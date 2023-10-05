@@ -33,7 +33,7 @@ Using SQL, you can define database roles with only the privileges you choose to 
 
 To begin, assume you're creating a new database that will be used by several developers, all requiring read-write access.
 
-1. Start by connecting to the ready-to-use `neondb` database with your default Neon role using `psql` (or some other client that supports SQL). As described above, this role has administration privileges in Neon, which enable it to create databases and roles.
+1. Start by connecting to an existing database with your default Neon role using `psql` (or some other client that supports SQL). As described above, this role has administration privileges in Neon, which enable it to create databases and roles.
 
     <CodeBlock shouldWrap>
 

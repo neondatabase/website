@@ -49,10 +49,10 @@ fn main() -> Result<(), Box<dyn error::Error>> {
 
 where:
 
-- `<user>` is the database user.
-- `<password>` is the database user's password.
-- `<dbname>` is the name of the database. The default Neon database is `neondb`
-- `<hostname>` is the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
+- `[user]` is the database user.
+- `[password]` is the database user's password.
+- `[dbname]` is the name of the database. The default Neon database is `neondb`
+- `[hostname]` is the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`.
 
 You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 

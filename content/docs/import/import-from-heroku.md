@@ -63,16 +63,18 @@ $ heroku pg:links --app thawing-wave-57227
 From your terminal, run the following Heroku CLI command:
 
 ```shell
-heroku pg:pull --app <app> <heroku-pg-database> <neon-connection-string>
+heroku pg:pull --app [app] [heroku-pg-database] [neon-connection-string]
 ```
 
 where:
 
-- `<app>` is the name of the Heroku app
-- `<heroku-pg-database>` is the name of the Heroku PostgreSQL database
-- `<neon-connection-string>` is the Neon connection string
+- `[app]` is the name of the Heroku app
+- `[heroku-pg-database]` is the name of the Heroku PostgreSQL database
+- `[neon-connection-string]` is the Neon connection string
 
 For example:
+
+<CodeBlock shouldWrap>
 
 ```shell
 $ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
@@ -147,6 +149,8 @@ pg_restore: creating CONSTRAINT "public.order order_pkey"
 pg_restore: creating FK CONSTRAINT "public.order order_customer_id_fkey"
 heroku-cli: Pulling complete.
 ```
+
+</CodeBlock>
 
 ## Verify that your data was imported
 

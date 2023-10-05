@@ -23,7 +23,7 @@ You can obtain a connection string from the **Connection Details** widget on the
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
-From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**, but be sure to add your password, as shown:
+From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**.
 
 <CodeBlock shouldWrap>
 

@@ -34,7 +34,7 @@ Complete the following steps before you begin:
     - **Server name**: Specify your Neon hostname, which is this portion of your connection string: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
     - **Port**: `5432`
     - **User name**: Specify the Neon user.
-    - **Password**: Specify the password in the following format: `endpoint=<endpoint_id>$<password>`, which looks similar to this when defined:
+    - **Password**: Specify the password in the following format: `endpoint=[endpoint_id]$[password]`, which looks similar to this when defined:
 
       ```text
       endpoint=ep-cool-darkness-123456$AbC123dEf

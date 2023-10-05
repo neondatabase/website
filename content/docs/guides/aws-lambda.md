@@ -174,6 +174,8 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
     </Admonition>
 
     You can copy the connection string from **Connection Details** widget the Neon Console. Add the `DATABASE_URL` under `environment`, and add `sslmode=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells Postgres to use SSL encryption and verify the server's certificate.
+
+    <CodeBlock shouldWrap>
   
     ```yaml
     provider:
@@ -190,6 +192,8 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
              path: /users
              method: get
     ```
+
+    </codeblock>
 
 7. Deploy the serverless function using the following command:
 
@@ -264,9 +268,13 @@ If you make API calls to the Lambda function from your app, you will likely need
 
 You can run the following command to enable CORS to your local development environment:
 
+<CodeBlock shouldWrap>
+
 ```bash
 aws apigatewayv2 update-api --api-id <api-id> --cors-configuration AllowOrigins="http://localhost:3000"
 ```
+
+</CodeBlock>
 
 You can find your `api-id` on the API Gateway dashboard:
 

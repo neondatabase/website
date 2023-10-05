@@ -25,7 +25,7 @@ To import your data from another Neon project:
 
 3. Retrieve the connection strings for the new and existing Neon databases.
 
-   You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Your connection strings will look something like this:
+   You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Connections strings have this format:
 
    <CodeBlock shouldWrap>
 
@@ -35,7 +35,7 @@ To import your data from another Neon project:
 
    </CodeBlock>
 
-4. Prepare your import command to pipe data to from one Neon project to the other. The command will look similar to this one:
+4. Prepare your import command to pipe data to from one Neon project to the other. The command will look similar to this:
 
    <CodeBlock shouldWrap>
 

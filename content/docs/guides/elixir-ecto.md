@@ -106,7 +106,7 @@ Follow these steps to complete the configuration:
     ssl_opts: [
       cacertfile: "/path/to/certfile.crt",
       verify: :verify_peer,
-      server_name_indication: to_charlist('ep-morning-sunset-123456.us-east-2.aws.neon.tech'),
+      server_name_indication: to_charlist('ep-cool-darkness-123456.us-west-2.aws.neon.tech'),
       customize_hostname_check: [
         # By default, Erlang does not support wildcard certificates. This function supports validating wildcard hosts
         match_fun: :public_key.pkix_verify_hostname_match_fun(:https)

@@ -35,9 +35,9 @@ To establish a basic connection from Prisma to Neon, perform the following steps
    }
    ```
 
-3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step and add `?sslmode=require` to the end of the connection string. 
+3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step,  and add `?sslmode=require` to the end of the connection string.
 
-Your setting will appear similar to the following:
+   Your setting will appear similar to the following:
 
    <CodeBlock shouldWrap>
 
@@ -65,7 +65,7 @@ DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=requi
 
 - A pooled Neon connection string appends `-pooler` to the endpoint ID, which tells Neon to use a pooled connection rather than a direct connection. The **Connection Details** widget on the Neon **Dashboard** provides a **Pooled connection** checkbox that adds `-pooler` suffix to your connection string.
 - Neon uses PgBouncer to provide [connection pooling](/docs/connect/connection-pooling). Prisma requires the `pgbouncer=true` flag when using Prisma Client with PgBouncer, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
-- In summary, to use a pooled Neon connection with Prisma Client, you require **both** a pooled Neon connection string (one that includes `-pooler`) _and_ the `pgbouncer=true` flag (required by Prisma Client). See the example above.
+- In summary, to use a pooled Neon connection with Prisma Client, you require a pooled Neon connection string (one that includes `-pooler`) and the `pgbouncer=true` flag, which is required by Prisma Client. See the example above.
 
 ## Connection timeouts
 
