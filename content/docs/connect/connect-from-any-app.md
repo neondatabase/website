@@ -4,7 +4,7 @@ subtitle: Learn how to connect to Neon from any application
 enableTableOfContents: true
 updatedOn: '2023-09-15T13:00:43Z'
 ---
-When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch. The primary branch in a Neon project is created with a ready-to-use database named `neondb`.
+When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch.
 
 To connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through a compute endpoint associated with the branch.
 
@@ -12,11 +12,11 @@ To connect to a database, you must connect to the branch where the database resi
 Project
     |----primary branch (main) ---- compute endpoint <--- application/client
              |    |
-             |    |---- database (neondb)
+             |    |---- database
              |
              ---- child branch ---- compute endpoint <--- application/client
                             |
-                            |---- database (mydb)  
+                            |---- database  
 ```
 
 You can obtain the connection details you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
@@ -30,14 +30,14 @@ A Neon connection string includes the role, the compute endpoint hostname, and t
 ```text
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
            ^              ^                                               ^
-           |- <role>      |- <hostname>                                   |- <database>
+           |- role        |- hostname                                     |- database
 ```
 
 <Admonition type="note">
-The hostname includes the ID of the compute endpoint, which has an `ep-` prefix: `ep-raspy-cherry-95040071`. For more information about Neon connection strings, see [Connection string](/docs/reference/glossary#connection-string).
+The hostname includes the ID of the compute endpoint, which has an `ep-` prefix: `ep-cool-darkness-123456`. For more information about Neon connection strings, see [Connection string](/docs/reference/glossary#connection-string).
 </Admonition>
 
-You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line, as shown:
+You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line.
 
 `.env` file:
 
