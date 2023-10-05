@@ -31,7 +31,7 @@ To create a Neon project:
   
 4. Click **Create Project**.
 
-Upon creating a project, you are presented with a dialog that provides your connection details for a ready-to-use `dbname` database. The connection details include your password.
+Upon creating a project, you are presented with a dialog that provides your connection details for a ready-to-use `neondb` database. The connection details include your password.
 
 ## Compute size configuration with Autoscaling
 
