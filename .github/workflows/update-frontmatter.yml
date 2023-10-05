@@ -39,5 +39,9 @@ jobs:
         git config user.email "action@github.com"
         export HUSKY=0
         git add -A
-        git commit -m "chore(docs): Update frontmatter date"
-        git push
+        if git diff --staged | grep '.'; then
+          git commit -m "chore(docs): Update frontmatter date"
+          git push
+        else
+          echo "No changes to commit"
+        fi
