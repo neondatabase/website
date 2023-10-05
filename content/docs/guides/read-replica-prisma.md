@@ -87,7 +87,7 @@ DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.ne
 DATABASE_REPLICA_URL="postgres://alex:AbC123dEf@ep-damp-cell-123456.us-east-2.aws.neon.tech/dbname"
 ```
 
-Notice that the `endpoint_id` for the read replica compute differs. The read replica is a different compute instance and therefore has a different `endpoint_id`.
+Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compute differs. The read replica is a different compute instance and therefore has a different `endpoint_id`.
 
 ## Configure Prisma Client to use a read replica
 
