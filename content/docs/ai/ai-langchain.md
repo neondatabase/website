@@ -70,7 +70,7 @@ In Neon, create a database named `titanic`. You can do this from the Neon Consol
 Retrieve the connection string for your `titanic` database. You can copy it from the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
 
 ```text
-postgres://<users>:<password>@ep-morning-limit-06265452.us-east-2.aws.neon.tech/titanic
+postgres://[users]:[password]@ep-morning-limit-06265452.us-east-2.aws.neon.tech/titanic
 ```
 
 ## Set up your environment variables
