@@ -28,6 +28,7 @@ jobs:
       run: |
         git config user.name "GitHub Action"
         git config user.email "action@github.com"
+        export HUSKY=0
         git add -A
-        git commit -m "Update frontmatter date" || echo "No changes to commit"
+        git commit -m "chore(docs): Update frontmatter date"
         git push
