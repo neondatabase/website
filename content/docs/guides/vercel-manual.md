@@ -28,7 +28,7 @@ The connection string includes the role name, hostname, and database name. For e
 ```text
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
            ^              ^                                               ^
-            |- <role>     |- <hostname>                                   |- <database>
+           |- <role>      |- <hostname>                                   |- <database>
 ```
 
 - role name: `alex`
