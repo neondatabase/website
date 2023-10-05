@@ -1,0 +1,33 @@
+name: Update Frontmatter
+
+on:
+  push:
+    paths:
+      - 'content/docs/*.md'
+
+jobs:
+  update-date:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run update script
+      run: node src/scripts/update-frontmatter.js content/docs/*.md
+
+    - name: Commit changes
+      run: |
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+        git add -A
+        git commit -m "Update frontmatter date" || echo "No changes to commit"
+        git push
