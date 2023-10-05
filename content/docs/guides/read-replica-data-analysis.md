@@ -100,7 +100,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
     - role: `alex`
     - password:`AbC123dEf`
     - hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
-    - database name: `dbname`. This is the ready-to-use database created with your Neon project. Your database name may differ.
+    - database name: `dbname`. Your database name may differ.
 
     When you connect to a read-only compute, no write operations are permitted on the connection.
 
