@@ -4,7 +4,7 @@ subtitle: Learn how to build and deploy serverless GraphQL backends with Grafbas
   Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-04T13:12:25.660Z'
+updatedOn: '2023-10-05T19:42:20.341Z'
 ---
 
 _This guide was contributed by Josep Vidal from Grafbase_
