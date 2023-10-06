@@ -32,6 +32,8 @@ const updateFrontmatter = async () => {
   // NOTE: to fetch the last update date from GitHub, uncomment the code above,
   // and slice the files array to 60 items
 
+  // const docsMdFilePaths = files.slice(0, 60)
+
   const mdFilePaths = process.argv.slice(2).filter(Boolean);
 
   const docsMdFilePaths = mdFilePaths.filter(
