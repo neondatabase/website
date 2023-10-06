@@ -87,6 +87,13 @@ export default {
   pingThing: {
     robotsNoindex: 'noindex',
   },
+  allThingsOpen: {
+    title: 'Neon — Serverless, Fault-Tolerant, Branchable Postgres',
+    description:
+      'Postgres made for developers. Easy to Use, Scalable, Cost efficient solution for your next project.',
+    pathname: '',
+    robotsNoindex: 'noindex',
+  },
 };
 
 export const getBlogCategoryDescription = (category) => {
