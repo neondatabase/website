@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/prisma
   - /docs/integrations/prisma
-updatedOn: '2023-10-03T18:28:23.119Z'
+updatedOn: '2023-10-05T19:42:20.344Z'
 ---
 
 This topic also describes how to configure Prisma Migrate when you need to connect to the same Neon database from Prisma Migrate, which requires a direct database connection, and serverless functions that require a pooled database connection.
