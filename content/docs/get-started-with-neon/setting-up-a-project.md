@@ -4,7 +4,7 @@ subtitle: Create a Neon project in seconds with just a few clicks
 redirectFrom:
   - /docs/tutorial/project-setup
   - /docs/tutorial/neon-tutorial
-updatedOn: '2023-09-27T18:05:34Z'
+updatedOn: '2023-10-06T17:44:14.687Z'
 ---
 
 To create your first project:
@@ -31,6 +31,6 @@ To create your first project:
 - [Connect to Neon from other applications or clients](/docs/connect/connect-from-any-app)
 - [Learn about the Neon object hierarchy and managing your Neon project](/docs/manage/overview)
 
-## Need help\?
+## Need help?
 
 To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

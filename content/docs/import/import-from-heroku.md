@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/hasura-heroku-migration
   - /docs/how-to-guides/import-from-heroku
-updatedOn: '2023-10-05T19:42:20.350Z'
+updatedOn: '2023-10-06T17:44:14.701Z'
 ---
 
 This guide describes how to import your data from Heroku Postgres to Neon.
@@ -159,6 +159,6 @@ heroku-cli: Pulling complete.
 3. Select the **Tables** tab.
 4. In the sidebar, verify that your database tables appear under the **Tables** heading.
 
-## Need help\?
+## Need help?
 
 To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.
