@@ -4,20 +4,34 @@ import PropTypes from 'prop-types';
 
 import ChevronDownIcon from '../images/chevron-down.inline.svg';
 
-const Select = ({ containerRef, activeItem, isExpanded, onSelect, onExpand, items, type }) => (
+const Select = ({
+  className = null,
+  containerRef,
+  activeItem,
+  isExpanded,
+  onSelect,
+  onExpand,
+  items,
+  type,
+}) => (
   <div className="relative" ref={containerRef}>
     <button
-      className="mt-7 pt-5 w-full flex items-center px-6 pb-6 border border-gray-new-15 rounded-[10px] hover:border-green-45 duration-200 transition-colors"
+      className={clsx(
+        'mt-7 w-full border border-gray-new-15 rounded-[10px] relative after:absolute after:-inset-px after:rounded-[10px] after:p-px after:transition-colors after:duration-200',
+        className
+      )}
       type="button"
       onClick={onExpand}
     >
-      <div className="flex flex-col items-start">
-        <h4 className="text-xl font-medium leading-tight">{activeItem.title}</h4>
-        <p className="text-left mt-2 text-gray-new-70 font-light leading-tight text-[15px]">
-          {activeItem.description}
-        </p>
+      <div className="bg-black-new relative z-10 rounded-[10px] w-full flex items-center pt-5 px-6 pb-6">
+        <div className="flex flex-col items-start">
+          <h4 className="text-xl font-medium leading-tight">{activeItem.title}</h4>
+          <p className="text-left mt-2 text-gray-new-70 font-light leading-tight text-[15px]">
+            {activeItem.description}
+          </p>
+        </div>
+        <ChevronDownIcon className="w-6 h-6 mt-2 ml-auto" />
       </div>
-      <ChevronDownIcon className="w-6 h-6 mt-2 ml-auto" />
     </button>
     <LazyMotion features={domAnimation}>
       <AnimatePresence>
@@ -54,6 +68,7 @@ const Select = ({ containerRef, activeItem, isExpanded, onSelect, onExpand, item
 );
 
 Select.propTypes = {
+  className: PropTypes.string,
   containerRef: PropTypes.shape({}).isRequired,
   activeItem: PropTypes.shape({
     title: PropTypes.string.isRequired,

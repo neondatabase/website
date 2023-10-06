@@ -161,6 +161,7 @@ const Forecast = () => {
               What peak performance is needed for your app?
             </h3>
             <Select
+              className="after:bg-[linear-gradient(90deg,rgba(240,240,117,0.2)0%,rgba(12,13,13,0.5)40%,rgba(12,13,13,0.5)100%)]"
               containerRef={performanceRef}
               activeItem={activeItems.performance}
               isExpanded={isExpanded.performance}
@@ -180,7 +181,8 @@ const Forecast = () => {
             </h3>
 
             <Select
-              buttonRef={storageRef}
+              className="after:bg-[linear-gradient(90deg,rgba(110,224,247,0.3)0%,rgba(12,13,13,0.5)40%,rgba(12,13,13,0.5)100%)]"
+              containerRef={storageRef}
               activeItem={activeItems.storage}
               isExpanded={isExpanded.storage}
               items={storage}
