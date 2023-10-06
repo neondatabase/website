@@ -9,7 +9,7 @@ import Subscribe from 'components/shared/subscribe';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
-export const metadata = getMetadata(SEO_DATA.allThingsOpen);
+export const metadata = getMetadata({ ...SEO_DATA.index, robotsNoindex: 'noindex' });
 
 const AllThingsOpen = () => (
   <Layout headerTheme="black" isSignIn footerWithTopBorder withOverflowHidden>
