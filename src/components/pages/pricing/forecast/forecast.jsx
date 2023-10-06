@@ -11,7 +11,7 @@ import LINKS from 'constants/links';
 import useClickOutside from 'hooks/use-click-outside';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
-import InputSearchIcon from './images/input-search.inline.svg';
+import inputSearchIcon from './images/input-search.svg';
 import Select from './select';
 
 const activities = [
@@ -153,7 +153,7 @@ const Forecast = () => {
             </ul>
           </div>
 
-          <div className="mt-40">
+          <div className="mt-[400px]">
             <span className="text-yellow-70 leading-none font-medium -tracking-extra-tight">
               Performance
             </span>
@@ -161,7 +161,11 @@ const Forecast = () => {
               What peak performance is needed for your app?
             </h3>
             <Select
-              className="after:bg-[linear-gradient(90deg,rgba(240,240,117,0.2)0%,rgba(12,13,13,0.5)40%,rgba(12,13,13,0.5)100%)]"
+              className={clsx(
+                'after:bg-[linear-gradient(90deg,rgba(240,240,117,0.2)0%,rgba(12,13,13,0.5)40%,rgba(12,13,13,0.5)100%)]',
+                isExpanded.performance &&
+                  'shadow-[0px_14px_64px_0px_rgba(240,240,117,0.08),0px_6px_10px_0px_rgba(0,0,0,0.25)]'
+              )}
               containerRef={performanceRef}
               activeItem={activeItems.performance}
               isExpanded={isExpanded.performance}
@@ -172,7 +176,7 @@ const Forecast = () => {
             />
           </div>
 
-          <div className="mt-40">
+          <div className="mt-[461px]">
             <span className="text-blue-80 leading-none font-medium -tracking-extra-tight">
               Storage
             </span>
@@ -181,7 +185,11 @@ const Forecast = () => {
             </h3>
 
             <Select
-              className="after:bg-[linear-gradient(90deg,rgba(110,224,247,0.3)0%,rgba(12,13,13,0.5)40%,rgba(12,13,13,0.5)100%)]"
+              className={clsx(
+                'after:bg-[linear-gradient(90deg,rgba(110,224,247,0.3)0%,rgba(12,13,13,0.5)40%,rgba(12,13,13,0.5)100%)]',
+                isExpanded.storage &&
+                  'shadow-[0px_14px_64px_0px_rgba(117,219,240,0.10),0px_6px_10px_0px_rgba(0,0,0,0.25)]'
+              )}
               containerRef={storageRef}
               activeItem={activeItems.storage}
               isExpanded={isExpanded.storage}
@@ -192,7 +200,7 @@ const Forecast = () => {
             />
           </div>
 
-          <div className="mt-40 py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden">
+          <div className="mt-[461px] py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden">
             <p className="font-medium -tracking-extra-tight leading-none">Estimated price</p>
             <p className="mt-6">
               <span className="text-6xl text-green-45 leading-none font-light tracking-[-0.06em]">
@@ -209,7 +217,14 @@ const Forecast = () => {
             <ul className="mt-6 pt-7 border-t border-gray-new-15 flex flex-col gap-y-[18px]">
               {Object.values(activeItems).map(({ title }) => (
                 <li className="flex items-center" key={title}>
-                  <InputSearchIcon className="mr-3.5 w-8 h-8" />
+                  <img
+                    className="mr-3.5 w-8 h-8"
+                    src={inputSearchIcon}
+                    alt=""
+                    loading="lazy"
+                    width={32}
+                    height={32}
+                  />
                   <span className="text-lg font-medium leading-tight tracking-extra-tight">
                     {title}
                   </span>
