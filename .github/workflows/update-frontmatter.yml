@@ -2,6 +2,9 @@ name: Update Frontmatter
 
 on:
   push:
+    branches:
+      - '*'
+      - '!main' # Exclude the main branch
     paths:
       - 'content/docs/**/*.md'
 
