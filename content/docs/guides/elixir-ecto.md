@@ -2,7 +2,7 @@
 title: Connect from Elixir with Ecto to Neon
 subtitle: Set up a Neon project in seconds and connect from Elixir with Ecto
 enableTableOfContents: true
-updatedOn: '2023-10-05T19:42:20.340Z'
+updatedOn: '2023-10-06T17:44:14.690Z'
 ---
 
 This guide describes how to connect from an Elixir application with Ecto, which is a database wrapper and query generator for Elixir. Ecto provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
