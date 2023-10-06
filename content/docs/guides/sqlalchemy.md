@@ -82,7 +82,7 @@ from sqlalchemy import create_engine
 
 USERNAME = "alex"
 PASSWORD = "AbC123dEf"
-HOST = "@ep-cool-darkness-123456.us-east-2.aws.neon.tech"
+HOST = "ep-cool-darkness-123456.us-east-2.aws.neon.tech"
 DATABASE = "dbname"
 
 conn_str = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?sslmode=require'
