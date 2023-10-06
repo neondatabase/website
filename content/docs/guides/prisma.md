@@ -150,6 +150,6 @@ For additional information about connecting from Prisma, refer to the following 
 - [PostgreSQL database connector](https://www.prisma.io/docs/concepts/database-connectors/postgresql)
 - [Increasing the pool timeout](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#increasing-the-pool-timeout)
 
-## Need help\?
+## Need help?
 
 To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

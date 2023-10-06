@@ -128,6 +128,6 @@ Please keep in mind that certain restrictions may apply with respect to Postgres
 
 Depending on the nature of your extension, Neon may also request a liability waiver.
 
-## Need help\?
+## Need help?
 
 To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.
