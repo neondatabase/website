@@ -3,6 +3,7 @@ title: Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
+updatedOn: '2023-10-06T17:44:14.684Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
@@ -36,7 +37,6 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [ltree](https://www.postgresql.org/docs/15/ltree.html)                    | 1.2            | 1.2           |   1.2           |                                                                                                                  |
 | [moddattime (spi)](https://www.postgresql.org/docs/current/contrib-spi.html)         | 1.0 | 1.0  |   1.0  |                                                                                                                  |
 | [neon_utils](/docs/extensions/neon-utils)               | 1.0                              | 1.0                               |     1.0              |                                                                                                                   |
-| [pg_embedding](https://github.com/neondatabase/pg_embedding)             | 0.3.50           | 0.3.5  | -            | Install with `CREATE EXTENSION embedding;`                                                                         |
 | [pg_graphql](https://github.com/supabase/pg_graphql)               | 1.1.0                 | 1.1.0                  |  -                  |                                                                                                                   |
 | [pg_hashids](https://github.com/iCyberon/pg_hashids)                | 1.2.1                | 1.2.1                  |  1.2.1                  |                                                                                                                  |
 | [pg_hint_plan](https://github.com/ossc-db/pg_hint_plan)             | 1.4.1                  | 1.5.0                  |  1.6.0                  |                                                                                                                   |
@@ -54,7 +54,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [pgstattuple](https://www.postgresql.org/docs/15/pgstattuple.html)              | 1.5      | 1.5       |  1.5       |                                                                                                                  |
 | [pgtap](https://pgtap.org/documentation.html)                    | 1.2.0                   | 1.2.0       |   1.2.0       |                                                                                                                    |
 | [pgvector](https://github.com/pgvector/pgvector)                 | 0.5.0                   | 0.5.0  | 0.5.0                  | Install with `CREATE EXTENSION vector;`                                                                                                                    |
-| [pgx_ulid](https://github.com/pksunkara/pgx_ulid)                 | 0.1.0                   | 0.1.0  |  -                                 | Install with `CREATE EXTENSION ulid;`                                                                                                                    |
+| [pgx_ulid](https://github.com/pksunkara/pgx_ulid)                 | 0.1.0                   | 0.1.0  | 0.1.0                                 | Install with `CREATE EXTENSION ulid;`                                                                                                                    |
 | [plcoffee](https://github.com/plv8/plv8/)                 | 3.1.5                          | 3.1.5  | 3.1.8                         |                                                                                                                    |
 | [plls](https://github.com/plv8/plv8/)                     | 3.1.5                          | 3.1.5 | 3.1.8                          |                                                                                                                    |  
 | [plpgsql](https://www.postgresql.org/docs/15/plpgsql.html)                  | 1.0          | 1.0   | 1.0        | Pre-installed with Postgres.                                                                                     |
@@ -130,4 +130,4 @@ Depending on the nature of your extension, Neon may also request a liability wai
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

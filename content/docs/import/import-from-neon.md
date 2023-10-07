@@ -1,6 +1,7 @@
 ---
 title: Import data from another Neon project
 enableTableOfContents: true
+updatedOn: '2023-10-06T17:44:14.702Z'
 ---
 
 This guide describes how to migrate a database from one Neon project to another by piping data from `pg_dump` to `pg_restore`. Use these instructions to:
@@ -24,22 +25,22 @@ To import your data from another Neon project:
 
 3. Retrieve the connection strings for the new and existing Neon databases.
 
-   You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Your connection strings will look something like this:
+   You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Connections strings have this format:
 
    <CodeBlock shouldWrap>
 
    ```bash
-   postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
+   postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>
 
-4. Prepare your import command to pipe data to from one Neon project to the other. The command will look similar to this one:
+4. Prepare your import command to pipe data to from one Neon project to the other. The command will look similar to this:
 
    <CodeBlock shouldWrap>
 
    ```bash
-   pg_dump -Fc -v -d postgres://<user>:<password>@ep-dawn-union-749234.us-east-2.aws.neon.tech/<dbname> | pg_restore -v -d postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
+   pg_dump -Fc -v -d postgres://[user]:[password]@[neon_hostname]/[dbname] | pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>
@@ -55,4 +56,4 @@ To import your data from another Neon project:
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

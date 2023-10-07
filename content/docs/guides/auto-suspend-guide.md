@@ -1,7 +1,8 @@
 ---
-title: Configuring Auto-suspend for Neon computes 
-subtitle: Learn how to configure Neon's Auto-suspend feature to control when your compute scales to zero 
+title: Configuring Auto-suspend for Neon computes
+subtitle: Learn how to configure Neon's Auto-suspend feature to control when your compute scales to zero
 enableTableOfContents: true
+updatedOn: '2023-08-09T08:55:53Z'
 ---
 
 Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature controls when a Neon compute instance transitions to an `Idle` state (scales to zero) due to inactivity. This guide demonstrates how to configure the _Auto-suspend_ setting in your Neon project.

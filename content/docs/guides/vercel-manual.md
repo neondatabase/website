@@ -2,6 +2,7 @@
 title: Connect Vercel and Neon manually
 subtitle: Learn how to connect a Vercel project to a Neon database manually
 enableTableOfContents: true
+updatedOn: '2023-10-06T17:44:14.700Z'
 ---
 
 This guide describes how to manually connect a Vercel project to a Neon database.
@@ -25,30 +26,30 @@ You can these details from the **Connection Details** widget on the **Neon Dashb
 The connection string includes the role name, hostname, and database name. For example:
 
 ```text
-postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
-             ^                                 ^                           ^
-             |- <role>                         |- <hostname>               |- <database>
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+           ^              ^                                               ^
+           |- <role>      |- <hostname>                                   |- <database>
 ```
 
-- role name: `daniel`
-- hostname: `ep-raspy-cherry-95040071.us-east-2.aws.neon.tech`
-- database name: `neondb`
+- role name: `alex`
+- hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech
+- database name: `dbname`
 
 ## Configure project environment variables in Vercel
 
 The environment variables required to connect your application to Neon depend on your application. Some applications use a `DATABASE_URL` environment variable with a database connection string:
 
 ```text
-DATABASE_URL="postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb"
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
 ```
 
 Other applications may use `PG*` environment variables to define database connection details:
 
 ```text
-PGHOST=ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
-PGUSER=daniel
-PGDATABASE=neondb
-PGPASSWORD=<password>
+PGUSER=alex
+PGHOST=ep-cool-darkness-123456.us-east-2.aws.neon.tech
+PGDATABASE=dbname
+PGPASSWORD=AbC123dEf
 PGPORT=5432
 ```
 
@@ -77,4 +78,4 @@ You must redeploy your application in Vercel for the environment variable settin
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

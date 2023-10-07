@@ -4,6 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/projects
+updatedOn: '2023-10-06T17:44:14.705Z'
 ---
 
 A project is the top-level object in the [Neon object hierarchy](/docs/manage/overview). Tier limits define how many projects you can create. Neon's Free Tier permits one project per Neon account.
@@ -147,7 +148,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 }' | jq
 ```
 
-The response includes information about the roles, the ready-to-use database (`neondb)`), the primary branch (`main`), and the read-write compute endpoint that is created with the project.
+The response includes information about the roles, the ready-to-use database (`neondb`), the primary branch (`main`), and the read-write compute endpoint that is created with the project.
 
 <details>
 <summary>Response body</summary>
@@ -156,7 +157,7 @@ The response includes information about the roles, the ready-to-use database (`n
 {
   "project": {
     "cpu_used_sec": 0,
-    "id": "odd-cell-528527",
+    "id": "ep-cool-darkness-123456",
     "platform_id": "aws",
     "region_id": "aws-us-east-2",
     "name": "myproject",
@@ -170,14 +171,14 @@ The response includes information about the roles, the ready-to-use database (`n
   },
   "connection_uris": [
     {
-      "connection_uri": "postgres://casey:kFbAy47krZeV@odd-cell-528527.us-east-2.aws.neon.tech/neondb"
+      "connection_uri": "postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
     }
   ],
   "roles": [
     {
       "branch_id": "br-falling-frost-286006",
-      "name": "casey",
-      "password": "kFbAy47krZeV",
+      "name": "alex",
+      "password": "AbC123dEf",
       "protected": false,
       "created_at": "2023-01-04T17:33:11Z",
       "updated_at": "2023-01-04T17:33:11Z"
@@ -194,8 +195,8 @@ The response includes information about the roles, the ready-to-use database (`n
     {
       "id": 1138408,
       "branch_id": "br-falling-frost-286006",
-      "name": "neondb",
-      "owner_name": "casey",
+      "name": "dbname",
+      "owner_name": "alex",
       "created_at": "2023-01-04T17:33:11Z",
       "updated_at": "2023-01-04T17:33:11Z"
     }
@@ -203,7 +204,7 @@ The response includes information about the roles, the ready-to-use database (`n
   "operations": [
     {
       "id": "b7c32d83-6402-49c8-b40b-0388309549da",
-      "project_id": "odd-cell-528527",
+      "project_id": "ep-cool-darkness-123456",
       "branch_id": "br-falling-frost-286006",
       "action": "create_timeline",
       "status": "running",
@@ -213,7 +214,7 @@ The response includes information about the roles, the ready-to-use database (`n
     },
     {
       "id": "756f2b87-f45c-4a61-9b21-6cd3f3c48c68",
-      "project_id": "odd-cell-528527",
+      "project_id": "ep-cool-darkness-123456",
       "branch_id": "br-falling-frost-286006",
       "endpoint_id": "ep-jolly-moon-631024",
       "action": "start_compute",
@@ -225,7 +226,7 @@ The response includes information about the roles, the ready-to-use database (`n
   ],
   "branch": {
     "id": "br-falling-frost-286006",
-    "project_id": "odd-cell-528527",
+    "project_id": "ep-cool-darkness-123456",
     "name": "main",
     "current_state": "init",
     "pending_state": "ready",
@@ -236,7 +237,7 @@ The response includes information about the roles, the ready-to-use database (`n
     {
       "host": "ep-jolly-moon-631024.us-east-2.aws.neon.tech",
       "id": "ep-jolly-moon-631024",
-      "project_id": "odd-cell-528527",
+      "project_id": "ep-cool-darkness-123456",
       "branch_id": "br-falling-frost-286006",
       "autoscaling_limit_min_cu": 1,
       "autoscaling_limit_max_cu": 1,
@@ -314,7 +315,7 @@ PATCH /projects/{project_id}
 The API method appears as follows when specified in a cURL command. The `project_id` is a required parameter. The example changes the project `name` to `project1`.
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/odd-cell-528527' \
+curl 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY' \
   -H 'Content-Type: application/json' \
@@ -332,7 +333,7 @@ curl 'https://console.neon.tech/api/v2/projects/odd-cell-528527' \
 {
   "project": {
     "cpu_used_sec": 0,
-    "id": "odd-cell-528527",
+    "id": "ep-cool-darkness-123456",
     "platform_id": "aws",
     "region_id": "aws-us-east-2",
     "name": "project1",
@@ -362,7 +363,7 @@ The API method appears as follows when specified in a cURL command. The `project
 
 ```bash
 curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/odd-cell-528527' \
+  'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
@@ -374,7 +375,7 @@ curl -X 'DELETE' \
 {
   "project": {
     "cpu_used_sec": 0,
-    "id": "odd-cell-528527",
+    "id": "ep-cool-darkness-123456",
     "platform_id": "aws",
     "region_id": "aws-us-east-2",
     "name": "project1",
@@ -393,4 +394,4 @@ curl -X 'DELETE' \
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

@@ -4,6 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/hasura-heroku-migration
   - /docs/how-to-guides/import-from-heroku
+updatedOn: '2023-10-06T17:44:14.701Z'
 ---
 
 This guide describes how to import your data from Heroku Postgres to Neon.
@@ -29,7 +30,7 @@ To migrate your data from Heroku to Neon:
     <CodeBlock shouldWrap>
 
     ```text
-    postgres://jsmith:Wij8mIDXoQ8H@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
 
     </CodeBlock>
@@ -62,21 +63,23 @@ $ heroku pg:links --app thawing-wave-57227
 From your terminal, run the following Heroku CLI command:
 
 ```shell
-heroku pg:pull --app <app> <heroku-pg-database> <neon-connection-string>
+heroku pg:pull --app [app] [heroku-pg-database] [neon-connection-string]
 ```
 
 where:
 
-- `<app>` is the name of the Heroku app
-- `<heroku-pg-database>` is the name of the Heroku PostgreSQL database
-- `<neon-connection-string>` is the Neon connection string
+- `[app]` is the name of the Heroku app
+- `[heroku-pg-database]` is the name of the Heroku PostgreSQL database
+- `[neon-connection-string]` is the Neon connection string
 
 For example:
 
-```shell
-$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgres://jsmith:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+<CodeBlock shouldWrap>
 
-heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgres://jsmith:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech:5432/neondb
+```shell
+$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+
+heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 
 pg_dump: last built-in OID is 16383
 pg_dump: reading extensions
@@ -147,6 +150,8 @@ pg_restore: creating FK CONSTRAINT "public.order order_customer_id_fkey"
 heroku-cli: Pulling complete.
 ```
 
+</CodeBlock>
+
 ## Verify that your data was imported
 
 1. Log in to the [Neon Console](https://console.neon.tech/app/projects).
@@ -156,4 +161,4 @@ heroku-cli: Pulling complete.
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

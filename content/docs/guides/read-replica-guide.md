@@ -1,7 +1,8 @@
 ---
-title: Working with Neon read replicas 
+title: Working with Neon read replicas
 subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
+updatedOn: '2023-10-06T17:44:14.699Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with the [Neon Pro plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating and managing read replicas.
@@ -79,19 +80,12 @@ Connecting to a read replica is the same as connecting to any branch, except you
     <CodeBlock shouldWrap>
 
     ```bash
-    postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+    postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>
 
     If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string or example.
-
-    The information in your connection string corresponds to the following connection details:
-
-    - role: `daniel`
-    - password:`<password>`
-    - hostname: `ep-raspy-cherry-95040071.us-east-2.aws.neon.tech`
-    - database name: `neondb`. This is the default Neon database. Your database name may differ.
 
     When you use a read-only connection string, you are connecting to a read replica. No write operations are permitted on this connection.
 
@@ -180,4 +174,4 @@ For information about obtaining the required `project_id` and `endpoint_id` para
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

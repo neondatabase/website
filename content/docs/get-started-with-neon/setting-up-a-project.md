@@ -4,6 +4,7 @@ subtitle: Create a Neon project in seconds with just a few clicks
 redirectFrom:
   - /docs/tutorial/project-setup
   - /docs/tutorial/neon-tutorial
+updatedOn: '2023-10-06T17:44:14.687Z'
 ---
 
 To create your first project:
@@ -11,17 +12,17 @@ To create your first project:
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select **Create a project**.
 
-![Create a project](/docs/get-started-with-neon/create_project.png)
+   ![Create a project](/docs/get-started-with-neon/create_project.png)
 
 3. On the **Project Creation** dialog, specify a name, a Postgres version, and a region. If you are a [Pro plan](/docs/introduction/pro-plan) user, you can also specify compute size settings (not shown below). Neon supports larger compute sizes and Autoscaling (beta). For more information about these options, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
-![Select project options](/docs/get-started-with-neon/select_project_options.png)
+   ![Select project options](/docs/get-started-with-neon/select_project_options.png)
 
 4. Click **Create project**.
 
 5. You are presented with the connection details for your new project. You can save the connection details or retrieve them later from the **Connection details** widget on the Neon **Dashboard**.
 
-![Connection details dialog](/docs/get-started-with-neon/connection_details_modal.png)
+   ![Connection details dialog](/docs/get-started-with-neon/connection_details_modal.png)
 
 ## Next steps
 
@@ -32,4 +33,4 @@ To create your first project:
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

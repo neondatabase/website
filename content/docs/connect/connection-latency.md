@@ -3,6 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
+updatedOn: '2023-10-05T19:42:20.336Z'
 ---
 
 Neon's _Auto-suspend_ feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute instance transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state takes anywhere from 500 ms to a few seconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -65,7 +66,7 @@ Here are examples of how to increase connection timeout settings in a few common
 
 <CodeTabs labels={["Node.js", "Python", "Java", "Prisma" ]}>
 
-```js
+```javascript
 const { Pool } = require('pg')
 
 const pool = new Pool({
@@ -99,7 +100,7 @@ Connection conn = DriverManager.getConnection(dbUrl, properties);
 ```
 
 ```prisma
-DATABASE_URL=postgres://<user>:<password>@<neon_hostname>/neondb?connect_timeout=15&pool_timeout=15`
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?connect_timeout=15&pool_timeout=15`
 ```
 
 </CodeTabs>

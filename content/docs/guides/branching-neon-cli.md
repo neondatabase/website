@@ -2,6 +2,7 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 enableTableOfContents: true
+updatedOn: '2023-10-06T17:44:14.689Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -41,7 +42,7 @@ connection_uris
 ┌───────────────────────────────────────────────────────────────────────────────────────┐
 │ Connection Uri                                                                        │
 ├───────────────────────────────────────────────────────────────────────────────────────┤
-│ postgres://daniel:<password>@ep-mute-voice-52609794.us-east-2.aws.neon.tech/neondb    │
+│ postgres://[user]:[password]@[neon_hostname]/[dbname]                                 │
 └───────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -95,4 +96,4 @@ This API key configuration ensures that the API key is kept secure while still p
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

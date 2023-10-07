@@ -4,6 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
+updatedOn: '2023-10-06T17:44:14.703Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [primary branch](#primary-branch) called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -115,7 +116,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
   <CodeBlock shouldWrap>
 
   ```bash
-  psql postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+  psql postgres://[user]:[password]@[neon_hostname]/[dbname]
   ```
 
   </CodeBlock>
@@ -398,4 +399,4 @@ You can verify that a branch is deleted by listing the branches for your project
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

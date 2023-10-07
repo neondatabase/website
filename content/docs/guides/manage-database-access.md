@@ -2,6 +2,7 @@
 title: Manage roles and database access with SQL
 subtitle: Learn how to create roles and manage database access in Neon with SQL
 enableTableOfContents: true
+updatedOn: '2023-10-05T19:42:20.343Z'
 ---
 
 This guide shows how to manage database access in Neon using SQL. This guide will lead you through connecting to Neon with an administrator role, creating a database, creating a role for privilege management, and granting privileges to that role. It will then show how to create roles for database users and grant role membership to those users that will allow them to use the new database.
@@ -32,12 +33,12 @@ Using SQL, you can define database roles with only the privileges you choose to 
 
 To begin, assume you're creating a new database that will be used by several developers, all requiring read-write access.
 
-1. Start by connecting to the ready-to-use `neondb` database with your default Neon role using `psql` (or some other client that supports SQL). As described above, this role has administration privileges in Neon, which enable it to create databases and roles.
+1. Start by connecting to an existing database with your default Neon role using `psql` (or some other client that supports SQL). As described above, this role has administration privileges in Neon, which enable it to create databases and roles.
 
     <CodeBlock shouldWrap>
 
     ```bash
-    psql postgres://john:<password>@ep-restless-waterfall-733645.us-west-2.aws.neon.tech/neondb
+    psql postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>
@@ -100,7 +101,7 @@ To begin, assume you're creating a new database that will be used by several dev
     The `dev_user1` and `dev_user2` can now connect to the `app_db` database and start using it with full privileges.
 
     ```bash
-    psql postgres://dev_user1:<password>@ep-restless-waterfall-733645.us-west-2.aws.neon.tech/app_db
+    psql postgres://[user]:[password]@[neon_hostname]/app_db
     psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
     SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
     Type "help" for help.

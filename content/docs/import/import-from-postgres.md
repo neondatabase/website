@@ -4,6 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
+updatedOn: '2023-10-06T17:44:14.702Z'
 ---
 
 This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore` command line utilities.
@@ -22,7 +23,7 @@ Repeat the `pg_dump` and `pg_restore` process for each database you want to migr
    <CodeBlock shouldWrap>
 
    ```bash
-   postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
+   postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>
@@ -83,12 +84,12 @@ The following example shows how data from a `pagila` source database is dumped a
 
 ```bash
 ~$ cd mydump
-~/mydump$ pg_dump -Fc -v -d postgres://sally:<password>@<hostname>:<port>/pagila -f mydumpfile.bak 
+~/mydump$ pg_dump -Fc -v -d postgres://[user]:[password]@[neon_hostname]/pagila -f mydumpfile.bak 
 
 ~/mydump$ ls
 mydumpfile.bak
 
-~/mydump$ pg_restore -v -d postgres://sally:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/pagila mydumpfile.bak
+~/mydump$ pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak
 ```
 
 </CodeBlock>
@@ -132,7 +133,7 @@ To avoid the non-fatal errors, you can ignore database object ownership statemen
 <CodeBlock shouldWrap>
 
 ```bash
-pg_restore -v -O -d postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/pagila mydumpfile.bak 
+pg_restore -v -O -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak 
 ```
 
 </CodeBlock>
@@ -192,4 +193,4 @@ For information about the Postgres client utilities referred to in this topic, r
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.
