@@ -5,29 +5,32 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-This page offers guidelines on how to contribute to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in enhancing the Neon documentation.
+This page offers guidelines on how to contribute to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
 
 ## Why should you contribute?
 
-Open-source projects and their documentation are always evolving. Contributing to documentation is a great way for beginners to get started in open source and for experienced developers to explain complex topics while sharing their knowledge with the community.
+Open-source projects are always evolving. Contributing to documentation is a great way for beginners to get started in open source and for experienced developers to explain complex topics while sharing their knowledge with the community.
 
-By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or you've noticed that a certain topic is missing, your contributions are always welcome and appreciated.
+By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or you've noticed that a certain topic is missing, your contribution is always welcome and appreciated.
 
 ## How to contribute
 
-The content for the documentation is located in the [Neon website repository](https://github.com/neondatabase/website) in the `docs/content/` directory. To make a contribution, you have two options: you can edit files directly on GitHub or fork the repo and edit the files on your local machine. If you prefer the former option, which is great for edits and small updates, there is an **Edit this page** link at the bottom of each Neon documentation page.
+The content for the documentation is located in the [Neon website repository](https://github.com/neondatabase/website), in the `content/docs` directory. To contribute, you have two options:
+
+1. Edit files directly on GitHub
+2. Fork the `neondatabase/website` repo, create a branch for your changes, and submit a pull request.
+
+If you prefer the first option, which is great for edits and small updates, there is an **Edit this page** link at the bottom of each Neon documentation page.
 
 ![GitHub edit this page link](/docs/community/edit_this_page.png)
 
 Clicking the link takes you to the Markdown file in GitHub, where you can click the **Edit this page** icon to make a change. When you are finished editing, commit your changes to create a pull request.
 
-## Working with GitHub
-
-If you're not familiar with GitHub, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide will teach you how to fork a repository, create a branch, and submit a pull request.
+If you want to fork the repository and submit pull requests but are not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request), which will teach you how to fork a repository, create a branch, and submit a pull request.
 
 ## Markdown
 
-Neon uses Markdown as the source format for its documentation. Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents. It's designed to be easy-to-read and easy-to-write.
+Neon uses Markdown as the documentation source format. Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents. It's designed to be easy-to-read and easy-to-write.
 
 If you're new to Markdown, GitHub provides an excellent guide to get you started. The [GitHub Markdown Documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) covers most of the basic writing and formatting syntax you'll need to contribute to the Neon docs.
 
@@ -37,22 +40,15 @@ At Neon, we use VSCode for writing documentation. VSCode includes a built-in mar
 
 To use this feature, open the command palette (⌘ + ⇧ + V on Mac or Ctrl + Shift + V on Windows). This will open a preview window where you can see your changes in formatted markdown.
 
-### VSCode extensions
-
-For an enhanced experience while working with markdown files in VSCode, we recommend the following extensions:
-
-- [Grammarly](https://marketplace.visualstudio.com/items?itemName=znck.grammarly): This extension helps with grammar and spell checking.
-- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): This extension automatically formats markdown files when you save them, ensuring consistent style and formatting.
-
 ## Contribution review process
 
-After you have submitted your contribution, the Neon documentation team will review your changes, provide feedback, and merge the pull request when it is ready.
+After you submit a contribution, the Neon documentation team reviews your changes, provides feedback, and merges the pull request when it's ready.
 
-Please reach out if you have any questions or need further assistance. We appreciate your contribution and your participation in our community.
+Please reach out if you have any questions or need further assistance.
 
 ## Documentation file structure
 
-The Neon documentation file structure reflects the navigation that you see on the website. However, the order of the directories in the repository, under `/content/docs/`, are alphabetical.
+The Neon documentation file structure reflects the navigation you see on the website. However, the order of the directories under `/content/docs/` is alphabetical.
 
 ```text
 ├── content
@@ -68,16 +64,16 @@ The Neon documentation file structure reflects the navigation that you see on th
        └── tutorial
 ```
 
-- Every Markdown file in the `/docs` folder becomes a documentation page unless it is defined with an `isDraft: true` property in the page frontmatter.
+- Every Markdown file in the `/docs` folder becomes a documentation page unless it's defined with an `isDraft: true` property in the page [frontmatter](#markdown-frontmatter).
 - Folder and file names should use kebab-case.
 
 ## Documentation table of contents
 
-This section describes how to modify the documentation left-hand table of contents, also referred to as the "sidebar". Adding, removing, or moving a page to the documentation requires modifying the sidebar. The sidebar is managed in a `yaml` file conveniently named `sidebar.yaml`, which is found in at the root of the `/docs` directory.
+This section describes how to modify the documentation table of contents, also referred to as the "sidebar". Adding, removing, or moving a page to the documentation requires updating the sidebar. The sidebar is defined in a `yaml` file, conveniently named `sidebar.yaml`, which you can find at the root of the `/docs` directory.
 
-### How to add a new category
+### Add a new category
 
-In order to add a new category to the sidebar, add a new item to the top level array with keys `title` and `items`.
+To add a new category to the sidebar, add a new item to the top level array with `title` and `items` key values, as shown below:
 
 For example:
 
@@ -92,7 +88,7 @@ For example:
 +      slug: page-2
 ```
 
-### How to add a new subcategory
+### Ddd a new subcategory
 
 To add a new subcategory, add a new item to `items` array with keys `title` and `items` under specific category.
 
@@ -113,9 +109,9 @@ For example:
 +          slug: page-3
 ```
 
-### How to add a new page
+### Add a new page
 
-To add a new page to the root level, add `slug` in the same level with `title`.
+To add a new page to the root level, add `slug` in the same level with a `title`.
 
 ```diff yaml
  - title: Root page 1
@@ -139,7 +135,7 @@ To add a new page to the root level, add `slug` in the same level with `title`.
 
 ```
 
-In order to add new page under a category, add a new item to the `items` array with keys `title` and `slug` under the category or subcategory:
+To add new page under a category, add a new item to the `items` array with the `title` and `slug` keys under the category or subcategory:
 
 For example:
 
@@ -162,7 +158,7 @@ For example:
 +     slug: page-5
 ```
 
-- `title` in the sidebar may differ from `title` in Markdown file.
+- The `title` in the sidebar may differ from `title` in Markdown file. For example, your sidebar title might be a shorter version of the title in your Markdown file.
 - `slug` should always match page's slug.
 
 ### How to add a single page
@@ -197,9 +193,9 @@ enableTableOfContents: true
 ---
 ```
 
-The only required attribute is `title`, which is the title of the page as it will appear in the browser tab and in the header of the webpage.
+The only required attribute is `title`, which is the page title that appears on the page and in the browser tab.
 
-### Optional attributes
+### Optional frontmatter attributes
 
 Optional attributes include:
 
@@ -223,9 +219,15 @@ redirectFrom:
 
 ## Heading levels
 
-Tne page title in the frontmatter is translated into an h1 element when the page is converted to HTML.
+The page title in the frontmatter is translated into an `h1` element when the page is converted to HTML.
 
-- For each subsequent section, the heading level should be increased. In other words, add an additional # character before the topic title.
+Top-level section headings in the body of your document are defined with two hash characters, which equivalent to an `h2` heading:
+
+```md
+## Section heading
+```
+
+- To add subsection headings, add a another `#` character
 - Try to avoid heading levels beyond h4 (`####`).
 - Do not skip a level, e.g., do not go from `##` to `####`.
 - Ensure there's a blank line before and after the heading.
@@ -233,7 +235,9 @@ Tne page title in the frontmatter is translated into an h1 element when the page
 ## Common markup
 
 ```md
-Link markup: [link](/)
+External link markup: [Example.com website](https://www.example.com/)
+Neon documentation page link: [Connection from any application](/docs/connect/connect-from-any-app)
+Neon documentation same page link: [Code blocks](#code-blocks)
 Italics markup: *italic*
 Bold markup: **strong**
 monospace: `baktick`
@@ -249,11 +253,11 @@ SELECT * FROM elements ORDER BY id;
 ```
 ````
 
-Supported languages include those found [here](https://prismjs.com/index.html#supported-languages).
+You can add language specific highlighting to codeblocks, as in the example above. See [Supported language highlighting for code blocks](https://prismjs.com/index.html#supported-languages).
 
-To display code with options, you can wrap your code with `<CodeBlock></CodeBlock>` component.
+You can also wrap codeblocks in `<CodeBlock></CodeBlock>` tags to show line numbers or wrap long strings.
 
-Currently, `<CodeBlock>` accepts the following options:
+`<CodeBlock>` accepts the following options:
 
 - `showLineNumbers`: Shows the line numbers in the code block
 - `shouldWrap`: Enables code wrapping in the code block. This is useful for long command or connection strings that would otherwise require the reader to scroll.
@@ -272,57 +276,24 @@ DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon
 
 ## Code Tabs
 
-To display code tabs, enclose all pieces of code withing `<CodeTabs></CodeTabs>`, and specify  code tabs labels in order, as shown in the following example:
+To display code tabs, enclose all pieces of code within `<CodeTabs></CodeTabs>`, and specify labels in order, as shown in the following example:
 
 ````md
-<CodeTabs labels={["Shell", "C++", "C#", "Java"]}>
+<CodeTabs labels={["node-postgres", "postgres.js"]}>
 
-```bash
-#!/bin/bash
-STR="Hello World!"
-echo $STR
-```
+  ```shell
+  npm install pg
+  ```
 
-```c++
-#include <iostream>
-
-int main() {
-    std::cout << "Hello World";
-    return 0;
-}
-```
-
-```csharp
-namespace HelloWorld
-{
-    class Hello {
-        static void Main(string[] args)
-        {
-            System.Console.WriteLine("Hello World");
-        }
-    }
-}
-```
-
-```java
-import java.io.*;
-
-class GFG {
-    public static void main (String[] args) {
-       System.out.println("Hello World");
-    }
-}
-```
+  ```shell
+  npm install postgres
+  ```
 
 </CodeTabs>
 ````
 
-<details>
-<summary>Code tabs example</summary>
-
-![Code tabs example](/docs/community/code-tabs-example.jpg)
-
-</details>
+To view this example in the Neon documentation, see [Create a Next.js project and add dependencies
+](https://neon.tech/docs/guides/nextjs#create-a-nextjs-project-and-add-dependencies).
 
 ## Admonitions
 
@@ -336,34 +307,35 @@ The Neon documentation supports the following admonitions:
 
 To use an admonition, enclose your text with `<Admonition></Admonition>` and specify the admonition type: `note`, `important`, `tip`, `warning`, and `info`. The default is `note`.
 
-You may also specify an optional title with the `title` property.
-
 ```md
-<Admonition type="note" title="Your title">
-  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
-</Admonition>
-
-<Admonition type="info">
-  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+<Admonition type="note">
+This is an important note
 </Admonition>
 ```
 
-<details>
-<summary>Examples</summary>
+You can specify a title with the `title` property.
 
-![Admonition example](/docs/community/admonition-example.jpg)
+```md
+<Admonition type="note" title="Very important note">
+This is a very important note.
+</Admonition>
+```
 
-</details>
+Example output:
 
-## Diagrams and images
+<Admonition type="note" title="Very important note">
+This is a very important note.
+</Admonition>
 
-Diagrams are a great tool for clarifying complex ideas. Neon uses Figma for the creation of diagrams.
+## Diagrams and screen captures
 
-If you're interested in updating or adding a diagram, please open a GitHub issue with your suggestions. Please include a draft, if possible. A tool like [tldraw](https://www.tldraw.com/) can be used to create a draft.
+Neon uses Figma to create diagrams.
 
-Screen captures should be taken on a high resolution monitor (UHD/4K) and should be unaltered (no borders or special effects).
+If you're interested in updating or adding a diagram, please open a GitHub issue with your suggestions. Please include a draft, if possible. You can use a tool like [tldraw](https://www.tldraw.com/) to create a draft.
 
-Diagrams and images reside in the `/public/docs` directory in the Neon website repository. You can add a diagram or image to an `.md` file by specifying a relative path beginning with a slash `/`. The directory location of the diagram or image un  `public` should mirror the location of the file that will include the diagram or image, as shown below:
+If possible, please take screen captures on a high resolution monitor (UHD/4K). Screen captures should be unaltered (no borders or special effects).
+
+Diagrams and images are stored in the `/public/docs` directory in the Neon website repository. The directory location of the diagram or image under `public` mirrors the location of the file that includes the diagram or image, as shown below:
 
 Example file structure:
 
@@ -372,51 +344,86 @@ Example file structure:
 │ ├── docs
 │   ├── introduction
 │     ├── architecture-overview.md
+
+
 ├── public
 │ ├── docs
 │   ├── introduction
-│     ├── neon_architecture_2.png // put images in a public directory with the same name
+│     ├── neon_architecture.png // put images in the public directory with the same name
 ```
 
-For example, to add an image to a file, add an entry that looks like this:
+To add an image to your Markdown file, add an entry that looks like this:
 
 ```md
-![Neon architecture diagram](/docs/introduction/neon_architecture_3.png)
+![Neon architecture diagram](/docs/introduction/neon_architecture.png)
 ```
 
 ## Style Guide
 
-This section outlines the stylistic elements that we do our best to adhere to in the Neon documentation.
+This section outlines the stylistic elements that we try to follow in the Neon documentation.
 
-### Voice
+### Voice and language
 
-The voice in the documentation strives to be conversational but brief, friendly but succinct.
+The voice in the documentation should sound like a human being explaining something important to another human being while striking the right a balance between being approachable and professional. Be friendly and conversational, but at the same time, maintain a focus on clarity and brevity.
 
-### Language
+### Guidelines
 
-The language used in Neon's documentation should be clear and easily understood.
+1. **Use contractions**:
+    - **Do**: Use contractions like "it's", "don't", "you'll" to make the tone more conversational.
+      - *Example*: "It's essential to save your progress."
+    - **Don't**: Overuse contractions where clarity is compromised.
 
-- Avoid unnecessary verbiage.
-- Ensure clarity and brevity, staying focused on the topic's objective.
-- Use US English and adhere to US grammar rules.
+2. **Simplicity over jargon**:
+    - **Do**: Choose simpler words when possible.
+      - *Example*: "Use the tool," not "Utilize the instrument."
+    - **Don't**: Oversimplify to the point of being inaccurate.
 
-We do not use emojis or exclamation marks in the Neon documentation.
+3. **Active voice**:
+    - **Do**: Prefer active voice.
+      - *Example*: "The software converts the file."
+    - **Don't**: Over-rely on passive voice.
+      - *Example*: "The file is converted by the software."
+
+4. **Brief sentences**:
+    - **Do**: Keep sentences concise.
+      - *Example*: "Check the settings."
+
+5. **Personalize when relevant**:
+    - **Do**: Use "you" to address the reader.
+      - *Example*: "You can adjust the setting."
+    - **Don't**: Overdo direct addresses. Not every sentence should start with "You".
+
+6. **Consistent terminology**:
+    - **Do**: Stick to one term for one concept.
+      - *Example*: Always use "dashboard", not sometimes "control panel".
+    - **Don't**: Confuse with synonyms.
+      - *Example*: Switching between "log-in", "sign-in", and "access point".
+
+7. **Examples for clarity**:
+    - **Do**: Provide clear examples.
+      - *Example*: "For instance, to upload a file, click on the 'Upload' button."
+
+8. **Use US English**:
+    - **Do**: Adhere to US English spelling and grammar rules.
+
+9. **Avoid emojis and exclamations**:
+    - **Don't**: Use emojis or exclamation marks in the documentation.
 
 ### Link instead of repeating text
 
-We strive to avoid repeating information from other topics. Instead, we link to the original source of information and explain why it is important.
+Avoid repeating or duplicating information from other topics. Instead, link to the original source of information and explain why it is important.
 
 ### Capitalization
 
-The general rule is that we use lowercase wherever possible.
+Use lowercase wherever possible.
 
-For topic titles, we use sentence-style capitalization. For example: "Create your first project"
+For topic titles, use sentence-style capitalization. For example: "Create your first project"
 
-Generally, product names should align with the official names of the products, protocols, etc., maintaining exact capitalization.
+Product names should align with the official names of the products, protocols, etc., maintaining exact capitalization.
 
 #### UI text
 
-When referencing specific user interface text, such as button labels or menu items, we use the same capitalization displayed in the user interface wherever possible.
+When referencing specific user interface text, such as button labels or menu items, use the same capitalization displayed in the user interface wherever possible.
 
 #### Feature names
 
@@ -426,7 +433,7 @@ Generally, feature names should be lowercase.
 
 Capitalize names of:
 
-- Neon tiers. For example, Neon Free Tier, Neon Pro Plan.
+- Neon tiers and plans. For example, Neon Free Tier, Neon Pro Plan.
 - Third-party organizations, software, and products. Kubernetes, Git, and Vercel.
 - Methods or methodologies. Continuous Integration, Continuous Deployment, etc.
 
@@ -436,7 +443,7 @@ Follow the capitalization style used by the authoritative source, which may use 
 
 When including user information in connection details, API calls, or UI instructions, do not use real user information or email addresses.
 
-- Use an email address ending in `@example.com`.
+- Use an email address ending in `@example.com` or `domain.com`.
 - Use strings like `example_username` or one of the following diverse and non-gendered names: Zhang Kai, Alex Lopez, or Dana Smith.
 
 ### Connection strings
@@ -447,7 +454,7 @@ Connection strings should be defined as follows:
 postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
-If you need to provide a connection string with realistic values, use one of the diverse and non-gendered user names mentioned above, `AbC123dEf` for the password, and `dbname` for the database name:
+If you need to provide a connection string with realistic values, use one of the user names mentioned above, `AbC123dEf` for the password, and `dbname` for the database name:
 
 ```text
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
@@ -455,7 +462,7 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 
 ### Commands, parameters, values, filenames
 
-Commands, parameters, values, filenames, error messages, and connection strings should be enclosed in backticks. For example:
+Commands, parameters, values, filenames, error messages, connection strings, and other similar items should be enclosed in backticks. For example:
 
 - "Run the `neonctl projects list` command."
 
