@@ -1,5 +1,5 @@
 ---
-title: Contribution Guide
+title: Documentation contribution guide
 subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
 isDraft: true
