@@ -16,10 +16,10 @@ By contributing to the Neon docs, you're helping us create a stronger learning r
 
 ## How to contribute
 
-The content for the documentation is located in the [Neon website repository](https://github.com/neondatabase/website), in the `/content/docs` directory. To contribute, you have two options:
+The content for the documentation is located in the [neondatabase/website](https://github.com/neondatabase/website) repository, in the `/content/docs` directory. To contribute, you have two options:
 
 1. Edit files directly on GitHub.
-2. Fork the `neondatabase/website` repository, create a branch for your changes, and submit a pull request.
+2. Fork the [neondatabase/website](https://github.com/neondatabase/website) repository, create a branch for your changes, and submit a pull request.
 
 If you prefer the first option, which is great for edits and small updates, there is an **Edit this page** link at the bottom of each Neon documentation page.
 
@@ -27,7 +27,7 @@ If you prefer the first option, which is great for edits and small updates, ther
 
 Clicking the link takes you to the Markdown file in GitHub, where you can click the **Edit this page** icon to make a change. When you are finished editing, commit your changes to create a pull request.
 
-If you want to fork the `neondatabase/website` repository and submit pull requests, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request.
+If you want to fork the [neondatabase/website](https://github.com/neondatabase/website) repository and submit pull requests, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request.
 
 ## Markdown
 
@@ -45,7 +45,7 @@ To use this feature, open the command palette (⌘ + ⇧ + V on Mac or Ctrl + Sh
 
 After you submit a contribution, the Neon documentation team reviews your changes, provides feedback, and merges the pull request when it's ready.
 
-Please reach out if you have any questions or need further assistance.
+Please reach out on the [Neon Community forum](https://community.neon.tech/) if you have any questions or need further assistance.
 
 ## Documentation file structure
 
@@ -76,8 +76,6 @@ This section describes how to modify the documentation table of contents, also r
 
 To add a new category to the sidebar, add a new item to the top-level array with `title` and `items` key values, as shown below:
 
-For example:
-
 ```diff
  - title: Category 1
    items:
@@ -92,8 +90,6 @@ For example:
 ### Add a new subcategory
 
 To add a new subcategory, add a new item to `items` array with keys `title` and `items` under a specific category.
-
-For example:
 
 ```diff yaml
  - title: Category 1
@@ -136,9 +132,7 @@ To add a new page to the root level, add a `slug` at the same level as the `titl
 
 ```
 
-To add new page under a category, add a new item to the `items` array with the `title` and `slug` keys under the category or subcategory:
-
-For example:
+To add new page under a category, add a new item to the `items` array with the `title` and `slug` keys under the category or subcategory.
 
 ```diff yaml
  - title: Category 1
@@ -164,7 +158,7 @@ For example:
 
 ### Add a single page
 
-To add a single page to the docs sidebar, add the `title` with a slug, without an `items` entry. For example:
+To add a single page to the docs sidebar, add the `title` with a slug without an `items` entry.
 
 ```diff yaml
 +- title: Release notes
@@ -185,7 +179,7 @@ To add a single page to the docs sidebar, add the `title` with a slug, without a
 
 ## Markdown frontmatter
 
-Each Neon documentation Markdown file includes frontmatter section at the beginning of the file containing file metadata. The frontmatter section is distinguished by three dashes. For example:
+Each Neon documentation Markdown file includes frontmatter section at the beginning of the file containing file metadata. The frontmatter section is distinguished by three dashes, as shown here:
 
 ```yaml
 ---
@@ -364,7 +358,7 @@ This section outlines the stylistic elements that we try to follow in the Neon d
 
 ### Voice and language
 
-The voice in the documentation should sound like a human being explaining something important to another human being while striking the right This page offers guidelines on how to contribute to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
+The voice in the documentation should sound like one human being explaining something important to another, while striking the right balance between being approachable yet professional.
 
 #### Guidelines
 
