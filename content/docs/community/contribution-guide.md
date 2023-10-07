@@ -249,7 +249,7 @@ To insert a code block into your Markdown file, specify three backticks (```) on
 
 ````md
 ```sql
-SELECT * FROM elements ORDER BY id;
+SELECT * FROM posts ORDER BY id;
 ```
 ````
 
@@ -268,7 +268,7 @@ Example:
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb?connect_timeout=15&pool_timeout=15`
+DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?connect_timeout=15&pool_timeout=15`
 ```
 
 </CodeBlock>
