@@ -4,7 +4,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2023-07-01T08:51:49Z'
+updatedOn: '2023-10-07T08:16:00.614Z'
 ---
 
 The Neon **Limited Preview** started in February, 2022, and was made available to a small number of select users and friends.

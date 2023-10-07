@@ -2,7 +2,7 @@
 title: Point-in-time restore
 subtitle: Restore your data to previous state
 enableTableOfContents: true
-updatedOn: '2023-09-15T20:02:38Z'
+updatedOn: '2023-10-07T08:16:00.601Z'
 ---
 
 Neon retains a history of changes for all branches, enabling point-in-time restore. This feature allows you to restore data to any point within the retention period. You can use the point-in-time restore feature as a database [backup](/docs/manage/backups) strategy, to view the past state of your database, or to recover lost data.

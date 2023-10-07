@@ -1,7 +1,7 @@
 ---
 title: Neon OAuth integration
 enableTableOfContents: true
-updatedOn: '2023-09-20T14:06:11Z'
+updatedOn: '2023-10-07T08:16:00.570Z'
 ---
 
 

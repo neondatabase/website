@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/branches
   - /docs/conceptual-guides/branching
-updatedOn: '2023-09-06T14:36:02Z'
+updatedOn: '2023-10-07T08:16:00.599Z'
 ---
 
 <a id="branches-coming-soon/"></a>

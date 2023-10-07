@@ -3,7 +3,7 @@ title: Neon architecture
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-07T08:16:00.597Z'
 ---
 
 Neon architecture is based on the separation of compute and storage and is orchestrated by the Neon Control Plane, which manages cloud resources across both storage and compute.
