@@ -1,7 +1,7 @@
 ---
 title: Manage billing
 enableTableOfContents: true
-updatedOn: '2023-10-07T08:16:00.600Z'
+updatedOn: '2023-10-07T10:43:33.405Z'
 ---
 
 A Neon account subscribed to a paid plan can manage billing from the **Billing** page in the Neon Console. On the **Billing** page, you can:

@@ -4,7 +4,7 @@ subtitle: Create a Neon project in seconds with just a few clicks
 redirectFrom:
   - /docs/tutorial/project-setup
   - /docs/tutorial/neon-tutorial
-updatedOn: '2023-10-07T08:16:00.558Z'
+updatedOn: '2023-10-07T10:43:33.369Z'
 ---
 
 To create your first project:

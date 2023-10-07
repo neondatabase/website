@@ -2,7 +2,7 @@
 title: Manage integrations
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-07T08:16:00.617Z'
+updatedOn: '2023-10-07T10:43:33.418Z'
 ---
 
 Neon supports integrations with partners such as Vercel. You can view and revoke integrations for a Neon project from the **Integrations** page in the Neon Console.

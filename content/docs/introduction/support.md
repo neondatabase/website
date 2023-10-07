@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2023-10-07T08:16:00.615Z'
+updatedOn: '2023-10-07T10:43:33.416Z'
 ---
 
 Support channels for the Neon Free Tier, Pro, and Custom plans are outlined below.

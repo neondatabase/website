@@ -3,7 +3,7 @@ title: Neon and Vercel overview
 subtitle: Learn about different ways you can integrate Neon and Vercel
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-07T08:16:00.582Z'
+updatedOn: '2023-10-07T10:43:33.395Z'
 ---
 
 Neon supports several options for integrating with Vercel:
