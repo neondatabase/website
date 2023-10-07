@@ -4,7 +4,7 @@ subtitle: Create a Neon branch to test queries before running them in production
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/test-queries
-updatedOn: '2023-09-06T15:09:56Z'
+updatedOn: '2023-10-07T08:16:00.565Z'
 ---
 
 Complex queries that modify data or alter schemas have the potential to be destructive. It is advisable to test these types of queries before running them in production. On other database systems, testing potentially destructive queries can be time and resource intensive. For example, testing may involve setting up a separate database instance and replicating data. With Neon, you can instantly create a database branch with a full copy-on-write clone of your production data in just a few clicks. When you finish testing, you can remove the branch just as easily.
