@@ -239,7 +239,7 @@ Top-level section headings in the body of your document are defined with two has
 External link markup: [Example.com website](https://www.example.com/)
 Neon documentation page link: [Connection from any application](/docs/connect/connect-from-any-app)
 Neon documentation same page link: [Code blocks](#code-blocks)
-Italics markup: *italic*
+Italics markup: _italic_
 Bold markup: **strong**
 monospace: `backtick`
 ```
@@ -366,7 +366,7 @@ This section outlines the stylistic elements that we try to follow in the Neon d
 
 The voice in the documentation should sound like a human being explaining something important to another human being while striking the right This page offers guidelines on how to contribute to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
 
-### Guidelines
+#### Guidelines
 
 1. **Use contractions**:
     - **Do**: Use contractions like "it's", "don't", "you're" to make the tone more conversational.
