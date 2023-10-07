@@ -2,7 +2,7 @@
 title: Manage roles and database access with SQL
 subtitle: Learn how to create roles and manage database access in Neon with SQL
 enableTableOfContents: true
-updatedOn: '2023-10-07T08:16:00.569Z'
+updatedOn: '2023-10-07T10:43:33.386Z'
 ---
 
 This guide shows how to manage database access in Neon using SQL. This guide will lead you through connecting to Neon with an administrator role, creating a database, creating a role for privilege management, and granting privileges to that role. It will then show how to create roles for database users and grant role membership to those users that will allow them to use the new database.

@@ -4,7 +4,7 @@ subtitle: Leverage the power of Neon and WunderGraph to build fully serverless a
   minutes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-07T08:16:00.592Z'
+updatedOn: '2023-10-07T10:43:33.396Z'
 ---
 
 _This guide was contributed by the team at WunderGraph_
