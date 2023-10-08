@@ -6,7 +6,7 @@ isDraft: true
 updatedOn: '2023-10-07T12:25:27.662Z'
 ---
 
-This page offers guidelines on how to contribute to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
+This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
 
 ## Why should you contribute?
 
@@ -25,9 +25,9 @@ If you prefer the first option, which is great for edits and small updates, ther
 
 ![GitHub edit this page link](/docs/community/edit_this_page.png)
 
-Clicking the link takes you to the Markdown file in GitHub, where you can click the **Edit this page** icon to make a change. When you are finished editing, commit your changes to create a pull request.
+Clicking the link takes you to the Markdown file in GitHub, where you can click the **Edit this page** icon to make a change. When you finish editing, commit your changes to create a pull request.
 
-If you want to fork the [neondatabase/website](https://github.com/neondatabase/website) repository and submit pull requests, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request.
+If you would rather fork the [neondatabase/website](https://github.com/neondatabase/website) repository and submit pull requests, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request.
 
 ## Markdown
 
@@ -87,52 +87,9 @@ To add a new category to the sidebar, add a new item to the top-level array with
 +      slug: page-2
 ```
 
-### Add a new subcategory
-
-To add a new subcategory, add a new item to `items` array with keys `title` and `items` under a specific category.
-
-```diff yaml
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-+    - title: Subcategory 1
-+      items:
-+        - title: Page 3
-+          slug: page-3
-```
-
 ### Add a new page
 
-To add a new page to the root level, add a `slug` at the same level as the `title`.
-
-```diff yaml
- - title: Root page 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Root page 2
-   items:
-     - title: Page 2
-       slug: page-2
-+ - title: Root page 1
-+   slug: root-page-1
-+   items:
-+     - title: Page 1
-+       slug: page-1
-+ - title: Root page 2
-+   slug: root-page-2
-+   items:
-+     - title: Page 2
-+       slug: page-2
-
-```
-
-To add new page under a category, add a new item to the `items` array with the `title` and `slug` keys under the category or subcategory.
+To add new page, add a new item to the `items` array with the `title` and `slug` keys under the category or subcategory.
 
 ```diff yaml
  - title: Category 1
@@ -149,33 +106,12 @@ To add new page under a category, add a new item to the `items` array with the `
           slug: page-3
 +       - title: Page 4
 +         slug: page-4
-+   - title: Page 5
-+     slug: page-5
+    - title: Page 5
+      slug: page-5
 ```
 
 - The `title` in the sidebar may differ from `title` in the Markdown file. For example, your sidebar title might be a shorter version of the title in your Markdown file.
 - `slug` should always match page's slug.
-
-### Add a single page
-
-To add a single page to the docs sidebar, add the `title` with a slug without an `items` entry.
-
-```diff yaml
-+- title: Release notes
-+  slug: release-notes
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-    - title: Subcategory 1
-      items:
-        - title: Page 3
-          slug: page-3
-```
 
 ## Markdown frontmatter
 
@@ -188,17 +124,19 @@ enableTableOfContents: true
 ---
 ```
 
-The only required attribute is `title`, which is the page title that appears on the page and in the browser tab.
+The only required attribute is `title`, which becomes the page title that appears on the page and the browser tab.
 
-### Optional frontmatter attributes
+### Frontmatter attributes
 
-Optional attributes include:
+Frontmatter attributes include:
 
-Field | Explanation
+Attribute | Description
 ----- | ---
 subtitle |  A secondary title or description that appears on the page, under the main title.
 enableTableOfContents | A boolean flag (i.e., true or false) that tells the static site generator whether or not to generate a right-hand table of contents for the page. We recommend adding this option if your page has more than a few sections.
+isDraft | Adding this attribute and setting it to `true` prevents the page from becoming a documentation page and being searchable. Include this option to avoid publishing the content before its ready.
 redirectFrom | A list of directory paths that should redirect to this file. This is useful if the page has moved and you want old URLs to continue working.
+updatedOn | This attribute is added automatically. You do not need to add it.
 
 Example:
 
@@ -209,6 +147,7 @@ subtitle: Set up a Neon project and connect from a Next.js application
 enableTableOfContents: true
 redirectFrom:
   - /docs/content/<old_directory_name>
+`updatedOn: '2023-10-07T12:25:27.662Z'`
 ---
 ```
 
@@ -222,10 +161,10 @@ Top-level section headings in the body of your document are defined with two has
 ## Section heading
 ```
 
-- To add subsection headings, add a another `#` character
+- To add subsection headings, add another `#` character: (`### Subsection heading`)
 - Try to avoid heading levels beyond h4 (`####`).
 - Do not skip a level, e.g., do not go from `##` to `####`.
-- Ensure there's a blank line before and after the heading.
+- Ensure there's a blank line before and after each heading.
 
 ## Common markup
 
@@ -354,18 +293,18 @@ To add an image to your Markdown file, add an entry that looks like this:
 
 ## Style Guide
 
-This section outlines the stylistic elements that we try to follow in the Neon documentation.
+This section outlines the stylistic elements that we do our best to follow in the Neon documentation.
 
 ### Voice and language
 
-The voice in the documentation should sound like one human being explaining something important to another, while striking the right balance between being approachable yet professional.
+The voice in the documentation should sound like one human being explaining something to another, while striking the right balance between being approachable and professional.
 
 #### Guidelines
 
 1. **Use contractions**:
     - **Do**: Use contractions like "it's", "don't", "you're" to make the tone more conversational.
       - *Example*: "It's essential to save your progress."
-    - **Don't**: Overuse contractions where clarity is compromised.
+    - **Don't**: Overuse contractions, which can compromise clarifyS.
 
 2. **Simplicity over jargon**:
     - **Do**: Choose simpler words when possible.
