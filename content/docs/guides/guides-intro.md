@@ -8,6 +8,8 @@ Welcome to the guides section of our documentation. Whether you're exploring Neo
 
 ### Neon features
 
+Use the guides below to explore Neon's core features.
+
 - [Autoscaling](guides/autoscaling-guide)
 - [Auto-suspend](guides/auto-suspend-guide)
 - **Branching**
@@ -29,7 +31,7 @@ Welcome to the guides section of our documentation. Whether you're exploring Neo
 
 ### Frameworks, languages, and platforms
 
-Navigate to our guides from the cards below or explore the sidebar for more.
+Navigate our frameworks, language, and platform guides using the cards below or explore the sidebar for more.
 
 <TechnologyNavigation>
 
