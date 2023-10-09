@@ -161,7 +161,12 @@ Top-level section headings in the body of your document are defined with two has
 ## Section heading
 ```
 
-- To add subsection headings, add another `#` character: (`### Subsection heading`)
+To add a subsection heading, equivalent to an `h3`, add another `#` character:
+
+```md
+### Subsection heading
+```
+
 - Try to avoid heading levels beyond h4 (`####`).
 - Do not skip a level, e.g., do not go from `##` to `####`.
 - Ensure there's a blank line before and after each heading.
