@@ -271,6 +271,9 @@ Try rolling back your last change by running the Liquibase `rollback` command:
 liquibase$ liquibase rollbackCount 1
 ```
 
+<details>
+<summary>Command output</summary>
+
 If the command was successful, you’ll see output similar to the following:
 
 ```bash
@@ -280,6 +283,8 @@ Liquibase Open Source 4.24.0 by Liquibase
 Rolling Back Changeset: dbchangelog.xml::myIDNumber1234::AlexL
 Liquibase command 'rollbackCount' was executed successfully.
 ```
+
+</details>
 
 ## Liquibase developer workflow with Neon branching
 
@@ -367,6 +372,9 @@ Running the following command to see if there are changesets that haven't been a
 liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog status --verbose
 ```
 
+<details>
+<summary>Command output</summary>
+
 If the command was successful, you’ll see output similar to the following indicating that there is one changeset that has not been applied to your development database. This is the `comments` table changeset.
 
 ```bash
@@ -378,6 +386,8 @@ Liquibase Open Source 4.24.0 by Liquibase
 Liquibase command 'status' was executed successfully.
 ```
 
+</details>
+
 ### Check your SQL
 
 Before applying the update, you can run the following command to check the SQL:
@@ -386,7 +396,10 @@ Before applying the update, you can run the following command to check the SQL:
 liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog updateSQL
 ```
 
-If the command was successful, you’ll see output similar to the following, which confirms that the changeset will create the `comments` table, which is the change you expected.
+<details>
+<summary>Command output</summary>
+
+If the command was successful, you’ll see output similar to the following, which confirms that the changeset will create the `comments` table.
 
 ```bash
 Starting Liquibase at 12:32:55 (version 4.24.0 #14062 built at 2023-09-28 12:18+0000)
@@ -427,6 +440,8 @@ SET SEARCH_PATH TO public, "$user","public";
 Liquibase command 'updateSql' was executed successfully.
 ```
 
+</details>
+
 ## Run a diff command to compare the changes
 
 You can also run a `diff` command to compare your source and target databases.
@@ -434,6 +449,9 @@ You can also run a `diff` command to compare your source and target databases.
 ```bash
 liquibase --referenceUrl=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog --referenceUsername alex --referencePassword IwMdnTs1R6kH diff
 ```
+
+<details>
+<summary>Command output</summary>
 
 If the command was successful, you’ll see output similar to the following:
 
@@ -492,6 +510,8 @@ Changed View(s): NONE
 Liquibase command 'diff' was executed successfully.
 ```
 
+</details>
+
 ### Save to source control
 
 Save your changelog to source control when you are satisfied with the changes that will be applied.
@@ -503,6 +523,9 @@ Apply the new changesets to the source database on your primary branch:
 ```bash
 liquibase --url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog update
 ```
+
+<details>
+<summary>Command output</summary>
 
 If the command was successful, you’ll see output similar to the following:
 
@@ -522,6 +545,8 @@ Total change sets:            1
 Liquibase: Update has been successful. Rows affected: 1
 Liquibase command 'update' was executed successfully.
 ```
+
+</details>
 
 To ensure that all changes have been applied to the production database, you can rerun the `status`, `updatedSql`, and `diff` commands you ran above. You can also check your databases in the Tables view in the Neon console to verify that both databases now have a `comments` table.
 
