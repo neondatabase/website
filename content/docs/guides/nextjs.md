@@ -220,7 +220,7 @@ From your Edge Functions, add the following code snippet and connect to your Neo
 ```javascript
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.DATABASE_URL);
+const sql = neon(process.env.DATABASE_URL, { ssl: 'require' });
 
 export default async function handler(req, res) {
   const response = await sql`SELECT version()`;
