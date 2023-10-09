@@ -8,7 +8,7 @@ Welcome to the guides section of our documentation. Whether you're exploring Neo
 
 ### Neon features
 
-Use the guides below to explore Neon's core features.
+Explore Neon's capabilities with our feature guides.
 
 - [Autoscaling](guides/autoscaling-guide)
 - [Auto-suspend](guides/auto-suspend-guide)
@@ -26,12 +26,10 @@ Use the guides below to explore Neon's core features.
   - [Data analysis and reporting](guides/read-replica-data-analysis)
   - [Use read replicas with Prisma](guides/read-replica-prisma)
 - [Manage roles and databases with SQL](guides/manage-database-access)
-- **Extensions**
-  - [neon_utils](extensions/neon-utils)
 
 ### Frameworks, languages, and platforms
 
-Navigate our frameworks, language, and platform guides using the cards below or explore the sidebar for more.
+Learn how to integrate your applications with our framework, language, and platform guides.
 
 <TechnologyNavigation>
 
