@@ -186,6 +186,12 @@
           slug: guides/stepzen
         - title: WunderGraph
           slug: guides/wundergraph
+    - title: Database migrations
+      items:
+        - title: Liquibase
+          slug: guides/liquibase
+        - title: Liquibase developer workflow
+          slug: guides/liquibase-workflow
     - title: Serverless
       items:
         - title: Neon serverless driver
