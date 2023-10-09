@@ -4,7 +4,7 @@ subtitle: Learn how to import data from different sources or load sample data
 enableTableOfContents: true
 ---
 
-Welcome to the data import section. This part of the documentation provides guides on importing data into Neon from different sources. You'll find instructions for importing data from Postgres, CSV, other Neon projects, and more. Additionally, if you're new to Neon and want to try it out, our sample guide provides datasets for exploration and testing.
+Welcome to the data import section. This part of the documentation provides guides on importing data into Neon from different sources. You'll find instructions for importing data from Postgres, CSV, other Neon projects, and more. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.
 
 ### Data import guides
 
