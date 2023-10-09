@@ -31,7 +31,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs labels={["node-postgres", "postgres.js"]}>
+    <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
       ```shell
       npm install pg
@@ -39,6 +39,10 @@ If you do not have one already, create a Neon project. Save your connection deta
 
       ```shell
       npm install postgres
+      ```
+      
+      ```shell
+      npm install @neondatabase/serverless
       ```
 
     </CodeTabs>
@@ -98,7 +102,7 @@ import postgres from 'postgres';
 async function getData() {
   const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
 
-  const response = await sql`select version()`;
+  const response = await sql`SELECT version()`;
   console.log(response);
   return response;
 }
@@ -147,7 +151,7 @@ import postgres from 'postgres';
 export async function getServerSideProps() {
   const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
 
-  const response = await sql`select version()`;
+  const response = await sql`SELECT version()`;
   console.log(response);
   return { props: { data: response } };
 }
@@ -158,9 +162,10 @@ export default function Page({ data }) {}
 
 </CodeTabs>
 
-### API Routes
 
-From your API handlers, add the following code snippet to connect to your Neon database:
+### Serverless Functions
+
+From your Serverless Functions, add the following code snippet to connect to your Neon database:
 
 <CodeTabs labels={["node-postgres", "postgres.js"]}>
 
@@ -180,6 +185,11 @@ export default async function handler(req, res) {
   try {
     const response = await client.query('SELECT version()');
     console.log(response.rows[0]);
+
+    res.status(200).json({
+      data: response.rows[0]
+    })
+
   } finally {
     client.release();
   }
@@ -192,12 +202,40 @@ import postgres from 'postgres';
 const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
 
 export default async function handler(req, res) {
-  const response = await sql`select version()`;
+  const response = await sql`SELECT version()`;
   console.log(response);
+
+  res.status(200).json({
+    data: response
+  })
 }
 ```
 
 </CodeTabs>
+
+### Edge Functions
+
+From your Edge Functions, add the following code snippet and connect to your Neon database using the [Neon serverless driver](/docs/serverless/serverless-driver):
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL);
+
+export default async function handler(req, res) {
+  const response = await sql`SELECT version()`;
+  console.log(response)
+
+  return Response.json({
+    data: response,
+  });
+}
+
+export const config = {
+  runtime: 'edge',
+};
+```
+
 
 ## Run the app
 
