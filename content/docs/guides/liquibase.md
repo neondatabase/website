@@ -38,31 +38,23 @@ examples       lib                  liquibase    UNINSTALL.txt
 
 ## Set your path variable
 
-To add the directory to your `PATH`, open a terminal and run the following command:
+Sdd the Liquibase directory to your `PATH`. For example:
 
 ```bash
-export PATH=$PATH:/path/to/liquibase
-```
-
-<Admonition type="note">
-This command does not permanently update your `PATH` after the termination of your session.
-</Admonition>
-
-To update your `PATH` permanently, add `export PATH=$PATH:/path/to/liquibase` to the end of your `~/.profile` or `~/.bashrc` file and run:
-
-```bash
-source ~/.profile 
+echo 'export PATH=$PATH:/path/to/liquibase' >> ~/.bashrc
+source ~/.bashrc
 ```
 
 or
 
 ```bash
-source ~/.bashrc
+echo 'export PATH=$PATH:/path/to/liquibase' >> ~/.profile
+source ~/.profile
 ```
 
 ## Verify your installation
 
-After installing Liquibase, you can verify that the installation was successful by running the following command:
+Verify that the Liquibase installation was successful by running the following command:
 
 ```bash
 liquibase --version
@@ -73,7 +65,7 @@ Liquibase Open Source 4.24.0 by Liquibase
 
 ## Initialize a new Liquibase project
 
-Run the following command to initialize a Liquibase project, which sets up a `liquibase.properties` file, `flowfile`, and sample changelog.
+Run the following command to initialize a Liquibase project:
 
 ```bash
 liquibase init project
@@ -135,8 +127,22 @@ password:  AbC123dEf
 classpath:  internal/lib/postgresql.jar
 ```
 
+```env
+# Enter the path for your changelog file.
+changeLogFile=dbchangelog.xml
+
+#### Enter the Target database 'url' information  ####
+liquibase.command.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
+
+# Enter the username for your Target database.
+liquibase.command.username: alex
+
+# Enter the password for your Target database.
+liquibase.command.password: AbC123dEf
+```
+
 <Admonition type="note">
-To use Liquibase and PostgreSQL, you need the JDBC driver JAR file. The latest version of Liquibase includes this driver in the `liquibase/internal/lib` directory. The driver version is displayed when you run the `liquibase --version` command:
+To use Liquibase with PostgreSQL, you need the JDBC driver JAR file. The latest version of Liquibase includes this driver in the `liquibase/internal/lib` directory. The driver version is displayed when you run the `liquibase --version` command:
 
 ```bash
 liquibase --version
