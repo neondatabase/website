@@ -1,6 +1,6 @@
 ---
 title: Neon data import guides
-subtitle: Learn how to import data from different sources or load sample data for exploring Neon
+subtitle: Learn how to import data from different sources or load sample data
 enableTableOfContents: true
 ---
 
