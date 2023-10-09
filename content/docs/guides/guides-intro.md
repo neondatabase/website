@@ -10,22 +10,43 @@ Welcome to the guides section of our documentation. Whether you're exploring Neo
 
 Explore Neon's capabilities with our feature guides.
 
-- [Autoscaling](guides/autoscaling-guide)
-- [Auto-suspend](guides/auto-suspend-guide)
-- **Branching**
-  - [Branching — Point-in-time restore](guides/branching-pitr)
-  - [Branching — Testing queries](guides/branching-test-queries)
-  - [Branching with the CLI](guides/branching-neon-cli)
-  - [Branching with the API](guides/branching-neon-api)
-  - [Branching with GitHub Actions](guides/branching-github-actions)
-  - [Refresh a branch with the Neon API](guides/branch-refresh)
-  - [Promote a branch to primary with the Neon API](guides/branch-promote)
-- [Project sharing](guides/project-sharing-guide)
-- **Read replicas**
-  - [Working with read replicas](guides/read-replica-guide)
-  - [Data analysis and reporting](guides/read-replica-data-analysis)
-  - [Use read replicas with Prisma](guides/read-replica-prisma)
-- [Manage roles and databases with SQL](guides/manage-database-access)
+#### Autoscaling
+
+Learn how to enable and configure Neon's [Autoscaling feature](/docs/guides/autoscaling-guide) to automatically scale compute resources up and down based on demand.
+
+[Enable Autoscaling in Neon](/docs/guides/autoscaling-guide)
+
+#### Auto-suspend
+
+Learn about Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature and how to configure it.
+
+[Configure Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide)
+
+#### Branching
+
+Explore Neon's [branching feature](/docs/introduction/branching) with our branching guides.
+
+- [Branching — Point-in-time restore](/docs/guides/branching-pitr)
+- [Branching — Testing queries](/docs/guides/branching-test-queries)
+- [Branching with the CLI](/docs/guides/branching-neon-cli)
+- [Branching with the API](/docs/guides/branching-neon-api)
+- [Branching with GitHub Actions](/docs/guides/branching-github-actions)
+- [Refresh a branch with the Neon API](/docs/guides/branch-refresh)
+- [Promote a branch to primary with the Neon API](/docs/guides/branch-promote)
+
+#### Project sharing
+
+Learn how to share your Neon project with anyone using Neon's project sharing feature.
+
+[Project sharing](/docs/guides/project-sharing-guide)
+
+#### Read replicas
+
+Learn how to use and integrate Neon [read replicas](/docs/introduction/read-replicas).
+
+- [Working with read replicas](/docs/guides/read-replica-guide)
+- [Data analysis and reporting](/docs/guides/read-replica-data-analysis)
+- [Use read replicas with Prisma](/docs/guides/read-replica-prisma)
 
 ### Frameworks, languages, and platforms
 
