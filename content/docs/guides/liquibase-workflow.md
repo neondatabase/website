@@ -1,12 +1,12 @@
 ---
-title: Manage schema changes with Liquibase
-subtitle: Learn how to manage schema changes in Neon using Liquibase
+title: Liquibase developer workflow with Neon
+subtitle: Implement a developer workflow for schema changes using Liquibase and Neon branching
 enableTableOfContents: true
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing and applying database schema changes. To learn more about Luquibase, please refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
-This guide steps you through downloading and installing the Liquibase CLI, configuring Liquibase to connect to your Neon database, creating and deploying a database schema change, and rolling back a schema change. We'll also take a look a developer workflow that uses Liquibase with Neon's branching feature. The workflow involves making schema changes on a database development branch and apply the changes back to the database on your main branch.
+This guide shows you how to set up a developer workflow that uses Liquibase with Neon's branching feature. The workflow involves making schema changes on a target development database branch and apply the changes back to the source database on your main branch in Neon.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ liquibase init project
 
 Enter `Y` to accept the defaults.
 
-## Prepare a Neon database
+## Prepare a source database in Neon
 
 Create a `blog` database in Neon with two tables, `posts` and `authors`.
 
@@ -52,63 +52,72 @@ Create a `blog` database in Neon with two tables, `posts` and `authors`.
     );
     ```
 
-## Retrieve your Neon database connection string
+## Prepare a target development database in Neon
 
-Retrieve your Neon database connection string from the **Connection Details** widget on the Neon Dashboard. It will look something like this:
+Now, let's prepare a target development database in Neon by creating a branch in Neon, where you can safely start making changes to your database schema. A branch is a copy-on-write clone, so it will include a copy of the `blog` database with the `authors` and `posts` tables.
+
+To create a branch:
+
+1. In the Neon Console, select a project.
+2. Select **Branches**.
+3. Click **New Branch** to open the branch creation dialog.
+   ![Create branch dialog](/docs/manage/create_branch.png)
+4. Enter a name for the branch. Let's call it `dev1`.
+5. Select a parent branch. Select the branch where the `blog` database was created.
+6. Leave the remaining default settings.
+8. Click **Create Branch** to create your branch.
+
+## Retrieve your Neon database connection strings
+
+Retrieve connection strings for your source and target databases from the **Connection Details** widget on the Neon Dashboard. They will look something like this:
+
+Source database:
 
 ```bash
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
 ```
 
-## Connect from Liquibase to your Neon database
-
-Update `liquibase.properties` text file to specify your `driver classpath`, `URL`, and user authentication information for your Neon database.
+Target database:
 
 ```bash
-cd ~/liquibase
-touch liquibase.properties
+postgres://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
 ```
 
-Open the `liquibase.properties` file in an editor and add the following details, replacing the values with those from your own Neon database connection string:
+Notice that the hostname differs. This is because the new branch is a completely separate Postgres instance, hosted on its own compute instance.
 
-```env
-changeLogFile:dbchangelog.xml  
-url:  jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
-username:  alex 
-password:  AbC123dEf
-classpath:  internal/lib/postgresql.jar
-```
+## Update your liquibase.properties file to define source and target databases
+
+Replace the current configuration in your `liquibase.properties` file with the following, substituting your database connection details for your target and source databases.
 
 ```env
 # Enter the path for your changelog file.
 changeLogFile=dbchangelog.xml
 
 #### Enter the Target database 'url' information  ####
-liquibase.command.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
+liquibase.command.url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
 
 # Enter the username for your Target database.
 liquibase.command.username: alex
 
 # Enter the password for your Target database.
 liquibase.command.password: AbC123dEf
+
+#### Enter the Source Database 'referenceUrl' information ####
+## The source database is the baseline or reference against which your target database is compared for diff/diffchangelog commands.
+
+# Enter URL for the source database
+liquibase.command.referenceUrl: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
+
+# Enter the username for your source database
+liquibase.command.referenceUsername: alex
+
+# Enter the password for your source database
+liquibase.command.referencePassword: AbC123dEf
 ```
 
-<Admonition type="note">
-To use Liquibase with PostgreSQL, you need the JDBC driver JAR file. The latest version of Liquibase includes this driver in the `liquibase/internal/lib` directory. The driver version is displayed when you run the `liquibase --version` command:
+## Take a snapshot of your target database
 
-```bash
-liquibase --version
-...
-- internal/lib/postgresql.jar: PostgreSQL JDBC Driver 42.6.0 By PostgreSQL Global Development Group
-...
-```
-
-Optionally, you can download a different version of the driver JAR file from [https://jdbc.postgresql.org/download/](https://jdbc.postgresql.org/download/) or from [Maven](https://mvnrepository.com/artifact/org.postgresql/postgresql). See [Adding and Updating Liquibase Drivers](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) for information about using a different driver.
-</Admonition>
-
-## Take a snapshot of your existing database
-
-Capture the current state of your database by creating a deployable Liquibase changelog.
+Capture the current state of your target database by creating a deployable Liquibase changelog.
 
 ```bash
 liquibase --changeLogFile=mydatabase_changelog.xml generateChangeLog
@@ -193,9 +202,9 @@ touch dbchangelog.xml
 </databaseChangeLog>
 ```
 
-## Deploy your database change
+### Apply changes to the target developer database
 
-Deploy your database change by running the `update` command like this:
+Run `liquibase update` to apply the changes to the target developer database. Iterate until you are happy with the final state.
 
 ```bash
 liquibase update
@@ -219,82 +228,6 @@ Total change sets:            1
 
 Liquibase: Update has been successful. Rows affected: 1
 Liquibase command 'update' was executed successfully.
-```
-
-## Liquibase developer workflow with Neon branching
-
-Let's assume the database you created above is your production database. If you followed all of the steps, you should have a database named `blog` with two tables:
-
-- `posts`
-- `authors`
-
-You no longer have the `comments` table because you rolled that changeset back.
-
-## Create a branch in Neon for your development database
-
-Now, let's create a branch in Neon to use as your developer database, where you can safely start making changes to your database schema. A branch is a copy-on-write clone, so it will incllude a copy of the `blog` database with the `authors` and `posts` tables.
-
-To create a branch:
-
-1. In the Neon Console, select a project.
-2. Select **Branches**.
-3. Click **New Branch** to open the branch creation dialog.
-   ![Create branch dialog](/docs/manage/create_branch.png)
-4. Enter a name for the branch. Let's call it `dev1`.
-5. Select a parent branch. Select the branch where the `blog` database was created.
-6. Leave the remaining default settings.
-8. Click **Create Branch** to create your branch.
-
-Copy the connection string for your new branch. It will look something like this:
-
-```bash
-postgresql://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
-```
-
-Notice that the hostname is different. This is because the new branch is a completely separate Postgres instance, hosted on its own compute instance.
-
-## Update your liquibase.properties file to define source and target databases
-
-Your existing database will become the source database. The target database will be your development database and will point to your new database branch.
-
-Replace the current configuration in your `liquibase.properties` file with the following, substituting your database connection details for your target and source databases.
-
-```env
-# Enter the path for your changelog file.
-changeLogFile=dbchangelog.xml
-
-#### Enter the Target database 'url' information  ####
-liquibase.command.url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
-
-# Enter the username for your Target database.
-liquibase.command.username: alex
-
-# Enter the password for your Target database.
-liquibase.command.password: AbC123dEf
-
-#### Enter the Source Database 'referenceUrl' information ####
-## The source database is the baseline or reference against which your target database is compared for diff/diffchangelog commands.
-
-# Enter URL for the source database
-liquibase.command.referenceUrl: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
-
-# Enter the username for your source database
-liquibase.command.referenceUsername: alex
-
-# Enter the password for your source database
-liquibase.command.referencePassword: AbC123dEf
-```
-
-### Add new changesets to the changelog
-
-At this point, you can add new changeset(s) to your changelog to apply to your development database. We'll reuse the existing changeset with the new `comments` table that you created previously (which you applied and then rolled back). We'll apply this changeset to the development database in the next step.
-
-### Apply changes to the developer database
-
-Run `liquibase update` to apply the changes to the developer database. Iterate until you are happy with the final state.
-
-```bash
-liquibase update
 ```
 
 ### Understand database changes before saving and applying them
@@ -447,11 +380,11 @@ Liquibase command 'diff' was executed successfully.
 
 </details>
 
-### Save to source control
+### Save your changelog to source control
 
-Save your changelog to source control when you are satisfied with the changes that will be applied.
+ When you are satisfied with the changes that will be applied, save your changelog to source control.
 
-### Apply the new changesets
+### Apply the new changeset to your source database
 
 Apply the new changesets to the source database on your primary branch:
 

@@ -249,6 +249,9 @@ Deploy your database change by running the `update` command like this:
 liquibase update
 ```
 
+<details>
+<summary>Command output</summary>
+
 If the command was successful, you’ll see output similar to the following:
 
 ```bash
@@ -268,6 +271,8 @@ Total change sets:            1
 Liquibase: Update has been successful. Rows affected: 1
 Liquibase command 'update' was executed successfully.
 ```
+
+</details>
 
 ## Rollback a change
 
