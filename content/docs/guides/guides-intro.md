@@ -1,12 +1,12 @@
 ---
 title: Neon user guides
-subtitle: Explore Neon features, integrations, and connecting to Neon from different frameworks and languages.
+subtitle: Explore Neon features how to integrate Neon with different frameworks, languages, and platforms
 enableTableOfContents: true
 ---
 
-Welcome to the guides section of our documentation. Whether you're exploring Neon's features or looking for detailed instructions for integration across various frameworks, languages, and platforms, our guides are tailored to assist you. Dive in and discover how to maximize your experience with Neon.
+Welcome to the guides section of our documentation. Whether you're exploring Neon's features or looking for detailed instructions for integration across various frameworks, languages, and platforms, our guides are tailored to assist you.
 
-### Feature guides
+### Neon features
 
 - [Autoscaling](guides/autoscaling-guide)
 - [Auto-suspend](guides/auto-suspend-guide)
@@ -27,7 +27,9 @@ Welcome to the guides section of our documentation. Whether you're exploring Neo
 - **Extensions**
   - [neon_utils](extensions/neon-utils)
 
-### Framework and language guides
+### Frameworks, languages, and platforms
+
+Navigate to our guides from the cards below or explore the sidebar for more.
 
 <TechnologyNavigation>
 
