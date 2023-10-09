@@ -18,7 +18,7 @@ Learn how to enable Neon's [Autoscaling feature](/docs/guides/autoscaling-guide)
 
 #### Auto-suspend
 
-Learn how to configure Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature, which controls when Neon compute resources scale to zero.
+Learn about Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature, which controls when Neon compute resources scale to zero.
 
 [Configure Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide)
 
@@ -42,7 +42,7 @@ Learn how to share your Neon project with anyone using Neon's project sharing fe
 
 #### Read replicas
 
-Learn how to use and integrate Neon [read replicas](/docs/introduction/read-replicas).
+Learn about Neon [read replicas](/docs/introduction/read-replicas).
 
 - [Working with read replicas](/docs/guides/read-replica-guide)
 - [Data analysis and reporting](/docs/guides/read-replica-data-analysis)
@@ -50,7 +50,7 @@ Learn how to use and integrate Neon [read replicas](/docs/introduction/read-repl
 
 ### Framework, language, and platform guides
 
-Learn how to integrate your applications with our framework, language, and platform guides.
+Integrate your applications with our framework, language, and platform guides.
 
 <TechnologyNavigation>
 
