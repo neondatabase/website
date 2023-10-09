@@ -6,19 +6,19 @@ enableTableOfContents: true
 
 Welcome to the guides section of our documentation. Whether you're exploring Neon's features or looking for detailed instructions for integration across various frameworks, languages, and platforms, our guides are tailored to assist you.
 
-### Neon features
+### Feature guides
 
 Explore Neon's capabilities with our feature guides.
 
 #### Autoscaling
 
-Learn how to enable and configure Neon's [Autoscaling feature](/docs/guides/autoscaling-guide) to automatically scale compute resources up and down based on demand.
+Learn how to enable Neon's [Autoscaling feature](/docs/guides/autoscaling-guide) to automatically scale compute resources up and down based on demand.
 
 [Enable Autoscaling in Neon](/docs/guides/autoscaling-guide)
 
 #### Auto-suspend
 
-Learn about Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature and how to configure it.
+Learn how to configure Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature, which controls when Neon compute resources scale to zero.
 
 [Configure Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide)
 
@@ -48,7 +48,7 @@ Learn how to use and integrate Neon [read replicas](/docs/introduction/read-repl
 - [Data analysis and reporting](/docs/guides/read-replica-data-analysis)
 - [Use read replicas with Prisma](/docs/guides/read-replica-prisma)
 
-### Frameworks, languages, and platforms
+### Framework, language, and platform guides
 
 Learn how to integrate your applications with our framework, language, and platform guides.
 
