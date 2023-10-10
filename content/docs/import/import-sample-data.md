@@ -2,7 +2,7 @@
 title: Postgres sample data
 subtitle: 'Download sample data for learning, testing, and exploring Neon'
 enableTableOfContents: true
-updatedOn: '2023-10-06T17:44:14.702Z'
+updatedOn: '2023-10-10T08:41:39.929Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.

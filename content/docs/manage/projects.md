@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2023-10-06T17:44:14.705Z'
+updatedOn: '2023-10-10T08:41:39.935Z'
 ---
 
 A project is the top-level object in the [Neon object hierarchy](/docs/manage/overview). Tier limits define how many projects you can create. Neon's Free Tier permits one project per Neon account.
