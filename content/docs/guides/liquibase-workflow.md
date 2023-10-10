@@ -130,7 +130,7 @@ liquibase.command.referencePassword: AbC123dEf
 
 ## Take a snapshot of your target database
 
-Capture the current state of your Target database. The following command creates a Liquibase changelog named `mydatabase_changelog.xml`.
+Capture the current state of your Target database. The following command creates a Liquibase changelog file named `my-changelog.xml`.
 
 ```bash
 liquibase --changeLogFile=my-changelog.xml generateChangeLog
@@ -149,7 +149,7 @@ Generated changelog written to my-changelog.xml
 Liquibase command 'generateChangelog' was executed successfully.
 ```
 
-Check for the `my-changelog.xml` file that should have been created in your Liquibase project directory. You’ll get a changelog for your development `blog` database. It will looks something like this.
+Check for the `my-changelog.xml` file in your Liquibase project directory. It should looks something like this:
 
 ```xml
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
