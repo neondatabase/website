@@ -116,6 +116,13 @@ export default async function Page() {
 
 ### Pages Router
 
+There are two methods for fetching data using server-side requests in Next.js they are:
+
+1. `getServerSideProps` fetches data at runtime so that content is always fresh.
+2. `getStaticProps` pre-renders pages at build time for data that is static or changes infrequently.
+
+### getServerSideProps
+
 From `getServerSideProps` using the Pages Router, add the following code snippet to connect to your Neon database:
 
 <CodeTabs labels={["node-postgres", "postgres.js"]}>
@@ -161,6 +168,8 @@ export default function Page({ data }) {}
 ```
 
 </CodeTabs>
+
+### getStaticProps
 
 From `getStaticProps` using the Pages Router, add the following code snippet to connect to your Neon database:
 
