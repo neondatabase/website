@@ -121,7 +121,7 @@ There are two methods for fetching data using server-side requests in Next.js th
 1. `getServerSideProps` fetches data at runtime so that content is always fresh.
 2. `getStaticProps` pre-renders pages at build time for data that is static or changes infrequently.
 
-### getServerSideProps
+#### getServerSideProps
 
 From `getServerSideProps` using the Pages Router, add the following code snippet to connect to your Neon database:
 
@@ -169,7 +169,7 @@ export default function Page({ data }) {}
 
 </CodeTabs>
 
-### getStaticProps
+#### getStaticProps
 
 From `getStaticProps` using the Pages Router, add the following code snippet to connect to your Neon database:
 
