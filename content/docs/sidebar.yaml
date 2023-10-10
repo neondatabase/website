@@ -98,6 +98,7 @@
     - title: Backups
       slug: manage/backups
 - title: Guides
+  slug: guides/guides-intro
   items:
     - title: Neon features
       items: 
