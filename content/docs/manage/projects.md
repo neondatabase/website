@@ -7,14 +7,18 @@ redirectFrom:
 updatedOn: '2023-10-06T17:44:14.705Z'
 ---
 
-A project is the top-level object in the [Neon object hierarchy](/docs/manage/overview). Tier limits define how many projects you can create. Neon's Free Tier permits one project per Neon account.
+With Neon, everything starts with the project. It's the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases, and as many branches of those databases, as your application or workflow needs. However, [tier limits] (/docs/link to tier limits) define how many projects you can create. Neon's Free Tier limits you to one project per Neon account.
 
-A Neon project is created with the following resources, by default:
+When you add a new project, Neon creates the following resources by default:
 
-- A primary branch called `main`. You can create child branches from the primary branch or from a previously created branch. For more information, see [Manage branches](/docs/manage/branches).
-- A single read-write compute endpoint, which is the compute instance associated with a branch. For more information, see [Manage computes](/docs/manage/endpoints).
-- A ready-to-use database, called `neondb`, which resides in the project's primary branch.
+- A primary branch called `main`. You can create child branches from the primary branch or from any previously created branch. For more information, see [Manage branches](/docs/manage/branches).
+- A single read-write compute endpoint. This is the compute instance associated with the branch. //is this accurate to say? "You can think of it as the engine that processes your database interactions."// For more information, see [Manage computes](/docs/manage/endpoints).
+- A ready-to-use database, called `neondb`, which lives in the project's primary branch.
 - A default Postgres role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
+
+//Add something to address common confusion about dbs per project? 
+Should we be explicit that a project is or acts like a postgres cluster?
+Is there some guideance we can give over when you would want to create a new project?//
 
 ## Create a project
 
@@ -52,7 +56,7 @@ To view your projects:
 1. Select **Home** or the Neon logo at the top left of the Console.
 1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
-## Edit a project
+## Change the name of your project Edit a project
 
 You are permitted to change the project name when editing a project.
 
