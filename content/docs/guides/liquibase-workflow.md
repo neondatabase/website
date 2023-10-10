@@ -29,8 +29,8 @@ Enter `Y` to accept the defaults.
 
 Create a `blog` database in Neon with two tables, `posts` and `authors`.
 
-1. From the Neon console, create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
-2. Using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), add the following tables:
+1. From the Neon console, create a database named `blog` on the `main` branch of your Neon project. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
+2. Open the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and create the following tables:
 
     ```sql
     -- Creating the `authors` table
@@ -54,45 +54,56 @@ Create a `blog` database in Neon with two tables, `posts` and `authors`.
 
 ## Prepare a target development database in Neon
 
-Now, let's prepare a target development database in Neon by creating a branch in Neon, where you can safely start making changes to your database schema. A branch is a copy-on-write clone, so it will include a copy of the `blog` database with the `authors` and `posts` tables.
+Now, let's prepare a development database in Neon by creating a development branch, where you can safely make changes to your database schema without affecting the database schema on your `main` branch. A branch is a copy-on-write clone of the data in your Neon project, so it will include a copy of the `blog` database with the `authors` and `posts` tables that you just created.
 
 To create a branch:
 
-1. In the Neon Console, select a project.
-2. Select **Branches**.
+1. In the Neon Console, select **Branches**. You will see your `main` branch, where you created just created your `blog` database.
 3. Click **New Branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch. Let's call it `dev1`.
-5. Select a parent branch. Select the branch where the `blog` database was created.
-6. Leave the remaining default settings.
+5. Leave `main` selected as the parent branch, where the `blog` database was created.
+6. Leave the remaining default settings. You want to create a branch from **Head** to include the latest data, and you need a compute endpoint to connect to the copy of the `blog` database on the branch.
 8. Click **Create Branch** to create your branch.
 
 ## Retrieve your Neon database connection strings
 
-Retrieve connection strings for your source and target databases from the **Connection Details** widget on the Neon Dashboard. They will look something like this:
+Retrieve connection strings for your target and source databases from the **Connection Details** widget on the Neon Dashboard.
 
-Source database:
+1. Select the `dev1` branch, the `blog` database, and copy the connection string.
 
 ```bash
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
 ```
+postgres://daniel:SDdVI21ghEQk@ep-long-base-47046964.us-east-2.aws.neon.tech/blog
 
-Target database:
+2. Select the `main` branch, the `blog` database, and copy the connection string.
 
 ```bash
 postgres://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
 ```
+postgres://daniel:SDdVI21ghEQk@ep-plain-scene-32928153.us-east-2.aws.neon.tech/blog
 
-Notice that the hostname differs. This is because the new branch is a completely separate Postgres instance, hosted on its own compute instance.
+Notice that the hostname (the part starting with `-ep` and ending in `neon.tech`) differs. This is because the `dev1` branch is a completely separate Postgres instance, hosted on its own compute.
 
-## Update your liquibase.properties file to define source and target databases
+## Update your liquibase.properties file
 
-Replace the current configuration in your `liquibase.properties` file with the following, substituting your database connection details for your target and source databases.
+The `liquibase.properties` file defines the location of your Liquibase changelog file and your Target and Source databases.
+
+1. In your Liquibase project directory, open the `liquibase.properties` file, which comes pre-populated with example settings.
+
+2. Change the `changeLogFile` setting as shown:
 
 ```env
 # Enter the path for your changelog file.
-changeLogFile=dbchangelog.xml
+changeLogFile=my-changelog.xml
+``````
 
+The [changelog file](https://docs.liquibase.com/parameters/changelog-file.html) is the root file of your Liquibase project that stores a record of all your database changes (changesets).
+
+3. Configure the `url`, `username`, and `password` settings for your Target database. These are the settings for the `blog` database on your `dev1` branch. You can obtain the required details from the connection string you copied previously. Please notice how the connection string format differs from the one you copied from Neon.
+
+```env
 #### Enter the Target database 'url' information  ####
 liquibase.command.url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
 
@@ -101,7 +112,11 @@ liquibase.command.username: alex
 
 # Enter the password for your Target database.
 liquibase.command.password: AbC123dEf
+```
 
+4. Configure the `url`, `username`, and `password` settings for your Source database. These are the settings for the `blog` database on your `main` branch. You can obtain the required details from the connection string you copied previously. Please notice how the connection string format differs from the one you copied from Neon.
+
+```env
 #### Enter the Source Database 'referenceUrl' information ####
 ## The source database is the baseline or reference against which your target database is compared for diff/diffchangelog commands.
 
@@ -117,18 +132,31 @@ liquibase.command.referencePassword: AbC123dEf
 
 ## Take a snapshot of your target database
 
-Capture the current state of your target database by creating a deployable Liquibase changelog.
+Capture the current state of your Target database. The following command creates a Liquibase changelog named `mydatabase_changelog.xml`.
 
 ```bash
-liquibase --changeLogFile=mydatabase_changelog.xml generateChangeLog
+liquibase --changeLogFile=my-changelog.xml generateChangeLog
 ```
 
-You’ll get a changelog for your database that looks something like this:
+If the command was successful, you’ll see output similar to the following:
+
+```bash
+Starting Liquibase at 07:09:59 (version 4.24.0 #14062 built at 2023-09-28 12:18+0000)
+Liquibase Version: 4.24.0
+Liquibase Open Source 4.24.0 by Liquibase
+
+BEST PRACTICE: The changelog generated by diffChangeLog/generateChangeLog should be inspected for correctness and completeness before being deployed. Some database objects and their dependencies cannot be represented automatically, and they may need to be manually updated before being deployed.
+
+Generated changelog written to my-changelog.xml
+Liquibase command 'generateChangelog' was executed successfully.
+```
+
+Check for the `my-changelog.xml` file that should have been created in your Liquibase project directory. You’ll get a changelog for your development `blog` database. It will looks something like this.
 
 ```xml
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <changeSet author="alex (generated)" id="1696773347773-1">
+    <changeSet author="dtprice (generated)" id="1696932602147-1">
         <createTable tableName="authors">
             <column autoIncrement="true" name="author_id" type="INTEGER">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="authors_pkey"/>
@@ -141,7 +169,7 @@ You’ll get a changelog for your database that looks something like this:
             <column name="bio" type="TEXT"/>
         </createTable>
     </changeSet>
-    <changeSet author="alex (generated)" id="1696773347773-2">
+    <changeSet author="dtprice (generated)" id="1696932602147-2">
         <createTable tableName="posts">
             <column autoIncrement="true" name="post_id" type="INTEGER">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="posts_pkey"/>
@@ -154,10 +182,10 @@ You’ll get a changelog for your database that looks something like this:
             <column defaultValueComputed="CURRENT_TIMESTAMP" name="published_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
         </createTable>
     </changeSet>
-    <changeSet author="alex (generated)" id="1696773347773-3">
+    <changeSet author="dtprice (generated)" id="1696932602147-3">
         <addUniqueConstraint columnNames="email" constraintName="authors_email_key" tableName="authors"/>
     </changeSet>
-    <changeSet author="alex (generated)" id="1696773347773-4">
+    <changeSet author="dtprice (generated)" id="1696932602147-4">
         <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="posts" constraintName="posts_author_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="author_id" referencedTableName="authors" validate="true"/>
     </changeSet>
 </databaseChangeLog>
@@ -165,7 +193,7 @@ You’ll get a changelog for your database that looks something like this:
 
 ## Create a database schema change
 
-Now you can start to make database changes by creating your first changeset in your `dbchangelog.xml` changelog:
+Now you can start to make database changes by creating your first changeset:
 
 1. Create a `dbchangelog.xml` file:
 
