@@ -116,7 +116,7 @@ export default async function Page() {
 
 ### Pages Router
 
-From your server functions using the Pages Router, add the following code snippet to connect to your Neon database:
+From `getServerSideProps` using the Pages Router, add the following code snippet to connect to your Neon database:
 
 <CodeTabs labels={["node-postgres", "postgres.js"]}>
 
@@ -149,6 +149,52 @@ export default function Page({ data }) {}
 import postgres from 'postgres';
 
 export async function getServerSideProps() {
+  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+
+  const response = await sql`SELECT version()`;
+  console.log(response);
+  return { props: { data: response } };
+}
+
+export default function Page({ data }) {}
+
+```
+
+</CodeTabs>
+
+From `getStaticProps` using the Pages Router, add the following code snippet to connect to your Neon database:
+
+<CodeTabs labels={["node-postgres", "postgres.js"]}>
+
+```javascript
+import { Pool } from 'pg';
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    require: true,
+  },
+});
+
+export async function getStaticProps() {
+  const client = await pool.connect();
+
+  try {
+    const response = await client.query('SELECT version()');
+    console.log(response.rows[0]);
+    return { props: { data: response.rows[0] } };
+  } finally {
+    client.release();
+  }
+}
+
+export default function Page({ data }) {}
+```
+
+```javascript
+import postgres from 'postgres';
+
+export async function getStaticProps() {
   const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
 
   const response = await sql`SELECT version()`;
