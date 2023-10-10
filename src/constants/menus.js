@@ -174,6 +174,10 @@ export default {
           text: 'Privacy Guide',
           to: LINKS.privacyGuide,
         },
+        {
+          text: 'Cookie Policy',
+          to: LINKS.cookiePolicy,
+        },
       ],
     },
   ],
