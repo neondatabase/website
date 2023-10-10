@@ -75,14 +75,12 @@ Retrieve connection strings for your target and source databases from the **Conn
 ```bash
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
 ```
-postgres://daniel:SDdVI21ghEQk@ep-long-base-47046964.us-east-2.aws.neon.tech/blog
 
 2. Select the `main` branch, the `blog` database, and copy the connection string.
 
 ```bash
 postgres://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
 ```
-postgres://daniel:SDdVI21ghEQk@ep-plain-scene-32928153.us-east-2.aws.neon.tech/blog
 
 Notice that the hostname (the part starting with `-ep` and ending in `neon.tech`) differs. This is because the `dev1` branch is a completely separate Postgres instance, hosted on its own compute.
 
