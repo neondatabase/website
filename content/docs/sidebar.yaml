@@ -233,15 +233,16 @@
 - title: Postgres extensions
   slug: extensions/pg-extensions
 - title: Import data
+  slug: import/import-intro
   items:
     - title: Import from Postgres
       slug: import/import-from-postgres
-    - title: Import from Heroku
-      slug: import/import-from-heroku
-    - title: Import from CSV
-      slug: import/import-from-csv
     - title: Import from a Neon project
       slug: import/import-from-neon
+    - title: Import from CSV
+      slug: import/import-from-csv
+    - title: Import from Heroku
+      slug: import/import-from-heroku
     - title: Migrate data with AWS DMS
       slug: import/migrate-aws-dms
     - title: Sample data
