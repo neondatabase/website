@@ -2,7 +2,7 @@
 title: Neon CLI commands — connection-string
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-06T17:44:14.715Z'
 ---
 
 ## Before you begin
@@ -73,4 +73,4 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

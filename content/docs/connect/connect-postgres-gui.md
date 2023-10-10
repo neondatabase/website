@@ -2,7 +2,7 @@
 title: Connect a GUI application
 subtitle: Learn how to connect a GUI application to Neon
 enableTableOfContents: true
-updatedOn: '2023-09-03T22:57:38Z'
+updatedOn: '2023-10-06T17:44:14.680Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.
@@ -99,4 +99,4 @@ ERROR: The endpoint ID is not specified. Either upgrade the Postgres client libr
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

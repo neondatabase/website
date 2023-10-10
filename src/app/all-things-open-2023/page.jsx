@@ -11,7 +11,7 @@ import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata({ ...SEO_DATA.index, robotsNoindex: 'noindex' });
 
-const LastWeekInAWS = () => (
+const AllThingsOpen = () => (
   <Layout headerTheme="black" isSignIn footerWithTopBorder withOverflowHidden>
     <FirstSection />
     <Community />
@@ -23,6 +23,6 @@ const LastWeekInAWS = () => (
   </Layout>
 );
 
-export default LastWeekInAWS;
+export default AllThingsOpen;
 
 export const revalidate = 60;

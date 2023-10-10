@@ -3,7 +3,7 @@ title: Postgres compatibility
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2023-09-13T23:32:46Z'
+updatedOn: '2023-10-06T17:44:14.717Z'
 ---
 
 Neon is protocol and application-compatible with Postgres. However, when using the Neon cloud service, there are some limitations that you should be aware of.
@@ -69,4 +69,4 @@ Neon does not currently support changing the database encoding. This feature wil
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

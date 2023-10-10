@@ -6,13 +6,19 @@ module.exports = {
     '/docs/release-notes/rss.xml',
     '/last-week-in-aws',
     '/ping-thing',
+    '/all-things-open-2023',
   ],
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [
       {
         userAgent: '*',
-        disallow: ['/blog/wp-draft-post-preview-page$', '/last-week-in-aws$', '/ping-thing$'],
+        disallow: [
+          '/blog/wp-draft-post-preview-page$',
+          '/last-week-in-aws$',
+          '/ping-thing$',
+          '/all-things-open-2023$',
+        ],
       },
     ],
   },
