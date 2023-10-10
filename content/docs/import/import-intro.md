@@ -8,9 +8,18 @@ Welcome to the data import section. This part of the documentation provides guid
 
 ### Data import guides
 
-- [Import from Postgres](import/import-from-postgres)
-- [Import from a Neon project](import/import-from-neon)
-- [Import from CSV](import/import-from-csv)
-- [Import from Heroku](import/import-from-heroku)
-- [Migrate data with AWS DMS](import/migrate-aws-dms)
-- [Sample data](import/import-sample-data)
+<DetailIconCards>
+
+<a href="/docs/import/import-from-postgres" description="Import data from another Postgres database" icon="import">Import from Postgres</a>
+
+<a href="/docs/import/import-from-neon" description="Import data from another Neon project to upgrade Postgres or change regions" icon="import">Import from a Neon project</a>
+
+<a href="/docs/import/import-from-csv" description="Import data from a CSV file" icon="import">Import from CSV</a>
+
+<a href="/docs/import/import-from-heroku" description="Import data from a Heroku Postgres database" icon="import">Import from Heroku</a>
+
+<a href="/docs/import/migrate-aws-dms" description="Migrate data using AWS Data Migration Service" icon="import">Migrate with AWS DMS</a>
+
+<a href="(/docs/import/import-sample-data" description="Load sample data for evaluation and learning" icon="import">Load sample data</a>
+
+</DetailIconCards>
