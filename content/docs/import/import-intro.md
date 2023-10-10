@@ -12,7 +12,7 @@ Welcome to the data import section. This part of the documentation provides guid
 
 <a href="/docs/import/import-from-postgres" description="Import data from another Postgres database" icon="import">Import from Postgres</a>
 
-<a href="/docs/import/import-from-neon" description="Import data from another Neon project to upgrade Postgres or change regions" icon="import">Import from a Neon project</a>
+<a href="/docs/import/import-from-neon" description="Import data from another Neon project for upgrade or region migration" icon="import">Import from a Neon project</a>
 
 <a href="/docs/import/import-from-csv" description="Import data from a CSV file" icon="import">Import from CSV</a>
 
@@ -20,6 +20,6 @@ Welcome to the data import section. This part of the documentation provides guid
 
 <a href="/docs/import/migrate-aws-dms" description="Migrate data using AWS Data Migration Service" icon="import">Migrate with AWS DMS</a>
 
-<a href="(/docs/import/import-sample-data" description="Load sample data for evaluation and learning" icon="import">Load sample data</a>
+<a href="(/docs/import/import-sample-data" description="Load sample data for exploration and testing" icon="import">Load sample data</a>
 
 </DetailIconCards>

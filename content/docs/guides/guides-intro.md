@@ -4,61 +4,7 @@ subtitle: Explore Neon features and how to integrate with different frameworks, 
 enableTableOfContents: true
 ---
 
-Welcome to the guides section of our documentation. Whether you're exploring Neon's features or looking for detailed instructions for integration across various frameworks, languages, and platforms, our guides are tailored to assist you.
-
-### Feature guides
-
-Explore Neon's capabilities with our feature guides.
-
-#### Autoscaling
-
-Learn how to enable Neon's [Autoscaling feature](/docs/guides/autoscaling-guide) to automatically scale compute resources up and down based on demand.
-
-[Enable Autoscaling in Neon](/docs/guides/autoscaling-guide)
-
-#### Auto-suspend
-
-Learn about Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature, which controls when Neon compute resources scale to zero.
-
-[Configure Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide)
-
-#### Branching
-
-Explore Neon's branching feature with our branching guides.
-
-<DetailIconCards>
-
-<a href="/docs/introduction/branching" description="Learn about Neon's branching feature" icon="split-branch">Learn about branching</a>
-
-<a href="/docs/guides/branching-pitr" description="Restore your data to a past state with database branching" icon="split-branch">Point-in-time restore</a>
-
-<a href="/docs/guides/branching-test-queries" description="Use branching to test queries before running them in production" icon="split-branch">Test queries on a branch</a>
-
-<a href="/docs/guides/branching-neon-cli" description="Create and manage branches with the Neon CLI" icon="split-branch">Branching with the CLI</a>
-
-<a href="/docs/guides/branching-neon-api" description="Create and manage branches with the Neon API" icon="split-branch">Branching with the API</a>
-
-<a href="(/docs/guides/branching-github-actions" description="Automate branching with GitHub Actions" icon="split-branch">Branching with GitHub Actions</a>
-
-<a href="(/docs/guides/branch-refresh" description="Refresh a development branch with the Neon API" icon="split-branch">Refresh a branch</a>
-
-<a href="(/docs/guides/branch-promote" description="Promote a branch to primary with the the Neon API" icon="split-branch">Promote a branch to primary</a>
-
-</DetailIconCards>
-
-#### Project sharing
-
-Learn how to share your Neon project with anyone using Neon's project sharing feature.
-
-[Project sharing](/docs/guides/project-sharing-guide)
-
-#### Read replicas
-
-Learn about Neon [read replicas](/docs/introduction/read-replicas).
-
-- [Working with read replicas](/docs/guides/read-replica-guide)
-- [Data analysis and reporting](/docs/guides/read-replica-data-analysis)
-- [Use read replicas with Prisma](/docs/guides/read-replica-prisma)
+Welcome to the guides section of our documentation. Whether you're looking for detailed instructions for integration across various frameworks, languages, and platforms, or exploring Neon's features, our guides are tailored to assist you.
 
 ### Framework, language, and platform guides
 
@@ -91,3 +37,83 @@ Integrate your applications with our framework, language, and platform guides.
 <img src="/images/technology-logos/symfony-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Symfony with Doctrine to Neon" />
 
 </TechnologyNavigation>
+
+### Feature guides
+
+Explore Neon's capabilities with our feature guides.
+
+#### Autoscaling
+
+Learn how to enable Neon's [Autoscaling feature](/docs/guides/autoscaling-guide) to automatically scale compute resources up and down based on demand.
+
+<DetailIconCards>
+
+<a href="/docs/introduction/autoscaling" description="Learn about Neon's Autoscaling feature" icon="ladder">Learn about Autoscaling</a>
+
+<a href="/docs/guides/autoscaling-guide" description="Enable Autoscaling to automatically scale compute resources on demand" icon="ladder">Enable Autoscaling</a>
+
+</DetailIconCards>
+
+[Enable Autoscaling in Neon](/docs/guides/autoscaling-guide)
+
+#### Auto-suspend
+
+Learn about Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature, which controls when Neon compute resources scale to zero.
+
+<DetailIconCards>
+
+<a href="/docs/introduction/auto-suspend" description="Learn about Neon's Auto-suspend feature" icon="transactions">Learn about Auto-suspend</a>
+
+<a href="/docs/guides/autoscaling-guide" description="Configure Auto-suspend to control when your compute scales to zero" icon="transactions">Configure Auto-suspend</a>
+
+</DetailIconCards>
+
+#### Branching
+
+Explore Neon's branching feature with our branching guides.
+
+<DetailIconCards>
+
+<a href="/docs/introduction/branching" description="Learn about Neon's branching feature" icon="split-branch">Learn about branching</a>
+
+<a href="/docs/guides/branching-pitr" description="Restore your data to a past state with database branching" icon="split-branch">Point-in-time restore</a>
+
+<a href="/docs/guides/branching-test-queries" description="Use branching to test queries before running them in production" icon="split-branch">Test queries on a branch</a>
+
+<a href="/docs/guides/branching-neon-cli" description="Create and manage branches with the Neon CLI" icon="split-branch">Branching with the CLI</a>
+
+<a href="/docs/guides/branching-neon-api" description="Create and manage branches with the Neon API" icon="split-branch">Branching with the API</a>
+
+<a href="(/docs/guides/branching-github-actions" description="Automate branching with GitHub Actions" icon="split-branch">Branching with GitHub Actions</a>
+
+<a href="(/docs/guides/branch-refresh" description="Refresh a development branch with the Neon API" icon="split-branch">Refresh a branch</a>
+
+<a href="(/docs/guides/branch-promote" description="Promote a branch to primary with the the Neon API" icon="split-branch">Promote a branch to primary</a>
+
+</DetailIconCards>
+
+#### Project sharing
+
+Learn how to share your Neon project with anyone using Neon's project sharing feature.
+
+<DetailIconCards>
+
+<a href="/docs/guides/project-sharing-guide" description="Share a Neon project" icon="split-branch">Learn how to share your Neon project with others</a>
+
+</DetailIconCards>
+
+#### Read replicas
+
+Learn how Neon read replicas can help you scale and manage read-only workloads.
+
+<DetailIconCards>
+
+<a href="/docs/introduction/read-replicas" description="Learn about Neon's read replica feature" icon="import">Learn about read replicas</a>
+
+<a href="/docs/guides/read-replica-guide" description="Learn how to create and manage read replicas" icon="import">Working with read replicas</a>
+
+<a href="/docs/guides/read-replica-data-analysis" description="Offload data analysis and reporting queries to read replicas" icon="import">Data analysis and reporting</a>
+
+<a href="/docs/guides/read-replica-prisma" description="Scale your applications with Neon read replicas and Prisma Client" icon="import">Point-in-time restore</a>
+
+</DetailIconCards>
