@@ -48,7 +48,7 @@ Automatically scale compute resources up and down based on demand.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/autoscaling" description="Learn about  Autoscaling" icon="ladder">Learn about Autoscaling</a>
+<a href="/docs/introduction/autoscaling" description="Find out how autoscaling can reduce your costs." icon="ladder">Learn about Autoscaling</a>
 
 <a href="/docs/guides/autoscaling-guide" description="Enable Autoscaling to automatically scale compute resources on demand" icon="ladder">Enable Autoscaling</a>
 
@@ -60,7 +60,7 @@ Control when Neon compute resources scale to zero.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/auto-suspend" description="Learn about Neon's Auto-suspend feature" icon="transactions">Learn about Auto-suspend</a>
+<a href="/docs/introduction/auto-suspend" description="Discover how Neon can reduce your compute to zero when not in use" icon="transactions">Learn about Auto-suspend</a>
 
 <a href="/docs/guides/autoscaling-guide" description="Configure Auto-suspend to control when your compute scales to zero" icon="transactions">Configure Auto-suspend</a>
 
@@ -72,7 +72,7 @@ Branch data the same way you branch your code.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/branching" description="Learn about Neon's branching feature" icon="split-branch">Learn about branching</a>
+<a href="/docs/introduction/branching" description="With Neon you can instantly branch your data in the same way that you branch your code" icon="split-branch">Learn about branching</a>
 
 <a href="/docs/guides/branching-pitr" description="Restore your data to a past state with database branching" icon="split-branch">Point-in-time restore</a>
 
@@ -96,7 +96,7 @@ Share your Neon project with anyone.
 
 <DetailIconCards>
 
-<a href="/docs/guides/project-sharing-guide" description="Share a Neon project" icon="split-branch">Learn how to share your Neon project with others</a>
+<a href="/docs/guides/project-sharing-guide" description="Give other users access to your project from the Neon Console, API, and CLI" icon="split-branch">Learn how to share your Neon project with others</a>
 
 </DetailIconCards>
 
@@ -106,9 +106,9 @@ Learn how Neon read replicas can help you scale and manage read-only workloads.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/read-replicas" description="Learn about Neon's read replica feature" icon="import">Learn about read replicas</a>
+<a href="/docs/introduction/read-replicas" description="Learn how Neon maximizes scalability and more with instant read replicas" icon="import">Learn about read replicas</a>
 
-<a href="/docs/guides/read-replica-guide" description="Learn how to create and manage read replicas" icon="import">Working with read replicas</a>
+<a href="/docs/guides/read-replica-guide" description="How to create and manage read replicas" icon="import">Working with read replicas</a>
 
 <a href="/docs/guides/read-replica-data-analysis" description="Offload data analysis and reporting queries to read replicas" icon="import">Data analysis and reporting</a>
 
