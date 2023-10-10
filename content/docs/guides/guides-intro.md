@@ -24,7 +24,11 @@ Learn about Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature, whic
 
 #### Branching
 
-Explore Neon's [branching feature](/docs/introduction/branching) with our branching guides.
+Explore Neon's branching feature with our branching guides.
+
+<DetailIconCards>
+
+<a href="/docs/introduction/branching" description="Learn about Neon's branching feature" icon="split-branch">Learn about branching</a>
 
 <a href="/docs/guides/branching-pitr" description="Restore your data to a past state with database branching" icon="split-branch">Point-in-time restore</a>
 
@@ -39,6 +43,8 @@ Explore Neon's [branching feature](/docs/introduction/branching) with our branch
 <a href="(/docs/guides/branch-refresh" description="Refresh a development branch with the Neon API" icon="split-branch">Refresh a branch</a>
 
 <a href="(/docs/guides/branch-promote" description="Promote a branch to primary with the the Neon API" icon="split-branch">Promote a branch to primary</a>
+
+</DetailIconCards>
 
 #### Project sharing
 
