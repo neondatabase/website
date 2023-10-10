@@ -26,13 +26,19 @@ Learn about Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature, whic
 
 Explore Neon's [branching feature](/docs/introduction/branching) with our branching guides.
 
-- [Branching — Point-in-time restore](/docs/guides/branching-pitr)
-- [Branching — Testing queries](/docs/guides/branching-test-queries)
-- [Branching with the CLI](/docs/guides/branching-neon-cli)
-- [Branching with the API](/docs/guides/branching-neon-api)
-- [Branching with GitHub Actions](/docs/guides/branching-github-actions)
-- [Refresh a branch with the Neon API](/docs/guides/branch-refresh)
-- [Promote a branch to primary with the Neon API](/docs/guides/branch-promote)
+<a href="/docs/guides/branching-pitr" description="Restore your data to a past state with database branching" icon="split-branch">Point-in-time restore</a>
+
+<a href="/docs/guides/branching-test-queries" description="Use branching to test queries before running them in production" icon="split-branch">Test queries on a branch</a>
+
+<a href="/docs/guides/branching-neon-cli" description="Create and manage branches with the Neon CLI" icon="split-branch">Branching with the CLI</a>
+
+<a href="/docs/guides/branching-neon-api" description="Create and manage branches with the Neon API" icon="split-branch">Branching with the API</a>
+
+<a href="(/docs/guides/branching-github-actions" description="Automate branching with GitHub Actions" icon="split-branch">Branching with GitHub Actions</a>
+
+<a href="(/docs/guides/branch-refresh" description="Refresh a development branch with the Neon API" icon="split-branch">Refresh a branch</a>
+
+<a href="(/docs/guides/branch-promote" description="Promote a branch to primary with the the Neon API" icon="split-branch">Promote a branch to primary</a>
 
 #### Project sharing
 
