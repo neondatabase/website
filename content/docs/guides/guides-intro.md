@@ -8,7 +8,7 @@ Welcome to the guides section of our documentation. Whether you're looking for d
 
 ### Framework, language, and platform guides
 
-Integrate your applications with our framework, language, and platform guides.
+Integrate your applications with Neon.
 
 <TechnologyNavigation>
 
@@ -44,21 +44,19 @@ Explore Neon's capabilities with our feature guides.
 
 #### Autoscaling
 
-Learn how to enable Neon's [Autoscaling feature](/docs/guides/autoscaling-guide) to automatically scale compute resources up and down based on demand.
+Automatically scale compute resources up and down based on demand.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/autoscaling" description="Learn about Neon's Autoscaling feature" icon="ladder">Learn about Autoscaling</a>
+<a href="/docs/introduction/autoscaling" description="Learn about  Autoscaling" icon="ladder">Learn about Autoscaling</a>
 
 <a href="/docs/guides/autoscaling-guide" description="Enable Autoscaling to automatically scale compute resources on demand" icon="ladder">Enable Autoscaling</a>
 
 </DetailIconCards>
 
-[Enable Autoscaling in Neon](/docs/guides/autoscaling-guide)
-
 #### Auto-suspend
 
-Learn about Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature, which controls when Neon compute resources scale to zero.
+Control when Neon compute resources scale to zero.
 
 <DetailIconCards>
 
@@ -70,7 +68,7 @@ Learn about Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature, whic
 
 #### Branching
 
-Explore Neon's branching feature with our branching guides.
+Branch data the same way you branch your code.
 
 <DetailIconCards>
 
@@ -94,7 +92,7 @@ Explore Neon's branching feature with our branching guides.
 
 #### Project sharing
 
-Learn how to share your Neon project with anyone using Neon's project sharing feature.
+Share your Neon project with anyone.
 
 <DetailIconCards>
 
