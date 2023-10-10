@@ -138,6 +138,10 @@
           items:
             - title: neon_utils
               slug: extensions/neon-utils
+    - title: Frameworks
+      items:
+        - title: Next.js
+          slug: guides/nextjs
     - title: Languages
       items:
         - title: Elixir
@@ -149,8 +153,6 @@
           slug: guides/java
         - title: Javascript
           items:
-            - title: Next.js
-              slug: guides/nextjs
             - title: Node.js
               slug: guides/node
             - title: Prisma
