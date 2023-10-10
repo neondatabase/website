@@ -37,25 +37,15 @@ const TableOfContents = ({ items }) => {
       <ul className="mt-2.5">
         {items.map((item, index) => {
           const linkHref = `#${item.id}`;
-
+          const { level } = item;
           return (
             <li key={index}>
-              {item.level === 2 && (
-                <a
-                  className={linkClassName}
-                  href={linkHref}
-                  dangerouslySetInnerHTML={{ __html: item.title }}
-                  onClick={(e) => handleAnchorClick(e, linkHref)}
-                />
-              )}
-              {item.level === 3 && (
-                <a
-                  className={clsx(linkClassName, 'ml-3')}
-                  href={linkHref}
-                  dangerouslySetInnerHTML={{ __html: item.title }}
-                  onClick={(e) => handleAnchorClick(e, linkHref)}
-                />
-              )}
+              <a
+                className={clsx(linkClassName, level === 2 ? '' : `ml-${level - 1}`)}
+                href={linkHref}
+                dangerouslySetInnerHTML={{ __html: item.title }}
+                onClick={(e) => handleAnchorClick(e, linkHref)}
+              />
             </li>
           );
         })}
