@@ -145,6 +145,10 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
           return <EmbedTweet {...props}>{domToReact(children)}</EmbedTweet>;
         }
 
+        if (domNode.attribs?.class?.includes('wp-block-heading')) {
+          return AnchorHeading(domNode.name)({ children: domToReact(domNode.children) });
+        }
+
         if (!includeBaseTags) return <></>;
       }
     },
