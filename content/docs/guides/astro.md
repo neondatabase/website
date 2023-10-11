@@ -103,7 +103,7 @@ console.log(response);
 ---
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(import.meta.env.DATABASE_URL, { ssl: 'require' });
+const sql = neon(import.meta.env.DATABASE_URL);
 
 const response = await sql`SELECT version()`;
 console.log(response);

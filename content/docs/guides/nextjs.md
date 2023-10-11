@@ -116,7 +116,7 @@ export default async function Page() {
 import { neon } from '@neondatabase/serverless';
 
 async function getData() {
-  const sql = neon(process.env.DATABASE_URL, { ssl: 'require' });
+  const sql = neon(process.env.DATABASE_URL);
 
   const response = await sql`SELECT version()`;
   console.log(response);
@@ -187,7 +187,7 @@ export default function Page({ data }) {}
 import { neon } from '@neondatabase/serverless';
 
 export async function getServerSideProps() {
-  const sql = neon(process.env.DATABASE_URL, { ssl: 'require' });
+  const sql = neon(process.env.DATABASE_URL);
 
   const response = await sql`SELECT version()`;
   console.log(response);
@@ -248,7 +248,7 @@ export default function Page({ data }) {}
 import { neon } from '@neondatabase/serverless';
 
 export async function getServerSideProps() {
-  const sql = neon(process.env.DATABASE_URL, { ssl: 'require' });
+  const sql = neon(process.env.DATABASE_URL);
 
   const response = await sql`SELECT version()`;
   console.log(response);
@@ -312,7 +312,7 @@ export default async function handler(req, res) {
 ```javascript
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.DATABASE_URL, { ssl: 'require' });
+const sql = neon(process.env.DATABASE_URL);
 
 export default async function handler(req, res) {
   const response = await sql`SELECT version()`;
@@ -333,7 +333,7 @@ From your Edge Functions, add the following code snippet and connect to your Neo
 ```javascript
 import { neon } from '@neondatabase/serverless';
 
-const sql = neon(process.env.DATABASE_URL, { ssl: 'require' });
+const sql = neon(process.env.DATABASE_URL);
 
 export default async function handler(req, res) {
   const response = await sql`SELECT version()`;
