@@ -62,7 +62,14 @@ const Field = forwardRef(
           ref={ref}
           {...otherProps}
         />
-        {error && <span className="mt-2 text-sm leading-none text-secondary-1">{error}</span>}
+        {error && (
+          <span
+            className="mt-2 text-sm leading-none text-secondary-1"
+            data-test="error-field-message"
+          >
+            {error}
+          </span>
+        )}
       </div>
     );
   }
