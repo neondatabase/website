@@ -29,7 +29,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs labels={["node-postgres", "postgres.js"]}>
+    <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
       ```shell
       npm install pg
@@ -37,6 +37,10 @@ If you do not have one already, create a Neon project. Save your connection deta
 
       ```shell
       npm install postgres
+      ```
+
+      ```shell
+      npm install @neondatabase/serverless
       ```
 
     </CodeTabs>
@@ -57,7 +61,7 @@ DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 
 From your `.astro` files, add the following code snippet to connect to your Neon database:
 
-<CodeTabs labels={["node-postgres", "postgres.js"]}>
+<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
 ---
@@ -94,6 +98,17 @@ const response = await sql`SELECT version()`;
 console.log(response);
 ---
 ```
+
+```javascript
+---
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon(import.meta.env.DATABASE_URL, { ssl: 'require' });
+
+const response = await sql`SELECT version()`;
+console.log(response);
+---
+```
 </CodeTabs>
 
 ## Run the app
@@ -103,7 +118,7 @@ For server-side requests you can expect to see one of the following in your term
 <CodeBlock shouldWrap>
 
 ```shell
-# node-postgres
+# node-postgres & Neon serverless driver 
 
 {
   version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
