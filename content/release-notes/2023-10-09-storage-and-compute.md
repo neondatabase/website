@@ -10,6 +10,8 @@ The following Postgres extensions were updated to a newer version and are now su
 
 If you installed these extensions previously and want to upgrade to the latest version, please refer to [Update an extension version](/docs/extensions/pg-extensions#update-an-extension-version) for instructions.
 
+Additionally, the [pg_tiktoken](/docs/extensions/pg_tiktoken) extension is now supported with Postgres 16.
+
 For a complete list of Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
 
 ### Fixes & improvements
