@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import slugify from 'slugify';
 
 import HashIcon from './images/hash.inline.svg';
@@ -24,14 +25,14 @@ const extractText = (children) => {
 const AnchorHeading =
   (Tag) =>
   // eslint-disable-next-line react/prop-types
-  ({ children }) => {
+  ({ children, className = null }) => {
     const id = slugify(extractText(children), { lower: true, remove: /[*+~.()'"!?:@]/g }).replace(
       /_/g,
       ''
     );
 
     return (
-      <Tag id={id} className="not-prose group relative w-fit scroll-mt-20 lg:scroll-mt-5">
+      <Tag id={id} className={clsx('not-prose group relative w-fit', className)}>
         <a
           className="anchor absolute -right-16 top-1/2 flex h-full -translate-x-full -translate-y-[calc(50%-0.15rem)] items-center justify-center px-2.5 no-underline opacity-0 transition-opacity duration-200 hover:opacity-100 group-hover:opacity-100 sm:hidden"
           href={`#${id}`}
@@ -46,5 +47,10 @@ const AnchorHeading =
       </Tag>
     );
   };
+
+AnchorHeading.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+};
 
 export default AnchorHeading;
