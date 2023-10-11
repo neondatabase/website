@@ -305,7 +305,7 @@ For API handlers, and server functions you can expect to see one of the followin
   version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
 }
 
-# postgres.js
+# postgres.js & Neon serverless driver
 
 Result(1) [
   {

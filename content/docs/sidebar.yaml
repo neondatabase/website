@@ -142,6 +142,8 @@
       items:
         - title: Next.js
           slug: guides/nextjs
+        - title: Astro
+          slug: guides/astro
     - title: Languages
       items:
         - title: Elixir
