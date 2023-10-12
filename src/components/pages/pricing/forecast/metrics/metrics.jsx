@@ -203,7 +203,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
 };
 
 Metrics.propTypes = {
-  windowWidth: PropTypes.number.isRequired,
+  windowWidth: PropTypes.number,
   currentSectionIndex: PropTypes.number.isRequired,
   activeItems: PropTypes.shape({
     activity: PropTypes.shape({
