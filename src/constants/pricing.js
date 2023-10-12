@@ -2,30 +2,36 @@ export const activities = [
   {
     title: 'Always active',
     description: 'Users are active 24/7 and requires instant connection.',
+    unit: 24,
   },
   {
     title: 'Only during business days',
     description: 'Users access app only within business hours.',
+    unit: 7,
   },
   {
     title: 'Rarely active',
     description: 'Users rarely access the app. Less than 10% compute usage.',
+    unit: 1,
   },
 ];
 
 // @TODO: Replace with real data
 export const performance = [
   {
-    title: '0.25 vCPU, 1GB RAM',
+    title: '1 CPU, 4GB RAM',
     description: 'Starts from $0.0082/h',
+    unit: 1,
   },
   {
-    title: '0.5 vCPU, 2GB RAM',
+    title: '5 CPU/ 20GB',
     description: 'Starts from $0.0164/h',
+    unit: 5,
   },
   {
-    title: '1 vCPU, 4GB RAM',
+    title: '7 CPU/ 28GB RAM',
     description: 'Starts from $0.0328/h',
+    unit: 7,
   },
 ];
 
@@ -34,13 +40,16 @@ export const storage = [
   {
     title: '1GB',
     description: 'Starts from $0.000164 / GiB-hour',
+    unit: 1,
   },
   {
-    title: '10GB',
+    title: '100 GB',
     description: 'Starts from $0.00164 / GiB-hour',
+    unit: 100,
   },
   {
-    title: '100GB',
+    title: '1 TB',
     description: 'Starts from $0.0164 / GiB-hour',
+    unit: 1000,
   },
 ];

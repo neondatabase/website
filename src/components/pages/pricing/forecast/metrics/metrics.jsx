@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 import Button from 'components/shared/button/button';
 import LinesIllustration from 'components/shared/lines-illustration';
@@ -14,6 +14,17 @@ import ArrowIcon from 'icons/arrow-sm.inline.svg';
 import inputSearchIcon from '../images/input-search.svg';
 import Select from '../select';
 
+const COMPUTE_TIME_PRICE = 0.102;
+const AVERAGE_DAYS_IN_MONTH = 30.416666;
+const PROJECT_STORAGE_PRICE = 0.000164;
+const PROJECT_STORAGE_HOURS = 24;
+
+const calculateStorageCost = (storageValue) =>
+  storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE * AVERAGE_DAYS_IN_MONTH;
+
+const calculateComputeCost = (computeUnits, activeTime) =>
+  computeUnits * activeTime * COMPUTE_TIME_PRICE * AVERAGE_DAYS_IN_MONTH;
+
 const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems }) => {
   const performanceRef = useRef(null);
   const storageRef = useRef(null);
@@ -24,8 +35,8 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
   });
 
   const onSelect = useCallback(
-    (type, title, description) => {
-      setActiveItems({ ...activeItems, [type]: { title, description } });
+    (type, item) => {
+      setActiveItems({ ...activeItems, [type]: { ...item } });
       setIsExpanded({ ...isExpanded, [type]: false });
     },
     [activeItems, isExpanded, setActiveItems]
@@ -41,6 +52,21 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
   useClickOutside([performanceRef, storageRef], () => {
     setIsExpanded({ performance: false, storage: false });
   });
+
+  const computeTimeCost = useMemo(
+    () => calculateComputeCost(activeItems.performance.unit, activeItems.activity.unit),
+    [activeItems.performance.unit, activeItems.activity.unit]
+  );
+
+  const storageCost = useMemo(
+    () => calculateStorageCost(activeItems.storage.unit),
+    [activeItems.storage.unit]
+  );
+
+  const totalCost = useMemo(
+    () => (computeTimeCost + storageCost).toFixed(2),
+    [computeTimeCost, storageCost]
+  );
 
   return (
     <LazyMotion features={domAnimation}>
@@ -58,7 +84,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
           How active your users?
         </h3>
         <ul className="mt-7 grid gap-y-5">
-          {activities.map(({ title, description }) => (
+          {activities.map(({ title, description, unit }) => (
             <li key={title}>
               <button
                 className={clsx(
@@ -66,7 +92,9 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
                   activeItems.activity.title === title ? 'border-green-45' : 'border-gray-new-15'
                 )}
                 type="button"
-                onClick={() => setActiveItems({ ...activeItems, activity: { title, description } })}
+                onClick={() =>
+                  setActiveItems({ ...activeItems, activity: { title, description, unit } })
+                }
               >
                 <h4 className="text-xl font-medium leading-tight">{title}</h4>
                 <p className="text-left mt-2 text-gray-new-70 font-light leading-tight text-[15px]">
@@ -148,7 +176,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
           <p className="font-medium -tracking-extra-tight leading-none">Estimated price</p>
           <p className="mt-6">
             <span className="text-6xl text-green-45 leading-none font-light tracking-[-0.06em]">
-              $24.50
+              ${totalCost}
             </span>
             <span className="tracking-[-0.06em] text-2xl leading-none inline-block ml-1">/ mo</span>
           </p>
@@ -209,14 +237,17 @@ Metrics.propTypes = {
     activity: PropTypes.shape({
       title: PropTypes.string,
       description: PropTypes.string,
+      unit: PropTypes.number,
     }),
     performance: PropTypes.shape({
       title: PropTypes.string,
       description: PropTypes.string,
+      unit: PropTypes.number,
     }),
     storage: PropTypes.shape({
       title: PropTypes.string,
       description: PropTypes.string,
+      unit: PropTypes.number,
     }),
   }).isRequired,
   setActiveItems: PropTypes.func.isRequired,
