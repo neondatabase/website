@@ -12,5 +12,9 @@ For a complete list of Postgres extensions supported by Neon, see [Postgres exte
 
 ### Fixes & improvements
 
-- Proxy: Increased the maximum request body size for Neon serverless driver SQL requests over HTTP from 1 MB to 10 MB.
-- Proxy: Added a 15 second proxy timeout for Neon serverless driver SQL requests over HTTP. Long running queries that exceed the 15 second threshold are terminated.
+The following items affect the Neon serverless driver, which is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP:
+
+- Proxy: Increased the maximum request body size for SQL requests over HTTP from 1 MB to 10 MB.
+- Proxy: Added a 15 second proxy timeout for SQL requests over HTTP for handling of long running queries.
+
+For more information about our serverless driver, see [Neon serverless driver](/docs/serverless/serverless-driver).
