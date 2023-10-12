@@ -57,4 +57,3 @@ Optimize your connections by enabling Neon's connection pooling.
 <a href="/docs/guides/prisma#connect-from-serverless-functions" description="Import data from another Neon project for Postgres version upgrades or region migration" icon="audio-jack">Connection pooling with Prisma</a>
 
 </DetailIconCards>
-
