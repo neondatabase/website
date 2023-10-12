@@ -202,7 +202,7 @@ To create a read-write role:
 
 ## Statement summary for read-only and read-write roles
 
-To create read-only and read-write roles described in the previous sections, you must connect to the database <database> using your default Neon role or another `neon_superuser` role, and then run the following SQL statements using an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+To create read-only and read-write roles described in the previous sections, you must connect to the database `<database>` using your default Neon role or another `neon_superuser` role, and then run the following SQL statements using an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 ```sql
 -- read_only role
