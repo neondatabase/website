@@ -59,7 +59,12 @@ DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 
 ## Configure the Postgres client
 
-Create a `db.server.ts` or `.js` file at the root of your `app` directory add the following code snippet to connect to your Neon database:
+TODO. Add explanation here about whey a you need a `.db.server` file.
+
+### db.server
+
+Create a `db.server.ts` file at the root of your `/app` directory add the following code snippet to connect to your Neon database:
+
 
 <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
@@ -93,6 +98,66 @@ export { sql };
 ```
 </CodeTabs>
 
+### route
+
+Create a new route in your `app/routes` directory and import the `db.server` file.  
+
+<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+
+```javascript
+import { json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+import { pool } from '~/db.server';
+
+export const loader = async () => {
+  const client = await pool.connect();
+
+  try {
+    const response = await client.query('SELECT version()');
+    console.log(response.rows[0]);
+    return json({ data: response.rows[0] });
+  } finally {
+    client.release();
+  }
+};
+
+export default function Page() {
+  const data = useLoaderData();
+}
+```
+
+```javascript
+import { json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+import { sql } from '~/db.server';
+
+export const loader = async () => {
+  const response = await sql`SELECT version()`;
+  console.log(response);
+  return json({ data: response });
+};
+
+export default function Page() {
+  const data = useLoaderData();
+}
+```
+
+```javascript
+import { json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+import { sql } from '~/db.server';
+
+export const loader = async () => {
+  const response = await sql`SELECT version()`;
+  console.log(response);
+  return json({ data: response });
+};
+
+export default function Page() {
+  const data = useLoaderData();
+}
+```
+</CodeTabs>
 
 
 ## Run the app
