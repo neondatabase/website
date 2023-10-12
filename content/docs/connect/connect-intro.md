@@ -12,7 +12,7 @@ Learn how to establish a connection to Neon from any application.
 
 <DetailIconCards>
 
-<a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a Neon database from any application" icon="audio-jack">Connect to Neon from any app</a>
+<a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a Neon database from any application" icon="audio-jack">Connect from any app</a>
 
 <a href="/docs/connect/connect-postgres-gui" description="Learn how to connect to a Neon database from a GUI application or IDE" icon="audio-jack">Connect a GUI application</a>
 
@@ -20,15 +20,13 @@ Learn how to establish a connection to Neon from any application.
 
 ## Connect from a command-line client
 
-Unlock connectivity via Postgres command-line clients.
+Unlock connectivity with Postgres command-line clients.
 
 <DetailIconCards>
 
-<a href="/docs/connect/query-with-psql-editor" description="Import data from another Postgres database using pg_dump and pg_restore" icon="audio-jack">Learn how to connect with psql, the native command-line client for Postgres</a>
+<a href="/docs/connect/query-with-psql-editor" description="Learn how to connect with psql, the native command-line client for Postgres" icon="audio-jack">Connect with psql</a>
 
-<a href="/docs/connect/connect-pgcli" description="The pgcli client is an interactive command-line interface for Postgres that offers several advantages over the traditional psql client" icon="audio-jack">Connect with pgcli</a>
-
-<a href="/docs/connect/passwordless-connect" description="Neon's psql passwordless auth feature helps you quickly authenticate a connection to Neon without a password" icon="audio-jack">Passwordless auth</a>
+<a href="/docs/connect/passwordless-connect" description="Connect without a password Neon's psql passwordless auth feature" icon="audio-jack">Passwordless auth</a>
 
 </DetailIconCards>
 
@@ -40,7 +38,7 @@ Ensure the integrity and security of your connections to Neon.
 
 <a href="/connect/connect-securely" description="Learn how to connect to Neon securely using SSL/TLS encrypted connections" icon="audio-jack">Connect to Neon securely</a>
 
-<a href="https://neon.tech/blog/avoid-mitm-attacks-with-psql-postgres-16" description="Learn how the psql client in Postgres 16 makes it simple to connect a secure interactive session to your Neon database" icon="audio-jack">Avoid MME attacks in Postgres 16</a>
+<a href="https://neon.tech/blog/avoid-mitm-attacks-with-psql-postgres-16" description="Learn how the psql client in Postgres 16 makes it simple to connect securely" icon="audio-jack">Avoid MME attacks in Postgres 16</a>
 
 </DetailIconCards>
 
@@ -52,7 +50,7 @@ Optimize your connections by enabling Neon's connection pooling.
 
 <a href="/docs/connect/connection-pooling" description="Learn about connection pooling in Neon to support up to 10,000 concurrent connections" icon="audio-jack">Connection pooling in Neon</a>
 
-<a href="/docs/guides/prisma#connect-from-serverless-functions" description="Import data from another Neon project for Postgres version upgrades or region migration" icon="audio-jack">Connection pooling with Prisma Client</a>
+<a href="/docs/guides/prisma#connect-from-serverless-functions" description="Import data from another Neon project for Postgres version upgrades or region migration" icon="audio-jack">Connection pooling with Prisma</a>
 
 </DetailIconCards>
 
@@ -64,6 +62,6 @@ Troubleshoot and resolve common connection issues.
 
 <a href="/docs/connect/connection-errors" description="Learn how to resolve commonly-encountered connection errors" icon="audio-jack">Connection errors</a>
 
-<a href="/docs/connect/connection-latency" description="Learn about strategies to manage connection latencies and timeouts" icon="audio-jack">Connect latency and timeouts</a>
+<a href="/docs/connect/connection-latency" description="Learn about strategies for managing connection latencies and timeouts" icon="audio-jack">Connect latency and timeouts</a>
 
 </DetailIconCards>
