@@ -39,13 +39,15 @@ You can remove a role from a user at any time to revoke privileges.
 
 This section describes how to create roles in Neon via SQL and grant the roles access to database objects. Access must be granted at the database, schema, and schema object level. For example, to grant access to a table, you must also grant access to the database and schema in which the table resides. If these access permissions are not defined, the role will not be able access the table.
 
-In the following sections, we'll cover how to create read-only and read-write roles in Neon with access to a specific database and schema. For a summary of the required SQL statements, see []().
+In the following sections, we'll cover how to create read-only and read-write roles with access to a specific database and schema. For a summary of the required SQL statements, see [Statement summary for read-only and read-write roles](#statement-summary-for-read-only-and-read-write-roles).
 
 ### Create a read-only role
 
 To create a read-only role:
 
-1. Create a `read_only` role using the following statement. Neon requires specifying a password when creating a role with SQL. Since this is a shared role used for privilege management, the `LOGIN` privilege is optional and not included.
+1. Connect to your database from an client such as [psql](/docs/connect/query-with-psql-editor) or [pgAdmin](https://www.pgadmin.org/), or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
+
+2. Create a `read_only` role using the following statement. Neon requires specifying a password when creating a role with SQL. Since this is a shared role used for privilege management, the `LOGIN` privilege is optional and not included.
 
     ```sql
     CREATE ROLE read_only PASSWORD '<password>';
@@ -70,7 +72,7 @@ To create a read-only role:
     Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
     </Admonition>
 
-2. Grant the `read_only` role read-only privileges on the schema. Replace <database> and <schema> with actual database and schema names, respectively.
+3. Grant the `read_only` role read-only privileges on the schema. Replace <database> and <schema> with actual database and schema names, respectively.
 
     ```sql
     -- Grant the "read_only" role the privilege to connect to the specified database
@@ -90,13 +92,13 @@ To create a read-only role:
     ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT SELECT ON TABLES TO read_only;
     ```
 
-3. Create a database user. The password requirements mentioned above apply here as well.
+4. Create a database user. The password requirements mentioned above apply here as well.
 
     ```sql
     CREATE ROLE read_only_user1 WITH LOGIN PASSWORD '<password>';
     ```
 
-4. Grant the user membership in the `read_only` role:
+5. Grant the user membership in the `read_only` role:
 
     ```sql
     GRANT read_only TO read_only_user1;
@@ -119,7 +121,9 @@ To create a read-only role:
 
 To create a read-write role:
 
-1. Create a `read_write` role using the following statement. Neon requires specifying a password when creating a role with SQL. Since this is a shared role used for privilege management, the `LOGIN` privilege is optional and not included.
+1. Connect to your database from an client such as [psql](/docs/connect/query-with-psql-editor) or [pgAdmin](https://www.pgadmin.org/), or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
+
+2. Create a `read_write` role using the following statement. Neon requires specifying a password when creating a role with SQL. Since this is a shared role used for privilege management, the `LOGIN` privilege is optional and not included.
 
     ```sql
     CREATE ROLE read_write PASSWORD '<password>';
@@ -144,7 +148,7 @@ To create a read-write role:
     Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
     </Admonition>
 
-2. Grant the `read_write` role read-only privileges on the schema. Replace <database> and <schema> with actual database and schema names, respectively.
+3. Grant the `read_write` role read-only privileges on the schema. Replace <database> and <schema> with actual database and schema names, respectively.
 
     ```sql
     -- Grant the "read_only" role the privilege to connect to the specified database
@@ -171,19 +175,19 @@ To create a read-write role:
     -- automatically grant USAGE privileges to the 'read_write' role, allowing it to use the sequences.
     ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT USAGE ON SEQUENCES TO read_write;
 
-3. Create a database user. The password requirements mentioned above apply here as well.
+4. Create a database user. The password requirements mentioned above apply here as well.
 
     ```sql
     CREATE ROLE read_write_user1 WITH LOGIN PASSWORD '<password>';
     ```
 
-4. Grant the user membership in the `read_write` role:
+5. Grant the user membership in the `read_write` role:
 
     ```sql
     GRANT read_only TO read_write_user1;
     ```
 
-    The `read_write_user1` user now has read-only access to tables in the specified schema and database. When connecting, replace placeholders in the connection string (like `dbname`).
+    The `read_write_user1` user now has read-write access to tables in the specified schema and database. When connecting, replace placeholders in the connection string (like `dbname`).
 
     ```bash
     psql postgres://read_write_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
@@ -194,7 +198,7 @@ To create a read-write role:
     your_db=> 
     ```
 
-    If the user attempts to perform an `INSERT`, `UPDATE`, or `DELETE` operation, a `permission denied` error is returned.
+    You read_write user will be permitted to perform `INSERT`, `UPDATE`, or `DELETE` operations on tables in the schema.
 
 ## Statement summary for read-only and read-write roles
 
@@ -232,9 +236,11 @@ GRANT read_write TO read_write_user2;
 
 ## Role management with Neon branching
 
-When you create a branch in Neon, you are creating a clone of the parent branch, which includes the roles and databases as they exist on the parent branch. If you want to create a "development" branch of your production database, and then provide users with access to the database on the development branch only, you can follow this general procedure:
+When you create a branch in Neon, you are creating a clone of the parent branch, which includes the roles and databases as they exist on the parent branch. If you want to create a "development" branch of your "production" database, and then provide developers with access to the database on the development branch, you can follow this general procedure:
 
-1. Use your default Neon role or another role with `neon_superuser` privileges to create a role **on the parent branch**. For example, create a `dev_user` role.
+1. Connect to your database from an client such as [psql](/docs/connect/query-with-psql-editor) or [pgAdmin](https://www.pgadmin.org/), or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
+
+2. Use your default Neon role or another role with `neon_superuser` privileges to create a developer role **on the parent branch**. For example, create a role named `dev_user`.
 
     ```sql
     CREATE ROLE dev_user PASSWORD `password`;
@@ -259,10 +265,42 @@ When you create a branch in Neon, you are creating a clone of the parent branch,
     Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
     </Admonition>
 
-2. Grant privileges to the `dev_user` role to grant access to database objects. For example, grant the ability to run `SELECT` queries to the `read_only role`, and grant `INSERT`, `UPDATE`, and `DELETE` privileges to the `read_write` role.
-3. Create users. For example, create a user named `read_only_user1` or `read_write_user1`.
-4. Assign the predefined `read_only` ord `read_write` roles to those users to grant them the same privileges as the role. For example, grant the `read_only` role to `read_only_user1`, and the `read_write` role to `read_write_user1`.
+2. Grant the `dev_user` role privileges on the database:
 
+    ```sql
+    GRANT ALL PRIVILEGES ON DATABASE <database> TO dev_users;
+    ```
+
+    At this point, you have a `dev_user` role on your parent branch, and the role is not assigned to any users. This unused role will now be created in all future branches created from this branch.
+
+3. Create a development branch. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions. This branch includes the `dev_user` role you just defined.
+
+4. Connect to the same database on the new branch, again with a client such as [psql](/docs/connect/query-with-psql-editor) or [pgAdmin](https://www.pgadmin.org/), or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you are connecting from an SQL client, be mindful that your connection string will differ. If you need help connecting to your new branch, see [Connect from any client](/docs/connect/connect-from-any-app).
+
+4. Connected the the database on your new branch, create developer users. The password requirements described above apply here as well.
+
+    ```sql
+    CREATE ROLE dev_user1 WITH LOGIN PASSWORD '<password>';
+    CREATE ROLE dev_user2 WITH LOGIN PASSWORD '<password>';
+    ```
+
+5. Grant the users membership in the `dev_users` role:
+
+    ```sql
+    GRANT dev_users TO dev_user1;
+    GRANT dev_users TO dev_user2;
+    ```
+
+    The `dev_user1` and `dev_user2` can now connect to the specified database and start using it with full privileges.
+
+    ```bash
+    psql postgres://dev_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
+    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
+    Type "help" for help.
+
+    dbname=> 
+    ```
 
 ## More information
 
