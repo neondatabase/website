@@ -16,6 +16,9 @@ import Metrics from './metrics';
 
 const SECTION_MIN_HEIGHT = 760;
 
+const getSelectedIndex = (activeTitle, items) =>
+  items.findIndex(({ title }) => title === activeTitle) + 1;
+
 const Forecast = () => {
   const sectionRef = useRef();
   const { width: windowWidth, height: pageHeight } = useWindowSize();
@@ -53,30 +56,26 @@ const Forecast = () => {
 
   useEffect(() => {
     if (!animationStageInput) return;
-
     animationStageInput.value = currentSectionIndex + 1;
-  }, [currentSectionIndex, animationStageInput]);
 
-  useEffect(() => {
     if (!firstSelectInput) return;
+    firstSelectInput.value = getSelectedIndex(activeItems.activity.title, activities);
 
-    firstSelectInput.value =
-      activities.findIndex(({ title }) => title === activeItems.activity.title) + 1;
-  }, [activeItems.activity.title, firstSelectInput]);
-
-  useEffect(() => {
     if (!secondSelectInput) return;
+    secondSelectInput.value = getSelectedIndex(activeItems.performance.title, performance);
 
-    secondSelectInput.value =
-      performance.findIndex(({ title }) => title === activeItems.performance.title) + 1;
-  }, [activeItems.performance.title, secondSelectInput]);
-
-  useEffect(() => {
     if (!thirdSelectInput) return;
-
-    thirdSelectInput.value =
-      storage.findIndex(({ title }) => title === activeItems.storage.title) + 1;
-  }, [activeItems.storage.title, thirdSelectInput]);
+    thirdSelectInput.value = getSelectedIndex(activeItems.storage.title, storage);
+  }, [
+    currentSectionIndex,
+    animationStageInput,
+    firstSelectInput,
+    secondSelectInput,
+    thirdSelectInput,
+    activeItems.activity.title,
+    activeItems.performance.title,
+    activeItems.storage.title,
+  ]);
 
   useEffect(() => {
     const currentScrollTop = scrollY;
