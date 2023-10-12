@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import TOCIcon from './images/toc.inline.svg';
@@ -41,7 +40,10 @@ const TableOfContents = ({ items }) => {
           return (
             <li key={index}>
               <a
-                className={clsx(linkClassName, level === 2 ? '' : `ml-${level - 1}`)}
+                className={linkClassName}
+                style={{
+                  marginLeft: level === 2 ? '' : `${(level - 2) * 0.5}rem`,
+                }}
                 href={linkHref}
                 dangerouslySetInnerHTML={{ __html: item.title }}
                 onClick={(e) => handleAnchorClick(e, linkHref)}

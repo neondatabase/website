@@ -21,6 +21,7 @@ import Link from 'components/shared/link';
 const getComponents = (withoutAnchorHeading, isReleaseNote) => ({
   h2: withoutAnchorHeading ? 'h2' : AnchorHeading('h2'),
   h3: withoutAnchorHeading ? 'h3' : AnchorHeading('h3'),
+  h4: withoutAnchorHeading ? 'h4' : AnchorHeading('h4'),
   table: (props) => (
     <div className="table-wrapper">
       <table {...props} />
