@@ -11,7 +11,10 @@ This guide describes how to manage roles and database access in Neon. Learn how 
 
 Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the ready-to-use database (`neondb`) created in your project's primary branch. For example, if a user named "Alex" signs up for Neon with a Google account, the project is created with a default role named `alex`, and `alex` is the owner of the `neondb` database.
 
-Your default Neon role is automatically granted membership in a `neon_superuser` role, which has the following privileges and predefined role memberships:
+Your default Neon role is automatically granted membership in a `neon_superuser` role, which has the privileges outlined below.
+
+<details>
+<summary>neon_superuser privileges</summary>
 
 - `CREATEDB`: Provides the ability to create databases.
 - `CREATEROLE`: Provides the ability to create new roles (which also means it can alter and drop roles).
@@ -19,6 +22,8 @@ Your default Neon role is automatically granted membership in a `neon_superuser`
 - `NOLOGIN`: The role cannot be used to log in to the Postgres server. Neon is a managed Postgres service, so you cannot access the host operating system directly.
 - `pg_read_all_data`: A predefined role in Postgres that provides the ability to read all data (tables, views, sequences), as if having `SELECT` rights on those objects, and `USAGE` rights on all schemas.
 - `pg_write_all_data`: A predefined role in Postgres that provides the ability to write all data (tables, views, sequences), as if having `INSERT`, `UPDATE`, and `DELETE` rights on those objects, and `USAGE` rights on all schemas.
+
+</details>
 
 Any user created with the Neon console, Neon API, or Neon CLI is also granted membership in the `neon_superuser` role. But what do you do if you need to create roles with more granular access permissions? For example, how do you grant read-only access to a particular database schema to users that run analytics queries, or read-write access to application users?
 
@@ -35,7 +40,7 @@ The recommended approach to creating roles with granular access permissions in N
 
 You can remove a role from a user at any time to revoke privileges.
 
-## Create database roles
+## Create roles
 
 This section describes how to create roles in Neon via SQL and grant the roles access to database objects. Access must be granted at the database, schema, and schema object level. For example, to grant access to a table, you must also grant access to the database and schema in which the table resides. If these access permissions are not defined, the role will not be able access the table.
 
@@ -52,8 +57,11 @@ To create a read-only role:
     ```sql
     CREATE ROLE read_only PASSWORD '<password>';
     ```
+  
+    Your password must have 60 bits of entropy. To achieve this, follow the password composition guidelines.
 
-    <Admonition type="important">  
+    <details>
+    <summary>Password composition guidelines</summary>
     Your password must have 60 bits of entropy. To achieve this, you can follow these password composition guidelines:
     - **Length**: The password should consist of at least 12 characters.
     - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
@@ -70,7 +78,7 @@ To create a read-only role:
     Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
 
     Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
-    </Admonition>
+    </details>
 
 3. Grant the `read_only` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
@@ -129,7 +137,10 @@ To create a read-write role:
     CREATE ROLE read_write PASSWORD '<password>';
     ```
 
-    <Admonition type="important">  
+    Your password must have 60 bits of entropy. To achieve this, follow the password composition guidelines.
+
+    <details>
+    <summary>Password composition guidelines</summary>
     Your password must have 60 bits of entropy. To achieve this, you can follow these password composition guidelines:
     - **Length**: The password should consist of at least 12 characters.
     - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
@@ -146,7 +157,7 @@ To create a read-write role:
     Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
 
     Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
-    </Admonition>
+    </details>
 
 3. Grant the `read_write` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
@@ -246,8 +257,11 @@ When you create a branch in Neon, you are creating a clone of the parent branch,
     CREATE ROLE dev_user PASSWORD `password`;
     ```
 
-   <Admonition type="important">  
-    Passwords must have 60 bits of entropy. To achieve this, you can follow these password composition guidelines:
+    Your password must have 60 bits of entropy. To achieve this, follow the password composition guidelines.
+
+    <details>
+    <summary>Password composition guidelines</summary>
+    Your password must have 60 bits of entropy. To achieve this, you can follow these password composition guidelines:
     - **Length**: The password should consist of at least 12 characters.
     - **Character diversity**: To enhance complexity, passwords should include a variety of character types, specifically:
       - Lowercase letters (a-z)
@@ -263,7 +277,7 @@ When you create a branch in Neon, you are creating a clone of the parent branch,
     Example password: `T3sting!23Ab` (DO NOT USE THIS EXAMPLE PASSWORD)
 
     Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
-    </Admonition>
+    </details>
 
 2. Grant the `dev_user` role privileges on the database:
 
