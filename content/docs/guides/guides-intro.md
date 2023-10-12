@@ -74,7 +74,11 @@ Branch data the same way you branch your code.
 
 <DetailIconCards>
 
+<<<<<<< HEAD
 <a href="/docs/introduction/branching" description="With Neon, you can instantly branch your data in the same way that you branch your code" icon="branching">Learn about branching</a>
+=======
+<a href="/docs/introduction/branching" description="With Neon you can instantly branch your data in the same way that you branch your code" icon="branching">Learn about branching</a>
+>>>>>>> cb6e5d6b (feat: add icons for docs)
 
 <a href="/docs/guides/branching-pitr" description="Restore your data to a past state with database branching" icon="invert">Point-in-time restore</a>
 
@@ -84,11 +88,19 @@ Branch data the same way you branch your code.
 
 <a href="/docs/guides/branching-neon-api" description="Create and manage branches with the Neon API" icon="transactions">Branching with the API</a>
 
+<<<<<<< HEAD
 <a href="/docs/guides/branching-github-actions" description="Automate branching with GitHub Actions" icon="split-branch">Branching with GitHub Actions</a>
 
 <a href="/docs/guides/branch-refresh" description="Refresh a development branch with the Neon API" icon="split-branch">Refresh a branch</a>
 
 <a href="/docs/guides/branch-promote" description="Promote a branch to primary with the the Neon API" icon="split-branch">Promote a branch to primary</a>
+=======
+<a href="(/docs/guides/branching-github-actions" description="Automate branching with GitHub Actions" icon="filter">Branching with GitHub Actions</a>
+
+<a href="(/docs/guides/branch-refresh" description="Refresh a development branch with the Neon API" icon="refresh">Refresh a branch</a>
+
+<a href="(/docs/guides/branch-promote" description="Promote a branch to primary with the the Neon API" icon="trend-up">Promote a branch to primary</a>
+>>>>>>> bc98fb76 (feat: add icons for docs)
 
 </DetailIconCards>
 
