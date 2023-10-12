@@ -59,7 +59,7 @@ DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 
 ## Configure the Postgres client
 
-TODO. Add explanation here about whey a you need a `.db.server` file.
+TODO. Add explanation for why a `.db.server` file is required.
 
 ### db.server
 
