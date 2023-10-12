@@ -1,8 +1,8 @@
 export const activities = [
   {
-    title: 'Always active',
-    description: 'Users are active 24/7 and requires instant connection.',
-    unit: 24,
+    title: 'Rarely active',
+    description: 'Users rarely access the app. Less than 10% compute usage.',
+    unit: 1,
   },
   {
     title: 'Only during business days',
@@ -10,9 +10,9 @@ export const activities = [
     unit: 7,
   },
   {
-    title: 'Rarely active',
-    description: 'Users rarely access the app. Less than 10% compute usage.',
-    unit: 1,
+    title: 'Always active',
+    description: 'Users are active 24/7 and requires instant connection.',
+    unit: 24,
   },
 ];
 
