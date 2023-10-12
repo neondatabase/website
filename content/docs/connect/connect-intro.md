@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 Welcome to the connection documentation for Neon. Here, you will find detailed information and instructions regarding various methods of connecting to Neon using different clients and applications. The following sections will guide you through the process of connecting via applications, graphical user interfaces, command-line clients, and more.
 
-## Connect from any app
+## Connect from a client or application
 
 Learn how to establish a connection to Neon from any application.
 
@@ -14,19 +14,23 @@ Learn how to establish a connection to Neon from any application.
 
 <a href="/docs/connect/connect-from-any-app" description="Learn how to connect to a Neon database from any application" icon="audio-jack">Connect from any app</a>
 
-<a href="/docs/connect/connect-postgres-gui" description="Learn how to connect to a Neon database from a GUI application or IDE" icon="audio-jack">Connect a GUI application</a>
+<a href="/docs/connect/connect-postgres-gui" description="Learn how to connect to a Neon database from a GUI application" icon="audio-jack">Connect a GUI application</a>
+
+<a href="/docs/connect/query-with-psql-editor" description="Connect with psql, the native command-line client for Postgres" icon="audio-jack">Connect with psql</a>
+
+<a href="/docs/connect/passwordless-connect" description="Connect without a password Neon's psql passwordless auth feature" icon="audio-jack">Passwordless auth</a>
 
 </DetailIconCards>
 
-## Connect from a command-line client
+## Connection issues
 
-Unlock connectivity with Postgres command-line clients.
+Troubleshoot and resolve common connection issues.
 
 <DetailIconCards>
 
-<a href="/docs/connect/query-with-psql-editor" description="Learn how to connect with psql, the native command-line client for Postgres" icon="audio-jack">Connect with psql</a>
+<a href="/docs/connect/connection-errors" description="Learn how to resolve commonly-encountered connection errors" icon="audio-jack">Connection errors</a>
 
-<a href="/docs/connect/passwordless-connect" description="Connect without a password Neon's psql passwordless auth feature" icon="audio-jack">Passwordless auth</a>
+<a href="/docs/connect/connection-latency" description="Learn about strategies for managing connection latencies and timeouts" icon="audio-jack">Connect latency and timeouts</a>
 
 </DetailIconCards>
 
@@ -54,14 +58,3 @@ Optimize your connections by enabling Neon's connection pooling.
 
 </DetailIconCards>
 
-## Connection issues
-
-Troubleshoot and resolve common connection issues.
-
-<DetailIconCards>
-
-<a href="/docs/connect/connection-errors" description="Learn how to resolve commonly-encountered connection errors" icon="audio-jack">Connection errors</a>
-
-<a href="/docs/connect/connection-latency" description="Learn about strategies for managing connection latencies and timeouts" icon="audio-jack">Connect latency and timeouts</a>
-
-</DetailIconCards>
