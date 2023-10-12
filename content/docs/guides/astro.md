@@ -113,7 +113,7 @@ console.log(response);
 
 ## Run the app
 
-For server-side requests you can expect to see one of the following in your terminal output:
+You can expect to see one of the following in your terminal output:
 
 <CodeBlock shouldWrap>
 
