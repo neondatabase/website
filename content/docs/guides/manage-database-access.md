@@ -72,7 +72,7 @@ To create a read-only role:
     Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
     </Admonition>
 
-3. Grant the `read_only` role read-only privileges on the schema. Replace <database> and <schema> with actual database and schema names, respectively.
+3. Grant the `read_only` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
     ```sql
     -- Grant the "read_only" role the privilege to connect to the specified database
@@ -148,7 +148,7 @@ To create a read-write role:
     Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
     </Admonition>
 
-3. Grant the `read_write` role read-only privileges on the schema. Replace <database> and <schema> with actual database and schema names, respectively.
+3. Grant the `read_write` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
     ```sql
     -- Grant the "read_only" role the privilege to connect to the specified database
