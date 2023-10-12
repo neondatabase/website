@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const Select = ({
   className = null,
+  titleClassName = null,
   containerRef,
   activeItem,
   isExpanded,
@@ -31,7 +32,14 @@ const Select = ({
             onClick={onExpand}
           >
             <div className="flex flex-col items-start">
-              <h4 className="text-xl font-medium leading-tight">{activeItem.title}</h4>
+              <h4
+                className={clsx(
+                  'text-xl font-medium leading-tight transition-colors duration-200',
+                  titleClassName
+                )}
+              >
+                {activeItem.title}
+              </h4>
               <p className="text-left mt-2 text-gray-new-70 font-light leading-tight text-[15px]">
                 {activeItem.description}
               </p>
@@ -119,6 +127,7 @@ const Select = ({
 
 Select.propTypes = {
   className: PropTypes.string,
+  titleClassName: PropTypes.string,
   containerRef: PropTypes.shape({}).isRequired,
   activeItem: PropTypes.shape({
     title: PropTypes.string.isRequired,
