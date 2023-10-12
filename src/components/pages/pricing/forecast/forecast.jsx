@@ -122,8 +122,8 @@ const Forecast = () => {
       <Container className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4" size="medium">
         <div className="relative col-span-5 -mx-10 col-start-2 h-full xl:col-span-6 lg:-ml-8 md:col-span-full md:hidden">
           <div className="sticky top-0 h-screen min-h-[1020px] -mt-40">
-            <div className="absolute flex h-full w-full items-center justify-center pl-20 pr-24 xl:pl-0 xl:pr-10">
-              <RiveComponent width={590} height={830} aria-hidden />
+            <div className="absolute flex h-full w-full items-center justify-center">
+              <RiveComponent width={870} height={767} aria-hidden />
             </div>
           </div>
         </div>
