@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2023-09-15T13:00:43Z'
 ---
 
-This guide describes how to manage roles and database access in Neon.
+This guide describes how to manage roles and database access in Neon. Learn how to create read-only and read-write roles, and how to manage access to development branches.
 
 ## Understanding roles in Neon
 
