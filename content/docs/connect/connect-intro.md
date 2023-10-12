@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 Welcome to the connection documentation for Neon. Here, you will find detailed information and instructions for connecting to Neon from different clients and applications.
 
-## Connect from a client or application
+## Connect from clients and applications
 
 Learn how to establish a connection to Neon from any application.
 
@@ -22,7 +22,7 @@ Learn how to establish a connection to Neon from any application.
 
 </DetailIconCards>
 
-## Connection issues
+## Troubleshoot connection issues
 
 Troubleshoot and resolve common connection issues.
 
@@ -34,7 +34,7 @@ Troubleshoot and resolve common connection issues.
 
 </DetailIconCards>
 
-## Connect securely
+## Secure connections
 
 Ensure the integrity and security of your connections to Neon.
 
@@ -54,6 +54,6 @@ Optimize your connections by enabling connection pooling.
 
 <a href="/docs/connect/connection-pooling" description="Learn how to enable connection pooling to support up to 10,000 concurrent connections" icon="audio-jack">Connection pooling in Neon</a>
 
-<a href="/docs/guides/prisma#connect-from-serverless-functions" description="Use a pooled connection when connecting from Prisma to Neon from serverless functions" icon="audio-jack">Connection pooling with Prisma</a>
+<a href="/docs/guides/prisma#connect-from-serverless-functions" description="Learn about connecting from Prisma to Neon from serverless functions" icon="audio-jack">Connection pooling with Prisma</a>
 
 </DetailIconCards>
