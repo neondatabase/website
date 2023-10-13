@@ -23,7 +23,7 @@ _PostgreSQL manages database access permissions using the concept of roles. A ro
 
 In the instructions that follow, we'll grant privileges to roles, and then assign those roles to database users.
 
-## Creating roles with limited access
+## Create roles with limited access
 
 You can create roles with limited access permissions in Neon via SQL. Roles created with SQL are created with the same basic [public schema privileges](#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object.
 
@@ -97,7 +97,7 @@ To create a read-only role:
 
     If the user attempts to perform an `INSERT`, `UPDATE`, or `DELETE` operation, a `permission denied` error is returned.
 
-### SQL statement summary for a read-only role
+#### SQL statement summary for a read-only role
 
 To create the read-only role and user described above, run the following statements from an SQL client:
 
@@ -175,7 +175,7 @@ To create a read-write role:
     dbname=> INSERT INTO <table_name> (col1, col2) VALUES (1, 2);
     ```
 
-### SQL statement summary for a read-write role
+#### SQL statement summary for a read-write role
 
 To create the read-write role and user described above, run the following statements from an SQL client:
 
@@ -196,7 +196,7 @@ CREATE USER readwrite_user2 WITH PASSWORD '<password>';
 GRANT readwrite TO readwrite_user1;
 ```
 
-## Create a developer role in a branching context
+### Create a developer role in a branching context
 
 This section describes how to create a "development" branch and grant developers full database access on the development branch. To accomplish this, we will create a `dev_users` role on the "parent" branch, create a "development branch", and then assign users to the `dev_users` role on the development branch.
 
@@ -249,7 +249,7 @@ To get started:
     dbname=> 
     ```
 
-### SQL statement summary for a developer role
+#### SQL statement summary for a developer role
 
 ```sql
 -- dev_users role
