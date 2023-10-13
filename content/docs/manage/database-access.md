@@ -172,7 +172,7 @@ To create a read-write role:
     SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
     Type "help" for help.
 
-    your_db=> 
+    dbname=> 
     ```
 
     You readwrite user will be permitted to perform `INSERT`, `UPDATE`, or `DELETE` operations on tables in the schema.
