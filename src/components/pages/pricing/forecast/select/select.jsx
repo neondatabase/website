@@ -14,10 +14,10 @@ const Select = ({
   type,
 }) => (
   <LazyMotion features={domAnimation}>
-    <div className="mt-7 relative">
+    <div className="mt-7 relative lg:mt-5">
       <div
         className={clsx(
-          'border rounded-[10px] border-gray-new-15 absolute inset-x-0 top-0 after:absolute after:-inset-px after:rounded-[10px] after:p-px',
+          'absolute inset-x-0 top-0 border rounded-[10px] border-gray-new-15 after:absolute after:-inset-px after:rounded-[10px] after:p-px md:static',
           className
         )}
         ref={containerRef}
@@ -34,7 +34,7 @@ const Select = ({
             <div className="flex flex-col items-start">
               <h4
                 className={clsx(
-                  'text-xl font-medium leading-tight transition-colors duration-200',
+                  'text-xl font-medium leading-tight transition-colors duration-200 lg:text-lg',
                   titleClassName
                 )}
               >

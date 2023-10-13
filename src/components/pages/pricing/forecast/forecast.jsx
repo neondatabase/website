@@ -97,20 +97,26 @@ const Forecast = () => {
   }, [pageHeight, scrollY]);
 
   return (
-    <section className="forecast safe-paddings pt-[200px]" ref={sectionRef}>
-      <Container className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4" size="medium">
-        <div className="col-start-2 col-span-5 -mr-10">
-          <h2 className="text-6xl leading-none font-medium tracking-tighter">
+    <section
+      className="forecast safe-paddings pt-[200px] 2xl:pt-36 md:pt-24 md:pb-20"
+      ref={sectionRef}
+    >
+      <Container
+        className="relative z-10 grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
+        size="medium"
+      >
+        <div className="col-start-2 col-span-5 -mr-10 xl:col-start-1 xl:col-span-6 xl:mr-0 md:col-span-full">
+          <h2 className="text-6xl leading-none font-medium tracking-tighter lg:text-5xl">
             Forecasting is easy
           </h2>
-          <p className="text-lg leading-snug font-light mt-4 max-w-[464px]">
+          <p className="text-lg leading-snug font-light mt-4 max-w-[464px] md:max-w-none">
             Follow a simple survey to quickly estimate potential monthly bill based on your app
             users’ activity.
           </p>
         </div>
-        <div className="col-end-12 col-span-4 -ml-10">
+        <div className="col-end-12 col-span-4 -ml-10 md:col-span-full md:ml-0">
           <div>
-            <p className="text-lg leading-snug font-light mt-4 max-w-[255px]">
+            <p className="text-lg leading-snug font-light mt-4 max-w-[255px] md:max-w-none">
               Need an additional help or custom volume-based plans?
             </p>
             <Link
@@ -123,15 +129,21 @@ const Forecast = () => {
           </div>
         </div>
       </Container>
-      <Container className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4" size="medium">
-        <div className="relative col-span-5 -mx-10 col-start-2 h-full xl:col-span-6 lg:-ml-8 md:col-span-full md:hidden">
-          <div className="sticky top-0 h-screen min-h-[1020px] -mt-40">
+      <Container
+        className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
+        size="medium"
+      >
+        <div className="relative col-span-5 -mx-[140px] col-start-2 h-full xl:col-span-6 xl:col-start-1 xl:-mx-24 md:col-span-full md:hidden">
+          <div className="sticky -top-[5vh] h-screen min-h-[900px] -mt-40">
             <div className="absolute flex h-full w-full items-center justify-center">
               <RiveComponent width={870} height={767} aria-hidden />
             </div>
           </div>
         </div>
-        <div className="col-end-12 col-span-4 -ml-10" ref={contentRef}>
+        <div
+          className="relative col-end-12 col-span-4 -ml-10 z-10 xl:col-end-13 xl:col-span-5 md:col-span-full md:ml-0"
+          ref={contentRef}
+        >
           <Metrics
             windowWidth={windowWidth}
             currentSectionIndex={currentSectionIndex}

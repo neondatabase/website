@@ -167,7 +167,7 @@ const Hero = () => {
                     <p
                       className={clsx(
                         'mt-9 font-light leading-snug tracking-tight text-gray-new-70 md:mt-8',
-                        type === 'Pro' ? 'lg:mt-5' : 'lg:min-h-[66px]'
+                        type === 'Pro' ? 'lg:mt-5' : 'lg:min-h-[66px] md:min-h-fit'
                       )}
                     >
                       {description}

@@ -20,7 +20,7 @@ const COMPUTE_TIME_PRICE = 0.102;
 const AVERAGE_DAYS_IN_MONTH = 30.416666;
 const PROJECT_STORAGE_PRICE = 0.000164;
 const PROJECT_STORAGE_HOURS = 24;
-
+const PERCENTAGE_OF_MONTHLY_COST = 0.05;
 const calculateStorageCost = (storageValue) =>
   storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE * AVERAGE_DAYS_IN_MONTH;
 
@@ -70,15 +70,20 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
     [activeItems.storage.unit]
   );
 
-  const totalCost = useMemo(
-    () => (computeTimeCost + storageCost).toFixed(2),
+  const writtenAndTransferDataCost = useMemo(
+    () => (computeTimeCost + storageCost) * PERCENTAGE_OF_MONTHLY_COST,
     [computeTimeCost, storageCost]
+  );
+
+  const totalCost = useMemo(
+    () => (computeTimeCost + storageCost + writtenAndTransferDataCost).toFixed(2),
+    [computeTimeCost, storageCost, writtenAndTransferDataCost]
   );
 
   return (
     <LazyMotion features={domAnimation}>
       <m.div
-        className="flex h-[50vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0"
+        className="flex h-[50vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0 md:mt-16"
         initial={{ opacity: windowWidth < 768 ? 1 : 0.3 }}
         animate={{
           opacity: currentSectionIndex === 0 || windowWidth < 768 ? 1 : 0.3,
@@ -87,15 +92,15 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
         <span className="text-green-45 font-medium leading-none -tracking-extra-tight">
           Activity
         </span>
-        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5">
+        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5">
           How active your users?
         </h3>
-        <ul className="mt-7 grid gap-y-5">
+        <ul className="mt-7 grid gap-y-5 lg:mt-5">
           {activities.map(({ title, description, unit }) => (
             <li key={title}>
               <button
                 className={clsx(
-                  'pt-5 w-full flex flex-col px-6 pb-6 border rounded-[10px] hover:border-green-45 duration-200 transition-colors',
+                  'pt-5 w-full flex flex-col px-6 pb-6 border rounded-[10px] hover:border-green-45 duration-200 transition-colors text-left',
                   activeItems.activity.title === title ? 'border-green-45' : 'border-gray-new-15'
                 )}
                 type="button"
@@ -114,7 +119,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
       </m.div>
 
       <m.div
-        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0"
+        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16"
         initial={{ opacity: windowWidth < 768 ? 1 : 0.3 }}
         animate={{
           opacity: currentSectionIndex === 1 || windowWidth < 768 ? 1 : 0.3,
@@ -123,7 +128,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
         <span className="text-yellow-70 leading-none font-medium -tracking-extra-tight">
           Performance
         </span>
-        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5">
+        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5">
           What peak performance is needed for your app?
         </h3>
         <Select
@@ -144,14 +149,14 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
       </m.div>
 
       <m.div
-        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0"
+        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16"
         initial={{ opacity: windowWidth < 768 ? 1 : 0.3 }}
         animate={{
           opacity: currentSectionIndex === 2 || windowWidth < 768 ? 1 : 0.3,
         }}
       >
         <span className="text-blue-80 leading-none font-medium -tracking-extra-tight">Storage</span>
-        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5">
+        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5">
           How much storage is required?
         </h3>
 
@@ -173,13 +178,13 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
       </m.div>
 
       <m.div
-        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0"
+        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16"
         initial={{ opacity: windowWidth < 768 ? 1 : 0.3 }}
         animate={{
           opacity: currentSectionIndex === 3 || windowWidth < 768 ? 1 : 0.3,
         }}
       >
-        <div className="py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden">
+        <div className="py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden lg:px-6 lg:py-6">
           <p className="font-medium -tracking-extra-tight leading-none">Estimated price</p>
           <p className="mt-6">
             <span className="text-6xl text-green-45 leading-none font-light tracking-[-0.06em]">
@@ -216,6 +221,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
               className="w-full relative z-20 !font-semibold tracking-extra-tight"
               theme="primary"
               size="new-lg"
+              to={LINKS.signup}
             >
               Sign up and start
             </Button>
@@ -224,7 +230,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
 
           <p className="mt-11 relative z-10 text-base leading-snug font-light text-gray-new-80">
             <strong className="font-medium text-white">Want to learn more?</strong> For advanced
-            users we highly recommend explore our billing documentation.{' '}
+            users we highly recommend exploring our billing documentation.{' '}
             <Link
               className="inline-flex items-baseline font-normal text-[15px] leading-none tracking-extra-tight"
               theme="green"
