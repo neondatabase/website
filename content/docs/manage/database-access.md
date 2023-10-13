@@ -56,8 +56,6 @@ To create a read-only role:
 
 3. Grant the `readonly` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
-    <CodeBlock shouldWrap>
-
     ```sql
     -- Grant the "readonly" role the privilege to connect to the specified database
     GRANT CONNECT ON DATABASE <database> TO readonly;
@@ -75,8 +73,6 @@ To create a read-only role:
     -- grant SELECT privileges to the 'readonly' role.
     ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT SELECT ON TABLES TO readonly;
     ```
-
-    </CodeBlock>
 
 4. Create a database user. The password requirements mentioned above apply here as well.
 
@@ -138,9 +134,7 @@ To create a read-write role:
 
 3. Grant the `readwrite` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
-    <CodeBlock shouldWrap>
-
-    ```sql
+     ```sql
     -- Grant the "readwrite" role the privilege to connect to the specified database
     GRANT CONNECT ON DATABASE <database> TO readwrite;
 
@@ -165,8 +159,6 @@ To create a read-write role:
     -- automatically grant USAGE privileges to the 'readwrite' role, allowing it to use the sequences.
     ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT USAGE ON SEQUENCES TO readwrite;
     ```
-
-    </CodeBlock>
 
 4. Create a database user. The password requirements mentioned above apply here as well.
 
