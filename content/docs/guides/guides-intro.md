@@ -6,7 +6,7 @@ enableTableOfContents: true
 updatedOn: '2023-10-12T13:25:53.998Z'
 ---
 
-Welcome to the guides section of our documentation. Whether you're looking for detailed instructions for integration across various frameworks, languages, and platforms, or exploring Neon's features, our guides are tailored to assist you.
+Find detailed instructions for integration across various frameworks, languages, and platforms, or exploring Neon's features, our guides are tailored to assist you.
 
 ## Framework, language, and platform guides
 
