@@ -2,53 +2,71 @@
 title: Manage projects
 enableTableOfContents: true
 isDraft: false
+subtitle: Learn about Neon projects and how to manage them using either the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
 updatedOn: '2023-10-06T17:44:14.705Z'
 ---
 
-With Neon, everything starts with the project. It's the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases, and as many branches of those databases, as your application or workflow needs. However, [tier limits] (/docs/link to tier limits) define how many projects you can create. Neon's Free Tier limits you to one project per Neon account.
+With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases, and with the Pro plan, as many branches of those databases, as your application or workflow needs. However, [tier limits](/docs/introduction/plans) define how many projects you can create. Neon's Free Tier limits you to one project per Neon account.
+
+Learn more about projects and how to manage them in these sections:
+- [Default resources](#default-resources)
+- [Project Settings](#about-the-settings-page)
+- [Basic actions](#basic-actions)
+- [Advanced settings](#advanced-settings)
+- [Manage projects from the API](#manage-projects-with-the-neon-api)
+
+## Default resources
 
 When you add a new project, Neon creates the following resources by default:
 
 - A primary branch called `main`. You can create child branches from the primary branch or from any previously created branch. For more information, see [Manage branches](/docs/manage/branches).
-- A single read-write compute endpoint. This is the compute instance associated with the branch. //is this accurate to say? "You can think of it as the engine that processes your database interactions."// For more information, see [Manage computes](/docs/manage/endpoints).
+- A single read-write compute endpoint. This is the compute instance associated with the branch. For more information, see [Manage computes](/docs/manage/endpoints).
 - A ready-to-use database, called `neondb`, which lives in the project's primary branch.
 - A default Postgres role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with).
 
-//Add something to address common confusion about dbs per project? 
-Should we be explicit that a project is or acts like a postgres cluster?
-Is there some guideance we can give over when you would want to create a new project?//
+## About the Settings page
 
-## Create a project
+Once you open a project, you can use the **Settings** page to manage that particular project and set any defaults.
+
+![Project Settings page](/public/docs/manage/settings_page.png)
+
+- **General** &#8212; Change the name or ID of your project.
+- **Compute** &#8212; Set the default sizes for any new compute instances you create when branching.
+- **Storage** &#8212; Choose how long Neon maintains a history of changes for all branches.
+- **Sharing** &#8212; Let other users access your project's databases.
+- **Delete** &#8212; Use with care! This action deletes your entire project and all its objects, and is irreversible.
+
+## Basic actions
+
+Here are some of the basic actions you can take to add or manage projects:
+- [Create a project](#Create-a-project)
+- [View projects](#view-projects)
+- [Change a project name](#change-the-name-of-your-project)
+- [Delete a project](#delete-a-project)
+- [Share a project](#share-a-project)
+
+### Create a project
 
 Neon Free Tier users can create a single project. Support for multiple projects is available to Neon [Pro plan](/docs/introduction/pro-plan) users.
 
 To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
+
 2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
-3. Specify vales for **Name**, **Postgres version**, and **Region**. Project names are limited to 64 characters. If you are a Neon [Pro plan](/docs/introduction/pro-plan) user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
+
+3. Specify valeus for **Name**, **Postgres version**, and **Region**. Project names are limited to 64 characters. If you are a Neon [Pro plan](/docs/introduction/pro-plan) user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
     - Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
     - The **Auto-suspend delay** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
   
 4. Click **Create Project**.
 
-Upon creating a project, you are presented with a dialog that provides your connection details for a ready-to-use `neondb` database. The connection details include your password.
+After creating a project, you are presented with a dialog that provides your connection details for a ready-to-use `neondb` database. The connection details include your password.
 
-## Compute size configuration with Autoscaling
-
-Neon [Pro plan](/docs/introduction/pro-plan) users can configure default compute size settings when [creating a project](#create-a-project) or from the the **Settings** > **Compute** page.
-
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
-
-Neon supports two compute size configuration options:
-
-- **Fixed Size:** This option allows you to select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, _Autoscaling_ supports a range of 1 to 7 CUs. The 1/4 CU and 1/2 CU settings, called _shared compute_, will be supported with _Autoscaling_ in a future release. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
-
-## View projects
+### View projects
 
 To view your projects:
 
@@ -56,9 +74,9 @@ To view your projects:
 1. Select **Home** or the Neon logo at the top left of the Console.
 1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
-## Change the name of your project Edit a project
+### Change the name or ID of your project
 
-You are permitted to change the project name when editing a project.
+You are permitted to change either the ID or the name of your project at any point.
 
 To edit a Neon project:
 
@@ -66,22 +84,9 @@ To edit a Neon project:
 2. Select the project that you want to edit.
 3. Select **Settings**.
 4. Select **General**.
-5. Make your change and click **Save**.
+5. Make your changes and click **Save**.
 
-## Configure history retention
-
-By default, Neon retains a 7-day history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/billing#project-storage).
-
-To configure the history retention period for a project:
-
-1. Select a project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Storage**.
-    ![History retention configuration](/docs/relnotes/history_retention.png)
-4. Use the slider to select the history retention period.
-5. Click **Save**.
-
-## Delete a project
+### Delete a project
 
 Deleting a project is a permanent action, which also deletes any compute endpoints, branches, databases, and roles that belong to the project.
 
@@ -94,7 +99,7 @@ To delete a project:
 5. Click **Delete project.**
 6. On the confirmation dialog, click **Delete**.
 
-## Share a project
+### Share a project
 
 Project sharing is a Neon Pro plan feature that allows you to share your project with other Neon accounts.
 
@@ -115,6 +120,47 @@ A user **without** a Neon account will not receive an email notification when a 
 The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
 
 For additional information, refer to our [Project sharing guide](/docs/guides/project-sharing-guide).
+
+## Advanced settings
+
+From the **Settings** page, you can also set defaults or apply bulk changes across your Neon objects:
+- [Reset default compute size](#reset-the-default-compute-size) (Pro plan only)
+- [Configure history retention range](#configure-history-retention)
+
+### Reset the default compute size
+
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
+
+For [Free Tier](/docs/introduction/free-tier) users, Neon sets your compute size to a static shared 1 vCPU, with 1 GB of RAM for each branch (max 10 branches).
+
+[Pro plan](/docs/introduction/pro-plan) users have the flexibility to choose a compute size for each branch's compute endpoint individually. By default, new branches inherit the size you selected when you created the first branch in your project (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create a series of read-only replicas, where each replica typically requires less compute per branch.
+
+To reset the default compute size, go to **Settings** > **Compute**.
+
+You can choose from two options:
+
+- **Fixed Size:** Select a fixed compute size ranging from .25 CUs to 7 CUs. A fixed-size compute does not scale to meet workload demand.
+- **Autoscaling:** This option allows you to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, _Autoscaling_ supports a range of 1/4 (.25) CU to 7 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+
+_Example: default minimum and maximum autoscale settings_
+
+![Default autoscaling min and max](/public/docs/manage/default_autoscale.png)
+
+
+### Configure history retention
+
+By default, Neon retains a 7-day history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/billing#project-storage).
+
+To configure the history retention period for a project:
+
+1. Select a project in the Neon console.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Storage**.
+    ![History retention configuration](/public/docs/relnotes/history_retention.png)
+4. Use the slider to select the history retention period.
+5. Click **Save**.
+
+
 
 ## Manage projects with the Neon API
 
