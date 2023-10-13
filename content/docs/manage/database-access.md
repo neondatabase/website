@@ -1,17 +1,13 @@
 ---
 title: Manage database access
-subtitle: Learn how to manage database access in Neon
+subtitle: Learn how to manage user access to database in your Neon project
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/manage-database-access
 updatedOn: '2023-09-15T13:00:43Z'
 ---
 
-This guide describes how to manage database access in Neon.
-
-## Understanding roles in Neon
-
-Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account you registered with). This role owns the ready-to-use database (`neondb`) created in your project's primary branch. For example, if a user named "Alex" signs up for Neon with a Google account, the project is created with a default role named `alex`.
+Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account you registered with). This Postgres role owns the ready-to-use database (`neondb`) created in your project's primary branch. For example, if a user named "Alex" signs up for Neon with a Google account, the project is created with a default role named `alex`.
 
 Your default Neon role is automatically assigned the `neon_superuser` role, which allows it to create databases, roles, and read and write data in all tables, views, sequences. Any user created with the Neon console, Neon API, or Neon CLI is also assigned the `neon_superuser` role. For more information, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
