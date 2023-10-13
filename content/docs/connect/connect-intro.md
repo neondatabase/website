@@ -1,10 +1,10 @@
 ---
 title: Connect to Neon
-subtitle: Everything you need to know about connecting to Neon
+subtitle: Everything you need to know about connecting to Neon from clients and applications
 enableTableOfContents: true
 ---
 
-Find detailed information and instructions for connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more.
+Find detailed information and instructions about connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more. For information about integrating with Neon with different frameworks, languages, and platforms, refer to our [Guides](/docs/guides/guides-intro) documentation.
 
 ## Connect from clients and applications
 
