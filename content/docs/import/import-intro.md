@@ -4,9 +4,9 @@ subtitle: Learn how to import data from different sources or load sample data
 enableTableOfContents: true
 ---
 
-Welcome to the data import section. This part of the documentation provides guides on importing data into Neon from different sources. You'll find instructions for importing data from Postgres, CSV, other Neon projects, and more. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.
+Find instructions for importing data from Postgres, CSV, other Neon projects, and more. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.
 
-### Data import guides
+## Data import guides
 
 <DetailIconCards>
 
@@ -20,6 +20,6 @@ Welcome to the data import section. This part of the documentation provides guid
 
 <a href="/docs/import/migrate-aws-dms" description="Migrate data from another database source to Neon using the AWS Data Migration Service" icon="import">Migrate with AWS DMS</a>
 
-<a href="(/docs/import/import-sample-data" description="Load one of several sample datasets for exploration and testing" icon="import">Load sample data</a>
+<a href="/docs/import/import-sample-data" description="Load one of several sample datasets for exploration and testing" icon="import">Load sample data</a>
 
 </DetailIconCards>
