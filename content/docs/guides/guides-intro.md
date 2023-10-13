@@ -4,7 +4,7 @@ subtitle: Explore Neon features and how to integrate with different frameworks, 
 enableTableOfContents: true
 ---
 
-Welcome to the guides section of our documentation. Whether you're looking for detailed instructions for integration across various frameworks, languages, and platforms, or exploring Neon's features, our guides are tailored to assist you.
+Find detailed instructions for integration across various frameworks, languages, and platforms, or exploring Neon's features, our guides are tailored to assist you.
 
 ## Framework, language, and platform guides
 

@@ -4,7 +4,7 @@ subtitle: Everything you need to know about connecting to Neon
 enableTableOfContents: true
 ---
 
-Welcome to the connection documentation for Neon. Here, you will find detailed information and instructions for connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more.
+Find detailed information and instructions for connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more.
 
 ## Connect from clients and applications
 
