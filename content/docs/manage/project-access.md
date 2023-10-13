@@ -16,7 +16,7 @@ Users that you share a project with are able to perform any action you can perfo
 - View data
 - Run queries
 
-You can think of sharing a Neon project as granting administrator access.
+You can think of sharing a Neon project as granting administrator access to your project.
 
 ## How to share a project
 
