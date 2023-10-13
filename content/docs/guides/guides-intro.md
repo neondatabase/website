@@ -6,15 +6,15 @@ enableTableOfContents: true
 updatedOn: '2023-10-12T13:25:53.998Z'
 ---
 
-Welcome to the guides section of our documentation. Whether you're looking for detailed instructions for integration across various frameworks, languages, and platforms, or exploring Neon's features, our guides are tailored to assist you.
+Find detailed instructions for integration across various frameworks, languages, and platforms, or exploring Neon's features, our guides are tailored to assist you.
 
-### Framework, language, and platform guides
+## Framework, language, and platform guides
 
 Integrate your applications with Neon.
 
 <TechnologyNavigation>
 
-<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel-overview" title="Integrate Neon with Vercel" />
+<img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/nextjs" title="Connect a Next.js application to Neon" />
 
 <img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
 
@@ -28,7 +28,7 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/laravel-logo.svg" width="35" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect a Laravel application to Neon" />
 
-<img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/vercel" title="Connect a Next.js application to Neon" />
+<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel-overview" title="Integrate Neon with Vercel" />
 
 <img src="/images/technology-logos/nodejs-logo.svg" width="33" height="36" alt="Node.js" href="/docs/guides/node" title="Connect a Node.js application to Neon" />
 
@@ -40,11 +40,11 @@ Integrate your applications with Neon.
 
 </TechnologyNavigation>
 
-### Feature guides
+## Feature guides
 
 Explore Neon's capabilities with our feature guides.
 
-#### Autoscaling
+### Autoscaling
 
 Automatically scale compute resources up and down based on demand.
 
@@ -56,7 +56,7 @@ Automatically scale compute resources up and down based on demand.
 
 </DetailIconCards>
 
-#### Auto-suspend
+### Auto-suspend
 
 Control when Neon compute resources scale to zero.
 
@@ -68,7 +68,7 @@ Control when Neon compute resources scale to zero.
 
 </DetailIconCards>
 
-#### Branching
+### Branching
 
 Branch data the same way you branch your code.
 
@@ -92,7 +92,7 @@ Branch data the same way you branch your code.
 
 </DetailIconCards>
 
-#### Project sharing
+### Project sharing
 
 Share your Neon project with anyone.
 
@@ -102,7 +102,7 @@ Share your Neon project with anyone.
 
 </DetailIconCards>
 
-#### Read replicas
+### Read replicas
 
 Learn how Neon read replicas can help you scale and manage read-only workloads.
 

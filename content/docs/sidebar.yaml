@@ -54,6 +54,7 @@
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
 - title: Connect
+  slug: connect/connect-intro
   items:
     - title: Connect from any application
       slug: connect/connect-from-any-app
