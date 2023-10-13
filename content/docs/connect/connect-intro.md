@@ -5,9 +5,13 @@ enableTableOfContents: true
 updatedOn: '2023-10-13T14:08:36.341Z'
 ---
 
+<<<<<<< HEAD
 Find detailed information and instructions about connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more.
 
 For integrating Neon with different frameworks, languages, and platforms, refer to our [Guides](/docs/guides/guides-intro) documentation.
+=======
+Find detailed information and instructions for connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more.
+>>>>>>> 92c630f3 (Update intro text for landing pages)
 
 ## Connect from clients and applications
 
