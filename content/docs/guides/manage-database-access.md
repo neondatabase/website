@@ -19,7 +19,7 @@ But how do you create roles with limited access? The following sections will sho
 
 ## A word about users, groups, and roles in Postgres
 
-Before you proceed, it is helpful to have an understanding of how POstgres manages "users, groups, and roles".
+Before you proceed, it is helpful to have an understanding of how Postgres manages "users, groups, and roles".
 
 In Postgres, users, groups, and roles are the same thing, while other relational database management systems often define these as separate entities. From Postgres [Database Roles and Privileges](https://www.postgresql.org/docs/current/user-manag.html) documentation:
 
@@ -64,6 +64,8 @@ To create a read-only role:
 
 3. Grant the `readonly` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
+    <CodeBlock shouldWrap>
+
     ```sql
     -- Grant the "readonly" role the privilege to connect to the specified database
     GRANT CONNECT ON DATABASE <database> TO readonly;
@@ -81,6 +83,8 @@ To create a read-only role:
     -- grant SELECT privileges to the 'readonly' role.
     ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT SELECT ON TABLES TO readonly;
     ```
+
+    </CodeBlock>
 
 4. Create a database user. The password requirements mentioned above apply here as well.
 
@@ -142,6 +146,8 @@ To create a read-write role:
 
 3. Grant the `readwrite` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
+    <CodeBlock shouldWrap>
+
     ```sql
     -- Grant the "readwrite" role the privilege to connect to the specified database
     GRANT CONNECT ON DATABASE <database> TO readwrite;
@@ -166,6 +172,9 @@ To create a read-write role:
     -- Alter the default privileges so that any new sequences created in the specified schema in the future
     -- automatically grant USAGE privileges to the 'readwrite' role, allowing it to use the sequences.
     ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT USAGE ON SEQUENCES TO readwrite;
+    ```
+
+    </CodeBlock>
 
 4. Create a database user. The password requirements mentioned above apply here as well.
 
@@ -196,6 +205,8 @@ To create a read-write role:
 
 To create the read-only role and user described above, run the following statements from an SQL client:
 
+<CodeBlock shouldWrap>
+
 ```sql
 -- readwrite role
 CREATE ROLE readwrite;
@@ -212,6 +223,8 @@ CREATE USER readwrite_user2 WITH PASSWORD '<password>';
 -- Grant privileges to user
 GRANT readwrite TO readwrite_user1;
 ```
+
+</CodeBlock>
 
 ## Role management with Neon branching
 
