@@ -34,7 +34,7 @@ Once you open a project, you can use the **Settings** page to manage that partic
 
 You can tab between these sections:
 
-- **General** &#8212; Change the name or ID of your project.
+- **General** &#8212; Change the name of your project or copy ID.
 - **Compute** &#8212; Set the default sizes for any new compute instances you create when branching.
 - **Storage** &#8212; Choose how long Neon maintains a history of changes for all branches.
 - **Sharing** &#8212; Let other users access your project's databases.
@@ -76,9 +76,9 @@ To view your projects:
 1. Select **Home** or the Neon logo at the top left of the Console.
 1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
-### Change the name or ID of your project
+### Change the name or copy the ID of your project
 
-You are permitted to change either the ID or the name of your project at any point.
+You are permitted to change the name of your project at any point. The project ID is permanent.
 
 To edit a Neon project:
 
