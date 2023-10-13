@@ -196,7 +196,7 @@ CREATE USER readwrite_user2 WITH PASSWORD '<password>';
 GRANT readwrite TO readwrite_user1;
 ```
 
-## Create a developer role in a branching context
+### Create a developer role
 
 This section describes how to create a "development" branch and grant developers full database access on the development branch. To accomplish this, we will create a `dev_users` role on the "parent" branch, create a "development branch", and then assign users to the `dev_users` role on the development branch.
 
@@ -249,7 +249,7 @@ To get started:
     dbname=> 
     ```
 
-### SQL statement summary for a developer role
+#### SQL statement summary for a developer role
 
 ```sql
 -- dev_users role
