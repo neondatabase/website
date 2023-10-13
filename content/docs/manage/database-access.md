@@ -7,23 +7,25 @@ redirectFrom:
 updatedOn: '2023-09-15T13:00:43Z'
 ---
 
-Each Neon project is created with a default Postgres role that takes its name from your Neon account (the Google, GitHub, or partner account you registered with). For example, if a user named "Alex" signs up for Neon with a Google account, the project is created with a default role named `alex`.
+Each Neon project is created with a default Postgres role that takes its name from your Neon account (the account you registered with). For example, if a user named "Alex" signs up for Neon, the project is created with a default role named `alex`.
 
-The default Postgres role is automatically assigned the `neon_superuser` role, which allows it to create databases, roles, and read and write data in all tables, views, sequences. Any user created with the Neon console, Neon API, or Neon CLI is also assigned the `neon_superuser` role. For more information, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
+The default Postgres role is automatically assigned the `neon_superuser` role, which allows creating databases, roles, and reading and writing data in all tables, views, sequences. Any user created with the Neon console, Neon API, or Neon CLI is also assigned the `neon_superuser` role. For more information, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
-It is good practice to reserve `neon_superuser` roles for database administration tasks like creating roles and databases. For other users, we recommend creating roles with specific sets of permissions based on application and access requirements. Then, assign the appropriate role to each user. The roles you create should adhere to a _least privilege_ model for accessing database objects, granting only the permissions required to accomplish their tasks.
+It is good practice to reserve `neon_superuser` roles for database administration tasks like creating roles and databases. For other users, we recommend creating roles with specific sets of permissions based on application and access requirements. Then, assign the appropriate role to each user. The roles you create should adhere to a _least privilege_ model, granting only the permissions required to accomplish their tasks.
 
-But how do you create roles with limited access? The following sections will show you how to create read-only and read-write roles and assign those roles to users. We'll also look at how to create a "developer" role and grant that role full access to a database on a "development" branch in a Neon project.
+But how do you create roles with limited access? The following sections will show you how to create read-only and read-write roles and assign those roles to users. We'll also look at how to create a "developer" role and grant that role full access to a database on a development branch in a Neon project.
 
 ## A word about users, groups, and roles in Postgres
 
-In Postgres, users, groups, and roles are the same thing, while other relational database management systems often define these as separate entities. From Postgres [Database Roles and Privileges](https://www.postgresql.org/docs/current/user-manag.html) documentation:
+In Postgres, users, groups, and roles are the same thing, while other relational database management systems often define these as separate entities. From the PostgreSQL [Database Roles and Privileges](https://www.postgresql.org/docs/current/user-manag.html) documentation:
 
 _PostgreSQL manages database access permissions using the concept of roles. A role can be thought of as either a database user, or a group of database users, depending on how the role is set up._
 
+In the instructions that follow, we'll grant privileges to roles, and then assign those roles to database users.
+
 ## Creating roles with limited access
 
-You can create roles with limited access permissions in Neon via SQL. Roles created with SQL from a client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), are created with the same basic privileges granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object. This provides a lot of flexibility but also makes the process of creating roles with the desired permissions slightly more complicated.
+You can create roles with limited access permissions in Neon via SQL. Roles created with SQL are created with the same basic privileges granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object.
 
 The recommended approach to creating roles with limited access permissions in Neon is as follows:
 
@@ -32,13 +34,13 @@ The recommended approach to creating roles with limited access permissions in Ne
 3. Create your database users. For example, create users named `readonly_user1` and `readwrite_user1`.
 4. Assign the `readonly` or `readwrite` role to those users to grant them the privileges associated with those roles. For example, assign the `readonly` role to `readonly_user1`, and `readwrite` to `readwrite_user1`.
 
-You can remove a role from a user at any time to revoke privileges.
+You can remove a role from a user at any time to revoke privileges. See [Revoke privileges](#revoke-privileges).
 
 ## Create roles
 
-This section describes how to create roles in Neon via SQL and grant the roles access to database objects. Access must be granted at the database, schema, and schema object level. For example, to grant access to a table, you must also grant access to the database and schema in which the table resides. If these access permissions are not defined, the role will not be able access the table.
+This section describes how to create roles in Neon via SQL and grant the roles access to database objects. Access must be granted at the database, schema, and object level. For example, to grant access to a table, you must also grant access to the database and schema in which the table resides. If these access permissions are not defined, the role will not be able access the table.
 
-In the following sections, we'll cover how to create read-only and read-write roles with access to a specific database and schema. For a summary of the required SQL statements, refer to the SQL statement summaries at the end of each section.
+In the following sections, we'll show how to create read-only and read-write roles with access to a specific database and schema. SQL statement summaries are provided at the end of each section.
 
 ### Create a read-only role
 
@@ -46,31 +48,27 @@ To create a read-only role:
 
 1. Connect to your database from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
 
-2. Create a `readonly` role using the following statement. Neon requires specifying a password when creating a role with SQL. Since this is a shared role used for privilege management, the `LOGIN` privilege is optional and not included.
+2. Create a `readonly` role using the following statement:
 
     ```sql
     CREATE ROLE readonly PASSWORD '<password>';
     ```
   
-    The password must have 60 bits of entropy (at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters). For specific guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+    Neon requires specifying a password. Since this role will be used for privilege management, the `LOGIN` privilege is optional and not included. The password must have 60 bits of entropy (at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters). For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
 3. Grant the `readonly` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
     ```sql
-    -- Grant the "readonly" role the privilege to connect to the specified database
+    -- Grant permission to connect to the database
     GRANT CONNECT ON DATABASE <database> TO readonly;
 
-    -- Grant the 'readonly' role usage privileges on the specified schema. 
-    -- This allows the role to access objects in the schema but doesn't grant any specific permissions on those objects.
+    -- Grant USAGE on the schema 
     GRANT USAGE ON SCHEMA <schema> TO readonly;
 
-    -- Grant the 'readonly' role SELECT privileges on all existing tables in the specified schema.
-    -- This allows the role to read the data from any table within the schema.
+    -- Grant SELECT on all existing tables in the schema
     GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO readonly; 
 
-    -- Alter the default privileges for any new tables created in the specified schema.
-    -- This ensures that any new tables created in this schema in the future automatically 
-    -- grant SELECT privileges to the 'readonly' role.
+    -- Grant SELECT on all tables added in the future
     ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT SELECT ON TABLES TO readonly;
     ```
 
@@ -86,7 +84,7 @@ To create a read-only role:
     GRANT readonly TO readonly_user1;
     ```
 
-    The `readonly_user1` user now has read-only access to tables in the specified schema and database. When connecting, replace the example connection string with your own.
+    The `readonly_user1` user now has read-only access to tables in the specified schema and database and should able to connect and run `SELECT` queries.
 
     ```bash
     psql postgres://readonly_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
@@ -94,7 +92,7 @@ To create a read-only role:
     SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
     Type "help" for help.
 
-    dbname=> 
+    dbname=> SELECT * FROM <schema>.<table_name>;
     ```
 
     If the user attempts to perform an `INSERT`, `UPDATE`, or `DELETE` operation, a `permission denied` error is returned.
@@ -130,33 +128,27 @@ To create a read-write role:
     CREATE ROLE readwrite PASSWORD '<password>';
     ```
 
-    The password must have 60 bits of entropy (at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters). For specific guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+    The password must have 60 bits of entropy (at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters). For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
 3. Grant the `readwrite` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
      ```sql
-    -- Grant the "readwrite" role the privilege to connect to the specified database
+    -- Grant permission to connect to the database
     GRANT CONNECT ON DATABASE <database> TO readwrite;
 
-    -- Grant the 'readwrite' role usage and create privileges on the specified schema. 
-    -- This allows the role to access and create objects in the schema.
+    -- Grant USAGE and CREATE on the schema
     GRANT USAGE, CREATE ON SCHEMA <schema> TO readwrite;
 
-    -- Grant the 'readwrite' role SELECT, INSERT, UPDATE, DELETE privileges on all existing tables in the specified schema.
-    -- This allows the role to read the data from any table within the schema.
-    GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA <schema> TO readwrite; 
+    -- Grant SELECT, INSERT, UPDATE, DELETE on all existing tables in the schema
+     GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA <schema> TO readwrite; 
 
-    -- Alter the default privileges for any new tables created in the specified schema.
-    -- This ensures that any new tables created in this schema in the future automatically 
-    -- grant SELECT privileges to the 'readonly' role.
+    -- grant SELECT on all tables added in the future
     ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO readwrite;
 
-    -- Grant USAGE privileges to the 'readwrite' role on all existing sequences in the specified schema.
-    -- USAGE allows the role to use the sequence to generate values, typically for serial columns.
+    -- Grant USAGE on all sequences in the schema
     GRANT USAGE ON ALL SEQUENCES IN SCHEMA <schema> TO readwrite;
 
-    -- Alter the default privileges so that any new sequences created in the specified schema in the future
-    -- automatically grant USAGE privileges to the 'readwrite' role, allowing it to use the sequences.
+    -- Grant USAGE on all sequences added in the future
     ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT USAGE ON SEQUENCES TO readwrite;
     ```
 
@@ -172,7 +164,7 @@ To create a read-write role:
     GRANT readwrite TO readwrite_user1;
     ```
 
-    The `readwrite_user1` user now has read-write access to tables in the specified schema and database. When connecting, replace the example connection string with your own.
+    The `readwrite_user1` user now has read-write access to tables in the specified schema and database and should able to connect and run `SELECT`, `INSERT`, `UPDATE`, `DELETE` queries.
 
     ```bash
     psql postgres://readwrite_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
