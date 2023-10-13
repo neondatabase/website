@@ -96,11 +96,11 @@
     - title: Operations
       slug: manage/operations
     - title: Access
-          items: 
-            - title: Project access
-              slug: manage/project-access
-            - title: Database access
-              slug: manage/database-access
+      items: 
+         - title: Project access
+           slug: manage/project-access
+         - title: Database access
+           slug: manage/database-access
     - title: Backups
       slug: manage/backups
 - title: Guides
