@@ -2,6 +2,8 @@
 title: Manage database access
 subtitle: Learn how to manage database access in Neon
 enableTableOfContents: true
+redirectFrom:
+  - /docs/guides/manage-database-access
 updatedOn: '2023-09-15T13:00:43Z'
 ---
 

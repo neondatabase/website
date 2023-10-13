@@ -98,9 +98,9 @@
     - title: Access
           items: 
             - title: Project access
-              slug: manage/project-acess
+              slug: manage/project-access
             - title: Database access
-              slug: guides/manage-database-access
+              slug: manage/database-access
     - title: Backups
       slug: manage/backups
 - title: Guides
