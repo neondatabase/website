@@ -20,6 +20,6 @@ Find instructions for importing data from Postgres, CSV, other Neon projects, an
 
 <a href="/docs/import/migrate-aws-dms" description="Migrate data from another database source to Neon using the AWS Data Migration Service" icon="import">Migrate with AWS DMS</a>
 
-<a href="(/docs/import/import-sample-data" description="Load one of several sample datasets for exploration and testing" icon="import">Load sample data</a>
+<a href="/docs/import/import-sample-data" description="Load one of several sample datasets for exploration and testing" icon="import">Load sample data</a>
 
 </DetailIconCards>
