@@ -54,6 +54,7 @@
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
 - title: Connect
+  slug: connect/connect-intro
   items:
     - title: Connect from any application
       slug: connect/connect-from-any-app
@@ -104,6 +105,7 @@
     - title: Backups
       slug: manage/backups
 - title: Guides
+  slug: guides/guides-intro
   items:
     - title: Neon features
       items: 
@@ -141,6 +143,12 @@
           items:
             - title: neon_utils
               slug: extensions/neon-utils
+    - title: Frameworks
+      items:
+        - title: Next.js
+          slug: guides/nextjs
+        - title: Astro
+          slug: guides/astro
     - title: Languages
       items:
         - title: Elixir
@@ -152,8 +160,6 @@
           slug: guides/java
         - title: Javascript
           items:
-            - title: Next.js
-              slug: guides/nextjs
             - title: Node.js
               slug: guides/node
             - title: Prisma
@@ -237,15 +243,16 @@
 - title: Postgres extensions
   slug: extensions/pg-extensions
 - title: Import data
+  slug: import/import-intro
   items:
     - title: Import from Postgres
       slug: import/import-from-postgres
-    - title: Import from Heroku
-      slug: import/import-from-heroku
-    - title: Import from CSV
-      slug: import/import-from-csv
     - title: Import from a Neon project
       slug: import/import-from-neon
+    - title: Import from CSV
+      slug: import/import-from-csv
+    - title: Import from Heroku
+      slug: import/import-from-heroku
     - title: Migrate data with AWS DMS
       slug: import/migrate-aws-dms
     - title: Sample data

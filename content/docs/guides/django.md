@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-06T17:44:14.690Z'
 ---
 
 To connect to Neon from a Django application:
@@ -34,22 +34,17 @@ In your Django project, navigate to the `DATABASES` section of your `settings.py
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '<dbname>',
-        'USER': '<user>',
-        'PASSWORD': '<password>',
-        'HOST': '<hostname>',
-        'PORT': '<port>',
+        'NAME': '[dbname]',
+        'USER': '[user]',
+        'PASSWORD': '[password]',
+        'HOST': '[hostname]',
+        'PORT': '[port]',
+         'OPTIONS': {
+             'sslmode': 'require',
+        }
     }
 }
 ```
-
-where:
-
-- `<dbname>` is the name of the database. The default Neon database is `neondb`.
-- `<user>` is the database user.
-- `<password>` is the database user's password.
-- `<hostname>` is the hostname of the branch's compute endpoint. The hostname has an `ep-` prefix and appears similar to this: `ep-tight-salad-272396.us-east-2.aws.neon.tech`.
-- `<port>` is the Postgres port number. Neon uses the default port, `5432`.
 
 <Admonition type="note">
 Neon places computes into an `Idle` state and closes connections after 5 minutes of inactivity (see [Compute lifecycle](https://neon.tech/docs/introduction/compute-lifecycle/)). To avoid connection errors, you can set the Django [CONN_MAX_AGE](https://docs.djangoproject.com/en/4.1/ref/settings/#std-setting-CONN_MAX_AGE) setting to 0 to close database connections at the end of each request so that your application does not attempt to reuse connections that were closed by Neon. From Django 4.1, you can use a higher `CONN_MAX_AGE` setting in combination with the [CONN_HEALTH_CHECKS](https://docs.djangoproject.com/en/4.1/ref/settings/#conn-health-checks) setting to enable connection reuse while preventing errors that might occur due to closed connections. For more information about these configuration options, see [Connection management](https://docs.djangoproject.com/en/4.1/ref/databases#connection-management), in the _Django documentation_.
@@ -87,4 +82,4 @@ Watch Justin Mitchel's video course, _Micro eCommerce with Python, Django, Neon 
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

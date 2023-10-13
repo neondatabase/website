@@ -3,7 +3,7 @@ title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Learn how to connect to Neon from serverless and edge environments over HTTP
   or WebSockets
-updatedOn: '2023-10-03T19:45:09.137Z'
+updatedOn: '2023-10-05T19:42:20.363Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP.
@@ -27,12 +27,12 @@ The driver includes TypeScript types (the equivalent of `@types/pg`). No additio
 You can obtain a connection string for your database from the **Connection Details** widget on the Neon **Dashboard** and set it as an environment variable. Your Neon connection string will look something like this:
 
 ```shell
-DATABASE_URL=postgres://<user>:<password>@<endpoint>.<region>.aws.neon.tech/<dbname>
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 ## How to use the driver over HTTP
 
-To use the Neon serverless driver over HTTP, you must use the driver's `neon` function. You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/installation-and-db-connection/postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
+To use the Neon serverless driver over HTTP, you must use the driver's `neon` function. You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
 
 <CodeTabs labels={["Node.js",  "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
@@ -91,7 +91,7 @@ export default async function handler(
 </CodeTabs>
 
 <Admonition type="note">
-The maximum response size for queries over HTTP is 10 MB.
+The maximum request size and response size for queries over HTTP is 10 MB. Additionally, there is a 15 second proxy timeout for SQL requests over HTTP. Long running queries that exceed the 15 second threshold are terminated.
 </Admonition>
 
 ## Experimental connection caching
@@ -230,7 +230,11 @@ Consider using the driver with `Pool` or `Client` in the following scenarios:
 
 For configuration options that apply to `Pool` and `Client`, see [options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration) in the driver's GitHub repository.
 
-## Example application
+## Example applications
+
+Explore the example applications that use the Neon serverless driver.
+
+### UNESCO World Heritage sites app
 
 Neon provides an example application to help you get started with the Neon serverless driver. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
 
@@ -244,4 +248,13 @@ There are different implementations of the application to choose from.
 <a href="https://github.com/neondatabase/serverless-cfworker-demo" description="Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance." icon="github">Raw SQL + Cloudflare Workers</a>
 <a href="https://github.com/neondatabase/neon-vercel-kysely" description="Demonstrates using kysely and kysely-codegen with Neon's serverless driver on Vercel Edge Functions" icon="github">Kysely + Vercel Edge Functions</a>
 <a href="https://github.com/neondatabase/neon-vercel-zapatos" description="Demonstrates using Zapatos with Neon's serverless driver on Vercel Edge Functions" icon="github">Zapatos + Vercel Edge Functions</a>
+<a href="https://github.com/neondatabase/neon-hyperdrive" description="Neon + Cloudflare Hyperdrive (Beta)" icon="github">Demonstrates using Cloudflare's Hyperdrive to access your Neon database from Cloudflare Workers</a>
+</DetailIconCards>
+
+### Ping Thing
+
+The Ping Thing application pings a Neon Serverless Postgres database using a Vercel Edge Function and shows the journey your request makes. You can read more about this application in the accompanying blog post: [How to use Postgres at the Edge](https://neon.tech/blog/how-to-use-postgres-at-the-edge)
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/ping-thing" description="Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes" icon="github">Ping Thing</a>
 </DetailIconCards>

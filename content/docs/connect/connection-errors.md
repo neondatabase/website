@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2023-09-15T13:00:43Z'
+updatedOn: '2023-10-06T17:44:14.682Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -42,12 +42,12 @@ If a library or application upgrade does not help, there are several workarounds
 
 ### A. Pass the endpoint ID as an option
 
-Neon supports a connection option named `endpoint`, which you can use to identify the compute endpoint you are connecting to. Specifically, you can add `options=endpoint%3Dep-mute-recipe-123456` as a parameter to your connection string, as shown in the example below. The `%3D` is a URL-encoded `=` sign.
+Neon supports a connection option named `endpoint`, which you can use to identify the compute endpoint you are connecting to. Specifically, you can add `options=endpoint%3D[endpoint_id]` as a parameter to your connection string, as shown in the example below. The `%3D` is a URL-encoded `=` sign. Replace `[endpoint_id]` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
 <CodeBlock shouldWrap>
 
 ```txt
-postgres://<user>:<password>@ep-mute-recipe-123456.us-east-2.aws.neon.tech/neondb?options=endpoint%3Dep-mute-recipe-123456
+postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
 ```
 
 </CodeBlock>
@@ -60,10 +60,10 @@ The `endpoint` option works if your application or library permits it to be set.
 
 ### B. Use libpq key=value syntax in the database field
 
-If your application or client is based on `libpq` but you cannot upgrade the library, such as when the library is compiled inside of a an application, you can take advantage of the fact that `libpq` permits adding options to the database name. So, in addition to the database name, you can specify the `endpoint` option, as shown below. Replace `<endpoint_id>` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-mute-recipe-123456`.
+If your application or client is based on `libpq` but you cannot upgrade the library, such as when the library is compiled inside of a an application, you can take advantage of the fact that `libpq` permits adding options to the database name. So, in addition to the database name, you can specify the `endpoint` option, as shown below. Replace `[endpoint_id]` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
 ```txt
-dbname=neondb options=endpoint=<endpoint_id>
+dbname=neondb options=endpoint=[endpoint_id]
 ```
 
 ### C. Set verify-full for golang-based clients
@@ -72,7 +72,7 @@ If your application or service uses golang Postgres clients like `pgx` and `lib/
 
 ### D. Specify the endpoint ID in the password field
 
-Another supported workaround involves specifying the endpoint ID in the password field. So, instead of specifying only your password, you provide a string consisting of the `endpoint` option and your password, separated by a semicolon (`;`) or dollar sign character (`$`), as shown in the examples below. Replace `<endpoint_id>` with your compute's endpoint ID, which you can find in your Neon connection string. An `endpoint_id` looks similar to this: `ep-mute-recipe-123456`.
+Another supported workaround involves specifying the endpoint ID in the password field. So, instead of specifying only your password, you provide a string consisting of the `endpoint` option and your password, separated by a semicolon (`;`) or dollar sign character (`$`), as shown in the examples below. Replace `[endpoint_id]` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
 ```txt
 endpoint=<endpoint_id>;<password>
@@ -129,7 +129,7 @@ Check your connection to see if it is defined correctly. Your Neon connection st
 <CodeBlock shouldWrap>
 
 ```text
-postgres://daniel:f98wh99w398h@ep-white-morning-123456.us-east-2.aws.neon.tech/neondb
+postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 </CodeBlock>
@@ -188,4 +188,4 @@ Prisma Migrate requires a direct connection to the database. It does not support
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

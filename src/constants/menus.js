@@ -170,10 +170,14 @@ export default {
           text: 'Subprocessors List',
           to: LINKS.subprocessors,
         },
-        // {
-        //   text: 'Privacy Guide',
-        //   to: LINKS.privacyGuide,
-        // },
+        {
+          text: 'Privacy Guide',
+          to: LINKS.privacyGuide,
+        },
+        {
+          text: 'Cookie Policy',
+          to: LINKS.cookiePolicy,
+        },
       ],
     },
   ],

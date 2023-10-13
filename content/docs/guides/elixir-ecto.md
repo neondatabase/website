@@ -2,7 +2,7 @@
 title: Connect from Elixir with Ecto to Neon
 subtitle: Set up a Neon project in seconds and connect from Elixir with Ecto
 enableTableOfContents: true
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-06T17:44:14.690Z'
 ---
 
 This guide describes how to connect from an Elixir application with Ecto, which is a database wrapper and query generator for Elixir. Ecto provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
@@ -37,7 +37,7 @@ You can obtain the connection string for the database from the **Connection Deta
 <CodeBlock shouldWrap>
 
 ```bash
-postgres://<user>:<password>@ep-billowing-sun-767748.us-west-2.aws.neon.tech/friends
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/friends
 ```
 
 </CodeBlock>
@@ -90,12 +90,12 @@ Follow these steps to complete the configuration:
     ```elixir
     config :friends, Friends.Repo,
       database: "friends",
-      username: "<user>",
-      password: "<password>",
-      hostname: "ep-billowing-sun-767748.us-west-2.aws.neon.tech",
+      username: "alex",
+      password: "AbC123dEf",
+      hostname: "ep-cool-darkness-123456.us-west-2.aws.neon.tech",
       ssl: true,
       ssl_opts: [
-        server_name_indication: 'ep-billowing-sun-767748.us-west-2.aws.neon.tech',
+        server_name_indication: 'ep-cool-darkness-123456.us-west-2.aws.neon.tech',
         verify: :verify_none
       ]
     ```
@@ -106,7 +106,7 @@ Follow these steps to complete the configuration:
     ssl_opts: [
       cacertfile: "/path/to/certfile.crt",
       verify: :verify_peer,
-      server_name_indication: to_charlist('ep-morning-sunset-123456.us-east-2.aws.neon.tech'),
+      server_name_indication: to_charlist('ep-cool-darkness-123456.us-west-2.aws.neon.tech'),
       customize_hostname_check: [
         # By default, Erlang does not support wildcard certificates. This function supports validating wildcard hosts
         match_fun: :public_key.pkix_verify_hostname_match_fun(:https)
@@ -126,7 +126,7 @@ Follow these steps to complete the configuration:
 
     Ecto uses the module definition to query the database. The `otp_app` setting tells Ecto where to find the database configuration. In this case, the `:friends` application is specified, so Ecto will use the configuration defined in the that application's `config/config.exs` file. The `:adapter` option defines the Postgres adapter.
 
-3. Next, the `Friends.Repo` must be defined as a supervisor within the application's supervision tree. In `lib/friends/application.ex`, make sure `Friends.Repo` is specified in the `start/2` function, as shown:
+3. Next, the `Friends.Repo` must be defined as a supervisor within the application's supervision tree. In `lib/friends/application.ex`, make sure `Friends.Repo` is specified in the `start` function, as shown:
 
     ```elixir
     def start(_type, _args) do
@@ -206,6 +206,14 @@ You can use the **Tables** feature in the Neon Console to view the table that wa
 1. Select **Tables** from the sidebar.
 1. Select the Branch, Database (`friends`), and the schema (`public`). You should see the `people` table along with a `schema_migration` table that was created by the migration.
 
+## Application code
+
+You can find the application code for the example above on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/neon-ecto-getting-started-app" description="Learn how to connect from Elixir with Ecto to Neon" icon="github">Neon Ecto Getting Started App</a>
+</DetailIconCards>
+
 ## Next steps
 
 The [Ecto Getting Started Guide](https://hexdocs.pm/ecto/getting-started.html#content) provides additional steps that you can follow to create a schema, insert data, and run queries. See [Creating the schema](https://hexdocs.pm/ecto/getting-started.html#creating-the-schema ) in the _Ecto Getting Started Guide_ to pick up where the steps in this guide leave off.
@@ -217,4 +225,4 @@ The [Ecto Getting Started Guide](https://hexdocs.pm/ecto/getting-started.html#co
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

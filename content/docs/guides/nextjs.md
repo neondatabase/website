@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2023-10-03T20:31:35.165Z'
+updatedOn: '2023-10-06T17:44:14.691Z'
 ---
 
 Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js application.
@@ -13,10 +13,9 @@ Next.js by Vercel is an open-source web development framework that enables React
 To create a Neon project and access it from a Next.js application:
 
 1. [Create a Neon project](#create-a-neon-project)
-2. [Create a Next.js project](#create-a-nextjs-project)
-3. [Add a Postgres client to your app](#add-a-postgresql-client-to-your-app)
-4. [Add your Neon connection details](#add-your-neon-connection-details)
-5. [Connect to the Neon database](#connect-to-the-neon-database)
+2. [Create a Next.js project and add dependencies](#create-a-nextjs-project-and-add-dependencies)
+3. [Configure a Postgres client](#configure-the-postgres-client)
+4. [Run the app](#run-the-app)
 
 ## Create a Neon project
 
@@ -30,10 +29,10 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 1. Create a Next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app/setup), in the Vercel documentation.
 
-
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs labels={["node-postgres", "postgres.js"]}>
+    <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+
       ```shell
       npm install pg
       ```
@@ -41,114 +40,316 @@ If you do not have one already, create a Neon project. Save your connection deta
       ```shell
       npm install postgres
       ```
+      
+      ```shell
+      npm install @neondatabase/serverless
+      ```
+
     </CodeTabs>
-
-
 
 ## Store your Neon credentials
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-
 <CodeBlock shouldWrap>
 
 ```shell
-DATABASE_URL=postgres://<user>:<password>@ep-snowy-unit-550577.us-east-2.aws.neon.tech/neondb?options=endpoint%3Dep-snowy-unit-550577
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 </CodeBlock>
 
-## Configure the Postgres client 
+## Configure the Postgres client
 
-1. From your API handlers, add the following code snippet to connect to your Neon database:
+There a multiple ways to make server side requests with Next.js. See below for the different implementations.
 
-    <CodeTabs labels={["node-postgres", "postgres.js"]}>
-      ```javascript
-      import { Pool } from 'pg';
+### App Router
 
-      const pool = new Pool({
-        connectionString: process.env.DATABASE_URL,
-        ssl: {
-          require: true,
-        },
-      });
+From your server functions using the App Router, add the following code snippet to connect to your Neon database:
 
-      export default async function handler(req, res) {
-        const client = await pool.connect();
+<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-        try {
-          const response = await client.query('SELECT version()');
-          console.log(response.rows[0]);
-        } finally {
-          client.release();
-        }
-      }
+```javascript
+import { Pool } from 'pg';
 
-      ```
-      ```javascript
-      import postgres from 'postgres';
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
 
-      const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+async function getData() {
+  const client = await pool.connect();
 
-      export default async function handler(req, res) {
-        const response = await sql`select version()`;
-        console.log(response);
-      }
+  try {
+    const response = await client.query('SELECT version()');
+    console.log(response.rows[0]);
+    return response.rows[0];
+  } finally {
+    client.release();
+  }
+}
 
-      ```
-    </CodeTabs>
+export default async function Page() {
+  const data = await getData();
+}
+```
+
+```javascript
+import postgres from 'postgres';
+
+async function getData() {
+  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+
+  const response = await sql`SELECT version()`;
+  console.log(response);
+  return response;
+}
+
+export default async function Page() {
+  const data = await getData();
+}
+```
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+async function getData() {
+  const sql = neon(process.env.DATABASE_URL);
+
+  const response = await sql`SELECT version()`;
+  console.log(response);
+  return response;
+}
+
+export default async function Page() {
+  const data = await getData();
+}
+
+```
+
+</CodeTabs>
+
+### Pages Router
+
+There are two methods for fetching data using server-side requests in Next.js they are:
+
+1. `getServerSideProps` fetches data at runtime so that content is always fresh.
+2. `getStaticProps` pre-renders pages at build time for data that is static or changes infrequently.
+
+#### getServerSideProps
+
+From `getServerSideProps` using the Pages Router, add the following code snippet to connect to your Neon database:
+
+<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+
+```javascript
+import { Pool } from 'pg';
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+ssl: true
+});
+
+export async function getServerSideProps() {
+  const client = await pool.connect();
+
+  try {
+    const response = await client.query('SELECT version()');
+    console.log(response.rows[0]);
+    return { props: { data: response.rows[0] } };
+  } finally {
+    client.release();
+  }
+}
+
+export default function Page({ data }) {}
+```
+
+```javascript
+import postgres from 'postgres';
+
+export async function getServerSideProps() {
+  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+
+  const response = await sql`SELECT version()`;
+  console.log(response);
+  return { props: { data: response } };
+}
+
+export default function Page({ data }) {}
+```
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+export async function getServerSideProps() {
+  const sql = neon(process.env.DATABASE_URL);
+
+  const response = await sql`SELECT version()`;
+  console.log(response);
+  return { props: { data: response } };
+}
+
+export default function Page({ data }) {}
+```
+
+</CodeTabs>
+
+#### getStaticProps
+
+From `getStaticProps` using the Pages Router, add the following code snippet to connect to your Neon database:
+
+<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+
+```javascript
+import { Pool } from 'pg';
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+ssl: true
+});
+
+export async function getStaticProps() {
+  const client = await pool.connect();
+
+  try {
+    const response = await client.query('SELECT version()');
+    console.log(response.rows[0]);
+    return { props: { data: response.rows[0] } };
+  } finally {
+    client.release();
+  }
+}
+
+export default function Page({ data }) {}
+```
+
+```javascript
+import postgres from 'postgres';
+
+export async function getStaticProps() {
+  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+
+  const response = await sql`SELECT version()`;
+  console.log(response);
+  return { props: { data: response } };
+}
+
+export default function Page({ data }) {}
+```
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+export async function getServerSideProps() {
+  const sql = neon(process.env.DATABASE_URL);
+
+  const response = await sql`SELECT version()`;
+  console.log(response);
+  return { props: { data: response } };
+}
+
+export default function Page({ data }) {}
+```
+
+</CodeTabs>
 
 
-2. From your server functions, add the following code snippet to connect to your Neon database:
+### Serverless Functions
 
-    <CodeTabs labels={["node-postgres", "postgres.js"]}>
-      ```javascript
-      import { Pool } from 'pg';
+From your Serverless Functions, add the following code snippet to connect to your Neon database:
 
-      const pool = new Pool({
-        connectionString: process.env.DATABASE_URL,
-        ssl: {
-          require: true,
-        },
-      });
+<CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
-      export async function getServerSideProps() {
-        const client = await pool.connect();
+```javascript
+import { Pool } from 'pg';
 
-        try {
-          const response = await client.query('SELECT version()');
-          console.log(response.rows[0]);
-          return { props: { data: response.rows[0] } };
-        } finally {
-          client.release();
-        }
-      }
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+ssl: true
+});
 
-      export default function Page({ data }) {}
+export default async function handler(req, res) {
+  const client = await pool.connect();
 
-      ```
-      ```javascript
-      import postgres from 'postgres';
+  try {
+    const response = await client.query('SELECT version()');
+    console.log(response.rows[0]);
 
-      export async function getServerSideProps() {
-        const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+    res.status(200).json({
+      data: response.rows[0]
+    })
 
-        const response = await sql`select version()`;
-        console.log(response);
-        return { props: { data: response } };
-      }
+  } finally {
+    client.release();
+  }
+}
+```
 
-      export default function Page({ data }) {}
+```javascript
+import postgres from 'postgres';
 
-      ```
-    </CodeTabs>
+const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+
+export default async function handler(req, res) {
+  const response = await sql`SELECT version()`;
+  console.log(response);
+
+  res.status(200).json({
+    data: response
+  })
+}
+```
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL);
+
+export default async function handler(req, res) {
+  const response = await sql`SELECT version()`;
+  console.log(response);
+
+  res.status(200).json({
+    data: response
+  })
+}
+```
+
+</CodeTabs>
+
+### Edge Functions
+
+From your Edge Functions, add the following code snippet and connect to your Neon database using the [Neon serverless driver](/docs/serverless/serverless-driver):
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL);
+
+export default async function handler(req, res) {
+  const response = await sql`SELECT version()`;
+  console.log(response)
+
+  return Response.json({
+    data: response,
+  });
+}
+
+export const config = {
+  runtime: 'edge',
+};
+```
+
 
 ## Run the app
 
-For API handlers, and server functions you can expect to see one of the following in your terminal output.
+When you run `npm run dev` you can expect to see one of the following in your terminal output:
+
+<CodeBlock shouldWrap>
 
 ```shell
-# node-postgres
+# node-postgres & Neon serverless driver
 
 {
   version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
@@ -163,7 +364,8 @@ Result(1) [
 ]
 ```
 
+</CodeBlock>
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.

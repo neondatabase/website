@@ -3,7 +3,7 @@ title: Use StepZen with Neon
 subtitle: Learn how to use StepZen to build a GraphQL API for your Neon database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-09-15T13:00:43Z'
+updatedOn: '2023-10-05T19:42:20.349Z'
 ---
 
 _This guide was contributed by Roy Derks from StepZen_
@@ -18,7 +18,7 @@ Before generating a GraphQL API, you must set up a Neon database, which you can 
 
 1. Sign in to Neon, or [sign up](/docs/get-started-with-neon/signing-up) if you do not yet have an account.
 2. [Create a project](/docs/get-started-with-neon/setting-up-a-project).
-3. [Create a database](/docs/manage/databases#create-a-database) or use the ready-to-use `neondb` database.
+3. [Create a database](/docs/manage/databases#create-a-database) or use the ready-to-use `dbname` database.
 
 You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**.
 
@@ -33,7 +33,7 @@ You can seed the database directly from the terminal by running the following `p
 <CodeBlock shouldWrap>
 
 ```bash
-psql postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb < init.sql
+psql postgres://[user]:[password]@[neon_hostname]/[dbname] < init.sql
 ```
 
 </CodeBlock>
@@ -81,9 +81,9 @@ Specify your data source with the `stepzen import` CLI. Answer the setup questio
 stepzen import postgresql
 
 ? What would you like your endpoint to be called? api/with-neon
-? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-raspy-cherry-95040071.us-east-2.aws.neon.tech:5432`)
-? What is your database name? YOUR_NEON_DATABASE (e.g., `neondb`)
-? What is the username? YOUR_NEON_USERNAME (e.g., `daniel`)
+? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432`)
+? What is your database name? YOUR_NEON_DATABASE (e.g., `dbname`)
+? What is the username? YOUR_NEON_USERNAME (e.g., `alex`)
 ? What is the password? [hidden] YOUR_NEON_PASSWORD
 ? Automatically link types based on foreign key relationships using @materializer
  (https://stepzen.com/docs/features/linking-types) Yes
