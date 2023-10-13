@@ -2,7 +2,7 @@
 title: Manage projects
 enableTableOfContents: true
 isDraft: false
-subtitle: Learn about Neon projects and how to manage them using either the Neon Console or the Neon API.
+subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
 updatedOn: '2023-10-06T17:44:14.705Z'
@@ -28,9 +28,11 @@ When you add a new project, Neon creates the following resources by default:
 
 ## About the Settings page
 
-Once you open a project, you can use the **Settings** page to manage that particular project and set any defaults.
+Once you open a project, you can use the **Settings** page to manage that particular project and configure any defaults.
 
-![Project Settings page](/public/docs/manage/settings_page.png)
+![Project Settings page](/docs/manage/settings_page.png)
+
+You can tab between these sections:
 
 - **General** &#8212; Change the name or ID of your project.
 - **Compute** &#8212; Set the default sizes for any new compute instances you create when branching.
@@ -40,7 +42,7 @@ Once you open a project, you can use the **Settings** page to manage that partic
 
 ## Basic actions
 
-Here are some of the basic actions you can take to add or manage projects:
+Here are some basic actions you can take to add or manage projects:
 - [Create a project](#Create-a-project)
 - [View projects](#view-projects)
 - [Change a project name](#change-the-name-of-your-project)
@@ -133,7 +135,7 @@ _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute e
 
 For [Free Tier](/docs/introduction/free-tier) users, Neon sets your compute size to a static shared 1 vCPU, with 1 GB of RAM for each branch (max 10 branches).
 
-[Pro plan](/docs/introduction/pro-plan) users have the flexibility to choose a compute size for each branch's compute endpoint individually. By default, new branches inherit the size you selected when you created the first branch in your project (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create a series of read-only replicas, where each replica typically requires less compute per branch.
+[Pro plan](/docs/introduction/pro-plan) users have the flexibility to choose a compute size for each branch's compute endpoint individually. By default, new branches inherit the compute endpoint size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create a series of read-only replicas, where each replica typically requires less compute per branch.
 
 To reset the default compute size, go to **Settings** > **Compute**.
 
@@ -144,7 +146,7 @@ You can choose from two options:
 
 _Example: default minimum and maximum autoscale settings_
 
-![Default autoscaling min and max](/public/docs/manage/default_autoscale.png)
+![Default autoscaling min and max](/docs/manage/default_autoscale.png)
 
 
 ### Configure history retention
@@ -156,7 +158,7 @@ To configure the history retention period for a project:
 1. Select a project in the Neon console.
 2. On the Neon **Dashboard**, select **Settings**.
 3. Select **Storage**.
-    ![History retention configuration](/public/docs/relnotes/history_retention.png)
+    ![History retention configuration](/docs/relnotes/history_retention.png)
 4. Use the slider to select the history retention period.
 5. Click **Save**.
 
