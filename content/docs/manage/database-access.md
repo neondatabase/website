@@ -198,7 +198,7 @@ GRANT readwrite TO readwrite_user1;
 
 ### Create a developer role
 
-This section describes how to create a "development" branch and grant developers full database access on the development branch. To accomplish this, we will create a `dev_users` role on the "parent" branch, create a "development branch", and then assign users to the `dev_users` role on the development branch.
+This section describes how to create a "development branch" and grant developers full database access on the development branch. To accomplish this, we will create a developer role on the "parent" branch, create a development branch, and then assign users to the developer role on the development branch.
 
 As you work through the steps in this scenario, it is important to remember that when you create a branch in Neon, you are creating a clone of the parent branch, which includes the roles and databases on the parent branch.
 
