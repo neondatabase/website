@@ -11,7 +11,9 @@ import { activities, performance, storage } from 'constants/pricing';
 import useClickOutside from 'hooks/use-click-outside';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
-import inputSearchIcon from '../images/input-search.svg';
+import activityIcon from '../images/activity.svg';
+import performanceIcon from '../images/performance.svg';
+import storageIcon from '../images/storage.svg';
 import Select from '../select';
 
 const COMPUTE_TIME_PRICE = 0.102;
@@ -25,6 +27,11 @@ const calculateStorageCost = (storageValue) =>
 const calculateComputeCost = (computeUnits, activeTime) =>
   computeUnits * activeTime * COMPUTE_TIME_PRICE * AVERAGE_DAYS_IN_MONTH;
 
+const icons = {
+  activity: activityIcon,
+  performance: performanceIcon,
+  storage: storageIcon,
+};
 const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems }) => {
   const performanceRef = useRef(null);
   const storageRef = useRef(null);
@@ -169,7 +176,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
         className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0"
         initial={{ opacity: windowWidth < 768 ? 1 : 0.3 }}
         animate={{
-          opacity: currentSectionIndex === 2 || windowWidth < 768 ? 1 : 0.3,
+          opacity: currentSectionIndex === 3 || windowWidth < 768 ? 1 : 0.3,
         }}
       >
         <div className="py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden">
@@ -185,21 +192,24 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
           </p>
 
           <ul className="mt-6 pt-7 border-t border-gray-new-15 flex flex-col gap-y-[18px]">
-            {Object.values(activeItems).map(({ title }) => (
-              <li className="flex items-center" key={title}>
-                <img
-                  className="mr-3.5 w-8 h-8"
-                  src={inputSearchIcon}
-                  alt=""
-                  loading="lazy"
-                  width={32}
-                  height={32}
-                />
-                <span className="text-lg font-medium leading-tight tracking-extra-tight">
-                  {title}
-                </span>
-              </li>
-            ))}
+            {Object.entries(activeItems).map(([key, value]) => {
+              const icon = icons[key];
+              return (
+                <li className="flex items-center" key={value.title}>
+                  <img
+                    className="mr-3.5 w-8 h-8"
+                    src={icon}
+                    alt=""
+                    loading="lazy"
+                    width={32}
+                    height={32}
+                  />
+                  <span className="text-lg font-medium leading-tight tracking-extra-tight">
+                    {value.title}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
           <div className="relative mt-8">
             <Button

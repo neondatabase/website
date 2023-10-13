@@ -24,7 +24,7 @@ export const performance = [
     unit: 1,
   },
   {
-    title: '5 CPU/ 20GB',
+    title: '5 CPU/ 20GB RAM',
     description: 'Starts from $0.0164/h',
     unit: 5,
   },

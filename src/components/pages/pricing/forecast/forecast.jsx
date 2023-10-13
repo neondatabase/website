@@ -56,7 +56,12 @@ const Forecast = () => {
 
   useEffect(() => {
     if (!animationStageInput) return;
-    animationStageInput.value = currentSectionIndex + 1;
+
+    if (currentSectionIndex === 3 && animationStageInput.value === 1) {
+      animationStageInput.value = 3;
+    } else {
+      animationStageInput.value = currentSectionIndex + 1;
+    }
 
     if (!firstSelectInput) return;
     firstSelectInput.value = getSelectedIndex(activeItems.activity.title, activities);
@@ -80,7 +85,7 @@ const Forecast = () => {
   useEffect(() => {
     const currentScrollTop = scrollY;
     const switchPointMultiplier = pageHeight < 975 ? SECTION_MIN_HEIGHT * 1 : pageHeight * 0.9;
-    const switchPoints = [...Array(4)].map(
+    const switchPoints = [...Array(5)].map(
       (_, index) => sectionRef.current.offsetTop + 130 + index * switchPointMultiplier - 200
     );
 
