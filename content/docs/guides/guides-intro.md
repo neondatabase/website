@@ -82,11 +82,11 @@ Branch data the same way you branch your code.
 
 <a href="/docs/guides/branching-neon-api" description="Create and manage branches with the Neon API" icon="split-branch">Branching with the API</a>
 
-<a href="(/docs/guides/branching-github-actions" description="Automate branching with GitHub Actions" icon="split-branch">Branching with GitHub Actions</a>
+<a href="/docs/guides/branching-github-actions" description="Automate branching with GitHub Actions" icon="split-branch">Branching with GitHub Actions</a>
 
-<a href="(/docs/guides/branch-refresh" description="Refresh a development branch with the Neon API" icon="split-branch">Refresh a branch</a>
+<a href="/docs/guides/branch-refresh" description="Refresh a development branch with the Neon API" icon="split-branch">Refresh a branch</a>
 
-<a href="(/docs/guides/branch-promote" description="Promote a branch to primary with the the Neon API" icon="split-branch">Promote a branch to primary</a>
+<a href="/docs/guides/branch-promote" description="Promote a branch to primary with the the Neon API" icon="split-branch">Promote a branch to primary</a>
 
 </DetailIconCards>
 
