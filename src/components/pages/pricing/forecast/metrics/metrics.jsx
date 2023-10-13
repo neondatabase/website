@@ -92,7 +92,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
         <span className="text-green-45 font-medium leading-none -tracking-extra-tight">
           Activity
         </span>
-        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5">
+        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
           How active your users?
         </h3>
         <ul className="mt-7 grid gap-y-5 lg:mt-5">
@@ -128,7 +128,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
         <span className="text-yellow-70 leading-none font-medium -tracking-extra-tight">
           Performance
         </span>
-        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5">
+        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
           What peak performance is needed for your app?
         </h3>
         <Select
@@ -156,7 +156,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
         }}
       >
         <span className="text-blue-80 leading-none font-medium -tracking-extra-tight">Storage</span>
-        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5">
+        <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
           How much storage is required?
         </h3>
 
@@ -187,7 +187,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
         <div className="py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden lg:px-6 lg:py-6">
           <p className="font-medium -tracking-extra-tight leading-none">Estimated price</p>
           <p className="mt-6">
-            <span className="text-6xl text-green-45 leading-none font-light tracking-[-0.06em]">
+            <span className="text-6xl text-green-45 leading-none font-light tracking-[-0.06em] md:text-5xl">
               ${totalCost}
             </span>
             <span className="tracking-[-0.06em] text-2xl leading-none inline-block ml-1">/ mo</span>
@@ -196,20 +196,20 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
             The price calculated for Ohio region
           </p>
 
-          <ul className="mt-6 pt-7 border-t border-gray-new-15 flex flex-col gap-y-[18px]">
+          <ul className="mt-6 pt-7 border-t border-gray-new-15 flex flex-col gap-y-[18px] sm:gap-y-4">
             {Object.entries(activeItems).map(([key, value]) => {
               const icon = icons[key];
               return (
                 <li className="flex items-center" key={value.title}>
                   <img
-                    className="mr-3.5 w-8 h-8"
+                    className="mr-3.5 w-8 h-8 sm:w-7 sm:h-7"
                     src={icon}
                     alt=""
                     loading="lazy"
                     width={32}
                     height={32}
                   />
-                  <span className="text-lg font-medium leading-tight tracking-extra-tight">
+                  <span className="text-lg font-medium leading-tight tracking-extra-tight sm:text-base">
                     {value.title}
                   </span>
                 </li>
