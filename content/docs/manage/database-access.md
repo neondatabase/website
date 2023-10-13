@@ -25,7 +25,7 @@ In the instructions that follow, we'll grant privileges to roles, and then assig
 
 ## Creating roles with limited access
 
-You can create roles with limited access permissions in Neon via SQL. Roles created with SQL are created with the same basic [public role privileges](#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object.
+You can create roles with limited access permissions in Neon via SQL. Roles created with SQL are created with the same basic [public schema privileges](#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object.
 
 The recommended approach to creating roles with limited access permissions in Neon is as follows:
 
