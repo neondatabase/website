@@ -196,13 +196,17 @@ CREATE USER readwrite_user2 WITH PASSWORD '<password>';
 GRANT readwrite TO readwrite_user1;
 ```
 
-## Role management with Neon branching
+## Create a developer role in a branching context
 
-When you create a branch in Neon, you are creating a clone of the parent branch, which includes roles and databases on the parent branch. If you want to create a "development" branch and provide developers with access to the database on the development branch, you can follow these steps:
+This section describes how to create a "development" branch and grant developers full database access on the development branch. To accomplish this, we will create a `dev_users` role on the "parent" branch, create a "development branch", and then assign users to the `dev_users` role on the development branch.
+
+As you work through the steps in this scenario, it is important to remember that when you create a branch in Neon, you are creating a clone of the parent branch, which includes the roles and databases on the parent branch.
+
+To get started:
 
 1. Connect to your database from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
 
-2. Use your default Neon role or another role with `neon_superuser` privileges to create a developer role **on the parent branch**. For example, create a role named `dev_user`.
+2. Use your default Neon role or another role with `neon_superuser` privileges to create a developer role **on the parent branch**. For example, create a role named `dev_users`.
 
     ```sql
     CREATE ROLE dev_users PASSWORD `password`;
@@ -210,15 +214,15 @@ When you create a branch in Neon, you are creating a clone of the parent branch,
 
     The password must have 60 bits of entropy (at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters). For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
-2. Grant the `dev_user` role privileges on the database:
+2. Grant the `dev_users` role privileges on the database:
 
     ```sql
     GRANT ALL PRIVILEGES ON DATABASE <database> TO dev_users;
     ```
 
-    You now have a `dev_user` role on your parent branch, and the role is not assigned to any users. This role will now be included in all future branches created from this branch.
+    You now have a `dev_users` role on your parent branch, and the role is not assigned to any users. This role will now be included in all future branches created from this branch.
 
-3. Create a development branch. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions. This branch will include the `dev_user` role you just defined.
+3. Create a development branch. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions. This branch will include the `dev_users` role you just defined.
 
 4. Connect to the database **on the new branch** with an SQL client. Be mindful that a child branch connection string differs from a parent branch connection string. They reside on different hosts. If you need help connecting to your branch, see [Connect from any client](/docs/connect/connect-from-any-app).
 
