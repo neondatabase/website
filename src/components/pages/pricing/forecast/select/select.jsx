@@ -96,26 +96,21 @@ const Select = ({
                   },
                 }}
               >
-                {items.map((item) => {
-                  const value = item.description
-                    .replace(/\/ GiB-hour/g, '/h')
-                    .replace('Starts from', '≥');
-                  return (
-                    <li className="group" key={item.title}>
-                      <button
-                        className={clsx(
-                          'relative z-10 py-[15px] w-full border-t border-gray-new-15 flex items-center justify-between px-6 text-[15px] duration-200 transition-colors group-last:rounded-b-[10px] group-last:border-t-gray-new-15/60 hover:bg-white hover:bg-opacity-[3%]',
-                          activeItem.title === item.title && 'bg-white bg-opacity-[3%]'
-                        )}
-                        type="button"
-                        onClick={() => onSelect(type, item)}
-                      >
-                        <h4 className="leading-tight">{item.title}</h4>
-                        <p className="text-gray-new-70 font-light leading-tight">{value}</p>
-                      </button>
-                    </li>
-                  );
-                })}
+                {items.map((item) => (
+                  <li className="group" key={item.title}>
+                    <button
+                      className={clsx(
+                        'relative z-10 py-[15px] w-full border-t border-gray-new-15 flex items-center justify-between px-6 text-[15px] duration-200 transition-colors group-last:rounded-b-[10px] group-last:border-t-gray-new-15/60 hover:bg-white hover:bg-opacity-[3%]',
+                        activeItem.title === item.title && 'bg-white bg-opacity-[3%]'
+                      )}
+                      type="button"
+                      onClick={() => onSelect(type, item)}
+                    >
+                      <h4 className="leading-tight">{item.title}</h4>
+                      <p className="text-gray-new-70 font-light leading-tight">{item.type}</p>
+                    </button>
+                  </li>
+                ))}
               </m.ul>
             ) : null}
           </AnimatePresence>

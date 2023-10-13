@@ -111,7 +111,7 @@ const Forecast = () => {
         <div className="col-end-12 col-span-4 -ml-10">
           <div>
             <p className="text-lg leading-snug font-light mt-4 max-w-[255px]">
-              Need an additional help or custom volume-based plans
+              Need an additional help or custom volume-based plans?
             </p>
             <Link
               className="mt-3.5 py-[7px] px-3 text-[15px] border border-green-45 rounded-[50px] inline-flex items-baseline leading-none text-green-45 tracking-extra-tight"

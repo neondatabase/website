@@ -16,40 +16,44 @@ export const activities = [
   },
 ];
 
-// @TODO: Replace with real data
 export const performance = [
   {
     title: '1 CPU, 4GB RAM',
-    description: 'Starts from $0.0082/h',
+    description: 'Small business, non-profit, personal blogs',
+    type: 'Simple static sites',
     unit: 1,
   },
   {
     title: '5 CPU/ 20GB RAM',
-    description: 'Starts from $0.0164/h',
+    description: 'CRM, Social media, Travel booking',
+    type: 'Dynamic SaaS applications',
     unit: 5,
   },
   {
     title: '7 CPU/ 28GB RAM',
-    description: 'Starts from $0.0328/h',
+    description: 'Crypto, banking, data sciences',
+    type: 'Data heavy applications',
     unit: 7,
   },
 ];
 
-// @TODO: Replace with real data
 export const storage = [
   {
     title: '1GB',
-    description: 'Starts from $0.000164 / GiB-hour',
+    description: 'Small business, non-profit, personal blogs',
+    type: 'Simple static sites',
     unit: 1,
   },
   {
     title: '100 GB',
-    description: 'Starts from $0.00164 / GiB-hour',
+    description: 'CRM, Social media, Travel booking',
+    type: 'Dynamic SaaS applications',
     unit: 100,
   },
   {
     title: '1 TB',
-    description: 'Starts from $0.0164 / GiB-hour',
+    description: 'Crypto, banking, data sciences',
+    type: 'Data heavy applications',
     unit: 1000,
   },
 ];
