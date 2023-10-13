@@ -1,11 +1,11 @@
 ---
-title: Manage roles and database access
-subtitle: Learn how to manage roles and database access in Neon
+title: Manage database access
+subtitle: Learn how to manage database access in Neon
 enableTableOfContents: true
 updatedOn: '2023-09-15T13:00:43Z'
 ---
 
-This guide describes how to manage roles and database access in Neon.
+This guide describes how to manage database access in Neon.
 
 ## Understanding roles in Neon
 
