@@ -111,7 +111,7 @@ console.log(response);
 
 ## Run the app
 
-When your run `npm run dev` you can expect to see one of the following in your terminal output:
+When you run `npm run dev` you can expect to see one of the following in your terminal output:
 
 <CodeBlock shouldWrap>
 
