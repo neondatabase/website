@@ -7,9 +7,9 @@ redirectFrom:
 updatedOn: '2023-09-15T13:00:43Z'
 ---
 
-Each Neon project is created with a default role that takes its name from your Neon account (the Google, GitHub, or partner account you registered with). This Postgres role owns the ready-to-use database (`neondb`) created in your project's primary branch. For example, if a user named "Alex" signs up for Neon with a Google account, the project is created with a default role named `alex`.
+Each Neon project is created with a default Postgres role that takes its name from your Neon account (the Google, GitHub, or partner account you registered with). For example, if a user named "Alex" signs up for Neon with a Google account, the project is created with a default role named `alex`.
 
-Your default Neon role is automatically assigned the `neon_superuser` role, which allows it to create databases, roles, and read and write data in all tables, views, sequences. Any user created with the Neon console, Neon API, or Neon CLI is also assigned the `neon_superuser` role. For more information, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
+The default Postgres role is automatically assigned the `neon_superuser` role, which allows it to create databases, roles, and read and write data in all tables, views, sequences. Any user created with the Neon console, Neon API, or Neon CLI is also assigned the `neon_superuser` role. For more information, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
 It is good practice to reserve `neon_superuser` roles for database administration tasks like creating roles and databases. For other users, we recommend creating roles with specific sets of permissions based on application and access requirements. Then, assign the appropriate role to each user. The roles you create should adhere to a _least privilege_ model for accessing database objects, granting only the permissions required to accomplish their tasks.
 
@@ -17,15 +17,9 @@ But how do you create roles with limited access? The following sections will sho
 
 ## A word about users, groups, and roles in Postgres
 
-Before you proceed, it is helpful to understand how Postgres manages users, groups, and roles.
-
 In Postgres, users, groups, and roles are the same thing, while other relational database management systems often define these as separate entities. From Postgres [Database Roles and Privileges](https://www.postgresql.org/docs/current/user-manag.html) documentation:
 
-_"PostgreSQL manages database access permissions using the concept of roles. A role can be thought of as either a database user, or a group of database users, depending on how the role is set up. Roles can own database objects (for example, tables and functions) and can assign privileges on those objects to other roles to control who has access to which objects. Furthermore, it is possible to grant membership in a role to another role, thus allowing the member role to use privileges assigned to another role.
-
-The concept of roles subsumes the concepts of “users” and “groups”. In PostgreSQL versions before 8.1, users and groups were distinct kinds of entities, but now there are only roles. Any role can act as a user, a group, or both."_
-
-With that out of the way, let's get started.
+_PostgreSQL manages database access permissions using the concept of roles. A role can be thought of as either a database user, or a group of database users, depending on how the role is set up._
 
 ## Creating roles with limited access
 
@@ -203,8 +197,6 @@ To create a read-write role:
 
 To create the read-only role and user described above, run the following statements from an SQL client:
 
-<CodeBlock shouldWrap>
-
 ```sql
 -- readwrite role
 CREATE ROLE readwrite;
@@ -221,8 +213,6 @@ CREATE USER readwrite_user2 WITH PASSWORD '<password>';
 -- Grant privileges to user
 GRANT readwrite TO readwrite_user1;
 ```
-
-</CodeBlock>
 
 ## Role management with Neon branching
 
