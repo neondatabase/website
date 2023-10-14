@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 Liquibase is an open-source database-independent library for tracking, managing and applying database schema changes. To learn more about Luquibase, please refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
-This guide steps you through downloading and installing the Liquibase CLI, configuring Liquibase to connect to your Neon database, creating and deploying a database schema change, and rolling back a schema change. We'll also take a look a developer workflow that uses Liquibase with Neon's branching feature. The workflow involves making schema changes on a database development branch and apply the changes back to the database on your main branch.
+This guide steps you through installing the Liquibase CLI, configuring Liquibase to connect to your Neon database, creating and deploying a database schema change, and rolling back a schema change.
 
 ## Prerequisites
 

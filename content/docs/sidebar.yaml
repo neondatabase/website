@@ -186,7 +186,7 @@
           slug: guides/stepzen
         - title: WunderGraph
           slug: guides/wundergraph
-    - title: Database migrations
+    - title: Schema migrations
       items:
         - title: Liquibase
           slug: guides/liquibase
