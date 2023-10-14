@@ -4,15 +4,15 @@ subtitle: Learn how to manage schema changes in Neon using Liquibase
 enableTableOfContents: true
 ---
 
-Liquibase is an open-source database-independent library for tracking, managing and applying database schema changes. To learn more about Luquibase, please refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
+Liquibase is an open-source database-independent library for tracking, managing and applying database schema changes. To learn more about Luquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
-This guide steps you through installing the Liquibase CLI, configuring Liquibase to connect to your Neon database, creating and deploying a database schema change, and rolling back a schema change.
+This guide steps you through installing the Liquibase CLI, configuring Liquibase to connect to your Neon database, creating and deploying a database schema change on your Neon database, and rolling back the schema change.
 
 ## Prerequisites
 
 - A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- Liquibase requires Java. To check if you have Java installed, run `java --version`. If not, refer to the instructions for your operating system.
+- Liquibase requires Java. To check if you have Java installed, run `java --version`. If not, refer to the installation instructions for your operating system.
 
 ## Download and extract Liquibase
 
@@ -38,7 +38,7 @@ examples       lib                  liquibase    UNINSTALL.txt
 
 ## Set your path variable
 
-Sdd the Liquibase directory to your `PATH`. For example:
+Add the Liquibase directory to your `PATH`. For example:
 
 ```bash
 echo 'export PATH=$PATH:/path/to/liquibase' >> ~/.bashrc
@@ -110,26 +110,11 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
 
 ## Connect from Liquibase to your Neon database
 
-Update `liquibase.properties` text file to specify your `driver classpath`, `URL`, and user authentication information for your Neon database.
-
-```bash
-cd ~/liquibase
-touch liquibase.properties
-```
-
 Open the `liquibase.properties` file in an editor and add the following details, replacing the values with those from your own Neon database connection string:
 
 ```env
-changeLogFile:dbchangelog.xml  
-url:  jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
-username:  alex 
-password:  AbC123dEf
-classpath:  internal/lib/postgresql.jar
-```
-
-```env
 # Enter the path for your changelog file.
-changeLogFile=dbchangelog.xml
+changeLogFile=mychangelog.xml
 
 #### Enter the Target database 'url' information  ####
 liquibase.command.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
@@ -142,7 +127,7 @@ liquibase.command.password: AbC123dEf
 ```
 
 <Admonition type="note">
-To use Liquibase with PostgreSQL, you need the JDBC driver JAR file. The latest version of Liquibase includes this driver in the `liquibase/internal/lib` directory. The driver version is displayed when you run the `liquibase --version` command:
+Using Liquibase with PostgreSQL requires a JDBC driver JAR file. The latest version of Liquibase includes this driver in the `liquibase/internal/lib` directory and is used by default. The driver version is displayed when you run the `liquibase --version` command:
 
 ```bash
 liquibase --version
@@ -204,9 +189,9 @@ You’ll get a changelog for your database that looks something like this:
 
 ## Create a database schema change
 
-Now you can start to make database changes by creating your first changeset in your `dbchangelog.xml` changelog:
+Now, you can start to make database changes by creating your first changeset:
 
-1. Create a `dbchangelog.xml` file:
+1. Create a changelog file:
 
 ```bash
 cd ~/liquibase

@@ -1,18 +1,18 @@
 ---
 title: Liquibase developer workflow with Neon
-subtitle: Implement a developer workflow for schema changes using Liquibase and Neon branching
+subtitle: Implement a developer workflow for schema changes with Liquibase and Neon branching
 enableTableOfContents: true
 ---
 
-Liquibase is an open-source database-independent library for tracking, managing and applying database schema changes. To learn more about Luquibase, please refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
+Liquibase is an open-source database-independent library for tracking, managing and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
-This guide shows you how to set up a developer workflow that uses Liquibase with Neon's branching feature. The workflow involves making schema changes on a target development database branch and apply the changes back to the source database on your main branch in Neon.
+This guide shows you how to set up a developer workflow that uses Liquibase with Neon's branching feature. The workflow involves making schema changes on a target development database branch and applying the changes back to the source database on your main branch in Neon.
 
 ## Prerequisites
 
 - A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- Liquibase requires Java. To check if you have Java installed, run `java --version`. If not, refer to the instructions for your operating system.
+- Liquibase requires Java. To check if you have Java installed, run `java --version`. If not, refer to the installation instructions for your operating system.
 - An installation of Liquibase. For instructions, refer to [Manage schema changes with Liquibase](/docs/guides/liquibase) for installation instructions.
 
 ## Initialize a new Liquibase project
@@ -68,7 +68,7 @@ To create a branch:
 
 ## Retrieve your Neon database connection strings
 
-Retrieve connection strings for your target and source databases from the **Connection Details** widget on the Neon Dashboard.
+Retrieve connection strings for your target and source databases from the **Connection Details** widget on the Neon **Dashboard**.
 
 1. Select the `dev1` branch, the `blog` database, and copy the connection string.
 
@@ -230,7 +230,7 @@ touch dbchangelog.xml
 
 ### Apply changes to the target developer database
 
-Run `liquibase update` to apply the changes to the target developer database. Iterate until you are happy with the final state.
+Run `liquibase update` to apply the changes to the target developer database. Iterate until you are happy with the changes on your development database.
 
 ```bash
 liquibase update
@@ -256,11 +256,11 @@ Liquibase: Update has been successful. Rows affected: 1
 Liquibase command 'update' was executed successfully.
 ```
 
-### Understand database changes before saving and applying them
+### Review schema changes before saving and applying them
 
-It is a best practice to understand the changes before saving and applying them to the changelog, especially if someone else edited or created the changelog.
+It is a best practice to review schema changes before saving and applying them to your changelog.
 
-Running the following command to see if there are changesets that haven't been applied to the production database:
+Running the following command to see if there are changesets that haven't been applied to the source database:
 
 ```bash
 liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog status --verbose
@@ -408,7 +408,7 @@ Liquibase command 'diff' was executed successfully.
 
 ### Save your changelog to source control
 
- When you are satisfied with the changes that will be applied, save your changelog to source control.
+ When you are satisfied with the changes that will be applied, save your changelog to source control, such as a GitHub repository where you or your team stores you changelog.
 
 ### Apply the new changeset to your source database
 
@@ -442,7 +442,7 @@ Liquibase command 'update' was executed successfully.
 
 </details>
 
-To ensure that all changes have been applied to the production database, you can rerun the `status`, `updatedSql`, and `diff` commands you ran above. You can also check your databases in the Tables view in the Neon console to verify that both databases now have a `comments` table.
+To ensure that all changes have been applied to the production database, you can rerun the `status`, `updatedSql`, and `diff` commands you ran above. After applying the change, there should be no differences. You can also check your databases in the **Tables** view in the Neon console to verify that both databases now have a `comments` table.
 
 ## References
 
