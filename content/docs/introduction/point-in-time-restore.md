@@ -1,6 +1,6 @@
 ---
 title: Point-in-time restore
-subtitle: Restore your data to previous state
+subtitle: Restore your data to a previous state
 enableTableOfContents: true
 updatedOn: '2023-09-15T20:02:38Z'
 ---
