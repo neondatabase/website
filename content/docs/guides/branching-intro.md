@@ -78,7 +78,7 @@ Learn how to refresh a branch or promote a branch to become your primary branch.
 
 ## Example applications
 
-Explore example applications that use branching.
+Explore example applications that use Neon's branching feature.
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/restore-neon-branch" description="A script to restore data to a previous state while preserving the connection configuration" icon="github">Restore a Neon database</a>
