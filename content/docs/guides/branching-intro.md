@@ -4,7 +4,7 @@ subtitle: Everything you need to get started with Neon's branching feature
 enableTableOfContents: true
 ---
 
-Find detailed information and instructions about Neon's branching feature and how you can integrate it with your development workflows.
+Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
 
 ## What is branching?
 
