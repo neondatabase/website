@@ -20,13 +20,17 @@ Learn about branching and how you can apply it in your development workflows.
 
 ## Automate branching
 
-Integrate branching into your CI/CD pipelines and workflows with the Neon API and CLI.
+Integrate branching into your CI/CD pipelines and workflows with the Neon API, CLI, GitHub Actions, and Githooks.
 
 <DetailIconCards>
 
 <a href="/docs/guides/branching-neon-api" description="Learn how to instantly create and manage branches with the Neon API" icon="split-branch">Branching with the Neon API</a>
 
 <a href="https://neon.tech/blog/database-branching-for-postgres-with-neon" description="Learn how to instantly create and manage branches with the Neon CLI" icon="split-branch">Branching with the Neon CLI</a>
+
+<a href="/docs/guides/branching-github-actions" description="Automate branching with Neon's GitHub Actions for branching" icon="split-branch">Branching with GitHub Actions</a>
+
+<a href="https://neon.tech/blog/automating-neon-branch-creation-with-githooks" description="Learn how to automating branch creation with Githooks" icon="split-branch">Branching with Githooks</a>
 
 </DetailIconCards>
 
