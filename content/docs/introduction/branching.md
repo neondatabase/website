@@ -9,7 +9,7 @@ updatedOn: '2023-09-06T14:36:02Z'
 
 <a id="branches-coming-soon/"></a>
 
-Neon allows you to instantly branch your data the same way you branch your code. You can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. 
+Neon allows you to instantly branch your data the same way you branch your code. You can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
 
 ## What is a branch?
 

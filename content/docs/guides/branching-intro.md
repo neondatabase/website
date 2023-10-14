@@ -58,7 +58,7 @@ Test potentially destructive or performance-impacting queries before your run th
 
 </DetailIconCards>
 
-## Point-in-time restore
+## Data recovery
 
 Create a branch from the past to recover lost data or track down issues.
 
