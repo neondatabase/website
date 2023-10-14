@@ -108,6 +108,7 @@
         - title: Auto-suspend
           slug: guides/auto-suspend-guide
         - title: Branching
+          slug: guides/branching-intro
           items: 
             - title: Branching — Point-in-time restore
               slug: guides/branching-pitr
