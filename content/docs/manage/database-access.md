@@ -9,40 +9,40 @@ updatedOn: '2023-09-15T13:00:43Z'
 
 Each Neon project is created with a default Postgres role that takes its name from your Neon account (the account you registered with). For example, if a user named "Alex" signs up for Neon, the project is created with a default role named `alex`.
 
-The default Postgres role is automatically assigned the `neon_superuser` role, which allows creating databases, roles, and reading and writing data in all tables, views, sequences. Any user created with the Neon console, Neon API, or Neon CLI is also assigned the `neon_superuser` role. For more information, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
+The default Postgres role is automatically assigned the [neon_superuser role](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, sequences. Any user created with the Neon console, Neon API, or Neon CLI is also assigned the `neon_superuser` role.
 
-It is good practice to reserve `neon_superuser` roles for database administration tasks like creating roles and databases. For other users, we recommend creating roles with specific sets of permissions based on application and access requirements. Then, assign the appropriate roles to you users. The roles you create should adhere to a _least privilege_ model, granting only the permissions required to accomplish their tasks.
+It is good practice to reserve `neon_superuser` roles for database administration tasks like creating roles and databases. For other users, we recommend creating roles with specific sets of permissions based on application and access requirements. Then, assign the appropriate roles to your users. The roles you create should adhere to a _least privilege_ model, granting only the permissions required to accomplish their tasks.
 
 But how do you create roles with limited access? The following sections describe how to create read-only and read-write roles and assign those roles to users. We'll also look at how to create a "developer" role and grant that role full access to a database on a development branch in a Neon project.
 
 ## A word about users, groups, and roles in Postgres
 
-In Postgres, users, groups, and roles are the same thing, while other relational database management systems often define these as separate entities. From the PostgreSQL [Database Roles and Privileges](https://www.postgresql.org/docs/current/user-manag.html) documentation:
+In Postgres, users, groups, and roles are the same thing. From the PostgreSQL [Database Roles](https://www.postgresql.org/docs/current/user-manag.html) documentation:
 
 _PostgreSQL manages database access permissions using the concept of roles. A role can be thought of as either a database user, or a group of database users, depending on how the role is set up._
 
 In the instructions that follow, we'll grant privileges to roles, and then assign those roles to database users.
 
-## Create roles with limited access
+## Creating roles with limited access
 
-You can create roles with limited access permissions in Neon via SQL. Roles created with SQL are created with the same basic [public schema privileges](#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object.
+You can create roles with limited access permissions in Neon via SQL. Roles created with SQL are created with the same basic [public schema privileges](#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the [neon_superuser role](/docs/manage/roles#the-neonsuperuser-role) role. They must be selectively granted permissions for each database object.
 
 The recommended approach to creating roles with limited access permissions in Neon is as follows:
 
 1. Use your  default Neon role or another role with `neon_superuser` privileges to create roles for each application or use case via SQL. For example, create `readonly` and `readwrite` roles.
 2. Grant privileges to those roles to allow access to database objects. For example, grant the `SELECT` privilege to a `readonly` role, or grant `SELECT`, `INSERT`, `UPDATE`, and `DELETE` privileges to a `readwrite` role.
 3. Create your database users. For example, create users named `readonly_user1` and `readwrite_user1`.
-4. Assign the `readonly` or `readwrite` role to those users to grant them the privileges associated with those roles. For example, assign the `readonly` role to `readonly_user1`, and `readwrite` to `readwrite_user1`.
+4. Assign the `readonly` or `readwrite` role to those users to grant them the privileges associated with those roles. For example, assign the `readonly` role to `readonly_user1`, and the `readwrite` role to `readwrite_user1`.
 
+<Admonition type="note">
 You can remove a role from a user at any time to revoke privileges. See [Revoke privileges](#revoke-privileges).
+</Admonition>
 
-## Create roles
+The following sections describes how to create roles in Neon via SQL and grant the roles access to database objects. In Postgres, access must be granted at the database, schema, and object level. For example, to grant access to a table, you must also grant access to the database and schema in which the table resides. If these access permissions are not defined, the role will not be able access the table.
 
-This section describes how to create roles in Neon via SQL and grant the roles access to database objects. Access must be granted at the database, schema, and object level. For example, to grant access to a table, you must also grant access to the database and schema in which the table resides. If these access permissions are not defined, the role will not be able access the table.
+## Create a read-only role
 
-The following sections describe how to create read-only and read-write roles with access to a specific database and schema. SQL statement summaries are provided at the end of each section.
-
-### Create a read-only role
+This section describes how to create a read-only role with access to a specific database and schema. An SQL statement summary is provided at the end.
 
 To create a read-only role:
 
@@ -54,7 +54,7 @@ To create a read-only role:
     CREATE ROLE readonly PASSWORD '<password>';
     ```
   
-    Neon requires specifying a password. Since this role will be used for privilege management, the `LOGIN` privilege is optional and not included. The password must have 60 bits of entropy (at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters). For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+    Neon requires specifying a password. The password must have 60 bits of entropy (at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters). For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
 3. Grant the `readonly` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
@@ -97,7 +97,7 @@ To create a read-only role:
 
     If the user attempts to perform an `INSERT`, `UPDATE`, or `DELETE` operation, a `permission denied` error is returned.
 
-#### SQL statement summary for a read-only role
+### SQL statement summary
 
 To create the read-only role and user described above, run the following statements from an SQL client:
 
@@ -116,13 +116,15 @@ CREATE USER readonly_user1 WITH PASSWORD '<password>';
 GRANT readonly TO readonly_user1;
 ```
 
-### Create a read-write role
+## Create a read-write role
+
+This section describes how to create a read-write role with access to a specific database and schema. An SQL statement summary is provided at the end.
 
 To create a read-write role:
 
 1. Connect to your database from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
 
-2. Create a `readwrite` role using the following statement. Neon requires specifying a password when creating a role with SQL. Since this is a shared role used for privilege management, the `LOGIN` privilege is optional and not included.
+2. Create a `readwrite` role using the following statement. Neon requires specifying a password when creating a role with SQL.
 
     ```sql
     CREATE ROLE readwrite PASSWORD '<password>';
@@ -175,7 +177,7 @@ To create a read-write role:
     dbname=> INSERT INTO <table_name> (col1, col2) VALUES (1, 2);
     ```
 
-#### SQL statement summary for a read-write role
+### SQL statement summary
 
 To create the read-write role and user described above, run the following statements from an SQL client:
 
@@ -196,15 +198,15 @@ CREATE USER readwrite_user2 WITH PASSWORD '<password>';
 GRANT readwrite TO readwrite_user1;
 ```
 
-### Create a developer role
+## Create a developer role
 
-This section describes how to create a "development branch" and grant developers full database access on the development branch. To accomplish this, we will create a developer role on the "parent" branch, create a development branch, and then assign users to the developer role on the development branch.
+This section describes how to create a "development branch" and grant developers full access on a database on the development branch. To accomplish this, we will create a developer role on the "parent" branch, create a development branch, and then assign users to the developer role on the development branch.
 
 As you work through the steps in this scenario, it is important to remember that when you create a branch in Neon, you are creating a clone of the parent branch, which includes the roles and databases on the parent branch.
 
 To get started:
 
-1. Connect to your database from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
+1. Connect to your database **on the parent branch** from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
 
 2. Use your default Neon role or another role with `neon_superuser` privileges to create a developer role **on the parent branch**. For example, create a role named `dev_users`.
 
@@ -222,11 +224,11 @@ To get started:
 
     You now have a `dev_users` role on your parent branch, and the role is not assigned to any users. This role will now be included in all future branches created from this branch.
 
-3. Create a development branch. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions. This branch will include the `dev_users` role you just defined.
+3. Create a development branch. Name it something like `dev1`. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions. This branch and all future development branches you create from the parent branch will include the `dev_users` role you just defined.
 
-4. Connect to the database **on the new branch** with an SQL client. Be mindful that a child branch connection string differs from a parent branch connection string. They reside on different hosts. If you need help connecting to your branch, see [Connect from any client](/docs/connect/connect-from-any-app).
+4. Connect to the database **on the development branch** with an SQL client. Be mindful that a child branch connection string differs from a parent branch connection string. They reside on different hosts. If you need help connecting to your branch, see [Connect from any client](/docs/connect/connect-from-any-app).
 
-4. After connected the database on your new branch, create a developer user. The password requirements described above apply here as well.
+4. After connecting the database on your new branch, create a developer user (e.g., `dev_user1`). The password requirements described above apply here as well.
 
     ```sql
     CREATE ROLE dev_user1 WITH LOGIN PASSWORD '<password>';
@@ -249,7 +251,7 @@ To get started:
     dbname=> 
     ```
 
-#### SQL statement summary for a developer role
+### SQL statement summary
 
 ```sql
 -- dev_users role
@@ -265,7 +267,7 @@ GRANT dev_users TO dev_user1;
 
 ## Revoke privileges
 
-You can revoke privileges by removing assigned roles. For example, to remove the `readwrite` role from `readwrite_user1`, run the following SQL statement:
+If you set up roles as describe above, you can revoke privileges by removing assigned roles. For example, to remove the `readwrite` role from `readwrite_user1`, run the following SQL statement:
 
 ```sql
 REVOKE readwrite FROM readwrite_user1;
@@ -273,9 +275,9 @@ REVOKE readwrite FROM readwrite_user1;
 
 ## Public schema privileges
 
-Postgres 15 introduced changes regarding privileges on the `public` schema. When creating a new database, Postgres creates a schema named `public` in the database and permits access to the schema to a predefined Postgres role named `public`. Newly created roles in Postgres are automatically assigned the `public` role. In Postgres 14, the public role had `CREATE` and `USAGE` privileges on the `public` schema. In Postgres 15 and higher, the `public` role no longer has `CREATE` privileges on the public schema.
+Postgres 15 introduced changes to default privileges on the `public` schema. When creating a new database, Postgres creates a schema named `public` in the database and permits access to the schema to a predefined Postgres role named `public`. Newly created roles in Postgres are automatically assigned the `public` role. In Postgres 14, the public role had `CREATE` and `USAGE` privileges on the `public` schema. In Postgres 15 and higher, the `public` role no longer has `CREATE` privileges on the `public` schema.
 
-Postgres uses a concept known as a `search path`, which is essentially a list of schema names that Postgres checks in the absence of a qualified name for a database object. For example, if you run a `SELECT` query on a table named `mytable` without prefixing the schema name, Postgres searches for this table in the schemas listed in the search path, settling on the first match identified. The default search path includes the following schemas:
+Why does this matter? Postgres uses a concept known as a `search path`, which is essentially a list of schema names that Postgres checks in the absence of a qualified name for a database object. For example, if you run a `SELECT` query on a table named `mytable` without prefixing the schema name, Postgres searches for this table in the schemas listed in the search path, settling on the first match identified. The default search path includes the following schemas:
 
 ```sql
 dbname=> show search_path;
@@ -285,9 +287,9 @@ dbname=> show search_path;
 (1 row)
 ```
 
-The initial name `$user` is resolved to the name of the current user. If a schema with a name identical to the current user name does not exist, this positions the `public` schema as the default schema. Given this particular search path, creating a table without specifying a schema will not be successful unless the user is explicitly granted the `CREATE` privileges on the `public` schema.
+The initial name `$user` is resolved to the name of the current user. If a schema with a name identical to the current user name does not exist, this positions the `public` schema as the default schema. Given this particular search path, creating a table without specifying a schema will not be successful unless the user was explicitly granted the `CREATE` privilege on the `public` schema.
 
-Prior to Postgres 15, the default ability to create objects within the `public` schema can present issues in scenarios involving the creation of read-only users. Despite restricting all privileges, the permissions inherited through the `public` role could, prior to Postgres 15, inadvertently permit a user to create objects in the `public` schema. This issue is mitigated from Postgres 15 onwards, but it is important to understand and manage if you are using Postgres 14 or if you are using Postgres 15 and are puzzled by the change in behavior.
+Prior to Postgres 15, the default ability to create objects within the `public` schema can present issues when trying to set up up a read-only user role. Despite restricting all privileges, the permissions inherited through the `public` role could, prior to Postgres 15, inadvertently permit a user to create objects in the `public` schema. This issue is mitigated from Postgres 15 onwards, but it is important to understand and manage if you are using Postgres 14 or if you are using Postgres 15 and are puzzled by the change in behavior. Users of Postgres 15 and higher often expect newly created users to be able to create objects in the `public` schema of a database owned by another user, not realizing that this privilege must be granted explicitly.
 
 For users of Postgres 14, the SQL statement to revoke the default `CREATE` permission on the `public` schema from the `public` role is as follows:
 
@@ -297,7 +299,7 @@ REVOKE CREATE ON SCHEMA public FROM PUBLIC;
 
 Ensure that you are the owner of the `public` schema or a member of a role that authorizes you to execute this SQL statement.
 
-Furthermore, to restrict the `public` role’s capability to connect to the database, use this statement:
+Furthermore, to restrict the `public` role’s capability to connect to the database on any version of Postgres, use this statement:
 
 ```sql
 REVOKE ALL ON DATABASE <database> FROM PUBLIC;
