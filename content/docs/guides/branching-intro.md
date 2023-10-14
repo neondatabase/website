@@ -4,7 +4,7 @@ subtitle: Everything you need to get started with Neon's branching feature
 enableTableOfContents: true
 ---
 
-Find detailed information and instructions about Neon's branching feature and how you can integrate it with your development workflows and processes.
+Find detailed information and instructions about Neon's branching feature and how you can integrate it with your development workflows.
 
 ## What is branching?
 
@@ -44,6 +44,8 @@ Create a branch for each preview deployment with the Neon-Vercel Integration.
 
 <a href="https://neon.tech/blog/database-branching-for-postgres-with-neon" description="Read about full-stack preview deployments using the Neon Vercel Integration" icon="split-branch">Preview deployments with Vercel</a>
 
+<a href="https://neon.tech/blog/branching-with-preview-environments" description="Create a database for every preview environment with Neon, GitHub Actions, and Vercel" icon="split-branch">A database for every preview</a>
+
 </DetailIconCards>
 
 ## Test queries
@@ -58,7 +60,7 @@ Test potentially destructive or performance-impacting queries before your run th
 
 ## Point-in-time restore
 
-Instantly recover lost data or track down issues with point-in-time branches.
+Create a branch from the past to recover lost data or track down issues.
 
 <DetailIconCards>
 
@@ -89,4 +91,5 @@ Explore example applications that use Neon's branching feature.
 <a href="https://github.com/kelvich/branching_demo_bisect" description="Use Neon branching, the Neon API, and a bisect script to recover lost data" icon="github">Neon branch bisect demo</a>
 <a href="https://github.com/neondatabase/neon_twitter" description="An application that uses GitHub Actions to create and delete a branch with each pull request" icon="github">Neon Twitter app</a>
 <a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with preview deployments in Vercel" icon="github">Preview branches app</a>
+<a href="https://github.com/tinkertim/neon_branching_demo" description="Learn how to build a Discord bot while leveraging Neon branching" icon="github">Neon Discord Bot</a>
 </DetailIconCards>
