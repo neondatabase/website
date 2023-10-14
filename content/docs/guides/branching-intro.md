@@ -12,7 +12,7 @@ Learn about branching and how you can apply it in your development workflows.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/branching" description="Learn about Neon's branching feature and you can use it in your development workflows" icon="split-branch">Learn about branching</a>
+<a href="/docs/introduction/branching" description="Learn about Neon's branching feature and how to use it in your development workflows" icon="branching">Learn about branching</a>
 
 <a href="https://neon.tech/blog/database-branching-for-postgres-with-neon" description="Read about how Neon's branching feature works and what it means for your workflows" icon="split-branch">Data branching for Postgres</a>
 
@@ -24,9 +24,9 @@ Integrate branching into your CI/CD pipelines and workflows with the Neon API, C
 
 <DetailIconCards>
 
-<a href="/docs/guides/branching-neon-api" description="Learn how to instantly create and manage branches with the Neon API" icon="split-branch">Branching with the Neon API</a>
+<a href="/docs/guides/branching-neon-api" description="Learn how to instantly create and manage branches with the Neon API" icon="transactions">Branching with the Neon API</a>
 
-<a href="/docs/guides/branching-neon-cli" description="Learn how to instantly create and manage branches with the Neon CLI" icon="split-branch">Branching with the Neon CLI</a>
+<a href="/docs/guides/branching-neon-cli" description="Learn how to instantly create and manage branches with the Neon CLI" icon="cli">Branching with the Neon CLI</a>
 
 <a href="/docs/guides/branching-github-actions" description="Automate branching with Neon's GitHub Actions for branching" icon="split-branch">Branching with GitHub Actions</a>
 
@@ -54,7 +54,7 @@ Test potentially destructive or performance-impacting queries before your run th
 
 <DetailIconCards>
 
-<a href="/docs/guides/branching-test-queries" description="Instantly create a branch to test queries before running them in production" icon="split-branch">Branching — Testing queries</a>
+<a href="/docs/guides/branching-test-queries" description="Instantly create a branch to test queries before running them in production" icon="queries">Branching — Testing queries</a>
 
 </DetailIconCards>
 
@@ -64,9 +64,9 @@ Create a branch from the past to recover lost data or track down issues.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/point-in-time-restore" description="Restore data to a previous state with Neon's point-in-time restore feature" icon="split-branch">Learn about point-in-time restore</a>
+<a href="/docs/introduction/point-in-time-restore" description="Restore data to a previous state with Neon's point-in-time restore feature" icon="screen">Learn about point-in-time restore</a>
 
-<a href="/docs/guides/branching-pitr" description="Learn how to restore your data to previous state using Neon's branching feature" icon="split-branch">Create a point-in-time branch</a>
+<a href="/docs/guides/branching-pitr" description="Learn how to restore your data to previous state using Neon's branching feature" icon="screen">Create a point-in-time branch</a>
 
 </DetailIconCards>
 

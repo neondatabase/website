@@ -74,7 +74,7 @@ Branch data the same way you branch your code.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/branching" description="With Neon you can instantly branch your data in the same way that you branch your code" icon="branching">Learn about branching</a>
+<a href="/docs/introduction/branching" description="With Neon, you can instantly branch your data in the same way that you branch your code" icon="branching">Learn about branching</a>
 
 <a href="/docs/guides/branching-pitr" description="Restore your data to a past state with database branching" icon="invert">Point-in-time restore</a>
 
