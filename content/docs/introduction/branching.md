@@ -1,5 +1,6 @@
 ---
 title: Branching
+subtitle: Branch your data the same way you branch your code
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/branches
@@ -9,7 +10,7 @@ updatedOn: '2023-09-06T14:36:02Z'
 
 <a id="branches-coming-soon/"></a>
 
-Neon allows you to instantly branch your data the same way you branch your code. You can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
+With Neon, you can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
 
 ## What is a branch?
 
@@ -69,16 +70,16 @@ Refer to the following guide for instructions.
 
 ### Data recovery
 
-If you lose data due to an unintended deletion or some other event, you can create a branch with data as it existed before the event occurred, allowing you to recover the lost data.
+If you lose data due to an unintended deletion or some other event, you can create a branch from the past to recover the lost data.
 
 ![data recovery branch](/docs/introduction/branching_data_loss.png)
+
+Refer to the following guides for instructions.
 
 <DetailIconCards>
 
 <a href="/docs/introduction/point-in-time-restore" description="Restore data to a previous state with Neon's point-in-time restore feature" icon="invert">Learn about point-in-time restore</a>
 
-<a href="/docs/guides/branching-pitr" description="Learn how to restore your data to previous state using Neon's branching feature" icon="screen">Create a branch from the past</a>
-
-<a href="https://neon.tech/blog/time-travel-with-postgres" description="Time travel with database branching to recover lost data" icon="screen">Time Travel Neon Branching</a>
+<a href="/docs/guides/branching-pitr" description="Learn how to restore your data to previous state with branching" icon="screen">Create a branch from the past</a>
 
 </DetailIconCards>
