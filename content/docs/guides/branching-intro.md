@@ -66,7 +66,9 @@ Create a branch from the past to recover lost data or track down issues.
 
 <a href="/docs/introduction/point-in-time-restore" description="Restore data to a previous state with Neon's point-in-time restore feature" icon="invert">Learn about point-in-time restore</a>
 
-<a href="/docs/guides/branching-pitr" description="Learn how to restore your data to previous state using Neon's branching feature" icon="screen">Create a point-in-time branch</a>
+<a href="/docs/guides/branching-pitr" description="Learn how to restore your data to previous state using Neon's branching feature" icon="screen">Create a branch from the past</a>
+
+<a href="https://neon.tech/blog/time-travel-with-postgres" description="Time travel with database branching to recover lost data" icon="screen">Time Travel Neon Branching</a>
 
 </DetailIconCards>
 
