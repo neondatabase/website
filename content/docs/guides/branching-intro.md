@@ -90,7 +90,7 @@ Explore example applications that use Neon's branching feature.
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/restore-neon-branch" description="A script to restore data to a previous state while preserving the connection configuration" icon="github">Restore a Neon database</a>
-<a href="https://github.com/kelvich/branching_demo_bisect" description="Use Neon branching, the Neon API, and a bisect script to recover lost data" icon="github">Neon branch bisect demo</a>
+<a href="https://github.com/kelvich/branching_demo_bisect" description="Use Neon branching, the Neon API, and a bisect script to recover lost data" icon="github">Time Travel Demo</a>
 <a href="https://github.com/neondatabase/neon_twitter" description="Use GitHub Actions to create and delete a branch with each pull request" icon="github">Neon Twitter app</a>
 <a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with preview deployments in Vercel" icon="github">Preview branches app</a>
 <a href="https://github.com/tinkertim/neon_branching_demo" description="Learn how to build a Discord bot while leveraging Neon branching" icon="github">Neon Discord Bot</a>
