@@ -44,7 +44,7 @@ Create a branch for each preview deployment with the Neon-Vercel Integration.
 
 <a href="https://neon.tech/blog/database-branching-for-postgres-with-neon" description="Read about full-stack preview deployments using the Neon Vercel Integration" icon="split-branch">Preview deployments with Vercel</a>
 
-<a href="https://neon.tech/blog/branching-with-preview-environments" description="Create a database for every preview environment with Neon, GitHub Actions, and Vercel" icon="split-branch">A database for every preview</a>
+<a href="https://neon.tech/blog/branching-with-preview-environments" description="Create a database for every preview environment with GitHub Actions, and Vercel" icon="split-branch">A database for every preview</a>
 
 </DetailIconCards>
 
