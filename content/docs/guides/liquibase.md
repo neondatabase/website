@@ -1,6 +1,6 @@
 ---
-title: Use Liquibase with Neon
-subtitle: Learn how to manage schema changes in Neon using Liquibase
+title: Get started with Liquibase and Neon
+subtitle: Learn how to manage schema changes with Liquibase and Neon
 enableTableOfContents: true
 ---
 

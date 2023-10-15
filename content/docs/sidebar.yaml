@@ -189,9 +189,11 @@
     - title: Schema migrations
       items:
         - title: Liquibase
-          slug: guides/liquibase
-        - title: Liquibase developer workflow
-          slug: guides/liquibase-workflow
+          items:
+             - title: Use Liquibase with Neon
+               slug: guides/liquibase
+             - title: Liquibase developer workflow
+               slug: guides/liquibase-workflow
     - title: Serverless
       items:
         - title: Neon serverless driver
