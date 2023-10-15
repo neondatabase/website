@@ -1,6 +1,6 @@
 ---
 title: Get started with Liquibase and Neon
-subtitle: Learn how to manage schema changes with Liquibase and Neon
+subtitle: Learn how to manage schema changes in Neon with Liquibase
 enableTableOfContents: true
 ---
 
@@ -58,20 +58,6 @@ Verify that the Liquibase installation was successful by running the following c
 
 ```bash
 liquibase --version
-/####################################################
-/##   _     _             _ _                      ##
-/##  | |   (_)           (_) |                     ##
-/##  | |    _  __ _ _   _ _| |__   __ _ ___  ___   ##
-/##  | |   | |/ _` | | | | | '_ \ / _` / __|/ _ \  ##
-/##  | |___| | (_| | |_| | | |_) | (_| \__ \  __/  ##
-/##  \_____/_|\__, |\__,_|_|_.__/ \__,_|___/\___|  ##
-/##              | |                               ##
-/##              |_|                               ##
-/##                                                ##
-/##  Get documentation at docs.liquibase.com       ##
-/##  Get certified courses at learn.liquibase.com  ##
-/##                                                ##
-/####################################################
 ...
 Liquibase Version: 4.24.0
 Liquibase Open Source 4.24.0 by Liquibase
@@ -126,6 +112,8 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
 
 Open the `liquibase.properties` file in an editor and update the Target database details with the values from your Neon database connection string. Please notice how the database URL is constructed for the JDBC connection. It differs somewhat from the connection string you copied from the Neon dashboard.
 
+<CodeBlock shouldWrap>
+
 ```env
 #### Enter the Target database 'url' information  ####
 liquibase.command.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
@@ -136,6 +124,8 @@ liquibase.command.username: alex
 # Enter the password for your Target database.
 liquibase.command.password: AbC123dEf
 ```
+
+</CodeBlock>
 
 <Admonition type="note">
 Using Liquibase with PostgreSQL requires a JDBC driver JAR file. Liquibase includes this driver in the `liquibase/internal/lib` directory and uses it by default. The driver version is displayed when you run the `liquibase --version` command:
