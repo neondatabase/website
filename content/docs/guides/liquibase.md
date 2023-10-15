@@ -4,7 +4,7 @@ subtitle: Learn how to manage schema changes in Neon using Liquibase
 enableTableOfContents: true
 ---
 
-Liquibase is an open-source database-independent library for tracking, managing and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
+Liquibase is an open-source library for tracking, managing and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
 This guide steps you through installing the Liquibase CLI, configuring Liquibase to connect to your Neon database, deploying a database schema change, and rolling back the schema change.
 
@@ -20,21 +20,21 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 2. Extract the Liquibase files. For example:
 
-```bash
-cd ~/Downloads
-mkdir ~/liquibase
-tar -xzvf liquibase-4.24.0.tar.gz -C ~/liquibase/
-```
+    ```bash
+    cd ~/Downloads
+    mkdir ~/liquibase
+    tar -xzvf liquibase-4.24.0.tar.gz -C ~/liquibase/
+    ```
 
 3. Open a command prompt to view your new directory:
 
-```bash
-cd ~/liquibase
-ls
-ABOUT.txt      GETTING_STARTED.txt  licenses     liquibase.bat
-changelog.txt  internal             LICENSE.txt  README.txt
-examples       lib                  liquibase    UNINSTALL.txt
-```
+    ```bash
+    cd ~/liquibase
+    ls
+    ABOUT.txt      GETTING_STARTED.txt  licenses     liquibase.bat
+    changelog.txt  internal             LICENSE.txt  README.txt
+    examples       lib                  liquibase    UNINSTALL.txt
+    ```
 
 ## Set your path variable
 
@@ -58,6 +58,20 @@ Verify that the Liquibase installation was successful by running the following c
 
 ```bash
 liquibase --version
+####################################################
+##   _     _             _ _                      ##
+##  | |   (_)           (_) |                     ##
+##  | |    _  __ _ _   _ _| |__   __ _ ___  ___   ##
+##  | |   | |/ _` | | | | | '_ \ / _` / __|/ _ \  ##
+##  | |___| | (_| | |_| | | |_) | (_| \__ \  __/  ##
+##  \_____/_|\__, |\__,_|_|_.__/ \__,_|___/\___|  ##
+##              | |                               ##
+##              |_|                               ##
+##                                                ##
+##  Get documentation at docs.liquibase.com       ##
+##  Get certified courses at learn.liquibase.com  ##
+##                                                ##
+####################################################
 ...
 Liquibase Version: 4.24.0
 Liquibase Open Source 4.24.0 by Liquibase
@@ -110,7 +124,7 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
 
 ## Connect from Liquibase to your Neon database
 
-Open the `liquibase.properties` file in an editor and update the Target database details, using the values from your Neon database connection string. Please notice how the database URL is constructed for the JDBC connection. It differs somewhat from the connection string you copied from the Neon dashboard, so be sure to define your JDBC URL correctly with the values from your Neon connection string.
+Open the `liquibase.properties` file in an editor and update the Target database details with the values from your Neon database connection string. Please notice how the database URL is constructed for the JDBC connection. It differs somewhat from the connection string you copied from the Neon dashboard.
 
 ```env
 #### Enter the Target database 'url' information  ####
@@ -136,11 +150,11 @@ liquibase --version
 Optionally, you can download a different version of the driver from [https://jdbc.postgresql.org/download/](https://jdbc.postgresql.org/download/) or from [Maven](https://mvnrepository.com/artifact/org.postgresql/postgresql). See [Adding and Updating Liquibase Drivers](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) for information about using a different driver version.
 </Admonition>
 
-## Take a snapshot of your existing database
+## Take a snapshot of your database
 
-After defining your database connection details, you can capture the current state of your database by creating a master Liquibase changelog file. Your master changelog file will also record all future changes made to your database.
+After defining your database connection details, you can capture the current state of your database by creating a master changelog file. Your master changelog file will also record all future changes to your database.
 
-Run this command to create your master changelog file:
+Run the [generateChangelog](https://docs.liquibase.com/commands/inspection/generate-changelog.html) command to create your master changelog file:
 
 ```bash
 liquibase --changeLogFile=mychangelog.xml generateChangeLog
@@ -188,7 +202,7 @@ You’ll get a changelog file for your database that looks something like this:
 
 ## Create a changeset
 
-Now, you can start making database changes by creating changesets. A changeset is the basic unit of change in Liquibase. You can append a changeset to your master changelog file or define it in its own file, as we do here.
+Now, you can start making database changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.htm). A changeset is the basic unit of change in Liquibase. You can append a changeset to your master changelog file or define it in its own file, as we do here.
 
 1. Create a changelog file for your changeset:
 
@@ -227,7 +241,7 @@ touch dbchangelog1.xml
 
 ## Deploy your change
 
-Deploy your changeset by running the `update` command like this:
+Deploy your changeset by running the [update](https://docs.liquibase.com/commands/update/update.html) command:
 
 ```bash
 liquibase update
