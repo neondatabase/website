@@ -1,5 +1,5 @@
 ---
-title: Manage schema changes with Liquibase
+title: Use Liquibase with Neon
 subtitle: Learn how to manage schema changes in Neon using Liquibase
 enableTableOfContents: true
 ---
@@ -58,20 +58,20 @@ Verify that the Liquibase installation was successful by running the following c
 
 ```bash
 liquibase --version
-####################################################
-##   _     _             _ _                      ##
-##  | |   (_)           (_) |                     ##
-##  | |    _  __ _ _   _ _| |__   __ _ ___  ___   ##
-##  | |   | |/ _` | | | | | '_ \ / _` / __|/ _ \  ##
-##  | |___| | (_| | |_| | | |_) | (_| \__ \  __/  ##
-##  \_____/_|\__, |\__,_|_|_.__/ \__,_|___/\___|  ##
-##              | |                               ##
-##              |_|                               ##
-##                                                ##
-##  Get documentation at docs.liquibase.com       ##
-##  Get certified courses at learn.liquibase.com  ##
-##                                                ##
-####################################################
+/####################################################
+/##   _     _             _ _                      ##
+/##  | |   (_)           (_) |                     ##
+/##  | |    _  __ _ _   _ _| |__   __ _ ___  ___   ##
+/##  | |   | |/ _` | | | | | '_ \ / _` / __|/ _ \  ##
+/##  | |___| | (_| | |_| | | |_) | (_| \__ \  __/  ##
+/##  \_____/_|\__, |\__,_|_|_.__/ \__,_|___/\___|  ##
+/##              | |                               ##
+/##              |_|                               ##
+/##                                                ##
+/##  Get documentation at docs.liquibase.com       ##
+/##  Get certified courses at learn.liquibase.com  ##
+/##                                                ##
+/####################################################
 ...
 Liquibase Version: 4.24.0
 Liquibase Open Source 4.24.0 by Liquibase
