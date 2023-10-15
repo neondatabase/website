@@ -4,9 +4,9 @@ subtitle: Learn how to manage schema changes in Neon using Liquibase
 enableTableOfContents: true
 ---
 
-Liquibase is an open-source database-independent library for tracking, managing and applying database schema changes. To learn more about Luquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
+Liquibase is an open-source database-independent library for tracking, managing and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
-This guide steps you through installing the Liquibase CLI, configuring Liquibase to connect to your Neon database, creating and deploying a database schema change on your Neon database, and rolling back the schema change.
+This guide steps you through installing the Liquibase CLI, configuring Liquibase to connect to your Neon database, deploying a database schema change, and rolling back the schema change.
 
 ## Prerequisites
 
@@ -110,12 +110,9 @@ postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
 
 ## Connect from Liquibase to your Neon database
 
-Open the `liquibase.properties` file in an editor and add the following details, replacing the values with those from your own Neon database connection string:
+Open the `liquibase.properties` file in an editor and update the Target database details, using the values from your Neon database connection string. Please notice how the database URL is constructed for the JDBC connection. It differs somewhat from the connection string you copied from the Neon dashboard, so be sure to define your JDBC URL correctly with the values from your Neon connection string.
 
 ```env
-# Enter the path for your changelog file.
-changeLogFile=mychangelog.xml
-
 #### Enter the Target database 'url' information  ####
 liquibase.command.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
 
@@ -127,7 +124,7 @@ liquibase.command.password: AbC123dEf
 ```
 
 <Admonition type="note">
-Using Liquibase with PostgreSQL requires a JDBC driver JAR file. The latest version of Liquibase includes this driver in the `liquibase/internal/lib` directory and is used by default. The driver version is displayed when you run the `liquibase --version` command:
+Using Liquibase with PostgreSQL requires a JDBC driver JAR file. Liquibase includes this driver in the `liquibase/internal/lib` directory and uses it by default. The driver version is displayed when you run the `liquibase --version` command:
 
 ```bash
 liquibase --version
@@ -136,18 +133,20 @@ liquibase --version
 ...
 ```
 
-Optionally, you can download a different version of the driver JAR file from [https://jdbc.postgresql.org/download/](https://jdbc.postgresql.org/download/) or from [Maven](https://mvnrepository.com/artifact/org.postgresql/postgresql). See [Adding and Updating Liquibase Drivers](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) for information about using a different driver.
+Optionally, you can download a different version of the driver from [https://jdbc.postgresql.org/download/](https://jdbc.postgresql.org/download/) or from [Maven](https://mvnrepository.com/artifact/org.postgresql/postgresql). See [Adding and Updating Liquibase Drivers](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) for information about using a different driver version.
 </Admonition>
 
 ## Take a snapshot of your existing database
 
-Capture the current state of your database by creating a deployable Liquibase changelog.
+After defining your database connection details, you can capture the current state of your database by creating a master Liquibase changelog file. Your master changelog file will also record all future changes made to your database.
+
+Run this command to create your master changelog file:
 
 ```bash
-liquibase --changeLogFile=mydatabase_changelog.xml generateChangeLog
+liquibase --changeLogFile=mychangelog.xml generateChangeLog
 ```
 
-You’ll get a changelog for your database that looks something like this:
+You’ll get a changelog file for your database that looks something like this:
 
 ```xml
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
@@ -187,18 +186,18 @@ You’ll get a changelog for your database that looks something like this:
 </databaseChangeLog>
 ```
 
-## Create a database schema change
+## Create a changeset
 
-Now, you can start to make database changes by creating your first changeset:
+Now, you can start making database changes by creating changesets. A changeset is the basic unit of change in Liquibase. You can append a changeset to your master changelog file or define it in its own file, as we do here.
 
-1. Create a changelog file:
+1. Create a changelog file for your changeset:
 
 ```bash
 cd ~/liquibase
-touch dbchangelog.xml
+touch dbchangelog1.xml
 ```
 
-2. Add the following changeset, which adds a `comments` table:
+2. Add the following changeset, which adds a `comments` table to your database:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>  
@@ -226,9 +225,9 @@ touch dbchangelog.xml
 </databaseChangeLog>
 ```
 
-## Deploy your database change
+## Deploy your change
 
-Deploy your database change by running the `update` command like this:
+Deploy your changeset by running the `update` command like this:
 
 ```bash
 liquibase update
@@ -243,7 +242,7 @@ If the command was successful, you’ll see output similar to the following:
 Starting Liquibase at 11:04:03 (version 4.24.0 #14062 built at 2023-09-28 12:18+0000)
 Liquibase Version: 4.24.0
 Liquibase Open Source 4.24.0 by Liquibase
-Running Changeset: dbchangelog.xml::myIDNumber1234::AlexL
+Running Changeset: dbchange1.xml::myIDNumber1234::AlexL
 
 UPDATE SUMMARY
 
@@ -261,7 +260,7 @@ Liquibase command 'update' was executed successfully.
 
 ## Rollback a change
 
-Try rolling back your last change by running the Liquibase `rollback` command:
+Try rolling back your last change by running the Liquibase [rollbackCount](https://docs.liquibase.com/commands/rollback/rollback-count.html) command:
 
 ```bash
 liquibase$ liquibase rollbackCount 1
@@ -284,7 +283,7 @@ Liquibase command 'rollbackCount' was executed successfully.
 
 ## Next steps
 
-Learn about how to use Liquibase with Neon's database branching feature to set up a developer workflow. See [Set up a developer workflow with Liquibase and Neon](/docs/guides/liquibase-workflow).
+Learn how to use Liquibase with Neon's database branching feature to set up a developer workflow. See [Set up a developer workflow with Liquibase and Neon](/docs/guides/liquibase-workflow).
 
 ## References
 
