@@ -281,7 +281,7 @@ When creating a new database, Postgres creates a schema named `public` in the da
 
 Why does this matter? If you create a new role and want to limit access for that role, you should be aware of the default `public` schema access automatically assigned to newly created roles.
 
-If you want to limit access to the `public` schema for your users, you will have to revoke privileges on the public schema explicitly.
+If you want to limit access to the `public` schema for your users, you have to revoke privileges on the `public` schema explicitly.
 
 For users of Postgres 14, the SQL statement to revoke the default `CREATE` permission on the `public` schema from the `public` role is as follows:
 
@@ -291,13 +291,13 @@ REVOKE CREATE ON SCHEMA public FROM PUBLIC;
 
 Ensure that you are the owner of the `public` schema or a member of a role that authorizes you to execute this SQL statement.
 
-To restrict the `public` role’s capability to connect to the database on any version of Postgres, use this statement:
+To restrict the `public` role’s capability to connect to a database, use this statement:
 
 ```sql
 REVOKE ALL ON DATABASE <database> FROM PUBLIC;
 ```
 
-This ensures users are unable to connect to the database by default unless this permission is explicitly granted.
+This ensures users are unable to connect to a database by default unless this permission is explicitly granted.
 
 ## More information
 
