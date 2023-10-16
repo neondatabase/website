@@ -34,7 +34,7 @@ Once you open a project, you can use the **Settings** page to manage that partic
 
 You can tab between these sections:
 
-- **General** &#8212; Change the name of your project or copy ID.
+- **General** &#8212; Change the name of your project or copy the project ID.
 - **Compute** &#8212; Set the default sizes for any new compute instances you create when branching.
 - **Storage** &#8212; Choose how long Neon maintains a history of changes for all branches.
 - **Sharing** &#8212; Let other users access your project's databases.
