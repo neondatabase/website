@@ -26,6 +26,6 @@ Sharing a project is performed from the **Settings** page in your Neon project.
   <source type="video/mp4" src="/docs/manage/project_sharing.mp4"/>
 </video>
 
-For step-by-step project sharing instructions, please refer to the [Project sharing guide](/docs/guides/project-sharing-guide).
+For step-by-step instructions, please refer to the [Project sharing guide](/docs/guides/project-sharing-guide).
 
-To manage access to a database within a Neon project or objects within a database, refer to [Manage database access](/docs/manage/database-access).
+To manage access to a database within a Neon project, refer to [Manage database access](/docs/manage/database-access).

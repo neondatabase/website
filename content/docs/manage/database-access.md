@@ -38,11 +38,13 @@ The recommended approach to creating roles with limited access is as follows:
 You can remove a role from a user at any time to revoke privileges. See [Revoke privileges](#revoke-privileges).
 </Admonition>
 
-The following sections describe how to create roles in Neon via SQL and grant those roles access to database objects. In Postgres, access must be granted at the database, schema, and object level. For example, to grant access to a table, you must also grant access to the database and schema in which the table resides. If these access permissions are not defined, the role will not be able access the table.
-
 ## Create a read-only role
 
 This section describes how to create a read-only role with access to a specific database and schema. An SQL statement summary is provided at the end.
+
+<Admonition type="info">
+In Postgres, access must be granted at the database, schema, and object level. For example, to grant access to a table, you must also grant access to the database and schema in which the table resides. If these access permissions are not defined, the role will not be able access the table.
+</Admonition>
 
 To create a read-only role:
 
@@ -200,13 +202,13 @@ GRANT readwrite TO readwrite_user1;
 
 ## Create a developer role
 
-This section describes how to create a "development branch" and grant developers full access on a database on the development branch. To accomplish this, we will create a developer role on the "parent" branch, create a development branch, and then assign users to the developer role on the development branch.
+This section describes how to create a "development branch" and grant developers full access on a database on the development branch. To accomplish this, we create a developer role on the "parent" branch, create a development branch, and then assign users to the developer role on the development branch.
 
-As you work through the steps in this scenario, it is important to remember that when you create a branch in Neon, you are creating a clone of the parent branch, which includes the roles and databases on the parent branch.
+As you work through the steps in this scenario, remember that when you create a branch in Neon, you are creating a clone of the parent branch, which includes the roles and databases on the parent branch.
 
 To get started:
 
-1. Connect to your database **on the parent branch** from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
+1. Connect to the database **on the parent branch** from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
 
 2. Use your default Neon role or another role with `neon_superuser` privileges to create a developer role **on the parent branch**. For example, create a role named `dev_users`.
 
@@ -224,9 +226,9 @@ To get started:
 
     You now have a `dev_users` role on your parent branch, and the role is not assigned to any users. This role will now be included in all future branches created from this branch.
 
-3. Create a development branch. Name it something like `dev1`. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions. This branch and all future development branches you create from the parent branch will include the `dev_users` role you just defined.
+3. Create a development branch. Name it something like `dev1`. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions.
 
-4. Connect to the database **on the development branch** with an SQL client. Be mindful that a child branch connection string differs from a parent branch connection string. They reside on different hosts. If you need help connecting to your branch, see [Connect from any client](/docs/connect/connect-from-any-app).
+4. Connect to the database **on the development branch** with an SQL client. Be mindful that a child branch connection string differs from a parent branch connection string. The branches reside on different hosts. If you need help connecting to your branch, see [Connect from any client](/docs/connect/connect-from-any-app).
 
 4. After connecting the database on your new branch, create a developer user (e.g., `dev_user1`). The password requirements described above apply here as well.
 
@@ -267,7 +269,7 @@ GRANT dev_users TO dev_user1;
 
 ## Revoke privileges
 
-If you set up roles as describe above, you can revoke privileges by removing assigned roles. For example, to remove the `readwrite` role from `readwrite_user1`, run the following SQL statement:
+If you set up privilege-holding roles as describe above, you can revoke privileges by removing assigned roles. For example, to remove the `readwrite` role from `readwrite_user1`, run the following SQL statement:
 
 ```sql
 REVOKE readwrite FROM readwrite_user1;
@@ -275,21 +277,11 @@ REVOKE readwrite FROM readwrite_user1;
 
 ## Public schema privileges
 
-Postgres 15 introduced changes to default privileges on the `public` schema. When creating a new database, Postgres creates a schema named `public` in the database and permits access to the schema to a predefined Postgres role named `public`. Newly created roles in Postgres are automatically assigned the `public` role. In Postgres 14, the public role had `CREATE` and `USAGE` privileges on the `public` schema. In Postgres 15 and higher, the `public` role no longer has `CREATE` privileges on the `public` schema.
+When creating a new database, Postgres creates a schema named `public` in the database and permits access to the schema to a predefined Postgres role named `public`. Newly created roles in Postgres are automatically assigned the `public` role. In Postgres 14, the public role has `CREATE` and `USAGE` privileges on the `public` schema. In Postgres 15 and higher, the `public` role has only `USAGE` privileges on the `public` schema.
 
-Why does this matter? Postgres uses a concept known as a `search path`, which is essentially a list of schema names that Postgres checks in the absence of a qualified name for a database object. For example, if you run a `SELECT` query on a table named `mytable` without prefixing the schema name, Postgres searches for this table in the schemas listed in the search path, settling on the first match identified. The default search path includes the following schemas:
+Why does this matter? If you create a new role and want to limit access for that role, you should be aware of the default `public` schema access automatically assigned to newly created roles.
 
-```sql
-dbname=> show search_path;
-   search_path   
------------------
- "$user", public
-(1 row)
-```
-
-The initial name `$user` is resolved to the name of the current user. If a schema with a name identical to the current user name does not exist, this positions the `public` schema as the default schema. Given this particular search path, creating a table without specifying a schema will not be successful unless the user was explicitly granted the `CREATE` privilege on the `public` schema.
-
-Prior to Postgres 15, the default ability to create objects within the `public` schema can present issues when trying to set up up a read-only user role. Despite restricting all privileges, the permissions inherited through the `public` role could, prior to Postgres 15, inadvertently permit a user to create objects in the `public` schema. This issue is mitigated from Postgres 15 onwards, but it is important to understand and manage if you are using Postgres 14 or if you are using Postgres 15 and are puzzled by the change in behavior. Users of Postgres 15 and higher often expect newly created users to be able to create objects in the `public` schema of a database owned by another user, not realizing that this privilege must be granted explicitly.
+If you want to limit access to the `public` schema for your users, you will have to revoke privileges on the public schema explicitly.
 
 For users of Postgres 14, the SQL statement to revoke the default `CREATE` permission on the `public` schema from the `public` role is as follows:
 
@@ -299,15 +291,13 @@ REVOKE CREATE ON SCHEMA public FROM PUBLIC;
 
 Ensure that you are the owner of the `public` schema or a member of a role that authorizes you to execute this SQL statement.
 
-Furthermore, to restrict the `public` role’s capability to connect to the database on any version of Postgres, use this statement:
+To restrict the `public` role’s capability to connect to the database on any version of Postgres, use this statement:
 
 ```sql
 REVOKE ALL ON DATABASE <database> FROM PUBLIC;
 ```
 
 This ensures users are unable to connect to the database by default unless this permission is explicitly granted.
-
-Be aware that revoking permissions from the `public` role may impact existing roles. Prior to revoking permissions from the `public` role, be sure to explicitly grant permissions to any roles that require the ability to connect to a database or create objects in the `public` schema.
 
 ## More information
 
