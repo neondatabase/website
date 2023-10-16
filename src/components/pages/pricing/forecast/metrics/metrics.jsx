@@ -9,7 +9,6 @@ import LINKS from 'constants/links';
 import { activities, performance, storage } from 'constants/pricing';
 import useClickOutside from 'hooks/use-click-outside';
 import useWindowSize from 'hooks/use-window-size';
-import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
 import activityIcon from '../images/activity.svg';
 import performanceIcon from '../images/performance.svg';
@@ -231,15 +230,15 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
 
           <p className="mt-11 relative z-10 text-base leading-snug font-light text-gray-new-80">
             <strong className="font-medium text-white">Want to learn more?</strong> For advanced
-            users we highly recommend exploring our billing documentation.{' '}
+            users we highly recommend exploring our{' '}
             <Link
-              className="inline-flex items-baseline font-normal text-[15px] leading-none tracking-extra-tight"
-              theme="green"
+              className="inline-block leading-tight decoration-1 underline-offset-[6px]"
+              theme="green-underlined"
               to={LINKS.billing}
             >
-              Billing docs
-              <ArrowIcon className="ml-1" />
+              billing documentation
             </Link>
+            .
           </p>
         </div>
       </m.div>
