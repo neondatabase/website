@@ -86,7 +86,7 @@ To create a read-only role:
     GRANT readonly TO readonly_user1;
     ```
 
-    The `readonly_user1` user now has read-only access to tables in the specified schema and database and should able to connect and run `SELECT` queries.
+    The `readonly_user1` user now has read-only access to tables in the specified schema and database and should be able to connect and run `SELECT` queries.
 
     ```bash
     psql postgres://readonly_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
