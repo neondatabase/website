@@ -63,16 +63,6 @@ Liquibase Version: 4.24.0
 Liquibase Open Source 4.24.0 by Liquibase
 ```
 
-## Initialize a new Liquibase project
-
-Run the following command to initialize a Liquibase project:
-
-```bash
-liquibase init project
-```
-
-Enter `Y` to accept the defaults.
-
 ## Prepare a Neon database
 
 Create a `blog` database in Neon with two tables, `posts` and `authors`.
@@ -102,30 +92,34 @@ Create a `blog` database in Neon with two tables, `posts` and `authors`.
 
 ## Retrieve your Neon database connection string
 
-Retrieve your Neon database connection string from the **Connection Details** widget on the Neon Dashboard. It will look something like this:
-
-```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
-```
-
-## Connect from Liquibase to your Neon database
-
-Open the `liquibase.properties` file in an editor and update the Target database details with the values from your Neon database connection string. Please notice how the database URL is constructed for the JDBC connection. It differs somewhat from the connection string you copied from the Neon dashboard.
+Retrieve a Neon database Java connection string from the **Connection Details** widget on the Neon Dashboard. Use the selection drop-down menu. It will look something like this:
 
 <CodeBlock shouldWrap>
 
-```env
-#### Enter the Target database 'url' information  ####
-liquibase.command.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
-
-# Enter the username for your Target database.
-liquibase.command.username: alex
-
-# Enter the password for your Target database.
-liquibase.command.password: AbC123dEf
+```bash
+jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf
 ```
 
 </CodeBlock>
+
+## Connect from Liquibase to your Neon database
+
+1. Create a directory for your Liquibase project.
+
+    ```bash
+    mkdir liquibase
+    ```
+
+2. Create a `liquibase.properties` file in your project directory, and add an entry with the name of you liquibase changelog file and your database `url`, as shown. For the `url`, specify the Neon connection string you retrieved previously:
+
+    <CodeBlock shouldWrap>
+
+    ```env
+    changeLogFile:dbchangelog.xml  
+    url: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf
+    ```
+
+    </CodeBlock>
 
 <Admonition type="note">
 Using Liquibase with PostgreSQL requires a JDBC driver JAR file. Liquibase includes this driver in the `liquibase/internal/lib` directory and uses it by default. The driver version is displayed when you run the `liquibase --version` command:
@@ -142,12 +136,10 @@ Optionally, you can download a different version of the driver from [https://jdb
 
 ## Take a snapshot of your database
 
-After defining your database connection details, you can capture the current state of your database by creating a master changelog file. Your master changelog file will also record all future changes to your database.
-
-Run the [generateChangelog](https://docs.liquibase.com/commands/inspection/generate-changelog.html) command to create your master changelog file:
+After defining your database connection details, run the [generateChangelog](https://docs.liquibase.com/commands/inspection/generate-changelog.html) command to creates the specified changelog file with the current state of your database.
 
 ```bash
-liquibase --changeLogFile=mychangelog.xml generateChangeLog
+liquibase --changeLogFile=dbchangelog.xml generateChangeLog
 ```
 
 You’ll get a changelog file for your database that looks something like this:
@@ -155,7 +147,7 @@ You’ll get a changelog file for your database that looks something like this:
 ```xml
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <changeSet author="alex (generated)" id="1696773347773-1">
+    <changeSet author="dtprice (generated)" id="1697394458474-1">
         <createTable tableName="authors">
             <column autoIncrement="true" name="author_id" type="INTEGER">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="authors_pkey"/>
@@ -168,7 +160,7 @@ You’ll get a changelog file for your database that looks something like this:
             <column name="bio" type="TEXT"/>
         </createTable>
     </changeSet>
-    <changeSet author="alex (generated)" id="1696773347773-2">
+    <changeSet author="dtprice (generated)" id="1697394458474-2">
         <createTable tableName="posts">
             <column autoIncrement="true" name="post_id" type="INTEGER">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="posts_pkey"/>
@@ -181,27 +173,20 @@ You’ll get a changelog file for your database that looks something like this:
             <column defaultValueComputed="CURRENT_TIMESTAMP" name="published_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
         </createTable>
     </changeSet>
-    <changeSet author="alex (generated)" id="1696773347773-3">
+    <changeSet author="dtprice (generated)" id="1697394458474-3">
         <addUniqueConstraint columnNames="email" constraintName="authors_email_key" tableName="authors"/>
     </changeSet>
-    <changeSet author="alex (generated)" id="1696773347773-4">
+    <changeSet author="dtprice (generated)" id="1697394458474-4">
         <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="posts" constraintName="posts_author_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="author_id" referencedTableName="authors" validate="true"/>
     </changeSet>
 </databaseChangeLog>
 ```
 
-## Create a changeset
+## Add a changeset
 
 Now, you can start making database changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.htm). A changeset is the basic unit of change in Liquibase. You can append a changeset to your master changelog file or define it in its own file, as we do here.
 
-1. Create a changelog file for your changeset:
-
-```bash
-cd ~/liquibase
-touch dbchangelog1.xml
-```
-
-2. Add the following changeset, which adds a `comments` table to your database:
+Append the following changeset to your `dbchangelog.xml` file. This changeset adds a `comments` table to your database:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>  
