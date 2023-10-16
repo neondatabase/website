@@ -40,7 +40,7 @@ Create a branch for each preview deployment with the Neon-Vercel Integration.
 
 <DetailIconCards>
 
-<a href="/docs/guides/branching-neon-api" description="Connect your Vercel project and create a branch for each preview deployment" icon="split-branch">The Neon Vercel Integration</a>
+<a href="https://neon.tech/docs/guides/vercel" description="Connect your Vercel project and create a branch for each preview deployment" icon="split-branch">The Neon Vercel Integration</a>
 
 <a href="https://neon.tech/blog/database-branching-for-postgres-with-neon" description="Blog: Read about full-stack preview deployments using the Neon Vercel Integration" icon="split-branch">Preview deployments with Vercel</a>
 
@@ -80,7 +80,7 @@ Learn how to refresh a branch or promote a branch to become your primary branch.
 
 <a href="/docs/guides/branch-refresh" description="Learn how to refresh a branch with the latest data using the Neon API" icon="split-branch">Refresh a branch</a>
 
-<a href="/docs/guides/branch-promote" description="Promote a branch to the primary branch of your Neon project using the Neon API" icon="split-branch">Promote a branch to primary</a>
+<a href="/docs/guides/branch-promote" description="Promote a branch to the primary branch of your Neon project using the Neon API" icon="split-branch">Promote a branch</a>
 
 </DetailIconCards>
 
