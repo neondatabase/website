@@ -120,7 +120,7 @@ const Forecast = () => {
               Need an additional help or custom volume-based plans?
             </p>
             <Link
-              className="mt-3.5 py-[7px] px-3 text-[15px] border border-green-45 rounded-[50px] inline-flex items-baseline leading-none text-green-45 tracking-extra-tight"
+              className="mt-3.5 pt-[7px] pb-2 px-3 text-[15px] border border-green-45 rounded-[50px] inline-flex items-baseline leading-none text-green-45 tracking-extra-tight transition-colors duration-200 hover:border-white"
               to={LINKS.contactSales}
             >
               Contact Sales

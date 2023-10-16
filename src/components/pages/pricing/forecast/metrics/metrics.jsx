@@ -3,8 +3,7 @@ import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
-import Button from 'components/shared/button/button';
-import LinesIllustration from 'components/shared/lines-illustration';
+import AnimatedButton from 'components/shared/animated-button';
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 import { activities, performance, storage } from 'constants/pricing';
@@ -20,7 +19,9 @@ const COMPUTE_TIME_PRICE = 0.102;
 const AVERAGE_DAYS_IN_MONTH = 30.416666;
 const PROJECT_STORAGE_PRICE = 0.000164;
 const PROJECT_STORAGE_HOURS = 24;
-const PERCENTAGE_OF_MONTHLY_COST = 0.05;
+
+const MOBILE_WIDTH = 768;
+
 const calculateStorageCost = (storageValue) =>
   storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE * AVERAGE_DAYS_IN_MONTH;
 
@@ -70,30 +71,25 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
     [activeItems.storage.unit]
   );
 
-  const writtenAndTransferDataCost = useMemo(
-    () => (computeTimeCost + storageCost) * PERCENTAGE_OF_MONTHLY_COST,
-    [computeTimeCost, storageCost]
-  );
-
   const totalCost = useMemo(
-    () => (computeTimeCost + storageCost + writtenAndTransferDataCost).toFixed(2),
-    [computeTimeCost, storageCost, writtenAndTransferDataCost]
+    () => (computeTimeCost + storageCost).toFixed(2),
+    [computeTimeCost, storageCost]
   );
 
   return (
     <LazyMotion features={domAnimation}>
       <m.div
         className="flex h-[50vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0 md:mt-16"
-        initial={{ opacity: windowWidth < 768 ? 1 : 0.3 }}
+        initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.3 }}
         animate={{
-          opacity: currentSectionIndex === 0 || windowWidth < 768 ? 1 : 0.3,
+          opacity: currentSectionIndex === 0 || windowWidth < MOBILE_WIDTH ? 1 : 0.3,
         }}
       >
         <span className="text-green-45 font-medium leading-none -tracking-extra-tight">
           Activity
         </span>
         <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
-          How active your users?
+          How active are your users?
         </h3>
         <ul className="mt-7 grid gap-y-5 lg:mt-5">
           {activities.map(({ title, description, unit }) => (
@@ -120,16 +116,16 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
 
       <m.div
         className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16"
-        initial={{ opacity: windowWidth < 768 ? 1 : 0.3 }}
+        initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.3 }}
         animate={{
-          opacity: currentSectionIndex === 1 || windowWidth < 768 ? 1 : 0.3,
+          opacity: currentSectionIndex === 1 || windowWidth < MOBILE_WIDTH ? 1 : 0.3,
         }}
       >
         <span className="text-yellow-70 leading-none font-medium -tracking-extra-tight">
           Performance
         </span>
         <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
-          What peak performance is needed for your app?
+          What level of performance does your application require?
         </h3>
         <Select
           className={clsx(
@@ -150,14 +146,14 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
 
       <m.div
         className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16"
-        initial={{ opacity: windowWidth < 768 ? 1 : 0.3 }}
+        initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.3 }}
         animate={{
-          opacity: currentSectionIndex === 2 || windowWidth < 768 ? 1 : 0.3,
+          opacity: currentSectionIndex === 2 || windowWidth < MOBILE_WIDTH ? 1 : 0.3,
         }}
       >
         <span className="text-blue-80 leading-none font-medium -tracking-extra-tight">Storage</span>
         <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
-          How much storage is required?
+          How much storage do you require?
         </h3>
 
         <Select
@@ -179,9 +175,9 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
 
       <m.div
         className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16"
-        initial={{ opacity: windowWidth < 768 ? 1 : 0.3 }}
+        initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.3 }}
         animate={{
-          opacity: currentSectionIndex === 3 || windowWidth < 768 ? 1 : 0.3,
+          opacity: currentSectionIndex === 3 || windowWidth < MOBILE_WIDTH ? 1 : 0.3,
         }}
       >
         <div className="py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden lg:px-6 lg:py-6">
@@ -217,15 +213,15 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
             })}
           </ul>
           <div className="relative mt-8">
-            <Button
+            <AnimatedButton
               className="w-full relative z-20 !font-semibold tracking-extra-tight"
               theme="primary"
               size="new-lg"
               to={LINKS.signup}
+              isAnimated
             >
               Sign up and start
-            </Button>
-            <LinesIllustration className="z-10 !w-[125%]" color="#00E599" />
+            </AnimatedButton>
           </div>
 
           <p className="mt-11 relative z-10 text-base leading-snug font-light text-gray-new-80">

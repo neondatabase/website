@@ -146,7 +146,7 @@ const Hero = () => {
                     <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
                       {type}
                     </span>
-                    <h3
+                    <h2
                       className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px] md:mt-4"
                       dangerouslySetInnerHTML={{ __html: price }}
                     />
