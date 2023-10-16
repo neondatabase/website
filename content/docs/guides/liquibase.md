@@ -182,11 +182,18 @@ You’ll get a changelog file for your database that looks something like this:
 </databaseChangeLog>
 ```
 
-## Add a changeset
+## Create a changeset
 
-Now, you can start making database changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.htm). A changeset is the basic unit of change in Liquibase. You can append a changeset to your master changelog file or define it in its own file, as we do here.
+Now, you can start making database changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.htm). A changeset is the basic unit of change in Liquibase. You can append a changeset to your master changelog file or define it in a separate file, as we do here.
 
-Append the following changeset to your `dbchangelog.xml` file. This changeset adds a `comments` table to your database:
+1. Create a changelog file for your changeset:
+
+```bash
+cd ~/liquibase
+touch dbchangelog.xml
+```
+
+2. Add the following changeset, which adds a `comments` table to your database:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>  
