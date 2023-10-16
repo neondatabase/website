@@ -105,7 +105,7 @@ To create the read-only role and user described above, run the following stateme
 
 ```sql
 -- readonly role
-CREATE ROLE readonly;
+CREATE ROLE readonly PASSWORD '<password>';
 GRANT CONNECT ON DATABASE <database> TO readonly;
 GRANT USAGE ON SCHEMA <schema> TO readonly;
 GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO readonly;
@@ -185,7 +185,7 @@ To create the read-write role and user described above, run the following statem
 
 ```sql
 -- readwrite role
-CREATE ROLE readwrite;
+CREATE ROLE readwrite PASSWORD '<password>';
 GRANT CONNECT ON DATABASE <database> TO readwrite;
 GRANT USAGE, CREATE ON SCHEMA <schema> TO readwrite;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA <schema> TO readwrite;
@@ -194,7 +194,7 @@ GRANT USAGE ON ALL SEQUENCES IN SCHEMA <schema> TO readwrite;
 ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT USAGE ON SEQUENCES TO readwrite;
 
 -- User creation
-CREATE USER readwrite_user2 WITH PASSWORD '<password>';
+CREATE USER readwrite_user1 WITH PASSWORD '<password>';
 
 -- Grant privileges to user
 GRANT readwrite TO readwrite_user1;
@@ -213,7 +213,7 @@ To get started:
 2. Use your default Neon role or another role with `neon_superuser` privileges to create a developer role **on the parent branch**. For example, create a role named `dev_users`.
 
     ```sql
-    CREATE ROLE dev_users PASSWORD `password`;
+    CREATE ROLE dev_users PASSWORD '<password>';
     ```
 
     The password must have 60 bits of entropy (at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters). For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
@@ -225,6 +225,20 @@ To get started:
     ```
 
     You now have a `dev_users` role on your parent branch, and the role is not assigned to any users. This role will now be included in all future branches created from this branch.
+
+    <Admonition type="note">
+    This does not automatically grant privileges on all existing schemas, tables, sequences, etc., within the database. If you want the `dev_users` role to access specific schemas, tables, etc., you need to grant those permissions explicitly.
+
+    For example, to grant all privileges on all tables in a schema:
+
+    ```sql
+    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA <schema_name> TO dev_users;
+    ```
+
+    Similarly, you'd grant privileges for sequences and other objects as needed.
+
+    That said, the initial command will allow `dev_users` to create new schemas within the database. But for pre-existing schemas and their objects, you need to grant permissions explicitly.
+    </Admonition>
 
 3. Create a development branch. Name it something like `dev1`. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions.
 
