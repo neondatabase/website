@@ -190,9 +190,9 @@
       items:
         - title: Liquibase
           items:
-             - title: Use Liquibase with Neon
+             - title: Get started
                slug: guides/liquibase
-             - title: Liquibase developer workflow
+             - title: Developer workflow
                slug: guides/liquibase-workflow
     - title: Serverless
       items:
