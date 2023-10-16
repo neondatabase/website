@@ -26,7 +26,7 @@ const Item = ({
   const currentSlug = pathname.replace(`${links.docs}/`, '');
 
   const hasActiveChild = isActiveItem(items, currentSlug);
-  const [isOpen, setIsOpen] = useState(() => slug === currentSlug || hasActiveChild);
+  const [isOpen, setIsOpen] = useState(() => hasActiveChild);
 
   if (!isOpen && isActiveItem(items, currentSlug)) {
     setIsOpen(true);
