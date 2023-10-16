@@ -10,18 +10,21 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import { activities, performance, storage } from 'constants/pricing';
 import useWindowSize from 'hooks/use-window-size';
-import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
 import Metrics from './metrics';
 
 const SECTION_MIN_HEIGHT = 760;
+const PAGE_HEIGHT_THRESHOLD = 975;
+const OFFSET_1 = 130;
+const OFFSET_2 = 200;
+const PAGE_HEIGHT_MULTIPLIER = 0.9;
 
 const getSelectedIndex = (activeTitle, items) =>
   items.findIndex(({ title }) => title === activeTitle) + 1;
 
 const Forecast = () => {
   const sectionRef = useRef();
-  const { width: windowWidth, height: pageHeight } = useWindowSize();
+  const { height: pageHeight } = useWindowSize();
   const scrollY = useScrollPosition();
   const [contentRef, isContentInView] = useInView({ triggerOnce: true });
 
@@ -43,7 +46,7 @@ const Forecast = () => {
     }),
   });
 
-  const animationStageInput = useStateMachineInput(rive, 'SM', 'stages', 1);
+  const animationStageInput = useStateMachineInput(rive, 'SM', 'stages', currentSectionIndex + 1);
   const firstSelectInput = useStateMachineInput(rive, 'SM', '1 select', 1);
   const secondSelectInput = useStateMachineInput(rive, 'SM', '2 select', 1);
   const thirdSelectInput = useStateMachineInput(rive, 'SM', '3 select', 1);
@@ -56,12 +59,7 @@ const Forecast = () => {
 
   useEffect(() => {
     if (!animationStageInput) return;
-
-    if (currentSectionIndex === 3 && animationStageInput.value === 1) {
-      animationStageInput.value = 3;
-    } else {
-      animationStageInput.value = currentSectionIndex + 1;
-    }
+    animationStageInput.value = currentSectionIndex + 1;
 
     if (!firstSelectInput) return;
     firstSelectInput.value = getSelectedIndex(activeItems.activity.title, activities);
@@ -84,9 +82,14 @@ const Forecast = () => {
 
   useEffect(() => {
     const currentScrollTop = scrollY;
-    const switchPointMultiplier = pageHeight < 975 ? SECTION_MIN_HEIGHT * 1 : pageHeight * 0.9;
+    const switchPointMultiplier =
+      pageHeight < PAGE_HEIGHT_THRESHOLD
+        ? SECTION_MIN_HEIGHT * 1
+        : pageHeight * PAGE_HEIGHT_MULTIPLIER;
+    // 5 is number of sections: 4 + 1
     const switchPoints = [...Array(5)].map(
-      (_, index) => sectionRef.current.offsetTop + 130 + index * switchPointMultiplier - 200
+      (_, index) =>
+        sectionRef.current.offsetTop + OFFSET_1 + index * switchPointMultiplier - OFFSET_2
     );
 
     switchPoints.forEach((_, index) => {
@@ -120,11 +123,11 @@ const Forecast = () => {
               Need an additional help or custom volume-based plans?
             </p>
             <Link
-              className="mt-3.5 pt-[7px] pb-2 px-3 text-[15px] border border-green-45 rounded-[50px] inline-flex items-baseline leading-none text-green-45 tracking-extra-tight transition-colors duration-200 hover:border-white"
+              className="mt-3.5 text-[15px] inline-flex items-baseline leading-none text-green-45 tracking-extra-tight transition-colors duration-200 underline-offset-[5px]"
+              theme="green-underlined"
               to={LINKS.contactSales}
             >
               Contact Sales
-              <ArrowIcon className="ml-1" />
             </Link>
           </div>
         </div>
@@ -145,7 +148,6 @@ const Forecast = () => {
           ref={contentRef}
         >
           <Metrics
-            windowWidth={windowWidth}
             currentSectionIndex={currentSectionIndex}
             activeItems={activeItems}
             setActiveItems={setActiveItems}

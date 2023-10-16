@@ -8,7 +8,6 @@ const styles = {
   size: {
     md: 't-2xl py-7 px-11 2xl:py-[26px] xl:py-[21px] xl:px-9 md:py-5 md:px-8',
     sm: 't-xl py-[26px] px-11 2xl:py-[21px] 2xl:px-9 xl:py-5 xl:px-8',
-    'new-lg': 'text-lg py-[17px] px-11 2xl:py-4 2xl:px-9',
     'new-md': 't-base py-[11px] px-[26px]',
     xs: 't-base py-[14px] px-[26px]',
     xxs: 'px-3 py-1.5 text-xs uppercase tracking-wider',

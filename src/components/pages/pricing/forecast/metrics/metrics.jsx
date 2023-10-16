@@ -8,6 +8,7 @@ import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 import { activities, performance, storage } from 'constants/pricing';
 import useClickOutside from 'hooks/use-click-outside';
+import useWindowSize from 'hooks/use-window-size';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
 import activityIcon from '../images/activity.svg';
@@ -33,7 +34,9 @@ const icons = {
   performance: performanceIcon,
   storage: storageIcon,
 };
-const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems }) => {
+
+const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
+  const { width: windowWidth } = useWindowSize();
   const performanceRef = useRef(null);
   const storageRef = useRef(null);
 
@@ -79,7 +82,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
   return (
     <LazyMotion features={domAnimation}>
       <m.div
-        className="flex h-[50vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0 md:mt-16"
+        className="flex h-[50vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0 md:mt-16 md:opacity-100"
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.3 }}
         animate={{
           opacity: currentSectionIndex === 0 || windowWidth < MOBILE_WIDTH ? 1 : 0.3,
@@ -115,7 +118,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
       </m.div>
 
       <m.div
-        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16"
+        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.3 }}
         animate={{
           opacity: currentSectionIndex === 1 || windowWidth < MOBILE_WIDTH ? 1 : 0.3,
@@ -134,6 +137,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
               'shadow-[0px_14px_64px_0px_rgba(240,240,117,0.08),0px_6px_10px_0px_rgba(0,0,0,0.25)]'
           )}
           titleClassName={clsx(isExpanded.performance && 'text-yellow-70')}
+          activeClassName="md:text-yellow-70"
           containerRef={performanceRef}
           activeItem={activeItems.performance}
           isExpanded={isExpanded.performance}
@@ -145,7 +149,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
       </m.div>
 
       <m.div
-        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16"
+        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.3 }}
         animate={{
           opacity: currentSectionIndex === 2 || windowWidth < MOBILE_WIDTH ? 1 : 0.3,
@@ -163,6 +167,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
               'shadow-[0px_14px_64px_0px_rgba(117,219,240,0.10),0px_6px_10px_0px_rgba(0,0,0,0.25)]'
           )}
           titleClassName={clsx(isExpanded.storage && 'text-blue-80')}
+          activeClassName="md:text-blue-80"
           containerRef={storageRef}
           activeItem={activeItems.storage}
           isExpanded={isExpanded.storage}
@@ -174,7 +179,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
       </m.div>
 
       <m.div
-        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16"
+        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.3 }}
         animate={{
           opacity: currentSectionIndex === 3 || windowWidth < MOBILE_WIDTH ? 1 : 0.3,
@@ -216,7 +221,7 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
             <AnimatedButton
               className="w-full relative z-20 !font-semibold tracking-extra-tight"
               theme="primary"
-              size="new-lg"
+              size="lg"
               to={LINKS.signup}
               isAnimated
             >
@@ -243,7 +248,6 @@ const Metrics = ({ windowWidth, currentSectionIndex, activeItems, setActiveItems
 };
 
 Metrics.propTypes = {
-  windowWidth: PropTypes.number,
   currentSectionIndex: PropTypes.number.isRequired,
   activeItems: PropTypes.shape({
     activity: PropTypes.shape({

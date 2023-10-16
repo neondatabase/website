@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const Select = ({
   className = null,
   titleClassName = null,
+  activeClassName,
   containerRef,
   activeItem,
   isExpanded,
@@ -101,7 +102,8 @@ const Select = ({
                     <button
                       className={clsx(
                         'relative z-10 py-[15px] w-full border-t border-gray-new-15 flex items-center justify-between px-6 text-[15px] duration-200 transition-colors group-last:rounded-b-[10px] group-last:border-t-gray-new-15/60 hover:bg-white hover:bg-opacity-[3%] gap-x-4',
-                        activeItem.title === item.title && 'bg-white bg-opacity-[3%]'
+                        activeItem.title === item.title && 'bg-white bg-opacity-[3%]',
+                        activeItem.title === item.title && activeClassName
                       )}
                       type="button"
                       onClick={() => onSelect(type, item)}
@@ -125,6 +127,7 @@ const Select = ({
 Select.propTypes = {
   className: PropTypes.string,
   titleClassName: PropTypes.string,
+  activeClassName: PropTypes.string.isRequired,
   containerRef: PropTypes.shape({}).isRequired,
   activeItem: PropTypes.shape({
     title: PropTypes.string.isRequired,

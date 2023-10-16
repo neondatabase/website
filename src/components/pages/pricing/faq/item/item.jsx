@@ -39,9 +39,10 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, linkLabel = n
         onClick={handleOpen}
       >
         <ArrowIcon
-          className={clsx('shrink-0 text-pricing-primary-1 transition duration-200', {
-            'rotate-90 fill-pricing-primary-1 !text-black-new': isOpen,
-          })}
+          className={clsx(
+            'shrink-0 transition-[fill,transform] duration-200',
+            isOpen ? 'rotate-90 fill-green-45 text-black-new' : 'text-green-45'
+          )}
           aria-hidden
         />
         <h3 className="text-[22px] font-medium leading-tight tracking-tight xl:text-xl md:text-lg">
@@ -67,9 +68,9 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, linkLabel = n
           />
           {linkText && linkUrl && (
             <Link
-              className="my-2.5 ml-[42px] border-b border-pricing-primary-3 pb-1.5 !text-base font-normal leading-none !text-pricing-primary-1 hover:!border-pricing-primary-1 lg:mt-4 lg:!text-base"
+              className="my-2.5 ml-[42px] pb-1.5 !text-base font-normal leading-none lg:mt-4 lg:!text-base"
               size="sm"
-              theme="white"
+              theme="green"
               to={linkUrl}
             >
               {linkText}
