@@ -108,6 +108,7 @@
         - title: Auto-suspend
           slug: guides/auto-suspend-guide
         - title: Branching
+          slug: guides/branching-intro
           items: 
             - title: Branching — Point-in-time restore
               slug: guides/branching-pitr
@@ -121,7 +122,7 @@
               slug: guides/branching-github-actions
             - title: Refresh a branch with the Neon API
               slug: guides/branch-refresh
-            - title: Promote a branch to primary with the Neon API
+            - title: Promote a branch with the Neon API
               slug: guides/branch-promote
         - title: Project sharing
           slug: guides/project-sharing-guide
