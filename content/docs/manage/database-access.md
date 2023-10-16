@@ -21,13 +21,13 @@ In Postgres, users, groups, and roles are the same thing. From the PostgreSQL [D
 
 _PostgreSQL manages database access permissions using the concept of roles. A role can be thought of as either a database user, or a group of database users, depending on how the role is set up._
 
-In the instructions that follow, we'll grant privileges to roles, and then assign those roles to database users.
+Neon recommends granting privileges to roles, and then assigning those roles to your database users.
 
 ## Creating roles with limited access
 
-You can create roles with limited access permissions in Neon via SQL. Roles created with SQL are created with the same basic [public schema privileges](#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role. They must be selectively granted permissions for each database object.
+You can create roles with limited access via SQL. Roles created with SQL are created with the same basic [public schema privileges](#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role. They must be selectively granted permissions for each database object.
 
-The recommended approach to creating roles with limited access permissions in Neon is as follows:
+The recommended approach to creating roles with limited access is as follows:
 
 1. Use your  default Neon role or another role with `neon_superuser` privileges to create roles for each application or use case via SQL. For example, create `readonly` and `readwrite` roles.
 2. Grant privileges to those roles to allow access to database objects. For example, grant the `SELECT` privilege to a `readonly` role, or grant `SELECT`, `INSERT`, `UPDATE`, and `DELETE` privileges to a `readwrite` role.
@@ -38,7 +38,7 @@ The recommended approach to creating roles with limited access permissions in Ne
 You can remove a role from a user at any time to revoke privileges. See [Revoke privileges](#revoke-privileges).
 </Admonition>
 
-The following sections describes how to create roles in Neon via SQL and grant the roles access to database objects. In Postgres, access must be granted at the database, schema, and object level. For example, to grant access to a table, you must also grant access to the database and schema in which the table resides. If these access permissions are not defined, the role will not be able access the table.
+The following sections describe how to create roles in Neon via SQL and grant those roles access to database objects. In Postgres, access must be granted at the database, schema, and object level. For example, to grant access to a table, you must also grant access to the database and schema in which the table resides. If these access permissions are not defined, the role will not be able access the table.
 
 ## Create a read-only role
 
