@@ -60,7 +60,7 @@ const Forecast = () => {
     if (rive && isContentInView) {
       rive.play();
     }
-  }, [rive, isContentInView, currentSectionIndex]);
+  }, [rive, isContentInView]);
 
   useEffect(() => {
     if (!animationStageInput) return;
