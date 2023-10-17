@@ -7,7 +7,7 @@ updatedOn: '2023-08-09T08:55:53Z'
 
 Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature controls when a Neon compute instance transitions to an `Idle` state (scales to zero) due to inactivity. This guide demonstrates how to configure the _Auto-suspend_ setting in your Neon project.
 
-[Neon Pro plan](/docs/introduction/pro-plan) users can configure the _Auto-suspend_ setting for a new project, for an existing project, or for an individual compute endpoint. Configuring the _Auto-suspend_ setting for a new or existing project sets the project's default Auto-suspend setting, which is used from that point forward when creating compute endpoints.
+[Neon Pro plan](/docs/introduction/pro-plan) users can configure the _Auto-suspend_ setting for a new project, for an existing project, or for an individual compute endpoint. Configuring the _Auto-suspend_ setting for a new or existing project sets the project's default Auto-suspend setting, which is used from that point forward when creating new compute endpoints.
 
 ### Configure the Auto-suspend setting for a new project
 
