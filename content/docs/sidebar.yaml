@@ -96,6 +96,12 @@
       slug: manage/integrations
     - title: Operations
       slug: manage/operations
+    - title: Access
+      items: 
+         - title: Project access
+           slug: manage/project-access
+         - title: Database access
+           slug: manage/database-access
     - title: Backups
       slug: manage/backups
 - title: Guides
@@ -134,8 +140,6 @@
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
               slug: guides/read-replica-prisma
-        - title: Manage roles and databases with SQL
-          slug: guides/manage-database-access
         - title: Extensions
           items:
             - title: neon_utils
