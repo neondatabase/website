@@ -5,8 +5,8 @@ enableTableOfContents: true
 updatedOn: '2023-10-06T17:44:14.691Z'
 ---
 
-Remix is a full stack web framework that lets you focus on the user interface and work back through web standards to deliver a fast, slick, and resilient user experience. People are gonna love using your stuff.
 
+Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using common web standards. This guide explains how to connect Remix with Neon using a secure server-side request. 
 
 To create a Neon project and access it from a Remix application:
 
