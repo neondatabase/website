@@ -2,7 +2,7 @@
 
 import useScrollPosition from '@react-hook/window-scroll';
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container/container';
@@ -46,7 +46,12 @@ const Forecast = () => {
     }),
   });
 
-  const animationStageInput = useStateMachineInput(rive, 'SM', 'stages', currentSectionIndex + 1);
+  const defaultInputName = useMemo(
+    () => (currentSectionIndex === 3 ? 3 : currentSectionIndex + 1),
+    [currentSectionIndex]
+  );
+
+  const animationStageInput = useStateMachineInput(rive, 'SM', 'stages', defaultInputName);
   const firstSelectInput = useStateMachineInput(rive, 'SM', '1 select', 1);
   const secondSelectInput = useStateMachineInput(rive, 'SM', '2 select', 1);
   const thirdSelectInput = useStateMachineInput(rive, 'SM', '3 select', 1);
@@ -59,7 +64,11 @@ const Forecast = () => {
 
   useEffect(() => {
     if (!animationStageInput) return;
-    animationStageInput.value = currentSectionIndex + 1;
+    if (currentSectionIndex === 3) {
+      animationStageInput.value = 3;
+    } else {
+      animationStageInput.value = currentSectionIndex + 1;
+    }
 
     if (!firstSelectInput) return;
     firstSelectInput.value = getSelectedIndex(activeItems.activity.title, activities);
