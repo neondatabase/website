@@ -11,7 +11,7 @@ Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature controls when a N
 
 ### Configure the Auto-suspend setting for a new project
 
-Configuring the _Auto-suspend_ setting for a new project sets the project's default, which is applied to all compute endpoints created from that point forward. You can adjust _Auto-suspend_ default or configure the setting for individual compute endpoints later, as necessary.
+Configuring the _Auto-suspend_ setting for a new project sets the project's default, which is applied to all compute endpoints created from that point forward. You can adjust this _Auto-suspend_ default at any time, or configure the setting for individual compute endpoints later, as necessary.
 
 To configure the _Auto-suspend_ default setting at project creation time:
 
