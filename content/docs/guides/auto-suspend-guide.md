@@ -29,7 +29,7 @@ To configure the _Auto-suspend_ default setting at project creation time:
 
 ### Configure the Auto-suspend setting for an existing project
 
-Configuring the _Auto-suspend_ setting for an existing project sets the project's default, which is applied to all compute endpoints created from that point forward. Existing compute endpoints are unaffected. You can adjust _Auto-suspend_ default or configure the setting for individual compute endpoints later, as necessary.
+Configuring the _Auto-suspend_ setting for an existing project sets the project's default, which is applied to all compute endpoints created from that point forward. Existing compute endpoints are unaffected. You can adjust the _Auto-suspend_ default or configure the setting for individual compute endpoints later, as necessary.
 
 To configure the Auto-suspend default for an existing project:
 
