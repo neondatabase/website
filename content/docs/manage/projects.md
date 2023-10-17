@@ -43,9 +43,10 @@ You can tab between these sections:
 ## Basic actions
 
 Here are some basic actions you can take to add or manage projects:
-- [Create a project](#Create-a-project)
+
+- [Create a project](#create-a-project)
 - [View projects](#view-projects)
-- [Change a project name](#change-the-name-of-your-project)
+- [Change a project name](#change-the-name-or-copy-the-id-of-your-project)
 - [Delete a project](#delete-a-project)
 - [Share a project](#share-a-project)
 
@@ -115,10 +116,6 @@ To share a project:
 
 The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
 
-<Admonition type="note">
-A user **without** a Neon account will not receive an email notification when a project is shared. However, if the user creates a Neon account afterward with the specified email address, the shared project will be available when the user logs in to the Neon Console.
-</Admonition>
-
 The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
 
 For additional information, refer to our [Project sharing guide](/docs/guides/project-sharing-guide).
@@ -126,6 +123,7 @@ For additional information, refer to our [Project sharing guide](/docs/guides/pr
 ## Advanced settings
 
 From the **Settings** page, you can also set defaults or apply bulk changes across your Neon objects:
+
 - [Reset default compute size](#reset-the-default-compute-size) (Pro plan only)
 - [Configure history retention range](#configure-history-retention)
 
