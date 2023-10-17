@@ -10,6 +10,7 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import { activities, performance, storage } from 'constants/pricing';
 import useWindowSize from 'hooks/use-window-size';
+import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
 import Metrics from './metrics';
 
@@ -132,11 +133,11 @@ const Forecast = () => {
               Need an additional help or custom volume-based plans?
             </p>
             <Link
-              className="mt-3.5 text-[15px] inline-flex items-baseline leading-none text-green-45 tracking-extra-tight transition-colors duration-200 underline-offset-[5px]"
-              theme="green-underlined"
+              className="mt-3.5 pt-[7px] pb-2 px-3 text-[15px] border border-green-45 rounded-[50px] inline-flex items-baseline leading-none text-green-45 tracking-extra-tight transition-colors duration-200 hover:border-[#00e5bf] hover:text-[#00e5bf]"
               to={LINKS.contactSales}
             >
               Contact Sales
+              <ArrowIcon className="ml-1" />
             </Link>
           </div>
         </div>
