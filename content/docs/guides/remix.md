@@ -6,7 +6,7 @@ updatedOn: '2023-10-06T17:44:14.691Z'
 ---
 
 
-Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using common web standards. This guide explains how to connect Remix with Neon using a secure server-side request. 
+Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request. 
 
 To create a Neon project and access it from a Remix application:
 
