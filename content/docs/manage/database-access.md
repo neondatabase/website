@@ -50,13 +50,13 @@ To create a read-only role:
 
 1. Connect to your database from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
 
-2. Create a `readonly` role using the following statement:
+2. Create a `readonly` role using the following statement. A password is required.
 
     ```sql
     CREATE ROLE readonly PASSWORD '<password>';
     ```
   
-    Neon requires specifying a password. The password must have 60 bits of entropy (at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters). For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+    The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
 3. Grant the `readonly` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
@@ -80,7 +80,7 @@ To create a read-only role:
     CREATE ROLE readonly_user1 WITH LOGIN PASSWORD '<password>';
     ```
 
-5. Grant the user membership in the `readonly` role:
+5. Assign the `readonly` role to `readonly_user1`:
 
     ```sql
     GRANT readonly TO readonly_user1;
@@ -126,13 +126,13 @@ To create a read-write role:
 
 1. Connect to your database from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
 
-2. Create a `readwrite` role using the following statement. Neon requires specifying a password when creating a role with SQL.
+2. Create a `readwrite` role using the following statement. A password is required.
 
     ```sql
     CREATE ROLE readwrite PASSWORD '<password>';
     ```
 
-    The password must have 60 bits of entropy (at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters). For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+    The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
 3. Grant the `readwrite` role read-write privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
@@ -162,7 +162,7 @@ To create a read-write role:
     CREATE ROLE readwrite_user1 WITH LOGIN PASSWORD '<password>';
     ```
 
-5. Grant the user membership in the `readwrite` role:
+5. Assign the `readwrite` role to `readwrite_user1`:
 
     ```sql
     GRANT readwrite TO readwrite_user1;
@@ -202,7 +202,7 @@ GRANT readwrite TO readwrite_user1;
 
 ## Create a developer role
 
-This section describes how to create a "development branch" and grant developers full access on a database on the development branch. To accomplish this, we create a developer role on the "parent" branch, create a development branch, and then assign users to the developer role on the development branch.
+This section describes how to create a "development branch" and grant developers full access to a database on the development branch. To accomplish this, we create a developer role on the "parent" branch, create a development branch, and then assign users to the developer role on the development branch.
 
 As you work through the steps in this scenario, remember that when you create a branch in Neon, you are creating a clone of the parent branch, which includes the roles and databases on the parent branch.
 
@@ -216,7 +216,7 @@ To get started:
     CREATE ROLE dev_users PASSWORD '<password>';
     ```
 
-    The password must have 60 bits of entropy (at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters). For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+    The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
 2. Grant the `dev_users` role privileges on the database:
 
@@ -227,7 +227,7 @@ To get started:
     You now have a `dev_users` role on your parent branch, and the role is not assigned to any users. This role will now be included in all future branches created from this branch.
 
     <Admonition type="note">
-    This does not automatically grant privileges on all existing schemas, tables, sequences, etc., within the database. If you want the `dev_users` role to access specific schemas, tables, etc., you need to grant those permissions explicitly.
+    The `GRANT` statement above does not grant privileges on existing schemas, tables, sequences, etc., within the database. If you want the `dev_users` role to access specific schemas, tables, etc., you need to grant those permissions explicitly.
 
     For example, to grant all privileges on all tables in a schema:
 
@@ -237,7 +237,7 @@ To get started:
 
     Similarly, you'd grant privileges for sequences and other objects as needed.
 
-    That said, the initial command will allow `dev_users` to create new schemas within the database. But for pre-existing schemas and their objects, you need to grant permissions explicitly.
+    That said, the `GRANT` command above allows users with the `dev_users` role to create new schemas within the database. But for pre-existing schemas and their objects, you need to grant permissions explicitly.
     </Admonition>
 
 3. Create a development branch. Name it something like `dev1`. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions.
@@ -274,6 +274,9 @@ To get started:
 CREATE ROLE dev_users PASSWORD `password`;
 GRANT ALL PRIVILEGES ON DATABASE <database> TO dev_users;
 
+-- optionally, grant access to an existing schema
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA <schema_name> TO dev_users;
+
 -- User creation
 CREATE ROLE dev_user1 WITH LOGIN PASSWORD '<password>';
 
@@ -303,7 +306,7 @@ For users of Postgres 14, the SQL statement to revoke the default `CREATE` permi
 REVOKE CREATE ON SCHEMA public FROM PUBLIC;
 ```
 
-Ensure that you are the owner of the `public` schema or a member of a role that authorizes you to execute this SQL statement.
+You must be the owner of the `public` schema or a member of a role that authorizes you to execute this SQL statement.
 
 To restrict the `public` role’s capability to connect to a database, use this statement:
 
