@@ -14,7 +14,7 @@ _Autoscaling_ is a [Neon Pro plan](/docs/introduction/pro-plan) feature. Pro pla
 
 Enabling Autoscaling when you create a project allows you to set _Autoscaling_ default settings for all compute endpoints created in your project. You can adjust _Autoscaling_ settings for individual compute endpoints afterward, but setting defaults when creating a project saves you from having to configure the settings for each compute endpoint later on.
 
-To enable Autoscaling at project creation time:
+To enable Autoscaling when you first create your project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
