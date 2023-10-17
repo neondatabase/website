@@ -39,7 +39,7 @@ To configure Autoscaling default settings for an existing project:
 1. Select **Compute** and click **Change**.
 1. Under **Compute size**, select the **Autoscaling** option.
 1. Using the slider, specify a minimum and maximum compute size.
-    ![Autoscaling](/docs/guides/autoscaling_project_creation.png)
+    ![Autoscaling](/docs/guides/autoscaling_existing_project.png)
 
     <Admonition type="note">
     You can configure the Auto-suspend setting for your compute endpoint at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".
