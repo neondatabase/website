@@ -1,17 +1,18 @@
 ---
 title: Configuring Auto-suspend for Neon computes
-subtitle: Learn how to configure Neon's Auto-suspend feature to control when your compute scales to zero
+subtitle: Learn how to configure Neon's Auto-suspend feature to control when your
+  compute scales to zero
 enableTableOfContents: true
-updatedOn: '2023-08-09T08:55:53Z'
+updatedOn: '2023-10-17T21:41:41.810Z'
 ---
 
 Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature controls when a Neon compute instance transitions to an `Idle` state (scales to zero) due to inactivity. This guide demonstrates how to configure the _Auto-suspend_ setting in your Neon project.
 
-[Neon Pro plan](/docs/introduction/pro-plan) users can configure the _Auto-suspend_ setting for a new project, for an existing project, or for an individual compute endpoint. Configuring the _Auto-suspend_ setting for a new or existing project sets the project's default Auto-suspend setting, which is used from that point forward when creating compute endpoints.
+[Neon Pro plan](/docs/introduction/pro-plan) users can configure the _Auto-suspend_ setting for a new project, for an existing project, or for an individual compute endpoint. Configuring the _Auto-suspend_ setting for a new or existing project sets the project's default Auto-suspend setting, which is used from that point forward when creating new compute endpoints.
 
 ### Configure the Auto-suspend setting for a new project
 
-Configuring the _Auto-suspend_ setting for a new project sets the project's default, which is applied to all compute endpoints created from that point forward. You can adjust _Auto-suspend_ default or configure the setting for individual compute endpoints later, as necessary.
+Configuring the _Auto-suspend_ setting for a new project sets the project's default, which is applied to all compute endpoints created from that point forward. You can adjust this _Auto-suspend_ default at any time, or configure the setting for individual compute endpoints later, as necessary.
 
 To configure the _Auto-suspend_ default setting when you first create your project:
 
@@ -29,7 +30,7 @@ To configure the _Auto-suspend_ default setting when you first create your proje
 
 ### Configure the Auto-suspend setting for an existing project
 
-Configuring the _Auto-suspend_ setting for an existing project sets the project's default, which is applied to all compute endpoints created from that point forward. Existing compute endpoints are unaffected. You can adjust _Auto-suspend_ default or configure the setting for individual compute endpoints later, as necessary.
+Configuring the _Auto-suspend_ setting for an existing project sets the project's default, which is applied to all compute endpoints created from that point forward. Existing compute endpoints are unaffected. You can adjust the _Auto-suspend_ default or configure the setting for individual compute endpoints later, as necessary.
 
 To configure the Auto-suspend default for an existing project:
 
