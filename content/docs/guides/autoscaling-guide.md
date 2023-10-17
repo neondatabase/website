@@ -27,7 +27,7 @@ To enable Autoscaling at project creation time:
     You can configure the Auto-suspend setting for your compute endpoint at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. This feature is also referred to as "scale-to-zero".
     </Admonition>
 
-6. Click **Create Project**. Your initial compute endpoint is created with the specified settings. All compute endpoints created in the future when creating a branch or adding a compute endpoint to a branch are created with this setting.
+6. Click **Create Project**. Your initial compute endpoint is created with the specified settings. All future compute endpoints that you create will use this setting.
 
 ## Enable Autoscaling for an existing project
 
