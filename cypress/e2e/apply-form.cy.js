@@ -1,6 +1,8 @@
+import 'dotenv/config';
+
 describe('Apply Form', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/partners');
+    cy.visit(`${Cypress.env('NEXT_PUBLIC_DEFAULT_SITE_URL')}/partners`);
   });
 
   it('allows users to apply to become a partner', () => {
@@ -61,7 +63,7 @@ describe('Apply Form', () => {
     cy.get("textarea[name='message']").type('I would like to become a partner.');
     cy.get('form').submit();
 
-    cy.wait('@formSubmit');
+    cy.wait('@formErrorSubmit');
     cy.getByData('error-message')
       .should('exist')
       .contains('Something went wrong. Please reload the page and try again.');
