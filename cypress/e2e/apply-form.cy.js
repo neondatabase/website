@@ -4,13 +4,29 @@ describe('Apply Form', () => {
   });
 
   it('allows users to apply to become a partner', () => {
+    cy.intercept(
+      {
+        method: 'POST',
+        url: `https://api.hsforms.com/submissions/v3/integration/submit/**`,
+      },
+      {
+        statusCode: 200,
+        body: {
+          status: 'success',
+        },
+      }
+    ).as('formSuccessSubmit');
+
     cy.get("input[name='integration_type']").click({ force: true });
-    cy.get("input[name='firstname']").type('Test');
-    cy.get("input[name='lastname']").type('Test');
+    cy.get("input[name='firstname']").type('Autotest');
+    cy.get("input[name='lastname']").type('Autotest');
     cy.get("input[name='email']").type('info@example.com');
     cy.get("input[name='company']").type('Example, Inc.');
     cy.get("textarea[name='message']").type('I would like to become a partner.');
-    cy.getByData('submit-button').click();
+    cy.get('form').submit();
+
+    cy.wait('@formSuccessSubmit');
+
     cy.getByData('submit-button').should('exist').contains('Applied!');
   });
 
@@ -27,7 +43,7 @@ describe('Apply Form', () => {
     cy.intercept(
       {
         method: 'POST', // or whatever method the form uses
-        url: `https://api.hsforms.com/submissions/v3/integration/submit/26233105/03763d80-c254-482e-95cc-75ec64e3ef16`,
+        url: `https://api.hsforms.com/submissions/v3/integration/submit/**`,
       },
       {
         statusCode: 500,
@@ -35,7 +51,7 @@ describe('Apply Form', () => {
           error: 'Internal server error',
         },
       }
-    ).as('formSubmit');
+    ).as('formErrorSubmit');
 
     cy.get("input[name='integration_type']").click({ force: true });
     cy.get("input[name='firstname']").type('Test');
