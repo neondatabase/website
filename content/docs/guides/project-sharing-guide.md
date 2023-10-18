@@ -2,7 +2,7 @@
 title: Project sharing
 subtitle: Learn how to share your Neon project with others
 enableTableOfContents: true
-updatedOn: '2023-09-22T19:19:30Z'
+updatedOn: '2023-10-17T18:28:49.780Z'
 ---
 
 The [Neon Pro plan](/docs/introduction/pro-plan) enables sharing your Neon project with other users, which gives them access to your Neon project from all supported management interfaces including the Neon Console, API, and CLI. Follow this guide to learn how.
@@ -34,10 +34,6 @@ To share your project:
     ![Project shared with me](/docs/guides/shared_with_me.png)
 
     An email is also sent to the email address informing the user that a project has been shared with them. The email includes an **Open project** link the user can click on to log in to Neon. After logging in, the user is directed to the **Dashboard** for the shared project in the Neon Console.
-
-    <Admonition type="note">
-    A user **without** a Neon account will not receive an email notification when a project is shared. However, if the user creates a Neon account afterward with the specified email address, the shared project will be available when the user logs in to the Neon Console.
-    </Admonition>
 
 ## Shared project billing
 
