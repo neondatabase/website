@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2023-10-18T10:04:26.584Z'
 ---
 
-The [Neon Pro plan](/docs/introduction/pro-plan) enables sharing your Neon project with other users, which gives them access to your Neon project from all supported Neon project interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
+The [Neon Pro plan](/docs/introduction/pro-plan) enables sharing your Neon project with other users, providing them access to your Neon project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
 
 ## Set up Neon accounts
 
@@ -41,16 +41,16 @@ To share your project:
 
 ## Shared project limits
 
-The users you share the project with operate within your project limits rather than their Free Tier project limits when using your project. For example, a Free Tier user is limited to 10 branches in their own project. When using your project, there is no such restriction. For an overview of plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
+The users you share a project with operate within your Pro plan project limits rather than their Free Tier project limits when using your project. For example, a Free Tier user is limited to 10 branches in their own project. When using your project, there is no such restriction. For an overview of plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
 
 ## Access to a shared project via the Neon API or CLI
 
-The users you share a project with are able to access your project from all supported Neon project interfaces, including the Neon Console, [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), and [Neon CLI](/docs/reference/neon-cli).
+The users you share a project with are able to access the project from all supported Neon interfaces, including the Neon Console, [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), and [Neon CLI](/docs/reference/neon-cli).
 
-When accessing a project from the Neon API, users can supply the Neon API key from their own Neon account. Users can obtain an API key from the **Developer Settings** page in the Neon Console. For instructions, see [Manage API keys](/docs/manage/api-keys).
+Users can access a shared project via the Neon API using an API key from their own Neon account. For information about obtaining an API key, see [Manage API keys](/docs/manage/api-keys).
 
-When using the Neon CLI, users authenticate as they would normally for their own Neon account. They will able able to access their own Neon projects as well as shared projects. See [Neon CLI — Connect](/docs/reference/cli-install#connect) for instructions.
+When using the Neon CLI, users authenticate as they would normally. Users are able able to access their own Neon projects as well as shared projects. See [Neon CLI — Connect](/docs/reference/cli-install#connect) for authentication instructions.
 
 ## Shared project billing
 
-The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account.
+The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account.
