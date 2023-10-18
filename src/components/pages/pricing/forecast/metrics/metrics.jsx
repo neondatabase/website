@@ -82,13 +82,18 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
     <LazyMotion features={domAnimation}>
       <m.div
         className="flex h-[50vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0 md:mt-16 md:opacity-100"
-        initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.3 }}
+        initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
         animate={{
-          opacity: currentSectionIndex === 0 || windowWidth < MOBILE_WIDTH ? 1 : 0.3,
+          opacity: currentSectionIndex === 0 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
         }}
       >
-        <span className="text-green-45 font-medium leading-none -tracking-extra-tight">
-          Activity
+        <span className="flex items-center space-x-2.5">
+          <span className="text-[15px] leading-none tracking-[-0.02em] font-medium py-1 px-3 text-black bg-green-45 rounded-[50px]">
+            1/3
+          </span>
+          <span className="text-green-45 font-medium leading-none -tracking-extra-tight">
+            Activity
+          </span>
         </span>
         <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
           How active are your users?
@@ -98,8 +103,10 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
             <li key={title}>
               <button
                 className={clsx(
-                  'pt-5 w-full flex flex-col px-6 pb-6 border rounded-[10px] hover:border-green-45 duration-200 transition-colors text-left',
-                  activeItems.activity.title === title ? 'border-green-45' : 'border-gray-new-15'
+                  'pt-5 w-full flex flex-col px-6 pb-6 border rounded-[10px] hover:border-green-45/30 duration-200 transition-colors text-left',
+                  activeItems.activity.title === title
+                    ? 'border-green-45 hover:border-green-45'
+                    : 'border-gray-new-15'
                 )}
                 type="button"
                 onClick={() =>
@@ -117,14 +124,19 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
       </m.div>
 
       <m.div
-        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
-        initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.3 }}
+        className="flex h-[70vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
+        initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
         animate={{
-          opacity: currentSectionIndex === 1 || windowWidth < MOBILE_WIDTH ? 1 : 0.3,
+          opacity: currentSectionIndex === 1 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
         }}
       >
-        <span className="text-yellow-70 leading-none font-medium -tracking-extra-tight">
-          Performance
+        <span className="flex items-center space-x-2.5">
+          <span className="text-[15px] leading-none tracking-[-0.02em] font-medium py-1 px-3 text-black bg-yellow-70 rounded-[50px]">
+            2/3
+          </span>
+          <span className="text-yellow-70 leading-none font-medium -tracking-extra-tight">
+            Performance
+          </span>
         </span>
         <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
           What level of performance does your application require?
@@ -148,13 +160,20 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
       </m.div>
 
       <m.div
-        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
-        initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.3 }}
+        className="flex h-[70vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
+        initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
         animate={{
-          opacity: currentSectionIndex === 2 || windowWidth < MOBILE_WIDTH ? 1 : 0.3,
+          opacity: currentSectionIndex === 2 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
         }}
       >
-        <span className="text-blue-80 leading-none font-medium -tracking-extra-tight">Storage</span>
+        <span className="flex items-center space-x-2.5">
+          <span className="text-[15px] leading-none tracking-[-0.02em] font-medium py-1 px-3 text-black bg-blue-80 rounded-[50px]">
+            3/3
+          </span>
+          <span className="text-blue-80 leading-none font-medium -tracking-extra-tight">
+            Storage
+          </span>
+        </span>
         <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
           How much storage do you require?
         </h3>
@@ -179,9 +198,9 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
 
       <m.div
         className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
-        initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.3 }}
+        initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
         animate={{
-          opacity: currentSectionIndex === 3 || windowWidth < MOBILE_WIDTH ? 1 : 0.3,
+          opacity: currentSectionIndex === 3 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
         }}
       >
         <div className="py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden lg:px-6 lg:py-6">
