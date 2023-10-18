@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2023-09-22T19:19:30Z'
 ---
 
-The [Neon Pro plan](/docs/introduction/pro-plan) enables sharing your Neon project with other users, which gives them access to your Neon project from all supported management interfaces including the Neon Console, API, and CLI. Follow this guide to learn how.
+The [Neon Pro plan](/docs/introduction/pro-plan) enables sharing your Neon project with other users, which gives them access to your Neon project from the Neon Console. Follow this guide to learn how.
 
 ## Set up Neon accounts
 
@@ -38,6 +38,10 @@ To share your project:
     <Admonition type="note">
     A user **without** a Neon account will not receive an email notification when a project is shared. However, if the user creates a Neon account afterward with the specified email address, the shared project will be available when the user logs in to the Neon Console.
     </Admonition>
+
+## Shared project limits
+
+The users you share the project with operate within your project limits rather than their Free Tier project limits when using your project. For example, a Free Tier user is limited to 10 branches in their own project. When using your project, there is no such restriction. For an overview of plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
 
 ## Shared project billing
 
