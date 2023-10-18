@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2023-09-22T19:19:30Z'
 ---
 
-The [Neon Pro plan](/docs/introduction/pro-plan) enables sharing your Neon project with other users, which gives them access to your Neon project from the Neon Console. Follow this guide to learn how.
+The [Neon Pro plan](/docs/introduction/pro-plan) enables sharing your Neon project with other users, which gives them access to your Neon project from all supported Neon project interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
 
 ## Set up Neon accounts
 
@@ -42,6 +42,14 @@ To share your project:
 ## Shared project limits
 
 The users you share the project with operate within your project limits rather than their Free Tier project limits when using your project. For example, a Free Tier user is limited to 10 branches in their own project. When using your project, there is no such restriction. For an overview of plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
+
+## Access to a shared project via the Neon API or CLI
+
+The users you share a project with are able to access your project from all supported Neon project interfaces, including the Neon Console, [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), and [Neon CLI](/docs/reference/neon-cli).
+
+When accessing a project from the Neon API, users can supply the Neon API key from their own Neon account. Users can obtain an API key from the **Developer Settings** page in the Neon Console. For instructions, see [Manage API keys](/docs/manage/api-keys).
+
+When using the Neon CLI, users authenticate as they would normally for their own Neon account. They will able able to access their own Neon projects as well as shared projects. See [Neon CLI — Connect](/docs/reference/cli-install#connect) for instructions.
 
 ## Shared project billing
 
