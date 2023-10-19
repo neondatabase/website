@@ -13,7 +13,7 @@ Support channels for the Neon Free Tier, Pro, and Custom plans are outlined belo
 | Video chat                                           |     -     | &check; | &check; |
 | Resale customer support                              |     -     |    -    | &check; |
 
-## Join the Community Forum
+## Join the community forum
 
 All Neon users can join the Neon community forum to ask questions or see what others are doing with Neon.
 
