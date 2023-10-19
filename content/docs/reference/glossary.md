@@ -265,11 +265,9 @@ An open-source relational database management system (RDBMS) emphasizing extensi
 
 ### Postgres role
 
-A Postgre role named for the registered Neon account is created with each Neon project. This user can access a Neon database from a client. Older projects may have a `web-access` system role, used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth). The `web-access` role is system managed. It cannot be modified, removed, or used in other authentication scenarios.
+A Postgres role named for the registered Neon account is created with each Neon project. This role and any additional role created in the Neon Console, API, or CLI is assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, sequences. Roles created with SQL are created with the same basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-acess).
 
-Additional Postgres roles can be created in the Neon Console. You can think of a Postgres role as a "database user".
-
-In Postgres, a role with the `LOGIN` attribute is considered the same as a _database user_. For additional information, refer to [Database roles](https://www.postgresql.org/docs/14/user-manag.html) and [Role Attributes](https://www.postgresql.org/docs/14/role-attributes.html), in the Postgres documentation.
+Older projects may have a `web-access` system role, used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth). The `web-access` role is system managed. It cannot be modified, removed, or used in other authentication scenarios.
 
 ### Primary branch
 

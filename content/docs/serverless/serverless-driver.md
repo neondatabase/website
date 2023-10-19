@@ -3,7 +3,7 @@ title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Learn how to connect to Neon from serverless and edge environments over HTTP
   or WebSockets
-updatedOn: '2023-10-05T19:42:20.363Z'
+updatedOn: '2023-10-13T14:08:36.352Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP.
@@ -32,7 +32,7 @@ DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 
 ## How to use the driver over HTTP
 
-To use the Neon serverless driver over HTTP, you must use the driver's `neon` function. You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/installation-and-db-connection/postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
+To use the Neon serverless driver over HTTP, you must use the driver's `neon` function. You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
 
 <CodeTabs labels={["Node.js",  "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
@@ -91,7 +91,7 @@ export default async function handler(
 </CodeTabs>
 
 <Admonition type="note">
-The maximum response size for queries over HTTP is 10 MB.
+The maximum request size and response size for queries over HTTP is 10 MB. Additionally, there is a 15 second proxy timeout for SQL requests over HTTP. Long running queries that exceed the 15 second threshold are terminated.
 </Admonition>
 
 ## Experimental connection caching

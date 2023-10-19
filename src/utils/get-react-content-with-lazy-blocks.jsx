@@ -145,6 +145,13 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
           return <EmbedTweet {...props}>{domToReact(children)}</EmbedTweet>;
         }
 
+        if (domNode.attribs?.class?.includes('wp-block-heading')) {
+          return AnchorHeading(domNode.name)({
+            children: domToReact(domNode.children),
+            className: `${domNode.attribs.class} scroll-mt-20`,
+          });
+        }
+
         if (!includeBaseTags) return <></>;
       }
     },

@@ -29,6 +29,7 @@ export default {
   dpa: '/dpa',
   subprocessors: '/subprocessors',
   privacyGuide: '/privacy-guide',
+  cookiePolicy: '/cookie-policy',
   partners: '/partners',
   cliReference: '/docs/reference/neon-cli',
   ai: '/ai',

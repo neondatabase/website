@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2023-08-13T22:21:50Z'
+updatedOn: '2023-10-13T14:08:36.349Z'
 ---
 
 Neon is Serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
@@ -21,7 +21,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <a href="/docs/import/import-from-postgres" description="Load your data into a Postgres database hosted by Neon" icon="import">Import data</a>
 
-<a href="/docs/manage/overview" description="Learn how to manage Neon projects, branches, compute resources, databases, and roles" icon="ladder">Manage</a>
+<a href="/docs/ai/ai-intro" description="Build and scale transformative LLM applications with vector storage and similarity search." icon="openai">AI & embeddings</a>
 
 <a href="/docs/introduction/branching" description="Learn to optimize development workflows with database branching" icon="split-branch">Branching</a>
 
@@ -35,7 +35,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <TechnologyNavigation>
 
-<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel-overview" title="Integrate Neon with Vercel" />
+<img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/nextjs" title="Connect a Next.js application to Neon" />
 
 <img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
 
@@ -49,7 +49,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/laravel-logo.svg" width="35" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect a Laravel application to Neon" />
 
-<img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/vercel" title="Connect a Next.js application to Neon" />
+<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel-overview" title="Integrate Neon with Vercel" />
 
 <img src="/images/technology-logos/nodejs-logo.svg" width="33" height="36" alt="Node.js" href="/docs/guides/node" title="Connect a Node.js application to Neon" />
 

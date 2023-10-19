@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2023-10-06T17:44:14.703Z'
+updatedOn: '2023-10-13T14:08:36.351Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [primary branch](#primary-branch) called `main`. You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -125,7 +125,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 A compute endpoint hostname starts with an `ep-` prefix. You can also find a compute endpoint hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
 </Admonition>
 
-If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the _Guides_ section in the documentation provide connection examples for various languages and frameworks. For more information about connecting, see [Connect from any application](/docs/connect/connect-from-any-app).
+If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the [Guides](/docs/guides/guides-intro) section in the documentation provide connection examples for various languages and frameworks. For more information about connecting, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Delete a branch
 
