@@ -3,10 +3,10 @@ title: Neon Pro plan
 subtitle: Learn about the advantages of upgrading to the Neon Pro plan
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-09-19T20:11:34Z'
+updatedOn: '2023-10-19T12:56:03.260Z'
 ---
 
-The Neon **Pro** plan is intended for users and teams who have completed their evaluation of Neon on the Free Tier and are ready to transition projects and prototypes to a production-level plan with higher limits and advanced features.
+The Neon **Pro** plan is intended for users who have completed their evaluation of Neon on the Free Tier and are ready to transition to a production-level plan with higher limits and advanced features.
 
 Because the Neon Pro plan is usage-based, you never have to worry about over-provisioning. You only pay for what you use. Transitioning to the Pro plan has been designed to be as smooth and hassle-free as possible. However, we understand that the Pro plan might not be for everyone &mdash; so if it turns out to be more than you need, reverting to the Free Tier is a simple process. There are no fixed contracts or obligations.
 
