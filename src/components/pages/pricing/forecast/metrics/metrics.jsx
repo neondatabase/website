@@ -53,7 +53,7 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
   return (
     <LazyMotion features={domAnimation}>
       <m.div
-        className="flex h-[50vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0 md:mt-16 md:opacity-100"
+        className="flex h-[50vh] max-h-[975px] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0 md:mt-16 md:opacity-100"
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
         animate={{
           opacity: currentSectionIndex === 0 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
@@ -97,7 +97,7 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
       </m.div>
 
       <m.div
-        className="flex h-[60vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
+        className="flex h-[60vh] max-h-[975px] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
         animate={{
           opacity: currentSectionIndex === 1 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
@@ -141,7 +141,7 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
       </m.div>
 
       <m.div
-        className="flex h-[60vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
+        className="flex h-[60vh] max-h-[975px] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
         animate={{
           opacity: currentSectionIndex === 2 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,

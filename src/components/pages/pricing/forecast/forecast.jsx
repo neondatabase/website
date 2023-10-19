@@ -15,12 +15,17 @@ import ArrowIcon from 'icons/arrow-sm.inline.svg';
 import Metrics from './metrics';
 
 const SECTION_MIN_HEIGHT = 760;
-const PAGE_HEIGHT_THRESHOLD_MIN = 975;
-const PAGE_HEIGHT_THRESHOLD_MAX = 1200;
-const OFFSET_1 = 100;
-const OFFSET_2 = 150;
-const PAGE_HEIGHT_MULTIPLIER_MIN = 0.6;
-const PAGE_HEIGHT_MULTIPLIER_MAX = 0.5;
+const PAGE_MIN_HEIGHT = 800;
+const OFFSET = 100;
+
+const PAGE_HEIGHT_SETTINGS = [
+  [975, 0.6, 0],
+  [1200, 0.55, 200],
+  [1600, 0.5, 300],
+  [1900, 0.45, 400],
+  [2200, 0.4, 500],
+  [Number.MAX_SAFE_INTEGER, 0.35, 600],
+];
 
 const getSelectedIndex = (activeTitle, items) =>
   items.findIndex(({ title }) => title === activeTitle) + 1;
@@ -92,23 +97,27 @@ const Forecast = () => {
     activeItems.storage.title,
   ]);
 
+  const pageHeightMultiplier = useMemo(() => {
+    const setting = PAGE_HEIGHT_SETTINGS.find(([threshold]) => pageHeight <= threshold);
+
+    return setting ? setting[1] : PAGE_HEIGHT_SETTINGS[PAGE_HEIGHT_SETTINGS.length - 1][1];
+  }, [pageHeight]);
+
+  const switchPointsOffset = useMemo(() => {
+    const setting = PAGE_HEIGHT_SETTINGS.find(([threshold]) => pageHeight <= threshold);
+
+    return setting ? setting[2] : 0;
+  }, [pageHeight]);
+
   useEffect(() => {
     const currentScrollTop = scrollY;
-
-    const pageHeightMultiplier =
-      pageHeight > PAGE_HEIGHT_THRESHOLD_MAX
-        ? PAGE_HEIGHT_MULTIPLIER_MAX
-        : PAGE_HEIGHT_MULTIPLIER_MIN;
-
     const switchPointMultiplier =
-      pageHeight < PAGE_HEIGHT_THRESHOLD_MIN
-        ? SECTION_MIN_HEIGHT * 1
-        : pageHeight * pageHeightMultiplier;
+      pageHeight < PAGE_MIN_HEIGHT ? SECTION_MIN_HEIGHT * 1 : pageHeight * pageHeightMultiplier;
 
     // 5 is number of sections: 4 + 1
     const switchPoints = [...Array(5)].map(
       (_, index) =>
-        sectionRef.current.offsetTop + OFFSET_1 + index * switchPointMultiplier - OFFSET_2
+        sectionRef.current.offsetTop + OFFSET + index * switchPointMultiplier - switchPointsOffset
     );
 
     switchPoints.forEach((_, index) => {
@@ -116,7 +125,7 @@ const Forecast = () => {
         setCurrentSectionIndex(index);
       }
     });
-  }, [pageHeight, scrollY]);
+  }, [switchPointsOffset, pageHeight, pageHeightMultiplier, scrollY]);
 
   return (
     <section
@@ -155,7 +164,7 @@ const Forecast = () => {
         size="medium"
       >
         <div className="relative col-span-5 -mx-[140px] col-start-2 h-full xl:col-span-6 xl:col-start-1 xl:-mx-24 md:col-span-full md:hidden">
-          <div className="sticky top-0 h-screen min-h-[700px] -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh]">
+          <div className="sticky top-0 h-screen min-h-[700px] -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh]">
             <div className="absolute flex h-full w-full items-center justify-center">
               <RiveComponent width={870} height={767} aria-hidden />
             </div>
