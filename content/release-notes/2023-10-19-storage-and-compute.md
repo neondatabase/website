@@ -1,6 +1,6 @@
 ### Support for pgvector 0.5.1
 
-The `pgvector` extension for vector similarity search in Postgres was updated to a newer version:
+The `pgvector` extension for vector similarity search in Postgres was updated to a newer version.
 
 | Postgres extension           | Old version   | New version   |
 |------------------------------|---------------|---------------|
