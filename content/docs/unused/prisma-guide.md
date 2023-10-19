@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/prisma-tutorial
-updatedOn: '2023-10-19T20:13:38.508Z'
+updatedOn: '2023-10-19T22:50:50.210Z'
 ---
 
 Prisma is an open source next-generation ORM that consists of the following parts:
