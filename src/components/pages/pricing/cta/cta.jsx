@@ -44,7 +44,7 @@ const CTA = () => {
           </Heading>
           <p className="mt-4 text-lg font-light leading-snug xl:text-base md:mx-auto md:mt-2 md:max-w-[550px] md:text-center">
             Interested in increasing your free tier limits or learning about pricing? Complete the
-            form below to get in touch with our Sales team
+            form below to get in touch with our Sales team.
           </p>
           <AnimatedButton
             className="mt-8 inline-flex !px-14 !py-5 !text-lg tracking-tight hover:bg-[#00FFAA] xl:!px-11 xl:!py-[17px] lg:mt-6 md:mx-auto md:flex md:w-48"
@@ -56,7 +56,7 @@ const CTA = () => {
             linesOffsetBottom={50}
             isAnimated
           >
-            Talk to sales
+            Talk to Sales
           </AnimatedButton>
         </div>
         <div
