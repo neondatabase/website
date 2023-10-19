@@ -2,7 +2,7 @@
 title: Connect an Astro site or application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Astro site or application
 enableTableOfContents: true
-updatedOn: '2023-10-19T22:53:11.727Z'
+updatedOn: '2023-10-19T23:10:12.824Z'
 ---
 
 Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This topic describes how to create a Neon project and access it from an Astro site or application.
