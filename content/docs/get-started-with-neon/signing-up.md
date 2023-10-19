@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/quickstart/console/
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
-updatedOn: '2023-10-19T22:50:50.186Z'
+updatedOn: '2023-10-19T22:53:11.726Z'
 ---
 
 You can sign up for free and upgrade to a paid plan when you are ready to scale. For information about our Free Tier limits, see [Free Tier](/docs/introduction/free-tier). For information about Neon's paid plan options, see [Neon plans](/docs/introduction/plans).
