@@ -3,7 +3,7 @@ title: Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2023-10-19T22:50:50.183Z'
+updatedOn: '2023-10-19T22:53:11.723Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.

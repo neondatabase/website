@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-19T22:50:50.201Z'
+updatedOn: '2023-10-19T22:53:11.746Z'
 ---
 
 A single read-write compute endpoint is created for your project's [primary branch](/docs/reference/glossary#primary-branch), by default.
