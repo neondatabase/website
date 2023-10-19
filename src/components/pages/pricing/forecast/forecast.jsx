@@ -119,7 +119,7 @@ const Forecast = () => {
         size="medium"
       >
         <div className="col-start-2 col-span-5 -mr-10 xl:col-start-1 xl:col-span-6 xl:mr-0 md:col-span-full">
-          <h2 className="text-6xl leading-none font-medium tracking-tighter xl:text-[56px] lg:text-5xl md:text-4xl">
+          <h2 className="text-6xl leading-none font-medium tracking-tighter 2xl:text-[60px] xl:text-[56px] lg:text-5xl md:text-4xl">
             3-click bill estimate
           </h2>
           <p className="text-lg leading-snug font-light mt-4 max-w-[464px] md:text-base md:max-w-none">
