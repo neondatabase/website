@@ -2,7 +2,7 @@
 title: Read replicas — Data analysis and reporting
 subtitle: Leverage read replicas for running data-intensive queries
 enableTableOfContents: true
-updatedOn: '2023-10-05T19:42:20.346Z'
+updatedOn: '2023-10-18T13:12:41.709Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read-only compute instance for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
@@ -40,7 +40,7 @@ Creating a read replica involves adding a read-only compute endpoint to a branch
 2. Select the branch where your database resides.
 3. Click **Add compute**.
 4. On the **Create Compute Endpoint** dialog, select **Read-only** as the **Compute type**.
-5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable **Autoscaling** and configure a minimum and maximum compute size. You can also configure the **Auto-suspend delay** period, which is the amount of idle time after which your read-only compute is transitioned to an idle state. The default setting is 300 seconds (5 minutes). You can set this value up to 604800 seconds (7 days).
+5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable **Autoscaling** and configure a minimum and maximum compute size. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your compute is automatically suspended. The default setting is 5 minutes. You can set this value up to 7 days.
     <Admonition type="note">
     The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
     </Admonition>
