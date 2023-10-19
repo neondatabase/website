@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2023-10-18T19:45:03.399Z'
 ---
 
-The [Neon Pro plan](/docs/introduction/pro-plan) enables sharing your Neon project with other users, providing them access to your Neon project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
+The [Neon Pro plan](/docs/introduction/pro-plan) lets you share your Neon project with other users, giving them access to your Neon project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
 
 ## Set up Neon accounts
 
