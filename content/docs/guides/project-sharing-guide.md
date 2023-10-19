@@ -2,7 +2,7 @@
 title: Project sharing
 subtitle: Learn how to share your Neon project with others
 enableTableOfContents: true
-updatedOn: '2023-10-19T12:29:55.529Z'
+updatedOn: '2023-10-19T12:56:03.258Z'
 ---
 
 The [Neon Pro plan](/docs/introduction/pro-plan) lets you share your Neon project with other users, giving them access to your Neon project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
