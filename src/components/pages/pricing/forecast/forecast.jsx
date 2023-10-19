@@ -18,7 +18,7 @@ const SECTION_MIN_HEIGHT = 760;
 const PAGE_HEIGHT_THRESHOLD = 975;
 const OFFSET_1 = 130;
 const OFFSET_2 = 200;
-const PAGE_HEIGHT_MULTIPLIER = 0.6;
+const PAGE_HEIGHT_MULTIPLIER = 0.5;
 
 const getSelectedIndex = (activeTitle, items) =>
   items.findIndex(({ title }) => title === activeTitle) + 1;
@@ -130,7 +130,7 @@ const Forecast = () => {
         <div className="col-end-12 col-span-4 -ml-10 md:col-span-full md:ml-0">
           <div>
             <p className="text-lg leading-snug font-light mt-4 max-w-[255px] md:text-base md:max-w-none">
-              Need an additional help or custom volume-based plans?
+              Need additional help or custom volume-based plans?
             </p>
             <Link
               className="mt-3.5 pt-[7px] pb-2 px-3 text-[15px] border border-green-45 rounded-[50px] inline-flex items-baseline leading-none text-green-45 tracking-extra-tight transition-colors duration-200 hover:border-[#00e5bf] hover:text-[#00e5bf]"

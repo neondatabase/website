@@ -1,19 +1,17 @@
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useMemo } from 'react';
 
 import AnimatedButton from 'components/shared/animated-button';
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 import { activities, performance, storage } from 'constants/pricing';
-import useClickOutside from 'hooks/use-click-outside';
 import useWindowSize from 'hooks/use-window-size';
 
 import activityIcon from '../images/activity.svg';
 import performanceIcon from '../images/performance.svg';
 import storageIcon from '../images/storage.svg';
-import Select from '../select';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const AVERAGE_DAYS_IN_MONTH = 30.416666;
@@ -36,32 +34,6 @@ const icons = {
 
 const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
   const { width: windowWidth } = useWindowSize();
-  const performanceRef = useRef(null);
-  const storageRef = useRef(null);
-
-  const [isExpanded, setIsExpanded] = useState({
-    performance: false,
-    storage: false,
-  });
-
-  const onSelect = useCallback(
-    (type, item) => {
-      setActiveItems({ ...activeItems, [type]: { ...item } });
-      setIsExpanded({ ...isExpanded, [type]: false });
-    },
-    [activeItems, isExpanded, setActiveItems]
-  );
-
-  const onExpand = useCallback(
-    (type) => {
-      setIsExpanded({ ...isExpanded, [type]: !isExpanded[type] });
-    },
-    [isExpanded]
-  );
-
-  useClickOutside([performanceRef, storageRef], () => {
-    setIsExpanded({ performance: false, storage: false });
-  });
 
   const computeTimeCost = useMemo(
     () => calculateComputeCost(activeItems.performance.unit, activeItems.activity.unit),
@@ -87,14 +59,10 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
           opacity: currentSectionIndex === 0 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
         }}
       >
-        <span className="flex items-center space-x-2.5">
-          <span className="text-[15px] leading-none tracking-[-0.02em] font-medium py-1 px-3 text-black bg-green-45 rounded-[50px]">
-            1/3
-          </span>
-          <span className="text-green-45 font-medium leading-none -tracking-extra-tight">
-            Activity
-          </span>
+        <span className="text-green-45 font-medium leading-none -tracking-extra-tight">
+          Activity
         </span>
+
         <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
           How active are your users?
         </h3>
@@ -103,10 +71,10 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
             <li key={title}>
               <button
                 className={clsx(
-                  'pt-5 w-full flex flex-col px-6 pb-6 border rounded-[10px] hover:border-green-45/30 duration-200 transition-colors text-left',
+                  'pt-5 w-full flex flex-col px-6 pb-6 border rounded-[10px] duration-200 transition-colors text-left',
                   activeItems.activity.title === title
                     ? 'border-green-45 hover:border-green-45'
-                    : 'border-gray-new-15'
+                    : 'border-gray-new-15 hover:border-green-45/30'
                 )}
                 type="button"
                 onClick={() =>
@@ -124,80 +92,84 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
       </m.div>
 
       <m.div
-        className="flex h-[70vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
+        className="flex h-[60vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
         animate={{
           opacity: currentSectionIndex === 1 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
         }}
       >
-        <span className="flex items-center space-x-2.5">
-          <span className="text-[15px] leading-none tracking-[-0.02em] font-medium py-1 px-3 text-black bg-yellow-70 rounded-[50px]">
-            2/3
-          </span>
-          <span className="text-yellow-70 leading-none font-medium -tracking-extra-tight">
-            Performance
-          </span>
+        <span className="text-yellow-70 leading-none font-medium -tracking-extra-tight">
+          Performance
         </span>
+
         <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
           What level of performance does your application require?
         </h3>
-        <Select
-          className={clsx(
-            'after:bg-[linear-gradient(90deg,rgba(240,240,117,0.2)0%,rgba(12,13,13,0.5)40%,rgba(12,13,13,0.5)100%)]',
-            isExpanded.performance &&
-              'shadow-[0px_14px_64px_0px_rgba(240,240,117,0.08),0px_6px_10px_0px_rgba(0,0,0,0.25)]'
-          )}
-          titleClassName={clsx(isExpanded.performance && 'text-yellow-70')}
-          activeClassName="md:text-yellow-70"
-          containerRef={performanceRef}
-          activeItem={activeItems.performance}
-          isExpanded={isExpanded.performance}
-          items={performance}
-          type="performance"
-          onSelect={onSelect}
-          onExpand={() => onExpand('performance')}
-        />
+        <ul className="mt-7 grid gap-y-5 lg:mt-5">
+          {performance.map(({ title, description, unit }) => (
+            <li key={title}>
+              <button
+                className={clsx(
+                  'pt-5 w-full flex flex-col px-6 pb-6 border rounded-[10px] duration-200 transition-colors text-left',
+                  activeItems.performance.title === title
+                    ? 'border-yellow-70 hover:border-yellow-70'
+                    : 'border-gray-new-15 hover:border-yellow-70/30'
+                )}
+                type="button"
+                onClick={() =>
+                  setActiveItems({ ...activeItems, performance: { title, description, unit } })
+                }
+              >
+                <h4 className="text-xl font-medium leading-tight">{title}</h4>
+                <p className="text-left mt-2 text-gray-new-70 font-light leading-tight text-[15px]">
+                  {description}
+                </p>
+              </button>
+            </li>
+          ))}
+        </ul>
       </m.div>
 
       <m.div
-        className="flex h-[70vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
+        className="flex h-[60vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
         animate={{
           opacity: currentSectionIndex === 2 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
         }}
       >
-        <span className="flex items-center space-x-2.5">
-          <span className="text-[15px] leading-none tracking-[-0.02em] font-medium py-1 px-3 text-black bg-blue-80 rounded-[50px]">
-            3/3
-          </span>
-          <span className="text-blue-80 leading-none font-medium -tracking-extra-tight">
-            Storage
-          </span>
-        </span>
+        <span className="text-blue-80 leading-none font-medium -tracking-extra-tight">Storage</span>
+
         <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
           How much storage do you require?
         </h3>
 
-        <Select
-          className={clsx(
-            'after:bg-[linear-gradient(90deg,rgba(110,224,247,0.3)0%,rgba(12,13,13,0.5)40%,rgba(12,13,13,0.5)100%)]',
-            isExpanded.storage &&
-              'shadow-[0px_14px_64px_0px_rgba(117,219,240,0.10),0px_6px_10px_0px_rgba(0,0,0,0.25)]'
-          )}
-          titleClassName={clsx(isExpanded.storage && 'text-blue-80')}
-          activeClassName="md:text-blue-80"
-          containerRef={storageRef}
-          activeItem={activeItems.storage}
-          isExpanded={isExpanded.storage}
-          items={storage}
-          type="storage"
-          onSelect={onSelect}
-          onExpand={() => onExpand('storage')}
-        />
+        <ul className="mt-7 grid gap-y-5 lg:mt-5">
+          {storage.map(({ title, description, unit }) => (
+            <li key={title}>
+              <button
+                className={clsx(
+                  'pt-5 w-full flex flex-col px-6 pb-6 border rounded-[10px] duration-200 transition-colors text-left',
+                  activeItems.storage.title === title
+                    ? 'border-blue-80 hover:border-blue-80'
+                    : 'border-gray-new-15 hover:border-blue-80/30'
+                )}
+                type="button"
+                onClick={() =>
+                  setActiveItems({ ...activeItems, storage: { title, description, unit } })
+                }
+              >
+                <h4 className="text-xl font-medium leading-tight">{title}</h4>
+                <p className="text-left mt-2 text-gray-new-70 font-light leading-tight text-[15px]">
+                  {description}
+                </p>
+              </button>
+            </li>
+          ))}
+        </ul>
       </m.div>
 
       <m.div
-        className="flex h-[100vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
+        className="flex h-[90vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
         animate={{
           opacity: currentSectionIndex === 3 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
