@@ -145,7 +145,7 @@ const Forecast = () => {
         className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
         size="medium"
       >
-        <div className="relative col-span-5 -mx-[140px] col-start-2 h-full xl:col-span-6 xl:col-start-1 xl:-mx-24 md:col-span-full md:hidden mix-blend-lighten">
+        <div className="relative col-span-5 -mx-[140px] col-start-2 h-full xl:col-span-6 xl:col-start-1 xl:-mx-24 md:col-span-full md:hidden">
           <div className="sticky top-0 h-screen min-h-[700px] -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh]">
             <div className="absolute flex h-full w-full items-center justify-center">
               <RiveComponent width={870} height={767} aria-hidden />
