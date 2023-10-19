@@ -107,7 +107,7 @@ const Hero = () => {
           tag="h1"
           size="lg"
         >
-          <span className="text-pricing-primary-1">Start Free.</span>{' '}
+          <span className="text-pricing-primary-1">Start free.</span>{' '}
           <span>Only pay for what you use.</span>
         </Heading>
         <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">

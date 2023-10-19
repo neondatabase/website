@@ -193,7 +193,7 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
         }}
       >
         <div className="py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden lg:px-6 lg:py-6">
-          <p className="font-medium -tracking-extra-tight leading-none">Estimated price</p>
+          <p className="font-medium -tracking-extra-tight leading-none">Estimated bill</p>
           <p className="mt-6">
             <span className="text-6xl text-green-45 leading-none font-light tracking-[-0.06em] md:text-5xl">
               ${totalCost}
@@ -201,7 +201,7 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
             <span className="tracking-[-0.06em] text-2xl leading-none inline-block ml-1">/ mo</span>
           </p>
           <p className="mt-2 text-[15px] font-light text-gray-new-70 leading-tight">
-            The price calculated for Ohio region
+            The price calculated for the Ohio region
           </p>
 
           <ul className="mt-6 pt-7 border-t border-gray-new-15 flex flex-col gap-y-[18px] sm:gap-y-4">

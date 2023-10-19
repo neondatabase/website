@@ -120,16 +120,15 @@ const Forecast = () => {
       >
         <div className="col-start-2 col-span-5 -mr-10 xl:col-start-1 xl:col-span-6 xl:mr-0 md:col-span-full">
           <h2 className="text-6xl leading-none font-medium tracking-tighter xl:text-[56px] lg:text-5xl md:text-4xl">
-            Forecasting is easy
+            3-click bill estimate
           </h2>
           <p className="text-lg leading-snug font-light mt-4 max-w-[464px] md:text-base md:max-w-none">
-            Follow a simple survey to quickly estimate potential monthly bill based on your app
-            users’ activity.
+            Forecast your monthly bill by answering questions about user activity and app needs.
           </p>
         </div>
         <div className="col-end-12 col-span-4 -ml-10 md:col-span-full md:ml-0">
           <div>
-            <p className="text-lg leading-snug font-light mt-4 max-w-[255px] md:text-base md:max-w-none">
+            <p className="text-lg leading-snug font-light mt-4 max-w-[248px] md:text-base md:max-w-none">
               Need additional help or custom volume-based plans?
             </p>
             <Link
