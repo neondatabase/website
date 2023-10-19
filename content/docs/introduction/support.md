@@ -8,15 +8,23 @@ Support channels for the Neon Free Tier, Pro, and Custom plans are outlined belo
 
 | Support channels                                     | Free Tier |   Pro   | Custom  |
 | :--------------------------------------------------- | :-------: | :-----: | :-----: |
-| [Neon Community Forum](https://community.neon.tech/) |  &check;  | &check; | &check; |
+| Neon Community Forum                                 |  &check;  | &check; | &check; |
 | Ability to open support tickets                      |  &check;  | &check; | &check; |
 | Video chat                                           |     -     | &check; | &check; |
 | Resale customer support                              |     -     |    -    | &check; |
 
-All Neon users can open a support ticket from the Neon console. Look for the **Support** link in the sidebar. It opens the **Create Ticket for Support** modal, where you can describe your issue.
+## Join the Community Forum
+
+All Neon users can join the Neon community forum to ask questions or see what others are doing with Neon.
+
+<CommunityBanner>Welcome to the <br /> Neon Discourse Community!</CommunityBanner>
+
+## Open a support ticket
+
+[Neon Pro Plan](/docs/introduction/pro-plan) and [Custom Plan](/docs/introduction/custom-plan) users can open a support ticket from the Neon console. Look for the **Support** link in the sidebar. It opens the **Create Ticket for Support** modal, where you can describe your issue.
 
 ![Support ticket modal](/docs/introduction/neon-support-modal.png)
 
-Pro and Custom plan users can expect an initial response time of 2 business days, from 6am to 6pm Pacific Standard Time (UTC -8), Monday through Friday, excluding public holidays in the United States. For custom support solutions, please contact [Sales](https://neon.tech/contact-sales).
+You can expect an initial response time of 2 business days, from 6am to 6pm Pacific Standard Time (UTC -8), Monday through Friday, excluding public holidays in the United States. For custom support solutions, please contact [Sales](https://neon.tech/contact-sales).
 
-Free Tier users are not guaranteed a specific response time.
+Video chat requests and retail customer support inquiries can be submitted via a support ticket.
