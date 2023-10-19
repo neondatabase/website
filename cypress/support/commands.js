@@ -1,27 +1,31 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
 Cypress.Commands.add('getByData', (selector) => cy.get(`[data-test=${selector}]`));
+
+Cypress.Commands.add('formSuccessSubmit', () => {
+  cy.intercept(
+    {
+      method: 'POST',
+      url: `https://api.hsforms.com/submissions/v3/integration/submit/**`,
+    },
+    {
+      statusCode: 200,
+      body: {
+        status: 'success',
+      },
+    }
+  ).as('formSuccessSubmit');
+});
+
+Cypress.Commands.add('formErrorSubmit', () => {
+  cy.intercept(
+    {
+      method: 'POST', // or whatever method the form uses
+      url: `https://api.hsforms.com/submissions/v3/integration/submit/**`,
+    },
+    {
+      statusCode: 500,
+      body: {
+        error: 'Internal server error',
+      },
+    }
+  ).as('formErrorSubmit');
+});
