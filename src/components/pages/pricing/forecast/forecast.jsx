@@ -15,10 +15,12 @@ import ArrowIcon from 'icons/arrow-sm.inline.svg';
 import Metrics from './metrics';
 
 const SECTION_MIN_HEIGHT = 760;
-const PAGE_HEIGHT_THRESHOLD = 975;
-const OFFSET_1 = 130;
-const OFFSET_2 = 200;
-const PAGE_HEIGHT_MULTIPLIER = 0.45;
+const PAGE_HEIGHT_THRESHOLD_MIN = 975;
+const PAGE_HEIGHT_THRESHOLD_MAX = 1200;
+const OFFSET_1 = 100;
+const OFFSET_2 = 150;
+const PAGE_HEIGHT_MULTIPLIER_MIN = 0.6;
+const PAGE_HEIGHT_MULTIPLIER_MAX = 0.5;
 
 const getSelectedIndex = (activeTitle, items) =>
   items.findIndex(({ title }) => title === activeTitle) + 1;
@@ -92,10 +94,17 @@ const Forecast = () => {
 
   useEffect(() => {
     const currentScrollTop = scrollY;
+
+    const pageHeightMultiplier =
+      pageHeight > PAGE_HEIGHT_THRESHOLD_MAX
+        ? PAGE_HEIGHT_MULTIPLIER_MAX
+        : PAGE_HEIGHT_MULTIPLIER_MIN;
+
     const switchPointMultiplier =
-      pageHeight < PAGE_HEIGHT_THRESHOLD
+      pageHeight < PAGE_HEIGHT_THRESHOLD_MIN
         ? SECTION_MIN_HEIGHT * 1
-        : pageHeight * PAGE_HEIGHT_MULTIPLIER;
+        : pageHeight * pageHeightMultiplier;
+
     // 5 is number of sections: 4 + 1
     const switchPoints = [...Array(5)].map(
       (_, index) =>
