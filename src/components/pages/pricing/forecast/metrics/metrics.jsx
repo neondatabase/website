@@ -59,8 +59,13 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
           opacity: currentSectionIndex === 0 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
         }}
       >
-        <span className="text-green-45 font-medium leading-none -tracking-extra-tight">
-          Activity
+        <span className="flex items-center space-x-2.5">
+          <span className="text-[15px] leading-none tracking-[-0.02em] font-medium py-1 px-3 text-black bg-green-45 rounded-[50px]">
+            1/3
+          </span>
+          <span className="text-green-45 font-medium leading-none -tracking-extra-tight">
+            Activity
+          </span>
         </span>
 
         <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
@@ -98,8 +103,13 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
           opacity: currentSectionIndex === 1 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
         }}
       >
-        <span className="text-yellow-70 leading-none font-medium -tracking-extra-tight">
-          Performance
+        <span className="flex items-center space-x-2.5">
+          <span className="text-[15px] leading-none tracking-[-0.02em] font-medium py-1 px-3 text-black bg-yellow-70 rounded-[50px]">
+            2/3
+          </span>
+          <span className="text-yellow-70 leading-none font-medium -tracking-extra-tight">
+            Performance
+          </span>
         </span>
 
         <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
@@ -137,7 +147,14 @@ const Metrics = ({ currentSectionIndex, activeItems, setActiveItems }) => {
           opacity: currentSectionIndex === 2 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
         }}
       >
-        <span className="text-blue-80 leading-none font-medium -tracking-extra-tight">Storage</span>
+        <span className="flex items-center space-x-2.5">
+          <span className="text-[15px] leading-none tracking-[-0.02em] font-medium py-1 px-3 text-black bg-blue-80 rounded-[50px]">
+            3/3
+          </span>
+          <span className="text-blue-80 leading-none font-medium -tracking-extra-tight">
+            Storage
+          </span>
+        </span>
 
         <h3 className="text-4xl tracking-tighter leading-dense font-light mt-3.5 lg:text-3xl lg:mt-2.5 md:text-2xl">
           How much storage do you require?
