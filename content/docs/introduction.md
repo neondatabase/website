@@ -59,6 +59,30 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/symfony-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Symfony with Doctrine to Neon" />
 
+<img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Astro to Neon" />
+
+<img src="public/images/technology-logos/aws-lambda-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from AWS Lambda to Neon" />
+
+<img src="public/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Elixir with Ecto to Neon" />
+
+<img src="public/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Exograph to Neon" />
+
+<img src="public/images/technology-logos/grafbase-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Grafbase to Neon" />
+
+<img src="public/images/technology-logos/javascript-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from JavaScript to Neon" />
+
+<img src="public/images/technology-logos/koyeb-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Kaoyeb to Neon" />
+
+<img src="public/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="OAuth INtegration with Neon" />
+
+<img src="public/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from PolyScale to Neon" />
+
+<img src="public/images/technology-logos/remix-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Remix to Neon" />
+
+<img src="public/images/technology-logos/stepzen-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from StenZen to Neon" />
+
+<img src="public/images/technology-logos/wundergraph-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Wundergraph to Neon" />
+
 </TechnologyNavigation>
 
 ## Join the community
