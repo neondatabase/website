@@ -1,12 +1,21 @@
-name: End-to-end tests
-on: push
+name: E2E on Chrome
+
+on: [push]
+
 jobs:
-  cypress-run:
-    runs-on: ubuntu-22.04
+  install:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
+        with:
+          project: ./site
+          browser: chrome
+          build: npm run build
+          start: npm run start
+          wait-on: "http://localhost:3000"
+        env:
+          NEXT_PUBLIC_DEFAULT_SITE_URL: http://localhost:3000
