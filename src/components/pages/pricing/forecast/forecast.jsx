@@ -18,7 +18,7 @@ const SECTION_MIN_HEIGHT = 760;
 const PAGE_HEIGHT_THRESHOLD = 975;
 const OFFSET_1 = 130;
 const OFFSET_2 = 200;
-const PAGE_HEIGHT_MULTIPLIER = 0.5;
+const PAGE_HEIGHT_MULTIPLIER = 0.55;
 
 const getSelectedIndex = (activeTitle, items) =>
   items.findIndex(({ title }) => title === activeTitle) + 1;
