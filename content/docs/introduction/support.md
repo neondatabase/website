@@ -9,7 +9,7 @@ Support channels for the Neon Free Tier, Pro, and Custom plans are outlined belo
 | Support channels                                     | Free Tier |   Pro   | Custom  |
 | :--------------------------------------------------- | :-------: | :-----: | :-----: |
 | [Neon Community Forum](https://community.neon.tech/) |  &check;  | &check; | &check; |
-| Ability to open support tickets                      |  &check;  | &check; | &check; |
+| Ability to open support tickets                      |     -     | &check; | &check; |
 | Video chat                                           |     -     | &check; | &check; |
 | Resale customer support                              |     -     |    -    | &check; |
 
