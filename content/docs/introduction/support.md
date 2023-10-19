@@ -8,8 +8,8 @@ Support channels for the Neon Free Tier, Pro, and Custom plans are outlined belo
 
 | Support channels                                     | Free Tier |   Pro   | Custom  |
 | :--------------------------------------------------- | :-------: | :-----: | :-----: |
-| Neon Community Forum                                 |  &check;  | &check; | &check; |
-| Ability to open support tickets                      |  &check;  | &check; | &check; |
+| Neon community forum                                 |  &check;  | &check; | &check; |
+| Ability to open support tickets                      |     -     | &check; | &check; |
 | Video chat                                           |     -     | &check; | &check; |
 | Resale customer support                              |     -     |    -    | &check; |
 
@@ -17,7 +17,7 @@ Support channels for the Neon Free Tier, Pro, and Custom plans are outlined belo
 
 All Neon users can join the Neon community forum to ask questions or see what others are doing with Neon.
 
-<CommunityBanner>Welcome to the <br /> Neon Discourse Community!</CommunityBanner>
+<CommunityBanner>Neon Discourse Community</CommunityBanner>
 
 ## Open a support ticket
 
