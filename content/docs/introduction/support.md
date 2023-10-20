@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2023-06-07T19:20:39Z'
+updatedOn: '2023-10-19T13:51:01.194Z'
 ---
 
 Support channels for the Neon Free Tier, Pro, and Custom plans are outlined below.
@@ -9,7 +9,7 @@ Support channels for the Neon Free Tier, Pro, and Custom plans are outlined belo
 | Support channels                                     | Free Tier |   Pro   | Custom  |
 | :--------------------------------------------------- | :-------: | :-----: | :-----: |
 | [Neon Community Forum](https://community.neon.tech/) |  &check;  | &check; | &check; |
-| Ability to open support tickets                      |  &check;  | &check; | &check; |
+| Ability to open support tickets                      |     -     | &check; | &check; |
 | Video chat                                           |     -     | &check; | &check; |
 | Resale customer support                              |     -     |    -    | &check; |
 
