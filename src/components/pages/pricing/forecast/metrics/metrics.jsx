@@ -19,6 +19,27 @@ const AVERAGE_DAYS_IN_MONTH = 30.416666;
 const PROJECT_STORAGE_PRICE = 0.000164;
 const PROJECT_STORAGE_HOURS = 24;
 
+function shallowEqual(object1, object2) {
+  if (object1 === object2) {
+    return true;
+  }
+
+  const keys1 = Object.keys(object1);
+  const keys2 = Object.keys(object2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (const key of keys1) {
+    if (object1[key] !== object2[key]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 const calculateStorageCost = (storageValue) =>
   storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE * AVERAGE_DAYS_IN_MONTH;
 
@@ -100,14 +121,48 @@ const Metrics = ({
   );
 
   useEffect(() => {
+    setFinalEstimatePrice((finalEstimatePrice) => {
+      const newActiveItems = {
+        ...finalEstimatePrice.activeItems,
+        ...(activeItems.activity && { activity: activeItems.activity }),
+        ...(activeItems.performance && { performance: activeItems.performance }),
+        ...(activeItems.storage && { storage: activeItems.storage }),
+      };
+
+      let newPrice = finalEstimatePrice.price; // Default to the current price
+
+      // Calculate the new price based on the selected items
+      if (!allItemsSelected || activeItems.activity) {
+        newPrice = 0;
+      }
+      if (activeItems.activity && activeItems.performance) {
+        newPrice = computeTimeCost.toFixed(2);
+      }
+      if (activeItems.activity && activeItems.performance && activeItems.storage) {
+        newPrice = totalCost;
+      }
+
+      // Check if either the active items or the price has changed
+      const hasChanged =
+        newPrice !== finalEstimatePrice.price ||
+        !shallowEqual(newActiveItems, finalEstimatePrice.activeItems);
+
+      if (hasChanged) {
+        return {
+          price: newPrice,
+          activeItems: newActiveItems,
+        };
+      }
+
+      return finalEstimatePrice; // Return current state if nothing has changed
+    });
+  }, [activeItems, computeTimeCost, totalCost, allItemsSelected]);
+
+  useEffect(() => {
     if (activeItems.activity && activeItems.performance && activeItems.storage) {
-      setFinalEstimatePrice({
-        price: totalCost,
-        activeItems: { ...activeItems },
-      });
       setAllItemsSelected(true);
     }
-  }, [activeItems, totalCost]);
+  }, [activeItems]);
 
   return (
     <LazyMotion features={domAnimation}>

@@ -27,20 +27,26 @@ const Select = (props) => {
   } = props;
   // once the user selects an item, the animation on hover should be disabled
   const [isSelected, setIsSelected] = useState(false);
+  const { width: windowWidth } = useWindowSize();
 
   const type = label.toLowerCase();
 
-  const { width: windowWidth } = useWindowSize();
   const onHover = (type, item) => {
-    if (!isSelected) {
-      setActiveAnimations({ ...activeAnimations, [type]: { ...item } });
-    }
+    setActiveAnimations((prevAnimations) => ({
+      ...prevAnimations,
+      [type]: { ...item },
+    }));
   };
 
   const onUnhover = (type) => {
-    if (!isSelected) {
-      setActiveAnimations({ ...activeAnimations, [type]: null });
-    }
+    setActiveAnimations((prevAnimations) => {
+      const newState = {
+        ...prevAnimations,
+        [type]: null,
+      };
+
+      return newState;
+    });
   };
 
   return (
@@ -73,10 +79,10 @@ const Select = (props) => {
                   activeItems[type]?.title === title ? activeColor : defaultColor
                 )}
                 type="button"
-                onMouseOver={() => onHover(type, item)}
-                onMouseOut={() => onUnhover(type)}
-                onFocus={() => onHover(type, item)}
-                onBlur={() => onUnhover(type)}
+                onMouseEnter={() => onHover(type, item)}
+                onMouseLeave={() => onUnhover(type)}
+                // onFocus={() => onHover(type, item)}
+                // onBlur={() => onUnhover(type)}
                 onClick={() => {
                   onHover(type, item);
                   setIsSelected(true);

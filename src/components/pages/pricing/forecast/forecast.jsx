@@ -27,8 +27,10 @@ const PAGE_HEIGHT_SETTINGS = [
   [Number.MAX_SAFE_INTEGER, 0.35, 600], // max height
 ];
 
-const getSelectedIndex = (activeTitle, items) =>
-  items.findIndex(({ title }) => title === activeTitle) + 1;
+const getSelectedIndex = (activeTitle, items) => {
+  const index = items.findIndex((item) => item.title === activeTitle);
+  return index === -1 ? 1 : index + 1;
+};
 
 const Forecast = () => {
   const sectionRef = useRef();
@@ -85,19 +87,33 @@ const Forecast = () => {
     }
 
     if (!firstSelectInput) return;
-    firstSelectInput.value = getSelectedIndex(activeAnimations.activity?.title, activities);
+
+    if (activeItems.activity && !activeAnimations.activity?.title) {
+      firstSelectInput.value = getSelectedIndex(activeItems.activity?.title, activities);
+    } else {
+      firstSelectInput.value = getSelectedIndex(activeAnimations.activity?.title, activities);
+    }
 
     if (!secondSelectInput) return;
-    secondSelectInput.value = getSelectedIndex(activeAnimations.performance?.title, performance);
+    if (activeItems.performance && !activeAnimations.performance?.title) {
+      secondSelectInput.value = getSelectedIndex(activeItems.performance?.title, performance);
+    } else {
+      secondSelectInput.value = getSelectedIndex(activeAnimations.performance?.title, performance);
+    }
 
     if (!thirdSelectInput) return;
-    thirdSelectInput.value = getSelectedIndex(activeAnimations.storage?.title, storage);
+    if (activeItems.storage && !activeAnimations.storage?.title) {
+      thirdSelectInput.value = getSelectedIndex(activeItems.storage?.title, storage);
+    } else {
+      thirdSelectInput.value = getSelectedIndex(activeAnimations.storage?.title, storage);
+    }
   }, [
     currentSectionIndex,
     animationStageInput,
     firstSelectInput,
     secondSelectInput,
     thirdSelectInput,
+    activeItems,
     activeAnimations.activity?.title,
     activeAnimations.performance?.title,
     activeAnimations.storage?.title,
