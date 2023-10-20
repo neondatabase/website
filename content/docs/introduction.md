@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2023-10-20T11:30:23.640Z'
+updatedOn: '2023-10-20T13:21:52.073Z'
 ---
 
 Neon is Serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
