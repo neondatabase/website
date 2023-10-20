@@ -2,6 +2,7 @@
 
 import useScrollPosition from '@react-hook/window-scroll';
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -34,6 +35,7 @@ const getSelectedIndex = (activeTitle, items) => {
 
 const Forecast = () => {
   const sectionRef = useRef();
+  const animationRef = useRef();
   const { height: pageHeight } = useWindowSize();
   const scrollY = useScrollPosition();
   const [contentRef, isContentInView] = useInView({ triggerOnce: true });
@@ -51,6 +53,15 @@ const Forecast = () => {
     performance: null,
     storage: null,
   });
+
+  const [showSectionTitle, setShowSectionTitle] = useState(true);
+
+  useEffect(() => {
+    if (isContentInView) {
+      const animationTop = animationRef.current.getBoundingClientRect().top;
+      setShowSectionTitle(animationTop !== 0);
+    }
+  }, [isContentInView, scrollY]);
 
   const { RiveComponent, rive } = useRive({
     src: '/animations/pages/pricing/lights.riv',
@@ -154,39 +165,52 @@ const Forecast = () => {
       className="forecast safe-paddings pt-[200px] 2xl:pt-36 md:pt-24 md:pb-20"
       ref={sectionRef}
     >
-      <Container
-        className="relative z-10 grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
-        size="medium"
-      >
-        <div className="col-start-2 col-span-5 -mr-10 xl:col-start-1 xl:col-span-6 xl:mr-0 md:col-span-full">
-          <h2 className="text-6xl leading-none font-medium tracking-tighter 2xl:text-[60px] xl:text-[56px] lg:text-5xl md:text-4xl">
-            Forecasting is easy
-          </h2>
-          <p className="text-lg leading-snug font-light mt-4 max-w-[464px] md:text-base md:max-w-none">
-            Forecast your monthly bill by answering questions about user activity and app needs.
-          </p>
-        </div>
-        <div className="col-end-12 col-span-4 -ml-10 md:col-span-full md:ml-0">
-          <div>
-            <p className="text-lg leading-snug font-light mt-4 max-w-[248px] md:text-base md:max-w-none">
-              Need additional help or custom volume-based plans?
-            </p>
-            <Link
-              className="mt-3.5 pt-[7px] pb-2 px-3 text-[15px] border border-green-45 rounded-[50px] inline-flex items-baseline leading-none text-green-45 tracking-extra-tight transition-colors duration-200 hover:border-[#00e5bf] hover:text-[#00e5bf]"
-              to={LINKS.contactSales}
-            >
-              Contact Sales
-              <ArrowIcon className="ml-1" />
-            </Link>
-          </div>
-        </div>
-      </Container>
+      <LazyMotion features={domAnimation}>
+        <m.div
+          initial={{ opacity: 1 }}
+          animate={{
+            opacity: showSectionTitle ? 1 : 0.4,
+          }}
+          transition={{ duration: 0.2 }}
+        >
+          <Container
+            className="relative z-10 grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
+            size="medium"
+          >
+            <div className="col-start-2 col-span-5 -mr-10 xl:col-start-1 xl:col-span-6 xl:mr-0 md:col-span-full">
+              <h2 className="text-6xl leading-none font-medium tracking-tighter 2xl:text-[60px] xl:text-[56px] lg:text-5xl md:text-4xl">
+                Forecasting is easy
+              </h2>
+              <p className="text-lg leading-snug font-light mt-4 max-w-[464px] md:text-base md:max-w-none">
+                Forecast your monthly bill by answering questions about user activity and app needs.
+              </p>
+            </div>
+            <div className="col-end-12 col-span-4 -ml-10 md:col-span-full md:ml-0">
+              <div>
+                <p className="text-lg leading-snug font-light mt-4 max-w-[248px] md:text-base md:max-w-none">
+                  Need additional help or custom volume-based plans?
+                </p>
+                <Link
+                  className="mt-3.5 pt-[7px] pb-2 px-3 text-[15px] border border-green-45 rounded-[50px] inline-flex items-baseline leading-none text-green-45 tracking-extra-tight transition-colors duration-200 hover:border-[#00e5bf] hover:text-[#00e5bf]"
+                  to={LINKS.contactSales}
+                >
+                  Contact Sales
+                  <ArrowIcon className="ml-1" />
+                </Link>
+              </div>
+            </div>
+          </Container>
+        </m.div>
+      </LazyMotion>
       <Container
         className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
         size="medium"
       >
         <div className="relative col-span-5 -mx-[140px] col-start-2 h-full xl:col-span-6 xl:col-start-1 xl:-mx-24 md:col-span-full md:hidden">
-          <div className="sticky top-0 h-screen min-h-[700px] -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh]">
+          <div
+            className="sticky top-0 h-screen min-h-[700px] -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh]"
+            ref={animationRef}
+          >
             <div className="absolute flex h-full w-full items-center justify-center">
               <RiveComponent width={870} height={767} aria-hidden />
             </div>
