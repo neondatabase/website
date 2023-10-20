@@ -59,7 +59,7 @@ DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 
 ## Configure the Postgres client
 
-There are two parts to connecting a Remix application to Neon. The first is `db.server`, Remix will ensure any code added to this file won't be included in the client bundle. The second is the route where the connection to the database will be used. 
+There are two parts to connecting a Remix application to Neon. The first is `db.server`. Remix will ensure any code added to this file won't be included in the client bundle. The second is the route where the connection to the database will be used. 
 
 ### db.server
 
