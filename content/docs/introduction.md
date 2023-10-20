@@ -39,7 +39,7 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/nodejs-logo.svg" width="33" height="36" alt="Node.js" href="/docs/guides/node" title="Connect a Node.js application to Neon" />
 
-<img src="/images/technology-logos/neon-logo.svg"  width="42" height="36" alt="Neon serverless driver" href="/docs/serverless/serverless-driver" title="Connect with the Neon serverless driver" />
+<img src="/images/technology-logos/neon-logo.svg"  width="42" height="36" alt="Neon" href="/docs/serverless/serverless-driver" title="Connect with the Neon serverless driver" />
 
 <img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
 
