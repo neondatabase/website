@@ -221,8 +221,13 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
-    - title: OAuth
-      slug: guides/oauth-integration
+    - title: Partner Guide
+      slug: guides/partner-intro
+      items: 
+        - title: OAuth
+          slug: guides/oauth-integration
+        - title: Manage reseller billing
+          slug: guides/partner-billing
 - title: AI & embeddings
   items:
     - title: Introduction
