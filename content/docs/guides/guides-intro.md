@@ -44,7 +44,7 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/laravel-logo.svg" width="35" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect from Laravel to Neon" />
 
-<img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="OAuth integration with Neon" />
+<img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
 
 <img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale" title="Connect Neon to PolyScale" />
 

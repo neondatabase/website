@@ -143,5 +143,5 @@ You can check out the following example application that leverages the Neon OAut
 The example application code is available on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/neon-branches-visualizer" description="A Neon branching visualizer app that showcases how to build an OAuth integration with Neon" icon="github">Neon Branches Visualizer</a>
+<a href="https://github.com/neondatabase/neon-branches-visualizer" description="A Neon branching visualizer app showcasing how to build an OAuth integration with Neon" icon="github">Neon Branches Visualizer</a>
 </DetailIconCards>
