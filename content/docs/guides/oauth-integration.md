@@ -138,9 +138,7 @@ The response object includes an `access_token` value, required for making reques
 
 ## Example OAuth applications
 
-You can check out the following example application that leverages the Neon OAuth integration: [Visualizing Neon Database Branches](https://neon-experimental.vercel.app)
-
-The example application code is available on GitHub.
+The [Visualizing Neon Database Branches](https://neon-experimental.vercel.app) application leverages the Neon OAuth integration. You can find the example application code on GitHub.
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/neon-branches-visualizer" description="A Neon branching visualizer app showcasing how to build an OAuth integration with Neon" icon="github">Neon Branches Visualizer</a>
