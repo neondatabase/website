@@ -116,7 +116,7 @@ const Metrics = ({
           className={clsx(
             index === 0
               ? 'h-[50vh]'
-              : 'h-[60vh] scroll-mt-[calc((100vh-975px)/2)] [@media(max-height:900px)]:scroll-mt-[calc((100vh-760px)/2)]'
+              : 'h-[60vh] scroll-mt-[calc((100vh-975px)/2)] [@media(max-height:1400px)]:scroll-mt-[calc((100vh-760px)/2)]'
           )}
           key={item.label}
           {...item}
