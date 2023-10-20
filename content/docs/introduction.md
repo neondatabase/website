@@ -51,6 +51,8 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel-overview" title="Integrate Neon with Vercel" />
 
+<img src="/images/technology-logos/neon.svg"  width="42" height="36" alt="Neon serverless driver" href="/docs/guides/serverless-driver" title="Connect with the Neon serverless driver" />
+
 <img src="/images/technology-logos/nodejs-logo.svg" width="33" height="36" alt="Node.js" href="/docs/guides/node" title="Connect a Node.js application to Neon" />
 
 <img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
@@ -61,25 +63,23 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/aws-lambda-logo.svg" width="36" height="36" alt="AWS Lambda" href="/docs/guides/aws-lambda" title="Connect from AWS Lambda to Neon" />
 
-<img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir" title="Connect from Elixir with Ecto to Neon" />
+<img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir-ecto" title="Connect from Elixir with Ecto to Neon" />
 
-<img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Connect from Exograph to Neon" />
+<img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Use Exograph with Neon" />
 
-<img src="/images/technology-logos/grafbase-logo.svg" width="36" height="36" alt="Grafbase" href="/docs/guides/grafbase" title="Connect from Grafbase to Neon" />
-
-<img src="/images/technology-logos/javascript-logo.svg" width="36" height="36" alt="JavaScript" href="/docs/guides/javascript" title="Connect from JavaScript to Neon" />
+<img src="/images/technology-logos/grafbase-logo.svg" width="36" height="36" alt="Grafbase" href="/docs/guides/grafbase" title="Use Grafbase Edge Resolvers with Neon" />
 
 <img src="/images/technology-logos/koyeb-logo.svg" width="36" height="36" alt="Koyeb" href="/docs/guides/koyeb" title="Connect from Koyeb to Neon" />
 
-<img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth" title="OAuth Integration with Neon" />
+<img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Neon OAuth integration" />
 
 <img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale" title="Connect from PolyScale to Neon" />
 
-<img src="/images/technology-logos/remix-logo.svg" width="36" height="36" alt="Remix" href="/docs/guides/remix" title="Connect from Remix to Neon" />
+<img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Remix" href="/docs/guides/astro" title="Connect from Astro to Neon" />
 
-<img src="/images/technology-logos/stepzen-logo.svg" width="36" height="36" alt="StepZen" href="/docs/guides/symfony" title="Connect from StepZen to Neon" />
+<img src="/images/technology-logos/stepzen-logo.svg" width="36" height="36" alt="StepZen" href="/docs/guides/stpzen" title="Use StepZen with Neon" />
 
-<img src="/images/technology-logos/wundergraph-logo.svg" width="36" height="36" alt="Wundergraph" href="/docs/guides/symfony" title="Connect from Wundergraph to Neon" />
+<img src="/images/technology-logos/wundergraph-logo.svg" width="36" height="36" alt="Wundergraph" href="/docs/guides/wundergraph" title="Use Wundergraph with Neon" />
 
 </TechnologyNavigation>
 
