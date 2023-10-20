@@ -63,7 +63,7 @@ There are two parts to connecting a Remix application to Neon. The first is `db.
 
 ### db.server
 
-Create a `db.server.ts` file at the root of your `/app` directory add the following code snippet to connect to your Neon database:
+Create a `db.server.ts` file at the root of your `/app` directory and add the following code snippet to connect to your Neon database:
 
 
 <CodeTabs labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
