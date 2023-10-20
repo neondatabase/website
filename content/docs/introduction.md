@@ -61,9 +61,9 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 <img src="/images/technology-logos/java-logo.svg" width="27" height="36" alt="Java" href="/docs/guides/java" title="Connect a Java application to Neon" />
 
-<img src="/images/technology-logos/koyeb-logo.svg" width="36" height="36" alt="Koyeb" href="/docs/guides/koyeb" title="Use Koyeb with Neon" />
+<img src="/images/technology-logos/koyeb-logo.svg" width="36" height="36" alt="Koyeb" href="/docs/guides/koyeb" title="Use Neon with Koyeb" />
 
-<img src="/images/technology-logos/laravel-logo.svg" width="35" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect a Laravel application to Neon" />
+<img src="/images/technology-logos/laravel-logo.svg" width="35" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect from Laravel to Neon" />
 
 <img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="OAuth integration with Neon" />
 
