@@ -87,4 +87,4 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 
 If you have questions about Neon or Postgres, reach out to Neon community members and developers in the [Neon Discourse Community](https://community.neon.tech/).
 
-<CommunityBanner>Welcome to the <br /> Neon Discourse Community!</CommunityBanner>
+<CommunityBanner>Neon Discourse Community</CommunityBanner>
