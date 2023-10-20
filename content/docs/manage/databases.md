@@ -2,7 +2,7 @@
 title: Manage databases
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-06T17:44:14.704Z'
+updatedOn: '2023-10-19T23:10:12.845Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is no limit on the number of databases you can create.
@@ -344,10 +344,6 @@ As of Postgres 15, only a database owner has the `CREATE` privilege on a databas
 
 For more information about database object privileges in Postgres, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
 
-## Need help?
-
-To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.
-
 ## Protected database names
 
 The following names are protected and cannot be given to a database:
@@ -355,3 +351,7 @@ The following names are protected and cannot be given to a database:
 - `postgres`
 - `template0`
 - `template1`
+
+## Need help?
+
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
