@@ -19,12 +19,12 @@ const PAGE_MIN_HEIGHT = 800;
 const OFFSET = 100;
 
 const PAGE_HEIGHT_SETTINGS = [
-  [975, 0.6, 0],
-  [1200, 0.55, 200],
+  [975, 0.7, 0], // page height, multiplier, offset
+  [1200, 0.6, 100],
   [1600, 0.5, 300],
   [1900, 0.45, 400],
   [2200, 0.4, 500],
-  [Number.MAX_SAFE_INTEGER, 0.35, 600],
+  [Number.MAX_SAFE_INTEGER, 0.35, 600], // max height
 ];
 
 const getSelectedIndex = (activeTitle, items) =>
@@ -39,9 +39,15 @@ const Forecast = () => {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
 
   const [activeItems, setActiveItems] = useState({
-    activity: activities[0],
-    performance: performance[0],
-    storage: storage[0],
+    activity: null,
+    performance: null,
+    storage: null,
+  });
+
+  const [activeAnimations, setActiveAnimations] = useState({
+    activity: null,
+    performance: null,
+    storage: null,
   });
 
   const { RiveComponent, rive } = useRive({
@@ -79,22 +85,22 @@ const Forecast = () => {
     }
 
     if (!firstSelectInput) return;
-    firstSelectInput.value = getSelectedIndex(activeItems.activity.title, activities);
+    firstSelectInput.value = getSelectedIndex(activeAnimations.activity?.title, activities);
 
     if (!secondSelectInput) return;
-    secondSelectInput.value = getSelectedIndex(activeItems.performance.title, performance);
+    secondSelectInput.value = getSelectedIndex(activeAnimations.performance?.title, performance);
 
     if (!thirdSelectInput) return;
-    thirdSelectInput.value = getSelectedIndex(activeItems.storage.title, storage);
+    thirdSelectInput.value = getSelectedIndex(activeAnimations.storage?.title, storage);
   }, [
     currentSectionIndex,
     animationStageInput,
     firstSelectInput,
     secondSelectInput,
     thirdSelectInput,
-    activeItems.activity.title,
-    activeItems.performance.title,
-    activeItems.storage.title,
+    activeAnimations.activity?.title,
+    activeAnimations.performance?.title,
+    activeAnimations.storage?.title,
   ]);
 
   const pageHeightMultiplier = useMemo(() => {
@@ -138,7 +144,7 @@ const Forecast = () => {
       >
         <div className="col-start-2 col-span-5 -mr-10 xl:col-start-1 xl:col-span-6 xl:mr-0 md:col-span-full">
           <h2 className="text-6xl leading-none font-medium tracking-tighter 2xl:text-[60px] xl:text-[56px] lg:text-5xl md:text-4xl">
-            3-click bill estimate
+            Forecasting is easy
           </h2>
           <p className="text-lg leading-snug font-light mt-4 max-w-[464px] md:text-base md:max-w-none">
             Forecast your monthly bill by answering questions about user activity and app needs.
@@ -178,6 +184,8 @@ const Forecast = () => {
             currentSectionIndex={currentSectionIndex}
             activeItems={activeItems}
             setActiveItems={setActiveItems}
+            activeAnimations={activeAnimations}
+            setActiveAnimations={setActiveAnimations}
           />
         </div>
       </Container>
