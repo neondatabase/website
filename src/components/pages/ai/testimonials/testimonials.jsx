@@ -13,7 +13,7 @@ import TwitterIcon from './images/twitter.inline.svg';
 // TODO: add links to original tweets?
 const sliderItems = [
   {
-    text: 'What if PGVector was on steroids ?! <a href="https://twitter.com/raoufdevrel" target="_blank" rel="noreferrer noopener">@raoufdevrel</a> from <a href="https://twitter.com/neondatabase" target="_blank" rel="noreferrer noopener">@neondatabase</a> just did that with pg_embedding and made it available through <a href="https://twitter.com/LangChainAI" target="_blank" rel="noreferrer noopener">@LangChainAI</a>. I&apos;ll definitely give it a try on <a href="https://twitter.com/quivr_brain" target="_blank" rel="noreferrer noopener">@quivr_brain</a> and our 10GiB of vectors that use PGVector',
+    text: 'What if PGVector was on steroids ?! <a href="https://twitter.com/raoufdevrel" target="_blank" rel="noreferrer noopener">@raoufdevrel</a> from <a href="https://twitter.com/neondatabase" target="_blank" rel="noreferrer noopener">@neondatabase</a> just did that with pg_embedding and made it available through <a href="https://twitter.com/LangChainAI" target="_blank" rel="noreferrer noopener">@LangChainAI</a>. I&apos;ll definitely give it a try on <a href="https://twitter.com/quivr_brain" target="_blank" rel="noreferrer noopener">@quivr_brain</a> and our 10 GiB of vectors that use PGVector',
     authorName: 'Stan Girard',
     authorTitle: 'Founder, Quivr',
   },
