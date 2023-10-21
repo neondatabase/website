@@ -17,12 +17,12 @@ Upgrading to the Neon Pro plan gives you higher limits, advanced features, and a
 ### Higher limits
 
 - **More projects:** The Pro Tier offers unlimited projects, while the Free Tier offers only one. But what is a Neon project, and why would you need more than one? A project is a top-level container in Neon for your computes, branches, databases, and roles. Projects are a way to organize your resources and usage. If you are a company that develops data-driven applications, it might make sense to create a project for each client or each application. For information about objects that a project contains, see [The Neon object hierarchy](/docs/manage/overview).
-- **Unlimited storage:** The Pro plan supports any data size. There's a default limit of 200 GB to protect your account from unintended use, but if you contact [support@neon.tech](mailto:support@neon.tech), we'll raise the limit to whatever you require.
+- **Unlimited storage:** The Pro plan supports any data size. There's a default limit of 200 GB to protect your account from unintended use, but if you [open a support ticket](/docs/introduction/support), we can raise the limit to whatever you require.
 - **Unlimited branches:** With the Pro plan, there is no limit on branches. You can create as many branches as required to support your CI/CD pipeline. You can instantly and cost-effectively create a database branch for every preview deployment, client, or developer.
 - **Unlimited databases:** There is no limit on Postgres databases in any Neon plan. You can create as many databases as you need.
 
 <Admonition type="note">
-The Pro plan has default limit of 20 simultaneously active computes to protect against unintended usage. To increase this limit, reach out to [support@neon.tech](mailto:support@neon.tech). The simultaneously active compute limit does not affect the primary branch compute, which always remains available. If you encounter `Console request failed` errors, this may indicate that you have reached the active compute limit.
+The Pro plan has default limit of 20 simultaneously active computes to protect against unintended usage. To request an increase this limit, please [open a support ticket](/docs/introduction/support). The simultaneously active compute limit does not affect the primary branch compute, which always remains available. If you encounter `Console request failed` errors, this may indicate that you have reached the active compute limit.
 </Admonition>
 
 ### Advanced features
@@ -37,7 +37,7 @@ The Neon Pro plan comes with the following advanced features, and we plan to add
 
 ### Added support
 
-In addition to the [community forum](https://community.neon.tech/) and the ability to open support tickets, Pro plan users have access to Neon Support via video chat. As a Pro user, you can send a request to [support@neon.tech](mailto:support@neon.tech) to request a video chat.
+In addition to the [community forum](https://community.neon.tech/) and the ability to open support tickets, Pro plan users have access to Neon Support via video chat. Please [open a support ticket](/docs/introduction/support) to request a video chat.
 
 ## How does billing work?
 
