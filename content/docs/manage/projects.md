@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2023-10-16T18:03:39.756Z'
+updatedOn: '2023-10-19T23:10:12.847Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases, and with the Pro plan, as many branches of those databases, as your application or workflow needs. However, [tier limits](/docs/introduction/plans) define how many projects you can create. Neon's Free Tier limits you to one project per Neon account.
@@ -43,9 +43,10 @@ You can tab between these sections:
 ## Basic actions
 
 Here are some basic actions you can take to add or manage projects:
-- [Create a project](#Create-a-project)
+
+- [Create a project](#create-a-project)
 - [View projects](#view-projects)
-- [Change a project name](#change-the-name-of-your-project)
+- [Change a project name](#change-the-name-or-copy-the-id-of-your-project)
 - [Delete a project](#delete-a-project)
 - [Share a project](#share-a-project)
 
@@ -62,7 +63,7 @@ To create a Neon project:
 3. Specify valeus for **Name**, **Postgres version**, and **Region**. Project names are limited to 64 characters. If you are a Neon [Pro plan](/docs/introduction/pro-plan) user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
     - Neon supports fixed size computes and _Autoscaling_. For more information, see [Compute size and Autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
-    - The **Auto-suspend delay** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
+    - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
   
 4. Click **Create Project**.
 
@@ -115,10 +116,6 @@ To share a project:
 
 The email you specify is added to the list of **People who have access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
 
-<Admonition type="note">
-A user **without** a Neon account will not receive an email notification when a project is shared. However, if the user creates a Neon account afterward with the specified email address, the shared project will be available when the user logs in to the Neon Console.
-</Admonition>
-
 The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you were to share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
 
 For additional information, refer to our [Project sharing guide](/docs/guides/project-sharing-guide).
@@ -126,6 +123,7 @@ For additional information, refer to our [Project sharing guide](/docs/guides/pr
 ## Advanced settings
 
 From the **Settings** page, you can also set defaults or apply bulk changes across your Neon objects:
+
 - [Reset default compute size](#reset-the-default-compute-size) (Pro plan only)
 - [Configure history retention range](#configure-history-retention)
 
@@ -148,7 +146,6 @@ _Example: default minimum and maximum autoscale settings_
 
 ![Default autoscaling min and max](/docs/manage/default_autoscale.png)
 
-
 ### Configure history retention
 
 By default, Neon retains a 7-day history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/billing#project-storage).
@@ -161,8 +158,6 @@ To configure the history retention period for a project:
     ![History retention configuration](/docs/relnotes/history_retention.png)
 4. Use the slider to select the history retention period.
 5. Click **Save**.
-
-
 
 ## Manage projects with the Neon API
 
@@ -446,4 +441,4 @@ curl -X 'DELETE' \
 
 ## Need help?
 
-To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).

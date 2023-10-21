@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-06T17:44:14.704Z'
+updatedOn: '2023-10-19T23:10:12.846Z'
 ---
 
 A single read-write compute endpoint is created for your project's [primary branch](/docs/reference/glossary#primary-branch), by default.
@@ -32,10 +32,10 @@ Compute endpoint details shown on the branch page include:
 
 - **Id**: The compute endpoint ID.
 -- **Type**: The type of compute endpoint. `R/W` (Read-write) or `R/O` (Read-only).
+- **Status**: The compute endpoint status (`Active`, `Idle`, or `Stopped`).
 - **Compute size**: The size of the compute endpoint. Neon [Pro plan](/docs/introduction/pro-plan) users can configure the amount of vCPU and RAM for a compute endpoint when creating or editing a compute endpoint. Shows _Autoscaling_ minimum and maximum vCPU values if _Autoscaling_ is enabled.
 - **Auto-suspend delay**: The number of seconds of inactivity after which a compute endpoint is automatically suspended. The default is 300 seconds (5 minutes). For more information, see [Auto-suspend configuration](#auto-suspend-configuration).
 - **Last active**: The date and time the compute was last active.
-- **Status**: The compute endpoint status (`Active`, `Idle`, or `Stopped`).
 
 ## Create a compute endpoint
 
@@ -90,10 +90,7 @@ The `neon_utils` extension provides a `num_cpus()` function you can use to monit
 
 Neon's _Auto-suspend_ feature automatically transitions a compute endpoint into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable _Auto-suspend_ completely to maintain an "always-active" compute endpoint. An "always-active" configuration eliminates the few seconds of latency required to reactivate a compute endpoint but is likely to increase your compute time usage.
 
-The maximum **Auto-suspend delay** setting is 604800 seconds (7 days), and the following settings have a special meaning:
-
-- `0` means use the default setting (5 minutes / 300 seconds).
-- `-1` means never suspend the compute endpoint.
+The maximum **Suspend compute after a period of inactivity** setting is 7 days. To configure a compute as "always-active", deselect **Suspend compute after a period of inactivity**. For more information, refer to [Configuring Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide).
 
 ## Delete a compute endpoint
 
@@ -394,4 +391,4 @@ curl -X 'DELETE' \
 
 ## Need help?
 
-To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
