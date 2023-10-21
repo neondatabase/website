@@ -150,6 +150,8 @@
           slug: guides/nextjs
         - title: Astro
           slug: guides/astro
+        - title: Remix
+          slug: guides/remix
     - title: Languages
       items:
         - title: Elixir
