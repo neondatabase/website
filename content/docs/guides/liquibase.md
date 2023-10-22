@@ -147,7 +147,7 @@ You’ll get a changelog file for your database that looks something like this:
 ```xml
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <changeSet author="dtprice (generated)" id="1697969580160-1">
+    <changeSet author="alex (generated)" id="1697969580160-1">
         <createTable tableName="authors">
             <column autoIncrement="true" name="author_id" type="INTEGER">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="authors_pkey"/>
@@ -160,7 +160,7 @@ You’ll get a changelog file for your database that looks something like this:
             <column name="bio" type="TEXT"/>
         </createTable>
     </changeSet>
-    <changeSet author="dtprice (generated)" id="1697969580160-2">
+    <changeSet author="alex (generated)" id="1697969580160-2">
         <createTable tableName="posts">
             <column autoIncrement="true" name="post_id" type="INTEGER">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="posts_pkey"/>
@@ -173,10 +173,10 @@ You’ll get a changelog file for your database that looks something like this:
             <column defaultValueComputed="CURRENT_TIMESTAMP" name="published_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
         </createTable>
     </changeSet>
-    <changeSet author="dtprice (generated)" id="1697969580160-3">
+    <changeSet author="alex (generated)" id="1697969580160-3">
         <addUniqueConstraint columnNames="email" constraintName="authors_email_key" tableName="authors"/>
     </changeSet>
-    <changeSet author="dtprice (generated)" id="1697969580160-4">
+    <changeSet author="alex (generated)" id="1697969580160-4">
         <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="posts" constraintName="posts_author_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="author_id" referencedTableName="authors" validate="true"/>
     </changeSet>
 </databaseChangeLog>
@@ -203,7 +203,7 @@ Now, you can start making database schema changes by creating [changesets](https
     xmlns:pro="http://www.liquibase.org/xml/ns/pro"  
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
-        <changeSet author="AlexL" id="myIDNumber1234">
+        <changeSet author="alex" id="myIDNumber1234">
             <createTable tableName="comments">
                 <column autoIncrement="true" name="comment_id" type="INTEGER">
                     <constraints nullable="false" primaryKey="true" primaryKeyName="comments_pkey"/>
