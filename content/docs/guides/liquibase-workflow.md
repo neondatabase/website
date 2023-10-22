@@ -27,7 +27,7 @@ liquibase init project --project-dir ~/blogdb
 
 Enter `Y` to accept the defaults.
 
-## Prepare a source database in Neon
+## Prepare a source database
 
 For demonstration purposes, create a `blog` database in Neon with two tables, `posts` and `authors`.
 
@@ -56,7 +56,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
     );
     ```
 
-## Prepare a target development database in Neon
+## Prepare a development database
 
 Now, let's prepare a development database in Neon by creating a development branch, where you can safely make changes to your database schema without affecting the source database on your `main` branch. A branch is a copy-on-write clone of the data in your Neon project, so it will include a copy of the `blog` database with the `authors` and `posts` tables that you just created.
 
@@ -224,7 +224,7 @@ Now, you can start making database schema changes by creating [changesets](https
     </databaseChangeLog>
     ```
 
-### Deploy the schema change to the target database
+### Deploy the schema change
 
 Run the [update](https://docs.liquibase.com/commands/update/update.html) command to deploy the schema change to your target database (your development database on the `dev1` branch).
 
@@ -262,7 +262,7 @@ You can verify these tables were created by viewing the `blog` database on your 
 
 At this point, you can continue to iterate, applying schema changes to you database, until you are satisfied with the modified schema.
 
-### Review schema changes before saving and applying them
+### Review schema changes
 
 It is a best practice to review schema changes before saving and applying them to your source database.
 
@@ -342,7 +342,7 @@ Liquibase command 'updateSql' was executed successfully.
 
 </details>
 
-## Run a diff command to compare the changes
+### Run a diff command
 
 You can also run a `diff` command to compare your source and target databases.
 
@@ -416,7 +416,7 @@ Liquibase command 'diff' was executed successfully.
 
 When you are satisfied with the changes that will be applied, save your changelog to source control, such as a GitHub repository where you or your team stores you changelog.
 
-### Apply the new changeset to your source database
+### Apply the changeset to your source database
 
 Apply the new changesets to the source database on your primary branch:
 

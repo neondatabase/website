@@ -204,7 +204,7 @@
         - title: Flyway
           items:
             - title: Get started
-            - slug: guides/flyway  
+              slug: guides/flyway  
         - title: Liquibase
           items:
              - title: Get started
