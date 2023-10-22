@@ -4,9 +4,9 @@ subtitle: Learn how to manage schema changes in Neon with Liquibase
 enableTableOfContents: true
 ---
 
-Liquibase is an open-source library for tracking, managing and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
+Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
-This guide steps you through installing the Liquibase CLI, configuring Liquibase to connect to your Neon database, deploying a database schema change, and rolling back the schema change.
+This guide steps you through installing the Liquibase CLI, configuring Liquibase to connect to a Neon database, deploying a database schema change, and rolling back the schema change. It generally follows the steps described in the [Liquibase Quickstart](https://www.liquibase.org/get-started/quickstart).
 
 ## Prerequisites
 
@@ -65,7 +65,7 @@ Liquibase Open Source 4.24.0 by Liquibase
 
 ## Prepare a Neon database
 
-Create a `blog` database in Neon with two tables, `posts` and `authors`.
+For demonstration purposes, create a `blog` database in Neon with two tables, `posts` and `authors`.
 
 1. From the Neon console, create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 2. Using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), add the following tables:
@@ -104,42 +104,29 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex
 
 ## Connect from Liquibase to your Neon database
 
-1. Create a directory for your Liquibase project.
+1. Create a directory for your Liquibase project. For example:
 
     ```bash
-    mkdir liquibase
+    mkdir blogdb
     ```
 
-2. Create a `liquibase.properties` file in your project directory, and add an entry with the name of you liquibase changelog file and your database `url`, as shown. For the `url`, specify the Neon connection string you retrieved previously:
+2. Create a `liquibase.properties` file in your project directory, and add an entry with the name for your [liquibase changelog file](https://docs.liquibase.com/concepts/changelogs/home.html) and your database `url`, as shown. The current state of your database will be written to this changelog file. For the `url`, specify the Neon connection string you retrieved previously:
 
     <CodeBlock shouldWrap>
 
     ```env
-    changeLogFile:dbchangelog.xml  
+    changeLogFile:mydbchangelog.xml  
     url: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf
     ```
 
     </CodeBlock>
 
-<Admonition type="note">
-Using Liquibase with PostgreSQL requires a JDBC driver JAR file. Liquibase includes this driver in the `liquibase/internal/lib` directory and uses it by default. The driver version is displayed when you run the `liquibase --version` command:
-
-```bash
-liquibase --version
-...
-- internal/lib/postgresql.jar: PostgreSQL JDBC Driver 42.6.0 By PostgreSQL Global Development Group
-...
-```
-
-Optionally, you can download a different version of the driver from [https://jdbc.postgresql.org/download/](https://jdbc.postgresql.org/download/) or from [Maven](https://mvnrepository.com/artifact/org.postgresql/postgresql). See [Adding and Updating Liquibase Drivers](https://docs.liquibase.com/workflows/liquibase-community/adding-and-updating-liquibase-drivers.html) for information about using a different driver version.
-</Admonition>
-
 ## Take a snapshot of your database
 
-After defining your database connection details, run the [generateChangelog](https://docs.liquibase.com/commands/inspection/generate-changelog.html) command to creates the specified changelog file with the current state of your database.
+After defining your database connection, run the [generateChangelog](https://docs.liquibase.com/commands/inspection/generate-changelog.html) command to create a changelog file with the current state of your database.
 
 ```bash
-liquibase --changeLogFile=dbchangelog.xml generateChangeLog
+liquibase --changeLogFile=mydatabase_changelog.xml generateChangeLog
 ```
 
 You’ll get a changelog file for your database that looks something like this:
@@ -182,14 +169,14 @@ You’ll get a changelog file for your database that looks something like this:
 </databaseChangeLog>
 ```
 
-## Create a changeset
+## Create a schema change
 
-Now, you can start making database changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.htm). A changeset is the basic unit of change in Liquibase. You can append a changeset to your master changelog file or define it in a separate file, as we do here.
+Now, you can start making database schema changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.htm). A changeset is the basic unit of change in Liquibase. You can append a changeset to your master changelog file or define it in a separate file, as we do here.
 
 1. Create a changelog file for your changeset:
 
 ```bash
-cd ~/liquibase
+cd ~/blogdb
 touch dbchangelog.xml
 ```
 
