@@ -66,14 +66,21 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=al
 
 ## Configure flyway
 
-Configure Flyway by editing `/conf/flyway.conf` file. Supply the required connection details, which you retrieved in the previous step.
+Configure Flyway by uncommenting and updating the following items in the `/conf/flyway.conf` file. You retrieved the required connection details in the previous step.
+
+<CodeBlock shouldWrap>
 
 ```bash
 flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
+
 flyway.user=alex
+
 flyway.password=AbC123dEf
+
 flyway.locations=filesystem:/home/alex/flyway-9.22.3/sql
 ```
+
+</CodeBlock>
 
 ## Create the first migration
 
@@ -91,7 +98,7 @@ create table person (
 Run the `flyway migrate` command to migrate your database:
 
 ```bash
-flyway> flyway migrate
+flyway migrate
 ```
 
 If the command was successful, you’ll see output similar to the following:
@@ -120,7 +127,7 @@ insert into person (ID, NAME) values (3, 'Ms. Smith');
 Run the migration:
 
 ```bash
-flyway> flyway migrate
+flyway migrate
 ```
 
 If the command was successful, you’ll see output similar to the following:
@@ -138,7 +145,7 @@ You can verify that the data was added by viewing the table on **Tables** page i
 
 ## View schema migration history
 
-Whn you run the `flyway migrate` command, the schema changes are registered in the `flyway_schema_history` table, which Flyway automatically creates in your database. You can view this table by running the `flyway info` command.
+Whn you run the `flyway migrate` command, Flyway registers the schema changes in the `flyway_schema_history` table, which Flyway automatically creates in your database. You can view the table by running the `flyway info` command.
 
 ```bash
 flyway info
@@ -153,7 +160,7 @@ Schema version: 2
 A Flyway report has been generated here: /home/alex/flyway-9.22.3/sql/report.html
 ```
 
-You can also view this table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+You can also view the table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
 
 ## Next steps
 
