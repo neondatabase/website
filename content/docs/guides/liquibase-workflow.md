@@ -1,6 +1,6 @@
 ---
 title: Liquibase developer workflow with Neon
-subtitle: Implement a developer workflow for schema changes with Liquibase and Neon branching
+subtitle: Implement a developer workflow with Liquibase and Neon branching
 enableTableOfContents: true
 ---
 
