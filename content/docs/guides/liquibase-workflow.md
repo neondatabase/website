@@ -6,7 +6,9 @@ enableTableOfContents: true
 
 Liquibase is an open-source database-independent library for tracking, managing and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
-This guide shows you how to set up a developer workflow that uses Liquibase with Neon's branching feature. The workflow involves making schema changes on a target development database branch and applying the changes back to the source database on your main branch in Neon.
+This guide shows you how to set up a developer workflow that uses Liquibase with Neon's branching feature. The workflow involves making schema changes to a database on a development branch and applying the changes back to the source database on the main branch of your Neon project.
+
+The instructions in this guide are based on the workflow described in the [Liquibase Developer Workflow](https://www.liquibase.org/get-started/developer-workflow) tutorial.
 
 ## Prerequisites
 
@@ -27,10 +29,12 @@ Enter `Y` to accept the defaults.
 
 ## Prepare a source database in Neon
 
-Create a `blog` database in Neon with two tables, `posts` and `authors`.
+For demonstration purposes, create a `blog` database in Neon with two tables, `posts` and `authors`.
 
-1. From the Neon console, create a database named `blog` on the `main` branch of your Neon project. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
-2. Open the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and create the following tables:
+1. Open the [Neon Console](https://console.neon.tech/app/projects).
+1. Select your project.
+1. Select **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
+1. Using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), add the following tables:
 
     ```sql
     -- Creating the `authors` table
@@ -63,7 +67,7 @@ To create a branch:
    ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch. Let's call it `dev1`.
 5. Leave `main` selected as the parent branch, where the `blog` database was created.
-6. Leave the remaining default settings. You want to create a branch from **Head** to include the latest data, and you need a compute endpoint to connect to the copy of the `blog` database on the branch.
+6. Leave the remaining default settings. Creating a branch from **Head** creates a branch with the latest data, and a compute endpoint is required to connect to the database on the branch.
 8. Click **Create Branch** to create your branch.
 
 ## Retrieve your Neon database connection strings
@@ -72,68 +76,68 @@ Retrieve connection strings for your target and source databases from the **Conn
 
 1. Select the `dev1` branch, the `blog` database, and copy the connection string.
 
-```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
-```
+    ```bash
+    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
+    ```
 
 2. Select the `main` branch, the `blog` database, and copy the connection string.
 
-```bash
-postgres://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
-```
+    ```bash
+    postgres://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
+    ```
 
-Notice that the hostname (the part starting with `-ep` and ending in `neon.tech`) differs. This is because the `dev1` branch is a completely separate Postgres instance, hosted on its own compute.
+Notice that the hostname (the part starting with `-ep` and ending in `neon.tech`) differs. This is because the `dev1` branch is a separate instance of Postgres, hosted on its own compute.
 
 ## Update your liquibase.properties file
 
-The `liquibase.properties` file defines the location of your Liquibase changelog file and your Target and Source databases.
+The `liquibase.properties` file defines the location of the Liquibase changelog file and your Target and Source databases.
 
 1. In your Liquibase project directory, open the `liquibase.properties` file, which comes pre-populated with example settings.
 
 2. Change the `changeLogFile` setting as shown:
 
-```env
-# Enter the path for your changelog file.
-changeLogFile=my-changelog.xml
-``````
+    ```env
+    # Enter the path for your changelog file.
+    changeLogFile=dbchangelog.xml
+    ``````
 
-The [changelog file](https://docs.liquibase.com/parameters/changelog-file.html) is the root file of your Liquibase project that stores a record of all your database changes (changesets).
+    The [changelog file](https://docs.liquibase.com/parameters/changelog-file.html) is where you define database schema changes (changesets).
 
-3. Configure the `url`, `username`, and `password` settings for your Target database. These are the settings for the `blog` database on your `dev1` branch. You can obtain the required details from the connection string you copied previously. Please notice how the connection string format differs from the one you copied from Neon.
+3. Configure the `url`, `username`, and `password` settings for your Target database. These are the settings for the `blog` database on your `dev1` branch. You can obtain the required details from the connection string you copied previously.
 
-```env
-#### Enter the Target database 'url' information  ####
-liquibase.command.url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
+    ```env
+    #### Enter the Target database 'url' information  ####
+    liquibase.command.url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
 
-# Enter the username for your Target database.
-liquibase.command.username: alex
+    # Enter the username for your Target database.
+    liquibase.command.username: alex
 
-# Enter the password for your Target database.
-liquibase.command.password: AbC123dEf
-```
+    # Enter the password for your Target database.
+    liquibase.command.password: AbC123dEf
+    ```
 
-4. Configure the `url`, `username`, and `password` settings for your Source database. These are the settings for the `blog` database on your `main` branch. You can obtain the required details from the connection string you copied previously. Please notice how the connection string format differs from the one you copied from Neon.
+4. Configure the `url`, `username`, and `password` settings for your Source database. These are the settings for the `blog` database on your `main` branch. You can obtain the required details from the connection string you copied previously.
 
-```env
-#### Enter the Source Database 'referenceUrl' information ####
-## The source database is the baseline or reference against which your target database is compared for diff/diffchangelog commands.
+    ```env
+    #### Enter the Source Database 'referenceUrl' information ####
+    ## The source database is the baseline or reference against which your target database is compared for diff/diffchangelog commands.
 
-# Enter URL for the source database
-liquibase.command.referenceUrl: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
+    # Enter URL for the source database
+    liquibase.command.referenceUrl: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
 
-# Enter the username for your source database
-liquibase.command.referenceUsername: alex
+    # Enter the username for your source database
+    liquibase.command.referenceUsername: alex
 
-# Enter the password for your source database
-liquibase.command.referencePassword: AbC123dEf
-```
+    # Enter the password for your source database
+    liquibase.command.referencePassword: AbC123dEf
+    ```
 
 ## Take a snapshot of your target database
 
-Capture the current state of your Target database. The following command creates a Liquibase changelog file named `my-changelog.xml`.
+Capture the current state of your Target database. The following command creates a Liquibase changelog file named `mydatabase_changelog.xml`.
 
 ```bash
-liquibase --changeLogFile=my-changelog.xml generateChangeLog
+liquibase --changeLogFile=mydatabase_changelog.xml generateChangeLog
 ```
 
 If the command was successful, you’ll see output similar to the following:
@@ -145,11 +149,11 @@ Liquibase Open Source 4.24.0 by Liquibase
 
 BEST PRACTICE: The changelog generated by diffChangeLog/generateChangeLog should be inspected for correctness and completeness before being deployed. Some database objects and their dependencies cannot be represented automatically, and they may need to be manually updated before being deployed.
 
-Generated changelog written to my-changelog.xml
+Generated changelog written to mydatabase_changelog.xml
 Liquibase command 'generateChangelog' was executed successfully.
 ```
 
-Check for the `my-changelog.xml` file in your Liquibase project directory. It should looks something like this:
+Check for the `mydatabase_changelog.xml` file in your Liquibase project directory. It should look something like this:
 
 ```xml
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
@@ -189,48 +193,48 @@ Check for the `my-changelog.xml` file in your Liquibase project directory. It sh
 </databaseChangeLog>
 ```
 
-## Create a database schema change
+## Create a schema change
 
-Now you can start to make database changes by creating your first changeset:
+Now you can start making database schema changes by creating your first changeset:
 
 1. Create a `dbchangelog.xml` file:
 
-```bash
-cd ~/liquibase
-touch dbchangelog.xml
-```
+    ```bash
+    cd ~/liquibase
+    touch dbchangelog.xml
+    ```
 
 2. Add the following changeset, which adds a `comments` table:
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>  
-<databaseChangeLog  
-  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"  
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-  xmlns:pro="http://www.liquibase.org/xml/ns/pro"  
-  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
-      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
-    <changeSet author="AlexL" id="myIDNumber1234">
-        <createTable tableName="comments">
-            <column autoIncrement="true" name="comment_id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="comments_pkey"/>
-            </column>
-            <column name="post_id" type="INTEGER">
-                <constraints nullable="false" foreignKeyName="fk_comments_post_id" referencedTableName="posts" referencedColumnNames="post_id"/>
-            </column>
-            <column name="author_id" type="INTEGER">
-                <constraints nullable="false" foreignKeyName="fk_comments_author_id" referencedTableName="authors" referencedColumnNames="author_id"/>
-            </column>
-            <column name="comment" type="TEXT"/>
-            <column name="commented_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
-        </createTable>
-    </changeSet>
-</databaseChangeLog>
-```
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>  
+    <databaseChangeLog  
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:pro="http://www.liquibase.org/xml/ns/pro"  
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+        <changeSet author="AlexL" id="myIDNumber1234">
+            <createTable tableName="comments">
+                <column autoIncrement="true" name="comment_id" type="INTEGER">
+                    <constraints nullable="false" primaryKey="true" primaryKeyName="comments_pkey"/>
+                </column>
+                <column name="post_id" type="INTEGER">
+                    <constraints nullable="false" foreignKeyName="fk_comments_post_id" referencedTableName="posts" referencedColumnNames="post_id"/>
+                </column>
+                <column name="author_id" type="INTEGER">
+                    <constraints nullable="false" foreignKeyName="fk_comments_author_id" referencedTableName="authors" referencedColumnNames="author_id"/>
+                </column>
+                <column name="comment" type="TEXT"/>
+                <column name="commented_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            </createTable>
+        </changeSet>
+    </databaseChangeLog>
+    ```
 
-### Apply changes to the target developer database
+### Deploy the schema change to target database
 
-Run `liquibase update` to apply the changes to the target developer database. Iterate until you are happy with the changes on your development database.
+Run `liquibase update` to deploy the schema change to the target developer database. Iterate until you are happy with the changes on your development database.
 
 ```bash
 liquibase update
@@ -256,11 +260,20 @@ Liquibase: Update has been successful. Rows affected: 1
 Liquibase command 'update' was executed successfully.
 ```
 
+<Admonition type="info">
+When you run a changeset for the first time, Liquibase automatically creates two tracking tables in your database:
+
+- [databasechangelog](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html): Tracks which changesets have been run.
+- [databasechangeloglock](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html): Ensures only one instance of Liquibase runs at a time.
+
+You can verify these tables were created by viewing the `blog` database on the **Tables** page in the Neon console. Select **Tables** from the sidebar.
+</Admonition>
+
 ### Review schema changes before saving and applying them
 
-It is a best practice to review schema changes before saving and applying them to your changelog.
+It is a best practice to review schema changes before saving and applying them to your source database.
 
-Running the following command to see if there are changesets that haven't been applied to the source database:
+Run the following command to see if there are changesets that haven't been applied to the source database:
 
 ```bash
 liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog status --verbose
