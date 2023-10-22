@@ -4,9 +4,9 @@ subtitle: Implement a developer workflow for schema changes with Liquibase and N
 enableTableOfContents: true
 ---
 
-Liquibase is an open-source database-independent library for tracking, managing and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
+Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
-This guide shows you how to set up a developer workflow that uses Liquibase with Neon's branching feature. The workflow involves making schema changes to a database on a development branch and applying the changes back to the source database on the main branch of your Neon project.
+This guide shows how to set up a developer workflow using Liquibase with Neon's branching feature. The workflow involves making schema changes to a database on a development branch and applying those changes back to the source database on the main branch of your Neon project.
 
 The instructions in this guide are based on the workflow described in the [Liquibase Developer Workflow](https://www.liquibase.org/get-started/developer-workflow) tutorial.
 
@@ -19,7 +19,7 @@ The instructions in this guide are based on the workflow described in the [Liqui
 
 ## Initialize a new Liquibase project
 
-Run the [init project](https://docs.liquibase.com/commands/init/project.html) command to initialize a Liquibase project in the specified directory. The directory will be created is it does not exist.
+Run the [init project](https://docs.liquibase.com/commands/init/project.html) command to initialize a Liquibase project in the specified directory. The project directory is created if it does not exist. Initializing a Liquibase project in this way provides us with a pre-populated Liquibase properties file, which we'll modify in a later step.
 
 ```bash
 liquibase init project --project-dir ~/blogdb
@@ -58,7 +58,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 
 ## Prepare a target development database in Neon
 
-Now, let's prepare a development database in Neon by creating a development branch, where you can safely make changes to your database schema without affecting the database schema on your `main` branch. A branch is a copy-on-write clone of the data in your Neon project, so it will include a copy of the `blog` database with the `authors` and `posts` tables that you just created.
+Now, let's prepare a development database in Neon by creating a development branch, where you can safely make changes to your database schema without affecting the source database on your `main` branch. A branch is a copy-on-write clone of the data in your Neon project, so it will include a copy of the `blog` database with the `authors` and `posts` tables that you just created.
 
 To create a branch:
 
@@ -66,7 +66,7 @@ To create a branch:
 3. Click **New Branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch. Let's call it `dev1`.
-5. Leave `main` selected as the parent branch. This is where you created `blog` database.
+5. Leave `main` selected as the parent branch. This is where you created the `blog` database.
 6. Leave the remaining default settings. Creating a branch from **Head** creates a branch with the latest data, and a compute endpoint is required to connect to the database on the branch.
 8. Click **Create Branch** to create your branch.
 
@@ -75,7 +75,7 @@ To create a branch:
 From the [Neon console](https://console.neon.tech/app/projects), select your project and retrieve connection strings for your target and source databases from the **Connection Details** widget on the Neon **Dashboard**.
 
 <Admonition type="note">
-The target database is the database on your `dev1` branch where you will will do you development work, evolving your database schema. Your source database is where you will apply your schema changes later, once you are satisfied with the changes on your development branch.
+The target database is the database on your `dev1` branch where you will will do your development work, evolving your database schema. Your source database is where you will apply your schema changes later, once you are satisfied with the changes on your development branch.
 </Admonition>
 
 1. Select the `dev1` branch, the `blog` database, and copy the connection string.
@@ -94,7 +94,7 @@ Be careful not to mix up your connection strings. You'll see that the hostname (
 
 ## Update your liquibase.properties file
 
-The `liquibase.properties` file defines the location of the Liquibase changelog file and your Target and Source databases.
+The `liquibase.properties` file defines the location of the Liquibase changelog file and your target and source databases.
 
 1. From your Liquibase project directory, open the `liquibase.properties` file, which comes pre-populated with example settings.
 
@@ -106,7 +106,7 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
 
     The [changelog file](https://docs.liquibase.com/parameters/changelog-file.html) is where you define database schema changes (changesets).
 
-3. Change the Target database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `dev1` branch. You can obtain the required details from the connection string you copied previously. You will have to swap out the hostname (`ep-silent-hill-85675036.us-east-2.aws.neon.tech`), username, and password for your own.
+3. Change the target database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `dev1` branch. You can obtain the required details from the connection string you copied previously. You will need to swap out the hostname (`ep-silent-hill-85675036.us-east-2.aws.neon.tech`), username, and password for your own.
 
     ```env
     liquibase.command.url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
@@ -116,7 +116,7 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
     liquibase.command.password: AbC123dEf
     ```
 
-4. Change the Source database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `main` branch. You can obtain the required details from the connection string you copied previously. You will have to swap out the hostname (`ep-cool-darkness-123456.us-east-2.aws.neon.tech`), username, and password for your own.
+4. Change the source database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `main` branch. You can obtain the required details from the connection string you copied previously. You will need to swap out the hostname (`ep-cool-darkness-123456.us-east-2.aws.neon.tech`), username, and password for your own.
 
     ```env
     liquibase.command.referenceUrl: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
@@ -128,7 +128,7 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
 
 ## Take a snapshot of your target database
 
-Capture the current state of your Target database. The following command creates a Liquibase changelog file named `mydatabase_changelog.xml`.
+Capture the current state of your target database. The following command creates a Liquibase changelog file named `mydatabase_changelog.xml`.
 
 ```bash
 liquibase --changeLogFile=mydatabase_changelog.xml generateChangeLog
@@ -187,7 +187,7 @@ Check for the `mydatabase_changelog.xml` file in your Liquibase project director
 
 ## Create a schema change
 
-Now, you can start making database schema changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.htm) and adding them to the database changelog file you defined in your `liquibase.properties` file. A changeset is the basic unit of change in Liquibase.
+Now, you can start making database schema changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.htm) and adding them to the changelog file you defined in your `liquibase.properties` file. A changeset is the basic unit of change in Liquibase.
 
 1. Create the changelog file where you will add your schema changes:
 
@@ -226,7 +226,7 @@ Now, you can start making database schema changes by creating [changesets](https
 
 ### Deploy the schema change to the target database
 
-Run the [update](https://docs.liquibase.com/commands/update/update.html) command to deploy the schema change to the target developer database.
+Run the [update](https://docs.liquibase.com/commands/update/update.html) command to deploy the schema change to your target database (your development database on the `dev1` branch).
 
 ```bash
 liquibase update
@@ -275,7 +275,7 @@ liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech
 <details>
 <summary>Command output</summary>
 
-If the command was successful, you’ll see output similar to the following indicating that there is one changeset that has not been applied to the source database. This is the `comments` table changeset.
+If the command was successful, you’ll see output similar to the following indicating that there is one changeset that has not been applied to the source database. This is your `comments` table changeset.
 
 ```bash
 tarting Liquibase at 12:30:51 (version 4.24.0 #14062 built at 2023-09-28 12:18+0000)
@@ -290,7 +290,7 @@ Liquibase command 'status' was executed successfully.
 
 ### Check your SQL
 
-Before applying the update, you can run the [updateSQL](https://docs.liquibase.com/commands/update/update-sql.html) command to inspect the SQL Liquibase will apply when you run the update command:
+Before applying the update, you can run the [updateSQL](https://docs.liquibase.com/commands/update/update-sql.html) command to inspect the SQL Liquibase will apply when running the update command:
 
 ```bash
 liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog updateSQL
@@ -299,7 +299,7 @@ liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech
 <details>
 <summary>Command output</summary>
 
-If the command was successful, you’ll see output similar to the following, which confirms that the changeset will create the `comments` table.
+If the command was successful, you’ll see output similar to the following, which confirms that the changeset will create a `comments` table.
 
 ```bash
 Starting Liquibase at 12:32:55 (version 4.24.0 #14062 built at 2023-09-28 12:18+0000)
@@ -414,7 +414,7 @@ Liquibase command 'diff' was executed successfully.
 
 ### Save your changelog to source control
 
- When you are satisfied with the changes that will be applied, save your changelog to source control, such as a GitHub repository where you or your team stores you changelog.
+When you are satisfied with the changes that will be applied, save your changelog to source control, such as a GitHub repository where you or your team stores you changelog.
 
 ### Apply the new changeset to your source database
 
@@ -448,10 +448,10 @@ Liquibase command 'update' was executed successfully.
 
 </details>
 
-To ensure that all changes have been applied to the production database, you can rerun the `status`, `updatedSql`, and `diff` commands you ran above. After applying the change, there should be no differences. You can also check your databases in the **Tables** view in the Neon console to verify that both databases now have a `comments` table.
+To ensure that all changes have been applied to the production database, you can rerun the `status`, `updatedSql`, and `diff` commands you ran above. After applying the change, there should be no differences. You can also check your databases in the **Tables** view in the Neon console to verify that the source database now has a `comments` table.
 
 <Admonition type="note">
-When you run a changeset for the first time on the source database, you will find that Liquibase automatically creates the [databasechangelog](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html) and [databasechangeloglock](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html) tracking tables that were created on in your development database. These tables are created on any database where you apply changesets.
+When you run a changeset for the first time on the source database, you will find that Liquibase automatically creates the [databasechangelog](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html) and [databasechangeloglock](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html) tracking tables that were created in your development database. These tracking tables are created on any database where you apply changesets.
 </Admonition>
 
 ## References
