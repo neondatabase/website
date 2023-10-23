@@ -14,6 +14,7 @@ import useWindowSize from 'hooks/use-window-size';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
 import Metrics from './metrics';
+import { MOBILE_WIDTH } from './select/select';
 
 const SECTION_MIN_HEIGHT = 760;
 const PAGE_MIN_HEIGHT = 800;
@@ -37,7 +38,7 @@ const getSelectedIndex = (activeTitle, items) => {
 const Forecast = () => {
   const sectionRef = useRef();
   const animationRef = useRef();
-  const { height: pageHeight } = useWindowSize();
+  const { width: windowWidth, height: pageHeight } = useWindowSize();
   const scrollY = useScrollPosition();
   const [contentRef, isContentInView] = useInView({ triggerOnce: true });
 
@@ -168,10 +169,10 @@ const Forecast = () => {
     >
       <LazyMotion features={domAnimation}>
         <m.div
-          className="relative"
+          className="relative md:opacity-100"
           initial={{ opacity: 1 }}
           animate={{
-            opacity: showSectionTitle ? 1 : 0.4,
+            opacity: showSectionTitle || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
             zIndex: 10,
           }}
           transition={{ duration: 0.2 }}
