@@ -119,43 +119,52 @@ const Forecast = () => {
 
   useEffect(() => {
     if (!animationStageInput) return;
-    if (currentSectionIndex === 3) {
-      animationStageInput.value = 3;
-    } else {
-      animationStageInput.value = currentSectionIndex + 1;
-    }
+    const updateAnimationStageInput = () => {
+      const { activity, performance, storage } = activeItems;
+      if (!performance && !storage) animationStageInput.value = 1;
+      if (activity && !performance && !storage) animationStageInput.value = 2;
+      if (activity && performance) animationStageInput.value = 3;
+      if (activity && performance && storage) {
+        animationStageInput.value = currentSectionIndex === 3 ? 3 : currentSectionIndex + 1;
+      }
+    };
 
-    if (!firstSelectInput) return;
+    const updateSelectInputValue = (input, activeItem, activeAnimation, options) => {
+      if (!input) return;
+      if (activeItem && !activeAnimation?.title) {
+        input.value = getSelectedIndex(activeItem?.title, options);
+      } else {
+        input.value = getSelectedIndex(activeAnimation?.title, options);
+      }
+    };
 
-    if (activeItems.activity && !activeAnimations.activity?.title) {
-      firstSelectInput.value = getSelectedIndex(activeItems.activity?.title, activities);
-    } else {
-      firstSelectInput.value = getSelectedIndex(activeAnimations.activity?.title, activities);
-    }
-
-    if (!secondSelectInput) return;
-    if (activeItems.performance && !activeAnimations.performance?.title) {
-      secondSelectInput.value = getSelectedIndex(activeItems.performance?.title, performance);
-    } else {
-      secondSelectInput.value = getSelectedIndex(activeAnimations.performance?.title, performance);
-    }
-
-    if (!thirdSelectInput) return;
-    if (activeItems.storage && !activeAnimations.storage?.title) {
-      thirdSelectInput.value = getSelectedIndex(activeItems.storage?.title, storage);
-    } else {
-      thirdSelectInput.value = getSelectedIndex(activeAnimations.storage?.title, storage);
-    }
+    updateAnimationStageInput();
+    updateSelectInputValue(
+      firstSelectInput,
+      activeItems.activity,
+      activeAnimations.activity,
+      activities
+    );
+    updateSelectInputValue(
+      secondSelectInput,
+      activeItems.performance,
+      activeAnimations.performance,
+      performance
+    );
+    updateSelectInputValue(
+      thirdSelectInput,
+      activeItems.storage,
+      activeAnimations.storage,
+      storage
+    );
   }, [
-    currentSectionIndex,
     animationStageInput,
     firstSelectInput,
     secondSelectInput,
     thirdSelectInput,
     activeItems,
-    activeAnimations.activity?.title,
-    activeAnimations.performance?.title,
-    activeAnimations.storage?.title,
+    activeAnimations,
+    currentSectionIndex,
   ]);
 
   const pageHeightMultiplier = useMemo(() => {
