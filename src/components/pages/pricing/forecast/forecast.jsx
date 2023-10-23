@@ -20,7 +20,8 @@ const PAGE_MIN_HEIGHT = 800;
 const OFFSET = 100;
 
 const PAGE_HEIGHT_SETTINGS = [
-  [975, 0.7, 0], // page height, multiplier, offset
+  [800, 0.8, 0], // min height
+  [975, 0.7, 100], // page height, multiplier, offset
   [1200, 0.6, 100],
   [1600, 0.5, 300],
   [1900, 0.45, 400],
@@ -167,9 +168,11 @@ const Forecast = () => {
     >
       <LazyMotion features={domAnimation}>
         <m.div
+          className="relative"
           initial={{ opacity: 1 }}
           animate={{
             opacity: showSectionTitle ? 1 : 0.4,
+            zIndex: 10,
           }}
           transition={{ duration: 0.2 }}
         >
