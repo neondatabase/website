@@ -115,7 +115,7 @@ To add new page, add a new item to the `items` array with the `title` and `slug`
 
 ## Markdown frontmatter
 
-Each Neon documentation Markdown file includes frontmatter section at the beginning of the file containing file metadata. The frontmatter section is distinguished by three dashes, as shown here:
+Each Neon documentation Markdown file includes a frontmatter section at the beginning of the file containing file metadata. The frontmatter section is distinguished by three dashes, as shown here:
 
 ```yaml
 ---
