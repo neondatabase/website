@@ -309,7 +309,7 @@ The voice in the documentation should sound like one human being explaining some
 1. **Use contractions**:
     - **Do**: Use contractions like "it's", "don't", "you're" to make the tone more conversational.
       - *Example*: "It's essential to save your progress."
-    - **Don't**: Overuse contractions, which can compromise clarifyS.
+    - **Don't**: Overuse contractions, which can compromise clarity.
 
 2. **Simplicity over jargon**:
     - **Do**: Choose simpler words when possible.
