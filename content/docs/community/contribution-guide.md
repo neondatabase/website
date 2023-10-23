@@ -314,7 +314,7 @@ The voice in the documentation should sound like one human being explaining some
 2. **Simplicity over jargon**:
     - **Do**: Choose simpler words when possible.
       - *Example*: "Use the tool," not "Utilize the instrument."
-    - **Don't**: Oversimplify to the point of being inaccurate.
+    - **Don't**: Oversimplify to the point of being inaccurate or leaving out useful context.
 
 3. **Active voice**:
     - **Do**: Prefer active voice.
