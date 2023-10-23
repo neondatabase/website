@@ -1,5 +1,6 @@
 ---
-title: Neon Community
+title: Neon community
+subtitle: Learn how you can get involved in the Neon community
 enableTableOfContents: true
 isDraft: true
 updatedOn: '2023-10-23T15:52:46.147Z'
