@@ -406,7 +406,7 @@ Commands, parameters, values, filenames, error messages, connection strings, and
 
 - "Execute `git clone` to clone a Git repository..."
 
-- 'git clone' is a command that should be in lowercase, whereas Git is the product and should have a capital G.
+- `git clone` is a command that should be in lowercase, whereas Git is the product and should have a capital G.
 
 - "A connection string has this format: `postgres://[user]:[password]@[neon_hostname]/[dbname]`"
 
