@@ -286,8 +286,7 @@
     - title: Postgres compatibility
       slug: reference/compatibility
 - title: Community
+  slug: community/community-intro
   items:
-    - title: Community forum
-      slug: https://community.neon.tech/
     - title: Contribution guide
       slug: community/contribution-guide
