@@ -206,7 +206,7 @@ Example:
 ````md
 <CodeBlock shouldWrap>
 
-```text
+```bash
 A really long line that scrolls off the page
 ```
 
