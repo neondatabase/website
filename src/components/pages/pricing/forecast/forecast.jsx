@@ -84,8 +84,6 @@ const Forecast = () => {
     }
   }, [activeItems]);
 
-  console.log(progressBarKey);
-
   useEffect(() => {
     if (isContentInView) {
       const animationTop = animationRef.current.getBoundingClientRect().top;
