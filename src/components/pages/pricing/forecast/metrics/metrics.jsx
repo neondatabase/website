@@ -118,13 +118,18 @@ const Metrics = ({
         className="flex h-[90vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
         animate={{
-          opacity: currentSectionIndex === 3 || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
+          opacity: allItemsSelected || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
         }}
         id="pricing"
       >
         <div className="py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden lg:px-6 lg:py-6">
           <p className="font-medium -tracking-extra-tight leading-none">Estimated bill</p>
-          <span className="block mt-6 text-gray-new-70 text-[15px] font-light leading-tight">
+          <span
+            className={clsx(
+              'block mt-6 text-gray-new-70 text-[15px] font-light leading-tight',
+              allItemsSelected && 'opacity-0'
+            )}
+          >
             From
           </span>
           <span className="block">
