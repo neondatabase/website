@@ -404,7 +404,7 @@ Commands, parameters, values, filenames, error messages, connection strings, and
 
 - "Run the `neonctl projects list` command."
 
-- "Execute 'git clone' to clone a Git repository..."
+- "Execute `git clone` to clone a Git repository..."
 
 - 'git clone' is a command that should be in lowercase, whereas Git is the product and should have a capital G.
 
