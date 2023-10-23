@@ -81,8 +81,6 @@ const Select = (props) => {
                 type="button"
                 onMouseEnter={() => onHover(type, item)}
                 onMouseLeave={() => onUnhover(type)}
-                // onFocus={() => onHover(type, item)}
-                // onBlur={() => onUnhover(type)}
                 onClick={() => {
                   onHover(type, item);
                   setIsSelected(true);
