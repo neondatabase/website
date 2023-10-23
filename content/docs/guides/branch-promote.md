@@ -1,7 +1,6 @@
 ---
-title: Promote a branch to primary
-subtitle: Learn how to promote a branch to the primary branch of your Neon project using
-  the Neon API
+title: Promote a branch
+subtitle: Learn how to promote a branch to the primary branch of your Neon project using the Neon API
 enableTableOfContents: true
 updatedOn: '2023-10-07T10:43:33.372Z'
 ---

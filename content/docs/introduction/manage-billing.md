@@ -31,7 +31,7 @@ To update your payment method:
 4. From the menu, select **Update card**.
 5. Update your payment method and click **Update**.
 
-If you are unable to update your payment method, please contact [support@neon.tech](mailto:support@neon.tech).
+If you are unable to update your payment method, please [open a support ticket](/docs/introduction/support).
 
 ## Add a new payment method
 
@@ -42,7 +42,7 @@ To add a new payment method:
 3. Click **Add a new payment method**.
 4. Enter your card details and click **Save Card**.
 
-If you are unable to add a payment method, please contact [support@neon.tech](mailto:support@neon.tech).
+If you are unable to add a payment method, please [open a support ticket](/docs/introduction/support).
 
 ### Missed payments
 

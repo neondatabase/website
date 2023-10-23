@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/quickstart/console/
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
-updatedOn: '2023-10-07T10:43:33.370Z'
+updatedOn: '2023-10-19T23:10:12.824Z'
 ---
 
 You can sign up for free and upgrade to a paid plan when you are ready to scale. For information about our Free Tier limits, see [Free Tier](/docs/introduction/free-tier). For information about Neon's paid plan options, see [Neon plans](/docs/introduction/plans).
@@ -17,4 +17,4 @@ After signing in, you are directed to the Neon Console where you can create your
 
 ## Need help?
 
-To get help from our support team, open a ticket from the console. Look for the **Support** link in the left sidebar. For more detail, see [Getting Support](/docs/introduction/support). You can also join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon.
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).

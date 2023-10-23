@@ -165,6 +165,14 @@ const defaultConfig = {
         source: '/demos/ping-thing/:path*',
         destination: 'https://ping-thing.vercel.app/demos/ping-thing/:path*',
       },
+      {
+        source: '/demos/playground',
+        destination: 'https://postgres-ai-playground.vercel.app/demos/playground',
+      },
+      {
+        source: '/demos/playground/:path*',
+        destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
+      },
     ];
   },
   webpack(config) {

@@ -20,7 +20,7 @@ const items = [
     features: [
       { title: '1 project' },
       { title: '10 branches' },
-      { title: '3 GB of data per branch' },
+      { title: '3 GiB of data per branch' },
       { title: 'A shared compute with 1 GB of RAM' },
     ],
     button: {
