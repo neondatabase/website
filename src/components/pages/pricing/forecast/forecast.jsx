@@ -2,6 +2,7 @@
 
 import useScrollPosition from '@react-hook/window-scroll';
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
+import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -31,6 +32,13 @@ const PAGE_HEIGHT_SETTINGS = [
   [Number.MAX_SAFE_INTEGER, 0.35, 600], // max height
 ];
 
+const PROGRESS_BAR_VALUE = {
+  0: 0,
+  1: 4,
+  2: 32,
+  3: 60,
+};
+
 const getSelectedIndex = (activeTitle, items) => {
   const index = items.findIndex((item) => item.title === activeTitle);
   return index === -1 ? 1 : index + 1;
@@ -58,6 +66,25 @@ const Forecast = () => {
   });
 
   const [showSectionTitle, setShowSectionTitle] = useState(true);
+
+  const progressBarKey = useMemo(() => {
+    const selectedCount = Object.keys(activeItems).filter(
+      (key) => activeItems[key] !== null
+    ).length;
+
+    switch (selectedCount) {
+      case 1:
+        return 1;
+      case 2:
+        return 2;
+      case 3:
+        return 3;
+      default:
+        return 0;
+    }
+  }, [activeItems]);
+
+  console.log(progressBarKey);
 
   useEffect(() => {
     if (isContentInView) {
@@ -206,34 +233,53 @@ const Forecast = () => {
             </div>
           </Container>
         </m.div>
-      </LazyMotion>
-      <Container
-        className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
-        size="medium"
-      >
-        <div className="relative col-span-5 -mx-[140px] col-start-2 h-full xl:col-span-6 xl:col-start-1 xl:-mx-24 md:col-span-full md:hidden">
-          <div
-            className="sticky top-0 h-screen min-h-[700px] -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh]"
-            ref={animationRef}
-          >
-            <div className="absolute flex h-full w-full items-center justify-center">
-              <RiveComponent width={870} height={767} aria-hidden />
+
+        <Container
+          className="relative grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
+          size="medium"
+        >
+          <div className="relative col-span-5 -mx-[140px] col-start-2 h-full xl:col-span-6 xl:col-start-1 xl:-mx-24 md:col-span-full md:hidden">
+            <div
+              className="sticky top-0 h-screen min-h-[700px] -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh]"
+              ref={animationRef}
+            >
+              <div className="absolute flex h-full w-full items-center justify-center">
+                <RiveComponent width={870} height={767} aria-hidden />
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          className="relative col-end-12 col-span-4 -ml-10 z-10 xl:col-end-13 xl:col-span-5 md:col-span-full md:ml-0"
-          ref={contentRef}
-        >
-          <Metrics
-            currentSectionIndex={currentSectionIndex}
-            activeItems={activeItems}
-            setActiveItems={setActiveItems}
-            activeAnimations={activeAnimations}
-            setActiveAnimations={setActiveAnimations}
-          />
-        </div>
-      </Container>
+          <div
+            className="relative col-end-12 col-span-4 -ml-10 z-10 xl:col-end-13 xl:col-span-5 md:col-span-full md:ml-0"
+            ref={contentRef}
+          >
+            <Metrics
+              currentSectionIndex={currentSectionIndex}
+              activeItems={activeItems}
+              setActiveItems={setActiveItems}
+              activeAnimations={activeAnimations}
+              setActiveAnimations={setActiveAnimations}
+            />
+          </div>
+          <div className="sticky top-0 h-screen min-h-[700px] -right-10 -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh] flex items-center">
+            <div className="relative flex flex-col">
+              <m.span
+                className="absolute top-0 w-1 flex rounded-[20px] bg-gray-new-98"
+                initial={{ height: 0 }}
+                animate={{ height: PROGRESS_BAR_VALUE[progressBarKey] }}
+              />
+              {Array.from({ length: 3 }).map((_, index) => (
+                <span
+                  className={clsx(
+                    'block rounded-full w-1 h-1 mb-6 last:mb-0 transition-colors duration-200',
+                    currentSectionIndex === index ? 'bg-gray-new-98' : 'bg-gray-new-40'
+                  )}
+                  key={index}
+                />
+              ))}
+            </div>
+          </div>
+        </Container>
+      </LazyMotion>
     </section>
   );
 };

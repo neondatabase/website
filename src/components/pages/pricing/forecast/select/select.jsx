@@ -23,7 +23,7 @@ const Select = (props) => {
     activeAnimations,
     setActiveAnimations,
     allItemsSelected,
-    currentSectionIndex,
+    isItemSelected,
   } = props;
   // once the user selects an item, the animation on hover should be disabled
   const [isSelected, setIsSelected] = useState(false);
@@ -53,11 +53,13 @@ const Select = (props) => {
     <m.div
       className={clsx(
         'flex max-h-[975px] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0 md:mt-16 md:opacity-100',
+        // pointer events none if the user has not selected the previous item
+        !isItemSelected(index - 1) && 'pointer-events-none',
         className
       )}
       initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
       animate={{
-        opacity: currentSectionIndex === index || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
+        opacity: index === 0 || isItemSelected(index - 1) || windowWidth < MOBILE_WIDTH ? 1 : 0.4,
       }}
       id={type}
     >

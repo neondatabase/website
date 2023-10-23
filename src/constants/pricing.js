@@ -57,3 +57,33 @@ export const storage = [
     unit: 1000,
   },
 ];
+
+export const items = [
+  {
+    label: 'Activity',
+    title: 'How active are your users?',
+    items: activities,
+    nextId: 'performance',
+    textColor: 'text-green-45',
+    activeColor: 'border-green-45 hover:border-green-45',
+    defaultColor: 'border-gray-new-15 hover:border-green-45/30',
+  },
+  {
+    label: 'Performance',
+    title: 'What level of performance does your application require?',
+    items: performance,
+    nextId: 'storage',
+    textColor: 'text-yellow-70',
+    activeColor: 'border-yellow-70 hover:border-yellow-70',
+    defaultColor: 'border-gray-new-15 hover:border-yellow-70/30',
+  },
+  {
+    label: 'Storage',
+    title: 'How much storage do you require?',
+    items: storage,
+    nextId: 'pricing',
+    textColor: 'text-blue-80',
+    activeColor: 'border-blue-80 hover:border-blue-80',
+    defaultColor: 'border-gray-new-15 hover:border-blue-80/30',
+  },
+];

@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import AnimatedButton from 'components/shared/animated-button';
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
-import { activities, performance, storage } from 'constants/pricing';
+import { items } from 'constants/pricing';
 import useWindowSize from 'hooks/use-window-size';
 
 import activityIcon from '../images/activity.svg';
@@ -19,27 +19,6 @@ const AVERAGE_DAYS_IN_MONTH = 30.416666;
 const PROJECT_STORAGE_PRICE = 0.000164;
 const PROJECT_STORAGE_HOURS = 24;
 
-function shallowEqual(object1, object2) {
-  if (object1 === object2) {
-    return true;
-  }
-
-  const keys1 = Object.keys(object1);
-  const keys2 = Object.keys(object2);
-
-  if (keys1.length !== keys2.length) {
-    return false;
-  }
-
-  for (const key of keys1) {
-    if (object1[key] !== object2[key]) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
 const calculateStorageCost = (storageValue) =>
   storageValue * PROJECT_STORAGE_HOURS * PROJECT_STORAGE_PRICE * AVERAGE_DAYS_IN_MONTH;
 
@@ -52,36 +31,6 @@ const icons = {
   storage: storageIcon,
 };
 
-const items = [
-  {
-    label: 'Activity',
-    title: 'How active are your users?',
-    items: activities,
-    nextId: 'performance',
-    textColor: 'text-green-45',
-    activeColor: 'border-green-45 hover:border-green-45',
-    defaultColor: 'border-gray-new-15 hover:border-green-45/30',
-  },
-  {
-    label: 'Performance',
-    title: 'What level of performance does your application require?',
-    items: performance,
-    nextId: 'storage',
-    textColor: 'text-yellow-70',
-    activeColor: 'border-yellow-70 hover:border-yellow-70',
-    defaultColor: 'border-gray-new-15 hover:border-yellow-70/30',
-  },
-  {
-    label: 'Storage',
-    title: 'How much storage do you require?',
-    items: storage,
-    nextId: 'pricing',
-    textColor: 'text-blue-80',
-    activeColor: 'border-blue-80 hover:border-blue-80',
-    defaultColor: 'border-gray-new-15 hover:border-blue-80/30',
-  },
-];
-
 const Metrics = ({
   currentSectionIndex,
   activeItems,
@@ -91,7 +40,6 @@ const Metrics = ({
 }) => {
   const { width: windowWidth } = useWindowSize();
   const [finalEstimatePrice, setFinalEstimatePrice] = useState({
-    price: 0,
     activeItems: {
       activity: {
         title: 'Activity',
@@ -129,32 +77,9 @@ const Metrics = ({
         ...(activeItems.storage && { storage: activeItems.storage }),
       };
 
-      let newPrice = finalEstimatePrice.price; // Default to the current price
-
-      // Calculate the new price based on the selected items
-      if (!allItemsSelected || activeItems.activity) {
-        newPrice = 0;
-      }
-      if (activeItems.activity && activeItems.performance) {
-        newPrice = computeTimeCost.toFixed(2);
-      }
-      if (activeItems.activity && activeItems.performance && activeItems.storage) {
-        newPrice = totalCost;
-      }
-
-      // Check if either the active items or the price has changed
-      const hasChanged =
-        newPrice !== finalEstimatePrice.price ||
-        !shallowEqual(newActiveItems, finalEstimatePrice.activeItems);
-
-      if (hasChanged) {
-        return {
-          price: newPrice,
-          activeItems: newActiveItems,
-        };
-      }
-
-      return finalEstimatePrice; // Return current state if nothing has changed
+      return {
+        activeItems: newActiveItems,
+      };
     });
   }, [activeItems, computeTimeCost, totalCost, allItemsSelected]);
 
@@ -163,6 +88,9 @@ const Metrics = ({
       setAllItemsSelected(true);
     }
   }, [activeItems]);
+
+  const isItemSelected = (sectionIndex) =>
+    activeItems[items[sectionIndex]?.label.toLowerCase()] !== null;
 
   return (
     <LazyMotion features={domAnimation}>
@@ -182,6 +110,7 @@ const Metrics = ({
           setActiveAnimations={setActiveAnimations}
           currentSectionIndex={currentSectionIndex}
           allItemsSelected={allItemsSelected}
+          isItemSelected={isItemSelected}
         />
       ))}
 
@@ -195,12 +124,15 @@ const Metrics = ({
       >
         <div className="py-7 px-8 border border-green-45 rounded-[10px] overflow-hidden lg:px-6 lg:py-6">
           <p className="font-medium -tracking-extra-tight leading-none">Estimated bill</p>
-          <p className="mt-6">
+          <span className="block mt-6 text-gray-new-70 text-[15px] font-light leading-tight">
+            From
+          </span>
+          <span className="block">
             <span className="text-6xl text-green-45 leading-none font-light tracking-[-0.06em] md:text-5xl">
-              ${finalEstimatePrice.price}
+              ${totalCost === 'NaN' ? '3.22' : totalCost}
             </span>
             <span className="tracking-[-0.06em] text-2xl leading-none inline-block ml-1">/ mo</span>
-          </p>
+          </span>
           <p className="mt-2 text-[15px] font-light text-gray-new-70 leading-tight">
             The price calculated for the Ohio region
           </p>
