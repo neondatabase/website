@@ -2,7 +2,7 @@
 title: Neon Community
 enableTableOfContents: true
 isDraft: true
-updatedOn: '2023-10-23T15:51:08.910Z'
+updatedOn: '2023-10-23T15:52:46.147Z'
 ---
 
 Neon has an enthusiastic and dynamic user community worldwide. Here's how you can get involved:
