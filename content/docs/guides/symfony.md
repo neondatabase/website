@@ -28,7 +28,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 In your `.env` file, set the `DATABASE_URL` to the Neon project connection string that you copied in the previous step.
 
 ```shell
-DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?charset=utf8&sslmode=requre"
+DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?charset=utf8&sslmode=require"
 ```
 
 
