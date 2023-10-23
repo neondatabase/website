@@ -33,10 +33,10 @@ const PAGE_HEIGHT_SETTINGS = [
 ];
 
 const PROGRESS_BAR_VALUE = {
-  0: 0,
-  1: 4,
-  2: 32,
-  3: 60,
+  0: 4,
+  1: 32,
+  2: 60,
+  3: 88,
 };
 
 const getSelectedIndex = (activeTitle, items) => {
@@ -245,7 +245,7 @@ const Forecast = () => {
           className="relative grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
           size="medium"
         >
-          <div className="relative col-span-5 -mx-[140px] col-start-2 h-full xl:col-span-6 xl:col-start-1 xl:-mx-24 md:col-span-full md:hidden">
+          <div className="relative col-span-5 -mx-[140px] col-start-2 h-full xl:col-span-6 xl:col-start-1 xl:row-start-1 xl:-mx-24 md:col-span-full md:hidden">
             <div
               className="sticky top-0 h-screen min-h-[700px] -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh]"
               ref={animationRef}
@@ -256,7 +256,7 @@ const Forecast = () => {
             </div>
           </div>
           <div
-            className="relative col-end-12 col-span-4 -ml-10 z-10 xl:col-end-13 xl:col-span-5 md:col-span-full md:ml-0"
+            className="relative col-end-12 col-span-4 -ml-10 z-10 xl:col-end-13 xl:col-span-5 xl:row-start-1 md:col-span-full md:ml-0"
             ref={contentRef}
           >
             <Metrics
@@ -267,18 +267,19 @@ const Forecast = () => {
               setActiveAnimations={setActiveAnimations}
             />
           </div>
-          <div className="sticky top-0 h-screen min-h-[700px] -right-10 -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh] flex items-center">
+
+          <div className="sticky top-0 h-screen min-h-[700px] -right-10 -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh] flex items-center xl:justify-end xl:col-end-13 xl:row-start-1 xl:col-span-1 xl:right-0 xl:-mr-6 md:hidden">
             <div className="relative flex flex-col">
               <m.span
                 className="absolute top-0 w-1 flex rounded-[20px] bg-gray-new-98"
                 initial={{ height: 0 }}
                 animate={{ height: PROGRESS_BAR_VALUE[progressBarKey] }}
               />
-              {Array.from({ length: 3 }).map((_, index) => (
+              {Array.from({ length: 4 }).map((_, index) => (
                 <span
                   className={clsx(
                     'block rounded-full w-1 h-1 mb-6 last:mb-0 transition-colors duration-200',
-                    currentSectionIndex === index ? 'bg-gray-new-98' : 'bg-gray-new-40'
+                    index === progressBarKey ? 'bg-gray-new-98' : 'bg-gray-new-40'
                   )}
                   key={index}
                 />
