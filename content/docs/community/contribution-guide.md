@@ -111,7 +111,7 @@ To add new page, add a new item to the `items` array with the `title` and `slug`
 ```
 
 - The `title` in the sidebar may differ from `title` in the Markdown file. For example, your sidebar title might be a shorter version of the title in your Markdown file.
-- `slug` should always match page's slug.
+- `slug` should always exactly match the page's slug (the last part of the URL after the final backslash "/", in our case the name of the Markdown file).
 
 ## Markdown frontmatter
 
