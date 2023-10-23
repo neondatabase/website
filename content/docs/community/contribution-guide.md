@@ -207,7 +207,7 @@ Example:
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?connect_timeout=15&pool_timeout=15`
+A really long line that scrolls off the page
 ```
 
 </CodeBlock>
