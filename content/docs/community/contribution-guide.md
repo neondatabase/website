@@ -333,7 +333,7 @@ The voice in the documentation should sound like one human being explaining some
 
 6. **Consistent terminology**:
     - **Do**: Stick to one term for one concept.
-      - *Example*: Always use "dashboard", not sometimes "control panel".
+      - *Example*: Always use "dashboard". Don't mix that term with "control panel".
     - **Don't**: Confuse with synonyms.
       - *Example*: Switching between "log-in", "sign-in", and "access point".
 
