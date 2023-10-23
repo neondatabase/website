@@ -21,7 +21,7 @@ const PAGE_MIN_HEIGHT = 800;
 const OFFSET = 100;
 
 const PAGE_HEIGHT_SETTINGS = [
-  [800, 0.8, 0], // min height
+  [850, 0.8, 0], // min height
   [975, 0.7, 100], // page height, multiplier, offset
   [1200, 0.6, 100],
   [1400, 0.55, 200],
