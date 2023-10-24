@@ -49,6 +49,55 @@ The **Connection Details** widget on the Neon **Dashboard** provides **Pooled co
 
 ![Connection Details pooled connection string](/docs/connect/connection_details_pooled.png)
 
+## Optimize queries with PgBouncer and prepared statements
+
+If you use connection pooling in Neon, you are using PgBouncer. As of [PgBouncer 1.21.0](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_21_0), which is supported with Neon, PgBouncer supports protocol-level prepared statements. This capability can help you boost query performance while providing an added layer of protection against potential SQL injection attacks.
+
+### Understanding prepared statements
+
+A prepared statement in Postgres allows for the optimization of an SQL query by defining its structure once and executing it multiple times with varied parameters. Here's an SQL-level example to illustrate, but please note that direct SQL-level `PREPARE` and `EXECUTE` are not supported with PgBouncer (see [below](#use-prepared-statements-with-pgbouncer)).
+
+```sql
+PREPARE fetch_plan (TEXT) AS
+SELECT * FROM users WHERE username = $1;
+
+EXECUTE fetch_plan('alice');
+```
+
+`fetch_plan` here is the prepared statement's name, and `$1` acts as a parameter placeholder.
+
+The benefits of using prepared statements include:
+
+- **Performance**: Parsing the SQL and creating the execution plan happens just once, speeding up subsequent executions. This performance benefit would be most noticeable on databases with heavy and repeated traffic.
+- **Security**: By sending data values separately from the query, prepared statements reduce the risk of SQL injection attacks.
+
+You can learn more about prepared statements in the PostgreSQL documentation. See [PREPARE](https://www.postgresql.org/docs/current/sql-prepare.html).
+
+### Use prepared statements with PgBouncer
+
+PgBouncer supports protocol-level prepared statements only. Direct SQL-level `PREPARE` and `EXECUTE` are not supported, which means you cannot take advantage of this feature by running prepared statements from an SQL client like `psql`. You must rely on PostgreSQL client libraries instead. Fortunately, most PostgreSQL client libraries support prepared statements. Here are a couple of examples showing how to use prepared statements from popular Python and JavaScript client libraries:
+
+<CodeTabs labels={["pg", "psycopg2"]}>
+
+```javascript
+const query = {
+   // give the query a unique name
+   name: 'fetch-user',
+      text: 'SELECT * FROM users WHERE username = $1',
+      values: ['alice'],
+  };
+  client.query(query);
+```
+
+```python
+cur = conn.cursor()
+  query = "SELECT * FROM users WHERE username = %s;"
+  cur.execute(query, ('alice',), prepare=True)
+  results = cur.fetchall()
+```
+
+</CodeTabs>
+
 ## Connection pooling notes and limitations
 
 Neon uses PgBouncer in _transaction mode_, which does not support Postgres features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
