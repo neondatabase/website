@@ -55,7 +55,7 @@ Protocol-level prepared statements are supported with Neon and PgBouncer as of t
 
 ### Understanding prepared statements
 
-A prepared statement in Postgres allows for the optimization of an SQL query by defining its structure once and executing it multiple times with varied parameters. Here's an SQL-level example to illustrate, but please note that direct SQL-level `PREPARE` and `EXECUTE` are not supported with PgBouncer (see [below](#use-prepared-statements-with-pgbouncer)).
+A prepared statement in Postgres allows for the optimization of an SQL query by defining its structure once and executing it multiple times with varied parameters. Here's an SQL-level example to illustrate. Note that direct SQL-level `PREPARE` and `EXECUTE` are not supported with PgBouncer (see [below](#use-prepared-statements-with-pgbouncer)), so you can't use this query from the SQL editor. It is meant to give you a clear idea of how a prepared statement works. Refer to the protocol-level samples below to see how this SQL-level example translates to different protocol-level examples.
 
 ```sql
 PREPARE fetch_plan (TEXT) AS
@@ -75,14 +75,14 @@ You can learn more about prepared statements in the PostgreSQL documentation. Se
 
 ### Use prepared statements with PgBouncer
 
-PgBouncer supports protocol-level prepared statements only. Direct SQL-level `PREPARE` and `EXECUTE` are not supported, which means you cannot run prepared statements from an SQL client like `psql`. You must rely on PostgreSQL client libraries instead. Fortunately, most PostgreSQL client libraries support prepared statements. Here are a couple of examples showing how to use prepared statements with Javascript and Python client libraries:
+Since pgBouncer supports protocol-level prepared statements only, you must rely on PostgreSQL client libraries instead (direct SQL-level `PREPARE` and `EXECUTE` are not supported). Fortunately, most PostgreSQL client libraries support prepared statements. Here are a couple of examples showing how to use prepared statements with Javascript and Python client libraries:
 
 <CodeTabs labels={["pg", "psycopg2"]}>
 
 ```javascript
 const query = {
    // give the query a unique name
-   name: 'fetch-user',
+   name: 'fetch-plan',
       text: 'SELECT * FROM users WHERE username = $1',
       values: ['alice'],
   };
