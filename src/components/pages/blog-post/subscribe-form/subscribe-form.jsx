@@ -87,13 +87,13 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
         } else {
           doNowOrAfterSomeTime(() => {
             setFormState(STATES.ERROR);
-            setErrorMessage('Something went wrong. Please reload the page and try again');
+            setErrorMessage('Please reload the page and try again');
           }, loadingAnimationStartedTime);
         }
       } catch (error) {
         doNowOrAfterSomeTime(() => {
           setFormState(STATES.ERROR);
-          setErrorMessage('Something went wrong. Please reload the page and try again');
+          setErrorMessage('Please reload the page and try again');
         }, loadingAnimationStartedTime);
       }
     }
@@ -239,6 +239,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
                     animate="animate"
                     exit="exit"
                     variants={appearAndExitAnimationVariants}
+                    data-test="success-message"
                   >
                     <CheckIcon className="h-10 w-10" />
                   </m.div>
@@ -252,6 +253,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
                   'absolute left-7 top-full text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight',
                   size === 'sm' ? 'mt-1.5' : 'mt-2.5'
                 )}
+                data-test="error-message"
               >
                 {errorMessage}
               </span>
