@@ -3,7 +3,7 @@ title: Neon user guides
 subtitle: Explore Neon features and how to integrate with different frameworks,
   languages, and platforms
 enableTableOfContents: true
-updatedOn: '2023-10-23T18:55:20.690Z'
+updatedOn: '2023-10-24T21:20:23.643Z'
 ---
 
 Find detailed instructions for integration across various frameworks, languages, and platforms, or exploring Neon's features, our guides are tailored to assist you.
@@ -138,6 +138,6 @@ Learn how Neon read replicas can help you scale and manage read-only workloads.
 
 <a href="/docs/guides/read-replica-data-analysis" description="Offload data analysis and reporting queries to read replicas" icon="chart-bar">Data analysis and reporting</a>
 
-<a href="/docs/guides/read-replica-prisma" description="Scale your applications with Neon read replicas and Prisma Client" icon="screen">Point-in-time restore</a>
+<a href="/docs/guides/read-replica-prisma" description="Scale your applications with Neon read replicas and Prisma Client" icon="screen">Use read replicas with Prisma</a>
 
 </DetailIconCards>
