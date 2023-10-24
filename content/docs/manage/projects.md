@@ -130,7 +130,7 @@ From the **Settings** page, you can also set defaults or apply bulk changes acro
 
 ### Reset the default compute size
 
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GBs of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 7 CUs. Larger compute sizes will be supported in a future release.
 
 For [Neon Free Tier](/docs/introduction/free-tier) users, Neon sets your compute size to a static shared 1 vCPU, with 1 GB of RAM for each branch (max 10 branches).
 
