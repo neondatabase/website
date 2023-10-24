@@ -171,7 +171,7 @@ A custom volume-based paid plan offered by Neon. See [Neon plans](/docs/introduc
 
 ### Free Tier
 
-A Neon service tier for which there are no usage charges. For information about the Neon Free Tier and associated limits, see [Neon Free Tier](/docs/introduction/free-tier).
+See [Neon Free Tier](#neon-free-tier).
 
 ### Kubernetes
 
@@ -220,6 +220,14 @@ The Neon RESTful Application Programming Interface. Any operation performed in t
 ### Neon Console
 
 A browser-based graphical interface for managing Neon projects and resources.
+
+### Neon Free Tier
+
+A Neon service tier for which there are no usage charges. For information about the Neon Free Tier and associated limits, see [Neon Free Tier](/docs/introduction/free-tier).
+
+### Neon Pro Plan
+
+A usage-based paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
 
 ### Neon user
 
@@ -273,9 +281,9 @@ Older projects may have a `web-access` system role, used by the [SQL Editor](#sq
 
 Each Neon project is created with a primary branch called `main`, but you can designate any branch as your project's primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
 
-### Pro Plan
+## Pro Plan
 
-A usage-based paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
+See [Neon Pro Plan](#neon-pro-plan).
 
 ### Project
 
