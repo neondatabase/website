@@ -255,7 +255,7 @@ const Forecast = () => {
                 // fadeIn animation in first 0.5s of render to avoid animation flickering
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
+                transition={{ duration: 0.5, delay: 1 }}
               >
                 <RiveComponent width={870} height={767} aria-hidden />
               </m.div>
