@@ -250,9 +250,15 @@ const Forecast = () => {
               className="sticky top-0 h-screen min-h-[700px] -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh]"
               ref={animationRef}
             >
-              <div className="absolute flex h-full w-full items-center justify-center">
+              <m.div
+                className="absolute flex h-full w-full items-center justify-center"
+                // fadeIn animation in first 0.5s of render to avoid animation flickering
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
                 <RiveComponent width={870} height={767} aria-hidden />
-              </div>
+              </m.div>
             </div>
           </div>
           <div
