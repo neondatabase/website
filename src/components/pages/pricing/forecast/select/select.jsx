@@ -53,7 +53,7 @@ const Select = (props) => {
     <m.div
       className={clsx(
         'flex max-h-[975px] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0 md:mt-16 md:opacity-100',
-        !isItemSelected(index - 1) && 'pointer-events-none',
+        !isItemSelected(index - 1) && 'pointer-events-none md:pointer-events-auto',
         className
       )}
       initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
