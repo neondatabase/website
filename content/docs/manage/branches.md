@@ -67,8 +67,8 @@ Branch details shown on the branch page include:
 - **Current Data Size**: The current data size of the branch.
 - **Active Time**: The total amount of time that your branch compute has been active within the current billing period, measured in hours.
 - **Compute Time**: The computing capacity used by the branch within the current billing period, measured in Compute Unit (CU) hours.
-- **Written Data**: The total volume of data written from your branch compute to storage within the current billing period, measured in gibibytes (GiBs).
-- **Data Transfer**: The total volume of data transferred out of Neon (known as "egress") within the current billing period, measured in (GiBs).
+- **Written Data**: The total volume of data written from your branch compute to storage within the current billing period, measured in gibibytes (GiB).
+- **Data Transfer**: The total volume of data transferred out of Neon (known as "egress") within the current billing period, measured in (GiB).
 - **Parent Branch**: The branch from which this branch was created (only visible for child branches).
 - **Date**: The date the parent branch was created (only displayed for branches created with the **Time** option).
 - **Time**: The time the parent branch was created (only displayed for branches created with the **Time** option).
@@ -141,7 +141,7 @@ To delete a branch:
 
 ## Check the data size
 
-Tier limits define the amount of data you can store in a branch. Neon's [Free Tier](/docs/introduction/free-tier) permits 3 GB per branch. When creating a new branch, the child branch includes the data from the parent branch. For example, if you have a branch with 1 GB of data, the child branch is created with the same 1 GB of data.
+Tier limits define the amount of data you can store in a branch. Neon's [Free Tier](/docs/introduction/free-tier) permits 3 GiB per branch. When creating a new branch, the child branch includes the data from the parent branch. For example, if you have a branch with 1 GiB of data, the child branch is created with the same 1 GiB of data.
 
 You can check the data size for a branch by viewing the `Database size` value on the branch details page (see [View branches](#view-branches)). Alternatively, you can run the following query from the Neon SQL Editor:
 

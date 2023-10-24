@@ -150,6 +150,8 @@
           slug: guides/nextjs
         - title: Astro
           slug: guides/astro
+        - title: Remix
+          slug: guides/remix
     - title: Languages
       items:
         - title: Elixir
@@ -302,3 +304,8 @@
       slug: reference/glossary
     - title: Postgres compatibility
       slug: reference/compatibility
+- title: Community
+  slug: community/community-intro
+  items:
+    - title: Docs Contribution Guide
+      slug: community/contribution-guide

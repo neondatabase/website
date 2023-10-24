@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/introduction/technical-preview-free-tier
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-07T10:43:33.405Z'
 ---
 
 Neon is currently in Technical Preview. For information about how the Technical Preview fits within Neon's release plans, refer to the [Neon roadmap](/docs/reference/roadmap).
@@ -13,7 +13,7 @@ Neon is currently in Technical Preview. For information about how the Technical 
 The Neon Free Tier is intended for personal projects, prototyping, or evaluating Neon's core features. It includes the following:
 
 - One Neon project with up to 10 branches.
-- 3 GB of storage per branch.
+- 3 GiB of storage per branch.
 - Unlimited Postgres databases
 - A shared compute with 1 GB of RAM for each branch.
 - 100 hours of _Active time_ per month, affecting non-primary branch compute usage only. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. **Your primary branch compute always remains available regardless of the limit, ensuring that access to data on your primary branch is never interrupted.** You can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**.

@@ -7,6 +7,7 @@ module.exports = {
     '/last-week-in-aws',
     '/ping-thing',
     '/all-things-open-2023',
+    '/stackoverflow',
   ],
   generateRobotsTxt: true,
   robotsTxtOptions: {
@@ -18,6 +19,7 @@ module.exports = {
           '/last-week-in-aws$',
           '/ping-thing$',
           '/all-things-open-2023$',
+          '/stackoverflow$',
         ],
       },
     ],

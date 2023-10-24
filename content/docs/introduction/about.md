@@ -3,7 +3,7 @@ title: What is Neon?
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
-updatedOn: '2023-09-13T23:32:46Z'
+updatedOn: '2023-10-07T10:43:33.399Z'
 ---
 
 Neon is a fully managed serverless Postgres with a generous free tier.
