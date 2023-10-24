@@ -3,7 +3,7 @@ title: Neon Pro Plan
 subtitle: Learn about the advantages of upgrading to the Neon Pro Plan
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-19T12:56:03.260Z'
+updatedOn: '2023-10-24T18:56:54.990Z'
 ---
 
 The Neon Pro Plan plan is intended for users who have completed their evaluation of Neon on the Neon Free Tier and are ready to transition to a production-level plan with higher limits and advanced features.

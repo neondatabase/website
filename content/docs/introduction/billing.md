@@ -1,7 +1,7 @@
 ---
 title: Billing metrics
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.404Z'
+updatedOn: '2023-10-24T18:56:54.987Z'
 ---
 
 Neon [paid plans](/docs/introduction/plans#neon-plans) bill for usage based on the following metrics:
