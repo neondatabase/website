@@ -1,4 +1,4 @@
-describe('Blog Post Subscribe', () => {
+describe('Blog Post Subscribe Form', () => {
   beforeEach(() => {
     cy.visit('/blog/neon-serverless-postgres-is-live');
   });

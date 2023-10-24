@@ -1,4 +1,4 @@
-describe('Newsletter Subscribe', () => {
+describe('Newsletter Subscribe Form', () => {
   beforeEach(() => {
     cy.visit('/');
   });
