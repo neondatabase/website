@@ -51,7 +51,7 @@ The **Connection Details** widget on the Neon **Dashboard** provides **Pooled co
 
 ## Optimize queries with PgBouncer and prepared statements
 
-If you use connection pooling in Neon, you are using PgBouncer. As of [PgBouncer 1.21.0](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_21_0), which is supported with Neon, PgBouncer supports protocol-level prepared statements. This capability can help you boost query performance while providing an added layer of protection against potential SQL injection attacks.
+PgBouncer supports protocol-level prepared statements as of the [1.21.0 release](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_21_0), which is supported with Neon. This capability can help you boost query performance while providing an added layer of protection against potential SQL injection attacks.
 
 ### Understanding prepared statements
 
