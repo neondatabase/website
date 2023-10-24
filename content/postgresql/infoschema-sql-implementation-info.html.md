@@ -1,0 +1,28 @@
+<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+|               37.49. `sql_implementation_info`              |                                                                    |                                    |                                                       |                                                       |
+| :---------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
+| [Prev](infoschema-sql-features.html "37.48. sql_features")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-sql-parts.html "37.50. sql_parts") |
+
+***
+
+## 37.49. `sql_implementation_info` [#](#INFOSCHEMA-SQL-IMPLEMENTATION-INFO)
+
+The table `sql_implementation_info` contains information about various aspects that are left implementation-defined by the SQL standard. This information is primarily intended for use in the context of the ODBC interface; users of other interfaces will probably find this information to be of little use. For this reason, the individual implementation information items are not described here; you will find them in the description of the ODBC interface.
+
+**Table 37.47. `sql_implementation_info` Columns**
+
+| Column TypeDescription                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `implementation_info_id` `character_data`Identifier string of the implementation information item                                                |
+| `implementation_info_name` `character_data`Descriptive name of the implementation information item                                               |
+| `integer_value` `cardinal_number`Value of the implementation information item, or null if the value is contained in the column `character_value` |
+| `character_value` `character_data`Value of the implementation information item, or null if the value is contained in the column `integer_value`  |
+| `comments` `character_data`Possibly a comment pertaining to the implementation information item                                                  |
+
+***
+
+|                                                             |                                                                    |                                                       |
+| :---------------------------------------------------------- | :----------------------------------------------------------------: | ----------------------------------------------------: |
+| [Prev](infoschema-sql-features.html "37.48. sql_features")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-sql-parts.html "37.50. sql_parts") |
+| 37.48. `sql_features`                                       |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                    37.50. `sql_parts` |

@@ -1,0 +1,30 @@
+<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+|                        37.38. `role_udt_grants`                       |                                                                    |                                    |                                                       |                                                                       |
+| :-------------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
+| [Prev](infoschema-role-table-grants.html "37.37. role_table_grants")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-role-usage-grants.html "37.39. role_usage_grants") |
+
+***
+
+## 37.38. `role_udt_grants` [#](#INFOSCHEMA-ROLE-UDT-GRANTS)
+
+The view `role_udt_grants` is intended to identify `USAGE` privileges granted on user-defined types where the grantor or grantee is a currently enabled role. Further information can be found under `udt_privileges`. The only effective difference between this view and `udt_privileges` is that this view omits objects that have been made accessible to the current user by way of a grant to `PUBLIC`. Since data types do not have real privileges in PostgreSQL, but only an implicit grant to `PUBLIC`, this view is empty.
+
+**Table 37.36. `role_udt_grants` Columns**
+
+| Column TypeDescription                                                                               |
+| ---------------------------------------------------------------------------------------------------- |
+| `grantor` `sql_identifier`The name of the role that granted the privilege                            |
+| `grantee` `sql_identifier`The name of the role that the privilege was granted to                     |
+| `udt_catalog` `sql_identifier`Name of the database containing the type (always the current database) |
+| `udt_schema` `sql_identifier`Name of the schema containing the type                                  |
+| `udt_name` `sql_identifier`Name of the type                                                          |
+| `privilege_type` `character_data`Always `TYPE USAGE`                                                 |
+| `is_grantable` `yes_or_no``YES` if the privilege is grantable, `NO` if not                           |
+
+***
+
+|                                                                       |                                                                    |                                                                       |
+| :-------------------------------------------------------------------- | :----------------------------------------------------------------: | --------------------------------------------------------------------: |
+| [Prev](infoschema-role-table-grants.html "37.37. role_table_grants")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-role-usage-grants.html "37.39. role_usage_grants") |
+| 37.37. `role_table_grants`                                            |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                            37.39. `role_usage_grants` |

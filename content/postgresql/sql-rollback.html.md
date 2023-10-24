@@ -1,0 +1,60 @@
+<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+|              ROLLBACK             |                                        |              |                                                       |                                                         |
+| :-------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------: |
+| [Prev](sql-revoke.html "REVOKE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-rollback-prepared.html "ROLLBACK PREPARED") |
+
+***
+
+[]()
+
+## ROLLBACK
+
+ROLLBACK — abort the current transaction
+
+## Synopsis
+
+    ROLLBACK [ WORK | TRANSACTION ] [ AND [ NO ] CHAIN ]
+
+## Description
+
+`ROLLBACK` rolls back the current transaction and causes all the updates made by the transaction to be discarded.
+
+## Parameters
+
+[]()
+
+*   `WORK``TRANSACTION` [#](#SQL-ROLLBACK-TRANSACTION)
+
+    Optional key words. They have no effect.
+
+*   `AND CHAIN` [#](#SQL-ROLLBACK-CHAIN)
+
+    If `AND CHAIN` is specified, a new (not aborted) transaction is immediately started with the same transaction characteristics (see [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION")) as the just finished one. Otherwise, no new transaction is started.
+
+## Notes
+
+Use [`COMMIT`](sql-commit.html "COMMIT") to successfully terminate a transaction.
+
+Issuing `ROLLBACK` outside of a transaction block emits a warning and otherwise has no effect. `ROLLBACK AND CHAIN` outside of a transaction block is an error.
+
+## Examples
+
+To abort all changes:
+
+    ROLLBACK;
+
+## Compatibility
+
+The command `ROLLBACK` conforms to the SQL standard. The form `ROLLBACK TRANSACTION` is a PostgreSQL extension.
+
+## See Also
+
+[BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [ROLLBACK TO SAVEPOINT](sql-rollback-to.html "ROLLBACK TO SAVEPOINT")
+
+***
+
+|                                   |                                                       |                                                         |
+| :-------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
+| [Prev](sql-revoke.html "REVOKE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-rollback-prepared.html "ROLLBACK PREPARED") |
+| REVOKE                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                       ROLLBACK PREPARED |
