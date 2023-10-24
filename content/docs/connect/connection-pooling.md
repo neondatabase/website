@@ -75,7 +75,7 @@ You can learn more about prepared statements in the PostgreSQL documentation. Se
 
 ### Use prepared statements with PgBouncer
 
-PgBouncer supports protocol-level prepared statements only. Direct SQL-level `PREPARE` and `EXECUTE` are not supported, which means you cannot take advantage of this feature by running prepared statements from an SQL client like `psql`. You must rely on PostgreSQL client libraries instead. Fortunately, most PostgreSQL client libraries support prepared statements. Here are a couple of examples showing how to use prepared statements from popular Python and JavaScript client libraries:
+PgBouncer supports protocol-level prepared statements only. Direct SQL-level `PREPARE` and `EXECUTE` are not supported, which means you cannot run prepared statements from an SQL client like `psql`. You must rely on PostgreSQL client libraries instead. Fortunately, most PostgreSQL client libraries support prepared statements. Here are a couple of examples showing how to use prepared statements with Javascript and Python client libraries:
 
 <CodeTabs labels={["pg", "psycopg2"]}>
 
