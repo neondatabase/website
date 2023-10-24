@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { m } from 'framer-motion';
+import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
 import AnimatedButton from 'components/shared/animated-button';
@@ -31,7 +32,13 @@ const icons = {
   storage: storageIcon,
 };
 
-const Metrics = ({ activeItems, setActiveItems, activeAnimations, setActiveAnimations }) => {
+const Metrics = ({
+  activeItems,
+  setActiveItems,
+  activeAnimations,
+  setActiveAnimations,
+  allItemsSelected,
+}) => {
   const { width: windowWidth } = useWindowSize();
 
   const [finalActiveTitles, setFinalActiveTitles] = useState({
@@ -45,8 +52,6 @@ const Metrics = ({ activeItems, setActiveItems, activeAnimations, setActiveAnima
       title: 'Storage',
     },
   });
-
-  const [allItemsSelected, setAllItemsSelected] = useState(false);
 
   const computeTimeCost = useMemo(
     () => calculateComputeCost(activeItems.performance?.unit, activeItems.activity?.unit),
@@ -76,23 +81,16 @@ const Metrics = ({ activeItems, setActiveItems, activeAnimations, setActiveAnima
     });
   }, [activeItems.activity, activeItems.performance, activeItems.storage]);
 
-  useEffect(() => {
-    if (activeItems.activity && activeItems.performance && activeItems.storage) {
-      setAllItemsSelected(true);
-    }
-  }, [activeItems]);
-
   const isItemSelected = (sectionIndex) =>
     activeItems[items[sectionIndex]?.label.toLowerCase()] !== null;
 
   return (
-    <LazyMotion features={domAnimation}>
+    <>
       {items.map((item, index) => (
         <Select
           className={clsx(
-            index === 0
-              ? 'h-[50vh]'
-              : 'h-[60vh] scroll-mt-[calc((100vh-975px)/2)] [@media(max-height:1400px)]:scroll-mt-[calc((100vh-760px)/2)]'
+            index === 0 ? 'h-[50vh]' : 'h-[60vh]',
+            'scroll-mt-[calc((100vh-975px)/2)] [@media(max-height:1400px)]:scroll-mt-[calc((100vh-760px)/2)]'
           )}
           key={item.label}
           {...item}
@@ -183,12 +181,13 @@ const Metrics = ({ activeItems, setActiveItems, activeAnimations, setActiveAnima
           </p>
         </div>
       </m.div>
-    </LazyMotion>
+    </>
   );
 };
 
 Metrics.propTypes = {
   ...selectPropTypes,
+  allItemsSelected: PropTypes.bool.isRequired,
 };
 
 export default Metrics;

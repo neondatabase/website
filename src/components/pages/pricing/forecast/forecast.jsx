@@ -179,6 +179,21 @@ const Forecast = () => {
     return setting ? setting[2] : 0;
   }, [pageHeight]);
 
+  const allItemsSelected = useMemo(
+    () => !!(activeItems.activity && activeItems.performance && activeItems.storage),
+    [activeItems]
+  );
+
+  const allItemsUnselected = useMemo(
+    () =>
+      !!(
+        activeItems.activity === null &&
+        activeItems.performance === null &&
+        activeItems.storage === null
+      ),
+    [activeItems]
+  );
+
   useEffect(() => {
     const currentScrollTop = scrollY;
     const switchPointMultiplier =
@@ -266,20 +281,36 @@ const Forecast = () => {
             ref={contentRef}
           >
             <Metrics
-              currentSectionIndex={currentSectionIndex}
               activeItems={activeItems}
               setActiveItems={setActiveItems}
               activeAnimations={activeAnimations}
               setActiveAnimations={setActiveAnimations}
+              allItemsSelected={allItemsSelected}
             />
           </div>
 
           <div className="sticky top-0 h-screen min-h-[700px] -right-10 -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh] flex items-center xl:justify-end xl:col-end-13 xl:row-start-1 xl:col-span-1 xl:right-0 xl:-mr-6 md:hidden">
-            <div className="relative flex flex-col">
+            <m.button
+              className={clsx(
+                'relative flex flex-col after:absolute after:-inset-x-3 after:-inset-y-2',
+                allItemsUnselected ? 'pointer-events-auto' : 'pointer-events-none'
+              )}
+              initial={{ opacity: 1 }}
+              animate={{ opacity: allItemsSelected ? 0 : 1 }}
+              transition={{ duration: 0.2, delay: 2 }}
+              type="button"
+              onClick={() => {
+                if (allItemsUnselected) {
+                  document.getElementById('activity').scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               <m.span
                 className="absolute top-0 w-1 flex rounded-[20px] bg-gray-new-98"
                 initial={{ height: 0 }}
-                animate={{ height: PROGRESS_BAR_VALUE[progressBarKey] }}
+                animate={{
+                  height: PROGRESS_BAR_VALUE[progressBarKey],
+                }}
               />
               {Array.from({ length: 4 }).map((_, index) => (
                 <span
@@ -290,7 +321,7 @@ const Forecast = () => {
                   key={index}
                 />
               ))}
-            </div>
+            </m.button>
           </div>
         </Container>
       </LazyMotion>
