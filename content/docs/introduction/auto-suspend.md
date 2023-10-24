@@ -7,7 +7,7 @@ updatedOn: '2023-10-07T10:43:33.403Z'
 
 Neon's _Auto-suspend_ feature controls when a Neon compute instance transitions to an `Idle` state (scales to zero) due to inactivity.
 
-By default, a Neon compute instance scales to zero after 300 seconds (5 minutes) of inactivity. For Neon [Free Tier](/docs/introduction/free-tier) users, this setting is fixed. [Neon Pro plan](/docs/introduction/pro-plan) users can increase, decrease, or disable the _Auto-suspend_ setting, controlling when or if a compute scales to zero.
+By default, a Neon compute instance scales to zero after 300 seconds (5 minutes) of inactivity. For [Neon Free Tier](/docs/introduction/free-tier) users, this setting is fixed. [Neon Pro Plan](/docs/introduction/pro-plan) users can increase, decrease, or disable the _Auto-suspend_ setting, controlling when or if a compute scales to zero.
 
 Reasons for adjusting the _Auto-suspend_ setting might include:
 

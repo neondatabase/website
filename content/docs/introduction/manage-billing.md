@@ -12,7 +12,7 @@ A Neon account subscribed to a paid plan can manage billing from the **Billing**
 - View and download invoices
 - Downgrade your plan
 
-For Free Tier accounts, the **Billing** page allows users to view [Free Tier](/docs/introduction/free-tier) usage limits, learn about [Neon Pro plan](/docs/introduction/pro-plan) features, and estimate monthly Pro plan cost based on your current usage.
+For Neon Free Tier accounts, the **Billing** page allows users to view [Neon Free Tier](/docs/introduction/free-tier) usage limits, learn about [Neon Pro Plan](/docs/introduction/pro-plan) features, and estimate monthly Neon Pro Plan cost based on your current usage.
 
 ## View the billing page
 
@@ -61,14 +61,14 @@ To download an invoice:
 
 ## Downgrade your plan
 
-To downgrade from the Pro plan to the Free Tier:
+To downgrade from the Neon Pro Plan to the Neon Free Tier:
 
 1. Navigate to the **Billing** page in the Neon Console.
 1. Click **Downgrade plan** at the bottom of the page.
 1. Follow the instructions on the **Downgrade** modal, and click **Downgrade**.
 
-Downgrading from the Pro plan transitions your account to the Neon Free Tier, which has lower usage limits that may affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
+Downgrading from the Neon Pro Plan transitions your account to the Neon Free Tier, which has lower usage limits that may affect the performance of your applications. To compare plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
 
-You will be required to remove any projects, branches, or data that exceed [Free Tier limits](/docs/introduction/free-tier). The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade).
+You will be required to remove any projects, branches, or data that exceed [Neon Free Tier](/docs/introduction/free-tier) limits. The downgrade goes into effect within 30 minutes. You will receive your final bill at the beginning of the next billing period (the start of the month following the downgrade).
 
 To downgrade from Enterprise or Platform Partnership plans, please contact [Sales](https://neon.tech/contact-sales). Cancellation of these plans is handled in accordance with the Master Subscription Agreement (MSA) outlined in the customer agreement.

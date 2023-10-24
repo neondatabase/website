@@ -40,4 +40,4 @@ Advantages of Neon's read replica feature include the following:
 
 ## Get started with read replicas
 
-The first step to leveraging Neon's read replica feature is to sign up for Neon's [Pro plan](/docs/introduction/pro-plan). After subscribing, you will be able to create and configure read replicas. To get started, refer to the [Working with read replicas](/docs/guides/read-replica-guide) guide.
+The first step to leveraging Neon's read replica feature is to sign up for the [Neon Pro Plan](/docs/introduction/pro-plan). After subscribing, you will be able to create and configure read replicas. To get started, refer to the [Working with read replicas](/docs/guides/read-replica-guide) guide.

@@ -63,7 +63,7 @@ neonctl projects list
 
 This subcommand allows you to create a Neon project.
 
-The [Neon Free Tier](../introduction/free-tier) supports creating a single project. The [Neon Pro plan](../introduction/pro-plan) allows creating multiple projects.
+The [Neon Free Tier](../introduction/free-tier) supports creating a single project. The [Neon Pro Plan](../introduction/pro-plan) allows creating multiple projects.
 
 #### Usage
 

@@ -13,7 +13,7 @@ Our _Custom_ plan can be tailored to your specific requirements with:
 - A custom contract
 - Volume-based discounts
 - Prepaid or integrated billing
-- Access to all Neon features available with the [Neon Pro plan](/docs/introduction/pro-plan)
+- Access to all Neon features available with the [Neon Pro Plan](/docs/introduction/pro-plan)
 - Tailored features and solutions
 - Custom support options
 

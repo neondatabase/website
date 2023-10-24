@@ -13,7 +13,7 @@ See [Token](#token).
 
 ### Active time
 
-The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). The [Free Tier](/docs/introduction/free-tier) has an [Active time](/docs/reference/glossary#active-time) limit of 100 hours per month, but that limit only affects non-primary branch compute usage. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. The primary branch compute always remains available regardless of the limit, ensuring that access to data on the primary branch is never interrupted. Free Tier users can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**. The _Active time_ limit resets at the beginning of each month.
+The total amount of time, measured in hours, that your compute resources have been active within a given billing period. This includes all computes in your Neon project, but excludes time when computes are in an `Idle` state due to [auto-suspension](#auto-suspend-compute). The [Neon Free Tier](/docs/introduction/free-tier) has an [Active time](/docs/reference/glossary#active-time) limit of 100 hours per month, but that limit only affects non-primary branch compute usage. Active time on all computes is counted toward the limit, but when the limit is exceeded, only non-primary branch computes are subject to suspension. The primary branch compute always remains available regardless of the limit, ensuring that access to data on the primary branch is never interrupted. Neon Free Tier users can monitor _Active time_ on the **Usage** widget on the Neon **Dashboard**. The _Active time_ limit resets at the beginning of each month.
 
 ### Activity Monitor
 
@@ -33,7 +33,7 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 ### Auto-suspend compute
 
-A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Neon Pro plan users can configure the _Auto-suspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable Auto-suspend completely to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
+A feature that suspends a compute endpoint after a specified period of inactivity (5 minutes, by default) to save on compute resources. This feature is also referred to as "scale to zero". When suspended, a compute endpoint is placed into an `Idle` state. Otherwise, the compute endpoint is in an `Active` state. Neon Pro Plan users can configure the _Auto-suspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable Auto-suspend completely to maintain an "always-active" compute endpoint. For more information, see [Edit a compute endpoint](/docs/manage/endpoints#edit-a-compute-endpoint).
 
 ### autoscaler-agent
 
@@ -171,7 +171,7 @@ A custom volume-based paid plan offered by Neon. See [Neon plans](/docs/introduc
 
 ### Free Tier
 
-A Neon service tier for which there are no usage charges. For information about Neon’s Free Tier and associated limits, see [Free Tier](/docs/introduction/free-tier).
+A Neon service tier for which there are no usage charges. For information about the Neon Free Tier and associated limits, see [Neon Free Tier](/docs/introduction/free-tier).
 
 ### Kubernetes
 
@@ -257,7 +257,7 @@ A custom volume-based paid plan offered by Neon that includes support for resale
 
 ### Point-in-time restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. By default, Neon retains a 7-day history of changes for all branches in a project. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. For more information about this feature, see [Branching — Point-in-time restore](https://neon.tech/docs/guides/branching-pitr).
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier time. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option. By default, Neon retains a 7-day history of changes for all branches in a project. The supported range is 0 to 7 days for [Neon Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Neon Pro Plan](/docs/introduction/pro-plan) users. For more information about this feature, see [Branching — Point-in-time restore](https://neon.tech/docs/guides/branching-pitr).
 
 ### PostgreSQL
 
@@ -273,7 +273,7 @@ Older projects may have a `web-access` system role, used by the [SQL Editor](#sq
 
 Each Neon project is created with a primary branch called `main`, but you can designate any branch as your project's primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
 
-### Pro plan
+### Pro Plan
 
 A usage-based paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
 
