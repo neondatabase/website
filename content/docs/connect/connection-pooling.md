@@ -51,7 +51,7 @@ The **Connection Details** widget on the Neon **Dashboard** provides **Pooled co
 
 ## Optimize queries with PgBouncer and prepared statements
 
-PgBouncer supports protocol-level prepared statements as of the [1.21.0 release](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_21_0), which is supported with Neon. This capability can help you boost query performance while providing an added layer of protection against potential SQL injection attacks.
+Protocol-level prepared statements are now supported with Neon and PgBouncer as of the [PgBouncer 1.21.0 release](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_21_0). This capability can help you boost query performance while providing an added layer of protection against potential SQL injection attacks.
 
 ### Understanding prepared statements
 
@@ -100,7 +100,7 @@ cur = conn.cursor()
 
 ## Connection pooling notes and limitations
 
-Neon uses PgBouncer in _transaction mode_, which does not support Postgres features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
+Neon uses PgBouncer in _transaction mode_, which limits some functionality in Postgres. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
 ## Need help?
 
