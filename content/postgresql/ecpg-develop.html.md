@@ -20,41 +20,41 @@ The most important function in the library is `ECPGdo`, which takes care of exec
 
 The arguments are:
 
-*   A line number [#](#ECPG-DEVELOP-LINE-NUMBER)
+* A line number [#](#ECPG-DEVELOP-LINE-NUMBER)
 
     This is the line number of the original line; used in error messages only.
 
-*   A string [#](#ECPG-DEVELOP-STRING)
+* A string [#](#ECPG-DEVELOP-STRING)
 
     This is the SQL command that is to be issued. It is modified by the input variables, i.e., the variables that where not known at compile time but are to be entered in the command. Where the variables should go the string contains `?`.
 
-*   Input variables [#](#ECPG-DEVELOP-INPUT-VARIABLES)
+* Input variables [#](#ECPG-DEVELOP-INPUT-VARIABLES)
 
     Every input variable causes ten arguments to be created. (See below.)
 
-*   *`ECPGt_EOIT`* [#](#ECPG-DEVELOP-ECPGT-EOIT)
+* *`ECPGt_EOIT`* [#](#ECPG-DEVELOP-ECPGT-EOIT)
 
     An `enum` telling that there are no more input variables.
 
-*   Output variables [#](#ECPG-DEVELOP-OUTPUT-VARIABLES)
+* Output variables [#](#ECPG-DEVELOP-OUTPUT-VARIABLES)
 
     Every output variable causes ten arguments to be created. (See below.) These variables are filled by the function.
 
-*   *`ECPGt_EORT`* [#](#ECPG-DEVELOP-ECPGT-EORT)
+* *`ECPGt_EORT`* [#](#ECPG-DEVELOP-ECPGT-EORT)
 
     An `enum` telling that there are no more variables.
 
 For every variable that is part of the SQL command, the function gets ten arguments:
 
-1.  The type as a special symbol.
-2.  A pointer to the value or a pointer to the pointer.
-3.  The size of the variable if it is a `char` or `varchar`.
-4.  The number of elements in the array (for array fetches).
-5.  The offset to the next element in the array (for array fetches).
-6.  The type of the indicator variable as a special symbol.
-7.  A pointer to the indicator variable.
-8.  0
-9.  The number of elements in the indicator array (for array fetches).
+1. The type as a special symbol.
+2. A pointer to the value or a pointer to the pointer.
+3. The size of the variable if it is a `char` or `varchar`.
+4. The number of elements in the array (for array fetches).
+5. The offset to the next element in the array (for array fetches).
+6. The type of the indicator variable as a special symbol.
+7. A pointer to the indicator variable.
+8. 0
+9. The number of elements in the indicator array (for array fetches).
 10. The offset to the next element in the indicator array (for array fetches).
 
 Note that not all SQL commands are treated in this way. For instance, an open cursor statement like:

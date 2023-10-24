@@ -16,9 +16,9 @@ For the languages supplied with the standard distribution, it is only necessary 
 
 A procedural language is installed in a database in five steps, which must be carried out by a database superuser. In most cases the required SQL commands should be packaged as the installation script of an “extension”, so that `CREATE EXTENSION` can be used to execute them.
 
-1.  The shared object for the language handler must be compiled and installed into an appropriate library directory. This works in the same way as building and installing modules with regular user-defined C functions does; see [Section 38.10.5](xfunc-c.html#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions"). Often, the language handler will depend on an external library that provides the actual programming language engine; if so, that must be installed as well.
+1. The shared object for the language handler must be compiled and installed into an appropriate library directory. This works in the same way as building and installing modules with regular user-defined C functions does; see [Section 38.10.5](xfunc-c.html#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions"). Often, the language handler will depend on an external library that provides the actual programming language engine; if so, that must be installed as well.
 
-2.  The handler must be declared with the command
+2. The handler must be declared with the command
 
         CREATE FUNCTION handler_function_name()
             RETURNS language_handler
@@ -27,21 +27,21 @@ A procedural language is installed in a database in five steps, which must be ca
 
     The special return type of `language_handler` tells the database system that this function does not return one of the defined SQL data types and is not directly usable in SQL statements.
 
-3.  Optionally, the language handler can provide an “inline” handler function that executes anonymous code blocks ([`DO`](sql-do.html "DO") commands) written in this language. If an inline handler function is provided by the language, declare it with a command like
+3. Optionally, the language handler can provide an “inline” handler function that executes anonymous code blocks ([`DO`](sql-do.html "DO") commands) written in this language. If an inline handler function is provided by the language, declare it with a command like
 
         CREATE FUNCTION inline_function_name(internal)
             RETURNS void
             AS 'path-to-shared-object'
             LANGUAGE C;
 
-4.  Optionally, the language handler can provide a “validator” function that checks a function definition for correctness without actually executing it. The validator function is called by `CREATE FUNCTION` if it exists. If a validator function is provided by the language, declare it with a command like
+4. Optionally, the language handler can provide a “validator” function that checks a function definition for correctness without actually executing it. The validator function is called by `CREATE FUNCTION` if it exists. If a validator function is provided by the language, declare it with a command like
 
         CREATE FUNCTION validator_function_name(oid)
             RETURNS void
             AS 'path-to-shared-object'
             LANGUAGE C STRICT;
 
-5.  Finally, the PL must be declared with the command
+5. Finally, the PL must be declared with the command
 
         CREATE [TRUSTED] LANGUAGE language_name
             HANDLER handler_function_name
@@ -77,7 +77,6 @@ The command:
 then defines that the previously declared functions should be invoked for functions and procedures where the language attribute is `plperl`.
 
 \
-
 
 In a default PostgreSQL installation, the handler for the PL/pgSQL language is built and installed into the “library” directory; furthermore, the PL/pgSQL language itself is installed in all databases. If Tcl support is configured in, the handlers for PL/Tcl and PL/TclU are built and installed in the library directory, but the language itself is not installed in any database by default. Likewise, the PL/Perl and PL/PerlU handlers are built and installed if Perl support is configured, and the PL/PythonU handler is installed if Python support is configured, but these languages are not installed by default.
 

@@ -8,20 +8,18 @@
 
 ## 38.10. C-Language Functions [#](#XFUNC-C)
 
-*   *   [38.10.1. Dynamic Loading](xfunc-c.html#XFUNC-C-DYNLOAD)
-    *   [38.10.2. Base Types in C-Language Functions](xfunc-c.html#XFUNC-C-BASETYPE)
-    *   [38.10.3. Version 1 Calling Conventions](xfunc-c.html#XFUNC-C-V1-CALL-CONV)
-    *   [38.10.4. Writing Code](xfunc-c.html#XFUNC-C-CODE)
-    *   [38.10.5. Compiling and Linking Dynamically-Loaded Functions](xfunc-c.html#DFUNC)
-    *   [38.10.6. Composite-Type Arguments](xfunc-c.html#XFUNC-C-COMPOSITE-TYPE-ARGS)
-    *   [38.10.7. Returning Rows (Composite Types)](xfunc-c.html#XFUNC-C-RETURNING-ROWS)
-    *   [38.10.8. Returning Sets](xfunc-c.html#XFUNC-C-RETURN-SET)
-    *   [38.10.9. Polymorphic Arguments and Return Types](xfunc-c.html#XFUNC-C-POLYMORPHIC)
-    *   [38.10.10. Shared Memory and LWLocks](xfunc-c.html#XFUNC-SHARED-ADDIN)
-    *   [38.10.11. Custom Wait Events](xfunc-c.html#XFUNC-ADDIN-WAIT-EVENTS)
-    *   [38.10.12. Using C++ for Extensibility](xfunc-c.html#EXTEND-CPP)
-
-[]()
+  * *   [38.10.1. Dynamic Loading](xfunc-c.html#XFUNC-C-DYNLOAD)
+* [38.10.2. Base Types in C-Language Functions](xfunc-c.html#XFUNC-C-BASETYPE)
+* [38.10.3. Version 1 Calling Conventions](xfunc-c.html#XFUNC-C-V1-CALL-CONV)
+* [38.10.4. Writing Code](xfunc-c.html#XFUNC-C-CODE)
+* [38.10.5. Compiling and Linking Dynamically-Loaded Functions](xfunc-c.html#DFUNC)
+* [38.10.6. Composite-Type Arguments](xfunc-c.html#XFUNC-C-COMPOSITE-TYPE-ARGS)
+* [38.10.7. Returning Rows (Composite Types)](xfunc-c.html#XFUNC-C-RETURNING-ROWS)
+* [38.10.8. Returning Sets](xfunc-c.html#XFUNC-C-RETURN-SET)
+* [38.10.9. Polymorphic Arguments and Return Types](xfunc-c.html#XFUNC-C-POLYMORPHIC)
+* [38.10.10. Shared Memory and LWLocks](xfunc-c.html#XFUNC-SHARED-ADDIN)
+* [38.10.11. Custom Wait Events](xfunc-c.html#XFUNC-ADDIN-WAIT-EVENTS)
+* [38.10.12. Using C++ for Extensibility](xfunc-c.html#EXTEND-CPP)
 
 User-defined functions can be written in C (or a language that can be made compatible with C, such as C++). Such functions are compiled into dynamically loadable objects (also called shared libraries) and are loaded by the server on demand. The dynamic loading feature is what distinguishes “C language” functions from “internal” functions — the actual coding conventions are essentially the same for both. (Hence, the standard internal function library is a rich source of coding examples for user-defined C functions.)
 
@@ -29,16 +27,14 @@ Currently only one calling convention is used for C functions (“version 1”).
 
 ### 38.10.1. Dynamic Loading [#](#XFUNC-C-DYNLOAD)
 
-[]()
-
 The first time a user-defined function in a particular loadable object file is called in a session, the dynamic loader loads that object file into memory so that the function can be called. The `CREATE FUNCTION` for a user-defined C function must therefore specify two pieces of information for the function: the name of the loadable object file, and the C name (link symbol) of the specific function to call within that object file. If the C name is not explicitly specified then it is assumed to be the same as the SQL function name.
 
 The following algorithm is used to locate the shared object file based on the name given in the `CREATE FUNCTION` command:
 
-1.  If the name is an absolute path, the given file is loaded.
-2.  If the name starts with the string `$libdir`, that part is replaced by the PostgreSQL package library directory name, which is determined at build time.[]()
-3.  If the name does not contain a directory part, the file is searched for in the path specified by the configuration variable [dynamic\_library\_path](runtime-config-client.html#GUC-DYNAMIC-LIBRARY-PATH).[]()
-4.  Otherwise (the file was not found in the path, or it contains a non-absolute directory part), the dynamic loader will try to take the name as given, which will most likely fail. (It is unreliable to depend on the current working directory.)
+1. If the name is an absolute path, the given file is loaded.
+2. If the name starts with the string `$libdir`, that part is replaced by the PostgreSQL package library directory name, which is determined at build time.
+3. If the name does not contain a directory part, the file is searched for in the path specified by the configuration variable [dynamic\_library\_path](runtime-config-client.html#GUC-DYNAMIC-LIBRARY-PATH).
+4. Otherwise (the file was not found in the path, or it contains a non-absolute directory part), the dynamic loader will try to take the name as given, which will most likely fail. (It is unreliable to depend on the current working directory.)
 
 If this sequence does not work, the platform-specific shared library file name extension (often `.so`) is appended to the given name and this sequence is tried again. If that fails as well, the load will fail.
 
@@ -52,29 +48,23 @@ In any case, the file name that is given in the `CREATE FUNCTION` command is rec
 
 PostgreSQL will not compile a C function automatically. The object file must be compiled before it is referenced in a `CREATE FUNCTION` command. See [Section 38.10.5](xfunc-c.html#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions") for additional information.
 
-[]()
-
 To ensure that a dynamically loaded object file is not loaded into an incompatible server, PostgreSQL checks that the file contains a “magic block” with the appropriate contents. This allows the server to detect obvious incompatibilities, such as code compiled for a different major version of PostgreSQL. To include a magic block, write this in one (and only one) of the module source files, after having included the header `fmgr.h`:
 
     PG_MODULE_MAGIC;
 
 After it is used for the first time, a dynamically loaded object file is retained in memory. Future calls in the same session to the function(s) in that file will only incur the small overhead of a symbol table lookup. If you need to force a reload of an object file, for example after recompiling it, begin a fresh session.
 
-[]()[]()
-
 Optionally, a dynamically loaded file can contain an initialization function. If the file includes a function named `_PG_init`, that function will be called immediately after loading the file. The function receives no parameters and should return void. There is presently no way to unload a dynamically loaded file.
 
 ### 38.10.2. Base Types in C-Language Functions [#](#XFUNC-C-BASETYPE)
-
-[]()
 
 To know how to write C-language functions, you need to know how PostgreSQL internally represents base data types and how they can be passed to and from functions. Internally, PostgreSQL regards a base type as a “blob of memory”. The user-defined functions that you define over a type in turn define the way that PostgreSQL can operate on it. That is, PostgreSQL will only store and retrieve the data from disk and use your user-defined functions to input, process, and output the data.
 
 Base types can have one of three internal formats:
 
-*   pass by value, fixed-length
-*   pass by reference, fixed-length
-*   pass by reference, variable-length
+* pass by value, fixed-length
+* pass by reference, fixed-length
+* pass by reference, variable-length
 
 By-value types can only be 1, 2, or 4 bytes in length (also 8 bytes, if `sizeof(Datum)` is 8 on your machine). You should be careful to define your types such that they will be the same size (in bytes) on all architectures. For example, the `long` type is dangerous because it is 4 bytes on some machines and 8 bytes on others, whereas `int` type is 4 bytes on most Unix machines. A reasonable implementation of the `int4` type on Unix machines might be:
 
@@ -160,7 +150,6 @@ When manipulating variable-length types, we must be careful to allocate the corr
 | `xid`                         | `TransactionId` | `postgres.h`                           |
 
 \
-
 
 Now that we've gone over all of the possible structures for base types, we can show some examples of real functions.
 
@@ -315,25 +304,25 @@ Before we turn to the more advanced topics, we should discuss some coding rules 
 
 The basic rules for writing and building C functions are as follows:
 
-*   Use `pg_config --includedir-server`[]() to find out where the PostgreSQL server header files are installed on your system (or the system that your users will be running on).
-*   Compiling and linking your code so that it can be dynamically loaded into PostgreSQL always requires special flags. See [Section 38.10.5](xfunc-c.html#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions") for a detailed explanation of how to do it for your particular operating system.
-*   Remember to define a “magic block” for your shared library, as described in [Section 38.10.1](xfunc-c.html#XFUNC-C-DYNLOAD "38.10.1. Dynamic Loading").
-*   When allocating memory, use the PostgreSQL functions `palloc`[]() and `pfree`[]() instead of the corresponding C library functions `malloc` and `free`. The memory allocated by `palloc` will be freed automatically at the end of each transaction, preventing memory leaks.
-*   Always zero the bytes of your structures using `memset` (or allocate them with `palloc0` in the first place). Even if you assign to each field of your structure, there might be alignment padding (holes in the structure) that contain garbage values. Without this, it's difficult to support hash indexes or hash joins, as you must pick out only the significant bits of your data structure to compute a hash. The planner also sometimes relies on comparing constants via bitwise equality, so you can get undesirable planning results if logically-equivalent values aren't bitwise equal.
-*   Most of the internal PostgreSQL types are declared in `postgres.h`, while the function manager interfaces (`PG_FUNCTION_ARGS`, etc.) are in `fmgr.h`, so you will need to include at least these two files. For portability reasons it's best to include `postgres.h` *first*, before any other system or user header files. Including `postgres.h` will also include `elog.h` and `palloc.h` for you.
-*   Symbol names defined within object files must not conflict with each other or with symbols defined in the PostgreSQL server executable. You will have to rename your functions or variables if you get error messages to this effect.
+* Use `pg_config --includedir-server` to find out where the PostgreSQL server header files are installed on your system (or the system that your users will be running on).
+* Compiling and linking your code so that it can be dynamically loaded into PostgreSQL always requires special flags. See [Section 38.10.5](xfunc-c.html#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions") for a detailed explanation of how to do it for your particular operating system.
+* Remember to define a “magic block” for your shared library, as described in [Section 38.10.1](xfunc-c.html#XFUNC-C-DYNLOAD "38.10.1. Dynamic Loading").
+* When allocating memory, use the PostgreSQL functions `palloc` and `pfree` instead of the corresponding C library functions `malloc` and `free`. The memory allocated by `palloc` will be freed automatically at the end of each transaction, preventing memory leaks.
+* Always zero the bytes of your structures using `memset` (or allocate them with `palloc0` in the first place). Even if you assign to each field of your structure, there might be alignment padding (holes in the structure) that contain garbage values. Without this, it's difficult to support hash indexes or hash joins, as you must pick out only the significant bits of your data structure to compute a hash. The planner also sometimes relies on comparing constants via bitwise equality, so you can get undesirable planning results if logically-equivalent values aren't bitwise equal.
+* Most of the internal PostgreSQL types are declared in `postgres.h`, while the function manager interfaces (`PG_FUNCTION_ARGS`, etc.) are in `fmgr.h`, so you will need to include at least these two files. For portability reasons it's best to include `postgres.h` *first*, before any other system or user header files. Including `postgres.h` will also include `elog.h` and `palloc.h` for you.
+* Symbol names defined within object files must not conflict with each other or with symbols defined in the PostgreSQL server executable. You will have to rename your functions or variables if you get error messages to this effect.
 
 ### 38.10.5. Compiling and Linking Dynamically-Loaded Functions [#](#DFUNC)
 
-Before you are able to use your PostgreSQL extension functions written in C, they must be compiled and linked in a special way to produce a file that can be dynamically loaded by the server. To be precise, a *shared library* needs to be created.[]()
+Before you are able to use your PostgreSQL extension functions written in C, they must be compiled and linked in a special way to produce a file that can be dynamically loaded by the server. To be precise, a *shared library* needs to be created.
 
 For information beyond what is contained in this section you should read the documentation of your operating system, in particular the manual pages for the C compiler, `cc`, and the link editor, `ld`. In addition, the PostgreSQL source code contains several working examples in the `contrib` directory. If you rely on these examples you will make your modules dependent on the availability of the PostgreSQL source code, however.
 
-Creating shared libraries is generally analogous to linking executables: first the source files are compiled into object files, then the object files are linked together. The object files need to be created as *position-independent code* (PIC),[]() which conceptually means that they can be placed at an arbitrary location in memory when they are loaded by the executable. (Object files intended for executables are usually not compiled that way.) The command to link a shared library contains special flags to distinguish it from linking an executable (at least in theory — on some systems the practice is much uglier).
+Creating shared libraries is generally analogous to linking executables: first the source files are compiled into object files, then the object files are linked together. The object files need to be created as *position-independent code* (PIC), which conceptually means that they can be placed at an arbitrary location in memory when they are loaded by the executable. (Object files intended for executables are usually not compiled that way.) The command to link a shared library contains special flags to distinguish it from linking an executable (at least in theory — on some systems the practice is much uglier).
 
 In the following examples we assume that your source code is in a file `foo.c` and we will create a shared library `foo.so`. The intermediate object file will be called `foo.o` unless otherwise noted. A shared library can contain more than one object file, but we only use one here.
 
-*   FreeBSD[]()
+* FreeBSD
 
     The compiler flag to create PIC is `-fPIC`. To create shared libraries the compiler flag is `-shared`.
 
@@ -342,35 +331,35 @@ In the following examples we assume that your source code is in a file `foo.c` a
 
     This is applicable as of version 3.0 of FreeBSD.
 
-*   Linux[]()
+* Linux
 
     The compiler flag to create PIC is `-fPIC`. The compiler flag to create a shared library is `-shared`. A complete example looks like this:
 
         cc -fPIC -c foo.c
         cc -shared -o foo.so foo.o
 
-*   macOS[]()
+* macOS
 
     Here is an example. It assumes the developer tools are installed.
 
         cc -c foo.c
         cc -bundle -flat_namespace -undefined suppress -o foo.so foo.o
 
-*   NetBSD[]()
+* NetBSD
 
     The compiler flag to create PIC is `-fPIC`. For ELF systems, the compiler with the flag `-shared` is used to link shared libraries. On the older non-ELF systems, `ld -Bshareable` is used.
 
         gcc -fPIC -c foo.c
         gcc -shared -o foo.so foo.o
 
-*   OpenBSD[]()
+* OpenBSD
 
     The compiler flag to create PIC is `-fPIC`. `ld -Bshareable` is used to link shared libraries.
 
         gcc -fPIC -c foo.c
         ld -Bshareable -o foo.so foo.o
 
-*   Solaris[]()
+* Solaris
 
     The compiler flag to create PIC is `-KPIC` with the Sun compiler and `-fPIC` with GCC. To link shared libraries, the compiler option is `-G` with either compiler or alternatively `-shared` with GCC.
 
@@ -814,7 +803,7 @@ There is a variant of polymorphism that is only available to C-language function
 
 ### 38.10.10. Shared Memory and LWLocks [#](#XFUNC-SHARED-ADDIN)
 
-Add-ins can reserve LWLocks and an allocation of shared memory on server startup. The add-in's shared library must be preloaded by specifying it in [shared\_preload\_libraries](runtime-config-client.html#GUC-SHARED-PRELOAD-LIBRARIES)[](). The shared library should register a `shmem_request_hook` in its `_PG_init` function. This `shmem_request_hook` can reserve LWLocks or shared memory. Shared memory is reserved by calling:
+Add-ins can reserve LWLocks and an allocation of shared memory on server startup. The add-in's shared library must be preloaded by specifying it in [shared\_preload\_libraries](runtime-config-client.html#GUC-SHARED-PRELOAD-LIBRARIES). The shared library should register a `shmem_request_hook` in its `_PG_init` function. This `shmem_request_hook` can reserve LWLocks or shared memory. Shared memory is reserved by calling:
 
     void RequestAddinShmemSpace(int size)
 
@@ -866,14 +855,12 @@ Custom wait events can be viewed in [`pg_stat_activity`](monitoring-stats.html#M
 
 ### 38.10.12. Using C++ for Extensibility [#](#EXTEND-CPP)
 
-[]()
-
 Although the PostgreSQL backend is written in C, it is possible to write extensions in C++ if these guidelines are followed:
 
-*   All functions accessed by the backend must present a C interface to the backend; these C functions can then call C++ functions. For example, `extern C` linkage is required for backend-accessed functions. This is also necessary for any functions that are passed as pointers between the backend and C++ code.
-*   Free memory using the appropriate deallocation method. For example, most backend memory is allocated using `palloc()`, so use `pfree()` to free it. Using C++ `delete` in such cases will fail.
-*   Prevent exceptions from propagating into the C code (use a catch-all block at the top level of all `extern C` functions). This is necessary even if the C++ code does not explicitly throw any exceptions, because events like out-of-memory can still throw exceptions. Any exceptions must be caught and appropriate errors passed back to the C interface. If possible, compile C++ with `-fno-exceptions` to eliminate exceptions entirely; in such cases, you must check for failures in your C++ code, e.g., check for NULL returned by `new()`.
-*   If calling backend functions from C++ code, be sure that the C++ call stack contains only plain old data structures (POD). This is necessary because backend errors generate a distant `longjmp()` that does not properly unroll a C++ call stack with non-POD objects.
+* All functions accessed by the backend must present a C interface to the backend; these C functions can then call C++ functions. For example, `extern C` linkage is required for backend-accessed functions. This is also necessary for any functions that are passed as pointers between the backend and C++ code.
+* Free memory using the appropriate deallocation method. For example, most backend memory is allocated using `palloc()`, so use `pfree()` to free it. Using C++ `delete` in such cases will fail.
+* Prevent exceptions from propagating into the C code (use a catch-all block at the top level of all `extern C` functions). This is necessary even if the C++ code does not explicitly throw any exceptions, because events like out-of-memory can still throw exceptions. Any exceptions must be caught and appropriate errors passed back to the C interface. If possible, compile C++ with `-fno-exceptions` to eliminate exceptions entirely; in such cases, you must check for failures in your C++ code, e.g., check for NULL returned by `new()`.
+* If calling backend functions from C++ code, be sure that the C++ call stack contains only plain old data structures (POD). This is necessary because backend errors generate a distant `longjmp()` that does not properly unroll a C++ call stack with non-POD objects.
 
 In summary, it is best to place C++ code behind a wall of `extern C` functions that interface to the backend, and avoid exception, memory, and call stack leakage.
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_result\_code\_string
 
 SPI\_result\_code\_string — return error code as string
@@ -22,7 +20,7 @@ SPI\_result\_code\_string — return error code as string
 
 ## Arguments
 
-*   `int code`
+* `int code`
 
     result code
 

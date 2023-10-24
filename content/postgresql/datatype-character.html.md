@@ -8,8 +8,6 @@
 
 ## 8.3. Character Types [#](#DATATYPE-CHARACTER)
 
-[]()[]()[]()[]()[]()[]()[]()[]()
-
 **Table 8.4. Character Types**
 
 | Name                                   | Description                |
@@ -19,7 +17,6 @@
 | `text`                                 | variable unlimited length  |
 
 \
-
 
 [Table 8.4](datatype-character.html#DATATYPE-CHARACTER-TABLE "Table 8.4. Character Types") shows the general-purpose character types available in PostgreSQL.
 
@@ -73,7 +70,6 @@ Refer to [Section 4.1.2.1](sql-syntax-lexical.html#SQL-SYNTAX-STRINGS "4.1.2.1.
 | [(1)](#co.datatype-char) | The `char_length` function is discussed in [Section 9.4](functions-string.html "9.4. String Functions and Operators"). |
 
 \
-
 
 There are two other fixed-length character types in PostgreSQL, shown in [Table 8.5](datatype-character.html#DATATYPE-CHARACTER-SPECIAL-TABLE "Table 8.5. Special Character Types"). These are not intended for general-purpose use, only for use in the internal system catalogs. The `name` type is used to store identifiers. Its length is currently defined as 64 bytes (63 usable characters plus terminator) but should be referenced using the constant `NAMEDATALEN` in `C` source code. The length is set at compile time (and is therefore adjustable for special uses); the default maximum length might change in a future release. The type `"char"` (note the quotes) is different from `char(1)` in that it only uses one byte of storage, and therefore can store only a single ASCII character. It is used in the system catalogs as a simplistic enumeration type.
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## CHECKPOINT
 
 CHECKPOINT — force a write-ahead log checkpoint

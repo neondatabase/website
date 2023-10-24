@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ALTER USER
 
 ALTER USER — change a database role

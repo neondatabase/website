@@ -8,20 +8,20 @@
 
 ## 20.11. Client Connection Defaults [#](#RUNTIME-CONFIG-CLIENT)
 
-*   *   [20.11.1. Statement Behavior](runtime-config-client.html#RUNTIME-CONFIG-CLIENT-STATEMENT)
-    *   [20.11.2. Locale and Formatting](runtime-config-client.html#RUNTIME-CONFIG-CLIENT-FORMAT)
-    *   [20.11.3. Shared Library Preloading](runtime-config-client.html#RUNTIME-CONFIG-CLIENT-PRELOAD)
-    *   [20.11.4. Other Defaults](runtime-config-client.html#RUNTIME-CONFIG-CLIENT-OTHER)
+  * *   [20.11.1. Statement Behavior](runtime-config-client.html#RUNTIME-CONFIG-CLIENT-STATEMENT)
+* [20.11.2. Locale and Formatting](runtime-config-client.html#RUNTIME-CONFIG-CLIENT-FORMAT)
+* [20.11.3. Shared Library Preloading](runtime-config-client.html#RUNTIME-CONFIG-CLIENT-PRELOAD)
+* [20.11.4. Other Defaults](runtime-config-client.html#RUNTIME-CONFIG-CLIENT-OTHER)
 
 ### 20.11.1. Statement Behavior [#](#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
-*   `client_min_messages` (`enum`) []()[#](#GUC-CLIENT-MIN-MESSAGES)
+* `client_min_messages` (`enum`) [#](#GUC-CLIENT-MIN-MESSAGES)
 
     Controls which [message levels](runtime-config-logging.html#RUNTIME-CONFIG-SEVERITY-LEVELS "Table 20.2. Message Severity Levels") are sent to the client. Valid values are `DEBUG5`, `DEBUG4`, `DEBUG3`, `DEBUG2`, `DEBUG1`, `LOG`, `NOTICE`, `WARNING`, and `ERROR`. Each level includes all the levels that follow it. The later the level, the fewer messages are sent. The default is `NOTICE`. Note that `LOG` has a different rank here than in [log\_min\_messages](runtime-config-logging.html#GUC-LOG-MIN-MESSAGES).
 
     `INFO` level messages are always sent to the client.
 
-*   `search_path` (`string`) []()[]()[#](#GUC-SEARCH-PATH)
+* `search_path` (`string`) [#](#GUC-SEARCH-PATH)
 
     This variable specifies the order in which schemas are searched when an object (table, data type, function, etc.) is referenced by a simple name with no schema specified. When there are objects of identical names in different schemas, the one found first in the search path is used. An object that is not in any of the schemas in the search path can only be referenced by specifying its containing schema with a qualified (dotted) name.
 
@@ -31,7 +31,7 @@
 
     The system catalog schema, `pg_catalog`, is always searched, whether it is mentioned in the path or not. If it is mentioned in the path then it will be searched in the specified order. If `pg_catalog` is not in the path then it will be searched *before* searching any of the path items.
 
-    Likewise, the current session's temporary-table schema, `pg_temp_nnn`, is always searched if it exists. It can be explicitly listed in the path by using the alias `pg_temp`[](). If it is not listed in the path then it is searched first (even before `pg_catalog`). However, the temporary schema is only searched for relation (table, view, sequence, etc.) and data type names. It is never searched for function or operator names.
+    Likewise, the current session's temporary-table schema, `pg_temp_nnn`, is always searched if it exists. It can be explicitly listed in the path by using the alias `pg_temp`. If it is not listed in the path then it is searched first (even before `pg_catalog`). However, the temporary schema is only searched for relation (table, view, sequence, etc.) and data type names. It is never searched for function or operator names.
 
     When objects are created without specifying a particular target schema, they will be placed in the first valid schema named in `search_path`. An error is reported if the search path is empty.
 
@@ -41,17 +41,17 @@
 
     The current effective value of the search path can be examined via the SQL function `current_schemas` (see [Section 9.26](functions-info.html "9.26. System Information Functions and Operators")). This is not quite the same as examining the value of `search_path`, since `current_schemas` shows how the items appearing in `search_path` were resolved.
 
-*   `row_security` (`boolean`) []()[#](#GUC-ROW-SECURITY)
+* `row_security` (`boolean`) [#](#GUC-ROW-SECURITY)
 
     This variable controls whether to raise an error in lieu of applying a row security policy. When set to `on`, policies apply normally. When set to `off`, queries fail which would otherwise apply at least one policy. The default is `on`. Change to `off` where limited row visibility could cause incorrect results; for example, pg\_dump makes that change by default. This variable has no effect on roles which bypass every row security policy, to wit, superusers and roles with the `BYPASSRLS` attribute.
 
     For more information on row security policies, see [CREATE POLICY](sql-createpolicy.html "CREATE POLICY").
 
-*   `default_table_access_method` (`string`) []()[#](#GUC-DEFAULT-TABLE-ACCESS-METHOD)
+* `default_table_access_method` (`string`) [#](#GUC-DEFAULT-TABLE-ACCESS-METHOD)
 
     This parameter specifies the default table access method to use when creating tables or materialized views if the `CREATE` command does not explicitly specify an access method, or when `SELECT ... INTO` is used, which does not allow specifying a table access method. The default is `heap`.
 
-*   `default_tablespace` (`string`) []()[]()[#](#GUC-DEFAULT-TABLESPACE)
+* `default_tablespace` (`string`) [#](#GUC-DEFAULT-TABLESPACE)
 
     This variable specifies the default tablespace in which to create objects (tables and indexes) when a `CREATE` command does not explicitly specify a tablespace.
 
@@ -65,11 +65,11 @@
 
     For more information on tablespaces, see [Section 23.6](manage-ag-tablespaces.html "23.6. Tablespaces").
 
-*   `default_toast_compression` (`enum`) []()[#](#GUC-DEFAULT-TOAST-COMPRESSION)
+* `default_toast_compression` (`enum`) [#](#GUC-DEFAULT-TOAST-COMPRESSION)
 
     This variable sets the default [TOAST](storage-toast.html "73.2. TOAST") compression method for values of compressible columns. (This can be overridden for individual columns by setting the `COMPRESSION` column option in `CREATE TABLE` or `ALTER TABLE`.) The supported compression methods are `pglz` and (if PostgreSQL was compiled with `--with-lz4`) `lz4`. The default is `pglz`.
 
-*   `temp_tablespaces` (`string`) []()[]()[#](#GUC-TEMP-TABLESPACES)
+* `temp_tablespaces` (`string`) [#](#GUC-TEMP-TABLESPACES)
 
     This variable specifies tablespaces in which to create temporary objects (temp tables and indexes on temp tables) when a `CREATE` command does not explicitly specify a tablespace. Temporary files for purposes such as sorting large data sets are also created in these tablespaces.
 
@@ -81,23 +81,23 @@
 
     See also [default\_tablespace](runtime-config-client.html#GUC-DEFAULT-TABLESPACE).
 
-*   `check_function_bodies` (`boolean`) []()[#](#GUC-CHECK-FUNCTION-BODIES)
+* `check_function_bodies` (`boolean`) [#](#GUC-CHECK-FUNCTION-BODIES)
 
     This parameter is normally on. When set to `off`, it disables validation of the routine body string during [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") and [CREATE PROCEDURE](sql-createprocedure.html "CREATE PROCEDURE"). Disabling validation avoids side effects of the validation process, in particular preventing false positives due to problems such as forward references. Set this parameter to `off` before loading functions on behalf of other users; pg\_dump does so automatically.
 
-*   `default_transaction_isolation` (`enum`) []()[]()[#](#GUC-DEFAULT-TRANSACTION-ISOLATION)
+* `default_transaction_isolation` (`enum`) [#](#GUC-DEFAULT-TRANSACTION-ISOLATION)
 
     Each SQL transaction has an isolation level, which can be either “read uncommitted”, “read committed”, “repeatable read”, or “serializable”. This parameter controls the default isolation level of each new transaction. The default is “read committed”.
 
     Consult [Chapter 13](mvcc.html "Chapter 13. Concurrency Control") and [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION") for more information.
 
-*   `default_transaction_read_only` (`boolean`) []()[]()[#](#GUC-DEFAULT-TRANSACTION-READ-ONLY)
+* `default_transaction_read_only` (`boolean`) [#](#GUC-DEFAULT-TRANSACTION-READ-ONLY)
 
     A read-only SQL transaction cannot alter non-temporary tables. This parameter controls the default read-only status of each new transaction. The default is `off` (read/write).
 
     Consult [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION") for more information.
 
-*   `default_transaction_deferrable` (`boolean`) []()[]()[#](#GUC-DEFAULT-TRANSACTION-DEFERRABLE)
+* `default_transaction_deferrable` (`boolean`) [#](#GUC-DEFAULT-TRANSACTION-DEFERRABLE)
 
     When running at the `serializable` isolation level, a deferrable read-only SQL transaction may be delayed before it is allowed to proceed. However, once it begins executing it does not incur any of the overhead required to ensure serializability; so serialization code will have no reason to force it to abort because of concurrent updates, making this option suitable for long-running read-only transactions.
 
@@ -105,19 +105,19 @@
 
     Consult [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION") for more information.
 
-*   `transaction_isolation` (`enum`) []()[]()[#](#GUC-TRANSACTION-ISOLATION)
+* `transaction_isolation` (`enum`) [#](#GUC-TRANSACTION-ISOLATION)
 
     This parameter reflects the current transaction's isolation level. At the beginning of each transaction, it is set to the current value of [default\_transaction\_isolation](runtime-config-client.html#GUC-DEFAULT-TRANSACTION-ISOLATION). Any subsequent attempt to change it is equivalent to a [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION") command.
 
-*   `transaction_read_only` (`boolean`) []()[]()[#](#GUC-TRANSACTION-READ-ONLY)
+* `transaction_read_only` (`boolean`) [#](#GUC-TRANSACTION-READ-ONLY)
 
     This parameter reflects the current transaction's read-only status. At the beginning of each transaction, it is set to the current value of [default\_transaction\_read\_only](runtime-config-client.html#GUC-DEFAULT-TRANSACTION-READ-ONLY). Any subsequent attempt to change it is equivalent to a [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION") command.
 
-*   `transaction_deferrable` (`boolean`) []()[]()[#](#GUC-TRANSACTION-DEFERRABLE)
+* `transaction_deferrable` (`boolean`) [#](#GUC-TRANSACTION-DEFERRABLE)
 
     This parameter reflects the current transaction's deferrability status. At the beginning of each transaction, it is set to the current value of [default\_transaction\_deferrable](runtime-config-client.html#GUC-DEFAULT-TRANSACTION-DEFERRABLE). Any subsequent attempt to change it is equivalent to a [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION") command.
 
-*   `session_replication_role` (`enum`) []()[#](#GUC-SESSION-REPLICATION-ROLE)
+* `session_replication_role` (`enum`) [#](#GUC-SESSION-REPLICATION-ROLE)
 
     Controls firing of replication-related triggers and rules for the current session. Possible values are `origin` (the default), `replica` and `local`. Setting this parameter results in discarding any previously cached query plans. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
@@ -127,7 +127,7 @@
 
     Since foreign keys are implemented as triggers, setting this parameter to `replica` also disables all foreign key checks, which can leave data in an inconsistent state if improperly used.
 
-*   `statement_timeout` (`integer`) []()[#](#GUC-STATEMENT-TIMEOUT)
+* `statement_timeout` (`integer`) [#](#GUC-STATEMENT-TIMEOUT)
 
     Abort any statement that takes more than the specified amount of time. If `log_min_error_statement` is set to `ERROR` or lower, the statement that timed out will also be logged. If this value is specified without units, it is taken as milliseconds. A value of zero (the default) disables the timeout.
 
@@ -135,7 +135,7 @@
 
     Setting `statement_timeout` in `postgresql.conf` is not recommended because it would affect all sessions.
 
-*   `lock_timeout` (`integer`) []()[#](#GUC-LOCK-TIMEOUT)
+* `lock_timeout` (`integer`) [#](#GUC-LOCK-TIMEOUT)
 
     Abort any statement that waits longer than the specified amount of time while attempting to acquire a lock on a table, index, row, or other database object. The time limit applies separately to each lock acquisition attempt. The limit applies both to explicit locking requests (such as `LOCK TABLE`, or `SELECT FOR UPDATE` without `NOWAIT`) and to implicitly-acquired locks. If this value is specified without units, it is taken as milliseconds. A value of zero (the default) disables the timeout.
 
@@ -143,13 +143,13 @@
 
     Setting `lock_timeout` in `postgresql.conf` is not recommended because it would affect all sessions.
 
-*   `idle_in_transaction_session_timeout` (`integer`) []()[#](#GUC-IDLE-IN-TRANSACTION-SESSION-TIMEOUT)
+* `idle_in_transaction_session_timeout` (`integer`) [#](#GUC-IDLE-IN-TRANSACTION-SESSION-TIMEOUT)
 
     Terminate any session that has been idle (that is, waiting for a client query) within an open transaction for longer than the specified amount of time. If this value is specified without units, it is taken as milliseconds. A value of zero (the default) disables the timeout.
 
     This option can be used to ensure that idle sessions do not hold locks for an unreasonable amount of time. Even when no significant locks are held, an open transaction prevents vacuuming away recently-dead tuples that may be visible only to this transaction; so remaining idle for a long time can contribute to table bloat. See [Section 25.1](routine-vacuuming.html "25.1. Routine Vacuuming") for more details.
 
-*   `idle_session_timeout` (`integer`) []()[#](#GUC-IDLE-SESSION-TIMEOUT)
+* `idle_session_timeout` (`integer`) [#](#GUC-IDLE-SESSION-TIMEOUT)
 
     Terminate any session that has been idle (that is, waiting for a client query), but not within an open transaction, for longer than the specified amount of time. If this value is specified without units, it is taken as milliseconds. A value of zero (the default) disables the timeout.
 
@@ -157,15 +157,15 @@
 
     Be wary of enforcing this timeout on connections made through connection-pooling software or other middleware, as such a layer may not react well to unexpected connection closure. It may be helpful to enable this timeout only for interactive sessions, perhaps by applying it only to particular users.
 
-*   `vacuum_freeze_table_age` (`integer`) []()[#](#GUC-VACUUM-FREEZE-TABLE-AGE)
+* `vacuum_freeze_table_age` (`integer`) [#](#GUC-VACUUM-FREEZE-TABLE-AGE)
 
     `VACUUM` performs an aggressive scan if the table's `pg_class`.`relfrozenxid` field has reached the age specified by this setting. An aggressive scan differs from a regular `VACUUM` in that it visits every page that might contain unfrozen XIDs or MXIDs, not just those that might contain dead tuples. The default is 150 million transactions. Although users can set this value anywhere from zero to two billion, `VACUUM` will silently limit the effective value to 95% of [autovacuum\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE), so that a periodic manual `VACUUM` has a chance to run before an anti-wraparound autovacuum is launched for the table. For more information see [Section 25.1.5](routine-vacuuming.html#VACUUM-FOR-WRAPAROUND "25.1.5. Preventing Transaction ID Wraparound Failures").
 
-*   `vacuum_freeze_min_age` (`integer`) []()[#](#GUC-VACUUM-FREEZE-MIN-AGE)
+* `vacuum_freeze_min_age` (`integer`) [#](#GUC-VACUUM-FREEZE-MIN-AGE)
 
     Specifies the cutoff age (in transactions) that `VACUUM` should use to decide whether to trigger freezing of pages that have an older XID. The default is 50 million transactions. Although users can set this value anywhere from zero to one billion, `VACUUM` will silently limit the effective value to half the value of [autovacuum\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE), so that there is not an unreasonably short time between forced autovacuums. For more information see [Section 25.1.5](routine-vacuuming.html#VACUUM-FOR-WRAPAROUND "25.1.5. Preventing Transaction ID Wraparound Failures").
 
-*   `vacuum_failsafe_age` (`integer`) []()[#](#GUC-VACUUM-FAILSAFE-AGE)
+* `vacuum_failsafe_age` (`integer`) [#](#GUC-VACUUM-FAILSAFE-AGE)
 
     Specifies the maximum age (in transactions) that a table's `pg_class`.`relfrozenxid` field can attain before `VACUUM` takes extraordinary measures to avoid system-wide transaction ID wraparound failure. This is `VACUUM`'s strategy of last resort. The failsafe typically triggers when an autovacuum to prevent transaction ID wraparound has already been running for some time, though it's possible for the failsafe to trigger during any `VACUUM`.
 
@@ -173,15 +173,15 @@
 
     The default is 1.6 billion transactions. Although users can set this value anywhere from zero to 2.1 billion, `VACUUM` will silently adjust the effective value to no less than 105% of [autovacuum\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE).
 
-*   `vacuum_multixact_freeze_table_age` (`integer`) []()[#](#GUC-VACUUM-MULTIXACT-FREEZE-TABLE-AGE)
+* `vacuum_multixact_freeze_table_age` (`integer`) [#](#GUC-VACUUM-MULTIXACT-FREEZE-TABLE-AGE)
 
     `VACUUM` performs an aggressive scan if the table's `pg_class`.`relminmxid` field has reached the age specified by this setting. An aggressive scan differs from a regular `VACUUM` in that it visits every page that might contain unfrozen XIDs or MXIDs, not just those that might contain dead tuples. The default is 150 million multixacts. Although users can set this value anywhere from zero to two billion, `VACUUM` will silently limit the effective value to 95% of [autovacuum\_multixact\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-MULTIXACT-FREEZE-MAX-AGE), so that a periodic manual `VACUUM` has a chance to run before an anti-wraparound is launched for the table. For more information see [Section 25.1.5.1](routine-vacuuming.html#VACUUM-FOR-MULTIXACT-WRAPAROUND "25.1.5.1. Multixacts and Wraparound").
 
-*   `vacuum_multixact_freeze_min_age` (`integer`) []()[#](#GUC-VACUUM-MULTIXACT-FREEZE-MIN-AGE)
+* `vacuum_multixact_freeze_min_age` (`integer`) [#](#GUC-VACUUM-MULTIXACT-FREEZE-MIN-AGE)
 
     Specifies the cutoff age (in multixacts) that `VACUUM` should use to decide whether to trigger freezing of pages with an older multixact ID. The default is 5 million multixacts. Although users can set this value anywhere from zero to one billion, `VACUUM` will silently limit the effective value to half the value of [autovacuum\_multixact\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-MULTIXACT-FREEZE-MAX-AGE), so that there is not an unreasonably short time between forced autovacuums. For more information see [Section 25.1.5.1](routine-vacuuming.html#VACUUM-FOR-MULTIXACT-WRAPAROUND "25.1.5.1. Multixacts and Wraparound").
 
-*   `vacuum_multixact_failsafe_age` (`integer`) []()[#](#GUC-VACUUM-MULTIXACT-FAILSAFE-AGE)
+* `vacuum_multixact_failsafe_age` (`integer`) [#](#GUC-VACUUM-MULTIXACT-FAILSAFE-AGE)
 
     Specifies the maximum age (in multixacts) that a table's `pg_class`.`relminmxid` field can attain before `VACUUM` takes extraordinary measures to avoid system-wide multixact ID wraparound failure. This is `VACUUM`'s strategy of last resort. The failsafe typically triggers when an autovacuum to prevent transaction ID wraparound has already been running for some time, though it's possible for the failsafe to trigger during any `VACUUM`.
 
@@ -189,17 +189,17 @@
 
     The default is 1.6 billion multixacts. Although users can set this value anywhere from zero to 2.1 billion, `VACUUM` will silently adjust the effective value to no less than 105% of [autovacuum\_multixact\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-MULTIXACT-FREEZE-MAX-AGE).
 
-*   `bytea_output` (`enum`) []()[#](#GUC-BYTEA-OUTPUT)
+* `bytea_output` (`enum`) [#](#GUC-BYTEA-OUTPUT)
 
     Sets the output format for values of type `bytea`. Valid values are `hex` (the default) and `escape` (the traditional PostgreSQL format). See [Section 8.4](datatype-binary.html "8.4. Binary Data Types") for more information. The `bytea` type always accepts both formats on input, regardless of this setting.
 
-*   `xmlbinary` (`enum`) []()[#](#GUC-XMLBINARY)
+* `xmlbinary` (`enum`) [#](#GUC-XMLBINARY)
 
     Sets how binary values are to be encoded in XML. This applies for example when `bytea` values are converted to XML by the functions `xmlelement` or `xmlforest`. Possible values are `base64` and `hex`, which are both defined in the XML Schema standard. The default is `base64`. For further information about XML-related functions, see [Section 9.15](functions-xml.html "9.15. XML Functions").
 
     The actual choice here is mostly a matter of taste, constrained only by possible restrictions in client applications. Both methods support all possible values, although the hex encoding will be somewhat larger than the base64 encoding.
 
-*   `xmloption` (`enum`) []()[]()[]()[#](#GUC-XMLOPTION)
+* `xmloption` (`enum`) [#](#GUC-XMLOPTION)
 
     Sets whether `DOCUMENT` or `CONTENT` is implicit when converting between XML and character string values. See [Section 8.13](datatype-xml.html "8.13. XML Type") for a description of this. Valid values are `DOCUMENT` and `CONTENT`. The default is `CONTENT`.
 
@@ -209,41 +209,41 @@
 
     This syntax is also available in PostgreSQL.
 
-*   `gin_pending_list_limit` (`integer`) []()[#](#GUC-GIN-PENDING-LIST-LIMIT)
+* `gin_pending_list_limit` (`integer`) [#](#GUC-GIN-PENDING-LIST-LIMIT)
 
     Sets the maximum size of a GIN index's pending list, which is used when `fastupdate` is enabled. If the list grows larger than this maximum size, it is cleaned up by moving the entries in it to the index's main GIN data structure in bulk. If this value is specified without units, it is taken as kilobytes. The default is four megabytes (`4MB`). This setting can be overridden for individual GIN indexes by changing index storage parameters. See [Section 70.4.1](gin-implementation.html#GIN-FAST-UPDATE "70.4.1. GIN Fast Update Technique") and [Section 70.5](gin-tips.html "70.5. GIN Tips and Tricks") for more information.
 
-*   `createrole_self_grant` (`string`) []()[#](#GUC-CREATEROLE-SELF-GRANT)
+* `createrole_self_grant` (`string`) [#](#GUC-CREATEROLE-SELF-GRANT)
 
     If a user who has `CREATEROLE` but not `SUPERUSER` creates a role, and if this is set to a non-empty value, the newly-created role will be granted to the creating user with the options specified. The value must be `set`, `inherit`, or a comma-separated list of these. The default value is an empty string, which disables the feature.
 
     The purpose of this option is to allow a `CREATEROLE` user who is not a superuser to automatically inherit, or automatically gain the ability to `SET ROLE` to, any created users. Since a `CREATEROLE` user is always implicitly granted `ADMIN OPTION` on created roles, that user could always execute a `GRANT` statement that would achieve the same effect as this setting. However, it can be convenient for usability reasons if the grant happens automatically. A superuser automatically inherits the privileges of every role and can always `SET ROLE` to any role, and this setting can be used to produce a similar behavior for `CREATEROLE` users for users which they create.
 
-*   `event_triggers` (`boolean`) []()[#](#GUC-EVENT-TRIGGERS)
+* `event_triggers` (`boolean`) [#](#GUC-EVENT-TRIGGERS)
 
     Allow temporarily disabling execution of event triggers in order to troubleshoot and repair faulty event triggers. All event triggers will be disabled by setting it to `false`. Setting the value to `true` allows all event triggers to fire, this is the default value. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
 ### 20.11.2. Locale and Formatting [#](#RUNTIME-CONFIG-CLIENT-FORMAT)
 
-*   `DateStyle` (`string`) []()[#](#GUC-DATESTYLE)
+* `DateStyle` (`string`) [#](#GUC-DATESTYLE)
 
     Sets the display format for date and time values, as well as the rules for interpreting ambiguous date input values. For historical reasons, this variable contains two independent components: the output format specification (`ISO`, `Postgres`, `SQL`, or `German`) and the input/output specification for year/month/day ordering (`DMY`, `MDY`, or `YMD`). These can be set separately or together. The keywords `Euro` and `European` are synonyms for `DMY`; the keywords `US`, `NonEuro`, and `NonEuropean` are synonyms for `MDY`. See [Section 8.5](datatype-datetime.html "8.5. Date/Time Types") for more information. The built-in default is `ISO, MDY`, but initdb will initialize the configuration file with a setting that corresponds to the behavior of the chosen `lc_time` locale.
 
-*   `IntervalStyle` (`enum`) []()[#](#GUC-INTERVALSTYLE)
+* `IntervalStyle` (`enum`) [#](#GUC-INTERVALSTYLE)
 
     Sets the display format for interval values. The value `sql_standard` will produce output matching SQL standard interval literals. The value `postgres` (which is the default) will produce output matching PostgreSQL releases prior to 8.4 when the [DateStyle](runtime-config-client.html#GUC-DATESTYLE) parameter was set to `ISO`. The value `postgres_verbose` will produce output matching PostgreSQL releases prior to 8.4 when the `DateStyle` parameter was set to non-`ISO` output. The value `iso_8601` will produce output matching the time interval “format with designators” defined in section 4.4.3.2 of ISO 8601.
 
     The `IntervalStyle` parameter also affects the interpretation of ambiguous interval input. See [Section 8.5.4](datatype-datetime.html#DATATYPE-INTERVAL-INPUT "8.5.4. Interval Input") for more information.
 
-*   `TimeZone` (`string`) []()[]()[#](#GUC-TIMEZONE)
+* `TimeZone` (`string`) [#](#GUC-TIMEZONE)
 
     Sets the time zone for displaying and interpreting time stamps. The built-in default is `GMT`, but that is typically overridden in `postgresql.conf`; initdb will install a setting there corresponding to its system environment. See [Section 8.5.3](datatype-datetime.html#DATATYPE-TIMEZONES "8.5.3. Time Zones") for more information.
 
-*   `timezone_abbreviations` (`string`) []()[]()[#](#GUC-TIMEZONE-ABBREVIATIONS)
+* `timezone_abbreviations` (`string`) [#](#GUC-TIMEZONE-ABBREVIATIONS)
 
     Sets the collection of time zone abbreviations that will be accepted by the server for datetime input. The default is `'Default'`, which is a collection that works in most of the world; there are also `'Australia'` and `'India'`, and other collections can be defined for a particular installation. See [Section B.4](datetime-config-files.html "B.4. Date/Time Configuration Files") for more information.
 
-*   `extra_float_digits` (`integer`) []()[]()[]()[#](#GUC-EXTRA-FLOAT-DIGITS)
+* `extra_float_digits` (`integer`) [#](#GUC-EXTRA-FLOAT-DIGITS)
 
     This parameter adjusts the number of digits used for textual output of floating-point values, including `float4`, `float8`, and geometric data types.
 
@@ -251,15 +251,15 @@
 
     If the value is zero or negative, then the output is rounded to a given decimal precision. The precision used is the standard number of digits for the type (`FLT_DIG` or `DBL_DIG` as appropriate) reduced according to the value of this parameter. (For example, specifying -1 will cause `float4` values to be output rounded to 5 significant digits, and `float8` values rounded to 14 digits.) This format is slower and does not preserve all the bits of the binary float value, but may be more human-readable.
 
-    ### Note
+### Note
 
     The meaning of this parameter, and its default value, changed in PostgreSQL 12; see [Section 8.1.3](datatype-numeric.html#DATATYPE-FLOAT "8.1.3. Floating-Point Types") for further discussion.
 
-*   `client_encoding` (`string`) []()[]()[#](#GUC-CLIENT-ENCODING)
+* `client_encoding` (`string`) [#](#GUC-CLIENT-ENCODING)
 
     Sets the client-side encoding (character set). The default is to use the database encoding. The character sets supported by the PostgreSQL server are described in [Section 24.3.1](multibyte.html#MULTIBYTE-CHARSET-SUPPORTED "24.3.1. Supported Character Sets").
 
-*   `lc_messages` (`string`) []()[#](#GUC-LC-MESSAGES)
+* `lc_messages` (`string`) [#](#GUC-LC-MESSAGES)
 
     Sets the language in which messages are displayed. Acceptable values are system-dependent; see [Section 24.1](locale.html "24.1. Locale Support") for more information. If this variable is set to the empty string (which is the default) then the value is inherited from the execution environment of the server in a system-dependent way.
 
@@ -267,25 +267,25 @@
 
     Only superusers and users with the appropriate `SET` privilege can change this setting.
 
-*   `lc_monetary` (`string`) []()[#](#GUC-LC-MONETARY)
+* `lc_monetary` (`string`) [#](#GUC-LC-MONETARY)
 
     Sets the locale to use for formatting monetary amounts, for example with the `to_char` family of functions. Acceptable values are system-dependent; see [Section 24.1](locale.html "24.1. Locale Support") for more information. If this variable is set to the empty string (which is the default) then the value is inherited from the execution environment of the server in a system-dependent way.
 
-*   `lc_numeric` (`string`) []()[#](#GUC-LC-NUMERIC)
+* `lc_numeric` (`string`) [#](#GUC-LC-NUMERIC)
 
     Sets the locale to use for formatting numbers, for example with the `to_char` family of functions. Acceptable values are system-dependent; see [Section 24.1](locale.html "24.1. Locale Support") for more information. If this variable is set to the empty string (which is the default) then the value is inherited from the execution environment of the server in a system-dependent way.
 
-*   `lc_time` (`string`) []()[#](#GUC-LC-TIME)
+* `lc_time` (`string`) [#](#GUC-LC-TIME)
 
     Sets the locale to use for formatting dates and times, for example with the `to_char` family of functions. Acceptable values are system-dependent; see [Section 24.1](locale.html "24.1. Locale Support") for more information. If this variable is set to the empty string (which is the default) then the value is inherited from the execution environment of the server in a system-dependent way.
 
-*   `icu_validation_level` (`enum`) []()[#](#GUC-ICU-VALIDATION-LEVEL)
+* `icu_validation_level` (`enum`) [#](#GUC-ICU-VALIDATION-LEVEL)
 
     When ICU locale validation problems are encountered, controls which [message level](runtime-config-logging.html#RUNTIME-CONFIG-SEVERITY-LEVELS "Table 20.2. Message Severity Levels") is used to report the problem. Valid values are `DISABLED`, `DEBUG5`, `DEBUG4`, `DEBUG3`, `DEBUG2`, `DEBUG1`, `INFO`, `NOTICE`, `WARNING`, `ERROR`, and `LOG`.
 
     If set to `DISABLED`, does not report validation problems at all. Otherwise reports problems at the given message level. The default is `WARNING`.
 
-*   `default_text_search_config` (`string`) []()[#](#GUC-DEFAULT-TEXT-SEARCH-CONFIG)
+* `default_text_search_config` (`string`) [#](#GUC-DEFAULT-TEXT-SEARCH-CONFIG)
 
     Selects the text search configuration that is used by those variants of the text search functions that do not have an explicit argument specifying the configuration. See [Chapter 12](textsearch.html "Chapter 12. Full Text Search") for further information. The built-in default is `pg_catalog.simple`, but initdb will initialize the configuration file with a setting that corresponds to the chosen `lc_ctype` locale, if a configuration matching that locale can be identified.
 
@@ -299,7 +299,7 @@ Only shared libraries specifically intended to be used with PostgreSQL can be lo
 
 In general, refer to the documentation of a specific module for the recommended way to load that module.
 
-*   `local_preload_libraries` (`string`) []()[]()[#](#GUC-LOCAL-PRELOAD-LIBRARIES)
+* `local_preload_libraries` (`string`) [#](#GUC-LOCAL-PRELOAD-LIBRARIES)
 
     This variable specifies one or more shared libraries that are to be preloaded at connection start. It contains a comma-separated list of library names, where each name is interpreted as for the [`LOAD`](sql-load.html "LOAD") command. Whitespace between entries is ignored; surround a library name with double quotes if you need to include whitespace or commas in the name. The parameter value only takes effect at the start of the connection. Subsequent changes have no effect. If a specified library is not found, the connection attempt will fail.
 
@@ -309,7 +309,7 @@ In general, refer to the documentation of a specific module for the recommended 
 
     However, unless a module is specifically designed to be used in this way by non-superusers, this is usually not the right setting to use. Look at [session\_preload\_libraries](runtime-config-client.html#GUC-SESSION-PRELOAD-LIBRARIES) instead.
 
-*   `session_preload_libraries` (`string`) []()[#](#GUC-SESSION-PRELOAD-LIBRARIES)
+* `session_preload_libraries` (`string`) [#](#GUC-SESSION-PRELOAD-LIBRARIES)
 
     This variable specifies one or more shared libraries that are to be preloaded at connection start. It contains a comma-separated list of library names, where each name is interpreted as for the [`LOAD`](sql-load.html "LOAD") command. Whitespace between entries is ignored; surround a library name with double quotes if you need to include whitespace or commas in the name. The parameter value only takes effect at the start of the connection. Subsequent changes have no effect. If a specified library is not found, the connection attempt will fail. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
@@ -317,7 +317,7 @@ In general, refer to the documentation of a specific module for the recommended 
 
     Unlike [shared\_preload\_libraries](runtime-config-client.html#GUC-SHARED-PRELOAD-LIBRARIES), there is no large performance advantage to loading a library at session start rather than when it is first used. There is some advantage, however, when connection pooling is used.
 
-*   `shared_preload_libraries` (`string`) []()[#](#GUC-SHARED-PRELOAD-LIBRARIES)
+* `shared_preload_libraries` (`string`) [#](#GUC-SHARED-PRELOAD-LIBRARIES)
 
     This variable specifies one or more shared libraries to be preloaded at server start. It contains a comma-separated list of library names, where each name is interpreted as for the [`LOAD`](sql-load.html "LOAD") command. Whitespace between entries is ignored; surround a library name with double quotes if you need to include whitespace or commas in the name. This parameter can only be set at server start. If a specified library is not found, the server will fail to start.
 
@@ -325,11 +325,11 @@ In general, refer to the documentation of a specific module for the recommended 
 
     Other libraries can also be preloaded. By preloading a shared library, the library startup time is avoided when the library is first used. However, the time to start each new server process might increase slightly, even if that process never uses the library. So this parameter is recommended only for libraries that will be used in most sessions. Also, changing this parameter requires a server restart, so this is not the right setting to use for short-term debugging tasks, say. Use [session\_preload\_libraries](runtime-config-client.html#GUC-SESSION-PRELOAD-LIBRARIES) for that instead.
 
-    ### Note
+### Note
 
-    On Windows hosts, preloading a library at server start will not reduce the time required to start each new server process; each server process will re-load all preload libraries. However, `shared_preload_libraries `is still useful on Windows hosts for libraries that need to perform operations at postmaster start time.
+    On Windows hosts, preloading a library at server start will not reduce the time required to start each new server process; each server process will re-load all preload libraries. However, `shared_preload_libraries`is still useful on Windows hosts for libraries that need to perform operations at postmaster start time.
 
-*   `jit_provider` (`string`) []()[#](#GUC-JIT-PROVIDER)
+* `jit_provider` (`string`) [#](#GUC-JIT-PROVIDER)
 
     This variable is the name of the JIT provider library to be used (see [Section 32.4.2](jit-extensibility.html#JIT-PLUGGABLE "32.4.2. Pluggable JIT Providers")). The default is `llvmjit`. This parameter can only be set at server start.
 
@@ -337,7 +337,7 @@ In general, refer to the documentation of a specific module for the recommended 
 
 ### 20.11.4. Other Defaults [#](#RUNTIME-CONFIG-CLIENT-OTHER)
 
-*   `dynamic_library_path` (`string`) []()[]()[#](#GUC-DYNAMIC-LIBRARY-PATH)
+* `dynamic_library_path` (`string`) [#](#GUC-DYNAMIC-LIBRARY-PATH)
 
     If a dynamically loadable module needs to be opened and the file name specified in the `CREATE FUNCTION` or `LOAD` command does not have a directory component (i.e., the name does not contain a slash), the system will search this path for the required file.
 
@@ -353,7 +353,7 @@ In general, refer to the documentation of a specific module for the recommended 
 
     This parameter can be changed at run time by superusers and users with the appropriate `SET` privilege, but a setting done that way will only persist until the end of the client connection, so this method should be reserved for development purposes. The recommended way to set this parameter is in the `postgresql.conf` configuration file.
 
-*   `gin_fuzzy_search_limit` (`integer`) []()[#](#GUC-GIN-FUZZY-SEARCH-LIMIT)
+* `gin_fuzzy_search_limit` (`integer`) [#](#GUC-GIN-FUZZY-SEARCH-LIMIT)
 
     Soft upper limit of the size of the set returned by GIN index scans. For more information see [Section 70.5](gin-tips.html "70.5. GIN Tips and Tricks").
 

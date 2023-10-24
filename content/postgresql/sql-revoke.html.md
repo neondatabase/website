@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## REVOKE
 
 REVOKE — remove access privileges

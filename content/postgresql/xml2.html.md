@@ -8,13 +8,11 @@
 
 ## F.49. xml2 — XPath querying and XSLT functionality [#](#XML2)
 
-*   *   [F.49.1. Deprecation Notice](xml2.html#XML2-DEPRECATION)
-    *   [F.49.2. Description of Functions](xml2.html#XML2-FUNCTIONS)
-    *   [F.49.3. `xpath_table`](xml2.html#XML2-XPATH-TABLE)
-    *   [F.49.4. XSLT Functions](xml2.html#XML2-XSLT)
-    *   [F.49.5. Author](xml2.html#XML2-AUTHOR)
-
-[]()
+  * *   [F.49.1. Deprecation Notice](xml2.html#XML2-DEPRECATION)
+* [F.49.2. Description of Functions](xml2.html#XML2-FUNCTIONS)
+* [F.49.3. `xpath_table`](xml2.html#XML2-XPATH-TABLE)
+* [F.49.4. XSLT Functions](xml2.html#XML2-XSLT)
+* [F.49.5. Author](xml2.html#XML2-AUTHOR)
 
 The `xml2` module provides XPath querying and XSLT functionality.
 
@@ -42,8 +40,6 @@ From PostgreSQL 8.3 on, there is XML-related functionality based on the SQL/XML 
 
 ### F.49.3. `xpath_table` [#](#XML2-XPATH-TABLE)
 
-[]()
-
     xpath_table(text key, text document, text relation, text xpaths, text criteria) returns setof record
 
 `xpath_table` is a table function that evaluates a set of XPath queries on each of a set of documents and returns the results as a table. The primary key field from the original document table is returned as the first column of the result so that the result set can readily be used in joins. The parameters are described in [Table F.37](xml2.html#XML2-XPATH-TABLE-PARAMETERS "Table F.37. xpath_table Parameters").
@@ -59,7 +55,6 @@ From PostgreSQL 8.3 on, there is XML-related functionality based on the SQL/XML 
 | *`criteria`* | the contents of the WHERE clause. This cannot be omitted, so use `true` or `1=1` if you want to process all the rows in the relation                                                                         |
 
 \
-
 
 These parameters (except the XPath strings) are just substituted into a plain SQL SELECT statement, so you have some flexibility — the statement is
 
@@ -149,8 +144,6 @@ To get `doc_num` on every line, the solution is to use two invocations of `xpath
 The following functions are available if libxslt is installed:
 
 #### F.49.4.1. `xslt_process` [#](#XML2-XSLT-XSLT-PROCESS)
-
-[]()
 
     xslt_process(text document, text stylesheet, text paramlist) returns text
 

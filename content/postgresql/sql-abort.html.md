@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ABORT
 
 ABORT — abort the current transaction
@@ -22,11 +20,11 @@ ABORT — abort the current transaction
 
 ## Parameters
 
-*   `WORK``TRANSACTION`
+* `WORK``TRANSACTION`
 
     Optional key words. They have no effect.
 
-*   `AND CHAIN`
+* `AND CHAIN`
 
     If `AND CHAIN` is specified, a new transaction is immediately started with the same transaction characteristics (see [`SET TRANSACTION`](sql-set-transaction.html "SET TRANSACTION")) as the just finished one. Otherwise, no new transaction is started.
 

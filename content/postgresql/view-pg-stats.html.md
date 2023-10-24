@@ -8,8 +8,6 @@
 
 ## 54.27. `pg_stats` [#](#VIEW-PG-STATS)
 
-[]()
-
 The view `pg_stats` provides access to the information stored in the [`pg_statistic`](catalog-pg-statistic.html "53.51. pg_statistic") catalog. This view allows access only to rows of [`pg_statistic`](catalog-pg-statistic.html "53.51. pg_statistic") that correspond to tables the user has permission to read, and therefore it is safe to allow public read access to this view.
 
 `pg_stats` is also designed to present the information in a more readable format than the underlying catalog — at the cost that its schema must be extended whenever new slot types are defined for [`pg_statistic`](catalog-pg-statistic.html "53.51. pg_statistic").
@@ -34,7 +32,6 @@ The view `pg_stats` provides access to the information stored in the [`pg_statis
 | `elem_count_histogram` `float4[]`A histogram of the counts of distinct non-null element values within the values of the column, followed by the average number of distinct non-null elements. (Null for scalar types.)                                                                                                                                                                                                                                                                                                                           |
 
 \
-
 
 The maximum number of entries in the array fields can be controlled on a column-by-column basis using the [`ALTER TABLE SET STATISTICS`](sql-altertable.html "ALTER TABLE") command, or globally by setting the [default\_statistics\_target](runtime-config-query.html#GUC-DEFAULT-STATISTICS-TARGET) run-time parameter.
 

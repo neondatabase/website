@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## pg\_receivewal
 
 pg\_receivewal — stream write-ahead logs from a PostgreSQL server
@@ -28,9 +26,9 @@ The write-ahead log is streamed over a regular PostgreSQL connection and uses th
 
 The starting point of the write-ahead log streaming is calculated when pg\_receivewal starts:
 
-1.  First, scan the directory where the WAL segment files are written and find the newest completed segment file, using as the starting point the beginning of the next WAL segment file.
-2.  If a starting point cannot be calculated with the previous method, and if a replication slot is used, an extra `READ_REPLICATION_SLOT` command is issued to retrieve the slot's `restart_lsn` to use as the starting point. This option is only available when streaming write-ahead logs from PostgreSQL 15 and up.
-3.  If a starting point cannot be calculated with the previous method, the latest WAL flush location is used as reported by the server from an `IDENTIFY_SYSTEM` command.
+1. First, scan the directory where the WAL segment files are written and find the newest completed segment file, using as the starting point the beginning of the next WAL segment file.
+2. If a starting point cannot be calculated with the previous method, and if a replication slot is used, an extra `READ_REPLICATION_SLOT` command is issued to retrieve the slot's `restart_lsn` to use as the starting point. This option is only available when streaming write-ahead logs from PostgreSQL 15 and up.
+3. If a starting point cannot be calculated with the previous method, the latest WAL flush location is used as reported by the server from an `IDENTIFY_SYSTEM` command.
 
 If the connection is lost, or if it cannot be initially established, with a non-fatal error, pg\_receivewal will retry the connection indefinitely, and reestablish streaming as soon as possible. To avoid this behavior, use the `-n` parameter.
 
@@ -38,53 +36,53 @@ In the absence of fatal errors, pg\_receivewal will run until terminated by the 
 
 ## Options
 
-*   `-D directory``--directory=directory`
+* `-D directory``--directory=directory`
 
     Directory to write the output to.
 
     This parameter is required.
 
-*   `-E lsn``--endpos=lsn`
+* `-E lsn``--endpos=lsn`
 
     Automatically stop replication and exit with normal exit status 0 when receiving reaches the specified LSN.
 
     If there is a record with LSN exactly equal to *`lsn`*, the record will be processed.
 
-*   `--if-not-exists`
+* `--if-not-exists`
 
     Do not error out when `--create-slot` is specified and a slot with the specified name already exists.
 
-*   `-n``--no-loop`
+* `-n``--no-loop`
 
     Don't loop on connection errors. Instead, exit right away with an error.
 
-*   `--no-sync`
+* `--no-sync`
 
     This option causes `pg_receivewal` to not force WAL data to be flushed to disk. This is faster, but means that a subsequent operating system crash can leave the WAL segments corrupt. Generally, this option is useful for testing but should not be used when doing WAL archiving on a production deployment.
 
     This option is incompatible with `--synchronous`.
 
-*   `-s interval``--status-interval=interval`
+* `-s interval``--status-interval=interval`
 
     Specifies the number of seconds between status packets sent back to the server. This allows for easier monitoring of the progress from server. A value of zero disables the periodic status updates completely, although an update will still be sent when requested by the server, to avoid timeout disconnect. The default value is 10 seconds.
 
-*   `-S slotname``--slot=slotname`
+* `-S slotname``--slot=slotname`
 
     Require pg\_receivewal to use an existing replication slot (see [Section 27.2.6](warm-standby.html#STREAMING-REPLICATION-SLOTS "27.2.6. Replication Slots")). When this option is used, pg\_receivewal will report a flush position to the server, indicating when each segment has been synchronized to disk so that the server can remove that segment if it is not otherwise needed.
 
     When the replication client of pg\_receivewal is configured on the server as a synchronous standby, then using a replication slot will report the flush position to the server, but only when a WAL file is closed. Therefore, that configuration will cause transactions on the primary to wait for a long time and effectively not work satisfactorily. The option `--synchronous` (see below) must be specified in addition to make this work correctly.
 
-*   `--synchronous`
+* `--synchronous`
 
     Flush the WAL data to disk immediately after it has been received. Also send a status packet back to the server immediately after flushing, regardless of `--status-interval`.
 
     This option should be specified if the replication client of pg\_receivewal is configured on the server as a synchronous standby, to ensure that timely feedback is sent to the server.
 
-*   `-v``--verbose`
+* `-v``--verbose`
 
     Enables verbose mode.
 
-*   `-Z level``-Z method[:detail]``--compress=level``--compress=method[:detail]`
+* `-Z level``-Z method[:detail]``--compress=level``--compress=method[:detail]`
 
     Enables compression of write-ahead logs.
 
@@ -96,29 +94,29 @@ In the absence of fatal errors, pg\_receivewal will run until terminated by the 
 
 The following command-line options control the database connection parameters.
 
-*   `-d connstr``--dbname=connstr`
+* `-d connstr``--dbname=connstr`
 
     Specifies parameters used to connect to the server, as a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"); these will override any conflicting command line options.
 
     The option is called `--dbname` for consistency with other client applications, but because pg\_receivewal doesn't connect to any particular database in the cluster, any database name in the connection string will be ignored by PostgreSQL. Middleware, or proxies, used in connecting to PostgreSQL might however utilize the value.
 
-*   `-h host``--host=host`
+* `-h host``--host=host`
 
     Specifies the host name of the machine on which the server is running. If the value begins with a slash, it is used as the directory for the Unix domain socket. The default is taken from the `PGHOST` environment variable, if set, else a Unix domain socket connection is attempted.
 
-*   `-p port``--port=port`
+* `-p port``--port=port`
 
     Specifies the TCP port or local Unix domain socket file extension on which the server is listening for connections. Defaults to the `PGPORT` environment variable, if set, or a compiled-in default.
 
-*   `-U username``--username=username`
+* `-U username``--username=username`
 
     User name to connect as.
 
-*   `-w``--no-password`
+* `-w``--no-password`
 
     Never issue a password prompt. If the server requires password authentication and a password is not available by other means such as a `.pgpass` file, the connection attempt will fail. This option can be useful in batch jobs and scripts where no user is present to enter a password.
 
-*   `-W``--password`
+* `-W``--password`
 
     Force pg\_receivewal to prompt for a password before connecting to a database.
 
@@ -126,21 +124,21 @@ The following command-line options control the database connection parameters.
 
 pg\_receivewal can perform one of the two following actions in order to control physical replication slots:
 
-*   `--create-slot`
+* `--create-slot`
 
     Create a new physical replication slot with the name specified in `--slot`, then exit.
 
-*   `--drop-slot`
+* `--drop-slot`
 
     Drop the replication slot with the name specified in `--slot`, then exit.
 
 Other options are also available:
 
-*   `-V``--version`
+* `-V``--version`
 
     Print the pg\_receivewal version and exit.
 
-*   `-?``--help`
+* `-?``--help`
 
     Show help about pg\_receivewal command line arguments, and exit.
 
@@ -164,7 +162,7 @@ pg\_receivewal will preserve group permissions on the received WAL files if grou
 
 To stream the write-ahead log from the server at `mydbserver` and store it in the local directory `/usr/local/pgsql/archive`:
 
-    $ pg_receivewal -h mydbserver -D /usr/local/pgsql/archive
+    pg_receivewal -h mydbserver -D /usr/local/pgsql/archive
 
 ## See Also
 

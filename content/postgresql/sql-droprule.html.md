@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DROP RULE
 
 DROP RULE — remove a rewrite rule
@@ -22,23 +20,23 @@ DROP RULE — remove a rewrite rule
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the rule does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name of the rule to drop.
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (optionally schema-qualified) of the table or view that the rule applies to.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically drop objects that depend on the rule, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse to drop the rule if any objects depend on it. This is the default.
 

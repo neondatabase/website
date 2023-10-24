@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DROP SEQUENCE
 
 DROP SEQUENCE — remove a sequence
@@ -22,19 +20,19 @@ DROP SEQUENCE — remove a sequence
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the sequence does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of a sequence.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically drop objects that depend on the sequence, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse to drop the sequence if any objects depend on it. This is the default.
 

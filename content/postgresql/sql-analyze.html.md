@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ANALYZE
 
 ANALYZE — collect statistics about a database
@@ -34,31 +32,31 @@ Without a *`table_and_columns`* list, `ANALYZE` processes every table and materi
 
 ## Parameters
 
-*   `VERBOSE`
+* `VERBOSE`
 
     Enables display of progress messages.
 
-*   `SKIP_LOCKED`
+* `SKIP_LOCKED`
 
     Specifies that `ANALYZE` should not wait for any conflicting locks to be released when beginning work on a relation: if a relation cannot be locked immediately without waiting, the relation is skipped. Note that even with this option, `ANALYZE` may still block when opening the relation's indexes or when acquiring sample rows from partitions, table inheritance children, and some types of foreign tables. Also, while `ANALYZE` ordinarily processes all partitions of specified partitioned tables, this option will cause `ANALYZE` to skip all partitions if there is a conflicting lock on the partitioned table.
 
-*   `BUFFER_USAGE_LIMIT`
+* `BUFFER_USAGE_LIMIT`
 
     Specifies the [**](glossary.html#GLOSSARY-BUFFER-ACCESS-STRATEGY)*[Buffer Access Strategy](glossary.html#GLOSSARY-BUFFER-ACCESS-STRATEGY "Buffer Access Strategy")* ring buffer size for `ANALYZE`. This size is used to calculate the number of shared buffers which will be reused as part of this strategy. `0` disables use of a `Buffer Access Strategy`. When this option is not specified, `ANALYZE` uses the value from [vacuum\_buffer\_usage\_limit](runtime-config-resource.html#GUC-VACUUM-BUFFER-USAGE-LIMIT). Higher settings can allow `ANALYZE` to run more quickly, but having too large a setting may cause too many other useful pages to be evicted from shared buffers. The minimum value is `128 kB` and the maximum value is `16 GB`.
 
-*   *`boolean`*
+* *`boolean`*
 
     Specifies whether the selected option should be turned on or off. You can write `TRUE`, `ON`, or `1` to enable the option, and `FALSE`, `OFF`, or `0` to disable it. The *`boolean`* value can also be omitted, in which case `TRUE` is assumed.
 
-*   *`size`*
+* *`size`*
 
     Specifies an amount of memory in kilobytes. Sizes may also be specified as a string containing the numerical size followed by any one of the following memory units: `B` (bytes), `kB` (kilobytes), `MB` (megabytes), `GB` (gigabytes), or `TB` (terabytes).
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (possibly schema-qualified) of a specific table to analyze. If omitted, all regular tables, partitioned tables, and materialized views in the current database are analyzed (but not foreign tables). If the specified table is a partitioned table, both the inheritance statistics of the partitioned table as a whole and statistics of the individual partitions are updated.
 
-*   *`column_name`*
+* *`column_name`*
 
     The name of a specific column to analyze. Defaults to all columns.
 

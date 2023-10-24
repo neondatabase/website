@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ALTER LARGE OBJECT
 
 ALTER LARGE OBJECT — change the definition of a large object
@@ -24,11 +22,11 @@ You must own the large object to use `ALTER LARGE OBJECT`. To alter the owner, y
 
 ## Parameters
 
-*   *`large_object_oid`*
+* *`large_object_oid`*
 
     OID of the large object to be altered
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The new owner of the large object
 

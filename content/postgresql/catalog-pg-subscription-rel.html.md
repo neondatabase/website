@@ -8,8 +8,6 @@
 
 ## 53.55. `pg_subscription_rel` [#](#CATALOG-PG-SUBSCRIPTION-REL)
 
-[]()
-
 The catalog `pg_subscription_rel` contains the state for each replicated relation in each subscription. This is a many-to-many mapping.
 
 This catalog only contains tables known to the subscription after running either [`CREATE SUBSCRIPTION`](sql-createsubscription.html "CREATE SUBSCRIPTION") or [`ALTER SUBSCRIPTION ... REFRESH PUBLICATION`](sql-altersubscription.html "ALTER SUBSCRIPTION").

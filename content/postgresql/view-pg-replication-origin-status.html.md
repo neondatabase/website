@@ -8,8 +8,6 @@
 
 ## 54.18. `pg_replication_origin_status` [#](#VIEW-PG-REPLICATION-ORIGIN-STATUS)
 
-[]()
-
 The `pg_replication_origin_status` view contains information about how far replay for a certain origin has progressed. For more on replication origins see [Chapter 50](replication-origins.html "Chapter 50. Replication Progress Tracking").
 
 **Table 54.18. `pg_replication_origin_status` Columns**

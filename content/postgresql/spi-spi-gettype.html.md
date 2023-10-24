@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_gettype
 
 SPI\_gettype — return the data type name of the specified column
@@ -22,11 +20,11 @@ SPI\_gettype — return the data type name of the specified column
 
 ## Arguments
 
-*   `TupleDesc rowdesc`
+* `TupleDesc rowdesc`
 
     input row description
 
-*   `int colnumber`
+* `int colnumber`
 
     column number (count starts at 1)
 

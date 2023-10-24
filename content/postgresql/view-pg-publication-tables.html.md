@@ -8,8 +8,6 @@
 
 ## 54.17. `pg_publication_tables` [#](#VIEW-PG-PUBLICATION-TABLES)
 
-[]()
-
 The view `pg_publication_tables` provides information about the mapping between publications and information of tables they contain. Unlike the underlying catalog [`pg_publication_rel`](catalog-pg-publication-rel.html "53.42. pg_publication_rel"), this view expands publications defined as [`FOR ALL TABLES`](sql-createpublication.html#SQL-CREATEPUBLICATION-FOR-ALL-TABLES) and [`FOR TABLES IN SCHEMA`](sql-createpublication.html#SQL-CREATEPUBLICATION-FOR-TABLES-IN-SCHEMA), so for such publications there will be a row for each eligible table.
 
 **Table 54.17. `pg_publication_tables` Columns**

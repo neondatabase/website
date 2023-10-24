@@ -10,7 +10,7 @@
 
 In this section, we follow the usual Tcl convention of using question marks, rather than brackets, to indicate an optional element in a syntax synopsis. The following commands are available to access the database from the body of a PL/Tcl function:
 
-*   `spi_exec ?-count n? ?-array name? command ?loop-body?`
+* `spi_exec ?-count n? ?-array name? command ?loop-body?`
 
     Executes an SQL command given as a string. An error in the command causes an error to be raised. Otherwise, the return value of `spi_exec` is the number of rows processed (selected, inserted, updated, or deleted) by the command, or zero if the command is a utility statement. In addition, if the command is a `SELECT` statement, the values of the selected columns are placed in Tcl variables as described below.
 
@@ -34,15 +34,15 @@ In this section, we follow the usual Tcl convention of using question marks, rat
 
     If a column of a query result is null, the target variable for it is “unset” rather than being set.
 
-*   `spi_prepare` *`query`* *`typelist`*
+* `spi_prepare` *`query`* *`typelist`*
 
-    Prepares and saves a query plan for later execution. The saved plan will be retained for the life of the current session.[]()
+    Prepares and saves a query plan for later execution. The saved plan will be retained for the life of the current session.
 
     The query can use parameters, that is, placeholders for values to be supplied whenever the plan is actually executed. In the query string, refer to parameters by the symbols `$1` ... `$n`. If the query uses parameters, the names of the parameter types must be given as a Tcl list. (Write an empty list for *`typelist`* if no parameters are used.)
 
     The return value from `spi_prepare` is a query ID to be used in subsequent calls to `spi_execp`. See `spi_execp` for an example.
 
-*   `spi_execp ?-count n? ?-array name? ?-nulls string? queryid ?value-list? ?loop-body?`
+* `spi_execp ?-count n? ?-array name? ?-nulls string? queryid ?value-list? ?loop-body?`
 
     Executes a query previously prepared with `spi_prepare`. *`queryid`* is the ID returned by `spi_prepare`. If the query references parameters, a *`value-list`* must be supplied. This is a Tcl list of actual values for the parameters. The list must be the same length as the parameter type list previously given to `spi_prepare`. Omit *`value-list`* if the query has no parameters.
 
@@ -65,11 +65,11 @@ In this section, we follow the usual Tcl convention of using question marks, rat
 
     We need backslashes inside the query string given to `spi_prepare` to ensure that the `$n` markers will be passed through to `spi_prepare` as-is, and not replaced by Tcl variable substitution.
 
-*   `subtransaction` *`command`*
+* `subtransaction` *`command`*
 
     The Tcl script contained in *`command`* is executed within an SQL subtransaction. If the script returns an error, that entire subtransaction is rolled back before returning the error out to the surrounding Tcl code. See [Section 44.9](pltcl-subtransactions.html "44.9. Explicit Subtransactions in PL/Tcl") for more details and an example.
 
-*   `quote` *`string`*
+* `quote` *`string`*
 
     Doubles all occurrences of single quote and backslash characters in the given string. This can be used to safely quote strings that are to be inserted into SQL commands given to `spi_exec` or `spi_prepare`. For example, think about an SQL command string like:
 
@@ -89,7 +89,7 @@ In this section, we follow the usual Tcl convention of using question marks, rat
 
     One advantage of `spi_execp` is that you don't have to quote parameter values like this, since the parameters are never parsed as part of an SQL command string.
 
-*   `elog` *`level`* *`msg`*[]()
+* `elog` *`level`* *`msg`*
 
     Emits a log or error message. Possible levels are `DEBUG`, `LOG`, `INFO`, `NOTICE`, `WARNING`, `ERROR`, and `FATAL`. `ERROR` raises an error condition; if this is not trapped by the surrounding Tcl code, the error propagates out to the calling query, causing the current transaction or subtransaction to be aborted. This is effectively the same as the Tcl `error` command. `FATAL` aborts the transaction and causes the current session to shut down. (There is probably no good reason to use this error level in PL/Tcl functions, but it's provided for completeness.) The other levels only generate messages of different priority levels. Whether messages of a particular priority are reported to the client, written to the server log, or both is controlled by the [log\_min\_messages](runtime-config-logging.html#GUC-LOG-MIN-MESSAGES) and [client\_min\_messages](runtime-config-client.html#GUC-CLIENT-MIN-MESSAGES) configuration variables. See [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") and [Section 44.8](pltcl-error-handling.html "44.8. Error Handling in PL/Tcl") for more information.
 

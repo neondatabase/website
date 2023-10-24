@@ -8,7 +8,7 @@
 
 ## 73.6. Database Page Layout [#](#STORAGE-PAGE-LAYOUT)
 
-*   [73.6.1. Table Row Layout](storage-page-layout.html#STORAGE-TUPLE-LAYOUT)
+* [73.6.1. Table Row Layout](storage-page-layout.html#STORAGE-TUPLE-LAYOUT)
 
 This section provides an overview of the page format used within PostgreSQL tables and indexes.[\[17\]](#ftn.id-1.10.24.8.2.2) Sequences and TOAST tables are formatted just like a regular table.
 
@@ -30,7 +30,6 @@ Every table and index is stored as an array of *pages* of a fixed size (usually 
 
 \
 
-
 The first 24 bytes of each page consists of a page header (`PageHeaderData`). Its format is detailed in [Table 73.3](storage-page-layout.html#PAGEHEADERDATA-TABLE "Table 73.3. PageHeaderData Layout"). The first field tracks the most recent WAL entry related to this page. The second field contains the page checksum if [data checksums](app-initdb.html#APP-INITDB-DATA-CHECKSUMS) are enabled. Next is a 2-byte field containing flag bits. This is followed by three 2-byte integer fields (`pd_lower`, `pd_upper`, and `pd_special`). These contain byte offsets from the page start to the start of unallocated space, to the end of unallocated space, and to the start of the special space. The next 2 bytes of the page header, `pd_pagesize_version`, store both the page size and a version indicator. Beginning with PostgreSQL 8.3 the version number is 4; PostgreSQL 8.1 and 8.2 used version number 3; PostgreSQL 8.0 used version number 2; PostgreSQL 7.3 and 7.4 used version number 1; prior releases used version number 0. (The basic page layout and header format has not changed in most of these versions, but the layout of heap row headers has.) The page size is basically only present as a cross-check; there is no support for having more than one page size in an installation. The last field is a hint that shows whether pruning the page is likely to be profitable: it tracks the oldest un-pruned XMAX on the page.
 
 **Table 73.3. PageHeaderData Layout**
@@ -48,7 +47,6 @@ The first 24 bytes of each page consists of a page header (`PageHeaderData`). It
 
 \
 
-
 All the details can be found in `src/include/storage/bufpage.h`.
 
 Following the page header are item identifiers (`ItemIdData`), each requiring four bytes. An item identifier contains a byte-offset to the start of an item, its length in bytes, and a few attribute bits which affect its interpretation. New item identifiers are allocated as needed from the beginning of the unallocated space. The number of item identifiers present can be determined by looking at `pd_lower`, which is increased to allocate a new identifier. Because an item identifier is never moved until it is freed, its index can be used on a long-term basis to reference an item, even when the item itself is moved around on the page to compact free space. In fact, every pointer to an item (`ItemPointer`, also known as `CTID`) created by PostgreSQL consists of a page number and the index of an item identifier.
@@ -62,7 +60,6 @@ The final section is the “special section” which can contain anything the ac
 **Figure 73.1. Page Layout** [#](#STORAGE-PAGE-LAYOUT-FIGURE)
 
 ![](pagelayout.svg)
-
 
 ### 73.6.1. Table Row Layout [#](#STORAGE-TUPLE-LAYOUT)
 
@@ -82,7 +79,6 @@ All table rows are structured in the same way. There is a fixed-size header (occ
 | t\_hoff      | uint8           | 1 byte  | offset to user data                                    |
 
 \
-
 
 All the details can be found in `src/include/access/htup_details.h`.
 

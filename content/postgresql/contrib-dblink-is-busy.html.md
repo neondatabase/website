@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## dblink\_is\_busy
 
 dblink\_is\_busy — checks if connection is busy with an async query
@@ -22,7 +20,7 @@ dblink\_is\_busy — checks if connection is busy with an async query
 
 ## Arguments
 
-*   *`connname`*
+* *`connname`*
 
     Name of the connection to check.
 

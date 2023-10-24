@@ -8,12 +8,10 @@
 
 ## F.22. lo — manage large objects [#](#LO)
 
-*   *   [F.22.1. Rationale](lo.html#LO-RATIONALE)
-    *   [F.22.2. How to Use It](lo.html#LO-HOW-TO-USE)
-    *   [F.22.3. Limitations](lo.html#LO-LIMITATIONS)
-    *   [F.22.4. Author](lo.html#LO-AUTHOR)
-
-[]()
+  * *   [F.22.1. Rationale](lo.html#LO-RATIONALE)
+* [F.22.2. How to Use It](lo.html#LO-HOW-TO-USE)
+* [F.22.3. Limitations](lo.html#LO-LIMITATIONS)
+* [F.22.4. Author](lo.html#LO-AUTHOR)
 
 The `lo` module provides support for managing Large Objects (also called LOs or BLOBs). This includes a data type `lo` and a trigger `lo_manage`.
 
@@ -44,13 +42,13 @@ For each column that will contain unique references to large objects, create a `
 
 ### F.22.3. Limitations [#](#LO-LIMITATIONS)
 
-*   Dropping a table will still orphan any objects it contains, as the trigger is not executed. You can avoid this by preceding the `DROP TABLE` with `DELETE FROM table`.
+* Dropping a table will still orphan any objects it contains, as the trigger is not executed. You can avoid this by preceding the `DROP TABLE` with `DELETE FROM table`.
 
     `TRUNCATE` has the same hazard.
 
     If you already have, or suspect you have, orphaned large objects, see the [vacuumlo](vacuumlo.html "vacuumlo") module to help you clean them up. It's a good idea to run vacuumlo occasionally as a back-stop to the `lo_manage` trigger.
 
-*   Some frontends may create their own tables, and will not create the associated trigger(s). Also, users may not remember (or know) to create the triggers.
+* Some frontends may create their own tables, and will not create the associated trigger(s). Also, users may not remember (or know) to create the triggers.
 
 ### F.22.4. Author [#](#LO-AUTHOR)
 

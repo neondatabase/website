@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DROP TEXT SEARCH CONFIGURATION
 
 DROP TEXT SEARCH CONFIGURATION — remove a text search configuration
@@ -22,19 +20,19 @@ DROP TEXT SEARCH CONFIGURATION — remove a text search configuration
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the text search configuration does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing text search configuration.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically drop objects that depend on the text search configuration, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse to drop the text search configuration if any objects depend on it. This is the default.
 

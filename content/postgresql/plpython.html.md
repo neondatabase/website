@@ -10,37 +10,35 @@
 
 **Table of Contents**
 
-*   *   [46.1. PL/Python Functions](plpython-funcs.html)
-    *   [46.2. Data Values](plpython-data.html)
+  * *   [46.1. PL/Python Functions](plpython-funcs.html)
+* [46.2. Data Values](plpython-data.html)
 
     <!---->
 
-    *   *   [46.2.1. Data Type Mapping](plpython-data.html#PLPYTHON-DATA-TYPE-MAPPING)
-        *   [46.2.2. Null, None](plpython-data.html#PLPYTHON-DATA-NULL)
-        *   [46.2.3. Arrays, Lists](plpython-data.html#PLPYTHON-ARRAYS)
-        *   [46.2.4. Composite Types](plpython-data.html#PLPYTHON-DATA-COMPOSITE-TYPES)
-        *   [46.2.5. Set-Returning Functions](plpython-data.html#PLPYTHON-DATA-SET-RETURNING-FUNCS)
+  * *   [46.2.1. Data Type Mapping](plpython-data.html#PLPYTHON-DATA-TYPE-MAPPING)
+  * [46.2.2. Null, None](plpython-data.html#PLPYTHON-DATA-NULL)
+  * [46.2.3. Arrays, Lists](plpython-data.html#PLPYTHON-ARRAYS)
+  * [46.2.4. Composite Types](plpython-data.html#PLPYTHON-DATA-COMPOSITE-TYPES)
+  * [46.2.5. Set-Returning Functions](plpython-data.html#PLPYTHON-DATA-SET-RETURNING-FUNCS)
 
-*   *   [46.3. Sharing Data](plpython-sharing.html)
-    *   [46.4. Anonymous Code Blocks](plpython-do.html)
-    *   [46.5. Trigger Functions](plpython-trigger.html)
-    *   [46.6. Database Access](plpython-database.html)
+      * *   [46.3. Sharing Data](plpython-sharing.html)
+* [46.4. Anonymous Code Blocks](plpython-do.html)
+* [46.5. Trigger Functions](plpython-trigger.html)
+* [46.6. Database Access](plpython-database.html)
 
     <!---->
 
-    *   *   [46.6.1. Database Access Functions](plpython-database.html#PLPYTHON-DATABASE-ACCESS-FUNCS)
-        *   [46.6.2. Trapping Errors](plpython-database.html#PLPYTHON-TRAPPING)
+  * *   [46.6.1. Database Access Functions](plpython-database.html#PLPYTHON-DATABASE-ACCESS-FUNCS)
+  * [46.6.2. Trapping Errors](plpython-database.html#PLPYTHON-TRAPPING)
 
-*   [46.7. Explicit Subtransactions](plpython-subtransaction.html)
+* [46.7. Explicit Subtransactions](plpython-subtransaction.html)
 
-    *   [46.7.1. Subtransaction Context Managers](plpython-subtransaction.html#PLPYTHON-SUBTRANSACTION-CONTEXT-MANAGERS)
+  * [46.7.1. Subtransaction Context Managers](plpython-subtransaction.html#PLPYTHON-SUBTRANSACTION-CONTEXT-MANAGERS)
 
-*   *   [46.8. Transaction Management](plpython-transactions.html)
-    *   [46.9. Utility Functions](plpython-util.html)
-    *   [46.10. Python 2 vs. Python 3](plpython-python23.html)
-    *   [46.11. Environment Variables](plpython-envar.html)
-
-[]()[]()
+      * *   [46.8. Transaction Management](plpython-transactions.html)
+  * [46.9. Utility Functions](plpython-util.html)
+  * [46.10. Python 2 vs. Python 3](plpython-python23.html)
+  * [46.11. Environment Variables](plpython-envar.html)
 
 The PL/Python procedural language allows PostgreSQL functions and procedures to be written in the [Python language](https://www.python.org).
 

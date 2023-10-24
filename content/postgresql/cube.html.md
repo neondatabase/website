@@ -8,14 +8,12 @@
 
 ## F.11. cube — a multi-dimensional cube data type [#](#CUBE)
 
-*   *   [F.11.1. Syntax](cube.html#CUBE-SYNTAX)
-    *   [F.11.2. Precision](cube.html#CUBE-PRECISION)
-    *   [F.11.3. Usage](cube.html#CUBE-USAGE)
-    *   [F.11.4. Defaults](cube.html#CUBE-DEFAULTS)
-    *   [F.11.5. Notes](cube.html#CUBE-NOTES)
-    *   [F.11.6. Credits](cube.html#CUBE-CREDITS)
-
-[]()
+  * *   [F.11.1. Syntax](cube.html#CUBE-SYNTAX)
+* [F.11.2. Precision](cube.html#CUBE-PRECISION)
+* [F.11.3. Usage](cube.html#CUBE-USAGE)
+* [F.11.4. Defaults](cube.html#CUBE-DEFAULTS)
+* [F.11.5. Notes](cube.html#CUBE-NOTES)
+* [F.11.6. Credits](cube.html#CUBE-CREDITS)
 
 This module implements a data type `cube` for representing multidimensional cubes.
 
@@ -39,7 +37,6 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 | `[(x1,...,xn),(y1,...,yn)]` | Same as above                                                                                             |
 
 \
-
 
 It does not matter which order the opposite corners of a cube are entered in. The `cube` functions automatically swap values if needed to create a uniform “lower left — upper right” internal representation. When the corners coincide, `cube` stores only one corner along with an “is point” flag to avoid wasting space.
 
@@ -67,7 +64,6 @@ Values are stored internally as 64-bit floating point numbers. This means that n
 | `cube` `<=>` `cube` → `float8`Computes the Chebyshev (L-inf metric) distance between the two cubes.                                                                                                                                                                                                                                                                         |
 
 \
-
 
 In addition to the above operators, the usual comparison operators shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for type `cube`. These operators first compare the first coordinates, and if those are equal, compare the second coordinates, etc. They exist mainly to support the b-tree index operator class for `cube`, which can be useful for example if you would like a UNIQUE constraint on a `cube` column. Otherwise, this ordering is not of much practical use.
 

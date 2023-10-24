@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## dblink\_error\_message
 
 dblink\_error\_message — gets last error message on the named connection
@@ -22,7 +20,7 @@ dblink\_error\_message — gets last error message on the named connection
 
 ## Arguments
 
-*   *`connname`*
+* *`connname`*
 
     Name of the connection to use.
 

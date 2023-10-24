@@ -8,12 +8,12 @@
 
 ## 43.5. Basic Statements [#](#PLPGSQL-STATEMENTS)
 
-*   *   [43.5.1. Assignment](plpgsql-statements.html#PLPGSQL-STATEMENTS-ASSIGNMENT)
-    *   [43.5.2. Executing SQL Commands](plpgsql-statements.html#PLPGSQL-STATEMENTS-GENERAL-SQL)
-    *   [43.5.3. Executing a Command with a Single-Row Result](plpgsql-statements.html#PLPGSQL-STATEMENTS-SQL-ONEROW)
-    *   [43.5.4. Executing Dynamic Commands](plpgsql-statements.html#PLPGSQL-STATEMENTS-EXECUTING-DYN)
-    *   [43.5.5. Obtaining the Result Status](plpgsql-statements.html#PLPGSQL-STATEMENTS-DIAGNOSTICS)
-    *   [43.5.6. Doing Nothing At All](plpgsql-statements.html#PLPGSQL-STATEMENTS-NULL)
+  * *   [43.5.1. Assignment](plpgsql-statements.html#PLPGSQL-STATEMENTS-ASSIGNMENT)
+* [43.5.2. Executing SQL Commands](plpgsql-statements.html#PLPGSQL-STATEMENTS-GENERAL-SQL)
+* [43.5.3. Executing a Command with a Single-Row Result](plpgsql-statements.html#PLPGSQL-STATEMENTS-SQL-ONEROW)
+* [43.5.4. Executing Dynamic Commands](plpgsql-statements.html#PLPGSQL-STATEMENTS-EXECUTING-DYN)
+* [43.5.5. Obtaining the Result Status](plpgsql-statements.html#PLPGSQL-STATEMENTS-DIAGNOSTICS)
+* [43.5.6. Doing Nothing At All](plpgsql-statements.html#PLPGSQL-STATEMENTS-NULL)
 
 In this section and the following ones, we describe all the statement types that are explicitly understood by PL/pgSQL. Anything not recognized as one of these statement types is presumed to be an SQL command and is sent to the main database engine to execute, as described in [Section 43.5.2](plpgsql-statements.html#PLPGSQL-STATEMENTS-GENERAL-SQL "43.5.2. Executing SQL Commands").
 
@@ -69,8 +69,6 @@ An example:
     PERFORM create_mv('cs_session_page_requests_mv', my_query);
 
 ### 43.5.3. Executing a Command with a Single-Row Result [#](#PLPGSQL-STATEMENTS-SQL-ONEROW)
-
-[]()[]()
 
 The result of an SQL command yielding a single row (possibly of multiple columns) can be assigned to a record variable, row-type variable, or list of scalar variables. This is done by writing the base SQL command and adding an `INTO` clause. For example,
 
@@ -186,8 +184,6 @@ The PL/pgSQL `EXECUTE` statement is not related to the [`EXECUTE`](sql-execute.h
 
 **Example 43.1. Quoting Values in Dynamic Queries**
 
-[]()[]()[]()[]()
-
 When working with dynamic commands you will often have to handle escaping of single quotes. The recommended method for quoting fixed text in your function body is dollar quoting. (If you have legacy code that does not use dollar quoting, please refer to the overview in [Section 43.12.1](plpgsql-development-tips.html#PLPGSQL-QUOTE-TIPS "43.12.1. Handling of Quotation Marks"), which can save you some effort when translating said code to a more reasonable scheme.)
 
 Dynamic values require careful handling since they might contain quote characters. An example using `format()` (this assumes that you are dollar quoting the function body so quote marks need not be doubled):
@@ -252,7 +248,6 @@ This form is better because the variables are handled in their native data type 
 
 \
 
-
 A much larger example of a dynamic command and `EXECUTE` can be seen in [Example 43.10](plpgsql-porting.html#PLPGSQL-PORTING-EX2 "Example 43.10. Porting a Function that Creates Another Function from PL/SQL to PL/pgSQL"), which builds and executes a `CREATE FUNCTION` command to define a new function.
 
 ### 43.5.5. Obtaining the Result Status [#](#PLPGSQL-STATEMENTS-DIAGNOSTICS)
@@ -275,16 +270,15 @@ This command allows retrieval of system status indicators. `CURRENT` is a noise 
 
 \
 
-
 The second method to determine the effects of a command is to check the special variable named `FOUND`, which is of type `boolean`. `FOUND` starts out false within each PL/pgSQL function call. It is set by each of the following types of statements:
 
-*   A `SELECT INTO` statement sets `FOUND` true if a row is assigned, false if no row is returned.
-*   A `PERFORM` statement sets `FOUND` true if it produces (and discards) one or more rows, false if no row is produced.
-*   `UPDATE`, `INSERT`, `DELETE`, and `MERGE` statements set `FOUND` true if at least one row is affected, false if no row is affected.
-*   A `FETCH` statement sets `FOUND` true if it returns a row, false if no row is returned.
-*   A `MOVE` statement sets `FOUND` true if it successfully repositions the cursor, false otherwise.
-*   A `FOR` or `FOREACH` statement sets `FOUND` true if it iterates one or more times, else false. `FOUND` is set this way when the loop exits; inside the execution of the loop, `FOUND` is not modified by the loop statement, although it might be changed by the execution of other statements within the loop body.
-*   `RETURN QUERY` and `RETURN QUERY EXECUTE` statements set `FOUND` true if the query returns at least one row, false if no row is returned.
+* A `SELECT INTO` statement sets `FOUND` true if a row is assigned, false if no row is returned.
+* A `PERFORM` statement sets `FOUND` true if it produces (and discards) one or more rows, false if no row is produced.
+* `UPDATE`, `INSERT`, `DELETE`, and `MERGE` statements set `FOUND` true if at least one row is affected, false if no row is affected.
+* A `FETCH` statement sets `FOUND` true if it returns a row, false if no row is returned.
+* A `MOVE` statement sets `FOUND` true if it successfully repositions the cursor, false otherwise.
+* A `FOR` or `FOREACH` statement sets `FOUND` true if it iterates one or more times, else false. `FOUND` is set this way when the loop exits; inside the execution of the loop, `FOUND` is not modified by the loop statement, although it might be changed by the execution of other statements within the loop body.
+* `RETURN QUERY` and `RETURN QUERY EXECUTE` statements set `FOUND` true if the query returns at least one row, false if no row is returned.
 
 Other PL/pgSQL statements do not change the state of `FOUND`. Note in particular that `EXECUTE` changes the output of `GET DIAGNOSTICS`, but does not change `FOUND`.
 

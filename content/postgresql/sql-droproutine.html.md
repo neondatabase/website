@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DROP ROUTINE
 
 DROP ROUTINE — remove a routine
@@ -41,10 +39,10 @@ This command will work independent of whether `foo` is an aggregate, function, o
 
 This command conforms to the SQL standard, with these PostgreSQL extensions:
 
-*   The standard only allows one routine to be dropped per command.
-*   The `IF EXISTS` option is an extension.
-*   The ability to specify argument modes and names is an extension, and the lookup rules differ when modes are given.
-*   User-definable aggregate functions are an extension.
+* The standard only allows one routine to be dropped per command.
+* The `IF EXISTS` option is an extension.
+* The ability to specify argument modes and names is an extension, and the lookup rules differ when modes are given.
+* User-definable aggregate functions are an extension.
 
 ## See Also
 

@@ -26,7 +26,7 @@ There are five user-defined methods that an index operator class for SP-GiST mus
 
 The five mandatory user-defined methods are:
 
-*   `config`
+* `config`
 
     Returns static information about the index implementation, including the data type OIDs of the prefix and node label data types.
 
@@ -58,7 +58,7 @@ The five mandatory user-defined methods are:
 
     When `attType` and `leafType` are different, the optional method `compress` must be provided. Method `compress` is responsible for transformation of datums to be indexed from `attType` to `leafType`.
 
-*   `choose`
+* `choose`
 
     Chooses a method for inserting a new value into an inner tuple.
 
@@ -132,7 +132,7 @@ The five mandatory user-defined methods are:
 
     If the new value is inconsistent with the tuple prefix, set `resultType` to `spgSplitTuple`. This action moves all the existing nodes into a new lower-level inner tuple, and replaces the existing inner tuple with a tuple having a single downlink pointing to the new lower-level inner tuple. Set `prefixHasPrefix` to indicate whether the new upper tuple should have a prefix, and if so set `prefixPrefixDatum` to the prefix value. This new prefix value must be sufficiently less restrictive than the original to accept the new value to be indexed. Set `prefixNNodes` to the number of nodes needed in the new tuple, and set `prefixNodeLabels` to a palloc'd array holding their labels, or to NULL if node labels are not required. Note that the total size of the new upper tuple must be no more than the total size of the tuple it is replacing; this constrains the lengths of the new prefix and new labels. Set `childNodeN` to the index (from zero) of the node that will downlink to the new lower-level inner tuple. Set `postfixHasPrefix` to indicate whether the new lower-level inner tuple should have a prefix, and if so set `postfixPrefixDatum` to the prefix value. The combination of these two prefixes and the downlink node's label (if any) must have the same meaning as the original prefix, because there is no opportunity to alter the node labels that are moved to the new lower-level tuple, nor to change any child index entries. After the node has been split, the `choose` function will be called again with the replacement inner tuple. That call may return an `spgAddNode` result, if no suitable node was created by the `spgSplitTuple` action. Eventually `choose` must return `spgMatchNode` to allow the insertion to descend to the next level.
 
-*   `picksplit`
+* `picksplit`
 
     Decides how to create a new inner tuple over a set of leaf tuples.
 
@@ -169,7 +169,7 @@ The five mandatory user-defined methods are:
 
     `picksplit` can be applied to a single leaf tuple only in the case that the `config` function set `longValuesOK` to true and a larger-than-a-page input value has been supplied. In this case the point of the operation is to strip off a prefix and produce a new, shorter leaf datum value. The call will be repeated until a leaf datum short enough to fit on a page has been produced. See [Section 69.4.1](spgist-implementation.html#SPGIST-LIMITS "69.4.1. SP-GiST Limits") for more information.
 
-*   `inner_consistent`
+* `inner_consistent`
 
     Returns set of nodes (branches) to follow during tree search.
 
@@ -215,7 +215,7 @@ The five mandatory user-defined methods are:
 
     `nNodes` must be set to the number of child nodes that need to be visited by the search, and `nodeNumbers` must be set to an array of their indexes. If the operator class keeps track of levels, set `levelAdds` to an array of the level increments required when descending to each node to be visited. (Often these increments will be the same for all the nodes, but that's not necessarily so, so an array is used.) If value reconstruction is needed, set `reconstructedValues` to an array of the values reconstructed for each child node to be visited; otherwise, leave `reconstructedValues` as NULL. The reconstructed values are assumed to be of type `spgConfigOut`.`leafType`. (However, since the core system will do nothing with them except possibly copy them, it is sufficient for them to have the same `typlen` and `typbyval` properties as `leafType`.) If ordered search is performed, set `distances` to an array of distance values according to `orderbys` array (nodes with lowest distances will be processed first). Leave it NULL otherwise. If it is desired to pass down additional out-of-band information (“traverse values”) to lower levels of the tree search, set `traversalValues` to an array of the appropriate traverse values, one for each child node to be visited; otherwise, leave `traversalValues` as NULL. Note that the `inner_consistent` function is responsible for palloc'ing the `nodeNumbers`, `levelAdds`, `distances`, `reconstructedValues`, and `traversalValues` arrays in the current memory context. However, any output traverse values pointed to by the `traversalValues` array should be allocated in `traversalMemoryContext`. Each traverse value must be a single palloc'd chunk.
 
-*   `leaf_consistent`
+* `leaf_consistent`
 
     Returns true if a leaf tuple satisfies a query.
 
@@ -255,13 +255,13 @@ The five mandatory user-defined methods are:
 
 The optional user-defined methods are:
 
-*   `Datum compress(Datum in)`
+* `Datum compress(Datum in)`
 
     Converts a data item into a format suitable for physical storage in a leaf tuple of the index. It accepts a value of type `spgConfigIn`.`attType` and returns a value of type `spgConfigOut`.`leafType`. The output value must not contain an out-of-line TOAST pointer.
 
     Note: the `compress` method is only applied to values to be stored. The consistent methods receive query `scankeys` unchanged, without transformation using `compress`.
 
-*   `options`
+* `options`
 
     Defines a set of user-visible parameters that control operator class behavior.
 

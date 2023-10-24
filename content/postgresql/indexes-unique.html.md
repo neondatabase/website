@@ -8,8 +8,6 @@
 
 ## 11.6. Unique Indexes [#](#INDEXES-UNIQUE)
 
-[]()
-
 Indexes can also be used to enforce uniqueness of a column's value, or the uniqueness of the combined values of more than one column.
 
     CREATE UNIQUE INDEX name ON table (column [, ...]) [ NULLS [ NOT ] DISTINCT ];

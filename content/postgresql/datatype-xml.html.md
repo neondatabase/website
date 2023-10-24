@@ -8,11 +8,9 @@
 
 ## 8.13. XML Type [#](#DATATYPE-XML)
 
-*   *   [8.13.1. Creating XML Values](datatype-xml.html#DATATYPE-XML-CREATING)
-    *   [8.13.2. Encoding Handling](datatype-xml.html#DATATYPE-XML-ENCODING-HANDLING)
-    *   [8.13.3. Accessing XML Values](datatype-xml.html#DATATYPE-XML-ACCESSING-XML-VALUES)
-
-[]()
+  * *   [8.13.1. Creating XML Values](datatype-xml.html#DATATYPE-XML-CREATING)
+* [8.13.2. Encoding Handling](datatype-xml.html#DATATYPE-XML-ENCODING-HANDLING)
+* [8.13.3. Accessing XML Values](datatype-xml.html#DATATYPE-XML-ACCESSING-XML-VALUES)
 
 The `xml` data type can be used to store XML data. Its advantage over storing XML data in a `text` field is that it checks the input values for well-formedness, and there are support functions to perform type-safe operations on it; see [Section 9.15](functions-xml.html "9.15. XML Functions"). Use of this data type requires the installation to have been built with `configure --with-libxml`.
 
@@ -22,7 +20,7 @@ Limits and compatibility notes for the `xml` data type can be found in [Section�
 
 ### 8.13.1. Creating XML Values [#](#DATATYPE-XML-CREATING)
 
-To produce a value of type `xml` from character data, use the function `xmlparse`:[]()
+To produce a value of type `xml` from character data, use the function `xmlparse`:
 
     XMLPARSE ( { DOCUMENT | CONTENT } value)
 
@@ -38,9 +36,9 @@ While this is the only way to convert character strings into XML values accordin
 
 can also be used.
 
-The `xml` type does not validate input values against a document type declaration (DTD),[]() even when the input value specifies a DTD. There is also currently no built-in support for validating against other XML schema languages such as XML Schema.
+The `xml` type does not validate input values against a document type declaration (DTD), even when the input value specifies a DTD. There is also currently no built-in support for validating against other XML schema languages such as XML Schema.
 
-The inverse operation, producing a character string value from `xml`, uses the function `xmlserialize`:[]()
+The inverse operation, producing a character string value from `xml`, uses the function `xmlserialize`:
 
     XMLSERIALIZE ( { DOCUMENT | CONTENT } value AS type [ [ NO ] INDENT ] )
 
@@ -48,7 +46,7 @@ The inverse operation, producing a character string value from `xml`, uses the f
 
 The `INDENT` option causes the result to be pretty-printed, while `NO INDENT` (which is the default) just emits the original input string. Casting to a character type likewise produces the original string.
 
-When a character string value is cast to or from type `xml` without going through `XMLPARSE` or `XMLSERIALIZE`, respectively, the choice of `DOCUMENT` versus `CONTENT` is determined by the “XML option” []()session configuration parameter, which can be set using the standard command:
+When a character string value is cast to or from type `xml` without going through `XMLPARSE` or `XMLSERIALIZE`, respectively, the choice of `DOCUMENT` versus `CONTENT` is determined by the “XML option” session configuration parameter, which can be set using the standard command:
 
     SET XML OPTION { DOCUMENT | CONTENT };
 

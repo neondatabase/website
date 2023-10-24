@@ -8,8 +8,6 @@
 
 ## 53.28. `pg_init_privs` [#](#CATALOG-PG-INIT-PRIVS)
 
-[]()
-
 The catalog `pg_init_privs` records information about the initial privileges of objects in the system. There is one entry for each object in the database which has a non-default (non-NULL) initial set of privileges.
 
 Objects can have initial privileges either by having those privileges set when the system is initialized (by initdb) or when the object is created during a [`CREATE EXTENSION`](sql-createextension.html "CREATE EXTENSION") and the extension script sets initial privileges using the [`GRANT`](sql-grant.html "GRANT") system. Note that the system will automatically handle recording of the privileges during the extension script and that extension authors need only use the `GRANT` and `REVOKE` statements in their script to have the privileges recorded. The `privtype` column indicates if the initial privilege was set by initdb or during a `CREATE EXTENSION` command.

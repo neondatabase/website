@@ -10,122 +10,120 @@
 
 **Table of Contents**
 
-*   [8.1. Numeric Types](datatype-numeric.html)
+* [8.1. Numeric Types](datatype-numeric.html)
 
-    *   *   [8.1.1. Integer Types](datatype-numeric.html#DATATYPE-INT)
-        *   [8.1.2. Arbitrary Precision Numbers](datatype-numeric.html#DATATYPE-NUMERIC-DECIMAL)
-        *   [8.1.3. Floating-Point Types](datatype-numeric.html#DATATYPE-FLOAT)
-        *   [8.1.4. Serial Types](datatype-numeric.html#DATATYPE-SERIAL)
+  * *   [8.1.1. Integer Types](datatype-numeric.html#DATATYPE-INT)
+  * [8.1.2. Arbitrary Precision Numbers](datatype-numeric.html#DATATYPE-NUMERIC-DECIMAL)
+  * [8.1.3. Floating-Point Types](datatype-numeric.html#DATATYPE-FLOAT)
+  * [8.1.4. Serial Types](datatype-numeric.html#DATATYPE-SERIAL)
 
-*   *   [8.2. Monetary Types](datatype-money.html)
-    *   [8.3. Character Types](datatype-character.html)
-    *   [8.4. Binary Data Types](datatype-binary.html)
-
-    <!---->
-
-    *   *   [8.4.1. `bytea` Hex Format](datatype-binary.html#DATATYPE-BINARY-BYTEA-HEX-FORMAT)
-        *   [8.4.2. `bytea` Escape Format](datatype-binary.html#DATATYPE-BINARY-BYTEA-ESCAPE-FORMAT)
-
-*   [8.5. Date/Time Types](datatype-datetime.html)
-
-    *   *   [8.5.1. Date/Time Input](datatype-datetime.html#DATATYPE-DATETIME-INPUT)
-        *   [8.5.2. Date/Time Output](datatype-datetime.html#DATATYPE-DATETIME-OUTPUT)
-        *   [8.5.3. Time Zones](datatype-datetime.html#DATATYPE-TIMEZONES)
-        *   [8.5.4. Interval Input](datatype-datetime.html#DATATYPE-INTERVAL-INPUT)
-        *   [8.5.5. Interval Output](datatype-datetime.html#DATATYPE-INTERVAL-OUTPUT)
-
-*   *   [8.6. Boolean Type](datatype-boolean.html)
-    *   [8.7. Enumerated Types](datatype-enum.html)
+      * *   [8.2. Monetary Types](datatype-money.html)
+  * [8.3. Character Types](datatype-character.html)
+  * [8.4. Binary Data Types](datatype-binary.html)
 
     <!---->
 
-    *   *   [8.7.1. Declaration of Enumerated Types](datatype-enum.html#DATATYPE-ENUM-DECLARATION)
-        *   [8.7.2. Ordering](datatype-enum.html#DATATYPE-ENUM-ORDERING)
-        *   [8.7.3. Type Safety](datatype-enum.html#DATATYPE-ENUM-TYPE-SAFETY)
-        *   [8.7.4. Implementation Details](datatype-enum.html#DATATYPE-ENUM-IMPLEMENTATION-DETAILS)
+      * *   [8.4.1. `bytea` Hex Format](datatype-binary.html#DATATYPE-BINARY-BYTEA-HEX-FORMAT)
+    * [8.4.2. `bytea` Escape Format](datatype-binary.html#DATATYPE-BINARY-BYTEA-ESCAPE-FORMAT)
 
-*   [8.8. Geometric Types](datatype-geometric.html)
+* [8.5. Date/Time Types](datatype-datetime.html)
 
-    *   *   [8.8.1. Points](datatype-geometric.html#DATATYPE-GEOMETRIC-POINTS)
-        *   [8.8.2. Lines](datatype-geometric.html#DATATYPE-LINE)
-        *   [8.8.3. Line Segments](datatype-geometric.html#DATATYPE-LSEG)
-        *   [8.8.4. Boxes](datatype-geometric.html#DATATYPE-GEOMETRIC-BOXES)
-        *   [8.8.5. Paths](datatype-geometric.html#DATATYPE-GEOMETRIC-PATHS)
-        *   [8.8.6. Polygons](datatype-geometric.html#DATATYPE-POLYGON)
-        *   [8.8.7. Circles](datatype-geometric.html#DATATYPE-CIRCLE)
+  * *   [8.5.1. Date/Time Input](datatype-datetime.html#DATATYPE-DATETIME-INPUT)
+  * [8.5.2. Date/Time Output](datatype-datetime.html#DATATYPE-DATETIME-OUTPUT)
+  * [8.5.3. Time Zones](datatype-datetime.html#DATATYPE-TIMEZONES)
+  * [8.5.4. Interval Input](datatype-datetime.html#DATATYPE-INTERVAL-INPUT)
+  * [8.5.5. Interval Output](datatype-datetime.html#DATATYPE-INTERVAL-OUTPUT)
 
-*   [8.9. Network Address Types](datatype-net-types.html)
-
-    *   *   [8.9.1. `inet`](datatype-net-types.html#DATATYPE-INET)
-        *   [8.9.2. `cidr`](datatype-net-types.html#DATATYPE-CIDR)
-        *   [8.9.3. `inet` vs. `cidr`](datatype-net-types.html#DATATYPE-INET-VS-CIDR)
-        *   [8.9.4. `macaddr`](datatype-net-types.html#DATATYPE-MACADDR)
-        *   [8.9.5. `macaddr8`](datatype-net-types.html#DATATYPE-MACADDR8)
-
-*   *   [8.10. Bit String Types](datatype-bit.html)
-    *   [8.11. Text Search Types](datatype-textsearch.html)
+      * *   [8.6. Boolean Type](datatype-boolean.html)
+  * [8.7. Enumerated Types](datatype-enum.html)
 
     <!---->
 
-    *   *   [8.11.1. `tsvector`](datatype-textsearch.html#DATATYPE-TSVECTOR)
-        *   [8.11.2. `tsquery`](datatype-textsearch.html#DATATYPE-TSQUERY)
+      * *   [8.7.1. Declaration of Enumerated Types](datatype-enum.html#DATATYPE-ENUM-DECLARATION)
+    * [8.7.2. Ordering](datatype-enum.html#DATATYPE-ENUM-ORDERING)
+    * [8.7.3. Type Safety](datatype-enum.html#DATATYPE-ENUM-TYPE-SAFETY)
+    * [8.7.4. Implementation Details](datatype-enum.html#DATATYPE-ENUM-IMPLEMENTATION-DETAILS)
 
-*   *   [8.12. UUID Type](datatype-uuid.html)
-    *   [8.13. XML Type](datatype-xml.html)
+* [8.8. Geometric Types](datatype-geometric.html)
+
+  * *   [8.8.1. Points](datatype-geometric.html#DATATYPE-GEOMETRIC-POINTS)
+  * [8.8.2. Lines](datatype-geometric.html#DATATYPE-LINE)
+  * [8.8.3. Line Segments](datatype-geometric.html#DATATYPE-LSEG)
+  * [8.8.4. Boxes](datatype-geometric.html#DATATYPE-GEOMETRIC-BOXES)
+  * [8.8.5. Paths](datatype-geometric.html#DATATYPE-GEOMETRIC-PATHS)
+  * [8.8.6. Polygons](datatype-geometric.html#DATATYPE-POLYGON)
+  * [8.8.7. Circles](datatype-geometric.html#DATATYPE-CIRCLE)
+
+* [8.9. Network Address Types](datatype-net-types.html)
+
+  * *   [8.9.1. `inet`](datatype-net-types.html#DATATYPE-INET)
+  * [8.9.2. `cidr`](datatype-net-types.html#DATATYPE-CIDR)
+  * [8.9.3. `inet` vs. `cidr`](datatype-net-types.html#DATATYPE-INET-VS-CIDR)
+  * [8.9.4. `macaddr`](datatype-net-types.html#DATATYPE-MACADDR)
+  * [8.9.5. `macaddr8`](datatype-net-types.html#DATATYPE-MACADDR8)
+
+      * *   [8.10. Bit String Types](datatype-bit.html)
+  * [8.11. Text Search Types](datatype-textsearch.html)
 
     <!---->
 
-    *   *   [8.13.1. Creating XML Values](datatype-xml.html#DATATYPE-XML-CREATING)
-        *   [8.13.2. Encoding Handling](datatype-xml.html#DATATYPE-XML-ENCODING-HANDLING)
-        *   [8.13.3. Accessing XML Values](datatype-xml.html#DATATYPE-XML-ACCESSING-XML-VALUES)
+      * *   [8.11.1. `tsvector`](datatype-textsearch.html#DATATYPE-TSVECTOR)
+    * [8.11.2. `tsquery`](datatype-textsearch.html#DATATYPE-TSQUERY)
 
-*   [8.14. JSON Types](datatype-json.html)
+      * *   [8.12. UUID Type](datatype-uuid.html)
+  * [8.13. XML Type](datatype-xml.html)
 
-    *   *   [8.14.1. JSON Input and Output Syntax](datatype-json.html#JSON-KEYS-ELEMENTS)
-        *   [8.14.2. Designing JSON Documents](datatype-json.html#JSON-DOC-DESIGN)
-        *   [8.14.3. `jsonb` Containment and Existence](datatype-json.html#JSON-CONTAINMENT)
-        *   [8.14.4. `jsonb` Indexing](datatype-json.html#JSON-INDEXING)
-        *   [8.14.5. `jsonb` Subscripting](datatype-json.html#JSONB-SUBSCRIPTING)
-        *   [8.14.6. Transforms](datatype-json.html#DATATYPE-JSON-TRANSFORMS)
-        *   [8.14.7. jsonpath Type](datatype-json.html#DATATYPE-JSONPATH)
+    <!---->
 
-*   [8.15. Arrays](arrays.html)
+      * *   [8.13.1. Creating XML Values](datatype-xml.html#DATATYPE-XML-CREATING)
+    * [8.13.2. Encoding Handling](datatype-xml.html#DATATYPE-XML-ENCODING-HANDLING)
+    * [8.13.3. Accessing XML Values](datatype-xml.html#DATATYPE-XML-ACCESSING-XML-VALUES)
 
-    *   *   [8.15.1. Declaration of Array Types](arrays.html#ARRAYS-DECLARATION)
-        *   [8.15.2. Array Value Input](arrays.html#ARRAYS-INPUT)
-        *   [8.15.3. Accessing Arrays](arrays.html#ARRAYS-ACCESSING)
-        *   [8.15.4. Modifying Arrays](arrays.html#ARRAYS-MODIFYING)
-        *   [8.15.5. Searching in Arrays](arrays.html#ARRAYS-SEARCHING)
-        *   [8.15.6. Array Input and Output Syntax](arrays.html#ARRAYS-IO)
+* [8.14. JSON Types](datatype-json.html)
 
-*   [8.16. Composite Types](rowtypes.html)
+  * *   [8.14.1. JSON Input and Output Syntax](datatype-json.html#JSON-KEYS-ELEMENTS)
+  * [8.14.2. Designing JSON Documents](datatype-json.html#JSON-DOC-DESIGN)
+  * [8.14.3. `jsonb` Containment and Existence](datatype-json.html#JSON-CONTAINMENT)
+  * [8.14.4. `jsonb` Indexing](datatype-json.html#JSON-INDEXING)
+  * [8.14.5. `jsonb` Subscripting](datatype-json.html#JSONB-SUBSCRIPTING)
+  * [8.14.6. Transforms](datatype-json.html#DATATYPE-JSON-TRANSFORMS)
+  * [8.14.7. jsonpath Type](datatype-json.html#DATATYPE-JSONPATH)
 
-    *   *   [8.16.1. Declaration of Composite Types](rowtypes.html#ROWTYPES-DECLARING)
-        *   [8.16.2. Constructing Composite Values](rowtypes.html#ROWTYPES-CONSTRUCTING)
-        *   [8.16.3. Accessing Composite Types](rowtypes.html#ROWTYPES-ACCESSING)
-        *   [8.16.4. Modifying Composite Types](rowtypes.html#ROWTYPES-MODIFYING)
-        *   [8.16.5. Using Composite Types in Queries](rowtypes.html#ROWTYPES-USAGE)
-        *   [8.16.6. Composite Type Input and Output Syntax](rowtypes.html#ROWTYPES-IO-SYNTAX)
+* [8.15. Arrays](arrays.html)
 
-*   [8.17. Range Types](rangetypes.html)
+  * *   [8.15.1. Declaration of Array Types](arrays.html#ARRAYS-DECLARATION)
+  * [8.15.2. Array Value Input](arrays.html#ARRAYS-INPUT)
+  * [8.15.3. Accessing Arrays](arrays.html#ARRAYS-ACCESSING)
+  * [8.15.4. Modifying Arrays](arrays.html#ARRAYS-MODIFYING)
+  * [8.15.5. Searching in Arrays](arrays.html#ARRAYS-SEARCHING)
+  * [8.15.6. Array Input and Output Syntax](arrays.html#ARRAYS-IO)
 
-    *   *   [8.17.1. Built-in Range and Multirange Types](rangetypes.html#RANGETYPES-BUILTIN)
-        *   [8.17.2. Examples](rangetypes.html#RANGETYPES-EXAMPLES)
-        *   [8.17.3. Inclusive and Exclusive Bounds](rangetypes.html#RANGETYPES-INCLUSIVITY)
-        *   [8.17.4. Infinite (Unbounded) Ranges](rangetypes.html#RANGETYPES-INFINITE)
-        *   [8.17.5. Range Input/Output](rangetypes.html#RANGETYPES-IO)
-        *   [8.17.6. Constructing Ranges and Multiranges](rangetypes.html#RANGETYPES-CONSTRUCT)
-        *   [8.17.7. Discrete Range Types](rangetypes.html#RANGETYPES-DISCRETE)
-        *   [8.17.8. Defining New Range Types](rangetypes.html#RANGETYPES-DEFINING)
-        *   [8.17.9. Indexing](rangetypes.html#RANGETYPES-INDEXING)
-        *   [8.17.10. Constraints on Ranges](rangetypes.html#RANGETYPES-CONSTRAINT)
+* [8.16. Composite Types](rowtypes.html)
 
-*   *   [8.18. Domain Types](domains.html)
-    *   [8.19. Object Identifier Types](datatype-oid.html)
-    *   [8.20. `pg_lsn` Type](datatype-pg-lsn.html)
-    *   [8.21. Pseudo-Types](datatype-pseudo.html)
+  * *   [8.16.1. Declaration of Composite Types](rowtypes.html#ROWTYPES-DECLARING)
+  * [8.16.2. Constructing Composite Values](rowtypes.html#ROWTYPES-CONSTRUCTING)
+  * [8.16.3. Accessing Composite Types](rowtypes.html#ROWTYPES-ACCESSING)
+  * [8.16.4. Modifying Composite Types](rowtypes.html#ROWTYPES-MODIFYING)
+  * [8.16.5. Using Composite Types in Queries](rowtypes.html#ROWTYPES-USAGE)
+  * [8.16.6. Composite Type Input and Output Syntax](rowtypes.html#ROWTYPES-IO-SYNTAX)
 
-[]()[]()
+* [8.17. Range Types](rangetypes.html)
+
+  * *   [8.17.1. Built-in Range and Multirange Types](rangetypes.html#RANGETYPES-BUILTIN)
+  * [8.17.2. Examples](rangetypes.html#RANGETYPES-EXAMPLES)
+  * [8.17.3. Inclusive and Exclusive Bounds](rangetypes.html#RANGETYPES-INCLUSIVITY)
+  * [8.17.4. Infinite (Unbounded) Ranges](rangetypes.html#RANGETYPES-INFINITE)
+  * [8.17.5. Range Input/Output](rangetypes.html#RANGETYPES-IO)
+  * [8.17.6. Constructing Ranges and Multiranges](rangetypes.html#RANGETYPES-CONSTRUCT)
+  * [8.17.7. Discrete Range Types](rangetypes.html#RANGETYPES-DISCRETE)
+  * [8.17.8. Defining New Range Types](rangetypes.html#RANGETYPES-DEFINING)
+  * [8.17.9. Indexing](rangetypes.html#RANGETYPES-INDEXING)
+  * [8.17.10. Constraints on Ranges](rangetypes.html#RANGETYPES-CONSTRAINT)
+
+      * *   [8.18. Domain Types](domains.html)
+  * [8.19. Object Identifier Types](datatype-oid.html)
+  * [8.20. `pg_lsn` Type](datatype-pg-lsn.html)
+  * [8.21. Pseudo-Types](datatype-pseudo.html)
 
 PostgreSQL has a rich set of native data types available to users. Users can add new types to PostgreSQL using the [CREATE TYPE](sql-createtype.html "CREATE TYPE") command.
 
@@ -180,7 +178,6 @@ PostgreSQL has a rich set of native data types available to users. Users can add
 | `xml`                                     |                      | XML data                                                           |
 
 \
-
 
 ### Compatibility
 

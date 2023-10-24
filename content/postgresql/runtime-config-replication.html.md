@@ -8,10 +8,10 @@
 
 ## 20.6. Replication [#](#RUNTIME-CONFIG-REPLICATION)
 
-*   *   [20.6.1. Sending Servers](runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-SENDER)
-    *   [20.6.2. Primary Server](runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-PRIMARY)
-    *   [20.6.3. Standby Servers](runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-STANDBY)
-    *   [20.6.4. Subscribers](runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-SUBSCRIBER)
+  * *   [20.6.1. Sending Servers](runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-SENDER)
+* [20.6.2. Primary Server](runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-PRIMARY)
+* [20.6.3. Standby Servers](runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-STANDBY)
+* [20.6.4. Subscribers](runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-SUBSCRIBER)
 
 These settings control the behavior of the built-in *streaming replication* feature (see [Section 27.2.5](warm-standby.html#STREAMING-REPLICATION "27.2.5. Streaming Replication")), and the built-in *logical replication* feature (see [Chapter 31](logical-replication.html "Chapter 31. Logical Replication")).
 
@@ -23,35 +23,35 @@ For *logical replication*, *publishers* (servers that do [`CREATE PUBLICATION`](
 
 These parameters can be set on any server that is to send replication data to one or more standby servers. The primary is always a sending server, so these parameters must always be set on the primary. The role and meaning of these parameters does not change after a standby becomes the primary.
 
-*   `max_wal_senders` (`integer`) []()[#](#GUC-MAX-WAL-SENDERS)
+* `max_wal_senders` (`integer`) [#](#GUC-MAX-WAL-SENDERS)
 
     Specifies the maximum number of concurrent connections from standby servers or streaming base backup clients (i.e., the maximum number of simultaneously running WAL sender processes). The default is `10`. The value `0` means replication is disabled. Abrupt disconnection of a streaming client might leave an orphaned connection slot behind until a timeout is reached, so this parameter should be set slightly higher than the maximum number of expected clients so disconnected clients can immediately reconnect. This parameter can only be set at server start. Also, `wal_level` must be set to `replica` or higher to allow connections from standby servers.
 
     When running a standby server, you must set this parameter to the same or higher value than on the primary server. Otherwise, queries will not be allowed in the standby server.
 
-*   `max_replication_slots` (`integer`) []()[#](#GUC-MAX-REPLICATION-SLOTS)
+* `max_replication_slots` (`integer`) [#](#GUC-MAX-REPLICATION-SLOTS)
 
     Specifies the maximum number of replication slots (see [Section 27.2.6](warm-standby.html#STREAMING-REPLICATION-SLOTS "27.2.6. Replication Slots")) that the server can support. The default is 10. This parameter can only be set at server start. Setting it to a lower value than the number of currently existing replication slots will prevent the server from starting. Also, `wal_level` must be set to `replica` or higher to allow replication slots to be used.
 
     Note that this parameter also applies on the subscriber side, but with a different meaning.
 
-*   `wal_keep_size` (`integer`) []()[#](#GUC-WAL-KEEP-SIZE)
+* `wal_keep_size` (`integer`) [#](#GUC-WAL-KEEP-SIZE)
 
     Specifies the minimum size of past WAL files kept in the `pg_wal` directory, in case a standby server needs to fetch them for streaming replication. If a standby server connected to the sending server falls behind by more than `wal_keep_size` megabytes, the sending server might remove a WAL segment still needed by the standby, in which case the replication connection will be terminated. Downstream connections will also eventually fail as a result. (However, the standby server can recover by fetching the segment from archive, if WAL archiving is in use.)
 
     This sets only the minimum size of segments retained in `pg_wal`; the system might need to retain more segments for WAL archival or to recover from a checkpoint. If `wal_keep_size` is zero (the default), the system doesn't keep any extra segments for standby purposes, so the number of old WAL segments available to standby servers is a function of the location of the previous checkpoint and status of WAL archiving. If this value is specified without units, it is taken as megabytes. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `max_slot_wal_keep_size` (`integer`) []()[#](#GUC-MAX-SLOT-WAL-KEEP-SIZE)
+* `max_slot_wal_keep_size` (`integer`) [#](#GUC-MAX-SLOT-WAL-KEEP-SIZE)
 
     Specify the maximum size of WAL files that [replication slots](warm-standby.html#STREAMING-REPLICATION-SLOTS "27.2.6. Replication Slots") are allowed to retain in the `pg_wal` directory at checkpoint time. If `max_slot_wal_keep_size` is -1 (the default), replication slots may retain an unlimited amount of WAL files. Otherwise, if restart\_lsn of a replication slot falls behind the current LSN by more than the given size, the standby using the slot may no longer be able to continue replication due to removal of required WAL files. You can see the WAL availability of replication slots in [pg\_replication\_slots](view-pg-replication-slots.html "54.19. pg_replication_slots"). If this value is specified without units, it is taken as megabytes. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `wal_sender_timeout` (`integer`) []()[#](#GUC-WAL-SENDER-TIMEOUT)
+* `wal_sender_timeout` (`integer`) [#](#GUC-WAL-SENDER-TIMEOUT)
 
     Terminate replication connections that are inactive for longer than this amount of time. This is useful for the sending server to detect a standby crash or network outage. If this value is specified without units, it is taken as milliseconds. The default value is 60 seconds. A value of zero disables the timeout mechanism.
 
     With a cluster distributed across multiple geographic locations, using different values per location brings more flexibility in the cluster management. A smaller value is useful for faster failure detection with a standby having a low-latency network connection, and a larger value helps in judging better the health of a standby if located on a remote location, with a high-latency network connection.
 
-*   `track_commit_timestamp` (`boolean`) []()[#](#GUC-TRACK-COMMIT-TIMESTAMP)
+* `track_commit_timestamp` (`boolean`) [#](#GUC-TRACK-COMMIT-TIMESTAMP)
 
     Record commit time of transactions. This parameter can only be set in `postgresql.conf` file or on the server command line. The default value is `off`.
 
@@ -59,7 +59,7 @@ These parameters can be set on any server that is to send replication data to on
 
 These parameters can be set on the primary server that is to send replication data to one or more standby servers. Note that in addition to these parameters, [wal\_level](runtime-config-wal.html#GUC-WAL-LEVEL) must be set appropriately on the primary server, and optionally WAL archiving can be enabled as well (see [Section 20.5.3](runtime-config-wal.html#RUNTIME-CONFIG-WAL-ARCHIVING "20.5.3. Archiving")). The values of these parameters on standby servers are irrelevant, although you may wish to set them there in preparation for the possibility of a standby becoming the primary.
 
-*   `synchronous_standby_names` (`string`) []()[#](#GUC-SYNCHRONOUS-STANDBY-NAMES)
+* `synchronous_standby_names` (`string`) [#](#GUC-SYNCHRONOUS-STANDBY-NAMES)
 
     Specifies a list of standby servers that can support *synchronous replication*, as described in [Section 27.2.8](warm-standby.html#SYNCHRONOUS-REPLICATION "27.2.8. Synchronous Replication"). There will be one or more active synchronous standbys; transactions waiting for commit will be allowed to proceed after these standby servers confirm receipt of their data. The synchronous standbys will be those whose names appear in this list, and that are both currently connected and streaming data in real-time (as shown by a state of `streaming` in the [`pg_stat_replication`](monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-VIEW "28.2.4. pg_stat_replication") view). Specifying more than one synchronous standby can allow for very high availability and protection against data loss.
 
@@ -85,7 +85,7 @@ These parameters can be set on the primary server that is to send replication da
 
     There is no mechanism to enforce uniqueness of standby names. In case of duplicates one of the matching standbys will be considered as higher priority, though exactly which one is indeterminate.
 
-    ### Note
+### Note
 
     Each *`standby_name`* should have the form of a valid SQL identifier, unless it is `*`. You can use double-quoting if necessary. But note that *`standby_name`*s are compared to standby application names case-insensitively, whether double-quoted or not.
 
@@ -97,7 +97,7 @@ These parameters can be set on the primary server that is to send replication da
 
 These settings control the behavior of a [standby server](warm-standby.html#STANDBY-SERVER-OPERATION "27.2.2. Standby Server Operation") that is to receive replication data. Their values on the primary server are irrelevant.
 
-*   `primary_conninfo` (`string`) []()[#](#GUC-PRIMARY-CONNINFO)
+* `primary_conninfo` (`string`) [#](#GUC-PRIMARY-CONNINFO)
 
     Specifies a connection string to be used for the standby server to connect with a sending server. This string is in the format described in [Section 34.1.1](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If any option is unspecified in this string, then the corresponding environment variable (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")) is checked. If the environment variable is not set either, then defaults are used.
 
@@ -105,45 +105,45 @@ These settings control the behavior of a [standby server](warm-standby.html#STAN
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line. If this parameter is changed while the WAL receiver process is running, that process is signaled to shut down and expected to restart with the new setting (except if `primary_conninfo` is an empty string). This setting has no effect if the server is not in standby mode.
 
-*   `primary_slot_name` (`string`) []()[#](#GUC-PRIMARY-SLOT-NAME)
+* `primary_slot_name` (`string`) [#](#GUC-PRIMARY-SLOT-NAME)
 
     Optionally specifies an existing replication slot to be used when connecting to the sending server via streaming replication to control resource removal on the upstream node (see [Section 27.2.6](warm-standby.html#STREAMING-REPLICATION-SLOTS "27.2.6. Replication Slots")). This parameter can only be set in the `postgresql.conf` file or on the server command line. If this parameter is changed while the WAL receiver process is running, that process is signaled to shut down and expected to restart with the new setting. This setting has no effect if `primary_conninfo` is not set or the server is not in standby mode.
 
-*   `hot_standby` (`boolean`) []()[#](#GUC-HOT-STANDBY)
+* `hot_standby` (`boolean`) [#](#GUC-HOT-STANDBY)
 
     Specifies whether or not you can connect and run queries during recovery, as described in [Section 27.4](hot-standby.html "27.4. Hot Standby"). The default value is `on`. This parameter can only be set at server start. It only has effect during archive recovery or in standby mode.
 
-*   `max_standby_archive_delay` (`integer`) []()[#](#GUC-MAX-STANDBY-ARCHIVE-DELAY)
+* `max_standby_archive_delay` (`integer`) [#](#GUC-MAX-STANDBY-ARCHIVE-DELAY)
 
     When hot standby is active, this parameter determines how long the standby server should wait before canceling standby queries that conflict with about-to-be-applied WAL entries, as described in [Section 27.4.2](hot-standby.html#HOT-STANDBY-CONFLICT "27.4.2. Handling Query Conflicts"). `max_standby_archive_delay` applies when WAL data is being read from WAL archive (and is therefore not current). If this value is specified without units, it is taken as milliseconds. The default is 30 seconds. A value of -1 allows the standby to wait forever for conflicting queries to complete. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
     Note that `max_standby_archive_delay` is not the same as the maximum length of time a query can run before cancellation; rather it is the maximum total time allowed to apply any one WAL segment's data. Thus, if one query has resulted in significant delay earlier in the WAL segment, subsequent conflicting queries will have much less grace time.
 
-*   `max_standby_streaming_delay` (`integer`) []()[#](#GUC-MAX-STANDBY-STREAMING-DELAY)
+* `max_standby_streaming_delay` (`integer`) [#](#GUC-MAX-STANDBY-STREAMING-DELAY)
 
     When hot standby is active, this parameter determines how long the standby server should wait before canceling standby queries that conflict with about-to-be-applied WAL entries, as described in [Section 27.4.2](hot-standby.html#HOT-STANDBY-CONFLICT "27.4.2. Handling Query Conflicts"). `max_standby_streaming_delay` applies when WAL data is being received via streaming replication. If this value is specified without units, it is taken as milliseconds. The default is 30 seconds. A value of -1 allows the standby to wait forever for conflicting queries to complete. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
     Note that `max_standby_streaming_delay` is not the same as the maximum length of time a query can run before cancellation; rather it is the maximum total time allowed to apply WAL data once it has been received from the primary server. Thus, if one query has resulted in significant delay, subsequent conflicting queries will have much less grace time until the standby server has caught up again.
 
-*   `wal_receiver_create_temp_slot` (`boolean`) []()[#](#GUC-WAL-RECEIVER-CREATE-TEMP-SLOT)
+* `wal_receiver_create_temp_slot` (`boolean`) [#](#GUC-WAL-RECEIVER-CREATE-TEMP-SLOT)
 
     Specifies whether the WAL receiver process should create a temporary replication slot on the remote instance when no permanent replication slot to use has been configured (using [primary\_slot\_name](runtime-config-replication.html#GUC-PRIMARY-SLOT-NAME)). The default is off. This parameter can only be set in the `postgresql.conf` file or on the server command line. If this parameter is changed while the WAL receiver process is running, that process is signaled to shut down and expected to restart with the new setting.
 
-*   `wal_receiver_status_interval` (`integer`) []()[#](#GUC-WAL-RECEIVER-STATUS-INTERVAL)
+* `wal_receiver_status_interval` (`integer`) [#](#GUC-WAL-RECEIVER-STATUS-INTERVAL)
 
     Specifies the minimum frequency for the WAL receiver process on the standby to send information about replication progress to the primary or upstream standby, where it can be seen using the [`pg_stat_replication`](monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-VIEW "28.2.4. pg_stat_replication") view. The standby will report the last write-ahead log location it has written, the last position it has flushed to disk, and the last position it has applied. This parameter's value is the maximum amount of time between reports. Updates are sent each time the write or flush positions change, or as often as specified by this parameter if set to a non-zero value. There are additional cases where updates are sent while ignoring this parameter; for example, when processing of the existing WAL completes or when `synchronous_commit` is set to `remote_apply`. Thus, the apply position may lag slightly behind the true position. If this value is specified without units, it is taken as seconds. The default value is 10 seconds. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `hot_standby_feedback` (`boolean`) []()[#](#GUC-HOT-STANDBY-FEEDBACK)
+* `hot_standby_feedback` (`boolean`) [#](#GUC-HOT-STANDBY-FEEDBACK)
 
     Specifies whether or not a hot standby will send feedback to the primary or upstream standby about queries currently executing on the standby. This parameter can be used to eliminate query cancels caused by cleanup records, but can cause database bloat on the primary for some workloads. Feedback messages will not be sent more frequently than once per `wal_receiver_status_interval`. The default value is `off`. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
     If cascaded replication is in use the feedback is passed upstream until it eventually reaches the primary. Standbys make no other use of feedback they receive other than to pass upstream.
 
-*   `wal_receiver_timeout` (`integer`) []()[#](#GUC-WAL-RECEIVER-TIMEOUT)
+* `wal_receiver_timeout` (`integer`) [#](#GUC-WAL-RECEIVER-TIMEOUT)
 
     Terminate replication connections that are inactive for longer than this amount of time. This is useful for the receiving standby server to detect a primary node crash or network outage. If this value is specified without units, it is taken as milliseconds. The default value is 60 seconds. A value of zero disables the timeout mechanism. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `wal_retrieve_retry_interval` (`integer`) []()[#](#GUC-WAL-RETRIEVE-RETRY-INTERVAL)
+* `wal_retrieve_retry_interval` (`integer`) [#](#GUC-WAL-RETRIEVE-RETRY-INTERVAL)
 
     Specifies how long the standby server should wait when WAL data is not available from any sources (streaming replication, local `pg_wal` or WAL archive) before trying again to retrieve WAL data. If this value is specified without units, it is taken as milliseconds. The default value is 5 seconds. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
@@ -151,7 +151,7 @@ These settings control the behavior of a [standby server](warm-standby.html#STAN
 
     In logical replication, this parameter also limits how often a failing replication apply worker will be respawned.
 
-*   `recovery_min_apply_delay` (`integer`) []()[#](#GUC-RECOVERY-MIN-APPLY-DELAY)
+* `recovery_min_apply_delay` (`integer`) [#](#GUC-RECOVERY-MIN-APPLY-DELAY)
 
     By default, a standby server restores WAL records from the sending server as soon as possible. It may be useful to have a time-delayed copy of the data, offering opportunities to correct data loss errors. This parameter allows you to delay recovery by a specified amount of time. For example, if you set this parameter to `5min`, the standby will replay each transaction commit only when the system time on the standby is at least five minutes past the commit time reported by the primary. If this value is specified without units, it is taken as milliseconds. The default is zero, adding no delay.
 
@@ -165,7 +165,7 @@ These settings control the behavior of a [standby server](warm-standby.html#STAN
 
     This parameter is intended for use with streaming replication deployments; however, if the parameter is specified it will be honored in all cases except crash recovery. `hot_standby_feedback` will be delayed by use of this feature which could lead to bloat on the primary; use both together with care.
 
-    ### Warning
+### Warning
 
     Synchronous replication is affected by this setting when `synchronous_commit` is set to `remote_apply`; every `COMMIT` will need to wait to be applied.
 
@@ -175,13 +175,13 @@ These settings control the behavior of a [standby server](warm-standby.html#STAN
 
 These settings control the behavior of a logical replication subscriber. Their values on the publisher are irrelevant. See [Section 31.10](logical-replication-config.html "31.10. Configuration Settings") for more details.
 
-*   `max_replication_slots` (`integer`) []()[#](#GUC-MAX-REPLICATION-SLOTS-SUBSCRIBER)
+* `max_replication_slots` (`integer`) [#](#GUC-MAX-REPLICATION-SLOTS-SUBSCRIBER)
 
     Specifies how many replication origins (see [Chapter 50](replication-origins.html "Chapter 50. Replication Progress Tracking")) can be tracked simultaneously, effectively limiting how many logical replication subscriptions can be created on the server. Setting it to a lower value than the current number of tracked replication origins (reflected in [pg\_replication\_origin\_status](view-pg-replication-origin-status.html "54.18. pg_replication_origin_status")) will prevent the server from starting. `max_replication_slots` must be set to at least the number of subscriptions that will be added to the subscriber, plus some reserve for table synchronization.
 
     Note that this parameter also applies on a sending server, but with a different meaning.
 
-*   `max_logical_replication_workers` (`integer`) []()[#](#GUC-MAX-LOGICAL-REPLICATION-WORKERS)
+* `max_logical_replication_workers` (`integer`) [#](#GUC-MAX-LOGICAL-REPLICATION-WORKERS)
 
     Specifies maximum number of logical replication workers. This includes leader apply workers, parallel apply workers, and table synchronization workers.
 
@@ -189,7 +189,7 @@ These settings control the behavior of a logical replication subscriber. Their v
 
     The default value is 4. This parameter can only be set at server start.
 
-*   `max_sync_workers_per_subscription` (`integer`) []()[#](#GUC-MAX-SYNC-WORKERS-PER-SUBSCRIPTION)
+* `max_sync_workers_per_subscription` (`integer`) [#](#GUC-MAX-SYNC-WORKERS-PER-SUBSCRIPTION)
 
     Maximum number of synchronization workers per subscription. This parameter controls the amount of parallelism of the initial data copy during the subscription initialization or when new tables are added.
 
@@ -199,7 +199,7 @@ These settings control the behavior of a logical replication subscriber. Their v
 
     The default value is 2. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `max_parallel_apply_workers_per_subscription` (`integer`) []()[#](#GUC-MAX-PARALLEL-APPLY-WORKERS-PER-SUBSCRIPTION)
+* `max_parallel_apply_workers_per_subscription` (`integer`) [#](#GUC-MAX-PARALLEL-APPLY-WORKERS-PER-SUBSCRIPTION)
 
     Maximum number of parallel apply workers per subscription. This parameter controls the amount of parallelism for streaming of in-progress transactions with subscription parameter `streaming = parallel`.
 

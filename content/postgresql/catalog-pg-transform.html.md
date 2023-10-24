@@ -8,8 +8,6 @@
 
 ## 53.57. `pg_transform` [#](#CATALOG-PG-TRANSFORM)
 
-[]()
-
 The catalog `pg_transform` stores information about transforms, which are a mechanism to adapt data types to procedural languages. See [CREATE TRANSFORM](sql-createtransform.html "CREATE TRANSFORM") for more information.
 
 **Table 53.57. `pg_transform` Columns**

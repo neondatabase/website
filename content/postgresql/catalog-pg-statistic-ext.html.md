@@ -8,8 +8,6 @@
 
 ## 53.52. `pg_statistic_ext` [#](#CATALOG-PG-STATISTIC-EXT)
 
-[]()
-
 The catalog `pg_statistic_ext` holds definitions of extended planner statistics. Each row in this catalog corresponds to a *statistics object* created with [`CREATE STATISTICS`](sql-createstatistics.html "CREATE STATISTICS").
 
 **Table 53.52. `pg_statistic_ext` Columns**
@@ -27,7 +25,6 @@ The catalog `pg_statistic_ext` holds definitions of extended planner statistics.
 | `stxexprs` `pg_node_tree`Expression trees (in `nodeToString()` representation) for statistics object attributes that are not simple column references. This is a list with one element per expression. Null if all statistics object attributes are simple references.                                                                                                                                                                                                               |
 
 \
-
 
 The `pg_statistic_ext` entry is filled in completely during [`CREATE STATISTICS`](sql-createstatistics.html "CREATE STATISTICS"), but the actual statistical values are not computed then. Subsequent [`ANALYZE`](sql-analyze.html "ANALYZE") commands compute the desired values and populate an entry in the [`pg_statistic_ext_data`](catalog-pg-statistic-ext-data.html "53.53. pg_statistic_ext_data") catalog.
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ALTER STATISTICS
 
 ALTER STATISTICS — change the definition of an extended statistics object
@@ -27,23 +25,23 @@ You must own the statistics object to use `ALTER STATISTICS`. To change a statis
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of the statistics object to be altered.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The user name of the new owner of the statistics object.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name for the statistics object.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the statistics object.
 
-*   *`new_target`*
+* *`new_target`*
 
     The statistic-gathering target for this statistics object for subsequent [`ANALYZE`](sql-analyze.html "ANALYZE") operations. The target can be set in the range 0 to 10000; alternatively, set it to -1 to revert to using the maximum of the statistics target of the referenced columns, if set, or the system default statistics target ([default\_statistics\_target](runtime-config-query.html#GUC-DEFAULT-STATISTICS-TARGET)). For more information on the use of statistics by the PostgreSQL query planner, refer to [Section 14.2](planner-stats.html "14.2. Statistics Used by the Planner").
 

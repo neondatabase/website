@@ -8,12 +8,12 @@
 
 ## 36.4. Using Host Variables [#](#ECPG-VARIABLES)
 
-*   *   [36.4.1. Overview](ecpg-variables.html#ECPG-VARIABLES-OVERVIEW)
-    *   [36.4.2. Declare Sections](ecpg-variables.html#ECPG-DECLARE-SECTIONS)
-    *   [36.4.3. Retrieving Query Results](ecpg-variables.html#ECPG-RETRIEVING)
-    *   [36.4.4. Type Mapping](ecpg-variables.html#ECPG-VARIABLES-TYPE-MAPPING)
-    *   [36.4.5. Handling Nonprimitive SQL Data Types](ecpg-variables.html#ECPG-VARIABLES-NONPRIMITIVE-SQL)
-    *   [36.4.6. Indicators](ecpg-variables.html#ECPG-INDICATORS)
+  * *   [36.4.1. Overview](ecpg-variables.html#ECPG-VARIABLES-OVERVIEW)
+* [36.4.2. Declare Sections](ecpg-variables.html#ECPG-DECLARE-SECTIONS)
+* [36.4.3. Retrieving Query Results](ecpg-variables.html#ECPG-RETRIEVING)
+* [36.4.4. Type Mapping](ecpg-variables.html#ECPG-VARIABLES-TYPE-MAPPING)
+* [36.4.5. Handling Nonprimitive SQL Data Types](ecpg-variables.html#ECPG-VARIABLES-NONPRIMITIVE-SQL)
+* [36.4.6. Indicators](ecpg-variables.html#ECPG-INDICATORS)
 
 In [Section 36.3](ecpg-commands.html "36.3. Running SQL Commands") you saw how you can execute SQL statements from an embedded SQL program. Some of those statements only used fixed values and did not provide a way to insert user-supplied values into statements or have the program process the values returned by the query. Those kinds of statements are not really useful in real applications. This section explains in detail how you can pass data between your C program and the embedded SQL statements using a simple mechanism called *host variables*. In an embedded SQL program we consider the SQL statements to be *guests* in the C program code which is the *host language*. Therefore the variables of the C program are called *host variables*.
 
@@ -133,7 +133,6 @@ In this respect, there are two kinds of data types: Some simple PostgreSQL data 
 | [\[a\] ](#ECPG-DATATYPE-TABLE-FN)This type can only be accessed through special library functions; see [Section 36.4.4.2](ecpg-variables.html#ECPG-SPECIAL-TYPES "36.4.4.2. Accessing Special Data Types").[\[b\] ](#id-1.7.5.10.7.5.2.2.17.2.2)declared in `ecpglib.h` if not native |                                                                    |
 
 \
-
 
 #### 36.4.4.1. Handling Character Strings [#](#ECPG-CHAR)
 
@@ -413,8 +412,6 @@ Structure host variables “absorb” as many columns as the structure as fields
         EXEC SQL CLOSE cur1;
 
 ##### 36.4.4.3.3. Typedefs [#](#ECPG-VARIABLES-NONPRIMITIVE-C-TYPEDEFS)
-
-[]()
 
 Use the `typedef` keyword to map new types to already existing types.
 

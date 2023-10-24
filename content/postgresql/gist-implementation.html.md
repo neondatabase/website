@@ -8,7 +8,7 @@
 
 ## 68.4. Implementation [#](#GIST-IMPLEMENTATION)
 
-*   [68.4.1. GiST Index Build Methods](gist-implementation.html#GIST-BUFFERING-BUILD)
+* [68.4.1. GiST Index Build Methods](gist-implementation.html#GIST-BUFFERING-BUILD)
 
 ### 68.4.1. GiST Index Build Methods [#](#GIST-BUFFERING-BUILD)
 

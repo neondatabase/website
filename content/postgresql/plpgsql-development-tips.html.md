@@ -8,8 +8,8 @@
 
 ## 43.12. Tips for Developing in PL/pgSQL [#](#PLPGSQL-DEVELOPMENT-TIPS)
 
-*   *   [43.12.1. Handling of Quotation Marks](plpgsql-development-tips.html#PLPGSQL-QUOTE-TIPS)
-    *   [43.12.2. Additional Compile-Time and Run-Time Checks](plpgsql-development-tips.html#PLPGSQL-EXTRA-CHECKS)
+  * *   [43.12.1. Handling of Quotation Marks](plpgsql-development-tips.html#PLPGSQL-QUOTE-TIPS)
+* [43.12.2. Additional Compile-Time and Run-Time Checks](plpgsql-development-tips.html#PLPGSQL-EXTRA-CHECKS)
 
 One good way to develop in PL/pgSQL is to use the text editor of your choice to create your functions, and in another window, use psql to load and test those functions. If you are doing it this way, it is a good idea to write the function using `CREATE OR REPLACE FUNCTION`. That way you can just reload the file to update the function definition. For example:
 
@@ -37,7 +37,7 @@ Within this, you might use quote marks for simple literal strings in SQL command
 
 The following chart shows what you have to do when writing quote marks without dollar quoting. It might be useful when translating pre-dollar quoting code into something more comprehensible.
 
-*   1 quotation mark [#](#PLPGSQL-QUOTE-TIPS-1-QUOT)
+* 1 quotation mark [#](#PLPGSQL-QUOTE-TIPS-1-QUOT)
 
     To begin and end the function body, for example:
 
@@ -47,7 +47,7 @@ The following chart shows what you have to do when writing quote marks without d
 
     Anywhere within a single-quoted function body, quote marks *must* appear in pairs.
 
-*   2 quotation marks [#](#PLPGSQL-QUOTE-TIPS-2-QUOT)
+* 2 quotation marks [#](#PLPGSQL-QUOTE-TIPS-2-QUOT)
 
     For string literals inside the function body, for example:
 
@@ -61,7 +61,7 @@ The following chart shows what you have to do when writing quote marks without d
 
     which is exactly what the PL/pgSQL parser would see in either case.
 
-*   4 quotation marks [#](#PLPGSQL-QUOTE-TIPS-4-QUOT)
+* 4 quotation marks [#](#PLPGSQL-QUOTE-TIPS-4-QUOT)
 
     When you need a single quotation mark in a string constant inside the function body, for example:
 
@@ -75,7 +75,7 @@ The following chart shows what you have to do when writing quote marks without d
 
     being careful that any dollar-quote delimiters around this are not just `$$`.
 
-*   6 quotation marks [#](#PLPGSQL-QUOTE-TIPS-6-QUOT)
+* 6 quotation marks [#](#PLPGSQL-QUOTE-TIPS-6-QUOT)
 
     When a single quotation mark in a string inside the function body is adjacent to the end of that string constant, for example:
 
@@ -87,7 +87,7 @@ The following chart shows what you have to do when writing quote marks without d
 
         a_output := a_output || $$ AND name LIKE 'foobar'$$
 
-*   10 quotation marks [#](#PLPGSQL-QUOTE-TIPS-10-QUOT)
+* 10 quotation marks [#](#PLPGSQL-QUOTE-TIPS-10-QUOT)
 
     When you want two single quotation marks in a string constant (which accounts for 8 quotation marks) and this is adjacent to the end of that string constant (2 more). You will probably only need that if you are writing a function that generates other functions, as in [Example 43.10](plpgsql-porting.html#PLPGSQL-PORTING-EX2 "Example 43.10. Porting a Function that Creates Another Function from PL/SQL to PL/pgSQL"). For example:
 
@@ -118,15 +118,15 @@ Setting `plpgsql.extra_warnings`, or `plpgsql.extra_errors`, as appropriate, to 
 
 These additional checks are enabled through the configuration variables `plpgsql.extra_warnings` for warnings and `plpgsql.extra_errors` for errors. Both can be set either to a comma-separated list of checks, `"none"` or `"all"`. The default is `"none"`. Currently the list of available checks includes:
 
-*   `shadowed_variables` [#](#PLPGSQL-EXTRA-CHECKS-SHADOWED-VARIABLES)
+* `shadowed_variables` [#](#PLPGSQL-EXTRA-CHECKS-SHADOWED-VARIABLES)
 
     Checks if a declaration shadows a previously defined variable.
 
-*   `strict_multi_assignment` [#](#PLPGSQL-EXTRA-CHECKS-STRICT-MULTI-ASSIGNMENT)
+* `strict_multi_assignment` [#](#PLPGSQL-EXTRA-CHECKS-STRICT-MULTI-ASSIGNMENT)
 
     Some PL/pgSQL commands allow assigning values to more than one variable at a time, such as `SELECT INTO`. Typically, the number of target variables and the number of source variables should match, though PL/pgSQL will use `NULL` for missing values and extra variables are ignored. Enabling this check will cause PL/pgSQL to throw a `WARNING` or `ERROR` whenever the number of target variables and the number of source variables are different.
 
-*   `too_many_rows` [#](#PLPGSQL-EXTRA-CHECKS-TOO-MANY-ROWS)
+* `too_many_rows` [#](#PLPGSQL-EXTRA-CHECKS-TOO-MANY-ROWS)
 
     Enabling this check will cause PL/pgSQL to check if a given query returns more than one row when an `INTO` clause is used. As an `INTO` statement will only ever use one row, having a query return multiple rows is generally either inefficient and/or nondeterministic and therefore is likely an error.
 

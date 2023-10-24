@@ -149,7 +149,6 @@ main(int argc, char **argv)
 
 \
 
-
 **Example 34.2. libpq Example Program 2**
 
 ```
@@ -307,7 +306,6 @@ main(int argc, char **argv)
 ```
 
 \
-
 
 **Example 34.3. libpq Example Program 3**
 

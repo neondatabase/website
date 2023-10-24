@@ -8,8 +8,6 @@
 
 ## 23.6. Tablespaces [#](#MANAGE-AG-TABLESPACES)
 
-[]()
-
 Tablespaces in PostgreSQL allow database administrators to define locations in the file system where the files representing database objects can be stored. Once created, a tablespace can be referred to by name when creating database objects.
 
 By using tablespaces, an administrator can control the disk layout of a PostgreSQL installation. This is useful in at least two ways. First, if the partition or volume on which the cluster was initialized runs out of space and cannot be extended, a tablespace can be created on a different partition and used until the system can be reconfigured.
@@ -20,7 +18,7 @@ Second, tablespaces allow an administrator to use knowledge of the usage pattern
 
 Even though located outside the main PostgreSQL data directory, tablespaces are an integral part of the database cluster and *cannot* be treated as an autonomous collection of data files. They are dependent on metadata contained in the main data directory, and therefore cannot be attached to a different database cluster or backed up individually. Similarly, if you lose a tablespace (file deletion, disk failure, etc.), the database cluster might become unreadable or unable to start. Placing a tablespace on a temporary file system like a RAM disk risks the reliability of the entire cluster.
 
-To define a tablespace, use the [CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE") command, for example:[]():
+To define a tablespace, use the [CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE") command, for example::
 
     CREATE TABLESPACE fastspace LOCATION '/ssd1/postgresql/data';
 
@@ -53,7 +51,7 @@ Once created, a tablespace can be used from any database, provided the requestin
 
 To remove an empty tablespace, use the [DROP TABLESPACE](sql-droptablespace.html "DROP TABLESPACE") command.
 
-To determine the set of existing tablespaces, examine the [`pg_tablespace` ](catalog-pg-tablespace.html "53.56. pg_tablespace")system catalog, for example
+To determine the set of existing tablespaces, examine the [`pg_tablespace`](catalog-pg-tablespace.html "53.56. pg_tablespace")system catalog, for example
 
     SELECT spcname FROM pg_tablespace;
 

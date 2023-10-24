@@ -16,26 +16,26 @@ When specified on the command line, user and database names have their case pres
 
 **Table of Contents**
 
-*   *   [clusterdb](app-clusterdb.html) — cluster a PostgreSQL database
-    *   [createdb](app-createdb.html) — create a new PostgreSQL database
-    *   [createuser](app-createuser.html) — define a new PostgreSQL user account
-    *   [dropdb](app-dropdb.html) — remove a PostgreSQL database
-    *   [dropuser](app-dropuser.html) — remove a PostgreSQL user account
-    *   [ecpg](app-ecpg.html) — embedded SQL C preprocessor
-    *   [pg\_amcheck](app-pgamcheck.html) — checks for corruption in one or more PostgreSQL databases
-    *   [pg\_basebackup](app-pgbasebackup.html) — take a base backup of a PostgreSQL cluster
-    *   [pgbench](pgbench.html) — run a benchmark test on PostgreSQL
-    *   [pg\_config](app-pgconfig.html) — retrieve information about the installed version of PostgreSQL
-    *   [pg\_dump](app-pgdump.html) — extract a PostgreSQL database into a script file or other archive file
-    *   [pg\_dumpall](app-pg-dumpall.html) — extract a PostgreSQL database cluster into a script file
-    *   [pg\_isready](app-pg-isready.html) — check the connection status of a PostgreSQL server
-    *   [pg\_receivewal](app-pgreceivewal.html) — stream write-ahead logs from a PostgreSQL server
-    *   [pg\_recvlogical](app-pgrecvlogical.html) — control PostgreSQL logical decoding streams
-    *   [pg\_restore](app-pgrestore.html) — restore a PostgreSQL database from an archive file created by pg\_dump
-    *   [pg\_verifybackup](app-pgverifybackup.html) — verify the integrity of a base backup of a PostgreSQL cluster
-    *   [psql](app-psql.html) — PostgreSQL interactive terminal
-    *   [reindexdb](app-reindexdb.html) — reindex a PostgreSQL database
-    *   [vacuumdb](app-vacuumdb.html) — garbage-collect and analyze a PostgreSQL database
+  * *   [clusterdb](app-clusterdb.html) — cluster a PostgreSQL database
+* [createdb](app-createdb.html) — create a new PostgreSQL database
+* [createuser](app-createuser.html) — define a new PostgreSQL user account
+* [dropdb](app-dropdb.html) — remove a PostgreSQL database
+* [dropuser](app-dropuser.html) — remove a PostgreSQL user account
+* [ecpg](app-ecpg.html) — embedded SQL C preprocessor
+* [pg\_amcheck](app-pgamcheck.html) — checks for corruption in one or more PostgreSQL databases
+* [pg\_basebackup](app-pgbasebackup.html) — take a base backup of a PostgreSQL cluster
+* [pgbench](pgbench.html) — run a benchmark test on PostgreSQL
+* [pg\_config](app-pgconfig.html) — retrieve information about the installed version of PostgreSQL
+* [pg\_dump](app-pgdump.html) — extract a PostgreSQL database into a script file or other archive file
+* [pg\_dumpall](app-pg-dumpall.html) — extract a PostgreSQL database cluster into a script file
+* [pg\_isready](app-pg-isready.html) — check the connection status of a PostgreSQL server
+* [pg\_receivewal](app-pgreceivewal.html) — stream write-ahead logs from a PostgreSQL server
+* [pg\_recvlogical](app-pgrecvlogical.html) — control PostgreSQL logical decoding streams
+* [pg\_restore](app-pgrestore.html) — restore a PostgreSQL database from an archive file created by pg\_dump
+* [pg\_verifybackup](app-pgverifybackup.html) — verify the integrity of a base backup of a PostgreSQL cluster
+* [psql](app-psql.html) — PostgreSQL interactive terminal
+* [reindexdb](app-reindexdb.html) — reindex a PostgreSQL database
+* [vacuumdb](app-vacuumdb.html) — garbage-collect and analyze a PostgreSQL database
 
 ***
 

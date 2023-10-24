@@ -6,8 +6,6 @@
 
 ***
 
-[]()[]()[]()
-
 ## SELECT
 
 SELECT, TABLE, WITH — retrieve rows from a table or view
@@ -66,15 +64,15 @@ SELECT, TABLE, WITH — retrieve rows from a table or view
 
 `SELECT` retrieves rows from zero or more tables. The general processing of `SELECT` is as follows:
 
-1.  All queries in the `WITH` list are computed. These effectively serve as temporary tables that can be referenced in the `FROM` list. A `WITH` query that is referenced more than once in `FROM` is computed only once, unless specified otherwise with `NOT MATERIALIZED`. (See [WITH Clause](sql-select.html#SQL-WITH "WITH Clause") below.)
-2.  All elements in the `FROM` list are computed. (Each element in the `FROM` list is a real or virtual table.) If more than one element is specified in the `FROM` list, they are cross-joined together. (See [FROM Clause](sql-select.html#SQL-FROM "FROM Clause") below.)
-3.  If the `WHERE` clause is specified, all rows that do not satisfy the condition are eliminated from the output. (See [WHERE Clause](sql-select.html#SQL-WHERE "WHERE Clause") below.)
-4.  If the `GROUP BY` clause is specified, or if there are aggregate function calls, the output is combined into groups of rows that match on one or more values, and the results of aggregate functions are computed. If the `HAVING` clause is present, it eliminates groups that do not satisfy the given condition. (See [GROUP BY Clause](sql-select.html#SQL-GROUPBY "GROUP BY Clause") and [HAVING Clause](sql-select.html#SQL-HAVING "HAVING Clause") below.) Although query output columns are nominally computed in the next step, they can also be referenced (by name or ordinal number) in the `GROUP BY` clause.
-5.  The actual output rows are computed using the `SELECT` output expressions for each selected row or row group. (See [SELECT List](sql-select.html#SQL-SELECT-LIST "SELECT List") below.)
-6.  `SELECT DISTINCT` eliminates duplicate rows from the result. `SELECT DISTINCT ON` eliminates rows that match on all the specified expressions. `SELECT ALL` (the default) will return all candidate rows, including duplicates. (See [DISTINCT Clause](sql-select.html#SQL-DISTINCT "DISTINCT Clause") below.)
-7.  Using the operators `UNION`, `INTERSECT`, and `EXCEPT`, the output of more than one `SELECT` statement can be combined to form a single result set. The `UNION` operator returns all rows that are in one or both of the result sets. The `INTERSECT` operator returns all rows that are strictly in both result sets. The `EXCEPT` operator returns the rows that are in the first result set but not in the second. In all three cases, duplicate rows are eliminated unless `ALL` is specified. The noise word `DISTINCT` can be added to explicitly specify eliminating duplicate rows. Notice that `DISTINCT` is the default behavior here, even though `ALL` is the default for `SELECT` itself. (See [UNION Clause](sql-select.html#SQL-UNION "UNION Clause"), [INTERSECT Clause](sql-select.html#SQL-INTERSECT "INTERSECT Clause"), and [EXCEPT Clause](sql-select.html#SQL-EXCEPT "EXCEPT Clause") below.)
-8.  If the `ORDER BY` clause is specified, the returned rows are sorted in the specified order. If `ORDER BY` is not given, the rows are returned in whatever order the system finds fastest to produce. (See [ORDER BY Clause](sql-select.html#SQL-ORDERBY "ORDER BY Clause") below.)
-9.  If the `LIMIT` (or `FETCH FIRST`) or `OFFSET` clause is specified, the `SELECT` statement only returns a subset of the result rows. (See [LIMIT Clause](sql-select.html#SQL-LIMIT "LIMIT Clause") below.)
+1. All queries in the `WITH` list are computed. These effectively serve as temporary tables that can be referenced in the `FROM` list. A `WITH` query that is referenced more than once in `FROM` is computed only once, unless specified otherwise with `NOT MATERIALIZED`. (See [WITH Clause](sql-select.html#SQL-WITH "WITH Clause") below.)
+2. All elements in the `FROM` list are computed. (Each element in the `FROM` list is a real or virtual table.) If more than one element is specified in the `FROM` list, they are cross-joined together. (See [FROM Clause](sql-select.html#SQL-FROM "FROM Clause") below.)
+3. If the `WHERE` clause is specified, all rows that do not satisfy the condition are eliminated from the output. (See [WHERE Clause](sql-select.html#SQL-WHERE "WHERE Clause") below.)
+4. If the `GROUP BY` clause is specified, or if there are aggregate function calls, the output is combined into groups of rows that match on one or more values, and the results of aggregate functions are computed. If the `HAVING` clause is present, it eliminates groups that do not satisfy the given condition. (See [GROUP BY Clause](sql-select.html#SQL-GROUPBY "GROUP BY Clause") and [HAVING Clause](sql-select.html#SQL-HAVING "HAVING Clause") below.) Although query output columns are nominally computed in the next step, they can also be referenced (by name or ordinal number) in the `GROUP BY` clause.
+5. The actual output rows are computed using the `SELECT` output expressions for each selected row or row group. (See [SELECT List](sql-select.html#SQL-SELECT-LIST "SELECT List") below.)
+6. `SELECT DISTINCT` eliminates duplicate rows from the result. `SELECT DISTINCT ON` eliminates rows that match on all the specified expressions. `SELECT ALL` (the default) will return all candidate rows, including duplicates. (See [DISTINCT Clause](sql-select.html#SQL-DISTINCT "DISTINCT Clause") below.)
+7. Using the operators `UNION`, `INTERSECT`, and `EXCEPT`, the output of more than one `SELECT` statement can be combined to form a single result set. The `UNION` operator returns all rows that are in one or both of the result sets. The `INTERSECT` operator returns all rows that are strictly in both result sets. The `EXCEPT` operator returns the rows that are in the first result set but not in the second. In all three cases, duplicate rows are eliminated unless `ALL` is specified. The noise word `DISTINCT` can be added to explicitly specify eliminating duplicate rows. Notice that `DISTINCT` is the default behavior here, even though `ALL` is the default for `SELECT` itself. (See [UNION Clause](sql-select.html#SQL-UNION "UNION Clause"), [INTERSECT Clause](sql-select.html#SQL-INTERSECT "INTERSECT Clause"), and [EXCEPT Clause](sql-select.html#SQL-EXCEPT "EXCEPT Clause") below.)
+8. If the `ORDER BY` clause is specified, the returned rows are sorted in the specified order. If `ORDER BY` is not given, the rows are returned in whatever order the system finds fastest to produce. (See [ORDER BY Clause](sql-select.html#SQL-ORDERBY "ORDER BY Clause") below.)
+9. If the `LIMIT` (or `FETCH FIRST`) or `OFFSET` clause is specified, the `SELECT` statement only returns a subset of the result rows. (See [LIMIT Clause](sql-select.html#SQL-LIMIT "LIMIT Clause") below.)
 10. If `FOR UPDATE`, `FOR NO KEY UPDATE`, `FOR SHARE` or `FOR KEY SHARE` is specified, the `SELECT` statement locks the selected rows against concurrent updates. (See [The Locking Clause](sql-select.html#SQL-FOR-UPDATE-SHARE "The Locking Clause") below.)
 
 You must have `SELECT` privilege on each column used in a `SELECT` command. The use of `FOR NO KEY UPDATE`, `FOR UPDATE`, `FOR SHARE` or `FOR KEY SHARE` requires `UPDATE` privilege as well (for at least one column of each table so selected).
@@ -119,15 +117,15 @@ The `FROM` clause specifies one or more source tables for the `SELECT`. If multi
 
 The `FROM` clause can contain the following elements:
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (optionally schema-qualified) of an existing table or view. If `ONLY` is specified before the table name, only that table is scanned. If `ONLY` is not specified, the table and all its descendant tables (if any) are scanned. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included.
 
-*   *`alias`*
+* *`alias`*
 
     A substitute name for the `FROM` item containing the alias. An alias is used for brevity or to eliminate ambiguity for self-joins (where the same table is scanned multiple times). When an alias is provided, it completely hides the actual name of the table or function; for example given `FROM foo AS f`, the remainder of the `SELECT` must refer to this `FROM` item as `f` not `foo`. If an alias is written, a column alias list can also be written to provide substitute names for one or more columns of the table.
 
-*   `TABLESAMPLE sampling_method ( argument [, ...] ) [ REPEATABLE ( seed ) ]`
+* `TABLESAMPLE sampling_method ( argument [, ...] ) [ REPEATABLE ( seed ) ]`
 
     A `TABLESAMPLE` clause after a *`table_name`* indicates that the specified *`sampling_method`* should be used to retrieve a subset of the rows in that table. This sampling precedes the application of any other filters such as `WHERE` clauses. The standard PostgreSQL distribution includes two sampling methods, `BERNOULLI` and `SYSTEM`, and other sampling methods can be installed in the database via extensions.
 
@@ -135,15 +133,15 @@ The `FROM` clause can contain the following elements:
 
     The optional `REPEATABLE` clause specifies a *`seed`* number or expression to use for generating random numbers within the sampling method. The seed value can be any non-null floating-point value. Two queries that specify the same seed and *`argument`* values will select the same sample of the table, if the table has not been changed meanwhile. But different seed values will usually produce different samples. If `REPEATABLE` is not given then a new random sample is selected for each query, based upon a system-generated seed. Note that some add-on sampling methods do not accept `REPEATABLE`, and will always produce new samples on each use.
 
-*   *`select`*
+* *`select`*
 
     A sub-`SELECT` can appear in the `FROM` clause. This acts as though its output were created as a temporary table for the duration of this single `SELECT` command. Note that the sub-`SELECT` must be surrounded by parentheses, and an alias can be provided in the same way as for a table. A [`VALUES`](sql-values.html "VALUES") command can also be used here.
 
-*   *`with_query_name`*
+* *`with_query_name`*
 
     A `WITH` query is referenced by writing its name, just as though the query's name were a table name. (In fact, the `WITH` query hides any real table of the same name for the purposes of the primary query. If necessary, you can refer to a real table of the same name by schema-qualifying the table's name.) An alias can be provided in the same way as for a table.
 
-*   *`function_name`*
+* *`function_name`*
 
     Function calls can appear in the `FROM` clause. (This is especially useful for functions that return result sets, but any function can be used.) This acts as though the function's output were created as a temporary table for the duration of this single `SELECT` command. If the function's result type is composite (including the case of a function with multiple `OUT` parameters), each attribute becomes a separate column in the implicit table.
 
@@ -159,14 +157,14 @@ The `FROM` clause can contain the following elements:
 
     To use `ORDINALITY` together with a column definition list, you must use the `ROWS FROM( ... )` syntax and put the column definition list inside `ROWS FROM( ... )`.
 
-*   *`join_type`*
+* *`join_type`*
 
     One of
 
-    *   `[ INNER ] JOIN`
-    *   `LEFT [ OUTER ] JOIN`
-    *   `RIGHT [ OUTER ] JOIN`
-    *   `FULL [ OUTER ] JOIN`
+  * `[ INNER ] JOIN`
+  * `LEFT [ OUTER ] JOIN`
+  * `RIGHT [ OUTER ] JOIN`
+  * `FULL [ OUTER ] JOIN`
 
     For the `INNER` and `OUTER` join types, a join condition must be specified, namely exactly one of `ON join_condition`, `USING (join_column [, ...])`, or `NATURAL`. See below for the meaning.
 
@@ -178,25 +176,25 @@ The `FROM` clause can contain the following elements:
 
     `FULL OUTER JOIN` returns all the joined rows, plus one row for each unmatched left-hand row (extended with nulls on the right), plus one row for each unmatched right-hand row (extended with nulls on the left).
 
-*   `ON join_condition`
+* `ON join_condition`
 
     *`join_condition`* is an expression resulting in a value of type `boolean` (similar to a `WHERE` clause) that specifies which rows in a join are considered to match.
 
-*   `USING ( join_column [, ...] ) [ AS join_using_alias ]`
+* `USING ( join_column [, ...] ) [ AS join_using_alias ]`
 
     A clause of the form `USING ( a, b, ... )` is shorthand for `ON left_table.a = right_table.a AND left_table.b = right_table.b ...`. Also, `USING` implies that only one of each pair of equivalent columns will be included in the join output, not both.
 
     If a *`join_using_alias`* name is specified, it provides a table alias for the join columns. Only the join columns listed in the `USING` clause are addressable by this name. Unlike a regular *`alias`*, this does not hide the names of the joined tables from the rest of the query. Also unlike a regular *`alias`*, you cannot write a column alias list — the output names of the join columns are the same as they appear in the `USING` list.
 
-*   `NATURAL`
+* `NATURAL`
 
     `NATURAL` is shorthand for a `USING` list that mentions all columns in the two tables that have matching names. If there are no common column names, `NATURAL` is equivalent to `ON TRUE`.
 
-*   `CROSS JOIN`
+* `CROSS JOIN`
 
     `CROSS JOIN` is equivalent to `INNER JOIN ON (TRUE)`, that is, no rows are removed by qualification. They produce a simple Cartesian product, the same result as you get from listing the two tables at the top level of `FROM`, but restricted by the join condition (if any).
 
-*   `LATERAL`
+* `LATERAL`
 
     The `LATERAL` key word can precede a sub-`SELECT` `FROM` item. This allows the sub-`SELECT` to refer to columns of `FROM` items that appear before it in the `FROM` list. (Without `LATERAL`, each sub-`SELECT` is evaluated independently and so cannot cross-reference any other `FROM` item.)
 

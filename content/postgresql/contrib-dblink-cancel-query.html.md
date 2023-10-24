@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## dblink\_cancel\_query
 
 dblink\_cancel\_query — cancels any active query on the named connection
@@ -22,7 +20,7 @@ dblink\_cancel\_query — cancels any active query on the named connection
 
 ## Arguments
 
-*   *`connname`*
+* *`connname`*
 
     Name of the connection to use.
 

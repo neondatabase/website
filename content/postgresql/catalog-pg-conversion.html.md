@@ -8,8 +8,6 @@
 
 ## 53.14. `pg_conversion` [#](#CATALOG-PG-CONVERSION)
 
-[]()
-
 The catalog `pg_conversion` describes encoding conversion functions. See [CREATE CONVERSION](sql-createconversion.html "CREATE CONVERSION") for more information.
 
 **Table 53.14. `pg_conversion` Columns**

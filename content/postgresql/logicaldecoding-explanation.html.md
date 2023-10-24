@@ -8,22 +8,18 @@
 
 ## 49.2. Logical Decoding Concepts [#](#LOGICALDECODING-EXPLANATION)
 
-*   *   [49.2.1. Logical Decoding](logicaldecoding-explanation.html#LOGICALDECODING-EXPLANATION-LOG-DEC)
-    *   [49.2.2. Replication Slots](logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS)
-    *   [49.2.3. Output Plugins](logicaldecoding-explanation.html#LOGICALDECODING-EXPLANATION-OUTPUT-PLUGINS)
-    *   [49.2.4. Exported Snapshots](logicaldecoding-explanation.html#LOGICALDECODING-EXPLANATION-EXPORTED-SNAPSHOTS)
+  * *   [49.2.1. Logical Decoding](logicaldecoding-explanation.html#LOGICALDECODING-EXPLANATION-LOG-DEC)
+* [49.2.2. Replication Slots](logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS)
+* [49.2.3. Output Plugins](logicaldecoding-explanation.html#LOGICALDECODING-EXPLANATION-OUTPUT-PLUGINS)
+* [49.2.4. Exported Snapshots](logicaldecoding-explanation.html#LOGICALDECODING-EXPLANATION-EXPORTED-SNAPSHOTS)
 
 ### 49.2.1. Logical Decoding [#](#LOGICALDECODING-EXPLANATION-LOG-DEC)
-
-[]()
 
 Logical decoding is the process of extracting all persistent changes to a database's tables into a coherent, easy to understand format which can be interpreted without detailed knowledge of the database's internal state.
 
 In PostgreSQL, logical decoding is implemented by decoding the contents of the [write-ahead log](wal.html "Chapter 30. Reliability and the Write-Ahead Log"), which describe changes on a storage level, into an application-specific form such as a stream of tuples or SQL statements.
 
 ### 49.2.2. Replication Slots [#](#LOGICALDECODING-REPLICATION-SLOTS)
-
-[]()
 
 In the context of logical replication, a slot represents a stream of changes that can be replayed to a client in the order they were made on the origin server. Each slot streams a sequence of changes from a single database.
 

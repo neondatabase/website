@@ -8,19 +8,16 @@
 
 ## 9.25. Set Returning Functions [#](#FUNCTIONS-SRF)
 
-[]()
-
 This section describes functions that possibly return more than one row. The most widely used functions in this class are series generating functions, as detailed in [Table 9.65](functions-srf.html#FUNCTIONS-SRF-SERIES "Table 9.65. Series Generating Functions") and [Table 9.66](functions-srf.html#FUNCTIONS-SRF-SUBSCRIPTS "Table 9.66. Subscript Generating Functions"). Other, more specialized set-returning functions are described elsewhere in this manual. See [Section 7.2.1.4](queries-table-expressions.html#QUERIES-TABLEFUNCTIONS "7.2.1.4. Table Functions") for ways to combine multiple set-returning functions.
 
 **Table 9.65. Series Generating Functions**
 
 | FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| []()`generate_series` ( *`start`* `integer`, *`stop`* `integer` \[, *`step`* `integer` ] ) → `setof integer``generate_series` ( *`start`* `bigint`, *`stop`* `bigint` \[, *`step`* `bigint` ] ) → `setof bigint``generate_series` ( *`start`* `numeric`, *`stop`* `numeric` \[, *`step`* `numeric` ] ) → `setof numeric`Generates a series of values from *`start`* to *`stop`*, with a step size of *`step`*. *`step`* defaults to 1.                                                                                                                                                                                                 |
+| `generate_series` ( *`start`* `integer`, *`stop`* `integer` \[, *`step`* `integer` ] ) → `setof integer``generate_series` ( *`start`* `bigint`, *`stop`* `bigint` \[, *`step`* `bigint` ] ) → `setof bigint``generate_series` ( *`start`* `numeric`, *`stop`* `numeric` \[, *`step`* `numeric` ] ) → `setof numeric`Generates a series of values from *`start`* to *`stop`*, with a step size of *`step`*. *`step`* defaults to 1.                                                                                                                                                                                                 |
 | `generate_series` ( *`start`* `timestamp`, *`stop`* `timestamp`, *`step`* `interval` ) → `setof timestamp``generate_series` ( *`start`* `timestamp with time zone`, *`stop`* `timestamp with time zone`, *`step`* `interval` \[, *`timezone`* `text` ] ) → `setof timestamp with time zone`Generates a series of values from *`start`* to *`stop`*, with a step size of *`step`*. In the timezone-aware form, times of day and daylight-savings adjustments are computed according to the time zone named by the *`timezone`* argument, or the current [TimeZone](runtime-config-client.html#GUC-TIMEZONE) setting if that is omitted. |
 
 \
-
 
 When *`step`* is positive, zero rows are returned if *`start`* is greater than *`stop`*. Conversely, when *`step`* is negative, zero rows are returned if *`start`* is less than *`stop`*. Zero rows are also returned if any input is `NULL`. It is an error for *`step`* to be zero. Some examples follow:
 
@@ -100,11 +97,10 @@ When *`step`* is positive, zero rows are returned if *`start`* is greater than *
 
 | FunctionDescription                                                                                                                                                                                                                                                         |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| []()`generate_subscripts` ( *`array`* `anyarray`, *`dim`* `integer` ) → `setof integer`Generates a series comprising the valid subscripts of the *`dim`*'th dimension of the given array.                                                                                   |
+| `generate_subscripts` ( *`array`* `anyarray`, *`dim`* `integer` ) → `setof integer`Generates a series comprising the valid subscripts of the *`dim`*'th dimension of the given array.                                                                                   |
 | `generate_subscripts` ( *`array`* `anyarray`, *`dim`* `integer`, *`reverse`* `boolean` ) → `setof integer`Generates a series comprising the valid subscripts of the *`dim`*'th dimension of the given array. When *`reverse`* is true, returns the series in reverse order. |
 
 \
-
 
 `generate_subscripts` is a convenience function that generates the set of valid subscripts for the specified dimension of the given array. Zero rows are returned for arrays that do not have the requested dimension, or if any input is `NULL`. Some examples follow:
 
@@ -154,8 +150,6 @@ When *`step`* is positive, zero rows are returned if *`start`* is greater than *
            3
            4
     (4 rows)
-
-[]()
 
 When a function in the `FROM` clause is suffixed by `WITH ORDINALITY`, a `bigint` column is appended to the function's output column(s), which starts from 1 and increments by 1 for each row of the function's output. This is most useful in the case of set returning functions such as `unnest()`.
 

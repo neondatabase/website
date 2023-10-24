@@ -14,8 +14,8 @@ In the examples that follow, we assume that you have created a database named `m
 
 Examples in this manual can also be found in the PostgreSQL source distribution in the directory `src/tutorial/`. (Binary distributions of PostgreSQL might not provide those files.) To use those files, first change to that directory and run make:
 
-    $ cd .../src/tutorial
-    $ make
+    cd .../src/tutorial
+    make
 
 This creates the scripts and compiles the C files containing user-defined functions and types. Then, to start the tutorial, do the following:
 

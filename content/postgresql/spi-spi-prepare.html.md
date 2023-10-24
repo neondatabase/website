@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_prepare
 
 SPI\_prepare — prepare a statement, without executing it yet
@@ -28,15 +26,15 @@ The statement returned by `SPI_prepare` can be used only in the current invocati
 
 ## Arguments
 
-*   `const char * command`
+* `const char * command`
 
     command string
 
-*   `int nargs`
+* `int nargs`
 
     number of input parameters (`$1`, `$2`, etc.)
 
-*   `Oid * argtypes`
+* `Oid * argtypes`
 
     pointer to an array containing the OIDs of the data types of the parameters
 

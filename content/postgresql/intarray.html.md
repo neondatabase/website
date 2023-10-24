@@ -8,13 +8,11 @@
 
 ## F.20. intarray — manipulate arrays of integers [#](#INTARRAY)
 
-*   *   [F.20.1. `intarray` Functions and Operators](intarray.html#INTARRAY-FUNCS-OPS)
-    *   [F.20.2. Index Support](intarray.html#INTARRAY-INDEX)
-    *   [F.20.3. Example](intarray.html#INTARRAY-EXAMPLE)
-    *   [F.20.4. Benchmark](intarray.html#INTARRAY-BENCHMARK)
-    *   [F.20.5. Authors](intarray.html#INTARRAY-AUTHORS)
-
-[]()
+  * *   [F.20.1. `intarray` Functions and Operators](intarray.html#INTARRAY-FUNCS-OPS)
+* [F.20.2. Index Support](intarray.html#INTARRAY-INDEX)
+* [F.20.3. Example](intarray.html#INTARRAY-EXAMPLE)
+* [F.20.4. Benchmark](intarray.html#INTARRAY-BENCHMARK)
+* [F.20.5. Authors](intarray.html#INTARRAY-AUTHORS)
 
 The `intarray` module provides a number of useful functions and operators for manipulating null-free arrays of integers. There is also support for indexed searches using some of the operators.
 
@@ -32,18 +30,17 @@ The functions provided by the `intarray` module are shown in [Table F.9](intarr
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| []()`icount` ( `integer[]` ) → `integer`Returns the number of elements in the array.`icount('{1,2,3}'::integer[])` → `3`                                                                                                           |
-| []()`sort` ( `integer[]`, *`dir`* `text` ) → `integer[]`Sorts the array in either ascending or descending order. *`dir`* must be `asc` or `desc`.`sort('{1,3,2}'::integer[], 'desc')` → `{3,2,1}`                                  |
-| `sort` ( `integer[]` ) → `integer[]`[]()`sort_asc` ( `integer[]` ) → `integer[]`Sorts in ascending order.`sort(array[11,77,44])` → `{11,44,77}`                                                                                    |
-| []()`sort_desc` ( `integer[]` ) → `integer[]`Sorts in descending order.`sort_desc(array[11,77,44])` → `{77,44,11}`                                                                                                                 |
-| []()`uniq` ( `integer[]` ) → `integer[]`Removes adjacent duplicates. Often used with `sort` to remove all duplicates.`uniq('{1,2,2,3,1,1}'::integer[])` → `{1,2,3,1}``uniq(sort('{1,2,3,2,1}'::integer[]))` → `{1,2,3}`            |
-| []()`idx` ( `integer[]`, *`item`* `integer` ) → `integer`Returns index of the first array element matching *`item`*, or 0 if no match.`idx(array[11,22,33,22,11], 22)` → `2`                                                       |
-| []()`subarray` ( `integer[]`, *`start`* `integer`, *`len`* `integer` ) → `integer[]`Extracts the portion of the array starting at position *`start`*, with *`len`* elements.`subarray('{1,2,3,2,1}'::integer[], 2, 3)` → `{2,3,2}` |
+| `icount` ( `integer[]` ) → `integer`Returns the number of elements in the array.`icount('{1,2,3}'::integer[])` → `3`                                                                                                           |
+| `sort` ( `integer[]`, *`dir`* `text` ) → `integer[]`Sorts the array in either ascending or descending order. *`dir`* must be `asc` or `desc`.`sort('{1,3,2}'::integer[], 'desc')` → `{3,2,1}`                                  |
+| `sort` ( `integer[]` ) → `integer[]``sort_asc` ( `integer[]` ) → `integer[]`Sorts in ascending order.`sort(array[11,77,44])` → `{11,44,77}`                                                                                    |
+| `sort_desc` ( `integer[]` ) → `integer[]`Sorts in descending order.`sort_desc(array[11,77,44])` → `{77,44,11}`                                                                                                                 |
+| `uniq` ( `integer[]` ) → `integer[]`Removes adjacent duplicates. Often used with `sort` to remove all duplicates.`uniq('{1,2,2,3,1,1}'::integer[])` → `{1,2,3,1}``uniq(sort('{1,2,3,2,1}'::integer[]))` → `{1,2,3}`            |
+| `idx` ( `integer[]`, *`item`* `integer` ) → `integer`Returns index of the first array element matching *`item`*, or 0 if no match.`idx(array[11,22,33,22,11], 22)` → `2`                                                       |
+| `subarray` ( `integer[]`, *`start`* `integer`, *`len`* `integer` ) → `integer[]`Extracts the portion of the array starting at position *`start`*, with *`len`* elements.`subarray('{1,2,3,2,1}'::integer[], 2, 3)` → `{2,3,2}` |
 | `subarray` ( `integer[]`, *`start`* `integer` ) → `integer[]`Extracts the portion of the array starting at position *`start`*.`subarray('{1,2,3,2,1}'::integer[], 2)` → `{2,3,2,1}`                                                |
-| []()`intset` ( `integer` ) → `integer[]`Makes a single-element array.`intset(42)` → `{42}`                                                                                                                                         |
+| `intset` ( `integer` ) → `integer[]`Makes a single-element array.`intset(42)` → `{42}`                                                                                                                                         |
 
 \
-
 
 **Table F.10. `intarray` Operators**
 
@@ -52,7 +49,7 @@ The functions provided by the `intarray` module are shown in [Table F.9](intarr
 | `integer[]` `&&` `integer[]` → `boolean`Do arrays overlap (have at least one element in common)?                                                       |
 | `integer[]` `@>` `integer[]` → `boolean`Does left array contain right array?                                                                           |
 | `integer[]` `<@` `integer[]` → `boolean`Is left array contained in right array?                                                                        |
-| ```#` `integer[]` → `integer`Returns the number of elements in the array.                                                                              |
+| ```#``integer[]` → `integer`Returns the number of elements in the array.                                                                              |
 | `integer[]` `#` `integer` → `integer`Returns index of the first array element matching the right argument, or 0 if no match. (Same as `idx` function.) |
 | `integer[]` `+` `integer` → `integer[]`Adds element to end of array.                                                                                   |
 | `integer[]` `+` `integer[]` → `integer[]`Concatenates the arrays.                                                                                      |
@@ -65,7 +62,6 @@ The functions provided by the `intarray` module are shown in [Table F.9](intarr
 | `query_int` `~~` `integer[]` → `boolean`Does array satisfy query? (commutator of `@@`)                                                                 |
 
 \
-
 
 The operators `&&`, `@>` and `<@` are equivalent to PostgreSQL's built-in operators of the same names, except that they work only on integer arrays that do not contain nulls, while the built-in operators work for any array type. This restriction makes them faster than the built-in operators in many cases.
 

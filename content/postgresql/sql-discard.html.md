@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DISCARD
 
 DISCARD — discard session state
@@ -22,19 +20,19 @@ DISCARD — discard session state
 
 ## Parameters
 
-*   `PLANS`
+* `PLANS`
 
     Releases all cached query plans, forcing re-planning to occur the next time the associated prepared statement is used.
 
-*   `SEQUENCES`
+* `SEQUENCES`
 
     Discards all cached sequence-related state, including `currval()`/`lastval()` information and any preallocated sequence values that have not yet been returned by `nextval()`. (See [CREATE SEQUENCE](sql-createsequence.html "CREATE SEQUENCE") for a description of preallocated sequence values.)
 
-*   `TEMPORARY` or `TEMP`
+* `TEMPORARY` or `TEMP`
 
     Drops all temporary tables created in the current session.
 
-*   `ALL`
+* `ALL`
 
     Releases all temporary resources associated with the current session and resets the session to its initial state. Currently, this has the same effect as executing the following sequence of statements:
 

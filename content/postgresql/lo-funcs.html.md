@@ -14,14 +14,13 @@ Server-side functions tailored for manipulating large objects from SQL are liste
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| []()`lo_from_bytea` ( *`loid`* `oid`, *`data`* `bytea` ) → `oid`Creates a large object and stores *`data`* in it. If *`loid`* is zero then the system will choose a free OID, otherwise that OID is used (with an error if some large object already has that OID). On success, the large object's OID is returned.`lo_from_bytea(0, '\xffffff00')` → `24528` |
-| []()`lo_put` ( *`loid`* `oid`, *`offset`* `bigint`, *`data`* `bytea` ) → `void`Writes *`data`* starting at the given offset within the large object; the large object is enlarged if necessary.`lo_put(24528, 1, '\xaa')` →``                                                                                                                                 |
-| []()`lo_get` ( *`loid`* `oid` \[, *`offset`* `bigint`, *`length`* `integer` ] ) → `bytea`Extracts the large object's contents, or a substring thereof.`lo_get(24528, 0, 3)` → `\xffaaff`                                                                                                                                                                      |
+| `lo_from_bytea` ( *`loid`* `oid`, *`data`* `bytea` ) → `oid`Creates a large object and stores *`data`* in it. If *`loid`* is zero then the system will choose a free OID, otherwise that OID is used (with an error if some large object already has that OID). On success, the large object's OID is returned.`lo_from_bytea(0, '\xffffff00')` → `24528` |
+| `lo_put` ( *`loid`* `oid`, *`offset`* `bigint`, *`data`* `bytea` ) → `void`Writes *`data`* starting at the given offset within the large object; the large object is enlarged if necessary.`lo_put(24528, 1, '\xaa')` →``                                                                                                                                 |
+| `lo_get` ( *`loid`* `oid` \[, *`offset`* `bigint`, *`length`* `integer` ] ) → `bytea`Extracts the large object's contents, or a substring thereof.`lo_get(24528, 0, 3)` → `\xffaaff`                                                                                                                                                                      |
 
 \
 
-
-There are additional server-side functions corresponding to each of the client-side functions described earlier; indeed, for the most part the client-side functions are simply interfaces to the equivalent server-side functions. The ones just as convenient to call via SQL commands are `lo_creat`[](), `lo_create`, `lo_unlink`[](), `lo_import`[](), and `lo_export`[](). Here are examples of their use:
+There are additional server-side functions corresponding to each of the client-side functions described earlier; indeed, for the most part the client-side functions are simply interfaces to the equivalent server-side functions. The ones just as convenient to call via SQL commands are `lo_creat`, `lo_create`, `lo_unlink`, `lo_import`, and `lo_export`. Here are examples of their use:
 
     CREATE TABLE image (
         name            text,

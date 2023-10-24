@@ -8,8 +8,6 @@
 
 ## 53.64. `pg_type` [#](#CATALOG-PG-TYPE)
 
-[]()
-
 The catalog `pg_type` stores information about data types. Base types and enum types (scalar types) are created with [`CREATE TYPE`](sql-createtype.html "CREATE TYPE"), and domains with [`CREATE DOMAIN`](sql-createdomain.html "CREATE DOMAIN"). A composite type is automatically created for each table in the database, to represent the row structure of the table. It is also possible to create composite types with `CREATE TYPE AS`.
 
 **Table 53.64. `pg_type` Columns**
@@ -39,13 +37,14 @@ The catalog `pg_type` stores information about data types. Base types and enum t
 | `typmodout` `regproc` (references [`pg_proc`](catalog-pg-proc.html "53.39. pg_proc").`oid`)Type modifier output function, or zero to use the standard format                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `typanalyze` `regproc` (references [`pg_proc`](catalog-pg-proc.html "53.39. pg_proc").`oid`)Custom [ANALYZE](sql-analyze.html "ANALYZE") function, or zero to use the standard function                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `typalign` `char``typalign` is the alignment required when storing a value of this type. It applies to storage on disk as well as most representations of the value inside PostgreSQL. When multiple values are stored consecutively, such as in the representation of a complete row on disk, padding is inserted before a datum of this type so that it begins on the specified boundary. The alignment reference is the beginning of the first datum in the sequence. Possible values are:*   `c` = `char` alignment, i.e., no alignment needed.
-*   `s` = `short` alignment (2 bytes on most machines).
-*   `i` = `int` alignment (4 bytes on most machines).
-*   `d` = `double` alignment (8 bytes on many machines, but by no means all).                            |
+
+* `s` = `short` alignment (2 bytes on most machines).
+* `i` = `int` alignment (4 bytes on most machines).
+* `d` = `double` alignment (8 bytes on many machines, but by no means all).                            |
 | `typstorage` `char``typstorage` tells for varlena types (those with `typlen` = -1) if the type is prepared for toasting and what the default strategy for attributes of this type should be. Possible values are:*   `p` (plain): Values must always be stored plain (non-varlena types always use this value).
-*   `e` (external): Values can be stored in a secondary “TOAST” relation (if relation has one, see `pg_class.reltoastrelid`).
-*   `m` (main): Values can be compressed and stored inline.
-*   `x` (extended): Values can be compressed and/or moved to a secondary relation.`x` is the usual choice for toast-able types. Note that `m` values can also be moved out to secondary storage, but only as a last resort (`e` and `x` values are moved first). |
+* `e` (external): Values can be stored in a secondary “TOAST” relation (if relation has one, see `pg_class.reltoastrelid`).
+* `m` (main): Values can be compressed and stored inline.
+* `x` (extended): Values can be compressed and/or moved to a secondary relation.`x` is the usual choice for toast-able types. Note that `m` values can also be moved out to secondary storage, but only as a last resort (`e` and `x` values are moved first). |
 | `typnotnull` `bool``typnotnull` represents a not-null constraint on a type. Used for domains only.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `typbasetype` `oid` (references [`pg_type`](catalog-pg-type.html "53.64. pg_type").`oid`)If this is a domain (see `typtype`), then `typbasetype` identifies the type that this one is based on. Zero if this type is not a domain.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `typtypmod` `int4`Domains use `typtypmod` to record the `typmod` to be applied to their base type (-1 if base type does not use a `typmod`). -1 if this type is not a domain.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -56,7 +55,6 @@ The catalog `pg_type` stores information about data types. Base types and enum t
 | `typacl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv.html "5.7. Privileges") for details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 \
-
 
 ### Note
 

@@ -8,11 +8,9 @@
 
 ## 19.6. Upgrading a PostgreSQL Cluster [#](#UPGRADING)
 
-*   *   [19.6.1. Upgrading Data via pg\_dumpall](upgrading.html#UPGRADING-VIA-PGDUMPALL)
-    *   [19.6.2. Upgrading Data via pg\_upgrade](upgrading.html#UPGRADING-VIA-PG-UPGRADE)
-    *   [19.6.3. Upgrading Data via Replication](upgrading.html#UPGRADING-VIA-REPLICATION)
-
-[]()[]()
+  * *   [19.6.1. Upgrading Data via pg\_dumpall](upgrading.html#UPGRADING-VIA-PGDUMPALL)
+* [19.6.2. Upgrading Data via pg\_upgrade](upgrading.html#UPGRADING-VIA-PG-UPGRADE)
+* [19.6.3. Upgrading Data via Replication](upgrading.html#UPGRADING-VIA-REPLICATION)
 
 This section discusses how to upgrade your database data from one PostgreSQL release to a newer one.
 
@@ -26,23 +24,23 @@ New major versions also typically introduce some user-visible incompatibilities,
 
 Cautious users will want to test their client applications on the new version before switching over fully; therefore, it's often a good idea to set up concurrent installations of old and new versions. When testing a PostgreSQL major upgrade, consider the following categories of possible changes:
 
-*   Administration
+* Administration
 
     The capabilities available for administrators to monitor and control the server often change and improve in each major release.
 
-*   SQL
+* SQL
 
     Typically this includes new SQL command capabilities and not changes in behavior, unless specifically mentioned in the release notes.
 
-*   Library API
+* Library API
 
     Typically libraries like libpq only add new functionality, again unless mentioned in the release notes.
 
-*   System Catalogs
+* System Catalogs
 
     System catalog changes usually only affect database management tools.
 
-*   Server C-language API
+* Server C-language API
 
     This involves changes in the backend function API, which is written in the C programming language. Such changes affect code that references backend functions deep inside the server.
 
@@ -54,15 +52,15 @@ It is recommended that you use the pg\_dump and pg\_dumpall programs from the *n
 
 These instructions assume that your existing installation is under the `/usr/local/pgsql` directory, and that the data area is in `/usr/local/pgsql/data`. Substitute your paths appropriately.
 
-1.  If making a backup, make sure that your database is not being updated. This does not affect the integrity of the backup, but the changed data would of course not be included. If necessary, edit the permissions in the file `/usr/local/pgsql/data/pg_hba.conf` (or equivalent) to disallow access from everyone except you. See [Chapter 21](client-authentication.html "Chapter 21. Client Authentication") for additional information on access control.
+1. If making a backup, make sure that your database is not being updated. This does not affect the integrity of the backup, but the changed data would of course not be included. If necessary, edit the permissions in the file `/usr/local/pgsql/data/pg_hba.conf` (or equivalent) to disallow access from everyone except you. See [Chapter 21](client-authentication.html "Chapter 21. Client Authentication") for additional information on access control.
 
-    []()To back up your database installation, type:
+    To back up your database installation, type:
 
         pg_dumpall > outputfile
 
     To make the backup, you can use the pg\_dumpall command from the version you are currently running; see [Section 26.1.2](backup-dump.html#BACKUP-DUMP-ALL "26.1.2. Using pg_dumpall") for more details. For best results, however, try to use the pg\_dumpall command from PostgreSQL 17devel, since this version contains bug fixes and improvements over older versions. While this advice might seem idiosyncratic since you haven't installed the new version yet, it is advisable to follow it if you plan to install the new version in parallel with the old version. In that case you can complete the installation normally and transfer the data later. This will also decrease the downtime.
 
-2.  Shut down the old server:
+2. Shut down the old server:
 
         pg_ctl stop
 
@@ -72,25 +70,25 @@ These instructions assume that your existing installation is under the `/usr/loc
 
     See [Chapter 19](runtime.html "Chapter 19. Server Setup and Operation") for details about starting and stopping the server.
 
-3.  If restoring from backup, rename or delete the old installation directory if it is not version-specific. It is a good idea to rename the directory, rather than delete it, in case you have trouble and need to revert to it. Keep in mind the directory might consume significant disk space. To rename the directory, use a command like this:
+3. If restoring from backup, rename or delete the old installation directory if it is not version-specific. It is a good idea to rename the directory, rather than delete it, in case you have trouble and need to revert to it. Keep in mind the directory might consume significant disk space. To rename the directory, use a command like this:
 
         mv /usr/local/pgsql /usr/local/pgsql.old
 
     (Be sure to move the directory as a single unit so relative paths remain unchanged.)
 
-4.  Install the new version of PostgreSQL as outlined in [Chapter 17](installation.html "Chapter 17. Installation from Source Code").
+4. Install the new version of PostgreSQL as outlined in [Chapter 17](installation.html "Chapter 17. Installation from Source Code").
 
-5.  Create a new database cluster if needed. Remember that you must execute these commands while logged in to the special database user account (which you already have if you are upgrading).
+5. Create a new database cluster if needed. Remember that you must execute these commands while logged in to the special database user account (which you already have if you are upgrading).
 
         /usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data
 
-6.  Restore your previous `pg_hba.conf` and any `postgresql.conf` modifications.
+6. Restore your previous `pg_hba.conf` and any `postgresql.conf` modifications.
 
-7.  Start the database server, again using the special database user account:
+7. Start the database server, again using the special database user account:
 
         /usr/local/pgsql/bin/postgres -D /usr/local/pgsql/data
 
-8.  Finally, restore your data from backup with:
+8. Finally, restore your data from backup with:
 
         /usr/local/pgsql/bin/psql -d postgres -f outputfile
 

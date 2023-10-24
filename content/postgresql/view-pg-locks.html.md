@@ -8,8 +8,6 @@
 
 ## 54.12. `pg_locks` [#](#VIEW-PG-LOCKS)
 
-[]()
-
 The view `pg_locks` provides access to information about the locks held by active processes within the database server. See [Chapter 13](mvcc.html "Chapter 13. Concurrency Control") for more discussion of locking.
 
 `pg_locks` contains one row per active lockable object, requested lock mode, and relevant process. Thus, the same lockable object might appear many times, if multiple processes are holding or waiting for locks on it. However, an object that currently has no locks on it will not appear at all.
@@ -38,7 +36,6 @@ There are several distinct types of lockable objects: whole relations (e.g., tab
 | `waitstart` `timestamptz`Time when the server process started waiting for this lock, or null if the lock is held. Note that this can be null for a very short period of time after the wait started even though `granted` is `false`.                                                                                |
 
 \
-
 
 `granted` is true in a row representing a lock held by the indicated process. False indicates that this process is currently waiting to acquire this lock, which implies that at least one other process is holding or waiting for a conflicting lock mode on the same lockable object. The waiting process will sleep until the other lock is released (or a deadlock situation is detected). A single process can be waiting to acquire at most one lock at a time.
 

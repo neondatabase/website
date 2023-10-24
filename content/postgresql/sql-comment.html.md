@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## COMMENT
 
 COMMENT — define or change the comment of an object
@@ -81,59 +79,59 @@ Comments can be viewed using psql's `\d` family of commands. Other user interfac
 
 ## Parameters
 
-*   *`object_name`**`relation_name`*.*`column_name`**`aggregate_name`**`constraint_name`**`function_name`**`operator_name`**`policy_name`**`procedure_name`**`routine_name`**`rule_name`**`trigger_name`*
+* *`object_name`**`relation_name`*.*`column_name`**`aggregate_name`**`constraint_name`**`function_name`**`operator_name`**`policy_name`**`procedure_name`**`routine_name`**`rule_name`**`trigger_name`*
 
     The name of the object to be commented. Names of objects that reside in schemas (tables, functions, etc.) can be schema-qualified. When commenting on a column, *`relation_name`* must refer to a table, view, composite type, or foreign table.
 
-*   *`table_name`**`domain_name`*
+* *`table_name`**`domain_name`*
 
     When creating a comment on a constraint, a trigger, a rule or a policy these parameters specify the name of the table or domain on which that object is defined.
 
-*   *`source_type`*
+* *`source_type`*
 
     The name of the source data type of the cast.
 
-*   *`target_type`*
+* *`target_type`*
 
     The name of the target data type of the cast.
 
-*   *`argmode`*
+* *`argmode`*
 
     The mode of a function, procedure, or aggregate argument: `IN`, `OUT`, `INOUT`, or `VARIADIC`. If omitted, the default is `IN`. Note that `COMMENT` does not actually pay any attention to `OUT` arguments, since only the input arguments are needed to determine the function's identity. So it is sufficient to list the `IN`, `INOUT`, and `VARIADIC` arguments.
 
-*   *`argname`*
+* *`argname`*
 
     The name of a function, procedure, or aggregate argument. Note that `COMMENT` does not actually pay any attention to argument names, since only the argument data types are needed to determine the function's identity.
 
-*   *`argtype`*
+* *`argtype`*
 
     The data type of a function, procedure, or aggregate argument.
 
-*   *`large_object_oid`*
+* *`large_object_oid`*
 
     The OID of the large object.
 
-*   *`left_type`**`right_type`*
+* *`left_type`**`right_type`*
 
     The data type(s) of the operator's arguments (optionally schema-qualified). Write `NONE` for the missing argument of a prefix operator.
 
-*   `PROCEDURAL`
+* `PROCEDURAL`
 
     This is a noise word.
 
-*   *`type_name`*
+* *`type_name`*
 
     The name of the data type of the transform.
 
-*   *`lang_name`*
+* *`lang_name`*
 
     The name of the language of the transform.
 
-*   *`string_literal`*
+* *`string_literal`*
 
     The new comment contents, written as a string literal.
 
-*   `NULL`
+* `NULL`
 
     Write `NULL` to drop the comment.
 

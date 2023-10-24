@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## CREATE SCHEMA
 
 CREATE SCHEMA — define a new schema
@@ -36,19 +34,19 @@ Optionally, `CREATE SCHEMA` can include subcommands to create objects within the
 
 ## Parameters
 
-*   *`schema_name`*
+* *`schema_name`*
 
     The name of a schema to be created. If this is omitted, the *`user_name`* is used as the schema name. The name cannot begin with `pg_`, as such names are reserved for system schemas.
 
-*   *`user_name`*
+* *`user_name`*
 
     The role name of the user who will own the new schema. If omitted, defaults to the user executing the command. To create a schema owned by another role, you must be able to `SET ROLE` to that role.
 
-*   *`schema_element`*
+* *`schema_element`*
 
     An SQL statement defining an object to be created within the schema. Currently, only `CREATE TABLE`, `CREATE VIEW`, `CREATE INDEX`, `CREATE SEQUENCE`, `CREATE TRIGGER` and `GRANT` are accepted as clauses within `CREATE SCHEMA`. Other kinds of objects may be created in separate commands after the schema is created.
 
-*   `IF NOT EXISTS`
+* `IF NOT EXISTS`
 
     Do nothing (except issuing a notice) if a schema with the same name already exists. *`schema_element`* subcommands cannot be included when this option is used.
 

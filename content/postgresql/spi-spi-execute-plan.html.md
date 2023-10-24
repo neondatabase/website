@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_execute\_plan
 
 SPI\_execute\_plan — execute a statement prepared by `SPI_prepare`
@@ -23,25 +21,25 @@ SPI\_execute\_plan — execute a statement prepared by `SPI_prepare`
 
 ## Arguments
 
-*   `SPIPlanPtr plan`
+* `SPIPlanPtr plan`
 
     prepared statement (returned by `SPI_prepare`)
 
-*   `Datum * values`
+* `Datum * values`
 
     An array of actual parameter values. Must have same length as the statement's number of arguments.
 
-*   `const char * nulls`
+* `const char * nulls`
 
     An array describing which parameters are null. Must have same length as the statement's number of arguments.
 
     If *`nulls`* is `NULL` then `SPI_execute_plan` assumes that no parameters are null. Otherwise, each entry of the *`nulls`* array should be `' '` if the corresponding parameter value is non-null, or `'n'` if the corresponding parameter value is null. (In the latter case, the actual value in the corresponding *`values`* entry doesn't matter.) Note that *`nulls`* is not a text string, just an array: it does not need a `'\0'` terminator.
 
-*   `bool read_only`
+* `bool read_only`
 
     `true` for read-only execution
 
-*   `long count`
+* `long count`
 
     maximum number of rows to return, or `0` for no limit
 
@@ -49,11 +47,11 @@ SPI\_execute\_plan — execute a statement prepared by `SPI_prepare`
 
 The return value is the same as for `SPI_execute`, with the following additional possible error (negative) results:
 
-*   `SPI_ERROR_ARGUMENT`
+* `SPI_ERROR_ARGUMENT`
 
     if *`plan`* is `NULL` or invalid, or *`count`* is less than 0
 
-*   `SPI_ERROR_PARAM`
+* `SPI_ERROR_PARAM`
 
     if *`values`* is `NULL` and *`plan`* was prepared with some parameters
 

@@ -8,13 +8,11 @@
 
 ## 38.2. The PostgreSQL Type System [#](#EXTEND-TYPE-SYSTEM)
 
-*   *   [38.2.1. Base Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-BASE)
-    *   [38.2.2. Container Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-CONTAINER)
-    *   [38.2.3. Domains](extend-type-system.html#EXTEND-TYPE-SYSTEM-DOMAINS)
-    *   [38.2.4. Pseudo-Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-PSEUDO)
-    *   [38.2.5. Polymorphic Types](extend-type-system.html#EXTEND-TYPES-POLYMORPHIC)
-
-[]()[]()[]()[]()[]()[]()
+  * *   [38.2.1. Base Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-BASE)
+* [38.2.2. Container Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-CONTAINER)
+* [38.2.3. Domains](extend-type-system.html#EXTEND-TYPE-SYSTEM-DOMAINS)
+* [38.2.4. Pseudo-Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-PSEUDO)
+* [38.2.5. Polymorphic Types](extend-type-system.html#EXTEND-TYPES-POLYMORPHIC)
 
 PostgreSQL data types can be divided into base types, container types, domains, and pseudo-types.
 
@@ -44,8 +42,6 @@ There are a few “pseudo-types” for special purposes. Pseudo-types cannot app
 
 ### 38.2.5. Polymorphic Types [#](#EXTEND-TYPES-POLYMORPHIC)
 
-[]()[]()[]()[]()
-
 Some pseudo-types of special interest are the *polymorphic types*, which are used to declare *polymorphic functions*. This powerful feature allows a single function definition to operate on many different data types, with the specific data type(s) being determined by the data types actually passed to it in a particular call. The polymorphic types are shown in [Table 38.1](extend-type-system.html#EXTEND-TYPES-POLYMORPHIC-TABLE "Table 38.1. Polymorphic Types"). Some examples of their use appear in [Section 38.5.11](xfunc-sql.html#XFUNC-SQL-POLYMORPHIC-FUNCTIONS "38.5.11. Polymorphic SQL Functions").
 
 **Table 38.1. Polymorphic Types**
@@ -65,7 +61,6 @@ Some pseudo-types of special interest are the *polymorphic types*, which are use
 | `anycompatiblemultirange` | Common | Indicates that a function accepts any multirange data type, with automatic promotion of multiple arguments to a common data type |
 
 \
-
 
 Polymorphic arguments and results are tied to each other and are resolved to specific data types when a query calling a polymorphic function is parsed. When there is more than one polymorphic argument, the actual data types of the input values must match up as described below. If the function's result type is polymorphic, or it has output parameters of polymorphic types, the types of those results are deduced from the actual types of the polymorphic inputs as described below.
 

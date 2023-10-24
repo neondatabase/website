@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## pg\_checksums
 
 pg\_checksums — enable, disable or check data checksums in a PostgreSQL database cluster
@@ -26,35 +24,35 @@ When verifying checksums, every file in the cluster is scanned. When enabling ch
 
 The following command-line options are available:
 
-*   `-D directory``--pgdata=directory`
+* `-D directory``--pgdata=directory`
 
     Specifies the directory where the database cluster is stored.
 
-*   `-c``--check`
+* `-c``--check`
 
     Checks checksums. This is the default mode if nothing else is specified.
 
-*   `-d``--disable`
+* `-d``--disable`
 
     Disables checksums.
 
-*   `-e``--enable`
+* `-e``--enable`
 
     Enables checksums.
 
-*   `-f filenode``--filenode=filenode`
+* `-f filenode``--filenode=filenode`
 
     Only validate checksums in the relation with filenode *`filenode`*.
 
-*   `-N``--no-sync`
+* `-N``--no-sync`
 
     By default, `pg_checksums` will wait for all files to be written safely to disk. This option causes `pg_checksums` to return without waiting, which is faster, but means that a subsequent operating system crash can leave the updated data directory corrupt. Generally, this option is useful for testing but should not be used on a production installation. This option has no effect when using `--check`.
 
-*   `-P``--progress`
+* `-P``--progress`
 
     Enable progress reporting. Turning this on will deliver a progress report while checking or enabling checksums.
 
-*   `--sync-method=method`
+* `--sync-method=method`
 
     When set to `fsync`, which is the default, `pg_checksums` will recursively open and synchronize all files in the data directory. The search for files will follow symbolic links for the WAL directory and each configured tablespace.
 
@@ -62,25 +60,25 @@ The following command-line options are available:
 
     This option has no effect when `--no-sync` is used.
 
-*   `-v``--verbose`
+* `-v``--verbose`
 
     Enable verbose output. Lists all checked files.
 
-*   `-V``--version`
+* `-V``--version`
 
     Print the pg\_checksums version and exit.
 
-*   `-?``--help`
+* `-?``--help`
 
     Show help about pg\_checksums command line arguments, and exit.
 
 ## Environment
 
-*   `PGDATA`
+* `PGDATA`
 
     Specifies the directory where the database cluster is stored; can be overridden using the `-D` option.
 
-*   `PG_COLOR`
+* `PG_COLOR`
 
     Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 

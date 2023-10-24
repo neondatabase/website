@@ -8,8 +8,6 @@
 
 ## 21.8. Ident Authentication [#](#AUTH-IDENT)
 
-[]()
-
 The ident authentication method works by obtaining the client's operating system user name from an ident server and using it as the allowed database user name (with an optional user name mapping). This is only supported on TCP/IP connections.
 
 ### Note
@@ -18,7 +16,7 @@ When ident is specified for a local (non-TCP/IP) connection, peer authentication
 
 The following configuration options are supported for `ident`:
 
-*   `map`
+* `map`
 
     Allows for mapping between system and database user names. See [Section 21.2](auth-username-maps.html "21.2. User Name Maps") for details.
 

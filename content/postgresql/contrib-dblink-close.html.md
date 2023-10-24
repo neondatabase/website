@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## dblink\_close
 
 dblink\_close — closes a cursor in a remote database
@@ -23,15 +21,15 @@ dblink\_close — closes a cursor in a remote database
 
 ## Arguments
 
-*   *`connname`*
+* *`connname`*
 
     Name of the connection to use; omit this parameter to use the unnamed connection.
 
-*   *`cursorname`*
+* *`cursorname`*
 
     The name of the cursor to close.
 
-*   *`fail_on_error`*
+* *`fail_on_error`*
 
     If true (the default when omitted) then an error thrown on the remote side of the connection causes an error to also be thrown locally. If false, the remote error is locally reported as a NOTICE, and the function's return value is set to `ERROR`.
 

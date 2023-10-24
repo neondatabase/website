@@ -10,23 +10,23 @@
 
 **Table of Contents**
 
-*   *   [52.1. The Path of a Query](query-path.html)
-    *   [52.2. How Connections Are Established](connect-estab.html)
-    *   [52.3. The Parser Stage](parser-stage.html)
+  * *   [52.1. The Path of a Query](query-path.html)
+* [52.2. How Connections Are Established](connect-estab.html)
+* [52.3. The Parser Stage](parser-stage.html)
 
     <!---->
 
-    *   *   [52.3.1. Parser](parser-stage.html#PARSER-STAGE-PARSER)
-        *   [52.3.2. Transformation Process](parser-stage.html#PARSER-STAGE-TRANSFORMATION-PROCESS)
+  * *   [52.3.1. Parser](parser-stage.html#PARSER-STAGE-PARSER)
+  * [52.3.2. Transformation Process](parser-stage.html#PARSER-STAGE-TRANSFORMATION-PROCESS)
 
-*   *   [52.4. The PostgreSQL Rule System](rule-system.html)
-    *   [52.5. Planner/Optimizer](planner-optimizer.html)
+      * *   [52.4. The PostgreSQL Rule System](rule-system.html)
+* [52.5. Planner/Optimizer](planner-optimizer.html)
 
     <!---->
 
-    *   [52.5.1. Generating Possible Plans](planner-optimizer.html#PLANNER-OPTIMIZER-GENERATING-POSSIBLE-PLANS)
+* [52.5.1. Generating Possible Plans](planner-optimizer.html#PLANNER-OPTIMIZER-GENERATING-POSSIBLE-PLANS)
 
-*   [52.6. Executor](executor.html)
+* [52.6. Executor](executor.html)
 
 ### Author
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## COPY
 
 COPY — copy data between a file and a table
@@ -50,97 +48,97 @@ Each backend running `COPY` will report its progress in the `pg_stat_progress_co
 
 ## Parameters
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (optionally schema-qualified) of an existing table.
 
-*   *`column_name`*
+* *`column_name`*
 
     An optional list of columns to be copied. If no column list is specified, all columns of the table except generated columns will be copied.
 
-*   *`query`*
+* *`query`*
 
     A [`SELECT`](sql-select.html "SELECT"), [`VALUES`](sql-values.html "VALUES"), [`INSERT`](sql-insert.html "INSERT"), [`UPDATE`](sql-update.html "UPDATE"), or [`DELETE`](sql-delete.html "DELETE") command whose results are to be copied. Note that parentheses are required around the query.
 
     For `INSERT`, `UPDATE` and `DELETE` queries a RETURNING clause must be provided, and the target relation must not have a conditional rule, nor an `ALSO` rule, nor an `INSTEAD` rule that expands to multiple statements.
 
-*   *`filename`*
+* *`filename`*
 
     The path name of the input or output file. An input file name can be an absolute or relative path, but an output file name must be an absolute path. Windows users might need to use an `E''` string and double any backslashes used in the path name.
 
-*   `PROGRAM`
+* `PROGRAM`
 
     A command to execute. In `COPY FROM`, the input is read from standard output of the command, and in `COPY TO`, the output is written to the standard input of the command.
 
     Note that the command is invoked by the shell, so if you need to pass any arguments that come from an untrusted source, you must be careful to strip or escape any special characters that might have a special meaning for the shell. For security reasons, it is best to use a fixed command string, or at least avoid including any user input in it.
 
-*   `STDIN`
+* `STDIN`
 
     Specifies that input comes from the client application.
 
-*   `STDOUT`
+* `STDOUT`
 
     Specifies that output goes to the client application.
 
-*   *`boolean`*
+* *`boolean`*
 
     Specifies whether the selected option should be turned on or off. You can write `TRUE`, `ON`, or `1` to enable the option, and `FALSE`, `OFF`, or `0` to disable it. The *`boolean`* value can also be omitted, in which case `TRUE` is assumed.
 
-*   `FORMAT`
+* `FORMAT`
 
     Selects the data format to be read or written: `text`, `csv` (Comma Separated Values), or `binary`. The default is `text`.
 
-*   `FREEZE`
+* `FREEZE`
 
     Requests copying the data with rows already frozen, just as they would be after running the `VACUUM FREEZE` command. This is intended as a performance option for initial data loading. Rows will be frozen only if the table being loaded has been created or truncated in the current subtransaction, there are no cursors open and there are no older snapshots held by this transaction. It is currently not possible to perform a `COPY FREEZE` on a partitioned table.
 
     Note that all other sessions will immediately be able to see the data once it has been successfully loaded. This violates the normal rules of MVCC visibility and users should be aware of the potential problems this might cause.
 
-*   `DELIMITER`
+* `DELIMITER`
 
     Specifies the character that separates columns within each row (line) of the file. The default is a tab character in text format, a comma in `CSV` format. This must be a single one-byte character. This option is not allowed when using `binary` format.
 
-*   `NULL`
+* `NULL`
 
     Specifies the string that represents a null value. The default is `\N` (backslash-N) in text format, and an unquoted empty string in `CSV` format. You might prefer an empty string even in text format for cases where you don't want to distinguish nulls from empty strings. This option is not allowed when using `binary` format.
 
-    ### Note
+### Note
 
     When using `COPY FROM`, any data item that matches this string will be stored as a null value, so you should make sure that you use the same string as you used with `COPY TO`.
 
-*   `DEFAULT`
+* `DEFAULT`
 
     Specifies the string that represents a default value. Each time the string is found in the input file, the default value of the corresponding column will be used. This option is allowed only in `COPY FROM`, and only when not using `binary` format.
 
-*   `HEADER`
+* `HEADER`
 
     Specifies that the file contains a header line with the names of each column in the file. On output, the first line contains the column names from the table. On input, the first line is discarded when this option is set to `true` (or equivalent Boolean value). If this option is set to `MATCH`, the number and names of the columns in the header line must match the actual column names of the table, in order; otherwise an error is raised. This option is not allowed when using `binary` format. The `MATCH` option is only valid for `COPY FROM` commands.
 
-*   `QUOTE`
+* `QUOTE`
 
     Specifies the quoting character to be used when a data value is quoted. The default is double-quote. This must be a single one-byte character. This option is allowed only when using `CSV` format.
 
-*   `ESCAPE`
+* `ESCAPE`
 
     Specifies the character that should appear before a data character that matches the `QUOTE` value. The default is the same as the `QUOTE` value (so that the quoting character is doubled if it appears in the data). This must be a single one-byte character. This option is allowed only when using `CSV` format.
 
-*   `FORCE_QUOTE`
+* `FORCE_QUOTE`
 
     Forces quoting to be used for all non-`NULL` values in each specified column. `NULL` output is never quoted. If `*` is specified, non-`NULL` values will be quoted in all columns. This option is allowed only in `COPY TO`, and only when using `CSV` format.
 
-*   `FORCE_NOT_NULL`
+* `FORCE_NOT_NULL`
 
     Do not match the specified columns' values against the null string. In the default case where the null string is empty, this means that empty values will be read as zero-length strings rather than nulls, even when they are not quoted. If `*` is specified, the option will be applied to all columns. This option is allowed only in `COPY FROM`, and only when using `CSV` format.
 
-*   `FORCE_NULL`
+* `FORCE_NULL`
 
     Match the specified columns' values against the null string, even if it has been quoted, and if a match is found set the value to `NULL`. In the default case where the null string is empty, this converts a quoted empty string into NULL. If `*` is specified, the option will be applied to all columns. This option is allowed only in `COPY FROM`, and only when using `CSV` format.
 
-*   `ENCODING`
+* `ENCODING`
 
     Specifies that the file is encoded in the *`encoding_name`*. If this option is omitted, the current client encoding is used. See the Notes below for more details.
 
-*   `WHERE`
+* `WHERE`
 
     The optional `WHERE` clause has the general form
 
@@ -263,19 +261,19 @@ PostgreSQL releases before 7.4 used a different binary file format.
 
 The file header consists of 15 bytes of fixed fields, followed by a variable-length header extension area. The fixed fields are:
 
-*   Signature
+* Signature
 
     11-byte sequence `PGCOPY\n\377\r\n\0` — note that the zero byte is a required part of the signature. (The signature is designed to allow easy identification of files that have been munged by a non-8-bit-clean transfer. This signature will be changed by end-of-line-translation filters, dropped zero bytes, dropped high bits, or parity changes.)
 
-*   Flags field
+* Flags field
 
     32-bit integer bit mask to denote important aspects of the file format. Bits are numbered from 0 (LSB) to 31 (MSB). Note that this field is stored in network byte order (most significant byte first), as are all the integer fields used in the file format. Bits 16–31 are reserved to denote critical file format issues; a reader should abort if it finds an unexpected bit set in this range. Bits 0–15 are reserved to signal backwards-compatible format issues; a reader should simply ignore any unexpected bits set in this range. Currently only one flag bit is defined, and the rest must be zero:
 
-    *   Bit 16
+  * Bit 16
 
         If 1, OIDs are included in the data; if 0, not. Oid system columns are not supported in PostgreSQL anymore, but the format still contains the indicator.
 
-*   Header extension area length
+* Header extension area length
 
     32-bit integer, length in bytes of remainder of header, not including self. Currently, this is zero, and the first tuple follows immediately. Future changes to the format might allow additional data to be present in the header. A reader should silently skip over any header extension data it does not know what to do with.
 

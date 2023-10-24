@@ -8,14 +8,12 @@
 
 ## 24.1. Locale Support [#](#LOCALE)
 
-*   *   [24.1.1. Overview](locale.html#LOCALE-OVERVIEW)
-    *   [24.1.2. Behavior](locale.html#LOCALE-BEHAVIOR)
-    *   [24.1.3. Selecting Locales](locale.html#LOCALE-SELECTING-LOCALES)
-    *   [24.1.4. Locale Providers](locale.html#LOCALE-PROVIDERS)
-    *   [24.1.5. ICU Locales](locale.html#ICU-LOCALES)
-    *   [24.1.6. Problems](locale.html#LOCALE-PROBLEMS)
-
-[]()
+  * *   [24.1.1. Overview](locale.html#LOCALE-OVERVIEW)
+* [24.1.2. Behavior](locale.html#LOCALE-BEHAVIOR)
+* [24.1.3. Selecting Locales](locale.html#LOCALE-SELECTING-LOCALES)
+* [24.1.4. Locale Providers](locale.html#LOCALE-PROVIDERS)
+* [24.1.5. ICU Locales](locale.html#ICU-LOCALES)
+* [24.1.6. Problems](locale.html#LOCALE-PROBLEMS)
 
 *Locale* support refers to an application respecting cultural preferences regarding alphabets, sorting, number formatting, etc. PostgreSQL uses the standard ISO C and POSIX locale facilities provided by the server operating system. For additional information refer to the documentation of your system.
 
@@ -62,11 +60,11 @@ To enable messages to be translated to the user's preferred language, NLS must h
 
 The locale settings influence the following SQL features:
 
-*   Sort order in queries using `ORDER BY` or the standard comparison operators on textual data[]()
-*   The `upper`, `lower`, and `initcap` functions[]()[]()
-*   Pattern matching operators (`LIKE`, `SIMILAR TO`, and POSIX-style regular expressions); locales affect both case insensitive matching and the classification of characters by character-class regular expressions[]()[]()
-*   The `to_char` family of functions[]()
-*   The ability to use indexes with `LIKE` clauses
+* Sort order in queries using `ORDER BY` or the standard comparison operators on textual data
+* The `upper`, `lower`, and `initcap` functions
+* Pattern matching operators (`LIKE`, `SIMILAR TO`, and POSIX-style regular expressions); locales affect both case insensitive matching and the classification of characters by character-class regular expressions
+* The `to_char` family of functions
+* The ability to use indexes with `LIKE` clauses
 
 The drawback of using locales other than `C` or `POSIX` in PostgreSQL is its performance impact. It slows character handling and prevents ordinary indexes from being used by `LIKE`. For this reason use locales only if you actually need them.
 
@@ -76,15 +74,15 @@ As a workaround to allow PostgreSQL to use indexes with `LIKE` clauses under a n
 
 Locales can be selected in different scopes depending on requirements. The above overview showed how locales are specified using `initdb` to set the defaults for the entire cluster. The following list shows where locales can be selected. Each item provides the defaults for the subsequent items, and each lower item allows overriding the defaults on a finer granularity.
 
-1.  As explained above, the environment of the operating system provides the defaults for the locales of a newly initialized database cluster. In many cases, this is enough: If the operating system is configured for the desired language/territory, then PostgreSQL will by default also behave according to that locale.
-2.  As shown above, command-line options for `initdb` specify the locale settings for a newly initialized database cluster. Use this if the operating system does not have the locale configuration you want for your database system.
-3.  A locale can be selected separately for each database. The SQL command `CREATE DATABASE` and its command-line equivalent `createdb` have options for that. Use this for example if a database cluster houses databases for multiple tenants with different requirements.
-4.  Locale settings can be made for individual table columns. This uses an SQL object called *collation* and is explained in [Section 24.2](collation.html "24.2. Collation Support"). Use this for example to sort data in different languages or customize the sort order of a particular table.
-5.  Finally, locales can be selected for an individual query. Again, this uses SQL collation objects. This could be used to change the sort order based on run-time choices or for ad-hoc experimentation.
+1. As explained above, the environment of the operating system provides the defaults for the locales of a newly initialized database cluster. In many cases, this is enough: If the operating system is configured for the desired language/territory, then PostgreSQL will by default also behave according to that locale.
+2. As shown above, command-line options for `initdb` specify the locale settings for a newly initialized database cluster. Use this if the operating system does not have the locale configuration you want for your database system.
+3. A locale can be selected separately for each database. The SQL command `CREATE DATABASE` and its command-line equivalent `createdb` have options for that. Use this for example if a database cluster houses databases for multiple tenants with different requirements.
+4. Locale settings can be made for individual table columns. This uses an SQL object called *collation* and is explained in [Section 24.2](collation.html "24.2. Collation Support"). Use this for example to sort data in different languages or customize the sort order of a particular table.
+5. Finally, locales can be selected for an individual query. Again, this uses SQL collation objects. This could be used to change the sort order based on run-time choices or for ad-hoc experimentation.
 
 ### 24.1.4. Locale Providers [#](#LOCALE-PROVIDERS)
 
-PostgreSQL supports multiple *locale providers*. This specifies which library supplies the locale data. One standard provider name is `libc`, which uses the locales provided by the operating system C library. These are the locales used by most tools provided by the operating system. Another provider is `icu`, which uses the external ICU[]() library. ICU locales can only be used if support for ICU was configured when PostgreSQL was built.
+PostgreSQL supports multiple *locale providers*. This specifies which library supplies the locale data. One standard provider name is `libc`, which uses the locales provided by the operating system C library. These are the locales used by most tools provided by the operating system. Another provider is `icu`, which uses the external ICU library. ICU locales can only be used if support for ICU was configured when PostgreSQL was built.
 
 The commands and tools that select the locale settings, as described above, each have an option to select the locale provider. The examples shown earlier all use the `libc` provider, which is the default. Here is an example to initialize a database cluster using the ICU provider:
 

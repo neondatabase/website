@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_returntuple
 
 SPI\_returntuple — prepare to return a tuple as a Datum
@@ -26,11 +24,11 @@ Note that this should be used for functions that are declared to return composit
 
 ## Arguments
 
-*   `HeapTuple row`
+* `HeapTuple row`
 
     row to be copied
 
-*   `TupleDesc rowdesc`
+* `TupleDesc rowdesc`
 
     descriptor for row (pass the same descriptor each time for most effective caching)
 

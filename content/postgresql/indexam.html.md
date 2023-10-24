@@ -10,14 +10,12 @@
 
 **Table of Contents**
 
-*   *   [64.1. Basic API Structure for Indexes](index-api.html)
-    *   [64.2. Index Access Method Functions](index-functions.html)
-    *   [64.3. Index Scanning](index-scanning.html)
-    *   [64.4. Index Locking Considerations](index-locking.html)
-    *   [64.5. Index Uniqueness Checks](index-unique-checks.html)
-    *   [64.6. Index Cost Estimation Functions](index-cost-estimation.html)
-
-[]()[]()
+  * *   [64.1. Basic API Structure for Indexes](index-api.html)
+* [64.2. Index Access Method Functions](index-functions.html)
+* [64.3. Index Scanning](index-scanning.html)
+* [64.4. Index Locking Considerations](index-locking.html)
+* [64.5. Index Uniqueness Checks](index-unique-checks.html)
+* [64.6. Index Cost Estimation Functions](index-cost-estimation.html)
 
 This chapter defines the interface between the core PostgreSQL system and *index access methods*, which manage individual index types. The core system knows nothing about indexes beyond what is specified here, so it is possible to develop entirely new index types by writing add-on code.
 

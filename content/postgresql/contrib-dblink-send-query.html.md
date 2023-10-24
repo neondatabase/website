@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## dblink\_send\_query
 
 dblink\_send\_query — sends an async query to a remote database
@@ -24,11 +22,11 @@ After successfully dispatching an async query, completion status can be checked 
 
 ## Arguments
 
-*   *`connname`*
+* *`connname`*
 
     Name of the connection to use.
 
-*   *`sql`*
+* *`sql`*
 
     The SQL statement that you wish to execute in the remote database, for example `select * from pg_class`.
 

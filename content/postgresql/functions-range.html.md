@@ -32,7 +32,6 @@ See [Section 8.17](rangetypes.html "8.17. Range Types") for an overview of ran
 
 \
 
-
 **Table 9.56. Multirange Operators**
 
 | OperatorDescriptionExample(s)                                                                                                                                                                                              |
@@ -69,7 +68,6 @@ See [Section 8.17](rangetypes.html "8.17. Range Types") for an overview of ran
 
 \
 
-
 The left-of/right-of/adjacent operators always return false when an empty range or multirange is involved; that is, an empty range is not considered to be either before or after any other range.
 
 Elsewhere empty ranges and multiranges are treated as the additive identity: anything unioned with an empty value is itself. Anything minus an empty value is itself. An empty multirange has exactly the same points as an empty range. Every range contains the empty range. Every multirange contains as many empty ranges as you like.
@@ -82,35 +80,33 @@ The range union and difference operators will fail if the resulting range would 
 
 | FunctionDescriptionExample(s)                                                                                                                                                               |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| []()`lower` ( `anyrange` ) → `anyelement`Extracts the lower bound of the range (`NULL` if the range is empty or the lower bound is infinite).`lower(numrange(1.1,2.2))` → `1.1`             |
-| []()`upper` ( `anyrange` ) → `anyelement`Extracts the upper bound of the range (`NULL` if the range is empty or the upper bound is infinite).`upper(numrange(1.1,2.2))` → `2.2`             |
-| []()`isempty` ( `anyrange` ) → `boolean`Is the range empty?`isempty(numrange(1.1,2.2))` → `f`                                                                                               |
-| []()`lower_inc` ( `anyrange` ) → `boolean`Is the range's lower bound inclusive?`lower_inc(numrange(1.1,2.2))` → `t`                                                                         |
-| []()`upper_inc` ( `anyrange` ) → `boolean`Is the range's upper bound inclusive?`upper_inc(numrange(1.1,2.2))` → `f`                                                                         |
-| []()`lower_inf` ( `anyrange` ) → `boolean`Is the range's lower bound infinite?`lower_inf('(,)'::daterange)` → `t`                                                                           |
-| []()`upper_inf` ( `anyrange` ) → `boolean`Is the range's upper bound infinite?`upper_inf('(,)'::daterange)` → `t`                                                                           |
-| []()`range_merge` ( `anyrange`, `anyrange` ) → `anyrange`Computes the smallest range that includes both of the given ranges.`range_merge('[1,2)'::int4range, '[3,4)'::int4range)` → `[1,4)` |
+| `lower` ( `anyrange` ) → `anyelement`Extracts the lower bound of the range (`NULL` if the range is empty or the lower bound is infinite).`lower(numrange(1.1,2.2))` → `1.1`             |
+| `upper` ( `anyrange` ) → `anyelement`Extracts the upper bound of the range (`NULL` if the range is empty or the upper bound is infinite).`upper(numrange(1.1,2.2))` → `2.2`             |
+| `isempty` ( `anyrange` ) → `boolean`Is the range empty?`isempty(numrange(1.1,2.2))` → `f`                                                                                               |
+| `lower_inc` ( `anyrange` ) → `boolean`Is the range's lower bound inclusive?`lower_inc(numrange(1.1,2.2))` → `t`                                                                         |
+| `upper_inc` ( `anyrange` ) → `boolean`Is the range's upper bound inclusive?`upper_inc(numrange(1.1,2.2))` → `f`                                                                         |
+| `lower_inf` ( `anyrange` ) → `boolean`Is the range's lower bound infinite?`lower_inf('(,)'::daterange)` → `t`                                                                           |
+| `upper_inf` ( `anyrange` ) → `boolean`Is the range's upper bound infinite?`upper_inf('(,)'::daterange)` → `t`                                                                           |
+| `range_merge` ( `anyrange`, `anyrange` ) → `anyrange`Computes the smallest range that includes both of the given ranges.`range_merge('[1,2)'::int4range, '[3,4)'::int4range)` → `[1,4)` |
 
 \
-
 
 **Table 9.58. Multirange Functions**
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                       |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| []()`lower` ( `anymultirange` ) → `anyelement`Extracts the lower bound of the multirange (`NULL` if the multirange is empty or the lower bound is infinite).`lower('{[1.1,2.2)}'::nummultirange)` → `1.1`           |
-| []()`upper` ( `anymultirange` ) → `anyelement`Extracts the upper bound of the multirange (`NULL` if the multirange is empty or the upper bound is infinite).`upper('{[1.1,2.2)}'::nummultirange)` → `2.2`           |
-| []()`isempty` ( `anymultirange` ) → `boolean`Is the multirange empty?`isempty('{[1.1,2.2)}'::nummultirange)` → `f`                                                                                                  |
-| []()`lower_inc` ( `anymultirange` ) → `boolean`Is the multirange's lower bound inclusive?`lower_inc('{[1.1,2.2)}'::nummultirange)` → `t`                                                                            |
-| []()`upper_inc` ( `anymultirange` ) → `boolean`Is the multirange's upper bound inclusive?`upper_inc('{[1.1,2.2)}'::nummultirange)` → `f`                                                                            |
-| []()`lower_inf` ( `anymultirange` ) → `boolean`Is the multirange's lower bound infinite?`lower_inf('{(,)}'::datemultirange)` → `t`                                                                                  |
-| []()`upper_inf` ( `anymultirange` ) → `boolean`Is the multirange's upper bound infinite?`upper_inf('{(,)}'::datemultirange)` → `t`                                                                                  |
-| []()`range_merge` ( `anymultirange` ) → `anyrange`Computes the smallest range that includes the entire multirange.`range_merge('{[1,2), [3,4)}'::int4multirange)` → `[1,4)`                                         |
-| []()`multirange` ( `anyrange` ) → `anymultirange`Returns a multirange containing just the given range.`multirange('[1,2)'::int4range)` → `{[1,2)}`                                                                  |
-| []()`unnest` ( `anymultirange` ) → `setof anyrange`Expands a multirange into a set of ranges. The ranges are read out in storage order (ascending).`unnest('{[1,2), [3,4)}'::int4multirange)` →``     [1,2)  [3,4)  |
+| `lower` ( `anymultirange` ) → `anyelement`Extracts the lower bound of the multirange (`NULL` if the multirange is empty or the lower bound is infinite).`lower('{[1.1,2.2)}'::nummultirange)` → `1.1`           |
+| `upper` ( `anymultirange` ) → `anyelement`Extracts the upper bound of the multirange (`NULL` if the multirange is empty or the upper bound is infinite).`upper('{[1.1,2.2)}'::nummultirange)` → `2.2`           |
+| `isempty` ( `anymultirange` ) → `boolean`Is the multirange empty?`isempty('{[1.1,2.2)}'::nummultirange)` → `f`                                                                                                  |
+| `lower_inc` ( `anymultirange` ) → `boolean`Is the multirange's lower bound inclusive?`lower_inc('{[1.1,2.2)}'::nummultirange)` → `t`                                                                            |
+| `upper_inc` ( `anymultirange` ) → `boolean`Is the multirange's upper bound inclusive?`upper_inc('{[1.1,2.2)}'::nummultirange)` → `f`                                                                            |
+| `lower_inf` ( `anymultirange` ) → `boolean`Is the multirange's lower bound infinite?`lower_inf('{(,)}'::datemultirange)` → `t`                                                                                  |
+| `upper_inf` ( `anymultirange` ) → `boolean`Is the multirange's upper bound infinite?`upper_inf('{(,)}'::datemultirange)` → `t`                                                                                  |
+| `range_merge` ( `anymultirange` ) → `anyrange`Computes the smallest range that includes the entire multirange.`range_merge('{[1,2), [3,4)}'::int4multirange)` → `[1,4)`                                         |
+| `multirange` ( `anyrange` ) → `anymultirange`Returns a multirange containing just the given range.`multirange('[1,2)'::int4range)` → `{[1,2)}`                                                                  |
+| `unnest` ( `anymultirange` ) → `setof anyrange`Expands a multirange into a set of ranges. The ranges are read out in storage order (ascending).`unnest('{[1,2), [3,4)}'::int4multirange)` →``     [1,2)  [3,4)  |
 
 \
-
 
 The `lower_inc`, `upper_inc`, `lower_inf`, and `upper_inf` functions all return false for an empty range or multirange.
 

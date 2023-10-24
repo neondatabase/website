@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_getargtypeid
 
 SPI\_getargtypeid — return the data type OID for an argument of a statement prepared by `SPI_prepare`
@@ -22,11 +20,11 @@ SPI\_getargtypeid — return the data type OID for an argument of a statement pr
 
 ## Arguments
 
-*   `SPIPlanPtr plan`
+* `SPIPlanPtr plan`
 
     prepared statement (returned by `SPI_prepare`)
 
-*   `int argIndex`
+* `int argIndex`
 
     zero based index of the argument
 

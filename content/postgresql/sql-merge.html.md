@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## MERGE
 
 MERGE — conditionally insert, update, or delete rows of a table
@@ -59,35 +57,35 @@ There is no separate `MERGE` privilege. If you specify an update action, you mus
 
 ## Parameters
 
-*   *`target_table_name`*
+* *`target_table_name`*
 
     The name (optionally schema-qualified) of the target table to merge into. If `ONLY` is specified before the table name, matching rows are updated or deleted in the named table only. If `ONLY` is not specified, matching rows are also updated or deleted in any tables inheriting from the named table. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included. The `ONLY` keyword and `*` option do not affect insert actions, which always insert into the named table only.
 
-*   *`target_alias`*
+* *`target_alias`*
 
     A substitute name for the target table. When an alias is provided, it completely hides the actual name of the table. For example, given `MERGE INTO foo AS f`, the remainder of the `MERGE` statement must refer to this table as `f` not `foo`.
 
-*   *`source_table_name`*
+* *`source_table_name`*
 
     The name (optionally schema-qualified) of the source table, view, or transition table. If `ONLY` is specified before the table name, matching rows are included from the named table only. If `ONLY` is not specified, matching rows are also included from any tables inheriting from the named table. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included.
 
-*   *`source_query`*
+* *`source_query`*
 
     A query (`SELECT` statement or `VALUES` statement) that supplies the rows to be merged into the *`target_table_name`*. Refer to the [SELECT](sql-select.html "SELECT") statement or [VALUES](sql-values.html "VALUES") statement for a description of the syntax.
 
-*   *`source_alias`*
+* *`source_alias`*
 
     A substitute name for the data source. When an alias is provided, it completely hides the actual name of the table or the fact that a query was issued.
 
-*   *`join_condition`*
+* *`join_condition`*
 
     *`join_condition`* is an expression resulting in a value of type `boolean` (similar to a `WHERE` clause) that specifies which rows in the *`data_source`* match rows in the *`target_table_name`*.
 
-    ### Warning
+### Warning
 
     Only columns from *`target_table_name`* that attempt to match *`data_source`* rows should appear in *`join_condition`*. *`join_condition`* subexpressions that only reference *`target_table_name`* columns can affect which action is taken, often in surprising ways.
 
-*   *`when_clause`*
+* *`when_clause`*
 
     At least one `WHEN` clause is required.
 
@@ -95,13 +93,13 @@ There is no separate `MERGE` privilege. If you specify an update action, you mus
 
     Conversely, if the `WHEN` clause specifies `WHEN NOT MATCHED` and the candidate change row does not match a row in the *`target_table_name`*, the `WHEN` clause is executed if the *`condition`* is absent or it evaluates to `true`.
 
-*   *`condition`*
+* *`condition`*
 
     An expression that returns a value of type `boolean`. If this expression for a `WHEN` clause returns `true`, then the action for that clause is executed for that row.
 
     A condition on a `WHEN MATCHED` clause can refer to columns in both the source and the target relations. A condition on a `WHEN NOT MATCHED` clause can only refer to columns from the source relation, since by definition there is no matching target row. Only the system attributes from the target table are accessible.
 
-*   *`merge_insert`*
+* *`merge_insert`*
 
     The specification of an `INSERT` action that inserts one row into the target table. The target column names can be listed in any order. If no list of column names is given at all, the default is all the columns of the table in their declared order.
 
@@ -113,41 +111,41 @@ There is no separate `MERGE` privilege. If you specify an update action, you mus
 
     Only one `VALUES` clause can be specified. The `VALUES` clause can only refer to columns from the source relation, since by definition there is no matching target row.
 
-*   *`merge_update`*
+* *`merge_update`*
 
     The specification of an `UPDATE` action that updates the current row of the *`target_table_name`*. Column names may not be specified more than once.
 
     Neither a table name nor a `WHERE` clause are allowed.
 
-*   *`merge_delete`*
+* *`merge_delete`*
 
     Specifies a `DELETE` action that deletes the current row of the *`target_table_name`*. Do not include the table name or any other clauses, as you would normally do with a [DELETE](sql-delete.html "DELETE") command.
 
-*   *`column_name`*
+* *`column_name`*
 
     The name of a column in the *`target_table_name`*. The column name can be qualified with a subfield name or array subscript, if needed. (Inserting into only some fields of a composite column leaves the other fields null.) Do not include the table's name in the specification of a target column.
 
-*   `OVERRIDING SYSTEM VALUE`
+* `OVERRIDING SYSTEM VALUE`
 
     Without this clause, it is an error to specify an explicit value (other than `DEFAULT`) for an identity column defined as `GENERATED ALWAYS`. This clause overrides that restriction.
 
-*   `OVERRIDING USER VALUE`
+* `OVERRIDING USER VALUE`
 
     If this clause is specified, then any values supplied for identity columns defined as `GENERATED BY DEFAULT` are ignored and the default sequence-generated values are applied.
 
-*   `DEFAULT VALUES`
+* `DEFAULT VALUES`
 
     All columns will be filled with their default values. (An `OVERRIDING` clause is not permitted in this form.)
 
-*   *`expression`*
+* *`expression`*
 
     An expression to assign to the column. If used in a `WHEN MATCHED` clause, the expression can use values from the original row in the target table, and values from the `data_source` row. If used in a `WHEN NOT MATCHED` clause, the expression can use values from the `data_source`.
 
-*   `DEFAULT`
+* `DEFAULT`
 
     Set the column to its default value (which will be `NULL` if no specific default expression has been assigned to it).
 
-*   *`with_query`*
+* *`with_query`*
 
     The `WITH` clause allows you to specify one or more subqueries that can be referenced by name in the `MERGE` query. See [Section 7.8](queries-with.html "7.8. WITH Queries (Common Table Expressions)") and [SELECT](sql-select.html "SELECT") for details.
 
@@ -163,21 +161,21 @@ The *`total_count`* is the total number of rows changed (whether inserted, updat
 
 The following steps take place during the execution of `MERGE`.
 
-1.  Perform any `BEFORE STATEMENT` triggers for all actions specified, whether or not their `WHEN` clauses match.
+1. Perform any `BEFORE STATEMENT` triggers for all actions specified, whether or not their `WHEN` clauses match.
 
-2.  Perform a join from source to target table. The resulting query will be optimized normally and will produce a set of candidate change rows. For each candidate change row,
+2. Perform a join from source to target table. The resulting query will be optimized normally and will produce a set of candidate change rows. For each candidate change row,
 
-    1.  Evaluate whether each row is `MATCHED` or `NOT MATCHED`.
+    1. Evaluate whether each row is `MATCHED` or `NOT MATCHED`.
 
-    2.  Test each `WHEN` condition in the order specified until one returns true.
+    2. Test each `WHEN` condition in the order specified until one returns true.
 
-    3.  When a condition returns true, perform the following actions:
+    3. When a condition returns true, perform the following actions:
 
-        1.  Perform any `BEFORE ROW` triggers that fire for the action's event type.
-        2.  Perform the specified action, invoking any check constraints on the target table.
-        3.  Perform any `AFTER ROW` triggers that fire for the action's event type.
+        1. Perform any `BEFORE ROW` triggers that fire for the action's event type.
+        2. Perform the specified action, invoking any check constraints on the target table.
+        3. Perform any `AFTER ROW` triggers that fire for the action's event type.
 
-3.  Perform any `AFTER STATEMENT` triggers for actions specified, whether or not they actually occur. This is similar to the behavior of an `UPDATE` statement that modifies no rows.
+3. Perform any `AFTER STATEMENT` triggers for actions specified, whether or not they actually occur. This is similar to the behavior of an `UPDATE` statement that modifies no rows.
 
 In summary, statement triggers for an event type (say, `INSERT`) will be fired whenever we *specify* an action of that kind. In contrast, row-level triggers will fire only for the specific event type being *executed*. So a `MERGE` command might fire statement triggers for both `UPDATE` and `INSERT`, even though only `UPDATE` row triggers were fired.
 

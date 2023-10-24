@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DROP FOREIGN DATA WRAPPER
 
 DROP FOREIGN DATA WRAPPER — remove a foreign-data wrapper
@@ -22,19 +20,19 @@ DROP FOREIGN DATA WRAPPER — remove a foreign-data wrapper
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the foreign-data wrapper does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name of an existing foreign-data wrapper.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically drop objects that depend on the foreign-data wrapper (such as foreign tables and servers), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse to drop the foreign-data wrapper if any objects depend on it. This is the default.
 

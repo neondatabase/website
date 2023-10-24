@@ -22,11 +22,11 @@ This command is only recognized when `ecpg` is run with the `-c` option.
 
 ## Parameters
 
-*   *`type_name`* [#](#ECPG-SQL-TYPE-TYPE-NAME)
+* *`type_name`* [#](#ECPG-SQL-TYPE-TYPE-NAME)
 
     The name for the new type. It must be a valid C type name.
 
-*   *`ctype`* [#](#ECPG-SQL-TYPE-CTYPE)
+* *`ctype`* [#](#ECPG-SQL-TYPE-CTYPE)
 
     A C type specification.
 

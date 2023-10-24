@@ -8,10 +8,10 @@
 
 ## 17.3. Building and Installation with Autoconf and Make [#](#INSTALL-MAKE)
 
-*   *   [17.3.1. Short Version](install-make.html#INSTALL-SHORT-MAKE)
-    *   [17.3.2. Installation Procedure](install-make.html#INSTALL-PROCEDURE-MAKE)
-    *   [17.3.3. `configure` Options](install-make.html#CONFIGURE-OPTIONS)
-    *   [17.3.4. `configure` Environment Variables](install-make.html#CONFIGURE-ENVVARS)
+  * *   [17.3.1. Short Version](install-make.html#INSTALL-SHORT-MAKE)
+* [17.3.2. Installation Procedure](install-make.html#INSTALL-PROCEDURE-MAKE)
+* [17.3.3. `configure` Options](install-make.html#CONFIGURE-OPTIONS)
+* [17.3.4. `configure` Environment Variables](install-make.html#CONFIGURE-ENVVARS)
 
 ### 17.3.1. Short Version [#](#INSTALL-SHORT-MAKE)
 
@@ -32,9 +32,7 @@ The long version is the rest of this section.
 
 ### 17.3.2. Installation Procedure [#](#INSTALL-PROCEDURE-MAKE)
 
-1.  **Configuration**
-
-    []()
+1. **Configuration**
 
     The first step of the installation procedure is to configure the source tree for your system and choose the options you would like. This is done by running the `configure` script. For a default installation simply enter:
 
@@ -42,7 +40,7 @@ The long version is the rest of this section.
 
     This script will run a number of tests to determine values for various system dependent variables and detect any quirks of your operating system, and finally will create several files in the build tree to record what it found.
 
-    You can also run `configure` in a directory outside the source tree, and then build there, if you want to keep the build directory separate from the original source files. This procedure is called a []()*VPATH* build. Here's how:
+    You can also run `configure` in a directory outside the source tree, and then build there, if you want to keep the build directory separate from the original source files. This procedure is called a *VPATH* build. Here's how:
 
         mkdir build_dir
         cd build_dir
@@ -55,7 +53,7 @@ The long version is the rest of this section.
 
     Also, `configure` responds to certain environment variables, as described in [Section 17.3.4](install-make.html#CONFIGURE-ENVVARS "17.3.4. configure Environment Variables"). These provide additional ways to customize the configuration.
 
-2.  **Build**
+2. **Build**
 
     To start the build, type either of:
 
@@ -79,9 +77,7 @@ The long version is the rest of this section.
 
     Failure to do that can lead to strange error messages, typically about missing header files.
 
-3.  **Regression Tests**
-
-    []()
+3. **Regression Tests**
 
     If you want to test the newly built server before you install it, you can run the regression tests at this point. The regression tests are a test suite to verify that PostgreSQL runs on your machine in the way the developers expected it to. Type:
 
@@ -89,9 +85,9 @@ The long version is the rest of this section.
 
     (This won't work as root; do it as an unprivileged user.) See [Chapter 33](regress.html "Chapter 33. Regression Tests") for detailed information about interpreting the test results. You can repeat this test at any later time by issuing the same command.
 
-4.  **Installing the Files**
+4. **Installing the Files**
 
-    ### Note
+### Note
 
     If you are upgrading an existing system be sure to read [Section 19.6](upgrading.html "19.6. Upgrading a PostgreSQL Cluster"), which has instructions about upgrading a cluster.
 
@@ -119,7 +115,7 @@ The long version is the rest of this section.
 
     The standard installation provides all the header files needed for client application development as well as for server-side program development, such as custom functions or data types written in C.
 
-    **Client-only installation: ** If you want to install only the client applications and interface libraries, then you can use these commands:
+    **Client-only installation:** If you want to install only the client applications and interface libraries, then you can use these commands:
 
         make -C src/bin install
         make -C src/include install
@@ -128,15 +124,13 @@ The long version is the rest of this section.
 
     `src/bin` has a few binaries for server-only use, but they are small.
 
-**Uninstallation: ** To undo the installation use the command `make uninstall`. However, this will not remove any created directories.
+**Uninstallation:** To undo the installation use the command `make uninstall`. However, this will not remove any created directories.
 
-**Cleaning: ** After the installation you can free disk space by removing the built files from the source tree with the command `make clean`. This will preserve the files made by the `configure` program, so that you can rebuild everything with `make` later on. To reset the source tree to the state in which it was distributed, use `make distclean`. If you are going to build for several platforms within the same source tree you must do this and re-configure for each platform. (Alternatively, use a separate build tree for each platform, so that the source tree remains unmodified.)
+**Cleaning:** After the installation you can free disk space by removing the built files from the source tree with the command `make clean`. This will preserve the files made by the `configure` program, so that you can rebuild everything with `make` later on. To reset the source tree to the state in which it was distributed, use `make distclean`. If you are going to build for several platforms within the same source tree you must do this and re-configure for each platform. (Alternatively, use a separate build tree for each platform, so that the source tree remains unmodified.)
 
 If you perform a build and then discover that your `configure` options were wrong, or if you change anything that `configure` investigates (for example, software upgrades), then it's a good idea to do `make distclean` before reconfiguring and rebuilding. Without this, your changes in configuration choices might not propagate everywhere they need to.
 
 ### 17.3.3. `configure` Options [#](#CONFIGURE-OPTIONS)
-
-[]()
 
 `configure`'s command line options are explained below. This list is not exhaustive (use `./configure --help` to get one that is). The options not covered here are meant for advanced use-cases such as cross-compilation, and are documented in the standard Autoconf documentation.
 
@@ -144,51 +138,51 @@ If you perform a build and then discover that your `configure` options were wron
 
 These options control where `make install` will put the files. The `--prefix` option is sufficient for most cases. If you have special needs, you can customize the installation subdirectories with the other options described in this section. Beware however that changing the relative locations of the different subdirectories may render the installation non-relocatable, meaning you won't be able to move it after installation. (The `man` and `doc` locations are not affected by this restriction.) For relocatable installs, you might want to use the `--disable-rpath` option described later.
 
-*   `--prefix=PREFIX` [#](#CONFIGURE-OPTION-PREFIX)
+* `--prefix=PREFIX` [#](#CONFIGURE-OPTION-PREFIX)
 
     Install all files under the directory *`PREFIX`* instead of `/usr/local/pgsql`. The actual files will be installed into various subdirectories; no files will ever be installed directly into the *`PREFIX`* directory.
 
-*   `--exec-prefix=EXEC-PREFIX` [#](#CONFIGURE-OPTION-EXEC-PREFIX)
+* `--exec-prefix=EXEC-PREFIX` [#](#CONFIGURE-OPTION-EXEC-PREFIX)
 
     You can install architecture-dependent files under a different prefix, *`EXEC-PREFIX`*, than what *`PREFIX`* was set to. This can be useful to share architecture-independent files between hosts. If you omit this, then *`EXEC-PREFIX`* is set equal to *`PREFIX`* and both architecture-dependent and independent files will be installed under the same tree, which is probably what you want.
 
-*   `--bindir=DIRECTORY` [#](#CONFIGURE-OPTION-BINDIR)
+* `--bindir=DIRECTORY` [#](#CONFIGURE-OPTION-BINDIR)
 
     Specifies the directory for executable programs. The default is `EXEC-PREFIX/bin`, which normally means `/usr/local/pgsql/bin`.
 
-*   `--sysconfdir=DIRECTORY` [#](#CONFIGURE-OPTION-SYSCONFDIR)
+* `--sysconfdir=DIRECTORY` [#](#CONFIGURE-OPTION-SYSCONFDIR)
 
     Sets the directory for various configuration files, `PREFIX/etc` by default.
 
-*   `--libdir=DIRECTORY` [#](#CONFIGURE-OPTION-LIBDIR)
+* `--libdir=DIRECTORY` [#](#CONFIGURE-OPTION-LIBDIR)
 
     Sets the location to install libraries and dynamically loadable modules. The default is `EXEC-PREFIX/lib`.
 
-*   `--includedir=DIRECTORY` [#](#CONFIGURE-OPTION-INCLUDEDIR)
+* `--includedir=DIRECTORY` [#](#CONFIGURE-OPTION-INCLUDEDIR)
 
     Sets the directory for installing C and C++ header files. The default is `PREFIX/include`.
 
-*   `--datarootdir=DIRECTORY` [#](#CONFIGURE-OPTION-DATAROOTDIR)
+* `--datarootdir=DIRECTORY` [#](#CONFIGURE-OPTION-DATAROOTDIR)
 
     Sets the root directory for various types of read-only data files. This only sets the default for some of the following options. The default is `PREFIX/share`.
 
-*   `--datadir=DIRECTORY` [#](#CONFIGURE-OPTION-DATADIR)
+* `--datadir=DIRECTORY` [#](#CONFIGURE-OPTION-DATADIR)
 
     Sets the directory for read-only data files used by the installed programs. The default is `DATAROOTDIR`. Note that this has nothing to do with where your database files will be placed.
 
-*   `--localedir=DIRECTORY` [#](#CONFIGURE-OPTION-LOCALEDIR)
+* `--localedir=DIRECTORY` [#](#CONFIGURE-OPTION-LOCALEDIR)
 
     Sets the directory for installing locale data, in particular message translation catalog files. The default is `DATAROOTDIR/locale`.
 
-*   `--mandir=DIRECTORY` [#](#CONFIGURE-OPTION-MANDIR)
+* `--mandir=DIRECTORY` [#](#CONFIGURE-OPTION-MANDIR)
 
     The man pages that come with PostgreSQL will be installed under this directory, in their respective `manx` subdirectories. The default is `DATAROOTDIR/man`.
 
-*   `--docdir=DIRECTORY` [#](#CONFIGURE-OPTION-DOCDIR)
+* `--docdir=DIRECTORY` [#](#CONFIGURE-OPTION-DOCDIR)
 
     Sets the root directory for installing documentation files, except “man” pages. This only sets the default for the following options. The default value for this option is `DATAROOTDIR/doc/postgresql`.
 
-*   `--htmldir=DIRECTORY` [#](#CONFIGURE-OPTION-HTMLDIR)
+* `--htmldir=DIRECTORY` [#](#CONFIGURE-OPTION-HTMLDIR)
 
     The HTML-formatted documentation for PostgreSQL will be installed under this directory. The default is `DATAROOTDIR`.
 
@@ -200,91 +194,91 @@ Care has been taken to make it possible to install PostgreSQL into shared instal
 
 The options described in this section enable building of various PostgreSQL features that are not built by default. Most of these are non-default only because they require additional software, as described in [Section 17.1](install-requirements.html "17.1. Requirements").
 
-*   `--enable-nls[=LANGUAGES]` [#](#CONFIGURE-OPTION-ENABLE-NLS)
+* `--enable-nls[=LANGUAGES]` [#](#CONFIGURE-OPTION-ENABLE-NLS)
 
     Enables Native Language Support (NLS), that is, the ability to display a program's messages in a language other than English. *`LANGUAGES`* is an optional space-separated list of codes of the languages that you want supported, for example `--enable-nls='de fr'`. (The intersection between your list and the set of actually provided translations will be computed automatically.) If you do not specify a list, then all available translations are installed.
 
     To use this option, you will need an implementation of the Gettext API.
 
-*   `--with-perl` [#](#CONFIGURE-OPTION-WITH-PERL)
+* `--with-perl` [#](#CONFIGURE-OPTION-WITH-PERL)
 
     Build the PL/Perl server-side language.
 
-*   `--with-python` [#](#CONFIGURE-OPTION-WITH-PYTHON)
+* `--with-python` [#](#CONFIGURE-OPTION-WITH-PYTHON)
 
     Build the PL/Python server-side language.
 
-*   `--with-tcl` [#](#CONFIGURE-OPTION-WITH-TCL)
+* `--with-tcl` [#](#CONFIGURE-OPTION-WITH-TCL)
 
     Build the PL/Tcl server-side language.
 
-*   `--with-tclconfig=DIRECTORY` [#](#CONFIGURE-OPTION-WITH-TCLCONFIG)
+* `--with-tclconfig=DIRECTORY` [#](#CONFIGURE-OPTION-WITH-TCLCONFIG)
 
     Tcl installs the file `tclConfig.sh`, which contains configuration information needed to build modules interfacing to Tcl. This file is normally found automatically at a well-known location, but if you want to use a different version of Tcl you can specify the directory in which to look for `tclConfig.sh`.
 
-*   `--with-llvm` [#](#CONFIGURE-WITH-LLVM)
+* `--with-llvm` [#](#CONFIGURE-WITH-LLVM)
 
     Build with support for LLVM based JIT compilation (see [Chapter 32](jit.html "Chapter 32. Just-in-Time Compilation (JIT)")). This requires the LLVM library to be installed. The minimum required version of LLVM is currently 3.9.
 
-    `llvm-config`[]() will be used to find the required compilation options. `llvm-config`, and then `llvm-config-$major-$minor` for all supported versions, will be searched for in your `PATH`. If that would not yield the desired program, use `LLVM_CONFIG` to specify a path to the correct `llvm-config`. For example
+    `llvm-config` will be used to find the required compilation options. `llvm-config`, and then `llvm-config-$major-$minor` for all supported versions, will be searched for in your `PATH`. If that would not yield the desired program, use `LLVM_CONFIG` to specify a path to the correct `llvm-config`. For example
 
         ./configure ... --with-llvm LLVM_CONFIG='/path/to/llvm/bin/llvm-config'
 
     LLVM support requires a compatible `clang` compiler (specified, if necessary, using the `CLANG` environment variable), and a working C++ compiler (specified, if necessary, using the `CXX` environment variable).
 
-*   `--with-lz4` [#](#CONFIGURE-OPTION-WITH-LZ4)
+* `--with-lz4` [#](#CONFIGURE-OPTION-WITH-LZ4)
 
     Build with LZ4 compression support.
 
-*   `--with-zstd` [#](#CONFIGURE-OPTION-WITH-ZSTD)
+* `--with-zstd` [#](#CONFIGURE-OPTION-WITH-ZSTD)
 
     Build with Zstandard compression support.
 
-*   `--with-ssl=LIBRARY` []()[#](#CONFIGURE-OPTION-WITH-SSL)
+* `--with-ssl=LIBRARY` [#](#CONFIGURE-OPTION-WITH-SSL)
 
     Build with support for SSL (encrypted) connections. The only *`LIBRARY`* supported is `openssl`. This requires the OpenSSL package to be installed. `configure` will check for the required header files and libraries to make sure that your OpenSSL installation is sufficient before proceeding.
 
-*   `--with-openssl` [#](#CONFIGURE-OPTION-WITH-OPENSSL)
+* `--with-openssl` [#](#CONFIGURE-OPTION-WITH-OPENSSL)
 
     Obsolete equivalent of `--with-ssl=openssl`.
 
-*   `--with-gssapi` [#](#CONFIGURE-OPTION-WITH-GSSAPI)
+* `--with-gssapi` [#](#CONFIGURE-OPTION-WITH-GSSAPI)
 
     Build with support for GSSAPI authentication. MIT Kerberos is required to be installed for GSSAPI. On many systems, the GSSAPI system (a part of the MIT Kerberos installation) is not installed in a location that is searched by default (e.g., `/usr/include`, `/usr/lib`), so you must use the options `--with-includes` and `--with-libraries` in addition to this option. `configure` will check for the required header files and libraries to make sure that your GSSAPI installation is sufficient before proceeding.
 
-*   `--with-ldap` [#](#CONFIGURE-OPTION-WITH-LDAP)
+* `--with-ldap` [#](#CONFIGURE-OPTION-WITH-LDAP)
 
-    Build with LDAP[]() support for authentication and connection parameter lookup (see [Section 34.18](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters") and [Section 21.10](auth-ldap.html "21.10. LDAP Authentication") for more information). On Unix, this requires the OpenLDAP package to be installed. On Windows, the default WinLDAP library is used. `configure` will check for the required header files and libraries to make sure that your OpenLDAP installation is sufficient before proceeding.
+    Build with LDAP support for authentication and connection parameter lookup (see [Section 34.18](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters") and [Section 21.10](auth-ldap.html "21.10. LDAP Authentication") for more information). On Unix, this requires the OpenLDAP package to be installed. On Windows, the default WinLDAP library is used. `configure` will check for the required header files and libraries to make sure that your OpenLDAP installation is sufficient before proceeding.
 
-*   `--with-pam` [#](#CONFIGURE-OPTION-WITH-PAM)
+* `--with-pam` [#](#CONFIGURE-OPTION-WITH-PAM)
 
-    Build with PAM[]() (Pluggable Authentication Modules) support.
+    Build with PAM (Pluggable Authentication Modules) support.
 
-*   `--with-bsd-auth` [#](#CONFIGURE-OPTION-WITH-BSD-AUTH)
+* `--with-bsd-auth` [#](#CONFIGURE-OPTION-WITH-BSD-AUTH)
 
     Build with BSD Authentication support. (The BSD Authentication framework is currently only available on OpenBSD.)
 
-*   `--with-systemd` [#](#CONFIGURE-OPTION-WITH-SYSTEMD)
+* `--with-systemd` [#](#CONFIGURE-OPTION-WITH-SYSTEMD)
 
-    Build with support for systemd[]() service notifications. This improves integration if the server is started under systemd but has no impact otherwise; see [Section 19.3](server-start.html "19.3. Starting the Database Server") for more information. libsystemd and the associated header files need to be installed to use this option.
+    Build with support for systemd service notifications. This improves integration if the server is started under systemd but has no impact otherwise; see [Section 19.3](server-start.html "19.3. Starting the Database Server") for more information. libsystemd and the associated header files need to be installed to use this option.
 
-*   `--with-bonjour` [#](#CONFIGURE-OPTION-WITH-BONJOUR)
+* `--with-bonjour` [#](#CONFIGURE-OPTION-WITH-BONJOUR)
 
     Build with support for Bonjour automatic service discovery. This requires Bonjour support in your operating system. Recommended on macOS.
 
-*   `--with-uuid=LIBRARY` [#](#CONFIGURE-OPTION-WITH-UUID)
+* `--with-uuid=LIBRARY` [#](#CONFIGURE-OPTION-WITH-UUID)
 
-    Build the [uuid-ossp](uuid-ossp.html "F.48. uuid-ossp — a UUID generator") module (which provides functions to generate UUIDs), using the specified UUID library.[]() *`LIBRARY`* must be one of:
+    Build the [uuid-ossp](uuid-ossp.html "F.48. uuid-ossp — a UUID generator") module (which provides functions to generate UUIDs), using the specified UUID library. *`LIBRARY`* must be one of:
 
-    *   `bsd` to use the UUID functions found in FreeBSD and some other BSD-derived systems
-    *   `e2fs` to use the UUID library created by the `e2fsprogs` project; this library is present in most Linux systems and in macOS, and can be obtained for other platforms as well
-    *   `ossp` to use the [OSSP UUID library](http://www.ossp.org/pkg/lib/uuid/)
+  * `bsd` to use the UUID functions found in FreeBSD and some other BSD-derived systems
+  * `e2fs` to use the UUID library created by the `e2fsprogs` project; this library is present in most Linux systems and in macOS, and can be obtained for other platforms as well
+  * `ossp` to use the [OSSP UUID library](http://www.ossp.org/pkg/lib/uuid/)
 
-*   `--with-ossp-uuid` [#](#CONFIGURE-OPTION-WITH-OSSP-UUID)
+* `--with-ossp-uuid` [#](#CONFIGURE-OPTION-WITH-OSSP-UUID)
 
     Obsolete equivalent of `--with-uuid=ossp`.
 
-*   `--with-libxml` [#](#CONFIGURE-OPTION-WITH-LIBXML)
+* `--with-libxml` [#](#CONFIGURE-OPTION-WITH-LIBXML)
 
     Build with libxml2, enabling SQL/XML support. Libxml2 version 2.6.23 or later is required for this feature.
 
@@ -292,7 +286,7 @@ The options described in this section enable building of various PostgreSQL feat
 
     To use a libxml2 installation that is in an unusual location, you can set `pkg-config`-related environment variables (see its documentation), or set the environment variable `XML2_CONFIG` to point to the `xml2-config` program belonging to the libxml2 installation, or set the variables `XML2_CFLAGS` and `XML2_LIBS`. (If `pkg-config` is installed, then to override its idea of where libxml2 is you must either set `XML2_CONFIG` or set both `XML2_CFLAGS` and `XML2_LIBS` to nonempty strings.)
 
-*   `--with-libxslt` [#](#CONFIGURE-OPTION-WITH-LIBXSLT)
+* `--with-libxslt` [#](#CONFIGURE-OPTION-WITH-LIBXSLT)
 
     Build with libxslt, enabling the [xml2](xml2.html "F.49. xml2 — XPath querying and XSLT functionality") module to perform XSL transformations of XML. `--with-libxml` must be specified as well.
 
@@ -300,57 +294,55 @@ The options described in this section enable building of various PostgreSQL feat
 
 The options described in this section allow disabling certain PostgreSQL features that are built by default, but which might need to be turned off if the required software or system features are not available. Using these options is not recommended unless really necessary.
 
-*   `--without-icu` [#](#CONFIGURE-OPTION-WITHOUT-ICU)
+* `--without-icu` [#](#CONFIGURE-OPTION-WITHOUT-ICU)
 
-    Build without support for the ICU[]() library, disabling the use of ICU collation features (see [Section 24.2](collation.html "24.2. Collation Support")).
+    Build without support for the ICU library, disabling the use of ICU collation features (see [Section 24.2](collation.html "24.2. Collation Support")).
 
-*   `--without-readline` [#](#CONFIGURE-OPTION-WITHOUT-READLINE)
+* `--without-readline` [#](#CONFIGURE-OPTION-WITHOUT-READLINE)
 
     Prevents use of the Readline library (and libedit as well). This option disables command-line editing and history in psql.
 
-*   `--with-libedit-preferred` [#](#CONFIGURE-OPTION-WITH-LIBEDIT-PREFERRED)
+* `--with-libedit-preferred` [#](#CONFIGURE-OPTION-WITH-LIBEDIT-PREFERRED)
 
     Favors the use of the BSD-licensed libedit library rather than GPL-licensed Readline. This option is significant only if you have both libraries installed; the default in that case is to use Readline.
 
-*   `--without-zlib` [#](#CONFIGURE-OPTION-WITHOUT-ZLIB)
+* `--without-zlib` [#](#CONFIGURE-OPTION-WITHOUT-ZLIB)
 
-    []()Prevents use of the Zlib library. This disables support for compressed archives in pg\_dump and pg\_restore.
+    Prevents use of the Zlib library. This disables support for compressed archives in pg\_dump and pg\_restore.
 
-*   `--disable-spinlocks` [#](#CONFIGURE-OPTION-DISABLE-SPINLOCKS)
+* `--disable-spinlocks` [#](#CONFIGURE-OPTION-DISABLE-SPINLOCKS)
 
     Allow the build to succeed even if PostgreSQL has no CPU spinlock support for the platform. The lack of spinlock support will result in very poor performance; therefore, this option should only be used if the build aborts and informs you that the platform lacks spinlock support. If this option is required to build PostgreSQL on your platform, please report the problem to the PostgreSQL developers.
 
-*   `--disable-atomics` [#](#CONFIGURE-OPTION-DISABLE-ATOMICS)
+* `--disable-atomics` [#](#CONFIGURE-OPTION-DISABLE-ATOMICS)
 
     Disable use of CPU atomic operations. This option does nothing on platforms that lack such operations. On platforms that do have them, this will result in poor performance. This option is only useful for debugging or making performance comparisons.
 
 #### 17.3.3.4. Build Process Details [#](#CONFIGURE-OPTIONS-BUILD-PROCESS)
 
-*   `--with-includes=DIRECTORIES` [#](#CONFIGURE-OPTION-WITH-INCLUDES)
+* `--with-includes=DIRECTORIES` [#](#CONFIGURE-OPTION-WITH-INCLUDES)
 
     *`DIRECTORIES`* is a colon-separated list of directories that will be added to the list the compiler searches for header files. If you have optional packages (such as GNU Readline) installed in a non-standard location, you have to use this option and probably also the corresponding `--with-libraries` option.
 
     Example: `--with-includes=/opt/gnu/include:/usr/sup/include`.
 
-*   `--with-libraries=DIRECTORIES` [#](#CONFIGURE-OPTION-WITH-LIBRARIES)
+* `--with-libraries=DIRECTORIES` [#](#CONFIGURE-OPTION-WITH-LIBRARIES)
 
     *`DIRECTORIES`* is a colon-separated list of directories to search for libraries. You will probably have to use this option (and the corresponding `--with-includes` option) if you have packages installed in non-standard locations.
 
     Example: `--with-libraries=/opt/gnu/lib:/usr/sup/lib`.
 
-*   `--with-system-tzdata=DIRECTORY` []()[#](#CONFIGURE-OPTION-WITH-SYSTEM-TZDATA)
+* `--with-system-tzdata=DIRECTORY` [#](#CONFIGURE-OPTION-WITH-SYSTEM-TZDATA)
 
     PostgreSQL includes its own time zone database, which it requires for date and time operations. This time zone database is in fact compatible with the IANA time zone database provided by many operating systems such as FreeBSD, Linux, and Solaris, so it would be redundant to install it again. When this option is used, the system-supplied time zone database in *`DIRECTORY`* is used instead of the one included in the PostgreSQL source distribution. *`DIRECTORY`* must be specified as an absolute path. `/usr/share/zoneinfo` is a likely directory on some operating systems. Note that the installation routine will not detect mismatching or erroneous time zone data. If you use this option, you are advised to run the regression tests to verify that the time zone data you have pointed to works correctly with PostgreSQL.
 
-    []()
-
     This option is mainly aimed at binary package distributors who know their target operating system well. The main advantage of using this option is that the PostgreSQL package won't need to be upgraded whenever any of the many local daylight-saving time rules change. Another advantage is that PostgreSQL can be cross-compiled more straightforwardly if the time zone database files do not need to be built during the installation.
 
-*   `--with-extra-version=STRING` [#](#CONFIGURE-OPTION-WITH-EXTRA-VERSION)
+* `--with-extra-version=STRING` [#](#CONFIGURE-OPTION-WITH-EXTRA-VERSION)
 
     Append *`STRING`* to the PostgreSQL version number. You can use this, for example, to mark binaries built from unreleased Git snapshots or containing custom patches with an extra version string, such as a `git describe` identifier or a distribution package release number.
 
-*   `--disable-rpath` [#](#CONFIGURE-OPTION-DISABLE-RPATH)
+* `--disable-rpath` [#](#CONFIGURE-OPTION-DISABLE-RPATH)
 
     Do not mark PostgreSQL's executables to indicate that they should search for shared libraries in the installation's library directory (see `--libdir`). On most platforms, this marking uses an absolute path to the library directory, so that it will be unhelpful if you relocate the installation later. However, you will then need to provide some other way for the executables to find the shared libraries. Typically this requires configuring the operating system's dynamic linker to search the library directory; see [Section 17.5.1](install-post.html#INSTALL-POST-SHLIBS "17.5.1. Shared Libraries") for more detail.
 
@@ -358,23 +350,23 @@ The options described in this section allow disabling certain PostgreSQL feature
 
 It's fairly common, particularly for test builds, to adjust the default port number with `--with-pgport`. The other options in this section are recommended only for advanced users.
 
-*   `--with-pgport=NUMBER` [#](#CONFIGURE-OPTION-WITH-PGPORT)
+* `--with-pgport=NUMBER` [#](#CONFIGURE-OPTION-WITH-PGPORT)
 
     Set *`NUMBER`* as the default port number for server and clients. The default is 5432. The port can always be changed later on, but if you specify it here then both server and clients will have the same default compiled in, which can be very convenient. Usually the only good reason to select a non-default value is if you intend to run multiple PostgreSQL servers on the same machine.
 
-*   `--with-krb-srvnam=NAME` [#](#CONFIGURE-OPTION-WITH-KRB-SRVNAM)
+* `--with-krb-srvnam=NAME` [#](#CONFIGURE-OPTION-WITH-KRB-SRVNAM)
 
     The default name of the Kerberos service principal used by GSSAPI. `postgres` is the default. There's usually no reason to change this unless you are building for a Windows environment, in which case it must be set to upper case `POSTGRES`.
 
-*   `--with-segsize=SEGSIZE` [#](#CONFIGURE-OPTION-WITH-SEGSIZE)
+* `--with-segsize=SEGSIZE` [#](#CONFIGURE-OPTION-WITH-SEGSIZE)
 
     Set the *segment size*, in gigabytes. Large tables are divided into multiple operating-system files, each of size equal to the segment size. This avoids problems with file size limits that exist on many platforms. The default segment size, 1 gigabyte, is safe on all supported platforms. If your operating system has “largefile” support (which most do, nowadays), you can use a larger segment size. This can be helpful to reduce the number of file descriptors consumed when working with very large tables. But be careful not to select a value larger than is supported by your platform and the file systems you intend to use. Other tools you might wish to use, such as tar, could also set limits on the usable file size. It is recommended, though not absolutely required, that this value be a power of 2. Note that changing this value breaks on-disk database compatibility, meaning you cannot use `pg_upgrade` to upgrade to a build with a different segment size.
 
-*   `--with-blocksize=BLOCKSIZE` [#](#CONFIGURE-OPTION-WITH-BLOCKSIZE)
+* `--with-blocksize=BLOCKSIZE` [#](#CONFIGURE-OPTION-WITH-BLOCKSIZE)
 
     Set the *block size*, in kilobytes. This is the unit of storage and I/O within tables. The default, 8 kilobytes, is suitable for most situations; but other values may be useful in special cases. The value must be a power of 2 between 1 and 32 (kilobytes). Note that changing this value breaks on-disk database compatibility, meaning you cannot use `pg_upgrade` to upgrade to a build with a different block size.
 
-*   `--with-wal-blocksize=BLOCKSIZE` [#](#CONFIGURE-OPTION-WITH-WAL-BLOCKSIZE)
+* `--with-wal-blocksize=BLOCKSIZE` [#](#CONFIGURE-OPTION-WITH-WAL-BLOCKSIZE)
 
     Set the *WAL block size*, in kilobytes. This is the unit of storage and I/O within the WAL log. The default, 8 kilobytes, is suitable for most situations; but other values may be useful in special cases. The value must be a power of 2 between 1 and 64 (kilobytes). Note that changing this value breaks on-disk database compatibility, meaning you cannot use `pg_upgrade` to upgrade to a build with a different WAL block size.
 
@@ -384,33 +376,33 @@ Most of the options in this section are only of interest for developing or debug
 
 When building an installation that will be used to develop code inside the server, it is recommended to use at least the options `--enable-debug` and `--enable-cassert`.
 
-*   `--enable-debug` [#](#CONFIGURE-OPTION-ENABLE-DEBUG)
+* `--enable-debug` [#](#CONFIGURE-OPTION-ENABLE-DEBUG)
 
     Compiles all programs and libraries with debugging symbols. This means that you can run the programs in a debugger to analyze problems. This enlarges the size of the installed executables considerably, and on non-GCC compilers it usually also disables compiler optimization, causing slowdowns. However, having the symbols available is extremely helpful for dealing with any problems that might arise. Currently, this option is recommended for production installations only if you use GCC. But you should always have it on if you are doing development work or running a beta version.
 
-*   `--enable-cassert` [#](#CONFIGURE-OPTION-ENABLE-CASSERT)
+* `--enable-cassert` [#](#CONFIGURE-OPTION-ENABLE-CASSERT)
 
     Enables *assertion* checks in the server, which test for many “cannot happen” conditions. This is invaluable for code development purposes, but the tests can slow down the server significantly. Also, having the tests turned on won't necessarily enhance the stability of your server! The assertion checks are not categorized for severity, and so what might be a relatively harmless bug will still lead to server restarts if it triggers an assertion failure. This option is not recommended for production use, but you should have it on for development work or when running a beta version.
 
-*   `--enable-tap-tests` [#](#CONFIGURE-OPTION-ENABLE-TAP-TESTS)
+* `--enable-tap-tests` [#](#CONFIGURE-OPTION-ENABLE-TAP-TESTS)
 
     Enable tests using the Perl TAP tools. This requires a Perl installation and the Perl module `IPC::Run`. See [Section 33.4](regress-tap.html "33.4. TAP Tests") for more information.
 
-*   `--enable-depend` [#](#CONFIGURE-OPTION-ENABLE-DEPEND)
+* `--enable-depend` [#](#CONFIGURE-OPTION-ENABLE-DEPEND)
 
     Enables automatic dependency tracking. With this option, the makefiles are set up so that all affected object files will be rebuilt when any header file is changed. This is useful if you are doing development work, but is just wasted overhead if you intend only to compile once and install. At present, this option only works with GCC.
 
-*   `--enable-coverage` [#](#CONFIGURE-OPTION-ENABLE-COVERAGE)
+* `--enable-coverage` [#](#CONFIGURE-OPTION-ENABLE-COVERAGE)
 
     If using GCC, all programs and libraries are compiled with code coverage testing instrumentation. When run, they generate files in the build directory with code coverage metrics. See [Section 33.5](regress-coverage.html "33.5. Test Coverage Examination") for more information. This option is for use only with GCC and when doing development work.
 
-*   `--enable-profiling` [#](#CONFIGURE-OPTION-ENABLE-PROFILING)
+* `--enable-profiling` [#](#CONFIGURE-OPTION-ENABLE-PROFILING)
 
     If using GCC, all programs and libraries are compiled so they can be profiled. On backend exit, a subdirectory will be created that contains the `gmon.out` file containing profile data. This option is for use only with GCC and when doing development work.
 
-*   `--enable-dtrace` [#](#CONFIGURE-OPTION-ENABLE-DTRACE)
+* `--enable-dtrace` [#](#CONFIGURE-OPTION-ENABLE-DTRACE)
 
-    []()Compiles PostgreSQL with support for the dynamic tracing tool DTrace. See [Section 28.5](dynamic-trace.html "28.5. Dynamic Tracing") for more information.
+    Compiles PostgreSQL with support for the dynamic tracing tool DTrace. See [Section 28.5](dynamic-trace.html "28.5. Dynamic Tracing") for more information.
 
     To point to the `dtrace` program, the environment variable `DTRACE` can be set. This will often be necessary because `dtrace` is typically installed under `/usr/sbin`, which might not be in your `PATH`.
 
@@ -422,13 +414,11 @@ When building an installation that will be used to develop code inside the serve
 
         ./configure CC='/opt/SUNWspro/bin/cc -xtarget=native64' --enable-dtrace DTRACEFLAGS='-64' ...
 
-*   `--with-segsize-blocks=SEGSIZE_BLOCKS` [#](#CONFIGURE-OPTION-WITH-SEGSIZE-BLOCKS)
+* `--with-segsize-blocks=SEGSIZE_BLOCKS` [#](#CONFIGURE-OPTION-WITH-SEGSIZE-BLOCKS)
 
     Specify the relation segment size in blocks. If both `--with-segsize` and this option are specified, this option wins. This option is only for developers, to test segment related code.
 
 ### 17.3.4. `configure` Environment Variables [#](#CONFIGURE-ENVVARS)
-
-[]()
 
 In addition to the ordinary command-line options described above, `configure` responds to a number of environment variables. You can specify environment variables on the `configure` command line, for example:
 
@@ -446,83 +436,83 @@ The most commonly used of these environment variables are `CC` and `CFLAGS`. If 
 
 Here is a list of the significant variables that can be set in this manner:
 
-*   `BISON` [#](#CONFIGURE-ENVVARS-BISON)
+* `BISON` [#](#CONFIGURE-ENVVARS-BISON)
 
     Bison program
 
-*   `CC` [#](#CONFIGURE-ENVVARS-CC)
+* `CC` [#](#CONFIGURE-ENVVARS-CC)
 
     C compiler
 
-*   `CFLAGS` [#](#CONFIGURE-ENVVARS-CFLAGS)
+* `CFLAGS` [#](#CONFIGURE-ENVVARS-CFLAGS)
 
     options to pass to the C compiler
 
-*   `CLANG` [#](#CONFIGURE-ENVVARS-CLANG)
+* `CLANG` [#](#CONFIGURE-ENVVARS-CLANG)
 
     path to `clang` program used to process source code for inlining when compiling with `--with-llvm`
 
-*   `CPP` [#](#CONFIGURE-ENVVARS-CPP)
+* `CPP` [#](#CONFIGURE-ENVVARS-CPP)
 
     C preprocessor
 
-*   `CPPFLAGS` [#](#CONFIGURE-ENVVARS-CPPFLAGS)
+* `CPPFLAGS` [#](#CONFIGURE-ENVVARS-CPPFLAGS)
 
     options to pass to the C preprocessor
 
-*   `CXX` [#](#CONFIGURE-ENVVARS-CXX)
+* `CXX` [#](#CONFIGURE-ENVVARS-CXX)
 
     C++ compiler
 
-*   `CXXFLAGS` [#](#CONFIGURE-ENVVARS-CXXFLAGS)
+* `CXXFLAGS` [#](#CONFIGURE-ENVVARS-CXXFLAGS)
 
     options to pass to the C++ compiler
 
-*   `DTRACE` [#](#CONFIGURE-ENVVARS-DTRACE)
+* `DTRACE` [#](#CONFIGURE-ENVVARS-DTRACE)
 
     location of the `dtrace` program
 
-*   `DTRACEFLAGS` [#](#CONFIGURE-ENVVARS-DTRACEFLAGS)
+* `DTRACEFLAGS` [#](#CONFIGURE-ENVVARS-DTRACEFLAGS)
 
     options to pass to the `dtrace` program
 
-*   `FLEX` [#](#CONFIGURE-ENVVARS-FLEX)
+* `FLEX` [#](#CONFIGURE-ENVVARS-FLEX)
 
     Flex program
 
-*   `LDFLAGS` [#](#CONFIGURE-ENVVARS-LDFLAGS)
+* `LDFLAGS` [#](#CONFIGURE-ENVVARS-LDFLAGS)
 
     options to use when linking either executables or shared libraries
 
-*   `LDFLAGS_EX` [#](#CONFIGURE-ENVVARS-LDFLAGS-EX)
+* `LDFLAGS_EX` [#](#CONFIGURE-ENVVARS-LDFLAGS-EX)
 
     additional options for linking executables only
 
-*   `LDFLAGS_SL` [#](#CONFIGURE-ENVVARS-LDFLAGS-SL)
+* `LDFLAGS_SL` [#](#CONFIGURE-ENVVARS-LDFLAGS-SL)
 
     additional options for linking shared libraries only
 
-*   `LLVM_CONFIG` [#](#CONFIGURE-ENVVARS-LLVM-CONFIG)
+* `LLVM_CONFIG` [#](#CONFIGURE-ENVVARS-LLVM-CONFIG)
 
     `llvm-config` program used to locate the LLVM installation
 
-*   `MSGFMT` [#](#CONFIGURE-ENVVARS-MSGFMT)
+* `MSGFMT` [#](#CONFIGURE-ENVVARS-MSGFMT)
 
     `msgfmt` program for native language support
 
-*   `PERL` [#](#CONFIGURE-ENVVARS-PERL)
+* `PERL` [#](#CONFIGURE-ENVVARS-PERL)
 
     Perl interpreter program. This will be used to determine the dependencies for building PL/Perl. The default is `perl`.
 
-*   `PYTHON` [#](#CONFIGURE-ENVVARS-PYTHON)
+* `PYTHON` [#](#CONFIGURE-ENVVARS-PYTHON)
 
     Python interpreter program. This will be used to determine the dependencies for building PL/Python. If this is not set, the following are probed in this order: `python3 python`.
 
-*   `TCLSH` [#](#CONFIGURE-ENVVARS-TCLSH)
+* `TCLSH` [#](#CONFIGURE-ENVVARS-TCLSH)
 
     Tcl interpreter program. This will be used to determine the dependencies for building PL/Tcl. If this is not set, the following are probed in this order: `tclsh tcl tclsh8.6 tclsh86 tclsh8.5 tclsh85 tclsh8.4 tclsh84`.
 
-*   `XML2_CONFIG` [#](#CONFIGURE-ENVVARS-XML2-CONFIG)
+* `XML2_CONFIG` [#](#CONFIGURE-ENVVARS-XML2-CONFIG)
 
     `xml2-config` program used to locate the libxml2 installation
 

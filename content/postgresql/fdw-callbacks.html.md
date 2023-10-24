@@ -8,18 +8,18 @@
 
 ## 59.2. Foreign Data Wrapper Callback Routines [#](#FDW-CALLBACKS)
 
-*   *   [59.2.1. FDW Routines for Scanning Foreign Tables](fdw-callbacks.html#FDW-CALLBACKS-SCAN)
-    *   [59.2.2. FDW Routines for Scanning Foreign Joins](fdw-callbacks.html#FDW-CALLBACKS-JOIN-SCAN)
-    *   [59.2.3. FDW Routines for Planning Post-Scan/Join Processing](fdw-callbacks.html#FDW-CALLBACKS-UPPER-PLANNING)
-    *   [59.2.4. FDW Routines for Updating Foreign Tables](fdw-callbacks.html#FDW-CALLBACKS-UPDATE)
-    *   [59.2.5. FDW Routines for `TRUNCATE`](fdw-callbacks.html#FDW-CALLBACKS-TRUNCATE)
-    *   [59.2.6. FDW Routines for Row Locking](fdw-callbacks.html#FDW-CALLBACKS-ROW-LOCKING)
-    *   [59.2.7. FDW Routines for `EXPLAIN`](fdw-callbacks.html#FDW-CALLBACKS-EXPLAIN)
-    *   [59.2.8. FDW Routines for `ANALYZE`](fdw-callbacks.html#FDW-CALLBACKS-ANALYZE)
-    *   [59.2.9. FDW Routines for `IMPORT FOREIGN SCHEMA`](fdw-callbacks.html#FDW-CALLBACKS-IMPORT)
-    *   [59.2.10. FDW Routines for Parallel Execution](fdw-callbacks.html#FDW-CALLBACKS-PARALLEL)
-    *   [59.2.11. FDW Routines for Asynchronous Execution](fdw-callbacks.html#FDW-CALLBACKS-ASYNC)
-    *   [59.2.12. FDW Routines for Reparameterization of Paths](fdw-callbacks.html#FDW-CALLBACKS-REPARAMETERIZE-PATHS)
+  * *   [59.2.1. FDW Routines for Scanning Foreign Tables](fdw-callbacks.html#FDW-CALLBACKS-SCAN)
+* [59.2.2. FDW Routines for Scanning Foreign Joins](fdw-callbacks.html#FDW-CALLBACKS-JOIN-SCAN)
+* [59.2.3. FDW Routines for Planning Post-Scan/Join Processing](fdw-callbacks.html#FDW-CALLBACKS-UPPER-PLANNING)
+* [59.2.4. FDW Routines for Updating Foreign Tables](fdw-callbacks.html#FDW-CALLBACKS-UPDATE)
+* [59.2.5. FDW Routines for `TRUNCATE`](fdw-callbacks.html#FDW-CALLBACKS-TRUNCATE)
+* [59.2.6. FDW Routines for Row Locking](fdw-callbacks.html#FDW-CALLBACKS-ROW-LOCKING)
+* [59.2.7. FDW Routines for `EXPLAIN`](fdw-callbacks.html#FDW-CALLBACKS-EXPLAIN)
+* [59.2.8. FDW Routines for `ANALYZE`](fdw-callbacks.html#FDW-CALLBACKS-ANALYZE)
+* [59.2.9. FDW Routines for `IMPORT FOREIGN SCHEMA`](fdw-callbacks.html#FDW-CALLBACKS-IMPORT)
+* [59.2.10. FDW Routines for Parallel Execution](fdw-callbacks.html#FDW-CALLBACKS-PARALLEL)
+* [59.2.11. FDW Routines for Asynchronous Execution](fdw-callbacks.html#FDW-CALLBACKS-ASYNC)
+* [59.2.12. FDW Routines for Reparameterization of Paths](fdw-callbacks.html#FDW-CALLBACKS-REPARAMETERIZE-PATHS)
 
 The FDW handler function returns a palloc'd `FdwRoutine` struct containing pointers to the callback functions described below. The scan-related functions are required, the rest are optional.
 

@@ -8,14 +8,12 @@
 
 ## F.23. ltree — hierarchical tree-like data type [#](#LTREE)
 
-*   *   [F.23.1. Definitions](ltree.html#LTREE-DEFINITIONS)
-    *   [F.23.2. Operators and Functions](ltree.html#LTREE-OPS-FUNCS)
-    *   [F.23.3. Indexes](ltree.html#LTREE-INDEXES)
-    *   [F.23.4. Example](ltree.html#LTREE-EXAMPLE)
-    *   [F.23.5. Transforms](ltree.html#LTREE-TRANSFORMS)
-    *   [F.23.6. Authors](ltree.html#LTREE-AUTHORS)
-
-[]()
+  * *   [F.23.1. Definitions](ltree.html#LTREE-DEFINITIONS)
+* [F.23.2. Operators and Functions](ltree.html#LTREE-OPS-FUNCS)
+* [F.23.3. Indexes](ltree.html#LTREE-INDEXES)
+* [F.23.4. Example](ltree.html#LTREE-EXAMPLE)
+* [F.23.5. Transforms](ltree.html#LTREE-TRANSFORMS)
+* [F.23.6. Authors](ltree.html#LTREE-AUTHORS)
 
 This module implements a data type `ltree` for representing labels of data stored in a hierarchical tree-like structure. Extensive facilities for searching through label trees are provided.
 
@@ -33,9 +31,9 @@ Example: `Top.Countries.Europe.Russia`
 
 The `ltree` module provides several data types:
 
-*   `ltree` stores a label path.
+* `ltree` stores a label path.
 
-*   `lquery` represents a regular-expression-like pattern for matching `ltree` values. A simple word matches that label within a path. A star symbol (`*`) matches zero or more labels. These can be joined with dots to form a pattern that must match the whole label path. For example:
+* `lquery` represents a regular-expression-like pattern for matching `ltree` values. A simple word matches that label within a path. A star symbol (`*`) matches zero or more labels. These can be joined with dots to form a pattern that must match the whole label path. For example:
 
         foo         Match the exact label path foo
         *.foo.*     Match any label path containing the label foo
@@ -69,13 +67,13 @@ The `ltree` module provides several data types:
 
     This query will match any label path that:
 
-    1.  begins with the label `Top`
-    2.  and next has zero to two labels before
-    3.  a label beginning with the case-insensitive prefix `sport`
-    4.  then has one or more labels, none of which match `football` nor `tennis`
-    5.  and then ends with a label beginning with `Russ` or exactly matching `Spain`.
+    1. begins with the label `Top`
+    2. and next has zero to two labels before
+    3. a label beginning with the case-insensitive prefix `sport`
+    4. then has one or more labels, none of which match `football` nor `tennis`
+    5. and then ends with a label beginning with `Russ` or exactly matching `Spain`.
 
-*   `ltxtquery` represents a full-text-search-like pattern for matching `ltree` values. An `ltxtquery` value contains words, possibly with the modifiers `@`, `*`, `%` at the end; the modifiers have the same meanings as in `lquery`. Words can be combined with `&` (AND), `|` (OR), `!` (NOT), and parentheses. The key difference from `lquery` is that `ltxtquery` matches words without regard to their position in the label path.
+* `ltxtquery` represents a full-text-search-like pattern for matching `ltree` values. An `ltxtquery` value contains words, possibly with the modifiers `@`, `*`, `%` at the end; the modifiers have the same meanings as in `lquery`. Words can be combined with `&` (AND), `|` (OR), `!` (NOT), and parentheses. The key difference from `lquery` is that `ltxtquery` matches words without regard to their position in the label path.
 
     Here's an example `ltxtquery`:
 
@@ -112,7 +110,6 @@ Type `ltree` has the usual comparison operators `=`, `<>`, `<`, `>`, `<=`, `>=`.
 
 \
 
-
 The operators `<@`, `@>`, `@` and `~` have analogues `^<@`, `^@>`, `^@`, `^~`, which are the same except they do not use indexes. These are useful only for testing purposes.
 
 The available functions are shown in [Table F.14](ltree.html#LTREE-FUNC-TABLE "Table F.14. ltree Functions").
@@ -121,24 +118,24 @@ The available functions are shown in [Table F.14](ltree.html#LTREE-FUNC-TABLE "
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                                                                                                                                                                         |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| []()`subltree` ( `ltree`, *`start`* `integer`, *`end`* `integer` ) → `ltree`Returns subpath of `ltree` from position *`start`* to position *`end`*-1 (counting from 0).`subltree('Top.Child1.Child2', 1, 2)` → `Child1`                                                                                                                                               |
-| []()`subpath` ( `ltree`, *`offset`* `integer`, *`len`* `integer` ) → `ltree`Returns subpath of `ltree` starting at position *`offset`*, with length *`len`*. If *`offset`* is negative, subpath starts that far from the end of the path. If *`len`* is negative, leaves that many labels off the end of the path.`subpath('Top.Child1.Child2', 0, 2)` → `Top.Child1` |
+| `subltree` ( `ltree`, *`start`* `integer`, *`end`* `integer` ) → `ltree`Returns subpath of `ltree` from position *`start`* to position *`end`*-1 (counting from 0).`subltree('Top.Child1.Child2', 1, 2)` → `Child1`                                                                                                                                               |
+| `subpath` ( `ltree`, *`offset`* `integer`, *`len`* `integer` ) → `ltree`Returns subpath of `ltree` starting at position *`offset`*, with length *`len`*. If *`offset`* is negative, subpath starts that far from the end of the path. If *`len`* is negative, leaves that many labels off the end of the path.`subpath('Top.Child1.Child2', 0, 2)` → `Top.Child1` |
 | `subpath` ( `ltree`, *`offset`* `integer` ) → `ltree`Returns subpath of `ltree` starting at position *`offset`*, extending to end of path. If *`offset`* is negative, subpath starts that far from the end of the path.`subpath('Top.Child1.Child2', 1)` → `Child1.Child2`                                                                                            |
-| []()`nlevel` ( `ltree` ) → `integer`Returns number of labels in path.`nlevel('Top.Child1.Child2')` → `3`                                                                                                                                                                                                                                                              |
-| []()`index` ( *`a`* `ltree`, *`b`* `ltree` ) → `integer`Returns position of first occurrence of *`b`* in *`a`*, or -1 if not found.`index('0.1.2.3.5.4.5.6.8.5.6.8', '5.6')` → `6`                                                                                                                                                                                    |
+| `nlevel` ( `ltree` ) → `integer`Returns number of labels in path.`nlevel('Top.Child1.Child2')` → `3`                                                                                                                                                                                                                                                              |
+| `index` ( *`a`* `ltree`, *`b`* `ltree` ) → `integer`Returns position of first occurrence of *`b`* in *`a`*, or -1 if not found.`index('0.1.2.3.5.4.5.6.8.5.6.8', '5.6')` → `6`                                                                                                                                                                                    |
 | `index` ( *`a`* `ltree`, *`b`* `ltree`, *`offset`* `integer` ) → `integer`Returns position of first occurrence of *`b`* in *`a`*, or -1 if not found. The search starts at position *`offset`*; negative *`offset`* means start *`-offset`* labels from the end of the path.`index('0.1.2.3.5.4.5.6.8.5.6.8', '5.6', -4)` → `9`                                       |
-| []()`text2ltree` ( `text` ) → `ltree`Casts `text` to `ltree`.                                                                                                                                                                                                                                                                                                         |
-| []()`ltree2text` ( `ltree` ) → `text`Casts `ltree` to `text`.                                                                                                                                                                                                                                                                                                         |
-| []()`lca` ( `ltree` \[, `ltree` \[, ... ]] ) → `ltree`Computes longest common ancestor of paths (up to 8 arguments are supported).`lca('1.2.3', '1.2.3.4.5.6')` → `1.2`                                                                                                                                                                                               |
+| `text2ltree` ( `text` ) → `ltree`Casts `text` to `ltree`.                                                                                                                                                                                                                                                                                                         |
+| `ltree2text` ( `ltree` ) → `text`Casts `ltree` to `text`.                                                                                                                                                                                                                                                                                                         |
+| `lca` ( `ltree` \[, `ltree` \[, ... ]] ) → `ltree`Computes longest common ancestor of paths (up to 8 arguments are supported).`lca('1.2.3', '1.2.3.4.5.6')` → `1.2`                                                                                                                                                                                               |
 | `lca` ( `ltree[]` ) → `ltree`Computes longest common ancestor of paths in array.`lca(array['1.2.3'::ltree,'1.2.3.4'])` → `1.2`                                                                                                                                                                                                                                        |
 
 ### F.23.3. Indexes [#](#LTREE-INDEXES)
 
 `ltree` supports several types of indexes that can speed up the indicated operators:
 
-*   B-tree index over `ltree`: `<`, `<=`, `=`, `>=`, `>`
+* B-tree index over `ltree`: `<`, `<=`, `=`, `>=`, `>`
 
-*   GiST index over `ltree` (`gist_ltree_ops` opclass): `<`, `<=`, `=`, `>=`, `>`, `@>`, `<@`, `@`, `~`, `?`
+* GiST index over `ltree` (`gist_ltree_ops` opclass): `<`, `<=`, `=`, `>=`, `>`, `@>`, `<@`, `@`, `~`, `?`
 
     `gist_ltree_ops` GiST opclass approximates a set of path labels as a bitmap signature. Its optional integer parameter `siglen` determines the signature length in bytes. The default signature length is 8 bytes. The length must be a positive multiple of `int` alignment (4 bytes on most machines)) up to 2024. Longer signatures lead to a more precise search (scanning a smaller fraction of the index and fewer heap pages), at the cost of a larger index.
 
@@ -150,7 +147,7 @@ The available functions are shown in [Table F.14](ltree.html#LTREE-FUNC-TABLE "
 
         CREATE INDEX path_gist_idx ON test USING GIST (path gist_ltree_ops(siglen=100));
 
-*   GiST index over `ltree[]` (`gist__ltree_ops` opclass): `ltree[] <@ ltree`, `ltree @> ltree[]`, `@`, `~`, `?`
+* GiST index over `ltree[]` (`gist__ltree_ops` opclass): `ltree[] <@ ltree`, `ltree @> ltree[]`, `@`, `~`, `?`
 
     `gist__ltree_ops` GiST opclass works similarly to `gist_ltree_ops` and also takes signature length as a parameter. The default value of `siglen` in `gist__ltree_ops` is 28 bytes.
 

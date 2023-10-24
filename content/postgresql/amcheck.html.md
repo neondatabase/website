@@ -8,12 +8,10 @@
 
 ## F.2. amcheck — tools to verify table and index consistency [#](#AMCHECK)
 
-*   *   [F.2.1. Functions](amcheck.html#AMCHECK-FUNCTIONS)
-    *   [F.2.2. Optional *`heapallindexed`* Verification](amcheck.html#AMCHECK-OPTIONAL-HEAPALLINDEXED-VERIFICATION)
-    *   [F.2.3. Using `amcheck` Effectively](amcheck.html#AMCHECK-USING-AMCHECK-EFFECTIVELY)
-    *   [F.2.4. Repairing Corruption](amcheck.html#AMCHECK-REPAIRING-CORRUPTION)
-
-[]()
+  * *   [F.2.1. Functions](amcheck.html#AMCHECK-FUNCTIONS)
+* [F.2.2. Optional *`heapallindexed`* Verification](amcheck.html#AMCHECK-OPTIONAL-HEAPALLINDEXED-VERIFICATION)
+* [F.2.3. Using `amcheck` Effectively](amcheck.html#AMCHECK-USING-AMCHECK-EFFECTIVELY)
+* [F.2.4. Repairing Corruption](amcheck.html#AMCHECK-REPAIRING-CORRUPTION)
 
 The `amcheck` module provides functions that allow you to verify the logical consistency of the structure of relations.
 
@@ -27,7 +25,7 @@ Permission to execute `amcheck` functions may be granted to non-superusers, but 
 
 ### F.2.1. Functions [#](#AMCHECK-FUNCTIONS)
 
-*   `bt_index_check(index regclass, heapallindexed boolean) returns void`[]()
+* `bt_index_check(index regclass, heapallindexed boolean) returns void`
 
     `bt_index_check` tests that its target, a B-Tree index, respects a variety of invariants. Example usage:
 
@@ -63,7 +61,7 @@ Permission to execute `amcheck` functions may be granted to non-superusers, but 
 
     `bt_index_check` acquires an `AccessShareLock` on the target index and the heap relation it belongs to. This lock mode is the same lock mode acquired on relations by simple `SELECT` statements. `bt_index_check` does not verify invariants that span child/parent relationships, but will verify the presence of all heap tuples as index tuples within the index when *`heapallindexed`* is `true`. When a routine, lightweight test for corruption is required in a live production environment, using `bt_index_check` often provides the best trade-off between thoroughness of verification and limiting the impact on application performance and availability.
 
-*   `bt_index_parent_check(index regclass, heapallindexed boolean, rootdescend boolean) returns void`[]()
+* `bt_index_parent_check(index regclass, heapallindexed boolean, rootdescend boolean) returns void`
 
     `bt_index_parent_check` tests that its target, a B-Tree index, respects a variety of invariants. Optionally, when the *`heapallindexed`* argument is `true`, the function verifies the presence of all heap tuples that should be found within the index. When the optional *`rootdescend`* argument is `true`, verification re-finds tuples on the leaf level by performing a new search from the root page for each tuple. The checks that can be performed by `bt_index_parent_check` are a superset of the checks that can be performed by `bt_index_check`. `bt_index_parent_check` can be thought of as a more thorough variant of `bt_index_check`: unlike `bt_index_check`, `bt_index_parent_check` also checks invariants that span parent/child relationships, including checking that there are no missing downlinks in the index structure. `bt_index_parent_check` follows the general convention of raising an error if it finds a logical inconsistency or other problem.
 
@@ -79,19 +77,19 @@ Permission to execute `amcheck` functions may be granted to non-superusers, but 
 
 in an interactive psql session before running a verification query will display messages about the progress of verification with a manageable level of detail.
 
-*   `verify_heapam(relation regclass, on_error_stop boolean, check_toast boolean, skip text, startblock bigint, endblock bigint, blkno OUT bigint, offnum OUT integer, attnum OUT integer, msg OUT text) returns setof record`
+* `verify_heapam(relation regclass, on_error_stop boolean, check_toast boolean, skip text, startblock bigint, endblock bigint, blkno OUT bigint, offnum OUT integer, attnum OUT integer, msg OUT text) returns setof record`
 
     Checks a table, sequence, or materialized view for structural corruption, where pages in the relation contain data that is invalidly formatted, and for logical corruption, where pages are structurally valid but inconsistent with the rest of the database cluster.
 
     The following optional arguments are recognized:
 
-    *   `on_error_stop`
+  * `on_error_stop`
 
         If true, corruption checking stops at the end of the first block in which any corruptions are found.
 
         Defaults to false.
 
-    *   `check_toast`
+  * `check_toast`
 
         If true, toasted values are checked against the target relation's TOAST table.
 
@@ -99,19 +97,19 @@ in an interactive psql session before running a verification query will display 
 
         Defaults to false.
 
-    *   `skip`
+  * `skip`
 
         If not `none`, corruption checking skips blocks that are marked as all-visible or all-frozen, as specified. Valid options are `all-visible`, `all-frozen` and `none`.
 
         Defaults to `none`.
 
-    *   `startblock`
+  * `startblock`
 
         If specified, corruption checking begins at the specified block, skipping all previous blocks. It is an error to specify a *`startblock`* outside the range of blocks in the target table.
 
         By default, checking begins at the first block.
 
-    *   `endblock`
+  * `endblock`
 
         If specified, corruption checking ends at the specified block, skipping all remaining blocks. It is an error to specify an *`endblock`* outside the range of blocks in the target table.
 
@@ -119,19 +117,19 @@ in an interactive psql session before running a verification query will display 
 
     For each corruption detected, `verify_heapam` returns a row with the following columns:
 
-    *   `blkno`
+  * `blkno`
 
         The number of the block containing the corrupt page.
 
-    *   `offnum`
+  * `offnum`
 
         The OffsetNumber of the corrupt tuple.
 
-    *   `attnum`
+  * `attnum`
 
         The attribute number of the corrupt column in the tuple, if the corruption is specific to a column and not the tuple as a whole.
 
-    *   `msg`
+  * `msg`
 
         A message describing the problem detected.
 
@@ -147,25 +145,25 @@ The summarizing structure is bound in size by `maintenance_work_mem`. In order t
 
 `amcheck` can be effective at detecting various types of failure modes that [data checksums](app-initdb.html#APP-INITDB-DATA-CHECKSUMS) will fail to catch. These include:
 
-*   Structural inconsistencies caused by incorrect operator class implementations.
+* Structural inconsistencies caused by incorrect operator class implementations.
 
     This includes issues caused by the comparison rules of operating system collations changing. Comparisons of datums of a collatable type like `text` must be immutable (just as all comparisons used for B-Tree index scans must be immutable), which implies that operating system collation rules must never change. Though rare, updates to operating system collation rules can cause these issues. More commonly, an inconsistency in the collation order between a primary server and a standby server is implicated, possibly because the *major* operating system version in use is inconsistent. Such inconsistencies will generally only arise on standby servers, and so can generally only be detected on standby servers.
 
     If a problem like this arises, it may not affect each individual index that is ordered using an affected collation, simply because *indexed* values might happen to have the same absolute ordering regardless of the behavioral inconsistency. See [Section 24.1](locale.html "24.1. Locale Support") and [Section 24.2](collation.html "24.2. Collation Support") for further details about how PostgreSQL uses operating system locales and collations.
 
-*   Structural inconsistencies between indexes and the heap relations that are indexed (when *`heapallindexed`* verification is performed).
+* Structural inconsistencies between indexes and the heap relations that are indexed (when *`heapallindexed`* verification is performed).
 
     There is no cross-checking of indexes against their heap relation during normal operation. Symptoms of heap corruption can be subtle.
 
-*   Corruption caused by hypothetical undiscovered bugs in the underlying PostgreSQL access method code, sort code, or transaction management code.
+* Corruption caused by hypothetical undiscovered bugs in the underlying PostgreSQL access method code, sort code, or transaction management code.
 
     Automatic verification of the structural integrity of indexes plays a role in the general testing of new or proposed PostgreSQL features that could plausibly allow a logical inconsistency to be introduced. Verification of table structure and associated visibility and transaction status information plays a similar role. One obvious testing strategy is to call `amcheck` functions continuously when running the standard regression tests. See [Section 33.1](regress-run.html "33.1. Running the Tests") for details on running the tests.
 
-*   File system or storage subsystem faults where checksums happen to simply not be enabled.
+* File system or storage subsystem faults where checksums happen to simply not be enabled.
 
     Note that `amcheck` examines a page as represented in some shared memory buffer at the time of verification if there is only a shared buffer hit when accessing the block. Consequently, `amcheck` does not necessarily examine data read from the file system at the time of verification. Note that when checksums are enabled, `amcheck` may raise an error due to a checksum failure when a corrupt block is read into a buffer.
 
-*   Corruption caused by faulty RAM, or the broader memory subsystem.
+* Corruption caused by faulty RAM, or the broader memory subsystem.
 
     PostgreSQL does not protect against correctable memory errors and it is assumed you will operate using RAM that uses industry standard Error Correcting Codes (ECC) or better protection. However, ECC memory is typically only immune to single-bit errors, and should not be assumed to provide *absolute* protection against failures that result in memory corruption.
 

@@ -8,9 +8,9 @@
 
 ## 47.4. Transaction Management [#](#SPI-TRANSACTION)
 
-*   *   [SPI\_commit](spi-spi-commit.html) — commit the current transaction
-    *   [SPI\_rollback](spi-spi-rollback.html) — abort the current transaction
-    *   [SPI\_start\_transaction](spi-spi-start-transaction.html) — obsolete function
+  * *   [SPI\_commit](spi-spi-commit.html) — commit the current transaction
+* [SPI\_rollback](spi-spi-rollback.html) — abort the current transaction
+* [SPI\_start\_transaction](spi-spi-start-transaction.html) — obsolete function
 
 It is not possible to run transaction control commands such as `COMMIT` and `ROLLBACK` through SPI functions such as `SPI_execute`. There are, however, separate interface functions that allow transaction control through SPI.
 

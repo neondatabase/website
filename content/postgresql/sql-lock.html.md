@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## LOCK
 
 LOCK — lock a table
@@ -37,19 +35,19 @@ More information about the lock modes and locking strategies can be found in [Se
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing table to lock. If `ONLY` is specified before the table name, only that table is locked. If `ONLY` is not specified, the table and all its descendant tables (if any) are locked. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included.
 
     The command `LOCK TABLE a, b;` is equivalent to `LOCK TABLE a; LOCK TABLE b;`. The tables are locked one-by-one in the order specified in the `LOCK TABLE` command.
 
-*   *`lockmode`*
+* *`lockmode`*
 
     The lock mode specifies which locks this lock conflicts with. Lock modes are described in [Section 13.3](explicit-locking.html "13.3. Explicit Locking").
 
     If no lock mode is specified, then `ACCESS EXCLUSIVE`, the most restrictive mode, is used.
 
-*   `NOWAIT`
+* `NOWAIT`
 
     Specifies that `LOCK TABLE` should not wait for any conflicting locks to be released: if the specified lock(s) cannot be acquired immediately without waiting, the transaction is aborted.
 

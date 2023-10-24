@@ -24,37 +24,37 @@ Each `amcostestimate` function must have the signature:
 
 The first three parameters are inputs:
 
-*   *`root`*
+* *`root`*
 
     The planner's information about the query being processed.
 
-*   *`path`*
+* *`path`*
 
     The index access path being considered. All fields except cost and selectivity values are valid.
 
-*   *`loop_count`*
+* *`loop_count`*
 
     The number of repetitions of the index scan that should be factored into the cost estimates. This will typically be greater than one when considering a parameterized scan for use in the inside of a nestloop join. Note that the cost estimates should still be for just one scan; a larger *`loop_count`* means that it may be appropriate to allow for some caching effects across multiple scans.
 
 The last five parameters are pass-by-reference outputs:
 
-*   *`*indexStartupCost`*
+* *`*indexStartupCost`*
 
     Set to cost of index start-up processing
 
-*   *`*indexTotalCost`*
+* *`*indexTotalCost`*
 
     Set to total cost of index processing
 
-*   *`*indexSelectivity`*
+* *`*indexSelectivity`*
 
     Set to index selectivity
 
-*   *`*indexCorrelation`*
+* *`*indexCorrelation`*
 
     Set to correlation coefficient between index scan order and underlying table's order
 
-*   *`*indexPages`*
+* *`*indexPages`*
 
     Set to number of index leaf pages
 
@@ -78,17 +78,17 @@ When *`loop_count`* is greater than one, the returned numbers should be averages
 
 A typical cost estimator will proceed as follows:
 
-1.  Estimate and return the fraction of parent-table rows that will be visited based on the given qual conditions. In the absence of any index-type-specific knowledge, use the standard optimizer function `clauselist_selectivity()`:
+1. Estimate and return the fraction of parent-table rows that will be visited based on the given qual conditions. In the absence of any index-type-specific knowledge, use the standard optimizer function `clauselist_selectivity()`:
 
         *indexSelectivity = clauselist_selectivity(root, path->indexquals,
                                                    path->indexinfo->rel->relid,
                                                    JOIN_INNER, NULL);
 
-2.  Estimate the number of index rows that will be visited during the scan. For many index types this is the same as *`indexSelectivity`* times the number of rows in the index, but it might be more. (Note that the index's size in pages and rows is available from the `path->indexinfo` struct.)
+2. Estimate the number of index rows that will be visited during the scan. For many index types this is the same as *`indexSelectivity`* times the number of rows in the index, but it might be more. (Note that the index's size in pages and rows is available from the `path->indexinfo` struct.)
 
-3.  Estimate the number of index pages that will be retrieved during the scan. This might be just *`indexSelectivity`* times the index's size in pages.
+3. Estimate the number of index pages that will be retrieved during the scan. This might be just *`indexSelectivity`* times the index's size in pages.
 
-4.  Compute the index access cost. A generic estimator might do this:
+4. Compute the index access cost. A generic estimator might do this:
 
         /*
          * Our generic assumption is that the index pages will be read
@@ -103,7 +103,7 @@ A typical cost estimator will proceed as follows:
 
     However, the above does not account for amortization of index reads across repeated index scans.
 
-5.  Estimate the index correlation. For a simple ordered index on a single field, this can be retrieved from pg\_statistic. If the correlation is not known, the conservative estimate is zero (no correlation).
+5. Estimate the index correlation. For a simple ordered index on a single field, this can be retrieved from pg\_statistic. If the correlation is not known, the conservative estimate is zero (no correlation).
 
 Examples of cost estimator functions can be found in `src/backend/utils/adt/selfuncs.c`.
 

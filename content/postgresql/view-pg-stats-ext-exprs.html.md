@@ -8,8 +8,6 @@
 
 ## 54.29. `pg_stats_ext_exprs` [#](#VIEW-PG-STATS-EXT-EXPRS)
 
-[]()
-
 The view `pg_stats_ext_exprs` provides access to information about all expressions included in extended statistics objects, combining information stored in the [`pg_statistic_ext`](catalog-pg-statistic-ext.html "53.52. pg_statistic_ext") and [`pg_statistic_ext_data`](catalog-pg-statistic-ext-data.html "53.53. pg_statistic_ext_data") catalogs. This view allows access only to rows of [`pg_statistic_ext`](catalog-pg-statistic-ext.html "53.52. pg_statistic_ext") and [`pg_statistic_ext_data`](catalog-pg-statistic-ext-data.html "53.53. pg_statistic_ext_data") that correspond to tables the user has permission to read, and therefore it is safe to allow public read access to this view.
 
 `pg_stats_ext_exprs` is also designed to present the information in a more readable format than the underlying catalogs — at the cost that its schema must be extended whenever the structure of statistics in `pg_statistic_ext` changes.
@@ -37,7 +35,6 @@ The view `pg_stats_ext_exprs` provides access to information about all expressio
 | `elem_count_histogram` `float4[]`A histogram of the counts of distinct non-null element values within the values of the expression, followed by the average number of distinct non-null elements. (Null for scalar types.)                                                                                                                                                                                                                                                                                                                                   |
 
 \
-
 
 The maximum number of entries in the array fields can be controlled on a column-by-column basis using the [`ALTER TABLE SET STATISTICS`](sql-altertable.html "ALTER TABLE") command, or globally by setting the [default\_statistics\_target](runtime-config-query.html#GUC-DEFAULT-STATISTICS-TARGET) run-time parameter.
 

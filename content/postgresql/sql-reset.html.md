@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## RESET
 
 RESET — restore the value of a run-time parameter to the default value
@@ -31,11 +29,11 @@ The transactional behavior of `RESET` is the same as `SET`: its effects will be 
 
 ## Parameters
 
-*   *`configuration_parameter`*
+* *`configuration_parameter`*
 
     Name of a settable run-time parameter. Available parameters are documented in [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") and on the [SET](sql-set.html "SET") reference page.
 
-*   `ALL`
+* `ALL`
 
     Resets all settable run-time parameters to default values.
 

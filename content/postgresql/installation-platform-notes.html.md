@@ -8,19 +8,17 @@
 
 ## 17.7. Platform-Specific Notes [#](#INSTALLATION-PLATFORM-NOTES)
 
-*   *   [17.7.1. AIX](installation-platform-notes.html#INSTALLATION-NOTES-AIX)
-    *   [17.7.2. Cygwin](installation-platform-notes.html#INSTALLATION-NOTES-CYGWIN)
-    *   [17.7.3. macOS](installation-platform-notes.html#INSTALLATION-NOTES-MACOS)
-    *   [17.7.4. MinGW/Native Windows](installation-platform-notes.html#INSTALLATION-NOTES-MINGW)
-    *   [17.7.5. Solaris](installation-platform-notes.html#INSTALLATION-NOTES-SOLARIS)
+  * *   [17.7.1. AIX](installation-platform-notes.html#INSTALLATION-NOTES-AIX)
+* [17.7.2. Cygwin](installation-platform-notes.html#INSTALLATION-NOTES-CYGWIN)
+* [17.7.3. macOS](installation-platform-notes.html#INSTALLATION-NOTES-MACOS)
+* [17.7.4. MinGW/Native Windows](installation-platform-notes.html#INSTALLATION-NOTES-MINGW)
+* [17.7.5. Solaris](installation-platform-notes.html#INSTALLATION-NOTES-SOLARIS)
 
 This section documents additional platform-specific issues regarding the installation and setup of PostgreSQL. Be sure to read the installation instructions, and in particular [Section 17.1](install-requirements.html "17.1. Requirements") as well. Also, check [Chapter 33](regress.html "Chapter 33. Regression Tests") regarding the interpretation of regression test results.
 
 Platforms that are not covered here have no known platform-specific installation issues.
 
 ### 17.7.1. AIX [#](#INSTALLATION-NOTES-AIX)
-
-[]()
 
 You can use GCC or the native IBM compiler `xlc` to build PostgreSQL on AIX.
 
@@ -54,25 +52,23 @@ By default, overcommit of paging space can happen. While we have not seen this o
 
 ### 17.7.2. Cygwin [#](#INSTALLATION-NOTES-CYGWIN)
 
-[]()
-
 PostgreSQL can be built using Cygwin, a Linux-like environment for Windows, but that method is inferior to the native Windows build (see [Chapter 18](install-windows.html "Chapter 18. Installation from Source Code on Windows")) and running a server under Cygwin is no longer recommended.
 
 When building from source, proceed according to the Unix-style installation procedure (i.e., `./configure; make`; etc.), noting the following Cygwin-specific differences:
 
-*   Set your path to use the Cygwin bin directory before the Windows utilities. This will help prevent problems with compilation.
+* Set your path to use the Cygwin bin directory before the Windows utilities. This will help prevent problems with compilation.
 
-*   The `adduser` command is not supported; use the appropriate user management application on Windows. Otherwise, skip this step.
+* The `adduser` command is not supported; use the appropriate user management application on Windows. Otherwise, skip this step.
 
-*   The `su` command is not supported; use ssh to simulate su on Windows. Otherwise, skip this step.
+* The `su` command is not supported; use ssh to simulate su on Windows. Otherwise, skip this step.
 
-*   OpenSSL is not supported.
+* OpenSSL is not supported.
 
-*   Start `cygserver` for shared memory support. To do this, enter the command `/usr/sbin/cygserver &`. This program needs to be running anytime you start the PostgreSQL server or initialize a database cluster (`initdb`). The default `cygserver` configuration may need to be changed (e.g., increase `SEMMNS`) to prevent PostgreSQL from failing due to a lack of system resources.
+* Start `cygserver` for shared memory support. To do this, enter the command `/usr/sbin/cygserver &`. This program needs to be running anytime you start the PostgreSQL server or initialize a database cluster (`initdb`). The default `cygserver` configuration may need to be changed (e.g., increase `SEMMNS`) to prevent PostgreSQL from failing due to a lack of system resources.
 
-*   Building might fail on some systems where a locale other than C is in use. To fix this, set the locale to C by doing `export LANG=C.utf8` before building, and then setting it back to the previous setting after you have installed PostgreSQL.
+* Building might fail on some systems where a locale other than C is in use. To fix this, set the locale to C by doing `export LANG=C.utf8` before building, and then setting it back to the previous setting after you have installed PostgreSQL.
 
-*   The parallel regression tests (`make check`) can generate spurious regression test failures due to overflowing the `listen()` backlog queue which causes connection refused errors or hangs. You can limit the number of connections using the make variable `MAX_CONNECTIONS` thus:
+* The parallel regression tests (`make check`) can generate spurious regression test failures due to overflowing the `listen()` backlog queue which causes connection refused errors or hangs. You can limit the number of connections using the make variable `MAX_CONNECTIONS` thus:
 
         make MAX_CONNECTIONS=5 check
 
@@ -81,8 +77,6 @@ When building from source, proceed according to the Unix-style installation proc
 It is possible to install `cygserver` and the PostgreSQL server as Windows NT services. For information on how to do this, please refer to the `README` document included with the PostgreSQL binary package on Cygwin. It is installed in the directory `/usr/share/doc/Cygwin`.
 
 ### 17.7.3. macOS [#](#INSTALLATION-NOTES-MACOS)
-
-[]()
 
 To build PostgreSQL from source on macOS, you will need to install Apple's command line developer tools, which can be done by issuing
 
@@ -116,8 +110,6 @@ macOS's “System Integrity Protection” (SIP) feature breaks `make check`, bec
 
 ### 17.7.4. MinGW/Native Windows [#](#INSTALLATION-NOTES-MINGW)
 
-[]()
-
 PostgreSQL for Windows can be built using MinGW, a Unix-like build environment for Microsoft operating systems, or using Microsoft's Visual C++ compiler suite. The MinGW build procedure uses the normal build system described in this chapter; the Visual C++ build works completely differently and is described in [Chapter 18](install-windows.html "Chapter 18. Installation from Source Code on Windows").
 
 The native Windows port requires a 32 or 64-bit version of Windows 2000 or later. Earlier operating systems do not have sufficient infrastructure (but Cygwin may be used on those). MinGW, the Unix-like build tools, and MSYS, a collection of Unix tools required to run shell scripts like `configure`, can be downloaded from <http://www.mingw.org/>. Neither is required to run the resulting binaries; they are needed only for creating the binaries.
@@ -131,8 +123,6 @@ After you have everything installed, it is suggested that you run psql under `CM
 If PostgreSQL on Windows crashes, it has the ability to generate minidumps that can be used to track down the cause for the crash, similar to core dumps on Unix. These dumps can be read using the Windows Debugger Tools or using Visual Studio. To enable the generation of dumps on Windows, create a subdirectory named `crashdumps` inside the cluster data directory. The dumps will then be written into this directory with a unique name based on the identifier of the crashing process and the current time of the crash.
 
 ### 17.7.5. Solaris [#](#INSTALLATION-NOTES-SOLARIS)
-
-[]()
 
 PostgreSQL is well-supported on Solaris. The more up to date your operating system, the fewer issues you will experience.
 

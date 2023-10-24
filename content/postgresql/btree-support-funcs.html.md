@@ -10,19 +10,17 @@
 
 As shown in [Table 38.9](xindex.html#XINDEX-BTREE-SUPPORT-TABLE "Table 38.9. B-Tree Support Functions"), btree defines one required and four optional support functions. The five user-defined methods are:
 
-*   `order`
+* `order`
 
     For each combination of data types that a btree operator family provides comparison operators for, it must provide a comparison support function, registered in `pg_amproc` with support function number 1 and `amproclefttype`/`amprocrighttype` equal to the left and right data types for the comparison (i.e., the same data types that the matching operators are registered with in `pg_amop`). The comparison function must take two non-null values *`A`* and *`B`* and return an `int32` value that is `<` `0`, `0`, or `>` `0` when *`A`* `<` *`B`*, *`A`* `=` *`B`*, or *`A`* `>` *`B`*, respectively. A null result is disallowed: all values of the data type must be comparable. See `src/backend/access/nbtree/nbtcompare.c` for examples.
 
     If the compared values are of a collatable data type, the appropriate collation OID will be passed to the comparison support function, using the standard `PG_GET_COLLATION()` mechanism.
 
-*   `sortsupport`
+* `sortsupport`
 
     Optionally, a btree operator family may provide *sort support* function(s), registered under support function number 2. These functions allow implementing comparisons for sorting purposes in a more efficient way than naively calling the comparison support function. The APIs involved in this are defined in `src/include/utils/sortsupport.h`.
 
-*   `in_range`
-
-    []()[]()
+* `in_range`
 
     Optionally, a btree operator family may provide *in\_range* support function(s), registered under support function number 3. These are not used during btree index operations; rather, they extend the semantics of the operator family so that it can support window clauses containing the `RANGE` *`offset`* `PRECEDING` and `RANGE` *`offset`* `FOLLOWING` frame bound types (see [Section 4.2.8](sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls")). Fundamentally, the extra information provided is how to add or subtract an *`offset`* value in a way that is compatible with the family's data ordering.
 
@@ -35,10 +33,10 @@ As shown in [Table 38.9](xindex.html#XINDEX-BTREE-SUPPORT-TABLE "Table 38.9. 
 
     The essential semantics of an `in_range` function depend on the two Boolean flag parameters. It should add or subtract *`base`* and *`offset`*, then compare *`val`* to the result, as follows:
 
-    *   if `!`*`sub`* and `!`*`less`*, return *`val`* `>=` (*`base`* `+` *`offset`*)
-    *   if `!`*`sub`* and *`less`*, return *`val`* `<=` (*`base`* `+` *`offset`*)
-    *   if *`sub`* and `!`*`less`*, return *`val`* `>=` (*`base`* `-` *`offset`*)
-    *   if *`sub`* and *`less`*, return *`val`* `<=` (*`base`* `-` *`offset`*)
+  * if `!`*`sub`* and `!`*`less`*, return *`val`* `>=` (*`base`* `+` *`offset`*)
+  * if `!`*`sub`* and *`less`*, return *`val`* `<=` (*`base`* `+` *`offset`*)
+  * if *`sub`* and `!`*`less`*, return *`val`* `>=` (*`base`* `-` *`offset`*)
+  * if *`sub`* and *`less`*, return *`val`* `<=` (*`base`* `-` *`offset`*)
 
     Before doing so, the function should check the sign of *`offset`*: if it is less than zero, raise error `ERRCODE_INVALID_PRECEDING_OR_FOLLOWING_SIZE` (22013) with error text like “invalid preceding or following size in window function”. (This is required by the SQL standard, although nonstandard operator families might perhaps choose to ignore this restriction, since there seems to be little semantic necessity for it.) This requirement is delegated to the `in_range` function so that the core code needn't understand what “less than zero” means for a particular data type.
 
@@ -46,10 +44,10 @@ As shown in [Table 38.9](xindex.html#XINDEX-BTREE-SUPPORT-TABLE "Table 38.9. 
 
     The results of the `in_range` function must be consistent with the sort ordering imposed by the operator family. To be precise, given any fixed values of *`offset`* and *`sub`*, then:
 
-    *   If `in_range` with *`less`* = true is true for some *`val1`* and *`base`*, it must be true for every *`val2`* `<=` *`val1`* with the same *`base`*.
-    *   If `in_range` with *`less`* = true is false for some *`val1`* and *`base`*, it must be false for every *`val2`* `>=` *`val1`* with the same *`base`*.
-    *   If `in_range` with *`less`* = true is true for some *`val`* and *`base1`*, it must be true for every *`base2`* `>=` *`base1`* with the same *`val`*.
-    *   If `in_range` with *`less`* = true is false for some *`val`* and *`base1`*, it must be false for every *`base2`* `<=` *`base1`* with the same *`val`*.
+  * If `in_range` with *`less`* = true is true for some *`val1`* and *`base`*, it must be true for every *`val2`* `<=` *`val1`* with the same *`base`*.
+  * If `in_range` with *`less`* = true is false for some *`val1`* and *`base`*, it must be false for every *`val2`* `>=` *`val1`* with the same *`base`*.
+  * If `in_range` with *`less`* = true is true for some *`val`* and *`base1`*, it must be true for every *`base2`* `>=` *`base1`* with the same *`val`*.
+  * If `in_range` with *`less`* = true is false for some *`val`* and *`base1`*, it must be false for every *`base2`* `<=` *`base1`* with the same *`val`*.
 
     Analogous statements with inverted conditions hold when *`less`* = false.
 
@@ -57,7 +55,7 @@ As shown in [Table 38.9](xindex.html#XINDEX-BTREE-SUPPORT-TABLE "Table 38.9. 
 
     `in_range` functions need not handle NULL inputs, and typically will be marked strict.
 
-*   `equalimage`
+* `equalimage`
 
     Optionally, a btree operator family may provide `equalimage` (“equality implies image equality”) support functions, registered under support function number 4. These functions allow the core code to determine when it is safe to apply the btree deduplication optimization. Currently, `equalimage` functions are only called when building or rebuilding an index.
 
@@ -77,7 +75,7 @@ As shown in [Table 38.9](xindex.html#XINDEX-BTREE-SUPPORT-TABLE "Table 38.9. 
 
     The convention followed by the operator classes included with the core PostgreSQL distribution is to register a stock, generic `equalimage` function. Most operator classes register `btequalimage()`, which indicates that deduplication is safe unconditionally. Operator classes for collatable data types such as `text` register `btvarstrequalimage()`, which indicates that deduplication is safe with deterministic collations. Best practice for third-party extensions is to register their own custom function to retain control.
 
-*   `options`
+* `options`
 
     Optionally, a B-tree operator family may provide `options` (“operator class specific options”) support functions, registered under support function number 5. These functions define a set of user-visible parameters that control operator class behavior.
 

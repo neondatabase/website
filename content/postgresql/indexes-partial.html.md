@@ -8,8 +8,6 @@
 
 ## 11.8. Partial Indexes [#](#INDEXES-PARTIAL)
 
-[]()
-
 A *partial index* is an index built over a subset of a table; the subset is defined by a conditional expression (called the *predicate* of the partial index). The index contains entries only for those table rows that satisfy the predicate. Partial indexes are a specialized feature, but there are several situations in which they are useful.
 
 One major reason for using a partial index is to avoid indexing common values. Since a query searching for a common value (one that accounts for more than a few percent of all the table rows) will not use the index anyway, there is no point in keeping those rows in the index at all. This reduces the size of the index, which will speed up those queries that do use the index. It will also speed up many table update operations because the index does not need to be updated in all cases. [Example 11.1](indexes-partial.html#INDEXES-PARTIAL-EX1 "Example 11.1. Setting up a Partial Index to Exclude Common Values") shows a possible application of this idea.
@@ -48,7 +46,6 @@ Observe that this kind of partial index requires that the common values be prede
 
 \
 
-
 Another possible use for a partial index is to exclude values from the index that the typical query workload is not interested in; this is shown in [Example 11.2](indexes-partial.html#INDEXES-PARTIAL-EX2 "Example 11.2. Setting up a Partial Index to Exclude Uninteresting Values"). This results in the same advantages as listed above, but it prevents the “uninteresting” values from being accessed via that index, even if an index scan might be profitable in that case. Obviously, setting up partial indexes for this kind of scenario will require a lot of care and experimentation.
 
 **Example 11.2. Setting up a Partial Index to Exclude Uninteresting Values**
@@ -76,7 +73,6 @@ The order 3501 might be among the billed or unbilled orders.
 
 \
 
-
 [Example 11.2](indexes-partial.html#INDEXES-PARTIAL-EX2 "Example 11.2. Setting up a Partial Index to Exclude Uninteresting Values") also illustrates that the indexed column and the column used in the predicate do not need to match. PostgreSQL supports partial indexes with arbitrary predicates, so long as only columns of the table being indexed are involved. However, keep in mind that the predicate must match the conditions used in the queries that are supposed to benefit from the index. To be precise, a partial index can be used in a query only if the system can recognize that the `WHERE` condition of the query mathematically implies the predicate of the index. PostgreSQL does not have a sophisticated theorem prover that can recognize mathematically equivalent expressions that are written in different forms. (Not only is such a general theorem prover extremely difficult to create, it would probably be too slow to be of any real use.) The system can recognize simple inequality implications, for example “x < 1” implies “x < 2”; otherwise the predicate condition must exactly match part of the query's `WHERE` condition or the index will not be recognized as usable. Matching takes place at query planning time, not at run time. As a result, parameterized query clauses do not work with a partial index. For example a prepared query with a parameter might specify “x < ?” which will never imply “x < 2” for all possible values of the parameter.
 
 A third possible use for partial indexes does not require the index to be used in queries at all. The idea here is to create a unique index over a subset of a table, as in [Example 11.3](indexes-partial.html#INDEXES-PARTIAL-EX3 "Example 11.3. Setting up a Partial Unique Index"). This enforces uniqueness among the rows that satisfy the index predicate, without constraining those that do not.
@@ -98,7 +94,6 @@ Suppose that we have a table describing test outcomes. We wish to ensure that th
 This is a particularly efficient approach when there are few successful tests and many unsuccessful ones. It is also possible to allow only one null in a column by creating a unique partial index with an `IS NULL` restriction.
 
 \
-
 
 Finally, a partial index can also be used to override the system's query plan choices. Also, data sets with peculiar distributions might cause the system to use an index when it really should not. In that case the index can be set up so that it is not available for the offending query. Normally, PostgreSQL makes reasonable choices about index usage (e.g., it avoids them when retrieving common values, so the earlier example really only saves index size, it is not required to avoid index usage), and grossly incorrect plan choices are cause for a bug report.
 
@@ -123,7 +118,6 @@ This is a bad idea! Almost certainly, you'll be better off with a single non-par
 If your table is large enough that a single index really is a bad idea, you should look into using partitioning instead (see [Section 5.11](ddl-partitioning.html "5.11. Table Partitioning")). With that mechanism, the system does understand that the tables and indexes are non-overlapping, so far better performance is possible.
 
 \
-
 
 More information about partial indexes can be found in [\[ston89b\]](biblio.html#STON89B), [\[olson93\]](biblio.html#OLSON93 "Partial indexing in POSTGRES: research project"), and [\[seshadri95\]](biblio.html#SESHADRI95).
 

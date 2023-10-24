@@ -8,8 +8,6 @@
 
 ## 23.1. Overview [#](#MANAGE-AG-OVERVIEW)
 
-[]()
-
 A small number of objects, like role, database, and tablespace names, are defined at the cluster level and stored in the `pg_global` tablespace. Inside the cluster are multiple databases, which are isolated from each other but can access cluster-level objects. Inside each database are multiple schemas, which contain objects like tables and functions. So the full hierarchy is: cluster, database, schema, table (or some other kind of object, such as a function).
 
 When connecting to the database server, a client must specify the database name in its connection request. It is not possible to access more than one database per connection. However, clients can open multiple connections to the same database, or different databases. Database-level security has two components: access control (see [Section 21.1](auth-pg-hba-conf.html "21.1. The pg_hba.conf File")), managed at the connection level, and authorization control (see [Section 5.7](ddl-priv.html "5.7. Privileges")), managed via the grant system. Foreign data wrappers (see [postgres\_fdw](postgres-fdw.html "F.37. postgres_fdw — access data stored in external PostgreSQL servers")) allow for objects within one database to act as proxies for objects in other database or clusters. The older dblink module (see [dblink](dblink.html "F.12. dblink — connect to other PostgreSQL databases")) provides a similar capability. By default, all users can connect to all databases using all connection methods.

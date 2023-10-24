@@ -8,11 +8,9 @@
 
 ## 14.1. Using `EXPLAIN` [#](#USING-EXPLAIN)
 
-*   *   [14.1.1. `EXPLAIN` Basics](using-explain.html#USING-EXPLAIN-BASICS)
-    *   [14.1.2. `EXPLAIN ANALYZE`](using-explain.html#USING-EXPLAIN-ANALYZE)
-    *   [14.1.3. Caveats](using-explain.html#USING-EXPLAIN-CAVEATS)
-
-[]()[]()
+  * *   [14.1.1. `EXPLAIN` Basics](using-explain.html#USING-EXPLAIN-BASICS)
+* [14.1.2. `EXPLAIN ANALYZE`](using-explain.html#USING-EXPLAIN-ANALYZE)
+* [14.1.3. Caveats](using-explain.html#USING-EXPLAIN-CAVEATS)
 
 PostgreSQL devises a *query plan* for each query it receives. Choosing the right plan to match the query structure and the properties of the data is absolutely critical for good performance, so the system includes a complex *planner* that tries to choose good plans. You can use the [`EXPLAIN`](sql-explain.html "EXPLAIN") command to see what query plan the planner creates for any query. Plan-reading is an art that requires some experience to master, but this section attempts to cover the basics.
 
@@ -34,10 +32,10 @@ Here is a trivial example, just to show what the output looks like:
 
 Since this query has no `WHERE` clause, it must scan all the rows of the table, so the planner has chosen to use a simple sequential scan plan. The numbers that are quoted in parentheses are (left to right):
 
-*   Estimated start-up cost. This is the time expended before the output phase can begin, e.g., time to do the sorting in a sort node.
-*   Estimated total cost. This is stated on the assumption that the plan node is run to completion, i.e., all available rows are retrieved. In practice a node's parent node might stop short of reading all available rows (see the `LIMIT` example below).
-*   Estimated number of rows output by this plan node. Again, the node is assumed to be run to completion.
-*   Estimated average width of rows output by this plan node (in bytes).
+* Estimated start-up cost. This is the time expended before the output phase can begin, e.g., time to do the sorting in a sort node.
+* Estimated total cost. This is stated on the assumption that the plan node is run to completion, i.e., all available rows are retrieved. In practice a node's parent node might stop short of reading all available rows (see the `LIMIT` example below).
+* Estimated number of rows output by this plan node. Again, the node is assumed to be run to completion.
+* Estimated average width of rows output by this plan node (in bytes).
 
 The costs are measured in arbitrary units determined by the planner's cost parameters (see [Section 20.7.2](runtime-config-query.html#RUNTIME-CONFIG-QUERY-CONSTANTS "20.7.2. Planner Cost Constants")). Traditional practice is to measure the costs in units of disk page fetches; that is, [seq\_page\_cost](runtime-config-query.html#GUC-SEQ-PAGE-COST) is conventionally set to `1.0` and the other cost parameters are set relative to that. The examples in this section are run with the default cost parameters.
 

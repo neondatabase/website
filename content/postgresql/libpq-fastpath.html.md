@@ -8,15 +8,13 @@
 
 ## 34.8. The Fast-Path Interface [#](#LIBPQ-FASTPATH)
 
-[]()
-
 PostgreSQL provides a fast-path interface to send simple function calls to the server.
 
 ### Tip
 
 This interface is somewhat obsolete, as one can achieve similar performance and greater functionality by setting up a prepared statement to define the function call. Then, executing the statement with binary transmission of parameters and results substitutes for a fast-path function call.
 
-The function `PQfn`[]() requests execution of a server function via the fast-path interface:
+The function `PQfn` requests execution of a server function via the fast-path interface:
 
     PGresult *PQfn(PGconn *conn,
                    int fnid,

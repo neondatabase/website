@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_modifytuple
 
 SPI\_modifytuple — create a row by replacing selected fields of a given row
@@ -25,27 +23,27 @@ This function can only be used while connected to SPI. Otherwise, it returns NUL
 
 ## Arguments
 
-*   `Relation rel`
+* `Relation rel`
 
     Used only as the source of the row descriptor for the row. (Passing a relation rather than a row descriptor is a misfeature.)
 
-*   `HeapTuple row`
+* `HeapTuple row`
 
     row to be modified
 
-*   `int ncols`
+* `int ncols`
 
     number of columns to be changed
 
-*   `int * colnum`
+* `int * colnum`
 
     an array of length *`ncols`*, containing the numbers of the columns that are to be changed (column numbers start at 1)
 
-*   `Datum * values`
+* `Datum * values`
 
     an array of length *`ncols`*, containing the new values for the specified columns
 
-*   `const char * nulls`
+* `const char * nulls`
 
     an array of length *`ncols`*, describing which new values are null
 
@@ -57,15 +55,15 @@ new row with modifications, allocated in the upper executor context, or `NULL` o
 
 On error, `SPI_result` is set as follows:
 
-*   `SPI_ERROR_ARGUMENT`
+* `SPI_ERROR_ARGUMENT`
 
     if *`rel`* is `NULL`, or if *`row`* is `NULL`, or if *`ncols`* is less than or equal to 0, or if *`colnum`* is `NULL`, or if *`values`* is `NULL`.
 
-*   `SPI_ERROR_NOATTRIBUTE`
+* `SPI_ERROR_NOATTRIBUTE`
 
     if *`colnum`* contains an invalid column number (less than or equal to 0 or greater than the number of columns in *`row`*)
 
-*   `SPI_ERROR_UNCONNECTED`
+* `SPI_ERROR_UNCONNECTED`
 
     if SPI is not active
 

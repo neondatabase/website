@@ -8,15 +8,15 @@
 
 ## 43.6. Control Structures [#](#PLPGSQL-CONTROL-STRUCTURES)
 
-*   *   [43.6.1. Returning from a Function](plpgsql-control-structures.html#PLPGSQL-STATEMENTS-RETURNING)
-    *   [43.6.2. Returning from a Procedure](plpgsql-control-structures.html#PLPGSQL-STATEMENTS-RETURNING-PROCEDURE)
-    *   [43.6.3. Calling a Procedure](plpgsql-control-structures.html#PLPGSQL-STATEMENTS-CALLING-PROCEDURE)
-    *   [43.6.4. Conditionals](plpgsql-control-structures.html#PLPGSQL-CONDITIONALS)
-    *   [43.6.5. Simple Loops](plpgsql-control-structures.html#PLPGSQL-CONTROL-STRUCTURES-LOOPS)
-    *   [43.6.6. Looping through Query Results](plpgsql-control-structures.html#PLPGSQL-RECORDS-ITERATING)
-    *   [43.6.7. Looping through Arrays](plpgsql-control-structures.html#PLPGSQL-FOREACH-ARRAY)
-    *   [43.6.8. Trapping Errors](plpgsql-control-structures.html#PLPGSQL-ERROR-TRAPPING)
-    *   [43.6.9. Obtaining Execution Location Information](plpgsql-control-structures.html#PLPGSQL-CALL-STACK)
+  * *   [43.6.1. Returning from a Function](plpgsql-control-structures.html#PLPGSQL-STATEMENTS-RETURNING)
+* [43.6.2. Returning from a Procedure](plpgsql-control-structures.html#PLPGSQL-STATEMENTS-RETURNING-PROCEDURE)
+* [43.6.3. Calling a Procedure](plpgsql-control-structures.html#PLPGSQL-STATEMENTS-CALLING-PROCEDURE)
+* [43.6.4. Conditionals](plpgsql-control-structures.html#PLPGSQL-CONDITIONALS)
+* [43.6.5. Simple Loops](plpgsql-control-structures.html#PLPGSQL-CONTROL-STRUCTURES-LOOPS)
+* [43.6.6. Looping through Query Results](plpgsql-control-structures.html#PLPGSQL-RECORDS-ITERATING)
+* [43.6.7. Looping through Arrays](plpgsql-control-structures.html#PLPGSQL-FOREACH-ARRAY)
+* [43.6.8. Trapping Errors](plpgsql-control-structures.html#PLPGSQL-ERROR-TRAPPING)
+* [43.6.9. Obtaining Execution Location Information](plpgsql-control-structures.html#PLPGSQL-CALL-STACK)
 
 Control structures are probably the most useful (and important) part of PL/pgSQL. With PL/pgSQL's control structures, you can manipulate PostgreSQL data in a very flexible and powerful way.
 
@@ -49,8 +49,6 @@ Some examples:
     RETURN (1, 2, 'three'::text);  -- must cast columns to correct types
 
 #### 43.6.1.2. `RETURN NEXT` and `RETURN QUERY` [#](#PLPGSQL-STATEMENTS-RETURNING-RETURN-NEXT)
-
-[]()[]()
 
     RETURN NEXT expression;
     RETURN QUERY query;
@@ -149,14 +147,14 @@ The variable corresponding to an output parameter can be a simple variable or a 
 
 `IF` and `CASE` statements let you execute alternative commands based on certain conditions. PL/pgSQL has three forms of `IF`:
 
-*   `IF ... THEN ... END IF`
-*   `IF ... THEN ... ELSE ... END IF`
-*   `IF ... THEN ... ELSIF ... THEN ... ELSE ... END IF`
+* `IF ... THEN ... END IF`
+* `IF ... THEN ... ELSE ... END IF`
+* `IF ... THEN ... ELSIF ... THEN ... ELSE ... END IF`
 
 and two forms of `CASE`:
 
-*   `CASE ... WHEN ... THEN ... ELSE ... END CASE`
-*   `CASE WHEN ... THEN ... ELSE ... END CASE`
+* `CASE ... WHEN ... THEN ... ELSE ... END CASE`
+* `CASE WHEN ... THEN ... ELSE ... END CASE`
 
 #### 43.6.4.1. `IF-THEN` [#](#PLPGSQL-CONDITIONALS-IF-THEN)
 
@@ -294,8 +292,6 @@ This form of `CASE` is entirely equivalent to `IF-THEN-ELSIF`, except for the ru
 
 ### 43.6.5. Simple Loops [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS)
 
-[]()
-
 With the `LOOP`, `EXIT`, `CONTINUE`, `WHILE`, `FOR`, and `FOREACH` statements, you can arrange for your PL/pgSQL function to repeat a series of commands.
 
 #### 43.6.5.1. `LOOP` [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS-LOOP)
@@ -308,8 +304,6 @@ With the `LOOP`, `EXIT`, `CONTINUE`, `WHILE`, `FOR`, and `FOREACH` statements, y
 `LOOP` defines an unconditional loop that is repeated indefinitely until terminated by an `EXIT` or `RETURN` statement. The optional *`label`* can be used by `EXIT` and `CONTINUE` statements within nested loops to specify which loop those statements refer to.
 
 #### 43.6.5.2. `EXIT` [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS-EXIT)
-
-[]()
 
     EXIT [ label ] [ WHEN boolean-expression ];
 
@@ -346,8 +340,6 @@ Examples:
 
 #### 43.6.5.3. `CONTINUE` [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS-CONTINUE)
 
-[]()
-
     CONTINUE [ label ] [ WHEN boolean-expression ];
 
 If no *`label`* is given, the next iteration of the innermost loop is begun. That is, all statements remaining in the loop body are skipped, and control returns to the loop control expression (if any) to determine whether another loop iteration is needed. If *`label`* is present, it specifies the label of the loop whose execution will be continued.
@@ -366,8 +358,6 @@ Examples:
     END LOOP;
 
 #### 43.6.5.4. `WHILE` [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS-WHILE)
-
-[]()
 
     [ <<label>> ]
     WHILE boolean-expression LOOP
@@ -519,8 +509,6 @@ With a positive `SLICE` value, `FOREACH` iterates through slices of the array ra
 
 ### 43.6.8. Trapping Errors [#](#PLPGSQL-ERROR-TRAPPING)
 
-[]()
-
 By default, any error occurring in a PL/pgSQL function aborts execution of the function and the surrounding transaction. You can trap errors and recover from them by using a `BEGIN` block with an `EXCEPTION` clause. The syntax is an extension of the normal syntax for a `BEGIN` block:
 
     [ <<label>> ]
@@ -600,7 +588,6 @@ This coding assumes the `unique_violation` error is caused by the `INSERT`, and 
 
 \
 
-
 #### 43.6.8.1. Obtaining Information about an Error [#](#PLPGSQL-EXCEPTION-DIAGNOSTICS)
 
 Exception handlers frequently need to identify the specific error that occurred. There are two ways to get information about the current exception in PL/pgSQL: special variables and the `GET STACKED DIAGNOSTICS` command.
@@ -629,7 +616,6 @@ Each *`item`* is a key word identifying a status value to be assigned to the spe
 | `PG_EXCEPTION_CONTEXT` | `text` | line(s) of text describing the call stack at the time of the exception (see [Section 43.6.9](plpgsql-control-structures.html#PLPGSQL-CALL-STACK "43.6.9. Obtaining Execution Location Information")) |
 
 \
-
 
 If the exception did not set a value for an item, an empty string will be returned.
 

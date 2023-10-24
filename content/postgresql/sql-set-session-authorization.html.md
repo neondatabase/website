@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SET SESSION AUTHORIZATION
 
 SET SESSION AUTHORIZATION — set the session user identifier and the current user identifier of the current session

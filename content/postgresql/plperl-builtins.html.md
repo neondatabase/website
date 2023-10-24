@@ -8,14 +8,14 @@
 
 ## 45.3. Built-in Functions [#](#PLPERL-BUILTINS)
 
-*   *   [45.3.1. Database Access from PL/Perl](plperl-builtins.html#PLPERL-DATABASE)
-    *   [45.3.2. Utility Functions in PL/Perl](plperl-builtins.html#PLPERL-UTILITY-FUNCTIONS)
+  * *   [45.3.1. Database Access from PL/Perl](plperl-builtins.html#PLPERL-DATABASE)
+* [45.3.2. Utility Functions in PL/Perl](plperl-builtins.html#PLPERL-UTILITY-FUNCTIONS)
 
 ### 45.3.1. Database Access from PL/Perl [#](#PLPERL-DATABASE)
 
 Access to the database itself from your Perl function can be done via the following functions:
 
-*   `spi_exec_query(query [, limit])`[]()
+* `spi_exec_query(query [, limit])`
 
     `spi_exec_query` executes an SQL command and returns the entire row set as a reference to an array of hash references. If *`limit`* is specified and is greater than zero, then `spi_exec_query` retrieves at most *`limit`* rows, much as if the query included a `LIMIT` clause. Omitting *`limit`* or specifying it as zero results in no row limit.
 
@@ -71,7 +71,7 @@ Access to the database itself from your Perl function can be done via the follow
 
         SELECT * FROM test_munge();
 
-*   `spi_query(command)`[]()`spi_fetchrow(cursor)`[]()`spi_cursor_close(cursor)`[]()
+* `spi_query(command)``spi_fetchrow(cursor)``spi_cursor_close(cursor)`
 
     `spi_query` and `spi_fetchrow` work together as a pair for row sets which might be large, or for cases where you wish to return rows as they arrive. `spi_fetchrow` works *only* with `spi_query`. The following example illustrates how you use them together:
 
@@ -104,7 +104,7 @@ Access to the database itself from your Perl function can be done via the follow
 
     Normally, `spi_fetchrow` should be repeated until it returns `undef`, indicating that there are no more rows to read. The cursor returned by `spi_query` is automatically freed when `spi_fetchrow` returns `undef`. If you do not wish to read all the rows, instead call `spi_cursor_close` to free the cursor. Failure to do so will result in memory leaks.
 
-*   `spi_prepare(command, argument types)`[]()`spi_query_prepared(plan, arguments)`[]()`spi_exec_prepared(plan [, attributes], arguments)`[]()`spi_freeplan(plan)`[]()
+* `spi_prepare(command, argument types)``spi_query_prepared(plan, arguments)``spi_exec_prepared(plan [, attributes], arguments)``spi_freeplan(plan)`
 
     `spi_prepare`, `spi_query_prepared`, `spi_exec_prepared`, and `spi_freeplan` implement the same functionality but for prepared queries. `spi_prepare` accepts a query string with numbered argument placeholders ($1, $2, etc.) and a string list of argument types:
 
@@ -175,7 +175,7 @@ Access to the database itself from your Perl function can be done via the follow
          (2,192.168.1.2)
         (2 rows)
 
-*   `spi_commit()`[]()`spi_rollback()`[]()
+* `spi_commit()``spi_rollback()`
 
     Commit or roll back the current transaction. This can only be called in a procedure or anonymous code block (`DO` command) called from the top level. (Note that it is not possible to run the SQL commands `COMMIT` or `ROLLBACK` via `spi_exec_query` or similar. It has to be done using these functions.) After a transaction is ended, a new transaction is automatically started, so there is no separate function for that.
 
@@ -198,47 +198,47 @@ Access to the database itself from your Perl function can be done via the follow
 
 ### 45.3.2. Utility Functions in PL/Perl [#](#PLPERL-UTILITY-FUNCTIONS)
 
-*   `elog(level, msg)`[]()
+* `elog(level, msg)`
 
     Emit a log or error message. Possible levels are `DEBUG`, `LOG`, `INFO`, `NOTICE`, `WARNING`, and `ERROR`. `ERROR` raises an error condition; if this is not trapped by the surrounding Perl code, the error propagates out to the calling query, causing the current transaction or subtransaction to be aborted. This is effectively the same as the Perl `die` command. The other levels only generate messages of different priority levels. Whether messages of a particular priority are reported to the client, written to the server log, or both is controlled by the [log\_min\_messages](runtime-config-logging.html#GUC-LOG-MIN-MESSAGES) and [client\_min\_messages](runtime-config-client.html#GUC-CLIENT-MIN-MESSAGES) configuration variables. See [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for more information.
 
-*   `quote_literal(string)`[]()
+* `quote_literal(string)`
 
     Return the given string suitably quoted to be used as a string literal in an SQL statement string. Embedded single-quotes and backslashes are properly doubled. Note that `quote_literal` returns undef on undef input; if the argument might be undef, `quote_nullable` is often more suitable.
 
-*   `quote_nullable(string)`[]()
+* `quote_nullable(string)`
 
     Return the given string suitably quoted to be used as a string literal in an SQL statement string; or, if the argument is undef, return the unquoted string "NULL". Embedded single-quotes and backslashes are properly doubled.
 
-*   `quote_ident(string)`[]()
+* `quote_ident(string)`
 
     Return the given string suitably quoted to be used as an identifier in an SQL statement string. Quotes are added only if necessary (i.e., if the string contains non-identifier characters or would be case-folded). Embedded quotes are properly doubled.
 
-*   `decode_bytea(string)`[]()
+* `decode_bytea(string)`
 
     Return the unescaped binary data represented by the contents of the given string, which should be `bytea` encoded.
 
-*   `encode_bytea(string)`[]()
+* `encode_bytea(string)`
 
     Return the `bytea` encoded form of the binary data contents of the given string.
 
-*   `encode_array_literal(array)`[]()`encode_array_literal(array, delimiter)`
+* `encode_array_literal(array)``encode_array_literal(array, delimiter)`
 
-    Returns the contents of the referenced array as a string in array literal format (see [Section 8.15.2](arrays.html#ARRAYS-INPUT "8.15.2. Array Value Input")). Returns the argument value unaltered if it's not a reference to an array. The delimiter used between elements of the array literal defaults to "`, `" if a delimiter is not specified or is undef.
+    Returns the contents of the referenced array as a string in array literal format (see [Section 8.15.2](arrays.html#ARRAYS-INPUT "8.15.2. Array Value Input")). Returns the argument value unaltered if it's not a reference to an array. The delimiter used between elements of the array literal defaults to "`,`" if a delimiter is not specified or is undef.
 
-*   `encode_typed_literal(value, typename)`[]()
+* `encode_typed_literal(value, typename)`
 
     Converts a Perl variable to the value of the data type passed as a second argument and returns a string representation of this value. Correctly handles nested arrays and values of composite types.
 
-*   `encode_array_constructor(array)`[]()
+* `encode_array_constructor(array)`
 
     Returns the contents of the referenced array as a string in array constructor format (see [Section 4.2.12](sql-expressions.html#SQL-SYNTAX-ARRAY-CONSTRUCTORS "4.2.12. Array Constructors")). Individual values are quoted using `quote_nullable`. Returns the argument value, quoted using `quote_nullable`, if it's not a reference to an array.
 
-*   `looks_like_number(string)`[]()
+* `looks_like_number(string)`
 
     Returns a true value if the content of the given string looks like a number, according to Perl, returns false otherwise. Returns undef if the argument is undef. Leading and trailing space is ignored. `Inf` and `Infinity` are regarded as numbers.
 
-*   `is_array_ref(argument)`[]()
+* `is_array_ref(argument)`
 
     Returns a true value if the given argument may be treated as an array reference, that is, if ref of the argument is `ARRAY` or `PostgreSQL::InServer::ARRAY`. Returns false otherwise.
 

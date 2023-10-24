@@ -8,9 +8,9 @@
 
 ## 67.4. Implementation [#](#BTREE-IMPLEMENTATION)
 
-*   *   [67.4.1. B-Tree Structure](btree-implementation.html#BTREE-STRUCTURE)
-    *   [67.4.2. Bottom-up Index Deletion](btree-implementation.html#BTREE-DELETION)
-    *   [67.4.3. Deduplication](btree-implementation.html#BTREE-DEDUPLICATION)
+  * *   [67.4.1. B-Tree Structure](btree-implementation.html#BTREE-STRUCTURE)
+* [67.4.2. Bottom-up Index Deletion](btree-implementation.html#BTREE-DELETION)
+* [67.4.3. Deduplication](btree-implementation.html#BTREE-DEDUPLICATION)
 
 This section covers B-Tree index implementation details that may be of use to advanced users. See `src/backend/access/nbtree/README` in the source distribution for a much more detailed, internals-focused description of the B-Tree implementation.
 
@@ -62,18 +62,18 @@ Deduplication cannot be used in all cases due to implementation-level restrictio
 
 Note that deduplication is deemed unsafe and cannot be used in the following cases involving semantically significant differences among equal datums:
 
-*   `text`, `varchar`, and `char` cannot use deduplication when a *nondeterministic* collation is used. Case and accent differences must be preserved among equal datums.
-*   `numeric` cannot use deduplication. Numeric display scale must be preserved among equal datums.
-*   `jsonb` cannot use deduplication, since the `jsonb` B-Tree operator class uses `numeric` internally.
-*   `float4` and `float8` cannot use deduplication. These types have distinct representations for `-0` and `0`, which are nevertheless considered equal. This difference must be preserved.
+* `text`, `varchar`, and `char` cannot use deduplication when a *nondeterministic* collation is used. Case and accent differences must be preserved among equal datums.
+* `numeric` cannot use deduplication. Numeric display scale must be preserved among equal datums.
+* `jsonb` cannot use deduplication, since the `jsonb` B-Tree operator class uses `numeric` internally.
+* `float4` and `float8` cannot use deduplication. These types have distinct representations for `-0` and `0`, which are nevertheless considered equal. This difference must be preserved.
 
 There is one further implementation-level restriction that may be lifted in a future version of PostgreSQL:
 
-*   Container types (such as composite types, arrays, or range types) cannot use deduplication.
+* Container types (such as composite types, arrays, or range types) cannot use deduplication.
 
 There is one further implementation-level restriction that applies regardless of the operator class or collation used:
 
-*   `INCLUDE` indexes can never use deduplication.
+* `INCLUDE` indexes can never use deduplication.
 
 ***
 

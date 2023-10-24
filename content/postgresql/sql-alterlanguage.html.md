@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ALTER LANGUAGE
 
 ALTER LANGUAGE — change the definition of a procedural language
@@ -23,15 +21,15 @@ ALTER LANGUAGE — change the definition of a procedural language
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     Name of a language
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the language
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The new owner of the language
 

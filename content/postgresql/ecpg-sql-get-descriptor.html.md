@@ -23,23 +23,23 @@ This command has two forms: The first form retrieves descriptor “header” ite
 
 ## Parameters
 
-*   *`descriptor_name`* [#](#ECPG-SQL-GET-DESCRIPTOR-DESCRIPTOR-NAME)
+* *`descriptor_name`* [#](#ECPG-SQL-GET-DESCRIPTOR-DESCRIPTOR-NAME)
 
     A descriptor name.
 
-*   *`descriptor_header_item`* [#](#ECPG-SQL-GET-DESCRIPTOR-DESCRIPTOR-HEADER-ITEM)
+* *`descriptor_header_item`* [#](#ECPG-SQL-GET-DESCRIPTOR-DESCRIPTOR-HEADER-ITEM)
 
     A token identifying which header information item to retrieve. Only `COUNT`, to get the number of columns in the result set, is currently supported.
 
-*   *`column_number`* [#](#ECPG-SQL-GET-DESCRIPTOR-COLUMN-NUMBER)
+* *`column_number`* [#](#ECPG-SQL-GET-DESCRIPTOR-COLUMN-NUMBER)
 
     The number of the column about which information is to be retrieved. The count starts at 1.
 
-*   *`descriptor_item`* [#](#ECPG-SQL-GET-DESCRIPTOR-DESCRIPTOR-ITEM)
+* *`descriptor_item`* [#](#ECPG-SQL-GET-DESCRIPTOR-DESCRIPTOR-ITEM)
 
     A token identifying which item of information about a column to retrieve. See [Section 36.7.1](ecpg-descriptors.html#ECPG-NAMED-DESCRIPTORS "36.7.1. Named SQL Descriptor Areas") for a list of supported items.
 
-*   *`cvariable`* [#](#ECPG-SQL-GET-DESCRIPTOR-CVARIABLE)
+* *`cvariable`* [#](#ECPG-SQL-GET-DESCRIPTOR-CVARIABLE)
 
     A host variable that will receive the data retrieved from the descriptor area.
 

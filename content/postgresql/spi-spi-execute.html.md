@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_execute
 
 SPI\_execute — execute a command
@@ -68,15 +66,15 @@ The fields `tupdesc`, `vals`, and `numvals` can be used by SPI callers; the rema
 
 ## Arguments
 
-*   `const char * command`
+* `const char * command`
 
     string containing command to execute
 
-*   `bool read_only`
+* `bool read_only`
 
     `true` for read-only execution
 
-*   `long count`
+* `long count`
 
     maximum number of rows to return, or `0` for no limit
 
@@ -84,69 +82,69 @@ The fields `tupdesc`, `vals`, and `numvals` can be used by SPI callers; the rema
 
 If the execution of the command was successful then one of the following (nonnegative) values will be returned:
 
-*   `SPI_OK_SELECT`
+* `SPI_OK_SELECT`
 
     if a `SELECT` (but not `SELECT INTO`) was executed
 
-*   `SPI_OK_SELINTO`
+* `SPI_OK_SELINTO`
 
     if a `SELECT INTO` was executed
 
-*   `SPI_OK_INSERT`
+* `SPI_OK_INSERT`
 
     if an `INSERT` was executed
 
-*   `SPI_OK_DELETE`
+* `SPI_OK_DELETE`
 
     if a `DELETE` was executed
 
-*   `SPI_OK_UPDATE`
+* `SPI_OK_UPDATE`
 
     if an `UPDATE` was executed
 
-*   `SPI_OK_MERGE`
+* `SPI_OK_MERGE`
 
     if a `MERGE` was executed
 
-*   `SPI_OK_INSERT_RETURNING`
+* `SPI_OK_INSERT_RETURNING`
 
     if an `INSERT RETURNING` was executed
 
-*   `SPI_OK_DELETE_RETURNING`
+* `SPI_OK_DELETE_RETURNING`
 
     if a `DELETE RETURNING` was executed
 
-*   `SPI_OK_UPDATE_RETURNING`
+* `SPI_OK_UPDATE_RETURNING`
 
     if an `UPDATE RETURNING` was executed
 
-*   `SPI_OK_UTILITY`
+* `SPI_OK_UTILITY`
 
     if a utility command (e.g., `CREATE TABLE`) was executed
 
-*   `SPI_OK_REWRITTEN`
+* `SPI_OK_REWRITTEN`
 
     if the command was rewritten into another kind of command (e.g., `UPDATE` became an `INSERT`) by a [rule](rules.html "Chapter 41. The Rule System").
 
 On error, one of the following negative values is returned:
 
-*   `SPI_ERROR_ARGUMENT`
+* `SPI_ERROR_ARGUMENT`
 
     if *`command`* is `NULL` or *`count`* is less than 0
 
-*   `SPI_ERROR_COPY`
+* `SPI_ERROR_COPY`
 
     if `COPY TO stdout` or `COPY FROM stdin` was attempted
 
-*   `SPI_ERROR_TRANSACTION`
+* `SPI_ERROR_TRANSACTION`
 
     if a transaction manipulation command was attempted (`BEGIN`, `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `PREPARE TRANSACTION`, `COMMIT PREPARED`, `ROLLBACK PREPARED`, or any variant thereof)
 
-*   `SPI_ERROR_OPUNKNOWN`
+* `SPI_ERROR_OPUNKNOWN`
 
     if the command type is unknown (shouldn't happen)
 
-*   `SPI_ERROR_UNCONNECTED`
+* `SPI_ERROR_UNCONNECTED`
 
     if called from an unconnected C function
 

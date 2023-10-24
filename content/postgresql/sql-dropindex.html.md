@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DROP INDEX
 
 DROP INDEX — remove an index
@@ -22,7 +20,7 @@ DROP INDEX — remove an index
 
 ## Parameters
 
-*   `CONCURRENTLY`
+* `CONCURRENTLY`
 
     Drop the index without locking out concurrent selects, inserts, updates, and deletes on the index's table. A normal `DROP INDEX` acquires an `ACCESS EXCLUSIVE` lock on the table, blocking other accesses until the index drop can be completed. With this option, the command instead waits until conflicting transactions have completed.
 
@@ -30,19 +28,19 @@ DROP INDEX — remove an index
 
     For temporary tables, `DROP INDEX` is always non-concurrent, as no other session can access them, and non-concurrent index drop is cheaper.
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the index does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an index to remove.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically drop objects that depend on the index, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse to drop the index if any objects depend on it. This is the default.
 

@@ -8,8 +8,6 @@
 
 ## 54.25. `pg_shadow` [#](#VIEW-PG-SHADOW)
 
-[]()
-
 The view `pg_shadow` exists for backwards compatibility: it emulates a catalog that existed in PostgreSQL before version 8.1. It shows properties of all roles that are marked as `rolcanlogin` in [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").
 
 The name stems from the fact that this table should not be readable by the public since it contains passwords. [`pg_user`](view-pg-user.html "54.33. pg_user") is a publicly readable view on `pg_shadow` that blanks out the password field.

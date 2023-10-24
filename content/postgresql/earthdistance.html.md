@@ -8,10 +8,8 @@
 
 ## F.15. earthdistance — calculate great-circle distances [#](#EARTHDISTANCE)
 
-*   *   [F.15.1. Cube-Based Earth Distances](earthdistance.html#EARTHDISTANCE-CUBE-BASED)
-    *   [F.15.2. Point-Based Earth Distances](earthdistance.html#EARTHDISTANCE-POINT-BASED)
-
-[]()
+  * *   [F.15.1. Cube-Based Earth Distances](earthdistance.html#EARTHDISTANCE-CUBE-BASED)
+* [F.15.2. Point-Based Earth Distances](earthdistance.html#EARTHDISTANCE-POINT-BASED)
 
 The `earthdistance` module provides two different approaches to calculating great circle distances on the surface of the Earth. The one described first depends on the `cube` module. The second one is based on the built-in `point` data type, using longitude and latitude for the coordinates.
 
@@ -39,14 +37,14 @@ The provided functions are shown in [Table F.5](earthdistance.html#EARTHDISTANC
 
 | FunctionDescription                                                                                                                                                                                                                                                                                                                                                |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| []()`earth` () → `float8`Returns the assumed radius of the Earth.                                                                                                                                                                                                                                                                                                  |
-| []()`sec_to_gc` ( `float8` ) → `float8`Converts the normal straight line (secant) distance between two points on the surface of the Earth to the great circle distance between them.                                                                                                                                                                               |
-| []()`gc_to_sec` ( `float8` ) → `float8`Converts the great circle distance between two points on the surface of the Earth to the normal straight line (secant) distance between them.                                                                                                                                                                               |
-| []()`ll_to_earth` ( `float8`, `float8` ) → `earth`Returns the location of a point on the surface of the Earth given its latitude (argument 1) and longitude (argument 2) in degrees.                                                                                                                                                                               |
-| []()`latitude` ( `earth` ) → `float8`Returns the latitude in degrees of a point on the surface of the Earth.                                                                                                                                                                                                                                                       |
-| []()`longitude` ( `earth` ) → `float8`Returns the longitude in degrees of a point on the surface of the Earth.                                                                                                                                                                                                                                                     |
-| []()`earth_distance` ( `earth`, `earth` ) → `float8`Returns the great circle distance between two points on the surface of the Earth.                                                                                                                                                                                                                              |
-| []()`earth_box` ( `earth`, `float8` ) → `cube`Returns a box suitable for an indexed search using the `cube` `@>` operator for points within a given great circle distance of a location. Some points in this box are further than the specified great circle distance from the location, so a second check using `earth_distance` should be included in the query. |
+| `earth` () → `float8`Returns the assumed radius of the Earth.                                                                                                                                                                                                                                                                                                  |
+| `sec_to_gc` ( `float8` ) → `float8`Converts the normal straight line (secant) distance between two points on the surface of the Earth to the great circle distance between them.                                                                                                                                                                               |
+| `gc_to_sec` ( `float8` ) → `float8`Converts the great circle distance between two points on the surface of the Earth to the normal straight line (secant) distance between them.                                                                                                                                                                               |
+| `ll_to_earth` ( `float8`, `float8` ) → `earth`Returns the location of a point on the surface of the Earth given its latitude (argument 1) and longitude (argument 2) in degrees.                                                                                                                                                                               |
+| `latitude` ( `earth` ) → `float8`Returns the latitude in degrees of a point on the surface of the Earth.                                                                                                                                                                                                                                                       |
+| `longitude` ( `earth` ) → `float8`Returns the longitude in degrees of a point on the surface of the Earth.                                                                                                                                                                                                                                                     |
+| `earth_distance` ( `earth`, `earth` ) → `float8`Returns the great circle distance between two points on the surface of the Earth.                                                                                                                                                                                                                              |
+| `earth_box` ( `earth`, `float8` ) → `cube`Returns a box suitable for an indexed search using the `cube` `@>` operator for points within a given great circle distance of a location. Some points in this box are further than the specified great circle distance from the location, so a second check using `earth_distance` should be included in the query. |
 
 ### F.15.2. Point-Based Earth Distances [#](#EARTHDISTANCE-POINT-BASED)
 
@@ -61,7 +59,6 @@ A single operator is provided, shown in [Table F.6](earthdistance.html#EARTHDIS
 | `point` `<@>` `point` → `float8`Computes the distance in statute miles between two points on the Earth's surface. |
 
 \
-
 
 Note that unlike the `cube`-based part of the module, units are hardwired here: changing the `earth()` function will not affect the results of this operator.
 

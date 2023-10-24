@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## pg\_test\_fsync
 
 pg\_test\_fsync — determine fastest `wal_sync_method` for PostgreSQL
@@ -24,19 +22,19 @@ pg\_test\_fsync is intended to give you a reasonable idea of what the fastest [w
 
 pg\_test\_fsync accepts the following command-line options:
 
-*   `-f``--filename`
+* `-f``--filename`
 
     Specifies the file name to write test data in. This file should be in the same file system that the `pg_wal` directory is or will be placed in. (`pg_wal` contains the WAL files.) The default is `pg_test_fsync.out` in the current directory.
 
-*   `-s``--secs-per-test`
+* `-s``--secs-per-test`
 
     Specifies the number of seconds for each test. The more time per test, the greater the test's accuracy, but the longer it takes to run. The default is 5 seconds, which allows the program to complete in under 2 minutes.
 
-*   `-V``--version`
+* `-V``--version`
 
     Print the pg\_test\_fsync version and exit.
 
-*   `-?``--help`
+* `-?``--help`
 
     Show help about pg\_test\_fsync command line arguments, and exit.
 

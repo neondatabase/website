@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## CREATE TABLESPACE
 
 CREATE TABLESPACE — define a new tablespace
@@ -33,19 +31,19 @@ A tablespace cannot be used independently of the cluster in which it is defined;
 
 ## Parameters
 
-*   *`tablespace_name`*
+* *`tablespace_name`*
 
     The name of a tablespace to be created. The name cannot begin with `pg_`, as such names are reserved for system tablespaces.
 
-*   *`user_name`*
+* *`user_name`*
 
     The name of the user who will own the tablespace. If omitted, defaults to the user executing the command. Only superusers can create tablespaces, but they can assign ownership of tablespaces to non-superusers.
 
-*   *`directory`*
+* *`directory`*
 
     The directory that will be used for the tablespace. The directory must exist (`CREATE TABLESPACE` will not create it), should be empty, and must be owned by the PostgreSQL system user. The directory must be specified by an absolute path name.
 
-*   *`tablespace_option`*
+* *`tablespace_option`*
 
     A tablespace parameter to be set or reset. Currently, the only available parameters are `seq_page_cost`, `random_page_cost`, `effective_io_concurrency` and `maintenance_io_concurrency`. Setting these values for a particular tablespace will override the planner's usual estimate of the cost of reading pages from tables in that tablespace, and the executor's prefetching behavior, as established by the configuration parameters of the same name (see [seq\_page\_cost](runtime-config-query.html#GUC-SEQ-PAGE-COST), [random\_page\_cost](runtime-config-query.html#GUC-RANDOM-PAGE-COST), [effective\_io\_concurrency](runtime-config-resource.html#GUC-EFFECTIVE-IO-CONCURRENCY), [maintenance\_io\_concurrency](runtime-config-resource.html#GUC-MAINTENANCE-IO-CONCURRENCY)). This may be useful if one tablespace is located on a disk which is faster or slower than the remainder of the I/O subsystem.
 

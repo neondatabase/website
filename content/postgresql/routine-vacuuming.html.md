@@ -8,14 +8,12 @@
 
 ## 25.1. Routine Vacuuming [#](#ROUTINE-VACUUMING)
 
-*   *   [25.1.1. Vacuuming Basics](routine-vacuuming.html#VACUUM-BASICS)
-    *   [25.1.2. Recovering Disk Space](routine-vacuuming.html#VACUUM-FOR-SPACE-RECOVERY)
-    *   [25.1.3. Updating Planner Statistics](routine-vacuuming.html#VACUUM-FOR-STATISTICS)
-    *   [25.1.4. Updating the Visibility Map](routine-vacuuming.html#VACUUM-FOR-VISIBILITY-MAP)
-    *   [25.1.5. Preventing Transaction ID Wraparound Failures](routine-vacuuming.html#VACUUM-FOR-WRAPAROUND)
-    *   [25.1.6. The Autovacuum Daemon](routine-vacuuming.html#AUTOVACUUM)
-
-[]()
+  * *   [25.1.1. Vacuuming Basics](routine-vacuuming.html#VACUUM-BASICS)
+* [25.1.2. Recovering Disk Space](routine-vacuuming.html#VACUUM-FOR-SPACE-RECOVERY)
+* [25.1.3. Updating Planner Statistics](routine-vacuuming.html#VACUUM-FOR-STATISTICS)
+* [25.1.4. Updating the Visibility Map](routine-vacuuming.html#VACUUM-FOR-VISIBILITY-MAP)
+* [25.1.5. Preventing Transaction ID Wraparound Failures](routine-vacuuming.html#VACUUM-FOR-WRAPAROUND)
+* [25.1.6. The Autovacuum Daemon](routine-vacuuming.html#AUTOVACUUM)
 
 PostgreSQL databases require periodic maintenance known as *vacuuming*. For many installations, it is sufficient to let vacuuming be performed by the *autovacuum daemon*, which is described in [Section 25.1.6](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon"). You might need to adjust the autovacuuming parameters described there to obtain best results for your situation. Some database administrators will want to supplement or replace the daemon's activities with manually-managed `VACUUM` commands, which typically are executed according to a schedule by cron or Task Scheduler scripts. To set up manually-managed vacuuming properly, it is essential to understand the issues discussed in the next few subsections. Administrators who rely on autovacuuming may still wish to skim this material to help them understand and adjust autovacuuming.
 
@@ -23,10 +21,10 @@ PostgreSQL databases require periodic maintenance known as *vacuuming*. For many
 
 PostgreSQL's [`VACUUM`](sql-vacuum.html "VACUUM") command has to process each table on a regular basis for several reasons:
 
-1.  To recover or reuse disk space occupied by updated or deleted rows.
-2.  To update data statistics used by the PostgreSQL query planner.
-3.  To update the visibility map, which speeds up [index-only scans](indexes-index-only-scans.html "11.9. Index-Only Scans and Covering Indexes").
-4.  To protect against loss of very old data due to *transaction ID wraparound* or *multixact ID wraparound*.
+1. To recover or reuse disk space occupied by updated or deleted rows.
+2. To update data statistics used by the PostgreSQL query planner.
+3. To update the visibility map, which speeds up [index-only scans](indexes-index-only-scans.html "11.9. Index-Only Scans and Covering Indexes").
+4. To protect against loss of very old data due to *transaction ID wraparound* or *multixact ID wraparound*.
 
 Each of these reasons dictates performing `VACUUM` operations of varying frequency and scope, as explained in the following subsections.
 
@@ -35,8 +33,6 @@ There are two variants of `VACUUM`: standard `VACUUM` and `VACUUM FULL`. `VACUUM
 `VACUUM` creates a substantial amount of I/O traffic, which can cause poor performance for other active sessions. There are configuration parameters that can be adjusted to reduce the performance impact of background vacuuming — see [Section 20.4.4](runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-VACUUM-COST "20.4.4. Cost-based Vacuum Delay").
 
 ### 25.1.2. Recovering Disk Space [#](#VACUUM-FOR-SPACE-RECOVERY)
-
-[]()
 
 In PostgreSQL, an `UPDATE` or `DELETE` of a row does not immediately remove the old version of the row. This approach is necessary to gain the benefits of multiversion concurrency control (MVCC, see [Chapter 13](mvcc.html "Chapter 13. Concurrency Control")): the row version must not be deleted while it is still potentially visible to other transactions. But eventually, an outdated or deleted row version is no longer of interest to any transaction. The space it occupies must then be reclaimed for reuse by new rows, to avoid unbounded growth of disk space requirements. This is done by running `VACUUM`.
 
@@ -57,8 +53,6 @@ Plain `VACUUM` may not be satisfactory when a table contains large numbers of de
 If you have a table whose entire contents are deleted on a periodic basis, consider doing it with [`TRUNCATE`](sql-truncate.html "TRUNCATE") rather than using `DELETE` followed by `VACUUM`. `TRUNCATE` removes the entire content of the table immediately, without requiring a subsequent `VACUUM` or `VACUUM FULL` to reclaim the now-unused disk space. The disadvantage is that strict MVCC semantics are violated.
 
 ### 25.1.3. Updating Planner Statistics [#](#VACUUM-FOR-STATISTICS)
-
-[]()[]()
 
 The PostgreSQL query planner relies on statistical information about the contents of tables in order to generate good plans for queries. These statistics are gathered by the [`ANALYZE`](sql-analyze.html "ANALYZE") command, which can be invoked by itself or as an optional step in `VACUUM`. It is important to have reasonably accurate statistics, otherwise poor choices of plans might degrade database performance.
 
@@ -91,8 +85,6 @@ Vacuum maintains a [visibility map](storage-vm.html "73.4. Visibility Map") for
 Second, it allows PostgreSQL to answer some queries using only the index, without reference to the underlying table. Since PostgreSQL indexes don't contain tuple visibility information, a normal index scan fetches the heap tuple for each matching index entry, to check whether it should be seen by the current transaction. An [*index-only scan*](indexes-index-only-scans.html "11.9. Index-Only Scans and Covering Indexes"), on the other hand, checks the visibility map first. If it's known that all tuples on the page are visible, the heap fetch can be skipped. This is most useful on large data sets where the visibility map can prevent disk accesses. The visibility map is vastly smaller than the heap, so it can easily be cached even when the heap is very large.
 
 ### 25.1.5. Preventing Transaction ID Wraparound Failures [#](#VACUUM-FOR-WRAPAROUND)
-
-[]()[]()
 
 PostgreSQL's [MVCC](mvcc-intro.html "13.1. Introduction") transaction semantics depend on being able to compare transaction ID (XID) numbers: a row version with an insertion XID greater than the current transaction's XID is “in the future” and should not be visible to the current transaction. But since transaction IDs have limited size (32 bits) a cluster that runs for a long time (more than 4 billion transactions) would suffer *transaction ID wraparound*: the XID counter wraps around to zero, and all of a sudden transactions that were in the past appear to be in the future — which means their output become invisible. In short, catastrophic data loss. (Actually the data is still there, but that's cold comfort if you cannot get at it.) To avoid this, it is necessary to vacuum every table in every database at least once every two billion transactions.
 
@@ -148,19 +140,17 @@ If for some reason autovacuum fails to clear old XIDs from a table, the system w
 
 In this condition any transactions already in progress can continue, but only read-only transactions can be started. Operations that modify database records or truncate relations will fail. The `VACUUM` command can still be run normally. Note that, contrary to what was sometimes recommended in earlier releases, it is not necessary or desirable to stop the postmaster or enter single user-mode in order to restore normal operation. Instead, follow these steps:
 
-1.  Resolve old prepared transactions. You can find these by checking [pg\_prepared\_xacts](view-pg-prepared-xacts.html "54.16. pg_prepared_xacts") for rows where `age(transactionid)` is large. Such transactions should be committed or rolled back.
-2.  End long-running open transactions. You can find these by checking [pg\_stat\_activity](monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity") for rows where `age(backend_xid)` or `age(backend_xmin)` is large. Such transactions should be committed or rolled back, or the session can be terminated using `pg_terminate_backend`.
-3.  Drop any old replication slots. Use [pg\_stat\_replication](monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-VIEW "28.2.4. pg_stat_replication") to find slots where `age(xmin)` or `age(catalog_xmin)` is large. In many cases, such slots were created for replication to servers that no longer exist, or that have been down for a long time. If you drop a slot for a server that still exists and might still try to connect to that slot, that replica may need to be rebuilt.
-4.  Execute `VACUUM` in the target database. A database-wide `VACUUM` is simplest; to reduce the time required, it as also possible to issue manual `VACUUM` commands on the tables where `relminxid` is oldest. Do not use `VACUUM FULL` in this scenario, because it requires an XID and will therefore fail, except in super-user mode, where it will instead consume an XID and thus increase the risk of transaction ID wraparound. Do not use `VACUUM FREEZE` either, because it will do more than the minimum amount of work required to restore normal operation.
-5.  Once normal operation is restored, ensure that autovacuum is properly configured in the target database in order to avoid future problems.
+1. Resolve old prepared transactions. You can find these by checking [pg\_prepared\_xacts](view-pg-prepared-xacts.html "54.16. pg_prepared_xacts") for rows where `age(transactionid)` is large. Such transactions should be committed or rolled back.
+2. End long-running open transactions. You can find these by checking [pg\_stat\_activity](monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity") for rows where `age(backend_xid)` or `age(backend_xmin)` is large. Such transactions should be committed or rolled back, or the session can be terminated using `pg_terminate_backend`.
+3. Drop any old replication slots. Use [pg\_stat\_replication](monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-VIEW "28.2.4. pg_stat_replication") to find slots where `age(xmin)` or `age(catalog_xmin)` is large. In many cases, such slots were created for replication to servers that no longer exist, or that have been down for a long time. If you drop a slot for a server that still exists and might still try to connect to that slot, that replica may need to be rebuilt.
+4. Execute `VACUUM` in the target database. A database-wide `VACUUM` is simplest; to reduce the time required, it as also possible to issue manual `VACUUM` commands on the tables where `relminxid` is oldest. Do not use `VACUUM FULL` in this scenario, because it requires an XID and will therefore fail, except in super-user mode, where it will instead consume an XID and thus increase the risk of transaction ID wraparound. Do not use `VACUUM FREEZE` either, because it will do more than the minimum amount of work required to restore normal operation.
+5. Once normal operation is restored, ensure that autovacuum is properly configured in the target database in order to avoid future problems.
 
 ### Note
 
 In earlier versions, it was sometimes necessary to stop the postmaster and `VACUUM` the database in a single-user mode. In typical scenarios, this is no longer necessary, and should be avoided whenever possible, since it involves taking the system down. It is also riskier, since it disables transaction ID wraparound safeguards that are designed to prevent data loss. The only reason to use single-user mode in this scenario is if you wish to `TRUNCATE` or `DROP` unneeded tables to avoid needing to `VACUUM` them. The three-million-transaction safety margin exists to let the administrator do this. See the [postgres](app-postgres.html "postgres") reference page for details about using single-user mode.
 
 #### 25.1.5.1. Multixacts and Wraparound [#](#VACUUM-FOR-MULTIXACT-WRAPAROUND)
-
-[]()[]()
 
 *Multixact IDs* are used to support row locking by multiple transactions. Since there is only limited space in a tuple header to store lock information, that information is encoded as a “multiple transaction ID”, or multixact ID for short, whenever there is more than one transaction concurrently locking a row. Information about which transaction IDs are included in any particular multixact ID is stored separately in the `pg_multixact` subdirectory, and only the multixact ID appears in the `xmax` field in the tuple header. Like transaction IDs, multixact IDs are implemented as a 32-bit counter and corresponding storage, all of which requires careful aging management, storage cleanup, and wraparound handling. There is a separate storage area which holds the list of members in each multixact, which also uses a 32-bit counter and which must also be managed.
 
@@ -174,13 +164,11 @@ Similar to the XID case, if autovacuum fails to clear old MXIDs from a table, th
 
 Normal operation when MXIDs are exhausted can be restored in much the same way as when XIDs are exhausted. Follow the same steps in the previous section, but with the following differences:
 
-1.  Running transactions and prepared transactions can be ignored if there is no chance that they might appear in a multixact.
-2.  MXID information is not directly visible in system views such as `pg_stat_activity`; however, looking for old XIDs is still a good way of determining which transactions are causing MXID wraparound problems.
-3.  XID exhaustion will block all write transactions, but MXID exhaustion will only block a subset of write transactions, specifically those that involve row locks that require an MXID.
+1. Running transactions and prepared transactions can be ignored if there is no chance that they might appear in a multixact.
+2. MXID information is not directly visible in system views such as `pg_stat_activity`; however, looking for old XIDs is still a good way of determining which transactions are causing MXID wraparound problems.
+3. XID exhaustion will block all write transactions, but MXID exhaustion will only block a subset of write transactions, specifically those that involve row locks that require an MXID.
 
 ### 25.1.6. The Autovacuum Daemon [#](#AUTOVACUUM)
-
-[]()
 
 PostgreSQL has an optional but highly recommended feature called *autovacuum*, whose purpose is to automate the execution of `VACUUM` and `ANALYZE` commands. When enabled, autovacuum checks for tables that have had a large number of inserted, updated or deleted tuples. These checks use the statistics collection facility; therefore, autovacuum cannot be used unless [track\_counts](runtime-config-statistics.html#GUC-TRACK-COUNTS) is set to `true`. In the default configuration, autovacuuming is enabled and the related configuration parameters are appropriately set.
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_getrelname
 
 SPI\_getrelname — return the name of the specified relation
@@ -22,7 +20,7 @@ SPI\_getrelname — return the name of the specified relation
 
 ## Arguments
 
-*   `Relation rel`
+* `Relation rel`
 
     input relation
 

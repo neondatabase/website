@@ -8,8 +8,6 @@
 
 ## 9.14. UUID Functions [#](#FUNCTIONS-UUID)
 
-[]()[]()
-
 PostgreSQL includes one function to generate a UUID:
 
     gen_random_uuid () → uuid

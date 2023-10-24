@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## vacuumlo
 
 vacuumlo — remove orphaned large objects from a PostgreSQL database
@@ -28,45 +26,45 @@ All databases named on the command line are processed.
 
 vacuumlo accepts the following command-line arguments:
 
-*   `-l limit``--limit=limit`
+* `-l limit``--limit=limit`
 
     Remove no more than *`limit`* large objects per transaction (default 1000). Since the server acquires a lock per LO removed, removing too many LOs in one transaction risks exceeding [max\_locks\_per\_transaction](runtime-config-locks.html#GUC-MAX-LOCKS-PER-TRANSACTION). Set the limit to zero if you want all removals done in a single transaction.
 
-*   `-n``--dry-run`
+* `-n``--dry-run`
 
     Don't remove anything, just show what would be done.
 
-*   `-v``--verbose`
+* `-v``--verbose`
 
     Write a lot of progress messages.
 
-*   `-V``--version`
+* `-V``--version`
 
     Print the vacuumlo version and exit.
 
-*   `-?``--help`
+* `-?``--help`
 
     Show help about vacuumlo command line arguments, and exit.
 
 vacuumlo also accepts the following command-line arguments for connection parameters:
 
-*   `-h host``--host=host`
+* `-h host``--host=host`
 
     Database server's host.
 
-*   `-p port``--port=port`
+* `-p port``--port=port`
 
     Database server's port.
 
-*   `-U username``--username=username`
+* `-U username``--username=username`
 
     User name to connect as.
 
-*   `-w``--no-password`
+* `-w``--no-password`
 
     Never issue a password prompt. If the server requires password authentication and a password is not available by other means such as a `.pgpass` file, the connection attempt will fail. This option can be useful in batch jobs and scripts where no user is present to enter a password.
 
-*   `-W``--password`
+* `-W``--password`
 
     Force vacuumlo to prompt for a password before connecting to a database.
 
@@ -74,7 +72,7 @@ vacuumlo also accepts the following command-line arguments for connection parame
 
 ## Environment
 
-*   `PGHOST``PGPORT``PGUSER`
+* `PGHOST``PGPORT``PGUSER`
 
     Default connection parameters.
 

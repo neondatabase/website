@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## dblink\_build\_sql\_insert
 
 dblink\_build\_sql\_insert — builds an INSERT statement using a local tuple, replacing the primary key field values with alternative supplied values
@@ -26,23 +24,23 @@ dblink\_build\_sql\_insert — builds an INSERT statement using a local tuple, r
 
 ## Arguments
 
-*   *`relname`*
+* *`relname`*
 
     Name of a local relation, for example `foo` or `myschema.mytab`. Include double quotes if the name is mixed-case or contains special characters, for example `"FooBar"`; without quotes, the string will be folded to lower case.
 
-*   *`primary_key_attnums`*
+* *`primary_key_attnums`*
 
     Attribute numbers (1-based) of the primary key fields, for example `1 2`.
 
-*   *`num_primary_key_atts`*
+* *`num_primary_key_atts`*
 
     The number of primary key fields.
 
-*   *`src_pk_att_vals_array`*
+* *`src_pk_att_vals_array`*
 
     Values of the primary key fields to be used to look up the local tuple. Each field is represented in text form. An error is thrown if there is no local row with these primary key values.
 
-*   *`tgt_pk_att_vals_array`*
+* *`tgt_pk_att_vals_array`*
 
     Values of the primary key fields to be placed in the resulting `INSERT` command. Each field is represented in text form.
 

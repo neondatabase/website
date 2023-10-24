@@ -8,8 +8,8 @@
 
 ## 36.7. Using Descriptor Areas [#](#ECPG-DESCRIPTORS)
 
-*   *   [36.7.1. Named SQL Descriptor Areas](ecpg-descriptors.html#ECPG-NAMED-DESCRIPTORS)
-    *   [36.7.2. SQLDA Descriptor Areas](ecpg-descriptors.html#ECPG-SQLDA-DESCRIPTORS)
+  * *   [36.7.1. Named SQL Descriptor Areas](ecpg-descriptors.html#ECPG-NAMED-DESCRIPTORS)
+* [36.7.2. SQLDA Descriptor Areas](ecpg-descriptors.html#ECPG-SQLDA-DESCRIPTORS)
 
 An SQL descriptor area is a more sophisticated method for processing the result of a `SELECT`, `FETCH` or a `DESCRIBE` statement. An SQL descriptor area groups the data of one row of data together with metadata items into one data structure. The metadata is particularly useful when executing dynamic SQL statements, where the nature of the result columns might not be known ahead of time. PostgreSQL provides two ways to use Descriptor Areas: the named SQL Descriptor Areas and the C-structure SQLDAs.
 
@@ -54,63 +54,63 @@ Currently, there is only one header field defined: *`COUNT`*, which tells how ma
 
 *`num`* can be a literal integer or a host variable containing an integer. Possible fields are:
 
-*   `CARDINALITY` (integer) [#](#ECPG-NAMED-DESCRIPTORS-CARDINALITY)
+* `CARDINALITY` (integer) [#](#ECPG-NAMED-DESCRIPTORS-CARDINALITY)
 
     number of rows in the result set
 
-*   `DATA` [#](#ECPG-NAMED-DESCRIPTORS-DATA)
+* `DATA` [#](#ECPG-NAMED-DESCRIPTORS-DATA)
 
     actual data item (therefore, the data type of this field depends on the query)
 
-*   `DATETIME_INTERVAL_CODE` (integer) [#](#ECPG-NAMED-DESCRIPTORS-DATETIME-INTERVAL-CODE)
+* `DATETIME_INTERVAL_CODE` (integer) [#](#ECPG-NAMED-DESCRIPTORS-DATETIME-INTERVAL-CODE)
 
     When `TYPE` is `9`, `DATETIME_INTERVAL_CODE` will have a value of `1` for `DATE`, `2` for `TIME`, `3` for `TIMESTAMP`, `4` for `TIME WITH TIME ZONE`, or `5` for `TIMESTAMP WITH TIME ZONE`.
 
-*   `DATETIME_INTERVAL_PRECISION` (integer) [#](#ECPG-NAMED-DESCRIPTORS-DATETIME-INTERVAL-PRECISION)
+* `DATETIME_INTERVAL_PRECISION` (integer) [#](#ECPG-NAMED-DESCRIPTORS-DATETIME-INTERVAL-PRECISION)
 
     not implemented
 
-*   `INDICATOR` (integer) [#](#ECPG-NAMED-DESCRIPTORS-INDICATOR)
+* `INDICATOR` (integer) [#](#ECPG-NAMED-DESCRIPTORS-INDICATOR)
 
     the indicator (indicating a null value or a value truncation)
 
-*   `KEY_MEMBER` (integer) [#](#ECPG-NAMED-DESCRIPTORS-KEY-MEMBER)
+* `KEY_MEMBER` (integer) [#](#ECPG-NAMED-DESCRIPTORS-KEY-MEMBER)
 
     not implemented
 
-*   `LENGTH` (integer) [#](#ECPG-NAMED-DESCRIPTORS-LENGTH)
+* `LENGTH` (integer) [#](#ECPG-NAMED-DESCRIPTORS-LENGTH)
 
     length of the datum in characters
 
-*   `NAME` (string) [#](#ECPG-NAMED-DESCRIPTORS-NAME)
+* `NAME` (string) [#](#ECPG-NAMED-DESCRIPTORS-NAME)
 
     name of the column
 
-*   `NULLABLE` (integer) [#](#ECPG-NAMED-DESCRIPTORS-NULLABLE)
+* `NULLABLE` (integer) [#](#ECPG-NAMED-DESCRIPTORS-NULLABLE)
 
     not implemented
 
-*   `OCTET_LENGTH` (integer) [#](#ECPG-NAMED-DESCRIPTORS-OCTET-LENGTH)
+* `OCTET_LENGTH` (integer) [#](#ECPG-NAMED-DESCRIPTORS-OCTET-LENGTH)
 
     length of the character representation of the datum in bytes
 
-*   `PRECISION` (integer) [#](#ECPG-NAMED-DESCRIPTORS-PRECISION)
+* `PRECISION` (integer) [#](#ECPG-NAMED-DESCRIPTORS-PRECISION)
 
     precision (for type `numeric`)
 
-*   `RETURNED_LENGTH` (integer) [#](#ECPG-NAMED-DESCRIPTORS-RETURNED-LENGTH)
+* `RETURNED_LENGTH` (integer) [#](#ECPG-NAMED-DESCRIPTORS-RETURNED-LENGTH)
 
     length of the datum in characters
 
-*   `RETURNED_OCTET_LENGTH` (integer) [#](#ECPG-NAMED-DESCRIPTORS-RETURNED-OCTET-LENGTH)
+* `RETURNED_OCTET_LENGTH` (integer) [#](#ECPG-NAMED-DESCRIPTORS-RETURNED-OCTET-LENGTH)
 
     length of the character representation of the datum in bytes
 
-*   `SCALE` (integer) [#](#ECPG-NAMED-DESCRIPTORS-SCALE)
+* `SCALE` (integer) [#](#ECPG-NAMED-DESCRIPTORS-SCALE)
 
     scale (for type `numeric`)
 
-*   `TYPE` (integer) [#](#ECPG-NAMED-DESCRIPTORS-TYPE)
+* `TYPE` (integer) [#](#ECPG-NAMED-DESCRIPTORS-TYPE)
 
     numeric code of the data type of the column
 
@@ -143,14 +143,14 @@ Note that the `SQL` keyword is omitted. The paragraphs about the use cases of th
 
 The general flow of a program that uses SQLDA is:
 
-1.  Prepare a query, and declare a cursor for it.
-2.  Declare an SQLDA for the result rows.
-3.  Declare an SQLDA for the input parameters, and initialize them (memory allocation, parameter settings).
-4.  Open a cursor with the input SQLDA.
-5.  Fetch rows from the cursor, and store them into an output SQLDA.
-6.  Read values from the output SQLDA into the host variables (with conversion if necessary).
-7.  Close the cursor.
-8.  Free the memory area allocated for the input SQLDA.
+1. Prepare a query, and declare a cursor for it.
+2. Declare an SQLDA for the result rows.
+3. Declare an SQLDA for the input parameters, and initialize them (memory allocation, parameter settings).
+4. Open a cursor with the input SQLDA.
+5. Fetch rows from the cursor, and store them into an output SQLDA.
+6. Read values from the output SQLDA into the host variables (with conversion if necessary).
+7. Close the cursor.
+8. Free the memory area allocated for the input SQLDA.
 
 #### 36.7.2.1. SQLDA Data Structure [#](#ECPG-SQLDA-DESCRIPTORS-SQLDA)
 
@@ -180,27 +180,27 @@ The definition of `sqlda_t` is:
 
 The meaning of the fields is:
 
-*   `sqldaid` [#](#ECPG-SQLDA-SQLDA-SQLDAID)
+* `sqldaid` [#](#ECPG-SQLDA-SQLDA-SQLDAID)
 
     It contains the literal string `"SQLDA "`.
 
-*   `sqldabc` [#](#ECPG-SQLDA-SQLDA-SQLDABC)
+* `sqldabc` [#](#ECPG-SQLDA-SQLDA-SQLDABC)
 
     It contains the size of the allocated space in bytes.
 
-*   `sqln` [#](#ECPG-SQLDA-SQLDA-SQLN)
+* `sqln` [#](#ECPG-SQLDA-SQLDA-SQLN)
 
     It contains the number of input parameters for a parameterized query in case it's passed into `OPEN`, `DECLARE` or `EXECUTE` statements using the `USING` keyword. In case it's used as output of `SELECT`, `EXECUTE` or `FETCH` statements, its value is the same as `sqld` statement
 
-*   `sqld` [#](#ECPG-SQLDA-SQLDA-SQLD)
+* `sqld` [#](#ECPG-SQLDA-SQLDA-SQLD)
 
     It contains the number of fields in a result set.
 
-*   `desc_next` [#](#ECPG-SQLDA-SQLDA-DESC-NEXT)
+* `desc_next` [#](#ECPG-SQLDA-SQLDA-DESC-NEXT)
 
     If the query returns more than one record, multiple linked SQLDA structures are returned, and `desc_next` holds a pointer to the next entry in the list.
 
-*   `sqlvar` [#](#ECPG-SQLDA-SQLDA-SQLVAR)
+* `sqlvar` [#](#ECPG-SQLDA-SQLDA-SQLVAR)
 
     This is the array of the columns in the result set.
 
@@ -221,23 +221,23 @@ The structure type `sqlvar_t` holds a column value and metadata such as type and
 
 The meaning of the fields is:
 
-*   `sqltype` [#](#ECPG-SQLDA-SQLVAR-SQLTYPE)
+* `sqltype` [#](#ECPG-SQLDA-SQLVAR-SQLTYPE)
 
     Contains the type identifier of the field. For values, see `enum ECPGttype` in `ecpgtype.h`.
 
-*   `sqllen` [#](#ECPG-SQLDA-SQLVAR-SQLLEN)
+* `sqllen` [#](#ECPG-SQLDA-SQLVAR-SQLLEN)
 
     Contains the binary length of the field. e.g., 4 bytes for `ECPGt_int`.
 
-*   `sqldata` [#](#ECPG-SQLDA-SQLVAR-SQLDATA)
+* `sqldata` [#](#ECPG-SQLDA-SQLVAR-SQLDATA)
 
     Points to the data. The format of the data is described in [Section 36.4.4](ecpg-variables.html#ECPG-VARIABLES-TYPE-MAPPING "36.4.4. Type Mapping").
 
-*   `sqlind` [#](#ECPG-SQLDA-SQLVAR-SQLIND)
+* `sqlind` [#](#ECPG-SQLDA-SQLVAR-SQLIND)
 
     Points to the null indicator. 0 means not null, -1 means null.
 
-*   `sqlname` [#](#ECPG-SQLDA-SQLVAR-SQLNAME)
+* `sqlname` [#](#ECPG-SQLDA-SQLVAR-SQLNAME)
 
     The name of the field.
 
@@ -255,11 +255,11 @@ A `struct sqlname` structure holds a column name. It is used as a member of the 
 
 The meaning of the fields is:
 
-*   `length` [#](#ECPG-SQLDA-SQLNAME-LENGTH)
+* `length` [#](#ECPG-SQLDA-SQLNAME-LENGTH)
 
     Contains the length of the field name.
 
-*   `data` [#](#ECPG-SQLDA-SQLNAME-DATA)
+* `data` [#](#ECPG-SQLDA-SQLNAME-DATA)
 
     Contains the actual field name.
 
@@ -267,12 +267,12 @@ The meaning of the fields is:
 
 The general steps to retrieve a query result set through an SQLDA are:
 
-1.  Declare an `sqlda_t` structure to receive the result set.
-2.  Execute `FETCH`/`EXECUTE`/`DESCRIBE` commands to process a query specifying the declared SQLDA.
-3.  Check the number of records in the result set by looking at `sqln`, a member of the `sqlda_t` structure.
-4.  Get the values of each column from `sqlvar[0]`, `sqlvar[1]`, etc., members of the `sqlda_t` structure.
-5.  Go to next row (`sqlda_t` structure) by following the `desc_next` pointer, a member of the `sqlda_t` structure.
-6.  Repeat above as you need.
+1. Declare an `sqlda_t` structure to receive the result set.
+2. Execute `FETCH`/`EXECUTE`/`DESCRIBE` commands to process a query specifying the declared SQLDA.
+3. Check the number of records in the result set by looking at `sqln`, a member of the `sqlda_t` structure.
+4. Get the values of each column from `sqlvar[0]`, `sqlvar[1]`, etc., members of the `sqlda_t` structure.
+5. Go to next row (`sqlda_t` structure) by following the `desc_next` pointer, a member of the `sqlda_t` structure.
+6. Repeat above as you need.
 
 Here is an example retrieving a result set through an SQLDA.
 
@@ -328,11 +328,11 @@ To get a column value, check the `sqltype` value, a member of the `sqlvar_t` str
 
 The general steps to use an SQLDA to pass input parameters to a prepared query are:
 
-1.  Create a prepared query (prepared statement)
-2.  Declare an sqlda\_t structure as an input SQLDA.
-3.  Allocate memory area (as sqlda\_t structure) for the input SQLDA.
-4.  Set (copy) input values in the allocated memory.
-5.  Open a cursor with specifying the input SQLDA.
+1. Create a prepared query (prepared statement)
+2. Declare an sqlda\_t structure as an input SQLDA.
+3. Allocate memory area (as sqlda\_t structure) for the input SQLDA.
+4. Set (copy) input values in the allocated memory.
+5. Open a cursor with specifying the input SQLDA.
 
 Here is an example.
 

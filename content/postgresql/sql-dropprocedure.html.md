@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DROP PROCEDURE
 
 DROP PROCEDURE — remove a procedure
@@ -23,31 +21,31 @@ DROP PROCEDURE — remove a procedure
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the procedure does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing procedure.
 
-*   *`argmode`*
+* *`argmode`*
 
     The mode of an argument: `IN`, `OUT`, `INOUT`, or `VARIADIC`. If omitted, the default is `IN` (but see below).
 
-*   *`argname`*
+* *`argname`*
 
     The name of an argument. Note that `DROP PROCEDURE` does not actually pay any attention to argument names, since only the argument data types are used to determine the procedure's identity.
 
-*   *`argtype`*
+* *`argtype`*
 
     The data type(s) of the procedure's arguments (optionally schema-qualified), if any. See below for details.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically drop objects that depend on the procedure, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse to drop the procedure if any objects depend on it. This is the default.
 
@@ -87,9 +85,9 @@ However, the last example would be ambiguous if there is also, say,
 
 This command conforms to the SQL standard, with these PostgreSQL extensions:
 
-*   The standard only allows one procedure to be dropped per command.
-*   The `IF EXISTS` option is an extension.
-*   The ability to specify argument modes and names is an extension, and the lookup rules differ when modes are given.
+* The standard only allows one procedure to be dropped per command.
+* The `IF EXISTS` option is an extension.
+* The ability to specify argument modes and names is an extension, and the lookup rules differ when modes are given.
 
 ## See Also
 

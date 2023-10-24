@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DROP USER
 
 DROP USER — remove a database role

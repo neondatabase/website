@@ -14,20 +14,20 @@ When several data types share near-identical sorting semantics, their operator c
 
 There are some basic assumptions that a btree operator family must satisfy:
 
-*   An `=` operator must be an equivalence relation; that is, for all non-null values *`A`*, *`B`*, *`C`* of the data type:
+* An `=` operator must be an equivalence relation; that is, for all non-null values *`A`*, *`B`*, *`C`* of the data type:
 
-    *   *`A`* `=` *`A`* is true (*reflexive law*)
-    *   if *`A`* `=` *`B`*, then *`B`* `=` *`A`* (*symmetric law*)
-    *   if *`A`* `=` *`B`* and *`B`* `=` *`C`*, then *`A`* `=` *`C`* (*transitive law*)
+  * *`A`* `=` *`A`* is true (*reflexive law*)
+  * if *`A`* `=` *`B`*, then *`B`* `=` *`A`* (*symmetric law*)
+  * if *`A`* `=` *`B`* and *`B`* `=` *`C`*, then *`A`* `=` *`C`* (*transitive law*)
 
-*   A `<` operator must be a strong ordering relation; that is, for all non-null values *`A`*, *`B`*, *`C`*:
+* A `<` operator must be a strong ordering relation; that is, for all non-null values *`A`*, *`B`*, *`C`*:
 
-    *   *`A`* `<` *`A`* is false (*irreflexive law*)
-    *   if *`A`* `<` *`B`* and *`B`* `<` *`C`*, then *`A`* `<` *`C`* (*transitive law*)
+  * *`A`* `<` *`A`* is false (*irreflexive law*)
+  * if *`A`* `<` *`B`* and *`B`* `<` *`C`*, then *`A`* `<` *`C`* (*transitive law*)
 
-*   Furthermore, the ordering is total; that is, for all non-null values *`A`*, *`B`*:
+* Furthermore, the ordering is total; that is, for all non-null values *`A`*, *`B`*:
 
-    *   exactly one of *`A`* `<` *`B`*, *`A`* `=` *`B`*, and *`B`* `<` *`A`* is true (*trichotomy law*)
+  * exactly one of *`A`* `<` *`B`*, *`A`* `=` *`B`*, and *`B`* `<` *`A`* is true (*trichotomy law*)
 
     (The trichotomy law justifies the definition of the comparison support function, of course.)
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ALTER AGGREGATE
 
 ALTER AGGREGATE — change the definition of an aggregate function
@@ -33,31 +31,31 @@ You must own the aggregate function to use `ALTER AGGREGATE`. To change the sche
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing aggregate function.
 
-*   *`argmode`*
+* *`argmode`*
 
     The mode of an argument: `IN` or `VARIADIC`. If omitted, the default is `IN`.
 
-*   *`argname`*
+* *`argname`*
 
     The name of an argument. Note that `ALTER AGGREGATE` does not actually pay any attention to argument names, since only the argument data types are needed to determine the aggregate function's identity.
 
-*   *`argtype`*
+* *`argtype`*
 
     An input data type on which the aggregate function operates. To reference a zero-argument aggregate function, write `*` in place of the list of argument specifications. To reference an ordered-set aggregate function, write `ORDER BY` between the direct and aggregated argument specifications.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the aggregate function.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The new owner of the aggregate function.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the aggregate function.
 

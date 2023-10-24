@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## CREATE FUNCTION
 
 CREATE FUNCTION — define a new function
@@ -55,19 +53,19 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of the function to create.
 
-*   *`argmode`*
+* *`argmode`*
 
     The mode of an argument: `IN`, `OUT`, `INOUT`, or `VARIADIC`. If omitted, the default is `IN`. Only `OUT` arguments can follow a `VARIADIC` one. Also, `OUT` and `INOUT` arguments cannot be used together with the `RETURNS TABLE` notation.
 
-*   *`argname`*
+* *`argname`*
 
     The name of an argument. Some languages (including SQL and PL/pgSQL) let you use the name in the function body. For other languages the name of an input argument is just extra documentation, so far as the function itself is concerned; but you can use input argument names when calling a function to improve readability (see [Section 4.3](sql-syntax-calling-funcs.html "4.3. Calling Functions")). In any case, the name of an output argument is significant, because it defines the column name in the result row type. (If you omit the name for an output argument, the system will choose a default column name.)
 
-*   *`argtype`*
+* *`argtype`*
 
     The data type(s) of the function's arguments (optionally schema-qualified), if any. The argument types can be base, composite, or domain types, or can reference the type of a table column.
 
@@ -75,11 +73,11 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
     The type of a column is referenced by writing `table_name.column_name%TYPE`. Using this feature can sometimes help make a function independent of changes to the definition of a table.
 
-*   *`default_expr`*
+* *`default_expr`*
 
     An expression to be used as default value if the parameter is not specified. The expression has to be coercible to the argument type of the parameter. Only input (including `INOUT`) parameters can have a default value. All input parameters following a parameter with a default value must have default values as well.
 
-*   *`rettype`*
+* *`rettype`*
 
     The return data type (optionally schema-qualified). The return type can be a base, composite, or domain type, or can reference the type of a table column. Depending on the implementation language it might also be allowed to specify “pseudo-types” such as `cstring`. If the function is not supposed to return a value, specify `void` as the return type.
 
@@ -89,27 +87,27 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
     The type of a column is referenced by writing `table_name.column_name%TYPE`.
 
-*   *`column_name`*
+* *`column_name`*
 
     The name of an output column in the `RETURNS TABLE` syntax. This is effectively another way of declaring a named `OUT` parameter, except that `RETURNS TABLE` also implies `RETURNS SETOF`.
 
-*   *`column_type`*
+* *`column_type`*
 
     The data type of an output column in the `RETURNS TABLE` syntax.
 
-*   *`lang_name`*
+* *`lang_name`*
 
     The name of the language that the function is implemented in. It can be `sql`, `c`, `internal`, or the name of a user-defined procedural language, e.g., `plpgsql`. The default is `sql` if *`sql_body`* is specified. Enclosing the name in single quotes is deprecated and requires matching case.
 
-*   `TRANSFORM { FOR TYPE type_name } [, ... ] }`
+* `TRANSFORM { FOR TYPE type_name } [, ... ] }`
 
     Lists which transforms a call to the function should apply. Transforms convert between SQL types and language-specific data types; see [CREATE TRANSFORM](sql-createtransform.html "CREATE TRANSFORM"). Procedural language implementations usually have hardcoded knowledge of the built-in types, so those don't need to be listed here. If a procedural language implementation does not know how to handle a type and no transform is supplied, it will fall back to a default behavior for converting data types, but this depends on the implementation.
 
-*   `WINDOW`
+* `WINDOW`
 
     `WINDOW` indicates that the function is a *window function* rather than a plain function. This is currently only useful for functions written in C. The `WINDOW` attribute cannot be changed when replacing an existing function definition.
 
-*   `IMMUTABLE``STABLE``VOLATILE`
+* `IMMUTABLE``STABLE``VOLATILE`
 
     These attributes inform the query optimizer about the behavior of the function. At most one choice can be specified. If none of these appear, `VOLATILE` is the default assumption.
 
@@ -121,41 +119,41 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
     For additional details see [Section 38.7](xfunc-volatility.html "38.7. Function Volatility Categories").
 
-*   `LEAKPROOF`
+* `LEAKPROOF`
 
     `LEAKPROOF` indicates that the function has no side effects. It reveals no information about its arguments other than by its return value. For example, a function which throws an error message for some argument values but not others, or which includes the argument values in any error message, is not leakproof. This affects how the system executes queries against views created with the `security_barrier` option or tables with row level security enabled. The system will enforce conditions from security policies and security barrier views before any user-supplied conditions from the query itself that contain non-leakproof functions, in order to prevent the inadvertent exposure of data. Functions and operators marked as leakproof are assumed to be trustworthy, and may be executed before conditions from security policies and security barrier views. In addition, functions which do not take arguments or which are not passed any arguments from the security barrier view or table do not have to be marked as leakproof to be executed before security conditions. See [CREATE VIEW](sql-createview.html "CREATE VIEW") and [Section 41.5](rules-privileges.html "41.5. Rules and Privileges"). This option can only be set by the superuser.
 
-*   `CALLED ON NULL INPUT``RETURNS NULL ON NULL INPUT``STRICT`
+* `CALLED ON NULL INPUT``RETURNS NULL ON NULL INPUT``STRICT`
 
     `CALLED ON NULL INPUT` (the default) indicates that the function will be called normally when some of its arguments are null. It is then the function author's responsibility to check for null values if necessary and respond appropriately.
 
     `RETURNS NULL ON NULL INPUT` or `STRICT` indicates that the function always returns null whenever any of its arguments are null. If this parameter is specified, the function is not executed when there are null arguments; instead a null result is assumed automatically.
 
-*   `[EXTERNAL] SECURITY INVOKER``[EXTERNAL] SECURITY DEFINER`
+* `[EXTERNAL] SECURITY INVOKER``[EXTERNAL] SECURITY DEFINER`
 
     `SECURITY INVOKER` indicates that the function is to be executed with the privileges of the user that calls it. That is the default. `SECURITY DEFINER` specifies that the function is to be executed with the privileges of the user that owns it. For information on how to write `SECURITY DEFINER` functions safely, [see below](sql-createfunction.html#SQL-CREATEFUNCTION-SECURITY "Writing SECURITY DEFINER Functions Safely").
 
     The key word `EXTERNAL` is allowed for SQL conformance, but it is optional since, unlike in SQL, this feature applies to all functions not only external ones.
 
-*   `PARALLEL`
+* `PARALLEL`
 
     `PARALLEL UNSAFE` indicates that the function can't be executed in parallel mode and the presence of such a function in an SQL statement forces a serial execution plan. This is the default. `PARALLEL RESTRICTED` indicates that the function can be executed in parallel mode, but the execution is restricted to parallel group leader. `PARALLEL SAFE` indicates that the function is safe to run in parallel mode without restriction.
 
     Functions should be labeled parallel unsafe if they modify any database state, or if they make changes to the transaction such as using sub-transactions, or if they access sequences or attempt to make persistent changes to settings (e.g., `setval`). They should be labeled as parallel restricted if they access temporary tables, client connection state, cursors, prepared statements, or miscellaneous backend-local state which the system cannot synchronize in parallel mode (e.g., `setseed` cannot be executed other than by the group leader because a change made by another process would not be reflected in the leader). In general, if a function is labeled as being safe when it is restricted or unsafe, or if it is labeled as being restricted when it is in fact unsafe, it may throw errors or produce wrong answers when used in a parallel query. C-language functions could in theory exhibit totally undefined behavior if mislabeled, since there is no way for the system to protect itself against arbitrary C code, but in most likely cases the result will be no worse than for any other function. If in doubt, functions should be labeled as `UNSAFE`, which is the default.
 
-*   `COST` *`execution_cost`*
+* `COST` *`execution_cost`*
 
     A positive number giving the estimated execution cost for the function, in units of [cpu\_operator\_cost](runtime-config-query.html#GUC-CPU-OPERATOR-COST). If the function returns a set, this is the cost per returned row. If the cost is not specified, 1 unit is assumed for C-language and internal functions, and 100 units for functions in all other languages. Larger values cause the planner to try to avoid evaluating the function more often than necessary.
 
-*   `ROWS` *`result_rows`*
+* `ROWS` *`result_rows`*
 
     A positive number giving the estimated number of rows that the planner should expect the function to return. This is only allowed when the function is declared to return a set. The default assumption is 1000 rows.
 
-*   `SUPPORT` *`support_function`*
+* `SUPPORT` *`support_function`*
 
     The name (optionally schema-qualified) of a *planner support function* to use for this function. See [Section 38.11](xfunc-optimization.html "38.11. Function Optimization Information") for details. You must be superuser to use this option.
 
-*   *`configuration_parameter`**`value`*
+* *`configuration_parameter`**`value`*
 
     The `SET` clause causes the specified configuration parameter to be set to the specified value when the function is entered, and then restored to its prior value when the function exits. `SET FROM CURRENT` saves the value of the parameter that is current when `CREATE FUNCTION` is executed as the value to be applied when the function is entered.
 
@@ -163,19 +161,19 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
     See [SET](sql-set.html "SET") and [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
 
-*   *`definition`*
+* *`definition`*
 
     A string constant defining the function; the meaning depends on the language. It can be an internal function name, the path to an object file, an SQL command, or text in a procedural language.
 
     It is often helpful to use dollar quoting (see [Section 4.1.2.4](sql-syntax-lexical.html#SQL-SYNTAX-DOLLAR-QUOTING "4.1.2.4. Dollar-Quoted String Constants")) to write the function definition string, rather than the normal single quote syntax. Without dollar quoting, any single quotes or backslashes in the function definition must be escaped by doubling them.
 
-*   `obj_file, link_symbol`
+* `obj_file, link_symbol`
 
     This form of the `AS` clause is used for dynamically loadable C language functions when the function name in the C language source code is not the same as the name of the SQL function. The string *`obj_file`* is the name of the shared library file containing the compiled C function, and is interpreted as for the [`LOAD`](sql-load.html "LOAD") command. The string *`link_symbol`* is the function's link symbol, that is, the name of the function in the C language source code. If the link symbol is omitted, it is assumed to be the same as the name of the SQL function being defined. The C names of all functions must be different, so you must give overloaded C functions different C names (for example, use the argument types as part of the C names).
 
     When repeated `CREATE FUNCTION` calls refer to the same object file, the file is only loaded once per session. To unload and reload the file (perhaps during development), start a new session.
 
-*   *`sql_body`*
+* *`sql_body`*
 
     The body of a `LANGUAGE SQL` function. This can either be a single statement
 
@@ -272,9 +270,7 @@ However, a `TABLE` function is different from the preceding examples, because it
 
 ## Writing `SECURITY DEFINER` Functions Safely
 
-[]()[]()
-
-Because a `SECURITY DEFINER` function is executed with the privileges of the user that owns it, care is needed to ensure that the function cannot be misused. For security, [search\_path](runtime-config-client.html#GUC-SEARCH-PATH) should be set to exclude any schemas writable by untrusted users. This prevents malicious users from creating objects (e.g., tables, functions, and operators) that mask objects intended to be used by the function. Particularly important in this regard is the temporary-table schema, which is searched first by default, and is normally writable by anyone. A secure arrangement can be obtained by forcing the temporary schema to be searched last. To do this, write `pg_temp`[]() as the last entry in `search_path`. This function illustrates safe usage:
+Because a `SECURITY DEFINER` function is executed with the privileges of the user that owns it, care is needed to ensure that the function cannot be misused. For security, [search\_path](runtime-config-client.html#GUC-SEARCH-PATH) should be set to exclude any schemas writable by untrusted users. This prevents malicious users from creating objects (e.g., tables, functions, and operators) that mask objects intended to be used by the function. Particularly important in this regard is the temporary-table schema, which is searched first by default, and is normally writable by anyone. A secure arrangement can be obtained by forcing the temporary schema to be searched last. To do this, write `pg_temp` as the last entry in `search_path`. This function illustrates safe usage:
 
     CREATE FUNCTION check_password(uname TEXT, pass TEXT)
     RETURNS BOOLEAN AS $$
@@ -309,13 +305,13 @@ A `CREATE FUNCTION` command is defined in the SQL standard. The PostgreSQL imple
 
 The following are important compatibility issues:
 
-*   `OR REPLACE` is a PostgreSQL extension.
-*   For compatibility with some other database systems, *`argmode`* can be written either before or after *`argname`*. But only the first way is standard-compliant.
-*   For parameter defaults, the SQL standard specifies only the syntax with the `DEFAULT` key word. The syntax with `=` is used in T-SQL and Firebird.
-*   The `SETOF` modifier is a PostgreSQL extension.
-*   Only `SQL` is standardized as a language.
-*   All other attributes except `CALLED ON NULL INPUT` and `RETURNS NULL ON NULL INPUT` are not standardized.
-*   For the body of `LANGUAGE SQL` functions, the SQL standard only specifies the *`sql_body`* form.
+* `OR REPLACE` is a PostgreSQL extension.
+* For compatibility with some other database systems, *`argmode`* can be written either before or after *`argname`*. But only the first way is standard-compliant.
+* For parameter defaults, the SQL standard specifies only the syntax with the `DEFAULT` key word. The syntax with `=` is used in T-SQL and Firebird.
+* The `SETOF` modifier is a PostgreSQL extension.
+* Only `SQL` is standardized as a language.
+* All other attributes except `CALLED ON NULL INPUT` and `RETURNS NULL ON NULL INPUT` are not standardized.
+* For the body of `LANGUAGE SQL` functions, the SQL standard only specifies the *`sql_body`* form.
 
 Simple `LANGUAGE SQL` functions can be written in a way that is both standard-conforming and portable to other implementations. More complex functions using advanced features, optimization attributes, or other languages will necessarily be specific to PostgreSQL in a significant way.
 

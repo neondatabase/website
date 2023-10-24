@@ -14,15 +14,15 @@ Also, the `declare index` and `declare toast` commands cannot be used until the 
 
 Thus, the structure of the `postgres.bki` file has to be:
 
-1.  `create bootstrap` one of the critical tables
-2.  `insert` data describing at least the critical tables
-3.  `close`
-4.  Repeat for the other critical tables.
-5.  `create` (without `bootstrap`) a noncritical table
-6.  `open`
-7.  `insert` desired data
-8.  `close`
-9.  Repeat for the other noncritical tables.
+1. `create bootstrap` one of the critical tables
+2. `insert` data describing at least the critical tables
+3. `close`
+4. Repeat for the other critical tables.
+5. `create` (without `bootstrap`) a noncritical table
+6. `open`
+7. `insert` desired data
+8. `close`
+9. Repeat for the other noncritical tables.
 10. Define indexes and toast tables.
 11. `build indices`
 

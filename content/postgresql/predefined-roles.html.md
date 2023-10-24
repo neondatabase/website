@@ -8,8 +8,6 @@
 
 ## 22.5. Predefined Roles [#](#PREDEFINED-ROLES)
 
-[]()
-
 PostgreSQL provides a set of predefined roles that provide access to certain, commonly needed, privileged capabilities and information. Administrators (including roles that have the `CREATEROLE` privilege) can `GRANT` these roles to users and/or other roles in their environment, providing those users with access to the specified capabilities and information.
 
 The predefined roles are described in [Table 22.1](predefined-roles.html#PREDEFINED-ROLES-TABLE "Table 22.1. Predefined Roles"). Note that the specific permissions for each of the roles may change in the future as additional capabilities are added. Administrators should monitor the release notes for changes.
@@ -34,7 +32,6 @@ The predefined roles are described in [Table 22.1](predefined-roles.html#PREDEF
 | pg\_create\_subscription       | Allow users with `CREATE` permission on the database to issue [`CREATE SUBSCRIPTION`](sql-createsubscription.html "CREATE SUBSCRIPTION").                                                                                                                                                                                                                    |
 
 \
-
 
 The `pg_monitor`, `pg_read_all_settings`, `pg_read_all_stats` and `pg_stat_scan_tables` roles are intended to allow administrators to easily configure a role for the purpose of monitoring the database server. They grant a set of common privileges allowing the role to read various useful configuration settings, statistics and other system information normally restricted to superusers.
 

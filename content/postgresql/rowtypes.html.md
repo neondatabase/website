@@ -8,14 +8,12 @@
 
 ## 8.16. Composite Types [#](#ROWTYPES)
 
-*   *   [8.16.1. Declaration of Composite Types](rowtypes.html#ROWTYPES-DECLARING)
-    *   [8.16.2. Constructing Composite Values](rowtypes.html#ROWTYPES-CONSTRUCTING)
-    *   [8.16.3. Accessing Composite Types](rowtypes.html#ROWTYPES-ACCESSING)
-    *   [8.16.4. Modifying Composite Types](rowtypes.html#ROWTYPES-MODIFYING)
-    *   [8.16.5. Using Composite Types in Queries](rowtypes.html#ROWTYPES-USAGE)
-    *   [8.16.6. Composite Type Input and Output Syntax](rowtypes.html#ROWTYPES-IO-SYNTAX)
-
-[]()[]()
+  * *   [8.16.1. Declaration of Composite Types](rowtypes.html#ROWTYPES-DECLARING)
+* [8.16.2. Constructing Composite Values](rowtypes.html#ROWTYPES-CONSTRUCTING)
+* [8.16.3. Accessing Composite Types](rowtypes.html#ROWTYPES-ACCESSING)
+* [8.16.4. Modifying Composite Types](rowtypes.html#ROWTYPES-MODIFYING)
+* [8.16.5. Using Composite Types in Queries](rowtypes.html#ROWTYPES-USAGE)
+* [8.16.6. Composite Type Input and Output Syntax](rowtypes.html#ROWTYPES-IO-SYNTAX)
 
 A *composite type* represents the structure of a row or record; it is essentially just a list of field names and their data types. PostgreSQL allows composite types to be used in many of the same ways that simple types can be used. For example, a column of a table can be declared to be of a composite type.
 
@@ -63,8 +61,6 @@ Whenever you create a table, a composite type is also automatically created, wit
 then the same `inventory_item` composite type shown above would come into being as a byproduct, and could be used just as above. Note however an important restriction of the current implementation: since no constraints are associated with a composite type, the constraints shown in the table definition *do not apply* to values of the composite type outside the table. (To work around this, create a [**](glossary.html#GLOSSARY-DOMAIN)*[domain](glossary.html#GLOSSARY-DOMAIN "Domain")* over the composite type, and apply the desired constraints as `CHECK` constraints of the domain.)
 
 ### 8.16.2. Constructing Composite Values [#](#ROWTYPES-CONSTRUCTING)
-
-[]()
 
 To write a composite value as a literal constant, enclose the field values within parentheses and separate them by commas. You can put double quotes around any field value, and must do so if it contains commas or parentheses. (More details appear [below](rowtypes.html#ROWTYPES-IO-SYNTAX "8.16.6. Composite Type Input and Output Syntax").) Thus, the general format of a composite constant is the following:
 
@@ -222,7 +218,7 @@ Moreover, if we have a function that accepts a single argument of a composite ty
     SELECT somefunc(c.*) FROM inventory_item c;
     SELECT c.somefunc FROM inventory_item c;
 
-This equivalence between functional notation and field notation makes it possible to use functions on composite types to implement “computed fields”. []()[]()An application using the last query above wouldn't need to be directly aware that `somefunc` isn't a real column of the table.
+This equivalence between functional notation and field notation makes it possible to use functions on composite types to implement “computed fields”. An application using the last query above wouldn't need to be directly aware that `somefunc` isn't a real column of the table.
 
 ### Tip
 

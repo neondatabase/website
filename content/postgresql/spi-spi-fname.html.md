@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_fname
 
 SPI\_fname — determine the column name for the specified column number
@@ -22,11 +20,11 @@ SPI\_fname — determine the column name for the specified column number
 
 ## Arguments
 
-*   `TupleDesc rowdesc`
+* `TupleDesc rowdesc`
 
     input row description
 
-*   `int colnumber`
+* `int colnumber`
 
     column number (count starts at 1)
 

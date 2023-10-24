@@ -20,11 +20,11 @@ SET CONNECTION — select a database connection
 
 ## Parameters
 
-*   *`connection_name`* [#](#ECPG-SQL-SET-CONNECTION-CONNECTION-NAME)
+* *`connection_name`* [#](#ECPG-SQL-SET-CONNECTION-CONNECTION-NAME)
 
     A database connection name established by the `CONNECT` command.
 
-*   `DEFAULT` [#](#ECPG-SQL-SET-CONNECTION-DEFAULT)
+* `DEFAULT` [#](#ECPG-SQL-SET-CONNECTION-DEFAULT)
 
     Set the connection to the default connection.
 

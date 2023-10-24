@@ -8,22 +8,20 @@
 
 ## 26.3. Continuous Archiving and Point-in-Time Recovery (PITR) [#](#CONTINUOUS-ARCHIVING)
 
-*   *   [26.3.1. Setting Up WAL Archiving](continuous-archiving.html#BACKUP-ARCHIVING-WAL)
-    *   [26.3.2. Making a Base Backup](continuous-archiving.html#BACKUP-BASE-BACKUP)
-    *   [26.3.3. Making a Base Backup Using the Low Level API](continuous-archiving.html#BACKUP-LOWLEVEL-BASE-BACKUP)
-    *   [26.3.4. Recovering Using a Continuous Archive Backup](continuous-archiving.html#BACKUP-PITR-RECOVERY)
-    *   [26.3.5. Timelines](continuous-archiving.html#BACKUP-TIMELINES)
-    *   [26.3.6. Tips and Examples](continuous-archiving.html#BACKUP-TIPS)
-    *   [26.3.7. Caveats](continuous-archiving.html#CONTINUOUS-ARCHIVING-CAVEATS)
-
-[]()[]()[]()
+  * *   [26.3.1. Setting Up WAL Archiving](continuous-archiving.html#BACKUP-ARCHIVING-WAL)
+* [26.3.2. Making a Base Backup](continuous-archiving.html#BACKUP-BASE-BACKUP)
+* [26.3.3. Making a Base Backup Using the Low Level API](continuous-archiving.html#BACKUP-LOWLEVEL-BASE-BACKUP)
+* [26.3.4. Recovering Using a Continuous Archive Backup](continuous-archiving.html#BACKUP-PITR-RECOVERY)
+* [26.3.5. Timelines](continuous-archiving.html#BACKUP-TIMELINES)
+* [26.3.6. Tips and Examples](continuous-archiving.html#BACKUP-TIPS)
+* [26.3.7. Caveats](continuous-archiving.html#CONTINUOUS-ARCHIVING-CAVEATS)
 
 At all times, PostgreSQL maintains a *write ahead log* (WAL) in the `pg_wal/` subdirectory of the cluster's data directory. The log records every change made to the database's data files. This log exists primarily for crash-safety purposes: if the system crashes, the database can be restored to consistency by “replaying” the log entries made since the last checkpoint. However, the existence of the log makes it possible to use a third strategy for backing up databases: we can combine a file-system-level backup with backup of the WAL files. If recovery is needed, we restore the file system backup and then replay from the backed-up WAL files to bring the system to a current state. This approach is more complex to administer than either of the previous approaches, but it has some significant benefits:
 
-*   We do not need a perfectly consistent file system backup as the starting point. Any internal inconsistency in the backup will be corrected by log replay (this is not significantly different from what happens during crash recovery). So we do not need a file system snapshot capability, just tar or a similar archiving tool.
-*   Since we can combine an indefinitely long sequence of WAL files for replay, continuous backup can be achieved simply by continuing to archive the WAL files. This is particularly valuable for large databases, where it might not be convenient to take a full backup frequently.
-*   It is not necessary to replay the WAL entries all the way to the end. We could stop the replay at any point and have a consistent snapshot of the database as it was at that time. Thus, this technique supports *point-in-time recovery*: it is possible to restore the database to its state at any time since your base backup was taken.
-*   If we continuously feed the series of WAL files to another machine that has been loaded with the same base backup file, we have a *warm standby* system: at any point we can bring up the second machine and it will have a nearly-current copy of the database.
+* We do not need a perfectly consistent file system backup as the starting point. Any internal inconsistency in the backup will be corrected by log replay (this is not significantly different from what happens during crash recovery). So we do not need a file system snapshot capability, just tar or a similar archiving tool.
+* Since we can combine an indefinitely long sequence of WAL files for replay, continuous backup can be achieved simply by continuing to archive the WAL files. This is particularly valuable for large databases, where it might not be convenient to take a full backup frequently.
+* It is not necessary to replay the WAL entries all the way to the end. We could stop the replay at any point and have a consistent snapshot of the database as it was at that time. Thus, this technique supports *point-in-time recovery*: it is possible to restore the database to its state at any time since your base backup was taken.
+* If we continuously feed the series of WAL files to another machine that has been loaded with the same base backup file, we have a *warm standby* system: at any point we can bring up the second machine and it will have a nearly-current copy of the database.
 
 ### Note
 
@@ -98,9 +96,9 @@ The procedure for making a base backup using the low level APIs contains a few m
 
 Multiple backups are able to be run concurrently (both those started using this backup API and those started using [pg\_basebackup](app-pgbasebackup.html "pg_basebackup")).
 
-1.  Ensure that WAL archiving is enabled and working.
+1. Ensure that WAL archiving is enabled and working.
 
-2.  Connect to the server (it does not matter which database) as a user with rights to run `pg_backup_start` (superuser, or a user who has been granted `EXECUTE` on the function) and issue the command:
+2. Connect to the server (it does not matter which database) as a user with rights to run `pg_backup_start` (superuser, or a user who has been granted `EXECUTE` on the function) and issue the command:
 
         SELECT pg_backup_start(label => 'label', fast => false);
 
@@ -108,9 +106,9 @@ Multiple backups are able to be run concurrently (both those started using this 
 
     Online backups are always started at the beginning of a checkpoint. By default, `pg_backup_start` will wait for the next regularly scheduled checkpoint to complete, which may take a long time (see the configuration parameters [checkpoint\_timeout](runtime-config-wal.html#GUC-CHECKPOINT-TIMEOUT) and [checkpoint\_completion\_target](runtime-config-wal.html#GUC-CHECKPOINT-COMPLETION-TARGET)). This is usually preferable as it minimizes the impact on the running system. If you want to start the backup as soon as possible, pass `true` as the second parameter to `pg_backup_start` and it will request an immediate checkpoint, which will finish as fast as possible using as much I/O as possible.
 
-3.  Perform the backup, using any convenient file-system-backup tool such as tar or cpio (not pg\_dump or pg\_dumpall). It is neither necessary nor desirable to stop normal operation of the database while you do this. See [Section 26.3.3.1](continuous-archiving.html#BACKUP-LOWLEVEL-BASE-BACKUP-DATA "26.3.3.1. Backing Up the Data Directory") for things to consider during this backup.
+3. Perform the backup, using any convenient file-system-backup tool such as tar or cpio (not pg\_dump or pg\_dumpall). It is neither necessary nor desirable to stop normal operation of the database while you do this. See [Section 26.3.3.1](continuous-archiving.html#BACKUP-LOWLEVEL-BASE-BACKUP-DATA "26.3.3.1. Backing Up the Data Directory") for things to consider during this backup.
 
-4.  In the same connection as before, issue the command:
+4. In the same connection as before, issue the command:
 
         SELECT * FROM pg_backup_stop(wait_for_archive => true);
 
@@ -118,7 +116,7 @@ Multiple backups are able to be run concurrently (both those started using this 
 
     `pg_backup_stop` will return one row with three values. The second of these fields should be written to a file named `backup_label` in the root directory of the backup. The third field should be written to a file named `tablespace_map` unless the field is empty. These files are vital to the backup working and must be written byte for byte without modification, which may require opening the file in binary mode.
 
-5.  Once the WAL segment files active during the backup are archived, you are done. The file identified by `pg_backup_stop`'s first return value is the last segment that is required to form a complete set of backup files. On a primary, if `archive_mode` is enabled and the `wait_for_archive` parameter is `true`, `pg_backup_stop` does not return until the last segment has been archived. On a standby, `archive_mode` must be `always` in order for `pg_backup_stop` to wait. Archiving of these files happens automatically since you have already configured `archive_command` or `archive_library`. In most cases this happens quickly, but you are advised to monitor your archive system to ensure there are no delays. If the archive process has fallen behind because of failures of the archive command or library, it will keep retrying until the archive succeeds and the backup is complete. If you wish to place a time limit on the execution of `pg_backup_stop`, set an appropriate `statement_timeout` value, but make note that if `pg_backup_stop` terminates because of this your backup may not be valid.
+5. Once the WAL segment files active during the backup are archived, you are done. The file identified by `pg_backup_stop`'s first return value is the last segment that is required to form a complete set of backup files. On a primary, if `archive_mode` is enabled and the `wait_for_archive` parameter is `true`, `pg_backup_stop` does not return until the last segment has been archived. On a standby, `archive_mode` must be `always` in order for `pg_backup_stop` to wait. Archiving of these files happens automatically since you have already configured `archive_command` or `archive_library`. In most cases this happens quickly, but you are advised to monitor your archive system to ensure there are no delays. If the archive process has fallen behind because of failures of the archive command or library, it will keep retrying until the archive succeeds and the backup is complete. If you wish to place a time limit on the execution of `pg_backup_stop`, set an appropriate `statement_timeout` value, but make note that if `pg_backup_stop` terminates because of this your backup may not be valid.
 
     If the backup process monitors and ensures that all WAL segment files required for the backup are successfully archived then the `wait_for_archive` parameter (which defaults to true) can be set to false to have `pg_backup_stop` return as soon as the stop backup record is written to the WAL. By default, `pg_backup_stop` will wait until all WAL has been archived, which can take some time. This option must be used with caution: if WAL archiving is not monitored correctly then the backup might not include all of the WAL files and will therefore be incomplete and not able to be restored.
 
@@ -146,15 +144,15 @@ It is also possible to make a backup while the server is stopped. In this case, 
 
 Okay, the worst has happened and you need to recover from your backup. Here is the procedure:
 
-1.  Stop the server, if it's running.
-2.  If you have the space to do so, copy the whole cluster data directory and any tablespaces to a temporary location in case you need them later. Note that this precaution will require that you have enough free space on your system to hold two copies of your existing database. If you do not have enough space, you should at least save the contents of the cluster's `pg_wal` subdirectory, as it might contain WAL files which were not archived before the system went down.
-3.  Remove all existing files and subdirectories under the cluster data directory and under the root directories of any tablespaces you are using.
-4.  Restore the database files from your file system backup. Be sure that they are restored with the right ownership (the database system user, not `root`!) and with the right permissions. If you are using tablespaces, you should verify that the symbolic links in `pg_tblspc/` were correctly restored.
-5.  Remove any files present in `pg_wal/`; these came from the file system backup and are therefore probably obsolete rather than current. If you didn't archive `pg_wal/` at all, then recreate it with proper permissions, being careful to ensure that you re-establish it as a symbolic link if you had it set up that way before.
-6.  If you have unarchived WAL segment files that you saved in step 2, copy them into `pg_wal/`. (It is best to copy them, not move them, so you still have the unmodified files if a problem occurs and you have to start over.)
-7.  Set recovery configuration settings in `postgresql.conf` (see [Section 20.5.5](runtime-config-wal.html#RUNTIME-CONFIG-WAL-ARCHIVE-RECOVERY "20.5.5. Archive Recovery")) and create a file `recovery.signal` in the cluster data directory. You might also want to temporarily modify `pg_hba.conf` to prevent ordinary users from connecting until you are sure the recovery was successful.
-8.  Start the server. The server will go into recovery mode and proceed to read through the archived WAL files it needs. Should the recovery be terminated because of an external error, the server can simply be restarted and it will continue recovery. Upon completion of the recovery process, the server will remove `recovery.signal` (to prevent accidentally re-entering recovery mode later) and then commence normal database operations.
-9.  Inspect the contents of the database to ensure you have recovered to the desired state. If not, return to step 1. If all is well, allow your users to connect by restoring `pg_hba.conf` to normal.
+1. Stop the server, if it's running.
+2. If you have the space to do so, copy the whole cluster data directory and any tablespaces to a temporary location in case you need them later. Note that this precaution will require that you have enough free space on your system to hold two copies of your existing database. If you do not have enough space, you should at least save the contents of the cluster's `pg_wal` subdirectory, as it might contain WAL files which were not archived before the system went down.
+3. Remove all existing files and subdirectories under the cluster data directory and under the root directories of any tablespaces you are using.
+4. Restore the database files from your file system backup. Be sure that they are restored with the right ownership (the database system user, not `root`!) and with the right permissions. If you are using tablespaces, you should verify that the symbolic links in `pg_tblspc/` were correctly restored.
+5. Remove any files present in `pg_wal/`; these came from the file system backup and are therefore probably obsolete rather than current. If you didn't archive `pg_wal/` at all, then recreate it with proper permissions, being careful to ensure that you re-establish it as a symbolic link if you had it set up that way before.
+6. If you have unarchived WAL segment files that you saved in step 2, copy them into `pg_wal/`. (It is best to copy them, not move them, so you still have the unmodified files if a problem occurs and you have to start over.)
+7. Set recovery configuration settings in `postgresql.conf` (see [Section 20.5.5](runtime-config-wal.html#RUNTIME-CONFIG-WAL-ARCHIVE-RECOVERY "20.5.5. Archive Recovery")) and create a file `recovery.signal` in the cluster data directory. You might also want to temporarily modify `pg_hba.conf` to prevent ordinary users from connecting until you are sure the recovery was successful.
+8. Start the server. The server will go into recovery mode and proceed to read through the archived WAL files it needs. Should the recovery be terminated because of an external error, the server can simply be restarted and it will continue recovery. Upon completion of the recovery process, the server will remove `recovery.signal` (to prevent accidentally re-entering recovery mode later) and then commence normal database operations.
+9. Inspect the contents of the database to ensure you have recovered to the desired state. If not, return to step 1. If all is well, allow your users to connect by restoring `pg_hba.conf` to normal.
 
 The key part of all this is to set up a recovery configuration that describes how you want to recover and how far the recovery should run. The one thing that you absolutely must specify is the `restore_command`, which tells PostgreSQL how to retrieve archived WAL file segments. Like the `archive_command`, this is a shell command string. It can contain `%f`, which is replaced by the name of the desired WAL file, and `%p`, which is replaced by the path name to copy the WAL file to. (The path name is relative to the current working directory, i.e., the cluster's data directory.) Write `%%` if you need to embed an actual `%` character in the command. The simplest useful command is something like:
 
@@ -179,8 +177,6 @@ The stop point must be after the ending time of the base backup, i.e., the end t
 If recovery finds corrupted WAL data, recovery will halt at that point and the server will not start. In such a case the recovery process could be re-run from the beginning, specifying a “recovery target” before the point of corruption so that recovery can complete normally. If recovery fails for an external reason, such as a system crash or if the WAL archive has become inaccessible, then the recovery can simply be restarted and it will restart almost from where it failed. Recovery restart works much like checkpointing in normal operation: the server periodically forces all its state to disk, and then updates the `pg_control` file to indicate that the already-processed WAL data need not be scanned again.
 
 ### 26.3.5. Timelines [#](#BACKUP-TIMELINES)
-
-[]()
 
 The ability to restore the database to a previous point in time creates some complexities that are akin to science-fiction stories about time travel and parallel universes. For example, in the original history of the database, suppose you dropped a critical table at 5:15PM on Tuesday evening, but didn't realize your mistake until Wednesday noon. Unfazed, you get out your backup, restore to the point-in-time 5:14PM Tuesday evening, and are up and running. In *this* history of the database universe, you never dropped the table. But suppose you later realize this wasn't such a great idea, and would like to return to sometime Wednesday morning in the original history. You won't be able to if, while your database was up-and-running, it overwrote some of the WAL segment files that led up to the time you now wish you could get back to. Thus, to avoid this, you need to distinguish the series of WAL records generated after you've done a point-in-time recovery from those that were generated in the original database history.
 
@@ -222,10 +218,10 @@ Using a separate script file is advisable any time you want to use more than a s
 
 Examples of requirements that might be solved within a script include:
 
-*   Copying data to secure off-site data storage
-*   Batching WAL files so that they are transferred every three hours, rather than one at a time
-*   Interfacing with other backup and recovery software
-*   Interfacing with monitoring software to report errors
+* Copying data to secure off-site data storage
+* Batching WAL files so that they are transferred every three hours, rather than one at a time
+* Interfacing with other backup and recovery software
+* Interfacing with monitoring software to report errors
 
 ### Tip
 
@@ -235,8 +231,8 @@ When using an `archive_command` script, it's desirable to enable [logging\_colle
 
 At this writing, there are several limitations of the continuous archiving technique. These will probably be fixed in future releases:
 
-*   If a [`CREATE DATABASE`](sql-createdatabase.html "CREATE DATABASE") command is executed while a base backup is being taken, and then the template database that the `CREATE DATABASE` copied is modified while the base backup is still in progress, it is possible that recovery will cause those modifications to be propagated into the created database as well. This is of course undesirable. To avoid this risk, it is best not to modify any template databases while taking a base backup.
-*   [`CREATE TABLESPACE`](sql-createtablespace.html "CREATE TABLESPACE") commands are WAL-logged with the literal absolute path, and will therefore be replayed as tablespace creations with the same absolute path. This might be undesirable if the WAL is being replayed on a different machine. It can be dangerous even if the WAL is being replayed on the same machine, but into a new data directory: the replay will still overwrite the contents of the original tablespace. To avoid potential gotchas of this sort, the best practice is to take a new base backup after creating or dropping tablespaces.
+* If a [`CREATE DATABASE`](sql-createdatabase.html "CREATE DATABASE") command is executed while a base backup is being taken, and then the template database that the `CREATE DATABASE` copied is modified while the base backup is still in progress, it is possible that recovery will cause those modifications to be propagated into the created database as well. This is of course undesirable. To avoid this risk, it is best not to modify any template databases while taking a base backup.
+* [`CREATE TABLESPACE`](sql-createtablespace.html "CREATE TABLESPACE") commands are WAL-logged with the literal absolute path, and will therefore be replayed as tablespace creations with the same absolute path. This might be undesirable if the WAL is being replayed on a different machine. It can be dangerous even if the WAL is being replayed on the same machine, but into a new data directory: the replay will still overwrite the contents of the original tablespace. To avoid potential gotchas of this sort, the best practice is to take a new base backup after creating or dropping tablespaces.
 
 It should also be noted that the default WAL format is fairly bulky since it includes many disk page snapshots. These page snapshots are designed to support crash recovery, since we might need to fix partially-written disk pages. Depending on your system hardware and software, the risk of partial writes might be small enough to ignore, in which case you can significantly reduce the total volume of archived WAL files by turning off page snapshots using the [full\_page\_writes](runtime-config-wal.html#GUC-FULL-PAGE-WRITES) parameter. (Read the notes and warnings in [Chapter 30](wal.html "Chapter 30. Reliability and the Write-Ahead Log") before you do so.) Turning off page snapshots does not prevent use of the WAL for PITR operations. An area for future development is to compress archived WAL data by removing unnecessary page copies even when `full_page_writes` is on. In the meantime, administrators might wish to reduce the number of page snapshots included in WAL by increasing the checkpoint interval parameters as much as feasible.
 

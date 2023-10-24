@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## LISTEN
 
 LISTEN — listen for a notification
@@ -28,7 +26,7 @@ The method a client application must use to detect notification events depends o
 
 ## Parameters
 
-*   *`channel`*
+* *`channel`*
 
     Name of a notification channel (any identifier).
 

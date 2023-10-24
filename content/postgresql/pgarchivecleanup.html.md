@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## pg\_archivecleanup
 
 pg\_archivecleanup — clean up PostgreSQL WAL archive files
@@ -42,27 +40,27 @@ pg\_archivecleanup assumes that *`archivelocation`* is a directory readable and 
 
 pg\_archivecleanup accepts the following command-line arguments:
 
-*   `-b``--clean-backup-history`
+* `-b``--clean-backup-history`
 
     Remove backup history files as well. See [Section 26.3.2](continuous-archiving.html#BACKUP-BASE-BACKUP "26.3.2. Making a Base Backup") for details about backup history files.
 
-*   `-d``--debug`
+* `-d``--debug`
 
     Print lots of debug logging output on `stderr`.
 
-*   `-n``--dry-run`
+* `-n``--dry-run`
 
     Print the names of the files that would have been removed on `stdout` (performs a dry run).
 
-*   `-V``--version`
+* `-V``--version`
 
     Print the pg\_archivecleanup version and exit.
 
-*   `-x extension``--strip-extension=extension`
+* `-x extension``--strip-extension=extension`
 
     Provide an extension that will be stripped from all file names before deciding if they should be deleted. This is typically useful for cleaning up archives that have been compressed during storage, and therefore have had an extension added by the compression program. For example: `-x .gz`.
 
-*   `-?``--help`
+* `-?``--help`
 
     Show help about pg\_archivecleanup command line arguments, and exit.
 
@@ -84,8 +82,8 @@ On Linux or Unix systems, you might use:
 
 where the archive directory is physically located on the standby server, so that the `archive_command` is accessing it across NFS, but the files are local to the standby. This will:
 
-*   produce debugging output in `cleanup.log`
-*   remove no-longer-needed files from the archive directory
+* produce debugging output in `cleanup.log`
+* remove no-longer-needed files from the archive directory
 
 ***
 

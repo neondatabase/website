@@ -8,23 +8,23 @@
 
 ## N.2. Configuring the Colors [#](#COLOR-WHICH)
 
-The actual colors to be used are configured using the environment variable `PG_COLORS`[]() (note plural). The value is a colon-separated list of `key=value` pairs. The keys specify what the color is to be used for. The values are SGR (Select Graphic Rendition) specifications, which are interpreted by the terminal.
+The actual colors to be used are configured using the environment variable `PG_COLORS` (note plural). The value is a colon-separated list of `key=value` pairs. The keys specify what the color is to be used for. The values are SGR (Select Graphic Rendition) specifications, which are interpreted by the terminal.
 
 The following keys are currently in use:
 
-*   `error`
+* `error`
 
     used to highlight the text “error” in error messages
 
-*   `warning`
+* `warning`
 
     used to highlight the text “warning” in warning messages
 
-*   `note`
+* `note`
 
     used to highlight the text “detail” and “hint” in such messages
 
-*   `locus`
+* `locus`
 
     used to highlight location information (e.g., program name and file name) in messages
 

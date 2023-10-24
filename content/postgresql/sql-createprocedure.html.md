@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## CREATE PROCEDURE
 
 CREATE PROCEDURE — define a new procedure
@@ -43,19 +41,19 @@ Refer to [Section 38.4](xproc.html "38.4. User-Defined Procedures") for furthe
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of the procedure to create.
 
-*   *`argmode`*
+* *`argmode`*
 
     The mode of an argument: `IN`, `OUT`, `INOUT`, or `VARIADIC`. If omitted, the default is `IN`.
 
-*   *`argname`*
+* *`argname`*
 
     The name of an argument.
 
-*   *`argtype`*
+* *`argtype`*
 
     The data type(s) of the procedure's arguments (optionally schema-qualified), if any. The argument types can be base, composite, or domain types, or can reference the type of a table column.
 
@@ -63,19 +61,19 @@ Refer to [Section 38.4](xproc.html "38.4. User-Defined Procedures") for furthe
 
     The type of a column is referenced by writing `table_name.column_name%TYPE`. Using this feature can sometimes help make a procedure independent of changes to the definition of a table.
 
-*   *`default_expr`*
+* *`default_expr`*
 
     An expression to be used as default value if the parameter is not specified. The expression has to be coercible to the argument type of the parameter. All input parameters following a parameter with a default value must have default values as well.
 
-*   *`lang_name`*
+* *`lang_name`*
 
     The name of the language that the procedure is implemented in. It can be `sql`, `c`, `internal`, or the name of a user-defined procedural language, e.g., `plpgsql`. The default is `sql` if *`sql_body`* is specified. Enclosing the name in single quotes is deprecated and requires matching case.
 
-*   `TRANSFORM { FOR TYPE type_name } [, ... ] }`
+* `TRANSFORM { FOR TYPE type_name } [, ... ] }`
 
     Lists which transforms a call to the procedure should apply. Transforms convert between SQL types and language-specific data types; see [CREATE TRANSFORM](sql-createtransform.html "CREATE TRANSFORM"). Procedural language implementations usually have hardcoded knowledge of the built-in types, so those don't need to be listed here. If a procedural language implementation does not know how to handle a type and no transform is supplied, it will fall back to a default behavior for converting data types, but this depends on the implementation.
 
-*   `[EXTERNAL] SECURITY INVOKER``[EXTERNAL] SECURITY DEFINER`
+* `[EXTERNAL] SECURITY INVOKER``[EXTERNAL] SECURITY DEFINER`
 
     `SECURITY INVOKER` indicates that the procedure is to be executed with the privileges of the user that calls it. That is the default. `SECURITY DEFINER` specifies that the procedure is to be executed with the privileges of the user that owns it.
 
@@ -83,7 +81,7 @@ Refer to [Section 38.4](xproc.html "38.4. User-Defined Procedures") for furthe
 
     A `SECURITY DEFINER` procedure cannot execute transaction control statements (for example, `COMMIT` and `ROLLBACK`, depending on the language).
 
-*   *`configuration_parameter`**`value`*
+* *`configuration_parameter`**`value`*
 
     The `SET` clause causes the specified configuration parameter to be set to the specified value when the procedure is entered, and then restored to its prior value when the procedure exits. `SET FROM CURRENT` saves the value of the parameter that is current when `CREATE PROCEDURE` is executed as the value to be applied when the procedure is entered.
 
@@ -93,19 +91,19 @@ Refer to [Section 38.4](xproc.html "38.4. User-Defined Procedures") for furthe
 
     See [SET](sql-set.html "SET") and [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
 
-*   *`definition`*
+* *`definition`*
 
     A string constant defining the procedure; the meaning depends on the language. It can be an internal procedure name, the path to an object file, an SQL command, or text in a procedural language.
 
     It is often helpful to use dollar quoting (see [Section 4.1.2.4](sql-syntax-lexical.html#SQL-SYNTAX-DOLLAR-QUOTING "4.1.2.4. Dollar-Quoted String Constants")) to write the procedure definition string, rather than the normal single quote syntax. Without dollar quoting, any single quotes or backslashes in the procedure definition must be escaped by doubling them.
 
-*   `obj_file, link_symbol`
+* `obj_file, link_symbol`
 
     This form of the `AS` clause is used for dynamically loadable C language procedures when the procedure name in the C language source code is not the same as the name of the SQL procedure. The string *`obj_file`* is the name of the shared library file containing the compiled C procedure, and is interpreted as for the [`LOAD`](sql-load.html "LOAD") command. The string *`link_symbol`* is the procedure's link symbol, that is, the name of the procedure in the C language source code. If the link symbol is omitted, it is assumed to be the same as the name of the SQL procedure being defined.
 
     When repeated `CREATE PROCEDURE` calls refer to the same object file, the file is only loaded once per session. To unload and reload the file (perhaps during development), start a new session.
 
-*   *`sql_body`*
+* *`sql_body`*
 
     The body of a `LANGUAGE SQL` procedure. This should be a block
 

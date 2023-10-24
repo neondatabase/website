@@ -8,19 +8,15 @@
 
 ## F.30. pgrowlocks — show a table's row locking information [#](#PGROWLOCKS)
 
-*   *   [F.30.1. Overview](pgrowlocks.html#PGROWLOCKS-OVERVIEW)
-    *   [F.30.2. Sample Output](pgrowlocks.html#PGROWLOCKS-SAMPLE-OUTPUT)
-    *   [F.30.3. Author](pgrowlocks.html#PGROWLOCKS-AUTHOR)
-
-[]()
+  * *   [F.30.1. Overview](pgrowlocks.html#PGROWLOCKS-OVERVIEW)
+* [F.30.2. Sample Output](pgrowlocks.html#PGROWLOCKS-SAMPLE-OUTPUT)
+* [F.30.3. Author](pgrowlocks.html#PGROWLOCKS-AUTHOR)
 
 The `pgrowlocks` module provides a function to show row locking information for a specified table.
 
 By default use is restricted to superusers, roles with privileges of the `pg_stat_scan_tables` role, and users with `SELECT` permissions on the table.
 
 ### F.30.1. Overview [#](#PGROWLOCKS-OVERVIEW)
-
-[]()
 
     pgrowlocks(text) returns setof record
 
@@ -39,11 +35,10 @@ The parameter is the name of a table. The result is a set of records, with one r
 
 \
 
-
 `pgrowlocks` takes `AccessShareLock` for the target table and reads each row one by one to collect the row locking information. This is not very speedy for a large table. Note that:
 
-1.  If an `ACCESS EXCLUSIVE` lock is taken on the table, `pgrowlocks` will be blocked.
-2.  `pgrowlocks` is not guaranteed to produce a self-consistent snapshot. It is possible that a new row lock is taken, or an old lock is freed, during its execution.
+1. If an `ACCESS EXCLUSIVE` lock is taken on the table, `pgrowlocks` will be blocked.
+2. `pgrowlocks` is not guaranteed to produce a self-consistent snapshot. It is possible that a new row lock is taken, or an old lock is freed, during its execution.
 
 `pgrowlocks` does not show the contents of locked rows. If you want to take a look at the row contents at the same time, you could do something like this:
 

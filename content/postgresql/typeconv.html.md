@@ -10,14 +10,12 @@
 
 **Table of Contents**
 
-*   *   [10.1. Overview](typeconv-overview.html)
-    *   [10.2. Operators](typeconv-oper.html)
-    *   [10.3. Functions](typeconv-func.html)
-    *   [10.4. Value Storage](typeconv-query.html)
-    *   [10.5. `UNION`, `CASE`, and Related Constructs](typeconv-union-case.html)
-    *   [10.6. `SELECT` Output Columns](typeconv-select.html)
-
-[]()
+  * *   [10.1. Overview](typeconv-overview.html)
+* [10.2. Operators](typeconv-oper.html)
+* [10.3. Functions](typeconv-func.html)
+* [10.4. Value Storage](typeconv-query.html)
+* [10.5. `UNION`, `CASE`, and Related Constructs](typeconv-union-case.html)
+* [10.6. `SELECT` Output Columns](typeconv-select.html)
 
 SQL statements can, intentionally or not, require the mixing of different data types in the same expression. PostgreSQL has extensive facilities for evaluating mixed-type expressions.
 

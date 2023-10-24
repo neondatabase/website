@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DROP CAST
 
 DROP CAST — remove a cast
@@ -24,19 +22,19 @@ To be able to drop a cast, you must own the source or the target data type. Thes
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the cast does not exist. A notice is issued in this case.
 
-*   *`source_type`*
+* *`source_type`*
 
     The name of the source data type of the cast.
 
-*   *`target_type`*
+* *`target_type`*
 
     The name of the target data type of the cast.
 
-*   `CASCADE``RESTRICT`
+* `CASCADE``RESTRICT`
 
     These key words do not have any effect, since there are no dependencies on casts.
 

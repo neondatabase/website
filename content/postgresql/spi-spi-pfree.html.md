@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_pfree
 
 SPI\_pfree — free memory in the upper executor context
@@ -24,7 +22,7 @@ This function is no longer different from plain `pfree`. It's kept just for back
 
 ## Arguments
 
-*   `void * pointer`
+* `void * pointer`
 
     pointer to existing storage to free
 

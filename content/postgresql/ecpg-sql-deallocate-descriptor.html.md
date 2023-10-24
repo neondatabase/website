@@ -20,7 +20,7 @@ DEALLOCATE DESCRIPTOR — deallocate an SQL descriptor area
 
 ## Parameters
 
-*   *`name`* [#](#ECPG-SQL-DEALLOCATE-DESCRIPTOR-NAME)
+* *`name`* [#](#ECPG-SQL-DEALLOCATE-DESCRIPTOR-NAME)
 
     The name of the descriptor which is going to be deallocated. It is case sensitive. This can be an SQL identifier or a host variable.
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## CREATE USER
 
 CREATE USER — define a new database role

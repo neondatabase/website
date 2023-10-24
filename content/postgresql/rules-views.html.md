@@ -8,12 +8,10 @@
 
 ## 41.2. Views and the Rule System [#](#RULES-VIEWS)
 
-*   *   [41.2.1. How `SELECT` Rules Work](rules-views.html#RULES-SELECT)
-    *   [41.2.2. View Rules in Non-`SELECT` Statements](rules-views.html#RULES-VIEWS-NON-SELECT)
-    *   [41.2.3. The Power of Views in PostgreSQL](rules-views.html#RULES-VIEWS-POWER)
-    *   [41.2.4. Updating a View](rules-views.html#RULES-VIEWS-UPDATE)
-
-[]()[]()
+  * *   [41.2.1. How `SELECT` Rules Work](rules-views.html#RULES-SELECT)
+* [41.2.2. View Rules in Non-`SELECT` Statements](rules-views.html#RULES-VIEWS-NON-SELECT)
+* [41.2.3. The Power of Views in PostgreSQL](rules-views.html#RULES-VIEWS-POWER)
+* [41.2.4. Updating a View](rules-views.html#RULES-VIEWS-UPDATE)
 
 Views in PostgreSQL are implemented using the rule system. A view is basically an empty table (having no actual storage) with an `ON SELECT DO INSTEAD` rule. Conventionally, that rule is named `_RETURN`. So a view like
 
@@ -30,8 +28,6 @@ although you can't actually write that, because tables are not allowed to have `
 A view can also have other kinds of `DO INSTEAD` rules, allowing `INSERT`, `UPDATE`, or `DELETE` commands to be performed on the view despite its lack of underlying storage. This is discussed further below, in [Section 41.2.4](rules-views.html#RULES-VIEWS-UPDATE "41.2.4. Updating a View").
 
 ### 41.2.1. How `SELECT` Rules Work [#](#RULES-SELECT)
-
-[]()
 
 Rules `ON SELECT` are applied to all queries as the last step, even if the command given is an `INSERT`, `UPDATE` or `DELETE`. And they have different semantics from rules on the other command types in that they modify the query tree in place instead of creating a new one. So `SELECT` rules are described first.
 
@@ -255,10 +251,10 @@ There are only a few differences between a query tree for a `SELECT` and one for
 
 are nearly identical. In particular:
 
-*   The range tables contain entries for the tables `t1` and `t2`.
-*   The target lists contain one variable that points to column `b` of the range table entry for table `t2`.
-*   The qualification expressions compare the columns `a` of both range-table entries for equality.
-*   The join trees show a simple join between `t1` and `t2`.
+* The range tables contain entries for the tables `t1` and `t2`.
+* The target lists contain one variable that points to column `b` of the range table entry for table `t2`.
+* The qualification expressions compare the columns `a` of both range-table entries for equality.
+* The join trees show a simple join between `t1` and `t2`.
 
 The consequence is, that both query trees result in similar execution plans: They are both joins over the two tables. For the `UPDATE` the missing columns from `t1` are added to the target list by the planner and the final query tree will read as:
 
@@ -270,7 +266,7 @@ and thus the executor run over the join will produce exactly the same result set
 
 But there is a little problem in `UPDATE`: the part of the executor plan that does the join does not care what the results from the join are meant for. It just produces a result set of rows. The fact that one is a `SELECT` command and the other is an `UPDATE` is handled higher up in the executor, where it knows that this is an `UPDATE`, and it knows that this result should go into table `t1`. But which of the rows that are there has to be replaced by the new row?
 
-To resolve this problem, another entry is added to the target list in `UPDATE` (and also in `DELETE`) statements: the current tuple ID (CTID).[]() This is a system column containing the file block number and position in the block for the row. Knowing the table, the CTID can be used to retrieve the original row of `t1` to be updated. After adding the CTID to the target list, the query actually looks like:
+To resolve this problem, another entry is added to the target list in `UPDATE` (and also in `DELETE`) statements: the current tuple ID (CTID). This is a system column containing the file block number and position in the block for the row. Knowing the table, the CTID can be used to retrieve the original row of `t1` to be updated. After adding the CTID to the target list, the query actually looks like:
 
     SELECT t1.a, t2.b, t1.ctid FROM t1, t2 WHERE t1.a = t2.a;
 

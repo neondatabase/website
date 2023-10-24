@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_freeplan
 
 SPI\_freeplan — free a previously saved prepared statement
@@ -22,7 +20,7 @@ SPI\_freeplan — free a previously saved prepared statement
 
 ## Arguments
 
-*   `SPIPlanPtr plan`
+* `SPIPlanPtr plan`
 
     pointer to statement to free
 

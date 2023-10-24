@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## CREATE EXTENSION
 
 CREATE EXTENSION — install an extension
@@ -31,15 +29,15 @@ Loading an extension ordinarily requires the same privileges that would be requi
 
 ## Parameters
 
-*   `IF NOT EXISTS`
+* `IF NOT EXISTS`
 
     Do not throw an error if an extension with the same name already exists. A notice is issued in this case. Note that there is no guarantee that the existing extension is anything like the one that would have been created from the currently-available script file.
 
-*   *`extension_name`*
+* *`extension_name`*
 
     The name of the extension to be installed. PostgreSQL will create the extension using details from the file `SHAREDIR/extension/`*`extension_name`*`.control`.
 
-*   *`schema_name`*
+* *`schema_name`*
 
     The name of the schema in which to install the extension's objects, given that the extension allows its contents to be relocated. The named schema must already exist. If not specified, and the extension's control file does not specify a schema either, the current default object creation schema is used.
 
@@ -47,11 +45,11 @@ Loading an extension ordinarily requires the same privileges that would be requi
 
     Remember that the extension itself is not considered to be within any schema: extensions have unqualified names that must be unique database-wide. But objects belonging to the extension can be within schemas.
 
-*   *`version`*
+* *`version`*
 
     The version of the extension to install. This can be written as either an identifier or a string literal. The default version is whatever is specified in the extension's control file.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically install any extensions that this extension depends on that are not already installed. Their dependencies are likewise automatically installed, recursively. The `SCHEMA` clause, if given, applies to all extensions that get installed this way. Other options of the statement are not applied to automatically-installed extensions; in particular, their default versions are always selected.
 

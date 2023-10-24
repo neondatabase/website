@@ -8,17 +8,15 @@
 
 ## F.39. sepgsql — SELinux-, label-based mandatory access control (MAC) security module [#](#SEPGSQL)
 
-*   *   [F.39.1. Overview](sepgsql.html#SEPGSQL-OVERVIEW)
-    *   [F.39.2. Installation](sepgsql.html#SEPGSQL-INSTALLATION)
-    *   [F.39.3. Regression Tests](sepgsql.html#SEPGSQL-REGRESSION)
-    *   [F.39.4. GUC Parameters](sepgsql.html#SEPGSQL-PARAMETERS)
-    *   [F.39.5. Features](sepgsql.html#SEPGSQL-FEATURES)
-    *   [F.39.6. Sepgsql Functions](sepgsql.html#SEPGSQL-FUNCTIONS)
-    *   [F.39.7. Limitations](sepgsql.html#SEPGSQL-LIMITATIONS)
-    *   [F.39.8. External Resources](sepgsql.html#SEPGSQL-RESOURCES)
-    *   [F.39.9. Author](sepgsql.html#SEPGSQL-AUTHOR)
-
-[]()
+  * *   [F.39.1. Overview](sepgsql.html#SEPGSQL-OVERVIEW)
+* [F.39.2. Installation](sepgsql.html#SEPGSQL-INSTALLATION)
+* [F.39.3. Regression Tests](sepgsql.html#SEPGSQL-REGRESSION)
+* [F.39.4. GUC Parameters](sepgsql.html#SEPGSQL-PARAMETERS)
+* [F.39.5. Features](sepgsql.html#SEPGSQL-FEATURES)
+* [F.39.6. Sepgsql Functions](sepgsql.html#SEPGSQL-FUNCTIONS)
+* [F.39.7. Limitations](sepgsql.html#SEPGSQL-LIMITATIONS)
+* [F.39.8. External Resources](sepgsql.html#SEPGSQL-RESOURCES)
+* [F.39.9. Author](sepgsql.html#SEPGSQL-AUTHOR)
 
 `sepgsql` is a loadable module that supports label-based mandatory access control (MAC) based on SELinux security policy.
 
@@ -110,27 +108,27 @@ See [Section F.39.8](sepgsql.html#SEPGSQL-RESOURCES "F.39.8. External Resource
 
 Finally, run the regression test script:
 
-    $ ./test_sepgsql
+    ./test_sepgsql
 
 This script will attempt to verify that you have done all the configuration steps correctly, and then it will run the regression tests for the `sepgsql` module.
 
 After completing the tests, it's recommended you disable the `sepgsql_regression_test_mode` parameter:
 
-    $ sudo setsebool sepgsql_regression_test_mode off
+    sudo setsebool sepgsql_regression_test_mode off
 
 You might prefer to remove the `sepgsql-regtest` policy entirely:
 
-    $ sudo semodule -r sepgsql-regtest
+    sudo semodule -r sepgsql-regtest
 
 ### F.39.4. GUC Parameters [#](#SEPGSQL-PARAMETERS)
 
-*   `sepgsql.permissive` (`boolean`) []()[#](#GUC-SEPGSQL-PERMISSIVE)
+* `sepgsql.permissive` (`boolean`) [#](#GUC-SEPGSQL-PERMISSIVE)
 
     This parameter enables `sepgsql` to function in permissive mode, regardless of the system setting. The default is off. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
     When this parameter is on, `sepgsql` functions in permissive mode, even if SELinux in general is working in enforcing mode. This parameter is primarily useful for testing purposes.
 
-*   `sepgsql.debug_audit` (`boolean`) []()[#](#GUC-SEPGSQL-DEBUG-AUDIT)
+* `sepgsql.debug_audit` (`boolean`) [#](#GUC-SEPGSQL-DEBUG-AUDIT)
 
     This parameter enables the printing of audit messages regardless of the system policy settings. The default is off, which means that messages will be printed according to the system settings.
 
@@ -178,18 +176,18 @@ SELinux defines several permissions to control common operations for each object
 
 Creating a new database object requires `create` permission. SELinux will grant or deny this permission based on the client's security label and the proposed security label for the new object. In some cases, additional privileges are required:
 
-*   [`CREATE DATABASE`](sql-createdatabase.html "CREATE DATABASE") additionally requires `getattr` permission for the source or template database.
-*   Creating a schema object additionally requires `add_name` permission on the parent schema.
-*   Creating a table additionally requires permission to create each individual table column, just as if each table column were a separate top-level object.
-*   Creating a function marked as `LEAKPROOF` additionally requires `install` permission. (This permission is also checked when `LEAKPROOF` is set for an existing function.)
+* [`CREATE DATABASE`](sql-createdatabase.html "CREATE DATABASE") additionally requires `getattr` permission for the source or template database.
+* Creating a schema object additionally requires `add_name` permission on the parent schema.
+* Creating a table additionally requires permission to create each individual table column, just as if each table column were a separate top-level object.
+* Creating a function marked as `LEAKPROOF` additionally requires `install` permission. (This permission is also checked when `LEAKPROOF` is set for an existing function.)
 
 When `DROP` command is executed, `drop` will be checked on the object being removed. Permissions will be also checked for objects dropped indirectly via `CASCADE`. Deletion of objects contained within a particular schema (tables, views, sequences and procedures) additionally requires `remove_name` on the schema.
 
 When `ALTER` command is executed, `setattr` will be checked on the object being modified for each object types, except for subsidiary objects such as the indexes or triggers of a table, where permissions are instead checked on the parent object. In some cases, additional permissions are required:
 
-*   Moving an object to a new schema additionally requires `remove_name` permission on the old schema and `add_name` permission on the new one.
-*   Setting the `LEAKPROOF` attribute on a function requires `install` permission.
-*   Using [`SECURITY LABEL`](sql-security-label.html "SECURITY LABEL") on an object additionally requires `relabelfrom` permission for the object in conjunction with its old security label and `relabelto` permission for the object in conjunction with its new security label. (In cases where multiple label providers are installed and the user tries to set a security label, but it is not managed by SELinux, only `setattr` should be checked here. This is currently not done due to implementation restrictions.)
+* Moving an object to a new schema additionally requires `remove_name` permission on the old schema and `add_name` permission on the new one.
+* Setting the `LEAKPROOF` attribute on a function requires `install` permission.
+* Using [`SECURITY LABEL`](sql-security-label.html "SECURITY LABEL") on an object additionally requires `relabelfrom` permission for the object in conjunction with its old security label and `relabelto` permission for the object in conjunction with its new security label. (In cases where multiple label providers are installed and the user tries to set a security label, but it is not managed by SELinux, only `setattr` should be checked here. This is currently not done due to implementation restrictions.)
 
 #### F.39.5.4. Trusted Procedures [#](#SEPGSQL-FEATURES-TRUSTED-PROCEDURES)
 
@@ -271,33 +269,33 @@ We reject the [`LOAD`](sql-load.html "LOAD") command across the board, because a
 
 ### F.39.7. Limitations [#](#SEPGSQL-LIMITATIONS)
 
-*   Data Definition Language (DDL) Permissions
+* Data Definition Language (DDL) Permissions
 
     Due to implementation restrictions, some DDL operations do not check permissions.
 
-*   Data Control Language (DCL) Permissions
+* Data Control Language (DCL) Permissions
 
     Due to implementation restrictions, DCL operations do not check permissions.
 
-*   Row-level access control
+* Row-level access control
 
     PostgreSQL supports row-level access, but `sepgsql` does not.
 
-*   Covert channels
+* Covert channels
 
     `sepgsql` does not try to hide the existence of a certain object, even if the user is not allowed to reference it. For example, we can infer the existence of an invisible object as a result of primary key conflicts, foreign key violations, and so on, even if we cannot obtain the contents of the object. The existence of a top secret table cannot be hidden; we only hope to conceal its contents.
 
 ### F.39.8. External Resources [#](#SEPGSQL-RESOURCES)
 
-*   [SE-PostgreSQL Introduction](https://wiki.postgresql.org/wiki/SEPostgreSQL)
+* [SE-PostgreSQL Introduction](https://wiki.postgresql.org/wiki/SEPostgreSQL)
 
     This wiki page provides a brief overview, security design, architecture, administration and upcoming features.
 
-*   [SELinux User's and Administrator's Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/index)
+* [SELinux User's and Administrator's Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/index)
 
     This document provides a wide spectrum of knowledge to administer SELinux on your systems. It focuses primarily on Red Hat operating systems, but is not limited to them.
 
-*   [Fedora SELinux FAQ](https://fedoraproject.org/wiki/SELinux_FAQ)
+* [Fedora SELinux FAQ](https://fedoraproject.org/wiki/SELinux_FAQ)
 
     This document answers frequently asked questions about SELinux. It focuses primarily on Fedora, but is not limited to Fedora.
 

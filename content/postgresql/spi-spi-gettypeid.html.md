@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_gettypeid
 
 SPI\_gettypeid — return the data type OID of the specified column
@@ -22,11 +20,11 @@ SPI\_gettypeid — return the data type OID of the specified column
 
 ## Arguments
 
-*   `TupleDesc rowdesc`
+* `TupleDesc rowdesc`
 
     input row description
 
-*   `int colnumber`
+* `int colnumber`
 
     column number (count starts at 1)
 

@@ -8,8 +8,6 @@
 
 ## 53.45. `pg_rewrite` [#](#CATALOG-PG-REWRITE)
 
-[]()
-
 The catalog `pg_rewrite` stores rewrite rules for tables and views.
 
 **Table 53.45. `pg_rewrite` Columns**
@@ -26,7 +24,6 @@ The catalog `pg_rewrite` stores rewrite rules for tables and views.
 | `ev_action` `pg_node_tree`Query tree (in the form of a `nodeToString()` representation) for the rule's action                                                                                                                                                                         |
 
 \
-
 
 ### Note
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DROP GROUP
 
 DROP GROUP — remove a database role

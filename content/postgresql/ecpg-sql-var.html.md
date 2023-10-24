@@ -20,11 +20,11 @@ The `VAR` command assigns a new C data type to a host variable. The host variabl
 
 ## Parameters
 
-*   *`varname`* [#](#ECPG-SQL-VAR-VARNAME)
+* *`varname`* [#](#ECPG-SQL-VAR-VARNAME)
 
     A C variable name.
 
-*   *`ctype`* [#](#ECPG-SQL-VAR-CTYPE)
+* *`ctype`* [#](#ECPG-SQL-VAR-CTYPE)
 
     A C type specification.
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ALTER EVENT TRIGGER
 
 ALTER EVENT TRIGGER — change the definition of an event trigger
@@ -27,19 +25,19 @@ You must be superuser to alter an event trigger.
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of an existing trigger to alter.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The user name of the new owner of the event trigger.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the event trigger.
 
-*   `DISABLE`/`ENABLE [ REPLICA | ALWAYS ] TRIGGER`
+* `DISABLE`/`ENABLE [ REPLICA | ALWAYS ] TRIGGER`
 
     These forms configure the firing of event triggers. A disabled trigger is still known to the system, but is not executed when its triggering event occurs. See also [session\_replication\_role](runtime-config-client.html#GUC-SESSION-REPLICATION-ROLE).
 

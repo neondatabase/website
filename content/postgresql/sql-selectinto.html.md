@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SELECT INTO
 
 SELECT INTO — define a new table from the results of a query
@@ -36,15 +34,15 @@ SELECT INTO — define a new table from the results of a query
 
 ## Parameters
 
-*   `TEMPORARY` or `TEMP`
+* `TEMPORARY` or `TEMP`
 
     If specified, the table is created as a temporary table. Refer to [CREATE TABLE](sql-createtable.html "CREATE TABLE") for details.
 
-*   `UNLOGGED`
+* `UNLOGGED`
 
     If specified, the table is created as an unlogged table. Refer to [CREATE TABLE](sql-createtable.html "CREATE TABLE") for details.
 
-*   *`new_table`*
+* *`new_table`*
 
     The name (optionally schema-qualified) of the table to be created.
 

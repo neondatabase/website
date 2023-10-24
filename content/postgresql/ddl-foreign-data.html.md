@@ -8,8 +8,6 @@
 
 ## 5.12. Foreign Data [#](#DDL-FOREIGN-DATA)
 
-[]()[]()[]()
-
 PostgreSQL implements portions of the SQL/MED specification, allowing you to access data that resides outside PostgreSQL using regular SQL queries. Such data is referred to as *foreign data*. (Note that this usage is not to be confused with foreign keys, which are a type of constraint within the database.)
 
 Foreign data is accessed with help from a *foreign data wrapper*. A foreign data wrapper is a library that can communicate with an external data source, hiding the details of connecting to the data source and obtaining data from it. There are some foreign data wrappers available as `contrib` modules; see [Appendix F](contrib.html "Appendix F. Additional Supplied Modules and Extensions"). Other kinds of foreign data wrappers might be found as third party products. If none of the existing foreign data wrappers suit your needs, you can write your own; see [Chapter 59](fdwhandler.html "Chapter 59. Writing a Foreign Data Wrapper").

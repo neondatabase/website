@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DROP DATABASE
 
 DROP DATABASE — remove a database
@@ -28,15 +26,15 @@ DROP DATABASE — remove a database
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the database does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name of the database to remove.
 
-*   `FORCE`
+* `FORCE`
 
     Attempt to terminate all existing connections to the target database. It doesn't terminate if prepared transactions, active logical replication slots or subscriptions are present in the target database.
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## dblink\_exec
 
 dblink\_exec — executes a command in a remote database
@@ -26,19 +24,19 @@ When two `text` arguments are given, the first one is first looked up as a persi
 
 ## Arguments
 
-*   *`connname`*
+* *`connname`*
 
     Name of the connection to use; omit this parameter to use the unnamed connection.
 
-*   *`connstr`*
+* *`connstr`*
 
     A connection info string, as previously described for `dblink_connect`.
 
-*   *`sql`*
+* *`sql`*
 
     The SQL command that you wish to execute in the remote database, for example `insert into foo values(0, 'a', '{"a0","b0","c0"}')`.
 
-*   *`fail_on_error`*
+* *`fail_on_error`*
 
     If true (the default when omitted) then an error thrown on the remote side of the connection causes an error to also be thrown locally. If false, the remote error is locally reported as a NOTICE, and the function's return value is set to `ERROR`.
 

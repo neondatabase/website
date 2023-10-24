@@ -8,34 +8,34 @@
 
 ## 19.3. Starting the Database Server [#](#SERVER-START)
 
-*   *   [19.3.1. Server Start-up Failures](server-start.html#SERVER-START-FAILURES)
-    *   [19.3.2. Client Connection Problems](server-start.html#CLIENT-CONNECTION-PROBLEMS)
+  * *   [19.3.1. Server Start-up Failures](server-start.html#SERVER-START-FAILURES)
+* [19.3.2. Client Connection Problems](server-start.html#CLIENT-CONNECTION-PROBLEMS)
 
-Before anyone can access the database, you must start the database server. The database server program is called `postgres`.[]()
+Before anyone can access the database, you must start the database server. The database server program is called `postgres`.
 
 If you are using a pre-packaged version of PostgreSQL, it almost certainly includes provisions for running the server as a background task according to the conventions of your operating system. Using the package's infrastructure to start the server will be much less work than figuring out how to do this yourself. Consult the package-level documentation for details.
 
 The bare-bones way to start the server manually is just to invoke `postgres` directly, specifying the location of the data directory with the `-D` option, for example:
 
-    $ postgres -D /usr/local/pgsql/data
+    postgres -D /usr/local/pgsql/data
 
 which will leave the server running in the foreground. This must be done while logged into the PostgreSQL user account. Without `-D`, the server will try to use the data directory named by the environment variable `PGDATA`. If that variable is not provided either, it will fail.
 
 Normally it is better to start `postgres` in the background. For this, use the usual Unix shell syntax:
 
-    $ postgres -D /usr/local/pgsql/data >logfile 2>&1 &
+    postgres -D /usr/local/pgsql/data >logfile 2>&1 &
 
 It is important to store the server's stdout and stderr output somewhere, as shown above. It will help for auditing purposes and to diagnose problems. (See [Section 25.3](logfile-maintenance.html "25.3. Log File Maintenance") for a more thorough discussion of log file handling.)
 
 The `postgres` program also takes a number of other command-line options. For more information, see the [postgres](app-postgres.html "postgres") reference page and [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") below.
 
-This shell syntax can get tedious quickly. Therefore the wrapper program [pg\_ctl](app-pg-ctl.html "pg_ctl")[]() is provided to simplify some tasks. For example:
+This shell syntax can get tedious quickly. Therefore the wrapper program [pg\_ctl](app-pg-ctl.html "pg_ctl") is provided to simplify some tasks. For example:
 
     pg_ctl start -l logfile
 
 will start the server in the background and put the output into the named log file. The `-D` option has the same meaning here as for `postgres`. `pg_ctl` is also capable of stopping the server.
 
-Normally, you will want to start the database server when the computer boots.[]() Autostart scripts are operating-system-specific. There are a few example scripts distributed with PostgreSQL in the `contrib/start-scripts` directory. Installing one will require root privileges.
+Normally, you will want to start the database server when the computer boots. Autostart scripts are operating-system-specific. There are a few example scripts distributed with PostgreSQL in the `contrib/start-scripts` directory. Installing one will require root privileges.
 
 Different systems have different conventions for starting up daemons at boot time. Many systems have a file `/etc/rc.local` or `/etc/rc.d/rc.local`. Others use `init.d` or `rc.d` directories. Whatever you do, the server must be run by the PostgreSQL user account *and not by root* or any other user. Therefore you probably should form your commands using `su postgres -c '...'`. For example:
 
@@ -43,22 +43,22 @@ Different systems have different conventions for starting up daemons at boot tim
 
 Here are a few more operating-system-specific suggestions. (In each case be sure to use the proper installation directory and user name where we show generic values.)
 
-*   For FreeBSD, look at the file `contrib/start-scripts/freebsd` in the PostgreSQL source distribution.[]()
+* For FreeBSD, look at the file `contrib/start-scripts/freebsd` in the PostgreSQL source distribution.
 
-*   On OpenBSD, add the following lines to the file `/etc/rc.local`:[]()
+* On OpenBSD, add the following lines to the file `/etc/rc.local`:
 
         if [ -x /usr/local/pgsql/bin/pg_ctl -a -x /usr/local/pgsql/bin/postgres ]; then
             su -l postgres -c '/usr/local/pgsql/bin/pg_ctl start -s -l /var/postgresql/log -D /usr/local/pgsql/data'
             echo -n ' postgresql'
         fi
 
-*   On Linux systems either add[]()
+* On Linux systems either add
 
         /usr/local/pgsql/bin/pg_ctl start -l logfile -D /usr/local/pgsql/data
 
     to `/etc/rc.d/rc.local` or `/etc/rc.local` or look at the file `contrib/start-scripts/linux` in the PostgreSQL source distribution.
 
-    When using systemd, you can use the following service unit file (e.g., at `/etc/systemd/system/postgresql.service`):[]()
+    When using systemd, you can use the following service unit file (e.g., at `/etc/systemd/system/postgresql.service`):
 
         [Unit]
         Description=PostgreSQL database server
@@ -82,9 +82,9 @@ Here are a few more operating-system-specific suggestions. (In each case be sure
 
     Consider carefully the timeout setting. systemd has a default timeout of 90 seconds as of this writing and will kill a process that does not report readiness within that time. But a PostgreSQL server that might have to perform crash recovery at startup could take much longer to become ready. The suggested value of `infinity` disables the timeout logic.
 
-*   On NetBSD, use either the FreeBSD or Linux start scripts, depending on preference.[]()
+* On NetBSD, use either the FreeBSD or Linux start scripts, depending on preference.
 
-*   On Solaris, create a file called `/etc/init.d/postgresql` that contains the following line:[]()
+* On Solaris, create a file called `/etc/init.d/postgresql` that contains the following line:
 
         su - postgres -c "/usr/local/pgsql/bin/pg_ctl start -l logfile -D /usr/local/pgsql/data"
 

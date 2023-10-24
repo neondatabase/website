@@ -8,10 +8,8 @@
 
 ## F.32. pgstattuple — obtain tuple-level statistics [#](#PGSTATTUPLE)
 
-*   *   [F.32.1. Functions](pgstattuple.html#PGSTATTUPLE-FUNCS)
-    *   [F.32.2. Authors](pgstattuple.html#PGSTATTUPLE-AUTHORS)
-
-[]()
+  * *   [F.32.1. Functions](pgstattuple.html#PGSTATTUPLE-FUNCS)
+* [F.32.2. Authors](pgstattuple.html#PGSTATTUPLE-AUTHORS)
 
 The `pgstattuple` module provides various functions to obtain tuple-level statistics.
 
@@ -19,7 +17,7 @@ Because these functions return detailed page-level information, access is restri
 
 ### F.32.1. Functions [#](#PGSTATTUPLE-FUNCS)
 
-*   []()`pgstattuple(regclass) returns record`
+* `pgstattuple(regclass) returns record`
 
     `pgstattuple` returns a relation's physical length, percentage of “dead” tuples, and other info. This may help users to determine whether vacuum is necessary or not. The argument is the target relation's name (optionally schema-qualified) or OID. For example:
 
@@ -53,8 +51,7 @@ Because these functions return detailed page-level information, access is restri
 
     \
 
-
-    ### Note
+### Note
 
     The `table_len` will always be greater than the sum of the `tuple_len`, `dead_tuple_len` and `free_space`. The difference is accounted for by fixed page overhead, the per-page table of pointers to tuples, and padding to ensure that tuples are correctly aligned.
 
@@ -62,11 +59,11 @@ Because these functions return detailed page-level information, access is restri
 
     `pgstattuple` judges a tuple is “dead” if `HeapTupleSatisfiesDirty` returns false.
 
-*   `pgstattuple(text) returns record`
+* `pgstattuple(text) returns record`
 
     This is the same as `pgstattuple(regclass)`, except that the target relation is specified as TEXT. This function is kept because of backward-compatibility so far, and will be deprecated in some future release.
 
-*   []()`pgstatindex(regclass) returns record`
+* `pgstatindex(regclass) returns record`
 
     `pgstatindex` returns a record showing information about a B-tree index. For example:
 
@@ -102,11 +99,11 @@ Because these functions return detailed page-level information, access is restri
 
     As with `pgstattuple`, the results are accumulated page-by-page, and should not be expected to represent an instantaneous snapshot of the whole index.
 
-*   `pgstatindex(text) returns record`
+* `pgstatindex(text) returns record`
 
     This is the same as `pgstatindex(regclass)`, except that the target index is specified as TEXT. This function is kept because of backward-compatibility so far, and will be deprecated in some future release.
 
-*   []()`pgstatginindex(regclass) returns record`
+* `pgstatginindex(regclass) returns record`
 
     `pgstatginindex` returns a record showing information about a GIN index. For example:
 
@@ -124,7 +121,7 @@ Because these functions return detailed page-level information, access is restri
     | `pending_pages`  | `integer` | Number of pages in the pending list  |
     | `pending_tuples` | `bigint`  | Number of tuples in the pending list |
 
-*   []()`pgstathashindex(regclass) returns record`
+* `pgstathashindex(regclass) returns record`
 
     `pgstathashindex` returns a record showing information about a HASH index. For example:
 
@@ -152,15 +149,15 @@ Because these functions return detailed page-level information, access is restri
     | `dead_tuples`    | `bigint`  | Number of dead tuples    |
     | `free_percent`   | `float`   | Percentage of free space |
 
-*   []()`pg_relpages(regclass) returns bigint`
+* `pg_relpages(regclass) returns bigint`
 
     `pg_relpages` returns the number of pages in the relation.
 
-*   `pg_relpages(text) returns bigint`
+* `pg_relpages(text) returns bigint`
 
     This is the same as `pg_relpages(regclass)`, except that the target relation is specified as TEXT. This function is kept because of backward-compatibility so far, and will be deprecated in some future release.
 
-*   []()`pgstattuple_approx(regclass) returns record`
+* `pgstattuple_approx(regclass) returns record`
 
     `pgstattuple_approx` is a faster alternative to `pgstattuple` that returns approximate results. The argument is the target relation's name or OID. For example:
 
@@ -201,7 +198,6 @@ Because these functions return detailed page-level information, access is restri
     | `approx_free_percent`  | `float8` | Percentage of free space                         |
 
     \
-
 
     In the above output, the free space figures may not match the `pgstattuple` output exactly, because the free space map gives us an exact figure, but is not guaranteed to be accurate to the byte.
 

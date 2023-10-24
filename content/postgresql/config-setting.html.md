@@ -8,34 +8,34 @@
 
 ## 20.1. Setting Parameters [#](#CONFIG-SETTING)
 
-*   *   [20.1.1. Parameter Names and Values](config-setting.html#CONFIG-SETTING-NAMES-VALUES)
-    *   [20.1.2. Parameter Interaction via the Configuration File](config-setting.html#CONFIG-SETTING-CONFIGURATION-FILE)
-    *   [20.1.3. Parameter Interaction via SQL](config-setting.html#CONFIG-SETTING-SQL)
-    *   [20.1.4. Parameter Interaction via the Shell](config-setting.html#CONFIG-SETTING-SHELL)
-    *   [20.1.5. Managing Configuration File Contents](config-setting.html#CONFIG-INCLUDES)
+  * *   [20.1.1. Parameter Names and Values](config-setting.html#CONFIG-SETTING-NAMES-VALUES)
+* [20.1.2. Parameter Interaction via the Configuration File](config-setting.html#CONFIG-SETTING-CONFIGURATION-FILE)
+* [20.1.3. Parameter Interaction via SQL](config-setting.html#CONFIG-SETTING-SQL)
+* [20.1.4. Parameter Interaction via the Shell](config-setting.html#CONFIG-SETTING-SHELL)
+* [20.1.5. Managing Configuration File Contents](config-setting.html#CONFIG-INCLUDES)
 
 ### 20.1.1. Parameter Names and Values [#](#CONFIG-SETTING-NAMES-VALUES)
 
 All parameter names are case-insensitive. Every parameter takes a value of one of five types: boolean, string, integer, floating point, or enumerated (enum). The type determines the syntax for setting the parameter:
 
-*   *Boolean:* Values can be written as `on`, `off`, `true`, `false`, `yes`, `no`, `1`, `0` (all case-insensitive) or any unambiguous prefix of one of these.
+* *Boolean:* Values can be written as `on`, `off`, `true`, `false`, `yes`, `no`, `1`, `0` (all case-insensitive) or any unambiguous prefix of one of these.
 
-*   *String:* In general, enclose the value in single quotes, doubling any single quotes within the value. Quotes can usually be omitted if the value is a simple number or identifier, however. (Values that match an SQL keyword require quoting in some contexts.)
+* *String:* In general, enclose the value in single quotes, doubling any single quotes within the value. Quotes can usually be omitted if the value is a simple number or identifier, however. (Values that match an SQL keyword require quoting in some contexts.)
 
-*   *Numeric (integer and floating point):* Numeric parameters can be specified in the customary integer and floating-point formats; fractional values are rounded to the nearest integer if the parameter is of integer type. Integer parameters additionally accept hexadecimal input (beginning with `0x`) and octal input (beginning with `0`), but these formats cannot have a fraction. Do not use thousands separators. Quotes are not required, except for hexadecimal input.
+* *Numeric (integer and floating point):* Numeric parameters can be specified in the customary integer and floating-point formats; fractional values are rounded to the nearest integer if the parameter is of integer type. Integer parameters additionally accept hexadecimal input (beginning with `0x`) and octal input (beginning with `0`), but these formats cannot have a fraction. Do not use thousands separators. Quotes are not required, except for hexadecimal input.
 
-*   *Numeric with Unit:* Some numeric parameters have an implicit unit, because they describe quantities of memory or time. The unit might be bytes, kilobytes, blocks (typically eight kilobytes), milliseconds, seconds, or minutes. An unadorned numeric value for one of these settings will use the setting's default unit, which can be learned from `pg_settings`.`unit`. For convenience, settings can be given with a unit specified explicitly, for example `'120 ms'` for a time value, and they will be converted to whatever the parameter's actual unit is. Note that the value must be written as a string (with quotes) to use this feature. The unit name is case-sensitive, and there can be whitespace between the numeric value and the unit.
+* *Numeric with Unit:* Some numeric parameters have an implicit unit, because they describe quantities of memory or time. The unit might be bytes, kilobytes, blocks (typically eight kilobytes), milliseconds, seconds, or minutes. An unadorned numeric value for one of these settings will use the setting's default unit, which can be learned from `pg_settings`.`unit`. For convenience, settings can be given with a unit specified explicitly, for example `'120 ms'` for a time value, and they will be converted to whatever the parameter's actual unit is. Note that the value must be written as a string (with quotes) to use this feature. The unit name is case-sensitive, and there can be whitespace between the numeric value and the unit.
 
-    *   Valid memory units are `B` (bytes), `kB` (kilobytes), `MB` (megabytes), `GB` (gigabytes), and `TB` (terabytes). The multiplier for memory units is 1024, not 1000.
-    *   Valid time units are `us` (microseconds), `ms` (milliseconds), `s` (seconds), `min` (minutes), `h` (hours), and `d` (days).
+  * Valid memory units are `B` (bytes), `kB` (kilobytes), `MB` (megabytes), `GB` (gigabytes), and `TB` (terabytes). The multiplier for memory units is 1024, not 1000.
+  * Valid time units are `us` (microseconds), `ms` (milliseconds), `s` (seconds), `min` (minutes), `h` (hours), and `d` (days).
 
     If a fractional value is specified with a unit, it will be rounded to a multiple of the next smaller unit if there is one. For example, `30.1 GB` will be converted to `30822 MB` not `32319628902 B`. If the parameter is of integer type, a final rounding to integer occurs after any unit conversion.
 
-*   *Enumerated:* Enumerated-type parameters are written in the same way as string parameters, but are restricted to have one of a limited set of values. The values allowable for such a parameter can be found from `pg_settings`.`enumvals`. Enum parameter values are case-insensitive.
+* *Enumerated:* Enumerated-type parameters are written in the same way as string parameters, but are restricted to have one of a limited set of values. The values allowable for such a parameter can be found from `pg_settings`.`enumvals`. Enum parameter values are case-insensitive.
 
 ### 20.1.2. Parameter Interaction via the Configuration File [#](#CONFIG-SETTING-CONFIGURATION-FILE)
 
-The most fundamental way to set these parameters is to edit the file `postgresql.conf`[](), which is normally kept in the data directory. A default copy is installed when the database cluster directory is initialized. An example of what this file might look like is:
+The most fundamental way to set these parameters is to edit the file `postgresql.conf`, which is normally kept in the data directory. A default copy is installed when the database cluster directory is initialized. An example of what this file might look like is:
 
     # This is a comment
     log_connections = yes
@@ -47,9 +47,9 @@ One parameter is specified per line. The equal sign between name and value is op
 
 Parameters set in this way provide default values for the cluster. The settings seen by active sessions will be these values unless they are overridden. The following sections describe ways in which the administrator or user can override these defaults.
 
-[]()The configuration file is reread whenever the main server process receives a SIGHUP signal; this signal is most easily sent by running `pg_ctl reload` from the command line or by calling the SQL function `pg_reload_conf()`. The main server process also propagates this signal to all currently running server processes, so that existing sessions also adopt the new values (this will happen after they complete any currently-executing client command). Alternatively, you can send the signal to a single server process directly. Some parameters can only be set at server start; any changes to their entries in the configuration file will be ignored until the server is restarted. Invalid parameter settings in the configuration file are likewise ignored (but logged) during SIGHUP processing.
+The configuration file is reread whenever the main server process receives a SIGHUP signal; this signal is most easily sent by running `pg_ctl reload` from the command line or by calling the SQL function `pg_reload_conf()`. The main server process also propagates this signal to all currently running server processes, so that existing sessions also adopt the new values (this will happen after they complete any currently-executing client command). Alternatively, you can send the signal to a single server process directly. Some parameters can only be set at server start; any changes to their entries in the configuration file will be ignored until the server is restarted. Invalid parameter settings in the configuration file are likewise ignored (but logged) during SIGHUP processing.
 
-In addition to `postgresql.conf`, a PostgreSQL data directory contains a file `postgresql.auto.conf`[](), which has the same format as `postgresql.conf` but is intended to be edited automatically, not manually. This file holds settings provided through the [`ALTER SYSTEM`](sql-altersystem.html "ALTER SYSTEM") command. This file is read whenever `postgresql.conf` is, and its settings take effect in the same way. Settings in `postgresql.auto.conf` override those in `postgresql.conf`.
+In addition to `postgresql.conf`, a PostgreSQL data directory contains a file `postgresql.auto.conf`, which has the same format as `postgresql.conf` but is intended to be edited automatically, not manually. This file holds settings provided through the [`ALTER SYSTEM`](sql-altersystem.html "ALTER SYSTEM") command. This file is read whenever `postgresql.conf` is, and its settings take effect in the same way. Settings in `postgresql.auto.conf` override those in `postgresql.conf`.
 
 External tools may also modify `postgresql.auto.conf`. It is not recommended to do this while the server is running, since a concurrent `ALTER SYSTEM` command could overwrite such changes. Such tools might simply append new settings to the end, or they might choose to remove duplicate settings and/or comments (as `ALTER SYSTEM` will).
 
@@ -59,21 +59,21 @@ The system view [`pg_file_settings`](view-pg-file-settings.html "54.7. pg_file_
 
 PostgreSQL provides three SQL commands to establish configuration defaults. The already-mentioned `ALTER SYSTEM` command provides an SQL-accessible means of changing global defaults; it is functionally equivalent to editing `postgresql.conf`. In addition, there are two commands that allow setting of defaults on a per-database or per-role basis:
 
-*   The [`ALTER DATABASE`](sql-alterdatabase.html "ALTER DATABASE") command allows global settings to be overridden on a per-database basis.
-*   The [`ALTER ROLE`](sql-alterrole.html "ALTER ROLE") command allows both global and per-database settings to be overridden with user-specific values.
+* The [`ALTER DATABASE`](sql-alterdatabase.html "ALTER DATABASE") command allows global settings to be overridden on a per-database basis.
+* The [`ALTER ROLE`](sql-alterrole.html "ALTER ROLE") command allows both global and per-database settings to be overridden with user-specific values.
 
 Values set with `ALTER DATABASE` and `ALTER ROLE` are applied only when starting a fresh database session. They override values obtained from the configuration files or server command line, and constitute defaults for the rest of the session. Note that some settings cannot be changed after server start, and so cannot be set with these commands (or the ones listed below).
 
 Once a client is connected to the database, PostgreSQL provides two additional SQL commands (and equivalent functions) to interact with session-local configuration settings:
 
-*   The [`SHOW`](sql-show.html "SHOW") command allows inspection of the current value of any parameter. The corresponding SQL function is `current_setting(setting_name text)` (see [Section 9.27.1](functions-admin.html#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions")).
-*   The [`SET`](sql-set.html "SET") command allows modification of the current value of those parameters that can be set locally to a session; it has no effect on other sessions. Many parameters can be set this way by any user, but some can only be set by superusers and users who have been granted `SET` privilege on that parameter. The corresponding SQL function is `set_config(setting_name, new_value, is_local)` (see [Section 9.27.1](functions-admin.html#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions")).
+* The [`SHOW`](sql-show.html "SHOW") command allows inspection of the current value of any parameter. The corresponding SQL function is `current_setting(setting_name text)` (see [Section 9.27.1](functions-admin.html#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions")).
+* The [`SET`](sql-set.html "SET") command allows modification of the current value of those parameters that can be set locally to a session; it has no effect on other sessions. Many parameters can be set this way by any user, but some can only be set by superusers and users who have been granted `SET` privilege on that parameter. The corresponding SQL function is `set_config(setting_name, new_value, is_local)` (see [Section 9.27.1](functions-admin.html#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions")).
 
 In addition, the system view [`pg_settings`](view-pg-settings.html "54.24. pg_settings") can be used to view and change session-local values:
 
-*   Querying this view is similar to using `SHOW ALL` but provides more detail. It is also more flexible, since it's possible to specify filter conditions or join against other relations.
+* Querying this view is similar to using `SHOW ALL` but provides more detail. It is also more flexible, since it's possible to specify filter conditions or join against other relations.
 
-*   Using `UPDATE` on this view, specifically updating the `setting` column, is the equivalent of issuing `SET` commands. For example, the equivalent of
+* Using `UPDATE` on this view, specifically updating the `setting` column, is the equivalent of issuing `SET` commands. For example, the equivalent of
 
         SET configuration_parameter TO DEFAULT;
 
@@ -85,13 +85,13 @@ In addition, the system view [`pg_settings`](view-pg-settings.html "54.24. pg_s
 
 In addition to setting global defaults or attaching overrides at the database or role level, you can pass settings to PostgreSQL via shell facilities. Both the server and libpq client library accept parameter values via the shell.
 
-*   During server startup, parameter settings can be passed to the `postgres` command via the `-c` command-line parameter. For example,
+* During server startup, parameter settings can be passed to the `postgres` command via the `-c` command-line parameter. For example,
 
         postgres -c log_connections=yes -c log_destination='syslog'
 
     Settings provided in this way override those set via `postgresql.conf` or `ALTER SYSTEM`, so they cannot be changed globally without restarting the server.
 
-*   When starting a client session via libpq, parameter settings can be specified using the `PGOPTIONS` environment variable. Settings established in this way constitute defaults for the life of the session, but do not affect other sessions. For historical reasons, the format of `PGOPTIONS` is similar to that used when launching the `postgres` command; specifically, the `-c` flag must be specified. For example,
+* When starting a client session via libpq, parameter settings can be specified using the `PGOPTIONS` environment variable. Settings established in this way constitute defaults for the life of the session, but do not affect other sessions. For historical reasons, the format of `PGOPTIONS` is similar to that used when launching the `postgres` command; specifically, the `-c` flag must be specified. For example,
 
         env PGOPTIONS="-c geqo=off -c statement_timeout=5min" psql
 
@@ -101,15 +101,15 @@ In addition to setting global defaults or attaching overrides at the database or
 
 PostgreSQL provides several features for breaking down complex `postgresql.conf` files into sub-files. These features are especially useful when managing multiple servers with related, but not identical, configurations.
 
-[]()In addition to individual parameter settings, the `postgresql.conf` file can contain *include directives*, which specify another file to read and process as if it were inserted into the configuration file at this point. This feature allows a configuration file to be divided into physically separate parts. Include directives simply look like:
+In addition to individual parameter settings, the `postgresql.conf` file can contain *include directives*, which specify another file to read and process as if it were inserted into the configuration file at this point. This feature allows a configuration file to be divided into physically separate parts. Include directives simply look like:
 
     include 'filename'
 
 If the file name is not an absolute path, it is taken as relative to the directory containing the referencing configuration file. Inclusions can be nested.
 
-[]()There is also an `include_if_exists` directive, which acts the same as the `include` directive, except when the referenced file does not exist or cannot be read. A regular `include` will consider this an error condition, but `include_if_exists` merely logs a message and continues processing the referencing configuration file.
+There is also an `include_if_exists` directive, which acts the same as the `include` directive, except when the referenced file does not exist or cannot be read. A regular `include` will consider this an error condition, but `include_if_exists` merely logs a message and continues processing the referencing configuration file.
 
-[]()The `postgresql.conf` file can also contain `include_dir` directives, which specify an entire directory of configuration files to include. These look like
+The `postgresql.conf` file can also contain `include_dir` directives, which specify an entire directory of configuration files to include. These look like
 
     include_dir 'directory'
 

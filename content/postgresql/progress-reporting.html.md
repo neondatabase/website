@@ -8,18 +8,16 @@
 
 ## 28.4. Progress Reporting [#](#PROGRESS-REPORTING)
 
-*   *   [28.4.1. ANALYZE Progress Reporting](progress-reporting.html#ANALYZE-PROGRESS-REPORTING)
-    *   [28.4.2. CLUSTER Progress Reporting](progress-reporting.html#CLUSTER-PROGRESS-REPORTING)
-    *   [28.4.3. COPY Progress Reporting](progress-reporting.html#COPY-PROGRESS-REPORTING)
-    *   [28.4.4. CREATE INDEX Progress Reporting](progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING)
-    *   [28.4.5. VACUUM Progress Reporting](progress-reporting.html#VACUUM-PROGRESS-REPORTING)
-    *   [28.4.6. Base Backup Progress Reporting](progress-reporting.html#BASEBACKUP-PROGRESS-REPORTING)
+  * *   [28.4.1. ANALYZE Progress Reporting](progress-reporting.html#ANALYZE-PROGRESS-REPORTING)
+* [28.4.2. CLUSTER Progress Reporting](progress-reporting.html#CLUSTER-PROGRESS-REPORTING)
+* [28.4.3. COPY Progress Reporting](progress-reporting.html#COPY-PROGRESS-REPORTING)
+* [28.4.4. CREATE INDEX Progress Reporting](progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING)
+* [28.4.5. VACUUM Progress Reporting](progress-reporting.html#VACUUM-PROGRESS-REPORTING)
+* [28.4.6. Base Backup Progress Reporting](progress-reporting.html#BASEBACKUP-PROGRESS-REPORTING)
 
 PostgreSQL has the ability to report the progress of certain commands during command execution. Currently, the only commands which support progress reporting are `ANALYZE`, `CLUSTER`, `CREATE INDEX`, `VACUUM`, `COPY`, and [BASE\_BACKUP](protocol-replication.html#PROTOCOL-REPLICATION-BASE-BACKUP) (i.e., replication command that [pg\_basebackup](app-pgbasebackup.html "pg_basebackup") issues to take a base backup). This may be expanded in the future.
 
 ### 28.4.1. ANALYZE Progress Reporting [#](#ANALYZE-PROGRESS-REPORTING)
-
-[]()
 
 Whenever `ANALYZE` is running, the `pg_stat_progress_analyze` view will contain a row for each backend that is currently running that command. The tables below describe the information that will be reported and provide information about how to interpret it.
 
@@ -42,7 +40,6 @@ Whenever `ANALYZE` is running, the `pg_stat_progress_analyze` view will contain 
 
 \
 
-
 **Table 28.38. ANALYZE Phases**
 
 | Phase                             | Description                                                                                                                                                                                               |
@@ -56,14 +53,11 @@ Whenever `ANALYZE` is running, the `pg_stat_progress_analyze` view will contain 
 
 \
 
-
 ### Note
 
 Note that when `ANALYZE` is run on a partitioned table, all of its partitions are also recursively analyzed. In that case, `ANALYZE` progress is reported first for the parent table, whereby its inheritance statistics are collected, followed by that for each partition.
 
 ### 28.4.2. CLUSTER Progress Reporting [#](#CLUSTER-PROGRESS-REPORTING)
-
-[]()
 
 Whenever `CLUSTER` or `VACUUM FULL` is running, the `pg_stat_progress_cluster` view will contain a row for each backend that is currently running either command. The tables below describe the information that will be reported and provide information about how to interpret it.
 
@@ -86,7 +80,6 @@ Whenever `CLUSTER` or `VACUUM FULL` is running, the `pg_stat_progress_cluster` v
 
 \
 
-
 **Table 28.40. CLUSTER and VACUUM FULL Phases**
 
 | Phase                      | Description                                                                                                 |
@@ -101,8 +94,6 @@ Whenever `CLUSTER` or `VACUUM FULL` is running, the `pg_stat_progress_cluster` v
 | `performing final cleanup` | The command is performing final cleanup. When this phase is completed, `CLUSTER` or `VACUUM FULL` will end. |
 
 ### 28.4.3. COPY Progress Reporting [#](#COPY-PROGRESS-REPORTING)
-
-[]()
 
 Whenever `COPY` is running, the `pg_stat_progress_copy` view will contain one row for each backend that is currently running a `COPY` command. The table below describes the information that will be reported and provides information about how to interpret it.
 
@@ -122,8 +113,6 @@ Whenever `COPY` is running, the `pg_stat_progress_copy` view will contain one ro
 | `tuples_excluded` `bigint`Number of tuples not processed because they were excluded by the `WHERE` clause of the `COPY` command.                                                                                                             |
 
 ### 28.4.4. CREATE INDEX Progress Reporting [#](#CREATE-INDEX-PROGRESS-REPORTING)
-
-[]()
 
 Whenever `CREATE INDEX` or `REINDEX` is running, the `pg_stat_progress_create_index` view will contain one row for each backend that is currently creating indexes. The tables below describe the information that will be reported and provide information about how to interpret it.
 
@@ -150,7 +139,6 @@ Whenever `CREATE INDEX` or `REINDEX` is running, the `pg_stat_progress_create_in
 
 \
 
-
 **Table 28.43. CREATE INDEX Phases**
 
 | Phase                                     | Description                                                                                                                                                                                                                                                                                                                                |
@@ -167,8 +155,6 @@ Whenever `CREATE INDEX` or `REINDEX` is running, the `pg_stat_progress_create_in
 | `waiting for readers before dropping`     | `REINDEX CONCURRENTLY` is waiting for transactions with read locks on the table to finish, before dropping the old index. This phase is skipped when not in concurrent mode. Columns `lockers_total`, `lockers_done` and `current_locker_pid` contain the progress information for this phase.                                             |
 
 ### 28.4.5. VACUUM Progress Reporting [#](#VACUUM-PROGRESS-REPORTING)
-
-[]()
 
 Whenever `VACUUM` is running, the `pg_stat_progress_vacuum` view will contain one row for each backend (including autovacuum worker processes) that is currently vacuuming. The tables below describe the information that will be reported and provide information about how to interpret it. Progress for `VACUUM FULL` commands is reported via `pg_stat_progress_cluster` because both `VACUUM FULL` and `CLUSTER` rewrite the table, while regular `VACUUM` only modifies it in place. See [Section 28.4.2](progress-reporting.html#CLUSTER-PROGRESS-REPORTING "28.4.2. CLUSTER Progress Reporting").
 
@@ -192,7 +178,6 @@ Whenever `VACUUM` is running, the `pg_stat_progress_vacuum` view will contain on
 
 \
 
-
 **Table 28.45. VACUUM Phases**
 
 | Phase                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -206,8 +191,6 @@ Whenever `VACUUM` is running, the `pg_stat_progress_vacuum` view will contain on
 | `performing final cleanup` | `VACUUM` is performing final cleanup. During this phase, `VACUUM` will vacuum the free space map, update statistics in `pg_class`, and report statistics to the cumulative statistics system. When this phase is completed, `VACUUM` will end.                                                                                                                                                                                                                             |
 
 ### 28.4.6. Base Backup Progress Reporting [#](#BASEBACKUP-PROGRESS-REPORTING)
-
-[]()
 
 Whenever an application like pg\_basebackup is taking a base backup, the `pg_stat_progress_basebackup` view will contain a row for each WAL sender process that is currently running the `BASE_BACKUP` replication command and streaming the backup. The tables below describe the information that will be reported and provide information about how to interpret it.
 
@@ -223,7 +206,6 @@ Whenever an application like pg\_basebackup is taking a base backup, the `pg_sta
 | `tablespaces_streamed` `bigint`Number of tablespaces streamed. This counter only advances when the phase is `streaming database files`.                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 \
-
 
 **Table 28.47. Base Backup Phases**
 

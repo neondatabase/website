@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_exec
 
 SPI\_exec — execute a read/write command
@@ -22,11 +20,11 @@ SPI\_exec — execute a read/write command
 
 ## Arguments
 
-*   `const char * command`
+* `const char * command`
 
     string containing command to execute
 
-*   `long count`
+* `long count`
 
     maximum number of rows to return, or `0` for no limit
 

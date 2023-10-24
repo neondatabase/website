@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## REASSIGN OWNED
 
 REASSIGN OWNED — change the ownership of database objects owned by a database role
@@ -23,11 +21,11 @@ REASSIGN OWNED — change the ownership of database objects owned by a database 
 
 ## Parameters
 
-*   *`old_role`*
+* *`old_role`*
 
     The name of a role. The ownership of all the objects within the current database, and of all shared objects (databases, tablespaces), owned by this role will be reassigned to *`new_role`*.
 
-*   *`new_role`*
+* *`new_role`*
 
     The name of the role that will be made the new owner of the affected objects.
 

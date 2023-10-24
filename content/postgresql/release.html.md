@@ -10,8 +10,8 @@
 
 **Table of Contents**
 
-*   *   [E.1. Release 17](release-17.html)
-    *   [E.2. Prior Releases](release-prior.html)
+  * *   [E.1. Release 17](release-17.html)
+* [E.2. Prior Releases](release-prior.html)
 
 The release notes contain the significant changes in each PostgreSQL release, with major features and migration issues listed at the top. The release notes do not contain changes that affect only a few users or changes that are internal and therefore not user-visible. For example, the optimizer is improved in almost every release, but the improvements are usually observed by users as simply faster queries.
 

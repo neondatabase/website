@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## CREATE TYPE
 
 CREATE TYPE — define a new data type
@@ -135,115 +133,115 @@ When specifying a custom `SUBSCRIPT` function, it is not necessary to specify `E
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of a type to be created.
 
-*   *`attribute_name`*
+* *`attribute_name`*
 
     The name of an attribute (column) for the composite type.
 
-*   *`data_type`*
+* *`data_type`*
 
     The name of an existing data type to become a column of the composite type.
 
-*   *`collation`*
+* *`collation`*
 
     The name of an existing collation to be associated with a column of a composite type, or with a range type.
 
-*   *`label`*
+* *`label`*
 
     A string literal representing the textual label associated with one value of an enum type.
 
-*   *`subtype`*
+* *`subtype`*
 
     The name of the element type that the range type will represent ranges of.
 
-*   *`subtype_operator_class`*
+* *`subtype_operator_class`*
 
     The name of a b-tree operator class for the subtype.
 
-*   *`canonical_function`*
+* *`canonical_function`*
 
     The name of the canonicalization function for the range type.
 
-*   *`subtype_diff_function`*
+* *`subtype_diff_function`*
 
     The name of a difference function for the subtype.
 
-*   *`multirange_type_name`*
+* *`multirange_type_name`*
 
     The name of the corresponding multirange type.
 
-*   *`input_function`*
+* *`input_function`*
 
     The name of a function that converts data from the type's external textual form to its internal form.
 
-*   *`output_function`*
+* *`output_function`*
 
     The name of a function that converts data from the type's internal form to its external textual form.
 
-*   *`receive_function`*
+* *`receive_function`*
 
     The name of a function that converts data from the type's external binary form to its internal form.
 
-*   *`send_function`*
+* *`send_function`*
 
     The name of a function that converts data from the type's internal form to its external binary form.
 
-*   *`type_modifier_input_function`*
+* *`type_modifier_input_function`*
 
     The name of a function that converts an array of modifier(s) for the type into internal form.
 
-*   *`type_modifier_output_function`*
+* *`type_modifier_output_function`*
 
     The name of a function that converts the internal form of the type's modifier(s) to external textual form.
 
-*   *`analyze_function`*
+* *`analyze_function`*
 
     The name of a function that performs statistical analysis for the data type.
 
-*   *`subscript_function`*
+* *`subscript_function`*
 
     The name of a function that defines what subscripting a value of the data type does.
 
-*   *`internallength`*
+* *`internallength`*
 
     A numeric constant that specifies the length in bytes of the new type's internal representation. The default assumption is that it is variable-length.
 
-*   *`alignment`*
+* *`alignment`*
 
     The storage alignment requirement of the data type. If specified, it must be `char`, `int2`, `int4`, or `double`; the default is `int4`.
 
-*   *`storage`*
+* *`storage`*
 
     The storage strategy for the data type. If specified, must be `plain`, `external`, `extended`, or `main`; the default is `plain`.
 
-*   *`like_type`*
+* *`like_type`*
 
     The name of an existing data type that the new type will have the same representation as. The values of *`internallength`*, *`passedbyvalue`*, *`alignment`*, and *`storage`* are copied from that type, unless overridden by explicit specification elsewhere in this `CREATE TYPE` command.
 
-*   *`category`*
+* *`category`*
 
     The category code (a single ASCII character) for this type. The default is `'U'` for “user-defined type”. Other standard category codes can be found in [Table 53.65](catalog-pg-type.html#CATALOG-TYPCATEGORY-TABLE "Table 53.65. typcategory Codes"). You may also choose other ASCII characters in order to create custom categories.
 
-*   *`preferred`*
+* *`preferred`*
 
     True if this type is a preferred type within its type category, else false. The default is false. Be very careful about creating a new preferred type within an existing type category, as this could cause surprising changes in behavior.
 
-*   *`default`*
+* *`default`*
 
     The default value for the data type. If this is omitted, the default is null.
 
-*   *`element`*
+* *`element`*
 
     The type being created is an array; this specifies the type of the array elements.
 
-*   *`delimiter`*
+* *`delimiter`*
 
     The delimiter character to be used between values in arrays made of this type.
 
-*   *`collatable`*
+* *`collatable`*
 
     True if this type's operations can use collation information. The default is false.
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_is\_cursor\_plan
 
 SPI\_is\_cursor\_plan — return `true` if a statement prepared by `SPI_prepare` can be used with `SPI_cursor_open`
@@ -22,7 +20,7 @@ SPI\_is\_cursor\_plan — return `true` if a statement prepared by `SPI_prepare`
 
 ## Arguments
 
-*   `SPIPlanPtr plan`
+* `SPIPlanPtr plan`
 
     prepared statement (returned by `SPI_prepare`)
 

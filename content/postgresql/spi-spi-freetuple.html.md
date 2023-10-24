@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_freetuple
 
 SPI\_freetuple — free a row allocated in the upper executor context
@@ -24,7 +22,7 @@ This function is no longer different from plain `heap_freetuple`. It's kept just
 
 ## Arguments
 
-*   `HeapTuple row`
+* `HeapTuple row`
 
     row to free
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## CREATE OPERATOR FAMILY
 
 CREATE OPERATOR FAMILY — define a new operator family
@@ -30,11 +28,11 @@ Refer to [Section 38.16](xindex.html "38.16. Interfacing Extensions to Indexes
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of the operator family to be created. The name can be schema-qualified.
 
-*   *`index_method`*
+* *`index_method`*
 
     The name of the index method this operator family is for.
 

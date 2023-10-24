@@ -8,9 +8,9 @@
 
 ## 36.2. Managing Database Connections [#](#ECPG-CONNECT)
 
-*   *   [36.2.1. Connecting to the Database Server](ecpg-connect.html#ECPG-CONNECTING)
-    *   [36.2.2. Choosing a Connection](ecpg-connect.html#ECPG-SET-CONNECTION)
-    *   [36.2.3. Closing a Connection](ecpg-connect.html#ECPG-DISCONNECT)
+  * *   [36.2.1. Connecting to the Database Server](ecpg-connect.html#ECPG-CONNECTING)
+* [36.2.2. Choosing a Connection](ecpg-connect.html#ECPG-SET-CONNECTION)
+* [36.2.3. Closing a Connection](ecpg-connect.html#ECPG-DISCONNECT)
 
 This section describes how to open, close, and switch database connections.
 
@@ -22,12 +22,12 @@ One connects to a database using the following statement:
 
 The *`target`* can be specified in the following ways:
 
-*   `dbname[@hostname][:port]`
-*   `tcp:postgresql://hostname[:port][/dbname][?options]`
-*   `unix:postgresql://localhost[:port][/dbname][?options]`
-*   an SQL string literal containing one of the above forms
-*   a reference to a character variable containing one of the above forms (see examples)
-*   `DEFAULT`
+* `dbname[@hostname][:port]`
+* `tcp:postgresql://hostname[:port][/dbname][?options]`
+* `unix:postgresql://localhost[:port][/dbname][?options]`
+* an SQL string literal containing one of the above forms
+* a reference to a character variable containing one of the above forms (see examples)
+* `DEFAULT`
 
 The connection target `DEFAULT` initiates a connection to the default database under the default user name. No separate user name or connection name can be specified in that case.
 
@@ -35,10 +35,10 @@ If you specify the connection target directly (that is, not as a string literal 
 
 There are also different ways to specify the user name:
 
-*   `username`
-*   `username/password`
-*   `username IDENTIFIED BY password`
-*   `username USING password`
+* `username`
+* `username/password`
+* `username IDENTIFIED BY password`
+* `username USING password`
 
 As above, the parameters *`username`* and *`password`* can be an SQL identifier, an SQL string literal, or a reference to a character variable.
 
@@ -169,10 +169,10 @@ To close a connection, use the following statement:
 
 The *`connection`* can be specified in the following ways:
 
-*   `connection-name`
-*   `DEFAULT`
-*   `CURRENT`
-*   `ALL`
+* `connection-name`
+* `DEFAULT`
+* `CURRENT`
+* `ALL`
 
 If no connection name is specified, the current connection is closed.
 

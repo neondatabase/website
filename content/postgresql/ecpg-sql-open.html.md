@@ -22,15 +22,15 @@ OPEN — open a dynamic cursor
 
 ## Parameters
 
-*   *`cursor_name`* [#](#ECPG-SQL-OPEN-CURSOR-NAME)
+* *`cursor_name`* [#](#ECPG-SQL-OPEN-CURSOR-NAME)
 
     The name of the cursor to be opened. This can be an SQL identifier or a host variable.
 
-*   *`value`* [#](#ECPG-SQL-OPEN-VALUE)
+* *`value`* [#](#ECPG-SQL-OPEN-VALUE)
 
     A value to be bound to a placeholder in the cursor. This can be an SQL constant, a host variable, or a host variable with indicator.
 
-*   *`descriptor_name`* [#](#ECPG-SQL-OPEN-DESCRIPTOR-NAME)
+* *`descriptor_name`* [#](#ECPG-SQL-OPEN-DESCRIPTOR-NAME)
 
     The name of a descriptor containing values to be bound to the placeholders in the cursor. This can be an SQL identifier or a host variable.
 

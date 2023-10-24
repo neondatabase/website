@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ALTER POLICY
 
 ALTER POLICY — change the definition of a row-level security policy
@@ -31,27 +29,27 @@ In the second form of `ALTER POLICY`, the role list, *`using_expression`*, and *
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of an existing policy to alter.
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (optionally schema-qualified) of the table that the policy is on.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name for the policy.
 
-*   *`role_name`*
+* *`role_name`*
 
     The role(s) to which the policy applies. Multiple roles can be specified at one time. To apply the policy to all roles, use `PUBLIC`.
 
-*   *`using_expression`*
+* *`using_expression`*
 
     The `USING` expression for the policy. See [CREATE POLICY](sql-createpolicy.html "CREATE POLICY") for details.
 
-*   *`check_expression`*
+* *`check_expression`*
 
     The `WITH CHECK` expression for the policy. See [CREATE POLICY](sql-createpolicy.html "CREATE POLICY") for details.
 

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## pg\_controldata
 
 pg\_controldata — display control information of a PostgreSQL database cluster
@@ -24,11 +22,11 @@ This utility can only be run by the user who initialized the cluster because it 
 
 ## Environment
 
-*   `PGDATA`
+* `PGDATA`
 
     Default data directory location
 
-*   `PG_COLOR`
+* `PG_COLOR`
 
     Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 

@@ -8,8 +8,6 @@
 
 ## 54.20. `pg_roles` [#](#VIEW-PG-ROLES)
 
-[]()
-
 The view `pg_roles` provides access to information about database roles. This is simply a publicly readable view of [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid") that blanks out the password field.
 
 **Table 54.20. `pg_roles` Columns**

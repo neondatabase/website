@@ -8,8 +8,6 @@
 
 ## 38.11. Function Optimization Information [#](#XFUNC-OPTIMIZATION)
 
-[]()
-
 By default, a function is just a “black box” that the database system knows very little about the behavior of. However, that means that queries using the function may be executed much less efficiently than they could be. It is possible to supply additional knowledge that helps the planner optimize function calls.
 
 Some basic facts can be supplied by declarative annotations provided in the [`CREATE FUNCTION`](sql-createfunction.html "CREATE FUNCTION") command. Most important of these is the function's [volatility category](xfunc-volatility.html "38.7. Function Volatility Categories") (`IMMUTABLE`, `STABLE`, or `VOLATILE`); one should always be careful to specify this correctly when defining a function. The parallel safety property (`PARALLEL UNSAFE`, `PARALLEL RESTRICTED`, or `PARALLEL SAFE`) must also be specified if you hope to use the function in parallelized queries. It can also be useful to specify the function's estimated execution cost, and/or the number of rows a set-returning function is estimated to return. However, the declarative way of specifying those two facts only allows specifying a constant value, which is often inadequate.

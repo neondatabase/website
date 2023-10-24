@@ -8,10 +8,10 @@
 
 ## 51.2. Archive Module Callbacks [#](#ARCHIVE-MODULE-CALLBACKS)
 
-*   *   [51.2.1. Startup Callback](archive-module-callbacks.html#ARCHIVE-MODULE-STARTUP)
-    *   [51.2.2. Check Callback](archive-module-callbacks.html#ARCHIVE-MODULE-CHECK)
-    *   [51.2.3. Archive Callback](archive-module-callbacks.html#ARCHIVE-MODULE-ARCHIVE)
-    *   [51.2.4. Shutdown Callback](archive-module-callbacks.html#ARCHIVE-MODULE-SHUTDOWN)
+  * *   [51.2.1. Startup Callback](archive-module-callbacks.html#ARCHIVE-MODULE-STARTUP)
+* [51.2.2. Check Callback](archive-module-callbacks.html#ARCHIVE-MODULE-CHECK)
+* [51.2.3. Archive Callback](archive-module-callbacks.html#ARCHIVE-MODULE-ARCHIVE)
+* [51.2.4. Shutdown Callback](archive-module-callbacks.html#ARCHIVE-MODULE-SHUTDOWN)
 
 The archive callbacks define the actual archiving behavior of the module. The server will call them as required to process each individual WAL file.
 

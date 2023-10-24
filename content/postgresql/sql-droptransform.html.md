@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## DROP TRANSFORM
 
 DROP TRANSFORM — remove a transform
@@ -24,23 +22,23 @@ To be able to drop a transform, you must own the type and the language. These ar
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the transform does not exist. A notice is issued in this case.
 
-*   *`type_name`*
+* *`type_name`*
 
     The name of the data type of the transform.
 
-*   *`lang_name`*
+* *`lang_name`*
 
     The name of the language of the transform.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically drop objects that depend on the transform, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse to drop the transform if any objects depend on it. This is the default.
 

@@ -8,16 +8,14 @@
 
 ## 38.16. Interfacing Extensions to Indexes [#](#XINDEX)
 
-*   *   [38.16.1. Index Methods and Operator Classes](xindex.html#XINDEX-OPCLASS)
-    *   [38.16.2. Index Method Strategies](xindex.html#XINDEX-STRATEGIES)
-    *   [38.16.3. Index Method Support Routines](xindex.html#XINDEX-SUPPORT)
-    *   [38.16.4. An Example](xindex.html#XINDEX-EXAMPLE)
-    *   [38.16.5. Operator Classes and Operator Families](xindex.html#XINDEX-OPFAMILY)
-    *   [38.16.6. System Dependencies on Operator Classes](xindex.html#XINDEX-OPCLASS-DEPENDENCIES)
-    *   [38.16.7. Ordering Operators](xindex.html#XINDEX-ORDERING-OPS)
-    *   [38.16.8. Special Features of Operator Classes](xindex.html#XINDEX-OPCLASS-FEATURES)
-
-[]()
+  * *   [38.16.1. Index Methods and Operator Classes](xindex.html#XINDEX-OPCLASS)
+* [38.16.2. Index Method Strategies](xindex.html#XINDEX-STRATEGIES)
+* [38.16.3. Index Method Support Routines](xindex.html#XINDEX-SUPPORT)
+* [38.16.4. An Example](xindex.html#XINDEX-EXAMPLE)
+* [38.16.5. Operator Classes and Operator Families](xindex.html#XINDEX-OPFAMILY)
+* [38.16.6. System Dependencies on Operator Classes](xindex.html#XINDEX-OPCLASS-DEPENDENCIES)
+* [38.16.7. Ordering Operators](xindex.html#XINDEX-ORDERING-OPS)
+* [38.16.8. Special Features of Operator Classes](xindex.html#XINDEX-OPCLASS-FEATURES)
 
 The procedures described thus far let you define new types, new functions, and new operators. However, we cannot yet define an index on a column of a new data type. To do this, we must define an *operator class* for the new data type. Later in this section, we will illustrate this concept in an example: a new operator class for the B-tree index method that stores and sorts complex numbers in ascending absolute value order.
 
@@ -27,7 +25,7 @@ Operator classes can be grouped into *operator families* to show the relationshi
 
 The `pg_am` table contains one row for every index method (internally known as access method). Support for regular access to tables is built into PostgreSQL, but all index methods are described in `pg_am`. It is possible to add a new index access method by writing the necessary code and then creating an entry in `pg_am` — but that is beyond the scope of this chapter (see [Chapter 64](indexam.html "Chapter 64. Index Access Method Interface Definition")).
 
-The routines for an index method do not directly know anything about the data types that the index method will operate on. Instead, an *operator class*[]() identifies the set of operations that the index method needs to use to work with a particular data type. Operator classes are so called because one thing they specify is the set of `WHERE`-clause operators that can be used with an index (i.e., can be converted into an index-scan qualification). An operator class can also specify some *support function* that are needed by the internal operations of the index method, but do not directly correspond to any `WHERE`-clause operator that can be used with the index.
+The routines for an index method do not directly know anything about the data types that the index method will operate on. Instead, an *operator class* identifies the set of operations that the index method needs to use to work with a particular data type. Operator classes are so called because one thing they specify is the set of `WHERE`-clause operators that can be used with an index (i.e., can be converted into an index-scan qualification). An operator class can also specify some *support function* that are needed by the internal operations of the index method, but do not directly correspond to any `WHERE`-clause operator that can be used with the index.
 
 It is possible to define multiple operator classes for the same data type and index method. By doing this, multiple sets of indexing semantics can be defined for a single data type. For example, a B-tree index requires a sort ordering to be defined for each data type it works on. It might be useful for a complex-number data type to have one B-tree operator class that sorts the data by complex absolute value, another that sorts by real part, and so on. Typically, one of the operator classes will be deemed most commonly useful and will be marked as the default operator class for that data type and index method.
 
@@ -51,7 +49,6 @@ The B-tree index method defines five strategies, shown in [Table 38.3](xindex.h
 
 \
 
-
 Hash indexes support only equality comparisons, and so they use only one strategy, shown in [Table 38.4](xindex.html#XINDEX-HASH-STRAT-TABLE "Table 38.4. Hash Strategies").
 
 **Table 38.4. Hash Strategies**
@@ -61,7 +58,6 @@ Hash indexes support only equality comparisons, and so they use only one strateg
 | equal     | 1               |
 
 \
-
 
 GiST indexes are more flexible: they do not have a fixed set of strategies at all. Instead, the “consistency” support routine of each particular GiST operator class interprets the strategy numbers however it likes. As an example, several of the built-in GiST index operator classes index two-dimensional geometric objects, providing the “R-tree” strategies shown in [Table 38.5](xindex.html#XINDEX-RTREE-STRAT-TABLE "Table 38.5. GiST Two-Dimensional “R-tree” Strategies"). Four of these are true two-dimensional tests (overlaps, same, contains, contained by); four of them consider only the X direction; and the other four provide the same tests in the Y direction.
 
@@ -84,7 +80,6 @@ GiST indexes are more flexible: they do not have a fixed set of strategies at al
 
 \
 
-
 SP-GiST indexes are similar to GiST indexes in flexibility: they don't have a fixed set of strategies. Instead the support routines of each operator class interpret the strategy numbers according to the operator class's definition. As an example, the strategy numbers used by the built-in operator classes for points are shown in [Table 38.6](xindex.html#XINDEX-SPGIST-POINT-STRAT-TABLE "Table 38.6. SP-GiST Point Strategies").
 
 **Table 38.6. SP-GiST Point Strategies**
@@ -100,7 +95,6 @@ SP-GiST indexes are similar to GiST indexes in flexibility: they don't have a fi
 
 \
 
-
 GIN indexes are similar to GiST and SP-GiST indexes, in that they don't have a fixed set of strategies either. Instead the support routines of each operator class interpret the strategy numbers according to the operator class's definition. As an example, the strategy numbers used by the built-in operator class for arrays are shown in [Table 38.7](xindex.html#XINDEX-GIN-ARRAY-STRAT-TABLE "Table 38.7. GIN Array Strategies").
 
 **Table 38.7. GIN Array Strategies**
@@ -113,7 +107,6 @@ GIN indexes are similar to GiST and SP-GiST indexes, in that they don't have a f
 | equal           | 4               |
 
 \
-
 
 BRIN indexes are similar to GiST, SP-GiST and GIN indexes in that they don't have a fixed set of strategies either. Instead the support routines of each operator class interpret the strategy numbers according to the operator class's definition. As an example, the strategy numbers used by the built-in `Minmax` operator classes are shown in [Table 38.8](xindex.html#XINDEX-BRIN-MINMAX-STRAT-TABLE "Table 38.8. BRIN Minmax Strategies").
 
@@ -128,7 +121,6 @@ BRIN indexes are similar to GiST, SP-GiST and GIN indexes in that they don't hav
 | greater than          | 5               |
 
 \
-
 
 Notice that all the operators listed above return Boolean values. In practice, all operators defined as index method search operators must return type `boolean`, since they must appear at the top level of a `WHERE` clause to be used with an index. (Some index access methods also support *ordering operators*, which typically don't return Boolean values; that feature is discussed in [Section 38.16.7](xindex.html#XINDEX-ORDERING-OPS "38.16.7. Ordering Operators").)
 
@@ -154,7 +146,6 @@ B-trees require a comparison support function, and allow four additional support
 
 \
 
-
 Hash indexes require one support function, and allow two additional ones to be supplied at the operator class author's option, as shown in [Table 38.10](xindex.html#XINDEX-HASH-SUPPORT-TABLE "Table 38.10. Hash Support Functions").
 
 **Table 38.10. Hash Support Functions**
@@ -166,7 +157,6 @@ Hash indexes require one support function, and allow two additional ones to be s
 | Define options that are specific to this operator class (optional)                                                                                                                       | 3              |
 
 \
-
 
 GiST indexes have eleven support functions, six of which are optional, as shown in [Table 38.11](xindex.html#XINDEX-GIST-SUPPORT-TABLE "Table 38.11. GiST Support Functions"). (For more information see [Chapter 68](gist.html "Chapter 68. GiST Indexes").)
 
@@ -188,7 +178,6 @@ GiST indexes have eleven support functions, six of which are optional, as shown 
 
 \
 
-
 SP-GiST indexes have six support functions, one of which is optional, as shown in [Table 38.12](xindex.html#XINDEX-SPGIST-SUPPORT-TABLE "Table 38.12. SP-GiST Support Functions"). (For more information see [Chapter 69](spgist.html "Chapter 69. SP-GiST Indexes").)
 
 **Table 38.12. SP-GiST Support Functions**
@@ -203,7 +192,6 @@ SP-GiST indexes have six support functions, one of which is optional, as shown i
 | `options`          | define options that are specific to this operator class (optional) | 6              |
 
 \
-
 
 GIN indexes have seven support functions, four of which are optional, as shown in [Table 38.13](xindex.html#XINDEX-GIN-SUPPORT-TABLE "Table 38.13. GIN Support Functions"). (For more information see [Chapter 70](gin.html "Chapter 70. GIN Indexes").)
 
@@ -221,7 +209,6 @@ GIN indexes have seven support functions, four of which are optional, as shown i
 
 \
 
-
 BRIN indexes have five basic support functions, one of which is optional, as shown in [Table 38.14](xindex.html#XINDEX-BRIN-SUPPORT-TABLE "Table 38.14. BRIN Support Functions"). Some versions of the basic functions require additional support functions to be provided. (For more information see [Section 71.3](brin-extensibility.html "71.3. Extensibility").)
 
 **Table 38.14. BRIN Support Functions**
@@ -236,18 +223,17 @@ BRIN indexes have five basic support functions, one of which is optional, as sho
 
 \
 
-
 Unlike search operators, support functions return whichever data type the particular index method expects; for example in the case of the comparison function for B-trees, a signed integer. The number and types of the arguments to each support function are likewise dependent on the index method. For B-tree and hash the comparison and hashing support functions take the same input data types as do the operators included in the operator class, but this is not the case for most GiST, SP-GiST, GIN, and BRIN support functions.
 
 ### 38.16.4. An Example [#](#XINDEX-EXAMPLE)
 
 Now that we have seen the ideas, here is the promised example of creating a new operator class. (You can find a working copy of this example in `src/tutorial/complex.c` and `src/tutorial/complex.sql` in the source distribution.) The operator class encapsulates operators that sort complex numbers in absolute value order, so we choose the name `complex_abs_ops`. First, we need a set of operators. The procedure for defining operators was discussed in [Section 38.14](xoper.html "38.14. User-Defined Operators"). For an operator class on B-trees, the operators we require are:
 
-*   absolute-value less-than (strategy 1)
-*   absolute-value less-than-or-equal (strategy 2)
-*   absolute-value equal (strategy 3)
-*   absolute-value greater-than-or-equal (strategy 4)
-*   absolute-value greater-than (strategy 5)
+* absolute-value less-than (strategy 1)
+* absolute-value less-than-or-equal (strategy 2)
+* absolute-value equal (strategy 3)
+* absolute-value greater-than-or-equal (strategy 4)
+* absolute-value greater-than (strategy 5)
 
 The least error-prone way to define a related set of comparison operators is to write the B-tree comparison support function first, and then write the other functions as one-line wrappers around the support function. This reduces the odds of getting inconsistent results for corner cases. Following this approach, we first write:
 
@@ -297,9 +283,9 @@ It is important to specify the correct commutator and negator operators, as well
 
 Other things worth noting are happening here:
 
-*   There can only be one operator named, say, `=` and taking type `complex` for both operands. In this case we don't have any other operator `=` for `complex`, but if we were building a practical data type we'd probably want `=` to be the ordinary equality operation for complex numbers (and not the equality of the absolute values). In that case, we'd need to use some other operator name for `complex_abs_eq`.
-*   Although PostgreSQL can cope with functions having the same SQL name as long as they have different argument data types, C can only cope with one global function having a given name. So we shouldn't name the C function something simple like `abs_eq`. Usually it's a good practice to include the data type name in the C function name, so as not to conflict with functions for other data types.
-*   We could have made the SQL name of the function `abs_eq`, relying on PostgreSQL to distinguish it by argument data types from any other SQL function of the same name. To keep the example simple, we make the function have the same names at the C level and SQL level.
+* There can only be one operator named, say, `=` and taking type `complex` for both operands. In this case we don't have any other operator `=` for `complex`, but if we were building a practical data type we'd probably want `=` to be the ordinary equality operation for complex numbers (and not the equality of the absolute values). In that case, we'd need to use some other operator name for `complex_abs_eq`.
+* Although PostgreSQL can cope with functions having the same SQL name as long as they have different argument data types, C can only cope with one global function having a given name. So we shouldn't name the C function something simple like `abs_eq`. Usually it's a good practice to include the data type name in the C function name, so as not to conflict with functions for other data types.
+* We could have made the SQL name of the function `abs_eq`, relying on PostgreSQL to distinguish it by argument data types from any other SQL function of the same name. To keep the example simple, we make the function have the same names at the C level and SQL level.
 
 The next step is the registration of the support routine required by B-trees. The example C code that implements this is in the same file that contains the operator functions. This is how we declare the function:
 
@@ -333,7 +319,7 @@ The above example assumes that you want to make this new operator class the defa
 
 So far we have implicitly assumed that an operator class deals with only one data type. While there certainly can be only one data type in a particular index column, it is often useful to index operations that compare an indexed column to a value of a different data type. Also, if there is use for a cross-data-type operator in connection with an operator class, it is often the case that the other data type has a related operator class of its own. It is helpful to make the connections between related classes explicit, because this can aid the planner in optimizing SQL queries (particularly for B-tree operator classes, since the planner contains a great deal of knowledge about how to work with them).
 
-To handle these needs, PostgreSQL uses the concept of an *operator family*[](). An operator family contains one or more operator classes, and can also contain indexable operators and corresponding support functions that belong to the family as a whole but not to any single class within the family. We say that such operators and functions are “loose” within the family, as opposed to being bound into a specific class. Typically each operator class contains single-data-type operators while cross-data-type operators are loose in the family.
+To handle these needs, PostgreSQL uses the concept of an *operator family*. An operator family contains one or more operator classes, and can also contain indexable operators and corresponding support functions that belong to the family as a whole but not to any single class within the family. We say that such operators and functions are “loose” within the family, as opposed to being bound into a specific class. Typically each operator class contains single-data-type operators while cross-data-type operators are loose in the family.
 
 All the operators and functions in an operator family must have compatible semantics, where the compatibility requirements are set by the index method. You might therefore wonder why bother to single out particular subsets of the family as operator classes; and indeed for many purposes the class divisions are irrelevant and the family is the only interesting grouping. The reason for defining operator classes is that they specify how much of the family is needed to support any particular index. If there is an index using an operator class, then that operator class cannot be dropped without dropping the index — but other parts of the operator family, namely other operator classes and loose operators, could be dropped. Thus, an operator class should be specified to contain the minimum set of operators and functions that are reasonably needed to work with an index on a specific data type, and then related but non-essential operators can be added as loose members of the operator family.
 
@@ -450,8 +436,6 @@ In BRIN, the requirements depends on the framework that provides the operator cl
 Prior to PostgreSQL 8.3, there was no concept of operator families, and so any cross-data-type operators intended to be used with an index had to be bound directly into the index's operator class. While this approach still works, it is deprecated because it makes an index's dependencies too broad, and because the planner can handle cross-data-type comparisons more effectively when both data types have operators in the same operator family.
 
 ### 38.16.6. System Dependencies on Operator Classes [#](#XINDEX-OPCLASS-DEPENDENCIES)
-
-[]()
 
 PostgreSQL uses operator classes to infer the properties of operators in more ways than just whether they can be used with indexes. Therefore, you might want to create operator classes even if you have no intention of indexing any columns of your data type.
 

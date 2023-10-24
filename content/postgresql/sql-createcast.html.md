@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## CREATE CAST
 
 CREATE CAST — define a new cast
@@ -66,31 +64,31 @@ To be able to create a cast, you must own the source or the target data type and
 
 ## Parameters
 
-*   *`source_type`*
+* *`source_type`*
 
     The name of the source data type of the cast.
 
-*   *`target_type`*
+* *`target_type`*
 
     The name of the target data type of the cast.
 
-*   `function_name[(argument_type [, ...])]`
+* `function_name[(argument_type [, ...])]`
 
     The function used to perform the cast. The function name can be schema-qualified. If it is not, the function will be looked up in the schema search path. The function's result data type must match the target type of the cast. Its arguments are discussed below. If no argument list is specified, the function name must be unique in its schema.
 
-*   `WITHOUT FUNCTION`
+* `WITHOUT FUNCTION`
 
     Indicates that the source type is binary-coercible to the target type, so no function is required to perform the cast.
 
-*   `WITH INOUT`
+* `WITH INOUT`
 
     Indicates that the cast is an I/O conversion cast, performed by invoking the output function of the source data type, and passing the resulting string to the input function of the target data type.
 
-*   `AS ASSIGNMENT`
+* `AS ASSIGNMENT`
 
     Indicates that the cast can be invoked implicitly in assignment contexts.
 
-*   `AS IMPLICIT`
+* `AS IMPLICIT`
 
     Indicates that the cast can be invoked implicitly in any context.
 
@@ -109,8 +107,6 @@ A cast to or from a domain type currently has no effect. Casting to or from a do
 Use [`DROP CAST`](sql-dropcast.html "DROP CAST") to remove user-defined casts.
 
 Remember that if you want to be able to convert types both ways you need to declare casts both ways explicitly.
-
-[]()
 
 It is normally not necessary to create casts between user-defined types and the standard string types (`text`, `varchar`, and `char(n)`, as well as user-defined types that are defined to be in the string category). PostgreSQL provides automatic I/O conversion casts for that. The automatic casts to string types are treated as assignment casts, while the automatic casts from string types are explicit-only. You can override this behavior by declaring your own cast to replace an automatic cast, but usually the only reason to do so is if you want the conversion to be more easily invokable than the standard assignment-only or explicit-only setting. Another possible reason is that you want the conversion to behave differently from the type's I/O function; but that is sufficiently surprising that you should think twice about whether it's a good idea. (A small number of the built-in types do indeed have different behaviors for conversions, mostly because of requirements of the SQL standard.)
 

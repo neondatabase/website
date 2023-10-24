@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## TRUNCATE
 
 TRUNCATE — empty a table or set of tables
@@ -23,23 +21,23 @@ TRUNCATE — empty a table or set of tables
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of a table to truncate. If `ONLY` is specified before the table name, only that table is truncated. If `ONLY` is not specified, the table and all its descendant tables (if any) are truncated. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included.
 
-*   `RESTART IDENTITY`
+* `RESTART IDENTITY`
 
     Automatically restart sequences owned by columns of the truncated table(s).
 
-*   `CONTINUE IDENTITY`
+* `CONTINUE IDENTITY`
 
     Do not change the values of sequences. This is the default.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically truncate all tables that have foreign-key references to any of the named tables, or to any tables added to the group due to `CASCADE`.
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse to truncate if any of the tables have foreign-key references from tables that are not listed in the command. This is the default.
 

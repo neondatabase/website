@@ -8,8 +8,6 @@
 
 ## 11.7. Indexes on Expressions [#](#INDEXES-EXPRESSIONAL)
 
-[]()
-
 An index column need not be just a column of the underlying table, but can be a function or scalar expression computed from one or more columns of the table. This feature is useful to obtain fast access to tables based on the results of computations.
 
 For example, a common way to do case-insensitive comparisons is to use the `lower` function:

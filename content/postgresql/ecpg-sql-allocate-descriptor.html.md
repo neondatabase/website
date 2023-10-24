@@ -22,7 +22,7 @@ Descriptor areas should be freed after use using the `DEALLOCATE DESCRIPTOR` com
 
 ## Parameters
 
-*   *`name`* [#](#ECPG-SQL-ALLOCATE-DESCRIPTOR-NAME)
+* *`name`* [#](#ECPG-SQL-ALLOCATE-DESCRIPTOR-NAME)
 
     A name of SQL descriptor, case sensitive. This can be an SQL identifier or a host variable.
 

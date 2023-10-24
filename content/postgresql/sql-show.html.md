@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SHOW
 
 SHOW — show the value of a run-time parameter
@@ -23,31 +21,31 @@ SHOW — show the value of a run-time parameter
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of a run-time parameter. Available parameters are documented in [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") and on the [SET](sql-set.html "SET") reference page. In addition, there are a few parameters that can be shown but not set:
 
-    *   `SERVER_VERSION`
+  * `SERVER_VERSION`
 
         Shows the server's version number.
 
-    *   `SERVER_ENCODING`
+  * `SERVER_ENCODING`
 
         Shows the server-side character set encoding. At present, this parameter can be shown but not set, because the encoding is determined at database creation time.
 
-    *   `LC_COLLATE`
+  * `LC_COLLATE`
 
         Shows the database's locale setting for collation (text ordering). At present, this parameter can be shown but not set, because the setting is determined at database creation time.
 
-    *   `LC_CTYPE`
+  * `LC_CTYPE`
 
         Shows the database's locale setting for character classification. At present, this parameter can be shown but not set, because the setting is determined at database creation time.
 
-    *   `IS_SUPERUSER`
+  * `IS_SUPERUSER`
 
         True if the current role has superuser privileges.
 
-*   `ALL`
+* `ALL`
 
     Show the values of all configuration parameters, with descriptions.
 

@@ -8,12 +8,10 @@
 
 ## 43.9. Errors and Messages [#](#PLPGSQL-ERRORS-AND-MESSAGES)
 
-*   *   [43.9.1. Reporting Errors and Messages](plpgsql-errors-and-messages.html#PLPGSQL-STATEMENTS-RAISE)
-    *   [43.9.2. Checking Assertions](plpgsql-errors-and-messages.html#PLPGSQL-STATEMENTS-ASSERT)
+  * *   [43.9.1. Reporting Errors and Messages](plpgsql-errors-and-messages.html#PLPGSQL-STATEMENTS-RAISE)
+* [43.9.2. Checking Assertions](plpgsql-errors-and-messages.html#PLPGSQL-STATEMENTS-ASSERT)
 
 ### 43.9.1. Reporting Errors and Messages [#](#PLPGSQL-STATEMENTS-RAISE)
-
-[]()[]()
 
 Use the `RAISE` statement to report messages and raise errors.
 
@@ -33,23 +31,23 @@ In this example, the value of `v_job_id` will replace the `%` in the string:
 
 You can attach additional information to the error report by writing `USING` followed by *`option`* = *`expression`* items. Each *`expression`* can be any string-valued expression. The allowed *`option`* key words are:
 
-*   `MESSAGE` [#](#RAISE-USING-OPTION-MESSAGE)
+* `MESSAGE` [#](#RAISE-USING-OPTION-MESSAGE)
 
     Sets the error message text. This option can't be used in the form of `RAISE` that includes a format string before `USING`.
 
-*   `DETAIL` [#](#RAISE-USING-OPTION-DETAIL)
+* `DETAIL` [#](#RAISE-USING-OPTION-DETAIL)
 
     Supplies an error detail message.
 
-*   `HINT` [#](#RAISE-USING-OPTION-HINT)
+* `HINT` [#](#RAISE-USING-OPTION-HINT)
 
     Supplies a hint message.
 
-*   `ERRCODE` [#](#RAISE-USING-OPTION-ERRCODE)
+* `ERRCODE` [#](#RAISE-USING-OPTION-ERRCODE)
 
     Specifies the error code (SQLSTATE) to report, either by condition name, as shown in [Appendix A](errcodes-appendix.html "Appendix A. PostgreSQL Error Codes"), or directly as a five-character SQLSTATE code.
 
-*   `COLUMN``CONSTRAINT``DATATYPE``TABLE``SCHEMA` [#](#RAISE-USING-OPTION-COLUMN)
+* `COLUMN``CONSTRAINT``DATATYPE``TABLE``SCHEMA` [#](#RAISE-USING-OPTION-COLUMN)
 
     Supplies the name of a related object.
 
@@ -87,8 +85,6 @@ If no condition name nor SQLSTATE is specified in a `RAISE EXCEPTION` command, t
 When specifying an error code by SQLSTATE code, you are not limited to the predefined error codes, but can select any error code consisting of five digits and/or upper-case ASCII letters, other than `00000`. It is recommended that you avoid throwing error codes that end in three zeroes, because these are category codes and can only be trapped by trapping the whole category.
 
 ### 43.9.2. Checking Assertions [#](#PLPGSQL-STATEMENTS-ASSERT)
-
-[]()[]()[]()
 
 The `ASSERT` statement is a convenient shorthand for inserting debugging checks into PL/pgSQL functions.
 

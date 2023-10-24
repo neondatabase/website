@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## dblink\_get\_notify
 
 dblink\_get\_notify — retrieve async notifications on a connection
@@ -23,7 +21,7 @@ dblink\_get\_notify — retrieve async notifications on a connection
 
 ## Arguments
 
-*   *`connname`*
+* *`connname`*
 
     The name of a named connection to get notifications on.
 

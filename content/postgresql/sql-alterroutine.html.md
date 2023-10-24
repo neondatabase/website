@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ALTER ROUTINE
 
 ALTER ROUTINE — change the definition of a routine

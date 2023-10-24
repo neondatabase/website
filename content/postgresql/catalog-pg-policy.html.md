@@ -8,8 +8,6 @@
 
 ## 53.38. `pg_policy` [#](#CATALOG-PG-POLICY)
 
-[]()
-
 The catalog `pg_policy` stores row-level security policies for tables. A policy includes the kind of command that it applies to (possibly all commands), the roles that it applies to, the expression to be added as a security-barrier qualification to queries that include the table, and the expression to be added as a `WITH CHECK` option for queries that attempt to add new records to the table.
 
 **Table 53.38. `pg_policy` Columns**
@@ -26,7 +24,6 @@ The catalog `pg_policy` stores row-level security policies for tables. A policy 
 | `polwithcheck` `pg_node_tree`The expression tree to be added to the WITH CHECK qualifications for queries that attempt to add rows to the table                                                                                                                |
 
 \
-
 
 ### Note
 

@@ -8,17 +8,13 @@
 
 ## F.26. pg\_buffercache — inspect PostgreSQL buffer cache state [#](#PGBUFFERCACHE)
 
-*   *   [F.26.1. The `pg_buffercache` View](pgbuffercache.html#PGBUFFERCACHE-PG-BUFFERCACHE)
-    *   [F.26.2. The `pg_buffercache_summary()` Function](pgbuffercache.html#PGBUFFERCACHE-SUMMARY)
-    *   [F.26.3. The `pg_buffercache_usage_counts()` Function](pgbuffercache.html#PGBUFFERCACHE-USAGE-COUNTS)
-    *   [F.26.4. Sample Output](pgbuffercache.html#PGBUFFERCACHE-SAMPLE-OUTPUT)
-    *   [F.26.5. Authors](pgbuffercache.html#PGBUFFERCACHE-AUTHORS)
-
-[]()
+  * *   [F.26.1. The `pg_buffercache` View](pgbuffercache.html#PGBUFFERCACHE-PG-BUFFERCACHE)
+* [F.26.2. The `pg_buffercache_summary()` Function](pgbuffercache.html#PGBUFFERCACHE-SUMMARY)
+* [F.26.3. The `pg_buffercache_usage_counts()` Function](pgbuffercache.html#PGBUFFERCACHE-USAGE-COUNTS)
+* [F.26.4. Sample Output](pgbuffercache.html#PGBUFFERCACHE-SAMPLE-OUTPUT)
+* [F.26.5. Authors](pgbuffercache.html#PGBUFFERCACHE-AUTHORS)
 
 The `pg_buffercache` module provides a means for examining what's happening in the shared buffer cache in real time.
-
-[]()[]()
 
 This module provides the `pg_buffercache_pages()` function (wrapped in the `pg_buffercache` view), the `pg_buffercache_summary()` function, and the `pg_buffercache_usage_counts()` function.
 
@@ -50,7 +46,6 @@ The definitions of the columns exposed by the view are shown in [Table F.15](pg
 
 \
 
-
 There is one row for each buffer in the shared cache. Unused buffers are shown with all fields null except `bufferid`. Shared system catalogs are shown as belonging to database zero.
 
 Because the cache is shared by all the databases, there will normally be pages from relations not belonging to the current database. This means that there may not be matching join rows in `pg_class` for some rows, or that there could even be incorrect joins. If you are trying to join against `pg_class`, it's a good idea to restrict the join to rows having `reldatabase` equal to the current database's OID or zero.
@@ -73,7 +68,6 @@ The definitions of the columns exposed by the function are shown in [Table F.16
 
 \
 
-
 The `pg_buffercache_summary()` function returns a single row summarizing the state of all shared buffers. Similar and more detailed information is provided by the `pg_buffercache` view, but `pg_buffercache_summary()` is significantly cheaper.
 
 Like the `pg_buffercache` view, `pg_buffercache_summary()` does not acquire buffer manager locks. Therefore concurrent activity can lead to minor inaccuracies in the result.
@@ -92,7 +86,6 @@ The definitions of the columns exposed by the function are shown in [Table F.17
 | `pinned` `int4`Number of pinned buffers with the usage count |
 
 \
-
 
 The `pg_buffercache_usage_counts()` function returns a set of rows summarizing the states of all shared buffers, aggregated over the possible usage count values. Similar and more detailed information is provided by the `pg_buffercache` view, but `pg_buffercache_usage_counts()` is significantly cheaper.
 

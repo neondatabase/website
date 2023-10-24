@@ -8,10 +8,10 @@
 
 ## 34.14. Event System [#](#LIBPQ-EVENTS)
 
-*   *   [34.14.1. Event Types](libpq-events.html#LIBPQ-EVENTS-TYPES)
-    *   [34.14.2. Event Callback Procedure](libpq-events.html#LIBPQ-EVENTS-PROC)
-    *   [34.14.3. Event Support Functions](libpq-events.html#LIBPQ-EVENTS-FUNCS)
-    *   [34.14.4. Event Example](libpq-events.html#LIBPQ-EVENTS-EXAMPLE)
+  * *   [34.14.1. Event Types](libpq-events.html#LIBPQ-EVENTS-TYPES)
+* [34.14.2. Event Callback Procedure](libpq-events.html#LIBPQ-EVENTS-PROC)
+* [34.14.3. Event Support Functions](libpq-events.html#LIBPQ-EVENTS-FUNCS)
+* [34.14.4. Event Example](libpq-events.html#LIBPQ-EVENTS-EXAMPLE)
 
 libpq's event system is designed to notify registered event handlers about interesting libpq events, such as the creation or destruction of `PGconn` and `PGresult` objects. A principal use case is that this allows applications to associate their own data with a `PGconn` or `PGresult` and ensure that that data is freed at an appropriate time.
 
@@ -21,7 +21,7 @@ Each registered event handler is associated with two pieces of data, known to li
 
 The enum `PGEventId` names the types of events handled by the event system. All its values have names beginning with `PGEVT`. For each event type, there is a corresponding event info structure that carries the parameters passed to the event handlers. The event types are:
 
-*   `PGEVT_REGISTER` [#](#LIBPQ-PGEVT-REGISTER)
+* `PGEVT_REGISTER` [#](#LIBPQ-PGEVT-REGISTER)
 
     The register event occurs when [`PQregisterEventProc`](libpq-events.html#LIBPQ-PQREGISTEREVENTPROC) is called. It is the ideal time to initialize any `instanceData` an event procedure may need. Only one register event will be fired per event handler per connection. If the event procedure fails (returns zero), the registration is cancelled.
 
@@ -32,7 +32,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
     When a `PGEVT_REGISTER` event is received, the *`evtInfo`* pointer should be cast to a `PGEventRegister *`. This structure contains a `PGconn` that should be in the `CONNECTION_OK` status; guaranteed if one calls [`PQregisterEventProc`](libpq-events.html#LIBPQ-PQREGISTEREVENTPROC) right after obtaining a good `PGconn`. When returning a failure code, all cleanup must be performed as no `PGEVT_CONNDESTROY` event will be sent.
 
-*   `PGEVT_CONNRESET` [#](#LIBPQ-PGEVT-CONNRESET)
+* `PGEVT_CONNRESET` [#](#LIBPQ-PGEVT-CONNRESET)
 
     The connection reset event is fired on completion of [`PQreset`](libpq-connect.html#LIBPQ-PQRESET) or `PQresetPoll`. In both cases, the event is only fired if the reset was successful. The return value of the event procedure is ignored in PostgreSQL v15 and later. With earlier versions, however, it's important to return success (nonzero) or the connection will be aborted.
 
@@ -43,7 +43,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
     When a `PGEVT_CONNRESET` event is received, the *`evtInfo`* pointer should be cast to a `PGEventConnReset *`. Although the contained `PGconn` was just reset, all event data remains unchanged. This event should be used to reset/reload/requery any associated `instanceData`. Note that even if the event procedure fails to process `PGEVT_CONNRESET`, it will still receive a `PGEVT_CONNDESTROY` event when the connection is closed.
 
-*   `PGEVT_CONNDESTROY` [#](#LIBPQ-PGEVT-CONNDESTROY)
+* `PGEVT_CONNDESTROY` [#](#LIBPQ-PGEVT-CONNDESTROY)
 
     The connection destroy event is fired in response to [`PQfinish`](libpq-connect.html#LIBPQ-PQFINISH). It is the event procedure's responsibility to properly clean up its event data as libpq has no ability to manage this memory. Failure to clean up will lead to memory leaks.
 
@@ -54,7 +54,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
     When a `PGEVT_CONNDESTROY` event is received, the *`evtInfo`* pointer should be cast to a `PGEventConnDestroy *`. This event is fired prior to [`PQfinish`](libpq-connect.html#LIBPQ-PQFINISH) performing any other cleanup. The return value of the event procedure is ignored since there is no way of indicating a failure from [`PQfinish`](libpq-connect.html#LIBPQ-PQFINISH). Also, an event procedure failure should not abort the process of cleaning up unwanted memory.
 
-*   `PGEVT_RESULTCREATE` [#](#LIBPQ-PGEVT-RESULTCREATE)
+* `PGEVT_RESULTCREATE` [#](#LIBPQ-PGEVT-RESULTCREATE)
 
     The result creation event is fired in response to any query execution function that generates a result, including [`PQgetResult`](libpq-async.html#LIBPQ-PQGETRESULT). This event will only be fired after the result has been created successfully.
 
@@ -66,7 +66,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
     When a `PGEVT_RESULTCREATE` event is received, the *`evtInfo`* pointer should be cast to a `PGEventResultCreate *`. The *`conn`* is the connection used to generate the result. This is the ideal place to initialize any `instanceData` that needs to be associated with the result. If an event procedure fails (returns zero), that event procedure will be ignored for the remaining lifetime of the result; that is, it will not receive `PGEVT_RESULTCOPY` or `PGEVT_RESULTDESTROY` events for this result or results copied from it.
 
-*   `PGEVT_RESULTCOPY` [#](#LIBPQ-PGEVT-RESULTCOPY)
+* `PGEVT_RESULTCOPY` [#](#LIBPQ-PGEVT-RESULTCOPY)
 
     The result copy event is fired in response to [`PQcopyResult`](libpq-misc.html#LIBPQ-PQCOPYRESULT). This event will only be fired after the copy is complete. Only event procedures that have successfully handled the `PGEVT_RESULTCREATE` or `PGEVT_RESULTCOPY` event for the source result will receive `PGEVT_RESULTCOPY` events.
 
@@ -78,7 +78,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
     When a `PGEVT_RESULTCOPY` event is received, the *`evtInfo`* pointer should be cast to a `PGEventResultCopy *`. The *`src`* result is what was copied while the *`dest`* result is the copy destination. This event can be used to provide a deep copy of `instanceData`, since `PQcopyResult` cannot do that. If an event procedure fails (returns zero), that event procedure will be ignored for the remaining lifetime of the new result; that is, it will not receive `PGEVT_RESULTCOPY` or `PGEVT_RESULTDESTROY` events for that result or results copied from it.
 
-*   `PGEVT_RESULTDESTROY` [#](#LIBPQ-PGEVT-RESULTDESTROY)
+* `PGEVT_RESULTDESTROY` [#](#LIBPQ-PGEVT-RESULTDESTROY)
 
     The result destroy event is fired in response to a [`PQclear`](libpq-exec.html#LIBPQ-PQCLEAR). It is the event procedure's responsibility to properly clean up its event data as libpq has no ability to manage this memory. Failure to clean up will lead to memory leaks.
 
@@ -91,7 +91,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
 ### 34.14.2. Event Callback Procedure [#](#LIBPQ-EVENTS-PROC)
 
-*   `PGEventProc`[]() [#](#LIBPQ-PGEVENTPROC)
+* `PGEventProc` [#](#LIBPQ-PGEVENTPROC)
 
     `PGEventProc` is a typedef for a pointer to an event procedure, that is, the user callback function that receives events from libpq. The signature of an event procedure must be
 
@@ -101,13 +101,13 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
     A particular event procedure can be registered only once in any `PGconn`. This is because the address of the procedure is used as a lookup key to identify the associated instance data.
 
-    ### Caution
+### Caution
 
     On Windows, functions can have two different addresses: one visible from outside a DLL and another visible from inside the DLL. One should be careful that only one of these addresses is used with libpq's event-procedure functions, else confusion will result. The simplest rule for writing code that will work is to ensure that event procedures are declared `static`. If the procedure's address must be available outside its own source file, expose a separate function to return the address.
 
 ### 34.14.3. Event Support Functions [#](#LIBPQ-EVENTS-FUNCS)
 
-*   `PQregisterEventProc`[]() [#](#LIBPQ-PQREGISTEREVENTPROC)
+* `PQregisterEventProc` [#](#LIBPQ-PQREGISTEREVENTPROC)
 
     Registers an event callback procedure with libpq.
 
@@ -118,19 +118,19 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
     The *`proc`* argument will be called when a libpq event is fired. Its memory address is also used to lookup `instanceData`. The *`name`* argument is used to refer to the event procedure in error messages. This value cannot be `NULL` or a zero-length string. The name string is copied into the `PGconn`, so what is passed need not be long-lived. The *`passThrough`* pointer is passed to the *`proc`* whenever an event occurs. This argument can be `NULL`.
 
-*   `PQsetInstanceData`[]() [#](#LIBPQ-PQSETINSTANCEDATA)
+* `PQsetInstanceData` [#](#LIBPQ-PQSETINSTANCEDATA)
 
     Sets the connection *`conn`*'s `instanceData` for procedure *`proc`* to *`data`*. This returns non-zero for success and zero for failure. (Failure is only possible if *`proc`* has not been properly registered in *`conn`*.)
 
         int PQsetInstanceData(PGconn *conn, PGEventProc proc, void *data);
 
-*   `PQinstanceData`[]() [#](#LIBPQ-PQINSTANCEDATA)
+* `PQinstanceData` [#](#LIBPQ-PQINSTANCEDATA)
 
     Returns the connection *`conn`*'s `instanceData` associated with procedure *`proc`*, or `NULL` if there is none.
 
         void *PQinstanceData(const PGconn *conn, PGEventProc proc);
 
-*   `PQresultSetInstanceData`[]() [#](#LIBPQ-PQRESULTSETINSTANCEDATA)
+* `PQresultSetInstanceData` [#](#LIBPQ-PQRESULTSETINSTANCEDATA)
 
     Sets the result's `instanceData` for *`proc`* to *`data`*. This returns non-zero for success and zero for failure. (Failure is only possible if *`proc`* has not been properly registered in the result.)
 
@@ -138,7 +138,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
     Beware that any storage represented by *`data`* will not be accounted for by [`PQresultMemorySize`](libpq-misc.html#LIBPQ-PQRESULTMEMORYSIZE), unless it is allocated using [`PQresultAlloc`](libpq-misc.html#LIBPQ-PQRESULTALLOC). (Doing so is recommendable because it eliminates the need to free such storage explicitly when the result is destroyed.)
 
-*   `PQresultInstanceData`[]() [#](#LIBPQ-PQRESULTINSTANCEDATA)
+* `PQresultInstanceData` [#](#LIBPQ-PQRESULTINSTANCEDATA)
 
     Returns the result's `instanceData` associated with *`proc`*, or `NULL` if there is none.
 

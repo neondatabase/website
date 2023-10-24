@@ -8,8 +8,6 @@
 
 ## 22.1. Database Roles [#](#DATABASE-ROLES)
 
-[]()[]()[]()[]()
-
 Database roles are conceptually completely separate from operating system users. In practice it might be convenient to maintain a correspondence, but this is not required. Database roles are global across a database cluster installation (and not per individual database). To create a role use the [`CREATE ROLE`](sql-createrole.html "CREATE ROLE") SQL command:
 
     CREATE ROLE name;
@@ -17,8 +15,6 @@ Database roles are conceptually completely separate from operating system users.
 *`name`* follows the rules for SQL identifiers: either unadorned without special characters, or double-quoted. (In practice, you will usually want to add additional options, such as `LOGIN`, to the command. More details appear below.) To remove an existing role, use the analogous [`DROP ROLE`](sql-droprole.html "DROP ROLE") command:
 
     DROP ROLE name;
-
-[]()[]()
 
 For convenience, the programs [createuser](app-createuser.html "createuser") and [dropuser](app-dropuser.html "dropuser") are provided as wrappers around these SQL commands that can be called from the shell command line:
 

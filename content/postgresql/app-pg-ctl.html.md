@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## pg\_ctl
 
 pg\_ctl — initialize, start, stop, or control a PostgreSQL server
@@ -66,53 +64,53 @@ The `init` or `initdb` mode creates a new PostgreSQL database cluster, that is, 
 
 ## Options
 
-*   `-c``--core-files`
+* `-c``--core-files`
 
     Attempt to allow server crashes to produce core files, on platforms where this is possible, by lifting any soft resource limit placed on core files. This is useful in debugging or diagnosing problems by allowing a stack trace to be obtained from a failed server process.
 
-*   `-D datadir``--pgdata=datadir`
+* `-D datadir``--pgdata=datadir`
 
     Specifies the file system location of the database configuration files. If this option is omitted, the environment variable `PGDATA` is used.
 
-*   `-l filename``--log=filename`
+* `-l filename``--log=filename`
 
     Append the server log output to *`filename`*. If the file does not exist, it is created. The umask is set to 077, so access to the log file is disallowed to other users by default.
 
-*   `-m mode``--mode=mode`
+* `-m mode``--mode=mode`
 
     Specifies the shutdown mode. *`mode`* can be `smart`, `fast`, or `immediate`, or the first letter of one of these three. If this option is omitted, `fast` is the default.
 
-*   `-o options``--options=options`
+* `-o options``--options=options`
 
     Specifies options to be passed directly to the `postgres` command. `-o` can be specified multiple times, with all the given options being passed through.
 
     The *`options`* should usually be surrounded by single or double quotes to ensure that they are passed through as a group.
 
-*   `-o initdb-options``--options=initdb-options`
+* `-o initdb-options``--options=initdb-options`
 
     Specifies options to be passed directly to the `initdb` command. `-o` can be specified multiple times, with all the given options being passed through.
 
     The *`initdb-options`* should usually be surrounded by single or double quotes to ensure that they are passed through as a group.
 
-*   `-p path`
+* `-p path`
 
     Specifies the location of the `postgres` executable. By default the `postgres` executable is taken from the same directory as `pg_ctl`, or failing that, the hard-wired installation directory. It is not necessary to use this option unless you are doing something unusual and get errors that the `postgres` executable was not found.
 
     In `init` mode, this option analogously specifies the location of the `initdb` executable.
 
-*   `-s``--silent`
+* `-s``--silent`
 
     Print only errors, no informational messages.
 
-*   `-t seconds``--timeout=seconds`
+* `-t seconds``--timeout=seconds`
 
     Specifies the maximum number of seconds to wait when waiting for an operation to complete (see option `-w`). Defaults to the value of the `PGCTLTIMEOUT` environment variable or, if not set, to 60 seconds.
 
-*   `-V``--version`
+* `-V``--version`
 
     Print the pg\_ctl version and exit.
 
-*   `-w``--wait`
+* `-w``--wait`
 
     Wait for the operation to complete. This is supported for the modes `start`, `stop`, `restart`, `promote`, and `register`, and is the default for those modes.
 
@@ -120,7 +118,7 @@ The `init` or `initdb` mode creates a new PostgreSQL database cluster, that is, 
 
     If the operation does not complete within the timeout (see option `-t`), then `pg_ctl` exits with a nonzero exit status. But note that the operation might continue in the background and eventually succeed.
 
-*   `-W``--no-wait`
+* `-W``--no-wait`
 
     Do not wait for the operation to complete. This is the opposite of the option `-w`.
 
@@ -128,7 +126,7 @@ The `init` or `initdb` mode creates a new PostgreSQL database cluster, that is, 
 
     In prior releases of PostgreSQL, this was the default except for the `stop` mode.
 
-*   `-?``--help`
+* `-?``--help`
 
     Show help about pg\_ctl command line arguments, and exit.
 
@@ -136,33 +134,33 @@ If an option is specified that is valid, but not relevant to the selected operat
 
 ### Options for Windows
 
-*   `-e source`
+* `-e source`
 
     Name of the event source for pg\_ctl to use for logging to the event log when running as a Windows service. The default is `PostgreSQL`. Note that this only controls messages sent from pg\_ctl itself; once started, the server will use the event source specified by its [event\_source](runtime-config-logging.html#GUC-EVENT-SOURCE) parameter. Should the server fail very early in startup, before that parameter has been set, it might also log using the default event source name `PostgreSQL`.
 
-*   `-N servicename`
+* `-N servicename`
 
     Name of the system service to register. This name will be used as both the service name and the display name. The default is `PostgreSQL`.
 
-*   `-P password`
+* `-P password`
 
     Password for the user to run the service as.
 
-*   `-S start-type`
+* `-S start-type`
 
     Start type of the system service. *`start-type`* can be `auto`, or `demand`, or the first letter of one of these two. If this option is omitted, `auto` is the default.
 
-*   `-U username`
+* `-U username`
 
     User name for the user to run the service as. For domain users, use the format `DOMAIN\username`.
 
 ## Environment
 
-*   `PGCTLTIMEOUT`
+* `PGCTLTIMEOUT`
 
     Default limit on the number of seconds to wait when waiting for startup or shutdown to complete. If not set, the default is 60 seconds.
 
-*   `PGDATA`
+* `PGDATA`
 
     Default data directory location.
 
@@ -174,11 +172,11 @@ For additional variables that affect the server, see [postgres](app-postgres.htm
 
 ## Files
 
-*   `postmaster.pid`
+* `postmaster.pid`
 
     pg\_ctl examines this file in the data directory to determine whether the server is currently running.
 
-*   `postmaster.opts`
+* `postmaster.opts`
 
     If this file exists in the data directory, pg\_ctl (in `restart` mode) will pass the contents of the file as options to postgres, unless overridden by the `-o` option. The contents of this file are also displayed in `status` mode.
 
@@ -188,31 +186,31 @@ For additional variables that affect the server, see [postgres](app-postgres.htm
 
 To start the server, waiting until the server is accepting connections:
 
-    $ pg_ctl start
+    pg_ctl start
 
 To start the server using port 5433, and running without `fsync`, use:
 
-    $ pg_ctl -o "-F -p 5433" start
+    pg_ctl -o "-F -p 5433" start
 
 ### Stopping the Server
 
 To stop the server, use:
 
-    $ pg_ctl stop
+    pg_ctl stop
 
 The `-m` option allows control over *how* the server shuts down:
 
-    $ pg_ctl stop -m smart
+    pg_ctl stop -m smart
 
 ### Restarting the Server
 
 Restarting the server is almost equivalent to stopping the server and starting it again, except that by default, `pg_ctl` saves and reuses the command line options that were passed to the previously-running instance. To restart the server using the same options as before, use:
 
-    $ pg_ctl restart
+    pg_ctl restart
 
 But if `-o` is specified, that replaces any previous options. To restart using port 5433, disabling `fsync` upon restart:
 
-    $ pg_ctl -o "-F -p 5433" restart
+    pg_ctl -o "-F -p 5433" restart
 
 ### Showing the Server Status
 

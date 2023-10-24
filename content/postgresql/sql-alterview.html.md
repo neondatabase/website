@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ALTER VIEW
 
 ALTER VIEW — change the definition of a view
@@ -31,51 +29,51 @@ You must own the view to use `ALTER VIEW`. To change a view's schema, you must a
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing view.
 
-*   *`column_name`*
+* *`column_name`*
 
     Name of an existing column.
 
-*   *`new_column_name`*
+* *`new_column_name`*
 
     New name for an existing column.
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the view does not exist. A notice is issued in this case.
 
-*   `SET`/`DROP DEFAULT`
+* `SET`/`DROP DEFAULT`
 
     These forms set or remove the default value for a column. A view column's default value is substituted into any `INSERT` or `UPDATE` command whose target is the view, before applying any rules or triggers for the view. The view's default will therefore take precedence over any default values from underlying relations.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The user name of the new owner of the view.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name for the view.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the view.
 
-*   `SET ( view_option_name [= view_option_value] [, ... ] )``RESET ( view_option_name [, ... ] )`
+* `SET ( view_option_name [= view_option_value] [, ... ] )``RESET ( view_option_name [, ... ] )`
 
     Sets or resets a view option. Currently supported options are:
 
-    *   `check_option` (`enum`)
+  * `check_option` (`enum`)
 
         Changes the check option of the view. The value must be `local` or `cascaded`.
 
-    *   `security_barrier` (`boolean`)
+  * `security_barrier` (`boolean`)
 
         Changes the security-barrier property of the view. The value must be a Boolean value, such as `true` or `false`.
 
-    *   `security_invoker` (`boolean`)
+  * `security_invoker` (`boolean`)
 
         Changes the security-invoker property of the view. The value must be a Boolean value, such as `true` or `false`.
 

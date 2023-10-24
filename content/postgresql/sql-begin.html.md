@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## BEGIN
 
 BEGIN — start a transaction block
@@ -32,7 +30,7 @@ If the isolation level, read/write mode, or deferrable mode is specified, the ne
 
 ## Parameters
 
-*   `WORK``TRANSACTION`
+* `WORK``TRANSACTION`
 
     Optional key words. They have no effect.
 

@@ -8,8 +8,6 @@
 
 ## 54.34. `pg_user_mappings` [#](#VIEW-PG-USER-MAPPINGS)
 
-[]()
-
 The view `pg_user_mappings` provides access to information about user mappings. This is essentially a publicly readable view of [`pg_user_mapping`](catalog-pg-user-mapping.html "53.65. pg_user_mapping") that leaves out the options field if the user has no rights to use it.
 
 **Table 54.34. `pg_user_mappings` Columns**
@@ -25,12 +23,11 @@ The view `pg_user_mappings` provides access to information about user mappings. 
 
 \
 
-
 To protect password information stored as a user mapping option, the `umoptions` column will read as null unless one of the following applies:
 
-*   current user is the user being mapped, and owns the server or holds `USAGE` privilege on it
-*   current user is the server owner and mapping is for `PUBLIC`
-*   current user is a superuser
+* current user is the user being mapped, and owns the server or holds `USAGE` privilege on it
+* current user is the server owner and mapping is for `PUBLIC`
+* current user is a superuser
 
 ***
 

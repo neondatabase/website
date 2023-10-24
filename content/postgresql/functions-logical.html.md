@@ -8,9 +8,7 @@
 
 ## 9.1. Logical Operators [#](#FUNCTIONS-LOGICAL)
 
-[]()[]()
-
-The usual logical operators are available:[]()[]()[]()[]()[]()[]()
+The usual logical operators are available:
 
     boolean AND boolean → boolean
     boolean OR boolean → boolean

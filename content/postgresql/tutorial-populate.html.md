@@ -8,8 +8,6 @@
 
 ## 2.4. Populating a Table With Rows [#](#TUTORIAL-POPULATE)
 
-[]()
-
 The `INSERT` statement is used to populate a table with rows:
 
     INSERT INTO weather VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
@@ -34,7 +32,7 @@ Many developers consider explicitly listing the columns better style than relyin
 
 Please enter all the commands shown above so you have some data to work with in the following sections.
 
-[]()You could also have used `COPY` to load large amounts of data from flat-text files. This is usually faster because the `COPY` command is optimized for this application while allowing less flexibility than `INSERT`. An example would be:
+You could also have used `COPY` to load large amounts of data from flat-text files. This is usually faster because the `COPY` command is optimized for this application while allowing less flexibility than `INSERT`. An example would be:
 
     COPY weather FROM '/home/user/weather.txt';
 

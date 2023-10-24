@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_start\_transaction
 
 SPI\_start\_transaction — obsolete function

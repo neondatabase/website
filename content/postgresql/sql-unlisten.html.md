@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## UNLISTEN
 
 UNLISTEN — stop listening for a notification
@@ -24,11 +22,11 @@ UNLISTEN — stop listening for a notification
 
 ## Parameters
 
-*   *`channel`*
+* *`channel`*
 
     Name of a notification channel (any identifier).
 
-*   `*`
+* `*`
 
     All current listen registrations for this session are cleared.
 

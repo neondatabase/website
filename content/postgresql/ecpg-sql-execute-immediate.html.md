@@ -20,7 +20,7 @@ EXECUTE IMMEDIATE — dynamically prepare and execute a statement
 
 ## Parameters
 
-*   *`string`* [#](#ECPG-SQL-EXECUTE-IMMEDIATE-STRING)
+* *`string`* [#](#ECPG-SQL-EXECUTE-IMMEDIATE-STRING)
 
     A literal string or a host variable containing the SQL statement to be executed.
 

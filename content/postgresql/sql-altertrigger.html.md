@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ALTER TRIGGER
 
 ALTER TRIGGER — change the definition of a trigger
@@ -29,19 +27,19 @@ You must own the table on which the trigger acts to be allowed to change its pro
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of an existing trigger to alter.
 
-*   *`table_name`*
+* *`table_name`*
 
     The name of the table on which this trigger acts.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name for the trigger.
 
-*   *`extension_name`*
+* *`extension_name`*
 
     The name of the extension that the trigger is to depend on (or no longer dependent on, if `NO` is specified). A trigger that's marked as dependent on an extension is automatically dropped when the extension is dropped.
 

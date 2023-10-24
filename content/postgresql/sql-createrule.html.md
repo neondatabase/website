@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## CREATE RULE
 
 CREATE RULE — define a new rewrite rule
@@ -42,33 +40,33 @@ Another alternative worth considering is to use `INSTEAD OF` triggers (see [CREA
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of a rule to create. This must be distinct from the name of any other rule for the same table. Multiple rules on the same table and same event type are applied in alphabetical name order.
 
-*   *`event`*
+* *`event`*
 
     The event is one of `SELECT`, `INSERT`, `UPDATE`, or `DELETE`. Note that an `INSERT` containing an `ON CONFLICT` clause cannot be used on tables that have either `INSERT` or `UPDATE` rules. Consider using an updatable view instead.
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (optionally schema-qualified) of the table or view the rule applies to.
 
-*   *`condition`*
+* *`condition`*
 
     Any SQL conditional expression (returning `boolean`). The condition expression cannot refer to any tables except `NEW` and `OLD`, and cannot contain aggregate functions.
 
-*   `INSTEAD`
+* `INSTEAD`
 
     `INSTEAD` indicates that the commands should be executed *instead of* the original command.
 
-*   `ALSO`
+* `ALSO`
 
     `ALSO` indicates that the commands should be executed *in addition to* the original command.
 
     If neither `ALSO` nor `INSTEAD` is specified, `ALSO` is the default.
 
-*   *`command`*
+* *`command`*
 
     The command or commands that make up the rule action. Valid commands are `SELECT`, `INSERT`, `UPDATE`, `DELETE`, or `NOTIFY`.
 

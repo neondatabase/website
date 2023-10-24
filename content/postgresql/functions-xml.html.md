@@ -8,12 +8,10 @@
 
 ## 9.15. XML Functions [#](#FUNCTIONS-XML)
 
-*   *   [9.15.1. Producing XML Content](functions-xml.html#FUNCTIONS-PRODUCING-XML)
-    *   [9.15.2. XML Predicates](functions-xml.html#FUNCTIONS-XML-PREDICATES)
-    *   [9.15.3. Processing XML](functions-xml.html#FUNCTIONS-XML-PROCESSING)
-    *   [9.15.4. Mapping Tables to XML](functions-xml.html#FUNCTIONS-XML-MAPPING)
-
-[]()
+  * *   [9.15.1. Producing XML Content](functions-xml.html#FUNCTIONS-PRODUCING-XML)
+* [9.15.2. XML Predicates](functions-xml.html#FUNCTIONS-XML-PREDICATES)
+* [9.15.3. Processing XML](functions-xml.html#FUNCTIONS-XML-PROCESSING)
+* [9.15.4. Mapping Tables to XML](functions-xml.html#FUNCTIONS-XML-MAPPING)
 
 The functions and function-like expressions described in this section operate on values of type `xml`. See [Section 8.13](datatype-xml.html "8.13. XML Type") for information about the `xml` type. The function-like expressions `xmlparse` and `xmlserialize` for converting to and from type `xml` are documented there, not in this section.
 
@@ -24,8 +22,6 @@ Use of most of these functions requires PostgreSQL to have been built with `conf
 A set of functions and function-like expressions is available for producing XML content from SQL data. As such, they are particularly suitable for formatting query results into XML documents for processing in client applications.
 
 #### 9.15.1.1. `xmlcomment` [#](#FUNCTIONS-PRODUCING-XML-XMLCOMMENT)
-
-[]()
 
     xmlcomment ( text ) → xml
 
@@ -40,8 +36,6 @@ Example:
      <!--hello-->
 
 #### 9.15.1.2. `xmlconcat` [#](#FUNCTIONS-PRODUCING-XML-XMLCONCAT)
-
-[]()
 
     xmlconcat ( xml [, ...] ) → xml
 
@@ -66,8 +60,6 @@ Example:
      <?xml version="1.1"?><foo/><bar/>
 
 #### 9.15.1.3. `xmlelement` [#](#FUNCTIONS-PRODUCING-XML-XMLELEMENT)
-
-[]()
 
     xmlelement ( NAME name [, XMLATTRIBUTES ( attvalue [ AS attname ] [, ...] ) ] [, content [, ...]] ) → xml
 
@@ -126,8 +118,6 @@ Content of other types will be formatted into valid XML character data. This mea
 
 #### 9.15.1.4. `xmlforest` [#](#FUNCTIONS-PRODUCING-XML-XMLFOREST)
 
-[]()
-
     xmlforest ( content [ AS name ] [, ...] ) → xml
 
 The `xmlforest` expression produces an XML forest (sequence) of elements using the given names and content. As for `xmlelement`, each *`name`* must be a simple identifier, while the *`content`* expressions can have any data type.
@@ -159,8 +149,6 @@ Note that XML forests are not valid XML documents if they consist of more than o
 
 #### 9.15.1.5. `xmlpi` [#](#FUNCTIONS-PRODUCING-XML-XMLPI)
 
-[]()
-
     xmlpi ( NAME name [, content ] ) → xml
 
 The `xmlpi` expression creates an XML processing instruction. As for `xmlelement`, the *`name`* must be a simple identifier, while the *`content`* expression can have any data type. The *`content`*, if present, must not contain the character sequence `?>`.
@@ -175,8 +163,6 @@ Example:
 
 #### 9.15.1.6. `xmlroot` [#](#FUNCTIONS-PRODUCING-XML-XMLROOT)
 
-[]()
-
     xmlroot ( xml, VERSION {text|NO VALUE} [, STANDALONE {YES|NO|NO VALUE} ] ) → xml
 
 The `xmlroot` expression alters the properties of the root node of an XML value. If a version is specified, it replaces the value in the root node's version declaration; if a standalone setting is specified, it replaces the value in the root node's standalone declaration.
@@ -190,8 +176,6 @@ The `xmlroot` expression alters the properties of the root node of an XML value.
      <content>abc</content>
 
 #### 9.15.1.7. `xmlagg` [#](#FUNCTIONS-XML-XMLAGG)
-
-[]()
 
     xmlagg ( xml ) → xml
 
@@ -227,23 +211,17 @@ The expressions described in this section check properties of `xml` values.
 
 #### 9.15.2.1. `IS DOCUMENT` [#](#FUNCTIONS-PRODUCING-XML-IS-DOCUMENT)
 
-[]()
-
     xml IS DOCUMENT → boolean
 
 The expression `IS DOCUMENT` returns true if the argument XML value is a proper XML document, false if it is not (that is, it is a content fragment), or null if the argument is null. See [Section 8.13](datatype-xml.html "8.13. XML Type") about the difference between documents and content fragments.
 
 #### 9.15.2.2. `IS NOT DOCUMENT` [#](#FUNCTIONS-PRODUCING-XML-IS-NOT-DOCUMENT)
 
-[]()
-
     xml IS NOT DOCUMENT → boolean
 
 The expression `IS NOT DOCUMENT` returns false if the argument XML value is a proper XML document, true if it is not (that is, it is a content fragment), or null if the argument is null.
 
 #### 9.15.2.3. `XMLEXISTS` [#](#XML-EXISTS)
-
-[]()
 
     XMLEXISTS ( text PASSING [BY {REF|VALUE}] xml [BY {REF|VALUE}] ) → boolean
 
@@ -263,8 +241,6 @@ The `BY REF` and `BY VALUE` clauses are accepted in PostgreSQL, but are ignored,
 In the SQL standard, the `xmlexists` function evaluates an expression in the XML Query language, but PostgreSQL allows only an XPath 1.0 expression, as discussed in [Section D.3.1](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-XPATH1 "D.3.1. Queries Are Restricted to XPath 1.0").
 
 #### 9.15.2.4. `xml_is_well_formed` [#](#XML-IS-WELL-FORMED)
-
-[]()[]()[]()
 
     xml_is_well_formed ( text ) → boolean
     xml_is_well_formed_document ( text ) → boolean
@@ -314,8 +290,6 @@ To process values of data type `xml`, PostgreSQL offers the functions `xpath` an
 
 #### 9.15.3.1. `xpath` [#](#FUNCTIONS-XML-PROCESSING-XPATH)
 
-[]()
-
     xpath ( xpath text, xml xml [, nsarray text[] ] ) → xml[]
 
 The function `xpath` evaluates the XPath 1.0 expression *`xpath`* (given as text) against the XML value *`xml`*. It returns an array of XML values corresponding to the node-set produced by the XPath expression. If the XPath expression returns a scalar value rather than a node-set, a single-element array is returned.
@@ -346,8 +320,6 @@ To deal with default (anonymous) namespaces, do something like this:
 
 #### 9.15.3.2. `xpath_exists` [#](#FUNCTIONS-XML-PROCESSING-XPATH-EXISTS)
 
-[]()
-
     xpath_exists ( xpath text, xml xml [, nsarray text[] ] ) → boolean
 
 The function `xpath_exists` is a specialized form of the `xpath` function. Instead of returning the individual XML values that satisfy the XPath 1.0 expression, this function returns a Boolean indicating whether the query was satisfied or not (specifically, whether it produced any value other than an empty node-set). This function is equivalent to the `XMLEXISTS` predicate, except that it also offers support for a namespace mapping argument.
@@ -363,8 +335,6 @@ Example:
     (1 row)
 
 #### 9.15.3.3. `xmltable` [#](#FUNCTIONS-XML-PROCESSING-XMLTABLE)
-
-[]()[]()
 
     XMLTABLE (
         [ XMLNAMESPACES ( namespace_uri AS namespace_name [, ...] ), ]
@@ -491,8 +461,6 @@ The following example illustrates how the `XMLNAMESPACES` clause can be used to 
     (3 rows)
 
 ### 9.15.4. Mapping Tables to XML [#](#FUNCTIONS-XML-MAPPING)
-
-[]()
 
 The following functions map the contents of relational tables to XML values. They can be thought of as XML export functionality:
 

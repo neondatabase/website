@@ -8,22 +8,18 @@
 
 ## 5.4. Constraints [#](#DDL-CONSTRAINTS)
 
-*   *   [5.4.1. Check Constraints](ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
-    *   [5.4.2. Not-Null Constraints](ddl-constraints.html#DDL-CONSTRAINTS-NOT-NULL)
-    *   [5.4.3. Unique Constraints](ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS)
-    *   [5.4.4. Primary Keys](ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS)
-    *   [5.4.5. Foreign Keys](ddl-constraints.html#DDL-CONSTRAINTS-FK)
-    *   [5.4.6. Exclusion Constraints](ddl-constraints.html#DDL-CONSTRAINTS-EXCLUSION)
-
-[]()
+  * *   [5.4.1. Check Constraints](ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
+* [5.4.2. Not-Null Constraints](ddl-constraints.html#DDL-CONSTRAINTS-NOT-NULL)
+* [5.4.3. Unique Constraints](ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS)
+* [5.4.4. Primary Keys](ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS)
+* [5.4.5. Foreign Keys](ddl-constraints.html#DDL-CONSTRAINTS-FK)
+* [5.4.6. Exclusion Constraints](ddl-constraints.html#DDL-CONSTRAINTS-EXCLUSION)
 
 Data types are a way to limit the kind of data that can be stored in a table. For many applications, however, the constraint they provide is too coarse. For example, a column containing a product price should probably only accept positive values. But there is no standard data type that accepts only positive numbers. Another issue is that you might want to constrain column data with respect to other columns or rows. For example, in a table containing product information, there should be only one row for each product number.
 
 To that end, SQL allows you to define constraints on columns and tables. Constraints give you as much control over the data in your tables as you wish. If a user attempts to store data in a column that would violate a constraint, an error is raised. This applies even if the value came from the default value definition.
 
 ### 5.4.1. Check Constraints [#](#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
-
-[]()[]()
 
 A check constraint is the most generic constraint type. It allows you to specify that the value in a certain column must satisfy a Boolean (truth-value) expression. For instance, to require positive product prices, you could use:
 
@@ -34,8 +30,6 @@ A check constraint is the most generic constraint type. It allows you to specify
     );
 
 As you see, the constraint definition comes after the data type, just like default value definitions. Default values and constraints can be listed in any order. A check constraint consists of the key word `CHECK` followed by an expression in parentheses. The check constraint expression should involve the column thus constrained, otherwise the constraint would not make too much sense.
-
-[]()
 
 You can also give the constraint a separate name. This clarifies error messages and allows you to refer to the constraint when you need to change it. The syntax is:
 
@@ -95,8 +89,6 @@ Names can be assigned to table constraints in the same way as column constraints
         CONSTRAINT valid_discount CHECK (price > discounted_price)
     );
 
-[]()
-
 It should be noted that a check constraint is satisfied if the check expression evaluates to true or the null value. Since most expressions will evaluate to the null value if any operand is null, they will not prevent null values in the constrained columns. To ensure that a column does not contain null values, the not-null constraint described in the next section can be used.
 
 ### Note
@@ -112,8 +104,6 @@ PostgreSQL assumes that `CHECK` constraints' conditions are immutable, that is, 
 An example of a common way to break this assumption is to reference a user-defined function in a `CHECK` expression, and then change the behavior of that function. PostgreSQL does not disallow that, but it will not notice if there are rows in the table that now violate the `CHECK` constraint. That would cause a subsequent database dump and restore to fail. The recommended way to handle such a change is to drop the constraint (using `ALTER TABLE`), adjust the function definition, and re-add the constraint, thereby rechecking it against all table rows.
 
 ### 5.4.2. Not-Null Constraints [#](#DDL-CONSTRAINTS-NOT-NULL)
-
-[]()[]()
 
 A not-null constraint simply specifies that a column must not assume the null value. A syntax example:
 
@@ -173,8 +163,6 @@ In most database designs the majority of columns should be marked not null.
 
 ### 5.4.3. Unique Constraints [#](#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS)
 
-[]()[]()
-
 Unique constraints ensure that the data contained in a column, or a group of columns, is unique among all the rows in the table. The syntax is:
 
     CREATE TABLE products (
@@ -215,8 +203,6 @@ You can assign your own name for a unique constraint, in the usual way:
 
 Adding a unique constraint will automatically create a unique B-tree index on the column or group of columns listed in the constraint. A uniqueness restriction covering only some rows cannot be written as a unique constraint, but it is possible to enforce such a restriction by creating a unique [partial index](indexes-partial.html "11.8. Partial Indexes").
 
-[]()
-
 In general, a unique constraint is violated if there is more than one row in the table where the values of all of the columns included in the constraint are equal. By default, two null values are not considered equal in this comparison. That means even in the presence of a unique constraint it is possible to store duplicate rows that contain a null value in at least one of the constrained columns. This behavior can be changed by adding the clause `NULLS NOT DISTINCT`, like
 
     CREATE TABLE products (
@@ -237,8 +223,6 @@ or
 The default behavior can be specified explicitly using `NULLS DISTINCT`. The default null treatment in unique constraints is implementation-defined according to the SQL standard, and other implementations have a different behavior. So be careful when developing applications that are intended to be portable.
 
 ### 5.4.4. Primary Keys [#](#DDL-CONSTRAINTS-PRIMARY-KEYS)
-
-[]()[]()
 
 A primary key constraint indicates that a column, or group of columns, can be used as a unique identifier for rows in the table. This requires that the values be both unique and not null. So, the following two table definitions accept the same data:
 
@@ -272,8 +256,6 @@ A table can have at most one primary key. (There can be any number of unique con
 Primary keys are useful both for documentation purposes and for client applications. For example, a GUI application that allows modifying row values probably needs to know the primary key of a table to be able to identify rows uniquely. There are also various ways in which the database system makes use of a primary key if one has been declared; for example, the primary key defines the default target column(s) for foreign keys referencing its table.
 
 ### 5.4.5. Foreign Keys [#](#DDL-CONSTRAINTS-FK)
-
-[]()[]()[]()
 
 A foreign key constraint specifies that the values in a column (or a group of columns) must match the values appearing in some row of another table. We say this maintains the *referential integrity* between two related tables.
 
@@ -320,8 +302,6 @@ A foreign key can also constrain and reference a group of columns. As usual, it 
 
 Of course, the number and type of the constrained columns need to match the number and type of the referenced columns.
 
-[]()
-
 Sometimes it is useful for the “other table” of a foreign key constraint to be the same table; this is called a *self-referential* foreign key. For example, if you want rows of a table to represent nodes of a tree structure, you could write
 
     CREATE TABLE tree (
@@ -356,13 +336,11 @@ A table can have more than one foreign key constraint. This is used to implement
 
 Notice that the primary key overlaps with the foreign keys in the last table.
 
-[]()[]()
-
 We know that the foreign keys disallow creation of orders that do not relate to any products. But what if a product is removed after an order is created that references it? SQL allows you to handle that as well. Intuitively, we have a few options:
 
-*   Disallow deleting a referenced product
-*   Delete the orders as well
-*   Something else?
+* Disallow deleting a referenced product
+* Delete the orders as well
+* Something else?
 
 To illustrate this, let's implement the following policy on the many-to-many relationship example above: when someone wants to remove a product that is still referenced by an order (via `order_items`), we disallow it. If someone removes an order, the order items are removed as well:
 
@@ -420,8 +398,6 @@ A foreign key must reference columns that either are a primary key or form a uni
 More information about updating and deleting data is in [Chapter 6](dml.html "Chapter 6. Data Manipulation"). Also see the description of foreign key constraint syntax in the reference documentation for [CREATE TABLE](sql-createtable.html "CREATE TABLE").
 
 ### 5.4.6. Exclusion Constraints [#](#DDL-CONSTRAINTS-EXCLUSION)
-
-[]()[]()
 
 Exclusion constraints ensure that if any two rows are compared on the specified columns or expressions using the specified operators, at least one of these operator comparisons will return false or null. The syntax is:
 

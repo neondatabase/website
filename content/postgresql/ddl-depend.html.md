@@ -8,8 +8,6 @@
 
 ## 5.14. Dependency Tracking [#](#DDL-DEPEND)
 
-[]()[]()
-
 When you create complex database structures involving many tables with foreign key constraints, views, triggers, functions, etc. you implicitly create a net of dependencies between the objects. For instance, a table with a foreign key constraint depends on the table it references.
 
 To ensure the integrity of the entire database structure, PostgreSQL makes sure that you cannot drop objects that other objects still depend on. For example, attempting to drop the products table we considered in [Section 5.4.5](ddl-constraints.html#DDL-CONSTRAINTS-FK "5.4.5. Foreign Keys"), with the orders table depending on it, would result in an error message like this:

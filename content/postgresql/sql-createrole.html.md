@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## CREATE ROLE
 
 CREATE ROLE — define a new database role
@@ -41,73 +39,73 @@ Note that roles are defined at the database cluster level, and so are valid in a
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of the new role.
 
-*   `SUPERUSER``NOSUPERUSER`
+* `SUPERUSER``NOSUPERUSER`
 
     These clauses determine whether the new role is a “superuser”, who can override all access restrictions within the database. Superuser status is dangerous and should be used only when really needed. You must yourself be a superuser to create a new superuser. If not specified, `NOSUPERUSER` is the default.
 
-*   `CREATEDB``NOCREATEDB`
+* `CREATEDB``NOCREATEDB`
 
     These clauses define a role's ability to create databases. If `CREATEDB` is specified, the role being defined will be allowed to create new databases. Specifying `NOCREATEDB` will deny a role the ability to create databases. If not specified, `NOCREATEDB` is the default. Only superuser roles or roles with `CREATEDB` can specify `CREATEDB`.
 
-*   `CREATEROLE``NOCREATEROLE`
+* `CREATEROLE``NOCREATEROLE`
 
     These clauses determine whether a role will be permitted to create, alter, drop, comment on, and change the security label for other roles. See [role creation](role-attributes.html#ROLE-CREATION) for more details about what capabilities are conferred by this privilege. If not specified, `NOCREATEROLE` is the default.
 
-*   `INHERIT``NOINHERIT`
+* `INHERIT``NOINHERIT`
 
     When the `GRANT` statement is used to confer membership in one role to another role, the `GRANT` may use the `WITH INHERIT` clause to specify whether the privileges of the granted role should be “inherited” by the new member. If the `GRANT` statement does not specify either inheritance behavior, the new `GRANT` will be created `WITH INHERIT TRUE` if the member role is set to `INHERIT` and to `WITH INHERIT FALSE` if it is set to `NOINHERIT`.
 
     In PostgreSQL versions before 16, the `GRANT` statement did not support `WITH INHERIT`. Therefore, changing this role-level property would also change the behavior of already-existing grants. This is no longer the case.
 
-*   `LOGIN``NOLOGIN`
+* `LOGIN``NOLOGIN`
 
     These clauses determine whether a role is allowed to log in; that is, whether the role can be given as the initial session authorization name during client connection. A role having the `LOGIN` attribute can be thought of as a user. Roles without this attribute are useful for managing database privileges, but are not users in the usual sense of the word. If not specified, `NOLOGIN` is the default, except when `CREATE ROLE` is invoked through its alternative spelling [`CREATE USER`](sql-createuser.html "CREATE USER").
 
-*   `REPLICATION``NOREPLICATION`
+* `REPLICATION``NOREPLICATION`
 
     These clauses determine whether a role is a replication role. A role must have this attribute (or be a superuser) in order to be able to connect to the server in replication mode (physical or logical replication) and in order to be able to create or drop replication slots. A role having the `REPLICATION` attribute is a very highly privileged role, and should only be used on roles actually used for replication. If not specified, `NOREPLICATION` is the default. Only superuser roles or roles with `REPLICATION` can specify `REPLICATION`.
 
-*   `BYPASSRLS``NOBYPASSRLS`
+* `BYPASSRLS``NOBYPASSRLS`
 
     These clauses determine whether a role bypasses every row-level security (RLS) policy. `NOBYPASSRLS` is the default. Only superuser roles or roles with `BYPASSRLS` can specify `BYPASSRLS`.
 
     Note that pg\_dump will set `row_security` to `OFF` by default, to ensure all contents of a table are dumped out. If the user running pg\_dump does not have appropriate permissions, an error will be returned. However, superusers and the owner of the table being dumped always bypass RLS.
 
-*   `CONNECTION LIMIT` *`connlimit`*
+* `CONNECTION LIMIT` *`connlimit`*
 
     If role can log in, this specifies how many concurrent connections the role can make. -1 (the default) means no limit. Note that only normal connections are counted towards this limit. Neither prepared transactions nor background worker connections are counted towards this limit.
 
-*   \[ `ENCRYPTED` ] `PASSWORD` '*`password`*'`PASSWORD NULL`
+* \[ `ENCRYPTED` ] `PASSWORD` '*`password`*'`PASSWORD NULL`
 
     Sets the role's password. (A password is only of use for roles having the `LOGIN` attribute, but you can nonetheless define one for roles without it.) If you do not plan to use password authentication you can omit this option. If no password is specified, the password will be set to null and password authentication will always fail for that user. A null password can optionally be written explicitly as `PASSWORD NULL`.
 
-    ### Note
+### Note
 
     Specifying an empty string will also set the password to null, but that was not the case before PostgreSQL version 10. In earlier versions, an empty string could be used, or not, depending on the authentication method and the exact version, and libpq would refuse to use it in any case. To avoid the ambiguity, specifying an empty string should be avoided.
 
     The password is always stored encrypted in the system catalogs. The `ENCRYPTED` keyword has no effect, but is accepted for backwards compatibility. The method of encryption is determined by the configuration parameter [password\_encryption](runtime-config-connection.html#GUC-PASSWORD-ENCRYPTION). If the presented password string is already in MD5-encrypted or SCRAM-encrypted format, then it is stored as-is regardless of `password_encryption` (since the system cannot decrypt the specified encrypted password string, to encrypt it in a different format). This allows reloading of encrypted passwords during dump/restore.
 
-*   `VALID UNTIL` '*`timestamp`*'
+* `VALID UNTIL` '*`timestamp`*'
 
     The `VALID UNTIL` clause sets a date and time after which the role's password is no longer valid. If this clause is omitted the password will be valid for all time.
 
-*   `IN ROLE` *`role_name`*
+* `IN ROLE` *`role_name`*
 
     The `IN ROLE` clause causes the new role to be automatically added as a member of the specified existing roles. (Note that there is no option to add the new role as an administrator; use a separate `GRANT` command to do that.)
 
-*   `ROLE` *`role_name`*
+* `ROLE` *`role_name`*
 
     The `ROLE` clause causes one or more specified existing roles to be automatically added as members of the new role. This in effect makes the new role a “group”.
 
-*   `ADMIN` *`role_name`*
+* `ADMIN` *`role_name`*
 
     The `ADMIN` clause is like `ROLE`, but the named roles are added to the new role `WITH ADMIN OPTION`, giving them the right to grant membership in this role to others.
 
-*   `SYSID` *`uid`*
+* `SYSID` *`uid`*
 
     The `SYSID` clause is ignored, but is accepted for backwards compatibility.
 

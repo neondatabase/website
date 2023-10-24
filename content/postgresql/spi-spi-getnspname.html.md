@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_getnspname
 
 SPI\_getnspname — return the namespace of the specified relation
@@ -22,7 +20,7 @@ SPI\_getnspname — return the namespace of the specified relation
 
 ## Arguments
 
-*   `Relation rel`
+* `Relation rel`
 
     input relation
 

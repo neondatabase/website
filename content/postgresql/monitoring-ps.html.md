@@ -8,8 +8,6 @@
 
 ## 28.1. Standard Unix Tools [#](#MONITORING-PS)
 
-[]()
-
 On most Unix platforms, PostgreSQL modifies its command title as reported by `ps`, so that individual server processes can readily be identified. A sample display is
 
     $ ps auxww | grep ^postgres

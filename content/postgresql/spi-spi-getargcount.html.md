@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SPI\_getargcount
 
 SPI\_getargcount — return the number of arguments needed by a statement prepared by `SPI_prepare`
@@ -22,7 +20,7 @@ SPI\_getargcount — return the number of arguments needed by a statement prepar
 
 ## Arguments
 
-*   `SPIPlanPtr plan`
+* `SPIPlanPtr plan`
 
     prepared statement (returned by `SPI_prepare`)
 

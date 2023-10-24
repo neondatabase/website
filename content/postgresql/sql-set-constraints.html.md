@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## SET CONSTRAINTS
 
 SET CONSTRAINTS — set constraint check timing for the current transaction

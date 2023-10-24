@@ -8,8 +8,6 @@
 
 ## 53.31. `pg_largeobject_metadata` [#](#CATALOG-PG-LARGEOBJECT-METADATA)
 
-[]()
-
 The catalog `pg_largeobject_metadata` holds metadata associated with large objects. The actual large object data is stored in [`pg_largeobject`](catalog-pg-largeobject.html "53.30. pg_largeobject").
 
 **Table 53.31. `pg_largeobject_metadata` Columns**

@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## ALTER TEXT SEARCH DICTIONARY
 
 ALTER TEXT SEARCH DICTIONARY — change the definition of a text search dictionary
@@ -29,27 +27,27 @@ You must be the owner of the dictionary to use `ALTER TEXT SEARCH DICTIONARY`.
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing text search dictionary.
 
-*   *`option`*
+* *`option`*
 
     The name of a template-specific option to be set for this dictionary.
 
-*   *`value`*
+* *`value`*
 
     The new value to use for a template-specific option. If the equal sign and value are omitted, then any previous setting for the option is removed from the dictionary, allowing the default to be used.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the text search dictionary.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The new owner of the text search dictionary.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the text search dictionary.
 

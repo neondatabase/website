@@ -8,8 +8,6 @@
 
 ## 54.15. `pg_prepared_statements` [#](#VIEW-PG-PREPARED-STATEMENTS)
 
-[]()
-
 The `pg_prepared_statements` view displays all the prepared statements that are available in the current session. See [PREPARE](sql-prepare.html "PREPARE") for more information about prepared statements.
 
 `pg_prepared_statements` contains one row for each prepared statement. Rows are added to the view when a new prepared statement is created and removed when a prepared statement is released (for example, via the [`DEALLOCATE`](sql-deallocate.html "DEALLOCATE") command).
@@ -28,7 +26,6 @@ The `pg_prepared_statements` view displays all the prepared statements that are 
 | `custom_plans` `int8`Number of times custom plan was chosen                                                                                                                                                                                                                                                                                       |
 
 \
-
 
 The `pg_prepared_statements` view is read-only.
 

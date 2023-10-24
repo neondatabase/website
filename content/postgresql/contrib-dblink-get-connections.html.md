@@ -6,8 +6,6 @@
 
 ***
 
-[]()
-
 ## dblink\_get\_connections
 
 dblink\_get\_connections — returns the names of all open named dblink connections

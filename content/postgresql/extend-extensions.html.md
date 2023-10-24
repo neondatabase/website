@@ -8,15 +8,13 @@
 
 ## 38.17. Packaging Related Objects into an Extension [#](#EXTEND-EXTENSIONS)
 
-*   *   [38.17.1. Extension Files](extend-extensions.html#EXTEND-EXTENSIONS-FILES)
-    *   [38.17.2. Extension Relocatability](extend-extensions.html#EXTEND-EXTENSIONS-RELOCATION)
-    *   [38.17.3. Extension Configuration Tables](extend-extensions.html#EXTEND-EXTENSIONS-CONFIG-TABLES)
-    *   [38.17.4. Extension Updates](extend-extensions.html#EXTEND-EXTENSIONS-UPDATES)
-    *   [38.17.5. Installing Extensions Using Update Scripts](extend-extensions.html#EXTEND-EXTENSIONS-UPDATE-SCRIPTS)
-    *   [38.17.6. Security Considerations for Extensions](extend-extensions.html#EXTEND-EXTENSIONS-SECURITY)
-    *   [38.17.7. Extension Example](extend-extensions.html#EXTEND-EXTENSIONS-EXAMPLE)
-
-[]()
+  * *   [38.17.1. Extension Files](extend-extensions.html#EXTEND-EXTENSIONS-FILES)
+* [38.17.2. Extension Relocatability](extend-extensions.html#EXTEND-EXTENSIONS-RELOCATION)
+* [38.17.3. Extension Configuration Tables](extend-extensions.html#EXTEND-EXTENSIONS-CONFIG-TABLES)
+* [38.17.4. Extension Updates](extend-extensions.html#EXTEND-EXTENSIONS-UPDATES)
+* [38.17.5. Installing Extensions Using Update Scripts](extend-extensions.html#EXTEND-EXTENSIONS-UPDATE-SCRIPTS)
+* [38.17.6. Security Considerations for Extensions](extend-extensions.html#EXTEND-EXTENSIONS-SECURITY)
+* [38.17.7. Extension Example](extend-extensions.html#EXTEND-EXTENSIONS-EXAMPLE)
 
 A useful extension to PostgreSQL typically includes multiple SQL objects; for example, a new data type will require new functions, new operators, and probably new index operator classes. It is helpful to collect all these objects into a single package to simplify database management. PostgreSQL calls such a package an *extension*. To define an extension, you need at least a *script file* that contains the SQL commands to create the extension's objects, and a *control file* that specifies a few basic properties of the extension itself. If the extension includes C code, there will typically also be a shared library file into which the C code has been built. Once you have these files, a simple [`CREATE EXTENSION`](sql-createextension.html "CREATE EXTENSION") command loads the objects into your database.
 
@@ -36,55 +34,53 @@ If an extension's script creates any temporary objects (such as temp tables), th
 
 ### 38.17.1. Extension Files [#](#EXTEND-EXTENSIONS-FILES)
 
-[]()
-
 The `CREATE EXTENSION` command relies on a control file for each extension, which must be named the same as the extension with a suffix of `.control`, and must be placed in the installation's `SHAREDIR/extension` directory. There must also be at least one SQL script file, which follows the naming pattern `extension--version.sql` (for example, `foo--1.0.sql` for version `1.0` of extension `foo`). By default, the script file(s) are also placed in the `SHAREDIR/extension` directory; but the control file can specify a different directory for the script file(s).
 
 The file format for an extension control file is the same as for the `postgresql.conf` file, namely a list of *`parameter_name`* `=` *`value`* assignments, one per line. Blank lines and comments introduced by `#` are allowed. Be sure to quote any value that is not a single word or number.
 
 A control file can set the following parameters:
 
-*   `directory` (`string`) [#](#EXTEND-EXTENSIONS-FILES-DIRECTORY)
+* `directory` (`string`) [#](#EXTEND-EXTENSIONS-FILES-DIRECTORY)
 
     The directory containing the extension's SQL script file(s). Unless an absolute path is given, the name is relative to the installation's `SHAREDIR` directory. The default behavior is equivalent to specifying `directory = 'extension'`.
 
-*   `default_version` (`string`) [#](#EXTEND-EXTENSIONS-FILES-DEFAULT-VERSION)
+* `default_version` (`string`) [#](#EXTEND-EXTENSIONS-FILES-DEFAULT-VERSION)
 
     The default version of the extension (the one that will be installed if no version is specified in `CREATE EXTENSION`). Although this can be omitted, that will result in `CREATE EXTENSION` failing if no `VERSION` option appears, so you generally don't want to do that.
 
-*   `comment` (`string`) [#](#EXTEND-EXTENSIONS-FILES-COMMENT)
+* `comment` (`string`) [#](#EXTEND-EXTENSIONS-FILES-COMMENT)
 
     A comment (any string) about the extension. The comment is applied when initially creating an extension, but not during extension updates (since that might override user-added comments). Alternatively, the extension's comment can be set by writing a [COMMENT](sql-comment.html "COMMENT") command in the script file.
 
-*   `encoding` (`string`) [#](#EXTEND-EXTENSIONS-FILES-ENCODING)
+* `encoding` (`string`) [#](#EXTEND-EXTENSIONS-FILES-ENCODING)
 
     The character set encoding used by the script file(s). This should be specified if the script files contain any non-ASCII characters. Otherwise the files will be assumed to be in the database encoding.
 
-*   `module_pathname` (`string`) [#](#EXTEND-EXTENSIONS-FILES-MODULE-PATHNAME)
+* `module_pathname` (`string`) [#](#EXTEND-EXTENSIONS-FILES-MODULE-PATHNAME)
 
     The value of this parameter will be substituted for each occurrence of `MODULE_PATHNAME` in the script file(s). If it is not set, no substitution is made. Typically, this is set to `$libdir/shared_library_name` and then `MODULE_PATHNAME` is used in `CREATE FUNCTION` commands for C-language functions, so that the script files do not need to hard-wire the name of the shared library.
 
-*   `requires` (`string`) [#](#EXTEND-EXTENSIONS-FILES-REQUIRES)
+* `requires` (`string`) [#](#EXTEND-EXTENSIONS-FILES-REQUIRES)
 
     A list of names of extensions that this extension depends on, for example `requires = 'foo, bar'`. Those extensions must be installed before this one can be installed.
 
-*   `no_relocate` (`string`) [#](#EXTEND-EXTENSIONS-FILES-NO-RELOCATE)
+* `no_relocate` (`string`) [#](#EXTEND-EXTENSIONS-FILES-NO-RELOCATE)
 
     A list of names of extensions that this extension depends on that should be barred from changing their schemas via `ALTER EXTENSION ... SET SCHEMA`. This is needed if this extension's script references the name of a required extension's schema (using the `@extschema:name@` syntax) in a way that cannot track renames.
 
-*   `superuser` (`boolean`) [#](#EXTEND-EXTENSIONS-FILES-SUPERUSER)
+* `superuser` (`boolean`) [#](#EXTEND-EXTENSIONS-FILES-SUPERUSER)
 
     If this parameter is `true` (which is the default), only superusers can create the extension or update it to a new version (but see also `trusted`, below). If it is set to `false`, just the privileges required to execute the commands in the installation or update script are required. This should normally be set to `true` if any of the script commands require superuser privileges. (Such commands would fail anyway, but it's more user-friendly to give the error up front.)
 
-*   `trusted` (`boolean`) [#](#EXTEND-EXTENSIONS-FILES-TRUSTED)
+* `trusted` (`boolean`) [#](#EXTEND-EXTENSIONS-FILES-TRUSTED)
 
     This parameter, if set to `true` (which is not the default), allows some non-superusers to install an extension that has `superuser` set to `true`. Specifically, installation will be permitted for anyone who has `CREATE` privilege on the current database. When the user executing `CREATE EXTENSION` is not a superuser but is allowed to install by virtue of this parameter, then the installation or update script is run as the bootstrap superuser, not as the calling user. This parameter is irrelevant if `superuser` is `false`. Generally, this should not be set true for extensions that could allow access to otherwise-superuser-only abilities, such as file system access. Also, marking an extension trusted requires significant extra effort to write the extension's installation and update script(s) securely; see [Section 38.17.6](extend-extensions.html#EXTEND-EXTENSIONS-SECURITY "38.17.6. Security Considerations for Extensions").
 
-*   `relocatable` (`boolean`) [#](#EXTEND-EXTENSIONS-FILES-RELOCATABLE)
+* `relocatable` (`boolean`) [#](#EXTEND-EXTENSIONS-FILES-RELOCATABLE)
 
     An extension is *relocatable* if it is possible to move its contained objects into a different schema after initial creation of the extension. The default is `false`, i.e., the extension is not relocatable. See [Section 38.17.2](extend-extensions.html#EXTEND-EXTENSIONS-RELOCATION "38.17.2. Extension Relocatability") for more information.
 
-*   `schema` (`string`) [#](#EXTEND-EXTENSIONS-FILES-SCHEMA)
+* `schema` (`string`) [#](#EXTEND-EXTENSIONS-FILES-SCHEMA)
 
     This parameter can only be set for non-relocatable extensions. It forces the extension to be loaded into exactly the named schema and not any other. The `schema` parameter is consulted only when initially creating an extension, not during extension updates. See [Section 38.17.2](extend-extensions.html#EXTEND-EXTENSIONS-RELOCATION "38.17.2. Extension Relocatability") for more information.
 
@@ -102,9 +98,9 @@ While the script files can contain any characters allowed by the specified encod
 
 Users often wish to load the objects contained in an extension into a different schema than the extension's author had in mind. There are three supported levels of relocatability:
 
-*   A fully relocatable extension can be moved into another schema at any time, even after it's been loaded into a database. This is done with the `ALTER EXTENSION SET SCHEMA` command, which automatically renames all the member objects into the new schema. Normally, this is only possible if the extension contains no internal assumptions about what schema any of its objects are in. Also, the extension's objects must all be in one schema to begin with (ignoring objects that do not belong to any schema, such as procedural languages). Mark a fully relocatable extension by setting `relocatable = true` in its control file.
-*   An extension might be relocatable during installation but not afterwards. This is typically the case if the extension's script file needs to reference the target schema explicitly, for example in setting `search_path` properties for SQL functions. For such an extension, set `relocatable = false` in its control file, and use `@extschema@` to refer to the target schema in the script file. All occurrences of this string will be replaced by the actual target schema's name (double-quoted if necessary) before the script is executed. The user can set the target schema using the `SCHEMA` option of `CREATE EXTENSION`.
-*   If the extension does not support relocation at all, set `relocatable = false` in its control file, and also set `schema` to the name of the intended target schema. This will prevent use of the `SCHEMA` option of `CREATE EXTENSION`, unless it specifies the same schema named in the control file. This choice is typically necessary if the extension contains internal assumptions about its schema name that can't be replaced by uses of `@extschema@`. The `@extschema@` substitution mechanism is available in this case too, although it is of limited use since the schema name is determined by the control file.
+* A fully relocatable extension can be moved into another schema at any time, even after it's been loaded into a database. This is done with the `ALTER EXTENSION SET SCHEMA` command, which automatically renames all the member objects into the new schema. Normally, this is only possible if the extension contains no internal assumptions about what schema any of its objects are in. Also, the extension's objects must all be in one schema to begin with (ignoring objects that do not belong to any schema, such as procedural languages). Mark a fully relocatable extension by setting `relocatable = true` in its control file.
+* An extension might be relocatable during installation but not afterwards. This is typically the case if the extension's script file needs to reference the target schema explicitly, for example in setting `search_path` properties for SQL functions. For such an extension, set `relocatable = false` in its control file, and use `@extschema@` to refer to the target schema in the script file. All occurrences of this string will be replaced by the actual target schema's name (double-quoted if necessary) before the script is executed. The user can set the target schema using the `SCHEMA` option of `CREATE EXTENSION`.
+* If the extension does not support relocation at all, set `relocatable = false` in its control file, and also set `schema` to the name of the intended target schema. This will prevent use of the `SCHEMA` option of `CREATE EXTENSION`, unless it specifies the same schema named in the control file. This choice is typically necessary if the extension contains internal assumptions about its schema name that can't be replaced by uses of `@extschema@`. The `@extschema@` substitution mechanism is available in this case too, although it is of limited use since the schema name is determined by the control file.
 
 In all cases, the script file will be executed with [search\_path](runtime-config-client.html#GUC-SEARCH-PATH) initially set to point to the target schema; that is, `CREATE EXTENSION` does the equivalent of this:
 
@@ -125,8 +121,6 @@ If an extension references objects belonging to another extension, it is recomme
 ### 38.17.3. Extension Configuration Tables [#](#EXTEND-EXTENSIONS-CONFIG-TABLES)
 
 Some extensions include configuration tables, which contain data that might be added or changed by the user after installation of the extension. Ordinarily, if a table is part of an extension, neither the table's definition nor its content will be dumped by pg\_dump. But that behavior is undesirable for a configuration table; any data changes made by the user need to be included in dumps, or the extension will behave differently after a dump and restore.
-
-[]()
 
 To solve this problem, an extension's script file can mark a table or a sequence it has created as a configuration relation, which will cause pg\_dump to include the table's or the sequence's contents (not its definition) in dumps. To do that, call the function `pg_extension_config_dump(regclass, text)` after creating the table or the sequence, for example
 

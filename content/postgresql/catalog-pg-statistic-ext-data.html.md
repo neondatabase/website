@@ -8,8 +8,6 @@
 
 ## 53.53. `pg_statistic_ext_data` [#](#CATALOG-PG-STATISTIC-EXT-DATA)
 
-[]()
-
 The catalog `pg_statistic_ext_data` holds data for extended planner statistics defined in [`pg_statistic_ext`](catalog-pg-statistic-ext.html "53.52. pg_statistic_ext"). Each row in this catalog corresponds to a *statistics object* created with [`CREATE STATISTICS`](sql-createstatistics.html "CREATE STATISTICS").
 
 Normally there is one entry, with `stxdinherit` = `false`, for each statistics object that has been analyzed. If the table has inheritance children or partitions, a second entry with `stxdinherit` = `true` is also created. This row represents the statistics object over the inheritance tree, i.e., statistics for the data you'd see with `SELECT * FROM table*`, whereas the `stxdinherit` = `false` row represents the results of `SELECT * FROM ONLY table`.

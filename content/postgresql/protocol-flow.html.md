@@ -8,17 +8,17 @@
 
 ## 55.2. Message Flow [#](#PROTOCOL-FLOW)
 
-*   *   [55.2.1. Start-up](protocol-flow.html#PROTOCOL-FLOW-START-UP)
-    *   [55.2.2. Simple Query](protocol-flow.html#PROTOCOL-FLOW-SIMPLE-QUERY)
-    *   [55.2.3. Extended Query](protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY)
-    *   [55.2.4. Pipelining](protocol-flow.html#PROTOCOL-FLOW-PIPELINING)
-    *   [55.2.5. Function Call](protocol-flow.html#PROTOCOL-FLOW-FUNCTION-CALL)
-    *   [55.2.6. COPY Operations](protocol-flow.html#PROTOCOL-COPY)
-    *   [55.2.7. Asynchronous Operations](protocol-flow.html#PROTOCOL-ASYNC)
-    *   [55.2.8. Canceling Requests in Progress](protocol-flow.html#PROTOCOL-FLOW-CANCELING-REQUESTS)
-    *   [55.2.9. Termination](protocol-flow.html#PROTOCOL-FLOW-TERMINATION)
-    *   [55.2.10. SSL Session Encryption](protocol-flow.html#PROTOCOL-FLOW-SSL)
-    *   [55.2.11. GSSAPI Session Encryption](protocol-flow.html#PROTOCOL-FLOW-GSSAPI)
+  * *   [55.2.1. Start-up](protocol-flow.html#PROTOCOL-FLOW-START-UP)
+* [55.2.2. Simple Query](protocol-flow.html#PROTOCOL-FLOW-SIMPLE-QUERY)
+* [55.2.3. Extended Query](protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY)
+* [55.2.4. Pipelining](protocol-flow.html#PROTOCOL-FLOW-PIPELINING)
+* [55.2.5. Function Call](protocol-flow.html#PROTOCOL-FLOW-FUNCTION-CALL)
+* [55.2.6. COPY Operations](protocol-flow.html#PROTOCOL-COPY)
+* [55.2.7. Asynchronous Operations](protocol-flow.html#PROTOCOL-ASYNC)
+* [55.2.8. Canceling Requests in Progress](protocol-flow.html#PROTOCOL-FLOW-CANCELING-REQUESTS)
+* [55.2.9. Termination](protocol-flow.html#PROTOCOL-FLOW-TERMINATION)
+* [55.2.10. SSL Session Encryption](protocol-flow.html#PROTOCOL-FLOW-SSL)
+* [55.2.11. GSSAPI Session Encryption](protocol-flow.html#PROTOCOL-FLOW-GSSAPI)
 
 This section describes the message flow and the semantics of each message type. (Details of the exact representation of each message appear in [Section 55.7](protocol-message-formats.html "55.7. Message Formats").) There are several different sub-protocols depending on the state of the connection: start-up, query, function call, `COPY`, and termination. There are also special provisions for asynchronous operations (including notification responses and command cancellation), which can occur at any time after the start-up phase.
 
@@ -32,51 +32,51 @@ The authentication cycle ends with the server either rejecting the connection at
 
 The possible messages from the server in this phase are:
 
-*   ErrorResponse
+* ErrorResponse
 
     The connection attempt has been rejected. The server then immediately closes the connection.
 
-*   AuthenticationOk
+* AuthenticationOk
 
     The authentication exchange is successfully completed.
 
-*   AuthenticationKerberosV5
+* AuthenticationKerberosV5
 
     The frontend must now take part in a Kerberos V5 authentication dialog (not described here, part of the Kerberos specification) with the server. If this is successful, the server responds with an AuthenticationOk, otherwise it responds with an ErrorResponse. This is no longer supported.
 
-*   AuthenticationCleartextPassword
+* AuthenticationCleartextPassword
 
     The frontend must now send a PasswordMessage containing the password in clear-text form. If this is the correct password, the server responds with an AuthenticationOk, otherwise it responds with an ErrorResponse.
 
-*   AuthenticationMD5Password
+* AuthenticationMD5Password
 
     The frontend must now send a PasswordMessage containing the password (with user name) encrypted via MD5, then encrypted again using the 4-byte random salt specified in the AuthenticationMD5Password message. If this is the correct password, the server responds with an AuthenticationOk, otherwise it responds with an ErrorResponse. The actual PasswordMessage can be computed in SQL as `concat('md5', md5(concat(md5(concat(password, username)), random-salt)))`. (Keep in mind the `md5()` function returns its result as a hex string.)
 
-*   AuthenticationGSS
+* AuthenticationGSS
 
     The frontend must now initiate a GSSAPI negotiation. The frontend will send a GSSResponse message with the first part of the GSSAPI data stream in response to this. If further messages are needed, the server will respond with AuthenticationGSSContinue.
 
-*   AuthenticationSSPI
+* AuthenticationSSPI
 
     The frontend must now initiate an SSPI negotiation. The frontend will send a GSSResponse with the first part of the SSPI data stream in response to this. If further messages are needed, the server will respond with AuthenticationGSSContinue.
 
-*   AuthenticationGSSContinue
+* AuthenticationGSSContinue
 
     This message contains the response data from the previous step of GSSAPI or SSPI negotiation (AuthenticationGSS, AuthenticationSSPI or a previous AuthenticationGSSContinue). If the GSSAPI or SSPI data in this message indicates more data is needed to complete the authentication, the frontend must send that data as another GSSResponse message. If GSSAPI or SSPI authentication is completed by this message, the server will next send AuthenticationOk to indicate successful authentication or ErrorResponse to indicate failure.
 
-*   AuthenticationSASL
+* AuthenticationSASL
 
     The frontend must now initiate a SASL negotiation, using one of the SASL mechanisms listed in the message. The frontend will send a SASLInitialResponse with the name of the selected mechanism, and the first part of the SASL data stream in response to this. If further messages are needed, the server will respond with AuthenticationSASLContinue. See [Section 55.3](sasl-authentication.html "55.3. SASL Authentication") for details.
 
-*   AuthenticationSASLContinue
+* AuthenticationSASLContinue
 
     This message contains challenge data from the previous step of SASL negotiation (AuthenticationSASL, or a previous AuthenticationSASLContinue). The frontend must respond with a SASLResponse message.
 
-*   AuthenticationSASLFinal
+* AuthenticationSASLFinal
 
     SASL authentication has completed with additional mechanism-specific data for the client. The server will next send AuthenticationOk to indicate successful authentication, or an ErrorResponse to indicate failure. This message is sent only if the SASL mechanism specifies additional data to be sent from server to client at completion.
 
-*   NegotiateProtocolVersion
+* NegotiateProtocolVersion
 
     The server does not support the minor protocol version requested by the client, but does support an earlier version of the protocol; this message indicates the highest supported minor version. This message will also be sent if the client requested unsupported protocol options (i.e., beginning with `_pq_.`) in the startup packet. This message will be followed by an ErrorResponse or a message indicating the success or failure of authentication.
 
@@ -88,23 +88,23 @@ During this phase the backend will attempt to apply any additional run-time para
 
 The possible messages from the backend in this phase are:
 
-*   BackendKeyData
+* BackendKeyData
 
     This message provides secret-key data that the frontend must save if it wants to be able to issue cancel requests later. The frontend should not respond to this message, but should continue listening for a ReadyForQuery message.
 
-*   ParameterStatus
+* ParameterStatus
 
     This message informs the frontend about the current (initial) setting of backend parameters, such as [client\_encoding](runtime-config-client.html#GUC-CLIENT-ENCODING) or [DateStyle](runtime-config-client.html#GUC-DATESTYLE). The frontend can ignore this message, or record the settings for its future use; see [Section 55.2.7](protocol-flow.html#PROTOCOL-ASYNC "55.2.7. Asynchronous Operations") for more details. The frontend should not respond to this message, but should continue listening for a ReadyForQuery message.
 
-*   ReadyForQuery
+* ReadyForQuery
 
     Start-up is completed. The frontend can now issue commands.
 
-*   ErrorResponse
+* ErrorResponse
 
     Start-up failed. The connection is closed after sending this message.
 
-*   NoticeResponse
+* NoticeResponse
 
     A warning message has been issued. The frontend should display the message but continue listening for ReadyForQuery or ErrorResponse.
 
@@ -116,39 +116,39 @@ A simple query cycle is initiated by the frontend sending a Query message to the
 
 The possible response messages from the backend are:
 
-*   CommandComplete
+* CommandComplete
 
     An SQL command completed normally.
 
-*   CopyInResponse
+* CopyInResponse
 
     The backend is ready to copy data from the frontend to a table; see [Section 55.2.6](protocol-flow.html#PROTOCOL-COPY "55.2.6. COPY Operations").
 
-*   CopyOutResponse
+* CopyOutResponse
 
     The backend is ready to copy data from a table to the frontend; see [Section 55.2.6](protocol-flow.html#PROTOCOL-COPY "55.2.6. COPY Operations").
 
-*   RowDescription
+* RowDescription
 
     Indicates that rows are about to be returned in response to a `SELECT`, `FETCH`, etc. query. The contents of this message describe the column layout of the rows. This will be followed by a DataRow message for each row being returned to the frontend.
 
-*   DataRow
+* DataRow
 
     One of the set of rows returned by a `SELECT`, `FETCH`, etc. query.
 
-*   EmptyQueryResponse
+* EmptyQueryResponse
 
     An empty query string was recognized.
 
-*   ErrorResponse
+* ErrorResponse
 
     An error has occurred.
 
-*   ReadyForQuery
+* ReadyForQuery
 
     Processing of the query string is complete. A separate message is sent to indicate this because the query string might contain multiple SQL commands. (CommandComplete marks the end of processing one SQL command, not the whole string.) ReadyForQuery will always be sent, whether processing terminates successfully or with an error.
 
-*   NoticeResponse
+* NoticeResponse
 
     A warning message has been issued in relation to the query. Notices are in addition to other responses, i.e., the backend will continue processing the command.
 
@@ -268,8 +268,6 @@ The simple Query message is approximately equivalent to the series Parse, Bind, 
 
 ### 55.2.4. Pipelining [#](#PROTOCOL-FLOW-PIPELINING)
 
-[]()
-
 Use of the extended query protocol allows *pipelining*, which means sending a series of queries without waiting for earlier ones to complete. This reduces the number of network round trips needed to complete a given series of operations. However, the user must carefully consider the required behavior if one of the steps fails, since later queries will already be in flight to the server.
 
 One way to deal with that is to make the whole query series be a single transaction, that is wrap it in `BEGIN` ... `COMMIT`. However, this does not help if one wishes for some of the commands to commit independently of others.
@@ -292,19 +290,19 @@ A Function Call cycle is initiated by the frontend sending a FunctionCall messag
 
 The possible response messages from the backend are:
 
-*   ErrorResponse
+* ErrorResponse
 
     An error has occurred.
 
-*   FunctionCallResponse
+* FunctionCallResponse
 
     The function call was completed and returned the result given in the message. (Note that the Function Call protocol can only handle a single scalar result, not a row type or set of results.)
 
-*   ReadyForQuery
+* ReadyForQuery
 
     Processing of the function call is complete. ReadyForQuery will always be sent, whether processing terminates successfully or with an error.
 
-*   NoticeResponse
+* NoticeResponse
 
     A warning message has been issued in relation to the function call. Notices are in addition to other responses, i.e., the backend will continue processing the command.
 

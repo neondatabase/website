@@ -8,13 +8,11 @@
 
 ## 34.19. SSL Support [#](#LIBPQ-SSL)
 
-*   *   [34.19.1. Client Verification of Server Certificates](libpq-ssl.html#LIBQ-SSL-CERTIFICATES)
-    *   [34.19.2. Client Certificates](libpq-ssl.html#LIBPQ-SSL-CLIENTCERT)
-    *   [34.19.3. Protection Provided in Different Modes](libpq-ssl.html#LIBPQ-SSL-PROTECTION)
-    *   [34.19.4. SSL Client File Usage](libpq-ssl.html#LIBPQ-SSL-FILEUSAGE)
-    *   [34.19.5. SSL Library Initialization](libpq-ssl.html#LIBPQ-SSL-INITIALIZE)
-
-[]()
+  * *   [34.19.1. Client Verification of Server Certificates](libpq-ssl.html#LIBQ-SSL-CERTIFICATES)
+* [34.19.2. Client Certificates](libpq-ssl.html#LIBPQ-SSL-CLIENTCERT)
+* [34.19.3. Protection Provided in Different Modes](libpq-ssl.html#LIBPQ-SSL-PROTECTION)
+* [34.19.4. SSL Client File Usage](libpq-ssl.html#LIBPQ-SSL-FILEUSAGE)
+* [34.19.5. SSL Library Initialization](libpq-ssl.html#LIBPQ-SSL-INITIALIZE)
 
 PostgreSQL has native support for using SSL connections to encrypt client/server communications using TLS protocols for increased security. See [Section 19.9](ssl-tcp.html "19.9. Secure TCP/IP Connections with SSL") for details about the server-side SSL functionality.
 
@@ -62,15 +60,15 @@ For instructions on creating certificates, see [Section 19.9.5](ssl-tcp.html#SS
 
 The different values for the `sslmode` parameter provide different levels of protection. SSL can provide protection against three types of attacks:
 
-*   Eavesdropping
+* Eavesdropping
 
     If a third party can examine the network traffic between the client and the server, it can read both connection information (including the user name and password) and the data that is passed. SSL uses encryption to prevent this.
 
-*   Man-in-the-middle (MITM)
+* Man-in-the-middle (MITM)
 
     If a third party can modify the data while passing between the client and server, it can pretend to be the server and therefore see and modify data *even if it is encrypted*. The third party can then forward the connection information and data to the original server, making it impossible to detect this attack. Common vectors to do this include DNS poisoning and address hijacking, whereby the client is directed to a different server than intended. There are also several other attack methods that can accomplish this. SSL uses certificate verification to prevent this, by authenticating the server to the client.
 
-*   Impersonation
+* Impersonation
 
     If a third party can pretend to be an authorized client, it can simply access data it should not have access to. Typically this can happen through insecure password management. SSL uses client certificates to prevent this, by making sure that only holders of valid certificates can access the server.
 
@@ -93,7 +91,6 @@ All SSL options carry overhead in the form of encryption and key-exchange, so th
 
 \
 
-
 The difference between `verify-ca` and `verify-full` depends on the policy of the root CA. If a public CA is used, `verify-ca` allows connections to a server that *somebody else* may have registered with the CA. In this case, `verify-full` should always be used. If a local CA is used, or even a self-signed certificate, using `verify-ca` often provides enough protection.
 
 The default value for `sslmode` is `prefer`. As is shown in the table, this makes no sense from a security point of view, and it only promises performance overhead if possible. It is only provided as the default for backward compatibility, and is not recommended in secure deployments.
@@ -115,7 +112,7 @@ The default value for `sslmode` is `prefer`. As is shown in the table, this make
 
 If your application initializes `libssl` and/or `libcrypto` libraries and libpq is built with SSL support, you should call [`PQinitOpenSSL`](libpq-ssl.html#LIBPQ-PQINITOPENSSL) to tell libpq that the `libssl` and/or `libcrypto` libraries have been initialized by your application, so that libpq will not also initialize those libraries. However, this is unnecessary when using OpenSSL version 1.1.0 or later, as duplicate initializations are no longer problematic.
 
-*   `PQinitOpenSSL`[]() [#](#LIBPQ-PQINITOPENSSL)
+* `PQinitOpenSSL` [#](#LIBPQ-PQINITOPENSSL)
 
     Allows applications to select which security libraries to initialize.
 
@@ -125,7 +122,7 @@ If your application initializes `libssl` and/or `libcrypto` libraries and libpq 
 
     If your application uses and initializes either OpenSSL or its underlying `libcrypto` library, you *must* call this function with zeroes for the appropriate parameter(s) before first opening a database connection. Also be sure that you have done that initialization before opening a database connection.
 
-*   `PQinitSSL`[]() [#](#LIBPQ-PQINITSSL)
+* `PQinitSSL` [#](#LIBPQ-PQINITSSL)
 
     Allows applications to select which security libraries to initialize.
 

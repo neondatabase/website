@@ -1,22 +1,20 @@
 <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
 
-|               38.13. User-Defined Types              |                                               |                           |                                                       |                                                     |
+|              38.13. User-Defined Types               |                                               |                           |                                                       |                                                     |
 | :--------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](xaggr.html "38.12. User-Defined Aggregates")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xoper.html "38.14. User-Defined Operators") |
+| [Prev](xaggr.html '38.12. User-Defined Aggregates')  | [Up](extend.html 'Chapter 38. Extending SQL') | Chapter 38. Extending SQL | [Home](index.html 'PostgreSQL 17devel Documentation') |  [Next](xoper.html '38.14. User-Defined Operators') |
 
-***
+---
 
 ## 38.13. User-Defined Types [#](#XTYPES)
 
-*   [38.13.1. TOAST Considerations](xtypes.html#XTYPES-TOAST)
+- [38.13.1. TOAST Considerations](xtypes.html#XTYPES-TOAST)
 
-[]()
-
-As described in [Section 38.2](extend-type-system.html "38.2. The PostgreSQL Type System"), PostgreSQL can be extended to support new data types. This section describes how to define new base types, which are data types defined below the level of the SQL language. Creating a new base type requires implementing functions to operate on the type in a low-level language, usually C.
+As described in [Section 38.2](extend-type-system.html '38.2. The PostgreSQL Type System'), PostgreSQL can be extended to support new data types. This section describes how to define new base types, which are data types defined below the level of the SQL language. Creating a new base type requires implementing functions to operate on the type in a low-level language, usually C.
 
 The examples in this section can be found in `complex.sql` and `complex.c` in the `src/tutorial` directory of the source distribution. See the `README` file in that directory for instructions about running the examples.
 
-[]()[]()A user-defined type must always have input and output functions. These functions determine how the type appears in strings (for input by the user and output to the user) and how the type is organized in memory. The input function takes a null-terminated character string as its argument and returns the internal (in memory) representation of the type. The output function takes the internal representation of the type as argument and returns a null-terminated character string. If we want to do anything more with the type than merely store it, we must provide additional functions to implement whatever operations we'd like to have for the type.
+A user-defined type must always have input and output functions. These functions determine how the type appears in strings (for input by the user and output to the user) and how the type is organized in memory. The input function takes a null-terminated character string as its argument and returns the internal (in memory) representation of the type. The output function takes the internal representation of the type as argument and returns a null-terminated character string. If we want to do anything more with the type than merely store it, we must provide additional functions to implement whatever operations we'd like to have for the type.
 
 Suppose we want to define a type `complex` that represents complex numbers. A natural way to represent a complex number in memory would be the following C structure:
 
@@ -136,19 +134,17 @@ Finally, we can provide the full definition of the data type:
        alignment = double
     );
 
-[]()When you define a new base type, PostgreSQL automatically provides support for arrays of that type. The array type typically has the same name as the base type with the underscore character (`_`) prepended.
+When you define a new base type, PostgreSQL automatically provides support for arrays of that type. The array type typically has the same name as the base type with the underscore character (`_`) prepended.
 
 Once the data type exists, we can declare additional functions to provide useful operations on the data type. Operators can then be defined atop the functions, and if needed, operator classes can be created to support indexing of the data type. These additional layers are discussed in following sections.
 
 If the internal representation of the data type is variable-length, the internal representation must follow the standard layout for variable-length data: the first four bytes must be a `char[4]` field which is never accessed directly (customarily named `vl_len_`). You must use the `SET_VARSIZE()` macro to store the total size of the datum (including the length field itself) in this field and `VARSIZE()` to retrieve it. (These macros exist because the length field may be encoded depending on platform.)
 
-For further details see the description of the [CREATE TYPE](sql-createtype.html "CREATE TYPE") command.
+For further details see the description of the [CREATE TYPE](sql-createtype.html 'CREATE TYPE') command.
 
 ### 38.13.1. TOAST Considerations [#](#XTYPES-TOAST)
 
-[]()
-
-If the values of your data type vary in size (in internal form), it's usually desirable to make the data type TOAST-able (see [Section 73.2](storage-toast.html "73.2. TOAST")). You should do this even if the values are always too small to be compressed or stored externally, because TOAST can save space on small data too, by reducing header overhead.
+If the values of your data type vary in size (in internal form), it's usually desirable to make the data type TOAST-able (see [Section 73.2](storage-toast.html '73.2. TOAST')). You should do this even if the values are always too small to be compressed or stored externally, because TOAST can save space on small data too, by reducing header overhead.
 
 To support TOAST storage, the C functions operating on the data type must always be careful to unpack any toasted values they are handed by using `PG_DETOAST_DATUM`. (This detail is customarily hidden by defining type-specific `GETARG_DATATYPE_P` macros.) Then, when running the `CREATE TYPE` command, specify the internal length as `variable` and select some appropriate storage option other than `plain`.
 
@@ -158,7 +154,7 @@ If data alignment is unimportant (either just for a specific function or because
 
 Older code frequently declares `vl_len_` as an `int32` field instead of `char[4]`. This is OK as long as the struct definition has other fields that have at least `int32` alignment. But it is dangerous to use such a struct definition when working with a potentially unaligned datum; the compiler may take it as license to assume the datum actually is aligned, leading to core dumps on architectures that are strict about alignment.
 
-Another feature that's enabled by TOAST support is the possibility of having an *expanded* in-memory data representation that is more convenient to work with than the format that is stored on disk. The regular or “flat” varlena storage format is ultimately just a blob of bytes; it cannot for example contain pointers, since it may get copied to other locations in memory. For complex data types, the flat format may be quite expensive to work with, so PostgreSQL provides a way to “expand” the flat format into a representation that is more suited to computation, and then pass that format in-memory between functions of the data type.
+Another feature that's enabled by TOAST support is the possibility of having an _expanded_ in-memory data representation that is more convenient to work with than the format that is stored on disk. The regular or “flat” varlena storage format is ultimately just a blob of bytes; it cannot for example contain pointers, since it may get copied to other locations in memory. For complex data types, the flat format may be quite expensive to work with, so PostgreSQL provides a way to “expand” the flat format into a representation that is more suited to computation, and then pass that format in-memory between functions of the data type.
 
 To use expanded storage, a data type must define an expanded format that follows the rules given in `src/include/utils/expandeddatum.h`, and provide functions to “expand” a flat varlena value into expanded format and “flatten” the expanded format back to the regular varlena representation. Then ensure that all C functions for the data type can accept either representation, possibly by converting one into the other immediately upon receipt. This does not require fixing all existing functions for the data type at once, because the standard `PG_DETOAST_DATUM` macro is defined to convert expanded inputs into regular flat format. Therefore, existing functions that work with the flat varlena format will continue to work, though slightly inefficiently, with expanded inputs; they need not be converted until and unless better performance is important.
 
@@ -168,9 +164,9 @@ The TOAST infrastructure not only allows regular varlena values to be distinguis
 
 For examples of working with expanded values, see the standard array infrastructure, particularly `src/backend/utils/adt/array_expanded.c`.
 
-***
+---
 
 |                                                      |                                                       |                                                     |
 | :--------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](xaggr.html "38.12. User-Defined Aggregates")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xoper.html "38.14. User-Defined Operators") |
-| 38.12. User-Defined Aggregates                       | [Home](index.html "PostgreSQL 17devel Documentation") |                       38.14. User-Defined Operators |
+| [Prev](xaggr.html '38.12. User-Defined Aggregates')  |     [Up](extend.html 'Chapter 38. Extending SQL')     |  [Next](xoper.html '38.14. User-Defined Operators') |
+| 38.12. User-Defined Aggregates                       | [Home](index.html 'PostgreSQL 17devel Documentation') |                       38.14. User-Defined Operators |

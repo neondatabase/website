@@ -6,8 +6,6 @@
 
 ***
 
-[]()[]()
-
 ## SAVEPOINT
 
 SAVEPOINT — define a new savepoint within the current transaction
@@ -24,7 +22,7 @@ A savepoint is a special mark inside a transaction that allows all commands that
 
 ## Parameters
 
-*   *`savepoint_name`*
+* *`savepoint_name`*
 
     The name to give to the new savepoint. If savepoints with the same name already exist, they will be inaccessible until newer identically-named savepoints are released.
 

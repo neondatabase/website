@@ -8,8 +8,6 @@
 
 ## 39.3. Writing Trigger Functions in C [#](#TRIGGER-INTERFACE)
 
-[]()[]()
-
 This section describes the low-level details of the interface to a trigger function. This information is only needed when writing trigger functions in C. If you are using a higher-level language then these details are handled for you. In most cases you should consider using a procedural language before writing your triggers in C. The documentation of each procedural language explains how to write a trigger in that language.
 
 Trigger functions must use the “version 1” function manager interface.
@@ -43,63 +41,63 @@ If this returns true, then it is safe to cast `fcinfo->context` to type `Trigger
 
 where the members are defined as follows:
 
-*   `type`
+* `type`
 
     Always `T_TriggerData`.
 
-*   `tg_event`
+* `tg_event`
 
     Describes the event for which the function is called. You can use the following macros to examine `tg_event`:
 
-    *   `TRIGGER_FIRED_BEFORE(tg_event)`
+  * `TRIGGER_FIRED_BEFORE(tg_event)`
 
         Returns true if the trigger fired before the operation.
 
-    *   `TRIGGER_FIRED_AFTER(tg_event)`
+  * `TRIGGER_FIRED_AFTER(tg_event)`
 
         Returns true if the trigger fired after the operation.
 
-    *   `TRIGGER_FIRED_INSTEAD(tg_event)`
+  * `TRIGGER_FIRED_INSTEAD(tg_event)`
 
         Returns true if the trigger fired instead of the operation.
 
-    *   `TRIGGER_FIRED_FOR_ROW(tg_event)`
+  * `TRIGGER_FIRED_FOR_ROW(tg_event)`
 
         Returns true if the trigger fired for a row-level event.
 
-    *   `TRIGGER_FIRED_FOR_STATEMENT(tg_event)`
+  * `TRIGGER_FIRED_FOR_STATEMENT(tg_event)`
 
         Returns true if the trigger fired for a statement-level event.
 
-    *   `TRIGGER_FIRED_BY_INSERT(tg_event)`
+  * `TRIGGER_FIRED_BY_INSERT(tg_event)`
 
         Returns true if the trigger was fired by an `INSERT` command.
 
-    *   `TRIGGER_FIRED_BY_UPDATE(tg_event)`
+  * `TRIGGER_FIRED_BY_UPDATE(tg_event)`
 
         Returns true if the trigger was fired by an `UPDATE` command.
 
-    *   `TRIGGER_FIRED_BY_DELETE(tg_event)`
+  * `TRIGGER_FIRED_BY_DELETE(tg_event)`
 
         Returns true if the trigger was fired by a `DELETE` command.
 
-    *   `TRIGGER_FIRED_BY_TRUNCATE(tg_event)`
+  * `TRIGGER_FIRED_BY_TRUNCATE(tg_event)`
 
         Returns true if the trigger was fired by a `TRUNCATE` command.
 
-*   `tg_relation`
+* `tg_relation`
 
     A pointer to a structure describing the relation that the trigger fired for. Look at `utils/rel.h` for details about this structure. The most interesting things are `tg_relation->rd_att` (descriptor of the relation tuples) and `tg_relation->rd_rel->relname` (relation name; the type is not `char*` but `NameData`; use `SPI_getrelname(tg_relation)` to get a `char*` if you need a copy of the name).
 
-*   `tg_trigtuple`
+* `tg_trigtuple`
 
     A pointer to the row for which the trigger was fired. This is the row being inserted, updated, or deleted. If this trigger was fired for an `INSERT` or `DELETE` then this is what you should return from the function if you don't want to replace the row with a different one (in the case of `INSERT`) or skip the operation. For triggers on foreign tables, values of system columns herein are unspecified.
 
-*   `tg_newtuple`
+* `tg_newtuple`
 
     A pointer to the new version of the row, if the trigger was fired for an `UPDATE`, and `NULL` if it is for an `INSERT` or a `DELETE`. This is what you have to return from the function if the event is an `UPDATE` and you don't want to replace this row by a different one or skip the operation. For triggers on foreign tables, values of system columns herein are unspecified.
 
-*   `tg_trigger`
+* `tg_trigger`
 
     A pointer to a structure of type `Trigger`, defined in `utils/reltrigger.h`:
 
@@ -128,23 +126,23 @@ where the members are defined as follows:
 
     where `tgname` is the trigger's name, `tgnargs` is the number of arguments in `tgargs`, and `tgargs` is an array of pointers to the arguments specified in the `CREATE TRIGGER` statement. The other members are for internal use only.
 
-*   `tg_trigslot`
+* `tg_trigslot`
 
     The slot containing `tg_trigtuple`, or a `NULL` pointer if there is no such tuple.
 
-*   `tg_newslot`
+* `tg_newslot`
 
     The slot containing `tg_newtuple`, or a `NULL` pointer if there is no such tuple.
 
-*   `tg_oldtable`
+* `tg_oldtable`
 
     A pointer to a structure of type `Tuplestorestate` containing zero or more rows in the format specified by `tg_relation`, or a `NULL` pointer if there is no `OLD TABLE` transition relation.
 
-*   `tg_newtable`
+* `tg_newtable`
 
     A pointer to a structure of type `Tuplestorestate` containing zero or more rows in the format specified by `tg_relation`, or a `NULL` pointer if there is no `NEW TABLE` transition relation.
 
-*   `tg_updatedcols`
+* `tg_updatedcols`
 
     For `UPDATE` triggers, a bitmap set indicating the columns that were updated by the triggering command. Generic trigger functions can use this to optimize actions by not having to deal with columns that were not changed.
 

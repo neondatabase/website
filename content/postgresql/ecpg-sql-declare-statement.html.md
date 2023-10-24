@@ -20,7 +20,7 @@ DECLARE STATEMENT — declare SQL statement identifier
 
 ## Parameters
 
-*   *`connection_name`* [#](#ECPG-SQL-DECLARE-STATEMENT-CONNECTION-NAME)
+* *`connection_name`* [#](#ECPG-SQL-DECLARE-STATEMENT-CONNECTION-NAME)
 
     A database connection name established by the `CONNECT` command.
 
@@ -28,7 +28,7 @@ DECLARE STATEMENT — declare SQL statement identifier
 
 <!---->
 
-*   *`statement_name`* [#](#ECPG-SQL-DECLARE-STATEMENT-STATEMENT-NAME)
+* *`statement_name`* [#](#ECPG-SQL-DECLARE-STATEMENT-STATEMENT-NAME)
 
     The name of an SQL statement identifier, either as an SQL identifier or a host variable.
 
