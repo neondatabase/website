@@ -25,7 +25,7 @@ const Select = (props) => {
     allItemsSelected,
     isItemSelected,
   } = props;
-  // once the user selects an item, the animation on hover should be disabled
+
   const [isSelected, setIsSelected] = useState(false);
   const { width: windowWidth } = useWindowSize();
 
@@ -108,7 +108,6 @@ const Select = (props) => {
 };
 
 export const selectPropTypes = {
-  currentSectionIndex: PropTypes.number.isRequired,
   activeItems: PropTypes.shape({
     activity: PropTypes.shape({
       title: PropTypes.string,

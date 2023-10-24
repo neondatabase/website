@@ -31,28 +31,23 @@ const icons = {
   storage: storageIcon,
 };
 
-const Metrics = ({
-  currentSectionIndex,
-  activeItems,
-  setActiveItems,
-  activeAnimations,
-  setActiveAnimations,
-}) => {
+const Metrics = ({ activeItems, setActiveItems, activeAnimations, setActiveAnimations }) => {
   const { width: windowWidth } = useWindowSize();
-  const [finalEstimatePrice, setFinalEstimatePrice] = useState({
-    activeItems: {
-      activity: {
-        title: 'Activity',
-      },
-      performance: {
-        title: 'Performance',
-      },
-      storage: {
-        title: 'Storage',
-      },
+
+  const [finalActiveTitles, setFinalActiveTitles] = useState({
+    activity: {
+      title: 'Activity',
+    },
+    performance: {
+      title: 'Performance',
+    },
+    storage: {
+      title: 'Storage',
     },
   });
+
   const [allItemsSelected, setAllItemsSelected] = useState(false);
+
   const computeTimeCost = useMemo(
     () => calculateComputeCost(activeItems.performance?.unit, activeItems.activity?.unit),
     [activeItems.performance?.unit, activeItems.activity?.unit]
@@ -69,19 +64,17 @@ const Metrics = ({
   );
 
   useEffect(() => {
-    setFinalEstimatePrice((finalEstimatePrice) => {
-      const newActiveItems = {
-        ...finalEstimatePrice.activeItems,
+    setFinalActiveTitles((prevTitles) => {
+      const newState = {
+        ...prevTitles,
         ...(activeItems.activity && { activity: activeItems.activity }),
         ...(activeItems.performance && { performance: activeItems.performance }),
         ...(activeItems.storage && { storage: activeItems.storage }),
       };
 
-      return {
-        activeItems: newActiveItems,
-      };
+      return newState;
     });
-  }, [activeItems, computeTimeCost, totalCost, allItemsSelected]);
+  }, [activeItems.activity, activeItems.performance, activeItems.storage]);
 
   useEffect(() => {
     if (activeItems.activity && activeItems.performance && activeItems.storage) {
@@ -108,7 +101,6 @@ const Metrics = ({
           setActiveItems={setActiveItems}
           activeAnimations={activeAnimations}
           setActiveAnimations={setActiveAnimations}
-          currentSectionIndex={currentSectionIndex}
           allItemsSelected={allItemsSelected}
           isItemSelected={isItemSelected}
         />
@@ -146,7 +138,7 @@ const Metrics = ({
           </p>
 
           <ul className="mt-6 pt-7 border-t border-gray-new-15 flex flex-col gap-y-[18px] sm:gap-y-4">
-            {Object.entries(finalEstimatePrice.activeItems).map(([key, value]) => {
+            {Object.entries(finalActiveTitles).map(([key, value]) => {
               const icon = icons[key];
               return (
                 <li className="flex items-center" key={value?.title}>
