@@ -115,7 +115,10 @@ const Metrics = ({
       ))}
 
       <m.div
-        className="flex h-[90vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100"
+        className={clsx(
+          'flex h-[90vh] min-h-[760px] flex-col justify-center md:h-auto md:min-h-fit md:mt-16 md:opacity-100',
+          !allItemsSelected && 'pointer-events-none'
+        )}
         initial={{ opacity: windowWidth < MOBILE_WIDTH ? 1 : 0.4 }}
         animate={{
           opacity: allItemsSelected || windowWidth < MOBILE_WIDTH ? 1 : 0.4,

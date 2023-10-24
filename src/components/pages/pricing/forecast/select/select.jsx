@@ -53,7 +53,6 @@ const Select = (props) => {
     <m.div
       className={clsx(
         'flex max-h-[975px] min-h-[760px] flex-col justify-center md:h-auto md:min-h-0 md:mt-16 md:opacity-100',
-        // pointer events none if the user has not selected the previous item
         !isItemSelected(index - 1) && 'pointer-events-none',
         className
       )}
