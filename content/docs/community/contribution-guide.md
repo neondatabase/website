@@ -2,7 +2,6 @@
 title: Documentation Contribution Guide
 subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
-isDraft: true
 updatedOn: '2023-10-23T15:04:17.292Z'
 ---
 

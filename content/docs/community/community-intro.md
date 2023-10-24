@@ -2,7 +2,6 @@
 title: Neon community
 subtitle: Learn how to get involved in the Neon community
 enableTableOfContents: true
-isDraft: true
 updatedOn: '2023-10-23T17:55:15.628Z'
 ---
 
