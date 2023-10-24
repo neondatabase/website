@@ -51,7 +51,7 @@ The **Connection Details** widget on the Neon **Dashboard** provides **Pooled co
 
 ## Optimize queries with PgBouncer and prepared statements
 
-Protocol-level prepared statements are now supported with Neon and PgBouncer as of the [PgBouncer 1.21.0 release](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_21_0). This capability can help you boost query performance while providing an added layer of protection against potential SQL injection attacks.
+Protocol-level prepared statements are supported with Neon and PgBouncer as of the [PgBouncer 1.21.0 release](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_21_0). Using prepared statements can help boost query performance while providing an added layer of protection against potential SQL injection attacks.
 
 ### Understanding prepared statements
 
