@@ -2,7 +2,7 @@
 title: Neon community
 subtitle: Learn how to get involved in the Neon community
 enableTableOfContents: true
-updatedOn: '2023-10-23T17:55:15.628Z'
+updatedOn: '2023-10-24T13:30:10.815Z'
 ---
 
 Neon has an enthusiastic and dynamic user community worldwide. Here's how you can get involved:
