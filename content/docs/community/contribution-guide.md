@@ -13,6 +13,14 @@ Open-source projects are always evolving. Contributing to documentation is a gre
 
 By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or you've noticed that a certain topic is missing, your contribution is always welcome and appreciated.
 
+<Admonition type="info" title="TL;DR: Contributing to the Neon Docs">
+The Neon docs hosted in the [neondatabase/website](https://github.com/neondatabase/website) repository, under the `/content/docs` directory.
+
+You can contribute by editing files on GitHub using the **Edit this page** link at the base of each Neon documentation page or by forking the [neondatabase/website](https://github.com/neondatabase/website) repository and submitting a pull request.
+
+Refer to the this guide for Markup and style guidelines.
+</Admonition>
+
 ## How to contribute
 
 The content for the documentation is located in the [neondatabase/website](https://github.com/neondatabase/website) repository, in the `/content/docs` directory. To contribute, you have two options:
