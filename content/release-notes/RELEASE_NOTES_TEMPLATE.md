@@ -2,7 +2,11 @@
 isDraft: true
 ---
 
-### Release note template
+### Title for new feature
+
+Describe new feature
+
+### Fixes & improvements
 
 - UI: The Neon Technical Preview invite code is now requested only at the first login.
 - UI: Added a cover to all password fields to protect passwords from view.
