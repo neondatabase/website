@@ -23,7 +23,6 @@
 
 \
 
-
 See [Section 8.15](arrays.html "8.15. Arrays") for more details about array operator behavior. See [Section 11.2](indexes-types.html "11.2. Index Types") for more details about which operators support indexed operations.
 
 [Table 9.54](functions-array.html#ARRAY-FUNCTIONS-TABLE "Table 9.54. Array Functions") shows the functions available for use with array types. See [Section 8.15](arrays.html "8.15. Arrays") for more information and examples of the use of these functions.
@@ -50,11 +49,10 @@ See [Section 8.15](arrays.html "8.15. Arrays") for more details about array op
 | `array_upper` ( `anyarray`, `integer` ) → `integer`Returns the upper bound of the requested array dimension.`array_upper(ARRAY[1,8,3,7], 1)` → `4`                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `cardinality` ( `anyarray` ) → `integer`Returns the total number of elements in the array, or 0 if the array is empty.`cardinality(ARRAY[[1,2],[3,4]])` → `4`                                                                                                                                                                                                                                                                                                                                                                                       |
 | `trim_array` ( *`array`* `anyarray`, *`n`* `integer` ) → `anyarray`Trims an array by removing the last *`n`* elements. If the array is multidimensional, only the first dimension is trimmed.`trim_array(ARRAY[1,2,3,4,5,6], 2)` → `{1,2,3,4}`                                                                                                                                                                                                                                                                                                      |
-| `unnest` ( `anyarray` ) → `setof anyelement`Expands an array into a set of rows. The array's elements are read out in storage order.`unnest(ARRAY[1,2])` →``      1  2 `unnest(ARRAY[['foo','bar'],['baz','quux']])` →``      foo  bar  baz  quux                                                                                                                                                                                                                                                                                                   |
+| `unnest` ( `anyarray` ) → `setof anyelement`Expands an array into a set of rows. The array's elements are read out in storage order.`unnest(ARRAY[1,2])` →``1  2 `unnest(ARRAY[['foo','bar'],['baz','quux']])` →``      foo  bar  baz  quux                                                                                                                                                                                                                                                                                                   |
 | `unnest` ( `anyarray`, `anyarray` \[, ... ] ) → `setof anyelement, anyelement [, ... ]`Expands multiple arrays (possibly of different data types) into a set of rows. If the arrays are not all the same length then the shorter ones are padded with `NULL`s. This form is only allowed in a query's FROM clause; see [Section 7.2.1.4](queries-table-expressions.html#QUERIES-TABLEFUNCTIONS "7.2.1.4. Table Functions").`select * from unnest(ARRAY[1,2], ARRAY['foo','bar','baz']) as x(a,b)` →``      a |  b ---+-----  1 | foo  2 | bar    | baz  |
 
 \
-
 
 See also [Section 9.21](functions-aggregate.html "9.21. Aggregate Functions") about the aggregate function `array_agg` for use with arrays.
 

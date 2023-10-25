@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE VIEW
 
 CREATE VIEW — define a new view
@@ -32,13 +30,13 @@ If a schema name is given (for example, `CREATE VIEW myschema.myview ...`) then 
 
 ## Parameters
 
-*   `TEMPORARY` or `TEMP`
+* `TEMPORARY` or `TEMP`
 
     If specified, the view is created as a temporary view. Temporary views are automatically dropped at the end of the current session. Existing permanent relations with the same name are not visible to the current session while the temporary view exists, unless they are referenced with schema-qualified names.
 
     If any of the tables referenced by the view are temporary, the view is created as a temporary view (whether `TEMPORARY` is specified or not).
 
-*   `RECURSIVE`
+* `RECURSIVE`
 
     Creates a recursive view. The syntax
 
@@ -56,45 +54,45 @@ If a schema name is given (for example, `CREATE VIEW myschema.myview ...`) then 
 
     A view column name list must be specified for a recursive view.
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of a view to be created.
 
-*   *`column_name`*
+* *`column_name`*
 
     An optional list of names to be used for columns of the view. If not given, the column names are deduced from the query.
 
-*   `WITH ( view_option_name [= view_option_value] [, ... ] )`
+* `WITH ( view_option_name [= view_option_value] [, ... ] )`
 
     This clause specifies optional parameters for a view; the following parameters are supported:
 
-    *   `check_option` (`enum`)
+  * `check_option` (`enum`)
 
         This parameter may be either `local` or `cascaded`, and is equivalent to specifying `WITH [ CASCADED | LOCAL ] CHECK OPTION` (see below).
 
-    *   `security_barrier` (`boolean`)
+  * `security_barrier` (`boolean`)
 
         This should be used if the view is intended to provide row-level security. See [Section 41.5](rules-privileges.html "41.5. Rules and Privileges") for full details.
 
-    *   `security_invoker` (`boolean`)
+  * `security_invoker` (`boolean`)
 
         This option causes the underlying base relations to be checked against the privileges of the user of the view rather than the view owner. See the notes below for full details.
 
     All of the above options can be changed on existing views using [`ALTER VIEW`](sql-alterview.html "ALTER VIEW").
 
-*   *`query`*
+* *`query`*
 
     A [`SELECT`](sql-select.html "SELECT") or [`VALUES`](sql-values.html "VALUES") command which will provide the columns and rows of the view.
 
-*   `WITH [ CASCADED | LOCAL ] CHECK OPTION`
+* `WITH [ CASCADED | LOCAL ] CHECK OPTION`
 
     This option controls the behavior of automatically updatable views. When this option is specified, `INSERT` and `UPDATE` commands on the view will be checked to ensure that new rows satisfy the view-defining condition (that is, the new rows are checked to ensure that they are visible through the view). If they are not, the update will be rejected. If the `CHECK OPTION` is not specified, `INSERT` and `UPDATE` commands on the view are allowed to create rows that are not visible through the view. The following check options are supported:
 
-    *   `LOCAL`
+  * `LOCAL`
 
         New rows are only checked against the conditions defined directly in the view itself. Any conditions defined on underlying base views are not checked (unless they also specify the `CHECK OPTION`).
 
-    *   `CASCADED`
+  * `CASCADED`
 
         New rows are checked against the conditions of the view and all underlying base views. If the `CHECK OPTION` is specified, and neither `LOCAL` nor `CASCADED` is specified, then `CASCADED` is assumed.
 
@@ -136,14 +134,12 @@ When `CREATE OR REPLACE VIEW` is used on an existing view, only the view's defin
 
 ### Updatable Views
 
-
-
 Simple views are automatically updatable: the system will allow `INSERT`, `UPDATE` and `DELETE` statements to be used on the view in the same way as on a regular table. A view is automatically updatable if it satisfies all of the following conditions:
 
-*   The view must have exactly one entry in its `FROM` list, which must be a table or another updatable view.
-*   The view definition must not contain `WITH`, `DISTINCT`, `GROUP BY`, `HAVING`, `LIMIT`, or `OFFSET` clauses at the top level.
-*   The view definition must not contain set operations (`UNION`, `INTERSECT` or `EXCEPT`) at the top level.
-*   The view's select list must not contain any aggregates, window functions or set-returning functions.
+* The view must have exactly one entry in its `FROM` list, which must be a table or another updatable view.
+* The view definition must not contain `WITH`, `DISTINCT`, `GROUP BY`, `HAVING`, `LIMIT`, or `OFFSET` clauses at the top level.
+* The view definition must not contain set operations (`UNION`, `INTERSECT` or `EXCEPT`) at the top level.
+* The view's select list must not contain any aggregates, window functions or set-returning functions.
 
 An automatically updatable view may contain a mix of updatable and non-updatable columns. A column is updatable if it is a simple reference to an updatable column of the underlying base relation; otherwise the column is read-only, and an error will be raised if an `INSERT` or `UPDATE` statement attempts to assign a value to it.
 

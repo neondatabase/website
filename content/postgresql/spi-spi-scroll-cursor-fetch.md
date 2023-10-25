@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_scroll\_cursor\_fetch
 
 SPI\_scroll\_cursor\_fetch — fetch some rows from a cursor
@@ -26,15 +24,15 @@ void SPI_scroll_cursor_fetch(Portal portal, FetchDirection direction,
 
 ## Arguments
 
-*   `Portal portal`
+* `Portal portal`
 
     portal containing the cursor
 
-*   `FetchDirection direction`
+* `FetchDirection direction`
 
     one of `FETCH_FORWARD`, `FETCH_BACKWARD`, `FETCH_ABSOLUTE` or `FETCH_RELATIVE`
 
-*   `long count`
+* `long count`
 
     number of rows to fetch for `FETCH_FORWARD` or `FETCH_BACKWARD`; absolute row number to fetch for `FETCH_ABSOLUTE`; or relative row number to fetch for `FETCH_RELATIVE`
 

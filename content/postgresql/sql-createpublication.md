@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE PUBLICATION
 
 CREATE PUBLICATION — define a new publication
@@ -35,11 +33,11 @@ A publication is essentially a group of tables whose data changes are intended t
 
 ## Parameters
 
-*   *`name`* [#](#SQL-CREATEPUBLICATION-NAME)
+* *`name`* [#](#SQL-CREATEPUBLICATION-NAME)
 
     The name of the new publication.
 
-*   `FOR TABLE` [#](#SQL-CREATEPUBLICATION-FOR-TABLE)
+* `FOR TABLE` [#](#SQL-CREATEPUBLICATION-FOR-TABLE)
 
     Specifies a list of tables to add to the publication. If `ONLY` is specified before the table name, only that table is added to the publication. If `ONLY` is not specified, the table and all its descendant tables (if any) are added. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included. This does not apply to a partitioned table, however. The partitions of a partitioned table are always implicitly considered part of the publication, so they are never explicitly added to the publication.
 
@@ -53,11 +51,11 @@ A publication is essentially a group of tables whose data changes are intended t
 
     When a partitioned table is added to a publication, all of its existing and future partitions are implicitly considered to be part of the publication. So, even operations that are performed directly on a partition are also published via publications that its ancestors are part of.
 
-*   `FOR ALL TABLES` [#](#SQL-CREATEPUBLICATION-FOR-ALL-TABLES)
+* `FOR ALL TABLES` [#](#SQL-CREATEPUBLICATION-FOR-ALL-TABLES)
 
     Marks the publication as one that replicates changes for all tables in the database, including tables created in the future.
 
-*   `FOR TABLES IN SCHEMA` [#](#SQL-CREATEPUBLICATION-FOR-TABLES-IN-SCHEMA)
+* `FOR TABLES IN SCHEMA` [#](#SQL-CREATEPUBLICATION-FOR-TABLES-IN-SCHEMA)
 
     Marks the publication as one that replicates changes for all tables in the specified list of schemas, including tables created in the future.
 
@@ -67,17 +65,17 @@ A publication is essentially a group of tables whose data changes are intended t
 
     When a partitioned table is published via schema level publication, all of its existing and future partitions are implicitly considered to be part of the publication, regardless of whether they are from the publication schema or not. So, even operations that are performed directly on a partition are also published via publications that its ancestors are part of.
 
-*   `WITH ( publication_parameter [= value] [, ... ] )` [#](#SQL-CREATEPUBLICATION-WITH)
+* `WITH ( publication_parameter [= value] [, ... ] )` [#](#SQL-CREATEPUBLICATION-WITH)
 
     This clause specifies optional parameters for a publication. The following parameters are supported:
 
-    *   `publish` (`string`) [#](#SQL-CREATEPUBLICATION-WITH-PUBLISH)
+  * `publish` (`string`) [#](#SQL-CREATEPUBLICATION-WITH-PUBLISH)
 
         This parameter determines which DML operations will be published by the new publication to the subscribers. The value is comma-separated list of operations. The allowed operations are `insert`, `update`, `delete`, and `truncate`. The default is to publish all actions, and so the default value for this option is `'insert, update, delete, truncate'`.
 
         This parameter only affects DML operations. In particular, the initial data synchronization (see [Section 31.7.1](logical-replication-architecture.html#LOGICAL-REPLICATION-SNAPSHOT "31.7.1. Initial Snapshot")) for logical replication does not take this parameter into account when copying existing table data.
 
-    *   `publish_via_partition_root` (`boolean`) [#](#SQL-CREATEPUBLICATION-WITH-PUBLISH-VIA-PARTITION-ROOT)
+  * `publish_via_partition_root` (`boolean`) [#](#SQL-CREATEPUBLICATION-WITH-PUBLISH-VIA-PARTITION-ROOT)
 
         This parameter determines whether changes in a partitioned table (or on its partitions) contained in the publication will be published using the identity and schema of the partitioned table rather than that of the individual partitions that are actually changed; the latter is the default. Enabling this allows the changes to be replicated into a non-partitioned table or a partitioned table consisting of a different set of partitions.
 

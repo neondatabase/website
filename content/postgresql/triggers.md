@@ -10,12 +10,10 @@
 
 **Table of Contents**
 
-*   *   [39.1. Overview of Trigger Behavior](trigger-definition.html)
-    *   [39.2. Visibility of Data Changes](trigger-datachanges.html)
-    *   [39.3. Writing Trigger Functions in C](trigger-interface.html)
-    *   [39.4. A Complete Trigger Example](trigger-example.html)
-
-
+  * *   [39.1. Overview of Trigger Behavior](trigger-definition.html)
+  * [39.2. Visibility of Data Changes](trigger-datachanges.html)
+  * [39.3. Writing Trigger Functions in C](trigger-interface.html)
+  * [39.4. A Complete Trigger Example](trigger-example.html)
 
 This chapter provides general information about writing trigger functions. Trigger functions can be written in most of the available procedural languages, including PL/pgSQL ([Chapter 43](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language")), PL/Tcl ([Chapter 44](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language")), PL/Perl ([Chapter 45](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language")), and PL/Python ([Chapter 46](plpython.html "Chapter 46. PL/Python — Python Procedural Language")). After reading this chapter, you should consult the chapter for your favorite procedural language to find out the language-specific details of writing a trigger in it.
 

@@ -8,8 +8,6 @@
 
 ## F.44. test\_decoding — SQL-based test/example module for WAL logical decoding [#](#TEST-DECODING)
 
-
-
 `test_decoding` is an example of a logical decoding output plugin. It doesn't do anything especially useful, but can serve as a starting point for developing your own output plugin.
 
 `test_decoding` receives WAL through the logical decoding mechanism and decodes it into text representations of the operations performed.

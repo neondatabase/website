@@ -8,8 +8,6 @@
 
 ## 9.5. Binary String Functions and Operators [#](#FUNCTIONS-BINARYSTRING)
 
-
-
 This section describes functions and operators for examining and manipulating binary strings, that is values of type `bytea`. Many of these are equivalent, in purpose and syntax, to the text-string functions described in the previous section.
 
 SQL defines some string functions that use key words, rather than commas, to separate arguments. Details are in [Table 9.11](functions-binarystring.html#FUNCTIONS-BINARYSTRING-SQL "Table 9.11. SQL Binary String Functions and Operators"). PostgreSQL also provides versions of these functions that use the regular function invocation syntax (see [Table 9.12](functions-binarystring.html#FUNCTIONS-BINARYSTRING-OTHER "Table 9.12. Other Binary String Functions")).
@@ -31,7 +29,6 @@ SQL defines some string functions that use key words, rather than commas, to sep
 | `trim` ( \[ `LEADING` \| `TRAILING` \| `BOTH` ] \[ `FROM` ] *`bytes`* `bytea`, *`bytesremoved`* `bytea` ) → `bytea`This is a non-standard syntax for `trim()`.`trim(both from '\x1234567890'::bytea, '\x9012'::bytea)` → `\x345678`                                                                                                                                                                                                     |
 
 \
-
 
 Additional binary string manipulation functions are available and are listed in [Table 9.12](functions-binarystring.html#FUNCTIONS-BINARYSTRING-OTHER "Table 9.12. Other Binary String Functions"). Some of them are used internally to implement the SQL-standard string functions listed in [Table 9.11](functions-binarystring.html#FUNCTIONS-BINARYSTRING-SQL "Table 9.11. SQL Binary String Functions and Operators").
 
@@ -55,7 +52,6 @@ Additional binary string manipulation functions are available and are listed in 
 
 \
 
-
 Functions `get_byte` and `set_byte` number the first byte of a binary string as byte 0. Functions `get_bit` and `set_bit` number bits from the right within each byte; for example bit 0 is the least significant bit of the first byte, and bit 15 is the most significant bit of the second byte.
 
 For historical reasons, the function `md5` returns a hex-encoded value of type `text` whereas the SHA-2 functions return type `bytea`. Use the functions [`encode`](functions-binarystring.html#FUNCTION-ENCODE) and [`decode`](functions-binarystring.html#FUNCTION-DECODE) to convert between the two. For example write `encode(sha256('abc'), 'hex')` to get a hex-encoded text representation, or `decode(md5('abc'), 'hex')` to get a `bytea` value.
@@ -74,18 +70,17 @@ Functions for converting strings between different character sets (encodings), a
 
 \
 
-
 The `encode` and `decode` functions support the following textual formats:
 
-*   base64 [#](#ENCODE-FORMAT-BASE64)
+* base64 [#](#ENCODE-FORMAT-BASE64)
 
     The `base64` format is that of [RFC 2045 Section 6.8](https://tools.ietf.org/html/rfc2045#section-6.8). As per the RFC, encoded lines are broken at 76 characters. However instead of the MIME CRLF end-of-line marker, only a newline is used for end-of-line. The `decode` function ignores carriage-return, newline, space, and tab characters. Otherwise, an error is raised when `decode` is supplied invalid base64 data — including when trailing padding is incorrect.
 
-*   escape [#](#ENCODE-FORMAT-ESCAPE)
+* escape [#](#ENCODE-FORMAT-ESCAPE)
 
     The `escape` format converts zero bytes and bytes with the high bit set into octal escape sequences (`\`*`nnn`*), and it doubles backslashes. Other byte values are represented literally. The `decode` function will raise an error if a backslash is not followed by either a second backslash or three octal digits; it accepts other byte values unchanged.
 
-*   hex [#](#ENCODE-FORMAT-HEX)
+* hex [#](#ENCODE-FORMAT-HEX)
 
     The `hex` format represents each 4 bits of data as one hexadecimal digit, `0` through `f`, writing the higher-order digit of each byte first. The `encode` function outputs the `a`-`f` hex digits in lower case. Because the smallest unit of data is 8 bits, there are always an even number of characters returned by `encode`. The `decode` function accepts the `a`-`f` characters in either upper or lower case. An error is raised when `decode` is given invalid hex data — including when given an odd number of characters.
 

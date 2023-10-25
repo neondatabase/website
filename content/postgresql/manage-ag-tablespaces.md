@@ -8,8 +8,6 @@
 
 ## 23.6. Tablespaces [#](#MANAGE-AG-TABLESPACES)
 
-
-
 Tablespaces in PostgreSQL allow database administrators to define locations in the file system where the files representing database objects can be stored. Once created, a tablespace can be referred to by name when creating database objects.
 
 By using tablespaces, an administrator can control the disk layout of a PostgreSQL installation. This is useful in at least two ways. First, if the partition or volume on which the cluster was initialized runs out of space and cannot be extended, a tablespace can be created on a different partition and used until the system can be reconfigured.
@@ -62,7 +60,7 @@ Once created, a tablespace can be used from any database, provided the requestin
 
 To remove an empty tablespace, use the [DROP TABLESPACE](sql-droptablespace.html "DROP TABLESPACE") command.
 
-To determine the set of existing tablespaces, examine the [`pg_tablespace` ](catalog-pg-tablespace.html "53.56. pg_tablespace")system catalog, for example
+To determine the set of existing tablespaces, examine the [`pg_tablespace`](catalog-pg-tablespace.html "53.56. pg_tablespace")system catalog, for example
 
 ```
 

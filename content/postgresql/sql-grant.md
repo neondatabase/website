@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## GRANT
 
 GRANT — define access privileges
@@ -125,15 +123,15 @@ The right to drop an object, or to alter its definition in any way, is not treat
 
 The possible privileges are:
 
-*   `SELECT``INSERT``UPDATE``DELETE``TRUNCATE``REFERENCES``TRIGGER``CREATE``CONNECT``TEMPORARY``EXECUTE``USAGE``SET``ALTER SYSTEM`
+* `SELECT``INSERT``UPDATE``DELETE``TRUNCATE``REFERENCES``TRIGGER``CREATE``CONNECT``TEMPORARY``EXECUTE``USAGE``SET``ALTER SYSTEM`
 
     Specific types of privileges, as defined in [Section 5.7](ddl-priv.html "5.7. Privileges").
 
-*   `TEMP`
+* `TEMP`
 
     Alternative spelling for `TEMPORARY`.
 
-*   `ALL PRIVILEGES`
+* `ALL PRIVILEGES`
 
     Grant all of the privileges available for the object's type. The `PRIVILEGES` key word is optional in PostgreSQL, though it is required by strict SQL.
 

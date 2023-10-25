@@ -20,7 +20,6 @@ Server-side functions tailored for manipulating large objects from SQL are liste
 
 \
 
-
 There are additional server-side functions corresponding to each of the client-side functions described earlier; indeed, for the most part the client-side functions are simply interfaces to the equivalent server-side functions. The ones just as convenient to call via SQL commands are `lo_creat`, `lo_create`, `lo_unlink`, `lo_import`, and `lo_export`. Here are examples of their use:
 
 ```

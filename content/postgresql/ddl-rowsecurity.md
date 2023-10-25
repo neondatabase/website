@@ -8,8 +8,6 @@
 
 ## 5.8. Row Security Policies [#](#DDL-ROWSECURITY)
 
-
-
 In addition to the SQL-standard [privilege system](ddl-priv.html "5.7. Privileges") available through [GRANT](sql-grant.html "GRANT"), tables can have *row security policies* that restrict, on a per-user basis, which rows can be returned by normal queries or inserted, updated, or deleted by data modification commands. This feature is also known as *Row-Level Security*. By default, tables do not have any policies, so that if a user has access privileges to a table according to the SQL privilege system, all rows within it are equally available for querying or updating.
 
 When row security is enabled on a table (with [ALTER TABLE ... ENABLE ROW LEVEL SECURITY](sql-altertable.html "ALTER TABLE")), all normal access to the table for selecting rows or modifying rows must be allowed by a row security policy. (However, the table's owner is typically not subject to row security policies.) If no policy exists for the table, a default-deny policy is used, meaning that no rows are visible or can be modified. Operations that apply to the whole table, such as `TRUNCATE` and `REFERENCES`, are not subject to row security.

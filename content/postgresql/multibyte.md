@@ -8,13 +8,11 @@
 
 ## 24.3. Character Set Support [#](#MULTIBYTE)
 
-*   *   [24.3.1. Supported Character Sets](multibyte.html#MULTIBYTE-CHARSET-SUPPORTED)
-    *   [24.3.2. Setting the Character Set](multibyte.html#MULTIBYTE-SETTING)
-    *   [24.3.3. Automatic Character Set Conversion Between Server and Client](multibyte.html#MULTIBYTE-AUTOMATIC-CONVERSION)
-    *   [24.3.4. Available Character Set Conversions](multibyte.html#MULTIBYTE-CONVERSIONS-SUPPORTED)
-    *   [24.3.5. Further Reading](multibyte.html#MULTIBYTE-FURTHER-READING)
-
-
+  * *   [24.3.1. Supported Character Sets](multibyte.html#MULTIBYTE-CHARSET-SUPPORTED)
+  * [24.3.2. Setting the Character Set](multibyte.html#MULTIBYTE-SETTING)
+  * [24.3.3. Automatic Character Set Conversion Between Server and Client](multibyte.html#MULTIBYTE-AUTOMATIC-CONVERSION)
+  * [24.3.4. Available Character Set Conversions](multibyte.html#MULTIBYTE-CONVERSIONS-SUPPORTED)
+  * [24.3.5. Further Reading](multibyte.html#MULTIBYTE-FURTHER-READING)
 
 The character set support in PostgreSQL allows you to store text in a variety of character sets (also called encodings), including single-byte character sets such as the ISO 8859 series and multiple-byte character sets such as EUC (Extended Unix Code), UTF-8, and Mule internal code. All supported character sets can be used transparently by clients, but a few are not supported for use within the server (that is, as a server-side encoding). The default character set is selected while initializing your PostgreSQL database cluster using `initdb`. It can be overridden when you create a database, so you can have multiple databases each with a different character set.
 
@@ -72,7 +70,6 @@ An important restriction, however, is that each database's character set must be
 | `WIN1258`        | Windows CP1258                    | Vietnamese                     | Yes     | Yes  | 1           | `ABC`, `TCVN`, `TCVN5712`, `VSCII`            |
 
 \
-
 
 Not all client APIs support all the listed character sets. For example, the PostgreSQL JDBC driver does not support `MULE_INTERNAL`, `LATIN6`, `LATIN8`, and `LATIN10`.
 
@@ -135,16 +132,16 @@ PostgreSQL supports automatic character set conversion between server and client
 
 To enable automatic character set conversion, you have to tell PostgreSQL the character set (encoding) you would like to use in the client. There are several ways to accomplish this:
 
-*   Using the `\encoding` command in psql. `\encoding` allows you to change client encoding on the fly. For example, to change the encoding to `SJIS`, type:
+* Using the `\encoding` command in psql. `\encoding` allows you to change client encoding on the fly. For example, to change the encoding to `SJIS`, type:
 
     ```
 
     \encoding SJIS
     ```
 
-*   libpq ([Section 34.11](libpq-control.html "34.11. Control Functions")) has functions to control the client encoding.
+* libpq ([Section 34.11](libpq-control.html "34.11. Control Functions")) has functions to control the client encoding.
 
-*   Using `SET client_encoding TO`. Setting the client encoding can be done with this SQL command:
+* Using `SET client_encoding TO`. Setting the client encoding can be done with this SQL command:
 
     ```
 
@@ -172,9 +169,9 @@ To enable automatic character set conversion, you have to tell PostgreSQL the ch
     RESET client_encoding;
     ```
 
-*   Using `PGCLIENTENCODING`. If the environment variable `PGCLIENTENCODING` is defined in the client's environment, that client encoding is automatically selected when a connection to the server is made. (This can subsequently be overridden using any of the other methods mentioned above.)
+* Using `PGCLIENTENCODING`. If the environment variable `PGCLIENTENCODING` is defined in the client's environment, that client encoding is automatically selected when a connection to the server is made. (This can subsequently be overridden using any of the other methods mentioned above.)
 
-*   Using the configuration variable [client\_encoding](runtime-config-client.html#GUC-CLIENT-ENCODING). If the `client_encoding` variable is set, that client encoding is automatically selected when a connection to the server is made. (This can subsequently be overridden using any of the other methods mentioned above.)
+* Using the configuration variable [client\_encoding](runtime-config-client.html#GUC-CLIENT-ENCODING). If the `client_encoding` variable is set, that client encoding is automatically selected when a connection to the server is made. (This can subsequently be overridden using any of the other methods mentioned above.)
 
 If the conversion of a particular character is not possible — suppose you chose `EUC_JP` for the server and `LATIN1` for the client, and some Japanese characters are returned that do not have a representation in `LATIN1` — an error is reported.
 
@@ -232,7 +229,6 @@ PostgreSQL allows conversion between any two character sets for which a conversi
 | `WIN1258`            | *WIN1258*, `UTF8`                                                                                                                                     |
 
 \
-
 
 **Table 24.5. All Built-in Character Set Conversions**
 
@@ -368,15 +364,15 @@ PostgreSQL allows conversion between any two character sets for which a conversi
 
 These are good sources to start learning about various kinds of encoding systems.
 
-*   *CJKV Information Processing: Chinese, Japanese, Korean & Vietnamese Computing*
+* *CJKV Information Processing: Chinese, Japanese, Korean & Vietnamese Computing*
 
     Contains detailed explanations of `EUC_JP`, `EUC_CN`, `EUC_KR`, `EUC_TW`.
 
-*   <https://www.unicode.org/>
+* <https://www.unicode.org/>
 
     The web site of the Unicode Consortium.
 
-*   [RFC 3629](https://tools.ietf.org/html/rfc3629)
+* [RFC 3629](https://tools.ietf.org/html/rfc3629)
 
     UTF-8 (8-bit UCS/Unicode Transformation Format) is defined here.
 

@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_palloc
 
 SPI\_palloc — allocate memory in the upper executor context
@@ -27,7 +25,7 @@ This function can only be used while connected to SPI. Otherwise, it throws an e
 
 ## Arguments
 
-*   `Size size`
+* `Size size`
 
     size in bytes of storage to allocate
 

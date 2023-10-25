@@ -8,8 +8,6 @@
 
 ## 9.17. Sequence Manipulation Functions [#](#FUNCTIONS-SEQUENCE)
 
-
-
 This section describes functions for operating on *sequence objects*, also called sequence generators or just sequences. Sequence objects are special single-row tables created with [CREATE SEQUENCE](sql-createsequence.html "CREATE SEQUENCE"). Sequence objects are commonly used to generate unique identifiers for rows of a table. The sequence functions, listed in [Table 9.52](functions-sequence.html#FUNCTIONS-SEQUENCE-TABLE "Table 9.52. Sequence Functions"), provide simple, multiuser-safe methods for obtaining successive sequence values from sequence objects.
 
 **Table 9.52. Sequence Functions**
@@ -22,7 +20,6 @@ This section describes functions for operating on *sequence objects*, also calle
 | `lastval` () → `bigint`Returns the value most recently returned by `nextval` in the current session. This function is identical to `currval`, except that instead of taking the sequence name as an argument it refers to whichever sequence `nextval` was most recently applied to in the current session. It is an error to call `lastval` if `nextval` has not yet been called in the current session.This function requires `USAGE` or `SELECT` privilege on the last used sequence.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 \
-
 
 ### Caution
 

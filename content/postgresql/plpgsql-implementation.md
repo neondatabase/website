@@ -8,8 +8,8 @@
 
 ## 43.11. PL/pgSQL under the Hood [#](#PLPGSQL-IMPLEMENTATION)
 
-*   *   [43.11.1. Variable Substitution](plpgsql-implementation.html#PLPGSQL-VAR-SUBST)
-    *   [43.11.2. Plan Caching](plpgsql-implementation.html#PLPGSQL-PLAN-CACHING)
+  * *   [43.11.1. Variable Substitution](plpgsql-implementation.html#PLPGSQL-VAR-SUBST)
+  * [43.11.2. Plan Caching](plpgsql-implementation.html#PLPGSQL-PLAN-CACHING)
 
 This section discusses some implementation details that are frequently important for PL/pgSQL users to know.
 
@@ -54,8 +54,6 @@ BEGIN
 Here `block.foo` means the variable even if there is a column `foo` in `src`. Function parameters, as well as special variables such as `FOUND`, can be qualified by the function's name, because they are implicitly declared in an outer block labeled with the function's name.
 
 Sometimes it is impractical to fix all the ambiguous references in a large body of PL/pgSQL code. In such cases you can specify that PL/pgSQL should resolve ambiguous references as the variable (which is compatible with PL/pgSQL's behavior before PostgreSQL 9.0), or as the table column (which is compatible with some other systems such as Oracle).
-
-
 
 To change this behavior on a system-wide basis, set the configuration parameter `plpgsql.variable_conflict` to one of `error`, `use_variable`, or `use_column` (where `error` is the factory default). This parameter affects subsequent compilations of statements in PL/pgSQL functions, but not statements already compiled in the current session. Because changing this setting can cause unexpected changes in the behavior of PL/pgSQL functions, it can only be changed by a superuser.
 

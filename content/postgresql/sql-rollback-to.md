@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ROLLBACK TO SAVEPOINT
 
 ROLLBACK TO SAVEPOINT — roll back to a savepoint
@@ -27,7 +25,7 @@ Roll back all commands that were executed after the savepoint was established an
 
 ## Parameters
 
-*   *`savepoint_name`*
+* *`savepoint_name`*
 
     The savepoint to roll back to.
 

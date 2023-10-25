@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## dblink\_disconnect
 
 dblink\_disconnect — closes a persistent connection to a remote database
@@ -26,7 +24,7 @@ dblink_disconnect(text connname) returns text
 
 ## Arguments
 
-*   *`connname`*
+* *`connname`*
 
     The name of a named connection to be closed.
 

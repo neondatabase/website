@@ -8,9 +8,7 @@
 
 ## 38.13. User-Defined Types [#](#XTYPES)
 
-*   [38.13.1. TOAST Considerations](xtypes.html#XTYPES-TOAST)
-
-
+* [38.13.1. TOAST Considerations](xtypes.html#XTYPES-TOAST)
 
 As described in [Section 38.2](extend-type-system.html "38.2. The PostgreSQL Type System"), PostgreSQL can be extended to support new data types. This section describes how to define new base types, which are data types defined below the level of the SQL language. Creating a new base type requires implementing functions to operate on the type in a low-level language, usually C.
 
@@ -166,8 +164,6 @@ If the internal representation of the data type is variable-length, the internal
 For further details see the description of the [CREATE TYPE](sql-createtype.html "CREATE TYPE") command.
 
 ### 38.13.1. TOAST Considerations [#](#XTYPES-TOAST)
-
-
 
 If the values of your data type vary in size (in internal form), it's usually desirable to make the data type TOAST-able (see [Section 73.2](storage-toast.html "73.2. TOAST")). You should do this even if the values are always too small to be compressed or stored externally, because TOAST can save space on small data too, by reducing header overhead.
 

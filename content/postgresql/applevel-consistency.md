@@ -8,8 +8,8 @@
 
 ## 13.4. Data Consistency Checks at the Application Level [#](#APPLEVEL-CONSISTENCY)
 
-*   *   [13.4.1. Enforcing Consistency with Serializable Transactions](applevel-consistency.html#SERIALIZABLE-CONSISTENCY)
-    *   [13.4.2. Enforcing Consistency with Explicit Blocking Locks](applevel-consistency.html#NON-SERIALIZABLE-CONSISTENCY)
+  * *   [13.4.1. Enforcing Consistency with Serializable Transactions](applevel-consistency.html#SERIALIZABLE-CONSISTENCY)
+  * [13.4.2. Enforcing Consistency with Explicit Blocking Locks](applevel-consistency.html#NON-SERIALIZABLE-CONSISTENCY)
 
 It is very difficult to enforce business rules regarding data integrity using Read Committed transactions because the view of the data is shifting with each statement, and even a single statement may not restrict itself to the statement's snapshot if a write conflict occurs.
 

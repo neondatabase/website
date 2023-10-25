@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## DROP ACCESS METHOD
 
 DROP ACCESS METHOD — remove an access method
@@ -25,19 +23,19 @@ DROP ACCESS METHOD [ IF EXISTS ] name [ CASCADE | RESTRICT ]
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the access method does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name of an existing access method.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically drop objects that depend on the access method (such as operator classes, operator families, and indexes), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse to drop the access method if any objects depend on it. This is the default.
 

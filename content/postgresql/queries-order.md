@@ -8,8 +8,6 @@
 
 ## 7.5. Sorting Rows (`ORDER BY`) [#](#QUERIES-ORDER)
 
-
-
 After a query has produced an output table (after the select list has been processed) it can optionally be sorted. If sorting is not chosen, the rows will be returned in an unspecified order. The actual order in that case will depend on the scan and join plan types and the order on disk, but it must not be relied on. A particular output ordering can only be guaranteed if the sort step is explicitly chosen.
 
 The `ORDER BY` clause specifies the sort order:

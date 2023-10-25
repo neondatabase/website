@@ -8,17 +8,17 @@
 
 ## 15.4. Parallel Safety [#](#PARALLEL-SAFETY)
 
-*   [15.4.1. Parallel Labeling for Functions and Aggregates](parallel-safety.html#PARALLEL-LABELING)
+* [15.4.1. Parallel Labeling for Functions and Aggregates](parallel-safety.html#PARALLEL-LABELING)
 
 The planner classifies operations involved in a query as either *parallel safe*, *parallel restricted*, or *parallel unsafe*. A parallel safe operation is one that does not conflict with the use of parallel query. A parallel restricted operation is one that cannot be performed in a parallel worker, but that can be performed in the leader while parallel query is in use. Therefore, parallel restricted operations can never occur below a `Gather` or `Gather Merge` node, but can occur elsewhere in a plan that contains such a node. A parallel unsafe operation is one that cannot be performed while parallel query is in use, not even in the leader. When a query contains anything that is parallel unsafe, parallel query is completely disabled for that query.
 
 The following operations are always parallel restricted:
 
-*   Scans of common table expressions (CTEs).
-*   Scans of temporary tables.
-*   Scans of foreign tables, unless the foreign data wrapper has an `IsForeignScanParallelSafe` API that indicates otherwise.
-*   Plan nodes to which an `InitPlan` is attached.
-*   Plan nodes that reference a correlated `SubPlan`.
+* Scans of common table expressions (CTEs).
+* Scans of temporary tables.
+* Scans of foreign tables, unless the foreign data wrapper has an `IsForeignScanParallelSafe` API that indicates otherwise.
+* Plan nodes to which an `InitPlan` is attached.
+* Plan nodes that reference a correlated `SubPlan`.
 
 ### 15.4.1. Parallel Labeling for Functions and Aggregates [#](#PARALLEL-LABELING)
 

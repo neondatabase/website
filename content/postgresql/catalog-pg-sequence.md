@@ -8,8 +8,6 @@
 
 ## 53.47. `pg_sequence` [#](#CATALOG-PG-SEQUENCE)
 
-
-
 The catalog `pg_sequence` contains information about sequences. Some of the information about sequences, such as the name and the schema, is in [`pg_class`](catalog-pg-class.html "53.11. pg_class")
 
 **Table 53.47. `pg_sequence` Columns**

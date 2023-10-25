@@ -8,8 +8,6 @@
 
 ## 53.24. `pg_foreign_server` [#](#CATALOG-PG-FOREIGN-SERVER)
 
-
-
 The catalog `pg_foreign_server` stores foreign server definitions. A foreign server describes a source of external data, such as a remote server. Foreign servers are accessed via foreign-data wrappers.
 
 **Table 53.24. `pg_foreign_server` Columns**

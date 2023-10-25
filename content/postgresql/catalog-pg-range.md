@@ -8,8 +8,6 @@
 
 ## 53.43. `pg_range` [#](#CATALOG-PG-RANGE)
 
-
-
 The catalog `pg_range` stores information about range types. This is in addition to the types' entries in [`pg_type`](catalog-pg-type.html "53.64. pg_type").
 
 **Table 53.43. `pg_range` Columns**
@@ -25,7 +23,6 @@ The catalog `pg_range` stores information about range types. This is in addition
 | `rngsubdiff` `regproc` (references [`pg_proc`](catalog-pg-proc.html "53.39. pg_proc").`oid`)OID of the function to return the difference between two element values as `double precision`, or zero if none |
 
 \
-
 
 `rngsubopc` (plus `rngcollation`, if the element type is collatable) determines the sort ordering used by the range type. `rngcanonical` is used when the element type is discrete. `rngsubdiff` is optional but should be supplied to improve performance of GiST indexes on the range type.
 

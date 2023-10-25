@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## DELETE
 
 DELETE — delete rows of a table
@@ -39,35 +37,35 @@ You must have the `DELETE` privilege on the table to delete from it, as well as 
 
 ## Parameters
 
-*   *`with_query`*
+* *`with_query`*
 
     The `WITH` clause allows you to specify one or more subqueries that can be referenced by name in the `DELETE` query. See [Section 7.8](queries-with.html "7.8. WITH Queries (Common Table Expressions)") and [SELECT](sql-select.html "SELECT") for details.
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (optionally schema-qualified) of the table to delete rows from. If `ONLY` is specified before the table name, matching rows are deleted from the named table only. If `ONLY` is not specified, matching rows are also deleted from any tables inheriting from the named table. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included.
 
-*   *`alias`*
+* *`alias`*
 
     A substitute name for the target table. When an alias is provided, it completely hides the actual name of the table. For example, given `DELETE FROM foo AS f`, the remainder of the `DELETE` statement must refer to this table as `f` not `foo`.
 
-*   *`from_item`*
+* *`from_item`*
 
     A table expression allowing columns from other tables to appear in the `WHERE` condition. This uses the same syntax as the [`FROM`](sql-select.html#SQL-FROM "FROM Clause") clause of a `SELECT` statement; for example, an alias for the table name can be specified. Do not repeat the target table as a *`from_item`* unless you wish to set up a self-join (in which case it must appear with an alias in the *`from_item`*).
 
-*   *`condition`*
+* *`condition`*
 
     An expression that returns a value of type `boolean`. Only rows for which this expression returns `true` will be deleted.
 
-*   *`cursor_name`*
+* *`cursor_name`*
 
     The name of the cursor to use in a `WHERE CURRENT OF` condition. The row to be deleted is the one most recently fetched from this cursor. The cursor must be a non-grouping query on the `DELETE`'s target table. Note that `WHERE CURRENT OF` cannot be specified together with a Boolean condition. See [DECLARE](sql-declare.html "DECLARE") for more information about using cursors with `WHERE CURRENT OF`.
 
-*   *`output_expression`*
+* *`output_expression`*
 
     An expression to be computed and returned by the `DELETE` command after each row is deleted. The expression can use any column names of the table named by *`table_name`* or table(s) listed in `USING`. Write `*` to return all columns.
 
-*   *`output_name`*
+* *`output_name`*
 
     A name to use for a returned column.
 

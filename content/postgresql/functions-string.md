@@ -8,7 +8,7 @@
 
 ## 9.4. String Functions and Operators [#](#FUNCTIONS-STRING)
 
-*   [9.4.1. `format`](functions-string.html#FUNCTIONS-STRING-FORMAT)
+* [9.4.1. `format`](functions-string.html#FUNCTIONS-STRING-FORMAT)
 
 This section describes functions and operators for examining and manipulating string values. Strings in this context include values of the types `character`, `character varying`, and `text`. Except where noted, these functions and operators are declared to accept and return type `text`. They will interchangeably accept `character varying` arguments. Values of type `character` will be converted to `text` before the function or operator is applied, resulting in stripping any trailing spaces in the `character` value.
 
@@ -46,7 +46,6 @@ The string concatenation operator (`||`) will accept non-string input, so long a
 | `upper` ( `text` ) → `text`Converts the string to all upper case, according to the rules of the database's locale.`upper('tom')` → `TOM`                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 \
-
 
 Additional string manipulation functions and operators are available and are listed in [Table 9.10](functions-string.html#FUNCTIONS-STRING-OTHER "Table 9.10. Other String Functions and Operators"). (Some of these are used internally to implement the SQL-standard string functions listed in [Table 9.9](functions-string.html#FUNCTIONS-STRING-SQL "Table 9.9. SQL String Functions and Operators").) There are also pattern-matching operators, which are described in [Section 9.7](functions-matching.html "9.7. Pattern Matching"), and operators for full-text search, which are described in [Chapter 12](textsearch.html "Chapter 12. Full Text Search").
 
@@ -100,14 +99,11 @@ Additional string manipulation functions and operators are available and are lis
 
 \
 
-
 The `concat`, `concat_ws` and `format` functions are variadic, so it is possible to pass the values to be concatenated or formatted as an array marked with the `VARIADIC` keyword (see [Section 38.5.6](xfunc-sql.html#XFUNC-SQL-VARIADIC-FUNCTIONS "38.5.6. SQL Functions with Variable Numbers of Arguments")). The array's elements are treated as if they were separate ordinary arguments to the function. If the variadic array argument is NULL, `concat` and `concat_ws` return NULL, but `format` treats a NULL as a zero-element array.
 
 See also the aggregate function `string_agg` in [Section 9.21](functions-aggregate.html "9.21. Aggregate Functions"), and the functions for converting between strings and the `bytea` type in [Table 9.13](functions-binarystring.html#FUNCTIONS-BINARYSTRING-CONVERSIONS "Table 9.13. Text/Binary String Conversion Functions").
 
 ### 9.4.1. `format` [#](#FUNCTIONS-STRING-FORMAT)
-
-
 
 The function `format` produces output formatted according to a format string, in a style similar to the C function `sprintf`.
 
@@ -127,27 +123,27 @@ Format specifiers are introduced by a `%` character and have the form
 
 where the component fields are:
 
-*   *`position`* (optional)
+* *`position`* (optional)
 
     A string of the form `n$` where *`n`* is the index of the argument to print. Index 1 means the first argument after *`formatstr`*. If the *`position`* is omitted, the default is to use the next argument in sequence.
 
-*   *`flags`* (optional)
+* *`flags`* (optional)
 
     Additional options controlling how the format specifier's output is formatted. Currently the only supported flag is a minus sign (`-`) which will cause the format specifier's output to be left-justified. This has no effect unless the *`width`* field is also specified.
 
-*   *`width`* (optional)
+* *`width`* (optional)
 
     Specifies the *minimum* number of characters to use to display the format specifier's output. The output is padded on the left or right (depending on the `-` flag) with spaces as needed to fill the width. A too-small width does not cause truncation of the output, but is simply ignored. The width may be specified using any of the following: a positive integer; an asterisk (`*`) to use the next function argument as the width; or a string of the form `*n$` to use the *`n`*th function argument as the width.
 
     If the width comes from a function argument, that argument is consumed before the argument that is used for the format specifier's value. If the width argument is negative, the result is left aligned (as if the `-` flag had been specified) within a field of length `abs`(*`width`*).
 
-*   *`type`* (required)
+* *`type`* (required)
 
     The type of format conversion to use to produce the format specifier's output. The following types are supported:
 
-    *   `s` formats the argument value as a simple string. A null value is treated as an empty string.
-    *   `I` treats the argument value as an SQL identifier, double-quoting it if necessary. It is an error for the value to be null (equivalent to `quote_ident`).
-    *   `L` quotes the argument value as an SQL literal. A null value is displayed as the string `NULL`, without quotes (equivalent to `quote_nullable`).
+  * `s` formats the argument value as a simple string. A null value is treated as an empty string.
+  * `I` treats the argument value as an SQL identifier, double-quoting it if necessary. It is an error for the value to be null (equivalent to `quote_ident`).
+  * `L` quotes the argument value as an SQL literal. A null value is displayed as the string `NULL`, without quotes (equivalent to `quote_nullable`).
 
 In addition to the format specifiers described above, the special sequence `%%` may be used to output a literal `%` character.
 

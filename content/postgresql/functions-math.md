@@ -36,7 +36,6 @@ Mathematical operators are provided for many PostgreSQL types. For types without
 
 \
 
-
 [Table 9.5](functions-math.html#FUNCTIONS-MATH-FUNC-TABLE "Table 9.5. Mathematical Functions") shows the available mathematical functions. Many of these functions are provided in multiple forms with different argument types. Except where noted, any given form of a function returns the same data type as its argument(s); cross-type cases are resolved in the same way as explained above for operators. The functions working with `double precision` data are mostly implemented on top of the host system's C library; accuracy and behavior in boundary cases can therefore vary depending on the host system.
 
 **Table 9.5. Mathematical Functions**
@@ -78,7 +77,6 @@ Mathematical operators are provided for many PostgreSQL types. For types without
 
 \
 
-
 [Table 9.6](functions-math.html#FUNCTIONS-MATH-RANDOM-TABLE "Table 9.6. Random Functions") shows functions for generating random numbers.
 
 **Table 9.6. Random Functions**
@@ -90,7 +88,6 @@ Mathematical operators are provided for many PostgreSQL types. For types without
 | `setseed` ( `double precision` ) → `void`Sets the seed for subsequent `random()` and `random_normal()` calls; argument must be between -1.0 and 1.0, inclusive`setseed(0.12345)`                                                                                                            |
 
 \
-
 
 The `random()` function uses a deterministic pseudo-random number generator. It is fast but not suitable for cryptographic applications; see the [pgcrypto](pgcrypto.html "F.27. pgcrypto — cryptographic functions") module for a more secure alternative. If `setseed()` is called, the series of results of subsequent `random()` calls in the current session can be repeated by re-issuing `setseed()` with the same argument. Without any prior `setseed()` call in the same session, the first `random()` call obtains a seed from a platform-dependent source of random bits. These remarks hold equally for `random_normal()`.
 
@@ -118,7 +115,6 @@ The `random()` function uses a deterministic pseudo-random number generator. It 
 | `tand` ( `double precision` ) → `double precision`Tangent, argument in degrees`tand(45)` → `1`                                                                           |
 
 \
-
 
 ### Note
 

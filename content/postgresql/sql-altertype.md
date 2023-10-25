@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER TYPE
 
 ALTER TYPE — change the definition of a type
@@ -36,55 +34,55 @@ where action is one of:
 
 `ALTER TYPE` changes the definition of an existing type. There are several subforms:
 
-*   `OWNER`
+* `OWNER`
 
     This form changes the owner of the type.
 
-*   `RENAME`
+* `RENAME`
 
     This form changes the name of the type.
 
-*   `SET SCHEMA`
+* `SET SCHEMA`
 
     This form moves the type into another schema.
 
-*   `RENAME ATTRIBUTE`
+* `RENAME ATTRIBUTE`
 
     This form is only usable with composite types. It changes the name of an individual attribute of the type.
 
-*   `ADD ATTRIBUTE`
+* `ADD ATTRIBUTE`
 
     This form adds a new attribute to a composite type, using the same syntax as [`CREATE TYPE`](sql-createtype.html "CREATE TYPE").
 
-*   `DROP ATTRIBUTE [ IF EXISTS ]`
+* `DROP ATTRIBUTE [ IF EXISTS ]`
 
     This form drops an attribute from a composite type. If `IF EXISTS` is specified and the attribute does not exist, no error is thrown. In this case a notice is issued instead.
 
-*   `ALTER ATTRIBUTE ... SET DATA TYPE`
+* `ALTER ATTRIBUTE ... SET DATA TYPE`
 
     This form changes the type of an attribute of a composite type.
 
-*   `ADD VALUE [ IF NOT EXISTS ] [ BEFORE | AFTER ]`
+* `ADD VALUE [ IF NOT EXISTS ] [ BEFORE | AFTER ]`
 
     This form adds a new value to an enum type. The new value's place in the enum's ordering can be specified as being `BEFORE` or `AFTER` one of the existing values. Otherwise, the new item is added at the end of the list of values.
 
     If `IF NOT EXISTS` is specified, it is not an error if the type already contains the new value: a notice is issued but no other action is taken. Otherwise, an error will occur if the new value is already present.
 
-*   `RENAME VALUE`
+* `RENAME VALUE`
 
     This form renames a value of an enum type. The value's place in the enum's ordering is not affected. An error will occur if the specified value is not present or the new name is already present.
 
-*   `SET ( property = value [, ... ] )`
+* `SET ( property = value [, ... ] )`
 
     This form is only applicable to base types. It allows adjustment of a subset of the base-type properties that can be set in `CREATE TYPE`. Specifically, these properties can be changed:
 
-    *   `RECEIVE` can be set to the name of a binary input function, or `NONE` to remove the type's binary input function. Using this option requires superuser privilege.
-    *   `SEND` can be set to the name of a binary output function, or `NONE` to remove the type's binary output function. Using this option requires superuser privilege.
-    *   `TYPMOD_IN` can be set to the name of a type modifier input function, or `NONE` to remove the type's type modifier input function. Using this option requires superuser privilege.
-    *   `TYPMOD_OUT` can be set to the name of a type modifier output function, or `NONE` to remove the type's type modifier output function. Using this option requires superuser privilege.
-    *   `ANALYZE` can be set to the name of a type-specific statistics collection function, or `NONE` to remove the type's statistics collection function. Using this option requires superuser privilege.
-    *   `SUBSCRIPT` can be set to the name of a type-specific subscripting handler function, or `NONE` to remove the type's subscripting handler function. Using this option requires superuser privilege.
-    *   `STORAGE` can be set to `plain`, `extended`, `external`, or `main` (see [Section 73.2](storage-toast.html "73.2. TOAST") for more information about what these mean). However, changing from `plain` to another setting requires superuser privilege (because it requires that the type's C functions all be TOAST-ready), and changing to `plain` from another setting is not allowed at all (since the type may already have TOASTed values present in the database). Note that changing this option doesn't by itself change any stored data, it just sets the default TOAST strategy to be used for table columns created in the future. See [ALTER TABLE](sql-altertable.html "ALTER TABLE") to change the TOAST strategy for existing table columns.
+  * `RECEIVE` can be set to the name of a binary input function, or `NONE` to remove the type's binary input function. Using this option requires superuser privilege.
+  * `SEND` can be set to the name of a binary output function, or `NONE` to remove the type's binary output function. Using this option requires superuser privilege.
+  * `TYPMOD_IN` can be set to the name of a type modifier input function, or `NONE` to remove the type's type modifier input function. Using this option requires superuser privilege.
+  * `TYPMOD_OUT` can be set to the name of a type modifier output function, or `NONE` to remove the type's type modifier output function. Using this option requires superuser privilege.
+  * `ANALYZE` can be set to the name of a type-specific statistics collection function, or `NONE` to remove the type's statistics collection function. Using this option requires superuser privilege.
+  * `SUBSCRIPT` can be set to the name of a type-specific subscripting handler function, or `NONE` to remove the type's subscripting handler function. Using this option requires superuser privilege.
+  * `STORAGE` can be set to `plain`, `extended`, `external`, or `main` (see [Section 73.2](storage-toast.html "73.2. TOAST") for more information about what these mean). However, changing from `plain` to another setting requires superuser privilege (because it requires that the type's C functions all be TOAST-ready), and changing to `plain` from another setting is not allowed at all (since the type may already have TOASTed values present in the database). Note that changing this option doesn't by itself change any stored data, it just sets the default TOAST strategy to be used for table columns created in the future. See [ALTER TABLE](sql-altertable.html "ALTER TABLE") to change the TOAST strategy for existing table columns.
 
     See [CREATE TYPE](sql-createtype.html "CREATE TYPE") for more details about these type properties. Note that where appropriate, a change in these properties for a base type will be propagated automatically to domains based on that type.
 
@@ -94,55 +92,55 @@ You must own the type to use `ALTER TYPE`. To change the schema of a type, you m
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (possibly schema-qualified) of an existing type to alter.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name for the type.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The user name of the new owner of the type.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the type.
 
-*   *`attribute_name`*
+* *`attribute_name`*
 
     The name of the attribute to add, alter, or drop.
 
-*   *`new_attribute_name`*
+* *`new_attribute_name`*
 
     The new name of the attribute to be renamed.
 
-*   *`data_type`*
+* *`data_type`*
 
     The data type of the attribute to add, or the new type of the attribute to alter.
 
-*   *`new_enum_value`*
+* *`new_enum_value`*
 
     The new value to be added to an enum type's list of values, or the new name to be given to an existing value. Like all enum literals, it needs to be quoted.
 
-*   *`neighbor_enum_value`*
+* *`neighbor_enum_value`*
 
     The existing enum value that the new value should be added immediately before or after in the enum type's sort ordering. Like all enum literals, it needs to be quoted.
 
-*   *`existing_enum_value`*
+* *`existing_enum_value`*
 
     The existing enum value that should be renamed. Like all enum literals, it needs to be quoted.
 
-*   *`property`*
+* *`property`*
 
     The name of a base-type property to be modified; see above for possible values.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically propagate the operation to typed tables of the type being altered, and their descendants.
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse the operation if the type being altered is the type of a typed table. This is the default.
 

@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_commit
 
 SPI\_commit, SPI\_commit\_and\_chain — commit the current transaction

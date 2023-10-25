@@ -8,8 +8,6 @@
 
 ## 53.19. `pg_description` [#](#CATALOG-PG-DESCRIPTION)
 
-
-
 The catalog `pg_description` stores optional descriptions (comments) for each database object. Descriptions can be manipulated with the [`COMMENT`](sql-comment.html "COMMENT") command and viewed with psql's `\d` commands. Descriptions of many built-in system objects are provided in the initial contents of `pg_description`.
 
 See also [`pg_shdescription`](catalog-pg-shdescription.html "53.49. pg_shdescription"), which performs a similar function for descriptions involving objects that are shared across a database cluster.

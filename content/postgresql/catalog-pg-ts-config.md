@@ -8,8 +8,6 @@
 
 ## 53.59. `pg_ts_config` [#](#CATALOG-PG-TS-CONFIG)
 
-
-
 The `pg_ts_config` catalog contains entries representing text search configurations. A configuration specifies a particular text search parser and a list of dictionaries to use for each of the parser's output token types. The parser is shown in the `pg_ts_config` entry, but the token-to-dictionary mapping is defined by subsidiary entries in [`pg_ts_config_map`](catalog-pg-ts-config-map.html "53.60. pg_ts_config_map").
 
 PostgreSQL's text search features are described at length in [Chapter 12](textsearch.html "Chapter 12. Full Text Search").

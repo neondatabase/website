@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## START TRANSACTION
 
 START TRANSACTION — start a transaction block

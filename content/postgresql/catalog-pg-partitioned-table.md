@@ -8,8 +8,6 @@
 
 ## 53.37. `pg_partitioned_table` [#](#CATALOG-PG-PARTITIONED-TABLE)
 
-
-
 The catalog `pg_partitioned_table` stores information about how tables are partitioned.
 
 **Table 53.37. `pg_partitioned_table` Columns**

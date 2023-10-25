@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_cursor\_find
 
 SPI\_cursor\_find — find an existing cursor by name
@@ -25,7 +23,7 @@ Portal SPI_cursor_find(const char * name)
 
 ## Arguments
 
-*   `const char * name`
+* `const char * name`
 
     name of the portal
 

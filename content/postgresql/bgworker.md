@@ -8,8 +8,6 @@
 
 ## Chapter 48. Background Worker Processes
 
-
-
 PostgreSQL can be extended to run user-supplied code in separate processes. Such processes are started, stopped and monitored by `postgres`, which permits them to have a lifetime closely linked to the server's status. These processes are attached to PostgreSQL's shared memory area and have the option to connect to databases internally; they can also run multiple transactions serially, just like a regular client-connected server process. Also, by linking to libpq they can connect to the server and behave like a regular client application.
 
 ### Warning
@@ -42,11 +40,11 @@ typedef struct BackgroundWorker
 
 `bgw_flags` is a bitwise-or'd bit mask indicating the capabilities that the module wants. Possible values are:
 
-*   `BGWORKER_SHMEM_ACCESS`
+* `BGWORKER_SHMEM_ACCESS`
 
     Requests shared memory access. This flag is required.
 
-*   `BGWORKER_BACKEND_DATABASE_CONNECTION`
+* `BGWORKER_BACKEND_DATABASE_CONNECTION`
 
     Requests the ability to establish a database connection through which it can later run transactions and queries. A background worker using `BGWORKER_BACKEND_DATABASE_CONNECTION` to connect to a database must also attach shared memory using `BGWORKER_SHMEM_ACCESS`, or worker start-up will fail.
 

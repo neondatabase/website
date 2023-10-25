@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE SEQUENCE
 
 CREATE SEQUENCE — define a new sequence generator
@@ -43,55 +41,55 @@ to examine the parameters and current state of a sequence. In particular, the `l
 
 ## Parameters
 
-*   `TEMPORARY` or `TEMP`
+* `TEMPORARY` or `TEMP`
 
     If specified, the sequence object is created only for this session, and is automatically dropped on session exit. Existing permanent sequences with the same name are not visible (in this session) while the temporary sequence exists, unless they are referenced with schema-qualified names.
 
-*   `UNLOGGED`
+* `UNLOGGED`
 
     If specified, the sequence is created as an unlogged sequence. Changes to unlogged sequences are not written to the write-ahead log. They are not crash-safe: an unlogged sequence is automatically reset to its initial state after a crash or unclean shutdown. Unlogged sequences are also not replicated to standby servers.
 
     Unlike unlogged tables, unlogged sequences do not offer a significant performance advantage. This option is mainly intended for sequences associated with unlogged tables via identity columns or serial columns. In those cases, it usually wouldn't make sense to have the sequence WAL-logged and replicated but not its associated table.
 
-*   `IF NOT EXISTS`
+* `IF NOT EXISTS`
 
     Do not throw an error if a relation with the same name already exists. A notice is issued in this case. Note that there is no guarantee that the existing relation is anything like the sequence that would have been created — it might not even be a sequence.
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of the sequence to be created.
 
-*   *`data_type`*
+* *`data_type`*
 
     The optional clause `AS data_type` specifies the data type of the sequence. Valid types are `smallint`, `integer`, and `bigint`. `bigint` is the default. The data type determines the default minimum and maximum values of the sequence.
 
-*   *`increment`*
+* *`increment`*
 
     The optional clause `INCREMENT BY increment` specifies which value is added to the current sequence value to create a new value. A positive value will make an ascending sequence, a negative one a descending sequence. The default value is 1.
 
-*   *`minvalue`*`NO MINVALUE`
+* *`minvalue`*`NO MINVALUE`
 
     The optional clause `MINVALUE minvalue` determines the minimum value a sequence can generate. If this clause is not supplied or `NO MINVALUE` is specified, then defaults will be used. The default for an ascending sequence is 1. The default for a descending sequence is the minimum value of the data type.
 
-*   *`maxvalue`*`NO MAXVALUE`
+* *`maxvalue`*`NO MAXVALUE`
 
     The optional clause `MAXVALUE maxvalue` determines the maximum value for the sequence. If this clause is not supplied or `NO MAXVALUE` is specified, then default values will be used. The default for an ascending sequence is the maximum value of the data type. The default for a descending sequence is -1.
 
-*   *`start`*
+* *`start`*
 
-    The optional clause `START WITH start `allows the sequence to begin anywhere. The default starting value is *`minvalue`* for ascending sequences and *`maxvalue`* for descending ones.
+    The optional clause `START WITH start`allows the sequence to begin anywhere. The default starting value is *`minvalue`* for ascending sequences and *`maxvalue`* for descending ones.
 
-*   *`cache`*
+* *`cache`*
 
     The optional clause `CACHE cache` specifies how many sequence numbers are to be preallocated and stored in memory for faster access. The minimum value is 1 (only one value can be generated at a time, i.e., no cache), and this is also the default.
 
-*   `CYCLE``NO CYCLE`
+* `CYCLE``NO CYCLE`
 
     The `CYCLE` option allows the sequence to wrap around when the *`maxvalue`* or *`minvalue`* has been reached by an ascending or descending sequence respectively. If the limit is reached, the next number generated will be the *`minvalue`* or *`maxvalue`*, respectively.
 
     If `NO CYCLE` is specified, any calls to `nextval` after the sequence has reached its maximum value will return an error. If neither `CYCLE` or `NO CYCLE` are specified, `NO CYCLE` is the default.
 
-*   `OWNED BY` *`table_name`*.*`column_name`*`OWNED BY NONE`
+* `OWNED BY` *`table_name`*.*`column_name`*`OWNED BY NONE`
 
     The `OWNED BY` option causes the sequence to be associated with a specific table column, such that if that column (or its whole table) is dropped, the sequence will be automatically dropped as well. The specified table must have the same owner and be in the same schema as the sequence. `OWNED BY NONE`, the default, specifies that there is no such association.
 
@@ -161,8 +159,8 @@ END;
 
 `CREATE SEQUENCE` conforms to the SQL standard, with the following exceptions:
 
-*   Obtaining the next value is done using the `nextval()` function instead of the standard's `NEXT VALUE FOR` expression.
-*   The `OWNED BY` clause is a PostgreSQL extension.
+* Obtaining the next value is done using the `nextval()` function instead of the standard's `NEXT VALUE FOR` expression.
+* The `OWNED BY` clause is a PostgreSQL extension.
 
 ## See Also
 

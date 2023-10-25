@@ -8,9 +8,9 @@
 
 ## 31.2. Subscription [#](#LOGICAL-REPLICATION-SUBSCRIPTION)
 
-*   *   [31.2.1. Replication Slot Management](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
-    *   [31.2.2. Examples: Set Up Logical Replication](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
-    *   [31.2.3. Examples: Deferred Replication Slot Creation](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT)
+  * *   [31.2.1. Replication Slot Management](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
+  * [31.2.2. Examples: Set Up Logical Replication](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
+  * [31.2.3. Examples: Deferred Replication Slot Creation](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT)
 
 A *subscription* is the downstream side of logical replication. The node where a subscription is defined is referred to as the *subscriber*. A subscription defines the connection to another database and set of publications (one or more) to which it wants to subscribe.
 
@@ -42,10 +42,10 @@ Additional table synchronization slots are normally transient, created internall
 
 Normally, the remote replication slot is created automatically when the subscription is created using [`CREATE SUBSCRIPTION`](sql-createsubscription.html "CREATE SUBSCRIPTION") and it is dropped automatically when the subscription is dropped using [`DROP SUBSCRIPTION`](sql-dropsubscription.html "DROP SUBSCRIPTION"). In some situations, however, it can be useful or necessary to manipulate the subscription and the underlying replication slot separately. Here are some scenarios:
 
-*   When creating a subscription, the replication slot already exists. In that case, the subscription can be created using the `create_slot = false` option to associate with the existing slot.
-*   When creating a subscription, the remote host is not reachable or in an unclear state. In that case, the subscription can be created using the `connect = false` option. The remote host will then not be contacted at all. This is what pg\_dump uses. The remote replication slot will then have to be created manually before the subscription can be activated.
-*   When dropping a subscription, the replication slot should be kept. This could be useful when the subscriber database is being moved to a different host and will be activated from there. In that case, disassociate the slot from the subscription using [`ALTER SUBSCRIPTION`](sql-altersubscription.html "ALTER SUBSCRIPTION") before attempting to drop the subscription.
-*   When dropping a subscription, the remote host is not reachable. In that case, disassociate the slot from the subscription using `ALTER SUBSCRIPTION` before attempting to drop the subscription. If the remote database instance no longer exists, no further action is then necessary. If, however, the remote database instance is just unreachable, the replication slot (and any still remaining table synchronization slots) should then be dropped manually; otherwise it/they would continue to reserve WAL and might eventually cause the disk to fill up. Such cases should be carefully investigated.
+* When creating a subscription, the replication slot already exists. In that case, the subscription can be created using the `create_slot = false` option to associate with the existing slot.
+* When creating a subscription, the remote host is not reachable or in an unclear state. In that case, the subscription can be created using the `connect = false` option. The remote host will then not be contacted at all. This is what pg\_dump uses. The remote replication slot will then have to be created manually before the subscription can be activated.
+* When dropping a subscription, the replication slot should be kept. This could be useful when the subscriber database is being moved to a different host and will be activated from there. In that case, disassociate the slot from the subscription using [`ALTER SUBSCRIPTION`](sql-altersubscription.html "ALTER SUBSCRIPTION") before attempting to drop the subscription.
+* When dropping a subscription, the remote host is not reachable. In that case, disassociate the slot from the subscription using `ALTER SUBSCRIPTION` before attempting to drop the subscription. If the remote database instance no longer exists, no further action is then necessary. If, however, the remote database instance is just unreachable, the replication slot (and any still remaining table synchronization slots) should then be dropped manually; otherwise it/they would continue to reserve WAL and might eventually cause the disk to fill up. Such cases should be carefully investigated.
 
 ### 31.2.2. Examples: Set Up Logical Replication [#](#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
 
@@ -248,7 +248,7 @@ CREATE PUBLICATION
 
 Example 1: Where the subscription says `connect = false`
 
-*   Create the subscription.
+* Create the subscription.
 
     ```
 
@@ -261,7 +261,7 @@ Example 1: Where the subscription says `connect = false`
     CREATE SUBSCRIPTION
     ```
 
-*   On the publisher, manually create a slot. Because the name was not specified during `CREATE SUBSCRIPTION`, the name of the slot to create is same as the subscription name, e.g. "sub1".
+* On the publisher, manually create a slot. Because the name was not specified during `CREATE SUBSCRIPTION`, the name of the slot to create is same as the subscription name, e.g. "sub1".
 
     ```
 
@@ -272,7 +272,7 @@ Example 1: Where the subscription says `connect = false`
     (1 row)
     ```
 
-*   On the subscriber, complete the activation of the subscription. After this the tables of `pub1` will start replicating.
+* On the subscriber, complete the activation of the subscription. After this the tables of `pub1` will start replicating.
 
     ```
 
@@ -284,7 +284,7 @@ Example 1: Where the subscription says `connect = false`
 
 Example 2: Where the subscription says `connect = false`, but also specifies the [`slot_name`](sql-createsubscription.html#SQL-CREATESUBSCRIPTION-WITH-SLOT-NAME) option.
 
-*   Create the subscription.
+* Create the subscription.
 
     ```
 
@@ -297,7 +297,7 @@ Example 2: Where the subscription says `connect = false`, but also specifies the
     CREATE SUBSCRIPTION
     ```
 
-*   On the publisher, manually create a slot using the same name that was specified during `CREATE SUBSCRIPTION`, e.g. "myslot".
+* On the publisher, manually create a slot using the same name that was specified during `CREATE SUBSCRIPTION`, e.g. "myslot".
 
     ```
 
@@ -308,7 +308,7 @@ Example 2: Where the subscription says `connect = false`, but also specifies the
     (1 row)
     ```
 
-*   On the subscriber, the remaining subscription activation steps are the same as before.
+* On the subscriber, the remaining subscription activation steps are the same as before.
 
     ```
 
@@ -320,7 +320,7 @@ Example 2: Where the subscription says `connect = false`, but also specifies the
 
 Example 3: Where the subscription specifies `slot_name = NONE`
 
-*   Create the subscription. When `slot_name = NONE` then `enabled = false`, and `create_slot = false` are also needed.
+* Create the subscription. When `slot_name = NONE` then `enabled = false`, and `create_slot = false` are also needed.
 
     ```
 
@@ -331,7 +331,7 @@ Example 3: Where the subscription specifies `slot_name = NONE`
     CREATE SUBSCRIPTION
     ```
 
-*   On the publisher, manually create a slot using any name, e.g. "myslot".
+* On the publisher, manually create a slot using any name, e.g. "myslot".
 
     ```
 
@@ -342,7 +342,7 @@ Example 3: Where the subscription specifies `slot_name = NONE`
     (1 row)
     ```
 
-*   On the subscriber, associate the subscription with the slot name just created.
+* On the subscriber, associate the subscription with the slot name just created.
 
     ```
 
@@ -350,7 +350,7 @@ Example 3: Where the subscription specifies `slot_name = NONE`
     ALTER SUBSCRIPTION
     ```
 
-*   The remaining subscription activation steps are same as before.
+* The remaining subscription activation steps are same as before.
 
     ```
 

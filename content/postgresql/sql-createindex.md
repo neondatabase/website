@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE INDEX
 
 CREATE INDEX — define a new index
@@ -43,23 +41,23 @@ All functions and operators used in an index definition must be “immutable”,
 
 ## Parameters
 
-*   `UNIQUE`
+* `UNIQUE`
 
     Causes the system to check for duplicate values in the table when the index is created (if data already exist) and each time data is added. Attempts to insert or update data which would result in duplicate entries will generate an error.
 
     Additional restrictions apply when unique indexes are applied to partitioned tables; see [CREATE TABLE](sql-createtable.html "CREATE TABLE").
 
-*   `CONCURRENTLY`
+* `CONCURRENTLY`
 
     When this option is used, PostgreSQL will build the index without taking any locks that prevent concurrent inserts, updates, or deletes on the table; whereas a standard index build locks out writes (but not reads) on the table until it's done. There are several caveats to be aware of when using this option — see [Building Indexes Concurrently](sql-createindex.html#SQL-CREATEINDEX-CONCURRENTLY "Building Indexes Concurrently") below.
 
     For temporary tables, `CREATE INDEX` is always non-concurrent, as no other session can access them, and non-concurrent index creation is cheaper.
 
-*   `IF NOT EXISTS`
+* `IF NOT EXISTS`
 
     Do not throw an error if a relation with the same name already exists. A notice is issued in this case. Note that there is no guarantee that the existing index is anything like the one that would have been created. Index name is required when `IF NOT EXISTS` is specified.
 
-*   `INCLUDE`
+* `INCLUDE`
 
     The optional `INCLUDE` clause specifies a list of columns which will be included in the index as *non-key* columns. A non-key column cannot be used in an index scan search qualification, and it is disregarded for purposes of any uniqueness or exclusion constraint enforced by the index. However, an index-only scan can return the contents of non-key columns without having to visit the index's table, since they are available directly from the index entry. Thus, addition of non-key columns allows index-only scans to be used for queries that otherwise could not use them.
 
@@ -71,71 +69,71 @@ All functions and operators used in an index definition must be “immutable”,
 
     Currently, the B-tree, GiST and SP-GiST index access methods support this feature. In these indexes, the values of columns listed in the `INCLUDE` clause are included in leaf tuples which correspond to heap tuples, but are not included in upper-level index entries used for tree navigation.
 
-*   *`name`*
+* *`name`*
 
     The name of the index to be created. No schema name can be included here; the index is always created in the same schema as its parent table. The name of the index must be distinct from the name of any other relation (table, sequence, index, view, materialized view, or foreign table) in that schema. If the name is omitted, PostgreSQL chooses a suitable name based on the parent table's name and the indexed column name(s).
 
-*   `ONLY`
+* `ONLY`
 
     Indicates not to recurse creating indexes on partitions, if the table is partitioned. The default is to recurse.
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (possibly schema-qualified) of the table to be indexed.
 
-*   *`method`*
+* *`method`*
 
     The name of the index method to be used. Choices are `btree`, `hash`, `gist`, `spgist`, `gin`, `brin`, or user-installed access methods like [bloom](bloom.html "F.7. bloom — bloom filter index access method"). The default method is `btree`.
 
-*   *`column_name`*
+* *`column_name`*
 
     The name of a column of the table.
 
-*   *`expression`*
+* *`expression`*
 
     An expression based on one or more columns of the table. The expression usually must be written with surrounding parentheses, as shown in the syntax. However, the parentheses can be omitted if the expression has the form of a function call.
 
-*   *`collation`*
+* *`collation`*
 
     The name of the collation to use for the index. By default, the index uses the collation declared for the column to be indexed or the result collation of the expression to be indexed. Indexes with non-default collations can be useful for queries that involve expressions using non-default collations.
 
-*   *`opclass`*
+* *`opclass`*
 
     The name of an operator class. See below for details.
 
-*   *`opclass_parameter`*
+* *`opclass_parameter`*
 
     The name of an operator class parameter. See below for details.
 
-*   `ASC`
+* `ASC`
 
     Specifies ascending sort order (which is the default).
 
-*   `DESC`
+* `DESC`
 
     Specifies descending sort order.
 
-*   `NULLS FIRST`
+* `NULLS FIRST`
 
     Specifies that nulls sort before non-nulls. This is the default when `DESC` is specified.
 
-*   `NULLS LAST`
+* `NULLS LAST`
 
     Specifies that nulls sort after non-nulls. This is the default when `DESC` is not specified.
 
-*   `NULLS DISTINCT``NULLS NOT DISTINCT`
+* `NULLS DISTINCT``NULLS NOT DISTINCT`
 
     Specifies whether for a unique index, null values should be considered distinct (not equal). The default is that they are distinct, so that a unique index could contain multiple null values in a column.
 
-*   *`storage_parameter`*
+* *`storage_parameter`*
 
     The name of an index-method-specific storage parameter. See [Index Storage Parameters](sql-createindex.html#SQL-CREATEINDEX-STORAGE-PARAMETERS "Index Storage Parameters") below for details.
 
-*   *`tablespace_name`*
+* *`tablespace_name`*
 
     The tablespace in which to create the index. If not specified, [default\_tablespace](runtime-config-client.html#GUC-DEFAULT-TABLESPACE) is consulted, or [temp\_tablespaces](runtime-config-client.html#GUC-TEMP-TABLESPACES) for indexes on temporary tables.
 
-*   *`predicate`*
+* *`predicate`*
 
     The constraint expression for a partial index.
 
@@ -143,7 +141,7 @@ All functions and operators used in an index definition must be “immutable”,
 
 The optional `WITH` clause specifies *storage parameters* for the index. Each index method has its own set of allowed storage parameters. The B-tree, hash, GiST and SP-GiST index methods all accept this parameter:
 
-*   `fillfactor` (`integer`) [#](#INDEX-RELOPTION-FILLFACTOR)
+* `fillfactor` (`integer`) [#](#INDEX-RELOPTION-FILLFACTOR)
 
     The fillfactor for an index is a percentage that determines how full the index method will try to pack index pages. For B-trees, leaf pages are filled to this percentage during initial index builds, and also when extending the index at the right (adding new largest key values). If pages subsequently become completely full, they will be split, leading to fragmentation of the on-disk index structure. B-trees use a default fillfactor of 90, but any integer value from 10 to 100 can be selected.
 
@@ -155,49 +153,47 @@ The optional `WITH` clause specifies *storage parameters* for the index. Each in
 
 B-tree indexes additionally accept this parameter:
 
-*   `deduplicate_items` (`boolean`) [#](#INDEX-RELOPTION-DEDUPLICATE-ITEMS)
+* `deduplicate_items` (`boolean`) [#](#INDEX-RELOPTION-DEDUPLICATE-ITEMS)
 
     Controls usage of the B-tree deduplication technique described in [Section 67.4.3](btree-implementation.html#BTREE-DEDUPLICATION "67.4.3. Deduplication"). Set to `ON` or `OFF` to enable or disable the optimization. (Alternative spellings of `ON` and `OFF` are allowed as described in [Section 20.1](config-setting.html "20.1. Setting Parameters").) The default is `ON`.
 
-    ### Note
+### Note
 
     Turning `deduplicate_items` off via `ALTER INDEX` prevents future insertions from triggering deduplication, but does not in itself make existing posting list tuples use the standard tuple representation.
 
 GiST indexes additionally accept this parameter:
 
-*   `buffering` (`enum`) [#](#INDEX-RELOPTION-BUFFERING)
+* `buffering` (`enum`) [#](#INDEX-RELOPTION-BUFFERING)
 
     Determines whether the buffered build technique described in [Section 68.4.1](gist-implementation.html#GIST-BUFFERING-BUILD "68.4.1. GiST Index Build Methods") is used to build the index. With `OFF` buffering is disabled, with `ON` it is enabled, and with `AUTO` it is initially disabled, but is turned on on-the-fly once the index size reaches [effective\_cache\_size](runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE). The default is `AUTO`. Note that if sorted build is possible, it will be used instead of buffered build unless `buffering=ON` is specified.
 
 GIN indexes accept different parameters:
 
-*   `fastupdate` (`boolean`) [#](#INDEX-RELOPTION-FASTUPDATE)
+* `fastupdate` (`boolean`) [#](#INDEX-RELOPTION-FASTUPDATE)
 
     This setting controls usage of the fast update technique described in [Section 70.4.1](gin-implementation.html#GIN-FAST-UPDATE "70.4.1. GIN Fast Update Technique"). It is a Boolean parameter: `ON` enables fast update, `OFF` disables it. The default is `ON`.
 
-    ### Note
+### Note
 
     Turning `fastupdate` off via `ALTER INDEX` prevents future insertions from going into the list of pending index entries, but does not in itself flush previous entries. You might want to `VACUUM` the table or call `gin_clean_pending_list` function afterward to ensure the pending list is emptied.
 
 <!---->
 
-*   `gin_pending_list_limit` (`integer`) [#](#INDEX-RELOPTION-GIN-PENDING-LIST-LIMIT)
+* `gin_pending_list_limit` (`integer`) [#](#INDEX-RELOPTION-GIN-PENDING-LIST-LIMIT)
 
     Custom [gin\_pending\_list\_limit](runtime-config-client.html#GUC-GIN-PENDING-LIST-LIMIT) parameter. This value is specified in kilobytes.
 
 BRIN indexes accept different parameters:
 
-*   `pages_per_range` (`integer`) [#](#INDEX-RELOPTION-PAGES-PER-RANGE)
+* `pages_per_range` (`integer`) [#](#INDEX-RELOPTION-PAGES-PER-RANGE)
 
     Defines the number of table blocks that make up one block range for each entry of a BRIN index (see [Section 71.1](brin-intro.html "71.1. Introduction") for more details). The default is `128`.
 
-*   `autosummarize` (`boolean`) [#](#INDEX-RELOPTION-AUTOSUMMARIZE)
+* `autosummarize` (`boolean`) [#](#INDEX-RELOPTION-AUTOSUMMARIZE)
 
     Defines whether a summarization run is queued for the previous page range whenever an insertion is detected on the next one. See [Section 71.1.1](brin-intro.html#BRIN-OPERATION "71.1.1. Index Maintenance") for more details. The default is `off`.
 
 ### Building Indexes Concurrently
-
-
 
 Creating an index can interfere with regular operation of a database. Normally PostgreSQL locks the table to be indexed against writes and performs the entire index build with a single scan of the table. Other transactions can still read the table, but if they try to insert, update, or delete rows in the table they will block until the index build is finished. This could have a severe effect if the system is a live production database. Very large tables can take many hours to be indexed, and even for smaller tables, an index build can lock out writers for periods that are unacceptably long for a production system.
 

@@ -8,8 +8,6 @@
 
 ## 1.3. Creating a Database [#](#TUTORIAL-CREATEDB)
 
-
-
 The first test to see whether you can access the database server is to try to create a database. A running PostgreSQL server can manage many databases. Typically, a separate database is used for each project or for each user.
 
 Possibly, your site administrator has already created a database for your use. In that case you can omit this step and skip ahead to the next section.
@@ -18,7 +16,7 @@ To create a new database, in this example named `mydb`, you use the following co
 
 ```
 
-$ createdb mydb
+createdb mydb
 ```
 
 If this produces no response then this step was successful and you can skip over the remainder of this section.
@@ -34,7 +32,7 @@ then PostgreSQL was not installed properly. Either it was not installed at all o
 
 ```
 
-$ /usr/local/pgsql/bin/createdb mydb
+/usr/local/pgsql/bin/createdb mydb
 ```
 
 The path at your site might be different. Contact your site administrator or check the installation instructions to correct the situation.
@@ -71,14 +69,14 @@ You can also create databases with other names. PostgreSQL allows you to create 
 
 ```
 
-$ createdb
+createdb
 ```
 
 If you do not want to use your database anymore you can remove it. For example, if you are the owner (creator) of the database `mydb`, you can destroy it using the following command:
 
 ```
 
-$ dropdb mydb
+dropdb mydb
 ```
 
 (For this command, the database name does not default to the user account name. You always need to specify it.) This action physically removes all files associated with the database and cannot be undone, so this should only be done with a great deal of forethought.

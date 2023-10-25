@@ -8,11 +8,9 @@
 
 ## 4.3. Calling Functions [#](#SQL-SYNTAX-CALLING-FUNCS)
 
-*   *   [4.3.1. Using Positional Notation](sql-syntax-calling-funcs.html#SQL-SYNTAX-CALLING-FUNCS-POSITIONAL)
-    *   [4.3.2. Using Named Notation](sql-syntax-calling-funcs.html#SQL-SYNTAX-CALLING-FUNCS-NAMED)
-    *   [4.3.3. Using Mixed Notation](sql-syntax-calling-funcs.html#SQL-SYNTAX-CALLING-FUNCS-MIXED)
-
-
+  * *   [4.3.1. Using Positional Notation](sql-syntax-calling-funcs.html#SQL-SYNTAX-CALLING-FUNCS-POSITIONAL)
+  * [4.3.2. Using Named Notation](sql-syntax-calling-funcs.html#SQL-SYNTAX-CALLING-FUNCS-NAMED)
+  * [4.3.3. Using Mixed Notation](sql-syntax-calling-funcs.html#SQL-SYNTAX-CALLING-FUNCS-MIXED)
 
 PostgreSQL allows functions that have named parameters to be called using either *positional* or *named* notation. Named notation is especially useful for functions that have a large number of parameters, since it makes the associations between parameters and actual arguments more explicit and reliable. In positional notation, a function call is written with its argument values in the same order as they are defined in the function declaration. In named notation, the arguments are matched to the function parameters by name and can be written in any order. For each notation, also consider the effect of function argument types, documented in [Section 10.3](typeconv-func.html "10.3. Functions").
 
@@ -40,8 +38,6 @@ Function `concat_lower_or_upper` has two mandatory parameters, `a` and `b`. Addi
 
 ### 4.3.1. Using Positional Notation [#](#SQL-SYNTAX-CALLING-FUNCS-POSITIONAL)
 
-
-
 Positional notation is the traditional mechanism for passing arguments to functions in PostgreSQL. An example is:
 
 ```
@@ -67,8 +63,6 @@ SELECT concat_lower_or_upper('Hello', 'World');
 Here, the `uppercase` parameter is omitted, so it receives its default value of `false`, resulting in lower case output. In positional notation, arguments can be omitted from right to left so long as they have defaults.
 
 ### 4.3.2. Using Named Notation [#](#SQL-SYNTAX-CALLING-FUNCS-NAMED)
-
-
 
 In named notation, each argument's name is specified using `=>` to separate it from the argument expression. For example:
 
@@ -110,8 +104,6 @@ SELECT concat_lower_or_upper(a := 'Hello', uppercase := true, b := 'World');
 ```
 
 ### 4.3.3. Using Mixed Notation [#](#SQL-SYNTAX-CALLING-FUNCS-MIXED)
-
-
 
 The mixed notation combines positional and named notation. However, as already mentioned, named arguments cannot precede positional arguments. For example:
 

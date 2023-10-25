@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## DROP OPERATOR FAMILY
 
 DROP OPERATOR FAMILY — remove an operator family
@@ -27,23 +25,23 @@ DROP OPERATOR FAMILY [ IF EXISTS ] name USING index_method [ CASCADE | RESTRICT 
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the operator family does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing operator family.
 
-*   *`index_method`*
+* *`index_method`*
 
     The name of the index access method the operator family is for.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically drop objects that depend on the operator family, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse to drop the operator family if any objects depend on it. This is the default.
 

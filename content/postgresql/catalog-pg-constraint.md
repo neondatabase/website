@@ -8,8 +8,6 @@
 
 ## 53.13. `pg_constraint` [#](#CATALOG-PG-CONSTRAINT)
 
-
-
 The catalog `pg_constraint` stores check, not-null, primary key, unique, foreign key, and exclusion constraints on tables. (Column constraints are not treated specially. Every column constraint is equivalent to some table constraint.)
 
 User-defined constraint triggers (created with [`CREATE CONSTRAINT TRIGGER`](sql-createtrigger.html "CREATE TRIGGER")) also give rise to an entry in this table.
@@ -48,7 +46,6 @@ Check constraints on domains are stored here, too.
 | `conbin` `pg_node_tree`If a check constraint, an internal representation of the expression. (It's recommended to use `pg_get_constraintdef()` to extract the definition of a check constraint.)                                                                               |
 
 \
-
 
 In the case of an exclusion constraint, `conkey` is only useful for constraint elements that are simple column references. For other cases, a zero appears in `conkey` and the associated index must be consulted to discover the expression that is constrained. (`conkey` thus has the same contents as [`pg_index`](catalog-pg-index.html "53.26. pg_index").`indkey` for the index.)
 

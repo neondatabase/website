@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## DROP FOREIGN TABLE
 
 DROP FOREIGN TABLE — remove a foreign table
@@ -25,19 +23,19 @@ DROP FOREIGN TABLE [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the foreign table does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of the foreign table to drop.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically drop objects that depend on the foreign table (such as views), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse to drop the foreign table if any objects depend on it. This is the default.
 

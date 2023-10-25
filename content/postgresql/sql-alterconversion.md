@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER CONVERSION
 
 ALTER CONVERSION — change the definition of a conversion
@@ -29,19 +27,19 @@ You must own the conversion to use `ALTER CONVERSION`. To alter the owner, you m
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing conversion.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the conversion.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The new owner of the conversion.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the conversion.
 

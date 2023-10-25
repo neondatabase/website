@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE CONVERSION
 
 CREATE CONVERSION — define a new encoding conversion
@@ -30,23 +28,23 @@ To be able to create a conversion, you must have `EXECUTE` privilege on the func
 
 ## Parameters
 
-*   `DEFAULT`
+* `DEFAULT`
 
     The `DEFAULT` clause indicates that this conversion is the default for this particular source to destination encoding. There should be only one default encoding in a schema for the encoding pair.
 
-*   *`name`*
+* *`name`*
 
     The name of the conversion. The conversion name can be schema-qualified. If it is not, the conversion is defined in the current schema. The conversion name must be unique within a schema.
 
-*   *`source_encoding`*
+* *`source_encoding`*
 
     The source encoding name.
 
-*   *`dest_encoding`*
+* *`dest_encoding`*
 
     The destination encoding name.
 
-*   *`function_name`*
+* *`function_name`*
 
     The function used to perform the conversion. The function name can be schema-qualified. If it is not, the function will be looked up in the path.
 

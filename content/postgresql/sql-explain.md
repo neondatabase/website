@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## EXPLAIN
 
 EXPLAIN — show the execution plan of a statement
@@ -53,51 +51,51 @@ ROLLBACK;
 
 ## Parameters
 
-*   `ANALYZE`
+* `ANALYZE`
 
     Carry out the command and show actual run times and other statistics. This parameter defaults to `FALSE`.
 
-*   `VERBOSE`
+* `VERBOSE`
 
     Display additional information regarding the plan. Specifically, include the output column list for each node in the plan tree, schema-qualify table and function names, always label variables in expressions with their range table alias, and always print the name of each trigger for which statistics are displayed. The query identifier will also be displayed if one has been computed, see [compute\_query\_id](runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID) for more details. This parameter defaults to `FALSE`.
 
-*   `COSTS`
+* `COSTS`
 
     Include information on the estimated startup and total cost of each plan node, as well as the estimated number of rows and the estimated width of each row. This parameter defaults to `TRUE`.
 
-*   `SETTINGS`
+* `SETTINGS`
 
     Include information on configuration parameters. Specifically, include options affecting query planning with value different from the built-in default value. This parameter defaults to `FALSE`.
 
-*   `GENERIC_PLAN`
+* `GENERIC_PLAN`
 
     Allow the statement to contain parameter placeholders like `$1`, and generate a generic plan that does not depend on the values of those parameters. See [`PREPARE`](sql-prepare.html "PREPARE") for details about generic plans and the types of statement that support parameters. This parameter cannot be used together with `ANALYZE`. It defaults to `FALSE`.
 
-*   `BUFFERS`
+* `BUFFERS`
 
     Include information on buffer usage. Specifically, include the number of shared blocks hit, read, dirtied, and written, the number of local blocks hit, read, dirtied, and written, the number of temp blocks read and written, and the time spent reading and writing data file blocks, local blocks and temporary file blocks (in milliseconds) if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled. A *hit* means that a read was avoided because the block was found already in cache when needed. Shared blocks contain data from regular tables and indexes; local blocks contain data from temporary tables and indexes; while temporary blocks contain short-term working data used in sorts, hashes, Materialize plan nodes, and similar cases. The number of blocks *dirtied* indicates the number of previously unmodified blocks that were changed by this query; while the number of blocks *written* indicates the number of previously-dirtied blocks evicted from cache by this backend during query processing. The number of blocks shown for an upper-level node includes those used by all its child nodes. In text format, only non-zero values are printed. This parameter defaults to `FALSE`.
 
-*   `WAL`
+* `WAL`
 
     Include information on WAL record generation. Specifically, include the number of records, number of full page images (fpi) and the amount of WAL generated in bytes. In text format, only non-zero values are printed. This parameter may only be used when `ANALYZE` is also enabled. It defaults to `FALSE`.
 
-*   `TIMING`
+* `TIMING`
 
     Include actual startup time and time spent in each node in the output. The overhead of repeatedly reading the system clock can slow down the query significantly on some systems, so it may be useful to set this parameter to `FALSE` when only actual row counts, and not exact times, are needed. Run time of the entire statement is always measured, even when node-level timing is turned off with this option. This parameter may only be used when `ANALYZE` is also enabled. It defaults to `TRUE`.
 
-*   `SUMMARY`
+* `SUMMARY`
 
     Include summary information (e.g., totaled timing information) after the query plan. Summary information is included by default when `ANALYZE` is used but otherwise is not included by default, but can be enabled using this option. Planning time in `EXPLAIN EXECUTE` includes the time required to fetch the plan from the cache and the time required for re-planning, if necessary.
 
-*   `FORMAT`
+* `FORMAT`
 
     Specify the output format, which can be TEXT, XML, JSON, or YAML. Non-text output contains the same information as the text output format, but is easier for programs to parse. This parameter defaults to `TEXT`.
 
-*   *`boolean`*
+* *`boolean`*
 
     Specifies whether the selected option should be turned on or off. You can write `TRUE`, `ON`, or `1` to enable the option, and `FALSE`, `OFF`, or `0` to disable it. The *`boolean`* value can also be omitted, in which case `TRUE` is assumed.
 
-*   *`statement`*
+* *`statement`*
 
     Any `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `MERGE`, `VALUES`, `EXECUTE`, `DECLARE`, `CREATE TABLE AS`, or `CREATE MATERIALIZED VIEW AS` statement, whose execution plan you wish to see.
 

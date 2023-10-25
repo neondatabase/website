@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER TEXT SEARCH CONFIGURATION
 
 ALTER TEXT SEARCH CONFIGURATION — change the definition of a text search configuration
@@ -39,35 +37,35 @@ You must be the owner of the configuration to use `ALTER TEXT SEARCH CONFIGURATI
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing text search configuration.
 
-*   *`token_type`*
+* *`token_type`*
 
     The name of a token type that is emitted by the configuration's parser.
 
-*   *`dictionary_name`*
+* *`dictionary_name`*
 
     The name of a text search dictionary to be consulted for the specified token type(s). If multiple dictionaries are listed, they are consulted in the specified order.
 
-*   *`old_dictionary`*
+* *`old_dictionary`*
 
     The name of a text search dictionary to be replaced in the mapping.
 
-*   *`new_dictionary`*
+* *`new_dictionary`*
 
     The name of a text search dictionary to be substituted for *`old_dictionary`*.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the text search configuration.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The new owner of the text search configuration.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the text search configuration.
 

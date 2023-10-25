@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_rollback
 
 SPI\_rollback, SPI\_rollback\_and\_chain — abort the current transaction

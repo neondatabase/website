@@ -8,17 +8,17 @@
 
 ## 35.3. Client Interfaces [#](#LO-INTERFACES)
 
-*   *   [35.3.1. Creating a Large Object](lo-interfaces.html#LO-CREATE)
-    *   [35.3.2. Importing a Large Object](lo-interfaces.html#LO-IMPORT)
-    *   [35.3.3. Exporting a Large Object](lo-interfaces.html#LO-EXPORT)
-    *   [35.3.4. Opening an Existing Large Object](lo-interfaces.html#LO-OPEN)
-    *   [35.3.5. Writing Data to a Large Object](lo-interfaces.html#LO-WRITE)
-    *   [35.3.6. Reading Data from a Large Object](lo-interfaces.html#LO-READ)
-    *   [35.3.7. Seeking in a Large Object](lo-interfaces.html#LO-SEEK)
-    *   [35.3.8. Obtaining the Seek Position of a Large Object](lo-interfaces.html#LO-TELL)
-    *   [35.3.9. Truncating a Large Object](lo-interfaces.html#LO-TRUNCATE)
-    *   [35.3.10. Closing a Large Object Descriptor](lo-interfaces.html#LO-CLOSE)
-    *   [35.3.11. Removing a Large Object](lo-interfaces.html#LO-UNLINK)
+  * *   [35.3.1. Creating a Large Object](lo-interfaces.html#LO-CREATE)
+  * [35.3.2. Importing a Large Object](lo-interfaces.html#LO-IMPORT)
+  * [35.3.3. Exporting a Large Object](lo-interfaces.html#LO-EXPORT)
+  * [35.3.4. Opening an Existing Large Object](lo-interfaces.html#LO-OPEN)
+  * [35.3.5. Writing Data to a Large Object](lo-interfaces.html#LO-WRITE)
+  * [35.3.6. Reading Data from a Large Object](lo-interfaces.html#LO-READ)
+  * [35.3.7. Seeking in a Large Object](lo-interfaces.html#LO-SEEK)
+  * [35.3.8. Obtaining the Seek Position of a Large Object](lo-interfaces.html#LO-TELL)
+  * [35.3.9. Truncating a Large Object](lo-interfaces.html#LO-TRUNCATE)
+  * [35.3.10. Closing a Large Object Descriptor](lo-interfaces.html#LO-CLOSE)
+  * [35.3.11. Removing a Large Object](lo-interfaces.html#LO-UNLINK)
 
 This section describes the facilities that PostgreSQL's libpq client interface library provides for accessing large objects. The PostgreSQL large object interface is modeled after the Unix file-system interface, with analogues of `open`, `read`, `write`, `lseek`, etc.
 

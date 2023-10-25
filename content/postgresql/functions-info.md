@@ -8,16 +8,16 @@
 
 ## 9.26. System Information Functions and Operators [#](#FUNCTIONS-INFO)
 
-*   *   [9.26.1. Session Information Functions](functions-info.html#FUNCTIONS-INFO-SESSION)
-    *   [9.26.2. Access Privilege Inquiry Functions](functions-info.html#FUNCTIONS-INFO-ACCESS)
-    *   [9.26.3. Schema Visibility Inquiry Functions](functions-info.html#FUNCTIONS-INFO-SCHEMA)
-    *   [9.26.4. System Catalog Information Functions](functions-info.html#FUNCTIONS-INFO-CATALOG)
-    *   [9.26.5. Object Information and Addressing Functions](functions-info.html#FUNCTIONS-INFO-OBJECT)
-    *   [9.26.6. Comment Information Functions](functions-info.html#FUNCTIONS-INFO-COMMENT)
-    *   [9.26.7. Data Validity Checking Functions](functions-info.html#FUNCTIONS-INFO-VALIDITY)
-    *   [9.26.8. Transaction ID and Snapshot Information Functions](functions-info.html#FUNCTIONS-INFO-SNAPSHOT)
-    *   [9.26.9. Committed Transaction Information Functions](functions-info.html#FUNCTIONS-INFO-COMMIT-TIMESTAMP)
-    *   [9.26.10. Control Data Functions](functions-info.html#FUNCTIONS-INFO-CONTROLDATA)
+  * *   [9.26.1. Session Information Functions](functions-info.html#FUNCTIONS-INFO-SESSION)
+  * [9.26.2. Access Privilege Inquiry Functions](functions-info.html#FUNCTIONS-INFO-ACCESS)
+  * [9.26.3. Schema Visibility Inquiry Functions](functions-info.html#FUNCTIONS-INFO-SCHEMA)
+  * [9.26.4. System Catalog Information Functions](functions-info.html#FUNCTIONS-INFO-CATALOG)
+  * [9.26.5. Object Information and Addressing Functions](functions-info.html#FUNCTIONS-INFO-OBJECT)
+  * [9.26.6. Comment Information Functions](functions-info.html#FUNCTIONS-INFO-COMMENT)
+  * [9.26.7. Data Validity Checking Functions](functions-info.html#FUNCTIONS-INFO-VALIDITY)
+  * [9.26.8. Transaction ID and Snapshot Information Functions](functions-info.html#FUNCTIONS-INFO-SNAPSHOT)
+  * [9.26.9. Committed Transaction Information Functions](functions-info.html#FUNCTIONS-INFO-COMMIT-TIMESTAMP)
+  * [9.26.10. Control Data Functions](functions-info.html#FUNCTIONS-INFO-CONTROLDATA)
 
 The functions described in this section are used to obtain various information about a PostgreSQL installation.
 
@@ -60,7 +60,6 @@ In addition to the functions listed in this section, there are a number of funct
 
 \
 
-
 ### Note
 
 `current_catalog`, `current_role`, `current_schema`, `current_user`, `session_user`, and `user` have special syntactic status in SQL: they must be called without trailing parentheses. In PostgreSQL, parentheses can optionally be used with `current_schema`, but not with the others.
@@ -68,8 +67,6 @@ In addition to the functions listed in this section, there are a number of funct
 The `session_user` is normally the user who initiated the current database connection; but superusers can change this setting with [SET SESSION AUTHORIZATION](sql-set-session-authorization.html "SET SESSION AUTHORIZATION"). The `current_user` is the user identifier that is applicable for permission checking. Normally it is equal to the session user, but it can be changed with [SET ROLE](sql-set-role.html "SET ROLE"). It also changes during the execution of functions with the attribute `SECURITY DEFINER`. In Unix parlance, the session user is the “real user” and the current user is the “effective user”. `current_role` and `user` are synonyms for `current_user`. (The SQL standard draws a distinction between `current_role` and `current_user`, but PostgreSQL does not, since it unifies users and roles into a single kind of entity.)
 
 ### 9.26.2. Access Privilege Inquiry Functions [#](#FUNCTIONS-INFO-ACCESS)
-
-
 
 [Table 9.68](functions-info.html#FUNCTIONS-INFO-ACCESS-TABLE "Table 9.68. Access Privilege Inquiry Functions") lists functions that allow querying object access privileges programmatically. (See [Section 5.7](ddl-priv.html "5.7. Privileges") for more information about privileges.) In these functions, the user whose privileges are being inquired about can be specified by name or by OID (`pg_authid`.`oid`), or if the name is given as `public` then the privileges of the PUBLIC pseudo-role are checked. Also, the *`user`* argument can be omitted entirely, in which case the `current_user` is assumed. The object that is being inquired about can be specified either by name or by OID, too. When specifying by name, a schema name can be included if relevant. The access privilege of interest is specified by a text string, which must evaluate to one of the appropriate privilege keywords for the object's type (e.g., `SELECT`). Optionally, `WITH GRANT OPTION` can be added to a privilege type to test whether the privilege is held with grant option. Also, multiple privilege types can be listed separated by commas, in which case the result will be true if any of the listed privileges is held. (Case of the privilege string is not significant, and extra whitespace is allowed between but not within privilege names.) Some examples:
 
@@ -101,7 +98,6 @@ SELECT has_table_privilege('joe', 'mytable', 'INSERT, SELECT WITH GRANT OPTION')
 
 \
 
-
 [Table 9.69](functions-info.html#FUNCTIONS-ACLITEM-OP-TABLE "Table 9.69. aclitem Operators") shows the operators available for the `aclitem` type, which is the catalog representation of access privileges. See [Section 5.7](ddl-priv.html "5.7. Privileges") for information about how to read access privilege values.
 
 **Table 9.69. `aclitem` Operators**
@@ -113,7 +109,6 @@ SELECT has_table_privilege('joe', 'mytable', 'INSERT, SELECT WITH GRANT OPTION')
 | `aclitem[]` `~` `aclitem` → `boolean`This is a deprecated alias for `@>`.`'{calvin=r*w/hobbes,hobbes=r*w*/postgres}'::aclitem[] ~ 'calvin=r*/hobbes'::aclitem` → `t`                                                                                                                                                             |
 
 \
-
 
 [Table 9.70](functions-info.html#FUNCTIONS-ACLITEM-FN-TABLE "Table 9.70. aclitem Functions") shows some additional functions to manage the `aclitem` type.
 
@@ -136,8 +131,6 @@ SELECT relname FROM pg_class WHERE pg_table_is_visible(oid);
 
 For functions and operators, an object in the search path is said to be visible if there is no object of the same name *and argument data type(s)* earlier in the path. For operator classes and families, both the name and the associated index access method are considered.
 
-
-
 **Table 9.71. Schema Visibility Inquiry Functions**
 
 | FunctionDescription                                                                                                                                                                                            |
@@ -157,7 +150,6 @@ For functions and operators, an object in the search path is said to be visible 
 | `pg_type_is_visible` ( *`type`* `oid` ) → `boolean`Is type (or domain) visible in search path?                                                                                                             |
 
 \
-
 
 All these functions require object OIDs to identify the object to be checked. If you want to test an object by name, it is convenient to use the OID alias types (`regclass`, `regtype`, `regprocedure`, `regoperator`, `regconfig`, or `regdictionary`), for example:
 
@@ -218,7 +210,6 @@ Note that it would not make much sense to test a non-schema-qualified type name 
 
 \
 
-
 Most of the functions that reconstruct (decompile) database objects have an optional *`pretty`* flag, which if `true` causes the result to be “pretty-printed”. Pretty-printing suppresses unnecessary parentheses and adds whitespace for legibility. The pretty-printed format is more readable, but the default format is more likely to be interpreted the same way by future versions of PostgreSQL; so avoid using pretty-printed output for dump purposes. Passing `false` for the *`pretty`* parameter yields the same result as omitting the parameter.
 
 **Table 9.73. Index Column Properties**
@@ -237,7 +228,6 @@ Most of the functions that reconstruct (decompile) database objects have an opti
 
 \
 
-
 **Table 9.74. Index Properties**
 
 | Name            | Description                                                                                                              |
@@ -248,7 +238,6 @@ Most of the functions that reconstruct (decompile) database objects have an opti
 | `backward_scan` | Can the scan direction be changed in mid-scan (to support `FETCH BACKWARD` on a cursor without needing materialization)? |
 
 \
-
 
 **Table 9.75. Index Access Method Properties**
 
@@ -261,7 +250,6 @@ Most of the functions that reconstruct (decompile) database objects have an opti
 | `can_include`   | Does the access method support the `INCLUDE` clause of `CREATE INDEX`?               |
 
 \
-
 
 **Table 9.76. GUC Flags**
 
@@ -288,8 +276,6 @@ Most of the functions that reconstruct (decompile) database objects have an opti
 | `pg_get_object_address` ( *`type`* `text`, *`object_names`* `text[]`, *`object_args`* `text[]` ) → `record` ( *`classid`* `oid`, *`objid`* `oid`, *`objsubid`* `integer` )Returns a row containing enough information to uniquely identify the database object specified by a type code and object name and argument arrays. The returned values are the ones that would be used in system catalogs such as `pg_depend`; they can be passed to other system functions such as `pg_describe_object` or `pg_identify_object`. *`classid`* is the OID of the system catalog containing the object; *`objid`* is the OID of the object itself, and *`objsubid`* is the sub-object ID, or zero if none. This function is the inverse of `pg_identify_object_as_address`. Undefined objects are identified with `NULL` values.                                                                                                                                                                     |
 
 ### 9.26.6. Comment Information Functions [#](#FUNCTIONS-INFO-COMMENT)
-
-
 
 The functions shown in [Table 9.78](functions-info.html#FUNCTIONS-INFO-COMMENT-TABLE "Table 9.78. Comment Information Functions") extract comments previously stored with the [COMMENT](sql-comment.html "COMMENT") command. A null value is returned if no comment could be found for the specified parameters.
 
@@ -332,7 +318,6 @@ The functions shown in [Table 9.80](functions-info.html#FUNCTIONS-PG-SNAPSHOT "
 
 \
 
-
 The internal transaction ID type `xid` is 32 bits wide and wraps around every 4 billion transactions. However, the functions shown in [Table 9.80](functions-info.html#FUNCTIONS-PG-SNAPSHOT "Table 9.80. Transaction ID and Snapshot Information Functions") use a 64-bit type `xid8` that does not wrap around during the life of an installation and can be converted to `xid` by casting if required; see [Section 74.1](transaction-id.html "74.1. Transactions and Identifiers") for details. The data type `pg_snapshot` stores information about transaction ID visibility at a particular moment in time. Its components are described in [Table 9.81](functions-info.html#FUNCTIONS-PG-SNAPSHOT-PARTS "Table 9.81. Snapshot Components"). `pg_snapshot`'s textual representation is `xmin:xmax:xip_list`. For example `10:20:10,14,15` means `xmin=10, xmax=20, xip_list=10, 14, 15`.
 
 **Table 9.81. Snapshot Components**
@@ -344,7 +329,6 @@ The internal transaction ID type `xid` is 32 bits wide and wraps around every 4 
 | `xip_list` | Transactions in progress at the time of the snapshot. A transaction ID that is `xmin <= X < xmax` and not in this list was already completed at the time of the snapshot, and thus is either visible or dead according to its commit status. This list does not include the transaction IDs of subtransactions (subxids). |
 
 \
-
 
 In releases of PostgreSQL before 13 there was no `xid8` type, so variants of these functions were provided that used `bigint` to represent a 64-bit XID, with a correspondingly distinct snapshot data type `txid_snapshot`. These older functions have `txid` in their names. They are still supported for backward compatibility, but may be removed from a future release. See [Table 9.82](functions-info.html#FUNCTIONS-TXID-SNAPSHOT "Table 9.82. Deprecated Transaction ID and Snapshot Information Functions").
 
@@ -388,7 +372,6 @@ The functions shown in [Table 9.84](functions-info.html#FUNCTIONS-CONTROLDATA "
 
 \
 
-
 **Table 9.85. `pg_control_checkpoint` Output Columns**
 
 | Column Name            | Data Type                  |
@@ -414,7 +397,6 @@ The functions shown in [Table 9.84](functions-info.html#FUNCTIONS-CONTROLDATA "
 
 \
 
-
 **Table 9.86. `pg_control_system` Output Columns**
 
 | Column Name                | Data Type                  |
@@ -425,7 +407,6 @@ The functions shown in [Table 9.84](functions-info.html#FUNCTIONS-CONTROLDATA "
 | `pg_control_last_modified` | `timestamp with time zone` |
 
 \
-
 
 **Table 9.87. `pg_control_init` Output Columns**
 
@@ -444,7 +425,6 @@ The functions shown in [Table 9.84](functions-info.html#FUNCTIONS-CONTROLDATA "
 | `data_page_checksum_version` | `integer` |
 
 \
-
 
 **Table 9.88. `pg_control_recovery` Output Columns**
 

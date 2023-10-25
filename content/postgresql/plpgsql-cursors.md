@@ -8,12 +8,10 @@
 
 ## 43.7. Cursors [#](#PLPGSQL-CURSORS)
 
-*   *   [43.7.1. Declaring Cursor Variables](plpgsql-cursors.html#PLPGSQL-CURSOR-DECLARATIONS)
-    *   [43.7.2. Opening Cursors](plpgsql-cursors.html#PLPGSQL-CURSOR-OPENING)
-    *   [43.7.3. Using Cursors](plpgsql-cursors.html#PLPGSQL-CURSOR-USING)
-    *   [43.7.4. Looping through a Cursor's Result](plpgsql-cursors.html#PLPGSQL-CURSOR-FOR-LOOP)
-
-
+  * *   [43.7.1. Declaring Cursor Variables](plpgsql-cursors.html#PLPGSQL-CURSOR-DECLARATIONS)
+  * [43.7.2. Opening Cursors](plpgsql-cursors.html#PLPGSQL-CURSOR-OPENING)
+  * [43.7.3. Using Cursors](plpgsql-cursors.html#PLPGSQL-CURSOR-USING)
+  * [43.7.4. Looping through a Cursor's Result](plpgsql-cursors.html#PLPGSQL-CURSOR-FOR-LOOP)
 
 Rather than executing a whole query at once, it is possible to set up a *cursor* that encapsulates the query, and then read the query result a few rows at a time. One reason for doing this is to avoid memory overrun when the result contains a large number of rows. (However, PL/pgSQL users do not normally need to worry about that, since `FOR` loops automatically use a cursor internally to avoid memory problems.) A more interesting usage is to return a reference to a cursor that a function has created, allowing the caller to read the rows. This provides an efficient way to return large row sets from functions.
 
@@ -49,8 +47,6 @@ Before a cursor can be used to retrieve rows, it must be *opened*. (This is the 
 ### Note
 
 Bound cursor variables can also be used without explicitly opening the cursor, via the `FOR` statement described in [Section 43.7.4](plpgsql-cursors.html#PLPGSQL-CURSOR-FOR-LOOP "43.7.4. Looping through a Cursor's Result"). A `FOR` loop will open the cursor and then close it again when the loop completes.
-
-
 
 Opening a cursor involves creating a server-internal data structure called a *portal*, which holds the execution state for the cursor's query. A portal has a name, which must be unique within the session for the duration of the portal's existence. By default, PL/pgSQL will assign a unique name to each portal it creates. However, if you assign a non-null string value to a cursor variable, that string will be used as its portal name. This feature can be used as described in [Section 43.7.3.5](plpgsql-cursors.html#PLPGSQL-CURSOR-RETURNING "43.7.3.5. Returning Cursors").
 

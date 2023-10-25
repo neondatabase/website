@@ -8,8 +8,6 @@
 
 ## Chapter 63. Table Access Method Interface Definition
 
-
-
 This chapter explains the interface between the core PostgreSQL system and *table access methods*, which manage the storage for tables. The core system knows little about these access methods beyond what is specified here, so it is possible to develop entirely new access method types by writing add-on code.
 
 Each table access method is described by a row in the [`pg_am`](catalog-pg-am.html "53.3. pg_am") system catalog. The `pg_am` entry specifies a name and a *handler function* for the table access method. These entries can be created and deleted using the [CREATE ACCESS METHOD](sql-create-access-method.html "CREATE ACCESS METHOD") and [DROP ACCESS METHOD](sql-drop-access-method.html "DROP ACCESS METHOD") SQL commands.

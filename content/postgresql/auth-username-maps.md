@@ -8,8 +8,6 @@
 
 ## 21.2. User Name Maps [#](#AUTH-USERNAME-MAPS)
 
-
-
 When using an external authentication system such as Ident or GSSAPI, the name of the operating system user that initiated the connection might not be the same as the database user (role) that is to be used. In this case, a user name map can be applied to map the operating system user name to a database user. To use user name mapping, specify `map`=*`map-name`* in the options field in `pg_hba.conf`. This option is supported for all authentication methods that receive external user names. Since different mappings might be needed for different connections, the name of the map to be used is specified in the *`map-name`* parameter in `pg_hba.conf` to indicate which map to use for each individual connection.
 
 User name maps are defined in the ident map file, which by default is named `pg_ident.conf` and is stored in the cluster's data directory. (It is possible to place the map file elsewhere, however; see the [ident\_file](runtime-config-file-locations.html#GUC-IDENT-FILE) configuration parameter.) The ident map file contains lines of the general forms:

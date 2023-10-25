@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER PUBLICATION
 
 ALTER PUBLICATION — change the definition of a publication
@@ -45,11 +43,11 @@ Adding/Setting any schema when the publication also publishes a table with a col
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of an existing publication whose definition is to be altered.
 
-*   *`table_name`*
+* *`table_name`*
 
     Name of an existing table. If `ONLY` is specified before the table name, only that table is affected. If `ONLY` is not specified, the table and all its descendant tables (if any) are affected. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included.
 
@@ -57,19 +55,19 @@ Adding/Setting any schema when the publication also publishes a table with a col
 
     If the optional `WHERE` clause is specified, rows for which the *`expression`* evaluates to false or null will not be published. Note that parentheses are required around the expression. The *`expression`* is evaluated with the role used for the replication connection.
 
-*   *`schema_name`*
+* *`schema_name`*
 
     Name of an existing schema.
 
-*   `SET ( publication_parameter [= value] [, ... ] )`
+* `SET ( publication_parameter [= value] [, ... ] )`
 
     This clause alters publication parameters originally set by [CREATE PUBLICATION](sql-createpublication.html "CREATE PUBLICATION"). See there for more information.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The user name of the new owner of the publication.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name for the publication.
 

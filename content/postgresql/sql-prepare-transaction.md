@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## PREPARE TRANSACTION
 
 PREPARE TRANSACTION — prepare the current transaction for two-phase commit
@@ -31,7 +29,7 @@ If the `PREPARE TRANSACTION` command fails for any reason, it becomes a `ROLLBAC
 
 ## Parameters
 
-*   *`transaction_id`*
+* *`transaction_id`*
 
     An arbitrary identifier that later identifies this transaction for `COMMIT PREPARED` or `ROLLBACK PREPARED`. The identifier must be written as a string literal, and must be less than 200 bytes long. It must not be the same as the identifier used for any currently prepared transaction.
 

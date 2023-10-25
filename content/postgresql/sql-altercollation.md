@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER COLLATION
 
 ALTER COLLATION — change the definition of a collation
@@ -31,23 +29,23 @@ You must own the collation to use `ALTER COLLATION`. To alter the owner, you mus
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing collation.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the collation.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The new owner of the collation.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the collation.
 
-*   `REFRESH VERSION`
+* `REFRESH VERSION`
 
     Update the collation's version. See [Notes](sql-altercollation.html#SQL-ALTERCOLLATION-NOTES "Notes") below.
 

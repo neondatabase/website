@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## DROP POLICY
 
 DROP POLICY — remove a row-level security policy from a table
@@ -25,19 +23,19 @@ DROP POLICY [ IF EXISTS ] name ON table_name [ CASCADE | RESTRICT ]
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the policy does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name of the policy to drop.
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (optionally schema-qualified) of the table that the policy is on.
 
-*   `CASCADE``RESTRICT`
+* `CASCADE``RESTRICT`
 
     These key words do not have any effect, since there are no dependencies on policies.
 

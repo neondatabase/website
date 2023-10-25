@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## dblink\_fetch
 
 dblink\_fetch — returns rows from an open cursor in a remote database
@@ -26,19 +24,19 @@ dblink_fetch(text connname, text cursorname, int howmany [, bool fail_on_error])
 
 ## Arguments
 
-*   *`connname`*
+* *`connname`*
 
     Name of the connection to use; omit this parameter to use the unnamed connection.
 
-*   *`cursorname`*
+* *`cursorname`*
 
     The name of the cursor to fetch from.
 
-*   *`howmany`*
+* *`howmany`*
 
     The maximum number of rows to retrieve. The next *`howmany`* rows are fetched, starting at the current cursor position, moving forward. Once the cursor has reached its end, no more rows are produced.
 
-*   *`fail_on_error`*
+* *`fail_on_error`*
 
     If true (the default when omitted) then an error thrown on the remote side of the connection causes an error to also be thrown locally. If false, the remote error is locally reported as a NOTICE, and the function returns no rows.
 

@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_repalloc
 
 SPI\_repalloc — reallocate memory in the upper executor context
@@ -27,11 +25,11 @@ This function is no longer different from plain `repalloc`. It's kept just for b
 
 ## Arguments
 
-*   `void * pointer`
+* `void * pointer`
 
     pointer to existing storage to change
 
-*   `Size size`
+* `Size size`
 
     size in bytes of storage to allocate
 

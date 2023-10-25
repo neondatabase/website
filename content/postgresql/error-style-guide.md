@@ -160,13 +160,13 @@ Rationale: Users don't know what all those functions do.
 
 ### Tricky Words to Avoid [#](#ERROR-STYLE-GUIDE-TRICKY-WORDS)
 
-**Unable. ** “Unable” is nearly the passive voice. Better use “cannot” or “could not”, as appropriate.
+**Unable.** “Unable” is nearly the passive voice. Better use “cannot” or “could not”, as appropriate.
 
-**Bad. ** Error messages like “bad result” are really hard to interpret intelligently. It's better to write why the result is “bad”, e.g., “invalid format”.
+**Bad.** Error messages like “bad result” are really hard to interpret intelligently. It's better to write why the result is “bad”, e.g., “invalid format”.
 
-**Illegal. ** “Illegal” stands for a violation of the law, the rest is “invalid”. Better yet, say why it's invalid.
+**Illegal.** “Illegal” stands for a violation of the law, the rest is “invalid”. Better yet, say why it's invalid.
 
-**Unknown. ** Try to avoid “unknown”. Consider “error: unknown response”. If you don't know what the response is, how do you know it's erroneous? “Unrecognized” is often a better choice. Also, be sure to include the value being complained of.
+**Unknown.** Try to avoid “unknown”. Consider “error: unknown response”. If you don't know what the response is, how do you know it's erroneous? “Unrecognized” is often a better choice. Also, be sure to include the value being complained of.
 
 ```
 
@@ -174,23 +174,23 @@ BAD:    unknown node type
 BETTER: unrecognized node type: 42
 ```
 
-**Find vs. Exists. ** If the program uses a nontrivial algorithm to locate a resource (e.g., a path search) and that algorithm fails, it is fair to say that the program couldn't “find” the resource. If, on the other hand, the expected location of the resource is known but the program cannot access it there then say that the resource doesn't “exist”. Using “find” in this case sounds weak and confuses the issue.
+**Find vs. Exists.** If the program uses a nontrivial algorithm to locate a resource (e.g., a path search) and that algorithm fails, it is fair to say that the program couldn't “find” the resource. If, on the other hand, the expected location of the resource is known but the program cannot access it there then say that the resource doesn't “exist”. Using “find” in this case sounds weak and confuses the issue.
 
-**May vs. Can vs. Might. ** “May” suggests permission (e.g., "You may borrow my rake."), and has little use in documentation or error messages. “Can” suggests ability (e.g., "I can lift that log."), and “might” suggests possibility (e.g., "It might rain today."). Using the proper word clarifies meaning and assists translation.
+**May vs. Can vs. Might.** “May” suggests permission (e.g., "You may borrow my rake."), and has little use in documentation or error messages. “Can” suggests ability (e.g., "I can lift that log."), and “might” suggests possibility (e.g., "It might rain today."). Using the proper word clarifies meaning and assists translation.
 
-**Contractions. ** Avoid contractions, like “can't”; use “cannot” instead.
+**Contractions.** Avoid contractions, like “can't”; use “cannot” instead.
 
-**Non-negative. ** Avoid “non-negative” as it is ambiguous about whether it accepts zero. It's better to use “greater than zero” or “greater than or equal to zero”.
+**Non-negative.** Avoid “non-negative” as it is ambiguous about whether it accepts zero. It's better to use “greater than zero” or “greater than or equal to zero”.
 
 ### Proper Spelling [#](#ERROR-STYLE-GUIDE-SPELLING)
 
 Spell out words in full. For instance, avoid:
 
-*   spec
-*   stats
-*   parens
-*   auth
-*   xact
+* spec
+* stats
+* parens
+* auth
+* xact
 
 Rationale: This will improve consistency.
 

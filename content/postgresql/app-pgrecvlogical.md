@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## pg\_recvlogical
 
 pg\_recvlogical — control PostgreSQL logical decoding streams
@@ -30,17 +28,17 @@ In the absence of fatal errors, pg\_recvlogical will run until terminated by the
 
 At least one of the following options must be specified to select an action:
 
-*   `--create-slot`
+* `--create-slot`
 
     Create a new logical replication slot with the name specified by `--slot`, using the output plugin specified by `--plugin`, for the database specified by `--dbname`.
 
     The `--two-phase` can be specified with `--create-slot` to enable decoding of prepared transactions.
 
-*   `--drop-slot`
+* `--drop-slot`
 
     Drop the replication slot with the name specified by `--slot`, then exit.
 
-*   `--start`
+* `--start`
 
     Begin streaming changes from the logical replication slot specified by `--slot`, continuing until terminated by a signal. If the server side change stream ends with a server shutdown or disconnect, retry in a loop unless `--no-loop` is specified.
 
@@ -52,7 +50,7 @@ At least one of the following options must be specified to select an action:
 
 The following command-line options control the location and format of the output and other replication behavior:
 
-*   `-E lsn``--endpos=lsn`
+* `-E lsn``--endpos=lsn`
 
     In `--start` mode, automatically stop replication and exit with normal exit status 0 when receiving reaches the specified LSN. If specified when not in `--start` mode, an error is raised.
 
@@ -60,11 +58,11 @@ The following command-line options control the location and format of the output
 
     The `--endpos` option is not aware of transaction boundaries and may truncate output partway through a transaction. Any partially output transaction will not be consumed and will be replayed again when the slot is next read from. Individual messages are never truncated.
 
-*   `-f filename``--file=filename`
+* `-f filename``--file=filename`
 
     Write received and decoded transaction data into this file. Use `-` for stdout.
 
-*   `-F interval_seconds``--fsync-interval=interval_seconds`
+* `-F interval_seconds``--fsync-interval=interval_seconds`
 
     Specifies how often pg\_recvlogical should issue `fsync()` calls to ensure the output file is safely flushed to disk.
 
@@ -72,65 +70,65 @@ The following command-line options control the location and format of the output
 
     Specifying an interval of `0` disables issuing `fsync()` calls altogether, while still reporting progress to the server. In this case, data could be lost in the event of a crash.
 
-*   `-I lsn``--startpos=lsn`
+* `-I lsn``--startpos=lsn`
 
     In `--start` mode, start replication from the given LSN. For details on the effect of this, see the documentation in [Chapter 49](logicaldecoding.html "Chapter 49. Logical Decoding") and [Section 55.4](protocol-replication.html "55.4. Streaming Replication Protocol"). Ignored in other modes.
 
-*   `--if-not-exists`
+* `--if-not-exists`
 
     Do not error out when `--create-slot` is specified and a slot with the specified name already exists.
 
-*   `-n``--no-loop`
+* `-n``--no-loop`
 
     When the connection to the server is lost, do not retry in a loop, just exit.
 
-*   `-o name[=value]``--option=name[=value]`
+* `-o name[=value]``--option=name[=value]`
 
     Pass the option *`name`* to the output plugin with, if specified, the option value *`value`*. Which options exist and their effects depends on the used output plugin.
 
-*   `-P plugin``--plugin=plugin`
+* `-P plugin``--plugin=plugin`
 
     When creating a slot, use the specified logical decoding output plugin. See [Chapter 49](logicaldecoding.html "Chapter 49. Logical Decoding"). This option has no effect if the slot already exists.
 
-*   `-s interval_seconds``--status-interval=interval_seconds`
+* `-s interval_seconds``--status-interval=interval_seconds`
 
     This option has the same effect as the option of the same name in [pg\_receivewal](app-pgreceivewal.html "pg_receivewal"). See the description there.
 
-*   `-S slot_name``--slot=slot_name`
+* `-S slot_name``--slot=slot_name`
 
     In `--start` mode, use the existing logical replication slot named *`slot_name`*. In `--create-slot` mode, create the slot with this name. In `--drop-slot` mode, delete the slot with this name.
 
-*   `-t``--two-phase`
+* `-t``--two-phase`
 
     Enables decoding of prepared transactions. This option may only be specified with `--create-slot`
 
-*   `-v``--verbose`
+* `-v``--verbose`
 
     Enables verbose mode.
 
 The following command-line options control the database connection parameters.
 
-*   `-d dbname``--dbname=dbname`
+* `-d dbname``--dbname=dbname`
 
     The database to connect to. See the description of the actions for what this means in detail. The *`dbname`* can be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options. Defaults to the user name.
 
-*   `-h hostname-or-ip``--host=hostname-or-ip`
+* `-h hostname-or-ip``--host=hostname-or-ip`
 
     Specifies the host name of the machine on which the server is running. If the value begins with a slash, it is used as the directory for the Unix domain socket. The default is taken from the `PGHOST` environment variable, if set, else a Unix domain socket connection is attempted.
 
-*   `-p port``--port=port`
+* `-p port``--port=port`
 
     Specifies the TCP port or local Unix domain socket file extension on which the server is listening for connections. Defaults to the `PGPORT` environment variable, if set, or a compiled-in default.
 
-*   `-U user``--username=user`
+* `-U user``--username=user`
 
     User name to connect as. Defaults to current operating system user name.
 
-*   `-w``--no-password`
+* `-w``--no-password`
 
     Never issue a password prompt. If the server requires password authentication and a password is not available by other means such as a `.pgpass` file, the connection attempt will fail. This option can be useful in batch jobs and scripts where no user is present to enter a password.
 
-*   `-W``--password`
+* `-W``--password`
 
     Force pg\_recvlogical to prompt for a password before connecting to a database.
 
@@ -138,11 +136,11 @@ The following command-line options control the database connection parameters.
 
 The following additional options are available:
 
-*   `-V``--version`
+* `-V``--version`
 
     Print the pg\_recvlogical version and exit.
 
-*   `-?``--help`
+* `-?``--help`
 
     Show help about pg\_recvlogical command line arguments, and exit.
 

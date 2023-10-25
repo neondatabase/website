@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER OPERATOR FAMILY
 
 ALTER OPERATOR FAMILY — change the definition of an operator family
@@ -52,23 +50,23 @@ Refer to [Section 38.16](xindex.html "38.16. Interfacing Extensions to Indexes
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing operator family.
 
-*   *`index_method`*
+* *`index_method`*
 
     The name of the index method this operator family is for.
 
-*   *`strategy_number`*
+* *`strategy_number`*
 
     The index method's strategy number for an operator associated with the operator family.
 
-*   *`operator_name`*
+* *`operator_name`*
 
     The name (optionally schema-qualified) of an operator associated with the operator family.
 
-*   *`op_type`*
+* *`op_type`*
 
     In an `OPERATOR` clause, the operand data type(s) of the operator, or `NONE` to signify a prefix operator. Unlike the comparable syntax in `CREATE OPERATOR CLASS`, the operand data types must always be specified.
 
@@ -76,33 +74,33 @@ Refer to [Section 38.16](xindex.html "38.16. Interfacing Extensions to Indexes
 
     In a `DROP FUNCTION` clause, the operand data type(s) the function is intended to support must be specified.
 
-*   *`sort_family_name`*
+* *`sort_family_name`*
 
     The name (optionally schema-qualified) of an existing `btree` operator family that describes the sort ordering associated with an ordering operator.
 
     If neither `FOR SEARCH` nor `FOR ORDER BY` is specified, `FOR SEARCH` is the default.
 
-*   *`support_number`*
+* *`support_number`*
 
     The index method's support function number for a function associated with the operator family.
 
-*   *`function_name`*
+* *`function_name`*
 
     The name (optionally schema-qualified) of a function that is an index method support function for the operator family. If no argument list is specified, the name must be unique in its schema.
 
-*   *`argument_type`*
+* *`argument_type`*
 
     The parameter data type(s) of the function.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the operator family.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The new owner of the operator family.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the operator family.
 

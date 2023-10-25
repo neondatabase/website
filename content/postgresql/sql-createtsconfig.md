@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE TEXT SEARCH CONFIGURATION
 
 CREATE TEXT SEARCH CONFIGURATION — define a new text search configuration
@@ -36,15 +34,15 @@ Refer to [Chapter 12](textsearch.html "Chapter 12. Full Text Search") for fur
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of the text search configuration to be created. The name can be schema-qualified.
 
-*   *`parser_name`*
+* *`parser_name`*
 
     The name of the text search parser to use for this configuration.
 
-*   *`source_config`*
+* *`source_config`*
 
     The name of an existing text search configuration to copy.
 

@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## IMPORT FOREIGN SCHEMA
 
 IMPORT FOREIGN SCHEMA — import table definitions from a foreign server
@@ -33,27 +31,27 @@ To use `IMPORT FOREIGN SCHEMA`, the user must have `USAGE` privilege on the fore
 
 ## Parameters
 
-*   *`remote_schema`*
+* *`remote_schema`*
 
     The remote schema to import from. The specific meaning of a remote schema depends on the foreign data wrapper in use.
 
-*   `LIMIT TO ( table_name [, ...] )`
+* `LIMIT TO ( table_name [, ...] )`
 
     Import only foreign tables matching one of the given table names. Other tables existing in the foreign schema will be ignored.
 
-*   `EXCEPT ( table_name [, ...] )`
+* `EXCEPT ( table_name [, ...] )`
 
     Exclude specified foreign tables from the import. All tables existing in the foreign schema will be imported except the ones listed here.
 
-*   *`server_name`*
+* *`server_name`*
 
     The foreign server to import from.
 
-*   *`local_schema`*
+* *`local_schema`*
 
     The schema in which the imported foreign tables will be created.
 
-*   `OPTIONS ( option 'value' [, ...] )`
+* `OPTIONS ( option 'value' [, ...] )`
 
     Options to be used during the import. The allowed option names and values are specific to each foreign data wrapper.
 

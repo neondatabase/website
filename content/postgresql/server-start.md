@@ -8,8 +8,8 @@
 
 ## 19.3. Starting the Database Server [#](#SERVER-START)
 
-*   *   [19.3.1. Server Start-up Failures](server-start.html#SERVER-START-FAILURES)
-    *   [19.3.2. Client Connection Problems](server-start.html#CLIENT-CONNECTION-PROBLEMS)
+  * *   [19.3.1. Server Start-up Failures](server-start.html#SERVER-START-FAILURES)
+  * [19.3.2. Client Connection Problems](server-start.html#CLIENT-CONNECTION-PROBLEMS)
 
 Before anyone can access the database, you must start the database server. The database server program is called `postgres`.
 
@@ -19,7 +19,7 @@ The bare-bones way to start the server manually is just to invoke `postgres` dir
 
 ```
 
-$ postgres -D /usr/local/pgsql/data
+postgres -D /usr/local/pgsql/data
 ```
 
 which will leave the server running in the foreground. This must be done while logged into the PostgreSQL user account. Without `-D`, the server will try to use the data directory named by the environment variable `PGDATA`. If that variable is not provided either, it will fail.
@@ -28,7 +28,7 @@ Normally it is better to start `postgres` in the background. For this, use the u
 
 ```
 
-$ postgres -D /usr/local/pgsql/data >logfile 2>&1 &
+postgres -D /usr/local/pgsql/data >logfile 2>&1 &
 ```
 
 It is important to store the server's stdout and stderr output somewhere, as shown above. It will help for auditing purposes and to diagnose problems. (See [Section 25.3](logfile-maintenance.html "25.3. Log File Maintenance") for a more thorough discussion of log file handling.)
@@ -55,9 +55,9 @@ su postgres -c 'pg_ctl start -D /usr/local/pgsql/data -l serverlog'
 
 Here are a few more operating-system-specific suggestions. (In each case be sure to use the proper installation directory and user name where we show generic values.)
 
-*   For FreeBSD, look at the file `contrib/start-scripts/freebsd` in the PostgreSQL source distribution.
+* For FreeBSD, look at the file `contrib/start-scripts/freebsd` in the PostgreSQL source distribution.
 
-*   On OpenBSD, add the following lines to the file `/etc/rc.local`:
+* On OpenBSD, add the following lines to the file `/etc/rc.local`:
 
     ```
 
@@ -67,7 +67,7 @@ Here are a few more operating-system-specific suggestions. (In each case be sure
     fi
     ```
 
-*   On Linux systems either add
+* On Linux systems either add
 
     ```
 
@@ -103,9 +103,9 @@ Here are a few more operating-system-specific suggestions. (In each case be sure
 
     Consider carefully the timeout setting. systemd has a default timeout of 90 seconds as of this writing and will kill a process that does not report readiness within that time. But a PostgreSQL server that might have to perform crash recovery at startup could take much longer to become ready. The suggested value of `infinity` disables the timeout logic.
 
-*   On NetBSD, use either the FreeBSD or Linux start scripts, depending on preference.
+* On NetBSD, use either the FreeBSD or Linux start scripts, depending on preference.
 
-*   On Solaris, create a file called `/etc/init.d/postgresql` that contains the following line:
+* On Solaris, create a file called `/etc/init.d/postgresql` that contains the following line:
 
     ```
 

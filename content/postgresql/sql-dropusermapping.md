@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## DROP USER MAPPING
 
 DROP USER MAPPING — remove a user mapping for a foreign server
@@ -27,15 +25,15 @@ The owner of a foreign server can drop user mappings for that server for any use
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the user mapping does not exist. A notice is issued in this case.
 
-*   *`user_name`*
+* *`user_name`*
 
     User name of the mapping. `CURRENT_ROLE`, `CURRENT_USER`, and `USER` match the name of the current user. `PUBLIC` is used to match all present and future user names in the system.
 
-*   *`server_name`*
+* *`server_name`*
 
     Server name of the user mapping.
 

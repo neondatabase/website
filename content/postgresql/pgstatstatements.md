@@ -8,14 +8,12 @@
 
 ## F.31. pg\_stat\_statements — track statistics of SQL planning and execution [#](#PGSTATSTATEMENTS)
 
-*   *   [F.31.1. The `pg_stat_statements` View](pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
-    *   [F.31.2. The `pg_stat_statements_info` View](pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO)
-    *   [F.31.3. Functions](pgstatstatements.html#PGSTATSTATEMENTS-FUNCS)
-    *   [F.31.4. Configuration Parameters](pgstatstatements.html#PGSTATSTATEMENTS-CONFIG-PARAMS)
-    *   [F.31.5. Sample Output](pgstatstatements.html#PGSTATSTATEMENTS-SAMPLE-OUTPUT)
-    *   [F.31.6. Authors](pgstatstatements.html#PGSTATSTATEMENTS-AUTHORS)
-
-
+  * *   [F.31.1. The `pg_stat_statements` View](pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
+  * [F.31.2. The `pg_stat_statements_info` View](pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO)
+  * [F.31.3. Functions](pgstatstatements.html#PGSTATSTATEMENTS-FUNCS)
+  * [F.31.4. Configuration Parameters](pgstatstatements.html#PGSTATSTATEMENTS-CONFIG-PARAMS)
+  * [F.31.5. Sample Output](pgstatstatements.html#PGSTATSTATEMENTS-SAMPLE-OUTPUT)
+  * [F.31.6. Authors](pgstatstatements.html#PGSTATSTATEMENTS-AUTHORS)
 
 The `pg_stat_statements` module provides a means for tracking planning and execution statistics of all SQL statements executed by a server.
 
@@ -81,7 +79,6 @@ The statistics gathered by the module are made available via a view named `pg_st
 
 \
 
-
 For security reasons, only superusers and roles with privileges of the `pg_read_all_stats` role are allowed to see the SQL text and `queryid` of queries executed by other users. Other users can see the statistics, however, if the view has been installed in their database.
 
 Plannable queries (that is, `SELECT`, `INSERT`, `UPDATE`, `DELETE`, and `MERGE`) and utility commands are combined into a single `pg_stat_statements` entry whenever they have identical query structures according to an internal hash calculation. Typically, two queries will be considered the same for this purpose if they are semantically equivalent except for the values of literal constants appearing in the query.
@@ -110,8 +107,6 @@ The representative query texts are kept in an external disk file, and do not con
 
 ### F.31.2. The `pg_stat_statements_info` View [#](#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO)
 
-
-
 The statistics of the `pg_stat_statements` module itself are tracked and made available via a view named `pg_stat_statements_info`. This view contains only a single row. The columns of the view are shown in [Table F.23](pgstatstatements.html#PGSTATSTATEMENTSINFO-COLUMNS "Table F.23. pg_stat_statements_info Columns").
 
 **Table F.23. `pg_stat_statements_info` Columns**
@@ -123,33 +118,33 @@ The statistics of the `pg_stat_statements` module itself are tracked and made av
 
 ### F.31.3. Functions [#](#PGSTATSTATEMENTS-FUNCS)
 
-*   `pg_stat_statements_reset(userid Oid, dbid Oid, queryid bigint) returns void`
+* `pg_stat_statements_reset(userid Oid, dbid Oid, queryid bigint) returns void`
 
     `pg_stat_statements_reset` discards statistics gathered so far by `pg_stat_statements` corresponding to the specified `userid`, `dbid` and `queryid`. If any of the parameters are not specified, the default value `0`(invalid) is used for each of them and the statistics that match with other parameters will be reset. If no parameter is specified or all the specified parameters are `0`(invalid), it will discard all statistics. If all statistics in the `pg_stat_statements` view are discarded, it will also reset the statistics in the `pg_stat_statements_info` view. By default, this function can only be executed by superusers. Access may be granted to others using `GRANT`.
 
-*   `pg_stat_statements(showtext boolean) returns setof record`
+* `pg_stat_statements(showtext boolean) returns setof record`
 
     The `pg_stat_statements` view is defined in terms of a function also named `pg_stat_statements`. It is possible for clients to call the `pg_stat_statements` function directly, and by specifying `showtext := false` have query text be omitted (that is, the `OUT` argument that corresponds to the view's `query` column will return nulls). This feature is intended to support external tools that might wish to avoid the overhead of repeatedly retrieving query texts of indeterminate length. Such tools can instead cache the first query text observed for each entry themselves, since that is all `pg_stat_statements` itself does, and then retrieve query texts only as needed. Since the server stores query texts in a file, this approach may reduce physical I/O for repeated examination of the `pg_stat_statements` data.
 
 ### F.31.4. Configuration Parameters [#](#PGSTATSTATEMENTS-CONFIG-PARAMS)
 
-*   `pg_stat_statements.max` (`integer`)
+* `pg_stat_statements.max` (`integer`)
 
     `pg_stat_statements.max` is the maximum number of statements tracked by the module (i.e., the maximum number of rows in the `pg_stat_statements` view). If more distinct statements than that are observed, information about the least-executed statements is discarded. The number of times such information was discarded can be seen in the `pg_stat_statements_info` view. The default value is 5000. This parameter can only be set at server start.
 
-*   `pg_stat_statements.track` (`enum`)
+* `pg_stat_statements.track` (`enum`)
 
     `pg_stat_statements.track` controls which statements are counted by the module. Specify `top` to track top-level statements (those issued directly by clients), `all` to also track nested statements (such as statements invoked within functions), or `none` to disable statement statistics collection. The default value is `top`. Only superusers can change this setting.
 
-*   `pg_stat_statements.track_utility` (`boolean`)
+* `pg_stat_statements.track_utility` (`boolean`)
 
     `pg_stat_statements.track_utility` controls whether utility commands are tracked by the module. Utility commands are all those other than `SELECT`, `INSERT`, `UPDATE`, `DELETE`, and `MERGE`. The default value is `on`. Only superusers can change this setting.
 
-*   `pg_stat_statements.track_planning` (`boolean`)
+* `pg_stat_statements.track_planning` (`boolean`)
 
     `pg_stat_statements.track_planning` controls whether planning operations and duration are tracked by the module. Enabling this parameter may incur a noticeable performance penalty, especially when statements with identical query structure are executed by many concurrent connections which compete to update a small number of `pg_stat_statements` entries. The default value is `off`. Only superusers can change this setting.
 
-*   `pg_stat_statements.save` (`boolean`)
+* `pg_stat_statements.save` (`boolean`)
 
     `pg_stat_statements.save` specifies whether to save statement statistics across server shutdowns. If it is `off` then statistics are not saved at shutdown nor reloaded at server start. The default value is `on`. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 

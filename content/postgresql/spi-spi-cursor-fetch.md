@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_cursor\_fetch
 
 SPI\_cursor\_fetch — fetch some rows from a cursor
@@ -25,15 +23,15 @@ void SPI_cursor_fetch(Portal portal, bool forward, long count)
 
 ## Arguments
 
-*   `Portal portal`
+* `Portal portal`
 
     portal containing the cursor
 
-*   `bool forward`
+* `bool forward`
 
     true for fetch forward, false for fetch backward
 
-*   `long count`
+* `long count`
 
     maximum number of rows to fetch
 

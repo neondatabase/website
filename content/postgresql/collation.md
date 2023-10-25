@@ -8,11 +8,9 @@
 
 ## 24.2. Collation Support [#](#COLLATION)
 
-*   *   [24.2.1. Concepts](collation.html#COLLATION-CONCEPTS)
-    *   [24.2.2. Managing Collations](collation.html#COLLATION-MANAGING)
-    *   [24.2.3. ICU Custom Collations](collation.html#ICU-CUSTOM-COLLATIONS)
-
-
+  * *   [24.2.1. Concepts](collation.html#COLLATION-CONCEPTS)
+  * [24.2.2. Managing Collations](collation.html#COLLATION-MANAGING)
+  * [24.2.3. ICU Custom Collations](collation.html#ICU-CUSTOM-COLLATIONS)
 
 The collation feature allows specifying the sort order and character classification behavior of data per-column, or even per-operation. This alleviates the restriction that the `LC_COLLATE` and `LC_CTYPE` settings of a database cannot be changed after its creation.
 
@@ -28,9 +26,9 @@ For a function or operator call, the collation that is derived by examining the 
 
 The *collation derivation* of an expression can be implicit or explicit. This distinction affects how collations are combined when multiple different collations appear in an expression. An explicit collation derivation occurs when a `COLLATE` clause is used; all other collation derivations are implicit. When multiple collations need to be combined, for example in a function call, the following rules are used:
 
-1.  If any input expression has an explicit collation derivation, then all explicitly derived collations among the input expressions must be the same, otherwise an error is raised. If any explicitly derived collation is present, that is the result of the collation combination.
-2.  Otherwise, all input expressions must have the same implicit collation derivation or the default collation. If any non-default collation is present, that is the result of the collation combination. Otherwise, the result is the default collation.
-3.  If there are conflicting non-default implicit collations among the input expressions, then the combination is deemed to have indeterminate collation. This is not an error condition unless the particular function being invoked requires knowledge of the collation it should apply. If it does, an error will be raised at run-time.
+1. If any input expression has an explicit collation derivation, then all explicitly derived collations among the input expressions must be the same, otherwise an error is raised. If any explicitly derived collation is present, that is the result of the collation combination.
+2. Otherwise, all input expressions must have the same implicit collation derivation or the default collation. If any non-default collation is present, that is the result of the collation combination. Otherwise, the result is the default collation.
+3. If there are conflicting non-default implicit collations among the input expressions, then the combination is deemed to have indeterminate collation. This is not an error condition unless the particular function being invoked requires knowledge of the collation it should apply. If it does, an error will be raised at run-time.
 
 For example, consider this table definition:
 
@@ -126,11 +124,11 @@ The `C` and `POSIX` locales may behave differently depending on the database enc
 
 Additionally, two SQL standard collation names are available:
 
-*   `unicode`
+* `unicode`
 
     This collation sorts using the Unicode Collation Algorithm with the Default Unicode Collation Element Table. It is available in all encodings. ICU support is required to use this collation. (This collation has the same behavior as the ICU root locale; see [`und-x-icu` (for “undefined”)](collation.html#COLLATION-MANAGING-PREDEFINED-ICU-UND-X-ICU).)
 
-*   `ucs_basic`
+* `ucs_basic`
 
     This collation sorts by Unicode code point. It is only available for encoding `UTF8`. (This collation has the same behavior as the libc locale specification `C` in `UTF8` encoding.)
 
@@ -163,17 +161,17 @@ With ICU, it is not sensible to enumerate all possible locale names. ICU uses a 
 
 Here are some example collations that might be created:
 
-*   `de-x-icu` [#](#COLLATION-MANAGING-PREDEFINED-ICU-DE-X-ICU)
+* `de-x-icu` [#](#COLLATION-MANAGING-PREDEFINED-ICU-DE-X-ICU)
 
     German collation, default variant
 
-*   `de-AT-x-icu` [#](#COLLATION-MANAGING-PREDEFINED-ICU-DE-AT-X-ICU)
+* `de-AT-x-icu` [#](#COLLATION-MANAGING-PREDEFINED-ICU-DE-AT-X-ICU)
 
     German collation for Austria, default variant
 
     (There are also, say, `de-DE-x-icu` or `de-CH-x-icu`, but as of this writing, they are equivalent to `de-x-icu`.)
 
-*   `und-x-icu` (for “undefined”) [#](#COLLATION-MANAGING-PREDEFINED-ICU-UND-X-ICU)
+* `und-x-icu` (for “undefined”) [#](#COLLATION-MANAGING-PREDEFINED-ICU-UND-X-ICU)
 
     ICU “root” collation. Use this to get a reasonable language-agnostic sort order.
 
@@ -287,7 +285,6 @@ Comparison of two strings (collation) in ICU is determined by a multi-level proc
 
 \
 
-
 At every level, even with full normalization off, basic normalization is performed. For example, `'á'` may be composed of the code points `U&'\0061\0301'` or the single code point `U&'\00E1'`, and those sequences will be considered equal even at the `identic` level. To treat any difference in code point representation as distinct, use a collation created with `deterministic` set to `true`.
 
 ##### 24.2.3.1.1. Collation Level Examples [#](#ICU-COLLATION-LEVEL-EXAMPLES)
@@ -328,7 +325,6 @@ SELECT 'x-y' = 'x_y' COLLATE level4; -- false
 
 \
 
-
 Defaults may depend on locale. The above table is not meant to be complete. See [Section 24.2.3.5](collation.html#ICU-EXTERNAL-REFERENCES "24.2.3.5. External References for ICU") for additional options and details.
 
 ### Note
@@ -337,23 +333,23 @@ For many collation settings, you must create the collation with `deterministic` 
 
 #### 24.2.3.3. Collation Settings Examples [#](#ICU-LOCALE-EXAMPLES)
 
-*   `CREATE COLLATION "de-u-co-phonebk-x-icu" (provider = icu, locale = 'de-u-co-phonebk');` [#](#COLLATION-MANAGING-CREATE-ICU-DE-U-CO-PHONEBK-X-ICU)
+* `CREATE COLLATION "de-u-co-phonebk-x-icu" (provider = icu, locale = 'de-u-co-phonebk');` [#](#COLLATION-MANAGING-CREATE-ICU-DE-U-CO-PHONEBK-X-ICU)
 
     German collation with phone book collation type
 
-*   `CREATE COLLATION "und-u-co-emoji-x-icu" (provider = icu, locale = 'und-u-co-emoji');` [#](#COLLATION-MANAGING-CREATE-ICU-UND-U-CO-EMOJI-X-ICU)
+* `CREATE COLLATION "und-u-co-emoji-x-icu" (provider = icu, locale = 'und-u-co-emoji');` [#](#COLLATION-MANAGING-CREATE-ICU-UND-U-CO-EMOJI-X-ICU)
 
     Root collation with Emoji collation type, per Unicode Technical Standard #51
 
-*   `CREATE COLLATION latinlast (provider = icu, locale = 'en-u-kr-grek-latn');` [#](#COLLATION-MANAGING-CREATE-ICU-EN-U-KR-GREK-LATN)
+* `CREATE COLLATION latinlast (provider = icu, locale = 'en-u-kr-grek-latn');` [#](#COLLATION-MANAGING-CREATE-ICU-EN-U-KR-GREK-LATN)
 
     Sort Greek letters before Latin ones. (The default is Latin before Greek.)
 
-*   `CREATE COLLATION upperfirst (provider = icu, locale = 'en-u-kf-upper');` [#](#COLLATION-MANAGING-CREATE-ICU-EN-U-KF-UPPER)
+* `CREATE COLLATION upperfirst (provider = icu, locale = 'en-u-kf-upper');` [#](#COLLATION-MANAGING-CREATE-ICU-EN-U-KF-UPPER)
 
     Sort upper-case letters before lower-case letters. (The default is lower-case letters first.)
 
-*   `CREATE COLLATION special (provider = icu, locale = 'en-u-kf-upper-kr-grek-latn');` [#](#COLLATION-MANAGING-CREATE-ICU-EN-U-KF-UPPER-KR-GREK-LATN)
+* `CREATE COLLATION special (provider = icu, locale = 'en-u-kf-upper-kr-grek-latn');` [#](#COLLATION-MANAGING-CREATE-ICU-EN-U-KF-UPPER-KR-GREK-LATN)
 
     Combines both of the above options.
 
@@ -403,11 +399,11 @@ ORDER BY c COLLATE ebcdic;
 
 This section ([Section 24.2.3](collation.html#ICU-CUSTOM-COLLATIONS "24.2.3. ICU Custom Collations")) is only a brief overview of ICU behavior and language tags. Refer to the following documents for technical details, additional options, and new behavior:
 
-*   [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-collation.html)
-*   [BCP 47](https://tools.ietf.org/html/bcp47)
-*   [CLDR repository](https://github.com/unicode-org/cldr/blob/master/common/bcp47/collation.xml)
-*   <https://unicode-org.github.io/icu/userguide/locale/>
-*   <https://unicode-org.github.io/icu/userguide/collation/>
+* [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-collation.html)
+* [BCP 47](https://tools.ietf.org/html/bcp47)
+* [CLDR repository](https://github.com/unicode-org/cldr/blob/master/common/bcp47/collation.xml)
+* <https://unicode-org.github.io/icu/userguide/locale/>
+* <https://unicode-org.github.io/icu/userguide/collation/>
 
 ***
 

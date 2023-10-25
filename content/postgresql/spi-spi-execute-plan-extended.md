@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_execute\_plan\_extended
 
 SPI\_execute\_plan\_extended — execute a statement prepared by `SPI_prepare`
@@ -30,41 +28,41 @@ Also, instead of always accumulating the result tuples into a `SPI_tuptable` str
 
 ## Arguments
 
-*   `SPIPlanPtr plan`
+* `SPIPlanPtr plan`
 
     prepared statement (returned by `SPI_prepare`)
 
-*   `const SPIExecuteOptions * options`
+* `const SPIExecuteOptions * options`
 
     struct containing optional arguments
 
 Callers should always zero out the entire *`options`* struct, then fill whichever fields they want to set. This ensures forward compatibility of code, since any fields that are added to the struct in future will be defined to behave backwards-compatibly if they are zero. The currently available *`options`* fields are:
 
-*   `ParamListInfo params`
+* `ParamListInfo params`
 
     data structure containing query parameter types and values; NULL if none
 
-*   `bool read_only`
+* `bool read_only`
 
     `true` for read-only execution
 
-*   `bool allow_nonatomic`
+* `bool allow_nonatomic`
 
     `true` allows non-atomic execution of CALL and DO statements
 
-*   `bool must_return_tuples`
+* `bool must_return_tuples`
 
     if `true`, raise error if the query is not of a kind that returns tuples (this does not forbid the case where it happens to return zero tuples)
 
-*   `uint64 tcount`
+* `uint64 tcount`
 
     maximum number of rows to return, or `0` for no limit
 
-*   `DestReceiver * dest`
+* `DestReceiver * dest`
 
     `DestReceiver` object that will receive any tuples emitted by the query; if NULL, result tuples are accumulated into a `SPI_tuptable` structure, as in `SPI_execute_plan`
 
-*   `ResourceOwner owner`
+* `ResourceOwner owner`
 
     The resource owner that will hold a reference count on the plan while it is executed. If NULL, CurrentResourceOwner is used. Ignored for non-saved plans, as SPI does not acquire reference counts on those.
 

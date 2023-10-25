@@ -8,14 +8,12 @@
 
 ## 9.23. Subquery Expressions [#](#FUNCTIONS-SUBQUERY)
 
-*   *   [9.23.1. `EXISTS`](functions-subquery.html#FUNCTIONS-SUBQUERY-EXISTS)
-    *   [9.23.2. `IN`](functions-subquery.html#FUNCTIONS-SUBQUERY-IN)
-    *   [9.23.3. `NOT IN`](functions-subquery.html#FUNCTIONS-SUBQUERY-NOTIN)
-    *   [9.23.4. `ANY`/`SOME`](functions-subquery.html#FUNCTIONS-SUBQUERY-ANY-SOME)
-    *   [9.23.5. `ALL`](functions-subquery.html#FUNCTIONS-SUBQUERY-ALL)
-    *   [9.23.6. Single-Row Comparison](functions-subquery.html#FUNCTIONS-SUBQUERY-SINGLE-ROW-COMP)
-
-
+  * *   [9.23.1. `EXISTS`](functions-subquery.html#FUNCTIONS-SUBQUERY-EXISTS)
+  * [9.23.2. `IN`](functions-subquery.html#FUNCTIONS-SUBQUERY-IN)
+  * [9.23.3. `NOT IN`](functions-subquery.html#FUNCTIONS-SUBQUERY-NOTIN)
+  * [9.23.4. `ANY`/`SOME`](functions-subquery.html#FUNCTIONS-SUBQUERY-ANY-SOME)
+  * [9.23.5. `ALL`](functions-subquery.html#FUNCTIONS-SUBQUERY-ALL)
+  * [9.23.6. Single-Row Comparison](functions-subquery.html#FUNCTIONS-SUBQUERY-SINGLE-ROW-COMP)
 
 This section describes the SQL-compliant subquery expressions available in PostgreSQL. All of the expression forms documented in this section return Boolean (true/false) results.
 
@@ -136,8 +134,6 @@ The left-hand side of this form of `ALL` is a row constructor, as described in [
 See [Section 9.24.5](functions-comparisons.html#ROW-WISE-COMPARISON "9.24.5. Row Constructor Comparison") for details about the meaning of a row constructor comparison.
 
 ### 9.23.6. Single-Row Comparison [#](#FUNCTIONS-SUBQUERY-SINGLE-ROW-COMP)
-
-
 
 ```
 

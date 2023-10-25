@@ -8,13 +8,11 @@
 
 ## F.20. intarray — manipulate arrays of integers [#](#INTARRAY)
 
-*   *   [F.20.1. `intarray` Functions and Operators](intarray.html#INTARRAY-FUNCS-OPS)
-    *   [F.20.2. Index Support](intarray.html#INTARRAY-INDEX)
-    *   [F.20.3. Example](intarray.html#INTARRAY-EXAMPLE)
-    *   [F.20.4. Benchmark](intarray.html#INTARRAY-BENCHMARK)
-    *   [F.20.5. Authors](intarray.html#INTARRAY-AUTHORS)
-
-
+  * *   [F.20.1. `intarray` Functions and Operators](intarray.html#INTARRAY-FUNCS-OPS)
+  * [F.20.2. Index Support](intarray.html#INTARRAY-INDEX)
+  * [F.20.3. Example](intarray.html#INTARRAY-EXAMPLE)
+  * [F.20.4. Benchmark](intarray.html#INTARRAY-BENCHMARK)
+  * [F.20.5. Authors](intarray.html#INTARRAY-AUTHORS)
 
 The `intarray` module provides a number of useful functions and operators for manipulating null-free arrays of integers. There is also support for indexed searches using some of the operators.
 
@@ -44,7 +42,6 @@ The functions provided by the `intarray` module are shown in [Table F.9](intarr
 
 \
 
-
 **Table F.10. `intarray` Operators**
 
 | OperatorDescription                                                                                                                                    |
@@ -52,7 +49,7 @@ The functions provided by the `intarray` module are shown in [Table F.9](intarr
 | `integer[]` `&&` `integer[]` → `boolean`Do arrays overlap (have at least one element in common)?                                                       |
 | `integer[]` `@>` `integer[]` → `boolean`Does left array contain right array?                                                                           |
 | `integer[]` `<@` `integer[]` → `boolean`Is left array contained in right array?                                                                        |
-| ```#` `integer[]` → `integer`Returns the number of elements in the array.                                                                              |
+| ```#``integer[]` → `integer`Returns the number of elements in the array.                                                                              |
 | `integer[]` `#` `integer` → `integer`Returns index of the first array element matching the right argument, or 0 if no match. (Same as `idx` function.) |
 | `integer[]` `+` `integer` → `integer[]`Adds element to end of array.                                                                                   |
 | `integer[]` `+` `integer[]` → `integer[]`Concatenates the arrays.                                                                                      |
@@ -65,7 +62,6 @@ The functions provided by the `intarray` module are shown in [Table F.9](intarr
 | `query_int` `~~` `integer[]` → `boolean`Does array satisfy query? (commutator of `@@`)                                                                 |
 
 \
-
 
 The operators `&&`, `@>` and `<@` are equivalent to PostgreSQL's built-in operators of the same names, except that they work only on integer arrays that do not contain nulls, while the built-in operators work for any array type. This restriction makes them faster than the built-in operators in many cases.
 

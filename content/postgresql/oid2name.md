@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## oid2name
 
 oid2name — resolve OIDs and file nodes in a PostgreSQL data directory
@@ -30,65 +28,65 @@ oid2name connects to a target database and extracts OID, filenode, and/or table 
 
 oid2name accepts the following command-line arguments:
 
-*   `-f filenode``--filenode=filenode`
+* `-f filenode``--filenode=filenode`
 
     show info for table with filenode *`filenode`*.
 
-*   `-i``--indexes`
+* `-i``--indexes`
 
     include indexes and sequences in the listing.
 
-*   `-o oid``--oid=oid`
+* `-o oid``--oid=oid`
 
     show info for table with OID *`oid`*.
 
-*   `-q``--quiet`
+* `-q``--quiet`
 
     omit headers (useful for scripting).
 
-*   `-s``--tablespaces`
+* `-s``--tablespaces`
 
     show tablespace OIDs.
 
-*   `-S``--system-objects`
+* `-S``--system-objects`
 
     include system objects (those in `information_schema`, `pg_toast` and `pg_catalog` schemas).
 
-*   `-t tablename_pattern``--table=tablename_pattern`
+* `-t tablename_pattern``--table=tablename_pattern`
 
     show info for table(s) matching *`tablename_pattern`*.
 
-*   `-V``--version`
+* `-V``--version`
 
     Print the oid2name version and exit.
 
-*   `-x``--extended`
+* `-x``--extended`
 
     display more information about each object shown: tablespace name, schema name, and OID.
 
-*   `-?``--help`
+* `-?``--help`
 
     Show help about oid2name command line arguments, and exit.
 
 oid2name also accepts the following command-line arguments for connection parameters:
 
-*   `-d database``--dbname=database`
+* `-d database``--dbname=database`
 
     database to connect to.
 
-*   `-h host``--host=host`
+* `-h host``--host=host`
 
     database server's host.
 
-*   `-H host`
+* `-H host`
 
     database server's host. Use of this parameter is *deprecated* as of PostgreSQL 12.
 
-*   `-p port``--port=port`
+* `-p port``--port=port`
 
     database server's port.
 
-*   `-U username``--username=username`
+* `-U username``--username=username`
 
     user name to connect as.
 
@@ -100,7 +98,7 @@ If you don't give `-d` either, it will show a listing of database OIDs. Alternat
 
 ## Environment
 
-*   `PGHOST``PGPORT``PGUSER`
+* `PGHOST``PGPORT``PGUSER`
 
     Default connection parameters.
 

@@ -12,9 +12,9 @@ With Git you will make a copy of the entire code repository on your local machin
 
 **Git**
 
-1.  You will need an installed version of Git, which you can get from <https://git-scm.com>. Many systems already have a recent version of Git installed by default, or available in their package distribution system.
+1. You will need an installed version of Git, which you can get from <https://git-scm.com>. Many systems already have a recent version of Git installed by default, or available in their package distribution system.
 
-2.  To begin using the Git repository, make a clone of the official mirror:
+2. To begin using the Git repository, make a clone of the official mirror:
 
     ```
 
@@ -30,7 +30,7 @@ With Git you will make a copy of the entire code repository on your local machin
     git clone git://git.postgresql.org/git/postgresql.git
     ```
 
-3.  Whenever you want to get the latest updates in the system, `cd` into the repository, and run:
+3. Whenever you want to get the latest updates in the system, `cd` into the repository, and run:
 
     ```
 

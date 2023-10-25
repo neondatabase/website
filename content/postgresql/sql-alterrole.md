@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER ROLE
 
 ALTER ROLE — change a database role
@@ -62,31 +60,31 @@ Superusers can change anyone's session defaults. Roles having `CREATEROLE` privi
 
 ## Parameters
 
-*   *`name`* [#](#SQL-ALTERROLE-PARAMS-NAME)
+* *`name`* [#](#SQL-ALTERROLE-PARAMS-NAME)
 
     The name of the role whose attributes are to be altered.
 
-*   `CURRENT_ROLE``CURRENT_USER` [#](#SQL-ALTERROLE-PARAMS-CURRENT-ROLE)
+* `CURRENT_ROLE``CURRENT_USER` [#](#SQL-ALTERROLE-PARAMS-CURRENT-ROLE)
 
     Alter the current user instead of an explicitly identified role.
 
-*   `SESSION_USER` [#](#SQL-ALTERROLE-PARAMS-SESSION-USER)
+* `SESSION_USER` [#](#SQL-ALTERROLE-PARAMS-SESSION-USER)
 
     Alter the current session user instead of an explicitly identified role.
 
-*   `SUPERUSER``NOSUPERUSER``CREATEDB``NOCREATEDB``CREATEROLE``NOCREATEROLE``INHERIT``NOINHERIT``LOGIN``NOLOGIN``REPLICATION``NOREPLICATION``BYPASSRLS``NOBYPASSRLS``CONNECTION LIMIT` *`connlimit`*\[ `ENCRYPTED` ] `PASSWORD` '*`password`*'`PASSWORD NULL``VALID UNTIL` '*`timestamp`*' [#](#SQL-ALTERROLE-PARAMS-SUPERUSER)
+* `SUPERUSER``NOSUPERUSER``CREATEDB``NOCREATEDB``CREATEROLE``NOCREATEROLE``INHERIT``NOINHERIT``LOGIN``NOLOGIN``REPLICATION``NOREPLICATION``BYPASSRLS``NOBYPASSRLS``CONNECTION LIMIT` *`connlimit`*\[ `ENCRYPTED` ] `PASSWORD` '*`password`*'`PASSWORD NULL``VALID UNTIL` '*`timestamp`*' [#](#SQL-ALTERROLE-PARAMS-SUPERUSER)
 
     These clauses alter attributes originally set by [`CREATE ROLE`](sql-createrole.html "CREATE ROLE"). For more information, see the `CREATE ROLE` reference page.
 
-*   *`new_name`* [#](#SQL-ALTERROLE-PARAMS-NEW-NAME)
+* *`new_name`* [#](#SQL-ALTERROLE-PARAMS-NEW-NAME)
 
     The new name of the role.
 
-*   *`database_name`* [#](#SQL-ALTERROLE-PARAMS-DATABASE-NAME)
+* *`database_name`* [#](#SQL-ALTERROLE-PARAMS-DATABASE-NAME)
 
     The name of the database the configuration variable should be set in.
 
-*   *`configuration_parameter`**`value`* [#](#SQL-ALTERROLE-PARAMS-CONFIGURATION-PARAMETER)
+* *`configuration_parameter`**`value`* [#](#SQL-ALTERROLE-PARAMS-CONFIGURATION-PARAMETER)
 
     Set this role's session default for the specified configuration parameter to the given value. If *`value`* is `DEFAULT` or, equivalently, `RESET` is used, the role-specific variable setting is removed, so the role will inherit the system-wide default setting in new sessions. Use `RESET ALL` to clear all role-specific settings. `SET FROM CURRENT` saves the session's current value of the parameter as the role-specific value. If `IN DATABASE` is specified, the configuration parameter is set or removed for the given role and database only.
 

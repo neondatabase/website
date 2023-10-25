@@ -8,8 +8,6 @@
 
 ## 53.9. `pg_auth_members` [#](#CATALOG-PG-AUTH-MEMBERS)
 
-
-
 The catalog `pg_auth_members` shows the membership relations between roles. Any non-circular set of relationships is allowed.
 
 Because user identities are cluster-wide, `pg_auth_members` is shared across all databases of a cluster: there is only one copy of `pg_auth_members` per cluster, not one per database.

@@ -8,8 +8,6 @@
 
 ## 54.11. `pg_indexes` [#](#VIEW-PG-INDEXES)
 
-
-
 The view `pg_indexes` provides access to useful information about each index in the database.
 
 **Table 54.11. `pg_indexes` Columns**

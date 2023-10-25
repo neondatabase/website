@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER EXTENSION
 
 ALTER EXTENSION — change the definition of an extension
@@ -63,19 +61,19 @@ and aggregate_signature is:
 
 `ALTER EXTENSION` changes the definition of an installed extension. There are several subforms:
 
-*   `UPDATE`
+* `UPDATE`
 
     This form updates the extension to a newer version. The extension must supply a suitable update script (or series of scripts) that can modify the currently-installed version into the requested version.
 
-*   `SET SCHEMA`
+* `SET SCHEMA`
 
     This form moves the extension's objects into another schema. The extension has to be *relocatable* for this command to succeed.
 
-*   `ADD member_object`
+* `ADD member_object`
 
     This form adds an existing object to the extension. This is mainly useful in extension update scripts. The object will subsequently be treated as a member of the extension; notably, it can only be dropped by dropping the extension.
 
-*   `DROP member_object`
+* `DROP member_object`
 
     This form removes a member object from the extension. This is mainly useful in extension update scripts. The object is not dropped, only disassociated from the extension.
 
@@ -85,55 +83,55 @@ You must own the extension to use `ALTER EXTENSION`. The `ADD`/`DROP` forms requ
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of an installed extension.
 
-*   *`new_version`*
+* *`new_version`*
 
     The desired new version of the extension. This can be written as either an identifier or a string literal. If not specified, `ALTER EXTENSION UPDATE` attempts to update to whatever is shown as the default version in the extension's control file.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the extension.
 
-*   *`object_name`**`aggregate_name`**`function_name`**`operator_name`**`procedure_name`**`routine_name`*
+* *`object_name`**`aggregate_name`**`function_name`**`operator_name`**`procedure_name`**`routine_name`*
 
     The name of an object to be added to or removed from the extension. Names of tables, aggregates, domains, foreign tables, functions, operators, operator classes, operator families, procedures, routines, sequences, text search objects, types, and views can be schema-qualified.
 
-*   *`source_type`*
+* *`source_type`*
 
     The name of the source data type of the cast.
 
-*   *`target_type`*
+* *`target_type`*
 
     The name of the target data type of the cast.
 
-*   *`argmode`*
+* *`argmode`*
 
     The mode of a function, procedure, or aggregate argument: `IN`, `OUT`, `INOUT`, or `VARIADIC`. If omitted, the default is `IN`. Note that `ALTER EXTENSION` does not actually pay any attention to `OUT` arguments, since only the input arguments are needed to determine the function's identity. So it is sufficient to list the `IN`, `INOUT`, and `VARIADIC` arguments.
 
-*   *`argname`*
+* *`argname`*
 
     The name of a function, procedure, or aggregate argument. Note that `ALTER EXTENSION` does not actually pay any attention to argument names, since only the argument data types are needed to determine the function's identity.
 
-*   *`argtype`*
+* *`argtype`*
 
     The data type of a function, procedure, or aggregate argument.
 
-*   *`left_type`**`right_type`*
+* *`left_type`**`right_type`*
 
     The data type(s) of the operator's arguments (optionally schema-qualified). Write `NONE` for the missing argument of a prefix operator.
 
-*   `PROCEDURAL`
+* `PROCEDURAL`
 
     This is a noise word.
 
-*   *`type_name`*
+* *`type_name`*
 
     The name of the data type of the transform.
 
-*   *`lang_name`*
+* *`lang_name`*
 
     The name of the language of the transform.
 

@@ -8,17 +8,15 @@
 
 ## 12.8. Testing and Debugging Text Search [#](#TEXTSEARCH-DEBUGGING)
 
-*   *   [12.8.1. Configuration Testing](textsearch-debugging.html#TEXTSEARCH-CONFIGURATION-TESTING)
-    *   [12.8.2. Parser Testing](textsearch-debugging.html#TEXTSEARCH-PARSER-TESTING)
-    *   [12.8.3. Dictionary Testing](textsearch-debugging.html#TEXTSEARCH-DICTIONARY-TESTING)
+  * *   [12.8.1. Configuration Testing](textsearch-debugging.html#TEXTSEARCH-CONFIGURATION-TESTING)
+  * [12.8.2. Parser Testing](textsearch-debugging.html#TEXTSEARCH-PARSER-TESTING)
+  * [12.8.3. Dictionary Testing](textsearch-debugging.html#TEXTSEARCH-DICTIONARY-TESTING)
 
 The behavior of a custom text search configuration can easily become confusing. The functions described in this section are useful for testing text search objects. You can test a complete configuration, or test parsers and dictionaries separately.
 
 ### 12.8.1. Configuration Testing [#](#TEXTSEARCH-CONFIGURATION-TESTING)
 
 The function `ts_debug` allows easy testing of a text search configuration.
-
-
 
 ```
 
@@ -36,12 +34,12 @@ ts_debug([ config regconfig, ] document text,
 
 `ts_debug` returns one row for each token identified in the text by the parser. The columns returned are
 
-*   *`alias`* `text` — short name of the token type
-*   *`description`* `text` — description of the token type
-*   *`token`* `text` — text of the token
-*   *`dictionaries`* `regdictionary[]` — the dictionaries selected by the configuration for this token type
-*   *`dictionary`* `regdictionary` — the dictionary that recognized the token, or `NULL` if none did
-*   *`lexemes`* `text[]` — the lexeme(s) produced by the dictionary that recognized the token, or `NULL` if none did; an empty array (`{}`) means it was recognized as a stop word
+* *`alias`* `text` — short name of the token type
+* *`description`* `text` — description of the token type
+* *`token`* `text` — text of the token
+* *`dictionaries`* `regdictionary[]` — the dictionaries selected by the configuration for this token type
+* *`dictionary`* `regdictionary` — the dictionary that recognized the token, or `NULL` if none did
+* *`lexemes`* `text[]` — the lexeme(s) produced by the dictionary that recognized the token, or `NULL` if none did; an empty array (`{}`) means it was recognized as a stop word
 
 Here is a simple example:
 
@@ -128,8 +126,6 @@ FROM ts_debug('public.english', 'The Brightest supernovaes');
 
 The following functions allow direct testing of a text search parser.
 
-
-
 ```
 
 ts_parse(parser_name text, document text,
@@ -152,8 +148,6 @@ SELECT * FROM ts_parse('default', '123 - a number');
     12 |
      1 | number
 ```
-
-
 
 ```
 
@@ -198,8 +192,6 @@ SELECT * FROM ts_token_type('default');
 ### 12.8.3. Dictionary Testing [#](#TEXTSEARCH-DICTIONARY-TESTING)
 
 The `ts_lexize` function facilitates dictionary testing.
-
-
 
 ```
 

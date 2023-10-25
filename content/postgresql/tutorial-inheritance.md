@@ -8,8 +8,6 @@
 
 ## 3.6. Inheritance [#](#TUTORIAL-INHERITANCE)
 
-
-
 Inheritance is a concept from object-oriented databases. It opens up interesting new possibilities of database design.
 
 Let's create two tables: A table `cities` and a table `capitals`. Naturally, capitals are also cities, so you want some way to show the capitals implicitly when you list all cities. If you're really clever you might invent some scheme like this:

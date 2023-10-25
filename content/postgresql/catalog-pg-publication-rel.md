@@ -8,8 +8,6 @@
 
 ## 53.42. `pg_publication_rel` [#](#CATALOG-PG-PUBLICATION-REL)
 
-
-
 The catalog `pg_publication_rel` contains the mapping between relations and publications in the database. This is a many-to-many mapping. See also [Section 54.17](view-pg-publication-tables.html "54.17. pg_publication_tables") for a more user-friendly view of this information.
 
 **Table 53.42. `pg_publication_rel` Columns**

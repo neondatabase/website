@@ -8,8 +8,6 @@
 
 ## 53.2. `pg_aggregate` [#](#CATALOG-PG-AGGREGATE)
 
-
-
 The catalog `pg_aggregate` stores information about aggregate functions. An aggregate function is a function that operates on a set of values (typically one column from each row that matches a query condition) and returns a single value computed from all these values. Typical aggregate functions are `sum`, `count`, and `max`. Each entry in `pg_aggregate` is an extension of an entry in [`pg_proc`](catalog-pg-proc.html "53.39. pg_proc"). The `pg_proc` entry carries the aggregate's name, input and output data types, and other information that is similar to ordinary functions.
 
 **Table 53.2. `pg_aggregate` Columns**
@@ -40,7 +38,6 @@ The catalog `pg_aggregate` stores information about aggregate functions. An aggr
 | `aggminitval` `text`The initial value of the transition state for moving-aggregate mode. This is a text field containing the initial value in its external string representation. If this field is null, the transition state value starts out null.                                                                                                        |
 
 \
-
 
 New aggregate functions are registered with the [`CREATE AGGREGATE`](sql-createaggregate.html "CREATE AGGREGATE") command. See [Section 38.12](xaggr.html "38.12. User-Defined Aggregates") for more information about writing aggregate functions and the meaning of the transition functions, etc.
 

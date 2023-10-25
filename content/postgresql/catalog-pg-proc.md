@@ -8,8 +8,6 @@
 
 ## 53.39. `pg_proc` [#](#CATALOG-PG-PROC)
 
-
-
 The catalog `pg_proc` stores information about functions, procedures, aggregate functions, and window functions (collectively also known as routines). See [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [CREATE PROCEDURE](sql-createprocedure.html "CREATE PROCEDURE"), and [Section 38.3](xfunc.html "38.3. User-Defined Functions") for more information.
 
 If `prokind` indicates that the entry is for an aggregate function, there should be a matching row in [`pg_aggregate`](catalog-pg-aggregate.html "53.2. pg_aggregate").
@@ -50,7 +48,6 @@ If `prokind` indicates that the entry is for an aggregate function, there should
 | `proacl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv.html "5.7. Privileges") for details                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 \
-
 
 For compiled functions, both built-in and dynamically loaded, `prosrc` contains the function's C-language name (link symbol). For SQL-language functions, `prosrc` contains the function's source text if that is specified as a string literal; but if the function body is specified in SQL-standard style, `prosrc` is unused (typically it's an empty string) and `prosqlbody` contains the pre-parsed definition. For all other currently-known language types, `prosrc` contains the function's source text. `probin` is null except for dynamically-loaded C functions, for which it gives the name of the shared library file containing the function.
 

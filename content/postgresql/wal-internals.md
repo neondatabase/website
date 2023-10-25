@@ -8,8 +8,6 @@
 
 ## 30.6. WAL Internals [#](#WAL-INTERNALS)
 
-
-
 WAL is automatically enabled; no action is required from the administrator except ensuring that the disk-space requirements for the WAL files are met, and that any necessary tuning is done (see [Section 30.5](wal-configuration.html "30.5. WAL Configuration")).
 
 WAL records are appended to the WAL files as each new record is written. The insert position is described by a Log Sequence Number (LSN) that is a byte offset into the WAL, increasing monotonically with each new record. LSN values are returned as the datatype [`pg_lsn`](datatype-pg-lsn.html "8.20. pg_lsn Type"). Values can be compared to calculate the volume of WAL data that separates them, so they are used to measure the progress of replication and recovery.

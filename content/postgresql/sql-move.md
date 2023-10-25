@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## MOVE
 
 MOVE — position a cursor

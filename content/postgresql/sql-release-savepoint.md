@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## RELEASE SAVEPOINT
 
 RELEASE SAVEPOINT — release a previously defined savepoint
@@ -25,7 +23,7 @@ RELEASE [ SAVEPOINT ] savepoint_name
 
 ## Parameters
 
-*   *`savepoint_name`*
+* *`savepoint_name`*
 
     The name of the savepoint to release.
 

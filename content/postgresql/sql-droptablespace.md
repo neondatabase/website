@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## DROP TABLESPACE
 
 DROP TABLESPACE — remove a tablespace
@@ -27,11 +25,11 @@ A tablespace can only be dropped by its owner or a superuser. The tablespace mus
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the tablespace does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name of a tablespace.
 

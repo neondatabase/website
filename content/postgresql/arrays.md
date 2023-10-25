@@ -8,20 +8,16 @@
 
 ## 8.15. Arrays [#](#ARRAYS)
 
-*   *   [8.15.1. Declaration of Array Types](arrays.html#ARRAYS-DECLARATION)
-    *   [8.15.2. Array Value Input](arrays.html#ARRAYS-INPUT)
-    *   [8.15.3. Accessing Arrays](arrays.html#ARRAYS-ACCESSING)
-    *   [8.15.4. Modifying Arrays](arrays.html#ARRAYS-MODIFYING)
-    *   [8.15.5. Searching in Arrays](arrays.html#ARRAYS-SEARCHING)
-    *   [8.15.6. Array Input and Output Syntax](arrays.html#ARRAYS-IO)
-
-
+  * *   [8.15.1. Declaration of Array Types](arrays.html#ARRAYS-DECLARATION)
+  * [8.15.2. Array Value Input](arrays.html#ARRAYS-INPUT)
+  * [8.15.3. Accessing Arrays](arrays.html#ARRAYS-ACCESSING)
+  * [8.15.4. Modifying Arrays](arrays.html#ARRAYS-MODIFYING)
+  * [8.15.5. Searching in Arrays](arrays.html#ARRAYS-SEARCHING)
+  * [8.15.6. Array Input and Output Syntax](arrays.html#ARRAYS-IO)
 
 PostgreSQL allows columns of a table to be defined as variable-length multidimensional arrays. Arrays of any built-in or user-defined base type, enum type, composite type, range type, or domain can be created.
 
 ### 8.15.1. Declaration of Array Types [#](#ARRAYS-DECLARATION)
-
-
 
 To illustrate the use of array types, we create this table:
 
@@ -66,8 +62,6 @@ Or, if no array size is to be specified:
 As before, however, PostgreSQL does not enforce the size restriction in any case.
 
 ### 8.15.2. Array Value Input [#](#ARRAYS-INPUT)
-
-
 
 To write an array value as a literal constant, enclose the element values within curly braces and separate them by commas. (If you know C, this is not unlike the C syntax for initializing structures.) You can put double quotes around any element value, and must do so if it contains commas or curly braces. (More details appear below.) Thus, the general format of an array constant is the following:
 
@@ -145,8 +139,6 @@ INSERT INTO sal_emp
 Notice that the array elements are ordinary SQL constants or expressions; for instance, string literals are single quoted, instead of double quoted as they would be in an array literal. The `ARRAY` constructor syntax is discussed in more detail in [Section 4.2.12](sql-expressions.html#SQL-SYNTAX-ARRAY-CONSTRUCTORS "4.2.12. Array Constructors").
 
 ### 8.15.3. Accessing Arrays [#](#ARRAYS-ACCESSING)
-
-
 
 Now, we can run some queries on the table. First, we show how to access a single element of an array. This query retrieves the names of the employees whose pay changed in the second quarter:
 
@@ -273,8 +265,6 @@ SELECT cardinality(schedule) FROM sal_emp WHERE name = 'Carol';
 ```
 
 ### 8.15.4. Modifying Arrays [#](#ARRAYS-MODIFYING)
-
-
 
 An array value can be replaced completely:
 
@@ -440,8 +430,6 @@ In the examples above, the parser sees an integer array on one side of the conca
 
 ### 8.15.5. Searching in Arrays [#](#ARRAYS-SEARCHING)
 
-
-
 To search for a value in an array, each value must be checked. This can be done manually, if you know the size of the array. For example:
 
 ```
@@ -510,8 +498,6 @@ SELECT array_positions(ARRAY[1, 4, 3, 1, 3, 4, 2, 1], 1);
 Arrays are not sets; searching for specific array elements can be a sign of database misdesign. Consider using a separate table with a row for each item that would be an array element. This will be easier to search, and is likely to scale better for a large number of elements.
 
 ### 8.15.6. Array Input and Output Syntax [#](#ARRAYS-IO)
-
-
 
 The external text representation of an array value consists of items that are interpreted according to the I/O conversion rules for the array's element type, plus decoration that indicates the array structure. The decoration consists of curly braces (`{` and `}`) around the array value plus delimiter characters between adjacent items. The delimiter character is usually a comma (`,`) but can be something else: it is determined by the `typdelim` setting for the array's element type. Among the standard data types provided in the PostgreSQL distribution, all use a comma, except for type `box`, which uses a semicolon (`;`). In a multidimensional array, each dimension (row, plane, cube, etc.) gets its own level of curly braces, and delimiters must be written between adjacent curly-braced entities of the same level.
 

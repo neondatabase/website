@@ -8,12 +8,10 @@
 
 ## 9.18. Conditional Expressions [#](#FUNCTIONS-CONDITIONAL)
 
-*   *   [9.18.1. `CASE`](functions-conditional.html#FUNCTIONS-CASE)
-    *   [9.18.2. `COALESCE`](functions-conditional.html#FUNCTIONS-COALESCE-NVL-IFNULL)
-    *   [9.18.3. `NULLIF`](functions-conditional.html#FUNCTIONS-NULLIF)
-    *   [9.18.4. `GREATEST` and `LEAST`](functions-conditional.html#FUNCTIONS-GREATEST-LEAST)
-
-
+  * *   [9.18.1. `CASE`](functions-conditional.html#FUNCTIONS-CASE)
+  * [9.18.2. `COALESCE`](functions-conditional.html#FUNCTIONS-COALESCE-NVL-IFNULL)
+  * [9.18.3. `NULLIF`](functions-conditional.html#FUNCTIONS-NULLIF)
+  * [9.18.4. `GREATEST` and `LEAST`](functions-conditional.html#FUNCTIONS-GREATEST-LEAST)
 
 This section describes the SQL-compliant conditional expressions available in PostgreSQL.
 
@@ -112,8 +110,6 @@ As described in [Section 4.2.14](sql-expressions.html#SYNTAX-EXPRESS-EVAL "4.2.
 
 ### 9.18.2. `COALESCE` [#](#FUNCTIONS-COALESCE-NVL-IFNULL)
 
-
-
 ```
 
 COALESCE(value [, ...])
@@ -134,8 +130,6 @@ Like a `CASE` expression, `COALESCE` only evaluates the arguments that are neede
 
 ### 9.18.3. `NULLIF` [#](#FUNCTIONS-NULLIF)
 
-
-
 ```
 
 NULLIF(value1, value2)
@@ -155,8 +149,6 @@ The two arguments must be of comparable types. To be specific, they are compared
 The result has the same type as the first argument — but there is a subtlety. What is actually returned is the first argument of the implied `=` operator, and in some cases that will have been promoted to match the second argument's type. For example, `NULLIF(1, 2.2)` yields `numeric`, because there is no `integer` `=` `numeric` operator, only `numeric` `=` `numeric`.
 
 ### 9.18.4. `GREATEST` and `LEAST` [#](#FUNCTIONS-GREATEST-LEAST)
-
-
 
 ```
 

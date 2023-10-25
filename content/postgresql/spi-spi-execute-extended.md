@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_execute\_extended
 
 SPI\_execute\_extended — execute a command with out-of-line parameters
@@ -30,41 +28,41 @@ If *`options->dest`* is not NULL, then result tuples are passed to that object a
 
 ## Arguments
 
-*   `const char * command`
+* `const char * command`
 
     command string
 
-*   `const SPIExecuteOptions * options`
+* `const SPIExecuteOptions * options`
 
     struct containing optional arguments
 
 Callers should always zero out the entire *`options`* struct, then fill whichever fields they want to set. This ensures forward compatibility of code, since any fields that are added to the struct in future will be defined to behave backwards-compatibly if they are zero. The currently available *`options`* fields are:
 
-*   `ParamListInfo params`
+* `ParamListInfo params`
 
     data structure containing query parameter types and values; NULL if none
 
-*   `bool read_only`
+* `bool read_only`
 
     `true` for read-only execution
 
-*   `bool allow_nonatomic`
+* `bool allow_nonatomic`
 
     `true` allows non-atomic execution of CALL and DO statements
 
-*   `bool must_return_tuples`
+* `bool must_return_tuples`
 
     if `true`, raise error if the query is not of a kind that returns tuples (this does not forbid the case where it happens to return zero tuples)
 
-*   `uint64 tcount`
+* `uint64 tcount`
 
     maximum number of rows to return, or `0` for no limit
 
-*   `DestReceiver * dest`
+* `DestReceiver * dest`
 
     `DestReceiver` object that will receive any tuples emitted by the query; if NULL, result tuples are accumulated into a `SPI_tuptable` structure, as in `SPI_execute`
 
-*   `ResourceOwner owner`
+* `ResourceOwner owner`
 
     This field is present for consistency with `SPI_execute_plan_extended`, but it is ignored, since the plan used by `SPI_execute_extended` is never saved.
 

@@ -8,15 +8,15 @@
 
 ## 27.2. Log-Shipping Standby Servers [#](#WARM-STANDBY)
 
-*   *   [27.2.1. Planning](warm-standby.html#STANDBY-PLANNING)
-    *   [27.2.2. Standby Server Operation](warm-standby.html#STANDBY-SERVER-OPERATION)
-    *   [27.2.3. Preparing the Primary for Standby Servers](warm-standby.html#PREPARING-PRIMARY-FOR-STANDBY)
-    *   [27.2.4. Setting Up a Standby Server](warm-standby.html#STANDBY-SERVER-SETUP)
-    *   [27.2.5. Streaming Replication](warm-standby.html#STREAMING-REPLICATION)
-    *   [27.2.6. Replication Slots](warm-standby.html#STREAMING-REPLICATION-SLOTS)
-    *   [27.2.7. Cascading Replication](warm-standby.html#CASCADING-REPLICATION)
-    *   [27.2.8. Synchronous Replication](warm-standby.html#SYNCHRONOUS-REPLICATION)
-    *   [27.2.9. Continuous Archiving in Standby](warm-standby.html#CONTINUOUS-ARCHIVING-IN-STANDBY)
+  * *   [27.2.1. Planning](warm-standby.html#STANDBY-PLANNING)
+  * [27.2.2. Standby Server Operation](warm-standby.html#STANDBY-SERVER-OPERATION)
+  * [27.2.3. Preparing the Primary for Standby Servers](warm-standby.html#PREPARING-PRIMARY-FOR-STANDBY)
+  * [27.2.4. Setting Up a Standby Server](warm-standby.html#STANDBY-SERVER-SETUP)
+  * [27.2.5. Streaming Replication](warm-standby.html#STREAMING-REPLICATION)
+  * [27.2.6. Replication Slots](warm-standby.html#STREAMING-REPLICATION-SLOTS)
+  * [27.2.7. Cascading Replication](warm-standby.html#CASCADING-REPLICATION)
+  * [27.2.8. Synchronous Replication](warm-standby.html#SYNCHRONOUS-REPLICATION)
+  * [27.2.9. Continuous Archiving in Standby](warm-standby.html#CONTINUOUS-ARCHIVING-IN-STANDBY)
 
 Continuous archiving can be used to create a *high availability* (HA) cluster configuration with one or more *standby servers* ready to take over operations if the primary server fails. This capability is widely referred to as *warm standby* or *log shipping*.
 
@@ -27,8 +27,6 @@ Directly moving WAL records from one database server to another is typically des
 It should be noted that log shipping is asynchronous, i.e., the WAL records are shipped after transaction commit. As a result, there is a window for data loss should the primary server suffer a catastrophic failure; transactions not yet shipped will be lost. The size of the data loss window in file-based log shipping can be limited by use of the `archive_timeout` parameter, which can be set as low as a few seconds. However such a low setting will substantially increase the bandwidth required for file shipping. Streaming replication (see [Section 27.2.5](warm-standby.html#STREAMING-REPLICATION "27.2.5. Streaming Replication")) allows a much smaller window of data loss.
 
 Recovery performance is sufficiently good that the standby will typically be only moments away from full availability once it has been activated. As a result, this is called a warm standby configuration which offers high availability. Restoring a server from an archived base backup and rollforward will take considerably longer, so that technique only offers a solution for disaster recovery, not high availability. A standby server can also be used for read-only queries, in which case it is called a *hot standby* server. See [Section 27.4](hot-standby.html "27.4. Hot Standby") for more information.
-
-
 
 ### 27.2.1. Planning [#](#STANDBY-PLANNING)
 
@@ -81,8 +79,6 @@ You can have any number of standby servers, but if you use streaming replication
 
 ### 27.2.5. Streaming Replication [#](#STREAMING-REPLICATION)
 
-
-
 Streaming replication allows a standby server to stay more up-to-date than is possible with file-based log shipping. The standby connects to the primary, which streams WAL records to the standby as they're generated, without waiting for the WAL file to be filled.
 
 Streaming replication is asynchronous by default (see [Section 27.2.8](warm-standby.html#SYNCHRONOUS-REPLICATION "27.2.8. Synchronous Replication")), in which case there is a small delay between committing a transaction in the primary and the changes becoming visible in the standby. This delay is however much smaller than with file-based log shipping, typically under one second assuming the standby is powerful enough to keep up with the load. With streaming replication, `archive_timeout` is not required to reduce the data loss window.
@@ -131,8 +127,6 @@ On a hot standby, the status of the WAL receiver process can be retrieved via th
 
 ### 27.2.6. Replication Slots [#](#STREAMING-REPLICATION-SLOTS)
 
-
-
 Replication slots provide an automated way to ensure that the primary does not remove WAL segments until they have been received by all standbys, and that the primary does not remove rows which could cause a [recovery conflict](hot-standby.html#HOT-STANDBY-CONFLICT "27.4.2. Handling Query Conflicts") even when the standby is disconnected.
 
 In lieu of using replication slots, it is possible to prevent the removal of old WAL segments using [wal\_keep\_size](runtime-config-replication.html#GUC-WAL-KEEP-SIZE), or by storing the segments in an archive using [archive\_command](runtime-config-wal.html#GUC-ARCHIVE-COMMAND) or [archive\_library](runtime-config-wal.html#GUC-ARCHIVE-LIBRARY). However, these methods often result in retaining more WAL segments than required, whereas replication slots retain only the number of segments known to be needed. On the other hand, replication slots can retain so many WAL segments that they fill up the space allocated for `pg_wal`; [max\_slot\_wal\_keep\_size](runtime-config-replication.html#GUC-MAX-SLOT-WAL-KEEP-SIZE) limits the size of WAL files retained by replication slots.
@@ -175,8 +169,6 @@ primary_slot_name = 'node_a_slot'
 
 ### 27.2.7. Cascading Replication [#](#CASCADING-REPLICATION)
 
-
-
 The cascading replication feature allows a standby server to accept replication connections and stream WAL records to other standbys, acting as a relay. This can be used to reduce the number of direct connections to the primary and also to minimize inter-site bandwidth overheads.
 
 A standby acting as both a receiver and a sender is known as a cascading standby. Standbys that are more directly connected to the primary are known as upstream servers, while those standby servers further away are downstream servers. Cascading replication does not place limits on the number or arrangement of downstream servers, though each standby connects to only one upstream server which eventually links to a single primary server.
@@ -192,8 +184,6 @@ If an upstream standby server is promoted to become the new primary, downstream 
 To use cascading replication, set up the cascading standby so that it can accept replication connections (that is, set [max\_wal\_senders](runtime-config-replication.html#GUC-MAX-WAL-SENDERS) and [hot\_standby](runtime-config-replication.html#GUC-HOT-STANDBY), and configure [host-based authentication](auth-pg-hba-conf.html "21.1. The pg_hba.conf File")). You will also need to set `primary_conninfo` in the downstream standby to point to the cascading standby.
 
 ### 27.2.8. Synchronous Replication [#](#SYNCHRONOUS-REPLICATION)
-
-
 
 PostgreSQL streaming replication is asynchronous by default. If the primary server crashes then some transactions that were committed may not have been replicated to the standby server, causing data loss. The amount of data loss is proportional to the replication delay at the time of failover.
 
@@ -278,8 +268,6 @@ If the primary is isolated from remaining standby servers you should fail over t
 If you need to re-create a standby server while transactions are waiting, make sure that the commands pg\_backup\_start() and pg\_backup\_stop() are run in a session with `synchronous_commit` = `off`, otherwise those requests will wait forever for the standby to appear.
 
 ### 27.2.9. Continuous Archiving in Standby [#](#CONTINUOUS-ARCHIVING-IN-STANDBY)
-
-
 
 When continuous WAL archiving is used in a standby, there are two different scenarios: the WAL archive can be shared between the primary and the standby, or the standby can have its own WAL archive. When the standby has its own WAL archive, set `archive_mode` to `always`, and the standby will call the archive command for every WAL segment it receives, whether it's by restoring from the archive or by streaming replication. The shared archive can be handled similarly, but the `archive_command` or `archive_library` must test if the file being archived exists already, and if the existing file has identical contents. This requires more care in the `archive_command` or `archive_library`, as it must be careful to not overwrite an existing file with different contents, but return success if the exactly same file is archived twice. And all that must be done free of race conditions, if two servers attempt to archive the same file at the same time.
 

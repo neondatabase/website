@@ -24,15 +24,15 @@ DECLARE cursor_name [ BINARY ] [ ASENSITIVE | INSENSITIVE ] [ [ NO ] SCROLL ] CU
 
 ## Parameters
 
-*   *`cursor_name`* [#](#ECPG-SQL-DECLARE-CURSOR-NAME)
+* *`cursor_name`* [#](#ECPG-SQL-DECLARE-CURSOR-NAME)
 
     A cursor name, case sensitive. This can be an SQL identifier or a host variable.
 
-*   *`prepared_name`* [#](#ECPG-SQL-DECLARE-PREPARED-NAME)
+* *`prepared_name`* [#](#ECPG-SQL-DECLARE-PREPARED-NAME)
 
     The name of a prepared query, either as an SQL identifier or a host variable.
 
-*   *`query`* [#](#ECPG-SQL-DECLARE-QUERY)
+* *`query`* [#](#ECPG-SQL-DECLARE-QUERY)
 
     A [SELECT](sql-select.html "SELECT") or [VALUES](sql-values.html "VALUES") command which will provide the rows to be returned by the cursor.
 

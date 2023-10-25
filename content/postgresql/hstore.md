@@ -8,16 +8,14 @@
 
 ## F.18. hstore — hstore key/value datatype [#](#HSTORE)
 
-*   *   [F.18.1. `hstore` External Representation](hstore.html#HSTORE-EXTERNAL-REP)
-    *   [F.18.2. `hstore` Operators and Functions](hstore.html#HSTORE-OPS-FUNCS)
-    *   [F.18.3. Indexes](hstore.html#HSTORE-INDEXES)
-    *   [F.18.4. Examples](hstore.html#HSTORE-EXAMPLES)
-    *   [F.18.5. Statistics](hstore.html#HSTORE-STATISTICS)
-    *   [F.18.6. Compatibility](hstore.html#HSTORE-COMPATIBILITY)
-    *   [F.18.7. Transforms](hstore.html#HSTORE-TRANSFORMS)
-    *   [F.18.8. Authors](hstore.html#HSTORE-AUTHORS)
-
-
+  * *   [F.18.1. `hstore` External Representation](hstore.html#HSTORE-EXTERNAL-REP)
+  * [F.18.2. `hstore` Operators and Functions](hstore.html#HSTORE-OPS-FUNCS)
+  * [F.18.3. Indexes](hstore.html#HSTORE-INDEXES)
+  * [F.18.4. Examples](hstore.html#HSTORE-EXAMPLES)
+  * [F.18.5. Statistics](hstore.html#HSTORE-STATISTICS)
+  * [F.18.6. Compatibility](hstore.html#HSTORE-COMPATIBILITY)
+  * [F.18.7. Transforms](hstore.html#HSTORE-TRANSFORMS)
+  * [F.18.8. Authors](hstore.html#HSTORE-AUTHORS)
 
 This module implements the `hstore` data type for storing sets of key/value pairs within a single PostgreSQL value. This can be useful in various scenarios, such as rows with many attributes that are rarely examined, or semi-structured data. Keys and values are simply text strings.
 
@@ -86,7 +84,6 @@ The operators provided by the `hstore` module are shown in [Table F.7](hstore.h
 
 \
 
-
 **Table F.8. `hstore` Functions**
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -115,7 +112,6 @@ The operators provided by the `hstore` module are shown in [Table F.7](hstore.h
 | `populate_record` ( `anyelement`, `hstore` ) → `anyelement`Replaces fields in the left operand (which must be a composite type) with matching values from `hstore`.`populate_record(ROW(1,2), 'f1=>42'::hstore)` → `(42,2)`                                                                                                                                                                               |
 
 \
-
 
 In addition to these operators and functions, values of the `hstore` type can be subscripted, allowing them to act like associative arrays. Only a single subscript of type `text` can be specified; it is interpreted as a key and the corresponding value is fetched or stored. For example,
 

@@ -8,8 +8,6 @@
 
 ## 54.13. `pg_matviews` [#](#VIEW-PG-MATVIEWS)
 
-
-
 The view `pg_matviews` provides access to useful information about each materialized view in the database.
 
 **Table 54.13. `pg_matviews` Columns**

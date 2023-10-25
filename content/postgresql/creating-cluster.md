@@ -8,10 +8,8 @@
 
 ## 19.2. Creating a Database Cluster [#](#CREATING-CLUSTER)
 
-*   *   [19.2.1. Use of Secondary File Systems](creating-cluster.html#CREATING-CLUSTER-MOUNT-POINTS)
-    *   [19.2.2. File Systems](creating-cluster.html#CREATING-CLUSTER-FILESYSTEM)
-
-
+  * *   [19.2.1. Use of Secondary File Systems](creating-cluster.html#CREATING-CLUSTER-MOUNT-POINTS)
+  * [19.2.2. File Systems](creating-cluster.html#CREATING-CLUSTER-FILESYSTEM)
 
 Before you can do anything, you must initialize a database storage area on disk. We call this a *database cluster*. (The SQL standard uses the term catalog cluster.) A database cluster is a collection of databases that is managed by a single instance of a running database server. After initialization, a database cluster will contain a database named `postgres`, which is meant as a default database for use by utilities, users and third party applications. The database server itself does not require the `postgres` database to exist, but many external utility programs assume it exists. There are two more databases created within each cluster during initialization, named `template1` and `template0`. As the names suggest, these will be used as templates for subsequently-created databases; they should not be used for actual work. (See [Chapter 23](managing-databases.html "Chapter 23. Managing Databases") for information about creating new databases within a cluster.)
 
@@ -23,7 +21,7 @@ To initialize a database cluster manually, run `initdb` and specify the desired 
 
 ```
 
-$ initdb -D /usr/local/pgsql/data
+initdb -D /usr/local/pgsql/data
 ```
 
 Note that you must execute this command while logged into the PostgreSQL user account, which is described in the previous section.
@@ -36,7 +34,7 @@ Alternatively, you can run `initdb` via the [pg\_ctl](app-pg-ctl.html "pg_ctl") 
 
 ```
 
-$ pg_ctl -D /usr/local/pgsql/data initdb
+pg_ctl -D /usr/local/pgsql/data initdb
 ```
 
 This may be more intuitive if you are using `pg_ctl` for starting and stopping the server (see [Section 19.3](server-start.html "19.3. Starting the Database Server")), so that `pg_ctl` would be the sole command you use for managing the database server instance.
@@ -67,8 +65,6 @@ Non-`C` and non-`POSIX` locales rely on the operating system's collation library
 
 ### 19.2.1. Use of Secondary File Systems [#](#CREATING-CLUSTER-MOUNT-POINTS)
 
-
-
 Many installations create their database clusters on file systems (volumes) other than the machine's “root” volume. If you choose to do this, it is not advisable to try to use the secondary volume's topmost directory (mount point) as the data directory. Best practice is to create a directory within the mount-point directory that is owned by the PostgreSQL user, and then create the data directory within that. This avoids permissions problems, particularly for operations such as pg\_upgrade, and it also ensures clean failures if the secondary volume is taken offline.
 
 ### 19.2.2. File Systems [#](#CREATING-CLUSTER-FILESYSTEM)
@@ -76,8 +72,6 @@ Many installations create their database clusters on file systems (volumes) othe
 Generally, any file system with POSIX semantics can be used for PostgreSQL. Users prefer different file systems for a variety of reasons, including vendor support, performance, and familiarity. Experience suggests that, all other things being equal, one should not expect major performance or behavior changes merely from switching file systems or making minor file system configuration changes.
 
 #### 19.2.2.1. NFS [#](#CREATING-CLUSTER-NFS)
-
-
 
 It is possible to use an NFS file system for storing the PostgreSQL data directory. PostgreSQL does nothing special for NFS file systems, meaning it assumes NFS behaves exactly like locally-connected drives. PostgreSQL does not use any functionality that is known to have nonstandard behavior on NFS, such as file locking.
 

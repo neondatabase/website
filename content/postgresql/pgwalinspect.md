@@ -8,10 +8,8 @@
 
 ## F.36. pg\_walinspect — low-level WAL inspection [#](#PGWALINSPECT)
 
-*   *   [F.36.1. General Functions](pgwalinspect.html#PGWALINSPECT-FUNCS)
-    *   [F.36.2. Author](pgwalinspect.html#PGWALINSPECT-AUTHOR)
-
-
+  * *   [F.36.1. General Functions](pgwalinspect.html#PGWALINSPECT-FUNCS)
+  * [F.36.2. Author](pgwalinspect.html#PGWALINSPECT-AUTHOR)
 
 The `pg_walinspect` module provides SQL functions that allow you to inspect the contents of write-ahead log of a running PostgreSQL database cluster at a low level, which is useful for debugging, analytical, reporting or educational purposes. It is similar to [pg\_waldump](pgwaldump.html "pg_waldump"), but accessible through SQL rather than a separate utility.
 
@@ -31,7 +29,7 @@ By default, use of these functions is restricted to superusers and members of th
 
 ### F.36.1. General Functions [#](#PGWALINSPECT-FUNCS)
 
-*   `pg_get_wal_record_info(in_lsn pg_lsn) returns record` [#](#PGWALINSPECT-FUNCS-PG-GET-WAL-RECORD-INFO)
+* `pg_get_wal_record_info(in_lsn pg_lsn) returns record` [#](#PGWALINSPECT-FUNCS-PG-GET-WAL-RECORD-INFO)
 
     Gets WAL record information about a record that is located at or after the *`in_lsn`* argument. For example:
 
@@ -54,7 +52,7 @@ By default, use of these functions is restricted to superusers and members of th
 
     If *`in_lsn`* isn't at the start of a WAL record, information about the next valid WAL record is shown instead. If there is no next valid WAL record, the function raises an error.
 
-*   `pg_get_wal_records_info(start_lsn pg_lsn, end_lsn pg_lsn) returns setof record `[#](#PGWALINSPECT-FUNCS-PG-GET-WAL-RECORDS-INFO)
+* `pg_get_wal_records_info(start_lsn pg_lsn, end_lsn pg_lsn) returns setof record`[#](#PGWALINSPECT-FUNCS-PG-GET-WAL-RECORDS-INFO)
 
     Gets information of all the valid WAL records between *`start_lsn`* and *`end_lsn`*. Returns one row per WAL record. For example:
 
@@ -77,7 +75,7 @@ By default, use of these functions is restricted to superusers and members of th
 
     The function raises an error if *`start_lsn`* is not available.
 
-*   `pg_get_wal_block_info(start_lsn pg_lsn, end_lsn pg_lsn, show_data boolean DEFAULT true) returns setof record` [#](#PGWALINSPECT-FUNCS-PG-GET-WAL-BLOCK-INFO)
+* `pg_get_wal_block_info(start_lsn pg_lsn, end_lsn pg_lsn, show_data boolean DEFAULT true) returns setof record` [#](#PGWALINSPECT-FUNCS-PG-GET-WAL-BLOCK-INFO)
 
     Gets information about each block reference from all the valid WAL records between *`start_lsn`* and *`end_lsn`* with one or more block references. Returns one row per block reference per WAL record. For example:
 
@@ -113,7 +111,7 @@ By default, use of these functions is restricted to superusers and members of th
 
     The `reltablespace`, `reldatabase`, and `relfilenode` parameters reference [`pg_tablespace`](catalog-pg-tablespace.html "53.56. pg_tablespace").`oid`, [`pg_database`](catalog-pg-database.html "53.15. pg_database").`oid`, and [`pg_class`](catalog-pg-class.html "53.11. pg_class").`relfilenode` respectively. The `relforknumber` field is the fork number within the relation for the block reference; see `common/relpath.h` for details.
 
-    ### Tip
+### Tip
 
     The `pg_filenode_relation` function (see [Table 9.97](functions-admin.html#FUNCTIONS-ADMIN-DBLOCATION "Table 9.97. Database Object Location Functions")) can help you to determine which relation was modified during original execution
 
@@ -121,7 +119,7 @@ By default, use of these functions is restricted to superusers and members of th
 
     The function raises an error if *`start_lsn`* is not available.
 
-*   `pg_get_wal_stats(start_lsn pg_lsn, end_lsn pg_lsn, per_record boolean DEFAULT false) returns setof record `[#](#PGWALINSPECT-FUNCS-PG-GET-WAL-STATS)
+* `pg_get_wal_stats(start_lsn pg_lsn, end_lsn pg_lsn, per_record boolean DEFAULT false) returns setof record`[#](#PGWALINSPECT-FUNCS-PG-GET-WAL-STATS)
 
     Gets statistics of all the valid WAL records between *`start_lsn`* and *`end_lsn`*. By default, it returns one row per *`resource_manager`* type. When *`per_record`* is set to `true`, it returns one row per *`record_type`*. For example:
 

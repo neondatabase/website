@@ -8,8 +8,6 @@
 
 ## 54.35. `pg_views` [#](#VIEW-PG-VIEWS)
 
-
-
 The view `pg_views` provides access to useful information about each view in the database.
 
 **Table 54.35. `pg_views` Columns**

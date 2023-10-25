@@ -8,8 +8,6 @@
 
 ## 34.8. The Fast-Path Interface [#](#LIBPQ-FASTPATH)
 
-
-
 PostgreSQL provides a fast-path interface to send simple function calls to the server.
 
 ### Tip

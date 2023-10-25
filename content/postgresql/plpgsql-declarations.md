@@ -8,12 +8,12 @@
 
 ## 43.3. Declarations [#](#PLPGSQL-DECLARATIONS)
 
-*   *   [43.3.1. Declaring Function Parameters](plpgsql-declarations.html#PLPGSQL-DECLARATION-PARAMETERS)
-    *   [43.3.2. `ALIAS`](plpgsql-declarations.html#PLPGSQL-DECLARATION-ALIAS)
-    *   [43.3.3. Copying Types](plpgsql-declarations.html#PLPGSQL-DECLARATION-TYPE)
-    *   [43.3.4. Row Types](plpgsql-declarations.html#PLPGSQL-DECLARATION-ROWTYPES)
-    *   [43.3.5. Record Types](plpgsql-declarations.html#PLPGSQL-DECLARATION-RECORDS)
-    *   [43.3.6. Collation of PL/pgSQL Variables](plpgsql-declarations.html#PLPGSQL-DECLARATION-COLLATION)
+  * *   [43.3.1. Declaring Function Parameters](plpgsql-declarations.html#PLPGSQL-DECLARATION-PARAMETERS)
+  * [43.3.2. `ALIAS`](plpgsql-declarations.html#PLPGSQL-DECLARATION-ALIAS)
+  * [43.3.3. Copying Types](plpgsql-declarations.html#PLPGSQL-DECLARATION-TYPE)
+  * [43.3.4. Row Types](plpgsql-declarations.html#PLPGSQL-DECLARATION-ROWTYPES)
+  * [43.3.5. Record Types](plpgsql-declarations.html#PLPGSQL-DECLARATION-RECORDS)
+  * [43.3.6. Collation of PL/pgSQL Variables](plpgsql-declarations.html#PLPGSQL-DECLARATION-COLLATION)
 
 All variables used in a block must be declared in the declarations section of the block. (The only exceptions are that the loop variable of a `FOR` loop iterating over a range of integer values is automatically declared as an integer variable, and likewise the loop variable of a `FOR` loop iterating over a cursor's result is automatically declared as a record variable.)
 
@@ -327,8 +327,6 @@ Record variables are similar to row-type variables, but they have no predefined 
 Note that `RECORD` is not a true data type, only a placeholder. One should also realize that when a PL/pgSQL function is declared to return type `record`, this is not quite the same concept as a record variable, even though such a function might use a record variable to hold its result. In both cases the actual row structure is unknown when the function is written, but for a function returning `record` the actual structure is determined when the calling query is parsed, whereas a record variable can change its row structure on-the-fly.
 
 ### 43.3.6. Collation of PL/pgSQL Variables [#](#PLPGSQL-DECLARATION-COLLATION)
-
-
 
 When a PL/pgSQL function has one or more parameters of collatable data types, a collation is identified for each function call depending on the collations assigned to the actual arguments, as described in [Section 24.2](collation.html "24.2. Collation Support"). If a collation is successfully identified (i.e., there are no conflicts of implicit collations among the arguments) then all the collatable parameters are treated as having that collation implicitly. This will affect the behavior of collation-sensitive operations within the function. For example, consider
 

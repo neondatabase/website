@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_cursor\_close
 
 SPI\_cursor\_close — close a cursor
@@ -27,7 +25,7 @@ All open cursors are closed automatically at the end of a transaction. `SPI_curs
 
 ## Arguments
 
-*   `Portal portal`
+* `Portal portal`
 
     portal containing the cursor
 

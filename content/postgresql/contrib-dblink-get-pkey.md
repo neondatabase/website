@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## dblink\_get\_pkey
 
 dblink\_get\_pkey — returns the positions and field names of a relation's primary key fields
@@ -25,7 +23,7 @@ dblink_get_pkey(text relname) returns setof dblink_pkey_results
 
 ## Arguments
 
-*   *`relname`*
+* *`relname`*
 
     Name of a local relation, for example `foo` or `myschema.mytab`. Include double quotes if the name is mixed-case or contains special characters, for example `"FooBar"`; without quotes, the string will be folded to lower case.
 

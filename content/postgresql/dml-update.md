@@ -8,15 +8,13 @@
 
 ## 6.2. Updating Data [#](#DML-UPDATE)
 
-
-
 The modification of data that is already in the database is referred to as updating. You can update individual rows, all the rows in a table, or a subset of all rows. Each column can be updated separately; the other columns are not affected.
 
 To update existing rows, use the [UPDATE](sql-update.html "UPDATE") command. This requires three pieces of information:
 
-1.  The name of the table and column to update
-2.  The new value of the column
-3.  Which row(s) to update
+1. The name of the table and column to update
+2. The new value of the column
+3. Which row(s) to update
 
 Recall from [Chapter 5](ddl.html "Chapter 5. Data Definition") that SQL does not, in general, provide a unique identifier for rows. Therefore it is not always possible to directly specify which row to update. Instead, you specify which conditions a row must meet in order to be updated. Only if you have a primary key in the table (independent of whether you declared it or not) can you reliably address individual rows by choosing a condition that matches the primary key. Graphical database access tools rely on this fact to allow you to update rows individually.
 

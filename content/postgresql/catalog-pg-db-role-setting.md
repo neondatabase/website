@@ -8,8 +8,6 @@
 
 ## 53.16. `pg_db_role_setting` [#](#CATALOG-PG-DB-ROLE-SETTING)
 
-
-
 The catalog `pg_db_role_setting` records the default values that have been set for run-time configuration variables, for each role and database combination.
 
 Unlike most system catalogs, `pg_db_role_setting` is shared across all databases of a cluster: there is only one copy of `pg_db_role_setting` per cluster, not one per database.

@@ -8,8 +8,6 @@
 
 ## 54.22. `pg_seclabels` [#](#VIEW-PG-SECLABELS)
 
-
-
 The view `pg_seclabels` provides information about security labels. It as an easier-to-query version of the [`pg_seclabel`](catalog-pg-seclabel.html "53.46. pg_seclabel") catalog.
 
 **Table 54.22. `pg_seclabels` Columns**

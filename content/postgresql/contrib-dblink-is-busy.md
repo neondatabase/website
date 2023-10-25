@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## dblink\_is\_busy
 
 dblink\_is\_busy — checks if connection is busy with an async query
@@ -25,7 +23,7 @@ dblink_is_busy(text connname) returns int
 
 ## Arguments
 
-*   *`connname`*
+* *`connname`*
 
     Name of the connection to check.
 

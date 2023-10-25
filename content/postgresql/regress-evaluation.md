@@ -8,14 +8,14 @@
 
 ## 33.2. Test Evaluation [#](#REGRESS-EVALUATION)
 
-*   *   [33.2.1. Error Message Differences](regress-evaluation.html#REGRESS-EVALUATION-MESSAGE-DIFFERENCES)
-    *   [33.2.2. Locale Differences](regress-evaluation.html#REGRESS-EVALUATION-LOCALE-DIFFERENCES)
-    *   [33.2.3. Date and Time Differences](regress-evaluation.html#REGRESS-EVALUATION-DATE-TIME-DIFFERENCES)
-    *   [33.2.4. Floating-Point Differences](regress-evaluation.html#REGRESS-EVALUATION-FLOAT-DIFFERENCES)
-    *   [33.2.5. Row Ordering Differences](regress-evaluation.html#REGRESS-EVALUATION-ORDERING-DIFFERENCES)
-    *   [33.2.6. Insufficient Stack Depth](regress-evaluation.html#REGRESS-EVALUATION-STACK-DEPTH)
-    *   [33.2.7. The “random” Test](regress-evaluation.html#REGRESS-EVALUATION-RANDOM-TEST)
-    *   [33.2.8. Configuration Parameters](regress-evaluation.html#REGRESS-EVALUATION-CONFIG-PARAMS)
+  * *   [33.2.1. Error Message Differences](regress-evaluation.html#REGRESS-EVALUATION-MESSAGE-DIFFERENCES)
+  * [33.2.2. Locale Differences](regress-evaluation.html#REGRESS-EVALUATION-LOCALE-DIFFERENCES)
+  * [33.2.3. Date and Time Differences](regress-evaluation.html#REGRESS-EVALUATION-DATE-TIME-DIFFERENCES)
+  * [33.2.4. Floating-Point Differences](regress-evaluation.html#REGRESS-EVALUATION-FLOAT-DIFFERENCES)
+  * [33.2.5. Row Ordering Differences](regress-evaluation.html#REGRESS-EVALUATION-ORDERING-DIFFERENCES)
+  * [33.2.6. Insufficient Stack Depth](regress-evaluation.html#REGRESS-EVALUATION-STACK-DEPTH)
+  * [33.2.7. The “random” Test](regress-evaluation.html#REGRESS-EVALUATION-RANDOM-TEST)
+  * [33.2.8. Configuration Parameters](regress-evaluation.html#REGRESS-EVALUATION-CONFIG-PARAMS)
 
 Some properly installed and fully functional PostgreSQL installations can “fail” some of these regression tests due to platform-specific artifacts such as varying floating-point representation and message wording. The tests are currently evaluated using a simple `diff` comparison against the outputs generated on a reference system, so the results are sensitive to small system differences. When a test is reported as “failed”, always examine the differences between expected and actual results; you might find that the differences are not significant. Nonetheless, we still strive to maintain accurate reference files across all supported platforms, so it can be expected that all tests pass.
 

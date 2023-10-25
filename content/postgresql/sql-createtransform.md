@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE TRANSFORM
 
 CREATE TRANSFORM — define a new transform
@@ -30,8 +28,8 @@ A transform specifies how to adapt a data type to a procedural language. For exa
 
 A transform specifies two functions:
 
-*   A “from SQL” function that converts the type from the SQL environment to the language. This function will be invoked on the arguments of a function written in the language.
-*   A “to SQL” function that converts the type from the language to the SQL environment. This function will be invoked on the return value of a function written in the language.
+* A “from SQL” function that converts the type from the SQL environment to the language. This function will be invoked on the arguments of a function written in the language.
+* A “to SQL” function that converts the type from the language to the SQL environment. This function will be invoked on the return value of a function written in the language.
 
 It is not necessary to provide both of these functions. If one is not specified, the language-specific default behavior will be used if necessary. (To prevent a transformation in a certain direction from happening at all, you could also write a transform function that always errors out.)
 
@@ -39,19 +37,19 @@ To be able to create a transform, you must own and have `USAGE` privilege on the
 
 ## Parameters
 
-*   *`type_name`*
+* *`type_name`*
 
     The name of the data type of the transform.
 
-*   *`lang_name`*
+* *`lang_name`*
 
     The name of the language of the transform.
 
-*   `from_sql_function_name[(argument_type [, ...])]`
+* `from_sql_function_name[(argument_type [, ...])]`
 
     The name of the function for converting the type from the SQL environment to the language. It must take one argument of type `internal` and return type `internal`. The actual argument will be of the type for the transform, and the function should be coded as if it were. (But it is not allowed to declare an SQL-level function returning `internal` without at least one argument of type `internal`.) The actual return value will be something specific to the language implementation. If no argument list is specified, the function name must be unique in its schema.
 
-*   `to_sql_function_name[(argument_type [, ...])]`
+* `to_sql_function_name[(argument_type [, ...])]`
 
     The name of the function for converting the type from the language to the SQL environment. It must take one argument of type `internal` and return the type that is the type for the transform. The actual argument value will be something specific to the language implementation. If no argument list is specified, the function name must be unique in its schema.
 

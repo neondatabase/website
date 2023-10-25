@@ -10,15 +10,13 @@
 
 **Table of Contents**
 
-*   [18.1. Building with Visual C++ or the Microsoft Windows SDK](install-windows-full.html)
+* [18.1. Building with Visual C++ or the Microsoft Windows SDK](install-windows-full.html)
 
-    *   *   [18.1.1. Requirements](install-windows-full.html#INSTALL-WINDOWS-FULL-REQUIREMENTS)
-        *   [18.1.2. Special Considerations for 64-Bit Windows](install-windows-full.html#INSTALL-WINDOWS-FULL-64-BIT)
-        *   [18.1.3. Building](install-windows-full.html#INSTALL-WINDOWS-FULL-BUILD)
-        *   [18.1.4. Cleaning and Installing](install-windows-full.html#INSTALL-WINDOWS-FULL-CLEAN-INST)
-        *   [18.1.5. Running the Regression Tests](install-windows-full.html#INSTALL-WINDOWS-FULL-REG-TESTS)
-
-
+  * *   [18.1.1. Requirements](install-windows-full.html#INSTALL-WINDOWS-FULL-REQUIREMENTS)
+    * [18.1.2. Special Considerations for 64-Bit Windows](install-windows-full.html#INSTALL-WINDOWS-FULL-64-BIT)
+    * [18.1.3. Building](install-windows-full.html#INSTALL-WINDOWS-FULL-BUILD)
+    * [18.1.4. Cleaning and Installing](install-windows-full.html#INSTALL-WINDOWS-FULL-CLEAN-INST)
+    * [18.1.5. Running the Regression Tests](install-windows-full.html#INSTALL-WINDOWS-FULL-REG-TESTS)
 
 It is recommended that most users download the binary distribution for Windows, available as a graphical installer package from the PostgreSQL website at <https://www.postgresql.org/download/>. Building from source is only intended for people developing PostgreSQL or extensions.
 

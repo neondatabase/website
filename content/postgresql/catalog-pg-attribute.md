@@ -8,8 +8,6 @@
 
 ## 53.7. `pg_attribute` [#](#CATALOG-PG-ATTRIBUTE)
 
-
-
 The catalog `pg_attribute` stores information about table columns. There will be exactly one `pg_attribute` row for every column in every table in the database. (There will also be attribute entries for indexes, and indeed all objects that have [`pg_class`](catalog-pg-class.html "53.11. pg_class") entries.)
 
 The term attribute is equivalent to column and is used for historical reasons.
@@ -46,7 +44,6 @@ The term attribute is equivalent to column and is used for historical reasons.
 | `attmissingval` `anyarray`This column has a one element array containing the value used when the column is entirely missing from the row, as happens when the column is added with a non-volatile `DEFAULT` value after the row is created. The value is only used when `atthasmissing` is true. If there is no value the column is null.                                                                                                                                                                       |
 
 \
-
 
 In a dropped column's `pg_attribute` entry, `atttypid` is reset to zero, but `attlen` and the other fields copied from [`pg_type`](catalog-pg-type.html "53.64. pg_type") are still valid. This arrangement is needed to cope with the situation where the dropped column's data type was later dropped, and so there is no `pg_type` row anymore. `attlen` and the other fields can be used to interpret the contents of a row of the table.
 

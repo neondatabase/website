@@ -18,7 +18,6 @@ Through simulation of the evolutionary operations *recombination*, *mutation*, a
 
 \
 
-
 According to the comp.ai.genetic FAQ it cannot be stressed too strongly that a GA is not a pure random search for a solution to a problem. A GA uses stochastic processes, but the result is distinctly non-random (better than random).
 
 ***

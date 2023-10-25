@@ -29,7 +29,6 @@ The view `sequences` contains all sequences defined in the current database. Onl
 
 \
 
-
 Note that in accordance with the SQL standard, the start, minimum, maximum, and increment values are returned as character strings.
 
 ***

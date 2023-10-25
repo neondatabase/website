@@ -10,17 +10,15 @@
 
 **Table of Contents**
 
-*   *   [51.1. Initialization Functions](archive-module-init.html)
-    *   [51.2. Archive Module Callbacks](archive-module-callbacks.html)
+  * *   [51.1. Initialization Functions](archive-module-init.html)
+  * [51.2. Archive Module Callbacks](archive-module-callbacks.html)
 
     <!---->
 
-    *   *   [51.2.1. Startup Callback](archive-module-callbacks.html#ARCHIVE-MODULE-STARTUP)
-        *   [51.2.2. Check Callback](archive-module-callbacks.html#ARCHIVE-MODULE-CHECK)
-        *   [51.2.3. Archive Callback](archive-module-callbacks.html#ARCHIVE-MODULE-ARCHIVE)
-        *   [51.2.4. Shutdown Callback](archive-module-callbacks.html#ARCHIVE-MODULE-SHUTDOWN)
-
-
+  * *   [51.2.1. Startup Callback](archive-module-callbacks.html#ARCHIVE-MODULE-STARTUP)
+    * [51.2.2. Check Callback](archive-module-callbacks.html#ARCHIVE-MODULE-CHECK)
+    * [51.2.3. Archive Callback](archive-module-callbacks.html#ARCHIVE-MODULE-ARCHIVE)
+    * [51.2.4. Shutdown Callback](archive-module-callbacks.html#ARCHIVE-MODULE-SHUTDOWN)
 
 PostgreSQL provides infrastructure to create custom modules for continuous archiving (see [Section 26.3](continuous-archiving.html "26.3. Continuous Archiving and Point-in-Time Recovery (PITR)")). While archiving via a shell command (i.e., [archive\_command](runtime-config-wal.html#GUC-ARCHIVE-COMMAND)) is much simpler, a custom archive module will often be considerably more robust and performant.
 

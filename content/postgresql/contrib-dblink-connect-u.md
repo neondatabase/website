@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## dblink\_connect\_u
 
 dblink\_connect\_u — opens a persistent connection to a remote database, insecurely

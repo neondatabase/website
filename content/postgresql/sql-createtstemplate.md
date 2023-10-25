@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE TEXT SEARCH TEMPLATE
 
 CREATE TEXT SEARCH TEMPLATE — define a new text search template
@@ -34,15 +32,15 @@ Refer to [Chapter 12](textsearch.html "Chapter 12. Full Text Search") for fur
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of the text search template to be created. The name can be schema-qualified.
 
-*   *`init_function`*
+* *`init_function`*
 
     The name of the init function for the template.
 
-*   *`lexize_function`*
+* *`lexize_function`*
 
     The name of the lexize function for the template.
 

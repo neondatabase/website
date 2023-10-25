@@ -31,7 +31,6 @@ Any `cidr` value can be cast to `inet` implicitly; therefore, the operators and 
 
 \
 
-
 **Table 9.40. IP Address Functions**
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                                                                                                                                                   |
@@ -52,7 +51,6 @@ Any `cidr` value can be cast to `inet` implicitly; therefore, the operators and 
 | `text` ( `inet` ) → `text`Returns the unabbreviated IP address and netmask length as text. (This has the same result as an explicit cast to `text`.)`text(inet '192.168.1.5')` → `192.168.1.5/32`                                                                                                                                           |
 
 \
-
 
 ### Tip
 

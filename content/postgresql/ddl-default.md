@@ -8,8 +8,6 @@
 
 ## 5.2. Default Values [#](#DDL-DEFAULT)
 
-
-
 A column can be assigned a default value. When a new row is created and no values are specified for some of the columns, those columns will be filled with their respective default values. A data manipulation command can also request explicitly that a column be set to its default value, without having to know what that value is. (Details about data manipulation commands are in [Chapter 6](dml.html "Chapter 6. Data Manipulation").)
 
 o default value is declared explicitly, the default value is the null value. This usually makes sense because a null value can be considered to represent unknown data.

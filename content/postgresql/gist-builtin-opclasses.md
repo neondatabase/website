@@ -117,7 +117,6 @@ The core PostgreSQL distribution includes the GiST operator classes shown in [Ta
 
 \
 
-
 For historical reasons, the `inet_ops` operator class is not the default class for types `inet` and `cidr`. To use it, mention the class name in `CREATE INDEX`, for example
 
 ```

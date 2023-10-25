@@ -8,9 +8,9 @@
 
 ## F.4. auto\_explain — log execution plans of slow queries [#](#AUTO-EXPLAIN)
 
-  * *   [F.4.1. Configuration Parameters](auto-explain.html#AUTO-EXPLAIN-CONFIGURATION-PARAMETERS)
-  * [F.4.2. Example](auto-explain.html#AUTO-EXPLAIN-EXAMPLE)
-  * [F.4.3. Author](auto-explain.html#AUTO-EXPLAIN-AUTHOR)
+* *   [F.4.1. Configuration Parameters](auto-explain.html#AUTO-EXPLAIN-CONFIGURATION-PARAMETERS)
+* [F.4.2. Example](auto-explain.html#AUTO-EXPLAIN-EXAMPLE)
+* [F.4.3. Author](auto-explain.html#AUTO-EXPLAIN-AUTHOR)
 
 The `auto_explain` module provides a means for logging execution plans of slow statements automatically, without having to run [EXPLAIN](sql-explain.html "EXPLAIN") by hand. This is especially helpful for tracking down un-optimized queries in large applications.
 

@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SET ROLE
 
 SET ROLE — set the current user identifier of the current session

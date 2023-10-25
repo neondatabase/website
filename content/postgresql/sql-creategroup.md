@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE GROUP
 
 CREATE GROUP — define a new database role

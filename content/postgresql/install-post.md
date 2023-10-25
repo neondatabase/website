@@ -8,12 +8,10 @@
 
 ## 17.5. Post-Installation Setup [#](#INSTALL-POST)
 
-*   *   [17.5.1. Shared Libraries](install-post.html#INSTALL-POST-SHLIBS)
-    *   [17.5.2. Environment Variables](install-post.html#INSTALL-POST-ENV-VARS)
+  * *   [17.5.1. Shared Libraries](install-post.html#INSTALL-POST-SHLIBS)
+  * [17.5.2. Environment Variables](install-post.html#INSTALL-POST-ENV-VARS)
 
 ### 17.5.1. Shared Libraries [#](#INSTALL-POST-SHLIBS)
-
-
 
 On some systems with shared libraries you need to tell the system how to find the newly installed shared libraries. The systems on which this is *not* necessary include FreeBSD, Linux, NetBSD, OpenBSD, and Solaris.
 
@@ -65,8 +63,6 @@ If you are on Linux and you have root access, you can run:
 instead. Other systems are not known to have an equivalent command.
 
 ### 17.5.2. Environment Variables [#](#INSTALL-POST-ENV-VARS)
-
-
 
 If you installed into `/usr/local/pgsql` or some other location that is not searched for programs by default, you should add `/usr/local/pgsql/bin` (or whatever you set `--bindir` to in [Step 1](install-make.html#CONFIGURE "Configuration")) into your `PATH`. Strictly speaking, this is not necessary, but it will make the use of PostgreSQL much more convenient.
 

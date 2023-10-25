@@ -8,8 +8,8 @@
 
 ## 57.2. For the Programmer [#](#NLS-PROGRAMMER)
 
-*   *   [57.2.1. Mechanics](nls-programmer.html#NLS-MECHANICS)
-    *   [57.2.2. Message-Writing Guidelines](nls-programmer.html#NLS-GUIDELINES)
+  * *   [57.2.1. Mechanics](nls-programmer.html#NLS-MECHANICS)
+  * [57.2.2. Message-Writing Guidelines](nls-programmer.html#NLS-GUIDELINES)
 
 ### 57.2.1. Mechanics [#](#NLS-MECHANICS)
 
@@ -17,7 +17,7 @@ This section describes how to implement native language support in a program or 
 
 **Adding NLS Support to a Program**
 
-1.  Insert this code into the start-up sequence of the program:
+1. Insert this code into the start-up sequence of the program:
 
     ```
 
@@ -36,7 +36,7 @@ This section describes how to implement native language support in a program or 
 
     (The *`progname`* can actually be chosen freely.)
 
-2.  Wherever a message that is a candidate for translation is found, a call to `gettext()` needs to be inserted. E.g.:
+2. Wherever a message that is a candidate for translation is found, a call to `gettext()` needs to be inserted. E.g.:
 
     ```
 
@@ -61,21 +61,21 @@ This section describes how to implement native language support in a program or 
 
     Another solution is feasible if the program does much of its communication through one or a few functions, such as `ereport()` in the backend. Then you make this function call `gettext` internally on all input strings.
 
-3.  Add a file `nls.mk` in the directory with the program sources. This file will be read as a makefile. The following variable assignments need to be made here:
+3. Add a file `nls.mk` in the directory with the program sources. This file will be read as a makefile. The following variable assignments need to be made here:
 
-    *   `CATALOG_NAME`
+    * `CATALOG_NAME`
 
         The program name, as provided in the `textdomain()` call.
 
-    *   `GETTEXT_FILES`
+    * `GETTEXT_FILES`
 
         List of files that contain translatable strings, i.e., those marked with `gettext` or an alternative solution. Eventually, this will include nearly all source files of the program. If this list gets too long you can make the first “file” be a `+` and the second word be a file that contains one file name per line.
 
-    *   `GETTEXT_TRIGGERS`
+    * `GETTEXT_TRIGGERS`
 
         The tools that generate message catalogs for the translators to work on need to know what function calls contain translatable strings. By default, only `gettext()` calls are known. If you used `_` or other identifiers you need to list them here. If the translatable string is not the first argument, the item needs to be of the form `func:2` (for the second argument). If you have a function that supports pluralized messages, the item should look like `func:1,2` (identifying the singular and plural message arguments).
 
-4.  Add a file `po/LINGUAS`, which will contain the list of provided translations — initially empty.
+4. Add a file `po/LINGUAS`, which will contain the list of provided translations — initially empty.
 
 The build system will automatically take care of building and installing the message catalogs.
 
@@ -83,7 +83,7 @@ The build system will automatically take care of building and installing the mes
 
 Here are some guidelines for writing messages that are easily translatable.
 
-*   Do not construct sentences at run-time, like:
+* Do not construct sentences at run-time, like:
 
     ```
 
@@ -92,7 +92,7 @@ Here are some guidelines for writing messages that are easily translatable.
 
     The word order within the sentence might be different in other languages. Also, even if you remember to call `gettext()` on each fragment, the fragments might not translate well separately. It's better to duplicate a little code so that each message to be translated is a coherent whole. Only numbers, file names, and such-like run-time variables should be inserted at run time into a message text.
 
-*   For similar reasons, this won't work:
+* For similar reasons, this won't work:
 
     ```
 
@@ -130,7 +130,7 @@ Here are some guidelines for writing messages that are easily translatable.
 
     If you need to pluralize a message that isn't going directly to an `errmsg` or `errdetail` report, you have to use the underlying function `ngettext`. See the gettext documentation.
 
-*   If you want to communicate something to the translator, such as about how a message is intended to line up with other output, precede the occurrence of the string with a comment that starts with `translator`, e.g.:
+* If you want to communicate something to the translator, such as about how a message is intended to line up with other output, precede the occurrence of the string with a comment that starts with `translator`, e.g.:
 
     ```
 

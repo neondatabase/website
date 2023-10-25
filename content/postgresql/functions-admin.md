@@ -8,22 +8,20 @@
 
 ## 9.27. System Administration Functions [#](#FUNCTIONS-ADMIN)
 
-*   *   [9.27.1. Configuration Settings Functions](functions-admin.html#FUNCTIONS-ADMIN-SET)
-    *   [9.27.2. Server Signaling Functions](functions-admin.html#FUNCTIONS-ADMIN-SIGNAL)
-    *   [9.27.3. Backup Control Functions](functions-admin.html#FUNCTIONS-ADMIN-BACKUP)
-    *   [9.27.4. Recovery Control Functions](functions-admin.html#FUNCTIONS-RECOVERY-CONTROL)
-    *   [9.27.5. Snapshot Synchronization Functions](functions-admin.html#FUNCTIONS-SNAPSHOT-SYNCHRONIZATION)
-    *   [9.27.6. Replication Management Functions](functions-admin.html#FUNCTIONS-REPLICATION)
-    *   [9.27.7. Database Object Management Functions](functions-admin.html#FUNCTIONS-ADMIN-DBOBJECT)
-    *   [9.27.8. Index Maintenance Functions](functions-admin.html#FUNCTIONS-ADMIN-INDEX)
-    *   [9.27.9. Generic File Access Functions](functions-admin.html#FUNCTIONS-ADMIN-GENFILE)
-    *   [9.27.10. Advisory Lock Functions](functions-admin.html#FUNCTIONS-ADVISORY-LOCKS)
+  * *   [9.27.1. Configuration Settings Functions](functions-admin.html#FUNCTIONS-ADMIN-SET)
+  * [9.27.2. Server Signaling Functions](functions-admin.html#FUNCTIONS-ADMIN-SIGNAL)
+  * [9.27.3. Backup Control Functions](functions-admin.html#FUNCTIONS-ADMIN-BACKUP)
+  * [9.27.4. Recovery Control Functions](functions-admin.html#FUNCTIONS-RECOVERY-CONTROL)
+  * [9.27.5. Snapshot Synchronization Functions](functions-admin.html#FUNCTIONS-SNAPSHOT-SYNCHRONIZATION)
+  * [9.27.6. Replication Management Functions](functions-admin.html#FUNCTIONS-REPLICATION)
+  * [9.27.7. Database Object Management Functions](functions-admin.html#FUNCTIONS-ADMIN-DBOBJECT)
+  * [9.27.8. Index Maintenance Functions](functions-admin.html#FUNCTIONS-ADMIN-INDEX)
+  * [9.27.9. Generic File Access Functions](functions-admin.html#FUNCTIONS-ADMIN-GENFILE)
+  * [9.27.10. Advisory Lock Functions](functions-admin.html#FUNCTIONS-ADVISORY-LOCKS)
 
 The functions described in this section are used to control and monitor a PostgreSQL installation.
 
 ### 9.27.1. Configuration Settings Functions [#](#FUNCTIONS-ADMIN-SET)
-
-
 
 [Table 9.89](functions-admin.html#FUNCTIONS-ADMIN-SET-TABLE "Table 9.89. Configuration Settings Functions") shows the functions available to query and alter run-time configuration parameters.
 
@@ -35,8 +33,6 @@ The functions described in this section are used to control and monitor a Postgr
 | `set_config` ( *`setting_name`* `text`, *`new_value`* `text`, *`is_local`* `boolean` ) → `text`Sets the parameter *`setting_name`* to *`new_value`*, and returns that value. If *`is_local`* is `true`, the new value will only apply during the current transaction. If you want the new value to apply for the rest of the current session, use `false` instead. This function corresponds to the SQL command [SET](sql-set.html "SET").`set_config('log_statement_stats', 'off', false)` → `off` |
 
 ### 9.27.2. Server Signaling Functions [#](#FUNCTIONS-ADMIN-SIGNAL)
-
-
 
 The functions shown in [Table 9.90](functions-admin.html#FUNCTIONS-ADMIN-SIGNAL-TABLE "Table 9.90. Server Signaling Functions") send control signals to other server processes. Use of these functions is restricted to superusers by default but access may be granted to others using `GRANT`, with noted exceptions.
 
@@ -53,7 +49,6 @@ Each of these functions returns `true` if the signal was successfully sent and `
 | `pg_terminate_backend` ( *`pid`* `integer`, *`timeout`* `bigint` `DEFAULT` `0` ) → `boolean`Terminates the session whose backend process has the specified process ID. This is also allowed if the calling role is a member of the role whose backend is being terminated or the calling role has privileges of `pg_signal_backend`, however only superusers can terminate superuser backends.If *`timeout`* is not specified or zero, this function returns `true` whether the process actually terminates or not, indicating only that the sending of the signal was successful. If the *`timeout`* is specified (in milliseconds) and greater than zero, the function waits until the process is actually terminated or until the given time has passed. If the process is terminated, the function returns `true`. On timeout, a warning is emitted and `false` is returned. |
 
 \
-
 
 `pg_cancel_backend` and `pg_terminate_backend` send signals (SIGINT or SIGTERM respectively) to backend processes identified by process ID. The process ID of an active backend can be found from the `pid` column of the `pg_stat_activity` view, or by listing the `postgres` processes on the server (using ps on Unix or the Task Manager on Windows). The role of an active backend can be found from the `usename` column of the `pg_stat_activity` view.
 
@@ -91,8 +86,6 @@ If there are more than 100 child contexts under the same parent, the first 100 c
 
 ### 9.27.3. Backup Control Functions [#](#FUNCTIONS-ADMIN-BACKUP)
 
-
-
 The functions shown in [Table 9.91](functions-admin.html#FUNCTIONS-ADMIN-BACKUP-TABLE "Table 9.91. Backup Control Functions") assist in making on-line backups. These functions cannot be executed during recovery (except `pg_backup_start`, `pg_backup_stop`, and `pg_wal_lsn_diff`).
 
 For details about proper usage of these functions, see [Section 26.3](continuous-archiving.html "26.3. Continuous Archiving and Point-in-Time Recovery (PITR)").
@@ -114,7 +107,6 @@ For details about proper usage of these functions, see [Section 26.3](continuou
 | `pg_wal_lsn_diff` ( *`lsn1`* `pg_lsn`, *`lsn2`* `pg_lsn` ) → `numeric`Calculates the difference in bytes (*`lsn1`* - *`lsn2`*) between two write-ahead log locations. This can be used with `pg_stat_replication` or some of the functions shown in [Table 9.91](functions-admin.html#FUNCTIONS-ADMIN-BACKUP-TABLE "Table 9.91. Backup Control Functions") to get the replication lag.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 \
-
 
 `pg_current_wal_lsn` displays the current write-ahead log write location in the same format used by the above functions. Similarly, `pg_current_wal_insert_lsn` displays the current write-ahead log insertion location and `pg_current_wal_flush_lsn` displays the current write-ahead log flush location. The insertion location is the “logical” end of the write-ahead log at any instant, while the write location is the end of what has actually been written out from the server's internal buffers, and the flush location is the last location known to be written to durable storage. The write location is the end of what can be examined from outside the server, and is usually what you want if you are interested in archiving partially-complete write-ahead log files. The insertion and flush locations are made available primarily for server debugging purposes. These are all read-only operations and do not require superuser permissions.
 
@@ -163,7 +155,6 @@ The functions shown in [Table 9.92](functions-admin.html#FUNCTIONS-RECOVERY-INF
 
 \
 
-
 The functions shown in [Table 9.93](functions-admin.html#FUNCTIONS-RECOVERY-CONTROL-TABLE "Table 9.93. Recovery Control Functions") control the progress of recovery. These functions may be executed only during recovery.
 
 **Table 9.93. Recovery Control Functions**
@@ -177,7 +168,6 @@ The functions shown in [Table 9.93](functions-admin.html#FUNCTIONS-RECOVERY-CON
 | `pg_wal_replay_resume` () → `void`Restarts recovery if it was paused.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 \
-
 
 `pg_wal_replay_pause` and `pg_wal_replay_resume` cannot be executed while a promotion is ongoing. If a promotion is triggered while recovery is paused, the paused state ends and promotion continues.
 
@@ -246,9 +236,10 @@ The functions shown in [Table 9.96](functions-admin.html#FUNCTIONS-ADMIN-DBSIZE
 | `pg_database_size` ( `name` ) → `bigint``pg_database_size` ( `oid` ) → `bigint`Computes the total disk space used by the database with the specified name or OID. To use this function, you must have `CONNECT` privilege on the specified database (which is granted by default) or have privileges of the `pg_read_all_stats` role.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `pg_indexes_size` ( `regclass` ) → `bigint`Computes the total disk space used by indexes attached to the specified table.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `pg_relation_size` ( *`relation`* `regclass` \[, *`fork`* `text` ] ) → `bigint`Computes the disk space used by one “fork” of the specified relation. (Note that for most purposes it is more convenient to use the higher-level functions `pg_total_relation_size` or `pg_table_size`, which sum the sizes of all forks.) With one argument, this returns the size of the main data fork of the relation. The second argument can be provided to specify which fork to examine:*   `main` returns the size of the main data fork of the relation.
-*   `fsm` returns the size of the Free Space Map (see [Section 73.3](storage-fsm.html "73.3. Free Space Map")) associated with the relation.
-*   `vm` returns the size of the Visibility Map (see [Section 73.4](storage-vm.html "73.4. Visibility Map")) associated with the relation.
-*   `init` returns the size of the initialization fork, if any, associated with the relation. |
+
+* `fsm` returns the size of the Free Space Map (see [Section 73.3](storage-fsm.html "73.3. Free Space Map")) associated with the relation.
+* `vm` returns the size of the Visibility Map (see [Section 73.4](storage-vm.html "73.4. Visibility Map")) associated with the relation.
+* `init` returns the size of the initialization fork, if any, associated with the relation. |
 | `pg_size_bytes` ( `text` ) → `bigint`Converts a size in human-readable format (as returned by `pg_size_pretty`) into bytes. Valid units are `bytes`, `B`, `kB`, `MB`, `GB`, `TB`, and `PB`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `pg_size_pretty` ( `bigint` ) → `text``pg_size_pretty` ( `numeric` ) → `text`Converts a size in bytes into a more easily human-readable format with size units (bytes, kB, MB, GB, TB, or PB as appropriate). Note that the units are powers of 2 rather than powers of 10, so 1kB is 1024 bytes, 1MB is 10242 = 1048576 bytes, and so on.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | `pg_table_size` ( `regclass` ) → `bigint`Computes the disk space used by the specified table, excluding indexes (but including its TOAST table if any, free space map, and visibility map).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -256,7 +247,6 @@ The functions shown in [Table 9.96](functions-admin.html#FUNCTIONS-ADMIN-DBSIZE
 | `pg_total_relation_size` ( `regclass` ) → `bigint`Computes the total disk space used by the specified table, including all indexes and TOAST data. The result is equivalent to `pg_table_size` `+` `pg_indexes_size`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 \
-
 
 The functions above that operate on tables or indexes accept a `regclass` argument, which is simply the OID of the table or index in the `pg_class` system catalog. You do not have to look up the OID by hand, however, since the `regclass` data type's input converter will do the work for you. See [Section 8.19](datatype-oid.html "8.19. Object Identifier Types") for details.
 
@@ -272,7 +262,6 @@ The functions shown in [Table 9.97](functions-admin.html#FUNCTIONS-ADMIN-DBLOCA
 
 \
 
-
 [Table 9.98](functions-admin.html#FUNCTIONS-ADMIN-COLLATION "Table 9.98. Collation Management Functions") lists functions used to manage collations.
 
 **Table 9.98. Collation Management Functions**
@@ -285,7 +274,6 @@ The functions shown in [Table 9.97](functions-admin.html#FUNCTIONS-ADMIN-DBLOCA
 
 \
 
-
 [Table 9.99](functions-admin.html#FUNCTIONS-INFO-PARTITION "Table 9.99. Partitioning Information Functions") lists functions that provide information about the structure of partitioned tables.
 
 **Table 9.99. Partitioning Information Functions**
@@ -297,7 +285,6 @@ The functions shown in [Table 9.97](functions-admin.html#FUNCTIONS-ADMIN-DBLOCA
 | `pg_partition_root` ( `regclass` ) → `regclass`Returns the top-most parent of the partition tree to which the given relation belongs. Returns `NULL` if the relation does not exist or is not a partition or partitioned table.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 \
-
 
 For example, to check the total size of the data contained in a partitioned table `measurement`, one could use the following query:
 

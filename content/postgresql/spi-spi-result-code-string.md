@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_result\_code\_string
 
 SPI\_result\_code\_string — return error code as string
@@ -25,7 +23,7 @@ const char * SPI_result_code_string(int code);
 
 ## Arguments
 
-*   `int code`
+* `int code`
 
     result code
 

@@ -51,7 +51,6 @@ The geometric types `point`, `box`, `lseg`, `line`, `path`, `polygon`, and `circ
 
 \
 
-
 ### Caution
 
 Note that the “same as” operator, `~=`, represents the usual notion of equality for the `point`, `box`, `polygon`, and `circle` types. Some of the geometric types also have an `=` operator, but `=` compares for equal *areas* only. The other scalar comparison operators (`<=` and so on), where available for these types, likewise compare areas.
@@ -81,7 +80,6 @@ Before PostgreSQL 14, the point is strictly below/above comparison operators `po
 
 \
 
-
 **Table 9.38. Geometric Type Conversion Functions**
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -109,7 +107,6 @@ Before PostgreSQL 14, the point is strictly below/above comparison operators `po
 | `polygon` ( `path` ) → `polygon`Converts closed path to a polygon with the same list of points.`polygon(path '((0,0),(1,1),(2,0))')` → `((0,0),(1,1),(2,0))`                                                                                                                                                                                                                                                                                                                                                                                          |
 
 \
-
 
 It is possible to access the two component numbers of a `point` as though the point were an array with indexes 0 and 1. For example, if `t.p` is a `point` column then `SELECT p[0] FROM t` retrieves the X coordinate and `UPDATE t SET p[1] = ...` changes the Y coordinate. In the same way, a value of type `box` or `lseg` can be treated as an array of two `point` values.
 

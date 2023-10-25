@@ -8,13 +8,11 @@
 
 ## 27.4. Hot Standby [#](#HOT-STANDBY)
 
-*   *   [27.4.1. User's Overview](hot-standby.html#HOT-STANDBY-USERS)
-    *   [27.4.2. Handling Query Conflicts](hot-standby.html#HOT-STANDBY-CONFLICT)
-    *   [27.4.3. Administrator's Overview](hot-standby.html#HOT-STANDBY-ADMIN)
-    *   [27.4.4. Hot Standby Parameter Reference](hot-standby.html#HOT-STANDBY-PARAMETERS)
-    *   [27.4.5. Caveats](hot-standby.html#HOT-STANDBY-CAVEATS)
-
-
+  * *   [27.4.1. User's Overview](hot-standby.html#HOT-STANDBY-USERS)
+  * [27.4.2. Handling Query Conflicts](hot-standby.html#HOT-STANDBY-CONFLICT)
+  * [27.4.3. Administrator's Overview](hot-standby.html#HOT-STANDBY-ADMIN)
+  * [27.4.4. Hot Standby Parameter Reference](hot-standby.html#HOT-STANDBY-PARAMETERS)
+  * [27.4.5. Caveats](hot-standby.html#HOT-STANDBY-CAVEATS)
 
 Hot standby is the term used to describe the ability to connect to the server and run read-only queries while the server is in archive recovery or standby mode. This is useful both for replication purposes and for restoring a backup to a desired state with great precision. The term hot standby also refers to the ability of the server to move from recovery through to normal operation while users continue running queries and/or keep their connections open.
 
@@ -28,51 +26,51 @@ The data on the standby takes some time to arrive from the primary server so the
 
 Transactions started during hot standby may issue the following commands:
 
-*   Query access: `SELECT`, `COPY TO`
+* Query access: `SELECT`, `COPY TO`
 
-*   Cursor commands: `DECLARE`, `FETCH`, `CLOSE`
+* Cursor commands: `DECLARE`, `FETCH`, `CLOSE`
 
-*   Settings: `SHOW`, `SET`, `RESET`
+* Settings: `SHOW`, `SET`, `RESET`
 
-*   Transaction management commands:
+* Transaction management commands:
 
-    *   `BEGIN`, `END`, `ABORT`, `START TRANSACTION`
-    *   `SAVEPOINT`, `RELEASE`, `ROLLBACK TO SAVEPOINT`
-    *   `EXCEPTION` blocks and other internal subtransactions
+  * `BEGIN`, `END`, `ABORT`, `START TRANSACTION`
+  * `SAVEPOINT`, `RELEASE`, `ROLLBACK TO SAVEPOINT`
+  * `EXCEPTION` blocks and other internal subtransactions
 
-*   `LOCK TABLE`, though only when explicitly in one of these modes: `ACCESS SHARE`, `ROW SHARE` or `ROW EXCLUSIVE`.
+* `LOCK TABLE`, though only when explicitly in one of these modes: `ACCESS SHARE`, `ROW SHARE` or `ROW EXCLUSIVE`.
 
-*   Plans and resources: `PREPARE`, `EXECUTE`, `DEALLOCATE`, `DISCARD`
+* Plans and resources: `PREPARE`, `EXECUTE`, `DEALLOCATE`, `DISCARD`
 
-*   Plugins and extensions: `LOAD`
+* Plugins and extensions: `LOAD`
 
-*   `UNLISTEN`
+* `UNLISTEN`
 
 Transactions started during hot standby will never be assigned a transaction ID and cannot write to the system write-ahead log. Therefore, the following actions will produce error messages:
 
-*   Data Manipulation Language (DML): `INSERT`, `UPDATE`, `DELETE`, `MERGE`, `COPY FROM`, `TRUNCATE`. Note that there are no allowed actions that result in a trigger being executed during recovery. This restriction applies even to temporary tables, because table rows cannot be read or written without assigning a transaction ID, which is currently not possible in a hot standby environment.
+* Data Manipulation Language (DML): `INSERT`, `UPDATE`, `DELETE`, `MERGE`, `COPY FROM`, `TRUNCATE`. Note that there are no allowed actions that result in a trigger being executed during recovery. This restriction applies even to temporary tables, because table rows cannot be read or written without assigning a transaction ID, which is currently not possible in a hot standby environment.
 
-*   Data Definition Language (DDL): `CREATE`, `DROP`, `ALTER`, `COMMENT`. This restriction applies even to temporary tables, because carrying out these operations would require updating the system catalog tables.
+* Data Definition Language (DDL): `CREATE`, `DROP`, `ALTER`, `COMMENT`. This restriction applies even to temporary tables, because carrying out these operations would require updating the system catalog tables.
 
-*   `SELECT ... FOR SHARE | UPDATE`, because row locks cannot be taken without updating the underlying data files.
+* `SELECT ... FOR SHARE | UPDATE`, because row locks cannot be taken without updating the underlying data files.
 
-*   Rules on `SELECT` statements that generate DML commands.
+* Rules on `SELECT` statements that generate DML commands.
 
-*   `LOCK` that explicitly requests a mode higher than `ROW EXCLUSIVE MODE`.
+* `LOCK` that explicitly requests a mode higher than `ROW EXCLUSIVE MODE`.
 
-*   `LOCK` in short default form, since it requests `ACCESS EXCLUSIVE MODE`.
+* `LOCK` in short default form, since it requests `ACCESS EXCLUSIVE MODE`.
 
-*   Transaction management commands that explicitly set non-read-only state:
+* Transaction management commands that explicitly set non-read-only state:
 
-    *   `BEGIN READ WRITE`, `START TRANSACTION READ WRITE`
-    *   `SET TRANSACTION READ WRITE`, `SET SESSION CHARACTERISTICS AS TRANSACTION READ WRITE`
-    *   `SET transaction_read_only = off`
+  * `BEGIN READ WRITE`, `START TRANSACTION READ WRITE`
+  * `SET TRANSACTION READ WRITE`, `SET SESSION CHARACTERISTICS AS TRANSACTION READ WRITE`
+  * `SET transaction_read_only = off`
 
-*   Two-phase commit commands: `PREPARE TRANSACTION`, `COMMIT PREPARED`, `ROLLBACK PREPARED` because even read-only transactions need to write WAL in the prepare phase (the first phase of two phase commit).
+* Two-phase commit commands: `PREPARE TRANSACTION`, `COMMIT PREPARED`, `ROLLBACK PREPARED` because even read-only transactions need to write WAL in the prepare phase (the first phase of two phase commit).
 
-*   Sequence updates: `nextval()`, `setval()`
+* Sequence updates: `nextval()`, `setval()`
 
-*   `LISTEN`, `NOTIFY`
+* `LISTEN`, `NOTIFY`
 
 In normal operation, “read-only” transactions are allowed to use `LISTEN` and `NOTIFY`, so hot standby sessions operate under slightly tighter restrictions than ordinary read-only sessions. It is possible that some of these restrictions might be loosened in a future release.
 
@@ -86,11 +84,11 @@ The primary and standby servers are in many ways loosely connected. Actions on t
 
 There are also additional types of conflict that can occur with hot standby. These conflicts are *hard conflicts* in the sense that queries might need to be canceled and, in some cases, sessions disconnected to resolve them. The user is provided with several ways to handle these conflicts. Conflict cases include:
 
-*   Access Exclusive locks taken on the primary server, including both explicit `LOCK` commands and various DDL actions, conflict with table accesses in standby queries.
-*   Dropping a tablespace on the primary conflicts with standby queries using that tablespace for temporary work files.
-*   Dropping a database on the primary conflicts with sessions connected to that database on the standby.
-*   Application of a vacuum cleanup record from WAL conflicts with standby transactions whose snapshots can still “see” any of the rows to be removed.
-*   Application of a vacuum cleanup record from WAL conflicts with queries accessing the target page on the standby, whether or not the data to be removed is visible.
+* Access Exclusive locks taken on the primary server, including both explicit `LOCK` commands and various DDL actions, conflict with table accesses in standby queries.
+* Dropping a tablespace on the primary conflicts with standby queries using that tablespace for temporary work files.
+* Dropping a database on the primary conflicts with sessions connected to that database on the standby.
+* Application of a vacuum cleanup record from WAL conflicts with standby transactions whose snapshots can still “see” any of the rows to be removed.
+* Application of a vacuum cleanup record from WAL conflicts with queries accessing the target page on the standby, whether or not the data to be removed is visible.
 
 On the primary server, these cases simply result in waiting; and the user might choose to cancel either of the conflicting actions. However, on the standby there is no choice: the WAL-logged action already occurred on the primary so the standby must not fail to apply it. Furthermore, allowing WAL application to wait indefinitely may be very undesirable, because the standby's state will become increasingly far behind the primary's. Therefore, a mechanism is provided to forcibly cancel standby queries that conflict with to-be-applied WAL records.
 
@@ -134,18 +132,18 @@ LOG:  database system is ready to accept read-only connections
 
 Consistency information is recorded once per checkpoint on the primary. It is not possible to enable hot standby when reading WAL written during a period when `wal_level` was not set to `replica` or `logical` on the primary. Reaching a consistent state can also be delayed in the presence of both of these conditions:
 
-*   A write transaction has more than 64 subtransactions
-*   Very long-lived write transactions
+* A write transaction has more than 64 subtransactions
+* Very long-lived write transactions
 
 If you are running file-based log shipping ("warm standby"), you might need to wait until the next WAL file arrives, which could be as long as the `archive_timeout` setting on the primary.
 
 The settings of some parameters determine the size of shared memory for tracking transaction IDs, locks, and prepared transactions. These shared memory structures must be no smaller on a standby than on the primary in order to ensure that the standby does not run out of shared memory during recovery. For example, if the primary had used a prepared transaction but the standby had not allocated any shared memory for tracking prepared transactions, then recovery could not continue until the standby's configuration is changed. The parameters affected are:
 
-*   `max_connections`
-*   `max_prepared_transactions`
-*   `max_locks_per_transaction`
-*   `max_wal_senders`
-*   `max_worker_processes`
+* `max_connections`
+* `max_prepared_transactions`
+* `max_locks_per_transaction`
+* `max_wal_senders`
+* `max_worker_processes`
 
 The easiest way to ensure this does not become a problem is to have these parameters set on the standbys to values equal to or greater than on the primary. Therefore, if you want to increase these values, you should do so on all standby servers first, before applying the changes to the primary server. Conversely, if you want to decrease these values, you should do so on the primary server first, before applying the changes to all standby servers. Keep in mind that when a standby is promoted, it becomes the new reference for the required parameter settings for the standbys that follow it. Therefore, to avoid this becoming a problem during a switchover or failover, it is recommended to keep these settings the same on all standby servers.
 
@@ -168,9 +166,9 @@ Transaction status "hint bits" written on the primary are not WAL-logged, so dat
 
 The following types of administration commands are not accepted during recovery mode:
 
-*   Data Definition Language (DDL): e.g., `CREATE INDEX`
-*   Privilege and Ownership: `GRANT`, `REVOKE`, `REASSIGN`
-*   Maintenance commands: `ANALYZE`, `VACUUM`, `CLUSTER`, `REINDEX`
+* Data Definition Language (DDL): e.g., `CREATE INDEX`
+* Privilege and Ownership: `GRANT`, `REVOKE`, `REASSIGN`
+* Maintenance commands: `ANALYZE`, `VACUUM`, `CLUSTER`, `REINDEX`
 
 Again, note that some of these commands are actually allowed during "read only" mode transactions on the primary.
 
@@ -218,10 +216,10 @@ On the standby, parameters [hot\_standby](runtime-config-replication.html#GUC-HO
 
 There are several limitations of hot standby. These can and probably will be fixed in future releases:
 
-*   Full knowledge of running transactions is required before snapshots can be taken. Transactions that use large numbers of subtransactions (currently greater than 64) will delay the start of read-only connections until the completion of the longest running write transaction. If this situation occurs, explanatory messages will be sent to the server log.
-*   Valid starting points for standby queries are generated at each checkpoint on the primary. If the standby is shut down while the primary is in a shutdown state, it might not be possible to re-enter hot standby until the primary is started up, so that it generates further starting points in the WAL logs. This situation isn't a problem in the most common situations where it might happen. Generally, if the primary is shut down and not available anymore, that's likely due to a serious failure that requires the standby being converted to operate as the new primary anyway. And in situations where the primary is being intentionally taken down, coordinating to make sure the standby becomes the new primary smoothly is also standard procedure.
-*   At the end of recovery, `AccessExclusiveLocks` held by prepared transactions will require twice the normal number of lock table entries. If you plan on running either a large number of concurrent prepared transactions that normally take `AccessExclusiveLocks`, or you plan on having one large transaction that takes many `AccessExclusiveLocks`, you are advised to select a larger value of `max_locks_per_transaction`, perhaps as much as twice the value of the parameter on the primary server. You need not consider this at all if your setting of `max_prepared_transactions` is 0.
-*   The Serializable transaction isolation level is not yet available in hot standby. (See [Section 13.2.3](transaction-iso.html#XACT-SERIALIZABLE "13.2.3. Serializable Isolation Level") and [Section 13.4.1](applevel-consistency.html#SERIALIZABLE-CONSISTENCY "13.4.1. Enforcing Consistency with Serializable Transactions") for details.) An attempt to set a transaction to the serializable isolation level in hot standby mode will generate an error.
+* Full knowledge of running transactions is required before snapshots can be taken. Transactions that use large numbers of subtransactions (currently greater than 64) will delay the start of read-only connections until the completion of the longest running write transaction. If this situation occurs, explanatory messages will be sent to the server log.
+* Valid starting points for standby queries are generated at each checkpoint on the primary. If the standby is shut down while the primary is in a shutdown state, it might not be possible to re-enter hot standby until the primary is started up, so that it generates further starting points in the WAL logs. This situation isn't a problem in the most common situations where it might happen. Generally, if the primary is shut down and not available anymore, that's likely due to a serious failure that requires the standby being converted to operate as the new primary anyway. And in situations where the primary is being intentionally taken down, coordinating to make sure the standby becomes the new primary smoothly is also standard procedure.
+* At the end of recovery, `AccessExclusiveLocks` held by prepared transactions will require twice the normal number of lock table entries. If you plan on running either a large number of concurrent prepared transactions that normally take `AccessExclusiveLocks`, or you plan on having one large transaction that takes many `AccessExclusiveLocks`, you are advised to select a larger value of `max_locks_per_transaction`, perhaps as much as twice the value of the parameter on the primary server. You need not consider this at all if your setting of `max_prepared_transactions` is 0.
+* The Serializable transaction isolation level is not yet available in hot standby. (See [Section 13.2.3](transaction-iso.html#XACT-SERIALIZABLE "13.2.3. Serializable Isolation Level") and [Section 13.4.1](applevel-consistency.html#SERIALIZABLE-CONSISTENCY "13.4.1. Enforcing Consistency with Serializable Transactions") for details.) An attempt to set a transaction to the serializable isolation level in hot standby mode will generate an error.
 
 ***
 

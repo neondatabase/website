@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## VALUES
 
 VALUES — compute a set of rows
@@ -33,23 +31,23 @@ Within larger commands, `VALUES` is syntactically allowed anywhere that `SELECT`
 
 ## Parameters
 
-*   *`expression`*
+* *`expression`*
 
     A constant or expression to compute and insert at the indicated place in the resulting table (set of rows). In a `VALUES` list appearing at the top level of an `INSERT`, an *`expression`* can be replaced by `DEFAULT` to indicate that the destination column's default value should be inserted. `DEFAULT` cannot be used when `VALUES` appears in other contexts.
 
-*   *`sort_expression`*
+* *`sort_expression`*
 
     An expression or integer constant indicating how to sort the result rows. This expression can refer to the columns of the `VALUES` result as `column1`, `column2`, etc. For more details see [ORDER BY Clause](sql-select.html#SQL-ORDERBY "ORDER BY Clause") in the [SELECT](sql-select.html "SELECT") documentation.
 
-*   *`operator`*
+* *`operator`*
 
     A sorting operator. For details see [ORDER BY Clause](sql-select.html#SQL-ORDERBY "ORDER BY Clause") in the [SELECT](sql-select.html "SELECT") documentation.
 
-*   *`count`*
+* *`count`*
 
     The maximum number of rows to return. For details see [LIMIT Clause](sql-select.html#SQL-LIMIT "LIMIT Clause") in the [SELECT](sql-select.html "SELECT") documentation.
 
-*   *`start`*
+* *`start`*
 
     The number of rows to skip before starting to return rows. For details see [LIMIT Clause](sql-select.html#SQL-LIMIT "LIMIT Clause") in the [SELECT](sql-select.html "SELECT") documentation.
 

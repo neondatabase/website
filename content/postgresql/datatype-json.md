@@ -8,15 +8,13 @@
 
 ## 8.14. JSON Types [#](#DATATYPE-JSON)
 
-*   *   [8.14.1. JSON Input and Output Syntax](datatype-json.html#JSON-KEYS-ELEMENTS)
-    *   [8.14.2. Designing JSON Documents](datatype-json.html#JSON-DOC-DESIGN)
-    *   [8.14.3. `jsonb` Containment and Existence](datatype-json.html#JSON-CONTAINMENT)
-    *   [8.14.4. `jsonb` Indexing](datatype-json.html#JSON-INDEXING)
-    *   [8.14.5. `jsonb` Subscripting](datatype-json.html#JSONB-SUBSCRIPTING)
-    *   [8.14.6. Transforms](datatype-json.html#DATATYPE-JSON-TRANSFORMS)
-    *   [8.14.7. jsonpath Type](datatype-json.html#DATATYPE-JSONPATH)
-
-
+  * *   [8.14.1. JSON Input and Output Syntax](datatype-json.html#JSON-KEYS-ELEMENTS)
+  * [8.14.2. Designing JSON Documents](datatype-json.html#JSON-DOC-DESIGN)
+  * [8.14.3. `jsonb` Containment and Existence](datatype-json.html#JSON-CONTAINMENT)
+  * [8.14.4. `jsonb` Indexing](datatype-json.html#JSON-INDEXING)
+  * [8.14.5. `jsonb` Subscripting](datatype-json.html#JSONB-SUBSCRIPTING)
+  * [8.14.6. Transforms](datatype-json.html#DATATYPE-JSON-TRANSFORMS)
+  * [8.14.7. jsonpath Type](datatype-json.html#DATATYPE-JSONPATH)
 
 JSON data types are for storing JSON (JavaScript Object Notation) data, as specified in [RFC 7159](https://tools.ietf.org/html/rfc7159). Such data can also be stored as `text`, but the JSON data types have the advantage of enforcing that each stored value is valid according to the JSON rules. There are also assorted JSON-specific functions and operators available for data stored in these data types; see [Section 9.16](functions-json.html "9.16. JSON Functions and Operators").
 
@@ -50,7 +48,6 @@ Conversely, as noted in the table there are some minor restrictions on the input
 | `null`              | (none)          | SQL `NULL` is a different concept                                                                             |
 
 \
-
 
 ### 8.14.1. JSON Input and Output Syntax [#](#JSON-KEYS-ELEMENTS)
 
@@ -114,8 +111,6 @@ Representing data as JSON can be considerably more flexible than the traditional
 JSON data is subject to the same concurrency-control considerations as any other data type when stored in a table. Although storing large documents is practicable, keep in mind that any update acquires a row-level lock on the whole row. Consider limiting JSON documents to a manageable size in order to decrease lock contention among updating transactions. Ideally, JSON documents should each represent an atomic datum that business rules dictate cannot reasonably be further subdivided into smaller datums that could be modified independently.
 
 ### 8.14.3. `jsonb` Containment and Existence [#](#JSON-CONTAINMENT)
-
-
 
 Testing *containment* is an important capability of `jsonb`. There is no parallel set of facilities for the `json` type. Containment tests whether one `jsonb` document has contained within it another one. These examples return true except as noted:
 
@@ -211,8 +206,6 @@ On the other hand, the JSON existence operator is not nested: it will only look 
 The various containment and existence operators, along with all other JSON operators and functions are documented in [Section 9.16](functions-json.html "9.16. JSON Functions and Operators").
 
 ### 8.14.4. `jsonb` Indexing [#](#JSON-INDEXING)
-
-
 
 GIN indexes can be used to efficiently search for keys or key/value pairs occurring within a large number of `jsonb` documents (datums). Two GIN “operator classes” are provided, offering different performance and flexibility trade-offs.
 
@@ -418,15 +411,13 @@ Of these extensions, `jsonb_plperl` is considered “trusted”, that is, it can
 
 ### 8.14.7. jsonpath Type [#](#DATATYPE-JSONPATH)
 
-
-
 The `jsonpath` type implements support for the SQL/JSON path language in PostgreSQL to efficiently query JSON data. It provides a binary representation of the parsed SQL/JSON path expression that specifies the items to be retrieved by the path engine from the JSON data for further processing with the SQL/JSON query functions.
 
 The semantics of SQL/JSON path predicates and operators generally follow SQL. At the same time, to provide a natural way of working with JSON data, SQL/JSON path syntax uses some JavaScript conventions:
 
-*   Dot (`.`) is used for member access.
-*   Square brackets (`[]`) are used for array access.
-*   SQL/JSON arrays are 0-relative, unlike regular SQL arrays that start from 1.
+* Dot (`.`) is used for member access.
+* Square brackets (`[]`) are used for array access.
+* SQL/JSON arrays are 0-relative, unlike regular SQL arrays that start from 1.
 
 Numeric literals in SQL/JSON path expressions follow JavaScript rules, which are different from both SQL and JSON in some minor details. For example, SQL/JSON path allows `.1` and `1.`, which are invalid in JSON. Non-decimal integer literals and underscore separators are supported, for example, `1_000_000`, `0x1EEE_FFFF`, `0o273`, `0b100101`. In SQL/JSON path (and in JavaScript, but not in SQL proper), there must not be an underscore separator directly after the radix prefix.
 
@@ -434,11 +425,11 @@ An SQL/JSON path expression is typically written in an SQL query as an SQL chara
 
 A path expression consists of a sequence of path elements, which can be any of the following:
 
-*   Path literals of JSON primitive types: Unicode text, numeric, true, false, or null.
-*   Path variables listed in [Table 8.24](datatype-json.html#TYPE-JSONPATH-VARIABLES "Table 8.24. jsonpath Variables").
-*   Accessor operators listed in [Table 8.25](datatype-json.html#TYPE-JSONPATH-ACCESSORS "Table 8.25. jsonpath Accessors").
-*   `jsonpath` operators and methods listed in [Section 9.16.2.2](functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS "9.16.2.2. SQL/JSON Path Operators and Methods").
-*   Parentheses, which can be used to provide filter expressions or define the order of path evaluation.
+* Path literals of JSON primitive types: Unicode text, numeric, true, false, or null.
+* Path variables listed in [Table 8.24](datatype-json.html#TYPE-JSONPATH-VARIABLES "Table 8.24. jsonpath Variables").
+* Accessor operators listed in [Table 8.25](datatype-json.html#TYPE-JSONPATH-ACCESSORS "Table 8.25. jsonpath Accessors").
+* `jsonpath` operators and methods listed in [Section 9.16.2.2](functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS "9.16.2.2. SQL/JSON Path Operators and Methods").
+* Parentheses, which can be used to provide filter expressions or define the order of path evaluation.
 
 For details on using `jsonpath` expressions with SQL/JSON query functions, see [Section 9.16.2](functions-json.html#FUNCTIONS-SQLJSON-PATH "9.16.2. The SQL/JSON Path Language").
 
@@ -451,7 +442,6 @@ For details on using `jsonpath` expressions with SQL/JSON query functions, see [
 | `@`        | A variable representing the result of path evaluation in filter expressions.                                                                                                                                                      |
 
 \
-
 
 **Table 8.25. `jsonpath` Accessors**
 

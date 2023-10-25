@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## DROP SCHEMA
 
 DROP SCHEMA — remove a schema
@@ -27,19 +25,19 @@ A schema can only be dropped by its owner or a superuser. Note that the owner ca
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the schema does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name of a schema.
 
-*   `CASCADE`
+* `CASCADE`
 
     Automatically drop objects (tables, functions, etc.) that are contained in the schema, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
 
-*   `RESTRICT`
+* `RESTRICT`
 
     Refuse to drop the schema if it contains any objects. This is the default.
 

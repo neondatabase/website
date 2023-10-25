@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE LANGUAGE
 
 CREATE LANGUAGE — define a new procedural language
@@ -35,27 +33,27 @@ The form of `CREATE LANGUAGE` that does not supply any handler function is obsol
 
 ## Parameters
 
-*   `TRUSTED`
+* `TRUSTED`
 
     `TRUSTED` specifies that the language does not grant access to data that the user would not otherwise have. If this key word is omitted when registering the language, only users with the PostgreSQL superuser privilege can use this language to create new functions.
 
-*   `PROCEDURAL`
+* `PROCEDURAL`
 
     This is a noise word.
 
-*   *`name`*
+* *`name`*
 
     The name of the new procedural language. The name must be unique among the languages in the database.
 
-*   `HANDLER` *`call_handler`*
+* `HANDLER` *`call_handler`*
 
     *`call_handler`* is the name of a previously registered function that will be called to execute the procedural language's functions. The call handler for a procedural language must be written in a compiled language such as C with version 1 call convention and registered with PostgreSQL as a function taking no arguments and returning the `language_handler` type, a placeholder type that is simply used to identify the function as a call handler.
 
-*   `INLINE` *`inline_handler`*
+* `INLINE` *`inline_handler`*
 
     *`inline_handler`* is the name of a previously registered function that will be called to execute an anonymous code block ([`DO`](sql-do.html "DO") command) in this language. If no *`inline_handler`* function is specified, the language does not support anonymous code blocks. The handler function must take one argument of type `internal`, which will be the `DO` command's internal representation, and it will typically return `void`. The return value of the handler is ignored.
 
-*   `VALIDATOR` *`valfunction`*
+* `VALIDATOR` *`valfunction`*
 
     *`valfunction`* is the name of a previously registered function that will be called when a new function in the language is created, to validate the new function. If no validator function is specified, then a new function will not be checked when it is created. The validator function must take one argument of type `oid`, which will be the OID of the to-be-created function, and will typically return `void`.
 

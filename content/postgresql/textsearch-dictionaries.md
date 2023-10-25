@@ -8,35 +8,35 @@
 
 ## 12.6. Dictionaries [#](#TEXTSEARCH-DICTIONARIES)
 
-*   *   [12.6.1. Stop Words](textsearch-dictionaries.html#TEXTSEARCH-STOPWORDS)
-    *   [12.6.2. Simple Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SIMPLE-DICTIONARY)
-    *   [12.6.3. Synonym Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SYNONYM-DICTIONARY)
-    *   [12.6.4. Thesaurus Dictionary](textsearch-dictionaries.html#TEXTSEARCH-THESAURUS)
-    *   [12.6.5. Ispell Dictionary](textsearch-dictionaries.html#TEXTSEARCH-ISPELL-DICTIONARY)
-    *   [12.6.6. Snowball Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SNOWBALL-DICTIONARY)
+  * *   [12.6.1. Stop Words](textsearch-dictionaries.html#TEXTSEARCH-STOPWORDS)
+  * [12.6.2. Simple Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SIMPLE-DICTIONARY)
+  * [12.6.3. Synonym Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SYNONYM-DICTIONARY)
+  * [12.6.4. Thesaurus Dictionary](textsearch-dictionaries.html#TEXTSEARCH-THESAURUS)
+  * [12.6.5. Ispell Dictionary](textsearch-dictionaries.html#TEXTSEARCH-ISPELL-DICTIONARY)
+  * [12.6.6. Snowball Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SNOWBALL-DICTIONARY)
 
 Dictionaries are used to eliminate words that should not be considered in a search (*stop words*), and to *normalize* words so that different derived forms of the same word will match. A successfully normalized word is called a *lexeme*. Aside from improving search quality, normalization and removal of stop words reduce the size of the `tsvector` representation of a document, thereby improving performance. Normalization does not always have linguistic meaning and usually depends on application semantics.
 
 Some examples of normalization:
 
-*   Linguistic — Ispell dictionaries try to reduce input words to a normalized form; stemmer dictionaries remove word endings
+* Linguistic — Ispell dictionaries try to reduce input words to a normalized form; stemmer dictionaries remove word endings
 
-*   URL locations can be canonicalized to make equivalent URLs match:
+* URL locations can be canonicalized to make equivalent URLs match:
 
-    *   http\://www\.pgsql.ru/db/mw/index.html
-    *   http\://www\.pgsql.ru/db/mw/
-    *   http\://www\.pgsql.ru/db/../db/mw/index.html
+  * http\://www\.pgsql.ru/db/mw/index.html
+  * http\://www\.pgsql.ru/db/mw/
+  * http\://www\.pgsql.ru/db/../db/mw/index.html
 
-*   Color names can be replaced by their hexadecimal values, e.g., `red, green, blue, magenta -> FF0000, 00FF00, 0000FF, FF00FF`
+* Color names can be replaced by their hexadecimal values, e.g., `red, green, blue, magenta -> FF0000, 00FF00, 0000FF, FF00FF`
 
-*   If indexing numbers, we can remove some fractional digits to reduce the range of possible numbers, so for example *3.14*159265359, *3.14*15926, *3.14* will be the same after normalization if only two digits are kept after the decimal point.
+* If indexing numbers, we can remove some fractional digits to reduce the range of possible numbers, so for example *3.14*159265359, *3.14*15926, *3.14* will be the same after normalization if only two digits are kept after the decimal point.
 
 A dictionary is a program that accepts a token as input and returns:
 
-*   an array of lexemes if the input token is known to the dictionary (notice that one token can produce more than one lexeme)
-*   a single lexeme with the `TSL_FILTER` flag set, to replace the original token with a new token to be passed to subsequent dictionaries (a dictionary that does this is called a *filtering dictionary*)
-*   an empty array if the dictionary knows the token, but it is a stop word
-*   `NULL` if the dictionary does not recognize the input token
+* an array of lexemes if the input token is known to the dictionary (notice that one token can produce more than one lexeme)
+* a single lexeme with the `TSL_FILTER` flag set, to replace the original token with a new token to be passed to subsequent dictionaries (a dictionary that does this is called a *filtering dictionary*)
+* an empty array if the dictionary knows the token, but it is a stop word
+* `NULL` if the dictionary does not recognize the input token
 
 PostgreSQL provides predefined dictionaries for many languages. There are also several predefined templates that can be used to create new dictionaries with custom parameters. Each predefined dictionary template is described below. If no existing template is suitable, it is possible to create new ones; see the `contrib/` area of the PostgreSQL distribution for examples.
 
@@ -268,9 +268,9 @@ CREATE TEXT SEARCH DICTIONARY thesaurus_simple (
 
 Here:
 
-*   `thesaurus_simple` is the new dictionary's name
-*   `mythesaurus` is the base name of the thesaurus configuration file. (Its full name will be `$SHAREDIR/tsearch_data/mythesaurus.ths`, where `$SHAREDIR` means the installation shared-data directory.)
-*   `pg_catalog.english_stem` is the subdictionary (here, a Snowball English stemmer) to use for thesaurus normalization. Notice that the subdictionary will have its own configuration (for example, stop words), which is not shown here.
+* `thesaurus_simple` is the new dictionary's name
+* `mythesaurus` is the base name of the thesaurus configuration file. (Its full name will be `$SHAREDIR/tsearch_data/mythesaurus.ths`, where `$SHAREDIR` means the installation shared-data directory.)
+* `pg_catalog.english_stem` is the subdictionary (here, a Snowball English stemmer) to use for thesaurus normalization. Notice that the subdictionary will have its own configuration (for example, stop words), which is not shown here.
 
 Now it is possible to bind the thesaurus dictionary `thesaurus_simple` to the desired token types in a configuration, for example:
 
@@ -353,7 +353,7 @@ The standard PostgreSQL distribution does not include any Ispell configuration f
 
 To create an Ispell dictionary perform these steps:
 
-*   download dictionary configuration files. OpenOffice extension files have the `.oxt` extension. It is necessary to extract `.aff` and `.dic` files, change extensions to `.affix` and `.dict`. For some dictionary files it is also needed to convert characters to the UTF-8 encoding with commands (for example, for a Norwegian language dictionary):
+* download dictionary configuration files. OpenOffice extension files have the `.oxt` extension. It is necessary to extract `.aff` and `.dic` files, change extensions to `.affix` and `.dict`. For some dictionary files it is also needed to convert characters to the UTF-8 encoding with commands (for example, for a Norwegian language dictionary):
 
     ```
 
@@ -361,9 +361,9 @@ To create an Ispell dictionary perform these steps:
     iconv -f ISO_8859-1 -t UTF-8 -o nn_no.dict nn_NO.dic
     ```
 
-*   copy files to the `$SHAREDIR/tsearch_data` directory
+* copy files to the `$SHAREDIR/tsearch_data` directory
 
-*   load files into PostgreSQL with the following command:
+* load files into PostgreSQL with the following command:
 
     ```
 
@@ -451,11 +451,11 @@ SFX T   0     est        [^ey]
 
 The first line of an affix class is the header. Fields of an affix rules are listed after the header:
 
-*   parameter name (PFX or SFX)
-*   flag (name of the affix class)
-*   stripping characters from beginning (at prefix) or end (at suffix) of the word
-*   adding affix
-*   condition that has a format similar to the format of regular expressions.
+* parameter name (PFX or SFX)
+* flag (name of the affix class)
+* stripping characters from beginning (at prefix) or end (at suffix) of the word
+* adding affix
+* condition that has a format similar to the format of regular expressions.
 
 The `.dict` file looks like the `.dict` file of Ispell:
 

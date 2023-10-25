@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## DEALLOCATE
 
 DEALLOCATE — deallocate a prepared statement
@@ -27,15 +25,15 @@ For more information on prepared statements, see [PREPARE](sql-prepare.html "PRE
 
 ## Parameters
 
-*   `PREPARE`
+* `PREPARE`
 
     This key word is ignored.
 
-*   *`name`*
+* *`name`*
 
     The name of the prepared statement to deallocate.
 
-*   `ALL`
+* `ALL`
 
     Deallocate all prepared statements.
 

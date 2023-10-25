@@ -40,7 +40,7 @@ The optional parameter *`PATTERN`* can be the name of a text search object, opti
 
 The available commands are:
 
-*   `\dF[+] [PATTERN]`
+* `\dF[+] [PATTERN]`
 
     List text search configurations (add `+` for more detail).
 
@@ -78,7 +78,7 @@ The available commands are:
      word            | russian_stem
     ```
 
-*   `\dFd[+] [PATTERN]`
+* `\dFd[+] [PATTERN]`
 
     List text search dictionaries (add `+` for more detail).
 
@@ -119,7 +119,7 @@ The available commands are:
      pg_catalog | yiddish_stem    | snowball stemmer for yiddish language
     ```
 
-*   `\dFp[+] [PATTERN]`
+* `\dFp[+] [PATTERN]`
 
     List text search parsers (add `+` for more detail).
 
@@ -169,7 +169,7 @@ The available commands are:
     (23 rows)
     ```
 
-*   `\dFt[+] [PATTERN]`
+* `\dFt[+] [PATTERN]`
 
     List text search templates (add `+` for more detail).
 

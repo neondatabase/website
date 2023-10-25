@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## REFRESH MATERIALIZED VIEW
 
 REFRESH MATERIALIZED VIEW — replace the contents of a materialized view
@@ -28,7 +26,7 @@ REFRESH MATERIALIZED VIEW [ CONCURRENTLY ] name
 
 ## Parameters
 
-*   `CONCURRENTLY`
+* `CONCURRENTLY`
 
     Refresh the materialized view without locking out concurrent selects on the materialized view. Without this option a refresh which affects a lot of rows will tend to use fewer resources and complete more quickly, but could block other connections which are trying to read from the materialized view. This option may be faster in cases where a small number of rows are affected.
 
@@ -38,7 +36,7 @@ REFRESH MATERIALIZED VIEW [ CONCURRENTLY ] name
 
     Even with this option only one `REFRESH` at a time may run against any one materialized view.
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of the materialized view to refresh.
 

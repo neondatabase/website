@@ -8,9 +8,9 @@
 
 ## 69.4. Implementation [#](#SPGIST-IMPLEMENTATION)
 
-*   *   [69.4.1. SP-GiST Limits](spgist-implementation.html#SPGIST-LIMITS)
-    *   [69.4.2. SP-GiST Without Node Labels](spgist-implementation.html#SPGIST-NULL-LABELS)
-    *   [69.4.3. “All-the-Same” Inner Tuples](spgist-implementation.html#SPGIST-ALL-THE-SAME)
+  * *   [69.4.1. SP-GiST Limits](spgist-implementation.html#SPGIST-LIMITS)
+  * [69.4.2. SP-GiST Without Node Labels](spgist-implementation.html#SPGIST-NULL-LABELS)
+  * [69.4.3. “All-the-Same” Inner Tuples](spgist-implementation.html#SPGIST-ALL-THE-SAME)
 
 This section covers implementation details and other tricks that are useful for implementers of SP-GiST operator classes to know.
 

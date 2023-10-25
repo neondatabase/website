@@ -8,8 +8,6 @@
 
 ## 11.4. Indexes and `ORDER BY` [#](#INDEXES-ORDERING)
 
-
-
 In addition to simply finding the rows to be returned by a query, an index may be able to deliver them in a specific sorted order. This allows a query's `ORDER BY` specification to be honored without a separate sorting step. Of the index types currently supported by PostgreSQL, only B-tree can produce sorted output — the other index types return matching rows in an unspecified, implementation-dependent order.
 
 The planner will consider satisfying an `ORDER BY` specification either by scanning an available index that matches the specification, or by scanning the table in physical order and doing an explicit sort. For a query that requires scanning a large fraction of the table, an explicit sort is likely to be faster than using an index because it requires less disk I/O due to following a sequential access pattern. Indexes are more useful when only a few rows need be fetched. An important special case is `ORDER BY` in combination with `LIMIT` *`n`*: an explicit sort will have to process all the data to identify the first *`n`* rows, but if there is an index matching the `ORDER BY`, the first *`n`* rows can be retrieved directly, without scanning the remainder at all.

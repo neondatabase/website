@@ -8,8 +8,6 @@
 
 ## 2.7. Aggregate Functions [#](#TUTORIAL-AGG)
 
-
-
 Like most other relational database products, PostgreSQL supports *aggregate functions*. An aggregate function computes a single result from multiple input rows. For example, there are aggregates to compute the `count`, `sum`, `avg` (average), `max` (maximum) and `min` (minimum) over a set of rows.
 
 As an example, we can find the highest low-temperature reading anywhere with:

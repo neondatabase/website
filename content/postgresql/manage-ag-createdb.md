@@ -8,8 +8,6 @@
 
 ## 23.2. Creating a Database [#](#MANAGE-AG-CREATEDB)
 
-
-
 In order to create a database, the PostgreSQL server must be up and running (see [Section 19.3](server-start.html "19.3. Starting the Database Server")).
 
 Databases are created with the SQL command [CREATE DATABASE](sql-createdatabase.html "CREATE DATABASE"):

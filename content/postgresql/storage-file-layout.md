@@ -43,7 +43,6 @@ The `PGDATA` directory contains several subdirectories and control files, as sho
 
 \
 
-
 For each database in the cluster there is a subdirectory within `PGDATA``/base`, named after the database's OID in `pg_database`. This subdirectory is the default location for the database's files; in particular, its system catalogs are stored there.
 
 Note that the following sections describe the behavior of the builtin `heap` [table access method](tableam.html "Chapter 63. Table Access Method Interface Definition"), and the builtin [index access methods](indexam.html "Chapter 64. Index Access Method Interface Definition"). Due to the extensible nature of PostgreSQL, other access methods might work differently.

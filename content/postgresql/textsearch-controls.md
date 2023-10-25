@@ -8,18 +8,16 @@
 
 ## 12.3. Controlling Text Search [#](#TEXTSEARCH-CONTROLS)
 
-*   *   [12.3.1. Parsing Documents](textsearch-controls.html#TEXTSEARCH-PARSING-DOCUMENTS)
-    *   [12.3.2. Parsing Queries](textsearch-controls.html#TEXTSEARCH-PARSING-QUERIES)
-    *   [12.3.3. Ranking Search Results](textsearch-controls.html#TEXTSEARCH-RANKING)
-    *   [12.3.4. Highlighting Results](textsearch-controls.html#TEXTSEARCH-HEADLINE)
+  * *   [12.3.1. Parsing Documents](textsearch-controls.html#TEXTSEARCH-PARSING-DOCUMENTS)
+  * [12.3.2. Parsing Queries](textsearch-controls.html#TEXTSEARCH-PARSING-QUERIES)
+  * [12.3.3. Ranking Search Results](textsearch-controls.html#TEXTSEARCH-RANKING)
+  * [12.3.4. Highlighting Results](textsearch-controls.html#TEXTSEARCH-HEADLINE)
 
 To implement full text searching there must be a function to create a `tsvector` from a document and a `tsquery` from a user query. Also, we need to return results in a useful order, so we need a function that compares documents with respect to their relevance to the query. It's also important to be able to display the results nicely. PostgreSQL provides support for all of these functions.
 
 ### 12.3.1. Parsing Documents [#](#TEXTSEARCH-PARSING-DOCUMENTS)
 
 PostgreSQL provides the function `to_tsvector` for converting a document to the `tsvector` data type.
-
-
 
 ```
 
@@ -58,8 +56,6 @@ Here we have used `setweight` to label the source of each lexeme in the finished
 ### 12.3.2. Parsing Queries [#](#TEXTSEARCH-PARSING-QUERIES)
 
 PostgreSQL provides the functions `to_tsquery`, `plainto_tsquery`, `phraseto_tsquery` and `websearch_to_tsquery` for converting a query to the `tsquery` data type. `to_tsquery` offers access to more features than either `plainto_tsquery` or `phraseto_tsquery`, but it is less forgiving about its input. `websearch_to_tsquery` is a simplified version of `to_tsquery` with an alternative syntax, similar to the one used by web search engines.
-
-
 
 ```
 
@@ -110,8 +106,6 @@ SELECT to_tsquery('''supernovae stars'' & !crab');
 
 Without quotes, `to_tsquery` will generate a syntax error for tokens that are not separated by an AND, OR, or FOLLOWED BY operator.
 
-
-
 ```
 
 plainto_tsquery([ config regconfig, ] querytext text) returns tsquery
@@ -140,8 +134,6 @@ SELECT plainto_tsquery('english', 'The Fat & Rats:C');
 ```
 
 Here, all the input punctuation was discarded.
-
-
 
 ```
 
@@ -177,10 +169,10 @@ websearch_to_tsquery([ config regconfig, ] querytext text) returns tsquery
 
 `websearch_to_tsquery` creates a `tsquery` value from *`querytext`* using an alternative syntax in which simple unformatted text is a valid query. Unlike `plainto_tsquery` and `phraseto_tsquery`, it also recognizes certain operators. Moreover, this function will never raise syntax errors, which makes it possible to use raw user-supplied input for search. The following syntax is supported:
 
-*   `unquoted text`: text not inside quote marks will be converted to terms separated by `&` operators, as if processed by `plainto_tsquery`.
-*   `"quoted text"`: text inside quote marks will be converted to terms separated by `<->` operators, as if processed by `phraseto_tsquery`.
-*   `OR`: the word “or” will be converted to the `|` operator.
-*   `-`: a dash will be converted to the `!` operator.
+* `unquoted text`: text not inside quote marks will be converted to terms separated by `&` operators, as if processed by `plainto_tsquery`.
+* `"quoted text"`: text inside quote marks will be converted to terms separated by `<->` operators, as if processed by `phraseto_tsquery`.
+* `OR`: the word “or” will be converted to the `|` operator.
+* `-`: a dash will be converted to the `!` operator.
 
 Other punctuation is ignored. So like `plainto_tsquery` and `phraseto_tsquery`, the `websearch_to_tsquery` function will not recognize `tsquery` operators, weight labels, or prefix-match labels in its input.
 
@@ -225,11 +217,11 @@ Ranking attempts to measure how relevant documents are to a particular query, so
 
 The two ranking functions currently available are:
 
-*   `ts_rank([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4`
+* `ts_rank([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4`
 
     Ranks vectors based on the frequency of their matching lexemes.
 
-*   `ts_rank_cd([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4`
+* `ts_rank_cd([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4`
 
     This function computes the *cover density* ranking for the given document vector and query, as described in Clarke, Cormack, and Tudhope's "Relevance Ranking for One to Three Term Queries" in the journal "Information Processing and Management", 1999. Cover density is similar to `ts_rank` ranking except that the proximity of matching lexemes to each other is taken into consideration.
 
@@ -253,13 +245,13 @@ Typically weights are used to mark words from special areas of the document, lik
 
 Since a longer document has a greater chance of containing a query term it is reasonable to take into account document size, e.g., a hundred-word document with five instances of a search word is probably more relevant than a thousand-word document with five instances. Both ranking functions take an integer *`normalization`* option that specifies whether and how a document's length should impact its rank. The integer option controls several behaviors, so it is a bit mask: you can specify one or more behaviors using `|` (for example, `2|4`).
 
-*   0 (the default) ignores the document length
-*   1 divides the rank by 1 + the logarithm of the document length
-*   2 divides the rank by the document length
-*   4 divides the rank by the mean harmonic distance between extents (this is implemented only by `ts_rank_cd`)
-*   8 divides the rank by the number of unique words in document
-*   16 divides the rank by 1 + the logarithm of the number of unique words in document
-*   32 divides the rank by itself + 1
+* 0 (the default) ignores the document length
+* 1 divides the rank by 1 + the logarithm of the document length
+* 2 divides the rank by the document length
+* 4 divides the rank by the mean harmonic distance between extents (this is implemented only by `ts_rank_cd`)
+* 8 divides the rank by the number of unique words in document
+* 16 divides the rank by 1 + the logarithm of the number of unique words in document
+* 32 divides the rank by itself + 1
 
 If more than one flag bit is specified, the transformations are applied in the order listed.
 
@@ -317,8 +309,6 @@ Ranking can be expensive since it requires consulting the `tsvector` of each mat
 
 To present search results it is ideal to show a part of each document and how it is related to the query. Usually, search engines show fragments of the document with marked search terms. PostgreSQL provides a function `ts_headline` that implements this functionality.
 
-
-
 ```
 
 ts_headline([ config regconfig, ] document text, query tsquery [, options text ]) returns text
@@ -328,12 +318,12 @@ ts_headline([ config regconfig, ] document text, query tsquery [, options text ]
 
 If an *`options`* string is specified it must consist of a comma-separated list of one or more *`option`*`=`*`value`* pairs. The available options are:
 
-*   `MaxWords`, `MinWords` (integers): these numbers determine the longest and shortest headlines to output. The default values are 35 and 15.
-*   `ShortWord` (integer): words of this length or less will be dropped at the start and end of a headline, unless they are query terms. The default value of three eliminates common English articles.
-*   `HighlightAll` (boolean): if `true` the whole document will be used as the headline, ignoring the preceding three parameters. The default is `false`.
-*   `MaxFragments` (integer): maximum number of text fragments to display. The default value of zero selects a non-fragment-based headline generation method. A value greater than zero selects fragment-based headline generation (see below).
-*   `StartSel`, `StopSel` (strings): the strings with which to delimit query words appearing in the document, to distinguish them from other excerpted words. The default values are “`<b>`” and “`</b>`”, which can be suitable for HTML output.
-*   `FragmentDelimiter` (string): When more than one fragment is displayed, the fragments will be separated by this string. The default is “`  ...  `”.
+* `MaxWords`, `MinWords` (integers): these numbers determine the longest and shortest headlines to output. The default values are 35 and 15.
+* `ShortWord` (integer): words of this length or less will be dropped at the start and end of a headline, unless they are query terms. The default value of three eliminates common English articles.
+* `HighlightAll` (boolean): if `true` the whole document will be used as the headline, ignoring the preceding three parameters. The default is `false`.
+* `MaxFragments` (integer): maximum number of text fragments to display. The default value of zero selects a non-fragment-based headline generation method. A value greater than zero selects fragment-based headline generation (see below).
+* `StartSel`, `StopSel` (strings): the strings with which to delimit query words appearing in the document, to distinguish them from other excerpted words. The default values are “`<b>`” and “`</b>`”, which can be suitable for HTML output.
+* `FragmentDelimiter` (string): When more than one fragment is displayed, the fragments will be separated by this string. The default is “`...`”.
 
 These option names are recognized case-insensitively. You must double-quote string values if they contain spaces or commas.
 

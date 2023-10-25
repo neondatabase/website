@@ -8,30 +8,30 @@
 
 ## 20.1. Setting Parameters [#](#CONFIG-SETTING)
 
-*   *   [20.1.1. Parameter Names and Values](config-setting.html#CONFIG-SETTING-NAMES-VALUES)
-    *   [20.1.2. Parameter Interaction via the Configuration File](config-setting.html#CONFIG-SETTING-CONFIGURATION-FILE)
-    *   [20.1.3. Parameter Interaction via SQL](config-setting.html#CONFIG-SETTING-SQL)
-    *   [20.1.4. Parameter Interaction via the Shell](config-setting.html#CONFIG-SETTING-SHELL)
-    *   [20.1.5. Managing Configuration File Contents](config-setting.html#CONFIG-INCLUDES)
+  * *   [20.1.1. Parameter Names and Values](config-setting.html#CONFIG-SETTING-NAMES-VALUES)
+  * [20.1.2. Parameter Interaction via the Configuration File](config-setting.html#CONFIG-SETTING-CONFIGURATION-FILE)
+  * [20.1.3. Parameter Interaction via SQL](config-setting.html#CONFIG-SETTING-SQL)
+  * [20.1.4. Parameter Interaction via the Shell](config-setting.html#CONFIG-SETTING-SHELL)
+  * [20.1.5. Managing Configuration File Contents](config-setting.html#CONFIG-INCLUDES)
 
 ### 20.1.1. Parameter Names and Values [#](#CONFIG-SETTING-NAMES-VALUES)
 
 All parameter names are case-insensitive. Every parameter takes a value of one of five types: boolean, string, integer, floating point, or enumerated (enum). The type determines the syntax for setting the parameter:
 
-*   *Boolean:* Values can be written as `on`, `off`, `true`, `false`, `yes`, `no`, `1`, `0` (all case-insensitive) or any unambiguous prefix of one of these.
+* *Boolean:* Values can be written as `on`, `off`, `true`, `false`, `yes`, `no`, `1`, `0` (all case-insensitive) or any unambiguous prefix of one of these.
 
-*   *String:* In general, enclose the value in single quotes, doubling any single quotes within the value. Quotes can usually be omitted if the value is a simple number or identifier, however. (Values that match an SQL keyword require quoting in some contexts.)
+* *String:* In general, enclose the value in single quotes, doubling any single quotes within the value. Quotes can usually be omitted if the value is a simple number or identifier, however. (Values that match an SQL keyword require quoting in some contexts.)
 
-*   *Numeric (integer and floating point):* Numeric parameters can be specified in the customary integer and floating-point formats; fractional values are rounded to the nearest integer if the parameter is of integer type. Integer parameters additionally accept hexadecimal input (beginning with `0x`) and octal input (beginning with `0`), but these formats cannot have a fraction. Do not use thousands separators. Quotes are not required, except for hexadecimal input.
+* *Numeric (integer and floating point):* Numeric parameters can be specified in the customary integer and floating-point formats; fractional values are rounded to the nearest integer if the parameter is of integer type. Integer parameters additionally accept hexadecimal input (beginning with `0x`) and octal input (beginning with `0`), but these formats cannot have a fraction. Do not use thousands separators. Quotes are not required, except for hexadecimal input.
 
-*   *Numeric with Unit:* Some numeric parameters have an implicit unit, because they describe quantities of memory or time. The unit might be bytes, kilobytes, blocks (typically eight kilobytes), milliseconds, seconds, or minutes. An unadorned numeric value for one of these settings will use the setting's default unit, which can be learned from `pg_settings`.`unit`. For convenience, settings can be given with a unit specified explicitly, for example `'120 ms'` for a time value, and they will be converted to whatever the parameter's actual unit is. Note that the value must be written as a string (with quotes) to use this feature. The unit name is case-sensitive, and there can be whitespace between the numeric value and the unit.
+* *Numeric with Unit:* Some numeric parameters have an implicit unit, because they describe quantities of memory or time. The unit might be bytes, kilobytes, blocks (typically eight kilobytes), milliseconds, seconds, or minutes. An unadorned numeric value for one of these settings will use the setting's default unit, which can be learned from `pg_settings`.`unit`. For convenience, settings can be given with a unit specified explicitly, for example `'120 ms'` for a time value, and they will be converted to whatever the parameter's actual unit is. Note that the value must be written as a string (with quotes) to use this feature. The unit name is case-sensitive, and there can be whitespace between the numeric value and the unit.
 
-    *   Valid memory units are `B` (bytes), `kB` (kilobytes), `MB` (megabytes), `GB` (gigabytes), and `TB` (terabytes). The multiplier for memory units is 1024, not 1000.
-    *   Valid time units are `us` (microseconds), `ms` (milliseconds), `s` (seconds), `min` (minutes), `h` (hours), and `d` (days).
+  * Valid memory units are `B` (bytes), `kB` (kilobytes), `MB` (megabytes), `GB` (gigabytes), and `TB` (terabytes). The multiplier for memory units is 1024, not 1000.
+  * Valid time units are `us` (microseconds), `ms` (milliseconds), `s` (seconds), `min` (minutes), `h` (hours), and `d` (days).
 
     If a fractional value is specified with a unit, it will be rounded to a multiple of the next smaller unit if there is one. For example, `30.1 GB` will be converted to `30822 MB` not `32319628902 B`. If the parameter is of integer type, a final rounding to integer occurs after any unit conversion.
 
-*   *Enumerated:* Enumerated-type parameters are written in the same way as string parameters, but are restricted to have one of a limited set of values. The values allowable for such a parameter can be found from `pg_settings`.`enumvals`. Enum parameter values are case-insensitive.
+* *Enumerated:* Enumerated-type parameters are written in the same way as string parameters, but are restricted to have one of a limited set of values. The values allowable for such a parameter can be found from `pg_settings`.`enumvals`. Enum parameter values are case-insensitive.
 
 ### 20.1.2. Parameter Interaction via the Configuration File [#](#CONFIG-SETTING-CONFIGURATION-FILE)
 
@@ -62,21 +62,21 @@ The system view [`pg_file_settings`](view-pg-file-settings.html "54.7. pg_file_
 
 PostgreSQL provides three SQL commands to establish configuration defaults. The already-mentioned `ALTER SYSTEM` command provides an SQL-accessible means of changing global defaults; it is functionally equivalent to editing `postgresql.conf`. In addition, there are two commands that allow setting of defaults on a per-database or per-role basis:
 
-*   The [`ALTER DATABASE`](sql-alterdatabase.html "ALTER DATABASE") command allows global settings to be overridden on a per-database basis.
-*   The [`ALTER ROLE`](sql-alterrole.html "ALTER ROLE") command allows both global and per-database settings to be overridden with user-specific values.
+* The [`ALTER DATABASE`](sql-alterdatabase.html "ALTER DATABASE") command allows global settings to be overridden on a per-database basis.
+* The [`ALTER ROLE`](sql-alterrole.html "ALTER ROLE") command allows both global and per-database settings to be overridden with user-specific values.
 
 Values set with `ALTER DATABASE` and `ALTER ROLE` are applied only when starting a fresh database session. They override values obtained from the configuration files or server command line, and constitute defaults for the rest of the session. Note that some settings cannot be changed after server start, and so cannot be set with these commands (or the ones listed below).
 
 Once a client is connected to the database, PostgreSQL provides two additional SQL commands (and equivalent functions) to interact with session-local configuration settings:
 
-*   The [`SHOW`](sql-show.html "SHOW") command allows inspection of the current value of any parameter. The corresponding SQL function is `current_setting(setting_name text)` (see [Section 9.27.1](functions-admin.html#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions")).
-*   The [`SET`](sql-set.html "SET") command allows modification of the current value of those parameters that can be set locally to a session; it has no effect on other sessions. Many parameters can be set this way by any user, but some can only be set by superusers and users who have been granted `SET` privilege on that parameter. The corresponding SQL function is `set_config(setting_name, new_value, is_local)` (see [Section 9.27.1](functions-admin.html#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions")).
+* The [`SHOW`](sql-show.html "SHOW") command allows inspection of the current value of any parameter. The corresponding SQL function is `current_setting(setting_name text)` (see [Section 9.27.1](functions-admin.html#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions")).
+* The [`SET`](sql-set.html "SET") command allows modification of the current value of those parameters that can be set locally to a session; it has no effect on other sessions. Many parameters can be set this way by any user, but some can only be set by superusers and users who have been granted `SET` privilege on that parameter. The corresponding SQL function is `set_config(setting_name, new_value, is_local)` (see [Section 9.27.1](functions-admin.html#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions")).
 
 In addition, the system view [`pg_settings`](view-pg-settings.html "54.24. pg_settings") can be used to view and change session-local values:
 
-*   Querying this view is similar to using `SHOW ALL` but provides more detail. It is also more flexible, since it's possible to specify filter conditions or join against other relations.
+* Querying this view is similar to using `SHOW ALL` but provides more detail. It is also more flexible, since it's possible to specify filter conditions or join against other relations.
 
-*   Using `UPDATE` on this view, specifically updating the `setting` column, is the equivalent of issuing `SET` commands. For example, the equivalent of
+* Using `UPDATE` on this view, specifically updating the `setting` column, is the equivalent of issuing `SET` commands. For example, the equivalent of
 
     ```
 
@@ -94,7 +94,7 @@ In addition, the system view [`pg_settings`](view-pg-settings.html "54.24. pg_s
 
 In addition to setting global defaults or attaching overrides at the database or role level, you can pass settings to PostgreSQL via shell facilities. Both the server and libpq client library accept parameter values via the shell.
 
-*   During server startup, parameter settings can be passed to the `postgres` command via the `-c` command-line parameter. For example,
+* During server startup, parameter settings can be passed to the `postgres` command via the `-c` command-line parameter. For example,
 
     ```
 
@@ -103,7 +103,7 @@ In addition to setting global defaults or attaching overrides at the database or
 
     Settings provided in this way override those set via `postgresql.conf` or `ALTER SYSTEM`, so they cannot be changed globally without restarting the server.
 
-*   When starting a client session via libpq, parameter settings can be specified using the `PGOPTIONS` environment variable. Settings established in this way constitute defaults for the life of the session, but do not affect other sessions. For historical reasons, the format of `PGOPTIONS` is similar to that used when launching the `postgres` command; specifically, the `-c` flag must be specified. For example,
+* When starting a client session via libpq, parameter settings can be specified using the `PGOPTIONS` environment variable. Settings established in this way constitute defaults for the life of the session, but do not affect other sessions. For historical reasons, the format of `PGOPTIONS` is similar to that used when launching the `postgres` command; specifically, the `-c` flag must be specified. For example,
 
     ```
 

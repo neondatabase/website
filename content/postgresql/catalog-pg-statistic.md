@@ -8,8 +8,6 @@
 
 ## 53.51. `pg_statistic` [#](#CATALOG-PG-STATISTIC)
 
-
-
 The catalog `pg_statistic` stores statistical data about the contents of the database. Entries are created by [`ANALYZE`](sql-analyze.html "ANALYZE") and subsequently used by the query planner. Note that all the statistical data is inherently approximate, even assuming that it is up-to-date.
 
 Normally there is one entry, with `stainherit` = `false`, for each table column that has been analyzed. If the table has inheritance children or partitions, a second entry with `stainherit` = `true` is also created. This row represents the column's statistics over the inheritance tree, i.e., statistics for the data you'd see with `SELECT column FROM table*`, whereas the `stainherit` = `false` row represents the results of `SELECT column FROM ONLY table`.

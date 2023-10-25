@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER RULE
 
 ALTER RULE — change the definition of a rule
@@ -27,15 +25,15 @@ To use `ALTER RULE`, you must own the table or view that the rule applies to.
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of an existing rule to alter.
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (optionally schema-qualified) of the table or view that the rule applies to.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name for the rule.
 

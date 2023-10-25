@@ -8,8 +8,6 @@
 
 ## 9.2. Comparison Functions and Operators [#](#FUNCTIONS-COMPARISON)
 
-
-
 The usual comparison operators are available, as shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators").
 
 **Table 9.1. Comparison Operators**
@@ -25,7 +23,6 @@ The usual comparison operators are available, as shown in [Table 9.1](functions
 | *`datatype`* `!=` *`datatype`* → `boolean` | Not equal                |
 
 \
-
 
 ### Note
 
@@ -61,7 +58,6 @@ There are also some comparison predicates, as shown in [Table 9.2](functions-co
 | `boolean` `IS NOT UNKNOWN` → `boolean`Test whether boolean expression yields true or false.`true IS NOT UNKNOWN` → `t``NULL::boolean IS NOT UNKNOWN` → `f` (rather than `NULL`)                                            |
 
 \
-
 
 The `BETWEEN` predicate simplifies range tests:
 
@@ -110,8 +106,6 @@ or the equivalent, but nonstandard, predicates:
 expression ISNULL
 expression NOTNULL
 ```
-
-
 
 Do *not* write `expression = NULL` because `NULL` is not “equal to” `NULL`. (The null value represents an unknown value, and it is not known whether two unknown values are equal.)
 

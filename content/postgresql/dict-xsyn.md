@@ -8,10 +8,8 @@
 
 ## F.14. dict\_xsyn — example synonym full-text search dictionary [#](#DICT-XSYN)
 
-*   *   [F.14.1. Configuration](dict-xsyn.html#DICT-XSYN-CONFIG)
-    *   [F.14.2. Usage](dict-xsyn.html#DICT-XSYN-USAGE)
-
-
+  * *   [F.14.1. Configuration](dict-xsyn.html#DICT-XSYN-CONFIG)
+  * [F.14.2. Usage](dict-xsyn.html#DICT-XSYN-USAGE)
 
 `dict_xsyn` (Extended Synonym Dictionary) is an example of an add-on dictionary template for full-text search. This dictionary type replaces words with groups of their synonyms, and so makes it possible to search for a word using any of its synonyms.
 
@@ -19,22 +17,22 @@
 
 A `dict_xsyn` dictionary accepts the following options:
 
-*   `matchorig` controls whether the original word is accepted by the dictionary. Default is `true`.
-*   `matchsynonyms` controls whether the synonyms are accepted by the dictionary. Default is `false`.
-*   `keeporig` controls whether the original word is included in the dictionary's output. Default is `true`.
-*   `keepsynonyms` controls whether the synonyms are included in the dictionary's output. Default is `true`.
-*   `rules` is the base name of the file containing the list of synonyms. This file must be stored in `$SHAREDIR/tsearch_data/` (where `$SHAREDIR` means the PostgreSQL installation's shared-data directory). Its name must end in `.rules` (which is not to be included in the `rules` parameter).
+* `matchorig` controls whether the original word is accepted by the dictionary. Default is `true`.
+* `matchsynonyms` controls whether the synonyms are accepted by the dictionary. Default is `false`.
+* `keeporig` controls whether the original word is included in the dictionary's output. Default is `true`.
+* `keepsynonyms` controls whether the synonyms are included in the dictionary's output. Default is `true`.
+* `rules` is the base name of the file containing the list of synonyms. This file must be stored in `$SHAREDIR/tsearch_data/` (where `$SHAREDIR` means the PostgreSQL installation's shared-data directory). Its name must end in `.rules` (which is not to be included in the `rules` parameter).
 
 The rules file has the following format:
 
-*   Each line represents a group of synonyms for a single word, which is given first on the line. Synonyms are separated by whitespace, thus:
+* Each line represents a group of synonyms for a single word, which is given first on the line. Synonyms are separated by whitespace, thus:
 
     ```
 
     word syn1 syn2 syn3
     ```
 
-*   The sharp (`#`) sign is a comment delimiter. It may appear at any position in a line. The rest of the line will be skipped.
+* The sharp (`#`) sign is a comment delimiter. It may appear at any position in a line. The rest of the line will be skipped.
 
 Look at `xsyn_sample.rules`, which is installed in `$SHAREDIR/tsearch_data/`, for an example.
 

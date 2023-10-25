@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## COMMIT PREPARED
 
 COMMIT PREPARED — commit a transaction that was earlier prepared for two-phase commit
@@ -25,7 +23,7 @@ COMMIT PREPARED transaction_id
 
 ## Parameters
 
-*   *`transaction_id`*
+* *`transaction_id`*
 
     The transaction identifier of the transaction that is to be committed.
 

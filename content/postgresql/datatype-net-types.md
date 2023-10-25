@@ -8,13 +8,11 @@
 
 ## 8.9. Network Address Types [#](#DATATYPE-NET-TYPES)
 
-*   *   [8.9.1. `inet`](datatype-net-types.html#DATATYPE-INET)
-    *   [8.9.2. `cidr`](datatype-net-types.html#DATATYPE-CIDR)
-    *   [8.9.3. `inet` vs. `cidr`](datatype-net-types.html#DATATYPE-INET-VS-CIDR)
-    *   [8.9.4. `macaddr`](datatype-net-types.html#DATATYPE-MACADDR)
-    *   [8.9.5. `macaddr8`](datatype-net-types.html#DATATYPE-MACADDR8)
-
-
+  * *   [8.9.1. `inet`](datatype-net-types.html#DATATYPE-INET)
+  * [8.9.2. `cidr`](datatype-net-types.html#DATATYPE-CIDR)
+  * [8.9.3. `inet` vs. `cidr`](datatype-net-types.html#DATATYPE-INET-VS-CIDR)
+  * [8.9.4. `macaddr`](datatype-net-types.html#DATATYPE-MACADDR)
+  * [8.9.5. `macaddr8`](datatype-net-types.html#DATATYPE-MACADDR8)
 
 PostgreSQL offers data types to store IPv4, IPv6, and MAC addresses, as shown in [Table 8.21](datatype-net-types.html#DATATYPE-NET-TYPES-TABLE "Table 8.21. Network Address Types"). It is better to use these types instead of plain text types to store network addresses, because these types offer input error checking and specialized operators and functions (see [Section 9.12](functions-net.html "9.12. Network Address Functions and Operators")).
 
@@ -29,20 +27,15 @@ PostgreSQL offers data types to store IPv4, IPv6, and MAC addresses, as shown in
 
 \
 
-
 When sorting `inet` or `cidr` data types, IPv4 addresses will always sort before IPv6 addresses, including IPv4 addresses encapsulated or mapped to IPv6 addresses, such as ::10.2.3.4 or ::ffff:10.4.3.2.
 
 ### 8.9.1. `inet` [#](#DATATYPE-INET)
-
-
 
 The `inet` type holds an IPv4 or IPv6 host address, and optionally its subnet, all in one field. The subnet is represented by the number of network address bits present in the host address (the “netmask”). If the netmask is 32 and the address is IPv4, then the value does not indicate a subnet, only a single host. In IPv6, the address length is 128 bits, so 128 bits specify a unique host address. Note that if you want to accept only networks, you should use the `cidr` type rather than `inet`.
 
 The input format for this type is *`address/y`* where *`address`* is an IPv4 or IPv6 address and *`y`* is the number of bits in the netmask. If the *`/y`* portion is omitted, the netmask is taken to be 32 for IPv4 or 128 for IPv6, so the value represents just a single host. On display, the *`/y`* portion is suppressed if the netmask specifies a single host.
 
 ### 8.9.2. `cidr` [#](#DATATYPE-CIDR)
-
-
 
 The `cidr` type holds an IPv4 or IPv6 network specification. Input and output formats follow Classless Internet Domain Routing conventions. The format for specifying networks is *`address/y`* where *`address`* is the network's lowest address represented as an IPv4 or IPv6 address, and *`y`* is the number of bits in the netmask. If *`y`* is omitted, it is calculated using assumptions from the older classful network numbering system, except it will be at least large enough to include all of the octets written in the input. It is an error to specify a network address that has bits set to the right of the specified netmask.
 
@@ -79,8 +72,6 @@ If you do not like the output format for `inet` or `cidr` values, try the functi
 
 ### 8.9.4. `macaddr` [#](#DATATYPE-MACADDR)
 
-
-
 The `macaddr` type stores MAC addresses, known for example from Ethernet card hardware addresses (although MAC addresses are used for other purposes as well). Input is accepted in the following formats:
 
 |                       |
@@ -100,8 +91,6 @@ IEEE Standard 802-2001 specifies the second form shown (with hyphens) as the can
 The remaining five input formats are not part of any standard.
 
 ### 8.9.5. `macaddr8` [#](#DATATYPE-MACADDR8)
-
-
 
 The `macaddr8` type stores MAC addresses in EUI-64 format, known for example from Ethernet card hardware addresses (although MAC addresses are used for other purposes as well). This type can accept both 6 and 8 byte length MAC addresses and stores them in 8 byte length format. MAC addresses given in 6 byte format will be stored in 8 byte length format with the 4th and 5th bytes set to FF and FE, respectively. Note that IPv6 uses a modified EUI-64 format where the 7th bit should be set to one after the conversion from EUI-48. The function `macaddr8_set7bit` is provided to make this change. Generally speaking, any input which is comprised of pairs of hex digits (on byte boundaries), optionally separated consistently by one of `':'`, `'-'` or `'.'`, is accepted. The number of hex digits must be either 16 (8 bytes) or 12 (6 bytes). Leading and trailing whitespace is ignored. The following are examples of input formats that are accepted:
 

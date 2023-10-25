@@ -8,8 +8,6 @@
 
 ## 53.23. `pg_foreign_data_wrapper` [#](#CATALOG-PG-FOREIGN-DATA-WRAPPER)
 
-
-
 The catalog `pg_foreign_data_wrapper` stores foreign-data wrapper definitions. A foreign-data wrapper is the mechanism by which external data, residing on foreign servers, is accessed.
 
 **Table 53.23. `pg_foreign_data_wrapper` Columns**

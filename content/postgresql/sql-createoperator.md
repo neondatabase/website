@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE OPERATOR
 
 CREATE OPERATOR — define a new operator
@@ -35,15 +33,15 @@ The operator name is a sequence of up to `NAMEDATALEN`-1 (63 by default) charact
 
 There are a few restrictions on your choice of name:
 
-*   `--` and `/*` cannot appear anywhere in an operator name, since they will be taken as the start of a comment.
+* `--` and `/*` cannot appear anywhere in an operator name, since they will be taken as the start of a comment.
 
-*   A multicharacter operator name cannot end in `+` or `-`, unless the name also contains at least one of these characters:
+* A multicharacter operator name cannot end in `+` or `-`, unless the name also contains at least one of these characters:
 
     \~ ! @ # % ^ & | \` ?
 
     For example, `@-` is an allowed operator name, but `*-` is not. This restriction allows PostgreSQL to parse SQL-compliant commands without requiring spaces between tokens.
 
-*   The symbol `=>` is reserved by the SQL grammar, so it cannot be used as an operator name.
+* The symbol `=>` is reserved by the SQL grammar, so it cannot be used as an operator name.
 
 The operator `!=` is mapped to `<>` on input, so these two names are always equivalent.
 
@@ -57,43 +55,43 @@ To be able to create an operator, you must have `USAGE` privilege on the argumen
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of the operator to be defined. See above for allowable characters. The name can be schema-qualified, for example `CREATE OPERATOR myschema.+ (...)`. If not, then the operator is created in the current schema. Two operators in the same schema can have the same name if they operate on different data types. This is called *overloading*.
 
-*   *`function_name`*
+* *`function_name`*
 
     The function used to implement this operator.
 
-*   *`left_type`*
+* *`left_type`*
 
     The data type of the operator's left operand, if any. This option would be omitted for a prefix operator.
 
-*   *`right_type`*
+* *`right_type`*
 
     The data type of the operator's right operand.
 
-*   *`com_op`*
+* *`com_op`*
 
     The commutator of this operator.
 
-*   *`neg_op`*
+* *`neg_op`*
 
     The negator of this operator.
 
-*   *`res_proc`*
+* *`res_proc`*
 
     The restriction selectivity estimator function for this operator.
 
-*   *`join_proc`*
+* *`join_proc`*
 
     The join selectivity estimator function for this operator.
 
-*   `HASHES`
+* `HASHES`
 
     Indicates this operator can support a hash join.
 
-*   `MERGES`
+* `MERGES`
 
     Indicates this operator can support a merge join.
 
@@ -110,9 +108,9 @@ Refer to [Section 38.14](xoper.html "38.14. User-Defined Operators") and [Sect
 
 When you are defining a self-commutative operator, you just do it. When you are defining a pair of commutative operators, things are a little trickier: how can the first one to be defined refer to the other one, which you haven't defined yet? There are three solutions to this problem:
 
-*   One way is to omit the `COMMUTATOR` clause in the first operator that you define, and then provide one in the second operator's definition. Since PostgreSQL knows that commutative operators come in pairs, when it sees the second definition it will automatically go back and fill in the missing `COMMUTATOR` clause in the first definition.
-*   Another, more straightforward way is just to include `COMMUTATOR` clauses in both definitions. When PostgreSQL processes the first definition and realizes that `COMMUTATOR` refers to a nonexistent operator, the system will make a dummy entry for that operator in the system catalog. This dummy entry will have valid data only for the operator name, left and right operand types, and owner, since that's all that PostgreSQL can deduce at this point. The first operator's catalog entry will link to this dummy entry. Later, when you define the second operator, the system updates the dummy entry with the additional information from the second definition. If you try to use the dummy operator before it's been filled in, you'll just get an error message.
-*   Alternatively, both operators can be defined without `COMMUTATOR` clauses and then `ALTER OPERATOR` can be used to set their commutator links. It's sufficient to `ALTER` either one of the pair.
+* One way is to omit the `COMMUTATOR` clause in the first operator that you define, and then provide one in the second operator's definition. Since PostgreSQL knows that commutative operators come in pairs, when it sees the second definition it will automatically go back and fill in the missing `COMMUTATOR` clause in the first definition.
+* Another, more straightforward way is just to include `COMMUTATOR` clauses in both definitions. When PostgreSQL processes the first definition and realizes that `COMMUTATOR` refers to a nonexistent operator, the system will make a dummy entry for that operator in the system catalog. This dummy entry will have valid data only for the operator name, left and right operand types, and owner, since that's all that PostgreSQL can deduce at this point. The first operator's catalog entry will link to this dummy entry. Later, when you define the second operator, the system updates the dummy entry with the additional information from the second definition. If you try to use the dummy operator before it's been filled in, you'll just get an error message.
+* Alternatively, both operators can be defined without `COMMUTATOR` clauses and then `ALTER OPERATOR` can be used to set their commutator links. It's sufficient to `ALTER` either one of the pair.
 
 In all three cases, you must own both operators in order to mark them as commutators.
 

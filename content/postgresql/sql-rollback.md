@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ROLLBACK
 
 ROLLBACK — abort the current transaction
@@ -25,13 +23,11 @@ ROLLBACK [ WORK | TRANSACTION ] [ AND [ NO ] CHAIN ]
 
 ## Parameters
 
-
-
-*   `WORK``TRANSACTION` [#](#SQL-ROLLBACK-TRANSACTION)
+* `WORK``TRANSACTION` [#](#SQL-ROLLBACK-TRANSACTION)
 
     Optional key words. They have no effect.
 
-*   `AND CHAIN` [#](#SQL-ROLLBACK-CHAIN)
+* `AND CHAIN` [#](#SQL-ROLLBACK-CHAIN)
 
     If `AND CHAIN` is specified, a new (not aborted) transaction is immediately started with the same transaction characteristics (see [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION")) as the just finished one. Otherwise, no new transaction is started.
 

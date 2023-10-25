@@ -8,8 +8,6 @@
 
 ## 19.12. Registering Event Log on Windows [#](#EVENT-LOG-REGISTRATION)
 
-
-
 To register a Windows event log library with the operating system, issue this command:
 
 ```

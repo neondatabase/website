@@ -8,10 +8,8 @@
 
 ## 8.4. Binary Data Types [#](#DATATYPE-BINARY)
 
-*   *   [8.4.1. `bytea` Hex Format](datatype-binary.html#DATATYPE-BINARY-BYTEA-HEX-FORMAT)
-    *   [8.4.2. `bytea` Escape Format](datatype-binary.html#DATATYPE-BINARY-BYTEA-ESCAPE-FORMAT)
-
-
+  * *   [8.4.1. `bytea` Hex Format](datatype-binary.html#DATATYPE-BINARY-BYTEA-HEX-FORMAT)
+  * [8.4.2. `bytea` Escape Format](datatype-binary.html#DATATYPE-BINARY-BYTEA-ESCAPE-FORMAT)
 
 The `bytea` data type allows storage of binary strings; see [Table 8.6](datatype-binary.html#DATATYPE-BINARY-TABLE "Table 8.6. Binary Data Types").
 
@@ -22,7 +20,6 @@ The `bytea` data type allows storage of binary strings; see [Table 8.6](datatyp
 | `bytea` | 1 or 4 bytes plus the actual binary string | variable-length binary string |
 
 \
-
 
 A binary string is a sequence of octets (or bytes). Binary strings are distinguished from character strings in two ways. First, binary strings specifically allow storing octets of value zero and other “non-printable” octets (usually, octets outside the decimal range 32 to 126). Character strings disallow zero octets, and also disallow any other octet values and sequences of octet values that are invalid according to the database's selected character set encoding. Second, operations on binary strings process the actual bytes, whereas the processing of character strings depends on locale settings. In short, binary strings are appropriate for storing data that the programmer thinks of as “raw bytes”, whereas character strings are appropriate for storing text.
 
@@ -63,7 +60,6 @@ When entering `bytea` values in escape format, octets of certain values *must* b
 
 \
 
-
 The requirement to escape *non-printable* octets varies depending on locale settings. In some instances you can get away with leaving them unescaped.
 
 The reason that single quotes must be doubled, as shown in [Table 8.7](datatype-binary.html#DATATYPE-BINARY-SQLESC "Table 8.7. bytea Literal Escaped Octets"), is that this is true for any string literal in an SQL command. The generic string-literal parser consumes the outermost single quotes and reduces any pair of single quotes to one data character. What the `bytea` input function sees is just one single quote, which it treats as a plain data character. However, the `bytea` input function treats backslashes as special, and the other behaviors shown in [Table 8.7](datatype-binary.html#DATATYPE-BINARY-SQLESC "Table 8.7. bytea Literal Escaped Octets") are implemented by that function.
@@ -93,7 +89,6 @@ The octet with decimal value 92 (backslash) is doubled in the output. Details ar
 | 32 to 126              | “printable” octets     | client character set representation | `'\176'::bytea` | `~`           |
 
 \
-
 
 Depending on the front end to PostgreSQL you use, you might have additional work to do in terms of escaping and unescaping `bytea` strings. For example, you might also have to escape line feeds and carriage returns if your interface automatically translates these.
 

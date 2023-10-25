@@ -6,15 +6,13 @@
 
 ***
 
-
-
 ## pg\_rewind
 
 pg\_rewind — synchronize a PostgreSQL data directory with another data directory that was forked from it
 
 ## Synopsis
 
-`pg_rewind` \[*`option`*...] { `-D` | `--target-pgdata` }*` directory`* { `--source-pgdata=directory` | `--source-server=connstr` }
+`pg_rewind` \[*`option`*...] { `-D` | `--target-pgdata` }*`directory`* { `--source-pgdata=directory` | `--source-server=connstr` }
 
 ## Description
 
@@ -40,51 +38,51 @@ pg\_rewind will fail immediately if it finds files it cannot write directly to. 
 
 pg\_rewind accepts the following command-line arguments:
 
-*   `-D directory``--target-pgdata=directory`
+* `-D directory``--target-pgdata=directory`
 
     This option specifies the target data directory that is synchronized with the source. The target server must be shut down cleanly before running pg\_rewind
 
-*   `--source-pgdata=directory`
+* `--source-pgdata=directory`
 
     Specifies the file system path to the data directory of the source server to synchronize the target with. This option requires the source server to be cleanly shut down.
 
-*   `--source-server=connstr`
+* `--source-server=connstr`
 
     Specifies a libpq connection string to connect to the source PostgreSQL server to synchronize the target with. The connection must be a normal (non-replication) connection with a role having sufficient permissions to execute the functions used by pg\_rewind on the source server (see Notes section for details) or a superuser role. This option requires the source server to be running and accepting connections.
 
-*   `-R``--write-recovery-conf`
+* `-R``--write-recovery-conf`
 
     Create `standby.signal` and append connection settings to `postgresql.auto.conf` in the output directory. `--source-server` is mandatory with this option.
 
-*   `-n``--dry-run`
+* `-n``--dry-run`
 
     Do everything except actually modifying the target directory.
 
-*   `-N``--no-sync`
+* `-N``--no-sync`
 
     By default, `pg_rewind` will wait for all files to be written safely to disk. This option causes `pg_rewind` to return without waiting, which is faster, but means that a subsequent operating system crash can leave the data directory corrupt. Generally, this option is useful for testing but should not be used on a production installation.
 
-*   `-P``--progress`
+* `-P``--progress`
 
     Enables progress reporting. Turning this on will deliver an approximate progress report while copying data from the source cluster.
 
-*   `-c``--restore-target-wal`
+* `-c``--restore-target-wal`
 
     Use `restore_command` defined in the target cluster configuration to retrieve WAL files from the WAL archive if these files are no longer available in the `pg_wal` directory.
 
-*   `--config-file=filename`
+* `--config-file=filename`
 
     Use the specified main server configuration file for the target cluster. This affects pg\_rewind when it uses internally the postgres command for the rewind operation on this cluster (when retrieving `restore_command` with the option `-c/--restore-target-wal` and when forcing a completion of crash recovery).
 
-*   `--debug`
+* `--debug`
 
     Print verbose debugging output that is mostly useful for developers debugging pg\_rewind.
 
-*   `--no-ensure-shutdown`
+* `--no-ensure-shutdown`
 
     pg\_rewind requires that the target server is cleanly shut down before rewinding. By default, if the target server is not shut down cleanly, pg\_rewind starts the target server in single-user mode to complete crash recovery first, and stops it. By passing this option, pg\_rewind skips this and errors out immediately if the server is not cleanly shut down. Users are expected to handle the situation themselves in that case.
 
-*   `--sync-method=method`
+* `--sync-method=method`
 
     When set to `fsync`, which is the default, `pg_rewind` will recursively open and synchronize all files in the data directory. The search for files will follow symbolic links for the WAL directory and each configured tablespace.
 
@@ -92,11 +90,11 @@ pg\_rewind accepts the following command-line arguments:
 
     This option has no effect when `--no-sync` is used.
 
-*   `-V``--version`
+* `-V``--version`
 
     Display version information, then exit.
 
-*   `-?``--help`
+* `-?``--help`
 
     Show help, then exit.
 
@@ -123,11 +121,11 @@ GRANT EXECUTE ON function pg_catalog.pg_read_binary_file(text, bigint, bigint, b
 
 The basic idea is to copy all file system-level changes from the source cluster to the target cluster:
 
-1.  Scan the WAL log of the target cluster, starting from the last checkpoint before the point where the source cluster's timeline history forked off from the target cluster. For each WAL record, record each data block that was touched. This yields a list of all the data blocks that were changed in the target cluster, after the source cluster forked off. If some of the WAL files are no longer available, try re-running pg\_rewind with the `-c` option to search for the missing files in the WAL archive.
-2.  Copy all those changed blocks from the source cluster to the target cluster, either using direct file system access (`--source-pgdata`) or SQL (`--source-server`). Relation files are now in a state equivalent to the moment of the last completed checkpoint prior to the point at which the WAL timelines of the source and target diverged plus the current state on the source of any blocks changed on the target after that divergence.
-3.  Copy all other files, including new relation files, WAL segments, `pg_xact`, and configuration files from the source cluster to the target cluster. Similarly to base backups, the contents of the directories `pg_dynshmem/`, `pg_notify/`, `pg_replslot/`, `pg_serial/`, `pg_snapshots/`, `pg_stat_tmp/`, and `pg_subtrans/` are omitted from the data copied from the source cluster. The files `backup_label`, `tablespace_map`, `pg_internal.init`, `postmaster.opts`, and `postmaster.pid`, as well as any file or directory beginning with `pgsql_tmp`, are omitted.
-4.  Create a `backup_label` file to begin WAL replay at the checkpoint created at failover and configure the `pg_control` file with a minimum consistency LSN defined as the result of `pg_current_wal_insert_lsn()` when rewinding from a live source or the last checkpoint LSN when rewinding from a stopped source.
-5.  When starting the target, PostgreSQL replays all the required WAL, resulting in a data directory in a consistent state.
+1. Scan the WAL log of the target cluster, starting from the last checkpoint before the point where the source cluster's timeline history forked off from the target cluster. For each WAL record, record each data block that was touched. This yields a list of all the data blocks that were changed in the target cluster, after the source cluster forked off. If some of the WAL files are no longer available, try re-running pg\_rewind with the `-c` option to search for the missing files in the WAL archive.
+2. Copy all those changed blocks from the source cluster to the target cluster, either using direct file system access (`--source-pgdata`) or SQL (`--source-server`). Relation files are now in a state equivalent to the moment of the last completed checkpoint prior to the point at which the WAL timelines of the source and target diverged plus the current state on the source of any blocks changed on the target after that divergence.
+3. Copy all other files, including new relation files, WAL segments, `pg_xact`, and configuration files from the source cluster to the target cluster. Similarly to base backups, the contents of the directories `pg_dynshmem/`, `pg_notify/`, `pg_replslot/`, `pg_serial/`, `pg_snapshots/`, `pg_stat_tmp/`, and `pg_subtrans/` are omitted from the data copied from the source cluster. The files `backup_label`, `tablespace_map`, `pg_internal.init`, `postmaster.opts`, and `postmaster.pid`, as well as any file or directory beginning with `pgsql_tmp`, are omitted.
+4. Create a `backup_label` file to begin WAL replay at the checkpoint created at failover and configure the `pg_control` file with a minimum consistency LSN defined as the result of `pg_current_wal_insert_lsn()` when rewinding from a live source or the last checkpoint LSN when rewinding from a stopped source.
+5. When starting the target, PostgreSQL replays all the required WAL, resulting in a data directory in a consistent state.
 
 ***
 

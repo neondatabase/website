@@ -8,13 +8,11 @@
 
 ## F.17. fuzzystrmatch — determine string similarities and distance [#](#FUZZYSTRMATCH)
 
-*   *   [F.17.1. Soundex](fuzzystrmatch.html#FUZZYSTRMATCH-SOUNDEX)
-    *   [F.17.2. Daitch-Mokotoff Soundex](fuzzystrmatch.html#FUZZYSTRMATCH-DAITCH-MOKOTOFF)
-    *   [F.17.3. Levenshtein](fuzzystrmatch.html#FUZZYSTRMATCH-LEVENSHTEIN)
-    *   [F.17.4. Metaphone](fuzzystrmatch.html#FUZZYSTRMATCH-METAPHONE)
-    *   [F.17.5. Double Metaphone](fuzzystrmatch.html#FUZZYSTRMATCH-DOUBLE-METAPHONE)
-
-
+  * *   [F.17.1. Soundex](fuzzystrmatch.html#FUZZYSTRMATCH-SOUNDEX)
+  * [F.17.2. Daitch-Mokotoff Soundex](fuzzystrmatch.html#FUZZYSTRMATCH-DAITCH-MOKOTOFF)
+  * [F.17.3. Levenshtein](fuzzystrmatch.html#FUZZYSTRMATCH-LEVENSHTEIN)
+  * [F.17.4. Metaphone](fuzzystrmatch.html#FUZZYSTRMATCH-METAPHONE)
+  * [F.17.5. Double Metaphone](fuzzystrmatch.html#FUZZYSTRMATCH-DOUBLE-METAPHONE)
 
 The `fuzzystrmatch` module provides several functions to determine similarities and distance between strings.
 
@@ -29,8 +27,6 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 The Soundex system is a method of matching similar-sounding names by converting them to the same code. It was initially used by the United States Census in 1880, 1900, and 1910. Note that Soundex is not very useful for non-English names.
 
 The `fuzzystrmatch` module provides two functions for working with Soundex codes:
-
-
 
 ```
 
@@ -66,12 +62,10 @@ SELECT * FROM s WHERE difference(s.nm, 'john') > 2;
 
 Like the original Soundex system, Daitch-Mokotoff Soundex matches similar-sounding names by converting them to the same code. However, Daitch-Mokotoff Soundex is significantly more useful for non-English names than the original system. Major improvements over the original system include:
 
-*   The code is based on the first six meaningful letters rather than four.
-*   A letter or combination of letters maps into ten possible codes rather than seven.
-*   Where two consecutive letters have a single sound, they are coded as a single number.
-*   When a letter or combination of letters may have different sounds, multiple codes are emitted to cover all possibilities.
-
-
+* The code is based on the first six meaningful letters rather than four.
+* A letter or combination of letters maps into ten possible codes rather than seven.
+* Where two consecutive letters have a single sound, they are coded as a single number.
+* When a letter or combination of letters may have different sounds, multiple codes are emitted to cover all possibilities.
 
 This function generates the Daitch-Mokotoff soundex codes for its input:
 
@@ -168,8 +162,6 @@ If it is desired to avoid recalculation of soundex codes during index rechecks, 
 
 This function calculates the Levenshtein distance between two strings:
 
-
-
 ```
 
 levenshtein(source text, target text, ins_cost int, del_cost int, sub_cost int) returns int
@@ -217,8 +209,6 @@ Metaphone, like Soundex, is based on the idea of constructing a representative c
 
 This function calculates the metaphone code of an input string:
 
-
-
 ```
 
 metaphone(source text, max_output_length int) returns text
@@ -240,8 +230,6 @@ test=# SELECT metaphone('GUMBO', 4);
 ### F.17.5. Double Metaphone [#](#FUZZYSTRMATCH-DOUBLE-METAPHONE)
 
 The Double Metaphone system computes two “sounds like” strings for a given input string — a “primary” and an “alternate”. In most cases they are the same, but for non-English names especially they can be a bit different, depending on pronunciation. These functions compute the primary and alternate codes:
-
-
 
 ```
 

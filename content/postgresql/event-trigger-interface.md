@@ -8,8 +8,6 @@
 
 ## 40.3. Writing Event Trigger Functions in C [#](#EVENT-TRIGGER-INTERFACE)
 
-
-
 This section describes the low-level details of the interface to an event trigger function. This information is only needed when writing event trigger functions in C. If you are using a higher-level language then these details are handled for you. In most cases you should consider using a procedural language before writing your event triggers in C. The documentation of each procedural language explains how to write an event trigger in that language.
 
 Event trigger functions must use the “version 1” function manager interface.
@@ -45,19 +43,19 @@ typedef struct EventTriggerData
 
 where the members are defined as follows:
 
-*   `type`
+* `type`
 
     Always `T_EventTriggerData`.
 
-*   `event`
+* `event`
 
     Describes the event for which the function is called, one of `"ddl_command_start"`, `"ddl_command_end"`, `"sql_drop"`, `"table_rewrite"`. See [Section 40.1](event-trigger-definition.html "40.1. Overview of Event Trigger Behavior") for the meaning of these events.
 
-*   `parsetree`
+* `parsetree`
 
     A pointer to the parse tree of the command. Check the PostgreSQL source code for details. The parse tree structure is subject to change without notice.
 
-*   `tag`
+* `tag`
 
     The command tag associated with the event for which the event trigger is run, for example `"CREATE FUNCTION"`.
 

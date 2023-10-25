@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## DROP ROLE
 
 DROP ROLE — remove a database role
@@ -29,11 +27,11 @@ However, it is not necessary to remove role memberships involving the role; `DRO
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the role does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name of the role to remove.
 

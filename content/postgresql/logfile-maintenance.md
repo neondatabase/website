@@ -8,8 +8,6 @@
 
 ## 25.3. Log File Maintenance [#](#LOGFILE-MAINTENANCE)
 
-
-
 It is a good idea to save the database server's log output somewhere, rather than just discarding it via `/dev/null`. The log output is invaluable when diagnosing problems.
 
 ### Note

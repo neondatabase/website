@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CLUSTER
 
 CLUSTER — cluster a table according to an index
@@ -37,19 +35,19 @@ When a table is being clustered, an `ACCESS EXCLUSIVE` lock is acquired on it. T
 
 ## Parameters
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (possibly schema-qualified) of a table.
 
-*   *`index_name`*
+* *`index_name`*
 
     The name of an index.
 
-*   `VERBOSE`
+* `VERBOSE`
 
     Prints a progress report as each table is clustered.
 
-*   *`boolean`*
+* *`boolean`*
 
     Specifies whether the selected option should be turned on or off. You can write `TRUE`, `ON`, or `1` to enable the option, and `FALSE`, `OFF`, or `0` to disable it. The *`boolean`* value can also be omitted, in which case `TRUE` is assumed.
 

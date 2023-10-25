@@ -8,8 +8,6 @@
 
 ## 21.6. GSSAPI Authentication [#](#GSSAPI-AUTH)
 
-
-
 GSSAPI is an industry-standard protocol for secure authentication defined in [RFC 2743](https://tools.ietf.org/html/rfc2743). PostgreSQL supports GSSAPI for authentication, communications encryption, or both. GSSAPI provides automatic authentication (single sign-on) for systems that support it. The authentication itself is secure. If GSSAPI encryption or SSL encryption is used, the data sent along the database connection will be encrypted; otherwise, it will not.
 
 GSSAPI support has to be enabled when PostgreSQL is built; see [Chapter 17](installation.html "Chapter 17. Installation from Source Code") for more information.
@@ -34,15 +32,15 @@ kadmin% ktadd -k krb5.keytab postgres/server.my.domain.org
 
 The following authentication options are supported for the GSSAPI authentication method:
 
-*   `include_realm`
+* `include_realm`
 
     If set to 0, the realm name from the authenticated user principal is stripped off before being passed through the user name mapping ([Section 21.2](auth-username-maps.html "21.2. User Name Maps")). This is discouraged and is primarily available for backwards compatibility, as it is not secure in multi-realm environments unless `krb_realm` is also used. It is recommended to leave `include_realm` set to the default (1) and to provide an explicit mapping in `pg_ident.conf` to convert principal names to PostgreSQL user names.
 
-*   `map`
+* `map`
 
     Allows mapping from client principals to database user names. See [Section 21.2](auth-username-maps.html "21.2. User Name Maps") for details. For a GSSAPI/Kerberos principal, such as `username@EXAMPLE.COM` (or, less commonly, `username/hostbased@EXAMPLE.COM`), the user name used for mapping is `username@EXAMPLE.COM` (or `username/hostbased@EXAMPLE.COM`, respectively), unless `include_realm` has been set to 0, in which case `username` (or `username/hostbased`) is what is seen as the system user name when mapping.
 
-*   `krb_realm`
+* `krb_realm`
 
     Sets the realm to match user principal names against. If this parameter is set, only users of that realm will be accepted. If it is not set, users of any realm can connect, subject to whatever user name mapping is done.
 

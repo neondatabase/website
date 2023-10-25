@@ -8,8 +8,6 @@
 
 ## 53.26. `pg_index` [#](#CATALOG-PG-INDEX)
 
-
-
 The catalog `pg_index` contains part of the information about indexes. The rest is mostly in [`pg_class`](catalog-pg-class.html "53.11. pg_class").
 
 **Table 53.26. `pg_index` Columns**

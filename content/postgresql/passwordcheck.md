@@ -8,8 +8,6 @@
 
 ## F.25. passwordcheck — verify password strength [#](#PASSWORDCHECK)
 
-
-
 The `passwordcheck` module checks users' passwords whenever they are set with [CREATE ROLE](sql-createrole.html "CREATE ROLE") or [ALTER ROLE](sql-alterrole.html "ALTER ROLE"). If a password is considered too weak, it will be rejected and the command will terminate with an error.
 
 To enable this module, add `'$libdir/passwordcheck'` to [shared\_preload\_libraries](runtime-config-client.html#GUC-SHARED-PRELOAD-LIBRARIES) in `postgresql.conf`, then restart the server.

@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ROLLBACK PREPARED
 
 ROLLBACK PREPARED — cancel a transaction that was earlier prepared for two-phase commit
@@ -25,7 +23,7 @@ ROLLBACK PREPARED transaction_id
 
 ## Parameters
 
-*   *`transaction_id`*
+* *`transaction_id`*
 
     The transaction identifier of the transaction that is to be rolled back.
 

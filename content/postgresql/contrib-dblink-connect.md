@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## dblink\_connect
 
 dblink\_connect — opens a persistent connection to a remote database
@@ -28,11 +26,11 @@ The connection string may also be the name of an existing foreign server. It is 
 
 ## Arguments
 
-*   *`connname`*
+* *`connname`*
 
     The name to use for this connection; if omitted, an unnamed connection is opened, replacing any existing unnamed connection.
 
-*   *`connstr`*
+* *`connstr`*
 
     libpq-style connection info string, for example `hostaddr=127.0.0.1 port=5432 dbname=mydb user=postgres password=mypasswd options=-csearch_path=`. For details see [Section 34.1.1](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). Alternatively, the name of a foreign server.
 

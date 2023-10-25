@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_cursor\_open\_with\_args
 
 SPI\_cursor\_open\_with\_args — set up a cursor using a query and parameters
@@ -35,37 +33,37 @@ This function is now deprecated in favor of `SPI_cursor_parse_open`, which provi
 
 ## Arguments
 
-*   `const char * name`
+* `const char * name`
 
     name for portal, or `NULL` to let the system select a name
 
-*   `const char * command`
+* `const char * command`
 
     command string
 
-*   `int nargs`
+* `int nargs`
 
     number of input parameters (`$1`, `$2`, etc.)
 
-*   `Oid * argtypes`
+* `Oid * argtypes`
 
     an array of length *`nargs`*, containing the OIDs of the data types of the parameters
 
-*   `Datum * values`
+* `Datum * values`
 
     an array of length *`nargs`*, containing the actual parameter values
 
-*   `const char * nulls`
+* `const char * nulls`
 
     an array of length *`nargs`*, describing which parameters are null
 
     If *`nulls`* is `NULL` then `SPI_cursor_open_with_args` assumes that no parameters are null. Otherwise, each entry of the *`nulls`* array should be `' '` if the corresponding parameter value is non-null, or `'n'` if the corresponding parameter value is null. (In the latter case, the actual value in the corresponding *`values`* entry doesn't matter.) Note that *`nulls`* is not a text string, just an array: it does not need a `'\0'` terminator.
 
-*   `bool read_only`
+* `bool read_only`
 
     `true` for read-only execution
 
-*   `int cursorOptions`
+* `int cursorOptions`
 
     integer bit mask of cursor options; zero produces default behavior
 

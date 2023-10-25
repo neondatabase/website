@@ -8,12 +8,10 @@
 
 ## 9.15. XML Functions [#](#FUNCTIONS-XML)
 
-*   *   [9.15.1. Producing XML Content](functions-xml.html#FUNCTIONS-PRODUCING-XML)
-    *   [9.15.2. XML Predicates](functions-xml.html#FUNCTIONS-XML-PREDICATES)
-    *   [9.15.3. Processing XML](functions-xml.html#FUNCTIONS-XML-PROCESSING)
-    *   [9.15.4. Mapping Tables to XML](functions-xml.html#FUNCTIONS-XML-MAPPING)
-
-
+  * *   [9.15.1. Producing XML Content](functions-xml.html#FUNCTIONS-PRODUCING-XML)
+  * [9.15.2. XML Predicates](functions-xml.html#FUNCTIONS-XML-PREDICATES)
+  * [9.15.3. Processing XML](functions-xml.html#FUNCTIONS-XML-PROCESSING)
+  * [9.15.4. Mapping Tables to XML](functions-xml.html#FUNCTIONS-XML-MAPPING)
 
 The functions and function-like expressions described in this section operate on values of type `xml`. See [Section 8.13](datatype-xml.html "8.13. XML Type") for information about the `xml` type. The function-like expressions `xmlparse` and `xmlserialize` for converting to and from type `xml` are documented there, not in this section.
 
@@ -24,8 +22,6 @@ Use of most of these functions requires PostgreSQL to have been built with `conf
 A set of functions and function-like expressions is available for producing XML content from SQL data. As such, they are particularly suitable for formatting query results into XML documents for processing in client applications.
 
 #### 9.15.1.1. `xmlcomment` [#](#FUNCTIONS-PRODUCING-XML-XMLCOMMENT)
-
-
 
 ```
 
@@ -46,8 +42,6 @@ SELECT xmlcomment('hello');
 ```
 
 #### 9.15.1.2. `xmlconcat` [#](#FUNCTIONS-PRODUCING-XML-XMLCONCAT)
-
-
 
 ```
 
@@ -81,8 +75,6 @@ SELECT xmlconcat('<?xml version="1.1"?><foo/>', '<?xml version="1.1" standalone=
 ```
 
 #### 9.15.1.3. `xmlelement` [#](#FUNCTIONS-PRODUCING-XML-XMLELEMENT)
-
-
 
 ```
 
@@ -159,8 +151,6 @@ Content of other types will be formatted into valid XML character data. This mea
 
 #### 9.15.1.4. `xmlforest` [#](#FUNCTIONS-PRODUCING-XML-XMLFOREST)
 
-
-
 ```
 
 xmlforest ( content [ AS name ] [, ...] ) → xml
@@ -198,8 +188,6 @@ Note that XML forests are not valid XML documents if they consist of more than o
 
 #### 9.15.1.5. `xmlpi` [#](#FUNCTIONS-PRODUCING-XML-XMLPI)
 
-
-
 ```
 
 xmlpi ( NAME name [, content ] ) → xml
@@ -220,8 +208,6 @@ SELECT xmlpi(name php, 'echo "hello world";');
 
 #### 9.15.1.6. `xmlroot` [#](#FUNCTIONS-PRODUCING-XML-XMLROOT)
 
-
-
 ```
 
 xmlroot ( xml, VERSION {text|NO VALUE} [, STANDALONE {YES|NO|NO VALUE} ] ) → xml
@@ -241,8 +227,6 @@ SELECT xmlroot(xmlparse(document '<?xml version="1.1"?><content>abc</content>'),
 ```
 
 #### 9.15.1.7. `xmlagg` [#](#FUNCTIONS-XML-XMLAGG)
-
-
 
 ```
 
@@ -290,8 +274,6 @@ The expressions described in this section check properties of `xml` values.
 
 #### 9.15.2.1. `IS DOCUMENT` [#](#FUNCTIONS-PRODUCING-XML-IS-DOCUMENT)
 
-
-
 ```
 
 xml IS DOCUMENT → boolean
@@ -301,8 +283,6 @@ The expression `IS DOCUMENT` returns true if the argument XML value is a proper 
 
 #### 9.15.2.2. `IS NOT DOCUMENT` [#](#FUNCTIONS-PRODUCING-XML-IS-NOT-DOCUMENT)
 
-
-
 ```
 
 xml IS NOT DOCUMENT → boolean
@@ -311,8 +291,6 @@ xml IS NOT DOCUMENT → boolean
 The expression `IS NOT DOCUMENT` returns false if the argument XML value is a proper XML document, true if it is not (that is, it is a content fragment), or null if the argument is null.
 
 #### 9.15.2.3. `XMLEXISTS` [#](#XML-EXISTS)
-
-
 
 ```
 
@@ -338,8 +316,6 @@ The `BY REF` and `BY VALUE` clauses are accepted in PostgreSQL, but are ignored,
 In the SQL standard, the `xmlexists` function evaluates an expression in the XML Query language, but PostgreSQL allows only an XPath 1.0 expression, as discussed in [Section D.3.1](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-XPATH1 "D.3.1. Queries Are Restricted to XPath 1.0").
 
 #### 9.15.2.4. `xml_is_well_formed` [#](#XML-IS-WELL-FORMED)
-
-
 
 ```
 
@@ -395,8 +371,6 @@ To process values of data type `xml`, PostgreSQL offers the functions `xpath` an
 
 #### 9.15.3.1. `xpath` [#](#FUNCTIONS-XML-PROCESSING-XPATH)
 
-
-
 ```
 
 xpath ( xpath text, xml xml [, nsarray text[] ] ) → xml[]
@@ -436,8 +410,6 @@ SELECT xpath('//mydefns:b/text()', '<a xmlns="http://example.com"><b>test</b></a
 
 #### 9.15.3.2. `xpath_exists` [#](#FUNCTIONS-XML-PROCESSING-XPATH-EXISTS)
 
-
-
 ```
 
 xpath_exists ( xpath text, xml xml [, nsarray text[] ] ) → boolean
@@ -459,8 +431,6 @@ SELECT xpath_exists('/my:a/text()', '<my:a xmlns:my="http://example.com">test</m
 ```
 
 #### 9.15.3.3. `xmltable` [#](#FUNCTIONS-XML-PROCESSING-XMLTABLE)
-
-
 
 ```
 
@@ -599,8 +569,6 @@ SELECT xmltable.*
 ```
 
 ### 9.15.4. Mapping Tables to XML [#](#FUNCTIONS-XML-MAPPING)
-
-
 
 The following functions map the contents of relational tables to XML values. They can be thought of as XML export functionality:
 

@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_fnumber
 
 SPI\_fnumber — determine the column number for the specified column name
@@ -27,11 +25,11 @@ If *`colname`* refers to a system column (e.g., `ctid`) then the appropriate neg
 
 ## Arguments
 
-*   `TupleDesc rowdesc`
+* `TupleDesc rowdesc`
 
     input row description
 
-*   `const char * colname`
+* `const char * colname`
 
     column name
 

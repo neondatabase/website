@@ -8,14 +8,12 @@
 
 ## 38.3. User-Defined Functions [#](#XFUNC)
 
-
-
 PostgreSQL provides four kinds of functions:
 
-*   query language functions (functions written in SQL) ([Section 38.5](xfunc-sql.html "38.5. Query Language (SQL) Functions"))
-*   procedural language functions (functions written in, for example, PL/pgSQL or PL/Tcl) ([Section 38.8](xfunc-pl.html "38.8. Procedural Language Functions"))
-*   internal functions ([Section 38.9](xfunc-internal.html "38.9. Internal Functions"))
-*   C-language functions ([Section 38.10](xfunc-c.html "38.10. C-Language Functions"))
+* query language functions (functions written in SQL) ([Section 38.5](xfunc-sql.html "38.5. Query Language (SQL) Functions"))
+* procedural language functions (functions written in, for example, PL/pgSQL or PL/Tcl) ([Section 38.8](xfunc-pl.html "38.8. Procedural Language Functions"))
+* internal functions ([Section 38.9](xfunc-internal.html "38.9. Internal Functions"))
+* C-language functions ([Section 38.10](xfunc-c.html "38.10. C-Language Functions"))
 
 Every kind of function can take base types, composite types, or combinations of these as arguments (parameters). In addition, every kind of function can return a base type or a composite type. Functions can also be defined to return sets of base or composite values.
 

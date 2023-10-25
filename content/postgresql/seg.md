@@ -8,14 +8,12 @@
 
 ## F.38. seg — a datatype for line segments or floating point intervals [#](#SEG)
 
-*   *   [F.38.1. Rationale](seg.html#SEG-RATIONALE)
-    *   [F.38.2. Syntax](seg.html#SEG-SYNTAX)
-    *   [F.38.3. Precision](seg.html#SEG-PRECISION)
-    *   [F.38.4. Usage](seg.html#SEG-USAGE)
-    *   [F.38.5. Notes](seg.html#SEG-NOTES)
-    *   [F.38.6. Credits](seg.html#SEG-CREDITS)
-
-
+  * *   [F.38.1. Rationale](seg.html#SEG-RATIONALE)
+  * [F.38.2. Syntax](seg.html#SEG-SYNTAX)
+  * [F.38.3. Precision](seg.html#SEG-PRECISION)
+  * [F.38.4. Usage](seg.html#SEG-USAGE)
+  * [F.38.5. Notes](seg.html#SEG-NOTES)
+  * [F.38.6. Credits](seg.html#SEG-CREDITS)
 
 This module implements a data type `seg` for representing line segments, or floating point intervals. `seg` can represent uncertainty in the interval endpoints, making it especially useful for representing laboratory measurements.
 
@@ -71,7 +69,6 @@ In [Table F.28](seg.html#SEG-REPR-TABLE "Table F.28. seg External Representat
 
 \
 
-
 **Table F.29. Examples of Valid `seg` Input**
 
 |                  |                                                                                                                               |
@@ -87,7 +84,6 @@ In [Table F.28](seg.html#SEG-REPR-TABLE "Table F.28. seg External Representat
 | `1 ... 2`        | The same as `1...2`, or `1 .. 2`, or `1..2` (spaces around the range operator are ignored)                                    |
 
 \
-
 
 Because the `...` operator is widely used in data sources, it is allowed as an alternative spelling of the `..` operator. Unfortunately, this creates a parsing ambiguity: it is not clear whether the upper bound in `0...23` is meant to be `23` or `0.23`. This is resolved by requiring at least one digit before the decimal point in all numbers in `seg` input.
 
@@ -117,7 +113,6 @@ The `seg` module includes a GiST index operator class for `seg` values. The oper
 | `seg` `<@` `seg` → `boolean`Is the first `seg` contained in the second?                                                       |
 
 \
-
 
 In addition to the above operators, the usual comparison operators shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for type `seg`. These operators first compare (a) to (c), and if these are equal, compare (b) to (d). That results in reasonably good sorting in most cases, which is useful if you want to use ORDER BY with this type.
 

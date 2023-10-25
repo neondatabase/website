@@ -10,29 +10,27 @@
 
 **Table of Contents**
 
-*   *   [41.1. The Query Tree](querytree.html)
-    *   [41.2. Views and the Rule System](rules-views.html)
+  * *   [41.1. The Query Tree](querytree.html)
+  * [41.2. Views and the Rule System](rules-views.html)
 
     <!---->
 
-    *   *   [41.2.1. How `SELECT` Rules Work](rules-views.html#RULES-SELECT)
-        *   [41.2.2. View Rules in Non-`SELECT` Statements](rules-views.html#RULES-VIEWS-NON-SELECT)
-        *   [41.2.3. The Power of Views in PostgreSQL](rules-views.html#RULES-VIEWS-POWER)
-        *   [41.2.4. Updating a View](rules-views.html#RULES-VIEWS-UPDATE)
+  * *   [41.2.1. How `SELECT` Rules Work](rules-views.html#RULES-SELECT)
+    * [41.2.2. View Rules in Non-`SELECT` Statements](rules-views.html#RULES-VIEWS-NON-SELECT)
+    * [41.2.3. The Power of Views in PostgreSQL](rules-views.html#RULES-VIEWS-POWER)
+    * [41.2.4. Updating a View](rules-views.html#RULES-VIEWS-UPDATE)
 
-*   *   [41.3. Materialized Views](rules-materializedviews.html)
-    *   [41.4. Rules on `INSERT`, `UPDATE`, and `DELETE`](rules-update.html)
+  * *   [41.3. Materialized Views](rules-materializedviews.html)
+  * [41.4. Rules on `INSERT`, `UPDATE`, and `DELETE`](rules-update.html)
 
     <!---->
 
-    *   *   [41.4.1. How Update Rules Work](rules-update.html#RULES-UPDATE-HOW)
-        *   [41.4.2. Cooperation with Views](rules-update.html#RULES-UPDATE-VIEWS)
+  * *   [41.4.1. How Update Rules Work](rules-update.html#RULES-UPDATE-HOW)
+    * [41.4.2. Cooperation with Views](rules-update.html#RULES-UPDATE-VIEWS)
 
-*   *   [41.5. Rules and Privileges](rules-privileges.html)
-    *   [41.6. Rules and Command Status](rules-status.html)
-    *   [41.7. Rules Versus Triggers](rules-triggers.html)
-
-
+  * *   [41.5. Rules and Privileges](rules-privileges.html)
+  * [41.6. Rules and Command Status](rules-status.html)
+  * [41.7. Rules Versus Triggers](rules-triggers.html)
 
 This chapter discusses the rule system in PostgreSQL. Production rule systems are conceptually simple, but there are many subtle points involved in actually using them.
 

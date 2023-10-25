@@ -8,17 +8,15 @@
 
 ## 9.29. Event Trigger Functions [#](#FUNCTIONS-EVENT-TRIGGERS)
 
-*   *   [9.29.1. Capturing Changes at Command End](functions-event-triggers.html#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
-    *   [9.29.2. Processing Objects Dropped by a DDL Command](functions-event-triggers.html#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
-    *   [9.29.3. Handling a Table Rewrite Event](functions-event-triggers.html#PG-EVENT-TRIGGER-TABLE-REWRITE-FUNCTIONS)
+  * *   [9.29.1. Capturing Changes at Command End](functions-event-triggers.html#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
+  * [9.29.2. Processing Objects Dropped by a DDL Command](functions-event-triggers.html#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
+  * [9.29.3. Handling a Table Rewrite Event](functions-event-triggers.html#PG-EVENT-TRIGGER-TABLE-REWRITE-FUNCTIONS)
 
 PostgreSQL provides these helper functions to retrieve information from event triggers.
 
 For more information about event triggers, see [Chapter 40](event-triggers.html "Chapter 40. Event Triggers").
 
 ### 9.29.1. Capturing Changes at Command End [#](#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
-
-
 
 ```
 
@@ -40,8 +38,6 @@ pg_event_trigger_ddl_commands () → setof record
 | `command`         | `pg_ddl_command` | A complete representation of the command, in internal format. This cannot be output directly, but it can be passed to other functions to obtain different pieces of information about the command. |
 
 ### 9.29.2. Processing Objects Dropped by a DDL Command [#](#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
-
-
 
 ```
 
@@ -102,7 +98,6 @@ The functions shown in [Table 9.104](functions-event-triggers.html#FUNCTIONS-EV
 | `pg_event_trigger_table_rewrite_reason` () → `integer`Returns a code explaining the reason(s) for rewriting. The exact meaning of the codes is release dependent. |
 
 \
-
 
 These functions can be used in an event trigger like this:
 

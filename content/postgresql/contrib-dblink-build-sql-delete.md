@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## dblink\_build\_sql\_delete
 
 dblink\_build\_sql\_delete — builds a DELETE statement using supplied values for primary key field values
@@ -28,19 +26,19 @@ dblink_build_sql_delete(text relname,
 
 ## Arguments
 
-*   *`relname`*
+* *`relname`*
 
     Name of a local relation, for example `foo` or `myschema.mytab`. Include double quotes if the name is mixed-case or contains special characters, for example `"FooBar"`; without quotes, the string will be folded to lower case.
 
-*   *`primary_key_attnums`*
+* *`primary_key_attnums`*
 
     Attribute numbers (1-based) of the primary key fields, for example `1 2`.
 
-*   *`num_primary_key_atts`*
+* *`num_primary_key_atts`*
 
     The number of primary key fields.
 
-*   *`tgt_pk_att_vals_array`*
+* *`tgt_pk_att_vals_array`*
 
     Values of the primary key fields to be used in the resulting `DELETE` command. Each field is represented in text form.
 

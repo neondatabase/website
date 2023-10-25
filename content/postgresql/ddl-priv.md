@@ -8,8 +8,6 @@
 
 ## 5.7. Privileges [#](#DDL-PRIV)
 
-
-
 When an object is created, it is assigned an owner. The owner is normally the role that executed the creation statement. For most kinds of objects, the initial state is that only the owner (or a superuser) can do anything with the object. To allow other roles to use it, *privileges* must be granted.
 
 There are different kinds of privileges: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, `REFERENCES`, `TRIGGER`, `CREATE`, `CONNECT`, `TEMPORARY`, `EXECUTE`, `USAGE`, `SET` and `ALTER SYSTEM`. The privileges applicable to a particular object vary depending on the object's type (table, function, etc.). More detail about the meanings of these privileges appears below. The following sections and chapters will also show you how these privileges are used.
@@ -49,35 +47,35 @@ An object's owner can choose to revoke their own ordinary privileges, for exampl
 
 The available privileges are:
 
-*   `SELECT` [#](#DDL-PRIV-SELECT)
+* `SELECT` [#](#DDL-PRIV-SELECT)
 
     Allows `SELECT` from any column, or specific column(s), of a table, view, materialized view, or other table-like object. Also allows use of `COPY TO`. This privilege is also needed to reference existing column values in `UPDATE`, `DELETE`, or `MERGE`. For sequences, this privilege also allows use of the `currval` function. For large objects, this privilege allows the object to be read.
 
-*   `INSERT` [#](#DDL-PRIV-INSERT)
+* `INSERT` [#](#DDL-PRIV-INSERT)
 
     Allows `INSERT` of a new row into a table, view, etc. Can be granted on specific column(s), in which case only those columns may be assigned to in the `INSERT` command (other columns will therefore receive default values). Also allows use of `COPY FROM`.
 
-*   `UPDATE` [#](#DDL-PRIV-UPDATE)
+* `UPDATE` [#](#DDL-PRIV-UPDATE)
 
     Allows `UPDATE` of any column, or specific column(s), of a table, view, etc. (In practice, any nontrivial `UPDATE` command will require `SELECT` privilege as well, since it must reference table columns to determine which rows to update, and/or to compute new values for columns.) `SELECT ... FOR UPDATE` and `SELECT ... FOR SHARE` also require this privilege on at least one column, in addition to the `SELECT` privilege. For sequences, this privilege allows use of the `nextval` and `setval` functions. For large objects, this privilege allows writing or truncating the object.
 
-*   `DELETE` [#](#DDL-PRIV-DELETE)
+* `DELETE` [#](#DDL-PRIV-DELETE)
 
     Allows `DELETE` of a row from a table, view, etc. (In practice, any nontrivial `DELETE` command will require `SELECT` privilege as well, since it must reference table columns to determine which rows to delete.)
 
-*   `TRUNCATE` [#](#DDL-PRIV-TRUNCATE)
+* `TRUNCATE` [#](#DDL-PRIV-TRUNCATE)
 
     Allows `TRUNCATE` on a table.
 
-*   `REFERENCES` [#](#DDL-PRIV-REFERENCES)
+* `REFERENCES` [#](#DDL-PRIV-REFERENCES)
 
     Allows creation of a foreign key constraint referencing a table, or specific column(s) of a table.
 
-*   `TRIGGER` [#](#DDL-PRIV-TRIGGER)
+* `TRIGGER` [#](#DDL-PRIV-TRIGGER)
 
     Allows creation of a trigger on a table, view, etc.
 
-*   `CREATE` [#](#DDL-PRIV-CREATE)
+* `CREATE` [#](#DDL-PRIV-CREATE)
 
     For databases, allows new schemas and publications to be created within the database, and allows trusted extensions to be installed within the database.
 
@@ -87,19 +85,19 @@ The available privileges are:
 
     Note that revoking this privilege will not alter the existence or location of existing objects.
 
-*   `CONNECT` [#](#DDL-PRIV-CONNECT)
+* `CONNECT` [#](#DDL-PRIV-CONNECT)
 
     Allows the grantee to connect to the database. This privilege is checked at connection startup (in addition to checking any restrictions imposed by `pg_hba.conf`).
 
-*   `TEMPORARY` [#](#DDL-PRIV-TEMPORARY)
+* `TEMPORARY` [#](#DDL-PRIV-TEMPORARY)
 
     Allows temporary tables to be created while using the database.
 
-*   `EXECUTE` [#](#DDL-PRIV-EXECUTE)
+* `EXECUTE` [#](#DDL-PRIV-EXECUTE)
 
     Allows calling a function or procedure, including use of any operators that are implemented on top of the function. This is the only type of privilege that is applicable to functions and procedures.
 
-*   `USAGE` [#](#DDL-PRIV-USAGE)
+* `USAGE` [#](#DDL-PRIV-USAGE)
 
     For procedural languages, allows use of the language for the creation of functions in that language. This is the only type of privilege that is applicable to procedural languages.
 
@@ -113,11 +111,11 @@ The available privileges are:
 
     For foreign servers, allows creation of foreign tables using the server. Grantees may also create, alter, or drop their own user mappings associated with that server.
 
-*   `SET` [#](#DDL-PRIV-SET)
+* `SET` [#](#DDL-PRIV-SET)
 
     Allows a server configuration parameter to be set to a new value within the current session. (While this privilege can be granted on any parameter, it is meaningless except for parameters that would normally require superuser privilege to set.)
 
-*   `ALTER SYSTEM` [#](#DDL-PRIV-ALTER-SYSTEM)
+* `ALTER SYSTEM` [#](#DDL-PRIV-ALTER-SYSTEM)
 
     Allows a server configuration parameter to be configured to a new value using the [ALTER SYSTEM](sql-altersystem.html "ALTER SYSTEM") command.
 
@@ -148,7 +146,6 @@ PostgreSQL grants privileges on some types of objects to `PUBLIC` by default whe
 
 \
 
-
 [Table 5.2](ddl-priv.html#PRIVILEGES-SUMMARY-TABLE "Table 5.2. Summary of Access Privileges") summarizes the privileges available for each type of SQL object, using the abbreviations shown above. It also shows the psql command that can be used to examine privilege settings for each object type.
 
 **Table 5.2. Summary of Access Privileges**
@@ -171,7 +168,6 @@ PostgreSQL grants privileges on some types of objects to `PUBLIC` by default whe
 | `TYPE`                           | `U`            | `U`                         | `\dT+`       |
 
 \
-
 
 The privileges that have been granted for a particular object are displayed as a list of `aclitem` entries, where each `aclitem` describes the permissions of one grantee that have been granted by a particular grantor. For example, `calvin=r*w/hobbes` specifies that the role `calvin` has the privilege `SELECT` (`r`) with grant option (`*`) as well as the non-grantable privilege `UPDATE` (`w`), both granted by the role `hobbes`. If `calvin` also has some privileges on the same object granted by a different grantor, those would appear as a separate `aclitem` entry. An empty grantee field in an `aclitem` stands for `PUBLIC`.
 

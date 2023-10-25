@@ -8,12 +8,10 @@
 
 ## F.40. spi — Server Programming Interface features/examples [#](#CONTRIB-SPI)
 
-*   *   [F.40.1. refint — Functions for Implementing Referential Integrity](contrib-spi.html#CONTRIB-SPI-REFINT)
-    *   [F.40.2. autoinc — Functions for Autoincrementing Fields](contrib-spi.html#CONTRIB-SPI-AUTOINC)
-    *   [F.40.3. insert\_username — Functions for Tracking Who Changed a Table](contrib-spi.html#CONTRIB-SPI-INSERT-USERNAME)
-    *   [F.40.4. moddatetime — Functions for Tracking Last Modification Time](contrib-spi.html#CONTRIB-SPI-MODDATETIME)
-
-
+  * *   [F.40.1. refint — Functions for Implementing Referential Integrity](contrib-spi.html#CONTRIB-SPI-REFINT)
+  * [F.40.2. autoinc — Functions for Autoincrementing Fields](contrib-spi.html#CONTRIB-SPI-AUTOINC)
+  * [F.40.3. insert\_username — Functions for Tracking Who Changed a Table](contrib-spi.html#CONTRIB-SPI-INSERT-USERNAME)
+  * [F.40.4. moddatetime — Functions for Tracking Last Modification Time](contrib-spi.html#CONTRIB-SPI-MODDATETIME)
 
 The spi module provides several workable examples of using the [Server Programming Interface](spi.html "Chapter 47. Server Programming Interface") (SPI) and triggers. While these functions are of some value in their own right, they are even more useful as examples to modify for your own purposes. The functions are general enough to be used with any table, but you have to specify table and field names (as described below) while creating a trigger.
 

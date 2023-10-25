@@ -8,10 +8,8 @@
 
 ## 14.2. Statistics Used by the Planner [#](#PLANNER-STATS)
 
-*   *   [14.2.1. Single-Column Statistics](planner-stats.html#PLANNER-STATS-SINGLE-COLUMN)
-    *   [14.2.2. Extended Statistics](planner-stats.html#PLANNER-STATS-EXTENDED)
-
-
+  * *   [14.2.1. Single-Column Statistics](planner-stats.html#PLANNER-STATS-SINGLE-COLUMN)
+  * [14.2.2. Extended Statistics](planner-stats.html#PLANNER-STATS-EXTENDED)
 
 ### 14.2.1. Single-Column Statistics [#](#PLANNER-STATS-SINGLE-COLUMN)
 
@@ -39,11 +37,7 @@ Here we can see that `tenk1` contains 10000 rows, as do its indexes, but the ind
 
 For efficiency reasons, `reltuples` and `relpages` are not updated on-the-fly, and so they usually contain somewhat out-of-date values. They are updated by `VACUUM`, `ANALYZE`, and a few DDL commands such as `CREATE INDEX`. A `VACUUM` or `ANALYZE` operation that does not scan the entire table (which is commonly the case) will incrementally update the `reltuples` count on the basis of the part of the table it did scan, resulting in an approximate value. In any case, the planner will scale the values it finds in `pg_class` to match the current physical table size, thus obtaining a closer approximation.
 
-
-
 Most queries retrieve only a fraction of the rows in a table, due to `WHERE` clauses that restrict the rows to be examined. The planner thus needs to make an estimate of the *selectivity* of `WHERE` clauses, that is, the fraction of rows that match each condition in the `WHERE` clause. The information used for this task is stored in the [`pg_statistic`](catalog-pg-statistic.html "53.51. pg_statistic") system catalog. Entries in `pg_statistic` are updated by the `ANALYZE` and `VACUUM ANALYZE` commands, and are always approximate even when freshly updated.
-
-
 
 Rather than look at `pg_statistic` directly, it's better to look at its view [`pg_stats`](view-pg-stats.html "54.27. pg_stats") when examining the statistics manually. `pg_stats` is designed to be more easily readable. Furthermore, `pg_stats` is readable by all, whereas `pg_statistic` is only readable by a superuser. (This prevents unprivileged users from learning something about the contents of other people's tables from the statistics. The `pg_stats` view is restricted to show only rows about tables that the current user can read.) For example, we might do:
 
@@ -76,8 +70,6 @@ The amount of information stored in `pg_statistic` by `ANALYZE`, in particular t
 Further details about the planner's use of statistics can be found in [Chapter 76](planner-stats-details.html "Chapter 76. How the Planner Uses Statistics").
 
 ### 14.2.2. Extended Statistics [#](#PLANNER-STATS-EXTENDED)
-
-
 
 It is common to see slow queries running bad execution plans because multiple columns used in the query clauses are correlated. The planner normally assumes that multiple conditions are independent of each other, an assumption that does not hold when column values are correlated. Regular statistics, because of their per-individual-column nature, cannot capture any knowledge about cross-column correlation. However, PostgreSQL has the ability to compute *multivariate statistics*, which can capture such information.
 

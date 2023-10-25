@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER MATERIALIZED VIEW
 
 ALTER MATERIALIZED VIEW — change the definition of a materialized view
@@ -55,31 +53,31 @@ The statement subforms and actions available for `ALTER MATERIALIZED VIEW` are a
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing materialized view.
 
-*   *`column_name`*
+* *`column_name`*
 
     Name of a new or existing column.
 
-*   *`extension_name`*
+* *`extension_name`*
 
     The name of the extension that the materialized view is to depend on (or no longer dependent on, if `NO` is specified). A materialized view that's marked as dependent on an extension is automatically dropped when the extension is dropped.
 
-*   *`new_column_name`*
+* *`new_column_name`*
 
     New name for an existing column.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The user name of the new owner of the materialized view.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name for the materialized view.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the materialized view.
 

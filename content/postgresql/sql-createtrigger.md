@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE TRIGGER
 
 CREATE TRIGGER — define a new trigger
@@ -72,15 +70,15 @@ Refer to [Chapter 39](triggers.html "Chapter 39. Triggers") for more informat
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name to give the new trigger. This must be distinct from the name of any other trigger for the same table. The name cannot be schema-qualified — the trigger inherits the schema of its table. For a constraint trigger, this is also the name to use when modifying the trigger's behavior using `SET CONSTRAINTS`.
 
-*   `BEFORE``AFTER``INSTEAD OF`
+* `BEFORE``AFTER``INSTEAD OF`
 
     Determines whether the function is called before, after, or instead of the event. A constraint trigger can only be specified as `AFTER`.
 
-*   *`event`*
+* *`event`*
 
     One of `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE`; this specifies the event that will fire the trigger. Multiple events can be specified using `OR`, except when transition relations are requested.
 
@@ -95,35 +93,35 @@ Refer to [Chapter 39](triggers.html "Chapter 39. Triggers") for more informat
 
     `INSTEAD OF UPDATE` events do not allow a list of columns. A column list cannot be specified when requesting transition relations, either.
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (optionally schema-qualified) of the table, view, or foreign table the trigger is for.
 
-*   *`referenced_table_name`*
+* *`referenced_table_name`*
 
     The (possibly schema-qualified) name of another table referenced by the constraint. This option is used for foreign-key constraints and is not recommended for general use. This can only be specified for constraint triggers.
 
-*   `DEFERRABLE``NOT DEFERRABLE``INITIALLY IMMEDIATE``INITIALLY DEFERRED`
+* `DEFERRABLE``NOT DEFERRABLE``INITIALLY IMMEDIATE``INITIALLY DEFERRED`
 
     The default timing of the trigger. See the [CREATE TABLE](sql-createtable.html "CREATE TABLE") documentation for details of these constraint options. This can only be specified for constraint triggers.
 
-*   `REFERENCING`
+* `REFERENCING`
 
     This keyword immediately precedes the declaration of one or two relation names that provide access to the transition relations of the triggering statement.
 
-*   `OLD TABLE``NEW TABLE`
+* `OLD TABLE``NEW TABLE`
 
     This clause indicates whether the following relation name is for the before-image transition relation or the after-image transition relation.
 
-*   *`transition_relation_name`*
+* *`transition_relation_name`*
 
     The (unqualified) name to be used within the trigger for this transition relation.
 
-*   `FOR EACH ROW``FOR EACH STATEMENT`
+* `FOR EACH ROW``FOR EACH STATEMENT`
 
     This specifies whether the trigger function should be fired once for every row affected by the trigger event, or just once per SQL statement. If neither is specified, `FOR EACH STATEMENT` is the default. Constraint triggers can only be specified `FOR EACH ROW`.
 
-*   *`condition`*
+* *`condition`*
 
     A Boolean expression that determines whether the trigger function will actually be executed. If `WHEN` is specified, the function will only be called if the *`condition`* returns `true`. In `FOR EACH ROW` triggers, the `WHEN` condition can refer to columns of the old and/or new row values by writing `OLD.column_name` or `NEW.column_name` respectively. Of course, `INSERT` triggers cannot refer to `OLD` and `DELETE` triggers cannot refer to `NEW`.
 
@@ -133,13 +131,13 @@ Refer to [Chapter 39](triggers.html "Chapter 39. Triggers") for more informat
 
     Note that for constraint triggers, evaluation of the `WHEN` condition is not deferred, but occurs immediately after the row update operation is performed. If the condition does not evaluate to true then the trigger is not queued for deferred execution.
 
-*   *`function_name`*
+* *`function_name`*
 
     A user-supplied function that is declared as taking no arguments and returning type `trigger`, which is executed when the trigger fires.
 
     In the syntax of `CREATE TRIGGER`, the keywords `FUNCTION` and `PROCEDURE` are equivalent, but the referenced function must in any case be a function, not a procedure. The use of the keyword `PROCEDURE` here is historical and deprecated.
 
-*   *`arguments`*
+* *`arguments`*
 
     An optional comma-separated list of arguments to be provided to the function when the trigger is executed. The arguments are literal string constants. Simple names and numeric constants can be written here, too, but they will all be converted to strings. Please check the description of the implementation language of the trigger function to find out how these arguments can be accessed within the function; it might be different from normal function arguments.
 
@@ -255,9 +253,9 @@ CREATE TRIGGER paired_items_update
 
 The `CREATE TRIGGER` statement in PostgreSQL implements a subset of the SQL standard. The following functionalities are currently missing:
 
-*   While transition table names for `AFTER` triggers are specified using the `REFERENCING` clause in the standard way, the row variables used in `FOR EACH ROW` triggers may not be specified in a `REFERENCING` clause. They are available in a manner that is dependent on the language in which the trigger function is written, but is fixed for any one language. Some languages effectively behave as though there is a `REFERENCING` clause containing `OLD ROW AS OLD NEW ROW AS NEW`.
-*   The standard allows transition tables to be used with column-specific `UPDATE` triggers, but then the set of rows that should be visible in the transition tables depends on the trigger's column list. This is not currently implemented by PostgreSQL.
-*   PostgreSQL only allows the execution of a user-defined function for the triggered action. The standard allows the execution of a number of other SQL commands, such as `CREATE TABLE`, as the triggered action. This limitation is not hard to work around by creating a user-defined function that executes the desired commands.
+* While transition table names for `AFTER` triggers are specified using the `REFERENCING` clause in the standard way, the row variables used in `FOR EACH ROW` triggers may not be specified in a `REFERENCING` clause. They are available in a manner that is dependent on the language in which the trigger function is written, but is fixed for any one language. Some languages effectively behave as though there is a `REFERENCING` clause containing `OLD ROW AS OLD NEW ROW AS NEW`.
+* The standard allows transition tables to be used with column-specific `UPDATE` triggers, but then the set of rows that should be visible in the transition tables depends on the trigger's column list. This is not currently implemented by PostgreSQL.
+* PostgreSQL only allows the execution of a user-defined function for the triggered action. The standard allows the execution of a number of other SQL commands, such as `CREATE TABLE`, as the triggered action. This limitation is not hard to work around by creating a user-defined function that executes the desired commands.
 
 SQL specifies that multiple triggers should be fired in time-of-creation order. PostgreSQL uses name order, which was judged to be more convenient.
 

@@ -8,12 +8,12 @@
 
 ## 9.9. Date/Time Functions and Operators [#](#FUNCTIONS-DATETIME)
 
-*   *   [9.9.1. `EXTRACT`, `date_part`](functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT)
-    *   [9.9.2. `date_trunc`](functions-datetime.html#FUNCTIONS-DATETIME-TRUNC)
-    *   [9.9.3. `date_bin`](functions-datetime.html#FUNCTIONS-DATETIME-BIN)
-    *   [9.9.4. `AT TIME ZONE and AT LOCAL`](functions-datetime.html#FUNCTIONS-DATETIME-ZONECONVERT)
-    *   [9.9.5. Current Date/Time](functions-datetime.html#FUNCTIONS-DATETIME-CURRENT)
-    *   [9.9.6. Delaying Execution](functions-datetime.html#FUNCTIONS-DATETIME-DELAY)
+  * *   [9.9.1. `EXTRACT`, `date_part`](functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT)
+  * [9.9.2. `date_trunc`](functions-datetime.html#FUNCTIONS-DATETIME-TRUNC)
+  * [9.9.3. `date_bin`](functions-datetime.html#FUNCTIONS-DATETIME-BIN)
+  * [9.9.4. `AT TIME ZONE and AT LOCAL`](functions-datetime.html#FUNCTIONS-DATETIME-ZONECONVERT)
+  * [9.9.5. Current Date/Time](functions-datetime.html#FUNCTIONS-DATETIME-CURRENT)
+  * [9.9.6. Delaying Execution](functions-datetime.html#FUNCTIONS-DATETIME-DELAY)
 
 [Table 9.33](functions-datetime.html#FUNCTIONS-DATETIME-TABLE "Table 9.33. Date/Time Functions") shows the available functions for date/time value processing, with details appearing in the following subsections. [Table 9.32](functions-datetime.html#OPERATORS-DATETIME-TABLE "Table 9.32. Date/Time Operators") illustrates the behaviors of the basic arithmetic operators (`+`, `*`, etc.). For formatting functions, refer to [Section 9.8](functions-formatting.html "9.8. Data Type Formatting Functions"). You should be familiar with the background information on date/time data types from [Section 8.5](datatype-datetime.html "8.5. Date/Time Types").
 
@@ -44,7 +44,6 @@ All the functions and operators described below that take `time` or `timestamp` 
 | `interval` `/` `double precision` → `interval`Divide an interval by a scalar`interval '1 hour' / 1.5` → `00:40:00`                                                                                                     |
 
 \
-
 
 **Table 9.33. Date/Time Functions**
 
@@ -90,7 +89,6 @@ All the functions and operators described below that take `time` or `timestamp` 
 | `to_timestamp` ( `double precision` ) → `timestamp with time zone`Convert Unix epoch (seconds since 1970-01-01 00:00:00+00) to timestamp with time zone`to_timestamp(1284352323)` → `2010-09-13 04:32:03+00`                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 \
-
 
 In addition to these functions, the SQL `OVERLAPS` operator is supported:
 
@@ -151,8 +149,6 @@ Result: 4 mons
 
 ### 9.9.1. `EXTRACT`, `date_part` [#](#FUNCTIONS-DATETIME-EXTRACT)
 
-
-
 ```
 
 EXTRACT(field FROM source)
@@ -160,7 +156,7 @@ EXTRACT(field FROM source)
 
 The `extract` function retrieves subfields such as year or hour from date/time values. *`source`* must be a value expression of type `timestamp`, `time`, or `interval`. (Expressions of type `date` are cast to `timestamp` and can therefore be used as well.) *`field`* is an identifier or string that selects what field to extract from the source value. The `extract` function returns values of type `numeric`. The following are valid field names:
 
-*   `century`
+* `century`
 
     The century
 
@@ -174,7 +170,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
 
     The first century starts at 0001-01-01 00:00:00 AD, although they did not know it at the time. This definition applies to all Gregorian calendar countries. There is no century number 0, you go from -1 century to 1 century. If you disagree with this, please write your complaint to: Pope, Cathedral Saint-Peter of Roma, Vatican.
 
-*   `day`
+* `day`
 
     For `timestamp` values, the day (of the month) field (1–31) ; for `interval` values, the number of days
 
@@ -187,7 +183,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
     Result: 40
     ```
 
-*   `decade`
+* `decade`
 
     The year field divided by 10
 
@@ -197,7 +193,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
     Result: 200
     ```
 
-*   `dow`
+* `dow`
 
     The day of the week as Sunday (`0`) to Saturday (`6`)
 
@@ -209,7 +205,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
 
     Note that `extract`'s day of the week numbering differs from that of the `to_char(..., 'D')` function.
 
-*   `doy`
+* `doy`
 
     The day of the year (1–365/366)
 
@@ -219,7 +215,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
     Result: 47
     ```
 
-*   `epoch`
+* `epoch`
 
     For `timestamp with time zone` values, the number of seconds since 1970-01-01 00:00:00 UTC (negative for timestamps before that); for `date` and `timestamp` values, the nominal number of seconds since 1970-01-01 00:00:00, without regard to timezone or daylight-savings rules; for `interval` values, the total number of seconds in the interval
 
@@ -245,7 +241,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
 
     Beware that applying `to_timestamp` to an epoch extracted from a `date` or `timestamp` value could produce a misleading result: the result will effectively assume that the original value had been given in UTC, which might not be the case.
 
-*   `hour`
+* `hour`
 
     The hour field (0–23)
 
@@ -255,7 +251,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
     Result: 20
     ```
 
-*   `isodow`
+* `isodow`
 
     The day of the week as Monday (`1`) to Sunday (`7`)
 
@@ -267,7 +263,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
 
     This is identical to `dow` except for Sunday. This matches the ISO 8601 day of the week numbering.
 
-*   `isoyear`
+* `isoyear`
 
     The ISO 8601 week-numbering year that the date falls in (not applicable to intervals)
 
@@ -283,7 +279,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
 
     This field is not available in PostgreSQL releases prior to 8.3.
 
-*   `julian`
+* `julian`
 
     The *Julian Date* corresponding to the date or timestamp (not applicable to intervals). Timestamps that are not local midnight result in a fractional value. See [Section B.7](datetime-julian-dates.html "B.7. Julian Dates") for more information.
 
@@ -295,7 +291,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
     Result: 2453737.50000000000000000000
     ```
 
-*   `microseconds`
+* `microseconds`
 
     The seconds field, including fractional parts, multiplied by 1 000 000; note that this includes full seconds
 
@@ -305,7 +301,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
     Result: 28500000
     ```
 
-*   `millennium`
+* `millennium`
 
     The millennium
 
@@ -317,7 +313,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
 
     Years in the 1900s are in the second millennium. The third millennium started January 1, 2001.
 
-*   `milliseconds`
+* `milliseconds`
 
     The seconds field, including fractional parts, multiplied by 1000. Note that this includes full seconds.
 
@@ -327,7 +323,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
     Result: 28500.000
     ```
 
-*   `minute`
+* `minute`
 
     The minutes field (0–59)
 
@@ -337,7 +333,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
     Result: 38
     ```
 
-*   `month`
+* `month`
 
     For `timestamp` values, the number of the month within the year (1–12) ; for `interval` values, the number of months, modulo 12 (0–11)
 
@@ -353,7 +349,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
     Result: 1
     ```
 
-*   `quarter`
+* `quarter`
 
     The quarter of the year (1–4) that the date is in
 
@@ -363,7 +359,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
     Result: 1
     ```
 
-*   `second`
+* `second`
 
     The seconds field, including any fractional seconds
 
@@ -376,19 +372,19 @@ The `extract` function retrieves subfields such as year or hour from date/time v
     Result: 28.500000
     ```
 
-*   `timezone`
+* `timezone`
 
     The time zone offset from UTC, measured in seconds. Positive values correspond to time zones east of UTC, negative values to zones west of UTC. (Technically, PostgreSQL does not use UTC because leap seconds are not handled.)
 
-*   `timezone_hour`
+* `timezone_hour`
 
     The hour component of the time zone offset
 
-*   `timezone_minute`
+* `timezone_minute`
 
     The minute component of the time zone offset
 
-*   `week`
+* `week`
 
     The number of the ISO 8601 week-numbering week of the year. By definition, ISO weeks start on Mondays and the first week of a year contains January 4 of that year. In other words, the first Thursday of a year is in week 1 of that year.
 
@@ -400,7 +396,7 @@ The `extract` function retrieves subfields such as year or hour from date/time v
     Result: 7
     ```
 
-*   `year`
+* `year`
 
     The year field. Keep in mind there is no `0 AD`, so subtracting `BC` years from `AD` years should be done with care.
 
@@ -435,8 +431,6 @@ Result: 4
 ```
 
 ### 9.9.2. `date_trunc` [#](#FUNCTIONS-DATETIME-TRUNC)
-
-
 
 The function `date_trunc` is conceptually similar to the `trunc` function for numbers.
 
@@ -491,8 +485,6 @@ Result: 3 days 02:00:00
 
 ### 9.9.3. `date_bin` [#](#FUNCTIONS-DATETIME-BIN)
 
-
-
 The function `date_bin` “bins” the input timestamp into the specified interval (the *stride*) aligned with a specified origin.
 
 ```
@@ -519,8 +511,6 @@ The *`stride`* interval must be greater than zero and cannot contain units of mo
 
 ### 9.9.4. `AT TIME ZONE and AT LOCAL` [#](#FUNCTIONS-DATETIME-ZONECONVERT)
 
-
-
 The `AT TIME ZONE` operator converts time stamp *without* time zone to/from time stamp *with* time zone, and `time with time zone` values to different time zones. [Table 9.34](functions-datetime.html#FUNCTIONS-DATETIME-ZONECONVERT-TABLE "Table 9.34. AT TIME ZONE and AT LOCAL Variants") shows its variants.
 
 **Table 9.34. `AT TIME ZONE` and `AT LOCAL` Variants**
@@ -535,7 +525,6 @@ The `AT TIME ZONE` operator converts time stamp *without* time zone to/from time
 | `time with time zone` `AT LOCAL` → `time with time zone`Converts given time *with* time zone to a new time zone. Since no date is supplied, this uses the currently active UTC offset for the session's `TimeZone` value.Assuming the session's `TimeZone` is set to `UTC`:`time with time zone '05:34:17-05' at local` → `10:34:17+00` |
 
 \
-
 
 In these expressions, the desired time zone *`zone`* can be specified either as a text value (e.g., `'America/Los_Angeles'`) or as an interval (e.g., `INTERVAL '-08:00'`). In the text case, a time zone name can be specified in any of the ways described in [Section 8.5.3](datatype-datetime.html#DATATYPE-TIMEZONES "8.5.3. Time Zones"). The interval case is only useful for zones that have fixed offsets from UTC, so it is not very common in practice.
 
@@ -574,8 +563,6 @@ The function `timezone(timestamp)` is equivalent to the SQL-conforming construct
 The function `timezone(time)` is equivalent to the SQL-conforming construct `time AT LOCAL`.
 
 ### 9.9.5. Current Date/Time [#](#FUNCTIONS-DATETIME-CURRENT)
-
-
 
 PostgreSQL provides a number of functions that return values related to the current date and time. These SQL-standard functions all return values based on the start time of the current transaction:
 
@@ -649,8 +636,6 @@ SELECT TIMESTAMP 'now';  -- but see tip below
 Do not use the third form when specifying a value to be evaluated later, for example in a `DEFAULT` clause for a table column. The system will convert `now` to a `timestamp` as soon as the constant is parsed, so that when the default value is needed, the time of the table creation would be used! The first two forms will not be evaluated until the default value is used, because they are function calls. Thus they will give the desired behavior of defaulting to the time of row insertion. (See also [Section 8.5.1.4](datatype-datetime.html#DATATYPE-DATETIME-SPECIAL-VALUES "8.5.1.4. Special Values").)
 
 ### 9.9.6. Delaying Execution [#](#FUNCTIONS-DATETIME-DELAY)
-
-
 
 The following functions are available to delay execution of the server process:
 

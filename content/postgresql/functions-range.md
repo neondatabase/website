@@ -32,7 +32,6 @@ See [Section 8.17](rangetypes.html "8.17. Range Types") for an overview of ran
 
 \
 
-
 **Table 9.56. Multirange Operators**
 
 | OperatorDescriptionExample(s)                                                                                                                                                                                              |
@@ -69,7 +68,6 @@ See [Section 8.17](rangetypes.html "8.17. Range Types") for an overview of ran
 
 \
 
-
 The left-of/right-of/adjacent operators always return false when an empty range or multirange is involved; that is, an empty range is not considered to be either before or after any other range.
 
 Elsewhere empty ranges and multiranges are treated as the additive identity: anything unioned with an empty value is itself. Anything minus an empty value is itself. An empty multirange has exactly the same points as an empty range. Every range contains the empty range. Every multirange contains as many empty ranges as you like.
@@ -93,7 +91,6 @@ The range union and difference operators will fail if the resulting range would 
 
 \
 
-
 **Table 9.58. Multirange Functions**
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                        |
@@ -110,7 +107,6 @@ The range union and difference operators will fail if the resulting range would 
 | `unnest` ( `anymultirange` ) → `setof anyrange`Expands a multirange into a set of ranges. The ranges are read out in storage order (ascending).`unnest('{[1,2), [3,4)}'::int4multirange)` →``      [1,2)  [3,4)  |
 
 \
-
 
 The `lower_inc`, `upper_inc`, `lower_inf`, and `upper_inf` functions all return false for an empty range or multirange.
 

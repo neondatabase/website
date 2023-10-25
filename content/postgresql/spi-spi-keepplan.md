@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_keepplan
 
 SPI\_keepplan — save a prepared statement
@@ -25,7 +23,7 @@ int SPI_keepplan(SPIPlanPtr plan)
 
 ## Arguments
 
-*   `SPIPlanPtr plan`
+* `SPIPlanPtr plan`
 
     the prepared statement to be saved
 

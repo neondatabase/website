@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER GROUP
 
 ALTER GROUP — change role name or membership
@@ -39,15 +37,15 @@ The third variant changes the name of the group. This is exactly equivalent to r
 
 ## Parameters
 
-*   *`group_name`*
+* *`group_name`*
 
     The name of the group (role) to modify.
 
-*   *`user_name`*
+* *`user_name`*
 
     Users (roles) that are to be added to or removed from the group. The users must already exist; `ALTER GROUP` does not create or drop users.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the group.
 

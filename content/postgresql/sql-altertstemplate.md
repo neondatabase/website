@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER TEXT SEARCH TEMPLATE
 
 ALTER TEXT SEARCH TEMPLATE — change the definition of a text search template
@@ -28,15 +26,15 @@ You must be a superuser to use `ALTER TEXT SEARCH TEMPLATE`.
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing text search template.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the text search template.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the text search template.
 

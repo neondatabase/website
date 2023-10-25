@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## DECLARE
 
 DECLARE — define a cursor
@@ -30,29 +28,29 @@ This page describes usage of cursors at the SQL command level. If you are trying
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of the cursor to be created. This must be different from any other active cursor name in the session.
 
-*   `BINARY`
+* `BINARY`
 
     Causes the cursor to return data in binary rather than in text format.
 
-*   `ASENSITIVE``INSENSITIVE`
+* `ASENSITIVE``INSENSITIVE`
 
     Cursor sensitivity determines whether changes to the data underlying the cursor, done in the same transaction, after the cursor has been declared, are visible in the cursor. `INSENSITIVE` means they are not visible, `ASENSITIVE` means the behavior is implementation-dependent. A third behavior, `SENSITIVE`, meaning that such changes are visible in the cursor, is not available in PostgreSQL. In PostgreSQL, all cursors are insensitive; so these key words have no effect and are only accepted for compatibility with the SQL standard.
 
     Specifying `INSENSITIVE` together with `FOR UPDATE` or `FOR SHARE` is an error.
 
-*   `SCROLL``NO SCROLL`
+* `SCROLL``NO SCROLL`
 
     `SCROLL` specifies that the cursor can be used to retrieve rows in a nonsequential fashion (e.g., backward). Depending upon the complexity of the query's execution plan, specifying `SCROLL` might impose a performance penalty on the query's execution time. `NO SCROLL` specifies that the cursor cannot be used to retrieve rows in a nonsequential fashion. The default is to allow scrolling in some cases; this is not the same as specifying `SCROLL`. See [Notes](sql-declare.html#SQL-DECLARE-NOTES "Notes") below for details.
 
-*   `WITH HOLD``WITHOUT HOLD`
+* `WITH HOLD``WITHOUT HOLD`
 
     `WITH HOLD` specifies that the cursor can continue to be used after the transaction that created it successfully commits. `WITHOUT HOLD` specifies that the cursor cannot be used outside of the transaction that created it. If neither `WITHOUT HOLD` nor `WITH HOLD` is specified, `WITHOUT HOLD` is the default.
 
-*   *`query`*
+* *`query`*
 
     A [`SELECT`](sql-select.html "SELECT") or [`VALUES`](sql-values.html "VALUES") command which will provide the rows to be returned by the cursor.
 

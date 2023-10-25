@@ -8,8 +8,6 @@
 
 ## 53.40. `pg_publication` [#](#CATALOG-PG-PUBLICATION)
 
-
-
 The catalog `pg_publication` contains all publications created in the database. For more on publications see [Section 31.1](logical-replication-publication.html "31.1. Publication").
 
 **Table 53.40. `pg_publication` Columns**

@@ -23,11 +23,11 @@ PREPARE prepared_name FROM string
 
 ## Parameters
 
-*   *`prepared_name`* [#](#ECPG-SQL-PREPARE-PREPARED-NAME)
+* *`prepared_name`* [#](#ECPG-SQL-PREPARE-PREPARED-NAME)
 
     An identifier for the prepared query.
 
-*   *`string`* [#](#ECPG-SQL-PREPARE-STRING)
+* *`string`* [#](#ECPG-SQL-PREPARE-STRING)
 
     A literal string or a host variable containing a preparable SQL statement, one of SELECT, INSERT, UPDATE, or DELETE. Use question marks (`?`) for parameter values to be supplied at execution.
 

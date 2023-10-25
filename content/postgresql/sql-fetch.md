@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## FETCH
 
 FETCH — retrieve rows from a query using a cursor
@@ -54,71 +52,71 @@ This page describes usage of cursors at the SQL command level. If you are trying
 
 ## Parameters
 
-*   *`direction`*
+* *`direction`*
 
     *`direction`* defines the fetch direction and number of rows to fetch. It can be one of the following:
 
-    *   `NEXT`
+  * `NEXT`
 
         Fetch the next row. This is the default if *`direction`* is omitted.
 
-    *   `PRIOR`
+  * `PRIOR`
 
         Fetch the prior row.
 
-    *   `FIRST`
+  * `FIRST`
 
         Fetch the first row of the query (same as `ABSOLUTE 1`).
 
-    *   `LAST`
+  * `LAST`
 
         Fetch the last row of the query (same as `ABSOLUTE -1`).
 
-    *   `ABSOLUTE count`
+  * `ABSOLUTE count`
 
         Fetch the *`count`*'th row of the query, or the `abs(count)`'th row from the end if *`count`* is negative. Position before first row or after last row if *`count`* is out of range; in particular, `ABSOLUTE 0` positions before the first row.
 
-    *   `RELATIVE count`
+  * `RELATIVE count`
 
         Fetch the *`count`*'th succeeding row, or the `abs(count)`'th prior row if *`count`* is negative. `RELATIVE 0` re-fetches the current row, if any.
 
-    *   *`count`*
+  * *`count`*
 
         Fetch the next *`count`* rows (same as `FORWARD count`).
 
-    *   `ALL`
+  * `ALL`
 
         Fetch all remaining rows (same as `FORWARD ALL`).
 
-    *   `FORWARD`
+  * `FORWARD`
 
         Fetch the next row (same as `NEXT`).
 
-    *   `FORWARD count`
+  * `FORWARD count`
 
         Fetch the next *`count`* rows. `FORWARD 0` re-fetches the current row.
 
-    *   `FORWARD ALL`
+  * `FORWARD ALL`
 
         Fetch all remaining rows.
 
-    *   `BACKWARD`
+  * `BACKWARD`
 
         Fetch the prior row (same as `PRIOR`).
 
-    *   `BACKWARD count`
+  * `BACKWARD count`
 
         Fetch the prior *`count`* rows (scanning backwards). `BACKWARD 0` re-fetches the current row.
 
-    *   `BACKWARD ALL`
+  * `BACKWARD ALL`
 
         Fetch all prior rows (scanning backwards).
 
-*   *`count`*
+* *`count`*
 
     *`count`* is a possibly-signed integer constant, determining the location or number of rows to fetch. For `FORWARD` and `BACKWARD` cases, specifying a negative *`count`* is equivalent to changing the sense of `FORWARD` and `BACKWARD`.
 
-*   *`cursor_name`*
+* *`cursor_name`*
 
     An open cursor's name.
 

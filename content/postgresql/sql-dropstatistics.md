@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## DROP STATISTICS
 
 DROP STATISTICS — remove extended statistics
@@ -25,15 +23,15 @@ DROP STATISTICS [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 ## Parameters
 
-*   `IF EXISTS`
+* `IF EXISTS`
 
     Do not throw an error if the statistics object does not exist. A notice is issued in this case.
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of the statistics object to drop.
 
-*   `CASCADE``RESTRICT`
+* `CASCADE``RESTRICT`
 
     These key words do not have any effect, since there are no dependencies on statistics.
 

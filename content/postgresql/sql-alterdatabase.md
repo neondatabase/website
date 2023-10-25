@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER DATABASE
 
 ALTER DATABASE — change a database
@@ -54,41 +52,41 @@ The remaining forms change the session default for a run-time configuration vari
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name of the database whose attributes are to be altered.
 
-*   *`allowconn`*
+* *`allowconn`*
 
     If false then no one can connect to this database.
 
-*   *`connlimit`*
+* *`connlimit`*
 
     How many concurrent connections can be made to this database. -1 means no limit.
 
-*   *`istemplate`*
+* *`istemplate`*
 
     If true, then this database can be cloned by any user with `CREATEDB` privileges; if false, then only superusers or the owner of the database can clone it.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the database.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The new owner of the database.
 
-*   *`new_tablespace`*
+* *`new_tablespace`*
 
     The new default tablespace of the database.
 
     This form of the command cannot be executed inside a transaction block.
 
-*   `REFRESH COLLATION VERSION`
+* `REFRESH COLLATION VERSION`
 
     Update the database collation version. See [Notes](sql-altercollation.html#SQL-ALTERCOLLATION-NOTES "Notes") for background.
 
-*   *`configuration_parameter`**`value`*
+* *`configuration_parameter`**`value`*
 
     Set this database's session default for the specified configuration parameter to the given value. If *`value`* is `DEFAULT` or, equivalently, `RESET` is used, the database-specific setting is removed, so the system-wide default setting will be inherited in new sessions. Use `RESET ALL` to clear all database-specific settings. `SET FROM CURRENT` saves the session's current value of the parameter as the database-specific value.
 

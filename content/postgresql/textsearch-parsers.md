@@ -42,7 +42,6 @@ The built-in parser is named `pg_catalog.default`. It recognizes 23 token types,
 
 \
 
-
 ### Note
 
 The parser's notion of a “letter” is determined by the database's locale setting, specifically `lc_ctype`. Words containing only the basic ASCII letters are reported as a separate token type, since it is sometimes useful to distinguish them. In most European languages, token types `word` and `asciiword` should be treated alike.

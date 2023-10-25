@@ -8,12 +8,10 @@
 
 ## 7.8. `WITH` Queries (Common Table Expressions) [#](#QUERIES-WITH)
 
-*   *   [7.8.1. `SELECT` in `WITH`](queries-with.html#QUERIES-WITH-SELECT)
-    *   [7.8.2. Recursive Queries](queries-with.html#QUERIES-WITH-RECURSIVE)
-    *   [7.8.3. Common Table Expression Materialization](queries-with.html#QUERIES-WITH-CTE-MATERIALIZATION)
-    *   [7.8.4. Data-Modifying Statements in `WITH`](queries-with.html#QUERIES-WITH-MODIFYING)
-
-
+  * *   [7.8.1. `SELECT` in `WITH`](queries-with.html#QUERIES-WITH-SELECT)
+  * [7.8.2. Recursive Queries](queries-with.html#QUERIES-WITH-RECURSIVE)
+  * [7.8.3. Common Table Expression Materialization](queries-with.html#QUERIES-WITH-CTE-MATERIALIZATION)
+  * [7.8.4. Data-Modifying Statements in `WITH`](queries-with.html#QUERIES-WITH-MODIFYING)
 
 `WITH` provides a way to write auxiliary statements for use in a larger query. These statements, which are often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist just for one query. Each auxiliary statement in a `WITH` clause can be a `SELECT`, `INSERT`, `UPDATE`, or `DELETE`; and the `WITH` clause itself is attached to a primary statement that can be a `SELECT`, `INSERT`, `UPDATE`, `DELETE`, or `MERGE`.
 
@@ -61,12 +59,12 @@ The general form of a recursive `WITH` query is always a *non-recursive term*, t
 
 **Recursive Query Evaluation**
 
-1.  Evaluate the non-recursive term. For `UNION` (but not `UNION ALL`), discard duplicate rows. Include all remaining rows in the result of the recursive query, and also place them in a temporary *working table*.
+1. Evaluate the non-recursive term. For `UNION` (but not `UNION ALL`), discard duplicate rows. Include all remaining rows in the result of the recursive query, and also place them in a temporary *working table*.
 
-2.  So long as the working table is not empty, repeat these steps:
+2. So long as the working table is not empty, repeat these steps:
 
-    1.  Evaluate the recursive term, substituting the current contents of the working table for the recursive self-reference. For `UNION` (but not `UNION ALL`), discard duplicate rows and rows that duplicate any previous result row. Include all remaining rows in the result of the recursive query, and also place them in a temporary *intermediate table*.
-    2.  Replace the contents of the working table with the contents of the intermediate table, then empty the intermediate table.
+    1. Evaluate the recursive term, substituting the current contents of the working table for the recursive self-reference. For `UNION` (but not `UNION ALL`), discard duplicate rows and rows that duplicate any previous result row. Include all remaining rows in the result of the recursive query, and also place them in a temporary *intermediate table*.
+    2. Replace the contents of the working table with the contents of the intermediate table, then empty the intermediate table.
 
 ### Note
 

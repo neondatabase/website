@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## dblink\_get\_result
 
 dblink\_get\_result — gets an async query result
@@ -25,11 +23,11 @@ dblink_get_result(text connname [, bool fail_on_error]) returns setof record
 
 ## Arguments
 
-*   *`connname`*
+* *`connname`*
 
     Name of the connection to use.
 
-*   *`fail_on_error`*
+* *`fail_on_error`*
 
     If true (the default when omitted) then an error thrown on the remote side of the connection causes an error to also be thrown locally. If false, the remote error is locally reported as a NOTICE, and the function returns no rows.
 

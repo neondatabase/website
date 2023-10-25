@@ -8,7 +8,7 @@
 
 ## 75.4. BKI Commands [#](#BKI-COMMANDS)
 
-*   `create` *`tablename`* *`tableoid`* \[`bootstrap`] \[`shared_relation`] \[`rowtype_oid` *`oid`*] (*`name1`* = *`type1`* \[`FORCE NOT NULL` | `FORCE NULL` ] \[, *`name2`* = *`type2`* \[`FORCE NOT NULL` | `FORCE NULL` ], ...])
+* `create` *`tablename`* *`tableoid`* \[`bootstrap`] \[`shared_relation`] \[`rowtype_oid` *`oid`*] (*`name1`* = *`type1`* \[`FORCE NOT NULL` | `FORCE NULL` ] \[, *`name2`* = *`type2`* \[`FORCE NOT NULL` | `FORCE NULL` ], ...])
 
     Create a table named *`tablename`*, and having the OID *`tableoid`*, with the columns given in parentheses.
 
@@ -18,29 +18,29 @@
 
     The table is created as shared if `shared_relation` is specified. The table's row type OID (`pg_type` OID) can optionally be specified via the `rowtype_oid` clause; if not specified, an OID is automatically generated for it. (The `rowtype_oid` clause is useless if `bootstrap` is specified, but it can be provided anyway for documentation.)
 
-*   `open` *`tablename`*
+* `open` *`tablename`*
 
     Open the table named *`tablename`* for insertion of data. Any currently open table is closed.
 
-*   `close` *`tablename`*
+* `close` *`tablename`*
 
     Close the open table. The name of the table must be given as a cross-check.
 
-*   `insert` `(` \[*`oid_value`*] *`value1`* *`value2`* ... `)`
+* `insert` `(` \[*`oid_value`*] *`value1`* *`value2`* ... `)`
 
     Insert a new row into the open table using *`value1`*, *`value2`*, etc., for its column values.
 
     NULL values can be specified using the special key word `_null_`. Values that do not look like identifiers or digit strings must be single-quoted. (To include a single quote in a value, write it twice. Escape-string-style backslash escapes are allowed in the string, too.)
 
-*   `declare` \[`unique`] `index` *`indexname`* *`indexoid`* `on` *`tablename`* `using` *`amname`* `(` *`opclass1`* *`name1`* \[, ...] `)`
+* `declare` \[`unique`] `index` *`indexname`* *`indexoid`* `on` *`tablename`* `using` *`amname`* `(` *`opclass1`* *`name1`* \[, ...] `)`
 
     Create an index named *`indexname`*, having OID *`indexoid`*, on the table named *`tablename`*, using the *`amname`* access method. The fields to index are called *`name1`*, *`name2`* etc., and the operator classes to use are *`opclass1`*, *`opclass2`* etc., respectively. The index file is created and appropriate catalog entries are made for it, but the index contents are not initialized by this command.
 
-*   `declare toast` *`toasttableoid`* *`toastindexoid`* `on` *`tablename`*
+* `declare toast` *`toasttableoid`* *`toastindexoid`* `on` *`tablename`*
 
     Create a TOAST table for the table named *`tablename`*. The TOAST table is assigned OID *`toasttableoid`* and its index is assigned OID *`toastindexoid`*. As with `declare index`, filling of the index is postponed.
 
-*   `build indices`
+* `build indices`
 
     Fill in the indices that have previously been declared.
 

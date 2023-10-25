@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## pg\_test\_timing
 
 pg\_test\_timing — measure timing overhead
@@ -24,15 +22,15 @@ pg\_test\_timing is a tool to measure the timing overhead on your system and con
 
 pg\_test\_timing accepts the following command-line options:
 
-*   `-d duration``--duration=duration`
+* `-d duration``--duration=duration`
 
     Specifies the test duration, in seconds. Longer durations give slightly better accuracy, and are more likely to discover problems with the system clock moving backwards. The default test duration is 3 seconds.
 
-*   `-V``--version`
+* `-V``--version`
 
     Print the pg\_test\_timing version and exit.
 
-*   `-?``--help`
+* `-?``--help`
 
     Show help about pg\_test\_timing command line arguments, and exit.
 

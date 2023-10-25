@@ -32,7 +32,6 @@ The core PostgreSQL distribution includes the GIN operator classes shown in [Tab
 
 \
 
-
 Of the two operator classes for type `jsonb`, `jsonb_ops` is the default. `jsonb_path_ops` supports fewer operators but offers better performance for those operators. See [Section 8.14.4](datatype-json.html#JSON-INDEXING "8.14.4. jsonb Indexing") for details.
 
 ***

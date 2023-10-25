@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER SYSTEM
 
 ALTER SYSTEM — change a server configuration parameter
@@ -32,11 +30,11 @@ Only superusers and users granted `ALTER SYSTEM` privilege on a parameter can ch
 
 ## Parameters
 
-*   *`configuration_parameter`*
+* *`configuration_parameter`*
 
     Name of a settable configuration parameter. Available parameters are documented in [Chapter 20](runtime-config.html "Chapter 20. Server Configuration").
 
-*   *`value`*
+* *`value`*
 
     New value of the parameter. Values can be specified as string constants, identifiers, numbers, or comma-separated lists of these, as appropriate for the particular parameter. `DEFAULT` can be written to specify removing the parameter and its value from `postgresql.auto.conf`.
 

@@ -8,10 +8,8 @@
 
 ## F.42. tablefunc — functions that return tables (`crosstab` and others) [#](#TABLEFUNC)
 
-*   *   [F.42.1. Functions Provided](tablefunc.html#TABLEFUNC-FUNCTIONS-SECT)
-    *   [F.42.2. Author](tablefunc.html#TABLEFUNC-AUTHOR)
-
-
+  * *   [F.42.1. Functions Provided](tablefunc.html#TABLEFUNC-FUNCTIONS-SECT)
+  * [F.42.2. Author](tablefunc.html#TABLEFUNC-AUTHOR)
 
 The `tablefunc` module includes various functions that return tables (that is, multiple rows). These functions are useful both in their own right and as examples of how to write C functions that return multiple rows.
 
@@ -34,10 +32,7 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 
 \
 
-
 #### F.42.1.1. `normal_rand` [#](#TABLEFUNC-FUNCTIONS-NORMAL-RAND)
-
-
 
 ```
 
@@ -70,8 +65,6 @@ test=# SELECT * FROM normal_rand(1000, 5, 3);
 ```
 
 #### F.42.1.2. `crosstab(text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT)
-
-
 
 ```
 
@@ -183,8 +176,6 @@ See also the `\crosstabview` command in psql, which provides functionality simil
 
 #### F.42.1.3. `crosstabN(text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-N-TEXT)
 
-
-
 ```
 
 crosstabN(text sql)
@@ -221,7 +212,7 @@ FROM crosstab3(
 
 These functions are provided mostly for illustration purposes. You can create your own return types and functions based on the underlying `crosstab()` function. There are two ways to do it:
 
-*   Create a composite type describing the desired output columns, similar to the examples in `contrib/tablefunc/tablefunc--1.0.sql`. Then define a unique function name accepting one `text` parameter and returning `setof your_type_name`, but linking to the same underlying `crosstab` C function. For example, if your source data produces row names that are `text`, and values that are `float8`, and you want 5 value columns:
+* Create a composite type describing the desired output columns, similar to the examples in `contrib/tablefunc/tablefunc--1.0.sql`. Then define a unique function name accepting one `text` parameter and returning `setof your_type_name`, but linking to the same underlying `crosstab` C function. For example, if your source data produces row names that are `text`, and values that are `float8`, and you want 5 value columns:
 
     ```
 
@@ -239,7 +230,7 @@ These functions are provided mostly for illustration purposes. You can create yo
         AS '$libdir/tablefunc','crosstab' LANGUAGE C STABLE STRICT;
     ```
 
-*   Use `OUT` parameters to define the return type implicitly. The same example could also be done this way:
+* Use `OUT` parameters to define the return type implicitly. The same example could also be done this way:
 
     ```
 
@@ -256,8 +247,6 @@ These functions are provided mostly for illustration purposes. You can create yo
     ```
 
 #### F.42.1.4. `crosstab(text, text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT-2)
-
-
 
 ```
 
@@ -396,8 +385,6 @@ You can create predefined functions to avoid having to write out the result colu
 
 #### F.42.1.5. `connectby` [#](#TABLEFUNC-FUNCTIONS-CONNECTBY)
 
-
-
 ```
 
 connectby(text relname, text keyid_fld, text parent_keyid_fld
@@ -422,7 +409,6 @@ The `connectby` function produces a display of hierarchical data that is stored 
 | *`branch_delim`*     | String to separate keys with in branch output (optional) |
 
 \
-
 
 The key and parent-key fields can be any data type, but they must be the same type. Note that the *`start_with`* value must be entered as a text string, regardless of the type of the key field.
 

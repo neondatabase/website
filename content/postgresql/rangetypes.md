@@ -8,18 +8,16 @@
 
 ## 8.17. Range Types [#](#RANGETYPES)
 
-*   *   [8.17.1. Built-in Range and Multirange Types](rangetypes.html#RANGETYPES-BUILTIN)
-    *   [8.17.2. Examples](rangetypes.html#RANGETYPES-EXAMPLES)
-    *   [8.17.3. Inclusive and Exclusive Bounds](rangetypes.html#RANGETYPES-INCLUSIVITY)
-    *   [8.17.4. Infinite (Unbounded) Ranges](rangetypes.html#RANGETYPES-INFINITE)
-    *   [8.17.5. Range Input/Output](rangetypes.html#RANGETYPES-IO)
-    *   [8.17.6. Constructing Ranges and Multiranges](rangetypes.html#RANGETYPES-CONSTRUCT)
-    *   [8.17.7. Discrete Range Types](rangetypes.html#RANGETYPES-DISCRETE)
-    *   [8.17.8. Defining New Range Types](rangetypes.html#RANGETYPES-DEFINING)
-    *   [8.17.9. Indexing](rangetypes.html#RANGETYPES-INDEXING)
-    *   [8.17.10. Constraints on Ranges](rangetypes.html#RANGETYPES-CONSTRAINT)
-
-
+  * *   [8.17.1. Built-in Range and Multirange Types](rangetypes.html#RANGETYPES-BUILTIN)
+  * [8.17.2. Examples](rangetypes.html#RANGETYPES-EXAMPLES)
+  * [8.17.3. Inclusive and Exclusive Bounds](rangetypes.html#RANGETYPES-INCLUSIVITY)
+  * [8.17.4. Infinite (Unbounded) Ranges](rangetypes.html#RANGETYPES-INFINITE)
+  * [8.17.5. Range Input/Output](rangetypes.html#RANGETYPES-IO)
+  * [8.17.6. Constructing Ranges and Multiranges](rangetypes.html#RANGETYPES-CONSTRUCT)
+  * [8.17.7. Discrete Range Types](rangetypes.html#RANGETYPES-DISCRETE)
+  * [8.17.8. Defining New Range Types](rangetypes.html#RANGETYPES-DEFINING)
+  * [8.17.9. Indexing](rangetypes.html#RANGETYPES-INDEXING)
+  * [8.17.10. Constraints on Ranges](rangetypes.html#RANGETYPES-CONSTRAINT)
 
 Range types are data types representing a range of values of some element type (called the range's *subtype*). For instance, ranges of `timestamp` might be used to represent the ranges of time that a meeting room is reserved. In this case the data type is `tsrange` (short for “timestamp range”), and `timestamp` is the subtype. The subtype must have a total order so that it is well-defined whether element values are within, before, or after a range of values.
 
@@ -31,12 +29,12 @@ Every range type has a corresponding multirange type. A multirange is an ordered
 
 PostgreSQL comes with the following built-in range types:
 
-*   `int4range` — Range of `integer`, `int4multirange` — corresponding Multirange
-*   `int8range` — Range of `bigint`, `int8multirange` — corresponding Multirange
-*   `numrange` — Range of `numeric`, `nummultirange` — corresponding Multirange
-*   `tsrange` — Range of `timestamp without time zone`, `tsmultirange` — corresponding Multirange
-*   `tstzrange` — Range of `timestamp with time zone`, `tstzmultirange` — corresponding Multirange
-*   `daterange` — Range of `date`, `datemultirange` — corresponding Multirange
+* `int4range` — Range of `integer`, `int4multirange` — corresponding Multirange
+* `int8range` — Range of `bigint`, `int8multirange` — corresponding Multirange
+* `numrange` — Range of `numeric`, `nummultirange` — corresponding Multirange
+* `tsrange` — Range of `timestamp without time zone`, `tsmultirange` — corresponding Multirange
+* `tstzrange` — Range of `timestamp with time zone`, `tstzmultirange` — corresponding Multirange
+* `daterange` — Range of `date`, `datemultirange` — corresponding Multirange
 
 In addition, you can define your own range types; see [CREATE TYPE](sql-createtype.html "CREATE TYPE") for more information.
 
@@ -218,8 +216,6 @@ See [CREATE TYPE](sql-createtype.html "CREATE TYPE") for more information about 
 
 ### 8.17.9. Indexing [#](#RANGETYPES-INDEXING)
 
-
-
 GiST and SP-GiST indexes can be created for table columns of range types. GiST indexes can be also created for table columns of multirange types. For instance, to create a GiST index:
 
 ```
@@ -232,8 +228,6 @@ A GiST or SP-GiST index on ranges can accelerate queries involving these range o
 In addition, B-tree and hash indexes can be created for table columns of range types. For these index types, basically the only useful range operation is equality. There is a B-tree sort ordering defined for range values, with corresponding `<` and `>` operators, but the ordering is rather arbitrary and not usually useful in the real world. Range types' B-tree and hash support is primarily meant to allow sorting and hashing internally in queries, rather than creation of actual indexes.
 
 ### 8.17.10. Constraints on Ranges [#](#RANGETYPES-CONSTRAINT)
-
-
 
 While `UNIQUE` is a natural constraint for scalar values, it is usually unsuitable for range types. Instead, an exclusion constraint is often more appropriate (see [CREATE TABLE ... CONSTRAINT ... EXCLUDE](sql-createtable.html#SQL-CREATETABLE-EXCLUDE)). Exclusion constraints allow the specification of constraints such as “non-overlapping” on a range type. For example:
 

@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## VACUUM
 
 VACUUM — garbage-collect and optionally analyze a database
@@ -52,31 +50,31 @@ Plain `VACUUM` (without `FULL`) simply reclaims space and makes it available for
 
 ## Parameters
 
-*   `FULL`
+* `FULL`
 
     Selects “full” vacuum, which can reclaim more space, but takes much longer and exclusively locks the table. This method also requires extra disk space, since it writes a new copy of the table and doesn't release the old copy until the operation is complete. Usually this should only be used when a significant amount of space needs to be reclaimed from within the table.
 
-*   `FREEZE`
+* `FREEZE`
 
     Selects aggressive “freezing” of tuples. Specifying `FREEZE` is equivalent to performing `VACUUM` with the [vacuum\_freeze\_min\_age](runtime-config-client.html#GUC-VACUUM-FREEZE-MIN-AGE) and [vacuum\_freeze\_table\_age](runtime-config-client.html#GUC-VACUUM-FREEZE-TABLE-AGE) parameters set to zero. Aggressive freezing is always performed when the table is rewritten, so this option is redundant when `FULL` is specified.
 
-*   `VERBOSE`
+* `VERBOSE`
 
     Prints a detailed vacuum activity report for each table.
 
-*   `ANALYZE`
+* `ANALYZE`
 
     Updates statistics used by the planner to determine the most efficient way to execute a query.
 
-*   `DISABLE_PAGE_SKIPPING`
+* `DISABLE_PAGE_SKIPPING`
 
     Normally, `VACUUM` will skip pages based on the [visibility map](routine-vacuuming.html#VACUUM-FOR-VISIBILITY-MAP "25.1.4. Updating the Visibility Map"). Pages where all tuples are known to be frozen can always be skipped, and those where all tuples are known to be visible to all transactions may be skipped except when performing an aggressive vacuum. Furthermore, except when performing an aggressive vacuum, some pages may be skipped in order to avoid waiting for other sessions to finish using them. This option disables all page-skipping behavior, and is intended to be used only when the contents of the visibility map are suspect, which should happen only if there is a hardware or software issue causing database corruption.
 
-*   `SKIP_LOCKED`
+* `SKIP_LOCKED`
 
     Specifies that `VACUUM` should not wait for any conflicting locks to be released when beginning work on a relation: if a relation cannot be locked immediately without waiting, the relation is skipped. Note that even with this option, `VACUUM` may still block when opening the relation's indexes. Additionally, `VACUUM ANALYZE` may still block when acquiring sample rows from partitions, table inheritance children, and some types of foreign tables. Also, while `VACUUM` ordinarily processes all partitions of specified partitioned tables, this option will cause `VACUUM` to skip all partitions if there is a conflicting lock on the partitioned table.
 
-*   `INDEX_CLEANUP`
+* `INDEX_CLEANUP`
 
     Normally, `VACUUM` will skip index vacuuming when there are very few dead tuples in the table. The cost of processing all of the table's indexes is expected to greatly exceed the benefit of removing dead index tuples when this happens. This option can be used to force `VACUUM` to process indexes when there are more than zero dead tuples. The default is `AUTO`, which allows `VACUUM` to skip index vacuuming when appropriate. If `INDEX_CLEANUP` is set to `ON`, `VACUUM` will conservatively remove all dead tuples from indexes. This may be useful for backwards compatibility with earlier releases of PostgreSQL where this was the standard behavior.
 
@@ -84,51 +82,51 @@ Plain `VACUUM` (without `FULL`) simply reclaims space and makes it available for
 
     This option has no effect for tables that have no index and is ignored if the `FULL` option is used. It also has no effect on the transaction ID wraparound failsafe mechanism. When triggered it will skip index vacuuming, even when `INDEX_CLEANUP` is set to `ON`.
 
-*   `PROCESS_MAIN`
+* `PROCESS_MAIN`
 
     Specifies that `VACUUM` should attempt to process the main relation. This is usually the desired behavior and is the default. Setting this option to false may be useful when it is only necessary to vacuum a relation's corresponding `TOAST` table.
 
-*   `PROCESS_TOAST`
+* `PROCESS_TOAST`
 
     Specifies that `VACUUM` should attempt to process the corresponding `TOAST` table for each relation, if one exists. This is usually the desired behavior and is the default. Setting this option to false may be useful when it is only necessary to vacuum the main relation. This option is required when the `FULL` option is used.
 
-*   `TRUNCATE`
+* `TRUNCATE`
 
     Specifies that `VACUUM` should attempt to truncate off any empty pages at the end of the table and allow the disk space for the truncated pages to be returned to the operating system. This is normally the desired behavior and is the default unless the `vacuum_truncate` option has been set to false for the table to be vacuumed. Setting this option to false may be useful to avoid `ACCESS EXCLUSIVE` lock on the table that the truncation requires. This option is ignored if the `FULL` option is used.
 
-*   `PARALLEL`
+* `PARALLEL`
 
     Perform index vacuum and index cleanup phases of `VACUUM` in parallel using *`integer`* background workers (for the details of each vacuum phase, please refer to [Table 28.45](progress-reporting.html#VACUUM-PHASES "Table 28.45. VACUUM Phases")). The number of workers used to perform the operation is equal to the number of indexes on the relation that support parallel vacuum which is limited by the number of workers specified with `PARALLEL` option if any which is further limited by [max\_parallel\_maintenance\_workers](runtime-config-resource.html#GUC-MAX-PARALLEL-MAINTENANCE-WORKERS). An index can participate in parallel vacuum if and only if the size of the index is more than [min\_parallel\_index\_scan\_size](runtime-config-query.html#GUC-MIN-PARALLEL-INDEX-SCAN-SIZE). Please note that it is not guaranteed that the number of parallel workers specified in *`integer`* will be used during execution. It is possible for a vacuum to run with fewer workers than specified, or even with no workers at all. Only one worker can be used per index. So parallel workers are launched only when there are at least `2` indexes in the table. Workers for vacuum are launched before the start of each phase and exit at the end of the phase. These behaviors might change in a future release. This option can't be used with the `FULL` option.
 
-*   `SKIP_DATABASE_STATS`
+* `SKIP_DATABASE_STATS`
 
     Specifies that `VACUUM` should skip updating the database-wide statistics about oldest unfrozen XIDs. Normally `VACUUM` will update these statistics once at the end of the command. However, this can take awhile in a database with a very large number of tables, and it will accomplish nothing unless the table that had contained the oldest unfrozen XID was among those vacuumed. Moreover, if multiple `VACUUM` commands are issued in parallel, only one of them can update the database-wide statistics at a time. Therefore, if an application intends to issue a series of many `VACUUM` commands, it can be helpful to set this option in all but the last such command; or set it in all the commands and separately issue `VACUUM (ONLY_DATABASE_STATS)` afterwards.
 
-*   `ONLY_DATABASE_STATS`
+* `ONLY_DATABASE_STATS`
 
     Specifies that `VACUUM` should do nothing except update the database-wide statistics about oldest unfrozen XIDs. When this option is specified, the *`table_and_columns`* list must be empty, and no other option may be enabled except `VERBOSE`.
 
-*   `BUFFER_USAGE_LIMIT`
+* `BUFFER_USAGE_LIMIT`
 
     Specifies the [**](glossary.html#GLOSSARY-BUFFER-ACCESS-STRATEGY)*[Buffer Access Strategy](glossary.html#GLOSSARY-BUFFER-ACCESS-STRATEGY "Buffer Access Strategy")* ring buffer size for `VACUUM`. This size is used to calculate the number of shared buffers which will be reused as part of this strategy. `0` disables use of a `Buffer Access Strategy`. If `ANALYZE` is also specified, the `BUFFER_USAGE_LIMIT` value is used for both the vacuum and analyze stages. This option can't be used with the `FULL` option except if `ANALYZE` is also specified. When this option is not specified, `VACUUM` uses the value from [vacuum\_buffer\_usage\_limit](runtime-config-resource.html#GUC-VACUUM-BUFFER-USAGE-LIMIT). Higher settings can allow `VACUUM` to run more quickly, but having too large a setting may cause too many other useful pages to be evicted from shared buffers. The minimum value is `128 kB` and the maximum value is `16 GB`.
 
-*   *`boolean`*
+* *`boolean`*
 
     Specifies whether the selected option should be turned on or off. You can write `TRUE`, `ON`, or `1` to enable the option, and `FALSE`, `OFF`, or `0` to disable it. The *`boolean`* value can also be omitted, in which case `TRUE` is assumed.
 
-*   *`integer`*
+* *`integer`*
 
     Specifies a non-negative integer value passed to the selected option.
 
-*   *`size`*
+* *`size`*
 
     Specifies an amount of memory in kilobytes. Sizes may also be specified as a string containing the numerical size followed by any one of the following memory units: `B` (bytes), `kB` (kilobytes), `MB` (megabytes), `GB` (gigabytes), or `TB` (terabytes).
 
-*   *`table_name`*
+* *`table_name`*
 
     The name (optionally schema-qualified) of a specific table or materialized view to vacuum. If the specified table is a partitioned table, all of its leaf partitions are vacuumed.
 
-*   *`column_name`*
+* *`column_name`*
 
     The name of a specific column to analyze. Defaults to all columns. If a column list is specified, `ANALYZE` must also be specified.
 

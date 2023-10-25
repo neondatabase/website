@@ -8,7 +8,7 @@
 
 ## 71.1. Introduction [#](#BRIN-INTRO)
 
-*   [71.1.1. Index Maintenance](brin-intro.html#BRIN-OPERATION)
+* [71.1.1. Index Maintenance](brin-intro.html#BRIN-OPERATION)
 
 BRIN stands for Block Range Index. BRIN is designed for handling very large tables in which certain columns have some natural correlation with their physical location within the table.
 

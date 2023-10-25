@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_prepare\_cursor
 
 SPI\_prepare\_cursor — prepare a statement, without executing it yet
@@ -28,19 +26,19 @@ This function is now deprecated in favor of `SPI_prepare_extended`.
 
 ## Arguments
 
-*   `const char * command`
+* `const char * command`
 
     command string
 
-*   `int nargs`
+* `int nargs`
 
     number of input parameters (`$1`, `$2`, etc.)
 
-*   `Oid * argtypes`
+* `Oid * argtypes`
 
     pointer to an array containing the OIDs of the data types of the parameters
 
-*   `int cursorOptions`
+* `int cursorOptions`
 
     integer bit mask of cursor options; zero produces default behavior
 

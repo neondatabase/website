@@ -16,8 +16,8 @@ Examples in this manual can also be found in the PostgreSQL source distribution 
 
 ```
 
-$ cd .../src/tutorial
-$ make
+cd .../src/tutorial
+make
 ```
 
 This creates the scripts and compiles the C files containing user-defined functions and types. Then, to start the tutorial, do the following:

@@ -8,8 +8,6 @@
 
 ## 2.9. Deletions [#](#TUTORIAL-DELETE)
 
-
-
 Rows can be removed from a table using the `DELETE` command. Suppose you are no longer interested in the weather of Hayward. Then you can do the following to delete those rows from the table:
 
 ```

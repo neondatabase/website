@@ -8,8 +8,6 @@
 
 ## 53.5. `pg_amproc` [#](#CATALOG-PG-AMPROC)
 
-
-
 The catalog `pg_amproc` stores information about support functions associated with access method operator families. There is one row for each support function belonging to an operator family.
 
 **Table 53.5. `pg_amproc` Columns**
@@ -24,7 +22,6 @@ The catalog `pg_amproc` stores information about support functions associated wi
 | `amproc` `regproc` (references [`pg_proc`](catalog-pg-proc.html "53.39. pg_proc").`oid`)OID of the function                                    |
 
 \
-
 
 The usual interpretation of the `amproclefttype` and `amprocrighttype` fields is that they identify the left and right input types of the operator(s) that a particular support function supports. For some access methods these match the input data type(s) of the support function itself, for others not. There is a notion of “default” support functions for an index, which are those with `amproclefttype` and `amprocrighttype` both equal to the index operator class's `opcintype`.
 

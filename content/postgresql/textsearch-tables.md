@@ -8,8 +8,8 @@
 
 ## 12.2. Tables and Indexes [#](#TEXTSEARCH-TABLES)
 
-*   *   [12.2.1. Searching a Table](textsearch-tables.html#TEXTSEARCH-TABLES-SEARCH)
-    *   [12.2.2. Creating Indexes](textsearch-tables.html#TEXTSEARCH-TABLES-INDEX)
+  * *   [12.2.1. Searching a Table](textsearch-tables.html#TEXTSEARCH-TABLES-SEARCH)
+  * [12.2.2. Creating Indexes](textsearch-tables.html#TEXTSEARCH-TABLES-INDEX)
 
 The examples in the previous section illustrated full text matching using simple constant strings. This section shows how to search table data, optionally using indexes.
 

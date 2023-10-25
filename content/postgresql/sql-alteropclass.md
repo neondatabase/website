@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER OPERATOR CLASS
 
 ALTER OPERATOR CLASS — change the definition of an operator class
@@ -34,23 +32,23 @@ You must own the operator class to use `ALTER OPERATOR CLASS`. To alter the owne
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing operator class.
 
-*   *`index_method`*
+* *`index_method`*
 
     The name of the index method this operator class is for.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the operator class.
 
-*   *`new_owner`*
+* *`new_owner`*
 
     The new owner of the operator class.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the operator class.
 

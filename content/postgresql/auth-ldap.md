@@ -8,8 +8,6 @@
 
 ## 21.10. LDAP Authentication [#](#AUTH-LDAP)
 
-
-
 This authentication method operates similarly to `password` except that it uses LDAP as the password verification method. LDAP is used only to validate the user name/password pairs. Therefore the user must already exist in the database before LDAP can be used for authentication.
 
 LDAP authentication can operate in two modes. In the first mode, which we will call the simple bind mode, the server will bind to the distinguished name constructed as *`prefix`* *`username`* *`suffix`*. Typically, the *`prefix`* parameter is used to specify `cn=`, or *`DOMAIN`*`\` in an Active Directory environment. *`suffix`* is used to specify the remaining part of the DN in a non-Active Directory environment.
@@ -18,19 +16,19 @@ In the second mode, which we will call the search+bind mode, the server first bi
 
 The following configuration options are used in both modes:
 
-*   `ldapserver`
+* `ldapserver`
 
     Names or IP addresses of LDAP servers to connect to. Multiple servers may be specified, separated by spaces.
 
-*   `ldapport`
+* `ldapport`
 
     Port number on LDAP server to connect to. If no port is specified, the LDAP library's default port setting will be used.
 
-*   `ldapscheme`
+* `ldapscheme`
 
     Set to `ldaps` to use LDAPS. This is a non-standard way of using LDAP over SSL, supported by some LDAP server implementations. See also the `ldaptls` option for an alternative.
 
-*   `ldaptls`
+* `ldaptls`
 
     Set to 1 to make the connection between PostgreSQL and the LDAP server use TLS encryption. This uses the `StartTLS` operation per [RFC 4513](https://tools.ietf.org/html/rfc4513). See also the `ldapscheme` option for an alternative.
 
@@ -38,37 +36,37 @@ Note that using `ldapscheme` or `ldaptls` only encrypts the traffic between the 
 
 The following options are used in simple bind mode only:
 
-*   `ldapprefix`
+* `ldapprefix`
 
     String to prepend to the user name when forming the DN to bind as, when doing simple bind authentication.
 
-*   `ldapsuffix`
+* `ldapsuffix`
 
     String to append to the user name when forming the DN to bind as, when doing simple bind authentication.
 
 The following options are used in search+bind mode only:
 
-*   `ldapbasedn`
+* `ldapbasedn`
 
     Root DN to begin the search for the user in, when doing search+bind authentication.
 
-*   `ldapbinddn`
+* `ldapbinddn`
 
     DN of user to bind to the directory with to perform the search when doing search+bind authentication.
 
-*   `ldapbindpasswd`
+* `ldapbindpasswd`
 
     Password for user to bind to the directory with to perform the search when doing search+bind authentication.
 
-*   `ldapsearchattribute`
+* `ldapsearchattribute`
 
     Attribute to match against the user name in the search when doing search+bind authentication. If no attribute is specified, the `uid` attribute will be used.
 
-*   `ldapsearchfilter`
+* `ldapsearchfilter`
 
     The search filter to use when doing search+bind authentication. Occurrences of `$username` will be replaced with the user name. This allows for more flexible search filters than `ldapsearchattribute`.
 
-*   `ldapurl`
+* `ldapurl`
 
     An [RFC 4516](https://tools.ietf.org/html/rfc4516) LDAP URL. This is an alternative way to write some of the other LDAP options in a more compact and standard form. The format is
 

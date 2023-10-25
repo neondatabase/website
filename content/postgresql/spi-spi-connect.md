@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_connect
 
 SPI\_connect, SPI\_connect\_ext — connect a C function to the SPI manager
@@ -30,7 +28,7 @@ int SPI_connect_ext(int options)
 
 `SPI_connect_ext` does the same but has an argument that allows passing option flags. Currently, the following option values are available:
 
-*   `SPI_OPT_NONATOMIC`
+* `SPI_OPT_NONATOMIC`
 
     Sets the SPI connection to be *nonatomic*, which means that transaction control calls (`SPI_commit`, `SPI_rollback`) are allowed. Otherwise, calling those functions will result in an immediate error.
 
@@ -38,11 +36,11 @@ int SPI_connect_ext(int options)
 
 ## Return Value
 
-*   `SPI_OK_CONNECT`
+* `SPI_OK_CONNECT`
 
     on success
 
-*   `SPI_ERROR_CONNECT`
+* `SPI_ERROR_CONNECT`
 
     on error
 

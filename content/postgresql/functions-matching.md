@@ -8,11 +8,9 @@
 
 ## 9.7. Pattern Matching [#](#FUNCTIONS-MATCHING)
 
-*   *   [9.7.1. `LIKE`](functions-matching.html#FUNCTIONS-LIKE)
-    *   [9.7.2. `SIMILAR TO` Regular Expressions](functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP)
-    *   [9.7.3. POSIX Regular Expressions](functions-matching.html#FUNCTIONS-POSIX-REGEXP)
-
-
+  * *   [9.7.1. `LIKE`](functions-matching.html#FUNCTIONS-LIKE)
+  * [9.7.2. `SIMILAR TO` Regular Expressions](functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP)
+  * [9.7.3. POSIX Regular Expressions](functions-matching.html#FUNCTIONS-POSIX-REGEXP)
 
 There are three separate approaches to pattern matching provided by PostgreSQL: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), and POSIX-style regular expressions. Aside from the basic “does this string match this pattern?” operators, functions are available to extract or replace matching substrings and to split a string at matching locations.
 
@@ -31,8 +29,6 @@ Searches using `SIMILAR TO` patterns have the same security hazards, since `SIMI
 The pattern matching operators of all three kinds do not support nondeterministic collations. If required, apply a different collation to the expression to work around this limitation.
 
 ### 9.7.1. `LIKE` [#](#FUNCTIONS-LIKE)
-
-
 
 ```
 
@@ -76,8 +72,6 @@ Also see the starts-with operator `^@` and the corresponding `starts_with()` fun
 
 ### 9.7.2. `SIMILAR TO` Regular Expressions [#](#FUNCTIONS-SIMILARTO-REGEXP)
 
-
-
 ```
 
 string SIMILAR TO pattern [ESCAPE escape-character]
@@ -90,15 +84,15 @@ Like `LIKE`, the `SIMILAR TO` operator succeeds only if its pattern matches the 
 
 In addition to these facilities borrowed from `LIKE`, `SIMILAR TO` supports these pattern-matching metacharacters borrowed from POSIX regular expressions:
 
-*   `|` denotes alternation (either of two alternatives).
-*   `*` denotes repetition of the previous item zero or more times.
-*   `+` denotes repetition of the previous item one or more times.
-*   `?` denotes repetition of the previous item zero or one time.
-*   `{`*`m`*`}` denotes repetition of the previous item exactly *`m`* times.
-*   `{`*`m`*`,}` denotes repetition of the previous item *`m`* or more times.
-*   `{`*`m`*`,`*`n`*`}` denotes repetition of the previous item at least *`m`* and not more than *`n`* times.
-*   Parentheses `()` can be used to group items into a single logical item.
-*   A bracket expression `[...]` specifies a character class, just as in POSIX regular expressions.
+* `|` denotes alternation (either of two alternatives).
+* `*` denotes repetition of the previous item zero or more times.
+* `+` denotes repetition of the previous item one or more times.
+* `?` denotes repetition of the previous item zero or one time.
+* `{`*`m`*`}` denotes repetition of the previous item exactly *`m`* times.
+* `{`*`m`*`,}` denotes repetition of the previous item *`m`* or more times.
+* `{`*`m`*`,`*`n`*`}` denotes repetition of the previous item at least *`m`* and not more than *`n`* times.
+* Parentheses `()` can be used to group items into a single logical item.
+* A bracket expression `[...]` specifies a character class, just as in POSIX regular expressions.
 
 Notice that the period (`.`) is not a metacharacter for `SIMILAR TO`.
 
@@ -157,8 +151,6 @@ substring('foobar' similar '#"o_b#"%' escape '#')    NULL
 
 ### 9.7.3. POSIX Regular Expressions [#](#FUNCTIONS-POSIX-REGEXP)
 
-
-
 [Table 9.16](functions-matching.html#FUNCTIONS-POSIX-TABLE "Table 9.16. Regular Expression Match Operators") lists the available operators for pattern matching using POSIX regular expressions.
 
 **Table 9.16. Regular Expression Match Operators**
@@ -171,7 +163,6 @@ substring('foobar' similar '#"o_b#"%' escape '#')    NULL
 | `text` `!~*` `text` → `boolean`String does not match regular expression, case-insensitively`'thomas' !~* 'T.*ma'` → `f` |
 
 \
-
 
 POSIX regular expressions provide a more powerful means for pattern matching than the `LIKE` and `SIMILAR TO` operators. Many Unix tools such as `egrep`, `sed`, or `awk` use a pattern matching language that is similar to the one described here.
 
@@ -410,7 +401,6 @@ A *constraint* matches an empty string, but matches only when specific condition
 
 \
 
-
 An RE cannot end with a backslash (`\`).
 
 ### Note
@@ -436,7 +426,6 @@ If you have [standard\_conforming\_strings](runtime-config-compatible.html#GUC-S
 
 \
 
-
 The forms using `{`*`...`*`}` are known as *bounds*. The numbers *`m`* and *`n`* within a bound are unsigned decimal integers with permissible values from 0 to 255 inclusive.
 
 *Non-greedy* quantifiers (available in AREs only) match the same possibilities as their corresponding normal (*greedy*) counterparts, but prefer the smallest number rather than the largest number of matches. See [Section 9.7.3.5](functions-matching.html#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules") for more detail.
@@ -457,7 +446,6 @@ A quantifier cannot immediately follow another quantifier, e.g., `**` is invalid
 | `(?<!`*`re`*`)` | *negative lookbehind* matches at any point where no substring matching *`re`* ends (AREs only)  |
 
 \
-
 
 Lookahead and lookbehind constraints cannot contain *back references* (see [Section 9.7.3.3](functions-matching.html#POSIX-ESCAPE-SEQUENCES "9.7.3.3. Regular Expression Escapes")), and all parentheses within them are considered non-capturing.
 
@@ -514,7 +502,6 @@ A *back reference* (`\`*`n`*) matches the same string matched by the previous pa
 
 \
 
-
 Hexadecimal digits are `0`-`9`, `a`-`f`, and `A`-`F`. Octal digits are `0`-`7`.
 
 Numeric character-entry escapes specifying values outside the ASCII range (0–127) have meanings dependent on the database encoding. When the encoding is UTF-8, escape values are equivalent to Unicode code points, for example `\u1234` means the character `U+1234`. For other multibyte encodings, character-entry escapes usually just specify the concatenation of the byte values for the character. If the escape value does not correspond to any legal character in the database encoding, no error will be raised, but it will never match any data.
@@ -534,7 +521,6 @@ The character-entry escapes are always taken as ordinary characters. For example
 
 \
 
-
 The class-shorthand escapes also work within bracket expressions, although the definitions shown above are not quite syntactically valid in that context. For example, `[a-c\d]` is equivalent to `[a-c[:digit:]]`.
 
 **Table 9.22. Regular Expression Constraint Escapes**
@@ -550,7 +536,6 @@ The class-shorthand escapes also work within bracket expressions, although the d
 
 \
 
-
 A word is defined as in the specification of `[[:<:]]` and `[[:>:]]` above. Constraint escapes are illegal within bracket expressions.
 
 **Table 9.23. Regular Expression Back References**
@@ -561,7 +546,6 @@ A word is defined as in the specification of `[[:<:]]` and `[[:>:]]` above. Cons
 | `\`*`mnn`* | (where *`m`* is a nonzero digit, and *`nn`* is some more digits, and the decimal value *`mnn`* is not greater than the number of closing capturing parentheses seen so far) a back reference to the *`mnn`*'th subexpression |
 
 \
-
 
 ### Note
 
@@ -594,14 +578,13 @@ An ARE can begin with *embedded options*: a sequence `(?`*`xyz`*`)` (where *`xyz
 
 \
 
-
 Embedded options take effect at the `)` terminating the sequence. They can appear only at the start of an ARE (after the `***:` director if any).
 
 In addition to the usual (*tight*) RE syntax, in which all characters are significant, there is an *expanded* syntax, available by specifying the embedded `x` option. In the expanded syntax, white-space characters in the RE are ignored, as are all characters between a `#` and the following newline (or the end of the RE). This permits paragraphing and commenting a complex RE. There are three exceptions to that basic rule:
 
-*   a white-space character or `#` preceded by `\` is retained
-*   white space or `#` within a bracket expression is retained
-*   white space and comments cannot appear within multi-character symbols, such as `(?:`
+* a white-space character or `#` preceded by `\` is retained
+* white space or `#` within a bracket expression is retained
+* white space and comments cannot appear within multi-character symbols, such as `(?:`
 
 For this purpose, white-space characters are blank, tab, newline, and any character that belongs to the *`space`* character class.
 
@@ -615,13 +598,13 @@ In the event that an RE could match more than one substring of a given string, t
 
 Whether an RE is greedy or not is determined by the following rules:
 
-*   Most atoms, and all constraints, have no greediness attribute (because they cannot match variable amounts of text anyway).
-*   Adding parentheses around an RE does not change its greediness.
-*   A quantified atom with a fixed-repetition quantifier (`{`*`m`*`}` or `{`*`m`*`}?`) has the same greediness (possibly none) as the atom itself.
-*   A quantified atom with other normal quantifiers (including `{`*`m`*`,`*`n`*`}` with *`m`* equal to *`n`*) is greedy (prefers longest match).
-*   A quantified atom with a non-greedy quantifier (including `{`*`m`*`,`*`n`*`}?` with *`m`* equal to *`n`*) is non-greedy (prefers shortest match).
-*   A branch — that is, an RE that has no top-level `|` operator — has the same greediness as the first quantified atom in it that has a greediness attribute.
-*   An RE consisting of two or more branches connected by the `|` operator is always greedy.
+* Most atoms, and all constraints, have no greediness attribute (because they cannot match variable amounts of text anyway).
+* Adding parentheses around an RE does not change its greediness.
+* A quantified atom with a fixed-repetition quantifier (`{`*`m`*`}` or `{`*`m`*`}?`) has the same greediness (possibly none) as the atom itself.
+* A quantified atom with other normal quantifiers (including `{`*`m`*`,`*`n`*`}` with *`m`* equal to *`n`*) is greedy (prefers longest match).
+* A quantified atom with a non-greedy quantifier (including `{`*`m`*`,`*`n`*`}?` with *`m`* equal to *`n`*) is non-greedy (prefers shortest match).
+* A branch — that is, an RE that has no top-level `|` operator — has the same greediness as the first quantified atom in it that has a greediness attribute.
+* An RE consisting of two or more branches connected by the `|` operator is always greedy.
 
 The above rules associate greediness attributes not only with individual quantified atoms, but with branches and entire REs that contain quantified atoms. What that means is that the matching is done in such a way that the branch, or whole RE, matches the longest or shortest possible substring *as a whole*. Once the length of the entire match is determined, the part of it that matches any particular subexpression is determined on the basis of the greediness attribute of that subexpression, with subexpressions starting earlier in the RE taking priority over ones starting later.
 
@@ -689,15 +672,13 @@ BREs differ from EREs in several respects. In BREs, `|`, `+`, and `?` are ordina
 
 #### 9.7.3.8. Differences from SQL Standard and XQuery [#](#POSIX-VS-XQUERY)
 
-
-
 Since SQL:2008, the SQL standard includes regular expression operators and functions that performs pattern matching according to the XQuery regular expression standard:
 
-*   `LIKE_REGEX`
-*   `OCCURRENCES_REGEX`
-*   `POSITION_REGEX`
-*   `SUBSTRING_REGEX`
-*   `TRANSLATE_REGEX`
+* `LIKE_REGEX`
+* `OCCURRENCES_REGEX`
+* `POSITION_REGEX`
+* `SUBSTRING_REGEX`
+* `TRANSLATE_REGEX`
 
 PostgreSQL does not currently implement these operators and functions. You can get approximately equivalent functionality in each case as shown in [Table 9.25](functions-matching.html#FUNCTIONS-REGEXP-SQL-TABLE "Table 9.25. Regular Expression Functions Equivalencies"). (Various optional clauses on both sides have been omitted in this table.)
 
@@ -713,33 +694,32 @@ PostgreSQL does not currently implement these operators and functions. You can g
 
 \
 
-
 Regular expression functions similar to those provided by PostgreSQL are also available in a number of other SQL implementations, whereas the SQL-standard functions are not as widely implemented. Some of the details of the regular expression syntax will likely differ in each implementation.
 
 The SQL-standard operators and functions use XQuery regular expressions, which are quite close to the ARE syntax described above. Notable differences between the existing POSIX-based regular-expression feature and XQuery regular expressions include:
 
-*   XQuery character class subtraction is not supported. An example of this feature is using the following to match only English consonants: `[a-z-[aeiou]]`.
+* XQuery character class subtraction is not supported. An example of this feature is using the following to match only English consonants: `[a-z-[aeiou]]`.
 
-*   XQuery character class shorthands `\c`, `\C`, `\i`, and `\I` are not supported.
+* XQuery character class shorthands `\c`, `\C`, `\i`, and `\I` are not supported.
 
-*   XQuery character class elements using `\p{UnicodeProperty}` or the inverse `\P{UnicodeProperty}` are not supported.
+* XQuery character class elements using `\p{UnicodeProperty}` or the inverse `\P{UnicodeProperty}` are not supported.
 
-*   POSIX interprets character classes such as `\w` (see [Table 9.21](functions-matching.html#POSIX-CLASS-SHORTHAND-ESCAPES-TABLE "Table 9.21. Regular Expression Class-Shorthand Escapes")) according to the prevailing locale (which you can control by attaching a `COLLATE` clause to the operator or function). XQuery specifies these classes by reference to Unicode character properties, so equivalent behavior is obtained only with a locale that follows the Unicode rules.
+* POSIX interprets character classes such as `\w` (see [Table 9.21](functions-matching.html#POSIX-CLASS-SHORTHAND-ESCAPES-TABLE "Table 9.21. Regular Expression Class-Shorthand Escapes")) according to the prevailing locale (which you can control by attaching a `COLLATE` clause to the operator or function). XQuery specifies these classes by reference to Unicode character properties, so equivalent behavior is obtained only with a locale that follows the Unicode rules.
 
-*   The SQL standard (not XQuery itself) attempts to cater for more variants of “newline” than POSIX does. The newline-sensitive matching options described above consider only ASCII NL (`\n`) to be a newline, but SQL would have us treat CR (`\r`), CRLF (`\r\n`) (a Windows-style newline), and some Unicode-only characters like LINE SEPARATOR (U+2028) as newlines as well. Notably, `.` and `\s` should count `\r\n` as one character not two according to SQL.
+* The SQL standard (not XQuery itself) attempts to cater for more variants of “newline” than POSIX does. The newline-sensitive matching options described above consider only ASCII NL (`\n`) to be a newline, but SQL would have us treat CR (`\r`), CRLF (`\r\n`) (a Windows-style newline), and some Unicode-only characters like LINE SEPARATOR (U+2028) as newlines as well. Notably, `.` and `\s` should count `\r\n` as one character not two according to SQL.
 
-*   Of the character-entry escapes described in [Table 9.20](functions-matching.html#POSIX-CHARACTER-ENTRY-ESCAPES-TABLE "Table 9.20. Regular Expression Character-Entry Escapes"), XQuery supports only `\n`, `\r`, and `\t`.
+* Of the character-entry escapes described in [Table 9.20](functions-matching.html#POSIX-CHARACTER-ENTRY-ESCAPES-TABLE "Table 9.20. Regular Expression Character-Entry Escapes"), XQuery supports only `\n`, `\r`, and `\t`.
 
-*   XQuery does not support the `[:name:]` syntax for character classes within bracket expressions.
+* XQuery does not support the `[:name:]` syntax for character classes within bracket expressions.
 
-*   XQuery does not have lookahead or lookbehind constraints, nor any of the constraint escapes described in [Table 9.22](functions-matching.html#POSIX-CONSTRAINT-ESCAPES-TABLE "Table 9.22. Regular Expression Constraint Escapes").
+* XQuery does not have lookahead or lookbehind constraints, nor any of the constraint escapes described in [Table 9.22](functions-matching.html#POSIX-CONSTRAINT-ESCAPES-TABLE "Table 9.22. Regular Expression Constraint Escapes").
 
-*   The metasyntax forms described in [Section 9.7.3.4](functions-matching.html#POSIX-METASYNTAX "9.7.3.4. Regular Expression Metasyntax") do not exist in XQuery.
+* The metasyntax forms described in [Section 9.7.3.4](functions-matching.html#POSIX-METASYNTAX "9.7.3.4. Regular Expression Metasyntax") do not exist in XQuery.
 
-*   The regular expression flag letters defined by XQuery are related to but not the same as the option letters for POSIX ([Table 9.24](functions-matching.html#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters")). While the `i` and `q` options behave the same, others do not:
+* The regular expression flag letters defined by XQuery are related to but not the same as the option letters for POSIX ([Table 9.24](functions-matching.html#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters")). While the `i` and `q` options behave the same, others do not:
 
-    *   XQuery's `s` (allow dot to match newline) and `m` (allow `^` and `$` to match at newlines) flags provide access to the same behaviors as POSIX's `n`, `p` and `w` flags, but they do *not* match the behavior of POSIX's `s` and `m` flags. Note in particular that dot-matches-newline is the default behavior in POSIX but not XQuery.
-    *   XQuery's `x` (ignore whitespace in pattern) flag is noticeably different from POSIX's expanded-mode flag. POSIX's `x` flag also allows `#` to begin a comment in the pattern, and POSIX will not ignore a whitespace character after a backslash.
+  * XQuery's `s` (allow dot to match newline) and `m` (allow `^` and `$` to match at newlines) flags provide access to the same behaviors as POSIX's `n`, `p` and `w` flags, but they do *not* match the behavior of POSIX's `s` and `m` flags. Note in particular that dot-matches-newline is the default behavior in POSIX but not XQuery.
+  * XQuery's `x` (ignore whitespace in pattern) flag is noticeably different from POSIX's expanded-mode flag. POSIX's `x` flag also allows `#` to begin a comment in the pattern, and POSIX will not ignore a whitespace character after a backslash.
 
 ***
 

@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CALL
 
 CALL — invoke a procedure
@@ -27,11 +25,11 @@ If the procedure has any output parameters, then a result row will be returned, 
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of the procedure.
 
-*   *`argument`*
+* *`argument`*
 
     An argument expression for the procedure call.
 

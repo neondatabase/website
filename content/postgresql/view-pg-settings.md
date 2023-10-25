@@ -8,8 +8,6 @@
 
 ## 54.24. `pg_settings` [#](#VIEW-PG-SETTINGS)
 
-
-
 The view `pg_settings` provides access to run-time parameters of the server. It is essentially an alternative interface to the [`SHOW`](sql-show.html "SHOW") and [`SET`](sql-set.html "SET") commands. It also provides access to some facts about each parameter that are not directly available from [`SHOW`](sql-show.html "SHOW"), such as minimum and maximum values.
 
 **Table 54.24. `pg_settings` Columns**
@@ -36,34 +34,33 @@ The view `pg_settings` provides access to run-time parameters of the server. It 
 
 \
 
-
 There are several possible values of `context`. In order of decreasing difficulty of changing the setting, they are:
 
-*   `internal`
+* `internal`
 
     These settings cannot be changed directly; they reflect internally determined values. Some of them may be adjustable by rebuilding the server with different configuration options, or by changing options supplied to initdb.
 
-*   `postmaster`
+* `postmaster`
 
     These settings can only be applied when the server starts, so any change requires restarting the server. Values for these settings are typically stored in the `postgresql.conf` file, or passed on the command line when starting the server. Of course, settings with any of the lower `context` types can also be set at server start time.
 
-*   `sighup`
+* `sighup`
 
     Changes to these settings can be made in `postgresql.conf` without restarting the server. Send a SIGHUP signal to the postmaster to cause it to re-read `postgresql.conf` and apply the changes. The postmaster will also forward the SIGHUP signal to its child processes so that they all pick up the new value.
 
-*   `superuser-backend`
+* `superuser-backend`
 
     Changes to these settings can be made in `postgresql.conf` without restarting the server. They can also be set for a particular session in the connection request packet (for example, via libpq's `PGOPTIONS` environment variable), but only if the connecting user is a superuser or has been granted the appropriate `SET` privilege. However, these settings never change in a session after it is started. If you change them in `postgresql.conf`, send a SIGHUP signal to the postmaster to cause it to re-read `postgresql.conf`. The new values will only affect subsequently-launched sessions.
 
-*   `backend`
+* `backend`
 
     Changes to these settings can be made in `postgresql.conf` without restarting the server. They can also be set for a particular session in the connection request packet (for example, via libpq's `PGOPTIONS` environment variable); any user can make such a change for their session. However, these settings never change in a session after it is started. If you change them in `postgresql.conf`, send a SIGHUP signal to the postmaster to cause it to re-read `postgresql.conf`. The new values will only affect subsequently-launched sessions.
 
-*   `superuser`
+* `superuser`
 
     These settings can be set from `postgresql.conf`, or within a session via the `SET` command; but only superusers and users with the appropriate `SET` privilege can change them via `SET`. Changes in `postgresql.conf` will affect existing sessions only if no session-local value has been established with `SET`.
 
-*   `user`
+* `user`
 
     These settings can be set from `postgresql.conf`, or within a session via the `SET` command. Any user is allowed to change their session-local value. Changes in `postgresql.conf` will affect existing sessions only if no session-local value has been established with `SET`.
 

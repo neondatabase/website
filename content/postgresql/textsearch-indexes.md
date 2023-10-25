@@ -8,17 +8,15 @@
 
 ## 12.9. Preferred Index Types for Text Search [#](#TEXTSEARCH-INDEXES)
 
-
-
 There are two kinds of indexes that can be used to speed up full text searches: [GIN](gin.html "Chapter 70. GIN Indexes") and [GiST](gist.html "Chapter 68. GiST Indexes"). Note that indexes are not mandatory for full text searching, but in cases where a column is searched on a regular basis, an index is usually desirable.
 
 To create such an index, do one of:
 
-*   `CREATE INDEX name ON table USING GIN (column);`
+* `CREATE INDEX name ON table USING GIN (column);`
 
     Creates a GIN (Generalized Inverted Index)-based index. The *`column`* must be of `tsvector` type.
 
-*   `CREATE INDEX name ON table USING GIST (column [ { DEFAULT | tsvector_ops } (siglen = number) ] );`
+* `CREATE INDEX name ON table USING GIST (column [ { DEFAULT | tsvector_ops } (siglen = number) ] );`
 
     Creates a GiST (Generalized Search Tree)-based index. The *`column`* can be of `tsvector` or `tsquery` type. Optional integer parameter `siglen` determines signature length in bytes (see below for details).
 

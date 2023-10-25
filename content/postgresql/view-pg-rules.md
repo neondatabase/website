@@ -8,8 +8,6 @@
 
 ## 54.21. `pg_rules` [#](#VIEW-PG-RULES)
 
-
-
 The view `pg_rules` provides access to useful information about query rewrite rules.
 
 **Table 54.21. `pg_rules` Columns**
@@ -22,7 +20,6 @@ The view `pg_rules` provides access to useful information about query rewrite ru
 | `definition` `text`Rule definition (a reconstructed creation command)                                                                       |
 
 \
-
 
 The `pg_rules` view excludes the `ON SELECT` rules of views and materialized views; those can be seen in [`pg_views`](view-pg-views.html "54.35. pg_views") and [`pg_matviews`](view-pg-matviews.html "54.13. pg_matviews").
 

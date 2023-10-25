@@ -8,10 +8,8 @@
 
 ## 73.2. TOAST [#](#STORAGE-TOAST)
 
-*   *   [73.2.1. Out-of-Line, On-Disk TOAST Storage](storage-toast.html#STORAGE-TOAST-ONDISK)
-    *   [73.2.2. Out-of-Line, In-Memory TOAST Storage](storage-toast.html#STORAGE-TOAST-INMEMORY)
-
-
+  * *   [73.2.1. Out-of-Line, On-Disk TOAST Storage](storage-toast.html#STORAGE-TOAST-ONDISK)
+  * [73.2.2. Out-of-Line, In-Memory TOAST Storage](storage-toast.html#STORAGE-TOAST-INMEMORY)
 
 This section provides an overview of TOAST (The Oversized-Attribute Storage Technique).
 
@@ -35,10 +33,10 @@ The TOAST management code is triggered only when a row value to be stored in a t
 
 The TOAST management code recognizes four different strategies for storing TOAST-able columns on disk:
 
-*   `PLAIN` prevents either compression or out-of-line storage; furthermore it disables use of single-byte headers for varlena types. This is the only possible strategy for columns of non-TOAST-able data types.
-*   `EXTENDED` allows both compression and out-of-line storage. This is the default for most TOAST-able data types. Compression will be attempted first, then out-of-line storage if the row is still too big.
-*   `EXTERNAL` allows out-of-line storage but not compression. Use of `EXTERNAL` will make substring operations on wide `text` and `bytea` columns faster (at the penalty of increased storage space) because these operations are optimized to fetch only the required parts of the out-of-line value when it is not compressed.
-*   `MAIN` allows compression but not out-of-line storage. (Actually, out-of-line storage will still be performed for such columns, but only as a last resort when there is no other way to make the row small enough to fit on a page.)
+* `PLAIN` prevents either compression or out-of-line storage; furthermore it disables use of single-byte headers for varlena types. This is the only possible strategy for columns of non-TOAST-able data types.
+* `EXTENDED` allows both compression and out-of-line storage. This is the default for most TOAST-able data types. Compression will be attempted first, then out-of-line storage if the row is still too big.
+* `EXTERNAL` allows out-of-line storage but not compression. Use of `EXTERNAL` will make substring operations on wide `text` and `bytea` columns faster (at the penalty of increased storage space) because these operations are optimized to fetch only the required parts of the out-of-line value when it is not compressed.
+* `MAIN` allows compression but not out-of-line storage. (Actually, out-of-line storage will still be performed for such columns, but only as a last resort when there is no other way to make the row small enough to fit on a page.)
 
 Each TOAST-able data type specifies a default strategy for columns of that data type, but the strategy for a given table column can be altered with [`ALTER TABLE ... SET STORAGE`](sql-altertable.html "ALTER TABLE").
 

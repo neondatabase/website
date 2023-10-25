@@ -8,15 +8,13 @@
 
 ## F.34. pg\_trgm — support for similarity of text using trigram matching [#](#PGTRGM)
 
-*   *   [F.34.1. Trigram (or Trigraph) Concepts](pgtrgm.html#PGTRGM-CONCEPTS)
-    *   [F.34.2. Functions and Operators](pgtrgm.html#PGTRGM-FUNCS-OPS)
-    *   [F.34.3. GUC Parameters](pgtrgm.html#PGTRGM-GUC)
-    *   [F.34.4. Index Support](pgtrgm.html#PGTRGM-INDEX)
-    *   [F.34.5. Text Search Integration](pgtrgm.html#PGTRGM-TEXT-SEARCH)
-    *   [F.34.6. References](pgtrgm.html#PGTRGM-REFERENCES)
-    *   [F.34.7. Authors](pgtrgm.html#PGTRGM-AUTHORS)
-
-
+  * *   [F.34.1. Trigram (or Trigraph) Concepts](pgtrgm.html#PGTRGM-CONCEPTS)
+  * [F.34.2. Functions and Operators](pgtrgm.html#PGTRGM-FUNCS-OPS)
+  * [F.34.3. GUC Parameters](pgtrgm.html#PGTRGM-GUC)
+  * [F.34.4. Index Support](pgtrgm.html#PGTRGM-INDEX)
+  * [F.34.5. Text Search Integration](pgtrgm.html#PGTRGM-TEXT-SEARCH)
+  * [F.34.6. References](pgtrgm.html#PGTRGM-REFERENCES)
+  * [F.34.7. Authors](pgtrgm.html#PGTRGM-AUTHORS)
 
 The `pg_trgm` module provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, as well as index operator classes that support fast searching for similar strings.
 
@@ -28,7 +26,7 @@ A trigram is a group of three consecutive characters taken from a string. We can
 
 ### Note
 
-`pg_trgm` ignores non-word characters (non-alphanumerics) when extracting trigrams from a string. Each word is considered to have two spaces prefixed and one space suffixed when determining the set of trigrams contained in the string. For example, the set of trigrams in the string “`cat`” is “` c`”, “` ca`”, “`cat`”, and “`at `”. The set of trigrams in the string “`foo|bar`” is “` f`”, “` fo`”, “`foo`”, “`oo `”, “` b`”, “` ba`”, “`bar`”, and “`ar `”.
+`pg_trgm` ignores non-word characters (non-alphanumerics) when extracting trigrams from a string. Each word is considered to have two spaces prefixed and one space suffixed when determining the set of trigrams contained in the string. For example, the set of trigrams in the string “`cat`” is “`c`”, “`ca`”, “`cat`”, and “`at`”. The set of trigrams in the string “`foo|bar`” is “`f`”, “`fo`”, “`foo`”, “`oo`”, “`b`”, “`ba`”, “`bar`”, and “`ar`”.
 
 ### F.34.2. Functions and Operators [#](#PGTRGM-FUNCS-OPS)
 
@@ -46,7 +44,6 @@ The functions provided by the `pg_trgm` module are shown in [Table F.26](pgtrgm
 | `set_limit` ( `real` ) → `real`Sets the current similarity threshold that is used by the `%` operator. The threshold must be between 0 and 1 (default is 0.3). Returns the same value passed in. (*Deprecated*; instead use `SET` `pg_trgm.similarity_threshold`.)                                              |
 
 \
-
 
 Consider the following example:
 
@@ -93,15 +90,15 @@ Thus, the `strict_word_similarity` function is useful for finding the similarity
 
 ### F.34.3. GUC Parameters [#](#PGTRGM-GUC)
 
-*   `pg_trgm.similarity_threshold` (`real`) [#](#GUC-PGTRGM-SIMILARITY-THRESHOLD)
+* `pg_trgm.similarity_threshold` (`real`) [#](#GUC-PGTRGM-SIMILARITY-THRESHOLD)
 
     Sets the current similarity threshold that is used by the `%` operator. The threshold must be between 0 and 1 (default is 0.3).
 
-*   `pg_trgm.word_similarity_threshold` (`real`) [#](#GUC-PGTRGM-WORD-SIMILARITY-THRESHOLD)
+* `pg_trgm.word_similarity_threshold` (`real`) [#](#GUC-PGTRGM-WORD-SIMILARITY-THRESHOLD)
 
     Sets the current word similarity threshold that is used by the `<%` and `%>` operators. The threshold must be between 0 and 1 (default is 0.6).
 
-*   `pg_trgm.strict_word_similarity_threshold` (`real`) [#](#GUC-PGTRGM-STRICT-WORD-SIMILARITY-THRESHOLD)
+* `pg_trgm.strict_word_similarity_threshold` (`real`) [#](#GUC-PGTRGM-STRICT-WORD-SIMILARITY-THRESHOLD)
 
     Sets the current strict word similarity threshold that is used by the `<<%` and `%>>` operators. The threshold must be between 0 and 1 (default is 0.5).
 

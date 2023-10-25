@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## CREATE SERVER
 
 CREATE SERVER — define a new foreign server
@@ -33,27 +31,27 @@ Creating a server requires `USAGE` privilege on the foreign-data wrapper being u
 
 ## Parameters
 
-*   `IF NOT EXISTS`
+* `IF NOT EXISTS`
 
     Do not throw an error if a server with the same name already exists. A notice is issued in this case. Note that there is no guarantee that the existing server is anything like the one that would have been created.
 
-*   *`server_name`*
+* *`server_name`*
 
     The name of the foreign server to be created.
 
-*   *`server_type`*
+* *`server_type`*
 
     Optional server type, potentially useful to foreign-data wrappers.
 
-*   *`server_version`*
+* *`server_version`*
 
     Optional server version, potentially useful to foreign-data wrappers.
 
-*   *`fdw_name`*
+* *`fdw_name`*
 
     The name of the foreign-data wrapper that manages the server.
 
-*   `OPTIONS ( option 'value' [, ... ] )`
+* `OPTIONS ( option 'value' [, ... ] )`
 
     This clause specifies the options for the server. The options typically define the connection details of the server, but the actual names and values are dependent on the server's foreign-data wrapper.
 

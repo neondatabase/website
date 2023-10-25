@@ -8,13 +8,11 @@
 
 ## 19.9. Secure TCP/IP Connections with SSL [#](#SSL-TCP)
 
-*   *   [19.9.1. Basic Setup](ssl-tcp.html#SSL-SETUP)
-    *   [19.9.2. OpenSSL Configuration](ssl-tcp.html#SSL-OPENSSL-CONFIG)
-    *   [19.9.3. Using Client Certificates](ssl-tcp.html#SSL-CLIENT-CERTIFICATES)
-    *   [19.9.4. SSL Server File Usage](ssl-tcp.html#SSL-SERVER-FILES)
-    *   [19.9.5. Creating Certificates](ssl-tcp.html#SSL-CERTIFICATE-CREATION)
-
-
+  * *   [19.9.1. Basic Setup](ssl-tcp.html#SSL-SETUP)
+  * [19.9.2. OpenSSL Configuration](ssl-tcp.html#SSL-OPENSSL-CONFIG)
+  * [19.9.3. Using Client Certificates](ssl-tcp.html#SSL-CLIENT-CERTIFICATES)
+  * [19.9.4. SSL Server File Usage](ssl-tcp.html#SSL-SERVER-FILES)
+  * [19.9.5. Creating Certificates](ssl-tcp.html#SSL-CERTIFICATE-CREATION)
 
 PostgreSQL has native support for using SSL connections to encrypt client/server communications for increased security. This requires that OpenSSL is installed on both client and server systems and that support in PostgreSQL is enabled at build time (see [Chapter 17](installation.html "Chapter 17. Installation from Source Code")).
 
@@ -76,7 +74,6 @@ The second approach combines any authentication method for `hostssl` entries wit
 | [ssl\_crl\_file](runtime-config-connection.html#GUC-SSL-CRL-FILE)                          | certificates revoked by certificate authorities | client certificate must not be on this list                                                         |
 
 \
-
 
 The server reads these files at server start and whenever the server configuration is reloaded. On Windows systems, they are also re-read whenever a new backend process is spawned for a new client connection.
 

@@ -8,10 +8,8 @@
 
 ## F.15. earthdistance — calculate great-circle distances [#](#EARTHDISTANCE)
 
-*   *   [F.15.1. Cube-Based Earth Distances](earthdistance.html#EARTHDISTANCE-CUBE-BASED)
-    *   [F.15.2. Point-Based Earth Distances](earthdistance.html#EARTHDISTANCE-POINT-BASED)
-
-
+  * *   [F.15.1. Cube-Based Earth Distances](earthdistance.html#EARTHDISTANCE-CUBE-BASED)
+  * [F.15.2. Point-Based Earth Distances](earthdistance.html#EARTHDISTANCE-POINT-BASED)
 
 The `earthdistance` module provides two different approaches to calculating great circle distances on the surface of the Earth. The one described first depends on the `cube` module. The second one is based on the built-in `point` data type, using longitude and latitude for the coordinates.
 
@@ -61,7 +59,6 @@ A single operator is provided, shown in [Table F.6](earthdistance.html#EARTHDIS
 | `point` `<@>` `point` → `float8`Computes the distance in statute miles between two points on the Earth's surface. |
 
 \
-
 
 Note that unlike the `cube`-based part of the module, units are hardwired here: changing the `earth()` function will not affect the results of this operator.
 

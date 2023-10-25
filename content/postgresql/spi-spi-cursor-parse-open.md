@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## SPI\_cursor\_parse\_open
 
 SPI\_cursor\_parse\_open — set up a cursor using a query string and parameters
@@ -33,29 +31,29 @@ The passed-in parameter data will be copied into the cursor's portal, so it can 
 
 ## Arguments
 
-*   `const char * name`
+* `const char * name`
 
     name for portal, or `NULL` to let the system select a name
 
-*   `const char * command`
+* `const char * command`
 
     command string
 
-*   `const SPIParseOpenOptions * options`
+* `const SPIParseOpenOptions * options`
 
     struct containing optional arguments
 
 Callers should always zero out the entire *`options`* struct, then fill whichever fields they want to set. This ensures forward compatibility of code, since any fields that are added to the struct in future will be defined to behave backwards-compatibly if they are zero. The currently available *`options`* fields are:
 
-*   `ParamListInfo params`
+* `ParamListInfo params`
 
     data structure containing query parameter types and values; NULL if none
 
-*   `int cursorOptions`
+* `int cursorOptions`
 
     integer bit mask of cursor options; zero produces default behavior
 
-*   `bool read_only`
+* `bool read_only`
 
     `true` for read-only execution
 

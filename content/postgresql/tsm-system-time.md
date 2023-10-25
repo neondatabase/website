@@ -8,9 +8,7 @@
 
 ## F.46. tsm\_system\_time — the `SYSTEM_TIME` sampling method for `TABLESAMPLE` [#](#TSM-SYSTEM-TIME)
 
-*   [F.46.1. Examples](tsm-system-time.html#TSM-SYSTEM-TIME-EXAMPLES)
-
-
+* [F.46.1. Examples](tsm-system-time.html#TSM-SYSTEM-TIME-EXAMPLES)
 
 The `tsm_system_time` module provides the table sampling method `SYSTEM_TIME`, which can be used in the `TABLESAMPLE` clause of a [`SELECT`](sql-select.html "SELECT") command.
 

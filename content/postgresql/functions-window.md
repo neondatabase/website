@@ -8,8 +8,6 @@
 
 ## 9.22. Window Functions [#](#FUNCTIONS-WINDOW)
 
-
-
 *Window functions* provide the ability to perform calculations across sets of rows that are related to the current query row. See [Section 3.5](tutorial-window.html "3.5. Window Functions") for an introduction to this feature, and [Section 4.2.8](sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls") for syntax details.
 
 The built-in window functions are listed in [Table 9.64](functions-window.html#FUNCTIONS-WINDOW-TABLE "Table 9.64. General-Purpose Window Functions"). Note that these functions *must* be invoked using window function syntax, i.e., an `OVER` clause is required.
@@ -33,7 +31,6 @@ In addition to these functions, any built-in or user-defined ordinary aggregate 
 | `nth_value` ( *`value`* `anyelement`, *`n`* `integer` ) → `anyelement`Returns *`value`* evaluated at the row that is the *`n`*'th row of the window frame (counting from 1); returns `NULL` if there is no such row.                                                                                                                                                                                                                                                                  |
 
 \
-
 
 All of the functions listed in [Table 9.64](functions-window.html#FUNCTIONS-WINDOW-TABLE "Table 9.64. General-Purpose Window Functions") depend on the sort ordering specified by the `ORDER BY` clause of the associated window definition. Rows that are not distinct when considering only the `ORDER BY` columns are said to be *peers*. The four ranking functions (including `cume_dist`) are defined so that they give the same answer for all rows of a peer group.
 

@@ -8,8 +8,6 @@
 
 ## 53.33. `pg_opclass` [#](#CATALOG-PG-OPCLASS)
 
-
-
 The catalog `pg_opclass` defines index access method operator classes. Each operator class defines semantics for index columns of a particular data type and a particular index access method. An operator class essentially specifies that a particular operator family is applicable to a particular indexable column data type. The set of operators from the family that are actually usable with the indexed column are whichever ones accept the column's data type as their left-hand input.
 
 Operator classes are described at length in [Section 38.16](xindex.html "38.16. Interfacing Extensions to Indexes").
@@ -29,7 +27,6 @@ Operator classes are described at length in [Section 38.16](xindex.html "38.16.
 | `opckeytype` `oid` (references [`pg_type`](catalog-pg-type.html "53.64. pg_type").`oid`)Type of data stored in index, or zero if same as `opcintype` |
 
 \
-
 
 An operator class's `opcmethod` must match the `opfmethod` of its containing operator family. Also, there must be no more than one `pg_opclass` row having `opcdefault` true for any given combination of `opcmethod` and `opcintype`.
 

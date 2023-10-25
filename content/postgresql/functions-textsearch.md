@@ -8,8 +8,6 @@
 
 ## 9.13. Text Search Functions and Operators [#](#FUNCTIONS-TEXTSEARCH)
 
-
-
 [Table 9.42](functions-textsearch.html#TEXTSEARCH-OPERATORS-TABLE "Table 9.42. Text Search Operators"), [Table 9.43](functions-textsearch.html#TEXTSEARCH-FUNCTIONS-TABLE "Table 9.43. Text Search Functions") and [Table 9.44](functions-textsearch.html#TEXTSEARCH-FUNCTIONS-DEBUG-TABLE "Table 9.44. Text Search Debugging Functions") summarize the functions and operators that are provided for full text searching. See [Chapter 12](textsearch.html "Chapter 12. Full Text Search") for a detailed explanation of PostgreSQL's text search facility.
 
 **Table 9.42. Text Search Operators**
@@ -28,7 +26,6 @@
 | `tsquery` `<@` `tsquery` → `boolean`Is first `tsquery` contained in the second? (This considers only whether all the lexemes appearing in one query appear in the other, ignoring the combining operators.)`'cat'::tsquery <@ 'cat & rat'::tsquery` → `t``'cat'::tsquery <@ '!cat & rat'::tsquery` → `t` |
 
 \
-
 
 In addition to these specialized operators, the usual comparison operators shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for types `tsvector` and `tsquery`. These are not very useful for text searching but allow, for example, unique indexes to be built on columns of these types.
 
@@ -66,7 +63,6 @@ In addition to these specialized operators, the usual comparison operators shown
 | `unnest` ( `tsvector` ) → `setof record` ( *`lexeme`* `text`, *`positions`* `smallint[]`, *`weights`* `text` )Expands a `tsvector` into a set of rows, one per lexeme.`select * from unnest('cat:3 fat:2,4 rat:5A'::tsvector)` →``      lexeme | positions | weights --------+-----------+---------  cat    | {3}       | {D}  fat    | {2,4}     | {D,D}  rat    | {5}       | {A}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 \
-
 
 ### Note
 

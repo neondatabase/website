@@ -6,8 +6,6 @@
 
 ***
 
-
-
 ## ALTER TEXT SEARCH PARSER
 
 ALTER TEXT SEARCH PARSER — change the definition of a text search parser
@@ -28,15 +26,15 @@ You must be a superuser to use `ALTER TEXT SEARCH PARSER`.
 
 ## Parameters
 
-*   *`name`*
+* *`name`*
 
     The name (optionally schema-qualified) of an existing text search parser.
 
-*   *`new_name`*
+* *`new_name`*
 
     The new name of the text search parser.
 
-*   *`new_schema`*
+* *`new_schema`*
 
     The new schema for the text search parser.
 

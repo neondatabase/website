@@ -8,8 +8,6 @@
 
 ## 9.21. Aggregate Functions [#](#FUNCTIONS-AGGREGATE)
 
-
-
 *Aggregate functions* compute a single result from a set of input values. The built-in general-purpose aggregate functions are listed in [Table 9.59](functions-aggregate.html#FUNCTIONS-AGGREGATE-TABLE "Table 9.59. General-Purpose Aggregate Functions") while statistical aggregates are in [Table 9.60](functions-aggregate.html#FUNCTIONS-AGGREGATE-STATISTICS-TABLE "Table 9.60. Aggregate Functions for Statistics"). The built-in within-group ordered-set aggregate functions are listed in [Table 9.61](functions-aggregate.html#FUNCTIONS-ORDEREDSET-TABLE "Table 9.61. Ordered-Set Aggregate Functions") while the built-in within-group hypothetical-set ones are in [Table 9.62](functions-aggregate.html#FUNCTIONS-HYPOTHETICAL-TABLE "Table 9.62. Hypothetical-Set Aggregate Functions"). Grouping operations, which are closely related to aggregate functions, are listed in [Table 9.63](functions-aggregate.html#FUNCTIONS-GROUPING-TABLE "Table 9.63. Grouping Operations"). The special syntax considerations for aggregate functions are explained in [Section 4.2.7](sql-expressions.html#SYNTAX-AGGREGATES "4.2.7. Aggregate Expressions"). Consult [Section 2.7](tutorial-agg.html "2.7. Aggregate Functions") for additional introductory information.
 
 Aggregate functions that support *Partial Mode* are eligible to participate in various optimizations, such as parallel aggregation.
@@ -48,7 +46,6 @@ Aggregate functions that support *Partial Mode* are eligible to participate in v
 
 \
 
-
 It should be noted that except for `count`, these functions return a null value when no rows are selected. In particular, `sum` of no rows returns null, not zero as one might expect, and `array_agg` returns null rather than an empty array when there are no input rows. The `coalesce` function can be used to substitute zero or an empty array for null when necessary.
 
 The aggregate functions `array_agg`, `json_agg`, `jsonb_agg`, `json_agg_strict`, `jsonb_agg_strict`, `json_object_agg`, `jsonb_object_agg`, `json_object_agg_strict`, `jsonb_object_agg_strict`, `json_object_agg_unique`, `jsonb_object_agg_unique`, `json_object_agg_unique_strict`, `jsonb_object_agg_unique_strict`, `string_agg`, and `xmlagg`, as well as similar user-defined aggregate functions, produce meaningfully different result values depending on the order of the input values. This ordering is unspecified by default, but can be controlled by writing an `ORDER BY` clause within the aggregate call, as shown in [Section 4.2.7](sql-expressions.html#SYNTAX-AGGREGATES "4.2.7. Aggregate Expressions"). Alternatively, supplying the input values from a sorted subquery will usually work. For example:
@@ -61,8 +58,6 @@ SELECT xmlagg(x) FROM (SELECT x FROM test ORDER BY y DESC) AS tab;
 Beware that this approach can fail if the outer query level contains additional processing, such as a join, because that might cause the subquery's output to be reordered before the aggregate is computed.
 
 ### Note
-
-
 
 The boolean aggregates `bool_and` and `bool_or` correspond to the standard SQL aggregates `every` and `any` or `some`. PostgreSQL supports `every`, but not `any` or `some`, because there is an ambiguity built into the standard syntax:
 
@@ -86,8 +81,6 @@ will require effort proportional to the size of the table: PostgreSQL will need 
 
 [Table 9.60](functions-aggregate.html#FUNCTIONS-AGGREGATE-STATISTICS-TABLE "Table 9.60. Aggregate Functions for Statistics") shows aggregate functions typically used in statistical analysis. (These are separated out merely to avoid cluttering the listing of more-commonly-used aggregates.) Functions shown as accepting *`numeric_type`* are available for all the types `smallint`, `integer`, `bigint`, `numeric`, `real`, and `double precision`. Where the description mentions *`N`*, it means the number of input rows for which all the input expressions are non-null. In all cases, null is returned if the computation is meaningless, for example when *`N`* is zero.
 
-
-
 **Table 9.60. Aggregate Functions for Statistics**
 
 | FunctionDescription                                                                                                                                                                                                    | Partial Mode |
@@ -104,19 +97,16 @@ will require effort proportional to the size of the table: PostgreSQL will need 
 | `regr_sxx` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the “sum of squares” of the independent variable, `sum(X^2) - sum(X)^2/N`.                                          | Yes          |
 | `regr_sxy` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the “sum of products” of independent times dependent variables, `sum(X*Y) - sum(X) * sum(Y)/N`.                     | Yes          |
 | `regr_syy` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the “sum of squares” of the dependent variable, `sum(Y^2) - sum(Y)^2/N`.                                            | Yes          |
-| `stddev` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise `numeric`This is a historical alias for `stddev_samp`.                                                        | Yes          |
-| `stddev_pop` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise `numeric`Computes the population standard deviation of the input values.                                  | Yes          |
-| `stddev_samp` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise `numeric`Computes the sample standard deviation of the input values.                                     | Yes          |
-| `variance` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise `numeric`This is a historical alias for `var_samp`.                                                             | Yes          |
-| `var_pop` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise `numeric`Computes the population variance of the input values (square of the population standard deviation). | Yes          |
-| `var_samp` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise `numeric`Computes the sample variance of the input values (square of the sample standard deviation).        | Yes          |
+| `stddev` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`This is a historical alias for`stddev_samp`.                                                        | Yes          |
+| `stddev_pop` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`Computes the population standard deviation of the input values.                                  | Yes          |
+| `stddev_samp` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`Computes the sample standard deviation of the input values.                                     | Yes          |
+| `variance` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`This is a historical alias for`var_samp`.                                                             | Yes          |
+| `var_pop` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`Computes the population variance of the input values (square of the population standard deviation). | Yes          |
+| `var_samp` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`Computes the sample variance of the input values (square of the sample standard deviation).        | Yes          |
 
 \
 
-
 [Table 9.61](functions-aggregate.html#FUNCTIONS-ORDEREDSET-TABLE "Table 9.61. Ordered-Set Aggregate Functions") shows some aggregate functions that use the *ordered-set aggregate* syntax. These functions are sometimes referred to as “inverse distribution” functions. Their aggregated input is introduced by `ORDER BY`, and they may also take a *direct argument* that is not aggregated, but is computed only once. All these functions ignore null values in their aggregated input. For those that take a *`fraction`* parameter, the fraction value must be between 0 and 1; an error is thrown if not. However, a null *`fraction`* value simply produces a null result.
-
-
 
 **Table 9.61. Ordered-Set Aggregate Functions**
 
@@ -129,7 +119,6 @@ will require effort proportional to the size of the table: PostgreSQL will need 
 | `percentile_disc` ( *`fractions`* `double precision[]` ) `WITHIN GROUP` ( `ORDER BY` `anyelement` ) → `anyarray`Computes multiple discrete percentiles. The result is an array of the same dimensions as the *`fractions`* parameter, with each non-null element replaced by the input value corresponding to that percentile. The aggregated argument must be of a sortable type.                                                                                                 | No           |
 
 \
-
 
 Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-aggregate.html#FUNCTIONS-HYPOTHETICAL-TABLE "Table 9.62. Hypothetical-Set Aggregate Functions") is associated with a window function of the same name defined in [Section 9.22](functions-window.html "9.22. Window Functions"). In each case, the aggregate's result is the value that the associated window function would have returned for the “hypothetical” row constructed from *`args`*, if such a row had been added to the sorted group of rows represented by the *`sorted_args`*. For each of these functions, the list of direct arguments given in *`args`* must match the number and types of the aggregated arguments given in *`sorted_args`*. Unlike most built-in aggregates, these aggregates are not strict, that is they do not drop input rows containing nulls. Null values sort according to the rule specified in the `ORDER BY` clause.
 
@@ -144,7 +133,6 @@ Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-
 
 \
 
-
 **Table 9.63. Grouping Operations**
 
 | FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -152,7 +140,6 @@ Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-
 | `GROUPING` ( *`group_by_expression(s)`* ) → `integer`Returns a bit mask indicating which `GROUP BY` expressions are not included in the current grouping set. Bits are assigned with the rightmost argument corresponding to the least-significant bit; each bit is 0 if the corresponding expression is included in the grouping criteria of the grouping set generating the current result row, and 1 if it is not included. |
 
 \
-
 
 The grouping operations shown in [Table 9.63](functions-aggregate.html#FUNCTIONS-GROUPING-TABLE "Table 9.63. Grouping Operations") are used in conjunction with grouping sets (see [Section 7.2.4](queries-table-expressions.html#QUERIES-GROUPING-SETS "7.2.4. GROUPING SETS, CUBE, and ROLLUP")) to distinguish result rows. The arguments to the `GROUPING` function are not actually evaluated, but they must exactly match expressions given in the `GROUP BY` clause of the associated query level. For example:
 

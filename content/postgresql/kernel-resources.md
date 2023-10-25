@@ -8,17 +8,15 @@
 
 ## 19.4. Managing Kernel Resources [#](#KERNEL-RESOURCES)
 
-*   *   [19.4.1. Shared Memory and Semaphores](kernel-resources.html#SYSVIPC)
-    *   [19.4.2. systemd RemoveIPC](kernel-resources.html#SYSTEMD-REMOVEIPC)
-    *   [19.4.3. Resource Limits](kernel-resources.html#KERNEL-RESOURCES-LIMITS)
-    *   [19.4.4. Linux Memory Overcommit](kernel-resources.html#LINUX-MEMORY-OVERCOMMIT)
-    *   [19.4.5. Linux Huge Pages](kernel-resources.html#LINUX-HUGE-PAGES)
+  * *   [19.4.1. Shared Memory and Semaphores](kernel-resources.html#SYSVIPC)
+  * [19.4.2. systemd RemoveIPC](kernel-resources.html#SYSTEMD-REMOVEIPC)
+  * [19.4.3. Resource Limits](kernel-resources.html#KERNEL-RESOURCES-LIMITS)
+  * [19.4.4. Linux Memory Overcommit](kernel-resources.html#LINUX-MEMORY-OVERCOMMIT)
+  * [19.4.5. Linux Huge Pages](kernel-resources.html#LINUX-HUGE-PAGES)
 
 PostgreSQL can sometimes exhaust various operating system resource limits, especially when multiple copies of the server are running on the same system, or in very large installations. This section explains the kernel resources used by PostgreSQL and the steps you can take to resolve problems related to kernel resource consumption.
 
 ### 19.4.1. Shared Memory and Semaphores [#](#SYSVIPC)
-
-
 
 PostgreSQL requires the operating system to provide inter-process communication (IPC) features, specifically shared memory and semaphores. Unix-derived systems typically provide “System V” IPC, “POSIX” IPC, or both. Windows has its own implementation of these features and is not discussed here.
 
@@ -43,7 +41,6 @@ System V IPC features are typically constrained by system-wide allocation limits
 
 \
 
-
 PostgreSQL requires a few bytes of System V shared memory (typically 48 bytes, on 64-bit platforms) for each copy of the server. On most modern operating systems, this amount can easily be allocated. However, if you are running many copies of the server or you explicitly configure the server to use large amounts of System V shared memory (see [shared\_memory\_type](runtime-config-resource.html#GUC-SHARED-MEMORY-TYPE) and [dynamic\_shared\_memory\_type](runtime-config-resource.html#GUC-DYNAMIC-SHARED-MEMORY-TYPE)), it may be necessary to increase `SHMALL`, which is the total amount of System V shared memory system-wide. Note that `SHMALL` is measured in pages rather than bytes on many systems.
 
 Less likely to cause problems is the minimum size for shared memory segments (`SHMMIN`), which should be at most approximately 32 bytes for PostgreSQL (it is usually just 1). The maximum number of segments system-wide (`SHMMNI`) or per-process (`SHMSEG`) are unlikely to cause a problem unless your system has them set to zero.
@@ -56,13 +53,13 @@ Various other settings related to “semaphore undo”, such as `SEMMNU` and `SE
 
 When using POSIX semaphores, the number of semaphores needed is the same as for System V, that is one semaphore per allowed connection ([max\_connections](runtime-config-connection.html#GUC-MAX-CONNECTIONS)), allowed autovacuum worker process ([autovacuum\_max\_workers](runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS)) and allowed background process ([max\_worker\_processes](runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES)). On the platforms where this option is preferred, there is no specific kernel limit on the number of POSIX semaphores.
 
-*   AIX
+* AIX
 
     It should not be necessary to do any special configuration for such parameters as `SHMMAX`, as it appears this is configured to allow all memory to be used as shared memory. That is the sort of configuration commonly used for other databases such as DB/2.
 
     It might, however, be necessary to modify the global `ulimit` information in `/etc/security/limits`, as the default hard limits for file sizes (`fsize`) and numbers of files (`nofiles`) might be too low.
 
-*   FreeBSD
+* FreeBSD
 
     The default shared memory settings are usually good enough, unless you have set `shared_memory_type` to `sysv`. System V semaphores are not used on this platform.
 
@@ -80,7 +77,7 @@ When using POSIX semaphores, the number of semaphores needed is the same as for 
 
     If running in a FreeBSD jail, you should set its `sysvshm` parameter to `new`, so that it has its own separate System V shared memory namespace. (Before FreeBSD 11.0, it was necessary to enable shared access to the host's IPC namespace from jails, and take measures to avoid collisions.)
 
-*   NetBSD
+* NetBSD
 
     The default shared memory settings are usually good enough, unless you have set `shared_memory_type` to `sysv`. You will usually want to increase `kern.ipc.semmni` and `kern.ipc.semmns`, as NetBSD's default settings for these are uncomfortably small.
 
@@ -95,7 +92,7 @@ When using POSIX semaphores, the number of semaphores needed is the same as for 
 
     If you have set `shared_memory_type` to `sysv`, you might also want to configure your kernel to lock System V shared memory into RAM and prevent it from being paged out to swap. This can be accomplished using the `sysctl` setting `kern.ipc.shm_use_phys`.
 
-*   OpenBSD
+* OpenBSD
 
     The default shared memory settings are usually good enough, unless you have set `shared_memory_type` to `sysv`. You will usually want to increase `kern.seminfo.semmni` and `kern.seminfo.semmns`, as OpenBSD's default settings for these are uncomfortably small.
 
@@ -108,7 +105,7 @@ When using POSIX semaphores, the number of semaphores needed is the same as for 
 
     To make these settings persist over reboots, modify `/etc/sysctl.conf`.
 
-*   Linux
+* Linux
 
     The default shared memory settings are usually good enough, unless you have set `shared_memory_type` to `sysv`, and even then only on older kernel versions that shipped with low defaults. System V semaphores are not used on this platform.
 
@@ -116,13 +113,13 @@ When using POSIX semaphores, the number of semaphores needed is the same as for 
 
     ```
 
-    $ sysctl -w kernel.shmmax=17179869184
-    $ sysctl -w kernel.shmall=4194304
+    sysctl -w kernel.shmmax=17179869184
+    sysctl -w kernel.shmall=4194304
     ```
 
     To make these settings persist over reboots, see `/etc/sysctl.conf`.
 
-*   macOS
+* macOS
 
     The default shared memory and semaphore settings are usually good enough, unless you have set `shared_memory_type` to `sysv`.
 
@@ -145,7 +142,7 @@ When using POSIX semaphores, the number of semaphores needed is the same as for 
 
     It is possible to change all but `SHMMNI` on the fly, using sysctl. But it's still best to set up your preferred values via `/etc/sysctl.conf`, so that the values will be kept across reboots.
 
-*   Solarisillumos
+* Solarisillumos
 
     The default shared memory and semaphore settings are usually good enough for most PostgreSQL applications. Solaris defaults to a `SHMMAX` of one-quarter of system RAM. To further adjust this setting, use a project setting associated with the `postgres` user. For example, run the following as `root`:
 
@@ -168,8 +165,6 @@ When using POSIX semaphores, the number of semaphores needed is the same as for 
     Additionally, if you are running PostgreSQL inside a zone, you may need to raise the zone resource usage limits as well. See "Chapter2: Projects and Tasks" in the *System Administrator's Guide* for more information on `projects` and `prctl`.
 
 ### 19.4.2. systemd RemoveIPC [#](#SYSTEMD-REMOVEIPC)
-
-
 
 If systemd is in use, some care must be taken that IPC resources (including shared memory) are not prematurely removed by the operating system. This is especially of concern when installing PostgreSQL from source. Users of distribution packages of PostgreSQL are less likely to be affected, as the `postgres` user is then normally created as a system user.
 
@@ -221,7 +216,7 @@ default:\
 
 Kernels can also have system-wide limits on some resources.
 
-*   On Linux the kernel parameter `fs.file-max` determines the maximum number of open files that the kernel will support. It can be changed with `sysctl -w fs.file-max=N`. To make the setting persist across reboots, add an assignment in `/etc/sysctl.conf`. The maximum limit of files per process is fixed at the time the kernel is compiled; see `/usr/src/linux/Documentation/proc.txt` for more information.
+* On Linux the kernel parameter `fs.file-max` determines the maximum number of open files that the kernel will support. It can be changed with `sysctl -w fs.file-max=N`. To make the setting persist across reboots, add an assignment in `/etc/sysctl.conf`. The maximum limit of files per process is fixed at the time the kernel is compiled; see `/usr/src/linux/Documentation/proc.txt` for more information.
 
 The PostgreSQL server uses one process per connection so you should provide for at least as many processes as allowed connections, in addition to what you need for the rest of your system. This is usually not a problem but if you run several servers on one machine things might get tight.
 
@@ -232,8 +227,6 @@ On the other side of the coin, some systems allow individual processes to open l
 Another kernel limit that may be of concern when supporting large numbers of client connections is the maximum socket connection queue length. If more than that many connection requests arrive within a very short period, some may get rejected before the PostgreSQL server can service the requests, with those clients receiving unhelpful connection failure errors such as “Resource temporarily unavailable” or “Connection refused”. The default queue length limit is 128 on many platforms. To raise it, adjust the appropriate kernel parameter via sysctl, then restart the PostgreSQL server. The parameter is variously named `net.core.somaxconn` on Linux, `kern.ipc.soacceptqueue` on newer FreeBSD, and `kern.ipc.somaxconn` on macOS and other BSD variants.
 
 ### 19.4.4. Linux Memory Overcommit [#](#LINUX-MEMORY-OVERCOMMIT)
-
-
 
 The default virtual memory behavior on Linux is not optimal for PostgreSQL. Because of the way that the kernel implements memory overcommit, the kernel might terminate the PostgreSQL postmaster (the supervisor server process) if the memory demands of either PostgreSQL or another process cause the system to run out of virtual memory.
 
@@ -310,7 +303,7 @@ Sometimes the kernel is not able to allocate the desired number of huge pages im
 
 ```
 
-$ cat /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
+cat /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
 ```
 
 It may also be necessary to give the database server's operating system user permission to use huge pages by setting `vm.hugetlb_shm_group` via sysctl, and/or give permission to lock memory with `ulimit -l`.

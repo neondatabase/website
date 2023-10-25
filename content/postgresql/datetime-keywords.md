@@ -29,7 +29,6 @@
 
 \
 
-
 [Table B.2](datetime-keywords.html#DATETIME-DOW-TABLE "Table B.2. Day of the Week Names") shows the tokens that are recognized as names of days of the week.
 
 **Table B.2. Day of the Week Names**
@@ -45,7 +44,6 @@
 | Saturday  | Sat              |
 
 \
-
 
 [Table B.3](datetime-keywords.html#DATETIME-MOD-TABLE "Table B.3. Date/Time Field Modifiers") shows the tokens that serve various modifier purposes.
 

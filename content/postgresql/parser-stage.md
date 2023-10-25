@@ -8,13 +8,13 @@
 
 ## 52.3. The Parser Stage [#](#PARSER-STAGE)
 
-*   *   [52.3.1. Parser](parser-stage.html#PARSER-STAGE-PARSER)
-    *   [52.3.2. Transformation Process](parser-stage.html#PARSER-STAGE-TRANSFORMATION-PROCESS)
+  * *   [52.3.1. Parser](parser-stage.html#PARSER-STAGE-PARSER)
+  * [52.3.2. Transformation Process](parser-stage.html#PARSER-STAGE-TRANSFORMATION-PROCESS)
 
 The *parser stage* consists of two parts:
 
-*   The *parser* defined in `gram.y` and `scan.l` is built using the Unix tools bison and flex.
-*   The *transformation process* does modifications and augmentations to the data structures returned by the parser.
+* The *parser* defined in `gram.y` and `scan.l` is built using the Unix tools bison and flex.
+* The *transformation process* does modifications and augmentations to the data structures returned by the parser.
 
 ### 52.3.1. Parser [#](#PARSER-STAGE-PARSER)
 

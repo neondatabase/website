@@ -8,11 +8,9 @@
 
 ## 8.13. XML Type [#](#DATATYPE-XML)
 
-*   *   [8.13.1. Creating XML Values](datatype-xml.html#DATATYPE-XML-CREATING)
-    *   [8.13.2. Encoding Handling](datatype-xml.html#DATATYPE-XML-ENCODING-HANDLING)
-    *   [8.13.3. Accessing XML Values](datatype-xml.html#DATATYPE-XML-ACCESSING-XML-VALUES)
-
-
+  * *   [8.13.1. Creating XML Values](datatype-xml.html#DATATYPE-XML-CREATING)
+  * [8.13.2. Encoding Handling](datatype-xml.html#DATATYPE-XML-ENCODING-HANDLING)
+  * [8.13.3. Accessing XML Values](datatype-xml.html#DATATYPE-XML-ACCESSING-XML-VALUES)
 
 The `xml` data type can be used to store XML data. Its advantage over storing XML data in a `text` field is that it checks the input values for well-formedness, and there are support functions to perform type-safe operations on it; see [Section 9.15](functions-xml.html "9.15. XML Functions"). Use of this data type requires the installation to have been built with `configure --with-libxml`.
 
