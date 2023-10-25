@@ -12,7 +12,7 @@
     *   [24.2.2. Managing Collations](collation.html#COLLATION-MANAGING)
     *   [24.2.3. ICU Custom Collations](collation.html#ICU-CUSTOM-COLLATIONS)
 
-[]()
+
 
 The collation feature allows specifying the sort order and character classification behavior of data per-column, or even per-operation. This alleviates the restriction that the `LC_COLLATE` and `LC_CTYPE` settings of a database cannot be changed after its creation.
 
@@ -110,7 +110,7 @@ SELECT * FROM test1 ORDER BY a || b COLLATE "fr_FR";
 
 ### 24.2.2. Managing Collations [#](#COLLATION-MANAGING)
 
-A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation definition has a *provider* that specifies which library supplies the locale data. One standard provider name is `libc`, which uses the locales provided by the operating system C library. These are the locales used by most tools provided by the operating system. Another provider is `icu`, which uses the external ICU[]() library. ICU locales can only be used if support for ICU was configured when PostgreSQL was built.
+A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation definition has a *provider* that specifies which library supplies the locale data. One standard provider name is `libc`, which uses the locales provided by the operating system C library. These are the locales used by most tools provided by the operating system. Another provider is `icu`, which uses the external ICU library. ICU locales can only be used if support for ICU was configured when PostgreSQL was built.
 
 A collation object provided by `libc` maps to a combination of `LC_COLLATE` and `LC_CTYPE` settings, as accepted by the `setlocale()` system library call. (As the name would suggest, the main purpose of a collation is to set `LC_COLLATE`, which controls the sort order. But it is rarely necessary in practice to have an `LC_CTYPE` setting that is different from `LC_COLLATE`, so it is more convenient to collect these under one concept than to create another infrastructure for setting `LC_CTYPE` per expression.) Also, a `libc` collation is tied to a character set encoding (see [Section 24.3](multibyte.html "24.3. Character Set Support")). The same collation name may exist for different encodings.
 

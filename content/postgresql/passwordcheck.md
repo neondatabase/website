@@ -8,7 +8,7 @@
 
 ## F.25. passwordcheck — verify password strength [#](#PASSWORDCHECK)
 
-[]()
+
 
 The `passwordcheck` module checks users' passwords whenever they are set with [CREATE ROLE](sql-createrole.html "CREATE ROLE") or [ALTER ROLE](sql-alterrole.html "ALTER ROLE"). If a password is considered too weak, it will be rejected and the command will terminate with an error.
 

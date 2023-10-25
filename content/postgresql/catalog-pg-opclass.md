@@ -8,7 +8,7 @@
 
 ## 53.33. `pg_opclass` [#](#CATALOG-PG-OPCLASS)
 
-[]()
+
 
 The catalog `pg_opclass` defines index access method operator classes. Each operator class defines semantics for index columns of a particular data type and a particular index access method. An operator class essentially specifies that a particular operator family is applicable to a particular indexable column data type. The set of operators from the family that are actually usable with the indexed column are whichever ones accept the column's data type as their left-hand input.
 

@@ -8,7 +8,7 @@
 
 ## 21.5. Password Authentication [#](#AUTH-PASSWORD)
 
-[]()[]()[]()
+
 
 There are several password-based authentication methods. These methods operate similarly but differ in how the users' passwords are stored on the server and how the password provided by a client is sent across the connection.
 

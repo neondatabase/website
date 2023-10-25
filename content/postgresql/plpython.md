@@ -40,7 +40,7 @@
     *   [46.10. Python 2 vs. Python 3](plpython-python23.html)
     *   [46.11. Environment Variables](plpython-envar.html)
 
-[]()[]()
+
 
 The PL/Python procedural language allows PostgreSQL functions and procedures to be written in the [Python language](https://www.python.org).
 

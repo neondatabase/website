@@ -8,7 +8,7 @@
 
 ## 38.4. User-Defined Procedures [#](#XPROC)
 
-[]()
+
 
 A procedure is a database object similar to a function. The key differences are:
 
@@ -20,7 +20,7 @@ A procedure is a database object similar to a function. The key differences are:
 
 The explanations in the following sections about how to define user-defined functions apply to procedures as well, except for the points made above.
 
-Collectively, functions and procedures are also known as *routines*[](). There are commands such as [`ALTER ROUTINE`](sql-alterroutine.html "ALTER ROUTINE") and [`DROP ROUTINE`](sql-droproutine.html "DROP ROUTINE") that can operate on functions and procedures without having to know which kind it is. Note, however, that there is no `CREATE ROUTINE` command.
+Collectively, functions and procedures are also known as *routines*. There are commands such as [`ALTER ROUTINE`](sql-alterroutine.html "ALTER ROUTINE") and [`DROP ROUTINE`](sql-droproutine.html "DROP ROUTINE") that can operate on functions and procedures without having to know which kind it is. Note, however, that there is no `CREATE ROUTINE` command.
 
 ***
 

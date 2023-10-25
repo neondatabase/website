@@ -14,7 +14,7 @@
     *   [24.3.4. Available Character Set Conversions](multibyte.html#MULTIBYTE-CONVERSIONS-SUPPORTED)
     *   [24.3.5. Further Reading](multibyte.html#MULTIBYTE-FURTHER-READING)
 
-[]()
+
 
 The character set support in PostgreSQL allows you to store text in a variety of character sets (also called encodings), including single-byte character sets such as the ISO 8859 series and multiple-byte character sets such as EUC (Extended Unix Code), UTF-8, and Mule internal code. All supported character sets can be used transparently by clients, but a few are not supported for use within the server (that is, as a server-side encoding). The default character set is selected while initializing your PostgreSQL database cluster using `initdb`. It can be overridden when you create a database, so you can have multiple databases each with a different character set.
 

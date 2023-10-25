@@ -21,7 +21,7 @@
         *   [67.4.2. Bottom-up Index Deletion](btree-implementation.html#BTREE-DELETION)
         *   [67.4.3. Deduplication](btree-implementation.html#BTREE-DEDUPLICATION)
 
-[]()
+
 
 ***
 

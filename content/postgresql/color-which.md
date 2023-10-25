@@ -8,7 +8,7 @@
 
 ## N.2. Configuring the Colors [#](#COLOR-WHICH)
 
-The actual colors to be used are configured using the environment variable `PG_COLORS`[]() (note plural). The value is a colon-separated list of `key=value` pairs. The keys specify what the color is to be used for. The values are SGR (Select Graphic Rendition) specifications, which are interpreted by the terminal.
+The actual colors to be used are configured using the environment variable `PG_COLORS` (note plural). The value is a colon-separated list of `key=value` pairs. The keys specify what the color is to be used for. The values are SGR (Select Graphic Rendition) specifications, which are interpreted by the terminal.
 
 The following keys are currently in use:
 

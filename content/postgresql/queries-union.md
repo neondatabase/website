@@ -8,7 +8,7 @@
 
 ## 7.4. Combining Queries (`UNION`, `INTERSECT`, `EXCEPT`) [#](#QUERIES-UNION)
 
-[]()[]()[]()[]()[]()[]()[]()
+
 
 The results of two queries can be combined using the set operations union, intersection, and difference. The syntax is
 

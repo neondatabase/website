@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## CREATE FOREIGN TABLE
 
@@ -127,7 +127,7 @@ To be able to create a foreign table, you must have `USAGE` privilege on the for
 
     The default expression will be used in any insert operation that does not specify a value for the column. If there is no default for a column, then the default is null.
 
-*   `GENERATED ALWAYS AS ( generation_expr ) STORED`[]()
+*   `GENERATED ALWAYS AS ( generation_expr ) STORED`
 
     This clause creates the column as a *generated column*. The column cannot be written to, and when read the result of the specified expression will be returned.
 

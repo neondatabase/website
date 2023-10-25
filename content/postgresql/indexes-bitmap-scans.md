@@ -8,7 +8,7 @@
 
 ## 11.5. Combining Multiple Indexes [#](#INDEXES-BITMAP-SCANS)
 
-[]()[]()
+
 
 A single index scan can only use query clauses that use the index's columns with operators of its operator class and are joined with `AND`. For example, given an index on `(a, b)` a query condition like `WHERE a = 5 AND b = 6` could use the index, but a query like `WHERE a = 5 OR b = 6` could not directly use the index.
 

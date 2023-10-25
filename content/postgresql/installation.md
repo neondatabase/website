@@ -43,7 +43,7 @@
         *   [17.7.4. MinGW/Native Windows](installation-platform-notes.html#INSTALLATION-NOTES-MINGW)
         *   [17.7.5. Solaris](installation-platform-notes.html#INSTALLATION-NOTES-SOLARIS)
 
-[]()
+
 
 This chapter describes the installation of PostgreSQL using the source code distribution. If you are installing a pre-packaged distribution, such as an RPM or Debian package, ignore this chapter and see [Chapter 16](install-binaries.html "Chapter 16. Installation from Binaries") instead.
 

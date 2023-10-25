@@ -8,7 +8,7 @@
 
 ## 14.3. Controlling the Planner with Explicit `JOIN` Clauses [#](#EXPLICIT-JOINS)
 
-[]()
+
 
 It is possible to control the query planner to some extent by using the explicit `JOIN` syntax. To see why this matters, we first need some background.
 

@@ -8,7 +8,7 @@
 
 ## 53.51. `pg_statistic` [#](#CATALOG-PG-STATISTIC)
 
-[]()
+
 
 The catalog `pg_statistic` stores statistical data about the contents of the database. Entries are created by [`ANALYZE`](sql-analyze.html "ANALYZE") and subsequently used by the query planner. Note that all the statistical data is inherently approximate, even assuming that it is up-to-date.
 

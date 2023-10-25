@@ -11,7 +11,7 @@
 *   *   [73.2.1. Out-of-Line, On-Disk TOAST Storage](storage-toast.html#STORAGE-TOAST-ONDISK)
     *   [73.2.2. Out-of-Line, In-Memory TOAST Storage](storage-toast.html#STORAGE-TOAST-INMEMORY)
 
-[]()[]()
+
 
 This section provides an overview of TOAST (The Oversized-Attribute Storage Technique).
 

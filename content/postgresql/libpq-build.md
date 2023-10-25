@@ -8,7 +8,7 @@
 
 ## 34.21. Building libpq Programs [#](#LIBPQ-BUILD)
 
-[]()
+
 
 To build (i.e., compile and link) a program using libpq you need to do all of the following things:
 
@@ -45,7 +45,7 @@ To build (i.e., compile and link) a program using libpq you need to do all of th
     CPPFLAGS += -I/usr/local/pgsql/include
     ```
 
-    If there is any chance that your program might be compiled by other users then you should not hardcode the directory location like that. Instead, you can run the utility `pg_config`[]() to find out where the header files are on the local system:
+    If there is any chance that your program might be compiled by other users then you should not hardcode the directory location like that. Instead, you can run the utility `pg_config` to find out where the header files are on the local system:
 
     ```
 
@@ -53,7 +53,7 @@ To build (i.e., compile and link) a program using libpq you need to do all of th
     /usr/local/include
     ```
 
-    If you have `pkg-config`[]() installed, you can run instead:
+    If you have `pkg-config` installed, you can run instead:
 
     ```
 

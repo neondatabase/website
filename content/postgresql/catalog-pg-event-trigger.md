@@ -8,7 +8,7 @@
 
 ## 53.21. `pg_event_trigger` [#](#CATALOG-PG-EVENT-TRIGGER)
 
-[]()
+
 
 The catalog `pg_event_trigger` stores event triggers. See [Chapter 40](event-triggers.html "Chapter 40. Event Triggers") for more information.
 

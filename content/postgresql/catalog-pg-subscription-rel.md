@@ -8,7 +8,7 @@
 
 ## 53.55. `pg_subscription_rel` [#](#CATALOG-PG-SUBSCRIPTION-REL)
 
-[]()
+
 
 The catalog `pg_subscription_rel` contains the state for each replicated relation in each subscription. This is a many-to-many mapping.
 

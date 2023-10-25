@@ -13,7 +13,7 @@
     *   [F.22.3. Limitations](lo.html#LO-LIMITATIONS)
     *   [F.22.4. Author](lo.html#LO-AUTHOR)
 
-[]()
+
 
 The `lo` module provides support for managing Large Objects (also called LOs or BLOBs). This includes a data type `lo` and a trigger `lo_manage`.
 

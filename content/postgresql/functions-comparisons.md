@@ -15,7 +15,7 @@
     *   [9.24.5. Row Constructor Comparison](functions-comparisons.html#ROW-WISE-COMPARISON)
     *   [9.24.6. Composite Type Comparison](functions-comparisons.html#COMPOSITE-TYPE-COMPARISON)
 
-[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()
+
 
 This section describes several specialized constructs for making multiple comparisons between groups of values. These forms are syntactically related to the subquery forms of the previous section, but do not involve subqueries. The forms involving array subexpressions are PostgreSQL extensions; the rest are SQL-compliant. All of the expression forms documented in this section return Boolean (true/false) results.
 

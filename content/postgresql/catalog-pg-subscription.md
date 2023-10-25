@@ -8,7 +8,7 @@
 
 ## 53.54. `pg_subscription` [#](#CATALOG-PG-SUBSCRIPTION)
 
-[]()
+
 
 The catalog `pg_subscription` contains all existing logical replication subscriptions. For more information about logical replication see [Chapter 31](logical-replication.html "Chapter 31. Logical Replication").
 

@@ -328,7 +328,7 @@ Note that `RECORD` is not a true data type, only a placeholder. One should also 
 
 ### 43.3.6. Collation of PL/pgSQL Variables [#](#PLPGSQL-DECLARATION-COLLATION)
 
-[]()
+
 
 When a PL/pgSQL function has one or more parameters of collatable data types, a collation is identified for each function call depending on the collations assigned to the actual arguments, as described in [Section 24.2](collation.html "24.2. Collation Support"). If a collation is successfully identified (i.e., there are no conflicts of implicit collations among the arguments) then all the collatable parameters are treated as having that collation implicitly. This will affect the behavior of collation-sensitive operations within the function. For example, consider
 

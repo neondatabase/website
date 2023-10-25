@@ -16,7 +16,7 @@
     *   [F.34.6. References](pgtrgm.html#PGTRGM-REFERENCES)
     *   [F.34.7. Authors](pgtrgm.html#PGTRGM-AUTHORS)
 
-[]()
+
 
 The `pg_trgm` module provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, as well as index operator classes that support fast searching for similar strings.
 
@@ -38,12 +38,12 @@ The functions provided by the `pg_trgm` module are shown in [Table F.26](pgtrgm
 
 | FunctionDescription                                                                                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| []()`similarity` ( `text`, `text` ) → `real`Returns a number that indicates how similar the two arguments are. The range of the result is zero (indicating that the two strings are completely dissimilar) to one (indicating that the two strings are identical).                                                  |
-| []()`show_trgm` ( `text` ) → `text[]`Returns an array of all the trigrams in the given string. (In practice this is seldom useful except for debugging.)                                                                                                                                                            |
-| []()`word_similarity` ( `text`, `text` ) → `real`Returns a number that indicates the greatest similarity between the set of trigrams in the first string and any continuous extent of an ordered set of trigrams in the second string. For details, see the explanation below.                                      |
-| []()`strict_word_similarity` ( `text`, `text` ) → `real`Same as `word_similarity`, but forces extent boundaries to match word boundaries. Since we don't have cross-word trigrams, this function actually returns greatest similarity between first string and any continuous extent of words of the second string. |
-| []()`show_limit` () → `real`Returns the current similarity threshold used by the `%` operator. This sets the minimum similarity between two words for them to be considered similar enough to be misspellings of each other, for example. (*Deprecated*; instead use `SHOW` `pg_trgm.similarity_threshold`.)        |
-| []()`set_limit` ( `real` ) → `real`Sets the current similarity threshold that is used by the `%` operator. The threshold must be between 0 and 1 (default is 0.3). Returns the same value passed in. (*Deprecated*; instead use `SET` `pg_trgm.similarity_threshold`.)                                              |
+| `similarity` ( `text`, `text` ) → `real`Returns a number that indicates how similar the two arguments are. The range of the result is zero (indicating that the two strings are completely dissimilar) to one (indicating that the two strings are identical).                                                  |
+| `show_trgm` ( `text` ) → `text[]`Returns an array of all the trigrams in the given string. (In practice this is seldom useful except for debugging.)                                                                                                                                                            |
+| `word_similarity` ( `text`, `text` ) → `real`Returns a number that indicates the greatest similarity between the set of trigrams in the first string and any continuous extent of an ordered set of trigrams in the second string. For details, see the explanation below.                                      |
+| `strict_word_similarity` ( `text`, `text` ) → `real`Same as `word_similarity`, but forces extent boundaries to match word boundaries. Since we don't have cross-word trigrams, this function actually returns greatest similarity between first string and any continuous extent of words of the second string. |
+| `show_limit` () → `real`Returns the current similarity threshold used by the `%` operator. This sets the minimum similarity between two words for them to be considered similar enough to be misspellings of each other, for example. (*Deprecated*; instead use `SHOW` `pg_trgm.similarity_threshold`.)        |
+| `set_limit` ( `real` ) → `real`Sets the current similarity threshold that is used by the `%` operator. The threshold must be between 0 and 1 (default is 0.3). Returns the same value passed in. (*Deprecated*; instead use `SET` `pg_trgm.similarity_threshold`.)                                              |
 
 \
 
@@ -93,15 +93,15 @@ Thus, the `strict_word_similarity` function is useful for finding the similarity
 
 ### F.34.3. GUC Parameters [#](#PGTRGM-GUC)
 
-*   `pg_trgm.similarity_threshold` (`real`) []()[#](#GUC-PGTRGM-SIMILARITY-THRESHOLD)
+*   `pg_trgm.similarity_threshold` (`real`) [#](#GUC-PGTRGM-SIMILARITY-THRESHOLD)
 
     Sets the current similarity threshold that is used by the `%` operator. The threshold must be between 0 and 1 (default is 0.3).
 
-*   `pg_trgm.word_similarity_threshold` (`real`) []()[#](#GUC-PGTRGM-WORD-SIMILARITY-THRESHOLD)
+*   `pg_trgm.word_similarity_threshold` (`real`) [#](#GUC-PGTRGM-WORD-SIMILARITY-THRESHOLD)
 
     Sets the current word similarity threshold that is used by the `<%` and `%>` operators. The threshold must be between 0 and 1 (default is 0.6).
 
-*   `pg_trgm.strict_word_similarity_threshold` (`real`) []()[#](#GUC-PGTRGM-STRICT-WORD-SIMILARITY-THRESHOLD)
+*   `pg_trgm.strict_word_similarity_threshold` (`real`) [#](#GUC-PGTRGM-STRICT-WORD-SIMILARITY-THRESHOLD)
 
     Sets the current strict word similarity threshold that is used by the `<<%` and `%>>` operators. The threshold must be between 0 and 1 (default is 0.5).
 

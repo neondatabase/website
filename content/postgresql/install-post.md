@@ -13,7 +13,7 @@
 
 ### 17.5.1. Shared Libraries [#](#INSTALL-POST-SHLIBS)
 
-[]()
+
 
 On some systems with shared libraries you need to tell the system how to find the newly installed shared libraries. The systems on which this is *not* necessary include FreeBSD, Linux, NetBSD, OpenBSD, and Solaris.
 
@@ -48,7 +48,7 @@ libpq.so.2.1: cannot open shared object file: No such file or directory
 
 then this step was necessary. Simply take care of it then.
 
-[]()If you are on Linux and you have root access, you can run:
+If you are on Linux and you have root access, you can run:
 
 ```
 
@@ -66,7 +66,7 @@ instead. Other systems are not known to have an equivalent command.
 
 ### 17.5.2. Environment Variables [#](#INSTALL-POST-ENV-VARS)
 
-[]()
+
 
 If you installed into `/usr/local/pgsql` or some other location that is not searched for programs by default, you should add `/usr/local/pgsql/bin` (or whatever you set `--bindir` to in [Step 1](install-make.html#CONFIGURE "Configuration")) into your `PATH`. Strictly speaking, this is not necessary, but it will make the use of PostgreSQL much more convenient.
 
@@ -85,7 +85,7 @@ If you are using `csh` or `tcsh`, then use this command:
 set path = ( /usr/local/pgsql/bin $path )
 ```
 
-[]()To enable your system to find the man documentation, you need to add lines like the following to a shell start-up file unless you installed into a location that is searched by default:
+To enable your system to find the man documentation, you need to add lines like the following to a shell start-up file unless you installed into a location that is searched by default:
 
 ```
 

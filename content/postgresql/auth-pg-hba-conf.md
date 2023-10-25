@@ -8,7 +8,7 @@
 
 ## 21.1. The `pg_hba.conf` File [#](#AUTH-PG-HBA-CONF)
 
-[]()
+
 
 Client authentication is controlled by a configuration file, which traditionally is named `pg_hba.conf` and is stored in the database cluster's data directory. (HBA stands for host-based authentication.) A default `pg_hba.conf` file is installed when the data directory is initialized by [initdb](app-initdb.html "initdb"). It is possible to place the authentication configuration file elsewhere, however; see the [hba\_file](runtime-config-file-locations.html#GUC-HBA-FILE) configuration parameter.
 
@@ -213,7 +213,7 @@ Files included by `@` constructs are read as lists of names, which can be separa
 
 Since the `pg_hba.conf` records are examined sequentially for each connection attempt, the order of the records is significant. Typically, earlier records will have tight connection match parameters and weaker authentication methods, while later records will have looser match parameters and stronger authentication methods. For example, one might wish to use `trust` authentication for local TCP/IP connections but require a password for remote TCP/IP connections. In this case a record specifying `trust` authentication for connections from 127.0.0.1 would appear before a record specifying password authentication for a wider range of allowed client IP addresses.
 
-The `pg_hba.conf` file is read on start-up and when the main server process receives a SIGHUP[]() signal. If you edit the file on an active system, you will need to signal the postmaster (using `pg_ctl reload`, calling the SQL function `pg_reload_conf()`, or using `kill -HUP`) to make it re-read the file.
+The `pg_hba.conf` file is read on start-up and when the main server process receives a SIGHUP signal. If you edit the file on an active system, you will need to signal the postmaster (using `pg_ctl reload`, calling the SQL function `pg_reload_conf()`, or using `kill -HUP`) to make it re-read the file.
 
 ### Note
 

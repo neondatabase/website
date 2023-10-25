@@ -8,7 +8,7 @@
 
 ## 40.3. Writing Event Trigger Functions in C [#](#EVENT-TRIGGER-INTERFACE)
 
-[]()
+
 
 This section describes the low-level details of the interface to an event trigger function. This information is only needed when writing event trigger functions in C. If you are using a higher-level language then these details are handled for you. In most cases you should consider using a procedural language before writing your event triggers in C. The documentation of each procedural language explains how to write an event trigger in that language.
 

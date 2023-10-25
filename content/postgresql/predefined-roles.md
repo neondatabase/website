@@ -8,7 +8,7 @@
 
 ## 22.5. Predefined Roles [#](#PREDEFINED-ROLES)
 
-[]()
+
 
 PostgreSQL provides a set of predefined roles that provide access to certain, commonly needed, privileged capabilities and information. Administrators (including roles that have the `CREATEROLE` privilege) can `GRANT` these roles to users and/or other roles in their environment, providing those users with access to the specified capabilities and information.
 

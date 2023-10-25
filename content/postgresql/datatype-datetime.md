@@ -14,7 +14,7 @@
     *   [8.5.4. Interval Input](datatype-datetime.html#DATATYPE-INTERVAL-INPUT)
     *   [8.5.5. Interval Output](datatype-datetime.html#DATATYPE-INTERVAL-OUTPUT)
 
-[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()
+
 
 PostgreSQL supports the full set of SQL date and time types, shown in [Table 8.9](datatype-datetime.html#DATATYPE-DATETIME-TABLE "Table 8.9. Date/Time Types"). The operations available on these data types are described in [Section 9.9](functions-datetime.html "9.9. Date/Time Functions and Operators"). Dates are counted according to the Gregorian calendar, even in years before that calendar was introduced (see [Section B.6](datetime-units-history.html "B.6. History of Units") for more information).
 
@@ -78,7 +78,7 @@ where *`p`* is an optional precision specification giving the number of fraction
 
 #### 8.5.1.1. Dates [#](#DATATYPE-DATETIME-INPUT-DATES)
 
-[]()
+
 
 [Table 8.10](datatype-datetime.html#DATATYPE-DATETIME-DATE-TABLE "Table 8.10. Date Input") shows some possible inputs for the `date` type.
 
@@ -105,7 +105,7 @@ where *`p`* is an optional precision specification giving the number of fraction
 
 #### 8.5.1.2. Times [#](#DATATYPE-DATETIME-INPUT-TIMES)
 
-[]()[]()[]()
+
 
 The time-of-day types are `time [ (p) ] without time zone` and `time [ (p) ] with time zone`. `time` alone is equivalent to `time without time zone`.
 
@@ -154,7 +154,7 @@ Refer to [Section 8.5.3](datatype-datetime.html#DATATYPE-TIMEZONES "8.5.3. Tim
 
 #### 8.5.1.3. Time Stamps [#](#DATATYPE-DATETIME-INPUT-TIME-STAMPS)
 
-[]()[]()[]()
+
 
 Valid input for the time stamp types consists of the concatenation of a date and a time, followed by an optional time zone, followed by an optional `AD` or `BC`. (Alternatively, `AD`/`BC` can appear before the time zone, but this is not the preferred ordering.) Thus:
 
@@ -210,7 +210,7 @@ Conversions between `timestamp without time zone` and `timestamp with time zone`
 
 #### 8.5.1.4. Special Values [#](#DATATYPE-DATETIME-SPECIAL-VALUES)
 
-[]()[]()
+
 
 PostgreSQL supports several special date/time input values for convenience, as shown in [Table 8.13](datatype-datetime.html#DATATYPE-DATETIME-SPECIAL-TABLE "Table 8.13. Special Date/Time Inputs"). The values `infinity` and `-infinity` are specially represented inside the system and will be displayed unchanged; but the others are simply notational shorthands that will be converted to ordinary date/time values when read. (In particular, `now` and related strings are converted to a specific time value as soon as they are read.) All of these values need to be enclosed in single quotes when used as constants in SQL commands.
 
@@ -238,7 +238,7 @@ While the input strings `now`, `today`, `tomorrow`, and `yesterday` are fine to 
 
 ### 8.5.2. Date/Time Output [#](#DATATYPE-DATETIME-OUTPUT)
 
-[]()[]()
+
 
 The output format of the date/time types can be set to one of the four styles ISO 8601, SQL (Ingres), traditional POSTGRES (Unix date format), or German. The default is the ISO format. (The SQL standard requires the use of the ISO 8601 format. The name of the “SQL” output format is a historical accident.) [Table 8.14](datatype-datetime.html#DATATYPE-DATETIME-OUTPUT-TABLE "Table 8.14. Date/Time Output Styles") shows examples of each output style. The output of the `date` and `time` types is generally only the date or time part in accordance with the given examples. However, the POSTGRES style outputs date-only values in ISO format.
 
@@ -279,7 +279,7 @@ The formatting function `to_char` (see [Section 9.8](functions-formatting.html 
 
 ### 8.5.3. Time Zones [#](#DATATYPE-TIMEZONES)
 
-[]()
+
 
 Time zones, and time-zone conventions, are influenced by political decisions, not just earth geometry. Time zones around the world became somewhat standardized during the 1900s, but continue to be prone to arbitrary changes, particularly with respect to daylight-savings rules. PostgreSQL uses the widely-used IANA (Olson) time zone database for information about historical time zone rules. For times in the future, the assumption is that the latest known rules for a given time zone will continue to be observed indefinitely far into the future.
 
@@ -313,7 +313,7 @@ The [TimeZone](runtime-config-client.html#GUC-TIMEZONE) configuration parameter 
 
 ### 8.5.4. Interval Input [#](#DATATYPE-INTERVAL-INPUT)
 
-[]()
+
 
 `interval` values can be written using the following verbose syntax:
 
@@ -399,7 +399,7 @@ Functions `justify_days` and `justify_hours` are available for adjusting days an
 
 ### 8.5.5. Interval Output [#](#DATATYPE-INTERVAL-OUTPUT)
 
-[]()
+
 
 The output format of the interval type can be set to one of the four styles `sql_standard`, `postgres`, `postgres_verbose`, or `iso_8601`, using the command `SET intervalstyle`. The default is the `postgres` format. [Table 8.18](datatype-datetime.html#INTERVAL-STYLE-OUTPUT-TABLE "Table 8.18. Interval Output Style Examples") shows examples of each output style.
 

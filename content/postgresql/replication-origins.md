@@ -8,7 +8,7 @@
 
 ## Chapter 50. Replication Progress Tracking
 
-[]()[]()
+
 
 Replication origins are intended to make it easier to implement logical replication solutions on top of [logical decoding](logicaldecoding.html "Chapter 49. Logical Decoding"). They provide a solution to two common problems:
 

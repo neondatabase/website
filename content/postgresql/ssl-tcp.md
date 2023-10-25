@@ -14,7 +14,7 @@
     *   [19.9.4. SSL Server File Usage](ssl-tcp.html#SSL-SERVER-FILES)
     *   [19.9.5. Creating Certificates](ssl-tcp.html#SSL-CERTIFICATE-CREATION)
 
-[]()
+
 
 PostgreSQL has native support for using SSL connections to encrypt client/server communications for increased security. This requires that OpenSSL is installed on both client and server systems and that support in PostgreSQL is enabled at build time (see [Chapter 17](installation.html "Chapter 17. Installation from Source Code")).
 

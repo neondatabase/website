@@ -8,7 +8,7 @@
 
 ## 53.10. `pg_cast` [#](#CATALOG-PG-CAST)
 
-[]()
+
 
 The catalog `pg_cast` stores data type conversion paths, both built-in and user-defined.
 

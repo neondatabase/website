@@ -8,7 +8,7 @@
 
 ## 46.5. Trigger Functions [#](#PLPYTHON-TRIGGER)
 
-[]()
+
 
 When a function is used as a trigger, the dictionary `TD` contains trigger-related values:
 

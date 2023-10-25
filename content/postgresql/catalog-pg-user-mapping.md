@@ -8,7 +8,7 @@
 
 ## 53.65. `pg_user_mapping` [#](#CATALOG-PG-USER-MAPPING)
 
-[]()
+
 
 The catalog `pg_user_mapping` stores the mappings from local user to remote. Access to this catalog is restricted from normal users, use the view [`pg_user_mappings`](view-pg-user-mappings.html "54.34. pg_user_mappings") instead.
 

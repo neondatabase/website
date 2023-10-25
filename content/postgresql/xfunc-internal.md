@@ -8,7 +8,7 @@
 
 ## 38.9. Internal Functions [#](#XFUNC-INTERNAL)
 
-[]()
+
 
 Internal functions are functions written in C that have been statically linked into the PostgreSQL server. The “body” of the function definition specifies the C-language name of the function, which need not be the same as the name being declared for SQL use. (For reasons of backward compatibility, an empty body is accepted as meaning that the C-language function name is the same as the SQL name.)
 

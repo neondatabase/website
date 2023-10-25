@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## CREATE MATERIALIZED VIEW
 

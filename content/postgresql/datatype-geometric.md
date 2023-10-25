@@ -38,7 +38,7 @@ A rich set of functions and operators is available to perform various geometric 
 
 ### 8.8.1. Points [#](#DATATYPE-GEOMETRIC-POINTS)
 
-[]()
+
 
 Points are the fundamental two-dimensional building block for geometric types. Values of type `point` are specified using either of the following syntaxes:
 
@@ -54,7 +54,7 @@ Points are output using the first syntax.
 
 ### 8.8.2. Lines [#](#DATATYPE-LINE)
 
-[]()
+
 
 Lines are represented by the linear equation *`A`*x + *`B`*y + *`C`* = 0, where *`A`* and *`B`* are not both zero. Values of type `line` are input and output in the following form:
 
@@ -77,7 +77,7 @@ where `(x1,y1)` and `(x2,y2)` are two different points on the line.
 
 ### 8.8.3. Line Segments [#](#DATATYPE-LSEG)
 
-[]()[]()
+
 
 Line segments are represented by pairs of points that are the endpoints of the segment. Values of type `lseg` are specified using any of the following syntaxes:
 
@@ -95,7 +95,7 @@ Line segments are output using the first syntax.
 
 ### 8.8.4. Boxes [#](#DATATYPE-GEOMETRIC-BOXES)
 
-[]()[]()
+
 
 Boxes are represented by pairs of points that are opposite corners of the box. Values of type `box` are specified using any of the following syntaxes:
 
@@ -114,7 +114,7 @@ Any two opposite corners can be supplied on input, but the values will be reorde
 
 ### 8.8.5. Paths [#](#DATATYPE-GEOMETRIC-PATHS)
 
-[]()
+
 
 Paths are represented by lists of connected points. Paths can be *open*, where the first and last points in the list are considered not connected, or *closed*, where the first and last points are considered connected.
 
@@ -135,7 +135,7 @@ Paths are output using the first or second syntax, as appropriate.
 
 ### 8.8.6. Polygons [#](#DATATYPE-POLYGON)
 
-[]()
+
 
 Polygons are represented by lists of points (the vertexes of the polygon). Polygons are very similar to closed paths; the essential difference is that a polygon is considered to include the area within it, while a path is not.
 
@@ -155,7 +155,7 @@ Polygons are output using the first syntax.
 
 ### 8.8.7. Circles [#](#DATATYPE-CIRCLE)
 
-[]()
+
 
 Circles are represented by a center point and radius. Values of type `circle` are specified using any of the following syntaxes:
 

@@ -30,7 +30,7 @@
     *   *   [45.8.1. Configuration](plperl-under-the-hood.html#PLPERL-CONFIG)
         *   [45.8.2. Limitations and Missing Features](plperl-under-the-hood.html#PLPERL-MISSING)
 
-[]()[]()
+
 
 PL/Perl is a loadable procedural language that enables you to write PostgreSQL functions and procedures in the [Perl programming language](https://www.perl.org).
 

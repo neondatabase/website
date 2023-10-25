@@ -8,7 +8,7 @@
 
 ## 53.2. `pg_aggregate` [#](#CATALOG-PG-AGGREGATE)
 
-[]()
+
 
 The catalog `pg_aggregate` stores information about aggregate functions. An aggregate function is a function that operates on a set of values (typically one column from each row that matches a query condition) and returns a single value computed from all these values. Typical aggregate functions are `sum`, `count`, and `max`. Each entry in `pg_aggregate` is an extension of an entry in [`pg_proc`](catalog-pg-proc.html "53.39. pg_proc"). The `pg_proc` entry carries the aggregate's name, input and output data types, and other information that is similar to ordinary functions.
 

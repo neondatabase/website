@@ -11,7 +11,7 @@
 *   *   [F.42.1. Functions Provided](tablefunc.html#TABLEFUNC-FUNCTIONS-SECT)
     *   [F.42.2. Author](tablefunc.html#TABLEFUNC-AUTHOR)
 
-[]()
+
 
 The `tablefunc` module includes various functions that return tables (that is, multiple rows). These functions are useful both in their own right and as examples of how to write C functions that return multiple rows.
 
@@ -30,14 +30,14 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 | `crosstabN` ( *`sql`* `text` ) → `setof table_crosstab_N`Produces a “pivot table” containing row names plus *`N`* value columns. `crosstab2`, `crosstab3`, and `crosstab4` are predefined, but you can create additional `crosstabN` functions as described below.               |
 | `crosstab` ( *`source_sql`* `text`, *`category_sql`* `text` ) → `setof record`Produces a “pivot table” with the value columns specified by a second query.                                                                                                                       |
 | `crosstab` ( *`sql`* `text`, *`N`* `integer` ) → `setof record`Obsolete version of `crosstab(text)`. The parameter *`N`* is now ignored, since the number of value columns is always determined by the calling query.                                                            |
-| []()`connectby` ( *`relname`* `text`, *`keyid_fld`* `text`, *`parent_keyid_fld`* `text` \[, *`orderby_fld`* `text` ], *`start_with`* `text`, *`max_depth`* `integer` \[, *`branch_delim`* `text` ] ) → `setof record`Produces a representation of a hierarchical tree structure. |
+| `connectby` ( *`relname`* `text`, *`keyid_fld`* `text`, *`parent_keyid_fld`* `text` \[, *`orderby_fld`* `text` ], *`start_with`* `text`, *`max_depth`* `integer` \[, *`branch_delim`* `text` ] ) → `setof record`Produces a representation of a hierarchical tree structure. |
 
 \
 
 
 #### F.42.1.1. `normal_rand` [#](#TABLEFUNC-FUNCTIONS-NORMAL-RAND)
 
-[]()
+
 
 ```
 
@@ -71,7 +71,7 @@ test=# SELECT * FROM normal_rand(1000, 5, 3);
 
 #### F.42.1.2. `crosstab(text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT)
 
-[]()
+
 
 ```
 
@@ -183,7 +183,7 @@ See also the `\crosstabview` command in psql, which provides functionality simil
 
 #### F.42.1.3. `crosstabN(text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-N-TEXT)
 
-[]()
+
 
 ```
 
@@ -257,7 +257,7 @@ These functions are provided mostly for illustration purposes. You can create yo
 
 #### F.42.1.4. `crosstab(text, text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT-2)
 
-[]()
+
 
 ```
 
@@ -396,7 +396,7 @@ You can create predefined functions to avoid having to write out the result colu
 
 #### F.42.1.5. `connectby` [#](#TABLEFUNC-FUNCTIONS-CONNECTBY)
 
-[]()
+
 
 ```
 

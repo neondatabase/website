@@ -29,7 +29,7 @@
         *   [26.3.6. Tips and Examples](continuous-archiving.html#BACKUP-TIPS)
         *   [26.3.7. Caveats](continuous-archiving.html#CONTINUOUS-ARCHIVING-CAVEATS)
 
-[]()
+
 
 As with everything that contains valuable data, PostgreSQL databases should be backed up regularly. While the procedure is essentially simple, it is important to have a clear understanding of the underlying techniques and assumptions.
 

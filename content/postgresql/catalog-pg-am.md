@@ -8,7 +8,7 @@
 
 ## 53.3. `pg_am` [#](#CATALOG-PG-AM)
 
-[]()
+
 
 The catalog `pg_am` stores information about relation access methods. There is one row for each access method supported by the system. Currently, only tables and indexes have access methods. The requirements for table and index access methods are discussed in detail in [Chapter 63](tableam.html "Chapter 63. Table Access Method Interface Definition") and [Chapter 64](indexam.html "Chapter 64. Index Access Method Interface Definition") respectively.
 

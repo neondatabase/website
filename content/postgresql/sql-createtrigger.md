@@ -6,7 +6,7 @@
 
 ***
 
-[]()[]()
+
 
 ## CREATE TRIGGER
 
@@ -62,7 +62,7 @@ Also, a trigger definition can specify a Boolean `WHEN` condition, which will be
 
 If multiple triggers of the same kind are defined for the same event, they will be fired in alphabetical order by name.
 
-When the `CONSTRAINT` option is specified, this command creates a *constraint trigger*.[]() This is the same as a regular trigger except that the timing of the trigger firing can be adjusted using [`SET CONSTRAINTS`](sql-set-constraints.html "SET CONSTRAINTS"). Constraint triggers must be `AFTER ROW` triggers on plain tables (not foreign tables). They can be fired either at the end of the statement causing the triggering event, or at the end of the containing transaction; in the latter case they are said to be *deferred*. A pending deferred-trigger firing can also be forced to happen immediately by using `SET CONSTRAINTS`. Constraint triggers are expected to raise an exception when the constraints they implement are violated.
+When the `CONSTRAINT` option is specified, this command creates a *constraint trigger*. This is the same as a regular trigger except that the timing of the trigger firing can be adjusted using [`SET CONSTRAINTS`](sql-set-constraints.html "SET CONSTRAINTS"). Constraint triggers must be `AFTER ROW` triggers on plain tables (not foreign tables). They can be fired either at the end of the statement causing the triggering event, or at the end of the containing transaction; in the latter case they are said to be *deferred*. A pending deferred-trigger firing can also be forced to happen immediately by using `SET CONSTRAINTS`. Constraint triggers are expected to raise an exception when the constraints they implement are violated.
 
 The `REFERENCING` option enables collection of *transition relations*, which are row sets that include all of the rows inserted, deleted, or modified by the current SQL statement. This feature lets the trigger see a global view of what the statement did, not just one row at a time. This option is only allowed for an `AFTER` trigger that is not a constraint trigger; also, if the trigger is an `UPDATE` trigger, it must not specify a *`column_name`* list. `OLD TABLE` may only be specified once, and only for a trigger that can fire on `UPDATE` or `DELETE`; it creates a transition relation containing the *before-images* of all rows updated or deleted by the statement. Similarly, `NEW TABLE` may only be specified once, and only for a trigger that can fire on `UPDATE` or `INSERT`; it creates a transition relation containing the *after-images* of all rows updated or inserted by the statement.
 

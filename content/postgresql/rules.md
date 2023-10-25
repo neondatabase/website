@@ -32,7 +32,7 @@
     *   [41.6. Rules and Command Status](rules-status.html)
     *   [41.7. Rules Versus Triggers](rules-triggers.html)
 
-[]()
+
 
 This chapter discusses the rule system in PostgreSQL. Production rule systems are conceptually simple, but there are many subtle points involved in actually using them.
 

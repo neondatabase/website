@@ -8,7 +8,7 @@
 
 ## 53.63. `pg_ts_template` [#](#CATALOG-PG-TS-TEMPLATE)
 
-[]()
+
 
 The `pg_ts_template` catalog contains entries defining text search templates. A template is the implementation skeleton for a class of text search dictionaries. Since a template must be implemented by C-language-level functions, creation of new templates is restricted to database superusers.
 

@@ -8,7 +8,7 @@
 
 ## 11.4. Indexes and `ORDER BY` [#](#INDEXES-ORDERING)
 
-[]()
+
 
 In addition to simply finding the rows to be returned by a query, an index may be able to deliver them in a specific sorted order. This allows a query's `ORDER BY` specification to be honored without a separate sorting step. Of the index types currently supported by PostgreSQL, only B-tree can produce sorted output — the other index types return matching rows in an unspecified, implementation-dependent order.
 

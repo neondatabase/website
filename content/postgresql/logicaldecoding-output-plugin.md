@@ -18,7 +18,7 @@ An example output plugin can be found in the [`contrib/test_decoding` ](test-dec
 
 ### 49.6.1. Initialization Function [#](#LOGICALDECODING-OUTPUT-INIT)
 
-[]()
+
 
 An output plugin is loaded by dynamically loading a shared library with the output plugin's name as the library base name. The normal library search path is used to locate the library. To provide the required output plugin callbacks and to indicate that the library is actually an output plugin it needs to provide a function named `_PG_output_plugin_init`. This function is passed a struct that needs to be filled with the callback function pointers for individual actions.
 

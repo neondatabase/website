@@ -14,7 +14,7 @@
     *   [F.17.4. Metaphone](fuzzystrmatch.html#FUZZYSTRMATCH-METAPHONE)
     *   [F.17.5. Double Metaphone](fuzzystrmatch.html#FUZZYSTRMATCH-DOUBLE-METAPHONE)
 
-[]()
+
 
 The `fuzzystrmatch` module provides several functions to determine similarities and distance between strings.
 
@@ -30,7 +30,7 @@ The Soundex system is a method of matching similar-sounding names by converting 
 
 The `fuzzystrmatch` module provides two functions for working with Soundex codes:
 
-[]()[]()
+
 
 ```
 
@@ -71,7 +71,7 @@ Like the original Soundex system, Daitch-Mokotoff Soundex matches similar-soundi
 *   Where two consecutive letters have a single sound, they are coded as a single number.
 *   When a letter or combination of letters may have different sounds, multiple codes are emitted to cover all possibilities.
 
-[]()
+
 
 This function generates the Daitch-Mokotoff soundex codes for its input:
 
@@ -168,7 +168,7 @@ If it is desired to avoid recalculation of soundex codes during index rechecks, 
 
 This function calculates the Levenshtein distance between two strings:
 
-[]()[]()
+
 
 ```
 
@@ -217,7 +217,7 @@ Metaphone, like Soundex, is based on the idea of constructing a representative c
 
 This function calculates the metaphone code of an input string:
 
-[]()
+
 
 ```
 
@@ -241,7 +241,7 @@ test=# SELECT metaphone('GUMBO', 4);
 
 The Double Metaphone system computes two “sounds like” strings for a given input string — a “primary” and an “alternate”. In most cases they are the same, but for non-English names especially they can be a bit different, depending on pronunciation. These functions compute the primary and alternate codes:
 
-[]()[]()
+
 
 ```
 

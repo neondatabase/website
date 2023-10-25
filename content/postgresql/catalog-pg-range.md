@@ -8,7 +8,7 @@
 
 ## 53.43. `pg_range` [#](#CATALOG-PG-RANGE)
 
-[]()
+
 
 The catalog `pg_range` stores information about range types. This is in addition to the types' entries in [`pg_type`](catalog-pg-type.html "53.64. pg_type").
 

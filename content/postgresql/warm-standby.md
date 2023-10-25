@@ -28,7 +28,7 @@ It should be noted that log shipping is asynchronous, i.e., the WAL records are 
 
 Recovery performance is sufficiently good that the standby will typically be only moments away from full availability once it has been activated. As a result, this is called a warm standby configuration which offers high availability. Restoring a server from an archived base backup and rollforward will take considerably longer, so that technique only offers a solution for disaster recovery, not high availability. A standby server can also be used for read-only queries, in which case it is called a *hot standby* server. See [Section 27.4](hot-standby.html "27.4. Hot Standby") for more information.
 
-[]()[]()[]()[]()[]()[]()
+
 
 ### 27.2.1. Planning [#](#STANDBY-PLANNING)
 
@@ -38,7 +38,7 @@ In general, log shipping between servers running different major PostgreSQL rele
 
 ### 27.2.2. Standby Server Operation [#](#STANDBY-SERVER-OPERATION)
 
-A server enters standby mode if a `standby.signal` []()file exists in the data directory when the server is started.
+A server enters standby mode if a `standby.signal` file exists in the data directory when the server is started.
 
 In standby mode, the server continuously applies WAL received from the primary server. The standby server can read WAL from a WAL archive (see [restore\_command](runtime-config-wal.html#GUC-RESTORE-COMMAND)) or directly from the primary over a TCP connection (streaming replication). The standby server will also attempt to restore any WAL found in the standby cluster's `pg_wal` directory. That typically happens after a server restart, when the standby replays again WAL that was streamed from the primary before the restart, but you can also manually copy files to `pg_wal` at any time to have them replayed.
 
@@ -56,7 +56,7 @@ Take a base backup as described in [Section 26.3.2](continuous-archiving.html#B
 
 ### 27.2.4. Setting Up a Standby Server [#](#STANDBY-SERVER-SETUP)
 
-To set up the standby server, restore the base backup taken from primary server (see [Section 26.3.4](continuous-archiving.html#BACKUP-PITR-RECOVERY "26.3.4. Recovering Using a Continuous Archive Backup")). Create a file [`standby.signal`](warm-standby.html#FILE-STANDBY-SIGNAL)[]() in the standby's cluster data directory. Set [restore\_command](runtime-config-wal.html#GUC-RESTORE-COMMAND) to a simple command to copy files from the WAL archive. If you plan to have multiple standby servers for high availability purposes, make sure that `recovery_target_timeline` is set to `latest` (the default), to make the standby server follow the timeline change that occurs at failover to another standby.
+To set up the standby server, restore the base backup taken from primary server (see [Section 26.3.4](continuous-archiving.html#BACKUP-PITR-RECOVERY "26.3.4. Recovering Using a Continuous Archive Backup")). Create a file [`standby.signal`](warm-standby.html#FILE-STANDBY-SIGNAL) in the standby's cluster data directory. Set [restore\_command](runtime-config-wal.html#GUC-RESTORE-COMMAND) to a simple command to copy files from the WAL archive. If you plan to have multiple standby servers for high availability purposes, make sure that `recovery_target_timeline` is set to `latest` (the default), to make the standby server follow the timeline change that occurs at failover to another standby.
 
 ### Note
 
@@ -81,7 +81,7 @@ You can have any number of standby servers, but if you use streaming replication
 
 ### 27.2.5. Streaming Replication [#](#STREAMING-REPLICATION)
 
-[]()
+
 
 Streaming replication allows a standby server to stay more up-to-date than is possible with file-based log shipping. The standby connects to the primary, which streams WAL records to the standby as they're generated, without waiting for the WAL file to be filled.
 
@@ -131,7 +131,7 @@ On a hot standby, the status of the WAL receiver process can be retrieved via th
 
 ### 27.2.6. Replication Slots [#](#STREAMING-REPLICATION-SLOTS)
 
-[]()
+
 
 Replication slots provide an automated way to ensure that the primary does not remove WAL segments until they have been received by all standbys, and that the primary does not remove rows which could cause a [recovery conflict](hot-standby.html#HOT-STANDBY-CONFLICT "27.4.2. Handling Query Conflicts") even when the standby is disconnected.
 
@@ -175,7 +175,7 @@ primary_slot_name = 'node_a_slot'
 
 ### 27.2.7. Cascading Replication [#](#CASCADING-REPLICATION)
 
-[]()
+
 
 The cascading replication feature allows a standby server to accept replication connections and stream WAL records to other standbys, acting as a relay. This can be used to reduce the number of direct connections to the primary and also to minimize inter-site bandwidth overheads.
 
@@ -193,7 +193,7 @@ To use cascading replication, set up the cascading standby so that it can accept
 
 ### 27.2.8. Synchronous Replication [#](#SYNCHRONOUS-REPLICATION)
 
-[]()
+
 
 PostgreSQL streaming replication is asynchronous by default. If the primary server crashes then some transactions that were committed may not have been replicated to the standby server, causing data loss. The amount of data loss is proportional to the replication delay at the time of failover.
 
@@ -279,7 +279,7 @@ If you need to re-create a standby server while transactions are waiting, make s
 
 ### 27.2.9. Continuous Archiving in Standby [#](#CONTINUOUS-ARCHIVING-IN-STANDBY)
 
-[]()
+
 
 When continuous WAL archiving is used in a standby, there are two different scenarios: the WAL archive can be shared between the primary and the standby, or the standby can have its own WAL archive. When the standby has its own WAL archive, set `archive_mode` to `always`, and the standby will call the archive command for every WAL segment it receives, whether it's by restoring from the archive or by streaming replication. The shared archive can be handled similarly, but the `archive_command` or `archive_library` must test if the file being archived exists already, and if the existing file has identical contents. This requires more care in the `archive_command` or `archive_library`, as it must be careful to not overwrite an existing file with different contents, but return success if the exactly same file is archived twice. And all that must be done free of race conditions, if two servers attempt to archive the same file at the same time.
 

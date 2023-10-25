@@ -111,7 +111,7 @@
 
 *   [38.18. Extension Building Infrastructure](extend-pgxs.html)
 
-[]()
+
 
 In the sections that follow, we will discuss how you can extend the PostgreSQL SQL query language by adding:
 

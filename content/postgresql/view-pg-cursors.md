@@ -8,7 +8,7 @@
 
 ## 54.6. `pg_cursors` [#](#VIEW-PG-CURSORS)
 
-[]()
+
 
 The `pg_cursors` view lists the cursors that are currently available. Cursors can be defined in several ways:
 

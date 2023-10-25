@@ -14,7 +14,7 @@
     *   [27.4.4. Hot Standby Parameter Reference](hot-standby.html#HOT-STANDBY-PARAMETERS)
     *   [27.4.5. Caveats](hot-standby.html#HOT-STANDBY-CAVEATS)
 
-[]()
+
 
 Hot standby is the term used to describe the ability to connect to the server and run read-only queries while the server is in archive recovery or standby mode. This is useful both for replication purposes and for restoring a backup to a desired state with great precision. The term hot standby also refers to the ability of the server to move from recovery through to normal operation while users continue running queries and/or keep their connections open.
 
@@ -120,7 +120,7 @@ Users can control whether a log message is produced when WAL replay is waiting l
 
 ### 27.4.3. Administrator's Overview [#](#HOT-STANDBY-ADMIN)
 
-If `hot_standby` is `on` in `postgresql.conf` (the default value) and there is a [`standby.signal`](warm-standby.html#FILE-STANDBY-SIGNAL)[]() file present, the server will run in hot standby mode. However, it may take some time for hot standby connections to be allowed, because the server will not accept connections until it has completed sufficient recovery to provide a consistent state against which queries can run. During this period, clients that attempt to connect will be refused with an error message. To confirm the server has come up, either loop trying to connect from the application, or look for these messages in the server logs:
+If `hot_standby` is `on` in `postgresql.conf` (the default value) and there is a [`standby.signal`](warm-standby.html#FILE-STANDBY-SIGNAL) file present, the server will run in hot standby mode. However, it may take some time for hot standby connections to be allowed, because the server will not accept connections until it has completed sufficient recovery to provide a consistent state against which queries can run. During this period, clients that attempt to connect will be refused with an error message. To confirm the server has come up, either loop trying to connect from the application, or look for these messages in the server logs:
 
 ```
 

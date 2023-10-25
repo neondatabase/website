@@ -8,7 +8,7 @@
 
 ## 6.4. Returning Data from Modified Rows [#](#DML-RETURNING)
 
-[]()[]()[]()[]()
+
 
 Sometimes it is useful to obtain data from modified rows while they are being manipulated. The `INSERT`, `UPDATE`, and `DELETE` commands all have an optional `RETURNING` clause that supports this. Use of `RETURNING` avoids performing an extra database query to collect the data, and is especially valuable when it would otherwise be difficult to identify the modified rows reliably.
 

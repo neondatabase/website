@@ -12,7 +12,7 @@
     *   [19.6.2. Upgrading Data via pg\_upgrade](upgrading.html#UPGRADING-VIA-PG-UPGRADE)
     *   [19.6.3. Upgrading Data via Replication](upgrading.html#UPGRADING-VIA-REPLICATION)
 
-[]()[]()
+
 
 This section discusses how to upgrade your database data from one PostgreSQL release to a newer one.
 
@@ -56,7 +56,7 @@ These instructions assume that your existing installation is under the `/usr/loc
 
 1.  If making a backup, make sure that your database is not being updated. This does not affect the integrity of the backup, but the changed data would of course not be included. If necessary, edit the permissions in the file `/usr/local/pgsql/data/pg_hba.conf` (or equivalent) to disallow access from everyone except you. See [Chapter 21](client-authentication.html "Chapter 21. Client Authentication") for additional information on access control.
 
-    []()To back up your database installation, type:
+    To back up your database installation, type:
 
     ```
 

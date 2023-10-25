@@ -12,7 +12,7 @@
     *   [43.13.2. Other Things to Watch For](plpgsql-porting.html#PLPGSQL-PORTING-OTHER)
     *   [43.13.3. Appendix](plpgsql-porting.html#PLPGSQL-PORTING-APPENDIX)
 
-[]()[]()
+
 
 This section explains differences between PostgreSQL's PL/pgSQL language and Oracle's PL/SQL language, to help developers who port applications from Oracle® to PostgreSQL.
 
@@ -372,7 +372,7 @@ $$ LANGUAGE plpgsql STRICT IMMUTABLE;
 
 This section contains the code for a set of Oracle-compatible `instr` functions that you can use to simplify your porting efforts.
 
-[]()
+
 
 ```
 

@@ -8,7 +8,7 @@
 
 ## 11.10. Operator Classes and Operator Families [#](#INDEXES-OPCLASS)
 
-[]()[]()
+
 
 An index definition can specify an *operator class* for each column of an index.
 

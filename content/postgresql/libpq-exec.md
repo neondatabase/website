@@ -17,7 +17,7 @@ Once a connection to a database server has been successfully established, the fu
 
 ### 34.3.1. Main Functions [#](#LIBPQ-EXEC-MAIN)
 
-*   `PQexec`[]() [#](#LIBPQ-PQEXEC)
+*   `PQexec` [#](#LIBPQ-PQEXEC)
 
     Submits a command to the server and waits for the result.
 
@@ -30,7 +30,7 @@ Once a connection to a database server has been successfully established, the fu
 
 The command string can include multiple SQL commands (separated by semicolons). Multiple queries sent in a single [`PQexec`](libpq-exec.html#LIBPQ-PQEXEC) call are processed in a single transaction, unless there are explicit `BEGIN`/`COMMIT` commands included in the query string to divide it into multiple transactions. (See [Section 55.2.2.1](protocol-flow.html#PROTOCOL-FLOW-MULTI-STATEMENT "55.2.2.1. Multiple Statements in a Simple Query") for more details about how the server handles multi-query strings.) Note however that the returned `PGresult` structure describes only the result of the last command executed from the string. Should one of the commands fail, processing of the string stops with it and the returned `PGresult` describes the error condition.
 
-*   `PQexecParams`[]() [#](#LIBPQ-PQEXECPARAMS)
+*   `PQexecParams` [#](#LIBPQ-PQEXECPARAMS)
 
     Submits a command to the server and waits for the result, with the ability to pass parameters separately from the SQL command text.
 
@@ -99,7 +99,7 @@ SELECT * FROM mytable WHERE x = $1::bigint;
 
 This forces parameter `$1` to be treated as `bigint`, whereas by default it would be assigned the same type as `x`. Forcing the parameter type decision, either this way or by specifying a numeric type OID, is strongly recommended when sending parameter values in binary format, because binary format has less redundancy than text format and so there is less chance that the server will detect a type mismatch mistake for you.
 
-*   `PQprepare`[]() [#](#LIBPQ-PQPREPARE)
+*   `PQprepare` [#](#LIBPQ-PQPREPARE)
 
     Submits a request to create a prepared statement with the given parameters, and waits for completion.
 
@@ -120,7 +120,7 @@ This forces parameter `$1` to be treated as `bigint`, whereas by default it woul
 
 Prepared statements for use with [`PQexecPrepared`](libpq-exec.html#LIBPQ-PQEXECPREPARED) can also be created by executing SQL [PREPARE](sql-prepare.html "PREPARE") statements.
 
-*   `PQexecPrepared`[]() [#](#LIBPQ-PQEXECPREPARED)
+*   `PQexecPrepared` [#](#LIBPQ-PQEXECPREPARED)
 
     Sends a request to execute a prepared statement with given parameters, and waits for the result.
 
@@ -139,7 +139,7 @@ Prepared statements for use with [`PQexecPrepared`](libpq-exec.html#LIBPQ-PQEXEC
 
     The parameters are identical to [`PQexecParams`](libpq-exec.html#LIBPQ-PQEXECPARAMS), except that the name of a prepared statement is given instead of a query string, and the *`paramTypes[]`* parameter is not present (it is not needed since the prepared statement's parameter types were determined when it was created).
 
-*   `PQdescribePrepared`[]() [#](#LIBPQ-PQDESCRIBEPREPARED)
+*   `PQdescribePrepared` [#](#LIBPQ-PQDESCRIBEPREPARED)
 
     Submits a request to obtain information about the specified prepared statement, and waits for completion.
 
@@ -152,7 +152,7 @@ Prepared statements for use with [`PQexecPrepared`](libpq-exec.html#LIBPQ-PQEXEC
 
     *`stmtName`* can be `""` or `NULL` to reference the unnamed statement, otherwise it must be the name of an existing prepared statement. On success, a `PGresult` with status `PGRES_COMMAND_OK` is returned. The functions [`PQnparams`](libpq-exec.html#LIBPQ-PQNPARAMS) and [`PQparamtype`](libpq-exec.html#LIBPQ-PQPARAMTYPE) can be applied to this `PGresult` to obtain information about the parameters of the prepared statement, and the functions [`PQnfields`](libpq-exec.html#LIBPQ-PQNFIELDS), [`PQfname`](libpq-exec.html#LIBPQ-PQFNAME), [`PQftype`](libpq-exec.html#LIBPQ-PQFTYPE), etc. provide information about the result columns (if any) of the statement.
 
-*   `PQdescribePortal`[]() [#](#LIBPQ-PQDESCRIBEPORTAL)
+*   `PQdescribePortal` [#](#LIBPQ-PQDESCRIBEPORTAL)
 
     Submits a request to obtain information about the specified portal, and waits for completion.
 
@@ -165,7 +165,7 @@ Prepared statements for use with [`PQexecPrepared`](libpq-exec.html#LIBPQ-PQEXEC
 
     *`portalName`* can be `""` or `NULL` to reference the unnamed portal, otherwise it must be the name of an existing portal. On success, a `PGresult` with status `PGRES_COMMAND_OK` is returned. The functions [`PQnfields`](libpq-exec.html#LIBPQ-PQNFIELDS), [`PQfname`](libpq-exec.html#LIBPQ-PQFNAME), [`PQftype`](libpq-exec.html#LIBPQ-PQFTYPE), etc. can be applied to the `PGresult` to obtain information about the result columns (if any) of the portal.
 
-*   `PQclosePrepared`[]() [#](#LIBPQ-PQCLOSEPREPARED)
+*   `PQclosePrepared` [#](#LIBPQ-PQCLOSEPREPARED)
 
     Submits a request to close the specified prepared statement, and waits for completion.
 
@@ -178,7 +178,7 @@ Prepared statements for use with [`PQexecPrepared`](libpq-exec.html#LIBPQ-PQEXEC
 
     *`stmtName`* can be `""` or `NULL` to reference the unnamed statement. It is fine if no statement exists with this name, in that case the operation is a no-op. On success, a `PGresult` with status `PGRES_COMMAND_OK` is returned.
 
-*   `PQclosePortal`[]() [#](#LIBPQ-PQCLOSEPORTAL)
+*   `PQclosePortal` [#](#LIBPQ-PQCLOSEPORTAL)
 
     Submits a request to close the specified portal, and waits for completion.
 
@@ -191,9 +191,9 @@ Prepared statements for use with [`PQexecPrepared`](libpq-exec.html#LIBPQ-PQEXEC
 
     *`portalName`* can be `""` or `NULL` to reference the unnamed portal. It is fine if no portal exists with this name, in that case the operation is a no-op. On success, a `PGresult` with status `PGRES_COMMAND_OK` is returned.
 
-The `PGresult`[]() structure encapsulates the result returned by the server. libpq application programmers should be careful to maintain the `PGresult` abstraction. Use the accessor functions below to get at the contents of `PGresult`. Avoid directly referencing the fields of the `PGresult` structure because they are subject to change in the future.
+The `PGresult` structure encapsulates the result returned by the server. libpq application programmers should be careful to maintain the `PGresult` abstraction. Use the accessor functions below to get at the contents of `PGresult`. Avoid directly referencing the fields of the `PGresult` structure because they are subject to change in the future.
 
-*   `PQresultStatus`[]() [#](#LIBPQ-PQRESULTSTATUS)
+*   `PQresultStatus` [#](#LIBPQ-PQRESULTSTATUS)
 
     Returns the result status of the command.
 
@@ -256,7 +256,7 @@ The `PGresult`[]() structure encapsulates the result returned by the server. lib
 
     A result of status `PGRES_NONFATAL_ERROR` will never be returned directly by [`PQexec`](libpq-exec.html#LIBPQ-PQEXEC) or other query execution functions; results of this kind are instead passed to the notice processor (see [Section 34.13](libpq-notice-processing.html "34.13. Notice Processing")).
 
-*   `PQresStatus`[]() [#](#LIBPQ-PQRESSTATUS)
+*   `PQresStatus` [#](#LIBPQ-PQRESSTATUS)
 
     Converts the enumerated type returned by [`PQresultStatus`](libpq-exec.html#LIBPQ-PQRESULTSTATUS) into a string constant describing the status code. The caller should not free the result.
 
@@ -265,7 +265,7 @@ The `PGresult`[]() structure encapsulates the result returned by the server. lib
     char *PQresStatus(ExecStatusType status);
     ```
 
-*   `PQresultErrorMessage`[]() [#](#LIBPQ-PQRESULTERRORMESSAGE)
+*   `PQresultErrorMessage` [#](#LIBPQ-PQRESULTERRORMESSAGE)
 
     Returns the error message associated with the command, or an empty string if there was no error.
 
@@ -278,7 +278,7 @@ The `PGresult`[]() structure encapsulates the result returned by the server. lib
 
     Immediately following a [`PQexec`](libpq-exec.html#LIBPQ-PQEXEC) or [`PQgetResult`](libpq-async.html#LIBPQ-PQGETRESULT) call, [`PQerrorMessage`](libpq-status.html#LIBPQ-PQERRORMESSAGE) (on the connection) will return the same string as [`PQresultErrorMessage`](libpq-exec.html#LIBPQ-PQRESULTERRORMESSAGE) (on the result). However, a `PGresult` will retain its error message until destroyed, whereas the connection's error message will change when subsequent operations are done. Use [`PQresultErrorMessage`](libpq-exec.html#LIBPQ-PQRESULTERRORMESSAGE) when you want to know the status associated with a particular `PGresult`; use [`PQerrorMessage`](libpq-status.html#LIBPQ-PQERRORMESSAGE) when you want to know the status from the latest operation on the connection.
 
-*   `PQresultVerboseErrorMessage`[]() [#](#LIBPQ-PQRESULTVERBOSEERRORMESSAGE)
+*   `PQresultVerboseErrorMessage` [#](#LIBPQ-PQRESULTVERBOSEERRORMESSAGE)
 
     Returns a reformatted version of the error message associated with a `PGresult` object.
 
@@ -295,7 +295,7 @@ The `PGresult`[]() structure encapsulates the result returned by the server. lib
 
     A NULL return is possible if there is insufficient memory.
 
-*   `PQresultErrorField`[]() [#](#LIBPQ-PQRESULTERRORFIELD)
+*   `PQresultErrorField` [#](#LIBPQ-PQRESULTERRORFIELD)
 
     Returns an individual field of an error report.
 
@@ -316,7 +316,7 @@ The `PGresult`[]() structure encapsulates the result returned by the server. lib
 
         The severity; the field contents are `ERROR`, `FATAL`, or `PANIC` (in an error message), or `WARNING`, `NOTICE`, `DEBUG`, `INFO`, or `LOG` (in a notice message). This is identical to the `PG_DIAG_SEVERITY` field except that the contents are never localized. This is present only in reports generated by PostgreSQL versions 9.6 and later.
 
-    *   `PG_DIAG_SQLSTATE`[]() [#](#LIBPQ-PG-DIAG-SQLSTATE)
+    *   `PG_DIAG_SQLSTATE` [#](#LIBPQ-PG-DIAG-SQLSTATE)
 
         The SQLSTATE code for the error. The SQLSTATE code identifies the type of error that has occurred; it can be used by front-end applications to perform specific operations (such as error handling) in response to a particular database error. For a list of the possible SQLSTATE codes, see [Appendix A](errcodes-appendix.html "Appendix A. PostgreSQL Error Codes"). This field is not localizable, and is always present.
 
@@ -390,7 +390,7 @@ The `PGresult`[]() structure encapsulates the result returned by the server. lib
 
     Note that error fields are only available from `PGresult` objects, not `PGconn` objects; there is no `PQerrorField` function.
 
-*   `PQclear`[]() [#](#LIBPQ-PQCLEAR)
+*   `PQclear` [#](#LIBPQ-PQCLEAR)
 
     Frees the storage associated with a `PGresult`. Every command result should be freed via [`PQclear`](libpq-exec.html#LIBPQ-PQCLEAR) when it is no longer needed.
 
@@ -407,7 +407,7 @@ The `PGresult`[]() structure encapsulates the result returned by the server. lib
 
 These functions are used to extract information from a `PGresult` object that represents a successful query result (that is, one that has status `PGRES_TUPLES_OK` or `PGRES_SINGLE_TUPLE`). They can also be used to extract information from a successful Describe operation: a Describe's result has all the same column information that actual execution of the query would provide, but it has zero rows. For objects with other status values, these functions will act as though the result has zero rows and zero columns.
 
-*   `PQntuples`[]() [#](#LIBPQ-PQNTUPLES)
+*   `PQntuples` [#](#LIBPQ-PQNTUPLES)
 
     Returns the number of rows (tuples) in the query result. (Note that `PGresult` objects are limited to no more than `INT_MAX` rows, so an `int` result is sufficient.)
 
@@ -416,7 +416,7 @@ These functions are used to extract information from a `PGresult` object that re
     int PQntuples(const PGresult *res);
     ```
 
-*   `PQnfields`[]() [#](#LIBPQ-PQNFIELDS)
+*   `PQnfields` [#](#LIBPQ-PQNFIELDS)
 
     Returns the number of columns (fields) in each row of the query result.
 
@@ -425,7 +425,7 @@ These functions are used to extract information from a `PGresult` object that re
     int PQnfields(const PGresult *res);
     ```
 
-*   `PQfname`[]() [#](#LIBPQ-PQFNAME)
+*   `PQfname` [#](#LIBPQ-PQFNAME)
 
     Returns the column name associated with the given column number. Column numbers start at 0. The caller should not free the result directly. It will be freed when the associated `PGresult` handle is passed to [`PQclear`](libpq-exec.html#LIBPQ-PQCLEAR).
 
@@ -437,7 +437,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     `NULL` is returned if the column number is out of range.
 
-*   `PQfnumber`[]() [#](#LIBPQ-PQFNUMBER)
+*   `PQfnumber` [#](#LIBPQ-PQFNUMBER)
 
     Returns the column number associated with the given column name.
 
@@ -468,7 +468,7 @@ These functions are used to extract information from a `PGresult` object that re
     PQfnumber(res, "\"BAR\"")    1
     ```
 
-*   `PQftable`[]() [#](#LIBPQ-PQFTABLE)
+*   `PQftable` [#](#LIBPQ-PQFTABLE)
 
     Returns the OID of the table from which the given column was fetched. Column numbers start at 0.
 
@@ -482,7 +482,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     The type `Oid` and the constant `InvalidOid` will be defined when you include the libpq header file. They will both be some integer type.
 
-*   `PQftablecol`[]() [#](#LIBPQ-PQFTABLECOL)
+*   `PQftablecol` [#](#LIBPQ-PQFTABLECOL)
 
     Returns the column number (within its table) of the column making up the specified query result column. Query-result column numbers start at 0, but table columns have nonzero numbers.
 
@@ -494,7 +494,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     Zero is returned if the column number is out of range, or if the specified column is not a simple reference to a table column.
 
-*   `PQfformat`[]() [#](#LIBPQ-PQFFORMAT)
+*   `PQfformat` [#](#LIBPQ-PQFFORMAT)
 
     Returns the format code indicating the format of the given column. Column numbers start at 0.
 
@@ -506,7 +506,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     Format code zero indicates textual data representation, while format code one indicates binary representation. (Other codes are reserved for future definition.)
 
-*   `PQftype`[]() [#](#LIBPQ-PQFTYPE)
+*   `PQftype` [#](#LIBPQ-PQFTYPE)
 
     Returns the data type associated with the given column number. The integer returned is the internal OID number of the type. Column numbers start at 0.
 
@@ -518,7 +518,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     You can query the system table `pg_type` to obtain the names and properties of the various data types. The OIDs of the built-in data types are defined in the file `catalog/pg_type_d.h` in the PostgreSQL installation's `include` directory.
 
-*   `PQfmod`[]() [#](#LIBPQ-PQFMOD)
+*   `PQfmod` [#](#LIBPQ-PQFMOD)
 
     Returns the type modifier of the column associated with the given column number. Column numbers start at 0.
 
@@ -530,7 +530,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     The interpretation of modifier values is type-specific; they typically indicate precision or size limits. The value -1 is used to indicate “no information available”. Most data types do not use modifiers, in which case the value is always -1.
 
-*   `PQfsize`[]() [#](#LIBPQ-PQFSIZE)
+*   `PQfsize` [#](#LIBPQ-PQFSIZE)
 
     Returns the size in bytes of the column associated with the given column number. Column numbers start at 0.
 
@@ -542,7 +542,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     [`PQfsize`](libpq-exec.html#LIBPQ-PQFSIZE) returns the space allocated for this column in a database row, in other words the size of the server's internal representation of the data type. (Accordingly, it is not really very useful to clients.) A negative value indicates the data type is variable-length.
 
-*   `PQbinaryTuples`[]() [#](#LIBPQ-PQBINARYTUPLES)
+*   `PQbinaryTuples` [#](#LIBPQ-PQBINARYTUPLES)
 
     Returns 1 if the `PGresult` contains binary data and 0 if it contains text data.
 
@@ -553,7 +553,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     This function is deprecated (except for its use in connection with `COPY`), because it is possible for a single `PGresult` to contain text data in some columns and binary data in others. [`PQfformat`](libpq-exec.html#LIBPQ-PQFFORMAT) is preferred. [`PQbinaryTuples`](libpq-exec.html#LIBPQ-PQBINARYTUPLES) returns 1 only if all columns of the result are binary (format 1).
 
-*   `PQgetvalue`[]() [#](#LIBPQ-PQGETVALUE)
+*   `PQgetvalue` [#](#LIBPQ-PQGETVALUE)
 
     Returns a single field value of one row of a `PGresult`. Row and column numbers start at 0. The caller should not free the result directly. It will be freed when the associated `PGresult` handle is passed to [`PQclear`](libpq-exec.html#LIBPQ-PQCLEAR).
 
@@ -570,7 +570,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     The pointer returned by [`PQgetvalue`](libpq-exec.html#LIBPQ-PQGETVALUE) points to storage that is part of the `PGresult` structure. One should not modify the data it points to, and one must explicitly copy the data into other storage if it is to be used past the lifetime of the `PGresult` structure itself.
 
-*   `PQgetisnull`[]()[]() [#](#LIBPQ-PQGETISNULL)
+*   `PQgetisnull` [#](#LIBPQ-PQGETISNULL)
 
     Tests a field for a null value. Row and column numbers start at 0.
 
@@ -583,7 +583,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     This function returns 1 if the field is null and 0 if it contains a non-null value. (Note that [`PQgetvalue`](libpq-exec.html#LIBPQ-PQGETVALUE) will return an empty string, not a null pointer, for a null field.)
 
-*   `PQgetlength`[]() [#](#LIBPQ-PQGETLENGTH)
+*   `PQgetlength` [#](#LIBPQ-PQGETLENGTH)
 
     Returns the actual length of a field value in bytes. Row and column numbers start at 0.
 
@@ -596,7 +596,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     This is the actual data length for the particular data value, that is, the size of the object pointed to by [`PQgetvalue`](libpq-exec.html#LIBPQ-PQGETVALUE). For text data format this is the same as `strlen()`. For binary format this is essential information. Note that one should *not* rely on [`PQfsize`](libpq-exec.html#LIBPQ-PQFSIZE) to obtain the actual data length.
 
-*   `PQnparams`[]() [#](#LIBPQ-PQNPARAMS)
+*   `PQnparams` [#](#LIBPQ-PQNPARAMS)
 
     Returns the number of parameters of a prepared statement.
 
@@ -607,7 +607,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     This function is only useful when inspecting the result of [`PQdescribePrepared`](libpq-exec.html#LIBPQ-PQDESCRIBEPREPARED). For other types of results it will return zero.
 
-*   `PQparamtype`[]() [#](#LIBPQ-PQPARAMTYPE)
+*   `PQparamtype` [#](#LIBPQ-PQPARAMTYPE)
 
     Returns the data type of the indicated statement parameter. Parameter numbers start at 0.
 
@@ -618,7 +618,7 @@ These functions are used to extract information from a `PGresult` object that re
 
     This function is only useful when inspecting the result of [`PQdescribePrepared`](libpq-exec.html#LIBPQ-PQDESCRIBEPREPARED). For other types of results it will return zero.
 
-*   `PQprint`[]() [#](#LIBPQ-PQPRINT)
+*   `PQprint` [#](#LIBPQ-PQPRINT)
 
     Prints out all the rows and, optionally, the column names to the specified output stream.
 
@@ -648,7 +648,7 @@ These functions are used to extract information from a `PGresult` object that re
 
 These functions are used to extract other information from `PGresult` objects.
 
-*   `PQcmdStatus`[]() [#](#LIBPQ-PQCMDSTATUS)
+*   `PQcmdStatus` [#](#LIBPQ-PQCMDSTATUS)
 
     Returns the command status tag from the SQL command that generated the `PGresult`.
 
@@ -659,7 +659,7 @@ These functions are used to extract other information from `PGresult` objects.
 
     Commonly this is just the name of the command, but it might include additional data such as the number of rows processed. The caller should not free the result directly. It will be freed when the associated `PGresult` handle is passed to [`PQclear`](libpq-exec.html#LIBPQ-PQCLEAR).
 
-*   `PQcmdTuples`[]() [#](#LIBPQ-PQCMDTUPLES)
+*   `PQcmdTuples` [#](#LIBPQ-PQCMDTUPLES)
 
     Returns the number of rows affected by the SQL command.
 
@@ -670,16 +670,16 @@ These functions are used to extract other information from `PGresult` objects.
 
     This function returns a string containing the number of rows affected by the SQL statement that generated the `PGresult`. This function can only be used following the execution of a `SELECT`, `CREATE TABLE AS`, `INSERT`, `UPDATE`, `DELETE`, `MERGE`, `MOVE`, `FETCH`, or `COPY` statement, or an `EXECUTE` of a prepared query that contains an `INSERT`, `UPDATE`, `DELETE`, or `MERGE` statement. If the command that generated the `PGresult` was anything else, [`PQcmdTuples`](libpq-exec.html#LIBPQ-PQCMDTUPLES) returns an empty string. The caller should not free the return value directly. It will be freed when the associated `PGresult` handle is passed to [`PQclear`](libpq-exec.html#LIBPQ-PQCLEAR).
 
-*   `PQoidValue`[]() [#](#LIBPQ-PQOIDVALUE)
+*   `PQoidValue` [#](#LIBPQ-PQOIDVALUE)
 
-    Returns the OID[]() of the inserted row, if the SQL command was an `INSERT` that inserted exactly one row into a table that has OIDs, or a `EXECUTE` of a prepared query containing a suitable `INSERT` statement. Otherwise, this function returns `InvalidOid`. This function will also return `InvalidOid` if the table affected by the `INSERT` statement does not contain OIDs.
+    Returns the OID of the inserted row, if the SQL command was an `INSERT` that inserted exactly one row into a table that has OIDs, or a `EXECUTE` of a prepared query containing a suitable `INSERT` statement. Otherwise, this function returns `InvalidOid`. This function will also return `InvalidOid` if the table affected by the `INSERT` statement does not contain OIDs.
 
     ```
 
     Oid PQoidValue(const PGresult *res);
     ```
 
-*   `PQoidStatus`[]() [#](#LIBPQ-PQOIDSTATUS)
+*   `PQoidStatus` [#](#LIBPQ-PQOIDSTATUS)
 
     This function is deprecated in favor of [`PQoidValue`](libpq-exec.html#LIBPQ-PQOIDVALUE) and is not thread-safe. It returns a string with the OID of the inserted row, while [`PQoidValue`](libpq-exec.html#LIBPQ-PQOIDVALUE) returns the OID value.
 
@@ -690,9 +690,9 @@ These functions are used to extract other information from `PGresult` objects.
 
 ### 34.3.4. Escaping Strings for Inclusion in SQL Commands [#](#LIBPQ-EXEC-ESCAPE-STRING)
 
-[]()
 
-*   `PQescapeLiteral`[]() [#](#LIBPQ-PQESCAPELITERAL)
+
+*   `PQescapeLiteral` [#](#LIBPQ-PQESCAPELITERAL)
 
     ```
 
@@ -711,7 +711,7 @@ These functions are used to extract other information from `PGresult` objects.
 
     Note that it is neither necessary nor correct to do escaping when a data value is passed as a separate parameter in [`PQexecParams`](libpq-exec.html#LIBPQ-PQEXECPARAMS) or its sibling routines.
 
-*   `PQescapeIdentifier`[]() [#](#LIBPQ-PQESCAPEIDENTIFIER)
+*   `PQescapeIdentifier` [#](#LIBPQ-PQESCAPEIDENTIFIER)
 
     ```
 
@@ -728,7 +728,7 @@ These functions are used to extract other information from `PGresult` objects.
 
     As with string literals, to prevent SQL injection attacks, SQL identifiers must be escaped when they are received from an untrustworthy source.
 
-*   `PQescapeStringConn`[]() [#](#LIBPQ-PQESCAPESTRINGCONN)
+*   `PQescapeStringConn` [#](#LIBPQ-PQESCAPESTRINGCONN)
 
     ```
 
@@ -743,7 +743,7 @@ These functions are used to extract other information from `PGresult` objects.
 
     [`PQescapeStringConn`](libpq-exec.html#LIBPQ-PQESCAPESTRINGCONN) returns the number of bytes written to *`to`*, not including the terminating zero byte.
 
-*   `PQescapeString`[]() [#](#LIBPQ-PQESCAPESTRING)
+*   `PQescapeString` [#](#LIBPQ-PQESCAPESTRING)
 
     [`PQescapeString`](libpq-exec.html#LIBPQ-PQESCAPESTRING) is an older, deprecated version of [`PQescapeStringConn`](libpq-exec.html#LIBPQ-PQESCAPESTRINGCONN).
 
@@ -756,7 +756,7 @@ These functions are used to extract other information from `PGresult` objects.
 
     [`PQescapeString`](libpq-exec.html#LIBPQ-PQESCAPESTRING) can be used safely in client programs that work with only one PostgreSQL connection at a time (in this case it can find out what it needs to know “behind the scenes”). In other contexts it is a security hazard and should be avoided in favor of [`PQescapeStringConn`](libpq-exec.html#LIBPQ-PQESCAPESTRINGCONN).
 
-*   `PQescapeByteaConn`[]() [#](#LIBPQ-PQESCAPEBYTEACONN)
+*   `PQescapeByteaConn` [#](#LIBPQ-PQESCAPEBYTEACONN)
 
     Escapes binary data for use within an SQL command with the type `bytea`. As with [`PQescapeStringConn`](libpq-exec.html#LIBPQ-PQESCAPESTRINGCONN), this is only used when inserting data directly into an SQL command string.
 
@@ -776,7 +776,7 @@ These functions are used to extract other information from `PGresult` objects.
 
     On error, a null pointer is returned, and a suitable error message is stored in the *`conn`* object. Currently, the only possible error is insufficient memory for the result string.
 
-*   `PQescapeBytea`[]() [#](#LIBPQ-PQESCAPEBYTEA)
+*   `PQescapeBytea` [#](#LIBPQ-PQESCAPEBYTEA)
 
     [`PQescapeBytea`](libpq-exec.html#LIBPQ-PQESCAPEBYTEA) is an older, deprecated version of [`PQescapeByteaConn`](libpq-exec.html#LIBPQ-PQESCAPEBYTEACONN).
 
@@ -789,7 +789,7 @@ These functions are used to extract other information from `PGresult` objects.
 
     The only difference from [`PQescapeByteaConn`](libpq-exec.html#LIBPQ-PQESCAPEBYTEACONN) is that [`PQescapeBytea`](libpq-exec.html#LIBPQ-PQESCAPEBYTEA) does not take a `PGconn` parameter. Because of this, [`PQescapeBytea`](libpq-exec.html#LIBPQ-PQESCAPEBYTEA) can only be used safely in client programs that use a single PostgreSQL connection at a time (in this case it can find out what it needs to know “behind the scenes”). It *might give the wrong results* if used in programs that use multiple database connections (use [`PQescapeByteaConn`](libpq-exec.html#LIBPQ-PQESCAPEBYTEACONN) in such cases).
 
-*   `PQunescapeBytea`[]() [#](#LIBPQ-PQUNESCAPEBYTEA)
+*   `PQunescapeBytea` [#](#LIBPQ-PQUNESCAPEBYTEA)
 
     Converts a string representation of binary data into binary data — the reverse of [`PQescapeBytea`](libpq-exec.html#LIBPQ-PQESCAPEBYTEA). This is needed when retrieving `bytea` data in text format, but not when retrieving it in binary format.
 

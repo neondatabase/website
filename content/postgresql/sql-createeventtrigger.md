@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## CREATE EVENT TRIGGER
 

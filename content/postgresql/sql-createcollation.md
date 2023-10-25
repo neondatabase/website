@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## CREATE COLLATION
 
@@ -60,7 +60,7 @@ To be able to create a collation, you must have `CREATE` privilege on the destin
 
 *   *`provider`*
 
-    Specifies the provider to use for locale services associated with this collation. Possible values are `icu`[]() (if the server was built with ICU support) or `libc`. `libc` is the default. See [Section 24.1.4](locale.html#LOCALE-PROVIDERS "24.1.4. Locale Providers") for details.
+    Specifies the provider to use for locale services associated with this collation. Possible values are `icu` (if the server was built with ICU support) or `libc`. `libc` is the default. See [Section 24.1.4](locale.html#LOCALE-PROVIDERS "24.1.4. Locale Providers") for details.
 
 *   `DETERMINISTIC`
 

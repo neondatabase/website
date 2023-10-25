@@ -8,7 +8,7 @@
 
 ## Chapter 63. Table Access Method Interface Definition
 
-[]()[]()
+
 
 This chapter explains the interface between the core PostgreSQL system and *table access methods*, which manage the storage for tables. The core system knows little about these access methods beyond what is specified here, so it is possible to develop entirely new access method types by writing add-on code.
 

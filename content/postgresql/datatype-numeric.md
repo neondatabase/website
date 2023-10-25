@@ -13,7 +13,7 @@
     *   [8.1.3. Floating-Point Types](datatype-numeric.html#DATATYPE-FLOAT)
     *   [8.1.4. Serial Types](datatype-numeric.html#DATATYPE-SERIAL)
 
-[]()
+
 
 Numeric types consist of two-, four-, and eight-byte integers, four- and eight-byte floating-point numbers, and selectable-precision decimals. [Table 8.2](datatype-numeric.html#DATATYPE-NUMERIC-TABLE "Table 8.2. Numeric Types") lists the available types.
 
@@ -39,7 +39,7 @@ The syntax of constants for the numeric types is described in [Section 4.1.2](s
 
 ### 8.1.1. Integer Types [#](#DATATYPE-INT)
 
-[]()[]()[]()[]()[]()[]()
+
 
 The types `smallint`, `integer`, and `bigint` store whole numbers, that is, numbers without fractional components, of various ranges. Attempts to store values outside of the allowed range will result in an error.
 
@@ -49,7 +49,7 @@ SQL only specifies the integer types `integer` (or `int`), `smallint`, and `bigi
 
 ### 8.1.2. Arbitrary Precision Numbers [#](#DATATYPE-NUMERIC-DECIMAL)
 
-[]()[]()[]()
+
 
 The type `numeric` can store numbers with a very large number of digits. It is especially recommended for storing monetary amounts and other quantities where exactness is required. Calculations with `numeric` values yield exact results where possible, e.g., addition, subtraction, multiplication. However, calculations on `numeric` values are very slow compared to the integer types, or to the floating-point types described in the next section.
 
@@ -113,7 +113,7 @@ PostgreSQL permits the scale in a `numeric` type declaration to be any value in 
 
 Numeric values are physically stored without any extra leading or trailing zeroes. Thus, the declared precision and scale of a column are maximums, not fixed allocations. (In this sense the `numeric` type is more akin to `varchar(n)` than to `char(n)`.) The actual storage requirement is two bytes for each group of four decimal digits, plus three to eight bytes overhead.
 
-[]()[]()[]()
+
 
 In addition to ordinary numeric values, the `numeric` type has several special values:
 
@@ -156,7 +156,7 @@ FROM generate_series(-3.5, 3.5, 1) as x;
 
 ### 8.1.3. Floating-Point Types [#](#DATATYPE-FLOAT)
 
-[]()[]()[]()[]()[]()
+
 
 The data types `real` and `double precision` are inexact, variable-precision numeric types. On all currently supported platforms, these types are implementations of IEEE Standard 754 for Binary Floating-Point Arithmetic (single and double precision, respectively), to the extent that the underlying processor, operating system, and compiler support it.
 
@@ -182,7 +182,7 @@ Any value of [extra\_float\_digits](runtime-config-client.html#GUC-EXTRA-FLOAT-D
 
 Applications that wanted precise values have historically had to set [extra\_float\_digits](runtime-config-client.html#GUC-EXTRA-FLOAT-DIGITS) to 3 to obtain them. For maximum compatibility between versions, they should continue to do so.
 
-[]()[]()
+
 
 In addition to ordinary numeric values, the floating-point types have several special values:
 
@@ -200,7 +200,7 @@ PostgreSQL also supports the SQL-standard notations `float` and `float(p)` for s
 
 ### 8.1.4. Serial Types [#](#DATATYPE-SERIAL)
 
-[]()[]()[]()[]()[]()[]()[]()[]()
+
 
 ### Note
 

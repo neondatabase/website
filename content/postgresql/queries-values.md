@@ -8,7 +8,7 @@
 
 ## 7.7. `VALUES` Lists [#](#QUERIES-VALUES)
 
-[]()
+
 
 `VALUES` provides a way to generate a “constant table” that can be used in a query without having to actually create and populate a table on-disk. The syntax is
 

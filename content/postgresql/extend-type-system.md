@@ -14,7 +14,7 @@
     *   [38.2.4. Pseudo-Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-PSEUDO)
     *   [38.2.5. Polymorphic Types](extend-type-system.html#EXTEND-TYPES-POLYMORPHIC)
 
-[]()[]()[]()[]()[]()[]()
+
 
 PostgreSQL data types can be divided into base types, container types, domains, and pseudo-types.
 
@@ -44,7 +44,7 @@ There are a few “pseudo-types” for special purposes. Pseudo-types cannot app
 
 ### 38.2.5. Polymorphic Types [#](#EXTEND-TYPES-POLYMORPHIC)
 
-[]()[]()[]()[]()
+
 
 Some pseudo-types of special interest are the *polymorphic types*, which are used to declare *polymorphic functions*. This powerful feature allows a single function definition to operate on many different data types, with the specific data type(s) being determined by the data types actually passed to it in a particular call. The polymorphic types are shown in [Table 38.1](extend-type-system.html#EXTEND-TYPES-POLYMORPHIC-TABLE "Table 38.1. Polymorphic Types"). Some examples of their use appear in [Section 38.5.11](xfunc-sql.html#XFUNC-SQL-POLYMORPHIC-FUNCTIONS "38.5.11. Polymorphic SQL Functions").
 

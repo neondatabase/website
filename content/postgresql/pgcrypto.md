@@ -16,7 +16,7 @@
     *   [F.27.6. Notes](pgcrypto.html#PGCRYPTO-NOTES)
     *   [F.27.7. Author](pgcrypto.html#PGCRYPTO-AUTHOR)
 
-[]()[]()
+
 
 The `pgcrypto` module provides cryptographic functions for PostgreSQL.
 
@@ -28,7 +28,7 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 
 #### F.27.1.1. `digest()` [#](#PGCRYPTO-GENERAL-HASHING-FUNCS-DIGEST)
 
-[]()
+
 
 ```
 
@@ -49,7 +49,7 @@ $$ LANGUAGE SQL STRICT IMMUTABLE;
 
 #### F.27.1.2. `hmac()` [#](#PGCRYPTO-GENERAL-HASHING-FUNCS-HMAC)
 
-[]()
+
 
 ```
 
@@ -90,7 +90,7 @@ The algorithms in `crypt()` differ from the usual MD5 or SHA1 hashing algorithms
 
 #### F.27.2.1. `crypt()` [#](#PGCRYPTO-PASSWORD-HASHING-FUNCS-CRYPT)
 
-[]()
+
 
 ```
 
@@ -117,7 +117,7 @@ This returns `true` if the entered password is correct.
 
 #### F.27.2.2. `gen_salt()` [#](#PGCRYPTO-PASSWORD-HASHING-FUNCS-GEN-SALT)
 
-[]()
+
 
 ```
 
@@ -201,7 +201,7 @@ In either case the data to be encrypted is processed as follows:
 
 #### F.27.3.1. `pgp_sym_encrypt()` [#](#PGCRYPTO-PGP-ENC-FUNCS-PGP-SYM-ENCRYPT)
 
-[]()[]()
+
 
 ```
 
@@ -213,7 +213,7 @@ Encrypt *`data`* with a symmetric PGP key *`psw`*. The *`options`* parameter can
 
 #### F.27.3.2. `pgp_sym_decrypt()` [#](#PGCRYPTO-PGP-ENC-FUNCS-PGP-SYM-DECRYPT)
 
-[]()[]()
+
 
 ```
 
@@ -229,7 +229,7 @@ The *`options`* parameter can contain option settings, as described below.
 
 #### F.27.3.3. `pgp_pub_encrypt()` [#](#PGCRYPTO-PGP-ENC-FUNCS-PGP-PUB-ENCRYPT)
 
-[]()[]()
+
 
 ```
 
@@ -243,7 +243,7 @@ The *`options`* parameter can contain option settings, as described below.
 
 #### F.27.3.4. `pgp_pub_decrypt()` [#](#PGCRYPTO-PGP-ENC-FUNCS-PGP-PUB-DECRYPT)
 
-[]()[]()
+
 
 ```
 
@@ -259,7 +259,7 @@ The *`options`* parameter can contain option settings, as described below.
 
 #### F.27.3.5. `pgp_key_id()` [#](#PGCRYPTO-PGP-ENC-FUNCS-PGP-KEY-ID)
 
-[]()
+
 
 ```
 
@@ -282,7 +282,7 @@ Note that different keys may have the same ID. This is rare but a normal event. 
 
 #### F.27.3.6. `armor()`, `dearmor()` [#](#PGCRYPTO-PGP-ENC-FUNCS-ARMOR)
 
-[]()[]()
+
 
 ```
 
@@ -296,7 +296,7 @@ If the *`keys`* and *`values`* arrays are specified, an *armor header* is added 
 
 #### F.27.3.7. `pgp_armor_headers` [#](#PGCRYPTO-PGP-ENC-FUNCS-PGP-ARMOR-HEADERS)
 
-[]()
+
 
 ```
 
@@ -466,7 +466,7 @@ These functions only run a cipher over data; they don't have any advanced featur
 
 So, with the introduction of PGP encryption, usage of raw encryption functions is discouraged.
 
-[]()[]()[]()[]()
+
 
 ```
 
@@ -511,7 +511,7 @@ In `encrypt_iv` and `decrypt_iv`, the *`iv`* parameter is the initial value for 
 
 ### F.27.5. Random-Data Functions [#](#PGCRYPTO-RANDOM-DATA-FUNCS)
 
-[]()
+
 
 ```
 
@@ -520,7 +520,7 @@ gen_random_bytes(count integer) returns bytea
 
 Returns *`count`* cryptographically strong random bytes. At most 1024 bytes can be extracted at a time. This is to avoid draining the randomness generator pool.
 
-[]()
+
 
 ```
 

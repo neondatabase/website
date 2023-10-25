@@ -22,7 +22,7 @@ As shown in [Table 38.9](xindex.html#XINDEX-BTREE-SUPPORT-TABLE "Table 38.9. 
 
 *   `in_range`
 
-    []()[]()
+    
 
     Optionally, a btree operator family may provide *in\_range* support function(s), registered under support function number 3. These are not used during btree index operations; rather, they extend the semantics of the operator family so that it can support window clauses containing the `RANGE` *`offset`* `PRECEDING` and `RANGE` *`offset`* `FOLLOWING` frame bound types (see [Section 4.2.8](sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls")). Fundamentally, the extra information provided is how to add or subtract an *`offset`* value in a way that is compatible with the family's data ordering.
 

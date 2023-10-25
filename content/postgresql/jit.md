@@ -25,7 +25,7 @@
     *   *   [32.4.1. Inlining Support for Extensions](jit-extensibility.html#JIT-EXTENSIBILITY-BITCODE)
         *   [32.4.2. Pluggable JIT Providers](jit-extensibility.html#JIT-PLUGGABLE)
 
-[]()[]()
+
 
 This chapter explains what just-in-time compilation is, and how it can be configured in PostgreSQL.
 

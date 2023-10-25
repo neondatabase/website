@@ -38,7 +38,7 @@ A data type `tsvector` is provided for storing preprocessed documents, along wit
 
 ### 12.1.1. What Is a Document? [#](#TEXTSEARCH-DOCUMENT)
 
-[]()
+
 
 A *document* is the unit of searching in a full text search system; for example, a magazine article or email message. The text search engine must be able to parse documents and store associations of lexemes (key words) with their parent document. Later, these associations are used to search for documents that contain query words.
 

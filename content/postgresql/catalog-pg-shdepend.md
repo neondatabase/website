@@ -8,7 +8,7 @@
 
 ## 53.48. `pg_shdepend` [#](#CATALOG-PG-SHDEPEND)
 
-[]()
+
 
 The catalog `pg_shdepend` records the dependency relationships between database objects and shared objects, such as roles. This information allows PostgreSQL to ensure that those objects are unreferenced before attempting to delete them.
 

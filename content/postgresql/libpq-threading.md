@@ -8,7 +8,7 @@
 
 ## 34.20. Behavior in Threaded Programs [#](#LIBPQ-THREADING)
 
-[]()
+
 
 As of version 17, libpq is always reentrant and thread-safe. However, one restriction is that no two threads attempt to manipulate the same `PGconn` object at the same time. In particular, you cannot issue concurrent commands from different threads through the same connection object. (If you need to run concurrent commands, use multiple connections.)
 
@@ -16,7 +16,7 @@ As of version 17, libpq is always reentrant and thread-safe. However, one restri
 
 In earlier versions, libpq could be compiled with or without thread support, depending on compiler options. This function allows the querying of libpq's thread-safe status:
 
-*   `PQisthreadsafe`[]() [#](#LIBPQ-PQISTHREADSAFE)
+*   `PQisthreadsafe` [#](#LIBPQ-PQISTHREADSAFE)
 
     Returns the thread safety status of the libpq library.
 

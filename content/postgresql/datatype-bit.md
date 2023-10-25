@@ -8,7 +8,7 @@
 
 ## 8.10. Bit String Types [#](#DATATYPE-BIT)
 
-[]()
+
 
 Bit strings are strings of 1's and 0's. They can be used to store or visualize bit masks. There are two SQL bit types: `bit(n)` and `bit varying(n)`, where *`n`* is a positive integer.
 

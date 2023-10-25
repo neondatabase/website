@@ -10,7 +10,7 @@
 
 As always, there are some functions that just don't fit anywhere.
 
-*   `PQfreemem`[]() [#](#LIBPQ-PQFREEMEM)
+*   `PQfreemem` [#](#LIBPQ-PQFREEMEM)
 
     Frees memory allocated by libpq.
 
@@ -21,7 +21,7 @@ As always, there are some functions that just don't fit anywhere.
 
     Frees memory allocated by libpq, particularly [`PQescapeByteaConn`](libpq-exec.html#LIBPQ-PQESCAPEBYTEACONN), [`PQescapeBytea`](libpq-exec.html#LIBPQ-PQESCAPEBYTEA), [`PQunescapeBytea`](libpq-exec.html#LIBPQ-PQUNESCAPEBYTEA), and `PQnotifies`. It is particularly important that this function, rather than `free()`, be used on Microsoft Windows. This is because allocating memory in a DLL and releasing it in the application works only if multithreaded/single-threaded, release/debug, and static/dynamic flags are the same for the DLL and the application. On non-Microsoft Windows platforms, this function is the same as the standard library function `free()`.
 
-*   `PQconninfoFree`[]() [#](#LIBPQ-PQCONNINFOFREE)
+*   `PQconninfoFree` [#](#LIBPQ-PQCONNINFOFREE)
 
     Frees the data structures allocated by [`PQconndefaults`](libpq-connect.html#LIBPQ-PQCONNDEFAULTS) or [`PQconninfoParse`](libpq-connect.html#LIBPQ-PQCONNINFOPARSE).
 
@@ -34,7 +34,7 @@ As always, there are some functions that just don't fit anywhere.
 
     A simple [`PQfreemem`](libpq-misc.html#LIBPQ-PQFREEMEM) will not do for this, since the array contains references to subsidiary strings.
 
-*   `PQencryptPasswordConn`[]() [#](#LIBPQ-PQENCRYPTPASSWORDCONN)
+*   `PQencryptPasswordConn` [#](#LIBPQ-PQENCRYPTPASSWORDCONN)
 
     Prepares the encrypted form of a PostgreSQL password.
 
@@ -49,7 +49,7 @@ As always, there are some functions that just don't fit anywhere.
 
     The return value is a string allocated by `malloc`. The caller can assume the string doesn't contain any special characters that would require escaping. Use [`PQfreemem`](libpq-misc.html#LIBPQ-PQFREEMEM) to free the result when done with it. On error, returns `NULL`, and a suitable message is stored in the connection object.
 
-*   `PQencryptPassword`[]() [#](#LIBPQ-PQENCRYPTPASSWORD)
+*   `PQencryptPassword` [#](#LIBPQ-PQENCRYPTPASSWORD)
 
     Prepares the md5-encrypted form of a PostgreSQL password.
 
@@ -60,7 +60,7 @@ As always, there are some functions that just don't fit anywhere.
 
     [`PQencryptPassword`](libpq-misc.html#LIBPQ-PQENCRYPTPASSWORD) is an older, deprecated version of [`PQencryptPasswordConn`](libpq-misc.html#LIBPQ-PQENCRYPTPASSWORDCONN). The difference is that [`PQencryptPassword`](libpq-misc.html#LIBPQ-PQENCRYPTPASSWORD) does not require a connection object, and `md5` is always used as the encryption algorithm.
 
-*   `PQmakeEmptyPGresult`[]() [#](#LIBPQ-PQMAKEEMPTYPGRESULT)
+*   `PQmakeEmptyPGresult` [#](#LIBPQ-PQMAKEEMPTYPGRESULT)
 
     Constructs an empty `PGresult` object with the given status.
 
@@ -71,7 +71,7 @@ As always, there are some functions that just don't fit anywhere.
 
     This is libpq's internal function to allocate and initialize an empty `PGresult` object. This function returns `NULL` if memory could not be allocated. It is exported because some applications find it useful to generate result objects (particularly objects with error status) themselves. If *`conn`* is not null and *`status`* indicates an error, the current error message of the specified connection is copied into the `PGresult`. Also, if *`conn`* is not null, any event procedures registered in the connection are copied into the `PGresult`. (They do not get `PGEVT_RESULTCREATE` calls, but see [`PQfireResultCreateEvents`](libpq-misc.html#LIBPQ-PQFIRERESULTCREATEEVENTS).) Note that [`PQclear`](libpq-exec.html#LIBPQ-PQCLEAR) should eventually be called on the object, just as with a `PGresult` returned by libpq itself.
 
-*   `PQfireResultCreateEvents`[]() [#](#LIBPQ-PQFIRERESULTCREATEEVENTS)
+*   `PQfireResultCreateEvents` [#](#LIBPQ-PQFIRERESULTCREATEEVENTS)
 
     Fires a `PGEVT_RESULTCREATE` event (see [Section 34.14](libpq-events.html "34.14. Event System")) for each event procedure registered in the `PGresult` object. Returns non-zero for success, zero if any event procedure fails.
 
@@ -86,7 +86,7 @@ As always, there are some functions that just don't fit anywhere.
 
     The main reason that this function is separate from [`PQmakeEmptyPGresult`](libpq-misc.html#LIBPQ-PQMAKEEMPTYPGRESULT) is that it is often appropriate to create a `PGresult` and fill it with data before invoking the event procedures.
 
-*   `PQcopyResult`[]() [#](#LIBPQ-PQCOPYRESULT)
+*   `PQcopyResult` [#](#LIBPQ-PQCOPYRESULT)
 
     Makes a copy of a `PGresult` object. The copy is not linked to the source result in any way and [`PQclear`](libpq-exec.html#LIBPQ-PQCLEAR) must be called when the copy is no longer needed. If the function fails, `NULL` is returned.
 
@@ -97,7 +97,7 @@ As always, there are some functions that just don't fit anywhere.
 
     This is not intended to make an exact copy. The returned result is always put into `PGRES_TUPLES_OK` status, and does not copy any error message in the source. (It does copy the command status string, however.) The *`flags`* argument determines what else is copied. It is a bitwise OR of several flags. `PG_COPYRES_ATTRS` specifies copying the source result's attributes (column definitions). `PG_COPYRES_TUPLES` specifies copying the source result's tuples. (This implies copying the attributes, too.) `PG_COPYRES_NOTICEHOOKS` specifies copying the source result's notify hooks. `PG_COPYRES_EVENTS` specifies copying the source result's events. (But any instance data associated with the source is not copied.) The event procedures receive `PGEVT_RESULTCOPY` events.
 
-*   `PQsetResultAttrs`[]() [#](#LIBPQ-PQSETRESULTATTRS)
+*   `PQsetResultAttrs` [#](#LIBPQ-PQSETRESULTATTRS)
 
     Sets the attributes of a `PGresult` object.
 
@@ -108,7 +108,7 @@ As always, there are some functions that just don't fit anywhere.
 
     The provided *`attDescs`* are copied into the result. If the *`attDescs`* pointer is `NULL` or *`numAttributes`* is less than one, the request is ignored and the function succeeds. If *`res`* already contains attributes, the function will fail. If the function fails, the return value is zero. If the function succeeds, the return value is non-zero.
 
-*   `PQsetvalue`[]() [#](#LIBPQ-PQSETVALUE)
+*   `PQsetvalue` [#](#LIBPQ-PQSETVALUE)
 
     Sets a tuple field value of a `PGresult` object.
 
@@ -119,7 +119,7 @@ As always, there are some functions that just don't fit anywhere.
 
     The function will automatically grow the result's internal tuples array as needed. However, the *`tup_num`* argument must be less than or equal to [`PQntuples`](libpq-exec.html#LIBPQ-PQNTUPLES), meaning this function can only grow the tuples array one tuple at a time. But any field of any existing tuple can be modified in any order. If a value at *`field_num`* already exists, it will be overwritten. If *`len`* is -1 or *`value`* is `NULL`, the field value will be set to an SQL null value. The *`value`* is copied into the result's private storage, thus is no longer needed after the function returns. If the function fails, the return value is zero. If the function succeeds, the return value is non-zero.
 
-*   `PQresultAlloc`[]() [#](#LIBPQ-PQRESULTALLOC)
+*   `PQresultAlloc` [#](#LIBPQ-PQRESULTALLOC)
 
     Allocate subsidiary storage for a `PGresult` object.
 
@@ -130,7 +130,7 @@ As always, there are some functions that just don't fit anywhere.
 
     Any memory allocated with this function will be freed when *`res`* is cleared. If the function fails, the return value is `NULL`. The result is guaranteed to be adequately aligned for any type of data, just as for `malloc`.
 
-*   `PQresultMemorySize`[]() [#](#LIBPQ-PQRESULTMEMORYSIZE)
+*   `PQresultMemorySize` [#](#LIBPQ-PQRESULTMEMORYSIZE)
 
     Retrieves the number of bytes allocated for a `PGresult` object.
 
@@ -141,7 +141,7 @@ As always, there are some functions that just don't fit anywhere.
 
     This value is the sum of all `malloc` requests associated with the `PGresult` object, that is, all the space that will be freed by [`PQclear`](libpq-exec.html#LIBPQ-PQCLEAR). This information can be useful for managing memory consumption.
 
-*   `PQlibVersion`[]() [#](#LIBPQ-PQLIBVERSION)
+*   `PQlibVersion` [#](#LIBPQ-PQLIBVERSION)
 
     Return the version of libpq that is being used.
 

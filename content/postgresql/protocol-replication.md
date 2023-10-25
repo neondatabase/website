@@ -27,7 +27,7 @@ Replication commands are logged in the server log when [log\_replication\_comman
 
 The commands accepted in replication mode are:
 
-*   `IDENTIFY_SYSTEM` []()[#](#PROTOCOL-REPLICATION-IDENTIFY-SYSTEM)
+*   `IDENTIFY_SYSTEM` [#](#PROTOCOL-REPLICATION-IDENTIFY-SYSTEM)
 
     Requests the server to identify itself. Server replies with a result set of a single row, containing four fields:
 
@@ -47,7 +47,7 @@ The commands accepted in replication mode are:
 
         Database connected to or null.
 
-*   `SHOW` *`name`* []()[#](#PROTOCOL-REPLICATION-SHOW)
+*   `SHOW` *`name`* [#](#PROTOCOL-REPLICATION-SHOW)
 
     Requests the server to send the current setting of a run-time parameter. This is similar to the SQL command [SHOW](sql-show.html "SHOW").
 
@@ -55,7 +55,7 @@ The commands accepted in replication mode are:
 
         The name of a run-time parameter. Available parameters are documented in [Chapter 20](runtime-config.html "Chapter 20. Server Configuration").
 
-*   `TIMELINE_HISTORY` *`tli`* []()[#](#PROTOCOL-REPLICATION-TIMELINE-HISTORY)
+*   `TIMELINE_HISTORY` *`tli`* [#](#PROTOCOL-REPLICATION-TIMELINE-HISTORY)
 
     Requests the server to send over the timeline history file for timeline *`tli`*. Server replies with a result set of a single row, containing two fields. While the fields are labeled as `text`, they effectively return raw bytes, with no encoding conversion:
 
@@ -67,7 +67,7 @@ The commands accepted in replication mode are:
 
         Contents of the timeline history file.
 
-*   `CREATE_REPLICATION_SLOT` *`slot_name`* \[ `TEMPORARY` ] { `PHYSICAL` | `LOGICAL` *`output_plugin`* } \[ ( *`option`* \[, ...] ) ] []()[#](#PROTOCOL-REPLICATION-CREATE-REPLICATION-SLOT)
+*   `CREATE_REPLICATION_SLOT` *`slot_name`* \[ `TEMPORARY` ] { `PHYSICAL` | `LOGICAL` *`output_plugin`* } \[ ( *`option`* \[, ...] ) ] [#](#PROTOCOL-REPLICATION-CREATE-REPLICATION-SLOT)
 
     Create a physical or logical replication slot. See [Section 27.2.6](warm-standby.html#STREAMING-REPLICATION-SLOTS "27.2.6. Replication Slots") for more about replication slots.
 
@@ -119,7 +119,7 @@ The commands accepted in replication mode are:
 
     For compatibility with older releases, this alternative syntax for the `CREATE_REPLICATION_SLOT` command is still supported.
 
-*   `READ_REPLICATION_SLOT` *`slot_name`* []()[#](#PROTOCOL-REPLICATION-READ-REPLICATION-SLOT)
+*   `READ_REPLICATION_SLOT` *`slot_name`* [#](#PROTOCOL-REPLICATION-READ-REPLICATION-SLOT)
 
     Read some information associated with a replication slot. Returns a tuple with `NULL` values if the replication slot does not exist. This command is currently only supported for physical replication slots.
 
@@ -137,7 +137,7 @@ The commands accepted in replication mode are:
 
         The timeline ID associated with `restart_lsn`, following the current timeline history.
 
-*   `START_REPLICATION` \[ `SLOT` *`slot_name`* ] \[ `PHYSICAL` ] *`XXX/XXX`* \[ `TIMELINE` *`tli`* ] []()[#](#PROTOCOL-REPLICATION-START-REPLICATION)
+*   `START_REPLICATION` \[ `SLOT` *`slot_name`* ] \[ `PHYSICAL` ] *`XXX/XXX`* \[ `TIMELINE` *`tli`* ] [#](#PROTOCOL-REPLICATION-START-REPLICATION)
 
     Instructs server to start streaming WAL, starting at WAL location *`XXX/XXX`*. If `TIMELINE` option is specified, streaming starts on timeline *`tli`*; otherwise, the server's current timeline is selected. The server can reply with an error, for example if the requested section of WAL has already been recycled. On success, the server responds with a CopyBothResponse message, and then starts to stream WAL to the frontend.
 
@@ -271,7 +271,7 @@ The commands accepted in replication mode are:
 
         Optional value, in the form of a string constant, associated with the specified option.
 
-*   `DROP_REPLICATION_SLOT` *`slot_name`* \[ `WAIT` ] []()[#](#PROTOCOL-REPLICATION-DROP-REPLICATION-SLOT)
+*   `DROP_REPLICATION_SLOT` *`slot_name`* \[ `WAIT` ] [#](#PROTOCOL-REPLICATION-DROP-REPLICATION-SLOT)
 
     Drops a replication slot, freeing any reserved server-side resources. If the slot is a logical slot that was created in a database other than the database the walsender is connected to, this command fails.
 
@@ -283,7 +283,7 @@ The commands accepted in replication mode are:
 
         This option causes the command to wait if the slot is active until it becomes inactive, instead of the default behavior of raising an error.
 
-*   `BASE_BACKUP` \[ ( *`option`* \[, ...] ) ] []()[#](#PROTOCOL-REPLICATION-BASE-BACKUP)
+*   `BASE_BACKUP` \[ ( *`option`* \[, ...] ) ] [#](#PROTOCOL-REPLICATION-BASE-BACKUP)
 
     Instructs the server to start streaming a base backup. The system will automatically be put in backup mode before the backup is started, and taken out of it when the backup is complete. The following options are accepted:
 

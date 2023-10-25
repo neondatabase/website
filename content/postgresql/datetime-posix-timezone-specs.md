@@ -8,7 +8,7 @@
 
 ## B.5. POSIX Time Zone Specifications [#](#DATETIME-POSIX-TIMEZONE-SPECS)
 
-[]()
+
 
 PostgreSQL can accept time zone specifications that are written according to the POSIX standard's rules for the `TZ` environment variable. POSIX time zone specifications are inadequate to deal with the complexity of real-world time zone history, but there are sometimes reasons to use them.
 

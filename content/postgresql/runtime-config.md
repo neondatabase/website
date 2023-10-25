@@ -98,7 +98,7 @@
     *   [20.17. Developer Options](runtime-config-developer.html)
     *   [20.18. Short Options](runtime-config-short.html)
 
-[]()
+
 
 There are many configuration parameters that affect the behavior of the database system. In the first section of this chapter we describe how to interact with configuration parameters. The subsequent sections discuss each parameter in detail.
 

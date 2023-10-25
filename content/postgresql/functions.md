@@ -136,7 +136,7 @@
 
     *   [9.30.1. Inspecting MCV Lists](functions-statistics.html#FUNCTIONS-STATISTICS-MCV)
 
-[]()[]()
+
 
 PostgreSQL provides a large number of functions and operators for the built-in data types. This chapter describes most of them, although additional special-purpose functions appear in relevant sections of the manual. Users can also define their own functions and operators, as described in [Part V](server-programming.html "Part V. Server Programming"). The psql commands `\df` and `\do` can be used to list all available functions and operators, respectively.
 

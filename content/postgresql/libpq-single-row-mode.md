@@ -8,7 +8,7 @@
 
 ## 34.6. Retrieving Query Results Row-by-Row [#](#LIBPQ-SINGLE-ROW-MODE)
 
-[]()
+
 
 Ordinarily, libpq collects an SQL command's entire result and returns it to the application as a single `PGresult`. This can be unworkable for commands that return a large number of rows. For such cases, applications can use [`PQsendQuery`](libpq-async.html#LIBPQ-PQSENDQUERY) and [`PQgetResult`](libpq-async.html#LIBPQ-PQGETRESULT) in *single-row mode*. In this mode, the result row(s) are returned to the application one at a time, as they are received from the server.
 
@@ -16,7 +16,7 @@ To enter single-row mode, call [`PQsetSingleRowMode`](libpq-single-row-mode.html
 
 When using pipeline mode, single-row mode needs to be activated for each query in the pipeline before retrieving results for that query with `PQgetResult`. See [Section 34.5](libpq-pipeline-mode.html "34.5. Pipeline Mode") for more information.
 
-*   `PQsetSingleRowMode`[]() [#](#LIBPQ-PQSETSINGLEROWMODE)
+*   `PQsetSingleRowMode` [#](#LIBPQ-PQSETSINGLEROWMODE)
 
     Select single-row mode for the currently-executing query.
 

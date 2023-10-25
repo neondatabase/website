@@ -8,7 +8,7 @@
 
 ## 53.9. `pg_auth_members` [#](#CATALOG-PG-AUTH-MEMBERS)
 
-[]()
+
 
 The catalog `pg_auth_members` shows the membership relations between roles. Any non-circular set of relationships is allowed.
 

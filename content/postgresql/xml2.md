@@ -14,7 +14,7 @@
     *   [F.49.4. XSLT Functions](xml2.html#XML2-XSLT)
     *   [F.49.5. Author](xml2.html#XML2-AUTHOR)
 
-[]()
+
 
 The `xml2` module provides XPath querying and XSLT functionality.
 
@@ -42,7 +42,7 @@ From PostgreSQL 8.3 on, there is XML-related functionality based on the SQL/XML 
 
 ### F.49.3. `xpath_table` [#](#XML2-XPATH-TABLE)
 
-[]()
+
 
 ```
 
@@ -165,7 +165,7 @@ The following functions are available if libxslt is installed:
 
 #### F.49.4.1. `xslt_process` [#](#XML2-XSLT-XSLT-PROCESS)
 
-[]()
+
 
 ```
 

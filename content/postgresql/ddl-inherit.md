@@ -10,7 +10,7 @@
 
 *   [5.10.1. Caveats](ddl-inherit.html#DDL-INHERIT-CAVEATS)
 
-[]()[]()
+
 
 PostgreSQL implements table inheritance, which can be a useful tool for database designers. (SQL:1999 and later define a type inheritance feature, which differs in many respects from the features described here.)
 

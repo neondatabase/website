@@ -8,7 +8,7 @@
 
 ## 3.6. Inheritance [#](#TUTORIAL-INHERITANCE)
 
-[]()
+
 
 Inheritance is a concept from object-oriented databases. It opens up interesting new possibilities of database design.
 

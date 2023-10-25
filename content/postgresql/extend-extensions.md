@@ -16,7 +16,7 @@
     *   [38.17.6. Security Considerations for Extensions](extend-extensions.html#EXTEND-EXTENSIONS-SECURITY)
     *   [38.17.7. Extension Example](extend-extensions.html#EXTEND-EXTENSIONS-EXAMPLE)
 
-[]()
+
 
 A useful extension to PostgreSQL typically includes multiple SQL objects; for example, a new data type will require new functions, new operators, and probably new index operator classes. It is helpful to collect all these objects into a single package to simplify database management. PostgreSQL calls such a package an *extension*. To define an extension, you need at least a *script file* that contains the SQL commands to create the extension's objects, and a *control file* that specifies a few basic properties of the extension itself. If the extension includes C code, there will typically also be a shared library file into which the C code has been built. Once you have these files, a simple [`CREATE EXTENSION`](sql-createextension.html "CREATE EXTENSION") command loads the objects into your database.
 
@@ -36,7 +36,7 @@ If an extension's script creates any temporary objects (such as temp tables), th
 
 ### 38.17.1. Extension Files [#](#EXTEND-EXTENSIONS-FILES)
 
-[]()
+
 
 The `CREATE EXTENSION` command relies on a control file for each extension, which must be named the same as the extension with a suffix of `.control`, and must be placed in the installation's `SHAREDIR/extension` directory. There must also be at least one SQL script file, which follows the naming pattern `extension--version.sql` (for example, `foo--1.0.sql` for version `1.0` of extension `foo`). By default, the script file(s) are also placed in the `SHAREDIR/extension` directory; but the control file can specify a different directory for the script file(s).
 
@@ -129,7 +129,7 @@ If an extension references objects belonging to another extension, it is recomme
 
 Some extensions include configuration tables, which contain data that might be added or changed by the user after installation of the extension. Ordinarily, if a table is part of an extension, neither the table's definition nor its content will be dumped by pg\_dump. But that behavior is undesirable for a configuration table; any data changes made by the user need to be included in dumps, or the extension will behave differently after a dump and restore.
 
-[]()
+
 
 To solve this problem, an extension's script file can mark a table or a sequence it has created as a configuration relation, which will cause pg\_dump to include the table's or the sequence's contents (not its definition) in dumps. To do that, call the function `pg_extension_config_dump(regclass, text)` after creating the table or the sequence, for example
 

@@ -8,7 +8,7 @@
 
 ## 53.15. `pg_database` [#](#CATALOG-PG-DATABASE)
 
-[]()
+
 
 The catalog `pg_database` stores information about the available databases. Databases are created with the [`CREATE DATABASE`](sql-createdatabase.html "CREATE DATABASE") command. Consult [Chapter 23](managing-databases.html "Chapter 23. Managing Databases") for details about the meaning of some of the parameters.
 

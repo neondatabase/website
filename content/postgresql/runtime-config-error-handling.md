@@ -8,17 +8,17 @@
 
 ## 20.14. Error Handling [#](#RUNTIME-CONFIG-ERROR-HANDLING)
 
-*   `exit_on_error` (`boolean`) []()[#](#GUC-EXIT-ON-ERROR)
+*   `exit_on_error` (`boolean`) [#](#GUC-EXIT-ON-ERROR)
 
     If on, any error will terminate the current session. By default, this is set to off, so that only FATAL errors will terminate the session.
 
-*   `restart_after_crash` (`boolean`) []()[#](#GUC-RESTART-AFTER-CRASH)
+*   `restart_after_crash` (`boolean`) [#](#GUC-RESTART-AFTER-CRASH)
 
     When set to on, which is the default, PostgreSQL will automatically reinitialize after a backend crash. Leaving this value set to on is normally the best way to maximize the availability of the database. However, in some circumstances, such as when PostgreSQL is being invoked by clusterware, it may be useful to disable the restart so that the clusterware can gain control and take any actions it deems appropriate.
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `data_sync_retry` (`boolean`) []()[#](#GUC-DATA-SYNC-RETRY)
+*   `data_sync_retry` (`boolean`) [#](#GUC-DATA-SYNC-RETRY)
 
     When set to off, which is the default, PostgreSQL will raise a PANIC-level error on failure to flush modified data files to the file system. This causes the database server to crash. This parameter can only be set at server start.
 
@@ -26,7 +26,7 @@
 
     If set to on, PostgreSQL will instead report an error but continue to run so that the data flushing operation can be retried in a later checkpoint. Only set it to on after investigating the operating system's treatment of buffered data in case of write-back failure.
 
-*   `recovery_init_sync_method` (`enum`) []()[#](#GUC-RECOVERY-INIT-SYNC-METHOD)
+*   `recovery_init_sync_method` (`enum`) [#](#GUC-RECOVERY-INIT-SYNC-METHOD)
 
     When set to `fsync`, which is the default, PostgreSQL will recursively open and synchronize all files in the data directory before crash recovery begins. The search for files will follow symbolic links for the WAL directory and each configured tablespace (but not any other symbolic links). This is intended to make sure that all WAL and data files are durably stored on disk before replaying changes. This applies whenever starting a database cluster that did not shut down cleanly, including copies created with pg\_basebackup.
 

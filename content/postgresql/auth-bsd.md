@@ -8,7 +8,7 @@
 
 ## 21.14. BSD Authentication [#](#AUTH-BSD)
 
-[]()
+
 
 This authentication method operates similarly to `password` except that it uses BSD Authentication to verify the password. BSD Authentication is used only to validate user name/password pairs. Therefore the user's role must already exist in the database before BSD Authentication can be used for authentication. The BSD Authentication framework is currently only available on OpenBSD.
 

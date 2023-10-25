@@ -86,7 +86,7 @@ The long version is the rest of this section.
 
 3.  **Regression Tests**
 
-    []()
+    
 
     If you want to test the newly built server before you install it, you can run the regression tests at this point. The regression tests are a test suite to verify that PostgreSQL runs on your machine in the way the developers expected it to. Type:
 
@@ -192,13 +192,13 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
 *   `-Dicu={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-ICU-MESON)
 
-    Build with support for the ICU[]() library, enabling use of ICU collation features (see [Section 24.2](collation.html "24.2. Collation Support")). Defaults to auto and requires the ICU4C package to be installed. The minimum required version of ICU4C is currently 4.2.
+    Build with support for the ICU library, enabling use of ICU collation features (see [Section 24.2](collation.html "24.2. Collation Support")). Defaults to auto and requires the ICU4C package to be installed. The minimum required version of ICU4C is currently 4.2.
 
 *   `-Dllvm={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-LLVM-MESON)
 
     Build with support for LLVM based JIT compilation (see [Chapter 32](jit.html "Chapter 32. Just-in-Time Compilation (JIT)")). This requires the LLVM library to be installed. The minimum required version of LLVM is currently 3.9. Disabled by default.
 
-    `llvm-config`[]() will be used to find the required compilation options. `llvm-config`, and then `llvm-config-$version` for all supported versions, will be searched for in your `PATH`. If that would not yield the desired program, use `LLVM_CONFIG` to specify a path to the correct `llvm-config`.
+    `llvm-config` will be used to find the required compilation options. `llvm-config`, and then `llvm-config-$version` for all supported versions, will be searched for in your `PATH`. If that would not yield the desired program, use `LLVM_CONFIG` to specify a path to the correct `llvm-config`.
 
 *   `-Dlz4={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-LZ4-MESON)
 
@@ -208,7 +208,7 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
     Build with Zstandard compression support. Defaults to auto.
 
-*   `-Dssl={ auto | LIBRARY }` []()[#](#CONFIGURE-WITH-SSL-MESON)
+*   `-Dssl={ auto | LIBRARY }` [#](#CONFIGURE-WITH-SSL-MESON)
 
     Build with support for SSL (encrypted) connections. The only *`LIBRARY`* supported is `openssl`. This requires the OpenSSL package to be installed. Building with this will check for the required header files and libraries to make sure that your OpenSSL installation is sufficient before proceeding. The default for this option is auto.
 
@@ -218,11 +218,11 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
 *   `-Dldap={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-LDAP-MESON)
 
-    Build with LDAP[]() support for authentication and connection parameter lookup (see [Section 34.18](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters") and [Section 21.10](auth-ldap.html "21.10. LDAP Authentication") for more information). On Unix, this requires the OpenLDAP package to be installed. On Windows, the default WinLDAP library is used. Defaults to auto. `meson configure` will check for the required header files and libraries to make sure that your OpenLDAP installation is sufficient before proceeding.
+    Build with LDAP support for authentication and connection parameter lookup (see [Section 34.18](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters") and [Section 21.10](auth-ldap.html "21.10. LDAP Authentication") for more information). On Unix, this requires the OpenLDAP package to be installed. On Windows, the default WinLDAP library is used. Defaults to auto. `meson configure` will check for the required header files and libraries to make sure that your OpenLDAP installation is sufficient before proceeding.
 
 *   `-Dpam={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-PAM-MESON)
 
-    Build with PAM[]() (Pluggable Authentication Modules) support. Defaults to auto.
+    Build with PAM (Pluggable Authentication Modules) support. Defaults to auto.
 
 *   `-Dbsd_auth={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-BSD-AUTH-MESON)
 
@@ -230,7 +230,7 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
 *   `-Dsystemd={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-SYSTEMD-MESON)
 
-    Build with support for systemd[]() service notifications. This improves integration if the server is started under systemd but has no impact otherwise; see [Section 19.3](server-start.html "19.3. Starting the Database Server") for more information. Defaults to auto. libsystemd and the associated header files need to be installed to use this option.
+    Build with support for systemd service notifications. This improves integration if the server is started under systemd but has no impact otherwise; see [Section 19.3](server-start.html "19.3. Starting the Database Server") for more information. Defaults to auto. libsystemd and the associated header files need to be installed to use this option.
 
 *   `-Dbonjour={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-BONJOUR-MESON)
 
@@ -238,7 +238,7 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
 *   `-Duuid=LIBRARY` [#](#CONFIGURE-WITH-UUID-MESON)
 
-    Build the [uuid-ossp](uuid-ossp.html "F.48. uuid-ossp — a UUID generator") module (which provides functions to generate UUIDs), using the specified UUID library.[]() *`LIBRARY`* must be one of:
+    Build the [uuid-ossp](uuid-ossp.html "F.48. uuid-ossp — a UUID generator") module (which provides functions to generate UUIDs), using the specified UUID library. *`LIBRARY`* must be one of:
 
     *   `none` to not build the uuid module. This is the default.
     *   `bsd` to use the UUID functions found in FreeBSD, and some other BSD-derived systems
@@ -267,7 +267,7 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
 *   `-Dzlib={ auto | enabled | disabled }` [#](#CONFIGURE-ZLIB-MESON)
 
-    []()Enables use of the Zlib library. It defaults to auto and enables support for compressed archives in pg\_dump, pg\_restore and pg\_basebackup and is recommended.
+    Enables use of the Zlib library. It defaults to auto and enables support for compressed archives in pg\_dump, pg\_restore and pg\_basebackup and is recommended.
 
 *   `-Dspinlocks={ true | false }` [#](#CONFIGURE-SPINLOCKS-MESON)
 
@@ -307,11 +307,11 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
     Example: `-Dextra_lib_dirs=/opt/gnu/lib,/usr/sup/lib`.
 
-*   `-Dsystem_tzdata=DIRECTORY` []()[#](#CONFIGURE-SYSTEM-TZDATA-MESON)
+*   `-Dsystem_tzdata=DIRECTORY` [#](#CONFIGURE-SYSTEM-TZDATA-MESON)
 
     PostgreSQL includes its own time zone database, which it requires for date and time operations. This time zone database is in fact compatible with the IANA time zone database provided by many operating systems such as FreeBSD, Linux, and Solaris, so it would be redundant to install it again. When this option is used, the system-supplied time zone database in *`DIRECTORY`* is used instead of the one included in the PostgreSQL source distribution. *`DIRECTORY`* must be specified as an absolute path. `/usr/share/zoneinfo` is a likely directory on some operating systems. Note that the installation routine will not detect mismatching or erroneous time zone data. If you use this option, you are advised to run the regression tests to verify that the time zone data you have pointed to works correctly with PostgreSQL.
 
-    []()
+    
 
     This option is mainly aimed at binary package distributors who know their target operating system well. The main advantage of using this option is that the PostgreSQL package won't need to be upgraded whenever any of the many local daylight-saving time rules change. Another advantage is that PostgreSQL can be cross-compiled more straightforwardly if the time zone database files do not need to be built during the installation.
 

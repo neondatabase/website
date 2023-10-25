@@ -8,7 +8,7 @@
 
 ## 8.20. `pg_lsn` Type [#](#DATATYPE-PG-LSN)
 
-[]()
+
 
 The `pg_lsn` data type can be used to store LSN (Log Sequence Number) data which is a pointer to a location in the WAL. This type is a representation of `XLogRecPtr` and an internal system type of PostgreSQL.
 

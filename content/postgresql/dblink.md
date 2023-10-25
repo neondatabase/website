@@ -28,7 +28,7 @@
     *   [dblink\_build\_sql\_delete](contrib-dblink-build-sql-delete.html) — builds a DELETE statement using supplied values for primary key field values
     *   [dblink\_build\_sql\_update](contrib-dblink-build-sql-update.html) — builds an UPDATE statement using a local tuple, replacing the primary key field values with alternative supplied values
 
-[]()
+
 
 `dblink` is a module that supports connections to other PostgreSQL databases from within a database session.
 

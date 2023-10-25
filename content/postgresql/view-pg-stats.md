@@ -8,7 +8,7 @@
 
 ## 54.27. `pg_stats` [#](#VIEW-PG-STATS)
 
-[]()
+
 
 The view `pg_stats` provides access to the information stored in the [`pg_statistic`](catalog-pg-statistic.html "53.51. pg_statistic") catalog. This view allows access only to rows of [`pg_statistic`](catalog-pg-statistic.html "53.51. pg_statistic") that correspond to tables the user has permission to read, and therefore it is safe to allow public read access to this view.
 

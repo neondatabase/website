@@ -8,7 +8,7 @@
 
 ## 53.34. `pg_operator` [#](#CATALOG-PG-OPERATOR)
 
-[]()
+
 
 The catalog `pg_operator` stores information about operators. See [CREATE OPERATOR](sql-createoperator.html "CREATE OPERATOR") and [Section 38.14](xoper.html "38.14. User-Defined Operators") for more information.
 

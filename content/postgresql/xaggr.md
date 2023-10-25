@@ -14,7 +14,7 @@
     *   [38.12.4. Partial Aggregation](xaggr.html#XAGGR-PARTIAL-AGGREGATES)
     *   [38.12.5. Support Functions for Aggregates](xaggr.html#XAGGR-SUPPORT-FUNCTIONS)
 
-[]()
+
 
 Aggregate functions in PostgreSQL are defined in terms of *state values* and *state transition functions*. That is, an aggregate operates using a state value that is updated as each successive input row is processed. To define a new aggregate function, one selects a data type for the state value, an initial value for the state, and a state transition function. The state transition function takes the previous state value and the aggregate's input value(s) for the current row, and returns a new state value. A *final function* can also be specified, in case the desired result of the aggregate is different from the data that needs to be kept in the running state value. The final function takes the ending state value and returns whatever is wanted as the aggregate result. In principle, the transition and final functions are just ordinary functions that could also be used outside the context of the aggregate. (In practice, it's often helpful for performance reasons to create specialized transition functions that can only work when called as part of an aggregate.)
 
@@ -72,7 +72,7 @@ For further details see the [CREATE AGGREGATE](sql-createaggregate.html "CREATE 
 
 ### 38.12.1. Moving-Aggregate Mode [#](#XAGGR-MOVING-AGGREGATES)
 
-[]()[]()
+
 
 Aggregate functions can optionally support *moving-aggregate mode*, which allows substantially faster execution of aggregate functions within windows with moving frame starting points. (See [Section 3.5](tutorial-window.html "3.5. Window Functions") and [Section 4.2.8](sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls") for information about use of aggregate functions as window functions.) The basic idea is that in addition to a normal “forward” transition function, the aggregate provides an *inverse transition function*, which allows rows to be removed from the aggregate's running state value when they exit the window frame. For example a `sum` aggregate, which uses addition as the forward transition function, would use subtraction as the inverse transition function. Without an inverse transition function, the window function mechanism must recalculate the aggregate from scratch each time the frame starting point moves, resulting in run time proportional to the number of input rows times the average frame length. With an inverse transition function, the run time is only proportional to the number of input rows.
 
@@ -126,7 +126,7 @@ This query returns `0` as its second result, rather than the expected answer of 
 
 ### 38.12.2. Polymorphic and Variadic Aggregates [#](#XAGGR-POLYMORPHIC-AGGREGATES)
 
-[]()[]()
+
 
 Aggregate functions can use polymorphic state transition functions or final functions, so that the same functions can be used to implement multiple aggregates. See [Section 38.2.5](extend-type-system.html#EXTEND-TYPES-POLYMORPHIC "38.2.5. Polymorphic Types") for an explanation of polymorphic functions. Going a step further, the aggregate function itself can be specified with polymorphic input type(s) and state type, allowing a single aggregate definition to serve for multiple input data types. Here is an example of a polymorphic aggregate:
 
@@ -211,7 +211,7 @@ For the same reason, it's wise to think twice before creating aggregate function
 
 ### 38.12.3. Ordered-Set Aggregates [#](#XAGGR-ORDERED-SET-AGGREGATES)
 
-[]()
+
 
 The aggregates we have been describing so far are “normal” aggregates. PostgreSQL also supports *ordered-set aggregates*, which differ from normal aggregates in two key ways. First, in addition to ordinary aggregated arguments that are evaluated once per input row, an ordered-set aggregate can have “direct” arguments that are evaluated only once per aggregation operation. Second, the syntax for the ordinary aggregated arguments specifies a sort ordering for them explicitly. An ordered-set aggregate is usually used to implement a computation that depends on a specific row ordering, for instance rank or percentile, so that the sort ordering is a required aspect of any call. For example, the built-in definition of `percentile_disc` is equivalent to:
 
@@ -251,7 +251,7 @@ Currently, ordered-set aggregates cannot be used as window functions, and theref
 
 ### 38.12.4. Partial Aggregation [#](#XAGGR-PARTIAL-AGGREGATES)
 
-[]()
+
 
 Optionally, an aggregate function can support *partial aggregation*. The idea of partial aggregation is to run the aggregate's state transition function over different subsets of the input data independently, and then to combine the state values resulting from those subsets to produce the same state value that would have resulted from scanning all the input in a single operation. This mode can be used for parallel aggregation by having different worker processes scan different portions of a table. Each worker produces a partial state value, and at the end those state values are combined to produce a final state value. (In the future this mode might also be used for purposes such as combining aggregations over local and remote tables; but that is not implemented yet.)
 
@@ -271,7 +271,7 @@ Worth noting also is that for an aggregate to be executed in parallel, the aggre
 
 ### 38.12.5. Support Functions for Aggregates [#](#XAGGR-SUPPORT-FUNCTIONS)
 
-[]()
+
 
 A function written in C can detect that it is being called as an aggregate support function by calling `AggCheckCallContext`, for example:
 

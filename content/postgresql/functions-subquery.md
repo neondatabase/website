@@ -15,7 +15,7 @@
     *   [9.23.5. `ALL`](functions-subquery.html#FUNCTIONS-SUBQUERY-ALL)
     *   [9.23.6. Single-Row Comparison](functions-subquery.html#FUNCTIONS-SUBQUERY-SINGLE-ROW-COMP)
 
-[]()[]()[]()[]()[]()[]()[]()
+
 
 This section describes the SQL-compliant subquery expressions available in PostgreSQL. All of the expression forms documented in this section return Boolean (true/false) results.
 
@@ -137,7 +137,7 @@ See [Section 9.24.5](functions-comparisons.html#ROW-WISE-COMPARISON "9.24.5. R
 
 ### 9.23.6. Single-Row Comparison [#](#FUNCTIONS-SUBQUERY-SINGLE-ROW-COMP)
 
-[]()
+
 
 ```
 

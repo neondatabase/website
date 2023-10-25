@@ -8,7 +8,7 @@
 
 ## 53.36. `pg_parameter_acl` [#](#CATALOG-PG-PARAMETER-ACL)
 
-[]()
+
 
 The catalog `pg_parameter_acl` records configuration parameters for which privileges have been granted to one or more roles. No entry is made for parameters that have default privileges.
 

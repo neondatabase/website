@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## ROLLBACK
 
@@ -25,7 +25,7 @@ ROLLBACK [ WORK | TRANSACTION ] [ AND [ NO ] CHAIN ]
 
 ## Parameters
 
-[]()
+
 
 *   `WORK``TRANSACTION` [#](#SQL-ROLLBACK-TRANSACTION)
 

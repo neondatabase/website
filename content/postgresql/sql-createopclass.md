@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## CREATE OPERATOR CLASS
 

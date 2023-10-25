@@ -20,7 +20,7 @@
         *   [51.2.3. Archive Callback](archive-module-callbacks.html#ARCHIVE-MODULE-ARCHIVE)
         *   [51.2.4. Shutdown Callback](archive-module-callbacks.html#ARCHIVE-MODULE-SHUTDOWN)
 
-[]()
+
 
 PostgreSQL provides infrastructure to create custom modules for continuous archiving (see [Section 26.3](continuous-archiving.html "26.3. Continuous Archiving and Point-in-Time Recovery (PITR)")). While archiving via a shell command (i.e., [archive\_command](runtime-config-wal.html#GUC-ARCHIVE-COMMAND)) is much simpler, a custom archive module will often be considerably more robust and performant.
 

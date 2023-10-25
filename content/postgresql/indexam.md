@@ -17,7 +17,7 @@
     *   [64.5. Index Uniqueness Checks](index-unique-checks.html)
     *   [64.6. Index Cost Estimation Functions](index-cost-estimation.html)
 
-[]()[]()
+
 
 This chapter defines the interface between the core PostgreSQL system and *index access methods*, which manage individual index types. The core system knows nothing about indexes beyond what is specified here, so it is possible to develop entirely new index types by writing add-on code.
 

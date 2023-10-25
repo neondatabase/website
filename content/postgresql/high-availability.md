@@ -36,7 +36,7 @@
         *   [27.4.4. Hot Standby Parameter Reference](hot-standby.html#HOT-STANDBY-PARAMETERS)
         *   [27.4.5. Caveats](hot-standby.html#HOT-STANDBY-CAVEATS)
 
-[]()[]()[]()[]()[]()[]()
+
 
 Database servers can work together to allow a second server to take over quickly if the primary server fails (high availability), or to allow several computers to serve the same data (load balancing). Ideally, database servers could work together seamlessly. Web servers serving static web pages can be combined quite easily by merely load-balancing web requests to multiple machines. In fact, read-only database servers can be combined relatively easily too. Unfortunately, most database servers have a read/write mix of requests, and read/write servers are much harder to combine. This is because though read-only data needs to be placed on each server only once, a write to any server has to be propagated to all servers so that future read requests to those servers return consistent results.
 

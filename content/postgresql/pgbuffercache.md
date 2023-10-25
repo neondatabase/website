@@ -14,11 +14,11 @@
     *   [F.26.4. Sample Output](pgbuffercache.html#PGBUFFERCACHE-SAMPLE-OUTPUT)
     *   [F.26.5. Authors](pgbuffercache.html#PGBUFFERCACHE-AUTHORS)
 
-[]()
+
 
 The `pg_buffercache` module provides a means for examining what's happening in the shared buffer cache in real time.
 
-[]()[]()
+
 
 This module provides the `pg_buffercache_pages()` function (wrapped in the `pg_buffercache` view), the `pg_buffercache_summary()` function, and the `pg_buffercache_usage_counts()` function.
 

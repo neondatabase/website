@@ -21,7 +21,7 @@
     *   [38.5.11. Polymorphic SQL Functions](xfunc-sql.html#XFUNC-SQL-POLYMORPHIC-FUNCTIONS)
     *   [38.5.12. SQL Functions with Collations](xfunc-sql.html#XFUNC-SQL-COLLATIONS)
 
-[]()
+
 
 SQL functions execute an arbitrary list of SQL statements, returning the result of the last query in the list. In the simple (non-set) case, the first row of the last query's result will be returned. (Bear in mind that “the first row” of a multirow result is not well-defined unless you use `ORDER BY`.) If the last query happens to return no rows at all, the null value will be returned.
 
@@ -68,7 +68,7 @@ The syntax of the `CREATE FUNCTION` command requires the function body to be wri
 
 ### 38.5.1. Arguments for SQL Functions [#](#XFUNC-SQL-FUNCTION-ARGUMENTS)
 
-[]()
+
 
 Arguments of an SQL function can be referenced in the function body using either names or numbers. Examples of both methods appear below.
 
@@ -368,7 +368,7 @@ SELECT getname(new_emp());
 
 ### 38.5.4. SQL Functions with Output Parameters [#](#XFUNC-OUTPUT-PARAMETERS)
 
-[]()
+
 
 An alternative way of describing a function's results is to define it with *output parameters*, as in this example:
 
@@ -425,7 +425,7 @@ Parameters can be marked as `IN` (the default), `OUT`, `INOUT`, or `VARIADIC`. A
 
 ### 38.5.5. SQL Procedures with Output Parameters [#](#XFUNC-OUTPUT-PARAMETERS-PROC)
 
-[]()
+
 
 Output parameters are also supported in procedures, but they work a bit differently from functions. In `CALL` commands, output parameters must be included in the argument list. For example, the bank account debiting routine from earlier could be written like this:
 
@@ -452,7 +452,7 @@ When calling a procedure from PL/pgSQL, instead of writing `NULL` you must write
 
 ### 38.5.6. SQL Functions with Variable Numbers of Arguments [#](#XFUNC-SQL-VARIADIC-FUNCTIONS)
 
-[]()[]()
+
 
 SQL functions can be declared to accept variable numbers of arguments, so long as all the “optional” arguments are of the same data type. The optional arguments will be passed to the function as an array. The function is declared by marking the last parameter as `VARIADIC`; this parameter must be declared as being of an array type. For example:
 
@@ -513,7 +513,7 @@ SELECT mleast(arr => ARRAY[10, -1, 5, 4.4]);
 
 ### 38.5.7. SQL Functions with Default Values for Arguments [#](#XFUNC-SQL-PARAMETER-DEFAULTS)
 
-[]()
+
 
 Functions can be declared with default values for some or all input arguments. The default values are inserted whenever the function is called with insufficiently many actual arguments. Since arguments can only be omitted from the end of the actual argument list, all parameters after a parameter with a default value have to have default values as well. (Although the use of named argument notation could allow this restriction to be relaxed, it's still enforced so that positional argument notation works sensibly.) Whether or not you use it, this capability creates a need for precautions when calling functions in databases where some users mistrust other users; see [Section 10.3](typeconv-func.html "10.3. Functions").
 
@@ -583,7 +583,7 @@ Note that we only got one row out of the function. This is because we did not us
 
 ### 38.5.9. SQL Functions Returning Sets [#](#XFUNC-SQL-FUNCTIONS-RETURNING-SET)
 
-[]()
+
 
 When an SQL function is declared as returning `SETOF sometype`, the function's final query is executed to completion, and each row it outputs is returned as an element of the result set.
 
@@ -769,7 +769,7 @@ This formulation will work the same in all versions of PostgreSQL.
 
 ### 38.5.10. SQL Functions Returning `TABLE` [#](#XFUNC-SQL-FUNCTIONS-RETURNING-TABLE)
 
-[]()
+
 
 There is another way to declare a function as returning a set, which is to use the syntax `RETURNS TABLE(columns)`. This is equivalent to using one or more `OUT` parameters plus marking the function as returning `SETOF record` (or `SETOF` a single output parameter's type, as appropriate). This notation is specified in recent versions of the SQL standard, and thus may be more portable than using `SETOF`.
 
@@ -912,7 +912,7 @@ SELECT concat_values('|', 1, 4, 2);
 
 ### 38.5.12. SQL Functions with Collations [#](#XFUNC-SQL-COLLATIONS)
 
-[]()
+
 
 When an SQL function has one or more parameters of collatable data types, a collation is identified for each function call depending on the collations assigned to the actual arguments, as described in [Section 24.2](collation.html "24.2. Collation Support"). If a collation is successfully identified (i.e., there are no conflicts of implicit collations among the arguments) then all the collatable parameters are treated as having that collation implicitly. This will affect the behavior of collation-sensitive operations within the function. For example, using the `anyleast` function described above, the result of
 

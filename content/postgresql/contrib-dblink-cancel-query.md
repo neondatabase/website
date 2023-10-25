@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## dblink\_cancel\_query
 

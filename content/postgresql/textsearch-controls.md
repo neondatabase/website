@@ -19,7 +19,7 @@ To implement full text searching there must be a function to create a `tsvector`
 
 PostgreSQL provides the function `to_tsvector` for converting a document to the `tsvector` data type.
 
-[]()
+
 
 ```
 
@@ -59,7 +59,7 @@ Here we have used `setweight` to label the source of each lexeme in the finished
 
 PostgreSQL provides the functions `to_tsquery`, `plainto_tsquery`, `phraseto_tsquery` and `websearch_to_tsquery` for converting a query to the `tsquery` data type. `to_tsquery` offers access to more features than either `plainto_tsquery` or `phraseto_tsquery`, but it is less forgiving about its input. `websearch_to_tsquery` is a simplified version of `to_tsquery` with an alternative syntax, similar to the one used by web search engines.
 
-[]()
+
 
 ```
 
@@ -110,7 +110,7 @@ SELECT to_tsquery('''supernovae stars'' & !crab');
 
 Without quotes, `to_tsquery` will generate a syntax error for tokens that are not separated by an AND, OR, or FOLLOWED BY operator.
 
-[]()
+
 
 ```
 
@@ -141,7 +141,7 @@ SELECT plainto_tsquery('english', 'The Fat & Rats:C');
 
 Here, all the input punctuation was discarded.
 
-[]()
+
 
 ```
 
@@ -225,11 +225,11 @@ Ranking attempts to measure how relevant documents are to a particular query, so
 
 The two ranking functions currently available are:
 
-*   []()`ts_rank([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4`
+*   `ts_rank([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4`
 
     Ranks vectors based on the frequency of their matching lexemes.
 
-*   []()`ts_rank_cd([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4`
+*   `ts_rank_cd([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4`
 
     This function computes the *cover density* ranking for the given document vector and query, as described in Clarke, Cormack, and Tudhope's "Relevance Ranking for One to Three Term Queries" in the journal "Information Processing and Management", 1999. Cover density is similar to `ts_rank` ranking except that the proximity of matching lexemes to each other is taken into consideration.
 
@@ -317,7 +317,7 @@ Ranking can be expensive since it requires consulting the `tsvector` of each mat
 
 To present search results it is ideal to show a part of each document and how it is related to the query. Usually, search engines show fragments of the document with marked search terms. PostgreSQL provides a function `ts_headline` that implements this functionality.
 
-[]()
+
 
 ```
 

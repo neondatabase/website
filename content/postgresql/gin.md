@@ -24,7 +24,7 @@
     *   [70.6. Limitations](gin-limit.html)
     *   [70.7. Examples](gin-examples.html)
 
-[]()
+
 
 ***
 

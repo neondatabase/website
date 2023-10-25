@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## SPI\_result\_code\_string
 

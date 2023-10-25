@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## SPI\_cursor\_open\_with\_paramlist
 

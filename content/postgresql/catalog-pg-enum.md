@@ -8,7 +8,7 @@
 
 ## 53.20. `pg_enum` [#](#CATALOG-PG-ENUM)
 
-[]()
+
 
 The `pg_enum` catalog contains entries showing the values and labels for each enum type. The internal representation of a given enum value is actually the OID of its associated row in `pg_enum`.
 

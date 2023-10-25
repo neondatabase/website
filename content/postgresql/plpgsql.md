@@ -87,7 +87,7 @@
         *   [43.13.2. Other Things to Watch For](plpgsql-porting.html#PLPGSQL-PORTING-OTHER)
         *   [43.13.3. Appendix](plpgsql-porting.html#PLPGSQL-PORTING-APPENDIX)
 
-[]()
+
 
 ***
 

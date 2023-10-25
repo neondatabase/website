@@ -109,7 +109,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
 ### 34.14.2. Event Callback Procedure [#](#LIBPQ-EVENTS-PROC)
 
-*   `PGEventProc`[]() [#](#LIBPQ-PGEVENTPROC)
+*   `PGEventProc` [#](#LIBPQ-PGEVENTPROC)
 
     `PGEventProc` is a typedef for a pointer to an event procedure, that is, the user callback function that receives events from libpq. The signature of an event procedure must be
 
@@ -128,7 +128,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
 ### 34.14.3. Event Support Functions [#](#LIBPQ-EVENTS-FUNCS)
 
-*   `PQregisterEventProc`[]() [#](#LIBPQ-PQREGISTEREVENTPROC)
+*   `PQregisterEventProc` [#](#LIBPQ-PQREGISTEREVENTPROC)
 
     Registers an event callback procedure with libpq.
 
@@ -142,7 +142,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
     The *`proc`* argument will be called when a libpq event is fired. Its memory address is also used to lookup `instanceData`. The *`name`* argument is used to refer to the event procedure in error messages. This value cannot be `NULL` or a zero-length string. The name string is copied into the `PGconn`, so what is passed need not be long-lived. The *`passThrough`* pointer is passed to the *`proc`* whenever an event occurs. This argument can be `NULL`.
 
-*   `PQsetInstanceData`[]() [#](#LIBPQ-PQSETINSTANCEDATA)
+*   `PQsetInstanceData` [#](#LIBPQ-PQSETINSTANCEDATA)
 
     Sets the connection *`conn`*'s `instanceData` for procedure *`proc`* to *`data`*. This returns non-zero for success and zero for failure. (Failure is only possible if *`proc`* has not been properly registered in *`conn`*.)
 
@@ -151,7 +151,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
     int PQsetInstanceData(PGconn *conn, PGEventProc proc, void *data);
     ```
 
-*   `PQinstanceData`[]() [#](#LIBPQ-PQINSTANCEDATA)
+*   `PQinstanceData` [#](#LIBPQ-PQINSTANCEDATA)
 
     Returns the connection *`conn`*'s `instanceData` associated with procedure *`proc`*, or `NULL` if there is none.
 
@@ -160,7 +160,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
     void *PQinstanceData(const PGconn *conn, PGEventProc proc);
     ```
 
-*   `PQresultSetInstanceData`[]() [#](#LIBPQ-PQRESULTSETINSTANCEDATA)
+*   `PQresultSetInstanceData` [#](#LIBPQ-PQRESULTSETINSTANCEDATA)
 
     Sets the result's `instanceData` for *`proc`* to *`data`*. This returns non-zero for success and zero for failure. (Failure is only possible if *`proc`* has not been properly registered in the result.)
 
@@ -171,7 +171,7 @@ The enum `PGEventId` names the types of events handled by the event system. All 
 
     Beware that any storage represented by *`data`* will not be accounted for by [`PQresultMemorySize`](libpq-misc.html#LIBPQ-PQRESULTMEMORYSIZE), unless it is allocated using [`PQresultAlloc`](libpq-misc.html#LIBPQ-PQRESULTALLOC). (Doing so is recommendable because it eliminates the need to free such storage explicitly when the result is destroyed.)
 
-*   `PQresultInstanceData`[]() [#](#LIBPQ-PQRESULTINSTANCEDATA)
+*   `PQresultInstanceData` [#](#LIBPQ-PQRESULTINSTANCEDATA)
 
     Returns the result's `instanceData` associated with *`proc`*, or `NULL` if there is none.
 

@@ -42,7 +42,7 @@
         *   [4.3.2. Using Named Notation](sql-syntax-calling-funcs.html#SQL-SYNTAX-CALLING-FUNCS-NAMED)
         *   [4.3.3. Using Mixed Notation](sql-syntax-calling-funcs.html#SQL-SYNTAX-CALLING-FUNCS-MIXED)
 
-[]()
+
 
 This chapter describes the syntax of SQL. It forms the foundation for understanding the following chapters which will go into detail about how SQL commands are applied to define and modify data.
 

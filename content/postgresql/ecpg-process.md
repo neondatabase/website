@@ -37,7 +37,7 @@ cc -o myprog prog1.o prog2.o ... -lecpg
 
 Again, you might have to add an option like `-L/usr/local/pgsql/lib` to that command line.
 
-You can use `pg_config`[]() or `pkg-config`[]() with package name `libecpg` to get the paths for your installation.
+You can use `pg_config` or `pkg-config` with package name `libecpg` to get the paths for your installation.
 
 If you manage the build process of a larger project using make, it might be convenient to include the following implicit rule to your makefiles:
 

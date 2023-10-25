@@ -11,7 +11,7 @@
 *   *   [F.9.1. Example Usage](btree-gist.html#BTREE-GIST-EXAMPLE-USAGE)
     *   [F.9.2. Authors](btree-gist.html#BTREE-GIST-AUTHORS)
 
-[]()
+
 
 `btree_gist` provides GiST index operator classes that implement B-tree equivalent behavior for the data types `int2`, `int4`, `int8`, `float4`, `float8`, `numeric`, `timestamp with time zone`, `timestamp without time zone`, `time with time zone`, `time without time zone`, `date`, `interval`, `oid`, `money`, `char`, `varchar`, `text`, `bytea`, `bit`, `varbit`, `macaddr`, `macaddr8`, `inet`, `cidr`, `uuid`, `bool` and all `enum` types.
 

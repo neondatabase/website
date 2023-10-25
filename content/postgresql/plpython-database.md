@@ -65,7 +65,7 @@ The `plpy` module provides several functions to execute database commands:
 
 *   `plpy.prepare(query [, argtypes])``plpy.execute(plan [, arguments [, limit]])`
 
-    []()`plpy.prepare` prepares the execution plan for a query. It is called with a query string and a list of parameter types, if you have parameter references in the query. For example:
+    `plpy.prepare` prepares the execution plan for a query. It is called with a query string and a list of parameter types, if you have parameter references in the query. For example:
 
     ```
 

@@ -8,7 +8,7 @@
 
 ## 53.56. `pg_tablespace` [#](#CATALOG-PG-TABLESPACE)
 
-[]()
+
 
 The catalog `pg_tablespace` stores information about the available tablespaces. Tables can be placed in particular tablespaces to aid administration of disk layout.
 

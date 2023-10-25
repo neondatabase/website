@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## CREATE VIEW
 
@@ -38,7 +38,7 @@ If a schema name is given (for example, `CREATE VIEW myschema.myview ...`) then 
 
     If any of the tables referenced by the view are temporary, the view is created as a temporary view (whether `TEMPORARY` is specified or not).
 
-*   `RECURSIVE`[]()
+*   `RECURSIVE`
 
     Creates a recursive view. The syntax
 
@@ -86,7 +86,7 @@ If a schema name is given (for example, `CREATE VIEW myschema.myview ...`) then 
 
     A [`SELECT`](sql-select.html "SELECT") or [`VALUES`](sql-values.html "VALUES") command which will provide the columns and rows of the view.
 
-*   `WITH [ CASCADED | LOCAL ] CHECK OPTION`[]()[]()
+*   `WITH [ CASCADED | LOCAL ] CHECK OPTION`
 
     This option controls the behavior of automatically updatable views. When this option is specified, `INSERT` and `UPDATE` commands on the view will be checked to ensure that new rows satisfy the view-defining condition (that is, the new rows are checked to ensure that they are visible through the view). If they are not, the update will be rejected. If the `CHECK OPTION` is not specified, `INSERT` and `UPDATE` commands on the view are allowed to create rows that are not visible through the view. The following check options are supported:
 
@@ -136,7 +136,7 @@ When `CREATE OR REPLACE VIEW` is used on an existing view, only the view's defin
 
 ### Updatable Views
 
-[]()
+
 
 Simple views are automatically updatable: the system will allow `INSERT`, `UPDATE` and `DELETE` statements to be used on the view in the same way as on a regular table. A view is automatically updatable if it satisfies all of the following conditions:
 

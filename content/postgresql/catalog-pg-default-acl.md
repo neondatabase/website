@@ -8,7 +8,7 @@
 
 ## 53.17. `pg_default_acl` [#](#CATALOG-PG-DEFAULT-ACL)
 
-[]()
+
 
 The catalog `pg_default_acl` stores initial privileges to be assigned to newly created objects.
 

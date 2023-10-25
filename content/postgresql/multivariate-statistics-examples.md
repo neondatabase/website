@@ -12,7 +12,7 @@
     *   [76.2.2. Multivariate N-Distinct Counts](multivariate-statistics-examples.html#MULTIVARIATE-NDISTINCT-COUNTS)
     *   [76.2.3. MCV Lists](multivariate-statistics-examples.html#MCV-LISTS)
 
-[]()
+
 
 ### 76.2.1. Functional Dependencies [#](#FUNCTIONAL-DEPENDENCIES)
 

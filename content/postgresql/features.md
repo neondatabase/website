@@ -31,47 +31,47 @@ The standard is split into a number of parts, each also known by a shorthand nam
 
 *   ISO/IEC 9075-1 Framework (SQL/Framework)
 
-    []()
+    
 
 *   ISO/IEC 9075-2 Foundation (SQL/Foundation)
 
-    []()
+    
 
 *   ISO/IEC 9075-3 Call Level Interface (SQL/CLI)
 
-    []()
+    
 
 *   ISO/IEC 9075-4 Persistent Stored Modules (SQL/PSM)
 
-    []()
+    
 
 *   ISO/IEC 9075-9 Management of External Data (SQL/MED)
 
-    []()
+    
 
 *   ISO/IEC 9075-10 Object Language Bindings (SQL/OLB)
 
-    []()
+    
 
 *   ISO/IEC 9075-11 Information and Definition Schemas (SQL/Schemata)
 
-    []()
+    
 
 *   ISO/IEC 9075-13 Routines and Types using the Java Language (SQL/JRT)
 
-    []()
+    
 
 *   ISO/IEC 9075-14 XML-related specifications (SQL/XML)
 
-    []()
+    
 
 *   ISO/IEC 9075-15 Multi-dimensional arrays (SQL/MDA)
 
-    []()
+    
 
 *   ISO/IEC 9075-16 Property Graph Queries (SQL/PGQ)
 
-    []()
+    
 
 Note that some part numbers are not (or no longer) used.
 

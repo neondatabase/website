@@ -8,7 +8,7 @@
 
 ## 6.1. Inserting Data [#](#DML-INSERT)
 
-[]()[]()
+
 
 When a table is created, it contains no data. The first thing to do before a database can be of much use is to insert data. Data is inserted one row at a time. You can also insert more than one row in a single command, but it is not possible to insert something that is not a complete row. Even if you know only some column values, a complete row must be created.
 

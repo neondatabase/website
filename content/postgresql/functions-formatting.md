@@ -8,7 +8,7 @@
 
 ## 9.8. Data Type Formatting Functions [#](#FUNCTIONS-FORMATTING)
 
-[]()
+
 
 The PostgreSQL formatting functions provide a powerful set of tools for converting various data types (date/time, integer, floating point, numeric) to formatted strings and for converting from formatted strings to specific data types. [Table 9.26](functions-formatting.html#FUNCTIONS-FORMATTING-TABLE "Table 9.26. Formatting Functions") lists them. These functions all follow a common calling convention: the first argument is the value to be formatted and the second argument is a template that defines the output or input format.
 
@@ -16,12 +16,12 @@ The PostgreSQL formatting functions provide a powerful set of tools for converti
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                                                                                                                                                          |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| []()`to_char` ( `timestamp`, `text` ) → `text``to_char` ( `timestamp with time zone`, `text` ) → `text`Converts time stamp to string according to the given format.`to_char(timestamp '2002-04-20 17:31:12.66', 'HH12:MI:SS')` → `05:31:12`                                                                                                            |
+| `to_char` ( `timestamp`, `text` ) → `text``to_char` ( `timestamp with time zone`, `text` ) → `text`Converts time stamp to string according to the given format.`to_char(timestamp '2002-04-20 17:31:12.66', 'HH12:MI:SS')` → `05:31:12`                                                                                                            |
 | `to_char` ( `interval`, `text` ) → `text`Converts interval to string according to the given format.`to_char(interval '15h 2m 12s', 'HH24:MI:SS')` → `15:02:12`                                                                                                                                                                                         |
 | `to_char` ( *`numeric_type`*, `text` ) → `text`Converts number to string according to the given format; available for `integer`, `bigint`, `numeric`, `real`, `double precision`.`to_char(125, '999')` → `125``to_char(125.8::real, '999D9')` → `125.8``to_char(-125.8, '999D99S')` → `125.80-`                                                        |
-| []()`to_date` ( `text`, `text` ) → `date`Converts string to date according to the given format.`to_date('05 Dec 2000', 'DD Mon YYYY')` → `2000-12-05`                                                                                                                                                                                                  |
-| []()`to_number` ( `text`, `text` ) → `numeric`Converts string to numeric according to the given format.`to_number('12,454.8-', '99G999D9S')` → `-12454.8`                                                                                                                                                                                              |
-| []()`to_timestamp` ( `text`, `text` ) → `timestamp with time zone`Converts string to time stamp according to the given format. (See also `to_timestamp(double precision)` in [Table 9.33](functions-datetime.html#FUNCTIONS-DATETIME-TABLE "Table 9.33. Date/Time Functions").)`to_timestamp('05 Dec 2000', 'DD Mon YYYY')` → `2000-12-05 00:00:00-05` |
+| `to_date` ( `text`, `text` ) → `date`Converts string to date according to the given format.`to_date('05 Dec 2000', 'DD Mon YYYY')` → `2000-12-05`                                                                                                                                                                                                  |
+| `to_number` ( `text`, `text` ) → `numeric`Converts string to numeric according to the given format.`to_number('12,454.8-', '99G999D9S')` → `-12454.8`                                                                                                                                                                                              |
+| `to_timestamp` ( `text`, `text` ) → `timestamp with time zone`Converts string to time stamp according to the given format. (See also `to_timestamp(double precision)` in [Table 9.33](functions-datetime.html#FUNCTIONS-DATETIME-TABLE "Table 9.33. Date/Time Functions").)`to_timestamp('05 Dec 2000', 'DD Mon YYYY')` → `2000-12-05 00:00:00-05` |
 
 \
 

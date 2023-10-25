@@ -8,7 +8,7 @@
 
 ## 11.12. Examining Index Usage [#](#INDEXES-EXAMINE)
 
-[]()
+
 
 Although indexes in PostgreSQL do not need maintenance or tuning, it is still important to check which indexes are actually used by the real-life query workload. Examining index usage for an individual query is done with the [EXPLAIN](sql-explain.html "EXPLAIN") command; its application for this purpose is illustrated in [Section 14.1](using-explain.html "14.1. Using EXPLAIN"). It is also possible to gather overall statistics about index usage in a running server, as described in [Section 28.2](monitoring-stats.html "28.2. The Cumulative Statistics System").
 

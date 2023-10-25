@@ -19,7 +19,7 @@ For additional information on tuning these settings, see [Section 30.5](wal-con
 
 ### 20.5.1. Settings [#](#RUNTIME-CONFIG-WAL-SETTINGS)
 
-*   `wal_level` (`enum`) []()[#](#GUC-WAL-LEVEL)
+*   `wal_level` (`enum`) [#](#GUC-WAL-LEVEL)
 
     `wal_level` determines how much information is written to the WAL. The default value is `replica`, which writes enough data to support WAL archiving and replication, including running read-only queries on a standby server. `minimal` removes all logging except the information required to recover from a crash or immediate shutdown. Finally, `logical` adds information necessary to support logical decoding. Each level includes the information logged at all lower levels. This parameter can only be set at server start.
 
@@ -40,7 +40,7 @@ For additional information on tuning these settings, see [Section 30.5](wal-con
 
     In releases prior to 9.6, this parameter also allowed the values `archive` and `hot_standby`. These are still accepted but mapped to `replica`.
 
-*   `fsync` (`boolean`) []()[#](#GUC-FSYNC)
+*   `fsync` (`boolean`) [#](#GUC-FSYNC)
 
     If this parameter is on, the PostgreSQL server will try to make sure that updates are physically written to disk, by issuing `fsync()` system calls or various equivalent methods (see [wal\_sync\_method](runtime-config-wal.html#GUC-WAL-SYNC-METHOD)). This ensures that the database cluster can recover to a consistent state after an operating system or hardware crash.
 
@@ -54,7 +54,7 @@ For additional information on tuning these settings, see [Section 30.5](wal-con
 
     `fsync` can only be set in the `postgresql.conf` file or on the server command line. If you turn this parameter off, also consider turning off [full\_page\_writes](runtime-config-wal.html#GUC-FULL-PAGE-WRITES).
 
-*   `synchronous_commit` (`enum`) []()[#](#GUC-SYNCHRONOUS-COMMIT)
+*   `synchronous_commit` (`enum`) [#](#GUC-SYNCHRONOUS-COMMIT)
 
     Specifies how much WAL processing must complete before the database server returns a “success” indication to the client. Valid values are `remote_apply`, `on` (the default), `remote_write`, `local`, and `off`.
 
@@ -78,7 +78,7 @@ For additional information on tuning these settings, see [Section 30.5](wal-con
     | local                       |           •          |                                       |                                       |                           |
     | off                         |                      |                                       |                                       |                           |
 
-*   `wal_sync_method` (`enum`) []()[#](#GUC-WAL-SYNC-METHOD)
+*   `wal_sync_method` (`enum`) [#](#GUC-WAL-SYNC-METHOD)
 
     Method used for forcing WAL updates out to disk. If `fsync` is off then this setting is irrelevant, since WAL file updates will not be forced out at all. Possible values are:
 
@@ -90,7 +90,7 @@ For additional information on tuning these settings, see [Section 30.5](wal-con
 
     Not all of these choices are available on all platforms. The default is the first method in the above list that is supported by the platform, except that `fdatasync` is the default on Linux and FreeBSD. The default is not necessarily ideal; it might be necessary to change this setting or other aspects of your system configuration in order to create a crash-safe configuration or achieve optimal performance. These aspects are discussed in [Section 30.1](wal-reliability.html "30.1. Reliability"). This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `full_page_writes` (`boolean`) []()[#](#GUC-FULL-PAGE-WRITES)
+*   `full_page_writes` (`boolean`) [#](#GUC-FULL-PAGE-WRITES)
 
     When this parameter is on, the PostgreSQL server writes the entire content of each disk page to WAL during the first modification of that page after a checkpoint. This is needed because a page write that is in process during an operating system crash might be only partially completed, leading to an on-disk page that contains a mix of old and new data. The row-level change data normally stored in WAL will not be enough to completely restore such a page during post-crash recovery. Storing the full page image guarantees that the page can be correctly restored, but at the price of increasing the amount of data that must be written to WAL. (Because WAL replay always starts from a checkpoint, it is sufficient to do this during the first change of each page after a checkpoint. Therefore, one way to reduce the cost of full-page writes is to increase the checkpoint interval parameters.)
 
@@ -100,7 +100,7 @@ For additional information on tuning these settings, see [Section 30.5](wal-con
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line. The default is `on`.
 
-*   `wal_log_hints` (`boolean`) []()[#](#GUC-WAL-LOG-HINTS)
+*   `wal_log_hints` (`boolean`) [#](#GUC-WAL-LOG-HINTS)
 
     When this parameter is `on`, the PostgreSQL server writes the entire content of each disk page to WAL during the first modification of that page after a checkpoint, even for non-critical modifications of so-called hint bits.
 
@@ -108,127 +108,127 @@ For additional information on tuning these settings, see [Section 30.5](wal-con
 
     This parameter can only be set at server start. The default value is `off`.
 
-*   `wal_compression` (`enum`) []()[#](#GUC-WAL-COMPRESSION)
+*   `wal_compression` (`enum`) [#](#GUC-WAL-COMPRESSION)
 
     This parameter enables compression of WAL using the specified compression method. When enabled, the PostgreSQL server compresses full page images written to WAL when [full\_page\_writes](runtime-config-wal.html#GUC-FULL-PAGE-WRITES) is on or during a base backup. A compressed page image will be decompressed during WAL replay. The supported methods are `pglz`, `lz4` (if PostgreSQL was compiled with `--with-lz4`) and `zstd` (if PostgreSQL was compiled with `--with-zstd`). The default value is `off`. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
     Enabling compression can reduce the WAL volume without increasing the risk of unrecoverable data corruption, but at the cost of some extra CPU spent on the compression during WAL logging and on the decompression during WAL replay.
 
-*   `wal_init_zero` (`boolean`) []()[#](#GUC-WAL-INIT-ZERO)
+*   `wal_init_zero` (`boolean`) [#](#GUC-WAL-INIT-ZERO)
 
     If set to `on` (the default), this option causes new WAL files to be filled with zeroes. On some file systems, this ensures that space is allocated before we need to write WAL records. However, *Copy-On-Write* (COW) file systems may not benefit from this technique, so the option is given to skip the unnecessary work. If set to `off`, only the final byte is written when the file is created so that it has the expected size.
 
-*   `wal_recycle` (`boolean`) []()[#](#GUC-WAL-RECYCLE)
+*   `wal_recycle` (`boolean`) [#](#GUC-WAL-RECYCLE)
 
     If set to `on` (the default), this option causes WAL files to be recycled by renaming them, avoiding the need to create new ones. On COW file systems, it may be faster to create new ones, so the option is given to disable this behavior.
 
-*   `wal_buffers` (`integer`) []()[#](#GUC-WAL-BUFFERS)
+*   `wal_buffers` (`integer`) [#](#GUC-WAL-BUFFERS)
 
     The amount of shared memory used for WAL data that has not yet been written to disk. The default setting of -1 selects a size equal to 1/32nd (about 3%) of [shared\_buffers](runtime-config-resource.html#GUC-SHARED-BUFFERS), but not less than `64kB` nor more than the size of one WAL segment, typically `16MB`. This value can be set manually if the automatic choice is too large or too small, but any positive value less than `32kB` will be treated as `32kB`. If this value is specified without units, it is taken as WAL blocks, that is `XLOG_BLCKSZ` bytes, typically 8kB. This parameter can only be set at server start.
 
     The contents of the WAL buffers are written out to disk at every transaction commit, so extremely large values are unlikely to provide a significant benefit. However, setting this value to at least a few megabytes can improve write performance on a busy server where many clients are committing at once. The auto-tuning selected by the default setting of -1 should give reasonable results in most cases.
 
-*   `wal_writer_delay` (`integer`) []()[#](#GUC-WAL-WRITER-DELAY)
+*   `wal_writer_delay` (`integer`) [#](#GUC-WAL-WRITER-DELAY)
 
     Specifies how often the WAL writer flushes WAL, in time terms. After flushing WAL the writer sleeps for the length of time given by `wal_writer_delay`, unless woken up sooner by an asynchronously committing transaction. If the last flush happened less than `wal_writer_delay` ago and less than `wal_writer_flush_after` worth of WAL has been produced since, then WAL is only written to the operating system, not flushed to disk. If this value is specified without units, it is taken as milliseconds. The default value is 200 milliseconds (`200ms`). Note that on many systems, the effective resolution of sleep delays is 10 milliseconds; setting `wal_writer_delay` to a value that is not a multiple of 10 might have the same results as setting it to the next higher multiple of 10. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `wal_writer_flush_after` (`integer`) []()[#](#GUC-WAL-WRITER-FLUSH-AFTER)
+*   `wal_writer_flush_after` (`integer`) [#](#GUC-WAL-WRITER-FLUSH-AFTER)
 
     Specifies how often the WAL writer flushes WAL, in volume terms. If the last flush happened less than `wal_writer_delay` ago and less than `wal_writer_flush_after` worth of WAL has been produced since, then WAL is only written to the operating system, not flushed to disk. If `wal_writer_flush_after` is set to `0` then WAL data is always flushed immediately. If this value is specified without units, it is taken as WAL blocks, that is `XLOG_BLCKSZ` bytes, typically 8kB. The default is `1MB`. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `wal_skip_threshold` (`integer`) []()[#](#GUC-WAL-SKIP-THRESHOLD)
+*   `wal_skip_threshold` (`integer`) [#](#GUC-WAL-SKIP-THRESHOLD)
 
     When `wal_level` is `minimal` and a transaction commits after creating or rewriting a permanent relation, this setting determines how to persist the new data. If the data is smaller than this setting, write it to the WAL log; otherwise, use an fsync of affected files. Depending on the properties of your storage, raising or lowering this value might help if such commits are slowing concurrent transactions. If this value is specified without units, it is taken as kilobytes. The default is two megabytes (`2MB`).
 
-*   `commit_delay` (`integer`) []()[#](#GUC-COMMIT-DELAY)
+*   `commit_delay` (`integer`) [#](#GUC-COMMIT-DELAY)
 
     Setting `commit_delay` adds a time delay before a WAL flush is initiated. This can improve group commit throughput by allowing a larger number of transactions to commit via a single WAL flush, if system load is high enough that additional transactions become ready to commit within the given interval. However, it also increases latency by up to the `commit_delay` for each WAL flush. Because the delay is just wasted if no other transactions become ready to commit, a delay is only performed if at least `commit_siblings` other transactions are active when a flush is about to be initiated. Also, no delays are performed if `fsync` is disabled. If this value is specified without units, it is taken as microseconds. The default `commit_delay` is zero (no delay). Only superusers and users with the appropriate `SET` privilege can change this setting.
 
     In PostgreSQL releases prior to 9.3, `commit_delay` behaved differently and was much less effective: it affected only commits, rather than all WAL flushes, and waited for the entire configured delay even if the WAL flush was completed sooner. Beginning in PostgreSQL 9.3, the first process that becomes ready to flush waits for the configured interval, while subsequent processes wait only until the leader completes the flush operation.
 
-*   `commit_siblings` (`integer`) []()[#](#GUC-COMMIT-SIBLINGS)
+*   `commit_siblings` (`integer`) [#](#GUC-COMMIT-SIBLINGS)
 
     Minimum number of concurrent open transactions to require before performing the `commit_delay` delay. A larger value makes it more probable that at least one other transaction will become ready to commit during the delay interval. The default is five transactions.
 
 ### 20.5.2. Checkpoints [#](#RUNTIME-CONFIG-WAL-CHECKPOINTS)
 
-*   `checkpoint_timeout` (`integer`) []()[#](#GUC-CHECKPOINT-TIMEOUT)
+*   `checkpoint_timeout` (`integer`) [#](#GUC-CHECKPOINT-TIMEOUT)
 
     Maximum time between automatic WAL checkpoints. If this value is specified without units, it is taken as seconds. The valid range is between 30 seconds and one day. The default is five minutes (`5min`). Increasing this parameter can increase the amount of time needed for crash recovery. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `checkpoint_completion_target` (`floating point`) []()[#](#GUC-CHECKPOINT-COMPLETION-TARGET)
+*   `checkpoint_completion_target` (`floating point`) [#](#GUC-CHECKPOINT-COMPLETION-TARGET)
 
     Specifies the target of checkpoint completion, as a fraction of total time between checkpoints. The default is 0.9, which spreads the checkpoint across almost all of the available interval, providing fairly consistent I/O load while also leaving some time for checkpoint completion overhead. Reducing this parameter is not recommended because it causes the checkpoint to complete faster. This results in a higher rate of I/O during the checkpoint followed by a period of less I/O between the checkpoint completion and the next scheduled checkpoint. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `checkpoint_flush_after` (`integer`) []()[#](#GUC-CHECKPOINT-FLUSH-AFTER)
+*   `checkpoint_flush_after` (`integer`) [#](#GUC-CHECKPOINT-FLUSH-AFTER)
 
     Whenever more than this amount of data has been written while performing a checkpoint, attempt to force the OS to issue these writes to the underlying storage. Doing so will limit the amount of dirty data in the kernel's page cache, reducing the likelihood of stalls when an `fsync` is issued at the end of the checkpoint, or when the OS writes data back in larger batches in the background. Often that will result in greatly reduced transaction latency, but there also are some cases, especially with workloads that are bigger than [shared\_buffers](runtime-config-resource.html#GUC-SHARED-BUFFERS), but smaller than the OS's page cache, where performance might degrade. This setting may have no effect on some platforms. If this value is specified without units, it is taken as blocks, that is `BLCKSZ` bytes, typically 8kB. The valid range is between `0`, which disables forced writeback, and `2MB`. The default is `256kB` on Linux, `0` elsewhere. (If `BLCKSZ` is not 8kB, the default and maximum values scale proportionally to it.) This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `checkpoint_warning` (`integer`) []()[#](#GUC-CHECKPOINT-WARNING)
+*   `checkpoint_warning` (`integer`) [#](#GUC-CHECKPOINT-WARNING)
 
     Write a message to the server log if checkpoints caused by the filling of WAL segment files happen closer together than this amount of time (which suggests that `max_wal_size` ought to be raised). If this value is specified without units, it is taken as seconds. The default is 30 seconds (`30s`). Zero disables the warning. No warnings will be generated if `checkpoint_timeout` is less than `checkpoint_warning`. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `max_wal_size` (`integer`) []()[#](#GUC-MAX-WAL-SIZE)
+*   `max_wal_size` (`integer`) [#](#GUC-MAX-WAL-SIZE)
 
     Maximum size to let the WAL grow during automatic checkpoints. This is a soft limit; WAL size can exceed `max_wal_size` under special circumstances, such as heavy load, a failing `archive_command` or `archive_library`, or a high `wal_keep_size` setting. If this value is specified without units, it is taken as megabytes. The default is 1 GB. Increasing this parameter can increase the amount of time needed for crash recovery. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `min_wal_size` (`integer`) []()[#](#GUC-MIN-WAL-SIZE)
+*   `min_wal_size` (`integer`) [#](#GUC-MIN-WAL-SIZE)
 
     As long as WAL disk usage stays below this setting, old WAL files are always recycled for future use at a checkpoint, rather than removed. This can be used to ensure that enough WAL space is reserved to handle spikes in WAL usage, for example when running large batch jobs. If this value is specified without units, it is taken as megabytes. The default is 80 MB. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
 ### 20.5.3. Archiving [#](#RUNTIME-CONFIG-WAL-ARCHIVING)
 
-*   `archive_mode` (`enum`) []()[#](#GUC-ARCHIVE-MODE)
+*   `archive_mode` (`enum`) [#](#GUC-ARCHIVE-MODE)
 
     When `archive_mode` is enabled, completed WAL segments are sent to archive storage by setting [archive\_command](runtime-config-wal.html#GUC-ARCHIVE-COMMAND) or [archive\_library](runtime-config-wal.html#GUC-ARCHIVE-LIBRARY). In addition to `off`, to disable, there are two modes: `on`, and `always`. During normal operation, there is no difference between the two modes, but when set to `always` the WAL archiver is enabled also during archive recovery or standby mode. In `always` mode, all files restored from the archive or streamed with streaming replication will be archived (again). See [Section 27.2.9](warm-standby.html#CONTINUOUS-ARCHIVING-IN-STANDBY "27.2.9. Continuous Archiving in Standby") for details.
 
     `archive_mode` is a separate setting from `archive_command` and `archive_library` so that `archive_command` and `archive_library` can be changed without leaving archiving mode. This parameter can only be set at server start. `archive_mode` cannot be enabled when `wal_level` is set to `minimal`.
 
-*   `archive_command` (`string`) []()[#](#GUC-ARCHIVE-COMMAND)
+*   `archive_command` (`string`) [#](#GUC-ARCHIVE-COMMAND)
 
     The local shell command to execute to archive a completed WAL file segment. Any `%p` in the string is replaced by the path name of the file to archive, and any `%f` is replaced by only the file name. (The path name is relative to the working directory of the server, i.e., the cluster's data directory.) Use `%%` to embed an actual `%` character in the command. It is important for the command to return a zero exit status only if it succeeds. For more information see [Section 26.3.1](continuous-archiving.html#BACKUP-ARCHIVING-WAL "26.3.1. Setting Up WAL Archiving").
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line. It is only used if `archive_mode` was enabled at server start and `archive_library` is set to an empty string. If both `archive_command` and `archive_library` are set, an error will be raised. If `archive_command` is an empty string (the default) while `archive_mode` is enabled (and `archive_library` is set to an empty string), WAL archiving is temporarily disabled, but the server continues to accumulate WAL segment files in the expectation that a command will soon be provided. Setting `archive_command` to a command that does nothing but return true, e.g., `/bin/true` (`REM` on Windows), effectively disables archiving, but also breaks the chain of WAL files needed for archive recovery, so it should only be used in unusual circumstances.
 
-*   `archive_library` (`string`) []()[#](#GUC-ARCHIVE-LIBRARY)
+*   `archive_library` (`string`) [#](#GUC-ARCHIVE-LIBRARY)
 
     The library to use for archiving completed WAL file segments. If set to an empty string (the default), archiving via shell is enabled, and [archive\_command](runtime-config-wal.html#GUC-ARCHIVE-COMMAND) is used. If both `archive_command` and `archive_library` are set, an error will be raised. Otherwise, the specified shared library is used for archiving. The WAL archiver process is restarted by the postmaster when this parameter changes. For more information, see [Section 26.3.1](continuous-archiving.html#BACKUP-ARCHIVING-WAL "26.3.1. Setting Up WAL Archiving") and [Chapter 51](archive-modules.html "Chapter 51. Archive Modules").
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `archive_timeout` (`integer`) []()[#](#GUC-ARCHIVE-TIMEOUT)
+*   `archive_timeout` (`integer`) [#](#GUC-ARCHIVE-TIMEOUT)
 
     The [archive\_command](runtime-config-wal.html#GUC-ARCHIVE-COMMAND) or [archive\_library](runtime-config-wal.html#GUC-ARCHIVE-LIBRARY) is only invoked for completed WAL segments. Hence, if your server generates little WAL traffic (or has slack periods where it does so), there could be a long delay between the completion of a transaction and its safe recording in archive storage. To limit how old unarchived data can be, you can set `archive_timeout` to force the server to switch to a new WAL segment file periodically. When this parameter is greater than zero, the server will switch to a new segment file whenever this amount of time has elapsed since the last segment file switch, and there has been any database activity, including a single checkpoint (checkpoints are skipped if there is no database activity). Note that archived files that are closed early due to a forced switch are still the same length as completely full files. Therefore, it is unwise to use a very short `archive_timeout` — it will bloat your archive storage. `archive_timeout` settings of a minute or so are usually reasonable. You should consider using streaming replication, instead of archiving, if you want data to be copied off the primary server more quickly than that. If this value is specified without units, it is taken as seconds. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
 ### 20.5.4. Recovery [#](#RUNTIME-CONFIG-WAL-RECOVERY)
 
-[]()
+
 
 This section describes the settings that apply to recovery in general, affecting crash recovery, streaming replication and archive-based replication.
 
-*   `recovery_prefetch` (`enum`) []()[#](#GUC-RECOVERY-PREFETCH)
+*   `recovery_prefetch` (`enum`) [#](#GUC-RECOVERY-PREFETCH)
 
     Whether to try to prefetch blocks that are referenced in the WAL that are not yet in the buffer pool, during recovery. Valid values are `off`, `on` and `try` (the default). The setting `try` enables prefetching only if the operating system provides the `posix_fadvise` function, which is currently used to implement prefetching. Note that some operating systems provide the function, but it doesn't do anything.
 
     Prefetching blocks that will soon be needed can reduce I/O wait times during recovery with some workloads. See also the [wal\_decode\_buffer\_size](runtime-config-wal.html#GUC-WAL-DECODE-BUFFER-SIZE) and [maintenance\_io\_concurrency](runtime-config-resource.html#GUC-MAINTENANCE-IO-CONCURRENCY) settings, which limit prefetching activity.
 
-*   `wal_decode_buffer_size` (`integer`) []()[#](#GUC-WAL-DECODE-BUFFER-SIZE)
+*   `wal_decode_buffer_size` (`integer`) [#](#GUC-WAL-DECODE-BUFFER-SIZE)
 
     A limit on how far ahead the server can look in the WAL, to find blocks to prefetch. If this value is specified without units, it is taken as bytes. The default is 512kB.
 
 ### 20.5.5. Archive Recovery [#](#RUNTIME-CONFIG-WAL-ARCHIVE-RECOVERY)
 
-[]()
+
 
 This section describes the settings that apply only for the duration of the recovery. They must be reset for any subsequent recovery you wish to perform.
 
 “Recovery” covers using the server as a standby or for executing a targeted recovery. Typically, standby mode would be used to provide high availability and/or read scalability, whereas a targeted recovery is used to recover from data loss.
 
-To start the server in standby mode, create a file called `standby.signal`[]() in the data directory. The server will enter recovery and will not stop recovery when the end of archived WAL is reached, but will keep trying to continue recovery by connecting to the sending server as specified by the `primary_conninfo` setting and/or by fetching new WAL segments using `restore_command`. For this mode, the parameters from this section and [Section 20.6.3](runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-STANDBY "20.6.3. Standby Servers") are of interest. Parameters from [Section 20.5.6](runtime-config-wal.html#RUNTIME-CONFIG-WAL-RECOVERY-TARGET "20.5.6. Recovery Target") will also be applied but are typically not useful in this mode.
+To start the server in standby mode, create a file called `standby.signal` in the data directory. The server will enter recovery and will not stop recovery when the end of archived WAL is reached, but will keep trying to continue recovery by connecting to the sending server as specified by the `primary_conninfo` setting and/or by fetching new WAL segments using `restore_command`. For this mode, the parameters from this section and [Section 20.6.3](runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-STANDBY "20.6.3. Standby Servers") are of interest. Parameters from [Section 20.5.6](runtime-config-wal.html#RUNTIME-CONFIG-WAL-RECOVERY-TARGET "20.5.6. Recovery Target") will also be applied but are typically not useful in this mode.
 
-To start the server in targeted recovery mode, create a file called `recovery.signal`[]() in the data directory. If both `standby.signal` and `recovery.signal` files are created, standby mode takes precedence. Targeted recovery mode ends when the archived WAL is fully replayed, or when `recovery_target` is reached. In this mode, the parameters from both this section and [Section 20.5.6](runtime-config-wal.html#RUNTIME-CONFIG-WAL-RECOVERY-TARGET "20.5.6. Recovery Target") will be used.
+To start the server in targeted recovery mode, create a file called `recovery.signal` in the data directory. If both `standby.signal` and `recovery.signal` files are created, standby mode takes precedence. Targeted recovery mode ends when the archived WAL is fully replayed, or when `recovery_target` is reached. In this mode, the parameters from both this section and [Section 20.5.6](runtime-config-wal.html#RUNTIME-CONFIG-WAL-RECOVERY-TARGET "20.5.6. Recovery Target") will be used.
 
-*   `restore_command` (`string`) []()[#](#GUC-RESTORE-COMMAND)
+*   `restore_command` (`string`) [#](#GUC-RESTORE-COMMAND)
 
     The local shell command to execute to retrieve an archived segment of the WAL file series. This parameter is required for archive recovery, but optional for streaming replication. Any `%f` in the string is replaced by the name of the file to retrieve from the archive, and any `%p` is replaced by the copy destination path name on the server. (The path name is relative to the current working directory, i.e., the cluster's data directory.) Any `%r` is replaced by the name of the file containing the last valid restart point. That is the earliest file that must be kept to allow a restore to be restartable, so this information can be used to truncate the archive to just the minimum required to support restarting from the current restore. `%r` is typically only used by warm-standby configurations (see [Section 27.2](warm-standby.html "27.2. Log-Shipping Standby Servers")). Write `%%` to embed an actual `%` character.
 
@@ -244,7 +244,7 @@ To start the server in targeted recovery mode, create a file called `recovery.si
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `archive_cleanup_command` (`string`) []()[#](#GUC-ARCHIVE-CLEANUP-COMMAND)
+*   `archive_cleanup_command` (`string`) [#](#GUC-ARCHIVE-CLEANUP-COMMAND)
 
     This optional parameter specifies a shell command that will be executed at every restartpoint. The purpose of `archive_cleanup_command` is to provide a mechanism for cleaning up old archived WAL files that are no longer needed by the standby server. Any `%r` is replaced by the name of the file containing the last valid restart point. That is the earliest file that must be *kept* to allow a restore to be restartable, and so all files earlier than `%r` may be safely removed. This information can be used to truncate the archive to just the minimum required to support restart from the current restore. The [pg\_archivecleanup](pgarchivecleanup.html "pg_archivecleanup") module is often used in `archive_cleanup_command` for single-standby configurations, for example:
 

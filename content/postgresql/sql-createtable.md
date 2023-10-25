@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## CREATE TABLE
 
@@ -162,7 +162,7 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
     The `COLLATE` clause assigns a collation to the column (which must be of a collatable data type). If not specified, the column data type's default collation is used.
 
-*   `STORAGE { PLAIN | EXTERNAL | EXTENDED | MAIN | DEFAULT }` []()[#](#SQL-CREATETABLE-PARMS-STORAGE)
+*   `STORAGE { PLAIN | EXTERNAL | EXTENDED | MAIN | DEFAULT }` [#](#SQL-CREATETABLE-PARMS-STORAGE)
 
     This form sets the storage mode for the column. This controls whether this column is held inline or in a secondary TOAST table, and whether the data should be compressed or not. `PLAIN` must be used for fixed-length values such as `integer` and is inline, uncompressed. `MAIN` is for inline, compressible data. `EXTERNAL` is for external, uncompressed data, and `EXTENDED` is for external, compressed data. Writing `DEFAULT` sets the storage mode to the default mode for the column's data type. `EXTENDED` is the default for most data types that support non-`PLAIN` storage. Use of `EXTERNAL` will make substring operations on very large `text` and `bytea` values run faster, at the penalty of increased storage space. See [Section 73.2](storage-toast.html "73.2. TOAST") for more information.
 
@@ -312,7 +312,7 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
     The default expression will be used in any insert operation that does not specify a value for the column. If there is no default for a column, then the default is null.
 
-*   `GENERATED ALWAYS AS ( generation_expr ) STORED`[]() [#](#SQL-CREATETABLE-PARMS-GENERATED-STORED)
+*   `GENERATED ALWAYS AS ( generation_expr ) STORED` [#](#SQL-CREATETABLE-PARMS-GENERATED-STORED)
 
     This clause creates the column as a *generated column*. The column cannot be written to, and when read the result of the specified expression will be returned.
 
@@ -446,95 +446,95 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
 ### Storage Parameters
 
-[]()
+
 
 The `WITH` clause can specify *storage parameters* for tables, and for indexes associated with a `UNIQUE`, `PRIMARY KEY`, or `EXCLUDE` constraint. Storage parameters for indexes are documented in [CREATE INDEX](sql-createindex.html "CREATE INDEX"). The storage parameters currently available for tables are listed below. For many of these parameters, as shown, there is an additional parameter with the same name prefixed with `toast.`, which controls the behavior of the table's secondary TOAST table, if any (see [Section 73.2](storage-toast.html "73.2. TOAST") for more information about TOAST). If a table parameter value is set and the equivalent `toast.` parameter is not, the TOAST table will use the table's parameter value. Specifying these parameters for partitioned tables is not supported, but you may specify them for individual leaf partitions.
 
-*   `fillfactor` (`integer`) []()[#](#RELOPTION-FILLFACTOR)
+*   `fillfactor` (`integer`) [#](#RELOPTION-FILLFACTOR)
 
     The fillfactor for a table is a percentage between 10 and 100. 100 (complete packing) is the default. When a smaller fillfactor is specified, `INSERT` operations pack table pages only to the indicated percentage; the remaining space on each page is reserved for updating rows on that page. This gives `UPDATE` a chance to place the updated copy of a row on the same page as the original, which is more efficient than placing it on a different page, and makes [heap-only tuple updates](storage-hot.html "73.7. Heap-Only Tuples (HOT)") more likely. For a table whose entries are never updated, complete packing is the best choice, but in heavily updated tables smaller fillfactors are appropriate. This parameter cannot be set for TOAST tables.
 
-*   `toast_tuple_target` (`integer`) []()[#](#RELOPTION-TOAST-TUPLE-TARGET)
+*   `toast_tuple_target` (`integer`) [#](#RELOPTION-TOAST-TUPLE-TARGET)
 
     The toast\_tuple\_target specifies the minimum tuple length required before we try to compress and/or move long column values into TOAST tables, and is also the target length we try to reduce the length below once toasting begins. This affects columns marked as External (for move), Main (for compression), or Extended (for both) and applies only to new tuples. There is no effect on existing rows. By default this parameter is set to allow at least 4 tuples per block, which with the default block size will be 2040 bytes. Valid values are between 128 bytes and the (block size - header), by default 8160 bytes. Changing this value may not be useful for very short or very long rows. Note that the default setting is often close to optimal, and it is possible that setting this parameter could have negative effects in some cases. This parameter cannot be set for TOAST tables.
 
-*   `parallel_workers` (`integer`) []()[#](#RELOPTION-PARALLEL-WORKERS)
+*   `parallel_workers` (`integer`) [#](#RELOPTION-PARALLEL-WORKERS)
 
     This sets the number of workers that should be used to assist a parallel scan of this table. If not set, the system will determine a value based on the relation size. The actual number of workers chosen by the planner or by utility statements that use parallel scans may be less, for example due to the setting of [max\_worker\_processes](runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES).
 
-*   `autovacuum_enabled`, `toast.autovacuum_enabled` (`boolean`) []()[#](#RELOPTION-AUTOVACUUM-ENABLED)
+*   `autovacuum_enabled`, `toast.autovacuum_enabled` (`boolean`) [#](#RELOPTION-AUTOVACUUM-ENABLED)
 
     Enables or disables the autovacuum daemon for a particular table. If true, the autovacuum daemon will perform automatic `VACUUM` and/or `ANALYZE` operations on this table following the rules discussed in [Section 25.1.6](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon"). If false, this table will not be autovacuumed, except to prevent transaction ID wraparound. See [Section 25.1.5](routine-vacuuming.html#VACUUM-FOR-WRAPAROUND "25.1.5. Preventing Transaction ID Wraparound Failures") for more about wraparound prevention. Note that the autovacuum daemon does not run at all (except to prevent transaction ID wraparound) if the [autovacuum](runtime-config-autovacuum.html#GUC-AUTOVACUUM) parameter is false; setting individual tables' storage parameters does not override that. Therefore there is seldom much point in explicitly setting this storage parameter to `true`, only to `false`.
 
-*   `vacuum_index_cleanup`, `toast.vacuum_index_cleanup` (`enum`) []()[#](#RELOPTION-VACUUM-INDEX-CLEANUP)
+*   `vacuum_index_cleanup`, `toast.vacuum_index_cleanup` (`enum`) [#](#RELOPTION-VACUUM-INDEX-CLEANUP)
 
     Forces or disables index cleanup when `VACUUM` is run on this table. The default value is `AUTO`. With `OFF`, index cleanup is disabled, with `ON` it is enabled, and with `AUTO` a decision is made dynamically, each time `VACUUM` runs. The dynamic behavior allows `VACUUM` to avoid needlessly scanning indexes to remove very few dead tuples. Forcibly disabling all index cleanup can speed up `VACUUM` very significantly, but may also lead to severely bloated indexes if table modifications are frequent. The `INDEX_CLEANUP` parameter of [`VACUUM`](sql-vacuum.html "VACUUM"), if specified, overrides the value of this option.
 
-*   `vacuum_truncate`, `toast.vacuum_truncate` (`boolean`) []()[#](#RELOPTION-VACUUM-TRUNCATE)
+*   `vacuum_truncate`, `toast.vacuum_truncate` (`boolean`) [#](#RELOPTION-VACUUM-TRUNCATE)
 
     Enables or disables vacuum to try to truncate off any empty pages at the end of this table. The default value is `true`. If `true`, `VACUUM` and autovacuum do the truncation and the disk space for the truncated pages is returned to the operating system. Note that the truncation requires `ACCESS EXCLUSIVE` lock on the table. The `TRUNCATE` parameter of [`VACUUM`](sql-vacuum.html "VACUUM"), if specified, overrides the value of this option.
 
-*   `autovacuum_vacuum_threshold`, `toast.autovacuum_vacuum_threshold` (`integer`) []()[#](#RELOPTION-AUTOVACUUM-VACUUM-THRESHOLD)
+*   `autovacuum_vacuum_threshold`, `toast.autovacuum_vacuum_threshold` (`integer`) [#](#RELOPTION-AUTOVACUUM-VACUUM-THRESHOLD)
 
     Per-table value for [autovacuum\_vacuum\_threshold](runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-THRESHOLD) parameter.
 
-*   `autovacuum_vacuum_scale_factor`, `toast.autovacuum_vacuum_scale_factor` (`floating point`) []()[#](#RELOPTION-AUTOVACUUM-VACUUM-SCALE-FACTOR)
+*   `autovacuum_vacuum_scale_factor`, `toast.autovacuum_vacuum_scale_factor` (`floating point`) [#](#RELOPTION-AUTOVACUUM-VACUUM-SCALE-FACTOR)
 
     Per-table value for [autovacuum\_vacuum\_scale\_factor](runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-SCALE-FACTOR) parameter.
 
-*   `autovacuum_vacuum_insert_threshold`, `toast.autovacuum_vacuum_insert_threshold` (`integer`) []()[#](#RELOPTION-AUTOVACUUM-VACUUM-INSERT-THRESHOLD)
+*   `autovacuum_vacuum_insert_threshold`, `toast.autovacuum_vacuum_insert_threshold` (`integer`) [#](#RELOPTION-AUTOVACUUM-VACUUM-INSERT-THRESHOLD)
 
     Per-table value for [autovacuum\_vacuum\_insert\_threshold](runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-INSERT-THRESHOLD) parameter. The special value of -1 may be used to disable insert vacuums on the table.
 
-*   `autovacuum_vacuum_insert_scale_factor`, `toast.autovacuum_vacuum_insert_scale_factor` (`floating point`) []()[#](#RELOPTION-AUTOVACUUM-VACUUM-INSERT-SCALE-FACTOR)
+*   `autovacuum_vacuum_insert_scale_factor`, `toast.autovacuum_vacuum_insert_scale_factor` (`floating point`) [#](#RELOPTION-AUTOVACUUM-VACUUM-INSERT-SCALE-FACTOR)
 
     Per-table value for [autovacuum\_vacuum\_insert\_scale\_factor](runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-INSERT-SCALE-FACTOR) parameter.
 
-*   `autovacuum_analyze_threshold` (`integer`) []()[#](#RELOPTION-AUTOVACUUM-ANALYZE-THRESHOLD)
+*   `autovacuum_analyze_threshold` (`integer`) [#](#RELOPTION-AUTOVACUUM-ANALYZE-THRESHOLD)
 
     Per-table value for [autovacuum\_analyze\_threshold](runtime-config-autovacuum.html#GUC-AUTOVACUUM-ANALYZE-THRESHOLD) parameter.
 
-*   `autovacuum_analyze_scale_factor` (`floating point`) []()[#](#RELOPTION-AUTOVACUUM-ANALYZE-SCALE-FACTOR)
+*   `autovacuum_analyze_scale_factor` (`floating point`) [#](#RELOPTION-AUTOVACUUM-ANALYZE-SCALE-FACTOR)
 
     Per-table value for [autovacuum\_analyze\_scale\_factor](runtime-config-autovacuum.html#GUC-AUTOVACUUM-ANALYZE-SCALE-FACTOR) parameter.
 
-*   `autovacuum_vacuum_cost_delay`, `toast.autovacuum_vacuum_cost_delay` (`floating point`) []()[#](#RELOPTION-AUTOVACUUM-VACUUM-COST-DELAY)
+*   `autovacuum_vacuum_cost_delay`, `toast.autovacuum_vacuum_cost_delay` (`floating point`) [#](#RELOPTION-AUTOVACUUM-VACUUM-COST-DELAY)
 
     Per-table value for [autovacuum\_vacuum\_cost\_delay](runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-DELAY) parameter.
 
-*   `autovacuum_vacuum_cost_limit`, `toast.autovacuum_vacuum_cost_limit` (`integer`) []()[#](#RELOPTION-AUTOVACUUM-VACUUM-COST-LIMIT)
+*   `autovacuum_vacuum_cost_limit`, `toast.autovacuum_vacuum_cost_limit` (`integer`) [#](#RELOPTION-AUTOVACUUM-VACUUM-COST-LIMIT)
 
     Per-table value for [autovacuum\_vacuum\_cost\_limit](runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-LIMIT) parameter.
 
-*   `autovacuum_freeze_min_age`, `toast.autovacuum_freeze_min_age` (`integer`) []()[#](#RELOPTION-AUTOVACUUM-FREEZE-MIN-AGE)
+*   `autovacuum_freeze_min_age`, `toast.autovacuum_freeze_min_age` (`integer`) [#](#RELOPTION-AUTOVACUUM-FREEZE-MIN-AGE)
 
     Per-table value for [vacuum\_freeze\_min\_age](runtime-config-client.html#GUC-VACUUM-FREEZE-MIN-AGE) parameter. Note that autovacuum will ignore per-table `autovacuum_freeze_min_age` parameters that are larger than half the system-wide [autovacuum\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE) setting.
 
-*   `autovacuum_freeze_max_age`, `toast.autovacuum_freeze_max_age` (`integer`) []()[#](#RELOPTION-AUTOVACUUM-FREEZE-MAX-AGE)
+*   `autovacuum_freeze_max_age`, `toast.autovacuum_freeze_max_age` (`integer`) [#](#RELOPTION-AUTOVACUUM-FREEZE-MAX-AGE)
 
     Per-table value for [autovacuum\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE) parameter. Note that autovacuum will ignore per-table `autovacuum_freeze_max_age` parameters that are larger than the system-wide setting (it can only be set smaller).
 
-*   `autovacuum_freeze_table_age`, `toast.autovacuum_freeze_table_age` (`integer`) []()[#](#RELOPTION-AUTOVACUUM-FREEZE-TABLE-AGE)
+*   `autovacuum_freeze_table_age`, `toast.autovacuum_freeze_table_age` (`integer`) [#](#RELOPTION-AUTOVACUUM-FREEZE-TABLE-AGE)
 
     Per-table value for [vacuum\_freeze\_table\_age](runtime-config-client.html#GUC-VACUUM-FREEZE-TABLE-AGE) parameter.
 
-*   `autovacuum_multixact_freeze_min_age`, `toast.autovacuum_multixact_freeze_min_age` (`integer`) []()[#](#RELOPTION-AUTOVACUUM-MULTIXACT-FREEZE-MIN-AGE)
+*   `autovacuum_multixact_freeze_min_age`, `toast.autovacuum_multixact_freeze_min_age` (`integer`) [#](#RELOPTION-AUTOVACUUM-MULTIXACT-FREEZE-MIN-AGE)
 
     Per-table value for [vacuum\_multixact\_freeze\_min\_age](runtime-config-client.html#GUC-VACUUM-MULTIXACT-FREEZE-MIN-AGE) parameter. Note that autovacuum will ignore per-table `autovacuum_multixact_freeze_min_age` parameters that are larger than half the system-wide [autovacuum\_multixact\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-MULTIXACT-FREEZE-MAX-AGE) setting.
 
-*   `autovacuum_multixact_freeze_max_age`, `toast.autovacuum_multixact_freeze_max_age` (`integer`) []()[#](#RELOPTION-AUTOVACUUM-MULTIXACT-FREEZE-MAX-AGE)
+*   `autovacuum_multixact_freeze_max_age`, `toast.autovacuum_multixact_freeze_max_age` (`integer`) [#](#RELOPTION-AUTOVACUUM-MULTIXACT-FREEZE-MAX-AGE)
 
     Per-table value for [autovacuum\_multixact\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-MULTIXACT-FREEZE-MAX-AGE) parameter. Note that autovacuum will ignore per-table `autovacuum_multixact_freeze_max_age` parameters that are larger than the system-wide setting (it can only be set smaller).
 
-*   `autovacuum_multixact_freeze_table_age`, `toast.autovacuum_multixact_freeze_table_age` (`integer`) []()[#](#RELOPTION-AUTOVACUUM-MULTIXACT-FREEZE-TABLE-AGE)
+*   `autovacuum_multixact_freeze_table_age`, `toast.autovacuum_multixact_freeze_table_age` (`integer`) [#](#RELOPTION-AUTOVACUUM-MULTIXACT-FREEZE-TABLE-AGE)
 
     Per-table value for [vacuum\_multixact\_freeze\_table\_age](runtime-config-client.html#GUC-VACUUM-MULTIXACT-FREEZE-TABLE-AGE) parameter.
 
-*   `log_autovacuum_min_duration`, `toast.log_autovacuum_min_duration` (`integer`) []()[#](#RELOPTION-LOG-AUTOVACUUM-MIN-DURATION)
+*   `log_autovacuum_min_duration`, `toast.log_autovacuum_min_duration` (`integer`) [#](#RELOPTION-LOG-AUTOVACUUM-MIN-DURATION)
 
     Per-table value for [log\_autovacuum\_min\_duration](runtime-config-logging.html#GUC-LOG-AUTOVACUUM-MIN-DURATION) parameter.
 
-*   `user_catalog_table` (`boolean`) []()[#](#RELOPTION-USER-CATALOG-TABLE)
+*   `user_catalog_table` (`boolean`) [#](#RELOPTION-USER-CATALOG-TABLE)
 
     Declare the table as an additional catalog table for purposes of logical replication. See [Section 49.6.2](logicaldecoding-output-plugin.html#LOGICALDECODING-CAPABILITIES "49.6.2. Capabilities") for details. This parameter cannot be set for TOAST tables.
 

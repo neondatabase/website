@@ -60,7 +60,7 @@
     *   [12.10. psql Support](textsearch-psql.html)
     *   [12.11. Limitations](textsearch-limitations.html)
 
-[]()[]()
+
 
 ***
 

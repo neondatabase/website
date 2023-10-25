@@ -11,7 +11,7 @@
 *   *   [41.4.1. How Update Rules Work](rules-update.html#RULES-UPDATE-HOW)
     *   [41.4.2. Cooperation with Views](rules-update.html#RULES-UPDATE-VIEWS)
 
-[]()[]()[]()
+
 
 Rules that are defined on `INSERT`, `UPDATE`, and `DELETE` are significantly different from the view rules described in the previous sections. First, their `CREATE RULE` command allows more:
 
@@ -269,7 +269,7 @@ Here we can see why it is important that the original query tree is executed las
 
 ### 41.4.2. Cooperation with Views [#](#RULES-UPDATE-VIEWS)
 
-[]()
+
 
 A simple way to protect view relations from the mentioned possibility that someone can try to run `INSERT`, `UPDATE`, or `DELETE` on them is to let those query trees get thrown away. So we could create the rules:
 

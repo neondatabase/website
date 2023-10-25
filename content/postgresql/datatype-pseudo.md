@@ -8,7 +8,7 @@
 
 ## 8.21. Pseudo-Types [#](#DATATYPE-PSEUDO)
 
-[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()
+
 
 The PostgreSQL type system contains a number of special-purpose entries that are collectively called *pseudo-types*. A pseudo-type cannot be used as a column data type, but it can be used to declare a function's argument or result type. Each of the available pseudo-types is useful in situations where a function's behavior does not correspond to simply taking or returning a value of a specific SQL data type. [Table 8.27](datatype-pseudo.html#DATATYPE-PSEUDOTYPES-TABLE "Table 8.27. Pseudo-Types") lists the existing pseudo-types.
 

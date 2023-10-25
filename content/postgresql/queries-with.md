@@ -13,7 +13,7 @@
     *   [7.8.3. Common Table Expression Materialization](queries-with.html#QUERIES-WITH-CTE-MATERIALIZATION)
     *   [7.8.4. Data-Modifying Statements in `WITH`](queries-with.html#QUERIES-WITH-MODIFYING)
 
-[]()[]()
+
 
 `WITH` provides a way to write auxiliary statements for use in a larger query. These statements, which are often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist just for one query. Each auxiliary statement in a `WITH` clause can be a `SELECT`, `INSERT`, `UPDATE`, or `DELETE`; and the `WITH` clause itself is attached to a primary statement that can be a `SELECT`, `INSERT`, `UPDATE`, `DELETE`, or `MERGE`.
 
@@ -45,7 +45,7 @@ which displays per-product sales totals in only the top sales regions. The `WITH
 
 ### 7.8.2. Recursive Queries [#](#QUERIES-WITH-RECURSIVE)
 
-[]()The optional `RECURSIVE` modifier changes `WITH` from a mere syntactic convenience into a feature that accomplishes things not otherwise possible in standard SQL. Using `RECURSIVE`, a `WITH` query can refer to its own output. A very simple example is this query to sum the integers from 1 through 100:
+The optional `RECURSIVE` modifier changes `WITH` from a mere syntactic convenience into a feature that accomplishes things not otherwise possible in standard SQL. Using `RECURSIVE`, a `WITH` query can refer to its own output. A very simple example is this query to sum the integers from 1 through 100:
 
 ```
 

@@ -8,7 +8,7 @@
 
 ## 53.44. `pg_replication_origin` [#](#CATALOG-PG-REPLICATION-ORIGIN)
 
-[]()
+
 
 The `pg_replication_origin` catalog contains all replication origins created. For more on replication origins see [Chapter 50](replication-origins.html "Chapter 50. Replication Progress Tracking").
 

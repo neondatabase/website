@@ -8,7 +8,7 @@
 
 ## Appendix O. `syncfs()` Caveats
 
-[]()
+
 
 On Linux `syncfs()` may be specified for some configuration parameters (e.g., [recovery\_init\_sync\_method](runtime-config-error-handling.html#GUC-RECOVERY-INIT-SYNC-METHOD)), server applications (e.g., pg\_upgrade), and client applications (e.g., pg\_basebackup) that involve synchronizing many files to disk. `syncfs()` is advantageous in many cases, but there are some trade-offs to keep in mind.
 

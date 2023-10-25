@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## REINDEX
 
@@ -105,7 +105,7 @@ If `SCHEMA`, `DATABASE` or `SYSTEM` is used with `TABLESPACE`, system relations 
 
 ### Rebuilding Indexes Concurrently
 
-[]()
+
 
 Rebuilding an index can interfere with regular operation of a database. Normally PostgreSQL locks the table whose index is rebuilt against writes and performs the entire index build with a single scan of the table. Other transactions can still read the table, but if they try to insert, update, or delete rows in the table they will block until the index rebuild is finished. This could have a severe effect if the system is a live production database. Very large tables can take many hours to be indexed, and even for smaller tables, an index rebuild can lock out writers for periods that are unacceptably long for a production system.
 

@@ -8,7 +8,7 @@
 
 ## 53.5. `pg_amproc` [#](#CATALOG-PG-AMPROC)
 
-[]()
+
 
 The catalog `pg_amproc` stores information about support functions associated with access method operator families. There is one row for each support function belonging to an operator family.
 

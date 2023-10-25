@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## COMMIT
 
@@ -25,7 +25,7 @@ COMMIT [ WORK | TRANSACTION ] [ AND [ NO ] CHAIN ]
 
 ## Parameters
 
-[]()
+
 
 *   `WORK``TRANSACTION` [#](#SQL-COMMIT-TRANSACTION)
 

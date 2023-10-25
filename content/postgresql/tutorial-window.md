@@ -8,7 +8,7 @@
 
 ## 3.5. Window Functions [#](#TUTORIAL-WINDOW)
 
-[]()
+
 
 A *window function* performs a calculation across a set of table rows that are somehow related to the current row. This is comparable to the type of calculation that can be done with an aggregate function. However, window functions do not cause rows to become grouped into a single output row like non-window aggregate calls would. Instead, the rows retain their separate identities. Behind the scenes, the window function is able to access more than just the current row of the query result.
 

@@ -125,7 +125,7 @@
     *   [8.20. `pg_lsn` Type](datatype-pg-lsn.html)
     *   [8.21. Pseudo-Types](datatype-pseudo.html)
 
-[]()[]()
+
 
 PostgreSQL has a rich set of native data types available to users. Users can add new types to PostgreSQL using the [CREATE TYPE](sql-createtype.html "CREATE TYPE") command.
 

@@ -8,7 +8,7 @@
 
 ## 53.32. `pg_namespace` [#](#CATALOG-PG-NAMESPACE)
 
-[]()
+
 
 The catalog `pg_namespace` stores namespaces. A namespace is the structure underlying SQL schemas: each namespace can have a separate collection of relations, types, etc. without name conflicts.
 

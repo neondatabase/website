@@ -8,7 +8,7 @@
 
 ## 29.1. Determining Disk Usage [#](#DISK-USAGE)
 
-[]()
+
 
 Each table has a primary heap disk file where most of the data is stored. If the table has any columns with potentially-wide values, there also might be a TOAST file associated with the table, which is used to store values too wide to fit comfortably in the main table (see [Section 73.2](storage-toast.html "73.2. TOAST")). There will be one valid index on the TOAST table, if present. There also might be indexes associated with the base table. Each table and index is stored in a separate disk file — possibly more than one file, if the file would exceed one gigabyte. Naming conventions for these files are described in [Section 73.1](storage-file-layout.html "73.1. Database File Layout").
 

@@ -22,7 +22,7 @@
 *   *   [25.2. Routine Reindexing](routine-reindex.html)
     *   [25.3. Log File Maintenance](logfile-maintenance.html)
 
-[]()[]()
+
 
 PostgreSQL, like any database software, requires that certain tasks be performed regularly to achieve optimum performance. The tasks discussed here are *required*, but they are repetitive in nature and can easily be automated using standard tools such as cron scripts or Windows' Task Scheduler. It is the database administrator's responsibility to set up appropriate scripts, and to check that they execute successfully.
 

@@ -8,7 +8,7 @@
 
 ## 23.6. Tablespaces [#](#MANAGE-AG-TABLESPACES)
 
-[]()
+
 
 Tablespaces in PostgreSQL allow database administrators to define locations in the file system where the files representing database objects can be stored. Once created, a tablespace can be referred to by name when creating database objects.
 
@@ -20,7 +20,7 @@ Second, tablespaces allow an administrator to use knowledge of the usage pattern
 
 Even though located outside the main PostgreSQL data directory, tablespaces are an integral part of the database cluster and *cannot* be treated as an autonomous collection of data files. They are dependent on metadata contained in the main data directory, and therefore cannot be attached to a different database cluster or backed up individually. Similarly, if you lose a tablespace (file deletion, disk failure, etc.), the database cluster might become unreadable or unable to start. Placing a tablespace on a temporary file system like a RAM disk risks the reliability of the entire cluster.
 
-To define a tablespace, use the [CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE") command, for example:[]():
+To define a tablespace, use the [CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE") command, for example::
 
 ```
 

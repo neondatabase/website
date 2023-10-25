@@ -280,7 +280,7 @@ The simple Query message is approximately equivalent to the series Parse, Bind, 
 
 ### 55.2.4. Pipelining [#](#PROTOCOL-FLOW-PIPELINING)
 
-[]()
+
 
 Use of the extended query protocol allows *pipelining*, which means sending a series of queries without waiting for earlier ones to complete. This reduces the number of network round trips needed to complete a given series of operations. However, the user must carefully consider the required behavior if one of the steps fails, since later queries will already be in flight to the server.
 

@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## CREATE FUNCTION
 
@@ -305,9 +305,9 @@ However, a `TABLE` function is different from the preceding examples, because it
 
 ## Writing `SECURITY DEFINER` Functions Safely
 
-[]()[]()
 
-Because a `SECURITY DEFINER` function is executed with the privileges of the user that owns it, care is needed to ensure that the function cannot be misused. For security, [search\_path](runtime-config-client.html#GUC-SEARCH-PATH) should be set to exclude any schemas writable by untrusted users. This prevents malicious users from creating objects (e.g., tables, functions, and operators) that mask objects intended to be used by the function. Particularly important in this regard is the temporary-table schema, which is searched first by default, and is normally writable by anyone. A secure arrangement can be obtained by forcing the temporary schema to be searched last. To do this, write `pg_temp`[]() as the last entry in `search_path`. This function illustrates safe usage:
+
+Because a `SECURITY DEFINER` function is executed with the privileges of the user that owns it, care is needed to ensure that the function cannot be misused. For security, [search\_path](runtime-config-client.html#GUC-SEARCH-PATH) should be set to exclude any schemas writable by untrusted users. This prevents malicious users from creating objects (e.g., tables, functions, and operators) that mask objects intended to be used by the function. Particularly important in this regard is the temporary-table schema, which is searched first by default, and is normally writable by anyone. A secure arrangement can be obtained by forcing the temporary schema to be searched last. To do this, write `pg_temp` as the last entry in `search_path`. This function illustrates safe usage:
 
 ```
 

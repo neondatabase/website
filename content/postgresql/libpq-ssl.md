@@ -14,7 +14,7 @@
     *   [34.19.4. SSL Client File Usage](libpq-ssl.html#LIBPQ-SSL-FILEUSAGE)
     *   [34.19.5. SSL Library Initialization](libpq-ssl.html#LIBPQ-SSL-INITIALIZE)
 
-[]()
+
 
 PostgreSQL has native support for using SSL connections to encrypt client/server communications using TLS protocols for increased security. See [Section 19.9](ssl-tcp.html "19.9. Secure TCP/IP Connections with SSL") for details about the server-side SSL functionality.
 
@@ -115,7 +115,7 @@ The default value for `sslmode` is `prefer`. As is shown in the table, this make
 
 If your application initializes `libssl` and/or `libcrypto` libraries and libpq is built with SSL support, you should call [`PQinitOpenSSL`](libpq-ssl.html#LIBPQ-PQINITOPENSSL) to tell libpq that the `libssl` and/or `libcrypto` libraries have been initialized by your application, so that libpq will not also initialize those libraries. However, this is unnecessary when using OpenSSL version 1.1.0 or later, as duplicate initializations are no longer problematic.
 
-*   `PQinitOpenSSL`[]() [#](#LIBPQ-PQINITOPENSSL)
+*   `PQinitOpenSSL` [#](#LIBPQ-PQINITOPENSSL)
 
     Allows applications to select which security libraries to initialize.
 
@@ -128,7 +128,7 @@ If your application initializes `libssl` and/or `libcrypto` libraries and libpq 
 
     If your application uses and initializes either OpenSSL or its underlying `libcrypto` library, you *must* call this function with zeroes for the appropriate parameter(s) before first opening a database connection. Also be sure that you have done that initialization before opening a database connection.
 
-*   `PQinitSSL`[]() [#](#LIBPQ-PQINITSSL)
+*   `PQinitSSL` [#](#LIBPQ-PQINITSSL)
 
     Allows applications to select which security libraries to initialize.
 

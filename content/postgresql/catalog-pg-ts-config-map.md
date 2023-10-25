@@ -8,7 +8,7 @@
 
 ## 53.60. `pg_ts_config_map` [#](#CATALOG-PG-TS-CONFIG-MAP)
 
-[]()
+
 
 The `pg_ts_config_map` catalog contains entries showing which text search dictionaries should be consulted, and in what order, for each output token type of each text search configuration's parser.
 

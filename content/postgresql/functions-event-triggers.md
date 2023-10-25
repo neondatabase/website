@@ -18,7 +18,7 @@ For more information about event triggers, see [Chapter 40](event-triggers.html
 
 ### 9.29.1. Capturing Changes at Command End [#](#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
 
-[]()
+
 
 ```
 
@@ -41,7 +41,7 @@ pg_event_trigger_ddl_commands () → setof record
 
 ### 9.29.2. Processing Objects Dropped by a DDL Command [#](#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
 
-[]()
+
 
 ```
 
@@ -98,8 +98,8 @@ The functions shown in [Table 9.104](functions-event-triggers.html#FUNCTIONS-EV
 
 | FunctionDescription                                                                                                                                                   |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| []()`pg_event_trigger_table_rewrite_oid` () → `oid`Returns the OID of the table about to be rewritten.                                                                |
-| []()`pg_event_trigger_table_rewrite_reason` () → `integer`Returns a code explaining the reason(s) for rewriting. The exact meaning of the codes is release dependent. |
+| `pg_event_trigger_table_rewrite_oid` () → `oid`Returns the OID of the table about to be rewritten.                                                                |
+| `pg_event_trigger_table_rewrite_reason` () → `integer`Returns a code explaining the reason(s) for rewriting. The exact meaning of the codes is release dependent. |
 
 \
 

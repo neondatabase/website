@@ -42,7 +42,7 @@
     *   *   [33.5.1. Coverage with Autoconf and Make](regress-coverage.html#REGRESS-COVERAGE-CONFIGURE)
         *   [33.5.2. Coverage with Meson](regress-coverage.html#REGRESS-COVERAGE-MESON)
 
-[]()[]()
+
 
 The regression tests are a comprehensive set of tests for the SQL implementation in PostgreSQL. They test standard SQL operations as well as the extended capabilities of PostgreSQL.
 

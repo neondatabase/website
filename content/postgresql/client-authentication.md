@@ -26,7 +26,7 @@
     *   [21.14. BSD Authentication](auth-bsd.html)
     *   [21.15. Authentication Problems](client-authentication-problems.html)
 
-[]()
+
 
 When a client application connects to the database server, it specifies which PostgreSQL database user name it wants to connect as, much the same way one logs into a Unix computer as a particular user. Within the SQL environment the active database user name determines access privileges to database objects — see [Chapter 22](user-manag.html "Chapter 22. Database Roles") for more information. Therefore, it is essential to restrict which database users can connect.
 

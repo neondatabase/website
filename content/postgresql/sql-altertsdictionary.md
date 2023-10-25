@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## ALTER TEXT SEARCH DICTIONARY
 

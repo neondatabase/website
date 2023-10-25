@@ -8,7 +8,7 @@
 
 ## 10.5. `UNION`, `CASE`, and Related Constructs [#](#TYPECONV-UNION-CASE)
 
-[]()[]()[]()[]()[]()[]()
+
 
 SQL `UNION` constructs must match up possibly dissimilar types to become a single result set. The resolution algorithm is applied separately to each output column of a union query. The `INTERSECT` and `EXCEPT` constructs resolve dissimilar types in the same way as `UNION`. Some other constructs, including `CASE`, `ARRAY`, `VALUES`, and the `GREATEST` and `LEAST` functions, use the identical algorithm to match up their component expressions and select a result data type.
 

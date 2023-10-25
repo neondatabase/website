@@ -8,7 +8,7 @@
 
 ## 53.6. `pg_attrdef` [#](#CATALOG-PG-ATTRDEF)
 
-[]()
+
 
 The catalog `pg_attrdef` stores column default values. The main information about columns is stored in [`pg_attribute`](catalog-pg-attribute.html "53.7. pg_attribute"). Only columns for which a default value has been explicitly set will have an entry here.
 

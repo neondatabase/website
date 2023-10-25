@@ -8,7 +8,7 @@
 
 ## B.6. History of Units [#](#DATETIME-UNITS-HISTORY)
 
-[]()
+
 
 The SQL standard states that “Within the definition of a ‘datetime literal’, the ‘datetime values’ are constrained by the natural rules for dates and times according to the Gregorian calendar”. PostgreSQL follows the SQL standard's lead by counting dates exclusively in the Gregorian calendar, even for years before that calendar was in use. This rule is known as the *proleptic Gregorian calendar*.
 

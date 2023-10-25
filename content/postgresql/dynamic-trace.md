@@ -13,7 +13,7 @@
     *   [28.5.3. Using Probes](dynamic-trace.html#USING-TRACE-POINTS)
     *   [28.5.4. Defining New Probes](dynamic-trace.html#DEFINING-TRACE-POINTS)
 
-[]()
+
 
 PostgreSQL provides facilities to support dynamic tracing of the database server. This allows an external utility to be called at specific points in the code and thereby trace execution.
 

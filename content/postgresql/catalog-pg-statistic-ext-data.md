@@ -8,7 +8,7 @@
 
 ## 53.53. `pg_statistic_ext_data` [#](#CATALOG-PG-STATISTIC-EXT-DATA)
 
-[]()
+
 
 The catalog `pg_statistic_ext_data` holds data for extended planner statistics defined in [`pg_statistic_ext`](catalog-pg-statistic-ext.html "53.52. pg_statistic_ext"). Each row in this catalog corresponds to a *statistics object* created with [`CREATE STATISTICS`](sql-createstatistics.html "CREATE STATISTICS").
 

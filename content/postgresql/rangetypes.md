@@ -19,7 +19,7 @@
     *   [8.17.9. Indexing](rangetypes.html#RANGETYPES-INDEXING)
     *   [8.17.10. Constraints on Ranges](rangetypes.html#RANGETYPES-CONSTRAINT)
 
-[]()[]()
+
 
 Range types are data types representing a range of values of some element type (called the range's *subtype*). For instance, ranges of `timestamp` might be used to represent the ranges of time that a meeting room is reserved. In this case the data type is `tsrange` (short for “timestamp range”), and `timestamp` is the subtype. The subtype must have a total order so that it is well-defined whether element values are within, before, or after a range of values.
 
@@ -218,7 +218,7 @@ See [CREATE TYPE](sql-createtype.html "CREATE TYPE") for more information about 
 
 ### 8.17.9. Indexing [#](#RANGETYPES-INDEXING)
 
-[]()
+
 
 GiST and SP-GiST indexes can be created for table columns of range types. GiST indexes can be also created for table columns of multirange types. For instance, to create a GiST index:
 
@@ -233,7 +233,7 @@ In addition, B-tree and hash indexes can be created for table columns of range t
 
 ### 8.17.10. Constraints on Ranges [#](#RANGETYPES-CONSTRAINT)
 
-[]()
+
 
 While `UNIQUE` is a natural constraint for scalar values, it is usually unsuitable for range types. Instead, an exclusion constraint is often more appropriate (see [CREATE TABLE ... CONSTRAINT ... EXCLUDE](sql-createtable.html#SQL-CREATETABLE-EXCLUDE)). Exclusion constraints allow the specification of constraints such as “non-overlapping” on a range type. For example:
 

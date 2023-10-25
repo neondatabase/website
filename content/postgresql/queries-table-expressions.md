@@ -14,7 +14,7 @@
     *   [7.2.4. `GROUPING SETS`, `CUBE`, and `ROLLUP`](queries-table-expressions.html#QUERIES-GROUPING-SETS)
     *   [7.2.5. Window Function Processing](queries-table-expressions.html#QUERIES-WINDOW)
 
-[]()
+
 
 A *table expression* computes a table. The table expression contains a `FROM` clause that is optionally followed by `WHERE`, `GROUP BY`, and `HAVING` clauses. Trivial table expressions simply refer to a table on disk, a so-called base table, but more complex expressions can be used to modify or combine base tables in various ways.
 
@@ -31,7 +31,7 @@ FROM table_reference [, table_reference [, ...]]
 
 A table reference can be a table name (possibly schema-qualified), or a derived table such as a subquery, a `JOIN` construct, or complex combinations of these. If more than one table reference is listed in the `FROM` clause, the tables are cross-joined (that is, the Cartesian product of their rows is formed; see below). The result of the `FROM` list is an intermediate virtual table that can then be subject to transformations by the `WHERE`, `GROUP BY`, and `HAVING` clauses and is finally the result of the overall table expression.
 
-[]()
+
 
 When a table reference names a table that is the parent of a table inheritance hierarchy, the table reference produces rows of not only that table but all of its descendant tables, unless the key word `ONLY` precedes the table name. However, the reference produces only the columns that appear in the named table — any columns added in subtables are ignored.
 
@@ -39,7 +39,7 @@ Instead of writing `ONLY` before the table name, you can write `*` after the tab
 
 #### 7.2.1.1. Joined Tables [#](#QUERIES-JOIN)
 
-[]()
+
 
 A joined table is a table derived from two other (real or derived) tables according to the rules of the particular join type. Inner, outer, and cross-joins are available. The general syntax of a joined table is
 
@@ -52,7 +52,7 @@ Joins of all types can be chained together, or nested: either or both *`T1`* and
 
 **Join Types**
 
-*   Cross join[]()[]()
+*   Cross join
 
     ```
 
@@ -67,7 +67,7 @@ Joins of all types can be chained together, or nested: either or both *`T1`* and
 
     This latter equivalence does not hold exactly when more than two tables appear, because `JOIN` binds more tightly than comma. For example `FROM T1 CROSS JOIN T2 INNER JOIN T3 ON condition` is not the same as `FROM T1, T2 INNER JOIN T3 ON condition` because the *`condition`* can reference *`T1`* in the first case but not the second.
 
-*   Qualified joins[]()[]()
+*   Qualified joins
 
     ```
 
@@ -86,11 +86,11 @@ Joins of all types can be chained together, or nested: either or both *`T1`* and
 
         For each row R1 of T1, the joined table has a row for each row in T2 that satisfies the join condition with R1.
 
-    *   `LEFT OUTER JOIN`[]()[]()
+    *   `LEFT OUTER JOIN`
 
         First, an inner join is performed. Then, for each row in T1 that does not satisfy the join condition with any row in T2, a joined row is added with null values in columns of T2. Thus, the joined table always has at least one row for each row in T1.
 
-    *   `RIGHT OUTER JOIN`[]()[]()
+    *   `RIGHT OUTER JOIN`
 
         First, an inner join is performed. Then, for each row in T2 that does not satisfy the join condition with any row in T1, a joined row is added with null values in columns of T1. This is the converse of a left join: the result table will always have a row for each row in T2.
 
@@ -104,7 +104,7 @@ Joins of all types can be chained together, or nested: either or both *`T1`* and
 
     Furthermore, the output of `JOIN USING` suppresses redundant columns: there is no need to print both of the matched columns, since they must have equal values. While `JOIN ON` produces all columns from *`T1`* followed by all columns from *`T2`*, `JOIN USING` produces one output column for each of the listed column pairs (in the listed order), followed by any remaining columns from *`T1`*, followed by any remaining columns from *`T2`*.
 
-    []()[]()Finally, `NATURAL` is a shorthand form of `USING`: it forms a `USING` list consisting of all column names that appear in both input tables. As with `USING`, these columns appear only once in the output table. If there are no common column names, `NATURAL JOIN` behaves like `CROSS JOIN`.
+    Finally, `NATURAL` is a shorthand form of `USING`: it forms a `USING` list consisting of all column names that appear in both input tables. As with `USING`, these columns appear only once in the output table. If there are no common column names, `NATURAL JOIN` behaves like `CROSS JOIN`.
 
     ### Note
 
@@ -233,7 +233,7 @@ This is because a restriction placed in the `ON` clause is processed *before* th
 
 #### 7.2.1.2. Table and Column Aliases [#](#QUERIES-TABLE-ALIASES)
 
-[]()[]()
+
 
 A temporary name can be given to tables and complex table references to be used for references to the derived table in the rest of the query. This is called a *table alias*.
 
@@ -309,7 +309,7 @@ is not valid; the table alias `a` is not visible outside the alias `c`.
 
 #### 7.2.1.3. Subqueries [#](#QUERIES-SUBQUERIES)
 
-[]()
+
 
 Subqueries specifying a derived table must be enclosed in parentheses. They may be assigned a table alias name, and optionally column alias names (as in [Section 7.2.1.2](queries-table-expressions.html#QUERIES-TABLE-ALIASES "7.2.1.2. Table and Column Aliases")). For example:
 
@@ -334,7 +334,7 @@ According to the SQL standard, a table alias name must be supplied for a subquer
 
 #### 7.2.1.4. Table Functions [#](#QUERIES-TABLEFUNCTIONS)
 
-[]()[]()
+
 
 Table functions are functions that produce a set of rows, made up of either base data types (scalar types) or composite data types (table rows). They are used like a table, view, or subquery in the `FROM` clause of a query. Columns returned by table functions can be included in `SELECT`, `JOIN`, or `WHERE` clauses in the same manner as columns of a table, view, or subquery.
 
@@ -430,7 +430,7 @@ It joins two functions into a single `FROM` target. `json_to_recordset()` is ins
 
 #### 7.2.1.5. `LATERAL` Subqueries [#](#QUERIES-LATERAL)
 
-[]()
+
 
 Subqueries appearing in `FROM` can be preceded by the key word `LATERAL`. This allows them to reference columns provided by preceding `FROM` items. (Without `LATERAL`, each subquery is evaluated independently and so cannot cross-reference any other `FROM` item.)
 
@@ -488,7 +488,7 @@ WHERE pname IS NULL;
 
 ### 7.2.2. The `WHERE` Clause [#](#QUERIES-WHERE)
 
-[]()
+
 
 The syntax of the [`WHERE`](sql-select.html#SQL-WHERE "WHERE Clause") clause is
 
@@ -547,7 +547,7 @@ SELECT ... FROM fdt WHERE EXISTS (SELECT c1 FROM t2 WHERE c2 > fdt.c1)
 
 ### 7.2.3. The `GROUP BY` and `HAVING` Clauses [#](#QUERIES-GROUP)
 
-[]()[]()
+
 
 After passing the `WHERE` filter, the derived input table might be subject to grouping, using the `GROUP BY` clause, and elimination of group rows using the `HAVING` clause.
 
@@ -613,13 +613,13 @@ SELECT product_id, p.name, (sum(s.units) * p.price) AS sales
 
 In this example, the columns `product_id`, `p.name`, and `p.price` must be in the `GROUP BY` clause since they are referenced in the query select list (but see below). The column `s.units` does not have to be in the `GROUP BY` list since it is only used in an aggregate expression (`sum(...)`), which represents the sales of a product. For each product, the query returns a summary row about all sales of the product.
 
-[]()
+
 
 If the products table is set up so that, say, `product_id` is the primary key, then it would be enough to group by `product_id` in the above example, since name and price would be *functionally dependent* on the product ID, and so there would be no ambiguity about which name and price value to return for each product ID group.
 
 In strict SQL, `GROUP BY` can only group by columns of the source table but PostgreSQL extends this to also allow `GROUP BY` to group by columns in the select list. Grouping by value expressions instead of simple column names is also allowed.
 
-[]()
+
 
 If a table has been grouped using `GROUP BY`, but only certain groups are of interest, the `HAVING` clause can be used, much like a `WHERE` clause, to eliminate groups from the result. The syntax is:
 
@@ -666,7 +666,7 @@ If a query contains aggregate function calls, but no `GROUP BY` clause, grouping
 
 ### 7.2.4. `GROUPING SETS`, `CUBE`, and `ROLLUP` [#](#QUERIES-GROUPING-SETS)
 
-[]()[]()[]()
+
 
 More complex grouping operations than those described above are possible using the concept of *grouping sets*. The data selected by the `FROM` and `WHERE` clauses is grouped separately by each specified grouping set, aggregates computed for each group just as for simple `GROUP BY` clauses, and then the results returned. For example:
 
@@ -807,7 +807,7 @@ GROUP BY GROUPING SETS (
 )
 ```
 
-[]()[]()When specifying multiple grouping items together, the final set of grouping sets might contain duplicates. For example:
+When specifying multiple grouping items together, the final set of grouping sets might contain duplicates. For example:
 
 ```
 
@@ -859,7 +859,7 @@ The construct `(a, b)` is normally recognized in expressions as a [row construct
 
 ### 7.2.5. Window Function Processing [#](#QUERIES-WINDOW)
 
-[]()
+
 
 If the query contains any window functions (see [Section 3.5](tutorial-window.html "3.5. Window Functions"), [Section 9.22](functions-window.html "9.22. Window Functions") and [Section 4.2.8](sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls")), these functions are evaluated after any grouping, aggregation, and `HAVING` filtering is performed. That is, if the query uses any aggregates, `GROUP BY`, or `HAVING`, then the rows seen by the window functions are the group rows instead of the original table rows from `FROM`/`WHERE`.
 

@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## CREATE TEXT SEARCH TEMPLATE
 

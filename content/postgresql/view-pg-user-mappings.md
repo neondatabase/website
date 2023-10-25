@@ -8,7 +8,7 @@
 
 ## 54.34. `pg_user_mappings` [#](#VIEW-PG-USER-MAPPINGS)
 
-[]()
+
 
 The view `pg_user_mappings` provides access to information about user mappings. This is essentially a publicly readable view of [`pg_user_mapping`](catalog-pg-user-mapping.html "53.65. pg_user_mapping") that leaves out the options field if the user has no rights to use it.
 

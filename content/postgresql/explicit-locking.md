@@ -14,7 +14,7 @@
     *   [13.3.4. Deadlocks](explicit-locking.html#LOCKING-DEADLOCKS)
     *   [13.3.5. Advisory Locks](explicit-locking.html#ADVISORY-LOCKS)
 
-[]()
+
 
 PostgreSQL provides various lock modes to control concurrent access to data in tables. These modes can be used for application-controlled locking in situations where MVCC does not give the desired behavior. Also, most PostgreSQL commands automatically acquire locks of appropriate modes to ensure that referenced tables are not dropped or modified in incompatible ways while the command executes. (For example, `TRUNCATE` cannot safely be executed concurrently with other operations on the same table, so it obtains an `ACCESS EXCLUSIVE` lock on the table to enforce that.)
 
@@ -22,7 +22,7 @@ To examine a list of the currently outstanding locks in a database server, use t
 
 ### 13.3.1. Table-Level Locks [#](#LOCKING-TABLES)
 
-[]()
+
 
 The list below shows the available lock modes and the contexts in which they are used automatically by PostgreSQL. You can also acquire any of these locks explicitly with the command [LOCK](sql-lock.html "LOCK"). Remember that all of these lock modes are table-level locks, even if the name contains the word “row”; the names of the lock modes are historical. To some extent the names reflect the typical usage of each lock mode — but the semantics are all the same. The only real difference between one lock mode and another is the set of lock modes with which each conflicts (see [Table 13.2](explicit-locking.html#TABLE-LOCK-COMPATIBILITY "Table 13.2. Conflicting Lock Modes")). Two transactions cannot hold locks of conflicting modes on the same table at the same time. (However, a transaction never conflicts with itself. For example, it might acquire `ACCESS EXCLUSIVE` lock and later acquire `ACCESS SHARE` lock on the same table.) Non-conflicting lock modes can be held concurrently by many transactions. Notice in particular that some lock modes are self-conflicting (for example, an `ACCESS EXCLUSIVE` lock cannot be held by more than one transaction at a time) while others are not self-conflicting (for example, an `ACCESS SHARE` lock can be held by multiple transactions).
 
@@ -138,7 +138,7 @@ In addition to table and row locks, page-level share/exclusive locks are used to
 
 ### 13.3.4. Deadlocks [#](#LOCKING-DEADLOCKS)
 
-[]()
+
 
 The use of explicit locking can increase the likelihood of *deadlocks*, wherein two (or more) transactions each hold locks that the other wants. For example, if transaction 1 acquires an exclusive lock on table A and then tries to acquire an exclusive lock on table B, while transaction 2 has already exclusive-locked table B and now wants an exclusive lock on table A, then neither one can proceed. PostgreSQL automatically detects deadlock situations and resolves them by aborting one of the transactions involved, allowing the other(s) to complete. (Exactly which transaction will be aborted is difficult to predict and should not be relied upon.)
 
@@ -172,7 +172,7 @@ So long as no deadlock situation is detected, a transaction seeking either a tab
 
 ### 13.3.5. Advisory Locks [#](#ADVISORY-LOCKS)
 
-[]()[]()
+
 
 PostgreSQL provides a means for creating locks that have application-defined meanings. These are called *advisory locks*, because the system does not enforce their use — it is up to the application to use them correctly. Advisory locks can be useful for locking strategies that are an awkward fit for the MVCC model. For example, a common use of advisory locks is to emulate pessimistic locking strategies typical of so-called “flat file” data management systems. While a flag stored in a table could be used for the same purpose, advisory locks are faster, avoid table bloat, and are automatically cleaned up by the server at the end of the session.
 

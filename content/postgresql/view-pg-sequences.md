@@ -8,7 +8,7 @@
 
 ## 54.23. `pg_sequences` [#](#VIEW-PG-SEQUENCES)
 
-[]()
+
 
 The view `pg_sequences` provides access to useful information about each sequence in the database.
 

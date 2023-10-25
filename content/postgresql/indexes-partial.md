@@ -8,7 +8,7 @@
 
 ## 11.8. Partial Indexes [#](#INDEXES-PARTIAL)
 
-[]()
+
 
 A *partial index* is an index built over a subset of a table; the subset is defined by a conditional expression (called the *predicate* of the partial index). The index contains entries only for those table rows that satisfy the predicate. Partial indexes are a specialized feature, but there are several situations in which they are useful.
 

@@ -20,7 +20,7 @@
 
 *   [71.3. Extensibility](brin-extensibility.html)
 
-[]()
+
 
 ***
 

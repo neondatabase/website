@@ -37,7 +37,7 @@ The long version is the rest of this section.
 
 1.  **Configuration**
 
-    []()
+    
 
     The first step of the installation procedure is to configure the source tree for your system and choose the options you would like. This is done by running the `configure` script. For a default installation simply enter:
 
@@ -48,7 +48,7 @@ The long version is the rest of this section.
 
     This script will run a number of tests to determine values for various system dependent variables and detect any quirks of your operating system, and finally will create several files in the build tree to record what it found.
 
-    You can also run `configure` in a directory outside the source tree, and then build there, if you want to keep the build directory separate from the original source files. This procedure is called a []()*VPATH* build. Here's how:
+    You can also run `configure` in a directory outside the source tree, and then build there, if you want to keep the build directory separate from the original source files. This procedure is called a *VPATH* build. Here's how:
 
     ```
 
@@ -102,7 +102,7 @@ The long version is the rest of this section.
 
 3.  **Regression Tests**
 
-    []()
+    
 
     If you want to test the newly built server before you install it, you can run the regression tests at this point. The regression tests are a test suite to verify that PostgreSQL runs on your machine in the way the developers expected it to. Type:
 
@@ -175,7 +175,7 @@ If you perform a build and then discover that your `configure` options were wron
 
 ### 17.3.3. `configure` Options [#](#CONFIGURE-OPTIONS)
 
-[]()
+
 
 `configure`'s command line options are explained below. This list is not exhaustive (use `./configure --help` to get one that is). The options not covered here are meant for advanced use-cases such as cross-compilation, and are documented in the standard Autoconf documentation.
 
@@ -265,7 +265,7 @@ The options described in this section enable building of various PostgreSQL feat
 
     Build with support for LLVM based JIT compilation (see [Chapter 32](jit.html "Chapter 32. Just-in-Time Compilation (JIT)")). This requires the LLVM library to be installed. The minimum required version of LLVM is currently 3.9.
 
-    `llvm-config`[]() will be used to find the required compilation options. `llvm-config`, and then `llvm-config-$major-$minor` for all supported versions, will be searched for in your `PATH`. If that would not yield the desired program, use `LLVM_CONFIG` to specify a path to the correct `llvm-config`. For example
+    `llvm-config` will be used to find the required compilation options. `llvm-config`, and then `llvm-config-$major-$minor` for all supported versions, will be searched for in your `PATH`. If that would not yield the desired program, use `LLVM_CONFIG` to specify a path to the correct `llvm-config`. For example
 
     ```
 
@@ -282,7 +282,7 @@ The options described in this section enable building of various PostgreSQL feat
 
     Build with Zstandard compression support.
 
-*   `--with-ssl=LIBRARY` []()[#](#CONFIGURE-OPTION-WITH-SSL)
+*   `--with-ssl=LIBRARY` [#](#CONFIGURE-OPTION-WITH-SSL)
 
     Build with support for SSL (encrypted) connections. The only *`LIBRARY`* supported is `openssl`. This requires the OpenSSL package to be installed. `configure` will check for the required header files and libraries to make sure that your OpenSSL installation is sufficient before proceeding.
 
@@ -296,11 +296,11 @@ The options described in this section enable building of various PostgreSQL feat
 
 *   `--with-ldap` [#](#CONFIGURE-OPTION-WITH-LDAP)
 
-    Build with LDAP[]() support for authentication and connection parameter lookup (see [Section 34.18](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters") and [Section 21.10](auth-ldap.html "21.10. LDAP Authentication") for more information). On Unix, this requires the OpenLDAP package to be installed. On Windows, the default WinLDAP library is used. `configure` will check for the required header files and libraries to make sure that your OpenLDAP installation is sufficient before proceeding.
+    Build with LDAP support for authentication and connection parameter lookup (see [Section 34.18](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters") and [Section 21.10](auth-ldap.html "21.10. LDAP Authentication") for more information). On Unix, this requires the OpenLDAP package to be installed. On Windows, the default WinLDAP library is used. `configure` will check for the required header files and libraries to make sure that your OpenLDAP installation is sufficient before proceeding.
 
 *   `--with-pam` [#](#CONFIGURE-OPTION-WITH-PAM)
 
-    Build with PAM[]() (Pluggable Authentication Modules) support.
+    Build with PAM (Pluggable Authentication Modules) support.
 
 *   `--with-bsd-auth` [#](#CONFIGURE-OPTION-WITH-BSD-AUTH)
 
@@ -308,7 +308,7 @@ The options described in this section enable building of various PostgreSQL feat
 
 *   `--with-systemd` [#](#CONFIGURE-OPTION-WITH-SYSTEMD)
 
-    Build with support for systemd[]() service notifications. This improves integration if the server is started under systemd but has no impact otherwise; see [Section 19.3](server-start.html "19.3. Starting the Database Server") for more information. libsystemd and the associated header files need to be installed to use this option.
+    Build with support for systemd service notifications. This improves integration if the server is started under systemd but has no impact otherwise; see [Section 19.3](server-start.html "19.3. Starting the Database Server") for more information. libsystemd and the associated header files need to be installed to use this option.
 
 *   `--with-bonjour` [#](#CONFIGURE-OPTION-WITH-BONJOUR)
 
@@ -316,7 +316,7 @@ The options described in this section enable building of various PostgreSQL feat
 
 *   `--with-uuid=LIBRARY` [#](#CONFIGURE-OPTION-WITH-UUID)
 
-    Build the [uuid-ossp](uuid-ossp.html "F.48. uuid-ossp — a UUID generator") module (which provides functions to generate UUIDs), using the specified UUID library.[]() *`LIBRARY`* must be one of:
+    Build the [uuid-ossp](uuid-ossp.html "F.48. uuid-ossp — a UUID generator") module (which provides functions to generate UUIDs), using the specified UUID library. *`LIBRARY`* must be one of:
 
     *   `bsd` to use the UUID functions found in FreeBSD and some other BSD-derived systems
     *   `e2fs` to use the UUID library created by the `e2fsprogs` project; this library is present in most Linux systems and in macOS, and can be obtained for other platforms as well
@@ -344,7 +344,7 @@ The options described in this section allow disabling certain PostgreSQL feature
 
 *   `--without-icu` [#](#CONFIGURE-OPTION-WITHOUT-ICU)
 
-    Build without support for the ICU[]() library, disabling the use of ICU collation features (see [Section 24.2](collation.html "24.2. Collation Support")).
+    Build without support for the ICU library, disabling the use of ICU collation features (see [Section 24.2](collation.html "24.2. Collation Support")).
 
 *   `--without-readline` [#](#CONFIGURE-OPTION-WITHOUT-READLINE)
 
@@ -356,7 +356,7 @@ The options described in this section allow disabling certain PostgreSQL feature
 
 *   `--without-zlib` [#](#CONFIGURE-OPTION-WITHOUT-ZLIB)
 
-    []()Prevents use of the Zlib library. This disables support for compressed archives in pg\_dump and pg\_restore.
+    Prevents use of the Zlib library. This disables support for compressed archives in pg\_dump and pg\_restore.
 
 *   `--disable-spinlocks` [#](#CONFIGURE-OPTION-DISABLE-SPINLOCKS)
 
@@ -380,11 +380,11 @@ The options described in this section allow disabling certain PostgreSQL feature
 
     Example: `--with-libraries=/opt/gnu/lib:/usr/sup/lib`.
 
-*   `--with-system-tzdata=DIRECTORY` []()[#](#CONFIGURE-OPTION-WITH-SYSTEM-TZDATA)
+*   `--with-system-tzdata=DIRECTORY` [#](#CONFIGURE-OPTION-WITH-SYSTEM-TZDATA)
 
     PostgreSQL includes its own time zone database, which it requires for date and time operations. This time zone database is in fact compatible with the IANA time zone database provided by many operating systems such as FreeBSD, Linux, and Solaris, so it would be redundant to install it again. When this option is used, the system-supplied time zone database in *`DIRECTORY`* is used instead of the one included in the PostgreSQL source distribution. *`DIRECTORY`* must be specified as an absolute path. `/usr/share/zoneinfo` is a likely directory on some operating systems. Note that the installation routine will not detect mismatching or erroneous time zone data. If you use this option, you are advised to run the regression tests to verify that the time zone data you have pointed to works correctly with PostgreSQL.
 
-    []()
+    
 
     This option is mainly aimed at binary package distributors who know their target operating system well. The main advantage of using this option is that the PostgreSQL package won't need to be upgraded whenever any of the many local daylight-saving time rules change. Another advantage is that PostgreSQL can be cross-compiled more straightforwardly if the time zone database files do not need to be built during the installation.
 
@@ -452,7 +452,7 @@ When building an installation that will be used to develop code inside the serve
 
 *   `--enable-dtrace` [#](#CONFIGURE-OPTION-ENABLE-DTRACE)
 
-    []()Compiles PostgreSQL with support for the dynamic tracing tool DTrace. See [Section 28.5](dynamic-trace.html "28.5. Dynamic Tracing") for more information.
+    Compiles PostgreSQL with support for the dynamic tracing tool DTrace. See [Section 28.5](dynamic-trace.html "28.5. Dynamic Tracing") for more information.
 
     To point to the `dtrace` program, the environment variable `DTRACE` can be set. This will often be necessary because `dtrace` is typically installed under `/usr/sbin`, which might not be in your `PATH`.
 
@@ -476,7 +476,7 @@ When building an installation that will be used to develop code inside the serve
 
 ### 17.3.4. `configure` Environment Variables [#](#CONFIGURE-ENVVARS)
 
-[]()
+
 
 In addition to the ordinary command-line options described above, `configure` responds to a number of environment variables. You can specify environment variables on the `configure` command line, for example:
 

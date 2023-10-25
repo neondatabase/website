@@ -12,7 +12,7 @@
     *   [34.10.2. Functions for Receiving `COPY` Data](libpq-copy.html#LIBPQ-COPY-RECEIVE)
     *   [34.10.3. Obsolete Functions for `COPY`](libpq-copy.html#LIBPQ-COPY-DEPRECATED)
 
-[]()
+
 
 The `COPY` command in PostgreSQL has options to read from or write to the network connection used by libpq. The functions described in this section allow applications to take advantage of this capability by supplying or consuming copied data.
 
@@ -24,15 +24,15 @@ The functions of this section should be executed only after obtaining a result s
 
 A `PGresult` object bearing one of these status values carries some additional data about the `COPY` operation that is starting. This additional data is available using functions that are also used in connection with query results:
 
-*   `PQnfields`[]() [#](#LIBPQ-PQNFIELDS-1)
+*   `PQnfields` [#](#LIBPQ-PQNFIELDS-1)
 
     Returns the number of columns (fields) to be copied.
 
-*   `PQbinaryTuples`[]() [#](#LIBPQ-PQBINARYTUPLES-1)
+*   `PQbinaryTuples` [#](#LIBPQ-PQBINARYTUPLES-1)
 
     0 indicates the overall copy format is textual (rows separated by newlines, columns separated by separator characters, etc.). 1 indicates the overall copy format is binary. See [COPY](sql-copy.html "COPY") for more information.
 
-*   `PQfformat`[]() [#](#LIBPQ-PQFFORMAT-1)
+*   `PQfformat` [#](#LIBPQ-PQFFORMAT-1)
 
     Returns the format code (0 for text, 1 for binary) associated with each column of the copy operation. The per-column format codes will always be zero when the overall copy format is textual, but the binary format can support both text and binary columns. (However, as of the current implementation of `COPY`, only binary columns appear in a binary copy; so the per-column formats always match the overall format at present.)
 
@@ -40,7 +40,7 @@ A `PGresult` object bearing one of these status values carries some additional d
 
 These functions are used to send data during `COPY FROM STDIN`. They will fail if called when the connection is not in `COPY_IN` state.
 
-*   `PQputCopyData`[]() [#](#LIBPQ-PQPUTCOPYDATA)
+*   `PQputCopyData` [#](#LIBPQ-PQPUTCOPYDATA)
 
     Sends data to the server during `COPY_IN` state.
 
@@ -55,7 +55,7 @@ These functions are used to send data during `COPY FROM STDIN`. They will fail i
 
     The application can divide the `COPY` data stream into buffer loads of any convenient size. Buffer-load boundaries have no semantic significance when sending. The contents of the data stream must match the data format expected by the `COPY` command; see [COPY](sql-copy.html "COPY") for details.
 
-*   `PQputCopyEnd`[]() [#](#LIBPQ-PQPUTCOPYEND)
+*   `PQputCopyEnd` [#](#LIBPQ-PQPUTCOPYEND)
 
     Sends end-of-data indication to the server during `COPY_IN` state.
 
@@ -75,7 +75,7 @@ These functions are used to send data during `COPY FROM STDIN`. They will fail i
 
 These functions are used to receive data during `COPY TO STDOUT`. They will fail if called when the connection is not in `COPY_OUT` state.
 
-*   `PQgetCopyData`[]() [#](#LIBPQ-PQGETCOPYDATA)
+*   `PQgetCopyData` [#](#LIBPQ-PQGETCOPYDATA)
 
     Receives data from the server during `COPY_OUT` state.
 
@@ -98,7 +98,7 @@ These functions are used to receive data during `COPY TO STDOUT`. They will fail
 
 These functions represent older methods of handling `COPY`. Although they still work, they are deprecated due to poor error handling, inconvenient methods of detecting end-of-data, and lack of support for binary or nonblocking transfers.
 
-*   `PQgetline`[]() [#](#LIBPQ-PQGETLINE)
+*   `PQgetline` [#](#LIBPQ-PQGETLINE)
 
     Reads a newline-terminated line of characters (transmitted by the server) into a buffer string of size *`length`*.
 
@@ -113,7 +113,7 @@ These functions represent older methods of handling `COPY`. Although they still 
 
     Note that the application must check to see if a new line consists of the two characters `\.`, which indicates that the server has finished sending the results of the `COPY` command. If the application might receive lines that are more than *`length`*-1 characters long, care is needed to be sure it recognizes the `\.` line correctly (and does not, for example, mistake the end of a long data line for a terminator line).
 
-*   `PQgetlineAsync`[]() [#](#LIBPQ-PQGETLINEASYNC)
+*   `PQgetlineAsync` [#](#LIBPQ-PQGETLINEASYNC)
 
     Reads a row of `COPY` data (transmitted by the server) into a buffer without blocking.
 
@@ -132,7 +132,7 @@ These functions represent older methods of handling `COPY`. Although they still 
 
     The data returned will not extend beyond a data-row boundary. If possible a whole row will be returned at one time. But if the buffer offered by the caller is too small to hold a row sent by the server, then a partial data row will be returned. With textual data this can be detected by testing whether the last returned byte is `\n` or not. (In a binary `COPY`, actual parsing of the `COPY` data format will be needed to make the equivalent determination.) The returned string is not null-terminated. (If you want to add a terminating null, be sure to pass a *`bufsize`* one smaller than the room actually available.)
 
-*   `PQputline`[]() [#](#LIBPQ-PQPUTLINE)
+*   `PQputline` [#](#LIBPQ-PQPUTLINE)
 
     Sends a null-terminated string to the server. Returns 0 if OK and `EOF` if unable to send the string.
 
@@ -148,7 +148,7 @@ These functions represent older methods of handling `COPY`. Although they still 
 
     Before PostgreSQL protocol 3.0, it was necessary for the application to explicitly send the two characters `\.` as a final line to indicate to the server that it had finished sending `COPY` data. While this still works, it is deprecated and the special meaning of `\.` can be expected to be removed in a future release. It is sufficient to call [`PQendcopy`](libpq-copy.html#LIBPQ-PQENDCOPY) after having sent the actual data.
 
-*   `PQputnbytes`[]() [#](#LIBPQ-PQPUTNBYTES)
+*   `PQputnbytes` [#](#LIBPQ-PQPUTNBYTES)
 
     Sends a non-null-terminated string to the server. Returns 0 if OK and `EOF` if unable to send the string.
 
@@ -161,7 +161,7 @@ These functions represent older methods of handling `COPY`. Although they still 
 
     This is exactly like [`PQputline`](libpq-copy.html#LIBPQ-PQPUTLINE), except that the data buffer need not be null-terminated since the number of bytes to send is specified directly. Use this procedure when sending binary data.
 
-*   `PQendcopy`[]() [#](#LIBPQ-PQENDCOPY)
+*   `PQendcopy` [#](#LIBPQ-PQENDCOPY)
 
     Synchronizes with the server.
 

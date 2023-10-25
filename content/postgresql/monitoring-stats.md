@@ -34,7 +34,7 @@
     *   [28.2.24. `pg_stat_slru`](monitoring-stats.html#MONITORING-PG-STAT-SLRU-VIEW)
     *   [28.2.25. Statistics Functions](monitoring-stats.html#MONITORING-STATS-FUNCTIONS)
 
-[]()
+
 
 PostgreSQL's *cumulative statistics system* supports collection and reporting of information about server activity. Presently, accesses to tables and indexes in both disk-block and individual-row terms are counted. The total number of rows in each table, and information about vacuum and analyze actions for each table are also counted. If enabled, calls to user-defined functions and the total time spent in each one are counted as well.
 
@@ -74,19 +74,19 @@ Some of the information in the dynamic statistics views shown in [Table 28.1](m
 
 | View Name                           | Description                                                                                                                                                                                                                                                   |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pg_stat_activity`[]()              | One row per server process, showing information related to the current activity of that process, such as state and current query. See [`pg_stat_activity`](monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity") for details.    |
-| `pg_stat_replication`[]()           | One row per WAL sender process, showing statistics about replication to that sender's connected standby server. See [`pg_stat_replication`](monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-VIEW "28.2.4. pg_stat_replication") for details.             |
-| `pg_stat_wal_receiver`[]()          | Only one row, showing statistics about the WAL receiver from that receiver's connected server. See [`pg_stat_wal_receiver`](monitoring-stats.html#MONITORING-PG-STAT-WAL-RECEIVER-VIEW "28.2.6. pg_stat_wal_receiver") for details.                           |
-| `pg_stat_recovery_prefetch`[]()     | Only one row, showing statistics about blocks prefetched during recovery. See [`pg_stat_recovery_prefetch`](monitoring-stats.html#MONITORING-PG-STAT-RECOVERY-PREFETCH "28.2.7. pg_stat_recovery_prefetch") for details.                                      |
-| `pg_stat_subscription`[]()          | At least one row per subscription, showing information about the subscription workers. See [`pg_stat_subscription`](monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION "28.2.8. pg_stat_subscription") for details.                                        |
-| `pg_stat_ssl`[]()                   | One row per connection (regular and replication), showing information about SSL used on this connection. See [`pg_stat_ssl`](monitoring-stats.html#MONITORING-PG-STAT-SSL-VIEW "28.2.10. pg_stat_ssl") for details.                                           |
-| `pg_stat_gssapi`[]()                | One row per connection (regular and replication), showing information about GSSAPI authentication and encryption used on this connection. See [`pg_stat_gssapi`](monitoring-stats.html#MONITORING-PG-STAT-GSSAPI-VIEW "28.2.11. pg_stat_gssapi") for details. |
-| `pg_stat_progress_analyze`[]()      | One row for each backend (including autovacuum worker processes) running `ANALYZE`, showing current progress. See [Section 28.4.1](progress-reporting.html#ANALYZE-PROGRESS-REPORTING "28.4.1. ANALYZE Progress Reporting").                                  |
-| `pg_stat_progress_create_index`[]() | One row for each backend running `CREATE INDEX` or `REINDEX`, showing current progress. See [Section 28.4.4](progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting").                                              |
-| `pg_stat_progress_vacuum`[]()       | One row for each backend (including autovacuum worker processes) running `VACUUM`, showing current progress. See [Section 28.4.5](progress-reporting.html#VACUUM-PROGRESS-REPORTING "28.4.5. VACUUM Progress Reporting").                                     |
-| `pg_stat_progress_cluster`[]()      | One row for each backend running `CLUSTER` or `VACUUM FULL`, showing current progress. See [Section 28.4.2](progress-reporting.html#CLUSTER-PROGRESS-REPORTING "28.4.2. CLUSTER Progress Reporting").                                                         |
-| `pg_stat_progress_basebackup`[]()   | One row for each WAL sender process streaming a base backup, showing current progress. See [Section 28.4.6](progress-reporting.html#BASEBACKUP-PROGRESS-REPORTING "28.4.6. Base Backup Progress Reporting").                                                  |
-| `pg_stat_progress_copy`[]()         | One row for each backend running `COPY`, showing current progress. See [Section 28.4.3](progress-reporting.html#COPY-PROGRESS-REPORTING "28.4.3. COPY Progress Reporting").                                                                                   |
+| `pg_stat_activity`              | One row per server process, showing information related to the current activity of that process, such as state and current query. See [`pg_stat_activity`](monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity") for details.    |
+| `pg_stat_replication`           | One row per WAL sender process, showing statistics about replication to that sender's connected standby server. See [`pg_stat_replication`](monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-VIEW "28.2.4. pg_stat_replication") for details.             |
+| `pg_stat_wal_receiver`          | Only one row, showing statistics about the WAL receiver from that receiver's connected server. See [`pg_stat_wal_receiver`](monitoring-stats.html#MONITORING-PG-STAT-WAL-RECEIVER-VIEW "28.2.6. pg_stat_wal_receiver") for details.                           |
+| `pg_stat_recovery_prefetch`     | Only one row, showing statistics about blocks prefetched during recovery. See [`pg_stat_recovery_prefetch`](monitoring-stats.html#MONITORING-PG-STAT-RECOVERY-PREFETCH "28.2.7. pg_stat_recovery_prefetch") for details.                                      |
+| `pg_stat_subscription`          | At least one row per subscription, showing information about the subscription workers. See [`pg_stat_subscription`](monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION "28.2.8. pg_stat_subscription") for details.                                        |
+| `pg_stat_ssl`                   | One row per connection (regular and replication), showing information about SSL used on this connection. See [`pg_stat_ssl`](monitoring-stats.html#MONITORING-PG-STAT-SSL-VIEW "28.2.10. pg_stat_ssl") for details.                                           |
+| `pg_stat_gssapi`                | One row per connection (regular and replication), showing information about GSSAPI authentication and encryption used on this connection. See [`pg_stat_gssapi`](monitoring-stats.html#MONITORING-PG-STAT-GSSAPI-VIEW "28.2.11. pg_stat_gssapi") for details. |
+| `pg_stat_progress_analyze`      | One row for each backend (including autovacuum worker processes) running `ANALYZE`, showing current progress. See [Section 28.4.1](progress-reporting.html#ANALYZE-PROGRESS-REPORTING "28.4.1. ANALYZE Progress Reporting").                                  |
+| `pg_stat_progress_create_index` | One row for each backend running `CREATE INDEX` or `REINDEX`, showing current progress. See [Section 28.4.4](progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting").                                              |
+| `pg_stat_progress_vacuum`       | One row for each backend (including autovacuum worker processes) running `VACUUM`, showing current progress. See [Section 28.4.5](progress-reporting.html#VACUUM-PROGRESS-REPORTING "28.4.5. VACUUM Progress Reporting").                                     |
+| `pg_stat_progress_cluster`      | One row for each backend running `CLUSTER` or `VACUUM FULL`, showing current progress. See [Section 28.4.2](progress-reporting.html#CLUSTER-PROGRESS-REPORTING "28.4.2. CLUSTER Progress Reporting").                                                         |
+| `pg_stat_progress_basebackup`   | One row for each WAL sender process streaming a base backup, showing current progress. See [Section 28.4.6](progress-reporting.html#BASEBACKUP-PROGRESS-REPORTING "28.4.6. Base Backup Progress Reporting").                                                  |
+| `pg_stat_progress_copy`         | One row for each backend running `COPY`, showing current progress. See [Section 28.4.3](progress-reporting.html#COPY-PROGRESS-REPORTING "28.4.3. COPY Progress Reporting").                                                                                   |
 
 \
 
@@ -95,35 +95,35 @@ Some of the information in the dynamic statistics views shown in [Table 28.1](m
 
 | View Name                         | Description                                                                                                                                                                                                                                                                          |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `pg_stat_archiver`[]()            | One row only, showing statistics about the WAL archiver process's activity. See [`pg_stat_archiver`](monitoring-stats.html#MONITORING-PG-STAT-ARCHIVER-VIEW "28.2.12. pg_stat_archiver") for details.                                                                                |
-| `pg_stat_bgwriter`[]()            | One row only, showing statistics about the background writer process's activity. See [`pg_stat_bgwriter`](monitoring-stats.html#MONITORING-PG-STAT-BGWRITER-VIEW "28.2.14. pg_stat_bgwriter") for details.                                                                           |
-| `pg_stat_database`[]()            | One row per database, showing database-wide statistics. See [`pg_stat_database`](monitoring-stats.html#MONITORING-PG-STAT-DATABASE-VIEW "28.2.16. pg_stat_database") for details.                                                                                                    |
-| `pg_stat_database_conflicts`[]()  | One row per database, showing database-wide statistics about query cancels due to conflict with recovery on standby servers. See [`pg_stat_database_conflicts`](monitoring-stats.html#MONITORING-PG-STAT-DATABASE-CONFLICTS-VIEW "28.2.17. pg_stat_database_conflicts") for details. |
-| `pg_stat_io`[]()                  | One row for each combination of backend type, context, and target object containing cluster-wide I/O statistics. See [`pg_stat_io`](monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW "28.2.13. pg_stat_io") for details.                                                             |
-| `pg_stat_replication_slots`[]()   | One row per replication slot, showing statistics about the replication slot's usage. See [`pg_stat_replication_slots`](monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW "28.2.5. pg_stat_replication_slots") for details.                                             |
-| `pg_stat_slru`[]()                | One row per SLRU, showing statistics of operations. See [`pg_stat_slru`](monitoring-stats.html#MONITORING-PG-STAT-SLRU-VIEW "28.2.24. pg_stat_slru") for details.                                                                                                                    |
-| `pg_stat_subscription_stats`[]()  | One row per subscription, showing statistics about errors. See [`pg_stat_subscription_stats`](monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION-STATS "28.2.9. pg_stat_subscription_stats") for details.                                                                         |
-| `pg_stat_wal`[]()                 | One row only, showing statistics about WAL activity. See [`pg_stat_wal`](monitoring-stats.html#MONITORING-PG-STAT-WAL-VIEW "28.2.15. pg_stat_wal") for details.                                                                                                                      |
-| `pg_stat_all_tables`[]()          | One row for each table in the current database, showing statistics about accesses to that specific table. See [`pg_stat_all_tables`](monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW "28.2.18. pg_stat_all_tables") for details.                                            |
-| `pg_stat_sys_tables`[]()          | Same as `pg_stat_all_tables`, except that only system tables are shown.                                                                                                                                                                                                              |
-| `pg_stat_user_tables`[]()         | Same as `pg_stat_all_tables`, except that only user tables are shown.                                                                                                                                                                                                                |
-| `pg_stat_xact_all_tables`[]()     | Similar to `pg_stat_all_tables`, but counts actions taken so far within the current transaction (which are *not* yet included in `pg_stat_all_tables` and related views). The columns for numbers of live and dead rows and vacuum and analyze actions are not present in this view. |
-| `pg_stat_xact_sys_tables`[]()     | Same as `pg_stat_xact_all_tables`, except that only system tables are shown.                                                                                                                                                                                                         |
-| `pg_stat_xact_user_tables`[]()    | Same as `pg_stat_xact_all_tables`, except that only user tables are shown.                                                                                                                                                                                                           |
-| `pg_stat_all_indexes`[]()         | One row for each index in the current database, showing statistics about accesses to that specific index. See [`pg_stat_all_indexes`](monitoring-stats.html#MONITORING-PG-STAT-ALL-INDEXES-VIEW "28.2.19. pg_stat_all_indexes") for details.                                         |
-| `pg_stat_sys_indexes`[]()         | Same as `pg_stat_all_indexes`, except that only indexes on system tables are shown.                                                                                                                                                                                                  |
-| `pg_stat_user_indexes`[]()        | Same as `pg_stat_all_indexes`, except that only indexes on user tables are shown.                                                                                                                                                                                                    |
-| `pg_stat_user_functions`[]()      | One row for each tracked function, showing statistics about executions of that function. See [`pg_stat_user_functions`](monitoring-stats.html#MONITORING-PG-STAT-USER-FUNCTIONS-VIEW "28.2.23. pg_stat_user_functions") for details.                                                 |
-| `pg_stat_xact_user_functions`[]() | Similar to `pg_stat_user_functions`, but counts only calls during the current transaction (which are *not* yet included in `pg_stat_user_functions`).                                                                                                                                |
-| `pg_statio_all_tables`[]()        | One row for each table in the current database, showing statistics about I/O on that specific table. See [`pg_statio_all_tables`](monitoring-stats.html#MONITORING-PG-STATIO-ALL-TABLES-VIEW "28.2.20. pg_statio_all_tables") for details.                                           |
-| `pg_statio_sys_tables`[]()        | Same as `pg_statio_all_tables`, except that only system tables are shown.                                                                                                                                                                                                            |
-| `pg_statio_user_tables`[]()       | Same as `pg_statio_all_tables`, except that only user tables are shown.                                                                                                                                                                                                              |
-| `pg_statio_all_indexes`[]()       | One row for each index in the current database, showing statistics about I/O on that specific index. See [`pg_statio_all_indexes`](monitoring-stats.html#MONITORING-PG-STATIO-ALL-INDEXES-VIEW "28.2.21. pg_statio_all_indexes") for details.                                        |
-| `pg_statio_sys_indexes`[]()       | Same as `pg_statio_all_indexes`, except that only indexes on system tables are shown.                                                                                                                                                                                                |
-| `pg_statio_user_indexes`[]()      | Same as `pg_statio_all_indexes`, except that only indexes on user tables are shown.                                                                                                                                                                                                  |
-| `pg_statio_all_sequences`[]()     | One row for each sequence in the current database, showing statistics about I/O on that specific sequence. See [`pg_statio_all_sequences`](monitoring-stats.html#MONITORING-PG-STATIO-ALL-SEQUENCES-VIEW "28.2.22. pg_statio_all_sequences") for details.                            |
-| `pg_statio_sys_sequences`[]()     | Same as `pg_statio_all_sequences`, except that only system sequences are shown. (Presently, no system sequences are defined, so this view is always empty.)                                                                                                                          |
-| `pg_statio_user_sequences`[]()    | Same as `pg_statio_all_sequences`, except that only user sequences are shown.                                                                                                                                                                                                        |
+| `pg_stat_archiver`            | One row only, showing statistics about the WAL archiver process's activity. See [`pg_stat_archiver`](monitoring-stats.html#MONITORING-PG-STAT-ARCHIVER-VIEW "28.2.12. pg_stat_archiver") for details.                                                                                |
+| `pg_stat_bgwriter`            | One row only, showing statistics about the background writer process's activity. See [`pg_stat_bgwriter`](monitoring-stats.html#MONITORING-PG-STAT-BGWRITER-VIEW "28.2.14. pg_stat_bgwriter") for details.                                                                           |
+| `pg_stat_database`            | One row per database, showing database-wide statistics. See [`pg_stat_database`](monitoring-stats.html#MONITORING-PG-STAT-DATABASE-VIEW "28.2.16. pg_stat_database") for details.                                                                                                    |
+| `pg_stat_database_conflicts`  | One row per database, showing database-wide statistics about query cancels due to conflict with recovery on standby servers. See [`pg_stat_database_conflicts`](monitoring-stats.html#MONITORING-PG-STAT-DATABASE-CONFLICTS-VIEW "28.2.17. pg_stat_database_conflicts") for details. |
+| `pg_stat_io`                  | One row for each combination of backend type, context, and target object containing cluster-wide I/O statistics. See [`pg_stat_io`](monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW "28.2.13. pg_stat_io") for details.                                                             |
+| `pg_stat_replication_slots`   | One row per replication slot, showing statistics about the replication slot's usage. See [`pg_stat_replication_slots`](monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW "28.2.5. pg_stat_replication_slots") for details.                                             |
+| `pg_stat_slru`                | One row per SLRU, showing statistics of operations. See [`pg_stat_slru`](monitoring-stats.html#MONITORING-PG-STAT-SLRU-VIEW "28.2.24. pg_stat_slru") for details.                                                                                                                    |
+| `pg_stat_subscription_stats`  | One row per subscription, showing statistics about errors. See [`pg_stat_subscription_stats`](monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION-STATS "28.2.9. pg_stat_subscription_stats") for details.                                                                         |
+| `pg_stat_wal`                 | One row only, showing statistics about WAL activity. See [`pg_stat_wal`](monitoring-stats.html#MONITORING-PG-STAT-WAL-VIEW "28.2.15. pg_stat_wal") for details.                                                                                                                      |
+| `pg_stat_all_tables`          | One row for each table in the current database, showing statistics about accesses to that specific table. See [`pg_stat_all_tables`](monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW "28.2.18. pg_stat_all_tables") for details.                                            |
+| `pg_stat_sys_tables`          | Same as `pg_stat_all_tables`, except that only system tables are shown.                                                                                                                                                                                                              |
+| `pg_stat_user_tables`         | Same as `pg_stat_all_tables`, except that only user tables are shown.                                                                                                                                                                                                                |
+| `pg_stat_xact_all_tables`     | Similar to `pg_stat_all_tables`, but counts actions taken so far within the current transaction (which are *not* yet included in `pg_stat_all_tables` and related views). The columns for numbers of live and dead rows and vacuum and analyze actions are not present in this view. |
+| `pg_stat_xact_sys_tables`     | Same as `pg_stat_xact_all_tables`, except that only system tables are shown.                                                                                                                                                                                                         |
+| `pg_stat_xact_user_tables`    | Same as `pg_stat_xact_all_tables`, except that only user tables are shown.                                                                                                                                                                                                           |
+| `pg_stat_all_indexes`         | One row for each index in the current database, showing statistics about accesses to that specific index. See [`pg_stat_all_indexes`](monitoring-stats.html#MONITORING-PG-STAT-ALL-INDEXES-VIEW "28.2.19. pg_stat_all_indexes") for details.                                         |
+| `pg_stat_sys_indexes`         | Same as `pg_stat_all_indexes`, except that only indexes on system tables are shown.                                                                                                                                                                                                  |
+| `pg_stat_user_indexes`        | Same as `pg_stat_all_indexes`, except that only indexes on user tables are shown.                                                                                                                                                                                                    |
+| `pg_stat_user_functions`      | One row for each tracked function, showing statistics about executions of that function. See [`pg_stat_user_functions`](monitoring-stats.html#MONITORING-PG-STAT-USER-FUNCTIONS-VIEW "28.2.23. pg_stat_user_functions") for details.                                                 |
+| `pg_stat_xact_user_functions` | Similar to `pg_stat_user_functions`, but counts only calls during the current transaction (which are *not* yet included in `pg_stat_user_functions`).                                                                                                                                |
+| `pg_statio_all_tables`        | One row for each table in the current database, showing statistics about I/O on that specific table. See [`pg_statio_all_tables`](monitoring-stats.html#MONITORING-PG-STATIO-ALL-TABLES-VIEW "28.2.20. pg_statio_all_tables") for details.                                           |
+| `pg_statio_sys_tables`        | Same as `pg_statio_all_tables`, except that only system tables are shown.                                                                                                                                                                                                            |
+| `pg_statio_user_tables`       | Same as `pg_statio_all_tables`, except that only user tables are shown.                                                                                                                                                                                                              |
+| `pg_statio_all_indexes`       | One row for each index in the current database, showing statistics about I/O on that specific index. See [`pg_statio_all_indexes`](monitoring-stats.html#MONITORING-PG-STATIO-ALL-INDEXES-VIEW "28.2.21. pg_statio_all_indexes") for details.                                        |
+| `pg_statio_sys_indexes`       | Same as `pg_statio_all_indexes`, except that only indexes on system tables are shown.                                                                                                                                                                                                |
+| `pg_statio_user_indexes`      | Same as `pg_statio_all_indexes`, except that only indexes on user tables are shown.                                                                                                                                                                                                  |
+| `pg_statio_all_sequences`     | One row for each sequence in the current database, showing statistics about I/O on that specific sequence. See [`pg_statio_all_sequences`](monitoring-stats.html#MONITORING-PG-STATIO-ALL-SEQUENCES-VIEW "28.2.22. pg_statio_all_sequences") for details.                            |
+| `pg_statio_sys_sequences`     | Same as `pg_statio_all_sequences`, except that only system sequences are shown. (Presently, no system sequences are defined, so this view is always empty.)                                                                                                                          |
+| `pg_statio_user_sequences`    | Same as `pg_statio_all_sequences`, except that only user sequences are shown.                                                                                                                                                                                                        |
 
 \
 
@@ -134,7 +134,7 @@ The `pg_stat_io` and `pg_statio_` set of views are useful for determining the ef
 
 ### 28.2.3. `pg_stat_activity` [#](#MONITORING-PG-STAT-ACTIVITY-VIEW)
 
-[]()
+
 
 The `pg_stat_activity` view will have one row per server process, showing information related to the current activity of that process.
 
@@ -544,7 +544,7 @@ Extensions can add `Extension` and `LWLock` events to the lists shown in [Table�
 
 ### 28.2.4. `pg_stat_replication` [#](#MONITORING-PG-STAT-REPLICATION-VIEW)
 
-[]()
+
 
 The `pg_stat_replication` view will contain one row per WAL sender process, showing statistics about replication to that sender's connected standby server. Only directly connected standbys are listed; no information is available about downstream standby servers.
 
@@ -593,7 +593,7 @@ The reported lag times are not predictions of how long it will take for the stan
 
 ### 28.2.5. `pg_stat_replication_slots` [#](#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW)
 
-[]()
+
 
 The `pg_stat_replication_slots` view will contain one row per logical replication slot, showing statistics about its usage.
 
@@ -614,7 +614,7 @@ The `pg_stat_replication_slots` view will contain one row per logical replicatio
 
 ### 28.2.6. `pg_stat_wal_receiver` [#](#MONITORING-PG-STAT-WAL-RECEIVER-VIEW)
 
-[]()
+
 
 The `pg_stat_wal_receiver` view will contain only one row, showing statistics about the WAL receiver from that receiver's connected server.
 
@@ -640,7 +640,7 @@ The `pg_stat_wal_receiver` view will contain only one row, showing statistics ab
 
 ### 28.2.7. `pg_stat_recovery_prefetch` [#](#MONITORING-PG-STAT-RECOVERY-PREFETCH)
 
-[]()
+
 
 The `pg_stat_recovery_prefetch` view will contain only one row. The columns `wal_distance`, `block_distance` and `io_depth` show current values, and the other columns show cumulative counters that can be reset with the `pg_stat_reset_shared` function.
 
@@ -661,7 +661,7 @@ The `pg_stat_recovery_prefetch` view will contain only one row. The columns `wal
 
 ### 28.2.8. `pg_stat_subscription` [#](#MONITORING-PG-STAT-SUBSCRIPTION)
 
-[]()
+
 
 **Table 28.18. `pg_stat_subscription` View**
 
@@ -681,7 +681,7 @@ The `pg_stat_recovery_prefetch` view will contain only one row. The columns `wal
 
 ### 28.2.9. `pg_stat_subscription_stats` [#](#MONITORING-PG-STAT-SUBSCRIPTION-STATS)
 
-[]()
+
 
 The `pg_stat_subscription_stats` view will contain one row per subscription.
 
@@ -697,7 +697,7 @@ The `pg_stat_subscription_stats` view will contain one row per subscription.
 
 ### 28.2.10. `pg_stat_ssl` [#](#MONITORING-PG-STAT-SSL-VIEW)
 
-[]()
+
 
 The `pg_stat_ssl` view will contain one row per backend or WAL sender process, showing statistics about SSL usage on this connection. It can be joined to `pg_stat_activity` or `pg_stat_replication` on the `pid` column to get more details about the connection.
 
@@ -716,7 +716,7 @@ The `pg_stat_ssl` view will contain one row per backend or WAL sender process, s
 
 ### 28.2.11. `pg_stat_gssapi` [#](#MONITORING-PG-STAT-GSSAPI-VIEW)
 
-[]()
+
 
 The `pg_stat_gssapi` view will contain one row per backend, showing information about GSSAPI usage on this connection. It can be joined to `pg_stat_activity` or `pg_stat_replication` on the `pid` column to get more details about the connection.
 
@@ -732,7 +732,7 @@ The `pg_stat_gssapi` view will contain one row per backend, showing information 
 
 ### 28.2.12. `pg_stat_archiver` [#](#MONITORING-PG-STAT-ARCHIVER-VIEW)
 
-[]()
+
 
 The `pg_stat_archiver` view will always have a single row, containing data about the archiver process of the cluster.
 
@@ -755,7 +755,7 @@ Normally, WAL files are archived in order, oldest to newest, but that is not gua
 
 ### 28.2.13. `pg_stat_io` [#](#MONITORING-PG-STAT-IO-VIEW)
 
-[]()
+
 
 The `pg_stat_io` view will contain one row for each combination of backend type, target I/O object, and I/O context, showing cluster-wide I/O statistics. Combinations which do not make sense are omitted.
 
@@ -807,7 +807,7 @@ Columns tracking I/O time will only be non-zero when [track\_io\_timing](runtime
 
 ### 28.2.14. `pg_stat_bgwriter` [#](#MONITORING-PG-STAT-BGWRITER-VIEW)
 
-[]()
+
 
 The `pg_stat_bgwriter` view will always have a single row, containing global data for the cluster.
 
@@ -829,7 +829,7 @@ The `pg_stat_bgwriter` view will always have a single row, containing global dat
 
 ### 28.2.15. `pg_stat_wal` [#](#MONITORING-PG-STAT-WAL-VIEW)
 
-[]()
+
 
 The `pg_stat_wal` view will always have a single row, containing data about WAL activity of the cluster.
 
@@ -849,7 +849,7 @@ The `pg_stat_wal` view will always have a single row, containing data about WAL 
 
 ### 28.2.16. `pg_stat_database` [#](#MONITORING-PG-STAT-DATABASE-VIEW)
 
-[]()
+
 
 The `pg_stat_database` view will contain one row for each database in the cluster, plus one for shared objects, showing database-wide statistics.
 
@@ -888,7 +888,7 @@ The `pg_stat_database` view will contain one row for each database in the cluste
 
 ### 28.2.17. `pg_stat_database_conflicts` [#](#MONITORING-PG-STAT-DATABASE-CONFLICTS-VIEW)
 
-[]()
+
 
 The `pg_stat_database_conflicts` view will contain one row per database, showing database-wide statistics about query cancels occurring due to conflicts with recovery on standby servers. This view will only contain information on standby servers, since conflicts do not occur on primary servers.
 
@@ -907,7 +907,7 @@ The `pg_stat_database_conflicts` view will contain one row per database, showing
 
 ### 28.2.18. `pg_stat_all_tables` [#](#MONITORING-PG-STAT-ALL-TABLES-VIEW)
 
-[]()
+
 
 The `pg_stat_all_tables` view will contain one row for each table in the current database (including TOAST tables), showing statistics about accesses to that specific table. The `pg_stat_user_tables` and `pg_stat_sys_tables` views contain the same information, but filtered to only show user and system tables respectively.
 
@@ -944,7 +944,7 @@ The `pg_stat_all_tables` view will contain one row for each table in the current
 
 ### 28.2.19. `pg_stat_all_indexes` [#](#MONITORING-PG-STAT-ALL-INDEXES-VIEW)
 
-[]()
+
 
 The `pg_stat_all_indexes` view will contain one row for each index in the current database, showing statistics about accesses to that specific index. The `pg_stat_user_indexes` and `pg_stat_sys_indexes` views contain the same information, but filtered to only show user and system indexes respectively.
 
@@ -973,7 +973,7 @@ The `idx_tup_read` and `idx_tup_fetch` counts can be different even without any 
 
 ### 28.2.20. `pg_statio_all_tables` [#](#MONITORING-PG-STATIO-ALL-TABLES-VIEW)
 
-[]()
+
 
 The `pg_statio_all_tables` view will contain one row for each table in the current database (including TOAST tables), showing statistics about I/O on that specific table. The `pg_statio_user_tables` and `pg_statio_sys_tables` views contain the same information, but filtered to only show user and system tables respectively.
 
@@ -995,7 +995,7 @@ The `pg_statio_all_tables` view will contain one row for each table in the curre
 
 ### 28.2.21. `pg_statio_all_indexes` [#](#MONITORING-PG-STATIO-ALL-INDEXES-VIEW)
 
-[]()
+
 
 The `pg_statio_all_indexes` view will contain one row for each index in the current database, showing statistics about I/O on that specific index. The `pg_statio_user_indexes` and `pg_statio_sys_indexes` views contain the same information, but filtered to only show user and system indexes respectively.
 
@@ -1013,7 +1013,7 @@ The `pg_statio_all_indexes` view will contain one row for each index in the curr
 
 ### 28.2.22. `pg_statio_all_sequences` [#](#MONITORING-PG-STATIO-ALL-SEQUENCES-VIEW)
 
-[]()
+
 
 The `pg_statio_all_sequences` view will contain one row for each sequence in the current database, showing statistics about I/O on that specific sequence.
 
@@ -1029,7 +1029,7 @@ The `pg_statio_all_sequences` view will contain one row for each sequence in the
 
 ### 28.2.23. `pg_stat_user_functions` [#](#MONITORING-PG-STAT-USER-FUNCTIONS-VIEW)
 
-[]()
+
 
 The `pg_stat_user_functions` view will contain one row for each tracked function, showing statistics about executions of that function. The [track\_functions](runtime-config-statistics.html#GUC-TRACK-FUNCTIONS) parameter controls exactly which functions are tracked.
 
@@ -1046,7 +1046,7 @@ The `pg_stat_user_functions` view will contain one row for each tracked function
 
 ### 28.2.24. `pg_stat_slru` [#](#MONITORING-PG-STAT-SLRU-VIEW)
 
-[]()[]()
+
 
 PostgreSQL accesses certain on-disk information via *SLRU* (simple least-recently-used) caches. The `pg_stat_slru` view will contain one row for each tracked SLRU cache, showing statistics about access to cached pages.
 
@@ -1075,18 +1075,18 @@ Additional functions related to the cumulative statistics system are listed in [
 | FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `pg_backend_pid` () → `integer`Returns the process ID of the server process attached to the current session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| []()`pg_stat_get_activity` ( `integer` ) → `setof record`Returns a record of information about the backend with the specified process ID, or one record for each active backend in the system if `NULL` is specified. The fields returned are a subset of those in the `pg_stat_activity` view.                                                                                                                                                                                                                                                                                                                                                                                   |
-| []()`pg_stat_get_snapshot_timestamp` () → `timestamp with time zone`Returns the timestamp of the current statistics snapshot, or NULL if no statistics snapshot has been taken. A snapshot is taken the first time cumulative statistics are accessed in a transaction if `stats_fetch_consistency` is set to `snapshot`                                                                                                                                                                                                                                                                                                                                                          |
-| []()`pg_stat_get_xact_blocks_fetched` ( `oid` ) → `bigint`Returns the number of block read requests for table or index, in the current transaction. This number minus `pg_stat_get_xact_blocks_hit` gives the number of kernel `read()` calls; the number of actual physical reads is usually lower due to kernel-level buffering.                                                                                                                                                                                                                                                                                                                                                |
-| []()`pg_stat_get_xact_blocks_hit` ( `oid` ) → `bigint`Returns the number of block read requests for table or index, in the current transaction, found in cache (not triggering kernel `read()` calls).                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| []()`pg_stat_clear_snapshot` () → `void`Discards the current statistics snapshot or cached information.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| []()`pg_stat_reset` () → `void`Resets all statistics counters for the current database to zero.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| []()`pg_stat_reset_shared` ( `text` ) → `void`Resets some cluster-wide statistics counters to zero, depending on the argument. The argument can be `bgwriter` to reset all the counters shown in the `pg_stat_bgwriter` view, `archiver` to reset all the counters shown in the `pg_stat_archiver` view, `io` to reset all the counters shown in the `pg_stat_io` view, `wal` to reset all the counters shown in the `pg_stat_wal` view or `recovery_prefetch` to reset all the counters shown in the `pg_stat_recovery_prefetch` view\.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                         |
-| []()`pg_stat_reset_single_table_counters` ( `oid` ) → `void`Resets statistics for a single table or index in the current database or shared across all databases in the cluster to zero.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                                                         |
-| []()`pg_stat_reset_single_function_counters` ( `oid` ) → `void`Resets statistics for a single function in the current database to zero.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| []()`pg_stat_reset_slru` ( `text` ) → `void`Resets statistics to zero for a single SLRU cache, or for all SLRUs in the cluster. If the argument is NULL, all counters shown in the `pg_stat_slru` view for all SLRU caches are reset. The argument can be one of `CommitTs`, `MultiXactMember`, `MultiXactOffset`, `Notify`, `Serial`, `Subtrans`, or `Xact` to reset the counters for only that entry. If the argument is `other` (or indeed, any unrecognized name), then the counters for all other SLRU caches, such as extension-defined caches, are reset.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function. |
-| []()`pg_stat_reset_replication_slot` ( `text` ) → `void`Resets statistics of the replication slot defined by the argument. If the argument is `NULL`, resets statistics for all the replication slots.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                                           |
-| []()`pg_stat_reset_subscription_stats` ( `oid` ) → `void`Resets statistics for a single subscription shown in the `pg_stat_subscription_stats` view to zero. If the argument is `NULL`, reset statistics for all subscriptions.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                  |
+| `pg_stat_get_activity` ( `integer` ) → `setof record`Returns a record of information about the backend with the specified process ID, or one record for each active backend in the system if `NULL` is specified. The fields returned are a subset of those in the `pg_stat_activity` view.                                                                                                                                                                                                                                                                                                                                                                                   |
+| `pg_stat_get_snapshot_timestamp` () → `timestamp with time zone`Returns the timestamp of the current statistics snapshot, or NULL if no statistics snapshot has been taken. A snapshot is taken the first time cumulative statistics are accessed in a transaction if `stats_fetch_consistency` is set to `snapshot`                                                                                                                                                                                                                                                                                                                                                          |
+| `pg_stat_get_xact_blocks_fetched` ( `oid` ) → `bigint`Returns the number of block read requests for table or index, in the current transaction. This number minus `pg_stat_get_xact_blocks_hit` gives the number of kernel `read()` calls; the number of actual physical reads is usually lower due to kernel-level buffering.                                                                                                                                                                                                                                                                                                                                                |
+| `pg_stat_get_xact_blocks_hit` ( `oid` ) → `bigint`Returns the number of block read requests for table or index, in the current transaction, found in cache (not triggering kernel `read()` calls).                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `pg_stat_clear_snapshot` () → `void`Discards the current statistics snapshot or cached information.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `pg_stat_reset` () → `void`Resets all statistics counters for the current database to zero.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `pg_stat_reset_shared` ( `text` ) → `void`Resets some cluster-wide statistics counters to zero, depending on the argument. The argument can be `bgwriter` to reset all the counters shown in the `pg_stat_bgwriter` view, `archiver` to reset all the counters shown in the `pg_stat_archiver` view, `io` to reset all the counters shown in the `pg_stat_io` view, `wal` to reset all the counters shown in the `pg_stat_wal` view or `recovery_prefetch` to reset all the counters shown in the `pg_stat_recovery_prefetch` view\.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                         |
+| `pg_stat_reset_single_table_counters` ( `oid` ) → `void`Resets statistics for a single table or index in the current database or shared across all databases in the cluster to zero.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                                                         |
+| `pg_stat_reset_single_function_counters` ( `oid` ) → `void`Resets statistics for a single function in the current database to zero.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `pg_stat_reset_slru` ( `text` ) → `void`Resets statistics to zero for a single SLRU cache, or for all SLRUs in the cluster. If the argument is NULL, all counters shown in the `pg_stat_slru` view for all SLRU caches are reset. The argument can be one of `CommitTs`, `MultiXactMember`, `MultiXactOffset`, `Notify`, `Serial`, `Subtrans`, or `Xact` to reset the counters for only that entry. If the argument is `other` (or indeed, any unrecognized name), then the counters for all other SLRU caches, such as extension-defined caches, are reset.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function. |
+| `pg_stat_reset_replication_slot` ( `text` ) → `void`Resets statistics of the replication slot defined by the argument. If the argument is `NULL`, resets statistics for all the replication slots.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                                           |
+| `pg_stat_reset_subscription_stats` ( `oid` ) → `void`Resets statistics for a single subscription shown in the `pg_stat_subscription_stats` view to zero. If the argument is `NULL`, reset statistics for all subscriptions.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                  |
 
 \
 
@@ -1108,19 +1108,19 @@ FROM pg_stat_get_backend_idset() AS backendid;
 
 | FunctionDescription                                                                                                                                                                                                                                                                                                                                                                           |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| []()`pg_stat_get_backend_activity` ( `integer` ) → `text`Returns the text of this backend's most recent query.                                                                                                                                                                                                                                                                                |
-| []()`pg_stat_get_backend_activity_start` ( `integer` ) → `timestamp with time zone`Returns the time when the backend's most recent query was started.                                                                                                                                                                                                                                         |
-| []()`pg_stat_get_backend_client_addr` ( `integer` ) → `inet`Returns the IP address of the client connected to this backend.                                                                                                                                                                                                                                                                   |
-| []()`pg_stat_get_backend_client_port` ( `integer` ) → `integer`Returns the TCP port number that the client is using for communication.                                                                                                                                                                                                                                                        |
-| []()`pg_stat_get_backend_dbid` ( `integer` ) → `oid`Returns the OID of the database this backend is connected to.                                                                                                                                                                                                                                                                             |
-| []()`pg_stat_get_backend_idset` () → `setof integer`Returns the set of currently active backend ID numbers.                                                                                                                                                                                                                                                                                   |
-| []()`pg_stat_get_backend_pid` ( `integer` ) → `integer`Returns the process ID of this backend.                                                                                                                                                                                                                                                                                                |
-| []()`pg_stat_get_backend_start` ( `integer` ) → `timestamp with time zone`Returns the time when this process was started.                                                                                                                                                                                                                                                                     |
-| []()`pg_stat_get_backend_subxact` ( `integer` ) → `record`Returns a record of information about the subtransactions of the backend with the specified ID. The fields returned are *`subxact_count`*, which is the number of subtransactions in the backend's subtransaction cache, and *`subxact_overflow`*, which indicates whether the backend's subtransaction cache is overflowed or not. |
-| []()`pg_stat_get_backend_userid` ( `integer` ) → `oid`Returns the OID of the user logged into this backend.                                                                                                                                                                                                                                                                                   |
-| []()`pg_stat_get_backend_wait_event` ( `integer` ) → `text`Returns the wait event name if this backend is currently waiting, otherwise NULL. See [Table 28.5](monitoring-stats.html#WAIT-EVENT-ACTIVITY-TABLE "Table 28.5. Wait Events of Type Activity") through [Table 28.13](monitoring-stats.html#WAIT-EVENT-TIMEOUT-TABLE "Table 28.13. Wait Events of Type Timeout").                   |
-| []()`pg_stat_get_backend_wait_event_type` ( `integer` ) → `text`Returns the wait event type name if this backend is currently waiting, otherwise NULL. See [Table 28.4](monitoring-stats.html#WAIT-EVENT-TABLE "Table 28.4. Wait Event Types") for details.                                                                                                                                   |
-| []()`pg_stat_get_backend_xact_start` ( `integer` ) → `timestamp with time zone`Returns the time when the backend's current transaction was started.                                                                                                                                                                                                                                           |
+| `pg_stat_get_backend_activity` ( `integer` ) → `text`Returns the text of this backend's most recent query.                                                                                                                                                                                                                                                                                |
+| `pg_stat_get_backend_activity_start` ( `integer` ) → `timestamp with time zone`Returns the time when the backend's most recent query was started.                                                                                                                                                                                                                                         |
+| `pg_stat_get_backend_client_addr` ( `integer` ) → `inet`Returns the IP address of the client connected to this backend.                                                                                                                                                                                                                                                                   |
+| `pg_stat_get_backend_client_port` ( `integer` ) → `integer`Returns the TCP port number that the client is using for communication.                                                                                                                                                                                                                                                        |
+| `pg_stat_get_backend_dbid` ( `integer` ) → `oid`Returns the OID of the database this backend is connected to.                                                                                                                                                                                                                                                                             |
+| `pg_stat_get_backend_idset` () → `setof integer`Returns the set of currently active backend ID numbers.                                                                                                                                                                                                                                                                                   |
+| `pg_stat_get_backend_pid` ( `integer` ) → `integer`Returns the process ID of this backend.                                                                                                                                                                                                                                                                                                |
+| `pg_stat_get_backend_start` ( `integer` ) → `timestamp with time zone`Returns the time when this process was started.                                                                                                                                                                                                                                                                     |
+| `pg_stat_get_backend_subxact` ( `integer` ) → `record`Returns a record of information about the subtransactions of the backend with the specified ID. The fields returned are *`subxact_count`*, which is the number of subtransactions in the backend's subtransaction cache, and *`subxact_overflow`*, which indicates whether the backend's subtransaction cache is overflowed or not. |
+| `pg_stat_get_backend_userid` ( `integer` ) → `oid`Returns the OID of the user logged into this backend.                                                                                                                                                                                                                                                                                   |
+| `pg_stat_get_backend_wait_event` ( `integer` ) → `text`Returns the wait event name if this backend is currently waiting, otherwise NULL. See [Table 28.5](monitoring-stats.html#WAIT-EVENT-ACTIVITY-TABLE "Table 28.5. Wait Events of Type Activity") through [Table 28.13](monitoring-stats.html#WAIT-EVENT-TIMEOUT-TABLE "Table 28.13. Wait Events of Type Timeout").                   |
+| `pg_stat_get_backend_wait_event_type` ( `integer` ) → `text`Returns the wait event type name if this backend is currently waiting, otherwise NULL. See [Table 28.4](monitoring-stats.html#WAIT-EVENT-TABLE "Table 28.4. Wait Event Types") for details.                                                                                                                                   |
+| `pg_stat_get_backend_xact_start` ( `integer` ) → `timestamp with time zone`Returns the time when the backend's current transaction was started.                                                                                                                                                                                                                                           |
 
 ***
 

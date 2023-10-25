@@ -8,7 +8,7 @@
 
 ## 54.15. `pg_prepared_statements` [#](#VIEW-PG-PREPARED-STATEMENTS)
 
-[]()
+
 
 The `pg_prepared_statements` view displays all the prepared statements that are available in the current session. See [PREPARE](sql-prepare.html "PREPARE") for more information about prepared statements.
 

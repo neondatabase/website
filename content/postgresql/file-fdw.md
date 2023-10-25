@@ -8,7 +8,7 @@
 
 ## F.16. file\_fdw — access data files in the server's file system [#](#FILE-FDW)
 
-[]()
+
 
 The `file_fdw` module provides the foreign-data wrapper `file_fdw`, which can be used to access data files in the server's file system, or to execute programs on the server and read their output. The data file or program output must be in a format that can be read by `COPY FROM`; see [COPY](sql-copy.html "COPY") for details. Access to data files is currently read-only.
 

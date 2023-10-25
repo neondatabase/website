@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## ALTER OPERATOR FAMILY
 

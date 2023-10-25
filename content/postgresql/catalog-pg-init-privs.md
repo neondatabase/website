@@ -8,7 +8,7 @@
 
 ## 53.28. `pg_init_privs` [#](#CATALOG-PG-INIT-PRIVS)
 
-[]()
+
 
 The catalog `pg_init_privs` records information about the initial privileges of objects in the system. There is one entry for each object in the database which has a non-default (non-NULL) initial set of privileges.
 

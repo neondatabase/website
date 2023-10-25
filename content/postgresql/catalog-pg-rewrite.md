@@ -8,7 +8,7 @@
 
 ## 53.45. `pg_rewrite` [#](#CATALOG-PG-REWRITE)
 
-[]()
+
 
 The catalog `pg_rewrite` stores rewrite rules for tables and views.
 

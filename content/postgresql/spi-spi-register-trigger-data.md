@@ -6,7 +6,7 @@
 
 ***
 
-[]()[]()[]()
+
 
 ## SPI\_register\_trigger\_data
 

@@ -12,7 +12,7 @@
     *   [F.30.2. Sample Output](pgrowlocks.html#PGROWLOCKS-SAMPLE-OUTPUT)
     *   [F.30.3. Author](pgrowlocks.html#PGROWLOCKS-AUTHOR)
 
-[]()
+
 
 The `pgrowlocks` module provides a function to show row locking information for a specified table.
 
@@ -20,7 +20,7 @@ By default use is restricted to superusers, roles with privileges of the `pg_sta
 
 ### F.30.1. Overview [#](#PGROWLOCKS-OVERVIEW)
 
-[]()
+
 
 ```
 

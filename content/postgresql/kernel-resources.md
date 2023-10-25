@@ -18,7 +18,7 @@ PostgreSQL can sometimes exhaust various operating system resource limits, espec
 
 ### 19.4.1. Shared Memory and Semaphores [#](#SYSVIPC)
 
-[]()[]()
+
 
 PostgreSQL requires the operating system to provide inter-process communication (IPC) features, specifically shared memory and semaphores. Unix-derived systems typically provide “System V” IPC, “POSIX” IPC, or both. Windows has its own implementation of these features and is not discussed here.
 
@@ -56,13 +56,13 @@ Various other settings related to “semaphore undo”, such as `SEMMNU` and `SE
 
 When using POSIX semaphores, the number of semaphores needed is the same as for System V, that is one semaphore per allowed connection ([max\_connections](runtime-config-connection.html#GUC-MAX-CONNECTIONS)), allowed autovacuum worker process ([autovacuum\_max\_workers](runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS)) and allowed background process ([max\_worker\_processes](runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES)). On the platforms where this option is preferred, there is no specific kernel limit on the number of POSIX semaphores.
 
-*   AIX[]()
+*   AIX
 
     It should not be necessary to do any special configuration for such parameters as `SHMMAX`, as it appears this is configured to allow all memory to be used as shared memory. That is the sort of configuration commonly used for other databases such as DB/2.
 
     It might, however, be necessary to modify the global `ulimit` information in `/etc/security/limits`, as the default hard limits for file sizes (`fsize`) and numbers of files (`nofiles`) might be too low.
 
-*   FreeBSD[]()
+*   FreeBSD
 
     The default shared memory settings are usually good enough, unless you have set `shared_memory_type` to `sysv`. System V semaphores are not used on this platform.
 
@@ -80,7 +80,7 @@ When using POSIX semaphores, the number of semaphores needed is the same as for 
 
     If running in a FreeBSD jail, you should set its `sysvshm` parameter to `new`, so that it has its own separate System V shared memory namespace. (Before FreeBSD 11.0, it was necessary to enable shared access to the host's IPC namespace from jails, and take measures to avoid collisions.)
 
-*   NetBSD[]()
+*   NetBSD
 
     The default shared memory settings are usually good enough, unless you have set `shared_memory_type` to `sysv`. You will usually want to increase `kern.ipc.semmni` and `kern.ipc.semmns`, as NetBSD's default settings for these are uncomfortably small.
 
@@ -95,7 +95,7 @@ When using POSIX semaphores, the number of semaphores needed is the same as for 
 
     If you have set `shared_memory_type` to `sysv`, you might also want to configure your kernel to lock System V shared memory into RAM and prevent it from being paged out to swap. This can be accomplished using the `sysctl` setting `kern.ipc.shm_use_phys`.
 
-*   OpenBSD[]()
+*   OpenBSD
 
     The default shared memory settings are usually good enough, unless you have set `shared_memory_type` to `sysv`. You will usually want to increase `kern.seminfo.semmni` and `kern.seminfo.semmns`, as OpenBSD's default settings for these are uncomfortably small.
 
@@ -108,7 +108,7 @@ When using POSIX semaphores, the number of semaphores needed is the same as for 
 
     To make these settings persist over reboots, modify `/etc/sysctl.conf`.
 
-*   Linux[]()
+*   Linux
 
     The default shared memory settings are usually good enough, unless you have set `shared_memory_type` to `sysv`, and even then only on older kernel versions that shipped with low defaults. System V semaphores are not used on this platform.
 
@@ -122,7 +122,7 @@ When using POSIX semaphores, the number of semaphores needed is the same as for 
 
     To make these settings persist over reboots, see `/etc/sysctl.conf`.
 
-*   macOS[]()
+*   macOS
 
     The default shared memory and semaphore settings are usually good enough, unless you have set `shared_memory_type` to `sysv`.
 
@@ -169,7 +169,7 @@ When using POSIX semaphores, the number of semaphores needed is the same as for 
 
 ### 19.4.2. systemd RemoveIPC [#](#SYSTEMD-REMOVEIPC)
 
-[]()
+
 
 If systemd is in use, some care must be taken that IPC resources (including shared memory) are not prematurely removed by the operating system. This is especially of concern when installing PostgreSQL from source. Users of distribution packages of PostgreSQL are less likely to be affected, as the `postgres` user is then normally created as a system user.
 
@@ -233,7 +233,7 @@ Another kernel limit that may be of concern when supporting large numbers of cli
 
 ### 19.4.4. Linux Memory Overcommit [#](#LINUX-MEMORY-OVERCOMMIT)
 
-[]()[]()[]()
+
 
 The default virtual memory behavior on Linux is not optimal for PostgreSQL. Because of the way that the kernel implements memory overcommit, the kernel might terminate the PostgreSQL postmaster (the supervisor server process) if the memory demands of either PostgreSQL or another process cause the system to run out of virtual memory.
 

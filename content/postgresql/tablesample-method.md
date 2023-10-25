@@ -12,7 +12,7 @@
 
 *   [60.1. Sampling Method Support Functions](tablesample-support-functions.html)
 
-[]()[]()
+
 
 PostgreSQL's implementation of the `TABLESAMPLE` clause supports custom table sampling methods, in addition to the `BERNOULLI` and `SYSTEM` methods that are required by the SQL standard. The sampling method determines which rows of the table will be selected when the `TABLESAMPLE` clause is used.
 

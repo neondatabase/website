@@ -8,7 +8,7 @@
 
 ## 53.11. `pg_class` [#](#CATALOG-PG-CLASS)
 
-[]()
+
 
 The catalog `pg_class` describes tables and other objects that have columns or are otherwise similar to a table. This includes indexes (but see also [`pg_index`](catalog-pg-index.html "53.26. pg_index")), sequences (but see also [`pg_sequence`](catalog-pg-sequence.html "53.47. pg_sequence")), views, materialized views, composite types, and TOAST tables; see `relkind`. Below, when we mean all of these kinds of objects we speak of “relations”. Not all of `pg_class`'s columns are meaningful for all relation kinds.
 

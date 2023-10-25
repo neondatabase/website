@@ -8,7 +8,7 @@
 
 ## 53.22. `pg_extension` [#](#CATALOG-PG-EXTENSION)
 
-[]()
+
 
 The catalog `pg_extension` stores information about the installed extensions. See [Section 38.17](extend-extensions.html "38.17. Packaging Related Objects into an Extension") for details about extensions.
 

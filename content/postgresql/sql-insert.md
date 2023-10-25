@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## INSERT
 
@@ -120,7 +120,7 @@ This section covers parameters that may be used when only inserting new rows. Pa
 
 ### `ON CONFLICT` Clause
 
-[]()[]()
+
 
 The optional `ON CONFLICT` clause specifies an alternative action to raising a unique violation or exclusion constraint violation error. For each individual row proposed for insertion, either the insertion proceeds, or, if an *arbiter* constraint or index specified by *`conflict_target`* is violated, the alternative *`conflict_action`* is taken. `ON CONFLICT DO NOTHING` simply avoids inserting a row as its alternative action. `ON CONFLICT DO UPDATE` updates the existing row that conflicts with the row proposed for insertion as its alternative action.
 

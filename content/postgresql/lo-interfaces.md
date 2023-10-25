@@ -32,7 +32,7 @@ Client applications cannot use these functions while a libpq connection is in pi
 
 ### 35.3.1. Creating a Large Object [#](#LO-CREATE)
 
-[]()The function
+The function
 
 ```
 
@@ -48,7 +48,7 @@ An example:
 inv_oid = lo_create(conn, desired_oid);
 ```
 
-[]()The older function
+The older function
 
 ```
 
@@ -68,7 +68,7 @@ inv_oid = lo_creat(conn, INV_READ|INV_WRITE);
 
 ### 35.3.2. Importing a Large Object [#](#LO-IMPORT)
 
-[]()To import an operating system file as a large object, call
+To import an operating system file as a large object, call
 
 ```
 
@@ -77,7 +77,7 @@ Oid lo_import(PGconn *conn, const char *filename);
 
 *`filename`* specifies the operating system name of the file to be imported as a large object. The return value is the OID that was assigned to the new large object, or `InvalidOid` (zero) on failure. Note that the file is read by the client interface library, not by the server; so it must exist in the client file system and be readable by the client application.
 
-[]()The function
+The function
 
 ```
 
@@ -90,7 +90,7 @@ also imports a new large object. The OID to be assigned can be specified by *`lo
 
 ### 35.3.3. Exporting a Large Object [#](#LO-EXPORT)
 
-[]()To export a large object into an operating system file, call
+To export a large object into an operating system file, call
 
 ```
 
@@ -101,7 +101,7 @@ The *`lobjId`* argument specifies the OID of the large object to export and the 
 
 ### 35.3.4. Opening an Existing Large Object [#](#LO-OPEN)
 
-[]()To open an existing large object for reading or writing, call
+To open an existing large object for reading or writing, call
 
 ```
 
@@ -123,7 +123,7 @@ inv_fd = lo_open(conn, inv_oid, INV_READ|INV_WRITE);
 
 ### 35.3.5. Writing Data to a Large Object [#](#LO-WRITE)
 
-[]()The function
+The function
 
 ```
 
@@ -136,7 +136,7 @@ Although the *`len`* parameter is declared as `size_t`, this function will rejec
 
 ### 35.3.6. Reading Data from a Large Object [#](#LO-READ)
 
-[]()The function
+The function
 
 ```
 
@@ -149,7 +149,7 @@ Although the *`len`* parameter is declared as `size_t`, this function will rejec
 
 ### 35.3.7. Seeking in a Large Object [#](#LO-SEEK)
 
-[]()To change the current read or write location associated with a large object descriptor, call
+To change the current read or write location associated with a large object descriptor, call
 
 ```
 
@@ -158,7 +158,7 @@ int lo_lseek(PGconn *conn, int fd, int offset, int whence);
 
 This function moves the current location pointer for the large object descriptor identified by *`fd`* to the new location specified by *`offset`*. The valid values for *`whence`* are `SEEK_SET` (seek from object start), `SEEK_CUR` (seek from current position), and `SEEK_END` (seek from object end). The return value is the new location pointer, or -1 on error.
 
-[]()When dealing with large objects that might exceed 2GB in size, instead use
+When dealing with large objects that might exceed 2GB in size, instead use
 
 ```
 
@@ -171,7 +171,7 @@ This function has the same behavior as `lo_lseek`, but it can accept an *`offset
 
 ### 35.3.8. Obtaining the Seek Position of a Large Object [#](#LO-TELL)
 
-[]()To obtain the current read or write location of a large object descriptor, call
+To obtain the current read or write location of a large object descriptor, call
 
 ```
 
@@ -180,7 +180,7 @@ int lo_tell(PGconn *conn, int fd);
 
 If there is an error, the return value is -1.
 
-[]()When dealing with large objects that might exceed 2GB in size, instead use
+When dealing with large objects that might exceed 2GB in size, instead use
 
 ```
 
@@ -193,7 +193,7 @@ This function has the same behavior as `lo_tell`, but it can deliver a result la
 
 ### 35.3.9. Truncating a Large Object [#](#LO-TRUNCATE)
 
-[]()To truncate a large object to a given length, call
+To truncate a large object to a given length, call
 
 ```
 
@@ -206,7 +206,7 @@ The read/write location associated with the descriptor *`fd`* is not changed.
 
 Although the *`len`* parameter is declared as `size_t`, `lo_truncate` will reject length values larger than `INT_MAX`.
 
-[]()When dealing with large objects that might exceed 2GB in size, instead use
+When dealing with large objects that might exceed 2GB in size, instead use
 
 ```
 
@@ -221,7 +221,7 @@ This function has the same behavior as `lo_truncate`, but it can accept a *`len`
 
 ### 35.3.10. Closing a Large Object Descriptor [#](#LO-CLOSE)
 
-[]()A large object descriptor can be closed by calling
+A large object descriptor can be closed by calling
 
 ```
 
@@ -234,7 +234,7 @@ Any large object descriptors that remain open at the end of a transaction will b
 
 ### 35.3.11. Removing a Large Object [#](#LO-UNLINK)
 
-[]()To remove a large object from the database, call
+To remove a large object from the database, call
 
 ```
 

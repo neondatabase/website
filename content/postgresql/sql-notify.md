@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## NOTIFY
 
@@ -57,7 +57,7 @@ A transaction that has executed `NOTIFY` cannot be prepared for two-phase commit
 
 ### pg\_notify
 
-[]()
+
 
 To send a notification you can also use the function `pg_notify(text, text)`. The function takes the channel name as the first argument and the payload as the second. The function is much easier to use than the `NOTIFY` command if you need to work with non-constant channel names and payloads.
 

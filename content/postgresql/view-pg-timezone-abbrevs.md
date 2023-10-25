@@ -8,7 +8,7 @@
 
 ## 54.31. `pg_timezone_abbrevs` [#](#VIEW-PG-TIMEZONE-ABBREVS)
 
-[]()
+
 
 The view `pg_timezone_abbrevs` provides a list of time zone abbreviations that are currently recognized by the datetime input routines. The contents of this view change when the [timezone\_abbreviations](runtime-config-client.html#GUC-TIMEZONE-ABBREVIATIONS) run-time parameter is modified.
 
