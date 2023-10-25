@@ -1,5 +1,4 @@
 
-
 |                           17.1. Requirements                           |                                                                     |                                           |                                                       |                                                            |
 | :--------------------------------------------------------------------: | :------------------------------------------------------------------ | :---------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
 | [Prev](installation.html "Chapter 17. Installation from Source Code")  | [Up](installation.html "Chapter 17. Installation from Source Code") | Chapter 17. Installation from Source Code | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](install-getsource.html "17.2. Getting the Source") |
@@ -56,7 +55,7 @@ The following packages are optional. They are not required in the default config
 
 * To build the PL/Tcl procedural language, you of course need a Tcl installation. The minimum required version is Tcl 8.4.
 
-* To enable Native Language Support (NLS), that is, the ability to display a program's messages in a language other than English, you need an implementation of the Gettext API. Some operating systems have this built-in (e.g., Linux, NetBSD, Solaris), for other systems you can download an add-on package from <https://www.gnu.org/software/gettext/>. If you are using the Gettext implementation in the GNU C library, then you will additionally need the GNU Gettext package for some utility programs. For any of the other implementations you will not need it.
+* To enable Native Language Support (NLS), that is, the ability to display a program's messages in a language other than English, you need an implementation of the Gettext API. Some operating systems have this built-in (e.g., Linux, NetBSD, Solaris), for other systems you can download an add-on package from [https://www.gnu.org/software/gettext/](https://www.gnu.org/software/gettext/). If you are using the Gettext implementation in the GNU C library, then you will additionally need the GNU Gettext package for some utility programs. For any of the other implementations you will not need it.
 
 * You need OpenSSL, if you want to support encrypted client connections. OpenSSL is also required for random number generation on platforms that do not have `/dev/urandom` (except Windows). The minimum required version is 1.0.2.
 
@@ -73,7 +72,7 @@ If you are building from a Git tree instead of using a released source package, 
 * Flex and Bison are needed to build from a Git checkout, or if you changed the actual scanner and parser definition files. If you need them, be sure to get Flex 2.5.35 or later and Bison 2.3 or later. Other lex and yacc programs cannot be used.
 * Perl 5.14 or later is needed to build from a Git checkout, or if you changed the input files for any of the build steps that use Perl scripts. If building on Windows you will need Perl in any case. Perl is also required to run some test suites.
 
-If you need to get a GNU package, you can find it at your local GNU mirror site (see <https://www.gnu.org/prep/ftp> for a list) or at <ftp://ftp.gnu.org/gnu/>.
+If you need to get a GNU package, you can find it at your local GNU mirror site (see [https://www.gnu.org/prep/ftp](https://www.gnu.org/prep/ftp) for a list) or at [ftp://ftp.gnu.org/gnu/](ftp://ftp.gnu.org/gnu/).
 
 ***
 

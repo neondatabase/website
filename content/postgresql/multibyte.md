@@ -368,7 +368,7 @@ These are good sources to start learning about various kinds of encoding systems
 
     Contains detailed explanations of `EUC_JP`, `EUC_CN`, `EUC_KR`, `EUC_TW`.
 
-* <https://www.unicode.org/>
+* [https://www.unicode.org/](https://www.unicode.org/)
 
     The web site of the Unicode Consortium.
 

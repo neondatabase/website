@@ -92,7 +92,7 @@ If your bug is a portability problem on a non-supported platform, send mail to `
 
 ### Note
 
-Due to the unfortunate amount of spam going around, all of the above lists will be moderated unless you are subscribed. That means there will be some delay before the email is delivered. If you wish to subscribe to the lists, please visit <https://lists.postgresql.org/> for instructions.
+Due to the unfortunate amount of spam going around, all of the above lists will be moderated unless you are subscribed. That means there will be some delay before the email is delivered. If you wish to subscribe to the lists, please visit [https://lists.postgresql.org/](https://lists.postgresql.org/) for instructions.
 
 ***
 

@@ -59,7 +59,7 @@ INSERT 0 1
 
 ### F.9.2. Authors [#](#BTREE-GIST-AUTHORS)
 
-Teodor Sigaev (`<teodor@stack.net>`), Oleg Bartunov (`<oleg@sai.msu.su>`), Janko Richter (`<jankorichter@yahoo.de>`), and Paul Jungwirth (`<pj@illuminatedcomputing.com>`). See <http://www.sai.msu.su/~megera/postgres/gist/> for additional information.
+Teodor Sigaev (`<teodor@stack.net>`), Oleg Bartunov (`<oleg@sai.msu.su>`), Janko Richter (`<jankorichter@yahoo.de>`), and Paul Jungwirth (`<pj@illuminatedcomputing.com>`). See [http://www.sai.msu.su/~megera/postgres/gist/](http://www.sai.msu.su/~megera/postgres/gist/) for additional information.
 
 ***
 

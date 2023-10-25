@@ -30,7 +30,7 @@ SELECT * FROM test WHERE a < 10;
 
 ### F.8.2. Authors [#](#BTREE-GIN-AUTHORS)
 
-Teodor Sigaev (`<teodor@stack.net>`) and Oleg Bartunov (`<oleg@sai.msu.su>`). See <http://www.sai.msu.su/~megera/oddmuse/index.cgi/Gin> for additional information.
+Teodor Sigaev (`<teodor@stack.net>`) and Oleg Bartunov (`<oleg@sai.msu.su>`). See [http://www.sai.msu.su/~megera/oddmuse/index.cgi/Gin](http://www.sai.msu.su/~megera/oddmuse/index.cgi/Gin) for additional information.
 
 ***
 

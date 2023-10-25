@@ -141,18 +141,18 @@ SELECT isbn13(id) FROM test;
 
 The information to implement this module was collected from several sites, including:
 
-* <https://www.isbn-international.org/>
-* <https://www.issn.org/>
-* <https://www.ismn-international.org/>
-* <https://www.wikipedia.org/>
+* [https://www.isbn-international.org/](https://www.isbn-international.org/)
+* [https://www.issn.org/](https://www.issn.org/)
+* [https://www.ismn-international.org/](https://www.ismn-international.org/)
+* [https://www.wikipedia.org/](https://www.wikipedia.org/)
 
 The prefixes used for hyphenation were also compiled from:
 
-* <https://www.gs1.org/standards/id-keys>
-* <https://en.wikipedia.org/wiki/List_of_ISBN_identifier_groups>
-* <https://www.isbn-international.org/content/isbn-users-manual>
-* <https://en.wikipedia.org/wiki/International_Standard_Music_Number>
-* <https://www.ismn-international.org/ranges.html>
+* [https://www.gs1.org/standards/id-keys](https://www.gs1.org/standards/id-keys)
+* [https://en.wikipedia.org/wiki/List_of_ISBN_identifier_groups](https://en.wikipedia.org/wiki/List_of_ISBN_identifier_groups)
+* [https://www.isbn-international.org/content/isbn-users-manual](https://www.isbn-international.org/content/isbn-users-manual)
+* [https://en.wikipedia.org/wiki/International_Standard_Music_Number](https://en.wikipedia.org/wiki/International_Standard_Music_Number)
+* [https://www.ismn-international.org/ranges.html](https://www.ismn-international.org/ranges.html)
 
 Care was taken during the creation of the algorithms and they were meticulously verified against the suggested algorithms in the official ISBN, ISMN, ISSN User Manuals.
 

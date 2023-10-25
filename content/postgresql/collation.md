@@ -355,7 +355,7 @@ For many collation settings, you must create the collation with `deterministic` 
 
 #### 24.2.3.4. ICU Tailoring Rules [#](#ICU-TAILORING-RULES)
 
-If the options provided by the collation settings shown above are not sufficient, the order of collation elements can be changed with tailoring rules, whose syntax is detailed at <https://unicode-org.github.io/icu/userguide/collation/customization/>.
+If the options provided by the collation settings shown above are not sufficient, the order of collation elements can be changed with tailoring rules, whose syntax is detailed at [https://unicode-org.github.io/icu/userguide/collation/customization/](https://unicode-org.github.io/icu/userguide/collation/customization/).
 
 This small example creates a collation based on the root locale with a tailoring rule:
 
@@ -402,8 +402,8 @@ This section ([Section 24.2.3](collation.html#ICU-CUSTOM-COLLATIONS "24.2.3. I
 * [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-collation.html)
 * [BCP 47](https://tools.ietf.org/html/bcp47)
 * [CLDR repository](https://github.com/unicode-org/cldr/blob/master/common/bcp47/collation.xml)
-* <https://unicode-org.github.io/icu/userguide/locale/>
-* <https://unicode-org.github.io/icu/userguide/collation/>
+* [https://unicode-org.github.io/icu/userguide/locale/](https://unicode-org.github.io/icu/userguide/locale/)
+* [https://unicode-org.github.io/icu/userguide/collation/](https://unicode-org.github.io/icu/userguide/collation/)
 
 ***
 

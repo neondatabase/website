@@ -328,7 +328,7 @@ It is strongly recommended that the transform extension be installed in the same
 
 ### F.23.6. Authors [#](#LTREE-AUTHORS)
 
-All work was done by Teodor Sigaev (`<teodor@stack.net>`) and Oleg Bartunov (`<oleg@sai.msu.su>`). See <http://www.sai.msu.su/~megera/postgres/gist/> for additional information. Authors would like to thank Eugeny Rodichev for helpful discussions. Comments and bug reports are welcome.
+All work was done by Teodor Sigaev (`<teodor@stack.net>`) and Oleg Bartunov (`<oleg@sai.msu.su>`). See [http://www.sai.msu.su/~megera/postgres/gist/](http://www.sai.msu.su/~megera/postgres/gist/) for additional information. Authors would like to thank Eugeny Rodichev for helpful discussions. Comments and bug reports are welcome.
 
 ***
 

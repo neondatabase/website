@@ -12,7 +12,7 @@ With Git you will make a copy of the entire code repository on your local machin
 
 **Git**
 
-1. You will need an installed version of Git, which you can get from <https://git-scm.com>. Many systems already have a recent version of Git installed by default, or available in their package distribution system.
+1. You will need an installed version of Git, which you can get from [https://git-scm.com](https://git-scm.com). Many systems already have a recent version of Git installed by default, or available in their package distribution system.
 
 2. To begin using the Git repository, make a clone of the official mirror:
 
@@ -37,7 +37,7 @@ With Git you will make a copy of the entire code repository on your local machin
     git fetch
     ```
 
-Git can do a lot more things than just fetch the source. For more information, consult the Git man pages, or see the website at <https://git-scm.com>.
+Git can do a lot more things than just fetch the source. For more information, consult the Git man pages, or see the website at [https://git-scm.com](https://git-scm.com).
 
 ***
 

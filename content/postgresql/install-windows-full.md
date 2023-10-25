@@ -49,13 +49,13 @@ The following additional products are required to build PostgreSQL. Use the `con
 
 * Microsoft Windows SDK
 
-    If your build environment doesn't ship with a supported version of the Microsoft Windows SDK it is recommended that you upgrade to the latest version (currently version 10), available for download from <https://www.microsoft.com/download>.
+    If your build environment doesn't ship with a supported version of the Microsoft Windows SDK it is recommended that you upgrade to the latest version (currently version 10), available for download from [https://www.microsoft.com/download](https://www.microsoft.com/download).
 
     You must always include the Windows Headers and Libraries part of the SDK. If you install a Windows SDK including the Visual C++ Compilers, you don't need Visual Studio to build. Note that as of Version 8.0a the Windows SDK no longer ships with a complete command-line build environment.
 
 * ActiveState Perl
 
-    ActiveState Perl is required to run the build generation scripts. MinGW or Cygwin Perl will not work. It must also be present in the PATH. Binaries can be downloaded from <https://www.activestate.com> (Note: version 5.14 or later is required, the free Standard Distribution is sufficient).
+    ActiveState Perl is required to run the build generation scripts. MinGW or Cygwin Perl will not work. It must also be present in the PATH. Binaries can be downloaded from [https://www.activestate.com](https://www.activestate.com) (Note: version 5.14 or later is required, the free Standard Distribution is sufficient).
 
 The following additional products are not required to get started, but are required to build the complete package. Use the `config.pl` file to specify which directories the libraries are available in.
 
@@ -67,7 +67,7 @@ The following additional products are not required to get started, but are requi
 
     Bison and Flex are required to build from Git, but not required when building from a release file. Only Bison versions 2.3 and later will work. Flex must be version 2.5.35 or later.
 
-    Both Bison and Flex are included in the msys tool suite, available from <http://www.mingw.org/wiki/MSYS> as part of the MinGW compiler suite.
+    Both Bison and Flex are included in the msys tool suite, available from [http://www.mingw.org/wiki/MSYS](http://www.mingw.org/wiki/MSYS) as part of the MinGW compiler suite.
 
     You will need to add the directory containing `flex.exe` and `bison.exe` to the PATH environment variable in `buildenv.pl` unless they are already in PATH. In the case of MinGW, the directory is the `\msys\1.0\bin` subdirectory of your MinGW installation directory.
 
@@ -77,43 +77,43 @@ The following additional products are not required to get started, but are requi
 
 * Diff
 
-    Diff is required to run the regression tests, and can be downloaded from <http://gnuwin32.sourceforge.net>.
+    Diff is required to run the regression tests, and can be downloaded from [http://gnuwin32.sourceforge.net](http://gnuwin32.sourceforge.net).
 
 * Gettext
 
-    Gettext is required to build with NLS support, and can be downloaded from <http://gnuwin32.sourceforge.net>. Note that binaries, dependencies and developer files are all needed.
+    Gettext is required to build with NLS support, and can be downloaded from [http://gnuwin32.sourceforge.net](http://gnuwin32.sourceforge.net). Note that binaries, dependencies and developer files are all needed.
 
 * MIT Kerberos
 
-    Required for GSSAPI authentication support. MIT Kerberos can be downloaded from <https://web.mit.edu/Kerberos/dist/index.html>.
+    Required for GSSAPI authentication support. MIT Kerberos can be downloaded from [https://web.mit.edu/Kerberos/dist/index.html](https://web.mit.edu/Kerberos/dist/index.html).
 
 * libxml2 and libxslt
 
-    Required for XML support. Binaries can be downloaded from <https://zlatkovic.com/pub/libxml> or source from <http://xmlsoft.org>. Note that libxml2 requires iconv, which is available from the same download location.
+    Required for XML support. Binaries can be downloaded from [https://zlatkovic.com/pub/libxml](https://zlatkovic.com/pub/libxml) or source from [http://xmlsoft.org](http://xmlsoft.org). Note that libxml2 requires iconv, which is available from the same download location.
 
 * LZ4
 
-    Required for supporting LZ4 compression. Binaries and source can be downloaded from <https://github.com/lz4/lz4/releases>.
+    Required for supporting LZ4 compression. Binaries and source can be downloaded from [https://github.com/lz4/lz4/releases](https://github.com/lz4/lz4/releases).
 
 * Zstandard
 
-    Required for supporting Zstandard compression. Binaries and source can be downloaded from <https://github.com/facebook/zstd/releases>.
+    Required for supporting Zstandard compression. Binaries and source can be downloaded from [https://github.com/facebook/zstd/releases](https://github.com/facebook/zstd/releases).
 
 * OpenSSL
 
-    Required for SSL support. Binaries can be downloaded from <https://slproweb.com/products/Win32OpenSSL.html> or source from <https://www.openssl.org>.
+    Required for SSL support. Binaries can be downloaded from [https://slproweb.com/products/Win32OpenSSL.html](https://slproweb.com/products/Win32OpenSSL.html) or source from [https://www.openssl.org](https://www.openssl.org).
 
 * ossp-uuid
 
-    Required for UUID-OSSP support (contrib only). Source can be downloaded from <http://www.ossp.org/pkg/lib/uuid/>.
+    Required for UUID-OSSP support (contrib only). Source can be downloaded from [http://www.ossp.org/pkg/lib/uuid/](http://www.ossp.org/pkg/lib/uuid/).
 
 * Python
 
-    Required for building PL/Python. Binaries can be downloaded from <https://www.python.org>.
+    Required for building PL/Python. Binaries can be downloaded from [https://www.python.org](https://www.python.org).
 
 * zlib
 
-    Required for compression support in pg\_dump and pg\_restore. Binaries can be downloaded from <https://www.zlib.net>.
+    Required for compression support in pg\_dump and pg\_restore. Binaries can be downloaded from [https://www.zlib.net](https://www.zlib.net).
 
 ### 18.1.2. Special Considerations for 64-Bit Windows [#](#INSTALL-WINDOWS-FULL-64-BIT)
 
@@ -219,7 +219,7 @@ Running the regression tests on client programs with `vcregress bincheck`, on re
 
 * IPC::Run
 
-    As of this writing, `IPC::Run` is not included in the ActiveState Perl installation, nor in the ActiveState Perl Package Manager (PPM) library. To install, download the `IPC-Run-<version>.tar.gz` source archive from CPAN, at <https://metacpan.org/dist/IPC-Run>, and uncompress. Edit the `buildenv.pl` file, and add a PERL5LIB variable to point to the `lib` subdirectory from the extracted archive. For example:
+    As of this writing, `IPC::Run` is not included in the ActiveState Perl installation, nor in the ActiveState Perl Package Manager (PPM) library. To install, download the `IPC-Run-<version>.tar.gz` source archive from CPAN, at [https://metacpan.org/dist/IPC-Run](https://metacpan.org/dist/IPC-Run), and uncompress. Edit the `buildenv.pl` file, and add a PERL5LIB variable to point to the `lib` subdirectory from the extracted archive. For example:
 
     ```
 

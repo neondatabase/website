@@ -136,9 +136,9 @@ macOS's “System Integrity Protection” (SIP) feature breaks `make check`, bec
 
 PostgreSQL for Windows can be built using MinGW, a Unix-like build environment for Microsoft operating systems, or using Microsoft's Visual C++ compiler suite. The MinGW build procedure uses the normal build system described in this chapter; the Visual C++ build works completely differently and is described in [Chapter 18](install-windows.html "Chapter 18. Installation from Source Code on Windows").
 
-The native Windows port requires a 32 or 64-bit version of Windows 2000 or later. Earlier operating systems do not have sufficient infrastructure (but Cygwin may be used on those). MinGW, the Unix-like build tools, and MSYS, a collection of Unix tools required to run shell scripts like `configure`, can be downloaded from <http://www.mingw.org/>. Neither is required to run the resulting binaries; they are needed only for creating the binaries.
+The native Windows port requires a 32 or 64-bit version of Windows 2000 or later. Earlier operating systems do not have sufficient infrastructure (but Cygwin may be used on those). MinGW, the Unix-like build tools, and MSYS, a collection of Unix tools required to run shell scripts like `configure`, can be downloaded from [http://www.mingw.org/](http://www.mingw.org/). Neither is required to run the resulting binaries; they are needed only for creating the binaries.
 
-To build 64 bit binaries using MinGW, install the 64 bit tool set from <https://mingw-w64.org/>, put its bin directory in the `PATH`, and run `configure` with the `--host=x86_64-w64-mingw32` option.
+To build 64 bit binaries using MinGW, install the 64 bit tool set from [https://mingw-w64.org/](https://mingw-w64.org/), put its bin directory in the `PATH`, and run `configure` with the `--host=x86_64-w64-mingw32` option.
 
 After you have everything installed, it is suggested that you run psql under `CMD.EXE`, as the MSYS console has buffering issues.
 
@@ -154,7 +154,7 @@ PostgreSQL is well-supported on Solaris. The more up to date your operating syst
 
 You can build with either GCC or Sun's compiler suite. For better code optimization, Sun's compiler is strongly recommended on the SPARC architecture. If you are using Sun's compiler, be careful not to select `/usr/ucb/cc`; use `/opt/SUNWspro/bin/cc`.
 
-You can download Sun Studio from <https://www.oracle.com/technetwork/server-storage/solarisstudio/downloads/>. Many GNU tools are integrated into Solaris 10, or they are present on the Solaris companion CD. If you need packages for older versions of Solaris, you can find these tools at <http://www.sunfreeware.com>. If you prefer sources, look at <https://www.gnu.org/prep/ftp>.
+You can download Sun Studio from [https://www.oracle.com/technetwork/server-storage/solarisstudio/downloads/](https://www.oracle.com/technetwork/server-storage/solarisstudio/downloads/). Many GNU tools are integrated into Solaris 10, or they are present on the Solaris companion CD. If you need packages for older versions of Solaris, you can find these tools at [http://www.sunfreeware.com](http://www.sunfreeware.com). If you prefer sources, look at [https://www.gnu.org/prep/ftp](https://www.gnu.org/prep/ftp).
 
 #### 17.7.5.2. configure Complains About a Failed Test Program [#](#INSTALLATION-NOTES-SOLARIS-CONFIGURE-COMPLAINS)
 

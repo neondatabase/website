@@ -246,9 +246,9 @@ Since the `words` table has been generated as a separate, static table, it will 
 
 ### F.34.6. References [#](#PGTRGM-REFERENCES)
 
-GiST Development Site <http://www.sai.msu.su/~megera/postgres/gist/>
+GiST Development Site [http://www.sai.msu.su/~megera/postgres/gist/](http://www.sai.msu.su/~megera/postgres/gist/)
 
-Tsearch2 Development Site <http://www.sai.msu.su/~megera/postgres/gist/tsearch/V2/>
+Tsearch2 Development Site [http://www.sai.msu.su/~megera/postgres/gist/tsearch/V2/](http://www.sai.msu.su/~megera/postgres/gist/tsearch/V2/)
 
 ### F.34.7. Authors [#](#PGTRGM-AUTHORS)
 

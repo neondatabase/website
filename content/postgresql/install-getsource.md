@@ -8,7 +8,7 @@
 
 ## 17.2. Getting the Source [#](#INSTALL-GETSOURCE)
 
-The PostgreSQL source code for released versions can be obtained from the download section of our website: <https://www.postgresql.org/ftp/source/>. Download the `postgresql-version.tar.gz` or `postgresql-version.tar.bz2` file you're interested in, then unpack it:
+The PostgreSQL source code for released versions can be obtained from the download section of our website: [https://www.postgresql.org/ftp/source/](https://www.postgresql.org/ftp/source/). Download the `postgresql-version.tar.gz` or `postgresql-version.tar.bz2` file you're interested in, then unpack it:
 
 ```
 

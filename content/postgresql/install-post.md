@@ -30,7 +30,7 @@ or in `csh` or `tcsh`:
 setenv LD_LIBRARY_PATH /usr/local/pgsql/lib
 ```
 
-Replace `/usr/local/pgsql/lib` with whatever you set `--libdir` to in [Step 1](install-make.html#CONFIGURE "Configuration"). You should put these commands into a shell start-up file such as `/etc/profile` or `~/.bash_profile`. Some good information about the caveats associated with this method can be found at <http://xahlee.info/UnixResource_dir/_/ldpath.html>.
+Replace `/usr/local/pgsql/lib` with whatever you set `--libdir` to in [Step 1](install-make.html#CONFIGURE "Configuration"). You should put these commands into a shell start-up file such as `/etc/profile` or `~/.bash_profile`. Some good information about the caveats associated with this method can be found at [http://xahlee.info/UnixResource_dir/_/ldpath.html](http://xahlee.info/UnixResource_dir/_/ldpath.html).
 
 On some systems it might be preferable to set the environment variable `LD_RUN_PATH` *before* building.
 

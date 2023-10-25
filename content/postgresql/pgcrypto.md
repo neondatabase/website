@@ -420,7 +420,7 @@ gpg -a --export-secret-keys KEYID > secret.key
 
 You need to use `dearmor()` on these keys before giving them to the PGP functions. Or if you can handle binary data, you can drop `-a` from the command.
 
-For more details see `man gpg`, [The GNU Privacy Handbook](https://www.gnupg.org/gph/en/manual.html) and other documentation on <https://www.gnupg.org/>.
+For more details see `man gpg`, [The GNU Privacy Handbook](https://www.gnupg.org/gph/en/manual.html) and other documentation on [https://www.gnupg.org/](https://www.gnupg.org/).
 
 #### F.27.3.10. Limitations of PGP Code [#](#PGCRYPTO-PGP-ENC-FUNCS-LIMITATIONS)
 
@@ -525,49 +525,49 @@ The implementation does not resist [side-channel attacks](https://en.wikipedia.o
 
 #### F.27.6.4. Useful Reading [#](#PGCRYPTO-NOTES-USEFUL-READING)
 
-* <https://www.gnupg.org/gph/en/manual.html>
+* [https://www.gnupg.org/gph/en/manual.html](https://www.gnupg.org/gph/en/manual.html)
 
     The GNU Privacy Handbook.
 
-* <https://www.openwall.com/crypt/>
+* [https://www.openwall.com/crypt/](https://www.openwall.com/crypt/)
 
     Describes the crypt-blowfish algorithm.
 
-* <https://www.iusmentis.com/security/passphrasefaq/>
+* [https://www.iusmentis.com/security/passphrasefaq/](https://www.iusmentis.com/security/passphrasefaq/)
 
     How to choose a good password.
 
-* <http://world.std.com/~reinhold/diceware.html>
+* [http://world.std.com/~reinhold/diceware.html](http://world.std.com/~reinhold/diceware.html)
 
     Interesting idea for picking passwords.
 
-* <http://www.interhack.net/people/cmcurtin/snake-oil-faq.html>
+* [http://www.interhack.net/people/cmcurtin/snake-oil-faq.html](http://www.interhack.net/people/cmcurtin/snake-oil-faq.html)
 
     Describes good and bad cryptography.
 
 #### F.27.6.5. Technical References [#](#PGCRYPTO-NOTES-TECH-REF)
 
-* <https://tools.ietf.org/html/rfc4880>
+* [https://tools.ietf.org/html/rfc4880](https://tools.ietf.org/html/rfc4880)
 
     OpenPGP message format.
 
-* <https://tools.ietf.org/html/rfc1321>
+* [https://tools.ietf.org/html/rfc1321](https://tools.ietf.org/html/rfc1321)
 
     The MD5 Message-Digest Algorithm.
 
-* <https://tools.ietf.org/html/rfc2104>
+* [https://tools.ietf.org/html/rfc2104](https://tools.ietf.org/html/rfc2104)
 
     HMAC: Keyed-Hashing for Message Authentication.
 
-* <https://www.usenix.org/legacy/events/usenix99/provos.html>
+* [https://www.usenix.org/legacy/events/usenix99/provos.html](https://www.usenix.org/legacy/events/usenix99/provos.html)
 
     Comparison of crypt-des, crypt-md5 and bcrypt algorithms.
 
-* <https://en.wikipedia.org/wiki/Fortuna_(PRNG)>
+* [https://en.wikipedia.org/wiki/Fortuna_(PRNG)](https://en.wikipedia.org/wiki/Fortuna_(PRNG))
 
     Description of Fortuna CSPRNG.
 
-* <https://jlcooke.ca/random/>
+* [https://jlcooke.ca/random/](https://jlcooke.ca/random/)
 
     Jean-Luc Cooke Fortuna-based `/dev/random` driver for Linux.
 
