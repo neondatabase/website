@@ -1,5 +1,4 @@
 
-
 |                 17.7. Platform-Specific Notes                 |                                                                     |                                           |                                                       |                                                                                      |
 | :-----------------------------------------------------------: | :------------------------------------------------------------------ | :---------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------: |
 | [Prev](supported-platforms.html "17.6. Supported Platforms")  | [Up](installation.html "Chapter 17. Installation from Source Code") | Chapter 17. Installation from Source Code | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](install-windows.html "Chapter 18. Installation from Source Code on Windows") |
@@ -8,11 +7,11 @@
 
 ## 17.7. Platform-Specific Notes [#](#INSTALLATION-PLATFORM-NOTES)
 
-  * *   [17.7.1. AIX](installation-platform-notes.html#INSTALLATION-NOTES-AIX)
-  * [17.7.2. Cygwin](installation-platform-notes.html#INSTALLATION-NOTES-CYGWIN)
-  * [17.7.3. macOS](installation-platform-notes.html#INSTALLATION-NOTES-MACOS)
-  * [17.7.4. MinGW/Native Windows](installation-platform-notes.html#INSTALLATION-NOTES-MINGW)
-  * [17.7.5. Solaris](installation-platform-notes.html#INSTALLATION-NOTES-SOLARIS)
+* *   [17.7.1. AIX](installation-platform-notes.html#INSTALLATION-NOTES-AIX)
+* [17.7.2. Cygwin](installation-platform-notes.html#INSTALLATION-NOTES-CYGWIN)
+* [17.7.3. macOS](installation-platform-notes.html#INSTALLATION-NOTES-MACOS)
+* [17.7.4. MinGW/Native Windows](installation-platform-notes.html#INSTALLATION-NOTES-MINGW)
+* [17.7.5. Solaris](installation-platform-notes.html#INSTALLATION-NOTES-SOLARIS)
 
 This section documents additional platform-specific issues regarding the installation and setup of PostgreSQL. Be sure to read the installation instructions, and in particular [Section 17.1](install-requirements.html "17.1. Requirements") as well. Also, check [Chapter 33](regress.html "Chapter 33. Regression Tests") regarding the interpretation of regression test results.
 
@@ -50,7 +49,7 @@ In the case of the `plperl` example, above, check your umask and the permissions
 
 The “ideal” solution for this is to use a 64-bit build of PostgreSQL, but that is not always practical, because systems with 32-bit processors can build, but not run, 64-bit binaries.
 
-If a 32-bit binary is desired, set `LDR_CNTRL` to `MAXDATA=0xn0000000`, where 1 <= n <= 8, before starting the PostgreSQL server, and try different values and `postgresql.conf` settings to find a configuration that works satisfactorily. This use of `LDR_CNTRL` tells AIX that you want the server to have `MAXDATA` bytes set aside for the heap, allocated in 256 MB segments. When you find a workable configuration, `ldedit` can be used to modify the binaries so that they default to using the desired heap size. PostgreSQL can also be rebuilt, passing `configure LDFLAGS="-Wl,-bmaxdata:0xn0000000"` to achieve the same effect.
+If a 32-bit binary is desired, set `LDR_CNTRL` to `MAXDATA=0xn0000000`, where `1 <= n <= 8`, before starting the PostgreSQL server, and try different values and `postgresql.conf` settings to find a configuration that works satisfactorily. This use of `LDR_CNTRL` tells AIX that you want the server to have `MAXDATA` bytes set aside for the heap, allocated in 256 MB segments. When you find a workable configuration, `ldedit` can be used to modify the binaries so that they default to using the desired heap size. PostgreSQL can also be rebuilt, passing `configure LDFLAGS="-Wl,-bmaxdata:0xn0000000"` to achieve the same effect.
 
 For a 64-bit build, set `OBJECT_MODE` to 64 and pass `CC="gcc -maix64"` and `LDFLAGS="-Wl,-bbigtoc"` to `configure`. (Options for `xlc` might differ.) If you omit the export of `OBJECT_MODE`, your build may fail with linker errors. When `OBJECT_MODE` is set, it tells AIX's build utilities such as `ar`, `as`, and `ld` what type of objects to default to handling.
 
