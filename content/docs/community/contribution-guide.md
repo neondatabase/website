@@ -7,17 +7,17 @@ updatedOn: '2023-10-25T14:36:27.655Z'
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
 
-## Why should you contribute?
-
-Open-source projects are always evolving. Contributing to documentation is a great way for beginners to get started in open source and for experienced developers to explain complex topics while sharing their knowledge with the community.
-
-By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or you've noticed that a certain topic is missing, your contribution is always welcome and appreciated.
-
 <Admonition type="note" title="TL;DR: Contributing to the Neon Docs">
 - You can contribute by editing files on GitHub using the **Edit this page** link or by forking the [neondatabase/website](https://github.com/neondatabase/website) repository and submitting a pull request.
 - If you are interested in contributing a guide via a pull request, we provide a template file to help get you started. See [How to contribute](#how-to-contribute) for details.
 - Reference this contribution guide as needed for Markup and style guidelines.
 </Admonition>
+
+## Why should you contribute?
+
+Open-source projects are always evolving. Contributing to documentation is a great way for beginners to get started in open source and for experienced developers to explain complex topics while sharing their knowledge with the community.
+
+By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or you've noticed that a certain topic is missing, your contribution is always welcome and appreciated.
 
 ## How to contribute
 
