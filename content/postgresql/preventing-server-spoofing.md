@@ -8,7 +8,7 @@
 
 ## 19.7. Preventing Server Spoofing [#](#PREVENTING-SERVER-SPOOFING)
 
-[]()
+
 
 While the server is running, it is not possible for a malicious user to take the place of the normal database server. However, when the server is down, it is possible for a local user to spoof the normal server by starting their own server. The spoof server could read passwords and queries sent by clients, but could not return any data because the `PGDATA` directory would still be secure because of directory permissions. Spoofing is possible because any user can start a database server; a client cannot identify an invalid server unless it is specially configured.
 

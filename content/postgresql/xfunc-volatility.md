@@ -8,7 +8,7 @@
 
 ## 38.7. Function Volatility Categories [#](#XFUNC-VOLATILITY)
 
-[]()[]()[]()[]()
+
 
 Every function has a *volatility* classification, with the possibilities being `VOLATILE`, `STABLE`, or `IMMUTABLE`. `VOLATILE` is the default if the [`CREATE FUNCTION`](sql-createfunction.html "CREATE FUNCTION") command does not specify a category. The volatility category is a promise to the optimizer about the behavior of the function:
 

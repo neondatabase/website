@@ -8,7 +8,7 @@
 
 ## 54.4. `pg_backend_memory_contexts` [#](#VIEW-PG-BACKEND-MEMORY-CONTEXTS)
 
-[]()
+
 
 The view `pg_backend_memory_contexts` displays all the memory contexts of the server process attached to the current session.
 

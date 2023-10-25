@@ -8,7 +8,7 @@
 
 ## 53.27. `pg_inherits` [#](#CATALOG-PG-INHERITS)
 
-[]()
+
 
 The catalog `pg_inherits` records information about table and index inheritance hierarchies. There is one entry for each direct parent-child table or index relationship in the database. (Indirect inheritance can be determined by following chains of entries.)
 

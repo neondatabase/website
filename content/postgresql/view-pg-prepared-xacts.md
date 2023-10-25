@@ -8,7 +8,7 @@
 
 ## 54.16. `pg_prepared_xacts` [#](#VIEW-PG-PREPARED-XACTS)
 
-[]()
+
 
 The view `pg_prepared_xacts` displays information about transactions that are currently prepared for two-phase commit (see [PREPARE TRANSACTION](sql-prepare-transaction.html "PREPARE TRANSACTION") for details).
 

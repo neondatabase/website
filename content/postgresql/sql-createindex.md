@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## CREATE INDEX
 
@@ -143,7 +143,7 @@ All functions and operators used in an index definition must be “immutable”,
 
 The optional `WITH` clause specifies *storage parameters* for the index. Each index method has its own set of allowed storage parameters. The B-tree, hash, GiST and SP-GiST index methods all accept this parameter:
 
-*   `fillfactor` (`integer`) []()[#](#INDEX-RELOPTION-FILLFACTOR)
+*   `fillfactor` (`integer`) [#](#INDEX-RELOPTION-FILLFACTOR)
 
     The fillfactor for an index is a percentage that determines how full the index method will try to pack index pages. For B-trees, leaf pages are filled to this percentage during initial index builds, and also when extending the index at the right (adding new largest key values). If pages subsequently become completely full, they will be split, leading to fragmentation of the on-disk index structure. B-trees use a default fillfactor of 90, but any integer value from 10 to 100 can be selected.
 
@@ -155,7 +155,7 @@ The optional `WITH` clause specifies *storage parameters* for the index. Each in
 
 B-tree indexes additionally accept this parameter:
 
-*   `deduplicate_items` (`boolean`) []()[#](#INDEX-RELOPTION-DEDUPLICATE-ITEMS)
+*   `deduplicate_items` (`boolean`) [#](#INDEX-RELOPTION-DEDUPLICATE-ITEMS)
 
     Controls usage of the B-tree deduplication technique described in [Section 67.4.3](btree-implementation.html#BTREE-DEDUPLICATION "67.4.3. Deduplication"). Set to `ON` or `OFF` to enable or disable the optimization. (Alternative spellings of `ON` and `OFF` are allowed as described in [Section 20.1](config-setting.html "20.1. Setting Parameters").) The default is `ON`.
 
@@ -165,13 +165,13 @@ B-tree indexes additionally accept this parameter:
 
 GiST indexes additionally accept this parameter:
 
-*   `buffering` (`enum`) []()[#](#INDEX-RELOPTION-BUFFERING)
+*   `buffering` (`enum`) [#](#INDEX-RELOPTION-BUFFERING)
 
     Determines whether the buffered build technique described in [Section 68.4.1](gist-implementation.html#GIST-BUFFERING-BUILD "68.4.1. GiST Index Build Methods") is used to build the index. With `OFF` buffering is disabled, with `ON` it is enabled, and with `AUTO` it is initially disabled, but is turned on on-the-fly once the index size reaches [effective\_cache\_size](runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE). The default is `AUTO`. Note that if sorted build is possible, it will be used instead of buffered build unless `buffering=ON` is specified.
 
 GIN indexes accept different parameters:
 
-*   `fastupdate` (`boolean`) []()[#](#INDEX-RELOPTION-FASTUPDATE)
+*   `fastupdate` (`boolean`) [#](#INDEX-RELOPTION-FASTUPDATE)
 
     This setting controls usage of the fast update technique described in [Section 70.4.1](gin-implementation.html#GIN-FAST-UPDATE "70.4.1. GIN Fast Update Technique"). It is a Boolean parameter: `ON` enables fast update, `OFF` disables it. The default is `ON`.
 
@@ -181,23 +181,23 @@ GIN indexes accept different parameters:
 
 <!---->
 
-*   `gin_pending_list_limit` (`integer`) []()[#](#INDEX-RELOPTION-GIN-PENDING-LIST-LIMIT)
+*   `gin_pending_list_limit` (`integer`) [#](#INDEX-RELOPTION-GIN-PENDING-LIST-LIMIT)
 
     Custom [gin\_pending\_list\_limit](runtime-config-client.html#GUC-GIN-PENDING-LIST-LIMIT) parameter. This value is specified in kilobytes.
 
 BRIN indexes accept different parameters:
 
-*   `pages_per_range` (`integer`) []()[#](#INDEX-RELOPTION-PAGES-PER-RANGE)
+*   `pages_per_range` (`integer`) [#](#INDEX-RELOPTION-PAGES-PER-RANGE)
 
     Defines the number of table blocks that make up one block range for each entry of a BRIN index (see [Section 71.1](brin-intro.html "71.1. Introduction") for more details). The default is `128`.
 
-*   `autosummarize` (`boolean`) []()[#](#INDEX-RELOPTION-AUTOSUMMARIZE)
+*   `autosummarize` (`boolean`) [#](#INDEX-RELOPTION-AUTOSUMMARIZE)
 
     Defines whether a summarization run is queued for the previous page range whenever an insertion is detected on the next one. See [Section 71.1.1](brin-intro.html#BRIN-OPERATION "71.1.1. Index Maintenance") for more details. The default is `off`.
 
 ### Building Indexes Concurrently
 
-[]()
+
 
 Creating an index can interfere with regular operation of a database. Normally PostgreSQL locks the table to be indexed against writes and performs the entire index build with a single scan of the table. Other transactions can still read the table, but if they try to insert, update, or delete rows in the table they will block until the index build is finished. This could have a severe effect if the system is a live production database. Very large tables can take many hours to be indexed, and even for smaller tables, an index build can lock out writers for periods that are unacceptably long for a production system.
 

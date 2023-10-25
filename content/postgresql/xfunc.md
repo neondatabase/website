@@ -8,7 +8,7 @@
 
 ## 38.3. User-Defined Functions [#](#XFUNC)
 
-[]()
+
 
 PostgreSQL provides four kinds of functions:
 

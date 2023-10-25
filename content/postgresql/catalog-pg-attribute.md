@@ -8,7 +8,7 @@
 
 ## 53.7. `pg_attribute` [#](#CATALOG-PG-ATTRIBUTE)
 
-[]()
+
 
 The catalog `pg_attribute` stores information about table columns. There will be exactly one `pg_attribute` row for every column in every table in the database. (There will also be attribute entries for indexes, and indeed all objects that have [`pg_class`](catalog-pg-class.html "53.11. pg_class") entries.)
 

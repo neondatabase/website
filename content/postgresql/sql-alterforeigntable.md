@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## ALTER FOREIGN TABLE
 

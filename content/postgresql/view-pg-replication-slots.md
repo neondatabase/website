@@ -8,7 +8,7 @@
 
 ## 54.19. `pg_replication_slots` [#](#VIEW-PG-REPLICATION-SLOTS)
 
-[]()
+
 
 The `pg_replication_slots` view provides a listing of all replication slots that currently exist on the database cluster, along with their current state.
 

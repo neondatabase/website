@@ -8,7 +8,7 @@
 
 ## 5.14. Dependency Tracking [#](#DDL-DEPEND)
 
-[]()[]()
+
 
 When you create complex database structures involving many tables with foreign key constraints, views, triggers, functions, etc. you implicitly create a net of dependencies between the objects. For instance, a table with a foreign key constraint depends on the table it references.
 

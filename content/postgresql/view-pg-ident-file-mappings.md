@@ -8,7 +8,7 @@
 
 ## 54.10. `pg_ident_file_mappings` [#](#VIEW-PG-IDENT-FILE-MAPPINGS)
 
-[]()
+
 
 The view `pg_ident_file_mappings` provides a summary of the contents of the client user name mapping configuration file, [`pg_ident.conf`](auth-username-maps.html "21.2. User Name Maps"). A row appears in this view for each non-empty, non-comment line in the file, with annotations indicating whether the map could be applied successfully.
 

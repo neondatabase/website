@@ -8,7 +8,7 @@
 
 ## 53.41. `pg_publication_namespace` [#](#CATALOG-PG-PUBLICATION-NAMESPACE)
 
-[]()
+
 
 The catalog `pg_publication_namespace` contains the mapping between schemas and publications in the database. This is a many-to-many mapping.
 

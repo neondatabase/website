@@ -14,7 +14,7 @@
     *   [F.7.4. Limitations](bloom.html#BLOOM-LIMITATIONS)
     *   [F.7.5. Authors](bloom.html#BLOOM-AUTHORS)
 
-[]()
+
 
 `bloom` provides an index access method based on [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter).
 

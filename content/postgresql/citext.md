@@ -14,7 +14,7 @@
     *   [F.10.4. Limitations](citext.html#CITEXT-LIMITATIONS)
     *   [F.10.5. Author](citext.html#CITEXT-AUTHOR)
 
-[]()
+
 
 The `citext` module provides a case-insensitive character string type, `citext`. Essentially, it internally calls `lower` when comparing values. Otherwise, it behaves almost exactly like `text`.
 

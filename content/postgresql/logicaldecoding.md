@@ -44,7 +44,7 @@
 *   *   [49.9. Streaming of Large Transactions for Logical Decoding](logicaldecoding-streaming.html)
     *   [49.10. Two-phase Commit Support for Logical Decoding](logicaldecoding-two-phase-commits.html)
 
-[]()
+
 
 PostgreSQL provides infrastructure to stream the modifications performed via SQL to external consumers. This functionality can be used for a variety of purposes, including replication solutions and auditing.
 

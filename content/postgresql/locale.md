@@ -15,7 +15,7 @@
     *   [24.1.5. ICU Locales](locale.html#ICU-LOCALES)
     *   [24.1.6. Problems](locale.html#LOCALE-PROBLEMS)
 
-[]()
+
 
 *Locale* support refers to an application respecting cultural preferences regarding alphabets, sorting, number formatting, etc. PostgreSQL uses the standard ISO C and POSIX locale facilities provided by the server operating system. For additional information refer to the documentation of your system.
 
@@ -65,10 +65,10 @@ To enable messages to be translated to the user's preferred language, NLS must h
 
 The locale settings influence the following SQL features:
 
-*   Sort order in queries using `ORDER BY` or the standard comparison operators on textual data[]()
-*   The `upper`, `lower`, and `initcap` functions[]()[]()
-*   Pattern matching operators (`LIKE`, `SIMILAR TO`, and POSIX-style regular expressions); locales affect both case insensitive matching and the classification of characters by character-class regular expressions[]()[]()
-*   The `to_char` family of functions[]()
+*   Sort order in queries using `ORDER BY` or the standard comparison operators on textual data
+*   The `upper`, `lower`, and `initcap` functions
+*   Pattern matching operators (`LIKE`, `SIMILAR TO`, and POSIX-style regular expressions); locales affect both case insensitive matching and the classification of characters by character-class regular expressions
+*   The `to_char` family of functions
 *   The ability to use indexes with `LIKE` clauses
 
 The drawback of using locales other than `C` or `POSIX` in PostgreSQL is its performance impact. It slows character handling and prevents ordinary indexes from being used by `LIKE`. For this reason use locales only if you actually need them.
@@ -87,7 +87,7 @@ Locales can be selected in different scopes depending on requirements. The above
 
 ### 24.1.4. Locale Providers [#](#LOCALE-PROVIDERS)
 
-PostgreSQL supports multiple *locale providers*. This specifies which library supplies the locale data. One standard provider name is `libc`, which uses the locales provided by the operating system C library. These are the locales used by most tools provided by the operating system. Another provider is `icu`, which uses the external ICU[]() library. ICU locales can only be used if support for ICU was configured when PostgreSQL was built.
+PostgreSQL supports multiple *locale providers*. This specifies which library supplies the locale data. One standard provider name is `libc`, which uses the locales provided by the operating system C library. These are the locales used by most tools provided by the operating system. Another provider is `icu`, which uses the external ICU library. ICU locales can only be used if support for ICU was configured when PostgreSQL was built.
 
 The commands and tools that select the locale settings, as described above, each have an option to select the locale provider. The examples shown earlier all use the `libc` provider, which is the default. Here is an example to initialize a database cluster using the ICU provider:
 

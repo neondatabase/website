@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## pg\_basebackup
 
@@ -67,7 +67,7 @@ The following command-line options control the location and format of the output
 
 *   `-R``--write-recovery-conf`
 
-    Creates a [`standby.signal`](warm-standby.html#FILE-STANDBY-SIGNAL) []()file and appends connection settings to the `postgresql.auto.conf` file in the target directory (or within the base archive file when using tar format). This eases setting up a standby server using the results of the backup.
+    Creates a [`standby.signal`](warm-standby.html#FILE-STANDBY-SIGNAL) file and appends connection settings to the `postgresql.auto.conf` file in the target directory (or within the base archive file when using tar format). This eases setting up a standby server using the results of the backup.
 
     The `postgresql.auto.conf` file will record the connection settings and, if specified, the replication slot that pg\_basebackup is using, so that streaming replication will use the same settings later on.
 

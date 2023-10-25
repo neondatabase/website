@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## SET SESSION AUTHORIZATION
 

@@ -8,7 +8,7 @@
 
 ## 30.4. Asynchronous Commit [#](#WAL-ASYNC-COMMIT)
 
-[]()[]()
+
 
 *Asynchronous commit* is an option that allows transactions to complete more quickly, at the cost that the most recent transactions may be lost if the database should crash. In many applications this is an acceptable trade-off.
 

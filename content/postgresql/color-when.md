@@ -8,7 +8,7 @@
 
 ## N.1. When Color is Used [#](#COLOR-WHEN)
 
-To use colorized output, set the environment variable `PG_COLOR`[]() as follows:
+To use colorized output, set the environment variable `PG_COLOR` as follows:
 
 1.  If the value is `always`, then color is used.
 2.  If the value is `auto` and the standard error stream is associated with a terminal device, then color is used.

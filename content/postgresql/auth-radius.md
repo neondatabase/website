@@ -8,7 +8,7 @@
 
 ## 21.11. RADIUS Authentication [#](#AUTH-RADIUS)
 
-[]()
+
 
 This authentication method operates similarly to `password` except that it uses RADIUS as the password verification method. RADIUS is used only to validate the user name/password pairs. Therefore the user must already exist in the database before RADIUS can be used for authentication.
 

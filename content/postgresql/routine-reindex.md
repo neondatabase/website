@@ -8,7 +8,7 @@
 
 ## 25.2. Routine Reindexing [#](#ROUTINE-REINDEX)
 
-[]()
+
 
 In some situations it is worthwhile to rebuild indexes periodically with the [REINDEX](sql-reindex.html "REINDEX") command or a series of individual rebuilding steps.
 

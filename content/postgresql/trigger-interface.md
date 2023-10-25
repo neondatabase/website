@@ -8,7 +8,7 @@
 
 ## 39.3. Writing Trigger Functions in C [#](#TRIGGER-INTERFACE)
 
-[]()[]()
+
 
 This section describes the low-level details of the interface to a trigger function. This information is only needed when writing trigger functions in C. If you are using a higher-level language then these details are handled for you. In most cases you should consider using a procedural language before writing your triggers in C. The documentation of each procedural language explains how to write a trigger in that language.
 

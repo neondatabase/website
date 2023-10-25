@@ -8,7 +8,7 @@
 
 ## 41.1. The Query Tree [#](#QUERYTREE)
 
-[]()
+
 
 To understand how the rule system works it is necessary to know when it is invoked and what its input and results are.
 
@@ -24,7 +24,7 @@ When reading the SQL representations of the query trees in this chapter it is ne
 
     This is a simple value telling which command (`SELECT`, `INSERT`, `UPDATE`, `DELETE`) produced the query tree.
 
-*   the range table[]()
+*   the range table
 
     The range table is a list of relations that are used in the query. In a `SELECT` statement these are the relations given after the `FROM` key word.
 
@@ -38,7 +38,7 @@ When reading the SQL representations of the query trees in this chapter it is ne
 
     For `INSERT`, `UPDATE`, and `DELETE` commands, the result relation is the table (or view!) where the changes are to take effect.
 
-*   the target list[]()
+*   the target list
 
     The target list is a list of expressions that define the result of the query. In the case of a `SELECT`, these expressions are the ones that build the final output of the query. They correspond to the expressions between the key words `SELECT` and `FROM`. (`*` is just an abbreviation for all the column names of a relation. It is expanded by the parser into the individual columns, so the rule system never sees it.)
 

@@ -18,7 +18,7 @@ The behavior of a custom text search configuration can easily become confusing. 
 
 The function `ts_debug` allows easy testing of a text search configuration.
 
-[]()
+
 
 ```
 
@@ -128,7 +128,7 @@ FROM ts_debug('public.english', 'The Brightest supernovaes');
 
 The following functions allow direct testing of a text search parser.
 
-[]()
+
 
 ```
 
@@ -153,7 +153,7 @@ SELECT * FROM ts_parse('default', '123 - a number');
      1 | number
 ```
 
-[]()
+
 
 ```
 
@@ -199,7 +199,7 @@ SELECT * FROM ts_token_type('default');
 
 The `ts_lexize` function facilitates dictionary testing.
 
-[]()
+
 
 ```
 

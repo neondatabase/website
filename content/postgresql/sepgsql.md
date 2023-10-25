@@ -18,7 +18,7 @@
     *   [F.39.8. External Resources](sepgsql.html#SEPGSQL-RESOURCES)
     *   [F.39.9. Author](sepgsql.html#SEPGSQL-AUTHOR)
 
-[]()
+
 
 `sepgsql` is a loadable module that supports label-based mandatory access control (MAC) based on SELinux security policy.
 
@@ -151,13 +151,13 @@ $ sudo semodule -r sepgsql-regtest
 
 ### F.39.4. GUC Parameters [#](#SEPGSQL-PARAMETERS)
 
-*   `sepgsql.permissive` (`boolean`) []()[#](#GUC-SEPGSQL-PERMISSIVE)
+*   `sepgsql.permissive` (`boolean`) [#](#GUC-SEPGSQL-PERMISSIVE)
 
     This parameter enables `sepgsql` to function in permissive mode, regardless of the system setting. The default is off. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
     When this parameter is on, `sepgsql` functions in permissive mode, even if SELinux in general is working in enforcing mode. This parameter is primarily useful for testing purposes.
 
-*   `sepgsql.debug_audit` (`boolean`) []()[#](#GUC-SEPGSQL-DEBUG-AUDIT)
+*   `sepgsql.debug_audit` (`boolean`) [#](#GUC-SEPGSQL-DEBUG-AUDIT)
 
     This parameter enables the printing of audit messages regardless of the system policy settings. The default is off, which means that messages will be printed according to the system settings.
 

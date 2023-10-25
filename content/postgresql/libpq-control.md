@@ -10,7 +10,7 @@
 
 These functions control miscellaneous details of libpq's behavior.
 
-*   `PQclientEncoding`[]() [#](#LIBPQ-PQCLIENTENCODING)
+*   `PQclientEncoding` [#](#LIBPQ-PQCLIENTENCODING)
 
     Returns the client encoding.
 
@@ -26,7 +26,7 @@ These functions control miscellaneous details of libpq's behavior.
     char *pg_encoding_to_char(int encoding_id);
     ```
 
-*   `PQsetClientEncoding`[]() [#](#LIBPQ-PQSETCLIENTENCODING)
+*   `PQsetClientEncoding` [#](#LIBPQ-PQSETCLIENTENCODING)
 
     Sets the client encoding.
 
@@ -37,7 +37,7 @@ These functions control miscellaneous details of libpq's behavior.
 
     *`conn`* is a connection to the server, and *`encoding`* is the encoding you want to use. If the function successfully sets the encoding, it returns 0, otherwise -1. The current encoding for this connection can be determined by using [`PQclientEncoding`](libpq-control.html#LIBPQ-PQCLIENTENCODING).
 
-*   `PQsetErrorVerbosity`[]() [#](#LIBPQ-PQSETERRORVERBOSITY)
+*   `PQsetErrorVerbosity` [#](#LIBPQ-PQSETERRORVERBOSITY)
 
     Determines the verbosity of messages returned by [`PQerrorMessage`](libpq-status.html#LIBPQ-PQERRORMESSAGE) and [`PQresultErrorMessage`](libpq-exec.html#LIBPQ-PQRESULTERRORMESSAGE).
 
@@ -58,7 +58,7 @@ These functions control miscellaneous details of libpq's behavior.
 
     Changing the verbosity setting does not affect the messages available from already-existing `PGresult` objects, only subsequently-created ones. (But see [`PQresultVerboseErrorMessage`](libpq-exec.html#LIBPQ-PQRESULTVERBOSEERRORMESSAGE) if you want to print a previous error with a different verbosity.)
 
-*   `PQsetErrorContextVisibility`[]() [#](#LIBPQ-PQSETERRORCONTEXTVISIBILITY)
+*   `PQsetErrorContextVisibility` [#](#LIBPQ-PQSETERRORCONTEXTVISIBILITY)
 
     Determines the handling of `CONTEXT` fields in messages returned by [`PQerrorMessage`](libpq-status.html#LIBPQ-PQERRORMESSAGE) and [`PQresultErrorMessage`](libpq-exec.html#LIBPQ-PQRESULTERRORMESSAGE).
 
@@ -78,7 +78,7 @@ These functions control miscellaneous details of libpq's behavior.
 
     Changing this mode does not affect the messages available from already-existing `PGresult` objects, only subsequently-created ones. (But see [`PQresultVerboseErrorMessage`](libpq-exec.html#LIBPQ-PQRESULTVERBOSEERRORMESSAGE) if you want to print a previous error with a different display mode.)
 
-*   `PQtrace`[]() [#](#LIBPQ-PQTRACE)
+*   `PQtrace` [#](#LIBPQ-PQTRACE)
 
     Enables tracing of the client/server communication to a debugging file stream.
 
@@ -93,7 +93,7 @@ These functions control miscellaneous details of libpq's behavior.
 
     On Windows, if the libpq library and an application are compiled with different flags, this function call will crash the application because the internal representation of the `FILE` pointers differ. Specifically, multithreaded/single-threaded, release/debug, and static/dynamic flags should be the same for the library and all applications using that library.
 
-*   `PQsetTraceFlags`[]() [#](#LIBPQ-PQSETTRACEFLAGS)
+*   `PQsetTraceFlags` [#](#LIBPQ-PQSETTRACEFLAGS)
 
     Controls the tracing behavior of client/server communication.
 
@@ -104,7 +104,7 @@ These functions control miscellaneous details of libpq's behavior.
 
     `flags` contains flag bits describing the operating mode of tracing. If `flags` contains `PQTRACE_SUPPRESS_TIMESTAMPS`, then the timestamp is not included when printing each message. If `flags` contains `PQTRACE_REGRESS_MODE`, then some fields are redacted when printing each message, such as object OIDs, to make the output more convenient to use in testing frameworks. This function must be called after calling `PQtrace`.
 
-*   `PQuntrace`[]() [#](#LIBPQ-PQUNTRACE)
+*   `PQuntrace` [#](#LIBPQ-PQUNTRACE)
 
     Disables tracing started by [`PQtrace`](libpq-control.html#LIBPQ-PQTRACE).
 

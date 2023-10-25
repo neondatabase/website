@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## ALTER TABLE
 
@@ -195,7 +195,7 @@ referential_action in a FOREIGN KEY/REFERENCES constraint is:
 
     Changing per-attribute options acquires a `SHARE UPDATE EXCLUSIVE` lock.
 
-*   `SET STORAGE { PLAIN | EXTERNAL | EXTENDED | MAIN | DEFAULT }` []()[#](#SQL-ALTERTABLE-DESC-SET-STORAGE)
+*   `SET STORAGE { PLAIN | EXTERNAL | EXTENDED | MAIN | DEFAULT }` [#](#SQL-ALTERTABLE-DESC-SET-STORAGE)
 
     This form sets the storage mode for a column. This controls whether this column is held inline or in a secondary TOAST table, and whether the data should be compressed or not. `PLAIN` must be used for fixed-length values such as `integer` and is inline, uncompressed. `MAIN` is for inline, compressible data. `EXTERNAL` is for external, uncompressed data, and `EXTENDED` is for external, compressed data. Writing `DEFAULT` sets the storage mode to the default mode for the column's data type. `EXTENDED` is the default for most data types that support non-`PLAIN` storage. Use of `EXTERNAL` will make substring operations on very large `text` and `bytea` values run faster, at the penalty of increased storage space. Note that `ALTER TABLE ... SET STORAGE` doesn't itself change anything in the table; it just sets the strategy to be pursued during future table updates. See [Section 73.2](storage-toast.html "73.2. TOAST") for more information.
 

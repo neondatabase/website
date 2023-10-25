@@ -15,7 +15,7 @@
     *   [5.11.5. Partitioning and Constraint Exclusion](ddl-partitioning.html#DDL-PARTITIONING-CONSTRAINT-EXCLUSION)
     *   [5.11.6. Best Practices for Declarative Partitioning](ddl-partitioning.html#DDL-PARTITIONING-DECLARATIVE-BEST-PRACTICES)
 
-[]()[]()[]()
+
 
 PostgreSQL supports basic table partitioning. This section describes why and how to implement partitioning as part of your database design.
 
@@ -482,7 +482,7 @@ The following caveats apply to partitioning implemented using inheritance:
 
 ### 5.11.4. Partition Pruning [#](#DDL-PARTITION-PRUNING)
 
-[]()
+
 
 *Partition pruning* is a query optimization technique that improves performance for declaratively partitioned tables. As an example:
 
@@ -541,7 +541,7 @@ Partition pruning can be disabled using the [enable\_partition\_pruning](runtime
 
 ### 5.11.5. Partitioning and Constraint Exclusion [#](#DDL-PARTITIONING-CONSTRAINT-EXCLUSION)
 
-[]()
+
 
 *Constraint exclusion* is a query optimization technique similar to partition pruning. While it is primarily used for partitioning implemented using the legacy inheritance method, it can be used for other purposes, including with declarative partitioning.
 

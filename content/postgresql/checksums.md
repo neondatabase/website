@@ -10,7 +10,7 @@
 
 *   [30.2.1. Off-line Enabling of Checksums](checksums.html#CHECKSUMS-OFFLINE-ENABLE-DISABLE)
 
-[]()
+
 
 By default, data pages are not protected by checksums, but this can optionally be enabled for a cluster. When enabled, each data page includes a checksum that is updated when the page is written and verified each time the page is read. Only data pages are protected by checksums; internal data structures and temporary files are not.
 

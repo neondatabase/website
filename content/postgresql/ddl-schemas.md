@@ -16,7 +16,7 @@
     *   [5.9.6. Usage Patterns](ddl-schemas.html#DDL-SCHEMAS-PATTERNS)
     *   [5.9.7. Portability](ddl-schemas.html#DDL-SCHEMAS-PORTABILITY)
 
-[]()
+
 
 A PostgreSQL database cluster contains one or more named databases. Roles and a few other object types are shared across the entire cluster. A client connection to the server can only access data in a single database, the one specified in the connection request.
 
@@ -36,7 +36,7 @@ Schemas are analogous to directories at the operating system level, except that 
 
 ### 5.9.1. Creating a Schema [#](#DDL-SCHEMAS-CREATE)
 
-[]()
+
 
 To create a schema, use the [CREATE SCHEMA](sql-createschema.html "CREATE SCHEMA") command. Give the schema a name of your choice. For example:
 
@@ -45,7 +45,7 @@ To create a schema, use the [CREATE SCHEMA](sql-createschema.html "CREATE SCHEMA
 CREATE SCHEMA myschema;
 ```
 
-[]()[]()
+
 
 To create or access objects in a schema, write a *qualified name* consisting of the schema name and table name separated by a dot:
 
@@ -74,7 +74,7 @@ CREATE TABLE myschema.mytable (
 );
 ```
 
-[]()
+
 
 To drop a schema if it's empty (all objects in it have been dropped), use:
 
@@ -105,7 +105,7 @@ Schema names beginning with `pg_` are reserved for system purposes and cannot be
 
 ### 5.9.2. The Public Schema [#](#DDL-SCHEMAS-PUBLIC)
 
-[]()
+
 
 In the previous sections we created tables without specifying any schema names. By default such tables (and other objects) are automatically put into a schema named “public”. Every new database contains such a schema. Thus, the following are equivalent:
 
@@ -123,17 +123,17 @@ CREATE TABLE public.products ( ... );
 
 ### 5.9.3. The Schema Search Path [#](#DDL-SCHEMAS-PATH)
 
-[]()[]()[]()
+
 
 Qualified names are tedious to write, and it's often best not to wire a particular schema name into applications anyway. Therefore tables are often referred to by *unqualified names*, which consist of just the table name. The system determines which table is meant by following a *search path*, which is a list of schemas to look in. The first matching table in the search path is taken to be the one wanted. If there is no match in the search path, an error is reported, even if matching table names exist in other schemas in the database.
 
 The ability to create like-named objects in different schemas complicates writing a query that references precisely the same objects every time. It also opens up the potential for users to change the behavior of other users' queries, maliciously or accidentally. Due to the prevalence of unqualified names in queries and their use in PostgreSQL internals, adding a schema to `search_path` effectively trusts all users having `CREATE` privilege on that schema. When you run an ordinary query, a malicious user able to create objects in a schema of your search path can take control and execute arbitrary SQL functions as though you executed them.
 
-[]()
+
 
 The first schema named in the search path is called the current schema. Aside from being the first schema searched, it is also the schema in which new tables will be created if the `CREATE TABLE` command does not specify a schema name.
 
-[]()
+
 
 To show the current search path, use the following command:
 
@@ -200,7 +200,7 @@ In practice one usually relies on the search path for operators, so as not to ha
 
 ### 5.9.4. Schemas and Privileges [#](#DDL-SCHEMAS-PRIV)
 
-[]()
+
 
 By default, users cannot access any objects in schemas they do not own. To allow that, the owner of the schema must grant the `USAGE` privilege on the schema. By default, everyone has that privilege on the schema `public`. To allow users to make use of the objects in a schema, additional privileges might need to be granted, as appropriate for the object.
 
@@ -215,7 +215,7 @@ REVOKE CREATE ON SCHEMA public FROM PUBLIC;
 
 ### 5.9.5. The System Catalog Schema [#](#DDL-SCHEMAS-CATALOG)
 
-[]()
+
 
 In addition to `public` and user-created schemas, each database contains a `pg_catalog` schema, which contains the system tables and all the built-in data types, functions, and operators. `pg_catalog` is always effectively part of the search path. If it is not named explicitly in the path then it is implicitly searched *before* searching the path's schemas. This ensures that built-in names will always be findable. However, you can explicitly place `pg_catalog` at the end of your search path if you prefer to have user-defined names override built-in names.
 

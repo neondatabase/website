@@ -8,7 +8,7 @@
 
 ## 53.39. `pg_proc` [#](#CATALOG-PG-PROC)
 
-[]()
+
 
 The catalog `pg_proc` stores information about functions, procedures, aggregate functions, and window functions (collectively also known as routines). See [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [CREATE PROCEDURE](sql-createprocedure.html "CREATE PROCEDURE"), and [Section 38.3](xfunc.html "38.3. User-Defined Functions") for more information.
 

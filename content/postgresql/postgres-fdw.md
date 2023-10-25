@@ -20,7 +20,7 @@
     *   [F.37.10. Examples](postgres-fdw.html#POSTGRES-FDW-EXAMPLES)
     *   [F.37.11. Author](postgres-fdw.html#POSTGRES-FDW-AUTHOR)
 
-[]()
+
 
 The `postgres_fdw` module provides the foreign-data wrapper `postgres_fdw`, which can be used to access data stored in external PostgreSQL servers.
 
@@ -317,7 +317,7 @@ It is *not* recommended that you override this behavior by changing the session-
 
 ### F.37.9. Configuration Parameters [#](#POSTGRES-FDW-CONFIGURATION-PARAMETERS)
 
-*   `postgres_fdw.application_name` (`string`) []()[#](#GUC-PGFDW-APPLICATION-NAME)
+*   `postgres_fdw.application_name` (`string`) [#](#GUC-PGFDW-APPLICATION-NAME)
 
     Specifies a value for [application\_name](runtime-config-logging.html#GUC-APPLICATION-NAME) configuration parameter used when `postgres_fdw` establishes a connection to a foreign server. This overrides `application_name` option of the server object. Note that change of this parameter doesn't affect any existing connections until they are re-established.
 

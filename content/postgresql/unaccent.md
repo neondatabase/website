@@ -12,7 +12,7 @@
     *   [F.47.2. Usage](unaccent.html#UNACCENT-USAGE)
     *   [F.47.3. Functions](unaccent.html#UNACCENT-FUNCTIONS)
 
-[]()
+
 
 `unaccent` is a text search dictionary that removes accents (diacritic signs) from lexemes. It's a filtering dictionary, which means its output is always passed to the next dictionary (if any), unlike the normal behavior of dictionaries. This allows accent-insensitive processing for full text search.
 
@@ -115,7 +115,7 @@ mydb=# select ts_headline('fr','Hôtel de la Mer',to_tsquery('fr','Hotels'));
 
 The `unaccent()` function removes accents (diacritic signs) from a given string. Basically, it's a wrapper around `unaccent`-type dictionaries, but it can be used outside normal text search contexts.
 
-[]()
+
 
 ```
 

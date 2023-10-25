@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## dblink\_get\_connections
 

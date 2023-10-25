@@ -8,7 +8,7 @@
 
 ## H.3. Procedural Languages [#](#EXTERNAL-PL)
 
-[]()
+
 
 PostgreSQL includes several procedural languages with the base distribution: [PL/pgSQL](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language"), [PL/Tcl](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language"), [PL/Perl](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language"), and [PL/Python](plpython.html "Chapter 46. PL/Python — Python Procedural Language").
 

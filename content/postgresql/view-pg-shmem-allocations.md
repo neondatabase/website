@@ -8,7 +8,7 @@
 
 ## 54.26. `pg_shmem_allocations` [#](#VIEW-PG-SHMEM-ALLOCATIONS)
 
-[]()
+
 
 The `pg_shmem_allocations` view shows allocations made from the server's main shared memory segment. This includes both memory allocated by PostgreSQL itself and memory allocated by extensions using the mechanisms detailed in [Section 38.10.10](xfunc-c.html#XFUNC-SHARED-ADDIN "38.10.10. Shared Memory and LWLocks").
 

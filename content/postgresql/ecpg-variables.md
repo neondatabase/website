@@ -483,7 +483,7 @@ EXEC SQL END DECLARE SECTION;
 
 ##### 36.4.4.3.3. Typedefs [#](#ECPG-VARIABLES-NONPRIMITIVE-C-TYPEDEFS)
 
-[]()
+
 
 Use the `typedef` keyword to map new types to already existing types.
 

@@ -8,7 +8,7 @@
 
 ## 8.19. Object Identifier Types [#](#DATATYPE-OID)
 
-[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()[]()
+
 
 Object identifiers (OIDs) are used internally by PostgreSQL as primary keys for various system tables. Type `oid` represents an object identifier. There are also several alias types for `oid`, each named `regsomething`. [Table 8.26](datatype-oid.html#DATATYPE-OID-TABLE "Table 8.26. Object Identifier Types") shows an overview.
 

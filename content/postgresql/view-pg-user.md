@@ -8,7 +8,7 @@
 
 ## 54.33. `pg_user` [#](#VIEW-PG-USER)
 
-[]()
+
 
 The view `pg_user` provides access to information about database users. This is simply a publicly readable view of [`pg_shadow`](view-pg-shadow.html "54.25. pg_shadow") that blanks out the password field.
 

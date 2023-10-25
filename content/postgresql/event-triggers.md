@@ -17,7 +17,7 @@
     *   [40.5. A Table Rewrite Event Trigger Example](event-trigger-table-rewrite-example.html)
     *   [40.6. A Database Login Event Trigger Example](event-trigger-database-login-example.html)
 
-[]()
+
 
 To supplement the trigger mechanism discussed in [Chapter 39](triggers.html "Chapter 39. Triggers"), PostgreSQL also provides event triggers. Unlike regular triggers, which are attached to a single table and capture only DML events, event triggers are global to a particular database and are capable of capturing DDL events.
 

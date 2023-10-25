@@ -8,7 +8,7 @@
 
 ## 53.50. `pg_shseclabel` [#](#CATALOG-PG-SHSECLABEL)
 
-[]()
+
 
 The catalog `pg_shseclabel` stores security labels on shared database objects. Security labels can be manipulated with the [`SECURITY LABEL`](sql-security-label.html "SECURITY LABEL") command. For an easier way to view security labels, see [Section 54.22](view-pg-seclabels.html "54.22. pg_seclabels").
 

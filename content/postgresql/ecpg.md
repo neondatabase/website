@@ -110,7 +110,7 @@
 *   *   [36.16. Oracle Compatibility Mode](ecpg-oracle-compat.html)
     *   [36.17. Internals](ecpg-develop.html)
 
-[]()[]()[]()
+
 
 This chapter describes the embedded SQL package for PostgreSQL. It was written by Linus Tolke (`<linus@epact.se>`) and Michael Meskes (`<meskes@postgresql.org>`). Originally it was written to work with C. It also works with C++, but it does not recognize all C++ constructs yet.
 

@@ -8,7 +8,7 @@
 
 ## H.1. Client Interfaces [#](#EXTERNAL-INTERFACES)
 
-[]()
+
 
 There are only two client interfaces included in the base PostgreSQL distribution:
 

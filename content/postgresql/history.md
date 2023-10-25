@@ -12,13 +12,13 @@
     *   [2.2. Postgres95](history.html#HISTORY-POSTGRES95)
     *   [2.3. PostgreSQL](history.html#HISTORY-POSTGRESQL)
 
-[]()
+
 
 The object-relational database management system now known as PostgreSQL is derived from the POSTGRES package written at the University of California at Berkeley. With decades of development behind it, PostgreSQL is now the most advanced open-source database available anywhere.
 
 ### 2.1. The Berkeley POSTGRES Project [#](#HISTORY-BERKELEY)
 
-[]()
+
 
 The POSTGRES project, led by Professor Michael Stonebraker, was sponsored by the Defense Advanced Research Projects Agency (DARPA), the Army Research Office (ARO), the National Science Foundation (NSF), and ESL, Inc. The implementation of POSTGRES began in 1986. The initial concepts for the system were presented in [\[ston86\]](biblio.html#STON86), and the definition of the initial data model appeared in [\[rowe87\]](biblio.html#ROWE87). The design of the rule system at that time was described in [\[ston87a\]](biblio.html#STON87A). The rationale and architecture of the storage manager were detailed in [\[ston87b\]](biblio.html#STON87B).
 
@@ -30,7 +30,7 @@ The size of the external user community nearly doubled during 1993. It became in
 
 ### 2.2. Postgres95 [#](#HISTORY-POSTGRES95)
 
-[]()
+
 
 In 1994, Andrew Yu and Jolly Chen added an SQL language interpreter to POSTGRES. Under a new name, Postgres95 was subsequently released to the web to find its own way in the world as an open-source descendant of the original POSTGRES Berkeley code.
 

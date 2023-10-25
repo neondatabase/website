@@ -8,7 +8,7 @@
 
 ## 53.12. `pg_collation` [#](#CATALOG-PG-COLLATION)
 
-[]()
+
 
 The catalog `pg_collation` describes the available collations, which are essentially mappings from an SQL name to operating system locale categories. See [Section 24.2](collation.html "24.2. Collation Support") for more information.
 

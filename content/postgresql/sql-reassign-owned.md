@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## REASSIGN OWNED
 

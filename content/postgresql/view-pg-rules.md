@@ -8,7 +8,7 @@
 
 ## 54.21. `pg_rules` [#](#VIEW-PG-RULES)
 
-[]()
+
 
 The view `pg_rules` provides access to useful information about query rewrite rules.
 

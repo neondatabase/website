@@ -31,7 +31,7 @@
 *   *   [35.4. Server-Side Functions](lo-funcs.html)
     *   [35.5. Example Program](lo-examplesect.html)
 
-[]()[]()
+
 
 PostgreSQL has a *large object* facility, which provides stream-style access to user data that is stored in a special large-object structure. Streaming access is useful when working with data values that are too large to manipulate conveniently as a whole.
 

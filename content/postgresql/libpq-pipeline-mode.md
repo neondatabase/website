@@ -12,7 +12,7 @@
     *   [34.5.2. Functions Associated with Pipeline Mode](libpq-pipeline-mode.html#LIBPQ-PIPELINE-FUNCTIONS)
     *   [34.5.3. When to Use Pipeline Mode](libpq-pipeline-mode.html#LIBPQ-PIPELINE-TIPS)
 
-[]()[]()[]()
+
 
 libpq pipeline mode allows applications to send a query without having to read the result of the previously sent query. Taking advantage of the pipeline mode, a client will wait less for the server, since multiple queries/results can be sent/received in a single network transaction.
 
@@ -74,7 +74,7 @@ An example using `select()` and a simple state machine to track sent and receive
 
 ### 34.5.2. Functions Associated with Pipeline Mode [#](#LIBPQ-PIPELINE-FUNCTIONS)
 
-*   `PQpipelineStatus`[]() [#](#LIBPQ-PQPIPELINESTATUS)
+*   `PQpipelineStatus` [#](#LIBPQ-PQPIPELINESTATUS)
 
     Returns the current pipeline mode status of the libpq connection.
 
@@ -97,7 +97,7 @@ An example using `select()` and a simple state machine to track sent and receive
 
         The libpq connection is in pipeline mode and an error occurred while processing the current pipeline. The aborted flag is cleared when `PQgetResult` returns a result of type `PGRES_PIPELINE_SYNC`.
 
-*   `PQenterPipelineMode`[]() [#](#LIBPQ-PQENTERPIPELINEMODE)
+*   `PQenterPipelineMode` [#](#LIBPQ-PQENTERPIPELINEMODE)
 
     Causes a connection to enter pipeline mode if it is currently idle or already in pipeline mode.
 
@@ -108,7 +108,7 @@ An example using `select()` and a simple state machine to track sent and receive
 
     Returns 1 for success. Returns 0 and has no effect if the connection is not currently idle, i.e., it has a result ready, or it is waiting for more input from the server, etc. This function does not actually send anything to the server, it just changes the libpq connection state.
 
-*   `PQexitPipelineMode`[]() [#](#LIBPQ-PQEXITPIPELINEMODE)
+*   `PQexitPipelineMode` [#](#LIBPQ-PQEXITPIPELINEMODE)
 
     Causes a connection to exit pipeline mode if it is currently in pipeline mode with an empty queue and no pending results.
 
@@ -119,7 +119,7 @@ An example using `select()` and a simple state machine to track sent and receive
 
     Returns 1 for success. Returns 1 and takes no action if not in pipeline mode. If the current statement isn't finished processing, or `PQgetResult` has not been called to collect results from all previously sent query, returns 0 (in which case, use [`PQerrorMessage`](libpq-status.html#LIBPQ-PQERRORMESSAGE) to get more information about the failure).
 
-*   `PQpipelineSync`[]() [#](#LIBPQ-PQPIPELINESYNC)
+*   `PQpipelineSync` [#](#LIBPQ-PQPIPELINESYNC)
 
     Marks a synchronization point in a pipeline by sending a [sync message](protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY "55.2.3. Extended Query") and flushing the send buffer. This serves as the delimiter of an implicit transaction and an error recovery point; see [Section 34.5.1.3](libpq-pipeline-mode.html#LIBPQ-PIPELINE-ERRORS "34.5.1.3. Error Handling").
 
@@ -130,7 +130,7 @@ An example using `select()` and a simple state machine to track sent and receive
 
     Returns 1 for success. Returns 0 if the connection is not in pipeline mode or sending a [sync message](protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY "55.2.3. Extended Query") failed.
 
-*   `PQsendFlushRequest`[]() [#](#LIBPQ-PQSENDFLUSHREQUEST)
+*   `PQsendFlushRequest` [#](#LIBPQ-PQSENDFLUSHREQUEST)
 
     Sends a request for the server to flush its output buffer.
 

@@ -13,7 +13,7 @@
     *   [F.2.3. Using `amcheck` Effectively](amcheck.html#AMCHECK-USING-AMCHECK-EFFECTIVELY)
     *   [F.2.4. Repairing Corruption](amcheck.html#AMCHECK-REPAIRING-CORRUPTION)
 
-[]()
+
 
 The `amcheck` module provides functions that allow you to verify the logical consistency of the structure of relations.
 
@@ -27,7 +27,7 @@ Permission to execute `amcheck` functions may be granted to non-superusers, but 
 
 ### F.2.1. Functions [#](#AMCHECK-FUNCTIONS)
 
-*   `bt_index_check(index regclass, heapallindexed boolean) returns void`[]()
+*   `bt_index_check(index regclass, heapallindexed boolean) returns void`
 
     `bt_index_check` tests that its target, a B-Tree index, respects a variety of invariants. Example usage:
 
@@ -66,7 +66,7 @@ Permission to execute `amcheck` functions may be granted to non-superusers, but 
 
     `bt_index_check` acquires an `AccessShareLock` on the target index and the heap relation it belongs to. This lock mode is the same lock mode acquired on relations by simple `SELECT` statements. `bt_index_check` does not verify invariants that span child/parent relationships, but will verify the presence of all heap tuples as index tuples within the index when *`heapallindexed`* is `true`. When a routine, lightweight test for corruption is required in a live production environment, using `bt_index_check` often provides the best trade-off between thoroughness of verification and limiting the impact on application performance and availability.
 
-*   `bt_index_parent_check(index regclass, heapallindexed boolean, rootdescend boolean) returns void`[]()
+*   `bt_index_parent_check(index regclass, heapallindexed boolean, rootdescend boolean) returns void`
 
     `bt_index_parent_check` tests that its target, a B-Tree index, respects a variety of invariants. Optionally, when the *`heapallindexed`* argument is `true`, the function verifies the presence of all heap tuples that should be found within the index. When the optional *`rootdescend`* argument is `true`, verification re-finds tuples on the leaf level by performing a new search from the root page for each tuple. The checks that can be performed by `bt_index_parent_check` are a superset of the checks that can be performed by `bt_index_check`. `bt_index_parent_check` can be thought of as a more thorough variant of `bt_index_check`: unlike `bt_index_check`, `bt_index_parent_check` also checks invariants that span parent/child relationships, including checking that there are no missing downlinks in the index structure. `bt_index_parent_check` follows the general convention of raising an error if it finds a logical inconsistency or other problem.
 

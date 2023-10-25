@@ -8,7 +8,7 @@
 
 ## Appendix C. SQL Key Words
 
-[]()
+
 
 [Table C.1](sql-keywords-appendix.html#KEYWORDS-TABLE "Table C.1. SQL Key Words") lists all tokens that are key words in the SQL standard and in PostgreSQL 17devel. Background information can be found in [Section 4.1.1](sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS "4.1.1. Identifiers and Key Words"). (For space reasons, only the latest two versions of the SQL standard, and SQL-92 for historical comparison, are included. The differences between those and the other intermediate standard versions are small.)
 

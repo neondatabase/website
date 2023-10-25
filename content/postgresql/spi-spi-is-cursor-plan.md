@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## SPI\_is\_cursor\_plan
 

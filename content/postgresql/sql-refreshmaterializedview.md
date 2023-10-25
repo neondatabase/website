@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## REFRESH MATERIALIZED VIEW
 

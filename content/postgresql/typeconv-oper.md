@@ -8,7 +8,7 @@
 
 ## 10.2. Operators [#](#TYPECONV-OPER)
 
-[]()
+
 
 The specific operator that is referenced by an operator expression is determined using the following procedure. Note that this procedure is indirectly affected by the precedence of the operators involved, since that will determine which sub-expressions are taken to be the inputs of which operators. See [Section 4.1.6](sql-syntax-lexical.html#SQL-PRECEDENCE "4.1.6. Operator Precedence") for more information.
 

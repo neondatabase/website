@@ -11,7 +11,7 @@
 *   *   [F.3.1. Configuration Parameters](auth-delay.html#AUTH-DELAY-CONFIGURATION-PARAMETERS)
     *   [F.3.2. Author](auth-delay.html#AUTH-DELAY-AUTHOR)
 
-[]()
+
 
 `auth_delay` causes the server to pause briefly before reporting authentication failure, to make brute-force attacks on database passwords more difficult. Note that it does nothing to prevent denial-of-service attacks, and may even exacerbate them, since processes that are waiting before reporting authentication failure will still consume connection slots.
 
@@ -19,7 +19,7 @@ In order to function, this module must be loaded via [shared\_preload\_libraries
 
 ### F.3.1. Configuration Parameters [#](#AUTH-DELAY-CONFIGURATION-PARAMETERS)
 
-*   `auth_delay.milliseconds` (`integer`)[]()
+*   `auth_delay.milliseconds` (`integer`)
 
     The number of milliseconds to wait before reporting an authentication failure. The default is 0.
 

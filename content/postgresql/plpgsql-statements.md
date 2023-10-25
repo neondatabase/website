@@ -85,7 +85,7 @@ PERFORM create_mv('cs_session_page_requests_mv', my_query);
 
 ### 43.5.3. Executing a Command with a Single-Row Result [#](#PLPGSQL-STATEMENTS-SQL-ONEROW)
 
-[]()[]()
+
 
 The result of an SQL command yielding a single row (possibly of multiple columns) can be assigned to a record variable, row-type variable, or list of scalar variables. This is done by writing the base SQL command and adding an `INTO` clause. For example,
 
@@ -228,7 +228,7 @@ The PL/pgSQL `EXECUTE` statement is not related to the [`EXECUTE`](sql-execute.h
 
 **Example 43.1. Quoting Values in Dynamic Queries**
 
-[]()[]()[]()[]()
+
 
 When working with dynamic commands you will often have to handle escaping of single quotes. The recommended method for quoting fixed text in your function body is dollar quoting. (If you have legacy code that does not use dollar quoting, please refer to the overview in [Section 43.12.1](plpgsql-development-tips.html#PLPGSQL-QUOTE-TIPS "43.12.1. Handling of Quotation Marks"), which can save you some effort when translating said code to a more reasonable scheme.)
 

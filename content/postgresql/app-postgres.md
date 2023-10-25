@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## postgres
 
@@ -150,7 +150,7 @@ The options described here are used mainly for debugging purposes, and in some c
 
 ### Options for Single-User Mode
 
-[]()
+
 
 The following options only apply to the single-user mode (see [Single-User Mode](app-postgres.html#APP-POSTGRES-SINGLE-USER "Single-User Mode") below).
 

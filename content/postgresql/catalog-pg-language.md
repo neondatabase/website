@@ -8,7 +8,7 @@
 
 ## 53.29. `pg_language` [#](#CATALOG-PG-LANGUAGE)
 
-[]()
+
 
 The catalog `pg_language` registers languages in which you can write functions or stored procedures. See [CREATE LANGUAGE](sql-createlanguage.html "CREATE LANGUAGE") and [Chapter 42](xplang.html "Chapter 42. Procedural Languages") for more information about language handlers.
 

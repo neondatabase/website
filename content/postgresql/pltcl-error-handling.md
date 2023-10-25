@@ -8,7 +8,7 @@
 
 ## 44.8. Error Handling in PL/Tcl [#](#PLTCL-ERROR-HANDLING)
 
-[]()
+
 
 Tcl code within or called from a PL/Tcl function can raise an error, either by executing some invalid operation or by generating an error using the Tcl `error` command or PL/Tcl's `elog` command. Such errors can be caught within Tcl using the Tcl `catch` command. If an error is not caught but is allowed to propagate out to the top level of execution of the PL/Tcl function, it is reported as an SQL error in the function's calling query.
 

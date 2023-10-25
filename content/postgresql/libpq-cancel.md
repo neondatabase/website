@@ -8,11 +8,11 @@
 
 ## 34.7. Canceling Queries in Progress [#](#LIBPQ-CANCEL)
 
-[]()
+
 
 A client application can request cancellation of a command that is still being processed by the server, using the functions described in this section.
 
-*   `PQgetCancel`[]() [#](#LIBPQ-PQGETCANCEL)
+*   `PQgetCancel` [#](#LIBPQ-PQGETCANCEL)
 
     Creates a data structure containing the information needed to cancel a command issued through a particular database connection.
 
@@ -21,9 +21,9 @@ A client application can request cancellation of a command that is still being p
     PGcancel *PQgetCancel(PGconn *conn);
     ```
 
-    [`PQgetCancel`](libpq-cancel.html#LIBPQ-PQGETCANCEL) creates a `PGcancel`[]() object given a `PGconn` connection object. It will return `NULL` if the given *`conn`* is `NULL` or an invalid connection. The `PGcancel` object is an opaque structure that is not meant to be accessed directly by the application; it can only be passed to [`PQcancel`](libpq-cancel.html#LIBPQ-PQCANCEL) or [`PQfreeCancel`](libpq-cancel.html#LIBPQ-PQFREECANCEL).
+    [`PQgetCancel`](libpq-cancel.html#LIBPQ-PQGETCANCEL) creates a `PGcancel` object given a `PGconn` connection object. It will return `NULL` if the given *`conn`* is `NULL` or an invalid connection. The `PGcancel` object is an opaque structure that is not meant to be accessed directly by the application; it can only be passed to [`PQcancel`](libpq-cancel.html#LIBPQ-PQCANCEL) or [`PQfreeCancel`](libpq-cancel.html#LIBPQ-PQFREECANCEL).
 
-*   `PQfreeCancel`[]() [#](#LIBPQ-PQFREECANCEL)
+*   `PQfreeCancel` [#](#LIBPQ-PQFREECANCEL)
 
     Frees a data structure created by [`PQgetCancel`](libpq-cancel.html#LIBPQ-PQGETCANCEL).
 
@@ -34,7 +34,7 @@ A client application can request cancellation of a command that is still being p
 
     [`PQfreeCancel`](libpq-cancel.html#LIBPQ-PQFREECANCEL) frees a data object previously created by [`PQgetCancel`](libpq-cancel.html#LIBPQ-PQGETCANCEL).
 
-*   `PQcancel`[]() [#](#LIBPQ-PQCANCEL)
+*   `PQcancel` [#](#LIBPQ-PQCANCEL)
 
     Requests that the server abandon processing of the current command.
 
@@ -51,7 +51,7 @@ A client application can request cancellation of a command that is still being p
 
 <!---->
 
-*   `PQrequestCancel`[]() [#](#LIBPQ-PQREQUESTCANCEL)
+*   `PQrequestCancel` [#](#LIBPQ-PQREQUESTCANCEL)
 
     [`PQrequestCancel`](libpq-cancel.html#LIBPQ-PQREQUESTCANCEL) is a deprecated variant of [`PQcancel`](libpq-cancel.html#LIBPQ-PQCANCEL).
 

@@ -15,7 +15,7 @@
 
 This section lists configuration parameters that affect PL/Perl.
 
-*   `plperl.on_init` (`string`) []()[#](#GUC-PLPERL-ON-INIT)
+*   `plperl.on_init` (`string`) [#](#GUC-PLPERL-ON-INIT)
 
     Specifies Perl code to be executed when a Perl interpreter is first initialized, before it is specialized for use by `plperl` or `plperlu`. The SPI functions are not available when this code is executed. If the code fails with an error it will abort the initialization of the interpreter and propagate out to the calling query, causing the current transaction or subtransaction to be aborted.
 
@@ -38,7 +38,7 @@ This section lists configuration parameters that affect PL/Perl.
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-*   `plperl.on_plperl_init` (`string`)[]()`plperl.on_plperlu_init` (`string`) []()[#](#GUC-PLPERL-ON-PLPERL-INIT)
+*   `plperl.on_plperl_init` (`string`)`plperl.on_plperlu_init` (`string`) [#](#GUC-PLPERL-ON-PLPERL-INIT)
 
     These parameters specify Perl code to be executed when a Perl interpreter is specialized for `plperl` or `plperlu` respectively. This will happen when a PL/Perl or PL/PerlU function is first executed in a database session, or when an additional interpreter has to be created because the other language is called or a PL/Perl function is called by a new SQL role. This follows any initialization done by `plperl.on_init`. The SPI functions are not available when this code is executed. The Perl code in `plperl.on_plperl_init` is executed after “locking down” the interpreter, and thus it can only perform trusted operations.
 
@@ -46,7 +46,7 @@ This section lists configuration parameters that affect PL/Perl.
 
     Only superusers can change these settings. Although these settings can be changed within a session, such changes will not affect Perl interpreters that have already been used to execute functions.
 
-*   `plperl.use_strict` (`boolean`) []()[#](#GUC-PLPERL-USE-STRICT)
+*   `plperl.use_strict` (`boolean`) [#](#GUC-PLPERL-USE-STRICT)
 
     When set true subsequent compilations of PL/Perl functions will have the `strict` pragma enabled. This parameter does not affect functions already compiled in the current session.
 

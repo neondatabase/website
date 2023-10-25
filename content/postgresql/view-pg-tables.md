@@ -8,7 +8,7 @@
 
 ## 54.30. `pg_tables` [#](#VIEW-PG-TABLES)
 
-[]()
+
 
 The view `pg_tables` provides access to useful information about each table in the database.
 

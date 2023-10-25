@@ -8,7 +8,7 @@
 
 ## 8.6. Boolean Type [#](#DATATYPE-BOOLEAN)
 
-[]()[]()[]()
+
 
 PostgreSQL provides the standard SQL type `boolean`; see [Table 8.19](datatype-boolean.html#DATATYPE-BOOLEAN-TABLE "Table 8.19. Boolean Data Type"). The `boolean` type can have several states: “true”, “false”, and a third state, “unknown”, which is represented by the SQL null value.
 

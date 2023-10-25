@@ -8,7 +8,7 @@
 
 ## 19.11. Secure TCP/IP Connections with SSH Tunnels [#](#SSH-TUNNELS)
 
-[]()
+
 
 It is possible to use SSH to encrypt the network connection between clients and a PostgreSQL server. Done properly, this provides an adequately secure network connection, even for non-SSL-capable clients.
 

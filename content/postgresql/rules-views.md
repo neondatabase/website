@@ -13,7 +13,7 @@
     *   [41.2.3. The Power of Views in PostgreSQL](rules-views.html#RULES-VIEWS-POWER)
     *   [41.2.4. Updating a View](rules-views.html#RULES-VIEWS-UPDATE)
 
-[]()[]()
+
 
 Views in PostgreSQL are implemented using the rule system. A view is basically an empty table (having no actual storage) with an `ON SELECT DO INSTEAD` rule. Conventionally, that rule is named `_RETURN`. So a view like
 
@@ -37,7 +37,7 @@ A view can also have other kinds of `DO INSTEAD` rules, allowing `INSERT`, `UPDA
 
 ### 41.2.1. How `SELECT` Rules Work [#](#RULES-SELECT)
 
-[]()
+
 
 Rules `ON SELECT` are applied to all queries as the last step, even if the command given is an `INSERT`, `UPDATE` or `DELETE`. And they have different semantics from rules on the other command types in that they modify the query tree in place instead of creating a new one. So `SELECT` rules are described first.
 
@@ -315,7 +315,7 @@ SELECT t1.a, t2.b FROM t1, t2 WHERE t1.a = t2.a;
 
 But there is a little problem in `UPDATE`: the part of the executor plan that does the join does not care what the results from the join are meant for. It just produces a result set of rows. The fact that one is a `SELECT` command and the other is an `UPDATE` is handled higher up in the executor, where it knows that this is an `UPDATE`, and it knows that this result should go into table `t1`. But which of the rows that are there has to be replaced by the new row?
 
-To resolve this problem, another entry is added to the target list in `UPDATE` (and also in `DELETE`) statements: the current tuple ID (CTID).[]() This is a system column containing the file block number and position in the block for the row. Knowing the table, the CTID can be used to retrieve the original row of `t1` to be updated. After adding the CTID to the target list, the query actually looks like:
+To resolve this problem, another entry is added to the target list in `UPDATE` (and also in `DELETE`) statements: the current tuple ID (CTID). This is a system column containing the file block number and position in the block for the row. Knowing the table, the CTID can be used to retrieve the original row of `t1` to be updated. After adding the CTID to the target list, the query actually looks like:
 
 ```
 

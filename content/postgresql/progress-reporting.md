@@ -19,7 +19,7 @@ PostgreSQL has the ability to report the progress of certain commands during com
 
 ### 28.4.1. ANALYZE Progress Reporting [#](#ANALYZE-PROGRESS-REPORTING)
 
-[]()
+
 
 Whenever `ANALYZE` is running, the `pg_stat_progress_analyze` view will contain a row for each backend that is currently running that command. The tables below describe the information that will be reported and provide information about how to interpret it.
 
@@ -63,7 +63,7 @@ Note that when `ANALYZE` is run on a partitioned table, all of its partitions ar
 
 ### 28.4.2. CLUSTER Progress Reporting [#](#CLUSTER-PROGRESS-REPORTING)
 
-[]()
+
 
 Whenever `CLUSTER` or `VACUUM FULL` is running, the `pg_stat_progress_cluster` view will contain a row for each backend that is currently running either command. The tables below describe the information that will be reported and provide information about how to interpret it.
 
@@ -102,7 +102,7 @@ Whenever `CLUSTER` or `VACUUM FULL` is running, the `pg_stat_progress_cluster` v
 
 ### 28.4.3. COPY Progress Reporting [#](#COPY-PROGRESS-REPORTING)
 
-[]()
+
 
 Whenever `COPY` is running, the `pg_stat_progress_copy` view will contain one row for each backend that is currently running a `COPY` command. The table below describes the information that will be reported and provides information about how to interpret it.
 
@@ -123,7 +123,7 @@ Whenever `COPY` is running, the `pg_stat_progress_copy` view will contain one ro
 
 ### 28.4.4. CREATE INDEX Progress Reporting [#](#CREATE-INDEX-PROGRESS-REPORTING)
 
-[]()
+
 
 Whenever `CREATE INDEX` or `REINDEX` is running, the `pg_stat_progress_create_index` view will contain one row for each backend that is currently creating indexes. The tables below describe the information that will be reported and provide information about how to interpret it.
 
@@ -168,7 +168,7 @@ Whenever `CREATE INDEX` or `REINDEX` is running, the `pg_stat_progress_create_in
 
 ### 28.4.5. VACUUM Progress Reporting [#](#VACUUM-PROGRESS-REPORTING)
 
-[]()
+
 
 Whenever `VACUUM` is running, the `pg_stat_progress_vacuum` view will contain one row for each backend (including autovacuum worker processes) that is currently vacuuming. The tables below describe the information that will be reported and provide information about how to interpret it. Progress for `VACUUM FULL` commands is reported via `pg_stat_progress_cluster` because both `VACUUM FULL` and `CLUSTER` rewrite the table, while regular `VACUUM` only modifies it in place. See [Section 28.4.2](progress-reporting.html#CLUSTER-PROGRESS-REPORTING "28.4.2. CLUSTER Progress Reporting").
 
@@ -207,7 +207,7 @@ Whenever `VACUUM` is running, the `pg_stat_progress_vacuum` view will contain on
 
 ### 28.4.6. Base Backup Progress Reporting [#](#BASEBACKUP-PROGRESS-REPORTING)
 
-[]()
+
 
 Whenever an application like pg\_basebackup is taking a base backup, the `pg_stat_progress_basebackup` view will contain a row for each WAL sender process that is currently running the `BASE_BACKUP` replication command and streaming the backup. The tables below describe the information that will be reported and provide information about how to interpret it.
 

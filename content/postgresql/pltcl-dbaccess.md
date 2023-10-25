@@ -42,7 +42,7 @@ In this section, we follow the usual Tcl convention of using question marks, rat
 
 *   `spi_prepare` *`query`* *`typelist`*
 
-    Prepares and saves a query plan for later execution. The saved plan will be retained for the life of the current session.[]()
+    Prepares and saves a query plan for later execution. The saved plan will be retained for the life of the current session.
 
     The query can use parameters, that is, placeholders for values to be supplied whenever the plan is actually executed. In the query string, refer to parameters by the symbols `$1` ... `$n`. If the query uses parameters, the names of the parameter types must be given as a Tcl list. (Write an empty list for *`typelist`* if no parameters are used.)
 
@@ -110,7 +110,7 @@ In this section, we follow the usual Tcl convention of using question marks, rat
 
     One advantage of `spi_execp` is that you don't have to quote parameter values like this, since the parameters are never parsed as part of an SQL command string.
 
-*   `elog` *`level`* *`msg`*[]()
+*   `elog` *`level`* *`msg`*
 
     Emits a log or error message. Possible levels are `DEBUG`, `LOG`, `INFO`, `NOTICE`, `WARNING`, `ERROR`, and `FATAL`. `ERROR` raises an error condition; if this is not trapped by the surrounding Tcl code, the error propagates out to the calling query, causing the current transaction or subtransaction to be aborted. This is effectively the same as the Tcl `error` command. `FATAL` aborts the transaction and causes the current session to shut down. (There is probably no good reason to use this error level in PL/Tcl functions, but it's provided for completeness.) The other levels only generate messages of different priority levels. Whether messages of a particular priority are reported to the client, written to the server log, or both is controlled by the [log\_min\_messages](runtime-config-logging.html#GUC-LOG-MIN-MESSAGES) and [client\_min\_messages](runtime-config-client.html#GUC-CLIENT-MIN-MESSAGES) configuration variables. See [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") and [Section 44.8](pltcl-error-handling.html "44.8. Error Handling in PL/Tcl") for more information.
 

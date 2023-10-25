@@ -15,7 +15,7 @@
     *   [25.1.5. Preventing Transaction ID Wraparound Failures](routine-vacuuming.html#VACUUM-FOR-WRAPAROUND)
     *   [25.1.6. The Autovacuum Daemon](routine-vacuuming.html#AUTOVACUUM)
 
-[]()
+
 
 PostgreSQL databases require periodic maintenance known as *vacuuming*. For many installations, it is sufficient to let vacuuming be performed by the *autovacuum daemon*, which is described in [Section 25.1.6](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon"). You might need to adjust the autovacuuming parameters described there to obtain best results for your situation. Some database administrators will want to supplement or replace the daemon's activities with manually-managed `VACUUM` commands, which typically are executed according to a schedule by cron or Task Scheduler scripts. To set up manually-managed vacuuming properly, it is essential to understand the issues discussed in the next few subsections. Administrators who rely on autovacuuming may still wish to skim this material to help them understand and adjust autovacuuming.
 
@@ -36,7 +36,7 @@ There are two variants of `VACUUM`: standard `VACUUM` and `VACUUM FULL`. `VACUUM
 
 ### 25.1.2. Recovering Disk Space [#](#VACUUM-FOR-SPACE-RECOVERY)
 
-[]()
+
 
 In PostgreSQL, an `UPDATE` or `DELETE` of a row does not immediately remove the old version of the row. This approach is necessary to gain the benefits of multiversion concurrency control (MVCC, see [Chapter 13](mvcc.html "Chapter 13. Concurrency Control")): the row version must not be deleted while it is still potentially visible to other transactions. But eventually, an outdated or deleted row version is no longer of interest to any transaction. The space it occupies must then be reclaimed for reuse by new rows, to avoid unbounded growth of disk space requirements. This is done by running `VACUUM`.
 
@@ -58,7 +58,7 @@ If you have a table whose entire contents are deleted on a periodic basis, consi
 
 ### 25.1.3. Updating Planner Statistics [#](#VACUUM-FOR-STATISTICS)
 
-[]()[]()
+
 
 The PostgreSQL query planner relies on statistical information about the contents of tables in order to generate good plans for queries. These statistics are gathered by the [`ANALYZE`](sql-analyze.html "ANALYZE") command, which can be invoked by itself or as an optional step in `VACUUM`. It is important to have reasonably accurate statistics, otherwise poor choices of plans might degrade database performance.
 
@@ -92,7 +92,7 @@ Second, it allows PostgreSQL to answer some queries using only the index, withou
 
 ### 25.1.5. Preventing Transaction ID Wraparound Failures [#](#VACUUM-FOR-WRAPAROUND)
 
-[]()[]()
+
 
 PostgreSQL's [MVCC](mvcc-intro.html "13.1. Introduction") transaction semantics depend on being able to compare transaction ID (XID) numbers: a row version with an insertion XID greater than the current transaction's XID is “in the future” and should not be visible to the current transaction. But since transaction IDs have limited size (32 bits) a cluster that runs for a long time (more than 4 billion transactions) would suffer *transaction ID wraparound*: the XID counter wraps around to zero, and all of a sudden transactions that were in the past appear to be in the future — which means their output become invisible. In short, catastrophic data loss. (Actually the data is still there, but that's cold comfort if you cannot get at it.) To avoid this, it is necessary to vacuum every table in every database at least once every two billion transactions.
 
@@ -169,7 +169,7 @@ In earlier versions, it was sometimes necessary to stop the postmaster and `VACU
 
 #### 25.1.5.1. Multixacts and Wraparound [#](#VACUUM-FOR-MULTIXACT-WRAPAROUND)
 
-[]()[]()
+
 
 *Multixact IDs* are used to support row locking by multiple transactions. Since there is only limited space in a tuple header to store lock information, that information is encoded as a “multiple transaction ID”, or multixact ID for short, whenever there is more than one transaction concurrently locking a row. Information about which transaction IDs are included in any particular multixact ID is stored separately in the `pg_multixact` subdirectory, and only the multixact ID appears in the `xmax` field in the tuple header. Like transaction IDs, multixact IDs are implemented as a 32-bit counter and corresponding storage, all of which requires careful aging management, storage cleanup, and wraparound handling. There is a separate storage area which holds the list of members in each multixact, which also uses a 32-bit counter and which must also be managed.
 
@@ -189,7 +189,7 @@ Normal operation when MXIDs are exhausted can be restored in much the same way a
 
 ### 25.1.6. The Autovacuum Daemon [#](#AUTOVACUUM)
 
-[]()
+
 
 PostgreSQL has an optional but highly recommended feature called *autovacuum*, whose purpose is to automate the execution of `VACUUM` and `ANALYZE` commands. When enabled, autovacuum checks for tables that have had a large number of inserted, updated or deleted tuples. These checks use the statistics collection facility; therefore, autovacuum cannot be used unless [track\_counts](runtime-config-statistics.html#GUC-TRACK-COUNTS) is set to `true`. In the default configuration, autovacuuming is enabled and the related configuration parameters are appropriately set.
 

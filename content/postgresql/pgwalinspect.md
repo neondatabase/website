@@ -11,7 +11,7 @@
 *   *   [F.36.1. General Functions](pgwalinspect.html#PGWALINSPECT-FUNCS)
     *   [F.36.2. Author](pgwalinspect.html#PGWALINSPECT-AUTHOR)
 
-[]()
+
 
 The `pg_walinspect` module provides SQL functions that allow you to inspect the contents of write-ahead log of a running PostgreSQL database cluster at a low level, which is useful for debugging, analytical, reporting or educational purposes. It is similar to [pg\_waldump](pgwaldump.html "pg_waldump"), but accessible through SQL rather than a separate utility.
 

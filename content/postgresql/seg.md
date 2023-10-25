@@ -15,7 +15,7 @@
     *   [F.38.5. Notes](seg.html#SEG-NOTES)
     *   [F.38.6. Credits](seg.html#SEG-CREDITS)
 
-[]()
+
 
 This module implements a data type `seg` for representing line segments, or floating point intervals. `seg` can represent uncertainty in the interval endpoints, making it especially useful for representing laboratory measurements.
 

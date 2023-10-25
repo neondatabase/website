@@ -8,7 +8,7 @@
 
 ## 1.4. Accessing a Database [#](#TUTORIAL-ACCESSDB)
 
-[]()
+
 
 Once you have created a database, you can access it by:
 
@@ -35,7 +35,7 @@ Type "help" for help.
 mydb=>
 ```
 
-[]()The last line could also be:
+The last line could also be:
 
 ```
 
@@ -46,7 +46,7 @@ That would mean you are a database superuser, which is most likely the case if y
 
 If you encounter problems starting `psql` then go back to the previous section. The diagnostics of `createdb` and `psql` are similar, and if the former worked the latter should work as well.
 
-The last line printed out by `psql` is the prompt, and it indicates that `psql` is listening to you and that you can type SQL queries into a work space maintained by `psql`. Try out these commands:[]()
+The last line printed out by `psql` is the prompt, and it indicates that `psql` is listening to you and that you can type SQL queries into a work space maintained by `psql`. Try out these commands:
 
 ```
 

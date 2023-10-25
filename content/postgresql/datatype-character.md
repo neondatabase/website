@@ -8,7 +8,7 @@
 
 ## 8.3. Character Types [#](#DATATYPE-CHARACTER)
 
-[]()[]()[]()[]()[]()[]()[]()[]()
+
 
 **Table 8.4. Character Types**
 

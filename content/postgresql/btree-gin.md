@@ -11,7 +11,7 @@
 *   *   [F.8.1. Example Usage](btree-gin.html#BTREE-GIN-EXAMPLE-USAGE)
     *   [F.8.2. Authors](btree-gin.html#BTREE-GIN-AUTHORS)
 
-[]()
+
 
 `btree_gin` provides GIN operator classes that implement B-tree equivalent behavior for the data types `int2`, `int4`, `int8`, `float4`, `float8`, `timestamp with time zone`, `timestamp without time zone`, `time with time zone`, `time without time zone`, `date`, `interval`, `oid`, `money`, `"char"`, `varchar`, `text`, `bytea`, `bit`, `varbit`, `macaddr`, `macaddr8`, `inet`, `cidr`, `uuid`, `name`, `bool`, `bpchar`, and all `enum` types.
 

@@ -8,7 +8,7 @@
 
 ## Chapter 58. Writing a Procedural Language Handler
 
-[]()
+
 
 All calls to functions that are written in a language other than the current “version 1” interface for compiled languages (this includes functions in user-defined procedural languages and functions written in SQL) go through a *call handler* function for the specific language. It is the responsibility of the call handler to execute the function in a meaningful way, such as by interpreting the supplied source text. This chapter outlines how a new procedural language's call handler can be written.
 

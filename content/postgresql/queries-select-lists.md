@@ -12,13 +12,13 @@
     *   [7.3.2. Column Labels](queries-select-lists.html#QUERIES-COLUMN-LABELS)
     *   [7.3.3. `DISTINCT`](queries-select-lists.html#QUERIES-DISTINCT)
 
-[]()
+
 
 As shown in the previous section, the table expression in the `SELECT` command constructs an intermediate virtual table by possibly combining tables, views, eliminating rows, grouping, etc. This table is finally passed on to processing by the *select list*. The select list determines which *columns* of the intermediate table are actually output.
 
 ### 7.3.1. Select-List Items [#](#QUERIES-SELECT-LIST-ITEMS)
 
-[]()
+
 
 The simplest kind of select list is `*` which emits all columns that the table expression produces. Otherwise, a select list is a comma-separated list of value expressions (as defined in [Section 4.2](sql-expressions.html "4.2. Value Expressions")). For instance, it could be a list of column names:
 
@@ -49,7 +49,7 @@ If an arbitrary value expression is used in the select list, it conceptually add
 
 ### 7.3.2. Column Labels [#](#QUERIES-COLUMN-LABELS)
 
-[]()
+
 
 The entries in the select list can be assigned names for subsequent processing, such as for use in an `ORDER BY` clause or for display by the client application. For example:
 
@@ -83,7 +83,7 @@ The naming of output columns here is different from that done in the `FROM` clau
 
 ### 7.3.3. `DISTINCT` [#](#QUERIES-DISTINCT)
 
-[]()[]()[]()
+
 
 After the select list has been processed, the result table can optionally be subject to the elimination of duplicate rows. The `DISTINCT` key word is written directly after `SELECT` to specify this:
 
@@ -94,7 +94,7 @@ SELECT DISTINCT select_list ...
 
 (Instead of `DISTINCT` the key word `ALL` can be used to specify the default behavior of retaining all rows.)
 
-[]()
+
 
 Obviously, two rows are considered distinct if they differ in at least one column value. Null values are considered equal in this comparison.
 

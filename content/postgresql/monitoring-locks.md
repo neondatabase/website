@@ -8,7 +8,7 @@
 
 ## 28.3. Viewing Locks [#](#MONITORING-LOCKS)
 
-[]()
+
 
 Another useful tool for monitoring database activity is the `pg_locks` system table. It allows the database administrator to view information about the outstanding locks in the lock manager. For example, this capability can be used to:
 

@@ -11,7 +11,7 @@
 *   *   [34.1.1. Connection Strings](libpq-connect.html#LIBPQ-CONNSTRING)
     *   [34.1.2. Parameter Key Words](libpq-connect.html#LIBPQ-PARAMKEYWORDS)
 
-The following functions deal with making a connection to a PostgreSQL backend server. An application program can have several backend connections open at one time. (One reason to do that is to access more than one database.) Each connection is represented by a `PGconn`[]() object, which is obtained from the function [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB), [`PQconnectdbParams`](libpq-connect.html#LIBPQ-PQCONNECTDBPARAMS), or [`PQsetdbLogin`](libpq-connect.html#LIBPQ-PQSETDBLOGIN). Note that these functions will always return a non-null object pointer, unless perhaps there is too little memory even to allocate the `PGconn` object. The [`PQstatus`](libpq-status.html#LIBPQ-PQSTATUS) function should be called to check the return value for a successful connection before queries are sent via the connection object.
+The following functions deal with making a connection to a PostgreSQL backend server. An application program can have several backend connections open at one time. (One reason to do that is to access more than one database.) Each connection is represented by a `PGconn` object, which is obtained from the function [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB), [`PQconnectdbParams`](libpq-connect.html#LIBPQ-PQCONNECTDBPARAMS), or [`PQsetdbLogin`](libpq-connect.html#LIBPQ-PQSETDBLOGIN). Note that these functions will always return a non-null object pointer, unless perhaps there is too little memory even to allocate the `PGconn` object. The [`PQstatus`](libpq-status.html#LIBPQ-PQSTATUS) function should be called to check the return value for a successful connection before queries are sent via the connection object.
 
 ### Warning
 
@@ -21,7 +21,7 @@ If untrusted users have access to a database that has not adopted a [secure sche
 
 On Unix, forking a process with open libpq connections can lead to unpredictable results because the parent and child processes share the same sockets and operating system resources. For this reason, such usage is not recommended, though doing an `exec` from the child process to load a new executable is safe.
 
-*   `PQconnectdbParams`[]() [#](#LIBPQ-PQCONNECTDBPARAMS)
+*   `PQconnectdbParams` [#](#LIBPQ-PQCONNECTDBPARAMS)
 
     Makes a new connection to the database server.
 
@@ -44,7 +44,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     After processing all the array entries and any expanded connection string, any connection parameters that remain unset are filled with default values. If an unset parameter's corresponding environment variable (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")) is set, its value is used. If the environment variable is not set either, then the parameter's built-in default value is used.
 
-*   `PQconnectdb`[]() [#](#LIBPQ-PQCONNECTDB)
+*   `PQconnectdb` [#](#LIBPQ-PQCONNECTDB)
 
     Makes a new connection to the database server.
 
@@ -57,7 +57,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     The passed string can be empty to use all default parameters, or it can contain one or more parameter settings separated by whitespace, or it can contain a URI. See [Section 34.1.1](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings") for details.
 
-*   `PQsetdbLogin`[]() [#](#LIBPQ-PQSETDBLOGIN)
+*   `PQsetdbLogin` [#](#LIBPQ-PQSETDBLOGIN)
 
     Makes a new connection to the database server.
 
@@ -78,7 +78,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     `pgtty` is no longer used and any value passed will be ignored.
 
-*   `PQsetdb`[]() [#](#LIBPQ-PQSETDB)
+*   `PQsetdb` [#](#LIBPQ-PQSETDB)
 
     Makes a new connection to the database server.
 
@@ -93,9 +93,9 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     This is a macro that calls [`PQsetdbLogin`](libpq-connect.html#LIBPQ-PQSETDBLOGIN) with null pointers for the *`login`* and *`pwd`* parameters. It is provided for backward compatibility with very old programs.
 
-*   `PQconnectStartParams`[]()`PQconnectStart`[]()`PQconnectPoll`[]() [#](#LIBPQ-PQCONNECTSTARTPARAMS)
+*   `PQconnectStartParams``PQconnectStart``PQconnectPoll` [#](#LIBPQ-PQCONNECTSTARTPARAMS)
 
-    []()Make a connection to the database server in a nonblocking manner.
+    Make a connection to the database server in a nonblocking manner.
 
     ```
 
@@ -183,7 +183,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     Note that when `PQconnectStart` or [`PQconnectStartParams`](libpq-connect.html#LIBPQ-PQCONNECTSTARTPARAMS) returns a non-null pointer, you must call [`PQfinish`](libpq-connect.html#LIBPQ-PQFINISH) when you are finished with it, in order to dispose of the structure and any associated memory blocks. This must be done even if the connection attempt fails or is abandoned.
 
-*   `PQconndefaults`[]() [#](#LIBPQ-PQCONNDEFAULTS)
+*   `PQconndefaults` [#](#LIBPQ-PQCONNDEFAULTS)
 
     Returns the default connection options.
 
@@ -211,7 +211,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     After processing the options array, free it by passing it to [`PQconninfoFree`](libpq-misc.html#LIBPQ-PQCONNINFOFREE). If this is not done, a small amount of memory is leaked for each call to [`PQconndefaults`](libpq-connect.html#LIBPQ-PQCONNDEFAULTS).
 
-*   `PQconninfo`[]() [#](#LIBPQ-PQCONNINFO)
+*   `PQconninfo` [#](#LIBPQ-PQCONNINFO)
 
     Returns the connection options used by a live connection.
 
@@ -222,7 +222,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     Returns a connection options array. This can be used to determine all possible [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB) options and the values that were used to connect to the server. The return value points to an array of `PQconninfoOption` structures, which ends with an entry having a null `keyword` pointer. All notes above for [`PQconndefaults`](libpq-connect.html#LIBPQ-PQCONNDEFAULTS) also apply to the result of [`PQconninfo`](libpq-connect.html#LIBPQ-PQCONNINFO).
 
-*   `PQconninfoParse`[]() [#](#LIBPQ-PQCONNINFOPARSE)
+*   `PQconninfoParse` [#](#LIBPQ-PQCONNINFOPARSE)
 
     Returns parsed connection options from the provided connection string.
 
@@ -239,7 +239,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     After processing the options array, free it by passing it to [`PQconninfoFree`](libpq-misc.html#LIBPQ-PQCONNINFOFREE). If this is not done, some memory is leaked for each call to [`PQconninfoParse`](libpq-connect.html#LIBPQ-PQCONNINFOPARSE). Conversely, if an error occurs and `errmsg` is not `NULL`, be sure to free the error string using [`PQfreemem`](libpq-misc.html#LIBPQ-PQFREEMEM).
 
-*   `PQfinish`[]() [#](#LIBPQ-PQFINISH)
+*   `PQfinish` [#](#LIBPQ-PQFINISH)
 
     Closes the connection to the server. Also frees memory used by the `PGconn` object.
 
@@ -250,7 +250,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     Note that even if the server connection attempt fails (as indicated by [`PQstatus`](libpq-status.html#LIBPQ-PQSTATUS)), the application should call [`PQfinish`](libpq-connect.html#LIBPQ-PQFINISH) to free the memory used by the `PGconn` object. The `PGconn` pointer must not be used again after [`PQfinish`](libpq-connect.html#LIBPQ-PQFINISH) has been called.
 
-*   `PQreset`[]() [#](#LIBPQ-PQRESET)
+*   `PQreset` [#](#LIBPQ-PQRESET)
 
     Resets the communication channel to the server.
 
@@ -261,7 +261,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     This function will close the connection to the server and attempt to establish a new connection, using all the same parameters previously used. This might be useful for error recovery if a working connection is lost.
 
-*   `PQresetStart`[]()`PQresetPoll`[]() [#](#LIBPQ-PQRESETSTART)
+*   `PQresetStart``PQresetPoll` [#](#LIBPQ-PQRESETSTART)
 
     Reset the communication channel to the server, in a nonblocking manner.
 
@@ -276,7 +276,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     To initiate a connection reset, call [`PQresetStart`](libpq-connect.html#LIBPQ-PQRESETSTART). If it returns 0, the reset has failed. If it returns 1, poll the reset using `PQresetPoll` in exactly the same way as you would create the connection using `PQconnectPoll`.
 
-*   `PQpingParams`[]() [#](#LIBPQ-PQPINGPARAMS)
+*   `PQpingParams` [#](#LIBPQ-PQPINGPARAMS)
 
     [`PQpingParams`](libpq-connect.html#LIBPQ-PQPINGPARAMS) reports the status of the server. It accepts connection parameters identical to those of [`PQconnectdbParams`](libpq-connect.html#LIBPQ-PQCONNECTDBPARAMS), described above. It is not necessary to supply correct user name, password, or database name values to obtain the server status; however, if incorrect values are provided, the server will log a failed connection attempt.
 
@@ -305,7 +305,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
         No attempt was made to contact the server, because the supplied parameters were obviously incorrect or there was some client-side problem (for example, out of memory).
 
-*   `PQping`[]() [#](#LIBPQ-PQPING)
+*   `PQping` [#](#LIBPQ-PQPING)
 
     [`PQping`](libpq-connect.html#LIBPQ-PQPING) reports the status of the server. It accepts connection parameters identical to those of [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB), described above. It is not necessary to supply correct user name, password, or database name values to obtain the server status; however, if incorrect values are provided, the server will log a failed connection attempt.
 
@@ -316,7 +316,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     The return values are the same as for [`PQpingParams`](libpq-connect.html#LIBPQ-PQPINGPARAMS).
 
-*   `PQsetSSLKeyPassHook_OpenSSL`[]() [#](#LIBPQ-PQSETSSLKEYPASSHOOK-OPENSSL)
+*   `PQsetSSLKeyPassHook_OpenSSL` [#](#LIBPQ-PQSETSSLKEYPASSHOOK-OPENSSL)
 
     `PQsetSSLKeyPassHook_OpenSSL` lets an application override libpq's [default handling of encrypted client certificate key files](libpq-ssl.html#LIBPQ-SSL-CLIENTCERT "34.19.2. Client Certificates") using [sslpassword](libpq-connect.html#LIBPQ-CONNECT-SSLPASSWORD) or interactive prompting.
 
@@ -340,7 +340,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     The callback *must not* escape normal flow control with exceptions, `longjmp(...)`, etc. It must return normally.
 
-*   `PQgetSSLKeyPassHook_OpenSSL`[]() [#](#LIBPQ-PQGETSSLKEYPASSHOOK-OPENSSL)
+*   `PQgetSSLKeyPassHook_OpenSSL` [#](#LIBPQ-PQGETSSLKEYPASSHOOK-OPENSSL)
 
     `PQgetSSLKeyPassHook_OpenSSL` returns the current client certificate key password hook, or `NULL` if none has been set.
 
@@ -351,7 +351,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
 ### 34.1.1. Connection Strings [#](#LIBPQ-CONNSTRING)
 
-[]()[]()
+
 
 Several libpq functions parse a user-specified string to obtain connection parameters. There are two accepted formats for these strings: plain keyword/value strings and URIs. URIs generally follow [RFC 3986](https://tools.ietf.org/html/rfc3986), except that multi-host connection strings are allowed as further described below.
 
@@ -454,7 +454,7 @@ The currently recognized parameter key words are:
 
 *   `host` [#](#LIBPQ-CONNECT-HOST)
 
-    Name of host to connect to.[]() If a host name looks like an absolute path name, it specifies Unix-domain communication rather than TCP/IP communication; the value is the name of the directory in which the socket file is stored. (On Unix, an absolute path name begins with a slash. On Windows, paths starting with drive letters are also recognized.) If the host name starts with `@`, it is taken as a Unix-domain socket in the abstract namespace (currently supported on Linux and Windows). The default behavior when `host` is not specified, or is empty, is to connect to a Unix-domain socket[]() in `/tmp` (or whatever socket directory was specified when PostgreSQL was built). On Windows, the default is to connect to `localhost`.
+    Name of host to connect to. If a host name looks like an absolute path name, it specifies Unix-domain communication rather than TCP/IP communication; the value is the name of the directory in which the socket file is stored. (On Unix, an absolute path name begins with a slash. On Windows, paths starting with drive letters are also recognized.) If the host name starts with `@`, it is taken as a Unix-domain socket in the abstract namespace (currently supported on Linux and Windows). The default behavior when `host` is not specified, or is empty, is to connect to a Unix-domain socket in `/tmp` (or whatever socket directory was specified when PostgreSQL was built). On Windows, the default is to connect to `localhost`.
 
     A comma-separated list of host names is also accepted, in which case each host name in the list is tried in order; an empty item in the list selects the default behavior as explained above. See [Section 34.1.1.3](libpq-connect.html#LIBPQ-MULTIPLE-HOSTS "34.1.1.3. Specifying Multiple Hosts") for details.
 
@@ -476,7 +476,7 @@ The currently recognized parameter key words are:
 
 *   `port` [#](#LIBPQ-CONNECT-PORT)
 
-    Port number to connect to at the server host, or socket file name extension for Unix-domain connections.[]() If multiple hosts were given in the `host` or `hostaddr` parameters, this parameter may specify a comma-separated list of ports of the same length as the host list, or it may specify a single port number to be used for all hosts. An empty string, or an empty item in a comma-separated list, specifies the default port number established when PostgreSQL was built.
+    Port number to connect to at the server host, or socket file name extension for Unix-domain connections. If multiple hosts were given in the `host` or `hostaddr` parameters, this parameter may specify a comma-separated list of ports of the same length as the host list, or it may specify a single port number to be used for all hosts. An empty string, or an empty item in a comma-separated list, specifies the default port number established when PostgreSQL was built.
 
 *   `dbname` [#](#LIBPQ-CONNECT-DBNAME)
 
@@ -610,7 +610,7 @@ The currently recognized parameter key words are:
 
         only try a GSSAPI-encrypted connection
 
-    `gssencmode` is ignored for Unix domain socket communication. If PostgreSQL is compiled without GSSAPI support, using the `require` option will cause an error, while `prefer` will be accepted but libpq will not actually attempt a GSSAPI-encrypted connection.[]()
+    `gssencmode` is ignored for Unix domain socket communication. If PostgreSQL is compiled without GSSAPI support, using the `require` option will cause an error, while `prefer` will be accepted but libpq will not actually attempt a GSSAPI-encrypted connection.
 
 *   `sslmode` [#](#LIBPQ-CONNECT-SSLMODE)
 
@@ -642,7 +642,7 @@ The currently recognized parameter key words are:
 
     See [Section 34.19](libpq-ssl.html "34.19. SSL Support") for a detailed description of how these options work.
 
-    `sslmode` is ignored for Unix domain socket communication. If PostgreSQL is compiled without SSL support, using options `require`, `verify-ca`, or `verify-full` will cause an error, while options `allow` and `prefer` will be accepted but libpq will not actually attempt an SSL connection.[]()
+    `sslmode` is ignored for Unix domain socket communication. If PostgreSQL is compiled without SSL support, using options `require`, `verify-ca`, or `verify-full` will cause an error, while options `allow` and `prefer` will be accepted but libpq will not actually attempt an SSL connection.
 
     Note that if GSSAPI encryption is possible, that will be used in preference to SSL encryption, regardless of the value of `sslmode`. To force use of SSL encryption in an environment that has working GSSAPI infrastructure (such as a Kerberos server), also set `gssencmode` to `disable`.
 
@@ -722,7 +722,7 @@ The currently recognized parameter key words are:
 
     Both `sslcrl` and `sslcrldir` can be specified together.
 
-*   `sslsni`[]() [#](#LIBPQ-CONNECT-SSLSNI)
+*   `sslsni` [#](#LIBPQ-CONNECT-SSLSNI)
 
     If set to 1 (default), libpq sets the TLS extension “Server Name Indication” (SNI) on SSL-enabled connections. By setting this parameter to 0, this is turned off.
 

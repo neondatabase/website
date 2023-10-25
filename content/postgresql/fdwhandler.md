@@ -32,7 +32,7 @@
     *   [59.4. Foreign Data Wrapper Query Planning](fdw-planning.html)
     *   [59.5. Row Locking in Foreign Data Wrappers](fdw-row-locking.html)
 
-[]()
+
 
 All operations on a foreign table are handled through its foreign data wrapper, which consists of a set of functions that the core server calls. The foreign data wrapper is responsible for fetching data from the remote data source and returning it to the PostgreSQL executor. If updating foreign tables is to be supported, the wrapper must handle that, too. This chapter outlines how to write a new foreign data wrapper.
 

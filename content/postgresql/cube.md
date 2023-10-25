@@ -15,7 +15,7 @@
     *   [F.11.5. Notes](cube.html#CUBE-NOTES)
     *   [F.11.6. Credits](cube.html#CUBE-CREDITS)
 
-[]()
+
 
 This module implements a data type `cube` for representing multidimensional cubes.
 

@@ -15,7 +15,7 @@
     *   [F.21.5. Bibliography](isn.html#ISN-BIBLIOGRAPHY)
     *   [F.21.6. Author](isn.html#ISN-AUTHOR)
 
-[]()
+
 
 The `isn` module provides data types for the following international product numbering standards: EAN13, UPC, ISBN (books), ISMN (music), and ISSN (serials). Numbers are validated on input according to a hard-coded list of prefixes; this list of prefixes is also used to hyphenate numbers on output. Since new prefixes are assigned from time to time, the list of prefixes may be out of date. It is hoped that a future version of this module will obtain the prefix list from one or more tables that can be easily updated by users as needed; however, at present, the list can only be updated by modifying the source code and recompiling. Alternatively, prefix validation and hyphenation support may be dropped from a future version of this module.
 
@@ -80,10 +80,10 @@ The `isn` module provides the standard comparison operators, plus B-tree and has
 
 | FunctionDescription                                                                        |
 | ------------------------------------------------------------------------------------------ |
-| []()`isn_weak` ( `boolean` ) → `boolean`Sets the weak input mode, and returns new setting. |
+| `isn_weak` ( `boolean` ) → `boolean`Sets the weak input mode, and returns new setting. |
 | `isn_weak` () → `boolean`Returns the current status of the weak mode.                      |
-| []()`make_valid` ( `isn` ) → `isn`Validates an invalid number (clears the invalid flag).   |
-| []()`is_valid` ( `isn` ) → `boolean`Checks for the presence of the invalid flag.           |
+| `make_valid` ( `isn` ) → `isn`Validates an invalid number (clears the invalid flag).   |
+| `is_valid` ( `isn` ) → `boolean`Checks for the presence of the invalid flag.           |
 
 \
 

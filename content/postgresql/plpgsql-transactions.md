@@ -32,7 +32,7 @@ $$;
 CALL transaction_test1();
 ```
 
-[]()
+
 
 A new transaction starts out with default transaction characteristics such as transaction isolation level. In cases where transactions are committed in a loop, it might be desirable to start new transactions automatically with the same characteristics as the previous one. The commands `COMMIT AND CHAIN` and `ROLLBACK AND CHAIN` accomplish this.
 

@@ -8,7 +8,7 @@
 
 ## 53.58. `pg_trigger` [#](#CATALOG-PG-TRIGGER)
 
-[]()
+
 
 The catalog `pg_trigger` stores triggers on tables and views. See [CREATE TRIGGER](sql-createtrigger.html "CREATE TRIGGER") for more information.
 

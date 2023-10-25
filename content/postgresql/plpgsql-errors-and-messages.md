@@ -13,7 +13,7 @@
 
 ### 43.9.1. Reporting Errors and Messages [#](#PLPGSQL-STATEMENTS-RAISE)
 
-[]()[]()
+
 
 Use the `RAISE` statement to report messages and raise errors.
 
@@ -106,7 +106,7 @@ When specifying an error code by SQLSTATE code, you are not limited to the prede
 
 ### 43.9.2. Checking Assertions [#](#PLPGSQL-STATEMENTS-ASSERT)
 
-[]()[]()[]()
+
 
 The `ASSERT` statement is a convenient shorthand for inserting debugging checks into PL/pgSQL functions.
 

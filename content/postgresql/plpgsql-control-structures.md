@@ -56,7 +56,7 @@ RETURN (1, 2, 'three'::text);  -- must cast columns to correct types
 
 #### 43.6.1.2. `RETURN NEXT` and `RETURN QUERY` [#](#PLPGSQL-STATEMENTS-RETURNING-RETURN-NEXT)
 
-[]()[]()
+
 
 ```
 
@@ -346,7 +346,7 @@ This form of `CASE` is entirely equivalent to `IF-THEN-ELSIF`, except for the ru
 
 ### 43.6.5. Simple Loops [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS)
 
-[]()
+
 
 With the `LOOP`, `EXIT`, `CONTINUE`, `WHILE`, `FOR`, and `FOREACH` statements, you can arrange for your PL/pgSQL function to repeat a series of commands.
 
@@ -364,7 +364,7 @@ END LOOP [ label ];
 
 #### 43.6.5.2. `EXIT` [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS-EXIT)
 
-[]()
+
 
 ```
 
@@ -407,7 +407,7 @@ END;
 
 #### 43.6.5.3. `CONTINUE` [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS-CONTINUE)
 
-[]()
+
 
 ```
 
@@ -434,7 +434,7 @@ END LOOP;
 
 #### 43.6.5.4. `WHILE` [#](#PLPGSQL-CONTROL-STRUCTURES-LOOPS-WHILE)
 
-[]()
+
 
 ```
 
@@ -616,7 +616,7 @@ NOTICE:  row = {10,11,12}
 
 ### 43.6.8. Trapping Errors [#](#PLPGSQL-ERROR-TRAPPING)
 
-[]()
+
 
 By default, any error occurring in a PL/pgSQL function aborts execution of the function and the surrounding transaction. You can trap errors and recover from them by using a `BEGIN` block with an `EXCEPTION` clause. The syntax is an extension of the normal syntax for a `BEGIN` block:
 

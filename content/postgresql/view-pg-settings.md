@@ -8,7 +8,7 @@
 
 ## 54.24. `pg_settings` [#](#VIEW-PG-SETTINGS)
 
-[]()
+
 
 The view `pg_settings` provides access to run-time parameters of the server. It is essentially an alternative interface to the [`SHOW`](sql-show.html "SHOW") and [`SET`](sql-set.html "SET") commands. It also provides access to some facts about each parameter that are not directly available from [`SHOW`](sql-show.html "SHOW"), such as minimum and maximum values.
 

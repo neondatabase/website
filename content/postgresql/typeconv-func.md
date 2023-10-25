@@ -8,7 +8,7 @@
 
 ## 10.3. Functions [#](#TYPECONV-FUNC)
 
-[]()
+
 
 The specific function that is referenced by a function call is determined using the following procedure.
 

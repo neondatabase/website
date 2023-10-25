@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## SPI\_prepare\_extended
 

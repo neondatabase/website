@@ -8,7 +8,7 @@
 
 ## 54.14. `pg_policies` [#](#VIEW-PG-POLICIES)
 
-[]()
+
 
 The view `pg_policies` provides access to useful information about each row-level security policy in the database.
 

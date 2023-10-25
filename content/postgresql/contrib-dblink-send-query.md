@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## dblink\_send\_query
 
