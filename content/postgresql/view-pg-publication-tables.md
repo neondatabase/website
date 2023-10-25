@@ -1,0 +1,30 @@
+<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+|                  54.17. `pg_publication_tables`                 |                                             |                          |                                                       |                                                                                       |
+| :-------------------------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------------: |
+| [Prev](view-pg-prepared-xacts.html "54.16. pg_prepared_xacts")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-replication-origin-status.html "54.18. pg_replication_origin_status") |
+
+***
+
+## 54.17. `pg_publication_tables` [#](#VIEW-PG-PUBLICATION-TABLES)
+
+[]()
+
+The view `pg_publication_tables` provides information about the mapping between publications and information of tables they contain. Unlike the underlying catalog [`pg_publication_rel`](catalog-pg-publication-rel.html "53.42. pg_publication_rel"), this view expands publications defined as [`FOR ALL TABLES`](sql-createpublication.html#SQL-CREATEPUBLICATION-FOR-ALL-TABLES) and [`FOR TABLES IN SCHEMA`](sql-createpublication.html#SQL-CREATEPUBLICATION-FOR-TABLES-IN-SCHEMA), so for such publications there will be a row for each eligible table.
+
+**Table 54.17. `pg_publication_tables` Columns**
+
+| Column TypeDescription                                                                                                                                                                                                                                                |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pubname` `name` (references [`pg_publication`](catalog-pg-publication.html "53.40. pg_publication").`pubname`)Name of publication                                                                                                                                    |
+| `schemaname` `name` (references [`pg_namespace`](catalog-pg-namespace.html "53.32. pg_namespace").`nspname`)Name of schema containing table                                                                                                                           |
+| `tablename` `name` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`relname`)Name of table                                                                                                                                                          |
+| `attnames` `name[]` (references [`pg_attribute`](catalog-pg-attribute.html "53.7. pg_attribute").`attname`)Names of table columns included in the publication. This contains all the columns of the table when the user didn't specify the column list for the table. |
+| `rowfilter` `text`Expression for the table's publication qualifying condition                                                                                                                                                                                         |
+
+***
+
+|                                                                 |                                                       |                                                                                       |
+| :-------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------------------------: |
+| [Prev](view-pg-prepared-xacts.html "54.16. pg_prepared_xacts")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-replication-origin-status.html "54.18. pg_replication_origin_status") |
+| 54.16. `pg_prepared_xacts`                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                                 54.18. `pg_replication_origin_status` |
