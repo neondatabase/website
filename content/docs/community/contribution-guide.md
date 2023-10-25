@@ -14,9 +14,9 @@ Open-source projects are always evolving. Contributing to documentation is a gre
 By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or you've noticed that a certain topic is missing, your contribution is always welcome and appreciated.
 
 <Admonition type="note" title="TL;DR: Contributing to the Neon Docs">
-- The Neon docs hosted in the [neondatabase/website](https://github.com/neondatabase/website) repository, under the `/content/docs` directory.
-- You can contribute by editing files on GitHub using the **Edit this page** link at the base of each Neon documentation page or by forking the [neondatabase/website](https://github.com/neondatabase/website) repository and submitting a pull request. You'll find a [GUIDE_TEMPLATE.md] file in the repo under `/content/docs/guides` to help get you started.
-- Reference this guide for Markup and style guidelines.
+- You can contribute by editing files on GitHub using the **Edit this page** link at the base of each Neon documentation page or by forking the [neondatabase/website](https://github.com/neondatabase/website) repository and submitting a pull request.
+- If you are interested in contributing a guide via a pull request, we provide a `GUIDE_TEMPLATE.md` file to help get you started. The template file is found the [neondatabase/website](https://github.com/neondatabase/website) repository, under `/content/docs/guides`.
+- Reference this contribution guide for Markup and style guidelines.
 </Admonition>
 
 ## How to contribute
@@ -32,7 +32,7 @@ If you prefer the first option, which is great for edits and small updates, ther
 
 Clicking the link takes you to the Markdown file in GitHub, where you can click the **Edit this page** icon to make a change. When you finish editing, commit your changes to create a pull request.
 
-If you would rather fork the [neondatabase/website](https://github.com/neondatabase/website) repository and submit pull requests, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request. To help you get stared, we provide a [GUIDE_TEMPLATE.md] file, which you'll find in the [neondatabase/website](https://github.com/neondatabase/website) repository, under the `/content/docs/guides` directory. After you create a branch, simply copy the template and rename it to get started.
+If you would rather fork the [neondatabase/website](https://github.com/neondatabase/website) repository and submit a pull request, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request. To help you get stared, we provide a `GUIDE_TEMPLATE.md` file, which you'll find in the [neondatabase/website](https://github.com/neondatabase/website) repository, under the `/content/docs/guides` directory. After you create a branch, simply copy the template and rename it to get started. Don't forget to add your guide to the table of contents by updating the `sidebar.yaml` file. See [Add a new page](#add-a-new-page).
 
 ## Markdown
 
