@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                CREATE TABLE AS               |                                        |              |                                                       |                                                        |
 | :------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------------: |
@@ -38,7 +38,7 @@ CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXI
 
     Ignored for compatibility. Use of these keywords is deprecated; refer to [CREATE TABLE](sql-createtable.html "CREATE TABLE") for details.
 
-<!---->
+
 
 * `TEMPORARY` or `TEMP`
 

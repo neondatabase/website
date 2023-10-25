@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                 Chapter 34. libpq — C Library                |                                                           |                            |                                                       |                                                                           |
 | :----------------------------------------------------------: | :-------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------: |
@@ -18,7 +18,7 @@
   * *   [34.2. Connection Status Functions](libpq-status.html)
   * [34.3. Command Execution Functions](libpq-exec.html)
 
-    <!---->
+    
 
   * *   [34.3.1. Main Functions](libpq-exec.html#LIBPQ-EXEC-MAIN)
     * [34.3.2. Retrieving Query Result Information](libpq-exec.html#LIBPQ-EXEC-SELECT-INFO)
@@ -28,7 +28,7 @@
   * *   [34.4. Asynchronous Command Processing](libpq-async.html)
   * [34.5. Pipeline Mode](libpq-pipeline-mode.html)
 
-    <!---->
+    
 
   * *   [34.5.1. Using Pipeline Mode](libpq-pipeline-mode.html#LIBPQ-PIPELINE-USING)
     * [34.5.2. Functions Associated with Pipeline Mode](libpq-pipeline-mode.html#LIBPQ-PIPELINE-FUNCTIONS)
@@ -40,7 +40,7 @@
   * [34.9. Asynchronous Notification](libpq-notify.html)
   * [34.10. Functions Associated with the `COPY` Command](libpq-copy.html)
 
-    <!---->
+    
 
   * *   [34.10.1. Functions for Sending `COPY` Data](libpq-copy.html#LIBPQ-COPY-SEND)
     * [34.10.2. Functions for Receiving `COPY` Data](libpq-copy.html#LIBPQ-COPY-RECEIVE)
@@ -51,7 +51,7 @@
   * [34.13. Notice Processing](libpq-notice-processing.html)
   * [34.14. Event System](libpq-events.html)
 
-    <!---->
+    
 
   * *   [34.14.1. Event Types](libpq-events.html#LIBPQ-EVENTS-TYPES)
     * [34.14.2. Event Callback Procedure](libpq-events.html#LIBPQ-EVENTS-PROC)
@@ -64,7 +64,7 @@
   * [34.18. LDAP Lookup of Connection Parameters](libpq-ldap.html)
   * [34.19. SSL Support](libpq-ssl.html)
 
-    <!---->
+    
 
   * *   [34.19.1. Client Verification of Server Certificates](libpq-ssl.html#LIBQ-SSL-CERTIFICATES)
     * [34.19.2. Client Certificates](libpq-ssl.html#LIBPQ-SSL-CLIENTCERT)

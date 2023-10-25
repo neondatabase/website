@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                          Chapter 7. Queries                          |                                            |                           |                                                       |                                                |
 | :------------------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | ---------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [7.1. Overview](queries-overview.html)
   * [7.2. Table Expressions](queries-table-expressions.html)
 
-    <!---->
+    
 
   * *   [7.2.1. The `FROM` Clause](queries-table-expressions.html#QUERIES-FROM)
     * [7.2.2. The `WHERE` Clause](queries-table-expressions.html#QUERIES-WHERE)
@@ -33,7 +33,7 @@
   * [7.7. `VALUES` Lists](queries-values.html)
   * [7.8. `WITH` Queries (Common Table Expressions)](queries-with.html)
 
-    <!---->
+    
 
   * *   [7.8.1. `SELECT` in `WITH`](queries-with.html#QUERIES-WITH-SELECT)
     * [7.8.2. Recursive Queries](queries-with.html#QUERIES-WITH-RECURSIVE)

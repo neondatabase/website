@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |              Chapter 33. Regression Tests             |                                                    |                                 |                                                       |                                                     |
 | :---------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
@@ -33,7 +33,7 @@
   * *   [33.3. Variant Comparison Files](regress-variant.html)
   * [33.4. TAP Tests](regress-tap.html)
 
-    <!---->
+    
 
   * [33.4.1. Environment Variables](regress-tap.html#REGRESS-TAP-VARS)
 

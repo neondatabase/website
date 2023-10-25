@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |           Chapter 73. Database Physical Storage          |                                            |                     |                                                       |                                                                |
 | :------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [73.1. Database File Layout](storage-file-layout.html)
   * [73.2. TOAST](storage-toast.html)
 
-    <!---->
+    
 
   * *   [73.2.1. Out-of-Line, On-Disk TOAST Storage](storage-toast.html#STORAGE-TOAST-ONDISK)
     * [73.2.2. Out-of-Line, In-Memory TOAST Storage](storage-toast.html#STORAGE-TOAST-INMEMORY)
@@ -23,7 +23,7 @@
   * [73.5. The Initialization Fork](storage-init.html)
   * [73.6. Database Page Layout](storage-page-layout.html)
 
-    <!---->
+    
 
   * [73.6.1. Table Row Layout](storage-page-layout.html#STORAGE-TUPLE-LAYOUT)
 

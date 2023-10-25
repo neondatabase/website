@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                  Chapter 59. Writing a Foreign Data Wrapper                 |                                            |                     |                                                       |                                                                    |
 | :-------------------------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [59.1. Foreign Data Wrapper Functions](fdw-functions.html)
   * [59.2. Foreign Data Wrapper Callback Routines](fdw-callbacks.html)
 
-    <!---->
+    
 
   * *   [59.2.1. FDW Routines for Scanning Foreign Tables](fdw-callbacks.html#FDW-CALLBACKS-SCAN)
     * [59.2.2. FDW Routines for Scanning Foreign Joins](fdw-callbacks.html#FDW-CALLBACKS-JOIN-SCAN)

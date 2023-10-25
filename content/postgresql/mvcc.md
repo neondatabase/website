@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |              Chapter 13. Concurrency Control              |                                            |                           |                                                       |                                               |
 | :-------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [13.1. Introduction](mvcc-intro.html)
   * [13.2. Transaction Isolation](transaction-iso.html)
 
-    <!---->
+    
 
   * *   [13.2.1. Read Committed Isolation Level](transaction-iso.html#XACT-READ-COMMITTED)
     * [13.2.2. Repeatable Read Isolation Level](transaction-iso.html#XACT-REPEATABLE-READ)

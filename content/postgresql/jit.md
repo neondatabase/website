@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |             Chapter 32. Just-in-Time Compilation (JIT)             |                                                    |                                 |                                                       |                                                           |
 | :----------------------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
@@ -20,7 +20,7 @@
   * [32.3. Configuration](jit-configuration.html)
   * [32.4. Extensibility](jit-extensibility.html)
 
-    <!---->
+    
 
   * *   [32.4.1. Inlining Support for Extensions](jit-extensibility.html#JIT-EXTENSIBILITY-BITCODE)
     * [32.4.2. Pluggable JIT Providers](jit-extensibility.html#JIT-PLUGGABLE)

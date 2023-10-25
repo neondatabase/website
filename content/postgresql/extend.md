@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                   Chapter 38. Extending SQL                   |                                                            |                            |                                                       |                                                          |
 | :-----------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [38.1. How Extensibility Works](extend-how.html)
   * [38.2. The PostgreSQL Type System](extend-type-system.html)
 
-    <!---->
+    
 
   * *   [38.2.1. Base Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-BASE)
     * [38.2.2. Container Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-CONTAINER)
@@ -25,7 +25,7 @@
   * [38.4. User-Defined Procedures](xproc.html)
   * [38.5. Query Language (SQL) Functions](xfunc-sql.html)
 
-    <!---->
+    
 
   * *   [38.5.1. Arguments for SQL Functions](xfunc-sql.html#XFUNC-SQL-FUNCTION-ARGUMENTS)
     * [38.5.2. SQL Functions on Base Types](xfunc-sql.html#XFUNC-SQL-BASE-FUNCTIONS)
@@ -46,7 +46,7 @@
   * [38.9. Internal Functions](xfunc-internal.html)
   * [38.10. C-Language Functions](xfunc-c.html)
 
-    <!---->
+    
 
   * *   [38.10.1. Dynamic Loading](xfunc-c.html#XFUNC-C-DYNLOAD)
     * [38.10.2. Base Types in C-Language Functions](xfunc-c.html#XFUNC-C-BASETYPE)
@@ -64,7 +64,7 @@
   * *   [38.11. Function Optimization Information](xfunc-optimization.html)
   * [38.12. User-Defined Aggregates](xaggr.html)
 
-    <!---->
+    
 
   * *   [38.12.1. Moving-Aggregate Mode](xaggr.html#XAGGR-MOVING-AGGREGATES)
     * [38.12.2. Polymorphic and Variadic Aggregates](xaggr.html#XAGGR-POLYMORPHIC-AGGREGATES)
@@ -79,7 +79,7 @@
   * *   [38.14. User-Defined Operators](xoper.html)
   * [38.15. Operator Optimization Information](xoper-optimization.html)
 
-    <!---->
+    
 
   * *   [38.15.1. `COMMUTATOR`](xoper-optimization.html#XOPER-COMMUTATOR)
     * [38.15.2. `NEGATOR`](xoper-optimization.html#XOPER-NEGATOR)

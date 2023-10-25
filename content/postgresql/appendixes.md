@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                               Part VIII. Appendixes                               |                                                     |                                  |                                                       |                                                                      |
 | :-------------------------------------------------------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [A. PostgreSQL Error Codes](errcodes-appendix.html)
   * [B. Date/Time Support](datetime-appendix.html)
 
-    <!---->
+    
 
   * *   [B.1. Date/Time Input Interpretation](datetime-input-rules.html)
     * [B.2. Handling of Invalid or Ambiguous Timestamps](datetime-invalid-input.html)
@@ -26,7 +26,7 @@
   * *   [C. SQL Key Words](sql-keywords-appendix.html)
   * [D. SQL Conformance](features.html)
 
-    <!---->
+    
 
   * *   [D.1. Supported Features](features-sql-standard.html)
     * [D.2. Unsupported Features](unsupported-features-sql-standard.html)
@@ -119,7 +119,7 @@
   * [M. Glossary](glossary.html)
   * [N. Color Support](color.html)
 
-    <!---->
+    
 
   * *   [N.1. When Color is Used](color-when.html)
     * [N.2. Configuring the Colors](color-which.html)
@@ -127,7 +127,7 @@
   * *   [O. `syncfs()` Caveats](syncfs.html)
   * [P. Obsolete or Renamed Features](appendix-obsolete.html)
 
-    <!---->
+    
 
   * *   [P.1. `recovery.conf` file merged into `postgresql.conf`](recovery-config.html)
     * [P.2. Default Roles Renamed to Predefined Roles](default-roles.html)

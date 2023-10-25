@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                 CREATE INDEX                 |                                        |              |                                                       |                                                    |
 | :------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
@@ -177,7 +177,7 @@ GIN indexes accept different parameters:
 
     Turning `fastupdate` off via `ALTER INDEX` prevents future insertions from going into the list of pending index entries, but does not in itself flush previous entries. You might want to `VACUUM` the table or call `gin_clean_pending_list` function afterward to ensure the pending list is emptied.
 
-<!---->
+
 
 * `gin_pending_list_limit` (`integer`) [#](#INDEX-RELOPTION-GIN-PENDING-LIST-LIMIT)
 

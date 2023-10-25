@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                   Chapter 27. High Availability, Load Balancing, and Replication                  |                                                    |                                 |                                                       |                                                                                         |
 | :-----------------------------------------------------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [27.1. Comparison of Different Solutions](different-replication-solutions.html)
   * [27.2. Log-Shipping Standby Servers](warm-standby.html)
 
-    <!---->
+    
 
   * *   [27.2.1. Planning](warm-standby.html#STANDBY-PLANNING)
     * [27.2.2. Standby Server Operation](warm-standby.html#STANDBY-SERVER-OPERATION)
@@ -28,7 +28,7 @@
   * *   [27.3. Failover](warm-standby-failover.html)
   * [27.4. Hot Standby](hot-standby.html)
 
-    <!---->
+    
 
   * *   [27.4.1. User's Overview](hot-standby.html#HOT-STANDBY-USERS)
     * [27.4.2. Handling Query Conflicts](hot-standby.html#HOT-STANDBY-CONFLICT)

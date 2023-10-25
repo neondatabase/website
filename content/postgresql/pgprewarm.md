@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |            F.29. pg\_prewarm — preload relation data into buffer caches           |                                                                             |                                                        |                                                       |                                                                                      |
 | :-------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------: |
@@ -49,7 +49,7 @@ Update `autoprewarm.blocks` immediately. This may be useful if the autoprewarm w
 
     Controls whether the server should run the autoprewarm worker. This is on by default. This parameter can only be set at server start.
 
-<!---->
+
 
 * `pg_prewarm.autoprewarm_interval` (`integer`)
 

@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                                    Chapter 41. The Rule System                                    |                                                            |                            |                                                       |                                                |
 | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ---------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [41.1. The Query Tree](querytree.html)
   * [41.2. Views and the Rule System](rules-views.html)
 
-    <!---->
+    
 
   * *   [41.2.1. How `SELECT` Rules Work](rules-views.html#RULES-SELECT)
     * [41.2.2. View Rules in Non-`SELECT` Statements](rules-views.html#RULES-VIEWS-NON-SELECT)
@@ -23,7 +23,7 @@
   * *   [41.3. Materialized Views](rules-materializedviews.html)
   * [41.4. Rules on `INSERT`, `UPDATE`, and `DELETE`](rules-update.html)
 
-    <!---->
+    
 
   * *   [41.4.1. How Update Rules Work](rules-update.html#RULES-UPDATE-HOW)
     * [41.4.2. Cooperation with Views](rules-update.html#RULES-UPDATE-VIEWS)

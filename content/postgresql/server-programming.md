@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |           Part V. Server Programming          |                                                     |                                  |                                                       |                                                  |
 | :-------------------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
@@ -131,7 +131,7 @@ This part is about extending the server functionality with user-defined function
   * *   [48. Background Worker Processes](bgworker.html)
   * [49. Logical Decoding](logicaldecoding.html)
 
-    <!---->
+    
 
   * *   [49.1. Logical Decoding Examples](logicaldecoding-example.html)
     * [49.2. Logical Decoding Concepts](logicaldecoding-explanation.html)
@@ -147,7 +147,7 @@ This part is about extending the server functionality with user-defined function
   * *   [50. Replication Progress Tracking](replication-origins.html)
   * [51. Archive Modules](archive-modules.html)
 
-    <!---->
+    
 
   * *   [51.1. Initialization Functions](archive-module-init.html)
     * [51.2. Archive Module Callbacks](archive-module-callbacks.html)

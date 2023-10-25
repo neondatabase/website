@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                   F.7. bloom — bloom filter index access method                  |                                                                             |                                                        |                                                       |                                                                                      |
 | :------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------: |
@@ -30,7 +30,7 @@ A `bloom` index accepts the following parameters in its `WITH` clause:
 
     Length of each signature (index entry) in bits. It is rounded up to the nearest multiple of `16`. The default is `80` bits and the maximum is `4096`.
 
-<!---->
+
 
 * `col1 — col32`
 

@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                 Chapter 12. Full Text Search                 |                                            |                           |                                                       |                                                     |
 | :----------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
@@ -38,7 +38,7 @@
   * *   [12.5. Parsers](textsearch-parsers.html)
   * [12.6. Dictionaries](textsearch-dictionaries.html)
 
-    <!---->
+    
 
   * *   [12.6.1. Stop Words](textsearch-dictionaries.html#TEXTSEARCH-STOPWORDS)
     * [12.6.2. Simple Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SIMPLE-DICTIONARY)
@@ -50,7 +50,7 @@
   * *   [12.7. Configuration Example](textsearch-configuration.html)
   * [12.8. Testing and Debugging Text Search](textsearch-debugging.html)
 
-    <!---->
+    
 
   * *   [12.8.1. Configuration Testing](textsearch-debugging.html#TEXTSEARCH-CONFIGURATION-TESTING)
     * [12.8.2. Parser Testing](textsearch-debugging.html#TEXTSEARCH-PARSER-TESTING)

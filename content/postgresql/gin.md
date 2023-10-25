@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |             Chapter 70. GIN Indexes            |                                            |                     |                                                       |                                              |
 | :--------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | -------------------------------------------: |
@@ -15,7 +15,7 @@
   * [70.3. Extensibility](gin-extensibility.html)
   * [70.4. Implementation](gin-implementation.html)
 
-    <!---->
+    
 
   * *   [70.4.1. GIN Fast Update Technique](gin-implementation.html#GIN-FAST-UPDATE)
     * [70.4.2. Partial Match Algorithm](gin-implementation.html#GIN-PARTIAL-MATCH)

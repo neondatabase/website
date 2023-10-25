@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                  Chapter 68. GiST Indexes                 |                                            |                     |                                                       |                                               |
 | :-------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | --------------------------------------------: |
@@ -15,7 +15,7 @@
   * [68.3. Extensibility](gist-extensibility.html)
   * [68.4. Implementation](gist-implementation.html)
 
-    <!---->
+    
 
   * [68.4.1. GiST Index Build Methods](gist-implementation.html#GIST-BUFFERING-BUILD)
 

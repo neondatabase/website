@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                      Chapter 67. B-Tree Indexes                      |                                            |                     |                                                       |                                                |
 | :------------------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | ---------------------------------------------: |
@@ -15,7 +15,7 @@
   * [67.3. B-Tree Support Functions](btree-support-funcs.html)
   * [67.4. Implementation](btree-implementation.html)
 
-    <!---->
+    
 
   * *   [67.4.1. B-Tree Structure](btree-implementation.html#BTREE-STRUCTURE)
     * [67.4.2. Bottom-up Index Deletion](btree-implementation.html#BTREE-DELETION)

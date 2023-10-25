@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |  Chapter 30. Reliability and the Write-Ahead Log  |                                                    |                                 |                                                       |                                                   |
 | :-----------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [30.1. Reliability](wal-reliability.html)
   * [30.2. Data Checksums](checksums.html)
 
-    <!---->
+    
 
   * [30.2.1. Off-line Enabling of Checksums](checksums.html#CHECKSUMS-OFFLINE-ENABLE-DISABLE)
 

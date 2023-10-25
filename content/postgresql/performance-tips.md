@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                Chapter 14. Performance Tips               |                                            |                           |                                                       |                                                   |
 | :-------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | ------------------------------------------------: |
@@ -24,7 +24,7 @@
   * *   [14.3. Controlling the Planner with Explicit `JOIN` Clauses](explicit-joins.html)
   * [14.4. Populating a Database](populate.html)
 
-    <!---->
+    
 
   * *   [14.4.1. Disable Autocommit](populate.html#DISABLE-AUTOCOMMIT)
     * [14.4.2. Use `COPY`](populate.html#POPULATE-COPY-FROM)

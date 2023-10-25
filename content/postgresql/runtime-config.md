@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                        Chapter 20. Server Configuration                        |                                                    |                                 |                                                       |                                                         |
 | :----------------------------------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
@@ -21,7 +21,7 @@
   * *   [20.2. File Locations](runtime-config-file-locations.html)
   * [20.3. Connections and Authentication](runtime-config-connection.html)
 
-    <!---->
+    
 
   * *   [20.3.1. Connection Settings](runtime-config-connection.html#RUNTIME-CONFIG-CONNECTION-SETTINGS)
     * [20.3.2. TCP Settings](runtime-config-connection.html#RUNTIME-CONFIG-TCP-SETTINGS)
@@ -77,7 +77,7 @@
   * *   [20.10. Automatic Vacuuming](runtime-config-autovacuum.html)
   * [20.11. Client Connection Defaults](runtime-config-client.html)
 
-    <!---->
+    
 
   * *   [20.11.1. Statement Behavior](runtime-config-client.html#RUNTIME-CONFIG-CLIENT-STATEMENT)
     * [20.11.2. Locale and Formatting](runtime-config-client.html#RUNTIME-CONFIG-CLIENT-FORMAT)
@@ -87,7 +87,7 @@
   * *   [20.12. Lock Management](runtime-config-locks.html)
   * [20.13. Version and Platform Compatibility](runtime-config-compatible.html)
 
-    <!---->
+    
 
   * *   [20.13.1. Previous PostgreSQL Versions](runtime-config-compatible.html#RUNTIME-CONFIG-COMPATIBLE-VERSION)
     * [20.13.2. Platform and Client Compatibility](runtime-config-compatible.html#RUNTIME-CONFIG-COMPATIBLE-CLIENTS)

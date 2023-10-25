@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |         Chapter 46. PL/Python — Python Procedural Language         |                                                            |                            |                                                       |                                                          |
 | :----------------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [46.1. PL/Python Functions](plpython-funcs.html)
   * [46.2. Data Values](plpython-data.html)
 
-    <!---->
+    
 
   * *   [46.2.1. Data Type Mapping](plpython-data.html#PLPYTHON-DATA-TYPE-MAPPING)
     * [46.2.2. Null, None](plpython-data.html#PLPYTHON-DATA-NULL)
@@ -26,7 +26,7 @@
   * [46.5. Trigger Functions](plpython-trigger.html)
   * [46.6. Database Access](plpython-database.html)
 
-    <!---->
+    
 
   * *   [46.6.1. Database Access Functions](plpython-database.html#PLPYTHON-DATABASE-ACCESS-FUNCS)
     * [46.6.2. Trapping Errors](plpython-database.html#PLPYTHON-TRAPPING)

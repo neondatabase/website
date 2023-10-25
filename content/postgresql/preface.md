@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                         Preface                        |                                                     |                                  |                                                       |                                                      |
 | :----------------------------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [1. What Is PostgreSQL?](intro-whatis.html)
   * [2. A Brief History of PostgreSQL](history.html)
 
-    <!---->
+    
 
   * *   [2.1. The Berkeley POSTGRES Project](history.html#HISTORY-BERKELEY)
     * [2.2. Postgres95](history.html#HISTORY-POSTGRES95)
@@ -23,7 +23,7 @@
   * [4. Further Information](resources.html)
   * [5. Bug Reporting Guidelines](bug-reporting.html)
 
-    <!---->
+    
 
   * *   [5.1. Identifying Bugs](bug-reporting.html#BUG-REPORTING-IDENTIFYING-BUGS)
     * [5.2. What to Report](bug-reporting.html#BUG-REPORTING-WHAT-TO-REPORT)

@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                           Chapter 8. Data Types                           |                                            |                           |                                                       |                                                     |
 | :-----------------------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
@@ -21,7 +21,7 @@
   * [8.3. Character Types](datatype-character.html)
   * [8.4. Binary Data Types](datatype-binary.html)
 
-    <!---->
+    
 
   * *   [8.4.1. `bytea` Hex Format](datatype-binary.html#DATATYPE-BINARY-BYTEA-HEX-FORMAT)
     * [8.4.2. `bytea` Escape Format](datatype-binary.html#DATATYPE-BINARY-BYTEA-ESCAPE-FORMAT)
@@ -37,7 +37,7 @@
   * *   [8.6. Boolean Type](datatype-boolean.html)
   * [8.7. Enumerated Types](datatype-enum.html)
 
-    <!---->
+    
 
   * *   [8.7.1. Declaration of Enumerated Types](datatype-enum.html#DATATYPE-ENUM-DECLARATION)
     * [8.7.2. Ordering](datatype-enum.html#DATATYPE-ENUM-ORDERING)
@@ -65,7 +65,7 @@
   * *   [8.10. Bit String Types](datatype-bit.html)
   * [8.11. Text Search Types](datatype-textsearch.html)
 
-    <!---->
+    
 
   * *   [8.11.1. `tsvector`](datatype-textsearch.html#DATATYPE-TSVECTOR)
     * [8.11.2. `tsquery`](datatype-textsearch.html#DATATYPE-TSQUERY)
@@ -73,7 +73,7 @@
   * *   [8.12. UUID Type](datatype-uuid.html)
   * [8.13. XML Type](datatype-xml.html)
 
-    <!---->
+    
 
   * *   [8.13.1. Creating XML Values](datatype-xml.html#DATATYPE-XML-CREATING)
     * [8.13.2. Encoding Handling](datatype-xml.html#DATATYPE-XML-ENCODING-HANDLING)

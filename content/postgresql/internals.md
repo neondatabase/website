@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |          Part VII. Internals          |                                                     |                                  |                                                       |                                                                       |
 | :-----------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
@@ -156,7 +156,7 @@ This part contains assorted information that might be of use to PostgreSQL devel
   * *   [58. Writing a Procedural Language Handler](plhandler.html)
   * [59. Writing a Foreign Data Wrapper](fdwhandler.html)
 
-    <!---->
+    
 
   * *   [59.1. Foreign Data Wrapper Functions](fdw-functions.html)
     * [59.2. Foreign Data Wrapper Callback Routines](fdw-callbacks.html)
@@ -184,7 +184,7 @@ This part contains assorted information that might be of use to PostgreSQL devel
   * *   [63. Table Access Method Interface Definition](tableam.html)
   * [64. Index Access Method Interface Definition](indexam.html)
 
-    <!---->
+    
 
   * *   [64.1. Basic API Structure for Indexes](index-api.html)
     * [64.2. Index Access Method Functions](index-functions.html)
@@ -197,7 +197,7 @@ This part contains assorted information that might be of use to PostgreSQL devel
   * [66. Custom WAL Resource Managers](custom-rmgr.html)
   * [67. B-Tree Indexes](btree.html)
 
-    <!---->
+    
 
   * *   [67.1. Introduction](btree-intro.html)
     * [67.2. Behavior of B-Tree Operator Classes](btree-behavior.html)

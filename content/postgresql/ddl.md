@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                    Chapter 5. Data Definition                   |                                            |                           |                                                       |                                              |
 | :-------------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | -------------------------------------------: |
@@ -15,7 +15,7 @@
   * [5.3. Generated Columns](ddl-generated-columns.html)
   * [5.4. Constraints](ddl-constraints.html)
 
-    <!---->
+    
 
   * *   [5.4.1. Check Constraints](ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
     * [5.4.2. Not-Null Constraints](ddl-constraints.html#DDL-CONSTRAINTS-NOT-NULL)
@@ -27,7 +27,7 @@
   * *   [5.5. System Columns](ddl-system-columns.html)
   * [5.6. Modifying Tables](ddl-alter.html)
 
-    <!---->
+    
 
   * *   [5.6.1. Adding a Column](ddl-alter.html#DDL-ALTER-ADDING-A-COLUMN)
     * [5.6.2. Removing a Column](ddl-alter.html#DDL-ALTER-REMOVING-A-COLUMN)
@@ -42,7 +42,7 @@
   * [5.8. Row Security Policies](ddl-rowsecurity.html)
   * [5.9. Schemas](ddl-schemas.html)
 
-    <!---->
+    
 
   * *   [5.9.1. Creating a Schema](ddl-schemas.html#DDL-SCHEMAS-CREATE)
     * [5.9.2. The Public Schema](ddl-schemas.html#DDL-SCHEMAS-PUBLIC)

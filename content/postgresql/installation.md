@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                Chapter 17. Installation from Source Code                |                                                    |                                 |                                                       |                                                         |
 | :---------------------------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
@@ -14,7 +14,7 @@
   * [17.2. Getting the Source](install-getsource.html)
   * [17.3. Building and Installation with Autoconf and Make](install-make.html)
 
-    <!---->
+    
 
   * *   [17.3.1. Short Version](install-make.html#INSTALL-SHORT-MAKE)
     * [17.3.2. Installation Procedure](install-make.html#INSTALL-PROCEDURE-MAKE)
@@ -35,7 +35,7 @@
   * *   [17.6. Supported Platforms](supported-platforms.html)
   * [17.7. Platform-Specific Notes](installation-platform-notes.html)
 
-    <!---->
+    
 
   * *   [17.7.1. AIX](installation-platform-notes.html#INSTALLATION-NOTES-AIX)
     * [17.7.2. Cygwin](installation-platform-notes.html#INSTALLATION-NOTES-CYGWIN)

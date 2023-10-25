@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |          Chapter 69. SP-GiST Indexes         |                                            |                     |                                                       |                                                 |
 | :------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | ----------------------------------------------: |
@@ -15,7 +15,7 @@
   * [69.3. Extensibility](spgist-extensibility.html)
   * [69.4. Implementation](spgist-implementation.html)
 
-    <!---->
+    
 
   * *   [69.4.1. SP-GiST Limits](spgist-implementation.html#SPGIST-LIMITS)
     * [69.4.2. SP-GiST Without Node Labels](spgist-implementation.html#SPGIST-NULL-LABELS)

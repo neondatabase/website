@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                       34.7. Canceling Queries in Progress                       |                                                  |                               |                                                       |                                                              |
 | :-----------------------------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
@@ -47,7 +47,7 @@ A client application can request cancellation of a command that is still being p
 
     [`PQcancel`](libpq-cancel.html#LIBPQ-PQCANCEL) can safely be invoked from a signal handler, if the *`errbuf`* is a local variable in the signal handler. The `PGcancel` object is read-only as far as [`PQcancel`](libpq-cancel.html#LIBPQ-PQCANCEL) is concerned, so it can also be invoked from a thread that is separate from the one manipulating the `PGconn` object.
 
-<!---->
+
 
 * `PQrequestCancel` [#](#LIBPQ-PQREQUESTCANCEL)
 

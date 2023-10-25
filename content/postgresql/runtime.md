@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                                 Chapter 19. Server Setup and Operation                                 |                                                    |                                 |                                                       |                                                                 |
 | :----------------------------------------------------------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [19.1. The PostgreSQL User Account](postgres-user.html)
   * [19.2. Creating a Database Cluster](creating-cluster.html)
 
-    <!---->
+    
 
   * *   [19.2.1. Use of Secondary File Systems](creating-cluster.html#CREATING-CLUSTER-MOUNT-POINTS)
     * [19.2.2. File Systems](creating-cluster.html#CREATING-CLUSTER-FILESYSTEM)
@@ -34,7 +34,7 @@
   * *   [19.5. Shutting Down the Server](server-shutdown.html)
   * [19.6. Upgrading a PostgreSQL Cluster](upgrading.html)
 
-    <!---->
+    
 
   * *   [19.6.1. Upgrading Data via pg\_dumpall](upgrading.html#UPGRADING-VIA-PGDUMPALL)
     * [19.6.2. Upgrading Data via pg\_upgrade](upgrading.html#UPGRADING-VIA-PG-UPGRADE)
@@ -44,7 +44,7 @@
   * [19.8. Encryption Options](encryption-options.html)
   * [19.9. Secure TCP/IP Connections with SSL](ssl-tcp.html)
 
-    <!---->
+    
 
   * *   [19.9.1. Basic Setup](ssl-tcp.html#SSL-SETUP)
     * [19.9.2. OpenSSL Configuration](ssl-tcp.html#SSL-OPENSSL-CONFIG)

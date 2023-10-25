@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 | Appendix F. Additional Supplied Modules and Extensions |                                               |                       |                                                       |                                                                     |
 | :----------------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [F.1. adminpack — pgAdmin support toolpack](adminpack.html)
   * [F.2. amcheck — tools to verify table and index consistency](amcheck.html)
 
-    <!---->
+    
 
   * *   [F.2.1. Functions](amcheck.html#AMCHECK-FUNCTIONS)
     * [F.2.2. Optional *`heapallindexed`* Verification](amcheck.html#AMCHECK-OPTIONAL-HEAPALLINDEXED-VERIFICATION)
@@ -117,7 +117,7 @@
   * *   [F.16. file\_fdw — access data files in the server's file system](file-fdw.html)
   * [F.17. fuzzystrmatch — determine string similarities and distance](fuzzystrmatch.html)
 
-    <!---->
+    
 
   * *   [F.17.1. Soundex](fuzzystrmatch.html#FUZZYSTRMATCH-SOUNDEX)
     * [F.17.2. Daitch-Mokotoff Soundex](fuzzystrmatch.html#FUZZYSTRMATCH-DAITCH-MOKOTOFF)
@@ -187,7 +187,7 @@
   * *   [F.25. passwordcheck — verify password strength](passwordcheck.html)
   * [F.26. pg\_buffercache — inspect PostgreSQL buffer cache state](pgbuffercache.html)
 
-    <!---->
+    
 
   * *   [F.26.1. The `pg_buffercache` View](pgbuffercache.html#PGBUFFERCACHE-PG-BUFFERCACHE)
     * [F.26.2. The `pg_buffercache_summary()` Function](pgbuffercache.html#PGBUFFERCACHE-SUMMARY)
@@ -318,7 +318,7 @@
   * [F.44. test\_decoding — SQL-based test/example module for WAL logical decoding](test-decoding.html)
   * [F.45. tsm\_system\_rows — the `SYSTEM_ROWS` sampling method for `TABLESAMPLE`](tsm-system-rows.html)
 
-    <!---->
+    
 
   * [F.45.1. Examples](tsm-system-rows.html#TSM-SYSTEM-ROWS-EXAMPLES)
 

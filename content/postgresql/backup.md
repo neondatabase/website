@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                 Chapter 26. Backup and Restore                 |                                                    |                                 |                                                       |                                            |
 | :------------------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | -----------------------------------------: |
@@ -19,7 +19,7 @@
   * *   [26.2. File System Level Backup](backup-file.html)
   * [26.3. Continuous Archiving and Point-in-Time Recovery (PITR)](continuous-archiving.html)
 
-    <!---->
+    
 
   * *   [26.3.1. Setting Up WAL Archiving](continuous-archiving.html#BACKUP-ARCHIVING-WAL)
     * [26.3.2. Making a Base Backup](continuous-archiving.html#BACKUP-BASE-BACKUP)

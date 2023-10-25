@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                   Chapter 49. Logical Decoding                   |                                                            |                            |                                                       |                                                                         |
 | :--------------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [49.1. Logical Decoding Examples](logicaldecoding-example.html)
   * [49.2. Logical Decoding Concepts](logicaldecoding-explanation.html)
 
-    <!---->
+    
 
   * *   [49.2.1. Logical Decoding](logicaldecoding-explanation.html#LOGICALDECODING-EXPLANATION-LOG-DEC)
     * [49.2.2. Replication Slots](logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS)
@@ -25,7 +25,7 @@
   * [49.5. System Catalogs Related to Logical Decoding](logicaldecoding-catalogs.html)
   * [49.6. Logical Decoding Output Plugins](logicaldecoding-output-plugin.html)
 
-    <!---->
+    
 
   * *   [49.6.1. Initialization Function](logicaldecoding-output-plugin.html#LOGICALDECODING-OUTPUT-INIT)
     * [49.6.2. Capabilities](logicaldecoding-output-plugin.html#LOGICALDECODING-CAPABILITIES)
@@ -36,7 +36,7 @@
   * *   [49.7. Logical Decoding Output Writers](logicaldecoding-writer.html)
   * [49.8. Synchronous Replication Support for Logical Decoding](logicaldecoding-synchronous.html)
 
-    <!---->
+    
 
   * *   [49.8.1. Overview](logicaldecoding-synchronous.html#LOGICALDECODING-SYNCHRONOUS-OVERVIEW)
     * [49.8.2. Caveats](logicaldecoding-synchronous.html#LOGICALDECODING-SYNCHRONOUS-CAVEATS)

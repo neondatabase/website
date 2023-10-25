@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |    Chapter 28. Monitoring Database Activity   |                                                    |                                 |                                                       |                                                         |
 | :-------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [28.1. Standard Unix Tools](monitoring-ps.html)
   * [28.2. The Cumulative Statistics System](monitoring-stats.html)
 
-    <!---->
+    
 
   * *   [28.2.1. Statistics Collection Configuration](monitoring-stats.html#MONITORING-STATS-SETUP)
     * [28.2.2. Viewing Statistics](monitoring-stats.html#MONITORING-STATS-VIEWS)
@@ -44,7 +44,7 @@
   * *   [28.3. Viewing Locks](monitoring-locks.html)
   * [28.4. Progress Reporting](progress-reporting.html)
 
-    <!---->
+    
 
   * *   [28.4.1. ANALYZE Progress Reporting](progress-reporting.html#ANALYZE-PROGRESS-REPORTING)
     * [28.4.2. CLUSTER Progress Reporting](progress-reporting.html#CLUSTER-PROGRESS-REPORTING)

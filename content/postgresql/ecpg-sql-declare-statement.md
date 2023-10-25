@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |             DECLARE STATEMENT            |                                                             |                              |                                                       |                                            |
 | :--------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------: |
@@ -29,7 +29,7 @@ EXEC SQL [ AT connection_name ] DECLARE statement_name STATEMENT
 
     AT clause can be omitted, but such statement has no meaning.
 
-<!---->
+
 
 * *`statement_name`* [#](#ECPG-SQL-DECLARE-STATEMENT-STATEMENT-NAME)
 

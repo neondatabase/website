@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |         Chapter 9. Functions and Operators         |                                            |                           |                                                       |                                                          |
 | :------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
@@ -15,7 +15,7 @@
   * [9.3. Mathematical Functions and Operators](functions-math.html)
   * [9.4. String Functions and Operators](functions-string.html)
 
-    <!---->
+    
 
   * [9.4.1. `format`](functions-string.html#FUNCTIONS-STRING-FORMAT)
 
@@ -23,7 +23,7 @@
   * [9.6. Bit String Functions and Operators](functions-bitstring.html)
   * [9.7. Pattern Matching](functions-matching.html)
 
-    <!---->
+    
 
   * *   [9.7.1. `LIKE`](functions-matching.html#FUNCTIONS-LIKE)
     * [9.7.2. `SIMILAR TO` Regular Expressions](functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP)
@@ -32,7 +32,7 @@
   * *   [9.8. Data Type Formatting Functions](functions-formatting.html)
   * [9.9. Date/Time Functions and Operators](functions-datetime.html)
 
-    <!---->
+    
 
   * *   [9.9.1. `EXTRACT`, `date_part`](functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT)
     * [9.9.2. `date_trunc`](functions-datetime.html#FUNCTIONS-DATETIME-TRUNC)
@@ -48,7 +48,7 @@
   * [9.14. UUID Functions](functions-uuid.html)
   * [9.15. XML Functions](functions-xml.html)
 
-    <!---->
+    
 
   * *   [9.15.1. Producing XML Content](functions-xml.html#FUNCTIONS-PRODUCING-XML)
     * [9.15.2. XML Predicates](functions-xml.html#FUNCTIONS-XML-PREDICATES)
@@ -63,7 +63,7 @@
   * *   [9.17. Sequence Manipulation Functions](functions-sequence.html)
   * [9.18. Conditional Expressions](functions-conditional.html)
 
-    <!---->
+    
 
   * *   [9.18.1. `CASE`](functions-conditional.html#FUNCTIONS-CASE)
     * [9.18.2. `COALESCE`](functions-conditional.html#FUNCTIONS-COALESCE-NVL-IFNULL)
@@ -76,7 +76,7 @@
   * [9.22. Window Functions](functions-window.html)
   * [9.23. Subquery Expressions](functions-subquery.html)
 
-    <!---->
+    
 
   * *   [9.23.1. `EXISTS`](functions-subquery.html#FUNCTIONS-SUBQUERY-EXISTS)
     * [9.23.2. `IN`](functions-subquery.html#FUNCTIONS-SUBQUERY-IN)
@@ -97,7 +97,7 @@
   * *   [9.25. Set Returning Functions](functions-srf.html)
   * [9.26. System Information Functions and Operators](functions-info.html)
 
-    <!---->
+    
 
   * *   [9.26.1. Session Information Functions](functions-info.html#FUNCTIONS-INFO-SESSION)
     * [9.26.2. Access Privilege Inquiry Functions](functions-info.html#FUNCTIONS-INFO-ACCESS)
@@ -126,7 +126,7 @@
   * *   [9.28. Trigger Functions](functions-trigger.html)
   * [9.29. Event Trigger Functions](functions-event-triggers.html)
 
-    <!---->
+    
 
   * *   [9.29.1. Capturing Changes at Command End](functions-event-triggers.html#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
     * [9.29.2. Processing Objects Dropped by a DDL Command](functions-event-triggers.html#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)

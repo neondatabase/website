@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                          Chapter 51. Archive Modules                          |                                                            |                            |                                                       |                                                                    |
 | :---------------------------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [51.1. Initialization Functions](archive-module-init.html)
   * [51.2. Archive Module Callbacks](archive-module-callbacks.html)
 
-    <!---->
+    
 
   * *   [51.2.1. Startup Callback](archive-module-callbacks.html#ARCHIVE-MODULE-STARTUP)
     * [51.2.2. Check Callback](archive-module-callbacks.html#ARCHIVE-MODULE-CHECK)

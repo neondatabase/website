@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |         Chapter 36. ECPG — Embedded SQL in C         |                                                           |                            |                                                       |                                                |
 | :--------------------------------------------------: | :-------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ---------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [36.1. The Concept](ecpg-concept.html)
   * [36.2. Managing Database Connections](ecpg-connect.html)
 
-    <!---->
+    
 
   * *   [36.2.1. Connecting to the Database Server](ecpg-connect.html#ECPG-CONNECTING)
     * [36.2.2. Choosing a Connection](ecpg-connect.html#ECPG-SET-CONNECTION)
@@ -74,7 +74,7 @@
   * [36.12. Large Objects](ecpg-lo.html)
   * [36.13. C++ Applications](ecpg-cpp.html)
 
-    <!---->
+    
 
   * *   [36.13.1. Scope for Host Variables](ecpg-cpp.html#ECPG-CPP-SCOPE)
     * [36.13.2. C++ Application Development with External C Module](ecpg-cpp.html#ECPG-CPP-AND-C)

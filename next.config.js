@@ -148,6 +148,12 @@ const defaultConfig = {
         destination: '/demos/ping-thing',
         permanent: true,
       },
+      // redirect all path that contains /docs/postgres/**/*.html to /docs/postgres/**
+      {
+        source: '/docs/postgres/:path*.html',
+        destination: '/docs/postgres/:path*',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },

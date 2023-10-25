@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |          Chapter 31. Logical Replication          |                                                    |                                 |                                                       |                                                                   |
 | :-----------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [31.1. Publication](logical-replication-publication.html)
   * [31.2. Subscription](logical-replication-subscription.html)
 
-    <!---->
+    
 
   * *   [31.2.1. Replication Slot Management](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
     * [31.2.2. Examples: Set Up Logical Replication](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
@@ -37,7 +37,7 @@
   * [31.6. Restrictions](logical-replication-restrictions.html)
   * [31.7. Architecture](logical-replication-architecture.html)
 
-    <!---->
+    
 
   * [31.7.1. Initial Snapshot](logical-replication-architecture.html#LOGICAL-REPLICATION-SNAPSHOT)
 
@@ -45,7 +45,7 @@
   * [31.9. Security](logical-replication-security.html)
   * [31.10. Configuration Settings](logical-replication-config.html)
 
-    <!---->
+    
 
   * *   [31.10.1. Publishers](logical-replication-config.html#LOGICAL-REPLICATION-CONFIG-PUBLISHER)
     * [31.10.2. Subscribers](logical-replication-config.html#LOGICAL-REPLICATION-CONFIG-SUBSCRIBER)

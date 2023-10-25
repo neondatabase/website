@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |       Chapter 45. PL/Perl — Perl Procedural Language       |                                                            |                            |                                                       |                                                                    |
 | :--------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
@@ -14,7 +14,7 @@
   * [45.2. Data Values in PL/Perl](plperl-data.html)
   * [45.3. Built-in Functions](plperl-builtins.html)
 
-    <!---->
+    
 
   * *   [45.3.1. Database Access from PL/Perl](plperl-builtins.html#PLPERL-DATABASE)
     * [45.3.2. Utility Functions in PL/Perl](plperl-builtins.html#PLPERL-UTILITY-FUNCTIONS)
@@ -25,7 +25,7 @@
   * [45.7. PL/Perl Event Triggers](plperl-event-triggers.html)
   * [45.8. PL/Perl Under the Hood](plperl-under-the-hood.html)
 
-    <!---->
+    
 
   * *   [45.8.1. Configuration](plperl-under-the-hood.html#PLPERL-CONFIG)
     * [45.8.2. Limitations and Missing Features](plperl-under-the-hood.html#PLPERL-MISSING)

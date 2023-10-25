@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |  Chapter 76. How the Planner Uses Statistics  |                                            |                     |                                                       |                                                                       |
 | :-------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [76.1. Row Estimation Examples](row-estimation-examples.html)
   * [76.2. Multivariate Statistics Examples](multivariate-statistics-examples.html)
 
-    <!---->
+    
 
   * *   [76.2.1. Functional Dependencies](multivariate-statistics-examples.html#FUNCTIONAL-DEPENDENCIES)
     * [76.2.2. Multivariate N-Distinct Counts](multivariate-statistics-examples.html#MULTIVARIATE-NDISTINCT-COUNTS)

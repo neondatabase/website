@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                 Chapter 15. Parallel Query                |                                            |                           |                                                       |                                                                         |
 | :-------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
@@ -14,7 +14,7 @@
   * [15.2. When Can Parallel Query Be Used?](when-can-parallel-query-be-used.html)
   * [15.3. Parallel Plans](parallel-plans.html)
 
-    <!---->
+    
 
   * *   [15.3.1. Parallel Scans](parallel-plans.html#PARALLEL-SCANS)
     * [15.3.2. Parallel Joins](parallel-plans.html#PARALLEL-JOINS)

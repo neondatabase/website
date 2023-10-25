@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |           Chapter 55. Frontend/Backend Protocol           |                                            |                     |                                                       |                                                  |
 | :-------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | -----------------------------------------------: |
@@ -37,7 +37,7 @@
   * *   [55.4. Streaming Replication Protocol](protocol-replication.html)
   * [55.5. Logical Streaming Replication Protocol](protocol-logical-replication.html)
 
-    <!---->
+    
 
   * *   [55.5.1. Logical Streaming Replication Parameters](protocol-logical-replication.html#PROTOCOL-LOGICAL-REPLICATION-PARAMS)
     * [55.5.2. Logical Replication Protocol Messages](protocol-logical-replication.html#PROTOCOL-LOGICAL-MESSAGES)

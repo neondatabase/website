@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 | Chapter 75. System Catalog Declarations and Initial Contents |                                            |                     |                                                       |                                                                                    |
 | :----------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [75.1. System Catalog Declaration Rules](system-catalog-declarations.html)
   * [75.2. System Catalog Initial Data](system-catalog-initial-data.html)
 
-    <!---->
+    
 
   * *   [75.2.1. Data File Format](system-catalog-initial-data.html#SYSTEM-CATALOG-INITIAL-DATA-FORMAT)
     * [75.2.2. OID Assignment](system-catalog-initial-data.html#SYSTEM-CATALOG-OID-ASSIGNMENT)

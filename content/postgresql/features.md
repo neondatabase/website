@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                   Appendix D. SQL Conformance                   |                                               |                       |                                                       |                                                               |
 | :-------------------------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
@@ -14,7 +14,7 @@
   * [D.2. Unsupported Features](unsupported-features-sql-standard.html)
   * [D.3. XML Limits and Conformance to SQL/XML](xml-limits-conformance.html)
 
-    <!---->
+    
 
   * *   [D.3.1. Queries Are Restricted to XPath 1.0](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-XPATH1)
     * [D.3.2. Incidental Limits of the Implementation](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-POSTGRESQL)

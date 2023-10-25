@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |               Chapter 35. Large Objects               |                                                           |                            |                                                       |                                             |
 | :---------------------------------------------------: | :-------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ------------------------------------------: |
@@ -14,7 +14,7 @@
   * [35.2. Implementation Features](lo-implementation.html)
   * [35.3. Client Interfaces](lo-interfaces.html)
 
-    <!---->
+    
 
   * *   [35.3.1. Creating a Large Object](lo-interfaces.html#LO-CREATE)
     * [35.3.2. Importing a Large Object](lo-interfaces.html#LO-IMPORT)

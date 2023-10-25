@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |                     Chapter 11. Indexes                     |                                            |                           |                                                       |                                                  |
 | :---------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | -----------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [11.1. Introduction](indexes-intro.html)
   * [11.2. Index Types](indexes-types.html)
 
-    <!---->
+    
 
   * *   [11.2.1. B-Tree](indexes-types.html#INDEXES-TYPES-BTREE)
     * [11.2.2. Hash](indexes-types.html#INDEXES-TYPES-HASH)

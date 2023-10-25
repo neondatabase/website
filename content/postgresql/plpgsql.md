@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |            Chapter 43. PL/pgSQL — SQL Procedural Language            |                                                            |                            |                                                       |                                                 |
 | :------------------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ----------------------------------------------: |
@@ -18,7 +18,7 @@
   * *   [43.2. Structure of PL/pgSQL](plpgsql-structure.html)
   * [43.3. Declarations](plpgsql-declarations.html)
 
-    <!---->
+    
 
   * *   [43.3.1. Declaring Function Parameters](plpgsql-declarations.html#PLPGSQL-DECLARATION-PARAMETERS)
     * [43.3.2. `ALIAS`](plpgsql-declarations.html#PLPGSQL-DECLARATION-ALIAS)
@@ -30,7 +30,7 @@
   * *   [43.4. Expressions](plpgsql-expressions.html)
   * [43.5. Basic Statements](plpgsql-statements.html)
 
-    <!---->
+    
 
   * *   [43.5.1. Assignment](plpgsql-statements.html#PLPGSQL-STATEMENTS-ASSIGNMENT)
     * [43.5.2. Executing SQL Commands](plpgsql-statements.html#PLPGSQL-STATEMENTS-GENERAL-SQL)
@@ -61,7 +61,7 @@
   * *   [43.8. Transaction Management](plpgsql-transactions.html)
   * [43.9. Errors and Messages](plpgsql-errors-and-messages.html)
 
-    <!---->
+    
 
   * *   [43.9.1. Reporting Errors and Messages](plpgsql-errors-and-messages.html#PLPGSQL-STATEMENTS-RAISE)
     * [43.9.2. Checking Assertions](plpgsql-errors-and-messages.html#PLPGSQL-STATEMENTS-ASSERT)

@@ -1,4 +1,4 @@
-<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
 
 |              Appendix J. Documentation              |                                               |                       |                                                       |                                               |
 | :-------------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | --------------------------------------------: |
@@ -13,7 +13,7 @@
   * *   [J.1. DocBook](docguide-docbook.html)
   * [J.2. Tool Sets](docguide-toolsets.html)
 
-    <!---->
+    
 
   * *   [J.2.1. Installation on Fedora, RHEL, and Derivatives](docguide-toolsets.html#DOCGUIDE-TOOLSETS-INST-FEDORA-ET-AL)
     * [J.2.2. Installation on FreeBSD](docguide-toolsets.html#DOCGUIDE-TOOLSETS-INST-FREEBSD)
@@ -32,7 +32,7 @@
   * *   [J.4. Building the Documentation with Meson](docguide-build-meson.html)
   * [J.5. Documentation Authoring](docguide-authoring.html)
 
-    <!---->
+    
 
   * [J.5.1. Emacs](docguide-authoring.html#DOCGUIDE-AUTHORING-EMACS)
 
