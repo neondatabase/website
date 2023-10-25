@@ -13,7 +13,7 @@
     *   [9.18.3. `NULLIF`](functions-conditional.html#FUNCTIONS-NULLIF)
     *   [9.18.4. `GREATEST` and `LEAST`](functions-conditional.html#FUNCTIONS-GREATEST-LEAST)
 
-[]()[]()
+
 
 This section describes the SQL-compliant conditional expressions available in PostgreSQL.
 
@@ -112,7 +112,7 @@ As described in [Section 4.2.14](sql-expressions.html#SYNTAX-EXPRESS-EVAL "4.2.
 
 ### 9.18.2. `COALESCE` [#](#FUNCTIONS-COALESCE-NVL-IFNULL)
 
-[]()[]()[]()
+
 
 ```
 
@@ -134,7 +134,7 @@ Like a `CASE` expression, `COALESCE` only evaluates the arguments that are neede
 
 ### 9.18.3. `NULLIF` [#](#FUNCTIONS-NULLIF)
 
-[]()
+
 
 ```
 
@@ -156,7 +156,7 @@ The result has the same type as the first argument — but there is a subtlety. 
 
 ### 9.18.4. `GREATEST` and `LEAST` [#](#FUNCTIONS-GREATEST-LEAST)
 
-[]()[]()
+
 
 ```
 

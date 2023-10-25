@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## psql
 
@@ -885,7 +885,7 @@ The following meta-commands are defined:
 
         `unaligned` format writes all columns of a row on one line, separated by the currently active field separator. This is useful for creating output that might be intended to be read in by other programs, for example, tab-separated or comma-separated format. However, the field separator character is not treated specially if it appears in a column's value; so CSV format may be better suited for such purposes.
 
-        `csv` format []()writes column values separated by commas, applying the quoting rules described in [RFC 4180](https://tools.ietf.org/html/rfc4180). This output is compatible with the CSV format of the server's `COPY` command. A header line with column names is generated unless the `tuples_only` parameter is `on`. Titles and footers are not printed. Each row is terminated by the system-dependent end-of-line character, which is typically a single newline (`\n`) for Unix-like systems or a carriage return and newline sequence (`\r\n`) for Microsoft Windows. Field separator characters other than comma can be selected with `\pset csv_fieldsep`.
+        `csv` format writes column values separated by commas, applying the quoting rules described in [RFC 4180](https://tools.ietf.org/html/rfc4180). This output is compatible with the CSV format of the server's `COPY` command. A header line with column names is generated unless the `tuples_only` parameter is `on`. Titles and footers are not printed. Each row is terminated by the system-dependent end-of-line character, which is typically a single newline (`\n`) for Unix-like systems or a carriage return and newline sequence (`\r\n`) for Microsoft Windows. Field separator characters other than comma can be selected with `\pset csv_fieldsep`.
 
         `wrapped` format is like `aligned` but wraps wide data values across lines to make the output fit in the target column width. The target width is determined as described under the `columns` option. Note that psql will not attempt to wrap column header titles; therefore, `wrapped` format behaves the same as `aligned` if the total width needed for column headers exceeds the target.
 
@@ -1109,7 +1109,7 @@ The following meta-commands are defined:
 
 #### Patterns
 
-[]()
+
 
 The various `\d` commands accept a *`pattern`* parameter to specify the object name(s) to be displayed. In the simplest case, a pattern is just the exact name of the object. The characters within a pattern are normally folded to lower case, just as in SQL names; for example, `\dt FOO` will display the table named `foo`. As in SQL names, placing double quotes around a pattern stops folding to lower case. Should you need to include an actual double quote character in a pattern, write it as a pair of double quotes within a double-quote sequence; again this is in accord with the rules for SQL quoted identifiers. For example, `\dt "FOO""BAR"` will display the table named `FOO"BAR` (not `foo"bar`). Unlike the normal rules for SQL names, you can put double quotes around just part of a pattern, for instance `\dt FOO"FOO"BAR` will display the table named `fooFOObar`.
 
@@ -1158,7 +1158,7 @@ Variables that control psql's behavior generally cannot be unset or set to inval
 
 The specially treated variables are:
 
-*   `AUTOCOMMIT` []()[#](#APP-PSQL-VARIABLES-AUTOCOMMIT)
+*   `AUTOCOMMIT` [#](#APP-PSQL-VARIABLES-AUTOCOMMIT)
 
     When `on` (the default), each SQL command is automatically committed upon successful completion. To postpone commit in this mode, you must enter a `BEGIN` or `START TRANSACTION` SQL command. When `off` or unset, SQL commands are not committed until you explicitly issue `COMMIT` or `END`. The autocommit-off mode works by issuing an implicit `BEGIN` for you, just before any command that is not already in a transaction block and is not itself a `BEGIN` or other transaction-control command, nor a command that cannot be executed inside a transaction block (such as `VACUUM`).
 
@@ -1261,7 +1261,7 @@ The specially treated variables are:
 
     The primary error message and associated SQLSTATE code for the most recent failed query in the current psql session, or an empty string and `00000` if no error has occurred in the current session.
 
-*   `ON_ERROR_ROLLBACK` []()[#](#APP-PSQL-VARIABLES-ON-ERROR-ROLLBACK)
+*   `ON_ERROR_ROLLBACK` [#](#APP-PSQL-VARIABLES-ON-ERROR-ROLLBACK)
 
     When set to `on`, if a statement in a transaction block generates an error, the error is ignored and the transaction continues. When set to `interactive`, such errors are only ignored in interactive sessions, and not when reading script files. When set to `off` (the default), a statement in a transaction block that generates an error aborts the entire transaction. The error rollback mode works by issuing an implicit `SAVEPOINT` for you, just before each command that is in a transaction block, and then rolling back to the savepoint if the command fails.
 
@@ -1452,7 +1452,7 @@ This feature was shamelessly plagiarized from tcsh.
 
 #### Command-Line Editing
 
-[]()[]()
+
 
 psql uses the Readline or libedit library, if available, for convenient line editing and retrieval. The command history is automatically saved when psql exits and is reloaded when psql starts up. Type up-arrow or control-P to retrieve previous lines.
 

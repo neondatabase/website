@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## PREPARE TRANSACTION
 

@@ -8,7 +8,7 @@
 
 ## 2.3. Creating a New Table [#](#TUTORIAL-TABLE)
 
-[]()
+
 
 You can create a new table by specifying the table name, along with all column names and their types:
 
@@ -43,7 +43,7 @@ CREATE TABLE cities (
 
 The `point` type is an example of a PostgreSQL-specific data type.
 
-[]()Finally, it should be mentioned that if you don't need a table any longer or want to recreate it differently you can remove it using the following command:
+lly, it should be mentioned that if you don't need a table any longer or want to recreate it differently you can remove it using the following command:
 
 ```
 

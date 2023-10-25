@@ -12,7 +12,7 @@
     *   [F.28.2. Sample Output](pgfreespacemap.html#PGFREESPACEMAP-SAMPLE-OUTPUT)
     *   [F.28.3. Author](pgfreespacemap.html#PGFREESPACEMAP-AUTHOR)
 
-[]()
+
 
 The `pg_freespacemap` module provides a means for examining the [free space map](storage-fsm.html "73.3. Free Space Map") (FSM). It provides a function called `pg_freespace`, or two overloaded functions, to be precise. The functions show the value recorded in the free space map for a given page, or for all pages in the relation.
 
@@ -20,7 +20,7 @@ By default use is restricted to superusers and roles with privileges of the `pg_
 
 ### F.28.1. Functions [#](#PGFREESPACEMAP-FUNCS)
 
-*   `pg_freespace(rel regclass IN, blkno bigint IN) returns int2`[]()
+*   `pg_freespace(rel regclass IN, blkno bigint IN) returns int2`
 
     Returns the amount of free space on the page of the relation, specified by `blkno`, according to the FSM.
 

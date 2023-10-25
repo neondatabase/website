@@ -8,7 +8,7 @@
 
 ## 2.5. Querying a Table [#](#TUTORIAL-SELECT)
 
-[]()[]()To retrieve data from a table, the table is *queried*. An SQL `SELECT` statement is used to do this. The statement is divided into a select list (the part that lists the columns to be returned), a table list (the part that lists the tables from which to retrieve the data), and an optional qualification (the part that specifies any restrictions). For example, to retrieve all the rows of table `weather`, type:
+To retrieve data from a table, the table is *queried*. An SQL `SELECT` statement is used to do this. The statement is divided into a select list (the part that lists the columns to be returned), a table list (the part that lists the tables from which to retrieve the data), and an optional qualification (the part that specifies any restrictions). For example, to retrieve all the rows of table `weather`, type:
 
 ```
 
@@ -73,7 +73,7 @@ Result:
 (1 row)
 ```
 
-[]()You can request that the results of a query be returned in sorted order:
+can request that the results of a query be returned in sorted order:
 
 ```
 
@@ -98,7 +98,7 @@ SELECT * FROM weather
     ORDER BY city, temp_lo;
 ```
 
-[]()[]()You can request that duplicate rows be removed from the result of a query:
+request that duplicate rows be removed from the result of a query:
 
 ```
 

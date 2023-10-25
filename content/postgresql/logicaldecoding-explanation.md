@@ -15,7 +15,7 @@
 
 ### 49.2.1. Logical Decoding [#](#LOGICALDECODING-EXPLANATION-LOG-DEC)
 
-[]()
+
 
 Logical decoding is the process of extracting all persistent changes to a database's tables into a coherent, easy to understand format which can be interpreted without detailed knowledge of the database's internal state.
 
@@ -23,7 +23,7 @@ In PostgreSQL, logical decoding is implemented by decoding the contents of the [
 
 ### 49.2.2. Replication Slots [#](#LOGICALDECODING-REPLICATION-SLOTS)
 
-[]()
+
 
 In the context of logical replication, a slot represents a stream of changes that can be replayed to a client in the order they were made on the origin server. Each slot streams a sequence of changes from a single database.
 

@@ -40,7 +40,7 @@
         *   [7.8.3. Common Table Expression Materialization](queries-with.html#QUERIES-WITH-CTE-MATERIALIZATION)
         *   [7.8.4. Data-Modifying Statements in `WITH`](queries-with.html#QUERIES-WITH-MODIFYING)
 
-[]()[]()
+
 
 The previous chapters explained how to create tables, how to fill them with data, and how to manipulate that data. Now we finally discuss how to retrieve the data from the database.
 

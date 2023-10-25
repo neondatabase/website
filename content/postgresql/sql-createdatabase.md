@@ -6,7 +6,7 @@
 
 ***
 
-[]()
+
 
 ## CREATE DATABASE
 
@@ -97,7 +97,7 @@ By default, the new database will be created by cloning the standard system data
 
 *   *`locale_provider`* [#](#CREATE-DATABASE-LOCALE-PROVIDER)
 
-    Specifies the provider to use for the default collation in this database. Possible values are `icu`[]() (if the server was built with ICU support) or `libc`. By default, the provider is the same as that of the [*`template`*](sql-createdatabase.html#CREATE-DATABASE-TEMPLATE). See [Section 24.1.4](locale.html#LOCALE-PROVIDERS "24.1.4. Locale Providers") for details.
+    Specifies the provider to use for the default collation in this database. Possible values are `icu` (if the server was built with ICU support) or `libc`. By default, the provider is the same as that of the [*`template`*](sql-createdatabase.html#CREATE-DATABASE-TEMPLATE). See [Section 24.1.4](locale.html#LOCALE-PROVIDERS "24.1.4. Locale Providers") for details.
 
 *   *`collation_version`* [#](#CREATE-DATABASE-COLLATION-VERSION)
 

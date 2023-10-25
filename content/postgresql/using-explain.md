@@ -12,7 +12,7 @@
     *   [14.1.2. `EXPLAIN ANALYZE`](using-explain.html#USING-EXPLAIN-ANALYZE)
     *   [14.1.3. Caveats](using-explain.html#USING-EXPLAIN-CAVEATS)
 
-[]()[]()
+
 
 PostgreSQL devises a *query plan* for each query it receives. Choosing the right plan to match the query structure and the properties of the data is absolutely critical for good performance, so the system includes a complex *planner* that tries to choose good plans. You can use the [`EXPLAIN`](sql-explain.html "EXPLAIN") command to see what query plan the planner creates for any query. Plan-reading is an art that requires some experience to master, but this section attempts to cover the basics.
 

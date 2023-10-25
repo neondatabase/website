@@ -8,7 +8,7 @@
 
 ## 54.12. `pg_locks` [#](#VIEW-PG-LOCKS)
 
-[]()
+
 
 The view `pg_locks` provides access to information about the locks held by active processes within the database server. See [Chapter 13](mvcc.html "Chapter 13. Concurrency Control") for more discussion of locking.
 

@@ -8,7 +8,7 @@
 
 ## 2.7. Aggregate Functions [#](#TUTORIAL-AGG)
 
-[]()
+
 
 Like most other relational database products, PostgreSQL supports *aggregate functions*. An aggregate function computes a single result from multiple input rows. For example, there are aggregates to compute the `count`, `sum`, `avg` (average), `max` (maximum) and `min` (minimum) over a set of rows.
 
@@ -27,7 +27,7 @@ SELECT max(temp_lo) FROM weather;
 (1 row)
 ```
 
-[]()If we wanted to know what city (or cities) that reading occurred in, we might try:
+e wanted to know what city (or cities) that reading occurred in, we might try:
 
 ```
 
@@ -52,7 +52,7 @@ SELECT city FROM weather
 
 This is OK because the subquery is an independent computation that computes its own aggregate separately from what is happening in the outer query.
 
-[]()[]()Aggregates are also very useful in combination with `GROUP BY` clauses. For example, we can get the number of readings and the maximum low temperature observed in each city with:
+es are also very useful in combination with `GROUP BY` clauses. For example, we can get the number of readings and the maximum low temperature observed in each city with:
 
 ```
 
