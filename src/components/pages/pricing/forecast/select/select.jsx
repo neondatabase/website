@@ -56,10 +56,11 @@ const Select = (props) => {
     }
 
     if (windowHeight < 1400) {
-      return -(windowHeight - 760) / 2;
+      // 1400 is the height of the page screen when section height is 760
+      return -(windowHeight - 760) / 2; // 760px - min height of the section
     }
 
-    return -(windowHeight - 975) / 2;
+    return -(windowHeight - 975) / 2; // 975px - max height of the section
   };
 
   return (
