@@ -88,10 +88,7 @@ const Metrics = ({
     <>
       {items.map((item, index) => (
         <Select
-          className={clsx(
-            index === 0 ? 'h-[50vh]' : 'h-[60vh]',
-            'scroll-mt-[calc((100vh-975px)/2)] [@media(max-height:1400px)]:scroll-mt-[calc((100vh-760px)/2)]'
-          )}
+          className={clsx(index === 0 ? 'h-[50vh]' : 'h-[60vh]')}
           key={item.label}
           {...item}
           index={index}

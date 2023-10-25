@@ -2,7 +2,6 @@
 
 import useScrollPosition from '@react-hook/window-scroll';
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
-import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -32,13 +31,6 @@ const PAGE_HEIGHT_SETTINGS = [
   [Number.MAX_SAFE_INTEGER, 0.35, 600], // max height
 ];
 
-const PROGRESS_BAR_VALUE = {
-  0: 4,
-  1: 32,
-  2: 60,
-  3: 88,
-};
-
 const getSelectedIndex = (activeTitle, items) => {
   const index = items.findIndex((item) => item.title === activeTitle);
   return index === -1 ? 1 : index + 1;
@@ -66,23 +58,6 @@ const Forecast = () => {
   });
 
   const [showSectionTitle, setShowSectionTitle] = useState(true);
-
-  const progressBarKey = useMemo(() => {
-    const selectedCount = Object.keys(activeItems).filter(
-      (key) => activeItems[key] !== null
-    ).length;
-
-    switch (selectedCount) {
-      case 1:
-        return 1;
-      case 2:
-        return 2;
-      case 3:
-        return 3;
-      default:
-        return 0;
-    }
-  }, [activeItems]);
 
   useEffect(() => {
     if (isContentInView) {
@@ -184,16 +159,6 @@ const Forecast = () => {
     [activeItems]
   );
 
-  const allItemsUnselected = useMemo(
-    () =>
-      !!(
-        activeItems.activity === null &&
-        activeItems.performance === null &&
-        activeItems.storage === null
-      ),
-    [activeItems]
-  );
-
   useEffect(() => {
     const currentScrollTop = scrollY;
     const switchPointMultiplier =
@@ -287,41 +252,6 @@ const Forecast = () => {
               setActiveAnimations={setActiveAnimations}
               allItemsSelected={allItemsSelected}
             />
-          </div>
-
-          <div className="sticky top-0 h-screen min-h-[700px] -right-10 -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh] flex items-center xl:justify-end xl:col-end-13 xl:row-start-1 xl:col-span-1 xl:right-0 xl:-mr-6 md:hidden">
-            <m.button
-              className={clsx(
-                'relative flex flex-col after:absolute after:-inset-x-3 after:-inset-y-2',
-                allItemsUnselected ? 'pointer-events-auto' : 'pointer-events-none'
-              )}
-              initial={{ opacity: 1 }}
-              animate={{ opacity: allItemsSelected ? 0 : 1 }}
-              transition={{ duration: 0.2, delay: 2 }}
-              type="button"
-              onClick={() => {
-                if (allItemsUnselected) {
-                  document.getElementById('activity').scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-            >
-              <m.span
-                className="absolute top-0 w-1 flex rounded-[20px] bg-gray-new-98"
-                initial={{ height: 0 }}
-                animate={{
-                  height: PROGRESS_BAR_VALUE[progressBarKey],
-                }}
-              />
-              {Array.from({ length: 4 }).map((_, index) => (
-                <span
-                  className={clsx(
-                    'block rounded-full w-1 h-1 mb-6 last:mb-0 transition-colors duration-200',
-                    index === progressBarKey ? 'bg-gray-new-98' : 'bg-gray-new-40'
-                  )}
-                  key={index}
-                />
-              ))}
-            </m.button>
           </div>
         </Container>
       </LazyMotion>

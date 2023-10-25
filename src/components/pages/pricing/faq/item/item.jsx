@@ -32,7 +32,7 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, linkLabel = n
   return (
     <li className="border-b border-gray-new-20 py-3.5">
       <button
-        className="flex w-full items-start gap-4 text-left"
+        className="relative flex w-full items-start gap-4 text-left after:absolute after:w-full after:left-0 after:-inset-y-3.5"
         type="button"
         aria-expanded={isOpen}
         aria-controls={index}
