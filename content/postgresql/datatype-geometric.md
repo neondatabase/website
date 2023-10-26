@@ -1,5 +1,4 @@
 
-
 |                 8.8. Geometric Types                |                                             |                       |                                                       |                                                               |
 | :-------------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
 | [Prev](datatype-enum.html "8.7. Enumerated Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-net-types.html "8.9. Network Address Types") |
@@ -8,13 +7,13 @@
 
 ## 8.8. Geometric Types [#](#DATATYPE-GEOMETRIC)
 
-  * *   [8.8.1. Points](datatype-geometric.html#DATATYPE-GEOMETRIC-POINTS)
-  * [8.8.2. Lines](datatype-geometric.html#DATATYPE-LINE)
-  * [8.8.3. Line Segments](datatype-geometric.html#DATATYPE-LSEG)
-  * [8.8.4. Boxes](datatype-geometric.html#DATATYPE-GEOMETRIC-BOXES)
-  * [8.8.5. Paths](datatype-geometric.html#DATATYPE-GEOMETRIC-PATHS)
-  * [8.8.6. Polygons](datatype-geometric.html#DATATYPE-POLYGON)
-  * [8.8.7. Circles](datatype-geometric.html#DATATYPE-CIRCLE)
+* *   [8.8.1. Points](datatype-geometric.html#DATATYPE-GEOMETRIC-POINTS)
+* [8.8.2. Lines](datatype-geometric.html#DATATYPE-LINE)
+* [8.8.3. Line Segments](datatype-geometric.html#DATATYPE-LSEG)
+* [8.8.4. Boxes](datatype-geometric.html#DATATYPE-GEOMETRIC-BOXES)
+* [8.8.5. Paths](datatype-geometric.html#DATATYPE-GEOMETRIC-PATHS)
+* [8.8.6. Polygons](datatype-geometric.html#DATATYPE-POLYGON)
+* [8.8.7. Circles](datatype-geometric.html#DATATYPE-CIRCLE)
 
 Geometric data types represent two-dimensional spatial objects. [Table 8.20](datatype-geometric.html#DATATYPE-GEO-TABLE "Table 8.20. Geometric Types") shows the geometric types available in PostgreSQL.
 
@@ -22,14 +21,14 @@ Geometric data types represent two-dimensional spatial objects. [Table 8.20](da
 
 | Name      | Storage Size | Description                      | Representation                      |
 | --------- | ------------ | -------------------------------- | ----------------------------------- |
-| `point`   | 16 bytes     | Point on a plane                 | (x,y)                               |
-| `line`    | 32 bytes     | Infinite line                    | {A,B,C}                             |
-| `lseg`    | 32 bytes     | Finite line segment              | ((x1,y1),(x2,y2))                   |
-| `box`     | 32 bytes     | Rectangular box                  | ((x1,y1),(x2,y2))                   |
-| `path`    | 16+16n bytes | Closed path (similar to polygon) | ((x1,y1),...)                       |
-| `path`    | 16+16n bytes | Open path                        | \[(x1,y1),...]                      |
-| `polygon` | 40+16n bytes | Polygon (similar to closed path) | ((x1,y1),...)                       |
-| `circle`  | 24 bytes     | Circle                           | <(x,y),r> (center point and radius) |
+| `point`   | 16 bytes     | Point on a plane                 | `(x,y)`                               |
+| `line`    | 32 bytes     | Infinite line                    | `{A,B,C}`                             |
+| `lseg`    | 32 bytes     | Finite line segment              | `((x1,y1),(x2,y2))`                   |
+| `box`     | 32 bytes     | Rectangular box                  | `((x1,y1),(x2,y2))`                   |
+| `path`    | 16+16n bytes | Closed path (similar to polygon) | `((x1,y1),...)`                       |
+| `path`    | 16+16n bytes | Open path                        | `[(x1,y1),...]`                      |
+| `polygon` | 40+16n bytes | Polygon (similar to closed path) | `((x1,y1),...)`                       |
+| `circle`  | 24 bytes     | Circle                           | `<(x,y),r>` (center point and radius) |
 
 \
 

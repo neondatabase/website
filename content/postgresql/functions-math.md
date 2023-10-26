@@ -1,5 +1,4 @@
 
-
 |                   9.3. Mathematical Functions and Operators                  |                                                           |                                    |                                                       |                                                                      |
 | :--------------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
 | [Prev](functions-comparison.html "9.2. Comparison Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-string.html "9.4. String Functions and Operators") |
@@ -83,7 +82,7 @@ Mathematical operators are provided for many PostgreSQL types. For types without
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                                                                                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `random` ( ) → `double precision`Returns a random value in the range 0.0 <= x < 1.0`random()` → `0.897124072839091`                                                                                                                                                                         |
+| `random` ( ) → `double precision`Returns a random value in the range `0.0 <= x < 1.0``random()` → `0.897124072839091`                                                                                                                                                                         |
 | `random_normal` ( \[ *`mean`* `double precision` \[, *`stddev`* `double precision` ]] ) → `double precision`Returns a random value from the normal distribution with the given parameters; *`mean`* defaults to 0.0 and *`stddev`* defaults to 1.0`random_normal(0.0, 1.0)` → `0.051285419` |
 | `setseed` ( `double precision` ) → `void`Sets the seed for subsequent `random()` and `random_normal()` calls; argument must be between -1.0 and 1.0, inclusive`setseed(0.12345)`                                                                                                            |
 

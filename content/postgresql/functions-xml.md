@@ -1,5 +1,4 @@
 
-
 |                 9.15. XML Functions                 |                                                           |                                    |                                                       |                                                                   |
 | :-------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
 | [Prev](functions-uuid.html "9.14. UUID Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-json.html "9.16. JSON Functions and Operators") |
@@ -9,9 +8,9 @@
 ## 9.15. XML Functions [#](#FUNCTIONS-XML)
 
   * *   [9.15.1. Producing XML Content](functions-xml.html#FUNCTIONS-PRODUCING-XML)
-  * [9.15.2. XML Predicates](functions-xml.html#FUNCTIONS-XML-PREDICATES)
-  * [9.15.3. Processing XML](functions-xml.html#FUNCTIONS-XML-PROCESSING)
-  * [9.15.4. Mapping Tables to XML](functions-xml.html#FUNCTIONS-XML-MAPPING)
+* [9.15.2. XML Predicates](functions-xml.html#FUNCTIONS-XML-PREDICATES)
+* [9.15.3. Processing XML](functions-xml.html#FUNCTIONS-XML-PROCESSING)
+* [9.15.4. Mapping Tables to XML](functions-xml.html#FUNCTIONS-XML-MAPPING)
 
 The functions and function-like expressions described in this section operate on values of type `xml`. See [Section 8.13](datatype-xml.html "8.13. XML Type") for information about the `xml` type. The function-like expressions `xmlparse` and `xmlserialize` for converting to and from type `xml` are documented there, not in this section.
 
@@ -147,7 +146,7 @@ SELECT xmlelement(name foo, xmlattributes('xyz' as bar),
  <foo bar="xyz"><abc/><!--test--><xyz/></foo>
 ```
 
-Content of other types will be formatted into valid XML character data. This means in particular that the characters <, >, and & will be converted to entities. Binary data (data type `bytea`) will be represented in base64 or hex encoding, depending on the setting of the configuration parameter [xmlbinary](runtime-config-client.html#GUC-XMLBINARY). The particular behavior for individual data types is expected to evolve in order to align the PostgreSQL mappings with those specified in SQL:2006 and later, as discussed in [Section D.3.1.3](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-CASTS "D.3.1.3. Mappings between SQL and XML Data Types and Values").
+Content of other types will be formatted into valid XML character data. This means in particular that the characters `<`, `>`, and `&` will be converted to entities. Binary data (data type `bytea`) will be represented in base64 or hex encoding, depending on the setting of the configuration parameter [xmlbinary](runtime-config-client.html#GUC-XMLBINARY). The particular behavior for individual data types is expected to evolve in order to align the PostgreSQL mappings with those specified in SQL:2006 and later, as discussed in [Section D.3.1.3](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-CASTS "D.3.1.3. Mappings between SQL and XML Data Types and Values").
 
 #### 9.15.1.4. `xmlforest` [#](#FUNCTIONS-PRODUCING-XML-XMLFOREST)
 

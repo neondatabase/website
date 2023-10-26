@@ -114,7 +114,7 @@ The commands accepted in replication mode are:
 
         The name of the output plugin used by the newly-created replication slot. Null if the created slot is physical.
 
-* `CREATE_REPLICATION_SLOT` *`slot_name`* \[ `TEMPORARY` ] { `PHYSICAL` \[ `RESERVE_WAL` ] | `LOGICAL` *`output_plugin`* \[ `EXPORT_SNAPSHOT` | `NOEXPORT_SNAPSHOT` | `USE_SNAPSHOT` | `TWO_PHASE` ] } [#](#PROTOCOL-REPLICATION-CREATE-REPLICATION-SLOT-LEGACY)
+* `CREATE_REPLICATION_SLOT` *`slot_name`* \[ `TEMPORARY` ] \{ `PHYSICAL` \[ `RESERVE_WAL` ] | `LOGICAL` *`output_plugin`* \[ `EXPORT_SNAPSHOT` | `NOEXPORT_SNAPSHOT` | `USE_SNAPSHOT` | `TWO_PHASE` ] } [#](#PROTOCOL-REPLICATION-CREATE-REPLICATION-SLOT-LEGACY)
 
     For compatibility with older releases, this alternative syntax for the `CREATE_REPLICATION_SLOT` command is still supported.
 

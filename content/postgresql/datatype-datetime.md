@@ -1,5 +1,4 @@
 
-
 |                  8.5. Date/Time Types                  |                                             |                       |                                                       |                                                    |
 | :----------------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | -------------------------------------------------: |
 | [Prev](datatype-binary.html "8.4. Binary Data Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-boolean.html "8.6. Boolean Type") |
@@ -8,11 +7,11 @@
 
 ## 8.5. Date/Time Types [#](#DATATYPE-DATETIME)
 
-  * *   [8.5.1. Date/Time Input](datatype-datetime.html#DATATYPE-DATETIME-INPUT)
-  * [8.5.2. Date/Time Output](datatype-datetime.html#DATATYPE-DATETIME-OUTPUT)
-  * [8.5.3. Time Zones](datatype-datetime.html#DATATYPE-TIMEZONES)
-  * [8.5.4. Interval Input](datatype-datetime.html#DATATYPE-INTERVAL-INPUT)
-  * [8.5.5. Interval Output](datatype-datetime.html#DATATYPE-INTERVAL-OUTPUT)
+* *   [8.5.1. Date/Time Input](datatype-datetime.html#DATATYPE-DATETIME-INPUT)
+* [8.5.2. Date/Time Output](datatype-datetime.html#DATATYPE-DATETIME-OUTPUT)
+* [8.5.3. Time Zones](datatype-datetime.html#DATATYPE-TIMEZONES)
+* [8.5.4. Interval Input](datatype-datetime.html#DATATYPE-INTERVAL-INPUT)
+* [8.5.5. Interval Output](datatype-datetime.html#DATATYPE-INTERVAL-OUTPUT)
 
 PostgreSQL supports the full set of SQL date and time types, shown in [Table 8.9](datatype-datetime.html#DATATYPE-DATETIME-TABLE "Table 8.9. Date/Time Types"). The operations available on these data types are described in [Section 9.9](functions-datetime.html "9.9. Date/Time Functions and Operators"). Dates are counted according to the Gregorian calendar, even in years before that calendar was introduced (see [Section B.6](datetime-units-history.html "B.6. History of Units") for more information).
 
@@ -113,7 +112,7 @@ Valid input for these types consists of a time of day followed by an optional ti
 | `04:05`                                | ISO 8601                                                  |
 | `040506`                               | ISO 8601                                                  |
 | `04:05 AM`                             | same as 04:05; AM does not affect value                   |
-| `04:05 PM`                             | same as 16:05; input hour must be <= 12                   |
+| `04:05 PM`                             | same as 16:05; input hour must be `<= 12`                   |
 | `04:05:06.789-8`                       | ISO 8601, with time zone as UTC offset                    |
 | `04:05:06-08:00`                       | ISO 8601, with time zone as UTC offset                    |
 | `04:05-08:00`                          | ISO 8601, with time zone as UTC offset                    |
