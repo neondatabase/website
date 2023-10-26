@@ -2,7 +2,7 @@
 title: Neon status
 subtitle: Stay informed about the performance and availability of Neon
 enableTableOfContents: true
-updatedOn: '2023-09-20T12:37:42Z'
+updatedOn: '2023-10-07T10:43:33.416Z'
 ---
 
 For our customers to stay informed about the performance and availability of Neon, we provide a dedicated status page where you can monitor the health of our service in real-time.

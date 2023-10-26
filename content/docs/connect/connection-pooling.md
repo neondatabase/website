@@ -4,7 +4,7 @@ subtitle: Learn how to enable connection pooling in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2023-10-19T23:10:12.816Z'
+updatedOn: '2023-10-24T18:56:54.980Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to offer support for connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -15,13 +15,13 @@ This topic describes Neon's default connection limits, how connection pooling wo
 
 Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the `max_connections` parameter.
 
-In Neon, the size of your compute determines the `max_connections` setting. The formula used to calculate `max_connections` is `RAM in bytes / 9531392 bytes`. For a Free Tier compute, which has 1 GB of RAM, this works out to approximately 100 connections. Larger computes offered with the [Neon Pro plan](/docs/introduction/pro-plan) have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
+In Neon, the size of your compute determines the `max_connections` setting. The formula used to calculate `max_connections` is `RAM in bytes / 9531392 bytes`. For a Neon Free Tier compute, which has 1 GB of RAM, this works out to approximately 100 connections. Larger computes offered with the [Neon Pro Plan](/docs/introduction/pro-plan) have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
 
 ```sql
 SHOW max_connections;
 ```
 
-Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the [Free Tier](/docs/introduction/free-tier), support connection pooling.
+Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the [Neon Free Tier](/docs/introduction/free-tier), support connection pooling.
 
 ## Connection pooling
 

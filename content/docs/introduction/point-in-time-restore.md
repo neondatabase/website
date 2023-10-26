@@ -2,14 +2,14 @@
 title: Point-in-time restore
 subtitle: Restore your data to a previous state
 enableTableOfContents: true
-updatedOn: '2023-09-15T20:02:38Z'
+updatedOn: '2023-10-24T18:56:54.989Z'
 ---
 
 Neon retains a history of changes for all branches, enabling point-in-time restore. This feature allows you to restore data to any point within the retention period. You can use the point-in-time restore feature as a database [backup](/docs/manage/backups) strategy, to view the past state of your database, or to recover lost data.
 
 ## History retention
 
-The history retention period is 7 days, by default, but is configurable. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users.
+The history retention period is 7 days, by default, but is configurable. The supported range is 0 to 7 days for [Neon Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Neon Pro Plan](/docs/introduction/pro-plan) users.
 
 You can configure the **History retention** setting in the Neon Console, under **Settings** > **Storage**. For further instructions, see [Configure history retention](/docs/manage/projects#configure-history-retention).
 ![History retention configuration](/docs/relnotes/history_retention.png)

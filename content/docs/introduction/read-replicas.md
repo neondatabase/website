@@ -2,7 +2,7 @@
 title: Read replicas
 subtitle: Maximize scalability and more with Neon's instant read replicas
 enableTableOfContents: true
-updatedOn: '2023-08-08T20:44:56Z'
+updatedOn: '2023-10-24T18:56:54.990Z'
 ---
 
 Neon read replicas are independent read-only compute instances designed to perform read operations on the same data as your read-write computes. Neon read replicas do not replicate data across database instances. Instead, read requests are directed to a single source — a capability made possible by Neon's architecture, which separates storage and compute. The following diagram shows how read-write and read-only compute instances send read requests to the same Neon [Pageserver](/docs/reference/glossary#pageserver).
@@ -40,4 +40,4 @@ Advantages of Neon's read replica feature include the following:
 
 ## Get started with read replicas
 
-The first step to leveraging Neon's read replica feature is to sign up for Neon's [Pro plan](/docs/introduction/pro-plan). After subscribing, you will be able to create and configure read replicas. To get started, refer to the [Working with read replicas](/docs/guides/read-replica-guide) guide.
+The first step to leveraging Neon's read replica feature is to sign up for the [Neon Pro Plan](/docs/introduction/pro-plan). After subscribing, you will be able to create and configure read replicas. To get started, refer to the [Working with read replicas](/docs/guides/read-replica-guide) guide.

@@ -1,8 +1,9 @@
 ---
 title: Promote a branch
-subtitle: Learn how to promote a branch to the primary branch of your Neon project using the Neon API
+subtitle: Learn how to promote a branch to the primary branch of your Neon project using
+  the Neon API
 enableTableOfContents: true
-updatedOn: '2023-09-06T15:12:51Z'
+updatedOn: '2023-10-24T18:56:54.983Z'
 ---
 
 This guide describes how to create a new branch and promote it to the primary branch of your Neon project in the context of a data recovery scenario. It also describes how to move the compute endpoint from your existing primary branch to the new branch to avoid having to reconfigure your application's database connection details.
@@ -11,8 +12,8 @@ This guide describes how to create a new branch and promote it to the primary br
 
 Each Neon project has a primary branch. In the Neon Console, your primary branch is identified on the **Branches** page by a `PRIMARY` tag. You can designate any branch as the primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch, which is typically the branch used in production.
 
-- For [Free Tier](/docs/introduction/free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
-- For [Pro plan](/docs/introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
+- For [Neon Free Tier](/docs/introduction/free-tier) users, the compute endpoint associated with the primary branch remains accessible if you exceed the _Active time_ limit of 100 hours per month.
+- For [Neon Pro Plan](/docs/introduction/pro-plan) users, the compute endpoint associated with the primary branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 simultaneously active computes to protect your account from unintended usage.
 
 ## Why promote a branch to primary?
 
