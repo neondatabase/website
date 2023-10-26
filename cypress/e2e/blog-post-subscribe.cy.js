@@ -21,7 +21,7 @@ describe('Blog Post Subscribe Form', () => {
 
   it('displays an error message when the form is submitted with no email', () => {
     cy.get('button[type="submit"]').click();
-    cy.get('[data-test=error-message]').should('exist');
+    cy.getByData('error-message').should('exist');
   });
 
   it('displays an error message when there is server error', () => {
