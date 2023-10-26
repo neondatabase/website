@@ -53,8 +53,6 @@ const CodeBlock = ({
   const match = /language-(\w+)/.exec(className || '');
   const snippetLanguage = (match ? match[1] : language) || DEFAULT_LANGUAGE;
 
-  console.log(children);
-
   const code =
     typeof children === 'string'
       ? children
