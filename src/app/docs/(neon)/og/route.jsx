@@ -5,16 +5,16 @@ export const preferredRegion = 'auto';
 
 export async function GET(request) {
   const fontMedium = fetch(
-    new URL('../../../../public/fonts/ibm-plex-sans/ibm-plex-sans-medium.ttf', import.meta.url)
+    new URL('../../../../../public/fonts/ibm-plex-sans/ibm-plex-sans-medium.ttf', import.meta.url)
   ).then((res) => res.arrayBuffer());
   const fontNormal = fetch(
-    new URL('../../../../public/fonts/ibm-plex-sans/ibm-plex-sans-regular.ttf', import.meta.url)
+    new URL('../../../../../public/fonts/ibm-plex-sans/ibm-plex-sans-regular.ttf', import.meta.url)
   ).then((res) => res.arrayBuffer());
-  const logo = fetch(new URL('../../../../public/images/og-image/logo.png', import.meta.url)).then(
-    (res) => res.arrayBuffer()
-  );
+  const logo = fetch(
+    new URL('../../../../../public/images/og-image/logo.png', import.meta.url)
+  ).then((res) => res.arrayBuffer());
   const background = fetch(
-    new URL('../../../../public/images/og-image/background.png', import.meta.url)
+    new URL('../../../../../public/images/og-image/background.png', import.meta.url)
   ).then((res) => res.arrayBuffer());
 
   const [fontDataMedium, fontDataNormal, logoData, backgroundData] = await Promise.all([
