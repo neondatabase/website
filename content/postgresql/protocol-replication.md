@@ -1,5 +1,4 @@
 
-
 |              55.4. Streaming Replication Protocol             |                                                             |                                       |                                                       |                                                                                           |
 | :-----------------------------------------------------------: | :---------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------------------: |
 | [Prev](sasl-authentication.html "55.3. SASL Authentication")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") | Chapter 55. Frontend/Backend Protocol | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](protocol-logical-replication.html "55.5. Logical Streaming Replication Protocol") |
@@ -67,7 +66,7 @@ The commands accepted in replication mode are:
 
         Contents of the timeline history file.
 
-* `CREATE_REPLICATION_SLOT` *`slot_name`* \[ `TEMPORARY` ] { `PHYSICAL` | `LOGICAL` *`output_plugin`* } \[ ( *`option`* \[, ...] ) ] [#](#PROTOCOL-REPLICATION-CREATE-REPLICATION-SLOT)
+* `CREATE_REPLICATION_SLOT` *`slot_name`* \[ `TEMPORARY` ] \{ `PHYSICAL` | `LOGICAL` *`output_plugin`* \} \[ ( *`option`* \[, ...] ) ] [#](#PROTOCOL-REPLICATION-CREATE-REPLICATION-SLOT)
 
     Create a physical or logical replication slot. See [Section 27.2.6](warm-standby.html#STREAMING-REPLICATION-SLOTS "27.2.6. Replication Slots") for more about replication slots.
 

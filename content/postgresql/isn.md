@@ -1,5 +1,4 @@
 
-
 | F.21. isn — data types for international standard numbers (ISBN, EAN, UPC, etc.) |                                                                             |                                                        |                                                       |                                                    |
 | :------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------: |
 |      [Prev](intarray.html "F.20. intarray — manipulate arrays of integers")      | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](lo.html "F.22. lo — manage large objects") |
@@ -8,12 +7,12 @@
 
 ## F.21. isn — data types for international standard numbers (ISBN, EAN, UPC, etc.) [#](#ISN)
 
-  * *   [F.21.1. Data Types](isn.html#ISN-DATA-TYPES)
-  * [F.21.2. Casts](isn.html#ISN-CASTS)
-  * [F.21.3. Functions and Operators](isn.html#ISN-FUNCS-OPS)
-  * [F.21.4. Examples](isn.html#ISN-EXAMPLES)
-  * [F.21.5. Bibliography](isn.html#ISN-BIBLIOGRAPHY)
-  * [F.21.6. Author](isn.html#ISN-AUTHOR)
+* *   [F.21.1. Data Types](isn.html#ISN-DATA-TYPES)
+* [F.21.2. Casts](isn.html#ISN-CASTS)
+* [F.21.3. Functions and Operators](isn.html#ISN-FUNCS-OPS)
+* [F.21.4. Examples](isn.html#ISN-EXAMPLES)
+* [F.21.5. Bibliography](isn.html#ISN-BIBLIOGRAPHY)
+* [F.21.6. Author](isn.html#ISN-AUTHOR)
 
 The `isn` module provides data types for the following international product numbering standards: EAN13, UPC, ISBN (books), ISMN (music), and ISSN (serials). Numbers are validated on input according to a hard-coded list of prefixes; this list of prefixes is also used to hyphenate numbers on output. Since new prefixes are assigned from time to time, the list of prefixes may be out of date. It is hoped that a future version of this module will obtain the prefix list from one or more tables that can be easily updated by users as needed; however, at present, the list can only be updated by modifying the source code and recompiling. Alternatively, prefix validation and hyphenation support may be dropped from a future version of this module.
 
@@ -56,16 +55,16 @@ The `ISBN`, `ISMN`, and `ISSN` types will display the short version of the numbe
 
 The `isn` module provides the following pairs of type casts:
 
-* ISBN13 <=> EAN13
-* ISMN13 <=> EAN13
-* ISSN13 <=> EAN13
-* ISBN <=> EAN13
-* ISMN <=> EAN13
-* ISSN <=> EAN13
-* UPC <=> EAN13
-* ISBN <=> ISBN13
-* ISMN <=> ISMN13
-* ISSN <=> ISSN13
+* `ISBN13 <=> EAN13`
+* `ISMN13 <=> EAN13`
+* `ISSN13 <=> EAN13`
+* `ISBN <=> EAN13`
+* `ISMN <=> EAN13`
+* `ISSN <=> EAN13`
+* `UPC <=> EAN13`
+* `ISBN <=> ISBN13`
+* `ISMN <=> ISMN13`
+* `ISSN <=> ISSN13`
 
 When casting from `EAN13` to another type, there is a run-time check that the value is within the domain of the other type, and an error is thrown if not. The other casts are simply relabelings that will always succeed.
 

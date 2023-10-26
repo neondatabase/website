@@ -1,5 +1,4 @@
 
-
 |                        F.38. seg — a datatype for line segments or floating point intervals                       |                                                                             |                                                        |                                                       |                                                                                                                     |
 | :---------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------: |
 | [Prev](postgres-fdw.html "F.37. postgres_fdw —&#xA;   access data stored in external PostgreSQL&#xA;   servers")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sepgsql.html "F.39. sepgsql —&#xA;   SELinux-, label-based mandatory access control (MAC) security module") |
@@ -8,12 +7,12 @@
 
 ## F.38. seg — a datatype for line segments or floating point intervals [#](#SEG)
 
-  * *   [F.38.1. Rationale](seg.html#SEG-RATIONALE)
-  * [F.38.2. Syntax](seg.html#SEG-SYNTAX)
-  * [F.38.3. Precision](seg.html#SEG-PRECISION)
-  * [F.38.4. Usage](seg.html#SEG-USAGE)
-  * [F.38.5. Notes](seg.html#SEG-NOTES)
-  * [F.38.6. Credits](seg.html#SEG-CREDITS)
+* *   [F.38.1. Rationale](seg.html#SEG-RATIONALE)
+* [F.38.2. Syntax](seg.html#SEG-SYNTAX)
+* [F.38.3. Precision](seg.html#SEG-PRECISION)
+* [F.38.4. Usage](seg.html#SEG-USAGE)
+* [F.38.5. Notes](seg.html#SEG-NOTES)
+* [F.38.6. Credits](seg.html#SEG-CREDITS)
 
 This module implements a data type `seg` for representing line segments, or floating point intervals. `seg` can represent uncertainty in the interval endpoints, making it especially useful for representing laboratory measurements.
 
@@ -103,10 +102,10 @@ The `seg` module includes a GiST index operator class for `seg` values. The oper
 
 | OperatorDescription                                                                                                           |
 | ----------------------------------------------------------------------------------------------------------------------------- |
-| `seg` `<<` `seg` → `boolean`Is the first `seg` entirely to the left of the second? \[a, b] << \[c, d] is true if b < c.       |
-| `seg` `>>` `seg` → `boolean`Is the first `seg` entirely to the right of the second? \[a, b] >> \[c, d] is true if a > d.      |
-| `seg` `&<` `seg` → `boolean`Does the first `seg` not extend to the right of the second? \[a, b] &< \[c, d] is true if b <= d. |
-| `seg` `&>` `seg` → `boolean`Does the first `seg` not extend to the left of the second? \[a, b] &> \[c, d] is true if a >= c.  |
+| `seg` `<<` `seg` → `boolean`Is the first `seg` entirely to the left of the second? `[a, b] << [c, d]` is true if `b < c`.       |
+| `seg` `>>` `seg` → `boolean`Is the first `seg` entirely to the right of the second? `[a, b] >> [c, d]` is true if `a > d`.      |
+| `seg` `&<` `seg` → `boolean`Does the first `seg` not extend to the right of the second? `[a, b] &< [c, d]` is true if `b <= d`. |
+| `seg` `&>` `seg` → `boolean`Does the first `seg` not extend to the left of the second? `[a, b] &> [c, d]` is true if `a >= c`.  |
 | `seg` `=` `seg` → `boolean`Are the two `seg`s equal?                                                                          |
 | `seg` `&&` `seg` → `boolean`Do the two `seg`s overlap?                                                                        |
 | `seg` `@>` `seg` → `boolean`Does the first `seg` contain the second?                                                          |

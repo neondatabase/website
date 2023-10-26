@@ -1,5 +1,4 @@
 
-
 |                           CREATE OPERATOR                           |                                        |              |                                                       |                                                         |
 | :-----------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------: |
 | [Prev](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createopclass.html "CREATE OPERATOR CLASS") |
@@ -29,7 +28,7 @@ CREATE OPERATOR name (
 
 The operator name is a sequence of up to `NAMEDATALEN`-1 (63 by default) characters from the following list:
 
-+ - \* / < > = \~ ! @ # % ^ & | \` ?
+``+ - \* / < > = \~ ! @ # % ^ & | \` ?``
 
 There are a few restrictions on your choice of name:
 

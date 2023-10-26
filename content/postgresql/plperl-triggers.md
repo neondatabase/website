@@ -1,5 +1,4 @@
 
-
 |                       45.6. PL/Perl Triggers                       |                                                                    |                                                |                                                       |                                                                    |
 | :----------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
 | [Prev](plperl-trusted.html "45.5. Trusted and Untrusted PL/Perl")  | [Up](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language") | Chapter 45. PL/Perl — Perl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plperl-event-triggers.html "45.7. PL/Perl Event Triggers") |
@@ -44,7 +43,7 @@ PL/Perl can be used to write trigger functions. In a trigger function, the hash 
 
 * `$_TD->{relname}`
 
-    Name of the table on which the trigger fired. This has been deprecated, and could be removed in a future release. Please use $\_TD->{table\_name} instead.
+    Name of the table on which the trigger fired. This has been deprecated, and could be removed in a future release. Please use `$_TD->{table_name}` instead.
 
 * `$_TD->{table_schema}`
 
