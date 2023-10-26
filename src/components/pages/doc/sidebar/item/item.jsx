@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Link from 'components/shared/link';
-import { DOCS_BASE_PATH } from 'constants/docs';
 import links from 'constants/links';
 
 const isActiveItem = (items, currentSlug) =>
@@ -15,6 +14,7 @@ const isActiveItem = (items, currentSlug) =>
   );
 
 const Item = ({
+  basePath,
   title,
   slug = null,
   ariaLabel = null,
@@ -40,7 +40,8 @@ const Item = ({
   };
 
   const externalSlug = slug && slug.startsWith('http') ? slug : null;
-  const docSlug = isStandalone ? `/${slug}` : `${DOCS_BASE_PATH}${slug}/`;
+  const docSlug = isStandalone ? `/${slug}` : `${basePath}${slug}/`;
+
   const Tag = slug ? Link : 'button';
 
   return (
@@ -80,7 +81,7 @@ const Item = ({
           )}
         >
           {items.map((item, index) => (
-            <Item {...item} key={index} closeMenu={closeMenu} />
+            <Item {...item} key={index} closeMenu={closeMenu} basePath={basePath} />
           ))}
         </ul>
       )}
@@ -89,6 +90,7 @@ const Item = ({
 };
 
 Item.propTypes = {
+  basePath: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   isStandalone: PropTypes.bool,
   slug: PropTypes.string,

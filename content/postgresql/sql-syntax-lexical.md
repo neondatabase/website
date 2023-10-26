@@ -1,5 +1,4 @@
 
-
 |              4.1. Lexical Structure              |                                               |                       |                                                       |                                                        |
 | :----------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
 | [Prev](sql-syntax.html "Chapter 4. SQL Syntax")  | [Up](sql-syntax.html "Chapter 4. SQL Syntax") | Chapter 4. SQL Syntax | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-expressions.html "4.2. Value Expressions") |
@@ -9,11 +8,11 @@
 ## 4.1. Lexical Structure [#](#SQL-SYNTAX-LEXICAL)
 
   * *   [4.1.1. Identifiers and Key Words](sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS)
-  * [4.1.2. Constants](sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS)
-  * [4.1.3. Operators](sql-syntax-lexical.html#SQL-SYNTAX-OPERATORS)
-  * [4.1.4. Special Characters](sql-syntax-lexical.html#SQL-SYNTAX-SPECIAL-CHARS)
-  * [4.1.5. Comments](sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS)
-  * [4.1.6. Operator Precedence](sql-syntax-lexical.html#SQL-PRECEDENCE)
+* [4.1.2. Constants](sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS)
+* [4.1.3. Operators](sql-syntax-lexical.html#SQL-SYNTAX-OPERATORS)
+* [4.1.4. Special Characters](sql-syntax-lexical.html#SQL-SYNTAX-SPECIAL-CHARS)
+* [4.1.5. Comments](sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS)
+* [4.1.6. Operator Precedence](sql-syntax-lexical.html#SQL-PRECEDENCE)
 
 SQL input consists of a sequence of *commands*. A command is composed of a sequence of *tokens*, terminated by a semicolon (“;”). The end of the input stream also terminates a command. Which tokens are valid depends on the syntax of the particular command.
 
@@ -335,7 +334,7 @@ The `CAST()` syntax conforms to SQL. The `type 'string'` syntax is a generalizat
 
 An operator name is a sequence of up to `NAMEDATALEN`-1 (63 by default) characters from the following list:
 
-+ - \* / < > = \~ ! @ # % ^ & | \` ?
+```+ - \* / < > = \~ ! @ # % ^ & | \` ?```
 
 There are a few restrictions on operator names, however:
 

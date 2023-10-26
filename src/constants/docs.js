@@ -5,6 +5,8 @@ const RELEASE_NOTES_BASE_PATH = `${DOCS_BASE_PATH}${RELEASE_NOTES_SLUG}/`;
 const RELEASE_NOTES_DIR_PATH = `content/${RELEASE_NOTES_SLUG}`;
 const RELEASE_NOTES_SLUG_REGEX = /\d{4}-\d{2}-\d{2}-[a-z]*/;
 
+const POSTGRES_DOCS_BASE_PATH = '/docs/postgres/';
+
 // We are using ES modules here in order to be able to import variables from this file in gatsby-node.js
 module.exports = {
   DOCS_BASE_PATH,
@@ -13,4 +15,5 @@ module.exports = {
   RELEASE_NOTES_BASE_PATH,
   RELEASE_NOTES_DIR_PATH,
   RELEASE_NOTES_SLUG_REGEX,
+  POSTGRES_DOCS_BASE_PATH,
 };

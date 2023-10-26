@@ -52,4 +52,10 @@ const getAllPosts = async () => {
   });
 };
 
-export { getAllPosts, getPostBySlug, getPostSlugs, POSTGRES_DIR_PATH };
+const getSidebar = () => {
+  const sidebar = fs.readFileSync('content/postgresql/sidebar/sidebar.json', 'utf8');
+
+  return JSON.parse(sidebar);
+};
+
+export { getAllPosts, getPostBySlug, getPostSlugs, getSidebar, POSTGRES_DIR_PATH };

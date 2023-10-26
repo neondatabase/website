@@ -6,12 +6,13 @@ import Link from 'components/shared/link/link';
 import MENUS from 'constants/menus';
 
 import { ChatWidgetTrigger } from '../chat-widget';
+import DocNavLink from '../doc-nav-link';
 
 import Item from './item';
 
 const Search = dynamic(() => import('components/shared/search/search'));
 
-const Sidebar = ({ className = null, sidebar }) => (
+const Sidebar = ({ className = null, sidebar, basePath }) => (
   <aside
     className={clsx(
       'relative col-start-1 col-end-4 max-w-[254px] before:absolute before:-bottom-20 before:-right-5 before:-top-[110px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-gray-new-10 lg:hidden',
@@ -19,6 +20,12 @@ const Sidebar = ({ className = null, sidebar }) => (
     )}
   >
     <div className="sticky top-10 z-30 h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-10 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-gray-new-10 dark:after:to-gray-new-10">
+      <div className="">
+        <DocNavLink className="" to="/docs">
+          Neon
+        </DocNavLink>
+        <DocNavLink to="/docs/postgres/preface">Postgres</DocNavLink>
+      </div>
       <Search className="z-30" indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME} />
       <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-8">
         <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
@@ -38,7 +45,7 @@ const Sidebar = ({ className = null, sidebar }) => (
         </ul>
         <ul className="mt-9">
           {sidebar.map((item, index) => (
-            <Item {...item} key={index} />
+            <Item {...item} key={index} basePath={basePath} />
           ))}
         </ul>
       </nav>
@@ -65,6 +72,7 @@ export const sidebarPropTypes = PropTypes.arrayOf(
 Sidebar.propTypes = {
   className: PropTypes.string,
   sidebar: sidebarPropTypes,
+  basePath: PropTypes.string.isRequired,
 };
 
 export default Sidebar;
