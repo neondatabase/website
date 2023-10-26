@@ -2482,7 +2482,887 @@
   },
   {
     "title": "Reference",
-    "slug": "reference"
+    "slug": "reference",
+    "items": [
+      {
+        "title": "I. SQL Commands",
+        "slug": "sql-commands",
+        "items": [
+          {
+            "title": "ABORT",
+            "slug": "sql-abort"
+          },
+          {
+            "title": "ALTER AGGREGATE",
+            "slug": "sql-alteraggregate"
+          },
+          {
+            "title": "ALTER COLLATION",
+            "slug": "sql-altercollation"
+          },
+          {
+            "title": "ALTER CONVERSION",
+            "slug": "sql-alterconversion"
+          },
+          {
+            "title": "ALTER DATABASE",
+            "slug": "sql-alterdatabase"
+          },
+          {
+            "title": "ALTER DEFAULT PRIVILEGES",
+            "slug": "sql-alterdefaultprivileges"
+          },
+          {
+            "title": "ALTER DOMAIN",
+            "slug": "sql-alterdomain"
+          },
+          {
+            "title": "ALTER EVENT TRIGGER",
+            "slug": "sql-altereventtrigger"
+          },
+          {
+            "title": "ALTER EXTENSION",
+            "slug": "sql-alterextension"
+          },
+          {
+            "title": "ALTER FOREIGN DATA WRAPPER",
+            "slug": "sql-alterforeigndatawrapper"
+          },
+          {
+            "title": "ALTER FOREIGN TABLE",
+            "slug": "sql-alterforeigntable"
+          },
+          {
+            "title": "ALTER FUNCTION",
+            "slug": "sql-alterfunction"
+          },
+          {
+            "title": "ALTER GROUP",
+            "slug": "sql-altergroup"
+          },
+          {
+            "title": "ALTER INDEX",
+            "slug": "sql-alterindex"
+          },
+          {
+            "title": "ALTER LANGUAGE",
+            "slug": "sql-alterlanguage"
+          },
+          {
+            "title": "ALTER LARGE OBJECT",
+            "slug": "sql-alterlargeobject"
+          },
+          {
+            "title": "ALTER MATERIALIZED VIEW",
+            "slug": "sql-altermaterializedview"
+          },
+          {
+            "title": "ALTER OPERATOR",
+            "slug": "sql-alteroperator"
+          },
+          {
+            "title": "ALTER OPERATOR CLASS",
+            "slug": "sql-alteropclass"
+          },
+          {
+            "title": "ALTER OPERATOR FAMILY",
+            "slug": "sql-alteropfamily"
+          },
+          {
+            "title": "ALTER POLICY",
+            "slug": "sql-alterpolicy"
+          },
+          {
+            "title": "ALTER PROCEDURE",
+            "slug": "sql-alterprocedure"
+          },
+          {
+            "title": "ALTER PUBLICATION",
+            "slug": "sql-alterpublication"
+          },
+          {
+            "title": "ALTER ROLE",
+            "slug": "sql-alterrole"
+          },
+          {
+            "title": "ALTER ROUTINE",
+            "slug": "sql-alterroutine"
+          },
+          {
+            "title": "ALTER RULE",
+            "slug": "sql-alterrule"
+          },
+          {
+            "title": "ALTER SCHEMA",
+            "slug": "sql-alterschema"
+          },
+          {
+            "title": "ALTER SEQUENCE",
+            "slug": "sql-altersequence"
+          },
+          {
+            "title": "ALTER SERVER",
+            "slug": "sql-alterserver"
+          },
+          {
+            "title": "ALTER STATISTICS",
+            "slug": "sql-alterstatistics"
+          },
+          {
+            "title": "ALTER SUBSCRIPTION",
+            "slug": "sql-altersubscription"
+          },
+          {
+            "title": "ALTER SYSTEM",
+            "slug": "sql-altersystem"
+          },
+          {
+            "title": "ALTER TABLE",
+            "slug": "sql-altertable"
+          },
+          {
+            "title": "ALTER TABLESPACE",
+            "slug": "sql-altertablespace"
+          },
+          {
+            "title": "ALTER TEXT SEARCH CONFIGURATION",
+            "slug": "sql-altertsconfig"
+          },
+          {
+            "title": "ALTER TEXT SEARCH DICTIONARY",
+            "slug": "sql-altertsdictionary"
+          },
+          {
+            "title": "ALTER TEXT SEARCH PARSER",
+            "slug": "sql-altertsparser"
+          },
+          {
+            "title": "ALTER TEXT SEARCH TEMPLATE",
+            "slug": "sql-altertstemplate"
+          },
+          {
+            "title": "ALTER TRIGGER",
+            "slug": "sql-altertrigger"
+          },
+          {
+            "title": "ALTER TYPE",
+            "slug": "sql-altertype"
+          },
+          {
+            "title": "ALTER USER",
+            "slug": "sql-alteruser"
+          },
+          {
+            "title": "ALTER USER MAPPING",
+            "slug": "sql-alterusermapping"
+          },
+          {
+            "title": "ALTER VIEW",
+            "slug": "sql-alterview"
+          },
+          {
+            "title": "ANALYZE",
+            "slug": "sql-analyze"
+          },
+          {
+            "title": "BEGIN",
+            "slug": "sql-begin"
+          },
+          {
+            "title": "CALL",
+            "slug": "sql-call"
+          },
+          {
+            "title": "CHECKPOINT",
+            "slug": "sql-checkpoint"
+          },
+          {
+            "title": "CLOSE",
+            "slug": "sql-close"
+          },
+          {
+            "title": "CLUSTER",
+            "slug": "sql-cluster"
+          },
+          {
+            "title": "COMMENT",
+            "slug": "sql-comment"
+          },
+          {
+            "title": "COMMIT",
+            "slug": "sql-commit"
+          },
+          {
+            "title": "COMMIT PREPARED",
+            "slug": "sql-commit-prepared"
+          },
+          {
+            "title": "COPY",
+            "slug": "sql-copy"
+          },
+          {
+            "title": "CREATE ACCESS METHOD",
+            "slug": "sql-create-access-method"
+          },
+          {
+            "title": "CREATE AGGREGATE",
+            "slug": "sql-createaggregate"
+          },
+          {
+            "title": "CREATE CAST",
+            "slug": "sql-createcast"
+          },
+          {
+            "title": "CREATE COLLATION",
+            "slug": "sql-createcollation"
+          },
+          {
+            "title": "CREATE CONVERSION",
+            "slug": "sql-createconversion"
+          },
+          {
+            "title": "CREATE DATABASE",
+            "slug": "sql-createdatabase"
+          },
+          {
+            "title": "CREATE DOMAIN",
+            "slug": "sql-createdomain"
+          },
+          {
+            "title": "CREATE EVENT TRIGGER",
+            "slug": "sql-createeventtrigger"
+          },
+          {
+            "title": "CREATE EXTENSION",
+            "slug": "sql-createextension"
+          },
+          {
+            "title": "CREATE FOREIGN DATA WRAPPER",
+            "slug": "sql-createforeigndatawrapper"
+          },
+          {
+            "title": "CREATE FOREIGN TABLE",
+            "slug": "sql-createforeigntable"
+          },
+          {
+            "title": "CREATE FUNCTION",
+            "slug": "sql-createfunction"
+          },
+          {
+            "title": "CREATE GROUP",
+            "slug": "sql-creategroup"
+          },
+          {
+            "title": "CREATE INDEX",
+            "slug": "sql-createindex"
+          },
+          {
+            "title": "CREATE LANGUAGE",
+            "slug": "sql-createlanguage"
+          },
+          {
+            "title": "CREATE MATERIALIZED VIEW",
+            "slug": "sql-creatematerializedview"
+          },
+          {
+            "title": "CREATE OPERATOR",
+            "slug": "sql-createoperator"
+          },
+          {
+            "title": "CREATE OPERATOR CLASS",
+            "slug": "sql-createopclass"
+          },
+          {
+            "title": "CREATE OPERATOR FAMILY",
+            "slug": "sql-createopfamily"
+          },
+          {
+            "title": "CREATE POLICY",
+            "slug": "sql-createpolicy"
+          },
+          {
+            "title": "CREATE PROCEDURE",
+            "slug": "sql-createprocedure"
+          },
+          {
+            "title": "CREATE PUBLICATION",
+            "slug": "sql-createpublication"
+          },
+          {
+            "title": "CREATE ROLE",
+            "slug": "sql-createrole"
+          },
+          {
+            "title": "CREATE RULE",
+            "slug": "sql-createrule"
+          },
+          {
+            "title": "CREATE SCHEMA",
+            "slug": "sql-createschema"
+          },
+          {
+            "title": "CREATE SEQUENCE",
+            "slug": "sql-createsequence"
+          },
+          {
+            "title": "CREATE SERVER",
+            "slug": "sql-createserver"
+          },
+          {
+            "title": "CREATE STATISTICS",
+            "slug": "sql-createstatistics"
+          },
+          {
+            "title": "CREATE SUBSCRIPTION",
+            "slug": "sql-createsubscription"
+          },
+          {
+            "title": "CREATE TABLE",
+            "slug": "sql-createtable"
+          },
+          {
+            "title": "CREATE TABLE AS",
+            "slug": "sql-createtableas"
+          },
+          {
+            "title": "CREATE TABLESPACE",
+            "slug": "sql-createtablespace"
+          },
+          {
+            "title": "CREATE TEXT SEARCH CONFIGURATION",
+            "slug": "sql-createtsconfig"
+          },
+          {
+            "title": "CREATE TEXT SEARCH DICTIONARY",
+            "slug": "sql-createtsdictionary"
+          },
+          {
+            "title": "CREATE TEXT SEARCH PARSER",
+            "slug": "sql-createtsparser"
+          },
+          {
+            "title": "CREATE TEXT SEARCH TEMPLATE",
+            "slug": "sql-createtstemplate"
+          },
+          {
+            "title": "CREATE TRANSFORM",
+            "slug": "sql-createtransform"
+          },
+          {
+            "title": "CREATE TRIGGER",
+            "slug": "sql-createtrigger"
+          },
+          {
+            "title": "CREATE TYPE",
+            "slug": "sql-createtype"
+          },
+          {
+            "title": "CREATE USER",
+            "slug": "sql-createuser"
+          },
+          {
+            "title": "CREATE USER MAPPING",
+            "slug": "sql-createusermapping"
+          },
+          {
+            "title": "CREATE VIEW",
+            "slug": "sql-createview"
+          },
+          {
+            "title": "DEALLOCATE",
+            "slug": "sql-deallocate"
+          },
+          {
+            "title": "DECLARE",
+            "slug": "sql-declare"
+          },
+          {
+            "title": "DELETE",
+            "slug": "sql-delete"
+          },
+          {
+            "title": "DISCARD",
+            "slug": "sql-discard"
+          },
+          {
+            "title": "DO",
+            "slug": "sql-do"
+          },
+          {
+            "title": "DROP ACCESS METHOD",
+            "slug": "sql-drop-access-method"
+          },
+          {
+            "title": "DROP AGGREGATE",
+            "slug": "sql-dropaggregate"
+          },
+          {
+            "title": "DROP CAST",
+            "slug": "sql-dropcast"
+          },
+          {
+            "title": "DROP COLLATION",
+            "slug": "sql-dropcollation"
+          },
+          {
+            "title": "DROP CONVERSION",
+            "slug": "sql-dropconversion"
+          },
+          {
+            "title": "DROP DATABASE",
+            "slug": "sql-dropdatabase"
+          },
+          {
+            "title": "DROP DOMAIN",
+            "slug": "sql-dropdomain"
+          },
+          {
+            "title": "DROP EVENT TRIGGER",
+            "slug": "sql-dropeventtrigger"
+          },
+          {
+            "title": "DROP EXTENSION",
+            "slug": "sql-dropextension"
+          },
+          {
+            "title": "DROP FOREIGN DATA WRAPPER",
+            "slug": "sql-dropforeigndatawrapper"
+          },
+          {
+            "title": "DROP FOREIGN TABLE",
+            "slug": "sql-dropforeigntable"
+          },
+          {
+            "title": "DROP FUNCTION",
+            "slug": "sql-dropfunction"
+          },
+          {
+            "title": "DROP GROUP",
+            "slug": "sql-dropgroup"
+          },
+          {
+            "title": "DROP INDEX",
+            "slug": "sql-dropindex"
+          },
+          {
+            "title": "DROP LANGUAGE",
+            "slug": "sql-droplanguage"
+          },
+          {
+            "title": "DROP MATERIALIZED VIEW",
+            "slug": "sql-dropmaterializedview"
+          },
+          {
+            "title": "DROP OPERATOR",
+            "slug": "sql-dropoperator"
+          },
+          {
+            "title": "DROP OPERATOR CLASS",
+            "slug": "sql-dropopclass"
+          },
+          {
+            "title": "DROP OPERATOR FAMILY",
+            "slug": "sql-dropopfamily"
+          },
+          {
+            "title": "DROP OWNED",
+            "slug": "sql-drop-owned"
+          },
+          {
+            "title": "DROP POLICY",
+            "slug": "sql-droppolicy"
+          },
+          {
+            "title": "DROP PROCEDURE",
+            "slug": "sql-dropprocedure"
+          },
+          {
+            "title": "DROP PUBLICATION",
+            "slug": "sql-droppublication"
+          },
+          {
+            "title": "DROP ROLE",
+            "slug": "sql-droprole"
+          },
+          {
+            "title": "DROP ROUTINE",
+            "slug": "sql-droproutine"
+          },
+          {
+            "title": "DROP RULE",
+            "slug": "sql-droprule"
+          },
+          {
+            "title": "DROP SCHEMA",
+            "slug": "sql-dropschema"
+          },
+          {
+            "title": "DROP SEQUENCE",
+            "slug": "sql-dropsequence"
+          },
+          {
+            "title": "DROP SERVER",
+            "slug": "sql-dropserver"
+          },
+          {
+            "title": "DROP STATISTICS",
+            "slug": "sql-dropstatistics"
+          },
+          {
+            "title": "DROP SUBSCRIPTION",
+            "slug": "sql-dropsubscription"
+          },
+          {
+            "title": "DROP TABLE",
+            "slug": "sql-droptable"
+          },
+          {
+            "title": "DROP TABLESPACE",
+            "slug": "sql-droptablespace"
+          },
+          {
+            "title": "DROP TEXT SEARCH CONFIGURATION",
+            "slug": "sql-droptsconfig"
+          },
+          {
+            "title": "DROP TEXT SEARCH DICTIONARY",
+            "slug": "sql-droptsdictionary"
+          },
+          {
+            "title": "DROP TEXT SEARCH PARSER",
+            "slug": "sql-droptsparser"
+          },
+          {
+            "title": "DROP TEXT SEARCH TEMPLATE",
+            "slug": "sql-droptstemplate"
+          },
+          {
+            "title": "DROP TRANSFORM",
+            "slug": "sql-droptransform"
+          },
+          {
+            "title": "DROP TRIGGER",
+            "slug": "sql-droptrigger"
+          },
+          {
+            "title": "DROP TYPE",
+            "slug": "sql-droptype"
+          },
+          {
+            "title": "DROP USER",
+            "slug": "sql-dropuser"
+          },
+          {
+            "title": "DROP USER MAPPING",
+            "slug": "sql-dropusermapping"
+          },
+          {
+            "title": "DROP VIEW",
+            "slug": "sql-dropview"
+          },
+          {
+            "title": "END",
+            "slug": "sql-end"
+          },
+          {
+            "title": "EXECUTE",
+            "slug": "sql-execute"
+          },
+          {
+            "title": "EXPLAIN",
+            "slug": "sql-explain"
+          },
+          {
+            "title": "FETCH",
+            "slug": "sql-fetch"
+          },
+          {
+            "title": "GRANT",
+            "slug": "sql-grant"
+          },
+          {
+            "title": "IMPORT FOREIGN SCHEMA",
+            "slug": "sql-importforeignschema"
+          },
+          {
+            "title": "INSERT",
+            "slug": "sql-insert"
+          },
+          {
+            "title": "LISTEN",
+            "slug": "sql-listen"
+          },
+          {
+            "title": "LOAD",
+            "slug": "sql-load"
+          },
+          {
+            "title": "LOCK",
+            "slug": "sql-lock"
+          },
+          {
+            "title": "MERGE",
+            "slug": "sql-merge"
+          },
+          {
+            "title": "MOVE",
+            "slug": "sql-move"
+          },
+          {
+            "title": "NOTIFY",
+            "slug": "sql-notify"
+          },
+          {
+            "title": "PREPARE",
+            "slug": "sql-prepare"
+          },
+          {
+            "title": "PREPARE TRANSACTION",
+            "slug": "sql-prepare-transaction"
+          },
+          {
+            "title": "REASSIGN OWNED",
+            "slug": "sql-reassign-owned"
+          },
+          {
+            "title": "REFRESH MATERIALIZED VIEW",
+            "slug": "sql-refreshmaterializedview"
+          },
+          {
+            "title": "REINDEX",
+            "slug": "sql-reindex"
+          },
+          {
+            "title": "RELEASE SAVEPOINT",
+            "slug": "sql-release-savepoint"
+          },
+          {
+            "title": "RESET",
+            "slug": "sql-reset"
+          },
+          {
+            "title": "REVOKE",
+            "slug": "sql-revoke"
+          },
+          {
+            "title": "ROLLBACK",
+            "slug": "sql-rollback"
+          },
+          {
+            "title": "ROLLBACK PREPARED",
+            "slug": "sql-rollback-prepared"
+          },
+          {
+            "title": "ROLLBACK TO SAVEPOINT",
+            "slug": "sql-rollback-to"
+          },
+          {
+            "title": "SAVEPOINT",
+            "slug": "sql-savepoint"
+          },
+          {
+            "title": "SECURITY LABEL",
+            "slug": "sql-security-label"
+          },
+          {
+            "title": "SELECT",
+            "slug": "sql-select"
+          },
+          {
+            "title": "SELECT INTO",
+            "slug": "sql-selectinto"
+          },
+          {
+            "title": "SET",
+            "slug": "sql-set"
+          },
+          {
+            "title": "SET CONSTRAINTS",
+            "slug": "sql-set-constraints"
+          },
+          {
+            "title": "SET ROLE",
+            "slug": "sql-set-role"
+          },
+          {
+            "title": "SET SESSION AUTHORIZATION",
+            "slug": "sql-set-session-authorization"
+          },
+          {
+            "title": "SET TRANSACTION",
+            "slug": "sql-set-transaction"
+          },
+          {
+            "title": "SHOW",
+            "slug": "sql-show"
+          },
+          {
+            "title": "START TRANSACTION",
+            "slug": "sql-start-transaction"
+          },
+          {
+            "title": "TRUNCATE",
+            "slug": "sql-truncate"
+          },
+          {
+            "title": "UNLISTEN",
+            "slug": "sql-unlisten"
+          },
+          {
+            "title": "UPDATE",
+            "slug": "sql-update"
+          },
+          {
+            "title": "VACUUM",
+            "slug": "sql-vacuum"
+          },
+          {
+            "title": "VALUES",
+            "slug": "sql-values"
+          }
+        ]
+      },
+      {
+        "title": "II. PostgreSQL Client Applications",
+        "slug": "reference-client",
+        "items": [
+          {
+            "title": "clusterdb",
+            "slug": "app-clusterdb"
+          },
+          {
+            "title": "createdb",
+            "slug": "app-createdb"
+          },
+          {
+            "title": "createuser",
+            "slug": "app-createuser"
+          },
+          {
+            "title": "dropdb",
+            "slug": "app-dropdb"
+          },
+          {
+            "title": "dropuser",
+            "slug": "app-dropuser"
+          },
+          {
+            "title": "ecpg",
+            "slug": "app-ecpg"
+          },
+          {
+            "title": "pg\\_amcheck",
+            "slug": "app-pgamcheck"
+          },
+          {
+            "title": "pg\\_basebackup",
+            "slug": "app-pgbasebackup"
+          },
+          {
+            "title": "pgbench",
+            "slug": "pgbench"
+          },
+          {
+            "title": "pg\\_config",
+            "slug": "app-pgconfig"
+          },
+          {
+            "title": "pg\\_dump",
+            "slug": "app-pgdump"
+          },
+          {
+            "title": "pg\\_dumpall",
+            "slug": "app-pg-dumpall"
+          },
+          {
+            "title": "pg\\_isready",
+            "slug": "app-pg-isready"
+          },
+          {
+            "title": "pg\\_receivewal",
+            "slug": "app-pgreceivewal"
+          },
+          {
+            "title": "pg\\_recvlogical",
+            "slug": "app-pgrecvlogical"
+          },
+          {
+            "title": "pg\\_restore",
+            "slug": "app-pgrestore"
+          },
+          {
+            "title": "pg\\_verifybackup",
+            "slug": "app-pgverifybackup"
+          },
+          {
+            "title": "psql",
+            "slug": "app-psql"
+          },
+          {
+            "title": "reindexdb",
+            "slug": "app-reindexdb"
+          },
+          {
+            "title": "vacuumdb",
+            "slug": "app-vacuumdb"
+          }
+        ]
+      },
+      {
+        "title": "III. PostgreSQL Server Applications",
+        "slug": "reference-server",
+        "items": [
+          {
+            "title": "initdb",
+            "slug": "app-initdb"
+          },
+          {
+            "title": "pg\\_archivecleanup",
+            "slug": "pgarchivecleanup"
+          },
+          {
+            "title": "pg\\_checksums",
+            "slug": "app-pgchecksums"
+          },
+          {
+            "title": "pg\\_controldata",
+            "slug": "app-pgcontroldata"
+          },
+          {
+            "title": "pg\\_ctl",
+            "slug": "app-pg-ctl"
+          },
+          {
+            "title": "pg\\_resetwal",
+            "slug": "app-pgresetwal"
+          },
+          {
+            "title": "pg\\_rewind",
+            "slug": "app-pgrewind"
+          },
+          {
+            "title": "pg\\_test\\_fsync",
+            "slug": "pgtestfsync"
+          },
+          {
+            "title": "pg\\_test\\_timing",
+            "slug": "pgtesttiming"
+          },
+          {
+            "title": "pg\\_upgrade",
+            "slug": "pgupgrade"
+          },
+          {
+            "title": "pg\\_waldump",
+            "slug": "pgwaldump"
+          },
+          {
+            "title": "postgres",
+            "slug": "app-postgres"
+          }
+        ]
+      }
+    ]
   },
   {
     "title": "Internals",
