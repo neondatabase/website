@@ -8,7 +8,7 @@ updatedOn: '2023-10-25T15:19:05.629Z'
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
 
 <Admonition type="note" title="TL;DR: Contributing to the Neon Docs">
-- You can contribute by editing files on GitHub using the **Edit this page** link or by forking the [neondatabase/website](https://github.com/neondatabase/website) repository and submitting a pull request.
+- You can contribute by editing files on GitHub using the **Edit this page** link on documentation pages or by forking the [neondatabase/website](https://github.com/neondatabase/website) repository and submitting a pull request.
 - If you are interested in contributing a guide via a pull request, we provide a template file to help get you started. See [How to contribute](#how-to-contribute) for details.
 - Reference this contribution guide as needed for Markup and style guidelines.
 </Admonition>
@@ -32,7 +32,7 @@ If you prefer the first option, which is great for edits and small updates, ther
 
 Clicking the link takes you to the Markdown file in GitHub, where you can click the **Edit this page** icon to make a change. When you finish editing, commit your changes to create a pull request.
 
-If you would rather fork the [neondatabase/website](https://github.com/neondatabase/website) repository and submit a pull request, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request. To help you get stared, we provide a `GUIDE_TEMPLATE.md` file, which you xan find in the [neondatabase/website](https://github.com/neondatabase/website) repository, under the `/content/docs/guides` directory. After you create a branch, copy the template file and rename it. Also, don't forget to add your guide to the sidebar. See [Add a new page](#add-a-new-page).
+If you would rather fork the [neondatabase/website](https://github.com/neondatabase/website) repository and submit a pull request, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request. To help you get stared, we provide a `GUIDE_TEMPLATE.md` file, which you can find in the [neondatabase/website](https://github.com/neondatabase/website) repository, under the `/content/docs/guides` directory. After you create a branch, copy the template file and rename it. Also, don't forget to add your guide to the sidebar. See [Add a new page](#add-a-new-page).
 
 ## Markdown
 
@@ -59,15 +59,17 @@ The Neon documentation file structure reflects the navigation you see on the web
 ```text
 ├── content
    └── docs
+       ├── ai
+       ├── community
        ├── connect
        ├── extensions
        ├── get-started-with-neon
        ├── guides
        ├── introduction
        ├── manage
+       ├── reference
        ├── security
        ├── serverless
-       └── tutorial
 ```
 
 - Every Markdown file in the `/docs` folder becomes a documentation page unless it's defined with an `isDraft: true` property in the page [frontmatter](#markdown-frontmatter).
