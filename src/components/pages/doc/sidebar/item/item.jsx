@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Link from 'components/shared/link';
-import links from 'constants/links';
 
 const isActiveItem = (items, currentSlug) =>
   items?.some(
@@ -23,7 +22,7 @@ const Item = ({
   closeMenu = null,
 }) => {
   const pathname = usePathname();
-  const currentSlug = pathname.replace(`${links.docs}/`, '');
+  const currentSlug = pathname.replace(basePath, '');
 
   const hasActiveChild = isActiveItem(items, currentSlug);
   const [isOpen, setIsOpen] = useState(() => hasActiveChild);
