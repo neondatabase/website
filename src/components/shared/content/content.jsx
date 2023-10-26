@@ -35,7 +35,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote) => ({
     }
     return <code {...props} />;
   },
-  // pre: (props) => <div><CodeBlock language="bash" {...props} /></div>,
+  pre: (props) => <div><CodeBlock {...props} /></div>,
   a: (props) => {
     const { href, children, ...otherProps } = props;
     return (
