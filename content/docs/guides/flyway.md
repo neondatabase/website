@@ -6,13 +6,13 @@ enableTableOfContents: true
 
 Flyway is a database migration tool that facilitates version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
 
-This guide steps you through installing the Flyway command-line tool, configuring Flyway to connect to a Neon database, and running database migrations. The guide follows the setup described in the [Flyway command-line quickstart](https://documentation.red-gate.com/fd/quickstart-command-line-184127576.html).
+This guide steps you through installing the Flyway command-line tool, configuring Flyway to connect to a Neon database, and running database migrations, following the setup described in the [Flyway command-line quickstart](https://documentation.red-gate.com/fd/quickstart-command-line-184127576.html).
 
 ## Prerequisites
 
 - A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- A database. This guide uses the ready-to-use `neondb` database. You can use a different database if you like.
+- A database. This guide uses the ready-to-use `neondb` database. You can create your own database if you like. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 
 ## Download and extract Flyway
 
@@ -52,9 +52,9 @@ source ~/.profile
 
 ## Retrieve your Neon database connection string
 
-From the Neon **Dashboard**, retrieve your password and a Java connection string from the **Connection Details** widget. Use the selection drop-down menu.
+From the Neon **Dashboard**, retrieve your password and a Java connection string from the **Connection Details** widget.
 
-Your Java connection string should look something like the one shown below.
+Your Java connection string should look something like this:
 
 <CodeBlock shouldWrap>
 
@@ -66,7 +66,7 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=al
 
 ## Configure flyway
 
-Configure Flyway by uncommenting and updating the following items in the `/conf/flyway.conf` file. You retrieved the required connection details in the previous step.
+Configure Flyway to connect to your Neon database by uncommenting and updating the following items in the `/conf/flyway.conf` file with the connection details you retrieved in the previous step.
 
 <CodeBlock shouldWrap>
 
@@ -84,7 +84,7 @@ flyway.locations=filesystem:/home/alex/flyway-9.22.3/sql
 
 ## Create the first migration
 
-Create your first migration in the `/sql` directory. This migration will create a `person` table in your database. We'll name the migration file `V1__Create_person_table.sql`:
+Create your first migration in the `/sql` directory. This migration creates a `person` table in your database. We'll name the migration file `V1__Create_person_table.sql`:
 
 ```bash
 create table person (
@@ -116,7 +116,7 @@ To verify that the `person` table was created, you can view it on the **Tables**
 
 ## Add a second migration
 
-Let's run another migration to add data to the table. Add a second migration file to the `/sql` directory called `V2__Add_people.sql`, and add the following statements to the file:
+Run another migration to add data to the table. Add a second migration file to the `/sql` directory called `V2__Add_people.sql` and add the following statements:
 
 ```bash
 insert into person (ID, NAME) values (1, 'Alex');
@@ -141,11 +141,11 @@ Successfully applied 1 migration to schema "public", now at version v2 (executio
 A Flyway report has been generated here: /home/alex/flyway-9.22.3/sql/report.html
 ```
 
-You can verify that the data was added by viewing the table on **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+You can verify that the data was added by viewing the table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
 
 ## View schema migration history
 
-Whn you run the `flyway migrate` command, Flyway registers the schema changes in the `flyway_schema_history` table, which Flyway automatically creates in your database. You can view the table by running the `flyway info` command.
+When you run the `flyway migrate` command, Flyway registers the schema changes in the `flyway_schema_history` table, which Flyway automatically creates in your database. You can view the table by running the `flyway info` command.
 
 ```bash
 flyway info
@@ -164,7 +164,7 @@ You can also view the table on the **Tables** page in the Neon console. Select *
 
 ## Next steps
 
-Learn how to use Flyway with Neon's database branching feature. See [Set up a developer workflow with Liquibase and Neon](/docs/guides/liquibase-workflow).
+Learn how you can use Flyway with multiple database environments. See [Use Flyway with multiple database environments](/docs/guides/flyway-multiple-environments).
 
 ## References
 
