@@ -2,6 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
+updatedOn: '2023-10-19T23:10:12.850Z'
 ---
 
 ## Before you begin
@@ -146,7 +147,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ┌──────────────────────────────────────────────────────────────────────────────────────────┐
     │ Connection Uri                                                                           │
     ├──────────────────────────────────────────────────────────────────────────────────────────┤
-    │ postgres://daniel:<password>@ep-floral-violet-94096438.us-east-2.aws.neon.tech/neondb    │
+    │ postgres://[user]:[password]@[neon_hostname]/[dbname]                                    │
     └──────────────────────────────────────────────────────────────────────────────────────────┘
     ```
 
@@ -179,8 +180,8 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     },
     "endpoints": [
         {
-        "host": "ep-patient-sun-49170531.us-east-2.aws.neon.tech",
-        "id": "ep-patient-sun-49170531",
+        "host": "@ep-cool-darkness-123456.us-east-2.aws.neon.tech",
+        "id": "@ep-cool-darkness-123456",
         "project_id": "polished-shape-60485499",
         "branch_id": "br-frosty-art-30264288",
         "autoscaling_limit_min_cu": 1,
@@ -204,13 +205,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ],
     "connection_uris": [
         {
-        "connection_uri": "postgres://daniel:<password>@ep-patient-sun-49170531.us-east-2.aws.neon.tech/neondb",
+        "connection_uri": "postgres://alex:AbC123dEf@@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname",
         "connection_parameters": {
-            "database": "neondb",
-            "password": "<password>",
-            "role": "daniel",
-            "host": "ep-patient-sun-49170531.us-east-2.aws.neon.tech",
-            "pooler_host": "ep-patient-sun-49170531-pooler.us-east-2.aws.neon.tech"
+            "database": "dbname",
+            "password": "AbC123dEf",
+            "role": "alex",
+            "host": "@ep-cool-darkness-123456.us-east-2.aws.neon.tech",
+            "pooler_host": "@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech"
         }
         }
     ]
@@ -422,4 +423,4 @@ neonctl branches get main --output json
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).

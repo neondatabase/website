@@ -3,6 +3,7 @@ title: Security overview
 enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
+updatedOn: '2023-10-07T10:43:33.430Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.

@@ -3,6 +3,7 @@ title: Postgres compatibility
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
+updatedOn: '2023-10-19T23:10:12.858Z'
 ---
 
 Neon is protocol and application-compatible with Postgres. However, when using the Neon cloud service, there are some limitations that you should be aware of.
@@ -13,15 +14,15 @@ Neon cloud service is currently compatible with Postgres 14, 15, and 16. You can
 
 ## Postgres extensions
 
-Neon supports numerous Postgres extensions, and we regularly add support for more. For a list of supported extensions, see [Postgres Extensions](/docs/extensions/pg-extensions). To request support for additional extensions, please contact us at [support@neon.tech](mailto:support@neon.tech) or post your request to the [Neon community forum](https://community.neon.tech/).
+Neon supports numerous Postgres extensions, and we regularly add support for more. For a list of supported extensions, see [Postgres Extensions](/docs/extensions/pg-extensions). To request support for additional extensions, please post your request to the [Neon community forum](https://community.neon.tech/). [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
 
 ## Roles and permissions
 
-Neon is a managed Postgres service, so you cannot access the host operating system, and you can't connect using the Postgres `superuser` account like you can in a stand-alone Postgres installation.
+Neon is a managed Postgres service, so you cannot access the host operating system, and you can't connect using the Postgres `superuser` account like you can in a standalone Postgres installation.
 
 Roles created in the Neon console, CLI, or API, including the default role created with a Neon project, are granted membership in the `neon_superuser` role. For information about the privileges associated with this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
-Roles created in Neon with SQL syntax, from a command-line tool like `psql` or the [Neon SQL Editor](/docs/connect/query-with-psql-editor), have the same privileges as newly created roles in a stand-alone Postgres installation. These roles are not granted membership in the `neon_superuser` role. You must grant these roles the privileges you want them to have. For more information, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+Roles created in Neon with SQL syntax, from a command-line tool like `psql` or the [Neon SQL Editor](/docs/connect/query-with-psql-editor), have the same privileges as newly created roles in a standalone Postgres installation. These roles are not granted membership in the `neon_superuser` role. You must grant these roles the privileges you want them to have. For more information, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
 Neon roles cannot access replication methods or install Postgres extensions other than those supported by by Neon.
 
@@ -68,4 +69,4 @@ Neon does not currently support changing the database encoding. This feature wil
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).

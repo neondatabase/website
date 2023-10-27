@@ -2,6 +2,7 @@
 title: The neon_utils extension
 subtitle: Monitor how Neon's Autoscaling feature allocates compute resources
 enableTableOfContents: true
+updatedOn: '2023-10-19T23:10:12.818Z'
 ---
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
@@ -20,7 +21,7 @@ For information about using the Neon **SQL Editor**, see [Query with Neon's SQL 
 
 ## Use the `num_cpus()` function
 
-In Neon, computing capacity is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GBs is always 4 times the number of CUs. A Neon compute can have anywhere from .25 to 7 CUs.
+In Neon, computing capacity is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of CUs. A Neon compute can have anywhere from .25 to 7 CUs.
 
 When you enable _Autoscaling_ for a compute endpoint, you define a minimum and maximum compute size, as shown below:
 
@@ -65,12 +66,12 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     SELECT txid_current();
     ```
 
-3. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string from the **Connection Details** widget on the Neon **Dashboard**. Your connection string will appear similar to the one below:
+3. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string from the **Connection Details** widget on the Neon **Dashboard**.
 
     <CodeBlock shouldWrap>
 
     ```bash
-    pgbench -i postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+    pgbench -i postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>
@@ -80,7 +81,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     <CodeBlock shouldWrap>
 
     ```bash
-    pgbench -f test.sql -c 15 -T 1000 -P 1 postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+    pgbench -f test.sql -c 15 -T 1000 -P 1 postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>
@@ -138,4 +139,4 @@ The following instructions demonstrate how you can use the `num_cpus()` function
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).

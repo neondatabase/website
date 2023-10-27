@@ -5,6 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/security/secure-connections
+updatedOn: '2023-10-19T23:10:12.815Z'
 ---
 
 Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Neon rejects connections that do not use SSL/TLS, behaving in the same way as standalone Postgres with only `hostssl` records in a `pg_hba.conf` configuration file.
@@ -18,7 +19,7 @@ When connecting to Neon or any Postgres database, the `sslmode` parameter settin
 <CodeBlock shouldWrap>
 
 ```text
-postgres://<user>:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?sslmode=verify-full
+postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full
 ```
 
 </CodeBlock>
@@ -53,10 +54,10 @@ If the client application uses a popular Postgres client library, such as `psyco
 import psycopg2
 
 conn = psycopg2.connect(
-    dbname='<dbname>',
-    user='<username>',
-    password='<password>',
-    host='ep-wild-haze-482989.us-east-2.aws.neon.tech',
+    dbname='dbname',
+    user='alex',
+    password='AbC123dEf',
+    host='ep-cool-darkness-123456.us-east-2.aws.neon.tech',
     port='5432',
     sslmode='verify-full',
     sslrootcert='/path/to/your/root.crt'
@@ -117,4 +118,4 @@ The system root certificate locations listed above may differ depending on the v
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).

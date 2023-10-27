@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import TOCIcon from './images/toc.inline.svg';
@@ -37,25 +36,18 @@ const TableOfContents = ({ items }) => {
       <ul className="mt-2.5">
         {items.map((item, index) => {
           const linkHref = `#${item.id}`;
-
+          const { level } = item;
           return (
             <li key={index}>
-              {item.level === 2 && (
-                <a
-                  className={linkClassName}
-                  href={linkHref}
-                  dangerouslySetInnerHTML={{ __html: item.title }}
-                  onClick={(e) => handleAnchorClick(e, linkHref)}
-                />
-              )}
-              {item.level === 3 && (
-                <a
-                  className={clsx(linkClassName, 'ml-3')}
-                  href={linkHref}
-                  dangerouslySetInnerHTML={{ __html: item.title }}
-                  onClick={(e) => handleAnchorClick(e, linkHref)}
-                />
-              )}
+              <a
+                className={linkClassName}
+                style={{
+                  marginLeft: level === 2 ? '' : `${(level - 2) * 0.5}rem`,
+                }}
+                href={linkHref}
+                dangerouslySetInnerHTML={{ __html: item.title }}
+                onClick={(e) => handleAnchorClick(e, linkHref)}
+              />
             </li>
           );
         })}

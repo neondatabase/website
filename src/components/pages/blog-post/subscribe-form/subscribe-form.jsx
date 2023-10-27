@@ -121,6 +121,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
           src={subscribeSmPattern}
           width={458}
           height={98}
+          alt=""
         />
       )}
       <div

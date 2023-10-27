@@ -6,6 +6,7 @@ redirectFrom:
   - /docs/quickstart/prisma
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
+updatedOn: '2023-10-19T23:10:12.833Z'
 ---
 
 Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide explains how to connect Prisma to Neon, establish connections when using Prisma Client in serverless functions, and resolve [connection timeout](#connection-timeouts) issues.
@@ -34,12 +35,14 @@ To establish a basic connection from Prisma to Neon, perform the following steps
    }
    ```
 
-3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. Your setting will appear similar to the following:
+3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step,  and add `?sslmode=require` to the end of the connection string.
+
+   Your setting will appear similar to the following:
 
    <CodeBlock shouldWrap>
 
    ```text
-   DATABASE_URL="postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb"
+   DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
    ```
 
    </CodeBlock>
@@ -50,19 +53,19 @@ If you are using Prisma Client from a serverless function, see [Connect from ser
 
 ## Connect from serverless functions
 
-Serverless functions typically require a large number of database connections. When connecting from Prisma Client to Neon from a serverless function, use a pooled Neon connection string together with a `?pgbouncer=true` flag, as shown:
+Serverless functions typically require a large number of database connections. When connecting from Prisma Client to Neon from a serverless function, use a pooled Neon connection string together with a `pgbouncer=true` flag, as shown:
 
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-raspy-cherry-95040071-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&pgbouncer=true
 ```
 
 </CodeBlock>
 
 - A pooled Neon connection string appends `-pooler` to the endpoint ID, which tells Neon to use a pooled connection rather than a direct connection. The **Connection Details** widget on the Neon **Dashboard** provides a **Pooled connection** checkbox that adds `-pooler` suffix to your connection string.
-- Neon uses PgBouncer to provide [connection pooling](/docs/connect/connection-pooling). Prisma requires the `?pgbouncer=true` flag when using Prisma Client with PgBouncer, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
-- In summary, to use a pooled Neon connection with Prisma Client, you require **both** a pooled Neon connection string (one that includes `-pooler`) _and_ the `?pgbouncer=true` flag (required by Prisma Client). See the example above.
+- Neon uses PgBouncer to provide [connection pooling](/docs/connect/connection-pooling). Prisma requires the `pgbouncer=true` flag when using Prisma Client with PgBouncer, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
+- In summary, to use a pooled Neon connection with Prisma Client, you require a pooled Neon connection string (one that includes `-pooler`) and the `pgbouncer=true` flag, which is required by Prisma Client. See the example above.
 
 ## Connection timeouts
 
@@ -86,7 +89,7 @@ When you connect to an idle compute from Prisma, Neon automatically activates it
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb?connect_timeout=10`
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=10`
 ```
 
 </CodeBlock>
@@ -104,7 +107,7 @@ The default size of the Prisma connection pool is determined by the following fo
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb/neondb?connect_timeout=15&connection_limit=20`
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=15&connection_limit=20`
 ```
 
 </CodeBlock>
@@ -116,7 +119,7 @@ In addition to pool size, you can configure a `pool_timeout` setting. This setti
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL=postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb/neondb?connect_timeout=15&connection_limit=20&pool_timeout=15`
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=15&connection_limit=20&pool_timeout=15`
 ```
 
 </CodeBlock>
@@ -149,4 +152,4 @@ For additional information about connecting from Prisma, refer to the following 
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).

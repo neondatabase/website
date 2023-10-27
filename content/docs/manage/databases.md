@@ -2,6 +2,7 @@
 title: Manage databases
 enableTableOfContents: true
 isDraft: false
+updatedOn: '2023-10-19T23:10:12.845Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is no limit on the number of databases you can create.
@@ -327,25 +328,21 @@ curl -X 'DELETE' \
 
 ## Manage databases with SQL
 
-You can create and manage databases in Neon with SQL, as you can with any stand-alone Postgres installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+You can create and manage databases in Neon with SQL, as you can with any standalone Postgres installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 ```sql
 CREATE DATABASE testdb;
 ```
 
-Most standard [Postgres CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. This parameter requires access to the local file system, which is not permitted on Neon.
+Most standard [Postgres CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) are supported with the exception of `TABLESPACE`. This parameter requires access to the local file system, which is not permitted in Neon.
 
-The role that creates a database is the owner of the database. This role has the typical default Postgres privileges on the database, including the ability to `DROP` the database, `CONNECT` to the database, and create new schemas and objects in it.
+The role that creates a database is the owner of the database.
 
-As of Postgres 15, only a database owner has the `CREATE` privilege on a database's `public` schema. For other users, the `CREATE` privilege must be granted manually via a `GRANT CREATE ON SCHEMA public TO <username>;` statement.
+<Admonition type="note">
+As of Postgres 15, only a database owner has the `CREATE` privilege on a database's `public` schema. For other users, the `CREATE` privilege on the `public` schema must be granted explicitly via a `GRANT CREATE ON SCHEMA public TO <username>;` statement. For more information, see [Public schema privileges](/docs/manage/database-access#public-schema-privileges).
+</Admonition>
 
 For more information about database object privileges in Postgres, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
-
-For a database creation example, refer to the [Manage roles and database access with SQL](/docs/guides/manage-database-access) guide.
-
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
 
 ## Protected database names
 
@@ -354,3 +351,7 @@ The following names are protected and cannot be given to a database:
 - `postgres`
 - `template0`
 - `template1`
+
+## Need help?
+
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
