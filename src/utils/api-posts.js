@@ -36,7 +36,7 @@ const getAllWpBlogCategories = async () => {
   //   );
 
   //   return [...filteredCategories, { name: 'All posts', slug: 'all-posts' }];
-
+  // TODO: remove this when enable WP
   return null;
 };
 
@@ -136,7 +136,7 @@ const getWpPostsByCategorySlug = async () =>
 
     // return data?.posts?.nodes;
 
-    // TODO: remove mock data
+    // TODO: remove this when enable WP
     return null;
   };
 
@@ -325,7 +325,7 @@ const getWpBlogPage = async () => {
   // const data = await graphQLClient.request(blogPageQuery);
 
   // return data?.page?.template?.pageBlog;
-
+  // TODO: remove this when enable WP
   return null;
 };
 
@@ -375,7 +375,7 @@ const getAllWpPosts = async () => {
   // });
 
   // return data?.posts?.nodes;
-
+  // TODO: remove this when enable WP
   return null;
 };
 
@@ -471,7 +471,7 @@ const getWpPostBySlug = async () =>
     //   post: data?.post,
     //   relatedPosts: sortedPosts,
     // };
-
+    // TODO: remove this when enable WP
     return null;
   };
 
@@ -671,7 +671,7 @@ const getWpPreviewPostData = async () =>
     //     relatedPosts: sortedPosts,
     //   };
     // }
-
+    // TODO: remove this when enable WP
     return null;
   };
 
@@ -693,7 +693,7 @@ const getWpPreviewPost = async () =>
     // `;
 
     // return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
-
+    // TODO: remove this when enable WP
     return null;
   };
 

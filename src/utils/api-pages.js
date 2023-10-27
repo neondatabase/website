@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 // import { gql, graphQLClient } from 'lib/graphQLClient';
 
 // const PAGE_SEO_FRAGMENT = gql`
@@ -33,17 +34,8 @@ const getStaticPages = async () => {
   // const data = await graphQLClient.request(allStaticPagesQuery);
 
   // return data?.pages.nodes.filter((node) => node.template.templateName === 'Static');
-
-  const data = [
-    {
-      slug: 'test',
-      template: {
-        templateName: 'Static',
-      },
-    },
-  ];
-
-  return data;
+  // TODO: remove this when enable WP
+  return null;
 };
 
 const getStaticPageBySlug = async () =>
@@ -62,28 +54,8 @@ const getStaticPageBySlug = async () =>
     // const data = await graphQLClient.request(staticPageBySlugQuery, { slug });
 
     // return data?.page;
-
-    // TODO: remove mock data
-    const data = {
-      page: {
-        content: '<p>test</p>',
-        title: 'test',
-        seo: {
-          title: 'test',
-          metaDesc: 'test',
-          metaKeywords: 'test',
-          metaRobotsNoindex: 'test',
-          opengraphTitle: 'test',
-          opengraphDescription: 'test',
-          opengraphUrl: 'test',
-          twitterImage: {
-            mediaItemUrl: 'test',
-          },
-        },
-      },
-    };
-
-    return data?.page;
+    // TODO: remove this when enable WP
+    return null;
   };
 
 const getAboutPage = async () => {
@@ -100,26 +72,8 @@ const getAboutPage = async () => {
 
   // return data?.page;
 
-  // TODO: remove mock data
-  const data = {
-    page: {
-      content: '<p>test</p>',
-      seo: {
-        title: 'test',
-        metaDesc: 'test',
-        metaKeywords: 'test',
-        metaRobotsNoindex: 'test',
-        opengraphTitle: 'test',
-        opengraphDescription: 'test',
-        opengraphUrl: 'test',
-        twitterImage: {
-          mediaItemUrl: 'test',
-        },
-      },
-    },
-  };
-
-  return data?.page;
+  // TODO: remove this when enable WP
+  return null;
 };
 
 export { getStaticPages, getStaticPageBySlug, getAboutPage };
