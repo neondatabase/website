@@ -1,21 +1,20 @@
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import { DOCS_BASE_PATH } from 'constants/docs';
 
 import ArrowIcon from './images/arrow.inline.svg';
 
-const getUrl = (slug) => {
+const getUrl = (slug, basePath) => {
   if (slug.startsWith('http')) {
     return slug;
   }
 
-  return `${DOCS_BASE_PATH}${slug}`;
+  return `${basePath}${slug}`;
 };
 
-const PreviousAndNextLinks = ({ previousLink = null, nextLink = null }) => {
-  const previousLinkUrl = previousLink && getUrl(previousLink.slug);
-  const nextLinkUrl = nextLink && getUrl(nextLink.slug);
+const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }) => {
+  const previousLinkUrl = previousLink && getUrl(previousLink.slug, basePath);
+  const nextLinkUrl = nextLink && getUrl(nextLink.slug, basePath);
   return (
     <div className="mt-10 flex w-full space-x-10 sm:mt-7 sm:space-x-0">
       {previousLink && (
@@ -63,6 +62,7 @@ PreviousAndNextLinks.propTypes = {
     path: PropTypes.arrayOf(PropTypes.number).isRequired,
     ariaLabel: PropTypes.string,
   }),
+  basePath: PropTypes.string.isRequired,
 };
 
 export default PreviousAndNextLinks;

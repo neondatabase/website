@@ -52,10 +52,53 @@ const getAllPosts = async () => {
   });
 };
 
+const getDocPreviousAndNextLinks = (slug) => {
+  const flatSidebarJson = fs.readFileSync('content/postgresql/sidebar/flat-sidebar.json', 'utf8');
+  const flatSidebar = JSON.parse(flatSidebarJson);
+  const currentIndex = flatSidebar.findIndex((item) => item.currentSlug === slug);
+
+  // If the slug isn't found, return an empty object.
+  if (currentIndex === -1) {
+    return {};
+  }
+
+  const prevIndex = currentIndex - 1;
+  const nextIndex = currentIndex + 1;
+
+  // Calculate previous and next links based on the found index.
+  const previousLink =
+    currentIndex > 0 && flatSidebar[currentIndex].prevSlug !== 'index'
+      ? {
+          title: flatSidebar[prevIndex].title,
+          slug: flatSidebar[prevIndex].currentSlug,
+        }
+      : null;
+
+  const nextLink =
+    currentIndex < flatSidebar.length - 1
+      ? {
+          title: flatSidebar[nextIndex].title,
+          slug: flatSidebar[nextIndex].currentSlug,
+        }
+      : null;
+
+  return {
+    previousLink,
+    nextLink,
+  };
+};
+
 const getSidebar = () => {
   const sidebar = fs.readFileSync('content/postgresql/sidebar/sidebar.json', 'utf8');
 
   return JSON.parse(sidebar);
 };
 
-export { getAllPosts, getPostBySlug, getPostSlugs, getSidebar, POSTGRES_DIR_PATH };
+export {
+  getAllPosts,
+  getPostBySlug,
+  getPostSlugs,
+  getSidebar,
+  getDocPreviousAndNextLinks,
+  POSTGRES_DIR_PATH,
+};

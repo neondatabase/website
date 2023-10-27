@@ -40,7 +40,7 @@ const variants = {
   },
 };
 
-const MobileNav = ({ className = null, sidebar }) => {
+const MobileNav = ({ className = null, sidebar, basePath }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [containerHeight, setContainerHeight] = useState(null);
   const [buttonTop, setButtonTop] = useState(null);
@@ -134,7 +134,7 @@ const MobileNav = ({ className = null, sidebar }) => {
           </ul>
           <ul className="mt-7">
             {sidebar.map((item, index) => (
-              <Item {...item} key={index} closeMenu={toggleMenu} />
+              <Item {...item} key={index} closeMenu={toggleMenu} basePath={basePath} />
             ))}
           </ul>
         </m.div>
@@ -146,6 +146,7 @@ const MobileNav = ({ className = null, sidebar }) => {
 MobileNav.propTypes = {
   className: PropTypes.string,
   sidebar: sidebarPropTypes,
+  basePath: PropTypes.string.isRequired,
 };
 
 export default MobileNav;

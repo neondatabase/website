@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -73,16 +74,28 @@ const Item = ({
         />
       </Tag>
       {!!items?.length && (
-        <ul
-          className={clsx(
-            'relative pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-new-90 dark:before:bg-gray-new-20',
-            !isOpen && 'sr-only h-0'
-          )}
-        >
-          {items.map((item, index) => (
-            <Item {...item} key={index} closeMenu={closeMenu} basePath={basePath} />
-          ))}
-        </ul>
+        <LazyMotion features={domAnimation}>
+          <AnimatePresence>
+            {isOpen ? (
+              <m.ul
+                className={clsx(
+                  'relative pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-new-90 dark:before:bg-gray-new-20'
+                )}
+                initial="from"
+                animate="to"
+                exit="from"
+                variants={{
+                  from: { opacity: 0, height: 0 },
+                  to: { opacity: 1, height: 'auto' },
+                }}
+              >
+                {items.map((item, index) => (
+                  <Item {...item} key={index} closeMenu={closeMenu} basePath={basePath} />
+                ))}
+              </m.ul>
+            ) : null}
+          </AnimatePresence>
+        </LazyMotion>
       )}
     </li>
   );
