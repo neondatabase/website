@@ -30,6 +30,8 @@ export default async function StaticPage({ params }) {
 export async function generateStaticParams() {
   const payload = await getStaticPages();
 
+  if (!payload) return [];
+
   return payload.map((node) => ({
     static: node.slug,
   }));
