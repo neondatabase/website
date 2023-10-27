@@ -4,11 +4,13 @@ subtitle: Learn how to connect to Neon from Quarkus using a Reactive SQL Client
 enableTableOfContents: true
 ---
 
+[Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. Unlike traditional Java stacks designed for monolithic applications, Quarkus addresses the challenges of long startup times and high memory usage. It's tailored for both OpenJDK HotSpot and GraalVM and is built upon established Java libraries and standards. Its creation was driven by the need for a Java solution that is more compatible with modern, cloud-native architectures.
+
 To connect to Neon from a Quarkus application:
 
 1. [Create a Neon Project](#create-a-neon-project)
 2. [Create a Quarkus project and add dependencies](#create-a-quarkus-project)
-3. [Configure a PostgreSQL Data Source](#configure-a-postgresql-data-source)
+3. [Configure a PostgreSQL data source](#configure-a-postgresql-data-source)
 4. [Use the Reactive PostgreSQL client](#use-the-reactive-postgresql-client)
 5. [Run the application](#run-the-application)
 
@@ -33,7 +35,7 @@ quarkus create app neon-with-quarkus \
 
 You now have a Quarkus project in a folder named `neon-with-quarkus` with the Reactive Postgres client and RESTEasy Reactive extensions installed.
 
-## Configure a PostgreSQL Data Source
+## Configure a PostgreSQL data source
 
 Create a `.env` file in the root of your Quarkus project directory. Configure a reactive data source using your Neon database connection string and specifying the database kind as shown:
 
