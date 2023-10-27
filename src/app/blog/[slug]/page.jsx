@@ -157,6 +157,8 @@ export async function generateMetadata({ params }) {
 export async function generateStaticParams() {
   const posts = await getAllWpPosts();
 
+  if (!posts) return [];
+
   return posts.map((post) => ({
     slug: post.slug,
   }));

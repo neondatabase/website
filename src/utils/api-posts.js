@@ -1,66 +1,9 @@
+/* eslint-disable arrow-body-style */
+// TODO: enable eslint arrow-body-style
 // import { BLOG_POSTS_PER_PAGE } from 'constants/blog';
 // import { gql, graphQLClient, graphQLClientAdmin } from 'lib/graphQLClient';
 
 // import getAuthToken from './api-auth';
-
-const mockupData = {
-  post: {
-    categories: {
-      nodes: [
-        {
-          name: 'Community',
-          slug: 'Community',
-        },
-      ],
-    },
-    title: 'MITM attacks are easier to avoid with psql (Postgres) 16',
-    slug: 'avoid-mitm-attacks-with-psql-postgres-16',
-    excerpt:
-      '<p>The psql client accepts a new connection string option in Postgres 16: ?sslrootcert=system. This new option makes it simpler than ever to connect a secure interactive session to your Neon database: You can use psql version 16 with this new option even if your Neon database is still on Postgres 14 or 15. Read on [&hellip;]</p>\n',
-    dateGmt: '2021-09-30T12:00:00',
-    modifiedGmt: '2021-09-30T12:00:00',
-    content: 'test',
-    date: '2021-09-30T12:00:00',
-    readingTime: 'test',
-    pageBlogPost: {
-      largeCover: {
-        altText: 'test',
-        mediaItemUrl:
-          'https://neon-hwp.dreamhosters.com/wp-content/uploads/2023/10/neon-MITM-attacks-2.jpg',
-      },
-      description:
-        'Learn how the psql client in Postgres 16 makes it simpler than ever to connect a secure interactive session to your Neon database',
-      authors: [
-        {
-          author: {
-            title: 'George MacKerron',
-            postAuthor: {
-              role: 'Typescript Developer',
-              url: 'test',
-              image: {
-                altText: 'test',
-                mediaItemUrl:
-                  'https://neon-hwp.dreamhosters.com/wp-content/uploads/2022/12/george-mackerron.png',
-              },
-            },
-          },
-        },
-      ],
-    },
-    seo: {
-      title: 'MITM attacks are easier to avoid with psql (Postgres) 16',
-      metaDesc:
-        'Learn how the psql client in Postgres 16 makes it simpler than ever to connect a secure interactive session to your Neon database',
-      opengraphTitle: 'MITM attacks are easier to avoid with psql (Postgres) 16',
-      opengraphDescription:
-        'Learn how the psql client in Postgres 16 makes it simpler than ever to connect a secure interactive session to your Neon database',
-      twitterImage: {
-        mediaItemUrl:
-          'https://neon-hwp.dreamhosters.com/wp-content/uploads/2023/10/neon-MITM-attacks-2.jpg',
-      },
-    },
-  },
-};
 
 // const POST_SEO_FRAGMENT = gql`
 //   fragment wpPostSeo on Post {
@@ -93,15 +36,8 @@ const getAllWpBlogCategories = async () => {
   //   );
 
   //   return [...filteredCategories, { name: 'All posts', slug: 'all-posts' }];
-  // TODO: remove mock data
-  const data = [
-    {
-      name: 'test',
-      slug: 'test',
-    },
-  ];
 
-  return [...data, { name: 'All posts', slug: 'all-posts' }];
+  return null;
 };
 
 const getWpPostsByCategorySlug = async () =>
@@ -201,9 +137,7 @@ const getWpPostsByCategorySlug = async () =>
     // return data?.posts?.nodes;
 
     // TODO: remove mock data
-    const data = [mockupData.post];
-
-    return data;
+    return null;
   };
 
 const getWpBlogPage = async () => {
@@ -391,60 +325,8 @@ const getWpBlogPage = async () => {
   // const data = await graphQLClient.request(blogPageQuery);
 
   // return data?.page?.template?.pageBlog;
-  // TODO: remove mock data
-  const data = {
-    featuredPosts: [
-      {
-        post: mockupData.post,
-      },
-      {
-        post: mockupData.post,
-      },
-    ],
-    companyFeaturedPosts: [
-      {
-        post: mockupData.post,
-      },
-      {
-        post: mockupData.post,
-      },
-    ],
-    communityFeaturedPosts: [
-      {
-        post: mockupData.post,
-      },
-      {
-        post: mockupData.post,
-      },
-    ],
-    videos: [
-      {
-        post: mockupData.post,
-      },
-    ],
-    appearances: [
-      {
-        post: {
-          title: 'test',
-          appearancePost: {
-            url: 'test',
-            coverImage: {
-              mediaItemUrl:
-                'https://neon-hwp.dreamhosters.com/wp-content/uploads/2023/10/neon-MITM-attacks-2.jpg',
-              altText: 'test',
-            },
-          },
-        },
-      },
-    ],
-    engineeringFeaturedPosts: [
-      {
-        post: mockupData.post,
-      },
-    ],
-  };
 
-  return data;
+  return null;
 };
 
 const getAllWpPosts = async () => {
@@ -494,10 +376,7 @@ const getAllWpPosts = async () => {
 
   // return data?.posts?.nodes;
 
-  // TODO: remove mock data
-  const data = [mockupData.post];
-
-  return data;
+  return null;
 };
 
 const getWpPostBySlug = async () =>
@@ -593,16 +472,7 @@ const getWpPostBySlug = async () =>
     //   relatedPosts: sortedPosts,
     // };
 
-    // TODO: remove mock data
-    const data = {
-      post: mockupData.post,
-      posts: [mockupData.post],
-    };
-
-    return {
-      post: data?.post,
-      relatedPosts: data?.posts,
-    };
+    return null;
   };
 
 // Query that executes when user requests a preview on a CMS,
@@ -802,16 +672,7 @@ const getWpPreviewPostData = async () =>
     //   };
     // }
 
-    // TODO: remove mock data
-    const data = {
-      post: mockupData.post,
-      posts: [mockupData.post],
-    };
-
-    return {
-      post: data?.post,
-      relatedPosts: data?.posts,
-    };
+    return null;
   };
 
 const getWpPreviewPost = async () =>
@@ -833,15 +694,7 @@ const getWpPreviewPost = async () =>
 
     // return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
 
-    const data = {
-      post: {
-        databaseId: 1,
-        slug: 'test',
-        status: 'test',
-      },
-    };
-
-    return data;
+    return null;
   };
 
 export {

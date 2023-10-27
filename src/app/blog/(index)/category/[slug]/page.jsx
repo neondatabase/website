@@ -77,6 +77,8 @@ export async function generateMetadata({ params }) {
 export async function generateStaticParams() {
   const categories = await getAllWpBlogCategories();
 
+  if (!categories) return [];
+
   return categories.map((category) => ({
     slug: category.slug,
   }));

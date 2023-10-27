@@ -8,6 +8,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 export async function GET() {
   const allBlogPosts = await getAllWpPosts();
+  if (!allBlogPosts) {
+    return {
+      status: 404,
+    };
+  }
 
   const feed = new Rss({
     id: BLOG_BASE_PATH,

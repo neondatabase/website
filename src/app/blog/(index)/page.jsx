@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 import AppearanceEngineering from 'components/pages/blog/appearance-engineering';
 import FeaturedPostsList from 'components/pages/blog/featured-posts-list';
 import PostsList from 'components/pages/blog/posts-list';
@@ -24,6 +26,10 @@ export const metadata = getMetadata({ ...SEO_DATA.blog, rssPathname: `${BLOG_BAS
 export default async function BlogPage() {
   const releaseNotes = await getReleaseNotesData();
   const featuredReleaseNotes = releaseNotes.slice(0, 4);
+  const allPosts = await getWpBlogPage();
+
+  if (!allPosts) return notFound();
+
   const {
     featuredPosts,
     companyFeaturedPosts,
@@ -31,7 +37,7 @@ export default async function BlogPage() {
     videos,
     appearances,
     engineeringFeaturedPosts,
-  } = await getWpBlogPage();
+  } = allPosts;
 
   return (
     <>
