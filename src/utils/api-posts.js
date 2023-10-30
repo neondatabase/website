@@ -123,19 +123,19 @@ const getWpPostsByCategorySlug = async (slug) => {
   return null;
 
   // TODO: uncomment this code if you need to get data from WP
-  //   if (slug === 'all-posts') {
-  //     const allPostsData = await graphQLClient.request(allPostsQuery, {
-  //       first: BLOG_POSTS_PER_PAGE,
-  //     });
-
-  //     return allPostsData?.posts?.nodes;
-  //   }
-  //   const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
-
-  //   const data = await graphQLClient.request(postsQuery, {
+  // if (slug === 'all-posts') {
+  //   const allPostsData = await graphQLClient.request(allPostsQuery, {
   //     first: BLOG_POSTS_PER_PAGE,
-  //     categoryName,
   //   });
+
+  //   return allPostsData?.posts?.nodes;
+  // }
+  // const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
+
+  // const data = await graphQLClient.request(postsQuery, {
+  //   first: BLOG_POSTS_PER_PAGE,
+  //   categoryName,
+  // });
 
   // return data?.posts?.nodes;
 };
