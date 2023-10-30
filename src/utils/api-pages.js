@@ -31,11 +31,13 @@ const getStaticPages = async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(allStaticPagesQuery);
+
+  return null;
+
+  // TODO: uncomment this code if you need to get data from WP
+  // const data = await graphQLClient.request(allStaticPagesQuery);
 
   // return data?.pages.nodes.filter((node) => node.template.templateName === 'Static');
-  // TODO: remove this when enable WP
-  return null;
 };
 
 const getStaticPageBySlug = async (slug) => {
@@ -49,11 +51,13 @@ const getStaticPageBySlug = async (slug) => {
     }
     ${PAGE_SEO_FRAGMENT}
   `;
-  const data = await graphQLClient.request(staticPageBySlugQuery, { slug });
+
+  return null;
+
+  // TODO: uncomment this code if you need to get data from WP
+  // const data = await graphQLClient.request(staticPageBySlugQuery, { slug });
 
   // return data?.page;
-  // TODO: remove this when enable WP
-  return null;
 };
 
 const getAboutPage = async () => {
@@ -66,12 +70,13 @@ const getAboutPage = async () => {
     }
     ${PAGE_SEO_FRAGMENT}
   `;
-  const data = await graphQLClient.request(aboutPageQuery);
+
+  return null;
+
+  // TODO: uncomment this code if you need to get data from WP
+  // const data = await graphQLClient.request(aboutPageQuery);
 
   // return data?.page;
-
-  // TODO: remove this when enable WP
-  return null;
 };
 
 export { getStaticPages, getStaticPageBySlug, getAboutPage };

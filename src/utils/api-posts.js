@@ -30,14 +30,16 @@ const getAllWpBlogCategories = async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(categoriesQuery);
-  const filteredCategories = data?.categories?.nodes.filter(
-    (category) => category.slug !== 'uncategorized'
-  );
+
+  return null;
+
+  // TODO: uncomment this code if you need to get data from WP
+  // const data = await graphQLClient.request(categoriesQuery);
+  // const filteredCategories = data?.categories?.nodes.filter(
+  //   (category) => category.slug !== 'uncategorized'
+  // );
 
   //   return [...filteredCategories, { name: 'All posts', slug: 'all-posts' }];
-  // TODO: remove this when enable WP
-  return null;
 };
 
 const getWpPostsByCategorySlug = async (slug) => {
@@ -118,24 +120,24 @@ const getWpPostsByCategorySlug = async (slug) => {
     }
   `;
 
-  if (slug === 'all-posts') {
-    const allPostsData = await graphQLClient.request(allPostsQuery, {
-      first: BLOG_POSTS_PER_PAGE,
-    });
+  return null;
 
-    return allPostsData?.posts?.nodes;
-  }
-  const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
+  // TODO: uncomment this code if you need to get data from WP
+  //   if (slug === 'all-posts') {
+  //     const allPostsData = await graphQLClient.request(allPostsQuery, {
+  //       first: BLOG_POSTS_PER_PAGE,
+  //     });
 
-  const data = await graphQLClient.request(postsQuery, {
-    first: BLOG_POSTS_PER_PAGE,
-    categoryName,
-  });
+  //     return allPostsData?.posts?.nodes;
+  //   }
+  //   const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
+
+  //   const data = await graphQLClient.request(postsQuery, {
+  //     first: BLOG_POSTS_PER_PAGE,
+  //     categoryName,
+  //   });
 
   // return data?.posts?.nodes;
-
-  // TODO: remove this when enable WP
-  return null;
 };
 
 const getWpBlogPage = async () => {
@@ -320,11 +322,13 @@ const getWpBlogPage = async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(blogPageQuery);
+
+  return null;
+
+  // TODO: uncomment this code if you need to get data from WP
+  // const data = await graphQLClient.request(blogPageQuery);
 
   // return data?.page?.template?.pageBlog;
-  // TODO: remove this when enable WP
-  return null;
 };
 
 const getAllWpPosts = async () => {
@@ -368,13 +372,15 @@ const getAllWpPosts = async () => {
       }
     }
   `;
-  const data = await graphQLClient.request(allPostsQuery, {
-    first: BLOG_POSTS_PER_PAGE,
-  });
 
-  // return data?.posts?.nodes;
-  // TODO: remove this when enable WP
   return null;
+
+  // TODO: uncomment this code if you need to get data from WP
+  // const data = await graphQLClient.request(allPostsQuery, {
+  //   first: BLOG_POSTS_PER_PAGE,
+  // });
+
+  //  return data?.posts?.nodes;
 };
 
 const getWpPostBySlug = async (slug) => {
@@ -459,16 +465,17 @@ const getWpPostBySlug = async (slug) => {
     ${POST_SEO_FRAGMENT}
   `;
 
-  const data = await graphQLClient.request(postBySlugQuery, { id: slug });
+  return null;
 
-  const sortedPosts = data?.posts?.nodes.filter((post) => post.slug !== slug).slice(0, 3);
+  // TODO: uncomment this code if you need to get data from WP
+  // const data = await graphQLClient.request(postBySlugQuery, { id: slug });
+
+  // const sortedPosts = data?.posts?.nodes.filter((post) => post.slug !== slug).slice(0, 3);
 
   // return {
   //   post: data?.post,
   //   relatedPosts: sortedPosts,
   // };
-  // TODO: remove this when enable WP
-  return null;
 };
 
 // Query that executes when user requests a preview on a CMS,
@@ -682,9 +689,10 @@ const getWpPreviewPost = async (id) => {
     }
   `;
 
-  // return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
-  // TODO: remove this when enable WP
   return null;
+
+  // TODO: uncomment this code if you need to get data from WP
+  // return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
 };
 
 export {

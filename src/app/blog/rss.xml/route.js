@@ -1,4 +1,5 @@
 /* eslint-disable import/prefer-default-export */
+import { NextResponse } from 'next/server';
 import Rss from 'rss';
 
 import { BLOG_BASE_PATH } from 'constants/blog';
@@ -8,10 +9,16 @@ const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 export async function GET() {
   const allBlogPosts = await getAllWpPosts();
+
   if (!allBlogPosts) {
-    return {
-      status: 404,
-    };
+    return NextResponse.json(
+      {
+        message: 'No blog posts found',
+      },
+      {
+        status: 404,
+      }
+    );
   }
 
   const feed = new Rss({
