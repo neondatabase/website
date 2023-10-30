@@ -2,13 +2,42 @@
 import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
 import Content from 'components/shared/content';
 import { POSTGRES_DOCS_BASE_PATH } from 'constants/docs';
+import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import {
   POSTGRES_DIR_PATH,
   getAllPosts,
   getDocPreviousAndNextLinks,
   getPostBySlug,
 } from 'utils/api-postgres';
+import getMetadata from 'utils/get-metadata';
 import serializeMdx from 'utils/serialize-mdx';
+
+// @NOTE: the maximum length of the title to look fine on the og image
+const MAX_TITLE_LENGTH = 52;
+
+const vercelUrl =
+  process.env.VERCEL_ENV === 'preview'
+    ? `https://${process.env.VERCEL_BRANCH_URL}`
+    : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  const currentSlug = slug.join('/');
+
+  const { title, excerpt } = await getPostBySlug(`/${currentSlug}`, POSTGRES_DIR_PATH);
+
+  const encodedTitle = Buffer.from(title).toString('base64');
+
+  return getMetadata({
+    title: `${title} - PostgreSQL Docs`,
+    description: excerpt,
+    pathname: `${POSTGRES_DOCS_BASE_PATH}/${currentSlug}`,
+    imagePath:
+      title.length < MAX_TITLE_LENGTH
+        ? `${vercelUrl}/docs/og?title=${encodedTitle}`
+        : DEFAULT_IMAGE_PATH,
+  });
+}
 
 const PostgresPage = async ({ params }) => {
   const { slug } = params;

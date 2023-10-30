@@ -13,24 +13,31 @@ const getPostSlugs = async (pathname) => {
   return files.map((file) => file.replace(pathname, '').replace('.md', ''));
 };
 
+const findTitle = (sidebar, currentSlug) => {
+  let title = '';
+  sidebar.forEach((item) => {
+    if (item.slug === currentSlug) {
+      title = item.title;
+    } else if (item.items) {
+      item.items.forEach((child) => {
+        if (child.slug === currentSlug) {
+          title = child.title;
+        }
+      });
+    }
+  });
+  return title;
+};
+
 const getPostBySlug = async (path, basePath) => {
   try {
     const content = fs.readFileSync(`${basePath}${path}.md`, 'utf-8');
+    const sidebar = fs.readFileSync('content/postgresql/sidebar/sidebar.json', 'utf8');
 
-    const titleRegex = /\|\s*(.*?)\s*\|/g; // Global search for all table row beginnings
+    const currentSlug = path.slice(1);
+    const sidebarData = JSON.parse(sidebar);
 
-    let title = 'No title found'; // Default text if no title is found
-    let match;
-
-    // Check all instances of the regex match and find the title
-    while ((match = titleRegex.exec(content)) !== null) {
-      // The first capturing group (.*?) is non-greedy and captures the content of the first cell
-      if (match[1] && match[1].trim() !== '') {
-        title = match[1].trim();
-        break; // Exit the loop once the first non-empty title is found
-      }
-    }
-
+    const title = findTitle(sidebarData, currentSlug);
     const excerpt = getExcerpt(content, 200);
 
     return { title, excerpt, content };

@@ -1,8 +1,5 @@
 module.exports = {
-  siteUrl:
-    process.env.VERCEL_ENV === 'preview'
-      ? `https://${process.env.VERCEL_BRANCH_URL}`
-      : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL,
+  siteUrl: process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'https://neon.tech',
   exclude: [
     '/blog/wp-draft-post-preview-page',
     '/blog/rss.xml',
