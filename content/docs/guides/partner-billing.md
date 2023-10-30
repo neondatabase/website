@@ -83,7 +83,7 @@ curl --request POST \
 }
 ' | jq
 ```
-</codeblock>
+</CodeBlock>
 
 
 ## Updating an already created project
