@@ -74,7 +74,7 @@ const getDocPreviousAndNextLinks = (slug) => {
 
   // Calculate previous and next links based on the found index.
   const previousLink =
-    currentIndex > 0 && flatSidebar[currentIndex].prevSlug !== 'index'
+    currentIndex > 0
       ? {
           title: flatSidebar[prevIndex].title,
           slug: flatSidebar[prevIndex].currentSlug,

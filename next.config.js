@@ -104,6 +104,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/docs/postgres',
+        destination: '/docs/postgres/index',
+        permanent: true,
+      },
+      {
         source: '/early-access',
         destination: '/',
         permanent: true,
