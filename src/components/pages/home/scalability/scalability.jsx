@@ -26,7 +26,7 @@ const Scalability = () => {
             On-demand scalability
           </Heading>
           <p className="t-xl mt-8 2xl:mt-7 xl:mt-6">
-            We separated storage and compute to make on-demand scalability possible. Compute
+            We separate storage and compute to make on-demand scalability possible. Compute
             activates on an incoming connection and scales to zero when not in use.
           </p>
           <p className="t-xl mt-5 2xl:mt-4 xl:mt-3">

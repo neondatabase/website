@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/introduction/technical-preview-free-tier
-updatedOn: '2023-10-07T10:43:33.405Z'
+updatedOn: '2023-10-24T18:56:54.988Z'
 ---
 
 Neon is currently in Technical Preview. For information about how the Technical Preview fits within Neon's release plans, refer to the [Neon roadmap](/docs/reference/roadmap).
@@ -22,5 +22,5 @@ The Neon Free Tier is intended for personal projects, prototyping, or evaluating
 For higher limits and access to advanced features like _Autoscaling_, _Unlimited storage_,  _Project sharing_, and _Read replicas_, upgrade to our **Pro** plan. For more information, see [Neon Pro Plan](/docs/introduction/pro-plan), or select **Upgrade to Pro** in the [Neon Console](https://console.neon.tech/).
 
 <Admonition type="note">
-Neon reserves the right to adjust Free Tier limits, and to discontinue or limit compute usage in exceptional cases where misuse is identified, in order to protect the integrity of our platform and ensure a positive experience for all users.
+Neon reserves the right to adjust Neon Free Tier limits, and to discontinue or limit compute usage in exceptional cases where misuse is identified, in order to protect the integrity of our platform and ensure a positive experience for all users.
 </Admonition>

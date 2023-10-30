@@ -175,6 +175,37 @@
   }
 
   .prose-static {
+    @apply prose-ol:list-none;
+
+    ol {
+      counter-reset: item;
+      @apply m-0 p-0;
+    }
+
+    ol > li {
+      display: table;
+      counter-increment: item;
+      @apply mb-[0.6em];
+    }
+
+    ol > li ol {
+      @apply md:pl-0;
+    }
+
+    ol > li:before {
+      content: counters(item, '.') '. ';
+      display: table-cell;
+      @apply pr-[0.6em];
+    }
+
+    li ol > li {
+      @apply m-0;
+    }
+
+    li ol > li:before {
+      content: counters(item, '.') ' ';
+    }
+
     .wp-block-table {
       @apply md:-mx-4 md:overflow-x-auto md:px-4;
     }
