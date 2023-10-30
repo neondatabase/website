@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
   const encodedTitle = Buffer.from(title).toString('base64');
 
   return getMetadata({
-    title: `${title} - PostgreSQL Docs`,
+    title: `${title || 'PostgreSQL'} - PostgreSQL Docs`,
     description: excerpt,
     pathname: `${POSTGRES_DOCS_BASE_PATH}/${currentSlug}`,
     imagePath:

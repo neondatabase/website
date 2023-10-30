@@ -16,6 +16,12 @@ const getPostSlugs = async (pathname) => {
 const findTitle = (sidebar, currentSlug) => {
   let title = '';
   sidebar.forEach((item) => {
+    if (item.slug === 'index') {
+      title = 'PostgreSQL 17devel Documentation';
+    }
+    if (item.slug === 'legalnotice') {
+      title = 'Legal Notice';
+    }
     if (item.slug === currentSlug) {
       title = item.title;
     } else if (item.items) {
