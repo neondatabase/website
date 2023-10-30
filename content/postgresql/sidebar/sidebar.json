@@ -4779,5 +4779,13 @@
         ]
       }
     ]
+  },
+  {
+    "title": "Bibliography",
+    "slug": "biblio"
+  },
+  {
+    "title": "Book index",
+    "slug": "bookindex"
   }
 ]
