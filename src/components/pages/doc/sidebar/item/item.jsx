@@ -75,7 +75,7 @@ const Item = ({
       </Tag>
       {!!items?.length && (
         <LazyMotion features={domAnimation}>
-          <AnimatePresence>
+          <AnimatePresence initial={false}>
             {isOpen ? (
               <m.ul
                 className={clsx(
