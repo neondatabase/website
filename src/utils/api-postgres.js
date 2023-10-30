@@ -65,6 +65,8 @@ const getAllPosts = async () => {
   });
 };
 
+const getTitleWithInlineCode = (title) => title.replace(/`([^`]+)`/g, '<code>$1</code>');
+
 const getDocPreviousAndNextLinks = (slug) => {
   const flatSidebarJson = fs.readFileSync('content/postgresql/sidebar/flat-sidebar.json', 'utf8');
   const flatSidebar = JSON.parse(flatSidebarJson);
@@ -82,7 +84,7 @@ const getDocPreviousAndNextLinks = (slug) => {
   const previousLink =
     currentIndex > 0
       ? {
-          title: flatSidebar[prevIndex].title,
+          title: getTitleWithInlineCode(flatSidebar[prevIndex].title),
           slug: flatSidebar[prevIndex].currentSlug,
         }
       : null;
@@ -90,7 +92,7 @@ const getDocPreviousAndNextLinks = (slug) => {
   const nextLink =
     currentIndex < flatSidebar.length - 1
       ? {
-          title: flatSidebar[nextIndex].title,
+          title: getTitleWithInlineCode(flatSidebar[nextIndex].title),
           slug: flatSidebar[nextIndex].currentSlug,
         }
       : null;
@@ -101,10 +103,28 @@ const getDocPreviousAndNextLinks = (slug) => {
   };
 };
 
-const getSidebar = () => {
-  const sidebar = fs.readFileSync('content/postgresql/sidebar/sidebar.json', 'utf8');
+const getSideBarWithInlineCode = (sidebar) => {
+  // recursively iterate over the sidebar
+  // if title has inline code, replace it with html inline code
+  // if items, recursively iterate over the items
+  sidebar.forEach((item) => {
+    if (item.title) {
+      item.title = getTitleWithInlineCode(item.title);
+    }
+    if (item.items) {
+      getSideBarWithInlineCode(item.items);
+    }
+  });
 
-  return JSON.parse(sidebar);
+  return sidebar;
+};
+
+const getSidebar = () => {
+  const sidebarJson = fs.readFileSync('content/postgresql/sidebar/sidebar.json', 'utf8');
+  const sidebar = JSON.parse(sidebarJson);
+
+  return getSideBarWithInlineCode(sidebar);
+  // replace mdx inline code with html inline code
 };
 
 export {

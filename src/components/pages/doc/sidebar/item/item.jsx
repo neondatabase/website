@@ -59,9 +59,11 @@ const Item = ({
         onClick={handleClick}
       >
         {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
-        <span className="leading-snug" aria-hidden={!!ariaLabel}>
-          {title}
-        </span>
+        <span
+          className="leading-snug [&_code]:rounded-sm [&_code]:leading-none [&_code]:py-px [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:font-mono [&_code]:font-normal dark:[&_code]:bg-gray-new-15"
+          aria-hidden={!!ariaLabel}
+          dangerouslySetInnerHTML={{ __html: title }}
+        />
         <span
           className={clsx(
             'arrow-mask block h-4 w-4 transition-[transform,background-color] duration-200',
