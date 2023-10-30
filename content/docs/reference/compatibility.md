@@ -40,7 +40,7 @@ The following table lists Neon Postgres parameter settings that may differ from 
 | wal_level       | replica | Logical replication is currently not supported                                    |
 
 <Admonition type="note">
-You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling]../connect/connection-pooling).
+You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](../connect/connection-pooling).
 </Admonition>
 
 ## Unlogged tables
