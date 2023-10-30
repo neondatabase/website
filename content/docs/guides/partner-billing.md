@@ -132,7 +132,7 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-And here is what the response might look like. Key fields are highlighted in <what color?>.
+And here is what the response might look like. Key fields are highlighted in //what color?//.
 
 <details>
 <summary>Response body</summary>
