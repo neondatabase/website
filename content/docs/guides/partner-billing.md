@@ -6,23 +6,22 @@ isDraft: false
 updatedOn: '2023-10-06T17:44:14.701Z'
 ---
 
-When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute size a given project can consume. Using the `quota` key in the Neon API, you can 
+When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute size a given project can consume. Using the `quota` key in the Neon API, you can set a number of usage limits for key consumptoin metrics. These limits act as thresholds after which all active computes for a project are [suspended](#what-happens-when-the-quota-is-met). 
 
- allows you to strike a balance between providing a flexible and scalable service while preventing potential abuses and maintaining cost control.
-
-This is in addition to the kinds of sizing options available by setting [defaults](link to defaults) for autoscaling and autosuspend. By setting consumption quotas on key usage metrics, you can set up these hard limits after which all active computes for the project are suspended.
+These `quota` parameters let you set the balance between providing a flexible and scalable service while preventing potential abuses and maintaining cost control.
 
 ## Available metrics
 
-Neon supports consumption tracking at the project level. These consumption metrics are cumulative, refreshed on a set day every month (based on your billing period):
+Neon supports consumption tracking at the project level. These consumption metrics represent total cumulated usage across all branches and computes in a given project, accrued so far in a given monthly billing period. They are refreshed on a set day every month, on whichever date your new billing period starts. 
+
+Here are the relevant metrics that you can set quotas for:
 
 * `active_time_seconds`
 * `compute_time_seconds`
 * `written_data_bytes`
 * `data_transfer_bytes` 
-* `data_storage_bytes_hour`
 
-You can read more about these metrics in the [docs](/docs) and [API reference](API).
+To find the current usage level for any of these metrics, see see [how to `GET` current usage](#retrieving-details-about-a-project). You can read more about these metrics and how they impact billing in the [docs](/docs) and [API reference](API).
 
 ## About Quota keys
 
@@ -32,24 +31,28 @@ You can set quotas for all of these consumption metrics in the `quota` object in
 /projects/{project_id}/settings/quota
 ```
 
-The keys used to set these quotas use the the same names as their corresponding metrics:
+The main parameters used to set these quotas use the the same names as their corresponding metrics:
 
 * `active_time_seconds` &#8212; Sets the maximum amount of wall-clock time allowed in total across all of a project's compute endpoints. This means the total elapsed time, in seconds, from start to finish for each transaction handled by the project's endpoints, accumulated before the one-month refresh date.
 * `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's compute endpoints. This differs from `active_time_seconds` in that it only counts the time the CPU spends executing a process or a thread. It excludes time spent waiting for external resources, I/O operations, or time spent in a blocked or idle state.
 * `written_data_bytes` &#8212; Sets the maximum amount of data in total, measured in bytes, that can be written across all of a project's branches.
 * `data_transfer_bytes` &#8212; Sets the maximum amount of data, measured in bytes, that can be transferred from across all of a project's branches using the proxy.
-* `logical_size_bytes` &#8212; Sets the limit, measured in bytes, applied to any branch created in the project.
 
-<Admonition type="important">
-The most important quotas for controlling spend are `active_time_seconds` and `compute_time_seconds`, which set limits on your compute resource usage, and `written_data_bytes`, which places limits on maximum storage size. 
-</Admonition>
+There is one additional `quota` parameter, `logical_size_bytes` which sets a size limit for any branch created in the project. Measure in bytes, once this threshold is reached only compute for that particular branch is suspended. Note that this limit is not refreshed once per month: it is a strict size limit that applies for the life of the branch.
+
+### Suggested Guidelines
+
+Generally, the most important quotas for controlling spend per project are those controlling maximum compute (`active_time_seconds` and `compute_time_seconds`) and maximum storage size (`written_data_bytes`). In practice, `data_transfer_bytes` is less useful for controlling billing. 
+
 
 ## What happens when the quota is met?
-Neon tracks your consumption metrics are on a monthly cycle. When a metric hits the configured limit, all active computes for that project are automatically suspended. It is important to understand that this is not like an inactivity-based suspend, where computes restart at the next interaction: this suspend will not restart at the next API call or incoming proxy connection. The quota is reset every month. You can find that date using...[link]
+Neon tracks your consumption metrics are on a monthly cycle. When a metric hits the configured limit, all active computes for that project are automatically suspended. It is important to understand that this is not like an inactivity-based suspend, where computes restart at the next interaction: this suspend will not restart at the next API call or incoming proxy connection. Without intervention, the suspend will last until the next quota reset period (`quota_reset_at`).
+
+The quota is once per month. reset every month. You can find that date using...[link]
 
 The only exception to this monthly refresh cycle is for the `logical_size_bytes` limit. This setting places a size limit on each individual branch your users create. It is a strict limit on the total size of data allowed on a branch. There is no monthly refresh; the limit is perpetual.
 
-<So how to restart? is there a recommended way to configure a reset in the application?>
+//So how to restart? is there a recommended way to configure a reset in the application?//
 
 
 ## Setting quotas when you create the project
@@ -110,21 +113,21 @@ curl --request PATCH \
 ```
 </CodeBlock>
 
-## Retrieving details about a given project
+## Retrieving details about a project
 
 Using a `GET` request from the Neon API (see [Get project details]()), you can find all the usage details you need for a given project:
-* Current consumption metrics for the billing period
-* The start and end dates for the billing period
-* The actual date the billing period will reset
-* The current usage quotas configured for the project
+* Current consumption metrics accumulated for the billing period
+* Start and end dates for the billing period
+* Exact date the billing period will reset
+* Current usage quotas configured for the project
 
-Using these details, you can set up the logic for when to send notification warnings, when to reset a quota, among other possible actions.
+Using these details, you can set up the logic for when to send notification warnings, when to reset a quota, and other possible actions related to the pending or current suspension of a project's active computes.
 
-Here is an example of the `GET` request for the `UserProject` we created earlier, wtih project Id `wispy-wind-123456`.
+Here is an example of the `GET` request for the `UserProject` we created earlier, with the project Id `wispy-wind-123456`.
 
 ```bash
 curl --request GET \
-     --url https://console.neon.tech/api/v2/projects/wispy-wind-12345 \
+     --url https://console.neon.tech/api/v2/projects/wispy-wind-123456 \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq
 ```
@@ -155,8 +158,8 @@ And here is what the response might look like. Key fields are highlighted in <wh
     },
     "settings": {
       "quota": {
-        "active_time_seconds": 36000,
-        "compute_time_seconds": 18000
+        "active_time_seconds": 108000,
+        "compute_time_seconds": 72000
       }
     },
     "pg_version": 15,
@@ -183,6 +186,34 @@ And here is what the response might look like. Key fields are highlighted in <wh
 ```
 </CodeBlock>
 </details>
+
+Looking at this response, here are some conclusions we can draw:
+
+* **This project is 1 hour away from being suspended.**
+  
+  With current `compute_time_seconds` at _68,400_ (19 hours) and the quota for that metric set at _72,000_ (20 hours), the project is only _1 hour_ of compute time away from being suspended.
+
+* **This project is 1 day away from a quota refresh.**
+
+  If today's date is _October 31th, 2023_, and the `quota_reset_at` parameter is _2023-11-01T00:00:00Z_ (November 1st, 2023), then the project has _1 day_ left before all quota parameters (except for `logical_byte_size`) are refreshed.
+
+## Retrieving metrics for all projects
+
+<Admonition type="Warning" title="Preview API">
+This funtionality is part of the preview API and is subject to change in the future.
+</Admonition>
+
+You can use this API endpoint to retrieve a list of all consumption metrics in your organization for the current billing period, organized by project.
+
+```bash
+https://console.neon.tech/api/v2/consumption/projects
+```
+
+curl --request GET \
+     --url https://console.neon.tech/api/v2/consumption/projects \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer t8zk3xeepaieivirkt2h7dwqdh9k4r7506bfy4vf5j129zvyo8yjn6vc5d9zx5nh'
+
 
 ## Resetting a project after suspend
 The simplest reset method is just to wait until the next refresh period.
