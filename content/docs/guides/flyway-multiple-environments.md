@@ -51,7 +51,7 @@ From the Neon **Dashboard**, retrieve the connection string for each branch (`ma
 
 Your connection strings should look something like the ones shown below. Note that the hostname differs for each (the part starting with `ep-` and ending with `aws.neon.tech`). That's because each branch is hosted on its own compute instance.
 
-- `main:`
+- **main**:
 
     <CodeBlock shouldWrap>
 
@@ -61,7 +61,7 @@ Your connection strings should look something like the ones shown below. Note th
 
     </CodeBlock>
 
-- `development:`
+- **development**:
 
     <CodeBlock shouldWrap>
 
@@ -71,7 +71,7 @@ Your connection strings should look something like the ones shown below. Note th
 
     </CodeBlock>
 
-- `staging:`
+- **staging**:
 
     <CodeBlock shouldWrap>
 
