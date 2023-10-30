@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
+import { VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/docs';
 import LINKS from 'constants/links';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import {
@@ -17,14 +18,6 @@ import {
 } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
 import serializeMdx from 'utils/serialize-mdx';
-
-// @NOTE: the maximum length of the title to look fine on the og image
-const MAX_TITLE_LENGTH = 52;
-
-const vercelUrl =
-  process.env.VERCEL_ENV === 'preview'
-    ? `https://${process.env.VERCEL_BRANCH_URL}`
-    : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -60,7 +53,7 @@ export async function generateMetadata({ params }) {
     description: isReleaseNotes ? 'The latest product updates from Neon' : excerpt,
     imagePath:
       title.length < MAX_TITLE_LENGTH
-        ? `${vercelUrl}/docs/og?title=${encodedTitle}`
+        ? `${VERCEL_URL}/docs/og?title=${encodedTitle}`
         : DEFAULT_IMAGE_PATH,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isReleaseNotes ? `${LINKS.releaseNotes}/rss.xml` : null,

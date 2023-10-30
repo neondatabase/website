@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
 import Content from 'components/shared/content';
-import { POSTGRES_DOCS_BASE_PATH } from 'constants/docs';
+import { POSTGRES_DOCS_BASE_PATH, VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/docs';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import {
   POSTGRES_DIR_PATH,
@@ -11,14 +11,6 @@ import {
 } from 'utils/api-postgres';
 import getMetadata from 'utils/get-metadata';
 import serializeMdx from 'utils/serialize-mdx';
-
-// @NOTE: the maximum length of the title to look fine on the og image
-const MAX_TITLE_LENGTH = 52;
-
-const vercelUrl =
-  process.env.VERCEL_ENV === 'preview'
-    ? `https://${process.env.VERCEL_BRANCH_URL}`
-    : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
@@ -34,7 +26,7 @@ export async function generateMetadata({ params }) {
     pathname: `${POSTGRES_DOCS_BASE_PATH}/${currentSlug}`,
     imagePath:
       title.length < MAX_TITLE_LENGTH
-        ? `${vercelUrl}/docs/og?title=${encodedTitle}`
+        ? `${VERCEL_URL}/docs/og?title=${encodedTitle}`
         : DEFAULT_IMAGE_PATH,
   });
 }

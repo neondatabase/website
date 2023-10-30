@@ -5,7 +5,12 @@ import { RELEASE_NOTES_CATEGORIES } from 'components/pages/release-notes/release
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
-import { RELEASE_NOTES_BASE_PATH, RELEASE_NOTES_SLUG_REGEX } from 'constants/docs';
+import {
+  RELEASE_NOTES_BASE_PATH,
+  RELEASE_NOTES_SLUG_REGEX,
+  VERCEL_URL,
+  MAX_TITLE_LENGTH,
+} from 'constants/docs';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import { getAllReleaseNotes, getPostBySlug, RELEASE_NOTES_DIR_PATH } from 'utils/api-docs';
 import getExcerpt from 'utils/get-excerpt';
@@ -13,14 +18,6 @@ import getMetadata from 'utils/get-metadata';
 import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
 import serializeMdx from 'utils/serialize-mdx';
-
-// @NOTE: the maximum length of the title to look fine on the og image
-const MAX_TITLE_LENGTH = 52;
-
-const vercelUrl =
-  process.env.VERCEL_ENV === 'preview'
-    ? `https://${process.env.VERCEL_BRANCH_URL}`
-    : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 export async function generateStaticParams() {
   const releaseNotes = await getAllReleaseNotes();
@@ -62,7 +59,7 @@ export async function generateMetadata({ params }) {
     pathname: `${RELEASE_NOTES_BASE_PATH}${currentSlug}`,
     imagePath:
       label.length < MAX_TITLE_LENGTH
-        ? `${vercelUrl}/docs/og?title=${encodedLabel}`
+        ? `${VERCEL_URL}/docs/og?title=${encodedLabel}`
         : DEFAULT_IMAGE_PATH,
     type: 'article',
   });
