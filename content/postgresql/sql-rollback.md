@@ -1,11 +1,3 @@
-
-
-|              ROLLBACK             |                                        |              |                                                       |                                                         |
-| :-------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-revoke.html "REVOKE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-rollback-prepared.html "ROLLBACK PREPARED") |
-
-***
-
 ## ROLLBACK
 
 ROLLBACK — abort the current transaction
@@ -53,10 +45,3 @@ The command `ROLLBACK` conforms to the SQL standard. The form `ROLLBACK TRANSACT
 ## See Also
 
 [BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [ROLLBACK TO SAVEPOINT](sql-rollback-to.html "ROLLBACK TO SAVEPOINT")
-
-***
-
-|                                   |                                                       |                                                         |
-| :-------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-revoke.html "REVOKE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-rollback-prepared.html "ROLLBACK PREPARED") |
-| REVOKE                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                       ROLLBACK PREPARED |

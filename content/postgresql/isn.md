@@ -1,10 +1,3 @@
-
-| F.21. isn — data types for international standard numbers (ISBN, EAN, UPC, etc.) |                                                                             |                                                        |                                                       |                                                    |
-| :------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-|      [Prev](intarray.html "F.20. intarray — manipulate arrays of integers")      | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](lo.html "F.22. lo — manage large objects") |
-
-***
-
 ## F.21. isn — data types for international standard numbers (ISBN, EAN, UPC, etc.) [#](#ISN)
 
 * *   [F.21.1. Data Types](isn.html#ISN-DATA-TYPES)
@@ -160,10 +153,3 @@ Care was taken during the creation of the algorithms and they were meticulously 
 Germán Méndez Bravo (Kronuz), 2004–2006
 
 This module was inspired by Garrett A. Wollman's `isbn_issn` code.
-
-***
-
-|                                                                         |                                                                             |                                                    |
-| :---------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -------------------------------------------------: |
-| [Prev](intarray.html "F.20. intarray — manipulate arrays of integers")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](lo.html "F.22. lo — manage large objects") |
-| F.20. intarray — manipulate arrays of integers                          |            [Home](index.html "PostgreSQL 17devel Documentation")            |                    F.22. lo — manage large objects |

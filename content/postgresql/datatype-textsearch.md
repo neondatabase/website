@@ -1,11 +1,3 @@
-
-
-|               8.11. Text Search Types               |                                             |                       |                                                       |                                               |
-| :-------------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](datatype-bit.html "8.10. Bit String Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-uuid.html "8.12. UUID Type") |
-
-***
-
 ## 8.11. Text Search Types [#](#DATATYPE-TEXTSEARCH)
 
   * *   [8.11.1. `tsvector`](datatype-textsearch.html#DATATYPE-TSVECTOR)
@@ -170,10 +162,3 @@ SELECT to_tsvector( 'postgraduate' ), to_tsquery( 'postgres:*' );
 ```
 
 which will match the stemmed form of `postgraduate`.
-
-***
-
-|                                                     |                                                       |                                               |
-| :-------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](datatype-bit.html "8.10. Bit String Types")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](datatype-uuid.html "8.12. UUID Type") |
-| 8.10. Bit String Types                              | [Home](index.html "PostgreSQL 17devel Documentation") |                               8.12. UUID Type |

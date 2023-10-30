@@ -1,11 +1,3 @@
-
-
-|               59.5. Row Locking in Foreign Data Wrappers               |                                                                    |                                            |                                                       |                                                                                |
-| :--------------------------------------------------------------------: | :----------------------------------------------------------------- | :----------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](fdw-planning.html "59.4. Foreign Data Wrapper Query Planning")  | [Up](fdwhandler.html "Chapter 59. Writing a Foreign Data Wrapper") | Chapter 59. Writing a Foreign Data Wrapper | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tablesample-method.html "Chapter 60. Writing a Table Sampling Method") |
-
-***
-
 ## 59.5. Row Locking in Foreign Data Wrappers [#](#FDW-ROW-LOCKING)
 
 If an FDW's underlying storage mechanism has a concept of locking individual rows to prevent concurrent updates of those rows, it is usually worthwhile for the FDW to perform row-level locking with as close an approximation as practical to the semantics used in ordinary PostgreSQL tables. There are multiple considerations involved in this.
@@ -23,10 +15,3 @@ For foreign tables that are specified to be locked by a `SELECT FOR UPDATE/SHARE
 Lastly, for foreign tables that are used in an `UPDATE`, `DELETE` or `SELECT FOR UPDATE/SHARE` command but are not specified to be row-locked, you can override the default choice to copy entire rows by having `GetForeignRowMarkType` select option `ROW_MARK_REFERENCE` when it sees lock strength `LCS_NONE`. This will cause `RefetchForeignRow` to be called with that value for `markType`; it should then re-fetch the row without acquiring any new lock. (If you have a `GetForeignRowMarkType` function but don't wish to re-fetch unlocked rows, select option `ROW_MARK_COPY` for `LCS_NONE`.)
 
 See `src/include/nodes/lockoptions.h`, the comments for `RowMarkType` and `PlanRowMark` in `src/include/nodes/plannodes.h`, and the comments for `ExecRowMark` in `src/include/nodes/execnodes.h` for additional information.
-
-***
-
-|                                                                        |                                                                    |                                                                                |
-| :--------------------------------------------------------------------- | :----------------------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](fdw-planning.html "59.4. Foreign Data Wrapper Query Planning")  | [Up](fdwhandler.html "Chapter 59. Writing a Foreign Data Wrapper") |  [Next](tablesample-method.html "Chapter 60. Writing a Table Sampling Method") |
-| 59.4. Foreign Data Wrapper Query Planning                              |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                    Chapter 60. Writing a Table Sampling Method |

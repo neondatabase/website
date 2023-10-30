@@ -1,11 +1,3 @@
-
-
-|            59.2. Foreign Data Wrapper Callback Routines            |                                                                    |                                            |                                                       |                                                                         |
-| :----------------------------------------------------------------: | :----------------------------------------------------------------- | :----------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](fdw-functions.html "59.1. Foreign Data Wrapper Functions")  | [Up](fdwhandler.html "Chapter 59. Writing a Foreign Data Wrapper") | Chapter 59. Writing a Foreign Data Wrapper | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](fdw-helpers.html "59.3. Foreign Data Wrapper Helper Functions") |
-
-***
-
 ## 59.2. Foreign Data Wrapper Callback Routines [#](#FDW-CALLBACKS)
 
   * *   [59.2.1. FDW Routines for Scanning Foreign Tables](fdw-callbacks.html#FDW-CALLBACKS-SCAN)
@@ -672,10 +664,3 @@ ReparameterizeForeignPathByChild(PlannerInfo *root, List *fdw_private,
 ```
 
 This function is called while converting a path parameterized by the top-most parent of the given child relation `child_rel` to be parameterized by the child relation. The function is used to reparameterize any paths or translate any expression nodes saved in the given `fdw_private` member of a `ForeignPath`. The callback may use `reparameterize_path_by_child`, `adjust_appendrel_attrs` or `adjust_appendrel_attrs_multilevel` as required.
-
-***
-
-|                                                                    |                                                                    |                                                                         |
-| :----------------------------------------------------------------- | :----------------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](fdw-functions.html "59.1. Foreign Data Wrapper Functions")  | [Up](fdwhandler.html "Chapter 59. Writing a Foreign Data Wrapper") |  [Next](fdw-helpers.html "59.3. Foreign Data Wrapper Helper Functions") |
-| 59.1. Foreign Data Wrapper Functions                               |        [Home](index.html "PostgreSQL 17devel Documentation")       |                             59.3. Foreign Data Wrapper Helper Functions |

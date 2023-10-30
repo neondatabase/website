@@ -1,11 +1,3 @@
-
-
-|             54.22. `pg_seclabels`             |                                             |                          |                                                       |                                                       |
-| :-------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](view-pg-rules.html "54.21. pg_rules")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-sequences.html "54.23. pg_sequences") |
-
-***
-
 ## 54.22. `pg_seclabels` [#](#VIEW-PG-SECLABELS)
 
 The view `pg_seclabels` provides information about security labels. It as an easier-to-query version of the [`pg_seclabel`](catalog-pg-seclabel.html "53.46. pg_seclabel") catalog.
@@ -22,10 +14,3 @@ The view `pg_seclabels` provides information about security labels. It as an eas
 | `objname` `text`The name of the object to which this label applies, as text.                                                                                                                 |
 | `provider` `text` (references [`pg_seclabel`](catalog-pg-seclabel.html "53.46. pg_seclabel").`provider`)The label provider associated with this label.                                       |
 | `label` `text` (references [`pg_seclabel`](catalog-pg-seclabel.html "53.46. pg_seclabel").`label`)The security label applied to this object.                                                 |
-
-***
-
-|                                               |                                                       |                                                       |
-| :-------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](view-pg-rules.html "54.21. pg_rules")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-sequences.html "54.23. pg_sequences") |
-| 54.21. `pg_rules`                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                 54.23. `pg_sequences` |

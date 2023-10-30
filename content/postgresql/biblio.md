@@ -1,11 +1,3 @@
-
-
-|                                  Bibliography                                  |                                                     |                                  |                                                       |                                 |
-| :----------------------------------------------------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | ------------------------------: |
-| [Prev](app-pgreceivexlog.html "P.5. pg_receivexlog renamed to pg_receivewal")  | [Up](index.html "PostgreSQL 17devel Documentation") | PostgreSQL 17devel Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](bookindex.html "Index") |
-
-***
-
 # Bibliography
 
 Selected references and readings for SQL and PostgreSQL.
@@ -63,10 +55,3 @@ Some white papers and technical reports from the original POSTGRES development t
 \[ston90a] “[The implementation of POSTGRES](https://dsf.berkeley.edu/papers/ERL-M90-34.pdf)”. M. Stonebraker, L. A. Rowe, and M. Hirohama. *Transactions on Knowledge and Data Engineering 2(1)*. IEEE. March 1990.
 
 \[ston90b] “[On Rules, Procedures, Caching and Views in Database Systems](https://dsf.berkeley.edu/papers/ERL-M90-36.pdf)”. M. Stonebraker, A. Jhingran, J. Goh, and S. Potamianos. ACM-SIGMOD Conference on Management of Data, June 1990.
-
-***
-
-|                                                                                |                                                       |                                 |
-| :----------------------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------: |
-| [Prev](app-pgreceivexlog.html "P.5. pg_receivexlog renamed to pg_receivewal")  |  [Up](index.html "PostgreSQL 17devel Documentation")  |  [Next](bookindex.html "Index") |
-| P.5. `pg_receivexlog` renamed to `pg_receivewal`                               | [Home](index.html "PostgreSQL 17devel Documentation") |                           Index |

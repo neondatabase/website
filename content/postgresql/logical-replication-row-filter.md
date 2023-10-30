@@ -1,11 +1,3 @@
-
-
-|                          31.3. Row Filters                          |                                                                  |                                 |                                                       |                                                                  |
-| :-----------------------------------------------------------------: | :--------------------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](logical-replication-subscription.html "31.2. Subscription")  | [Up](logical-replication.html "Chapter 31. Logical Replication") | Chapter 31. Logical Replication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logical-replication-col-lists.html "31.4. Column Lists") |
-
-***
-
 ## 31.3. Row Filters [#](#LOGICAL-REPLICATION-ROW-FILTER)
 
   * *   [31.3.1. Row Filter Rules](logical-replication-row-filter.html#LOGICAL-REPLICATION-ROW-FILTER-RULES)
@@ -443,10 +435,3 @@ test_sub=# SELECT * FROM child ORDER BY a;
  7
 (3 rows)
 ```
-
-***
-
-|                                                                     |                                                                  |                                                                  |
-| :------------------------------------------------------------------ | :--------------------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](logical-replication-subscription.html "31.2. Subscription")  | [Up](logical-replication.html "Chapter 31. Logical Replication") |  [Next](logical-replication-col-lists.html "31.4. Column Lists") |
-| 31.2. Subscription                                                  |       [Home](index.html "PostgreSQL 17devel Documentation")      |                                               31.4. Column Lists |

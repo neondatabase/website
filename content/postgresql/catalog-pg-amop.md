@@ -1,11 +1,3 @@
-
-
-|              53.4. `pg_amop`              |                                                   |                             |                                                       |                                                   |
-| :---------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](catalog-pg-am.html "53.3. pg_am")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-amproc.html "53.5. pg_amproc") |
-
-***
-
 ## 53.4. `pg_amop` [#](#CATALOG-PG-AMOP)
 
 The catalog `pg_amop` stores information about operators associated with access method operator families. There is one row for each operator that is a member of an operator family. A family member can be either a *search* operator or an *ordering* operator. An operator can appear in more than one family, but cannot appear in more than one search position nor more than one ordering position within a family. (It is allowed, though unlikely, for an operator to be used for both search and ordering purposes.)
@@ -35,10 +27,3 @@ An “ordering” operator entry indicates that an index of this operator family
 At present, it's assumed that the sort order for an ordering operator is the default for the referenced operator family, i.e., `ASC NULLS LAST`. This might someday be relaxed by adding additional columns to specify sort options explicitly.
 
 An entry's `amopmethod` must match the `opfmethod` of its containing operator family (including `amopmethod` here is an intentional denormalization of the catalog structure for performance reasons). Also, `amoplefttype` and `amoprighttype` must match the `oprleft` and `oprright` fields of the referenced [`pg_operator`](catalog-pg-operator.html "53.34. pg_operator") entry.
-
-***
-
-|                                           |                                                       |                                                   |
-| :---------------------------------------- | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](catalog-pg-am.html "53.3. pg_am")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-amproc.html "53.5. pg_amproc") |
-| 53.3. `pg_am`                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                 53.5. `pg_amproc` |

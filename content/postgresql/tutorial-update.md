@@ -1,11 +1,3 @@
-
-
-|                      2.8. Updates                     |                                                       |                             |                                                       |                                                |
-| :---------------------------------------------------: | :---------------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](tutorial-agg.html "2.7. Aggregate Functions")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") | Chapter 2. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-delete.html "2.9. Deletions") |
-
-***
-
 ## 2.8. Updates [#](#TUTORIAL-UPDATE)
 
 You can update existing rows using the `UPDATE` command. Suppose you discover the temperature readings are all off by 2 degrees after November 28. You can correct the data as follows:
@@ -30,10 +22,3 @@ SELECT * FROM weather;
  Hayward       |      35 |      52 |      | 1994-11-29
 (3 rows)
 ```
-
-***
-
-|                                                       |                                                       |                                                |
-| :---------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](tutorial-agg.html "2.7. Aggregate Functions")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") |  [Next](tutorial-delete.html "2.9. Deletions") |
-| 2.7. Aggregate Functions                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                 2.9. Deletions |

@@ -1,11 +1,3 @@
-
-
-|                 8.2. Monetary Types                 |                                             |                       |                                                       |                                                         |
-| :-------------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](datatype-numeric.html "8.1. Numeric Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-character.html "8.3. Character Types") |
-
-***
-
 ## 8.2. Monetary Types [#](#DATATYPE-MONEY)
 
 The `money` type stores a currency amount with a fixed fractional precision; see [Table 8.3](datatype-money.html#DATATYPE-MONEY-TABLE "Table 8.3. Monetary Types"). The fractional precision is determined by the database's [lc\_monetary](runtime-config-client.html#GUC-LC-MONETARY) setting. The range shown in the table assumes there are two fractional digits. Input is accepted in a variety of formats, including integer and floating-point literals, as well as typical currency formatting, such as `'$1,000.00'`. Output is generally in the latter form but depends on the locale.
@@ -37,10 +29,3 @@ SELECT '52093.89'::money::numeric::float8;
 ```
 
 Division of a `money` value by an integer value is performed with truncation of the fractional part towards zero. To get a rounded result, divide by a floating-point value, or cast the `money` value to `numeric` before dividing and back to `money` afterwards. (The latter is preferable to avoid risking precision loss.) When a `money` value is divided by another `money` value, the result is `double precision` (i.e., a pure number, not money); the currency units cancel each other out in the division.
-
-***
-
-|                                                     |                                                       |                                                         |
-| :-------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](datatype-numeric.html "8.1. Numeric Types")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](datatype-character.html "8.3. Character Types") |
-| 8.1. Numeric Types                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                    8.3. Character Types |

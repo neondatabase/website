@@ -1,11 +1,3 @@
-
-
-|                 54.12. `pg_locks`                 |                                             |                          |                                                       |                                                     |
-| :-----------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](view-pg-indexes.html "54.11. pg_indexes")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-matviews.html "54.13. pg_matviews") |
-
-***
-
 ## 54.12. `pg_locks` [#](#VIEW-PG-LOCKS)
 
 The view `pg_locks` provides access to information about the locks held by active processes within the database server. See [Chapter 13](mvcc.html "Chapter 13. Concurrency Control") for more discussion of locking.
@@ -72,10 +64,3 @@ While it is possible to obtain information about which processes block which oth
 The `pg_locks` view displays data from both the regular lock manager and the predicate lock manager, which are separate systems; in addition, the regular lock manager subdivides its locks into regular and *fast-path* locks. This data is not guaranteed to be entirely consistent. When the view is queried, data on fast-path locks (with `fastpath` = `true`) is gathered from each backend one at a time, without freezing the state of the entire lock manager, so it is possible for locks to be taken or released while information is gathered. Note, however, that these locks are known not to conflict with any other lock currently in place. After all backends have been queried for fast-path locks, the remainder of the regular lock manager is locked as a unit, and a consistent snapshot of all remaining locks is collected as an atomic action. After unlocking the regular lock manager, the predicate lock manager is similarly locked and all predicate locks are collected as an atomic action. Thus, with the exception of fast-path locks, each lock manager will deliver a consistent set of results, but as we do not lock both lock managers simultaneously, it is possible for locks to be taken or released after we interrogate the regular lock manager and before we interrogate the predicate lock manager.
 
 Locking the regular and/or predicate lock manager could have some impact on database performance if this view is very frequently accessed. The locks are held only for the minimum amount of time necessary to obtain data from the lock managers, but this does not completely eliminate the possibility of a performance impact.
-
-***
-
-|                                                   |                                                       |                                                     |
-| :------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](view-pg-indexes.html "54.11. pg_indexes")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-matviews.html "54.13. pg_matviews") |
-| 54.11. `pg_indexes`                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                54.13. `pg_matviews` |

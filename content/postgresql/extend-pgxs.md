@@ -1,11 +1,3 @@
-
-
-|                       38.18. Extension Building Infrastructure                       |                                               |                           |                                                       |                                               |
-| :----------------------------------------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](extend-extensions.html "38.17. Packaging Related Objects into an Extension")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](triggers.html "Chapter 39. Triggers") |
-
-***
-
 ## 38.18. Extension Building Infrastructure [#](#EXTEND-PGXS)
 
 If you are thinking about distributing your PostgreSQL extension modules, setting up a portable build system for them can be fairly difficult. Therefore the PostgreSQL installation provides a build infrastructure for extensions, called PGXS, so that simple extension modules can be built simply against an already installed server. PGXS is mainly intended for extensions that include C code, although it can be used for pure-SQL extensions too. Note that PGXS is not intended to be a universal build system framework that can be used to build any software interfacing to PostgreSQL; it simply automates common build rules for simple server extension modules. For more complicated packages, you might need to write your own build system.
@@ -180,10 +172,3 @@ The scripts listed in the `ISOLATION` variable are used for tests stressing beha
 ### Tip
 
 The easiest way to create the expected files is to create empty files, then do a test run (which will of course report differences). Inspect the actual result files found in the `results/` directory (for tests in `REGRESS`), or `output_iso/results/` directory (for tests in `ISOLATION`), then copy them to `expected/` if they match what you expect from the test.
-
-***
-
-|                                                                                      |                                                       |                                               |
-| :----------------------------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](extend-extensions.html "38.17. Packaging Related Objects into an Extension")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](triggers.html "Chapter 39. Triggers") |
-| 38.17. Packaging Related Objects into an Extension                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                          Chapter 39. Triggers |

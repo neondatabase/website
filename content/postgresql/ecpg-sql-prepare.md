@@ -1,11 +1,3 @@
-
-
-|               PREPARE              |                                                             |                              |                                                       |                                                        |
-| :--------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](ecpg-sql-open.html "OPEN")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-set-autocommit.html "SET AUTOCOMMIT") |
-
-***
-
 ## PREPARE
 
 PREPARE — prepare a statement for execution
@@ -56,10 +48,3 @@ EXEC SQL EXECUTE foo USING SQL DESCRIPTOR indesc INTO SQL DESCRIPTOR outdesc;
 ## See Also
 
 [EXECUTE](sql-execute.html "EXECUTE")
-
-***
-
-|                                    |                                                             |                                                        |
-| :--------------------------------- | :---------------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](ecpg-sql-open.html "OPEN")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-set-autocommit.html "SET AUTOCOMMIT") |
-| OPEN                               |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                         SET AUTOCOMMIT |

@@ -1,11 +1,3 @@
-
-
-|            9.20. Range/Multirange Functions and Operators           |                                                           |                                    |                                                       |                                                               |
-| :-----------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](functions-array.html "9.19. Array Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-aggregate.html "9.21. Aggregate Functions") |
-
-***
-
 ## 9.20. Range/Multirange Functions and Operators [#](#FUNCTIONS-RANGE)
 
 See [Section 8.17](rangetypes.html "8.17. Range Types") for an overview of range types.
@@ -109,10 +101,3 @@ The range union and difference operators will fail if the resulting range would 
 \
 
 The `lower_inc`, `upper_inc`, `lower_inf`, and `upper_inf` functions all return false for an empty range or multirange.
-
-***
-
-|                                                                     |                                                           |                                                               |
-| :------------------------------------------------------------------ | :-------------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](functions-array.html "9.19. Array Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-aggregate.html "9.21. Aggregate Functions") |
-| 9.19. Array Functions and Operators                                 |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                     9.21. Aggregate Functions |

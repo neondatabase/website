@@ -1,11 +1,3 @@
-
-
-|      F.2. amcheck — tools to verify table and index consistency     |                                                                             |                                                        |                                                       |                                                                              |
-| :-----------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](adminpack.html "F.1. adminpack — pgAdmin support toolpack")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](auth-delay.html "F.3. auth_delay — pause on authentication failure") |
-
-***
-
 ## F.2. amcheck — tools to verify table and index consistency [#](#AMCHECK)
 
   * *   [F.2.1. Functions](amcheck.html#AMCHECK-FUNCTIONS)
@@ -190,10 +182,3 @@ In general, `amcheck` can only prove the presence of corruption; it cannot prove
 No error concerning corruption raised by `amcheck` should ever be a false positive. `amcheck` raises errors in the event of conditions that, by definition, should never happen, and so careful analysis of `amcheck` errors is often required.
 
 There is no general method of repairing problems that `amcheck` detects. An explanation for the root cause of an invariant violation should be sought. [pageinspect](pageinspect.html "F.24. pageinspect — low-level inspection of database pages") may play a useful role in diagnosing corruption that `amcheck` detects. A `REINDEX` may not be effective in repairing corruption.
-
-***
-
-|                                                                     |                                                                             |                                                                              |
-| :------------------------------------------------------------------ | :-------------------------------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](adminpack.html "F.1. adminpack — pgAdmin support toolpack")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](auth-delay.html "F.3. auth_delay — pause on authentication failure") |
-| F.1. adminpack — pgAdmin support toolpack                           |            [Home](index.html "PostgreSQL 17devel Documentation")            |                           F.3. auth\_delay — pause on authentication failure |

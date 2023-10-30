@@ -1,11 +1,3 @@
-
-
-|              54.13. `pg_matviews`             |                                             |                          |                                                       |                                                     |
-| :-------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](view-pg-locks.html "54.12. pg_locks")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-policies.html "54.14. pg_policies") |
-
-***
-
 ## 54.13. `pg_matviews` [#](#VIEW-PG-MATVIEWS)
 
 The view `pg_matviews` provides access to useful information about each materialized view in the database.
@@ -21,10 +13,3 @@ The view `pg_matviews` provides access to useful information about each material
 | `hasindexes` `bool`True if materialized view has (or recently had) any indexes                                                                                                                |
 | `ispopulated` `bool`True if materialized view is currently populated                                                                                                                          |
 | `definition` `text`Materialized view definition (a reconstructed [SELECT](sql-select.html "SELECT") query)                                                                                    |
-
-***
-
-|                                               |                                                       |                                                     |
-| :-------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](view-pg-locks.html "54.12. pg_locks")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-policies.html "54.14. pg_policies") |
-| 54.12. `pg_locks`                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                54.14. `pg_policies` |

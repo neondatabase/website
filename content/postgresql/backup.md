@@ -1,11 +1,3 @@
-
-
-|                 Chapter 26. Backup and Restore                 |                                                    |                                 |                                                       |                                            |
-| :------------------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](logfile-maintenance.html "25.3. Log File Maintenance")  | [Up](admin.html "Part III. Server Administration") | Part III. Server Administration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](backup-dump.html "26.1. SQL Dump") |
-
-***
-
 ## Chapter 26. Backup and Restore
 
 **Table of Contents**
@@ -38,10 +30,3 @@ There are three fundamentally different approaches to backing up PostgreSQL data
 * Continuous archiving
 
 Each has its own strengths and weaknesses; each is discussed in turn in the following sections.
-
-***
-
-|                                                                |                                                       |                                            |
-| :------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](logfile-maintenance.html "25.3. Log File Maintenance")  |   [Up](admin.html "Part III. Server Administration")  |  [Next](backup-dump.html "26.1. SQL Dump") |
-| 25.3. Log File Maintenance                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                             26.1. SQL Dump |

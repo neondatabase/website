@@ -1,11 +1,3 @@
-
-
-|         F.26. pg\_buffercache — inspect PostgreSQL buffer cache state        |                                                                             |                                                        |                                                       |                                                                   |
-| :--------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](passwordcheck.html "F.25. passwordcheck — verify password strength")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgcrypto.html "F.27. pgcrypto — cryptographic functions") |
-
-***
-
 ## F.26. pg\_buffercache — inspect PostgreSQL buffer cache state [#](#PGBUFFERCACHE)
 
   * *   [F.26.1. The `pg_buffercache` View](pgbuffercache.html#PGBUFFERCACHE-PG-BUFFERCACHE)
@@ -146,10 +138,3 @@ Mark Kirkwood `<markir@paradise.net.nz>`
 Design suggestions: Neil Conway `<neilc@samurai.com>`
 
 Debugging advice: Tom Lane `<tgl@sss.pgh.pa.us>`
-
-***
-
-|                                                                              |                                                                             |                                                                   |
-| :--------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](passwordcheck.html "F.25. passwordcheck — verify password strength")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](pgcrypto.html "F.27. pgcrypto — cryptographic functions") |
-| F.25. passwordcheck — verify password strength                               |            [Home](index.html "PostgreSQL 17devel Documentation")            |                          F.27. pgcrypto — cryptographic functions |

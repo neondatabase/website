@@ -1,11 +1,3 @@
-
-
-|                        53.10. `pg_cast`                       |                                                   |                             |                                                       |                                                  |
-| :-----------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](catalog-pg-auth-members.html "53.9. pg_auth_members")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-class.html "53.11. pg_class") |
-
-***
-
 ## 53.10. `pg_cast` [#](#CATALOG-PG-CAST)
 
 The catalog `pg_cast` stores data type conversion paths, both built-in and user-defined.
@@ -30,10 +22,3 @@ The cast functions listed in `pg_cast` must always take the cast source type as 
 It is legitimate to create a `pg_cast` entry in which the source and target types are the same, if the associated function takes more than one argument. Such entries represent “length coercion functions” that coerce values of the type to be legal for a particular type modifier value.
 
 When a `pg_cast` entry has different source and target types and a function that takes more than one argument, it represents converting from one type to another and applying a length coercion in a single step. When no such entry is available, coercion to a type that uses a type modifier involves two steps, one to convert between data types and a second to apply the modifier.
-
-***
-
-|                                                               |                                                       |                                                  |
-| :------------------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](catalog-pg-auth-members.html "53.9. pg_auth_members")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-class.html "53.11. pg_class") |
-| 53.9. `pg_auth_members`                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                53.11. `pg_class` |

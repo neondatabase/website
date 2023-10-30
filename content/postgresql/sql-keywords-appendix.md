@@ -1,11 +1,3 @@
-
-
-|                Appendix C. SQL Key Words                |                                               |                       |                                                       |                                                      |
-| :-----------------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](datetime-julian-dates.html "B.7. Julian Dates")  | [Up](appendixes.html "Part VIII. Appendixes") | Part VIII. Appendixes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](features.html "Appendix D. SQL Conformance") |
-
-***
-
 ## Appendix C. SQL Key Words
 
 [Table C.1](sql-keywords-appendix.html#KEYWORDS-TABLE "Table C.1. SQL Key Words") lists all tokens that are key words in the SQL standard and in PostgreSQL 17devel. Background information can be found in [Section 4.1.1](sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS "4.1.1. Identifiers and Key Words"). (For space reasons, only the latest two versions of the SQL standard, and SQL-92 for historical comparison, are included. The differences between those and the other intermediate standard versions are small.)
@@ -867,10 +859,3 @@ It is important to understand before studying [Table C.1](sql-keywords-appendix
 | `YEAR`                                 | non-reserved, requires `AS`                              | reserved     | reserved     | reserved     |
 | `YES`                                  | non-reserved                                             | non-reserved | non-reserved |              |
 | `ZONE`                                 | non-reserved                                             | non-reserved | non-reserved | reserved     |
-
-***
-
-|                                                         |                                                       |                                                      |
-| :------------------------------------------------------ | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](datetime-julian-dates.html "B.7. Julian Dates")  |     [Up](appendixes.html "Part VIII. Appendixes")     |  [Next](features.html "Appendix D. SQL Conformance") |
-| B.7. Julian Dates                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                          Appendix D. SQL Conformance |

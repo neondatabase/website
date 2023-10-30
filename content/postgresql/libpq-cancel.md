@@ -1,11 +1,3 @@
-
-
-|                       34.7. Canceling Queries in Progress                       |                                                  |                               |                                                       |                                                              |
-| :-----------------------------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](libpq-single-row-mode.html "34.6. Retrieving Query Results Row-by-Row")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-fastpath.html "34.8. The Fast-Path Interface") |
-
-***
-
 ## 34.7. Canceling Queries in Progress [#](#LIBPQ-CANCEL)
 
 A client application can request cancellation of a command that is still being processed by the server, using the functions described in this section.
@@ -59,10 +51,3 @@ A client application can request cancellation of a command that is still being p
     ```
 
     Requests that the server abandon processing of the current command. It operates directly on the `PGconn` object, and in case of failure stores the error message in the `PGconn` object (whence it can be retrieved by [`PQerrorMessage`](libpq-status.html#LIBPQ-PQERRORMESSAGE)). Although the functionality is the same, this approach is not safe within multiple-thread programs or signal handlers, since it is possible that overwriting the `PGconn`'s error message will mess up the operation currently in progress on the connection.
-
-***
-
-|                                                                                 |                                                       |                                                              |
-| :------------------------------------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](libpq-single-row-mode.html "34.6. Retrieving Query Results Row-by-Row")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-fastpath.html "34.8. The Fast-Path Interface") |
-| 34.6. Retrieving Query Results Row-by-Row                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                34.8. The Fast-Path Interface |

@@ -1,11 +1,3 @@
-
-
-|             N.2. Configuring the Colors            |                                              |                           |                                                       |                                                     |
-| :------------------------------------------------: | :------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](color-when.html "N.1. When Color is Used")  | [Up](color.html "Appendix N. Color Support") | Appendix N. Color Support | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](syncfs.html "Appendix O. syncfs() Caveats") |
-
-***
-
 ## N.2. Configuring the Colors [#](#COLOR-WHICH)
 
 The actual colors to be used are configured using the environment variable `PG_COLORS` (note plural). The value is a colon-separated list of `key=value` pairs. The keys specify what the color is to be used for. The values are SGR (Select Graphic Rendition) specifications, which are interpreted by the terminal.
@@ -33,10 +25,3 @@ The default value is `error=01;31:warning=01;35:note=01;36:locus=01` (`01;31` = 
 ### Tip
 
 This color specification format is also used by other software packages such as GCC, GNU coreutils, and GNU grep.
-
-***
-
-|                                                    |                                                       |                                                     |
-| :------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](color-when.html "N.1. When Color is Used")  |      [Up](color.html "Appendix N. Color Support")     |  [Next](syncfs.html "Appendix O. syncfs() Caveats") |
-| N.1. When Color is Used                            | [Home](index.html "PostgreSQL 17devel Documentation") |                      Appendix O. `syncfs()` Caveats |

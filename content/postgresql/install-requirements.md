@@ -1,10 +1,3 @@
-
-|                           17.1. Requirements                           |                                                                     |                                           |                                                       |                                                            |
-| :--------------------------------------------------------------------: | :------------------------------------------------------------------ | :---------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](installation.html "Chapter 17. Installation from Source Code")  | [Up](installation.html "Chapter 17. Installation from Source Code") | Chapter 17. Installation from Source Code | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](install-getsource.html "17.2. Getting the Source") |
-
-***
-
 ## 17.1. Requirements [#](#INSTALL-REQUIREMENTS)
 
 In general, a modern Unix-compatible platform should be able to run PostgreSQL. The platforms that had received specific testing at the time of release are described in [Section 17.6](supported-platforms.html "17.6. Supported Platforms") below.
@@ -73,10 +66,3 @@ If you are building from a Git tree instead of using a released source package, 
 * Perl 5.14 or later is needed to build from a Git checkout, or if you changed the input files for any of the build steps that use Perl scripts. If building on Windows you will need Perl in any case. Perl is also required to run some test suites.
 
 If you need to get a GNU package, you can find it at your local GNU mirror site (see [https://www.gnu.org/prep/ftp](https://www.gnu.org/prep/ftp) for a list) or at [ftp://ftp.gnu.org/gnu/](ftp://ftp.gnu.org/gnu/).
-
-***
-
-|                                                                        |                                                                     |                                                            |
-| :--------------------------------------------------------------------- | :-----------------------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](installation.html "Chapter 17. Installation from Source Code")  | [Up](installation.html "Chapter 17. Installation from Source Code") |  [Next](install-getsource.html "17.2. Getting the Source") |
-| Chapter 17. Installation from Source Code                              |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                   17.2. Getting the Source |

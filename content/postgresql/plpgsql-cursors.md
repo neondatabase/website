@@ -1,11 +1,3 @@
-
-
-|                            43.7. Cursors                            |                                                                     |                                                |                                                       |                                                                   |
-| :-----------------------------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](plpgsql-control-structures.html "43.6. Control Structures")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-transactions.html "43.8. Transaction Management") |
-
-***
-
 ## 43.7. Cursors [#](#PLPGSQL-CURSORS)
 
   * *   [43.7.1. Declaring Cursor Variables](plpgsql-cursors.html#PLPGSQL-CURSOR-DECLARATIONS)
@@ -296,10 +288,3 @@ END LOOP [ label ];
 The cursor variable must have been bound to some query when it was declared, and it *cannot* be open already. The `FOR` statement automatically opens the cursor, and it closes the cursor again when the loop exits. A list of actual argument value expressions must appear if and only if the cursor was declared to take arguments. These values will be substituted in the query, in just the same way as during an `OPEN` (see [Section 43.7.2.3](plpgsql-cursors.html#PLPGSQL-OPEN-BOUND-CURSOR "43.7.2.3. Opening a Bound Cursor")).
 
 The variable *`recordvar`* is automatically defined as type `record` and exists only inside the loop (any existing definition of the variable name is ignored within the loop). Each row returned by the cursor is successively assigned to this record variable and the loop body is executed.
-
-***
-
-|                                                                     |                                                                     |                                                                   |
-| :------------------------------------------------------------------ | :-----------------------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](plpgsql-control-structures.html "43.6. Control Structures")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](plpgsql-transactions.html "43.8. Transaction Management") |
-| 43.6. Control Structures                                            |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                      43.8. Transaction Management |

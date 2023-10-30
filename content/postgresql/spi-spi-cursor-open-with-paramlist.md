@@ -1,11 +1,3 @@
-
-
-|                    SPI\_cursor\_open\_with\_paramlist                   |                                                      |                           |                                                       |                                                                 |
-| :---------------------------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](spi-spi-cursor-open-with-args.html "SPI_cursor_open_with_args")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-cursor-parse-open.html "SPI_cursor_parse_open") |
-
-***
-
 ## SPI\_cursor\_open\_with\_paramlist
 
 SPI\_cursor\_open\_with\_paramlist — set up a cursor using parameters
@@ -47,10 +39,3 @@ The passed-in parameter data will be copied into the cursor's portal, so it can 
 ## Return Value
 
 Pointer to portal containing the cursor. Note there is no error return convention; any error will be reported via `elog`.
-
-***
-
-|                                                                         |                                                       |                                                                 |
-| :---------------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](spi-spi-cursor-open-with-args.html "SPI_cursor_open_with_args")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-cursor-parse-open.html "SPI_cursor_parse_open") |
-| SPI\_cursor\_open\_with\_args                                           | [Home](index.html "PostgreSQL 17devel Documentation") |                                        SPI\_cursor\_parse\_open |

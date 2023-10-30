@@ -1,11 +1,3 @@
-
-
-|               28.4. Progress Reporting               |                                                                  |                                          |                                                       |                                                     |
-| :--------------------------------------------------: | :--------------------------------------------------------------- | :--------------------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](monitoring-locks.html "28.3. Viewing Locks")  | [Up](monitoring.html "Chapter 28. Monitoring Database Activity") | Chapter 28. Monitoring Database Activity | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](dynamic-trace.html "28.5. Dynamic Tracing") |
-
-***
-
 ## 28.4. Progress Reporting [#](#PROGRESS-REPORTING)
 
   * *   [28.4.1. ANALYZE Progress Reporting](progress-reporting.html#ANALYZE-PROGRESS-REPORTING)
@@ -217,10 +209,3 @@ Whenever an application like pg\_basebackup is taking a base backup, the `pg_sta
 | `streaming database files`            | The WAL sender process is currently streaming database files as a base backup.                                                                                                                                                                                                                                             |
 | `waiting for wal archiving to finish` | The WAL sender process is currently performing `pg_backup_stop` to finish the backup, and waiting for all the WAL files required for the base backup to be successfully archived. If either `--wal-method=none` or `--wal-method=stream` is specified in pg\_basebackup, the backup will end when this phase is completed. |
 | `transferring wal files`              | The WAL sender process is currently transferring all WAL logs generated during the backup. This phase occurs after `waiting for wal archiving to finish` phase if `--wal-method=fetch` is specified in pg\_basebackup. The backup will end when this phase is completed.                                                   |
-
-***
-
-|                                                      |                                                                  |                                                     |
-| :--------------------------------------------------- | :--------------------------------------------------------------: | --------------------------------------------------: |
-| [Prev](monitoring-locks.html "28.3. Viewing Locks")  | [Up](monitoring.html "Chapter 28. Monitoring Database Activity") |  [Next](dynamic-trace.html "28.5. Dynamic Tracing") |
-| 28.3. Viewing Locks                                  |       [Home](index.html "PostgreSQL 17devel Documentation")      |                               28.5. Dynamic Tracing |

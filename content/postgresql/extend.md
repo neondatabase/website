@@ -1,11 +1,3 @@
-
-
-|                   Chapter 38. Extending SQL                   |                                                            |                            |                                                       |                                                          |
-| :-----------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](server-programming.html "Part V. Server Programming")  | [Up](server-programming.html "Part V. Server Programming") | Part V. Server Programming | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](extend-how.html "38.1. How Extensibility Works") |
-
-***
-
 ## Chapter 38. Extending SQL
 
 **Table of Contents**
@@ -119,10 +111,3 @@ In the sections that follow, we will discuss how you can extend the PostgreSQL S
 * operators (starting in [Section 38.14](xoper.html "38.14. User-Defined Operators"))
 * operator classes for indexes (starting in [Section 38.16](xindex.html "38.16. Interfacing Extensions to Indexes"))
 * packages of related objects (starting in [Section 38.17](extend-extensions.html "38.17. Packaging Related Objects into an Extension"))
-
-***
-
-|                                                               |                                                            |                                                          |
-| :------------------------------------------------------------ | :--------------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](server-programming.html "Part V. Server Programming")  | [Up](server-programming.html "Part V. Server Programming") |  [Next](extend-how.html "38.1. How Extensibility Works") |
-| Part V. Server Programming                                    |    [Home](index.html "PostgreSQL 17devel Documentation")   |                            38.1. How Extensibility Works |

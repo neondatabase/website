@@ -1,11 +1,3 @@
-
-
-|                 44.6. Trigger Functions in PL/Tcl                |                                                                 |                                              |                                                       |                                                                             |
-| :--------------------------------------------------------------: | :-------------------------------------------------------------- | :------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](pltcl-dbaccess.html "44.5. Database Access from PL/Tcl")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") | Chapter 44. PL/Tcl — Tcl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pltcl-event-trigger.html "44.7. Event Trigger Functions in PL/Tcl") |
-
-***
-
 ## 44.6. Trigger Functions in PL/Tcl [#](#PLTCL-TRIGGER)
 
 Trigger functions can be written in PL/Tcl. PostgreSQL requires that a function that is to be called as a trigger must be declared as a function with no arguments and a return type of `trigger`.
@@ -89,10 +81,3 @@ CREATE TRIGGER trig_mytab_modcount BEFORE INSERT OR UPDATE ON mytab
 ```
 
 Notice that the trigger function itself does not know the column name; that's supplied from the trigger arguments. This lets the trigger function be reused with different tables.
-
-***
-
-|                                                                  |                                                                 |                                                                             |
-| :--------------------------------------------------------------- | :-------------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](pltcl-dbaccess.html "44.5. Database Access from PL/Tcl")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") |  [Next](pltcl-event-trigger.html "44.7. Event Trigger Functions in PL/Tcl") |
-| 44.5. Database Access from PL/Tcl                                |      [Home](index.html "PostgreSQL 17devel Documentation")      |                                     44.7. Event Trigger Functions in PL/Tcl |

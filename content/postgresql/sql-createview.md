@@ -1,11 +1,3 @@
-
-
-|                        CREATE VIEW                        |                                        |              |                                                       |                                           |
-| :-------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------------: |
-| [Prev](sql-createusermapping.html "CREATE USER MAPPING")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-deallocate.html "DEALLOCATE") |
-
-***
-
 ## CREATE VIEW
 
 CREATE VIEW — define a new view
@@ -228,10 +220,3 @@ Notice that although the recursive view's name is schema-qualified in this `CREA
 ## See Also
 
 [ALTER VIEW](sql-alterview.html "ALTER VIEW"), [DROP VIEW](sql-dropview.html "DROP VIEW"), [CREATE MATERIALIZED VIEW](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW")
-
-***
-
-|                                                           |                                                       |                                           |
-| :-------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------: |
-| [Prev](sql-createusermapping.html "CREATE USER MAPPING")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-deallocate.html "DEALLOCATE") |
-| CREATE USER MAPPING                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                DEALLOCATE |

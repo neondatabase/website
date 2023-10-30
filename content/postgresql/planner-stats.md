@@ -1,11 +1,3 @@
-
-
-|        14.2. Statistics Used by the Planner       |                                                            |                              |                                                       |                                                                                         |
-| :-----------------------------------------------: | :--------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](using-explain.html "14.1. Using EXPLAIN")  | [Up](performance-tips.html "Chapter 14. Performance Tips") | Chapter 14. Performance Tips | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](explicit-joins.html "14.3. Controlling the Planner with Explicit JOIN Clauses") |
-
-***
-
 ## 14.2. Statistics Used by the Planner [#](#PLANNER-STATS)
 
   * *   [14.2.1. Single-Column Statistics](planner-stats.html#PLANNER-STATS-SINGLE-COLUMN)
@@ -195,10 +187,3 @@ SELECT m.* FROM pg_statistic_ext join pg_statistic_ext_data on (oid = stxoid),
 This indicates that the most common combination of city and state is Washington in DC, with actual frequency (in the sample) about 0.35%. The base frequency of the combination (as computed from the simple per-column frequencies) is only 0.0027%, resulting in two orders of magnitude under-estimates.
 
 It's advisable to create MCV statistics objects only on combinations of columns that are actually used in conditions together, and for which misestimation of the number of groups is resulting in bad plans. Otherwise, the `ANALYZE` and planning cycles are just wasted.
-
-***
-
-|                                                   |                                                            |                                                                                         |
-| :------------------------------------------------ | :--------------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](using-explain.html "14.1. Using EXPLAIN")  | [Up](performance-tips.html "Chapter 14. Performance Tips") |  [Next](explicit-joins.html "14.3. Controlling the Planner with Explicit JOIN Clauses") |
-| 14.1. Using `EXPLAIN`                             |    [Home](index.html "PostgreSQL 17devel Documentation")   |                              14.3. Controlling the Planner with Explicit `JOIN` Clauses |

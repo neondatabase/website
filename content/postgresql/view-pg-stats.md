@@ -1,11 +1,3 @@
-
-
-|                           54.27. `pg_stats`                           |                                             |                          |                                                       |                                                       |
-| :-------------------------------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](view-pg-shmem-allocations.html "54.26. pg_shmem_allocations")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-stats-ext.html "54.28. pg_stats_ext") |
-
-***
-
 ## 54.27. `pg_stats` [#](#VIEW-PG-STATS)
 
 The view `pg_stats` provides access to the information stored in the [`pg_statistic`](catalog-pg-statistic.html "53.51. pg_statistic") catalog. This view allows access only to rows of [`pg_statistic`](catalog-pg-statistic.html "53.51. pg_statistic") that correspond to tables the user has permission to read, and therefore it is safe to allow public read access to this view.
@@ -34,10 +26,3 @@ The view `pg_stats` provides access to the information stored in the [`pg_statis
 \
 
 The maximum number of entries in the array fields can be controlled on a column-by-column basis using the [`ALTER TABLE SET STATISTICS`](sql-altertable.html "ALTER TABLE") command, or globally by setting the [default\_statistics\_target](runtime-config-query.html#GUC-DEFAULT-STATISTICS-TARGET) run-time parameter.
-
-***
-
-|                                                                       |                                                       |                                                       |
-| :-------------------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](view-pg-shmem-allocations.html "54.26. pg_shmem_allocations")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-stats-ext.html "54.28. pg_stats_ext") |
-| 54.26. `pg_shmem_allocations`                                         | [Home](index.html "PostgreSQL 17devel Documentation") |                                 54.28. `pg_stats_ext` |

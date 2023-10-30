@@ -1,11 +1,3 @@
-
-
-|                      CREATE CAST                     |                                        |              |                                                       |                                                      |
-| :--------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-createaggregate.html "CREATE AGGREGATE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createcollation.html "CREATE COLLATION") |
-
-***
-
 ## CREATE CAST
 
 CREATE CAST — define a new cast
@@ -153,10 +145,3 @@ The `CREATE CAST` command conforms to the SQL standard, except that SQL does not
 ## See Also
 
 [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [CREATE TYPE](sql-createtype.html "CREATE TYPE"), [DROP CAST](sql-dropcast.html "DROP CAST")
-
-***
-
-|                                                      |                                                       |                                                      |
-| :--------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-createaggregate.html "CREATE AGGREGATE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createcollation.html "CREATE COLLATION") |
-| CREATE AGGREGATE                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                     CREATE COLLATION |

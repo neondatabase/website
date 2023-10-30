@@ -1,11 +1,3 @@
-
-
-|                           25.1. Routine Vacuuming                          |                                                                         |                                                |                                                       |                                                          |
-| :------------------------------------------------------------------------: | :---------------------------------------------------------------------- | :--------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](maintenance.html "Chapter 25. Routine Database Maintenance Tasks")  | [Up](maintenance.html "Chapter 25. Routine Database Maintenance Tasks") | Chapter 25. Routine Database Maintenance Tasks | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](routine-reindex.html "25.2. Routine Reindexing") |
-
-***
-
 ## 25.1. Routine Vacuuming [#](#ROUTINE-VACUUMING)
 
   * *   [25.1.1. Vacuuming Basics](routine-vacuuming.html#VACUUM-BASICS)
@@ -225,10 +217,3 @@ Autovacuum workers generally don't block other commands. If a process attempts t
 ### Warning
 
 Regularly running commands that acquire locks conflicting with a `SHARE UPDATE EXCLUSIVE` lock (e.g., ANALYZE) can effectively prevent autovacuums from ever completing.
-
-***
-
-|                                                                            |                                                                         |                                                          |
-| :------------------------------------------------------------------------- | :---------------------------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](maintenance.html "Chapter 25. Routine Database Maintenance Tasks")  | [Up](maintenance.html "Chapter 25. Routine Database Maintenance Tasks") |  [Next](routine-reindex.html "25.2. Routine Reindexing") |
-| Chapter 25. Routine Database Maintenance Tasks                             |          [Home](index.html "PostgreSQL 17devel Documentation")          |                                 25.2. Routine Reindexing |

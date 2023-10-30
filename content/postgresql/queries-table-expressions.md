@@ -1,11 +1,3 @@
-
-
-|             7.2. Table Expressions             |                                         |                    |                                                       |                                                        |
-| :--------------------------------------------: | :-------------------------------------- | :----------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](queries-overview.html "7.1. Overview")  | [Up](queries.html "Chapter 7. Queries") | Chapter 7. Queries | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](queries-select-lists.html "7.3. Select Lists") |
-
-***
-
 ## 7.2. Table Expressions [#](#QUERIES-TABLE-EXPRESSIONS)
 
   * *   [7.2.1. The `FROM` Clause](queries-table-expressions.html#QUERIES-FROM)
@@ -840,10 +832,3 @@ If the query contains any window functions (see [Section 3.5](tutorial-window.h
 When multiple window functions are used, all the window functions having syntactically equivalent `PARTITION BY` and `ORDER BY` clauses in their window definitions are guaranteed to be evaluated in a single pass over the data. Therefore they will see the same sort ordering, even if the `ORDER BY` does not uniquely determine an ordering. However, no guarantees are made about the evaluation of functions having different `PARTITION BY` or `ORDER BY` specifications. (In such cases a sort step is typically required between the passes of window function evaluations, and the sort is not guaranteed to preserve ordering of rows that its `ORDER BY` sees as equivalent.)
 
 Currently, window functions always require presorted data, and so the query output will be ordered according to one or another of the window functions' `PARTITION BY`/`ORDER BY` clauses. It is not recommended to rely on this, however. Use an explicit top-level `ORDER BY` clause if you want to be sure the results are sorted in a particular way.
-
-***
-
-|                                                |                                                       |                                                        |
-| :--------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](queries-overview.html "7.1. Overview")  |        [Up](queries.html "Chapter 7. Queries")        |  [Next](queries-select-lists.html "7.3. Select Lists") |
-| 7.1. Overview                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                      7.3. Select Lists |

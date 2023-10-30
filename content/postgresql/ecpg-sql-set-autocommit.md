@@ -1,11 +1,3 @@
-
-
-|              SET AUTOCOMMIT              |                                                             |                              |                                                       |                                                        |
-| :--------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](ecpg-sql-prepare.html "PREPARE")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-set-connection.html "SET CONNECTION") |
-
-***
-
 ## SET AUTOCOMMIT
 
 SET AUTOCOMMIT — set the autocommit behavior of the current session
@@ -24,10 +16,3 @@ SET AUTOCOMMIT { = | TO } { ON | OFF }
 ## Compatibility
 
 `SET AUTOCOMMIT` is an extension of PostgreSQL ECPG.
-
-***
-
-|                                          |                                                             |                                                        |
-| :--------------------------------------- | :---------------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](ecpg-sql-prepare.html "PREPARE")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-set-connection.html "SET CONNECTION") |
-| PREPARE                                  |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                         SET CONNECTION |

@@ -1,11 +1,3 @@
-
-
-|            F.44. test\_decoding — SQL-based test/example module for WAL logical decoding           |                                                                             |                                                        |                                                       |                                                                                                                |
-| :------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------------------------------------------: |
-| [Prev](tcn.html "F.43. tcn — a trigger function to notify listeners of changes to table content")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tsm-system-rows.html "F.45. tsm_system_rows —&#xA;   the SYSTEM_ROWS sampling method for TABLESAMPLE") |
-
-***
-
 ## F.44. test\_decoding — SQL-based test/example module for WAL logical decoding [#](#TEST-DECODING)
 
 `test_decoding` is an example of a logical decoding output plugin. It doesn't do anything especially useful, but can serve as a starting point for developing your own output plugin.
@@ -49,10 +41,3 @@ postgres[33712]=#* SELECT * FROM pg_logical_slot_get_changes('test_slot', NULL, 
  0/16BEBA0 | 503 | closing a streamed block for transaction TXN 503
 (10 rows)
 ```
-
-***
-
-|                                                                                                    |                                                                             |                                                                                                                |
-| :------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------: |
-| [Prev](tcn.html "F.43. tcn — a trigger function to notify listeners of changes to table content")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](tsm-system-rows.html "F.45. tsm_system_rows —&#xA;   the SYSTEM_ROWS sampling method for TABLESAMPLE") |
-| F.43. tcn — a trigger function to notify listeners of changes to table content                     |            [Home](index.html "PostgreSQL 17devel Documentation")            |                                  F.45. tsm\_system\_rows — the `SYSTEM_ROWS` sampling method for `TABLESAMPLE` |

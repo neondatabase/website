@@ -1,11 +1,3 @@
-
-
-|     34.1. Database Connection Control Functions     |                                                  |                               |                                                       |                                                                |
-| :-------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](libpq.html "Chapter 34. libpq — C Library")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-status.html "34.2. Connection Status Functions") |
-
-***
-
 ## 34.1. Database Connection Control Functions [#](#LIBPQ-CONNECT)
 
   * *   [34.1.1. Connection Strings](libpq-connect.html#LIBPQ-CONNSTRING)
@@ -797,10 +789,3 @@ The currently recognized parameter key words are:
         While random load balancing, due to its random nature, will almost never result in a completely uniform distribution, it statistically gets quite close. One important aspect here is that this algorithm uses two levels of random choices: First the hosts will be resolved in random order. Then secondly, before resolving the next host, all resolved addresses for the current host will be tried in random order. This behaviour can skew the amount of connections each node gets greatly in certain cases, for instance when some hosts resolve to more addresses than others. But such a skew can also be used on purpose, e.g. to increase the number of connections a larger server gets by providing its hostname multiple times in the host string.
 
         When using this value it's recommended to also configure a reasonable value for [connect\_timeout](libpq-connect.html#LIBPQ-CONNECT-CONNECT-TIMEOUT). Because then, if one of the nodes that are used for load balancing is not responding, a new node will be tried.
-
-***
-
-|                                                     |                                                       |                                                                |
-| :-------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](libpq.html "Chapter 34. libpq — C Library")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-status.html "34.2. Connection Status Functions") |
-| Chapter 34. libpq — C Library                       | [Home](index.html "PostgreSQL 17devel Documentation") |                              34.2. Connection Status Functions |

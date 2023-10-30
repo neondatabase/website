@@ -1,11 +1,3 @@
-
-
-|                49.1. Logical Decoding Examples               |                                                           |                              |                                                       |                                                                             |
-| :----------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](logicaldecoding.html "Chapter 49. Logical Decoding")  | [Up](logicaldecoding.html "Chapter 49. Logical Decoding") | Chapter 49. Logical Decoding | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logicaldecoding-explanation.html "49.2. Logical Decoding Concepts") |
-
-***
-
 ## 49.1. Logical Decoding Examples [#](#LOGICALDECODING-EXAMPLE)
 
 The following example demonstrates controlling logical decoding using the SQL interface.
@@ -178,10 +170,3 @@ postgres=# select * from pg_logical_slot_get_changes('regression_slot', NULL, NU
  0/168A4B8 | 530 | ROLLBACK PREPARED 'test_prepared2', txid 530
 (1 row)
 ```
-
-***
-
-|                                                              |                                                           |                                                                             |
-| :----------------------------------------------------------- | :-------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](logicaldecoding.html "Chapter 49. Logical Decoding")  | [Up](logicaldecoding.html "Chapter 49. Logical Decoding") |  [Next](logicaldecoding-explanation.html "49.2. Logical Decoding Concepts") |
-| Chapter 49. Logical Decoding                                 |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                             49.2. Logical Decoding Concepts |

@@ -1,11 +1,3 @@
-
-
-|                 21.6. GSSAPI Authentication                 |                                                                      |                                   |                                                       |                                                     |
-| :---------------------------------------------------------: | :------------------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](auth-password.html "21.5. Password Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") | Chapter 21. Client Authentication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sspi-auth.html "21.7. SSPI Authentication") |
-
-***
-
 ## 21.6. GSSAPI Authentication [#](#GSSAPI-AUTH)
 
 GSSAPI is an industry-standard protocol for secure authentication defined in [RFC 2743](https://tools.ietf.org/html/rfc2743). PostgreSQL supports GSSAPI for authentication, communications encryption, or both. GSSAPI provides automatic authentication (single sign-on) for systems that support it. The authentication itself is secure. If GSSAPI encryption or SSL encryption is used, the data sent along the database connection will be encrypted; otherwise, it will not.
@@ -45,10 +37,3 @@ The following authentication options are supported for the GSSAPI authentication
     Sets the realm to match user principal names against. If this parameter is set, only users of that realm will be accepted. If it is not set, users of any realm can connect, subject to whatever user name mapping is done.
 
 In addition to these settings, which can be different for different `pg_hba.conf` entries, there is the server-wide [krb\_caseins\_users](runtime-config-connection.html#GUC-KRB-CASEINS-USERS) configuration parameter. If that is set to true, client principals are matched to user map entries case-insensitively. `krb_realm`, if set, is also matched case-insensitively.
-
-***
-
-|                                                             |                                                                      |                                                     |
-| :---------------------------------------------------------- | :------------------------------------------------------------------: | --------------------------------------------------: |
-| [Prev](auth-password.html "21.5. Password Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") |  [Next](sspi-auth.html "21.7. SSPI Authentication") |
-| 21.5. Password Authentication                               |         [Home](index.html "PostgreSQL 17devel Documentation")        |                           21.7. SSPI Authentication |

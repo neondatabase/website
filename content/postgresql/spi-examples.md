@@ -1,11 +1,3 @@
-
-
-|                          47.6. Examples                         |                                                           |                                          |                                                       |                                                                  |
-| :-------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](spi-visibility.html "47.5. Visibility of Data Changes")  | [Up](spi.html "Chapter 47. Server Programming Interface") | Chapter 47. Server Programming Interface | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](bgworker.html "Chapter 48. Background Worker Processes") |
-
-***
-
 ## 47.6. Examples [#](#SPI-EXAMPLES)
 
 This section contains a very simple example of SPI usage. The C function `execq` takes an SQL command as its first argument and a row count as its second, executes the command using `SPI_exec` and returns the number of rows that were processed by the command. You can find more complex examples for SPI in the source tree in `src/test/regress/regress.c` and in the [spi](contrib-spi.html "F.40. spi — Server Programming Interface features/examples") module.
@@ -172,10 +164,3 @@ INSERT 0 2
  6                  -- 3 rows (2 + 1 just inserted) * 2 (x in second row)
 (4 rows)
 ```
-
-***
-
-|                                                                 |                                                           |                                                                  |
-| :-------------------------------------------------------------- | :-------------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](spi-visibility.html "47.5. Visibility of Data Changes")  | [Up](spi.html "Chapter 47. Server Programming Interface") |  [Next](bgworker.html "Chapter 48. Background Worker Processes") |
-| 47.5. Visibility of Data Changes                                |   [Home](index.html "PostgreSQL 17devel Documentation")   |                          Chapter 48. Background Worker Processes |

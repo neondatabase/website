@@ -1,11 +1,3 @@
-
-
-|                       ALTER ROLE                       |                                        |              |                                                       |                                                |
-| :----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-alterpublication.html "ALTER PUBLICATION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterroutine.html "ALTER ROUTINE") |
-
-***
-
 ## ALTER ROLE
 
 ALTER ROLE — change a database role
@@ -160,10 +152,3 @@ The `ALTER ROLE` statement is a PostgreSQL extension.
 ## See Also
 
 [CREATE ROLE](sql-createrole.html "CREATE ROLE"), [DROP ROLE](sql-droprole.html "DROP ROLE"), [ALTER DATABASE](sql-alterdatabase.html "ALTER DATABASE"), [SET](sql-set.html "SET")
-
-***
-
-|                                                        |                                                       |                                                |
-| :----------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-alterpublication.html "ALTER PUBLICATION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterroutine.html "ALTER ROUTINE") |
-| ALTER PUBLICATION                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                  ALTER ROUTINE |

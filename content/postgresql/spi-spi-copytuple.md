@@ -1,11 +1,3 @@
-
-
-|              SPI\_copytuple             |                                                 |                         |                                                       |                                                     |
-| :-------------------------------------: | :---------------------------------------------- | :---------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](spi-spi-pfree.html "SPI_pfree")  | [Up](spi-memory.html "47.3. Memory Management") | 47.3. Memory Management | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-returntuple.html "SPI_returntuple") |
-
-***
-
 ## SPI\_copytuple
 
 SPI\_copytuple — make a copy of a row in the upper executor context
@@ -32,10 +24,3 @@ This function can only be used while connected to SPI. Otherwise, it returns NUL
 ## Return Value
 
 the copied row, or `NULL` on error (see `SPI_result` for an error indication)
-
-***
-
-|                                         |                                                       |                                                     |
-| :-------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](spi-spi-pfree.html "SPI_pfree")  |    [Up](spi-memory.html "47.3. Memory Management")    |  [Next](spi-spi-returntuple.html "SPI_returntuple") |
-| SPI\_pfree                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                    SPI\_returntuple |

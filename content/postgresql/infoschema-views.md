@@ -1,11 +1,3 @@
-
-
-|                            37.66. `views`                           |                                                                    |                                    |                                                       |                                                               |
-| :-----------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](infoschema-view-table-usage.html "37.65. view_table_usage")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](server-programming.html "Part V. Server Programming") |
-
-***
-
 ## 37.66. `views` [#](#INFOSCHEMA-VIEWS)
 
 The view `views` contains all views defined in the current database. Only those views are shown that the current user has access to (by way of being the owner or having some privilege).
@@ -24,10 +16,3 @@ The view `views` contains all views defined in the current database. Only those 
 | `is_trigger_updatable` `yes_or_no``YES` if the view has an `INSTEAD OF` `UPDATE` trigger defined on it, `NO` if not              |
 | `is_trigger_deletable` `yes_or_no``YES` if the view has an `INSTEAD OF` `DELETE` trigger defined on it, `NO` if not              |
 | `is_trigger_insertable_into` `yes_or_no``YES` if the view has an `INSTEAD OF` `INSERT` trigger defined on it, `NO` if not        |
-
-***
-
-|                                                                     |                                                                    |                                                               |
-| :------------------------------------------------------------------ | :----------------------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](infoschema-view-table-usage.html "37.65. view_table_usage")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](server-programming.html "Part V. Server Programming") |
-| 37.65. `view_table_usage`                                           |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                    Part V. Server Programming |

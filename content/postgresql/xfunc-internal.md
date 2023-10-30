@@ -1,11 +1,3 @@
-
-
-|                   38.9. Internal Functions                   |                                               |                           |                                                       |                                                     |
-| :----------------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](xfunc-pl.html "38.8. Procedural Language Functions")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xfunc-c.html "38.10. C-Language Functions") |
-
-***
-
 ## 38.9. Internal Functions [#](#XFUNC-INTERNAL)
 
 Internal functions are functions written in C that have been statically linked into the PostgreSQL server. The “body” of the function definition specifies the C-language name of the function, which need not be the same as the name being declared for SQL use. (For reasons of backward compatibility, an empty body is accepted as meaning that the C-language function name is the same as the SQL name.)
@@ -25,10 +17,3 @@ CREATE FUNCTION square_root(double precision) RETURNS double precision
 ### Note
 
 Not all “predefined” functions are “internal” in the above sense. Some predefined functions are written in SQL.
-
-***
-
-|                                                              |                                                       |                                                     |
-| :----------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](xfunc-pl.html "38.8. Procedural Language Functions")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xfunc-c.html "38.10. C-Language Functions") |
-| 38.8. Procedural Language Functions                          | [Home](index.html "PostgreSQL 17devel Documentation") |                         38.10. C-Language Functions |

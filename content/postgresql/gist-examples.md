@@ -1,11 +1,3 @@
-
-
-|                      68.5. Examples                      |                                            |                          |                                                       |                                                    |
-| :------------------------------------------------------: | :----------------------------------------- | :----------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](gist-implementation.html "68.4. Implementation")  | [Up](gist.html "Chapter 68. GiST Indexes") | Chapter 68. GiST Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spgist.html "Chapter 69. SP-GiST Indexes") |
-
-***
-
 ## 68.5. Examples [#](#GIST-EXAMPLES)
 
 The PostgreSQL source distribution includes several examples of index methods implemented using GiST. The core system currently provides text search support (indexing for `tsvector` and `tsquery`) as well as R-Tree equivalent functionality for some of the built-in geometric data types (see `src/backend/access/gist/gistproc.c`). The following `contrib` modules also contain GiST operator classes:
@@ -37,10 +29,3 @@ The PostgreSQL source distribution includes several examples of index methods im
 * `seg`
 
     Indexing for “float ranges”
-
-***
-
-|                                                          |                                                       |                                                    |
-| :------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](gist-implementation.html "68.4. Implementation")  |       [Up](gist.html "Chapter 68. GiST Indexes")      |  [Next](spgist.html "Chapter 69. SP-GiST Indexes") |
-| 68.4. Implementation                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                        Chapter 69. SP-GiST Indexes |

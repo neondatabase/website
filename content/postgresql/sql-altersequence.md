@@ -1,11 +1,3 @@
-
-
-|                ALTER SEQUENCE                |                                        |              |                                                       |                                              |
-| :------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-alterschema.html "ALTER SCHEMA")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterserver.html "ALTER SERVER") |
-
-***
-
 ## ALTER SEQUENCE
 
 ALTER SEQUENCE — change the definition of a sequence generator
@@ -130,10 +122,3 @@ ALTER SEQUENCE serial RESTART WITH 105;
 ## See Also
 
 [CREATE SEQUENCE](sql-createsequence.html "CREATE SEQUENCE"), [DROP SEQUENCE](sql-dropsequence.html "DROP SEQUENCE")
-
-***
-
-|                                              |                                                       |                                              |
-| :------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-alterschema.html "ALTER SCHEMA")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterserver.html "ALTER SERVER") |
-| ALTER SCHEMA                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                 ALTER SERVER |

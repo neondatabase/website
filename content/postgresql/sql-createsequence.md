@@ -1,11 +1,3 @@
-
-
-|                 CREATE SEQUENCE                |                                        |              |                                                       |                                                |
-| :--------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-createschema.html "CREATE SCHEMA")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createserver.html "CREATE SERVER") |
-
-***
-
 ## CREATE SEQUENCE
 
 CREATE SEQUENCE — define a new sequence generator
@@ -165,10 +157,3 @@ END;
 ## See Also
 
 [ALTER SEQUENCE](sql-altersequence.html "ALTER SEQUENCE"), [DROP SEQUENCE](sql-dropsequence.html "DROP SEQUENCE")
-
-***
-
-|                                                |                                                       |                                                |
-| :--------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-createschema.html "CREATE SCHEMA")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createserver.html "CREATE SERVER") |
-| CREATE SCHEMA                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                  CREATE SERVER |

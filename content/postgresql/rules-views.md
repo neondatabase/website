@@ -1,11 +1,3 @@
-
-
-|         41.2. Views and the Rule System        |                                                |                             |                                                       |                                                                  |
-| :--------------------------------------------: | :--------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](querytree.html "41.1. The Query Tree")  | [Up](rules.html "Chapter 41. The Rule System") | Chapter 41. The Rule System | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](rules-materializedviews.html "41.3. Materialized Views") |
-
-***
-
 ## 41.2. Views and the Rule System [#](#RULES-VIEWS)
 
   * *   [41.2.1. How `SELECT` Rules Work](rules-views.html#RULES-SELECT)
@@ -345,10 +337,3 @@ Note that rules are evaluated first, rewriting the original query before it is p
 Automatic rewriting of an `INSERT`, `UPDATE`, or `DELETE` query on a simple view is always tried last. Therefore, if a view has rules or triggers, they will override the default behavior of automatically updatable views.
 
 If there are no `INSTEAD` rules or `INSTEAD OF` triggers for the view, and the rewriter cannot automatically rewrite the query as an update on the underlying base relation, an error will be thrown because the executor cannot update a view as such.
-
-***
-
-|                                                |                                                       |                                                                  |
-| :--------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](querytree.html "41.1. The Query Tree")  |     [Up](rules.html "Chapter 41. The Rule System")    |  [Next](rules-materializedviews.html "41.3. Materialized Views") |
-| 41.1. The Query Tree                           | [Home](index.html "PostgreSQL 17devel Documentation") |                                         41.3. Materialized Views |

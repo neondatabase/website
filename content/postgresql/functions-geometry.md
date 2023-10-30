@@ -1,11 +1,3 @@
-
-
-|           9.11. Geometric Functions and Operators           |                                                           |                                    |                                                       |                                                                             |
-| :---------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](functions-enum.html "9.10. Enum Support Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-net.html "9.12. Network Address Functions and Operators") |
-
-***
-
 ## 9.11. Geometric Functions and Operators [#](#FUNCTIONS-GEOMETRY)
 
 The geometric types `point`, `box`, `lseg`, `line`, `path`, `polygon`, and `circle` have a large set of native support functions and operators, shown in [Table 9.36](functions-geometry.html#FUNCTIONS-GEOMETRY-OP-TABLE "Table 9.36. Geometric Operators"), [Table 9.37](functions-geometry.html#FUNCTIONS-GEOMETRY-FUNC-TABLE "Table 9.37. Geometric Functions"), and [Table 9.38](functions-geometry.html#FUNCTIONS-GEOMETRY-CONV-TABLE "Table 9.38. Geometric Type Conversion Functions").
@@ -109,10 +101,3 @@ Before PostgreSQL 14, the point is strictly below/above comparison operators `po
 \
 
 It is possible to access the two component numbers of a `point` as though the point were an array with indexes 0 and 1. For example, if `t.p` is a `point` column then `SELECT p[0] FROM t` retrieves the X coordinate and `UPDATE t SET p[1] = ...` changes the Y coordinate. In the same way, a value of type `box` or `lseg` can be treated as an array of two `point` values.
-
-***
-
-|                                                             |                                                           |                                                                             |
-| :---------------------------------------------------------- | :-------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](functions-enum.html "9.10. Enum Support Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-net.html "9.12. Network Address Functions and Operators") |
-| 9.10. Enum Support Functions                                |   [Home](index.html "PostgreSQL 17devel Documentation")   |                               9.12. Network Address Functions and Operators |

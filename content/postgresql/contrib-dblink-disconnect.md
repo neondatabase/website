@@ -1,11 +1,3 @@
-
-
-|                     dblink\_disconnect                    |                                                                          |                                                      |                                                       |                                                |
-| :-------------------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](contrib-dblink-connect-u.html "dblink_connect_u")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-function.html "dblink") |
-
-***
-
 ## dblink\_disconnect
 
 dblink\_disconnect — closes a persistent connection to a remote database
@@ -48,10 +40,3 @@ SELECT dblink_disconnect('myconn');
  OK
 (1 row)
 ```
-
-***
-
-|                                                           |                                                                          |                                                |
-| :-------------------------------------------------------- | :----------------------------------------------------------------------: | ---------------------------------------------: |
-| [Prev](contrib-dblink-connect-u.html "dblink_connect_u")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-function.html "dblink") |
-| dblink\_connect\_u                                        |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                         dblink |

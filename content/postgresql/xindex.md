@@ -1,11 +1,3 @@
-
-
-|                   38.16. Interfacing Extensions to Indexes                  |                                               |                           |                                                       |                                                                                      |
-| :-------------------------------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](xoper-optimization.html "38.15. Operator Optimization Information")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](extend-extensions.html "38.17. Packaging Related Objects into an Extension") |
-
-***
-
 ## 38.16. Interfacing Extensions to Indexes [#](#XINDEX)
 
   * *   [38.16.1. Index Methods and Operator Classes](xindex.html#XINDEX-OPCLASS)
@@ -537,10 +529,3 @@ CREATE OPERATOR CLASS polygon_ops
 ```
 
 At present, only the GiST, SP-GiST, GIN and BRIN index methods support a `STORAGE` type that's different from the column data type. The GiST `compress` and `decompress` support routines must deal with data-type conversion when `STORAGE` is used. SP-GiST likewise requires a `compress` support function to convert to the storage type, when that is different; if an SP-GiST opclass also supports retrieving data, the reverse conversion must be handled by the `consistent` function. In GIN, the `STORAGE` type identifies the type of the “key” values, which normally is different from the type of the indexed column — for example, an operator class for integer-array columns might have keys that are just integers. The GIN `extractValue` and `extractQuery` support routines are responsible for extracting keys from indexed values. BRIN is similar to GIN: the `STORAGE` type identifies the type of the stored summary values, and operator classes' support procedures are responsible for interpreting the summary values correctly.
-
-***
-
-|                                                                             |                                                       |                                                                                      |
-| :-------------------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](xoper-optimization.html "38.15. Operator Optimization Information")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](extend-extensions.html "38.17. Packaging Related Objects into an Extension") |
-| 38.15. Operator Optimization Information                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                   38.17. Packaging Related Objects into an Extension |

@@ -1,11 +1,3 @@
-
-
-|                  10.2. Operators                 |                                                   |                             |                                                       |                                               |
-| :----------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](typeconv-overview.html "10.1. Overview")  | [Up](typeconv.html "Chapter 10. Type Conversion") | Chapter 10. Type Conversion | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](typeconv-func.html "10.3. Functions") |
-
-***
-
 ## 10.2. Operators [#](#TYPECONV-OPER)
 
 The specific operator that is referenced by an operator expression is determined using the following procedure. Note that this procedure is indirectly affected by the precedence of the operators involved, since that will determine which sub-expressions are taken to be the inputs of which operators. See [Section 4.1.6](sql-syntax-lexical.html#SQL-PRECEDENCE "4.1.6. Operator Precedence") for more information.
@@ -177,14 +169,3 @@ SELECT * FROM mytable WHERE val = text 'foo';
 so that the `mytext` `=` `text` operator is found immediately according to the exact-match rule. If the best-match rules are reached, they actively discriminate against operators on domain types. If they did not, such an operator would create too many ambiguous-operator failures, because the casting rules always consider a domain as castable to or from its base type, and so the domain operator would be considered usable in all the same cases as a similarly-named operator on the base type.
 
 \
-
-***
-
-[\[9\] ](#OP-QUALIFIED-SECURITY)The hazard does not arise with a non-schema-qualified name, because a search path containing schemas that permit untrusted users to create objects is not a [secure schema usage pattern](ddl-schemas.html#DDL-SCHEMAS-PATTERNS "5.9.6. Usage Patterns").
-
-***
-
-|                                                  |                                                       |                                               |
-| :----------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](typeconv-overview.html "10.1. Overview")  |   [Up](typeconv.html "Chapter 10. Type Conversion")   |  [Next](typeconv-func.html "10.3. Functions") |
-| 10.1. Overview                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                               10.3. Functions |

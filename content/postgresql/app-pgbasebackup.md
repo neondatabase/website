@@ -1,11 +1,3 @@
-
-
-|              pg\_basebackup              |                                                              |                                |                                                       |                                 |
-| :--------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ------------------------------: |
-| [Prev](app-pgamcheck.html "pg_amcheck")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgbench.html "pgbench") |
-
-***
-
 ## pg\_basebackup
 
 pg\_basebackup — take a base backup of a PostgreSQL cluster
@@ -327,10 +319,3 @@ pg_basebackup -D backup -Ft --compress=gzip:9
 ## See Also
 
 [pg\_dump](app-pgdump.html "pg_dump"), [Section 28.4.6](progress-reporting.html#BASEBACKUP-PROGRESS-REPORTING "28.4.6. Base Backup Progress Reporting")
-
-***
-
-|                                          |                                                              |                                 |
-| :--------------------------------------- | :----------------------------------------------------------: | ------------------------------: |
-| [Prev](app-pgamcheck.html "pg_amcheck")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](pgbench.html "pgbench") |
-| pg\_amcheck                              |     [Home](index.html "PostgreSQL 17devel Documentation")    |                         pgbench |

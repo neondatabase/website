@@ -1,11 +1,3 @@
-
-
-|                    43.4. Expressions                    |                                                                     |                                                |                                                       |                                                           |
-| :-----------------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](plpgsql-declarations.html "43.3. Declarations")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-statements.html "43.5. Basic Statements") |
-
-***
-
 ## 43.4. Expressions [#](#PLPGSQL-EXPRESSIONS)
 
 All expressions used in PL/pgSQL statements are processed using the server's main SQL executor. For example, when you write a PL/pgSQL statement like
@@ -46,10 +38,3 @@ IF count(*) > 0 FROM my_table THEN ...
 ```
 
 since the *`expression`* between `IF` and `THEN` is parsed as though it were `SELECT count(*) > 0 FROM my_table`. The `SELECT` must produce a single column, and not more than one row. (If it produces no rows, the result is taken as NULL.)
-
-***
-
-|                                                         |                                                                     |                                                           |
-| :------------------------------------------------------ | :-----------------------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](plpgsql-declarations.html "43.3. Declarations")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](plpgsql-statements.html "43.5. Basic Statements") |
-| 43.3. Declarations                                      |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                    43.5. Basic Statements |

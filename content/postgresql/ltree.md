@@ -1,11 +1,3 @@
-
-
-|   F.23. ltree — hierarchical tree-like data type   |                                                                             |                                                        |                                                       |                                                                                        |
-| :------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------------------: |
-| [Prev](lo.html "F.22. lo — manage large objects")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pageinspect.html "F.24. pageinspect — low-level inspection of database pages") |
-
-***
-
 ## F.23. ltree — hierarchical tree-like data type [#](#LTREE)
 
   * *   [F.23.1. Definitions](ltree.html#LTREE-DEFINITIONS)
@@ -329,10 +321,3 @@ It is strongly recommended that the transform extension be installed in the same
 ### F.23.6. Authors [#](#LTREE-AUTHORS)
 
 All work was done by Teodor Sigaev (`<teodor@stack.net>`) and Oleg Bartunov (`<oleg@sai.msu.su>`). See [http://www.sai.msu.su/~megera/postgres/gist/](http://www.sai.msu.su/~megera/postgres/gist/) for additional information. Authors would like to thank Eugeny Rodichev for helpful discussions. Comments and bug reports are welcome.
-
-***
-
-|                                                    |                                                                             |                                                                                        |
-| :------------------------------------------------- | :-------------------------------------------------------------------------: | -------------------------------------------------------------------------------------: |
-| [Prev](lo.html "F.22. lo — manage large objects")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](pageinspect.html "F.24. pageinspect — low-level inspection of database pages") |
-| F.22. lo — manage large objects                    |            [Home](index.html "PostgreSQL 17devel Documentation")            |                             F.24. pageinspect — low-level inspection of database pages |

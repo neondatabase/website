@@ -1,11 +1,3 @@
-
-
-|                21.7. SSPI Authentication                |                                                                      |                                   |                                                       |                                                       |
-| :-----------------------------------------------------: | :------------------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](gssapi-auth.html "21.6. GSSAPI Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") | Chapter 21. Client Authentication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](auth-ident.html "21.8. Ident Authentication") |
-
-***
-
 ## 21.7. SSPI Authentication [#](#SSPI-AUTH)
 
 SSPI is a Windows technology for secure authentication with single sign-on. PostgreSQL will use SSPI in `negotiate` mode, which will use Kerberos when possible and automatically fall back to NTLM in other cases. SSPI and GSSAPI interoperate as clients and servers, e.g., an SSPI client can authenticate to an GSSAPI server. It is recommended to use SSPI on Windows clients and servers and GSSAPI on non-Windows platforms.
@@ -37,10 +29,3 @@ The following configuration options are supported for SSPI:
 * `krb_realm`
 
     Sets the realm to match user principal names against. If this parameter is set, only users of that realm will be accepted. If it is not set, users of any realm can connect, subject to whatever user name mapping is done.
-
-***
-
-|                                                         |                                                                      |                                                       |
-| :------------------------------------------------------ | :------------------------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](gssapi-auth.html "21.6. GSSAPI Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") |  [Next](auth-ident.html "21.8. Ident Authentication") |
-| 21.6. GSSAPI Authentication                             |         [Home](index.html "PostgreSQL 17devel Documentation")        |                            21.8. Ident Authentication |

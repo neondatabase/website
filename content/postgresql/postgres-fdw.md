@@ -1,11 +1,3 @@
-
-
-|   F.37. postgres\_fdw — access data stored in external PostgreSQL servers   |                                                                             |                                                        |                                                       |                                                                                          |
-| :-------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------------: |
-| [Prev](pgwalinspect.html "F.36. pg_walinspect — low-level WAL inspection")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](seg.html "F.38. seg — a datatype for line segments or floating point intervals") |
-
-***
-
 ## F.37. postgres\_fdw — access data stored in external PostgreSQL servers [#](#POSTGRES-FDW)
 
   * *   [F.37.1. FDW Options of postgres\_fdw](postgres-fdw.html#POSTGRES-FDW-OPTIONS)
@@ -379,10 +371,3 @@ It's essential that the data types and other properties of the columns declared 
 ### F.37.11. Author [#](#POSTGRES-FDW-AUTHOR)
 
 Shigeru Hanada `<shigeru.hanada@gmail.com>`
-
-***
-
-|                                                                             |                                                                             |                                                                                          |
-| :-------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ---------------------------------------------------------------------------------------: |
-| [Prev](pgwalinspect.html "F.36. pg_walinspect — low-level WAL inspection")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](seg.html "F.38. seg — a datatype for line segments or floating point intervals") |
-| F.36. pg\_walinspect — low-level WAL inspection                             |            [Home](index.html "PostgreSQL 17devel Documentation")            |                     F.38. seg — a datatype for line segments or floating point intervals |

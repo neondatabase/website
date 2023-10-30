@@ -1,11 +1,3 @@
-
-
-|                ALTER PROCEDURE               |                                        |              |                                                       |                                                        |
-| :------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](sql-alterpolicy.html "ALTER POLICY")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterpublication.html "ALTER PUBLICATION") |
-
-***
-
 ## ALTER PROCEDURE
 
 ALTER PROCEDURE — change the definition of a procedure
@@ -141,10 +133,3 @@ This statement is partially compatible with the `ALTER PROCEDURE` statement in t
 ## See Also
 
 [CREATE PROCEDURE](sql-createprocedure.html "CREATE PROCEDURE"), [DROP PROCEDURE](sql-dropprocedure.html "DROP PROCEDURE"), [ALTER FUNCTION](sql-alterfunction.html "ALTER FUNCTION"), [ALTER ROUTINE](sql-alterroutine.html "ALTER ROUTINE")
-
-***
-
-|                                              |                                                       |                                                        |
-| :------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](sql-alterpolicy.html "ALTER POLICY")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterpublication.html "ALTER PUBLICATION") |
-| ALTER POLICY                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                      ALTER PUBLICATION |

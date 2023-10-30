@@ -1,11 +1,3 @@
-
-
-|       SET CONSTRAINTS       |                                        |              |                                                       |                                       |
-| :-------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------: |
-| [Prev](sql-set.html "SET")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-set-role.html "SET ROLE") |
-
-***
-
 ## SET CONSTRAINTS
 
 SET CONSTRAINTS — set constraint check timing for the current transaction
@@ -40,10 +32,3 @@ This command only alters the behavior of constraints within the current transact
 ## Compatibility
 
 This command complies with the behavior defined in the SQL standard, except for the limitation that, in PostgreSQL, it does not apply to `NOT NULL` and `CHECK` constraints. Also, PostgreSQL checks non-deferrable uniqueness constraints immediately, not at end of statement as the standard would suggest.
-
-***
-
-|                             |                                                       |                                       |
-| :-------------------------- | :---------------------------------------------------: | ------------------------------------: |
-| [Prev](sql-set.html "SET")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-set-role.html "SET ROLE") |
-| SET                         | [Home](index.html "PostgreSQL 17devel Documentation") |                              SET ROLE |

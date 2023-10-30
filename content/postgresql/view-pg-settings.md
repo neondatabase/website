@@ -1,11 +1,3 @@
-
-
-|                  54.24. `pg_settings`                 |                                             |                          |                                                       |                                                 |
-| :---------------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](view-pg-sequences.html "54.23. pg_sequences")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-shadow.html "54.25. pg_shadow") |
-
-***
-
 ## 54.24. `pg_settings` [#](#VIEW-PG-SETTINGS)
 
 The view `pg_settings` provides access to run-time parameters of the server. It is essentially an alternative interface to the [`SHOW`](sql-show.html "SHOW") and [`SET`](sql-set.html "SET") commands. It also provides access to some facts about each parameter that are not directly available from [`SHOW`](sql-show.html "SHOW"), such as minimum and maximum values.
@@ -69,10 +61,3 @@ See [Section 20.1](config-setting.html "20.1. Setting Parameters") for more in
 This view cannot be inserted into or deleted from, but it can be updated. An `UPDATE` applied to a row of `pg_settings` is equivalent to executing the `SET` command on that named parameter. The change only affects the value used by the current session. If an `UPDATE` is issued within a transaction that is later aborted, the effects of the `UPDATE` command disappear when the transaction is rolled back. Once the surrounding transaction is committed, the effects will persist until the end of the session, unless overridden by another `UPDATE` or `SET`.
 
 This view does not display [customized options](runtime-config-custom.html "20.16. Customized Options") unless the extension module that defines them has been loaded by the backend process executing the query (e.g., via a mention in [shared\_preload\_libraries](runtime-config-client.html#GUC-SHARED-PRELOAD-LIBRARIES), a call to a C function in the extension, or the [`LOAD`](sql-load.html "LOAD") command). For example, since [archive modules](archive-modules.html "Chapter 51. Archive Modules") are normally loaded only by the archiver process not regular sessions, this view will not display any customized options defined by such modules unless special action is taken to load them into the backend process executing the query.
-
-***
-
-|                                                       |                                                       |                                                 |
-| :---------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------: |
-| [Prev](view-pg-sequences.html "54.23. pg_sequences")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-shadow.html "54.25. pg_shadow") |
-| 54.23. `pg_sequences`                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                              54.25. `pg_shadow` |

@@ -1,11 +1,3 @@
-
-
-|             21.11. RADIUS Authentication             |                                                                      |                                   |                                                       |                                                             |
-| :--------------------------------------------------: | :------------------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](auth-ldap.html "21.10. LDAP Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") | Chapter 21. Client Authentication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](auth-cert.html "21.12. Certificate Authentication") |
-
-***
-
 ## 21.11. RADIUS Authentication [#](#AUTH-RADIUS)
 
 This authentication method operates similarly to `password` except that it uses RADIUS as the password verification method. RADIUS is used only to validate the user name/password pairs. Therefore the user must already exist in the database before RADIUS can be used for authentication.
@@ -42,10 +34,3 @@ If it is necessary to have a comma or whitespace in a RADIUS parameter value, th
 
 host ... radius radiusservers="server1,server2" radiussecrets="""secret one"",""secret two"""
 ```
-
-***
-
-|                                                      |                                                                      |                                                             |
-| :--------------------------------------------------- | :------------------------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](auth-ldap.html "21.10. LDAP Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") |  [Next](auth-cert.html "21.12. Certificate Authentication") |
-| 21.10. LDAP Authentication                           |         [Home](index.html "PostgreSQL 17devel Documentation")        |                           21.12. Certificate Authentication |

@@ -1,11 +1,3 @@
-
-
-|                   DROP TYPE                  |                                        |              |                                                       |                                        |
-| :------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------: |
-| [Prev](sql-droptrigger.html "DROP TRIGGER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropuser.html "DROP USER") |
-
-***
-
 ## DROP TYPE
 
 DROP TYPE — remove a data type
@@ -55,10 +47,3 @@ This command is similar to the corresponding command in the SQL standard, apart 
 ## See Also
 
 [ALTER TYPE](sql-altertype.html "ALTER TYPE"), [CREATE TYPE](sql-createtype.html "CREATE TYPE")
-
-***
-
-|                                              |                                                       |                                        |
-| :------------------------------------------- | :---------------------------------------------------: | -------------------------------------: |
-| [Prev](sql-droptrigger.html "DROP TRIGGER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropuser.html "DROP USER") |
-| DROP TRIGGER                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                              DROP USER |

@@ -1,11 +1,3 @@
-
-
-|               pg\_receivewal              |                                                              |                                |                                                       |                                                  |
-| :---------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](app-pg-isready.html "pg_isready")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pgrecvlogical.html "pg_recvlogical") |
-
-***
-
 ## pg\_receivewal
 
 pg\_receivewal — stream write-ahead logs from a PostgreSQL server
@@ -170,10 +162,3 @@ pg_receivewal -h mydbserver -D /usr/local/pgsql/archive
 ## See Also
 
 [pg\_basebackup](app-pgbasebackup.html "pg_basebackup")
-
-***
-
-|                                           |                                                              |                                                  |
-| :---------------------------------------- | :----------------------------------------------------------: | -----------------------------------------------: |
-| [Prev](app-pg-isready.html "pg_isready")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-pgrecvlogical.html "pg_recvlogical") |
-| pg\_isready                               |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                  pg\_recvlogical |

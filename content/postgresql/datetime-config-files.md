@@ -1,11 +1,3 @@
-
-
-|             B.4. Date/Time Configuration Files             |                                                              |                               |                                                       |                                                                                   |
-| :--------------------------------------------------------: | :----------------------------------------------------------- | :---------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------: |
-| [Prev](datetime-keywords.html "B.3. Date/Time Key Words")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") | Appendix B. Date/Time Support | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datetime-posix-timezone-specs.html "B.5. POSIX Time Zone Specifications") |
-
-***
-
 ## B.4. Date/Time Configuration Files [#](#DATETIME-CONFIG-FILES)
 
 Since timezone abbreviations are not well standardized, PostgreSQL provides a means to customize the set of abbreviations accepted by the server. The [timezone\_abbreviations](runtime-config-client.html#GUC-TIMEZONE-ABBREVIATIONS) run-time parameter determines the active set of abbreviations. While this parameter can be altered by any database user, the possible values for it are under the control of the database administrator — they are in fact names of configuration files stored in `.../share/timezonesets/` of the installation directory. By adding or altering files in that directory, the administrator can set local policy for timezone abbreviations.
@@ -50,10 +42,3 @@ Time zone abbreviations defined in the configuration file override non-timezone 
 ### Caution
 
 If you modify files in `.../share/timezonesets/`, it is up to you to make backups — a normal database dump will not include this directory.
-
-***
-
-|                                                            |                                                              |                                                                                   |
-| :--------------------------------------------------------- | :----------------------------------------------------------: | --------------------------------------------------------------------------------: |
-| [Prev](datetime-keywords.html "B.3. Date/Time Key Words")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") |  [Next](datetime-posix-timezone-specs.html "B.5. POSIX Time Zone Specifications") |
-| B.3. Date/Time Key Words                                   |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                               B.5. POSIX Time Zone Specifications |

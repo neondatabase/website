@@ -1,11 +1,3 @@
-
-
-|                  19.5. Shutting Down the Server                  |                                                             |                                        |                                                       |                                                                |
-| :--------------------------------------------------------------: | :---------------------------------------------------------- | :------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](kernel-resources.html "19.4. Managing Kernel Resources")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") | Chapter 19. Server Setup and Operation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](upgrading.html "19.6. Upgrading a PostgreSQL Cluster") |
-
-***
-
 ## 19.5. Shutting Down the Server [#](#SERVER-SHUTDOWN)
 
 There are several ways to shut down the database server. Under the hood, they all reduce to sending a signal to the supervisor `postgres` process.
@@ -38,10 +30,3 @@ kill -INT `head -1 /usr/local/pgsql/data/postmaster.pid`
 It is best not to use SIGKILL to shut down the server. Doing so will prevent the server from releasing shared memory and semaphores. Furthermore, SIGKILL kills the `postgres` process without letting it relay the signal to its subprocesses, so it might be necessary to kill the individual subprocesses by hand as well.
 
 To terminate an individual session while allowing other sessions to continue, use `pg_terminate_backend()` (see [Table 9.90](functions-admin.html#FUNCTIONS-ADMIN-SIGNAL-TABLE "Table 9.90. Server Signaling Functions")) or send a SIGTERM signal to the child process associated with the session.
-
-***
-
-|                                                                  |                                                             |                                                                |
-| :--------------------------------------------------------------- | :---------------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](kernel-resources.html "19.4. Managing Kernel Resources")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") |  [Next](upgrading.html "19.6. Upgrading a PostgreSQL Cluster") |
-| 19.4. Managing Kernel Resources                                  |    [Home](index.html "PostgreSQL 17devel Documentation")    |                           19.6. Upgrading a PostgreSQL Cluster |

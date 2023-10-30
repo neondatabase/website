@@ -1,11 +1,3 @@
-
-
-|                     60.1. Sampling Method Support Functions                    |                                                                             |                                             |                                                       |                                                                        |
-| :----------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :-----------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](tablesample-method.html "Chapter 60. Writing a Table Sampling Method")  | [Up](tablesample-method.html "Chapter 60. Writing a Table Sampling Method") | Chapter 60. Writing a Table Sampling Method | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](custom-scan.html "Chapter 61. Writing a Custom Scan Provider") |
-
-***
-
 ## 60.1. Sampling Method Support Functions [#](#TABLESAMPLE-SUPPORT-FUNCTIONS)
 
 The TSM handler function returns a palloc'd `TsmRoutine` struct containing pointers to the support functions described below. Most of the functions are required, but some are optional, and those pointers can be NULL.
@@ -85,10 +77,3 @@ EndSampleScan (SampleScanState *node);
 ```
 
 End the scan and release resources. It is normally not important to release palloc'd memory, but any externally-visible resources should be cleaned up. This function can be omitted (set the pointer to NULL) in the common case where no such resources exist.
-
-***
-
-|                                                                                |                                                                             |                                                                        |
-| :----------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](tablesample-method.html "Chapter 60. Writing a Table Sampling Method")  | [Up](tablesample-method.html "Chapter 60. Writing a Table Sampling Method") |  [Next](custom-scan.html "Chapter 61. Writing a Custom Scan Provider") |
-| Chapter 60. Writing a Table Sampling Method                                    |            [Home](index.html "PostgreSQL 17devel Documentation")            |                             Chapter 61. Writing a Custom Scan Provider |

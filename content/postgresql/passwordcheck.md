@@ -1,11 +1,3 @@
-
-
-|                     F.25. passwordcheck — verify password strength                     |                                                                             |                                                        |                                                       |                                                                                                    |
-| :------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------------------------------: |
-| [Prev](pageinspect.html "F.24. pageinspect — low-level inspection of database pages")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgbuffercache.html "F.26. pg_buffercache — inspect PostgreSQL&#xA;    buffer cache state") |
-
-***
-
 ## F.25. passwordcheck — verify password strength [#](#PASSWORDCHECK)
 
 The `passwordcheck` module checks users' passwords whenever they are set with [CREATE ROLE](sql-createrole.html "CREATE ROLE") or [ALTER ROLE](sql-alterrole.html "ALTER ROLE"). If a password is considered too weak, it will be rejected and the command will terminate with an error.
@@ -21,10 +13,3 @@ To prevent unencrypted passwords from being sent across the network, written to 
 This limits the usefulness of the `passwordcheck` module, because in that case it can only try to guess the password. For this reason, `passwordcheck` is not recommended if your security requirements are high. It is more secure to use an external authentication method such as GSSAPI (see [Chapter 21](client-authentication.html "Chapter 21. Client Authentication")) than to rely on passwords within the database.
 
 Alternatively, you could modify `passwordcheck` to reject pre-encrypted passwords, but forcing users to set their passwords in clear text carries its own security risks.
-
-***
-
-|                                                                                        |                                                                             |                                                                                                    |
-| :------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------: |
-| [Prev](pageinspect.html "F.24. pageinspect — low-level inspection of database pages")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](pgbuffercache.html "F.26. pg_buffercache — inspect PostgreSQL&#xA;    buffer cache state") |
-| F.24. pageinspect — low-level inspection of database pages                             |            [Home](index.html "PostgreSQL 17devel Documentation")            |                                      F.26. pg\_buffercache — inspect PostgreSQL buffer cache state |

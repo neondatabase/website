@@ -1,11 +1,3 @@
-
-
-|             pg\_test\_fsync            |                                                              |                                |                                                       |                                             |
-| :------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ------------------------------------------: |
-| [Prev](app-pgrewind.html "pg_rewind")  | [Up](reference-server.html "PostgreSQL Server Applications") | PostgreSQL Server Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgtesttiming.html "pg_test_timing") |
-
-***
-
 ## pg\_test\_fsync
 
 pg\_test\_fsync — determine fastest `wal_sync_method` for PostgreSQL
@@ -45,10 +37,3 @@ The environment variable `PG_COLOR` specifies whether to use color in diagnostic
 ## See Also
 
 [postgres](app-postgres.html "postgres")
-
-***
-
-|                                        |                                                              |                                             |
-| :------------------------------------- | :----------------------------------------------------------: | ------------------------------------------: |
-| [Prev](app-pgrewind.html "pg_rewind")  | [Up](reference-server.html "PostgreSQL Server Applications") |  [Next](pgtesttiming.html "pg_test_timing") |
-| pg\_rewind                             |     [Home](index.html "PostgreSQL 17devel Documentation")    |                            pg\_test\_timing |

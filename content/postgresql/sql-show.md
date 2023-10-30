@@ -1,11 +1,3 @@
-
-
-|                         SHOW                        |                                        |              |                                                       |                                                         |
-| :-------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-set-transaction.html "SET TRANSACTION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-start-transaction.html "START TRANSACTION") |
-
-***
-
 ## SHOW
 
 SHOW — show the value of a run-time parameter
@@ -103,10 +95,3 @@ The `SHOW` command is a PostgreSQL extension.
 ## See Also
 
 [SET](sql-set.html "SET"), [RESET](sql-reset.html "RESET")
-
-***
-
-|                                                     |                                                       |                                                         |
-| :-------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-set-transaction.html "SET TRANSACTION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-start-transaction.html "START TRANSACTION") |
-| SET TRANSACTION                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                       START TRANSACTION |

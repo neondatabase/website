@@ -1,11 +1,3 @@
-
-
-|      F.49. xml2 — XPath querying and XSLT functionality      |                                                                             |                                                        |                                                       |                                                                       |
-| :----------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](uuid-ossp.html "F.48. uuid-ossp — a UUID generator")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-prog.html "Appendix G. Additional Supplied Programs") |
-
-***
-
 ## F.49. xml2 — XPath querying and XSLT functionality [#](#XML2)
 
   * *   [F.49.1. Deprecation Notice](xml2.html#XML2-DEPRECATION)
@@ -174,10 +166,3 @@ There is also a two-parameter version of `xslt_process` which does not pass any 
 John Gray `<jgray@azuli.co.uk>`
 
 Development of this module was sponsored by Torchbox Ltd. (www\.torchbox.com). It has the same BSD license as PostgreSQL.
-
-***
-
-|                                                              |                                                                             |                                                                       |
-| :----------------------------------------------------------- | :-------------------------------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](uuid-ossp.html "F.48. uuid-ossp — a UUID generator")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](contrib-prog.html "Appendix G. Additional Supplied Programs") |
-| F.48. uuid-ossp — a UUID generator                           |            [Home](index.html "PostgreSQL 17devel Documentation")            |                              Appendix G. Additional Supplied Programs |

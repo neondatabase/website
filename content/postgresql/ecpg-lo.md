@@ -1,11 +1,3 @@
-
-
-|                  36.12. Large Objects                 |                                                        |                                      |                                                       |                                                  |
-| :---------------------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](ecpg-library.html "36.11. Library Functions")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-cpp.html "36.13. C++ Applications") |
-
-***
-
 ## 36.12. Large Objects [#](#ECPG-LO)
 
 Large objects are not directly supported by ECPG, but ECPG application can manipulate large objects through the libpq large object functions, obtaining the necessary `PGconn` object by calling the `ECPGget_PGconn()` function. (However, use of the `ECPGget_PGconn()` function and touching `PGconn` objects directly should be done very carefully and ideally not mixed with other ECPG database access calls.)
@@ -97,10 +89,3 @@ main(void)
     return 0;
 }
 ```
-
-***
-
-|                                                       |                                                        |                                                  |
-| :---------------------------------------------------- | :----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](ecpg-library.html "36.11. Library Functions")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](ecpg-cpp.html "36.13. C++ Applications") |
-| 36.11. Library Functions                              |  [Home](index.html "PostgreSQL 17devel Documentation") |                          36.13. C++ Applications |

@@ -1,11 +1,3 @@
-
-
-|                           34.11. Control Functions                           |                                                  |                               |                                                       |                                                           |
-| :--------------------------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](libpq-copy.html "34.10. Functions Associated with the COPY Command")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-misc.html "34.12. Miscellaneous Functions") |
-
-***
-
 ## 34.11. Control Functions [#](#LIBPQ-CONTROL)
 
 These functions control miscellaneous details of libpq's behavior.
@@ -112,10 +104,3 @@ These functions control miscellaneous details of libpq's behavior.
 
     void PQuntrace(PGconn *conn);
     ```
-
-***
-
-|                                                                              |                                                       |                                                           |
-| :--------------------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](libpq-copy.html "34.10. Functions Associated with the COPY Command")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-misc.html "34.12. Miscellaneous Functions") |
-| 34.10. Functions Associated with the `COPY` Command                          | [Home](index.html "PostgreSQL 17devel Documentation") |                            34.12. Miscellaneous Functions |

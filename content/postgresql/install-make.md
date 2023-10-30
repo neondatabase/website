@@ -1,11 +1,3 @@
-
-
-|   17.3. Building and Installation with Autoconf and Make   |                                                                     |                                           |                                                       |                                                                          |
-| :--------------------------------------------------------: | :------------------------------------------------------------------ | :---------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](install-getsource.html "17.2. Getting the Source")  | [Up](installation.html "Chapter 17. Installation from Source Code") | Chapter 17. Installation from Source Code | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](install-meson.html "17.4. Building and Installation with Meson") |
-
-***
-
 ## 17.3. Building and Installation with Autoconf and Make [#](#INSTALL-MAKE)
 
   * *   [17.3.1. Short Version](install-make.html#INSTALL-SHORT-MAKE)
@@ -590,10 +582,3 @@ make
 If using GCC, it is best to build with an optimization level of at least `-O1`, because using no optimization (`-O0`) disables some important compiler warnings (such as the use of uninitialized variables). However, non-zero optimization levels can complicate debugging because stepping through compiled code will usually not match up one-to-one with source code lines. If you get confused while trying to debug optimized code, recompile the specific files of interest with `-O0`. An easy way to do this is by passing an option to make: `make PROFILE=-O0 file.o`.
 
 The `COPT` and `PROFILE` environment variables are actually handled identically by the PostgreSQL makefiles. Which to use is a matter of preference, but a common habit among developers is to use `PROFILE` for one-time flag adjustments, while `COPT` might be kept set all the time.
-
-***
-
-|                                                            |                                                                     |                                                                          |
-| :--------------------------------------------------------- | :-----------------------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](install-getsource.html "17.2. Getting the Source")  | [Up](installation.html "Chapter 17. Installation from Source Code") |  [Next](install-meson.html "17.4. Building and Installation with Meson") |
-| 17.2. Getting the Source                                   |        [Home](index.html "PostgreSQL 17devel Documentation")        |                               17.4. Building and Installation with Meson |

@@ -1,11 +1,3 @@
-
-
-|                 41.7. Rules Versus Triggers                 |                                                |                             |                                                       |                                                         |
-| :---------------------------------------------------------: | :--------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](rules-status.html "41.6. Rules and Command Status")  | [Up](rules.html "Chapter 41. The Rule System") | Chapter 41. The Rule System | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xplang.html "Chapter 42. Procedural Languages") |
-
-***
-
 ## 41.7. Rules Versus Triggers [#](#RULES-TRIGGERS)
 
 Many things that can be done using triggers can also be implemented using the PostgreSQL rule system. One of the things that cannot be implemented by rules are some kinds of constraints, especially foreign keys. It is possible to place a qualified rule that rewrites a command to `NOTHING` if the value of a column does not appear in another table. But then the data is silently thrown away and that's not a good idea. If checks for valid values are required, and in the case of an invalid value an error message should be generated, it must be done by a trigger.
@@ -141,10 +133,3 @@ Nestloop
 In any of these cases, the extra commands from the rule system will be more or less independent from the number of affected rows in a command.
 
 The summary is, rules will only be significantly slower than triggers if their actions result in large and badly qualified joins, a situation where the planner fails.
-
-***
-
-|                                                             |                                                       |                                                         |
-| :---------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](rules-status.html "41.6. Rules and Command Status")  |     [Up](rules.html "Chapter 41. The Rule System")    |  [Next](xplang.html "Chapter 42. Procedural Languages") |
-| 41.6. Rules and Command Status                              | [Home](index.html "PostgreSQL 17devel Documentation") |                        Chapter 42. Procedural Languages |

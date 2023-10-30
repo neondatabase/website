@@ -1,11 +1,3 @@
-
-
-|                       Chapter 65. Generic WAL Records                       |                                            |                     |                                                       |                                                                      |
-| :-------------------------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](index-cost-estimation.html "64.6. Index Cost Estimation Functions")  | [Up](internals.html "Part VII. Internals") | Part VII. Internals | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](custom-rmgr.html "Chapter 66. Custom WAL Resource Managers") |
-
-***
-
 ## Chapter 65. Generic WAL Records
 
 Although all built-in WAL-logged modules have their own types of WAL records, there is also a generic WAL record type, which describes changes to pages in a generic way. This is useful for extensions that provide custom access methods.
@@ -38,10 +30,3 @@ Please note the following points when using the generic WAL record facility:
 * For unlogged relations, everything works the same except that no actual WAL record is emitted. Thus, you typically do not need to do any explicit checks for unlogged relations.
 * The generic WAL redo function will acquire exclusive locks to buffers in the same order as they were registered. After redoing all changes, the locks will be released in the same order.
 * If `GENERIC_XLOG_FULL_IMAGE` is not specified for a registered buffer, the generic WAL record contains a delta between the old and the new page images. This delta is based on byte-by-byte comparison. This is not very compact for the case of moving data within a page, and might be improved in the future.
-
-***
-
-|                                                                             |                                                       |                                                                      |
-| :-------------------------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](index-cost-estimation.html "64.6. Index Cost Estimation Functions")  |       [Up](internals.html "Part VII. Internals")      |  [Next](custom-rmgr.html "Chapter 66. Custom WAL Resource Managers") |
-| 64.6. Index Cost Estimation Functions                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                             Chapter 66. Custom WAL Resource Managers |

@@ -1,11 +1,3 @@
-
-
-|                       49.9. Streaming of Large Transactions for Logical Decoding                       |                                                           |                              |                                                       |                                                                                                        |
-| :----------------------------------------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------------------------: |
-| [Prev](logicaldecoding-synchronous.html "49.8. Synchronous Replication Support for Logical Decoding")  | [Up](logicaldecoding.html "Chapter 49. Logical Decoding") | Chapter 49. Logical Decoding | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logicaldecoding-two-phase-commits.html "49.10. Two-phase Commit Support for Logical Decoding") |
-
-***
-
 ## 49.9. Streaming of Large Transactions for Logical Decoding [#](#LOGICALDECODING-STREAMING)
 
 The basic output plugin callbacks (e.g., `begin_cb`, `change_cb`, `commit_cb` and `message_cb`) are only invoked when the transaction actually commits. The changes are still decoded from the transaction log, but are only passed to the output plugin at commit (and discarded if the transaction aborts).
@@ -52,10 +44,3 @@ The actual sequence of callback calls may be more complicated, of course. There 
 Similar to spill-to-disk behavior, streaming is triggered when the total amount of changes decoded from the WAL (for all in-progress transactions) exceeds the limit defined by `logical_decoding_work_mem` setting. At that point, the largest top-level transaction (measured by the amount of memory currently used for decoded changes) is selected and streamed. However, in some cases we still have to spill to disk even if streaming is enabled because we exceed the memory threshold but still have not decoded the complete tuple e.g., only decoded toast table insert but not the main table insert.
 
 Even when streaming large transactions, the changes are still applied in commit order, preserving the same guarantees as the non-streaming mode.
-
-***
-
-|                                                                                                        |                                                           |                                                                                                        |
-| :----------------------------------------------------------------------------------------------------- | :-------------------------------------------------------: | -----------------------------------------------------------------------------------------------------: |
-| [Prev](logicaldecoding-synchronous.html "49.8. Synchronous Replication Support for Logical Decoding")  | [Up](logicaldecoding.html "Chapter 49. Logical Decoding") |  [Next](logicaldecoding-two-phase-commits.html "49.10. Two-phase Commit Support for Logical Decoding") |
-| 49.8. Synchronous Replication Support for Logical Decoding                                             |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                                   49.10. Two-phase Commit Support for Logical Decoding |

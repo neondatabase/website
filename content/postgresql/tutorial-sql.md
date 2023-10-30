@@ -1,11 +1,3 @@
-
-
-|                 Chapter 2. The SQL Language                 |                                        |                  |                                                       |                                                      |
-| :---------------------------------------------------------: | :------------------------------------- | :--------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](tutorial-accessdb.html "1.4. Accessing a Database")  | [Up](tutorial.html "Part I. Tutorial") | Part I. Tutorial | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-sql-intro.html "2.1. Introduction") |
-
-***
-
 ## Chapter 2. The SQL Language
 
 **Table of Contents**
@@ -19,10 +11,3 @@
   * [2.7. Aggregate Functions](tutorial-agg.html)
   * [2.8. Updates](tutorial-update.html)
   * [2.9. Deletions](tutorial-delete.html)
-
-***
-
-|                                                             |                                                       |                                                      |
-| :---------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](tutorial-accessdb.html "1.4. Accessing a Database")  |         [Up](tutorial.html "Part I. Tutorial")        |  [Next](tutorial-sql-intro.html "2.1. Introduction") |
-| 1.4. Accessing a Database                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                    2.1. Introduction |

@@ -1,11 +1,3 @@
-
-
-|                         56.1. Formatting                         |                                                               |                                           |                                                       |                                                                                  |
-| :--------------------------------------------------------------: | :------------------------------------------------------------ | :---------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------------: |
-| [Prev](source.html "Chapter 56. PostgreSQL Coding Conventions")  | [Up](source.html "Chapter 56. PostgreSQL Coding Conventions") | Chapter 56. PostgreSQL Coding Conventions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](error-message-reporting.html "56.2. Reporting Errors Within the Server") |
-
-***
-
 ## 56.1. Formatting [#](#SOURCE-FORMAT)
 
 Source code formatting uses 4 column tab spacing, with tabs preserved (i.e., tabs are not expanded to spaces). Each logical indentation level is one additional tab stop.
@@ -52,10 +44,3 @@ less -x4
 ```
 
 to make them show tabs appropriately.
-
-***
-
-|                                                                  |                                                               |                                                                                  |
-| :--------------------------------------------------------------- | :-----------------------------------------------------------: | -------------------------------------------------------------------------------: |
-| [Prev](source.html "Chapter 56. PostgreSQL Coding Conventions")  | [Up](source.html "Chapter 56. PostgreSQL Coding Conventions") |  [Next](error-message-reporting.html "56.2. Reporting Errors Within the Server") |
-| Chapter 56. PostgreSQL Coding Conventions                        |     [Home](index.html "PostgreSQL 17devel Documentation")     |                                         56.2. Reporting Errors Within the Server |

@@ -1,11 +1,3 @@
-
-
-|                 43.12. Tips for Developing in PL/pgSQL                |                                                                     |                                                |                                                       |                                                                   |
-| :-------------------------------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](plpgsql-implementation.html "43.11. PL/pgSQL under the Hood")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-porting.html "43.13. Porting from Oracle PL/SQL") |
-
-***
-
 ## 43.12. Tips for Developing in PL/pgSQL [#](#PLPGSQL-DEVELOPMENT-TIPS)
 
   * *   [43.12.1. Handling of Quotation Marks](plpgsql-development-tips.html#PLPGSQL-QUOTE-TIPS)
@@ -221,10 +213,3 @@ HINT:  Make sure the query returns the exact list of columns.
 
 (1 row)
 ```
-
-***
-
-|                                                                       |                                                                     |                                                                   |
-| :-------------------------------------------------------------------- | :-----------------------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](plpgsql-implementation.html "43.11. PL/pgSQL under the Hood")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](plpgsql-porting.html "43.13. Porting from Oracle PL/SQL") |
-| 43.11. PL/pgSQL under the Hood                                        |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                 43.13. Porting from Oracle PL/SQL |

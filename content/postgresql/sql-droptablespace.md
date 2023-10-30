@@ -1,11 +1,3 @@
-
-
-|              DROP TABLESPACE             |                                        |              |                                                       |                                                                 |
-| :--------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](sql-droptable.html "DROP TABLE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droptsconfig.html "DROP TEXT SEARCH CONFIGURATION") |
-
-***
-
 ## DROP TABLESPACE
 
 DROP TABLESPACE — remove a tablespace
@@ -53,10 +45,3 @@ DROP TABLESPACE mystuff;
 ## See Also
 
 [CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE"), [ALTER TABLESPACE](sql-altertablespace.html "ALTER TABLESPACE")
-
-***
-
-|                                          |                                                       |                                                                 |
-| :--------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](sql-droptable.html "DROP TABLE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droptsconfig.html "DROP TEXT SEARCH CONFIGURATION") |
-| DROP TABLE                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                  DROP TEXT SEARCH CONFIGURATION |

@@ -1,11 +1,3 @@
-
-
-|              19.6. Upgrading a PostgreSQL Cluster              |                                                             |                                        |                                                       |                                                                             |
-| :------------------------------------------------------------: | :---------------------------------------------------------- | :------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](server-shutdown.html "19.5. Shutting Down the Server")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") | Chapter 19. Server Setup and Operation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](preventing-server-spoofing.html "19.7. Preventing Server Spoofing") |
-
-***
-
 ## 19.6. Upgrading a PostgreSQL Cluster [#](#UPGRADING)
 
   * *   [19.6.1. Upgrading Data via pg\_dumpall](upgrading.html#UPGRADING-VIA-PGDUMPALL)
@@ -133,10 +125,3 @@ The [pg\_upgrade](pgupgrade.html "pg_upgrade") module allows an installation to 
 It is also possible to use logical replication methods to create a standby server with the updated version of PostgreSQL. This is possible because logical replication supports replication between different major versions of PostgreSQL. The standby can be on the same computer or a different computer. Once it has synced up with the primary server (running the older version of PostgreSQL), you can switch primaries and make the standby the primary and shut down the older database instance. Such a switch-over results in only several seconds of downtime for an upgrade.
 
 This method of upgrading can be performed using the built-in logical replication facilities as well as using external logical replication systems such as pglogical, Slony, Londiste, and Bucardo.
-
-***
-
-|                                                                |                                                             |                                                                             |
-| :------------------------------------------------------------- | :---------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](server-shutdown.html "19.5. Shutting Down the Server")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") |  [Next](preventing-server-spoofing.html "19.7. Preventing Server Spoofing") |
-| 19.5. Shutting Down the Server                                 |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                            19.7. Preventing Server Spoofing |

@@ -1,11 +1,3 @@
-
-
-|              LOCK             |                                        |              |                                                       |                                 |
-| :---------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------: |
-| [Prev](sql-load.html "LOAD")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-merge.html "MERGE") |
-
-***
-
 ## LOCK
 
 LOCK — lock a table
@@ -97,10 +89,3 @@ COMMIT WORK;
 There is no `LOCK TABLE` in the SQL standard, which instead uses `SET TRANSACTION` to specify concurrency levels on transactions. PostgreSQL supports that too; see [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION") for details.
 
 Except for `ACCESS SHARE`, `ACCESS EXCLUSIVE`, and `SHARE UPDATE EXCLUSIVE` lock modes, the PostgreSQL lock modes and the `LOCK TABLE` syntax are compatible with those present in Oracle.
-
-***
-
-|                               |                                                       |                                 |
-| :---------------------------- | :---------------------------------------------------: | ------------------------------: |
-| [Prev](sql-load.html "LOAD")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-merge.html "MERGE") |
-| LOAD                          | [Home](index.html "PostgreSQL 17devel Documentation") |                           MERGE |

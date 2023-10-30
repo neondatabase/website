@@ -1,11 +1,3 @@
-
-
-|                    37.59. `usage_privileges`                    |                                                                    |                                    |                                                       |                                                                         |
-| :-------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](infoschema-udt-privileges.html "37.58. udt_privileges")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-user-defined-types.html "37.60. user_defined_types") |
-
-***
-
 ## 37.59. `usage_privileges` [#](#INFOSCHEMA-USAGE-PRIVILEGES)
 
 The view `usage_privileges` identifies `USAGE` privileges granted on various kinds of objects to a currently enabled role or by a currently enabled role. In PostgreSQL, this currently applies to collations, domains, foreign-data wrappers, foreign servers, and sequences. There is one row for each combination of object, grantor, and grantee.
@@ -26,10 +18,3 @@ In PostgreSQL, sequences also support `SELECT` and `UPDATE` privileges in additi
 | `object_type` `character_data``COLLATION` or `DOMAIN` or `FOREIGN DATA WRAPPER` or `FOREIGN SERVER` or `SEQUENCE` |
 | `privilege_type` `character_data`Always `USAGE`                                                                   |
 | `is_grantable` `yes_or_no``YES` if the privilege is grantable, `NO` if not                                        |
-
-***
-
-|                                                                 |                                                                    |                                                                         |
-| :-------------------------------------------------------------- | :----------------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](infoschema-udt-privileges.html "37.58. udt_privileges")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-user-defined-types.html "37.60. user_defined_types") |
-| 37.58. `udt_privileges`                                         |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                             37.60. `user_defined_types` |

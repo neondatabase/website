@@ -1,11 +1,3 @@
-
-
-|                   F.35. pg\_visibility — visibility map information and utilities                   |                                                                             |                                                        |                                                       |                                                                             |
-| :-------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](pgtrgm.html "F.34. pg_trgm —&#xA;   support for similarity of text using trigram matching")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgwalinspect.html "F.36. pg_walinspect — low-level WAL inspection") |
-
-***
-
 ## F.35. pg\_visibility — visibility map information and utilities [#](#PGVISIBILITY)
 
   * *   [F.35.1. Functions](pgvisibility.html#PGVISIBILITY-FUNCS)
@@ -56,10 +48,3 @@ By default, these functions are executable only by superusers and roles with pri
 ### F.35.2. Author [#](#PGVISIBILITY-AUTHOR)
 
 Robert Haas `<rhaas@postgresql.org>`
-
-***
-
-|                                                                                                     |                                                                             |                                                                             |
-| :-------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](pgtrgm.html "F.34. pg_trgm —&#xA;   support for similarity of text using trigram matching")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](pgwalinspect.html "F.36. pg_walinspect — low-level WAL inspection") |
-| F.34. pg\_trgm — support for similarity of text using trigram matching                              |            [Home](index.html "PostgreSQL 17devel Documentation")            |                             F.36. pg\_walinspect — low-level WAL inspection |

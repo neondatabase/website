@@ -1,11 +1,3 @@
-
-
-|          20.13. Version and Platform Compatibility          |                                                              |                                  |                                                       |                                                                     |
-| :---------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](runtime-config-locks.html "20.12. Lock Management")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-error-handling.html "20.14. Error Handling") |
-
-***
-
 ## 20.13. Version and Platform Compatibility [#](#RUNTIME-CONFIG-COMPATIBLE)
 
   * *   [20.13.1. Previous PostgreSQL Versions](runtime-config-compatible.html#RUNTIME-CONFIG-COMPATIBLE-VERSION)
@@ -60,10 +52,3 @@
     Note that this option only affects the exact form `= NULL`, not other comparison operators or other expressions that are computationally equivalent to some expression involving the equals operator (such as `IN`). Thus, this option is not a general fix for bad programming.
 
     Refer to [Section 9.2](functions-comparison.html "9.2. Comparison Functions and Operators") for related information.
-
-***
-
-|                                                             |                                                              |                                                                     |
-| :---------------------------------------------------------- | :----------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](runtime-config-locks.html "20.12. Lock Management")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-error-handling.html "20.14. Error Handling") |
-| 20.12. Lock Management                                      |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                               20.14. Error Handling |

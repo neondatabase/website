@@ -1,11 +1,3 @@
-
-
-|                5.5. System Columns               |                                             |                            |                                                       |                                                 |
-| :----------------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](ddl-constraints.html "5.4. Constraints")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-alter.html "5.6. Modifying Tables") |
-
-***
-
 ## 5.5. System Columns [#](#DDL-SYSTEM-COLUMNS)
 
 Every table has several *system columns* that are implicitly defined by the system. Therefore, these names cannot be used as names of user-defined columns. (Note that these restrictions are separate from whether the name is a key word or not; quoting a name will not allow you to escape these restrictions.) You do not really need to be concerned about these columns; just know they exist.
@@ -37,10 +29,3 @@ Every table has several *system columns* that are implicitly defined by the syst
 Transaction identifiers are also 32-bit quantities. In a long-lived database it is possible for transaction IDs to wrap around. This is not a fatal problem given appropriate maintenance procedures; see [Chapter 25](maintenance.html "Chapter 25. Routine Database Maintenance Tasks") for details. It is unwise, however, to depend on the uniqueness of transaction IDs over the long term (more than one billion transactions).
 
 Command identifiers are also 32-bit quantities. This creates a hard limit of 232 (4 billion) SQL commands within a single transaction. In practice this limit is not a problem — note that the limit is on the number of SQL commands, not the number of rows processed. Also, only commands that actually modify the database contents will consume a command identifier.
-
-***
-
-|                                                  |                                                       |                                                 |
-| :----------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------: |
-| [Prev](ddl-constraints.html "5.4. Constraints")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](ddl-alter.html "5.6. Modifying Tables") |
-| 5.4. Constraints                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                           5.6. Modifying Tables |

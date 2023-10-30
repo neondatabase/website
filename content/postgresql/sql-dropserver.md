@@ -1,11 +1,3 @@
-
-
-|                   DROP SERVER                  |                                        |              |                                                       |                                                    |
-| :--------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-dropsequence.html "DROP SEQUENCE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropstatistics.html "DROP STATISTICS") |
-
-***
-
 ## DROP SERVER
 
 DROP SERVER — remove a foreign server descriptor
@@ -55,10 +47,3 @@ DROP SERVER IF EXISTS foo;
 ## See Also
 
 [CREATE SERVER](sql-createserver.html "CREATE SERVER"), [ALTER SERVER](sql-alterserver.html "ALTER SERVER")
-
-***
-
-|                                                |                                                       |                                                    |
-| :--------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-dropsequence.html "DROP SEQUENCE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropstatistics.html "DROP STATISTICS") |
-| DROP SEQUENCE                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                    DROP STATISTICS |

@@ -1,11 +1,3 @@
-
-
-|                   4.2. Value Expressions                  |                                               |                       |                                                       |                                                                 |
-| :-------------------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](sql-syntax-lexical.html "4.1. Lexical Structure")  | [Up](sql-syntax.html "Chapter 4. SQL Syntax") | Chapter 4. SQL Syntax | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-syntax-calling-funcs.html "4.3. Calling Functions") |
-
-***
-
 ## 4.2. Value Expressions [#](#SQL-EXPRESSIONS)
 
   * *   [4.2.1. Column References](sql-expressions.html#SQL-EXPRESSIONS-COLUMN-REFS)
@@ -668,10 +660,3 @@ SELECT CASE WHEN min(employees) > 0
 ```
 
 The `min()` and `avg()` aggregates are computed concurrently over all the input rows, so if any row has `employees` equal to zero, the division-by-zero error will occur before there is any opportunity to test the result of `min()`. Instead, use a `WHERE` or `FILTER` clause to prevent problematic input rows from reaching an aggregate function in the first place.
-
-***
-
-|                                                           |                                                       |                                                                 |
-| :-------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](sql-syntax-lexical.html "4.1. Lexical Structure")  |     [Up](sql-syntax.html "Chapter 4. SQL Syntax")     |  [Next](sql-syntax-calling-funcs.html "4.3. Calling Functions") |
-| 4.1. Lexical Structure                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                          4.3. Calling Functions |

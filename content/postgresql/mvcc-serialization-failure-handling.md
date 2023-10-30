@@ -1,11 +1,3 @@
-
-
-|                             13.5. Serialization Failure Handling                            |                                                   |                                 |                                                       |                                            |
-| :-----------------------------------------------------------------------------------------: | :------------------------------------------------ | :-----------------------------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](applevel-consistency.html "13.4. Data Consistency Checks at the Application Level")  | [Up](mvcc.html "Chapter 13. Concurrency Control") | Chapter 13. Concurrency Control | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](mvcc-caveats.html "13.6. Caveats") |
-
-***
-
 ## 13.5. Serialization Failure Handling [#](#MVCC-SERIALIZATION-FAILURE-HANDLING)
 
 Both Repeatable Read and Serializable isolation levels can produce errors that are designed to prevent serialization anomalies. As previously stated, applications using these levels must be prepared to retry transactions that fail due to serialization errors. Such an error's message text will vary according to the precise circumstances, but it will always have the SQLSTATE code `40001` (`serialization_failure`).
@@ -17,10 +9,3 @@ In some cases it is also appropriate to retry unique-key failures, which have SQ
 It is important to retry the complete transaction, including all logic that decides which SQL to issue and/or which values to use. Therefore, PostgreSQL does not offer an automatic retry facility, since it cannot do so with any guarantee of correctness.
 
 Transaction retry does not guarantee that the retried transaction will complete; multiple retries may be needed. In cases with very high contention, it is possible that completion of a transaction may take many attempts. In cases involving a conflicting prepared transaction, it may not be possible to make progress until the prepared transaction commits or rolls back.
-
-***
-
-|                                                                                             |                                                       |                                            |
-| :------------------------------------------------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](applevel-consistency.html "13.4. Data Consistency Checks at the Application Level")  |   [Up](mvcc.html "Chapter 13. Concurrency Control")   |  [Next](mvcc-caveats.html "13.6. Caveats") |
-| 13.4. Data Consistency Checks at the Application Level                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                              13.6. Caveats |

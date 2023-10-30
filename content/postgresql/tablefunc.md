@@ -1,11 +1,3 @@
-
-
-| F.42. tablefunc — functions that return tables (`crosstab` and others) |                                                                             |                                                        |                                                       |                                                                                                    |
-| :--------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------------------------------: |
-|  [Prev](sslinfo.html "F.41. sslinfo — obtain client SSL information")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tcn.html "F.43. tcn — a trigger function to notify listeners of changes to table content") |
-
-***
-
 ## F.42. tablefunc — functions that return tables (`crosstab` and others) [#](#TABLEFUNC)
 
   * *   [F.42.1. Functions Provided](tablefunc.html#TABLEFUNC-FUNCTIONS-SECT)
@@ -504,10 +496,3 @@ SELECT * FROM connectby('connectby_tree', 'keyid', 'parent_keyid', 'pos', 'row2'
 ### F.42.2. Author [#](#TABLEFUNC-AUTHOR)
 
 Joe Conway
-
-***
-
-|                                                                       |                                                                             |                                                                                                    |
-| :-------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------: |
-| [Prev](sslinfo.html "F.41. sslinfo — obtain client SSL information")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](tcn.html "F.43. tcn — a trigger function to notify listeners of changes to table content") |
-| F.41. sslinfo — obtain client SSL information                         |            [Home](index.html "PostgreSQL 17devel Documentation")            |                     F.43. tcn — a trigger function to notify listeners of changes to table content |

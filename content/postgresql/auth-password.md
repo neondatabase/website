@@ -1,11 +1,3 @@
-
-
-|             21.5. Password Authentication             |                                                                      |                                   |                                                       |                                                         |
-| :---------------------------------------------------: | :------------------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](auth-trust.html "21.4. Trust Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") | Chapter 21. Client Authentication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](gssapi-auth.html "21.6. GSSAPI Authentication") |
-
-***
-
 ## 21.5. Password Authentication [#](#AUTH-PASSWORD)
 
 There are several password-based authentication methods. These methods operate similarly but differ in how the users' passwords are stored on the server and how the password provided by a client is sent across the connection.
@@ -31,10 +23,3 @@ PostgreSQL database passwords are separate from operating system user passwords.
 The availability of the different password-based authentication methods depends on how a user's password on the server is encrypted (or hashed, more accurately). This is controlled by the configuration parameter [password\_encryption](runtime-config-connection.html#GUC-PASSWORD-ENCRYPTION) at the time the password is set. If a password was encrypted using the `scram-sha-256` setting, then it can be used for the authentication methods `scram-sha-256` and `password` (but password transmission will be in plain text in the latter case). The authentication method specification `md5` will automatically switch to using the `scram-sha-256` method in this case, as explained above, so it will also work. If a password was encrypted using the `md5` setting, then it can be used only for the `md5` and `password` authentication method specifications (again, with the password transmitted in plain text in the latter case). (Previous PostgreSQL releases supported storing the password on the server in plain text. This is no longer possible.) To check the currently stored password hashes, see the system catalog `pg_authid`.
 
 To upgrade an existing installation from `md5` to `scram-sha-256`, after having ensured that all client libraries in use are new enough to support SCRAM, set `password_encryption = 'scram-sha-256'` in `postgresql.conf`, make all users set new passwords, and change the authentication method specifications in `pg_hba.conf` to `scram-sha-256`.
-
-***
-
-|                                                       |                                                                      |                                                         |
-| :---------------------------------------------------- | :------------------------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](auth-trust.html "21.4. Trust Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") |  [Next](gssapi-auth.html "21.6. GSSAPI Authentication") |
-| 21.4. Trust Authentication                            |         [Home](index.html "PostgreSQL 17devel Documentation")        |                             21.6. GSSAPI Authentication |

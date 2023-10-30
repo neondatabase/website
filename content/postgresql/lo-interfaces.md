@@ -1,11 +1,3 @@
-
-
-|                     35.3. Client Interfaces                     |                                                     |                           |                                                       |                                                      |
-| :-------------------------------------------------------------: | :-------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](lo-implementation.html "35.2. Implementation Features")  | [Up](largeobjects.html "Chapter 35. Large Objects") | Chapter 35. Large Objects | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](lo-funcs.html "35.4. Server-Side Functions") |
-
-***
-
 ## 35.3. Client Interfaces [#](#LO-INTERFACES)
 
   * *   [35.3.1. Creating a Large Object](lo-interfaces.html#LO-CREATE)
@@ -242,10 +234,3 @@ int lo_unlink(PGconn *conn, Oid lobjId);
 ```
 
 The *`lobjId`* argument specifies the OID of the large object to remove. Returns 1 if successful, -1 on failure.
-
-***
-
-|                                                                 |                                                       |                                                      |
-| :-------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](lo-implementation.html "35.2. Implementation Features")  |  [Up](largeobjects.html "Chapter 35. Large Objects")  |  [Next](lo-funcs.html "35.4. Server-Side Functions") |
-| 35.2. Implementation Features                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                          35.4. Server-Side Functions |

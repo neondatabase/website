@@ -1,11 +1,3 @@
-
-
-|                  9.9. Date/Time Functions and Operators                  |                                                           |                                    |                                                       |                                                             |
-| :----------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](functions-formatting.html "9.8. Data Type Formatting Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-enum.html "9.10. Enum Support Functions") |
-
-***
-
 ## 9.9. Date/Time Functions and Operators [#](#FUNCTIONS-DATETIME)
 
   * *   [9.9.1. `EXTRACT`, `date_part`](functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT)
@@ -662,10 +654,3 @@ The effective resolution of the sleep interval is platform-specific; 0.01 second
 ### Warning
 
 Make sure that your session does not hold more locks than necessary when calling `pg_sleep` or its variants. Otherwise other sessions might have to wait for your sleeping process, slowing down the entire system.
-
-***
-
-|                                                                          |                                                           |                                                             |
-| :----------------------------------------------------------------------- | :-------------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](functions-formatting.html "9.8. Data Type Formatting Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-enum.html "9.10. Enum Support Functions") |
-| 9.8. Data Type Formatting Functions                                      |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                9.10. Enum Support Functions |

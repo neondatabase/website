@@ -1,10 +1,3 @@
-
-|                 8.8. Geometric Types                |                                             |                       |                                                       |                                                               |
-| :-------------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](datatype-enum.html "8.7. Enumerated Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-net-types.html "8.9. Network Address Types") |
-
-***
-
 ## 8.8. Geometric Types [#](#DATATYPE-GEOMETRIC)
 
 * *   [8.8.1. Points](datatype-geometric.html#DATATYPE-GEOMETRIC-POINTS)
@@ -154,10 +147,3 @@ Circles are represented by a center point and radius. Values of type `circle` ar
 where `(x,y)` is the center point and *`r`* is the radius of the circle.
 
 Circles are output using the first syntax.
-
-***
-
-|                                                     |                                                       |                                                               |
-| :-------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](datatype-enum.html "8.7. Enumerated Types")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](datatype-net-types.html "8.9. Network Address Types") |
-| 8.7. Enumerated Types                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                    8.9. Network Address Types |

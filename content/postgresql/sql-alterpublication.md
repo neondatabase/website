@@ -1,11 +1,3 @@
-
-
-|                  ALTER PUBLICATION                 |                                        |              |                                                       |                                          |
-| :------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-alterprocedure.html "ALTER PROCEDURE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterrole.html "ALTER ROLE") |
-
-***
-
 ## ALTER PUBLICATION
 
 ALTER PUBLICATION — change the definition of a publication
@@ -115,10 +107,3 @@ ALTER PUBLICATION production_publication ADD TABLE users, departments, TABLES IN
 ## See Also
 
 [CREATE PUBLICATION](sql-createpublication.html "CREATE PUBLICATION"), [DROP PUBLICATION](sql-droppublication.html "DROP PUBLICATION"), [CREATE SUBSCRIPTION](sql-createsubscription.html "CREATE SUBSCRIPTION"), [ALTER SUBSCRIPTION](sql-altersubscription.html "ALTER SUBSCRIPTION")
-
-***
-
-|                                                    |                                                       |                                          |
-| :------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-alterprocedure.html "ALTER PROCEDURE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterrole.html "ALTER ROLE") |
-| ALTER PROCEDURE                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                               ALTER ROLE |

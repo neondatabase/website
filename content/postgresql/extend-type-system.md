@@ -1,11 +1,3 @@
-
-
-|             38.2. The PostgreSQL Type System             |                                               |                           |                                                       |                                                    |
-| :------------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](extend-how.html "38.1. How Extensibility Works")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xfunc.html "38.3. User-Defined Functions") |
-
-***
-
 ## 38.2. The PostgreSQL Type System [#](#EXTEND-TYPE-SYSTEM)
 
   * *   [38.2.1. Base Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-BASE)
@@ -98,10 +90,3 @@ RETURNS anycompatible AS ...
 In an actual call of this function, the first two inputs must have exactly the same type. The last two inputs must be promotable to a common type, but this type need not have anything to do with the type of the first two inputs. The result will have the common type of the last two inputs.
 
 A variadic function (one taking a variable number of arguments, as in [Section 38.5.6](xfunc-sql.html#XFUNC-SQL-VARIADIC-FUNCTIONS "38.5.6. SQL Functions with Variable Numbers of Arguments")) can be polymorphic: this is accomplished by declaring its last parameter as `VARIADIC` `anyarray` or `VARIADIC` `anycompatiblearray`. For purposes of argument matching and determining the actual result type, such a function behaves the same as if you had written the appropriate number of `anynonarray` or `anycompatiblenonarray` parameters.
-
-***
-
-|                                                          |                                                       |                                                    |
-| :------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](extend-how.html "38.1. How Extensibility Works")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xfunc.html "38.3. User-Defined Functions") |
-| 38.1. How Extensibility Works                            | [Home](index.html "PostgreSQL 17devel Documentation") |                       38.3. User-Defined Functions |

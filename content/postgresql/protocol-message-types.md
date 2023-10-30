@@ -1,11 +1,3 @@
-
-
-|                                  55.6. Message Data Types                                 |                                                             |                                       |                                                       |                                                                |
-| :---------------------------------------------------------------------------------------: | :---------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](protocol-logical-replication.html "55.5. Logical Streaming Replication Protocol")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") | Chapter 55. Frontend/Backend Protocol | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](protocol-message-formats.html "55.7. Message Formats") |
-
-***
-
 ## 55.6. Message Data Types [#](#PROTOCOL-MESSAGE-TYPES)
 
 This section describes the base data types used in messages.
@@ -29,10 +21,3 @@ This section describes the base data types used in messages.
 * Byte*`n`*(*`c`*)
 
     Exactly *`n`* bytes. If the field width *`n`* is not a constant, it is always determinable from an earlier field in the message. If *`c`* is specified it is the exact value. Eg. Byte2, Byte1('\n').
-
-***
-
-|                                                                                           |                                                             |                                                                |
-| :---------------------------------------------------------------------------------------- | :---------------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](protocol-logical-replication.html "55.5. Logical Streaming Replication Protocol")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") |  [Next](protocol-message-formats.html "55.7. Message Formats") |
-| 55.5. Logical Streaming Replication Protocol                                              |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                          55.7. Message Formats |

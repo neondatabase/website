@@ -1,11 +1,3 @@
-
-
-|             Chapter 21. Client Authentication             |                                                    |                                 |                                                       |                                                             |
-| :-------------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](runtime-config-short.html "20.18. Short Options")  | [Up](admin.html "Part III. Server Administration") | Part III. Server Administration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](auth-pg-hba-conf.html "21.1. The pg_hba.conf File") |
-
-***
-
 ## Chapter 21. Client Authentication
 
 **Table of Contents**
@@ -37,10 +29,3 @@ As explained in [Chapter 22](user-manag.html "Chapter 22. Database Roles"), P
 PostgreSQL offers a number of different client authentication methods. The method used to authenticate a particular client connection can be selected on the basis of (client) host address, database, and user.
 
 PostgreSQL database user names are logically separate from user names of the operating system in which the server runs. If all the users of a particular server also have accounts on the server's machine, it makes sense to assign database user names that match their operating system user names. However, a server that accepts remote connections might have many database users who have no local operating system account, and in such cases there need be no connection between database user names and OS user names.
-
-***
-
-|                                                           |                                                       |                                                             |
-| :-------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](runtime-config-short.html "20.18. Short Options")  |   [Up](admin.html "Part III. Server Administration")  |  [Next](auth-pg-hba-conf.html "21.1. The pg_hba.conf File") |
-| 20.18. Short Options                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                21.1. The `pg_hba.conf` File |

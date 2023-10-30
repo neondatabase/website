@@ -1,11 +1,3 @@
-
-
-|                  ecpg                 |                                                              |                                |                                                       |                                          |
-| :-----------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](app-dropuser.html "dropuser")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pgamcheck.html "pg_amcheck") |
-
-***
-
 ## ecpg
 
 ecpg — embedded SQL C preprocessor
@@ -101,10 +93,3 @@ The value of either of these directories that is appropriate for the installatio
 If you have an embedded SQL C source file named `prog1.pgc`, you can create an executable program using the following sequence of commands:
 
 \`\`\` ecpg prog1.pgc cc -I/usr/local/pgsql/include -c prog1.c cc -o prog1 prog1.o -L/usr/local/pgsql/lib -lecpg \`\`\`
-
-***
-
-|                                       |                                                              |                                          |
-| :------------------------------------ | :----------------------------------------------------------: | ---------------------------------------: |
-| [Prev](app-dropuser.html "dropuser")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-pgamcheck.html "pg_amcheck") |
-| dropuser                              |     [Home](index.html "PostgreSQL 17devel Documentation")    |                              pg\_amcheck |

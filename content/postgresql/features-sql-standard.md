@@ -1,11 +1,3 @@
-
-
-|                D.1. Supported Features               |                                                   |                             |                                                       |                                                                             |
-| :--------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](features.html "Appendix D. SQL Conformance")  | [Up](features.html "Appendix D. SQL Conformance") | Appendix D. SQL Conformance | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](unsupported-features-sql-standard.html "D.2. Unsupported Features") |
-
-***
-
 ## D.1. Supported Features [#](#FEATURES-SQL-STANDARD)
 
 | Identifier | Core? | Description                                                                                                              | Comment                                                     |
@@ -447,10 +439,3 @@
 | X304       |       | XMLTable: passing a context item                                                                                         | must be XML DOCUMENT                                        |
 | X400       |       | Name and identifier mapping                                                                                              |                                                             |
 | X410       |       | Alter column data type: XML type                                                                                         |                                                             |
-
-***
-
-|                                                      |                                                       |                                                                             |
-| :--------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](features.html "Appendix D. SQL Conformance")  |   [Up](features.html "Appendix D. SQL Conformance")   |  [Next](unsupported-features-sql-standard.html "D.2. Unsupported Features") |
-| Appendix D. SQL Conformance                          | [Home](index.html "PostgreSQL 17devel Documentation") |                                                   D.2. Unsupported Features |

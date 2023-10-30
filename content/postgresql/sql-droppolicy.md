@@ -1,11 +1,3 @@
-
-
-|                DROP POLICY                |                                        |              |                                                       |                                                  |
-| :---------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-drop-owned.html "DROP OWNED")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropprocedure.html "DROP PROCEDURE") |
-
-***
-
 ## DROP POLICY
 
 DROP POLICY — remove a row-level security policy from a table
@@ -55,10 +47,3 @@ DROP POLICY p1 ON my_table;
 ## See Also
 
 [CREATE POLICY](sql-createpolicy.html "CREATE POLICY"), [ALTER POLICY](sql-alterpolicy.html "ALTER POLICY")
-
-***
-
-|                                           |                                                       |                                                  |
-| :---------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-drop-owned.html "DROP OWNED")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropprocedure.html "DROP PROCEDURE") |
-| DROP OWNED                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                   DROP PROCEDURE |

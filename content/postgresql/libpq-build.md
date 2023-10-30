@@ -1,11 +1,3 @@
-
-
-|                    34.21. Building libpq Programs                    |                                                  |                               |                                                       |                                                       |
-| :------------------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](libpq-threading.html "34.20. Behavior in Threaded Programs")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-example.html "34.22. Example Programs") |
-
-***
-
 ## 34.21. Building libpq Programs [#](#LIBPQ-BUILD)
 
 To build (i.e., compile and link) a program using libpq you need to do all of the following things:
@@ -111,10 +103,3 @@ To build (i.e., compile and link) a program using libpq you need to do all of th
     ```
 
     This means you forgot the `-L` option or did not specify the right directory.
-
-***
-
-|                                                                      |                                                       |                                                       |
-| :------------------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](libpq-threading.html "34.20. Behavior in Threaded Programs")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-example.html "34.22. Example Programs") |
-| 34.20. Behavior in Threaded Programs                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                               34.22. Example Programs |

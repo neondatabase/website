@@ -1,11 +1,3 @@
-
-
-|                  ANALYZE                 |                                        |              |                                                       |                                 |
-| :--------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------: |
-| [Prev](sql-alterview.html "ALTER VIEW")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-begin.html "BEGIN") |
-
-***
-
 ## ANALYZE
 
 ANALYZE — collect statistics about a database
@@ -113,10 +105,3 @@ ANALYZE [ VERBOSE ] [ table_and_columns [, ...] ]
 ## See Also
 
 [VACUUM](sql-vacuum.html "VACUUM"), [vacuumdb](app-vacuumdb.html "vacuumdb"), [Section 20.4.4](runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-VACUUM-COST "20.4.4. Cost-based Vacuum Delay"), [Section 25.1.6](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon"), [Section 28.4.1](progress-reporting.html#ANALYZE-PROGRESS-REPORTING "28.4.1. ANALYZE Progress Reporting")
-
-***
-
-|                                          |                                                       |                                 |
-| :--------------------------------------- | :---------------------------------------------------: | ------------------------------: |
-| [Prev](sql-alterview.html "ALTER VIEW")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-begin.html "BEGIN") |
-| ALTER VIEW                               | [Home](index.html "PostgreSQL 17devel Documentation") |                           BEGIN |

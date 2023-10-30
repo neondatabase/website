@@ -1,11 +1,3 @@
-
-
-|                6.1. Inserting Data               |                                               |                              |                                                       |                                               |
-| :----------------------------------------------: | :-------------------------------------------- | :--------------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](dml.html "Chapter 6. Data Manipulation")  | [Up](dml.html "Chapter 6. Data Manipulation") | Chapter 6. Data Manipulation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](dml-update.html "6.2. Updating Data") |
-
-***
-
 ## 6.1. Inserting Data [#](#DML-INSERT)
 
 When a table is created, it contains no data. The first thing to do before a database can be of much use is to insert data. Data is inserted one row at a time. You can also insert more than one row in a single command, but it is not possible to insert something that is not a complete row. Even if you know only some column values, a complete row must be created.
@@ -82,10 +74,3 @@ This provides the full power of the SQL query mechanism ([Chapter 7](queries.ht
 ### Tip
 
 When inserting a lot of data at the same time, consider using the [COPY](sql-copy.html "COPY") command. It is not as flexible as the [INSERT](sql-insert.html "INSERT") command, but is more efficient. Refer to [Section 14.4](populate.html "14.4. Populating a Database") for more information on improving bulk loading performance.
-
-***
-
-|                                                  |                                                       |                                               |
-| :----------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](dml.html "Chapter 6. Data Manipulation")  |     [Up](dml.html "Chapter 6. Data Manipulation")     |  [Next](dml-update.html "6.2. Updating Data") |
-| Chapter 6. Data Manipulation                     | [Home](index.html "PostgreSQL 17devel Documentation") |                            6.2. Updating Data |

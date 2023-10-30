@@ -1,11 +1,3 @@
-
-
-|                       CREATE FUNCTION                       |                                        |              |                                                       |                                              |
-| :---------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-createforeigntable.html "CREATE FOREIGN TABLE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-creategroup.html "CREATE GROUP") |
-
-***
-
 ## CREATE FUNCTION
 
 CREATE FUNCTION — define a new function
@@ -357,10 +349,3 @@ Simple `LANGUAGE SQL` functions can be written in a way that is both standard-co
 ## See Also
 
 [ALTER FUNCTION](sql-alterfunction.html "ALTER FUNCTION"), [DROP FUNCTION](sql-dropfunction.html "DROP FUNCTION"), [GRANT](sql-grant.html "GRANT"), [LOAD](sql-load.html "LOAD"), [REVOKE](sql-revoke.html "REVOKE")
-
-***
-
-|                                                             |                                                       |                                              |
-| :---------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-createforeigntable.html "CREATE FOREIGN TABLE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-creategroup.html "CREATE GROUP") |
-| CREATE FOREIGN TABLE                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                 CREATE GROUP |

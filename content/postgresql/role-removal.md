@@ -1,11 +1,3 @@
-
-
-|                  22.4. Dropping Roles                 |                                                    |                            |                                                       |                                                         |
-| :---------------------------------------------------: | :------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](role-membership.html "22.3. Role Membership")  | [Up](user-manag.html "Chapter 22. Database Roles") | Chapter 22. Database Roles | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](predefined-roles.html "22.5. Predefined Roles") |
-
-***
-
 ## 22.4. Dropping Roles [#](#ROLE-REMOVAL)
 
 Because roles can own database objects and can hold privileges to access other objects, dropping a role is often not just a matter of a quick [`DROP ROLE`](sql-droprole.html "DROP ROLE"). Any objects owned by the role must first be dropped or reassigned to other owners; and any permissions granted to the role must be revoked.
@@ -36,10 +28,3 @@ DROP ROLE doomed_role;
 When not all owned objects are to be transferred to the same successor owner, it's best to handle the exceptions manually and then perform the above steps to mop up.
 
 If `DROP ROLE` is attempted while dependent objects still remain, it will issue messages identifying which objects need to be reassigned or dropped.
-
-***
-
-|                                                       |                                                       |                                                         |
-| :---------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](role-membership.html "22.3. Role Membership")  |   [Up](user-manag.html "Chapter 22. Database Roles")  |  [Next](predefined-roles.html "22.5. Predefined Roles") |
-| 22.3. Role Membership                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                  22.5. Predefined Roles |

@@ -1,11 +1,3 @@
-
-
-|                 30.4. Asynchronous Commit                 |                                                                  |                                                 |                                                       |                                                           |
-| :-------------------------------------------------------: | :--------------------------------------------------------------- | :---------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](wal-intro.html "30.3. Write-Ahead Logging (WAL)")  | [Up](wal.html "Chapter 30. Reliability and the Write-Ahead Log") | Chapter 30. Reliability and the Write-Ahead Log | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](wal-configuration.html "30.5. WAL Configuration") |
-
-***
-
 ## 30.4. Asynchronous Commit [#](#WAL-ASYNC-COMMIT)
 
 *Asynchronous commit* is an option that allows transactions to complete more quickly, at the cost that the most recent transactions may be lost if the database should crash. In many applications this is an acceptable trade-off.
@@ -29,10 +21,3 @@ An immediate-mode shutdown is equivalent to a server crash, and will therefore c
 Asynchronous commit provides behavior different from setting [fsync](runtime-config-wal.html#GUC-FSYNC) = off. `fsync` is a server-wide setting that will alter the behavior of all transactions. It disables all logic within PostgreSQL that attempts to synchronize writes to different portions of the database, and therefore a system crash (that is, a hardware or operating system crash, not a failure of PostgreSQL itself) could result in arbitrarily bad corruption of the database state. In many scenarios, asynchronous commit provides most of the performance improvement that could be obtained by turning off `fsync`, but without the risk of data corruption.
 
 [commit\_delay](runtime-config-wal.html#GUC-COMMIT-DELAY) also sounds very similar to asynchronous commit, but it is actually a synchronous commit method (in fact, `commit_delay` is ignored during an asynchronous commit). `commit_delay` causes a delay just before a transaction flushes WAL to disk, in the hope that a single flush executed by one such transaction can also serve other transactions committing at about the same time. The setting can be thought of as a way of increasing the time window in which transactions can join a group about to participate in a single flush, to amortize the cost of the flush among multiple transactions.
-
-***
-
-|                                                           |                                                                  |                                                           |
-| :-------------------------------------------------------- | :--------------------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](wal-intro.html "30.3. Write-Ahead Logging (WAL)")  | [Up](wal.html "Chapter 30. Reliability and the Write-Ahead Log") |  [Next](wal-configuration.html "30.5. WAL Configuration") |
-| 30.3. Write-Ahead Logging (WAL)                           |       [Home](index.html "PostgreSQL 17devel Documentation")      |                                   30.5. WAL Configuration |

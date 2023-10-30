@@ -1,11 +1,3 @@
-
-
-|                   D.2. Unsupported Features                   |                                                   |                             |                                                       |                                                                                   |
-| :-----------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------: |
-| [Prev](features-sql-standard.html "D.1. Supported Features")  | [Up](features.html "Appendix D. SQL Conformance") | Appendix D. SQL Conformance | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xml-limits-conformance.html "D.3. XML Limits and Conformance to SQL/XML") |
-
-***
-
 ## D.2. Unsupported Features [#](#UNSUPPORTED-FEATURES-SQL-STANDARD)
 
 The following features defined in SQL:2023 are not implemented in this release of PostgreSQL. In a few cases, equivalent functionality is available.
@@ -331,10 +323,3 @@ The following features defined in SQL:2023 are not implemented in this release o
 | X286       |       | XMLValidate: NO NAMESPACE with ELEMENT clause                                      |                                                                  |
 | X300       |       | XMLTable                                                                           | XPath 1.0 only                                                   |
 | X305       |       | XMLTable: initializing an XQuery variable                                          |                                                                  |
-
-***
-
-|                                                               |                                                       |                                                                                   |
-| :------------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------------------------------------: |
-| [Prev](features-sql-standard.html "D.1. Supported Features")  |   [Up](features.html "Appendix D. SQL Conformance")   |  [Next](xml-limits-conformance.html "D.3. XML Limits and Conformance to SQL/XML") |
-| D.1. Supported Features                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                        D.3. XML Limits and Conformance to SQL/XML |

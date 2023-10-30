@@ -1,11 +1,3 @@
-
-
-|              pg\_test\_timing             |                                                              |                                |                                                       |                                      |
-| :---------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -----------------------------------: |
-| [Prev](pgtestfsync.html "pg_test_fsync")  | [Up](reference-server.html "PostgreSQL Server Applications") | PostgreSQL Server Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgupgrade.html "pg_upgrade") |
-
-***
-
 ## pg\_test\_timing
 
 pg\_test\_timing — measure timing overhead
@@ -145,10 +137,3 @@ Timers used on older PC hardware include the 8254 Programmable Interval Timer (P
 ## See Also
 
 [EXPLAIN](sql-explain.html "EXPLAIN")
-
-***
-
-|                                           |                                                              |                                      |
-| :---------------------------------------- | :----------------------------------------------------------: | -----------------------------------: |
-| [Prev](pgtestfsync.html "pg_test_fsync")  | [Up](reference-server.html "PostgreSQL Server Applications") |  [Next](pgupgrade.html "pg_upgrade") |
-| pg\_test\_fsync                           |     [Home](index.html "PostgreSQL 17devel Documentation")    |                          pg\_upgrade |

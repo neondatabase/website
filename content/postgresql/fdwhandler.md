@@ -1,11 +1,3 @@
-
-
-|                  Chapter 59. Writing a Foreign Data Wrapper                 |                                            |                     |                                                       |                                                                    |
-| :-------------------------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](plhandler.html "Chapter 58. Writing a Procedural Language Handler")  | [Up](internals.html "Part VII. Internals") | Part VII. Internals | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](fdw-functions.html "59.1. Foreign Data Wrapper Functions") |
-
-***
-
 ## Chapter 59. Writing a Foreign Data Wrapper
 
 **Table of Contents**
@@ -39,10 +31,3 @@ The foreign data wrappers included in the standard distribution are good referen
 ### Note
 
 The SQL standard specifies an interface for writing foreign data wrappers. However, PostgreSQL does not implement that API, because the effort to accommodate it into PostgreSQL would be large, and the standard API hasn't gained wide adoption anyway.
-
-***
-
-|                                                                             |                                                       |                                                                    |
-| :-------------------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](plhandler.html "Chapter 58. Writing a Procedural Language Handler")  |       [Up](internals.html "Part VII. Internals")      |  [Next](fdw-functions.html "59.1. Foreign Data Wrapper Functions") |
-| Chapter 58. Writing a Procedural Language Handler                           | [Home](index.html "PostgreSQL 17devel Documentation") |                               59.1. Foreign Data Wrapper Functions |

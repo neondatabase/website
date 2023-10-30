@@ -1,11 +1,3 @@
-
-
-|                    53.8. `pg_authid`                    |                                                   |                             |                                                       |                                                               |
-| :-----------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](catalog-pg-attribute.html "53.7. pg_attribute")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-auth-members.html "53.9. pg_auth_members") |
-
-***
-
 ## 53.8. `pg_authid` [#](#CATALOG-PG-AUTHID)
 
 The catalog `pg_authid` contains information about database authorization identifiers (roles). A role subsumes the concepts of “users” and “groups”. A user is essentially just a role with the `rolcanlogin` flag set. Any role (with or without `rolcanlogin`) can have other roles as members; see [`pg_auth_members`](catalog-pg-auth-members.html "53.9. pg_auth_members").
@@ -47,10 +39,3 @@ SCRAM-SHA-256$<iteration count>:<salt>$<StoredKey>:<ServerKey>
 where *`salt`*, *`StoredKey`* and *`ServerKey`* are in Base64 encoded format. This format is the same as that specified by [RFC 5803](https://tools.ietf.org/html/rfc5803).
 
 A password that does not follow either of those formats is assumed to be unencrypted.
-
-***
-
-|                                                         |                                                       |                                                               |
-| :------------------------------------------------------ | :---------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](catalog-pg-attribute.html "53.7. pg_attribute")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-auth-members.html "53.9. pg_auth_members") |
-| 53.7. `pg_attribute`                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                       53.9. `pg_auth_members` |

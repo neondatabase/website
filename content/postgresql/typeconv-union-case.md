@@ -1,11 +1,3 @@
-
-
-|    10.5. `UNION`, `CASE`, and Related Constructs   |                                                   |                             |                                                       |                                                             |
-| :------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](typeconv-query.html "10.4. Value Storage")  | [Up](typeconv.html "Chapter 10. Type Conversion") | Chapter 10. Type Conversion | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](typeconv-select.html "10.6. SELECT Output Columns") |
-
-***
-
 ## 10.5. `UNION`, `CASE`, and Related Constructs [#](#TYPECONV-UNION-CASE)
 
 SQL `UNION` constructs must match up possibly dissimilar types to become a single result set. The resolution algorithm is applied separately to each output column of a union query. The `INTERSECT` and `EXCEPT` constructs resolve dissimilar types in the same way as `UNION`. Some other constructs, including `CASE`, `ARRAY`, `VALUES`, and the `GREATEST` and `LEAST` functions, use the identical algorithm to match up their component expressions and select a result data type.
@@ -93,16 +85,3 @@ The inner `UNION` is resolved as emitting type `text`, according to the rules gi
 `INTERSECT` and `EXCEPT` operations are likewise resolved pairwise. However, the other constructs described in this section consider all of their inputs in one resolution step.
 
 \
-
-***
-
-[\[12\] ](#id-1.5.9.10.9.3.1.1)Somewhat like the treatment of domain inputs for operators and functions, this behavior allows a domain type to be preserved through a `UNION` or similar construct, so long as the user is careful to ensure that all inputs are implicitly or explicitly of that exact type. Otherwise the domain's base type will be used.
-
-[\[13\] ](#id-1.5.9.10.9.6.1.1)For historical reasons, `CASE` treats its `ELSE` clause (if any) as the “first” input, with the `THEN` clauses(s) considered after that. In all other cases, “left to right” means the order in which the expressions appear in the query text.
-
-***
-
-|                                                    |                                                       |                                                             |
-| :------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](typeconv-query.html "10.4. Value Storage")  |   [Up](typeconv.html "Chapter 10. Type Conversion")   |  [Next](typeconv-select.html "10.6. SELECT Output Columns") |
-| 10.4. Value Storage                                | [Home](index.html "PostgreSQL 17devel Documentation") |                               10.6. `SELECT` Output Columns |

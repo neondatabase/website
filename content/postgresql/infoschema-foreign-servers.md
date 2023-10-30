@@ -1,11 +1,3 @@
-
-
-|                             37.29. `foreign_servers`                            |                                                                    |                                    |                                                       |                                                                               |
-| :-----------------------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](infoschema-foreign-server-options.html "37.28. foreign_server_options")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-foreign-table-options.html "37.30. foreign_table_options") |
-
-***
-
 ## 37.29. `foreign_servers` [#](#INFOSCHEMA-FOREIGN-SERVERS)
 
 The view `foreign_servers` contains all foreign servers defined in the current database. Only those foreign servers are shown that the current user has access to (by way of being the owner or having some privilege).
@@ -21,10 +13,3 @@ The view `foreign_servers` contains all foreign servers defined in the current d
 | `foreign_server_type` `character_data`Foreign server type information, if specified upon creation                                                                   |
 | `foreign_server_version` `character_data`Foreign server version information, if specified upon creation                                                             |
 | `authorization_identifier` `sql_identifier`Name of the owner of the foreign server                                                                                  |
-
-***
-
-|                                                                                 |                                                                    |                                                                               |
-| :------------------------------------------------------------------------------ | :----------------------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](infoschema-foreign-server-options.html "37.28. foreign_server_options")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-foreign-table-options.html "37.30. foreign_table_options") |
-| 37.28. `foreign_server_options`                                                 |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                                37.30. `foreign_table_options` |

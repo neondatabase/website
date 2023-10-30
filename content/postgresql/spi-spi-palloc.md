@@ -1,11 +1,3 @@
-
-
-|                     SPI\_palloc                    |                                                 |                         |                                                       |                                          |
-| :------------------------------------------------: | :---------------------------------------------- | :---------------------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](spi-memory.html "47.3. Memory Management")  | [Up](spi-memory.html "47.3. Memory Management") | 47.3. Memory Management | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-realloc.html "SPI_repalloc") |
-
-***
-
 ## SPI\_palloc
 
 SPI\_palloc — allocate memory in the upper executor context
@@ -32,10 +24,3 @@ This function can only be used while connected to SPI. Otherwise, it throws an e
 ## Return Value
 
 pointer to new storage space of the specified size
-
-***
-
-|                                                    |                                                       |                                          |
-| :------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------: |
-| [Prev](spi-memory.html "47.3. Memory Management")  |    [Up](spi-memory.html "47.3. Memory Management")    |  [Next](spi-realloc.html "SPI_repalloc") |
-| 47.3. Memory Management                            | [Home](index.html "PostgreSQL 17devel Documentation") |                            SPI\_repalloc |

@@ -1,11 +1,3 @@
-
-
-|                              F.27. pgcrypto — cryptographic functions                              |                                                                             |                                                        |                                                       |                                                                                   |
-| :------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------: |
-| [Prev](pgbuffercache.html "F.26. pg_buffercache — inspect PostgreSQL&#xA;    buffer cache state")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgfreespacemap.html "F.28. pg_freespacemap — examine the free space map") |
-
-***
-
 ## F.27. pgcrypto — cryptographic functions [#](#PGCRYPTO)
 
   * *   [F.27.1. General Hashing Functions](pgcrypto.html#PGCRYPTO-GENERAL-HASHING-FUNCS)
@@ -582,10 +574,3 @@ Marko Kreen `<markokr@gmail.com>`
 | DES crypt      | David Burren and others | FreeBSD libcrypt  |
 | MD5 crypt      | Poul-Henning Kamp       | FreeBSD libcrypt  |
 | Blowfish crypt | Solar Designer          | www\.openwall.com |
-
-***
-
-|                                                                                                    |                                                                             |                                                                                   |
-| :------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | --------------------------------------------------------------------------------: |
-| [Prev](pgbuffercache.html "F.26. pg_buffercache — inspect PostgreSQL&#xA;    buffer cache state")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](pgfreespacemap.html "F.28. pg_freespacemap — examine the free space map") |
-| F.26. pg\_buffercache — inspect PostgreSQL buffer cache state                                      |            [Home](index.html "PostgreSQL 17devel Documentation")            |                               F.28. pg\_freespacemap — examine the free space map |

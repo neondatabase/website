@@ -1,11 +1,3 @@
-
-
-|                      53.18. `pg_depend`                      |                                                   |                             |                                                       |                                                              |
-| :----------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](catalog-pg-default-acl.html "53.17. pg_default_acl")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-description.html "53.19. pg_description") |
-
-***
-
 ## 53.18. `pg_depend` [#](#CATALOG-PG-DEPEND)
 
 The catalog `pg_depend` records the dependency relationships between database objects. This information allows `DROP` commands to find which other objects must be dropped by `DROP CASCADE` or prevent dropping in the `DROP RESTRICT` case.
@@ -57,10 +49,3 @@ Other dependency flavors might be needed in future.
 Note that it's quite possible for two objects to be linked by more than one `pg_depend` entry. For example, a child partitioned index would have both a partition-type dependency on its associated partition table, and an auto dependency on each column of that table that it indexes. This sort of situation expresses the union of multiple dependency semantics. A dependent object can be dropped without `CASCADE` if any of its dependencies satisfies its condition for automatic dropping. Conversely, all the dependencies' restrictions about which objects must be dropped together must be satisfied.
 
 Most objects created during initdb are considered “pinned”, which means that the system itself depends on them. Therefore, they are never allowed to be dropped. Also, knowing that pinned objects will not be dropped, the dependency mechanism doesn't bother to make `pg_depend` entries showing dependencies on them. Thus, for example, a table column of type `numeric` notionally has a `NORMAL` dependency on the `numeric` data type, but no such entry actually appears in `pg_depend`.
-
-***
-
-|                                                              |                                                       |                                                              |
-| :----------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](catalog-pg-default-acl.html "53.17. pg_default_acl")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-description.html "53.19. pg_description") |
-| 53.17. `pg_default_acl`                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                      53.19. `pg_description` |

@@ -1,11 +1,3 @@
-
-
-|                         12.5. Parsers                         |                                                      |                              |                                                       |                                                            |
-| :-----------------------------------------------------------: | :--------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](textsearch-features.html "12.4. Additional Features")  | [Up](textsearch.html "Chapter 12. Full Text Search") | Chapter 12. Full Text Search | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](textsearch-dictionaries.html "12.6. Dictionaries") |
-
-***
-
 ## 12.5. Parsers [#](#TEXTSEARCH-PARSERS)
 
 Text search parsers are responsible for splitting raw document text into *tokens* and identifying each token's type, where the set of possible types is defined by the parser itself. Note that a parser does not modify the text at all — it simply identifies plausible word boundaries. Because of this limited scope, there is less need for application-specific custom parsers than there is for custom dictionaries. At present PostgreSQL provides just one built-in parser, which has been found to be useful for a wide range of applications.
@@ -75,10 +67,3 @@ SELECT alias, description, token FROM ts_debug('http://example.com/stuff/index.h
  host     | Host          | example.com
  url_path | URL path      | /stuff/index.html
 ```
-
-***
-
-|                                                               |                                                       |                                                            |
-| :------------------------------------------------------------ | :---------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](textsearch-features.html "12.4. Additional Features")  |  [Up](textsearch.html "Chapter 12. Full Text Search") |  [Next](textsearch-dictionaries.html "12.6. Dictionaries") |
-| 12.4. Additional Features                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                         12.6. Dictionaries |

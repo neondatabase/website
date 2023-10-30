@@ -1,11 +1,3 @@
-
-
-|                  68.4. Implementation                  |                                            |                          |                                                       |                                              |
-| :----------------------------------------------------: | :----------------------------------------- | :----------------------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](gist-extensibility.html "68.3. Extensibility")  | [Up](gist.html "Chapter 68. GiST Indexes") | Chapter 68. GiST Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](gist-examples.html "68.5. Examples") |
-
-***
-
 ## 68.4. Implementation [#](#GIST-IMPLEMENTATION)
 
 * [68.4.1. GiST Index Build Methods](gist-implementation.html#GIST-BUFFERING-BUILD)
@@ -21,10 +13,3 @@ The buffered method works by not inserting tuples directly into the index right 
 The buffered method needs to call the `penalty` function more often than the simple method does, which consumes some extra CPU resources. Also, the buffers need temporary disk space, up to the size of the resulting index. Buffering can also influence the quality of the resulting index, in both positive and negative directions. That influence depends on various factors, like the distribution of the input data and the operator class implementation.
 
 If sorting is not possible, then by default a GiST index build switches to the buffering method when the index size reaches [effective\_cache\_size](runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE). Buffering can be manually forced or prevented by the `buffering` parameter to the CREATE INDEX command. The default behavior is good for most cases, but turning buffering off might speed up the build somewhat if the input data is ordered.
-
-***
-
-|                                                        |                                                       |                                              |
-| :----------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](gist-extensibility.html "68.3. Extensibility")  |       [Up](gist.html "Chapter 68. GiST Indexes")      |  [Next](gist-examples.html "68.5. Examples") |
-| 68.3. Extensibility                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                               68.5. Examples |

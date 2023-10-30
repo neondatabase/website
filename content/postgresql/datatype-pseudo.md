@@ -1,11 +1,3 @@
-
-
-|                 8.21. Pseudo-Types                |                                             |                       |                                                       |                                                              |
-| :-----------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](datatype-pg-lsn.html "8.20. pg_lsn Type")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions.html "Chapter 9. Functions and Operators") |
-
-***
-
 ## 8.21. Pseudo-Types [#](#DATATYPE-PSEUDO)
 
 The PostgreSQL type system contains a number of special-purpose entries that are collectively called *pseudo-types*. A pseudo-type cannot be used as a column data type, but it can be used to declare a function's argument or result type. Each of the available pseudo-types is useful in situations where a function's behavior does not correspond to simply taking or returning a value of a specific SQL data type. [Table 8.27](datatype-pseudo.html#DATATYPE-PSEUDOTYPES-TABLE "Table 8.27. Pseudo-Types") lists the existing pseudo-types.
@@ -47,10 +39,3 @@ Functions coded in C (whether built-in or dynamically loaded) can be declared to
 Functions coded in procedural languages can use pseudo-types only as allowed by their implementation languages. At present most procedural languages forbid use of a pseudo-type as an argument type, and allow only `void` and `record` as a result type (plus `trigger` or `event_trigger` when the function is used as a trigger or event trigger). Some also support polymorphic functions using the polymorphic pseudo-types, which are shown above and discussed in detail in [Section 38.2.5](extend-type-system.html#EXTEND-TYPES-POLYMORPHIC "38.2.5. Polymorphic Types").
 
 The `internal` pseudo-type is used to declare functions that are meant only to be called internally by the database system, and not by direct invocation in an SQL query. If a function has at least one `internal`-type argument then it cannot be called from SQL. To preserve the type safety of this restriction it is important to follow this coding rule: do not create any function that is declared to return `internal` unless it has at least one `internal` argument.
-
-***
-
-|                                                   |                                                       |                                                              |
-| :------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](datatype-pg-lsn.html "8.20. pg_lsn Type")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](functions.html "Chapter 9. Functions and Operators") |
-| 8.20. `pg_lsn` Type                               | [Home](index.html "PostgreSQL 17devel Documentation") |                           Chapter 9. Functions and Operators |

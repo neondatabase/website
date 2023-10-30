@@ -1,11 +1,3 @@
-
-
-|                        psql                        |                                                              |                                |                                                       |                                         |
-| :------------------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | --------------------------------------: |
-| [Prev](app-pgverifybackup.html "pg_verifybackup")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-reindexdb.html "reindexdb") |
-
-***
-
 ## psql
 
 psql — PostgreSQL interactive terminal
@@ -1749,10 +1741,3 @@ testdb(> \crosstabview "A" "B" "AxB" ord
  1 | 101 | 102 | 103 | 104
 (4 rows)
 ```
-
-***
-
-|                                                    |                                                              |                                         |
-| :------------------------------------------------- | :----------------------------------------------------------: | --------------------------------------: |
-| [Prev](app-pgverifybackup.html "pg_verifybackup")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-reindexdb.html "reindexdb") |
-| pg\_verifybackup                                   |     [Home](index.html "PostgreSQL 17devel Documentation")    |                               reindexdb |

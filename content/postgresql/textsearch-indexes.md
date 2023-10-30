@@ -1,11 +1,3 @@
-
-
-|                  12.9. Preferred Index Types for Text Search                 |                                                      |                              |                                                       |                                                     |
-| :--------------------------------------------------------------------------: | :--------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](textsearch-debugging.html "12.8. Testing and Debugging Text Search")  | [Up](textsearch.html "Chapter 12. Full Text Search") | Chapter 12. Full Text Search | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](textsearch-psql.html "12.10. psql Support") |
-
-***
-
 ## 12.9. Preferred Index Types for Text Search [#](#TEXTSEARCH-INDEXES)
 
 There are two kinds of indexes that can be used to speed up full text searches: [GIN](gin.html "Chapter 70. GIN Indexes") and [GiST](gist.html "Chapter 68. GiST Indexes"). Note that indexes are not mandatory for full text searching, but in cases where a column is searched on a regular basis, an index is usually desirable.
@@ -31,10 +23,3 @@ Lossiness causes performance degradation due to unnecessary fetches of table rec
 Note that GIN index build time can often be improved by increasing [maintenance\_work\_mem](runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM), while GiST index build time is not sensitive to that parameter.
 
 Partitioning of big collections and the proper use of GIN and GiST indexes allows the implementation of very fast searches with online update. Partitioning can be done at the database level using table inheritance, or by distributing documents over servers and collecting external search results, e.g., via [Foreign Data](ddl-foreign-data.html "5.12. Foreign Data") access. The latter is possible because ranking functions use only local information.
-
-***
-
-|                                                                              |                                                       |                                                     |
-| :--------------------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](textsearch-debugging.html "12.8. Testing and Debugging Text Search")  |  [Up](textsearch.html "Chapter 12. Full Text Search") |  [Next](textsearch-psql.html "12.10. psql Support") |
-| 12.8. Testing and Debugging Text Search                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                 12.10. psql Support |

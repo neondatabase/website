@@ -1,11 +1,3 @@
-
-
-|        34.6. Retrieving Query Results Row-by-Row        |                                                  |                               |                                                       |                                                                  |
-| :-----------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](libpq-pipeline-mode.html "34.5. Pipeline Mode")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-cancel.html "34.7. Canceling Queries in Progress") |
-
-***
-
 ## 34.6. Retrieving Query Results Row-by-Row [#](#LIBPQ-SINGLE-ROW-MODE)
 
 Ordinarily, libpq collects an SQL command's entire result and returns it to the application as a single `PGresult`. This can be unworkable for commands that return a large number of rows. For such cases, applications can use [`PQsendQuery`](libpq-async.html#LIBPQ-PQSENDQUERY) and [`PQgetResult`](libpq-async.html#LIBPQ-PQGETRESULT) in *single-row mode*. In this mode, the result row(s) are returned to the application one at a time, as they are received from the server.
@@ -28,10 +20,3 @@ When using pipeline mode, single-row mode needs to be activated for each query i
 ### Caution
 
 While processing a query, the server may return some rows and then encounter an error, causing the query to be aborted. Ordinarily, libpq discards any such rows and reports only the error. But in single-row mode, those rows will have already been returned to the application. Hence, the application will see some `PGRES_SINGLE_TUPLE` `PGresult` objects followed by a `PGRES_FATAL_ERROR` object. For proper transactional behavior, the application must be designed to discard or undo whatever has been done with the previously-processed rows, if the query ultimately fails.
-
-***
-
-|                                                         |                                                       |                                                                  |
-| :------------------------------------------------------ | :---------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](libpq-pipeline-mode.html "34.5. Pipeline Mode")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-cancel.html "34.7. Canceling Queries in Progress") |
-| 34.5. Pipeline Mode                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                              34.7. Canceling Queries in Progress |

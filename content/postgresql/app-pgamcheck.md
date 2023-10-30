@@ -1,11 +1,3 @@
-
-
-|          pg\_amcheck          |                                                              |                                |                                                       |                                                |
-| :---------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](app-ecpg.html "ecpg")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pgbasebackup.html "pg_basebackup") |
-
-***
-
 ## pg\_amcheck
 
 pg\_amcheck — checks for corruption in one or more PostgreSQL databases
@@ -223,10 +215,3 @@ pg\_amcheck is designed to work with PostgreSQL 14.0 and later.
 ## See Also
 
 [amcheck](amcheck.html "F.2. amcheck — tools to verify table and index consistency")
-
-***
-
-|                               |                                                              |                                                |
-| :---------------------------- | :----------------------------------------------------------: | ---------------------------------------------: |
-| [Prev](app-ecpg.html "ecpg")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-pgbasebackup.html "pg_basebackup") |
-| ecpg                          |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                 pg\_basebackup |

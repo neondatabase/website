@@ -1,11 +1,3 @@
-
-
-|               53.2. `pg_aggregate`               |                                                   |                             |                                                       |                                           |
-| :----------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ----------------------------------------: |
-| [Prev](catalogs-overview.html "53.1. Overview")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-am.html "53.3. pg_am") |
-
-***
-
 ## 53.2. `pg_aggregate` [#](#CATALOG-PG-AGGREGATE)
 
 The catalog `pg_aggregate` stores information about aggregate functions. An aggregate function is a function that operates on a set of values (typically one column from each row that matches a query condition) and returns a single value computed from all these values. Typical aggregate functions are `sum`, `count`, and `max`. Each entry in `pg_aggregate` is an extension of an entry in [`pg_proc`](catalog-pg-proc.html "53.39. pg_proc"). The `pg_proc` entry carries the aggregate's name, input and output data types, and other information that is similar to ordinary functions.
@@ -40,10 +32,3 @@ The catalog `pg_aggregate` stores information about aggregate functions. An aggr
 \
 
 New aggregate functions are registered with the [`CREATE AGGREGATE`](sql-createaggregate.html "CREATE AGGREGATE") command. See [Section 38.12](xaggr.html "38.12. User-Defined Aggregates") for more information about writing aggregate functions and the meaning of the transition functions, etc.
-
-***
-
-|                                                  |                                                       |                                           |
-| :----------------------------------------------- | :---------------------------------------------------: | ----------------------------------------: |
-| [Prev](catalogs-overview.html "53.1. Overview")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-am.html "53.3. pg_am") |
-| 53.1. Overview                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                             53.3. `pg_am` |

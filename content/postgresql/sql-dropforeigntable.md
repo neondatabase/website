@@ -1,11 +1,3 @@
-
-
-|                          DROP FOREIGN TABLE                          |                                        |              |                                                       |                                                |
-| :------------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-dropforeigndatawrapper.html "DROP FOREIGN DATA WRAPPER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropfunction.html "DROP FUNCTION") |
-
-***
-
 ## DROP FOREIGN TABLE
 
 DROP FOREIGN TABLE — remove a foreign table
@@ -55,10 +47,3 @@ This command conforms to ISO/IEC 9075-9 (SQL/MED), except that the standard only
 ## See Also
 
 [ALTER FOREIGN TABLE](sql-alterforeigntable.html "ALTER FOREIGN TABLE"), [CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE")
-
-***
-
-|                                                                      |                                                       |                                                |
-| :------------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-dropforeigndatawrapper.html "DROP FOREIGN DATA WRAPPER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropfunction.html "DROP FUNCTION") |
-| DROP FOREIGN DATA WRAPPER                                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                  DROP FUNCTION |

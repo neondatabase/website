@@ -1,11 +1,3 @@
-
-
-|                    SPI\_execute\_with\_args                   |                                                      |                           |                                                       |                                             |
-| :-----------------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ------------------------------------------: |
-| [Prev](spi-spi-execute-extended.html "SPI_execute_extended")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-prepare.html "SPI_prepare") |
-
-***
-
 ## SPI\_execute\_with\_args
 
 SPI\_execute\_with\_args — execute a command with out-of-line parameters
@@ -65,10 +57,3 @@ Similar results can be achieved with `SPI_prepare` followed by `SPI_execute_plan
 The return value is the same as for `SPI_execute`.
 
 `SPI_processed` and `SPI_tuptable` are set as in `SPI_execute` if successful.
-
-***
-
-|                                                               |                                                       |                                             |
-| :------------------------------------------------------------ | :---------------------------------------------------: | ------------------------------------------: |
-| [Prev](spi-spi-execute-extended.html "SPI_execute_extended")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-prepare.html "SPI_prepare") |
-| SPI\_execute\_extended                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                SPI\_prepare |

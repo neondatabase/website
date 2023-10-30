@@ -1,11 +1,3 @@
-
-
-|                     Chapter 11. Indexes                     |                                            |                           |                                                       |                                                  |
-| :---------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](typeconv-select.html "10.6. SELECT Output Columns")  | [Up](sql.html "Part II. The SQL Language") | Part II. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](indexes-intro.html "11.1. Introduction") |
-
-***
-
 ## Chapter 11. Indexes
 
 **Table of Contents**
@@ -34,10 +26,3 @@
   * [11.12. Examining Index Usage](indexes-examine.html)
 
 Indexes are a common way to enhance database performance. An index allows the database server to find and retrieve specific rows much faster than it could do without an index. But indexes also add overhead to the database system as a whole, so they should be used sensibly.
-
-***
-
-|                                                             |                                                       |                                                  |
-| :---------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](typeconv-select.html "10.6. SELECT Output Columns")  |       [Up](sql.html "Part II. The SQL Language")      |  [Next](indexes-intro.html "11.1. Introduction") |
-| 10.6. `SELECT` Output Columns                               | [Home](index.html "PostgreSQL 17devel Documentation") |                               11.1. Introduction |

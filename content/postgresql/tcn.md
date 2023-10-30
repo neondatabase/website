@@ -1,11 +1,3 @@
-
-
-|         F.43. tcn — a trigger function to notify listeners of changes to table content         |                                                                             |                                                        |                                                       |                                                                                                            |
-| :--------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------------------------------: |
-| [Prev](tablefunc.html "F.42. tablefunc — functions that return tables (crosstab and others)")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](test-decoding.html "F.44. test_decoding — SQL-based test/example module for WAL logical decoding") |
-
-***
-
 ## F.43. tcn — a trigger function to notify listeners of changes to table content [#](#TCN)
 
 The `tcn` module provides a trigger function that notifies listeners of changes to any table on which it is attached. It must be used as an `AFTER` trigger `FOR EACH ROW`.
@@ -49,10 +41,3 @@ test=# delete from tcndata where a = 1 and b = date '2012-12-22';
 DELETE 1
 Asynchronous notification "tcn" with payload ""tcndata",D,"a"='1',"b"='2012-12-22'" received from server process with PID 22770.
 ```
-
-***
-
-|                                                                                                |                                                                             |                                                                                                            |
-| :--------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ---------------------------------------------------------------------------------------------------------: |
-| [Prev](tablefunc.html "F.42. tablefunc — functions that return tables (crosstab and others)")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](test-decoding.html "F.44. test_decoding — SQL-based test/example module for WAL logical decoding") |
-| F.42. tablefunc — functions that return tables (`crosstab` and others)                         |            [Home](index.html "PostgreSQL 17devel Documentation")            |                              F.44. test\_decoding — SQL-based test/example module for WAL logical decoding |

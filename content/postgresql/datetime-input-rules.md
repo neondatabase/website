@@ -1,11 +1,3 @@
-
-
-|               B.1. Date/Time Input Interpretation               |                                                              |                               |                                                       |                                                                                         |
-| :-------------------------------------------------------------: | :----------------------------------------------------------- | :---------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](datetime-appendix.html "Appendix B. Date/Time Support")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") | Appendix B. Date/Time Support | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datetime-invalid-input.html "B.2. Handling of Invalid or Ambiguous Timestamps") |
-
-***
-
 ## B.1. Date/Time Input Interpretation [#](#DATETIME-INPUT-RULES)
 
 Date/time input strings are decoded using the following procedure.
@@ -38,10 +30,3 @@ Date/time input strings are decoded using the following procedure.
 ### Tip
 
     Gregorian years AD 1–99 can be entered by using 4 digits with leading zeros (e.g., `0099` is AD 99).
-
-***
-
-|                                                                 |                                                              |                                                                                         |
-| :-------------------------------------------------------------- | :----------------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](datetime-appendix.html "Appendix B. Date/Time Support")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") |  [Next](datetime-invalid-input.html "B.2. Handling of Invalid or Ambiguous Timestamps") |
-| Appendix B. Date/Time Support                                   |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                        B.2. Handling of Invalid or Ambiguous Timestamps |

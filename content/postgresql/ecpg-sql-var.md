@@ -1,11 +1,3 @@
-
-
-|                 VAR                |                                                             |                              |                                                       |                                            |
-| :--------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](ecpg-sql-type.html "TYPE")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-whenever.html "WHENEVER") |
-
-***
-
 ## VAR
 
 VAR — define a variable
@@ -44,10 +36,3 @@ EXEC SQL VAR a IS int;
 ## Compatibility
 
 The `VAR` command is a PostgreSQL extension.
-
-***
-
-|                                    |                                                             |                                            |
-| :--------------------------------- | :---------------------------------------------------------: | -----------------------------------------: |
-| [Prev](ecpg-sql-type.html "TYPE")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-whenever.html "WHENEVER") |
-| TYPE                               |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                   WHENEVER |

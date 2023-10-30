@@ -1,11 +1,3 @@
-
-
-|                   51.2. Archive Module Callbacks                   |                                                          |                             |                                                       |                                              |
-| :----------------------------------------------------------------: | :------------------------------------------------------- | :-------------------------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](archive-module-init.html "51.1. Initialization Functions")  | [Up](archive-modules.html "Chapter 51. Archive Modules") | Chapter 51. Archive Modules | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](reference.html "Part VI. Reference") |
-
-***
-
 ## 51.2. Archive Module Callbacks [#](#ARCHIVE-MODULE-CALLBACKS)
 
   * *   [51.2.1. Startup Callback](archive-module-callbacks.html#ARCHIVE-MODULE-STARTUP)
@@ -61,10 +53,3 @@ The `shutdown_cb` callback is called when the archiver process exits (e.g., afte
 
 typedef void (*ArchiveShutdownCB) (ArchiveModuleState *state);
 ```
-
-***
-
-|                                                                    |                                                          |                                              |
-| :----------------------------------------------------------------- | :------------------------------------------------------: | -------------------------------------------: |
-| [Prev](archive-module-init.html "51.1. Initialization Functions")  | [Up](archive-modules.html "Chapter 51. Archive Modules") |  [Next](reference.html "Part VI. Reference") |
-| 51.1. Initialization Functions                                     |   [Home](index.html "PostgreSQL 17devel Documentation")  |                           Part VI. Reference |

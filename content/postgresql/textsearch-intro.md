@@ -1,11 +1,3 @@
-
-
-|                    12.1. Introduction                   |                                                      |                              |                                                       |                                                            |
-| :-----------------------------------------------------: | :--------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](textsearch.html "Chapter 12. Full Text Search")  | [Up](textsearch.html "Chapter 12. Full Text Search") | Chapter 12. Full Text Search | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](textsearch-tables.html "12.2. Tables and Indexes") |
-
-***
-
 ## 12.1. Introduction [#](#TEXTSEARCH-INTRO)
 
   * *   [12.1.1. What Is a Document?](textsearch-intro.html#TEXTSEARCH-DOCUMENT)
@@ -166,10 +158,3 @@ To make it easier to build custom text search configurations, a configuration is
 * *Text search configurations* select a parser and a set of dictionaries to use to normalize the tokens produced by the parser.
 
 Text search parsers and templates are built from low-level C functions; therefore it requires C programming ability to develop new ones, and superuser privileges to install one into a database. (There are examples of add-on parsers and templates in the `contrib/` area of the PostgreSQL distribution.) Since dictionaries and configurations just parameterize and connect together some underlying parsers and templates, no special privilege is needed to create a new dictionary or configuration. Examples of creating custom dictionaries and configurations appear later in this chapter.
-
-***
-
-|                                                         |                                                       |                                                            |
-| :------------------------------------------------------ | :---------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](textsearch.html "Chapter 12. Full Text Search")  |  [Up](textsearch.html "Chapter 12. Full Text Search") |  [Next](textsearch-tables.html "12.2. Tables and Indexes") |
-| Chapter 12. Full Text Search                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                   12.2. Tables and Indexes |

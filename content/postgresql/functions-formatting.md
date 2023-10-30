@@ -1,11 +1,3 @@
-
-
-|            9.8. Data Type Formatting Functions           |                                                           |                                    |                                                       |                                                                           |
-| :------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------: |
-| [Prev](functions-matching.html "9.7. Pattern Matching")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-datetime.html "9.9. Date/Time Functions and Operators") |
-
-***
-
 ## 9.8. Data Type Formatting Functions [#](#FUNCTIONS-FORMATTING)
 
 The PostgreSQL formatting functions provide a powerful set of tools for converting various data types (date/time, integer, floating point, numeric) to formatted strings and for converting from formatted strings to specific data types. [Table 9.26](functions-formatting.html#FUNCTIONS-FORMATTING-TABLE "Table 9.26. Formatting Functions") lists them. These functions all follow a common calling convention: the first argument is the value to be formatted and the second argument is a template that defines the output or input format.
@@ -258,10 +250,3 @@ Certain modifiers can be applied to any template pattern to alter its behavior. 
 | `to_char(12.4, '99V999')`                               | `' 12400'`                  |
 | `to_char(12.45, '99V9')`                                | `' 125'`                    |
 | `to_char(0.0004859, '9.99EEEE')`                        | `' 4.86e-04'`               |
-
-***
-
-|                                                          |                                                           |                                                                           |
-| :------------------------------------------------------- | :-------------------------------------------------------: | ------------------------------------------------------------------------: |
-| [Prev](functions-matching.html "9.7. Pattern Matching")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-datetime.html "9.9. Date/Time Functions and Operators") |
-| 9.7. Pattern Matching                                    |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                    9.9. Date/Time Functions and Operators |

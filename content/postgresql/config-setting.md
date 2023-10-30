@@ -1,11 +1,3 @@
-
-
-|                     20.1. Setting Parameters                    |                                                              |                                  |                                                       |                                                                    |
-| :-------------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](runtime-config.html "Chapter 20. Server Configuration")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-file-locations.html "20.2. File Locations") |
-
-***
-
 ## 20.1. Setting Parameters [#](#CONFIG-SETTING)
 
   * *   [20.1.1. Parameter Names and Values](config-setting.html#CONFIG-SETTING-NAMES-VALUES)
@@ -175,10 +167,3 @@ You might instead use this approach to naming the files descriptively:
 ```
 
 This sort of arrangement gives a unique name for each configuration file variation. This can help eliminate ambiguity when several servers have their configurations all stored in one place, such as in a version control repository. (Storing database configuration files under version control is another good practice to consider.)
-
-***
-
-|                                                                 |                                                              |                                                                    |
-| :-------------------------------------------------------------- | :----------------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](runtime-config.html "Chapter 20. Server Configuration")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-file-locations.html "20.2. File Locations") |
-| Chapter 20. Server Configuration                                |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                               20.2. File Locations |

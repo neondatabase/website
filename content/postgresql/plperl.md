@@ -1,11 +1,3 @@
-
-
-|       Chapter 45. PL/Perl — Perl Procedural Language       |                                                            |                            |                                                       |                                                                    |
-| :--------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](pltcl-procnames.html "44.12. Tcl Procedure Names")  | [Up](server-programming.html "Part V. Server Programming") | Part V. Server Programming | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plperl-funcs.html "45.1. PL/Perl Functions and Arguments") |
-
-***
-
 ## Chapter 45. PL/Perl — Perl Procedural Language
 
 **Table of Contents**
@@ -43,10 +35,3 @@ If a language is installed into `template1`, all subsequently created databases 
 ### Note
 
 Users of source packages must specially enable the build of PL/Perl during the installation process. (Refer to [Chapter 17](installation.html "Chapter 17. Installation from Source Code") for more information.) Users of binary packages might find PL/Perl in a separate subpackage.
-
-***
-
-|                                                            |                                                            |                                                                    |
-| :--------------------------------------------------------- | :--------------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](pltcl-procnames.html "44.12. Tcl Procedure Names")  | [Up](server-programming.html "Part V. Server Programming") |  [Next](plperl-funcs.html "45.1. PL/Perl Functions and Arguments") |
-| 44.12. Tcl Procedure Names                                 |    [Home](index.html "PostgreSQL 17devel Documentation")   |                              45.1. PL/Perl Functions and Arguments |

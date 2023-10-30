@@ -1,11 +1,3 @@
-
-
-|                34.3. Command Execution Functions               |                                                  |                               |                                                       |                                                                   |
-| :------------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](libpq-status.html "34.2. Connection Status Functions")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-async.html "34.4. Asynchronous Command Processing") |
-
-***
-
 ## 34.3. Command Execution Functions [#](#LIBPQ-EXEC)
 
   * *   [34.3.1. Main Functions](libpq-exec.html#LIBPQ-EXEC-MAIN)
@@ -799,10 +791,3 @@ These functions are used to extract other information from `PGresult` objects.
     The *`from`* parameter points to a string such as might be returned by [`PQgetvalue`](libpq-exec.html#LIBPQ-PQGETVALUE) when applied to a `bytea` column. [`PQunescapeBytea`](libpq-exec.html#LIBPQ-PQUNESCAPEBYTEA) converts this string representation into its binary representation. It returns a pointer to a buffer allocated with `malloc()`, or `NULL` on error, and puts the size of the buffer in *`to_length`*. The result must be freed using [`PQfreemem`](libpq-misc.html#LIBPQ-PQFREEMEM) when it is no longer needed.
 
     This conversion is not exactly the inverse of [`PQescapeBytea`](libpq-exec.html#LIBPQ-PQESCAPEBYTEA), because the string is not expected to be “escaped” when received from [`PQgetvalue`](libpq-exec.html#LIBPQ-PQGETVALUE). In particular this means there is no need for string quoting considerations, and so no need for a `PGconn` parameter.
-
-***
-
-|                                                                |                                                       |                                                                   |
-| :------------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](libpq-status.html "34.2. Connection Status Functions")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-async.html "34.4. Asynchronous Command Processing") |
-| 34.2. Connection Status Functions                              | [Home](index.html "PostgreSQL 17devel Documentation") |                             34.4. Asynchronous Command Processing |

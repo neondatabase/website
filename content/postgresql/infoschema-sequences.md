@@ -1,11 +1,3 @@
-
-
-|                  37.47. `sequences`                 |                                                                    |                                    |                                                       |                                                             |
-| :-------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](infoschema-schemata.html "37.46. schemata")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-sql-features.html "37.48. sql_features") |
-
-***
-
 ## 37.47. `sequences` [#](#INFOSCHEMA-SEQUENCES)
 
 The view `sequences` contains all sequences defined in the current database. Only those sequences are shown that the current user has access to (by way of being the owner or having some privilege).
@@ -30,10 +22,3 @@ The view `sequences` contains all sequences defined in the current database. Onl
 \
 
 Note that in accordance with the SQL standard, the start, minimum, maximum, and increment values are returned as character strings.
-
-***
-
-|                                                     |                                                                    |                                                             |
-| :-------------------------------------------------- | :----------------------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](infoschema-schemata.html "37.46. schemata")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-sql-features.html "37.48. sql_features") |
-| 37.46. `schemata`                                   |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                       37.48. `sql_features` |

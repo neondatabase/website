@@ -1,11 +1,3 @@
-
-
-|           DROP TEXT SEARCH CONFIGURATION           |                                        |              |                                                       |                                                                  |
-| :------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](sql-droptablespace.html "DROP TABLESPACE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droptsdictionary.html "DROP TEXT SEARCH DICTIONARY") |
-
-***
-
 ## DROP TEXT SEARCH CONFIGURATION
 
 DROP TEXT SEARCH CONFIGURATION — remove a text search configuration
@@ -57,10 +49,3 @@ There is no `DROP TEXT SEARCH CONFIGURATION` statement in the SQL standard.
 ## See Also
 
 [ALTER TEXT SEARCH CONFIGURATION](sql-altertsconfig.html "ALTER TEXT SEARCH CONFIGURATION"), [CREATE TEXT SEARCH CONFIGURATION](sql-createtsconfig.html "CREATE TEXT SEARCH CONFIGURATION")
-
-***
-
-|                                                    |                                                       |                                                                  |
-| :------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](sql-droptablespace.html "DROP TABLESPACE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droptsdictionary.html "DROP TEXT SEARCH DICTIONARY") |
-| DROP TABLESPACE                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                      DROP TEXT SEARCH DICTIONARY |

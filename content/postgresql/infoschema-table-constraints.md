@@ -1,11 +1,3 @@
-
-
-|                37.52. `table_constraints`               |                                                                    |                                    |                                                       |                                                                     |
-| :-----------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](infoschema-sql-sizing.html "37.51. sql_sizing")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-table-privileges.html "37.53. table_privileges") |
-
-***
-
 ## 37.52. `table_constraints` [#](#INFOSCHEMA-TABLE-CONSTRAINTS)
 
 The view `table_constraints` contains all constraints belonging to tables that the current user owns or has some privilege other than `SELECT` on.
@@ -25,10 +17,3 @@ The view `table_constraints` contains all constraints belonging to tables that t
 | `initially_deferred` `yes_or_no``YES` if the constraint is deferrable and initially deferred, `NO` if not                                                                                                              |
 | `enforced` `yes_or_no`Applies to a feature not available in PostgreSQL (currently always `YES`)                                                                                                                        |
 | `nulls_distinct` `yes_or_no`If the constraint is a unique constraint, then `YES` if the constraint treats nulls as distinct or `NO` if it treats nulls as not distinct, otherwise null for other types of constraints. |
-
-***
-
-|                                                         |                                                                    |                                                                     |
-| :------------------------------------------------------ | :----------------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](infoschema-sql-sizing.html "37.51. sql_sizing")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-table-privileges.html "37.53. table_privileges") |
-| 37.51. `sql_sizing`                                     |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                           37.53. `table_privileges` |

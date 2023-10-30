@@ -1,11 +1,3 @@
-
-
-|                       CREATE TEXT SEARCH PARSER                      |                                        |              |                                                       |                                                                  |
-| :------------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](sql-createtsdictionary.html "CREATE TEXT SEARCH DICTIONARY")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createtstemplate.html "CREATE TEXT SEARCH TEMPLATE") |
-
-***
-
 ## CREATE TEXT SEARCH PARSER
 
 CREATE TEXT SEARCH PARSER — define a new text search parser
@@ -70,10 +62,3 @@ There is no `CREATE TEXT SEARCH PARSER` statement in the SQL standard.
 ## See Also
 
 [ALTER TEXT SEARCH PARSER](sql-altertsparser.html "ALTER TEXT SEARCH PARSER"), [DROP TEXT SEARCH PARSER](sql-droptsparser.html "DROP TEXT SEARCH PARSER")
-
-***
-
-|                                                                      |                                                       |                                                                  |
-| :------------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](sql-createtsdictionary.html "CREATE TEXT SEARCH DICTIONARY")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createtstemplate.html "CREATE TEXT SEARCH TEMPLATE") |
-| CREATE TEXT SEARCH DICTIONARY                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                      CREATE TEXT SEARCH TEMPLATE |

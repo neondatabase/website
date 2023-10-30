@@ -1,11 +1,3 @@
-
-
-|              dropuser             |                                                              |                                |                                                       |                               |
-| :-------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ----------------------------: |
-| [Prev](app-dropdb.html "dropdb")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-ecpg.html "ecpg") |
-
-***
-
 ## dropuser
 
 dropuser — remove a PostgreSQL user account
@@ -110,10 +102,3 @@ DROP ROLE joe;
 ## See Also
 
 [createuser](app-createuser.html "createuser"), [DROP ROLE](sql-droprole.html "DROP ROLE")
-
-***
-
-|                                   |                                                              |                               |
-| :-------------------------------- | :----------------------------------------------------------: | ----------------------------: |
-| [Prev](app-dropdb.html "dropdb")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-ecpg.html "ecpg") |
-| dropdb                            |     [Home](index.html "PostgreSQL 17devel Documentation")    |                          ecpg |

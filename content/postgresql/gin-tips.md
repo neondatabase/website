@@ -1,11 +1,3 @@
-
-
-|                70.5. GIN Tips and Tricks                |                                          |                         |                                                       |                                             |
-| :-----------------------------------------------------: | :--------------------------------------- | :---------------------: | ----------------------------------------------------: | ------------------------------------------: |
-| [Prev](gin-implementation.html "70.4. Implementation")  | [Up](gin.html "Chapter 70. GIN Indexes") | Chapter 70. GIN Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](gin-limit.html "70.6. Limitations") |
-
-***
-
 ## 70.5. GIN Tips and Tricks [#](#GIN-TIPS)
 
 * Create vs. insert
@@ -33,10 +25,3 @@
     “Soft” means that the actual number of returned results could differ somewhat from the specified limit, depending on the query and the quality of the system's random number generator.
 
     From experience, values in the thousands (e.g., 5000 — 20000) work well.
-
-***
-
-|                                                         |                                                       |                                             |
-| :------------------------------------------------------ | :---------------------------------------------------: | ------------------------------------------: |
-| [Prev](gin-implementation.html "70.4. Implementation")  |        [Up](gin.html "Chapter 70. GIN Indexes")       |  [Next](gin-limit.html "70.6. Limitations") |
-| 70.4. Implementation                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                           70.6. Limitations |

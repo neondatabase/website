@@ -1,11 +1,3 @@
-
-
-|                 53.28. `pg_init_privs`                 |                                                   |                             |                                                       |                                                        |
-| :----------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](catalog-pg-inherits.html "53.27. pg_inherits")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-language.html "53.29. pg_language") |
-
-***
-
 ## 53.28. `pg_init_privs` [#](#CATALOG-PG-INIT-PRIVS)
 
 The catalog `pg_init_privs` records information about the initial privileges of objects in the system. There is one entry for each object in the database which has a non-default (non-NULL) initial set of privileges.
@@ -23,10 +15,3 @@ Objects which have initial privileges set by initdb will have entries where `pri
 | `objsubid` `int4`For a table column, this is the column number (the `objoid` and `classoid` refer to the table itself). For all other object types, this column is zero. |
 | `privtype` `char`A code defining the type of initial privilege of this object; see text                                                                                  |
 | `initprivs` `aclitem[]`The initial access privileges; see [Section 5.7](ddl-priv.html "5.7. Privileges") for details                                                     |
-
-***
-
-|                                                        |                                                       |                                                        |
-| :----------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](catalog-pg-inherits.html "53.27. pg_inherits")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-language.html "53.29. pg_language") |
-| 53.27. `pg_inherits`                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                   53.29. `pg_language` |

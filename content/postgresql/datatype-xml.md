@@ -1,11 +1,3 @@
-
-
-|                 8.13. XML Type                |                                             |                       |                                                       |                                                |
-| :-------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](datatype-uuid.html "8.12. UUID Type")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-json.html "8.14. JSON Types") |
-
-***
-
 ## 8.13. XML Type [#](#DATATYPE-XML)
 
   * *   [8.13.1. Creating XML Values](datatype-xml.html#DATATYPE-XML-CREATING)
@@ -93,10 +85,3 @@ The `xml` data type is unusual in that it does not provide any comparison operat
 Since there are no comparison operators for the `xml` data type, it is not possible to create an index directly on a column of this type. If speedy searches in XML data are desired, possible workarounds include casting the expression to a character string type and indexing that, or indexing an XPath expression. Of course, the actual query would have to be adjusted to search by the indexed expression.
 
 The text-search functionality in PostgreSQL can also be used to speed up full-document searches of XML data. The necessary preprocessing support is, however, not yet available in the PostgreSQL distribution.
-
-***
-
-|                                               |                                                       |                                                |
-| :-------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](datatype-uuid.html "8.12. UUID Type")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](datatype-json.html "8.14. JSON Types") |
-| 8.12. UUID Type                               | [Home](index.html "PostgreSQL 17devel Documentation") |                               8.14. JSON Types |

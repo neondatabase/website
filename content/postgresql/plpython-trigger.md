@@ -1,11 +1,3 @@
-
-
-|                 46.5. Trigger Functions                 |                                                                          |                                                    |                                                       |                                                         |
-| :-----------------------------------------------------: | :----------------------------------------------------------------------- | :------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](plpython-do.html "46.4. Anonymous Code Blocks")  | [Up](plpython.html "Chapter 46. PL/Python — Python Procedural Language") | Chapter 46. PL/Python — Python Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpython-database.html "46.6. Database Access") |
-
-***
-
 ## 46.5. Trigger Functions [#](#PLPYTHON-TRIGGER)
 
 When a function is used as a trigger, the dictionary `TD` contains trigger-related values:
@@ -47,10 +39,3 @@ When a function is used as a trigger, the dictionary `TD` contains trigger-relat
     If the `CREATE TRIGGER` command included arguments, they are available in `TD["args"][0]` to `TD["args"][n-1]`.
 
 If `TD["when"]` is `BEFORE` or `INSTEAD OF` and `TD["level"]` is `ROW`, you can return `None` or `"OK"` from the Python function to indicate the row is unmodified, `"SKIP"` to abort the event, or if `TD["event"]` is `INSERT` or `UPDATE` you can return `"MODIFY"` to indicate you've modified the new row. Otherwise the return value is ignored.
-
-***
-
-|                                                         |                                                                          |                                                         |
-| :------------------------------------------------------ | :----------------------------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](plpython-do.html "46.4. Anonymous Code Blocks")  | [Up](plpython.html "Chapter 46. PL/Python — Python Procedural Language") |  [Next](plpython-database.html "46.6. Database Access") |
-| 46.4. Anonymous Code Blocks                             |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                   46.6. Database Access |

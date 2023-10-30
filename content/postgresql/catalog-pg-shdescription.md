@@ -1,11 +1,3 @@
-
-
-|                53.49. `pg_shdescription`               |                                                   |                             |                                                       |                                                            |
-| :----------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](catalog-pg-shdepend.html "53.48. pg_shdepend")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-shseclabel.html "53.50. pg_shseclabel") |
-
-***
-
 ## 53.49. `pg_shdescription` [#](#CATALOG-PG-SHDESCRIPTION)
 
 The catalog `pg_shdescription` stores optional descriptions (comments) for shared database objects. Descriptions can be manipulated with the [`COMMENT`](sql-comment.html "COMMENT") command and viewed with psql's `\d` commands.
@@ -21,10 +13,3 @@ Unlike most system catalogs, `pg_shdescription` is shared across all databases o
 | `objoid` `oid` (references any OID column)The OID of the object this description pertains to                                                  |
 | `classoid` `oid` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`oid`)The OID of the system catalog this object appears in |
 | `description` `text`Arbitrary text that serves as the description of this object                                                              |
-
-***
-
-|                                                        |                                                       |                                                            |
-| :----------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](catalog-pg-shdepend.html "53.48. pg_shdepend")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-shseclabel.html "53.50. pg_shseclabel") |
-| 53.48. `pg_shdepend`                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                     53.50. `pg_shseclabel` |

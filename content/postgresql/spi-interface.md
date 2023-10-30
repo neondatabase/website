@@ -1,11 +1,3 @@
-
-
-|                   47.1. Interface Functions                  |                                                           |                                          |                                                       |                                             |
-| :----------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------------: | ----------------------------------------------------: | ------------------------------------------: |
-| [Prev](spi.html "Chapter 47. Server Programming Interface")  | [Up](spi.html "Chapter 47. Server Programming Interface") | Chapter 47. Server Programming Interface | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-connect.html "SPI_connect") |
-
-***
-
 ## 47.1. Interface Functions [#](#SPI-INTERFACE)
 
   * *   [SPI\_connect](spi-spi-connect.html) — connect a C function to the SPI manager
@@ -40,10 +32,3 @@
   * [SPI\_register\_relation](spi-spi-register-relation.html) — make an ephemeral named relation available by name in SPI queries
   * [SPI\_unregister\_relation](spi-spi-unregister-relation.html) — remove an ephemeral named relation from the registry
   * [SPI\_register\_trigger\_data](spi-spi-register-trigger-data.html) — make ephemeral trigger data available in SPI queries
-
-***
-
-|                                                              |                                                           |                                             |
-| :----------------------------------------------------------- | :-------------------------------------------------------: | ------------------------------------------: |
-| [Prev](spi.html "Chapter 47. Server Programming Interface")  | [Up](spi.html "Chapter 47. Server Programming Interface") |  [Next](spi-spi-connect.html "SPI_connect") |
-| Chapter 47. Server Programming Interface                     |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                SPI\_connect |

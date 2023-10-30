@@ -1,11 +1,3 @@
-
-
-|           54.15. `pg_prepared_statements`           |                                             |                          |                                                       |                                                                 |
-| :-------------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](view-pg-policies.html "54.14. pg_policies")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-prepared-xacts.html "54.16. pg_prepared_xacts") |
-
-***
-
 ## 54.15. `pg_prepared_statements` [#](#VIEW-PG-PREPARED-STATEMENTS)
 
 The `pg_prepared_statements` view displays all the prepared statements that are available in the current session. See [PREPARE](sql-prepare.html "PREPARE") for more information about prepared statements.
@@ -28,10 +20,3 @@ The `pg_prepared_statements` view displays all the prepared statements that are 
 \
 
 The `pg_prepared_statements` view is read-only.
-
-***
-
-|                                                     |                                                       |                                                                 |
-| :-------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](view-pg-policies.html "54.14. pg_policies")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-prepared-xacts.html "54.16. pg_prepared_xacts") |
-| 54.14. `pg_policies`                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                      54.16. `pg_prepared_xacts` |

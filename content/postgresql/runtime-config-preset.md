@@ -1,11 +1,3 @@
-
-
-|                        20.15. Preset Options                        |                                                              |                                  |                                                       |                                                                 |
-| :-----------------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](runtime-config-error-handling.html "20.14. Error Handling")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-custom.html "20.16. Customized Options") |
-
-***
-
 ## 20.15. Preset Options [#](#RUNTIME-CONFIG-PRESET)
 
 The following “parameters” are read-only. As such, they have been excluded from the sample `postgresql.conf` file. These options report various aspects of PostgreSQL behavior that might be of interest to certain applications, particularly administrative front-ends. Most of them are determined when PostgreSQL is compiled or when it is installed.
@@ -87,10 +79,3 @@ The following “parameters” are read-only. As such, they have been excluded f
 * `wal_segment_size` (`integer`) [#](#GUC-WAL-SEGMENT-SIZE)
 
     Reports the size of write ahead log segments. The default value is 16MB. See [Section 30.5](wal-configuration.html "30.5. WAL Configuration") for more information.
-
-***
-
-|                                                                     |                                                              |                                                                 |
-| :------------------------------------------------------------------ | :----------------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](runtime-config-error-handling.html "20.14. Error Handling")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-custom.html "20.16. Customized Options") |
-| 20.14. Error Handling                                               |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                       20.16. Customized Options |

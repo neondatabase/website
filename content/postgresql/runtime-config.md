@@ -1,11 +1,3 @@
-
-
-|                        Chapter 20. Server Configuration                        |                                                    |                                 |                                                       |                                                         |
-| :----------------------------------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](event-log-registration.html "19.12. Registering Event Log on Windows")  | [Up](admin.html "Part III. Server Administration") | Part III. Server Administration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](config-setting.html "20.1. Setting Parameters") |
-
-***
-
 ## Chapter 20. Server Configuration
 
 **Table of Contents**
@@ -99,10 +91,3 @@
   * [20.18. Short Options](runtime-config-short.html)
 
 There are many configuration parameters that affect the behavior of the database system. In the first section of this chapter we describe how to interact with configuration parameters. The subsequent sections discuss each parameter in detail.
-
-***
-
-|                                                                                |                                                       |                                                         |
-| :----------------------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](event-log-registration.html "19.12. Registering Event Log on Windows")  |   [Up](admin.html "Part III. Server Administration")  |  [Next](config-setting.html "20.1. Setting Parameters") |
-| 19.12. Registering Event Log on Windows                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                20.1. Setting Parameters |

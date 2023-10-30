@@ -1,11 +1,3 @@
-
-
-|                12.6. Dictionaries                |                                                      |                              |                                                       |                                                                      |
-| :----------------------------------------------: | :--------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](textsearch-parsers.html "12.5. Parsers")  | [Up](textsearch.html "Chapter 12. Full Text Search") | Chapter 12. Full Text Search | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](textsearch-configuration.html "12.7. Configuration Example") |
-
-***
-
 ## 12.6. Dictionaries [#](#TEXTSEARCH-DICTIONARIES)
 
   * *   [12.6.1. Stop Words](textsearch-dictionaries.html#TEXTSEARCH-STOPWORDS)
@@ -487,10 +479,3 @@ CREATE TEXT SEARCH DICTIONARY english_stem (
 The stopword file format is the same as already explained.
 
 A Snowball dictionary recognizes everything, whether or not it is able to simplify the word, so it should be placed at the end of the dictionary list. It is useless to have it before any other dictionary because a token will never pass through it to the next dictionary.
-
-***
-
-|                                                  |                                                       |                                                                      |
-| :----------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](textsearch-parsers.html "12.5. Parsers")  |  [Up](textsearch.html "Chapter 12. Full Text Search") |  [Next](textsearch-configuration.html "12.7. Configuration Example") |
-| 12.5. Parsers                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                          12.7. Configuration Example |

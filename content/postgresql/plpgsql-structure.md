@@ -1,11 +1,3 @@
-
-
-|           43.2. Structure of PL/pgSQL           |                                                                     |                                                |                                                       |                                                         |
-| :---------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](plpgsql-overview.html "43.1. Overview")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-declarations.html "43.3. Declarations") |
-
-***
-
 ## 43.2. Structure of PL/pgSQL [#](#PLPGSQL-STRUCTURE)
 
 Functions written in PL/pgSQL are defined to the server by executing [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") commands. Such a command would normally look like, say,
@@ -76,10 +68,3 @@ $$ LANGUAGE plpgsql;
 There is actually a hidden “outer block” surrounding the body of any PL/pgSQL function. This block provides the declarations of the function's parameters (if any), as well as some special variables such as `FOUND` (see [Section 43.5.5](plpgsql-statements.html#PLPGSQL-STATEMENTS-DIAGNOSTICS "43.5.5. Obtaining the Result Status")). The outer block is labeled with the function's name, meaning that parameters and special variables can be qualified with the function's name.
 
 It is important not to confuse the use of `BEGIN`/`END` for grouping statements in PL/pgSQL with the similarly-named SQL commands for transaction control. PL/pgSQL's `BEGIN`/`END` are only for grouping; they do not start or end a transaction. See [Section 43.8](plpgsql-transactions.html "43.8. Transaction Management") for information on managing transactions in PL/pgSQL. Also, a block containing an `EXCEPTION` clause effectively forms a subtransaction that can be rolled back without affecting the outer transaction. For more about that see [Section 43.6.8](plpgsql-control-structures.html#PLPGSQL-ERROR-TRAPPING "43.6.8. Trapping Errors").
-
-***
-
-|                                                 |                                                                     |                                                         |
-| :---------------------------------------------- | :-----------------------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](plpgsql-overview.html "43.1. Overview")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](plpgsql-declarations.html "43.3. Declarations") |
-| 43.1. Overview                                  |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                      43.3. Declarations |

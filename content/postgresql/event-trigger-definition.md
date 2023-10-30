@@ -1,11 +1,3 @@
-
-
-|          40.1. Overview of Event Trigger Behavior         |                                                        |                            |                                                       |                                                                        |
-| :-------------------------------------------------------: | :----------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](event-triggers.html "Chapter 40. Event Triggers")  | [Up](event-triggers.html "Chapter 40. Event Triggers") | Chapter 40. Event Triggers | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](event-trigger-matrix.html "40.2. Event Trigger Firing Matrix") |
-
-***
-
 ## 40.1. Overview of Event Trigger Behavior [#](#EVENT-TRIGGER-DEFINITION)
 
 An event trigger fires whenever the event with which it is associated occurs in the database in which it is defined. Currently, the only supported events are `login`, `ddl_command_start`, `ddl_command_end`, `table_rewrite` and `sql_drop`. Support for additional events may be added in future releases.
@@ -29,10 +21,3 @@ Event triggers are created using the command [CREATE EVENT TRIGGER](sql-createev
 If more than one event trigger is defined for a particular event, they will fire in alphabetical order by trigger name.
 
 A trigger definition can also specify a `WHEN` condition so that, for example, a `ddl_command_start` trigger can be fired only for particular commands which the user wishes to intercept. A common use of such triggers is to restrict the range of DDL operations which users may perform.
-
-***
-
-|                                                           |                                                        |                                                                        |
-| :-------------------------------------------------------- | :----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](event-triggers.html "Chapter 40. Event Triggers")  | [Up](event-triggers.html "Chapter 40. Event Triggers") |  [Next](event-trigger-matrix.html "40.2. Event Trigger Firing Matrix") |
-| Chapter 40. Event Triggers                                |  [Home](index.html "PostgreSQL 17devel Documentation") |                                      40.2. Event Trigger Firing Matrix |

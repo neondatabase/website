@@ -1,11 +1,3 @@
-
-
-|           Chapter 66. Custom WAL Resource Managers          |                                            |                     |                                                       |                                                  |
-| :---------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](generic-wal.html "Chapter 65. Generic WAL Records")  | [Up](internals.html "Part VII. Internals") | Part VII. Internals | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](btree.html "Chapter 67. B-Tree Indexes") |
-
-***
-
 ## Chapter 66. Custom WAL Resource Managers
 
 This chapter explains the interface between the core PostgreSQL system and custom WAL resource managers, which enable extensions to integrate directly with the [WAL](wal.html "Chapter 30. Reliability and the Write-Ahead Log").
@@ -72,10 +64,3 @@ Place the extension module implementing the custom resource manager in [shared\_
 ### Note
 
 The extension must remain in `shared_preload_libraries` as long as any custom WAL records may exist in the system. Otherwise PostgreSQL will not be able to apply or decode the custom WAL records, which may prevent the server from starting.
-
-***
-
-|                                                             |                                                       |                                                  |
-| :---------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](generic-wal.html "Chapter 65. Generic WAL Records")  |       [Up](internals.html "Part VII. Internals")      |  [Next](btree.html "Chapter 67. B-Tree Indexes") |
-| Chapter 65. Generic WAL Records                             | [Home](index.html "PostgreSQL 17devel Documentation") |                       Chapter 67. B-Tree Indexes |

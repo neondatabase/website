@@ -1,11 +1,3 @@
-
-
-|                  CREATE PUBLICATION                  |                                        |              |                                                       |                                            |
-| :--------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-createprocedure.html "CREATE PROCEDURE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createrole.html "CREATE ROLE") |
-
-***
-
 ## CREATE PUBLICATION
 
 CREATE PUBLICATION — define a new publication
@@ -178,10 +170,3 @@ CREATE PUBLICATION users_filtered FOR TABLE users (user_id, firstname);
 ## See Also
 
 [ALTER PUBLICATION](sql-alterpublication.html "ALTER PUBLICATION"), [DROP PUBLICATION](sql-droppublication.html "DROP PUBLICATION"), [CREATE SUBSCRIPTION](sql-createsubscription.html "CREATE SUBSCRIPTION"), [ALTER SUBSCRIPTION](sql-altersubscription.html "ALTER SUBSCRIPTION")
-
-***
-
-|                                                      |                                                       |                                            |
-| :--------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-createprocedure.html "CREATE PROCEDURE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createrole.html "CREATE ROLE") |
-| CREATE PROCEDURE                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                CREATE ROLE |

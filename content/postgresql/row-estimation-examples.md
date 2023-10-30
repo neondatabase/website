@@ -1,11 +1,3 @@
-
-
-|                           76.1. Row Estimation Examples                           |                                                                                |                                             |                                                       |                                                                                         |
-| :-------------------------------------------------------------------------------: | :----------------------------------------------------------------------------- | :-----------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](planner-stats-details.html "Chapter 76. How the Planner Uses Statistics")  | [Up](planner-stats-details.html "Chapter 76. How the Planner Uses Statistics") | Chapter 76. How the Planner Uses Statistics | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](multivariate-statistics-examples.html "76.2. Multivariate Statistics Examples") |
-
-***
-
 ## 76.1. Row Estimation Examples [#](#ROW-ESTIMATION-EXAMPLES)
 
 The examples shown below use tables in the PostgreSQL regression test database. Note also that since `ANALYZE` uses random sampling while producing statistics, the results will change slightly after any new `ANALYZE`.
@@ -291,10 +283,3 @@ Had there been MCV lists for the two columns, `eqjoinsel` would have used direct
 Notice that we showed `inner_cardinality` as 10000, that is, the unmodified size of `tenk2`. It might appear from inspection of the `EXPLAIN` output that the estimate of join rows comes from 50 \* 1, that is, the number of outer rows times the estimated number of rows obtained by each inner index scan on `tenk2`. But this is not the case: the join relation size is estimated before any particular join plan has been considered. If everything is working well then the two ways of estimating the join size will produce about the same answer, but due to round-off error and other factors they sometimes diverge significantly.
 
 For those interested in further details, estimation of the size of a table (before any `WHERE` clauses) is done in `src/backend/optimizer/util/plancat.c`. The generic logic for clause selectivities is in `src/backend/optimizer/path/clausesel.c`. The operator-specific selectivity functions are mostly found in `src/backend/utils/adt/selfuncs.c`.
-
-***
-
-|                                                                                   |                                                                                |                                                                                         |
-| :-------------------------------------------------------------------------------- | :----------------------------------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](planner-stats-details.html "Chapter 76. How the Planner Uses Statistics")  | [Up](planner-stats-details.html "Chapter 76. How the Planner Uses Statistics") |  [Next](multivariate-statistics-examples.html "76.2. Multivariate Statistics Examples") |
-| Chapter 76. How the Planner Uses Statistics                                       |              [Home](index.html "PostgreSQL 17devel Documentation")             |                                                  76.2. Multivariate Statistics Examples |

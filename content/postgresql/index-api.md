@@ -1,11 +1,3 @@
-
-
-|                     64.1. Basic API Structure for Indexes                    |                                                                           |                                                      |                                                       |                                                                     |
-| :--------------------------------------------------------------------------: | :------------------------------------------------------------------------ | :--------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](indexam.html "Chapter 64. Index Access Method Interface Definition")  | [Up](indexam.html "Chapter 64. Index Access Method Interface Definition") | Chapter 64. Index Access Method Interface Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](index-functions.html "64.2. Index Access Method Functions") |
-
-***
-
 ## 64.1. Basic API Structure for Indexes [#](#INDEX-API)
 
 Each index access method is described by a row in the [`pg_am`](catalog-pg-am.html "53.3. pg_am") system catalog. The `pg_am` entry specifies a name and a *handler function* for the index access method. These entries can be created and deleted using the [CREATE ACCESS METHOD](sql-create-access-method.html "CREATE ACCESS METHOD") and [DROP ACCESS METHOD](sql-drop-access-method.html "DROP ACCESS METHOD") SQL commands.
@@ -102,10 +94,3 @@ Some of the flag fields of `IndexAmRoutine` have nonobvious implications. The re
 The `amcaninclude` flag indicates whether the access method supports “included” columns, that is it can store (without processing) additional columns beyond the key column(s). The requirements of the preceding paragraph apply only to the key columns. In particular, the combination of `amcanmulticol`=`false` and `amcaninclude`=`true` is sensible: it means that there can only be one key column, but there can also be included column(s). Also, included columns must be allowed to be null, independently of `amoptionalkey`.
 
 The `amsummarizing` flag indicates whether the access method summarizes the indexed tuples, with summarizing granularity of at least per block. Access methods that do not point to individual tuples, but to block ranges (like BRIN), may allow the HOT optimization to continue. This does not apply to attributes referenced in index predicates, an update of such an attribute always disables HOT.
-
-***
-
-|                                                                              |                                                                           |                                                                     |
-| :--------------------------------------------------------------------------- | :-----------------------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](indexam.html "Chapter 64. Index Access Method Interface Definition")  | [Up](indexam.html "Chapter 64. Index Access Method Interface Definition") |  [Next](index-functions.html "64.2. Index Access Method Functions") |
-| Chapter 64. Index Access Method Interface Definition                         |           [Home](index.html "PostgreSQL 17devel Documentation")           |                                 64.2. Index Access Method Functions |

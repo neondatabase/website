@@ -1,11 +1,3 @@
-
-
-|               createuser              |                                                              |                                |                                                       |                                   |
-| :-----------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](app-createdb.html "createdb")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-dropdb.html "dropdb") |
-
-***
-
 ## createuser
 
 createuser — define a new PostgreSQL user account
@@ -212,10 +204,3 @@ In the above example, the new password isn't actually echoed when typed, but we 
 ## See Also
 
 [dropuser](app-dropuser.html "dropuser"), [CREATE ROLE](sql-createrole.html "CREATE ROLE"), [createrole\_self\_grant](runtime-config-client.html#GUC-CREATEROLE-SELF-GRANT)
-
-***
-
-|                                       |                                                              |                                   |
-| :------------------------------------ | :----------------------------------------------------------: | --------------------------------: |
-| [Prev](app-createdb.html "createdb")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-dropdb.html "dropdb") |
-| createdb                              |     [Home](index.html "PostgreSQL 17devel Documentation")    |                            dropdb |

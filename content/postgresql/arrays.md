@@ -1,11 +1,3 @@
-
-
-|                  8.15. Arrays                  |                                             |                       |                                                       |                                                |
-| :--------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](datatype-json.html "8.14. JSON Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](rowtypes.html "8.16. Composite Types") |
-
-***
-
 ## 8.15. Arrays [#](#ARRAYS)
 
   * *   [8.15.1. Declaration of Array Types](arrays.html#ARRAYS-DECLARATION)
@@ -527,10 +519,3 @@ You can add whitespace before a left brace or after a right brace. You can also 
 ### Tip
 
 The `ARRAY` constructor syntax (see [Section 4.2.12](sql-expressions.html#SQL-SYNTAX-ARRAY-CONSTRUCTORS "4.2.12. Array Constructors")) is often easier to work with than the array-literal syntax when writing array values in SQL commands. In `ARRAY`, individual element values are written the same way they would be written when not members of an array.
-
-***
-
-|                                                |                                                       |                                                |
-| :--------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](datatype-json.html "8.14. JSON Types")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](rowtypes.html "8.16. Composite Types") |
-| 8.14. JSON Types                               | [Home](index.html "PostgreSQL 17devel Documentation") |                          8.16. Composite Types |

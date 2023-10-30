@@ -1,11 +1,3 @@
-
-
-|          F.34. pg\_trgm — support for similarity of text using trigram matching         |                                                                             |                                                        |                                                       |                                                                                             |
-| :-------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------------------: |
-| [Prev](pgsurgery.html "F.33. pg_surgery — perform low-level surgery on relation data")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgvisibility.html "F.35. pg_visibility — visibility map information and utilities") |
-
-***
-
 ## F.34. pg\_trgm — support for similarity of text using trigram matching [#](#PGTRGM)
 
   * *   [F.34.1. Trigram (or Trigraph) Concepts](pgtrgm.html#PGTRGM-CONCEPTS)
@@ -261,10 +253,3 @@ Alexander Korotkov `<a.korotkov@postgrespro.ru>`, Moscow, Postgres Professional,
 Documentation: Christopher Kings-Lynne
 
 This module is sponsored by Delta-Soft Ltd., Moscow, Russia.
-
-***
-
-|                                                                                         |                                                                             |                                                                                             |
-| :-------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------: |
-| [Prev](pgsurgery.html "F.33. pg_surgery — perform low-level surgery on relation data")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](pgvisibility.html "F.35. pg_visibility — visibility map information and utilities") |
-| F.33. pg\_surgery — perform low-level surgery on relation data                          |            [Home](index.html "PostgreSQL 17devel Documentation")            |                             F.35. pg\_visibility — visibility map information and utilities |

@@ -1,11 +1,3 @@
-
-
-|             5.10. Inheritance            |                                             |                            |                                                       |                                                           |
-| :--------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](ddl-schemas.html "5.9. Schemas")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-partitioning.html "5.11. Table Partitioning") |
-
-***
-
 ## 5.10. Inheritance [#](#DDL-INHERIT)
 
 * [5.10.1. Caveats](ddl-inherit.html#DDL-INHERIT-CAVEATS)
@@ -162,10 +154,3 @@ A serious limitation of the inheritance feature is that indexes (including uniqu
 * Specifying that another table's column `REFERENCES cities(name)` would allow the other table to contain city names, but not capital names. There is no good workaround for this case.
 
 Some functionality not implemented for inheritance hierarchies is implemented for declarative partitioning. Considerable care is needed in deciding whether partitioning with legacy inheritance is useful for your application.
-
-***
-
-|                                          |                                                       |                                                           |
-| :--------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](ddl-schemas.html "5.9. Schemas")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](ddl-partitioning.html "5.11. Table Partitioning") |
-| 5.9. Schemas                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                  5.11. Table Partitioning |

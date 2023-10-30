@@ -1,11 +1,3 @@
-
-
-|               8.14. JSON Types              |                                             |                       |                                                       |                                     |
-| :-----------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | ----------------------------------: |
-| [Prev](datatype-xml.html "8.13. XML Type")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](arrays.html "8.15. Arrays") |
-
-***
-
 ## 8.14. JSON Types [#](#DATATYPE-JSON)
 
   * *   [8.14.1. JSON Input and Output Syntax](datatype-json.html#JSON-KEYS-ELEMENTS)
@@ -453,14 +445,3 @@ For details on using `jsonpath` expressions with SQL/JSON query functions, see [
 | `.**{level}``.**{start_level to end_level}` | Like `.**`, but selects only the specified levels of the JSON hierarchy. Nesting levels are specified as integers. Level zero corresponds to the current object. To access the lowest nesting level, you can use the `last` keyword. This is a PostgreSQL extension of the SQL/JSON standard.                                                                                                                                                                                                                                                                                                                                                            |
 | `[subscript, ...]`                          | Array element accessor. `subscript` can be given in two forms: `index` or `start_index to end_index`. The first form returns a single array element by its index. The second form returns an array slice by the range of indexes, including the elements that correspond to the provided *`start_index`* and *`end_index`*.The specified *`index`* can be an integer, as well as an expression returning a single numeric value, which is automatically cast to integer. Index zero corresponds to the first array element. You can also use the `last` keyword to denote the last array element, which is useful for handling arrays of unknown length. |
 | `[*]`                                       | Wildcard array element accessor that returns all array elements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-
-***
-
-[\[7\] ](#id-1.5.7.22.18.9.3)For this purpose, the term “value” includes array elements, though JSON terminology sometimes considers array elements distinct from values within objects.
-
-***
-
-|                                             |                                                       |                                     |
-| :------------------------------------------ | :---------------------------------------------------: | ----------------------------------: |
-| [Prev](datatype-xml.html "8.13. XML Type")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](arrays.html "8.15. Arrays") |
-| 8.13. XML Type                              | [Home](index.html "PostgreSQL 17devel Documentation") |                        8.15. Arrays |

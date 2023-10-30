@@ -1,11 +1,3 @@
-
-
-|     J.3. Building the Documentation with Make    |                                                 |                           |                                                       |                                                                                 |
-| :----------------------------------------------: | :---------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------: |
-| [Prev](docguide-toolsets.html "J.2. Tool Sets")  | [Up](docguide.html "Appendix J. Documentation") | Appendix J. Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](docguide-build-meson.html "J.4. Building the Documentation with Meson") |
-
-***
-
 ## J.3. Building the Documentation with Make [#](#DOCGUIDE-BUILD)
 
   * *   [J.3.1. HTML](docguide-build.html#DOCGUIDE-BUILD-HTML)
@@ -101,10 +93,3 @@ Building the documentation can take very long. But there is a method to just che
 
 doc/src/sgml$ make check
 ```
-
-***
-
-|                                                  |                                                       |                                                                                 |
-| :----------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------------------: |
-| [Prev](docguide-toolsets.html "J.2. Tool Sets")  |    [Up](docguide.html "Appendix J. Documentation")    |  [Next](docguide-build-meson.html "J.4. Building the Documentation with Meson") |
-| J.2. Tool Sets                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                      J.4. Building the Documentation with Meson |

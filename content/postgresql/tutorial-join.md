@@ -1,11 +1,3 @@
-
-
-|               2.6. Joins Between Tables               |                                                       |                             |                                                       |                                                       |
-| :---------------------------------------------------: | :---------------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](tutorial-select.html "2.5. Querying a Table")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") | Chapter 2. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-agg.html "2.7. Aggregate Functions") |
-
-***
-
 ## 2.6. Joins Between Tables [#](#TUTORIAL-JOIN)
 
 Thus far, our queries have only accessed one table at a time. Queries can access multiple tables at once, or access the same table in such a way that multiple rows of the table are being processed at the same time. Queries that access multiple tables (or multiple instances of the same table) at one time are called *join* queries. They combine rows from one table with rows from a second table, with an expression specifying which rows are to be paired. For example, to return all the weather records together with the location of the associated city, the database needs to compare the `city` column of each row of the `weather` table with the `name` column of all rows in the `cities` table, and select the pairs of rows where these values match.[\[4\]](#ftn.id-1.4.4.7.3.6) This would be accomplished by the following query:
@@ -108,14 +100,3 @@ SELECT *
 ```
 
 You will encounter this style of abbreviating quite frequently.
-
-***
-
-[\[4\] ](#id-1.4.4.7.3.6)This is only a conceptual model. The join is usually performed in a more efficient manner than actually comparing each possible pair of rows, but this is invisible to the user.
-
-***
-
-|                                                       |                                                       |                                                       |
-| :---------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](tutorial-select.html "2.5. Querying a Table")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") |  [Next](tutorial-agg.html "2.7. Aggregate Functions") |
-| 2.5. Querying a Table                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                              2.7. Aggregate Functions |

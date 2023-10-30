@@ -1,11 +1,3 @@
-
-
-|                 ALTER INDEX                |                                        |              |                                                       |                                                  |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-altergroup.html "ALTER GROUP")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterlanguage.html "ALTER LANGUAGE") |
-
-***
-
 ## ALTER INDEX
 
 ALTER INDEX — change the definition of an index
@@ -141,10 +133,3 @@ ALTER INDEX coord_idx ALTER COLUMN 3 SET STATISTICS 1000;
 ## See Also
 
 [CREATE INDEX](sql-createindex.html "CREATE INDEX"), [REINDEX](sql-reindex.html "REINDEX")
-
-***
-
-|                                            |                                                       |                                                  |
-| :----------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-altergroup.html "ALTER GROUP")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterlanguage.html "ALTER LANGUAGE") |
-| ALTER GROUP                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                   ALTER LANGUAGE |

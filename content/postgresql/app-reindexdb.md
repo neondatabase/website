@@ -1,11 +1,3 @@
-
-
-|           reindexdb           |                                                              |                                |                                                       |                                       |
-| :---------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ------------------------------------: |
-| [Prev](app-psql.html "psql")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-vacuumdb.html "vacuumdb") |
-
-***
-
 ## reindexdb
 
 reindexdb — reindex a PostgreSQL database
@@ -151,10 +143,3 @@ reindexdb --table=foo --index=bar abcd
 ## See Also
 
 [REINDEX](sql-reindex.html "REINDEX")
-
-***
-
-|                               |                                                              |                                       |
-| :---------------------------- | :----------------------------------------------------------: | ------------------------------------: |
-| [Prev](app-psql.html "psql")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-vacuumdb.html "vacuumdb") |
-| psql                          |     [Home](index.html "PostgreSQL 17devel Documentation")    |                              vacuumdb |

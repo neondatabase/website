@@ -1,11 +1,3 @@
-
-
-|               54.6. `pg_cursors`               |                                             |                          |                                                       |                                                              |
-| :--------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](view-pg-config.html "54.5. pg_config")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-file-settings.html "54.7. pg_file_settings") |
-
-***
-
 ## 54.6. `pg_cursors` [#](#VIEW-PG-CURSORS)
 
 The `pg_cursors` view lists the cursors that are currently available. Cursors can be defined in several ways:
@@ -34,10 +26,3 @@ Cursors are used internally to implement some of the components of PostgreSQL, s
 \
 
 The `pg_cursors` view is read-only.
-
-***
-
-|                                                |                                                       |                                                              |
-| :--------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](view-pg-config.html "54.5. pg_config")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-file-settings.html "54.7. pg_file_settings") |
-| 54.5. `pg_config`                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                     54.7. `pg_file_settings` |

@@ -1,11 +1,3 @@
-
-
-|                          RESET                          |                                        |              |                                                       |                                   |
-| :-----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](sql-release-savepoint.html "RELEASE SAVEPOINT")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-revoke.html "REVOKE") |
-
-***
-
 ## RESET
 
 RESET — restore the value of a run-time parameter to the default value
@@ -59,10 +51,3 @@ RESET timezone;
 ## See Also
 
 [SET](sql-set.html "SET"), [SHOW](sql-show.html "SHOW")
-
-***
-
-|                                                         |                                                       |                                   |
-| :------------------------------------------------------ | :---------------------------------------------------: | --------------------------------: |
-| [Prev](sql-release-savepoint.html "RELEASE SAVEPOINT")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-revoke.html "REVOKE") |
-| RELEASE SAVEPOINT                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                            REVOKE |

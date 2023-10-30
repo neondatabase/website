@@ -1,11 +1,3 @@
-
-
-|                        38.12. User-Defined Aggregates                       |                                               |                           |                                                       |                                                  |
-| :-------------------------------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](xfunc-optimization.html "38.11. Function Optimization Information")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xtypes.html "38.13. User-Defined Types") |
-
-***
-
 ## 38.12. User-Defined Aggregates [#](#XAGGR)
 
   * *   [38.12.1. Moving-Aggregate Mode](xaggr.html#XAGGR-MOVING-AGGREGATES)
@@ -273,10 +265,3 @@ One reason for checking this is that when it is true, the first input must be a 
 The second argument of `AggCheckCallContext` can be used to retrieve the memory context in which aggregate state values are being kept. This is useful for transition functions that wish to use “expanded” objects (see [Section 38.13.1](xtypes.html#XTYPES-TOAST "38.13.1. TOAST Considerations")) as their state values. On first call, the transition function should return an expanded object whose memory context is a child of the aggregate state context, and then keep returning the same expanded object on subsequent calls. See `array_append()` for an example. (`array_append()` is not the transition function of any built-in aggregate, but it is written to behave efficiently when used as transition function of a custom aggregate.)
 
 Another support routine available to aggregate functions written in C is `AggGetAggref`, which returns the `Aggref` parse node that defines the aggregate call. This is mainly useful for ordered-set aggregates, which can inspect the substructure of the `Aggref` node to find out what sort ordering they are supposed to implement. Examples can be found in `orderedsetaggs.c` in the PostgreSQL source code.
-
-***
-
-|                                                                             |                                                       |                                                  |
-| :-------------------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](xfunc-optimization.html "38.11. Function Optimization Information")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xtypes.html "38.13. User-Defined Types") |
-| 38.11. Function Optimization Information                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                        38.13. User-Defined Types |

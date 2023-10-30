@@ -1,11 +1,3 @@
-
-
-|                      17.4. Building and Installation with Meson                     |                                                                     |                                           |                                                       |                                                            |
-| :---------------------------------------------------------------------------------: | :------------------------------------------------------------------ | :---------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](install-make.html "17.3. Building and Installation with Autoconf and Make")  | [Up](installation.html "Chapter 17. Installation from Source Code") | Chapter 17. Installation from Source Code | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](install-post.html "17.5. Post-Installation Setup") |
-
-***
-
 ## 17.4. Building and Installation with Meson [#](#INSTALL-MESON)
 
   * *   [17.4.1. Short Version](install-meson.html#INSTALL-SHORT-MESON)
@@ -414,10 +406,3 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 * `-Dsegsize_blocks=SEGSIZE_BLOCKS #`
 
     `Specify the relation segment size in blocks. If both -Dsegsize and this option are specified, this option wins. This option is only for developers, to test segment related code.`
-
-***
-
-|                                                                                     |                                                                     |                                                            |
-| :---------------------------------------------------------------------------------- | :-----------------------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](install-make.html "17.3. Building and Installation with Autoconf and Make")  | [Up](installation.html "Chapter 17. Installation from Source Code") |  [Next](install-post.html "17.5. Post-Installation Setup") |
-| 17.3. Building and Installation with Autoconf and Make                              |        [Home](index.html "PostgreSQL 17devel Documentation")        |                              17.5. Post-Installation Setup |

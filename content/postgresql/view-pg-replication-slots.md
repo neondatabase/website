@@ -1,11 +1,3 @@
-
-
-|                             54.19. `pg_replication_slots`                             |                                             |                          |                                                       |                                               |
-| :-----------------------------------------------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](view-pg-replication-origin-status.html "54.18. pg_replication_origin_status")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-roles.html "54.20. pg_roles") |
-
-***
-
 ## 54.19. `pg_replication_slots` [#](#VIEW-PG-REPLICATION-SLOTS)
 
 The `pg_replication_slots` view provides a listing of all replication slots that currently exist on the database cluster, along with their current state.
@@ -36,10 +28,3 @@ For more on replication slots, see [Section 27.2.6](warm-standby.html#STREAMING
 | `safe_wal_size` `int8`The number of bytes that can be written to WAL such that this slot is not in danger of getting in state "lost". It is NULL for lost slots, as well as if `max_slot_wal_keep_size` is `-1`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `two_phase` `bool`True if the slot is enabled for decoding prepared transactions. Always false for physical slots.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `conflicting` `bool`True if this logical slot conflicted with recovery (and so is now invalidated). Always NULL for physical slots.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-
-***
-
-|                                                                                       |                                                       |                                               |
-| :------------------------------------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](view-pg-replication-origin-status.html "54.18. pg_replication_origin_status")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-roles.html "54.20. pg_roles") |
-| 54.18. `pg_replication_origin_status`                                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                             54.20. `pg_roles` |

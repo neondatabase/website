@@ -1,11 +1,3 @@
-
-
-|                   30.5. WAL Configuration                  |                                                                  |                                                 |                                                       |                                                   |
-| :--------------------------------------------------------: | :--------------------------------------------------------------- | :---------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](wal-async-commit.html "30.4. Asynchronous Commit")  | [Up](wal.html "Chapter 30. Reliability and the Write-Ahead Log") | Chapter 30. Reliability and the Write-Ahead Log | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](wal-internals.html "30.6. WAL Internals") |
-
-***
-
 ## 30.5. WAL Configuration [#](#WAL-CONFIGURATION)
 
 There are several WAL-related configuration parameters that affect database performance. This section explains their use. Consult [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for general information about setting server configuration parameters.
@@ -45,10 +37,3 @@ Enabling the [wal\_debug](runtime-config-developer.html#GUC-WAL-DEBUG) configura
 There are two internal functions to write WAL data to disk: `XLogWrite` and `issue_xlog_fsync`. When [track\_wal\_io\_timing](runtime-config-statistics.html#GUC-TRACK-WAL-IO-TIMING) is enabled, the total amounts of time `XLogWrite` writes and `issue_xlog_fsync` syncs WAL data to disk are counted as `wal_write_time` and `wal_sync_time` in [pg\_stat\_wal](monitoring-stats.html#PG-STAT-WAL-VIEW "Table 28.25. pg_stat_wal View"), respectively. `XLogWrite` is normally called by `XLogInsertRecord` (when there is no space for the new record in WAL buffers), `XLogFlush` and the WAL writer, to write WAL buffers to disk and call `issue_xlog_fsync`. `issue_xlog_fsync` is normally called by `XLogWrite` to sync WAL files to disk. If `wal_sync_method` is either `open_datasync` or `open_sync`, a write operation in `XLogWrite` guarantees to sync written WAL data to disk and `issue_xlog_fsync` does nothing. If `wal_sync_method` is either `fdatasync`, `fsync`, or `fsync_writethrough`, the write operation moves WAL buffers to kernel cache and `issue_xlog_fsync` syncs them to disk. Regardless of the setting of `track_wal_io_timing`, the number of times `XLogWrite` writes and `issue_xlog_fsync` syncs WAL data to disk are also counted as `wal_write` and `wal_sync` in `pg_stat_wal`, respectively.
 
 The [recovery\_prefetch](runtime-config-wal.html#GUC-RECOVERY-PREFETCH) parameter can be used to reduce I/O wait times during recovery by instructing the kernel to initiate reads of disk blocks that will soon be needed but are not currently in PostgreSQL's buffer pool. The [maintenance\_io\_concurrency](runtime-config-resource.html#GUC-MAINTENANCE-IO-CONCURRENCY) and [wal\_decode\_buffer\_size](runtime-config-wal.html#GUC-WAL-DECODE-BUFFER-SIZE) settings limit prefetching concurrency and distance, respectively. By default, it is set to `try`, which enables the feature on systems where `posix_fadvise` is available.
-
-***
-
-|                                                            |                                                                  |                                                   |
-| :--------------------------------------------------------- | :--------------------------------------------------------------: | ------------------------------------------------: |
-| [Prev](wal-async-commit.html "30.4. Asynchronous Commit")  | [Up](wal.html "Chapter 30. Reliability and the Write-Ahead Log") |  [Next](wal-internals.html "30.6. WAL Internals") |
-| 30.4. Asynchronous Commit                                  |       [Home](index.html "PostgreSQL 17devel Documentation")      |                               30.6. WAL Internals |

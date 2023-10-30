@@ -1,11 +1,3 @@
-
-
-|              CREATE EVENT TRIGGER              |                                        |              |                                                       |                                                      |
-| :--------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-createdomain.html "CREATE DOMAIN")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createextension.html "CREATE EXTENSION") |
-
-***
-
 ## CREATE EVENT TRIGGER
 
 CREATE EVENT TRIGGER — define a new event trigger
@@ -80,10 +72,3 @@ There is no `CREATE EVENT TRIGGER` statement in the SQL standard.
 ## See Also
 
 [ALTER EVENT TRIGGER](sql-altereventtrigger.html "ALTER EVENT TRIGGER"), [DROP EVENT TRIGGER](sql-dropeventtrigger.html "DROP EVENT TRIGGER"), [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION")
-
-***
-
-|                                                |                                                       |                                                      |
-| :--------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-createdomain.html "CREATE DOMAIN")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createextension.html "CREATE EXTENSION") |
-| CREATE DOMAIN                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                     CREATE EXTENSION |

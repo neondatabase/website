@@ -1,11 +1,3 @@
-
-
-|                12.3. Controlling Text Search               |                                                      |                              |                                                       |                                                               |
-| :--------------------------------------------------------: | :--------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](textsearch-tables.html "12.2. Tables and Indexes")  | [Up](textsearch.html "Chapter 12. Full Text Search") | Chapter 12. Full Text Search | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](textsearch-features.html "12.4. Additional Features") |
-
-***
-
 ## 12.3. Controlling Text Search [#](#TEXTSEARCH-CONTROLS)
 
   * *   [12.3.1. Parsing Documents](textsearch-controls.html#TEXTSEARCH-PARSING-DOCUMENTS)
@@ -359,10 +351,3 @@ occurrences to display in the result.',
 ```
 
 `ts_headline` uses the original document, not a `tsvector` summary, so it can be slow and should be used with care.
-
-***
-
-|                                                            |                                                       |                                                               |
-| :--------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](textsearch-tables.html "12.2. Tables and Indexes")  |  [Up](textsearch.html "Chapter 12. Full Text Search") |  [Next](textsearch-features.html "12.4. Additional Features") |
-| 12.2. Tables and Indexes                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                     12.4. Additional Features |

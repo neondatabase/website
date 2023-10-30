@@ -1,5 +1,3 @@
-
-
 **Legal Notice**
 
 PostgreSQL is Copyright © 1996–2023 by the PostgreSQL Global Development Group.

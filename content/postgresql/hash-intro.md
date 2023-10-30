@@ -1,11 +1,3 @@
-
-
-|                    72.1. Overview                   |                                                  |                          |                                                       |                                                          |
-| :-------------------------------------------------: | :----------------------------------------------- | :----------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](hash-index.html "Chapter 72. Hash Indexes")  | [Up](hash-index.html "Chapter 72. Hash Indexes") | Chapter 72. Hash Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](hash-implementation.html "72.2. Implementation") |
-
-***
-
 ## 72.1. Overview [#](#HASH-INTRO)
 
 PostgreSQL includes an implementation of persistent on-disk hash indexes, which are fully crash recoverable. Any data type can be indexed by a hash index, including data types that do not have a well-defined linear ordering. Hash indexes store only the hash value of the data being indexed, thus there are no restrictions on the size of the data column being indexed.
@@ -29,10 +21,3 @@ If it can, VACUUM will also try to squeeze the index tuples onto as few overflow
 Hash indexes may expand the number of bucket pages as the number of rows indexed grows. The hash key-to-bucket-number mapping is chosen so that the index can be incrementally expanded. When a new bucket is to be added to the index, exactly one existing bucket will need to be "split", with some of its tuples being transferred to the new bucket according to the updated key-to-bucket-number mapping.
 
 The expansion occurs in the foreground, which could increase execution time for user inserts. Thus, hash indexes may not be suitable for tables with rapidly increasing number of rows.
-
-***
-
-|                                                     |                                                       |                                                          |
-| :-------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](hash-index.html "Chapter 72. Hash Indexes")  |    [Up](hash-index.html "Chapter 72. Hash Indexes")   |  [Next](hash-implementation.html "72.2. Implementation") |
-| Chapter 72. Hash Indexes                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                     72.2. Implementation |

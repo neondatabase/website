@@ -1,11 +1,3 @@
-
-
-|              SECURITY LABEL             |                                        |              |                                                       |                                   |
-| :-------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](sql-savepoint.html "SAVEPOINT")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-select.html "SELECT") |
-
-***
-
 ## SECURITY LABEL
 
 SECURITY LABEL — define or change a security label applied to an object
@@ -117,10 +109,3 @@ There is no `SECURITY LABEL` command in the SQL standard.
 ## See Also
 
 [sepgsql](sepgsql.html "F.39. sepgsql — SELinux-, label-based mandatory access control (MAC) security module"), `src/test/modules/dummy_seclabel`
-
-***
-
-|                                         |                                                       |                                   |
-| :-------------------------------------- | :---------------------------------------------------: | --------------------------------: |
-| [Prev](sql-savepoint.html "SAVEPOINT")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-select.html "SELECT") |
-| SAVEPOINT                               | [Home](index.html "PostgreSQL 17devel Documentation") |                            SELECT |

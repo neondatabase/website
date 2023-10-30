@@ -1,11 +1,3 @@
-
-
-|                                    F.22. lo — manage large objects                                   |                                                                             |                                                        |                                                       |                                                                      |
-| :--------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](isn.html "F.21. isn — data types for international standard numbers (ISBN, EAN, UPC, etc.)")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ltree.html "F.23. ltree — hierarchical tree-like data type") |
-
-***
-
 ## F.22. lo — manage large objects [#](#LO)
 
   * *   [F.22.1. Rationale](lo.html#LO-RATIONALE)
@@ -56,10 +48,3 @@ For each column that will contain unique references to large objects, create a `
 ### F.22.4. Author [#](#LO-AUTHOR)
 
 Peter Mount `<peter@retep.org.uk>`
-
-***
-
-|                                                                                                      |                                                                             |                                                                      |
-| :--------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](isn.html "F.21. isn — data types for international standard numbers (ISBN, EAN, UPC, etc.)")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](ltree.html "F.23. ltree — hierarchical tree-like data type") |
-| F.21. isn — data types for international standard numbers (ISBN, EAN, UPC, etc.)                     |            [Home](index.html "PostgreSQL 17devel Documentation")            |                       F.23. ltree — hierarchical tree-like data type |

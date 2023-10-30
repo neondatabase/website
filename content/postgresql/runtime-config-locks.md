@@ -1,11 +1,3 @@
-
-
-|                          20.12. Lock Management                         |                                                              |                                  |                                                       |                                                                                     |
-| :---------------------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------------: |
-| [Prev](runtime-config-client.html "20.11. Client Connection Defaults")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-compatible.html "20.13. Version and Platform Compatibility") |
-
-***
-
 ## 20.12. Lock Management [#](#RUNTIME-CONFIG-LOCKS)
 
 * `deadlock_timeout` (`integer`) [#](#GUC-DEADLOCK-TIMEOUT)
@@ -31,10 +23,3 @@
 * `max_pred_locks_per_page` (`integer`) [#](#GUC-MAX-PRED-LOCKS-PER-PAGE)
 
     This controls how many rows on a single page can be predicate-locked before the lock is promoted to covering the whole page. The default is 2. This parameter can only be set in the `postgresql.conf` file or on the server command line.
-
-***
-
-|                                                                         |                                                              |                                                                                     |
-| :---------------------------------------------------------------------- | :----------------------------------------------------------: | ----------------------------------------------------------------------------------: |
-| [Prev](runtime-config-client.html "20.11. Client Connection Defaults")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-compatible.html "20.13. Version and Platform Compatibility") |
-| 20.11. Client Connection Defaults                                       |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                           20.13. Version and Platform Compatibility |

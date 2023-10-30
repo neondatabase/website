@@ -1,11 +1,3 @@
-
-
-|                   END                  |                                        |              |                                                       |                                     |
-| :------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-dropview.html "DROP VIEW")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-execute.html "EXECUTE") |
-
-***
-
 ## END
 
 END — commit the current transaction
@@ -53,10 +45,3 @@ END;
 ## See Also
 
 [BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [ROLLBACK](sql-rollback.html "ROLLBACK")
-
-***
-
-|                                        |                                                       |                                     |
-| :------------------------------------- | :---------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-dropview.html "DROP VIEW")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-execute.html "EXECUTE") |
-| DROP VIEW                              | [Home](index.html "PostgreSQL 17devel Documentation") |                             EXECUTE |

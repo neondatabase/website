@@ -1,11 +1,3 @@
-
-
-|             CREATE USER MAPPING            |                                        |              |                                                       |                                            |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-createuser.html "CREATE USER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createview.html "CREATE VIEW") |
-
-***
-
 ## CREATE USER MAPPING
 
 CREATE USER MAPPING — define a new mapping of a user to a foreign server
@@ -59,10 +51,3 @@ CREATE USER MAPPING FOR bob SERVER foo OPTIONS (user 'bob', password 'secret');
 ## See Also
 
 [ALTER USER MAPPING](sql-alterusermapping.html "ALTER USER MAPPING"), [DROP USER MAPPING](sql-dropusermapping.html "DROP USER MAPPING"), [CREATE FOREIGN DATA WRAPPER](sql-createforeigndatawrapper.html "CREATE FOREIGN DATA WRAPPER"), [CREATE SERVER](sql-createserver.html "CREATE SERVER")
-
-***
-
-|                                            |                                                       |                                            |
-| :----------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-createuser.html "CREATE USER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createview.html "CREATE VIEW") |
-| CREATE USER                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                CREATE VIEW |

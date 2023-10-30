@@ -1,11 +1,3 @@
-
-
-|                    1.3. Creating a Database                   |                                                        |                            |                                                       |                                                             |
-| :-----------------------------------------------------------: | :----------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](tutorial-arch.html "1.2. Architectural Fundamentals")  | [Up](tutorial-start.html "Chapter 1. Getting Started") | Chapter 1. Getting Started | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-accessdb.html "1.4. Accessing a Database") |
-
-***
-
 ## 1.3. Creating a Database [#](#TUTORIAL-CREATEDB)
 
 The first test to see whether you can access the database server is to try to create a database. A running PostgreSQL server can manage many databases. Typically, a separate database is used for each project or for each user.
@@ -82,14 +74,3 @@ dropdb mydb
 (For this command, the database name does not default to the user account name. You always need to specify it.) This action physically removes all files associated with the database and cannot be undone, so this should only be done with a great deal of forethought.
 
 More about `createdb` and `dropdb` can be found in [createdb](app-createdb.html "createdb") and [dropdb](app-dropdb.html "dropdb") respectively.
-
-***
-
-[\[1\] ](#id-1.4.3.4.10.4)As an explanation for why this works: PostgreSQL user names are separate from operating system user accounts. When you connect to a database, you can choose what PostgreSQL user name to connect as; if you don't, it will default to the same name as your current operating system account. As it happens, there will always be a PostgreSQL user account that has the same name as the operating system user that started the server, and it also happens that that user always has permission to create databases. Instead of logging in as that user you can also specify the `-U` option everywhere to select a PostgreSQL user name to connect as.
-
-***
-
-|                                                               |                                                        |                                                             |
-| :------------------------------------------------------------ | :----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](tutorial-arch.html "1.2. Architectural Fundamentals")  | [Up](tutorial-start.html "Chapter 1. Getting Started") |  [Next](tutorial-accessdb.html "1.4. Accessing a Database") |
-| 1.2. Architectural Fundamentals                               |  [Home](index.html "PostgreSQL 17devel Documentation") |                                   1.4. Accessing a Database |

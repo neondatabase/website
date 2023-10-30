@@ -1,11 +1,3 @@
-
-
-|           36.14. Embedded SQL Commands           |                                                        |                                      |                                                       |                                                                  |
-| :----------------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](ecpg-cpp.html "36.13. C++ Applications")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-allocate-descriptor.html "ALLOCATE DESCRIPTOR") |
-
-***
-
 ## 36.14. Embedded SQL Commands [#](#ECPG-SQL-COMMANDS)
 
   * *   [ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor.html) — allocate an SQL descriptor area
@@ -27,10 +19,3 @@
   * [WHENEVER](ecpg-sql-whenever.html) — specify the action to be taken when an SQL statement causes a specific class condition to be raised
 
 This section describes all SQL commands that are specific to embedded SQL. Also refer to the SQL commands listed in [SQL Commands](sql-commands.html "SQL Commands"), which can also be used in embedded SQL, unless stated otherwise.
-
-***
-
-|                                                  |                                                        |                                                                  |
-| :----------------------------------------------- | :----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](ecpg-cpp.html "36.13. C++ Applications")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](ecpg-sql-allocate-descriptor.html "ALLOCATE DESCRIPTOR") |
-| 36.13. C++ Applications                          |  [Home](index.html "PostgreSQL 17devel Documentation") |                                              ALLOCATE DESCRIPTOR |

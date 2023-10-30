@@ -1,11 +1,3 @@
-
-
-|                 29.2. Disk Full Failure                 |                                                          |                                   |                                                       |                                                                     |
-| :-----------------------------------------------------: | :------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](disk-usage.html "29.1. Determining Disk Usage")  | [Up](diskusage.html "Chapter 29. Monitoring Disk Usage") | Chapter 29. Monitoring Disk Usage | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](wal.html "Chapter 30. Reliability and the Write-Ahead Log") |
-
-***
-
 ## 29.2. Disk Full Failure [#](#DISK-FULL)
 
 The most important disk monitoring task of a database administrator is to make sure the disk doesn't become full. A filled data disk will not result in data corruption, but it might prevent useful activity from occurring. If the disk holding the WAL files grows full, database server panic and consequent shutdown might occur.
@@ -17,10 +9,3 @@ If you cannot free up additional space on the disk by deleting other things, you
 Some file systems perform badly when they are almost full, so do not wait until the disk is completely full to take action.
 
 If your system supports per-user disk quotas, then the database will naturally be subject to whatever quota is placed on the user the server runs as. Exceeding the quota will have the same bad effects as running out of disk space entirely.
-
-***
-
-|                                                         |                                                          |                                                                     |
-| :------------------------------------------------------ | :------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](disk-usage.html "29.1. Determining Disk Usage")  | [Up](diskusage.html "Chapter 29. Monitoring Disk Usage") |  [Next](wal.html "Chapter 30. Reliability and the Write-Ahead Log") |
-| 29.1. Determining Disk Usage                            |   [Home](index.html "PostgreSQL 17devel Documentation")  |                     Chapter 30. Reliability and the Write-Ahead Log |

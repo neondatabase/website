@@ -1,11 +1,3 @@
-
-
-|        38.17. Packaging Related Objects into an Extension       |                                               |                           |                                                       |                                                                      |
-| :-------------------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](xindex.html "38.16. Interfacing Extensions to Indexes")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](extend-pgxs.html "38.18. Extension Building Infrastructure") |
-
-***
-
 ## 38.17. Packaging Related Objects into an Extension [#](#EXTEND-EXTENSIONS)
 
   * *   [38.17.1. Extension Files](extend-extensions.html#EXTEND-EXTENSIONS-FILES)
@@ -274,10 +266,3 @@ include $(PGXS)
 This makefile relies on PGXS, which is described in [Section 38.18](extend-pgxs.html "38.18. Extension Building Infrastructure"). The command `make install` will install the control and script files into the correct directory as reported by pg\_config.
 
 Once the files are installed, use the `CREATE EXTENSION` command to load the objects into any particular database.
-
-***
-
-|                                                                 |                                                       |                                                                      |
-| :-------------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](xindex.html "38.16. Interfacing Extensions to Indexes")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](extend-pgxs.html "38.18. Extension Building Infrastructure") |
-| 38.16. Interfacing Extensions to Indexes                        | [Home](index.html "PostgreSQL 17devel Documentation") |                             38.18. Extension Building Infrastructure |

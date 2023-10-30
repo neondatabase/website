@@ -1,11 +1,3 @@
-
-
-|                   34.8. The Fast-Path Interface                  |                                                  |                               |                                                       |                                                              |
-| :--------------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](libpq-cancel.html "34.7. Canceling Queries in Progress")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-notify.html "34.9. Asynchronous Notification") |
-
-***
-
 ## 34.8. The Fast-Path Interface [#](#LIBPQ-FASTPATH)
 
 PostgreSQL provides a fast-path interface to send simple function calls to the server.
@@ -47,10 +39,3 @@ To pass a NULL argument to the function, set the *`len`* field of that parameter
 If the function returns NULL, *`*result_len`* is set to `-1`, and *`*result_buf`* is not modified.
 
 Note that it is not possible to handle set-valued results when using this interface. Also, the function must be a plain function, not an aggregate, window function, or procedure.
-
-***
-
-|                                                                  |                                                       |                                                              |
-| :--------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](libpq-cancel.html "34.7. Canceling Queries in Progress")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-notify.html "34.9. Asynchronous Notification") |
-| 34.7. Canceling Queries in Progress                              | [Home](index.html "PostgreSQL 17devel Documentation") |                              34.9. Asynchronous Notification |

@@ -1,11 +1,3 @@
-
-
-|             F.9. btree\_gist — GiST operator classes with B-tree behavior            |                                                                             |                                                        |                                                       |                                                                                |
-| :----------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](btree-gin.html "F.8. btree_gin — GIN operator classes with B-tree behavior")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](citext.html "F.10. citext — a case-insensitive character string type") |
-
-***
-
 ## F.9. btree\_gist — GiST operator classes with B-tree behavior [#](#BTREE-GIST)
 
   * *   [F.9.1. Example Usage](btree-gist.html#BTREE-GIST-EXAMPLE-USAGE)
@@ -60,10 +52,3 @@ INSERT 0 1
 ### F.9.2. Authors [#](#BTREE-GIST-AUTHORS)
 
 Teodor Sigaev (`<teodor@stack.net>`), Oleg Bartunov (`<oleg@sai.msu.su>`), Janko Richter (`<jankorichter@yahoo.de>`), and Paul Jungwirth (`<pj@illuminatedcomputing.com>`). See [http://www.sai.msu.su/~megera/postgres/gist/](http://www.sai.msu.su/~megera/postgres/gist/) for additional information.
-
-***
-
-|                                                                                      |                                                                             |                                                                                |
-| :----------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](btree-gin.html "F.8. btree_gin — GIN operator classes with B-tree behavior")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](citext.html "F.10. citext — a case-insensitive character string type") |
-| F.8. btree\_gin — GIN operator classes with B-tree behavior                          |            [Home](index.html "PostgreSQL 17devel Documentation")            |                        F.10. citext — a case-insensitive character string type |

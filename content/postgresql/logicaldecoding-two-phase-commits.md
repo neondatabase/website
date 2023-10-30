@@ -1,11 +1,3 @@
-
-
-|                         49.10. Two-phase Commit Support for Logical Decoding                         |                                                           |                              |                                                       |                                                                               |
-| :--------------------------------------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](logicaldecoding-streaming.html "49.9. Streaming of Large Transactions for Logical Decoding")  | [Up](logicaldecoding.html "Chapter 49. Logical Decoding") | Chapter 49. Logical Decoding | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](replication-origins.html "Chapter 50. Replication Progress Tracking") |
-
-***
-
 ## 49.10. Two-phase Commit Support for Logical Decoding [#](#LOGICALDECODING-TWO-PHASE-COMMITS)
 
 With the basic output plugin callbacks (eg., `begin_cb`, `change_cb`, `commit_cb` and `message_cb`) two-phase commit commands like `PREPARE TRANSACTION`, `COMMIT PREPARED` and `ROLLBACK PREPARED` are not decoded. While the `PREPARE TRANSACTION` is ignored, `COMMIT PREPARED` is decoded as a `COMMIT` and `ROLLBACK PREPARED` is decoded as a `ROLLBACK`.
@@ -22,10 +14,3 @@ The users that want to decode prepared transactions need to be careful about bel
 
 * If the prepared transaction has locked \[user] catalog tables exclusively then decoding prepare can block till the main transaction is committed.
 * The logical replication solution that builds distributed two phase commit using this feature can deadlock if the prepared transaction has locked \[user] catalog tables exclusively. To avoid this users must refrain from having locks on catalog tables (e.g. explicit `LOCK` command) in such transactions. See [Section 49.8.2](logicaldecoding-synchronous.html#LOGICALDECODING-SYNCHRONOUS-CAVEATS "49.8.2. Caveats") for the details.
-
-***
-
-|                                                                                                      |                                                           |                                                                               |
-| :--------------------------------------------------------------------------------------------------- | :-------------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](logicaldecoding-streaming.html "49.9. Streaming of Large Transactions for Logical Decoding")  | [Up](logicaldecoding.html "Chapter 49. Logical Decoding") |  [Next](replication-origins.html "Chapter 50. Replication Progress Tracking") |
-| 49.9. Streaming of Large Transactions for Logical Decoding                                           |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                     Chapter 50. Replication Progress Tracking |

@@ -1,11 +1,3 @@
-
-
-|                12.8. Testing and Debugging Text Search               |                                                      |                              |                                                       |                                                                                |
-| :------------------------------------------------------------------: | :--------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](textsearch-configuration.html "12.7. Configuration Example")  | [Up](textsearch.html "Chapter 12. Full Text Search") | Chapter 12. Full Text Search | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](textsearch-indexes.html "12.9. Preferred Index Types for Text Search") |
-
-***
-
 ## 12.8. Testing and Debugging Text Search [#](#TEXTSEARCH-DEBUGGING)
 
   * *   [12.8.1. Configuration Testing](textsearch-debugging.html#TEXTSEARCH-CONFIGURATION-TESTING)
@@ -236,10 +228,3 @@ SELECT plainto_tsquery('supernovae stars');
 -----------------
  'sn'
 ```
-
-***
-
-|                                                                      |                                                       |                                                                                |
-| :------------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](textsearch-configuration.html "12.7. Configuration Example")  |  [Up](textsearch.html "Chapter 12. Full Text Search") |  [Next](textsearch-indexes.html "12.9. Preferred Index Types for Text Search") |
-| 12.7. Configuration Example                                          | [Home](index.html "PostgreSQL 17devel Documentation") |                                    12.9. Preferred Index Types for Text Search |

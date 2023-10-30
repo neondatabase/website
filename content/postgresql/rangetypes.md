@@ -1,11 +1,3 @@
-
-
-|                8.17. Range Types               |                                             |                       |                                                       |                                            |
-| :--------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](rowtypes.html "8.16. Composite Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](domains.html "8.18. Domain Types") |
-
-***
-
 ## 8.17. Range Types [#](#RANGETYPES)
 
   * *   [8.17.1. Built-in Range and Multirange Types](rangetypes.html#RANGETYPES-BUILTIN)
@@ -279,10 +271,3 @@ INSERT INTO room_reservation VALUES
     ('123B', '[2010-01-01 14:30, 2010-01-01 15:30)');
 INSERT 0 1
 ```
-
-***
-
-|                                                |                                                       |                                            |
-| :--------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](rowtypes.html "8.16. Composite Types")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](domains.html "8.18. Domain Types") |
-| 8.16. Composite Types                          | [Home](index.html "PostgreSQL 17devel Documentation") |                         8.18. Domain Types |

@@ -1,11 +1,3 @@
-
-
-|               64.6. Index Cost Estimation Functions               |                                                                           |                                                      |                                                       |                                                             |
-| :---------------------------------------------------------------: | :------------------------------------------------------------------------ | :--------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](index-unique-checks.html "64.5. Index Uniqueness Checks")  | [Up](indexam.html "Chapter 64. Index Access Method Interface Definition") | Chapter 64. Index Access Method Interface Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](generic-wal.html "Chapter 65. Generic WAL Records") |
-
-***
-
 ## 64.6. Index Cost Estimation Functions [#](#INDEX-COST-ESTIMATION)
 
 The `amcostestimate` function is given information describing a possible index scan, including lists of WHERE and ORDER BY clauses that have been determined to be usable with the index. It must return estimates of the cost of accessing the index and the selectivity of the WHERE clauses (that is, the fraction of parent-table rows that will be retrieved during the index scan). For simple cases, nearly all the work of the cost estimator can be done by calling standard routines in the optimizer; the point of having an `amcostestimate` function is to allow index access methods to provide index-type-specific knowledge, in case it is possible to improve on the standard estimates.
@@ -115,10 +107,3 @@ A typical cost estimator will proceed as follows:
 5. Estimate the index correlation. For a simple ordered index on a single field, this can be retrieved from pg\_statistic. If the correlation is not known, the conservative estimate is zero (no correlation).
 
 Examples of cost estimator functions can be found in `src/backend/utils/adt/selfuncs.c`.
-
-***
-
-|                                                                   |                                                                           |                                                             |
-| :---------------------------------------------------------------- | :-----------------------------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](index-unique-checks.html "64.5. Index Uniqueness Checks")  | [Up](indexam.html "Chapter 64. Index Access Method Interface Definition") |  [Next](generic-wal.html "Chapter 65. Generic WAL Records") |
-| 64.5. Index Uniqueness Checks                                     |           [Home](index.html "PostgreSQL 17devel Documentation")           |                             Chapter 65. Generic WAL Records |

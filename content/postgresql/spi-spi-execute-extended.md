@@ -1,11 +1,3 @@
-
-
-|         SPI\_execute\_extended        |                                                      |                           |                                                       |                                                                 |
-| :-----------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](spi-spi-exec.html "SPI_exec")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-execute-with-args.html "SPI_execute_with_args") |
-
-***
-
 ## SPI\_execute\_extended
 
 SPI\_execute\_extended — execute a command with out-of-line parameters
@@ -71,10 +63,3 @@ Callers should always zero out the entire *`options`* struct, then fill whicheve
 The return value is the same as for `SPI_execute`.
 
 When *`options->dest`* is NULL, `SPI_processed` and `SPI_tuptable` are set as in `SPI_execute`. When *`options->dest`* is not NULL, `SPI_processed` is set to zero and `SPI_tuptable` is set to NULL. If a tuple count is required, the caller's `DestReceiver` object must calculate it.
-
-***
-
-|                                       |                                                       |                                                                 |
-| :------------------------------------ | :---------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](spi-spi-exec.html "SPI_exec")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-execute-with-args.html "SPI_execute_with_args") |
-| SPI\_exec                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                        SPI\_execute\_with\_args |

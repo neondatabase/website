@@ -1,11 +1,3 @@
-
-
-|                        CREATE ROLE                       |                                        |              |                                                       |                                            |
-| :------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-createpublication.html "CREATE PUBLICATION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createrule.html "CREATE RULE") |
-
-***
-
 ## CREATE ROLE
 
 CREATE ROLE — define a new database role
@@ -194,10 +186,3 @@ IN GROUP role_name [, ...]
 ## See Also
 
 [SET ROLE](sql-set-role.html "SET ROLE"), [ALTER ROLE](sql-alterrole.html "ALTER ROLE"), [DROP ROLE](sql-droprole.html "DROP ROLE"), [GRANT](sql-grant.html "GRANT"), [REVOKE](sql-revoke.html "REVOKE"), [createuser](app-createuser.html "createuser"), [createrole\_self\_grant](runtime-config-client.html#GUC-CREATEROLE-SELF-GRANT)
-
-***
-
-|                                                          |                                                       |                                            |
-| :------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-createpublication.html "CREATE PUBLICATION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createrule.html "CREATE RULE") |
-| CREATE PUBLICATION                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                CREATE RULE |

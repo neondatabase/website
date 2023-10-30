@@ -1,11 +1,3 @@
-
-
-|                    39.2. Visibility of Data Changes                   |                                            |                      |                                                       |                                                                        |
-| :-------------------------------------------------------------------: | :----------------------------------------- | :------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](trigger-definition.html "39.1. Overview of Trigger Behavior")  | [Up](triggers.html "Chapter 39. Triggers") | Chapter 39. Triggers | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](trigger-interface.html "39.3. Writing Trigger Functions in C") |
-
-***
-
 ## 39.2. Visibility of Data Changes [#](#TRIGGER-DATACHANGES)
 
 If you execute SQL commands in your trigger function, and these commands access the table that the trigger is for, then you need to be aware of the data visibility rules, because they determine whether these SQL commands will see the data change that the trigger is fired for. Briefly:
@@ -19,10 +11,3 @@ If you execute SQL commands in your trigger function, and these commands access 
 If your trigger function is written in any of the standard procedural languages, then the above statements apply only if the function is declared `VOLATILE`. Functions that are declared `STABLE` or `IMMUTABLE` will not see changes made by the calling command in any case.
 
 Further information about data visibility rules can be found in [Section 47.5](spi-visibility.html "47.5. Visibility of Data Changes"). The example in [Section 39.4](trigger-example.html "39.4. A Complete Trigger Example") contains a demonstration of these rules.
-
-***
-
-|                                                                       |                                                       |                                                                        |
-| :-------------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](trigger-definition.html "39.1. Overview of Trigger Behavior")  |       [Up](triggers.html "Chapter 39. Triggers")      |  [Next](trigger-interface.html "39.3. Writing Trigger Functions in C") |
-| 39.1. Overview of Trigger Behavior                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                   39.3. Writing Trigger Functions in C |

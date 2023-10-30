@@ -1,11 +1,3 @@
-
-
-|                     8.10. Bit String Types                    |                                             |                       |                                                       |                                                             |
-| :-----------------------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](datatype-net-types.html "8.9. Network Address Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-textsearch.html "8.11. Text Search Types") |
-
-***
-
 ## 8.10. Bit String Types [#](#DATATYPE-BIT)
 
 Bit strings are strings of 1's and 0's. They can be used to store or visualize bit masks. There are two SQL bit types: `bit(n)` and `bit varying(n)`, where *`n`* is a positive integer.
@@ -40,10 +32,3 @@ SELECT * FROM test;
 \
 
 A bit string value requires 1 byte for each group of 8 bits, plus 5 or 8 bytes overhead depending on the length of the string (but long values may be compressed or moved out-of-line, as explained in [Section 8.3](datatype-character.html "8.3. Character Types") for character strings).
-
-***
-
-|                                                               |                                                       |                                                             |
-| :------------------------------------------------------------ | :---------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](datatype-net-types.html "8.9. Network Address Types")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](datatype-textsearch.html "8.11. Text Search Types") |
-| 8.9. Network Address Types                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                     8.11. Text Search Types |

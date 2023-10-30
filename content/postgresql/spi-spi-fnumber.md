@@ -1,11 +1,3 @@
-
-
-|               SPI\_fnumber              |                                                                      |                                   |                                                       |                                               |
-| :-------------------------------------: | :------------------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](spi-spi-fname.html "SPI_fname")  | [Up](spi-interface-support.html "47.2. Interface Support Functions") | 47.2. Interface Support Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-getvalue.html "SPI_getvalue") |
-
-***
-
 ## SPI\_fnumber
 
 SPI\_fnumber — determine the column number for the specified column name
@@ -36,10 +28,3 @@ If *`colname`* refers to a system column (e.g., `ctid`) then the appropriate neg
 ## Return Value
 
 Column number (count starts at 1 for user-defined columns), or `SPI_ERROR_NOATTRIBUTE` if the named column was not found.
-
-***
-
-|                                         |                                                                      |                                               |
-| :-------------------------------------- | :------------------------------------------------------------------: | --------------------------------------------: |
-| [Prev](spi-spi-fname.html "SPI_fname")  | [Up](spi-interface-support.html "47.2. Interface Support Functions") |  [Next](spi-spi-getvalue.html "SPI_getvalue") |
-| SPI\_fname                              |         [Home](index.html "PostgreSQL 17devel Documentation")        |                                 SPI\_getvalue |

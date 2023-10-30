@@ -1,11 +1,3 @@
-
-
-|                    13.3. Explicit Locking                   |                                                   |                                 |                                                       |                                                                                             |
-| :---------------------------------------------------------: | :------------------------------------------------ | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------------------: |
-| [Prev](transaction-iso.html "13.2. Transaction Isolation")  | [Up](mvcc.html "Chapter 13. Concurrency Control") | Chapter 13. Concurrency Control | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](applevel-consistency.html "13.4. Data Consistency Checks at the Application Level") |
-
-***
-
 ## 13.3. Explicit Locking [#](#EXPLICIT-LOCKING)
 
   * *   [13.3.1. Table-Level Locks](explicit-locking.html#LOCKING-TABLES)
@@ -189,10 +181,3 @@ SELECT pg_advisory_lock(q.id) FROM
 In the above queries, the second form is dangerous because the `LIMIT` is not guaranteed to be applied before the locking function is executed. This might cause some locks to be acquired that the application was not expecting, and hence would fail to release (until it ends the session). From the point of view of the application, such locks would be dangling, although still viewable in `pg_locks`.
 
 The functions provided to manipulate advisory locks are described in [Section 9.27.10](functions-admin.html#FUNCTIONS-ADVISORY-LOCKS "9.27.10. Advisory Lock Functions").
-
-***
-
-|                                                             |                                                       |                                                                                             |
-| :---------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------------------------------: |
-| [Prev](transaction-iso.html "13.2. Transaction Isolation")  |   [Up](mvcc.html "Chapter 13. Concurrency Control")   |  [Next](applevel-consistency.html "13.4. Data Consistency Checks at the Application Level") |
-| 13.2. Transaction Isolation                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                      13.4. Data Consistency Checks at the Application Level |

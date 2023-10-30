@@ -1,11 +1,3 @@
-
-
-|                  DROP CONVERSION                 |                                        |              |                                                       |                                                |
-| :----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-dropcollation.html "DROP COLLATION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropdatabase.html "DROP DATABASE") |
-
-***
-
 ## DROP CONVERSION
 
 DROP CONVERSION — remove a conversion
@@ -51,10 +43,3 @@ There is no `DROP CONVERSION` statement in the SQL standard, but a `DROP TRANSLA
 ## See Also
 
 [ALTER CONVERSION](sql-alterconversion.html "ALTER CONVERSION"), [CREATE CONVERSION](sql-createconversion.html "CREATE CONVERSION")
-
-***
-
-|                                                  |                                                       |                                                |
-| :----------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-dropcollation.html "DROP COLLATION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropdatabase.html "DROP DATABASE") |
-| DROP COLLATION                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                  DROP DATABASE |

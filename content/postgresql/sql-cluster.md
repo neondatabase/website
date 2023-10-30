@@ -1,11 +1,3 @@
-
-
-|             CLUSTER             |                                        |              |                                                       |                                     |
-| :-----------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-close.html "CLOSE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-comment.html "COMMENT") |
-
-***
-
 ## CLUSTER
 
 CLUSTER — cluster a table according to an index
@@ -115,10 +107,3 @@ CLUSTER index_name ON table_name
 ## See Also
 
 [clusterdb](app-clusterdb.html "clusterdb"), [Section 28.4.2](progress-reporting.html#CLUSTER-PROGRESS-REPORTING "28.4.2. CLUSTER Progress Reporting")
-
-***
-
-|                                 |                                                       |                                     |
-| :------------------------------ | :---------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-close.html "CLOSE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-comment.html "COMMENT") |
-| CLOSE                           | [Home](index.html "PostgreSQL 17devel Documentation") |                             COMMENT |

@@ -1,11 +1,3 @@
-
-
-|              ALTER EVENT TRIGGER             |                                        |              |                                                       |                                                    |
-| :------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-alterdomain.html "ALTER DOMAIN")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterextension.html "ALTER EXTENSION") |
-
-***
-
 ## ALTER EVENT TRIGGER
 
 ALTER EVENT TRIGGER — change the definition of an event trigger
@@ -51,10 +43,3 @@ There is no `ALTER EVENT TRIGGER` statement in the SQL standard.
 ## See Also
 
 [CREATE EVENT TRIGGER](sql-createeventtrigger.html "CREATE EVENT TRIGGER"), [DROP EVENT TRIGGER](sql-dropeventtrigger.html "DROP EVENT TRIGGER")
-
-***
-
-|                                              |                                                       |                                                    |
-| :------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-alterdomain.html "ALTER DOMAIN")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterextension.html "ALTER EXTENSION") |
-| ALTER DOMAIN                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                    ALTER EXTENSION |

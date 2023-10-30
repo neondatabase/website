@@ -1,11 +1,3 @@
-
-
-|                    44.11. PL/Tcl Configuration                   |                                                                 |                                              |                                                       |                                                            |
-| :--------------------------------------------------------------: | :-------------------------------------------------------------- | :------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](pltcl-transactions.html "44.10. Transaction Management")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") | Chapter 44. PL/Tcl — Tcl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pltcl-procnames.html "44.12. Tcl Procedure Names") |
-
-***
-
 ## 44.11. PL/Tcl Configuration [#](#PLTCL-CONFIG)
 
 This section lists configuration parameters that affect PL/Tcl.
@@ -23,10 +15,3 @@ This section lists configuration parameters that affect PL/Tcl.
 * `pltclu.start_proc` (`string`) [#](#GUC-PLTCLU-START-PROC)
 
     This parameter is exactly like `pltcl.start_proc`, except that it applies to PL/TclU. The referenced function must be written in the `pltclu` language.
-
-***
-
-|                                                                  |                                                                 |                                                            |
-| :--------------------------------------------------------------- | :-------------------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](pltcl-transactions.html "44.10. Transaction Management")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") |  [Next](pltcl-procnames.html "44.12. Tcl Procedure Names") |
-| 44.10. Transaction Management                                    |      [Home](index.html "PostgreSQL 17devel Documentation")      |                                 44.12. Tcl Procedure Names |

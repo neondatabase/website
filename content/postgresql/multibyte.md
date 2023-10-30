@@ -1,11 +1,3 @@
-
-
-|            24.3. Character Set Support            |                                               |                          |                                                       |                                                                            |
-| :-----------------------------------------------: | :-------------------------------------------- | :----------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------: |
-| [Prev](collation.html "24.2. Collation Support")  | [Up](charset.html "Chapter 24. Localization") | Chapter 24. Localization | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](maintenance.html "Chapter 25. Routine Database Maintenance Tasks") |
-
-***
-
 ## 24.3. Character Set Support [#](#MULTIBYTE)
 
   * *   [24.3.1. Supported Character Sets](multibyte.html#MULTIBYTE-CHARSET-SUPPORTED)
@@ -375,10 +367,3 @@ These are good sources to start learning about various kinds of encoding systems
 * [RFC 3629](https://tools.ietf.org/html/rfc3629)
 
     UTF-8 (8-bit UCS/Unicode Transformation Format) is defined here.
-
-***
-
-|                                                   |                                                       |                                                                            |
-| :------------------------------------------------ | :---------------------------------------------------: | -------------------------------------------------------------------------: |
-| [Prev](collation.html "24.2. Collation Support")  |     [Up](charset.html "Chapter 24. Localization")     |  [Next](maintenance.html "Chapter 25. Routine Database Maintenance Tasks") |
-| 24.2. Collation Support                           | [Home](index.html "PostgreSQL 17devel Documentation") |                             Chapter 25. Routine Database Maintenance Tasks |

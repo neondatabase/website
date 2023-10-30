@@ -1,11 +1,3 @@
-
-
-|             34.18. LDAP Lookup of Connection Parameters            |                                                  |                               |                                                       |                                              |
-| :----------------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](libpq-pgservice.html "34.17. The Connection Service File")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-ssl.html "34.19. SSL Support") |
-
-***
-
 ## 34.18. LDAP Lookup of Connection Parameters [#](#LIBPQ-LDAP)
 
 If libpq has been compiled with LDAP support (option `--with-ldap` for `configure`) it is possible to retrieve connection options like `host` or `dbname` via LDAP from a central server. The advantage is that if the connection parameters for a database change, the connection information doesn't have to be updated on all client machines.
@@ -55,10 +47,3 @@ dbname=customer
 user=appuser
 ldap://ldap.acme.com/cn=dbserver,cn=hosts?pgconnectinfo?base?(objectclass=*)
 ```
-
-***
-
-|                                                                    |                                                       |                                              |
-| :----------------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](libpq-pgservice.html "34.17. The Connection Service File")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-ssl.html "34.19. SSL Support") |
-| 34.17. The Connection Service File                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                           34.19. SSL Support |

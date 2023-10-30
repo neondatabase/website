@@ -1,11 +1,3 @@
-
-
-|              CREATE FOREIGN DATA WRAPPER             |                                        |              |                                                       |                                                             |
-| :--------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](sql-createextension.html "CREATE EXTENSION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createforeigntable.html "CREATE FOREIGN TABLE") |
-
-***
-
 ## CREATE FOREIGN DATA WRAPPER
 
 CREATE FOREIGN DATA WRAPPER — define a new foreign-data wrapper
@@ -85,10 +77,3 @@ Note, however, that the SQL/MED functionality as a whole is not yet conforming.
 ## See Also
 
 [ALTER FOREIGN DATA WRAPPER](sql-alterforeigndatawrapper.html "ALTER FOREIGN DATA WRAPPER"), [DROP FOREIGN DATA WRAPPER](sql-dropforeigndatawrapper.html "DROP FOREIGN DATA WRAPPER"), [CREATE SERVER](sql-createserver.html "CREATE SERVER"), [CREATE USER MAPPING](sql-createusermapping.html "CREATE USER MAPPING"), [CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE")
-
-***
-
-|                                                      |                                                       |                                                             |
-| :--------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](sql-createextension.html "CREATE EXTENSION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createforeigntable.html "CREATE FOREIGN TABLE") |
-| CREATE EXTENSION                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                        CREATE FOREIGN TABLE |

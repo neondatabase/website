@@ -1,11 +1,3 @@
-
-
-|                75.4. BKI Commands                |                                                                               |                                                              |                                                       |                                                                         |
-| :----------------------------------------------: | :---------------------------------------------------------------------------- | :----------------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](bki-format.html "75.3. BKI File Format")  | [Up](bki.html "Chapter 75. System Catalog Declarations and Initial Contents") | Chapter 75. System Catalog Declarations and Initial Contents | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](bki-structure.html "75.5. Structure of the Bootstrap BKI File") |
-
-***
-
 ## 75.4. BKI Commands [#](#BKI-COMMANDS)
 
 * `create` *`tablename`* *`tableoid`* \[`bootstrap`] \[`shared_relation`] \[`rowtype_oid` *`oid`*] (*`name1`* = *`type1`* \[`FORCE NOT NULL` | `FORCE NULL` ] \[, *`name2`* = *`type2`* \[`FORCE NOT NULL` | `FORCE NULL` ], ...])
@@ -43,10 +35,3 @@
 * `build indices`
 
     Fill in the indices that have previously been declared.
-
-***
-
-|                                                  |                                                                               |                                                                         |
-| :----------------------------------------------- | :---------------------------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](bki-format.html "75.3. BKI File Format")  | [Up](bki.html "Chapter 75. System Catalog Declarations and Initial Contents") |  [Next](bki-structure.html "75.5. Structure of the Bootstrap BKI File") |
-| 75.3. BKI File Format                            |             [Home](index.html "PostgreSQL 17devel Documentation")             |                               75.5. Structure of the Bootstrap BKI File |

@@ -1,11 +1,3 @@
-
-
-|                  DO                 |                                        |              |                                                       |                                                           |
-| :---------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](sql-discard.html "DISCARD")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-drop-access-method.html "DROP ACCESS METHOD") |
-
-***
-
 ## DO
 
 DO — execute an anonymous code block
@@ -66,10 +58,3 @@ There is no `DO` statement in the SQL standard.
 ## See Also
 
 [CREATE LANGUAGE](sql-createlanguage.html "CREATE LANGUAGE")
-
-***
-
-|                                     |                                                       |                                                           |
-| :---------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](sql-discard.html "DISCARD")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-drop-access-method.html "DROP ACCESS METHOD") |
-| DISCARD                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                        DROP ACCESS METHOD |

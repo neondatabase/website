@@ -1,11 +1,3 @@
-
-
-|                CREATE SCHEMA               |                                        |              |                                                       |                                                    |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-createrule.html "CREATE RULE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createsequence.html "CREATE SEQUENCE") |
-
-***
-
 ## CREATE SCHEMA
 
 CREATE SCHEMA — define a new schema
@@ -115,10 +107,3 @@ The `IF NOT EXISTS` option is a PostgreSQL extension.
 ## See Also
 
 [ALTER SCHEMA](sql-alterschema.html "ALTER SCHEMA"), [DROP SCHEMA](sql-dropschema.html "DROP SCHEMA")
-
-***
-
-|                                            |                                                       |                                                    |
-| :----------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-createrule.html "CREATE RULE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createsequence.html "CREATE SEQUENCE") |
-| CREATE RULE                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                    CREATE SEQUENCE |

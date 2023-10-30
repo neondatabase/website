@@ -1,11 +1,3 @@
-
-
-|                 57.2. For the Programmer                |                                                      |                                     |                                                       |                                                                             |
-| :-----------------------------------------------------: | :--------------------------------------------------- | :---------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](nls-translator.html "57.1. For the Translator")  | [Up](nls.html "Chapter 57. Native Language Support") | Chapter 57. Native Language Support | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plhandler.html "Chapter 58. Writing a Procedural Language Handler") |
-
-***
-
 ## 57.2. For the Programmer [#](#NLS-PROGRAMMER)
 
   * *   [57.2.1. Mechanics](nls-programmer.html#NLS-MECHANICS)
@@ -138,10 +130,3 @@ Here are some guidelines for writing messages that are easily translatable.
     ```
 
     These comments are copied to the message catalog files so that the translators can see them.
-
-***
-
-|                                                         |                                                       |                                                                             |
-| :------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](nls-translator.html "57.1. For the Translator")  |  [Up](nls.html "Chapter 57. Native Language Support") |  [Next](plhandler.html "Chapter 58. Writing a Procedural Language Handler") |
-| 57.1. For the Translator                                | [Home](index.html "PostgreSQL 17devel Documentation") |                           Chapter 58. Writing a Procedural Language Handler |

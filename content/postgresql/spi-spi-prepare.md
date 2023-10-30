@@ -1,11 +1,3 @@
-
-
-|                           SPI\_prepare                          |                                                      |                           |                                                       |                                                           |
-| :-------------------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](spi-spi-execute-with-args.html "SPI_execute_with_args")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-prepare-cursor.html "SPI_prepare_cursor") |
-
-***
-
 ## SPI\_prepare
 
 SPI\_prepare — prepare a statement, without executing it yet
@@ -56,10 +48,3 @@ This function should only be called from a connected C function.
 `SPIPlanPtr` is declared as a pointer to an opaque struct type in `spi.h`. It is unwise to try to access its contents directly, as that makes your code much more likely to break in future revisions of PostgreSQL.
 
 The name `SPIPlanPtr` is somewhat historical, since the data structure no longer necessarily contains an execution plan.
-
-***
-
-|                                                                 |                                                       |                                                           |
-| :-------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](spi-spi-execute-with-args.html "SPI_execute_with_args")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-prepare-cursor.html "SPI_prepare_cursor") |
-| SPI\_execute\_with\_args                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                      SPI\_prepare\_cursor |

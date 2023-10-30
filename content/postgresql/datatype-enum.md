@@ -1,11 +1,3 @@
-
-
-|                8.7. Enumerated Types               |                                             |                       |                                                       |                                                         |
-| :------------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](datatype-boolean.html "8.6. Boolean Type")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-geometric.html "8.8. Geometric Types") |
-
-***
-
 ## 8.7. Enumerated Types [#](#DATATYPE-ENUM)
 
   * *   [8.7.1. Declaration of Enumerated Types](datatype-enum.html#DATATYPE-ENUM-DECLARATION)
@@ -114,10 +106,3 @@ Although enum types are primarily intended for static sets of values, there is s
 An enum value occupies four bytes on disk. The length of an enum value's textual label is limited by the `NAMEDATALEN` setting compiled into PostgreSQL; in standard builds this means at most 63 bytes.
 
 The translations from internal enum values to textual labels are kept in the system catalog [`pg_enum`](catalog-pg-enum.html "53.20. pg_enum"). Querying this catalog directly can be useful.
-
-***
-
-|                                                    |                                                       |                                                         |
-| :------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](datatype-boolean.html "8.6. Boolean Type")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](datatype-geometric.html "8.8. Geometric Types") |
-| 8.6. Boolean Type                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                    8.8. Geometric Types |

@@ -1,11 +1,3 @@
-
-
-|                    37.15. `column_privileges`                   |                                                                    |                                    |                                                       |                                                                     |
-| :-------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](infoschema-column-options.html "37.14. column_options")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-column-udt-usage.html "37.16. column_udt_usage") |
-
-***
-
 ## 37.15. `column_privileges` [#](#INFOSCHEMA-COLUMN-PRIVILEGES)
 
 The view `column_privileges` identifies all privileges granted on columns to a currently enabled role or by a currently enabled role. There is one row for each combination of column, grantor, and grantee.
@@ -24,10 +16,3 @@ If a privilege has been granted on an entire table, it will show up in this view
 | `column_name` `sql_identifier`Name of the column                                                                                    |
 | `privilege_type` `character_data`Type of the privilege: `SELECT`, `INSERT`, `UPDATE`, or `REFERENCES`                               |
 | `is_grantable` `yes_or_no``YES` if the privilege is grantable, `NO` if not                                                          |
-
-***
-
-|                                                                 |                                                                    |                                                                     |
-| :-------------------------------------------------------------- | :----------------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](infoschema-column-options.html "37.14. column_options")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-column-udt-usage.html "37.16. column_udt_usage") |
-| 37.14. `column_options`                                         |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                           37.16. `column_udt_usage` |

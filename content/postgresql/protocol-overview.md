@@ -1,11 +1,3 @@
-
-
-|                         55.1. Overview                         |                                                             |                                       |                                                       |                                                  |
-| :------------------------------------------------------------: | :---------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](protocol.html "Chapter 55. Frontend/Backend Protocol")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") | Chapter 55. Frontend/Backend Protocol | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](protocol-flow.html "55.2. Message Flow") |
-
-***
-
 ## 55.1. Overview [#](#PROTOCOL-OVERVIEW)
 
   * *   [55.1.1. Messaging Overview](protocol-overview.html#PROTOCOL-MESSAGE-CONCEPTS)
@@ -45,10 +37,3 @@ Data of a particular data type might be transmitted in any of several different 
 The text representation of values is whatever strings are produced and accepted by the input/output conversion functions for the particular data type. In the transmitted representation, there is no trailing null character; the frontend must add one to received values if it wants to process them as C strings. (The text format does not allow embedded nulls, by the way.)
 
 Binary representations for integers use network byte order (most significant byte first). For other data types consult the documentation or source code to learn about the binary representation. Keep in mind that binary representations for complex data types might change across server versions; the text format is usually the more portable choice.
-
-***
-
-|                                                                |                                                             |                                                  |
-| :------------------------------------------------------------- | :---------------------------------------------------------: | -----------------------------------------------: |
-| [Prev](protocol.html "Chapter 55. Frontend/Backend Protocol")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") |  [Next](protocol-flow.html "55.2. Message Flow") |
-| Chapter 55. Frontend/Backend Protocol                          |    [Home](index.html "PostgreSQL 17devel Documentation")    |                               55.2. Message Flow |

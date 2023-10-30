@@ -1,11 +1,3 @@
-
-
-|    56.2. Reporting Errors Within the Server    |                                                               |                                           |                                                       |                                                                   |
-| :--------------------------------------------: | :------------------------------------------------------------ | :---------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](source-format.html "56.1. Formatting")  | [Up](source.html "Chapter 56. PostgreSQL Coding Conventions") | Chapter 56. PostgreSQL Coding Conventions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](error-style-guide.html "56.3. Error Message Style Guide") |
-
-***
-
 ## 56.2. Reporting Errors Within the Server [#](#ERROR-MESSAGE-REPORTING)
 
 Error, warning, and log messages generated within the server code should be created using `ereport`, or its older cousin `elog`. The use of this function is complex enough to require some explanation.
@@ -97,14 +89,3 @@ ereport(level, errmsg_internal("format string", ...));
 Notice that the SQLSTATE error code is always defaulted, and the message string is not subject to translation. Therefore, `elog` should be used only for internal errors and low-level debug logging. Any message that is likely to be of interest to ordinary users should go through `ereport`. Nonetheless, there are enough internal “cannot happen” error checks in the system that `elog` is still widely used; it is preferred for those messages for its notational simplicity.
 
 Advice about writing good error messages can be found in [Section 56.3](error-style-guide.html "56.3. Error Message Style Guide").
-
-***
-
-[\[16\] ](#id-1.10.7.3.10.2.2.1.7)That is, the value that was current when the `ereport` call was reached; changes of `errno` within the auxiliary reporting routines will not affect it. That would not be true if you were to write `strerror(errno)` explicitly in `errmsg`'s parameter list; accordingly, do not do so.
-
-***
-
-|                                                |                                                               |                                                                   |
-| :--------------------------------------------- | :-----------------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](source-format.html "56.1. Formatting")  | [Up](source.html "Chapter 56. PostgreSQL Coding Conventions") |  [Next](error-style-guide.html "56.3. Error Message Style Guide") |
-| 56.1. Formatting                               |     [Home](index.html "PostgreSQL 17devel Documentation")     |                                   56.3. Error Message Style Guide |

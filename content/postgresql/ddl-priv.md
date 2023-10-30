@@ -1,11 +1,3 @@
-
-
-|                 5.7. Privileges                 |                                             |                            |                                                       |                                                            |
-| :---------------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](ddl-alter.html "5.6. Modifying Tables")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-rowsecurity.html "5.8. Row Security Policies") |
-
-***
-
 ## 5.7. Privileges [#](#DDL-PRIV)
 
 When an object is created, it is assigned an owner. The owner is normally the role that executed the creation statement. For most kinds of objects, the initial state is that only the owner (or a superuser) can do anything with the object. To allow other roles to use it, *privileges* must be granted.
@@ -197,10 +189,3 @@ Then psql's `\dp` command would show:
 If the “Access privileges” column is empty for a given object, it means the object has default privileges (that is, its privileges entry in the relevant system catalog is null). Default privileges always include all privileges for the owner, and can include some privileges for `PUBLIC` depending on the object type, as explained above. The first `GRANT` or `REVOKE` on an object will instantiate the default privileges (producing, for example, `miriam=arwdDxt/miriam`) and then modify them per the specified request. Similarly, entries are shown in “Column privileges” only for columns with nondefault privileges. (Note: for this purpose, “default privileges” always means the built-in default privileges for the object's type. An object whose privileges have been affected by an `ALTER DEFAULT PRIVILEGES` command will always be shown with an explicit privilege entry that includes the effects of the `ALTER`.)
 
 Notice that the owner's implicit grant options are not marked in the access privileges display. A `*` will appear only when grant options have been explicitly granted to someone.
-
-***
-
-|                                                 |                                                       |                                                            |
-| :---------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](ddl-alter.html "5.6. Modifying Tables")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](ddl-rowsecurity.html "5.8. Row Security Policies") |
-| 5.6. Modifying Tables                           | [Home](index.html "PostgreSQL 17devel Documentation") |                                 5.8. Row Security Policies |

@@ -1,11 +1,3 @@
-
-
-|           36.9. Preprocessor Directives          |                                                        |                                      |                                                       |                                                                      |
-| :----------------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](ecpg-errors.html "36.8. Error Handling")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-process.html "36.10. Processing Embedded SQL Programs") |
-
-***
-
 ## 36.9. Preprocessor Directives [#](#ECPG-PREPROC)
 
   * *   [36.9.1. Including Files](ecpg-preproc.html#ECPG-INCLUDE)
@@ -132,10 +124,3 @@ EXEC SQL else;
 EXEC SQL SET TIMEZONE TO 'GMT';
 EXEC SQL endif;
 ```
-
-***
-
-|                                                  |                                                        |                                                                      |
-| :----------------------------------------------- | :----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](ecpg-errors.html "36.8. Error Handling")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](ecpg-process.html "36.10. Processing Embedded SQL Programs") |
-| 36.8. Error Handling                             |  [Home](index.html "PostgreSQL 17devel Documentation") |                              36.10. Processing Embedded SQL Programs |

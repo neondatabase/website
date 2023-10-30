@@ -1,11 +1,3 @@
-
-
-|          RELEASE SAVEPOINT          |                                        |              |                                                       |                                 |
-| :---------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------: |
-| [Prev](sql-reindex.html "REINDEX")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-reset.html "RESET") |
-
-***
-
 ## RELEASE SAVEPOINT
 
 RELEASE SAVEPOINT — release a previously defined savepoint
@@ -82,10 +74,3 @@ This command conforms to the SQL standard. The standard specifies that the key w
 ## See Also
 
 [BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [ROLLBACK](sql-rollback.html "ROLLBACK"), [ROLLBACK TO SAVEPOINT](sql-rollback-to.html "ROLLBACK TO SAVEPOINT"), [SAVEPOINT](sql-savepoint.html "SAVEPOINT")
-
-***
-
-|                                     |                                                       |                                 |
-| :---------------------------------- | :---------------------------------------------------: | ------------------------------: |
-| [Prev](sql-reindex.html "REINDEX")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-reset.html "RESET") |
-| REINDEX                             | [Home](index.html "PostgreSQL 17devel Documentation") |                           RESET |

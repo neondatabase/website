@@ -1,11 +1,3 @@
-
-
-|                       52.1. The Path of a Query                       |                                                                    |                                              |                                                       |                                                                     |
-| :-------------------------------------------------------------------: | :----------------------------------------------------------------- | :------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](overview.html "Chapter 52. Overview of PostgreSQL Internals")  | [Up](overview.html "Chapter 52. Overview of PostgreSQL Internals") | Chapter 52. Overview of PostgreSQL Internals | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](connect-estab.html "52.2. How Connections Are Established") |
-
-***
-
 ## 52.1. The Path of a Query [#](#QUERY-PATH)
 
 Here we give a short overview of the stages a query has to pass to obtain a result.
@@ -25,10 +17,3 @@ Here we give a short overview of the stages a query has to pass to obtain a resu
 5. The executor recursively steps through the *plan tree* and retrieves rows in the way represented by the plan. The executor makes use of the *storage system* while scanning relations, performs *sorts* and *joins*, evaluates *qualifications* and finally hands back the rows derived.
 
 In the following sections we will cover each of the above listed items in more detail to give a better understanding of PostgreSQL's internal control and data structures.
-
-***
-
-|                                                                       |                                                                    |                                                                     |
-| :-------------------------------------------------------------------- | :----------------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](overview.html "Chapter 52. Overview of PostgreSQL Internals")  | [Up](overview.html "Chapter 52. Overview of PostgreSQL Internals") |  [Next](connect-estab.html "52.2. How Connections Are Established") |
-| Chapter 52. Overview of PostgreSQL Internals                          |        [Home](index.html "PostgreSQL 17devel Documentation")       |                               52.2. How Connections Are Established |

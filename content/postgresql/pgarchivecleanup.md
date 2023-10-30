@@ -1,11 +1,3 @@
-
-
-|         pg\_archivecleanup        |                                                              |                                |                                                       |                                              |
-| :-------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](app-initdb.html "initdb")  | [Up](reference-server.html "PostgreSQL Server Applications") | PostgreSQL Server Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pgchecksums.html "pg_checksums") |
-
-***
-
 ## pg\_archivecleanup
 
 pg\_archivecleanup — clean up PostgreSQL WAL archive files
@@ -93,10 +85,3 @@ where the archive directory is physically located on the standby server, so that
 
 * produce debugging output in `cleanup.log`
 * remove no-longer-needed files from the archive directory
-
-***
-
-|                                   |                                                              |                                              |
-| :-------------------------------- | :----------------------------------------------------------: | -------------------------------------------: |
-| [Prev](app-initdb.html "initdb")  | [Up](reference-server.html "PostgreSQL Server Applications") |  [Next](app-pgchecksums.html "pg_checksums") |
-| initdb                            |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                pg\_checksums |

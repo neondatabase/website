@@ -1,11 +1,3 @@
-
-
-|                          7.5. Sorting Rows (`ORDER BY`)                         |                                         |                    |                                                       |                                                     |
-| :-----------------------------------------------------------------------------: | :-------------------------------------- | :----------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](queries-union.html "7.4. Combining Queries (UNION, INTERSECT, EXCEPT)")  | [Up](queries.html "Chapter 7. Queries") | Chapter 7. Queries | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](queries-limit.html "7.6. LIMIT and OFFSET") |
-
-***
-
 ## 7.5. Sorting Rows (`ORDER BY`) [#](#QUERIES-ORDER)
 
 After a query has produced an output table (after the select list has been processed) it can optionally be sorted. If sorting is not chosen, the rows will be returned in an unspecified order. The actual order in that case will depend on the scan and join plan types and the order on disk, but it must not be relied on. A particular output ordering can only be guaranteed if the sort step is explicitly chosen.
@@ -51,14 +43,3 @@ SELECT a + b AS sum, c FROM table1 ORDER BY sum + c;          -- wrong
 This restriction is made to reduce ambiguity. There is still ambiguity if an `ORDER BY` item is a simple name that could match either an output column name or a column from the table expression. The output column is used in such cases. This would only cause confusion if you use `AS` to rename an output column to match some other table column's name.
 
 `ORDER BY` can be applied to the result of a `UNION`, `INTERSECT`, or `EXCEPT` combination, but in this case it is only permitted to sort by output column names or numbers, not by expressions.
-
-***
-
-[\[6\] ](#id-1.5.6.9.5.10)Actually, PostgreSQL uses the *default B-tree operator class* for the expression's data type to determine the sort ordering for `ASC` and `DESC`. Conventionally, data types will be set up so that the `<` and `>` operators correspond to this sort ordering, but a user-defined data type's designer could choose to do something different.
-
-***
-
-|                                                                                 |                                                       |                                                     |
-| :------------------------------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](queries-union.html "7.4. Combining Queries (UNION, INTERSECT, EXCEPT)")  |        [Up](queries.html "Chapter 7. Queries")        |  [Next](queries-limit.html "7.6. LIMIT and OFFSET") |
-| 7.4. Combining Queries (`UNION`, `INTERSECT`, `EXCEPT`)                         | [Home](index.html "PostgreSQL 17devel Documentation") |                           7.6. `LIMIT` and `OFFSET` |

@@ -1,11 +1,3 @@
-
-
-|                      Part I. Tutorial                     |                                                     |                                  |                                                       |                                                           |
-| :-------------------------------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](bug-reporting.html "5. Bug Reporting Guidelines")  | [Up](index.html "PostgreSQL 17devel Documentation") | PostgreSQL 17devel Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-start.html "Chapter 1. Getting Started") |
-
-***
-
 # Part I. Tutorial
 
 Welcome to the PostgreSQL Tutorial. The following few chapters are intended to give a simple introduction to PostgreSQL, relational database concepts, and the SQL language to those who are new to any one of these aspects. We only assume some general knowledge about how to use computers. No particular Unix or programming experience is required. This part is mainly intended to give you some hands-on experience with important aspects of the PostgreSQL system. It makes no attempt to be a complete or thorough treatment of the topics it covers.
@@ -42,10 +34,3 @@ After you have worked through this tutorial you might want to move on to reading
     * [3.5. Window Functions](tutorial-window.html)
     * [3.6. Inheritance](tutorial-inheritance.html)
     * [3.7. Conclusion](tutorial-conclusion.html)
-
-***
-
-|                                                           |                                                       |                                                           |
-| :-------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](bug-reporting.html "5. Bug Reporting Guidelines")  |  [Up](index.html "PostgreSQL 17devel Documentation")  |  [Next](tutorial-start.html "Chapter 1. Getting Started") |
-| 5. Bug Reporting Guidelines                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                Chapter 1. Getting Started |

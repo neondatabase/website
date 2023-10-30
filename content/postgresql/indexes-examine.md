@@ -1,11 +1,3 @@
-
-
-|                   11.12. Examining Index Usage                   |                                          |                     |                                                       |                                                         |
-| :--------------------------------------------------------------: | :--------------------------------------- | :-----------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](indexes-collations.html "11.11. Indexes and Collations")  | [Up](indexes.html "Chapter 11. Indexes") | Chapter 11. Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](textsearch.html "Chapter 12. Full Text Search") |
-
-***
-
 ## 11.12. Examining Index Usage [#](#INDEXES-EXAMINE)
 
 Although indexes in PostgreSQL do not need maintenance or tuning, it is still important to check which indexes are actually used by the real-life query workload. Examining index usage for an individual query is done with the [EXPLAIN](sql-explain.html "EXPLAIN") command; its application for this purpose is illustrated in [Section 14.1](using-explain.html "14.1. Using EXPLAIN"). It is also possible to gather overall statistics about index usage in a running server, as described in [Section 28.2](monitoring-stats.html "28.2. The Cumulative Statistics System").
@@ -27,10 +19,3 @@ It is difficult to formulate a general procedure for determining which indexes t
 * If it turns out that the cost estimates are wrong, there are, again, two possibilities. The total cost is computed from the per-row costs of each plan node times the selectivity estimate of the plan node. The costs estimated for the plan nodes can be adjusted via run-time parameters (described in [Section 20.7.2](runtime-config-query.html#RUNTIME-CONFIG-QUERY-CONSTANTS "20.7.2. Planner Cost Constants")). An inaccurate selectivity estimate is due to insufficient statistics. It might be possible to improve this by tuning the statistics-gathering parameters (see [ALTER TABLE](sql-altertable.html "ALTER TABLE")).
 
     If you do not succeed in adjusting the costs to be more appropriate, then you might have to resort to forcing index usage explicitly. You might also want to contact the PostgreSQL developers to examine the issue.
-
-***
-
-|                                                                  |                                                       |                                                         |
-| :--------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](indexes-collations.html "11.11. Indexes and Collations")  |        [Up](indexes.html "Chapter 11. Indexes")       |  [Next](textsearch.html "Chapter 12. Full Text Search") |
-| 11.11. Indexes and Collations                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                            Chapter 12. Full Text Search |

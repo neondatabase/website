@@ -1,10 +1,3 @@
-
-|                 9.15. XML Functions                 |                                                           |                                    |                                                       |                                                                   |
-| :-------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](functions-uuid.html "9.14. UUID Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-json.html "9.16. JSON Functions and Operators") |
-
-***
-
 ## 9.15. XML Functions [#](#FUNCTIONS-XML)
 
   * *   [9.15.1. Producing XML Content](functions-xml.html#FUNCTIONS-PRODUCING-XML)
@@ -770,14 +763,3 @@ As an example of using the output produced by these functions, [Example 9.1](fu
 
 </xsl:stylesheet>
 ```
-
-***
-
-[\[8\] ](#id-1.5.8.21.7.5.15.2)A result containing more than one element node at the top level, or non-whitespace text outside of an element, is an example of content form. An XPath result can be of neither form, for example if it returns an attribute node selected from the element that contains it. Such a result will be put into content form with each such disallowed node replaced by its string value, as defined for the XPath 1.0 `string` function.
-
-***
-
-|                                                     |                                                           |                                                                   |
-| :-------------------------------------------------- | :-------------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](functions-uuid.html "9.14. UUID Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-json.html "9.16. JSON Functions and Operators") |
-| 9.14. UUID Functions                                |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                9.16. JSON Functions and Operators |

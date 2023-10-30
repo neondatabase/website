@@ -1,11 +1,3 @@
-
-
-|            SELECT INTO            |                                        |              |                                                       |                             |
-| :-------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------: |
-| [Prev](sql-select.html "SELECT")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-set.html "SET") |
-
-***
-
 ## SELECT INTO
 
 SELECT INTO — define a new table from the results of a query
@@ -73,10 +65,3 @@ The SQL standard uses `SELECT INTO` to represent selecting values into scalar va
 ## See Also
 
 [CREATE TABLE AS](sql-createtableas.html "CREATE TABLE AS")
-
-***
-
-|                                   |                                                       |                             |
-| :-------------------------------- | :---------------------------------------------------: | --------------------------: |
-| [Prev](sql-select.html "SELECT")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-set.html "SET") |
-| SELECT                            | [Home](index.html "PostgreSQL 17devel Documentation") |                         SET |

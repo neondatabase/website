@@ -1,10 +1,3 @@
-
-|                    9.4. String Functions and Operators                   |                                                           |                                    |                                                       |                                                                                   |
-| :----------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------: |
-| [Prev](functions-math.html "9.3. Mathematical Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-binarystring.html "9.5. Binary String Functions and Operators") |
-
-***
-
 ## 9.4. String Functions and Operators [#](#FUNCTIONS-STRING)
 
 * [9.4.1. `format`](functions-string.html#FUNCTIONS-STRING-FORMAT)
@@ -209,10 +202,3 @@ Result: Testing three, two, three
 ```
 
 The `%I` and `%L` format specifiers are particularly useful for safely constructing dynamic SQL statements. See [Example 43.1](plpgsql-statements.html#PLPGSQL-QUOTE-LITERAL-EXAMPLE "Example 43.1. Quoting Values in Dynamic Queries").
-
-***
-
-|                                                                          |                                                           |                                                                                   |
-| :----------------------------------------------------------------------- | :-------------------------------------------------------: | --------------------------------------------------------------------------------: |
-| [Prev](functions-math.html "9.3. Mathematical Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-binarystring.html "9.5. Binary String Functions and Operators") |
-| 9.3. Mathematical Functions and Operators                                |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                        9.5. Binary String Functions and Operators |

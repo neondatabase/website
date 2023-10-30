@@ -1,11 +1,3 @@
-
-
-|              36.6. pgtypes Library             |                                                        |                                      |                                                       |                                                               |
-| :--------------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](ecpg-dynamic.html "36.5. Dynamic SQL")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-descriptors.html "36.7. Using Descriptor Areas") |
-
-***
-
 ## 36.6. pgtypes Library [#](#ECPG-PGTYPES)
 
   * *   [36.6.1. Character Strings](ecpg-pgtypes.html#ECPG-PGTYPES-CSTRINGS)
@@ -794,10 +786,3 @@ The following functions can be used to work with the decimal type and are not on
 * `PGTYPESInvalidTimestamp` [#](#PGTYPESINVALIDTIMESTAMP)
 
     A value of type timestamp representing an invalid time stamp. This is returned by the function `PGTYPEStimestamp_from_asc` on parse error. Note that due to the internal representation of the `timestamp` data type, `PGTYPESInvalidTimestamp` is also a valid timestamp at the same time. It is set to `1899-12-31 23:59:59`. In order to detect errors, make sure that your application does not only test for `PGTYPESInvalidTimestamp` but also for `errno != 0` after each call to `PGTYPEStimestamp_from_asc`.
-
-***
-
-|                                                |                                                        |                                                               |
-| :--------------------------------------------- | :----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](ecpg-dynamic.html "36.5. Dynamic SQL")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](ecpg-descriptors.html "36.7. Using Descriptor Areas") |
-| 36.5. Dynamic SQL                              |  [Home](index.html "PostgreSQL 17devel Documentation") |                                  36.7. Using Descriptor Areas |

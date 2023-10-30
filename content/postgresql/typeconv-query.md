@@ -1,11 +1,3 @@
-
-
-|              10.4. Value Storage              |                                                   |                             |                                                       |                                                                               |
-| :-------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](typeconv-func.html "10.3. Functions")  | [Up](typeconv.html "Chapter 10. Type Conversion") | Chapter 10. Type Conversion | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs") |
-
-***
-
 ## 10.4. Value Storage [#](#TYPECONV-QUERY)
 
 Values to be inserted into a table are converted to the destination column's data type according to the following steps.
@@ -33,10 +25,3 @@ SELECT v, octet_length(v) FROM vv;
 ```
 
 What has really happened here is that the two unknown literals are resolved to `text` by default, allowing the `||` operator to be resolved as `text` concatenation. Then the `text` result of the operator is converted to `bpchar` (“blank-padded char”, the internal name of the `character` data type) to match the target column type. (Since the conversion from `text` to `bpchar` is binary-coercible, this conversion does not insert any real function call.) Finally, the sizing function `bpchar(bpchar, integer, boolean)` is found in the system catalog and applied to the operator's result and the stored column length. This type-specific function performs the required length check and addition of padding spaces.
-
-***
-
-|                                               |                                                       |                                                                               |
-| :-------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](typeconv-func.html "10.3. Functions")  |   [Up](typeconv.html "Chapter 10. Type Conversion")   |  [Next](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs") |
-| 10.3. Functions                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                 10.5. `UNION`, `CASE`, and Related Constructs |

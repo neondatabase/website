@@ -1,11 +1,3 @@
-
-
-|           Part V. Server Programming          |                                                     |                                  |                                                       |                                                  |
-| :-------------------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](infoschema-views.html "37.66. views")  | [Up](index.html "PostgreSQL 17devel Documentation") | PostgreSQL 17devel Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](extend.html "Chapter 38. Extending SQL") |
-
-***
-
 # Part V. Server Programming
 
 This part is about extending the server functionality with user-defined functions, data types, triggers, etc. These are advanced topics which should probably be approached only after all the other user documentation about PostgreSQL has been understood. Later chapters in this part describe the server-side programming languages available in the PostgreSQL distribution as well as general issues concerning server-side programming languages. It is essential to read at least the earlier sections of [Chapter 38](extend.html "Chapter 38. Extending SQL") (covering functions) before diving into the material about server-side programming languages.
@@ -151,10 +143,3 @@ This part is about extending the server functionality with user-defined function
 
   * *   [51.1. Initialization Functions](archive-module-init.html)
     * [51.2. Archive Module Callbacks](archive-module-callbacks.html)
-
-***
-
-|                                               |                                                       |                                                  |
-| :-------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](infoschema-views.html "37.66. views")  |  [Up](index.html "PostgreSQL 17devel Documentation")  |  [Next](extend.html "Chapter 38. Extending SQL") |
-| 37.66. `views`                                | [Home](index.html "PostgreSQL 17devel Documentation") |                        Chapter 38. Extending SQL |

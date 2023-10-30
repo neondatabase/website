@@ -1,11 +1,3 @@
-
-
-|                        31.4. Column Lists                        |                                                                  |                                 |                                                       |                                                               |
-| :--------------------------------------------------------------: | :--------------------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](logical-replication-row-filter.html "31.3. Row Filters")  | [Up](logical-replication.html "Chapter 31. Logical Replication") | Chapter 31. Logical Replication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logical-replication-conflicts.html "31.5. Conflicts") |
-
-***
-
 ## 31.4. Column Lists [#](#LOGICAL-REPLICATION-COL-LISTS)
 
 * [31.4.1. Examples](logical-replication-col-lists.html#LOGICAL-REPLICATION-COL-LIST-EXAMPLES)
@@ -130,10 +122,3 @@ test_sub=# SELECT * FROM t1 ORDER BY id;
   3 | b-3 | a-3 | d-3
 (3 rows)
 ```
-
-***
-
-|                                                                  |                                                                  |                                                               |
-| :--------------------------------------------------------------- | :--------------------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](logical-replication-row-filter.html "31.3. Row Filters")  | [Up](logical-replication.html "Chapter 31. Logical Replication") |  [Next](logical-replication-conflicts.html "31.5. Conflicts") |
-| 31.3. Row Filters                                                |       [Home](index.html "PostgreSQL 17devel Documentation")      |                                               31.5. Conflicts |

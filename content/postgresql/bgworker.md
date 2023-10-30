@@ -1,11 +1,3 @@
-
-
-|             Chapter 48. Background Worker Processes             |                                                            |                            |                                                       |                                                              |
-| :-------------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](spi-spi-start-transaction.html "SPI_start_transaction")  | [Up](server-programming.html "Part V. Server Programming") | Part V. Server Programming | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logicaldecoding.html "Chapter 49. Logical Decoding") |
-
-***
-
 ## Chapter 48. Background Worker Processes
 
 PostgreSQL can be extended to run user-supplied code in separate processes. Such processes are started, stopped and monitored by `postgres`, which permits them to have a lifetime closely linked to the server's status. These processes are attached to PostgreSQL's shared memory area and have the option to connect to databases internally; they can also run multiple transactions serially, just like a regular client-connected server process. Also, by linking to libpq they can connect to the server and behave like a regular client application.
@@ -81,10 +73,3 @@ Background workers can send asynchronous notification messages, either by using 
 The `src/test/modules/worker_spi` module contains a working example, which demonstrates some useful techniques.
 
 The maximum number of registered background workers is limited by [max\_worker\_processes](runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES).
-
-***
-
-|                                                                 |                                                            |                                                              |
-| :-------------------------------------------------------------- | :--------------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](spi-spi-start-transaction.html "SPI_start_transaction")  | [Up](server-programming.html "Part V. Server Programming") |  [Next](logicaldecoding.html "Chapter 49. Logical Decoding") |
-| SPI\_start\_transaction                                         |    [Home](index.html "PostgreSQL 17devel Documentation")   |                                 Chapter 49. Logical Decoding |

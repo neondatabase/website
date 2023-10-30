@@ -1,11 +1,3 @@
-
-
-|                   CREATE CONVERSION                  |                                        |              |                                                       |                                                    |
-| :--------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-createcollation.html "CREATE COLLATION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createdatabase.html "CREATE DATABASE") |
-
-***
-
 ## CREATE CONVERSION
 
 CREATE CONVERSION — define a new encoding conversion
@@ -88,10 +80,3 @@ CREATE CONVERSION myconv FOR 'UTF8' TO 'LATIN1' FROM myfunc;
 ## See Also
 
 [ALTER CONVERSION](sql-alterconversion.html "ALTER CONVERSION"), [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [DROP CONVERSION](sql-dropconversion.html "DROP CONVERSION")
-
-***
-
-|                                                      |                                                       |                                                    |
-| :--------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-createcollation.html "CREATE COLLATION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createdatabase.html "CREATE DATABASE") |
-| CREATE COLLATION                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                    CREATE DATABASE |

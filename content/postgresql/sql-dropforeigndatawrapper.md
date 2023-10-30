@@ -1,11 +1,3 @@
-
-
-|             DROP FOREIGN DATA WRAPPER            |                                        |              |                                                       |                                                         |
-| :----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-dropextension.html "DROP EXTENSION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropforeigntable.html "DROP FOREIGN TABLE") |
-
-***
-
 ## DROP FOREIGN DATA WRAPPER
 
 DROP FOREIGN DATA WRAPPER — remove a foreign-data wrapper
@@ -55,10 +47,3 @@ DROP FOREIGN DATA WRAPPER dbi;
 ## See Also
 
 [CREATE FOREIGN DATA WRAPPER](sql-createforeigndatawrapper.html "CREATE FOREIGN DATA WRAPPER"), [ALTER FOREIGN DATA WRAPPER](sql-alterforeigndatawrapper.html "ALTER FOREIGN DATA WRAPPER")
-
-***
-
-|                                                  |                                                       |                                                         |
-| :----------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-dropextension.html "DROP EXTENSION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropforeigntable.html "DROP FOREIGN TABLE") |
-| DROP EXTENSION                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                      DROP FOREIGN TABLE |

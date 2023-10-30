@@ -1,11 +1,3 @@
-
-
-|                 73.6. Database Page Layout                 |                                                            |                                       |                                                       |                                                          |
-| :--------------------------------------------------------: | :--------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](storage-init.html "73.5. The Initialization Fork")  | [Up](storage.html "Chapter 73. Database Physical Storage") | Chapter 73. Database Physical Storage | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](storage-hot.html "73.7. Heap-Only Tuples (HOT)") |
-
-***
-
 ## 73.6. Database Page Layout [#](#STORAGE-PAGE-LAYOUT)
 
 * [73.6.1. Table Row Layout](storage-page-layout.html#STORAGE-TUPLE-LAYOUT)
@@ -85,14 +77,3 @@ All the details can be found in `src/include/access/htup_details.h`.
 Interpreting the actual data can only be done with information obtained from other tables, mostly `pg_attribute`. The key values needed to identify field locations are `attlen` and `attalign`. There is no way to directly get a particular attribute, except when there are only fixed width fields and no null values. All this trickery is wrapped up in the functions *heap\_getattr*, *fastgetattr* and *heap\_getsysattr*.
 
 To read the data you need to examine each attribute in turn. First check whether the field is NULL according to the null bitmap. If it is, go to the next. Then make sure you have the right alignment. If the field is a fixed width field, then all the bytes are simply placed. If it's a variable length field (attlen = -1) then it's a bit more complicated. All variable-length data types share the common header structure `struct varlena`, which includes the total length of the stored value and some flag bits. Depending on the flags, the data can be either inline or in a TOAST table; it might be compressed, too (see [Section 73.2](storage-toast.html "73.2. TOAST")).
-
-***
-
-[\[17\] ](#id-1.10.24.8.2.2)Actually, use of this page format is not required for either table or index access methods. The `heap` table access method always uses this format. All the existing index methods also use the basic format, but the data kept on index metapages usually doesn't follow the item layout rules.
-
-***
-
-|                                                            |                                                            |                                                          |
-| :--------------------------------------------------------- | :--------------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](storage-init.html "73.5. The Initialization Fork")  | [Up](storage.html "Chapter 73. Database Physical Storage") |  [Next](storage-hot.html "73.7. Heap-Only Tuples (HOT)") |
-| 73.5. The Initialization Fork                              |    [Home](index.html "PostgreSQL 17devel Documentation")   |                             73.7. Heap-Only Tuples (HOT) |

@@ -1,11 +1,3 @@
-
-
-|                          OPEN                          |                                                             |                              |                                                       |                                          |
-| :----------------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](ecpg-sql-get-descriptor.html "GET DESCRIPTOR")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-prepare.html "PREPARE") |
-
-***
-
 ## OPEN
 
 OPEN — open a dynamic cursor
@@ -54,10 +46,3 @@ EXEC SQL OPEN :curname1;
 ## See Also
 
 [DECLARE](ecpg-sql-declare.html "DECLARE"), [CLOSE](sql-close.html "CLOSE")
-
-***
-
-|                                                        |                                                             |                                          |
-| :----------------------------------------------------- | :---------------------------------------------------------: | ---------------------------------------: |
-| [Prev](ecpg-sql-get-descriptor.html "GET DESCRIPTOR")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-prepare.html "PREPARE") |
-| GET DESCRIPTOR                                         |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                  PREPARE |

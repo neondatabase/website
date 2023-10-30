@@ -1,11 +1,3 @@
-
-
-|                    SPI\_unregister\_relation                    |                                                      |                           |                                                       |                                                                         |
-| :-------------------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](spi-spi-register-relation.html "SPI_register_relation")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-register-trigger-data.html "SPI_register_trigger_data") |
-
-***
-
 ## SPI\_unregister\_relation
 
 SPI\_unregister\_relation — remove an ephemeral named relation from the registry
@@ -48,10 +40,3 @@ On error, one of the following negative values is returned:
 * `SPI_ERROR_REL_NOT_FOUND`
 
     if *`name`* is not found in the registry for the current connection
-
-***
-
-|                                                                 |                                                       |                                                                         |
-| :-------------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](spi-spi-register-relation.html "SPI_register_relation")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-register-trigger-data.html "SPI_register_trigger_data") |
-| SPI\_register\_relation                                         | [Home](index.html "PostgreSQL 17devel Documentation") |                                            SPI\_register\_trigger\_data |

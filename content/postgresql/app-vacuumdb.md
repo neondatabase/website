@@ -1,11 +1,3 @@
-
-
-|                 vacuumdb                |                                                              |                                |                                                       |                                                                 |
-| :-------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](app-reindexdb.html "reindexdb")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](reference-server.html "PostgreSQL Server Applications") |
-
-***
-
 ## vacuumdb
 
 vacuumdb — garbage-collect and analyze a PostgreSQL database
@@ -227,10 +219,3 @@ vacuumdb --schema='foo' --schema='bar' xyzzy
 ## See Also
 
 [VACUUM](sql-vacuum.html "VACUUM")
-
-***
-
-|                                         |                                                              |                                                                 |
-| :-------------------------------------- | :----------------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](app-reindexdb.html "reindexdb")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](reference-server.html "PostgreSQL Server Applications") |
-| reindexdb                               |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                  PostgreSQL Server Applications |

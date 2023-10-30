@@ -1,11 +1,3 @@
-
-
-|                       9.18. Conditional Expressions                      |                                                           |                                    |                                                       |                                                                     |
-| :----------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](functions-sequence.html "9.17. Sequence Manipulation Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-array.html "9.19. Array Functions and Operators") |
-
-***
-
 ## 9.18. Conditional Expressions [#](#FUNCTIONS-CONDITIONAL)
 
   * *   [9.18.1. `CASE`](functions-conditional.html#FUNCTIONS-CASE)
@@ -163,10 +155,3 @@ LEAST(value [, ...])
 The `GREATEST` and `LEAST` functions select the largest or smallest value from a list of any number of expressions. The expressions must all be convertible to a common data type, which will be the type of the result (see [Section 10.5](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs") for details).
 
 NULL values in the argument list are ignored. The result will be NULL only if all the expressions evaluate to NULL. (This is a deviation from the SQL standard. According to the standard, the return value is NULL if any argument is NULL. Some other databases behave this way.)
-
-***
-
-|                                                                          |                                                           |                                                                     |
-| :----------------------------------------------------------------------- | :-------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](functions-sequence.html "9.17. Sequence Manipulation Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-array.html "9.19. Array Functions and Operators") |
-| 9.17. Sequence Manipulation Functions                                    |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                 9.19. Array Functions and Operators |

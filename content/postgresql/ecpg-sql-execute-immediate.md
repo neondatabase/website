@@ -1,11 +1,3 @@
-
-
-|                EXECUTE IMMEDIATE               |                                                             |                              |                                                       |                                                        |
-| :--------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](ecpg-sql-disconnect.html "DISCONNECT")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-get-descriptor.html "GET DESCRIPTOR") |
-
-***
-
 ## EXECUTE IMMEDIATE
 
 EXECUTE IMMEDIATE — dynamically prepare and execute a statement
@@ -46,10 +38,3 @@ EXEC SQL EXECUTE IMMEDIATE :command;
 ## Compatibility
 
 `EXECUTE IMMEDIATE` is specified in the SQL standard.
-
-***
-
-|                                                |                                                             |                                                        |
-| :--------------------------------------------- | :---------------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](ecpg-sql-disconnect.html "DISCONNECT")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-get-descriptor.html "GET DESCRIPTOR") |
-| DISCONNECT                                     |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                         GET DESCRIPTOR |

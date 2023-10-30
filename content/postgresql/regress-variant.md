@@ -1,11 +1,3 @@
-
-
-|              33.3. Variant Comparison Files              |                                                   |                              |                                                       |                                             |
-| :------------------------------------------------------: | :------------------------------------------------ | :--------------------------: | ----------------------------------------------------: | ------------------------------------------: |
-| [Prev](regress-evaluation.html "33.2. Test Evaluation")  | [Up](regress.html "Chapter 33. Regression Tests") | Chapter 33. Regression Tests | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](regress-tap.html "33.4. TAP Tests") |
-
-***
-
 ## 33.3. Variant Comparison Files [#](#REGRESS-VARIANT)
 
 Since some of the tests inherently produce environment-dependent results, we have provided ways to specify alternate “expected” result files. Each regression test can have several comparison files showing possible results on different platforms. There are two independent mechanisms for determining which comparison file is used for each test.
@@ -35,10 +27,3 @@ The second selection mechanism for variant comparison files is much more automat
 For example, for the `char` test, the comparison file `char.out` contains results that are expected in the `C` and `POSIX` locales, while the file `char_1.out` contains results sorted as they appear in many other locales.
 
 The best-match mechanism was devised to cope with locale-dependent results, but it can be used in any situation where the test results cannot be predicted easily from the platform name alone. A limitation of this mechanism is that the test driver cannot tell which variant is actually “correct” for the current environment; it will just pick the variant that seems to work best. Therefore it is safest to use this mechanism only for variant results that you are willing to consider equally valid in all contexts.
-
-***
-
-|                                                          |                                                       |                                             |
-| :------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------: |
-| [Prev](regress-evaluation.html "33.2. Test Evaluation")  |   [Up](regress.html "Chapter 33. Regression Tests")   |  [Next](regress-tap.html "33.4. TAP Tests") |
-| 33.2. Test Evaluation                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                             33.4. TAP Tests |

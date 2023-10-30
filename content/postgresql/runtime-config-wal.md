@@ -1,11 +1,3 @@
-
-
-|                        20.5. Write Ahead Log                       |                                                              |                                  |                                                       |                                                              |
-| :----------------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](runtime-config-resource.html "20.4. Resource Consumption")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-replication.html "20.6. Replication") |
-
-***
-
 ## 20.5. Write Ahead Log [#](#RUNTIME-CONFIG-WAL)
 
   * *   [20.5.1. Settings](runtime-config-wal.html#RUNTIME-CONFIG-WAL-SETTINGS)
@@ -315,10 +307,3 @@ To start the server in targeted recovery mode, create a file called `recovery.si
     `This setting has no effect if no recovery target is set. If hot_standby is not enabled, a setting of pause will act the same as shutdown. If the recovery target is reached while a promotion is ongoing, a setting of pause will act the same as promote.`
 
     `In any case, if a recovery target is configured but the archive recovery ends before the target is reached, the server will shut down with a fatal error.`
-
-***
-
-|                                                                    |                                                              |                                                              |
-| :----------------------------------------------------------------- | :----------------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](runtime-config-resource.html "20.4. Resource Consumption")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-replication.html "20.6. Replication") |
-| 20.4. Resource Consumption                                         |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                            20.6. Replication |

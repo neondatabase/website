@@ -1,11 +1,3 @@
-
-
-|               38.10. C-Language Functions               |                                               |                           |                                                       |                                                                             |
-| :-----------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](xfunc-internal.html "38.9. Internal Functions")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xfunc-optimization.html "38.11. Function Optimization Information") |
-
-***
-
 ## 38.10. C-Language Functions [#](#XFUNC-C)
 
   * *   [38.10.1. Dynamic Loading](xfunc-c.html#XFUNC-C-DYNLOAD)
@@ -998,10 +990,3 @@ Although the PostgreSQL backend is written in C, it is possible to write extensi
 * If calling backend functions from C++ code, be sure that the C++ call stack contains only plain old data structures (POD). This is necessary because backend errors generate a distant `longjmp()` that does not properly unroll a C++ call stack with non-POD objects.
 
 In summary, it is best to place C++ code behind a wall of `extern C` functions that interface to the backend, and avoid exception, memory, and call stack leakage.
-
-***
-
-|                                                         |                                                       |                                                                             |
-| :------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](xfunc-internal.html "38.9. Internal Functions")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xfunc-optimization.html "38.11. Function Optimization Information") |
-| 38.9. Internal Functions                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                    38.11. Function Optimization Information |

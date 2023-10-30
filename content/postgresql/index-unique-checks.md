@@ -1,11 +1,3 @@
-
-
-|                   64.5. Index Uniqueness Checks                  |                                                                           |                                                      |                                                       |                                                                             |
-| :--------------------------------------------------------------: | :------------------------------------------------------------------------ | :--------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](index-locking.html "64.4. Index Locking Considerations")  | [Up](indexam.html "Chapter 64. Index Access Method Interface Definition") | Chapter 64. Index Access Method Interface Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](index-cost-estimation.html "64.6. Index Cost Estimation Functions") |
-
-***
-
 ## 64.5. Index Uniqueness Checks [#](#INDEX-UNIQUE-CHECKS)
 
 PostgreSQL enforces SQL uniqueness constraints using *unique indexes*, which are indexes that disallow multiple entries with identical keys. An access method that supports this feature sets `amcanunique` true. (At present, only b-tree supports it.) Columns listed in the `INCLUDE` clause are not considered when enforcing uniqueness.
@@ -33,10 +25,3 @@ If the unique constraint is deferrable, there is additional complexity: we need 
 * `UNIQUE_CHECK_EXISTING` indicates that this is a deferred recheck of a row that was reported as a potential uniqueness violation. Although this is implemented by calling `aminsert`, the access method must *not* insert a new index entry in this case. The index entry is already present. Rather, the access method must check to see if there is another live index entry. If so, and if the target row is also still live, report error.
 
     It is recommended that in a `UNIQUE_CHECK_EXISTING` call, the access method further verify that the target row actually does have an existing entry in the index, and report error if not. This is a good idea because the index tuple values passed to `aminsert` will have been recomputed. If the index definition involves functions that are not really immutable, we might be checking the wrong area of the index. Checking that the target row is found in the recheck verifies that we are scanning for the same tuple values as were used in the original insertion.
-
-***
-
-|                                                                  |                                                                           |                                                                             |
-| :--------------------------------------------------------------- | :-----------------------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](index-locking.html "64.4. Index Locking Considerations")  | [Up](indexam.html "Chapter 64. Index Access Method Interface Definition") |  [Next](index-cost-estimation.html "64.6. Index Cost Estimation Functions") |
-| 64.4. Index Locking Considerations                               |           [Home](index.html "PostgreSQL 17devel Documentation")           |                                       64.6. Index Cost Estimation Functions |

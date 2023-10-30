@@ -1,11 +1,3 @@
-
-
-|                     14.1. Using `EXPLAIN`                     |                                                            |                              |                                                       |                                                                    |
-| :-----------------------------------------------------------: | :--------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](performance-tips.html "Chapter 14. Performance Tips")  | [Up](performance-tips.html "Chapter 14. Performance Tips") | Chapter 14. Performance Tips | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](planner-stats.html "14.2. Statistics Used by the Planner") |
-
-***
-
 ## 14.1. Using `EXPLAIN` [#](#USING-EXPLAIN)
 
   * *   [14.1.1. `EXPLAIN` Basics](using-explain.html#USING-EXPLAIN-BASICS)
@@ -519,10 +511,3 @@ Merge joins also have measurement artifacts that can confuse the unwary. A merge
 BitmapAnd and BitmapOr nodes always report their actual row counts as zero, due to implementation limitations.
 
 Normally, `EXPLAIN` will display every plan node created by the planner. However, there are cases where the executor can determine that certain nodes need not be executed because they cannot produce any rows, based on parameter values that were not available at planning time. (Currently this can only happen for child nodes of an Append or MergeAppend node that is scanning a partitioned table.) When this happens, those plan nodes are omitted from the `EXPLAIN` output and a `Subplans Removed: N` annotation appears instead.
-
-***
-
-|                                                               |                                                            |                                                                    |
-| :------------------------------------------------------------ | :--------------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](performance-tips.html "Chapter 14. Performance Tips")  | [Up](performance-tips.html "Chapter 14. Performance Tips") |  [Next](planner-stats.html "14.2. Statistics Used by the Planner") |
-| Chapter 14. Performance Tips                                  |    [Home](index.html "PostgreSQL 17devel Documentation")   |                               14.2. Statistics Used by the Planner |

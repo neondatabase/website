@@ -1,11 +1,3 @@
-
-
-|                       46.9. Utility Functions                      |                                                                          |                                                    |                                                       |                                                                |
-| :----------------------------------------------------------------: | :----------------------------------------------------------------------- | :------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](plpython-transactions.html "46.8. Transaction Management")  | [Up](plpython.html "Chapter 46. PL/Python — Python Procedural Language") | Chapter 46. PL/Python — Python Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpython-python23.html "46.10. Python 2 vs. Python 3") |
-
-***
-
 ## 46.9. Utility Functions [#](#PLPYTHON-UTIL)
 
 The `plpy` module also provides the functions
@@ -66,10 +58,3 @@ plpy.execute("UPDATE tbl SET %s = %s WHERE key = %s" % (
     plpy.quote_nullable(newvalue),
     plpy.quote_literal(keyvalue)))
 ```
-
-***
-
-|                                                                    |                                                                          |                                                                |
-| :----------------------------------------------------------------- | :----------------------------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](plpython-transactions.html "46.8. Transaction Management")  | [Up](plpython.html "Chapter 46. PL/Python — Python Procedural Language") |  [Next](plpython-python23.html "46.10. Python 2 vs. Python 3") |
-| 46.8. Transaction Management                                       |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                   46.10. Python 2 vs. Python 3 |

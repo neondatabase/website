@@ -1,11 +1,3 @@
-
-
-|                   69.4. Implementation                   |                                                 |                             |                                                       |                                                |
-| :------------------------------------------------------: | :---------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](spgist-extensibility.html "69.3. Extensibility")  | [Up](spgist.html "Chapter 69. SP-GiST Indexes") | Chapter 69. SP-GiST Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spgist-examples.html "69.5. Examples") |
-
-***
-
 ## 69.4. Implementation [#](#SPGIST-IMPLEMENTATION)
 
   * *   [69.4.1. SP-GiST Limits](spgist-implementation.html#SPGIST-LIMITS)
@@ -37,10 +29,3 @@ The SP-GiST core can override the results of the operator class's `picksplit` fu
 When dealing with an `allTheSame` tuple, a `choose` result of `spgMatchNode` is interpreted to mean that the new value can be assigned to any of the equivalent nodes; the core code will ignore the supplied `nodeN` value and descend into one of the nodes at random (so as to keep the tree balanced). It is an error for `choose` to return `spgAddNode`, since that would make the nodes not all equivalent; the `spgSplitTuple` action must be used if the value to be inserted doesn't match the existing nodes.
 
 When dealing with an `allTheSame` tuple, the `inner_consistent` function should return either all or none of the nodes as targets for continuing the index search, since they are all equivalent. This may or may not require any special-case code, depending on how much the `inner_consistent` function normally assumes about the meaning of the nodes.
-
-***
-
-|                                                          |                                                       |                                                |
-| :------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](spgist-extensibility.html "69.3. Extensibility")  |    [Up](spgist.html "Chapter 69. SP-GiST Indexes")    |  [Next](spgist-examples.html "69.5. Examples") |
-| 69.3. Extensibility                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                 69.5. Examples |

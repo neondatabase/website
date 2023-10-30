@@ -1,11 +1,3 @@
-
-
-|               ALTER ROUTINE              |                                        |              |                                                       |                                          |
-| :--------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-alterrole.html "ALTER ROLE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterrule.html "ALTER RULE") |
-
-***
-
 ## ALTER ROUTINE
 
 ALTER ROUTINE — change the definition of a routine
@@ -63,10 +55,3 @@ This statement is partially compatible with the `ALTER ROUTINE` statement in the
 [ALTER AGGREGATE](sql-alteraggregate.html "ALTER AGGREGATE"), [ALTER FUNCTION](sql-alterfunction.html "ALTER FUNCTION"), [ALTER PROCEDURE](sql-alterprocedure.html "ALTER PROCEDURE"), [DROP ROUTINE](sql-droproutine.html "DROP ROUTINE")
 
 Note that there is no `CREATE ROUTINE` command.
-
-***
-
-|                                          |                                                       |                                          |
-| :--------------------------------------- | :---------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-alterrole.html "ALTER ROLE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterrule.html "ALTER RULE") |
-| ALTER ROLE                               | [Home](index.html "PostgreSQL 17devel Documentation") |                               ALTER RULE |

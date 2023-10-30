@@ -1,11 +1,3 @@
-
-
-|                 ALTER TEXT SEARCH TEMPLATE                 |                                        |              |                                                       |                                                |
-| :--------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-altertsparser.html "ALTER TEXT SEARCH PARSER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altertrigger.html "ALTER TRIGGER") |
-
-***
-
 ## ALTER TEXT SEARCH TEMPLATE
 
 ALTER TEXT SEARCH TEMPLATE — change the definition of a text search template
@@ -45,10 +37,3 @@ There is no `ALTER TEXT SEARCH TEMPLATE` statement in the SQL standard.
 ## See Also
 
 [CREATE TEXT SEARCH TEMPLATE](sql-createtstemplate.html "CREATE TEXT SEARCH TEMPLATE"), [DROP TEXT SEARCH TEMPLATE](sql-droptstemplate.html "DROP TEXT SEARCH TEMPLATE")
-
-***
-
-|                                                            |                                                       |                                                |
-| :--------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-altertsparser.html "ALTER TEXT SEARCH PARSER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altertrigger.html "ALTER TRIGGER") |
-| ALTER TEXT SEARCH PARSER                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                  ALTER TRIGGER |

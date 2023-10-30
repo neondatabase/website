@@ -1,11 +1,3 @@
-
-
-|                     CREATE DATABASE                    |                                        |              |                                                       |                                                |
-| :----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-createconversion.html "CREATE CONVERSION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createdomain.html "CREATE DOMAIN") |
-
-***
-
 ## CREATE DATABASE
 
 CREATE DATABASE — create a new database
@@ -195,10 +187,3 @@ There is no `CREATE DATABASE` statement in the SQL standard. Databases are equiv
 ## See Also
 
 [ALTER DATABASE](sql-alterdatabase.html "ALTER DATABASE"), [DROP DATABASE](sql-dropdatabase.html "DROP DATABASE")
-
-***
-
-|                                                        |                                                       |                                                |
-| :----------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-createconversion.html "CREATE CONVERSION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createdomain.html "CREATE DOMAIN") |
-| CREATE CONVERSION                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                  CREATE DOMAIN |

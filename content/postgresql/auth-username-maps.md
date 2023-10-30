@@ -1,11 +1,3 @@
-
-
-|                     21.2. User Name Maps                    |                                                                      |                                   |                                                       |                                                           |
-| :---------------------------------------------------------: | :------------------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](auth-pg-hba-conf.html "21.1. The pg_hba.conf File")  | [Up](client-authentication.html "Chapter 21. Client Authentication") | Chapter 21. Client Authentication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](auth-methods.html "21.3. Authentication Methods") |
-
-***
-
 ## 21.2. User Name Maps [#](#AUTH-USERNAME-MAPS)
 
 When using an external authentication system such as Ident or GSSAPI, the name of the operating system user that initiated the connection might not be the same as the database user (role) that is to be used. In this case, a user name map can be applied to map the operating system user name to a database user. To use user name mapping, specify `map`=*`map-name`* in the options field in `pg_hba.conf`. This option is supported for all authentication methods that receive external user names. Since different mappings might be needed for different connections, the name of the map to be used is specified in the *`map-name`* parameter in `pg_hba.conf` to indicate which map to use for each individual connection.
@@ -63,10 +55,3 @@ omicron         robert                  bob
 # bryanh can also connect as guest1
 omicron         bryanh                  guest1
 ```
-
-***
-
-|                                                             |                                                                      |                                                           |
-| :---------------------------------------------------------- | :------------------------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](auth-pg-hba-conf.html "21.1. The pg_hba.conf File")  | [Up](client-authentication.html "Chapter 21. Client Authentication") |  [Next](auth-methods.html "21.3. Authentication Methods") |
-| 21.1. The `pg_hba.conf` File                                |         [Home](index.html "PostgreSQL 17devel Documentation")        |                              21.3. Authentication Methods |

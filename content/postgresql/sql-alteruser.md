@@ -1,11 +1,3 @@
-
-
-|                ALTER USER                |                                        |              |                                                       |                                                         |
-| :--------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-altertype.html "ALTER TYPE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterusermapping.html "ALTER USER MAPPING") |
-
-***
-
 ## ALTER USER
 
 ALTER USER — change a database role
@@ -55,10 +47,3 @@ The `ALTER USER` statement is a PostgreSQL extension. The SQL standard leaves th
 ## See Also
 
 [ALTER ROLE](sql-alterrole.html "ALTER ROLE")
-
-***
-
-|                                          |                                                       |                                                         |
-| :--------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-altertype.html "ALTER TYPE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterusermapping.html "ALTER USER MAPPING") |
-| ALTER TYPE                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                      ALTER USER MAPPING |

@@ -1,11 +1,3 @@
-
-
-|                    53.1. Overview                    |                                                   |                             |                                                       |                                                         |
-| :--------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](catalogs.html "Chapter 53. System Catalogs")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-aggregate.html "53.2. pg_aggregate") |
-
-***
-
 ## 53.1. Overview [#](#CATALOGS-OVERVIEW)
 
 [Table 53.1](catalogs-overview.html#CATALOG-TABLE "Table 53.1. System Catalogs") lists the system catalogs. More detailed documentation of each catalog follows below.
@@ -80,10 +72,3 @@ Most system catalogs are copied from the template database during database creat
 | [`pg_ts_template`](catalog-pg-ts-template.html "53.63. pg_ts_template")                               | text search templates                                                                   |
 | [`pg_type`](catalog-pg-type.html "53.64. pg_type")                                                    | data types                                                                              |
 | [`pg_user_mapping`](catalog-pg-user-mapping.html "53.65. pg_user_mapping")                            | mappings of users to foreign servers                                                    |
-
-***
-
-|                                                      |                                                       |                                                         |
-| :--------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](catalogs.html "Chapter 53. System Catalogs")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-aggregate.html "53.2. pg_aggregate") |
-| Chapter 53. System Catalogs                          | [Home](index.html "PostgreSQL 17devel Documentation") |                                    53.2. `pg_aggregate` |

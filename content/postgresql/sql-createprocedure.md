@@ -1,11 +1,3 @@
-
-
-|                CREATE PROCEDURE                |                                        |              |                                                       |                                                          |
-| :--------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](sql-createpolicy.html "CREATE POLICY")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createpublication.html "CREATE PUBLICATION") |
-
-***
-
 ## CREATE PROCEDURE
 
 CREATE PROCEDURE — define a new procedure
@@ -166,10 +158,3 @@ A `CREATE PROCEDURE` command is defined in the SQL standard. The PostgreSQL impl
 ## See Also
 
 [ALTER PROCEDURE](sql-alterprocedure.html "ALTER PROCEDURE"), [DROP PROCEDURE](sql-dropprocedure.html "DROP PROCEDURE"), [CALL](sql-call.html "CALL"), [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION")
-
-***
-
-|                                                |                                                       |                                                          |
-| :--------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](sql-createpolicy.html "CREATE POLICY")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createpublication.html "CREATE PUBLICATION") |
-| CREATE POLICY                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                       CREATE PUBLICATION |

@@ -1,11 +1,3 @@
-
-
-|                  61.2. Creating Custom Scan Plans                 |                                                                     |                                            |                                                       |                                                                    |
-| :---------------------------------------------------------------: | :------------------------------------------------------------------ | :----------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](custom-scan-path.html "61.1. Creating Custom Scan Paths")  | [Up](custom-scan.html "Chapter 61. Writing a Custom Scan Provider") | Chapter 61. Writing a Custom Scan Provider | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](custom-scan-execution.html "61.3. Executing Custom Scans") |
-
-***
-
 ## 61.2. Creating Custom Scan Plans [#](#CUSTOM-SCAN-PLAN)
 
 * [61.2.1. Custom Scan Plan Callbacks](custom-scan-plan.html#CUSTOM-SCAN-PLAN-CALLBACKS)
@@ -41,10 +33,3 @@ Node *(*CreateCustomScanState) (CustomScan *cscan);
 ```
 
 Allocate a `CustomScanState` for this `CustomScan`. The actual allocation will often be larger than required for an ordinary `CustomScanState`, because many providers will wish to embed that as the first field of a larger structure. The value returned must have the node tag and `methods` set appropriately, but other fields should be left as zeroes at this stage; after `ExecInitCustomScan` performs basic initialization, the `BeginCustomScan` callback will be invoked to give the custom scan provider a chance to do whatever else is needed.
-
-***
-
-|                                                                   |                                                                     |                                                                    |
-| :---------------------------------------------------------------- | :-----------------------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](custom-scan-path.html "61.1. Creating Custom Scan Paths")  | [Up](custom-scan.html "Chapter 61. Writing a Custom Scan Provider") |  [Next](custom-scan-execution.html "61.3. Executing Custom Scans") |
-| 61.1. Creating Custom Scan Paths                                  |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                       61.3. Executing Custom Scans |

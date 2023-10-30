@@ -1,11 +1,3 @@
-
-
-|                   41.3. Materialized Views                  |                                                |                             |                                                       |                                                                        |
-| :---------------------------------------------------------: | :--------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](rules-views.html "41.2. Views and the Rule System")  | [Up](rules.html "Chapter 41. The Rule System") | Chapter 41. The Rule System | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](rules-update.html "41.4. Rules on INSERT, UPDATE, and DELETE") |
-
-***
-
 ## 41.3. Materialized Views [#](#RULES-MATERIALIZEDVIEWS)
 
 Materialized views in PostgreSQL use the rule system like views do, but persist the results in a table-like form. The main differences between:
@@ -171,10 +163,3 @@ Using the materialized view:
 ```
 
 If you can tolerate periodic update of the remote data to the local database, the performance benefit can be substantial.
-
-***
-
-|                                                             |                                                       |                                                                        |
-| :---------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](rules-views.html "41.2. Views and the Rule System")  |     [Up](rules.html "Chapter 41. The Rule System")    |  [Next](rules-update.html "41.4. Rules on INSERT, UPDATE, and DELETE") |
-| 41.2. Views and the Rule System                             | [Home](index.html "PostgreSQL 17devel Documentation") |                        41.4. Rules on `INSERT`, `UPDATE`, and `DELETE` |

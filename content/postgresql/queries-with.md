@@ -1,11 +1,3 @@
-
-
-|  7.8. `WITH` Queries (Common Table Expressions)  |                                         |                    |                                                       |                                                |
-| :----------------------------------------------: | :-------------------------------------- | :----------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](queries-values.html "7.7. VALUES Lists")  | [Up](queries.html "Chapter 7. Queries") | Chapter 7. Queries | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype.html "Chapter 8. Data Types") |
-
-***
-
 ## 7.8. `WITH` Queries (Common Table Expressions) [#](#QUERIES-WITH)
 
   * *   [7.8.1. `SELECT` in `WITH`](queries-with.html#QUERIES-WITH-SELECT)
@@ -425,10 +417,3 @@ the outer `SELECT` would return the updated data.
 Trying to update the same row twice in a single statement is not supported. Only one of the modifications takes place, but it is not easy (and sometimes not possible) to reliably predict which one. This also applies to deleting a row that was already updated in the same statement: only the update is performed. Therefore you should generally avoid trying to modify a single row twice in a single statement. In particular avoid writing `WITH` sub-statements that could affect the same rows changed by the main statement or a sibling sub-statement. The effects of such a statement will not be predictable.
 
 At present, any table used as the target of a data-modifying statement in `WITH` must not have a conditional rule, nor an `ALSO` rule, nor an `INSTEAD` rule that expands to multiple statements.
-
-***
-
-|                                                  |                                                       |                                                |
-| :----------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](queries-values.html "7.7. VALUES Lists")  |        [Up](queries.html "Chapter 7. Queries")        |  [Next](datatype.html "Chapter 8. Data Types") |
-| 7.7. `VALUES` Lists                              | [Home](index.html "PostgreSQL 17devel Documentation") |                          Chapter 8. Data Types |

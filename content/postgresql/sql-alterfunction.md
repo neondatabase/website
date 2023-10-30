@@ -1,11 +1,3 @@
-
-
-|                       ALTER FUNCTION                      |                                        |              |                                                       |                                            |
-| :-------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-alterforeigntable.html "ALTER FOREIGN TABLE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altergroup.html "ALTER GROUP") |
-
-***
-
 ## ALTER FUNCTION
 
 ALTER FUNCTION — change the definition of a function
@@ -178,10 +170,3 @@ This statement is partially compatible with the `ALTER FUNCTION` statement in th
 ## See Also
 
 [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [DROP FUNCTION](sql-dropfunction.html "DROP FUNCTION"), [ALTER PROCEDURE](sql-alterprocedure.html "ALTER PROCEDURE"), [ALTER ROUTINE](sql-alterroutine.html "ALTER ROUTINE")
-
-***
-
-|                                                           |                                                       |                                            |
-| :-------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-alterforeigntable.html "ALTER FOREIGN TABLE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altergroup.html "ALTER GROUP") |
-| ALTER FOREIGN TABLE                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                ALTER GROUP |

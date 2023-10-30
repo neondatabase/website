@@ -1,11 +1,3 @@
-
-
-|            Chapter 44. PL/Tcl — Tcl Procedural Language           |                                                            |                            |                                                       |                                               |
-| :---------------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](plpgsql-porting.html "43.13. Porting from Oracle PL/SQL")  | [Up](server-programming.html "Part V. Server Programming") | Part V. Server Programming | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pltcl-overview.html "44.1. Overview") |
-
-***
-
 ## Chapter 44. PL/Tcl — Tcl Procedural Language
 
 **Table of Contents**
@@ -24,10 +16,3 @@
   * [44.12. Tcl Procedure Names](pltcl-procnames.html)
 
 PL/Tcl is a loadable procedural language for the PostgreSQL database system that enables the [Tcl language](https://www.tcl.tk/) to be used to write PostgreSQL functions and procedures.
-
-***
-
-|                                                                   |                                                            |                                               |
-| :---------------------------------------------------------------- | :--------------------------------------------------------: | --------------------------------------------: |
-| [Prev](plpgsql-porting.html "43.13. Porting from Oracle PL/SQL")  | [Up](server-programming.html "Part V. Server Programming") |  [Next](pltcl-overview.html "44.1. Overview") |
-| 43.13. Porting from Oracle PL/SQL                                 |    [Home](index.html "PostgreSQL 17devel Documentation")   |                                44.1. Overview |

@@ -1,11 +1,3 @@
-
-
-|         F.12. dblink — connect to other PostgreSQL databases         |                                                                             |                                                        |                                                       |                                                       |
-| :------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](cube.html "F.11. cube — a multi-dimensional cube data type")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-connect.html "dblink_connect") |
-
-***
-
 ## F.12. dblink — connect to other PostgreSQL databases [#](#DBLINK)
 
   * *   [dblink\_connect](contrib-dblink-connect.html) — opens a persistent connection to a remote database
@@ -41,10 +33,3 @@
     Waiting to establish a connection to a remote server when it could not be found in the list of already-opened connections.
 
 See also [postgres\_fdw](postgres-fdw.html "F.37. postgres_fdw — access data stored in external PostgreSQL servers"), which provides roughly the same functionality using a more modern and standards-compliant infrastructure.
-
-***
-
-|                                                                      |                                                                             |                                                       |
-| :------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](cube.html "F.11. cube — a multi-dimensional cube data type")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](contrib-dblink-connect.html "dblink_connect") |
-| F.11. cube — a multi-dimensional cube data type                      |            [Home](index.html "PostgreSQL 17devel Documentation")            |                                       dblink\_connect |

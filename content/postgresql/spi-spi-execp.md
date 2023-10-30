@@ -1,11 +1,3 @@
-
-
-|                                      SPI\_execp                                     |                                                      |                           |                                                       |                                                     |
-| :---------------------------------------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](spi-spi-execute-plan-with-paramlist.html "SPI_execute_plan_with_paramlist")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-cursor-open.html "SPI_cursor_open") |
-
-***
-
 ## SPI\_execp
 
 SPI\_execp — execute a statement in read/write mode
@@ -46,10 +38,3 @@ int SPI_execp(SPIPlanPtr plan, Datum * values, const char * nulls, long count)
 See `SPI_execute_plan`.
 
 `SPI_processed` and `SPI_tuptable` are set as in `SPI_execute` if successful.
-
-***
-
-|                                                                                     |                                                       |                                                     |
-| :---------------------------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](spi-spi-execute-plan-with-paramlist.html "SPI_execute_plan_with_paramlist")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-cursor-open.html "SPI_cursor_open") |
-| SPI\_execute\_plan\_with\_paramlist                                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                   SPI\_cursor\_open |

@@ -1,11 +1,3 @@
-
-
-|                         33.4. TAP Tests                        |                                                   |                              |                                                       |                                                                  |
-| :------------------------------------------------------------: | :------------------------------------------------ | :--------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](regress-variant.html "33.3. Variant Comparison Files")  | [Up](regress.html "Chapter 33. Regression Tests") | Chapter 33. Regression Tests | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](regress-coverage.html "33.5. Test Coverage Examination") |
-
-***
-
 ## 33.4. TAP Tests [#](#REGRESS-TAP)
 
 * [33.4.1. Environment Variables](regress-tap.html#REGRESS-TAP-VARS)
@@ -44,10 +36,3 @@ PG_TEST_NOCLEAN=1 make -C src/bin/pg_dump check
 This environment variable also prevents the test's temporary directories from being removed.
 
 Many operations in the test suites use a 180-second timeout, which on slow hosts may lead to load-induced timeouts. Setting the environment variable `PG_TEST_TIMEOUT_DEFAULT` to a higher number will change the default to avoid this.
-
-***
-
-|                                                                |                                                       |                                                                  |
-| :------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](regress-variant.html "33.3. Variant Comparison Files")  |   [Up](regress.html "Chapter 33. Regression Tests")   |  [Next](regress-coverage.html "33.5. Test Coverage Examination") |
-| 33.3. Variant Comparison Files                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                  33.5. Test Coverage Examination |

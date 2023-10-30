@@ -1,11 +1,3 @@
-
-
-|                        dblink\_get\_pkey                        |                                                                          |                                                      |                                                       |                                                                         |
-| :-------------------------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](contrib-dblink-cancel-query.html "dblink_cancel_query")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-build-sql-insert.html "dblink_build_sql_insert") |
-
-***
-
 ## dblink\_get\_pkey
 
 dblink\_get\_pkey — returns the positions and field names of a relation's primary key fields
@@ -58,10 +50,3 @@ SELECT * FROM dblink_get_pkey('foobar');
         3 | f3
 (3 rows)
 ```
-
-***
-
-|                                                                 |                                                                          |                                                                         |
-| :-------------------------------------------------------------- | :----------------------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](contrib-dblink-cancel-query.html "dblink_cancel_query")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-build-sql-insert.html "dblink_build_sql_insert") |
-| dblink\_cancel\_query                                           |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                              dblink\_build\_sql\_insert |

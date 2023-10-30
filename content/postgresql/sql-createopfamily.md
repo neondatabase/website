@@ -1,11 +1,3 @@
-
-
-|                  CREATE OPERATOR FAMILY                 |                                        |              |                                                       |                                                |
-| :-----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-createopclass.html "CREATE OPERATOR CLASS")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createpolicy.html "CREATE POLICY") |
-
-***
-
 ## CREATE OPERATOR FAMILY
 
 CREATE OPERATOR FAMILY — define a new operator family
@@ -46,10 +38,3 @@ Refer to [Section 38.16](xindex.html "38.16. Interfacing Extensions to Indexes
 ## See Also
 
 [ALTER OPERATOR FAMILY](sql-alteropfamily.html "ALTER OPERATOR FAMILY"), [DROP OPERATOR FAMILY](sql-dropopfamily.html "DROP OPERATOR FAMILY"), [CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS"), [ALTER OPERATOR CLASS](sql-alteropclass.html "ALTER OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass.html "DROP OPERATOR CLASS")
-
-***
-
-|                                                         |                                                       |                                                |
-| :------------------------------------------------------ | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-createopclass.html "CREATE OPERATOR CLASS")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createpolicy.html "CREATE POLICY") |
-| CREATE OPERATOR CLASS                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                  CREATE POLICY |

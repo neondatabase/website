@@ -1,11 +1,3 @@
-
-
-|      44.2. PL/Tcl Functions and Arguments     |                                                                 |                                              |                                                       |                                                        |
-| :-------------------------------------------: | :-------------------------------------------------------------- | :------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](pltcl-overview.html "44.1. Overview")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") | Chapter 44. PL/Tcl — Tcl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pltcl-data.html "44.3. Data Values in PL/Tcl") |
-
-***
-
 ## 44.2. PL/Tcl Functions and Arguments [#](#PLTCL-FUNCTIONS)
 
 To create a function in the PL/Tcl language, use the standard [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") syntax:
@@ -124,10 +116,3 @@ CREATE FUNCTION table_of_squares(int, int) RETURNS TABLE (x int, x2 int) AS $$
     }
 $$ LANGUAGE pltcl;
 ```
-
-***
-
-|                                               |                                                                 |                                                        |
-| :-------------------------------------------- | :-------------------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](pltcl-overview.html "44.1. Overview")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") |  [Next](pltcl-data.html "44.3. Data Values in PL/Tcl") |
-| 44.1. Overview                                |      [Home](index.html "PostgreSQL 17devel Documentation")      |                            44.3. Data Values in PL/Tcl |

@@ -1,11 +1,3 @@
-
-
-|     DROP ACCESS METHOD    |                                        |              |                                                       |                                                  |
-| :-----------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-do.html "DO")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropaggregate.html "DROP AGGREGATE") |
-
-***
-
 ## DROP ACCESS METHOD
 
 DROP ACCESS METHOD — remove an access method
@@ -55,10 +47,3 @@ DROP ACCESS METHOD heptree;
 ## See Also
 
 [CREATE ACCESS METHOD](sql-create-access-method.html "CREATE ACCESS METHOD")
-
-***
-
-|                           |                                                       |                                                  |
-| :------------------------ | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-do.html "DO")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropaggregate.html "DROP AGGREGATE") |
-| DO                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                   DROP AGGREGATE |

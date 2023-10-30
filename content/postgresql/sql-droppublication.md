@@ -1,11 +1,3 @@
-
-
-|                 DROP PUBLICATION                 |                                        |              |                                                       |                                        |
-| :----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------: |
-| [Prev](sql-dropprocedure.html "DROP PROCEDURE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droprole.html "DROP ROLE") |
-
-***
-
 ## DROP PUBLICATION
 
 DROP PUBLICATION — remove a publication
@@ -53,10 +45,3 @@ DROP PUBLICATION mypublication;
 ## See Also
 
 [CREATE PUBLICATION](sql-createpublication.html "CREATE PUBLICATION"), [ALTER PUBLICATION](sql-alterpublication.html "ALTER PUBLICATION")
-
-***
-
-|                                                  |                                                       |                                        |
-| :----------------------------------------------- | :---------------------------------------------------: | -------------------------------------: |
-| [Prev](sql-dropprocedure.html "DROP PROCEDURE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droprole.html "DROP ROLE") |
-| DROP PROCEDURE                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                              DROP ROLE |

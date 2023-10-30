@@ -1,11 +1,3 @@
-
-
-|                        CREATE AGGREGATE                       |                                        |              |                                                       |                                            |
-| :-----------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-create-access-method.html "CREATE ACCESS METHOD")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createcast.html "CREATE CAST") |
-
-***
-
 ## CREATE AGGREGATE
 
 CREATE AGGREGATE — define a new aggregate function
@@ -271,10 +263,3 @@ See [Section 38.12](xaggr.html "38.12. User-Defined Aggregates").
 ## See Also
 
 [ALTER AGGREGATE](sql-alteraggregate.html "ALTER AGGREGATE"), [DROP AGGREGATE](sql-dropaggregate.html "DROP AGGREGATE")
-
-***
-
-|                                                               |                                                       |                                            |
-| :------------------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-create-access-method.html "CREATE ACCESS METHOD")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createcast.html "CREATE CAST") |
-| CREATE ACCESS METHOD                                          | [Home](index.html "PostgreSQL 17devel Documentation") |                                CREATE CAST |

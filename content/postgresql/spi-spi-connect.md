@@ -1,11 +1,3 @@
-
-
-|                       SPI\_connect                      |                                                      |                           |                                                       |                                           |
-| :-----------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ----------------------------------------: |
-| [Prev](spi-interface.html "47.1. Interface Functions")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-finish.html "SPI_finish") |
-
-***
-
 ## SPI\_connect
 
 SPI\_connect, SPI\_connect\_ext — connect a C function to the SPI manager
@@ -43,10 +35,3 @@ int SPI_connect_ext(int options)
 * `SPI_ERROR_CONNECT`
 
     on error
-
-***
-
-|                                                         |                                                       |                                           |
-| :------------------------------------------------------ | :---------------------------------------------------: | ----------------------------------------: |
-| [Prev](spi-interface.html "47.1. Interface Functions")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-finish.html "SPI_finish") |
-| 47.1. Interface Functions                               | [Home](index.html "PostgreSQL 17devel Documentation") |                               SPI\_finish |

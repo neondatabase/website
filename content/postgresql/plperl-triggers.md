@@ -1,10 +1,3 @@
-
-|                       45.6. PL/Perl Triggers                       |                                                                    |                                                |                                                       |                                                                    |
-| :----------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](plperl-trusted.html "45.5. Trusted and Untrusted PL/Perl")  | [Up](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language") | Chapter 45. PL/Perl — Perl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plperl-event-triggers.html "45.7. PL/Perl Event Triggers") |
-
-***
-
 ## 45.6. PL/Perl Triggers [#](#PLPERL-TRIGGERS)
 
 PL/Perl can be used to write trigger functions. In a trigger function, the hash reference `$_TD` contains information about the current trigger event. `$_TD` is a global variable, which gets a separate local value for each invocation of the trigger. The fields of the `$_TD` hash reference are:
@@ -95,10 +88,3 @@ CREATE TRIGGER test_valid_id_trig
     BEFORE INSERT OR UPDATE ON test
     FOR EACH ROW EXECUTE FUNCTION valid_id();
 ```
-
-***
-
-|                                                                    |                                                                    |                                                                    |
-| :----------------------------------------------------------------- | :----------------------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](plperl-trusted.html "45.5. Trusted and Untrusted PL/Perl")  | [Up](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language") |  [Next](plperl-event-triggers.html "45.7. PL/Perl Event Triggers") |
-| 45.5. Trusted and Untrusted PL/Perl                                |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                       45.7. PL/Perl Event Triggers |

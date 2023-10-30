@@ -1,11 +1,3 @@
-
-
-|                           71.3. Extensibility                          |                                            |                          |                                                       |                                                     |
-| :--------------------------------------------------------------------: | :----------------------------------------- | :----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](brin-builtin-opclasses.html "71.2. Built-in Operator Classes")  | [Up](brin.html "Chapter 71. BRIN Indexes") | Chapter 71. BRIN Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](hash-index.html "Chapter 72. Hash Indexes") |
-
-***
-
 ## 71.3. Extensibility [#](#BRIN-EXTENSIBILITY)
 
 The BRIN interface has a high level of abstraction, requiring the access method implementer only to implement the semantics of the data type being accessed. The BRIN layer itself takes care of concurrency, logging and searching the index structure.
@@ -159,10 +151,3 @@ The minmax-multi operator class is also intended for data types implementing a t
 \
 
 Both minmax and inclusion operator classes support cross-data-type operators, though with these the dependencies become more complicated. The minmax operator class requires a full set of operators to be defined with both arguments having the same data type. It allows additional data types to be supported by defining extra sets of operators. Inclusion operator class operator strategies are dependent on another operator strategy as shown in [Table 71.3](brin-extensibility.html#BRIN-EXTENSIBILITY-INCLUSION-TABLE "Table 71.3. Function and Support Numbers for Inclusion Operator Classes"), or the same operator strategy as themselves. They require the dependency operator to be defined with the `STORAGE` data type as the left-hand-side argument and the other supported data type to be the right-hand-side argument of the supported operator. See `float4_minmax_ops` as an example of minmax, and `box_inclusion_ops` as an example of inclusion.
-
-***
-
-|                                                                        |                                                       |                                                     |
-| :--------------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](brin-builtin-opclasses.html "71.2. Built-in Operator Classes")  |       [Up](brin.html "Chapter 71. BRIN Indexes")      |  [Next](hash-index.html "Chapter 72. Hash Indexes") |
-| 71.2. Built-in Operator Classes                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                            Chapter 72. Hash Indexes |

@@ -1,11 +1,3 @@
-
-
-|                53.11. `pg_class`               |                                                   |                             |                                                       |                                                          |
-| :--------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](catalog-pg-cast.html "53.10. pg_cast")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-collation.html "53.12. pg_collation") |
-
-***
-
 ## 53.11. `pg_class` [#](#CATALOG-PG-CLASS)
 
 The catalog `pg_class` describes tables and other objects that have columns or are otherwise similar to a table. This includes indexes (but see also [`pg_index`](catalog-pg-index.html "53.26. pg_index")), sequences (but see also [`pg_sequence`](catalog-pg-sequence.html "53.47. pg_sequence")), views, materialized views, composite types, and TOAST tables; see `relkind`. Below, when we mean all of these kinds of objects we speak of “relations”. Not all of `pg_class`'s columns are meaningful for all relation kinds.
@@ -51,10 +43,3 @@ The catalog `pg_class` describes tables and other objects that have columns or a
 \
 
 Several of the Boolean flags in `pg_class` are maintained lazily: they are guaranteed to be true if that's the correct state, but may not be reset to false immediately when the condition is no longer true. For example, `relhasindex` is set by [`CREATE INDEX`](sql-createindex.html "CREATE INDEX"), but it is never cleared by [`DROP INDEX`](sql-dropindex.html "DROP INDEX"). Instead, [`VACUUM`](sql-vacuum.html "VACUUM") clears `relhasindex` if it finds the table has no indexes. This arrangement avoids race conditions and improves concurrency.
-
-***
-
-|                                                |                                                       |                                                          |
-| :--------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](catalog-pg-cast.html "53.10. pg_cast")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-collation.html "53.12. pg_collation") |
-| 53.10. `pg_cast`                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                    53.12. `pg_collation` |

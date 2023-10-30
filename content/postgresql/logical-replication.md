@@ -1,11 +1,3 @@
-
-
-|          Chapter 31. Logical Replication          |                                                    |                                 |                                                       |                                                                   |
-| :-----------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](wal-internals.html "30.6. WAL Internals")  | [Up](admin.html "Part III. Server Administration") | Part III. Server Administration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logical-replication-publication.html "31.1. Publication") |
-
-***
-
 ## Chapter 31. Logical Replication
 
 **Table of Contents**
@@ -69,10 +61,3 @@ The typical use-cases for logical replication are:
 * Sharing a subset of the database between multiple databases.
 
 The subscriber database behaves in the same way as any other PostgreSQL instance and can be used as a publisher for other databases by defining its own publications. When the subscriber is treated as read-only by application, there will be no conflicts from a single subscription. On the other hand, if there are other writes done either by an application or by other subscribers to the same set of tables, conflicts can arise.
-
-***
-
-|                                                   |                                                       |                                                                   |
-| :------------------------------------------------ | :---------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](wal-internals.html "30.6. WAL Internals")  |   [Up](admin.html "Part III. Server Administration")  |  [Next](logical-replication-publication.html "31.1. Publication") |
-| 30.6. WAL Internals                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                                 31.1. Publication |

@@ -1,11 +1,3 @@
-
-
-|          COMMIT PREPARED          |                                        |              |                                                       |                               |
-| :-------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------: |
-| [Prev](sql-commit.html "COMMIT")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-copy.html "COPY") |
-
-***
-
 ## COMMIT PREPARED
 
 COMMIT PREPARED — commit a transaction that was earlier prepared for two-phase commit
@@ -51,10 +43,3 @@ COMMIT PREPARED 'foobar';
 ## See Also
 
 [PREPARE TRANSACTION](sql-prepare-transaction.html "PREPARE TRANSACTION"), [ROLLBACK PREPARED](sql-rollback-prepared.html "ROLLBACK PREPARED")
-
-***
-
-|                                   |                                                       |                               |
-| :-------------------------------- | :---------------------------------------------------: | ----------------------------: |
-| [Prev](sql-commit.html "COMMIT")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-copy.html "COPY") |
-| COMMIT                            | [Home](index.html "PostgreSQL 17devel Documentation") |                          COPY |

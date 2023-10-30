@@ -1,11 +1,3 @@
-
-
-|               MOVE              |                                        |              |                                                       |                                   |
-| :-----------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](sql-merge.html "MERGE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-notify.html "NOTIFY") |
-
-***
-
 ## MOVE
 
 MOVE — position a cursor
@@ -81,10 +73,3 @@ There is no `MOVE` statement in the SQL standard.
 ## See Also
 
 [CLOSE](sql-close.html "CLOSE"), [DECLARE](sql-declare.html "DECLARE"), [FETCH](sql-fetch.html "FETCH")
-
-***
-
-|                                 |                                                       |                                   |
-| :------------------------------ | :---------------------------------------------------: | --------------------------------: |
-| [Prev](sql-merge.html "MERGE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-notify.html "NOTIFY") |
-| MERGE                           | [Home](index.html "PostgreSQL 17devel Documentation") |                            NOTIFY |

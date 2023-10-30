@@ -1,11 +1,3 @@
-
-
-|                  dblink\_fetch                  |                                                                          |                                                      |                                                       |                                                   |
-| :---------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](contrib-dblink-open.html "dblink_open")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-close.html "dblink_close") |
-
-***
-
 ## dblink\_fetch
 
 dblink\_fetch — returns rows from an open cursor in a remote database
@@ -96,10 +88,3 @@ SELECT * FROM dblink_fetch('foo', 5) AS (funcname name, source text);
 ----------+--------
 (0 rows)
 ```
-
-***
-
-|                                                 |                                                                          |                                                   |
-| :---------------------------------------------- | :----------------------------------------------------------------------: | ------------------------------------------------: |
-| [Prev](contrib-dblink-open.html "dblink_open")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-close.html "dblink_close") |
-| dblink\_open                                    |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                     dblink\_close |

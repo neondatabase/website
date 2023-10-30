@@ -1,11 +1,3 @@
-
-
-|                 J.2. Tool Sets                |                                                 |                           |                                                       |                                                                          |
-| :-------------------------------------------: | :---------------------------------------------- | :-----------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](docguide-docbook.html "J.1. DocBook")  | [Up](docguide.html "Appendix J. Documentation") | Appendix J. Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](docguide-build.html "J.3. Building the Documentation with Make") |
-
-***
-
 ## J.2. Tool Sets [#](#DOCGUIDE-TOOLSETS)
 
   * *   [J.2.1. Installation on Fedora, RHEL, and Derivatives](docguide-toolsets.html#DOCGUIDE-TOOLSETS-INST-FEDORA-ET-AL)
@@ -132,10 +124,3 @@ If necessary, you can tell `configure` where to find these programs, for example
 ```
 
 If you prefer to build PostgreSQL using Meson, instead run `meson setup` as described in [Section 17.4](install-meson.html "17.4. Building and Installation with Meson"), and then see [Section J.4](docguide-build-meson.html "J.4. Building the Documentation with Meson").
-
-***
-
-|                                               |                                                       |                                                                          |
-| :-------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](docguide-docbook.html "J.1. DocBook")  |    [Up](docguide.html "Appendix J. Documentation")    |  [Next](docguide-build.html "J.3. Building the Documentation with Make") |
-| J.1. DocBook                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                J.3. Building the Documentation with Make |

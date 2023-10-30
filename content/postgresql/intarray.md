@@ -1,11 +1,3 @@
-
-
-|              F.20. intarray — manipulate arrays of integers             |                                                                             |                                                        |                                                       |                                                                                                      |
-| :---------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------------------------: |
-| [Prev](intagg.html "F.19. intagg — integer aggregator and enumerator")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](isn.html "F.21. isn — data types for international standard numbers (ISBN, EAN, UPC, etc.)") |
-
-***
-
 ## F.20. intarray — manipulate arrays of integers [#](#INTARRAY)
 
   * *   [F.20.1. `intarray` Functions and Operators](intarray.html#INTARRAY-FUNCS-OPS)
@@ -119,10 +111,3 @@ The `bench.pl` script has numerous options, which are displayed when it is run w
 ### F.20.5. Authors [#](#INTARRAY-AUTHORS)
 
 All work was done by Teodor Sigaev (`<teodor@sigaev.ru>`) and Oleg Bartunov (`<oleg@sai.msu.su>`). See [http://www.sai.msu.su/~megera/postgres/gist/](http://www.sai.msu.su/~megera/postgres/gist/) for additional information. Andrey Oktyabrski did a great work on adding new functions and operations.
-
-***
-
-|                                                                         |                                                                             |                                                                                                      |
-| :---------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ---------------------------------------------------------------------------------------------------: |
-| [Prev](intagg.html "F.19. intagg — integer aggregator and enumerator")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](isn.html "F.21. isn — data types for international standard numbers (ISBN, EAN, UPC, etc.)") |
-| F.19. intagg — integer aggregator and enumerator                        |            [Home](index.html "PostgreSQL 17devel Documentation")            |                     F.21. isn — data types for international standard numbers (ISBN, EAN, UPC, etc.) |

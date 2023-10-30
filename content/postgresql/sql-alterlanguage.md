@@ -1,11 +1,3 @@
-
-
-|               ALTER LANGUAGE               |                                        |              |                                                       |                                                         |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-alterindex.html "ALTER INDEX")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterlargeobject.html "ALTER LARGE OBJECT") |
-
-***
-
 ## ALTER LANGUAGE
 
 ALTER LANGUAGE — change the definition of a procedural language
@@ -43,10 +35,3 @@ There is no `ALTER LANGUAGE` statement in the SQL standard.
 ## See Also
 
 [CREATE LANGUAGE](sql-createlanguage.html "CREATE LANGUAGE"), [DROP LANGUAGE](sql-droplanguage.html "DROP LANGUAGE")
-
-***
-
-|                                            |                                                       |                                                         |
-| :----------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-alterindex.html "ALTER INDEX")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterlargeobject.html "ALTER LARGE OBJECT") |
-| ALTER INDEX                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                      ALTER LARGE OBJECT |

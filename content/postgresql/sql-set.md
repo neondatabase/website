@@ -1,11 +1,3 @@
-
-
-|                     SET                    |                                        |              |                                                       |                                                     |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](sql-selectinto.html "SELECT INTO")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-set-constraints.html "SET CONSTRAINTS") |
-
-***
-
 ## SET
 
 SET — change a run-time parameter
@@ -142,10 +134,3 @@ SET TIME ZONE 'Europe/Rome';
 ## See Also
 
 [RESET](sql-reset.html "RESET"), [SHOW](sql-show.html "SHOW")
-
-***
-
-|                                            |                                                       |                                                     |
-| :----------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](sql-selectinto.html "SELECT INTO")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-set-constraints.html "SET CONSTRAINTS") |
-| SELECT INTO                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                     SET CONSTRAINTS |

@@ -1,11 +1,3 @@
-
-
-|                 43.5. Basic Statements                |                                                                     |                                                |                                                       |                                                                     |
-| :---------------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](plpgsql-expressions.html "43.4. Expressions")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-control-structures.html "43.6. Control Structures") |
-
-***
-
 ## 43.5. Basic Statements [#](#PLPGSQL-STATEMENTS)
 
   * *   [43.5.1. Assignment](plpgsql-statements.html#PLPGSQL-STATEMENTS-ASSIGNMENT)
@@ -391,10 +383,3 @@ Which is preferable is a matter of taste.
 ### Note
 
 In Oracle's PL/SQL, empty statement lists are not allowed, and so `NULL` statements are *required* for situations such as this. PL/pgSQL allows you to just write nothing, instead.
-
-***
-
-|                                                       |                                                                     |                                                                     |
-| :---------------------------------------------------- | :-----------------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](plpgsql-expressions.html "43.4. Expressions")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](plpgsql-control-structures.html "43.6. Control Structures") |
-| 43.4. Expressions                                     |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                            43.6. Control Structures |

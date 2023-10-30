@@ -1,11 +1,3 @@
-
-
-|                   ALTER COLLATION                  |                                        |              |                                                       |                                                      |
-| :------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-alteraggregate.html "ALTER AGGREGATE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterconversion.html "ALTER CONVERSION") |
-
-***
-
 ## ALTER COLLATION
 
 ALTER COLLATION — change the definition of a collation
@@ -107,10 +99,3 @@ There is no `ALTER COLLATION` statement in the SQL standard.
 ## See Also
 
 [CREATE COLLATION](sql-createcollation.html "CREATE COLLATION"), [DROP COLLATION](sql-dropcollation.html "DROP COLLATION")
-
-***
-
-|                                                    |                                                       |                                                      |
-| :------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-alteraggregate.html "ALTER AGGREGATE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterconversion.html "ALTER CONVERSION") |
-| ALTER AGGREGATE                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                     ALTER CONVERSION |

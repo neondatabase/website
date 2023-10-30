@@ -1,11 +1,3 @@
-
-
-|                    F.1. adminpack — pgAdmin support toolpack                   |                                                                             |                                                        |                                                       |                                                                                    |
-| :----------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------: |
-| [Prev](contrib.html "Appendix F. Additional Supplied Modules and Extensions")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](amcheck.html "F.2. amcheck — tools to verify table and index consistency") |
-
-***
-
 ## F.1. adminpack — pgAdmin support toolpack [#](#ADMINPACK)
 
 `adminpack` provides a number of support functions which pgAdmin and other administration and management tools can use to provide additional functionality, such as remote management of server log files. Use of all these functions is only allowed to database superusers by default, but may be allowed to other users by using the `GRANT` command.
@@ -33,10 +25,3 @@ The functions shown in [Table F.1](adminpack.html#FUNCTIONS-ADMINPACK-TABLE "Ta
 `pg_file_unlink` removes the specified file. Returns true on success, false if the specified file is not present or the `unlink()` call fails; other cases throw errors.
 
 `pg_logdir_ls` returns the start timestamps and path names of all the log files in the [log\_directory](runtime-config-logging.html#GUC-LOG-DIRECTORY) directory. The [log\_filename](runtime-config-logging.html#GUC-LOG-FILENAME) parameter must have its default setting (`postgresql-%Y-%m-%d_%H%M%S.log`) to use this function.
-
-***
-
-|                                                                                |                                                                             |                                                                                    |
-| :----------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ---------------------------------------------------------------------------------: |
-| [Prev](contrib.html "Appendix F. Additional Supplied Modules and Extensions")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](amcheck.html "F.2. amcheck — tools to verify table and index consistency") |
-| Appendix F. Additional Supplied Modules and Extensions                         |            [Home](index.html "PostgreSQL 17devel Documentation")            |                         F.2. amcheck — tools to verify table and index consistency |

@@ -1,11 +1,3 @@
-
-
-|                 54.10. `pg_ident_file_mappings`                |                                             |                          |                                                       |                                                   |
-| :------------------------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](view-pg-hba-file-rules.html "54.9. pg_hba_file_rules")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-indexes.html "54.11. pg_indexes") |
-
-***
-
 ## 54.10. `pg_ident_file_mappings` [#](#VIEW-PG-IDENT-FILE-MAPPINGS)
 
 The view `pg_ident_file_mappings` provides a summary of the contents of the client user name mapping configuration file, [`pg_ident.conf`](auth-username-maps.html "21.2. User Name Maps"). A row appears in this view for each non-empty, non-comment line in the file, with annotations indicating whether the map could be applied successfully.
@@ -31,10 +23,3 @@ By default, the `pg_ident_file_mappings` view can be read only by superusers.
 Usually, a row reflecting an incorrect entry will have values for only the `line_number` and `error` fields.
 
 See [Chapter 21](client-authentication.html "Chapter 21. Client Authentication") for more information about client authentication configuration.
-
-***
-
-|                                                                |                                                       |                                                   |
-| :------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](view-pg-hba-file-rules.html "54.9. pg_hba_file_rules")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-indexes.html "54.11. pg_indexes") |
-| 54.9. `pg_hba_file_rules`                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                               54.11. `pg_indexes` |

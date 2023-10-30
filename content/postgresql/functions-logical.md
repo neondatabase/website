@@ -1,11 +1,3 @@
-
-
-|                    9.1. Logical Operators                    |                                                           |                                    |                                                       |                                                                              |
-| :----------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](functions.html "Chapter 9. Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-comparison.html "9.2. Comparison Functions and Operators") |
-
-***
-
 ## 9.1. Logical Operators [#](#FUNCTIONS-LOGICAL)
 
 The usual logical operators are available:
@@ -35,10 +27,3 @@ SQL uses a three-valued logic system with true, false, and `null`, which represe
 | NULL  | NULL      |
 
 The operators `AND` and `OR` are commutative, that is, you can switch the left and right operands without affecting the result. (However, it is not guaranteed that the left operand is evaluated before the right operand. See [Section 4.2.14](sql-expressions.html#SYNTAX-EXPRESS-EVAL "4.2.14. Expression Evaluation Rules") for more information about the order of evaluation of subexpressions.)
-
-***
-
-|                                                              |                                                           |                                                                              |
-| :----------------------------------------------------------- | :-------------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](functions.html "Chapter 9. Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-comparison.html "9.2. Comparison Functions and Operators") |
-| Chapter 9. Functions and Operators                           |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                      9.2. Comparison Functions and Operators |

@@ -1,11 +1,3 @@
-
-
-|               53.5. `pg_amproc`               |                                                   |                             |                                                       |                                                     |
-| :-------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](catalog-pg-amop.html "53.4. pg_amop")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-attrdef.html "53.6. pg_attrdef") |
-
-***
-
 ## 53.5. `pg_amproc` [#](#CATALOG-PG-AMPROC)
 
 The catalog `pg_amproc` stores information about support functions associated with access method operator families. There is one row for each support function belonging to an operator family.
@@ -24,10 +16,3 @@ The catalog `pg_amproc` stores information about support functions associated wi
 \
 
 The usual interpretation of the `amproclefttype` and `amprocrighttype` fields is that they identify the left and right input types of the operator(s) that a particular support function supports. For some access methods these match the input data type(s) of the support function itself, for others not. There is a notion of “default” support functions for an index, which are those with `amproclefttype` and `amprocrighttype` both equal to the index operator class's `opcintype`.
-
-***
-
-|                                               |                                                       |                                                     |
-| :-------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](catalog-pg-amop.html "53.4. pg_amop")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-attrdef.html "53.6. pg_attrdef") |
-| 53.4. `pg_amop`                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                  53.6. `pg_attrdef` |

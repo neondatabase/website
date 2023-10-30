@@ -1,11 +1,3 @@
-
-
-|                     pgbench                    |                                                              |                                |                                                       |                                        |
-| :--------------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -------------------------------------: |
-| [Prev](app-pgbasebackup.html "pg_basebackup")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pgconfig.html "pg_config") |
-
-***
-
 ## pgbench
 
 pgbench — run a benchmark test on PostgreSQL
@@ -956,10 +948,3 @@ A limitation of pgbench is that it can itself become the bottleneck when trying 
 ### Security
 
 If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas.html#DDL-SCHEMAS-PATTERNS "5.9.6. Usage Patterns"), do not run pgbench in that database. pgbench uses unqualified names and does not manipulate the search path.
-
-***
-
-|                                                |                                                              |                                        |
-| :--------------------------------------------- | :----------------------------------------------------------: | -------------------------------------: |
-| [Prev](app-pgbasebackup.html "pg_basebackup")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-pgconfig.html "pg_config") |
-| pg\_basebackup                                 |     [Home](index.html "PostgreSQL 17devel Documentation")    |                             pg\_config |

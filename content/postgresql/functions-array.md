@@ -1,11 +1,3 @@
-
-
-|                 9.19. Array Functions and Operators                 |                                                           |                                    |                                                       |                                                                                |
-| :-----------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](functions-conditional.html "9.18. Conditional Expressions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-range.html "9.20. Range/Multirange Functions and Operators") |
-
-***
-
 ## 9.19. Array Functions and Operators [#](#FUNCTIONS-ARRAY)
 
 [Table 9.53](functions-array.html#ARRAY-OPERATORS-TABLE "Table 9.53. Array Operators") shows the specialized operators available for array types. In addition to those, the usual comparison operators shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for arrays. The comparison operators compare the array contents element-by-element, using the default B-tree comparison function for the element data type, and sort based on the first difference. In multidimensional arrays the elements are visited in row-major order (last subscript varies most rapidly). If the contents of two arrays are equal but the dimensionality is different, the first difference in the dimensionality information determines the sort order.
@@ -55,10 +47,3 @@ See [Section 8.15](arrays.html "8.15. Arrays") for more details about array op
 \
 
 See also [Section 9.21](functions-aggregate.html "9.21. Aggregate Functions") about the aggregate function `array_agg` for use with arrays.
-
-***
-
-|                                                                     |                                                           |                                                                                |
-| :------------------------------------------------------------------ | :-------------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](functions-conditional.html "9.18. Conditional Expressions")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-range.html "9.20. Range/Multirange Functions and Operators") |
-| 9.18. Conditional Expressions                                       |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                 9.20. Range/Multirange Functions and Operators |

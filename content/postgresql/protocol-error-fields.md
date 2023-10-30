@@ -1,11 +1,3 @@
-
-
-|              55.8. Error and Notice Message Fields             |                                                             |                                       |                                                       |                                                                                               |
-| :------------------------------------------------------------: | :---------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------------------: |
-| [Prev](protocol-message-formats.html "55.7. Message Formats")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") | Chapter 55. Frontend/Backend Protocol | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](protocol-logicalrep-message-formats.html "55.9. Logical Replication Message Formats") |
-
-***
-
 ## 55.8. Error and Notice Message Fields [#](#PROTOCOL-ERROR-FIELDS)
 
 This section describes the fields that can appear in ErrorResponse and NoticeResponse messages. Each field type has a single-byte identification token. Note that any given field type should appear at most once per message.
@@ -87,10 +79,3 @@ This section describes the fields that can appear in ErrorResponse and NoticeRes
 The fields for schema name, table name, column name, data type name, and constraint name are supplied only for a limited number of error types; see [Appendix A](errcodes-appendix.html "Appendix A. PostgreSQL Error Codes"). Frontends should not assume that the presence of any of these fields guarantees the presence of another field. Core error sources observe the interrelationships noted above, but user-defined functions may use these fields in other ways. In the same vein, clients should not assume that these fields denote contemporary objects in the current database.
 
 The client is responsible for formatting displayed information to meet its needs; in particular it should break long lines as needed. Newline characters appearing in the error message fields should be treated as paragraph breaks, not line breaks.
-
-***
-
-|                                                                |                                                             |                                                                                               |
-| :------------------------------------------------------------- | :---------------------------------------------------------: | --------------------------------------------------------------------------------------------: |
-| [Prev](protocol-message-formats.html "55.7. Message Formats")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") |  [Next](protocol-logicalrep-message-formats.html "55.9. Logical Replication Message Formats") |
-| 55.7. Message Formats                                          |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                                     55.9. Logical Replication Message Formats |

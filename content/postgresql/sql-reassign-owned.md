@@ -1,11 +1,3 @@
-
-
-|                        REASSIGN OWNED                       |                                        |              |                                                       |                                                                       |
-| :---------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](sql-prepare-transaction.html "PREPARE TRANSACTION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-refreshmaterializedview.html "REFRESH MATERIALIZED VIEW") |
-
-***
-
 ## REASSIGN OWNED
 
 REASSIGN OWNED — change the ownership of database objects owned by a database role
@@ -51,10 +43,3 @@ The `REASSIGN OWNED` command is a PostgreSQL extension.
 ## See Also
 
 [DROP OWNED](sql-drop-owned.html "DROP OWNED"), [DROP ROLE](sql-droprole.html "DROP ROLE"), [ALTER DATABASE](sql-alterdatabase.html "ALTER DATABASE")
-
-***
-
-|                                                             |                                                       |                                                                       |
-| :---------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](sql-prepare-transaction.html "PREPARE TRANSACTION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-refreshmaterializedview.html "REFRESH MATERIALIZED VIEW") |
-| PREPARE TRANSACTION                                         | [Home](index.html "PostgreSQL 17devel Documentation") |                                             REFRESH MATERIALIZED VIEW |

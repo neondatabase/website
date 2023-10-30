@@ -1,11 +1,3 @@
-
-
-|            5.11. Table Partitioning           |                                             |                            |                                                       |                                                     |
-| :-------------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](ddl-inherit.html "5.10. Inheritance")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-foreign-data.html "5.12. Foreign Data") |
-
-***
-
 ## 5.11. Table Partitioning [#](#DDL-PARTITIONING)
 
   * *   [5.11.1. Overview](ddl-partitioning.html#DDL-PARTITIONING-OVERVIEW)
@@ -565,10 +557,3 @@ Sub-partitioning can be useful to further divide partitions that are expected to
 It is important to consider the overhead of partitioning during query planning and execution. The query planner is generally able to handle partition hierarchies with up to a few thousand partitions fairly well, provided that typical queries allow the query planner to prune all but a small number of partitions. Planning times become longer and memory consumption becomes higher when more partitions remain after the planner performs partition pruning. Another reason to be concerned about having a large number of partitions is that the server's memory consumption may grow significantly over time, especially if many sessions touch large numbers of partitions. That's because each partition requires its metadata to be loaded into the local memory of each session that touches it.
 
 With data warehouse type workloads, it can make sense to use a larger number of partitions than with an OLTP type workload. Generally, in data warehouses, query planning time is less of a concern as the majority of processing time is spent during query execution. With either of these two types of workload, it is important to make the right decisions early, as re-partitioning large quantities of data can be painfully slow. Simulations of the intended workload are often beneficial for optimizing the partitioning strategy. Never just assume that more partitions are better than fewer partitions, nor vice-versa.
-
-***
-
-|                                               |                                                       |                                                     |
-| :-------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](ddl-inherit.html "5.10. Inheritance")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](ddl-foreign-data.html "5.12. Foreign Data") |
-| 5.10. Inheritance                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                  5.12. Foreign Data |

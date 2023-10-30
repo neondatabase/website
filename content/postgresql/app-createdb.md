@@ -1,11 +1,3 @@
-
-
-|                 createdb                |                                                              |                                |                                                       |                                           |
-| :-------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ----------------------------------------: |
-| [Prev](app-clusterdb.html "clusterdb")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-createuser.html "createuser") |
-
-***
-
 ## createdb
 
 createdb — create a new PostgreSQL database
@@ -160,10 +152,3 @@ CREATE DATABASE demo TEMPLATE template0;
 ## See Also
 
 [dropdb](app-dropdb.html "dropdb"), [CREATE DATABASE](sql-createdatabase.html "CREATE DATABASE")
-
-***
-
-|                                         |                                                              |                                           |
-| :-------------------------------------- | :----------------------------------------------------------: | ----------------------------------------: |
-| [Prev](app-clusterdb.html "clusterdb")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-createuser.html "createuser") |
-| clusterdb                               |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                createuser |

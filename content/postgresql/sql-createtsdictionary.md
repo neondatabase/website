@@ -1,11 +1,3 @@
-
-
-|                    CREATE TEXT SEARCH DICTIONARY                    |                                        |              |                                                       |                                                              |
-| :-----------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](sql-createtsconfig.html "CREATE TEXT SEARCH CONFIGURATION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createtsparser.html "CREATE TEXT SEARCH PARSER") |
-
-***
-
 ## CREATE TEXT SEARCH DICTIONARY
 
 CREATE TEXT SEARCH DICTIONARY — define a new text search dictionary
@@ -70,10 +62,3 @@ There is no `CREATE TEXT SEARCH DICTIONARY` statement in the SQL standard.
 ## See Also
 
 [ALTER TEXT SEARCH DICTIONARY](sql-altertsdictionary.html "ALTER TEXT SEARCH DICTIONARY"), [DROP TEXT SEARCH DICTIONARY](sql-droptsdictionary.html "DROP TEXT SEARCH DICTIONARY")
-
-***
-
-|                                                                     |                                                       |                                                              |
-| :------------------------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](sql-createtsconfig.html "CREATE TEXT SEARCH CONFIGURATION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createtsparser.html "CREATE TEXT SEARCH PARSER") |
-| CREATE TEXT SEARCH CONFIGURATION                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                    CREATE TEXT SEARCH PARSER |

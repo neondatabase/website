@@ -1,11 +1,3 @@
-
-
-|                   23.3. Template Databases                   |                                                                |                                |                                                       |                                                               |
-| :----------------------------------------------------------: | :------------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](manage-ag-createdb.html "23.2. Creating a Database")  | [Up](managing-databases.html "Chapter 23. Managing Databases") | Chapter 23. Managing Databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](manage-ag-config.html "23.4. Database Configuration") |
-
-***
-
 ## 23.3. Template Databases [#](#MANAGE-AG-TEMPLATEDBS)
 
 `CREATE DATABASE` actually works by copying an existing database. By default, it copies the standard system database named `template1`. Thus that database is the “template” from which new databases are made. If you add objects to `template1`, these objects will be copied into subsequently created user databases. This behavior allows site-local modifications to the standard set of objects in databases. For example, if you install the procedural language PL/Perl in `template1`, it will automatically be available in user databases without any extra action being taken when those databases are created.
@@ -39,10 +31,3 @@ Two useful flags exist in `pg_database` each database: the columns `datistemplat
 `template1` and `template0` do not have any special status beyond the fact that the name `template1` is the default source database name for `CREATE DATABASE`. For example, one could drop `template1` and recreate it from `template0` without any ill effects. This course of action might be advisable if one has carelessly added a bunch of junk in `template1`. (To delete `template1`, it must have `pg_database.datistemplate = false`.)
 
 The `postgres` database is also created when a database cluster is initialized. This database is meant as a default database for users and applications to connect to. It is simply a copy of `template1` and can be dropped and recreated if necessary.
-
-***
-
-|                                                              |                                                                |                                                               |
-| :----------------------------------------------------------- | :------------------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](manage-ag-createdb.html "23.2. Creating a Database")  | [Up](managing-databases.html "Chapter 23. Managing Databases") |  [Next](manage-ag-config.html "23.4. Database Configuration") |
-| 23.2. Creating a Database                                    |      [Home](index.html "PostgreSQL 17devel Documentation")     |                                  23.4. Database Configuration |

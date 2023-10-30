@@ -1,11 +1,3 @@
-
-
-|                  15.2. When Can Parallel Query Be Used?                 |                                                        |                            |                                                       |                                                     |
-| :---------------------------------------------------------------------: | :----------------------------------------------------- | :------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](how-parallel-query-works.html "15.1. How Parallel Query Works")  | [Up](parallel-query.html "Chapter 15. Parallel Query") | Chapter 15. Parallel Query | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](parallel-plans.html "15.3. Parallel Plans") |
-
-***
-
 ## 15.2. When Can Parallel Query Be Used? [#](#WHEN-CAN-PARALLEL-QUERY-BE-USED)
 
 There are several settings that can cause the query planner not to generate a parallel query plan under any circumstances. In order for any parallel query plans whatsoever to be generated, the following settings must be configured as indicated.
@@ -34,10 +26,3 @@ Even when parallel query plan is generated for a particular query, there are sev
 * No background workers can be obtained because of the limitation that the total number of background workers cannot exceed [max\_worker\_processes](runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES).
 * No background workers can be obtained because of the limitation that the total number of background workers launched for purposes of parallel query cannot exceed [max\_parallel\_workers](runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS).
 * The client sends an Execute message with a non-zero fetch count. See the discussion of the [extended query protocol](protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY "55.2.3. Extended Query"). Since [libpq](libpq.html "Chapter 34. libpq — C Library") currently provides no way to send such a message, this can only occur when using a client that does not rely on libpq. If this is a frequent occurrence, it may be a good idea to set [max\_parallel\_workers\_per\_gather](runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS-PER-GATHER) to zero in sessions where it is likely, so as to avoid generating query plans that may be suboptimal when run serially.
-
-***
-
-|                                                                         |                                                        |                                                     |
-| :---------------------------------------------------------------------- | :----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](how-parallel-query-works.html "15.1. How Parallel Query Works")  | [Up](parallel-query.html "Chapter 15. Parallel Query") |  [Next](parallel-plans.html "15.3. Parallel Plans") |
-| 15.1. How Parallel Query Works                                          |  [Home](index.html "PostgreSQL 17devel Documentation") |                                15.3. Parallel Plans |

@@ -1,11 +1,3 @@
-
-
-|                        ALTER VIEW                       |                                        |              |                                                       |                                     |
-| :-----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-alterusermapping.html "ALTER USER MAPPING")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-analyze.html "ANALYZE") |
-
-***
-
 ## ALTER VIEW
 
 ALTER VIEW — change the definition of a view
@@ -111,10 +103,3 @@ INSERT INTO a_view(id) VALUES(2);  -- ts will receive the current time
 ## See Also
 
 [CREATE VIEW](sql-createview.html "CREATE VIEW"), [DROP VIEW](sql-dropview.html "DROP VIEW")
-
-***
-
-|                                                         |                                                       |                                     |
-| :------------------------------------------------------ | :---------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-alterusermapping.html "ALTER USER MAPPING")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-analyze.html "ANALYZE") |
-| ALTER USER MAPPING                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                             ANALYZE |

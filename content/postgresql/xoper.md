@@ -1,11 +1,3 @@
-
-
-|           38.14. User-Defined Operators          |                                               |                           |                                                       |                                                                             |
-| :----------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](xtypes.html "38.13. User-Defined Types")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xoper-optimization.html "38.15. Operator Optimization Information") |
-
-***
-
 ## 38.14. User-Defined Operators [#](#XOPER)
 
 Every operator is “syntactic sugar” for a call to an underlying function that does the real work; so you must first create the underlying function before you can create the operator. However, an operator is *not merely* syntactic sugar, because it carries additional information that helps the query planner optimize queries that use the operator. The next section will be devoted to explaining that additional information.
@@ -42,10 +34,3 @@ SELECT (a + b) AS c FROM test_complex;
 ```
 
 We've shown how to create a binary operator here. To create a prefix operator, just omit the `leftarg`. The `function` clause and the argument clauses are the only required items in `CREATE OPERATOR`. The `commutator` clause shown in the example is an optional hint to the query optimizer. Further details about `commutator` and other optimizer hints appear in the next section.
-
-***
-
-|                                                  |                                                       |                                                                             |
-| :----------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](xtypes.html "38.13. User-Defined Types")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xoper-optimization.html "38.15. Operator Optimization Information") |
-| 38.13. User-Defined Types                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                    38.15. Operator Optimization Information |

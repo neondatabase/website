@@ -1,11 +1,3 @@
-
-
-|        Appendix I. The Source Code Repository       |                                               |                       |                                                       |                                                     |
-| :-------------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](external-extensions.html "H.4. Extensions")  | [Up](appendixes.html "Part VIII. Appendixes") | Part VIII. Appendixes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](git.html "I.1. Getting the Source via Git") |
-
-***
-
 ## Appendix I. The Source Code Repository
 
 **Table of Contents**
@@ -17,10 +9,3 @@ The PostgreSQL source code is stored and managed using the Git version control s
 Our wiki, [https://wiki.postgresql.org/wiki/Working_with_Git](https://wiki.postgresql.org/wiki/Working_with_Git), has some discussion on working with Git.
 
 Note that building PostgreSQL from the source repository requires reasonably up-to-date versions of bison, flex, and Perl. These tools are not needed to build from a distribution tarball, because the files generated with these tools are included in the tarball. Other tool requirements are the same as shown in [Section 17.1](install-requirements.html "17.1. Requirements").
-
-***
-
-|                                                     |                                                       |                                                     |
-| :-------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](external-extensions.html "H.4. Extensions")  |     [Up](appendixes.html "Part VIII. Appendixes")     |  [Next](git.html "I.1. Getting the Source via Git") |
-| H.4. Extensions                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                     I.1. Getting the Source via Git |

@@ -1,11 +1,3 @@
-
-
-|               73.4. Visibility Map               |                                                            |                                       |                                                       |                                                            |
-| :----------------------------------------------: | :--------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](storage-fsm.html "73.3. Free Space Map")  | [Up](storage.html "Chapter 73. Database Physical Storage") | Chapter 73. Database Physical Storage | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](storage-init.html "73.5. The Initialization Fork") |
-
-***
-
 ## 73.4. Visibility Map [#](#STORAGE-VM)
 
 Each heap relation has a Visibility Map (VM) to keep track of which pages contain only tuples that are known to be visible to all active transactions; it also keeps track of which pages contain only frozen tuples. It's stored alongside the main relation data in a separate relation fork, named after the filenode number of the relation, plus a `_vm` suffix. For example, if the filenode of a relation is 12345, the VM is stored in a file called `12345_vm`, in the same directory as the main relation file. Note that indexes do not have VMs.
@@ -15,10 +7,3 @@ The visibility map stores two bits per heap page. The first bit, if set, indicat
 The map is conservative in the sense that we make sure that whenever a bit is set, we know the condition is true, but if a bit is not set, it might or might not be true. Visibility map bits are only set by vacuum, but are cleared by any data-modifying operations on a page.
 
 The [pg\_visibility](pgvisibility.html "F.35. pg_visibility — visibility map information and utilities") module can be used to examine the information stored in the visibility map.
-
-***
-
-|                                                  |                                                            |                                                            |
-| :----------------------------------------------- | :--------------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](storage-fsm.html "73.3. Free Space Map")  | [Up](storage.html "Chapter 73. Database Physical Storage") |  [Next](storage-init.html "73.5. The Initialization Fork") |
-| 73.3. Free Space Map                             |    [Home](index.html "PostgreSQL 17devel Documentation")   |                              73.5. The Initialization Fork |

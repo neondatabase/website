@@ -1,11 +1,3 @@
-
-
-|                 pg\_upgrade                 |                                                              |                                |                                                       |                                      |
-| :-----------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -----------------------------------: |
-| [Prev](pgtesttiming.html "pg_test_timing")  | [Up](reference-server.html "PostgreSQL Server Applications") | PostgreSQL Server Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgwaldump.html "pg_waldump") |
-
-***
-
 ## pg\_upgrade
 
 pg\_upgrade — upgrade a PostgreSQL server instance
@@ -359,10 +351,3 @@ If you want to use link mode and you do not want your old cluster to be modified
 ## See Also
 
 [initdb](app-initdb.html "initdb"), [pg\_ctl](app-pg-ctl.html "pg_ctl"), [pg\_dump](app-pgdump.html "pg_dump"), [postgres](app-postgres.html "postgres")
-
-***
-
-|                                             |                                                              |                                      |
-| :------------------------------------------ | :----------------------------------------------------------: | -----------------------------------: |
-| [Prev](pgtesttiming.html "pg_test_timing")  | [Up](reference-server.html "PostgreSQL Server Applications") |  [Next](pgwaldump.html "pg_waldump") |
-| pg\_test\_timing                            |     [Home](index.html "PostgreSQL 17devel Documentation")    |                          pg\_waldump |

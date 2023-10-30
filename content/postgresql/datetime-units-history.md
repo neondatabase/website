@@ -1,11 +1,3 @@
-
-
-|                               B.6. History of Units                               |                                                              |                               |                                                       |                                                         |
-| :-------------------------------------------------------------------------------: | :----------------------------------------------------------- | :---------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](datetime-posix-timezone-specs.html "B.5. POSIX Time Zone Specifications")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") | Appendix B. Date/Time Support | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datetime-julian-dates.html "B.7. Julian Dates") |
-
-***
-
 ## B.6. History of Units [#](#DATETIME-UNITS-HISTORY)
 
 The SQL standard states that “Within the definition of a ‘datetime literal’, the ‘datetime values’ are constrained by the natural rules for dates and times according to the Gregorian calendar”. PostgreSQL follows the SQL standard's lead by counting dates exclusively in the Gregorian calendar, even for years before that calendar was in use. This rule is known as the *proleptic Gregorian calendar*.
@@ -39,10 +31,3 @@ $ cal 9 1752
 But, of course, this calendar is only valid for Great Britain and dominions, not other places. Since it would be difficult and confusing to try to track the actual calendars that were in use in various places at various times, PostgreSQL does not try, but rather follows the Gregorian calendar rules for all dates, even though this method is not historically accurate.
 
 Different calendars have been developed in various parts of the world, many predating the Gregorian system. For example, the beginnings of the Chinese calendar can be traced back to the 14th century BC. Legend has it that the Emperor Huangdi invented that calendar in 2637 BC. The People's Republic of China uses the Gregorian calendar for civil purposes. The Chinese calendar is used for determining festivals.
-
-***
-
-|                                                                                   |                                                              |                                                         |
-| :-------------------------------------------------------------------------------- | :----------------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](datetime-posix-timezone-specs.html "B.5. POSIX Time Zone Specifications")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") |  [Next](datetime-julian-dates.html "B.7. Julian Dates") |
-| B.5. POSIX Time Zone Specifications                                               |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                       B.7. Julian Dates |

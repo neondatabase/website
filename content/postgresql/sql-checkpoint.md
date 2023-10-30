@@ -1,11 +1,3 @@
-
-
-|           CHECKPOINT          |                                        |              |                                                       |                                 |
-| :---------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------: |
-| [Prev](sql-call.html "CALL")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-close.html "CLOSE") |
-
-***
-
 ## CHECKPOINT
 
 CHECKPOINT — force a write-ahead log checkpoint
@@ -30,10 +22,3 @@ Only superusers or users with the privileges of the [`pg_checkpoint`](predefined
 ## Compatibility
 
 The `CHECKPOINT` command is a PostgreSQL language extension.
-
-***
-
-|                               |                                                       |                                 |
-| :---------------------------- | :---------------------------------------------------: | ------------------------------: |
-| [Prev](sql-call.html "CALL")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-close.html "CLOSE") |
-| CALL                          | [Home](index.html "PostgreSQL 17devel Documentation") |                           CLOSE |

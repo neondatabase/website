@@ -1,11 +1,3 @@
-
-
-|             44.5. Database Access from PL/Tcl            |                                                                 |                                              |                                                       |                                                                 |
-| :------------------------------------------------------: | :-------------------------------------------------------------- | :------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](pltcl-global.html "44.4. Global Data in PL/Tcl")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") | Chapter 44. PL/Tcl — Tcl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pltcl-trigger.html "44.6. Trigger Functions in PL/Tcl") |
-
-***
-
 ## 44.5. Database Access from PL/Tcl [#](#PLTCL-DBACCESS)
 
 In this section, we follow the usual Tcl convention of using question marks, rather than brackets, to indicate an optional element in a syntax synopsis. The following commands are available to access the database from the body of a PL/Tcl function:
@@ -113,10 +105,3 @@ In this section, we follow the usual Tcl convention of using question marks, rat
 * `elog` *`level`* *`msg`*
 
     Emits a log or error message. Possible levels are `DEBUG`, `LOG`, `INFO`, `NOTICE`, `WARNING`, `ERROR`, and `FATAL`. `ERROR` raises an error condition; if this is not trapped by the surrounding Tcl code, the error propagates out to the calling query, causing the current transaction or subtransaction to be aborted. This is effectively the same as the Tcl `error` command. `FATAL` aborts the transaction and causes the current session to shut down. (There is probably no good reason to use this error level in PL/Tcl functions, but it's provided for completeness.) The other levels only generate messages of different priority levels. Whether messages of a particular priority are reported to the client, written to the server log, or both is controlled by the [log\_min\_messages](runtime-config-logging.html#GUC-LOG-MIN-MESSAGES) and [client\_min\_messages](runtime-config-client.html#GUC-CLIENT-MIN-MESSAGES) configuration variables. See [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") and [Section 44.8](pltcl-error-handling.html "44.8. Error Handling in PL/Tcl") for more information.
-
-***
-
-|                                                          |                                                                 |                                                                 |
-| :------------------------------------------------------- | :-------------------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](pltcl-global.html "44.4. Global Data in PL/Tcl")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") |  [Next](pltcl-trigger.html "44.6. Trigger Functions in PL/Tcl") |
-| 44.4. Global Data in PL/Tcl                              |      [Home](index.html "PostgreSQL 17devel Documentation")      |                               44.6. Trigger Functions in PL/Tcl |

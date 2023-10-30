@@ -1,11 +1,3 @@
-
-
-|     6.4. Returning Data from Modified Rows    |                                               |                              |                                                       |                                            |
-| :-------------------------------------------: | :-------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](dml-delete.html "6.3. Deleting Data")  | [Up](dml.html "Chapter 6. Data Manipulation") | Chapter 6. Data Manipulation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](queries.html "Chapter 7. Queries") |
-
-***
-
 ## 6.4. Returning Data from Modified Rows [#](#DML-RETURNING)
 
 Sometimes it is useful to obtain data from modified rows while they are being manipulated. The `INSERT`, `UPDATE`, and `DELETE` commands all have an optional `RETURNING` clause that supports this. Use of `RETURNING` avoids performing an extra database query to collect the data, and is especially valuable when it would otherwise be difficult to identify the modified rows reliably.
@@ -42,10 +34,3 @@ DELETE FROM products
 ```
 
 If there are triggers ([Chapter 39](triggers.html "Chapter 39. Triggers")) on the target table, the data available to `RETURNING` is the row as modified by the triggers. Thus, inspecting columns computed by triggers is another common use-case for `RETURNING`.
-
-***
-
-|                                               |                                                       |                                            |
-| :-------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](dml-delete.html "6.3. Deleting Data")  |     [Up](dml.html "Chapter 6. Data Manipulation")     |  [Next](queries.html "Chapter 7. Queries") |
-| 6.3. Deleting Data                            | [Home](index.html "PostgreSQL 17devel Documentation") |                         Chapter 7. Queries |

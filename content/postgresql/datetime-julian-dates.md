@@ -1,11 +1,3 @@
-
-
-|                       B.7. Julian Dates                      |                                                              |                               |                                                       |                                                                 |
-| :----------------------------------------------------------: | :----------------------------------------------------------- | :---------------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](datetime-units-history.html "B.6. History of Units")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") | Appendix B. Date/Time Support | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-keywords-appendix.html "Appendix C. SQL Key Words") |
-
-***
-
 ## B.7. Julian Dates [#](#DATETIME-JULIAN-DATES)
 
 The *Julian Date* system is a method for numbering days. It is unrelated to the Julian calendar, though it is confusingly named similarly to that calendar. The Julian Date system was invented by the French scholar Joseph Justus Scaliger (1540–1609) and probably takes its name from Scaliger's father, the Italian scholar Julius Caesar Scaliger (1484–1558).
@@ -34,10 +26,3 @@ This definition does, however, provide a way to obtain the astronomical definiti
  2459389
 (1 row)
 ```
-
-***
-
-|                                                              |                                                              |                                                                 |
-| :----------------------------------------------------------- | :----------------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](datetime-units-history.html "B.6. History of Units")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") |  [Next](sql-keywords-appendix.html "Appendix C. SQL Key Words") |
-| B.6. History of Units                                        |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                       Appendix C. SQL Key Words |

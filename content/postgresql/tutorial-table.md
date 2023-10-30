@@ -1,11 +1,3 @@
-
-
-|            2.3. Creating a New Table            |                                                       |                             |                                                       |                                                                     |
-| :---------------------------------------------: | :---------------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](tutorial-concepts.html "2.2. Concepts")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") | Chapter 2. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-populate.html "2.4. Populating a Table With Rows") |
-
-***
-
 ## 2.3. Creating a New Table [#](#TUTORIAL-TABLE)
 
 You can create a new table by specifying the table name, along with all column names and their types:
@@ -47,10 +39,3 @@ lly, it should be mentioned that if you don't need a table any longer or want to
 
 DROP TABLE tablename;
 ```
-
-***
-
-|                                                 |                                                       |                                                                     |
-| :---------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](tutorial-concepts.html "2.2. Concepts")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") |  [Next](tutorial-populate.html "2.4. Populating a Table With Rows") |
-| 2.2. Concepts                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                   2.4. Populating a Table With Rows |

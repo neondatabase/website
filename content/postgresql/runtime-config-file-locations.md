@@ -1,11 +1,3 @@
-
-
-|                   20.2. File Locations                  |                                                              |                                  |                                                       |                                                                                |
-| :-----------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](config-setting.html "20.1. Setting Parameters")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-connection.html "20.3. Connections and Authentication") |
-
-***
-
 ## 20.2. File Locations [#](#RUNTIME-CONFIG-FILE-LOCATIONS)
 
 In addition to the `postgresql.conf` file already mentioned, PostgreSQL uses two other manually-edited configuration files, which control client authentication (their use is discussed in [Chapter 21](client-authentication.html "Chapter 21. Client Authentication")). By default, all three configuration files are stored in the database cluster's data directory. The parameters described in this section allow the configuration files to be placed elsewhere. (Doing so can ease administration. In particular it is often easier to ensure that the configuration files are properly backed-up when they are kept separate.)
@@ -37,10 +29,3 @@ If you wish to keep the configuration files elsewhere than the data directory, t
 If you wish, you can specify the configuration file names and locations individually using the parameters `config_file`, `hba_file` and/or `ident_file`. `config_file` can only be specified on the `postgres` command line, but the others can be set within the main configuration file. If all three parameters plus `data_directory` are explicitly set, then it is not necessary to specify `-D` or `PGDATA`.
 
 When setting any of these parameters, a relative path will be interpreted with respect to the directory in which `postgres` is started.
-
-***
-
-|                                                         |                                                              |                                                                                |
-| :------------------------------------------------------ | :----------------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](config-setting.html "20.1. Setting Parameters")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-connection.html "20.3. Connections and Authentication") |
-| 20.1. Setting Parameters                                |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                           20.3. Connections and Authentication |

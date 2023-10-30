@@ -1,11 +1,3 @@
-
-
-|         PREPARE TRANSACTION         |                                        |              |                                                       |                                                   |
-| :---------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](sql-prepare.html "PREPARE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-reassign-owned.html "REASSIGN OWNED") |
-
-***
-
 ## PREPARE TRANSACTION
 
 PREPARE TRANSACTION — prepare the current transaction for two-phase commit
@@ -67,10 +59,3 @@ PREPARE TRANSACTION 'foobar';
 ## See Also
 
 [COMMIT PREPARED](sql-commit-prepared.html "COMMIT PREPARED"), [ROLLBACK PREPARED](sql-rollback-prepared.html "ROLLBACK PREPARED")
-
-***
-
-|                                     |                                                       |                                                   |
-| :---------------------------------- | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](sql-prepare.html "PREPARE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-reassign-owned.html "REASSIGN OWNED") |
-| PREPARE                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                    REASSIGN OWNED |

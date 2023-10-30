@@ -1,11 +1,3 @@
-
-
-|                          Chapter 51. Archive Modules                          |                                                            |                            |                                                       |                                                                    |
-| :---------------------------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](replication-origins.html "Chapter 50. Replication Progress Tracking")  | [Up](server-programming.html "Part V. Server Programming") | Part V. Server Programming | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](archive-module-init.html "51.1. Initialization Functions") |
-
-***
-
 ## Chapter 51. Archive Modules
 
 **Table of Contents**
@@ -27,10 +19,3 @@ When a custom [archive\_library](runtime-config-wal.html#GUC-ARCHIVE-LIBRARY) is
 Archiving modules must at least consist of an initialization function (see [Section 51.1](archive-module-init.html "51.1. Initialization Functions")) and the required callbacks (see [Section 51.2](archive-module-callbacks.html "51.2. Archive Module Callbacks")). However, archive modules are also permitted to do much more (e.g., declare GUCs and register background workers).
 
 The `contrib/basic_archive` module contains a working example, which demonstrates some useful techniques.
-
-***
-
-|                                                                               |                                                            |                                                                    |
-| :---------------------------------------------------------------------------- | :--------------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](replication-origins.html "Chapter 50. Replication Progress Tracking")  | [Up](server-programming.html "Part V. Server Programming") |  [Next](archive-module-init.html "51.1. Initialization Functions") |
-| Chapter 50. Replication Progress Tracking                                     |    [Home](index.html "PostgreSQL 17devel Documentation")   |                                     51.1. Initialization Functions |

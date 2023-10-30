@@ -1,11 +1,3 @@
-
-
-|             DROP EVENT TRIGGER             |                                        |              |                                                       |                                                  |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-dropdomain.html "DROP DOMAIN")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropextension.html "DROP EXTENSION") |
-
-***
-
 ## DROP EVENT TRIGGER
 
 DROP EVENT TRIGGER — remove an event trigger
@@ -55,10 +47,3 @@ There is no `DROP EVENT TRIGGER` statement in the SQL standard.
 ## See Also
 
 [CREATE EVENT TRIGGER](sql-createeventtrigger.html "CREATE EVENT TRIGGER"), [ALTER EVENT TRIGGER](sql-altereventtrigger.html "ALTER EVENT TRIGGER")
-
-***
-
-|                                            |                                                       |                                                  |
-| :----------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-dropdomain.html "DROP DOMAIN")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropextension.html "DROP EXTENSION") |
-| DROP DOMAIN                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                   DROP EXTENSION |

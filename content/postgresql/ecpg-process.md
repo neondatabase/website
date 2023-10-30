@@ -1,11 +1,3 @@
-
-
-|           36.10. Processing Embedded SQL Programs          |                                                        |                                      |                                                       |                                                       |
-| :--------------------------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](ecpg-preproc.html "36.9. Preprocessor Directives")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-library.html "36.11. Library Functions") |
-
-***
-
 ## 36.10. Processing Embedded SQL Programs [#](#ECPG-PROCESS)
 
 Now that you have an idea how to form embedded SQL C programs, you probably want to know how to compile them. Before compiling you run the file through the embedded SQL C preprocessor, which converts the SQL statements you used to special function calls. After compiling, you must link with a special library that contains the needed functions. These functions fetch information from the arguments, perform the SQL command using the libpq interface, and put the result in the arguments specified for output.
@@ -52,10 +44,3 @@ ECPG = ecpg
 The complete syntax of the `ecpg` command is detailed in [ecpg](app-ecpg.html "ecpg").
 
 The ecpg library is thread-safe by default. However, you might need to use some threading command-line options to compile your client code.
-
-***
-
-|                                                            |                                                        |                                                       |
-| :--------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](ecpg-preproc.html "36.9. Preprocessor Directives")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](ecpg-library.html "36.11. Library Functions") |
-| 36.9. Preprocessor Directives                              |  [Home](index.html "PostgreSQL 17devel Documentation") |                              36.11. Library Functions |

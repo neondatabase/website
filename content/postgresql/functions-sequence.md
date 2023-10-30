@@ -1,11 +1,3 @@
-
-
-|               9.17. Sequence Manipulation Functions               |                                                           |                                    |                                                       |                                                                     |
-| :---------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](functions-json.html "9.16. JSON Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-conditional.html "9.18. Conditional Expressions") |
-
-***
-
 ## 9.17. Sequence Manipulation Functions [#](#FUNCTIONS-SEQUENCE)
 
 This section describes functions for operating on *sequence objects*, also called sequence generators or just sequences. Sequence objects are special single-row tables created with [CREATE SEQUENCE](sql-createsequence.html "CREATE SEQUENCE"). Sequence objects are commonly used to generate unique identifiers for rows of a table. The sequence functions, listed in [Table 9.52](functions-sequence.html#FUNCTIONS-SEQUENCE-TABLE "Table 9.52. Sequence Functions"), provide simple, multiuser-safe methods for obtaining successive sequence values from sequence objects.
@@ -30,10 +22,3 @@ Likewise, sequence state changes made by `setval` are immediately visible to oth
 If the database cluster crashes before committing a transaction containing a `nextval` or `setval` call, the sequence state change might not have made its way to persistent storage, so that it is uncertain whether the sequence will have its original or updated state after the cluster restarts. This is harmless for usage of the sequence within the database, since other effects of uncommitted transactions will not be visible either. However, if you wish to use a sequence value for persistent outside-the-database purposes, make sure that the `nextval` call has been committed before doing so.
 
 The sequence to be operated on by a sequence function is specified by a `regclass` argument, which is simply the OID of the sequence in the `pg_class` system catalog. You do not have to look up the OID by hand, however, since the `regclass` data type's input converter will do the work for you. See [Section 8.19](datatype-oid.html "8.19. Object Identifier Types") for details.
-
-***
-
-|                                                                   |                                                           |                                                                     |
-| :---------------------------------------------------------------- | :-------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](functions-json.html "9.16. JSON Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-conditional.html "9.18. Conditional Expressions") |
-| 9.16. JSON Functions and Operators                                |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                       9.18. Conditional Expressions |

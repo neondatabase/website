@@ -1,11 +1,3 @@
-
-
-|                UNLISTEN               |                                        |              |                                                       |                                   |
-| :-----------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](sql-truncate.html "TRUNCATE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-update.html "UPDATE") |
-
-***
-
 ## UNLISTEN
 
 UNLISTEN — stop listening for a notification
@@ -68,10 +60,3 @@ There is no `UNLISTEN` command in the SQL standard.
 ## See Also
 
 [LISTEN](sql-listen.html "LISTEN"), [NOTIFY](sql-notify.html "NOTIFY")
-
-***
-
-|                                       |                                                       |                                   |
-| :------------------------------------ | :---------------------------------------------------: | --------------------------------: |
-| [Prev](sql-truncate.html "TRUNCATE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-update.html "UPDATE") |
-| TRUNCATE                              | [Home](index.html "PostgreSQL 17devel Documentation") |                            UPDATE |

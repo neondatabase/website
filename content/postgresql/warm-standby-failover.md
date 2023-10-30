@@ -1,11 +1,3 @@
-
-
-|                          27.3. Failover                         |                                                                                               |                                                                |                                                       |                                               |
-| :-------------------------------------------------------------: | :-------------------------------------------------------------------------------------------- | :------------------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](warm-standby.html "27.2. Log-Shipping Standby Servers")  | [Up](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication") | Chapter 27. High Availability, Load Balancing, and Replication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](hot-standby.html "27.4. Hot Standby") |
-
-***
-
 ## 27.3. Failover [#](#WARM-STANDBY-FAILOVER)
 
 If the primary server fails then the standby server should begin failover procedures.
@@ -23,10 +15,3 @@ Once failover to the standby occurs, there is only a single server in operation.
 So, switching from primary to standby server can be fast but requires some time to re-prepare the failover cluster. Regular switching from primary to standby is useful, since it allows regular downtime on each system for maintenance. This also serves as a test of the failover mechanism to ensure that it will really work when you need it. Written administration procedures are advised.
 
 To trigger failover of a log-shipping standby server, run `pg_ctl promote` or call `pg_promote()`. If you're setting up reporting servers that are only used to offload read-only queries from the primary, not for high availability purposes, you don't need to promote.
-
-***
-
-|                                                                 |                                                                                               |                                               |
-| :-------------------------------------------------------------- | :-------------------------------------------------------------------------------------------: | --------------------------------------------: |
-| [Prev](warm-standby.html "27.2. Log-Shipping Standby Servers")  | [Up](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication") |  [Next](hot-standby.html "27.4. Hot Standby") |
-| 27.2. Log-Shipping Standby Servers                              |                     [Home](index.html "PostgreSQL 17devel Documentation")                     |                             27.4. Hot Standby |

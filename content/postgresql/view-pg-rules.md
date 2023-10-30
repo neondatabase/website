@@ -1,11 +1,3 @@
-
-
-|               54.21. `pg_rules`               |                                             |                          |                                                       |                                                       |
-| :-------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](view-pg-roles.html "54.20. pg_roles")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-seclabels.html "54.22. pg_seclabels") |
-
-***
-
 ## 54.21. `pg_rules` [#](#VIEW-PG-RULES)
 
 The view `pg_rules` provides access to useful information about query rewrite rules.
@@ -22,10 +14,3 @@ The view `pg_rules` provides access to useful information about query rewrite ru
 \
 
 The `pg_rules` view excludes the `ON SELECT` rules of views and materialized views; those can be seen in [`pg_views`](view-pg-views.html "54.35. pg_views") and [`pg_matviews`](view-pg-matviews.html "54.13. pg_matviews").
-
-***
-
-|                                               |                                                       |                                                       |
-| :-------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](view-pg-roles.html "54.20. pg_roles")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-seclabels.html "54.22. pg_seclabels") |
-| 54.20. `pg_roles`                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                 54.22. `pg_seclabels` |

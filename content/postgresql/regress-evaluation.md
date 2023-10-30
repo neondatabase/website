@@ -1,11 +1,3 @@
-
-
-|                33.2. Test Evaluation                |                                                   |                              |                                                       |                                                                |
-| :-------------------------------------------------: | :------------------------------------------------ | :--------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](regress-run.html "33.1. Running the Tests")  | [Up](regress.html "Chapter 33. Regression Tests") | Chapter 33. Regression Tests | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](regress-variant.html "33.3. Variant Comparison Files") |
-
-***
-
 ## 33.2. Test Evaluation [#](#REGRESS-EVALUATION)
 
   * *   [33.2.1. Error Message Differences](regress-evaluation.html#REGRESS-EVALUATION-MESSAGE-DIFFERENCES)
@@ -91,10 +83,3 @@ should produce only one or a few lines of differences. You need not worry unless
 ### 33.2.8. Configuration Parameters [#](#REGRESS-EVALUATION-CONFIG-PARAMS)
 
 When running the tests against an existing installation, some non-default parameter settings could cause the tests to fail. For example, changing parameters such as `enable_seqscan` or `enable_indexscan` could cause plan changes that would affect the results of tests that use `EXPLAIN`.
-
-***
-
-|                                                     |                                                       |                                                                |
-| :-------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](regress-run.html "33.1. Running the Tests")  |   [Up](regress.html "Chapter 33. Regression Tests")   |  [Next](regress-variant.html "33.3. Variant Comparison Files") |
-| 33.1. Running the Tests                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                 33.3. Variant Comparison Files |

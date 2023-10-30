@@ -1,11 +1,3 @@
-
-
-|       9.26. System Information Functions and Operators      |                                                           |                                    |                                                       |                                                                       |
-| :---------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](functions-srf.html "9.25. Set Returning Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-admin.html "9.27. System Administration Functions") |
-
-***
-
 ## 9.26. System Information Functions and Operators [#](#FUNCTIONS-INFO)
 
   * *   [9.26.1. Session Information Functions](functions-info.html#FUNCTIONS-INFO-SESSION)
@@ -435,10 +427,3 @@ The functions shown in [Table 9.84](functions-info.html#FUNCTIONS-CONTROLDATA "
 | `backup_start_lsn`              | `pg_lsn`  |
 | `backup_end_lsn`                | `pg_lsn`  |
 | `end_of_backup_record_required` | `boolean` |
-
-***
-
-|                                                             |                                                           |                                                                       |
-| :---------------------------------------------------------- | :-------------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](functions-srf.html "9.25. Set Returning Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-admin.html "9.27. System Administration Functions") |
-| 9.25. Set Returning Functions                               |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                 9.27. System Administration Functions |

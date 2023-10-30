@@ -1,11 +1,3 @@
-
-
-|                Chapter 17. Installation from Source Code                |                                                    |                                 |                                                       |                                                         |
-| :---------------------------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](install-binaries.html "Chapter 16. Installation from Binaries")  | [Up](admin.html "Part III. Server Administration") | Part III. Server Administration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](install-requirements.html "17.1. Requirements") |
-
-***
-
 ## Chapter 17. Installation from Source Code
 
 **Table of Contents**
@@ -46,10 +38,3 @@
 This chapter describes the installation of PostgreSQL using the source code distribution. If you are installing a pre-packaged distribution, such as an RPM or Debian package, ignore this chapter and see [Chapter 16](install-binaries.html "Chapter 16. Installation from Binaries") instead.
 
 If you are building PostgreSQL for Microsoft Windows, read this chapter if you intend to build with MinGW or Cygwin; but if you intend to build with Microsoft's Visual C++, see [Chapter 18](install-windows.html "Chapter 18. Installation from Source Code on Windows") instead.
-
-***
-
-|                                                                         |                                                       |                                                         |
-| :---------------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](install-binaries.html "Chapter 16. Installation from Binaries")  |   [Up](admin.html "Part III. Server Administration")  |  [Next](install-requirements.html "17.1. Requirements") |
-| Chapter 16. Installation from Binaries                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                      17.1. Requirements |

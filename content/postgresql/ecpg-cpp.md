@@ -1,11 +1,3 @@
-
-
-|            36.13. C++ Applications           |                                                        |                                      |                                                       |                                                                |
-| :------------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](ecpg-lo.html "36.12. Large Objects")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |
-
-***
-
 ## 36.13. C++ Applications [#](#ECPG-CPP)
 
   * *   [36.13.1. Scope for Host Variables](ecpg-cpp.html#ECPG-CPP-SCOPE)
@@ -204,10 +196,3 @@ Finally, link these object files, `test_cpp.o` and `test_mod.o`, into one execut
 
 c++ test_cpp.o test_mod.o -lecpg -o test_cpp
 ```
-
-***
-
-|                                              |                                                        |                                                                |
-| :------------------------------------------- | :----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](ecpg-lo.html "36.12. Large Objects")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |
-| 36.12. Large Objects                         |  [Home](index.html "PostgreSQL 17devel Documentation") |                                   36.14. Embedded SQL Commands |

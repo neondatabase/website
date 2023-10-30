@@ -1,11 +1,3 @@
-
-
-|                       11.8. Partial Indexes                       |                                          |                     |                                                       |                                                                                      |
-| :---------------------------------------------------------------: | :--------------------------------------- | :-----------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](indexes-expressional.html "11.7. Indexes on Expressions")  | [Up](indexes.html "Chapter 11. Indexes") | Chapter 11. Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](indexes-index-only-scans.html "11.9. Index-Only Scans and Covering Indexes") |
-
-***
-
 ## 11.8. Partial Indexes [#](#INDEXES-PARTIAL)
 
 A *partial index* is an index built over a subset of a table; the subset is defined by a conditional expression (called the *predicate* of the partial index). The index contains entries only for those table rows that satisfy the predicate. Partial indexes are a specialized feature, but there are several situations in which they are useful.
@@ -153,10 +145,3 @@ If your table is large enough that a single index really is a bad idea, you shou
 \
 
 More information about partial indexes can be found in [\[ston89b\]](biblio.html#STON89B), [\[olson93\]](biblio.html#OLSON93 "Partial indexing in POSTGRES: research project"), and [\[seshadri95\]](biblio.html#SESHADRI95).
-
-***
-
-|                                                                   |                                                       |                                                                                      |
-| :---------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](indexes-expressional.html "11.7. Indexes on Expressions")  |        [Up](indexes.html "Chapter 11. Indexes")       |  [Next](indexes-index-only-scans.html "11.9. Index-Only Scans and Covering Indexes") |
-| 11.7. Indexes on Expressions                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                          11.9. Index-Only Scans and Covering Indexes |

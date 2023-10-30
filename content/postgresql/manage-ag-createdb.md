@@ -1,11 +1,3 @@
-
-
-|             23.2. Creating a Database             |                                                                |                                |                                                       |                                                                |
-| :-----------------------------------------------: | :------------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](manage-ag-overview.html "23.1. Overview")  | [Up](managing-databases.html "Chapter 23. Managing Databases") | Chapter 23. Managing Databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](manage-ag-templatedbs.html "23.3. Template Databases") |
-
-***
-
 ## 23.2. Creating a Database [#](#MANAGE-AG-CREATEDB)
 
 In order to create a database, the PostgreSQL server must be up and running (see [Section 19.3](server-start.html "19.3. Starting the Database Server")).
@@ -53,10 +45,3 @@ createdb -O rolename dbname
 ```
 
 from the shell. Only the superuser is allowed to create a database for someone else (that is, for a role you are not a member of).
-
-***
-
-|                                                   |                                                                |                                                                |
-| :------------------------------------------------ | :------------------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](manage-ag-overview.html "23.1. Overview")  | [Up](managing-databases.html "Chapter 23. Managing Databases") |  [Next](manage-ag-templatedbs.html "23.3. Template Databases") |
-| 23.1. Overview                                    |      [Home](index.html "PostgreSQL 17devel Documentation")     |                                       23.3. Template Databases |

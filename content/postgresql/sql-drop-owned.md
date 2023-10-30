@@ -1,11 +1,3 @@
-
-
-|                       DROP OWNED                      |                                        |              |                                                       |                                            |
-| :---------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-dropopfamily.html "DROP OPERATOR FAMILY")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droppolicy.html "DROP POLICY") |
-
-***
-
 ## DROP OWNED
 
 DROP OWNED — remove database objects owned by a database role
@@ -54,10 +46,3 @@ The `DROP OWNED` command is a PostgreSQL extension.
 ## See Also
 
 [REASSIGN OWNED](sql-reassign-owned.html "REASSIGN OWNED"), [DROP ROLE](sql-droprole.html "DROP ROLE")
-
-***
-
-|                                                       |                                                       |                                            |
-| :---------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-dropopfamily.html "DROP OPERATOR FAMILY")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droppolicy.html "DROP POLICY") |
-| DROP OPERATOR FAMILY                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                DROP POLICY |

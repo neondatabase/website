@@ -1,11 +1,3 @@
-
-
-|                           40.6. A Database Login Event Trigger Example                          |                                                        |                            |                                                       |                                                   |
-| :---------------------------------------------------------------------------------------------: | :----------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](event-trigger-table-rewrite-example.html "40.5. A Table Rewrite Event Trigger Example")  | [Up](event-triggers.html "Chapter 40. Event Triggers") | Chapter 40. Event Triggers | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](rules.html "Chapter 41. The Rule System") |
-
-***
-
 ## 40.6. A Database Login Event Trigger Example [#](#EVENT-TRIGGER-DATABASE-LOGIN-EXAMPLE)
 
 The event trigger on the `login` event can be useful for logging user logins, for verifying the connection and assigning roles according to current circumstances, or for session data initialization. It is very important that any event trigger using the `login` event checks whether or not the database is in recovery before performing any writes. Writing to a standby server will make it inaccessible.
@@ -70,10 +62,3 @@ CREATE EVENT TRIGGER init_session
   EXECUTE FUNCTION init_session();
 ALTER EVENT TRIGGER init_session ENABLE ALWAYS;
 ```
-
-***
-
-|                                                                                                 |                                                        |                                                   |
-| :---------------------------------------------------------------------------------------------- | :----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](event-trigger-table-rewrite-example.html "40.5. A Table Rewrite Event Trigger Example")  | [Up](event-triggers.html "Chapter 40. Event Triggers") |  [Next](rules.html "Chapter 41. The Rule System") |
-| 40.5. A Table Rewrite Event Trigger Example                                                     |  [Home](index.html "PostgreSQL 17devel Documentation") |                       Chapter 41. The Rule System |

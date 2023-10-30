@@ -1,11 +1,3 @@
-
-
-|                  8.4. Binary Data Types                 |                                             |                       |                                                       |                                                        |
-| :-----------------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](datatype-character.html "8.3. Character Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-datetime.html "8.5. Date/Time Types") |
-
-***
-
 ## 8.4. Binary Data Types [#](#DATATYPE-BINARY)
 
   * *   [8.4.1. `bytea` Hex Format](datatype-binary.html#DATATYPE-BINARY-BYTEA-HEX-FORMAT)
@@ -91,10 +83,3 @@ The octet with decimal value 92 (backslash) is doubled in the output. Details ar
 \
 
 Depending on the front end to PostgreSQL you use, you might have additional work to do in terms of escaping and unescaping `bytea` strings. For example, you might also have to escape line feeds and carriage returns if your interface automatically translates these.
-
-***
-
-|                                                         |                                                       |                                                        |
-| :------------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](datatype-character.html "8.3. Character Types")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](datatype-datetime.html "8.5. Date/Time Types") |
-| 8.3. Character Types                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                   8.5. Date/Time Types |

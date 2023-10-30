@@ -1,11 +1,3 @@
-
-
-|               8.1. Numeric Types               |                                             |                       |                                                       |                                                    |
-| :--------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](datatype.html "Chapter 8. Data Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-money.html "8.2. Monetary Types") |
-
-***
-
 ## 8.1. Numeric Types [#](#DATATYPE-NUMERIC)
 
   * *   [8.1.1. Integer Types](datatype-numeric.html#DATATYPE-INT)
@@ -222,10 +214,3 @@ To insert the next value of the sequence into the `serial` column, specify that 
 The type names `serial` and `serial4` are equivalent: both create `integer` columns. The type names `bigserial` and `serial8` work the same way, except that they create a `bigint` column. `bigserial` should be used if you anticipate the use of more than 231 identifiers over the lifetime of the table. The type names `smallserial` and `serial2` also work the same way, except that they create a `smallint` column.
 
 The sequence created for a `serial` column is automatically dropped when the owning column is dropped. You can drop the sequence without dropping the column, but this will force removal of the column default expression.
-
-***
-
-|                                                |                                                       |                                                    |
-| :--------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](datatype.html "Chapter 8. Data Types")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](datatype-money.html "8.2. Monetary Types") |
-| Chapter 8. Data Types                          | [Home](index.html "PostgreSQL 17devel Documentation") |                                8.2. Monetary Types |

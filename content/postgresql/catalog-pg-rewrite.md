@@ -1,11 +1,3 @@
-
-
-|                             53.45. `pg_rewrite`                            |                                                   |                             |                                                       |                                                        |
-| :------------------------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](catalog-pg-replication-origin.html "53.44. pg_replication_origin")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-seclabel.html "53.46. pg_seclabel") |
-
-***
-
 ## 53.45. `pg_rewrite` [#](#CATALOG-PG-REWRITE)
 
 The catalog `pg_rewrite` stores rewrite rules for tables and views.
@@ -28,10 +20,3 @@ The catalog `pg_rewrite` stores rewrite rules for tables and views.
 ### Note
 
 `pg_class.relhasrules` must be true if a table has any rules in this catalog.
-
-***
-
-|                                                                            |                                                       |                                                        |
-| :------------------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](catalog-pg-replication-origin.html "53.44. pg_replication_origin")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-seclabel.html "53.46. pg_seclabel") |
-| 53.44. `pg_replication_origin`                                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                   53.46. `pg_seclabel` |

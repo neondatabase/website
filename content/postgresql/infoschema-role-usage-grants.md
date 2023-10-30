@@ -1,11 +1,3 @@
-
-
-|                     37.39. `role_usage_grants`                    |                                                                    |                                    |                                                       |                                                                             |
-| :---------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](infoschema-role-udt-grants.html "37.38. role_udt_grants")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-routine-column-usage.html "37.40. routine_column_usage") |
-
-***
-
 ## 37.39. `role_usage_grants` [#](#INFOSCHEMA-ROLE-USAGE-GRANTS)
 
 The view `role_usage_grants` identifies `USAGE` privileges granted on various kinds of objects where the grantor or grantee is a currently enabled role. Further information can be found under `usage_privileges`. The only effective difference between this view and `usage_privileges` is that this view omits objects that have been made accessible to the current user by way of a grant to `PUBLIC`.
@@ -22,10 +14,3 @@ The view `role_usage_grants` identifies `USAGE` privileges granted on various ki
 | `object_type` `character_data``COLLATION` or `DOMAIN` or `FOREIGN DATA WRAPPER` or `FOREIGN SERVER` or `SEQUENCE` |
 | `privilege_type` `character_data`Always `USAGE`                                                                   |
 | `is_grantable` `yes_or_no``YES` if the privilege is grantable, `NO` if not                                        |
-
-***
-
-|                                                                   |                                                                    |                                                                             |
-| :---------------------------------------------------------------- | :----------------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](infoschema-role-udt-grants.html "37.38. role_udt_grants")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-routine-column-usage.html "37.40. routine_column_usage") |
-| 37.38. `role_udt_grants`                                          |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                               37.40. `routine_column_usage` |

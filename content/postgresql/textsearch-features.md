@@ -1,11 +1,3 @@
-
-
-|                     12.4. Additional Features                     |                                                      |                              |                                                       |                                                  |
-| :---------------------------------------------------------------: | :--------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](textsearch-controls.html "12.3. Controlling Text Search")  | [Up](textsearch.html "Chapter 12. Full Text Search") | Chapter 12. Full Text Search | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](textsearch-parsers.html "12.5. Parsers") |
-
-***
-
 ## 12.4. Additional Features [#](#TEXTSEARCH-FEATURES)
 
   * *   [12.4.1. Manipulating Documents](textsearch-features.html#TEXTSEARCH-MANIPULATE-TSVECTOR)
@@ -287,10 +279,3 @@ SELECT * FROM ts_stat('SELECT vector FROM apod', 'ab')
 ORDER BY nentry DESC, ndoc DESC, word
 LIMIT 10;
 ```
-
-***
-
-|                                                                   |                                                       |                                                  |
-| :---------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](textsearch-controls.html "12.3. Controlling Text Search")  |  [Up](textsearch.html "Chapter 12. Full Text Search") |  [Next](textsearch-parsers.html "12.5. Parsers") |
-| 12.3. Controlling Text Search                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                    12.5. Parsers |

@@ -1,11 +1,3 @@
-
-
-|                          53.54. `pg_subscription`                          |                                                   |                             |                                                       |                                                                        |
-| :------------------------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](catalog-pg-statistic-ext-data.html "53.53. pg_statistic_ext_data")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-subscription-rel.html "53.55. pg_subscription_rel") |
-
-***
-
 ## 53.54. `pg_subscription` [#](#CATALOG-PG-SUBSCRIPTION)
 
 The catalog `pg_subscription` contains all existing logical replication subscriptions. For more information about logical replication see [Chapter 31](logical-replication.html "Chapter 31. Logical Replication").
@@ -35,10 +27,3 @@ Access to the column `subconninfo` is revoked from normal users, because it coul
 | `subsynccommit` `text`The `synchronous_commit` setting for the subscription's workers to use                                                                                                                                                                                                                                                                                                                                |
 | `subpublications` `text[]`Array of subscribed publication names. These reference publications defined in the upstream database. For more on publications see [Section 31.1](logical-replication-publication.html "31.1. Publication").                                                                                                                                                                                      |
 | `suborigin` `text`The origin value must be either `none` or `any`. The default is `any`. If `none`, the subscription will request the publisher to only send changes that don't have an origin. If `any`, the publisher sends changes regardless of their origin.                                                                                                                                                           |
-
-***
-
-|                                                                            |                                                       |                                                                        |
-| :------------------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](catalog-pg-statistic-ext-data.html "53.53. pg_statistic_ext_data")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-subscription-rel.html "53.55. pg_subscription_rel") |
-| 53.53. `pg_statistic_ext_data`                                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                           53.55. `pg_subscription_rel` |

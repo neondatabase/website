@@ -1,11 +1,3 @@
-
-
-|          28.2. The Cumulative Statistics System         |                                                                  |                                          |                                                       |                                                      |
-| :-----------------------------------------------------: | :--------------------------------------------------------------- | :--------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](monitoring-ps.html "28.1. Standard Unix Tools")  | [Up](monitoring.html "Chapter 28. Monitoring Database Activity") | Chapter 28. Monitoring Database Activity | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](monitoring-locks.html "28.3. Viewing Locks") |
-
-***
-
 ## 28.2. The Cumulative Statistics System [#](#MONITORING-STATS)
 
   * *   [28.2.1. Statistics Collection Configuration](monitoring-stats.html#MONITORING-STATS-SETUP)
@@ -1060,10 +1052,3 @@ FROM pg_stat_get_backend_idset() AS backendid;
 | `pg_stat_get_backend_wait_event` ( `integer` ) → `text`Returns the wait event name if this backend is currently waiting, otherwise NULL. See [Table 28.5](monitoring-stats.html#WAIT-EVENT-ACTIVITY-TABLE "Table 28.5. Wait Events of Type Activity") through [Table 28.13](monitoring-stats.html#WAIT-EVENT-TIMEOUT-TABLE "Table 28.13. Wait Events of Type Timeout").                   |
 | `pg_stat_get_backend_wait_event_type` ( `integer` ) → `text`Returns the wait event type name if this backend is currently waiting, otherwise NULL. See [Table 28.4](monitoring-stats.html#WAIT-EVENT-TABLE "Table 28.4. Wait Event Types") for details.                                                                                                                                   |
 | `pg_stat_get_backend_xact_start` ( `integer` ) → `timestamp with time zone`Returns the time when the backend's current transaction was started.                                                                                                                                                                                                                                           |
-
-***
-
-|                                                         |                                                                  |                                                      |
-| :------------------------------------------------------ | :--------------------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](monitoring-ps.html "28.1. Standard Unix Tools")  | [Up](monitoring.html "Chapter 28. Monitoring Database Activity") |  [Next](monitoring-locks.html "28.3. Viewing Locks") |
-| 28.1. Standard Unix Tools                               |       [Home](index.html "PostgreSQL 17devel Documentation")      |                                  28.3. Viewing Locks |

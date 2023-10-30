@@ -1,11 +1,3 @@
-
-
-|                  SPI\_exec                  |                                                      |                           |                                                       |                                                               |
-| :-----------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](spi-spi-execute.html "SPI_execute")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-execute-extended.html "SPI_execute_extended") |
-
-***
-
 ## SPI\_exec
 
 SPI\_exec — execute a read/write command
@@ -34,10 +26,3 @@ int SPI_exec(const char * command, long count)
 ## Return Value
 
 See `SPI_execute`.
-
-***
-
-|                                             |                                                       |                                                               |
-| :------------------------------------------ | :---------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](spi-spi-execute.html "SPI_execute")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-execute-extended.html "SPI_execute_extended") |
-| SPI\_execute                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                        SPI\_execute\_extended |

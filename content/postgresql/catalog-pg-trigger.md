@@ -1,11 +1,3 @@
-
-
-|                    53.58. `pg_trigger`                   |                                                   |                             |                                                       |                                                          |
-| :------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](catalog-pg-transform.html "53.57. pg_transform")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-ts-config.html "53.59. pg_ts_config") |
-
-***
-
 ## 53.58. `pg_trigger` [#](#CATALOG-PG-TRIGGER)
 
 The catalog `pg_trigger` stores triggers on tables and views. See [CREATE TRIGGER](sql-createtrigger.html "CREATE TRIGGER") for more information.
@@ -45,10 +37,3 @@ When `tgconstraint` is nonzero, `tgconstrrelid`, `tgconstrindid`, `tgdeferrable`
 ### Note
 
 `pg_class.relhastriggers` must be true if a relation has any triggers in this catalog.
-
-***
-
-|                                                          |                                                       |                                                          |
-| :------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](catalog-pg-transform.html "53.57. pg_transform")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-ts-config.html "53.59. pg_ts_config") |
-| 53.57. `pg_transform`                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                    53.59. `pg_ts_config` |

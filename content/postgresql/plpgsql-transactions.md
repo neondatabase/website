@@ -1,11 +1,3 @@
-
-
-|          43.8. Transaction Management         |                                                                     |                                                |                                                       |                                                                       |
-| :-------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](plpgsql-cursors.html "43.7. Cursors")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-errors-and-messages.html "43.9. Errors and Messages") |
-
-***
-
 ## 43.8. Transaction Management [#](#PLPGSQL-TRANSACTIONS)
 
 In procedures invoked by the `CALL` command as well as in anonymous code blocks (`DO` command), it is possible to end transactions using the commands `COMMIT` and `ROLLBACK`. A new transaction is started automatically after a transaction is ended using these commands, so there is no separate `START TRANSACTION` command. (Note that `BEGIN` and `END` have different meanings in PL/pgSQL.)
@@ -61,10 +53,3 @@ Normally, cursors are automatically closed at transaction commit. However, a cur
 Transaction commands are not allowed in cursor loops driven by commands that are not read-only (for example `UPDATE ... RETURNING`).
 
 A transaction cannot be ended inside a block with exception handlers.
-
-***
-
-|                                               |                                                                     |                                                                       |
-| :-------------------------------------------- | :-----------------------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](plpgsql-cursors.html "43.7. Cursors")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](plpgsql-errors-and-messages.html "43.9. Errors and Messages") |
-| 43.7. Cursors                                 |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                             43.9. Errors and Messages |

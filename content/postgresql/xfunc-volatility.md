@@ -1,11 +1,3 @@
-
-
-|            38.7. Function Volatility Categories           |                                               |                           |                                                       |                                                              |
-| :-------------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](xfunc-overload.html "38.6. Function Overloading")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xfunc-pl.html "38.8. Procedural Language Functions") |
-
-***
-
 ## 38.7. Function Volatility Categories [#](#XFUNC-VOLATILITY)
 
 Every function has a *volatility* classification, with the possibilities being `VOLATILE`, `STABLE`, or `IMMUTABLE`. `VOLATILE` is the default if the [`CREATE FUNCTION`](sql-createfunction.html "CREATE FUNCTION") command does not specify a category. The volatility category is a promise to the optimizer about the behavior of the function:
@@ -37,10 +29,3 @@ A common error is to label a function `IMMUTABLE` when its results depend on a c
 ### Note
 
 PostgreSQL requires that `STABLE` and `IMMUTABLE` functions contain no SQL commands other than `SELECT` to prevent data modification. (This is not a completely bulletproof test, since such functions could still call `VOLATILE` functions that modify the database. If you do that, you will find that the `STABLE` or `IMMUTABLE` function does not notice the database changes applied by the called function, since they are hidden from its snapshot.)
-
-***
-
-|                                                           |                                                       |                                                              |
-| :-------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](xfunc-overload.html "38.6. Function Overloading")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xfunc-pl.html "38.8. Procedural Language Functions") |
-| 38.6. Function Overloading                                | [Home](index.html "PostgreSQL 17devel Documentation") |                          38.8. Procedural Language Functions |

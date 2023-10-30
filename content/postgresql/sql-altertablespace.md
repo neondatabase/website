@@ -1,11 +1,3 @@
-
-
-|              ALTER TABLESPACE              |                                        |              |                                                       |                                                                   |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](sql-altertable.html "ALTER TABLE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altertsconfig.html "ALTER TEXT SEARCH CONFIGURATION") |
-
-***
-
 ## ALTER TABLESPACE
 
 ALTER TABLESPACE — change the definition of a tablespace
@@ -67,10 +59,3 @@ There is no `ALTER TABLESPACE` statement in the SQL standard.
 ## See Also
 
 [CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE"), [DROP TABLESPACE](sql-droptablespace.html "DROP TABLESPACE")
-
-***
-
-|                                            |                                                       |                                                                   |
-| :----------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](sql-altertable.html "ALTER TABLE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altertsconfig.html "ALTER TEXT SEARCH CONFIGURATION") |
-| ALTER TABLE                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                   ALTER TEXT SEARCH CONFIGURATION |

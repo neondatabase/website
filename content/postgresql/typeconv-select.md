@@ -1,11 +1,3 @@
-
-
-|                         10.6. `SELECT` Output Columns                         |                                                   |                             |                                                       |                                             |
-| :---------------------------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ------------------------------------------: |
-| [Prev](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs")  | [Up](typeconv.html "Chapter 10. Type Conversion") | Chapter 10. Type Conversion | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](indexes.html "Chapter 11. Indexes") |
-
-***
-
 ## 10.6. `SELECT` Output Columns [#](#TYPECONV-SELECT)
 
 The rules given in the preceding sections will result in assignment of non-`unknown` data types to all expressions in an SQL query, except for unspecified-type literals that appear as simple output columns of a `SELECT` command. For example, in
@@ -24,10 +16,3 @@ When the `SELECT` is one arm of a `UNION` (or `INTERSECT` or `EXCEPT`) construct
 ### Note
 
 Prior to PostgreSQL 10, this rule did not exist, and unspecified-type literals in a `SELECT` output list were left as type `unknown`. That had assorted bad consequences, so it's been changed.
-
-***
-
-|                                                                               |                                                       |                                             |
-| :---------------------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------: |
-| [Prev](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs")  |   [Up](typeconv.html "Chapter 10. Type Conversion")   |  [Next](indexes.html "Chapter 11. Indexes") |
-| 10.5. `UNION`, `CASE`, and Related Constructs                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                         Chapter 11. Indexes |

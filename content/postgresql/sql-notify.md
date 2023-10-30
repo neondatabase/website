@@ -1,11 +1,3 @@
-
-
-|             NOTIFY            |                                        |              |                                                       |                                     |
-| :---------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-move.html "MOVE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-prepare.html "PREPARE") |
-
-***
-
 ## NOTIFY
 
 NOTIFY — generate a notification
@@ -81,10 +73,3 @@ There is no `NOTIFY` statement in the SQL standard.
 ## See Also
 
 [LISTEN](sql-listen.html "LISTEN"), [UNLISTEN](sql-unlisten.html "UNLISTEN")
-
-***
-
-|                               |                                                       |                                     |
-| :---------------------------- | :---------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-move.html "MOVE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-prepare.html "PREPARE") |
-| MOVE                          | [Home](index.html "PostgreSQL 17devel Documentation") |                             PREPARE |

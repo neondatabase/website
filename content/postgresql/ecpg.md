@@ -1,11 +1,3 @@
-
-
-|         Chapter 36. ECPG — Embedded SQL in C         |                                                           |                            |                                                       |                                                |
-| :--------------------------------------------------: | :-------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](lo-examplesect.html "35.5. Example Program")  | [Up](client-interfaces.html "Part IV. Client Interfaces") | Part IV. Client Interfaces | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-concept.html "36.1. The Concept") |
-
-***
-
 ## Chapter 36. ECPG — Embedded SQL in C
 
 **Table of Contents**
@@ -113,10 +105,3 @@
 This chapter describes the embedded SQL package for PostgreSQL. It was written by Linus Tolke (`<linus@epact.se>`) and Michael Meskes (`<meskes@postgresql.org>`). Originally it was written to work with C. It also works with C++, but it does not recognize all C++ constructs yet.
 
 This documentation is quite incomplete. But since this interface is standardized, additional information can be found in many resources about SQL.
-
-***
-
-|                                                      |                                                           |                                                |
-| :--------------------------------------------------- | :-------------------------------------------------------: | ---------------------------------------------: |
-| [Prev](lo-examplesect.html "35.5. Example Program")  | [Up](client-interfaces.html "Part IV. Client Interfaces") |  [Next](ecpg-concept.html "36.1. The Concept") |
-| 35.5. Example Program                                |   [Home](index.html "PostgreSQL 17devel Documentation")   |                              36.1. The Concept |

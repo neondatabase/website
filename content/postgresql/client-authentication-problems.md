@@ -1,11 +1,3 @@
-
-
-|           21.15. Authentication Problems           |                                                                      |                                   |                                                       |                                                       |
-| :------------------------------------------------: | :------------------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](auth-bsd.html "21.14. BSD Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") | Chapter 21. Client Authentication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](user-manag.html "Chapter 22. Database Roles") |
-
-***
-
 ## 21.15. Authentication Problems [#](#CLIENT-AUTHENTICATION-PROBLEMS)
 
 Authentication failures and related problems generally manifest themselves through error messages like the following:
@@ -41,10 +33,3 @@ The database you are trying to connect to does not exist. Note that if you do no
 ### Tip
 
 The server log might contain more information about an authentication failure than is reported to the client. If you are confused about the reason for a failure, check the server log.
-
-***
-
-|                                                    |                                                                      |                                                       |
-| :------------------------------------------------- | :------------------------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](auth-bsd.html "21.14. BSD Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") |  [Next](user-manag.html "Chapter 22. Database Roles") |
-| 21.14. BSD Authentication                          |         [Home](index.html "PostgreSQL 17devel Documentation")        |                            Chapter 22. Database Roles |

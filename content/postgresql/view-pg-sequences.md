@@ -1,11 +1,3 @@
-
-
-|                 54.23. `pg_sequences`                 |                                             |                          |                                                       |                                                     |
-| :---------------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](view-pg-seclabels.html "54.22. pg_seclabels")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-settings.html "54.24. pg_settings") |
-
-***
-
 ## 54.23. `pg_sequences` [#](#VIEW-PG-SEQUENCES)
 
 The view `pg_sequences` provides access to useful information about each sequence in the database.
@@ -25,10 +17,3 @@ The view `pg_sequences` provides access to useful information about each sequenc
 | `cycle` `bool`Whether the sequence cycles                                                                                                                                                                                                                                                                              |
 | `cache_size` `int8`Cache size of the sequence                                                                                                                                                                                                                                                                          |
 | `last_value` `int8`The last sequence value written to disk. If caching is used, this value can be greater than the last value handed out from the sequence. Null if the sequence has not been read from yet. Also, if the current user does not have `USAGE` or `SELECT` privilege on the sequence, the value is null. |
-
-***
-
-|                                                       |                                                       |                                                     |
-| :---------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](view-pg-seclabels.html "54.22. pg_seclabels")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-settings.html "54.24. pg_settings") |
-| 54.22. `pg_seclabels`                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                54.24. `pg_settings` |

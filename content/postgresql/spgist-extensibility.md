@@ -1,11 +1,3 @@
-
-
-|                            69.3. Extensibility                           |                                                 |                             |                                                       |                                                            |
-| :----------------------------------------------------------------------: | :---------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](spgist-builtin-opclasses.html "69.2. Built-in Operator Classes")  | [Up](spgist.html "Chapter 69. SP-GiST Indexes") | Chapter 69. SP-GiST Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spgist-implementation.html "69.4. Implementation") |
-
-***
-
 ## 69.3. Extensibility [#](#SPGIST-EXTENSIBILITY)
 
 SP-GiST offers an interface with a high level of abstraction, requiring the access method developer to implement only methods specific to a given data type. The SP-GiST core is responsible for efficient disk mapping and searching the tree structure. It also takes care of concurrency and logging considerations.
@@ -312,10 +304,3 @@ The optional user-defined methods are:
 All the SP-GiST support methods are normally called in a short-lived memory context; that is, `CurrentMemoryContext` will be reset after processing of each tuple. It is therefore not very important to worry about pfree'ing everything you palloc. (The `config` method is an exception: it should try to avoid leaking memory. But usually the `config` method need do nothing but assign constants into the passed parameter struct.)
 
 If the indexed column is of a collatable data type, the index collation will be passed to all the support methods, using the standard `PG_GET_COLLATION()` mechanism.
-
-***
-
-|                                                                          |                                                       |                                                            |
-| :----------------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](spgist-builtin-opclasses.html "69.2. Built-in Operator Classes")  |    [Up](spgist.html "Chapter 69. SP-GiST Indexes")    |  [Next](spgist-implementation.html "69.4. Implementation") |
-| 69.2. Built-in Operator Classes                                          | [Home](index.html "PostgreSQL 17devel Documentation") |                                       69.4. Implementation |

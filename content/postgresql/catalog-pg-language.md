@@ -1,11 +1,3 @@
-
-
-|                    53.29. `pg_language`                    |                                                   |                             |                                                       |                                                              |
-| :--------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](catalog-pg-init-privs.html "53.28. pg_init_privs")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-largeobject.html "53.30. pg_largeobject") |
-
-***
-
 ## 53.29. `pg_language` [#](#CATALOG-PG-LANGUAGE)
 
 The catalog `pg_language` registers languages in which you can write functions or stored procedures. See [CREATE LANGUAGE](sql-createlanguage.html "CREATE LANGUAGE") and [Chapter 42](xplang.html "Chapter 42. Procedural Languages") for more information about language handlers.
@@ -23,10 +15,3 @@ The catalog `pg_language` registers languages in which you can write functions o
 | `laninline` `oid` (references [`pg_proc`](catalog-pg-proc.html "53.39. pg_proc").`oid`)This references a function that is responsible for executing “inline” anonymous code blocks ([DO](sql-do.html "DO") blocks). Zero if inline blocks are not supported.                                                     |
 | `lanvalidator` `oid` (references [`pg_proc`](catalog-pg-proc.html "53.39. pg_proc").`oid`)This references a language validator function that is responsible for checking the syntax and validity of new functions when they are created. Zero if no validator is provided.                                       |
 | `lanacl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv.html "5.7. Privileges") for details                                                                                                                                                                                                            |
-
-***
-
-|                                                            |                                                       |                                                              |
-| :--------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](catalog-pg-init-privs.html "53.28. pg_init_privs")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-largeobject.html "53.30. pg_largeobject") |
-| 53.28. `pg_init_privs`                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                      53.30. `pg_largeobject` |

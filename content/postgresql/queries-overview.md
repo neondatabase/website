@@ -1,11 +1,3 @@
-
-
-|                7.1. Overview               |                                         |                    |                                                       |                                                                  |
-| :----------------------------------------: | :-------------------------------------- | :----------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](queries.html "Chapter 7. Queries")  | [Up](queries.html "Chapter 7. Queries") | Chapter 7. Queries | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](queries-table-expressions.html "7.2. Table Expressions") |
-
-***
-
 ## 7.1. Overview [#](#QUERIES-OVERVIEW)
 
 The process of retrieving or the command to retrieve data from a database is called a *query*. In SQL the [`SELECT`](sql-select.html "SELECT") command is used to specify queries. The general syntax of the `SELECT` command is
@@ -46,10 +38,3 @@ This is more useful if the expressions in the select list return varying results
 
 SELECT random();
 ```
-
-***
-
-|                                            |                                                       |                                                                  |
-| :----------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](queries.html "Chapter 7. Queries")  |        [Up](queries.html "Chapter 7. Queries")        |  [Next](queries-table-expressions.html "7.2. Table Expressions") |
-| Chapter 7. Queries                         | [Home](index.html "PostgreSQL 17devel Documentation") |                                           7.2. Table Expressions |

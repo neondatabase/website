@@ -1,11 +1,3 @@
-
-
-|          Part VII. Internals          |                                                     |                                  |                                                       |                                                                       |
-| :-----------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](app-postgres.html "postgres")  | [Up](index.html "PostgreSQL 17devel Documentation") | PostgreSQL 17devel Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](overview.html "Chapter 52. Overview of PostgreSQL Internals") |
-
-***
-
 # Part VII. Internals
 
 This part contains assorted information that might be of use to PostgreSQL developers.
@@ -278,10 +270,3 @@ This part contains assorted information that might be of use to PostgreSQL devel
   * *   [77.1. Backup Manifest Top-level Object](backup-manifest-toplevel.html)
     * [77.2. Backup Manifest File Object](backup-manifest-files.html)
     * [77.3. Backup Manifest WAL Range Object](backup-manifest-wal-ranges.html)
-
-***
-
-|                                       |                                                       |                                                                       |
-| :------------------------------------ | :---------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](app-postgres.html "postgres")  |  [Up](index.html "PostgreSQL 17devel Documentation")  |  [Next](overview.html "Chapter 52. Overview of PostgreSQL Internals") |
-| postgres                              | [Home](index.html "PostgreSQL 17devel Documentation") |                          Chapter 52. Overview of PostgreSQL Internals |

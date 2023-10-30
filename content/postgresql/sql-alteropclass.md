@@ -1,11 +1,3 @@
-
-
-|               ALTER OPERATOR CLASS               |                                        |              |                                                       |                                                         |
-| :----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-alteroperator.html "ALTER OPERATOR")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alteropfamily.html "ALTER OPERATOR FAMILY") |
-
-***
-
 ## ALTER OPERATOR CLASS
 
 ALTER OPERATOR CLASS — change the definition of an operator class
@@ -59,10 +51,3 @@ There is no `ALTER OPERATOR CLASS` statement in the SQL standard.
 ## See Also
 
 [CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass.html "DROP OPERATOR CLASS"), [ALTER OPERATOR FAMILY](sql-alteropfamily.html "ALTER OPERATOR FAMILY")
-
-***
-
-|                                                  |                                                       |                                                         |
-| :----------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-alteroperator.html "ALTER OPERATOR")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alteropfamily.html "ALTER OPERATOR FAMILY") |
-| ALTER OPERATOR                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                   ALTER OPERATOR FAMILY |

@@ -1,11 +1,3 @@
-
-
-|                  53.53. `pg_statistic_ext_data`                  |                                                   |                             |                                                       |                                                                |
-| :--------------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](catalog-pg-statistic-ext.html "53.52. pg_statistic_ext")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-subscription.html "53.54. pg_subscription") |
-
-***
-
 ## 53.53. `pg_statistic_ext_data` [#](#CATALOG-PG-STATISTIC-EXT-DATA)
 
 The catalog `pg_statistic_ext_data` holds data for extended planner statistics defined in [`pg_statistic_ext`](catalog-pg-statistic-ext.html "53.52. pg_statistic_ext"). Each row in this catalog corresponds to a *statistics object* created with [`CREATE STATISTICS`](sql-createstatistics.html "CREATE STATISTICS").
@@ -24,10 +16,3 @@ Like [`pg_statistic`](catalog-pg-statistic.html "53.51. pg_statistic"), `pg_sta
 | `stxddependencies` `pg_dependencies`Functional dependency statistics, serialized as `pg_dependencies` type                                                                        |
 | `stxdmcv` `pg_mcv_list`MCV (most-common values) list statistics, serialized as `pg_mcv_list` type                                                                                 |
 | `stxdexpr` `pg_statistic[]`Per-expression statistics, serialized as an array of `pg_statistic` type                                                                               |
-
-***
-
-|                                                                  |                                                       |                                                                |
-| :--------------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](catalog-pg-statistic-ext.html "53.52. pg_statistic_ext")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-subscription.html "53.54. pg_subscription") |
-| 53.52. `pg_statistic_ext`                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                       53.54. `pg_subscription` |

@@ -1,11 +1,3 @@
-
-
-| Chapter 63. Table Access Method Interface Definition |                                            |                     |                                                       |                                                                              |
-| :--------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------: |
-|   [Prev](geqo-biblio.html "62.4. Further Reading")   | [Up](internals.html "Part VII. Internals") | Part VII. Internals | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](indexam.html "Chapter 64. Index Access Method Interface Definition") |
-
-***
-
 ## Chapter 63. Table Access Method Interface Definition
 
 This chapter explains the interface between the core PostgreSQL system and *table access methods*, which manage the storage for tables. The core system knows little about these access methods beyond what is specified here, so it is possible to develop entirely new access method types by writing add-on code.
@@ -25,10 +17,3 @@ For crash safety, an AM can use postgres' [WAL](wal.html "Chapter 30. Reliabil
 To implement transactional support in a manner that allows different table access methods be accessed within a single transaction, it likely is necessary to closely integrate with the machinery in `src/backend/access/transam/xlog.c`.
 
 Any developer of a new `table access method` can refer to the existing `heap` implementation present in `src/backend/access/heap/heapam_handler.c` for details of its implementation.
-
-***
-
-|                                                   |                                                       |                                                                              |
-| :------------------------------------------------ | :---------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](geqo-biblio.html "62.4. Further Reading")  |       [Up](internals.html "Part VII. Internals")      |  [Next](indexam.html "Chapter 64. Index Access Method Interface Definition") |
-| 62.4. Further Reading                             | [Home](index.html "PostgreSQL 17devel Documentation") |                         Chapter 64. Index Access Method Interface Definition |

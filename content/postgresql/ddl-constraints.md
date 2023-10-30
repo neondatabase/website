@@ -1,11 +1,3 @@
-
-
-|                       5.4. Constraints                       |                                             |                            |                                                       |                                                        |
-| :----------------------------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](ddl-generated-columns.html "5.3. Generated Columns")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-system-columns.html "5.5. System Columns") |
-
-***
-
 ## 5.4. Constraints [#](#DDL-CONSTRAINTS)
 
   * *   [5.4.1. Check Constraints](ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
@@ -494,10 +486,3 @@ CREATE TABLE circles (
 See also [`CREATE TABLE ... CONSTRAINT ... EXCLUDE`](sql-createtable.html#SQL-CREATETABLE-EXCLUDE) for details.
 
 Adding an exclusion constraint will automatically create an index of the type specified in the constraint declaration.
-
-***
-
-|                                                              |                                                       |                                                        |
-| :----------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](ddl-generated-columns.html "5.3. Generated Columns")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](ddl-system-columns.html "5.5. System Columns") |
-| 5.3. Generated Columns                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                    5.5. System Columns |

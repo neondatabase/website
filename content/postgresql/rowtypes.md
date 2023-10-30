@@ -1,11 +1,3 @@
-
-
-|        8.16. Composite Types        |                                             |                       |                                                       |                                              |
-| :---------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](arrays.html "8.15. Arrays")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](rangetypes.html "8.17. Range Types") |
-
-***
-
 ## 8.16. Composite Types [#](#ROWTYPES)
 
   * *   [8.16.1. Declaration of Composite Types](rowtypes.html#ROWTYPES-DECLARING)
@@ -342,10 +334,3 @@ The string-literal processor removes one level of backslashes, so that what arri
 ### Tip
 
 The `ROW` constructor syntax is usually easier to work with than the composite-literal syntax when writing composite values in SQL commands. In `ROW`, individual field values are written the same way they would be written when not members of a composite.
-
-***
-
-|                                     |                                                       |                                              |
-| :---------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](arrays.html "8.15. Arrays")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](rangetypes.html "8.17. Range Types") |
-| 8.15. Arrays                        | [Home](index.html "PostgreSQL 17devel Documentation") |                            8.17. Range Types |

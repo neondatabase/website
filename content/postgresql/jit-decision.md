@@ -1,11 +1,3 @@
-
-
-|                     32.2. When to JIT?                    |                                                             |                                            |                                                       |                                                       |
-| :-------------------------------------------------------: | :---------------------------------------------------------- | :----------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](jit-reason.html "32.1. What Is JIT compilation?")  | [Up](jit.html "Chapter 32. Just-in-Time Compilation (JIT)") | Chapter 32. Just-in-Time Compilation (JIT) | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](jit-configuration.html "32.3. Configuration") |
-
-***
-
 ## 32.2. When to JIT? [#](#JIT-DECISION)
 
 JIT compilation is beneficial primarily for long-running CPU-bound queries. Frequently these will be analytical queries. For short queries the added overhead of performing JIT compilation will often be higher than the time it can save.
@@ -52,10 +44,3 @@ SET
 ```
 
 As visible here, JIT was used, but inlining and expensive optimization were not. If [jit\_inline\_above\_cost](runtime-config-query.html#GUC-JIT-INLINE-ABOVE-COST) or [jit\_optimize\_above\_cost](runtime-config-query.html#GUC-JIT-OPTIMIZE-ABOVE-COST) were also lowered, that would change.
-
-***
-
-|                                                           |                                                             |                                                       |
-| :-------------------------------------------------------- | :---------------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](jit-reason.html "32.1. What Is JIT compilation?")  | [Up](jit.html "Chapter 32. Just-in-Time Compilation (JIT)") |  [Next](jit-configuration.html "32.3. Configuration") |
-| 32.1. What Is JIT compilation?                            |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                   32.3. Configuration |

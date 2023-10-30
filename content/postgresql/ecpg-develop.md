@@ -1,11 +1,3 @@
-
-
-|                           36.17. Internals                          |                                                        |                                      |                                                       |                                                                       |
-| :-----------------------------------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](ecpg-oracle-compat.html "36.16. Oracle Compatibility Mode")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](information-schema.html "Chapter 37. The Information Schema") |
-
-***
-
 ## 36.17. Internals [#](#ECPG-DEVELOP)
 
 This section explains how ECPG works internally. This information can occasionally be useful to help users understand how to use ECPG.
@@ -104,10 +96,3 @@ ECPGdo(__LINE__, NULL, "SELECT res FROM mytable WHERE index = ?     ",
 ```
 
 (The indentation here is added for readability and not something the preprocessor does.)
-
-***
-
-|                                                                     |                                                        |                                                                       |
-| :------------------------------------------------------------------ | :----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](ecpg-oracle-compat.html "36.16. Oracle Compatibility Mode")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](information-schema.html "Chapter 37. The Information Schema") |
-| 36.16. Oracle Compatibility Mode                                    |  [Home](index.html "PostgreSQL 17devel Documentation") |                                    Chapter 37. The Information Schema |

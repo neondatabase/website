@@ -1,11 +1,3 @@
-
-
-|                   SPI\_prepare\_extended                  |                                                      |                           |                                                       |                                                           |
-| :-------------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](spi-spi-prepare-cursor.html "SPI_prepare_cursor")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-prepare-params.html "SPI_prepare_params") |
-
-***
-
 ## SPI\_prepare\_extended
 
 SPI\_prepare\_extended — prepare a statement, without executing it yet
@@ -53,10 +45,3 @@ Callers should always zero out the entire *`options`* struct, then fill whicheve
 ## Return Value
 
 `SPI_prepare_extended` has the same return conventions as `SPI_prepare`.
-
-***
-
-|                                                           |                                                       |                                                           |
-| :-------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](spi-spi-prepare-cursor.html "SPI_prepare_cursor")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-prepare-params.html "SPI_prepare_params") |
-| SPI\_prepare\_cursor                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                      SPI\_prepare\_params |

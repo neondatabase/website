@@ -1,11 +1,3 @@
-
-
-|                   DROP DOMAIN                  |                                        |              |                                                       |                                                         |
-| :--------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-dropdatabase.html "DROP DATABASE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropeventtrigger.html "DROP EVENT TRIGGER") |
-
-***
-
 ## DROP DOMAIN
 
 DROP DOMAIN — remove a domain
@@ -55,10 +47,3 @@ This command conforms to the SQL standard, except for the `IF EXISTS` option, wh
 ## See Also
 
 [CREATE DOMAIN](sql-createdomain.html "CREATE DOMAIN"), [ALTER DOMAIN](sql-alterdomain.html "ALTER DOMAIN")
-
-***
-
-|                                                |                                                       |                                                         |
-| :--------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-dropdatabase.html "DROP DATABASE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropeventtrigger.html "DROP EVENT TRIGGER") |
-| DROP DATABASE                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                      DROP EVENT TRIGGER |

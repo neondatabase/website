@@ -1,11 +1,3 @@
-
-
-|                                DECLARE                               |                                                             |                              |                                                       |                                                              |
-| :------------------------------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](ecpg-sql-deallocate-descriptor.html "DEALLOCATE DESCRIPTOR")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-declare-statement.html "DECLARE STATEMENT") |
-
-***
-
 ## DECLARE
 
 DECLARE — define a cursor
@@ -64,10 +56,3 @@ EXEC SQL DECLARE cur1 CURSOR FOR stmt1;
 ## See Also
 
 [OPEN](ecpg-sql-open.html "OPEN"), [CLOSE](sql-close.html "CLOSE"), [DECLARE](sql-declare.html "DECLARE")
-
-***
-
-|                                                                      |                                                             |                                                              |
-| :------------------------------------------------------------------- | :---------------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](ecpg-sql-deallocate-descriptor.html "DEALLOCATE DESCRIPTOR")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-declare-statement.html "DECLARE STATEMENT") |
-| DEALLOCATE DESCRIPTOR                                                |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                            DECLARE STATEMENT |

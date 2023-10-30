@@ -1,11 +1,3 @@
-
-
-|               F.30. pgrowlocks — show a table's row locking information               |                                                                             |                                                        |                                                       |                                                                                                            |
-| :-----------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------------------------------: |
-| [Prev](pgprewarm.html "F.29. pg_prewarm — preload relation data into buffer caches")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgstatstatements.html "F.31. pg_stat_statements — track statistics of SQL planning and execution") |
-
-***
-
 ## F.30. pgrowlocks — show a table's row locking information [#](#PGROWLOCKS)
 
   * *   [F.30.1. Overview](pgrowlocks.html#PGROWLOCKS-OVERVIEW)
@@ -70,10 +62,3 @@ Be aware however that such a query will be very inefficient.
 ### F.30.3. Author [#](#PGROWLOCKS-AUTHOR)
 
 Tatsuo Ishii
-
-***
-
-|                                                                                       |                                                                             |                                                                                                            |
-| :------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------: | ---------------------------------------------------------------------------------------------------------: |
-| [Prev](pgprewarm.html "F.29. pg_prewarm — preload relation data into buffer caches")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](pgstatstatements.html "F.31. pg_stat_statements — track statistics of SQL planning and execution") |
-| F.29. pg\_prewarm — preload relation data into buffer caches                          |            [Home](index.html "PostgreSQL 17devel Documentation")            |                                F.31. pg\_stat\_statements — track statistics of SQL planning and execution |

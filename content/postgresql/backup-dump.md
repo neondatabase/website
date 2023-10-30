@@ -1,11 +1,3 @@
-
-
-|                     26.1. SQL Dump                    |                                                    |                                |                                                       |                                                            |
-| :---------------------------------------------------: | :------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](backup.html "Chapter 26. Backup and Restore")  | [Up](backup.html "Chapter 26. Backup and Restore") | Chapter 26. Backup and Restore | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](backup-file.html "26.2. File System Level Backup") |
-
-***
-
 ## 26.1. SQL Dump [#](#BACKUP-DUMP)
 
   * *   [26.1.1. Restoring the Dump](backup-dump.html#BACKUP-DUMP-RESTORE)
@@ -162,10 +154,3 @@ pg_dump -j num -F d -f out.dir dbname
 ```
 
 You can use `pg_restore -j` to restore a dump in parallel. This will work for any archive of either the "custom" or the "directory" archive mode, whether or not it has been created with `pg_dump -j`.
-
-***
-
-|                                                       |                                                       |                                                            |
-| :---------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](backup.html "Chapter 26. Backup and Restore")  |   [Up](backup.html "Chapter 26. Backup and Restore")  |  [Next](backup-file.html "26.2. File System Level Backup") |
-| Chapter 26. Backup and Restore                        | [Home](index.html "PostgreSQL 17devel Documentation") |                             26.2. File System Level Backup |

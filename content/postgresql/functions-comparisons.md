@@ -1,11 +1,3 @@
-
-
-|                9.24. Row and Array Comparisons                |                                                           |                                    |                                                       |                                                             |
-| :-----------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](functions-subquery.html "9.23. Subquery Expressions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-srf.html "9.25. Set Returning Functions") |
-
-***
-
 ## 9.24. Row and Array Comparisons [#](#FUNCTIONS-COMPARISONS)
 
   * *   [9.24.1. `IN`](functions-comparisons.html#FUNCTIONS-COMPARISONS-IN-SCALAR)
@@ -125,10 +117,3 @@ The SQL specification requires row-wise comparison to return NULL if the result 
 Each side is evaluated and they are compared row-wise. Composite type comparisons are allowed when the *`operator`* is `=`, `<>`, `<`, `<=`, `>` or `>=`, or has semantics similar to one of these. (To be specific, an operator can be a row comparison operator if it is a member of a B-tree operator class, or is the negator of the `=` member of a B-tree operator class.) The default behavior of the above operators is the same as for `IS [ NOT ] DISTINCT FROM` for row constructors (see [Section 9.24.5](functions-comparisons.html#ROW-WISE-COMPARISON "9.24.5. Row Constructor Comparison")).
 
 To support matching of rows which include elements without a default B-tree operator class, the following operators are defined for composite type comparison: `*=`, `*<>`, `*<`, `*<=`, `*>`, and `*>=`. These operators compare the internal binary representation of the two rows. Two rows might have a different binary representation even though comparisons of the two rows with the equality operator is true. The ordering of rows under these comparison operators is deterministic but not otherwise meaningful. These operators are used internally for materialized views and might be useful for other specialized purposes such as replication and B-Tree deduplication (see [Section 67.4.3](btree-implementation.html#BTREE-DEDUPLICATION "67.4.3. Deduplication")). They are not intended to be generally useful for writing queries, though.
-
-***
-
-|                                                               |                                                           |                                                             |
-| :------------------------------------------------------------ | :-------------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](functions-subquery.html "9.23. Subquery Expressions")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-srf.html "9.25. Set Returning Functions") |
-| 9.23. Subquery Expressions                                    |   [Home](index.html "PostgreSQL 17devel Documentation")   |                               9.25. Set Returning Functions |

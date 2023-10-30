@@ -1,11 +1,3 @@
-
-
-|                 F.3. auth\_delay — pause on authentication failure                 |                                                                             |                                                        |                                                       |                                                                                      |
-| :--------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](amcheck.html "F.2. amcheck — tools to verify table and index consistency")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](auto-explain.html "F.4. auto_explain — log execution plans of slow queries") |
-
-***
-
 ## F.3. auth\_delay — pause on authentication failure [#](#AUTH-DELAY)
 
   * *   [F.3.1. Configuration Parameters](auth-delay.html#AUTH-DELAY-CONFIGURATION-PARAMETERS)
@@ -34,10 +26,3 @@ auth_delay.milliseconds = '500'
 ### F.3.2. Author [#](#AUTH-DELAY-AUTHOR)
 
 KaiGai Kohei `<kaigai@ak.jp.nec.com>`
-
-***
-
-|                                                                                    |                                                                             |                                                                                      |
-| :--------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](amcheck.html "F.2. amcheck — tools to verify table and index consistency")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](auto-explain.html "F.4. auto_explain — log execution plans of slow queries") |
-| F.2. amcheck — tools to verify table and index consistency                         |            [Home](index.html "PostgreSQL 17devel Documentation")            |                             F.4. auto\_explain — log execution plans of slow queries |

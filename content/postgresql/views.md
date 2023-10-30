@@ -1,11 +1,3 @@
-
-
-|                    Chapter 54. System Views                    |                                            |                     |                                                       |                                               |
-| :------------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](catalog-pg-user-mapping.html "53.65. pg_user_mapping")  | [Up](internals.html "Part VII. Internals") | Part VII. Internals | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](views-overview.html "54.1. Overview") |
-
-***
-
 ## Chapter 54. System Views
 
 **Table of Contents**
@@ -52,10 +44,3 @@ In addition to the system catalogs, PostgreSQL provides a number of built-in vie
 The information schema ([Chapter 37](information-schema.html "Chapter 37. The Information Schema")) provides an alternative set of views which overlap the functionality of the system views. Since the information schema is SQL-standard whereas the views described here are PostgreSQL-specific, it's usually better to use the information schema if it provides all the information you need.
 
 [Table 54.1](views-overview.html#VIEW-TABLE "Table 54.1. System Views") lists the system views described here. More detailed documentation of each view follows below. There are some additional views that provide access to accumulated statistics; they are described in [Table 28.2](monitoring-stats.html#MONITORING-STATS-VIEWS-TABLE "Table 28.2. Collected Statistics Views").
-
-***
-
-|                                                                |                                                       |                                               |
-| :------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](catalog-pg-user-mapping.html "53.65. pg_user_mapping")  |       [Up](internals.html "Part VII. Internals")      |  [Next](views-overview.html "54.1. Overview") |
-| 53.65. `pg_user_mapping`                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                54.1. Overview |

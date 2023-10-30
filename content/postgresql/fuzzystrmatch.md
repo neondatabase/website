@@ -1,11 +1,3 @@
-
-
-|             F.17. fuzzystrmatch — determine string similarities and distance            |                                                                             |                                                        |                                                       |                                                                 |
-| :-------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](file-fdw.html "F.16. file_fdw — access data files in the server's file system")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](hstore.html "F.18. hstore — hstore key/value datatype") |
-
-***
-
 ## F.17. fuzzystrmatch — determine string similarities and distance [#](#FUZZYSTRMATCH)
 
   * *   [F.17.1. Soundex](fuzzystrmatch.html#FUZZYSTRMATCH-SOUNDEX)
@@ -249,10 +241,3 @@ test=# SELECT dmetaphone('gumbo');
  KMP
 (1 row)
 ```
-
-***
-
-|                                                                                         |                                                                             |                                                                 |
-| :-------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](file-fdw.html "F.16. file_fdw — access data files in the server's file system")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](hstore.html "F.18. hstore — hstore key/value datatype") |
-| F.16. file\_fdw — access data files in the server's file system                         |            [Home](index.html "PostgreSQL 17devel Documentation")            |                        F.18. hstore — hstore key/value datatype |

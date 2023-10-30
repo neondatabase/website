@@ -1,11 +1,3 @@
-
-
-|                   38.6. Function Overloading                   |                                               |                           |                                                       |                                                                       |
-| :------------------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](xfunc-sql.html "38.5. Query Language (SQL) Functions")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xfunc-volatility.html "38.7. Function Volatility Categories") |
-
-***
-
 ## 38.6. Function Overloading [#](#XFUNC-OVERLOAD)
 
 More than one function can be defined with the same SQL name, so long as the arguments they take are different. In other words, function names can be *overloaded*. Whether or not you use it, this capability entails security precautions when calling functions in databases where some users mistrust other users; see [Section 10.3](typeconv-func.html "10.3. Functions"). When a query is executed, the server will determine which function to call from the data types and the number of the provided arguments. Overloading can also be used to simulate functions with a variable number of arguments, up to a finite maximum number.
@@ -37,10 +29,3 @@ CREATE FUNCTION test(int, int) RETURNS int
 ```
 
 The names of the C functions here reflect one of many possible conventions.
-
-***
-
-|                                                                |                                                       |                                                                       |
-| :------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](xfunc-sql.html "38.5. Query Language (SQL) Functions")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xfunc-volatility.html "38.7. Function Volatility Categories") |
-| 38.5. Query Language (SQL) Functions                           | [Home](index.html "PostgreSQL 17devel Documentation") |                                  38.7. Function Volatility Categories |

@@ -1,11 +1,3 @@
-
-
-|                         37.6. `attributes`                         |                                                                    |                                    |                                                       |                                                                |
-| :----------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](infoschema-applicable-roles.html "37.5. applicable_roles")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-character-sets.html "37.7. character_sets") |
-
-***
-
 ## 37.6. `attributes` [#](#INFOSCHEMA-ATTRIBUTES)
 
 The view `attributes` contains information about the attributes of composite data types defined in the database. (Note that the view does not give information about table columns, which are sometimes called attributes in PostgreSQL contexts.) Only those attributes are shown that the current user has access to (by way of being the owner of or having some privilege on the type).
@@ -49,10 +41,3 @@ The view `attributes` contains information about the attributes of composite dat
 \
 
 See also under [Section 37.17](infoschema-columns.html "37.17. columns"), a similarly structured view, for further information on some of the columns.
-
-***
-
-|                                                                    |                                                                    |                                                                |
-| :----------------------------------------------------------------- | :----------------------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](infoschema-applicable-roles.html "37.5. applicable_roles")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-character-sets.html "37.7. character_sets") |
-| 37.5. `applicable_roles`                                           |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                         37.7. `character_sets` |

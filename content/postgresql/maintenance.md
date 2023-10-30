@@ -1,11 +1,3 @@
-
-
-|     Chapter 25. Routine Database Maintenance Tasks    |                                                    |                                 |                                                       |                                                           |
-| :---------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](multibyte.html "24.3. Character Set Support")  | [Up](admin.html "Part III. Server Administration") | Part III. Server Administration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](routine-vacuuming.html "25.1. Routine Vacuuming") |
-
-***
-
 ## Chapter 25. Routine Database Maintenance Tasks
 
 **Table of Contents**
@@ -33,10 +25,3 @@ Another task that might need periodic attention is log file management. This is 
 [check\_postgres](https://bucardo.org/check_postgres/) is available for monitoring database health and reporting unusual conditions. check\_postgres integrates with Nagios and MRTG, but can be run standalone too.
 
 PostgreSQL is low-maintenance compared to some other database management systems. Nonetheless, appropriate attention to these tasks will go far towards ensuring a pleasant and productive experience with the system.
-
-***
-
-|                                                       |                                                       |                                                           |
-| :---------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](multibyte.html "24.3. Character Set Support")  |   [Up](admin.html "Part III. Server Administration")  |  [Next](routine-vacuuming.html "25.1. Routine Vacuuming") |
-| 24.3. Character Set Support                           | [Home](index.html "PostgreSQL 17devel Documentation") |                                   25.1. Routine Vacuuming |

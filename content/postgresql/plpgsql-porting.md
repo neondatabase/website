@@ -1,11 +1,3 @@
-
-
-|                        43.13. Porting from Oracle PL/SQL                        |                                                                     |                                                |                                                       |                                                                    |
-| :-----------------------------------------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](plpgsql-development-tips.html "43.12. Tips for Developing in PL/pgSQL")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") |
-
-***
-
 ## 43.13. Porting from Oracle PL/SQL [#](#PLPGSQL-PORTING)
 
   * *   [43.13.1. Porting Examples](plpgsql-porting.html#PLPGSQL-PORTING-EXAMPLES)
@@ -483,10 +475,3 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql STRICT IMMUTABLE;
 ```
-
-***
-
-|                                                                                 |                                                                     |                                                                    |
-| :------------------------------------------------------------------------------ | :-----------------------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](plpgsql-development-tips.html "43.12. Tips for Developing in PL/pgSQL")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") |
-| 43.12. Tips for Developing in PL/pgSQL                                          |        [Home](index.html "PostgreSQL 17devel Documentation")        |                       Chapter 44. PL/Tcl — Tcl Procedural Language |

@@ -1,11 +1,3 @@
-
-
-|         F.19. intagg — integer aggregator and enumerator        |                                                                             |                                                        |                                                       |                                                                         |
-| :-------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](hstore.html "F.18. hstore — hstore key/value datatype")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](intarray.html "F.20. intarray — manipulate arrays of integers") |
-
-***
-
 ## F.19. intagg — integer aggregator and enumerator [#](#INTAGG)
 
   * *   [F.19.1. Functions](intagg.html#INTAGG-FUNCTIONS)
@@ -78,10 +70,3 @@ SELECT right, count(right) FROM
   GROUP BY right
   ORDER BY count DESC;
 ```
-
-***
-
-|                                                                 |                                                                             |                                                                         |
-| :-------------------------------------------------------------- | :-------------------------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](hstore.html "F.18. hstore — hstore key/value datatype")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](intarray.html "F.20. intarray — manipulate arrays of integers") |
-| F.18. hstore — hstore key/value datatype                        |            [Home](index.html "PostgreSQL 17devel Documentation")            |                          F.20. intarray — manipulate arrays of integers |

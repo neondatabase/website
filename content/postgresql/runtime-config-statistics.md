@@ -1,11 +1,3 @@
-
-
-|                         20.9. Run-time Statistics                        |                                                              |                                  |                                                       |                                                                      |
-| :----------------------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](runtime-config-logging.html "20.8. Error Reporting and Logging")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-autovacuum.html "20.10. Automatic Vacuuming") |
-
-***
-
 ## 20.9. Run-time Statistics [#](#RUNTIME-CONFIG-STATISTICS)
 
   * *   [20.9.1. Cumulative Query and Index Statistics](runtime-config-statistics.html#RUNTIME-CONFIG-CUMULATIVE-STATISTICS)
@@ -64,10 +56,3 @@ These parameters control the server-wide cumulative statistics system. When enab
 * `log_statement_stats` (`boolean`)`log_parser_stats` (`boolean`)`log_planner_stats` (`boolean`)`log_executor_stats` (`boolean`) [#](#GUC-LOG-STATEMENT-STATS)
 
     For each query, output performance statistics of the respective module to the server log. This is a crude profiling instrument, similar to the Unix `getrusage()` operating system facility. `log_statement_stats` reports total statement statistics, while the others report per-module statistics. `log_statement_stats` cannot be enabled together with any of the per-module options. All of these options are disabled by default. Only superusers and users with the appropriate `SET` privilege can change these settings.
-
-***
-
-|                                                                          |                                                              |                                                                      |
-| :----------------------------------------------------------------------- | :----------------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](runtime-config-logging.html "20.8. Error Reporting and Logging")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-autovacuum.html "20.10. Automatic Vacuuming") |
-| 20.8. Error Reporting and Logging                                        |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                           20.10. Automatic Vacuuming |

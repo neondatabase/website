@@ -1,11 +1,3 @@
-
-
-|                   F.7. bloom — bloom filter index access method                  |                                                                             |                                                        |                                                       |                                                                                      |
-| :------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](basic-archive.html "F.6. basic_archive — an example WAL archive module")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](btree-gin.html "F.8. btree_gin — GIN operator classes with B-tree behavior") |
-
-***
-
 ## F.7. bloom — bloom filter index access method [#](#BLOOM)
 
   * *   [F.7.1. Parameters](bloom.html#BLOOM-PARAMETERS)
@@ -186,10 +178,3 @@ Teodor Sigaev `<teodor@postgrespro.ru>`, Postgres Professional, Moscow, Russia
 Alexander Korotkov `<a.korotkov@postgrespro.ru>`, Postgres Professional, Moscow, Russia
 
 Oleg Bartunov `<obartunov@postgrespro.ru>`, Postgres Professional, Moscow, Russia
-
-***
-
-|                                                                                  |                                                                             |                                                                                      |
-| :------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](basic-archive.html "F.6. basic_archive — an example WAL archive module")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](btree-gin.html "F.8. btree_gin — GIN operator classes with B-tree behavior") |
-| F.6. basic\_archive — an example WAL archive module                              |            [Home](index.html "PostgreSQL 17devel Documentation")            |                          F.8. btree\_gin — GIN operator classes with B-tree behavior |

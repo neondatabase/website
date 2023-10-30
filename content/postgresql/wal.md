@@ -1,11 +1,3 @@
-
-
-|  Chapter 30. Reliability and the Write-Ahead Log  |                                                    |                                 |                                                       |                                                   |
-| :-----------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](disk-full.html "29.2. Disk Full Failure")  | [Up](admin.html "Part III. Server Administration") | Part III. Server Administration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](wal-reliability.html "30.1. Reliability") |
-
-***
-
 ## Chapter 30. Reliability and the Write-Ahead Log
 
 **Table of Contents**
@@ -23,10 +15,3 @@
   * [30.6. WAL Internals](wal-internals.html)
 
 This chapter explains how to control the reliability of PostgreSQL, including details about the Write-Ahead Log.
-
-***
-
-|                                                   |                                                       |                                                   |
-| :------------------------------------------------ | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](disk-full.html "29.2. Disk Full Failure")  |   [Up](admin.html "Part III. Server Administration")  |  [Next](wal-reliability.html "30.1. Reliability") |
-| 29.2. Disk Full Failure                           | [Home](index.html "PostgreSQL 17devel Documentation") |                                 30.1. Reliability |

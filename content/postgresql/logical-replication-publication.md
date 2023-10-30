@@ -1,11 +1,3 @@
-
-
-|                          31.1. Publication                          |                                                                  |                                 |                                                       |                                                                     |
-| :-----------------------------------------------------------------: | :--------------------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](logical-replication.html "Chapter 31. Logical Replication")  | [Up](logical-replication.html "Chapter 31. Logical Replication") | Chapter 31. Logical Replication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logical-replication-subscription.html "31.2. Subscription") |
-
-***
-
 ## 31.1. Publication [#](#LOGICAL-REPLICATION-PUBLICATION)
 
 A *publication* can be defined on any physical replication primary. The node where a publication is defined is referred to as *publisher*. A publication is a set of changes generated from a table or a group of tables, and might also be described as a change set or replication set. Each publication exists in only one database.
@@ -21,10 +13,3 @@ Every publication can have multiple subscribers.
 A publication is created using the [`CREATE PUBLICATION`](sql-createpublication.html "CREATE PUBLICATION") command and may later be altered or dropped using corresponding commands.
 
 The individual tables can be added and removed dynamically using [`ALTER PUBLICATION`](sql-alterpublication.html "ALTER PUBLICATION"). Both the `ADD TABLE` and `DROP TABLE` operations are transactional; so the table will start or stop replicating at the correct snapshot once the transaction has committed.
-
-***
-
-|                                                                     |                                                                  |                                                                     |
-| :------------------------------------------------------------------ | :--------------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](logical-replication.html "Chapter 31. Logical Replication")  | [Up](logical-replication.html "Chapter 31. Logical Replication") |  [Next](logical-replication-subscription.html "31.2. Subscription") |
-| Chapter 31. Logical Replication                                     |       [Home](index.html "PostgreSQL 17devel Documentation")      |                                                  31.2. Subscription |

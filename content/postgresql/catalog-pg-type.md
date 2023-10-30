@@ -1,11 +1,3 @@
-
-
-|                       53.64. `pg_type`                       |                                                   |                             |                                                       |                                                                |
-| :----------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](catalog-pg-ts-template.html "53.63. pg_ts_template")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-user-mapping.html "53.65. pg_user_mapping") |
-
-***
-
 ## 53.64. `pg_type` [#](#CATALOG-PG-TYPE)
 
 | `typtype` `char``typtype` is `b` for a base type, `c` for a composite type (e.g., a table's row type), `d` for a domain, `e` for an enum type, `p` for a pseudo-type, `r` for a range type, or `m` for a multirange type. See also `typrelid` and `typbasetype`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
@@ -71,10 +63,3 @@ For fixed-width types used in system tables, it is critical that the size and al
 | `V`  | Bit-string types      |
 | `X`  | `unknown` type        |
 | `Z`  | Internal-use types    |
-
-***
-
-|                                                              |                                                       |                                                                |
-| :----------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](catalog-pg-ts-template.html "53.63. pg_ts_template")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-user-mapping.html "53.65. pg_user_mapping") |
-| 53.63. `pg_ts_template`                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                       53.65. `pg_user_mapping` |

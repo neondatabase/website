@@ -1,11 +1,3 @@
-
-
-|                 47.5. Visibility of Data Changes                |                                                           |                                          |                                                       |                                             |
-| :-------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------------: | ----------------------------------------------------: | ------------------------------------------: |
-| [Prev](spi-spi-start-transaction.html "SPI_start_transaction")  | [Up](spi.html "Chapter 47. Server Programming Interface") | Chapter 47. Server Programming Interface | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-examples.html "47.6. Examples") |
-
-***
-
 ## 47.5. Visibility of Data Changes [#](#SPI-VISIBILITY)
 
 The following rules govern the visibility of data changes in functions that use SPI (or any other C function):
@@ -26,10 +18,3 @@ The following rules govern the visibility of data changes in functions that use 
 * All standard procedural languages set the SPI read-write mode depending on the volatility attribute of the function. Commands of `STABLE` and `IMMUTABLE` functions are done in read-only mode, while commands of `VOLATILE` functions are done in read-write mode. While authors of C functions are able to violate this convention, it's unlikely to be a good idea to do so.
 
 The next section contains an example that illustrates the application of these rules.
-
-***
-
-|                                                                 |                                                           |                                             |
-| :-------------------------------------------------------------- | :-------------------------------------------------------: | ------------------------------------------: |
-| [Prev](spi-spi-start-transaction.html "SPI_start_transaction")  | [Up](spi.html "Chapter 47. Server Programming Interface") |  [Next](spi-examples.html "47.6. Examples") |
-| SPI\_start\_transaction                                         |   [Home](index.html "PostgreSQL 17devel Documentation")   |                              47.6. Examples |

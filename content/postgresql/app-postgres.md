@@ -1,11 +1,3 @@
-
-
-|               postgres               |                                                              |                                |                                                       |                                               |
-| :----------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](pgwaldump.html "pg_waldump")  | [Up](reference-server.html "PostgreSQL Server Applications") | PostgreSQL Server Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](internals.html "Part VII. Internals") |
-
-***
-
 ## postgres
 
 postgres — PostgreSQL database server
@@ -293,10 +285,3 @@ Either form overrides whatever setting might exist for `work_mem` in `postgresql
 ## See Also
 
 [initdb](app-initdb.html "initdb"), [pg\_ctl](app-pg-ctl.html "pg_ctl")
-
-***
-
-|                                      |                                                              |                                               |
-| :----------------------------------- | :----------------------------------------------------------: | --------------------------------------------: |
-| [Prev](pgwaldump.html "pg_waldump")  | [Up](reference-server.html "PostgreSQL Server Applications") |  [Next](internals.html "Part VII. Internals") |
-| pg\_waldump                          |     [Home](index.html "PostgreSQL 17devel Documentation")    |                           Part VII. Internals |

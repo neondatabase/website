@@ -1,11 +1,3 @@
-
-
-|                 CREATE RULE                |                                        |              |                                                       |                                                |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-createrole.html "CREATE ROLE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createschema.html "CREATE SCHEMA") |
-
-***
-
 ## CREATE RULE
 
 CREATE RULE — define a new rewrite rule
@@ -116,10 +108,3 @@ one `NOTIFY` event will be sent during the `UPDATE`, whether or not there are an
 ## See Also
 
 [ALTER RULE](sql-alterrule.html "ALTER RULE"), [DROP RULE](sql-droprule.html "DROP RULE")
-
-***
-
-|                                            |                                                       |                                                |
-| :----------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-createrole.html "CREATE ROLE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createschema.html "CREATE SCHEMA") |
-| CREATE ROLE                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                  CREATE SCHEMA |

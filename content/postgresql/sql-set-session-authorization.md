@@ -1,11 +1,3 @@
-
-
-|       SET SESSION AUTHORIZATION       |                                        |              |                                                       |                                                     |
-| :-----------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](sql-set-role.html "SET ROLE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-set-transaction.html "SET TRANSACTION") |
-
-***
-
 ## SET SESSION AUTHORIZATION
 
 SET SESSION AUTHORIZATION — set the session user identifier and the current user identifier of the current session
@@ -63,10 +55,3 @@ The privileges necessary to execute this command are left implementation-defined
 ## See Also
 
 [SET ROLE](sql-set-role.html "SET ROLE")
-
-***
-
-|                                       |                                                       |                                                     |
-| :------------------------------------ | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](sql-set-role.html "SET ROLE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-set-transaction.html "SET TRANSACTION") |
-| SET ROLE                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                     SET TRANSACTION |

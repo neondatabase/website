@@ -1,11 +1,3 @@
-
-
-|                  DECLARE                  |                                        |              |                                                       |                                   |
-| :---------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](sql-deallocate.html "DEALLOCATE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-delete.html "DELETE") |
-
-***
-
 ## DECLARE
 
 DECLARE — define a cursor
@@ -118,10 +110,3 @@ Binary cursors are a PostgreSQL extension.
 ## See Also
 
 [CLOSE](sql-close.html "CLOSE"), [FETCH](sql-fetch.html "FETCH"), [MOVE](sql-move.html "MOVE")
-
-***
-
-|                                           |                                                       |                                   |
-| :---------------------------------------- | :---------------------------------------------------: | --------------------------------: |
-| [Prev](sql-deallocate.html "DEALLOCATE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-delete.html "DELETE") |
-| DEALLOCATE                                | [Home](index.html "PostgreSQL 17devel Documentation") |                            DELETE |

@@ -1,11 +1,3 @@
-
-
-|            DROP USER MAPPING           |                                        |              |                                                       |                                        |
-| :------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------: |
-| [Prev](sql-dropuser.html "DROP USER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropview.html "DROP VIEW") |
-
-***
-
 ## DROP USER MAPPING
 
 DROP USER MAPPING — remove a user mapping for a foreign server
@@ -53,10 +45,3 @@ DROP USER MAPPING IF EXISTS FOR bob SERVER foo;
 ## See Also
 
 [CREATE USER MAPPING](sql-createusermapping.html "CREATE USER MAPPING"), [ALTER USER MAPPING](sql-alterusermapping.html "ALTER USER MAPPING")
-
-***
-
-|                                        |                                                       |                                        |
-| :------------------------------------- | :---------------------------------------------------: | -------------------------------------: |
-| [Prev](sql-dropuser.html "DROP USER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropview.html "DROP VIEW") |
-| DROP USER                              | [Home](index.html "PostgreSQL 17devel Documentation") |                              DROP VIEW |

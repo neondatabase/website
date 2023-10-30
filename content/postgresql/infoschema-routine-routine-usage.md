@@ -1,11 +1,3 @@
-
-
-|                      37.42. `routine_routine_usage`                     |                                                                    |                                    |                                                       |                                                                                 |
-| :---------------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------: |
-| [Prev](infoschema-routine-privileges.html "37.41. routine_privileges")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-routine-sequence-usage.html "37.43. routine_sequence_usage") |
-
-***
-
 ## 37.42. `routine_routine_usage` [#](#INFOSCHEMA-ROUTINE-ROUTINE-USAGE)
 
 The view `routine_routine_usage` is meant to identify all functions or procedures that are used by another (or the same) function or procedure, either in the body or in parameter default expressions. Currently, only functions used in parameter default expressions are tracked. An entry is included here only if the used function is owned by a currently enabled role. (There is no such restriction on the using function.)
@@ -22,10 +14,3 @@ Note that the entries for both functions in the view refer to the “specific”
 | `routine_catalog` `sql_identifier`Name of the database that contains the function that is used by the first function (always the current database) |
 | `routine_schema` `sql_identifier`Name of the schema that contains the function that is used by the first function                                  |
 | `routine_name` `sql_identifier`The “specific name” of the function that is used by the first function.                                             |
-
-***
-
-|                                                                         |                                                                    |                                                                                 |
-| :---------------------------------------------------------------------- | :----------------------------------------------------------------: | ------------------------------------------------------------------------------: |
-| [Prev](infoschema-routine-privileges.html "37.41. routine_privileges")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-routine-sequence-usage.html "37.43. routine_sequence_usage") |
-| 37.41. `routine_privileges`                                             |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                                 37.43. `routine_sequence_usage` |

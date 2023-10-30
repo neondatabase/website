@@ -1,11 +1,3 @@
-
-
-|              Part II. The SQL Language              |                                                     |                                  |                                                       |                                                  |
-| :-------------------------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](tutorial-conclusion.html "3.7. Conclusion")  | [Up](index.html "PostgreSQL 17devel Documentation") | PostgreSQL 17devel Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-syntax.html "Chapter 4. SQL Syntax") |
-
-***
-
 # Part II. The SQL Language
 
 This part describes the use of the SQL language in PostgreSQL. We start with describing the general syntax of SQL, then explain how to create the structures to hold data, how to populate the database, and how to query it. The middle part lists the available data types and functions for use in SQL commands. The rest treats several aspects that are important for tuning a database for optimal performance.
@@ -176,10 +168,3 @@ Readers of this part should know how to connect to a PostgreSQL database and iss
     * [15.2. When Can Parallel Query Be Used?](when-can-parallel-query-be-used.html)
     * [15.3. Parallel Plans](parallel-plans.html)
     * [15.4. Parallel Safety](parallel-safety.html)
-
-***
-
-|                                                     |                                                       |                                                  |
-| :-------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](tutorial-conclusion.html "3.7. Conclusion")  |  [Up](index.html "PostgreSQL 17devel Documentation")  |  [Next](sql-syntax.html "Chapter 4. SQL Syntax") |
-| 3.7. Conclusion                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                            Chapter 4. SQL Syntax |

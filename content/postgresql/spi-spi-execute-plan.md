@@ -1,11 +1,3 @@
-
-
-|                     SPI\_execute\_plan                    |                                                      |                           |                                                       |                                                                         |
-| :-------------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](spi-spi-is-cursor-plan.html "SPI_is_cursor_plan")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-execute-plan-extended.html "SPI_execute_plan_extended") |
-
-***
-
 ## SPI\_execute\_plan
 
 SPI\_execute\_plan — execute a statement prepared by `SPI_prepare`
@@ -59,10 +51,3 @@ The return value is the same as for `SPI_execute`, with the following additional
     if *`values`* is `NULL` and *`plan`* was prepared with some parameters
 
 `SPI_processed` and `SPI_tuptable` are set as in `SPI_execute` if successful.
-
-***
-
-|                                                           |                                                       |                                                                         |
-| :-------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](spi-spi-is-cursor-plan.html "SPI_is_cursor_plan")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-execute-plan-extended.html "SPI_execute_plan_extended") |
-| SPI\_is\_cursor\_plan                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                            SPI\_execute\_plan\_extended |

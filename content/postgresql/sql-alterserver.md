@@ -1,11 +1,3 @@
-
-
-|                   ALTER SERVER                   |                                        |              |                                                       |                                                      |
-| :----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-altersequence.html "ALTER SEQUENCE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterstatistics.html "ALTER STATISTICS") |
-
-***
-
 ## ALTER SERVER
 
 ALTER SERVER — change the definition of a foreign server
@@ -71,10 +63,3 @@ ALTER SERVER foo VERSION '8.4' OPTIONS (SET host 'baz');
 ## See Also
 
 [CREATE SERVER](sql-createserver.html "CREATE SERVER"), [DROP SERVER](sql-dropserver.html "DROP SERVER")
-
-***
-
-|                                                  |                                                       |                                                      |
-| :----------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-altersequence.html "ALTER SEQUENCE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterstatistics.html "ALTER STATISTICS") |
-| ALTER SEQUENCE                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                     ALTER STATISTICS |

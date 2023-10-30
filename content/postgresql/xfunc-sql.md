@@ -1,11 +1,3 @@
-
-
-|         38.5. Query Language (SQL) Functions        |                                               |                           |                                                       |                                                           |
-| :-------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](xproc.html "38.4. User-Defined Procedures")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xfunc-overload.html "38.6. Function Overloading") |
-
-***
-
 ## 38.5. Query Language (SQL) Functions [#](#XFUNC-SQL)
 
   * *   [38.5.1. Arguments for SQL Functions](xfunc-sql.html#XFUNC-SQL-FUNCTION-ARGUMENTS)
@@ -924,10 +916,3 @@ But note that this will throw an error if applied to a non-collatable data type.
 If no common collation can be identified among the actual arguments, then an SQL function treats its parameters as having their data types' default collation (which is usually the database's default collation, but could be different for parameters of domain types).
 
 The behavior of collatable parameters can be thought of as a limited form of polymorphism, applicable only to textual data types.
-
-***
-
-|                                                     |                                                       |                                                           |
-| :-------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](xproc.html "38.4. User-Defined Procedures")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xfunc-overload.html "38.6. Function Overloading") |
-| 38.4. User-Defined Procedures                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                38.6. Function Overloading |

@@ -1,11 +1,3 @@
-
-
-|                    ALTER TEXT SEARCH DICTIONARY                   |                                        |              |                                                       |                                                            |
-| :---------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](sql-altertsconfig.html "ALTER TEXT SEARCH CONFIGURATION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altertsparser.html "ALTER TEXT SEARCH PARSER") |
-
-***
-
 ## ALTER TEXT SEARCH DICTIONARY
 
 ALTER TEXT SEARCH DICTIONARY — change the definition of a text search dictionary
@@ -88,10 +80,3 @@ There is no `ALTER TEXT SEARCH DICTIONARY` statement in the SQL standard.
 ## See Also
 
 [CREATE TEXT SEARCH DICTIONARY](sql-createtsdictionary.html "CREATE TEXT SEARCH DICTIONARY"), [DROP TEXT SEARCH DICTIONARY](sql-droptsdictionary.html "DROP TEXT SEARCH DICTIONARY")
-
-***
-
-|                                                                   |                                                       |                                                            |
-| :---------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](sql-altertsconfig.html "ALTER TEXT SEARCH CONFIGURATION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altertsparser.html "ALTER TEXT SEARCH PARSER") |
-| ALTER TEXT SEARCH CONFIGURATION                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                   ALTER TEXT SEARCH PARSER |

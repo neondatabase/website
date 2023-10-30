@@ -1,11 +1,3 @@
-
-
-|                 Chapter 24. Localization                |                                                    |                                 |                                                       |                                             |
-| :-----------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------: |
-| [Prev](manage-ag-tablespaces.html "23.6. Tablespaces")  | [Up](admin.html "Part III. Server Administration") | Part III. Server Administration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](locale.html "24.1. Locale Support") |
-
-***
-
 ## Chapter 24. Localization
 
 **Table of Contents**
@@ -37,10 +29,3 @@ This chapter describes the available localization features from the point of vie
 
 * Using the locale features of the operating system to provide locale-specific collation order, number formatting, translated messages, and other aspects. This is covered in [Section 24.1](locale.html "24.1. Locale Support") and [Section 24.2](collation.html "24.2. Collation Support").
 * Providing a number of different character sets to support storing text in all kinds of languages, and providing character set translation between client and server. This is covered in [Section 24.3](multibyte.html "24.3. Character Set Support").
-
-***
-
-|                                                         |                                                       |                                             |
-| :------------------------------------------------------ | :---------------------------------------------------: | ------------------------------------------: |
-| [Prev](manage-ag-tablespaces.html "23.6. Tablespaces")  |   [Up](admin.html "Part III. Server Administration")  |  [Next](locale.html "24.1. Locale Support") |
-| 23.6. Tablespaces                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                        24.1. Locale Support |

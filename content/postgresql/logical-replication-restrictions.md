@@ -1,11 +1,3 @@
-
-
-|                       31.6. Restrictions                      |                                                                  |                                 |                                                       |                                                                     |
-| :-----------------------------------------------------------: | :--------------------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](logical-replication-conflicts.html "31.5. Conflicts")  | [Up](logical-replication.html "Chapter 31. Logical Replication") | Chapter 31. Logical Replication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logical-replication-architecture.html "31.7. Architecture") |
-
-***
-
 ## 31.6. Restrictions [#](#LOGICAL-REPLICATION-RESTRICTIONS)
 
 Logical replication currently has the following restrictions or missing functionality. These might be addressed in future releases.
@@ -17,10 +9,3 @@ Logical replication currently has the following restrictions or missing function
 * Replication is only supported by tables, including partitioned tables. Attempts to replicate other types of relations, such as views, materialized views, or foreign tables, will result in an error.
 * When replicating between partitioned tables, the actual replication originates, by default, from the leaf partitions on the publisher, so partitions on the publisher must also exist on the subscriber as valid target tables. (They could either be leaf partitions themselves, or they could be further subpartitioned, or they could even be independent tables.) Publications can also specify that changes are to be replicated using the identity and schema of the partitioned root table instead of that of the individual leaf partitions in which the changes actually originate (see [`publish_via_partition_root`](sql-createpublication.html#SQL-CREATEPUBLICATION-WITH-PUBLISH-VIA-PARTITION-ROOT) parameter of `CREATE PUBLICATION`).
 * When using [`REPLICA IDENTITY FULL`](sql-altertable.html#SQL-ALTERTABLE-REPLICA-IDENTITY-FULL) on published tables, it is important to note that the `UPDATE` and `DELETE` operations cannot be applied to subscribers if the tables include attributes with datatypes (such as point or box) that do not have a default operator class for B-tree or Hash. However, this limitation can be overcome by ensuring that the table has a primary key or replica identity defined for it.
-
-***
-
-|                                                               |                                                                  |                                                                     |
-| :------------------------------------------------------------ | :--------------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](logical-replication-conflicts.html "31.5. Conflicts")  | [Up](logical-replication.html "Chapter 31. Logical Replication") |  [Next](logical-replication-architecture.html "31.7. Architecture") |
-| 31.5. Conflicts                                               |       [Home](index.html "PostgreSQL 17devel Documentation")      |                                                  31.7. Architecture |

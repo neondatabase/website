@@ -1,11 +1,3 @@
-
-
-|                31.10. Configuration Settings                |                                                                  |                                 |                                                       |                                                                    |
-| :---------------------------------------------------------: | :--------------------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](logical-replication-security.html "31.9. Security")  | [Up](logical-replication.html "Chapter 31. Logical Replication") | Chapter 31. Logical Replication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logical-replication-quick-setup.html "31.11. Quick Setup") |
-
-***
-
 ## 31.10. Configuration Settings [#](#LOGICAL-REPLICATION-CONFIG)
 
   * *   [31.10.1. Publishers](logical-replication-config.html#LOGICAL-REPLICATION-CONFIG-PUBLISHER)
@@ -36,10 +28,3 @@ Logical replication walsender is also affected by [`wal_sender_timeout`](runtime
 [`max_parallel_apply_workers_per_subscription`](runtime-config-replication.html#GUC-MAX-PARALLEL-APPLY-WORKERS-PER-SUBSCRIPTION) controls the amount of parallelism for streaming of in-progress transactions with subscription parameter `streaming = parallel`.
 
 Logical replication workers are also affected by [`wal_receiver_timeout`](runtime-config-replication.html#GUC-WAL-RECEIVER-TIMEOUT), [`wal_receiver_status_interval`](runtime-config-replication.html#GUC-WAL-RECEIVER-STATUS-INTERVAL) and [`wal_retrieve_retry_interval`](runtime-config-replication.html#GUC-WAL-RETRIEVE-RETRY-INTERVAL).
-
-***
-
-|                                                             |                                                                  |                                                                    |
-| :---------------------------------------------------------- | :--------------------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](logical-replication-security.html "31.9. Security")  | [Up](logical-replication.html "Chapter 31. Logical Replication") |  [Next](logical-replication-quick-setup.html "31.11. Quick Setup") |
-| 31.9. Security                                              |       [Home](index.html "PostgreSQL 17devel Documentation")      |                                                 31.11. Quick Setup |

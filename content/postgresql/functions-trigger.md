@@ -1,11 +1,3 @@
-
-
-|                        9.28. Trigger Functions                        |                                                           |                                    |                                                       |                                                                        |
-| :-------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](functions-admin.html "9.27. System Administration Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-event-triggers.html "9.29. Event Trigger Functions") |
-
-***
-
 ## 9.28. Trigger Functions [#](#FUNCTIONS-TRIGGER)
 
 While many uses of triggers involve user-written trigger functions, PostgreSQL provides a few built-in trigger functions that can be used directly in user-defined triggers. These are summarized in [Table 9.103](functions-trigger.html#BUILTIN-TRIGGERS-TABLE "Table 9.103. Built-In Trigger Functions"). (Additional built-in trigger functions exist, which implement foreign key constraints and deferred index constraints. Those are not documented here since users need not use them directly.)
@@ -36,10 +28,3 @@ FOR EACH ROW EXECUTE FUNCTION suppress_redundant_updates_trigger();
 ```
 
 In most cases, you need to fire this trigger last for each row, so that it does not override other triggers that might wish to alter the row. Bearing in mind that triggers fire in name order, you would therefore choose a trigger name that comes after the name of any other trigger you might have on the table. (Hence the “z” prefix in the example.)
-
-***
-
-|                                                                       |                                                           |                                                                        |
-| :-------------------------------------------------------------------- | :-------------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](functions-admin.html "9.27. System Administration Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-event-triggers.html "9.29. Event Trigger Functions") |
-| 9.27. System Administration Functions                                 |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                          9.29. Event Trigger Functions |

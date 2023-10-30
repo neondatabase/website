@@ -1,11 +1,3 @@
-
-
-|                    3.6. Inheritance                   |                                                             |                              |                                                       |                                                     |
-| :---------------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](tutorial-window.html "3.5. Window Functions")  | [Up](tutorial-advanced.html "Chapter 3. Advanced Features") | Chapter 3. Advanced Features | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-conclusion.html "3.7. Conclusion") |
-
-***
-
 ## 3.6. Inheritance [#](#TUTORIAL-INHERITANCE)
 
 Inheritance is a concept from object-oriented databases. It opens up interesting new possibilities of database design.
@@ -96,10 +88,3 @@ Here the `ONLY` before `cities` indicates that the query should be run over only
 ### Note
 
 Although inheritance is frequently useful, it has not been integrated with unique constraints or foreign keys, which limits its usefulness. See [Section 5.10](ddl-inherit.html "5.10. Inheritance") for more detail.
-
-***
-
-|                                                       |                                                             |                                                     |
-| :---------------------------------------------------- | :---------------------------------------------------------: | --------------------------------------------------: |
-| [Prev](tutorial-window.html "3.5. Window Functions")  | [Up](tutorial-advanced.html "Chapter 3. Advanced Features") |  [Next](tutorial-conclusion.html "3.7. Conclusion") |
-| 3.5. Window Functions                                 |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                     3.7. Conclusion |

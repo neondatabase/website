@@ -1,11 +1,3 @@
-
-
-|     14.3. Controlling the Planner with Explicit `JOIN` Clauses     |                                                            |                              |                                                       |                                                      |
-| :----------------------------------------------------------------: | :--------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](planner-stats.html "14.2. Statistics Used by the Planner")  | [Up](performance-tips.html "Chapter 14. Performance Tips") | Chapter 14. Performance Tips | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](populate.html "14.4. Populating a Database") |
-
-***
-
 ## 14.3. Controlling the Planner with Explicit `JOIN` Clauses [#](#EXPLICIT-JOINS)
 
 It is possible to control the query planner to some extent by using the explicit `JOIN` syntax. To see why this matters, we first need some background.
@@ -83,10 +75,3 @@ SELECT * FROM x, y, a, b, c WHERE something AND somethingelse;
 This usually results in a better plan than planning the subquery separately. (For example, the outer `WHERE` conditions might be such that joining X to A first eliminates many rows of A, thus avoiding the need to form the full logical output of the subquery.) But at the same time, we have increased the planning time; here, we have a five-way join problem replacing two separate three-way join problems. Because of the exponential growth of the number of possibilities, this makes a big difference. The planner tries to avoid getting stuck in huge join search problems by not collapsing a subquery if more than `from_collapse_limit` `FROM` items would result in the parent query. You can trade off planning time against quality of plan by adjusting this run-time parameter up or down.
 
 [from\_collapse\_limit](runtime-config-query.html#GUC-FROM-COLLAPSE-LIMIT) and [join\_collapse\_limit](runtime-config-query.html#GUC-JOIN-COLLAPSE-LIMIT) are similarly named because they do almost the same thing: one controls when the planner will “flatten out” subqueries, and the other controls when it will flatten out explicit joins. Typically you would either set `join_collapse_limit` equal to `from_collapse_limit` (so that explicit joins and subqueries act similarly) or set `join_collapse_limit` to 1 (if you want to control join order with explicit joins). But you might set them differently if you are trying to fine-tune the trade-off between planning time and run time.
-
-***
-
-|                                                                    |                                                            |                                                      |
-| :----------------------------------------------------------------- | :--------------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](planner-stats.html "14.2. Statistics Used by the Planner")  | [Up](performance-tips.html "Chapter 14. Performance Tips") |  [Next](populate.html "14.4. Populating a Database") |
-| 14.2. Statistics Used by the Planner                               |    [Home](index.html "PostgreSQL 17devel Documentation")   |                          14.4. Populating a Database |

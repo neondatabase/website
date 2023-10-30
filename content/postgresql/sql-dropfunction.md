@@ -1,11 +1,3 @@
-
-
-|                      DROP FUNCTION                      |                                        |              |                                                       |                                          |
-| :-----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-dropforeigntable.html "DROP FOREIGN TABLE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropgroup.html "DROP GROUP") |
-
-***
-
 ## DROP FUNCTION
 
 DROP FUNCTION — remove a function
@@ -95,10 +87,3 @@ This command conforms to the SQL standard, with these PostgreSQL extensions:
 ## See Also
 
 [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [ALTER FUNCTION](sql-alterfunction.html "ALTER FUNCTION"), [DROP PROCEDURE](sql-dropprocedure.html "DROP PROCEDURE"), [DROP ROUTINE](sql-droproutine.html "DROP ROUTINE")
-
-***
-
-|                                                         |                                                       |                                          |
-| :------------------------------------------------------ | :---------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-dropforeigntable.html "DROP FOREIGN TABLE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropgroup.html "DROP GROUP") |
-| DROP FOREIGN TABLE                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                               DROP GROUP |

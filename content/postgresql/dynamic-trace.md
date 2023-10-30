@@ -1,11 +1,3 @@
-
-
-|                    28.5. Dynamic Tracing                    |                                                                  |                                          |                                                       |                                                             |
-| :---------------------------------------------------------: | :--------------------------------------------------------------- | :--------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](progress-reporting.html "28.4. Progress Reporting")  | [Up](monitoring.html "Chapter 28. Monitoring Database Activity") | Chapter 28. Monitoring Database Activity | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](diskusage.html "Chapter 29. Monitoring Disk Usage") |
-
-***
-
 ## 28.5. Dynamic Tracing [#](#DYNAMIC-TRACE)
 
   * *   [28.5.1. Compiling for Dynamic Tracing](dynamic-trace.html#COMPILING-FOR-TRACE)
@@ -202,10 +194,3 @@ There are a few things to be careful about when adding trace macros to the C cod
     ```
 
     Each trace macro has a corresponding `ENABLED` macro.
-
-***
-
-|                                                             |                                                                  |                                                             |
-| :---------------------------------------------------------- | :--------------------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](progress-reporting.html "28.4. Progress Reporting")  | [Up](monitoring.html "Chapter 28. Monitoring Database Activity") |  [Next](diskusage.html "Chapter 29. Monitoring Disk Usage") |
-| 28.4. Progress Reporting                                    |       [Home](index.html "PostgreSQL 17devel Documentation")      |                           Chapter 29. Monitoring Disk Usage |

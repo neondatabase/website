@@ -1,11 +1,3 @@
-
-
-|                 54.1. Overview                 |                                             |                          |                                                       |                                                                            |
-| :--------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------: |
-| [Prev](views.html "Chapter 54. System Views")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-available-extensions.html "54.2. pg_available_extensions") |
-
-***
-
 ## 54.1. Overview [#](#VIEWS-OVERVIEW)
 
 [Table 54.1](views-overview.html#VIEW-TABLE "Table 54.1. System Views") lists the system views. More detailed documentation of each catalog follows below. Except where noted, all the views described here are read-only.
@@ -49,10 +41,3 @@
 | [`pg_user_mappings`](view-pg-user-mappings.html "54.34. pg_user_mappings")                                             | user mappings                                                         |
 | [`pg_views`](view-pg-views.html "54.35. pg_views")                                                                     | views                                                                 |
 | [`pg_wait_events`](view-pg-wait-events.html "54.36. pg_wait_events")                                                   | wait events                                                           |
-
-***
-
-|                                                |                                                       |                                                                            |
-| :--------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------------------: |
-| [Prev](views.html "Chapter 54. System Views")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-available-extensions.html "54.2. pg_available_extensions") |
-| Chapter 54. System Views                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                            54.2. `pg_available_extensions` |

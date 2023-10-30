@@ -1,11 +1,3 @@
-
-
-|                  11.4. Indexes and `ORDER BY`                 |                                          |                     |                                                       |                                                                       |
-| :-----------------------------------------------------------: | :--------------------------------------- | :-----------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](indexes-multicolumn.html "11.3. Multicolumn Indexes")  | [Up](indexes.html "Chapter 11. Indexes") | Chapter 11. Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](indexes-bitmap-scans.html "11.5. Combining Multiple Indexes") |
-
-***
-
 ## 11.4. Indexes and `ORDER BY` [#](#INDEXES-ORDERING)
 
 In addition to simply finding the rows to be returned by a query, an index may be able to deliver them in a specific sorted order. This allows a query's `ORDER BY` specification to be honored without a separate sorting step. Of the index types currently supported by PostgreSQL, only B-tree can produce sorted output — the other index types return matching rows in an unspecified, implementation-dependent order.
@@ -27,10 +19,3 @@ An index stored in ascending order with nulls first can satisfy either `ORDER BY
 You might wonder why bother providing all four options, when two options together with the possibility of backward scan would cover all the variants of `ORDER BY`. In single-column indexes the options are indeed redundant, but in multicolumn indexes they can be useful. Consider a two-column index on `(x, y)`: this can satisfy `ORDER BY x, y` if we scan forward, or `ORDER BY x DESC, y DESC` if we scan backward. But it might be that the application frequently needs to use `ORDER BY x ASC, y DESC`. There is no way to get that ordering from a plain index, but it is possible if the index is defined as `(x ASC, y DESC)` or `(x DESC, y ASC)`.
 
 Obviously, indexes with non-default sort orderings are a fairly specialized feature, but sometimes they can produce tremendous speedups for certain queries. Whether it's worth maintaining such an index depends on how often you use queries that require a special sort ordering.
-
-***
-
-|                                                               |                                                       |                                                                       |
-| :------------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](indexes-multicolumn.html "11.3. Multicolumn Indexes")  |        [Up](indexes.html "Chapter 11. Indexes")       |  [Next](indexes-bitmap-scans.html "11.5. Combining Multiple Indexes") |
-| 11.3. Multicolumn Indexes                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                      11.5. Combining Multiple Indexes |

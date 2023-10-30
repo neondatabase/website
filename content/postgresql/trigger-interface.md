@@ -1,11 +1,3 @@
-
-
-|                 39.3. Writing Trigger Functions in C                 |                                            |                      |                                                       |                                                                  |
-| :------------------------------------------------------------------: | :----------------------------------------- | :------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](trigger-datachanges.html "39.2. Visibility of Data Changes")  | [Up](triggers.html "Chapter 39. Triggers") | Chapter 39. Triggers | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](trigger-example.html "39.4. A Complete Trigger Example") |
-
-***
-
 ## 39.3. Writing Trigger Functions in C [#](#TRIGGER-INTERFACE)
 
 This section describes the low-level details of the interface to a trigger function. This information is only needed when writing trigger functions in C. If you are using a higher-level language then these details are handled for you. In most cases you should consider using a procedural language before writing your triggers in C. The documentation of each procedural language explains how to write a trigger in that language.
@@ -165,10 +157,3 @@ where the members are defined as follows:
 To allow queries issued through SPI to reference transition tables, see [SPI\_register\_trigger\_data](spi-spi-register-trigger-data.html "SPI_register_trigger_data").
 
 A trigger function must return either a `HeapTuple` pointer or a `NULL` pointer (*not* an SQL null value, that is, do not set *`isNull`* true). Be careful to return either `tg_trigtuple` or `tg_newtuple`, as appropriate, if you don't want to modify the row being operated on.
-
-***
-
-|                                                                      |                                                       |                                                                  |
-| :------------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](trigger-datachanges.html "39.2. Visibility of Data Changes")  |       [Up](triggers.html "Chapter 39. Triggers")      |  [Next](trigger-example.html "39.4. A Complete Trigger Example") |
-| 39.2. Visibility of Data Changes                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                 39.4. A Complete Trigger Example |

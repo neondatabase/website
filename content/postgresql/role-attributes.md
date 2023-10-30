@@ -1,11 +1,3 @@
-
-
-|                22.2. Role Attributes                |                                                    |                            |                                                       |                                                       |
-| :-------------------------------------------------: | :------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](database-roles.html "22.1. Database Roles")  | [Up](user-manag.html "Chapter 22. Database Roles") | Chapter 22. Database Roles | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](role-membership.html "22.3. Role Membership") |
-
-***
-
 ## 22.2. Role Attributes [#](#ROLE-ATTRIBUTES)
 
 A database role can have a number of attributes that define its privileges and interact with the client authentication system.
@@ -68,10 +60,3 @@ ALTER ROLE myname SET enable_indexscan TO off;
 This will save the setting (but not set it immediately). In subsequent connections by this role it will appear as though `SET enable_indexscan TO off` had been executed just before the session started. You can still alter this setting during the session; it will only be the default. To remove a role-specific default setting, use `ALTER ROLE rolename RESET varname`. Note that role-specific defaults attached to roles without `LOGIN` privilege are fairly useless, since they will never be invoked.
 
 When a non-superuser creates a role using the `CREATEROLE` privilege, the created role is automatically granted back to the creating user, just as if the bootstrap superuser had executed the command `GRANT created_user TO creating_user WITH ADMIN TRUE, SET FALSE, INHERIT FALSE`. Since a `CREATEROLE` user can only exercise special privileges with regard to an existing role if they have `ADMIN OPTION` on it, this grant is just sufficient to allow a `CREATEROLE` user to administer the roles they created. However, because it is created with `INHERIT FALSE, SET FALSE`, the `CREATEROLE` user doesn't inherit the privileges of the created role, nor can it access the privileges of that role using `SET ROLE`. However, since any user who has `ADMIN OPTION` on a role can grant membership in that role to any other user, the `CREATEROLE` user can gain access to the created role by simply granting that role back to themselves with the `INHERIT` and/or `SET` options. Thus, the fact that privileges are not inherited by default nor is `SET ROLE` granted by default is a safeguard against accidents, not a security feature. Also note that, because this automatic grant is granted by the bootstrap user, it cannot be removed or changed by the `CREATEROLE` user; however, any superuser could revoke it, modify it, and/or issue additional such grants to other `CREATEROLE` users. Whichever `CREATEROLE` users have `ADMIN OPTION` on a role at any given time can administer it.
-
-***
-
-|                                                     |                                                       |                                                       |
-| :-------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](database-roles.html "22.1. Database Roles")  |   [Up](user-manag.html "Chapter 22. Database Roles")  |  [Next](role-membership.html "22.3. Role Membership") |
-| 22.1. Database Roles                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                 22.3. Role Membership |

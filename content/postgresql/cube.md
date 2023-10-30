@@ -1,11 +1,3 @@
-
-
-|                 F.11. cube — a multi-dimensional cube data type                |                                                                             |                                                        |                                                       |                                                                             |
-| :----------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](citext.html "F.10. citext — a case-insensitive character string type")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |
-
-***
-
 ## F.11. cube — a multi-dimensional cube data type [#](#CUBE)
 
   * *   [F.11.1. Syntax](cube.html#CUBE-SYNTAX)
@@ -170,10 +162,3 @@ My thanks are primarily to Prof. Joe Hellerstein ([https://dsf.berkeley.edu/jmh/
 Minor updates to this package were made by Bruno Wolff III `<bruno@wolff.to>` in August/September of 2002. These include changing the precision from single precision to double precision and adding some new functions.
 
 Additional updates were made by Joshua Reich `<josh@root.net>` in July 2006. These include `cube(float8[], float8[])` and cleaning up the code to use the V1 call protocol instead of the deprecated V0 protocol.
-
-***
-
-|                                                                                |                                                                             |                                                                             |
-| :----------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](citext.html "F.10. citext — a case-insensitive character string type")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |
-| F.10. citext — a case-insensitive character string type                        |            [Home](index.html "PostgreSQL 17devel Documentation")            |                        F.12. dblink — connect to other PostgreSQL databases |

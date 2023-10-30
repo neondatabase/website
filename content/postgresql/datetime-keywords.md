@@ -1,11 +1,3 @@
-
-
-|                                 B.3. Date/Time Key Words                                |                                                              |                               |                                                       |                                                                          |
-| :-------------------------------------------------------------------------------------: | :----------------------------------------------------------- | :---------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](datetime-invalid-input.html "B.2. Handling of Invalid or Ambiguous Timestamps")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") | Appendix B. Date/Time Support | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datetime-config-files.html "B.4. Date/Time Configuration Files") |
-
-***
-
 ## B.3. Date/Time Key Words [#](#DATETIME-KEYWORDS)
 
 [Table B.1](datetime-keywords.html#DATETIME-MONTH-TABLE "Table B.1. Month Names") shows the tokens that are recognized as names of months.
@@ -57,10 +49,3 @@
 | `ON`                | Ignored                   |
 | `PM`                | Time is on or after 12:00 |
 | `T`                 | Next field is time        |
-
-***
-
-|                                                                                         |                                                              |                                                                          |
-| :-------------------------------------------------------------------------------------- | :----------------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](datetime-invalid-input.html "B.2. Handling of Invalid or Ambiguous Timestamps")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") |  [Next](datetime-config-files.html "B.4. Date/Time Configuration Files") |
-| B.2. Handling of Invalid or Ambiguous Timestamps                                        |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                       B.4. Date/Time Configuration Files |

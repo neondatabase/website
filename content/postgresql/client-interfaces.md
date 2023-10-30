@@ -1,11 +1,3 @@
-
-
-|                    Part IV. Client Interfaces                    |                                                     |                                  |                                                       |                                                     |
-| :--------------------------------------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](regress-coverage.html "33.5. Test Coverage Examination")  | [Up](index.html "PostgreSQL 17devel Documentation") | PostgreSQL 17devel Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq.html "Chapter 34. libpq — C Library") |
-
-***
-
 # Part IV. Client Interfaces
 
 This part describes the client programming interfaces distributed with PostgreSQL. Each of these chapters can be read independently. Note that there are many other programming interfaces for client programs that are distributed separately and contain their own documentation ([Appendix H](external-projects.html "Appendix H. External Projects") lists some of the more popular ones). Readers of this part should be familiar with using SQL commands to manipulate and query the database (see [Part II](sql.html "Part II. The SQL Language")) and of course with the programming language that the interface uses.
@@ -133,10 +125,3 @@ This part describes the client programming interfaces distributed with PostgreSQ
     * [37.64. `view_routine_usage`](infoschema-view-routine-usage.html)
     * [37.65. `view_table_usage`](infoschema-view-table-usage.html)
     * [37.66. `views`](infoschema-views.html)
-
-***
-
-|                                                                  |                                                       |                                                     |
-| :--------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](regress-coverage.html "33.5. Test Coverage Examination")  |  [Up](index.html "PostgreSQL 17devel Documentation")  |  [Next](libpq.html "Chapter 34. libpq — C Library") |
-| 33.5. Test Coverage Examination                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                       Chapter 34. libpq — C Library |

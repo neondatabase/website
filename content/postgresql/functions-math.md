@@ -1,10 +1,3 @@
-
-|                   9.3. Mathematical Functions and Operators                  |                                                           |                                    |                                                       |                                                                      |
-| :--------------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](functions-comparison.html "9.2. Comparison Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-string.html "9.4. String Functions and Operators") |
-
-***
-
 ## 9.3. Mathematical Functions and Operators [#](#FUNCTIONS-MATH)
 
 Mathematical operators are provided for many PostgreSQL types. For types without standard mathematical conventions (e.g., date/time types) we describe the actual behavior in subsequent sections.
@@ -131,10 +124,3 @@ Another way to work with angles measured in degrees is to use the unit transform
 | `asinh` ( `double precision` ) → `double precision`Inverse hyperbolic sine`asinh(1)` → `0.881373587019543`       |
 | `acosh` ( `double precision` ) → `double precision`Inverse hyperbolic cosine`acosh(1)` → `0`                     |
 | `atanh` ( `double precision` ) → `double precision`Inverse hyperbolic tangent`atanh(0.5)` → `0.5493061443340548` |
-
-***
-
-|                                                                              |                                                           |                                                                      |
-| :--------------------------------------------------------------------------- | :-------------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](functions-comparison.html "9.2. Comparison Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-string.html "9.4. String Functions and Operators") |
-| 9.2. Comparison Functions and Operators                                      |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                  9.4. String Functions and Operators |

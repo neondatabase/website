@@ -1,11 +1,3 @@
-
-
-|              5.2. Default Values             |                                             |                            |                                                       |                                                              |
-| :------------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](ddl-basics.html "5.1. Table Basics")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-generated-columns.html "5.3. Generated Columns") |
-
-***
-
 ## 5.2. Default Values [#](#DDL-DEFAULT)
 
 A column can be assigned a default value. When a new row is created and no values are specified for some of the columns, those columns will be filled with their respective default values. A data manipulation command can also request explicitly that a column be set to its default value, without having to know what that value is. (Details about data manipulation commands are in [Chapter 6](dml.html "Chapter 6. Data Manipulation").)
@@ -44,10 +36,3 @@ CREATE TABLE products (
 ```
 
 The `SERIAL` shorthand is discussed further in [Section 8.1.4](datatype-numeric.html#DATATYPE-SERIAL "8.1.4. Serial Types").
-
-***
-
-|                                              |                                                       |                                                              |
-| :------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](ddl-basics.html "5.1. Table Basics")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](ddl-generated-columns.html "5.3. Generated Columns") |
-| 5.1. Table Basics                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                       5.3. Generated Columns |

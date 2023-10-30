@@ -1,11 +1,3 @@
-
-
-|               38.13. User-Defined Types              |                                               |                           |                                                       |                                                     |
-| :--------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](xaggr.html "38.12. User-Defined Aggregates")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xoper.html "38.14. User-Defined Operators") |
-
-***
-
 ## 38.13. User-Defined Types [#](#XTYPES)
 
 * [38.13.1. TOAST Considerations](xtypes.html#XTYPES-TOAST)
@@ -184,10 +176,3 @@ C functions that know how to work with an expanded representation typically fall
 The TOAST infrastructure not only allows regular varlena values to be distinguished from expanded values, but also distinguishes “read-write” and “read-only” pointers to expanded values. C functions that only need to examine an expanded value, or will only change it in safe and non-semantically-visible ways, need not care which type of pointer they receive. C functions that produce a modified version of an input value are allowed to modify an expanded input value in-place if they receive a read-write pointer, but must not modify the input if they receive a read-only pointer; in that case they have to copy the value first, producing a new value to modify. A C function that has constructed a new expanded value should always return a read-write pointer to it. Also, a C function that is modifying a read-write expanded value in-place should take care to leave the value in a sane state if it fails partway through.
 
 For examples of working with expanded values, see the standard array infrastructure, particularly `src/backend/utils/adt/array_expanded.c`.
-
-***
-
-|                                                      |                                                       |                                                     |
-| :--------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](xaggr.html "38.12. User-Defined Aggregates")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xoper.html "38.14. User-Defined Operators") |
-| 38.12. User-Defined Aggregates                       | [Home](index.html "PostgreSQL 17devel Documentation") |                       38.14. User-Defined Operators |

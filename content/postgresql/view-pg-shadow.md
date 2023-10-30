@@ -1,11 +1,3 @@
-
-
-|                  54.25. `pg_shadow`                 |                                             |                          |                                                       |                                                                       |
-| :-------------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](view-pg-settings.html "54.24. pg_settings")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-shmem-allocations.html "54.26. pg_shmem_allocations") |
-
-***
-
 ## 54.25. `pg_shadow` [#](#VIEW-PG-SHADOW)
 
 The view `pg_shadow` exists for backwards compatibility: it emulates a catalog that existed in PostgreSQL before version 8.1. It shows properties of all roles that are marked as `rolcanlogin` in [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").
@@ -25,10 +17,3 @@ The name stems from the fact that this table should not be readable by the publi
 | `passwd` `text`Password (possibly encrypted); null if none. See [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid") for details of how encrypted passwords are stored. |
 | `valuntil` `timestamptz`Password expiry time (only used for password authentication)                                                                                       |
 | `useconfig` `text[]`Session defaults for run-time configuration variables                                                                                                  |
-
-***
-
-|                                                     |                                                       |                                                                       |
-| :-------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](view-pg-settings.html "54.24. pg_settings")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-shmem-allocations.html "54.26. pg_shmem_allocations") |
-| 54.24. `pg_settings`                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                         54.26. `pg_shmem_allocations` |

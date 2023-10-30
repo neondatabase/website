@@ -1,11 +1,3 @@
-
-
-|                     49.2. Logical Decoding Concepts                     |                                                           |                              |                                                       |                                                                                          |
-| :---------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------------: |
-| [Prev](logicaldecoding-example.html "49.1. Logical Decoding Examples")  | [Up](logicaldecoding.html "Chapter 49. Logical Decoding") | Chapter 49. Logical Decoding | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logicaldecoding-walsender.html "49.3. Streaming Replication Protocol Interface") |
-
-***
-
 ## 49.2. Logical Decoding Concepts [#](#LOGICALDECODING-EXPLANATION)
 
   * *   [49.2.1. Logical Decoding](logicaldecoding-explanation.html#LOGICALDECODING-EXPLANATION-LOG-DEC)
@@ -52,10 +44,3 @@ Output plugins transform the data from the write-ahead log's internal representa
 When a new replication slot is created using the streaming replication interface (see [CREATE\_REPLICATION\_SLOT](protocol-replication.html#PROTOCOL-REPLICATION-CREATE-REPLICATION-SLOT)), a snapshot is exported (see [Section 9.27.5](functions-admin.html#FUNCTIONS-SNAPSHOT-SYNCHRONIZATION "9.27.5. Snapshot Synchronization Functions")), which will show exactly the state of the database after which all changes will be included in the change stream. This can be used to create a new replica by using [`SET TRANSACTION SNAPSHOT`](sql-set-transaction.html "SET TRANSACTION") to read the state of the database at the moment the slot was created. This transaction can then be used to dump the database's state at that point in time, which afterwards can be updated using the slot's contents without losing any changes.
 
 Creation of a snapshot is not always possible. In particular, it will fail when connected to a hot standby. Applications that do not require snapshot export may suppress it with the `NOEXPORT_SNAPSHOT` option.
-
-***
-
-|                                                                         |                                                           |                                                                                          |
-| :---------------------------------------------------------------------- | :-------------------------------------------------------: | ---------------------------------------------------------------------------------------: |
-| [Prev](logicaldecoding-example.html "49.1. Logical Decoding Examples")  | [Up](logicaldecoding.html "Chapter 49. Logical Decoding") |  [Next](logicaldecoding-walsender.html "49.3. Streaming Replication Protocol Interface") |
-| 49.1. Logical Decoding Examples                                         |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                           49.3. Streaming Replication Protocol Interface |

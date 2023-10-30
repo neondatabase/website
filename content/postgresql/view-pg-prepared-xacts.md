@@ -1,11 +1,3 @@
-
-
-|                         54.16. `pg_prepared_xacts`                        |                                             |                          |                                                       |                                                                         |
-| :-----------------------------------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](view-pg-prepared-statements.html "54.15. pg_prepared_statements")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-publication-tables.html "54.17. pg_publication_tables") |
-
-***
-
 ## 54.16. `pg_prepared_xacts` [#](#VIEW-PG-PREPARED-XACTS)
 
 The view `pg_prepared_xacts` displays information about transactions that are currently prepared for two-phase commit (see [PREPARE TRANSACTION](sql-prepare-transaction.html "PREPARE TRANSACTION") for details).
@@ -25,10 +17,3 @@ The view `pg_prepared_xacts` displays information about transactions that are cu
 \
 
 When the `pg_prepared_xacts` view is accessed, the internal transaction manager data structures are momentarily locked, and a copy is made for the view to display. This ensures that the view produces a consistent set of results, while not blocking normal operations longer than necessary. Nonetheless there could be some impact on database performance if this view is frequently accessed.
-
-***
-
-|                                                                           |                                                       |                                                                         |
-| :------------------------------------------------------------------------ | :---------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](view-pg-prepared-statements.html "54.15. pg_prepared_statements")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-publication-tables.html "54.17. pg_publication_tables") |
-| 54.15. `pg_prepared_statements`                                           | [Home](index.html "PostgreSQL 17devel Documentation") |                                          54.17. `pg_publication_tables` |

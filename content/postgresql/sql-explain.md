@@ -1,11 +1,3 @@
-
-
-|               EXPLAIN               |                                        |              |                                                       |                                 |
-| :---------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------: |
-| [Prev](sql-execute.html "EXECUTE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-fetch.html "FETCH") |
-
-***
-
 ## EXPLAIN
 
 EXPLAIN — show the execution plan of a statement
@@ -277,10 +269,3 @@ Note that in this syntax, the options must be specified in exactly the order sho
 ## See Also
 
 [ANALYZE](sql-analyze.html "ANALYZE")
-
-***
-
-|                                     |                                                       |                                 |
-| :---------------------------------- | :---------------------------------------------------: | ------------------------------: |
-| [Prev](sql-execute.html "EXECUTE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-fetch.html "FETCH") |
-| EXECUTE                             | [Home](index.html "PostgreSQL 17devel Documentation") |                           FETCH |

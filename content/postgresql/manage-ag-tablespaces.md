@@ -1,11 +1,3 @@
-
-
-|                       23.6. Tablespaces                      |                                                                |                                |                                                       |                                                  |
-| :----------------------------------------------------------: | :------------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](manage-ag-dropdb.html "23.5. Destroying a Database")  | [Up](managing-databases.html "Chapter 23. Managing Databases") | Chapter 23. Managing Databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](charset.html "Chapter 24. Localization") |
-
-***
-
 ## 23.6. Tablespaces [#](#MANAGE-AG-TABLESPACES)
 
 Tablespaces in PostgreSQL allow database administrators to define locations in the file system where the files representing database objects can be stored. Once created, a tablespace can be referred to by name when creating database objects.
@@ -70,10 +62,3 @@ SELECT spcname FROM pg_tablespace;
 The [psql](app-psql.html "psql") program's `\db` meta-command is also useful for listing the existing tablespaces.
 
 The directory `$PGDATA/pg_tblspc` contains symbolic links that point to each of the non-built-in tablespaces defined in the cluster. Although not recommended, it is possible to adjust the tablespace layout by hand by redefining these links. Under no circumstances perform this operation while the server is running. Note that in PostgreSQL 9.1 and earlier you will also need to update the `pg_tablespace` catalog with the new locations. (If you do not, `pg_dump` will continue to output the old tablespace locations.)
-
-***
-
-|                                                              |                                                                |                                                  |
-| :----------------------------------------------------------- | :------------------------------------------------------------: | -----------------------------------------------: |
-| [Prev](manage-ag-dropdb.html "23.5. Destroying a Database")  | [Up](managing-databases.html "Chapter 23. Managing Databases") |  [Next](charset.html "Chapter 24. Localization") |
-| 23.5. Destroying a Database                                  |      [Home](index.html "PostgreSQL 17devel Documentation")     |                         Chapter 24. Localization |

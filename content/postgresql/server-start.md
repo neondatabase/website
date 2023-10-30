@@ -1,11 +1,3 @@
-
-
-|                 19.3. Starting the Database Server                 |                                                             |                                        |                                                       |                                                                  |
-| :----------------------------------------------------------------: | :---------------------------------------------------------- | :------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](creating-cluster.html "19.2. Creating a Database Cluster")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") | Chapter 19. Server Setup and Operation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](kernel-resources.html "19.4. Managing Kernel Resources") |
-
-***
-
 ## 19.3. Starting the Database Server [#](#SERVER-START)
 
   * *   [19.3.1. Server Start-up Failures](server-start.html#SERVER-START-FAILURES)
@@ -182,10 +174,3 @@ psql: error: connection to server on socket "/tmp/.s.PGSQL.5432" failed: No such
 If the server is indeed running, check that the client's idea of the socket path (here `/tmp`) agrees with the server's [unix\_socket\_directories](runtime-config-connection.html#GUC-UNIX-SOCKET-DIRECTORIES) setting.
 
 A connection failure message always shows the server address or socket path name, which is useful in verifying that the client is trying to connect to the right place. If there is in fact no server listening there, the kernel error message will typically be either `Connection refused` or `No such file or directory`, as illustrated. (It is important to realize that `Connection refused` in this context does *not* mean that the server got your connection request and rejected it. That case will produce a different message, as shown in [Section 21.15](client-authentication-problems.html "21.15. Authentication Problems").) Other error messages such as `Connection timed out` might indicate more fundamental problems, like lack of network connectivity, or a firewall blocking the connection.
-
-***
-
-|                                                                    |                                                             |                                                                  |
-| :----------------------------------------------------------------- | :---------------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](creating-cluster.html "19.2. Creating a Database Cluster")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") |  [Next](kernel-resources.html "19.4. Managing Kernel Resources") |
-| 19.2. Creating a Database Cluster                                  |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                  19.4. Managing Kernel Resources |

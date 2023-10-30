@@ -1,11 +1,3 @@
-
-
-|                          TYPE                          |                                                             |                              |                                                       |                                  |
-| :----------------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -------------------------------: |
-| [Prev](ecpg-sql-set-descriptor.html "SET DESCRIPTOR")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-var.html "VAR") |
-
-***
-
 ## TYPE
 
 TYPE — define a new data type
@@ -115,10 +107,3 @@ t_ind.i_ind = 0
 ## Compatibility
 
 The `TYPE` command is a PostgreSQL extension.
-
-***
-
-|                                                        |                                                             |                                  |
-| :----------------------------------------------------- | :---------------------------------------------------------: | -------------------------------: |
-| [Prev](ecpg-sql-set-descriptor.html "SET DESCRIPTOR")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-var.html "VAR") |
-| SET DESCRIPTOR                                         |    [Home](index.html "PostgreSQL 17devel Documentation")    |                              VAR |

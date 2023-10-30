@@ -1,11 +1,3 @@
-
-
-|                      67.3. B-Tree Support Functions                      |                                               |                            |                                                       |                                                           |
-| :----------------------------------------------------------------------: | :-------------------------------------------- | :------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](btree-behavior.html "67.2. Behavior of B-Tree Operator Classes")  | [Up](btree.html "Chapter 67. B-Tree Indexes") | Chapter 67. B-Tree Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](btree-implementation.html "67.4. Implementation") |
-
-***
-
 ## 67.3. B-Tree Support Functions [#](#BTREE-SUPPORT-FUNCS)
 
 As shown in [Table 38.9](xindex.html#XINDEX-BTREE-SUPPORT-TABLE "Table 38.9. B-Tree Support Functions"), btree defines one required and four optional support functions. The five user-defined methods are:
@@ -95,10 +87,3 @@ As shown in [Table 38.9](xindex.html#XINDEX-BTREE-SUPPORT-TABLE "Table 38.9. 
     The function is passed a pointer to a `local_relopts` struct, which needs to be filled with a set of operator class specific options. The options can be accessed from other support functions using the `PG_HAS_OPCLASS_OPTIONS()` and `PG_GET_OPCLASS_OPTIONS()` macros.
 
     Currently, no B-Tree operator class has an `options` support function. B-tree doesn't allow flexible representation of keys like GiST, SP-GiST, GIN and BRIN do. So, `options` probably doesn't have much application in the current B-tree index access method. Nevertheless, this support function was added to B-tree for uniformity, and will probably find uses during further evolution of B-tree in PostgreSQL.
-
-***
-
-|                                                                          |                                                       |                                                           |
-| :----------------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](btree-behavior.html "67.2. Behavior of B-Tree Operator Classes")  |     [Up](btree.html "Chapter 67. B-Tree Indexes")     |  [Next](btree-implementation.html "67.4. Implementation") |
-| 67.2. Behavior of B-Tree Operator Classes                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                      67.4. Implementation |

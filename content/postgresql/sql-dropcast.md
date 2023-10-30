@@ -1,11 +1,3 @@
-
-
-|                     DROP CAST                    |                                        |              |                                                       |                                                  |
-| :----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-dropaggregate.html "DROP AGGREGATE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropcollation.html "DROP COLLATION") |
-
-***
-
 ## DROP CAST
 
 DROP CAST — remove a cast
@@ -57,10 +49,3 @@ The `DROP CAST` command conforms to the SQL standard.
 ## See Also
 
 [CREATE CAST](sql-createcast.html "CREATE CAST")
-
-***
-
-|                                                  |                                                       |                                                  |
-| :----------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-dropaggregate.html "DROP AGGREGATE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropcollation.html "DROP COLLATION") |
-| DROP AGGREGATE                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                   DROP COLLATION |

@@ -1,11 +1,3 @@
-
-
-|                              SPI\_cursor\_parse\_open                             |                                                      |                           |                                                       |                                                     |
-| :-------------------------------------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](spi-spi-cursor-open-with-paramlist.html "SPI_cursor_open_with_paramlist")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-cursor-find.html "SPI_cursor_find") |
-
-***
-
 ## SPI\_cursor\_parse\_open
 
 SPI\_cursor\_parse\_open — set up a cursor using a query string and parameters
@@ -60,10 +52,3 @@ Callers should always zero out the entire *`options`* struct, then fill whicheve
 ## Return Value
 
 Pointer to portal containing the cursor. Note there is no error return convention; any error will be reported via `elog`.
-
-***
-
-|                                                                                   |                                                       |                                                     |
-| :-------------------------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](spi-spi-cursor-open-with-paramlist.html "SPI_cursor_open_with_paramlist")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-cursor-find.html "SPI_cursor_find") |
-| SPI\_cursor\_open\_with\_paramlist                                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                   SPI\_cursor\_find |

@@ -1,11 +1,3 @@
-
-
-|             55.3. SASL Authentication            |                                                             |                                       |                                                       |                                                                           |
-| :----------------------------------------------: | :---------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------: |
-| [Prev](protocol-flow.html "55.2. Message Flow")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") | Chapter 55. Frontend/Backend Protocol | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](protocol-replication.html "55.4. Streaming Replication Protocol") |
-
-***
-
 ## 55.3. SASL Authentication [#](#SASL-AUTHENTICATION)
 
 * [55.3.1. SCRAM-SHA-256 Authentication](sasl-authentication.html#SASL-SCRAM-SHA-256)
@@ -42,10 +34,3 @@ SCRAM with channel binding prevents such man-in-the-middle attacks by mixing the
 3. Server sends an AuthenticationSASLContinue message, with a SCRAM `server-first-message` as the content.
 4. Client sends a SASLResponse message, with SCRAM `client-final-message` as the content.
 5. Server sends an AuthenticationSASLFinal message, with the SCRAM `server-final-message`, followed immediately by an AuthenticationOk message.
-
-***
-
-|                                                  |                                                             |                                                                           |
-| :----------------------------------------------- | :---------------------------------------------------------: | ------------------------------------------------------------------------: |
-| [Prev](protocol-flow.html "55.2. Message Flow")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") |  [Next](protocol-replication.html "55.4. Streaming Replication Protocol") |
-| 55.2. Message Flow                               |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                      55.4. Streaming Replication Protocol |

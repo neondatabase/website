@@ -1,10 +1,3 @@
-
-|                  8.5. Date/Time Types                  |                                             |                       |                                                       |                                                    |
-| :----------------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](datatype-binary.html "8.4. Binary Data Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-boolean.html "8.6. Boolean Type") |
-
-***
-
 ## 8.5. Date/Time Types [#](#DATATYPE-DATETIME)
 
 * *   [8.5.1. Date/Time Input](datatype-datetime.html#DATATYPE-DATETIME-INPUT)
@@ -392,10 +385,3 @@ The output of the `iso_8601` style matches the “format with designators” des
 | `postgres`          | 1 year 2 mons       | 3 days 04:05:06                | -1 year -2 mons +3 days -04:05:06                 |
 | `postgres_verbose`  | @ 1 year 2 mons     | @ 3 days 4 hours 5 mins 6 secs | @ 1 year 2 mons -3 days 4 hours 5 mins 6 secs ago |
 | `iso_8601`          | P1Y2M               | P3DT4H5M6S                     | P-1Y-2M3D​T-4H-5M-6S                              |
-
-***
-
-|                                                        |                                                       |                                                    |
-| :----------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](datatype-binary.html "8.4. Binary Data Types")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](datatype-boolean.html "8.6. Boolean Type") |
-| 8.4. Binary Data Types                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                  8.6. Boolean Type |

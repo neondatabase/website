@@ -1,11 +1,3 @@
-
-
-|                    ALTER GROUP                   |                                        |              |                                                       |                                            |
-| :----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-alterfunction.html "ALTER FUNCTION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterindex.html "ALTER INDEX") |
-
-***
-
 ## ALTER GROUP
 
 ALTER GROUP — change role name or membership
@@ -72,10 +64,3 @@ There is no `ALTER GROUP` statement in the SQL standard.
 ## See Also
 
 [GRANT](sql-grant.html "GRANT"), [REVOKE](sql-revoke.html "REVOKE"), [ALTER ROLE](sql-alterrole.html "ALTER ROLE")
-
-***
-
-|                                                  |                                                       |                                            |
-| :----------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-alterfunction.html "ALTER FUNCTION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterindex.html "ALTER INDEX") |
-| ALTER FUNCTION                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                ALTER INDEX |

@@ -1,11 +1,3 @@
-
-
-|                              F.48. uuid-ossp — a UUID generator                             |                                                                             |                                                        |                                                       |                                                                         |
-| :-----------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](unaccent.html "F.47. unaccent — a text search dictionary which removes diacritics")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xml2.html "F.49. xml2 — XPath querying and XSLT functionality") |
-
-***
-
 ## F.48. uuid-ossp — a UUID generator [#](#UUID-OSSP)
 
   * *   [F.48.1. `uuid-ossp` Functions](uuid-ossp.html#UUID-OSSP-FUNCTIONS-SECT)
@@ -49,10 +41,3 @@ Historically this module depended on the OSSP UUID library, which accounts for t
 ### F.48.3. Author [#](#UUID-OSSP-AUTHOR)
 
 Peter Eisentraut `<peter_e@gmx.net>`
-
-***
-
-|                                                                                             |                                                                             |                                                                         |
-| :------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](unaccent.html "F.47. unaccent — a text search dictionary which removes diacritics")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](xml2.html "F.49. xml2 — XPath querying and XSLT functionality") |
-| F.47. unaccent — a text search dictionary which removes diacritics                          |            [Home](index.html "PostgreSQL 17devel Documentation")            |                      F.49. xml2 — XPath querying and XSLT functionality |

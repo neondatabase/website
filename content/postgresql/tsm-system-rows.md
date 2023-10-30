@@ -1,11 +1,3 @@
-
-
-|                F.45. tsm\_system\_rows — the `SYSTEM_ROWS` sampling method for `TABLESAMPLE`               |                                                                             |                                                        |                                                       |                                                                                                                |
-| :--------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------------------------------------------: |
-| [Prev](test-decoding.html "F.44. test_decoding — SQL-based test/example module for WAL logical decoding")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tsm-system-time.html "F.46. tsm_system_time —&#xA;   the SYSTEM_TIME sampling method for TABLESAMPLE") |
-
-***
-
 ## F.45. tsm\_system\_rows — the `SYSTEM_ROWS` sampling method for `TABLESAMPLE` [#](#TSM-SYSTEM-ROWS)
 
 * [F.45.1. Examples](tsm-system-rows.html#TSM-SYSTEM-ROWS-EXAMPLES)
@@ -37,10 +29,3 @@ SELECT * FROM my_table TABLESAMPLE SYSTEM_ROWS(100);
 ```
 
 This command will return a sample of 100 rows from the table `my_table` (unless the table does not have 100 visible rows, in which case all its rows are returned).
-
-***
-
-|                                                                                                            |                                                                             |                                                                                                                |
-| :--------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------: |
-| [Prev](test-decoding.html "F.44. test_decoding — SQL-based test/example module for WAL logical decoding")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](tsm-system-time.html "F.46. tsm_system_time —&#xA;   the SYSTEM_TIME sampling method for TABLESAMPLE") |
-| F.44. test\_decoding — SQL-based test/example module for WAL logical decoding                              |            [Home](index.html "PostgreSQL 17devel Documentation")            |                                  F.46. tsm\_system\_time — the `SYSTEM_TIME` sampling method for `TABLESAMPLE` |

@@ -1,11 +1,3 @@
-
-
-|          54.34. `pg_user_mappings`          |                                             |                          |                                                       |                                               |
-| :-----------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](view-pg-user.html "54.33. pg_user")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-views.html "54.35. pg_views") |
-
-***
-
 ## 54.34. `pg_user_mappings` [#](#VIEW-PG-USER-MAPPINGS)
 
 The view `pg_user_mappings` provides access to information about user mappings. This is essentially a publicly readable view of [`pg_user_mapping`](catalog-pg-user-mapping.html "53.65. pg_user_mapping") that leaves out the options field if the user has no rights to use it.
@@ -28,10 +20,3 @@ To protect password information stored as a user mapping option, the `umoptions`
 * current user is the user being mapped, and owns the server or holds `USAGE` privilege on it
 * current user is the server owner and mapping is for `PUBLIC`
 * current user is a superuser
-
-***
-
-|                                             |                                                       |                                               |
-| :------------------------------------------ | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](view-pg-user.html "54.33. pg_user")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-views.html "54.35. pg_views") |
-| 54.33. `pg_user`                            | [Home](index.html "PostgreSQL 17devel Documentation") |                             54.35. `pg_views` |

@@ -1,11 +1,3 @@
-
-
-|                 54.14. `pg_policies`                |                                             |                          |                                                       |                                                                           |
-| :-------------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------: |
-| [Prev](view-pg-matviews.html "54.13. pg_matviews")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-prepared-statements.html "54.15. pg_prepared_statements") |
-
-***
-
 ## 54.14. `pg_policies` [#](#VIEW-PG-POLICIES)
 
 The view `pg_policies` provides access to useful information about each row-level security policy in the database.
@@ -22,10 +14,3 @@ The view `pg_policies` provides access to useful information about each row-leve
 | `cmd` `text`The command type to which the policy is applied                                                                                              |
 | `qual` `text`The expression added to the security barrier qualifications for queries that this policy applies to                                         |
 | `with_check` `text`The expression added to the WITH CHECK qualifications for queries that attempt to add rows to this table                              |
-
-***
-
-|                                                     |                                                       |                                                                           |
-| :-------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------------: |
-| [Prev](view-pg-matviews.html "54.13. pg_matviews")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-prepared-statements.html "54.15. pg_prepared_statements") |
-| 54.13. `pg_matviews`                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                           54.15. `pg_prepared_statements` |

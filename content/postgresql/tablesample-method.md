@@ -1,11 +1,3 @@
-
-
-|                 Chapter 60. Writing a Table Sampling Method                |                                            |                     |                                                       |                                                                                       |
-| :------------------------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------------: |
-| [Prev](fdw-row-locking.html "59.5. Row Locking in Foreign Data Wrappers")  | [Up](internals.html "Part VII. Internals") | Part VII. Internals | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tablesample-support-functions.html "60.1. Sampling Method Support Functions") |
-
-***
-
 ## Chapter 60. Writing a Table Sampling Method
 
 **Table of Contents**
@@ -40,10 +32,3 @@ In addition to function pointers, the `TsmRoutine` struct must provide these add
 The `TsmRoutine` struct type is declared in `src/include/access/tsmapi.h`, which see for additional details.
 
 The table sampling methods included in the standard distribution are good references when trying to write your own. Look into the `src/backend/access/tablesample` subdirectory of the source tree for the built-in sampling methods, and into the `contrib` subdirectory for add-on methods.
-
-***
-
-|                                                                            |                                                       |                                                                                       |
-| :------------------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------------------------: |
-| [Prev](fdw-row-locking.html "59.5. Row Locking in Foreign Data Wrappers")  |       [Up](internals.html "Part VII. Internals")      |  [Next](tablesample-support-functions.html "60.1. Sampling Method Support Functions") |
-| 59.5. Row Locking in Foreign Data Wrappers                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                               60.1. Sampling Method Support Functions |

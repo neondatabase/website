@@ -1,11 +1,3 @@
-
-
-|                           Chapter 8. Data Types                           |                                            |                           |                                                       |                                                     |
-| :-----------------------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](queries-with.html "7.8. WITH Queries (Common Table Expressions)")  | [Up](sql.html "Part II. The SQL Language") | Part II. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-numeric.html "8.1. Numeric Types") |
-
-***
-
 ## Chapter 8. Data Types
 
 **Table of Contents**
@@ -184,10 +176,3 @@ PostgreSQL has a rich set of native data types available to users. Users can add
 The following types (or spellings thereof) are specified by SQL: `bigint`, `bit`, `bit varying`, `boolean`, `char`, `character varying`, `character`, `varchar`, `date`, `double precision`, `integer`, `interval`, `numeric`, `decimal`, `real`, `smallint`, `time` (with or without time zone), `timestamp` (with or without time zone), `xml`.
 
 Each data type has an external representation determined by its input and output functions. Many of the built-in types have obvious external formats. However, several types are either unique to PostgreSQL, such as geometric paths, or have several possible formats, such as the date and time types. Some of the input and output functions are not invertible, i.e., the result of an output function might lose accuracy when compared to the original input.
-
-***
-
-|                                                                           |                                                       |                                                     |
-| :------------------------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](queries-with.html "7.8. WITH Queries (Common Table Expressions)")  |       [Up](sql.html "Part II. The SQL Language")      |  [Next](datatype-numeric.html "8.1. Numeric Types") |
-| 7.8. `WITH` Queries (Common Table Expressions)                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                  8.1. Numeric Types |

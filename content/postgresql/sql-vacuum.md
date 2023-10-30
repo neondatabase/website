@@ -1,11 +1,3 @@
-
-
-|               VACUUM              |                                        |              |                                                       |                                   |
-| :-------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](sql-update.html "UPDATE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-values.html "VALUES") |
-
-***
-
 ## VACUUM
 
 VACUUM — garbage-collect and optionally analyze a database
@@ -177,10 +169,3 @@ Note that in this syntax, the options must be specified in exactly the order sho
 ## See Also
 
 [vacuumdb](app-vacuumdb.html "vacuumdb"), [Section 20.4.4](runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-VACUUM-COST "20.4.4. Cost-based Vacuum Delay"), [Section 25.1.6](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon"), [Section 28.4.5](progress-reporting.html#VACUUM-PROGRESS-REPORTING "28.4.5. VACUUM Progress Reporting"), [Section 28.4.2](progress-reporting.html#CLUSTER-PROGRESS-REPORTING "28.4.2. CLUSTER Progress Reporting")
-
-***
-
-|                                   |                                                       |                                   |
-| :-------------------------------- | :---------------------------------------------------: | --------------------------------: |
-| [Prev](sql-update.html "UPDATE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-values.html "VALUES") |
-| UPDATE                            | [Home](index.html "PostgreSQL 17devel Documentation") |                            VALUES |

@@ -1,11 +1,3 @@
-
-
-|                           37.54. `tables`                           |                                                                    |                                    |                                                       |                                                         |
-| :-----------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](infoschema-table-privileges.html "37.53. table_privileges")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-transforms.html "37.55. transforms") |
-
-***
-
 ## 37.54. `tables` [#](#INFOSCHEMA-TABLES)
 
 The view `tables` contains all tables and views defined in the current database. Only those tables and views are shown that the current user has access to (by way of being the owner or having some privilege).
@@ -26,10 +18,3 @@ The view `tables` contains all tables and views defined in the current database.
 | `is_insertable_into` `yes_or_no``YES` if the table is insertable into, `NO` if not (Base tables are always insertable into, views not necessarily.)                                                            |
 | `is_typed` `yes_or_no``YES` if the table is a typed table, `NO` if not                                                                                                                                         |
 | `commit_action` `character_data`Not yet implemented                                                                                                                                                            |
-
-***
-
-|                                                                     |                                                                    |                                                         |
-| :------------------------------------------------------------------ | :----------------------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](infoschema-table-privileges.html "37.53. table_privileges")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-transforms.html "37.55. transforms") |
-| 37.53. `table_privileges`                                           |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                     37.55. `transforms` |

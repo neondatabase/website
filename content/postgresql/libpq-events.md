@@ -1,11 +1,3 @@
-
-
-|                        34.14. Event System                       |                                                  |                               |                                                       |                                                           |
-| :--------------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](libpq-notice-processing.html "34.13. Notice Processing")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-envars.html "34.15. Environment Variables") |
-
-***
-
 ## 34.14. Event System [#](#LIBPQ-EVENTS)
 
   * *   [34.14.1. Event Types](libpq-events.html#LIBPQ-EVENTS-TYPES)
@@ -330,10 +322,3 @@ myEventProc(PGEventId evtId, void *evtInfo, void *passThrough)
     return true; /* event processing succeeded */
 }
 ```
-
-***
-
-|                                                                  |                                                       |                                                           |
-| :--------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](libpq-notice-processing.html "34.13. Notice Processing")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-envars.html "34.15. Environment Variables") |
-| 34.13. Notice Processing                                         | [Home](index.html "PostgreSQL 17devel Documentation") |                              34.15. Environment Variables |

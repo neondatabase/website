@@ -1,11 +1,3 @@
-
-
-|                           73.2. TOAST                          |                                                            |                                       |                                                       |                                                  |
-| :------------------------------------------------------------: | :--------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](storage-file-layout.html "73.1. Database File Layout")  | [Up](storage.html "Chapter 73. Database Physical Storage") | Chapter 73. Database Physical Storage | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](storage-fsm.html "73.3. Free Space Map") |
-
-***
-
 ## 73.2. TOAST [#](#STORAGE-TOAST)
 
   * *   [73.2.1. Out-of-Line, On-Disk TOAST Storage](storage-toast.html#STORAGE-TOAST-ONDISK)
@@ -55,10 +47,3 @@ Expanded TOAST pointers are useful for complex data types whose on-disk represen
 TOAST pointers to expanded values are further broken down into *read-write* and *read-only* pointers. The pointed-to representation is the same either way, but a function that receives a read-write pointer is allowed to modify the referenced value in-place, whereas one that receives a read-only pointer must not; it must first create a copy if it wants to make a modified version of the value. This distinction and some associated conventions make it possible to avoid unnecessary copying of expanded values during query execution.
 
 For all types of in-memory TOAST pointer, the TOAST management code ensures that no such pointer datum can accidentally get stored on disk. In-memory TOAST pointers are automatically expanded to normal in-line varlena values before storage — and then possibly converted to on-disk TOAST pointers, if the containing tuple would otherwise be too big.
-
-***
-
-|                                                                |                                                            |                                                  |
-| :------------------------------------------------------------- | :--------------------------------------------------------: | -----------------------------------------------: |
-| [Prev](storage-file-layout.html "73.1. Database File Layout")  | [Up](storage.html "Chapter 73. Database Physical Storage") |  [Next](storage-fsm.html "73.3. Free Space Map") |
-| 73.1. Database File Layout                                     |    [Home](index.html "PostgreSQL 17devel Documentation")   |                             73.3. Free Space Map |

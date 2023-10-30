@@ -1,10 +1,3 @@
-
-|                 17.7. Platform-Specific Notes                 |                                                                     |                                           |                                                       |                                                                                      |
-| :-----------------------------------------------------------: | :------------------------------------------------------------------ | :---------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](supported-platforms.html "17.6. Supported Platforms")  | [Up](installation.html "Chapter 17. Installation from Source Code") | Chapter 17. Installation from Source Code | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](install-windows.html "Chapter 18. Installation from Source Code on Windows") |
-
-***
-
 ## 17.7. Platform-Specific Notes [#](#INSTALLATION-PLATFORM-NOTES)
 
 * *   [17.7.1. AIX](installation-platform-notes.html#INSTALLATION-NOTES-AIX)
@@ -190,10 +183,3 @@ make: *** [postgres] Error 1
 ```
 
 your DTrace installation is too old to handle probes in static functions. You need Solaris 10u4 or newer to use DTrace.
-
-***
-
-|                                                               |                                                                     |                                                                                      |
-| :------------------------------------------------------------ | :-----------------------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](supported-platforms.html "17.6. Supported Platforms")  | [Up](installation.html "Chapter 17. Installation from Source Code") |  [Next](install-windows.html "Chapter 18. Installation from Source Code on Windows") |
-| 17.6. Supported Platforms                                     |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                 Chapter 18. Installation from Source Code on Windows |

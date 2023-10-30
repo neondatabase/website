@@ -1,11 +1,3 @@
-
-
-|                 SPI\_finish                 |                                                      |                           |                                                       |                                             |
-| :-----------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ------------------------------------------: |
-| [Prev](spi-spi-connect.html "SPI_connect")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-execute.html "SPI_execute") |
-
-***
-
 ## SPI\_finish
 
 SPI\_finish — disconnect a C function from the SPI manager
@@ -30,10 +22,3 @@ int SPI_finish(void)
 * `SPI_ERROR_UNCONNECTED`
 
     if called from an unconnected C function
-
-***
-
-|                                             |                                                       |                                             |
-| :------------------------------------------ | :---------------------------------------------------: | ------------------------------------------: |
-| [Prev](spi-spi-connect.html "SPI_connect")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-execute.html "SPI_execute") |
-| SPI\_connect                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                SPI\_execute |

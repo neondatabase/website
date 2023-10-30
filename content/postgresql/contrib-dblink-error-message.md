@@ -1,11 +1,3 @@
-
-
-|                         dblink\_error\_message                        |                                                                          |                                                      |                                                       |                                                             |
-| :-------------------------------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](contrib-dblink-get-connections.html "dblink_get_connections")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-send-query.html "dblink_send_query") |
-
-***
-
 ## dblink\_error\_message
 
 dblink\_error\_message — gets last error message on the named connection
@@ -41,10 +33,3 @@ When asynchronous queries are initiated by `dblink_send_query`, the error messag
 
 SELECT dblink_error_message('dtest1');
 ```
-
-***
-
-|                                                                       |                                                                          |                                                             |
-| :-------------------------------------------------------------------- | :----------------------------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](contrib-dblink-get-connections.html "dblink_get_connections")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-send-query.html "dblink_send_query") |
-| dblink\_get\_connections                                              |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                         dblink\_send\_query |

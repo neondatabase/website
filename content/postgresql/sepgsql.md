@@ -1,11 +1,3 @@
-
-
-|   F.39. sepgsql — SELinux-, label-based mandatory access control (MAC) security module   |                                                                             |                                                        |                                                       |                                                                                        |
-| :--------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------------------: |
-| [Prev](seg.html "F.38. seg — a datatype for line segments or floating point intervals")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-spi.html "F.40. spi — Server Programming Interface features/examples") |
-
-***
-
 ## F.39. sepgsql — SELinux-, label-based mandatory access control (MAC) security module [#](#SEPGSQL)
 
   * *   [F.39.1. Overview](sepgsql.html#SEPGSQL-OVERVIEW)
@@ -341,10 +333,3 @@ We reject the [`LOAD`](sql-load.html "LOAD") command across the board, because a
 ### F.39.9. Author [#](#SEPGSQL-AUTHOR)
 
 KaiGai Kohei `<kaigai@ak.jp.nec.com>`
-
-***
-
-|                                                                                          |                                                                             |                                                                                        |
-| :--------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -------------------------------------------------------------------------------------: |
-| [Prev](seg.html "F.38. seg — a datatype for line segments or floating point intervals")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](contrib-spi.html "F.40. spi — Server Programming Interface features/examples") |
-| F.38. seg — a datatype for line segments or floating point intervals                     |            [Home](index.html "PostgreSQL 17devel Documentation")            |                             F.40. spi — Server Programming Interface features/examples |

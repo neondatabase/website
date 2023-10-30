@@ -1,11 +1,3 @@
-
-
-|                   SPI\_modifytuple                  |                                                 |                         |                                                       |                                                 |
-| :-------------------------------------------------: | :---------------------------------------------- | :---------------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](spi-spi-returntuple.html "SPI_returntuple")  | [Up](spi-memory.html "47.3. Memory Management") | 47.3. Memory Management | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-freetuple.html "SPI_freetuple") |
-
-***
-
 ## SPI\_modifytuple
 
 SPI\_modifytuple — create a row by replacing selected fields of a given row
@@ -69,10 +61,3 @@ On error, `SPI_result` is set as follows:
 * `SPI_ERROR_UNCONNECTED`
 
     if SPI is not active
-
-***
-
-|                                                     |                                                       |                                                 |
-| :-------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------: |
-| [Prev](spi-spi-returntuple.html "SPI_returntuple")  |    [Up](spi-memory.html "47.3. Memory Management")    |  [Next](spi-spi-freetuple.html "SPI_freetuple") |
-| SPI\_returntuple                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                  SPI\_freetuple |

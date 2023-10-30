@@ -1,11 +1,3 @@
-
-
-|                 35.5. Example Program                |                                                     |                           |                                                       |                                                           |
-| :--------------------------------------------------: | :-------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](lo-funcs.html "35.4. Server-Side Functions")  | [Up](largeobjects.html "Chapter 35. Large Objects") | Chapter 35. Large Objects | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |
-
-***
-
 ## 35.5. Example Program [#](#LO-EXAMPLESECT)
 
 [Example 35.1](lo-examplesect.html#LO-EXAMPLE "Example 35.1. Large Objects with libpq Example Program") is a sample program which shows how the large object interface in libpq can be used. Parts of the program are commented out but are left in the source for the reader's benefit. This program can also be found in `src/test/examples/testlo.c` in the source distribution.
@@ -285,10 +277,3 @@ main(int argc, char **argv)
     return 0;
 }
 ```
-
-***
-
-|                                                      |                                                       |                                                           |
-| :--------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](lo-funcs.html "35.4. Server-Side Functions")  |  [Up](largeobjects.html "Chapter 35. Large Objects")  |  [Next](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |
-| 35.4. Server-Side Functions                          | [Home](index.html "PostgreSQL 17devel Documentation") |                      Chapter 36. ECPG — Embedded SQL in C |

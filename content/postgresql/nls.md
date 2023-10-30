@@ -1,11 +1,3 @@
-
-
-|                    Chapter 57. Native Language Support                    |                                            |                     |                                                       |                                                         |
-| :-----------------------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](source-conventions.html "56.4. Miscellaneous Coding Conventions")  | [Up](internals.html "Part VII. Internals") | Part VII. Internals | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](nls-translator.html "57.1. For the Translator") |
-
-***
-
 ## Chapter 57. Native Language Support
 
 **Table of Contents**
@@ -21,10 +13,3 @@
 
   * *   [57.2.1. Mechanics](nls-programmer.html#NLS-MECHANICS)
     * [57.2.2. Message-Writing Guidelines](nls-programmer.html#NLS-GUIDELINES)
-
-***
-
-|                                                                           |                                                       |                                                         |
-| :------------------------------------------------------------------------ | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](source-conventions.html "56.4. Miscellaneous Coding Conventions")  |       [Up](internals.html "Part VII. Internals")      |  [Next](nls-translator.html "57.1. For the Translator") |
-| 56.4. Miscellaneous Coding Conventions                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                57.1. For the Translator |

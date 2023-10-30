@@ -1,11 +1,3 @@
-
-
-|                ALTER LARGE OBJECT                |                                        |              |                                                       |                                                                   |
-| :----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](sql-alterlanguage.html "ALTER LANGUAGE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altermaterializedview.html "ALTER MATERIALIZED VIEW") |
-
-***
-
 ## ALTER LARGE OBJECT
 
 ALTER LARGE OBJECT — change the definition of a large object
@@ -40,10 +32,3 @@ There is no `ALTER LARGE OBJECT` statement in the SQL standard.
 ## See Also
 
 [Chapter 35](largeobjects.html "Chapter 35. Large Objects")
-
-***
-
-|                                                  |                                                       |                                                                   |
-| :----------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](sql-alterlanguage.html "ALTER LANGUAGE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altermaterializedview.html "ALTER MATERIALIZED VIEW") |
-| ALTER LANGUAGE                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                           ALTER MATERIALIZED VIEW |

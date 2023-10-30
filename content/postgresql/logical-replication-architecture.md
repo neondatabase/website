@@ -1,11 +1,3 @@
-
-
-|                          31.7. Architecture                         |                                                                  |                                 |                                                       |                                                                 |
-| :-----------------------------------------------------------------: | :--------------------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](logical-replication-restrictions.html "31.6. Restrictions")  | [Up](logical-replication.html "Chapter 31. Logical Replication") | Chapter 31. Logical Replication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logical-replication-monitoring.html "31.8. Monitoring") |
-
-***
-
 ## 31.7. Architecture [#](#LOGICAL-REPLICATION-ARCHITECTURE)
 
 * [31.7.1. Initial Snapshot](logical-replication-architecture.html#LOGICAL-REPLICATION-SNAPSHOT)
@@ -25,10 +17,3 @@ The initial data in existing subscribed tables are snapshotted and copied in a p
 ### Note
 
 The publication [`publish`](sql-createpublication.html#SQL-CREATEPUBLICATION-WITH-PUBLISH) parameter only affects what DML operations will be replicated. The initial data synchronization does not take this parameter into account when copying the existing table data.
-
-***
-
-|                                                                     |                                                                  |                                                                 |
-| :------------------------------------------------------------------ | :--------------------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](logical-replication-restrictions.html "31.6. Restrictions")  | [Up](logical-replication.html "Chapter 31. Logical Replication") |  [Next](logical-replication-monitoring.html "31.8. Monitoring") |
-| 31.6. Restrictions                                                  |       [Home](index.html "PostgreSQL 17devel Documentation")      |                                                31.8. Monitoring |

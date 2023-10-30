@@ -1,11 +1,3 @@
-
-
-|    Chapter 58. Writing a Procedural Language Handler    |                                            |                     |                                                       |                                                                       |
-| :-----------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](nls-programmer.html "57.2. For the Programmer")  | [Up](internals.html "Part VII. Internals") | Part VII. Internals | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](fdwhandler.html "Chapter 59. Writing a Foreign Data Wrapper") |
-
-***
-
 ## Chapter 58. Writing a Procedural Language Handler
 
 All calls to functions that are written in a language other than the current “version 1” interface for compiled languages (this includes functions in user-defined procedural languages and functions written in SQL) go through a *call handler* function for the specific language. It is the responsibility of the call handler to execute the function in a meaningful way, such as by interpreting the supplied source text. This chapter outlines how a new procedural language's call handler can be written.
@@ -33,10 +25,3 @@ If an inline handler is provided by a procedural language, it must be declared a
 It's recommended that you wrap all these function declarations, as well as the `CREATE LANGUAGE` command itself, into an *extension* so that a simple `CREATE EXTENSION` command is sufficient to install the language. See [Section 38.17](extend-extensions.html "38.17. Packaging Related Objects into an Extension") for information about writing extensions.
 
 The procedural languages included in the standard distribution are good references when trying to write your own language handler. Look into the `src/pl` subdirectory of the source tree. The [CREATE LANGUAGE](sql-createlanguage.html "CREATE LANGUAGE") reference page also has some useful details.
-
-***
-
-|                                                         |                                                       |                                                                       |
-| :------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](nls-programmer.html "57.2. For the Programmer")  |       [Up](internals.html "Part VII. Internals")      |  [Next](fdwhandler.html "Chapter 59. Writing a Foreign Data Wrapper") |
-| 57.2. For the Programmer                                | [Home](index.html "PostgreSQL 17devel Documentation") |                            Chapter 59. Writing a Foreign Data Wrapper |

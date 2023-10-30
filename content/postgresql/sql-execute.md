@@ -1,11 +1,3 @@
-
-
-|           EXECUTE           |                                        |              |                                                       |                                     |
-| :-------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-end.html "END")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-explain.html "EXPLAIN") |
-
-***
-
 ## EXECUTE
 
 EXECUTE — execute a prepared statement
@@ -50,10 +42,3 @@ The SQL standard includes an `EXECUTE` statement, but it is only for use in embe
 ## See Also
 
 [DEALLOCATE](sql-deallocate.html "DEALLOCATE"), [PREPARE](sql-prepare.html "PREPARE")
-
-***
-
-|                             |                                                       |                                     |
-| :-------------------------- | :---------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-end.html "END")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-explain.html "EXPLAIN") |
-| END                         | [Home](index.html "PostgreSQL 17devel Documentation") |                             EXPLAIN |

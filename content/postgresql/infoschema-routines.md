@@ -1,11 +1,3 @@
-
-
-|                             37.45. `routines`                             |                                                                    |                                    |                                                       |                                                     |
-| :-----------------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](infoschema-routine-table-usage.html "37.44. routine_table_usage")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-schemata.html "37.46. schemata") |
-
-***
-
 ## 37.45. `routines` [#](#INFOSCHEMA-ROUTINES)
 
 The view `routines` contains all functions and procedures in the current database. Only those functions and procedures are shown that the current user has access to (by way of being the owner or having some privilege).
@@ -96,10 +88,3 @@ The view `routines` contains all functions and procedures in the current databas
 | `result_cast_scope_name` `sql_identifier`Applies to a feature not available in PostgreSQL                                                                                                                                                                                                                                                                                            |
 | `result_cast_maximum_cardinality` `cardinal_number`Applies to a feature not available in PostgreSQL                                                                                                                                                                                                                                                                                  |
 | `result_cast_dtd_identifier` `sql_identifier`Applies to a feature not available in PostgreSQL                                                                                                                                                                                                                                                                                        |
-
-***
-
-|                                                                           |                                                                    |                                                     |
-| :------------------------------------------------------------------------ | :----------------------------------------------------------------: | --------------------------------------------------: |
-| [Prev](infoschema-routine-table-usage.html "37.44. routine_table_usage")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-schemata.html "37.46. schemata") |
-| 37.44. `routine_table_usage`                                              |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                   37.46. `schemata` |

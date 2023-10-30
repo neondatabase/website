@@ -1,11 +1,3 @@
-
-
-|           19.9. Secure TCP/IP Connections with SSL          |                                                             |                                        |                                                       |                                                                                    |
-| :---------------------------------------------------------: | :---------------------------------------------------------- | :------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------: |
-| [Prev](encryption-options.html "19.8. Encryption Options")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") | Chapter 19. Server Setup and Operation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](gssapi-enc.html "19.10. Secure TCP/IP Connections with GSSAPI Encryption") |
-
-***
-
 ## 19.9. Secure TCP/IP Connections with SSL [#](#SSL-TCP)
 
   * *   [19.9.1. Basic Setup](ssl-tcp.html#SSL-SETUP)
@@ -164,10 +156,3 @@ openssl x509 -req -in server.csr -text -days 365 \
 ```
 
 `server.crt` and `intermediate.crt` should be concatenated into a certificate file bundle and stored on the server. `server.key` should also be stored on the server. `root.crt` should be stored on the client so the client can verify that the server's leaf certificate was signed by a chain of certificates linked to its trusted root certificate. `root.key` and `intermediate.key` should be stored offline for use in creating future certificates.
-
-***
-
-|                                                             |                                                             |                                                                                    |
-| :---------------------------------------------------------- | :---------------------------------------------------------: | ---------------------------------------------------------------------------------: |
-| [Prev](encryption-options.html "19.8. Encryption Options")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") |  [Next](gssapi-enc.html "19.10. Secure TCP/IP Connections with GSSAPI Encryption") |
-| 19.8. Encryption Options                                    |    [Home](index.html "PostgreSQL 17devel Documentation")    |                            19.10. Secure TCP/IP Connections with GSSAPI Encryption |

@@ -1,11 +1,3 @@
-
-
-|                 pg\_rewind                 |                                                              |                                |                                                       |                                           |
-| :----------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ----------------------------------------: |
-| [Prev](app-pgresetwal.html "pg_resetwal")  | [Up](reference-server.html "PostgreSQL Server Applications") | PostgreSQL Server Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgtestfsync.html "pg_test_fsync") |
-
-***
-
 ## pg\_rewind
 
 pg\_rewind — synchronize a PostgreSQL data directory with another data directory that was forked from it
@@ -126,10 +118,3 @@ The basic idea is to copy all file system-level changes from the source cluster 
 3. Copy all other files, including new relation files, WAL segments, `pg_xact`, and configuration files from the source cluster to the target cluster. Similarly to base backups, the contents of the directories `pg_dynshmem/`, `pg_notify/`, `pg_replslot/`, `pg_serial/`, `pg_snapshots/`, `pg_stat_tmp/`, and `pg_subtrans/` are omitted from the data copied from the source cluster. The files `backup_label`, `tablespace_map`, `pg_internal.init`, `postmaster.opts`, and `postmaster.pid`, as well as any file or directory beginning with `pgsql_tmp`, are omitted.
 4. Create a `backup_label` file to begin WAL replay at the checkpoint created at failover and configure the `pg_control` file with a minimum consistency LSN defined as the result of `pg_current_wal_insert_lsn()` when rewinding from a live source or the last checkpoint LSN when rewinding from a stopped source.
 5. When starting the target, PostgreSQL replays all the required WAL, resulting in a data directory in a consistent state.
-
-***
-
-|                                            |                                                              |                                           |
-| :----------------------------------------- | :----------------------------------------------------------: | ----------------------------------------: |
-| [Prev](app-pgresetwal.html "pg_resetwal")  | [Up](reference-server.html "PostgreSQL Server Applications") |  [Next](pgtestfsync.html "pg_test_fsync") |
-| pg\_resetwal                               |     [Home](index.html "PostgreSQL 17devel Documentation")    |                           pg\_test\_fsync |

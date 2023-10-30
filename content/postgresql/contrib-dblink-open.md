@@ -1,11 +1,3 @@
-
-
-|                   dblink\_open                  |                                                                          |                                                      |                                                       |                                                   |
-| :---------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](contrib-dblink-exec.html "dblink_exec")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-fetch.html "dblink_fetch") |
-
-***
-
 ## dblink\_open
 
 dblink\_open — opens a cursor in a remote database
@@ -64,10 +56,3 @@ SELECT dblink_open('foo', 'select proname, prosrc from pg_proc');
  OK
 (1 row)
 ```
-
-***
-
-|                                                 |                                                                          |                                                   |
-| :---------------------------------------------- | :----------------------------------------------------------------------: | ------------------------------------------------: |
-| [Prev](contrib-dblink-exec.html "dblink_exec")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-fetch.html "dblink_fetch") |
-| dblink\_exec                                    |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                     dblink\_fetch |

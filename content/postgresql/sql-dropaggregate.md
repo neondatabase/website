@@ -1,11 +1,3 @@
-
-
-|                       DROP AGGREGATE                      |                                        |              |                                                       |                                        |
-| :-------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------: |
-| [Prev](sql-drop-access-method.html "DROP ACCESS METHOD")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropcast.html "DROP CAST") |
-
-***
-
 ## DROP AGGREGATE
 
 DROP AGGREGATE — remove an aggregate function
@@ -91,10 +83,3 @@ There is no `DROP AGGREGATE` statement in the SQL standard.
 ## See Also
 
 [ALTER AGGREGATE](sql-alteraggregate.html "ALTER AGGREGATE"), [CREATE AGGREGATE](sql-createaggregate.html "CREATE AGGREGATE")
-
-***
-
-|                                                           |                                                       |                                        |
-| :-------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------: |
-| [Prev](sql-drop-access-method.html "DROP ACCESS METHOD")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropcast.html "DROP CAST") |
-| DROP ACCESS METHOD                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                              DROP CAST |

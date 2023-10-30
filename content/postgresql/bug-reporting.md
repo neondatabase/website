@@ -1,11 +1,3 @@
-
-
-|            5. Bug Reporting Guidelines           |                              |         |                                                       |                                           |
-| :----------------------------------------------: | :--------------------------- | :-----: | ----------------------------------------------------: | ----------------------------------------: |
-| [Prev](resources.html "4. Further Information")  | [Up](preface.html "Preface") | Preface | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial.html "Part I. Tutorial") |
-
-***
-
 ## 5. Bug Reporting Guidelines [#](#BUG-REPORTING)
 
   * *   [5.1. Identifying Bugs](bug-reporting.html#BUG-REPORTING-IDENTIFYING-BUGS)
@@ -93,10 +85,3 @@ If your bug is a portability problem on a non-supported platform, send mail to `
 ### Note
 
 Due to the unfortunate amount of spam going around, all of the above lists will be moderated unless you are subscribed. That means there will be some delay before the email is delivered. If you wish to subscribe to the lists, please visit [https://lists.postgresql.org/](https://lists.postgresql.org/) for instructions.
-
-***
-
-|                                                  |                                                       |                                           |
-| :----------------------------------------------- | :---------------------------------------------------: | ----------------------------------------: |
-| [Prev](resources.html "4. Further Information")  |              [Up](preface.html "Preface")             |  [Next](tutorial.html "Part I. Tutorial") |
-| 4. Further Information                           | [Home](index.html "PostgreSQL 17devel Documentation") |                          Part I. Tutorial |

@@ -1,11 +1,3 @@
-
-
-|                            49.6. Logical Decoding Output Plugins                           |                                                           |                              |                                                       |                                                                              |
-| :----------------------------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](logicaldecoding-catalogs.html "49.5. System Catalogs Related to Logical Decoding")  | [Up](logicaldecoding.html "Chapter 49. Logical Decoding") | Chapter 49. Logical Decoding | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logicaldecoding-writer.html "49.7. Logical Decoding Output Writers") |
-
-***
-
 ## 49.6. Logical Decoding Output Plugins [#](#LOGICALDECODING-OUTPUT-PLUGIN)
 
   * *   [49.6.1. Initialization Function](logicaldecoding-output-plugin.html#LOGICALDECODING-OUTPUT-INIT)
@@ -372,10 +364,3 @@ OutputPluginPrepareWrite(ctx, true);
 appendStringInfo(ctx->out, "BEGIN %u", txn->xid);
 OutputPluginWrite(ctx, true);
 ```
-
-***
-
-|                                                                                            |                                                           |                                                                              |
-| :----------------------------------------------------------------------------------------- | :-------------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](logicaldecoding-catalogs.html "49.5. System Catalogs Related to Logical Decoding")  | [Up](logicaldecoding.html "Chapter 49. Logical Decoding") |  [Next](logicaldecoding-writer.html "49.7. Logical Decoding Output Writers") |
-| 49.5. System Catalogs Related to Logical Decoding                                          |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                        49.7. Logical Decoding Output Writers |

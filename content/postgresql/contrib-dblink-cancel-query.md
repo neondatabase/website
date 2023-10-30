@@ -1,11 +1,3 @@
-
-
-|                    dblink\_cancel\_query                    |                                                                          |                                                      |                                                       |                                                         |
-| :---------------------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](contrib-dblink-get-result.html "dblink_get_result")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-get-pkey.html "dblink_get_pkey") |
-
-***
-
 ## dblink\_cancel\_query
 
 dblink\_cancel\_query — cancels any active query on the named connection
@@ -37,10 +29,3 @@ Returns `OK` if the cancel request has been sent, or the text of an error messag
 
 SELECT dblink_cancel_query('dtest1');
 ```
-
-***
-
-|                                                             |                                                                          |                                                         |
-| :---------------------------------------------------------- | :----------------------------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](contrib-dblink-get-result.html "dblink_get_result")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-get-pkey.html "dblink_get_pkey") |
-| dblink\_get\_result                                         |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                       dblink\_get\_pkey |

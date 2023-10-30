@@ -1,11 +1,3 @@
-
-
-|               CALL              |                                        |              |                                                       |                                           |
-| :-----------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------------: |
-| [Prev](sql-begin.html "BEGIN")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-checkpoint.html "CHECKPOINT") |
-
-***
-
 ## CALL
 
 CALL — invoke a procedure
@@ -61,10 +53,3 @@ CALL do_db_maintenance();
 ## See Also
 
 [CREATE PROCEDURE](sql-createprocedure.html "CREATE PROCEDURE")
-
-***
-
-|                                 |                                                       |                                           |
-| :------------------------------ | :---------------------------------------------------: | ----------------------------------------: |
-| [Prev](sql-begin.html "BEGIN")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-checkpoint.html "CHECKPOINT") |
-| BEGIN                           | [Home](index.html "PostgreSQL 17devel Documentation") |                                CHECKPOINT |

@@ -1,11 +1,3 @@
-
-
-|    Chapter 28. Monitoring Database Activity   |                                                    |                                 |                                                       |                                                         |
-| :-------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](hot-standby.html "27.4. Hot Standby")  | [Up](admin.html "Part III. Server Administration") | Part III. Server Administration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](monitoring-ps.html "28.1. Standard Unix Tools") |
-
-***
-
 ## Chapter 28. Monitoring Database Activity
 
 **Table of Contents**
@@ -63,10 +55,3 @@
 A database administrator frequently wonders, “What is the system doing right now?” This chapter discusses how to find that out.
 
 Several tools are available for monitoring database activity and analyzing performance. Most of this chapter is devoted to describing PostgreSQL's cumulative statistics system, but one should not neglect regular Unix monitoring programs such as `ps`, `top`, `iostat`, and `vmstat`. Also, once one has identified a poorly-performing query, further investigation might be needed using PostgreSQL's [`EXPLAIN`](sql-explain.html "EXPLAIN") command. [Section 14.1](using-explain.html "14.1. Using EXPLAIN") discusses `EXPLAIN` and other methods for understanding the behavior of an individual query.
-
-***
-
-|                                               |                                                       |                                                         |
-| :-------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](hot-standby.html "27.4. Hot Standby")  |   [Up](admin.html "Part III. Server Administration")  |  [Next](monitoring-ps.html "28.1. Standard Unix Tools") |
-| 27.4. Hot Standby                             | [Home](index.html "PostgreSQL 17devel Documentation") |                               28.1. Standard Unix Tools |

@@ -1,11 +1,3 @@
-
-
-|                 SPI\_is\_cursor\_plan                 |                                                      |                           |                                                       |                                                       |
-| :---------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](spi-spi-getargtypeid.html "SPI_getargtypeid")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-execute-plan.html "SPI_execute_plan") |
-
-***
-
 ## SPI\_is\_cursor\_plan
 
 SPI\_is\_cursor\_plan — return `true` if a statement prepared by `SPI_prepare` can be used with `SPI_cursor_open`
@@ -30,10 +22,3 @@ bool SPI_is_cursor_plan(SPIPlanPtr plan)
 ## Return Value
 
 `true` or `false` to indicate if the *`plan`* can produce a cursor or not, with `SPI_result` set to zero. If it is not possible to determine the answer (for example, if the *`plan`* is `NULL` or invalid, or if called when not connected to SPI), then `SPI_result` is set to a suitable error code and `false` is returned.
-
-***
-
-|                                                       |                                                       |                                                       |
-| :---------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](spi-spi-getargtypeid.html "SPI_getargtypeid")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-execute-plan.html "SPI_execute_plan") |
-| SPI\_getargtypeid                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                    SPI\_execute\_plan |

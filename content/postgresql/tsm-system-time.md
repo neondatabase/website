@@ -1,11 +1,3 @@
-
-
-|                  F.46. tsm\_system\_time — the `SYSTEM_TIME` sampling method for `TABLESAMPLE`                 |                                                                             |                                                        |                                                       |                                                                                             |
-| :------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------------------: |
-| [Prev](tsm-system-rows.html "F.45. tsm_system_rows —&#xA;   the SYSTEM_ROWS sampling method for TABLESAMPLE")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](unaccent.html "F.47. unaccent — a text search dictionary which removes diacritics") |
-
-***
-
 ## F.46. tsm\_system\_time — the `SYSTEM_TIME` sampling method for `TABLESAMPLE` [#](#TSM-SYSTEM-TIME)
 
 * [F.46.1. Examples](tsm-system-time.html#TSM-SYSTEM-TIME-EXAMPLES)
@@ -37,10 +29,3 @@ SELECT * FROM my_table TABLESAMPLE SYSTEM_TIME(1000);
 ```
 
 This command will return as large a sample of `my_table` as it can read in 1 second (1000 milliseconds). Of course, if the whole table can be read in under 1 second, all its rows will be returned.
-
-***
-
-|                                                                                                                |                                                                             |                                                                                             |
-| :------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------: |
-| [Prev](tsm-system-rows.html "F.45. tsm_system_rows —&#xA;   the SYSTEM_ROWS sampling method for TABLESAMPLE")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](unaccent.html "F.47. unaccent — a text search dictionary which removes diacritics") |
-| F.45. tsm\_system\_rows — the `SYSTEM_ROWS` sampling method for `TABLESAMPLE`                                  |            [Home](index.html "PostgreSQL 17devel Documentation")            |                          F.47. unaccent — a text search dictionary which removes diacritics |

@@ -1,11 +1,3 @@
-
-
-|                  I.1. Getting the Source via Git                  |                                                                |                                        |                                                       |                                                    |
-| :---------------------------------------------------------------: | :------------------------------------------------------------- | :------------------------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sourcerepo.html "Appendix I. The Source Code Repository")  | [Up](sourcerepo.html "Appendix I. The Source Code Repository") | Appendix I. The Source Code Repository | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](docguide.html "Appendix J. Documentation") |
-
-***
-
 ## I.1. Getting the Source via Git [#](#GIT)
 
 With Git you will make a copy of the entire code repository on your local machine, so you will have access to all history and branches offline. This is the fastest and most flexible way to develop or test patches.
@@ -38,10 +30,3 @@ With Git you will make a copy of the entire code repository on your local machin
     ```
 
 Git can do a lot more things than just fetch the source. For more information, consult the Git man pages, or see the website at [https://git-scm.com](https://git-scm.com).
-
-***
-
-|                                                                   |                                                                |                                                    |
-| :---------------------------------------------------------------- | :------------------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sourcerepo.html "Appendix I. The Source Code Repository")  | [Up](sourcerepo.html "Appendix I. The Source Code Repository") |  [Next](docguide.html "Appendix J. Documentation") |
-| Appendix I. The Source Code Repository                            |      [Home](index.html "PostgreSQL 17devel Documentation")     |                          Appendix J. Documentation |

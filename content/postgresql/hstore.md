@@ -1,11 +1,3 @@
-
-
-|                            F.18. hstore — hstore key/value datatype                            |                                                                             |                                                        |                                                       |                                                                         |
-| :--------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](fuzzystrmatch.html "F.17. fuzzystrmatch — determine string similarities and distance")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](intagg.html "F.19. intagg — integer aggregator and enumerator") |
-
-***
-
 ## F.18. hstore — hstore key/value datatype [#](#HSTORE)
 
   * *   [F.18.1. `hstore` External Representation](hstore.html#HSTORE-EXTERNAL-REP)
@@ -311,10 +303,3 @@ Oleg Bartunov `<oleg@sai.msu.su>`, Moscow, Moscow University, Russia
 Teodor Sigaev `<teodor@sigaev.ru>`, Moscow, Delta-Soft Ltd., Russia
 
 Additional enhancements by Andrew Gierth `<andrew@tao11.riddles.org.uk>`, United Kingdom
-
-***
-
-|                                                                                                |                                                                             |                                                                         |
-| :--------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](fuzzystrmatch.html "F.17. fuzzystrmatch — determine string similarities and distance")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](intagg.html "F.19. intagg — integer aggregator and enumerator") |
-| F.17. fuzzystrmatch — determine string similarities and distance                               |            [Home](index.html "PostgreSQL 17devel Documentation")            |                        F.19. intagg — integer aggregator and enumerator |

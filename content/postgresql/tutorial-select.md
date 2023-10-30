@@ -1,11 +1,3 @@
-
-
-|                        2.5. Querying a Table                        |                                                       |                             |                                                       |                                                         |
-| :-----------------------------------------------------------------: | :---------------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](tutorial-populate.html "2.4. Populating a Table With Rows")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") | Chapter 2. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-join.html "2.6. Joins Between Tables") |
-
-***
-
 ## 2.5. Querying a Table [#](#TUTORIAL-SELECT)
 
 To retrieve data from a table, the table is *queried*. An SQL `SELECT` statement is used to do this. The statement is divided into a select list (the part that lists the columns to be returned), a table list (the part that lists the tables from which to retrieve the data), and an optional qualification (the part that specifies any restrictions). For example, to retrieve all the rows of table `weather`, type:
@@ -123,16 +115,3 @@ SELECT DISTINCT city
     FROM weather
     ORDER BY city;
 ```
-
-***
-
-[\[2\] ](#id-1.4.4.6.2.10)While `SELECT *` is useful for off-the-cuff queries, it is widely considered bad style in production code, since adding a column to the table would change the results.
-
-[\[3\] ](#id-1.4.4.6.6.7)In some database systems, including older versions of PostgreSQL, the implementation of `DISTINCT` automatically orders the rows and so `ORDER BY` is unnecessary. But this is not required by the SQL standard, and current PostgreSQL does not guarantee that `DISTINCT` causes the rows to be ordered.
-
-***
-
-|                                                                     |                                                       |                                                         |
-| :------------------------------------------------------------------ | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](tutorial-populate.html "2.4. Populating a Table With Rows")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") |  [Next](tutorial-join.html "2.6. Joins Between Tables") |
-| 2.4. Populating a Table With Rows                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                               2.6. Joins Between Tables |

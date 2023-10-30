@@ -1,11 +1,3 @@
-
-
-|                  ALTER TABLE                 |                                        |              |                                                       |                                                      |
-| :------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-altersystem.html "ALTER SYSTEM")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altertablespace.html "ALTER TABLESPACE") |
-
-***
-
 ## ALTER TABLE
 
 ALTER TABLE — change the definition of a table
@@ -755,10 +747,3 @@ The forms `ADD [COLUMN]`, `DROP [COLUMN]`, `DROP IDENTITY`, `RESTART`, `SET DEFA
 ## See Also
 
 [CREATE TABLE](sql-createtable.html "CREATE TABLE")
-
-***
-
-|                                              |                                                       |                                                      |
-| :------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-altersystem.html "ALTER SYSTEM")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altertablespace.html "ALTER TABLESPACE") |
-| ALTER SYSTEM                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                     ALTER TABLESPACE |

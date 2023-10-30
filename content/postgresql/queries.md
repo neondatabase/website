@@ -1,11 +1,3 @@
-
-
-|                          Chapter 7. Queries                          |                                            |                           |                                                       |                                                |
-| :------------------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](dml-returning.html "6.4. Returning Data from Modified Rows")  | [Up](sql.html "Part II. The SQL Language") | Part II. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](queries-overview.html "7.1. Overview") |
-
-***
-
 ## Chapter 7. Queries
 
 **Table of Contents**
@@ -41,10 +33,3 @@
     * [7.8.4. Data-Modifying Statements in `WITH`](queries-with.html#QUERIES-WITH-MODIFYING)
 
 The previous chapters explained how to create tables, how to fill them with data, and how to manipulate that data. Now we finally discuss how to retrieve the data from the database.
-
-***
-
-|                                                                      |                                                       |                                                |
-| :------------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](dml-returning.html "6.4. Returning Data from Modified Rows")  |       [Up](sql.html "Part II. The SQL Language")      |  [Next](queries-overview.html "7.1. Overview") |
-| 6.4. Returning Data from Modified Rows                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                  7.1. Overview |

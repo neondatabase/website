@@ -1,11 +1,3 @@
-
-
-|                          75.2. System Catalog Initial Data                         |                                                                               |                                                              |                                                       |                                                  |
-| :--------------------------------------------------------------------------------: | :---------------------------------------------------------------------------- | :----------------------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](system-catalog-declarations.html "75.1. System Catalog Declaration Rules")  | [Up](bki.html "Chapter 75. System Catalog Declarations and Initial Contents") | Chapter 75. System Catalog Declarations and Initial Contents | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](bki-format.html "75.3. BKI File Format") |
-
-***
-
 ## 75.2. System Catalog Initial Data [#](#SYSTEM-CATALOG-INITIAL-DATA)
 
   * *   [75.2.1. Data File Format](system-catalog-initial-data.html#SYSTEM-CATALOG-INITIAL-DATA-FORMAT)
@@ -173,10 +165,3 @@ Here are some suggestions about the easiest ways to perform common tasks when up
 5. Finally, run `make reformat-dat-files` to remove the useless old entries from `pg_proc.dat`.
 
 For further examples of scripts used for bulk editing, see `convert_oid2name.pl` and `remove_pg_type_oid_symbols.pl` attached to this message: [https://www.postgresql.org/message-id/CAJVSVGVX8gXnPm+Xa=DxR7kFYprcQ1tNcCT5D0O3ShfnM6jehA@mail.gmail.com](https://www.postgresql.org/message-id/CAJVSVGVX8gXnPm+Xa=DxR7kFYprcQ1tNcCT5D0O3ShfnM6jehA@mail.gmail.com)
-
-***
-
-|                                                                                    |                                                                               |                                                  |
-| :--------------------------------------------------------------------------------- | :---------------------------------------------------------------------------: | -----------------------------------------------: |
-| [Prev](system-catalog-declarations.html "75.1. System Catalog Declaration Rules")  | [Up](bki.html "Chapter 75. System Catalog Declarations and Initial Contents") |  [Next](bki-format.html "75.3. BKI File Format") |
-| 75.1. System Catalog Declaration Rules                                             |             [Home](index.html "PostgreSQL 17devel Documentation")             |                            75.3. BKI File Format |

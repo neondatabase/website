@@ -1,11 +1,3 @@
-
-
-|                55.2. Message Flow                |                                                             |                                       |                                                       |                                                               |
-| :----------------------------------------------: | :---------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](protocol-overview.html "55.1. Overview")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") | Chapter 55. Frontend/Backend Protocol | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sasl-authentication.html "55.3. SASL Authentication") |
-
-***
-
 ## 55.2. Message Flow [#](#PROTOCOL-FLOW)
 
   * *   [55.2.1. Start-up](protocol-flow.html#PROTOCOL-FLOW-START-UP)
@@ -407,10 +399,3 @@ An initial GSSENCRequest can also be used in a connection that is being opened t
 Once GSSAPI encryption has been successfully established, use `gss_wrap()` to encrypt the usual StartupMessage and all subsequent data, prepending the length of the result from `gss_wrap()` as a four byte integer in network byte order to the actual encrypted payload. Note that the server will only accept encrypted packets from the client which are less than 16kB; `gss_wrap_size_limit()` should be used by the client to determine the size of the unencrypted message which will fit within this limit and larger messages should be broken up into multiple `gss_wrap()` calls. Typical segments are 8kB of unencrypted data, resulting in encrypted packets of slightly larger than 8kB but well within the 16kB maximum. The server can be expected to not send encrypted packets of larger than 16kB to the client.
 
 While the protocol itself does not provide a way for the server to force GSSAPI encryption, the administrator can configure the server to reject unencrypted sessions as a byproduct of authentication checking.
-
-***
-
-|                                                  |                                                             |                                                               |
-| :----------------------------------------------- | :---------------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](protocol-overview.html "55.1. Overview")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") |  [Next](sasl-authentication.html "55.3. SASL Authentication") |
-| 55.1. Overview                                   |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                     55.3. SASL Authentication |

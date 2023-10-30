@@ -1,11 +1,3 @@
-
-
-|             54.28. `pg_stats_ext`             |                                             |                          |                                                       |                                                                   |
-| :-------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](view-pg-stats.html "54.27. pg_stats")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-stats-ext-exprs.html "54.29. pg_stats_ext_exprs") |
-
-***
-
 ## 54.28. `pg_stats_ext` [#](#VIEW-PG-STATS-EXT)
 
 The view `pg_stats_ext` provides access to information about each extended statistics object in the database, combining information stored in the [`pg_statistic_ext`](catalog-pg-statistic-ext.html "53.52. pg_statistic_ext") and [`pg_statistic_ext_data`](catalog-pg-statistic-ext-data.html "53.53. pg_statistic_ext_data") catalogs. This view allows access only to rows of [`pg_statistic_ext`](catalog-pg-statistic-ext.html "53.52. pg_statistic_ext") and [`pg_statistic_ext_data`](catalog-pg-statistic-ext-data.html "53.53. pg_statistic_ext_data") that correspond to tables the user has permission to read, and therefore it is safe to allow public read access to this view.
@@ -35,10 +27,3 @@ The view `pg_stats_ext` provides access to information about each extended stati
 \
 
 The maximum number of entries in the array fields can be controlled on a column-by-column basis using the [`ALTER TABLE SET STATISTICS`](sql-altertable.html "ALTER TABLE") command, or globally by setting the [default\_statistics\_target](runtime-config-query.html#GUC-DEFAULT-STATISTICS-TARGET) run-time parameter.
-
-***
-
-|                                               |                                                       |                                                                   |
-| :-------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](view-pg-stats.html "54.27. pg_stats")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-stats-ext-exprs.html "54.29. pg_stats_ext_exprs") |
-| 54.27. `pg_stats`                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                       54.29. `pg_stats_ext_exprs` |

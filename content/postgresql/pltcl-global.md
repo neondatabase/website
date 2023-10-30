@@ -1,11 +1,3 @@
-
-
-|               44.4. Global Data in PL/Tcl              |                                                                 |                                              |                                                       |                                                                  |
-| :----------------------------------------------------: | :-------------------------------------------------------------- | :------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](pltcl-data.html "44.3. Data Values in PL/Tcl")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") | Chapter 44. PL/Tcl — Tcl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pltcl-dbaccess.html "44.5. Database Access from PL/Tcl") |
-
-***
-
 ## 44.4. Global Data in PL/Tcl [#](#PLTCL-GLOBAL)
 
 Sometimes it is useful to have some global data that is held between two calls to a function or is shared between different functions. This is easily done in PL/Tcl, but there are some restrictions that must be understood.
@@ -17,10 +9,3 @@ All PL/TclU functions used in a session execute in the same Tcl interpreter, whi
 To help protect PL/Tcl functions from unintentionally interfering with each other, a global array is made available to each function via the `upvar` command. The global name of this variable is the function's internal name, and the local name is `GD`. It is recommended that `GD` be used for persistent private data of a function. Use regular Tcl global variables only for values that you specifically intend to be shared among multiple functions. (Note that the `GD` arrays are only global within a particular interpreter, so they do not bypass the security restrictions mentioned above.)
 
 An example of using `GD` appears in the `spi_execp` example below.
-
-***
-
-|                                                        |                                                                 |                                                                  |
-| :----------------------------------------------------- | :-------------------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](pltcl-data.html "44.3. Data Values in PL/Tcl")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") |  [Next](pltcl-dbaccess.html "44.5. Database Access from PL/Tcl") |
-| 44.3. Data Values in PL/Tcl                            |      [Home](index.html "PostgreSQL 17devel Documentation")      |                                44.5. Database Access from PL/Tcl |

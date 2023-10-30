@@ -1,11 +1,3 @@
-
-
-|             B.2. Handling of Invalid or Ambiguous Timestamps             |                                                              |                               |                                                       |                                                            |
-| :----------------------------------------------------------------------: | :----------------------------------------------------------- | :---------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](datetime-input-rules.html "B.1. Date/Time Input Interpretation")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") | Appendix B. Date/Time Support | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datetime-keywords.html "B.3. Date/Time Key Words") |
-
-***
-
 ## B.2. Handling of Invalid or Ambiguous Timestamps [#](#DATETIME-INVALID-INPUT)
 
 Ordinarily, if a date/time string is syntactically valid but contains out-of-range field values, an error will be thrown. For example, input specifying the 31st of February will be rejected.
@@ -48,10 +40,3 @@ On that date, there were two possible interpretations of 1:30AM; there was 1:30A
 The precise rule that is applied in such cases is that an invalid timestamp that appears to fall within a jump-forward daylight savings transition is assigned the UTC offset that prevailed in the time zone just before the transition, while an ambiguous timestamp that could fall on either side of a jump-back transition is assigned the UTC offset that prevailed just after the transition. In most time zones this is equivalent to saying that “the standard-time interpretation is preferred when in doubt”.
 
 In all cases, the UTC offset associated with a timestamp can be specified explicitly, using either a numeric UTC offset or a time zone abbreviation that corresponds to a fixed UTC offset. The rule just given applies only when it is necessary to infer a UTC offset for a time zone in which the offset varies.
-
-***
-
-|                                                                          |                                                              |                                                            |
-| :----------------------------------------------------------------------- | :----------------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](datetime-input-rules.html "B.1. Date/Time Input Interpretation")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") |  [Next](datetime-keywords.html "B.3. Date/Time Key Words") |
-| B.1. Date/Time Input Interpretation                                      |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                   B.3. Date/Time Key Words |

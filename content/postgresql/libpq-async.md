@@ -1,11 +1,3 @@
-
-
-|             34.4. Asynchronous Command Processing            |                                                  |                               |                                                       |                                                         |
-| :----------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](libpq-exec.html "34.3. Command Execution Functions")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-pipeline-mode.html "34.5. Pipeline Mode") |
-
-***
-
 ## 34.4. Asynchronous Command Processing [#](#LIBPQ-ASYNC)
 
 The [`PQexec`](libpq-exec.html#LIBPQ-PQEXEC) function is adequate for submitting commands in normal, synchronous applications. It has a few deficiencies, however, that can be of importance to some users:
@@ -213,10 +205,3 @@ By using the functions described above, it is possible to avoid blocking while w
     ```
 
 After sending any command or data on a nonblocking connection, call [`PQflush`](libpq-async.html#LIBPQ-PQFLUSH). If it returns 1, wait for the socket to become read- or write-ready. If it becomes write-ready, call [`PQflush`](libpq-async.html#LIBPQ-PQFLUSH) again. If it becomes read-ready, call [`PQconsumeInput`](libpq-async.html#LIBPQ-PQCONSUMEINPUT), then call [`PQflush`](libpq-async.html#LIBPQ-PQFLUSH) again. Repeat until [`PQflush`](libpq-async.html#LIBPQ-PQFLUSH) returns 0. (It is necessary to check for read-ready and drain the input with [`PQconsumeInput`](libpq-async.html#LIBPQ-PQCONSUMEINPUT), because the server can block trying to send us data, e.g., NOTICE messages, and won't read our data until we read its.) Once [`PQflush`](libpq-async.html#LIBPQ-PQFLUSH) returns 0, wait for the socket to be read-ready and then read the response as described above.
-
-***
-
-|                                                              |                                                       |                                                         |
-| :----------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](libpq-exec.html "34.3. Command Execution Functions")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-pipeline-mode.html "34.5. Pipeline Mode") |
-| 34.3. Command Execution Functions                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                     34.5. Pipeline Mode |

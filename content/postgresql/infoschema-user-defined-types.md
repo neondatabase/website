@@ -1,11 +1,3 @@
-
-
-|                     37.60. `user_defined_types`                     |                                                                    |                                    |                                                       |                                                                             |
-| :-----------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](infoschema-usage-privileges.html "37.59. usage_privileges")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-user-mapping-options.html "37.61. user_mapping_options") |
-
-***
-
 ## 37.60. `user_defined_types` [#](#INFOSCHEMA-USER-DEFINED-TYPES)
 
 The view `user_defined_types` currently contains all composite types defined in the current database. Only those types are shown that the current user has access to (by way of being the owner or having some privilege).
@@ -45,10 +37,3 @@ SQL knows about two kinds of user-defined types: structured types (also known as
 | `interval_precision` `cardinal_number`Applies to a feature not available in PostgreSQL                                |
 | `source_dtd_identifier` `sql_identifier`Applies to a feature not available in PostgreSQL                              |
 | `ref_dtd_identifier` `sql_identifier`Applies to a feature not available in PostgreSQL                                 |
-
-***
-
-|                                                                     |                                                                    |                                                                             |
-| :------------------------------------------------------------------ | :----------------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](infoschema-usage-privileges.html "37.59. usage_privileges")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-user-mapping-options.html "37.61. user_mapping_options") |
-| 37.59. `usage_privileges`                                           |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                               37.61. `user_mapping_options` |

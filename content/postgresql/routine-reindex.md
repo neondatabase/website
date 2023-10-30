@@ -1,11 +1,3 @@
-
-
-|                  25.2. Routine Reindexing                 |                                                                         |                                                |                                                       |                                                                |
-| :-------------------------------------------------------: | :---------------------------------------------------------------------- | :--------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](routine-vacuuming.html "25.1. Routine Vacuuming")  | [Up](maintenance.html "Chapter 25. Routine Database Maintenance Tasks") | Chapter 25. Routine Database Maintenance Tasks | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logfile-maintenance.html "25.3. Log File Maintenance") |
-
-***
-
 ## 25.2. Routine Reindexing [#](#ROUTINE-REINDEX)
 
 In some situations it is worthwhile to rebuild indexes periodically with the [REINDEX](sql-reindex.html "REINDEX") command or a series of individual rebuilding steps.
@@ -17,10 +9,3 @@ The potential for bloat in non-B-tree indexes has not been well researched. It i
 Also, for B-tree indexes, a freshly-constructed index is slightly faster to access than one that has been updated many times because logically adjacent pages are usually also physically adjacent in a newly built index. (This consideration does not apply to non-B-tree indexes.) It might be worthwhile to reindex periodically just to improve access speed.
 
 [REINDEX](sql-reindex.html "REINDEX") can be used safely and easily in all cases. This command requires an `ACCESS EXCLUSIVE` lock by default, hence it is often preferable to execute it with its `CONCURRENTLY` option, which requires only a `SHARE UPDATE EXCLUSIVE` lock.
-
-***
-
-|                                                           |                                                                         |                                                                |
-| :-------------------------------------------------------- | :---------------------------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](routine-vacuuming.html "25.1. Routine Vacuuming")  | [Up](maintenance.html "Chapter 25. Routine Database Maintenance Tasks") |  [Next](logfile-maintenance.html "25.3. Log File Maintenance") |
-| 25.1. Routine Vacuuming                                   |          [Home](index.html "PostgreSQL 17devel Documentation")          |                                     25.3. Log File Maintenance |

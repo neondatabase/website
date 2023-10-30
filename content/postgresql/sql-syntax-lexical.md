@@ -1,10 +1,3 @@
-
-|              4.1. Lexical Structure              |                                               |                       |                                                       |                                                        |
-| :----------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](sql-syntax.html "Chapter 4. SQL Syntax")  | [Up](sql-syntax.html "Chapter 4. SQL Syntax") | Chapter 4. SQL Syntax | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-expressions.html "4.2. Value Expressions") |
-
-***
-
 ## 4.1. Lexical Structure [#](#SQL-SYNTAX-LEXICAL)
 
   * *   [4.1.1. Identifiers and Key Words](sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS)
@@ -422,10 +415,3 @@ the `OPERATOR` construct is taken to have the default precedence shown in [Table
 ### Note
 
 PostgreSQL versions before 9.5 used slightly different operator precedence rules. In particular, `<=` `>=` and `<>` used to be treated as generic operators; `IS` tests used to have higher priority; and `NOT BETWEEN` and related constructs acted inconsistently, being taken in some cases as having the precedence of `NOT` rather than `BETWEEN`. These rules were changed for better compliance with the SQL standard and to reduce confusion from inconsistent treatment of logically equivalent constructs. In most cases, these changes will result in no behavioral change, or perhaps in “no such operator” failures which can be resolved by adding parentheses. However there are corner cases in which a query might change behavior without any parsing error being reported.
-
-***
-
-|                                                  |                                                       |                                                        |
-| :----------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](sql-syntax.html "Chapter 4. SQL Syntax")  |     [Up](sql-syntax.html "Chapter 4. SQL Syntax")     |  [Next](sql-expressions.html "4.2. Value Expressions") |
-| Chapter 4. SQL Syntax                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                 4.2. Value Expressions |

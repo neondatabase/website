@@ -1,11 +1,3 @@
-
-
-|       Chapter 37. The Information Schema      |                                                           |                            |                                                       |                                                    |
-| :-------------------------------------------: | :-------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](ecpg-develop.html "36.17. Internals")  | [Up](client-interfaces.html "Part IV. Client Interfaces") | Part IV. Client Interfaces | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-schema.html "37.1. The Schema") |
-
-***
-
 ## Chapter 37. The Information Schema
 
 **Table of Contents**
@@ -84,10 +76,3 @@ The information schema consists of a set of views that contain information about
 When querying the database for constraint information, it is possible for a standard-compliant query that expects to return one row to return several. This is because the SQL standard requires constraint names to be unique within a schema, but PostgreSQL does not enforce this restriction. PostgreSQL automatically-generated constraint names avoid duplicates in the same schema, but users can specify such duplicate names.
 
 This problem can appear when querying information schema views such as `check_constraint_routine_usage`, `check_constraints`, `domain_constraints`, and `referential_constraints`. Some other views have similar issues but contain the table name to help distinguish duplicate rows, e.g., `constraint_column_usage`, `constraint_table_usage`, `table_constraints`.
-
-***
-
-|                                               |                                                           |                                                    |
-| :-------------------------------------------- | :-------------------------------------------------------: | -------------------------------------------------: |
-| [Prev](ecpg-develop.html "36.17. Internals")  | [Up](client-interfaces.html "Part IV. Client Interfaces") |  [Next](infoschema-schema.html "37.1. The Schema") |
-| 36.17. Internals                              |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                   37.1. The Schema |

@@ -1,11 +1,3 @@
-
-
-|                 ALTER MATERIALIZED VIEW                 |                                        |              |                                                       |                                                  |
-| :-----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-alterlargeobject.html "ALTER LARGE OBJECT")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alteroperator.html "ALTER OPERATOR") |
-
-***
-
 ## ALTER MATERIALIZED VIEW
 
 ALTER MATERIALIZED VIEW — change the definition of a materialized view
@@ -97,10 +89,3 @@ ALTER MATERIALIZED VIEW foo RENAME TO bar;
 ## See Also
 
 [CREATE MATERIALIZED VIEW](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW"), [DROP MATERIALIZED VIEW](sql-dropmaterializedview.html "DROP MATERIALIZED VIEW"), [REFRESH MATERIALIZED VIEW](sql-refreshmaterializedview.html "REFRESH MATERIALIZED VIEW")
-
-***
-
-|                                                         |                                                       |                                                  |
-| :------------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-alterlargeobject.html "ALTER LARGE OBJECT")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alteroperator.html "ALTER OPERATOR") |
-| ALTER LARGE OBJECT                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                   ALTER OPERATOR |

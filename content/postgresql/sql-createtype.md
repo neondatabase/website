@@ -1,11 +1,3 @@
-
-
-|                    CREATE TYPE                   |                                        |              |                                                       |                                            |
-| :----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-createtrigger.html "CREATE TRIGGER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createuser.html "CREATE USER") |
-
-***
-
 ## CREATE TYPE
 
 CREATE TYPE — define a new data type
@@ -353,10 +345,3 @@ The ability to create a composite type with zero attributes is a PostgreSQL-spec
 ## See Also
 
 [ALTER TYPE](sql-altertype.html "ALTER TYPE"), [CREATE DOMAIN](sql-createdomain.html "CREATE DOMAIN"), [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [DROP TYPE](sql-droptype.html "DROP TYPE")
-
-***
-
-|                                                  |                                                       |                                            |
-| :----------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-createtrigger.html "CREATE TRIGGER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createuser.html "CREATE USER") |
-| CREATE TRIGGER                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                CREATE USER |

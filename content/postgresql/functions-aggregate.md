@@ -1,10 +1,3 @@
-
-|                            9.21. Aggregate Functions                           |                                                           |                                    |                                                       |                                                         |
-| :----------------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](functions-range.html "9.20. Range/Multirange Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-window.html "9.22. Window Functions") |
-
-***
-
 ## 9.21. Aggregate Functions [#](#FUNCTIONS-AGGREGATE)
 
 *Aggregate functions* compute a single result from a set of input values. The built-in general-purpose aggregate functions are listed in [Table 9.59](functions-aggregate.html#FUNCTIONS-AGGREGATE-TABLE "Table 9.59. General-Purpose Aggregate Functions") while statistical aggregates are in [Table 9.60](functions-aggregate.html#FUNCTIONS-AGGREGATE-STATISTICS-TABLE "Table 9.60. Aggregate Functions for Statistics"). The built-in within-group ordered-set aggregate functions are listed in [Table 9.61](functions-aggregate.html#FUNCTIONS-ORDEREDSET-TABLE "Table 9.61. Ordered-Set Aggregate Functions") while the built-in within-group hypothetical-set ones are in [Table 9.62](functions-aggregate.html#FUNCTIONS-HYPOTHETICAL-TABLE "Table 9.62. Hypothetical-Set Aggregate Functions"). Grouping operations, which are closely related to aggregate functions, are listed in [Table 9.63](functions-aggregate.html#FUNCTIONS-GROUPING-TABLE "Table 9.63. Grouping Operations"). The special syntax considerations for aggregate functions are explained in [Section 4.2.7](sql-expressions.html#SYNTAX-AGGREGATES "4.2.7. Aggregate Expressions"). Consult [Section 2.7](tutorial-agg.html "2.7. Aggregate Functions") for additional introductory information.
@@ -167,10 +160,3 @@ The grouping operations shown in [Table 9.63](functions-aggregate.html#FUNCTION
 ```
 
 Here, the `grouping` value `0` in the first four rows shows that those have been grouped normally, over both the grouping columns. The value `1` indicates that `model` was not grouped by in the next-to-last two rows, and the value `3` indicates that neither `make` nor `model` was grouped by in the last row (which therefore is an aggregate over all the input rows).
-
-***
-
-|                                                                                |                                                           |                                                         |
-| :----------------------------------------------------------------------------- | :-------------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](functions-range.html "9.20. Range/Multirange Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-window.html "9.22. Window Functions") |
-| 9.20. Range/Multirange Functions and Operators                                 |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                  9.22. Window Functions |

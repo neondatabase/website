@@ -1,11 +1,3 @@
-
-
-|            pg\_resetwal           |                                                              |                                |                                                       |                                        |
-| :-------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -------------------------------------: |
-| [Prev](app-pg-ctl.html "pg_ctl")  | [Up](reference-server.html "PostgreSQL Server Applications") | PostgreSQL Server Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pgrewind.html "pg_rewind") |
-
-***
-
 ## pg\_resetwal
 
 pg\_resetwal — reset the write-ahead log and other control information of a PostgreSQL database cluster
@@ -131,10 +123,3 @@ This command must not be used when the server is running. `pg_resetwal` will ref
 ## See Also
 
 [pg\_controldata](app-pgcontroldata.html "pg_controldata")
-
-***
-
-|                                   |                                                              |                                        |
-| :-------------------------------- | :----------------------------------------------------------: | -------------------------------------: |
-| [Prev](app-pg-ctl.html "pg_ctl")  | [Up](reference-server.html "PostgreSQL Server Applications") |  [Next](app-pgrewind.html "pg_rewind") |
-| pg\_ctl                           |     [Home](index.html "PostgreSQL 17devel Documentation")    |                             pg\_rewind |

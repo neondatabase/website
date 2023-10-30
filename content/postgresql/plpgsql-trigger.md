@@ -1,11 +1,3 @@
-
-
-|                        43.10. Trigger Functions                       |                                                                     |                                                |                                                       |                                                                       |
-| :-------------------------------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](plpgsql-errors-and-messages.html "43.9. Errors and Messages")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-implementation.html "43.11. PL/pgSQL under the Hood") |
-
-***
-
 ## 43.10. Trigger Functions [#](#PLPGSQL-TRIGGER)
 
   * *   [43.10.1. Triggers on Data Changes](plpgsql-trigger.html#PLPGSQL-DML-TRIGGER)
@@ -455,10 +447,3 @@ $$ LANGUAGE plpgsql;
 
 CREATE EVENT TRIGGER snitch ON ddl_command_start EXECUTE FUNCTION snitch();
 ```
-
-***
-
-|                                                                       |                                                                     |                                                                       |
-| :-------------------------------------------------------------------- | :-----------------------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](plpgsql-errors-and-messages.html "43.9. Errors and Messages")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](plpgsql-implementation.html "43.11. PL/pgSQL under the Hood") |
-| 43.9. Errors and Messages                                             |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                        43.11. PL/pgSQL under the Hood |

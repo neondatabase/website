@@ -1,11 +1,3 @@
-
-
-|     F.8. btree\_gin — GIN operator classes with B-tree behavior     |                                                                             |                                                        |                                                       |                                                                                         |
-| :-----------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](bloom.html "F.7. bloom — bloom filter index access method")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](btree-gist.html "F.9. btree_gist — GiST operator classes with B-tree behavior") |
-
-***
-
 ## F.8. btree\_gin — GIN operator classes with B-tree behavior [#](#BTREE-GIN)
 
   * *   [F.8.1. Example Usage](btree-gin.html#BTREE-GIN-EXAMPLE-USAGE)
@@ -31,10 +23,3 @@ SELECT * FROM test WHERE a < 10;
 ### F.8.2. Authors [#](#BTREE-GIN-AUTHORS)
 
 Teodor Sigaev (`<teodor@stack.net>`) and Oleg Bartunov (`<oleg@sai.msu.su>`). See [http://www.sai.msu.su/~megera/oddmuse/index.cgi/Gin](http://www.sai.msu.su/~megera/oddmuse/index.cgi/Gin) for additional information.
-
-***
-
-|                                                                     |                                                                             |                                                                                         |
-| :------------------------------------------------------------------ | :-------------------------------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](bloom.html "F.7. bloom — bloom filter index access method")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](btree-gist.html "F.9. btree_gist — GiST operator classes with B-tree behavior") |
-| F.7. bloom — bloom filter index access method                       |            [Home](index.html "PostgreSQL 17devel Documentation")            |                           F.9. btree\_gist — GiST operator classes with B-tree behavior |

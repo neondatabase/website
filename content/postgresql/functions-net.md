@@ -1,11 +1,3 @@
-
-
-|                9.12. Network Address Functions and Operators               |                                                           |                                    |                                                       |                                                                                |
-| :------------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](functions-geometry.html "9.11. Geometric Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-textsearch.html "9.13. Text Search Functions and Operators") |
-
-***
-
 ## 9.12. Network Address Functions and Operators [#](#FUNCTIONS-NET)
 
 The IP network address types, `cidr` and `inet`, support the usual comparison operators shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") as well as the specialized operators and functions shown in [Table 9.39](functions-net.html#CIDR-INET-OPERATORS-TABLE "Table 9.39. IP Address Operators") and [Table 9.40](functions-net.html#CIDR-INET-FUNCTIONS-TABLE "Table 9.40. IP Address Functions").
@@ -65,10 +57,3 @@ The MAC address types, `macaddr` and `macaddr8`, support the usual comparison op
 | `trunc` ( `macaddr` ) → `macaddr`Sets the last 3 bytes of the address to zero. The remaining prefix can be associated with a particular manufacturer (using data not included in PostgreSQL).`trunc(macaddr '12:34:56:78:90:ab')` → `12:34:56:00:00:00`            |
 | `trunc` ( `macaddr8` ) → `macaddr8`Sets the last 5 bytes of the address to zero. The remaining prefix can be associated with a particular manufacturer (using data not included in PostgreSQL).`trunc(macaddr8 '12:34:56:78:90:ab:cd:ef')` → `12:34:56:00:00:00:00:00` |
 | `macaddr8_set7bit` ( `macaddr8` ) → `macaddr8`Sets the 7th bit of the address to one, creating what is known as modified EUI-64, for inclusion in an IPv6 address.`macaddr8_set7bit(macaddr8 '00:34:56:ab:cd:ef')` → `02:34:56:ff:fe:ab:cd:ef`                     |
-
-***
-
-|                                                                            |                                                           |                                                                                |
-| :------------------------------------------------------------------------- | :-------------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](functions-geometry.html "9.11. Geometric Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-textsearch.html "9.13. Text Search Functions and Operators") |
-| 9.11. Geometric Functions and Operators                                    |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                      9.13. Text Search Functions and Operators |

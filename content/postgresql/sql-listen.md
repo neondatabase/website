@@ -1,11 +1,3 @@
-
-
-|               LISTEN              |                                        |              |                                                       |                               |
-| :-------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------: |
-| [Prev](sql-insert.html "INSERT")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-load.html "LOAD") |
-
-***
-
 ## LISTEN
 
 LISTEN — listen for a notification
@@ -61,10 +53,3 @@ There is no `LISTEN` statement in the SQL standard.
 ## See Also
 
 [NOTIFY](sql-notify.html "NOTIFY"), [UNLISTEN](sql-unlisten.html "UNLISTEN")
-
-***
-
-|                                   |                                                       |                               |
-| :-------------------------------- | :---------------------------------------------------: | ----------------------------: |
-| [Prev](sql-insert.html "INSERT")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-load.html "LOAD") |
-| INSERT                            | [Home](index.html "PostgreSQL 17devel Documentation") |                          LOAD |

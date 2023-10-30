@@ -1,11 +1,3 @@
-
-
-|                    36.3. Running SQL Commands                    |                                                        |                                      |                                                       |                                                           |
-| :--------------------------------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](ecpg-connect.html "36.2. Managing Database Connections")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-variables.html "36.4. Using Host Variables") |
-
-***
-
 ## 36.3. Running SQL Commands [#](#ECPG-COMMANDS)
 
   * *   [36.3.1. Executing SQL Statements](ecpg-commands.html#ECPG-EXECUTING)
@@ -174,10 +166,3 @@ EXEC SQL DEALLOCATE PREPARE name;
 ```
 
 For more details about `PREPARE`, see [PREPARE](ecpg-sql-prepare.html "PREPARE"). Also see [Section 36.5](ecpg-dynamic.html "36.5. Dynamic SQL") for more details about using placeholders and input parameters.
-
-***
-
-|                                                                  |                                                        |                                                           |
-| :--------------------------------------------------------------- | :----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](ecpg-connect.html "36.2. Managing Database Connections")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](ecpg-variables.html "36.4. Using Host Variables") |
-| 36.2. Managing Database Connections                              |  [Home](index.html "PostgreSQL 17devel Documentation") |                                36.4. Using Host Variables |

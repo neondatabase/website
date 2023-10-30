@@ -1,11 +1,3 @@
-
-
-|               21.3. Authentication Methods              |                                                                      |                                   |                                                       |                                                       |
-| :-----------------------------------------------------: | :------------------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](auth-username-maps.html "21.2. User Name Maps")  | [Up](client-authentication.html "Chapter 21. Client Authentication") | Chapter 21. Client Authentication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](auth-trust.html "21.4. Trust Authentication") |
-
-***
-
 ## 21.3. Authentication Methods [#](#AUTH-METHODS)
 
 PostgreSQL provides various methods for authenticating users:
@@ -25,10 +17,3 @@ PostgreSQL provides various methods for authenticating users:
 Peer authentication is usually recommendable for local connections, though trust authentication might be sufficient in some circumstances. Password authentication is the easiest choice for remote connections. All the other options require some kind of external security infrastructure (usually an authentication server or a certificate authority for issuing SSL certificates), or are platform-specific.
 
 The following sections describe each of these authentication methods in more detail.
-
-***
-
-|                                                         |                                                                      |                                                       |
-| :------------------------------------------------------ | :------------------------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](auth-username-maps.html "21.2. User Name Maps")  | [Up](client-authentication.html "Chapter 21. Client Authentication") |  [Next](auth-trust.html "21.4. Trust Authentication") |
-| 21.2. User Name Maps                                    |         [Home](index.html "PostgreSQL 17devel Documentation")        |                            21.4. Trust Authentication |

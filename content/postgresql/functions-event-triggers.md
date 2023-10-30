@@ -1,11 +1,3 @@
-
-
-|               9.29. Event Trigger Functions               |                                                           |                                    |                                                       |                                                                             |
-| :-------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](functions-trigger.html "9.28. Trigger Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-statistics.html "9.30. Statistics Information Functions") |
-
-***
-
 ## 9.29. Event Trigger Functions [#](#FUNCTIONS-EVENT-TRIGGERS)
 
   * *   [9.29.1. Capturing Changes at Command End](functions-event-triggers.html#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
@@ -118,10 +110,3 @@ CREATE EVENT TRIGGER test_table_rewrite_oid
                   ON table_rewrite
    EXECUTE FUNCTION test_event_trigger_table_rewrite_oid();
 ```
-
-***
-
-|                                                           |                                                           |                                                                             |
-| :-------------------------------------------------------- | :-------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](functions-trigger.html "9.28. Trigger Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-statistics.html "9.30. Statistics Information Functions") |
-| 9.28. Trigger Functions                                   |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                      9.30. Statistics Information Functions |

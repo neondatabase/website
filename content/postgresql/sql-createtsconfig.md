@@ -1,11 +1,3 @@
-
-
-|            CREATE TEXT SEARCH CONFIGURATION            |                                        |              |                                                       |                                                                      |
-| :----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](sql-createtablespace.html "CREATE TABLESPACE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createtsdictionary.html "CREATE TEXT SEARCH DICTIONARY") |
-
-***
-
 ## CREATE TEXT SEARCH CONFIGURATION
 
 CREATE TEXT SEARCH CONFIGURATION — define a new text search configuration
@@ -57,10 +49,3 @@ There is no `CREATE TEXT SEARCH CONFIGURATION` statement in the SQL standard.
 ## See Also
 
 [ALTER TEXT SEARCH CONFIGURATION](sql-altertsconfig.html "ALTER TEXT SEARCH CONFIGURATION"), [DROP TEXT SEARCH CONFIGURATION](sql-droptsconfig.html "DROP TEXT SEARCH CONFIGURATION")
-
-***
-
-|                                                        |                                                       |                                                                      |
-| :----------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](sql-createtablespace.html "CREATE TABLESPACE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createtsdictionary.html "CREATE TEXT SEARCH DICTIONARY") |
-| CREATE TABLESPACE                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                        CREATE TEXT SEARCH DICTIONARY |

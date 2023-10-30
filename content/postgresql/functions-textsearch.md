@@ -1,11 +1,3 @@
-
-
-|                  9.13. Text Search Functions and Operators                  |                                                           |                                    |                                                       |                                                     |
-| :-------------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](functions-net.html "9.12. Network Address Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-uuid.html "9.14. UUID Functions") |
-
-***
-
 ## 9.13. Text Search Functions and Operators [#](#FUNCTIONS-TEXTSEARCH)
 
 [Table 9.42](functions-textsearch.html#TEXTSEARCH-OPERATORS-TABLE "Table 9.42. Text Search Operators"), [Table 9.43](functions-textsearch.html#TEXTSEARCH-FUNCTIONS-TABLE "Table 9.43. Text Search Functions") and [Table 9.44](functions-textsearch.html#TEXTSEARCH-FUNCTIONS-DEBUG-TABLE "Table 9.44. Text Search Debugging Functions") summarize the functions and operators that are provided for full text searching. See [Chapter 12](textsearch.html "Chapter 12. Full Text Search") for a detailed explanation of PostgreSQL's text search facility.
@@ -81,10 +73,3 @@ The functions in [Table 9.44](functions-textsearch.html#TEXTSEARCH-FUNCTIONS-DE
 | `ts_token_type` ( *`parser_name`* `text` ) → `setof record` ( *`tokid`* `integer`, *`alias`* `text`, *`description`* `text` )Returns a table that describes each type of token the named parser can recognize. See [Section 12.8.2](textsearch-debugging.html#TEXTSEARCH-PARSER-TESTING "12.8.2. Parser Testing") for details.`ts_token_type('default')` → `(1,asciiword,"Word, all ASCII") ...`                                                                                                                                                                                                                                                                                    |
 | `ts_token_type` ( *`parser_oid`* `oid` ) → `setof record` ( *`tokid`* `integer`, *`alias`* `text`, *`description`* `text` )Returns a table that describes each type of token a parser specified by OID can recognize. See [Section 12.8.2](textsearch-debugging.html#TEXTSEARCH-PARSER-TESTING "12.8.2. Parser Testing") for details.`ts_token_type(3722)` → `(1,asciiword,"Word, all ASCII") ...`                                                                                                                                                                                                                                                                                      |
 | `ts_stat` ( *`sqlquery`* `text` \[, *`weights`* `text` ] ) → `setof record` ( *`word`* `text`, *`ndoc`* `integer`, *`nentry`* `integer` )Executes the *`sqlquery`*, which must return a single `tsvector` column, and returns statistics about each distinct lexeme contained in the data. See [Section 12.4.4](textsearch-features.html#TEXTSEARCH-STATISTICS "12.4.4. Gathering Document Statistics") for details.`ts_stat('SELECT vector FROM apod')` → `(foo,10,15) ...`                                                                                                                                                                                                        |
-
-***
-
-|                                                                             |                                                           |                                                     |
-| :-------------------------------------------------------------------------- | :-------------------------------------------------------: | --------------------------------------------------: |
-| [Prev](functions-net.html "9.12. Network Address Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-uuid.html "9.14. UUID Functions") |
-| 9.12. Network Address Functions and Operators                               |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                9.14. UUID Functions |

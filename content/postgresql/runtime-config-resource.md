@@ -1,11 +1,3 @@
-
-
-|                           20.4. Resource Consumption                           |                                                              |                                  |                                                       |                                                          |
-| :----------------------------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](runtime-config-connection.html "20.3. Connections and Authentication")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-wal.html "20.5. Write Ahead Log") |
-
-***
-
 ## 20.4. Resource Consumption [#](#RUNTIME-CONFIG-RESOURCE)
 
   * *   [20.4.1. Memory](runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-MEMORY)
@@ -232,10 +224,3 @@ Smaller values of `bgwriter_lru_maxpages` and `bgwriter_lru_multiplier` reduce t
 * `parallel_leader_participation` (`boolean`) [#](#GUC-PARALLEL-LEADER-PARTICIPATION)
 
     Allows the leader process to execute the query plan under `Gather` and `Gather Merge` nodes instead of waiting for worker processes. The default is `on`. Setting this value to `off` reduces the likelihood that workers will become blocked because the leader is not reading tuples fast enough, but requires the leader process to wait for worker processes to start up before the first tuples can be produced. The degree to which the leader can help or hinder performance depends on the plan type, number of workers and query duration.
-
-***
-
-|                                                                                |                                                              |                                                          |
-| :----------------------------------------------------------------------------- | :----------------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](runtime-config-connection.html "20.3. Connections and Authentication")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-wal.html "20.5. Write Ahead Log") |
-| 20.3. Connections and Authentication                                           |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                    20.5. Write Ahead Log |

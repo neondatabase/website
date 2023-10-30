@@ -1,11 +1,3 @@
-
-
-|                     11.10. Operator Classes and Operator Families                    |                                          |                     |                                                       |                                                                  |
-| :----------------------------------------------------------------------------------: | :--------------------------------------- | :-----------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](indexes-index-only-scans.html "11.9. Index-Only Scans and Covering Indexes")  | [Up](indexes.html "Chapter 11. Indexes") | Chapter 11. Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](indexes-collations.html "11.11. Indexes and Collations") |
-
-***
-
 ## 11.10. Operator Classes and Operator Families [#](#INDEXES-OPCLASS)
 
 An index definition can specify an *operator class* for each column of an index.
@@ -74,10 +66,3 @@ SELECT am.amname AS index_method,
 ### Tip
 
 [psql](app-psql.html "psql") has commands `\dAc`, `\dAf`, and `\dAo`, which provide slightly more sophisticated versions of these queries.
-
-***
-
-|                                                                                      |                                                       |                                                                  |
-| :----------------------------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](indexes-index-only-scans.html "11.9. Index-Only Scans and Covering Indexes")  |        [Up](indexes.html "Chapter 11. Indexes")       |  [Next](indexes-collations.html "11.11. Indexes and Collations") |
-| 11.9. Index-Only Scans and Covering Indexes                                          | [Home](index.html "PostgreSQL 17devel Documentation") |                                    11.11. Indexes and Collations |

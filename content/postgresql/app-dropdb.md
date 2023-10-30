@@ -1,11 +1,3 @@
-
-
-|                   dropdb                  |                                                              |                                |                                                       |                                       |
-| :---------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ------------------------------------: |
-| [Prev](app-createuser.html "createuser")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-dropuser.html "dropuser") |
-
-***
-
 ## dropdb
 
 dropdb — remove a PostgreSQL database
@@ -118,10 +110,3 @@ DROP DATABASE demo;
 ## See Also
 
 [createdb](app-createdb.html "createdb"), [DROP DATABASE](sql-dropdatabase.html "DROP DATABASE")
-
-***
-
-|                                           |                                                              |                                       |
-| :---------------------------------------- | :----------------------------------------------------------: | ------------------------------------: |
-| [Prev](app-createuser.html "createuser")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-dropuser.html "dropuser") |
-| createuser                                |     [Home](index.html "PostgreSQL 17devel Documentation")    |                              dropuser |

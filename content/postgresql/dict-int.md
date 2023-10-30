@@ -1,11 +1,3 @@
-
-
-|    F.13. dict\_int — example full-text search dictionary for integers   |                                                                             |                                                        |                                                       |                                                                                         |
-| :---------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](contrib-dblink-build-sql-update.html "dblink_build_sql_update")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](dict-xsyn.html "F.14. dict_xsyn — example synonym full-text search dictionary") |
-
-***
-
 ## F.13. dict\_int — example full-text search dictionary for integers [#](#DICT-INT)
 
   * *   [F.13.1. Configuration](dict-int.html#DICT-INT-CONFIG)
@@ -52,10 +44,3 @@ but real-world usage will involve including it in a text search configuration as
 ALTER TEXT SEARCH CONFIGURATION english
     ALTER MAPPING FOR int, uint WITH intdict;
 ```
-
-***
-
-|                                                                         |                                                                             |                                                                                         |
-| :---------------------------------------------------------------------- | :-------------------------------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](contrib-dblink-build-sql-update.html "dblink_build_sql_update")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](dict-xsyn.html "F.14. dict_xsyn — example synonym full-text search dictionary") |
-| dblink\_build\_sql\_update                                              |            [Home](index.html "PostgreSQL 17devel Documentation")            |                          F.14. dict\_xsyn — example synonym full-text search dictionary |

@@ -1,11 +1,3 @@
-
-
-|                  1.4. Accessing a Database                 |                                                        |                            |                                                       |                                                          |
-| :--------------------------------------------------------: | :----------------------------------------------------- | :------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](tutorial-createdb.html "1.3. Creating a Database")  | [Up](tutorial-start.html "Chapter 1. Getting Started") | Chapter 1. Getting Started | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-sql.html "Chapter 2. The SQL Language") |
-
-***
-
 ## 1.4. Accessing a Database [#](#TUTORIAL-ACCESSDB)
 
 Once you have created a database, you can access it by:
@@ -82,10 +74,3 @@ mydb=> \q
 ```
 
 and `psql` will quit and return you to your command shell. (For more internal commands, type `\?` at the `psql` prompt.) The full capabilities of `psql` are documented in [psql](app-psql.html "psql"). In this tutorial we will not use these features explicitly, but you can use them yourself when it is helpful.
-
-***
-
-|                                                            |                                                        |                                                          |
-| :--------------------------------------------------------- | :----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](tutorial-createdb.html "1.3. Creating a Database")  | [Up](tutorial-start.html "Chapter 1. Getting Started") |  [Next](tutorial-sql.html "Chapter 2. The SQL Language") |
-| 1.3. Creating a Database                                   |  [Home](index.html "PostgreSQL 17devel Documentation") |                              Chapter 2. The SQL Language |

@@ -1,11 +1,3 @@
-
-
-|                      53.50. `pg_shseclabel`                      |                                                   |                             |                                                       |                                                          |
-| :--------------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](catalog-pg-shdescription.html "53.49. pg_shdescription")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-statistic.html "53.51. pg_statistic") |
-
-***
-
 ## 53.50. `pg_shseclabel` [#](#CATALOG-PG-SHSECLABEL)
 
 The catalog `pg_shseclabel` stores security labels on shared database objects. Security labels can be manipulated with the [`SECURITY LABEL`](sql-security-label.html "SECURITY LABEL") command. For an easier way to view security labels, see [Section 54.22](view-pg-seclabels.html "54.22. pg_seclabels").
@@ -22,10 +14,3 @@ Unlike most system catalogs, `pg_shseclabel` is shared across all databases of a
 | `classoid` `oid` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`oid`)The OID of the system catalog this object appears in |
 | `provider` `text`The label provider associated with this label.                                                                               |
 | `label` `text`The security label applied to this object.                                                                                      |
-
-***
-
-|                                                                  |                                                       |                                                          |
-| :--------------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](catalog-pg-shdescription.html "53.49. pg_shdescription")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-statistic.html "53.51. pg_statistic") |
-| 53.49. `pg_shdescription`                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                    53.51. `pg_statistic` |

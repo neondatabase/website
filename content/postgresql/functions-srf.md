@@ -1,11 +1,3 @@
-
-
-|                     9.25. Set Returning Functions                     |                                                           |                                    |                                                       |                                                                                 |
-| :-------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------: |
-| [Prev](functions-comparisons.html "9.24. Row and Array Comparisons")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-info.html "9.26. System Information Functions and Operators") |
-
-***
-
 ## 9.25. Set Returning Functions [#](#FUNCTIONS-SRF)
 
 This section describes functions that possibly return more than one row. The most widely used functions in this class are series generating functions, as detailed in [Table 9.65](functions-srf.html#FUNCTIONS-SRF-SERIES "Table 9.65. Series Generating Functions") and [Table 9.66](functions-srf.html#FUNCTIONS-SRF-SUBSCRIPTS "Table 9.66. Subscript Generating Functions"). Other, more specialized set-returning functions are described elsewhere in this manual. See [Section 7.2.1.4](queries-table-expressions.html#QUERIES-TABLEFUNCTIONS "7.2.1.4. Table Functions") for ways to combine multiple set-returning functions.
@@ -186,10 +178,3 @@ SELECT * FROM pg_ls_dir('.') WITH ORDINALITY AS t(ls,n);
  pg_subtrans     | 19
 (19 rows)
 ```
-
-***
-
-|                                                                       |                                                           |                                                                                 |
-| :-------------------------------------------------------------------- | :-------------------------------------------------------: | ------------------------------------------------------------------------------: |
-| [Prev](functions-comparisons.html "9.24. Row and Array Comparisons")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-info.html "9.26. System Information Functions and Operators") |
-| 9.24. Row and Array Comparisons                                       |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                9.26. System Information Functions and Operators |

@@ -1,11 +1,3 @@
-
-
-|                        GET DESCRIPTOR                        |                                                             |                              |                                                       |                                    |
-| :----------------------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------: |
-| [Prev](ecpg-sql-execute-immediate.html "EXECUTE IMMEDIATE")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-open.html "OPEN") |
-
-***
-
 ## GET DESCRIPTOR
 
 GET DESCRIPTOR — get information from an SQL descriptor area
@@ -130,10 +122,3 @@ d_data                  = testdb
 ## See Also
 
 [ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor.html "ALLOCATE DESCRIPTOR"), [SET DESCRIPTOR](ecpg-sql-set-descriptor.html "SET DESCRIPTOR")
-
-***
-
-|                                                              |                                                             |                                    |
-| :----------------------------------------------------------- | :---------------------------------------------------------: | ---------------------------------: |
-| [Prev](ecpg-sql-execute-immediate.html "EXECUTE IMMEDIATE")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-open.html "OPEN") |
-| EXECUTE IMMEDIATE                                            |    [Home](index.html "PostgreSQL 17devel Documentation")    |                               OPEN |

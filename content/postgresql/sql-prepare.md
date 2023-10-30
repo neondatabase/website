@@ -1,11 +1,3 @@
-
-
-|              PREPARE              |                                        |              |                                                       |                                                             |
-| :-------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](sql-notify.html "NOTIFY")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-prepare-transaction.html "PREPARE TRANSACTION") |
-
-***
-
 ## PREPARE
 
 PREPARE — prepare a statement for execution
@@ -94,10 +86,3 @@ The SQL standard includes a `PREPARE` statement, but it is only for use in embed
 ## See Also
 
 [DEALLOCATE](sql-deallocate.html "DEALLOCATE"), [EXECUTE](sql-execute.html "EXECUTE")
-
-***
-
-|                                   |                                                       |                                                             |
-| :-------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](sql-notify.html "NOTIFY")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-prepare-transaction.html "PREPARE TRANSACTION") |
-| NOTIFY                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                         PREPARE TRANSACTION |

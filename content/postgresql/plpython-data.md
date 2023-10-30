@@ -1,11 +1,3 @@
-
-
-|                     46.2. Data Values                    |                                                                          |                                                    |                                                       |                                                     |
-| :------------------------------------------------------: | :----------------------------------------------------------------------- | :------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](plpython-funcs.html "46.1. PL/Python Functions")  | [Up](plpython.html "Chapter 46. PL/Python — Python Procedural Language") | Chapter 46. PL/Python — Python Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpython-sharing.html "46.3. Sharing Data") |
-
-***
-
 ## 46.2. Data Values [#](#PLPYTHON-DATA)
 
   * *   [46.2.1. Data Type Mapping](plpython-data.html#PLPYTHON-DATA-TYPE-MAPPING)
@@ -304,10 +296,3 @@ $$ LANGUAGE plpython3u;
 
 SELECT * FROM multiout_simple_setof(3);
 ```
-
-***
-
-|                                                          |                                                                          |                                                     |
-| :------------------------------------------------------- | :----------------------------------------------------------------------: | --------------------------------------------------: |
-| [Prev](plpython-funcs.html "46.1. PL/Python Functions")  | [Up](plpython.html "Chapter 46. PL/Python — Python Procedural Language") |  [Next](plpython-sharing.html "46.3. Sharing Data") |
-| 46.1. PL/Python Functions                                |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                  46.3. Sharing Data |

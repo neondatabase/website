@@ -1,11 +1,3 @@
-
-
-|              21.8. Ident Authentication             |                                                                      |                                   |                                                       |                                                     |
-| :-------------------------------------------------: | :------------------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](sspi-auth.html "21.7. SSPI Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") | Chapter 21. Client Authentication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](auth-peer.html "21.9. Peer Authentication") |
-
-***
-
 ## 21.8. Ident Authentication [#](#AUTH-IDENT)
 
 The ident authentication method works by obtaining the client's operating system user name from an ident server and using it as the allowed database user name (with an optional user name mapping). This is only supported on TCP/IP connections.
@@ -30,10 +22,3 @@ The drawback of this procedure is that it depends on the integrity of the client
 |   |                                                                                  --RFC 1413 |   |
 
 Some ident servers have a nonstandard option that causes the returned user name to be encrypted, using a key that only the originating machine's administrator knows. This option *must not* be used when using the ident server with PostgreSQL, since PostgreSQL does not have any way to decrypt the returned string to determine the actual user name.
-
-***
-
-|                                                     |                                                                      |                                                     |
-| :-------------------------------------------------- | :------------------------------------------------------------------: | --------------------------------------------------: |
-| [Prev](sspi-auth.html "21.7. SSPI Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") |  [Next](auth-peer.html "21.9. Peer Authentication") |
-| 21.7. SSPI Authentication                           |         [Home](index.html "PostgreSQL 17devel Documentation")        |                           21.9. Peer Authentication |

@@ -1,11 +1,3 @@
-
-
-|                           34.19. SSL Support                           |                                                  |                               |                                                       |                                                                      |
-| :--------------------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-threading.html "34.20. Behavior in Threaded Programs") |
-
-***
-
 ## 34.19. SSL Support [#](#LIBPQ-SSL)
 
   * *   [34.19.1. Client Verification of Server Certificates](libpq-ssl.html#LIBQ-SSL-CERTIFICATES)
@@ -137,10 +129,3 @@ If your application initializes `libssl` and/or `libcrypto` libraries and libpq 
     This function is equivalent to `PQinitOpenSSL(do_ssl, do_ssl)`. It is sufficient for applications that initialize both or neither of OpenSSL and `libcrypto`.
 
     [`PQinitSSL`](libpq-ssl.html#LIBPQ-PQINITSSL) has been present since PostgreSQL 8.0, while [`PQinitOpenSSL`](libpq-ssl.html#LIBPQ-PQINITOPENSSL) was added in PostgreSQL 8.4, so [`PQinitSSL`](libpq-ssl.html#LIBPQ-PQINITSSL) might be preferable for applications that need to work with older versions of libpq.
-
-***
-
-|                                                                        |                                                       |                                                                      |
-| :--------------------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-threading.html "34.20. Behavior in Threaded Programs") |
-| 34.18. LDAP Lookup of Connection Parameters                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                 34.20. Behavior in Threaded Programs |

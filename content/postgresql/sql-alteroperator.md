@@ -1,11 +1,3 @@
-
-
-|                           ALTER OPERATOR                          |                                        |              |                                                       |                                                       |
-| :---------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](sql-altermaterializedview.html "ALTER MATERIALIZED VIEW")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alteropclass.html "ALTER OPERATOR CLASS") |
-
-***
-
 ## ALTER OPERATOR
 
 ALTER OPERATOR — change the definition of an operator
@@ -118,10 +110,3 @@ There is no `ALTER OPERATOR` statement in the SQL standard.
 ## See Also
 
 [CREATE OPERATOR](sql-createoperator.html "CREATE OPERATOR"), [DROP OPERATOR](sql-dropoperator.html "DROP OPERATOR")
-
-***
-
-|                                                                   |                                                       |                                                       |
-| :---------------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](sql-altermaterializedview.html "ALTER MATERIALIZED VIEW")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alteropclass.html "ALTER OPERATOR CLASS") |
-| ALTER MATERIALIZED VIEW                                           | [Home](index.html "PostgreSQL 17devel Documentation") |                                  ALTER OPERATOR CLASS |

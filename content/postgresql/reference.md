@@ -1,11 +1,3 @@
-
-
-|                            Part VI. Reference                           |                                                     |                                  |                                                       |                                           |
-| :---------------------------------------------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | ----------------------------------------: |
-| [Prev](archive-module-callbacks.html "51.2. Archive Module Callbacks")  | [Up](index.html "PostgreSQL 17devel Documentation") | PostgreSQL 17devel Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-commands.html "SQL Commands") |
-
-***
-
 # Part VI. Reference
 
 The entries in this Reference are meant to provide in reasonable length an authoritative, complete, and formal summary about their respective subjects. More information about the use of PostgreSQL, in narrative, tutorial, or example form, can be found in other parts of this book. See the cross-references listed on each reference page.
@@ -237,10 +229,3 @@ The reference entries are also available as traditional “man” pages.
     * [pg\_upgrade](pgupgrade.html) — upgrade a PostgreSQL server instance
     * [pg\_waldump](pgwaldump.html) — display a human-readable rendering of the write-ahead log of a PostgreSQL database cluster
     * [postgres](app-postgres.html) — PostgreSQL database server
-
-***
-
-|                                                                         |                                                       |                                           |
-| :---------------------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------: |
-| [Prev](archive-module-callbacks.html "51.2. Archive Module Callbacks")  |  [Up](index.html "PostgreSQL 17devel Documentation")  |  [Next](sql-commands.html "SQL Commands") |
-| 51.2. Archive Module Callbacks                                          | [Home](index.html "PostgreSQL 17devel Documentation") |                              SQL Commands |

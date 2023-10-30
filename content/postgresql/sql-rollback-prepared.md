@@ -1,11 +1,3 @@
-
-
-|           ROLLBACK PREPARED           |                                        |              |                                                       |                                                       |
-| :-----------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](sql-rollback.html "ROLLBACK")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-rollback-to.html "ROLLBACK TO SAVEPOINT") |
-
-***
-
 ## ROLLBACK PREPARED
 
 ROLLBACK PREPARED — cancel a transaction that was earlier prepared for two-phase commit
@@ -51,10 +43,3 @@ ROLLBACK PREPARED 'foobar';
 ## See Also
 
 [PREPARE TRANSACTION](sql-prepare-transaction.html "PREPARE TRANSACTION"), [COMMIT PREPARED](sql-commit-prepared.html "COMMIT PREPARED")
-
-***
-
-|                                       |                                                       |                                                       |
-| :------------------------------------ | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](sql-rollback.html "ROLLBACK")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-rollback-to.html "ROLLBACK TO SAVEPOINT") |
-| ROLLBACK                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                 ROLLBACK TO SAVEPOINT |

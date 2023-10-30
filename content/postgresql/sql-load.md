@@ -1,11 +1,3 @@
-
-
-|                LOAD               |                                        |              |                                                       |                               |
-| :-------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------: |
-| [Prev](sql-listen.html "LISTEN")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-lock.html "LOCK") |
-
-***
-
 ## LOAD
 
 LOAD — load a shared library file
@@ -32,10 +24,3 @@ Non-superusers can only apply `LOAD` to library files located in `$libdir/plugin
 ## See Also
 
 [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION")
-
-***
-
-|                                   |                                                       |                               |
-| :-------------------------------- | :---------------------------------------------------: | ----------------------------: |
-| [Prev](sql-listen.html "LISTEN")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-lock.html "LOCK") |
-| LISTEN                            | [Home](index.html "PostgreSQL 17devel Documentation") |                          LOCK |

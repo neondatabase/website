@@ -1,11 +1,3 @@
-
-
-|                 UPDATE                |                                        |              |                                                       |                                   |
-| :-----------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](sql-unlisten.html "UNLISTEN")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-vacuum.html "VACUUM") |
-
-***
-
 ## UPDATE
 
 UPDATE — update rows of a table
@@ -222,10 +214,3 @@ This command conforms to the SQL standard, except that the `FROM` and `RETURNING
 Some other database systems offer a `FROM` option in which the target table is supposed to be listed again within `FROM`. That is not how PostgreSQL interprets `FROM`. Be careful when porting applications that use this extension.
 
 According to the standard, the source value for a parenthesized sub-list of target column names can be any row-valued expression yielding the correct number of columns. PostgreSQL only allows the source value to be a [row constructor](sql-expressions.html#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors") or a sub-`SELECT`. An individual column's updated value can be specified as `DEFAULT` in the row-constructor case, but not inside a sub-`SELECT`.
-
-***
-
-|                                       |                                                       |                                   |
-| :------------------------------------ | :---------------------------------------------------: | --------------------------------: |
-| [Prev](sql-unlisten.html "UNLISTEN")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-vacuum.html "VACUUM") |
-| UNLISTEN                              | [Home](index.html "PostgreSQL 17devel Documentation") |                            VACUUM |

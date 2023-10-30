@@ -1,11 +1,3 @@
-
-
-|                                  37.57. `triggers`                                  |                                                                    |                                    |                                                       |                                                                 |
-| :---------------------------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](infoschema-triggered-update-columns.html "37.56. triggered_update_columns")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-udt-privileges.html "37.58. udt_privileges") |
-
-***
-
 ## 37.57. `triggers` [#](#INFOSCHEMA-TRIGGERS)
 
 The view `triggers` contains all triggers defined in the current database on tables and views that the current user owns or has some privilege other than `SELECT` on.
@@ -39,10 +31,3 @@ Triggers in PostgreSQL have two incompatibilities with the SQL standard that aff
 ### Note
 
 Prior to PostgreSQL 9.1, this view's columns `action_timing`, `action_reference_old_table`, `action_reference_new_table`, `action_reference_old_row`, and `action_reference_new_row` were named `condition_timing`, `condition_reference_old_table`, `condition_reference_new_table`, `condition_reference_old_row`, and `condition_reference_new_row` respectively. That was how they were named in the SQL:1999 standard. The new naming conforms to SQL:2003 and later.
-
-***
-
-|                                                                                     |                                                                    |                                                                 |
-| :---------------------------------------------------------------------------------- | :----------------------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](infoschema-triggered-update-columns.html "37.56. triggered_update_columns")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-udt-privileges.html "37.58. udt_privileges") |
-| 37.56. `triggered_update_columns`                                                   |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                         37.58. `udt_privileges` |

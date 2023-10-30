@@ -1,11 +1,3 @@
-
-
-|                           37.23. `domains`                          |                                                                    |                                    |                                                       |                                                               |
-| :-----------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](infoschema-domain-udt-usage.html "37.22. domain_udt_usage")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-element-types.html "37.24. element_types") |
-
-***
-
 ## 37.23. `domains` [#](#INFOSCHEMA-DOMAINS)
 
 The view `domains` contains all [**](glossary.html#GLOSSARY-DOMAIN)*[domains](glossary.html#GLOSSARY-DOMAIN "Domain")* defined in the current database. Only those domains are shown that the current user has access to (by way of being the owner or having some privilege).
@@ -41,10 +33,3 @@ The view `domains` contains all [**](glossary.html#GLOSSARY-DOMAIN)*[domains](gl
 | `scope_name` `sql_identifier`Applies to a feature not available in PostgreSQL                                                                                                                                                                                                                                                                                                                                                       |
 | `maximum_cardinality` `cardinal_number`Always null, because arrays always have unlimited maximum cardinality in PostgreSQL                                                                                                                                                                                                                                                                                                          |
 | `dtd_identifier` `sql_identifier`An identifier of the data type descriptor of the domain, unique among the data type descriptors pertaining to the domain (which is trivial, because a domain only contains one data type descriptor). This is mainly useful for joining with other instances of such identifiers. (The specific format of the identifier is not defined and not guaranteed to remain the same in future versions.) |
-
-***
-
-|                                                                     |                                                                    |                                                               |
-| :------------------------------------------------------------------ | :----------------------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](infoschema-domain-udt-usage.html "37.22. domain_udt_usage")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-element-types.html "37.24. element_types") |
-| 37.22. `domain_udt_usage`                                           |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                        37.24. `element_types` |

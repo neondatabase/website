@@ -1,11 +1,3 @@
-
-
-|              CREATE MATERIALIZED VIEW              |                                        |              |                                                       |                                                    |
-| :------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-createlanguage.html "CREATE LANGUAGE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createoperator.html "CREATE OPERATOR") |
-
-***
-
 ## CREATE MATERIALIZED VIEW
 
 CREATE MATERIALIZED VIEW — define a new materialized view
@@ -72,10 +64,3 @@ CREATE MATERIALIZED VIEW [ IF NOT EXISTS ] table_name
 ## See Also
 
 [ALTER MATERIALIZED VIEW](sql-altermaterializedview.html "ALTER MATERIALIZED VIEW"), [CREATE TABLE AS](sql-createtableas.html "CREATE TABLE AS"), [CREATE VIEW](sql-createview.html "CREATE VIEW"), [DROP MATERIALIZED VIEW](sql-dropmaterializedview.html "DROP MATERIALIZED VIEW"), [REFRESH MATERIALIZED VIEW](sql-refreshmaterializedview.html "REFRESH MATERIALIZED VIEW")
-
-***
-
-|                                                    |                                                       |                                                    |
-| :------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-createlanguage.html "CREATE LANGUAGE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createoperator.html "CREATE OPERATOR") |
-| CREATE LANGUAGE                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                    CREATE OPERATOR |

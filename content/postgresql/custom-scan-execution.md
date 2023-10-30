@@ -1,11 +1,3 @@
-
-
-|                    61.3. Executing Custom Scans                   |                                                                     |                                            |                                                       |                                                          |
-| :---------------------------------------------------------------: | :------------------------------------------------------------------ | :----------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](custom-scan-plan.html "61.2. Creating Custom Scan Plans")  | [Up](custom-scan.html "Chapter 61. Writing a Custom Scan Provider") | Chapter 61. Writing a Custom Scan Provider | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](geqo.html "Chapter 62. Genetic Query Optimizer") |
-
-***
-
 ## 61.3. Executing Custom Scans [#](#CUSTOM-SCAN-EXECUTION)
 
 * [61.3.1. Custom Scan Execution Callbacks](custom-scan-execution.html#CUSTOM-SCAN-EXECUTION-CALLBACKS)
@@ -120,10 +112,3 @@ void (*ExplainCustomScan) (CustomScanState *node,
 ```
 
 Output additional information for `EXPLAIN` of a custom-scan plan node. This callback is optional. Common data stored in the `ScanState`, such as the target list and scan relation, will be shown even without this callback, but the callback allows the display of additional, private state.
-
-***
-
-|                                                                   |                                                                     |                                                          |
-| :---------------------------------------------------------------- | :-----------------------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](custom-scan-plan.html "61.2. Creating Custom Scan Plans")  | [Up](custom-scan.html "Chapter 61. Writing a Custom Scan Provider") |  [Next](geqo.html "Chapter 62. Genetic Query Optimizer") |
-| 61.2. Creating Custom Scan Plans                                  |        [Home](index.html "PostgreSQL 17devel Documentation")        |                      Chapter 62. Genetic Query Optimizer |

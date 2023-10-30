@@ -1,11 +1,3 @@
-
-
-|                              62.2. Genetic Algorithms                             |                                                       |                                     |                                                       |                                                                                     |
-| :-------------------------------------------------------------------------------: | :---------------------------------------------------- | :---------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------------: |
-| [Prev](geqo-intro.html "62.1. Query Handling as a Complex Optimization Problem")  | [Up](geqo.html "Chapter 62. Genetic Query Optimizer") | Chapter 62. Genetic Query Optimizer | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](geqo-pg-intro.html "62.3. Genetic Query Optimization (GEQO) in PostgreSQL") |
-
-***
-
 ## 62.2. Genetic Algorithms [#](#GEQO-INTRO2)
 
 The genetic algorithm (GA) is a heuristic optimization method which operates through randomized search. The set of possible solutions for the optimization problem is considered as a *population* of *individuals*. The degree of adaptation of an individual to its environment is specified by its *fitness*.
@@ -19,10 +11,3 @@ Through simulation of the evolutionary operations *recombination*, *mutation*, a
 \
 
 According to the comp.ai.genetic FAQ it cannot be stressed too strongly that a GA is not a pure random search for a solution to a problem. A GA uses stochastic processes, but the result is distinctly non-random (better than random).
-
-***
-
-|                                                                                   |                                                       |                                                                                     |
-| :-------------------------------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------------------------: |
-| [Prev](geqo-intro.html "62.1. Query Handling as a Complex Optimization Problem")  | [Up](geqo.html "Chapter 62. Genetic Query Optimizer") |  [Next](geqo-pg-intro.html "62.3. Genetic Query Optimization (GEQO) in PostgreSQL") |
-| 62.1. Query Handling as a Complex Optimization Problem                            | [Home](index.html "PostgreSQL 17devel Documentation") |                               62.3. Genetic Query Optimization (GEQO) in PostgreSQL |

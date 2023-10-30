@@ -1,11 +1,3 @@
-
-
-|               DROP SCHEMA              |                                        |              |                                                       |                                                |
-| :------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-droprule.html "DROP RULE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropsequence.html "DROP SEQUENCE") |
-
-***
-
 ## DROP SCHEMA
 
 DROP SCHEMA — remove a schema
@@ -61,10 +53,3 @@ DROP SCHEMA mystuff CASCADE;
 ## See Also
 
 [ALTER SCHEMA](sql-alterschema.html "ALTER SCHEMA"), [CREATE SCHEMA](sql-createschema.html "CREATE SCHEMA")
-
-***
-
-|                                        |                                                       |                                                |
-| :------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-droprule.html "DROP RULE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropsequence.html "DROP SEQUENCE") |
-| DROP RULE                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                  DROP SEQUENCE |

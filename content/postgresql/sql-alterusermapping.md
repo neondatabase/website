@@ -1,11 +1,3 @@
-
-
-|            ALTER USER MAPPING            |                                        |              |                                                       |                                          |
-| :--------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-alteruser.html "ALTER USER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterview.html "ALTER VIEW") |
-
-***
-
 ## ALTER USER MAPPING
 
 ALTER USER MAPPING — change the definition of a user mapping
@@ -55,10 +47,3 @@ ALTER USER MAPPING FOR bob SERVER foo OPTIONS (SET password 'public');
 ## See Also
 
 [CREATE USER MAPPING](sql-createusermapping.html "CREATE USER MAPPING"), [DROP USER MAPPING](sql-dropusermapping.html "DROP USER MAPPING")
-
-***
-
-|                                          |                                                       |                                          |
-| :--------------------------------------- | :---------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-alteruser.html "ALTER USER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterview.html "ALTER VIEW") |
-| ALTER USER                               | [Home](index.html "PostgreSQL 17devel Documentation") |                               ALTER VIEW |

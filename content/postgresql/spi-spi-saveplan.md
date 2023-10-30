@@ -1,11 +1,3 @@
-
-
-|                 SPI\_saveplan                 |                                                      |                           |                                                       |                                                                 |
-| :-------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](spi-spi-keepplan.html "SPI_keepplan")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-register-relation.html "SPI_register_relation") |
-
-***
-
 ## SPI\_saveplan
 
 SPI\_saveplan — save a prepared statement
@@ -44,10 +36,3 @@ Pointer to the copied statement; or `NULL` if unsuccessful. On error, `SPI_resul
 The originally passed-in statement is not freed, so you might wish to do `SPI_freeplan` on it to avoid leaking memory until `SPI_finish`.
 
 In most cases, `SPI_keepplan` is preferred to this function, since it accomplishes largely the same result without needing to physically copy the prepared statement's data structures.
-
-***
-
-|                                               |                                                       |                                                                 |
-| :-------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](spi-spi-keepplan.html "SPI_keepplan")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-register-relation.html "SPI_register_relation") |
-| SPI\_keepplan                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                         SPI\_register\_relation |

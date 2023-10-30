@@ -1,11 +1,3 @@
-
-
-|                CREATE LANGUAGE               |                                        |              |                                                       |                                                                     |
-| :------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](sql-createindex.html "CREATE INDEX")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW") |
-
-***
-
 ## CREATE LANGUAGE
 
 CREATE LANGUAGE — define a new procedural language
@@ -96,10 +88,3 @@ CREATE EXTENSION plsample;
 ## See Also
 
 [ALTER LANGUAGE](sql-alterlanguage.html "ALTER LANGUAGE"), [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [DROP LANGUAGE](sql-droplanguage.html "DROP LANGUAGE"), [GRANT](sql-grant.html "GRANT"), [REVOKE](sql-revoke.html "REVOKE")
-
-***
-
-|                                              |                                                       |                                                                     |
-| :------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](sql-createindex.html "CREATE INDEX")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW") |
-| CREATE INDEX                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                            CREATE MATERIALIZED VIEW |

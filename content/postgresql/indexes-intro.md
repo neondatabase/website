@@ -1,11 +1,3 @@
-
-
-|              11.1. Introduction             |                                          |                     |                                                       |                                                 |
-| :-----------------------------------------: | :--------------------------------------- | :-----------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](indexes.html "Chapter 11. Indexes")  | [Up](indexes.html "Chapter 11. Indexes") | Chapter 11. Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](indexes-types.html "11.2. Index Types") |
-
-***
-
 ## 11.1. Introduction [#](#INDEXES-INTRO)
 
 Suppose we have a table similar to this:
@@ -47,10 +39,3 @@ Indexes can also benefit `UPDATE` and `DELETE` commands with search conditions. 
 Creating an index on a large table can take a long time. By default, PostgreSQL allows reads (`SELECT` statements) to occur on the table in parallel with index creation, but writes (`INSERT`, `UPDATE`, `DELETE`) are blocked until the index build is finished. In production environments this is often unacceptable. It is possible to allow writes to occur in parallel with index creation, but there are several caveats to be aware of — for more information see [Building Indexes Concurrently](sql-createindex.html#SQL-CREATEINDEX-CONCURRENTLY "Building Indexes Concurrently").
 
 After an index is created, the system has to keep it synchronized with the table. This adds overhead to data manipulation operations. Indexes can also prevent the creation of [heap-only tuples](storage-hot.html "73.7. Heap-Only Tuples (HOT)"). Therefore indexes that are seldom or never used in queries should be removed.
-
-***
-
-|                                             |                                                       |                                                 |
-| :------------------------------------------ | :---------------------------------------------------: | ----------------------------------------------: |
-| [Prev](indexes.html "Chapter 11. Indexes")  |        [Up](indexes.html "Chapter 11. Indexes")       |  [Next](indexes-types.html "11.2. Index Types") |
-| Chapter 11. Indexes                         | [Home](index.html "PostgreSQL 17devel Documentation") |                               11.2. Index Types |

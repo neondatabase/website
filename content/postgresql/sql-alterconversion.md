@@ -1,11 +1,3 @@
-
-
-|                  ALTER CONVERSION                  |                                        |              |                                                       |                                                  |
-| :------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-altercollation.html "ALTER COLLATION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterdatabase.html "ALTER DATABASE") |
-
-***
-
 ## ALTER CONVERSION
 
 ALTER CONVERSION — change the definition of a conversion
@@ -66,10 +58,3 @@ There is no `ALTER CONVERSION` statement in the SQL standard.
 ## See Also
 
 [CREATE CONVERSION](sql-createconversion.html "CREATE CONVERSION"), [DROP CONVERSION](sql-dropconversion.html "DROP CONVERSION")
-
-***
-
-|                                                    |                                                       |                                                  |
-| :------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-altercollation.html "ALTER COLLATION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterdatabase.html "ALTER DATABASE") |
-| ALTER COLLATION                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                   ALTER DATABASE |

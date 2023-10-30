@@ -1,11 +1,3 @@
-
-
-|                       43.3. Declarations                      |                                                                     |                                                |                                                       |                                                       |
-| :-----------------------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](plpgsql-structure.html "43.2. Structure of PL/pgSQL")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-expressions.html "43.4. Expressions") |
-
-***
-
 ## 43.3. Declarations [#](#PLPGSQL-DECLARATIONS)
 
   * *   [43.3.1. Declaring Function Parameters](plpgsql-declarations.html#PLPGSQL-DECLARATION-PARAMETERS)
@@ -382,10 +374,3 @@ $$ LANGUAGE plpgsql;
 ```
 
 This overrides the collations associated with the table columns, parameters, or local variables used in the expression, just as would happen in a plain SQL command.
-
-***
-
-|                                                               |                                                                     |                                                       |
-| :------------------------------------------------------------ | :-----------------------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](plpgsql-structure.html "43.2. Structure of PL/pgSQL")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](plpgsql-expressions.html "43.4. Expressions") |
-| 43.2. Structure of PL/pgSQL                                   |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                     43.4. Expressions |

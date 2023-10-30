@@ -1,11 +1,3 @@
-
-
-|    67.2. Behavior of B-Tree Operator Classes   |                                               |                            |                                                       |                                                                    |
-| :--------------------------------------------: | :-------------------------------------------- | :------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](btree-intro.html "67.1. Introduction")  | [Up](btree.html "Chapter 67. B-Tree Indexes") | Chapter 67. B-Tree Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](btree-support-funcs.html "67.3. B-Tree Support Functions") |
-
-***
-
 ## 67.2. Behavior of B-Tree Operator Classes [#](#BTREE-BEHAVIOR)
 
 As shown in [Table 38.3](xindex.html#XINDEX-BTREE-STRAT-TABLE "Table 38.3. B-Tree Strategies"), a btree operator class must provide five comparison operators, `<`, `<=`, `=`, `>=` and `>`. One might expect that `<>` should also be part of the operator class, but it is not, because it would almost never be useful to use a `<>` WHERE clause in an index search. (For some purposes, the planner treats `<>` as associated with a btree operator class; but it finds that operator via the `=` operator's negator link, rather than from `pg_amop`.)
@@ -38,10 +30,3 @@ For an operator family supporting multiple data types, the above laws must hold 
 Another requirement for a multiple-data-type family is that any implicit or binary-coercion casts that are defined between data types included in the operator family must not change the associated sort ordering.
 
 It should be fairly clear why a btree index requires these laws to hold within a single data type: without them there is no ordering to arrange the keys with. Also, index searches using a comparison key of a different data type require comparisons to behave sanely across two data types. The extensions to three or more data types within a family are not strictly required by the btree index mechanism itself, but the planner relies on them for optimization purposes.
-
-***
-
-|                                                |                                                       |                                                                    |
-| :--------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](btree-intro.html "67.1. Introduction")  |     [Up](btree.html "Chapter 67. B-Tree Indexes")     |  [Next](btree-support-funcs.html "67.3. B-Tree Support Functions") |
-| 67.1. Introduction                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                     67.3. B-Tree Support Functions |

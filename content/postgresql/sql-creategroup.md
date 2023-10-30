@@ -1,11 +1,3 @@
-
-
-|                    CREATE GROUP                    |                                        |              |                                                       |                                              |
-| :------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-createfunction.html "CREATE FUNCTION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createindex.html "CREATE INDEX") |
-
-***
-
 ## CREATE GROUP
 
 CREATE GROUP — define a new database role
@@ -47,10 +39,3 @@ There is no `CREATE GROUP` statement in the SQL standard.
 ## See Also
 
 [CREATE ROLE](sql-createrole.html "CREATE ROLE")
-
-***
-
-|                                                    |                                                       |                                              |
-| :------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-createfunction.html "CREATE FUNCTION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createindex.html "CREATE INDEX") |
-| CREATE FUNCTION                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                 CREATE INDEX |

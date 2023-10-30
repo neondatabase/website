@@ -1,11 +1,3 @@
-
-
-|               3.4. Transactions               |                                                             |                              |                                                       |                                                       |
-| :-------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](tutorial-fk.html "3.3. Foreign Keys")  | [Up](tutorial-advanced.html "Chapter 3. Advanced Features") | Chapter 3. Advanced Features | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-window.html "3.5. Window Functions") |
-
-***
-
 ## 3.4. Transactions [#](#TUTORIAL-TRANSACTIONS)
 
 *Transactions* are a fundamental concept of all database systems. The essential point of a transaction is that it bundles multiple steps into a single, all-or-nothing operation. The intermediate states between the steps are not visible to other concurrent transactions, and if some failure occurs that prevents the transaction from completing, then none of the steps affect the database at all.
@@ -73,10 +65,3 @@ COMMIT;
 ```
 
 This example is, of course, oversimplified, but there's a lot of control possible in a transaction block through the use of savepoints. Moreover, `ROLLBACK TO` is the only way to regain control of a transaction block that was put in aborted state by the system due to an error, short of rolling it back completely and starting again.
-
-***
-
-|                                               |                                                             |                                                       |
-| :-------------------------------------------- | :---------------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](tutorial-fk.html "3.3. Foreign Keys")  | [Up](tutorial-advanced.html "Chapter 3. Advanced Features") |  [Next](tutorial-window.html "3.5. Window Functions") |
-| 3.3. Foreign Keys                             |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                 3.5. Window Functions |

@@ -1,11 +1,3 @@
-
-
-|                       DROP ROLE                      |                                        |              |                                                       |                                              |
-| :--------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-droppublication.html "DROP PUBLICATION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droproutine.html "DROP ROUTINE") |
-
-***
-
 ## DROP ROLE
 
 DROP ROLE — remove a database role
@@ -55,10 +47,3 @@ The SQL standard defines `DROP ROLE`, but it allows only one role to be dropped 
 ## See Also
 
 [CREATE ROLE](sql-createrole.html "CREATE ROLE"), [ALTER ROLE](sql-alterrole.html "ALTER ROLE"), [SET ROLE](sql-set-role.html "SET ROLE")
-
-***
-
-|                                                      |                                                       |                                              |
-| :--------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-droppublication.html "DROP PUBLICATION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droproutine.html "DROP ROUTINE") |
-| DROP PUBLICATION                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                 DROP ROUTINE |

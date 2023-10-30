@@ -1,11 +1,3 @@
-
-
-|                COMMIT               |                                        |              |                                                       |                                                     |
-| :---------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](sql-comment.html "COMMENT")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-commit-prepared.html "COMMIT PREPARED") |
-
-***
-
 ## COMMIT
 
 COMMIT — commit the current transaction
@@ -53,10 +45,3 @@ The command `COMMIT` conforms to the SQL standard. The form `COMMIT TRANSACTION`
 ## See Also
 
 [BEGIN](sql-begin.html "BEGIN"), [ROLLBACK](sql-rollback.html "ROLLBACK")
-
-***
-
-|                                     |                                                       |                                                     |
-| :---------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](sql-comment.html "COMMENT")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-commit-prepared.html "COMMIT PREPARED") |
-| COMMENT                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                     COMMIT PREPARED |

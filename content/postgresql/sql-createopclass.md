@@ -1,11 +1,3 @@
-
-
-|                CREATE OPERATOR CLASS               |                                        |              |                                                       |                                                           |
-| :------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](sql-createoperator.html "CREATE OPERATOR")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createopfamily.html "CREATE OPERATOR FAMILY") |
-
-***
-
 ## CREATE OPERATOR CLASS
 
 CREATE OPERATOR CLASS — define a new operator class
@@ -133,10 +125,3 @@ CREATE OPERATOR CLASS gist__int_ops
 ## See Also
 
 [ALTER OPERATOR CLASS](sql-alteropclass.html "ALTER OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass.html "DROP OPERATOR CLASS"), [CREATE OPERATOR FAMILY](sql-createopfamily.html "CREATE OPERATOR FAMILY"), [ALTER OPERATOR FAMILY](sql-alteropfamily.html "ALTER OPERATOR FAMILY")
-
-***
-
-|                                                    |                                                       |                                                           |
-| :------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](sql-createoperator.html "CREATE OPERATOR")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createopfamily.html "CREATE OPERATOR FAMILY") |
-| CREATE OPERATOR                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                    CREATE OPERATOR FAMILY |

@@ -1,11 +1,3 @@
-
-
-|       33.5. Test Coverage Examination       |                                                   |                              |                                                       |                                                              |
-| :-----------------------------------------: | :------------------------------------------------ | :--------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](regress-tap.html "33.4. TAP Tests")  | [Up](regress.html "Chapter 33. Regression Tests") | Chapter 33. Regression Tests | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](client-interfaces.html "Part IV. Client Interfaces") |
-
-***
-
 ## 33.5. Test Coverage Examination [#](#REGRESS-COVERAGE)
 
   * *   [33.5.1. Coverage with Autoconf and Make](regress-coverage.html#REGRESS-COVERAGE-CONFIGURE)
@@ -63,10 +55,3 @@ ninja coverage-html
 Then point your HTML browser to `./meson-logs/coveragereport/index.html`.
 
 You can run several different tests before making the coverage report; the execution counts will accumulate.
-
-***
-
-|                                             |                                                       |                                                              |
-| :------------------------------------------ | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](regress-tap.html "33.4. TAP Tests")  |   [Up](regress.html "Chapter 33. Regression Tests")   |  [Next](client-interfaces.html "Part IV. Client Interfaces") |
-| 33.4. TAP Tests                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                   Part IV. Client Interfaces |

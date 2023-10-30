@@ -1,11 +1,3 @@
-
-
-|          F.5. basebackup\_to\_shell — example "shell" pg\_basebackup module          |                                                                             |                                                        |                                                       |                                                                                  |
-| :----------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------------: |
-| [Prev](auto-explain.html "F.4. auto_explain — log execution plans of slow queries")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](basic-archive.html "F.6. basic_archive — an example WAL archive module") |
-
-***
-
 ## F.5. basebackup\_to\_shell — example "shell" pg\_basebackup module [#](#BASEBACKUP-TO-SHELL)
 
   * *   [F.5.1. Configuration Parameters](basebackup-to-shell.html#BASEBACKUP-TO-SHELL-CONFIGURATION-PARAMETERS)
@@ -28,10 +20,3 @@ This module is primarily intended as an example of how to create a new backup ta
 ### F.5.2. Author [#](#BASEBACKUP-TO-SHELL-AUTHOR)
 
 Robert Haas `<rhaas@postgresql.org>`
-
-***
-
-|                                                                                      |                                                                             |                                                                                  |
-| :----------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -------------------------------------------------------------------------------: |
-| [Prev](auto-explain.html "F.4. auto_explain — log execution plans of slow queries")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](basic-archive.html "F.6. basic_archive — an example WAL archive module") |
-| F.4. auto\_explain — log execution plans of slow queries                             |            [Home](index.html "PostgreSQL 17devel Documentation")            |                              F.6. basic\_archive — an example WAL archive module |

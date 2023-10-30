@@ -1,11 +1,3 @@
-
-
-|        71.2. Built-in Operator Classes        |                                            |                          |                                                       |                                                        |
-| :-------------------------------------------: | :----------------------------------------- | :----------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](brin-intro.html "71.1. Introduction")  | [Up](brin.html "Chapter 71. BRIN Indexes") | Chapter 71. BRIN Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](brin-extensibility.html "71.3. Extensibility") |
-
-***
-
 ## 71.2. Built-in Operator Classes [#](#BRIN-BUILTIN-OPCLASSES)
 
 * [71.2.1. Operator Class Parameters](brin-builtin-opclasses.html#BRIN-BUILTIN-OPCLASSES--PARAMETERS)
@@ -322,10 +314,3 @@ minmax-multi operator classes accept these parameters:
 * `values_per_range`
 
     Defines the maximum number of values stored by BRIN minmax indexes to summarize a block range. Each value may represent either a point, or a boundary of an interval. Values must be between 8 and 256, and the default value is 32.
-
-***
-
-|                                               |                                                       |                                                        |
-| :-------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](brin-intro.html "71.1. Introduction")  |       [Up](brin.html "Chapter 71. BRIN Indexes")      |  [Next](brin-extensibility.html "71.3. Extensibility") |
-| 71.1. Introduction                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                    71.3. Extensibility |

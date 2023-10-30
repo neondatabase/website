@@ -1,11 +1,3 @@
-
-
-|                       SET ROLE                      |                                        |              |                                                       |                                                                         |
-| :-------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](sql-set-constraints.html "SET CONSTRAINTS")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-set-session-authorization.html "SET SESSION AUTHORIZATION") |
-
-***
-
 ## SET ROLE
 
 SET ROLE — set the current user identifier of the current session
@@ -67,10 +59,3 @@ PostgreSQL allows identifier syntax (`"rolename"`), while the SQL standard requi
 ## See Also
 
 [SET SESSION AUTHORIZATION](sql-set-session-authorization.html "SET SESSION AUTHORIZATION")
-
-***
-
-|                                                     |                                                       |                                                                         |
-| :-------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](sql-set-constraints.html "SET CONSTRAINTS")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-set-session-authorization.html "SET SESSION AUTHORIZATION") |
-| SET CONSTRAINTS                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                               SET SESSION AUTHORIZATION |

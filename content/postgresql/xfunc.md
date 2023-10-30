@@ -1,11 +1,3 @@
-
-
-|                     38.3. User-Defined Functions                    |                                               |                           |                                                       |                                                     |
-| :-----------------------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](extend-type-system.html "38.2. The PostgreSQL Type System")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xproc.html "38.4. User-Defined Procedures") |
-
-***
-
 ## 38.3. User-Defined Functions [#](#XFUNC)
 
 PostgreSQL provides four kinds of functions:
@@ -22,10 +14,3 @@ Many kinds of functions can take or return certain pseudo-types (such as polymor
 It's easiest to define SQL functions, so we'll start by discussing those. Most of the concepts presented for SQL functions will carry over to the other types of functions.
 
 Throughout this chapter, it can be useful to look at the reference page of the [`CREATE FUNCTION`](sql-createfunction.html "CREATE FUNCTION") command to understand the examples better. Some examples from this chapter can be found in `funcs.sql` and `funcs.c` in the `src/tutorial` directory in the PostgreSQL source distribution.
-
-***
-
-|                                                                     |                                                       |                                                     |
-| :------------------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](extend-type-system.html "38.2. The PostgreSQL Type System")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xproc.html "38.4. User-Defined Procedures") |
-| 38.2. The PostgreSQL Type System                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                       38.4. User-Defined Procedures |

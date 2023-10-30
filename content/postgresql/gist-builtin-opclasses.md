@@ -1,11 +1,3 @@
-
-
-|        68.2. Built-in Operator Classes        |                                            |                          |                                                       |                                                        |
-| :-------------------------------------------: | :----------------------------------------- | :----------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](gist-intro.html "68.1. Introduction")  | [Up](gist.html "Chapter 68. GiST Indexes") | Chapter 68. GiST Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](gist-extensibility.html "68.3. Extensibility") |
-
-***
-
 ## 68.2. Built-in Operator Classes [#](#GIST-BUILTIN-OPCLASSES)
 
 The core PostgreSQL distribution includes the GiST operator classes shown in [Table 68.1](gist-builtin-opclasses.html#GIST-BUILTIN-OPCLASSES-TABLE "Table 68.1. Built-in GiST Operator Classes"). (Some of the optional modules described in [Appendix F](contrib.html "Appendix F. Additional Supplied Modules and Extensions") provide additional GiST operator classes.)
@@ -123,10 +115,3 @@ For historical reasons, the `inet_ops` operator class is not the default class f
 
 CREATE INDEX ON my_table USING GIST (my_inet_column inet_ops);
 ```
-
-***
-
-|                                               |                                                       |                                                        |
-| :-------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](gist-intro.html "68.1. Introduction")  |       [Up](gist.html "Chapter 68. GiST Indexes")      |  [Next](gist-extensibility.html "68.3. Extensibility") |
-| 68.1. Introduction                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                    68.3. Extensibility |

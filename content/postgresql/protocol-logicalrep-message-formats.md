@@ -1,11 +1,3 @@
-
-
-|                  55.9. Logical Replication Message Formats                  |                                                             |                                       |                                                       |                                                                               |
-| :-------------------------------------------------------------------------: | :---------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](protocol-error-fields.html "55.8. Error and Notice Message Fields")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") | Chapter 55. Frontend/Backend Protocol | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](protocol-changes.html "55.10. Summary of Changes since Protocol 2.0") |
-
-***
-
 ## 55.9. Logical Replication Message Formats [#](#PROTOCOL-LOGICALREP-MESSAGE-FORMATS)
 
 This section describes the detailed format of each logical replication message. These messages are either returned by the replication slot SQL interface or are sent by a walsender. In the case of a walsender, they are encapsulated inside replication protocol WAL messages as described in [Section 55.4](protocol-replication.html "55.4. Streaming Replication Protocol"), and generally obey the same message flow as physical replication.
@@ -535,10 +527,3 @@ The following message parts are shared by the above messages.
   * Byte*`n`*
 
         The value of the column, either in binary or in text format. (As specified in the preceding format byte). *`n`* is the above length.
-
-***
-
-|                                                                             |                                                             |                                                                               |
-| :-------------------------------------------------------------------------- | :---------------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](protocol-error-fields.html "55.8. Error and Notice Message Fields")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") |  [Next](protocol-changes.html "55.10. Summary of Changes since Protocol 2.0") |
-| 55.8. Error and Notice Message Fields                                       |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                  55.10. Summary of Changes since Protocol 2.0 |

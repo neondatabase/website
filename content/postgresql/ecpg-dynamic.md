@@ -1,11 +1,3 @@
-
-
-|                     36.5. Dynamic SQL                     |                                                        |                                      |                                                       |                                                    |
-| :-------------------------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](ecpg-variables.html "36.4. Using Host Variables")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-pgtypes.html "36.6. pgtypes Library") |
-
-***
-
 ## 36.5. Dynamic SQL [#](#ECPG-DYNAMIC)
 
   * *   [36.5.1. Executing Statements without a Result Set](ecpg-dynamic.html#ECPG-DYNAMIC-WITHOUT-RESULT)
@@ -103,10 +95,3 @@ EXEC SQL CLOSE cursor1;
 EXEC SQL COMMIT;
 EXEC SQL DISCONNECT ALL;
 ```
-
-***
-
-|                                                           |                                                        |                                                    |
-| :-------------------------------------------------------- | :----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](ecpg-variables.html "36.4. Using Host Variables")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](ecpg-pgtypes.html "36.6. pgtypes Library") |
-| 36.4. Using Host Variables                                |  [Home](index.html "PostgreSQL 17devel Documentation") |                              36.6. pgtypes Library |

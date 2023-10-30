@@ -1,11 +1,3 @@
-
-
-|                 pg\_recvlogical                |                                                              |                                |                                                       |                                          |
-| :--------------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](app-pgreceivewal.html "pg_receivewal")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pgrestore.html "pg_restore") |
-
-***
-
 ## pg\_recvlogical
 
 pg\_recvlogical — control PostgreSQL logical decoding streams
@@ -165,10 +157,3 @@ See [Section 49.1](logicaldecoding-example.html "49.1. Logical Decoding Exampl
 ## See Also
 
 [pg\_receivewal](app-pgreceivewal.html "pg_receivewal")
-
-***
-
-|                                                |                                                              |                                          |
-| :--------------------------------------------- | :----------------------------------------------------------: | ---------------------------------------: |
-| [Prev](app-pgreceivewal.html "pg_receivewal")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-pgrestore.html "pg_restore") |
-| pg\_receivewal                                 |     [Home](index.html "PostgreSQL 17devel Documentation")    |                              pg\_restore |

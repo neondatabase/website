@@ -1,11 +1,3 @@
-
-
-|                9.23. Subquery Expressions               |                                                           |                                    |                                                       |                                                                       |
-| :-----------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](functions-window.html "9.22. Window Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-comparisons.html "9.24. Row and Array Comparisons") |
-
-***
-
 ## 9.23. Subquery Expressions [#](#FUNCTIONS-SUBQUERY)
 
   * *   [9.23.1. `EXISTS`](functions-subquery.html#FUNCTIONS-SUBQUERY-EXISTS)
@@ -143,10 +135,3 @@ row_constructor operator (subquery)
 The left-hand side is a row constructor, as described in [Section 4.2.13](sql-expressions.html#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors"). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. Furthermore, the subquery cannot return more than one row. (If it returns zero rows, the result is taken to be null.) The left-hand side is evaluated and compared row-wise to the single subquery result row.
 
 See [Section 9.24.5](functions-comparisons.html#ROW-WISE-COMPARISON "9.24.5. Row Constructor Comparison") for details about the meaning of a row constructor comparison.
-
-***
-
-|                                                         |                                                           |                                                                       |
-| :------------------------------------------------------ | :-------------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](functions-window.html "9.22. Window Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-comparisons.html "9.24. Row and Array Comparisons") |
-| 9.22. Window Functions                                  |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                       9.24. Row and Array Comparisons |

@@ -1,11 +1,3 @@
-
-
-|              5.3. Generated Columns             |                                             |                            |                                                       |                                                  |
-| :---------------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](ddl-default.html "5.2. Default Values")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-constraints.html "5.4. Constraints") |
-
-***
-
 ## 5.3. Generated Columns [#](#DDL-GENERATED-COLUMNS)
 
 A generated column is a special column that is always computed from other columns. Thus, it is for columns what a view is for tables. There are two kinds of generated columns: stored and virtual. A stored generated column is computed when it is written (inserted or updated) and occupies storage as if it were a normal column. A virtual generated column occupies no storage and is computed when it is read. Thus, a virtual generated column is similar to a view and a stored generated column is similar to a materialized view (except that it is always updated automatically). PostgreSQL currently implements only stored generated columns.
@@ -53,10 +45,3 @@ Additional considerations apply to the use of generated columns.
 
 * Generated columns maintain access privileges separately from their underlying base columns. So, it is possible to arrange it so that a particular role can read from a generated column but not from the underlying base columns.
 * Generated columns are, conceptually, updated after `BEFORE` triggers have run. Therefore, changes made to base columns in a `BEFORE` trigger will be reflected in generated columns. But conversely, it is not allowed to access generated columns in `BEFORE` triggers.
-
-***
-
-|                                                 |                                                       |                                                  |
-| :---------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](ddl-default.html "5.2. Default Values")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](ddl-constraints.html "5.4. Constraints") |
-| 5.2. Default Values                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                 5.4. Constraints |

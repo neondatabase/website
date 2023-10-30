@@ -1,11 +1,3 @@
-
-
-|                        dblink\_build\_sql\_delete                       |                                                                          |                                                      |                                                       |                                                                         |
-| :---------------------------------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](contrib-dblink-build-sql-insert.html "dblink_build_sql_insert")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-build-sql-update.html "dblink_build_sql_update") |
-
-***
-
 ## dblink\_build\_sql\_delete
 
 dblink\_build\_sql\_delete — builds a DELETE statement using supplied values for primary key field values
@@ -60,10 +52,3 @@ SELECT dblink_build_sql_delete('"MyFoo"', '1 2', 2, '{"1", "b"}');
  DELETE FROM "MyFoo" WHERE f1='1' AND f2='b'
 (1 row)
 ```
-
-***
-
-|                                                                         |                                                                          |                                                                         |
-| :---------------------------------------------------------------------- | :----------------------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](contrib-dblink-build-sql-insert.html "dblink_build_sql_insert")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-build-sql-update.html "dblink_build_sql_update") |
-| dblink\_build\_sql\_insert                                              |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                              dblink\_build\_sql\_update |

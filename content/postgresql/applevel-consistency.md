@@ -1,11 +1,3 @@
-
-
-|  13.4. Data Consistency Checks at the Application Level |                                                   |                                 |                                                       |                                                                                          |
-| :-----------------------------------------------------: | :------------------------------------------------ | :-----------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------------: |
-| [Prev](explicit-locking.html "13.3. Explicit Locking")  | [Up](mvcc.html "Chapter 13. Concurrency Control") | Chapter 13. Concurrency Control | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](mvcc-serialization-failure-handling.html "13.5. Serialization Failure Handling") |
-
-***
-
 ## 13.4. Data Consistency Checks at the Application Level [#](#APPLEVEL-CONSISTENCY)
 
   * *   [13.4.1. Enforcing Consistency with Serializable Transactions](applevel-consistency.html#SERIALIZABLE-CONSISTENCY)
@@ -38,10 +30,3 @@ Also of note to those converting from other environments is the fact that `SELEC
 Global validity checks require extra thought under non-serializable MVCC. For example, a banking application might wish to check that the sum of all credits in one table equals the sum of debits in another table, when both tables are being actively updated. Comparing the results of two successive `SELECT sum(...)` commands will not work reliably in Read Committed mode, since the second query will likely include the results of transactions not counted by the first. Doing the two sums in a single repeatable read transaction will give an accurate picture of only the effects of transactions that committed before the repeatable read transaction started — but one might legitimately wonder whether the answer is still relevant by the time it is delivered. If the repeatable read transaction itself applied some changes before trying to make the consistency check, the usefulness of the check becomes even more debatable, since now it includes some but not all post-transaction-start changes. In such cases a careful person might wish to lock all tables needed for the check, in order to get an indisputable picture of current reality. A `SHARE` mode (or higher) lock guarantees that there are no uncommitted changes in the locked table, other than those of the current transaction.
 
 Note also that if one is relying on explicit locking to prevent concurrent changes, one should either use Read Committed mode, or in Repeatable Read mode be careful to obtain locks before performing queries. A lock obtained by a repeatable read transaction guarantees that no other transactions modifying the table are still running, but if the snapshot seen by the transaction predates obtaining the lock, it might predate some now-committed changes in the table. A repeatable read transaction's snapshot is actually frozen at the start of its first query or data-modification command (`SELECT`, `INSERT`, `UPDATE`, `DELETE`, or `MERGE`), so it is possible to obtain locks explicitly before the snapshot is frozen.
-
-***
-
-|                                                         |                                                       |                                                                                          |
-| :------------------------------------------------------ | :---------------------------------------------------: | ---------------------------------------------------------------------------------------: |
-| [Prev](explicit-locking.html "13.3. Explicit Locking")  |   [Up](mvcc.html "Chapter 13. Concurrency Control")   |  [Next](mvcc-serialization-failure-handling.html "13.5. Serialization Failure Handling") |
-| 13.3. Explicit Locking                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                                     13.5. Serialization Failure Handling |

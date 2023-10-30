@@ -1,11 +1,3 @@
-
-
-|                           53.43. `pg_range`                          |                                                   |                             |                                                       |                                                                            |
-| :------------------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------: |
-| [Prev](catalog-pg-publication-rel.html "53.42. pg_publication_rel")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-replication-origin.html "53.44. pg_replication_origin") |
-
-***
-
 ## 53.43. `pg_range` [#](#CATALOG-PG-RANGE)
 
 The catalog `pg_range` stores information about range types. This is in addition to the types' entries in [`pg_type`](catalog-pg-type.html "53.64. pg_type").
@@ -25,10 +17,3 @@ The catalog `pg_range` stores information about range types. This is in addition
 \
 
 `rngsubopc` (plus `rngcollation`, if the element type is collatable) determines the sort ordering used by the range type. `rngcanonical` is used when the element type is discrete. `rngsubdiff` is optional but should be supplied to improve performance of GiST indexes on the range type.
-
-***
-
-|                                                                      |                                                       |                                                                            |
-| :------------------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------------------: |
-| [Prev](catalog-pg-publication-rel.html "53.42. pg_publication_rel")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-replication-origin.html "53.44. pg_replication_origin") |
-| 53.42. `pg_publication_rel`                                          | [Home](index.html "PostgreSQL 17devel Documentation") |                                             53.44. `pg_replication_origin` |

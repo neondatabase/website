@@ -1,11 +1,3 @@
-
-
-|                 DISCONNECT                 |                                                             |                              |                                                       |                                                              |
-| :----------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](ecpg-sql-describe.html "DESCRIBE")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-execute-immediate.html "EXECUTE IMMEDIATE") |
-
-***
-
 ## DISCONNECT
 
 DISCONNECT — terminate a database connection
@@ -69,10 +61,3 @@ main(void)
 ## See Also
 
 [CONNECT](ecpg-sql-connect.html "CONNECT"), [SET CONNECTION](ecpg-sql-set-connection.html "SET CONNECTION")
-
-***
-
-|                                            |                                                             |                                                              |
-| :----------------------------------------- | :---------------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](ecpg-sql-describe.html "DESCRIBE")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-execute-immediate.html "EXECUTE IMMEDIATE") |
-| DESCRIBE                                   |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                            EXECUTE IMMEDIATE |

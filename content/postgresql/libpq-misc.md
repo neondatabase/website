@@ -1,11 +1,3 @@
-
-
-|             34.12. Miscellaneous Functions             |                                                  |                               |                                                       |                                                                  |
-| :----------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](libpq-control.html "34.11. Control Functions")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-notice-processing.html "34.13. Notice Processing") |
-
-***
-
 ## 34.12. Miscellaneous Functions [#](#LIBPQ-MISC)
 
 As always, there are some functions that just don't fit anywhere.
@@ -161,10 +153,3 @@ As always, there are some functions that just don't fit anywhere.
 ### Note
 
     This function appeared in PostgreSQL version 9.1, so it cannot be used to detect required functionality in earlier versions, since calling it will create a link dependency on version 9.1 or later.
-
-***
-
-|                                                        |                                                       |                                                                  |
-| :----------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](libpq-control.html "34.11. Control Functions")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-notice-processing.html "34.13. Notice Processing") |
-| 34.11. Control Functions                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                         34.13. Notice Processing |

@@ -1,11 +1,3 @@
-
-
-|                      F.41. sslinfo — obtain client SSL information                     |                                                                             |                                                        |                                                       |                                                                                                |
-| :------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------------------: |
-| [Prev](contrib-spi.html "F.40. spi — Server Programming Interface features/examples")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tablefunc.html "F.42. tablefunc — functions that return tables (crosstab and others)") |
-
-***
-
 ## F.41. sslinfo — obtain client SSL information [#](#SSLINFO)
 
   * *   [F.41.1. Functions Provided](sslinfo.html#SSLINFO-FUNCTIONS)
@@ -101,10 +93,3 @@ Victor Wagner `<vitus@cryptocom.ru>`, Cryptocom LTD
 Dmitry Voronin `<carriingfate92@yandex.ru>`
 
 E-Mail of Cryptocom OpenSSL development group: `<openssl@cryptocom.ru>`
-
-***
-
-|                                                                                        |                                                                             |                                                                                                |
-| :------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ---------------------------------------------------------------------------------------------: |
-| [Prev](contrib-spi.html "F.40. spi — Server Programming Interface features/examples")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](tablefunc.html "F.42. tablefunc — functions that return tables (crosstab and others)") |
-| F.40. spi — Server Programming Interface features/examples                             |            [Home](index.html "PostgreSQL 17devel Documentation")            |                         F.42. tablefunc — functions that return tables (`crosstab` and others) |

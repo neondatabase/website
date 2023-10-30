@@ -1,11 +1,3 @@
-
-
-|           Chapter 73. Database Physical Storage          |                                            |                     |                                                       |                                                                |
-| :------------------------------------------------------: | :----------------------------------------- | :-----------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](hash-implementation.html "72.2. Implementation")  | [Up](internals.html "Part VII. Internals") | Part VII. Internals | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](storage-file-layout.html "73.1. Database File Layout") |
-
-***
-
 ## Chapter 73. Database Physical Storage
 
 **Table of Contents**
@@ -30,10 +22,3 @@
 * [73.7. Heap-Only Tuples (HOT)](storage-hot.html)
 
 This chapter provides an overview of the physical storage format used by PostgreSQL databases.
-
-***
-
-|                                                          |                                                       |                                                                |
-| :------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](hash-implementation.html "72.2. Implementation")  |       [Up](internals.html "Part VII. Internals")      |  [Next](storage-file-layout.html "73.1. Database File Layout") |
-| 72.2. Implementation                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                     73.1. Database File Layout |

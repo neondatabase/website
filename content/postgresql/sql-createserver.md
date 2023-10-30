@@ -1,11 +1,3 @@
-
-
-|                    CREATE SERVER                   |                                        |              |                                                       |                                                        |
-| :------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](sql-createsequence.html "CREATE SEQUENCE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createstatistics.html "CREATE STATISTICS") |
-
-***
-
 ## CREATE SERVER
 
 CREATE SERVER — define a new foreign server
@@ -79,10 +71,3 @@ See [postgres\_fdw](postgres-fdw.html "F.37. postgres_fdw — access data store
 ## See Also
 
 [ALTER SERVER](sql-alterserver.html "ALTER SERVER"), [DROP SERVER](sql-dropserver.html "DROP SERVER"), [CREATE FOREIGN DATA WRAPPER](sql-createforeigndatawrapper.html "CREATE FOREIGN DATA WRAPPER"), [CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE"), [CREATE USER MAPPING](sql-createusermapping.html "CREATE USER MAPPING")
-
-***
-
-|                                                    |                                                       |                                                        |
-| :------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](sql-createsequence.html "CREATE SEQUENCE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createstatistics.html "CREATE STATISTICS") |
-| CREATE SEQUENCE                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                      CREATE STATISTICS |

@@ -1,11 +1,3 @@
-
-
-|     36.15. Informix Compatibility Mode     |                                                        |                                      |                                                       |                                                                     |
-| :----------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](ecpg-sql-whenever.html "WHENEVER")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-oracle-compat.html "36.16. Oracle Compatibility Mode") |
-
-***
-
 ## 36.15. Informix Compatibility Mode [#](#ECPG-INFORMIX-COMPAT)
 
   * *   [36.15.1. Additional Types](ecpg-informix-compat.html#ECPG-INFORMIX-TYPES)
@@ -870,10 +862,3 @@ Note that all constants here describe errors and all of them are defined to repr
 * `ECPG_INFORMIX_EXTRA_CHARS` [#](#ECPG-INFORMIX-CONSTANTS-ECPG-INFORMIX-EXTRA-CHARS)
 
     Functions return this value if a parsing routine is passed extra characters it cannot parse. Internally it is defined as -1264 (the Informix definition).
-
-***
-
-|                                            |                                                        |                                                                     |
-| :----------------------------------------- | :----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](ecpg-sql-whenever.html "WHENEVER")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](ecpg-oracle-compat.html "36.16. Oracle Compatibility Mode") |
-| WHENEVER                                   |  [Home](index.html "PostgreSQL 17devel Documentation") |                                    36.16. Oracle Compatibility Mode |

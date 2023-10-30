@@ -1,11 +1,3 @@
-
-
-|       36.2. Managing Database Connections      |                                                        |                                      |                                                       |                                                          |
-| :--------------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](ecpg-concept.html "36.1. The Concept")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-commands.html "36.3. Running SQL Commands") |
-
-***
-
 ## 36.2. Managing Database Connections [#](#ECPG-CONNECT)
 
   * *   [36.2.1. Connecting to the Database Server](ecpg-connect.html#ECPG-CONNECTING)
@@ -207,10 +199,3 @@ The *`connection`* can be specified in the following ways:
 If no connection name is specified, the current connection is closed.
 
 It is good style that an application always explicitly disconnect from every connection it opened.
-
-***
-
-|                                                |                                                        |                                                          |
-| :--------------------------------------------- | :----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](ecpg-concept.html "36.1. The Concept")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](ecpg-commands.html "36.3. Running SQL Commands") |
-| 36.1. The Concept                              |  [Home](index.html "PostgreSQL 17devel Documentation") |                               36.3. Running SQL Commands |

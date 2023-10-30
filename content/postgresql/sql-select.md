@@ -1,11 +1,3 @@
-
-
-|                       SELECT                      |                                        |              |                                                       |                                            |
-| :-----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-security-label.html "SECURITY LABEL")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-selectinto.html "SELECT INTO") |
-
-***
-
 ## SELECT
 
 SELECT, TABLE, WITH — retrieve rows from a table or view
@@ -845,10 +837,3 @@ PostgreSQL allows `INSERT`, `UPDATE`, and `DELETE` to be used as `WITH` queries.
 `ROWS FROM( ... )` is an extension of the SQL standard.
 
 The `MATERIALIZED` and `NOT MATERIALIZED` options of `WITH` are extensions of the SQL standard.
-
-***
-
-|                                                   |                                                       |                                            |
-| :------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-security-label.html "SECURITY LABEL")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-selectinto.html "SELECT INTO") |
-| SECURITY LABEL                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                SELECT INTO |

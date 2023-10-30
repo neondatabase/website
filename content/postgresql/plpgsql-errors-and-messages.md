@@ -1,11 +1,3 @@
-
-
-|                     43.9. Errors and Messages                     |                                                                     |                                                |                                                       |                                                          |
-| :---------------------------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](plpgsql-transactions.html "43.8. Transaction Management")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-trigger.html "43.10. Trigger Functions") |
-
-***
-
 ## 43.9. Errors and Messages [#](#PLPGSQL-ERRORS-AND-MESSAGES)
 
   * *   [43.9.1. Reporting Errors and Messages](plpgsql-errors-and-messages.html#PLPGSQL-STATEMENTS-RAISE)
@@ -118,10 +110,3 @@ If the optional *`message`* is provided, it is an expression whose result (if no
 Testing of assertions can be enabled or disabled via the configuration parameter `plpgsql.check_asserts`, which takes a Boolean value; the default is `on`. If this parameter is `off` then `ASSERT` statements do nothing.
 
 Note that `ASSERT` is meant for detecting program bugs, not for reporting ordinary error conditions. Use the `RAISE` statement, described above, for that.
-
-***
-
-|                                                                   |                                                                     |                                                          |
-| :---------------------------------------------------------------- | :-----------------------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](plpgsql-transactions.html "43.8. Transaction Management")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](plpgsql-trigger.html "43.10. Trigger Functions") |
-| 43.8. Transaction Management                                      |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                 43.10. Trigger Functions |

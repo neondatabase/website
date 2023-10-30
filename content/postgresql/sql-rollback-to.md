@@ -1,11 +1,3 @@
-
-
-|                  ROLLBACK TO SAVEPOINT                  |                                        |              |                                                       |                                         |
-| :-----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------: |
-| [Prev](sql-rollback-prepared.html "ROLLBACK PREPARED")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-savepoint.html "SAVEPOINT") |
-
-***
-
 ## ROLLBACK TO SAVEPOINT
 
 ROLLBACK TO SAVEPOINT — roll back to a savepoint
@@ -78,10 +70,3 @@ The SQL standard specifies that the key word `SAVEPOINT` is mandatory, but Postg
 ## See Also
 
 [BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [RELEASE SAVEPOINT](sql-release-savepoint.html "RELEASE SAVEPOINT"), [ROLLBACK](sql-rollback.html "ROLLBACK"), [SAVEPOINT](sql-savepoint.html "SAVEPOINT")
-
-***
-
-|                                                         |                                                       |                                         |
-| :------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------: |
-| [Prev](sql-rollback-prepared.html "ROLLBACK PREPARED")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-savepoint.html "SAVEPOINT") |
-| ROLLBACK PREPARED                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                               SAVEPOINT |

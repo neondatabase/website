@@ -1,11 +1,3 @@
-
-
-|                          70.3. Extensibility                          |                                          |                         |                                                       |                                                         |
-| :-------------------------------------------------------------------: | :--------------------------------------- | :---------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](gin-builtin-opclasses.html "70.2. Built-in Operator Classes")  | [Up](gin.html "Chapter 70. GIN Indexes") | Chapter 70. GIN Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](gin-implementation.html "70.4. Implementation") |
-
-***
-
 ## 70.3. Extensibility [#](#GIN-EXTENSIBILITY)
 
 The GIN interface has a high level of abstraction, requiring the access method implementer only to implement the semantics of the data type being accessed. The GIN layer itself takes care of concurrency, logging and searching the tree structure.
@@ -69,10 +61,3 @@ An operator class for GIN can optionally supply the following methods:
 To support “partial match” queries, an operator class must provide the `comparePartial` method, and its `extractQuery` method must set the `pmatch` parameter when a partial-match query is encountered. See [Section 70.4.2](gin-implementation.html#GIN-PARTIAL-MATCH "70.4.2. Partial Match Algorithm") for details.
 
 The actual data types of the various `Datum` values mentioned above vary depending on the operator class. The item values passed to `extractValue` are always of the operator class's input type, and all key values must be of the class's `STORAGE` type. The type of the `query` argument passed to `extractQuery`, `consistent` and `triConsistent` is whatever is the right-hand input type of the class member operator identified by the strategy number. This need not be the same as the indexed type, so long as key values of the correct type can be extracted from it. However, it is recommended that the SQL declarations of these three support functions use the opclass's indexed data type for the `query` argument, even though the actual type might be something else depending on the operator.
-
-***
-
-|                                                                       |                                                       |                                                         |
-| :-------------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](gin-builtin-opclasses.html "70.2. Built-in Operator Classes")  |        [Up](gin.html "Chapter 70. GIN Indexes")       |  [Next](gin-implementation.html "70.4. Implementation") |
-| 70.2. Built-in Operator Classes                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                    70.4. Implementation |

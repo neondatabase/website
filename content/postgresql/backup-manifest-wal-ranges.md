@@ -1,11 +1,3 @@
-
-
-|                  77.3. Backup Manifest WAL Range Object                 |                                                                        |                                    |                                                       |                                                  |
-| :---------------------------------------------------------------------: | :--------------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](backup-manifest-files.html "77.2. Backup Manifest File Object")  | [Up](backup-manifest-format.html "Chapter 77. Backup Manifest Format") | Chapter 77. Backup Manifest Format | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](appendixes.html "Part VIII. Appendixes") |
-
-***
-
 ## 77.3. Backup Manifest WAL Range Object [#](#BACKUP-MANIFEST-WAL-RANGES)
 
 The object which describes a WAL range always has three keys:
@@ -23,10 +15,3 @@ The object which describes a WAL range always has three keys:
     The earliest LSN at which replay on the indicated timeline may end when making use of this backup. This is stored in the same format as `Start-LSN`.
 
 Ordinarily, there will be only a single WAL range. However, if a backup is taken from a standby which switches timelines during the backup due to an upstream promotion, it is possible for multiple ranges to be present, each with a different timeline. There will never be multiple WAL ranges present for the same timeline.
-
-***
-
-|                                                                         |                                                                        |                                                  |
-| :---------------------------------------------------------------------- | :--------------------------------------------------------------------: | -----------------------------------------------: |
-| [Prev](backup-manifest-files.html "77.2. Backup Manifest File Object")  | [Up](backup-manifest-format.html "Chapter 77. Backup Manifest Format") |  [Next](appendixes.html "Part VIII. Appendixes") |
-| 77.2. Backup Manifest File Object                                       |          [Home](index.html "PostgreSQL 17devel Documentation")         |                            Part VIII. Appendixes |

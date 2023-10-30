@@ -1,11 +1,3 @@
-
-
-|             ALTER DEFAULT PRIVILEGES             |                                        |              |                                                       |                                              |
-| :----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-alterdatabase.html "ALTER DATABASE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterdomain.html "ALTER DOMAIN") |
-
-***
-
 ## ALTER DEFAULT PRIVILEGES
 
 ALTER DEFAULT PRIVILEGES — define default access privileges
@@ -147,10 +139,3 @@ There is no `ALTER DEFAULT PRIVILEGES` statement in the SQL standard.
 ## See Also
 
 [GRANT](sql-grant.html "GRANT"), [REVOKE](sql-revoke.html "REVOKE")
-
-***
-
-|                                                  |                                                       |                                              |
-| :----------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-alterdatabase.html "ALTER DATABASE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterdomain.html "ALTER DOMAIN") |
-| ALTER DATABASE                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                 ALTER DOMAIN |

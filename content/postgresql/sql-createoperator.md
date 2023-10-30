@@ -1,10 +1,3 @@
-
-|                           CREATE OPERATOR                           |                                        |              |                                                       |                                                         |
-| :-----------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createopclass.html "CREATE OPERATOR CLASS") |
-
-***
-
 ## CREATE OPERATOR
 
 CREATE OPERATOR — define a new operator
@@ -146,10 +139,3 @@ CREATE OPERATOR === (
 ## See Also
 
 [ALTER OPERATOR](sql-alteroperator.html "ALTER OPERATOR"), [CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS"), [DROP OPERATOR](sql-dropoperator.html "DROP OPERATOR")
-
-***
-
-|                                                                     |                                                       |                                                         |
-| :------------------------------------------------------------------ | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createopclass.html "CREATE OPERATOR CLASS") |
-| CREATE MATERIALIZED VIEW                                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                   CREATE OPERATOR CLASS |

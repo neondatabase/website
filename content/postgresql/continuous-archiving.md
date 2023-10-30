@@ -1,11 +1,3 @@
-
-
-| 26.3. Continuous Archiving and Point-in-Time Recovery (PITR) |                                                    |                                |                                                       |                                                                                                  |
-| :----------------------------------------------------------: | :------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------------------: |
-|  [Prev](backup-file.html "26.2. File System Level Backup")   | [Up](backup.html "Chapter 26. Backup and Restore") | Chapter 26. Backup and Restore | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication") |
-
-***
-
 ## 26.3. Continuous Archiving and Point-in-Time Recovery (PITR) [#](#CONTINUOUS-ARCHIVING)
 
   * *   [26.3.1. Setting Up WAL Archiving](continuous-archiving.html#BACKUP-ARCHIVING-WAL)
@@ -259,10 +251,3 @@ At this writing, there are several limitations of the continuous archiving techn
 * [`CREATE TABLESPACE`](sql-createtablespace.html "CREATE TABLESPACE") commands are WAL-logged with the literal absolute path, and will therefore be replayed as tablespace creations with the same absolute path. This might be undesirable if the WAL is being replayed on a different machine. It can be dangerous even if the WAL is being replayed on the same machine, but into a new data directory: the replay will still overwrite the contents of the original tablespace. To avoid potential gotchas of this sort, the best practice is to take a new base backup after creating or dropping tablespaces.
 
 It should also be noted that the default WAL format is fairly bulky since it includes many disk page snapshots. These page snapshots are designed to support crash recovery, since we might need to fix partially-written disk pages. Depending on your system hardware and software, the risk of partial writes might be small enough to ignore, in which case you can significantly reduce the total volume of archived WAL files by turning off page snapshots using the [full\_page\_writes](runtime-config-wal.html#GUC-FULL-PAGE-WRITES) parameter. (Read the notes and warnings in [Chapter 30](wal.html "Chapter 30. Reliability and the Write-Ahead Log") before you do so.) Turning off page snapshots does not prevent use of the WAL for PITR operations. An area for future development is to compress archived WAL data by removing unnecessary page copies even when `full_page_writes` is on. In the meantime, administrators might wish to reduce the number of page snapshots included in WAL by increasing the checkpoint interval parameters as much as feasible.
-
-***
-
-|                                                            |                                                       |                                                                                                  |
-| :--------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------------------------------------------: |
-| [Prev](backup-file.html "26.2. File System Level Backup")  |   [Up](backup.html "Chapter 26. Backup and Restore")  |  [Next](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication") |
-| 26.2. File System Level Backup                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                   Chapter 27. High Availability, Load Balancing, and Replication |

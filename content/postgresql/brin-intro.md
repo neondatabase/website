@@ -1,11 +1,3 @@
-
-
-|               71.1. Introduction              |                                            |                          |                                                       |                                                                        |
-| :-------------------------------------------: | :----------------------------------------- | :----------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](brin.html "Chapter 71. BRIN Indexes")  | [Up](brin.html "Chapter 71. BRIN Indexes") | Chapter 71. BRIN Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](brin-builtin-opclasses.html "71.2. Built-in Operator Classes") |
-
-***
-
 ## 71.1. Introduction [#](#BRIN-INTRO)
 
 * [71.1.1. Index Maintenance](brin-intro.html#BRIN-OPERATION)
@@ -43,10 +35,3 @@ LOG:  request for BRIN range summarization for index "brin_wi_idx" page 128 was 
 When this happens, the range will remain unsummarized until the next regular vacuum run on the table, or one of the functions mentioned above are invoked.
 
 Conversely, a range can be de-summarized using the `brin_desummarize_range(regclass, bigint)` function, which is useful when the index tuple is no longer a very good representation because the existing values have changed. See [Section 9.27.8](functions-admin.html#FUNCTIONS-ADMIN-INDEX "9.27.8. Index Maintenance Functions") for details.
-
-***
-
-|                                               |                                                       |                                                                        |
-| :-------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](brin.html "Chapter 71. BRIN Indexes")  |       [Up](brin.html "Chapter 71. BRIN Indexes")      |  [Next](brin-builtin-opclasses.html "71.2. Built-in Operator Classes") |
-| Chapter 71. BRIN Indexes                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                        71.2. Built-in Operator Classes |

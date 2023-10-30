@@ -1,11 +1,3 @@
-
-
-|                               12.10. psql Support                              |                                                      |                              |                                                       |                                                           |
-| :----------------------------------------------------------------------------: | :--------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](textsearch-indexes.html "12.9. Preferred Index Types for Text Search")  | [Up](textsearch.html "Chapter 12. Full Text Search") | Chapter 12. Full Text Search | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](textsearch-limitations.html "12.11. Limitations") |
-
-***
-
 ## 12.10. psql Support [#](#TEXTSEARCH-PSQL)
 
 Information about text search configuration objects can be obtained in psql using a set of commands:
@@ -185,10 +177,3 @@ The available commands are:
      pg_catalog | synonym   | synonym dictionary: replace word by its synonym
      pg_catalog | thesaurus | thesaurus dictionary: phrase by phrase substitution
     ```
-
-***
-
-|                                                                                |                                                       |                                                           |
-| :----------------------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](textsearch-indexes.html "12.9. Preferred Index Types for Text Search")  |  [Up](textsearch.html "Chapter 12. Full Text Search") |  [Next](textsearch-limitations.html "12.11. Limitations") |
-| 12.9. Preferred Index Types for Text Search                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                        12.11. Limitations |

@@ -1,11 +1,3 @@
-
-
-|                       SAVEPOINT                       |                                        |              |                                                       |                                                   |
-| :---------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](sql-rollback-to.html "ROLLBACK TO SAVEPOINT")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-security-label.html "SECURITY LABEL") |
-
-***
-
 ## SAVEPOINT
 
 SAVEPOINT — define a new savepoint within the current transaction
@@ -99,10 +91,3 @@ SQL requires a savepoint to be destroyed automatically when another savepoint wi
 ## See Also
 
 [BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [RELEASE SAVEPOINT](sql-release-savepoint.html "RELEASE SAVEPOINT"), [ROLLBACK](sql-rollback.html "ROLLBACK"), [ROLLBACK TO SAVEPOINT](sql-rollback-to.html "ROLLBACK TO SAVEPOINT")
-
-***
-
-|                                                       |                                                       |                                                   |
-| :---------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](sql-rollback-to.html "ROLLBACK TO SAVEPOINT")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-security-label.html "SECURITY LABEL") |
-| ROLLBACK TO SAVEPOINT                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                    SECURITY LABEL |

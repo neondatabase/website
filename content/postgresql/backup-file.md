@@ -1,11 +1,3 @@
-
-
-|       26.2. File System Level Backup       |                                                    |                                |                                                       |                                                                                                   |
-| :----------------------------------------: | :------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------------------------: |
-| [Prev](backup-dump.html "26.1. SQL Dump")  | [Up](backup.html "Chapter 26. Backup and Restore") | Chapter 26. Backup and Restore | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](continuous-archiving.html "26.3. Continuous Archiving and Point-in-Time Recovery (PITR)") |
-
-***
-
 ## 26.2. File System Level Backup [#](#BACKUP-FILE)
 
 An alternative backup strategy is to directly copy the files that PostgreSQL uses to store the data in the database; [Section 19.2](creating-cluster.html "19.2. Creating a Database Cluster") explains where these files are located. You can use whatever method you prefer for doing file system backups; for example:
@@ -29,10 +21,3 @@ If simultaneous snapshots are not possible, one option is to shut down the datab
 Another option is to use rsync to perform a file system backup. This is done by first running rsync while the database server is running, then shutting down the database server long enough to do an `rsync --checksum`. (`--checksum` is necessary because `rsync` only has file modification-time granularity of one second.) The second rsync will be quicker than the first, because it has relatively little data to transfer, and the end result will be consistent because the server was down. This method allows a file system backup to be performed with minimal downtime.
 
 Note that a file system backup will typically be larger than an SQL dump. (pg\_dump does not need to dump the contents of indexes for example, just the commands to recreate them.) However, taking a file system backup might be faster.
-
-***
-
-|                                            |                                                       |                                                                                                   |
-| :----------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------------------------------------: |
-| [Prev](backup-dump.html "26.1. SQL Dump")  |   [Up](backup.html "Chapter 26. Backup and Restore")  |  [Next](continuous-archiving.html "26.3. Continuous Archiving and Point-in-Time Recovery (PITR)") |
-| 26.1. SQL Dump                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                      26.3. Continuous Archiving and Point-in-Time Recovery (PITR) |

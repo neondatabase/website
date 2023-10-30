@@ -1,11 +1,3 @@
-
-
-|                DROP INDEX                |                                        |              |                                                       |                                                |
-| :--------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-dropgroup.html "DROP GROUP")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droplanguage.html "DROP LANGUAGE") |
-
-***
-
 ## DROP INDEX
 
 DROP INDEX — remove an index
@@ -63,10 +55,3 @@ DROP INDEX title_idx;
 ## See Also
 
 [CREATE INDEX](sql-createindex.html "CREATE INDEX")
-
-***
-
-|                                          |                                                       |                                                |
-| :--------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-dropgroup.html "DROP GROUP")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droplanguage.html "DROP LANGUAGE") |
-| DROP GROUP                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                  DROP LANGUAGE |

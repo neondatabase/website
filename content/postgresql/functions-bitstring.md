@@ -1,11 +1,3 @@
-
-
-|                      9.6. Bit String Functions and Operators                      |                                                           |                                    |                                                       |                                                          |
-| :-------------------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](functions-binarystring.html "9.5. Binary String Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-matching.html "9.7. Pattern Matching") |
-
-***
-
 ## 9.6. Bit String Functions and Operators [#](#FUNCTIONS-BITSTRING)
 
 This section describes functions and operators for examining and manipulating bit strings, that is values of the types `bit` and `bit varying`. (While only type `bit` is mentioned in these tables, values of type `bit varying` can be used interchangeably.) Bit strings support the usual comparison operators shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators"), as well as the operators shown in [Table 9.14](functions-bitstring.html#FUNCTIONS-BIT-STRING-OP-TABLE "Table 9.14. Bit String Operators").
@@ -53,10 +45,3 @@ cast(-44 as bit(12))           111111010100
 ```
 
 Note that casting to just “bit” means casting to `bit(1)`, and so will deliver only the least significant bit of the integer.
-
-***
-
-|                                                                                   |                                                           |                                                          |
-| :-------------------------------------------------------------------------------- | :-------------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](functions-binarystring.html "9.5. Binary String Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-matching.html "9.7. Pattern Matching") |
-| 9.5. Binary String Functions and Operators                                        |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                    9.7. Pattern Matching |

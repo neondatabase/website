@@ -1,11 +1,3 @@
-
-
-|                         54.30. `pg_tables`                        |                                             |                          |                                                       |                                                                     |
-| :---------------------------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](view-pg-stats-ext-exprs.html "54.29. pg_stats_ext_exprs")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-timezone-abbrevs.html "54.31. pg_timezone_abbrevs") |
-
-***
-
 ## 54.30. `pg_tables` [#](#VIEW-PG-TABLES)
 
 The view `pg_tables` provides access to useful information about each table in the database.
@@ -22,10 +14,3 @@ The view `pg_tables` provides access to useful information about each table in t
 | `hasrules` `bool` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`relhasrules`)True if table has (or once had) rules                                           |
 | `hastriggers` `bool` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`relhastriggers`)True if table has (or once had) triggers                                  |
 | `rowsecurity` `bool` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`relrowsecurity`)True if row security is enabled on the table                              |
-
-***
-
-|                                                                   |                                                       |                                                                     |
-| :---------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](view-pg-stats-ext-exprs.html "54.29. pg_stats_ext_exprs")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-timezone-abbrevs.html "54.31. pg_timezone_abbrevs") |
-| 54.29. `pg_stats_ext_exprs`                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                        54.31. `pg_timezone_abbrevs` |

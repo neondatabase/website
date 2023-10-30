@@ -1,11 +1,3 @@
-
-
-|                     20.7. Query Planning                     |                                                              |                                  |                                                       |                                                                          |
-| :----------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](runtime-config-replication.html "20.6. Replication")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-logging.html "20.8. Error Reporting and Logging") |
-
-***
-
 ## 20.7. Query Planning [#](#RUNTIME-CONFIG-QUERY)
 
   * *   [20.7.1. Planner Method Configuration](runtime-config-query.html#RUNTIME-CONFIG-QUERY-ENABLE)
@@ -261,10 +253,3 @@ The genetic query optimizer (GEQO) is an algorithm that does query planning usin
 * `recursive_worktable_factor` (`floating point`) [#](#GUC-RECURSIVE-WORKTABLE-FACTOR)
 
     Sets the planner's estimate of the average size of the working table of a [recursive query](queries-with.html#QUERIES-WITH-RECURSIVE "7.8.2. Recursive Queries"), as a multiple of the estimated size of the initial non-recursive term of the query. This helps the planner choose the most appropriate method for joining the working table to the query's other tables. The default value is `10.0`. A smaller value such as `1.0` can be helpful when the recursion has low “fan-out” from one step to the next, as for example in shortest-path queries. Graph analytics queries may benefit from larger-than-default values.
-
-***
-
-|                                                              |                                                              |                                                                          |
-| :----------------------------------------------------------- | :----------------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](runtime-config-replication.html "20.6. Replication")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-logging.html "20.8. Error Reporting and Logging") |
-| 20.6. Replication                                            |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                        20.8. Error Reporting and Logging |

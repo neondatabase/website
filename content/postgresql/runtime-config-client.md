@@ -1,11 +1,3 @@
-
-
-|                   20.11. Client Connection Defaults                  |                                                              |                                  |                                                       |                                                             |
-| :------------------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](runtime-config-autovacuum.html "20.10. Automatic Vacuuming")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-locks.html "20.12. Lock Management") |
-
-***
-
 ## 20.11. Client Connection Defaults [#](#RUNTIME-CONFIG-CLIENT)
 
   * *   [20.11.1. Statement Behavior](runtime-config-client.html#RUNTIME-CONFIG-CLIENT-STATEMENT)
@@ -365,10 +357,3 @@ In general, refer to the documentation of a specific module for the recommended 
 * `gin_fuzzy_search_limit` (`integer`) [#](#GUC-GIN-FUZZY-SEARCH-LIMIT)
 
     Soft upper limit of the size of the set returned by GIN index scans. For more information see [Section 70.5](gin-tips.html "70.5. GIN Tips and Tricks").
-
-***
-
-|                                                                      |                                                              |                                                             |
-| :------------------------------------------------------------------- | :----------------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](runtime-config-autovacuum.html "20.10. Automatic Vacuuming")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-locks.html "20.12. Lock Management") |
-| 20.10. Automatic Vacuuming                                           |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                      20.12. Lock Management |

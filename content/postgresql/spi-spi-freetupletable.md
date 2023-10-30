@@ -1,11 +1,3 @@
-
-
-|                SPI\_freetuptable                |                                                 |                         |                                                       |                                               |
-| :---------------------------------------------: | :---------------------------------------------- | :---------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](spi-spi-freetuple.html "SPI_freetuple")  | [Up](spi-memory.html "47.3. Memory Management") | 47.3. Memory Management | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-freeplan.html "SPI_freeplan") |
-
-***
-
 ## SPI\_freetuptable
 
 SPI\_freetuptable — free a row set created by `SPI_execute` or a similar function
@@ -30,10 +22,3 @@ Beginning in PostgreSQL 9.3, `SPI_freetuptable` contains guard logic to protect 
 * `SPITupleTable * tuptable`
 
     pointer to row set to free, or NULL to do nothing
-
-***
-
-|                                                 |                                                       |                                               |
-| :---------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](spi-spi-freetuple.html "SPI_freetuple")  |    [Up](spi-memory.html "47.3. Memory Management")    |  [Next](spi-spi-freeplan.html "SPI_freeplan") |
-| SPI\_freetuple                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                 SPI\_freeplan |

@@ -1,11 +1,3 @@
-
-
-|      F.24. pageinspect — low-level inspection of database pages      |                                                                             |                                                        |                                                       |                                                                              |
-| :------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](ltree.html "F.23. ltree — hierarchical tree-like data type")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](passwordcheck.html "F.25. passwordcheck — verify password strength") |
-
-***
-
 ## F.24. pageinspect — low-level inspection of database pages [#](#PAGEINSPECT)
 
   * *   [F.24.1. General Functions](pageinspect.html#PAGEINSPECT-GENERAL-FUNCS)
@@ -535,10 +527,3 @@ The `pageinspect` module provides functions that allow you to inspect the conten
     spares    | {0,0,0,0,0,0,1,1,1,1,1,1,1,1,3,4,4,4,45,55,58,59,​508,567,628,704,1193,1202,1204}
     mapp      | {65}
     ```
-
-***
-
-|                                                                      |                                                                             |                                                                              |
-| :------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](ltree.html "F.23. ltree — hierarchical tree-like data type")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](passwordcheck.html "F.25. passwordcheck — verify password strength") |
-| F.23. ltree — hierarchical tree-like data type                       |            [Home](index.html "PostgreSQL 17devel Documentation")            |                               F.25. passwordcheck — verify password strength |

@@ -1,11 +1,3 @@
-
-
-|            F.29. pg\_prewarm — preload relation data into buffer caches           |                                                                             |                                                        |                                                       |                                                                                      |
-| :-------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](pgfreespacemap.html "F.28. pg_freespacemap — examine the free space map")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgrowlocks.html "F.30. pgrowlocks — show a table's row locking information") |
-
-***
-
 ## F.29. pg\_prewarm — preload relation data into buffer caches [#](#PGPREWARM)
 
   * *   [F.29.1. Functions](pgprewarm.html#PGPREWARM-FUNCS)
@@ -69,10 +61,3 @@ pg_prewarm.autoprewarm_interval = 300s
 ### F.29.3. Author [#](#PGPREWARM-AUTHOR)
 
 Robert Haas `<rhaas@postgresql.org>`
-
-***
-
-|                                                                                   |                                                                             |                                                                                      |
-| :-------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](pgfreespacemap.html "F.28. pg_freespacemap — examine the free space map")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](pgrowlocks.html "F.30. pgrowlocks — show a table's row locking information") |
-| F.28. pg\_freespacemap — examine the free space map                               |            [Home](index.html "PostgreSQL 17devel Documentation")            |                            F.30. pgrowlocks — show a table's row locking information |

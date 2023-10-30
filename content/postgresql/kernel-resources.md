@@ -1,11 +1,3 @@
-
-
-|                 19.4. Managing Kernel Resources                 |                                                             |                                        |                                                       |                                                                |
-| :-------------------------------------------------------------: | :---------------------------------------------------------- | :------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](server-start.html "19.3. Starting the Database Server")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") | Chapter 19. Server Setup and Operation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](server-shutdown.html "19.5. Shutting Down the Server") |
-
-***
-
 ## 19.4. Managing Kernel Resources [#](#KERNEL-RESOURCES)
 
   * *   [19.4.1. Shared Memory and Semaphores](kernel-resources.html#SYSVIPC)
@@ -311,10 +303,3 @@ It may also be necessary to give the database server's operating system user per
 The default behavior for huge pages in PostgreSQL is to use them when possible, with the system's default huge page size, and to fall back to normal pages on failure. To enforce the use of huge pages, you can set [huge\_pages](runtime-config-resource.html#GUC-HUGE-PAGES) to `on` in `postgresql.conf`. Note that with this setting PostgreSQL will fail to start if not enough huge pages are available.
 
 For a detailed description of the Linux huge pages feature have a look at [https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt](https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt).
-
-***
-
-|                                                                 |                                                             |                                                                |
-| :-------------------------------------------------------------- | :---------------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](server-start.html "19.3. Starting the Database Server")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") |  [Next](server-shutdown.html "19.5. Shutting Down the Server") |
-| 19.3. Starting the Database Server                              |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                 19.5. Shutting Down the Server |

@@ -1,11 +1,3 @@
-
-
-|                  F.15. earthdistance — calculate great-circle distances                 |                                                                             |                                                        |                                                       |                                                                                         |
-| :-------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](dict-xsyn.html "F.14. dict_xsyn — example synonym full-text search dictionary")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](file-fdw.html "F.16. file_fdw — access data files in the server's file system") |
-
-***
-
 ## F.15. earthdistance — calculate great-circle distances [#](#EARTHDISTANCE)
 
   * *   [F.15.1. Cube-Based Earth Distances](earthdistance.html#EARTHDISTANCE-CUBE-BASED)
@@ -63,10 +55,3 @@ A single operator is provided, shown in [Table F.6](earthdistance.html#EARTHDIS
 Note that unlike the `cube`-based part of the module, units are hardwired here: changing the `earth()` function will not affect the results of this operator.
 
 One disadvantage of the longitude/latitude representation is that you need to be careful about the edge conditions near the poles and near +/- 180 degrees of longitude. The `cube`-based representation avoids these discontinuities.
-
-***
-
-|                                                                                         |                                                                             |                                                                                         |
-| :-------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](dict-xsyn.html "F.14. dict_xsyn — example synonym full-text search dictionary")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](file-fdw.html "F.16. file_fdw — access data files in the server's file system") |
-| F.14. dict\_xsyn — example synonym full-text search dictionary                          |            [Home](index.html "PostgreSQL 17devel Documentation")            |                         F.16. file\_fdw — access data files in the server's file system |

@@ -1,11 +1,3 @@
-
-
-|              CREATE COLLATION              |                                        |              |                                                       |                                                        |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](sql-createcast.html "CREATE CAST")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createconversion.html "CREATE CONVERSION") |
-
-***
-
 ## CREATE COLLATION
 
 CREATE COLLATION — define a new collation
@@ -131,10 +123,3 @@ There is a `CREATE COLLATION` statement in the SQL standard, but it is limited t
 ## See Also
 
 [ALTER COLLATION](sql-altercollation.html "ALTER COLLATION"), [DROP COLLATION](sql-dropcollation.html "DROP COLLATION")
-
-***
-
-|                                            |                                                       |                                                        |
-| :----------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](sql-createcast.html "CREATE CAST")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createconversion.html "CREATE CONVERSION") |
-| CREATE CAST                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                      CREATE CONVERSION |

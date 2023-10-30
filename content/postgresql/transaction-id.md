@@ -1,11 +1,3 @@
-
-
-|                74.1. Transactions and Identifiers               |                                                              |                                    |                                                       |                                                             |
-| :-------------------------------------------------------------: | :----------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](transactions.html "Chapter 74. Transaction Processing")  | [Up](transactions.html "Chapter 74. Transaction Processing") | Chapter 74. Transaction Processing | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xact-locking.html "74.2. Transactions and Locking") |
-
-***
-
 ## 74.1. Transactions and Identifiers [#](#TRANSACTION-ID)
 
 Transactions can be created explicitly using `BEGIN` or `START TRANSACTION` and ended using `COMMIT` or `ROLLBACK`. SQL statements outside of explicit transactions automatically use single-statement transactions.
@@ -19,10 +11,3 @@ The internal transaction ID type `xid` is 32 bits wide and [wraps around](routin
 When a top-level transaction with a (non-virtual) xid commits, it is marked as committed in the `pg_xact` directory. Additional information is recorded in the `pg_commit_ts` directory if [track\_commit\_timestamp](runtime-config-replication.html#GUC-TRACK-COMMIT-TIMESTAMP) is enabled.
 
 In addition to `vxid` and `xid`, prepared transactions are also assigned Global Transaction Identifiers (GID). GIDs are string literals up to 200 bytes long, which must be unique amongst other currently prepared transactions. The mapping of GID to xid is shown in [`pg_prepared_xacts`](view-pg-prepared-xacts.html "54.16. pg_prepared_xacts").
-
-***
-
-|                                                                 |                                                              |                                                             |
-| :-------------------------------------------------------------- | :----------------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](transactions.html "Chapter 74. Transaction Processing")  | [Up](transactions.html "Chapter 74. Transaction Processing") |  [Next](xact-locking.html "74.2. Transactions and Locking") |
-| Chapter 74. Transaction Processing                              |     [Home](index.html "PostgreSQL 17devel Documentation")    |                              74.2. Transactions and Locking |

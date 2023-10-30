@@ -1,11 +1,3 @@
-
-
-|                   77.1. Backup Manifest Top-level Object                  |                                                                        |                                    |                                                       |                                                                         |
-| :-----------------------------------------------------------------------: | :--------------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](backup-manifest-format.html "Chapter 77. Backup Manifest Format")  | [Up](backup-manifest-format.html "Chapter 77. Backup Manifest Format") | Chapter 77. Backup Manifest Format | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](backup-manifest-files.html "77.2. Backup Manifest File Object") |
-
-***
-
 ## 77.1. Backup Manifest Top-level Object [#](#BACKUP-MANIFEST-TOPLEVEL)
 
 The backup manifest JSON document contains the following keys.
@@ -25,10 +17,3 @@ The backup manifest JSON document contains the following keys.
 * `Manifest-Checksum`
 
     This key is always present on the last line of the backup manifest file. The associated value is a SHA256 checksum of all the preceding lines. We use a fixed checksum method here to make it possible for clients to do incremental parsing of the manifest. While a SHA256 checksum is significantly more expensive than a CRC32C checksum, the manifest should normally be small enough that the extra computation won't matter very much.
-
-***
-
-|                                                                           |                                                                        |                                                                         |
-| :------------------------------------------------------------------------ | :--------------------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](backup-manifest-format.html "Chapter 77. Backup Manifest Format")  | [Up](backup-manifest-format.html "Chapter 77. Backup Manifest Format") |  [Next](backup-manifest-files.html "77.2. Backup Manifest File Object") |
-| Chapter 77. Backup Manifest Format                                        |          [Home](index.html "PostgreSQL 17devel Documentation")         |                                       77.2. Backup Manifest File Object |

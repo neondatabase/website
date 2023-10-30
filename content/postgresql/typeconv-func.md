@@ -1,11 +1,3 @@
-
-
-|                10.3. Functions                |                                                   |                             |                                                       |                                                    |
-| :-------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](typeconv-oper.html "10.2. Operators")  | [Up](typeconv.html "Chapter 10. Type Conversion") | Chapter 10. Type Conversion | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](typeconv-query.html "10.4. Value Storage") |
-
-***
-
 ## 10.3. Functions [#](#TYPECONV-FUNC)
 
 The specific function that is referenced by a function call is determined using the following procedure.
@@ -176,16 +168,3 @@ SELECT substr(CAST (1234 AS text), 3);
 ```
 
 \
-
-***
-
-[\[10\] ](#FUNC-QUALIFIED-SECURITY)The hazard does not arise with a non-schema-qualified name, because a search path containing schemas that permit untrusted users to create objects is not a [secure schema usage pattern](ddl-schemas.html#DDL-SCHEMAS-PATTERNS "5.9.6. Usage Patterns").
-
-[\[11\] ](#id-1.5.9.8.4.4.1.2)The reason for this step is to support function-style cast specifications in cases where there is not an actual cast function. If there is a cast function, it is conventionally named after its output type, and so there is no need to have a special case. See [CREATE CAST](sql-createcast.html "CREATE CAST") for additional commentary.
-
-***
-
-|                                               |                                                       |                                                    |
-| :-------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](typeconv-oper.html "10.2. Operators")  |   [Up](typeconv.html "Chapter 10. Type Conversion")   |  [Next](typeconv-query.html "10.4. Value Storage") |
-| 10.2. Operators                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                10.4. Value Storage |

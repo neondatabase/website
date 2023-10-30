@@ -1,11 +1,3 @@
-
-
-|                59.4. Foreign Data Wrapper Query Planning                |                                                                    |                                            |                                                       |                                                                            |
-| :---------------------------------------------------------------------: | :----------------------------------------------------------------- | :----------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------: |
-| [Prev](fdw-helpers.html "59.3. Foreign Data Wrapper Helper Functions")  | [Up](fdwhandler.html "Chapter 59. Writing a Foreign Data Wrapper") | Chapter 59. Writing a Foreign Data Wrapper | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](fdw-row-locking.html "59.5. Row Locking in Foreign Data Wrappers") |
-
-***
-
 ## 59.4. Foreign Data Wrapper Query Planning [#](#FDW-PLANNING)
 
 The FDW callback functions `GetForeignRelSize`, `GetForeignPaths`, `GetForeignPlan`, `PlanForeignModify`, `GetForeignJoinPaths`, `GetForeignUpperPaths`, and `PlanDirectModify` must fit into the workings of the PostgreSQL planner. Here are some notes about what they must do.
@@ -39,10 +31,3 @@ An FDW might additionally support direct execution of some plan actions that are
 When planning an `UPDATE` or `DELETE`, `PlanForeignModify` and `PlanDirectModify` can look up the `RelOptInfo` struct for the foreign table and make use of the `baserel->fdw_private` data previously created by the scan-planning functions. However, in `INSERT` the target table is not scanned so there is no `RelOptInfo` for it. The `List` returned by `PlanForeignModify` has the same restrictions as the `fdw_private` list of a `ForeignScan` plan node, that is it must contain only structures that `copyObject` knows how to copy.
 
 `INSERT` with an `ON CONFLICT` clause does not support specifying the conflict target, as unique constraints or exclusion constraints on remote tables are not locally known. This in turn implies that `ON CONFLICT DO UPDATE` is not supported, since the specification is mandatory there.
-
-***
-
-|                                                                         |                                                                    |                                                                            |
-| :---------------------------------------------------------------------- | :----------------------------------------------------------------: | -------------------------------------------------------------------------: |
-| [Prev](fdw-helpers.html "59.3. Foreign Data Wrapper Helper Functions")  | [Up](fdwhandler.html "Chapter 59. Writing a Foreign Data Wrapper") |  [Next](fdw-row-locking.html "59.5. Row Locking in Foreign Data Wrappers") |
-| 59.3. Foreign Data Wrapper Helper Functions                             |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                 59.5. Row Locking in Foreign Data Wrappers |

@@ -1,11 +1,3 @@
-
-
-|                   34.22. Example Programs                  |                                                  |                               |                                                       |                                                        |
-| :--------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](libpq-build.html "34.21. Building libpq Programs")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](largeobjects.html "Chapter 35. Large Objects") |
-
-***
-
 ## 34.22. Example Programs [#](#LIBPQ-EXAMPLE)
 
 These examples and others can be found in the directory `src/test/examples` in the source code distribution.
@@ -546,10 +538,3 @@ main(int argc, char **argv)
     return 0;
 }
 ```
-
-***
-
-|                                                            |                                                       |                                                        |
-| :--------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](libpq-build.html "34.21. Building libpq Programs")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](largeobjects.html "Chapter 35. Large Objects") |
-| 34.21. Building libpq Programs                             | [Home](index.html "PostgreSQL 17devel Documentation") |                              Chapter 35. Large Objects |

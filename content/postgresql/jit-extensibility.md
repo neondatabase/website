@@ -1,11 +1,3 @@
-
-
-|                  32.4. Extensibility                  |                                                             |                                            |                                                       |                                                      |
-| :---------------------------------------------------: | :---------------------------------------------------------- | :----------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](jit-configuration.html "32.3. Configuration")  | [Up](jit.html "Chapter 32. Just-in-Time Compilation (JIT)") | Chapter 32. Just-in-Time Compilation (JIT) | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](regress.html "Chapter 33. Regression Tests") |
-
-***
-
 ## 32.4. Extensibility [#](#JIT-EXTENSIBILITY)
 
   * *   [32.4.1. Inlining Support for Extensions](jit-extensibility.html#JIT-EXTENSIBILITY-BITCODE)
@@ -40,10 +32,3 @@ struct JitProviderCallbacks
 
 extern void _PG_jit_provider_init(JitProviderCallbacks *cb);
 ```
-
-***
-
-|                                                       |                                                             |                                                      |
-| :---------------------------------------------------- | :---------------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](jit-configuration.html "32.3. Configuration")  | [Up](jit.html "Chapter 32. Just-in-Time Compilation (JIT)") |  [Next](regress.html "Chapter 33. Regression Tests") |
-| 32.3. Configuration                                   |    [Home](index.html "PostgreSQL 17devel Documentation")    |                         Chapter 33. Regression Tests |

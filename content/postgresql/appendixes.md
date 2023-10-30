@@ -1,11 +1,3 @@
-
-
-|                               Part VIII. Appendixes                               |                                                     |                                  |                                                       |                                                                      |
-| :-------------------------------------------------------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](backup-manifest-wal-ranges.html "77.3. Backup Manifest WAL Range Object")  | [Up](index.html "PostgreSQL 17devel Documentation") | PostgreSQL 17devel Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](errcodes-appendix.html "Appendix A. PostgreSQL Error Codes") |
-
-***
-
 # Part VIII. Appendixes
 
 **Table of Contents**
@@ -134,10 +126,3 @@
     * [P.3. `pg_xlogdump` renamed to `pg_waldump`](pgxlogdump.html)
     * [P.4. `pg_resetxlog` renamed to `pg_resetwal`](app-pgresetxlog.html)
     * [P.5. `pg_receivexlog` renamed to `pg_receivewal`](app-pgreceivexlog.html)
-
-***
-
-|                                                                                   |                                                       |                                                                      |
-| :-------------------------------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](backup-manifest-wal-ranges.html "77.3. Backup Manifest WAL Range Object")  |  [Up](index.html "PostgreSQL 17devel Documentation")  |  [Next](errcodes-appendix.html "Appendix A. PostgreSQL Error Codes") |
-| 77.3. Backup Manifest WAL Range Object                                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                   Appendix A. PostgreSQL Error Codes |

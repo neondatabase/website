@@ -1,11 +1,3 @@
-
-
-|                    B.5. POSIX Time Zone Specifications                   |                                                              |                               |                                                       |                                                              |
-| :----------------------------------------------------------------------: | :----------------------------------------------------------- | :---------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](datetime-config-files.html "B.4. Date/Time Configuration Files")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") | Appendix B. Date/Time Support | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datetime-units-history.html "B.6. History of Units") |
-
-***
-
 ## B.5. POSIX Time Zone Specifications [#](#DATETIME-POSIX-TIMEZONE-SPECS)
 
 PostgreSQL can accept time zone specifications that are written according to the POSIX standard's rules for the `TZ` environment variable. POSIX time zone specifications are inadequate to deal with the complexity of real-world time zone history, but there are sometimes reasons to use them.
@@ -63,10 +55,3 @@ As an example, `CET-1CEST,M3.5.0,M10.5.0/3` describes current (as of 2020) timek
 The four timezone names `EST5EDT`, `CST6CDT`, `MST7MDT`, and `PST8PDT` look like they are POSIX zone specifications. However, they actually are treated as named time zones because (for historical reasons) there are files by those names in the IANA time zone database. The practical implication of this is that these zone names will produce valid historical USA daylight-savings transitions, even when a plain POSIX specification would not.
 
 One should be wary that it is easy to misspell a POSIX-style time zone specification, since there is no check on the reasonableness of the zone abbreviation(s). For example, `SET TIMEZONE TO FOOBAR0` will work, leaving the system effectively using a rather peculiar abbreviation for UTC.
-
-***
-
-|                                                                          |                                                              |                                                              |
-| :----------------------------------------------------------------------- | :----------------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](datetime-config-files.html "B.4. Date/Time Configuration Files")  | [Up](datetime-appendix.html "Appendix B. Date/Time Support") |  [Next](datetime-units-history.html "B.6. History of Units") |
-| B.4. Date/Time Configuration Files                                       |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                        B.6. History of Units |

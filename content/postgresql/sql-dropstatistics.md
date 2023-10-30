@@ -1,11 +1,3 @@
-
-
-|               DROP STATISTICS              |                                        |              |                                                       |                                                        |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](sql-dropserver.html "DROP SERVER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropsubscription.html "DROP SUBSCRIPTION") |
-
-***
-
 ## DROP STATISTICS
 
 DROP STATISTICS — remove extended statistics
@@ -53,10 +45,3 @@ There is no `DROP STATISTICS` command in the SQL standard.
 ## See Also
 
 [ALTER STATISTICS](sql-alterstatistics.html "ALTER STATISTICS"), [CREATE STATISTICS](sql-createstatistics.html "CREATE STATISTICS")
-
-***
-
-|                                            |                                                       |                                                        |
-| :----------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](sql-dropserver.html "DROP SERVER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropsubscription.html "DROP SUBSCRIPTION") |
-| DROP SERVER                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                      DROP SUBSCRIPTION |

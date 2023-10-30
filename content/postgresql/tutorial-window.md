@@ -1,11 +1,3 @@
-
-
-|                  3.5. Window Functions                  |                                                             |                              |                                                       |                                                       |
-| :-----------------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](tutorial-transactions.html "3.4. Transactions")  | [Up](tutorial-advanced.html "Chapter 3. Advanced Features") | Chapter 3. Advanced Features | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-inheritance.html "3.6. Inheritance") |
-
-***
-
 ## 3.5. Window Functions [#](#TUTORIAL-WINDOW)
 
 A *window function* performs a calculation across a set of table rows that are somehow related to the current row. This is comparable to the type of calculation that can be done with an aggregate function. However, window functions do not cause rows to become grouped into a single output row like non-window aggregate calls would. Instead, the rows retain their separate identities. Behind the scenes, the window function is able to access more than just the current row of the query result.
@@ -147,14 +139,3 @@ SELECT sum(salary) OVER w, avg(salary) OVER w
 ```
 
 More details about window functions can be found in [Section 4.2.8](sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls"), [Section 9.22](functions-window.html "9.22. Window Functions"), [Section 7.2.5](queries-table-expressions.html#QUERIES-WINDOW "7.2.5. Window Function Processing"), and the [SELECT](sql-select.html "SELECT") reference page.
-
-***
-
-[\[5\] ](#id-1.4.5.6.9.5)There are options to define the window frame in other ways, but this tutorial does not cover them. See [Section 4.2.8](sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls") for details.
-
-***
-
-|                                                         |                                                             |                                                       |
-| :------------------------------------------------------ | :---------------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](tutorial-transactions.html "3.4. Transactions")  | [Up](tutorial-advanced.html "Chapter 3. Advanced Features") |  [Next](tutorial-inheritance.html "3.6. Inheritance") |
-| 3.4. Transactions                                       |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                      3.6. Inheritance |

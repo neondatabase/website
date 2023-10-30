@@ -1,11 +1,3 @@
-
-
-|                          F.6. basic\_archive — an example WAL archive module                          |                                                                             |                                                        |                                                       |                                                                     |
-| :---------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](basebackup-to-shell.html "F.5. basebackup_to_shell — example \"shell\" pg_basebackup module")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](bloom.html "F.7. bloom — bloom filter index access method") |
-
-***
-
 ## F.6. basic\_archive — an example WAL archive module [#](#BASIC-ARCHIVE)
 
   * *   [F.6.1. Configuration Parameters](basic-archive.html#BASIC-ARCHIVE-CONFIGURATION-PARAMETERS)
@@ -39,10 +31,3 @@ Server crashes may leave temporary files with the prefix `archtemp` in the archi
 ### F.6.3. Author [#](#BASIC-ARCHIVE-AUTHOR)
 
 Nathan Bossart
-
-***
-
-|                                                                                                       |                                                                             |                                                                     |
-| :---------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](basebackup-to-shell.html "F.5. basebackup_to_shell — example \"shell\" pg_basebackup module")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](bloom.html "F.7. bloom — bloom filter index access method") |
-| F.5. basebackup\_to\_shell — example "shell" pg\_basebackup module                                    |            [Home](index.html "PostgreSQL 17devel Documentation")            |                       F.7. bloom — bloom filter index access method |

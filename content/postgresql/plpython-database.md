@@ -1,11 +1,3 @@
-
-
-|                   46.6. Database Access                  |                                                                          |                                                    |                                                       |                                                                        |
-| :------------------------------------------------------: | :----------------------------------------------------------------------- | :------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](plpython-trigger.html "46.5. Trigger Functions")  | [Up](plpython.html "Chapter 46. PL/Python — Python Procedural Language") | Chapter 46. PL/Python — Python Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpython-subtransaction.html "46.7. Explicit Subtransactions") |
-
-***
-
 ## 46.6. Database Access [#](#PLPYTHON-DATABASE)
 
   * *   [46.6.1. Database Access Functions](plpython-database.html#PLPYTHON-DATABASE-ACCESS-FUNCS)
@@ -191,10 +183,3 @@ $$ LANGUAGE plpython3u;
 Note that because all exceptions from the `plpy.spiexceptions` module inherit from `SPIError`, an `except` clause handling it will catch any database access error.
 
 As an alternative way of handling different error conditions, you can catch the `SPIError` exception and determine the specific error condition inside the `except` block by looking at the `sqlstate` attribute of the exception object. This attribute is a string value containing the “SQLSTATE” error code. This approach provides approximately the same functionality
-
-***
-
-|                                                          |                                                                          |                                                                        |
-| :------------------------------------------------------- | :----------------------------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](plpython-trigger.html "46.5. Trigger Functions")  | [Up](plpython.html "Chapter 46. PL/Python — Python Procedural Language") |  [Next](plpython-subtransaction.html "46.7. Explicit Subtransactions") |
-| 46.5. Trigger Functions                                  |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                         46.7. Explicit Subtransactions |

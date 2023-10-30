@@ -1,11 +1,3 @@
-
-
-|                      ALTER EXTENSION                      |                                        |              |                                                       |                                                                        |
-| :-------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](sql-altereventtrigger.html "ALTER EVENT TRIGGER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterforeigndatawrapper.html "ALTER FOREIGN DATA WRAPPER") |
-
-***
-
 ## ALTER EXTENSION
 
 ALTER EXTENSION — change the definition of an extension
@@ -165,10 +157,3 @@ ALTER EXTENSION hstore ADD FUNCTION populate_record(anyelement, hstore);
 ## See Also
 
 [CREATE EXTENSION](sql-createextension.html "CREATE EXTENSION"), [DROP EXTENSION](sql-dropextension.html "DROP EXTENSION")
-
-***
-
-|                                                           |                                                       |                                                                        |
-| :-------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](sql-altereventtrigger.html "ALTER EVENT TRIGGER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterforeigndatawrapper.html "ALTER FOREIGN DATA WRAPPER") |
-| ALTER EVENT TRIGGER                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                             ALTER FOREIGN DATA WRAPPER |

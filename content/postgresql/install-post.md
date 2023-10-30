@@ -1,11 +1,3 @@
-
-
-|                       17.5. Post-Installation Setup                      |                                                                     |                                           |                                                       |                                                               |
-| :----------------------------------------------------------------------: | :------------------------------------------------------------------ | :---------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](install-meson.html "17.4. Building and Installation with Meson")  | [Up](installation.html "Chapter 17. Installation from Source Code") | Chapter 17. Installation from Source Code | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](supported-platforms.html "17.6. Supported Platforms") |
-
-***
-
 ## 17.5. Post-Installation Setup [#](#INSTALL-POST)
 
   * *   [17.5.1. Shared Libraries](install-post.html#INSTALL-POST-SHLIBS)
@@ -90,10 +82,3 @@ export MANPATH
 ```
 
 The environment variables `PGHOST` and `PGPORT` specify to client applications the host and port of the database server, overriding the compiled-in defaults. If you are going to run client applications remotely then it is convenient if every user that plans to use the database sets `PGHOST`. This is not required, however; the settings can be communicated via command line options to most client programs.
-
-***
-
-|                                                                          |                                                                     |                                                               |
-| :----------------------------------------------------------------------- | :-----------------------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](install-meson.html "17.4. Building and Installation with Meson")  | [Up](installation.html "Chapter 17. Installation from Source Code") |  [Next](supported-platforms.html "17.6. Supported Platforms") |
-| 17.4. Building and Installation with Meson                               |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                     17.6. Supported Platforms |

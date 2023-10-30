@@ -1,11 +1,3 @@
-
-
-|           DEALLOCATE DESCRIPTOR          |                                                             |                              |                                                       |                                          |
-| :--------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](ecpg-sql-connect.html "CONNECT")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-declare.html "DECLARE") |
-
-***
-
 ## DEALLOCATE DESCRIPTOR
 
 DEALLOCATE DESCRIPTOR — deallocate an SQL descriptor area
@@ -41,10 +33,3 @@ EXEC SQL DEALLOCATE DESCRIPTOR mydesc;
 ## See Also
 
 [ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor.html "ALLOCATE DESCRIPTOR"), [GET DESCRIPTOR](ecpg-sql-get-descriptor.html "GET DESCRIPTOR"), [SET DESCRIPTOR](ecpg-sql-set-descriptor.html "SET DESCRIPTOR")
-
-***
-
-|                                          |                                                             |                                          |
-| :--------------------------------------- | :---------------------------------------------------------: | ---------------------------------------: |
-| [Prev](ecpg-sql-connect.html "CONNECT")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-declare.html "DECLARE") |
-| CONNECT                                  |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                  DECLARE |

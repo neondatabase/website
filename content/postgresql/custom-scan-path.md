@@ -1,11 +1,3 @@
-
-
-|                    61.1. Creating Custom Scan Paths                    |                                                                     |                                            |                                                       |                                                                   |
-| :--------------------------------------------------------------------: | :------------------------------------------------------------------ | :----------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](custom-scan.html "Chapter 61. Writing a Custom Scan Provider")  | [Up](custom-scan.html "Chapter 61. Writing a Custom Scan Provider") | Chapter 61. Writing a Custom Scan Provider | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](custom-scan-plan.html "61.2. Creating Custom Scan Plans") |
-
-***
-
 ## 61.1. Creating Custom Scan Paths [#](#CUSTOM-SCAN-PATH)
 
 * [61.1.1. Custom Scan Path Callbacks](custom-scan-path.html#CUSTOM-SCAN-PATH-CALLBACKS)
@@ -77,10 +69,3 @@ List *(*ReparameterizeCustomPathByChild) (PlannerInfo *root,
 ```
 
 This callback is called while converting a path parameterized by the top-most parent of the given child relation `child_rel` to be parameterized by the child relation. The callback is used to reparameterize any paths or translate any expression nodes saved in the given `custom_private` member of a `CustomPath`. The callback may use `reparameterize_path_by_child`, `adjust_appendrel_attrs` or `adjust_appendrel_attrs_multilevel` as required.
-
-***
-
-|                                                                        |                                                                     |                                                                   |
-| :--------------------------------------------------------------------- | :-----------------------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](custom-scan.html "Chapter 61. Writing a Custom Scan Provider")  | [Up](custom-scan.html "Chapter 61. Writing a Custom Scan Provider") |  [Next](custom-scan-plan.html "61.2. Creating Custom Scan Plans") |
-| Chapter 61. Writing a Custom Scan Provider                             |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                  61.2. Creating Custom Scan Plans |

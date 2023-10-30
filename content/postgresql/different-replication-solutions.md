@@ -1,11 +1,3 @@
-
-
-|                              27.1. Comparison of Different Solutions                             |                                                                                               |                                                                |                                                       |                                                                 |
-| :----------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------- | :------------------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication")  | [Up](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication") | Chapter 27. High Availability, Load Balancing, and Replication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](warm-standby.html "27.2. Log-Shipping Standby Servers") |
-
-***
-
 ## 27.1. Comparison of Different Solutions [#](#DIFFERENT-REPLICATION-SOLUTIONS)
 
 * Shared Disk Failover
@@ -80,10 +72,3 @@ There are a few solutions that do not fit into the above categories:
     Many of the above solutions allow multiple servers to handle multiple queries, but none allow a single query to use multiple servers to complete faster. This solution allows multiple servers to work concurrently on a single query. It is usually accomplished by splitting the data among servers and having each server execute its part of the query and return results to a central server where they are combined and returned to the user. This can be implemented using the PL/Proxy tool set.
 
 It should also be noted that because PostgreSQL is open source and easily extended, a number of companies have taken PostgreSQL and created commercial closed-source solutions with unique failover, replication, and load balancing capabilities. These are not discussed here.
-
-***
-
-|                                                                                                  |                                                                                               |                                                                 |
-| :----------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication")  | [Up](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication") |  [Next](warm-standby.html "27.2. Log-Shipping Standby Servers") |
-| Chapter 27. High Availability, Load Balancing, and Replication                                   |                     [Home](index.html "PostgreSQL 17devel Documentation")                     |                              27.2. Log-Shipping Standby Servers |

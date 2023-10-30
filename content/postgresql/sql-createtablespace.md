@@ -1,11 +1,3 @@
-
-
-|                 CREATE TABLESPACE                 |                                        |              |                                                       |                                                                     |
-| :-----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](sql-createtableas.html "CREATE TABLE AS")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createtsconfig.html "CREATE TEXT SEARCH CONFIGURATION") |
-
-***
-
 ## CREATE TABLESPACE
 
 CREATE TABLESPACE — define a new tablespace
@@ -85,10 +77,3 @@ CREATE TABLESPACE indexspace OWNER genevieve LOCATION '/data/indexes';
 ## See Also
 
 [CREATE DATABASE](sql-createdatabase.html "CREATE DATABASE"), [CREATE TABLE](sql-createtable.html "CREATE TABLE"), [CREATE INDEX](sql-createindex.html "CREATE INDEX"), [DROP TABLESPACE](sql-droptablespace.html "DROP TABLESPACE"), [ALTER TABLESPACE](sql-altertablespace.html "ALTER TABLESPACE")
-
-***
-
-|                                                   |                                                       |                                                                     |
-| :------------------------------------------------ | :---------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](sql-createtableas.html "CREATE TABLE AS")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createtsconfig.html "CREATE TEXT SEARCH CONFIGURATION") |
-| CREATE TABLE AS                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                    CREATE TEXT SEARCH CONFIGURATION |

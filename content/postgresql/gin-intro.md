@@ -1,11 +1,3 @@
-
-
-|              70.1. Introduction             |                                          |                         |                                                       |                                                                       |
-| :-----------------------------------------: | :--------------------------------------- | :---------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](gin.html "Chapter 70. GIN Indexes")  | [Up](gin.html "Chapter 70. GIN Indexes") | Chapter 70. GIN Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](gin-builtin-opclasses.html "70.2. Built-in Operator Classes") |
-
-***
-
 ## 70.1. Introduction [#](#GIN-INTRO)
 
 GIN stands for Generalized Inverted Index. GIN is designed for handling cases where the items to be indexed are composite values, and the queries to be handled by the index need to search for element values that appear within the composite items. For example, the items could be documents, and the queries could be searches for documents containing specific words.
@@ -19,10 +11,3 @@ GIN is generalized in the sense that the GIN access method code does not need to
 One advantage of GIN is that it allows the development of custom data types with the appropriate access methods, by an expert in the domain of the data type, rather than a database expert. This is much the same advantage as using GiST.
 
 The GIN implementation in PostgreSQL is primarily maintained by Teodor Sigaev and Oleg Bartunov. There is more information about GIN on their [website](http://www.sai.msu.su/~megera/wiki/Gin).
-
-***
-
-|                                             |                                                       |                                                                       |
-| :------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](gin.html "Chapter 70. GIN Indexes")  |        [Up](gin.html "Chapter 70. GIN Indexes")       |  [Next](gin-builtin-opclasses.html "70.2. Built-in Operator Classes") |
-| Chapter 70. GIN Indexes                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                       70.2. Built-in Operator Classes |

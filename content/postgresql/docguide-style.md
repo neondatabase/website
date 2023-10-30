@@ -1,11 +1,3 @@
-
-
-|                         J.6. Style Guide                        |                                                 |                           |                                                       |                                                      |
-| :-------------------------------------------------------------: | :---------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](docguide-authoring.html "J.5. Documentation Authoring")  | [Up](docguide.html "Appendix J. Documentation") | Appendix J. Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](limits.html "Appendix K. PostgreSQL Limits") |
-
-***
-
 ## J.6. Style Guide [#](#DOCGUIDE-STYLE)
 
 * [J.6.1. Reference Pages](docguide-style.html#DOCGUIDE-STYLE-REF-PAGES)
@@ -73,10 +65,3 @@ Reference pages that describe executable commands should contain the following s
     Cross-references, listed in the following order: other PostgreSQL command reference pages, PostgreSQL SQL command reference pages, citation of PostgreSQL manuals, other reference pages (e.g., operating system, other packages), other documentation. Items in the same group are listed alphabetically.
 
 Reference pages describing SQL commands should contain the following sections: Name, Synopsis, Description, Parameters, Outputs, Notes, Examples, Compatibility, History, See Also. The Parameters section is like the Options section, but there is more freedom about which clauses of the command can be listed. The Outputs section is only needed if the command returns something other than a default command-completion tag. The Compatibility section should explain to what extent this command conforms to the SQL standard(s), or to which other database system it is compatible. The See Also section of SQL commands should list SQL commands before cross-references to programs.
-
-***
-
-|                                                                 |                                                       |                                                      |
-| :-------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](docguide-authoring.html "J.5. Documentation Authoring")  |    [Up](docguide.html "Appendix J. Documentation")    |  [Next](limits.html "Appendix K. PostgreSQL Limits") |
-| J.5. Documentation Authoring                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                        Appendix K. PostgreSQL Limits |

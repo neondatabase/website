@@ -1,11 +1,3 @@
-
-
-|                    10.1. Overview                    |                                                   |                             |                                                       |                                               |
-| :--------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](typeconv.html "Chapter 10. Type Conversion")  | [Up](typeconv.html "Chapter 10. Type Conversion") | Chapter 10. Type Conversion | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](typeconv-oper.html "10.2. Operators") |
-
-***
-
 ## 10.1. Overview [#](#TYPECONV-OVERVIEW)
 
 SQL is a strongly typed language. That is, every data item has an associated data type which determines its behavior and allowed usage. PostgreSQL has an extensible type system that is more general and flexible than other SQL implementations. Hence, most type conversion behavior in PostgreSQL is governed by general rules rather than by ad hoc heuristics. This allows the use of mixed-type expressions even with user-defined types.
@@ -51,10 +43,3 @@ All type conversion rules are designed with several principles in mind:
 * Implicit conversions should never have surprising or unpredictable outcomes.
 * There should be no extra overhead in the parser or executor if a query does not need implicit type conversion. That is, if a query is well-formed and the types already match, then the query should execute without spending extra time in the parser and without introducing unnecessary implicit conversion calls in the query.
 * Additionally, if a query usually requires an implicit conversion for a function, and if then the user defines a new function with the correct argument types, the parser should use this new function and no longer do implicit conversion to use the old function.
-
-***
-
-|                                                      |                                                       |                                               |
-| :--------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](typeconv.html "Chapter 10. Type Conversion")  |   [Up](typeconv.html "Chapter 10. Type Conversion")   |  [Next](typeconv-oper.html "10.2. Operators") |
-| Chapter 10. Type Conversion                          | [Home](index.html "PostgreSQL 17devel Documentation") |                               10.2. Operators |

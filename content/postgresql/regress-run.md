@@ -1,11 +1,3 @@
-
-
-|                33.1. Running the Tests               |                                                   |                              |                                                       |                                                          |
-| :--------------------------------------------------: | :------------------------------------------------ | :--------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](regress.html "Chapter 33. Regression Tests")  | [Up](regress.html "Chapter 33. Regression Tests") | Chapter 33. Regression Tests | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](regress-evaluation.html "33.2. Test Evaluation") |
-
-***
-
 ## 33.1. Running the Tests [#](#REGRESS-RUN)
 
   * *   [33.1.1. Running the Tests Against a Temporary Installation](regress-run.html#REGRESS-RUN-TEMP-INST)
@@ -195,10 +187,3 @@ The core regression test suite contains a few test files that are not run by def
 
 make check EXTRA_TESTS=numeric_big
 ```
-
-***
-
-|                                                      |                                                       |                                                          |
-| :--------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](regress.html "Chapter 33. Regression Tests")  |   [Up](regress.html "Chapter 33. Regression Tests")   |  [Next](regress-evaluation.html "33.2. Test Evaluation") |
-| Chapter 33. Regression Tests                         | [Home](index.html "PostgreSQL 17devel Documentation") |                                    33.2. Test Evaluation |

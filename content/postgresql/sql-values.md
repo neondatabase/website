@@ -1,11 +1,3 @@
-
-
-|               VALUES              |                                        |              |                                                       |                                                                 |
-| :-------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](sql-vacuum.html "VACUUM")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](reference-client.html "PostgreSQL Client Applications") |
-
-***
-
 ## VALUES
 
 VALUES — compute a set of rows
@@ -126,10 +118,3 @@ For simple `IN` tests, it's better to rely on the [list-of-scalars](functions-co
 ## See Also
 
 [INSERT](sql-insert.html "INSERT"), [SELECT](sql-select.html "SELECT")
-
-***
-
-|                                   |                                                       |                                                                 |
-| :-------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](sql-vacuum.html "VACUUM")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](reference-client.html "PostgreSQL Client Applications") |
-| VACUUM                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                  PostgreSQL Client Applications |

@@ -1,11 +1,3 @@
-
-
-|                CREATE STATISTICS               |                                        |              |                                                       |                                                            |
-| :--------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](sql-createserver.html "CREATE SERVER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createsubscription.html "CREATE SUBSCRIPTION") |
-
-***
-
 ## CREATE STATISTICS
 
 CREATE STATISTICS — define extended statistics
@@ -172,10 +164,3 @@ There is no `CREATE STATISTICS` command in the SQL standard.
 ## See Also
 
 [ALTER STATISTICS](sql-alterstatistics.html "ALTER STATISTICS"), [DROP STATISTICS](sql-dropstatistics.html "DROP STATISTICS")
-
-***
-
-|                                                |                                                       |                                                            |
-| :--------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](sql-createserver.html "CREATE SERVER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createsubscription.html "CREATE SUBSCRIPTION") |
-| CREATE SERVER                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                        CREATE SUBSCRIPTION |

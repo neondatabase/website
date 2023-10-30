@@ -1,11 +1,3 @@
-
-
-|                           CREATE FOREIGN TABLE                           |                                        |              |                                                       |                                                    |
-| :----------------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-createforeigndatawrapper.html "CREATE FOREIGN DATA WRAPPER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createfunction.html "CREATE FUNCTION") |
-
-***
-
 ## CREATE FOREIGN TABLE
 
 CREATE FOREIGN TABLE — define a new foreign table
@@ -190,10 +182,3 @@ The `CREATE FOREIGN TABLE` command largely conforms to the SQL standard; however
 ## See Also
 
 [ALTER FOREIGN TABLE](sql-alterforeigntable.html "ALTER FOREIGN TABLE"), [DROP FOREIGN TABLE](sql-dropforeigntable.html "DROP FOREIGN TABLE"), [CREATE TABLE](sql-createtable.html "CREATE TABLE"), [CREATE SERVER](sql-createserver.html "CREATE SERVER"), [IMPORT FOREIGN SCHEMA](sql-importforeignschema.html "IMPORT FOREIGN SCHEMA")
-
-***
-
-|                                                                          |                                                       |                                                    |
-| :----------------------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-createforeigndatawrapper.html "CREATE FOREIGN DATA WRAPPER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createfunction.html "CREATE FUNCTION") |
-| CREATE FOREIGN DATA WRAPPER                                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                    CREATE FUNCTION |

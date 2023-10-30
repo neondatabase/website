@@ -1,11 +1,3 @@
-
-
-|       39.1. Overview of Trigger Behavior      |                                            |                      |                                                       |                                                                      |
-| :-------------------------------------------: | :----------------------------------------- | :------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](triggers.html "Chapter 39. Triggers")  | [Up](triggers.html "Chapter 39. Triggers") | Chapter 39. Triggers | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](trigger-datachanges.html "39.2. Visibility of Data Changes") |
-
-***
-
 ## 39.1. Overview of Trigger Behavior [#](#TRIGGER-DEFINITION)
 
 A trigger is a specification that the database should automatically execute a particular function whenever a certain type of operation is performed. Triggers can be attached to tables (partitioned or not), views, and foreign tables.
@@ -60,10 +52,3 @@ When a trigger is being defined, arguments can be specified for it. The purpose 
 Each programming language that supports triggers has its own method for making the trigger input data available to the trigger function. This input data includes the type of trigger event (e.g., `INSERT` or `UPDATE`) as well as any arguments that were listed in `CREATE TRIGGER`. For a row-level trigger, the input data also includes the `NEW` row for `INSERT` and `UPDATE` triggers, and/or the `OLD` row for `UPDATE` and `DELETE` triggers.
 
 By default, statement-level triggers do not have any way to examine the individual row(s) modified by the statement. But an `AFTER STATEMENT` trigger can request that *transition tables* be created to make the sets of affected rows available to the trigger. `AFTER ROW` triggers can also request transition tables, so that they can see the total changes in the table as well as the change in the individual row they are currently being fired for. The method for examining the transition tables again depends on the programming language that is being used, but the typical approach is to make the transition tables act like read-only temporary tables that can be accessed by SQL commands issued within the trigger function.
-
-***
-
-|                                               |                                                       |                                                                      |
-| :-------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](triggers.html "Chapter 39. Triggers")  |       [Up](triggers.html "Chapter 39. Triggers")      |  [Next](trigger-datachanges.html "39.2. Visibility of Data Changes") |
-| Chapter 39. Triggers                          | [Home](index.html "PostgreSQL 17devel Documentation") |                                     39.2. Visibility of Data Changes |

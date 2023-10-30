@@ -1,11 +1,3 @@
-
-
-|              pg\_waldump             |                                                              |                                |                                                       |                                       |
-| :----------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ------------------------------------: |
-| [Prev](pgupgrade.html "pg_upgrade")  | [Up](reference-server.html "PostgreSQL Server Applications") | PostgreSQL Server Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-postgres.html "postgres") |
-
-***
-
 ## pg\_waldump
 
 pg\_waldump — display a human-readable rendering of the write-ahead log of a PostgreSQL database cluster
@@ -141,10 +133,3 @@ pg\_waldump cannot read WAL files with suffix `.partial`. If those files need to
 ## See Also
 
 [Section 30.6](wal-internals.html "30.6. WAL Internals")
-
-***
-
-|                                      |                                                              |                                       |
-| :----------------------------------- | :----------------------------------------------------------: | ------------------------------------: |
-| [Prev](pgupgrade.html "pg_upgrade")  | [Up](reference-server.html "PostgreSQL Server Applications") |  [Next](app-postgres.html "postgres") |
-| pg\_upgrade                          |     [Home](index.html "PostgreSQL 17devel Documentation")    |                              postgres |

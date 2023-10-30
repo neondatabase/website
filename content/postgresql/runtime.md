@@ -1,11 +1,3 @@
-
-
-|                                 Chapter 19. Server Setup and Operation                                 |                                                    |                                 |                                                       |                                                                 |
-| :----------------------------------------------------------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](install-windows-full.html "18.1. Building with Visual C++ or the&#xA;  Microsoft Windows SDK")  | [Up](admin.html "Part III. Server Administration") | Part III. Server Administration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](postgres-user.html "19.1. The PostgreSQL User Account") |
-
-***
-
 ## Chapter 19. Server Setup and Operation
 
 **Table of Contents**
@@ -62,10 +54,3 @@
 This chapter discusses how to set up and run the database server, and its interactions with the operating system.
 
 The directions in this chapter assume that you are working with plain PostgreSQL without any additional infrastructure, for example a copy that you built from source according to the directions in the preceding chapters. If you are working with a pre-packaged or vendor-supplied version of PostgreSQL, it is likely that the packager has made special provisions for installing and starting the database server according to your system's conventions. Consult the package-level documentation for details.
-
-***
-
-|                                                                                                        |                                                       |                                                                 |
-| :----------------------------------------------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](install-windows-full.html "18.1. Building with Visual C++ or the&#xA;  Microsoft Windows SDK")  |   [Up](admin.html "Part III. Server Administration")  |  [Next](postgres-user.html "19.1. The PostgreSQL User Account") |
-| 18.1. Building with Visual C++ or the Microsoft Windows SDK                                            | [Home](index.html "PostgreSQL 17devel Documentation") |                               19.1. The PostgreSQL User Account |

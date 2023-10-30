@@ -1,11 +1,3 @@
-
-
-|            ALTER TEXT SEARCH CONFIGURATION           |                                        |              |                                                       |                                                                    |
-| :--------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](sql-altertablespace.html "ALTER TABLESPACE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altertsdictionary.html "ALTER TEXT SEARCH DICTIONARY") |
-
-***
-
 ## ALTER TEXT SEARCH CONFIGURATION
 
 ALTER TEXT SEARCH CONFIGURATION — change the definition of a text search configuration
@@ -88,10 +80,3 @@ There is no `ALTER TEXT SEARCH CONFIGURATION` statement in the SQL standard.
 ## See Also
 
 [CREATE TEXT SEARCH CONFIGURATION](sql-createtsconfig.html "CREATE TEXT SEARCH CONFIGURATION"), [DROP TEXT SEARCH CONFIGURATION](sql-droptsconfig.html "DROP TEXT SEARCH CONFIGURATION")
-
-***
-
-|                                                      |                                                       |                                                                    |
-| :--------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](sql-altertablespace.html "ALTER TABLESPACE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altertsdictionary.html "ALTER TEXT SEARCH DICTIONARY") |
-| ALTER TABLESPACE                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                       ALTER TEXT SEARCH DICTIONARY |

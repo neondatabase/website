@@ -1,11 +1,3 @@
-
-
-|                          30.1. Reliability                          |                                                                  |                                                 |                                                       |                                                |
-| :-----------------------------------------------------------------: | :--------------------------------------------------------------- | :---------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](wal.html "Chapter 30. Reliability and the Write-Ahead Log")  | [Up](wal.html "Chapter 30. Reliability and the Write-Ahead Log") | Chapter 30. Reliability and the Write-Ahead Log | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](checksums.html "30.2. Data Checksums") |
-
-***
-
 ## 30.1. Reliability [#](#WAL-RELIABILITY)
 
 Reliability is an important property of any serious database system, and PostgreSQL does everything possible to guarantee reliable operation. One aspect of reliable operation is that all data recorded by a committed transaction should be stored in a nonvolatile area that is safe from power loss, operating system failure, and hardware failure (except failure of the nonvolatile area itself, of course). Successfully writing the data to the computer's permanent storage (disk drive or equivalent) ordinarily meets this requirement. In fact, even if a computer is fatally damaged, if the disk drives survive they can be moved to another computer with similar hardware and all committed transactions will remain intact.
@@ -39,10 +31,3 @@ PostgreSQL also protects against some kinds of data corruption on storage device
 * Temporary data files used in larger SQL queries for sorts, materializations and intermediate results are not currently checksummed, nor will WAL records be written for changes to those files.
 
 PostgreSQL does not protect against correctable memory errors and it is assumed you will operate using RAM that uses industry standard Error Correcting Codes (ECC) or better protection.
-
-***
-
-|                                                                     |                                                                  |                                                |
-| :------------------------------------------------------------------ | :--------------------------------------------------------------: | ---------------------------------------------: |
-| [Prev](wal.html "Chapter 30. Reliability and the Write-Ahead Log")  | [Up](wal.html "Chapter 30. Reliability and the Write-Ahead Log") |  [Next](checksums.html "30.2. Data Checksums") |
-| Chapter 30. Reliability and the Write-Ahead Log                     |       [Home](index.html "PostgreSQL 17devel Documentation")      |                           30.2. Data Checksums |

@@ -1,11 +1,3 @@
-
-
-|                    CREATE DOMAIN                   |                                        |              |                                                       |                                                             |
-| :------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](sql-createdatabase.html "CREATE DATABASE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createeventtrigger.html "CREATE EVENT TRIGGER") |
-
-***
-
 ## CREATE DOMAIN
 
 CREATE DOMAIN — define a new domain
@@ -125,10 +117,3 @@ The command `CREATE DOMAIN` conforms to the SQL standard.
 ## See Also
 
 [ALTER DOMAIN](sql-alterdomain.html "ALTER DOMAIN"), [DROP DOMAIN](sql-dropdomain.html "DROP DOMAIN")
-
-***
-
-|                                                    |                                                       |                                                             |
-| :------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](sql-createdatabase.html "CREATE DATABASE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createeventtrigger.html "CREATE EVENT TRIGGER") |
-| CREATE DATABASE                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                        CREATE EVENT TRIGGER |

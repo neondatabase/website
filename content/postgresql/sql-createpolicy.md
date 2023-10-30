@@ -1,11 +1,3 @@
-
-
-|                       CREATE POLICY                       |                                        |              |                                                       |                                                      |
-| :-------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-createopfamily.html "CREATE OPERATOR FAMILY")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createprocedure.html "CREATE PROCEDURE") |
-
-***
-
 ## CREATE POLICY
 
 CREATE POLICY — define a new row-level security policy for a table
@@ -186,10 +178,3 @@ Additional discussion and practical examples can be found in [Section 5.8](ddl-
 ## See Also
 
 [ALTER POLICY](sql-alterpolicy.html "ALTER POLICY"), [DROP POLICY](sql-droppolicy.html "DROP POLICY"), [ALTER TABLE](sql-altertable.html "ALTER TABLE")
-
-***
-
-|                                                           |                                                       |                                                      |
-| :-------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-createopfamily.html "CREATE OPERATOR FAMILY")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createprocedure.html "CREATE PROCEDURE") |
-| CREATE OPERATOR FAMILY                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                     CREATE PROCEDURE |

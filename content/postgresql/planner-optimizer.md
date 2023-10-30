@@ -1,11 +1,3 @@
-
-
-|                    52.5. Planner/Optimizer                   |                                                                    |                                              |                                                       |                                         |
-| :----------------------------------------------------------: | :----------------------------------------------------------------- | :------------------------------------------: | ----------------------------------------------------: | --------------------------------------: |
-| [Prev](rule-system.html "52.4. The PostgreSQL Rule System")  | [Up](overview.html "Chapter 52. Overview of PostgreSQL Internals") | Chapter 52. Overview of PostgreSQL Internals | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](executor.html "52.6. Executor") |
-
-***
-
 ## 52.5. Planner/Optimizer [#](#PLANNER-OPTIMIZER)
 
 * [52.5.1. Generating Possible Plans](planner-optimizer.html#PLANNER-OPTIMIZER-GENERATING-POSSIBLE-PLANS)
@@ -35,10 +27,3 @@ If the query uses fewer than [geqo\_threshold](runtime-config-query.html#GUC-GEQ
 When `geqo_threshold` is exceeded, the join sequences considered are determined by heuristics, as described in [Chapter 62](geqo.html "Chapter 62. Genetic Query Optimizer"). Otherwise the process is the same.
 
 The finished plan tree consists of sequential or index scans of the base relations, plus nested-loop, merge, or hash join nodes as needed, plus any auxiliary steps needed, such as sort nodes or aggregate-function calculation nodes. Most of these plan node types have the additional ability to do *selection* (discarding rows that do not meet a specified Boolean condition) and *projection* (computation of a derived column set based on given column values, that is, evaluation of scalar expressions where needed). One of the responsibilities of the planner is to attach selection conditions from the `WHERE` clause and computation of required output expressions to the most appropriate nodes of the plan tree.
-
-***
-
-|                                                              |                                                                    |                                         |
-| :----------------------------------------------------------- | :----------------------------------------------------------------: | --------------------------------------: |
-| [Prev](rule-system.html "52.4. The PostgreSQL Rule System")  | [Up](overview.html "Chapter 52. Overview of PostgreSQL Internals") |  [Next](executor.html "52.6. Executor") |
-| 52.4. The PostgreSQL Rule System                             |        [Home](index.html "PostgreSQL 17devel Documentation")       |                          52.6. Executor |

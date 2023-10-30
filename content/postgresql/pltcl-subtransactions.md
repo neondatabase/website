@@ -1,11 +1,3 @@
-
-
-|               44.9. Explicit Subtransactions in PL/Tcl              |                                                                 |                                              |                                                       |                                                                  |
-| :-----------------------------------------------------------------: | :-------------------------------------------------------------- | :------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](pltcl-error-handling.html "44.8. Error Handling in PL/Tcl")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") | Chapter 44. PL/Tcl — Tcl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pltcl-transactions.html "44.10. Transaction Management") |
-
-***
-
 ## 44.9. Explicit Subtransactions in PL/Tcl [#](#PLTCL-SUBTRANSACTIONS)
 
 Recovering from errors caused by database access as described in [Section 44.8](pltcl-error-handling.html "44.8. Error Handling in PL/Tcl") can lead to an undesirable situation where some operations succeed before one of them fails, and after recovering from that error the data is left in an inconsistent state. PL/Tcl offers a solution to this problem in the form of explicit subtransactions.
@@ -51,10 +43,3 @@ $$ LANGUAGE pltcl;
 Note that use of `catch` is still required for this purpose. Otherwise the error would propagate to the top level of the function, preventing the desired insertion into the `operations` table. The `subtransaction` command does not trap errors, it only assures that all database operations executed inside its scope will be rolled back together when an error is reported.
 
 A rollback of an explicit subtransaction occurs on any error reported by the contained Tcl code, not only errors originating from database access. Thus a regular Tcl exception raised inside a `subtransaction` command will also cause the subtransaction to be rolled back. However, non-error exits out of the contained Tcl code (for instance, due to `return`) do not cause a rollback.
-
-***
-
-|                                                                     |                                                                 |                                                                  |
-| :------------------------------------------------------------------ | :-------------------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](pltcl-error-handling.html "44.8. Error Handling in PL/Tcl")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") |  [Next](pltcl-transactions.html "44.10. Transaction Management") |
-| 44.8. Error Handling in PL/Tcl                                      |      [Home](index.html "PostgreSQL 17devel Documentation")      |                                    44.10. Transaction Management |

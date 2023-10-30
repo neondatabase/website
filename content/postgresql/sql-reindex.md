@@ -1,11 +1,3 @@
-
-
-|                                REINDEX                                |                                        |              |                                                       |                                                         |
-| :-------------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-refreshmaterializedview.html "REFRESH MATERIALIZED VIEW")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-release-savepoint.html "RELEASE SAVEPOINT") |
-
-***
-
 ## REINDEX
 
 REINDEX — rebuild indexes
@@ -183,10 +175,3 @@ There is no `REINDEX` command in the SQL standard.
 ## See Also
 
 [CREATE INDEX](sql-createindex.html "CREATE INDEX"), [DROP INDEX](sql-dropindex.html "DROP INDEX"), [reindexdb](app-reindexdb.html "reindexdb"), [Section 28.4.4](progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting")
-
-***
-
-|                                                                       |                                                       |                                                         |
-| :-------------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](sql-refreshmaterializedview.html "REFRESH MATERIALIZED VIEW")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-release-savepoint.html "RELEASE SAVEPOINT") |
-| REFRESH MATERIALIZED VIEW                                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                       RELEASE SAVEPOINT |

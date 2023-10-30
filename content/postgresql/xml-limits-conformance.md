@@ -1,11 +1,3 @@
-
-
-|                  D.3. XML Limits and Conformance to SQL/XML                 |                                                   |                             |                                                       |                                                   |
-| :-------------------------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](unsupported-features-sql-standard.html "D.2. Unsupported Features")  | [Up](features.html "Appendix D. SQL Conformance") | Appendix D. SQL Conformance | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](release.html "Appendix E. Release Notes") |
-
-***
-
 ## D.3. XML Limits and Conformance to SQL/XML [#](#XML-LIMITS-CONFORMANCE)
 
   * *   [D.3.1. Queries Are Restricted to XPath 1.0](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-XPATH1)
@@ -93,10 +85,3 @@ The XPath-based functions support passing one parameter to serve as the XPath ex
 #### D.3.2.3. No `XML(SEQUENCE)` Type [#](#FUNCTIONS-XML-LIMITS-POSTGRESQL-NO-XML-SEQUENCE)
 
 The PostgreSQL `xml` data type can only hold a value in `DOCUMENT` or `CONTENT` form. An XQuery/XPath expression context item must be a single XML node or atomic value, but XPath 1.0 further restricts it to be only an XML node, and has no node type allowing `CONTENT`. The upshot is that a well-formed `DOCUMENT` is the only form of XML value that PostgreSQL can supply as an XPath context item.
-
-***
-
-|                                                                             |                                                       |                                                   |
-| :-------------------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](unsupported-features-sql-standard.html "D.2. Unsupported Features")  |   [Up](features.html "Appendix D. SQL Conformance")   |  [Next](release.html "Appendix E. Release Notes") |
-| D.2. Unsupported Features                                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                         Appendix E. Release Notes |

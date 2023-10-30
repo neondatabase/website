@@ -1,11 +1,3 @@
-
-
-|                   DROP RULE                  |                                        |              |                                                       |                                            |
-| :------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-droproutine.html "DROP ROUTINE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropschema.html "DROP SCHEMA") |
-
-***
-
 ## DROP RULE
 
 DROP RULE — remove a rewrite rule
@@ -59,10 +51,3 @@ DROP RULE newrule ON mytable;
 ## See Also
 
 [CREATE RULE](sql-createrule.html "CREATE RULE"), [ALTER RULE](sql-alterrule.html "ALTER RULE")
-
-***
-
-|                                              |                                                       |                                            |
-| :------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-droproutine.html "DROP ROUTINE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropschema.html "DROP SCHEMA") |
-| DROP ROUTINE                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                DROP SCHEMA |

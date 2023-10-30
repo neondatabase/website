@@ -1,11 +1,3 @@
-
-
-|     34.20. Behavior in Threaded Programs     |                                                  |                               |                                                       |                                                            |
-| :------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](libpq-ssl.html "34.19. SSL Support")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-build.html "34.21. Building libpq Programs") |
-
-***
-
 ## 34.20. Behavior in Threaded Programs [#](#LIBPQ-THREADING)
 
 As of version 17, libpq is always reentrant and thread-safe. However, one restriction is that no two threads attempt to manipulate the same `PGconn` object at the same time. In particular, you cannot issue concurrent commands from different threads through the same connection object. (If you need to run concurrent commands, use multiple connections.)
@@ -28,10 +20,3 @@ In earlier versions, libpq could be compiled with or without thread support, dep
 The deprecated functions [`PQrequestCancel`](libpq-cancel.html#LIBPQ-PQREQUESTCANCEL) and [`PQoidStatus`](libpq-exec.html#LIBPQ-PQOIDSTATUS) are not thread-safe and should not be used in multithread programs. [`PQrequestCancel`](libpq-cancel.html#LIBPQ-PQREQUESTCANCEL) can be replaced by [`PQcancel`](libpq-cancel.html#LIBPQ-PQCANCEL). [`PQoidStatus`](libpq-exec.html#LIBPQ-PQOIDSTATUS) can be replaced by [`PQoidValue`](libpq-exec.html#LIBPQ-PQOIDVALUE).
 
 If you are using Kerberos inside your application (in addition to inside libpq), you will need to do locking around Kerberos calls because Kerberos functions are not thread-safe. See function `PQregisterThreadLock` in the libpq source code for a way to do cooperative locking between libpq and your application.
-
-***
-
-|                                              |                                                       |                                                            |
-| :------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](libpq-ssl.html "34.19. SSL Support")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-build.html "34.21. Building libpq Programs") |
-| 34.19. SSL Support                           | [Home](index.html "PostgreSQL 17devel Documentation") |                             34.21. Building libpq Programs |

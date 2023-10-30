@@ -1,11 +1,3 @@
-
-
-|      34.10. Functions Associated with the `COPY` Command     |                                                  |                               |                                                       |                                                        |
-| :----------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](libpq-notify.html "34.9. Asynchronous Notification")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-control.html "34.11. Control Functions") |
-
-***
-
 ## 34.10. Functions Associated with the `COPY` Command [#](#LIBPQ-COPY)
 
   * *   [34.10.1. Functions for Sending `COPY` Data](libpq-copy.html#LIBPQ-COPY-SEND)
@@ -173,10 +165,3 @@ These functions represent older methods of handling `COPY`. Although they still 
     When using [`PQgetResult`](libpq-async.html#LIBPQ-PQGETRESULT), the application should respond to a `PGRES_COPY_OUT` result by executing [`PQgetline`](libpq-copy.html#LIBPQ-PQGETLINE) repeatedly, followed by [`PQendcopy`](libpq-copy.html#LIBPQ-PQENDCOPY) after the terminator line is seen. It should then return to the [`PQgetResult`](libpq-async.html#LIBPQ-PQGETRESULT) loop until [`PQgetResult`](libpq-async.html#LIBPQ-PQGETRESULT) returns a null pointer. Similarly a `PGRES_COPY_IN` result is processed by a series of [`PQputline`](libpq-copy.html#LIBPQ-PQPUTLINE) calls followed by [`PQendcopy`](libpq-copy.html#LIBPQ-PQENDCOPY), then return to the [`PQgetResult`](libpq-async.html#LIBPQ-PQGETRESULT) loop. This arrangement will ensure that a `COPY` command embedded in a series of SQL commands will be executed correctly.
 
     Older applications are likely to submit a `COPY` via [`PQexec`](libpq-exec.html#LIBPQ-PQEXEC) and assume that the transaction is done after [`PQendcopy`](libpq-copy.html#LIBPQ-PQENDCOPY). This will work correctly only if the `COPY` is the only SQL command in the command string.
-
-***
-
-|                                                              |                                                       |                                                        |
-| :----------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](libpq-notify.html "34.9. Asynchronous Notification")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-control.html "34.11. Control Functions") |
-| 34.9. Asynchronous Notification                              | [Home](index.html "PostgreSQL 17devel Documentation") |                               34.11. Control Functions |

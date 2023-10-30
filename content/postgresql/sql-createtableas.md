@@ -1,11 +1,3 @@
-
-
-|                CREATE TABLE AS               |                                        |              |                                                       |                                                        |
-| :------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](sql-createtable.html "CREATE TABLE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createtablespace.html "CREATE TABLESPACE") |
-
-***
-
 ## CREATE TABLE AS
 
 CREATE TABLE AS — define a new table from the results of a query
@@ -145,10 +137,3 @@ CREATE TEMP TABLE films_recent ON COMMIT DROP AS
 ## See Also
 
 [CREATE MATERIALIZED VIEW](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW"), [CREATE TABLE](sql-createtable.html "CREATE TABLE"), [EXECUTE](sql-execute.html "EXECUTE"), [SELECT](sql-select.html "SELECT"), [SELECT INTO](sql-selectinto.html "SELECT INTO"), [VALUES](sql-values.html "VALUES")
-
-***
-
-|                                              |                                                       |                                                        |
-| :------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](sql-createtable.html "CREATE TABLE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createtablespace.html "CREATE TABLESPACE") |
-| CREATE TABLE                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                      CREATE TABLESPACE |

@@ -1,11 +1,3 @@
-
-
-|                 Appendix L. Acronyms                 |                                               |                       |                                                       |                                               |
-| :--------------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](limits.html "Appendix K. PostgreSQL Limits")  | [Up](appendixes.html "Part VIII. Appendixes") | Part VIII. Appendixes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](glossary.html "Appendix M. Glossary") |
-
-***
-
 ## Appendix L. Acronyms
 
 This is a list of acronyms commonly used in the PostgreSQL documentation and in discussions about PostgreSQL.
@@ -341,10 +333,3 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 * XML
 
     [Extensible Markup Language](https://en.wikipedia.org/wiki/XML)
-
-***
-
-|                                                      |                                                       |                                               |
-| :--------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](limits.html "Appendix K. PostgreSQL Limits")  |     [Up](appendixes.html "Part VIII. Appendixes")     |  [Next](glossary.html "Appendix M. Glossary") |
-| Appendix K. PostgreSQL Limits                        | [Home](index.html "PostgreSQL 17devel Documentation") |                          Appendix M. Glossary |

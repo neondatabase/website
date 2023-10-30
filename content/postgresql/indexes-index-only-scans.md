@@ -1,11 +1,3 @@
-
-
-|      11.9. Index-Only Scans and Covering Indexes      |                                          |                     |                                                       |                                                                               |
-| :---------------------------------------------------: | :--------------------------------------- | :-----------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](indexes-partial.html "11.8. Partial Indexes")  | [Up](indexes.html "Chapter 11. Indexes") | Chapter 11. Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](indexes-opclass.html "11.10. Operator Classes and Operator Families") |
-
-***
-
 ## 11.9. Index-Only Scans and Covering Indexes [#](#INDEXES-INDEX-ONLY-SCANS)
 
 All indexes in PostgreSQL are *secondary* indexes, meaning that each index is stored separately from the table's main data area (which is called the table's *heap* in PostgreSQL terminology). This means that in an ordinary index scan, each row retrieval requires fetching data from both the index and the heap. Furthermore, while the index entries that match a given indexable `WHERE` condition are usually close together in the index, the table rows they reference might be anywhere in the heap. The heap-access portion of an index scan thus involves a lot of random access into the heap, which can be slow, particularly on traditional rotating media. (As described in [Section 11.5](indexes-bitmap-scans.html "11.5. Combining Multiple Indexes"), bitmap scans try to alleviate this cost by doing the heap accesses in sorted order, but that only goes so far.)
@@ -106,10 +98,3 @@ SELECT target FROM tests WHERE subject = 'some-subject' AND success;
 ```
 
 But there's a problem: the `WHERE` clause refers to `success` which is not available as a result column of the index. Nonetheless, an index-only scan is possible because the plan does not need to recheck that part of the `WHERE` clause at run time: all entries found in the index necessarily have `success = true` so this need not be explicitly checked in the plan. PostgreSQL versions 9.6 and later will recognize such cases and allow index-only scans to be generated, but older versions will not.
-
-***
-
-|                                                       |                                                       |                                                                               |
-| :---------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](indexes-partial.html "11.8. Partial Indexes")  |        [Up](indexes.html "Chapter 11. Indexes")       |  [Next](indexes-opclass.html "11.10. Operator Classes and Operator Families") |
-| 11.8. Partial Indexes                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                 11.10. Operator Classes and Operator Families |

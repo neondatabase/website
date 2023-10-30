@@ -1,11 +1,3 @@
-
-
-|                34.9. Asynchronous Notification               |                                                  |                               |                                                       |                                                                              |
-| :----------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](libpq-fastpath.html "34.8. The Fast-Path Interface")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-copy.html "34.10. Functions Associated with the COPY Command") |
-
-***
-
 ## 34.9. Asynchronous Notification [#](#LIBPQ-NOTIFY)
 
 PostgreSQL offers asynchronous notification via the `LISTEN` and `NOTIFY` commands. A client session registers its interest in a particular notification channel with the `LISTEN` command (and can stop listening with the `UNLISTEN` command). All sessions listening on a particular channel will be notified asynchronously when a `NOTIFY` command with that channel name is executed by any session. A “payload” string can be passed to communicate additional data to the listeners.
@@ -33,10 +25,3 @@ After processing a `PGnotify` object returned by `PQnotifies`, be sure to free i
 `PQnotifies` does not actually read data from the server; it just returns messages previously absorbed by another libpq function. In ancient releases of libpq, the only way to ensure timely receipt of `NOTIFY` messages was to constantly submit commands, even empty ones, and then check `PQnotifies` after each [`PQexec`](libpq-exec.html#LIBPQ-PQEXEC). While this still works, it is deprecated as a waste of processing power.
 
 A better way to check for `NOTIFY` messages when you have no useful commands to execute is to call [`PQconsumeInput`](libpq-async.html#LIBPQ-PQCONSUMEINPUT), then check `PQnotifies`. You can use `select()` to wait for data to arrive from the server, thereby using no CPU power unless there is something to do. (See [`PQsocket`](libpq-status.html#LIBPQ-PQSOCKET) to obtain the file descriptor number to use with `select()`.) Note that this will work OK whether you submit commands with [`PQsendQuery`](libpq-async.html#LIBPQ-PQSENDQUERY)/[`PQgetResult`](libpq-async.html#LIBPQ-PQGETRESULT) or simply use [`PQexec`](libpq-exec.html#LIBPQ-PQEXEC). You should, however, remember to check `PQnotifies` after each [`PQgetResult`](libpq-async.html#LIBPQ-PQGETRESULT) or [`PQexec`](libpq-exec.html#LIBPQ-PQEXEC), to see if any notifications came in during the processing of the command.
-
-***
-
-|                                                              |                                                       |                                                                              |
-| :----------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](libpq-fastpath.html "34.8. The Fast-Path Interface")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-copy.html "34.10. Functions Associated with the COPY Command") |
-| 34.8. The Fast-Path Interface                                | [Home](index.html "PostgreSQL 17devel Documentation") |                          34.10. Functions Associated with the `COPY` Command |

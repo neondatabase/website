@@ -1,11 +1,3 @@
-
-
-|                           DESCRIBE                           |                                                             |                              |                                                       |                                                |
-| :----------------------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](ecpg-sql-declare-statement.html "DECLARE STATEMENT")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-disconnect.html "DISCONNECT") |
-
-***
-
 ## DESCRIBE
 
 DESCRIBE — obtain information about a prepared statement or result set
@@ -55,10 +47,3 @@ EXEC SQL DEALLOCATE DESCRIPTOR mydesc;
 ## See Also
 
 [ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor.html "ALLOCATE DESCRIPTOR"), [GET DESCRIPTOR](ecpg-sql-get-descriptor.html "GET DESCRIPTOR")
-
-***
-
-|                                                              |                                                             |                                                |
-| :----------------------------------------------------------- | :---------------------------------------------------------: | ---------------------------------------------: |
-| [Prev](ecpg-sql-declare-statement.html "DECLARE STATEMENT")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-disconnect.html "DISCONNECT") |
-| DECLARE STATEMENT                                            |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                     DISCONNECT |

@@ -1,11 +1,3 @@
-
-
-|                       F.47. unaccent — a text search dictionary which removes diacritics                       |                                                                             |                                                        |                                                       |                                                              |
-| :------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](tsm-system-time.html "F.46. tsm_system_time —&#xA;   the SYSTEM_TIME sampling method for TABLESAMPLE")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](uuid-ossp.html "F.48. uuid-ossp — a UUID generator") |
-
-***
-
 ## F.47. unaccent — a text search dictionary which removes diacritics [#](#UNACCENT)
 
   * *   [F.47.1. Configuration](unaccent.html#UNACCENT-CONFIGURATION)
@@ -127,10 +119,3 @@ For example:
 SELECT unaccent('unaccent', 'Hôtel');
 SELECT unaccent('Hôtel');
 ```
-
-***
-
-|                                                                                                                |                                                                             |                                                              |
-| :------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](tsm-system-time.html "F.46. tsm_system_time —&#xA;   the SYSTEM_TIME sampling method for TABLESAMPLE")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](uuid-ossp.html "F.48. uuid-ossp — a UUID generator") |
-| F.46. tsm\_system\_time — the `SYSTEM_TIME` sampling method for `TABLESAMPLE`                                  |            [Home](index.html "PostgreSQL 17devel Documentation")            |                           F.48. uuid-ossp — a UUID generator |

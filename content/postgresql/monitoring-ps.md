@@ -1,11 +1,3 @@
-
-
-|                      28.1. Standard Unix Tools                      |                                                                  |                                          |                                                       |                                                                         |
-| :-----------------------------------------------------------------: | :--------------------------------------------------------------- | :--------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](monitoring.html "Chapter 28. Monitoring Database Activity")  | [Up](monitoring.html "Chapter 28. Monitoring Database Activity") | Chapter 28. Monitoring Database Activity | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](monitoring-stats.html "28.2. The Cumulative Statistics System") |
-
-***
-
 ## 28.1. Standard Unix Tools [#](#MONITORING-PS)
 
 On most Unix platforms, PostgreSQL modifies its command title as reported by `ps`, so that individual server processes can readily be identified. A sample display is
@@ -52,10 +44,3 @@ If you have turned off [update\_process\_title](runtime-config-logging.html#GUC-
 ### Tip
 
 Solaris requires special handling. You must use `/usr/ucb/ps`, rather than `/bin/ps`. You also must use two `w` flags, not just one. In addition, your original invocation of the `postgres` command must have a shorter `ps` status display than that provided by each server process. If you fail to do all three things, the `ps` output for each server process will be the original `postgres` command line.
-
-***
-
-|                                                                     |                                                                  |                                                                         |
-| :------------------------------------------------------------------ | :--------------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](monitoring.html "Chapter 28. Monitoring Database Activity")  | [Up](monitoring.html "Chapter 28. Monitoring Database Activity") |  [Next](monitoring-stats.html "28.2. The Cumulative Statistics System") |
-| Chapter 28. Monitoring Database Activity                            |       [Home](index.html "PostgreSQL 17devel Documentation")      |                                  28.2. The Cumulative Statistics System |

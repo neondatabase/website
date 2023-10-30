@@ -1,11 +1,3 @@
-
-
-|                              F.40. spi — Server Programming Interface features/examples                             |                                                                             |                                                        |                                                       |                                                                       |
-| :-----------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](sepgsql.html "F.39. sepgsql —&#xA;   SELinux-, label-based mandatory access control (MAC) security module")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sslinfo.html "F.41. sslinfo — obtain client SSL information") |
-
-***
-
 ## F.40. spi — Server Programming Interface features/examples [#](#CONTRIB-SPI)
 
   * *   [F.40.1. refint — Functions for Implementing Referential Integrity](contrib-spi.html#CONTRIB-SPI-REFINT)
@@ -50,10 +42,3 @@ There is an example in `insert_username.example`.
 To use, create a `BEFORE UPDATE` trigger using this function. Specify a single trigger argument: the name of the column to be modified. The column must be of type `timestamp` or `timestamp with time zone`.
 
 There is an example in `moddatetime.example`.
-
-***
-
-|                                                                                                                     |                                                                             |                                                                       |
-| :------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](sepgsql.html "F.39. sepgsql —&#xA;   SELinux-, label-based mandatory access control (MAC) security module")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](sslinfo.html "F.41. sslinfo — obtain client SSL information") |
-| F.39. sepgsql — SELinux-, label-based mandatory access control (MAC) security module                                |            [Home](index.html "PostgreSQL 17devel Documentation")            |                         F.41. sslinfo — obtain client SSL information |

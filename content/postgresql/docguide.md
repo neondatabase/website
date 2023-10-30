@@ -1,11 +1,3 @@
-
-
-|              Appendix J. Documentation              |                                               |                       |                                                       |                                               |
-| :-------------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](git.html "I.1. Getting the Source via Git")  | [Up](appendixes.html "Part VIII. Appendixes") | Part VIII. Appendixes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](docguide-docbook.html "J.1. DocBook") |
-
-***
-
 ## Appendix J. Documentation
 
 **Table of Contents**
@@ -50,10 +42,3 @@ PostgreSQL has four primary documentation formats:
 Additionally, a number of plain-text `README` files can be found throughout the PostgreSQL source tree, documenting various implementation issues.
 
 HTML documentation and man pages are part of a standard distribution and are installed by default. PDF format documentation is available separately for download.
-
-***
-
-|                                                     |                                                       |                                               |
-| :-------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](git.html "I.1. Getting the Source via Git")  |     [Up](appendixes.html "Part VIII. Appendixes")     |  [Next](docguide-docbook.html "J.1. DocBook") |
-| I.1. Getting the Source via Git                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                  J.1. DocBook |

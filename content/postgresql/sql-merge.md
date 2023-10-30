@@ -1,11 +1,3 @@
-
-
-|             MERGE             |                                        |              |                                                       |                               |
-| :---------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------: |
-| [Prev](sql-lock.html "LOCK")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-move.html "MOVE") |
-
-***
-
 ## MERGE
 
 MERGE — conditionally insert, update, or delete rows of a table
@@ -247,10 +239,3 @@ The `wine_stock_changes` table might be, for example, a temporary table recently
 This command conforms to the SQL standard.
 
 The WITH clause and `DO NOTHING` action are extensions to the SQL standard.
-
-***
-
-|                               |                                                       |                               |
-| :---------------------------- | :---------------------------------------------------: | ----------------------------: |
-| [Prev](sql-lock.html "LOCK")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-move.html "MOVE") |
-| LOCK                          | [Home](index.html "PostgreSQL 17devel Documentation") |                          MOVE |

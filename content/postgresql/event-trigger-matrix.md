@@ -1,11 +1,3 @@
-
-
-|                         40.2. Event Trigger Firing Matrix                         |                                                        |                            |                                                       |                                                                                    |
-| :-------------------------------------------------------------------------------: | :----------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------: |
-| [Prev](event-trigger-definition.html "40.1. Overview of Event Trigger Behavior")  | [Up](event-triggers.html "Chapter 40. Event Triggers") | Chapter 40. Event Triggers | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](event-trigger-interface.html "40.3. Writing Event Trigger Functions in C") |
-
-***
-
 ## 40.2. Event Trigger Firing Matrix [#](#EVENT-TRIGGER-MATRIX)
 
 [Table 40.1](event-trigger-matrix.html#EVENT-TRIGGER-BY-COMMAND-TAG "Table 40.1. Event Trigger Support by Command Tag") lists all commands for which event triggers are supported.
@@ -125,10 +117,3 @@
 | `REVOKE`                           |          `X`          |         `X`         |     `-`     |        `-`       | Only for local objects |
 | `SECURITY LABEL`                   |          `X`          |         `X`         |     `-`     |        `-`       | Only for local objects |
 | `SELECT INTO`                      |          `X`          |         `X`         |     `-`     |        `-`       |                        |
-
-***
-
-|                                                                                   |                                                        |                                                                                    |
-| :-------------------------------------------------------------------------------- | :----------------------------------------------------: | ---------------------------------------------------------------------------------: |
-| [Prev](event-trigger-definition.html "40.1. Overview of Event Trigger Behavior")  | [Up](event-triggers.html "Chapter 40. Event Triggers") |  [Next](event-trigger-interface.html "40.3. Writing Event Trigger Functions in C") |
-| 40.1. Overview of Event Trigger Behavior                                          |  [Home](index.html "PostgreSQL 17devel Documentation") |                                         40.3. Writing Event Trigger Functions in C |

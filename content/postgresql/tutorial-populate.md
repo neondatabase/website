@@ -1,11 +1,3 @@
-
-
-|             2.4. Populating a Table With Rows            |                                                       |                             |                                                       |                                                       |
-| :------------------------------------------------------: | :---------------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](tutorial-table.html "2.3. Creating a New Table")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") | Chapter 2. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-select.html "2.5. Querying a Table") |
-
-***
-
 ## 2.4. Populating a Table With Rows [#](#TUTORIAL-POPULATE)
 
 The `INSERT` statement is used to populate a table with rows:
@@ -52,10 +44,3 @@ COPY weather FROM '/home/user/weather.txt';
 ```
 
 where the file name for the source file must be available on the machine running the backend process, not the client, since the backend process reads the file directly. You can read more about the `COPY` command in [COPY](sql-copy.html "COPY").
-
-***
-
-|                                                          |                                                       |                                                       |
-| :------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](tutorial-table.html "2.3. Creating a New Table")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") |  [Next](tutorial-select.html "2.5. Querying a Table") |
-| 2.3. Creating a New Table                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                 2.5. Querying a Table |

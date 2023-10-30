@@ -1,11 +1,3 @@
-
-
-|                      75.1. System Catalog Declaration Rules                      |                                                                               |                                                              |                                                       |                                                                               |
-| :------------------------------------------------------------------------------: | :---------------------------------------------------------------------------- | :----------------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](bki.html "Chapter 75. System Catalog Declarations and Initial Contents")  | [Up](bki.html "Chapter 75. System Catalog Declarations and Initial Contents") | Chapter 75. System Catalog Declarations and Initial Contents | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](system-catalog-initial-data.html "75.2. System Catalog Initial Data") |
-
-***
-
 ## 75.1. System Catalog Declaration Rules [#](#SYSTEM-CATALOG-DECLARATIONS)
 
 The key part of a catalog header file is a C structure definition describing the layout of each row of the catalog. This begins with a `CATALOG` macro, which so far as the C compiler is concerned is just shorthand for `typedef struct FormData_catalogname`. Each field in the struct gives rise to a catalog column. Fields can be annotated using the BKI property macros described in `genbki.h`, for example to define a default value for a field or mark it as nullable or not nullable. The `CATALOG` line can also be annotated, with some other BKI property macros described in `genbki.h`, to define other properties of the catalog as a whole, such as whether it is a shared relation.
@@ -17,10 +9,3 @@ As a partial guard against this type of error, variable-length or nullable field
 Frontend code should not include any `pg_xxx.h` catalog header file, as these files may contain C code that won't compile outside the backend. (Typically, that happens because these files also contain declarations for functions in `src/backend/catalog/` files.) Instead, frontend code may include the corresponding generated `pg_xxx_d.h` header, which will contain OID `#define`s and any other data that might be of use on the client side. If you want macros or other code in a catalog header to be visible to frontend code, write `#ifdef EXPOSE_TO_CLIENT_CODE` ... `#endif` around that section to instruct `genbki.pl` to copy that section to the `pg_xxx_d.h` header.
 
 A few of the catalogs are so fundamental that they can't even be created by the BKI `create` command that's used for most catalogs, because that command needs to write information into these catalogs to describe the new catalog. These are called *bootstrap* catalogs, and defining one takes a lot of extra work: you have to manually prepare appropriate entries for them in the pre-loaded contents of `pg_class` and `pg_type`, and those entries will need to be updated for subsequent changes to the catalog's structure. (Bootstrap catalogs also need pre-loaded entries in `pg_attribute`, but fortunately `genbki.pl` handles that chore nowadays.) Avoid making new catalogs be bootstrap catalogs if at all possible.
-
-***
-
-|                                                                                  |                                                                               |                                                                               |
-| :------------------------------------------------------------------------------- | :---------------------------------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](bki.html "Chapter 75. System Catalog Declarations and Initial Contents")  | [Up](bki.html "Chapter 75. System Catalog Declarations and Initial Contents") |  [Next](system-catalog-initial-data.html "75.2. System Catalog Initial Data") |
-| Chapter 75. System Catalog Declarations and Initial Contents                     |             [Home](index.html "PostgreSQL 17devel Documentation")             |                                             75.2. System Catalog Initial Data |

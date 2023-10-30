@@ -1,11 +1,3 @@
-
-
-|                       ALTER POLICY                      |                                        |              |                                                       |                                                    |
-| :-----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-alteropfamily.html "ALTER OPERATOR FAMILY")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterprocedure.html "ALTER PROCEDURE") |
-
-***
-
 ## ALTER POLICY
 
 ALTER POLICY — change the definition of a row-level security policy
@@ -63,10 +55,3 @@ In the second form of `ALTER POLICY`, the role list, *`using_expression`*, and *
 ## See Also
 
 [CREATE POLICY](sql-createpolicy.html "CREATE POLICY"), [DROP POLICY](sql-droppolicy.html "DROP POLICY")
-
-***
-
-|                                                         |                                                       |                                                    |
-| :------------------------------------------------------ | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-alteropfamily.html "ALTER OPERATOR FAMILY")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterprocedure.html "ALTER PROCEDURE") |
-| ALTER OPERATOR FAMILY                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                    ALTER PROCEDURE |

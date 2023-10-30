@@ -1,11 +1,3 @@
-
-
-|            36.7. Using Descriptor Areas            |                                                        |                                      |                                                       |                                                  |
-| :------------------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](ecpg-pgtypes.html "36.6. pgtypes Library")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-errors.html "36.8. Error Handling") |
-
-***
-
 ## 36.7. Using Descriptor Areas [#](#ECPG-DESCRIPTORS)
 
   * *   [36.7.1. Named SQL Descriptor Areas](ecpg-descriptors.html#ECPG-NAMED-DESCRIPTORS)
@@ -758,10 +750,3 @@ tup_inserted = 0 (type: 9)
 tup_updated = 0 (type: 9)
 tup_deleted = 0 (type: 9)
 ```
-
-***
-
-|                                                    |                                                        |                                                  |
-| :------------------------------------------------- | :----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](ecpg-pgtypes.html "36.6. pgtypes Library")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](ecpg-errors.html "36.8. Error Handling") |
-| 36.6. pgtypes Library                              |  [Home](index.html "PostgreSQL 17devel Documentation") |                             36.8. Error Handling |

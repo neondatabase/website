@@ -1,11 +1,3 @@
-
-
-|                            clusterdb                            |                                                              |                                |                                                       |                                       |
-| :-------------------------------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ------------------------------------: |
-| [Prev](reference-client.html "PostgreSQL Client Applications")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-createdb.html "createdb") |
-
-***
-
 ## clusterdb
 
 clusterdb — cluster a PostgreSQL database
@@ -121,10 +113,3 @@ clusterdb --table=foo xyzzy
 ## See Also
 
 [CLUSTER](sql-cluster.html "CLUSTER")
-
-***
-
-|                                                                 |                                                              |                                       |
-| :-------------------------------------------------------------- | :----------------------------------------------------------: | ------------------------------------: |
-| [Prev](reference-client.html "PostgreSQL Client Applications")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-createdb.html "createdb") |
-| PostgreSQL Client Applications                                  |     [Home](index.html "PostgreSQL 17devel Documentation")    |                              createdb |

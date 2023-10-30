@@ -1,11 +1,3 @@
-
-
-|                 SPI\_returntuple                |                                                 |                         |                                                       |                                                     |
-| :---------------------------------------------: | :---------------------------------------------- | :---------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](spi-spi-copytuple.html "SPI_copytuple")  | [Up](spi-memory.html "47.3. Memory Management") | 47.3. Memory Management | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-modifytuple.html "SPI_modifytuple") |
-
-***
-
 ## SPI\_returntuple
 
 SPI\_returntuple — prepare to return a tuple as a Datum
@@ -38,10 +30,3 @@ Note that this should be used for functions that are declared to return composit
 ## Return Value
 
 `HeapTupleHeader` pointing to copied row, or `NULL` on error (see `SPI_result` for an error indication)
-
-***
-
-|                                                 |                                                       |                                                     |
-| :---------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](spi-spi-copytuple.html "SPI_copytuple")  |    [Up](spi-memory.html "47.3. Memory Management")    |  [Next](spi-spi-modifytuple.html "SPI_modifytuple") |
-| SPI\_copytuple                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                    SPI\_modifytuple |

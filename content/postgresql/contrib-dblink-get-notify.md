@@ -1,11 +1,3 @@
-
-
-|                  dblink\_get\_notify                  |                                                                          |                                                      |                                                       |                                                             |
-| :---------------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](contrib-dblink-is-busy.html "dblink_is_busy")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-get-result.html "dblink_get_result") |
-
-***
-
 ## dblink\_get\_notify
 
 dblink\_get\_notify — retrieve async notifications on a connection
@@ -56,10 +48,3 @@ SELECT * FROM dblink_get_notify();
  virtual     |   1229 |
 (1 row)
 ```
-
-***
-
-|                                                       |                                                                          |                                                             |
-| :---------------------------------------------------- | :----------------------------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](contrib-dblink-is-busy.html "dblink_is_busy")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-get-result.html "dblink_get_result") |
-| dblink\_is\_busy                                      |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                         dblink\_get\_result |

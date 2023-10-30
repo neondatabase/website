@@ -1,11 +1,3 @@
-
-
-|                      SPI\_scroll\_cursor\_move                      |                                                      |                           |                                                       |                                                       |
-| :-----------------------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](spi-spi-scroll-cursor-fetch.html "SPI_scroll_cursor_fetch")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-cursor-close.html "SPI_cursor_close") |
-
-***
-
 ## SPI\_scroll\_cursor\_move
 
 SPI\_scroll\_cursor\_move — move a cursor
@@ -45,10 +37,3 @@ void SPI_scroll_cursor_move(Portal portal, FetchDirection direction,
 See the SQL [FETCH](sql-fetch.html "FETCH") command for details of the interpretation of the *`direction`* and *`count`* parameters.
 
 Direction values other than `FETCH_FORWARD` may fail if the cursor's plan was not created with the `CURSOR_OPT_SCROLL` option.
-
-***
-
-|                                                                     |                                                       |                                                       |
-| :------------------------------------------------------------------ | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](spi-spi-scroll-cursor-fetch.html "SPI_scroll_cursor_fetch")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-cursor-close.html "SPI_cursor_close") |
-| SPI\_scroll\_cursor\_fetch                                          | [Home](index.html "PostgreSQL 17devel Documentation") |                                    SPI\_cursor\_close |

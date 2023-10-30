@@ -1,11 +1,3 @@
-
-
-|                      36.8. Error Handling                     |                                                        |                                      |                                                       |                                                            |
-| :-----------------------------------------------------------: | :----------------------------------------------------- | :----------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](ecpg-descriptors.html "36.7. Using Descriptor Areas")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") | Chapter 36. ECPG — Embedded SQL in C | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-preproc.html "36.9. Preprocessor Directives") |
-
-***
-
 ## 36.8. Error Handling [#](#ECPG-ERRORS)
 
   * *   [36.8.1. Setting Callbacks](ecpg-errors.html#ECPG-WHENEVER)
@@ -374,10 +366,3 @@ These are the assigned `SQLCODE` values:
 * -605 (`ECPG_WARNING_PORTAL_EXISTS`) [#](#ECPG-SQLSTATE-SQLCODE-ECPG-WARNING-PORTAL-EXISTS)
 
     An existing cursor name was specified. (SQLSTATE 42P03)
-
-***
-
-|                                                               |                                                        |                                                            |
-| :------------------------------------------------------------ | :----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](ecpg-descriptors.html "36.7. Using Descriptor Areas")  | [Up](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") |  [Next](ecpg-preproc.html "36.9. Preprocessor Directives") |
-| 36.7. Using Descriptor Areas                                  |  [Home](index.html "PostgreSQL 17devel Documentation") |                              36.9. Preprocessor Directives |

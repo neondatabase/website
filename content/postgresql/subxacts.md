@@ -1,11 +1,3 @@
-
-
-|                    74.3. Subtransactions                    |                                                              |                                    |                                                       |                                                        |
-| :---------------------------------------------------------: | :----------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](xact-locking.html "74.2. Transactions and Locking")  | [Up](transactions.html "Chapter 74. Transaction Processing") | Chapter 74. Transaction Processing | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](two-phase.html "74.4. Two-Phase Transactions") |
-
-***
-
 ## 74.3. Subtransactions [#](#SUBXACTS)
 
 Subtransactions are started inside transactions, allowing large transactions to be broken into smaller units. Subtransactions can commit or abort without affecting their parent transactions, allowing parent transactions to continue. This allows errors to be handled more easily, which is a common application development pattern. The word subtransaction is often abbreviated as *subxact*.
@@ -21,10 +13,3 @@ When a subtransaction commits, all of its committed child subtransactions with s
 When a top-level transaction with an xid commits, all of its subcommitted child subtransactions are also persistently recorded as committed in the `pg_xact` directory. If the top-level transaction aborts, all its subtransactions are also aborted, even if they were subcommitted.
 
 The more subtransactions each transaction keeps open (not rolled back or released), the greater the transaction management overhead. Up to 64 open subxids are cached in shared memory for each backend; after that point, the storage I/O overhead increases significantly due to additional lookups of subxid entries in `pg_subtrans`.
-
-***
-
-|                                                             |                                                              |                                                        |
-| :---------------------------------------------------------- | :----------------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](xact-locking.html "74.2. Transactions and Locking")  | [Up](transactions.html "Chapter 74. Transaction Processing") |  [Next](two-phase.html "74.4. Two-Phase Transactions") |
-| 74.2. Transactions and Locking                              |     [Home](index.html "PostgreSQL 17devel Documentation")    |                           74.4. Two-Phase Transactions |

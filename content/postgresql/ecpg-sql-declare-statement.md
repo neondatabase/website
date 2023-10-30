@@ -1,11 +1,3 @@
-
-
-|             DECLARE STATEMENT            |                                                             |                              |                                                       |                                            |
-| :--------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](ecpg-sql-declare.html "DECLARE")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-describe.html "DESCRIBE") |
-
-***
-
 ## DECLARE STATEMENT
 
 DECLARE STATEMENT — declare SQL statement identifier
@@ -59,10 +51,3 @@ EXEC SQL CLOSE cursor_name;
 ## See Also
 
 [CONNECT](ecpg-sql-connect.html "CONNECT"), [DECLARE](ecpg-sql-declare.html "DECLARE"), [OPEN](ecpg-sql-open.html "OPEN")
-
-***
-
-|                                          |                                                             |                                            |
-| :--------------------------------------- | :---------------------------------------------------------: | -----------------------------------------: |
-| [Prev](ecpg-sql-declare.html "DECLARE")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-describe.html "DESCRIBE") |
-| DECLARE                                  |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                   DESCRIBE |

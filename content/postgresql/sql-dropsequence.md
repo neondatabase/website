@@ -1,11 +1,3 @@
-
-
-|                DROP SEQUENCE               |                                        |              |                                                       |                                            |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-dropschema.html "DROP SCHEMA")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropserver.html "DROP SERVER") |
-
-***
-
 ## DROP SEQUENCE
 
 DROP SEQUENCE — remove a sequence
@@ -55,10 +47,3 @@ DROP SEQUENCE serial;
 ## See Also
 
 [CREATE SEQUENCE](sql-createsequence.html "CREATE SEQUENCE"), [ALTER SEQUENCE](sql-altersequence.html "ALTER SEQUENCE")
-
-***
-
-|                                            |                                                       |                                            |
-| :----------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-dropschema.html "DROP SCHEMA")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropserver.html "DROP SERVER") |
-| DROP SCHEMA                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                DROP SERVER |

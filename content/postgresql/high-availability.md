@@ -1,11 +1,3 @@
-
-
-|                   Chapter 27. High Availability, Load Balancing, and Replication                  |                                                    |                                 |                                                       |                                                                                         |
-| :-----------------------------------------------------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](continuous-archiving.html "26.3. Continuous Archiving and Point-in-Time Recovery (PITR)")  | [Up](admin.html "Part III. Server Administration") | Part III. Server Administration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](different-replication-solutions.html "27.1. Comparison of Different Solutions") |
-
-***
-
 ## Chapter 27. High Availability, Load Balancing, and Replication
 
 **Table of Contents**
@@ -49,10 +41,3 @@ Solutions can also be categorized by their granularity. Some solutions can deal 
 Performance must be considered in any choice. There is usually a trade-off between functionality and performance. For example, a fully synchronous solution over a slow network might cut performance by more than half, while an asynchronous one might have a minimal performance impact.
 
 The remainder of this section outlines various failover, replication, and load balancing solutions.
-
-***
-
-|                                                                                                   |                                                       |                                                                                         |
-| :------------------------------------------------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](continuous-archiving.html "26.3. Continuous Archiving and Point-in-Time Recovery (PITR)")  |   [Up](admin.html "Part III. Server Administration")  |  [Next](different-replication-solutions.html "27.1. Comparison of Different Solutions") |
-| 26.3. Continuous Archiving and Point-in-Time Recovery (PITR)                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                                 27.1. Comparison of Different Solutions |

@@ -1,11 +1,3 @@
-
-
-|            pg\_config           |                                                              |                                |                                                       |                                    |
-| :-----------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ---------------------------------: |
-| [Prev](pgbench.html "pgbench")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pgdump.html "pg_dump") |
-
-***
-
 ## pg\_config
 
 pg\_config — retrieve information about the installed version of PostgreSQL
@@ -134,10 +126,3 @@ eval ./configure `pg_config --configure`
 ```
 
 The output of `pg_config --configure` contains shell quotation marks so arguments with spaces are represented correctly. Therefore, using `eval` is required for proper results.
-
-***
-
-|                                 |                                                              |                                    |
-| :------------------------------ | :----------------------------------------------------------: | ---------------------------------: |
-| [Prev](pgbench.html "pgbench")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-pgdump.html "pg_dump") |
-| pgbench                         |     [Home](index.html "PostgreSQL 17devel Documentation")    |                           pg\_dump |

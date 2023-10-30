@@ -1,11 +1,3 @@
-
-
-|             pg\_dumpall            |                                                              |                                |                                                       |                                           |
-| :--------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ----------------------------------------: |
-| [Prev](app-pgdump.html "pg_dump")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pg-isready.html "pg_isready") |
-
-***
-
 ## pg\_dumpall
 
 pg\_dumpall — extract a PostgreSQL database cluster into a script file
@@ -267,10 +259,3 @@ It is not important to which database you connect here since the script file cre
 ## See Also
 
 Check [pg\_dump](app-pgdump.html "pg_dump") for details on possible error conditions.
-
-***
-
-|                                    |                                                              |                                           |
-| :--------------------------------- | :----------------------------------------------------------: | ----------------------------------------: |
-| [Prev](app-pgdump.html "pg_dump")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-pg-isready.html "pg_isready") |
-| pg\_dump                           |     [Home](index.html "PostgreSQL 17devel Documentation")    |                               pg\_isready |

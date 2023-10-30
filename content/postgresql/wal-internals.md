@@ -1,11 +1,3 @@
-
-
-|                    30.6. WAL Internals                    |                                                                  |                                                 |                                                       |                                                                     |
-| :-------------------------------------------------------: | :--------------------------------------------------------------- | :---------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](wal-configuration.html "30.5. WAL Configuration")  | [Up](wal.html "Chapter 30. Reliability and the Write-Ahead Log") | Chapter 30. Reliability and the Write-Ahead Log | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logical-replication.html "Chapter 31. Logical Replication") |
-
-***
-
 ## 30.6. WAL Internals [#](#WAL-INTERNALS)
 
 WAL is automatically enabled; no action is required from the administrator except ensuring that the disk-space requirements for the WAL files are met, and that any necessary tuning is done (see [Section 30.5](wal-configuration.html "30.5. WAL Configuration")).
@@ -21,10 +13,3 @@ The aim of WAL is to ensure that the log is written before database records are 
 After a checkpoint has been made and the WAL flushed, the checkpoint's position is saved in the file `pg_control`. Therefore, at the start of recovery, the server first reads `pg_control` and then the checkpoint record; then it performs the REDO operation by scanning forward from the WAL location indicated in the checkpoint record. Because the entire content of data pages is saved in the WAL on the first page modification after a checkpoint (assuming [full\_page\_writes](runtime-config-wal.html#GUC-FULL-PAGE-WRITES) is not disabled), all pages changed since the checkpoint will be restored to a consistent state.
 
 To deal with the case where `pg_control` is corrupt, we should support the possibility of scanning existing WAL segments in reverse order — newest to oldest — in order to find the latest checkpoint. This has not been implemented yet. `pg_control` is small enough (less than one disk page) that it is not subject to partial-write problems, and as of this writing there have been no reports of database failures due solely to the inability to read `pg_control` itself. So while it is theoretically a weak spot, `pg_control` does not seem to be a problem in practice.
-
-***
-
-|                                                           |                                                                  |                                                                     |
-| :-------------------------------------------------------- | :--------------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](wal-configuration.html "30.5. WAL Configuration")  | [Up](wal.html "Chapter 30. Reliability and the Write-Ahead Log") |  [Next](logical-replication.html "Chapter 31. Logical Replication") |
-| 30.5. WAL Configuration                                   |       [Home](index.html "PostgreSQL 17devel Documentation")      |                                     Chapter 31. Logical Replication |

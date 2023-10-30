@@ -1,11 +1,3 @@
-
-
-|           F.4. auto\_explain — log execution plans of slow queries           |                                                                             |                                                        |                                                       |                                                                                                       |
-| :--------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------------------------------: |
-| [Prev](auth-delay.html "F.3. auth_delay — pause on authentication failure")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](basebackup-to-shell.html "F.5. basebackup_to_shell — example \"shell\" pg_basebackup module") |
-
-***
-
 ## F.4. auto\_explain — log execution plans of slow queries [#](#AUTO-EXPLAIN)
 
 * *   [F.4.1. Configuration Parameters](auto-explain.html#AUTO-EXPLAIN-CONFIGURATION-PARAMETERS)
@@ -126,10 +118,3 @@ LOG:  duration: 3.651 ms  plan:
 ### F.4.3. Author [#](#AUTO-EXPLAIN-AUTHOR)
 
 Takahiro Itagaki `<itagaki.takahiro@oss.ntt.co.jp>`
-
-***
-
-|                                                                              |                                                                             |                                                                                                       |
-| :--------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ----------------------------------------------------------------------------------------------------: |
-| [Prev](auth-delay.html "F.3. auth_delay — pause on authentication failure")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](basebackup-to-shell.html "F.5. basebackup_to_shell — example \"shell\" pg_basebackup module") |
-| F.3. auth\_delay — pause on authentication failure                           |            [Home](index.html "PostgreSQL 17devel Documentation")            |                                    F.5. basebackup\_to\_shell — example "shell" pg\_basebackup module |

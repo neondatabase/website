@@ -1,11 +1,3 @@
-
-
-|                  70.4. Implementation                 |                                          |                         |                                                       |                                                    |
-| :---------------------------------------------------: | :--------------------------------------- | :---------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](gin-extensibility.html "70.3. Extensibility")  | [Up](gin.html "Chapter 70. GIN Indexes") | Chapter 70. GIN Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](gin-tips.html "70.5. GIN Tips and Tricks") |
-
-***
-
 ## 70.4. Implementation [#](#GIN-IMPLEMENTATION)
 
   * *   [70.4.1. GIN Fast Update Technique](gin-implementation.html#GIN-FAST-UPDATE)
@@ -32,10 +24,3 @@ If consistent response time is more important than update speed, use of pending 
 ### 70.4.2. Partial Match Algorithm [#](#GIN-PARTIAL-MATCH)
 
 GIN can support “partial match” queries, in which the query does not determine an exact match for one or more keys, but the possible matches fall within a reasonably narrow range of key values (within the key sorting order determined by the `compare` support method). The `extractQuery` method, instead of returning a key value to be matched exactly, returns a key value that is the lower bound of the range to be searched, and sets the `pmatch` flag true. The key range is then scanned using the `comparePartial` method. `comparePartial` must return zero for a matching index key, less than zero for a non-match that is still within the range to be searched, or greater than zero if the index key is past the range that could match.
-
-***
-
-|                                                       |                                                       |                                                    |
-| :---------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](gin-extensibility.html "70.3. Extensibility")  |        [Up](gin.html "Chapter 70. GIN Indexes")       |  [Next](gin-tips.html "70.5. GIN Tips and Tricks") |
-| 70.3. Extensibility                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                          70.5. GIN Tips and Tricks |

@@ -1,11 +1,3 @@
-
-
-|                         COPY                        |                                        |              |                                                       |                                                               |
-| :-------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](sql-commit-prepared.html "COMMIT PREPARED")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-create-access-method.html "CREATE ACCESS METHOD") |
-
-***
-
 ## COPY
 
 COPY — copy data between a file and a table
@@ -417,10 +409,3 @@ COPY [ BINARY ] table_name
 ## See Also
 
 [Section 28.4.3](progress-reporting.html#COPY-PROGRESS-REPORTING "28.4.3. COPY Progress Reporting")
-
-***
-
-|                                                     |                                                       |                                                               |
-| :-------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](sql-commit-prepared.html "COMMIT PREPARED")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-create-access-method.html "CREATE ACCESS METHOD") |
-| COMMIT PREPARED                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                          CREATE ACCESS METHOD |

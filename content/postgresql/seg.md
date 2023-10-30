@@ -1,10 +1,3 @@
-
-|                        F.38. seg — a datatype for line segments or floating point intervals                       |                                                                             |                                                        |                                                       |                                                                                                                     |
-| :---------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------: |
-| [Prev](postgres-fdw.html "F.37. postgres_fdw —&#xA;   access data stored in external PostgreSQL&#xA;   servers")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sepgsql.html "F.39. sepgsql —&#xA;   SELinux-, label-based mandatory access control (MAC) security module") |
-
-***
-
 ## F.38. seg — a datatype for line segments or floating point intervals [#](#SEG)
 
 * *   [F.38.1. Rationale](seg.html#SEG-RATIONALE)
@@ -136,10 +129,3 @@ The performance of an R-tree index can largely depend on the initial order of in
 Original author: Gene Selkov, Jr. `<selkovjr@mcs.anl.gov>`, Mathematics and Computer Science Division, Argonne National Laboratory.
 
 My thanks are primarily to Prof. Joe Hellerstein ([https://dsf.berkeley.edu/jmh/](https://dsf.berkeley.edu/jmh/)) for elucidating the gist of the GiST ([http://gist.cs.berkeley.edu/](http://gist.cs.berkeley.edu/)). I am also grateful to all Postgres developers, present and past, for enabling myself to create my own world and live undisturbed in it. And I would like to acknowledge my gratitude to Argonne Lab and to the U.S. Department of Energy for the years of faithful support of my database research.
-
-***
-
-|                                                                                                                   |                                                                             |                                                                                                                     |
-| :---------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------: |
-| [Prev](postgres-fdw.html "F.37. postgres_fdw —&#xA;   access data stored in external PostgreSQL&#xA;   servers")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](sepgsql.html "F.39. sepgsql —&#xA;   SELinux-, label-based mandatory access control (MAC) security module") |
-| F.37. postgres\_fdw — access data stored in external PostgreSQL servers                                           |            [Home](index.html "PostgreSQL 17devel Documentation")            |                                F.39. sepgsql — SELinux-, label-based mandatory access control (MAC) security module |

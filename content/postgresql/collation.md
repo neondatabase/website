@@ -1,11 +1,3 @@
-
-
-|           24.2. Collation Support           |                                               |                          |                                                       |                                                       |
-| :-----------------------------------------: | :-------------------------------------------- | :----------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](locale.html "24.1. Locale Support")  | [Up](charset.html "Chapter 24. Localization") | Chapter 24. Localization | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](multibyte.html "24.3. Character Set Support") |
-
-***
-
 ## 24.2. Collation Support [#](#COLLATION)
 
   * *   [24.2.1. Concepts](collation.html#COLLATION-CONCEPTS)
@@ -404,10 +396,3 @@ This section ([Section 24.2.3](collation.html#ICU-CUSTOM-COLLATIONS "24.2.3. I
 * [CLDR repository](https://github.com/unicode-org/cldr/blob/master/common/bcp47/collation.xml)
 * [https://unicode-org.github.io/icu/userguide/locale/](https://unicode-org.github.io/icu/userguide/locale/)
 * [https://unicode-org.github.io/icu/userguide/collation/](https://unicode-org.github.io/icu/userguide/collation/)
-
-***
-
-|                                             |                                                       |                                                       |
-| :------------------------------------------ | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](locale.html "24.1. Locale Support")  |     [Up](charset.html "Chapter 24. Localization")     |  [Next](multibyte.html "24.3. Character Set Support") |
-| 24.1. Locale Support                        | [Home](index.html "PostgreSQL 17devel Documentation") |                           24.3. Character Set Support |

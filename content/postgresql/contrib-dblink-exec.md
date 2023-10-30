@@ -1,11 +1,3 @@
-
-
-|                  dblink\_exec                  |                                                                          |                                                      |                                                       |                                                 |
-| :--------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](contrib-dblink-function.html "dblink")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-open.html "dblink_open") |
-
-***
-
 ## dblink\_exec
 
 dblink\_exec — executes a command in a remote database
@@ -84,10 +76,3 @@ DETAIL:  ERROR:  null value in column "relnamespace" violates not-null constrain
  ERROR
 (1 row)
 ```
-
-***
-
-|                                                |                                                                          |                                                 |
-| :--------------------------------------------- | :----------------------------------------------------------------------: | ----------------------------------------------: |
-| [Prev](contrib-dblink-function.html "dblink")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-open.html "dblink_open") |
-| dblink                                         |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                    dblink\_open |

@@ -1,11 +1,3 @@
-
-
-| 7.4. Combining Queries (`UNION`, `INTERSECT`, `EXCEPT`) |                                         |                    |                                                       |                                                            |
-| :-----------------------------------------------------: | :-------------------------------------- | :----------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-|  [Prev](queries-select-lists.html "7.3. Select Lists")  | [Up](queries.html "Chapter 7. Queries") | Chapter 7. Queries | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](queries-order.html "7.5. Sorting Rows (ORDER BY)") |
-
-***
-
 ## 7.4. Combining Queries (`UNION`, `INTERSECT`, `EXCEPT`) [#](#QUERIES-UNION)
 
 The results of two queries can be combined using the set operations union, intersection, and difference. The syntax is
@@ -75,10 +67,3 @@ not
 
 SELECT a FROM b UNION (SELECT x FROM y LIMIT 10)
 ```
-
-***
-
-|                                                        |                                                       |                                                            |
-| :----------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](queries-select-lists.html "7.3. Select Lists")  |        [Up](queries.html "Chapter 7. Queries")        |  [Next](queries-order.html "7.5. Sorting Rows (ORDER BY)") |
-| 7.3. Select Lists                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                             7.5. Sorting Rows (`ORDER BY`) |

@@ -1,11 +1,3 @@
-
-
-|           54.9. `pg_hba_file_rules`          |                                             |                          |                                                       |                                                                           |
-| :------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------: |
-| [Prev](view-pg-group.html "54.8. pg_group")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-ident-file-mappings.html "54.10. pg_ident_file_mappings") |
-
-***
-
 ## 54.9. `pg_hba_file_rules` [#](#VIEW-PG-HBA-FILE-RULES)
 
 The view `pg_hba_file_rules` provides a summary of the contents of the client authentication configuration file, [`pg_hba.conf`](auth-pg-hba-conf.html "21.1. The pg_hba.conf File"). A row appears in this view for each non-empty, non-comment line in the file, with annotations indicating whether the rule could be applied successfully.
@@ -35,10 +27,3 @@ By default, the `pg_hba_file_rules` view can be read only by superusers.
 Usually, a row reflecting an incorrect entry will have values for only the `line_number` and `error` fields.
 
 See [Chapter 21](client-authentication.html "Chapter 21. Client Authentication") for more information about client authentication configuration.
-
-***
-
-|                                              |                                                       |                                                                           |
-| :------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------------: |
-| [Prev](view-pg-group.html "54.8. pg_group")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-ident-file-mappings.html "54.10. pg_ident_file_mappings") |
-| 54.8. `pg_group`                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                           54.10. `pg_ident_file_mappings` |

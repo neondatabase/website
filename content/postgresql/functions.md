@@ -1,11 +1,3 @@
-
-
-|         Chapter 9. Functions and Operators         |                                            |                           |                                                       |                                                          |
-| :------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](datatype-pseudo.html "8.21. Pseudo-Types")  | [Up](sql.html "Part II. The SQL Language") | Part II. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-logical.html "9.1. Logical Operators") |
-
-***
-
 ## Chapter 9. Functions and Operators
 
 **Table of Contents**
@@ -153,10 +145,3 @@ repeat('Pg', 4) → PgPgPgPg
 ```
 
 If you are concerned about portability then note that most of the functions and operators described in this chapter, with the exception of the most trivial arithmetic and comparison operators and some explicitly marked functions, are not specified by the SQL standard. Some of this extended functionality is present in other SQL database management systems, and in many cases this functionality is compatible and consistent between the various implementations.
-
-***
-
-|                                                    |                                                       |                                                          |
-| :------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](datatype-pseudo.html "8.21. Pseudo-Types")  |       [Up](sql.html "Part II. The SQL Language")      |  [Next](functions-logical.html "9.1. Logical Operators") |
-| 8.21. Pseudo-Types                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                   9.1. Logical Operators |

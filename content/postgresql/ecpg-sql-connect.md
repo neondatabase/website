@@ -1,11 +1,3 @@
-
-
-|                              CONNECT                             |                                                             |                              |                                                       |                                                                      |
-| :--------------------------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](ecpg-sql-allocate-descriptor.html "ALLOCATE DESCRIPTOR")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-deallocate-descriptor.html "DEALLOCATE DESCRIPTOR") |
-
-***
-
 ## CONNECT
 
 CONNECT — establish a database connection
@@ -139,10 +131,3 @@ EXEC SQL END DECLARE SECTION;
 ## See Also
 
 [DISCONNECT](ecpg-sql-disconnect.html "DISCONNECT"), [SET CONNECTION](ecpg-sql-set-connection.html "SET CONNECTION")
-
-***
-
-|                                                                  |                                                             |                                                                      |
-| :--------------------------------------------------------------- | :---------------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](ecpg-sql-allocate-descriptor.html "ALLOCATE DESCRIPTOR")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-deallocate-descriptor.html "DEALLOCATE DESCRIPTOR") |
-| ALLOCATE DESCRIPTOR                                              |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                                DEALLOCATE DESCRIPTOR |

@@ -1,11 +1,3 @@
-
-
-|          42.1. Installing Procedural Languages          |                                                      |                                  |                                                       |                                                                        |
-| :-----------------------------------------------------: | :--------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](xplang.html "Chapter 42. Procedural Languages")  | [Up](xplang.html "Chapter 42. Procedural Languages") | Chapter 42. Procedural Languages | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |
-
-***
-
 ## 42.1. Installing Procedural Languages [#](#XPLANG-INSTALL)
 
 A procedural language must be “installed” into each database where it is to be used. But procedural languages installed in the database `template1` are automatically available in all subsequently created databases, since their entries in `template1` will be copied by `CREATE DATABASE`. So the database administrator can decide which languages are available in which databases and can make some languages available by default if desired.
@@ -100,10 +92,3 @@ then defines that the previously declared functions should be invoked for functi
 \
 
 In a default PostgreSQL installation, the handler for the PL/pgSQL language is built and installed into the “library” directory; furthermore, the PL/pgSQL language itself is installed in all databases. If Tcl support is configured in, the handlers for PL/Tcl and PL/TclU are built and installed in the library directory, but the language itself is not installed in any database by default. Likewise, the PL/Perl and PL/PerlU handlers are built and installed if Perl support is configured, and the PL/PythonU handler is installed if Python support is configured, but these languages are not installed by default.
-
-***
-
-|                                                         |                                                       |                                                                        |
-| :------------------------------------------------------ | :---------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](xplang.html "Chapter 42. Procedural Languages")  |  [Up](xplang.html "Chapter 42. Procedural Languages") |  [Next](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |
-| Chapter 42. Procedural Languages                        | [Home](index.html "PostgreSQL 17devel Documentation") |                         Chapter 43. PL/pgSQL — SQL Procedural Language |

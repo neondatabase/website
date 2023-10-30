@@ -1,11 +1,3 @@
-
-
-|                 DROP TEXT SEARCH TEMPLATE                |                                        |              |                                                       |                                                  |
-| :------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-droptsparser.html "DROP TEXT SEARCH PARSER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droptransform.html "DROP TRANSFORM") |
-
-***
-
 ## DROP TEXT SEARCH TEMPLATE
 
 DROP TEXT SEARCH TEMPLATE — remove a text search template
@@ -57,10 +49,3 @@ There is no `DROP TEXT SEARCH TEMPLATE` statement in the SQL standard.
 ## See Also
 
 [ALTER TEXT SEARCH TEMPLATE](sql-altertstemplate.html "ALTER TEXT SEARCH TEMPLATE"), [CREATE TEXT SEARCH TEMPLATE](sql-createtstemplate.html "CREATE TEXT SEARCH TEMPLATE")
-
-***
-
-|                                                          |                                                       |                                                  |
-| :------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-droptsparser.html "DROP TEXT SEARCH PARSER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droptransform.html "DROP TRANSFORM") |
-| DROP TEXT SEARCH PARSER                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                   DROP TRANSFORM |

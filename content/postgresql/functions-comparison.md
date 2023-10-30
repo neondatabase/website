@@ -1,11 +1,3 @@
-
-
-|          9.2. Comparison Functions and Operators         |                                                           |                                    |                                                       |                                                                          |
-| :------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](functions-logical.html "9.1. Logical Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-math.html "9.3. Mathematical Functions and Operators") |
-
-***
-
 ## 9.2. Comparison Functions and Operators [#](#FUNCTIONS-COMPARISON)
 
 The usual comparison operators are available, as shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators").
@@ -137,10 +129,3 @@ Some comparison-related functions are also available, as shown in [Table 9.3](f
 | ------------------------------------------------------------------------------------------------------------------------------ |
 | `num_nonnulls` ( `VARIADIC` `"any"` ) → `integer`Returns the number of non-null arguments.`num_nonnulls(1, NULL, 2)` → `2` |
 | `num_nulls` ( `VARIADIC` `"any"` ) → `integer`Returns the number of null arguments.`num_nulls(1, NULL, 2)` → `1`           |
-
-***
-
-|                                                          |                                                           |                                                                          |
-| :------------------------------------------------------- | :-------------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](functions-logical.html "9.1. Logical Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-math.html "9.3. Mathematical Functions and Operators") |
-| 9.1. Logical Operators                                   |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                9.3. Mathematical Functions and Operators |

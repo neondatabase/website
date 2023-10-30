@@ -1,11 +1,3 @@
-
-
-|                 F.10. citext — a case-insensitive character string type                 |                                                                             |                                                        |                                                       |                                                                      |
-| :-------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](btree-gist.html "F.9. btree_gist — GiST operator classes with B-tree behavior")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](cube.html "F.11. cube — a multi-dimensional cube data type") |
-
-***
-
 ## F.10. citext — a case-insensitive character string type [#](#CITEXT)
 
   * *   [F.10.1. Rationale](citext.html#CITEXT-RATIONALE)
@@ -95,10 +87,3 @@ For the regexp functions, if you want to match case-sensitively, you can specify
 David E. Wheeler `<david@kineticode.com>`
 
 Inspired by the original `citext` module by Donald Fraser.
-
-***
-
-|                                                                                         |                                                                             |                                                                      |
-| :-------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](btree-gist.html "F.9. btree_gist — GiST operator classes with B-tree behavior")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](cube.html "F.11. cube — a multi-dimensional cube data type") |
-| F.9. btree\_gist — GiST operator classes with B-tree behavior                           |            [Home](index.html "PostgreSQL 17devel Documentation")            |                      F.11. cube — a multi-dimensional cube data type |

@@ -1,11 +1,3 @@
-
-
-|                  23.5. Destroying a Database                  |                                                                |                                |                                                       |                                                         |
-| :-----------------------------------------------------------: | :------------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](manage-ag-config.html "23.4. Database Configuration")  | [Up](managing-databases.html "Chapter 23. Managing Databases") | Chapter 23. Managing Databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](manage-ag-tablespaces.html "23.6. Tablespaces") |
-
-***
-
 ## 23.5. Destroying a Database [#](#MANAGE-AG-DROPDB)
 
 Databases are destroyed with the command [DROP DATABASE](sql-dropdatabase.html "DROP DATABASE"):
@@ -27,10 +19,3 @@ dropdb dbname
 ```
 
 (Unlike `createdb`, it is not the default action to drop the database with the current user name.)
-
-***
-
-|                                                               |                                                                |                                                         |
-| :------------------------------------------------------------ | :------------------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](manage-ag-config.html "23.4. Database Configuration")  | [Up](managing-databases.html "Chapter 23. Managing Databases") |  [Next](manage-ag-tablespaces.html "23.6. Tablespaces") |
-| 23.4. Database Configuration                                  |      [Home](index.html "PostgreSQL 17devel Documentation")     |                                       23.6. Tablespaces |

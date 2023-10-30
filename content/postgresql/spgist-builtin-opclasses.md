@@ -1,11 +1,3 @@
-
-
-|         69.2. Built-in Operator Classes         |                                                 |                             |                                                       |                                                          |
-| :---------------------------------------------: | :---------------------------------------------- | :-------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](spgist-intro.html "69.1. Introduction")  | [Up](spgist.html "Chapter 69. SP-GiST Indexes") | Chapter 69. SP-GiST Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spgist-extensibility.html "69.3. Extensibility") |
-
-***
-
 ## 69.2. Built-in Operator Classes [#](#SPGIST-BUILTIN-OPCLASSES)
 
 The core PostgreSQL distribution includes the SP-GiST operator classes shown in [Table 69.1](spgist-builtin-opclasses.html#SPGIST-BUILTIN-OPCLASSES-TABLE "Table 69.1. Built-in SP-GiST Operator Classes").
@@ -87,10 +79,3 @@ The core PostgreSQL distribution includes the SP-GiST operator classes shown in 
 Of the two operator classes for type `point`, `quad_point_ops` is the default. `kd_point_ops` supports the same operators but uses a different index data structure that may offer better performance in some applications.
 
 The `quad_point_ops`, `kd_point_ops` and `poly_ops` operator classes support the `<->` ordering operator, which enables the k-nearest neighbor (`k-NN`) search over indexed point or polygon data sets.
-
-***
-
-|                                                 |                                                       |                                                          |
-| :---------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](spgist-intro.html "69.1. Introduction")  |    [Up](spgist.html "Chapter 69. SP-GiST Indexes")    |  [Next](spgist-extensibility.html "69.3. Extensibility") |
-| 69.1. Introduction                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                      69.3. Extensibility |

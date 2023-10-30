@@ -1,11 +1,3 @@
-
-
-|                Index                |                                                     |                                  |                                                       |    |
-| :---------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -: |
-| [Prev](biblio.html "Bibliography")  | [Up](index.html "PostgreSQL 17devel Documentation") | PostgreSQL 17devel Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |    |
-
-***
-
 # Index
 
 [Symbols](#indexdiv-Symbols) | [A](#indexdiv-A) | [B](#indexdiv-B) | [C](#indexdiv-C) | [D](#indexdiv-D) | [E](#indexdiv-E) | [F](#indexdiv-F) | [G](#indexdiv-G) | [H](#indexdiv-H) | [I](#indexdiv-I) | [J](#indexdiv-J) | [K](#indexdiv-K) | [L](#indexdiv-L) | [M](#indexdiv-M) | [N](#indexdiv-N) | [O](#indexdiv-O) | [P](#indexdiv-P) | [Q](#indexdiv-Q) | [R](#indexdiv-R) | [S](#indexdiv-S) | [T](#indexdiv-T) | [U](#indexdiv-U) | [V](#indexdiv-V) | [W](#indexdiv-W) | [X](#indexdiv-X) | [Y](#indexdiv-Y) | [Z](#indexdiv-Z)
@@ -4300,10 +4292,3 @@
 
   * *   zero\_damaged\_pages configuration parameter, [Developer Options](runtime-config-developer.html)
   * zlib, [Requirements](install-requirements.html), [Anti-Features](install-make.html#CONFIGURE-OPTIONS-ANTI-FEATURES), [Anti-Features](install-meson.html#MESON-OPTIONS-ANTI-FEATURES)
-
-***
-
-|                                     |                                                       |    |
-| :---------------------------------- | :---------------------------------------------------: | -: |
-| [Prev](biblio.html "Bibliography")  |  [Up](index.html "PostgreSQL 17devel Documentation")  |    |
-| Bibliography                        | [Home](index.html "PostgreSQL 17devel Documentation") |    |

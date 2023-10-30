@@ -1,11 +1,3 @@
-
-
-|                           37.44. `routine_table_usage`                          |                                                                    |                                    |                                                       |                                                     |
-| :-----------------------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](infoschema-routine-sequence-usage.html "37.43. routine_sequence_usage")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-routines.html "37.45. routines") |
-
-***
-
 ## 37.44. `routine_table_usage` [#](#INFOSCHEMA-ROUTINE-TABLE-USAGE)
 
 The view `routine_table_usage` is meant to identify all tables that are used by a function or procedure. This information is currently not tracked by PostgreSQL.
@@ -23,10 +15,3 @@ The view `routine_table_usage` is meant to identify all tables that are used by 
 | `table_catalog` `sql_identifier`Name of the database that contains the table that is used by the function (always the current database)                    |
 | `table_schema` `sql_identifier`Name of the schema that contains the table that is used by the function                                                     |
 | `table_name` `sql_identifier`Name of the table that is used by the function                                                                                |
-
-***
-
-|                                                                                 |                                                                    |                                                     |
-| :------------------------------------------------------------------------------ | :----------------------------------------------------------------: | --------------------------------------------------: |
-| [Prev](infoschema-routine-sequence-usage.html "37.43. routine_sequence_usage")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-routines.html "37.45. routines") |
-| 37.43. `routine_sequence_usage`                                                 |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                   37.45. `routines` |

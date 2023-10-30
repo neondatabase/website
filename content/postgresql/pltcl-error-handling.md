@@ -1,11 +1,3 @@
-
-
-|                        44.8. Error Handling in PL/Tcl                       |                                                                 |                                              |                                                       |                                                                                |
-| :-------------------------------------------------------------------------: | :-------------------------------------------------------------- | :------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](pltcl-event-trigger.html "44.7. Event Trigger Functions in PL/Tcl")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") | Chapter 44. PL/Tcl — Tcl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pltcl-subtransactions.html "44.9. Explicit Subtransactions in PL/Tcl") |
-
-***
-
 ## 44.8. Error Handling in PL/Tcl [#](#PLTCL-ERROR-HANDLING)
 
 Tcl code within or called from a PL/Tcl function can raise an error, either by executing some invalid operation or by generating an error using the Tcl `error` command or PL/Tcl's `elog` command. Such errors can be caught within Tcl using the Tcl `catch` command. If an error is not caught but is allowed to propagate out to the top level of execution of the PL/Tcl function, it is reported as an SQL error in the function's calling query.
@@ -31,10 +23,3 @@ if {[catch { spi_exec $sql_command }]} {
 ```
 
 (The double colons explicitly specify that `errorCode` is a global variable.)
-
-***
-
-|                                                                             |                                                                 |                                                                                |
-| :-------------------------------------------------------------------------- | :-------------------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](pltcl-event-trigger.html "44.7. Event Trigger Functions in PL/Tcl")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") |  [Next](pltcl-subtransactions.html "44.9. Explicit Subtransactions in PL/Tcl") |
-| 44.7. Event Trigger Functions in PL/Tcl                                     |      [Home](index.html "PostgreSQL 17devel Documentation")      |                                       44.9. Explicit Subtransactions in PL/Tcl |

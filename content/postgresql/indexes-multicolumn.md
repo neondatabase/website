@@ -1,11 +1,3 @@
-
-
-|            11.3. Multicolumn Indexes            |                                          |                     |                                                       |                                                             |
-| :---------------------------------------------: | :--------------------------------------- | :-----------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](indexes-types.html "11.2. Index Types")  | [Up](indexes.html "Chapter 11. Indexes") | Chapter 11. Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](indexes-ordering.html "11.4. Indexes and ORDER BY") |
-
-***
-
 ## 11.3. Multicolumn Indexes [#](#INDEXES-MULTICOLUMN)
 
 An index can be defined on more than one column of a table. For example, if you have a table of this form:
@@ -46,10 +38,3 @@ A multicolumn BRIN index can be used with query conditions that involve any subs
 Of course, each column must be used with operators appropriate to the index type; clauses that involve other operators will not be considered.
 
 Multicolumn indexes should be used sparingly. In most situations, an index on a single column is sufficient and saves space and time. Indexes with more than three columns are unlikely to be helpful unless the usage of the table is extremely stylized. See also [Section 11.5](indexes-bitmap-scans.html "11.5. Combining Multiple Indexes") and [Section 11.9](indexes-index-only-scans.html "11.9. Index-Only Scans and Covering Indexes") for some discussion of the merits of different index configurations.
-
-***
-
-|                                                 |                                                       |                                                             |
-| :---------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](indexes-types.html "11.2. Index Types")  |        [Up](indexes.html "Chapter 11. Indexes")       |  [Next](indexes-ordering.html "11.4. Indexes and ORDER BY") |
-| 11.2. Index Types                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                11.4. Indexes and `ORDER BY` |

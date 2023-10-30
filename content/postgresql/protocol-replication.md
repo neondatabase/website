@@ -1,10 +1,3 @@
-
-|              55.4. Streaming Replication Protocol             |                                                             |                                       |                                                       |                                                                                           |
-| :-----------------------------------------------------------: | :---------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------------------: |
-| [Prev](sasl-authentication.html "55.3. SASL Authentication")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") | Chapter 55. Frontend/Backend Protocol | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](protocol-logical-replication.html "55.5. Logical Streaming Replication Protocol") |
-
-***
-
 ## 55.4. Streaming Replication Protocol [#](#PROTOCOL-REPLICATION)
 
 To initiate streaming replication, the frontend sends the `replication` parameter in the startup message. A Boolean value of `true` (or `on`, `yes`, `1`) tells the backend to go into physical replication walsender mode, wherein a small set of replication commands, shown below, can be issued instead of SQL statements.
@@ -426,10 +419,3 @@ The commands accepted in replication mode are:
   * Files other than regular files and directories, such as symbolic links (other than for the directories listed above) and special device files, are skipped. (Symbolic links in `pg_tblspc` are maintained.)
 
     Owner, group, and file mode are set if the underlying file system on the server supports it.
-
-***
-
-|                                                               |                                                             |                                                                                           |
-| :------------------------------------------------------------ | :---------------------------------------------------------: | ----------------------------------------------------------------------------------------: |
-| [Prev](sasl-authentication.html "55.3. SASL Authentication")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") |  [Next](protocol-logical-replication.html "55.5. Logical Streaming Replication Protocol") |
-| 55.3. SASL Authentication                                     |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                              55.5. Logical Streaming Replication Protocol |

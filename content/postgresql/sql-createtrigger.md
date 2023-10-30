@@ -1,11 +1,3 @@
-
-
-|                    CREATE TRIGGER                    |                                        |              |                                                       |                                            |
-| :--------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-createtransform.html "CREATE TRANSFORM")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createtype.html "CREATE TYPE") |
-
-***
-
 ## CREATE TRIGGER
 
 CREATE TRIGGER — define a new trigger
@@ -270,10 +262,3 @@ The ability to fire triggers for `TRUNCATE` is a PostgreSQL extension of the SQL
 ## See Also
 
 [ALTER TRIGGER](sql-altertrigger.html "ALTER TRIGGER"), [DROP TRIGGER](sql-droptrigger.html "DROP TRIGGER"), [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [SET CONSTRAINTS](sql-set-constraints.html "SET CONSTRAINTS")
-
-***
-
-|                                                      |                                                       |                                            |
-| :--------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-createtransform.html "CREATE TRANSFORM")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createtype.html "CREATE TYPE") |
-| CREATE TRANSFORM                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                CREATE TYPE |

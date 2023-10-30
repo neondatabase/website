@@ -1,11 +1,3 @@
-
-
-|             37.34. `referential_constraints`            |                                                                    |                                    |                                                       |                                                                         |
-| :-----------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](infoschema-parameters.html "37.33. parameters")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-role-column-grants.html "37.35. role_column_grants") |
-
-***
-
 ## 37.34. `referential_constraints` [#](#INFOSCHEMA-REFERENTIAL-CONSTRAINTS)
 
 The view `referential_constraints` contains all referential (foreign key) constraints in the current database. Only those constraints are shown for which the current user has write access to the referencing table (by way of being the owner or having some privilege other than `SELECT`).
@@ -23,10 +15,3 @@ The view `referential_constraints` contains all referential (foreign key) constr
 | `match_option` `character_data`Match option of the foreign key constraint: `FULL`, `PARTIAL`, or `NONE`.                                                                                     |
 | `update_rule` `character_data`Update rule of the foreign key constraint: `CASCADE`, `SET NULL`, `SET DEFAULT`, `RESTRICT`, or `NO ACTION`.                                                   |
 | `delete_rule` `character_data`Delete rule of the foreign key constraint: `CASCADE`, `SET NULL`, `SET DEFAULT`, `RESTRICT`, or `NO ACTION`.                                                   |
-
-***
-
-|                                                         |                                                                    |                                                                         |
-| :------------------------------------------------------ | :----------------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](infoschema-parameters.html "37.33. parameters")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-role-column-grants.html "37.35. role_column_grants") |
-| 37.33. `parameters`                                     |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                             37.35. `role_column_grants` |

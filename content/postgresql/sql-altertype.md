@@ -1,11 +1,3 @@
-
-
-|                   ALTER TYPE                   |                                        |              |                                                       |                                          |
-| :--------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-altertrigger.html "ALTER TRIGGER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alteruser.html "ALTER USER") |
-
-***
-
 ## ALTER TYPE
 
 ALTER TYPE — change the definition of a type
@@ -213,10 +205,3 @@ The variants to add and drop attributes are part of the SQL standard; the other 
 ## See Also
 
 [CREATE TYPE](sql-createtype.html "CREATE TYPE"), [DROP TYPE](sql-droptype.html "DROP TYPE")
-
-***
-
-|                                                |                                                       |                                          |
-| :--------------------------------------------- | :---------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-altertrigger.html "ALTER TRIGGER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alteruser.html "ALTER USER") |
-| ALTER TRIGGER                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                               ALTER USER |

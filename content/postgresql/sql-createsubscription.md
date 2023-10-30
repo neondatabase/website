@@ -1,11 +1,3 @@
-
-
-|                   CREATE SUBSCRIPTION                  |                                        |              |                                                       |                                              |
-| :----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-createstatistics.html "CREATE STATISTICS")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createtable.html "CREATE TABLE") |
-
-***
-
 ## CREATE SUBSCRIPTION
 
 CREATE SUBSCRIPTION — define a new subscription
@@ -195,10 +187,3 @@ CREATE SUBSCRIPTION mysub
 ## See Also
 
 [ALTER SUBSCRIPTION](sql-altersubscription.html "ALTER SUBSCRIPTION"), [DROP SUBSCRIPTION](sql-dropsubscription.html "DROP SUBSCRIPTION"), [CREATE PUBLICATION](sql-createpublication.html "CREATE PUBLICATION"), [ALTER PUBLICATION](sql-alterpublication.html "ALTER PUBLICATION")
-
-***
-
-|                                                        |                                                       |                                              |
-| :----------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-createstatistics.html "CREATE STATISTICS")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createtable.html "CREATE TABLE") |
-| CREATE STATISTICS                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                 CREATE TABLE |

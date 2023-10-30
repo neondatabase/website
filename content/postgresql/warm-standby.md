@@ -1,11 +1,3 @@
-
-
-|                            27.2. Log-Shipping Standby Servers                           |                                                                                               |                                                                |                                                       |                                                      |
-| :-------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------- | :------------------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](different-replication-solutions.html "27.1. Comparison of Different Solutions")  | [Up](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication") | Chapter 27. High Availability, Load Balancing, and Replication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](warm-standby-failover.html "27.3. Failover") |
-
-***
-
 ## 27.2. Log-Shipping Standby Servers [#](#WARM-STANDBY)
 
   * *   [27.2.1. Planning](warm-standby.html#STANDBY-PLANNING)
@@ -272,10 +264,3 @@ If you need to re-create a standby server while transactions are waiting, make s
 When continuous WAL archiving is used in a standby, there are two different scenarios: the WAL archive can be shared between the primary and the standby, or the standby can have its own WAL archive. When the standby has its own WAL archive, set `archive_mode` to `always`, and the standby will call the archive command for every WAL segment it receives, whether it's by restoring from the archive or by streaming replication. The shared archive can be handled similarly, but the `archive_command` or `archive_library` must test if the file being archived exists already, and if the existing file has identical contents. This requires more care in the `archive_command` or `archive_library`, as it must be careful to not overwrite an existing file with different contents, but return success if the exactly same file is archived twice. And all that must be done free of race conditions, if two servers attempt to archive the same file at the same time.
 
 If `archive_mode` is set to `on`, the archiver is not enabled during recovery or standby mode. If the standby server is promoted, it will start archiving after the promotion, but will not archive any WAL or timeline history files that it did not generate itself. To get a complete series of WAL files in the archive, you must ensure that all WAL is archived, before it reaches the standby. This is inherently true with file-based log shipping, as the standby can only restore files that are found in the archive, but not if streaming replication is enabled. When a server is not in recovery mode, there is no difference between `on` and `always` modes.
-
-***
-
-|                                                                                         |                                                                                               |                                                      |
-| :-------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](different-replication-solutions.html "27.1. Comparison of Different Solutions")  | [Up](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication") |  [Next](warm-standby-failover.html "27.3. Failover") |
-| 27.1. Comparison of Different Solutions                                                 |                     [Home](index.html "PostgreSQL 17devel Documentation")                     |                                       27.3. Failover |

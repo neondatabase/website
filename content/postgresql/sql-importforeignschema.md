@@ -1,11 +1,3 @@
-
-
-|      IMPORT FOREIGN SCHEMA      |                                        |              |                                                       |                                   |
-| :-----------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](sql-grant.html "GRANT")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-insert.html "INSERT") |
-
-***
-
 ## IMPORT FOREIGN SCHEMA
 
 IMPORT FOREIGN SCHEMA — import table definitions from a foreign server
@@ -80,10 +72,3 @@ The `IMPORT FOREIGN SCHEMA` command conforms to the SQL standard, except that th
 ## See Also
 
 [CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE"), [CREATE SERVER](sql-createserver.html "CREATE SERVER")
-
-***
-
-|                                 |                                                       |                                   |
-| :------------------------------ | :---------------------------------------------------: | --------------------------------: |
-| [Prev](sql-grant.html "GRANT")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-insert.html "INSERT") |
-| GRANT                           | [Home](index.html "PostgreSQL 17devel Documentation") |                            INSERT |

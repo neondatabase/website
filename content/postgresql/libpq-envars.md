@@ -1,11 +1,3 @@
-
-
-|           34.15. Environment Variables           |                                                  |                               |                                                       |                                                       |
-| :----------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](libpq-events.html "34.14. Event System")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-pgpass.html "34.16. The Password File") |
-
-***
-
 ## 34.15. Environment Variables [#](#LIBPQ-ENVARS)
 
 The following environment variables can be used to select default connection parameter values, which will be used by [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB), [`PQsetdbLogin`](libpq-connect.html#LIBPQ-PQSETDBLOGIN) and [`PQsetdb`](libpq-connect.html#LIBPQ-PQSETDB) if no value is directly specified by the calling code. These are useful to avoid hard-coding database connection information into simple client applications, for example.
@@ -57,10 +49,3 @@ The following environment variables determine internal behavior of libpq; they o
 
 * `PGSYSCONFDIR` sets the directory containing the `pg_service.conf` file and in a future version possibly other system-wide configuration files.
 * `PGLOCALEDIR` sets the directory containing the `locale` files for message localization.
-
-***
-
-|                                                  |                                                       |                                                       |
-| :----------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](libpq-events.html "34.14. Event System")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-pgpass.html "34.16. The Password File") |
-| 34.14. Event System                              | [Home](index.html "PostgreSQL 17devel Documentation") |                              34.16. The Password File |

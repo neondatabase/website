@@ -1,11 +1,3 @@
-
-
-|                5.14. Dependency Tracking                |                                             |                            |                                                       |                                                  |
-| :-----------------------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](ddl-others.html "5.13. Other Database Objects")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](dml.html "Chapter 6. Data Manipulation") |
-
-***
-
 ## 5.14. Dependency Tracking [#](#DDL-DEPEND)
 
 When you create complex database structures involving many tables with foreign key constraints, views, triggers, functions, etc. you implicitly create a net of dependencies between the objects. For instance, a table with a foreign key constraint depends on the table it references.
@@ -65,10 +57,3 @@ END;
 ```
 
 then the function's dependency on the `my_colors` table will be known and enforced by `DROP`.
-
-***
-
-|                                                         |                                                       |                                                  |
-| :------------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](ddl-others.html "5.13. Other Database Objects")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](dml.html "Chapter 6. Data Manipulation") |
-| 5.13. Other Database Objects                            | [Home](index.html "PostgreSQL 17devel Documentation") |                     Chapter 6. Data Manipulation |

@@ -1,11 +1,3 @@
-
-
-|                      55.7. Message Formats                      |                                                             |                                       |                                                       |                                                                             |
-| :-------------------------------------------------------------: | :---------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](protocol-message-types.html "55.6. Message Data Types")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") | Chapter 55. Frontend/Backend Protocol | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](protocol-error-fields.html "55.8. Error and Notice Message Fields") |
-
-***
-
 ## 55.7. Message Formats [#](#PROTOCOL-MESSAGE-FORMATS)
 
 This section describes the detailed format of each message. Each is marked to indicate that it can be sent by a frontend (F), a backend (B), or both (F & B). Notice that although each message includes a byte count at the beginning, the message format is defined so that the message end can be found without reference to the byte count. This aids validity checking. (The CopyData message is an exception, because it forms part of a data stream; the contents of any individual CopyData message cannot be interpretable on their own.)
@@ -965,10 +957,3 @@ This section describes the detailed format of each message. Each is marked to in
   * Int32(4)
 
         Length of message contents in bytes, including self.
-
-***
-
-|                                                                 |                                                             |                                                                             |
-| :-------------------------------------------------------------- | :---------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](protocol-message-types.html "55.6. Message Data Types")  | [Up](protocol.html "Chapter 55. Frontend/Backend Protocol") |  [Next](protocol-error-fields.html "55.8. Error and Notice Message Fields") |
-| 55.6. Message Data Types                                        |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                       55.8. Error and Notice Message Fields |

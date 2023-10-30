@@ -1,11 +1,3 @@
-
-
-|               DROP PROCEDURE               |                                        |              |                                                       |                                                      |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-droppolicy.html "DROP POLICY")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droppublication.html "DROP PUBLICATION") |
-
-***
-
 ## DROP PROCEDURE
 
 DROP PROCEDURE — remove a procedure
@@ -107,10 +99,3 @@ This command conforms to the SQL standard, with these PostgreSQL extensions:
 ## See Also
 
 [CREATE PROCEDURE](sql-createprocedure.html "CREATE PROCEDURE"), [ALTER PROCEDURE](sql-alterprocedure.html "ALTER PROCEDURE"), [DROP FUNCTION](sql-dropfunction.html "DROP FUNCTION"), [DROP ROUTINE](sql-droproutine.html "DROP ROUTINE")
-
-***
-
-|                                            |                                                       |                                                      |
-| :----------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-droppolicy.html "DROP POLICY")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droppublication.html "DROP PUBLICATION") |
-| DROP POLICY                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                     DROP PUBLICATION |

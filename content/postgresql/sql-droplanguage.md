@@ -1,11 +1,3 @@
-
-
-|               DROP LANGUAGE              |                                        |              |                                                       |                                                                 |
-| :--------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](sql-dropindex.html "DROP INDEX")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropmaterializedview.html "DROP MATERIALIZED VIEW") |
-
-***
-
 ## DROP LANGUAGE
 
 DROP LANGUAGE — remove a procedural language
@@ -59,10 +51,3 @@ There is no `DROP LANGUAGE` statement in the SQL standard.
 ## See Also
 
 [ALTER LANGUAGE](sql-alterlanguage.html "ALTER LANGUAGE"), [CREATE LANGUAGE](sql-createlanguage.html "CREATE LANGUAGE")
-
-***
-
-|                                          |                                                       |                                                                 |
-| :--------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](sql-dropindex.html "DROP INDEX")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropmaterializedview.html "DROP MATERIALIZED VIEW") |
-| DROP INDEX                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                          DROP MATERIALIZED VIEW |

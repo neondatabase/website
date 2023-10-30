@@ -1,11 +1,3 @@
-
-
-|                            dblink                           |                                                                          |                                                      |                                                       |                                                 |
-| :---------------------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](contrib-dblink-disconnect.html "dblink_disconnect")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-exec.html "dblink_exec") |
-
-***
-
 ## dblink
 
 dblink — executes a query in a remote database
@@ -146,10 +138,3 @@ SELECT * FROM dblink('myconn', 'select proname, prosrc from pg_proc')
  byteaout   | byteaout
 (14 rows)
 ```
-
-***
-
-|                                                             |                                                                          |                                                 |
-| :---------------------------------------------------------- | :----------------------------------------------------------------------: | ----------------------------------------------: |
-| [Prev](contrib-dblink-disconnect.html "dblink_disconnect")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-exec.html "dblink_exec") |
-| dblink\_disconnect                                          |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                    dblink\_exec |

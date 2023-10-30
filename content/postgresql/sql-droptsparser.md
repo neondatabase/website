@@ -1,11 +1,3 @@
-
-
-|                      DROP TEXT SEARCH PARSER                     |                                        |              |                                                       |                                                              |
-| :--------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](sql-droptsdictionary.html "DROP TEXT SEARCH DICTIONARY")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droptstemplate.html "DROP TEXT SEARCH TEMPLATE") |
-
-***
-
 ## DROP TEXT SEARCH PARSER
 
 DROP TEXT SEARCH PARSER — remove a text search parser
@@ -57,10 +49,3 @@ There is no `DROP TEXT SEARCH PARSER` statement in the SQL standard.
 ## See Also
 
 [ALTER TEXT SEARCH PARSER](sql-altertsparser.html "ALTER TEXT SEARCH PARSER"), [CREATE TEXT SEARCH PARSER](sql-createtsparser.html "CREATE TEXT SEARCH PARSER")
-
-***
-
-|                                                                  |                                                       |                                                              |
-| :--------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](sql-droptsdictionary.html "DROP TEXT SEARCH DICTIONARY")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droptstemplate.html "DROP TEXT SEARCH TEMPLATE") |
-| DROP TEXT SEARCH DICTIONARY                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                    DROP TEXT SEARCH TEMPLATE |

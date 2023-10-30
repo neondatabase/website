@@ -1,11 +1,3 @@
-
-
-|                41.1. The Query Tree               |                                                |                             |                                                       |                                                             |
-| :-----------------------------------------------: | :--------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](rules.html "Chapter 41. The Rule System")  | [Up](rules.html "Chapter 41. The Rule System") | Chapter 41. The Rule System | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](rules-views.html "41.2. Views and the Rule System") |
-
-***
-
 ## 41.1. The Query Tree [#](#QUERYTREE)
 
 To understand how the rule system works it is necessary to know when it is invoked and what its input and results are.
@@ -59,10 +51,3 @@ When reading the SQL representations of the query trees in this chapter it is ne
 * the others
 
     The other parts of the query tree like the `ORDER BY` clause aren't of interest here. The rule system substitutes some entries there while applying rules, but that doesn't have much to do with the fundamentals of the rule system.
-
-***
-
-|                                                   |                                                       |                                                             |
-| :------------------------------------------------ | :---------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](rules.html "Chapter 41. The Rule System")  |     [Up](rules.html "Chapter 41. The Rule System")    |  [Next](rules-views.html "41.2. Views and the Rule System") |
-| Chapter 41. The Rule System                       | [Home](index.html "PostgreSQL 17devel Documentation") |                             41.2. Views and the Rule System |

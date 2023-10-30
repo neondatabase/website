@@ -1,11 +1,3 @@
-
-
-|                         11.11. Indexes and Collations                         |                                          |                     |                                                       |                                                              |
-| :---------------------------------------------------------------------------: | :--------------------------------------- | :-----------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](indexes-opclass.html "11.10. Operator Classes and Operator Families")  | [Up](indexes.html "Chapter 11. Indexes") | Chapter 11. Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](indexes-examine.html "11.12. Examining Index Usage") |
-
-***
-
 ## 11.11. Indexes and Collations [#](#INDEXES-COLLATIONS)
 
 An index can support only one collation per index column. If multiple collations are of interest, multiple indexes may be needed.
@@ -42,10 +34,3 @@ are also of interest, an additional index could be created that supports the `"y
 
 CREATE INDEX test1c_content_y_index ON test1c (content COLLATE "y");
 ```
-
-***
-
-|                                                                               |                                                       |                                                              |
-| :---------------------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](indexes-opclass.html "11.10. Operator Classes and Operator Families")  |        [Up](indexes.html "Chapter 11. Indexes")       |  [Next](indexes-examine.html "11.12. Examining Index Usage") |
-| 11.10. Operator Classes and Operator Families                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                 11.12. Examining Index Usage |

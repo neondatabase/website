@@ -1,11 +1,3 @@
-
-
-|             DROP COLLATION             |                                        |              |                                                       |                                                    |
-| :------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-dropcast.html "DROP CAST")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropconversion.html "DROP CONVERSION") |
-
-***
-
 ## DROP COLLATION
 
 DROP COLLATION — remove a collation
@@ -55,10 +47,3 @@ The `DROP COLLATION` command conforms to the SQL standard, apart from the `IF EX
 ## See Also
 
 [ALTER COLLATION](sql-altercollation.html "ALTER COLLATION"), [CREATE COLLATION](sql-createcollation.html "CREATE COLLATION")
-
-***
-
-|                                        |                                                       |                                                    |
-| :------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-dropcast.html "DROP CAST")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropconversion.html "DROP CONVERSION") |
-| DROP CAST                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                    DROP CONVERSION |

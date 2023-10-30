@@ -1,11 +1,3 @@
-
-
-|                   ALTER RULE                   |                                        |              |                                                       |                                              |
-| :--------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-alterroutine.html "ALTER ROUTINE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterschema.html "ALTER SCHEMA") |
-
-***
-
 ## ALTER RULE
 
 ALTER RULE — change the definition of a rule
@@ -53,10 +45,3 @@ ALTER RULE notify_all ON emp RENAME TO notify_me;
 ## See Also
 
 [CREATE RULE](sql-createrule.html "CREATE RULE"), [DROP RULE](sql-droprule.html "DROP RULE")
-
-***
-
-|                                                |                                                       |                                              |
-| :--------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-alterroutine.html "ALTER ROUTINE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterschema.html "ALTER SCHEMA") |
-| ALTER ROUTINE                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                 ALTER SCHEMA |

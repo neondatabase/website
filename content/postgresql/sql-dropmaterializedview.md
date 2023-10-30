@@ -1,11 +1,3 @@
-
-
-|             DROP MATERIALIZED VIEW             |                                        |              |                                                       |                                                |
-| :--------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-droplanguage.html "DROP LANGUAGE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropoperator.html "DROP OPERATOR") |
-
-***
-
 ## DROP MATERIALIZED VIEW
 
 DROP MATERIALIZED VIEW — remove a materialized view
@@ -55,10 +47,3 @@ DROP MATERIALIZED VIEW order_summary;
 ## See Also
 
 [CREATE MATERIALIZED VIEW](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW"), [ALTER MATERIALIZED VIEW](sql-altermaterializedview.html "ALTER MATERIALIZED VIEW"), [REFRESH MATERIALIZED VIEW](sql-refreshmaterializedview.html "REFRESH MATERIALIZED VIEW")
-
-***
-
-|                                                |                                                       |                                                |
-| :--------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-droplanguage.html "DROP LANGUAGE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropoperator.html "DROP OPERATOR") |
-| DROP LANGUAGE                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                  DROP OPERATOR |

@@ -1,11 +1,3 @@
-
-
-|                 Chapter 34. libpq — C Library                |                                                           |                            |                                                       |                                                                           |
-| :----------------------------------------------------------: | :-------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------: |
-| [Prev](client-interfaces.html "Part IV. Client Interfaces")  | [Up](client-interfaces.html "Part IV. Client Interfaces") | Part IV. Client Interfaces | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-connect.html "34.1. Database Connection Control Functions") |
-
-***
-
 ## Chapter 34. libpq — C Library
 
 **Table of Contents**
@@ -83,10 +75,3 @@ libpq is also the underlying engine for several other PostgreSQL application int
 Some short programs are included at the end of this chapter ([Section 34.22](libpq-example.html "34.22. Example Programs")) to show how to write programs that use libpq. There are also several complete examples of libpq applications in the directory `src/test/examples` in the source code distribution.
 
 Client programs that use libpq must include the header file `libpq-fe.h` and must link with the libpq library.
-
-***
-
-|                                                              |                                                           |                                                                           |
-| :----------------------------------------------------------- | :-------------------------------------------------------: | ------------------------------------------------------------------------: |
-| [Prev](client-interfaces.html "Part IV. Client Interfaces")  | [Up](client-interfaces.html "Part IV. Client Interfaces") |  [Next](libpq-connect.html "34.1. Database Connection Control Functions") |
-| Part IV. Client Interfaces                                   |   [Home](index.html "PostgreSQL 17devel Documentation")   |                               34.1. Database Connection Control Functions |

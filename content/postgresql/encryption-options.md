@@ -1,11 +1,3 @@
-
-
-|                           19.8. Encryption Options                          |                                                             |                                        |                                                       |                                                                  |
-| :-------------------------------------------------------------------------: | :---------------------------------------------------------- | :------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](preventing-server-spoofing.html "19.7. Preventing Server Spoofing")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") | Chapter 19. Server Setup and Operation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ssl-tcp.html "19.9. Secure TCP/IP Connections with SSL") |
-
-***
-
 ## 19.8. Encryption Options [#](#ENCRYPTION-OPTIONS)
 
 PostgreSQL offers encryption at several levels, and provides flexibility in protecting data from disclosure due to database server theft, unscrupulous administrators, and insecure networks. Encryption might also be required to secure sensitive data such as medical records or financial transactions.
@@ -41,10 +33,3 @@ PostgreSQL offers encryption at several levels, and provides flexibility in prot
 * Client-Side Encryption
 
     If the system administrator for the server's machine cannot be trusted, it is necessary for the client to encrypt the data; this way, unencrypted data never appears on the database server. Data is encrypted on the client before being sent to the server, and database results have to be decrypted on the client before being used.
-
-***
-
-|                                                                             |                                                             |                                                                  |
-| :-------------------------------------------------------------------------- | :---------------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](preventing-server-spoofing.html "19.7. Preventing Server Spoofing")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") |  [Next](ssl-tcp.html "19.9. Secure TCP/IP Connections with SSL") |
-| 19.7. Preventing Server Spoofing                                            |    [Home](index.html "PostgreSQL 17devel Documentation")    |                         19.9. Secure TCP/IP Connections with SSL |

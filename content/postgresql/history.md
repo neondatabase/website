@@ -1,11 +1,3 @@
-
-
-|           2. A Brief History of PostgreSQL           |                              |         |                                                       |                                         |
-| :--------------------------------------------------: | :--------------------------- | :-----: | ----------------------------------------------------: | --------------------------------------: |
-| [Prev](intro-whatis.html "1.  What Is PostgreSQL?")  | [Up](preface.html "Preface") | Preface | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](notation.html "3. Conventions") |
-
-***
-
 ## 2. A Brief History of PostgreSQL [#](#HISTORY)
 
   * *   [2.1. The Berkeley POSTGRES Project](history.html#HISTORY-BERKELEY)
@@ -47,10 +39,3 @@ Many people continue to refer to PostgreSQL as “Postgres” (now rarely in all
 The emphasis during development of Postgres95 was on identifying and understanding existing problems in the server code. With PostgreSQL, the emphasis has shifted to augmenting features and capabilities, although work continues in all areas.
 
 Details about what has happened in PostgreSQL since then can be found in [Appendix E](release.html "Appendix E. Release Notes").
-
-***
-
-|                                                      |                                                       |                                         |
-| :--------------------------------------------------- | :---------------------------------------------------: | --------------------------------------: |
-| [Prev](intro-whatis.html "1.  What Is PostgreSQL?")  |              [Up](preface.html "Preface")             |  [Next](notation.html "3. Conventions") |
-| 1.  What Is PostgreSQL?                              | [Home](index.html "PostgreSQL 17devel Documentation") |                          3. Conventions |

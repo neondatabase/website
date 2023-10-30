@@ -1,11 +1,3 @@
-
-
-|                 ALTER OPERATOR FAMILY                 |                                        |              |                                                       |                                              |
-| :---------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-alteropclass.html "ALTER OPERATOR CLASS")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterpolicy.html "ALTER POLICY") |
-
-***
-
 ## ALTER OPERATOR FAMILY
 
 ALTER OPERATOR FAMILY — change the definition of an operator family
@@ -171,10 +163,3 @@ There is no `ALTER OPERATOR FAMILY` statement in the SQL standard.
 ## See Also
 
 [CREATE OPERATOR FAMILY](sql-createopfamily.html "CREATE OPERATOR FAMILY"), [DROP OPERATOR FAMILY](sql-dropopfamily.html "DROP OPERATOR FAMILY"), [CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS"), [ALTER OPERATOR CLASS](sql-alteropclass.html "ALTER OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass.html "DROP OPERATOR CLASS")
-
-***
-
-|                                                       |                                                       |                                              |
-| :---------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-alteropclass.html "ALTER OPERATOR CLASS")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterpolicy.html "ALTER POLICY") |
-| ALTER OPERATOR CLASS                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                 ALTER POLICY |

@@ -1,11 +1,3 @@
-
-
-|                        67.4. Implementation                        |                                               |                            |                                                       |                                               |
-| :----------------------------------------------------------------: | :-------------------------------------------- | :------------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](btree-support-funcs.html "67.3. B-Tree Support Functions")  | [Up](btree.html "Chapter 67. B-Tree Indexes") | Chapter 67. B-Tree Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](gist.html "Chapter 68. GiST Indexes") |
-
-***
-
 ## 67.4. Implementation [#](#BTREE-IMPLEMENTATION)
 
   * *   [67.4.1. B-Tree Structure](btree-implementation.html#BTREE-STRUCTURE)
@@ -74,10 +66,3 @@ There is one further implementation-level restriction that may be lifted in a fu
 There is one further implementation-level restriction that applies regardless of the operator class or collation used:
 
 * `INCLUDE` indexes can never use deduplication.
-
-***
-
-|                                                                    |                                                       |                                               |
-| :----------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](btree-support-funcs.html "67.3. B-Tree Support Functions")  |     [Up](btree.html "Chapter 67. B-Tree Indexes")     |  [Next](gist.html "Chapter 68. GiST Indexes") |
-| 67.3. B-Tree Support Functions                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                      Chapter 68. GiST Indexes |

@@ -1,11 +1,3 @@
-
-
-|                       F.36. pg\_walinspect — low-level WAL inspection                       |                                                                             |                                                        |                                                       |                                                                                                                   |
-| :-----------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------: |
-| [Prev](pgvisibility.html "F.35. pg_visibility — visibility map information and utilities")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](postgres-fdw.html "F.37. postgres_fdw —&#xA;   access data stored in external PostgreSQL&#xA;   servers") |
-
-***
-
 ## F.36. pg\_walinspect — low-level WAL inspection [#](#PGWALINSPECT)
 
   * *   [F.36.1. General Functions](pgwalinspect.html#PGWALINSPECT-FUNCS)
@@ -146,10 +138,3 @@ By default, use of these functions is restricted to superusers and members of th
 ### F.36.2. Author [#](#PGWALINSPECT-AUTHOR)
 
 Bharath Rupireddy `<bharath.rupireddyforpostgres@gmail.com>`
-
-***
-
-|                                                                                             |                                                                             |                                                                                                                   |
-| :------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------: |
-| [Prev](pgvisibility.html "F.35. pg_visibility — visibility map information and utilities")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](postgres-fdw.html "F.37. postgres_fdw —&#xA;   access data stored in external PostgreSQL&#xA;   servers") |
-| F.35. pg\_visibility — visibility map information and utilities                             |            [Home](index.html "PostgreSQL 17devel Documentation")            |                                           F.37. postgres\_fdw — access data stored in external PostgreSQL servers |

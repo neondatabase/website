@@ -1,11 +1,3 @@
-
-
-|                          DROP OPERATOR                          |                                        |              |                                                       |                                                     |
-| :-------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](sql-dropmaterializedview.html "DROP MATERIALIZED VIEW")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropopclass.html "DROP OPERATOR CLASS") |
-
-***
-
 ## DROP OPERATOR
 
 DROP OPERATOR — remove an operator
@@ -77,10 +69,3 @@ There is no `DROP OPERATOR` statement in the SQL standard.
 ## See Also
 
 [CREATE OPERATOR](sql-createoperator.html "CREATE OPERATOR"), [ALTER OPERATOR](sql-alteroperator.html "ALTER OPERATOR")
-
-***
-
-|                                                                 |                                                       |                                                     |
-| :-------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](sql-dropmaterializedview.html "DROP MATERIALIZED VIEW")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropopclass.html "DROP OPERATOR CLASS") |
-| DROP MATERIALIZED VIEW                                          | [Home](index.html "PostgreSQL 17devel Documentation") |                                 DROP OPERATOR CLASS |

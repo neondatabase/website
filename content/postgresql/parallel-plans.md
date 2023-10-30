@@ -1,11 +1,3 @@
-
-
-|                                  15.3. Parallel Plans                                  |                                                        |                            |                                                       |                                                       |
-| :------------------------------------------------------------------------------------: | :----------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](when-can-parallel-query-be-used.html "15.2. When Can Parallel Query Be Used?")  | [Up](parallel-query.html "Chapter 15. Parallel Query") | Chapter 15. Parallel Query | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](parallel-safety.html "15.4. Parallel Safety") |
-
-***
-
 ## 15.3. Parallel Plans [#](#PARALLEL-PLANS)
 
   * *   [15.3.1. Parallel Scans](parallel-plans.html#PARALLEL-SCANS)
@@ -57,10 +49,3 @@ Also, unlike a regular `Append` node, which can only have partial children when 
 If a query that is expected to do so does not produce a parallel plan, you can try reducing [parallel\_setup\_cost](runtime-config-query.html#GUC-PARALLEL-SETUP-COST) or [parallel\_tuple\_cost](runtime-config-query.html#GUC-PARALLEL-TUPLE-COST). Of course, this plan may turn out to be slower than the serial plan that the planner preferred, but this will not always be the case. If you don't get a parallel plan even with very small values of these settings (e.g., after setting them both to zero), there may be some reason why the query planner is unable to generate a parallel plan for your query. See [Section 15.2](when-can-parallel-query-be-used.html "15.2. When Can Parallel Query Be Used?") and [Section 15.4](parallel-safety.html "15.4. Parallel Safety") for information on why this may be the case.
 
 When executing a parallel plan, you can use `EXPLAIN (ANALYZE, VERBOSE)` to display per-worker statistics for each plan node. This may be useful in determining whether the work is being evenly distributed between all plan nodes and more generally in understanding the performance characteristics of the plan.
-
-***
-
-|                                                                                        |                                                        |                                                       |
-| :------------------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](when-can-parallel-query-be-used.html "15.2. When Can Parallel Query Be Used?")  | [Up](parallel-query.html "Chapter 15. Parallel Query") |  [Next](parallel-safety.html "15.4. Parallel Safety") |
-| 15.2. When Can Parallel Query Be Used?                                                 |  [Home](index.html "PostgreSQL 17devel Documentation") |                                 15.4. Parallel Safety |

@@ -1,11 +1,3 @@
-
-
-|                 32.1. What Is JIT compilation?                 |                                                             |                                            |                                                       |                                                 |
-| :------------------------------------------------------------: | :---------------------------------------------------------- | :----------------------------------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](jit.html "Chapter 32. Just-in-Time Compilation (JIT)")  | [Up](jit.html "Chapter 32. Just-in-Time Compilation (JIT)") | Chapter 32. Just-in-Time Compilation (JIT) | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](jit-decision.html "32.2. When to JIT?") |
-
-***
-
 ## 32.1. What Is JIT compilation? [#](#JIT-REASON)
 
   * *   [32.1.1. JIT Accelerated Operations](jit-reason.html#JIT-ACCELERATED-OPERATIONS)
@@ -33,10 +25,3 @@ PostgreSQL is very extensible and allows new data types, functions, operators an
 ### 32.1.3. Optimization [#](#JIT-OPTIMIZATION)
 
 LLVM has support for optimizing generated code. Some of the optimizations are cheap enough to be performed whenever JIT is used, while others are only beneficial for longer-running queries. See [https://llvm.org/docs/Passes.html#transform-passes](https://llvm.org/docs/Passes.html#transform-passes) for more details about optimizations.
-
-***
-
-|                                                                |                                                             |                                                 |
-| :------------------------------------------------------------- | :---------------------------------------------------------: | ----------------------------------------------: |
-| [Prev](jit.html "Chapter 32. Just-in-Time Compilation (JIT)")  | [Up](jit.html "Chapter 32. Just-in-Time Compilation (JIT)") |  [Next](jit-decision.html "32.2. When to JIT?") |
-| Chapter 32. Just-in-Time Compilation (JIT)                     |    [Home](index.html "PostgreSQL 17devel Documentation")    |                              32.2. When to JIT? |

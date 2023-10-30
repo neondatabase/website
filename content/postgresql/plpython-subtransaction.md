@@ -1,11 +1,3 @@
-
-
-|              46.7. Explicit Subtransactions             |                                                                          |                                                    |                                                       |                                                                    |
-| :-----------------------------------------------------: | :----------------------------------------------------------------------- | :------------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](plpython-database.html "46.6. Database Access")  | [Up](plpython.html "Chapter 46. PL/Python — Python Procedural Language") | Chapter 46. PL/Python — Python Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpython-transactions.html "46.8. Transaction Management") |
-
-***
-
 ## 46.7. Explicit Subtransactions [#](#PLPYTHON-SUBTRANSACTION)
 
 * [46.7.1. Subtransaction Context Managers](plpython-subtransaction.html#PLPYTHON-SUBTRANSACTION-CONTEXT-MANAGERS)
@@ -52,10 +44,3 @@ $$ LANGUAGE plpython3u;
 ```
 
 Note that the use of `try/catch` is still required. Otherwise the exception would propagate to the top of the Python stack and would cause the whole function to abort with a PostgreSQL error, so that the `operations` table would not have any row inserted into it. The subtransaction context manager does not trap errors, it only assures that all database operations executed inside its scope will be atomically committed or rolled back. A rollback of the subtransaction block occurs on any kind of exception exit, not only ones caused by errors originating from database access. A regular Python exception raised inside an explicit subtransaction block would also cause the subtransaction to be rolled back.
-
-***
-
-|                                                         |                                                                          |                                                                    |
-| :------------------------------------------------------ | :----------------------------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](plpython-database.html "46.6. Database Access")  | [Up](plpython.html "Chapter 46. PL/Python — Python Procedural Language") |  [Next](plpython-transactions.html "46.8. Transaction Management") |
-| 46.6. Database Access                                   |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                       46.8. Transaction Management |

@@ -1,11 +1,3 @@
-
-
-|                         Preface                        |                                                     |                                  |                                                       |                                                      |
-| :----------------------------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](index.html "PostgreSQL 17devel Documentation")  | [Up](index.html "PostgreSQL 17devel Documentation") | PostgreSQL 17devel Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](intro-whatis.html "1.  What Is PostgreSQL?") |
-
-***
-
 # Preface
 
 **Table of Contents**
@@ -40,10 +32,3 @@ To make the large amount of information about PostgreSQL manageable, this book h
 * [Part V](server-programming.html "Part V. Server Programming") contains information for advanced users about the extensibility capabilities of the server. Topics include user-defined data types and functions.
 * [Part VI](reference.html "Part VI. Reference") contains reference information about SQL commands, client and server programs. This part supports the other parts with structured information sorted by command or program.
 * [Part VII](internals.html "Part VII. Internals") contains assorted information that might be of use to PostgreSQL developers.
-
-***
-
-|                                                        |                                                       |                                                      |
-| :----------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](index.html "PostgreSQL 17devel Documentation")  |  [Up](index.html "PostgreSQL 17devel Documentation")  |  [Next](intro-whatis.html "1.  What Is PostgreSQL?") |
-| PostgreSQL 17devel Documentation                       | [Home](index.html "PostgreSQL 17devel Documentation") |                              1.  What Is PostgreSQL? |

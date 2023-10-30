@@ -1,11 +1,3 @@
-
-
-|                  53.13. `pg_constraint`                  |                                                   |                             |                                                       |                                                            |
-| :------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](catalog-pg-collation.html "53.12. pg_collation")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-conversion.html "53.14. pg_conversion") |
-
-***
-
 ## 53.13. `pg_constraint` [#](#CATALOG-PG-CONSTRAINT)
 
 The catalog `pg_constraint` stores check, not-null, primary key, unique, foreign key, and exclusion constraints on tables. (Column constraints are not treated specially. Every column constraint is equivalent to some table constraint.)
@@ -52,10 +44,3 @@ In the case of an exclusion constraint, `conkey` is only useful for constraint e
 ### Note
 
 `pg_class.relchecks` needs to agree with the number of check-constraint entries found in this table for each relation.
-
-***
-
-|                                                          |                                                       |                                                            |
-| :------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](catalog-pg-collation.html "53.12. pg_collation")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-conversion.html "53.14. pg_conversion") |
-| 53.12. `pg_collation`                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                     53.14. `pg_conversion` |

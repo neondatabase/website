@@ -1,11 +1,3 @@
-
-
-|                 59.3. Foreign Data Wrapper Helper Functions                |                                                                    |                                            |                                                       |                                                                        |
-| :------------------------------------------------------------------------: | :----------------------------------------------------------------- | :----------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](fdw-callbacks.html "59.2. Foreign Data Wrapper Callback Routines")  | [Up](fdwhandler.html "Chapter 59. Writing a Foreign Data Wrapper") | Chapter 59. Writing a Foreign Data Wrapper | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](fdw-planning.html "59.4. Foreign Data Wrapper Query Planning") |
-
-***
-
 ## 59.3. Foreign Data Wrapper Helper Functions [#](#FDW-HELPERS)
 
 Several helper functions are exported from the core server so that authors of foreign data wrappers can get easy access to attributes of FDW-related objects, such as FDW options. To use any of these functions, you need to include the header file `foreign/foreign.h` in your source file. That header also defines the struct types that are returned by these functions.
@@ -83,10 +75,3 @@ GetForeignServerByName(const char *name, bool missing_ok);
 ```
 
 This function returns a `ForeignServer` object for the foreign server with the given name. If the server is not found, return NULL if missing\_ok is true, otherwise raise an error.
-
-***
-
-|                                                                            |                                                                    |                                                                        |
-| :------------------------------------------------------------------------- | :----------------------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](fdw-callbacks.html "59.2. Foreign Data Wrapper Callback Routines")  | [Up](fdwhandler.html "Chapter 59. Writing a Foreign Data Wrapper") |  [Next](fdw-planning.html "59.4. Foreign Data Wrapper Query Planning") |
-| 59.2. Foreign Data Wrapper Callback Routines                               |        [Home](index.html "PostgreSQL 17devel Documentation")       |                              59.4. Foreign Data Wrapper Query Planning |

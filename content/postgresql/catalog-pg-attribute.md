@@ -1,11 +1,3 @@
-
-
-|                 53.7. `pg_attribute`                |                                                   |                             |                                                       |                                                   |
-| :-------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](catalog-pg-attrdef.html "53.6. pg_attrdef")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-authid.html "53.8. pg_authid") |
-
-***
-
 ## 53.7. `pg_attribute` [#](#CATALOG-PG-ATTRIBUTE)
 
 The catalog `pg_attribute` stores information about table columns. There will be exactly one `pg_attribute` row for every column in every table in the database. (There will also be attribute entries for indexes, and indeed all objects that have [`pg_class`](catalog-pg-class.html "53.11. pg_class") entries.)
@@ -46,10 +38,3 @@ The term attribute is equivalent to column and is used for historical reasons.
 \
 
 In a dropped column's `pg_attribute` entry, `atttypid` is reset to zero, but `attlen` and the other fields copied from [`pg_type`](catalog-pg-type.html "53.64. pg_type") are still valid. This arrangement is needed to cope with the situation where the dropped column's data type was later dropped, and so there is no `pg_type` row anymore. `attlen` and the other fields can be used to interpret the contents of a row of the table.
-
-***
-
-|                                                     |                                                       |                                                   |
-| :-------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](catalog-pg-attrdef.html "53.6. pg_attrdef")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-authid.html "53.8. pg_authid") |
-| 53.6. `pg_attrdef`                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                 53.8. `pg_authid` |

@@ -1,11 +1,3 @@
-
-
-|                pg\_dump                |                                                              |                                |                                                       |                                           |
-| :------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ----------------------------------------: |
-| [Prev](app-pgconfig.html "pg_config")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pg-dumpall.html "pg_dumpall") |
-
-***
-
 ## pg\_dump
 
 pg\_dump — extract a PostgreSQL database into a script file or other archive file
@@ -527,10 +519,3 @@ pg_dump -t "\"MixedCaseName\"" mydb > mytab.sql
 ## See Also
 
 [pg\_dumpall](app-pg-dumpall.html "pg_dumpall"), [pg\_restore](app-pgrestore.html "pg_restore"), [psql](app-psql.html "psql")
-
-***
-
-|                                        |                                                              |                                           |
-| :------------------------------------- | :----------------------------------------------------------: | ----------------------------------------: |
-| [Prev](app-pgconfig.html "pg_config")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-pg-dumpall.html "pg_dumpall") |
-| pg\_config                             |     [Home](index.html "PostgreSQL 17devel Documentation")    |                               pg\_dumpall |

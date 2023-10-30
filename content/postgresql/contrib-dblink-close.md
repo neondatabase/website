@@ -1,11 +1,3 @@
-
-
-|                   dblink\_close                   |                                                                          |                                                      |                                                       |                                                                       |
-| :-----------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](contrib-dblink-fetch.html "dblink_fetch")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-get-connections.html "dblink_get_connections") |
-
-***
-
 ## dblink\_close
 
 dblink\_close — closes a cursor in a remote database
@@ -66,10 +58,3 @@ SELECT dblink_close('foo');
  OK
 (1 row)
 ```
-
-***
-
-|                                                   |                                                                          |                                                                       |
-| :------------------------------------------------ | :----------------------------------------------------------------------: | --------------------------------------------------------------------: |
-| [Prev](contrib-dblink-fetch.html "dblink_fetch")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-get-connections.html "dblink_get_connections") |
-| dblink\_fetch                                     |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                              dblink\_get\_connections |

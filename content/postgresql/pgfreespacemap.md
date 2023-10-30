@@ -1,11 +1,3 @@
-
-
-|        F.28. pg\_freespacemap — examine the free space map        |                                                                             |                                                        |                                                       |                                                                                       |
-| :---------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------------: |
-| [Prev](pgcrypto.html "F.27. pgcrypto — cryptographic functions")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgprewarm.html "F.29. pg_prewarm — preload relation data into buffer caches") |
-
-***
-
 ## F.28. pg\_freespacemap — examine the free space map [#](#PGFREESPACEMAP)
 
   * *   [F.28.1. Functions](pgfreespacemap.html#PGFREESPACEMAP-FUNCS)
@@ -69,10 +61,3 @@ postgres=# SELECT * FROM pg_freespace('foo', 7);
 ### F.28.3. Author [#](#PGFREESPACEMAP-AUTHOR)
 
 Original version by Mark Kirkwood `<markir@paradise.net.nz>`. Rewritten in version 8.4 to suit new FSM implementation by Heikki Linnakangas `<heikki@enterprisedb.com>`
-
-***
-
-|                                                                   |                                                                             |                                                                                       |
-| :---------------------------------------------------------------- | :-------------------------------------------------------------------------: | ------------------------------------------------------------------------------------: |
-| [Prev](pgcrypto.html "F.27. pgcrypto — cryptographic functions")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](pgprewarm.html "F.29. pg_prewarm — preload relation data into buffer caches") |
-| F.27. pgcrypto — cryptographic functions                          |            [Home](index.html "PostgreSQL 17devel Documentation")            |                          F.29. pg\_prewarm — preload relation data into buffer caches |

@@ -1,11 +1,3 @@
-
-
-|                    53.51. `pg_statistic`                   |                                                   |                             |                                                       |                                                                  |
-| :--------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](catalog-pg-shseclabel.html "53.50. pg_shseclabel")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-statistic-ext.html "53.52. pg_statistic_ext") |
-
-***
-
 ## 53.51. `pg_statistic` [#](#CATALOG-PG-STATISTIC)
 
 The catalog `pg_statistic` stores statistical data about the contents of the database. Entries are created by [`ANALYZE`](sql-analyze.html "ANALYZE") and subsequently used by the query planner. Note that all the statistical data is inherently approximate, even assuming that it is up-to-date.
@@ -33,10 +25,3 @@ Since different kinds of statistics might be appropriate for different kinds of 
 | `stacollN` `oid` (references [`pg_collation`](catalog-pg-collation.html "53.12. pg_collation").`oid`)The collation used to derive the statistics stored in the *`N`*th “slot”. For example, a histogram slot for a collatable column would show the collation that defines the sort order of the data. Zero for noncollatable data.                                                                                                                                                |
 | `stanumbersN` `float4[]`Numerical statistics of the appropriate kind for the *`N`*th “slot”, or null if the slot kind does not involve numerical values                                                                                                                                                                                                                                                                                                                            |
 | `stavaluesN` `anyarray`Column data values of the appropriate kind for the *`N`*th “slot”, or null if the slot kind does not store any data values. Each array's element values are actually of the specific column's data type, or a related type such as an array's element type, so there is no way to define these columns' type more specifically than `anyarray`.                                                                                                             |
-
-***
-
-|                                                            |                                                       |                                                                  |
-| :--------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](catalog-pg-shseclabel.html "53.50. pg_shseclabel")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-statistic-ext.html "53.52. pg_statistic_ext") |
-| 53.50. `pg_shseclabel`                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                        53.52. `pg_statistic_ext` |

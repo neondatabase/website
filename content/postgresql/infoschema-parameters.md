@@ -1,11 +1,3 @@
-
-
-|                         37.33. `parameters`                         |                                                                    |                                    |                                                       |                                                                                   |
-| :-----------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------: |
-| [Prev](infoschema-key-column-usage.html "37.32. key_column_usage")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-referential-constraints.html "37.34. referential_constraints") |
-
-***
-
 ## 37.33. `parameters` [#](#INFOSCHEMA-PARAMETERS)
 
 The view `parameters` contains information about the parameters (arguments) of all functions in the current database. Only those functions are shown that the current user has access to (by way of being the owner or having some privilege).
@@ -46,10 +38,3 @@ The view `parameters` contains information about the parameters (arguments) of a
 | `maximum_cardinality` `cardinal_number`Always null, because arrays always have unlimited maximum cardinality in PostgreSQL                                                                                                                                                                                                                                   |
 | `dtd_identifier` `sql_identifier`An identifier of the data type descriptor of the parameter, unique among the data type descriptors pertaining to the function. This is mainly useful for joining with other instances of such identifiers. (The specific format of the identifier is not defined and not guaranteed to remain the same in future versions.) |
 | `parameter_default` `character_data`The default expression of the parameter, or null if none or if the function is not owned by a currently enabled role.                                                                                                                                                                                                    |
-
-***
-
-|                                                                     |                                                                    |                                                                                   |
-| :------------------------------------------------------------------ | :----------------------------------------------------------------: | --------------------------------------------------------------------------------: |
-| [Prev](infoschema-key-column-usage.html "37.32. key_column_usage")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-referential-constraints.html "37.34. referential_constraints") |
-| 37.32. `key_column_usage`                                           |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                                  37.34. `referential_constraints` |

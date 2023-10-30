@@ -1,11 +1,3 @@
-
-
-|                 45.1. PL/Perl Functions and Arguments                 |                                                                    |                                                |                                                       |                                                          |
-| :-------------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language")  | [Up](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language") | Chapter 45. PL/Perl — Perl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plperl-data.html "45.2. Data Values in PL/Perl") |
-
-***
-
 ## 45.1. PL/Perl Functions and Arguments [#](#PLPERL-FUNCS)
 
 To create a function in the PL/Perl language, use the standard [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") syntax:
@@ -240,10 +232,3 @@ use strict;
 at the top of the function body.
 
 The `feature` pragma is also available to `use` if your Perl is version 5.10.0 or higher.
-
-***
-
-|                                                                       |                                                                    |                                                          |
-| :-------------------------------------------------------------------- | :----------------------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language")  | [Up](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language") |  [Next](plperl-data.html "45.2. Data Values in PL/Perl") |
-| Chapter 45. PL/Perl — Perl Procedural Language                        |        [Home](index.html "PostgreSQL 17devel Documentation")       |                             45.2. Data Values in PL/Perl |

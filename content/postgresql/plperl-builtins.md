@@ -1,11 +1,3 @@
-
-
-|                 45.3. Built-in Functions                 |                                                                    |                                                |                                                       |                                                              |
-| :------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](plperl-data.html "45.2. Data Values in PL/Perl")  | [Up](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language") | Chapter 45. PL/Perl — Perl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plperl-global.html "45.4. Global Values in PL/Perl") |
-
-***
-
 ## 45.3. Built-in Functions [#](#PLPERL-BUILTINS)
 
   * *   [45.3.1. Database Access from PL/Perl](plperl-builtins.html#PLPERL-DATABASE)
@@ -277,10 +269,3 @@ Access to the database itself from your Perl function can be done via the follow
 * `is_array_ref(argument)`
 
     Returns a true value if the given argument may be treated as an array reference, that is, if ref of the argument is `ARRAY` or `PostgreSQL::InServer::ARRAY`. Returns false otherwise.
-
-***
-
-|                                                          |                                                                    |                                                              |
-| :------------------------------------------------------- | :----------------------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](plperl-data.html "45.2. Data Values in PL/Perl")  | [Up](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language") |  [Next](plperl-global.html "45.4. Global Values in PL/Perl") |
-| 45.2. Data Values in PL/Perl                             |        [Home](index.html "PostgreSQL 17devel Documentation")       |                               45.4. Global Values in PL/Perl |

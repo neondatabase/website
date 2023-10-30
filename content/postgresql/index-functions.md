@@ -1,11 +1,3 @@
-
-
-|               64.2. Index Access Method Functions               |                                                                           |                                                      |                                                       |                                                     |
-| :-------------------------------------------------------------: | :------------------------------------------------------------------------ | :--------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](index-api.html "64.1. Basic API Structure for Indexes")  | [Up](indexam.html "Chapter 64. Index Access Method Interface Definition") | Chapter 64. Index Access Method Interface Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](index-scanning.html "64.3. Index Scanning") |
-
-***
-
 ## 64.2. Index Access Method Functions [#](#INDEX-FUNCTIONS)
 
 The index construction and maintenance functions that an index access method must provide in `IndexAmRoutine` are:
@@ -251,10 +243,3 @@ amparallelrescan (IndexScanDesc scan);
 ```
 
 This function, if implemented, will be called when a parallel index scan must be restarted. It should reset any shared state set up by `aminitparallelscan` such that the scan will be restarted from the beginning.
-
-***
-
-|                                                                 |                                                                           |                                                     |
-| :-------------------------------------------------------------- | :-----------------------------------------------------------------------: | --------------------------------------------------: |
-| [Prev](index-api.html "64.1. Basic API Structure for Indexes")  | [Up](indexam.html "Chapter 64. Index Access Method Interface Definition") |  [Next](index-scanning.html "64.3. Index Scanning") |
-| 64.1. Basic API Structure for Indexes                           |           [Home](index.html "PostgreSQL 17devel Documentation")           |                                64.3. Index Scanning |

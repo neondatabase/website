@@ -1,11 +1,3 @@
-
-
-|                   Chapter 49. Logical Decoding                   |                                                            |                            |                                                       |                                                                         |
-| :--------------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](bgworker.html "Chapter 48. Background Worker Processes")  | [Up](server-programming.html "Part V. Server Programming") | Part V. Server Programming | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logicaldecoding-example.html "49.1. Logical Decoding Examples") |
-
-***
-
 ## Chapter 49. Logical Decoding
 
 **Table of Contents**
@@ -51,10 +43,3 @@ Changes are sent out in streams identified by logical replication slots.
 The format in which those changes are streamed is determined by the output plugin used. An example plugin is provided in the PostgreSQL distribution. Additional plugins can be written to extend the choice of available formats without modifying any core code. Every output plugin has access to each individual new row produced by `INSERT` and the new row version created by `UPDATE`. Availability of old row versions for `UPDATE` and `DELETE` depends on the configured replica identity (see [`REPLICA IDENTITY`](sql-altertable.html#SQL-ALTERTABLE-REPLICA-IDENTITY)).
 
 Changes can be consumed either using the streaming replication protocol (see [Section 55.4](protocol-replication.html "55.4. Streaming Replication Protocol") and [Section 49.3](logicaldecoding-walsender.html "49.3. Streaming Replication Protocol Interface")), or by calling functions via SQL (see [Section 49.4](logicaldecoding-sql.html "49.4. Logical Decoding SQL Interface")). It is also possible to write additional methods of consuming the output of a replication slot without modifying core code (see [Section 49.7](logicaldecoding-writer.html "49.7. Logical Decoding Output Writers")).
-
-***
-
-|                                                                  |                                                            |                                                                         |
-| :--------------------------------------------------------------- | :--------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](bgworker.html "Chapter 48. Background Worker Processes")  | [Up](server-programming.html "Part V. Server Programming") |  [Next](logicaldecoding-example.html "49.1. Logical Decoding Examples") |
-| Chapter 48. Background Worker Processes                          |    [Home](index.html "PostgreSQL 17devel Documentation")   |                                         49.1. Logical Decoding Examples |

@@ -1,11 +1,3 @@
-
-
-|                         31.2. Subscription                        |                                                                  |                                 |                                                       |                                                                  |
-| :---------------------------------------------------------------: | :--------------------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](logical-replication-publication.html "31.1. Publication")  | [Up](logical-replication.html "Chapter 31. Logical Replication") | Chapter 31. Logical Replication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logical-replication-row-filter.html "31.3. Row Filters") |
-
-***
-
 ## 31.2. Subscription [#](#LOGICAL-REPLICATION-SUBSCRIPTION)
 
   * *   [31.2.1. Replication Slot Management](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
@@ -359,10 +351,3 @@ Example 3: Where the subscription specifies `slot_name = NONE`
     test_sub=# ALTER SUBSCRIPTION sub1 REFRESH PUBLICATION;
     ALTER SUBSCRIPTION
     ```
-
-***
-
-|                                                                   |                                                                  |                                                                  |
-| :---------------------------------------------------------------- | :--------------------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](logical-replication-publication.html "31.1. Publication")  | [Up](logical-replication.html "Chapter 31. Logical Replication") |  [Next](logical-replication-row-filter.html "31.3. Row Filters") |
-| 31.1. Publication                                                 |       [Home](index.html "PostgreSQL 17devel Documentation")      |                                                31.3. Row Filters |

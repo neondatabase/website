@@ -1,11 +1,3 @@
-
-
-|           Chapter 47. Server Programming Interface          |                                                            |                            |                                                       |                                                         |
-| :---------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](plpython-envar.html "46.11. Environment Variables")  | [Up](server-programming.html "Part V. Server Programming") | Part V. Server Programming | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-interface.html "47.1. Interface Functions") |
-
-***
-
 ## Chapter 47. Server Programming Interface
 
 **Table of Contents**
@@ -89,10 +81,3 @@ Note that if a command invoked via SPI fails, then control will not be returned 
 SPI functions return a nonnegative result on success (either via a returned integer value or in the global variable `SPI_result`, as described below). On error, a negative result or `NULL` will be returned.
 
 Source code files that use SPI must include the header file `executor/spi.h`.
-
-***
-
-|                                                             |                                                            |                                                         |
-| :---------------------------------------------------------- | :--------------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](plpython-envar.html "46.11. Environment Variables")  | [Up](server-programming.html "Part V. Server Programming") |  [Next](spi-interface.html "47.1. Interface Functions") |
-| 46.11. Environment Variables                                |    [Home](index.html "PostgreSQL 17devel Documentation")   |                               47.1. Interface Functions |

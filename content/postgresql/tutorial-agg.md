@@ -1,11 +1,3 @@
-
-
-|                 2.7. Aggregate Functions                |                                                       |                             |                                                       |                                              |
-| :-----------------------------------------------------: | :---------------------------------------------------- | :-------------------------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](tutorial-join.html "2.6. Joins Between Tables")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") | Chapter 2. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-update.html "2.8. Updates") |
-
-***
-
 ## 2.7. Aggregate Functions [#](#TUTORIAL-AGG)
 
 Like most other relational database products, PostgreSQL supports *aggregate functions*. An aggregate function computes a single result from multiple input rows. For example, there are aggregates to compute the `count`, `sum`, `avg` (average), `max` (maximum) and `min` (minimum) over a set of rows.
@@ -131,10 +123,3 @@ SELECT city, count(*) FILTER (WHERE temp_lo < 45), max(temp_lo)
 ```
 
 `FILTER` is much like `WHERE`, except that it removes rows only from the input of the particular aggregate function that it is attached to. Here, the `count` aggregate counts only rows with `temp_lo` below 45; but the `max` aggregate is still applied to all rows, so it still finds the reading of 46.
-
-***
-
-|                                                         |                                                       |                                              |
-| :------------------------------------------------------ | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](tutorial-join.html "2.6. Joins Between Tables")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") |  [Next](tutorial-update.html "2.8. Updates") |
-| 2.6. Joins Between Tables                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                 2.8. Updates |

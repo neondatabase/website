@@ -1,11 +1,3 @@
-
-
-|                         TRUNCATE                        |                                        |              |                                                       |                                       |
-| :-----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------: |
-| [Prev](sql-start-transaction.html "START TRANSACTION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-unlisten.html "UNLISTEN") |
-
-***
-
 ## TRUNCATE
 
 TRUNCATE — empty a table or set of tables
@@ -92,10 +84,3 @@ The SQL:2008 standard includes a `TRUNCATE` command with the syntax `TRUNCATE TA
 ## See Also
 
 [DELETE](sql-delete.html "DELETE")
-
-***
-
-|                                                         |                                                       |                                       |
-| :------------------------------------------------------ | :---------------------------------------------------: | ------------------------------------: |
-| [Prev](sql-start-transaction.html "START TRANSACTION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-unlisten.html "UNLISTEN") |
-| START TRANSACTION                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                              UNLISTEN |

@@ -1,11 +1,3 @@
-
-
-|                     dblink\_get\_result                     |                                                                          |                                                      |                                                       |                                                                 |
-| :---------------------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](contrib-dblink-get-notify.html "dblink_get_notify")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-cancel-query.html "dblink_cancel_query") |
-
-***
-
 ## dblink\_get\_result
 
 dblink\_get\_result — gets an async query result
@@ -102,10 +94,3 @@ contrib_regression=# SELECT * FROM dblink_get_result('dtest1') AS t1(f1 int, f2 
 ----+----+----
 (0 rows)
 ```
-
-***
-
-|                                                             |                                                                          |                                                                 |
-| :---------------------------------------------------------- | :----------------------------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](contrib-dblink-get-notify.html "dblink_get_notify")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-cancel-query.html "dblink_cancel_query") |
-| dblink\_get\_notify                                         |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                           dblink\_cancel\_query |

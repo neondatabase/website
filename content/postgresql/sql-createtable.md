@@ -1,11 +1,3 @@
-
-
-|                        CREATE TABLE                        |                                        |              |                                                       |                                                   |
-| :--------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](sql-createsubscription.html "CREATE SUBSCRIPTION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createtableas.html "CREATE TABLE AS") |
-
-***
-
 ## CREATE TABLE
 
 CREATE TABLE — define a new table
@@ -929,10 +921,3 @@ The `PARTITION OF` clause is a PostgreSQL extension.
 ## See Also
 
 [ALTER TABLE](sql-altertable.html "ALTER TABLE"), [DROP TABLE](sql-droptable.html "DROP TABLE"), [CREATE TABLE AS](sql-createtableas.html "CREATE TABLE AS"), [CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE"), [CREATE TYPE](sql-createtype.html "CREATE TYPE")
-
-***
-
-|                                                            |                                                       |                                                   |
-| :--------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](sql-createsubscription.html "CREATE SUBSCRIPTION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createtableas.html "CREATE TABLE AS") |
-| CREATE SUBSCRIPTION                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                   CREATE TABLE AS |

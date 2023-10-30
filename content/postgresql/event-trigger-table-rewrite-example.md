@@ -1,11 +1,3 @@
-
-
-|                  40.5. A Table Rewrite Event Trigger Example                 |                                                        |                            |                                                       |                                                                                                   |
-| :--------------------------------------------------------------------------: | :----------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------------------------: |
-| [Prev](event-trigger-example.html "40.4. A Complete Event Trigger Example")  | [Up](event-triggers.html "Chapter 40. Event Triggers") | Chapter 40. Event Triggers | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](event-trigger-database-login-example.html "40.6. A Database Login Event Trigger Example") |
-
-***
-
 ## 40.5. A Table Rewrite Event Trigger Example [#](#EVENT-TRIGGER-TABLE-REWRITE-EXAMPLE)
 
 Thanks to the `table_rewrite` event, it is possible to implement a table rewriting policy only allowing the rewrite in maintenance windows.
@@ -54,10 +46,3 @@ CREATE EVENT TRIGGER no_rewrite_allowed
                   ON table_rewrite
    EXECUTE FUNCTION no_rewrite();
 ```
-
-***
-
-|                                                                              |                                                        |                                                                                                   |
-| :--------------------------------------------------------------------------- | :----------------------------------------------------: | ------------------------------------------------------------------------------------------------: |
-| [Prev](event-trigger-example.html "40.4. A Complete Event Trigger Example")  | [Up](event-triggers.html "Chapter 40. Event Triggers") |  [Next](event-trigger-database-login-example.html "40.6. A Database Login Event Trigger Example") |
-| 40.4. A Complete Event Trigger Example                                       |  [Home](index.html "PostgreSQL 17devel Documentation") |                                                      40.6. A Database Login Event Trigger Example |

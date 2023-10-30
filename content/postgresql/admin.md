@@ -1,11 +1,3 @@
-
-
-|            Part III. Server Administration            |                                                     |                                  |                                                       |                                                                         |
-| :---------------------------------------------------: | :-------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](parallel-safety.html "15.4. Parallel Safety")  | [Up](index.html "PostgreSQL 17devel Documentation") | PostgreSQL 17devel Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](install-binaries.html "Chapter 16. Installation from Binaries") |
-
-***
-
 # Part III. Server Administration
 
 This part covers topics that are of interest to a PostgreSQL database administrator. This includes installation of the software, set up and configuration of the server, management of users and databases, and maintenance tasks. Anyone who runs a PostgreSQL server, even for personal use, but especially in production, should be familiar with the topics covered in this part.
@@ -178,10 +170,3 @@ The first few chapters are written so they can be understood without prerequisit
   * [33.3. Variant Comparison Files](regress-variant.html)
   * [33.4. TAP Tests](regress-tap.html)
   * [33.5. Test Coverage Examination](regress-coverage.html)
-
-***
-
-|                                                       |                                                       |                                                                         |
-| :---------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](parallel-safety.html "15.4. Parallel Safety")  |  [Up](index.html "PostgreSQL 17devel Documentation")  |  [Next](install-binaries.html "Chapter 16. Installation from Binaries") |
-| 15.4. Parallel Safety                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                  Chapter 16. Installation from Binaries |

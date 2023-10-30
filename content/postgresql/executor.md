@@ -1,11 +1,3 @@
-
-
-|                       52.6. Executor                      |                                                                    |                                              |                                                       |                                                      |
-| :-------------------------------------------------------: | :----------------------------------------------------------------- | :------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](planner-optimizer.html "52.5. Planner/Optimizer")  | [Up](overview.html "Chapter 52. Overview of PostgreSQL Internals") | Chapter 52. Overview of PostgreSQL Internals | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalogs.html "Chapter 53. System Catalogs") |
-
-***
-
 ## 52.6. Executor [#](#EXECUTOR)
 
 The *executor* takes the plan created by the planner/optimizer and recursively processes it to extract the required set of rows. This is essentially a demand-pull pipeline mechanism. Each time a plan node is called, it must deliver one more row, or report that it is done delivering rows.
@@ -21,10 +13,3 @@ The executor mechanism is used to evaluate all five basic SQL query types: `SELE
 `INSERT ... SELECT` feeds the rows up to `ModifyTable` for insertion. For `UPDATE`, the planner arranges that each computed row includes all the updated column values, plus the *TID* (tuple ID, or row ID) of the original target row; this data is fed up to the `ModifyTable` node, which uses the information to create a new updated row and mark the old row deleted. For `DELETE`, the only column that is actually returned by the plan is the TID, and the `ModifyTable` node simply uses the TID to visit each target row and mark it deleted. For `MERGE`, the planner joins the source and target relations, and includes all column values required by any of the `WHEN` clauses, plus the TID of the target row; this data is fed up to the `ModifyTable` node, which uses the information to work out which `WHEN` clause to execute, and then inserts, updates or deletes the target row, as required.
 
 A simple `INSERT ... VALUES` command creates a trivial plan tree consisting of a single `Result` node, which computes just one result row, feeding that up to `ModifyTable` to perform the insertion.
-
-***
-
-|                                                           |                                                                    |                                                      |
-| :-------------------------------------------------------- | :----------------------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](planner-optimizer.html "52.5. Planner/Optimizer")  | [Up](overview.html "Chapter 52. Overview of PostgreSQL Internals") |  [Next](catalogs.html "Chapter 53. System Catalogs") |
-| 52.5. Planner/Optimizer                                   |        [Home](index.html "PostgreSQL 17devel Documentation")       |                          Chapter 53. System Catalogs |

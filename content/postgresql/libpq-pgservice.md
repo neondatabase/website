@@ -1,11 +1,3 @@
-
-
-|           34.17. The Connection Service File          |                                                  |                               |                                                       |                                                                        |
-| :---------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](libpq-pgpass.html "34.16. The Password File")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters") |
-
-***
-
 ## 34.17. The Connection Service File [#](#LIBPQ-PGSERVICE)
 
 The connection service file allows libpq connection parameters to be associated with a single service name. That service name can then be specified in a libpq connection string, and the associated settings will be used. This allows connection parameters to be modified without requiring a recompile of the libpq-using application. The service name can also be specified using the `PGSERVICE` environment variable.
@@ -26,10 +18,3 @@ user=admin
 An example file is provided in the PostgreSQL installation at `share/pg_service.conf.sample`.
 
 Connection parameters obtained from a service file are combined with parameters obtained from other sources. A service file setting overrides the corresponding environment variable, and in turn can be overridden by a value given directly in the connection string. For example, using the above service file, a connection string `service=mydb port=5434` will use host `somehost`, port `5434`, user `admin`, and other parameters as set by environment variables or built-in defaults.
-
-***
-
-|                                                       |                                                       |                                                                        |
-| :---------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------------: |
-| [Prev](libpq-pgpass.html "34.16. The Password File")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters") |
-| 34.16. The Password File                              | [Home](index.html "PostgreSQL 17devel Documentation") |                            34.18. LDAP Lookup of Connection Parameters |

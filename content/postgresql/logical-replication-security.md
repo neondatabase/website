@@ -1,11 +1,3 @@
-
-
-|                          31.9. Security                         |                                                                  |                                 |                                                       |                                                                          |
-| :-------------------------------------------------------------: | :--------------------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](logical-replication-monitoring.html "31.8. Monitoring")  | [Up](logical-replication.html "Chapter 31. Logical Replication") | Chapter 31. Logical Replication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logical-replication-config.html "31.10. Configuration Settings") |
-
-***
-
 ## 31.9. Security [#](#LOGICAL-REPLICATION-SECURITY)
 
 The role used for the replication connection must have the `REPLICATION` attribute (or be a superuser). If the role lacks `SUPERUSER` and `BYPASSRLS`, publisher row security policies can execute. If the role does not trust all table owners, include `options=-crow_security=off` in the connection string; if a table owner then adds a row security policy, that setting will cause replication to halt rather than execute the policy. Access for the role must be configured in `pg_hba.conf` and it must have the `LOGIN` attribute.
@@ -27,10 +19,3 @@ If the subscription has been configured with `run_as_owner = true`, then no user
 On the publisher, privileges are only checked once at the start of a replication connection and are not re-checked as each change record is read.
 
 On the subscriber, the subscription owner's privileges are re-checked for each transaction when applied. If a worker is in the process of applying a transaction when the ownership of the subscription is changed by a concurrent transaction, the application of the current transaction will continue under the old owner's privileges.
-
-***
-
-|                                                                 |                                                                  |                                                                          |
-| :-------------------------------------------------------------- | :--------------------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](logical-replication-monitoring.html "31.8. Monitoring")  | [Up](logical-replication.html "Chapter 31. Logical Replication") |  [Next](logical-replication-config.html "31.10. Configuration Settings") |
-| 31.8. Monitoring                                                |       [Home](index.html "PostgreSQL 17devel Documentation")      |                                            31.10. Configuration Settings |

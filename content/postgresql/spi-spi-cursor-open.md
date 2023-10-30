@@ -1,11 +1,3 @@
-
-
-|            SPI\_cursor\_open            |                                                      |                           |                                                       |                                                                         |
-| :-------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](spi-spi-execp.html "SPI_execp")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-cursor-open-with-args.html "SPI_cursor_open_with_args") |
-
-***
-
 ## SPI\_cursor\_open
 
 SPI\_cursor\_open — set up a cursor using a statement created with `SPI_prepare`
@@ -54,10 +46,3 @@ The passed-in parameter data will be copied into the cursor's portal, so it can 
 ## Return Value
 
 Pointer to portal containing the cursor. Note there is no error return convention; any error will be reported via `elog`.
-
-***
-
-|                                         |                                                       |                                                                         |
-| :-------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](spi-spi-execp.html "SPI_execp")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-cursor-open-with-args.html "SPI_cursor_open_with_args") |
-| SPI\_execp                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                           SPI\_cursor\_open\_with\_args |

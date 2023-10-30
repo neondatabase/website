@@ -1,11 +1,3 @@
-
-
-|                        34.5. Pipeline Mode                        |                                                  |                               |                                                       |                                                                                 |
-| :---------------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------: |
-| [Prev](libpq-async.html "34.4. Asynchronous Command Processing")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-single-row-mode.html "34.6. Retrieving Query Results Row-by-Row") |
-
-***
-
 ## 34.5. Pipeline Mode [#](#LIBPQ-PIPELINE-MODE)
 
   * *   [34.5.1. Using Pipeline Mode](libpq-pipeline-mode.html#LIBPQ-PIPELINE-USING)
@@ -169,14 +161,3 @@ UPDATE mytable SET x = x + 1 WHERE id = 42;
 ```
 
 Pipelining is less useful, and more complex, when a single pipeline contains multiple transactions (see [Section 34.5.1.3](libpq-pipeline-mode.html#LIBPQ-PIPELINE-ERRORS "34.5.1.3. Error Handling")).
-
-***
-
-[\[15\] ](#id-1.7.3.12.9.3.1.3)The client will block trying to send queries to the server, but the server will block trying to send results to the client from queries it has already processed. This only occurs when the client sends enough queries to fill both its output buffer and the server's receive buffer before it switches to processing input from the server, but it's hard to predict exactly when that will happen.
-
-***
-
-|                                                                   |                                                       |                                                                                 |
-| :---------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------------------: |
-| [Prev](libpq-async.html "34.4. Asynchronous Command Processing")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-single-row-mode.html "34.6. Retrieving Query Results Row-by-Row") |
-| 34.4. Asynchronous Command Processing                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                       34.6. Retrieving Query Results Row-by-Row |

@@ -1,11 +1,3 @@
-
-
-|                    Chapter 5. Data Definition                   |                                            |                           |                                                       |                                              |
-| :-------------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-syntax-calling-funcs.html "4.3. Calling Functions")  | [Up](sql.html "Part II. The SQL Language") | Part II. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-basics.html "5.1. Table Basics") |
-
-***
-
 ## Chapter 5. Data Definition
 
 **Table of Contents**
@@ -70,10 +62,3 @@
   * [5.14. Dependency Tracking](ddl-depend.html)
 
 This chapter covers how one creates the database structures that will hold one's data. In a relational database, the raw data is stored in tables, so the majority of this chapter is devoted to explaining how tables are created and modified and what features are available to control what data is stored in the tables. Subsequently, we discuss how tables can be organized into schemas, and how privileges can be assigned to tables. Finally, we will briefly look at other features that affect the data storage, such as inheritance, table partitioning, views, functions, and triggers.
-
-***
-
-|                                                                 |                                                       |                                              |
-| :-------------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-syntax-calling-funcs.html "4.3. Calling Functions")  |       [Up](sql.html "Part II. The SQL Language")      |  [Next](ddl-basics.html "5.1. Table Basics") |
-| 4.3. Calling Functions                                          | [Home](index.html "PostgreSQL 17devel Documentation") |                            5.1. Table Basics |

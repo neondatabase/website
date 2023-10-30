@@ -1,11 +1,3 @@
-
-
-|                 CREATE USER                |                                        |              |                                                       |                                                           |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](sql-createtype.html "CREATE TYPE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createusermapping.html "CREATE USER MAPPING") |
-
-***
-
 ## CREATE USER
 
 CREATE USER — define a new database role
@@ -47,10 +39,3 @@ The `CREATE USER` statement is a PostgreSQL extension. The SQL standard leaves t
 ## See Also
 
 [CREATE ROLE](sql-createrole.html "CREATE ROLE")
-
-***
-
-|                                            |                                                       |                                                           |
-| :----------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](sql-createtype.html "CREATE TYPE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createusermapping.html "CREATE USER MAPPING") |
-| CREATE TYPE                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                       CREATE USER MAPPING |

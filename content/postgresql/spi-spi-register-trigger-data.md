@@ -1,11 +1,3 @@
-
-
-|                     SPI\_register\_trigger\_data                    |                                                      |                           |                                                       |                                                                         |
-| :-----------------------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](spi-spi-unregister-relation.html "SPI_unregister_relation")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-interface-support.html "47.2. Interface Support Functions") |
-
-***
-
 ## SPI\_register\_trigger\_data
 
 SPI\_register\_trigger\_data — make ephemeral trigger data available in SPI queries
@@ -48,10 +40,3 @@ On error, one of the following negative values is returned:
 * `SPI_ERROR_REL_DUPLICATE`
 
     if the name of any trigger data transient relation is already registered for this connection
-
-***
-
-|                                                                     |                                                       |                                                                         |
-| :------------------------------------------------------------------ | :---------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](spi-spi-unregister-relation.html "SPI_unregister_relation")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-interface-support.html "47.2. Interface Support Functions") |
-| SPI\_unregister\_relation                                           | [Home](index.html "PostgreSQL 17devel Documentation") |                                       47.2. Interface Support Functions |

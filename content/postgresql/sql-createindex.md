@@ -1,11 +1,3 @@
-
-
-|                 CREATE INDEX                 |                                        |              |                                                       |                                                    |
-| :------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-creategroup.html "CREATE GROUP")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createlanguage.html "CREATE LANGUAGE") |
-
-***
-
 ## CREATE INDEX
 
 CREATE INDEX — define a new index
@@ -351,10 +343,3 @@ CREATE INDEX CONCURRENTLY sales_quantity_index ON sales_table (quantity);
 ## See Also
 
 [ALTER INDEX](sql-alterindex.html "ALTER INDEX"), [DROP INDEX](sql-dropindex.html "DROP INDEX"), [REINDEX](sql-reindex.html "REINDEX"), [Section 28.4.4](progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting")
-
-***
-
-|                                              |                                                       |                                                    |
-| :------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-creategroup.html "CREATE GROUP")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createlanguage.html "CREATE LANGUAGE") |
-| CREATE GROUP                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                    CREATE LANGUAGE |

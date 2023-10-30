@@ -1,11 +1,3 @@
-
-
-|               24.1. Locale Support               |                                               |                          |                                                       |                                                   |
-| :----------------------------------------------: | :-------------------------------------------- | :----------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](charset.html "Chapter 24. Localization")  | [Up](charset.html "Chapter 24. Localization") | Chapter 24. Localization | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](collation.html "24.2. Collation Support") |
-
-***
-
 ## 24.1. Locale Support [#](#LOCALE)
 
   * *   [24.1.1. Overview](locale.html#LOCALE-OVERVIEW)
@@ -181,10 +173,3 @@ The directory `src/test/locale` in the source distribution contains a test suite
 Client applications that handle server-side errors by parsing the text of the error message will obviously have problems when the server's messages are in a different language. Authors of such applications are advised to make use of the error code scheme instead.
 
 Maintaining catalogs of message translations requires the on-going efforts of many volunteers that want to see PostgreSQL speak their preferred language well. If messages in your language are currently not available or not fully translated, your assistance would be appreciated. If you want to help, refer to [Chapter 57](nls.html "Chapter 57. Native Language Support") or write to the developers' mailing list.
-
-***
-
-|                                                  |                                                       |                                                   |
-| :----------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](charset.html "Chapter 24. Localization")  |     [Up](charset.html "Chapter 24. Localization")     |  [Next](collation.html "24.2. Collation Support") |
-| Chapter 24. Localization                         | [Home](index.html "PostgreSQL 17devel Documentation") |                           24.2. Collation Support |

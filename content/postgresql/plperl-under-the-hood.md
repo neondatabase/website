@@ -1,11 +1,3 @@
-
-
-|                    45.8. PL/Perl Under the Hood                    |                                                                    |                                                |                                                       |                                                                             |
-| :----------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](plperl-event-triggers.html "45.7. PL/Perl Event Triggers")  | [Up](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language") | Chapter 45. PL/Perl — Perl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpython.html "Chapter 46. PL/Python — Python Procedural Language") |
-
-***
-
 ## 45.8. PL/Perl Under the Hood [#](#PLPERL-UNDER-THE-HOOD)
 
   * *   [45.8.1. Configuration](plperl-under-the-hood.html#PLPERL-CONFIG)
@@ -63,10 +55,3 @@ The following features are currently missing from PL/Perl, but they would make w
     A similar problem occurs if a set-returning function passes a large set of rows back to PostgreSQL via `return`. You can avoid this problem too by instead using `return_next` for each row returned, as shown previously.
 
 * When a session ends normally, not due to a fatal error, any `END` blocks that have been defined are executed. Currently no other actions are performed. Specifically, file handles are not automatically flushed and objects are not automatically destroyed.
-
-***
-
-|                                                                    |                                                                    |                                                                             |
-| :----------------------------------------------------------------- | :----------------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](plperl-event-triggers.html "45.7. PL/Perl Event Triggers")  | [Up](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language") |  [Next](plpython.html "Chapter 46. PL/Python — Python Procedural Language") |
-| 45.7. PL/Perl Event Triggers                                       |        [Home](index.html "PostgreSQL 17devel Documentation")       |                          Chapter 46. PL/Python — Python Procedural Language |

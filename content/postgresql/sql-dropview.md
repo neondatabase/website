@@ -1,11 +1,3 @@
-
-
-|                       DROP VIEW                       |                                        |              |                                                       |                             |
-| :---------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------: |
-| [Prev](sql-dropusermapping.html "DROP USER MAPPING")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-end.html "END") |
-
-***
-
 ## DROP VIEW
 
 DROP VIEW — remove a view
@@ -55,10 +47,3 @@ This command conforms to the SQL standard, except that the standard only allows 
 ## See Also
 
 [ALTER VIEW](sql-alterview.html "ALTER VIEW"), [CREATE VIEW](sql-createview.html "CREATE VIEW")
-
-***
-
-|                                                       |                                                       |                             |
-| :---------------------------------------------------- | :---------------------------------------------------: | --------------------------: |
-| [Prev](sql-dropusermapping.html "DROP USER MAPPING")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-end.html "END") |
-| DROP USER MAPPING                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                         END |

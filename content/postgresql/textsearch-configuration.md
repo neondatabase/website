@@ -1,11 +1,3 @@
-
-
-|                 12.7. Configuration Example                |                                                      |                              |                                                       |                                                                              |
-| :--------------------------------------------------------: | :--------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](textsearch-dictionaries.html "12.6. Dictionaries")  | [Up](textsearch.html "Chapter 12. Full Text Search") | Chapter 12. Full Text Search | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](textsearch-debugging.html "12.8. Testing and Debugging Text Search") |
-
-***
-
 ## 12.7. Configuration Example [#](#TEXTSEARCH-CONFIGURATION)
 
 A text search configuration specifies all options necessary to transform a document into a `tsvector`: the parser to use to break text into tokens, and the dictionaries to use to transform each token into a lexeme. Every call of `to_tsvector` or `to_tsquery` needs a text search configuration to perform its processing. The configuration parameter [default\_text\_search\_config](runtime-config-client.html#GUC-DEFAULT-TEXT-SEARCH-CONFIG) specifies the name of the default configuration, which is the one used by text search functions if an explicit configuration parameter is omitted. It can be set in `postgresql.conf`, or set for an individual session using the `SET` command.
@@ -97,10 +89,3 @@ SHOW default_text_search_config;
 ----------------------------
  public.pg
 ```
-
-***
-
-|                                                            |                                                       |                                                                              |
-| :--------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](textsearch-dictionaries.html "12.6. Dictionaries")  |  [Up](textsearch.html "Chapter 12. Full Text Search") |  [Next](textsearch-debugging.html "12.8. Testing and Debugging Text Search") |
-| 12.6. Dictionaries                                         | [Home](index.html "PostgreSQL 17devel Documentation") |                                      12.8. Testing and Debugging Text Search |

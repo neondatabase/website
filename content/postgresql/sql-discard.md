@@ -1,11 +1,3 @@
-
-
-|              DISCARD              |                                        |              |                                                       |                           |
-| :-------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------: |
-| [Prev](sql-delete.html "DELETE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-do.html "DO") |
-
-***
-
 ## DISCARD
 
 DISCARD — discard session state
@@ -59,10 +51,3 @@ DISCARD { ALL | PLANS | SEQUENCES | TEMPORARY | TEMP }
 ## Compatibility
 
 `DISCARD` is a PostgreSQL extension.
-
-***
-
-|                                   |                                                       |                           |
-| :-------------------------------- | :---------------------------------------------------: | ------------------------: |
-| [Prev](sql-delete.html "DELETE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-do.html "DO") |
-| DELETE                            | [Home](index.html "PostgreSQL 17devel Documentation") |                        DO |

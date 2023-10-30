@@ -1,11 +1,3 @@
-
-
-|                         53.26. `pg_index`                        |                                                   |                             |                                                       |                                                        |
-| :--------------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](catalog-pg-foreign-table.html "53.25. pg_foreign_table")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-inherits.html "53.27. pg_inherits") |
-
-***
-
 ## 53.26. `pg_index` [#](#CATALOG-PG-INDEX)
 
 The catalog `pg_index` contains part of the information about indexes. The rest is mostly in [`pg_class`](catalog-pg-class.html "53.11. pg_class").
@@ -35,10 +27,3 @@ The catalog `pg_index` contains part of the information about indexes. The rest 
 | `indoption` `int2vector`This is an array of `indnkeyatts` values that store per-column flag bits. The meaning of the bits is defined by the index's access method.                                                                                                                                                                                                                                                                                                                                                               |
 | `indexprs` `pg_node_tree`Expression trees (in `nodeToString()` representation) for index attributes that are not simple column references. This is a list with one element for each zero entry in `indkey`. Null if all index attributes are simple references.                                                                                                                                                                                                                                                                  |
 | `indpred` `pg_node_tree`Expression tree (in `nodeToString()` representation) for partial index predicate. Null if not a partial index.                                                                                                                                                                                                                                                                                                                                                                                           |
-
-***
-
-|                                                                  |                                                       |                                                        |
-| :--------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](catalog-pg-foreign-table.html "53.25. pg_foreign_table")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-inherits.html "53.27. pg_inherits") |
-| 53.25. `pg_foreign_table`                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                   53.27. `pg_inherits` |

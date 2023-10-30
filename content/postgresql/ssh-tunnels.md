@@ -1,11 +1,3 @@
-
-
-|                  19.11. Secure TCP/IP Connections with SSH Tunnels                 |                                                             |                                        |                                                       |                                                                                |
-| :--------------------------------------------------------------------------------: | :---------------------------------------------------------- | :------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](gssapi-enc.html "19.10. Secure TCP/IP Connections with GSSAPI Encryption")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") | Chapter 19. Server Setup and Operation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](event-log-registration.html "19.12. Registering Event Log on Windows") |
-
-***
-
 ## 19.11. Secure TCP/IP Connections with SSH Tunnels [#](#SSH-TUNNELS)
 
 It is possible to use SSH to encrypt the network connection between clients and a PostgreSQL server. Done properly, this provides an adequately secure network connection, even for non-SSL-capable clients.
@@ -49,10 +41,3 @@ Note that this way the connection from `shell.foo.com` to `db.foo.com` will not 
 ### Tip
 
 Several other applications exist that can provide secure tunnels using a procedure similar in concept to the one just described.
-
-***
-
-|                                                                                    |                                                             |                                                                                |
-| :--------------------------------------------------------------------------------- | :---------------------------------------------------------: | -----------------------------------------------------------------------------: |
-| [Prev](gssapi-enc.html "19.10. Secure TCP/IP Connections with GSSAPI Encryption")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") |  [Next](event-log-registration.html "19.12. Registering Event Log on Windows") |
-| 19.10. Secure TCP/IP Connections with GSSAPI Encryption                            |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                        19.12. Registering Event Log on Windows |

@@ -1,11 +1,3 @@
-
-
-|                        5.9. Schemas                        |                                             |                            |                                                       |                                               |
-| :--------------------------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](ddl-rowsecurity.html "5.8. Row Security Policies")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-inherit.html "5.10. Inheritance") |
-
-***
-
 ## 5.9. Schemas [#](#DDL-SCHEMAS)
 
   * *   [5.9.1. Creating a Schema](ddl-schemas.html#DDL-SCHEMAS-CREATE)
@@ -222,10 +214,3 @@ In the SQL standard, the notion of objects in the same schema being owned by dif
 Also, there is no concept of a `public` schema in the SQL standard. For maximum conformance to the standard, you should not use the `public` schema.
 
 Of course, some SQL database systems might not implement schemas at all, or provide namespace support by allowing (possibly limited) cross-database access. If you need to work with those systems, then maximum portability would be achieved by not using schemas at all.
-
-***
-
-|                                                            |                                                       |                                               |
-| :--------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](ddl-rowsecurity.html "5.8. Row Security Policies")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](ddl-inherit.html "5.10. Inheritance") |
-| 5.8. Row Security Policies                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                             5.10. Inheritance |

@@ -1,11 +1,3 @@
-
-
-|          49.8. Synchronous Replication Support for Logical Decoding          |                                                           |                              |                                                       |                                                                                                      |
-| :--------------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------------------------: |
-| [Prev](logicaldecoding-writer.html "49.7. Logical Decoding Output Writers")  | [Up](logicaldecoding.html "Chapter 49. Logical Decoding") | Chapter 49. Logical Decoding | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](logicaldecoding-streaming.html "49.9. Streaming of Large Transactions for Logical Decoding") |
-
-***
-
 ## 49.8. Synchronous Replication Support for Logical Decoding [#](#LOGICALDECODING-SYNCHRONOUS)
 
   * *   [49.8.1. Overview](logicaldecoding-synchronous.html#LOGICALDECODING-SYNCHRONOUS-OVERVIEW)
@@ -30,10 +22,3 @@ In synchronous replication setup, a deadlock can happen, if the transaction has 
 * Executing `TRUNCATE` on \[user] catalog table in a transaction.
 
 Note that these commands that can cause deadlock apply to not only explicitly indicated system catalog tables above but also to any other \[user] catalog table.
-
-***
-
-|                                                                              |                                                           |                                                                                                      |
-| :--------------------------------------------------------------------------- | :-------------------------------------------------------: | ---------------------------------------------------------------------------------------------------: |
-| [Prev](logicaldecoding-writer.html "49.7. Logical Decoding Output Writers")  | [Up](logicaldecoding.html "Chapter 49. Logical Decoding") |  [Next](logicaldecoding-streaming.html "49.9. Streaming of Large Transactions for Logical Decoding") |
-| 49.7. Logical Decoding Output Writers                                        |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                           49.9. Streaming of Large Transactions for Logical Decoding |

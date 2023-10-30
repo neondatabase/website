@@ -1,11 +1,3 @@
-
-
-|                  53.48. `pg_shdepend`                  |                                                   |                             |                                                       |                                                                  |
-| :----------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](catalog-pg-sequence.html "53.47. pg_sequence")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-shdescription.html "53.49. pg_shdescription") |
-
-***
-
 ## 53.48. `pg_shdepend` [#](#CATALOG-PG-SHDEPEND)
 
 The catalog `pg_shdepend` records the dependency relationships between database objects and shared objects, such as roles. This information allows PostgreSQL to ensure that those objects are unreferenced before attempting to delete them.
@@ -49,10 +41,3 @@ In all cases, a `pg_shdepend` entry indicates that the referenced object cannot 
 Other dependency flavors might be needed in future. Note in particular that the current definition only supports roles and tablespaces as referenced objects.
 
 As in the `pg_depend` catalog, most objects created during initdb are considered “pinned”. No entries are made in `pg_shdepend` that would have a pinned object as either referenced or dependent object.
-
-***
-
-|                                                        |                                                       |                                                                  |
-| :----------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](catalog-pg-sequence.html "53.47. pg_sequence")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-shdescription.html "53.49. pg_shdescription") |
-| 53.47. `pg_sequence`                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                        53.49. `pg_shdescription` |

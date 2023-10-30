@@ -1,11 +1,3 @@
-
-
-|                30.2. Data Checksums               |                                                                  |                                                 |                                                       |                                                           |
-| :-----------------------------------------------: | :--------------------------------------------------------------- | :---------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](wal-reliability.html "30.1. Reliability")  | [Up](wal.html "Chapter 30. Reliability and the Write-Ahead Log") | Chapter 30. Reliability and the Write-Ahead Log | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](wal-intro.html "30.3. Write-Ahead Logging (WAL)") |
-
-***
-
 ## 30.2. Data Checksums [#](#CHECKSUMS)
 
 * [30.2.1. Off-line Enabling of Checksums](checksums.html#CHECKSUMS-OFFLINE-ENABLE-DISABLE)
@@ -21,10 +13,3 @@ When attempting to recover from page corruptions, it may be necessary to bypass 
 ### 30.2.1. Off-line Enabling of Checksums [#](#CHECKSUMS-OFFLINE-ENABLE-DISABLE)
 
 The [pg\_checksums](app-pgchecksums.html "pg_checksums") application can be used to enable or disable data checksums, as well as verify checksums, on an offline cluster.
-
-***
-
-|                                                   |                                                                  |                                                           |
-| :------------------------------------------------ | :--------------------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](wal-reliability.html "30.1. Reliability")  | [Up](wal.html "Chapter 30. Reliability and the Write-Ahead Log") |  [Next](wal-intro.html "30.3. Write-Ahead Logging (WAL)") |
-| 30.1. Reliability                                 |       [Home](index.html "PostgreSQL 17devel Documentation")      |                           30.3. Write-Ahead Logging (WAL) |

@@ -1,11 +1,3 @@
-
-
-|                  37.2. Data Types                  |                                                                    |                                    |                                                       |                                                                                                  |
-| :------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------------------: |
-| [Prev](infoschema-schema.html "37.1. The Schema")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-information-schema-catalog-name.html "37.3. information_schema_catalog_name") |
-
-***
-
 ## 37.2. Data Types [#](#INFOSCHEMA-DATATYPES)
 
 The columns of the information schema views use special data types that are defined in the information schema. These are defined as simple domains over ordinary built-in types. You should not use these types for work outside the information schema, but your applications must be prepared for them if they select from the information schema.
@@ -33,10 +25,3 @@ These types are:
     A character string domain that contains either `YES` or `NO`. This is used to represent Boolean (true/false) data in the information schema. (The information schema was invented before the type `boolean` was added to the SQL standard, so this convention is necessary to keep the information schema backward compatible.)
 
 Every column in the information schema has one of these five types.
-
-***
-
-|                                                    |                                                                    |                                                                                                  |
-| :------------------------------------------------- | :----------------------------------------------------------------: | -----------------------------------------------------------------------------------------------: |
-| [Prev](infoschema-schema.html "37.1. The Schema")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-information-schema-catalog-name.html "37.3. information_schema_catalog_name") |
-| 37.1. The Schema                                   |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                                          37.3. `information_schema_catalog_name` |

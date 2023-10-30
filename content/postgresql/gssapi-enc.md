@@ -1,11 +1,3 @@
-
-
-|      19.10. Secure TCP/IP Connections with GSSAPI Encryption     |                                                             |                                        |                                                       |                                                                               |
-| :--------------------------------------------------------------: | :---------------------------------------------------------- | :------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](ssl-tcp.html "19.9. Secure TCP/IP Connections with SSL")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") | Chapter 19. Server Setup and Operation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ssh-tunnels.html "19.11. Secure TCP/IP Connections with SSH Tunnels") |
-
-***
-
 ## 19.10. Secure TCP/IP Connections with GSSAPI Encryption [#](#GSSAPI-ENC)
 
 * [19.10.1. Basic Setup](gssapi-enc.html#GSSAPI-SETUP)
@@ -19,10 +11,3 @@ The PostgreSQL server will listen for both normal and GSSAPI-encrypted connectio
 When using GSSAPI for encryption, it is common to use GSSAPI for authentication as well, since the underlying mechanism will determine both client and server identities (according to the GSSAPI implementation) in any case. But this is not required; another PostgreSQL authentication method can be chosen to perform additional verification.
 
 Other than configuration of the negotiation behavior, GSSAPI encryption requires no setup beyond that which is necessary for GSSAPI authentication. (For more information on configuring that, see [Section 21.6](gssapi-auth.html "21.6. GSSAPI Authentication").)
-
-***
-
-|                                                                  |                                                             |                                                                               |
-| :--------------------------------------------------------------- | :---------------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](ssl-tcp.html "19.9. Secure TCP/IP Connections with SSL")  | [Up](runtime.html "Chapter 19. Server Setup and Operation") |  [Next](ssh-tunnels.html "19.11. Secure TCP/IP Connections with SSH Tunnels") |
-| 19.9. Secure TCP/IP Connections with SSL                         |    [Home](index.html "PostgreSQL 17devel Documentation")    |                             19.11. Secure TCP/IP Connections with SSH Tunnels |

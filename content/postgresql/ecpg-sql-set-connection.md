@@ -1,11 +1,3 @@
-
-
-|                     SET CONNECTION                     |                                                             |                              |                                                       |                                                        |
-| :----------------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](ecpg-sql-set-autocommit.html "SET AUTOCOMMIT")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-set-descriptor.html "SET DESCRIPTOR") |
-
-***
-
 ## SET CONNECTION
 
 SET CONNECTION — select a database connection
@@ -46,10 +38,3 @@ EXEC SQL SET CONNECTION = con1;
 ## See Also
 
 [CONNECT](ecpg-sql-connect.html "CONNECT"), [DISCONNECT](ecpg-sql-disconnect.html "DISCONNECT")
-
-***
-
-|                                                        |                                                             |                                                        |
-| :----------------------------------------------------- | :---------------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](ecpg-sql-set-autocommit.html "SET AUTOCOMMIT")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-set-descriptor.html "SET DESCRIPTOR") |
-| SET AUTOCOMMIT                                         |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                         SET DESCRIPTOR |

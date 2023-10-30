@@ -1,11 +1,3 @@
-
-
-|                Chapter 14. Performance Tips               |                                            |                           |                                                       |                                                   |
-| :-------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](locking-indexes.html "13.7. Locking and Indexes")  | [Up](sql.html "Part II. The SQL Language") | Part II. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](using-explain.html "14.1. Using EXPLAIN") |
-
-***
-
 ## Chapter 14. Performance Tips
 
 **Table of Contents**
@@ -39,10 +31,3 @@
 * [14.5. Non-Durable Settings](non-durability.html)
 
 Query performance can be affected by many things. Some of these can be controlled by the user, while others are fundamental to the underlying design of the system. This chapter provides some hints about understanding and tuning PostgreSQL performance.
-
-***
-
-|                                                           |                                                       |                                                   |
-| :-------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](locking-indexes.html "13.7. Locking and Indexes")  |       [Up](sql.html "Part II. The SQL Language")      |  [Next](using-explain.html "14.1. Using EXPLAIN") |
-| 13.7. Locking and Indexes                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                             14.1. Using `EXPLAIN` |

@@ -1,11 +1,3 @@
-
-
-|                               14.4. Populating a Database                               |                                                            |                              |                                                       |                                                           |
-| :-------------------------------------------------------------------------------------: | :--------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](explicit-joins.html "14.3. Controlling the Planner with Explicit JOIN Clauses")  | [Up](performance-tips.html "Chapter 14. Performance Tips") | Chapter 14. Performance Tips | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](non-durability.html "14.5. Non-Durable Settings") |
-
-***
-
 ## 14.4. Populating a Database [#](#POPULATE)
 
   * *   [14.4.1. Disable Autocommit](populate.html#DISABLE-AUTOCOMMIT)
@@ -78,14 +70,3 @@ By default, pg\_dump uses `COPY`, and when it is generating a complete schema-an
 * Run `ANALYZE` afterwards.
 
 A data-only dump will still use `COPY`, but it does not drop or recreate indexes, and it does not normally touch foreign keys. [\[14\]](#ftn.id-1.5.13.7.11.4.2) So when loading a data-only dump, it is up to you to drop and recreate indexes and foreign keys if you wish to use those techniques. It's still useful to increase `max_wal_size` while loading the data, but don't bother increasing `maintenance_work_mem`; rather, you'd do that while manually recreating indexes and foreign keys afterwards. And don't forget to `ANALYZE` when you're done; see [Section 25.1.3](routine-vacuuming.html#VACUUM-FOR-STATISTICS "25.1.3. Updating Planner Statistics") and [Section 25.1.6](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon") for more information.
-
-***
-
-[\[14\] ](#id-1.5.13.7.11.4.2)You can get the effect of disabling foreign keys by using the `--disable-triggers` option — but realize that that eliminates, rather than just postpones, foreign key validation, and so it is possible to insert bad data if you use it.
-
-***
-
-|                                                                                         |                                                            |                                                           |
-| :-------------------------------------------------------------------------------------- | :--------------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](explicit-joins.html "14.3. Controlling the Planner with Explicit JOIN Clauses")  | [Up](performance-tips.html "Chapter 14. Performance Tips") |  [Next](non-durability.html "14.5. Non-Durable Settings") |
-| 14.3. Controlling the Planner with Explicit `JOIN` Clauses                              |    [Home](index.html "PostgreSQL 17devel Documentation")   |                                14.5. Non-Durable Settings |

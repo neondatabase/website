@@ -1,11 +1,3 @@
-
-
-|                          46.1. PL/Python Functions                          |                                                                          |                                                    |                                                       |                                                 |
-| :-------------------------------------------------------------------------: | :----------------------------------------------------------------------- | :------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](plpython.html "Chapter 46. PL/Python — Python Procedural Language")  | [Up](plpython.html "Chapter 46. PL/Python — Python Procedural Language") | Chapter 46. PL/Python — Python Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpython-data.html "46.2. Data Values") |
-
-***
-
 ## 46.1. PL/Python Functions [#](#PLPYTHON-FUNCS)
 
 Functions in PL/Python are declared via the standard [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") syntax:
@@ -72,10 +64,3 @@ $$ LANGUAGE plpython3u;
 ```
 
 But it is advisable not to rely on this implementation detail of PL/Python. It is better to treat the function parameters as read-only.
-
-***
-
-|                                                                             |                                                                          |                                                 |
-| :-------------------------------------------------------------------------- | :----------------------------------------------------------------------: | ----------------------------------------------: |
-| [Prev](plpython.html "Chapter 46. PL/Python — Python Procedural Language")  | [Up](plpython.html "Chapter 46. PL/Python — Python Procedural Language") |  [Next](plpython-data.html "46.2. Data Values") |
-| Chapter 46. PL/Python — Python Procedural Language                          |           [Home](index.html "PostgreSQL 17devel Documentation")          |                               46.2. Data Values |

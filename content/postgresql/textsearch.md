@@ -1,11 +1,3 @@
-
-
-|                 Chapter 12. Full Text Search                 |                                            |                           |                                                       |                                                     |
-| :----------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](indexes-examine.html "11.12. Examining Index Usage")  | [Up](sql.html "Part II. The SQL Language") | Part II. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](textsearch-intro.html "12.1. Introduction") |
-
-***
-
 ## Chapter 12. Full Text Search
 
 **Table of Contents**
@@ -59,10 +51,3 @@
   * *   [12.9. Preferred Index Types for Text Search](textsearch-indexes.html)
   * [12.10. psql Support](textsearch-psql.html)
   * [12.11. Limitations](textsearch-limitations.html)
-
-***
-
-|                                                              |                                                       |                                                     |
-| :----------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](indexes-examine.html "11.12. Examining Index Usage")  |       [Up](sql.html "Part II. The SQL Language")      |  [Next](textsearch-intro.html "12.1. Introduction") |
-| 11.12. Examining Index Usage                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                  12.1. Introduction |

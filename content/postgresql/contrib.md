@@ -1,11 +1,3 @@
-
-
-| Appendix F. Additional Supplied Modules and Extensions |                                               |                       |                                                       |                                                                     |
-| :----------------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-|    [Prev](release-prior.html "E.2. Prior Releases")    | [Up](appendixes.html "Part VIII. Appendixes") | Part VIII. Appendixes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](adminpack.html "F.1. adminpack — pgAdmin support toolpack") |
-
-***
-
 ## Appendix F. Additional Supplied Modules and Extensions
 
 **Table of Contents**
@@ -400,10 +392,3 @@ The following extensions are trusted in a default installation:
 Many extensions allow you to install their objects in a schema of your choice. To do that, add `SCHEMA schema_name` to the `CREATE EXTENSION` command. By default, the objects will be placed in your current creation target schema, which in turn defaults to `public`.
 
 Note, however, that some of these components are not “extensions” in this sense, but are loaded into the server in some other way, for instance by way of [shared\_preload\_libraries](runtime-config-client.html#GUC-SHARED-PRELOAD-LIBRARIES). See the documentation of each component for details.
-
-***
-
-|                                                   |                                                       |                                                                     |
-| :------------------------------------------------ | :---------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](release-prior.html "E.2. Prior Releases")  |     [Up](appendixes.html "Part VIII. Appendixes")     |  [Next](adminpack.html "F.1. adminpack — pgAdmin support toolpack") |
-| E.2. Prior Releases                               | [Home](index.html "PostgreSQL 17devel Documentation") |                           F.1. adminpack — pgAdmin support toolpack |

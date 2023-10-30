@@ -1,11 +1,3 @@
-
-
-|               12.2. Tables and Indexes              |                                                      |                              |                                                       |                                                                   |
-| :-------------------------------------------------: | :--------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](textsearch-intro.html "12.1. Introduction")  | [Up](textsearch.html "Chapter 12. Full Text Search") | Chapter 12. Full Text Search | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](textsearch-controls.html "12.3. Controlling Text Search") |
-
-***
-
 ## 12.2. Tables and Indexes [#](#TEXTSEARCH-TABLES)
 
   * *   [12.2.1. Searching a Table](textsearch-tables.html#TEXTSEARCH-TABLES-SEARCH)
@@ -109,10 +101,3 @@ LIMIT 10;
 ```
 
 One advantage of the separate-column approach over an expression index is that it is not necessary to explicitly specify the text search configuration in queries in order to make use of the index. As shown in the example above, the query can depend on `default_text_search_config`. Another advantage is that searches will be faster, since it will not be necessary to redo the `to_tsvector` calls to verify index matches. (This is more important when using a GiST index than a GIN index; see [Section 12.9](textsearch-indexes.html "12.9. Preferred Index Types for Text Search").) The expression-index approach is simpler to set up, however, and it requires less disk space since the `tsvector` representation is not stored explicitly.
-
-***
-
-|                                                     |                                                       |                                                                   |
-| :-------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](textsearch-intro.html "12.1. Introduction")  |  [Up](textsearch.html "Chapter 12. Full Text Search") |  [Next](textsearch-controls.html "12.3. Controlling Text Search") |
-| 12.1. Introduction                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                     12.3. Controlling Text Search |

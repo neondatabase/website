@@ -1,11 +1,3 @@
-
-
-|                           J.5. Documentation Authoring                          |                                                 |                           |                                                       |                                                 |
-| :-----------------------------------------------------------------------------: | :---------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](docguide-build-meson.html "J.4. Building the Documentation with Meson")  | [Up](docguide.html "Appendix J. Documentation") | Appendix J. Documentation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](docguide-style.html "J.6. Style Guide") |
-
-***
-
 ## J.5. Documentation Authoring [#](#DOCGUIDE-AUTHORING)
 
 * [J.5.1. Emacs](docguide-authoring.html#DOCGUIDE-AUTHORING-EMACS)
@@ -19,10 +11,3 @@ Note that for historical reasons the documentation source files are named with a
 nXML Mode, which ships with Emacs, is the most common mode for editing XML documents with Emacs. It will allow you to use Emacs to insert tags and check markup consistency, and it supports DocBook out of the box. Check the [nXML manual](https://www.gnu.org/software/emacs/manual/html_mono/nxml-mode.html) for detailed documentation.
 
 `src/tools/editors/emacs.samples` contains recommended settings for this mode.
-
-***
-
-|                                                                                 |                                                       |                                                 |
-| :------------------------------------------------------------------------------ | :---------------------------------------------------: | ----------------------------------------------: |
-| [Prev](docguide-build-meson.html "J.4. Building the Documentation with Meson")  |    [Up](docguide.html "Appendix J. Documentation")    |  [Next](docguide-style.html "J.6. Style Guide") |
-| J.4. Building the Documentation with Meson                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                J.6. Style Guide |

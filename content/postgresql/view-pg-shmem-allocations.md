@@ -1,11 +1,3 @@
-
-
-|          54.26. `pg_shmem_allocations`          |                                             |                          |                                                       |                                               |
-| :---------------------------------------------: | :------------------------------------------ | :----------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](view-pg-shadow.html "54.25. pg_shadow")  | [Up](views.html "Chapter 54. System Views") | Chapter 54. System Views | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](view-pg-stats.html "54.27. pg_stats") |
-
-***
-
 ## 54.26. `pg_shmem_allocations` [#](#VIEW-PG-SHMEM-ALLOCATIONS)
 
 The `pg_shmem_allocations` view shows allocations made from the server's main shared memory segment. This includes both memory allocated by PostgreSQL itself and memory allocated by extensions using the mechanisms detailed in [Section 38.10.10](xfunc-c.html#XFUNC-SHARED-ADDIN "38.10.10. Shared Memory and LWLocks").
@@ -26,10 +18,3 @@ Note that this view does not include memory allocated using the dynamic shared m
 Anonymous allocations are allocations that have been made with `ShmemAlloc()` directly, rather than via `ShmemInitStruct()` or `ShmemInitHash()`.
 
 By default, the `pg_shmem_allocations` view can be read only by superusers or roles with privileges of the `pg_read_all_stats` role.
-
-***
-
-|                                                 |                                                       |                                               |
-| :---------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](view-pg-shadow.html "54.25. pg_shadow")  |      [Up](views.html "Chapter 54. System Views")      |  [Next](view-pg-stats.html "54.27. pg_stats") |
-| 54.25. `pg_shadow`                              | [Home](index.html "PostgreSQL 17devel Documentation") |                             54.27. `pg_stats` |

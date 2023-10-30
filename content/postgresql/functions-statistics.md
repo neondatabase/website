@@ -1,11 +1,3 @@
-
-
-|                 9.30. Statistics Information Functions                 |                                                           |                                    |                                                       |                                                      |
-| :--------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](functions-event-triggers.html "9.29. Event Trigger Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](typeconv.html "Chapter 10. Type Conversion") |
-
-***
-
 ## 9.30. Statistics Information Functions [#](#FUNCTIONS-STATISTICS)
 
 * [9.30.1. Inspecting MCV Lists](functions-statistics.html#FUNCTIONS-STATISTICS-MCV)
@@ -38,10 +30,3 @@ SELECT m.* FROM pg_statistic_ext join pg_statistic_ext_data on (oid = stxoid),
 ```
 
 Values of the `pg_mcv_list` type can be obtained only from the `pg_statistic_ext_data`.`stxdmcv` column.
-
-***
-
-|                                                                        |                                                           |                                                      |
-| :--------------------------------------------------------------------- | :-------------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](functions-event-triggers.html "9.29. Event Trigger Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](typeconv.html "Chapter 10. Type Conversion") |
-| 9.29. Event Trigger Functions                                          |   [Home](index.html "PostgreSQL 17devel Documentation")   |                          Chapter 10. Type Conversion |

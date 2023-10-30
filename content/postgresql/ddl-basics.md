@@ -1,11 +1,3 @@
-
-
-|                5.1. Table Basics               |                                             |                            |                                                       |                                                 |
-| :--------------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](ddl.html "Chapter 5. Data Definition")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-default.html "5.2. Default Values") |
-
-***
-
 ## 5.1. Table Basics [#](#DDL-BASICS)
 
 A table in a relational database is much like a table on paper: It consists of rows and columns. The number and order of the columns is fixed, and each column has a name. The number of rows is variable — it reflects how much data is stored at a given moment. SQL does not make any guarantees about the order of the rows in a table. When a table is read, the rows will appear in an unspecified order, unless sorting is explicitly requested. This is covered in [Chapter 7](queries.html "Chapter 7. Queries"). Furthermore, SQL does not assign unique identifiers to rows, so it is possible to have several completely identical rows in a table. This is a consequence of the mathematical model that underlies SQL but is usually not desirable. Later in this chapter we will see how to deal with this issue.
@@ -58,10 +50,3 @@ Attempting to drop a table that does not exist is an error. Nevertheless, it is 
 If you need to modify a table that already exists, see [Section 5.6](ddl-alter.html "5.6. Modifying Tables") later in this chapter.
 
 With the tools discussed so far you can create fully functional tables. The remainder of this chapter is concerned with adding features to the table definition to ensure data integrity, security, or convenience. If you are eager to fill your tables with data now you can skip ahead to [Chapter 6](dml.html "Chapter 6. Data Manipulation") and read the rest of this chapter later.
-
-***
-
-|                                                |                                                       |                                                 |
-| :--------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------: |
-| [Prev](ddl.html "Chapter 5. Data Definition")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](ddl-default.html "5.2. Default Values") |
-| Chapter 5. Data Definition                     | [Home](index.html "PostgreSQL 17devel Documentation") |                             5.2. Default Values |

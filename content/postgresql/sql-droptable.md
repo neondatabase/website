@@ -1,11 +1,3 @@
-
-
-|                       DROP TABLE                       |                                        |              |                                                       |                                                    |
-| :----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-dropsubscription.html "DROP SUBSCRIPTION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droptablespace.html "DROP TABLESPACE") |
-
-***
-
 ## DROP TABLE
 
 DROP TABLE — remove a table
@@ -57,10 +49,3 @@ This command conforms to the SQL standard, except that the standard only allows 
 ## See Also
 
 [ALTER TABLE](sql-altertable.html "ALTER TABLE"), [CREATE TABLE](sql-createtable.html "CREATE TABLE")
-
-***
-
-|                                                        |                                                       |                                                    |
-| :----------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-dropsubscription.html "DROP SUBSCRIPTION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droptablespace.html "DROP TABLESPACE") |
-| DROP SUBSCRIPTION                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                    DROP TABLESPACE |

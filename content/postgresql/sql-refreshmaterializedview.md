@@ -1,11 +1,3 @@
-
-
-|             REFRESH MATERIALIZED VIEW             |                                        |              |                                                       |                                     |
-| :-----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-reassign-owned.html "REASSIGN OWNED")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-reindex.html "REINDEX") |
-
-***
-
 ## REFRESH MATERIALIZED VIEW
 
 REFRESH MATERIALIZED VIEW — replace the contents of a materialized view
@@ -67,10 +59,3 @@ REFRESH MATERIALIZED VIEW annual_statistics_basis WITH NO DATA;
 ## See Also
 
 [CREATE MATERIALIZED VIEW](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW"), [ALTER MATERIALIZED VIEW](sql-altermaterializedview.html "ALTER MATERIALIZED VIEW"), [DROP MATERIALIZED VIEW](sql-dropmaterializedview.html "DROP MATERIALIZED VIEW")
-
-***
-
-|                                                   |                                                       |                                     |
-| :------------------------------------------------ | :---------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-reassign-owned.html "REASSIGN OWNED")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-reindex.html "REINDEX") |
-| REASSIGN OWNED                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                             REINDEX |

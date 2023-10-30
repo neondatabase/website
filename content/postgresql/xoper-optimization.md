@@ -1,11 +1,3 @@
-
-
-|       38.15. Operator Optimization Information      |                                               |                           |                                                       |                                                                 |
-| :-------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](xoper.html "38.14. User-Defined Operators")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xindex.html "38.16. Interfacing Extensions to Indexes") |
-
-***
-
 ## 38.15. Operator Optimization Information [#](#XOPER-OPTIMIZATION)
 
   * *   [38.15.1. `COMMUTATOR`](xoper-optimization.html#XOPER-COMMUTATOR)
@@ -128,10 +120,3 @@ A merge-joinable operator must have a commutator (itself if the two operand data
 ### Note
 
 The function underlying a merge-joinable operator must be marked immutable or stable. If it is volatile, the system will never attempt to use the operator for a merge join.
-
-***
-
-|                                                     |                                                       |                                                                 |
-| :-------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](xoper.html "38.14. User-Defined Operators")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xindex.html "38.16. Interfacing Extensions to Indexes") |
-| 38.14. User-Defined Operators                       | [Home](index.html "PostgreSQL 17devel Documentation") |                        38.16. Interfacing Extensions to Indexes |

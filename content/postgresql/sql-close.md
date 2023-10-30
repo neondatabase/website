@@ -1,11 +1,3 @@
-
-
-|                   CLOSE                   |                                        |              |                                                       |                                     |
-| :---------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-checkpoint.html "CHECKPOINT")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-cluster.html "CLUSTER") |
-
-***
-
 ## CLOSE
 
 CLOSE — close a cursor
@@ -57,10 +49,3 @@ CLOSE liahona;
 ## See Also
 
 [DECLARE](sql-declare.html "DECLARE"), [FETCH](sql-fetch.html "FETCH"), [MOVE](sql-move.html "MOVE")
-
-***
-
-|                                           |                                                       |                                     |
-| :---------------------------------------- | :---------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-checkpoint.html "CHECKPOINT")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-cluster.html "CLUSTER") |
-| CHECKPOINT                                | [Home](index.html "PostgreSQL 17devel Documentation") |                             CLUSTER |

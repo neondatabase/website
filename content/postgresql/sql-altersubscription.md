@@ -1,11 +1,3 @@
-
-
-|                  ALTER SUBSCRIPTION                  |                                        |              |                                                       |                                              |
-| :--------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-alterstatistics.html "ALTER STATISTICS")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altersystem.html "ALTER SYSTEM") |
-
-***
-
 ## ALTER SUBSCRIPTION
 
 ALTER SUBSCRIPTION — change the definition of a subscription
@@ -130,10 +122,3 @@ ALTER SUBSCRIPTION mysub DISABLE;
 ## See Also
 
 [CREATE SUBSCRIPTION](sql-createsubscription.html "CREATE SUBSCRIPTION"), [DROP SUBSCRIPTION](sql-dropsubscription.html "DROP SUBSCRIPTION"), [CREATE PUBLICATION](sql-createpublication.html "CREATE PUBLICATION"), [ALTER PUBLICATION](sql-alterpublication.html "ALTER PUBLICATION")
-
-***
-
-|                                                      |                                                       |                                              |
-| :--------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-alterstatistics.html "ALTER STATISTICS")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altersystem.html "ALTER SYSTEM") |
-| ALTER STATISTICS                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                 ALTER SYSTEM |

@@ -1,11 +1,3 @@
-
-
-|                 22.3. Role Membership                 |                                                    |                            |                                                       |                                                   |
-| :---------------------------------------------------: | :------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](role-attributes.html "22.2. Role Attributes")  | [Up](user-manag.html "Chapter 22. Database Roles") | Chapter 22. Database Roles | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](role-removal.html "22.4. Dropping Roles") |
-
-***
-
 ## 22.3. Role Membership [#](#ROLE-MEMBERSHIP)
 
 It is frequently convenient to group users together to ease management of privileges: that way, privileges can be granted to, or revoked from, a group as a whole. In PostgreSQL this is done by creating a role that represents the group, and then granting *membership* in the group role to individual user roles.
@@ -83,10 +75,3 @@ DROP ROLE name;
 ```
 
 Any memberships in the group role are automatically revoked (but the member roles are not otherwise affected).
-
-***
-
-|                                                       |                                                       |                                                   |
-| :---------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](role-attributes.html "22.2. Role Attributes")  |   [Up](user-manag.html "Chapter 22. Database Roles")  |  [Next](role-removal.html "22.4. Dropping Roles") |
-| 22.2. Role Attributes                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                              22.4. Dropping Roles |

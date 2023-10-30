@@ -1,11 +1,3 @@
-
-
-|                 29.1. Determining Disk Usage                |                                                          |                                   |                                                       |                                                   |
-| :---------------------------------------------------------: | :------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](diskusage.html "Chapter 29. Monitoring Disk Usage")  | [Up](diskusage.html "Chapter 29. Monitoring Disk Usage") | Chapter 29. Monitoring Disk Usage | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](disk-full.html "29.2. Disk Full Failure") |
-
-***
-
 ## 29.1. Determining Disk Usage [#](#DISK-USAGE)
 
 Each table has a primary heap disk file where most of the data is stored. If the table has any columns with potentially-wide values, there also might be a TOAST file associated with the table, which is used to store values too wide to fit comfortably in the main table (see [Section 73.2](storage-toast.html "73.2. TOAST")). There will be one valid index on the TOAST table, if present. There also might be indexes associated with the base table. Each table and index is stored in a separate disk file — possibly more than one file, if the file would exceed one gigabyte. Naming conventions for these files are described in [Section 73.1](storage-file-layout.html "73.1. Database File Layout").
@@ -76,10 +68,3 @@ ORDER BY relpages DESC;
  bigtable             |     3290
  customer             |     3144
 ```
-
-***
-
-|                                                             |                                                          |                                                   |
-| :---------------------------------------------------------- | :------------------------------------------------------: | ------------------------------------------------: |
-| [Prev](diskusage.html "Chapter 29. Monitoring Disk Usage")  | [Up](diskusage.html "Chapter 29. Monitoring Disk Usage") |  [Next](disk-full.html "29.2. Disk Full Failure") |
-| Chapter 29. Monitoring Disk Usage                           |   [Home](index.html "PostgreSQL 17devel Documentation")  |                           29.2. Disk Full Failure |

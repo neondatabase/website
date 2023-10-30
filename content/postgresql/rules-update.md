@@ -1,11 +1,3 @@
-
-
-|          41.4. Rules on `INSERT`, `UPDATE`, and `DELETE`         |                                                |                             |                                                       |                                                             |
-| :--------------------------------------------------------------: | :--------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](rules-materializedviews.html "41.3. Materialized Views")  | [Up](rules.html "Chapter 41. The Rule System") | Chapter 41. The Rule System | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](rules-privileges.html "41.5. Rules and Privileges") |
-
-***
-
 ## 41.4. Rules on `INSERT`, `UPDATE`, and `DELETE` [#](#RULES-UPDATE)
 
   * *   [41.4.1. How Update Rules Work](rules-update.html#RULES-UPDATE-HOW)
@@ -630,10 +622,3 @@ SELECT * FROM shoelace;
 A `DELETE` on a view, with a subquery qualification that in total uses 4 nesting/joined views, where one of them itself has a subquery qualification containing a view and where calculated view columns are used, gets rewritten into one single query tree that deletes the requested data from a real table.
 
 There are probably only a few situations out in the real world where such a construct is necessary. But it makes you feel comfortable that it works.
-
-***
-
-|                                                                  |                                                       |                                                             |
-| :--------------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](rules-materializedviews.html "41.3. Materialized Views")  |     [Up](rules.html "Chapter 41. The Rule System")    |  [Next](rules-privileges.html "41.5. Rules and Privileges") |
-| 41.3. Materialized Views                                         | [Home](index.html "PostgreSQL 17devel Documentation") |                                  41.5. Rules and Privileges |

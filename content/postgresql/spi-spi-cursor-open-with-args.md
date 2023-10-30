@@ -1,11 +1,3 @@
-
-
-|            SPI\_cursor\_open\_with\_args            |                                                      |                           |                                                       |                                                                                   |
-| :-------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------: |
-| [Prev](spi-spi-cursor-open.html "SPI_cursor_open")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-cursor-open-with-paramlist.html "SPI_cursor_open_with_paramlist") |
-
-***
-
 ## SPI\_cursor\_open\_with\_args
 
 SPI\_cursor\_open\_with\_args — set up a cursor using a query and parameters
@@ -70,10 +62,3 @@ This function is now deprecated in favor of `SPI_cursor_parse_open`, which provi
 ## Return Value
 
 Pointer to portal containing the cursor. Note there is no error return convention; any error will be reported via `elog`.
-
-***
-
-|                                                     |                                                       |                                                                                   |
-| :-------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------------------------: |
-| [Prev](spi-spi-cursor-open.html "SPI_cursor_open")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-cursor-open-with-paramlist.html "SPI_cursor_open_with_paramlist") |
-| SPI\_cursor\_open                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                                SPI\_cursor\_open\_with\_paramlist |

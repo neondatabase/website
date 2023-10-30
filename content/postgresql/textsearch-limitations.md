@@ -1,11 +1,3 @@
-
-
-|                  12.11. Limitations                 |                                                      |                              |                                                       |                                                      |
-| :-------------------------------------------------: | :--------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](textsearch-psql.html "12.10. psql Support")  | [Up](textsearch.html "Chapter 12. Full Text Search") | Chapter 12. Full Text Search | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](mvcc.html "Chapter 13. Concurrency Control") |
-
-***
-
 ## 12.11. Limitations [#](#TEXTSEARCH-LIMITATIONS)
 
 The current limitations of PostgreSQL's text search features are:
@@ -21,10 +13,3 @@ The current limitations of PostgreSQL's text search features are:
 For comparison, the PostgreSQL 8.1 documentation contained 10,441 unique words, a total of 335,420 words, and the most frequent word “postgresql” was mentioned 6,127 times in 655 documents.
 
 Another example — the PostgreSQL mailing list archives contained 910,989 unique words with 57,491,343 lexemes in 461,020 messages.
-
-***
-
-|                                                     |                                                       |                                                      |
-| :-------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](textsearch-psql.html "12.10. psql Support")  |  [Up](textsearch.html "Chapter 12. Full Text Search") |  [Next](mvcc.html "Chapter 13. Concurrency Control") |
-| 12.10. psql Support                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                      Chapter 13. Concurrency Control |

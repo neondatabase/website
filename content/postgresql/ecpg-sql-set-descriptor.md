@@ -1,11 +1,3 @@
-
-
-|                     SET DESCRIPTOR                     |                                                             |                              |                                                       |                                    |
-| :----------------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------: |
-| [Prev](ecpg-sql-set-connection.html "SET CONNECTION")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-type.html "TYPE") |
-
-***
-
 ## SET DESCRIPTOR
 
 SET DESCRIPTOR — set information in an SQL descriptor area
@@ -64,10 +56,3 @@ EXEC SQL SET DESCRIPTOR indesc VALUE 2 INDICATOR = :val2null, DATA = :val2;
 ## See Also
 
 [ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor.html "ALLOCATE DESCRIPTOR"), [GET DESCRIPTOR](ecpg-sql-get-descriptor.html "GET DESCRIPTOR")
-
-***
-
-|                                                        |                                                             |                                    |
-| :----------------------------------------------------- | :---------------------------------------------------------: | ---------------------------------: |
-| [Prev](ecpg-sql-set-connection.html "SET CONNECTION")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-type.html "TYPE") |
-| SET CONNECTION                                         |    [Home](index.html "PostgreSQL 17devel Documentation")    |                               TYPE |

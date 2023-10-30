@@ -1,11 +1,3 @@
-
-
-|              Chapter 13. Concurrency Control              |                                            |                           |                                                       |                                               |
-| :-------------------------------------------------------: | :----------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](textsearch-limitations.html "12.11. Limitations")  | [Up](sql.html "Part II. The SQL Language") | Part II. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](mvcc-intro.html "13.1. Introduction") |
-
-***
-
 ## Chapter 13. Concurrency Control
 
 **Table of Contents**
@@ -37,10 +29,3 @@
   * [13.7. Locking and Indexes](locking-indexes.html)
 
 This chapter describes the behavior of the PostgreSQL database system when two or more sessions try to access the same data at the same time. The goals in that situation are to allow efficient access for all sessions while maintaining strict data integrity. Every developer of database applications should be familiar with the topics covered in this chapter.
-
-***
-
-|                                                           |                                                       |                                               |
-| :-------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](textsearch-limitations.html "12.11. Limitations")  |       [Up](sql.html "Part II. The SQL Language")      |  [Next](mvcc-intro.html "13.1. Introduction") |
-| 12.11. Limitations                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                            13.1. Introduction |

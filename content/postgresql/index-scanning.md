@@ -1,11 +1,3 @@
-
-
-|                         64.3. Index Scanning                        |                                                                           |                                                      |                                                       |                                                                  |
-| :-----------------------------------------------------------------: | :------------------------------------------------------------------------ | :--------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](index-functions.html "64.2. Index Access Method Functions")  | [Up](indexam.html "Chapter 64. Index Access Method Interface Definition") | Chapter 64. Index Access Method Interface Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](index-locking.html "64.4. Index Locking Considerations") |
-
-***
-
 ## 64.3. Index Scanning [#](#INDEX-SCANNING)
 
 In an index scan, the index access method is responsible for regurgitating the TIDs of all the tuples it has been told about that match the *scan keys*. The access method is *not* involved in actually fetching those tuples from the index's parent table, nor in determining whether they pass the scan's visibility test or other conditions.
@@ -32,10 +24,3 @@ If the index stores the original indexed data values (and not some lossy represe
 Instead of using `amgettuple`, an index scan can be done with `amgetbitmap` to fetch all tuples in one call. This can be noticeably more efficient than `amgettuple` because it allows avoiding lock/unlock cycles within the access method. In principle `amgetbitmap` should have the same effects as repeated `amgettuple` calls, but we impose several restrictions to simplify matters. First of all, `amgetbitmap` returns all tuples at once and marking or restoring scan positions isn't supported. Secondly, the tuples are returned in a bitmap which doesn't have any specific ordering, which is why `amgetbitmap` doesn't take a `direction` argument. (Ordering operators will never be supplied for such a scan, either.) Also, there is no provision for index-only scans with `amgetbitmap`, since there is no way to return the contents of index tuples. Finally, `amgetbitmap` does not guarantee any locking of the returned tuples, with implications spelled out in [Section 64.4](index-locking.html "64.4. Index Locking Considerations").
 
 Note that it is permitted for an access method to implement only `amgetbitmap` and not `amgettuple`, or vice versa, if its internal implementation is unsuited to one API or the other.
-
-***
-
-|                                                                     |                                                                           |                                                                  |
-| :------------------------------------------------------------------ | :-----------------------------------------------------------------------: | ---------------------------------------------------------------: |
-| [Prev](index-functions.html "64.2. Index Access Method Functions")  | [Up](indexam.html "Chapter 64. Index Access Method Interface Definition") |  [Next](index-locking.html "64.4. Index Locking Considerations") |
-| 64.2. Index Access Method Functions                                 |           [Home](index.html "PostgreSQL 17devel Documentation")           |                               64.4. Index Locking Considerations |

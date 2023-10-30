@@ -1,11 +1,3 @@
-
-
-|                 37.7. `character_sets`                 |                                                                    |                                    |                                                       |                                                                                                |
-| :----------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------------------: |
-| [Prev](infoschema-attributes.html "37.6. attributes")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-check-constraint-routine-usage.html "37.8. check_constraint_routine_usage") |
-
-***
-
 ## 37.7. `character_sets` [#](#INFOSCHEMA-CHARACTER-SETS)
 
 The view `character_sets` identifies the character sets available in the current database. Since PostgreSQL does not support multiple character sets within one database, this view only shows one, which is the database encoding.
@@ -38,10 +30,3 @@ You can think of an “encoding” in PostgreSQL either as a character set or a 
 | `default_collate_catalog` `sql_identifier`Name of the database containing the default collation (always the current database, if any collation is identified)                                                                                                                                               |
 | `default_collate_schema` `sql_identifier`Name of the schema containing the default collation                                                                                                                                                                                                                |
 | `default_collate_name` `sql_identifier`Name of the default collation. The default collation is identified as the collation that matches the `COLLATE` and `CTYPE` settings of the current database. If there is no such collation, then this column and the associated schema and catalog columns are null. |
-
-***
-
-|                                                        |                                                                    |                                                                                                |
-| :----------------------------------------------------- | :----------------------------------------------------------------: | ---------------------------------------------------------------------------------------------: |
-| [Prev](infoschema-attributes.html "37.6. attributes")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-check-constraint-routine-usage.html "37.8. check_constraint_routine_usage") |
-| 37.6. `attributes`                                     |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                                         37.8. `check_constraint_routine_usage` |

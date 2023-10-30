@@ -1,11 +1,3 @@
-
-
-| 62.3. Genetic Query Optimization (GEQO) in PostgreSQL |                                                       |                                     |                                                       |                                                   |
-| :---------------------------------------------------: | :---------------------------------------------------- | :---------------------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-|  [Prev](geqo-intro2.html "62.2. Genetic Algorithms")  | [Up](geqo.html "Chapter 62. Genetic Query Optimizer") | Chapter 62. Genetic Query Optimizer | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](geqo-biblio.html "62.4. Further Reading") |
-
-***
-
 ## 62.3. Genetic Query Optimization (GEQO) in PostgreSQL [#](#GEQO-PG-INTRO)
 
   * *   [62.3.1. Generating Possible Plans with GEQO](geqo-pg-intro.html#GEQO-PG-INTRO-GEN-POSSIBLE-PLANS)
@@ -49,10 +41,3 @@ Work is still needed to improve the genetic algorithm parameter settings. In fil
 In the current implementation, the fitness of each candidate join sequence is estimated by running the standard planner's join selection and cost estimation code from scratch. To the extent that different candidates use similar sub-sequences of joins, a great deal of work will be repeated. This could be made significantly faster by retaining cost estimates for sub-joins. The problem is to avoid expending unreasonable amounts of memory on retaining that state.
 
 At a more basic level, it is not clear that solving query optimization with a GA algorithm designed for TSP is appropriate. In the TSP case, the cost associated with any substring (partial tour) is independent of the rest of the tour, but this is certainly not true for query optimization. Thus it is questionable whether edge recombination crossover is the most effective mutation procedure.
-
-***
-
-|                                                      |                                                       |                                                   |
-| :--------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](geqo-intro2.html "62.2. Genetic Algorithms")  | [Up](geqo.html "Chapter 62. Genetic Query Optimizer") |  [Next](geqo-biblio.html "62.4. Further Reading") |
-| 62.2. Genetic Algorithms                             | [Home](index.html "PostgreSQL 17devel Documentation") |                             62.4. Further Reading |

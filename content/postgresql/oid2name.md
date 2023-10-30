@@ -1,11 +1,3 @@
-
-
-|                           oid2name                           |                                                           |                          |                                                       |                                   |
-| :----------------------------------------------------------: | :-------------------------------------------------------- | :----------------------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](contrib-prog-client.html "G.1. Client Applications")  | [Up](contrib-prog-client.html "G.1. Client Applications") | G.1. Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](vacuumlo.html "vacuumlo") |
-
-***
-
 ## oid2name
 
 oid2name — resolve OIDs and file nodes in a PostgreSQL data directory
@@ -235,10 +227,3 @@ From database "alvherre":
 ## Author
 
 B. Palmer `<bpalmer@crimelabs.net>`
-
-***
-
-|                                                              |                                                           |                                   |
-| :----------------------------------------------------------- | :-------------------------------------------------------: | --------------------------------: |
-| [Prev](contrib-prog-client.html "G.1. Client Applications")  | [Up](contrib-prog-client.html "G.1. Client Applications") |  [Next](vacuumlo.html "vacuumlo") |
-| G.1. Client Applications                                     |   [Home](index.html "PostgreSQL 17devel Documentation")   |                          vacuumlo |

@@ -1,11 +1,3 @@
-
-
-|                  CREATE TEXT SEARCH TEMPLATE                 |                                        |              |                                                       |                                                      |
-| :----------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-createtsparser.html "CREATE TEXT SEARCH PARSER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createtransform.html "CREATE TRANSFORM") |
-
-***
-
 ## CREATE TEXT SEARCH TEMPLATE
 
 CREATE TEXT SEARCH TEMPLATE — define a new text search template
@@ -55,10 +47,3 @@ There is no `CREATE TEXT SEARCH TEMPLATE` statement in the SQL standard.
 ## See Also
 
 [ALTER TEXT SEARCH TEMPLATE](sql-altertstemplate.html "ALTER TEXT SEARCH TEMPLATE"), [DROP TEXT SEARCH TEMPLATE](sql-droptstemplate.html "DROP TEXT SEARCH TEMPLATE")
-
-***
-
-|                                                              |                                                       |                                                      |
-| :----------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-createtsparser.html "CREATE TEXT SEARCH PARSER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createtransform.html "CREATE TRANSFORM") |
-| CREATE TEXT SEARCH PARSER                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                     CREATE TRANSFORM |

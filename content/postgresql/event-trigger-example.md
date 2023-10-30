@@ -1,11 +1,3 @@
-
-
-|                       40.4. A Complete Event Trigger Example                       |                                                        |                            |                                                       |                                                                                                 |
-| :--------------------------------------------------------------------------------: | :----------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------------------------: |
-| [Prev](event-trigger-interface.html "40.3. Writing Event Trigger Functions in C")  | [Up](event-triggers.html "Chapter 40. Event Triggers") | Chapter 40. Event Triggers | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](event-trigger-table-rewrite-example.html "40.5. A Table Rewrite Event Trigger Example") |
-
-***
-
 ## 40.4. A Complete Event Trigger Example [#](#EVENT-TRIGGER-EXAMPLE)
 
 Here is a very simple example of an event trigger function written in C. (Examples of triggers written in procedural languages can be found in the documentation of the procedural languages.)
@@ -81,10 +73,3 @@ COMMIT;
 ```
 
 (Recall that DDL commands on event triggers themselves are not affected by event triggers.)
-
-***
-
-|                                                                                    |                                                        |                                                                                                 |
-| :--------------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------------------------------------------------: |
-| [Prev](event-trigger-interface.html "40.3. Writing Event Trigger Functions in C")  | [Up](event-triggers.html "Chapter 40. Event Triggers") |  [Next](event-trigger-table-rewrite-example.html "40.5. A Table Rewrite Event Trigger Example") |
-| 40.3. Writing Event Trigger Functions in C                                         |  [Home](index.html "PostgreSQL 17devel Documentation") |                                                     40.5. A Table Rewrite Event Trigger Example |

@@ -1,11 +1,3 @@
-
-
-|              GRANT              |                                        |              |                                                       |                                                               |
-| :-----------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](sql-fetch.html "FETCH")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-importforeignschema.html "IMPORT FOREIGN SCHEMA") |
-
-***
-
 ## GRANT
 
 GRANT — define access privileges
@@ -223,10 +215,3 @@ Privileges on databases, tablespaces, schemas, languages, and configuration para
 ## See Also
 
 [REVOKE](sql-revoke.html "REVOKE"), [ALTER DEFAULT PRIVILEGES](sql-alterdefaultprivileges.html "ALTER DEFAULT PRIVILEGES")
-
-***
-
-|                                 |                                                       |                                                               |
-| :------------------------------ | :---------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](sql-fetch.html "FETCH")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-importforeignschema.html "IMPORT FOREIGN SCHEMA") |
-| FETCH                           | [Home](index.html "PostgreSQL 17devel Documentation") |                                         IMPORT FOREIGN SCHEMA |

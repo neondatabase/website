@@ -1,11 +1,3 @@
-
-
-|                15.4. Parallel Safety                |                                                        |                            |                                                       |                                                       |
-| :-------------------------------------------------: | :----------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](parallel-plans.html "15.3. Parallel Plans")  | [Up](parallel-query.html "Chapter 15. Parallel Query") | Chapter 15. Parallel Query | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](admin.html "Part III. Server Administration") |
-
-***
-
 ## 15.4. Parallel Safety [#](#PARALLEL-SAFETY)
 
 * [15.4.1. Parallel Labeling for Functions and Aggregates](parallel-safety.html#PARALLEL-LABELING)
@@ -31,10 +23,3 @@ In general, if a function is labeled as being safe when it is restricted or unsa
 If a function executed within a parallel worker acquires locks that are not held by the leader, for example by querying a table not referenced in the query, those locks will be released at worker exit, not end of transaction. If you write a function that does this, and this behavior difference is important to you, mark such functions as `PARALLEL RESTRICTED` to ensure that they execute only in the leader.
 
 Note that the query planner does not consider deferring the evaluation of parallel-restricted functions or aggregates involved in the query in order to obtain a superior plan. So, for example, if a `WHERE` clause applied to a particular table is parallel restricted, the query planner will not consider performing a scan of that table in the parallel portion of a plan. In some cases, it would be possible (and perhaps even efficient) to include the scan of that table in the parallel portion of the query and defer the evaluation of the `WHERE` clause so that it happens above the `Gather` node. However, the planner does not do this.
-
-***
-
-|                                                     |                                                        |                                                       |
-| :-------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](parallel-plans.html "15.3. Parallel Plans")  | [Up](parallel-query.html "Chapter 15. Parallel Query") |  [Next](admin.html "Part III. Server Administration") |
-| 15.3. Parallel Plans                                |  [Home](index.html "PostgreSQL 17devel Documentation") |                       Part III. Server Administration |

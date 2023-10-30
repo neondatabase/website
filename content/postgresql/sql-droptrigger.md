@@ -1,11 +1,3 @@
-
-
-|                   DROP TRIGGER                   |                                        |              |                                                       |                                        |
-| :----------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------: |
-| [Prev](sql-droptransform.html "DROP TRANSFORM")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droptype.html "DROP TYPE") |
-
-***
-
 ## DROP TRIGGER
 
 DROP TRIGGER — remove a trigger
@@ -59,10 +51,3 @@ The `DROP TRIGGER` statement in PostgreSQL is incompatible with the SQL standard
 ## See Also
 
 [CREATE TRIGGER](sql-createtrigger.html "CREATE TRIGGER")
-
-***
-
-|                                                  |                                                       |                                        |
-| :----------------------------------------------- | :---------------------------------------------------: | -------------------------------------: |
-| [Prev](sql-droptransform.html "DROP TRANSFORM")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droptype.html "DROP TYPE") |
-| DROP TRANSFORM                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                              DROP TYPE |

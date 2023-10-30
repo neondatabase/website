@@ -1,11 +1,3 @@
-
-
-|                 DEALLOCATE                 |                                        |              |                                                       |                                     |
-| :----------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-createview.html "CREATE VIEW")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-declare.html "DECLARE") |
-
-***
-
 ## DEALLOCATE
 
 DEALLOCATE — deallocate a prepared statement
@@ -44,10 +36,3 @@ The SQL standard includes a `DEALLOCATE` statement, but it is only for use in em
 ## See Also
 
 [EXECUTE](sql-execute.html "EXECUTE"), [PREPARE](sql-prepare.html "PREPARE")
-
-***
-
-|                                            |                                                       |                                     |
-| :----------------------------------------- | :---------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-createview.html "CREATE VIEW")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-declare.html "DECLARE") |
-| CREATE VIEW                                | [Home](index.html "PostgreSQL 17devel Documentation") |                             DECLARE |

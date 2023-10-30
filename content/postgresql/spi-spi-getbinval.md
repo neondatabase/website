@@ -1,11 +1,3 @@
-
-
-|                 SPI\_getbinval                |                                                                      |                                   |                                                       |                                             |
-| :-------------------------------------------: | :------------------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | ------------------------------------------: |
-| [Prev](spi-spi-getvalue.html "SPI_getvalue")  | [Up](spi-interface-support.html "47.2. Interface Support Functions") | 47.2. Interface Support Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-gettype.html "SPI_gettype") |
-
-***
-
 ## SPI\_getbinval
 
 SPI\_getbinval — return the binary value of the specified column
@@ -47,10 +39,3 @@ This function does not allocate new space for the datum. In the case of a pass-b
 The binary value of the column is returned. The variable pointed to by *`isnull`* is set to true if the column is null, else to false.
 
 `SPI_result` is set to `SPI_ERROR_NOATTRIBUTE` on error.
-
-***
-
-|                                               |                                                                      |                                             |
-| :-------------------------------------------- | :------------------------------------------------------------------: | ------------------------------------------: |
-| [Prev](spi-spi-getvalue.html "SPI_getvalue")  | [Up](spi-interface-support.html "47.2. Interface Support Functions") |  [Next](spi-spi-gettype.html "SPI_gettype") |
-| SPI\_getvalue                                 |         [Home](index.html "PostgreSQL 17devel Documentation")        |                                SPI\_gettype |

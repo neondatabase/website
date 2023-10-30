@@ -1,11 +1,3 @@
-
-
-|               COMMENT               |                                        |              |                                                       |                                   |
-| :---------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](sql-cluster.html "CLUSTER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-commit.html "COMMIT") |
-
-***
-
 ## COMMENT
 
 COMMENT — define or change the comment of an object
@@ -211,10 +203,3 @@ COMMENT ON VIEW my_view IS 'View of departmental costs';
 ## Compatibility
 
 There is no `COMMENT` command in the SQL standard.
-
-***
-
-|                                     |                                                       |                                   |
-| :---------------------------------- | :---------------------------------------------------: | --------------------------------: |
-| [Prev](sql-cluster.html "CLUSTER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-commit.html "COMMIT") |
-| CLUSTER                             | [Home](index.html "PostgreSQL 17devel Documentation") |                            COMMIT |

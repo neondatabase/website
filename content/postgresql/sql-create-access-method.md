@@ -1,11 +1,3 @@
-
-
-|      CREATE ACCESS METHOD     |                                        |              |                                                       |                                                      |
-| :---------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-copy.html "COPY")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createaggregate.html "CREATE AGGREGATE") |
-
-***
-
 ## CREATE ACCESS METHOD
 
 CREATE ACCESS METHOD — define a new access method
@@ -57,10 +49,3 @@ CREATE ACCESS METHOD heptree TYPE INDEX HANDLER heptree_handler;
 ## See Also
 
 [DROP ACCESS METHOD](sql-drop-access-method.html "DROP ACCESS METHOD"), [CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS"), [CREATE OPERATOR FAMILY](sql-createopfamily.html "CREATE OPERATOR FAMILY")
-
-***
-
-|                               |                                                       |                                                      |
-| :---------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](sql-copy.html "COPY")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createaggregate.html "CREATE AGGREGATE") |
-| COPY                          | [Home](index.html "PostgreSQL 17devel Documentation") |                                     CREATE AGGREGATE |

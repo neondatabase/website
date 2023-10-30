@@ -1,11 +1,3 @@
-
-
-|             WHENEVER             |                                                             |                              |                                                       |                                                                         |
-| :------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](ecpg-sql-var.html "VAR")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-informix-compat.html "36.15. Informix Compatibility Mode") |
-
-***
-
 ## WHENEVER
 
 WHENEVER — specify the action to be taken when an SQL statement causes a specific class condition to be raised
@@ -78,10 +70,3 @@ main(void)
 ## Compatibility
 
 `WHENEVER` is specified in the SQL standard, but most of the actions are PostgreSQL extensions.
-
-***
-
-|                                  |                                                             |                                                                         |
-| :------------------------------- | :---------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](ecpg-sql-var.html "VAR")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-informix-compat.html "36.15. Informix Compatibility Mode") |
-| VAR                              |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                      36.15. Informix Compatibility Mode |

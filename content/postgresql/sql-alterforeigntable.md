@@ -1,11 +1,3 @@
-
-
-|                           ALTER FOREIGN TABLE                          |                                        |              |                                                       |                                                  |
-| :--------------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-alterforeigndatawrapper.html "ALTER FOREIGN DATA WRAPPER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterfunction.html "ALTER FUNCTION") |
-
-***
-
 ## ALTER FOREIGN TABLE
 
 ALTER FOREIGN TABLE — change the definition of a foreign table
@@ -233,10 +225,3 @@ The forms `ADD`, `DROP`, and `SET DATA TYPE` conform with the SQL standard. The 
 ## See Also
 
 [CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE"), [DROP FOREIGN TABLE](sql-dropforeigntable.html "DROP FOREIGN TABLE")
-
-***
-
-|                                                                        |                                                       |                                                  |
-| :--------------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-alterforeigndatawrapper.html "ALTER FOREIGN DATA WRAPPER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterfunction.html "ALTER FUNCTION") |
-| ALTER FOREIGN DATA WRAPPER                                             | [Home](index.html "PostgreSQL 17devel Documentation") |                                   ALTER FUNCTION |

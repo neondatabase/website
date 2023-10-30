@@ -1,11 +1,3 @@
-
-
-|         Chapter 46. PL/Python — Python Procedural Language         |                                                            |                            |                                                       |                                                          |
-| :----------------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](plperl-under-the-hood.html "45.8. PL/Perl Under the Hood")  | [Up](server-programming.html "Part V. Server Programming") | Part V. Server Programming | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpython-funcs.html "46.1. PL/Python Functions") |
-
-***
-
 ## Chapter 46. PL/Python — Python Procedural Language
 
 **Table of Contents**
@@ -53,10 +45,3 @@ PL/Python is only available as an “untrusted” language, meaning it does not 
 ### Note
 
 Users of source packages must specially enable the build of PL/Python during the installation process. (Refer to the installation instructions for more information.) Users of binary packages might find PL/Python in a separate subpackage.
-
-***
-
-|                                                                    |                                                            |                                                          |
-| :----------------------------------------------------------------- | :--------------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](plperl-under-the-hood.html "45.8. PL/Perl Under the Hood")  | [Up](server-programming.html "Part V. Server Programming") |  [Next](plpython-funcs.html "46.1. PL/Python Functions") |
-| 45.8. PL/Perl Under the Hood                                       |    [Home](index.html "PostgreSQL 17devel Documentation")   |                                46.1. PL/Python Functions |

@@ -1,11 +1,3 @@
-
-
-|                     20.6. Replication                    |                                                              |                                  |                                                       |                                                           |
-| :------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](runtime-config-wal.html "20.5. Write Ahead Log")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-query.html "20.7. Query Planning") |
-
-***
-
 ## 20.6. Replication [#](#RUNTIME-CONFIG-REPLICATION)
 
   * *   [20.6.1. Sending Servers](runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-SENDER)
@@ -209,10 +201,3 @@ These settings control the behavior of a logical replication subscriber. Their v
     The parallel apply workers are taken from the pool defined by `max_logical_replication_workers`.
 
     The default value is 2. This parameter can only be set in the `postgresql.conf` file or on the server command line.
-
-***
-
-|                                                          |                                                              |                                                           |
-| :------------------------------------------------------- | :----------------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](runtime-config-wal.html "20.5. Write Ahead Log")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-query.html "20.7. Query Planning") |
-| 20.5. Write Ahead Log                                    |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                      20.7. Query Planning |

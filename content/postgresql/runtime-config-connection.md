@@ -1,11 +1,3 @@
-
-
-|                20.3. Connections and Authentication                |                                                              |                                  |                                                       |                                                                    |
-| :----------------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](runtime-config-file-locations.html "20.2. File Locations")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-resource.html "20.4. Resource Consumption") |
-
-***
-
 ## 20.3. Connections and Authentication [#](#RUNTIME-CONFIG-CONNECTION)
 
   * *   [20.3.1. Connection Settings](runtime-config-connection.html#RUNTIME-CONFIG-CONNECTION-SETTINGS)
@@ -242,10 +234,3 @@ See [Section 19.9](ssl-tcp.html "19.9. Secure TCP/IP Connections with SSL") fo
     This parameter determines whether the passphrase command set by `ssl_passphrase_command` will also be called during a configuration reload if a key file needs a passphrase. If this parameter is off (the default), then `ssl_passphrase_command` will be ignored during a reload and the SSL configuration will not be reloaded if a passphrase is needed. That setting is appropriate for a command that requires a TTY for prompting, which might not be available when the server is running. Setting this parameter to on might be appropriate if the passphrase is obtained from a file, for example.
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line.
-
-***
-
-|                                                                    |                                                              |                                                                    |
-| :----------------------------------------------------------------- | :----------------------------------------------------------: | -----------------------------------------------------------------: |
-| [Prev](runtime-config-file-locations.html "20.2. File Locations")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-resource.html "20.4. Resource Consumption") |
-| 20.2. File Locations                                               |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                         20.4. Resource Consumption |

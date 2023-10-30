@@ -1,11 +1,3 @@
-
-
-|        Appendix A. PostgreSQL Error Codes        |                                               |                       |                                                       |                                                                 |
-| :----------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](appendixes.html "Part VIII. Appendixes")  | [Up](appendixes.html "Part VIII. Appendixes") | Part VIII. Appendixes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datetime-appendix.html "Appendix B. Date/Time Support") |
-
-***
-
 ## Appendix A. PostgreSQL Error Codes
 
 All messages emitted by the PostgreSQL server are assigned five-character error codes that follow the SQL standard's conventions for “SQLSTATE” codes. Applications that need to know which error condition has occurred should usually test the error code, rather than looking at the textual error message. The error codes are less likely to change across PostgreSQL releases, and also are not subject to change due to localization of error messages. Note that some, but not all, of the error codes produced by PostgreSQL are defined by the SQL standard; some additional error codes for conditions not defined by the standard have been invented or borrowed from other databases.
@@ -323,10 +315,3 @@ For some types of errors, the server reports the name of a database object (a ta
 | `XX000`                                                                    | `internal_error`                                       |
 | `XX001`                                                                    | `data_corrupted`                                       |
 | `XX002`                                                                    | `index_corrupted`                                      |
-
-***
-
-|                                                  |                                                       |                                                                 |
-| :----------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](appendixes.html "Part VIII. Appendixes")  |     [Up](appendixes.html "Part VIII. Appendixes")     |  [Next](datetime-appendix.html "Appendix B. Date/Time Support") |
-| Part VIII. Appendixes                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                   Appendix B. Date/Time Support |

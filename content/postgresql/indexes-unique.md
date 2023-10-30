@@ -1,11 +1,3 @@
-
-
-|                          11.6. Unique Indexes                         |                                          |                     |                                                       |                                                                   |
-| :-------------------------------------------------------------------: | :--------------------------------------- | :-----------------: | ----------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](indexes-bitmap-scans.html "11.5. Combining Multiple Indexes")  | [Up](indexes.html "Chapter 11. Indexes") | Chapter 11. Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](indexes-expressional.html "11.7. Indexes on Expressions") |
-
-***
-
 ## 11.6. Unique Indexes [#](#INDEXES-UNIQUE)
 
 Indexes can also be used to enforce uniqueness of a column's value, or the uniqueness of the combined values of more than one column.
@@ -24,10 +16,3 @@ PostgreSQL automatically creates a unique index when a unique constraint or prim
 ### Note
 
 There's no need to manually create indexes on unique columns; doing so would just duplicate the automatically-created index.
-
-***
-
-|                                                                       |                                                       |                                                                   |
-| :-------------------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------------: |
-| [Prev](indexes-bitmap-scans.html "11.5. Combining Multiple Indexes")  |        [Up](indexes.html "Chapter 11. Indexes")       |  [Next](indexes-expressional.html "11.7. Indexes on Expressions") |
-| 11.5. Combining Multiple Indexes                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                      11.7. Indexes on Expressions |

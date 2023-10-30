@@ -1,11 +1,3 @@
-
-
-|                 57.1. For the Translator                |                                                      |                                     |                                                       |                                                         |
-| :-----------------------------------------------------: | :--------------------------------------------------- | :---------------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](nls.html "Chapter 57. Native Language Support")  | [Up](nls.html "Chapter 57. Native Language Support") | Chapter 57. Native Language Support | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](nls-programmer.html "57.2. For the Programmer") |
-
-***
-
 ## 57.1. For the Translator [#](#NLS-TRANSLATOR)
 
   * *   [57.1.1. Requirements](nls-translator.html#NLS-TRANSLATOR-REQUIREMENTS)
@@ -115,10 +107,3 @@ Here are some things to keep in mind while editing the translations:
 * Maintain the style and tone of the original string. Specifically, messages that are not sentences (`cannot open file %s`) should probably not start with a capital letter (if your language distinguishes letter case) or end with a period (if your language uses punctuation marks). It might help to read [Section 56.3](error-style-guide.html "56.3. Error Message Style Guide").
 
 * If you don't know what a message means, or if it is ambiguous, ask on the developers' mailing list. Chances are that English speaking end users might also not understand it or find it ambiguous, so it's best to improve the message.
-
-***
-
-|                                                         |                                                       |                                                         |
-| :------------------------------------------------------ | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](nls.html "Chapter 57. Native Language Support")  |  [Up](nls.html "Chapter 57. Native Language Support") |  [Next](nls-programmer.html "57.2. For the Programmer") |
-| Chapter 57. Native Language Support                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                57.2. For the Programmer |

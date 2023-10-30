@@ -1,11 +1,3 @@
-
-
-|                   Appendix D. SQL Conformance                   |                                               |                       |                                                       |                                                               |
-| :-------------------------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](sql-keywords-appendix.html "Appendix C. SQL Key Words")  | [Up](appendixes.html "Part VIII. Appendixes") | Part VIII. Appendixes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](features-sql-standard.html "D.1. Supported Features") |
-
-***
-
 ## Appendix D. SQL Conformance
 
 **Table of Contents**
@@ -62,10 +54,3 @@ In the following two sections, we provide a list of those features that PostgreS
 ### Note
 
 Feature codes containing a hyphen are subfeatures. Therefore, if a particular subfeature is not supported, the main feature is listed as unsupported even if some other subfeatures are supported.
-
-***
-
-|                                                                 |                                                       |                                                               |
-| :-------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](sql-keywords-appendix.html "Appendix C. SQL Key Words")  |     [Up](appendixes.html "Part VIII. Appendixes")     |  [Next](features-sql-standard.html "D.1. Supported Features") |
-| Appendix C. SQL Key Words                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                       D.1. Supported Features |

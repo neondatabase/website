@@ -1,11 +1,3 @@
-
-
-|                              F.32. pgstattuple — obtain tuple-level statistics                             |                                                                             |                                                        |                                                       |                                                                                         |
-| :--------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](pgstatstatements.html "F.31. pg_stat_statements — track statistics of SQL planning and execution")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgsurgery.html "F.33. pg_surgery — perform low-level surgery on relation data") |
-
-***
-
 ## F.32. pgstattuple — obtain tuple-level statistics [#](#PGSTATTUPLE)
 
   * *   [F.32.1. Functions](pgstattuple.html#PGSTATTUPLE-FUNCS)
@@ -219,10 +211,3 @@ Because these functions return detailed page-level information, access is restri
 ### F.32.2. Authors [#](#PGSTATTUPLE-AUTHORS)
 
 Tatsuo Ishii, Satoshi Nagayasu and Abhijit Menon-Sen
-
-***
-
-|                                                                                                            |                                                                             |                                                                                         |
-| :--------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | --------------------------------------------------------------------------------------: |
-| [Prev](pgstatstatements.html "F.31. pg_stat_statements — track statistics of SQL planning and execution")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](pgsurgery.html "F.33. pg_surgery — perform low-level surgery on relation data") |
-| F.31. pg\_stat\_statements — track statistics of SQL planning and execution                                |            [Home](index.html "PostgreSQL 17devel Documentation")            |                          F.33. pg\_surgery — perform low-level surgery on relation data |

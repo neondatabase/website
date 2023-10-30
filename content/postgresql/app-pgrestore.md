@@ -1,11 +1,3 @@
-
-
-|                    pg\_restore                   |                                                              |                                |                                                       |                                                    |
-| :----------------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](app-pgrecvlogical.html "pg_recvlogical")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pgverifybackup.html "pg_verifybackup") |
-
-***
-
 ## pg\_restore
 
 pg\_restore — restore a PostgreSQL database from an archive file created by pg\_dump
@@ -381,10 +373,3 @@ pg_restore -L db.list db.dump
 ## See Also
 
 [pg\_dump](app-pgdump.html "pg_dump"), [pg\_dumpall](app-pg-dumpall.html "pg_dumpall"), [psql](app-psql.html "psql")
-
-***
-
-|                                                  |                                                              |                                                    |
-| :----------------------------------------------- | :----------------------------------------------------------: | -------------------------------------------------: |
-| [Prev](app-pgrecvlogical.html "pg_recvlogical")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-pgverifybackup.html "pg_verifybackup") |
-| pg\_recvlogical                                  |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                   pg\_verifybackup |

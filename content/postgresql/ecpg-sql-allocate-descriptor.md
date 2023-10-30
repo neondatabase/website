@@ -1,11 +1,3 @@
-
-
-|                       ALLOCATE DESCRIPTOR                      |                                                             |                              |                                                       |                                          |
-| :------------------------------------------------------------: | :---------------------------------------------------------- | :--------------------------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](ecpg-sql-commands.html "36.14. Embedded SQL Commands")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") | 36.14. Embedded SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ecpg-sql-connect.html "CONNECT") |
-
-***
-
 ## ALLOCATE DESCRIPTOR
 
 ALLOCATE DESCRIPTOR — allocate an SQL descriptor area
@@ -43,10 +35,3 @@ EXEC SQL ALLOCATE DESCRIPTOR mydesc;
 ## See Also
 
 [DEALLOCATE DESCRIPTOR](ecpg-sql-deallocate-descriptor.html "DEALLOCATE DESCRIPTOR"), [GET DESCRIPTOR](ecpg-sql-get-descriptor.html "GET DESCRIPTOR"), [SET DESCRIPTOR](ecpg-sql-set-descriptor.html "SET DESCRIPTOR")
-
-***
-
-|                                                                |                                                             |                                          |
-| :------------------------------------------------------------- | :---------------------------------------------------------: | ---------------------------------------: |
-| [Prev](ecpg-sql-commands.html "36.14. Embedded SQL Commands")  | [Up](ecpg-sql-commands.html "36.14. Embedded SQL Commands") |  [Next](ecpg-sql-connect.html "CONNECT") |
-| 36.14. Embedded SQL Commands                                   |    [Home](index.html "PostgreSQL 17devel Documentation")    |                                  CONNECT |

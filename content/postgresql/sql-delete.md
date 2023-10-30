@@ -1,11 +1,3 @@
-
-
-|                DELETE               |                                        |              |                                                       |                                     |
-| :---------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-declare.html "DECLARE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-discard.html "DISCARD") |
-
-***
-
 ## DELETE
 
 DELETE — delete rows of a table
@@ -139,10 +131,3 @@ This command conforms to the SQL standard, except that the `USING` and `RETURNIN
 ## See Also
 
 [TRUNCATE](sql-truncate.html "TRUNCATE")
-
-***
-
-|                                     |                                                       |                                     |
-| :---------------------------------- | :---------------------------------------------------: | ----------------------------------: |
-| [Prev](sql-declare.html "DECLARE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-discard.html "DISCARD") |
-| DECLARE                             | [Home](index.html "PostgreSQL 17devel Documentation") |                             DISCARD |

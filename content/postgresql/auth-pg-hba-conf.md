@@ -1,11 +1,3 @@
-
-
-|                       21.1. The `pg_hba.conf` File                      |                                                                      |                                   |                                                       |                                                         |
-| :---------------------------------------------------------------------: | :------------------------------------------------------------------- | :-------------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](client-authentication.html "Chapter 21. Client Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") | Chapter 21. Client Authentication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](auth-username-maps.html "21.2. User Name Maps") |
-
-***
-
 ## 21.1. The `pg_hba.conf` File [#](#AUTH-PG-HBA-CONF)
 
 Client authentication is controlled by a configuration file, which traditionally is named `pg_hba.conf` and is stored in the database cluster's data directory. (HBA stands for host-based authentication.) A default `pg_hba.conf` file is installed when the data directory is initialized by [initdb](app-initdb.html "initdb"). It is possible to place the authentication configuration file elsewhere, however; see the [hba\_file](runtime-config-file-locations.html#GUC-HBA-FILE) configuration parameter.
@@ -329,10 +321,3 @@ local   all             @admins,+support                        md5
 # The database column can also use lists and file names:
 local   db1,db2,@demodbs  all                                   md5
 ```
-
-***
-
-|                                                                         |                                                                      |                                                         |
-| :---------------------------------------------------------------------- | :------------------------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](client-authentication.html "Chapter 21. Client Authentication")  | [Up](client-authentication.html "Chapter 21. Client Authentication") |  [Next](auth-username-maps.html "21.2. User Name Maps") |
-| Chapter 21. Client Authentication                                       |         [Home](index.html "PostgreSQL 17devel Documentation")        |                                    21.2. User Name Maps |

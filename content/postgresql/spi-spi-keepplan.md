@@ -1,11 +1,3 @@
-
-
-|                     SPI\_keepplan                     |                                                      |                           |                                                       |                                               |
-| :---------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](spi-spi-cursor-close.html "SPI_cursor_close")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-saveplan.html "SPI_saveplan") |
-
-***
-
 ## SPI\_keepplan
 
 SPI\_keepplan — save a prepared statement
@@ -34,10 +26,3 @@ int SPI_keepplan(SPIPlanPtr plan)
 ## Notes
 
 The passed-in statement is relocated to permanent storage by means of pointer adjustment (no data copying is required). If you later wish to delete it, use `SPI_freeplan` on it.
-
-***
-
-|                                                       |                                                       |                                               |
-| :---------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](spi-spi-cursor-close.html "SPI_cursor_close")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-saveplan.html "SPI_saveplan") |
-| SPI\_cursor\_close                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                 SPI\_saveplan |

@@ -1,11 +1,3 @@
-
-
-|                      pg\_ctl                     |                                                              |                                |                                                       |                                            |
-| :----------------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](app-pgcontroldata.html "pg_controldata")  | [Up](reference-server.html "PostgreSQL Server Applications") | PostgreSQL Server Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pgresetwal.html "pg_resetwal") |
-
-***
-
 ## pg\_ctl
 
 pg\_ctl — initialize, start, stop, or control a PostgreSQL server
@@ -247,10 +239,3 @@ The second line is the command that would be invoked in restart mode.
 ## See Also
 
 [initdb](app-initdb.html "initdb"), [postgres](app-postgres.html "postgres")
-
-***
-
-|                                                  |                                                              |                                            |
-| :----------------------------------------------- | :----------------------------------------------------------: | -----------------------------------------: |
-| [Prev](app-pgcontroldata.html "pg_controldata")  | [Up](reference-server.html "PostgreSQL Server Applications") |  [Next](app-pgresetwal.html "pg_resetwal") |
-| pg\_controldata                                  |     [Home](index.html "PostgreSQL 17devel Documentation")    |                               pg\_resetwal |

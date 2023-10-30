@@ -1,11 +1,3 @@
-
-
-|                               dblink\_connect                               |                                                                          |                                                      |                                                       |                                                           |
-| :-------------------------------------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](dblink.html "F.12. dblink — connect to other PostgreSQL databases")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-dblink-connect-u.html "dblink_connect_u") |
-
-***
-
 ## dblink\_connect
 
 dblink\_connect — opens a persistent connection to a remote database
@@ -107,10 +99,3 @@ DROP USER MAPPING FOR regress_dblink_user SERVER fdtest;
 DROP USER regress_dblink_user;
 DROP SERVER fdtest;
 ```
-
-***
-
-|                                                                             |                                                                          |                                                           |
-| :-------------------------------------------------------------------------- | :----------------------------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](dblink.html "F.12. dblink — connect to other PostgreSQL databases")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](contrib-dblink-connect-u.html "dblink_connect_u") |
-| F.12. dblink — connect to other PostgreSQL databases                        |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                        dblink\_connect\_u |

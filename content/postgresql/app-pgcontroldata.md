@@ -1,11 +1,3 @@
-
-
-|                pg\_controldata               |                                                              |                                |                                                       |                                   |
-| :------------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](app-pgchecksums.html "pg_checksums")  | [Up](reference-server.html "PostgreSQL Server Applications") | PostgreSQL Server Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pg-ctl.html "pg_ctl") |
-
-***
-
 ## pg\_controldata
 
 pg\_controldata — display control information of a PostgreSQL database cluster
@@ -29,10 +21,3 @@ This utility can only be run by the user who initialized the cluster because it 
 * `PG_COLOR`
 
     Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
-
-***
-
-|                                              |                                                              |                                   |
-| :------------------------------------------- | :----------------------------------------------------------: | --------------------------------: |
-| [Prev](app-pgchecksums.html "pg_checksums")  | [Up](reference-server.html "PostgreSQL Server Applications") |  [Next](app-pg-ctl.html "pg_ctl") |
-| pg\_checksums                                |     [Home](index.html "PostgreSQL 17devel Documentation")    |                           pg\_ctl |

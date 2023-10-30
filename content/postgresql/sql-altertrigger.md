@@ -1,11 +1,3 @@
-
-
-|                          ALTER TRIGGER                         |                                        |              |                                                       |                                          |
-| :------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-altertstemplate.html "ALTER TEXT SEARCH TEMPLATE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altertype.html "ALTER TYPE") |
-
-***
-
 ## ALTER TRIGGER
 
 ALTER TRIGGER — change the definition of a trigger
@@ -73,10 +65,3 @@ ALTER TRIGGER emp_stamp ON emp DEPENDS ON EXTENSION emplib;
 ## See Also
 
 [ALTER TABLE](sql-altertable.html "ALTER TABLE")
-
-***
-
-|                                                                |                                                       |                                          |
-| :------------------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-altertstemplate.html "ALTER TEXT SEARCH TEMPLATE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altertype.html "ALTER TYPE") |
-| ALTER TEXT SEARCH TEMPLATE                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                               ALTER TYPE |

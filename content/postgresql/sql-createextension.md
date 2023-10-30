@@ -1,11 +1,3 @@
-
-
-|                       CREATE EXTENSION                      |                                        |              |                                                       |                                                                          |
-| :---------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](sql-createeventtrigger.html "CREATE EVENT TRIGGER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createforeigndatawrapper.html "CREATE FOREIGN DATA WRAPPER") |
-
-***
-
 ## CREATE EXTENSION
 
 CREATE EXTENSION — install an extension
@@ -94,10 +86,3 @@ CREATE EXTENSION hstore;
 ## See Also
 
 [ALTER EXTENSION](sql-alterextension.html "ALTER EXTENSION"), [DROP EXTENSION](sql-dropextension.html "DROP EXTENSION")
-
-***
-
-|                                                             |                                                       |                                                                          |
-| :---------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](sql-createeventtrigger.html "CREATE EVENT TRIGGER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createforeigndatawrapper.html "CREATE FOREIGN DATA WRAPPER") |
-| CREATE EVENT TRIGGER                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                              CREATE FOREIGN DATA WRAPPER |

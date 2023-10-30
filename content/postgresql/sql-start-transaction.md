@@ -1,11 +1,3 @@
-
-
-|       START TRANSACTION       |                                        |              |                                                       |                                       |
-| :---------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------: |
-| [Prev](sql-show.html "SHOW")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-truncate.html "TRUNCATE") |
-
-***
-
 ## START TRANSACTION
 
 START TRANSACTION — start a transaction block
@@ -44,10 +36,3 @@ See also the compatibility section of [SET TRANSACTION](sql-set-transaction.html
 ## See Also
 
 [BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [ROLLBACK](sql-rollback.html "ROLLBACK"), [SAVEPOINT](sql-savepoint.html "SAVEPOINT"), [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION")
-
-***
-
-|                               |                                                       |                                       |
-| :---------------------------- | :---------------------------------------------------: | ------------------------------------: |
-| [Prev](sql-show.html "SHOW")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-truncate.html "TRUNCATE") |
-| SHOW                          | [Home](index.html "PostgreSQL 17devel Documentation") |                              TRUNCATE |

@@ -1,11 +1,3 @@
-
-
-|                       ALTER SYSTEM                       |                                        |              |                                                       |                                            |
-| :------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-altersubscription.html "ALTER SUBSCRIPTION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altertable.html "ALTER TABLE") |
-
-***
-
 ## ALTER SYSTEM
 
 ALTER SYSTEM — change a server configuration parameter
@@ -67,10 +59,3 @@ The `ALTER SYSTEM` statement is a PostgreSQL extension.
 ## See Also
 
 [SET](sql-set.html "SET"), [SHOW](sql-show.html "SHOW")
-
-***
-
-|                                                          |                                                       |                                            |
-| :------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-altersubscription.html "ALTER SUBSCRIPTION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altertable.html "ALTER TABLE") |
-| ALTER SUBSCRIPTION                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                ALTER TABLE |

@@ -1,11 +1,3 @@
-
-
-|                             SET TRANSACTION                             |                                        |              |                                                       |                               |
-| :---------------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------: |
-| [Prev](sql-set-session-authorization.html "SET SESSION AUTHORIZATION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-show.html "SHOW") |
-
-***
-
 ## SET TRANSACTION
 
 SET TRANSACTION — set the characteristics of the current transaction
@@ -96,10 +88,3 @@ These commands are defined in the SQL standard, except for the `DEFERRABLE` tran
 In the SQL standard, there is one other transaction characteristic that can be set with these commands: the size of the diagnostics area. This concept is specific to embedded SQL, and therefore is not implemented in the PostgreSQL server.
 
 The SQL standard requires commas between successive *`transaction_modes`*, but for historical reasons PostgreSQL allows the commas to be omitted.
-
-***
-
-|                                                                         |                                                       |                               |
-| :---------------------------------------------------------------------- | :---------------------------------------------------: | ----------------------------: |
-| [Prev](sql-set-session-authorization.html "SET SESSION AUTHORIZATION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-show.html "SHOW") |
-| SET SESSION AUTHORIZATION                                               | [Home](index.html "PostgreSQL 17devel Documentation") |                          SHOW |

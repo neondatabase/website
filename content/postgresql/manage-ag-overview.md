@@ -1,11 +1,3 @@
-
-
-|                           23.1. Overview                          |                                                                |                                |                                                       |                                                              |
-| :---------------------------------------------------------------: | :------------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](managing-databases.html "Chapter 23. Managing Databases")  | [Up](managing-databases.html "Chapter 23. Managing Databases") | Chapter 23. Managing Databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](manage-ag-createdb.html "23.2. Creating a Database") |
-
-***
-
 ## 23.1. Overview [#](#MANAGE-AG-OVERVIEW)
 
 A small number of objects, like role, database, and tablespace names, are defined at the cluster level and stored in the `pg_global` tablespace. Inside the cluster are multiple databases, which are isolated from each other but can access cluster-level objects. Inside each database are multiple schemas, which contain objects like tables and functions. So the full hierarchy is: cluster, database, schema, table (or some other kind of object, such as a function).
@@ -28,10 +20,3 @@ The [psql](app-psql.html "psql") program's `\l` meta-command and `-l` command-li
 ### Note
 
 The SQL standard calls databases “catalogs”, but there is no difference in practice.
-
-***
-
-|                                                                   |                                                                |                                                              |
-| :---------------------------------------------------------------- | :------------------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](managing-databases.html "Chapter 23. Managing Databases")  | [Up](managing-databases.html "Chapter 23. Managing Databases") |  [Next](manage-ag-createdb.html "23.2. Creating a Database") |
-| Chapter 23. Managing Databases                                    |      [Home](index.html "PostgreSQL 17devel Documentation")     |                                    23.2. Creating a Database |

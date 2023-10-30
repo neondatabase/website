@@ -1,11 +1,3 @@
-
-
-|             20.8. Error Reporting and Logging             |                                                              |                                  |                                                       |                                                                     |
-| :-------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](runtime-config-query.html "20.7. Query Planning")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-statistics.html "20.9. Run-time Statistics") |
-
-***
-
 ## 20.8. Error Reporting and Logging [#](#RUNTIME-CONFIG-LOGGING)
 
   * *   [20.8.1. Where to Log](runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHERE)
@@ -463,10 +455,3 @@ These settings control how process titles of server processes are modified. Proc
 * `update_process_title` (`boolean`) [#](#GUC-UPDATE-PROCESS-TITLE)
 
     Enables updating of the process title every time a new SQL command is received by the server. This setting defaults to `on` on most platforms, but it defaults to `off` on Windows due to that platform's larger overhead for updating the process title. Only superusers and users with the appropriate `SET` privilege can change this setting.
-
-***
-
-|                                                           |                                                              |                                                                     |
-| :-------------------------------------------------------- | :----------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](runtime-config-query.html "20.7. Query Planning")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-statistics.html "20.9. Run-time Statistics") |
-| 20.7. Query Planning                                      |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                           20.9. Run-time Statistics |

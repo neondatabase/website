@@ -1,11 +1,3 @@
-
-
-|                8.3. Character Types                |                                             |                       |                                                       |                                                        |
-| :------------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](datatype-money.html "8.2. Monetary Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-binary.html "8.4. Binary Data Types") |
-
-***
-
 ## 8.3. Character Types [#](#DATATYPE-CHARACTER)
 
 **Table 8.4. Character Types**
@@ -82,10 +74,3 @@ There are two other fixed-length character types in PostgreSQL, shown in [Table�
 | -------- | ------------ | ------------------------------ |
 | `"char"` | 1 byte       | single-byte internal type      |
 | `name`   | 64 bytes     | internal type for object names |
-
-***
-
-|                                                    |                                                       |                                                        |
-| :------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](datatype-money.html "8.2. Monetary Types")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](datatype-binary.html "8.4. Binary Data Types") |
-| 8.2. Monetary Types                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                 8.4. Binary Data Types |

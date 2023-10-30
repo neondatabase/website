@@ -1,11 +1,3 @@
-
-
-|                    DROP DATABASE                   |                                        |              |                                                       |                                            |
-| :------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-dropconversion.html "DROP CONVERSION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropdomain.html "DROP DOMAIN") |
-
-***
-
 ## DROP DATABASE
 
 DROP DATABASE — remove a database
@@ -56,10 +48,3 @@ There is no `DROP DATABASE` statement in the SQL standard.
 ## See Also
 
 [CREATE DATABASE](sql-createdatabase.html "CREATE DATABASE")
-
-***
-
-|                                                    |                                                       |                                            |
-| :------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------: |
-| [Prev](sql-dropconversion.html "DROP CONVERSION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropdomain.html "DROP DOMAIN") |
-| DROP CONVERSION                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                DROP DOMAIN |

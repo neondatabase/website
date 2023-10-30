@@ -1,11 +1,3 @@
-
-
-|              REVOKE             |                                        |              |                                                       |                                       |
-| :-----------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------: |
-| [Prev](sql-reset.html "RESET")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-rollback.html "ROLLBACK") |
-
-***
-
 ## REVOKE
 
 REVOKE — remove access privileges
@@ -196,10 +188,3 @@ The compatibility notes of the [`GRANT`](sql-grant.html "GRANT") command apply a
 ## See Also
 
 [GRANT](sql-grant.html "GRANT"), [ALTER DEFAULT PRIVILEGES](sql-alterdefaultprivileges.html "ALTER DEFAULT PRIVILEGES")
-
-***
-
-|                                 |                                                       |                                       |
-| :------------------------------ | :---------------------------------------------------: | ------------------------------------: |
-| [Prev](sql-reset.html "RESET")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-rollback.html "ROLLBACK") |
-| RESET                           | [Home](index.html "PostgreSQL 17devel Documentation") |                              ROLLBACK |

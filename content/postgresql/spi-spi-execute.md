@@ -1,11 +1,3 @@
-
-
-|                SPI\_execute               |                                                      |                           |                                                       |                                       |
-| :---------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ------------------------------------: |
-| [Prev](spi-spi-finish.html "SPI_finish")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-exec.html "SPI_exec") |
-
-***
-
 ## SPI\_execute
 
 SPI\_execute — execute a command
@@ -166,10 +158,3 @@ On error, one of the following negative values is returned:
 ## Notes
 
 All SPI query-execution functions set both `SPI_processed` and `SPI_tuptable` (just the pointer, not the contents of the structure). Save these two global variables into local C function variables if you need to access the result table of `SPI_execute` or another query-execution function across later calls.
-
-***
-
-|                                           |                                                       |                                       |
-| :---------------------------------------- | :---------------------------------------------------: | ------------------------------------: |
-| [Prev](spi-spi-finish.html "SPI_finish")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-exec.html "SPI_exec") |
-| SPI\_finish                               | [Home](index.html "PostgreSQL 17devel Documentation") |                             SPI\_exec |

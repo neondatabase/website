@@ -1,11 +1,3 @@
-
-
-|                      9.27. System Administration Functions                      |                                                           |                                    |                                                       |                                                           |
-| :-----------------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](functions-info.html "9.26. System Information Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-trigger.html "9.28. Trigger Functions") |
-
-***
-
 ## 9.27. System Administration Functions [#](#FUNCTIONS-ADMIN)
 
   * *   [9.27.1. Configuration Settings Functions](functions-admin.html#FUNCTIONS-ADMIN-SET)
@@ -354,10 +346,3 @@ All these functions are intended to be used to lock application-defined resource
 | `pg_try_advisory_lock_shared` ( *`key`* `bigint` ) → `boolean``pg_try_advisory_lock_shared` ( *`key1`* `integer`, *`key2`* `integer` ) → `boolean`Obtains a shared session-level advisory lock if available. This will either obtain the lock immediately and return `true`, or return `false` without waiting if the lock cannot be acquired immediately.                           |
 | `pg_try_advisory_xact_lock` ( *`key`* `bigint` ) → `boolean``pg_try_advisory_xact_lock` ( *`key1`* `integer`, *`key2`* `integer` ) → `boolean`Obtains an exclusive transaction-level advisory lock if available. This will either obtain the lock immediately and return `true`, or return `false` without waiting if the lock cannot be acquired immediately.                       |
 | `pg_try_advisory_xact_lock_shared` ( *`key`* `bigint` ) → `boolean``pg_try_advisory_xact_lock_shared` ( *`key1`* `integer`, *`key2`* `integer` ) → `boolean`Obtains a shared transaction-level advisory lock if available. This will either obtain the lock immediately and return `true`, or return `false` without waiting if the lock cannot be acquired immediately.             |
-
-***
-
-|                                                                                 |                                                           |                                                           |
-| :------------------------------------------------------------------------------ | :-------------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](functions-info.html "9.26. System Information Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-trigger.html "9.28. Trigger Functions") |
-| 9.26. System Information Functions and Operators                                |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                   9.28. Trigger Functions |

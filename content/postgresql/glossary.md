@@ -1,11 +1,3 @@
-
-
-|              Appendix M. Glossary             |                                               |                       |                                                       |                                                 |
-| :-------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](acronyms.html "Appendix L. Acronyms")  | [Up](appendixes.html "Part VIII. Appendixes") | Part VIII. Appendixes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](color.html "Appendix N. Color Support") |
-
-***
-
 ## Appendix M. Glossary
 
 This is a list of terms and their meaning in the context of PostgreSQL and relational database systems in general.
@@ -756,10 +748,3 @@ This is a list of terms and their meaning in the context of PostgreSQL and relat
 * Write-ahead log
 
     The journal that keeps track of the changes in the [**](glossary.html#GLOSSARY-DB-CLUSTER)*[database cluster](glossary.html#GLOSSARY-DB-CLUSTER "Database cluster")* as user- and system-invoked operations take place. It comprises many individual [**](glossary.html#GLOSSARY-WAL-RECORD)*[WAL records](glossary.html#GLOSSARY-WAL-RECORD "WAL record")* written sequentially to [**](glossary.html#GLOSSARY-WAL-FILE)*[WAL files](glossary.html#GLOSSARY-WAL-FILE "WAL file")*.
-
-***
-
-|                                               |                                                       |                                                 |
-| :-------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------: |
-| [Prev](acronyms.html "Appendix L. Acronyms")  |     [Up](appendixes.html "Part VIII. Appendixes")     |  [Next](color.html "Appendix N. Color Support") |
-| Appendix L. Acronyms                          | [Home](index.html "PostgreSQL 17devel Documentation") |                       Appendix N. Color Support |

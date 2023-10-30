@@ -1,11 +1,3 @@
-
-
-|                     5.12. Foreign Data                    |                                             |                            |                                                       |                                                         |
-| :-------------------------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](ddl-partitioning.html "5.11. Table Partitioning")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-others.html "5.13. Other Database Objects") |
-
-***
-
 ## 5.12. Foreign Data [#](#DDL-FOREIGN-DATA)
 
 PostgreSQL implements portions of the SQL/MED specification, allowing you to access data that resides outside PostgreSQL using regular SQL queries. Such data is referred to as *foreign data*. (Note that this usage is not to be confused with foreign keys, which are a type of constraint within the database.)
@@ -17,10 +9,3 @@ To access foreign data, you need to create a *foreign server* object, which defi
 Accessing remote data may require authenticating to the external data source. This information can be provided by a *user mapping*, which can provide additional data such as user names and passwords based on the current PostgreSQL role.
 
 For additional information, see [CREATE FOREIGN DATA WRAPPER](sql-createforeigndatawrapper.html "CREATE FOREIGN DATA WRAPPER"), [CREATE SERVER](sql-createserver.html "CREATE SERVER"), [CREATE USER MAPPING](sql-createusermapping.html "CREATE USER MAPPING"), [CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE"), and [IMPORT FOREIGN SCHEMA](sql-importforeignschema.html "IMPORT FOREIGN SCHEMA").
-
-***
-
-|                                                           |                                                       |                                                         |
-| :-------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](ddl-partitioning.html "5.11. Table Partitioning")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](ddl-others.html "5.13. Other Database Objects") |
-| 5.11. Table Partitioning                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                            5.13. Other Database Objects |

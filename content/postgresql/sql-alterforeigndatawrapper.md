@@ -1,11 +1,3 @@
-
-
-|             ALTER FOREIGN DATA WRAPPER             |                                        |              |                                                       |                                                           |
-| :------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](sql-alterextension.html "ALTER EXTENSION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterforeigntable.html "ALTER FOREIGN TABLE") |
-
-***
-
 ## ALTER FOREIGN DATA WRAPPER
 
 ALTER FOREIGN DATA WRAPPER — change the definition of a foreign-data wrapper
@@ -89,10 +81,3 @@ ALTER FOREIGN DATA WRAPPER dbi VALIDATOR bob.myvalidator;
 ## See Also
 
 [CREATE FOREIGN DATA WRAPPER](sql-createforeigndatawrapper.html "CREATE FOREIGN DATA WRAPPER"), [DROP FOREIGN DATA WRAPPER](sql-dropforeigndatawrapper.html "DROP FOREIGN DATA WRAPPER")
-
-***
-
-|                                                    |                                                       |                                                           |
-| :------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](sql-alterextension.html "ALTER EXTENSION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterforeigntable.html "ALTER FOREIGN TABLE") |
-| ALTER EXTENSION                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                       ALTER FOREIGN TABLE |

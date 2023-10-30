@@ -1,11 +1,3 @@
-
-
-|                      SPI\_freeplan                      |                                                 |                         |                                                       |                                                              |
-| :-----------------------------------------------------: | :---------------------------------------------- | :---------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](spi-spi-freetupletable.html "SPI_freetuptable")  | [Up](spi-memory.html "47.3. Memory Management") | 47.3. Memory Management | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-transaction.html "47.4. Transaction Management") |
-
-***
-
 ## SPI\_freeplan
 
 SPI\_freeplan — free a previously saved prepared statement
@@ -30,10 +22,3 @@ int SPI_freeplan(SPIPlanPtr plan)
 ## Return Value
 
 0 on success; `SPI_ERROR_ARGUMENT` if *`plan`* is `NULL` or invalid
-
-***
-
-|                                                         |                                                       |                                                              |
-| :------------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](spi-spi-freetupletable.html "SPI_freetuptable")  |    [Up](spi-memory.html "47.3. Memory Management")    |  [Next](spi-transaction.html "47.4. Transaction Management") |
-| SPI\_freetuptable                                       | [Home](index.html "PostgreSQL 17devel Documentation") |                                 47.4. Transaction Management |

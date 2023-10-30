@@ -1,11 +1,3 @@
-
-
-|                    53.15. `pg_database`                    |                                                   |                             |                                                       |                                                                      |
-| :--------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](catalog-pg-conversion.html "53.14. pg_conversion")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-db-role-setting.html "53.16. pg_db_role_setting") |
-
-***
-
 ## 53.15. `pg_database` [#](#CATALOG-PG-DATABASE)
 
 The catalog `pg_database` stores information about the available databases. Databases are created with the [`CREATE DATABASE`](sql-createdatabase.html "CREATE DATABASE") command. Consult [Chapter 23](managing-databases.html "Chapter 23. Managing Databases") for details about the meaning of some of the parameters.
@@ -34,10 +26,3 @@ Unlike most system catalogs, `pg_database` is shared across all databases of a c
 | `daticurules` `text`ICU collation rules for this database                                                                                                                                                                                                                                                                                                                                                 |
 | `datcollversion` `text`Provider-specific version of the collation. This is recorded when the database is created and then checked when it is used, to detect changes in the collation definition that could lead to data corruption.                                                                                                                                                                      |
 | `datacl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv.html "5.7. Privileges") for details                                                                                                                                                                                                                                                                                                     |
-
-***
-
-|                                                            |                                                       |                                                                      |
-| :--------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](catalog-pg-conversion.html "53.14. pg_conversion")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-db-role-setting.html "53.16. pg_db_role_setting") |
-| 53.14. `pg_conversion`                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                          53.16. `pg_db_role_setting` |

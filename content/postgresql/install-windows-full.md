@@ -1,11 +1,3 @@
-
-
-|              18.1. Building with Visual C++ or the Microsoft Windows SDK             |                                                                                   |                                                      |                                                       |                                                                |
-| :----------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](install-windows.html "Chapter 18. Installation from Source Code on Windows")  | [Up](install-windows.html "Chapter 18. Installation from Source Code on Windows") | Chapter 18. Installation from Source Code on Windows | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime.html "Chapter 19. Server Setup and Operation") |
-
-***
-
 ## 18.1. Building with Visual C++ or the Microsoft Windows SDK [#](#INSTALL-WINDOWS-FULL)
 
   * *   [18.1.1. Requirements](install-windows-full.html#INSTALL-WINDOWS-FULL-REQUIREMENTS)
@@ -265,10 +257,3 @@ Some of the TAP tests depend on a set of external commands that would optionally
 * `ZSTD`
 
     Path to a zstd command. The default is `zstd`, which will search for a command by that name in the configured `PATH`.
-
-***
-
-|                                                                                      |                                                                                   |                                                                |
-| :----------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------: | -------------------------------------------------------------: |
-| [Prev](install-windows.html "Chapter 18. Installation from Source Code on Windows")  | [Up](install-windows.html "Chapter 18. Installation from Source Code on Windows") |  [Next](runtime.html "Chapter 19. Server Setup and Operation") |
-| Chapter 18. Installation from Source Code on Windows                                 |               [Home](index.html "PostgreSQL 17devel Documentation")               |                         Chapter 19. Server Setup and Operation |

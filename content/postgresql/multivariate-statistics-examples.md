@@ -1,11 +1,3 @@
-
-
-|                 76.2. Multivariate Statistics Examples                |                                                                                |                                             |                                                       |                                                                              |
-| :-------------------------------------------------------------------: | :----------------------------------------------------------------------------- | :-----------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](row-estimation-examples.html "76.1. Row Estimation Examples")  | [Up](planner-stats-details.html "Chapter 76. How the Planner Uses Statistics") | Chapter 76. How the Planner Uses Statistics | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](planner-stats-security.html "76.3. Planner Statistics and Security") |
-
-***
-
 ## 76.2. Multivariate Statistics Examples [#](#MULTIVARIATE-STATISTICS-EXAMPLES)
 
   * *   [76.2.1. Functional Dependencies](multivariate-statistics-examples.html#FUNCTIONAL-DEPENDENCIES)
@@ -187,10 +179,3 @@ EXPLAIN (ANALYZE, TIMING OFF) SELECT * FROM t WHERE a <= 49 AND b > 49;
    Filter: ((a <= 49) AND (b > 49))
    Rows Removed by Filter: 10000
 ```
-
-***
-
-|                                                                       |                                                                                |                                                                              |
-| :-------------------------------------------------------------------- | :----------------------------------------------------------------------------: | ---------------------------------------------------------------------------: |
-| [Prev](row-estimation-examples.html "76.1. Row Estimation Examples")  | [Up](planner-stats-details.html "Chapter 76. How the Planner Uses Statistics") |  [Next](planner-stats-security.html "76.3. Planner Statistics and Security") |
-| 76.1. Row Estimation Examples                                         |              [Home](index.html "PostgreSQL 17devel Documentation")             |                                        76.3. Planner Statistics and Security |

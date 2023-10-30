@@ -1,11 +1,3 @@
-
-
-|                         SPI\_cursor\_close                        |                                                      |                           |                                                       |                                               |
-| :---------------------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](spi-spi-scroll-cursor-move.html "SPI_scroll_cursor_move")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-keepplan.html "SPI_keepplan") |
-
-***
-
 ## SPI\_cursor\_close
 
 SPI\_cursor\_close — close a cursor
@@ -28,10 +20,3 @@ All open cursors are closed automatically at the end of a transaction. `SPI_curs
 * `Portal portal`
 
     portal containing the cursor
-
-***
-
-|                                                                   |                                                       |                                               |
-| :---------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](spi-spi-scroll-cursor-move.html "SPI_scroll_cursor_move")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-keepplan.html "SPI_keepplan") |
-| SPI\_scroll\_cursor\_move                                         | [Home](index.html "PostgreSQL 17devel Documentation") |                                 SPI\_keepplan |

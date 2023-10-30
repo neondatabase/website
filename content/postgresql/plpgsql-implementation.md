@@ -1,11 +1,3 @@
-
-
-|              43.11. PL/pgSQL under the Hood              |                                                                     |                                                |                                                       |                                                                                 |
-| :------------------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------: |
-| [Prev](plpgsql-trigger.html "43.10. Trigger Functions")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-development-tips.html "43.12. Tips for Developing in PL/pgSQL") |
-
-***
-
 ## 43.11. PL/pgSQL under the Hood [#](#PLPGSQL-IMPLEMENTATION)
 
   * *   [43.11.1. Variable Substitution](plpgsql-implementation.html#PLPGSQL-VAR-SUBST)
@@ -144,10 +136,3 @@ $$ LANGUAGE plpgsql;
 In the case of `logfunc1`, the PostgreSQL main parser knows when analyzing the `INSERT` that the string `'now'` should be interpreted as `timestamp`, because the target column of `logtable` is of that type. Thus, `'now'` will be converted to a `timestamp` constant when the `INSERT` is analyzed, and then used in all invocations of `logfunc1` during the lifetime of the session. Needless to say, this isn't what the programmer wanted. A better idea is to use the `now()` or `current_timestamp` function.
 
 In the case of `logfunc2`, the PostgreSQL main parser does not know what type `'now'` should become and therefore it returns a data value of type `text` containing the string `now`. During the ensuing assignment to the local variable `curtime`, the PL/pgSQL interpreter casts this string to the `timestamp` type by calling the `textout` and `timestamp_in` functions for the conversion. So, the computed time stamp is updated on each execution as the programmer expects. Even though this happens to work as expected, it's not terribly efficient, so use of the `now()` function would still be a better idea.
-
-***
-
-|                                                          |                                                                     |                                                                                 |
-| :------------------------------------------------------- | :-----------------------------------------------------------------: | ------------------------------------------------------------------------------: |
-| [Prev](plpgsql-trigger.html "43.10. Trigger Functions")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](plpgsql-development-tips.html "43.12. Tips for Developing in PL/pgSQL") |
-| 43.10. Trigger Functions                                 |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                          43.12. Tips for Developing in PL/pgSQL |

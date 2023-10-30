@@ -1,11 +1,3 @@
-
-
-|                      DROP EXTENSION                     |                                        |              |                                                       |                                                                      |
-| :-----------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](sql-dropeventtrigger.html "DROP EVENT TRIGGER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropforeigndatawrapper.html "DROP FOREIGN DATA WRAPPER") |
-
-***
-
 ## DROP EXTENSION
 
 DROP EXTENSION — remove an extension
@@ -59,10 +51,3 @@ This command will fail if any of `hstore`'s objects are in use in the database, 
 ## See Also
 
 [CREATE EXTENSION](sql-createextension.html "CREATE EXTENSION"), [ALTER EXTENSION](sql-alterextension.html "ALTER EXTENSION")
-
-***
-
-|                                                         |                                                       |                                                                      |
-| :------------------------------------------------------ | :---------------------------------------------------: | -------------------------------------------------------------------: |
-| [Prev](sql-dropeventtrigger.html "DROP EVENT TRIGGER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropforeigndatawrapper.html "DROP FOREIGN DATA WRAPPER") |
-| DROP EVENT TRIGGER                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                            DROP FOREIGN DATA WRAPPER |

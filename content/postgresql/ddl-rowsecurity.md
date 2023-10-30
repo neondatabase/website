@@ -1,11 +1,3 @@
-
-
-|        5.8. Row Security Policies        |                                             |                            |                                                       |                                          |
-| :--------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](ddl-priv.html "5.7. Privileges")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-schemas.html "5.9. Schemas") |
-
-***
-
 ## 5.8. Row Security Policies [#](#DDL-ROWSECURITY)
 
 In addition to the SQL-standard [privilege system](ddl-priv.html "5.7. Privileges") available through [GRANT](sql-grant.html "GRANT"), tables can have *row security policies* that restrict, on a per-user basis, which rows can be returned by normal queries or inserted, updated, or deleted by data modification commands. This feature is also known as *Row-Level Security*. By default, tables do not have any policies, so that if a user has access privileges to a table according to the SQL privilege system, all rows within it are equally available for querying or updating.
@@ -278,10 +270,3 @@ and her transaction is in `READ COMMITTED` mode, it is possible for her to see �
 There are several ways around this problem. One simple answer is to use `SELECT ... FOR SHARE` in sub-`SELECT`s in row security policies. However, that requires granting `UPDATE` privilege on the referenced table (here `users`) to the affected users, which might be undesirable. (But another row security policy could be applied to prevent them from actually exercising that privilege; or the sub-`SELECT` could be embedded into a security definer function.) Also, heavy concurrent use of row share locks on the referenced table could pose a performance problem, especially if updates of it are frequent. Another solution, practical if updates of the referenced table are infrequent, is to take an `ACCESS EXCLUSIVE` lock on the referenced table when updating it, so that no concurrent transactions could be examining old row values. Or one could just wait for all concurrent transactions to end after committing an update of the referenced table and before making changes that rely on the new security situation.
 
 For additional details see [CREATE POLICY](sql-createpolicy.html "CREATE POLICY") and [ALTER TABLE](sql-altertable.html "ALTER TABLE").
-
-***
-
-|                                          |                                                       |                                          |
-| :--------------------------------------- | :---------------------------------------------------: | ---------------------------------------: |
-| [Prev](ddl-priv.html "5.7. Privileges")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](ddl-schemas.html "5.9. Schemas") |
-| 5.7. Privileges                          | [Home](index.html "PostgreSQL 17devel Documentation") |                             5.9. Schemas |

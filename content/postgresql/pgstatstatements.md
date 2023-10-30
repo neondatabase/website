@@ -1,11 +1,3 @@
-
-
-|      F.31. pg\_stat\_statements — track statistics of SQL planning and execution     |                                                                             |                                                        |                                                       |                                                                               |
-| :----------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](pgrowlocks.html "F.30. pgrowlocks — show a table's row locking information")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgstattuple.html "F.32. pgstattuple — obtain tuple-level statistics") |
-
-***
-
 ## F.31. pg\_stat\_statements — track statistics of SQL planning and execution [#](#PGSTATSTATEMENTS)
 
   * *   [F.31.1. The `pg_stat_statements` View](pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
@@ -268,10 +260,3 @@ hit_percent     |
 ### F.31.6. Authors [#](#PGSTATSTATEMENTS-AUTHORS)
 
 Takahiro Itagaki `<itagaki.takahiro@oss.ntt.co.jp>`. Query normalization added by Peter Geoghegan `<peter@2ndquadrant.com>`.
-
-***
-
-|                                                                                      |                                                                             |                                                                               |
-| :----------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ----------------------------------------------------------------------------: |
-| [Prev](pgrowlocks.html "F.30. pgrowlocks — show a table's row locking information")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](pgstattuple.html "F.32. pgstattuple — obtain tuple-level statistics") |
-| F.30. pgrowlocks — show a table's row locking information                            |            [Home](index.html "PostgreSQL 17devel Documentation")            |                             F.32. pgstattuple — obtain tuple-level statistics |

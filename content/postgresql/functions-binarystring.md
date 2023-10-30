@@ -1,11 +1,3 @@
-
-
-|              9.5. Binary String Functions and Operators              |                                                           |                                    |                                                       |                                                                             |
-| :------------------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](functions-string.html "9.4. String Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-bitstring.html "9.6. Bit String Functions and Operators") |
-
-***
-
 ## 9.5. Binary String Functions and Operators [#](#FUNCTIONS-BINARYSTRING)
 
 This section describes functions and operators for examining and manipulating binary strings, that is values of type `bytea`. Many of these are equivalent, in purpose and syntax, to the text-string functions described in the previous section.
@@ -85,10 +77,3 @@ The `encode` and `decode` functions support the following textual formats:
     The `hex` format represents each 4 bits of data as one hexadecimal digit, `0` through `f`, writing the higher-order digit of each byte first. The `encode` function outputs the `a`-`f` hex digits in lower case. Because the smallest unit of data is 8 bits, there are always an even number of characters returned by `encode`. The `decode` function accepts the `a`-`f` characters in either upper or lower case. An error is raised when `decode` is given invalid hex data — including when given an odd number of characters.
 
 See also the aggregate function `string_agg` in [Section 9.21](functions-aggregate.html "9.21. Aggregate Functions") and the large object functions in [Section 35.4](lo-funcs.html "35.4. Server-Side Functions").
-
-***
-
-|                                                                      |                                                           |                                                                             |
-| :------------------------------------------------------------------- | :-------------------------------------------------------: | --------------------------------------------------------------------------: |
-| [Prev](functions-string.html "9.4. String Functions and Operators")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-bitstring.html "9.6. Bit String Functions and Operators") |
-| 9.4. String Functions and Operators                                  |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                     9.6. Bit String Functions and Operators |

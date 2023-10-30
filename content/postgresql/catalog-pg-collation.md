@@ -1,11 +1,3 @@
-
-
-|               53.12. `pg_collation`              |                                                   |                             |                                                       |                                                            |
-| :----------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](catalog-pg-class.html "53.11. pg_class")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-constraint.html "53.13. pg_constraint") |
-
-***
-
 ## 53.12. `pg_collation` [#](#CATALOG-PG-COLLATION)
 
 The catalog `pg_collation` describes the available collations, which are essentially mappings from an SQL name to operating system locale categories. See [Section 24.2](collation.html "24.2. Collation Support") for more information.
@@ -32,10 +24,3 @@ The catalog `pg_collation` describes the available collations, which are essenti
 Note that the unique key on this catalog is (`collname`, `collencoding`, `collnamespace`) not just (`collname`, `collnamespace`). PostgreSQL generally ignores all collations that do not have `collencoding` equal to either the current database's encoding or -1, and creation of new entries with the same name as an entry with `collencoding` = -1 is forbidden. Therefore it is sufficient to use a qualified SQL name (*`schema`*.*`name`*) to identify a collation, even though this is not unique according to the catalog definition. The reason for defining the catalog this way is that initdb fills it in at cluster initialization time with entries for all locales available on the system, so it must be able to hold entries for all encodings that might ever be used in the cluster.
 
 In the `template0` database, it could be useful to create collations whose encoding does not match the database encoding, since they could match the encodings of databases later cloned from `template0`. This would currently have to be done manually.
-
-***
-
-|                                                  |                                                       |                                                            |
-| :----------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------------: |
-| [Prev](catalog-pg-class.html "53.11. pg_class")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-constraint.html "53.13. pg_constraint") |
-| 53.11. `pg_class`                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                     53.13. `pg_constraint` |

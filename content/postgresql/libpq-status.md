@@ -1,11 +1,3 @@
-
-
-|                     34.2. Connection Status Functions                     |                                                  |                               |                                                       |                                                              |
-| :-----------------------------------------------------------------------: | :----------------------------------------------- | :---------------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](libpq-connect.html "34.1. Database Connection Control Functions")  | [Up](libpq.html "Chapter 34. libpq — C Library") | Chapter 34. libpq — C Library | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](libpq-exec.html "34.3. Command Execution Functions") |
-
-***
-
 ## 34.2. Connection Status Functions [#](#LIBPQ-STATUS)
 
 These functions can be used to interrogate the status of an existing database connection object.
@@ -336,10 +328,3 @@ The following functions return information related to SSL. This information usua
     ```
 
     This function is equivalent to `PQsslStruct(conn, "OpenSSL")`. It should not be used in new applications, because the returned struct is specific to OpenSSL and will not be available if another SSL implementation is used. To check if a connection uses SSL, call [`PQsslInUse`](libpq-status.html#LIBPQ-PQSSLINUSE) instead, and for more details about the connection, use [`PQsslAttribute`](libpq-status.html#LIBPQ-PQSSLATTRIBUTE).
-
-***
-
-|                                                                           |                                                       |                                                              |
-| :------------------------------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](libpq-connect.html "34.1. Database Connection Control Functions")  |    [Up](libpq.html "Chapter 34. libpq — C Library")   |  [Next](libpq-exec.html "34.3. Command Execution Functions") |
-| 34.1. Database Connection Control Functions                               | [Home](index.html "PostgreSQL 17devel Documentation") |                            34.3. Command Execution Functions |

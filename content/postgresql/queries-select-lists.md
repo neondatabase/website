@@ -1,11 +1,3 @@
-
-
-|                         7.3. Select Lists                        |                                         |                    |                                                       |                                                                                 |
-| :--------------------------------------------------------------: | :-------------------------------------- | :----------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------: |
-| [Prev](queries-table-expressions.html "7.2. Table Expressions")  | [Up](queries.html "Chapter 7. Queries") | Chapter 7. Queries | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](queries-union.html "7.4. Combining Queries (UNION, INTERSECT, EXCEPT)") |
-
-***
-
 ## 7.3. Select Lists [#](#QUERIES-SELECT-LISTS)
 
   * *   [7.3.1. Select-List Items](queries-select-lists.html#QUERIES-SELECT-LIST-ITEMS)
@@ -98,10 +90,3 @@ SELECT DISTINCT ON (expression [, expression ...]) select_list ...
 Here *`expression`* is an arbitrary value expression that is evaluated for all rows. A set of rows for which all the expressions are equal are considered duplicates, and only the first row of the set is kept in the output. Note that the “first row” of a set is unpredictable unless the query is sorted on enough columns to guarantee a unique ordering of the rows arriving at the `DISTINCT` filter. (`DISTINCT ON` processing occurs after `ORDER BY` sorting.)
 
 The `DISTINCT ON` clause is not part of the SQL standard and is sometimes considered bad style because of the potentially indeterminate nature of its results. With judicious use of `GROUP BY` and subqueries in `FROM`, this construct can be avoided, but it is often the most convenient alternative.
-
-***
-
-|                                                                  |                                                       |                                                                                 |
-| :--------------------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------------------: |
-| [Prev](queries-table-expressions.html "7.2. Table Expressions")  |        [Up](queries.html "Chapter 7. Queries")        |  [Next](queries-union.html "7.4. Combining Queries (UNION, INTERSECT, EXCEPT)") |
-| 7.2. Table Expressions                                           | [Home](index.html "PostgreSQL 17devel Documentation") |                         7.4. Combining Queries (`UNION`, `INTERSECT`, `EXCEPT`) |

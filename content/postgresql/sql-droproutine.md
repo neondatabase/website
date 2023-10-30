@@ -1,11 +1,3 @@
-
-
-|              DROP ROUTINE              |                                        |              |                                                       |                                        |
-| :------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------: |
-| [Prev](sql-droprole.html "DROP ROLE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droprule.html "DROP RULE") |
-
-***
-
 ## DROP ROUTINE
 
 DROP ROUTINE — remove a routine
@@ -55,10 +47,3 @@ This command conforms to the SQL standard, with these PostgreSQL extensions:
 [DROP AGGREGATE](sql-dropaggregate.html "DROP AGGREGATE"), [DROP FUNCTION](sql-dropfunction.html "DROP FUNCTION"), [DROP PROCEDURE](sql-dropprocedure.html "DROP PROCEDURE"), [ALTER ROUTINE](sql-alterroutine.html "ALTER ROUTINE")
 
 Note that there is no `CREATE ROUTINE` command.
-
-***
-
-|                                        |                                                       |                                        |
-| :------------------------------------- | :---------------------------------------------------: | -------------------------------------: |
-| [Prev](sql-droprole.html "DROP ROLE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droprule.html "DROP RULE") |
-| DROP ROLE                              | [Home](index.html "PostgreSQL 17devel Documentation") |                              DROP RULE |

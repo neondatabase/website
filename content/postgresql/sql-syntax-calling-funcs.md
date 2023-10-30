@@ -1,11 +1,3 @@
-
-
-|                 4.3. Calling Functions                 |                                               |                       |                                                       |                                                |
-| :----------------------------------------------------: | :-------------------------------------------- | :-------------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-expressions.html "4.2. Value Expressions")  | [Up](sql-syntax.html "Chapter 4. SQL Syntax") | Chapter 4. SQL Syntax | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl.html "Chapter 5. Data Definition") |
-
-***
-
 ## 4.3. Calling Functions [#](#SQL-SYNTAX-CALLING-FUNCS)
 
   * *   [4.3.1. Using Positional Notation](sql-syntax-calling-funcs.html#SQL-SYNTAX-CALLING-FUNCS-POSITIONAL)
@@ -121,10 +113,3 @@ In the above query, the arguments `a` and `b` are specified positionally, while 
 ### Note
 
 Named and mixed call notations currently cannot be used when calling an aggregate function (but they do work when an aggregate function is used as a window function).
-
-***
-
-|                                                        |                                                       |                                                |
-| :----------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------: |
-| [Prev](sql-expressions.html "4.2. Value Expressions")  |     [Up](sql-syntax.html "Chapter 4. SQL Syntax")     |  [Next](ddl.html "Chapter 5. Data Definition") |
-| 4.2. Value Expressions                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                     Chapter 5. Data Definition |

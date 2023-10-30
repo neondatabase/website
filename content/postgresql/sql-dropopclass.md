@@ -1,11 +1,3 @@
-
-
-|               DROP OPERATOR CLASS              |                                        |              |                                                       |                                                       |
-| :--------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](sql-dropoperator.html "DROP OPERATOR")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-dropopfamily.html "DROP OPERATOR FAMILY") |
-
-***
-
 ## DROP OPERATOR CLASS
 
 DROP OPERATOR CLASS — remove an operator class
@@ -67,10 +59,3 @@ There is no `DROP OPERATOR CLASS` statement in the SQL standard.
 ## See Also
 
 [ALTER OPERATOR CLASS](sql-alteropclass.html "ALTER OPERATOR CLASS"), [CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS"), [DROP OPERATOR FAMILY](sql-dropopfamily.html "DROP OPERATOR FAMILY")
-
-***
-
-|                                                |                                                       |                                                       |
-| :--------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------: |
-| [Prev](sql-dropoperator.html "DROP OPERATOR")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-dropopfamily.html "DROP OPERATOR FAMILY") |
-| DROP OPERATOR                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                  DROP OPERATOR FAMILY |

@@ -1,11 +1,3 @@
-
-
-|              45.5. Trusted and Untrusted PL/Perl             |                                                                    |                                                |                                                       |                                                        |
-| :----------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](plperl-global.html "45.4. Global Values in PL/Perl")  | [Up](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language") | Chapter 45. PL/Perl — Perl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plperl-triggers.html "45.6. PL/Perl Triggers") |
-
-***
-
 ## 45.5. Trusted and Untrusted PL/Perl [#](#PLPERL-TRUSTED)
 
 Normally, PL/Perl is installed as a “trusted” programming language named `plperl`. In this setup, certain Perl operations are disabled to preserve security. In general, the operations that are restricted are those that interact with the environment. This includes file handle operations, `require`, and `use` (for external modules). There is no way to access internals of the database server process or to gain OS-level access with the permissions of the server process, as a C function can do. Thus, any unprivileged database user can be permitted to use this language.
@@ -41,10 +33,3 @@ While PL/Perl functions run in a separate Perl interpreter for each SQL role, al
 ### Note
 
 Perl cannot support multiple interpreters within one process unless it was built with the appropriate flags, namely either `usemultiplicity` or `useithreads`. (`usemultiplicity` is preferred unless you actually need to use threads. For more details, see the perlembed man page.) If PL/Perl is used with a copy of Perl that was not built this way, then it is only possible to have one Perl interpreter per session, and so any one session can only execute either PL/PerlU functions, or PL/Perl functions that are all called by the same SQL role.
-
-***
-
-|                                                              |                                                                    |                                                        |
-| :----------------------------------------------------------- | :----------------------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](plperl-global.html "45.4. Global Values in PL/Perl")  | [Up](plperl.html "Chapter 45. PL/Perl — Perl Procedural Language") |  [Next](plperl-triggers.html "45.6. PL/Perl Triggers") |
-| 45.4. Global Values in PL/Perl                               |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                 45.6. PL/Perl Triggers |

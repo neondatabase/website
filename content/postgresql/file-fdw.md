@@ -1,11 +1,3 @@
-
-
-|            F.16. file\_fdw — access data files in the server's file system           |                                                                             |                                                        |                                                       |                                                                                                |
-| :----------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | ---------------------------------------------------------------------------------------------: |
-| [Prev](earthdistance.html "F.15. earthdistance — calculate great-circle distances")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](fuzzystrmatch.html "F.17. fuzzystrmatch — determine string similarities and distance") |
-
-***
-
 ## F.16. file\_fdw — access data files in the server's file system [#](#FILE-FDW)
 
 The `file_fdw` module provides the foreign-data wrapper `file_fdw`, which can be used to access data files in the server's file system, or to execute programs on the server and read their output. The data file or program output must be in a format that can be read by `COPY FROM`; see [COPY](sql-copy.html "COPY") for details. Access to data files is currently read-only.
@@ -138,10 +130,3 @@ CREATE FOREIGN TABLE films (
 ) SERVER film_server
 OPTIONS ( filename 'films/db.csv', format 'csv' );
 ```
-
-***
-
-|                                                                                      |                                                                             |                                                                                                |
-| :----------------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | ---------------------------------------------------------------------------------------------: |
-| [Prev](earthdistance.html "F.15. earthdistance — calculate great-circle distances")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](fuzzystrmatch.html "F.17. fuzzystrmatch — determine string similarities and distance") |
-| F.15. earthdistance — calculate great-circle distances                               |            [Home](index.html "PostgreSQL 17devel Documentation")            |                               F.17. fuzzystrmatch — determine string similarities and distance |

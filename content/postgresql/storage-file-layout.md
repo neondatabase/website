@@ -1,11 +1,3 @@
-
-
-|                   73.1. Database File Layout                  |                                                            |                                       |                                                       |                                           |
-| :-----------------------------------------------------------: | :--------------------------------------------------------- | :-----------------------------------: | ----------------------------------------------------: | ----------------------------------------: |
-| [Prev](storage.html "Chapter 73. Database Physical Storage")  | [Up](storage.html "Chapter 73. Database Physical Storage") | Chapter 73. Database Physical Storage | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](storage-toast.html "73.2. TOAST") |
-
-***
-
 ## 73.1. Database File Layout [#](#STORAGE-FILE-LAYOUT)
 
 This section describes the storage format at the level of files and directories.
@@ -64,10 +56,3 @@ Tablespaces make the scenario more complicated. Each user-defined tablespace has
 The `pg_relation_filepath()` function shows the entire path (relative to `PGDATA`) of any relation. It is often useful as a substitute for remembering many of the above rules. But keep in mind that this function just gives the name of the first segment of the main fork of the relation — you may need to append a segment number and/or `_fsm`, `_vm`, or `_init` to find all the files associated with the relation.
 
 Temporary files (for operations such as sorting more data than can fit in memory) are created within `PGDATA``/base/pgsql_tmp`, or within a `pgsql_tmp` subdirectory of a tablespace directory if a tablespace other than `pg_default` is specified for them. The name of a temporary file has the form `pgsql_tmpPPP.NNN`, where *`PPP`* is the PID of the owning backend and *`NNN`* distinguishes different temporary files of that backend.
-
-***
-
-|                                                               |                                                            |                                           |
-| :------------------------------------------------------------ | :--------------------------------------------------------: | ----------------------------------------: |
-| [Prev](storage.html "Chapter 73. Database Physical Storage")  | [Up](storage.html "Chapter 73. Database Physical Storage") |  [Next](storage-toast.html "73.2. TOAST") |
-| Chapter 73. Database Physical Storage                         |    [Home](index.html "PostgreSQL 17devel Documentation")   |                               73.2. TOAST |

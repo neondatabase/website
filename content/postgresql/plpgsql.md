@@ -1,11 +1,3 @@
-
-
-|            Chapter 43. PL/pgSQL — SQL Procedural Language            |                                                            |                            |                                                       |                                                 |
-| :------------------------------------------------------------------: | :--------------------------------------------------------- | :------------------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](xplang-install.html "42.1. Installing Procedural Languages")  | [Up](server-programming.html "Part V. Server Programming") | Part V. Server Programming | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-overview.html "43.1. Overview") |
-
-***
-
 ## Chapter 43. PL/pgSQL — SQL Procedural Language
 
 **Table of Contents**
@@ -86,10 +78,3 @@
   * *   [43.13.1. Porting Examples](plpgsql-porting.html#PLPGSQL-PORTING-EXAMPLES)
     * [43.13.2. Other Things to Watch For](plpgsql-porting.html#PLPGSQL-PORTING-OTHER)
     * [43.13.3. Appendix](plpgsql-porting.html#PLPGSQL-PORTING-APPENDIX)
-
-***
-
-|                                                                      |                                                            |                                                 |
-| :------------------------------------------------------------------- | :--------------------------------------------------------: | ----------------------------------------------: |
-| [Prev](xplang-install.html "42.1. Installing Procedural Languages")  | [Up](server-programming.html "Part V. Server Programming") |  [Next](plpgsql-overview.html "43.1. Overview") |
-| 42.1. Installing Procedural Languages                                |    [Home](index.html "PostgreSQL 17devel Documentation")   |                                  43.1. Overview |

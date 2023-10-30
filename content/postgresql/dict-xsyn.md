@@ -1,11 +1,3 @@
-
-
-|                   F.14. dict\_xsyn — example synonym full-text search dictionary                  |                                                                             |                                                        |                                                       |                                                                                      |
-| :-----------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](dict-int.html "F.13. dict_int —&#xA;   example full-text search dictionary for integers")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](earthdistance.html "F.15. earthdistance — calculate great-circle distances") |
-
-***
-
 ## F.14. dict\_xsyn — example synonym full-text search dictionary [#](#DICT-XSYN)
 
   * *   [F.14.1. Configuration](dict-xsyn.html#DICT-XSYN-CONFIG)
@@ -89,10 +81,3 @@ Real-world usage will involve including it in a text search configuration as des
 ALTER TEXT SEARCH CONFIGURATION english
     ALTER MAPPING FOR word, asciiword WITH xsyn, english_stem;
 ```
-
-***
-
-|                                                                                                   |                                                                             |                                                                                      |
-| :------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------: | -----------------------------------------------------------------------------------: |
-| [Prev](dict-int.html "F.13. dict_int —&#xA;   example full-text search dictionary for integers")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](earthdistance.html "F.15. earthdistance — calculate great-circle distances") |
-| F.13. dict\_int — example full-text search dictionary for integers                                |            [Home](index.html "PostgreSQL 17devel Documentation")            |                               F.15. earthdistance — calculate great-circle distances |

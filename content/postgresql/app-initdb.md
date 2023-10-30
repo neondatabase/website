@@ -1,11 +1,3 @@
-
-
-|                              initdb                             |                                                              |                                |                                                       |                                                    |
-| :-------------------------------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](reference-server.html "PostgreSQL Server Applications")  | [Up](reference-server.html "PostgreSQL Server Applications") | PostgreSQL Server Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgarchivecleanup.html "pg_archivecleanup") |
-
-***
-
 ## initdb
 
 initdb — create a new PostgreSQL database cluster
@@ -201,10 +193,3 @@ This utility, like most other PostgreSQL utilities, also uses the environment va
 ## See Also
 
 [pg\_ctl](app-pg-ctl.html "pg_ctl"), [postgres](app-postgres.html "postgres"), [Section 21.1](auth-pg-hba-conf.html "21.1. The pg_hba.conf File")
-
-***
-
-|                                                                 |                                                              |                                                    |
-| :-------------------------------------------------------------- | :----------------------------------------------------------: | -------------------------------------------------: |
-| [Prev](reference-server.html "PostgreSQL Server Applications")  | [Up](reference-server.html "PostgreSQL Server Applications") |  [Next](pgarchivecleanup.html "pg_archivecleanup") |
-| PostgreSQL Server Applications                                  |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                 pg\_archivecleanup |

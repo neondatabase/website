@@ -1,11 +1,3 @@
-
-
-|              Chapter 33. Regression Tests             |                                                    |                                 |                                                       |                                                     |
-| :---------------------------------------------------: | :------------------------------------------------- | :-----------------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](jit-extensibility.html "32.4. Extensibility")  | [Up](admin.html "Part III. Server Administration") | Part III. Server Administration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](regress-run.html "33.1. Running the Tests") |
-
-***
-
 ## Chapter 33. Regression Tests
 
 **Table of Contents**
@@ -43,10 +35,3 @@
     * [33.5.2. Coverage with Meson](regress-coverage.html#REGRESS-COVERAGE-MESON)
 
 The regression tests are a comprehensive set of tests for the SQL implementation in PostgreSQL. They test standard SQL operations as well as the extended capabilities of PostgreSQL.
-
-***
-
-|                                                       |                                                       |                                                     |
-| :---------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](jit-extensibility.html "32.4. Extensibility")  |   [Up](admin.html "Part III. Server Administration")  |  [Next](regress-run.html "33.1. Running the Tests") |
-| 32.4. Extensibility                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                             33.1. Running the Tests |

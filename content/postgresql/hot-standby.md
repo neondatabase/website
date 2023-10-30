@@ -1,11 +1,3 @@
-
-
-|                   27.4. Hot Standby                  |                                                                                               |                                                                |                                                       |                                                                     |
-| :--------------------------------------------------: | :-------------------------------------------------------------------------------------------- | :------------------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](warm-standby-failover.html "27.3. Failover")  | [Up](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication") | Chapter 27. High Availability, Load Balancing, and Replication | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](monitoring.html "Chapter 28. Monitoring Database Activity") |
-
-***
-
 ## 27.4. Hot Standby [#](#HOT-STANDBY)
 
   * *   [27.4.1. User's Overview](hot-standby.html#HOT-STANDBY-USERS)
@@ -220,10 +212,3 @@ There are several limitations of hot standby. These can and probably will be fix
 * Valid starting points for standby queries are generated at each checkpoint on the primary. If the standby is shut down while the primary is in a shutdown state, it might not be possible to re-enter hot standby until the primary is started up, so that it generates further starting points in the WAL logs. This situation isn't a problem in the most common situations where it might happen. Generally, if the primary is shut down and not available anymore, that's likely due to a serious failure that requires the standby being converted to operate as the new primary anyway. And in situations where the primary is being intentionally taken down, coordinating to make sure the standby becomes the new primary smoothly is also standard procedure.
 * At the end of recovery, `AccessExclusiveLocks` held by prepared transactions will require twice the normal number of lock table entries. If you plan on running either a large number of concurrent prepared transactions that normally take `AccessExclusiveLocks`, or you plan on having one large transaction that takes many `AccessExclusiveLocks`, you are advised to select a larger value of `max_locks_per_transaction`, perhaps as much as twice the value of the parameter on the primary server. You need not consider this at all if your setting of `max_prepared_transactions` is 0.
 * The Serializable transaction isolation level is not yet available in hot standby. (See [Section 13.2.3](transaction-iso.html#XACT-SERIALIZABLE "13.2.3. Serializable Isolation Level") and [Section 13.4.1](applevel-consistency.html#SERIALIZABLE-CONSISTENCY "13.4.1. Enforcing Consistency with Serializable Transactions") for details.) An attempt to set a transaction to the serializable isolation level in hot standby mode will generate an error.
-
-***
-
-|                                                      |                                                                                               |                                                                     |
-| :--------------------------------------------------- | :-------------------------------------------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](warm-standby-failover.html "27.3. Failover")  | [Up](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication") |  [Next](monitoring.html "Chapter 28. Monitoring Database Activity") |
-| 27.3. Failover                                       |                     [Home](index.html "PostgreSQL 17devel Documentation")                     |                            Chapter 28. Monitoring Database Activity |

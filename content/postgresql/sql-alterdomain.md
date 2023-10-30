@@ -1,11 +1,3 @@
-
-
-|                             ALTER DOMAIN                            |                                        |              |                                                       |                                                           |
-| :-----------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](sql-alterdefaultprivileges.html "ALTER DEFAULT PRIVILEGES")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altereventtrigger.html "ALTER EVENT TRIGGER") |
-
-***
-
 ## ALTER DOMAIN
 
 ALTER DOMAIN — change the definition of a domain
@@ -175,10 +167,3 @@ ALTER DOMAIN zipcode SET SCHEMA customers;
 ## See Also
 
 [CREATE DOMAIN](sql-createdomain.html "CREATE DOMAIN"), [DROP DOMAIN](sql-dropdomain.html "DROP DOMAIN")
-
-***
-
-|                                                                     |                                                       |                                                           |
-| :------------------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](sql-alterdefaultprivileges.html "ALTER DEFAULT PRIVILEGES")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altereventtrigger.html "ALTER EVENT TRIGGER") |
-| ALTER DEFAULT PRIVILEGES                                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                       ALTER EVENT TRIGGER |

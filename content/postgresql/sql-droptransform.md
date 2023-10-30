@@ -1,11 +1,3 @@
-
-
-|                        DROP TRANSFORM                        |                                        |              |                                                       |                                              |
-| :----------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-droptstemplate.html "DROP TEXT SEARCH TEMPLATE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droptrigger.html "DROP TRIGGER") |
-
-***
-
 ## DROP TRANSFORM
 
 DROP TRANSFORM — remove a transform
@@ -61,10 +53,3 @@ This form of `DROP TRANSFORM` is a PostgreSQL extension. See [CREATE TRANSFORM](
 ## See Also
 
 [CREATE TRANSFORM](sql-createtransform.html "CREATE TRANSFORM")
-
-***
-
-|                                                              |                                                       |                                              |
-| :----------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------: |
-| [Prev](sql-droptstemplate.html "DROP TEXT SEARCH TEMPLATE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droptrigger.html "DROP TRIGGER") |
-| DROP TEXT SEARCH TEMPLATE                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                 DROP TRIGGER |

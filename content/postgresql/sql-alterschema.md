@@ -1,11 +1,3 @@
-
-
-|               ALTER SCHEMA               |                                        |              |                                                       |                                                  |
-| :--------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-alterrule.html "ALTER RULE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altersequence.html "ALTER SEQUENCE") |
-
-***
-
 ## ALTER SCHEMA
 
 ALTER SCHEMA — change the definition of a schema
@@ -45,10 +37,3 @@ There is no `ALTER SCHEMA` statement in the SQL standard.
 ## See Also
 
 [CREATE SCHEMA](sql-createschema.html "CREATE SCHEMA"), [DROP SCHEMA](sql-dropschema.html "DROP SCHEMA")
-
-***
-
-|                                          |                                                       |                                                  |
-| :--------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-alterrule.html "ALTER RULE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altersequence.html "ALTER SEQUENCE") |
-| ALTER RULE                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                   ALTER SEQUENCE |

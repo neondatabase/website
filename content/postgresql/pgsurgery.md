@@ -1,11 +1,3 @@
-
-
-|         F.33. pg\_surgery — perform low-level surgery on relation data        |                                                                             |                                                        |                                                       |                                                                                                     |
-| :---------------------------------------------------------------------------: | :-------------------------------------------------------------------------- | :----------------------------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------------------------------------------: |
-| [Prev](pgstattuple.html "F.32. pgstattuple — obtain tuple-level statistics")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") | Appendix F. Additional Supplied Modules and Extensions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pgtrgm.html "F.34. pg_trgm —&#xA;   support for similarity of text using trigram matching") |
-
-***
-
 ## F.33. pg\_surgery — perform low-level surgery on relation data [#](#PGSURGERY)
 
   * *   [F.33.1. Functions](pgsurgery.html#PGSURGERY-FUNCS)
@@ -67,10 +59,3 @@ The `pg_surgery` module provides various functions to perform surgery on a damag
 ### F.33.2. Authors [#](#PGSURGERY-AUTHORS)
 
 Ashutosh Sharma `<ashu.coek88@gmail.com>`
-
-***
-
-|                                                                               |                                                                             |                                                                                                     |
-| :---------------------------------------------------------------------------- | :-------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------: |
-| [Prev](pgstattuple.html "F.32. pgstattuple — obtain tuple-level statistics")  | [Up](contrib.html "Appendix F. Additional Supplied Modules and Extensions") |  [Next](pgtrgm.html "F.34. pg_trgm —&#xA;   support for similarity of text using trigram matching") |
-| F.32. pgstattuple — obtain tuple-level statistics                             |            [Home](index.html "PostgreSQL 17devel Documentation")            |                              F.34. pg\_trgm — support for similarity of text using trigram matching |

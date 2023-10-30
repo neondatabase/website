@@ -1,11 +1,3 @@
-
-
-|             SPI\_prepare\_cursor            |                                                      |                           |                                                       |                                                               |
-| :-----------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](spi-spi-prepare.html "SPI_prepare")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-prepare-extended.html "SPI_prepare_extended") |
-
-***
-
 ## SPI\_prepare\_cursor
 
 SPI\_prepare\_cursor — prepare a statement, without executing it yet
@@ -49,10 +41,3 @@ This function is now deprecated in favor of `SPI_prepare_extended`.
 ## Notes
 
 Useful bits to set in *`cursorOptions`* include `CURSOR_OPT_SCROLL`, `CURSOR_OPT_NO_SCROLL`, `CURSOR_OPT_FAST_PLAN`, `CURSOR_OPT_GENERIC_PLAN`, and `CURSOR_OPT_CUSTOM_PLAN`. Note in particular that `CURSOR_OPT_HOLD` is ignored.
-
-***
-
-|                                             |                                                       |                                                               |
-| :------------------------------------------ | :---------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](spi-spi-prepare.html "SPI_prepare")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-prepare-extended.html "SPI_prepare_extended") |
-| SPI\_prepare                                | [Home](index.html "PostgreSQL 17devel Documentation") |                                        SPI\_prepare\_extended |

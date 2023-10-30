@@ -1,11 +1,3 @@
-
-
-|       38.11. Function Optimization Information      |                                               |                           |                                                       |                                                      |
-| :-------------------------------------------------: | :-------------------------------------------- | :-----------------------: | ----------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](xfunc-c.html "38.10. C-Language Functions")  | [Up](extend.html "Chapter 38. Extending SQL") | Chapter 38. Extending SQL | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](xaggr.html "38.12. User-Defined Aggregates") |
-
-***
-
 ## 38.11. Function Optimization Information [#](#XFUNC-OPTIMIZATION)
 
 By default, a function is just a “black box” that the database system knows very little about the behavior of. However, that means that queries using the function may be executed much less efficiently than they could be. It is possible to supply additional knowledge that helps the planner optimize function calls.
@@ -34,10 +26,3 @@ If the target function's run time is highly dependent on its inputs, it may be u
 For target functions that return sets, it is often useful to provide a non-constant estimate for the number of rows that will be returned. This can be done by a support function that implements the `SupportRequestRows` request type.
 
 For target functions that return `boolean`, it may be possible to convert a function call appearing in `WHERE` into an indexable operator clause or clauses. The converted clauses might be exactly equivalent to the function's condition, or they could be somewhat weaker (that is, they might accept some values that the function condition does not). In the latter case the index condition is said to be *lossy*; it can still be used to scan an index, but the function call will have to be executed for each row returned by the index to see if it really passes the `WHERE` condition or not. To create such conditions, the support function must implement the `SupportRequestIndexCondition` request type.
-
-***
-
-|                                                     |                                                       |                                                      |
-| :-------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------------------: |
-| [Prev](xfunc-c.html "38.10. C-Language Functions")  |     [Up](extend.html "Chapter 38. Extending SQL")     |  [Next](xaggr.html "38.12. User-Defined Aggregates") |
-| 38.10. C-Language Functions                         | [Home](index.html "PostgreSQL 17devel Documentation") |                       38.12. User-Defined Aggregates |

@@ -1,11 +1,3 @@
-
-
-|                pg\_isready                |                                                              |                                |                                                       |                                                |
-| :---------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ---------------------------------------------: |
-| [Prev](app-pg-dumpall.html "pg_dumpall")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-pgreceivewal.html "pg_receivewal") |
-
-***
-
 ## pg\_isready
 
 pg\_isready — check the connection status of a PostgreSQL server
@@ -97,10 +89,3 @@ someremotehost:5432 - no response
 $ echo $?
 2
 ```
-
-***
-
-|                                           |                                                              |                                                |
-| :---------------------------------------- | :----------------------------------------------------------: | ---------------------------------------------: |
-| [Prev](app-pg-dumpall.html "pg_dumpall")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-pgreceivewal.html "pg_receivewal") |
-| pg\_dumpall                               |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                 pg\_receivewal |

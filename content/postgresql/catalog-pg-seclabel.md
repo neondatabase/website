@@ -1,11 +1,3 @@
-
-
-|                 53.46. `pg_seclabel`                 |                                                   |                             |                                                       |                                                        |
-| :--------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](catalog-pg-rewrite.html "53.45. pg_rewrite")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-sequence.html "53.47. pg_sequence") |
-
-***
-
 ## 53.46. `pg_seclabel` [#](#CATALOG-PG-SECLABEL)
 
 The catalog `pg_seclabel` stores security labels on database objects. Security labels can be manipulated with the [`SECURITY LABEL`](sql-security-label.html "SECURITY LABEL") command. For an easier way to view security labels, see [Section 54.22](view-pg-seclabels.html "54.22. pg_seclabels").
@@ -21,10 +13,3 @@ See also [`pg_shseclabel`](catalog-pg-shseclabel.html "53.50. pg_shseclabel"), 
 | `objsubid` `int4`For a security label on a table column, this is the column number (the `objoid` and `classoid` refer to the table itself). For all other object types, this column is zero. |
 | `provider` `text`The label provider associated with this label.                                                                                                                              |
 | `label` `text`The security label applied to this object.                                                                                                                                     |
-
-***
-
-|                                                      |                                                       |                                                        |
-| :--------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](catalog-pg-rewrite.html "53.45. pg_rewrite")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-sequence.html "53.47. pg_sequence") |
-| 53.45. `pg_rewrite`                                  | [Home](index.html "PostgreSQL 17devel Documentation") |                                   53.47. `pg_sequence` |

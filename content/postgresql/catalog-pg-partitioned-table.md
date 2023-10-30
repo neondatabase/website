@@ -1,11 +1,3 @@
-
-
-|                   53.37. `pg_partitioned_table`                  |                                                   |                             |                                                       |                                                    |
-| :--------------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](catalog-pg-parameter-acl.html "53.36. pg_parameter_acl")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-policy.html "53.38. pg_policy") |
-
-***
-
 ## 53.37. `pg_partitioned_table` [#](#CATALOG-PG-PARTITIONED-TABLE)
 
 The catalog `pg_partitioned_table` stores information about how tables are partitioned.
@@ -22,10 +14,3 @@ The catalog `pg_partitioned_table` stores information about how tables are parti
 | `partclass` `oidvector` (references [`pg_opclass`](catalog-pg-opclass.html "53.33. pg_opclass").`oid`)For each column in the partition key, this contains the OID of the operator class to use. See [`pg_opclass`](catalog-pg-opclass.html "53.33. pg_opclass") for details.                                                                                                                                                                                              |
 | `partcollation` `oidvector` (references [`pg_collation`](catalog-pg-collation.html "53.12. pg_collation").`oid`)For each column in the partition key, this contains the OID of the collation to use for partitioning, or zero if the column is not of a collatable data type.                                                                                                                                                                                             |
 | `partexprs` `pg_node_tree`Expression trees (in `nodeToString()` representation) for partition key columns that are not simple column references. This is a list with one element for each zero entry in `partattrs`. Null if all partition key columns are simple references.                                                                                                                                                                                             |
-
-***
-
-|                                                                  |                                                       |                                                    |
-| :--------------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](catalog-pg-parameter-acl.html "53.36. pg_parameter_acl")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-policy.html "53.38. pg_policy") |
-| 53.36. `pg_parameter_acl`                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                 53.38. `pg_policy` |

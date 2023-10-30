@@ -1,11 +1,3 @@
-
-
-|                 7.7. `VALUES` Lists                 |                                         |                    |                                                       |                                                                           |
-| :-------------------------------------------------: | :-------------------------------------- | :----------------: | ----------------------------------------------------: | ------------------------------------------------------------------------: |
-| [Prev](queries-limit.html "7.6. LIMIT and OFFSET")  | [Up](queries.html "Chapter 7. Queries") | Chapter 7. Queries | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](queries-with.html "7.8. WITH Queries (Common Table Expressions)") |
-
-***
-
 ## 7.7. `VALUES` Lists [#](#QUERIES-VALUES)
 
 `VALUES` provides a way to generate a “constant table” that can be used in a query without having to actually create and populate a table on-disk. The syntax is
@@ -58,10 +50,3 @@ SELECT select_list FROM table_expression
 and can appear anywhere a `SELECT` can. For example, you can use it as part of a `UNION`, or attach a *`sort_specification`* (`ORDER BY`, `LIMIT`, and/or `OFFSET`) to it. `VALUES` is most commonly used as the data source in an `INSERT` command, and next most commonly as a subquery.
 
 For more information see [VALUES](sql-values.html "VALUES").
-
-***
-
-|                                                     |                                                       |                                                                           |
-| :-------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------------: |
-| [Prev](queries-limit.html "7.6. LIMIT and OFFSET")  |        [Up](queries.html "Chapter 7. Queries")        |  [Next](queries-with.html "7.8. WITH Queries (Common Table Expressions)") |
-| 7.6. `LIMIT` and `OFFSET`                           | [Home](index.html "PostgreSQL 17devel Documentation") |                            7.8. `WITH` Queries (Common Table Expressions) |

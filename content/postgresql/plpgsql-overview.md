@@ -1,11 +1,3 @@
-
-
-|                             43.1. Overview                             |                                                                     |                                                |                                                       |                                                               |
-| :--------------------------------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-structure.html "43.2. Structure of PL/pgSQL") |
-
-***
-
 ## 43.1. Overview [#](#PLPGSQL-OVERVIEW)
 
   * *   [43.1.1. Advantages of Using PL/pgSQL](plpgsql-overview.html#PLPGSQL-ADVANTAGES)
@@ -55,10 +47,3 @@ Finally, a PL/pgSQL function can be declared to return `void` if it has no usefu
 PL/pgSQL functions can also be declared with output parameters in place of an explicit specification of the return type. This does not add any fundamental capability to the language, but it is often convenient, especially for returning multiple values. The `RETURNS TABLE` notation can also be used in place of `RETURNS SETOF`.
 
 Specific examples appear in [Section 43.3.1](plpgsql-declarations.html#PLPGSQL-DECLARATION-PARAMETERS "43.3.1. Declaring Function Parameters") and [Section 43.6.1](plpgsql-control-structures.html#PLPGSQL-STATEMENTS-RETURNING "43.6.1. Returning from a Function").
-
-***
-
-|                                                                        |                                                                     |                                                               |
-| :--------------------------------------------------------------------- | :-----------------------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](plpgsql-structure.html "43.2. Structure of PL/pgSQL") |
-| Chapter 43. PL/pgSQL — SQL Procedural Language                         |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                   43.2. Structure of PL/pgSQL |

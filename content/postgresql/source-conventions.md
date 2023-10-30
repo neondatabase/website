@@ -1,11 +1,3 @@
-
-
-|               56.4. Miscellaneous Coding Conventions              |                                                               |                                           |                                                       |                                                         |
-| :---------------------------------------------------------------: | :------------------------------------------------------------ | :---------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](error-style-guide.html "56.3. Error Message Style Guide")  | [Up](source.html "Chapter 56. PostgreSQL Coding Conventions") | Chapter 56. PostgreSQL Coding Conventions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](nls.html "Chapter 57. Native Language Support") |
-
-***
-
 ## 56.4. Miscellaneous Coding Conventions [#](#SOURCE-CONVENTIONS)
 
 ### C Standard [#](#SOURCE-CONVENTIONS-C-STANDARD)
@@ -86,10 +78,3 @@ For clarity, it is preferred to explicitly dereference a function pointer when c
 
 paramInfo->paramFetch(paramInfo, paramId);
 ```
-
-***
-
-|                                                                   |                                                               |                                                         |
-| :---------------------------------------------------------------- | :-----------------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](error-style-guide.html "56.3. Error Message Style Guide")  | [Up](source.html "Chapter 56. PostgreSQL Coding Conventions") |  [Next](nls.html "Chapter 57. Native Language Support") |
-| 56.3. Error Message Style Guide                                   |     [Home](index.html "PostgreSQL 17devel Documentation")     |                     Chapter 57. Native Language Support |

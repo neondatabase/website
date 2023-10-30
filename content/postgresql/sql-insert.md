@@ -1,11 +1,3 @@
-
-
-|                             INSERT                            |                                        |              |                                                       |                                   |
-| :-----------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | --------------------------------: |
-| [Prev](sql-importforeignschema.html "IMPORT FOREIGN SCHEMA")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-listen.html "LISTEN") |
-
-***
-
 ## INSERT
 
 INSERT — create new rows in a table
@@ -325,10 +317,3 @@ INSERT INTO distributors (did, dname) VALUES (10, 'Conrad International')
 The SQL standard specifies that `OVERRIDING SYSTEM VALUE` can only be specified if an identity column that is generated always exists. PostgreSQL allows the clause in any case and ignores it if it is not applicable.
 
 Possible limitations of the *`query`* clause are documented under [SELECT](sql-select.html "SELECT").
-
-***
-
-|                                                               |                                                       |                                   |
-| :------------------------------------------------------------ | :---------------------------------------------------: | --------------------------------: |
-| [Prev](sql-importforeignschema.html "IMPORT FOREIGN SCHEMA")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-listen.html "LISTEN") |
-| IMPORT FOREIGN SCHEMA                                         | [Home](index.html "PostgreSQL 17devel Documentation") |                            LISTEN |

@@ -1,11 +1,3 @@
-
-
-|                    ALTER DATABASE                    |                                        |              |                                                       |                                                                     |
-| :--------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](sql-alterconversion.html "ALTER CONVERSION")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alterdefaultprivileges.html "ALTER DEFAULT PRIVILEGES") |
-
-***
-
 ## ALTER DATABASE
 
 ALTER DATABASE — change a database
@@ -112,10 +104,3 @@ The `ALTER DATABASE` statement is a PostgreSQL extension.
 ## See Also
 
 [CREATE DATABASE](sql-createdatabase.html "CREATE DATABASE"), [DROP DATABASE](sql-dropdatabase.html "DROP DATABASE"), [SET](sql-set.html "SET"), [CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE")
-
-***
-
-|                                                      |                                                       |                                                                     |
-| :--------------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](sql-alterconversion.html "ALTER CONVERSION")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alterdefaultprivileges.html "ALTER DEFAULT PRIVILEGES") |
-| ALTER CONVERSION                                     | [Home](index.html "PostgreSQL 17devel Documentation") |                                            ALTER DEFAULT PRIVILEGES |

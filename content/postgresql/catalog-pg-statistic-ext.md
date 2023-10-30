@@ -1,11 +1,3 @@
-
-
-|                 53.52. `pg_statistic_ext`                |                                                   |                             |                                                       |                                                                            |
-| :------------------------------------------------------: | :------------------------------------------------ | :-------------------------: | ----------------------------------------------------: | -------------------------------------------------------------------------: |
-| [Prev](catalog-pg-statistic.html "53.51. pg_statistic")  | [Up](catalogs.html "Chapter 53. System Catalogs") | Chapter 53. System Catalogs | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](catalog-pg-statistic-ext-data.html "53.53. pg_statistic_ext_data") |
-
-***
-
 ## 53.52. `pg_statistic_ext` [#](#CATALOG-PG-STATISTIC-EXT)
 
 The catalog `pg_statistic_ext` holds definitions of extended planner statistics. Each row in this catalog corresponds to a *statistics object* created with [`CREATE STATISTICS`](sql-createstatistics.html "CREATE STATISTICS").
@@ -27,10 +19,3 @@ The catalog `pg_statistic_ext` holds definitions of extended planner statistics.
 \
 
 The `pg_statistic_ext` entry is filled in completely during [`CREATE STATISTICS`](sql-createstatistics.html "CREATE STATISTICS"), but the actual statistical values are not computed then. Subsequent [`ANALYZE`](sql-analyze.html "ANALYZE") commands compute the desired values and populate an entry in the [`pg_statistic_ext_data`](catalog-pg-statistic-ext-data.html "53.53. pg_statistic_ext_data") catalog.
-
-***
-
-|                                                          |                                                       |                                                                            |
-| :------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------------------: |
-| [Prev](catalog-pg-statistic.html "53.51. pg_statistic")  |   [Up](catalogs.html "Chapter 53. System Catalogs")   |  [Next](catalog-pg-statistic-ext-data.html "53.53. pg_statistic_ext_data") |
-| 53.51. `pg_statistic`                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                                             53.53. `pg_statistic_ext_data` |

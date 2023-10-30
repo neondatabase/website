@@ -1,11 +1,3 @@
-
-
-|              vacuumlo             |                                                           |                          |                                                       |                                                              |
-| :-------------------------------: | :-------------------------------------------------------- | :----------------------: | ----------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](oid2name.html "oid2name")  | [Up](contrib-prog-client.html "G.1. Client Applications") | G.1. Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](contrib-prog-server.html "G.2. Server Applications") |
-
-***
-
 ## vacuumlo
 
 vacuumlo — remove orphaned large objects from a PostgreSQL database
@@ -87,10 +79,3 @@ vacuumlo works by the following method: First, vacuumlo builds a temporary table
 ## Author
 
 Peter Mount `<peter@retep.org.uk>`
-
-***
-
-|                                   |                                                           |                                                              |
-| :-------------------------------- | :-------------------------------------------------------: | -----------------------------------------------------------: |
-| [Prev](oid2name.html "oid2name")  | [Up](contrib-prog-client.html "G.1. Client Applications") |  [Next](contrib-prog-server.html "G.2. Server Applications") |
-| oid2name                          |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                     G.2. Server Applications |

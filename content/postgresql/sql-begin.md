@@ -1,11 +1,3 @@
-
-
-|                BEGIN                |                                        |              |                                                       |                               |
-| :---------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ----------------------------: |
-| [Prev](sql-analyze.html "ANALYZE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-call.html "CALL") |
-
-***
-
 ## BEGIN
 
 BEGIN — start a transaction block
@@ -69,10 +61,3 @@ Incidentally, the `BEGIN` key word is used for a different purpose in embedded S
 ## See Also
 
 [COMMIT](sql-commit.html "COMMIT"), [ROLLBACK](sql-rollback.html "ROLLBACK"), [START TRANSACTION](sql-start-transaction.html "START TRANSACTION"), [SAVEPOINT](sql-savepoint.html "SAVEPOINT")
-
-***
-
-|                                     |                                                       |                               |
-| :---------------------------------- | :---------------------------------------------------: | ----------------------------: |
-| [Prev](sql-analyze.html "ANALYZE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-call.html "CALL") |
-| ANALYZE                             | [Home](index.html "PostgreSQL 17devel Documentation") |                          CALL |

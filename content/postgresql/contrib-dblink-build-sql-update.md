@@ -1,11 +1,3 @@
-
-
-|                        dblink\_build\_sql\_update                       |                                                                          |                                                      |                                                       |                                                                                                   |
-| :---------------------------------------------------------------------: | :----------------------------------------------------------------------- | :--------------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------------------------------------: |
-| [Prev](contrib-dblink-build-sql-delete.html "dblink_build_sql_delete")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") | F.12. dblink — connect to other PostgreSQL databases | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](dict-int.html "F.13. dict_int —&#xA;   example full-text search dictionary for integers") |
-
-***
-
 ## dblink\_build\_sql\_update
 
 dblink\_build\_sql\_update — builds an UPDATE statement using a local tuple, replacing the primary key field values with alternative supplied values
@@ -65,10 +57,3 @@ SELECT dblink_build_sql_update('foo', '1 2', 2, '{"1", "a"}', '{"1", "b"}');
  UPDATE foo SET f1='1',f2='b',f3='1' WHERE f1='1' AND f2='b'
 (1 row)
 ```
-
-***
-
-|                                                                         |                                                                          |                                                                                                   |
-| :---------------------------------------------------------------------- | :----------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------: |
-| [Prev](contrib-dblink-build-sql-delete.html "dblink_build_sql_delete")  | [Up](dblink.html "F.12. dblink — connect to other PostgreSQL databases") |  [Next](dict-int.html "F.13. dict_int —&#xA;   example full-text search dictionary for integers") |
-| dblink\_build\_sql\_delete                                              |           [Home](index.html "PostgreSQL 17devel Documentation")          |                                F.13. dict\_int — example full-text search dictionary for integers |

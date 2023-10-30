@@ -1,11 +1,3 @@
-
-
-|                     2.1. Introduction                    |                                                       |                             |                                                       |                                                 |
-| :------------------------------------------------------: | :---------------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ----------------------------------------------: |
-| [Prev](tutorial-sql.html "Chapter 2. The SQL Language")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") | Chapter 2. The SQL Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](tutorial-concepts.html "2.2. Concepts") |
-
-***
-
 ## 2.1. Introduction [#](#TUTORIAL-SQL-INTRO)
 
 This chapter provides an overview of how to use SQL to perform simple operations. This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL. Numerous books have been written on SQL, including [\[melt93\]](biblio.html#MELT93 "Understanding the New SQL") and [\[date97\]](biblio.html#DATE97 "A Guide to the SQL Standard"). You should be aware that some PostgreSQL language features are extensions to the standard.
@@ -32,10 +24,3 @@ mydb=> \i basics.sql
 ```
 
 The `\i` command reads in commands from the specified file. `psql`'s `-s` option puts you in single step mode which pauses before sending each statement to the server. The commands used in this section are in the file `basics.sql`.
-
-***
-
-|                                                          |                                                       |                                                 |
-| :------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------: |
-| [Prev](tutorial-sql.html "Chapter 2. The SQL Language")  | [Up](tutorial-sql.html "Chapter 2. The SQL Language") |  [Next](tutorial-concepts.html "2.2. Concepts") |
-| Chapter 2. The SQL Language                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                   2.2. Concepts |

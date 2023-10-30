@@ -1,11 +1,3 @@
-
-
-|                       41.5. Rules and Privileges                       |                                                |                             |                                                       |                                                             |
-| :--------------------------------------------------------------------: | :--------------------------------------------- | :-------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](rules-update.html "41.4. Rules on INSERT, UPDATE, and DELETE")  | [Up](rules.html "Chapter 41. The Rule System") | Chapter 41. The Rule System | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](rules-status.html "41.6. Rules and Command Status") |
-
-***
-
 ## 41.5. Rules and Privileges [#](#RULES-PRIVILEGES)
 
 Due to rewriting of queries by the PostgreSQL rule system, other tables/views than those used in the original query get accessed. When update rules are used, this can include write access to tables.
@@ -68,10 +60,3 @@ Views created with the `security_barrier` may perform far worse than views creat
 The query planner has more flexibility when dealing with functions that have no side effects. Such functions are referred to as `LEAKPROOF`, and include many simple, commonly used operators, such as many equality operators. The query planner can safely allow such functions to be evaluated at any point in the query execution process, since invoking them on rows invisible to the user will not leak any information about the unseen rows. Further, functions which do not take arguments or which are not passed any arguments from the security barrier view do not have to be marked as `LEAKPROOF` to be pushed down, as they never receive data from the view. In contrast, a function that might throw an error depending on the values received as arguments (such as one that throws an error in the event of overflow or division by zero) is not leak-proof, and could provide significant information about the unseen rows if applied before the security view's row filters.
 
 It is important to understand that even a view created with the `security_barrier` option is intended to be secure only in the limited sense that the contents of the invisible tuples will not be passed to possibly-insecure functions. The user may well have other means of making inferences about the unseen data; for example, they can see the query plan using `EXPLAIN`, or measure the run time of queries against the view. A malicious attacker might be able to infer something about the amount of unseen data, or even gain some information about the data distribution or most common values (since these things may affect the run time of the plan; or even, since they are also reflected in the optimizer statistics, the choice of plan). If these types of "covert channel" attacks are of concern, it is probably unwise to grant any access to the data at all.
-
-***
-
-|                                                                        |                                                       |                                                             |
-| :--------------------------------------------------------------------- | :---------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](rules-update.html "41.4. Rules on INSERT, UPDATE, and DELETE")  |     [Up](rules.html "Chapter 41. The Rule System")    |  [Next](rules-status.html "41.6. Rules and Command Status") |
-| 41.4. Rules on `INSERT`, `UPDATE`, and `DELETE`                        | [Home](index.html "PostgreSQL 17devel Documentation") |                              41.6. Rules and Command Status |

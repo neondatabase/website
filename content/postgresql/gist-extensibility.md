@@ -1,11 +1,3 @@
-
-
-|                           68.3. Extensibility                          |                                            |                          |                                                       |                                                          |
-| :--------------------------------------------------------------------: | :----------------------------------------- | :----------------------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](gist-builtin-opclasses.html "68.2. Built-in Operator Classes")  | [Up](gist.html "Chapter 68. GiST Indexes") | Chapter 68. GiST Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](gist-implementation.html "68.4. Implementation") |
-
-***
-
 ## 68.3. Extensibility [#](#GIST-EXTENSIBILITY)
 
 Traditionally, implementing a new index access method meant a lot of difficult work. It was necessary to understand the inner workings of the database, such as the lock manager and Write-Ahead Log. The GiST interface has a high level of abstraction, requiring the access method implementer only to implement the semantics of the data type being accessed. The GiST layer itself takes care of concurrency, logging and searching the tree structure.
@@ -646,10 +638,3 @@ There are five methods that an index operator class for GiST must provide, and s
     ```
 
 All the GiST support methods are normally called in short-lived memory contexts; that is, `CurrentMemoryContext` will get reset after each tuple is processed. It is therefore not very important to worry about pfree'ing everything you palloc. However, in some cases it's useful for a support method to cache data across repeated calls. To do that, allocate the longer-lived data in `fcinfo->flinfo->fn_mcxt`, and keep a pointer to it in `fcinfo->flinfo->fn_extra`. Such data will survive for the life of the index operation (e.g., a single GiST index scan, index build, or index tuple insertion). Be careful to pfree the previous value when replacing a `fn_extra` value, or the leak will accumulate for the duration of the operation.
-
-***
-
-|                                                                        |                                                       |                                                          |
-| :--------------------------------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](gist-builtin-opclasses.html "68.2. Built-in Operator Classes")  |       [Up](gist.html "Chapter 68. GiST Indexes")      |  [Next](gist-implementation.html "68.4. Implementation") |
-| 68.2. Built-in Operator Classes                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                     68.4. Implementation |

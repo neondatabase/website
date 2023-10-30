@@ -1,11 +1,3 @@
-
-
-|               37.24. `element_types`              |                                                                    |                                    |                                                       |                                                               |
-| :-----------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](infoschema-domains.html "37.23. domains")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-enabled-roles.html "37.25. enabled_roles") |
-
-***
-
 ## 37.24. `element_types` [#](#INFOSCHEMA-ELEMENT-TYPES)
 
 The view `element_types` contains the data type descriptors of the elements of arrays. When a table column, composite-type attribute, domain, function parameter, or function return value is defined to be of an array type, the respective information schema view only contains `ARRAY` in the column `data_type`. To obtain information on the element type of the array, you can join the respective view with this view. For example, to show the columns of a table with data types and array element types, if applicable, you could do:
@@ -54,10 +46,3 @@ This view only includes objects that the current user has access to, by way of b
 | `scope_name` `sql_identifier`Applies to a feature not available in PostgreSQL                                                                                                                                                                                                                                                                                               |
 | `maximum_cardinality` `cardinal_number`Always null, because arrays always have unlimited maximum cardinality in PostgreSQL                                                                                                                                                                                                                                                  |
 | `dtd_identifier` `sql_identifier`An identifier of the data type descriptor of the element. This is currently not useful.                                                                                                                                                                                                                                                    |
-
-***
-
-|                                                   |                                                                    |                                                               |
-| :------------------------------------------------ | :----------------------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](infoschema-domains.html "37.23. domains")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-enabled-roles.html "37.25. enabled_roles") |
-| 37.23. `domains`                                  |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                        37.25. `enabled_roles` |

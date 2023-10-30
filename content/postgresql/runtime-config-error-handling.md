@@ -1,11 +1,3 @@
-
-
-|                                20.14. Error Handling                                |                                                              |                                  |                                                       |                                                             |
-| :---------------------------------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](runtime-config-compatible.html "20.13. Version and Platform Compatibility")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-preset.html "20.15. Preset Options") |
-
-***
-
 ## 20.14. Error Handling [#](#RUNTIME-CONFIG-ERROR-HANDLING)
 
 * `exit_on_error` (`boolean`) [#](#GUC-EXIT-ON-ERROR)
@@ -33,10 +25,3 @@
     On Linux, `syncfs` may be used instead, to ask the operating system to synchronize the whole file systems that contain the data directory, the WAL files and each tablespace (but not any other file systems that may be reachable through symbolic links). See [Appendix O](syncfs.html "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line.
-
-***
-
-|                                                                                     |                                                              |                                                             |
-| :---------------------------------------------------------------------------------- | :----------------------------------------------------------: | ----------------------------------------------------------: |
-| [Prev](runtime-config-compatible.html "20.13. Version and Platform Compatibility")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-preset.html "20.15. Preset Options") |
-| 20.13. Version and Platform Compatibility                                           |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                       20.15. Preset Options |

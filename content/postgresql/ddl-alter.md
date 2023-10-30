@@ -1,11 +1,3 @@
-
-
-|                  5.6. Modifying Tables                 |                                             |                            |                                                       |                                          |
-| :----------------------------------------------------: | :------------------------------------------ | :------------------------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](ddl-system-columns.html "5.5. System Columns")  | [Up](ddl.html "Chapter 5. Data Definition") | Chapter 5. Data Definition | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](ddl-priv.html "5.7. Privileges") |
-
-***
-
 ## 5.6. Modifying Tables [#](#DDL-ALTER)
 
   * *   [5.6.1. Adding a Column](ddl-alter.html#DDL-ALTER-ADDING-A-COLUMN)
@@ -170,10 +162,3 @@ To rename a table:
 
 ALTER TABLE products RENAME TO items;
 ```
-
-***
-
-|                                                        |                                                       |                                          |
-| :----------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------: |
-| [Prev](ddl-system-columns.html "5.5. System Columns")  |      [Up](ddl.html "Chapter 5. Data Definition")      |  [Next](ddl-priv.html "5.7. Privileges") |
-| 5.5. System Columns                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                          5.7. Privileges |

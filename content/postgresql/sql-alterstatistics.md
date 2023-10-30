@@ -1,11 +1,3 @@
-
-
-|               ALTER STATISTICS               |                                        |              |                                                       |                                                          |
-| :------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](sql-alterserver.html "ALTER SERVER")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altersubscription.html "ALTER SUBSCRIPTION") |
-
-***
-
 ## ALTER STATISTICS
 
 ALTER STATISTICS — change the definition of an extended statistics object
@@ -55,10 +47,3 @@ There is no `ALTER STATISTICS` command in the SQL standard.
 ## See Also
 
 [CREATE STATISTICS](sql-createstatistics.html "CREATE STATISTICS"), [DROP STATISTICS](sql-dropstatistics.html "DROP STATISTICS")
-
-***
-
-|                                              |                                                       |                                                          |
-| :------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------: |
-| [Prev](sql-alterserver.html "ALTER SERVER")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altersubscription.html "ALTER SUBSCRIPTION") |
-| ALTER SERVER                                 | [Home](index.html "PostgreSQL 17devel Documentation") |                                       ALTER SUBSCRIPTION |

@@ -1,11 +1,3 @@
-
-
-|                  43.6. Control Structures                 |                                                                     |                                                |                                                       |                                               |
-| :-------------------------------------------------------: | :------------------------------------------------------------------ | :--------------------------------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](plpgsql-statements.html "43.5. Basic Statements")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") | Chapter 43. PL/pgSQL — SQL Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](plpgsql-cursors.html "43.7. Cursors") |
-
-***
-
 ## 43.6. Control Structures [#](#PLPGSQL-CONTROL-STRUCTURES)
 
   * *   [43.6.1. Returning from a Function](plpgsql-control-structures.html#PLPGSQL-STATEMENTS-RETURNING)
@@ -784,10 +776,3 @@ CONTEXT:  PL/pgSQL function outer_func() line 3 at RETURN
 ```
 
 `GET STACKED DIAGNOSTICS ... PG_EXCEPTION_CONTEXT` returns the same sort of stack trace, but describing the location at which an error was detected, rather than the current location.
-
-***
-
-|                                                           |                                                                     |                                               |
-| :-------------------------------------------------------- | :-----------------------------------------------------------------: | --------------------------------------------: |
-| [Prev](plpgsql-statements.html "43.5. Basic Statements")  | [Up](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language") |  [Next](plpgsql-cursors.html "43.7. Cursors") |
-| 43.5. Basic Statements                                    |        [Home](index.html "PostgreSQL 17devel Documentation")        |                                 43.7. Cursors |

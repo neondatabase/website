@@ -1,11 +1,3 @@
-
-
-|         ALTER AGGREGATE         |                                        |              |                                                       |                                                    |
-| :-----------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-abort.html "ABORT")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-altercollation.html "ALTER COLLATION") |
-
-***
-
 ## ALTER AGGREGATE
 
 ALTER AGGREGATE — change the definition of an aggregate function
@@ -103,10 +95,3 @@ There is no `ALTER AGGREGATE` statement in the SQL standard.
 ## See Also
 
 [CREATE AGGREGATE](sql-createaggregate.html "CREATE AGGREGATE"), [DROP AGGREGATE](sql-dropaggregate.html "DROP AGGREGATE")
-
-***
-
-|                                 |                                                       |                                                    |
-| :------------------------------ | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-abort.html "ABORT")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-altercollation.html "ALTER COLLATION") |
-| ABORT                           | [Home](index.html "PostgreSQL 17devel Documentation") |                                    ALTER COLLATION |

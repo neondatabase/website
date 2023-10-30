@@ -1,11 +1,3 @@
-
-
-|                      SPI\_prepare\_params                     |                                                      |                           |                                                       |                                                     |
-| :-----------------------------------------------------------: | :--------------------------------------------------- | :-----------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](spi-spi-prepare-extended.html "SPI_prepare_extended")  | [Up](spi-interface.html "47.1. Interface Functions") | 47.1. Interface Functions | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](spi-spi-getargcount.html "SPI_getargcount") |
-
-***
-
 ## SPI\_prepare\_params
 
 SPI\_prepare\_params — prepare a statement, without executing it yet
@@ -47,10 +39,3 @@ This function is now deprecated in favor of `SPI_prepare_extended`.
 ## Return Value
 
 `SPI_prepare_params` has the same return conventions as `SPI_prepare`.
-
-***
-
-|                                                               |                                                       |                                                     |
-| :------------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](spi-spi-prepare-extended.html "SPI_prepare_extended")  |  [Up](spi-interface.html "47.1. Interface Functions") |  [Next](spi-spi-getargcount.html "SPI_getargcount") |
-| SPI\_prepare\_extended                                        | [Home](index.html "PostgreSQL 17devel Documentation") |                                    SPI\_getargcount |

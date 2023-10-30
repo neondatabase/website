@@ -1,11 +1,3 @@
-
-
-|                        37.13. `column_domain_usage`                       |                                                                    |                                    |                                                       |                                                                 |
-| :-----------------------------------------------------------------------: | :----------------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](infoschema-column-column-usage.html "37.12. column_column_usage")  | [Up](information-schema.html "Chapter 37. The Information Schema") | Chapter 37. The Information Schema | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](infoschema-column-options.html "37.14. column_options") |
-
-***
-
 ## 37.13. `column_domain_usage` [#](#INFOSCHEMA-COLUMN-DOMAIN-USAGE)
 
 The view `column_domain_usage` identifies all columns (of a table or a view) that make use of some domain defined in the current database and owned by a currently enabled role.
@@ -21,10 +13,3 @@ The view `column_domain_usage` identifies all columns (of a table or a view) tha
 | `table_schema` `sql_identifier`Name of the schema containing the table                                    |
 | `table_name` `sql_identifier`Name of the table                                                            |
 | `column_name` `sql_identifier`Name of the column                                                          |
-
-***
-
-|                                                                           |                                                                    |                                                                 |
-| :------------------------------------------------------------------------ | :----------------------------------------------------------------: | --------------------------------------------------------------: |
-| [Prev](infoschema-column-column-usage.html "37.12. column_column_usage")  | [Up](information-schema.html "Chapter 37. The Information Schema") |  [Next](infoschema-column-options.html "37.14. column_options") |
-| 37.12. `column_column_usage`                                              |        [Home](index.html "PostgreSQL 17devel Documentation")       |                                         37.14. `column_options` |

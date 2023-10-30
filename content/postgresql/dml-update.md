@@ -1,11 +1,3 @@
-
-
-|               6.2. Updating Data               |                                               |                              |                                                       |                                               |
-| :--------------------------------------------: | :-------------------------------------------- | :--------------------------: | ----------------------------------------------------: | --------------------------------------------: |
-| [Prev](dml-insert.html "6.1. Inserting Data")  | [Up](dml.html "Chapter 6. Data Manipulation") | Chapter 6. Data Manipulation | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](dml-delete.html "6.3. Deleting Data") |
-
-***
-
 ## 6.2. Updating Data [#](#DML-UPDATE)
 
 The modification of data that is already in the database is referred to as updating. You can update individual rows, all the rows in a table, or a subset of all rows. Each column can be updated separately; the other columns are not affected.
@@ -42,10 +34,3 @@ You can update more than one column in an `UPDATE` command by listing more than 
 
 UPDATE mytable SET a = 5, b = 3, c = 1 WHERE a > 0;
 ```
-
-***
-
-|                                                |                                                       |                                               |
-| :--------------------------------------------- | :---------------------------------------------------: | --------------------------------------------: |
-| [Prev](dml-insert.html "6.1. Inserting Data")  |     [Up](dml.html "Chapter 6. Data Manipulation")     |  [Next](dml-delete.html "6.3. Deleting Data") |
-| 6.1. Inserting Data                            | [Home](index.html "PostgreSQL 17devel Documentation") |                            6.3. Deleting Data |

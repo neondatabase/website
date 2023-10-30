@@ -1,11 +1,3 @@
-
-
-|                   ABORT                   |                                        |              |                                                       |                                                    |
-| :---------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-commands.html "SQL Commands")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-alteraggregate.html "ALTER AGGREGATE") |
-
-***
-
 ## ABORT
 
 ABORT — abort the current transaction
@@ -53,10 +45,3 @@ This command is a PostgreSQL extension present for historical reasons. `ROLLBACK
 ## See Also
 
 [BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [ROLLBACK](sql-rollback.html "ROLLBACK")
-
-***
-
-|                                           |                                                       |                                                    |
-| :---------------------------------------- | :---------------------------------------------------: | -------------------------------------------------: |
-| [Prev](sql-commands.html "SQL Commands")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-alteraggregate.html "ALTER AGGREGATE") |
-| SQL Commands                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                    ALTER AGGREGATE |

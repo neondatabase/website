@@ -1,11 +1,3 @@
-
-
-|                  DROP SUBSCRIPTION                 |                                        |              |                                                       |                                          |
-| :------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-dropstatistics.html "DROP STATISTICS")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-droptable.html "DROP TABLE") |
-
-***
-
 ## DROP SUBSCRIPTION
 
 DROP SUBSCRIPTION — remove a subscription
@@ -57,10 +49,3 @@ DROP SUBSCRIPTION mysub;
 ## See Also
 
 [CREATE SUBSCRIPTION](sql-createsubscription.html "CREATE SUBSCRIPTION"), [ALTER SUBSCRIPTION](sql-altersubscription.html "ALTER SUBSCRIPTION")
-
-***
-
-|                                                    |                                                       |                                          |
-| :------------------------------------------------- | :---------------------------------------------------: | ---------------------------------------: |
-| [Prev](sql-dropstatistics.html "DROP STATISTICS")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-droptable.html "DROP TABLE") |
-| DROP STATISTICS                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                               DROP TABLE |

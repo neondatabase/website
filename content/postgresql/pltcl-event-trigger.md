@@ -1,11 +1,3 @@
-
-
-|             44.7. Event Trigger Functions in PL/Tcl             |                                                                 |                                              |                                                       |                                                                     |
-| :-------------------------------------------------------------: | :-------------------------------------------------------------- | :------------------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](pltcl-trigger.html "44.6. Trigger Functions in PL/Tcl")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") | Chapter 44. PL/Tcl — Tcl Procedural Language | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](pltcl-error-handling.html "44.8. Error Handling in PL/Tcl") |
-
-***
-
 ## 44.7. Event Trigger Functions in PL/Tcl [#](#PLTCL-EVENT-TRIGGER)
 
 Event trigger functions can be written in PL/Tcl. PostgreSQL requires that a function that is to be called as an event trigger must be declared as a function with no arguments and a return type of `event_trigger`.
@@ -32,10 +24,3 @@ $$ LANGUAGE pltcl;
 
 CREATE EVENT TRIGGER tcl_a_snitch ON ddl_command_start EXECUTE FUNCTION tclsnitch();
 ```
-
-***
-
-|                                                                 |                                                                 |                                                                     |
-| :-------------------------------------------------------------- | :-------------------------------------------------------------: | ------------------------------------------------------------------: |
-| [Prev](pltcl-trigger.html "44.6. Trigger Functions in PL/Tcl")  | [Up](pltcl.html "Chapter 44. PL/Tcl — Tcl Procedural Language") |  [Next](pltcl-error-handling.html "44.8. Error Handling in PL/Tcl") |
-| 44.6. Trigger Functions in PL/Tcl                               |      [Home](index.html "PostgreSQL 17devel Documentation")      |                                      44.8. Error Handling in PL/Tcl |

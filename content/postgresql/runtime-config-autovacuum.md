@@ -1,11 +1,3 @@
-
-
-|                      20.10. Automatic Vacuuming                     |                                                              |                                  |                                                       |                                                                         |
-| :-----------------------------------------------------------------: | :----------------------------------------------------------- | :------------------------------: | ----------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](runtime-config-statistics.html "20.9. Run-time Statistics")  | [Up](runtime-config.html "Chapter 20. Server Configuration") | Chapter 20. Server Configuration | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](runtime-config-client.html "20.11. Client Connection Defaults") |
-
-***
-
 ## 20.10. Automatic Vacuuming [#](#RUNTIME-CONFIG-AUTOVACUUM)
 
 These settings control the behavior of the *autovacuum* feature. Refer to [Section 25.1.6](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon") for more information. Note that many of these settings can be overridden on a per-table basis; see [Storage Parameters](sql-createtable.html#SQL-CREATETABLE-STORAGE-PARAMETERS "Storage Parameters").
@@ -67,10 +59,3 @@ These settings control the behavior of the *autovacuum* feature. Refer to [Secti
 * `autovacuum_vacuum_cost_limit` (`integer`) [#](#GUC-AUTOVACUUM-VACUUM-COST-LIMIT)
 
     Specifies the cost limit value that will be used in automatic `VACUUM` operations. If -1 is specified (which is the default), the regular [vacuum\_cost\_limit](runtime-config-resource.html#GUC-VACUUM-COST-LIMIT) value will be used. Note that the value is distributed proportionally among the running autovacuum workers, if there is more than one, so that the sum of the limits for each worker does not exceed the value of this variable. This parameter can only be set in the `postgresql.conf` file or on the server command line; but the setting can be overridden for individual tables by changing table storage parameters.
-
-***
-
-|                                                                     |                                                              |                                                                         |
-| :------------------------------------------------------------------ | :----------------------------------------------------------: | ----------------------------------------------------------------------: |
-| [Prev](runtime-config-statistics.html "20.9. Run-time Statistics")  | [Up](runtime-config.html "Chapter 20. Server Configuration") |  [Next](runtime-config-client.html "20.11. Client Connection Defaults") |
-| 20.9. Run-time Statistics                                           |     [Home](index.html "PostgreSQL 17devel Documentation")    |                                       20.11. Client Connection Defaults |

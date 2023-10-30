@@ -1,11 +1,3 @@
-
-
-|             pg\_verifybackup             |                                                              |                                |                                                       |                               |
-| :--------------------------------------: | :----------------------------------------------------------- | :----------------------------: | ----------------------------------------------------: | ----------------------------: |
-| [Prev](app-pgrestore.html "pg_restore")  | [Up](reference-client.html "PostgreSQL Client Applications") | PostgreSQL Client Applications | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](app-psql.html "psql") |
-
-***
-
 ## pg\_verifybackup
 
 pg\_verifybackup — verify the integrity of a base backup of a PostgreSQL cluster
@@ -109,10 +101,3 @@ pg_verifybackup --ignore=note.to.self --skip-checksums /usr/local/pgsql/data
 ## See Also
 
 [pg\_basebackup](app-pgbasebackup.html "pg_basebackup")
-
-***
-
-|                                          |                                                              |                               |
-| :--------------------------------------- | :----------------------------------------------------------: | ----------------------------: |
-| [Prev](app-pgrestore.html "pg_restore")  | [Up](reference-client.html "PostgreSQL Client Applications") |  [Next](app-psql.html "psql") |
-| pg\_restore                              |     [Home](index.html "PostgreSQL 17devel Documentation")    |                          psql |

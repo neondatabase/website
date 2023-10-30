@@ -1,11 +1,3 @@
-
-
-|                 11.2. Index Types                |                                          |                     |                                                       |                                                               |
-| :----------------------------------------------: | :--------------------------------------- | :-----------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](indexes-intro.html "11.1. Introduction")  | [Up](indexes.html "Chapter 11. Indexes") | Chapter 11. Indexes | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](indexes-multicolumn.html "11.3. Multicolumn Indexes") |
-
-***
-
 ## 11.2. Index Types [#](#INDEXES-TYPES)
 
   * *   [11.2.1. B-Tree](indexes-types.html#INDEXES-TYPES-BTREE)
@@ -102,10 +94,3 @@ BRIN indexes (a shorthand for Block Range INdexes) store summaries about the val
 ```
 
 The BRIN operator classes included in the standard distribution are documented in [Table 71.1](brin-builtin-opclasses.html#BRIN-BUILTIN-OPCLASSES-TABLE "Table 71.1. Built-in BRIN Operator Classes"). For more information see [Chapter 71](brin.html "Chapter 71. BRIN Indexes").
-
-***
-
-|                                                  |                                                       |                                                               |
-| :----------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](indexes-intro.html "11.1. Introduction")  |        [Up](indexes.html "Chapter 11. Indexes")       |  [Next](indexes-multicolumn.html "11.3. Multicolumn Indexes") |
-| 11.1. Introduction                               | [Home](index.html "PostgreSQL 17devel Documentation") |                                     11.3. Multicolumn Indexes |

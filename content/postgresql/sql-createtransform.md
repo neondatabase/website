@@ -1,11 +1,3 @@
-
-
-|                         CREATE TRANSFORM                         |                                        |              |                                                       |                                                  |
-| :--------------------------------------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-createtstemplate.html "CREATE TEXT SEARCH TEMPLATE")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-createtrigger.html "CREATE TRIGGER") |
-
-***
-
 ## CREATE TRANSFORM
 
 CREATE TRANSFORM — define a new transform
@@ -102,10 +94,3 @@ This form of `CREATE TRANSFORM` is a PostgreSQL extension. There is a `CREATE TR
 ## See Also
 
 [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [CREATE LANGUAGE](sql-createlanguage.html "CREATE LANGUAGE"), [CREATE TYPE](sql-createtype.html "CREATE TYPE"), [DROP TRANSFORM](sql-droptransform.html "DROP TRANSFORM")
-
-***
-
-|                                                                  |                                                       |                                                  |
-| :--------------------------------------------------------------- | :---------------------------------------------------: | -----------------------------------------------: |
-| [Prev](sql-createtstemplate.html "CREATE TEXT SEARCH TEMPLATE")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-createtrigger.html "CREATE TRIGGER") |
-| CREATE TEXT SEARCH TEMPLATE                                      | [Home](index.html "PostgreSQL 17devel Documentation") |                                   CREATE TRIGGER |

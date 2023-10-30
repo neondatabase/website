@@ -1,11 +1,3 @@
-
-
-|                     9.22. Window Functions                    |                                                           |                                    |                                                       |                                                               |
-| :-----------------------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](functions-aggregate.html "9.21. Aggregate Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") | Chapter 9. Functions and Operators | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](functions-subquery.html "9.23. Subquery Expressions") |
-
-***
-
 ## 9.22. Window Functions [#](#FUNCTIONS-WINDOW)
 
 *Window functions* provide the ability to perform calculations across sets of rows that are related to the current query row. See [Section 3.5](tutorial-window.html "3.5. Window Functions") for an introduction to this feature, and [Section 4.2.8](sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls") for syntax details.
@@ -41,10 +33,3 @@ When an aggregate function is used as a window function, it aggregates over the 
 ### Note
 
 The SQL standard defines a `RESPECT NULLS` or `IGNORE NULLS` option for `lead`, `lag`, `first_value`, `last_value`, and `nth_value`. This is not implemented in PostgreSQL: the behavior is always the same as the standard's default, namely `RESPECT NULLS`. Likewise, the standard's `FROM FIRST` or `FROM LAST` option for `nth_value` is not implemented: only the default `FROM FIRST` behavior is supported. (You can achieve the result of `FROM LAST` by reversing the `ORDER BY` ordering.)
-
-***
-
-|                                                               |                                                           |                                                               |
-| :------------------------------------------------------------ | :-------------------------------------------------------: | ------------------------------------------------------------: |
-| [Prev](functions-aggregate.html "9.21. Aggregate Functions")  | [Up](functions.html "Chapter 9. Functions and Operators") |  [Next](functions-subquery.html "9.23. Subquery Expressions") |
-| 9.21. Aggregate Functions                                     |   [Home](index.html "PostgreSQL 17devel Documentation")   |                                    9.23. Subquery Expressions |

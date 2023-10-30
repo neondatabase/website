@@ -1,11 +1,3 @@
-
-
-|                8.9. Network Address Types               |                                             |                       |                                                       |                                                     |
-| :-----------------------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | --------------------------------------------------: |
-| [Prev](datatype-geometric.html "8.8. Geometric Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-bit.html "8.10. Bit String Types") |
-
-***
-
 ## 8.9. Network Address Types [#](#DATATYPE-NET-TYPES)
 
   * *   [8.9.1. `inet`](datatype-net-types.html#DATATYPE-INET)
@@ -120,10 +112,3 @@ SELECT macaddr8_set7bit('08:00:2b:01:02:03');
  0a:00:2b:ff:fe:01:02:03
 (1 row)
 ```
-
-***
-
-|                                                         |                                                       |                                                     |
-| :------------------------------------------------------ | :---------------------------------------------------: | --------------------------------------------------: |
-| [Prev](datatype-geometric.html "8.8. Geometric Types")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](datatype-bit.html "8.10. Bit String Types") |
-| 8.8. Geometric Types                                    | [Home](index.html "PostgreSQL 17devel Documentation") |                              8.10. Bit String Types |

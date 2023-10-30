@@ -1,11 +1,3 @@
-
-
-|                FETCH                |                                        |              |                                                       |                                 |
-| :---------------------------------: | :------------------------------------- | :----------: | ----------------------------------------------------: | ------------------------------: |
-| [Prev](sql-explain.html "EXPLAIN")  | [Up](sql-commands.html "SQL Commands") | SQL Commands | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](sql-grant.html "GRANT") |
-
-***
-
 ## FETCH
 
 FETCH — retrieve rows from a query using a cursor
@@ -184,10 +176,3 @@ The SQL standard allows only `FROM` preceding the cursor name; the option to use
 ## See Also
 
 [CLOSE](sql-close.html "CLOSE"), [DECLARE](sql-declare.html "DECLARE"), [MOVE](sql-move.html "MOVE")
-
-***
-
-|                                     |                                                       |                                 |
-| :---------------------------------- | :---------------------------------------------------: | ------------------------------: |
-| [Prev](sql-explain.html "EXPLAIN")  |         [Up](sql-commands.html "SQL Commands")        |  [Next](sql-grant.html "GRANT") |
-| EXPLAIN                             | [Home](index.html "PostgreSQL 17devel Documentation") |                           GRANT |

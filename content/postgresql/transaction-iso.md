@@ -1,11 +1,3 @@
-
-
-|          13.2. Transaction Isolation          |                                                   |                                 |                                                       |                                                         |
-| :-------------------------------------------: | :------------------------------------------------ | :-----------------------------: | ----------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](mvcc-intro.html "13.1. Introduction")  | [Up](mvcc.html "Chapter 13. Concurrency Control") | Chapter 13. Concurrency Control | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](explicit-locking.html "13.3. Explicit Locking") |
-
-***
-
 ## 13.2. Transaction Isolation [#](#TRANSACTION-ISO)
 
   * *   [13.2.1. Read Committed Isolation Level](transaction-iso.html#XACT-READ-COMMITTED)
@@ -184,10 +176,3 @@ For optimal performance when relying on Serializable transactions for concurrenc
 * A sequential scan will always necessitate a relation-level predicate lock. This can result in an increased rate of serialization failures. It may be helpful to encourage the use of index scans by reducing [random\_page\_cost](runtime-config-query.html#GUC-RANDOM-PAGE-COST) and/or increasing [cpu\_tuple\_cost](runtime-config-query.html#GUC-CPU-TUPLE-COST). Be sure to weigh any decrease in transaction rollbacks and restarts against any overall change in query execution time.
 
 The Serializable isolation level is implemented using a technique known in academic database literature as Serializable Snapshot Isolation, which builds on Snapshot Isolation by adding checks for serialization anomalies. Some differences in behavior and performance may be observed when compared with other systems that use a traditional locking technique. Please see [\[ports12\]](biblio.html#PORTS12) for detailed information.
-
-***
-
-|                                               |                                                       |                                                         |
-| :-------------------------------------------- | :---------------------------------------------------: | ------------------------------------------------------: |
-| [Prev](mvcc-intro.html "13.1. Introduction")  |   [Up](mvcc.html "Chapter 13. Concurrency Control")   |  [Next](explicit-locking.html "13.3. Explicit Locking") |
-| 13.1. Introduction                            | [Home](index.html "PostgreSQL 17devel Documentation") |                                  13.3. Explicit Locking |

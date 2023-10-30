@@ -1,11 +1,3 @@
-
-
-|               22.5. Predefined Roles              |                                                    |                            |                                                       |                                                        |
-| :-----------------------------------------------: | :------------------------------------------------- | :------------------------: | ----------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](role-removal.html "22.4. Dropping Roles")  | [Up](user-manag.html "Chapter 22. Database Roles") | Chapter 22. Database Roles | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](perm-functions.html "22.6. Function Security") |
-
-***
-
 ## 22.5. Predefined Roles [#](#PREDEFINED-ROLES)
 
 PostgreSQL provides a set of predefined roles that provide access to certain, commonly needed, privileged capabilities and information. Administrators (including roles that have the `CREATEROLE` privilege) can `GRANT` these roles to users and/or other roles in their environment, providing those users with access to the specified capabilities and information.
@@ -49,10 +41,3 @@ Administrators can grant access to these roles to users using the [`GRANT`](sql-
 
 GRANT pg_signal_backend TO admin_user;
 ```
-
-***
-
-|                                                   |                                                       |                                                        |
-| :------------------------------------------------ | :---------------------------------------------------: | -----------------------------------------------------: |
-| [Prev](role-removal.html "22.4. Dropping Roles")  |   [Up](user-manag.html "Chapter 22. Database Roles")  |  [Next](perm-functions.html "22.6. Function Security") |
-| 22.4. Dropping Roles                              | [Home](index.html "PostgreSQL 17devel Documentation") |                                22.6. Function Security |

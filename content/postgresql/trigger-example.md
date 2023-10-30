@@ -1,11 +1,3 @@
-
-
-|                    39.4. A Complete Trigger Example                    |                                            |                      |                                                       |                                                           |
-| :--------------------------------------------------------------------: | :----------------------------------------- | :------------------: | ----------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](trigger-interface.html "39.3. Writing Trigger Functions in C")  | [Up](triggers.html "Chapter 39. Triggers") | Chapter 39. Triggers | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](event-triggers.html "Chapter 40. Event Triggers") |
-
-***
-
 ## 39.4. A Complete Trigger Example [#](#TRIGGER-EXAMPLE)
 
 Here is a very simple example of a trigger function written in C. (Examples of triggers written in procedural languages can be found in the documentation of the procedural languages.)
@@ -183,10 +175,3 @@ DELETE 2
 ```
 
 There are more complex examples in `src/test/regress/regress.c` and in [spi](contrib-spi.html "F.40. spi — Server Programming Interface features/examples").
-
-***
-
-|                                                                        |                                                       |                                                           |
-| :--------------------------------------------------------------------- | :---------------------------------------------------: | --------------------------------------------------------: |
-| [Prev](trigger-interface.html "39.3. Writing Trigger Functions in C")  |       [Up](triggers.html "Chapter 39. Triggers")      |  [Next](event-triggers.html "Chapter 40. Event Triggers") |
-| 39.3. Writing Trigger Functions in C                                   | [Home](index.html "PostgreSQL 17devel Documentation") |                                Chapter 40. Event Triggers |

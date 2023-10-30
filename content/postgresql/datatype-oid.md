@@ -1,11 +1,3 @@
-
-
-|        8.19. Object Identifier Types       |                                             |                       |                                                       |                                                   |
-| :----------------------------------------: | :------------------------------------------ | :-------------------: | ----------------------------------------------------: | ------------------------------------------------: |
-| [Prev](domains.html "8.18. Domain Types")  | [Up](datatype.html "Chapter 8. Data Types") | Chapter 8. Data Types | [Home](index.html "PostgreSQL 17devel Documentation") |  [Next](datatype-pg-lsn.html "8.20. pg_lsn Type") |
-
-***
-
 ## 8.19. Object Identifier Types [#](#DATATYPE-OID)
 
 Object identifiers (OIDs) are used internally by PostgreSQL as primary keys for various system tables. Type `oid` represents an object identifier. There are also several alias types for `oid`, each named `regsomething`. [Table 8.26](datatype-oid.html#DATATYPE-OID-TABLE "Table 8.26. Object Identifier Types") shows an overview.
@@ -108,10 +100,3 @@ A third identifier type used by the system is `cid`, or command identifier. This
 A final identifier type used by the system is `tid`, or tuple identifier (row identifier). This is the data type of the system column `ctid`. A tuple ID is a pair (block number, tuple index within block) that identifies the physical location of the row within its table.
 
 (The system columns are further explained in [Section 5.5](ddl-system-columns.html "5.5. System Columns").)
-
-***
-
-|                                            |                                                       |                                                   |
-| :----------------------------------------- | :---------------------------------------------------: | ------------------------------------------------: |
-| [Prev](domains.html "8.18. Domain Types")  |      [Up](datatype.html "Chapter 8. Data Types")      |  [Next](datatype-pg-lsn.html "8.20. pg_lsn Type") |
-| 8.18. Domain Types                         | [Home](index.html "PostgreSQL 17devel Documentation") |                               8.20. `pg_lsn` Type |
