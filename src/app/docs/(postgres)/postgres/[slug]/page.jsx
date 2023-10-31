@@ -13,8 +13,7 @@ import getMetadata from 'utils/get-metadata';
 import serializeMdx from 'utils/serialize-mdx';
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
-  const currentSlug = slug.join('/');
+  const { slug: currentSlug } = params;
 
   const { title, excerpt } = await getPostBySlug(`/${currentSlug}`, POSTGRES_DIR_PATH);
 
@@ -32,8 +31,8 @@ export async function generateMetadata({ params }) {
 }
 
 const PostgresPage = async ({ params }) => {
-  const { slug } = params;
-  const currentSlug = slug.join('/');
+  const { slug: currentSlug } = params;
+
   const { title, content } = await getPostBySlug(`/${currentSlug}`, POSTGRES_DIR_PATH);
   const mdxSource = await serializeMdx(content);
   const { previousLink, nextLink } = getDocPreviousAndNextLinks(currentSlug);
@@ -60,11 +59,7 @@ export default PostgresPage;
 export async function generateStaticParams() {
   const posts = await getAllPosts();
 
-  return posts.map(({ slug }) => {
-    const slugsArray = slug.split('/');
-
-    return {
-      slug: slugsArray,
-    };
-  });
+  return posts.map(({ slug }) => ({
+      slug,
+    }));
 }
