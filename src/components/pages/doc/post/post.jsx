@@ -10,6 +10,7 @@ import Hero from 'components/pages/release-notes/hero';
 import ReleaseNoteList from 'components/pages/release-notes/release-note-list';
 // import ReleaseNotesFilter from 'components/pages/release-notes/release-notes-filter';
 import Content from 'components/shared/content';
+import { DOCS_BASE_PATH } from 'constants/docs';
 
 // TODO: Add pagination for release notes
 const ReleaseNotes = ({
@@ -80,7 +81,11 @@ const Post = ({
           </article>
         )}
 
-        <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
+        <PreviousAndNextLinks
+          previousLink={previousLink}
+          nextLink={nextLink}
+          basePath={DOCS_BASE_PATH}
+        />
         <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
       </div>
 
