@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
   return getMetadata({
     title: `${title || 'PostgreSQL'} - PostgreSQL Docs`,
     description: excerpt,
-    pathname: `${POSTGRES_DOCS_BASE_PATH}/${currentSlug}`,
+    pathname: `${POSTGRES_DOCS_BASE_PATH}${currentSlug}`,
     imagePath:
       title.length < MAX_TITLE_LENGTH
         ? `${VERCEL_URL}/docs/og?title=${encodedTitle}`
@@ -60,6 +60,6 @@ export async function generateStaticParams() {
   const posts = await getAllPosts();
 
   return posts.map(({ slug }) => ({
-      slug,
-    }));
+    slug,
+  }));
 }
