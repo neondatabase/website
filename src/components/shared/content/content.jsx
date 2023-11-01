@@ -22,8 +22,11 @@ const Heading =
   (Tag) =>
   // eslint-disable-next-line react/prop-types
   ({ children, className = null }) => {
-    // eslint-disable-next-line react/prop-types
-    const id = Array.isArray(children) && children.find((child) => child?.props?.href).props.href.replace('#', '');
+    const href =
+      // eslint-disable-next-line react/prop-types
+      Array.isArray(children) ? children.find((child) => child?.props?.href)?.props?.href : null;
+
+    const id = href?.replace('#', '');
 
     return (
       <Tag className={clsx(className, 'postgres-heading')} id={id || undefined}>
