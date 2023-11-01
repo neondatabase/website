@@ -18,10 +18,38 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
 
-const getComponents = (withoutAnchorHeading, isReleaseNote) => ({
-  h2: withoutAnchorHeading ? 'h2' : AnchorHeading('h2'),
-  h3: withoutAnchorHeading ? 'h3' : AnchorHeading('h3'),
-  h4: withoutAnchorHeading ? 'h4' : AnchorHeading('h4'),
+const Heading =
+  (Tag) =>
+  // eslint-disable-next-line react/prop-types
+  ({ children, className = null }) => {
+    const href =
+      // eslint-disable-next-line react/prop-types
+      Array.isArray(children) ? children.find((child) => child?.props?.href)?.props?.href : null;
+
+    const id = href?.replace('#', '');
+
+    return (
+      <Tag className={clsx(className, 'postgres-heading')} id={id || undefined}>
+        {children}
+      </Tag>
+    );
+  };
+
+const getHeadingComponent = (heading, withoutAnchorHeading, isPostgres) => {
+  if (withoutAnchorHeading) {
+    return heading;
+  }
+  if (isPostgres) {
+    return Heading(heading);
+  }
+
+  return AnchorHeading(heading);
+};
+
+const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
+  h2: getHeadingComponent('h2', withoutAnchorHeading, isPostgres),
+  h3: getHeadingComponent('h3', withoutAnchorHeading, isPostgres),
+  h4: getHeadingComponent('h4', withoutAnchorHeading, isPostgres),
   table: (props) => (
     <div className="table-wrapper">
       <table {...props} />
@@ -35,7 +63,11 @@ const getComponents = (withoutAnchorHeading, isReleaseNote) => ({
     }
     return <code {...props} />;
   },
-  pre: (props) => <div {...props} />,
+  pre: (props) => (
+    <div>
+      <CodeBlock {...props} />
+    </div>
+  ),
   a: (props) => {
     const { href, children, ...otherProps } = props;
     return (
@@ -72,6 +104,7 @@ const Content = forwardRef(
       asHTML = false,
       withoutAnchorHeading = false,
       isReleaseNote = false,
+      isPostgres = false,
     },
     ref
   ) => (
@@ -82,7 +115,10 @@ const Content = forwardRef(
       {asHTML ? (
         <div dangerouslySetInnerHTML={{ __html: content }} />
       ) : (
-        <MDXRemote components={getComponents(withoutAnchorHeading, isReleaseNote)} {...content} />
+        <MDXRemote
+          components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres)}
+          {...content}
+        />
       )}
     </div>
   )
@@ -94,6 +130,7 @@ Content.propTypes = {
   asHTML: PropTypes.bool,
   withoutAnchorHeading: PropTypes.bool,
   isReleaseNote: PropTypes.bool,
+  isPostgres: PropTypes.bool,
 };
 
 export default Content;
