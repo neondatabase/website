@@ -34,7 +34,7 @@ DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 
 To use the Neon serverless driver over HTTP, you must use the driver's `neon` function. You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
 
-<CodeTabs labels={["Node.js",  "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
+<CodeTabs labels={["Node.js", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
 ```javascript
 import { neon } from '@neondatabase/serverless';
@@ -106,7 +106,7 @@ You can use the Neon serverless driver in the same way you would use `node-postg
 The `Pool` and `Client` objects must be connected, used, and closed within a single request handler. Don't create the objects outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them.
 </Admonition>
 
-<CodeTabs labels={["Node.js","Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
+<CodeTabs labels={["Node.js", "Prisma", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
 
 ```javascript
 import { Pool } from '@neondatabase/serverless';
@@ -114,6 +114,28 @@ import { Pool } from '@neondatabase/serverless';
 const pool = new Pool({connectionString: process.env.DATABASE_URL});
 const {rows: [post]} = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
 pool.end();
+```
+
+```typescript
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { PrismaClient } from '@prisma/client';
+import dotenv from 'dotenv';
+import ws from 'ws';
+
+dotenv.config()
+neonConfig.webSocketConstructor = ws;
+const connectionString = `${process.env.DATABASE_URL}`;
+
+const pool = new Pool({ connectionString });
+const adapter = new PrismaNeon(pool);
+const prisma = new PrismaClient({ adapter });
+
+async function main(){
+  const posts = await prisma.post.findMany()
+}
+
+main()
 ```
 
 ```typescript

@@ -6,6 +6,10 @@ const getExcerpt = (content, length = 5000) => {
     .replace(/\s+/g, ' ') // replace multiple spaces with single space
     .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // replace markdown links with link text
     .replace(/([*~`#])/g, '') // remove markdown formatting
+    .replace(/(\|\s*.+?\s*\|)+/g, '') // remove markdown tables
+    .replace(/(:-+|-+:|:-+:)/g, ' ') // remove table alignments
+    .replace(/Up\s+Home\s+/g, '') // specifically target and remove the 'Up Home' text
+    .replace(/\s+/g, ' ') // consolidate multiple spaces into a single space
     .trim();
 
   return excerpt.length > length ? `${excerpt.substring(0, length)}...` : excerpt;
