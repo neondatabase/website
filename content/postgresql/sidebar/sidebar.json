@@ -2169,131 +2169,131 @@
             "slug": "spi-interface",
             "items": [
               {
-                "title": "SPI\\_connect",
+                "title": "SPI_connect",
                 "slug": "spi-spi-connect"
               },
               {
-                "title": "SPI\\_finish",
+                "title": "SPI_finish",
                 "slug": "spi-spi-finish"
               },
               {
-                "title": "SPI\\_execute",
+                "title": "SPI_execute",
                 "slug": "spi-spi-execute"
               },
               {
-                "title": "SPI\\_exec",
+                "title": "SPI_exec",
                 "slug": "spi-spi-exec"
               },
               {
-                "title": "SPI\\_execute\\_extended",
+                "title": "SPI_execute_extended",
                 "slug": "spi-spi-execute-extended"
               },
               {
-                "title": "SPI\\_execute\\_with\\_args",
+                "title": "SPI_execute_with_args",
                 "slug": "spi-spi-execute-with-args"
               },
               {
-                "title": "SPI\\_prepare",
+                "title": "SPI_prepare",
                 "slug": "spi-spi-prepare"
               },
               {
-                "title": "SPI\\_prepare\\_cursor",
+                "title": "SPI_prepare_cursor",
                 "slug": "spi-spi-prepare-cursor"
               },
               {
-                "title": "SPI\\_prepare\\_extended",
+                "title": "SPI_prepare_extended",
                 "slug": "spi-spi-prepare-extended"
               },
               {
-                "title": "SPI\\_prepare\\_params",
+                "title": "SPI_prepare_params",
                 "slug": "spi-spi-prepare-params"
               },
               {
-                "title": "SPI\\_getargcount",
+                "title": "SPI_getargcount",
                 "slug": "spi-spi-getargcount"
               },
               {
-                "title": "SPI\\_getargtypeid",
+                "title": "SPI_getargtypeid",
                 "slug": "spi-spi-getargtypeid"
               },
               {
-                "title": "SPI\\_is\\_cursor\\_plan",
+                "title": "SPI_is_cursor_plan",
                 "slug": "spi-spi-is-cursor-plan"
               },
               {
-                "title": "SPI\\_execute\\_plan",
+                "title": "SPI_execute_plan",
                 "slug": "spi-spi-execute-plan"
               },
               {
-                "title": "SPI\\_execute\\_plan\\_extended",
+                "title": "SPI_execute_plan_extended",
                 "slug": "spi-spi-execute-plan-extended"
               },
               {
-                "title": "SPI\\_execute\\_plan\\_with\\_paramlist",
+                "title": "SPI_execute_plan_with_paramlist",
                 "slug": "spi-spi-execute-plan-with-paramlist"
               },
               {
-                "title": "SPI\\_execp",
+                "title": "SPI_execp",
                 "slug": "spi-spi-execp"
               },
               {
-                "title": "SPI\\_cursor\\_open",
+                "title": "SPI_cursor_open",
                 "slug": "spi-spi-cursor-open"
               },
               {
-                "title": "SPI\\_cursor\\_open\\_with\\_args",
+                "title": "SPI_cursor_open_with_args",
                 "slug": "spi-spi-cursor-open-with-args"
               },
               {
-                "title": "SPI\\_cursor\\_open\\_with\\_paramlist",
+                "title": "SPI_cursor_open_with_paramlist",
                 "slug": "spi-spi-cursor-open-with-paramlist"
               },
               {
-                "title": "SPI\\_cursor\\_parse\\_open",
+                "title": "SPI_cursor_parse_open",
                 "slug": "spi-spi-cursor-parse-open"
               },
               {
-                "title": "SPI\\_cursor\\_find",
+                "title": "SPI_cursor_find",
                 "slug": "spi-spi-cursor-find"
               },
               {
-                "title": "SPI\\_cursor\\_fetch",
+                "title": "SPI_cursor_fetch",
                 "slug": "spi-spi-cursor-fetch"
               },
               {
-                "title": "SPI\\_cursor\\_move",
+                "title": "SPI_cursor_move",
                 "slug": "spi-spi-cursor-move"
               },
               {
-                "title": "SPI\\_scroll\\_cursor\\_fetch",
+                "title": "SPI_scroll_cursor_fetch",
                 "slug": "spi-spi-scroll-cursor-fetch"
               },
               {
-                "title": "SPI\\_scroll\\_cursor\\_move",
+                "title": "SPI_scroll_cursor_move",
                 "slug": "spi-spi-scroll-cursor-move"
               },
               {
-                "title": "SPI\\_cursor\\_close",
+                "title": "SPI_cursor_close",
                 "slug": "spi-spi-cursor-close"
               },
               {
-                "title": "SPI\\_keepplan",
+                "title": "SPI_keepplan",
                 "slug": "spi-spi-keepplan"
               },
               {
-                "title": "SPI\\_saveplan",
+                "title": "SPI_saveplan",
                 "slug": "spi-spi-saveplan"
               },
               {
-                "title": "SPI\\_register\\_relation",
+                "title": "SPI_register_relation",
                 "slug": "spi-spi-register-relation"
               },
               {
-                "title": "SPI\\_unregister\\_relation",
+                "title": "SPI_unregister_relation",
                 "slug": "spi-spi-unregister-relation"
               },
               {
-                "title": "SPI\\_register\\_trigger\\_data",
+                "title": "SPI_register_trigger_data",
                 "slug": "spi-spi-register-trigger-data"
               }
             ]
@@ -2303,39 +2303,39 @@
             "slug": "spi-interface-support",
             "items": [
               {
-                "title": "SPI\\_fname",
+                "title": "SPI_fname",
                 "slug": "spi-spi-fname"
               },
               {
-                "title": "SPI\\_fnumber",
+                "title": "SPI_fnumber",
                 "slug": "spi-spi-fnumber"
               },
               {
-                "title": "SPI\\_getvalue",
+                "title": "SPI_getvalue",
                 "slug": "spi-spi-getvalue"
               },
               {
-                "title": "SPI\\_getbinval",
+                "title": "SPI_getbinval",
                 "slug": "spi-spi-getbinval"
               },
               {
-                "title": "SPI\\_gettype",
+                "title": "SPI_gettype",
                 "slug": "spi-spi-gettype"
               },
               {
-                "title": "SPI\\_gettypeid",
+                "title": "SPI_gettypeid",
                 "slug": "spi-spi-gettypeid"
               },
               {
-                "title": "SPI\\_getrelname",
+                "title": "SPI_getrelname",
                 "slug": "spi-spi-getrelname"
               },
               {
-                "title": "SPI\\_getnspname",
+                "title": "SPI_getnspname",
                 "slug": "spi-spi-getnspname"
               },
               {
-                "title": "SPI\\_result\\_code\\_string",
+                "title": "SPI_result_code_string",
                 "slug": "spi-spi-result-code-string"
               }
             ]
@@ -2345,39 +2345,39 @@
             "slug": "spi-memory",
             "items": [
               {
-                "title": "SPI\\_palloc",
+                "title": "SPI_palloc",
                 "slug": "spi-spi-palloc"
               },
               {
-                "title": "SPI\\_repalloc",
+                "title": "SPI_repalloc",
                 "slug": "spi-realloc"
               },
               {
-                "title": "SPI\\_pfree",
+                "title": "SPI_pfree",
                 "slug": "spi-spi-pfree"
               },
               {
-                "title": "SPI\\_copytuple",
+                "title": "SPI_copytuple",
                 "slug": "spi-spi-copytuple"
               },
               {
-                "title": "SPI\\_returntuple",
+                "title": "SPI_returntuple",
                 "slug": "spi-spi-returntuple"
               },
               {
-                "title": "SPI\\_modifytuple",
+                "title": "SPI_modifytuple",
                 "slug": "spi-spi-modifytuple"
               },
               {
-                "title": "SPI\\_freetuple",
+                "title": "SPI_freetuple",
                 "slug": "spi-spi-freetuple"
               },
               {
-                "title": "SPI\\_freetuptable",
+                "title": "SPI_freetuptable",
                 "slug": "spi-spi-freetupletable"
               },
               {
-                "title": "SPI\\_freeplan",
+                "title": "SPI_freeplan",
                 "slug": "spi-spi-freeplan"
               }
             ]
@@ -2387,15 +2387,15 @@
             "slug": "spi-transaction",
             "items": [
               {
-                "title": "SPI\\_commit",
+                "title": "SPI_commit",
                 "slug": "spi-spi-commit"
               },
               {
-                "title": "SPI\\_rollback",
+                "title": "SPI_rollback",
                 "slug": "spi-spi-rollback"
               },
               {
-                "title": "SPI\\_start\\_transaction",
+                "title": "SPI_start_transaction",
                 "slug": "spi-spi-start-transaction"
               }
             ]
@@ -3251,11 +3251,11 @@
             "slug": "app-ecpg"
           },
           {
-            "title": "pg\\_amcheck",
+            "title": "pg_amcheck",
             "slug": "app-pgamcheck"
           },
           {
-            "title": "pg\\_basebackup",
+            "title": "pg_basebackup",
             "slug": "app-pgbasebackup"
           },
           {
@@ -3263,35 +3263,35 @@
             "slug": "pgbench"
           },
           {
-            "title": "pg\\_config",
+            "title": "pg_config",
             "slug": "app-pgconfig"
           },
           {
-            "title": "pg\\_dump",
+            "title": "pg_dump",
             "slug": "app-pgdump"
           },
           {
-            "title": "pg\\_dumpall",
+            "title": "pg_dumpall",
             "slug": "app-pg-dumpall"
           },
           {
-            "title": "pg\\_isready",
+            "title": "pg_isready",
             "slug": "app-pg-isready"
           },
           {
-            "title": "pg\\_receivewal",
+            "title": "pg_receivewal",
             "slug": "app-pgreceivewal"
           },
           {
-            "title": "pg\\_recvlogical",
+            "title": "pg_recvlogical",
             "slug": "app-pgrecvlogical"
           },
           {
-            "title": "pg\\_restore",
+            "title": "pg_restore",
             "slug": "app-pgrestore"
           },
           {
-            "title": "pg\\_verifybackup",
+            "title": "pg_verifybackup",
             "slug": "app-pgverifybackup"
           },
           {
@@ -3317,43 +3317,43 @@
             "slug": "app-initdb"
           },
           {
-            "title": "pg\\_archivecleanup",
+            "title": "pg_archivecleanup",
             "slug": "pgarchivecleanup"
           },
           {
-            "title": "pg\\_checksums",
+            "title": "pg_checksums",
             "slug": "app-pgchecksums"
           },
           {
-            "title": "pg\\_controldata",
+            "title": "pg_controldata",
             "slug": "app-pgcontroldata"
           },
           {
-            "title": "pg\\_ctl",
+            "title": "pg_ctl",
             "slug": "app-pg-ctl"
           },
           {
-            "title": "pg\\_resetwal",
+            "title": "pg_resetwal",
             "slug": "app-pgresetwal"
           },
           {
-            "title": "pg\\_rewind",
+            "title": "pg_rewind",
             "slug": "app-pgrewind"
           },
           {
-            "title": "pg\\_test\\_fsync",
+            "title": "pg_test_fsync",
             "slug": "pgtestfsync"
           },
           {
-            "title": "pg\\_test\\_timing",
+            "title": "pg_test_timing",
             "slug": "pgtesttiming"
           },
           {
-            "title": "pg\\_upgrade",
+            "title": "pg_upgrade",
             "slug": "pgupgrade"
           },
           {
-            "title": "pg\\_waldump",
+            "title": "pg_waldump",
             "slug": "pgwaldump"
           },
           {
@@ -4369,19 +4369,19 @@
             "slug": "amcheck"
           },
           {
-            "title": "auth\\_delay — pause on authentication failure",
+            "title": "auth_delay — pause on authentication failure",
             "slug": "auth-delay"
           },
           {
-            "title": "auto\\_explain — log execution plans of slow queries",
+            "title": "auto_explain — log execution plans of slow queries",
             "slug": "auto-explain"
           },
           {
-            "title": "basebackup\\_to\\_shell — example \"shell\" pg\\_basebackup module",
+            "title": "basebackup_to_shell — example \"shell\" pg_basebackup module",
             "slug": "basebackup-to-shell"
           },
           {
-            "title": "basic\\_archive — an example WAL archive module",
+            "title": "basic_archive — an example WAL archive module",
             "slug": "basic-archive"
           },
           {
@@ -4389,11 +4389,11 @@
             "slug": "bloom"
           },
           {
-            "title": "btree\\_gin — GIN operator classes with B-tree behavior",
+            "title": "btree_gin — GIN operator classes with B-tree behavior",
             "slug": "btree-gin"
           },
           {
-            "title": "btree\\_gist — GiST operator classes with B-tree behavior",
+            "title": "btree_gist — GiST operator classes with B-tree behavior",
             "slug": "btree-gist"
           },
           {
@@ -4409,15 +4409,15 @@
             "slug": "dblink",
             "items": [
               {
-                "title": "dblink\\_connect",
+                "title": "dblink_connect",
                 "slug": "contrib-dblink-connect"
               },
               {
-                "title": "dblink\\_connect\\_u",
+                "title": "dblink_connect_u",
                 "slug": "contrib-dblink-connect-u"
               },
               {
-                "title": "dblink\\_disconnect",
+                "title": "dblink_disconnect",
                 "slug": "contrib-dblink-disconnect"
               },
               {
@@ -4425,73 +4425,73 @@
                 "slug": "contrib-dblink-function"
               },
               {
-                "title": "dblink\\_exec",
+                "title": "dblink_exec",
                 "slug": "contrib-dblink-exec"
               },
               {
-                "title": "dblink\\_open",
+                "title": "dblink_open",
                 "slug": "contrib-dblink-open"
               },
               {
-                "title": "dblink\\_fetch",
+                "title": "dblink_fetch",
                 "slug": "contrib-dblink-fetch"
               },
               {
-                "title": "dblink\\_close",
+                "title": "dblink_close",
                 "slug": "contrib-dblink-close"
               },
               {
-                "title": "dblink\\_get\\_connections",
+                "title": "dblink_get_connections",
                 "slug": "contrib-dblink-get-connections"
               },
               {
-                "title": "dblink\\_error\\_message",
+                "title": "dblink_error_message",
                 "slug": "contrib-dblink-error-message"
               },
               {
-                "title": "dblink\\_send\\_query",
+                "title": "dblink_send_query",
                 "slug": "contrib-dblink-send-query"
               },
               {
-                "title": "dblink\\_is\\_busy",
+                "title": "dblink_is_busy",
                 "slug": "contrib-dblink-is-busy"
               },
               {
-                "title": "dblink\\_get\\_notify",
+                "title": "dblink_get_notify",
                 "slug": "contrib-dblink-get-notify"
               },
               {
-                "title": "dblink\\_get\\_result",
+                "title": "dblink_get_result",
                 "slug": "contrib-dblink-get-result"
               },
               {
-                "title": "dblink\\_cancel\\_query",
+                "title": "dblink_cancel_query",
                 "slug": "contrib-dblink-cancel-query"
               },
               {
-                "title": "dblink\\_get\\_pkey",
+                "title": "dblink_get_pkey",
                 "slug": "contrib-dblink-get-pkey"
               },
               {
-                "title": "dblink\\_build\\_sql\\_insert",
+                "title": "dblink_build_sql_insert",
                 "slug": "contrib-dblink-build-sql-insert"
               },
               {
-                "title": "dblink\\_build\\_sql\\_delete",
+                "title": "dblink_build_sql_delete",
                 "slug": "contrib-dblink-build-sql-delete"
               },
               {
-                "title": "dblink\\_build\\_sql\\_update",
+                "title": "dblink_build_sql_update",
                 "slug": "contrib-dblink-build-sql-update"
               }
             ]
           },
           {
-            "title": "dict\\_int — example full-text search dictionary for integers",
+            "title": "dict_int — example full-text search dictionary for integers",
             "slug": "dict-int"
           },
           {
-            "title": "dict\\_xsyn — example synonym full-text search dictionary",
+            "title": "dict_xsyn — example synonym full-text search dictionary",
             "slug": "dict-xsyn"
           },
           {
@@ -4499,7 +4499,7 @@
             "slug": "earthdistance"
           },
           {
-            "title": "file\\_fdw — access data files in the server's file system",
+            "title": "file_fdw — access data files in the server's file system",
             "slug": "file-fdw"
           },
           {
@@ -4531,7 +4531,7 @@
             "slug": "ltree"
           },
           {
-            "title": "old\\_snapshot — inspect `old_snapshot_threshold` state",
+            "title": "old_snapshot — inspect `old_snapshot_threshold` state",
             "slug": "oldsnapshot"
           },
           {
@@ -4543,7 +4543,7 @@
             "slug": "passwordcheck"
           },
           {
-            "title": "pg\\_buffercache — inspect PostgreSQL buffer cache state",
+            "title": "pg_buffercache — inspect PostgreSQL buffer cache state",
             "slug": "pgbuffercache"
           },
           {
@@ -4551,11 +4551,11 @@
             "slug": "pgcrypto"
           },
           {
-            "title": "pg\\_freespacemap — examine the free space map",
+            "title": "pg_freespacemap — examine the free space map",
             "slug": "pgfreespacemap"
           },
           {
-            "title": "pg\\_prewarm — preload relation data into buffer caches",
+            "title": "pg_prewarm — preload relation data into buffer caches",
             "slug": "pgprewarm"
           },
           {
@@ -4563,7 +4563,7 @@
             "slug": "pgrowlocks"
           },
           {
-            "title": "pg\\_stat\\_statements — track statistics of SQL planning and execution",
+            "title": "pg_stat_statements — track statistics of SQL planning and execution",
             "slug": "pgstatstatements"
           },
           {
@@ -4571,23 +4571,23 @@
             "slug": "pgstattuple"
           },
           {
-            "title": "pg\\_surgery — perform low-level surgery on relation data",
+            "title": "pg_surgery — perform low-level surgery on relation data",
             "slug": "pgsurgery"
           },
           {
-            "title": "pg\\_trgm — support for similarity of text using trigram matching",
+            "title": "pg_trgm — support for similarity of text using trigram matching",
             "slug": "pgtrgm"
           },
           {
-            "title": "pg\\_visibility — visibility map information and utilities",
+            "title": "pg_visibility — visibility map information and utilities",
             "slug": "pgvisibility"
           },
           {
-            "title": "pg\\_walinspect — low-level WAL inspection",
+            "title": "pg_walinspect — low-level WAL inspection",
             "slug": "pgwalinspect"
           },
           {
-            "title": "postgres\\_fdw — access data stored in external PostgreSQL servers",
+            "title": "postgres_fdw — access data stored in external PostgreSQL servers",
             "slug": "postgres-fdw"
           },
           {
@@ -4615,15 +4615,15 @@
             "slug": "tcn"
           },
           {
-            "title": "test\\_decoding — SQL-based test/example module for WAL logical decoding",
+            "title": "test_decoding — SQL-based test/example module for WAL logical decoding",
             "slug": "test-decoding"
           },
           {
-            "title": "tsm\\_system\\_rows — the `SYSTEM_ROWS` sampling method for `TABLESAMPLE`",
+            "title": "tsm_system_rows — the `SYSTEM_ROWS` sampling method for `TABLESAMPLE`",
             "slug": "tsm-system-rows"
           },
           {
-            "title": "tsm\\_system\\_time — the `SYSTEM_TIME` sampling method for `TABLESAMPLE`",
+            "title": "tsm_system_time — the `SYSTEM_TIME` sampling method for `TABLESAMPLE`",
             "slug": "tsm-system-time"
           },
           {

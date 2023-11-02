@@ -24,14 +24,13 @@ const findTitle = (sidebar, currentSlug) => {
     }
     if (item.slug === currentSlug) {
       title = item.title;
-    } else if (item.items) {
-      item.items.forEach((child) => {
-        if (child.slug === currentSlug) {
-          title = child.title;
-        }
-      });
+    }
+
+    if (!title && item.items) {
+      title = findTitle(item.items, currentSlug);
     }
   });
+
   return title;
 };
 
@@ -44,6 +43,7 @@ const getPostBySlug = async (path, basePath) => {
     const sidebarData = JSON.parse(sidebar);
 
     const title = findTitle(sidebarData, currentSlug);
+
     const excerpt = getExcerpt(content, 200);
 
     return { title, excerpt, content };
