@@ -1,9 +1,9 @@
 ## F.2. amcheck — tools to verify table and index consistency [#](#AMCHECK)
 
-  * *   [F.2.1. Functions](amcheck#AMCHECK-FUNCTIONS)
-  * [F.2.2. Optional *`heapallindexed`* Verification](amcheck#AMCHECK-OPTIONAL-HEAPALLINDEXED-VERIFICATION)
-  * [F.2.3. Using `amcheck` Effectively](amcheck#AMCHECK-USING-AMCHECK-EFFECTIVELY)
-  * [F.2.4. Repairing Corruption](amcheck#AMCHECK-REPAIRING-CORRUPTION)
+* [F.2.1. Functions](amcheck#AMCHECK-FUNCTIONS)
+* [F.2.2. Optional *`heapallindexed`* Verification](amcheck#AMCHECK-OPTIONAL-HEAPALLINDEXED-VERIFICATION)
+* [F.2.3. Using `amcheck` Effectively](amcheck#AMCHECK-USING-AMCHECK-EFFECTIVELY)
+* [F.2.4. Repairing Corruption](amcheck#AMCHECK-REPAIRING-CORRUPTION)
 
 The `amcheck` module provides functions that allow you to verify the logical consistency of the structure of relations.
 
