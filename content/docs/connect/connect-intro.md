@@ -2,7 +2,7 @@
 title: Connect to Neon
 subtitle: Everything you need to know about connecting to Neon
 enableTableOfContents: true
-updatedOn: '2023-10-13T14:08:36.341Z'
+updatedOn: '2023-11-02T10:54:40.454Z'
 ---
 
 Find detailed information and instructions about connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more.
@@ -43,7 +43,7 @@ Ensure the integrity and security of your connections to Neon.
 
 <DetailIconCards>
 
-<a href="/connect/connect-securely" description="Learn how to connect to Neon securely using SSL/TLS encrypted connections" icon="audio-jack">Connect to Neon securely</a>
+<a href="/docs/connect/connect-securely" description="Learn how to connect to Neon securely using SSL/TLS encrypted connections" icon="audio-jack">Connect to Neon securely</a>
 
 <a href="https://neon.tech/blog/avoid-mitm-attacks-with-psql-postgres-16" description="Learn how the psql client in Postgres 16 makes it simple to connect securely" icon="audio-jack">Avoid MME attacks in Postgres 16</a>
 
