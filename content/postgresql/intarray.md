@@ -1,10 +1,10 @@
 ## F.20. intarray — manipulate arrays of integers [#](#INTARRAY)
 
-  * *   [F.20.1. `intarray` Functions and Operators](intarray.html#INTARRAY-FUNCS-OPS)
-  * [F.20.2. Index Support](intarray.html#INTARRAY-INDEX)
-  * [F.20.3. Example](intarray.html#INTARRAY-EXAMPLE)
-  * [F.20.4. Benchmark](intarray.html#INTARRAY-BENCHMARK)
-  * [F.20.5. Authors](intarray.html#INTARRAY-AUTHORS)
+  * *   [F.20.1. `intarray` Functions and Operators](intarray#INTARRAY-FUNCS-OPS)
+  * [F.20.2. Index Support](intarray#INTARRAY-INDEX)
+  * [F.20.3. Example](intarray#INTARRAY-EXAMPLE)
+  * [F.20.4. Benchmark](intarray#INTARRAY-BENCHMARK)
+  * [F.20.5. Authors](intarray#INTARRAY-AUTHORS)
 
 The `intarray` module provides a number of useful functions and operators for manipulating null-free arrays of integers. There is also support for indexed searches using some of the operators.
 
@@ -16,7 +16,7 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 
 ### F.20.1. `intarray` Functions and Operators [#](#INTARRAY-FUNCS-OPS)
 
-The functions provided by the `intarray` module are shown in [Table F.9](intarray.html#INTARRAY-FUNC-TABLE "Table F.9. intarray Functions"), the operators in [Table F.10](intarray.html#INTARRAY-OP-TABLE "Table F.10. intarray Operators").
+The functions provided by the `intarray` module are shown in [Table F.9](intarray#INTARRAY-FUNC-TABLE "Table F.9. intarray Functions"), the operators in [Table F.10](intarray#INTARRAY-OP-TABLE "Table F.10. intarray Operators").
 
 **Table F.9. `intarray` Functions**
 

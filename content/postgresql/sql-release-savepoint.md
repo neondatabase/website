@@ -23,7 +23,7 @@ RELEASE [ SAVEPOINT ] savepoint_name
 
 Specifying a savepoint name that was not previously defined is an error.
 
-It is not possible to release a savepoint when the transaction is in an aborted state; to do that, use [ROLLBACK TO SAVEPOINT](sql-rollback-to.html "ROLLBACK TO SAVEPOINT").
+It is not possible to release a savepoint when the transaction is in an aborted state; to do that, use [ROLLBACK TO SAVEPOINT](sql-rollback-to "ROLLBACK TO SAVEPOINT").
 
 If multiple savepoints have the same name, only the most recently defined unreleased one is released. Repeated commands will release progressively older savepoints.
 
@@ -73,4 +73,4 @@ This command conforms to the SQL standard. The standard specifies that the key w
 
 ## See Also
 
-[BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [ROLLBACK](sql-rollback.html "ROLLBACK"), [ROLLBACK TO SAVEPOINT](sql-rollback-to.html "ROLLBACK TO SAVEPOINT"), [SAVEPOINT](sql-savepoint.html "SAVEPOINT")
+[BEGIN](sql-begin "BEGIN"), [COMMIT](sql-commit "COMMIT"), [ROLLBACK](sql-rollback "ROLLBACK"), [ROLLBACK TO SAVEPOINT](sql-rollback-to "ROLLBACK TO SAVEPOINT"), [SAVEPOINT](sql-savepoint "SAVEPOINT")

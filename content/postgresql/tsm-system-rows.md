@@ -1,8 +1,8 @@
 ## F.45. tsm\_system\_rows — the `SYSTEM_ROWS` sampling method for `TABLESAMPLE` [#](#TSM-SYSTEM-ROWS)
 
-* [F.45.1. Examples](tsm-system-rows.html#TSM-SYSTEM-ROWS-EXAMPLES)
+* [F.45.1. Examples](tsm-system-rows#TSM-SYSTEM-ROWS-EXAMPLES)
 
-The `tsm_system_rows` module provides the table sampling method `SYSTEM_ROWS`, which can be used in the `TABLESAMPLE` clause of a [`SELECT`](sql-select.html "SELECT") command.
+The `tsm_system_rows` module provides the table sampling method `SYSTEM_ROWS`, which can be used in the `TABLESAMPLE` clause of a [`SELECT`](sql-select "SELECT") command.
 
 This table sampling method accepts a single integer argument that is the maximum number of rows to read. The resulting sample will always contain exactly that many rows, unless the table does not contain enough rows, in which case the whole table is selected.
 

@@ -1,7 +1,7 @@
 ## 43.11. PL/pgSQL under the Hood [#](#PLPGSQL-IMPLEMENTATION)
 
-  * *   [43.11.1. Variable Substitution](plpgsql-implementation.html#PLPGSQL-VAR-SUBST)
-  * [43.11.2. Plan Caching](plpgsql-implementation.html#PLPGSQL-PLAN-CACHING)
+  * *   [43.11.1. Variable Substitution](plpgsql-implementation#PLPGSQL-VAR-SUBST)
+  * [43.11.2. Plan Caching](plpgsql-implementation#PLPGSQL-PLAN-CACHING)
 
 This section discusses some implementation details that are frequently important for PL/pgSQL users to know.
 
@@ -16,7 +16,7 @@ INSERT INTO foo (foo) VALUES (foo(foo));
 
 The first occurrence of `foo` must syntactically be a table name, so it will not be substituted, even if the function has a variable named `foo`. The second occurrence must be the name of a column of that table, so it will not be substituted either. Likewise the third occurrence must be a function name, so it also will not be substituted for. Only the last occurrence is a candidate to be a reference to a variable of the PL/pgSQL function.
 
-Another way to understand this is that variable substitution can only insert data values into an SQL command; it cannot dynamically change which database objects are referenced by the command. (If you want to do that, you must build a command string dynamically, as explained in [Section 43.5.4](plpgsql-statements.html#PLPGSQL-STATEMENTS-EXECUTING-DYN "43.5.4. Executing Dynamic Commands").)
+Another way to understand this is that variable substitution can only insert data values into an SQL command; it cannot dynamically change which database objects are referenced by the command. (If you want to do that, you must build a command string dynamically, as explained in [Section 43.5.4](plpgsql-statements#PLPGSQL-STATEMENTS-EXECUTING-DYN "43.5.4. Executing Dynamic Commands").)
 
 Since the names of variables are syntactically no different from the names of table columns, there can be ambiguity in statements that also refer to tables: is a given name meant to refer to a table column, or a variable? Let's change the previous example to
 
@@ -31,7 +31,7 @@ By default, PL/pgSQL will report an error if a name in an SQL statement could re
 
 The simplest solution is to rename the variable or column. A common coding rule is to use a different naming convention for PL/pgSQL variables than you use for column names. For example, if you consistently name function variables `v_something` while none of your column names start with `v_`, no conflicts will occur.
 
-Alternatively you can qualify ambiguous references to make them clear. In the above example, `src.foo` would be an unambiguous reference to the table column. To create an unambiguous reference to a variable, declare it in a labeled block and use the block's label (see [Section 43.2](plpgsql-structure.html "43.2. Structure of PL/pgSQL")). For example,
+Alternatively you can qualify ambiguous references to make them clear. In the above example, `src.foo` would be an unambiguous reference to the table column. To create an unambiguous reference to a variable, declare it in a labeled block and use the block's label (see [Section 43.2](plpgsql-structure "43.2. Structure of PL/pgSQL")). For example,
 
 ```
 
@@ -88,7 +88,7 @@ CREATE FUNCTION stamp_user(id int, comment text) RETURNS void AS $$
 $$ LANGUAGE plpgsql;
 ```
 
-Variable substitution does not happen in a command string given to `EXECUTE` or one of its variants. If you need to insert a varying value into such a command, do so as part of constructing the string value, or use `USING`, as illustrated in [Section 43.5.4](plpgsql-statements.html#PLPGSQL-STATEMENTS-EXECUTING-DYN "43.5.4. Executing Dynamic Commands").
+Variable substitution does not happen in a command string given to `EXECUTE` or one of its variants. If you need to insert a varying value into such a command, do so as part of constructing the string value, or use `USING`, as illustrated in [Section 43.5.4](plpgsql-statements#PLPGSQL-STATEMENTS-EXECUTING-DYN "43.5.4. Executing Dynamic Commands").
 
 Variable substitution currently works only in `SELECT`, `INSERT`, `UPDATE`, `DELETE`, and commands containing one of these (such as `EXPLAIN` and `CREATE TABLE ... AS SELECT`), because the main SQL engine allows query parameters only in these commands. To use a non-constant name or value in other statement types (generically called utility statements), you must construct the utility statement as a string and `EXECUTE` it.
 
@@ -98,7 +98,7 @@ The PL/pgSQL interpreter parses the function's source text and produces an inter
 
 As each expression and SQL command is first executed in the function, the PL/pgSQL interpreter parses and analyzes the command to create a prepared statement, using the SPI manager's `SPI_prepare` function. Subsequent visits to that expression or command reuse the prepared statement. Thus, a function with conditional code paths that are seldom visited will never incur the overhead of analyzing those commands that are never executed within the current session. A disadvantage is that errors in a specific expression or command cannot be detected until that part of the function is reached in execution. (Trivial syntax errors will be detected during the initial parsing pass, but anything deeper will not be detected until execution.)
 
-PL/pgSQL (or more precisely, the SPI manager) can furthermore attempt to cache the execution plan associated with any particular prepared statement. If a cached plan is not used, then a fresh execution plan is generated on each visit to the statement, and the current parameter values (that is, PL/pgSQL variable values) can be used to optimize the selected plan. If the statement has no parameters, or is executed many times, the SPI manager will consider creating a *generic* plan that is not dependent on specific parameter values, and caching that for re-use. Typically this will happen only if the execution plan is not very sensitive to the values of the PL/pgSQL variables referenced in it. If it is, generating a plan each time is a net win. See [PREPARE](sql-prepare.html "PREPARE") for more information about the behavior of prepared statements.
+PL/pgSQL (or more precisely, the SPI manager) can furthermore attempt to cache the execution plan associated with any particular prepared statement. If a cached plan is not used, then a fresh execution plan is generated on each visit to the statement, and the current parameter values (that is, PL/pgSQL variable values) can be used to optimize the selected plan. If the statement has no parameters, or is executed many times, the SPI manager will consider creating a *generic* plan that is not dependent on specific parameter values, and caching that for re-use. Typically this will happen only if the execution plan is not very sensitive to the values of the PL/pgSQL variables referenced in it. If it is, generating a plan each time is a net win. See [PREPARE](sql-prepare "PREPARE") for more information about the behavior of prepared statements.
 
 Because PL/pgSQL saves prepared statements and sometimes execution plans in this way, SQL commands that appear directly in a PL/pgSQL function must refer to the same tables and columns on every execution; that is, you cannot use a parameter as the name of a table or column in an SQL command. To get around this restriction, you can construct dynamic commands using the PL/pgSQL `EXECUTE` statement — at the price of performing new parse analysis and constructing a new execution plan on every execution.
 

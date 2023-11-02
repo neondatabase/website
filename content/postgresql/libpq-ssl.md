@@ -1,12 +1,12 @@
 ## 34.19. SSL Support [#](#LIBPQ-SSL)
 
-  * *   [34.19.1. Client Verification of Server Certificates](libpq-ssl.html#LIBQ-SSL-CERTIFICATES)
-  * [34.19.2. Client Certificates](libpq-ssl.html#LIBPQ-SSL-CLIENTCERT)
-  * [34.19.3. Protection Provided in Different Modes](libpq-ssl.html#LIBPQ-SSL-PROTECTION)
-  * [34.19.4. SSL Client File Usage](libpq-ssl.html#LIBPQ-SSL-FILEUSAGE)
-  * [34.19.5. SSL Library Initialization](libpq-ssl.html#LIBPQ-SSL-INITIALIZE)
+  * *   [34.19.1. Client Verification of Server Certificates](libpq-ssl#LIBQ-SSL-CERTIFICATES)
+  * [34.19.2. Client Certificates](libpq-ssl#LIBPQ-SSL-CLIENTCERT)
+  * [34.19.3. Protection Provided in Different Modes](libpq-ssl#LIBPQ-SSL-PROTECTION)
+  * [34.19.4. SSL Client File Usage](libpq-ssl#LIBPQ-SSL-FILEUSAGE)
+  * [34.19.5. SSL Library Initialization](libpq-ssl#LIBPQ-SSL-INITIALIZE)
 
-PostgreSQL has native support for using SSL connections to encrypt client/server communications using TLS protocols for increased security. See [Section 19.9](ssl-tcp.html "19.9. Secure TCP/IP Connections with SSL") for details about the server-side SSL functionality.
+PostgreSQL has native support for using SSL connections to encrypt client/server communications using TLS protocols for increased security. See [Section 19.9](ssl-tcp "19.9. Secure TCP/IP Connections with SSL") for details about the server-side SSL functionality.
 
 libpq reads the system-wide OpenSSL configuration file. By default, this file is named `openssl.cnf` and is located in the directory reported by `openssl version -d`. This default can be overridden by setting environment variable `OPENSSL_CONF` to the name of the desired configuration file.
 
@@ -40,13 +40,13 @@ If the server attempts to verify the identity of the client by requesting the cl
 
 On Unix systems, the permissions on the private key file must disallow any access to world or group; achieve this by a command such as `chmod 0600 ~/.postgresql/postgresql.key`. Alternatively, the file can be owned by root and have group read access (that is, `0640` permissions). That setup is intended for installations where certificate and key files are managed by the operating system. The user of libpq should then be made a member of the group that has access to those certificate and key files. (On Microsoft Windows, there is no file permissions check, since the `%APPDATA%\postgresql` directory is presumed secure.)
 
-The first certificate in `postgresql.crt` must be the client's certificate because it must match the client's private key. “Intermediate” certificates can be optionally appended to the file — doing so avoids requiring storage of intermediate certificates on the server ([ssl\_ca\_file](runtime-config-connection.html#GUC-SSL-CA-FILE)).
+The first certificate in `postgresql.crt` must be the client's certificate because it must match the client's private key. “Intermediate” certificates can be optionally appended to the file — doing so avoids requiring storage of intermediate certificates on the server ([ssl\_ca\_file](runtime-config-connection#GUC-SSL-CA-FILE)).
 
 The certificate and key may be in PEM or ASN.1 DER format.
 
-The key may be stored in cleartext or encrypted with a passphrase using any algorithm supported by OpenSSL, like AES-128. If the key is stored encrypted, then the passphrase may be provided in the [sslpassword](libpq-connect.html#LIBPQ-CONNECT-SSLPASSWORD) connection option. If an encrypted key is supplied and the `sslpassword` option is absent or blank, a password will be prompted for interactively by OpenSSL with a `Enter PEM pass phrase:` prompt if a TTY is available. Applications can override the client certificate prompt and the handling of the `sslpassword` parameter by supplying their own key password callback; see [`PQsetSSLKeyPassHook_OpenSSL`](libpq-connect.html#LIBPQ-PQSETSSLKEYPASSHOOK-OPENSSL).
+The key may be stored in cleartext or encrypted with a passphrase using any algorithm supported by OpenSSL, like AES-128. If the key is stored encrypted, then the passphrase may be provided in the [sslpassword](libpq-connect#LIBPQ-CONNECT-SSLPASSWORD) connection option. If an encrypted key is supplied and the `sslpassword` option is absent or blank, a password will be prompted for interactively by OpenSSL with a `Enter PEM pass phrase:` prompt if a TTY is available. Applications can override the client certificate prompt and the handling of the `sslpassword` parameter by supplying their own key password callback; see [`PQsetSSLKeyPassHook_OpenSSL`](libpq-connect#LIBPQ-PQSETSSLKEYPASSHOOK-OPENSSL).
 
-For instructions on creating certificates, see [Section 19.9.5](ssl-tcp.html#SSL-CERTIFICATE-CREATION "19.9.5. Creating Certificates").
+For instructions on creating certificates, see [Section 19.9.5](ssl-tcp#SSL-CERTIFICATE-CREATION "19.9.5. Creating Certificates").
 
 ### 34.19.3. Protection Provided in Different Modes [#](#LIBPQ-SSL-PROTECTION)
 
@@ -68,7 +68,7 @@ For a connection to be known SSL-secured, SSL usage must be configured on *both 
 
 Once the server has been authenticated, the client can pass sensitive data. This means that up until this point, the client does not need to know if certificates will be used for authentication, making it safe to specify that only in the server configuration.
 
-All SSL options carry overhead in the form of encryption and key-exchange, so there is a trade-off that has to be made between performance and security. [Table 34.1](libpq-ssl.html#LIBPQ-SSL-SSLMODE-STATEMENTS "Table 34.1. SSL Mode Descriptions") illustrates the risks the different `sslmode` values protect against, and what statement they make about security and overhead.
+All SSL options carry overhead in the form of encryption and key-exchange, so there is a trade-off that has to be made between performance and security. [Table 34.1](libpq-ssl#LIBPQ-SSL-SSLMODE-STATEMENTS "Table 34.1. SSL Mode Descriptions") illustrates the risks the different `sslmode` values protect against, and what statement they make about security and overhead.
 
 **Table 34.1. SSL Mode Descriptions**
 
@@ -89,7 +89,7 @@ The default value for `sslmode` is `prefer`. As is shown in the table, this make
 
 ### 34.19.4. SSL Client File Usage [#](#LIBPQ-SSL-FILEUSAGE)
 
-[Table 34.2](libpq-ssl.html#LIBPQ-SSL-FILE-USAGE "Table 34.2. Libpq/Client SSL File Usage") summarizes the files that are relevant to the SSL setup on the client.
+[Table 34.2](libpq-ssl#LIBPQ-SSL-FILE-USAGE "Table 34.2. Libpq/Client SSL File Usage") summarizes the files that are relevant to the SSL setup on the client.
 
 **Table 34.2. Libpq/Client SSL File Usage**
 
@@ -102,7 +102,7 @@ The default value for `sslmode` is `prefer`. As is shown in the table, this make
 
 ### 34.19.5. SSL Library Initialization [#](#LIBPQ-SSL-INITIALIZE)
 
-If your application initializes `libssl` and/or `libcrypto` libraries and libpq is built with SSL support, you should call [`PQinitOpenSSL`](libpq-ssl.html#LIBPQ-PQINITOPENSSL) to tell libpq that the `libssl` and/or `libcrypto` libraries have been initialized by your application, so that libpq will not also initialize those libraries. However, this is unnecessary when using OpenSSL version 1.1.0 or later, as duplicate initializations are no longer problematic.
+If your application initializes `libssl` and/or `libcrypto` libraries and libpq is built with SSL support, you should call [`PQinitOpenSSL`](libpq-ssl#LIBPQ-PQINITOPENSSL) to tell libpq that the `libssl` and/or `libcrypto` libraries have been initialized by your application, so that libpq will not also initialize those libraries. However, this is unnecessary when using OpenSSL version 1.1.0 or later, as duplicate initializations are no longer problematic.
 
 * `PQinitOpenSSL` [#](#LIBPQ-PQINITOPENSSL)
 
@@ -113,7 +113,7 @@ If your application initializes `libssl` and/or `libcrypto` libraries and libpq 
     void PQinitOpenSSL(int do_ssl, int do_crypto);
     ```
 
-    When *`do_ssl`* is non-zero, libpq will initialize the OpenSSL library before first opening a database connection. When *`do_crypto`* is non-zero, the `libcrypto` library will be initialized. By default (if [`PQinitOpenSSL`](libpq-ssl.html#LIBPQ-PQINITOPENSSL) is not called), both libraries are initialized. When SSL support is not compiled in, this function is present but does nothing.
+    When *`do_ssl`* is non-zero, libpq will initialize the OpenSSL library before first opening a database connection. When *`do_crypto`* is non-zero, the `libcrypto` library will be initialized. By default (if [`PQinitOpenSSL`](libpq-ssl#LIBPQ-PQINITOPENSSL) is not called), both libraries are initialized. When SSL support is not compiled in, this function is present but does nothing.
 
     If your application uses and initializes either OpenSSL or its underlying `libcrypto` library, you *must* call this function with zeroes for the appropriate parameter(s) before first opening a database connection. Also be sure that you have done that initialization before opening a database connection.
 
@@ -128,4 +128,4 @@ If your application initializes `libssl` and/or `libcrypto` libraries and libpq 
 
     This function is equivalent to `PQinitOpenSSL(do_ssl, do_ssl)`. It is sufficient for applications that initialize both or neither of OpenSSL and `libcrypto`.
 
-    [`PQinitSSL`](libpq-ssl.html#LIBPQ-PQINITSSL) has been present since PostgreSQL 8.0, while [`PQinitOpenSSL`](libpq-ssl.html#LIBPQ-PQINITOPENSSL) was added in PostgreSQL 8.4, so [`PQinitSSL`](libpq-ssl.html#LIBPQ-PQINITSSL) might be preferable for applications that need to work with older versions of libpq.
+    [`PQinitSSL`](libpq-ssl#LIBPQ-PQINITSSL) has been present since PostgreSQL 8.0, while [`PQinitOpenSSL`](libpq-ssl#LIBPQ-PQINITOPENSSL) was added in PostgreSQL 8.4, so [`PQinitSSL`](libpq-ssl#LIBPQ-PQINITSSL) might be preferable for applications that need to work with older versions of libpq.

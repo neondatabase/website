@@ -1,6 +1,6 @@
 ## J.6. Style Guide [#](#DOCGUIDE-STYLE)
 
-* [J.6.1. Reference Pages](docguide-style.html#DOCGUIDE-STYLE-REF-PAGES)
+* [J.6.1. Reference Pages](docguide-style#DOCGUIDE-STYLE-REF-PAGES)
 
 ### J.6.1. Reference Pages [#](#DOCGUIDE-STYLE-REF-PAGES)
 

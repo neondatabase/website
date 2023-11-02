@@ -1,6 +1,6 @@
 ## 17.1. Requirements [#](#INSTALL-REQUIREMENTS)
 
-In general, a modern Unix-compatible platform should be able to run PostgreSQL. The platforms that had received specific testing at the time of release are described in [Section 17.6](supported-platforms.html "17.6. Supported Platforms") below.
+In general, a modern Unix-compatible platform should be able to run PostgreSQL. The platforms that had received specific testing at the time of release are described in [Section 17.6](supported-platforms "17.6. Supported Platforms") below.
 
 The following software packages are required for building PostgreSQL:
 
@@ -23,7 +23,7 @@ The following software packages are required for building PostgreSQL:
 
 * The zlib compression library is used by default. If you don't want to use it then you must specify the `--without-zlib` option to `configure`. Using this option disables support for compressed archives in pg\_dump and pg\_restore.
 
-* The ICU locale provider (see [Section 24.1.4](locale.html#LOCALE-PROVIDERS "24.1.4. Locale Providers")) is used by default. If you don't want to use it then you must specify the `--without-icu` option to `configure`. Using this option disables support for ICU collation features (see [Section 24.2](collation.html "24.2. Collation Support")).
+* The ICU locale provider (see [Section 24.1.4](locale#LOCALE-PROVIDERS "24.1.4. Locale Providers")) is used by default. If you don't want to use it then you must specify the `--without-icu` option to `configure`. Using this option disables support for ICU collation features (see [Section 24.2](collation "24.2. Collation Support")).
 
     ICU support requires the ICU4C package to be installed. The minimum required version of ICU4C is currently 4.2.
 
@@ -54,11 +54,11 @@ The following packages are optional. They are not required in the default config
 
 * You need MIT Kerberos (for GSSAPI), OpenLDAP, and/or PAM, if you want to support authentication using those services.
 
-* You need LZ4, if you want to support compression of data with that method; see [default\_toast\_compression](runtime-config-client.html#GUC-DEFAULT-TOAST-COMPRESSION) and [wal\_compression](runtime-config-wal.html#GUC-WAL-COMPRESSION).
+* You need LZ4, if you want to support compression of data with that method; see [default\_toast\_compression](runtime-config-client#GUC-DEFAULT-TOAST-COMPRESSION) and [wal\_compression](runtime-config-wal#GUC-WAL-COMPRESSION).
 
-* You need Zstandard, if you want to support compression of data with that method; see [wal\_compression](runtime-config-wal.html#GUC-WAL-COMPRESSION). The minimum required version is 1.4.0.
+* You need Zstandard, if you want to support compression of data with that method; see [wal\_compression](runtime-config-wal#GUC-WAL-COMPRESSION). The minimum required version is 1.4.0.
 
-* To build the PostgreSQL documentation, there is a separate set of requirements; see [Section J.2](docguide-toolsets.html "J.2. Tool Sets").
+* To build the PostgreSQL documentation, there is a separate set of requirements; see [Section J.2](docguide-toolsets "J.2. Tool Sets").
 
 If you are building from a Git tree instead of using a released source package, or if you want to do server development, you also need the following packages:
 

@@ -10,7 +10,7 @@ The following two keys are always present:
 
 * `Last-Modified`
 
-    The last modification time of the file as reported by the server at the time of the backup. Unlike the other fields stored in the backup, this field is not used by [pg\_verifybackup](app-pgverifybackup.html "pg_verifybackup"). It is included only for informational purposes.
+    The last modification time of the file as reported by the server at the time of the backup. Unlike the other fields stored in the backup, this field is not used by [pg\_verifybackup](app-pgverifybackup "pg_verifybackup"). It is included only for informational purposes.
 
 If the backup was taken with file checksums enabled, the following keys will be present:
 

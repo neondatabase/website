@@ -46,7 +46,7 @@ Another response could be this:
 createdb: error: connection to server on socket "/tmp/.s.PGSQL.5432" failed: FATAL:  role "joe" does not exist
 ```
 
-where your own login name is mentioned. This will happen if the administrator has not created a PostgreSQL user account for you. (PostgreSQL user accounts are distinct from operating system user accounts.) If you are the administrator, see [Chapter 22](user-manag.html "Chapter 22. Database Roles") for help creating accounts. You will need to become the operating system user under which PostgreSQL was installed (usually `postgres`) to create the first user account. It could also be that you were assigned a PostgreSQL user name that is different from your operating system user name; in that case you need to use the `-U` switch or set the `PGUSER` environment variable to specify your PostgreSQL user name.
+where your own login name is mentioned. This will happen if the administrator has not created a PostgreSQL user account for you. (PostgreSQL user accounts are distinct from operating system user accounts.) If you are the administrator, see [Chapter 22](user-manag "Chapter 22. Database Roles") for help creating accounts. You will need to become the operating system user under which PostgreSQL was installed (usually `postgres`) to create the first user account. It could also be that you were assigned a PostgreSQL user name that is different from your operating system user name; in that case you need to use the `-U` switch or set the `PGUSER` environment variable to specify your PostgreSQL user name.
 
 If you have a user account but it does not have the privileges required to create a database, you will see the following:
 
@@ -73,4 +73,4 @@ dropdb mydb
 
 (For this command, the database name does not default to the user account name. You always need to specify it.) This action physically removes all files associated with the database and cannot be undone, so this should only be done with a great deal of forethought.
 
-More about `createdb` and `dropdb` can be found in [createdb](app-createdb.html "createdb") and [dropdb](app-dropdb.html "dropdb") respectively.
+More about `createdb` and `dropdb` can be found in [createdb](app-createdb "createdb") and [dropdb](app-dropdb "dropdb") respectively.

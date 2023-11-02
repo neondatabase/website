@@ -117,7 +117,7 @@ The possible privileges are:
 
 * `SELECT``INSERT``UPDATE``DELETE``TRUNCATE``REFERENCES``TRIGGER``CREATE``CONNECT``TEMPORARY``EXECUTE``USAGE``SET``ALTER SYSTEM`
 
-    Specific types of privileges, as defined in [Section 5.7](ddl-priv.html "5.7. Privileges").
+    Specific types of privileges, as defined in [Section 5.7](ddl-priv "5.7. Privileges").
 
 * `TEMP`
 
@@ -139,9 +139,9 @@ Each of the options described below can be set to either `TRUE` or `FALSE`. The 
 
 The `ADMIN` option allows the member to in turn grant membership in the role to others, and revoke membership in the role as well. Without the admin option, ordinary users cannot do that. A role is not considered to hold `WITH ADMIN OPTION` on itself. Database superusers can grant or revoke membership in any role to anyone. This option defaults to `FALSE`.
 
-The `INHERIT` option, if it is set to `TRUE`, causes the member to inherit the privileges of the granted role. That is, it can automatically use whatever database privileges have been granted to that role. If set to `FALSE`, the member does not inherit the privileges of the granted role. If this clause is not specified, it defaults to true if the member role is set to `INHERIT` and to false if the member role is set to `NOINHERIT`. See [`CREATE ROLE`](sql-createrole.html "CREATE ROLE").
+The `INHERIT` option, if it is set to `TRUE`, causes the member to inherit the privileges of the granted role. That is, it can automatically use whatever database privileges have been granted to that role. If set to `FALSE`, the member does not inherit the privileges of the granted role. If this clause is not specified, it defaults to true if the member role is set to `INHERIT` and to false if the member role is set to `NOINHERIT`. See [`CREATE ROLE`](sql-createrole "CREATE ROLE").
 
-The `SET` option, if it is set to `TRUE`, allows the member to change to the granted role using the [`SET ROLE`](sql-set-role.html "SET ROLE") command. If a role is an indirect member of another role, it can use `SET ROLE` to change to that role only if there is a chain of grants each of which has `SET TRUE`. This option defaults to `TRUE`.
+The `SET` option, if it is set to `TRUE`, allows the member to change to the granted role using the [`SET ROLE`](sql-set-role "SET ROLE") command. If a role is an indirect member of another role, it can use `SET ROLE` to change to that role only if there is a chain of grants each of which has `SET TRUE`. This option defaults to `TRUE`.
 
 To create an object owned by another role or give ownership of an existing object to another role, you must have the ability to `SET ROLE` to that role; otherwise, commands such as `ALTER ... OWNER TO` or `CREATE DATABASE ... OWNER` will fail. However, a user who inherits the privileges of a role but does not have the ability to `SET ROLE` to that role may be able to obtain full access to the role by manipulating existing objects owned by that role (e.g. they could redefine an existing function to act as a Trojan horse). Therefore, if a role's privileges are to be inherited but should not be accessible via `SET ROLE`, it should not own any SQL objects.
 
@@ -151,7 +151,7 @@ Unlike the case with privileges, membership in a role cannot be granted to `PUBL
 
 ## Notes
 
-The [`REVOKE`](sql-revoke.html "REVOKE") command is used to revoke access privileges.
+The [`REVOKE`](sql-revoke "REVOKE") command is used to revoke access privileges.
 
 Since PostgreSQL 8.1, the concepts of users and groups have been unified into a single kind of entity called a role. It is therefore no longer necessary to use the keyword `GROUP` to identify whether a grantee is a user or a group. `GROUP` is still allowed in the command, but it is a noise word.
 
@@ -169,7 +169,7 @@ If the role executing `GRANT` holds the required privileges indirectly via more 
 
 Granting permission on a table does not automatically extend permissions to any sequences used by the table, including sequences tied to `SERIAL` columns. Permissions on sequences must be set separately.
 
-See [Section 5.7](ddl-priv.html "5.7. Privileges") for more information about specific privilege types, as well as how to inspect objects' privileges.
+See [Section 5.7](ddl-priv "5.7. Privileges") for more information about specific privilege types, as well as how to inspect objects' privileges.
 
 ## Examples
 
@@ -214,4 +214,4 @@ Privileges on databases, tablespaces, schemas, languages, and configuration para
 
 ## See Also
 
-[REVOKE](sql-revoke.html "REVOKE"), [ALTER DEFAULT PRIVILEGES](sql-alterdefaultprivileges.html "ALTER DEFAULT PRIVILEGES")
+[REVOKE](sql-revoke "REVOKE"), [ALTER DEFAULT PRIVILEGES](sql-alterdefaultprivileges "ALTER DEFAULT PRIVILEGES")

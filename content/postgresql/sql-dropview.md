@@ -25,7 +25,7 @@ DROP VIEW [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the view (such as other views), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the view (such as other views), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -46,4 +46,4 @@ This command conforms to the SQL standard, except that the standard only allows 
 
 ## See Also
 
-[ALTER VIEW](sql-alterview.html "ALTER VIEW"), [CREATE VIEW](sql-createview.html "CREATE VIEW")
+[ALTER VIEW](sql-alterview "ALTER VIEW"), [CREATE VIEW](sql-createview "CREATE VIEW")

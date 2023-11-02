@@ -2,11 +2,11 @@
 
 Although all built-in WAL-logged modules have their own types of WAL records, there is also a generic WAL record type, which describes changes to pages in a generic way. This is useful for extensions that provide custom access methods.
 
-In comparison with [Custom WAL Resource Managers](custom-rmgr.html "Chapter 66. Custom WAL Resource Managers"), Generic WAL is simpler for an extension to implement and does not require the extension library to be loaded in order to apply the records.
+In comparison with [Custom WAL Resource Managers](custom-rmgr "Chapter 66. Custom WAL Resource Managers"), Generic WAL is simpler for an extension to implement and does not require the extension library to be loaded in order to apply the records.
 
 ### Note
 
-Generic WAL records are ignored during [Logical Decoding](logicaldecoding.html "Chapter 49. Logical Decoding"). If logical decoding is required for your extension, consider a Custom WAL Resource Manager.
+Generic WAL records are ignored during [Logical Decoding](logicaldecoding "Chapter 49. Logical Decoding"). If logical decoding is required for your extension, consider a Custom WAL Resource Manager.
 
 The API for constructing generic WAL records is defined in `access/generic_xlog.h` and implemented in `access/transam/generic_xlog.c`.
 

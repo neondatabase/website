@@ -1,11 +1,11 @@
 ## F.11. cube — a multi-dimensional cube data type [#](#CUBE)
 
-  * *   [F.11.1. Syntax](cube.html#CUBE-SYNTAX)
-  * [F.11.2. Precision](cube.html#CUBE-PRECISION)
-  * [F.11.3. Usage](cube.html#CUBE-USAGE)
-  * [F.11.4. Defaults](cube.html#CUBE-DEFAULTS)
-  * [F.11.5. Notes](cube.html#CUBE-NOTES)
-  * [F.11.6. Credits](cube.html#CUBE-CREDITS)
+  * *   [F.11.1. Syntax](cube#CUBE-SYNTAX)
+  * [F.11.2. Precision](cube#CUBE-PRECISION)
+  * [F.11.3. Usage](cube#CUBE-USAGE)
+  * [F.11.4. Defaults](cube#CUBE-DEFAULTS)
+  * [F.11.5. Notes](cube#CUBE-NOTES)
+  * [F.11.6. Credits](cube#CUBE-CREDITS)
 
 This module implements a data type `cube` for representing multidimensional cubes.
 
@@ -13,7 +13,7 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 
 ### F.11.1. Syntax [#](#CUBE-SYNTAX)
 
-[Table F.2](cube.html#CUBE-REPR-TABLE "Table F.2. Cube External Representations") shows the valid external representations for the `cube` type. *`x`*, *`y`*, etc. denote floating-point numbers.
+[Table F.2](cube#CUBE-REPR-TABLE "Table F.2. Cube External Representations") shows the valid external representations for the `cube` type. *`x`*, *`y`*, etc. denote floating-point numbers.
 
 **Table F.2. Cube External Representations**
 
@@ -40,7 +40,7 @@ Values are stored internally as 64-bit floating point numbers. This means that n
 
 ### F.11.3. Usage [#](#CUBE-USAGE)
 
-[Table F.3](cube.html#CUBE-OPERATORS-TABLE "Table F.3. Cube Operators") shows the specialized operators provided for type `cube`.
+[Table F.3](cube#CUBE-OPERATORS-TABLE "Table F.3. Cube Operators") shows the specialized operators provided for type `cube`.
 
 **Table F.3. Cube Operators**
 
@@ -57,7 +57,7 @@ Values are stored internally as 64-bit floating point numbers. This means that n
 
 \
 
-In addition to the above operators, the usual comparison operators shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for type `cube`. These operators first compare the first coordinates, and if those are equal, compare the second coordinates, etc. They exist mainly to support the b-tree index operator class for `cube`, which can be useful for example if you would like a UNIQUE constraint on a `cube` column. Otherwise, this ordering is not of much practical use.
+In addition to the above operators, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for type `cube`. These operators first compare the first coordinates, and if those are equal, compare the second coordinates, etc. They exist mainly to support the b-tree index operator class for `cube`, which can be useful for example if you would like a UNIQUE constraint on a `cube` column. Otherwise, this ordering is not of much practical use.
 
 The `cube` module also provides a GiST index operator class for `cube` values. A `cube` GiST index can be used to search for values using the `=`, `&&`, `@>`, and `<@` operators in `WHERE` clauses.
 
@@ -82,7 +82,7 @@ And to get 2-D cubes ordered by the first coordinate of the upper right corner d
 SELECT c FROM test ORDER BY c ~> 3 DESC LIMIT 5;
 ```
 
-[Table F.4](cube.html#CUBE-FUNCTIONS-TABLE "Table F.4. Cube Functions") shows the available functions.
+[Table F.4](cube#CUBE-FUNCTIONS-TABLE "Table F.4. Cube Functions") shows the available functions.
 
 **Table F.4. Cube Functions**
 

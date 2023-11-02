@@ -1,13 +1,13 @@
 ## F.18. hstore — hstore key/value datatype [#](#HSTORE)
 
-  * *   [F.18.1. `hstore` External Representation](hstore.html#HSTORE-EXTERNAL-REP)
-  * [F.18.2. `hstore` Operators and Functions](hstore.html#HSTORE-OPS-FUNCS)
-  * [F.18.3. Indexes](hstore.html#HSTORE-INDEXES)
-  * [F.18.4. Examples](hstore.html#HSTORE-EXAMPLES)
-  * [F.18.5. Statistics](hstore.html#HSTORE-STATISTICS)
-  * [F.18.6. Compatibility](hstore.html#HSTORE-COMPATIBILITY)
-  * [F.18.7. Transforms](hstore.html#HSTORE-TRANSFORMS)
-  * [F.18.8. Authors](hstore.html#HSTORE-AUTHORS)
+  * *   [F.18.1. `hstore` External Representation](hstore#HSTORE-EXTERNAL-REP)
+  * [F.18.2. `hstore` Operators and Functions](hstore#HSTORE-OPS-FUNCS)
+  * [F.18.3. Indexes](hstore#HSTORE-INDEXES)
+  * [F.18.4. Examples](hstore#HSTORE-EXAMPLES)
+  * [F.18.5. Statistics](hstore#HSTORE-STATISTICS)
+  * [F.18.6. Compatibility](hstore#HSTORE-COMPATIBILITY)
+  * [F.18.7. Transforms](hstore#HSTORE-TRANSFORMS)
+  * [F.18.8. Authors](hstore#HSTORE-AUTHORS)
 
 This module implements the `hstore` data type for storing sets of key/value pairs within a single PostgreSQL value. This can be useful in various scenarios, such as rows with many attributes that are rarely examined, or semi-structured data. Keys and values are simply text strings.
 
@@ -47,13 +47,13 @@ The `NULL` keyword is case-insensitive. Double-quote the `NULL` to treat it as t
 
 ### Note
 
-Keep in mind that the `hstore` text format, when used for input, applies *before* any required quoting or escaping. If you are passing an `hstore` literal via a parameter, then no additional processing is needed. But if you're passing it as a quoted literal constant, then any single-quote characters and (depending on the setting of the `standard_conforming_strings` configuration parameter) backslash characters need to be escaped correctly. See [Section 4.1.2.1](sql-syntax-lexical.html#SQL-SYNTAX-STRINGS "4.1.2.1. String Constants") for more on the handling of string constants.
+Keep in mind that the `hstore` text format, when used for input, applies *before* any required quoting or escaping. If you are passing an `hstore` literal via a parameter, then no additional processing is needed. But if you're passing it as a quoted literal constant, then any single-quote characters and (depending on the setting of the `standard_conforming_strings` configuration parameter) backslash characters need to be escaped correctly. See [Section 4.1.2.1](sql-syntax-lexical#SQL-SYNTAX-STRINGS "4.1.2.1. String Constants") for more on the handling of string constants.
 
 On output, double quotes always surround keys and values, even when it's not strictly necessary.
 
 ### F.18.2. `hstore` Operators and Functions [#](#HSTORE-OPS-FUNCS)
 
-The operators provided by the `hstore` module are shown in [Table F.7](hstore.html#HSTORE-OP-TABLE "Table F.7. hstore Operators"), the functions in [Table F.8](hstore.html#HSTORE-FUNC-TABLE "Table F.8. hstore Functions").
+The operators provided by the `hstore` module are shown in [Table F.7](hstore#HSTORE-OP-TABLE "Table F.7. hstore Operators"), the functions in [Table F.8](hstore#HSTORE-FUNC-TABLE "Table F.8. hstore Functions").
 
 **Table F.7. `hstore` Operators**
 

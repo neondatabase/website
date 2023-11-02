@@ -7,7 +7,7 @@ The `pg_enum` catalog contains entries showing the values and labels for each en
 | Column TypeDescription                                                                                                                                                                |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `oid` `oid`Row identifier                                                                                                                                                             |
-| `enumtypid` `oid` (references [`pg_type`](catalog-pg-type.html "53.64. pg_type").`oid`)The OID of the [`pg_type`](catalog-pg-type.html "53.64. pg_type") entry owning this enum value |
+| `enumtypid` `oid` (references [`pg_type`](catalog-pg-type "53.64. pg_type").`oid`)The OID of the [`pg_type`](catalog-pg-type "53.64. pg_type") entry owning this enum value |
 | `enumsortorder` `float4`The sort position of this enum value within its enum type                                                                                                     |
 | `enumlabel` `name`The textual label for this enum value                                                                                                                               |
 

@@ -31,23 +31,23 @@ SELECT [ ALL | DISTINCT [ ON ( expression [, ...] ) ] ]
 
 * `TEMPORARY` or `TEMP`
 
-    If specified, the table is created as a temporary table. Refer to [CREATE TABLE](sql-createtable.html "CREATE TABLE") for details.
+    If specified, the table is created as a temporary table. Refer to [CREATE TABLE](sql-createtable "CREATE TABLE") for details.
 
 * `UNLOGGED`
 
-    If specified, the table is created as an unlogged table. Refer to [CREATE TABLE](sql-createtable.html "CREATE TABLE") for details.
+    If specified, the table is created as an unlogged table. Refer to [CREATE TABLE](sql-createtable "CREATE TABLE") for details.
 
 * *`new_table`*
 
     The name (optionally schema-qualified) of the table to be created.
 
-All other parameters are described in detail under [SELECT](sql-select.html "SELECT").
+All other parameters are described in detail under [SELECT](sql-select "SELECT").
 
 ## Notes
 
-[`CREATE TABLE AS`](sql-createtableas.html "CREATE TABLE AS") is functionally similar to `SELECT INTO`. `CREATE TABLE AS` is the recommended syntax, since this form of `SELECT INTO` is not available in ECPG or PL/pgSQL, because they interpret the `INTO` clause differently. Furthermore, `CREATE TABLE AS` offers a superset of the functionality provided by `SELECT INTO`.
+[`CREATE TABLE AS`](sql-createtableas "CREATE TABLE AS") is functionally similar to `SELECT INTO`. `CREATE TABLE AS` is the recommended syntax, since this form of `SELECT INTO` is not available in ECPG or PL/pgSQL, because they interpret the `INTO` clause differently. Furthermore, `CREATE TABLE AS` offers a superset of the functionality provided by `SELECT INTO`.
 
-In contrast to `CREATE TABLE AS`, `SELECT INTO` does not allow specifying properties like a table's access method with [`USING method`](sql-createtable.html#SQL-CREATETABLE-METHOD) or the table's tablespace with [`TABLESPACE tablespace_name`](sql-createtable.html#SQL-CREATETABLE-TABLESPACE). Use `CREATE TABLE AS` if necessary. Therefore, the default table access method is chosen for the new table. See [default\_table\_access\_method](runtime-config-client.html#GUC-DEFAULT-TABLE-ACCESS-METHOD) for more information.
+In contrast to `CREATE TABLE AS`, `SELECT INTO` does not allow specifying properties like a table's access method with [`USING method`](sql-createtable#SQL-CREATETABLE-METHOD) or the table's tablespace with [`TABLESPACE tablespace_name`](sql-createtable#SQL-CREATETABLE-TABLESPACE). Use `CREATE TABLE AS` if necessary. Therefore, the default table access method is chosen for the new table. See [default\_table\_access\_method](runtime-config-client#GUC-DEFAULT-TABLE-ACCESS-METHOD) for more information.
 
 ## Examples
 
@@ -60,8 +60,8 @@ SELECT * INTO films_recent FROM films WHERE date_prod >= '2002-01-01';
 
 ## Compatibility
 
-The SQL standard uses `SELECT INTO` to represent selecting values into scalar variables of a host program, rather than creating a new table. This indeed is the usage found in ECPG (see [Chapter 36](ecpg.html "Chapter 36. ECPG — Embedded SQL in C")) and PL/pgSQL (see [Chapter 43](plpgsql.html "Chapter 43. PL/pgSQL — SQL Procedural Language")). The PostgreSQL usage of `SELECT INTO` to represent table creation is historical. Some other SQL implementations also use `SELECT INTO` in this way (but most SQL implementations support `CREATE TABLE AS` instead). Apart from such compatibility considerations, it is best to use `CREATE TABLE AS` for this purpose in new code.
+The SQL standard uses `SELECT INTO` to represent selecting values into scalar variables of a host program, rather than creating a new table. This indeed is the usage found in ECPG (see [Chapter 36](ecpg "Chapter 36. ECPG — Embedded SQL in C")) and PL/pgSQL (see [Chapter 43](plpgsql "Chapter 43. PL/pgSQL — SQL Procedural Language")). The PostgreSQL usage of `SELECT INTO` to represent table creation is historical. Some other SQL implementations also use `SELECT INTO` in this way (but most SQL implementations support `CREATE TABLE AS` instead). Apart from such compatibility considerations, it is best to use `CREATE TABLE AS` for this purpose in new code.
 
 ## See Also
 
-[CREATE TABLE AS](sql-createtableas.html "CREATE TABLE AS")
+[CREATE TABLE AS](sql-createtableas "CREATE TABLE AS")

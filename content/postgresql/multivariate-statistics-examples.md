@@ -1,8 +1,8 @@
 ## 76.2. Multivariate Statistics Examples [#](#MULTIVARIATE-STATISTICS-EXAMPLES)
 
-  * *   [76.2.1. Functional Dependencies](multivariate-statistics-examples.html#FUNCTIONAL-DEPENDENCIES)
-  * [76.2.2. Multivariate N-Distinct Counts](multivariate-statistics-examples.html#MULTIVARIATE-NDISTINCT-COUNTS)
-  * [76.2.3. MCV Lists](multivariate-statistics-examples.html#MCV-LISTS)
+  * *   [76.2.1. Functional Dependencies](multivariate-statistics-examples#FUNCTIONAL-DEPENDENCIES)
+  * [76.2.2. Multivariate N-Distinct Counts](multivariate-statistics-examples#MULTIVARIATE-NDISTINCT-COUNTS)
+  * [76.2.3. MCV Lists](multivariate-statistics-examples#MCV-LISTS)
 
 ### 76.2.1. Functional Dependencies [#](#FUNCTIONAL-DEPENDENCIES)
 
@@ -15,7 +15,7 @@ INSERT INTO t SELECT i % 100, i % 100 FROM generate_series(1, 10000) s(i);
 ANALYZE t;
 ```
 
-As explained in [Section 14.2](planner-stats.html "14.2. Statistics Used by the Planner"), the planner can determine cardinality of `t` using the number of pages and rows obtained from `pg_class`:
+As explained in [Section 14.2](planner-stats "14.2. Statistics Used by the Planner"), the planner can determine cardinality of `t` using the number of pages and rows obtained from `pg_class`:
 
 ```
 
@@ -111,11 +111,11 @@ EXPLAIN (ANALYZE, TIMING OFF) SELECT COUNT(*) FROM t GROUP BY a, b;
 
 ### 76.2.3. MCV Lists [#](#MCV-LISTS)
 
-As explained in [Section 76.2.1](multivariate-statistics-examples.html#FUNCTIONAL-DEPENDENCIES "76.2.1. Functional Dependencies"), functional dependencies are very cheap and efficient type of statistics, but their main limitation is their global nature (only tracking dependencies at the column level, not between individual column values).
+As explained in [Section 76.2.1](multivariate-statistics-examples#FUNCTIONAL-DEPENDENCIES "76.2.1. Functional Dependencies"), functional dependencies are very cheap and efficient type of statistics, but their main limitation is their global nature (only tracking dependencies at the column level, not between individual column values).
 
-This section introduces multivariate variant of MCV (most-common values) lists, a straightforward extension of the per-column statistics described in [Section 76.1](row-estimation-examples.html "76.1. Row Estimation Examples"). These statistics address the limitation by storing individual values, but it is naturally more expensive, both in terms of building the statistics in `ANALYZE`, storage and planning time.
+This section introduces multivariate variant of MCV (most-common values) lists, a straightforward extension of the per-column statistics described in [Section 76.1](row-estimation-examples "76.1. Row Estimation Examples"). These statistics address the limitation by storing individual values, but it is naturally more expensive, both in terms of building the statistics in `ANALYZE`, storage and planning time.
 
-Let's look at the query from [Section 76.2.1](multivariate-statistics-examples.html#FUNCTIONAL-DEPENDENCIES "76.2.1. Functional Dependencies") again, but this time with a MCV list created on the same set of columns (be sure to drop the functional dependencies, to make sure the planner uses the newly created statistics).
+Let's look at the query from [Section 76.2.1](multivariate-statistics-examples#FUNCTIONAL-DEPENDENCIES "76.2.1. Functional Dependencies") again, but this time with a MCV list created on the same set of columns (be sure to drop the functional dependencies, to make sure the planner uses the newly created statistics).
 
 ```
 

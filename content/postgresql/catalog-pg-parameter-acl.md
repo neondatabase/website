@@ -10,4 +10,4 @@ Unlike most system catalogs, `pg_parameter_acl` is shared across all databases o
 | ----------------------------------------------------------------------------------------------------- |
 | `oid` `oid`Row identifier                                                                             |
 | `parname` `text`The name of a configuration parameter for which privileges are granted                |
-| `paracl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv.html "5.7. Privileges") for details |
+| `paracl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv "5.7. Privileges") for details |

@@ -41,7 +41,7 @@ It is common for a client that executes `NOTIFY` to be listening on the same not
 
 There is a queue that holds notifications that have been sent but not yet processed by all listening sessions. If this queue becomes full, transactions calling `NOTIFY` will fail at commit. The queue is quite large (8GB in a standard installation) and should be sufficiently sized for almost every use case. However, no cleanup can take place if a session executes `LISTEN` and then enters a transaction for a very long time. Once the queue is half full you will see warnings in the log file pointing you to the session that is preventing cleanup. In this case you should make sure that this session ends its current transaction so that cleanup can proceed.
 
-The function `pg_notification_queue_usage` returns the fraction of the queue that is currently occupied by pending notifications. See [Section 9.26](functions-info.html "9.26. System Information Functions and Operators") for more information.
+The function `pg_notification_queue_usage` returns the fraction of the queue that is currently occupied by pending notifications. See [Section 9.26](functions-info "9.26. System Information Functions and Operators") for more information.
 
 A transaction that has executed `NOTIFY` cannot be prepared for two-phase commit.
 
@@ -72,4 +72,4 @@ There is no `NOTIFY` statement in the SQL standard.
 
 ## See Also
 
-[LISTEN](sql-listen.html "LISTEN"), [UNLISTEN](sql-unlisten.html "UNLISTEN")
+[LISTEN](sql-listen "LISTEN"), [UNLISTEN](sql-unlisten "UNLISTEN")

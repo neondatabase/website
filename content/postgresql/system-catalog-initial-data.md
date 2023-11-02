@@ -1,10 +1,10 @@
 ## 75.2. System Catalog Initial Data [#](#SYSTEM-CATALOG-INITIAL-DATA)
 
-  * *   [75.2.1. Data File Format](system-catalog-initial-data.html#SYSTEM-CATALOG-INITIAL-DATA-FORMAT)
-  * [75.2.2. OID Assignment](system-catalog-initial-data.html#SYSTEM-CATALOG-OID-ASSIGNMENT)
-  * [75.2.3. OID Reference Lookup](system-catalog-initial-data.html#SYSTEM-CATALOG-OID-REFERENCES)
-  * [75.2.4. Automatic Creation of Array Types](system-catalog-initial-data.html#SYSTEM-CATALOG-AUTO-ARRAY-TYPES)
-  * [75.2.5. Recipes for Editing Data Files](system-catalog-initial-data.html#SYSTEM-CATALOG-RECIPES)
+  * *   [75.2.1. Data File Format](system-catalog-initial-data#SYSTEM-CATALOG-INITIAL-DATA-FORMAT)
+  * [75.2.2. OID Assignment](system-catalog-initial-data#SYSTEM-CATALOG-OID-ASSIGNMENT)
+  * [75.2.3. OID Reference Lookup](system-catalog-initial-data#SYSTEM-CATALOG-OID-REFERENCES)
+  * [75.2.4. Automatic Creation of Array Types](system-catalog-initial-data#SYSTEM-CATALOG-AUTO-ARRAY-TYPES)
+  * [75.2.5. Recipes for Editing Data Files](system-catalog-initial-data#SYSTEM-CATALOG-RECIPES)
 
 Each catalog that has any manually-created initial data (some do not) has a corresponding `.dat` file that contains its initial data in an editable format.
 
@@ -32,15 +32,15 @@ Points to note:
 
 * The overall file layout is: open square bracket, one or more sets of curly braces each of which represents a catalog row, close square bracket. Write a comma after each closing curly brace.
 
-* Within each catalog row, write comma-separated *`key`* `=>` *`value`* pairs. The allowed *`key`*s are the names of the catalog's columns, plus the metadata keys `oid`, `oid_symbol`, `array_type_oid`, and `descr`. (The use of `oid` and `oid_symbol` is described in [Section 75.2.2](system-catalog-initial-data.html#SYSTEM-CATALOG-OID-ASSIGNMENT "75.2.2. OID Assignment") below, while `array_type_oid` is described in [Section 75.2.4](system-catalog-initial-data.html#SYSTEM-CATALOG-AUTO-ARRAY-TYPES "75.2.4. Automatic Creation of Array Types"). `descr` supplies a description string for the object, which will be inserted into `pg_description` or `pg_shdescription` as appropriate.) While the metadata keys are optional, the catalog's defined columns must all be provided, except when the catalog's `.h` file specifies a default value for the column. (In the example above, the `datdba` field has been omitted because `pg_database.h` supplies a suitable default value for it.)
+* Within each catalog row, write comma-separated *`key`* `=>` *`value`* pairs. The allowed *`key`*s are the names of the catalog's columns, plus the metadata keys `oid`, `oid_symbol`, `array_type_oid`, and `descr`. (The use of `oid` and `oid_symbol` is described in [Section 75.2.2](system-catalog-initial-data#SYSTEM-CATALOG-OID-ASSIGNMENT "75.2.2. OID Assignment") below, while `array_type_oid` is described in [Section 75.2.4](system-catalog-initial-data#SYSTEM-CATALOG-AUTO-ARRAY-TYPES "75.2.4. Automatic Creation of Array Types"). `descr` supplies a description string for the object, which will be inserted into `pg_description` or `pg_shdescription` as appropriate.) While the metadata keys are optional, the catalog's defined columns must all be provided, except when the catalog's `.h` file specifies a default value for the column. (In the example above, the `datdba` field has been omitted because `pg_database.h` supplies a suitable default value for it.)
 
-* All values must be single-quoted. Escape single quotes used within a value with a backslash. Backslashes meant as data can, but need not, be doubled; this follows Perl's rules for simple quoted literals. Note that backslashes appearing as data will be treated as escapes by the bootstrap scanner, according to the same rules as for escape string constants (see [Section 4.1.2.2](sql-syntax-lexical.html#SQL-SYNTAX-STRINGS-ESCAPE "4.1.2.2. String Constants with C-Style Escapes")); for example `\t` converts to a tab character. If you actually want a backslash in the final value, you will need to write four of them: Perl strips two, leaving `\\` for the bootstrap scanner to see.
+* All values must be single-quoted. Escape single quotes used within a value with a backslash. Backslashes meant as data can, but need not, be doubled; this follows Perl's rules for simple quoted literals. Note that backslashes appearing as data will be treated as escapes by the bootstrap scanner, according to the same rules as for escape string constants (see [Section 4.1.2.2](sql-syntax-lexical#SQL-SYNTAX-STRINGS-ESCAPE "4.1.2.2. String Constants with C-Style Escapes")); for example `\t` converts to a tab character. If you actually want a backslash in the final value, you will need to write four of them: Perl strips two, leaving `\\` for the bootstrap scanner to see.
 
 * Null values are represented by `_null_`. (Note that there is no way to create a value that is just that string.)
 
 * Comments are preceded by `#`, and must be on their own lines.
 
-* Field values that are OIDs of other catalog entries should be represented by symbolic names rather than actual numeric OIDs. (In the example above, `dattablespace` contains such a reference.) This is described in [Section 75.2.3](system-catalog-initial-data.html#SYSTEM-CATALOG-OID-REFERENCES "75.2.3. OID Reference Lookup") below.
+* Field values that are OIDs of other catalog entries should be represented by symbolic names rather than actual numeric OIDs. (In the example above, `dattablespace` contains such a reference.) This is described in [Section 75.2.3](system-catalog-initial-data#SYSTEM-CATALOG-OID-REFERENCES "75.2.3. OID Reference Lookup") below.
 
 * Since hashes are unordered data structures, field order and line layout aren't semantically significant. However, to maintain a consistent appearance, we set a few rules that are applied by the formatting script `reformat_dat_file.pl`:
 

@@ -34,6 +34,6 @@ void SPI_scroll_cursor_move(Portal portal, FetchDirection direction,
 
 ## Notes
 
-See the SQL [FETCH](sql-fetch.html "FETCH") command for details of the interpretation of the *`direction`* and *`count`* parameters.
+See the SQL [FETCH](sql-fetch "FETCH") command for details of the interpretation of the *`direction`* and *`count`* parameters.
 
 Direction values other than `FETCH_FORWARD` may fail if the cursor's plan was not created with the `CURSOR_OPT_SCROLL` option.

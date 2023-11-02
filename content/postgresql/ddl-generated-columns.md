@@ -13,7 +13,7 @@ CREATE TABLE people (
 );
 ```
 
-The keyword `STORED` must be specified to choose the stored kind of generated column. See [CREATE TABLE](sql-createtable.html "CREATE TABLE") for more details.
+The keyword `STORED` must be specified to choose the stored kind of generated column. See [CREATE TABLE](sql-createtable "CREATE TABLE") for more details.
 
 A generated column cannot be written to directly. In `INSERT` or `UPDATE` commands, a value cannot be specified for a generated column, but the keyword `DEFAULT` may be specified.
 
@@ -31,7 +31,7 @@ Several restrictions apply to the definition of generated columns and tables inv
 
 * A generated column cannot be part of a partition key.
 
-* Foreign tables can have generated columns. See [CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE") for details.
+* Foreign tables can have generated columns. See [CREATE FOREIGN TABLE](sql-createforeigntable "CREATE FOREIGN TABLE") for details.
 
 * For inheritance and partitioning:
 

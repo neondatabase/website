@@ -39,7 +39,7 @@ If a column list is specified, `COPY TO` copies only the data in the specified c
 
 `COPY` with a file name instructs the PostgreSQL server to directly read from or write to a file. The file must be accessible by the PostgreSQL user (the user ID the server runs as) and the name must be specified from the viewpoint of the server. When `PROGRAM` is specified, the server executes the given command and reads from the standard output of the program, or writes to the standard input of the program. The command must be specified from the viewpoint of the server, and be executable by the PostgreSQL user. When `STDIN` or `STDOUT` is specified, data is transmitted via the connection between the client and the server.
 
-Each backend running `COPY` will report its progress in the `pg_stat_progress_copy` view. See [Section 28.4.3](progress-reporting.html#COPY-PROGRESS-REPORTING "28.4.3. COPY Progress Reporting") for details.
+Each backend running `COPY` will report its progress in the `pg_stat_progress_copy` view. See [Section 28.4.3](progress-reporting#COPY-PROGRESS-REPORTING "28.4.3. COPY Progress Reporting") for details.
 
 ## Parameters
 
@@ -53,7 +53,7 @@ Each backend running `COPY` will report its progress in the `pg_stat_progress_co
 
 * *`query`*
 
-    A [`SELECT`](sql-select.html "SELECT"), [`VALUES`](sql-values.html "VALUES"), [`INSERT`](sql-insert.html "INSERT"), [`UPDATE`](sql-update.html "UPDATE"), or [`DELETE`](sql-delete.html "DELETE") command whose results are to be copied. Note that parentheses are required around the query.
+    A [`SELECT`](sql-select "SELECT"), [`VALUES`](sql-values "VALUES"), [`INSERT`](sql-insert "INSERT"), [`UPDATE`](sql-update "UPDATE"), or [`DELETE`](sql-delete "DELETE") command whose results are to be copied. Note that parentheses are required around the query.
 
     For `INSERT`, `UPDATE` and `DELETE` queries a RETURNING clause must be provided, and the target relation must not have a conditional rule, nor an `ALSO` rule, nor an `INSTEAD` rule that expands to multiple statements.
 
@@ -408,4 +408,4 @@ COPY [ BINARY ] table_name
 
 ## See Also
 
-[Section 28.4.3](progress-reporting.html#COPY-PROGRESS-REPORTING "28.4.3. COPY Progress Reporting")
+[Section 28.4.3](progress-reporting#COPY-PROGRESS-REPORTING "28.4.3. COPY Progress Reporting")

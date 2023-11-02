@@ -4,7 +4,7 @@ Every table has several *system columns* that are implicitly defined by the syst
 
 * `tableoid` [#](#DDL-SYSTEM-COLUMNS-TABLEOID)
 
-    The OID of the table containing this row. This column is particularly handy for queries that select from partitioned tables (see [Section 5.11](ddl-partitioning.html "5.11. Table Partitioning")) or inheritance hierarchies (see [Section 5.10](ddl-inherit.html "5.10. Inheritance")), since without it, it's difficult to tell which individual table a row came from. The `tableoid` can be joined against the `oid` column of `pg_class` to obtain the table name.
+    The OID of the table containing this row. This column is particularly handy for queries that select from partitioned tables (see [Section 5.11](ddl-partitioning "5.11. Table Partitioning")) or inheritance hierarchies (see [Section 5.10](ddl-inherit "5.10. Inheritance")), since without it, it's difficult to tell which individual table a row came from. The `tableoid` can be joined against the `oid` column of `pg_class` to obtain the table name.
 
 * `xmin` [#](#DDL-SYSTEM-COLUMNS-XMIN)
 
@@ -26,6 +26,6 @@ Every table has several *system columns* that are implicitly defined by the syst
 
     The physical location of the row version within its table. Note that although the `ctid` can be used to locate the row version very quickly, a row's `ctid` will change if it is updated or moved by `VACUUM FULL`. Therefore `ctid` is useless as a long-term row identifier. A primary key should be used to identify logical rows.
 
-Transaction identifiers are also 32-bit quantities. In a long-lived database it is possible for transaction IDs to wrap around. This is not a fatal problem given appropriate maintenance procedures; see [Chapter 25](maintenance.html "Chapter 25. Routine Database Maintenance Tasks") for details. It is unwise, however, to depend on the uniqueness of transaction IDs over the long term (more than one billion transactions).
+Transaction identifiers are also 32-bit quantities. In a long-lived database it is possible for transaction IDs to wrap around. This is not a fatal problem given appropriate maintenance procedures; see [Chapter 25](maintenance "Chapter 25. Routine Database Maintenance Tasks") for details. It is unwise, however, to depend on the uniqueness of transaction IDs over the long term (more than one billion transactions).
 
 Command identifiers are also 32-bit quantities. This creates a hard limit of 232 (4 billion) SQL commands within a single transaction. In practice this limit is not a problem — note that the limit is on the number of SQL commands, not the number of rows processed. Also, only commands that actually modify the database contents will consume a command identifier.

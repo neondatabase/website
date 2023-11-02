@@ -1,7 +1,7 @@
 ## 57.2. For the Programmer [#](#NLS-PROGRAMMER)
 
-  * *   [57.2.1. Mechanics](nls-programmer.html#NLS-MECHANICS)
-  * [57.2.2. Message-Writing Guidelines](nls-programmer.html#NLS-GUIDELINES)
+  * *   [57.2.1. Mechanics](nls-programmer#NLS-MECHANICS)
+  * [57.2.2. Message-Writing Guidelines](nls-programmer#NLS-GUIDELINES)
 
 ### 57.2.1. Mechanics [#](#NLS-MECHANICS)
 

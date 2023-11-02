@@ -1,17 +1,17 @@
 ## 59.2. Foreign Data Wrapper Callback Routines [#](#FDW-CALLBACKS)
 
-  * *   [59.2.1. FDW Routines for Scanning Foreign Tables](fdw-callbacks.html#FDW-CALLBACKS-SCAN)
-  * [59.2.2. FDW Routines for Scanning Foreign Joins](fdw-callbacks.html#FDW-CALLBACKS-JOIN-SCAN)
-  * [59.2.3. FDW Routines for Planning Post-Scan/Join Processing](fdw-callbacks.html#FDW-CALLBACKS-UPPER-PLANNING)
-  * [59.2.4. FDW Routines for Updating Foreign Tables](fdw-callbacks.html#FDW-CALLBACKS-UPDATE)
-  * [59.2.5. FDW Routines for `TRUNCATE`](fdw-callbacks.html#FDW-CALLBACKS-TRUNCATE)
-  * [59.2.6. FDW Routines for Row Locking](fdw-callbacks.html#FDW-CALLBACKS-ROW-LOCKING)
-  * [59.2.7. FDW Routines for `EXPLAIN`](fdw-callbacks.html#FDW-CALLBACKS-EXPLAIN)
-  * [59.2.8. FDW Routines for `ANALYZE`](fdw-callbacks.html#FDW-CALLBACKS-ANALYZE)
-  * [59.2.9. FDW Routines for `IMPORT FOREIGN SCHEMA`](fdw-callbacks.html#FDW-CALLBACKS-IMPORT)
-  * [59.2.10. FDW Routines for Parallel Execution](fdw-callbacks.html#FDW-CALLBACKS-PARALLEL)
-  * [59.2.11. FDW Routines for Asynchronous Execution](fdw-callbacks.html#FDW-CALLBACKS-ASYNC)
-  * [59.2.12. FDW Routines for Reparameterization of Paths](fdw-callbacks.html#FDW-CALLBACKS-REPARAMETERIZE-PATHS)
+  * *   [59.2.1. FDW Routines for Scanning Foreign Tables](fdw-callbacks#FDW-CALLBACKS-SCAN)
+  * [59.2.2. FDW Routines for Scanning Foreign Joins](fdw-callbacks#FDW-CALLBACKS-JOIN-SCAN)
+  * [59.2.3. FDW Routines for Planning Post-Scan/Join Processing](fdw-callbacks#FDW-CALLBACKS-UPPER-PLANNING)
+  * [59.2.4. FDW Routines for Updating Foreign Tables](fdw-callbacks#FDW-CALLBACKS-UPDATE)
+  * [59.2.5. FDW Routines for `TRUNCATE`](fdw-callbacks#FDW-CALLBACKS-TRUNCATE)
+  * [59.2.6. FDW Routines for Row Locking](fdw-callbacks#FDW-CALLBACKS-ROW-LOCKING)
+  * [59.2.7. FDW Routines for `EXPLAIN`](fdw-callbacks#FDW-CALLBACKS-EXPLAIN)
+  * [59.2.8. FDW Routines for `ANALYZE`](fdw-callbacks#FDW-CALLBACKS-ANALYZE)
+  * [59.2.9. FDW Routines for `IMPORT FOREIGN SCHEMA`](fdw-callbacks#FDW-CALLBACKS-IMPORT)
+  * [59.2.10. FDW Routines for Parallel Execution](fdw-callbacks#FDW-CALLBACKS-PARALLEL)
+  * [59.2.11. FDW Routines for Asynchronous Execution](fdw-callbacks#FDW-CALLBACKS-ASYNC)
+  * [59.2.12. FDW Routines for Reparameterization of Paths](fdw-callbacks#FDW-CALLBACKS-REPARAMETERIZE-PATHS)
 
 The FDW handler function returns a palloc'd `FdwRoutine` struct containing pointers to the callback functions described below. The scan-related functions are required, the rest are optional.
 
@@ -31,7 +31,7 @@ Obtain relation size estimates for a foreign table. This is called at the beginn
 
 This function should update `baserel->rows` to be the expected number of rows returned by the table scan, after accounting for the filtering done by the restriction quals. The initial value of `baserel->rows` is just a constant default estimate, which should be replaced if at all possible. The function may also choose to update `baserel->width` if it can compute a better estimate of the average result row width. (The initial value is based on column data types and on column average-width values measured by the last `ANALYZE`.) Also, this function may update `baserel->tuples` if it can compute a better estimate of the foreign table's total row count. (The initial value is from `pg_class`.`reltuples` which represents the total row count seen by the last `ANALYZE`; it will be `-1` if no `ANALYZE` has been done on this foreign table.)
 
-See [Section 59.4](fdw-planning.html "59.4. Foreign Data Wrapper Query Planning") for additional information.
+See [Section 59.4](fdw-planning "59.4. Foreign Data Wrapper Query Planning") for additional information.
 
 ```
 
@@ -45,7 +45,7 @@ Create possible access paths for a scan on a foreign table. This is called durin
 
 This function must generate at least one access path (`ForeignPath` node) for a scan on the foreign table and must call `add_path` to add each such path to `baserel->pathlist`. It's recommended to use `create_foreignscan_path` to build the `ForeignPath` nodes. The function can generate multiple access paths, e.g., a path which has valid `pathkeys` to represent a pre-sorted result. Each access path must contain cost estimates, and can contain any FDW-private information that is needed to identify the specific scan method intended.
 
-See [Section 59.4](fdw-planning.html "59.4. Foreign Data Wrapper Query Planning") for additional information.
+See [Section 59.4](fdw-planning "59.4. Foreign Data Wrapper Query Planning") for additional information.
 
 ```
 
@@ -63,7 +63,7 @@ Create a `ForeignScan` plan node from the selected foreign access path. This is 
 
 This function must create and return a `ForeignScan` plan node; it's recommended to use `make_foreignscan` to build the `ForeignScan` node.
 
-See [Section 59.4](fdw-planning.html "59.4. Foreign Data Wrapper Query Planning") for additional information.
+See [Section 59.4](fdw-planning "59.4. Foreign Data Wrapper Query Planning") for additional information.
 
 ```
 
@@ -131,7 +131,7 @@ If a `ForeignPath` path is chosen for the join, it will represent the entire joi
 
 Beginning with PostgreSQL 16, `fs_relids` includes the rangetable indexes of outer joins, if any were involved in this join. The new field `fs_base_relids` includes only base relation indexes, and thus mimics `fs_relids`'s old semantics.
 
-See [Section 59.4](fdw-planning.html "59.4. Foreign Data Wrapper Query Planning") for additional information.
+See [Section 59.4](fdw-planning "59.4. Foreign Data Wrapper Query Planning") for additional information.
 
 ### 59.2.3. FDW Routines for Planning Post-Scan/Join Processing [#](#FDW-CALLBACKS-UPPER-PLANNING)
 
@@ -151,7 +151,7 @@ Create possible access paths for *upper relation* processing, which is the plann
 
 The `stage` parameter identifies which post-scan/join step is currently being considered. `output_rel` is the upper relation that should receive paths representing computation of this step, and `input_rel` is the relation representing the input to this step. The `extra` parameter provides additional details, currently, it is set only for `UPPERREL_PARTIAL_GROUP_AGG` or `UPPERREL_GROUP_AGG`, in which case it points to a `GroupPathExtraData` structure; or for `UPPERREL_FINAL`, in which case it points to a `FinalPathExtraData` structure. (Note that `ForeignPath` paths added to `output_rel` would typically not have any direct dependency on paths of the `input_rel`, since their processing is expected to be done externally. However, examining paths previously generated for the previous processing step can be useful to avoid redundant planning work.)
 
-See [Section 59.4](fdw-planning.html "59.4. Foreign Data Wrapper Query Planning") for additional information.
+See [Section 59.4](fdw-planning "59.4. Foreign Data Wrapper Query Planning") for additional information.
 
 ### 59.2.4. FDW Routines for Updating Foreign Tables [#](#FDW-CALLBACKS-UPDATE)
 
@@ -185,7 +185,7 @@ Perform any additional planning actions needed for an insert, update, or delete 
 
 `root` is the planner's global information about the query. `plan` is the `ModifyTable` plan node, which is complete except for the `fdwPrivLists` field. `resultRelation` identifies the target foreign table by its range table index. `subplan_index` identifies which target of the `ModifyTable` plan node this is, counting from zero; use this if you want to index into per-target-relation substructures of the `plan` node.
 
-See [Section 59.4](fdw-planning.html "59.4. Foreign Data Wrapper Query Planning") for additional information.
+See [Section 59.4](fdw-planning "59.4. Foreign Data Wrapper Query Planning") for additional information.
 
 If the `PlanForeignModify` pointer is set to `NULL`, no additional plan-time actions are taken, and the `fdw_private` list delivered to `BeginForeignModify` will be NIL.
 
@@ -356,7 +356,7 @@ Decide whether it is safe to execute a direct modification on the remote server.
 
 To execute the direct modification on the remote server, this function must rewrite the target subplan with a `ForeignScan` plan node that executes the direct modification on the remote server. The `operation` and `resultRelation` fields of the `ForeignScan` must be set appropriately. `operation` must be set to the `CmdType` enumeration corresponding to the statement kind (that is, `CMD_UPDATE` for `UPDATE`, `CMD_INSERT` for `INSERT`, and `CMD_DELETE` for `DELETE`), and the `resultRelation` argument must be copied to the `resultRelation` field.
 
-See [Section 59.4](fdw-planning.html "59.4. Foreign Data Wrapper Query Planning") for additional information.
+See [Section 59.4](fdw-planning "59.4. Foreign Data Wrapper Query Planning") for additional information.
 
 If the `PlanDirectModify` pointer is set to `NULL`, no attempts to execute a direct modification on the remote server are taken.
 
@@ -407,7 +407,7 @@ ExecForeignTruncate(List *rels,
                     bool restart_seqs);
 ```
 
-Truncate foreign tables. This function is called when [TRUNCATE](sql-truncate.html "TRUNCATE") is executed on a foreign table. `rels` is a list of `Relation` data structures of foreign tables to truncate.
+Truncate foreign tables. This function is called when [TRUNCATE](sql-truncate "TRUNCATE") is executed on a foreign table. `rels` is a list of `Relation` data structures of foreign tables to truncate.
 
 `behavior` is either `DROP_RESTRICT` or `DROP_CASCADE` indicating that the `RESTRICT` or `CASCADE` option was requested in the original `TRUNCATE` command, respectively.
 
@@ -421,7 +421,7 @@ If the `ExecForeignTruncate` pointer is set to `NULL`, attempts to truncate fore
 
 ### 59.2.6. FDW Routines for Row Locking [#](#FDW-CALLBACKS-ROW-LOCKING)
 
-If an FDW wishes to support *late row locking* (as described in [Section 59.5](fdw-row-locking.html "59.5. Row Locking in Foreign Data Wrappers")), it must provide the following callback functions:
+If an FDW wishes to support *late row locking* (as described in [Section 59.5](fdw-row-locking "59.5. Row Locking in Foreign Data Wrappers")), it must provide the following callback functions:
 
 ```
 
@@ -436,7 +436,7 @@ This function is called during query planning for each foreign table that appear
 
 If the `GetForeignRowMarkType` pointer is set to `NULL`, the `ROW_MARK_COPY` option is always used. (This implies that `RefetchForeignRow` will never be called, so it need not be provided either.)
 
-See [Section 59.5](fdw-row-locking.html "59.5. Row Locking in Foreign Data Wrappers") for more information.
+See [Section 59.5](fdw-row-locking "59.5. Row Locking in Foreign Data Wrappers") for more information.
 
 ```
 
@@ -460,7 +460,7 @@ The `rowid` is the `ctid` value previously read for the row to be re-fetched. Al
 
 If the `RefetchForeignRow` pointer is set to `NULL`, attempts to re-fetch rows will fail with an error message.
 
-See [Section 59.5](fdw-row-locking.html "59.5. Row Locking in Foreign Data Wrappers") for more information.
+See [Section 59.5](fdw-row-locking "59.5. Row Locking in Foreign Data Wrappers") for more information.
 
 ```
 
@@ -521,7 +521,7 @@ AnalyzeForeignTable(Relation relation,
                     BlockNumber *totalpages);
 ```
 
-This function is called when [ANALYZE](sql-analyze.html "ANALYZE") is executed on a foreign table. If the FDW can collect statistics for this foreign table, it should return `true`, and provide a pointer to a function that will collect sample rows from the table in *`func`*, plus the estimated size of the table in pages in *`totalpages`*. Otherwise, return `false`.
+This function is called when [ANALYZE](sql-analyze "ANALYZE") is executed on a foreign table. If the FDW can collect statistics for this foreign table, it should return `true`, and provide a pointer to a function that will collect sample rows from the table in *`func`*, plus the estimated size of the table in pages in *`totalpages`*. Otherwise, return `false`.
 
 If the FDW does not support collecting statistics for any tables, the `AnalyzeForeignTable` pointer can be set to `NULL`.
 
@@ -548,7 +548,7 @@ List *
 ImportForeignSchema(ImportForeignSchemaStmt *stmt, Oid serverOid);
 ```
 
-Obtain a list of foreign table creation commands. This function is called when executing [IMPORT FOREIGN SCHEMA](sql-importforeignschema.html "IMPORT FOREIGN SCHEMA"), and is passed the parse tree for that statement, as well as the OID of the foreign server to use. It should return a list of C strings, each of which must contain a [CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE") command. These strings will be parsed and executed by the core server.
+Obtain a list of foreign table creation commands. This function is called when executing [IMPORT FOREIGN SCHEMA](sql-importforeignschema "IMPORT FOREIGN SCHEMA"), and is passed the parse tree for that statement, as well as the OID of the foreign server to use. It should return a list of C strings, each of which must contain a [CREATE FOREIGN TABLE](sql-createforeigntable "CREATE FOREIGN TABLE") command. These strings will be parsed and executed by the core server.
 
 Within the `ImportForeignSchemaStmt` struct, `remote_schema` is the name of the remote schema from which tables are to be imported. `list_type` identifies how to filter table names: `FDW_IMPORT_SCHEMA_ALL` means that all tables in the remote schema should be imported (in this case `table_list` is empty), `FDW_IMPORT_SCHEMA_LIMIT_TO` means to include only tables listed in `table_list`, and `FDW_IMPORT_SCHEMA_EXCEPT` means to exclude the tables listed in `table_list`. `options` is a list of options used for the import process. The meanings of the options are up to the FDW. For example, an FDW could use an option to define whether the `NOT NULL` attributes of columns should be imported. These options need not have anything to do with those supported by the FDW as database object options.
 

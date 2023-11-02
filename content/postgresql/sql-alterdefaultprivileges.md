@@ -74,7 +74,7 @@ REVOKE [ GRANT OPTION FOR ]
 
 You can change default privileges only for objects that will be created by yourself or by roles that you are a member of. The privileges can be set globally (i.e., for all objects created in the current database), or just for objects created in specified schemas.
 
-As explained in [Section 5.7](ddl-priv.html "5.7. Privileges"), the default privileges for any object type normally grant all grantable permissions to the object owner, and may grant some privileges to `PUBLIC` as well. However, this behavior can be changed by altering the global default privileges with `ALTER DEFAULT PRIVILEGES`.
+As explained in [Section 5.7](ddl-priv "5.7. Privileges"), the default privileges for any object type normally grant all grantable permissions to the object owner, and may grant some privileges to `PUBLIC` as well. However, this behavior can be changed by altering the global default privileges with `ALTER DEFAULT PRIVILEGES`.
 
 Default privileges that are specified per-schema are added to whatever the global default privileges are for the particular object type. This means you cannot revoke privileges per-schema if they are granted globally (either by default, or according to a previous `ALTER DEFAULT PRIVILEGES` command that did not specify a schema). Per-schema `REVOKE` is only useful to reverse the effects of a previous per-schema `GRANT`.
 
@@ -90,11 +90,11 @@ Default privileges that are specified per-schema are added to whatever the globa
 
 * *`role_name`*
 
-    The name of an existing role to grant or revoke privileges for. This parameter, and all the other parameters in *`abbreviated_grant_or_revoke`*, act as described under [GRANT](sql-grant.html "GRANT") or [REVOKE](sql-revoke.html "REVOKE"), except that one is setting permissions for a whole class of objects rather than specific named objects.
+    The name of an existing role to grant or revoke privileges for. This parameter, and all the other parameters in *`abbreviated_grant_or_revoke`*, act as described under [GRANT](sql-grant "GRANT") or [REVOKE](sql-revoke "REVOKE"), except that one is setting permissions for a whole class of objects rather than specific named objects.
 
 ## Notes
 
-Use [psql](app-psql.html "psql")'s `\ddp` command to obtain information about existing assignments of default privileges. The meaning of the privilege display is the same as explained for `\dp` in [Section 5.7](ddl-priv.html "5.7. Privileges").
+Use [psql](app-psql "psql")'s `\ddp` command to obtain information about existing assignments of default privileges. The meaning of the privilege display is the same as explained for `\dp` in [Section 5.7](ddl-priv "5.7. Privileges").
 
 If you wish to drop a role for which the default privileges have been altered, it is necessary to reverse the changes in its default privileges or use `DROP OWNED BY` to get rid of the default privileges entry for the role.
 
@@ -138,4 +138,4 @@ There is no `ALTER DEFAULT PRIVILEGES` statement in the SQL standard.
 
 ## See Also
 
-[GRANT](sql-grant.html "GRANT"), [REVOKE](sql-revoke.html "REVOKE")
+[GRANT](sql-grant "GRANT"), [REVOKE](sql-revoke "REVOKE")

@@ -4,7 +4,7 @@ Once you have created a database, you can access it by:
 
 * Running the PostgreSQL interactive terminal program, called *psql*, which allows you to interactively enter, edit, and execute SQL commands.
 * Using an existing graphical frontend tool like pgAdmin or an office suite with ODBC or JDBC support to create and manipulate a database. These possibilities are not covered in this tutorial.
-* Writing a custom application, using one of the several available language bindings. These possibilities are discussed further in [Part IV](client-interfaces.html "Part IV. Client Interfaces").
+* Writing a custom application, using one of the several available language bindings. These possibilities are discussed further in [Part IV](client-interfaces "Part IV. Client Interfaces").
 
 You probably want to start up `psql` to try the examples in this tutorial. It can be activated for the `mydb` database by typing the command:
 
@@ -73,4 +73,4 @@ To get out of `psql`, type:
 mydb=> \q
 ```
 
-and `psql` will quit and return you to your command shell. (For more internal commands, type `\?` at the `psql` prompt.) The full capabilities of `psql` are documented in [psql](app-psql.html "psql"). In this tutorial we will not use these features explicitly, but you can use them yourself when it is helpful.
+and `psql` will quit and return you to your command shell. (For more internal commands, type `\?` at the `psql` prompt.) The full capabilities of `psql` are documented in [psql](app-psql "psql"). In this tutorial we will not use these features explicitly, but you can use them yourself when it is helpful.

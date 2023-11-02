@@ -1,11 +1,11 @@
 ## F.41. sslinfo — obtain client SSL information [#](#SSLINFO)
 
-  * *   [F.41.1. Functions Provided](sslinfo.html#SSLINFO-FUNCTIONS)
-  * [F.41.2. Author](sslinfo.html#SSLINFO-AUTHOR)
+  * *   [F.41.1. Functions Provided](sslinfo#SSLINFO-FUNCTIONS)
+  * [F.41.2. Author](sslinfo#SSLINFO-AUTHOR)
 
 The `sslinfo` module provides information about the SSL certificate that the current client provided when connecting to PostgreSQL. The module is useless (most functions will return NULL) if the current connection does not use SSL.
 
-Some of the information available through this module can also be obtained using the built-in system view [`pg_stat_ssl`](monitoring-stats.html#MONITORING-PG-STAT-SSL-VIEW "28.2.10. pg_stat_ssl").
+Some of the information available through this module can also be obtained using the built-in system view [`pg_stat_ssl`](monitoring-stats#MONITORING-PG-STAT-SSL-VIEW "28.2.10. pg_stat_ssl").
 
 This extension won't build at all unless the installation was configured with `--with-ssl=openssl`.
 

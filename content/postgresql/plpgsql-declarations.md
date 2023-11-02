@@ -1,11 +1,11 @@
 ## 43.3. Declarations [#](#PLPGSQL-DECLARATIONS)
 
-  * *   [43.3.1. Declaring Function Parameters](plpgsql-declarations.html#PLPGSQL-DECLARATION-PARAMETERS)
-  * [43.3.2. `ALIAS`](plpgsql-declarations.html#PLPGSQL-DECLARATION-ALIAS)
-  * [43.3.3. Copying Types](plpgsql-declarations.html#PLPGSQL-DECLARATION-TYPE)
-  * [43.3.4. Row Types](plpgsql-declarations.html#PLPGSQL-DECLARATION-ROWTYPES)
-  * [43.3.5. Record Types](plpgsql-declarations.html#PLPGSQL-DECLARATION-RECORDS)
-  * [43.3.6. Collation of PL/pgSQL Variables](plpgsql-declarations.html#PLPGSQL-DECLARATION-COLLATION)
+  * *   [43.3.1. Declaring Function Parameters](plpgsql-declarations#PLPGSQL-DECLARATION-PARAMETERS)
+  * [43.3.2. `ALIAS`](plpgsql-declarations#PLPGSQL-DECLARATION-ALIAS)
+  * [43.3.3. Copying Types](plpgsql-declarations#PLPGSQL-DECLARATION-TYPE)
+  * [43.3.4. Row Types](plpgsql-declarations#PLPGSQL-DECLARATION-ROWTYPES)
+  * [43.3.5. Record Types](plpgsql-declarations#PLPGSQL-DECLARATION-RECORDS)
+  * [43.3.6. Collation of PL/pgSQL Variables](plpgsql-declarations#PLPGSQL-DECLARATION-COLLATION)
 
 All variables used in a block must be declared in the declarations section of the block. (The only exceptions are that the loop variable of a `FOR` loop iterating over a range of integer values is automatically declared as an integer variable, and likewise the loop variable of a `FOR` loop iterating over a cursor's result is automatically declared as a record variable.)
 
@@ -30,7 +30,7 @@ The general syntax of a variable declaration is:
 name [ CONSTANT ] type [ COLLATE collation_name ] [ NOT NULL ] [ { DEFAULT | := | = } expression ];
 ```
 
-The `DEFAULT` clause, if given, specifies the initial value assigned to the variable when the block is entered. If the `DEFAULT` clause is not given then the variable is initialized to the SQL null value. The `CONSTANT` option prevents the variable from being assigned to after initialization, so that its value will remain constant for the duration of the block. The `COLLATE` option specifies a collation to use for the variable (see [Section 43.3.6](plpgsql-declarations.html#PLPGSQL-DECLARATION-COLLATION "43.3.6. Collation of PL/pgSQL Variables")). If `NOT NULL` is specified, an assignment of a null value results in a run-time error. All variables declared as `NOT NULL` must have a nonnull default value specified. Equal (`=`) can be used instead of PL/SQL-compliant `:=`.
+The `DEFAULT` clause, if given, specifies the initial value assigned to the variable when the block is entered. If the `DEFAULT` clause is not given then the variable is initialized to the SQL null value. The `CONSTANT` option prevents the variable from being assigned to after initialization, so that its value will remain constant for the duration of the block. The `COLLATE` option specifies a collation to use for the variable (see [Section 43.3.6](plpgsql-declarations#PLPGSQL-DECLARATION-COLLATION "43.3.6. Collation of PL/pgSQL Variables")). If `NOT NULL` is specified, an assignment of a null value results in a run-time error. All variables declared as `NOT NULL` must have a nonnull default value specified. Equal (`=`) can be used instead of PL/SQL-compliant `:=`.
 
 A variable's default value is evaluated and assigned to the variable each time the block is entered (not just once per function call). So, for example, assigning `now()` to a variable of type `timestamp` causes the variable to have the time of the current function call, not the time when the function was precompiled.
 
@@ -149,7 +149,7 @@ SELECT * FROM sum_n_product(2, 4);
    6 |    8
 ```
 
-As discussed in [Section 38.5.4](xfunc-sql.html#XFUNC-OUTPUT-PARAMETERS "38.5.4. SQL Functions with Output Parameters"), this effectively creates an anonymous record type for the function's results. If a `RETURNS` clause is given, it must say `RETURNS record`.
+As discussed in [Section 38.5.4](xfunc-sql#XFUNC-OUTPUT-PARAMETERS "38.5.4. SQL Functions with Output Parameters"), this effectively creates an anonymous record type for the function's results. If a `RETURNS` clause is given, it must say `RETURNS record`.
 
 This also works with procedures, for example:
 
@@ -173,7 +173,7 @@ CALL sum_n_product(2, 4, NULL, NULL);
    6 |    8
 ```
 
-However, when calling a procedure from PL/pgSQL, you should instead write a variable for any output parameter; the variable will receive the result of the call. See [Section 43.6.3](plpgsql-control-structures.html#PLPGSQL-STATEMENTS-CALLING-PROCEDURE "43.6.3. Calling a Procedure") for details.
+However, when calling a procedure from PL/pgSQL, you should instead write a variable for any output parameter; the variable will receive the result of the call. See [Section 43.6.3](plpgsql-control-structures#PLPGSQL-STATEMENTS-CALLING-PROCEDURE "43.6.3. Calling a Procedure") for details.
 
 Another way to declare a PL/pgSQL function is with `RETURNS TABLE`, for example:
 
@@ -190,7 +190,7 @@ $$ LANGUAGE plpgsql;
 
 This is exactly equivalent to declaring one or more `OUT` parameters and specifying `RETURNS SETOF sometype`.
 
-When the return type of a PL/pgSQL function is declared as a polymorphic type (see [Section 38.2.5](extend-type-system.html#EXTEND-TYPES-POLYMORPHIC "38.2.5. Polymorphic Types")), a special parameter `$0` is created. Its data type is the actual return type of the function, as deduced from the actual input types. This allows the function to access its actual return type as shown in [Section 43.3.3](plpgsql-declarations.html#PLPGSQL-DECLARATION-TYPE "43.3.3. Copying Types"). `$0` is initialized to null and can be modified by the function, so it can be used to hold the return value if desired, though that is not required. `$0` can also be given an alias. For example, this function works on any data type that has a `+` operator:
+When the return type of a PL/pgSQL function is declared as a polymorphic type (see [Section 38.2.5](extend-type-system#EXTEND-TYPES-POLYMORPHIC "38.2.5. Polymorphic Types")), a special parameter `$0` is created. Its data type is the actual return type of the function, as deduced from the actual input types. This allows the function to access its actual return type as shown in [Section 43.3.3](plpgsql-declarations#PLPGSQL-DECLARATION-TYPE "43.3.3. Copying Types"). `$0` is initialized to null and can be modified by the function, so it can be used to hold the return value if desired, though that is not required. `$0` can also be given an alias. For example, this function works on any data type that has a `+` operator:
 
 ```
 
@@ -320,7 +320,7 @@ Note that `RECORD` is not a true data type, only a placeholder. One should also 
 
 ### 43.3.6. Collation of PL/pgSQL Variables [#](#PLPGSQL-DECLARATION-COLLATION)
 
-When a PL/pgSQL function has one or more parameters of collatable data types, a collation is identified for each function call depending on the collations assigned to the actual arguments, as described in [Section 24.2](collation.html "24.2. Collation Support"). If a collation is successfully identified (i.e., there are no conflicts of implicit collations among the arguments) then all the collatable parameters are treated as having that collation implicitly. This will affect the behavior of collation-sensitive operations within the function. For example, consider
+When a PL/pgSQL function has one or more parameters of collatable data types, a collation is identified for each function call depending on the collations assigned to the actual arguments, as described in [Section 24.2](collation "24.2. Collation Support"). If a collation is successfully identified (i.e., there are no conflicts of implicit collations among the arguments) then all the collatable parameters are treated as having that collation implicitly. This will affect the behavior of collation-sensitive operations within the function. For example, consider
 
 ```
 

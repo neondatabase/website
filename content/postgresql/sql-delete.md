@@ -19,7 +19,7 @@ DELETE FROM [ ONLY ] table_name [ * ] [ [ AS ] alias ]
 
 ### Tip
 
-[`TRUNCATE`](sql-truncate.html "TRUNCATE") provides a faster mechanism to remove all rows from a table.
+[`TRUNCATE`](sql-truncate "TRUNCATE") provides a faster mechanism to remove all rows from a table.
 
 There are two ways to delete rows in a table using information contained in other tables in the database: using sub-selects, or specifying additional tables in the `USING` clause. Which technique is more appropriate depends on the specific circumstances.
 
@@ -31,7 +31,7 @@ You must have the `DELETE` privilege on the table to delete from it, as well as 
 
 * *`with_query`*
 
-    The `WITH` clause allows you to specify one or more subqueries that can be referenced by name in the `DELETE` query. See [Section 7.8](queries-with.html "7.8. WITH Queries (Common Table Expressions)") and [SELECT](sql-select.html "SELECT") for details.
+    The `WITH` clause allows you to specify one or more subqueries that can be referenced by name in the `DELETE` query. See [Section 7.8](queries-with "7.8. WITH Queries (Common Table Expressions)") and [SELECT](sql-select "SELECT") for details.
 
 * *`table_name`*
 
@@ -43,7 +43,7 @@ You must have the `DELETE` privilege on the table to delete from it, as well as 
 
 * *`from_item`*
 
-    A table expression allowing columns from other tables to appear in the `WHERE` condition. This uses the same syntax as the [`FROM`](sql-select.html#SQL-FROM "FROM Clause") clause of a `SELECT` statement; for example, an alias for the table name can be specified. Do not repeat the target table as a *`from_item`* unless you wish to set up a self-join (in which case it must appear with an alias in the *`from_item`*).
+    A table expression allowing columns from other tables to appear in the `WHERE` condition. This uses the same syntax as the [`FROM`](sql-select#SQL-FROM "FROM Clause") clause of a `SELECT` statement; for example, an alias for the table name can be specified. Do not repeat the target table as a *`from_item`* unless you wish to set up a self-join (in which case it must appear with an alias in the *`from_item`*).
 
 * *`condition`*
 
@@ -51,7 +51,7 @@ You must have the `DELETE` privilege on the table to delete from it, as well as 
 
 * *`cursor_name`*
 
-    The name of the cursor to use in a `WHERE CURRENT OF` condition. The row to be deleted is the one most recently fetched from this cursor. The cursor must be a non-grouping query on the `DELETE`'s target table. Note that `WHERE CURRENT OF` cannot be specified together with a Boolean condition. See [DECLARE](sql-declare.html "DECLARE") for more information about using cursors with `WHERE CURRENT OF`.
+    The name of the cursor to use in a `WHERE CURRENT OF` condition. The row to be deleted is the one most recently fetched from this cursor. The cursor must be a non-grouping query on the `DELETE`'s target table. Note that `WHERE CURRENT OF` cannot be specified together with a Boolean condition. See [DECLARE](sql-declare "DECLARE") for more information about using cursors with `WHERE CURRENT OF`.
 
 * *`output_expression`*
 
@@ -130,4 +130,4 @@ This command conforms to the SQL standard, except that the `USING` and `RETURNIN
 
 ## See Also
 
-[TRUNCATE](sql-truncate.html "TRUNCATE")
+[TRUNCATE](sql-truncate "TRUNCATE")

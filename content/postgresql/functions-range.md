@@ -1,8 +1,8 @@
 ## 9.20. Range/Multirange Functions and Operators [#](#FUNCTIONS-RANGE)
 
-See [Section 8.17](rangetypes.html "8.17. Range Types") for an overview of range types.
+See [Section 8.17](rangetypes "8.17. Range Types") for an overview of range types.
 
-[Table 9.55](functions-range.html#RANGE-OPERATORS-TABLE "Table 9.55. Range Operators") shows the specialized operators available for range types. [Table 9.56](functions-range.html#MULTIRANGE-OPERATORS-TABLE "Table 9.56. Multirange Operators") shows the specialized operators available for multirange types. In addition to those, the usual comparison operators shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for range and multirange types. The comparison operators order first by the range lower bounds, and only if those are equal do they compare the upper bounds. The multirange operators compare each range until one is unequal. This does not usually result in a useful overall ordering, but the operators are provided to allow unique indexes to be constructed on ranges.
+[Table 9.55](functions-range#RANGE-OPERATORS-TABLE "Table 9.55. Range Operators") shows the specialized operators available for range types. [Table 9.56](functions-range#MULTIRANGE-OPERATORS-TABLE "Table 9.56. Multirange Operators") shows the specialized operators available for multirange types. In addition to those, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for range and multirange types. The comparison operators order first by the range lower bounds, and only if those are equal do they compare the upper bounds. The multirange operators compare each range until one is unequal. This does not usually result in a useful overall ordering, but the operators are provided to allow unique indexes to be constructed on ranges.
 
 **Table 9.55. Range Operators**
 
@@ -66,7 +66,7 @@ Elsewhere empty ranges and multiranges are treated as the additive identity: any
 
 The range union and difference operators will fail if the resulting range would need to contain two disjoint sub-ranges, as such a range cannot be represented. There are separate operators for union and difference that take multirange parameters and return a multirange, and they do not fail even if their arguments are disjoint. So if you need a union or difference operation for ranges that may be disjoint, you can avoid errors by first casting your ranges to multiranges.
 
-[Table 9.57](functions-range.html#RANGE-FUNCTIONS-TABLE "Table 9.57. Range Functions") shows the functions available for use with range types. [Table 9.58](functions-range.html#MULTIRANGE-FUNCTIONS-TABLE "Table 9.58. Multirange Functions") shows the functions available for use with multirange types.
+[Table 9.57](functions-range#RANGE-FUNCTIONS-TABLE "Table 9.57. Range Functions") shows the functions available for use with range types. [Table 9.58](functions-range#MULTIRANGE-FUNCTIONS-TABLE "Table 9.58. Multirange Functions") shows the functions available for use with multirange types.
 
 **Table 9.57. Range Functions**
 

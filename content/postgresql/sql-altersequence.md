@@ -78,7 +78,7 @@ You must own the sequence to use `ALTER SEQUENCE`. To change a sequence's schema
 
 * `SET { LOGGED | UNLOGGED }`
 
-    This form changes the sequence from unlogged to logged or vice-versa (see [CREATE SEQUENCE](sql-createsequence.html "CREATE SEQUENCE")). It cannot be applied to a temporary sequence.
+    This form changes the sequence from unlogged to logged or vice-versa (see [CREATE SEQUENCE](sql-createsequence "CREATE SEQUENCE")). It cannot be applied to a temporary sequence.
 
 * `OWNED BY` *`table_name`*.*`column_name`*`OWNED BY NONE`
 
@@ -121,4 +121,4 @@ ALTER SEQUENCE serial RESTART WITH 105;
 
 ## See Also
 
-[CREATE SEQUENCE](sql-createsequence.html "CREATE SEQUENCE"), [DROP SEQUENCE](sql-dropsequence.html "DROP SEQUENCE")
+[CREATE SEQUENCE](sql-createsequence "CREATE SEQUENCE"), [DROP SEQUENCE](sql-dropsequence "DROP SEQUENCE")

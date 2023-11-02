@@ -1,11 +1,11 @@
 ## 20.9. Run-time Statistics [#](#RUNTIME-CONFIG-STATISTICS)
 
-  * *   [20.9.1. Cumulative Query and Index Statistics](runtime-config-statistics.html#RUNTIME-CONFIG-CUMULATIVE-STATISTICS)
-  * [20.9.2. Statistics Monitoring](runtime-config-statistics.html#RUNTIME-CONFIG-STATISTICS-MONITOR)
+  * *   [20.9.1. Cumulative Query and Index Statistics](runtime-config-statistics#RUNTIME-CONFIG-CUMULATIVE-STATISTICS)
+  * [20.9.2. Statistics Monitoring](runtime-config-statistics#RUNTIME-CONFIG-STATISTICS-MONITOR)
 
 ### 20.9.1. Cumulative Query and Index Statistics [#](#RUNTIME-CONFIG-CUMULATIVE-STATISTICS)
 
-These parameters control the server-wide cumulative statistics system. When enabled, the data that is collected can be accessed via the `pg_stat` and `pg_statio` family of system views. Refer to [Chapter 28](monitoring.html "Chapter 28. Monitoring Database Activity") for more information.
+These parameters control the server-wide cumulative statistics system. When enabled, the data that is collected can be accessed via the `pg_stat` and `pg_statio` family of system views. Refer to [Chapter 28](monitoring "Chapter 28. Monitoring Database Activity") for more information.
 
 * `track_activities` (`boolean`) [#](#GUC-TRACK-ACTIVITIES)
 
@@ -21,11 +21,11 @@ These parameters control the server-wide cumulative statistics system. When enab
 
 * `track_io_timing` (`boolean`) [#](#GUC-TRACK-IO-TIMING)
 
-    Enables timing of database I/O calls. This parameter is off by default, as it will repeatedly query the operating system for the current time, which may cause significant overhead on some platforms. You can use the [pg\_test\_timing](pgtesttiming.html "pg_test_timing") tool to measure the overhead of timing on your system. I/O timing information is displayed in [`pg_stat_database`](monitoring-stats.html#MONITORING-PG-STAT-DATABASE-VIEW "28.2.16. pg_stat_database"), in the output of [EXPLAIN](sql-explain.html "EXPLAIN") when the `BUFFERS` option is used, in the output of [VACUUM](sql-vacuum.html "VACUUM") when the `VERBOSE` option is used, by autovacuum for auto-vacuums and auto-analyzes, when [log\_autovacuum\_min\_duration](runtime-config-logging.html#GUC-LOG-AUTOVACUUM-MIN-DURATION) is set and by [pg\_stat\_statements](pgstatstatements.html "F.31. pg_stat_statements — track statistics of SQL planning and execution"). Only superusers and users with the appropriate `SET` privilege can change this setting.
+    Enables timing of database I/O calls. This parameter is off by default, as it will repeatedly query the operating system for the current time, which may cause significant overhead on some platforms. You can use the [pg\_test\_timing](pgtesttiming "pg_test_timing") tool to measure the overhead of timing on your system. I/O timing information is displayed in [`pg_stat_database`](monitoring-stats#MONITORING-PG-STAT-DATABASE-VIEW "28.2.16. pg_stat_database"), in the output of [EXPLAIN](sql-explain "EXPLAIN") when the `BUFFERS` option is used, in the output of [VACUUM](sql-vacuum "VACUUM") when the `VERBOSE` option is used, by autovacuum for auto-vacuums and auto-analyzes, when [log\_autovacuum\_min\_duration](runtime-config-logging#GUC-LOG-AUTOVACUUM-MIN-DURATION) is set and by [pg\_stat\_statements](pgstatstatements "F.31. pg_stat_statements — track statistics of SQL planning and execution"). Only superusers and users with the appropriate `SET` privilege can change this setting.
 
 * `track_wal_io_timing` (`boolean`) [#](#GUC-TRACK-WAL-IO-TIMING)
 
-    Enables timing of WAL I/O calls. This parameter is off by default, as it will repeatedly query the operating system for the current time, which may cause significant overhead on some platforms. You can use the pg\_test\_timing tool to measure the overhead of timing on your system. I/O timing information is displayed in [`pg_stat_wal`](monitoring-stats.html#MONITORING-PG-STAT-WAL-VIEW "28.2.15. pg_stat_wal"). Only superusers and users with the appropriate `SET` privilege can change this setting.
+    Enables timing of WAL I/O calls. This parameter is off by default, as it will repeatedly query the operating system for the current time, which may cause significant overhead on some platforms. You can use the pg\_test\_timing tool to measure the overhead of timing on your system. I/O timing information is displayed in [`pg_stat_wal`](monitoring-stats#MONITORING-PG-STAT-WAL-VIEW "28.2.15. pg_stat_wal"). Only superusers and users with the appropriate `SET` privilege can change this setting.
 
 * `track_functions` (`enum`) [#](#GUC-TRACK-FUNCTIONS)
 
@@ -47,7 +47,7 @@ These parameters control the server-wide cumulative statistics system. When enab
 
 * `compute_query_id` (`enum`) [#](#GUC-COMPUTE-QUERY-ID)
 
-    Enables in-core computation of a query identifier. Query identifiers can be displayed in the [`pg_stat_activity`](monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity") view, using `EXPLAIN`, or emitted in the log if configured via the [log\_line\_prefix](runtime-config-logging.html#GUC-LOG-LINE-PREFIX) parameter. The [pg\_stat\_statements](pgstatstatements.html "F.31. pg_stat_statements — track statistics of SQL planning and execution") extension also requires a query identifier to be computed. Note that an external module can alternatively be used if the in-core query identifier computation method is not acceptable. In this case, in-core computation must be always disabled. Valid values are `off` (always disabled), `on` (always enabled), `auto`, which lets modules such as [pg\_stat\_statements](pgstatstatements.html "F.31. pg_stat_statements — track statistics of SQL planning and execution") automatically enable it, and `regress` which has the same effect as `auto`, except that the query identifier is not shown in the `EXPLAIN` output in order to facilitate automated regression testing. The default is `auto`.
+    Enables in-core computation of a query identifier. Query identifiers can be displayed in the [`pg_stat_activity`](monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity") view, using `EXPLAIN`, or emitted in the log if configured via the [log\_line\_prefix](runtime-config-logging#GUC-LOG-LINE-PREFIX) parameter. The [pg\_stat\_statements](pgstatstatements "F.31. pg_stat_statements — track statistics of SQL planning and execution") extension also requires a query identifier to be computed. Note that an external module can alternatively be used if the in-core query identifier computation method is not acceptable. In this case, in-core computation must be always disabled. Valid values are `off` (always disabled), `on` (always enabled), `auto`, which lets modules such as [pg\_stat\_statements](pgstatstatements "F.31. pg_stat_statements — track statistics of SQL planning and execution") automatically enable it, and `regress` which has the same effect as `auto`, except that the query identifier is not shown in the `EXPLAIN` output in order to facilitate automated regression testing. The default is `auto`.
 
 ### Note
 

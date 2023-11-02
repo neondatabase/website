@@ -12,7 +12,7 @@ The `plpy` module also provides the functions
 | `plpy.error(msg, **kwargs)`   |
 | `plpy.fatal(msg, **kwargs)`   |
 
-`plpy.error` and `plpy.fatal` actually raise a Python exception which, if uncaught, propagates out to the calling query, causing the current transaction or subtransaction to be aborted. `raise plpy.Error(msg)` and `raise plpy.Fatal(msg)` are equivalent to calling `plpy.error(msg)` and `plpy.fatal(msg)`, respectively but the `raise` form does not allow passing keyword arguments. The other functions only generate messages of different priority levels. Whether messages of a particular priority are reported to the client, written to the server log, or both is controlled by the [log\_min\_messages](runtime-config-logging.html#GUC-LOG-MIN-MESSAGES) and [client\_min\_messages](runtime-config-client.html#GUC-CLIENT-MIN-MESSAGES) configuration variables. See [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for more information.
+`plpy.error` and `plpy.fatal` actually raise a Python exception which, if uncaught, propagates out to the calling query, causing the current transaction or subtransaction to be aborted. `raise plpy.Error(msg)` and `raise plpy.Fatal(msg)` are equivalent to calling `plpy.error(msg)` and `plpy.fatal(msg)`, respectively but the `raise` form does not allow passing keyword arguments. The other functions only generate messages of different priority levels. Whether messages of a particular priority are reported to the client, written to the server log, or both is controlled by the [log\_min\_messages](runtime-config-logging#GUC-LOG-MIN-MESSAGES) and [client\_min\_messages](runtime-config-client#GUC-CLIENT-MIN-MESSAGES) configuration variables. See [Chapter 20](runtime-config "Chapter 20. Server Configuration") for more information.
 
 The *`msg`* argument is given as a positional argument. For backward compatibility, more than one positional argument can be given. In that case, the string representation of the tuple of positional arguments becomes the message reported to the client.
 
@@ -49,7 +49,7 @@ CONTEXT:  Traceback (most recent call last):
 PL/Python function "raise_custom_exception"
 ```
 
-Another set of utility functions are `plpy.quote_literal(string)`, `plpy.quote_nullable(string)`, and `plpy.quote_ident(string)`. They are equivalent to the built-in quoting functions described in [Section 9.4](functions-string.html "9.4. String Functions and Operators"). They are useful when constructing ad-hoc queries. A PL/Python equivalent of dynamic SQL from [Example 43.1](plpgsql-statements.html#PLPGSQL-QUOTE-LITERAL-EXAMPLE "Example 43.1. Quoting Values in Dynamic Queries") would be:
+Another set of utility functions are `plpy.quote_literal(string)`, `plpy.quote_nullable(string)`, and `plpy.quote_ident(string)`. They are equivalent to the built-in quoting functions described in [Section 9.4](functions-string "9.4. String Functions and Operators"). They are useful when constructing ad-hoc queries. A PL/Python equivalent of dynamic SQL from [Example 43.1](plpgsql-statements#PLPGSQL-QUOTE-LITERAL-EXAMPLE "Example 43.1. Quoting Values in Dynamic Queries") would be:
 
 ```
 

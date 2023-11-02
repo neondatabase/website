@@ -4,7 +4,7 @@ When an object is created, it is assigned an owner. The owner is normally the ro
 
 There are different kinds of privileges: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, `REFERENCES`, `TRIGGER`, `CREATE`, `CONNECT`, `TEMPORARY`, `EXECUTE`, `USAGE`, `SET` and `ALTER SYSTEM`. The privileges applicable to a particular object vary depending on the object's type (table, function, etc.). More detail about the meanings of these privileges appears below. The following sections and chapters will also show you how these privileges are used.
 
-The right to modify or destroy an object is inherent in being the object's owner, and cannot be granted or revoked in itself. (However, like all privileges, that right can be inherited by members of the owning role; see [Section 22.3](role-membership.html "22.3. Role Membership").)
+The right to modify or destroy an object is inherent in being the object's owner, and cannot be granted or revoked in itself. (However, like all privileges, that right can be inherited by members of the owning role; see [Section 22.3](role-membership "22.3. Role Membership").)
 
 An object can be assigned to a new owner with an `ALTER` command of the appropriate kind for the object, for example
 
@@ -15,7 +15,7 @@ ALTER TABLE table_name OWNER TO new_owner;
 
 Superusers can always do this; ordinary roles can only do it if they are both the current owner of the object (or inherit the privileges of the owning role) and able to `SET ROLE` to the new owning role.
 
-To assign privileges, the [GRANT](sql-grant.html "GRANT") command is used. For example, if `joe` is an existing role, and `accounts` is an existing table, the privilege to update the table can be granted with:
+To assign privileges, the [GRANT](sql-grant "GRANT") command is used. For example, if `joe` is an existing role, and `accounts` is an existing table, the privilege to update the table can be granted with:
 
 ```
 
@@ -24,16 +24,16 @@ GRANT UPDATE ON accounts TO joe;
 
 Writing `ALL` in place of a specific privilege grants all privileges that are relevant for the object type.
 
-The special “role” name `PUBLIC` can be used to grant a privilege to every role on the system. Also, “group” roles can be set up to help manage privileges when there are many users of a database — for details see [Chapter 22](user-manag.html "Chapter 22. Database Roles").
+The special “role” name `PUBLIC` can be used to grant a privilege to every role on the system. Also, “group” roles can be set up to help manage privileges when there are many users of a database — for details see [Chapter 22](user-manag "Chapter 22. Database Roles").
 
-To revoke a previously-granted privilege, use the fittingly named [REVOKE](sql-revoke.html "REVOKE") command:
+To revoke a previously-granted privilege, use the fittingly named [REVOKE](sql-revoke "REVOKE") command:
 
 ```
 
 REVOKE ALL ON accounts FROM PUBLIC;
 ```
 
-Ordinarily, only the object's owner (or a superuser) can grant or revoke privileges on an object. However, it is possible to grant a privilege “with grant option”, which gives the recipient the right to grant it in turn to others. If the grant option is subsequently revoked then all who received the privilege from that recipient (directly or through a chain of grants) will lose the privilege. For details see the [GRANT](sql-grant.html "GRANT") and [REVOKE](sql-revoke.html "REVOKE") reference pages.
+Ordinarily, only the object's owner (or a superuser) can grant or revoke privileges on an object. However, it is possible to grant a privilege “with grant option”, which gives the recipient the right to grant it in turn to others. If the grant option is subsequently revoked then all who received the privilege from that recipient (directly or through a chain of grants) will lose the privilege. For details see the [GRANT](sql-grant "GRANT") and [REVOKE](sql-revoke "REVOKE") reference pages.
 
 An object's owner can choose to revoke their own ordinary privileges, for example to make a table read-only for themselves as well as others. But owners are always treated as holding all grant options, so they can always re-grant their own privileges.
 
@@ -109,13 +109,13 @@ The available privileges are:
 
 * `ALTER SYSTEM` [#](#DDL-PRIV-ALTER-SYSTEM)
 
-    Allows a server configuration parameter to be configured to a new value using the [ALTER SYSTEM](sql-altersystem.html "ALTER SYSTEM") command.
+    Allows a server configuration parameter to be configured to a new value using the [ALTER SYSTEM](sql-altersystem "ALTER SYSTEM") command.
 
 The privileges required by other commands are listed on the reference page of the respective command.
 
-PostgreSQL grants privileges on some types of objects to `PUBLIC` by default when the objects are created. No privileges are granted to `PUBLIC` by default on tables, table columns, sequences, foreign data wrappers, foreign servers, large objects, schemas, tablespaces, or configuration parameters. For other types of objects, the default privileges granted to `PUBLIC` are as follows: `CONNECT` and `TEMPORARY` (create temporary tables) privileges for databases; `EXECUTE` privilege for functions and procedures; and `USAGE` privilege for languages and data types (including domains). The object owner can, of course, `REVOKE` both default and expressly granted privileges. (For maximum security, issue the `REVOKE` in the same transaction that creates the object; then there is no window in which another user can use the object.) Also, these default privilege settings can be overridden using the [ALTER DEFAULT PRIVILEGES](sql-alterdefaultprivileges.html "ALTER DEFAULT PRIVILEGES") command.
+PostgreSQL grants privileges on some types of objects to `PUBLIC` by default when the objects are created. No privileges are granted to `PUBLIC` by default on tables, table columns, sequences, foreign data wrappers, foreign servers, large objects, schemas, tablespaces, or configuration parameters. For other types of objects, the default privileges granted to `PUBLIC` are as follows: `CONNECT` and `TEMPORARY` (create temporary tables) privileges for databases; `EXECUTE` privilege for functions and procedures; and `USAGE` privilege for languages and data types (including domains). The object owner can, of course, `REVOKE` both default and expressly granted privileges. (For maximum security, issue the `REVOKE` in the same transaction that creates the object; then there is no window in which another user can use the object.) Also, these default privilege settings can be overridden using the [ALTER DEFAULT PRIVILEGES](sql-alterdefaultprivileges "ALTER DEFAULT PRIVILEGES") command.
 
-[Table 5.1](ddl-priv.html#PRIVILEGE-ABBREVS-TABLE "Table 5.1. ACL Privilege Abbreviations") shows the one-letter abbreviations that are used for these privilege types in *ACL* (Access Control List) values. You will see these letters in the output of the [psql](app-psql.html "psql") commands listed below, or when looking at ACL columns of system catalogs.
+[Table 5.1](ddl-priv#PRIVILEGE-ABBREVS-TABLE "Table 5.1. ACL Privilege Abbreviations") shows the one-letter abbreviations that are used for these privilege types in *ACL* (Access Control List) values. You will see these letters in the output of the [psql](app-psql "psql") commands listed below, or when looking at ACL columns of system catalogs.
 
 **Table 5.1. ACL Privilege Abbreviations**
 
@@ -138,7 +138,7 @@ PostgreSQL grants privileges on some types of objects to `PUBLIC` by default whe
 
 \
 
-[Table 5.2](ddl-priv.html#PRIVILEGES-SUMMARY-TABLE "Table 5.2. Summary of Access Privileges") summarizes the privileges available for each type of SQL object, using the abbreviations shown above. It also shows the psql command that can be used to examine privilege settings for each object type.
+[Table 5.2](ddl-priv#PRIVILEGES-SUMMARY-TABLE "Table 5.2. Summary of Access Privileges") summarizes the privileges available for each type of SQL object, using the abbreviations shown above. It also shows the psql command that can be used to examine privilege settings for each object type.
 
 **Table 5.2. Summary of Access Privileges**
 

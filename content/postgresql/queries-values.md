@@ -7,7 +7,7 @@
 VALUES ( expression [, ...] ) [, ...]
 ```
 
-Each parenthesized list of expressions generates a row in the table. The lists must all have the same number of elements (i.e., the number of columns in the table), and corresponding entries in each list must have compatible data types. The actual data type assigned to each column of the result is determined using the same rules as for `UNION` (see [Section 10.5](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs")).
+Each parenthesized list of expressions generates a row in the table. The lists must all have the same number of elements (i.e., the number of columns in the table), and corresponding entries in each list must have compatible data types. The actual data type assigned to each column of the result is determined using the same rules as for `UNION` (see [Section 10.5](typeconv-union-case "10.5. UNION, CASE, and Related Constructs")).
 
 As an example:
 
@@ -49,4 +49,4 @@ SELECT select_list FROM table_expression
 
 and can appear anywhere a `SELECT` can. For example, you can use it as part of a `UNION`, or attach a *`sort_specification`* (`ORDER BY`, `LIMIT`, and/or `OFFSET`) to it. `VALUES` is most commonly used as the data source in an `INSERT` command, and next most commonly as a subquery.
 
-For more information see [VALUES](sql-values.html "VALUES").
+For more information see [VALUES](sql-values "VALUES").

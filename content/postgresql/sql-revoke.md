@@ -128,7 +128,7 @@ where role_specification can be:
 
 The `REVOKE` command revokes previously granted privileges from one or more roles. The key word `PUBLIC` refers to the implicitly defined group of all roles.
 
-See the description of the [`GRANT`](sql-grant.html "GRANT") command for the meaning of the privilege types.
+See the description of the [`GRANT`](sql-grant "GRANT") command for the meaning of the privilege types.
 
 Note that any particular role will have the sum of privileges granted directly to it, privileges granted to any role it is presently a member of, and privileges granted to `PUBLIC`. Thus, for example, revoking `SELECT` privilege from `PUBLIC` does not necessarily mean that all roles have lost `SELECT` privilege on the object: those who have it granted directly or via another role will still have it. Similarly, revoking `SELECT` from a user might not prevent that user from using `SELECT` if `PUBLIC` or another membership role still has `SELECT` rights.
 
@@ -154,7 +154,7 @@ If a superuser chooses to issue a `GRANT` or `REVOKE` command, the command is pe
 
 If the role executing `REVOKE` holds privileges indirectly via more than one role membership path, it is unspecified which containing role will be used to perform the command. In such cases it is best practice to use `SET ROLE` to become the specific role you want to do the `REVOKE` as. Failure to do so might lead to revoking privileges other than the ones you intended, or not revoking anything at all.
 
-See [Section 5.7](ddl-priv.html "5.7. Privileges") for more information about specific privilege types, as well as how to inspect objects' privileges.
+See [Section 5.7](ddl-priv "5.7. Privileges") for more information about specific privilege types, as well as how to inspect objects' privileges.
 
 ## Examples
 
@@ -183,8 +183,8 @@ REVOKE admins FROM joe;
 
 ## Compatibility
 
-The compatibility notes of the [`GRANT`](sql-grant.html "GRANT") command apply analogously to `REVOKE`. The keyword `RESTRICT` or `CASCADE` is required according to the standard, but PostgreSQL assumes `RESTRICT` by default.
+The compatibility notes of the [`GRANT`](sql-grant "GRANT") command apply analogously to `REVOKE`. The keyword `RESTRICT` or `CASCADE` is required according to the standard, but PostgreSQL assumes `RESTRICT` by default.
 
 ## See Also
 
-[GRANT](sql-grant.html "GRANT"), [ALTER DEFAULT PRIVILEGES](sql-alterdefaultprivileges.html "ALTER DEFAULT PRIVILEGES")
+[GRANT](sql-grant "GRANT"), [ALTER DEFAULT PRIVILEGES](sql-alterdefaultprivileges "ALTER DEFAULT PRIVILEGES")

@@ -1,14 +1,14 @@
 ## 8.8. Geometric Types [#](#DATATYPE-GEOMETRIC)
 
-* *   [8.8.1. Points](datatype-geometric.html#DATATYPE-GEOMETRIC-POINTS)
-* [8.8.2. Lines](datatype-geometric.html#DATATYPE-LINE)
-* [8.8.3. Line Segments](datatype-geometric.html#DATATYPE-LSEG)
-* [8.8.4. Boxes](datatype-geometric.html#DATATYPE-GEOMETRIC-BOXES)
-* [8.8.5. Paths](datatype-geometric.html#DATATYPE-GEOMETRIC-PATHS)
-* [8.8.6. Polygons](datatype-geometric.html#DATATYPE-POLYGON)
-* [8.8.7. Circles](datatype-geometric.html#DATATYPE-CIRCLE)
+* *   [8.8.1. Points](datatype-geometric#DATATYPE-GEOMETRIC-POINTS)
+* [8.8.2. Lines](datatype-geometric#DATATYPE-LINE)
+* [8.8.3. Line Segments](datatype-geometric#DATATYPE-LSEG)
+* [8.8.4. Boxes](datatype-geometric#DATATYPE-GEOMETRIC-BOXES)
+* [8.8.5. Paths](datatype-geometric#DATATYPE-GEOMETRIC-PATHS)
+* [8.8.6. Polygons](datatype-geometric#DATATYPE-POLYGON)
+* [8.8.7. Circles](datatype-geometric#DATATYPE-CIRCLE)
 
-Geometric data types represent two-dimensional spatial objects. [Table 8.20](datatype-geometric.html#DATATYPE-GEO-TABLE "Table 8.20. Geometric Types") shows the geometric types available in PostgreSQL.
+Geometric data types represent two-dimensional spatial objects. [Table 8.20](datatype-geometric#DATATYPE-GEO-TABLE "Table 8.20. Geometric Types") shows the geometric types available in PostgreSQL.
 
 **Table 8.20. Geometric Types**
 
@@ -25,7 +25,7 @@ Geometric data types represent two-dimensional spatial objects. [Table 8.20](da
 
 \
 
-A rich set of functions and operators is available to perform various geometric operations such as scaling, translation, rotation, and determining intersections. They are explained in [Section 9.11](functions-geometry.html "9.11. Geometric Functions and Operators").
+A rich set of functions and operators is available to perform various geometric operations such as scaling, translation, rotation, and determining intersections. They are explained in [Section 9.11](functions-geometry "9.11. Geometric Functions and Operators").
 
 ### 8.8.1. Points [#](#DATATYPE-GEOMETRIC-POINTS)
 

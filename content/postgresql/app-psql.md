@@ -44,7 +44,7 @@ psql is a terminal-based front-end to PostgreSQL. It enables you to type in quer
 
     (`\\` is the separator meta-command.)
 
-    Each SQL command string passed to `-c` is sent to the server as a single request. Because of this, the server executes it as a single transaction even if the string contains multiple SQL commands, unless there are explicit `BEGIN`/`COMMIT` commands included in the string to divide it into multiple transactions. (See [Section 55.2.2.1](protocol-flow.html#PROTOCOL-FLOW-MULTI-STATEMENT "55.2.2.1. Multiple Statements in a Simple Query") for more details about how the server handles multi-query strings.)
+    Each SQL command string passed to `-c` is sent to the server as a single request. Because of this, the server executes it as a single transaction even if the string contains multiple SQL commands, unless there are explicit `BEGIN`/`COMMIT` commands included in the string to divide it into multiple transactions. (See [Section 55.2.2.1](protocol-flow#PROTOCOL-FLOW-MULTI-STATEMENT "55.2.2.1. Multiple Statements in a Simple Query") for more details about how the server handles multi-query strings.)
 
     If having several commands executed in one transaction is not desired, use repeated `-c` commands or feed multiple commands to psql's standard input, either using echo as illustrated above, or via a shell here-document, for example:
 
@@ -62,7 +62,7 @@ psql is a terminal-based front-end to PostgreSQL. It enables you to type in quer
 
 * `-d dbname``--dbname=dbname` [#](#APP-PSQL-OPTION-DBNAME)
 
-    Specifies the name of the database to connect to. This is equivalent to specifying *`dbname`* as the first non-option argument on the command line. The *`dbname`* can be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
+    Specifies the name of the database to connect to. This is equivalent to specifying *`dbname`* as the first non-option argument on the command line. The *`dbname`* can be a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
 
 * `-e``--echo-queries` [#](#APP-PSQL-OPTION-ECHO-QUERIES)
 
@@ -104,7 +104,7 @@ psql is a terminal-based front-end to PostgreSQL. It enables you to type in quer
 
 * `-n``--no-readline` [#](#APP-PSQL-OPTION-NO-READLINE)
 
-    Do not use Readline for line editing and do not use the command history (see [the section called “Command-Line Editing”](app-psql.html#APP-PSQL-READLINE "Command-Line Editing") below).
+    Do not use Readline for line editing and do not use the command history (see [the section called “Command-Line Editing”](app-psql#APP-PSQL-READLINE "Command-Line Editing") below).
 
 * `-o filename``--output=filename` [#](#APP-PSQL-OPTION-OUTPUT)
 
@@ -208,7 +208,7 @@ psql returns 0 to the shell if it finished normally, 1 if a fatal error of its o
 
 psql is a regular PostgreSQL client application. In order to connect to a database you need to know the name of your target database, the host name and port number of the server, and what database user name you want to connect as. psql can be told about those parameters via command line options, namely `-d`, `-h`, `-p`, and `-U` respectively. If an argument is found that does not belong to any option it will be interpreted as the database name (or the database user name, if the database name is already given). Not all of these options are required; there are useful defaults. If you omit the host name, psql will connect via a Unix-domain socket to a server on the local host, or via TCP/IP to `localhost` on Windows. The default port number is determined at compile time. Since the database server uses the same default, you will not have to specify the port in most cases. The default database user name is your operating-system user name. Once the database user name is determined, it is used as the default database name. Note that you cannot just connect to any database under any database user name. Your database administrator should have informed you about your access rights.
 
-When the defaults aren't quite right, you can save yourself some typing by setting the environment variables `PGDATABASE`, `PGHOST`, `PGPORT` and/or `PGUSER` to appropriate values. (For additional environment variables, see [Section 34.15](libpq-envars.html "34.15. Environment Variables").) It is also convenient to have a `~/.pgpass` file to avoid regularly having to type in passwords. See [Section 34.16](libpq-pgpass.html "34.16. The Password File") for more information.
+When the defaults aren't quite right, you can save yourself some typing by setting the environment variables `PGDATABASE`, `PGHOST`, `PGPORT` and/or `PGUSER` to appropriate values. (For additional environment variables, see [Section 34.15](libpq-envars "34.15. Environment Variables").) It is also convenient to have a `~/.pgpass` file to avoid regularly having to type in passwords. See [Section 34.16](libpq-pgpass "34.16. The Password File") for more information.
 
 An alternative way to specify connection parameters is in a *`conninfo`* string or a URI, which is used instead of a database name. This mechanism give you very wide control over the connection. For example:
 
@@ -218,7 +218,7 @@ psql "service=myservice sslmode=require"
 psql postgresql://dbmaster:5433/mydb?sslmode=require
 ```
 
-This way you can also use LDAP for connection parameter lookup as described in [Section 34.18](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters"). See [Section 34.1.2](libpq-connect.html#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words") for more information on all the available connection options.
+This way you can also use LDAP for connection parameter lookup as described in [Section 34.18](libpq-ldap "34.18. LDAP Lookup of Connection Parameters"). See [Section 34.1.2](libpq-connect#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words") for more information on all the available connection options.
 
 If the connection could not be made for any reason (e.g., insufficient privileges, server is not running on the targeted host, etc.), psql will return an error and terminate.
 
@@ -239,9 +239,9 @@ testdb=>
 
 At the prompt, the user can type in SQL commands. Ordinarily, input lines are sent to the server when a command-terminating semicolon is reached. An end of line does not terminate a command. Thus commands can be spread over several lines for clarity. If the command was sent and executed without error, the results of the command are displayed on the screen.
 
-If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas.html#DDL-SCHEMAS-PATTERNS "5.9.6. Usage Patterns"), begin your session by removing publicly-writable schemas from `search_path`. One can add `options=-csearch_path=` to the connection string or issue `SELECT pg_catalog.set_config('search_path', '', false)` before other SQL commands. This consideration is not specific to psql; it applies to every interface for executing arbitrary SQL commands.
+If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas#DDL-SCHEMAS-PATTERNS "5.9.6. Usage Patterns"), begin your session by removing publicly-writable schemas from `search_path`. One can add `options=-csearch_path=` to the connection string or issue `SELECT pg_catalog.set_config('search_path', '', false)` before other SQL commands. This consideration is not specific to psql; it applies to every interface for executing arbitrary SQL commands.
 
-Whenever a command is executed, psql also polls for asynchronous notification events generated by [`LISTEN`](sql-listen.html "LISTEN") and [`NOTIFY`](sql-notify.html "NOTIFY").
+Whenever a command is executed, psql also polls for asynchronous notification events generated by [`LISTEN`](sql-listen "LISTEN") and [`NOTIFY`](sql-notify "NOTIFY").
 
 While C-style block comments are passed to the server for processing and removal, SQL-standard comments are removed by psql.
 
@@ -253,7 +253,7 @@ The format of a psql command is the backslash, followed immediately by a command
 
 To include whitespace in an argument you can quote it with single quotes. To include a single quote in an argument, write two single quotes within single-quoted text. Anything contained in single quotes is furthermore subject to C-like substitutions for `\n` (new line), `\t` (tab), `\b` (backspace), `\r` (carriage return), `\f` (form feed), `\`*`digits`* (octal), and `\x`*`digits`* (hexadecimal). A backslash preceding any other character within single-quoted text quotes that single character, whatever it is.
 
-If an unquoted colon (`:`) followed by a psql variable name appears within an argument, it is replaced by the variable's value, as described in [SQL Interpolation](app-psql.html#APP-PSQL-INTERPOLATION "SQL Interpolation") below. The forms `:'variable_name'` and `:"variable_name"` described there work as well. The `:{?variable_name}` syntax allows testing whether a variable is defined. It is substituted by TRUE or FALSE. Escaping the colon with a backslash protects it from substitution.
+If an unquoted colon (`:`) followed by a psql variable name appears within an argument, it is replaced by the variable's value, as described in [SQL Interpolation](app-psql#APP-PSQL-INTERPOLATION "SQL Interpolation") below. The forms `:'variable_name'` and `:"variable_name"` described there work as well. The `:{?variable_name}` syntax allows testing whether a variable is defined. It is substituted by TRUE or FALSE. Escaping the colon with a backslash protects it from substitution.
 
 Within an argument, text that is enclosed in backquotes (`` ` ``) is taken as a command line that is passed to the shell. The output of the command (with any trailing newline removed) replaces the backquoted text. Within the text enclosed in backquotes, no special quoting or other processing occurs, except that appearances of `:variable_name` where *`variable_name`* is a psql variable name are replaced by the variable's value. Also, appearances of `:'variable_name'` are replaced by the variable's value suitably quoted to become a single shell command argument. (The latter form is almost always preferable, unless you are very sure of what is in the variable.) Because carriage return and line feed characters cannot be safely quoted on all platforms, the `:'variable_name'` form prints an error message and does not substitute the variable value when such characters appear in the value.
 
@@ -282,11 +282,11 @@ The following meta-commands are defined:
 
     This also works for query-execution commands besides `\g`, such as `\gx` and `\gset`.
 
-    This command causes the extended query protocol (see [Section 55.1.2](protocol-overview.html#PROTOCOL-QUERY-CONCEPTS "55.1.2. Extended Query Overview")) to be used, unlike normal psql operation, which uses the simple query protocol. So this command can be useful to test the extended query protocol from psql. (The extended query protocol is used even if the query has no parameters and this command specifies zero parameters.) This command affects only the next query executed; all subsequent queries will use the simple query protocol by default.
+    This command causes the extended query protocol (see [Section 55.1.2](protocol-overview#PROTOCOL-QUERY-CONCEPTS "55.1.2. Extended Query Overview")) to be used, unlike normal psql operation, which uses the simple query protocol. So this command can be useful to test the extended query protocol from psql. (The extended query protocol is used even if the query has no parameters and this command specifies zero parameters.) This command affects only the next query executed; all subsequent queries will use the simple query protocol by default.
 
 * `\c` or `\connect [ -reuse-previous=on|off ] [ dbname [ username ] [ host ] [ port ] | conninfo ]` [#](#APP-PSQL-META-COMMAND-C-LC)
 
-    Establishes a new connection to a PostgreSQL server. The connection parameters to use can be specified either using a positional syntax (one or more of database name, user, host, and port), or using a *`conninfo`* connection string as detailed in [Section 34.1.1](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If no arguments are given, a new connection is made using the same parameters as before.
+    Establishes a new connection to a PostgreSQL server. The connection parameters to use can be specified either using a positional syntax (one or more of database name, user, host, and port), or using a *`conninfo`* connection string as detailed in [Section 34.1.1](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If no arguments are given, a new connection is made using the same parameters as before.
 
     Specifying any of *`dbname`*, *`username`*, *`host`* or *`port`* as `-` is equivalent to omitting that parameter.
 
@@ -323,13 +323,13 @@ The following meta-commands are defined:
 
 * `\copy { table [ ( column_list ) ] } from { 'filename' | program 'command' | stdin | pstdin } [ [ with ] ( option [, ...] ) ] [ where condition ]``\copy { table [ ( column_list ) ] | ( query ) } to { 'filename' | program 'command' | stdout | pstdout } [ [ with ] ( option [, ...] ) ]` [#](#APP-PSQL-META-COMMANDS-COPY)
 
-    Performs a frontend (client) copy. This is an operation that runs an SQL [`COPY`](sql-copy.html "COPY") command, but instead of the server reading or writing the specified file, psql reads or writes the file and routes the data between the server and the local file system. This means that file accessibility and privileges are those of the local user, not the server, and no SQL superuser privileges are required.
+    Performs a frontend (client) copy. This is an operation that runs an SQL [`COPY`](sql-copy "COPY") command, but instead of the server reading or writing the specified file, psql reads or writes the file and routes the data between the server and the local file system. This means that file accessibility and privileges are those of the local user, not the server, and no SQL superuser privileges are required.
 
     When `program` is specified, *`command`* is executed by psql and the data passed from or to *`command`* is routed between the server and the client. Again, the execution privileges are those of the local user, not the server, and no SQL superuser privileges are required.
 
     For `\copy ... from stdin`, data rows are read from the same source that issued the command, continuing until `\.` is read or the stream reaches EOF. This option is useful for populating tables in-line within an SQL script file. For `\copy ... to stdout`, output is sent to the same place as psql command output, and the `COPY count` command status is not printed (since it might be confused with a data row). To read/write psql's standard input or output regardless of the current command source or `\o` option, write `from pstdin` or `to pstdout`.
 
-    The syntax of this command is similar to that of the SQL [`COPY`](sql-copy.html "COPY") command. All options other than the data source/destination are as specified for `COPY`. Because of this, special parsing rules apply to the `\copy` meta-command. Unlike most other meta-commands, the entire remainder of the line is always taken to be the arguments of `\copy`, and neither variable interpolation nor backquote expansion are performed in the arguments.
+    The syntax of this command is similar to that of the SQL [`COPY`](sql-copy "COPY") command. All options other than the data source/destination are as specified for `COPY`. Because of this, special parsing rules apply to the `\copy` meta-command. Unlike most other meta-commands, the entire remainder of the line is always taken to be the arguments of `\copy`, and neither variable interpolation nor backquote expansion are performed in the arguments.
 
 ### Tip
 
@@ -357,11 +357,11 @@ The following meta-commands are defined:
 
 * `\d[S+] [ pattern ]` [#](#APP-PSQL-META-COMMAND-D)
 
-    For each relation (table, view, materialized view, index, sequence, or foreign table) or composite type matching the *`pattern`*, show all columns, their types, the tablespace (if not the default) and any special attributes such as `NOT NULL` or defaults. Associated indexes, constraints, rules, and triggers are also shown. For foreign tables, the associated foreign server is shown as well. (“Matching the pattern” is defined in [Patterns](app-psql.html#APP-PSQL-PATTERNS "Patterns") below.)
+    For each relation (table, view, materialized view, index, sequence, or foreign table) or composite type matching the *`pattern`*, show all columns, their types, the tablespace (if not the default) and any special attributes such as `NOT NULL` or defaults. Associated indexes, constraints, rules, and triggers are also shown. For foreign tables, the associated foreign server is shown as well. (“Matching the pattern” is defined in [Patterns](app-psql#APP-PSQL-PATTERNS "Patterns") below.)
 
     For some types of relation, `\d` shows additional information for each column: column values for sequences, indexed expressions for indexes, and foreign data wrapper options for foreign tables.
 
-    The command form `\d+` is identical, except that more information is displayed: any comments associated with the columns of the table are shown, as is the presence of OIDs in the table, the view definition if the relation is a view, a non-default [replica identity](sql-altertable.html#SQL-ALTERTABLE-REPLICA-IDENTITY) setting and the [access method](sql-create-access-method.html "CREATE ACCESS METHOD") name if the relation has an access method.
+    The command form `\d+` is identical, except that more information is displayed: any comments associated with the columns of the table are shown, as is the presence of OIDs in the table, the view definition if the relation is a view, a non-default [replica identity](sql-altertable#SQL-ALTERTABLE-REPLICA-IDENTITY) setting and the [access method](sql-create-access-method "CREATE ACCESS METHOD") name if the relation has an access method.
 
     By default, only user-created objects are shown; supply a pattern or the `S` modifier to include system objects.
 
@@ -379,19 +379,19 @@ The following meta-commands are defined:
 
 * `\dAc[+] [access-method-pattern [input-type-pattern]]`[#](#APP-PSQL-META-COMMAND-DAC)
 
-    Lists operator classes (see [Section 38.16.1](xindex.html#XINDEX-OPCLASS "38.16.1. Index Methods and Operator Classes")). If *`access-method-pattern`* is specified, only operator classes associated with access methods whose names match that pattern are listed. If *`input-type-pattern`* is specified, only operator classes associated with input types whose names match that pattern are listed. If `+` is appended to the command name, each operator class is listed with its associated operator family and owner.
+    Lists operator classes (see [Section 38.16.1](xindex#XINDEX-OPCLASS "38.16.1. Index Methods and Operator Classes")). If *`access-method-pattern`* is specified, only operator classes associated with access methods whose names match that pattern are listed. If *`input-type-pattern`* is specified, only operator classes associated with input types whose names match that pattern are listed. If `+` is appended to the command name, each operator class is listed with its associated operator family and owner.
 
 * `\dAf[+] [access-method-pattern [input-type-pattern]]`[#](#APP-PSQL-META-COMMAND-DAF)
 
-    Lists operator families (see [Section 38.16.5](xindex.html#XINDEX-OPFAMILY "38.16.5. Operator Classes and Operator Families")). If *`access-method-pattern`* is specified, only operator families associated with access methods whose names match that pattern are listed. If *`input-type-pattern`* is specified, only operator families associated with input types whose names match that pattern are listed. If `+` is appended to the command name, each operator family is listed with its owner.
+    Lists operator families (see [Section 38.16.5](xindex#XINDEX-OPFAMILY "38.16.5. Operator Classes and Operator Families")). If *`access-method-pattern`* is specified, only operator families associated with access methods whose names match that pattern are listed. If *`input-type-pattern`* is specified, only operator families associated with input types whose names match that pattern are listed. If `+` is appended to the command name, each operator family is listed with its owner.
 
 * `\dAo[+] [access-method-pattern [operator-family-pattern]]`[#](#APP-PSQL-META-COMMAND-DAO)
 
-    Lists operators associated with operator families (see [Section 38.16.2](xindex.html#XINDEX-STRATEGIES "38.16.2. Index Method Strategies")). If *`access-method-pattern`* is specified, only members of operator families associated with access methods whose names match that pattern are listed. If *`operator-family-pattern`* is specified, only members of operator families whose names match that pattern are listed. If `+` is appended to the command name, each operator is listed with its sort operator family (if it is an ordering operator).
+    Lists operators associated with operator families (see [Section 38.16.2](xindex#XINDEX-STRATEGIES "38.16.2. Index Method Strategies")). If *`access-method-pattern`* is specified, only members of operator families associated with access methods whose names match that pattern are listed. If *`operator-family-pattern`* is specified, only members of operator families whose names match that pattern are listed. If `+` is appended to the command name, each operator is listed with its sort operator family (if it is an ordering operator).
 
 * `\dAp[+] [access-method-pattern [operator-family-pattern]]`[#](#APP-PSQL-META-COMMAND-DAP)
 
-    Lists support functions associated with operator families (see [Section 38.16.3](xindex.html#XINDEX-SUPPORT "38.16.3. Index Method Support Routines")). If *`access-method-pattern`* is specified, only functions of operator families associated with access methods whose names match that pattern are listed. If *`operator-family-pattern`* is specified, only functions of operator families whose names match that pattern are listed. If `+` is appended to the command name, functions are displayed verbosely, with their actual parameter lists.
+    Lists support functions associated with operator families (see [Section 38.16.3](xindex#XINDEX-SUPPORT "38.16.3. Index Method Support Routines")). If *`access-method-pattern`* is specified, only functions of operator families associated with access methods whose names match that pattern are listed. If *`operator-family-pattern`* is specified, only functions of operator families whose names match that pattern are listed. If `+` is appended to the command name, functions are displayed verbosely, with their actual parameter lists.
 
 * `\db[+] [ pattern ]` [#](#APP-PSQL-META-COMMAND-DB)
 
@@ -415,7 +415,7 @@ The following meta-commands are defined:
 
     `\dd` displays descriptions for objects matching the *`pattern`*, or of visible objects of the appropriate type if no argument is given. But in either case, only objects that have a description are listed. By default, only user-created objects are shown; supply a pattern or the `S` modifier to include system objects.
 
-    Descriptions for objects can be created with the [`COMMENT`](sql-comment.html "COMMENT") SQL command.
+    Descriptions for objects can be created with the [`COMMENT`](sql-comment "COMMENT") SQL command.
 
 * `\dD[S+] [ pattern ]` [#](#APP-PSQL-META-COMMAND-DD-UC)
 
@@ -425,7 +425,7 @@ The following meta-commands are defined:
 
     Lists default access privilege settings. An entry is shown for each role (and schema, if applicable) for which the default privilege settings have been changed from the built-in defaults. If *`pattern`* is specified, only entries whose role name or schema name matches the pattern are listed.
 
-    The [`ALTER DEFAULT PRIVILEGES`](sql-alterdefaultprivileges.html "ALTER DEFAULT PRIVILEGES") command is used to set default access privileges. The meaning of the privilege display is explained in [Section 5.7](ddl-priv.html "5.7. Privileges").
+    The [`ALTER DEFAULT PRIVILEGES`](sql-alterdefaultprivileges "ALTER DEFAULT PRIVILEGES") command is used to set default access privileges. The meaning of the privilege display is explained in [Section 5.7](ddl-priv "5.7. Privileges").
 
 * `\dE[S+] [ pattern ]``\di[S+] [ pattern ]``\dm[S+] [ pattern ]``\ds[S+] [ pattern ]``\dt[S+] [ pattern ]``\dv[S+] [ pattern ]` [#](#APP-PSQL-META-COMMAND-DE)
 
@@ -499,7 +499,7 @@ The following meta-commands are defined:
 
     Lists tables, views and sequences with their associated access privileges. If *`pattern`* is specified, only tables, views and sequences whose names match the pattern are listed. By default only user-created objects are shown; supply a pattern or the `S` modifier to include system objects.
 
-    The [`GRANT`](sql-grant.html "GRANT") and [`REVOKE`](sql-revoke.html "REVOKE") commands are used to set access privileges. The meaning of the privilege display is explained in [Section 5.7](ddl-priv.html "5.7. Privileges").
+    The [`GRANT`](sql-grant "GRANT") and [`REVOKE`](sql-revoke "REVOKE") commands are used to set access privileges. The meaning of the privilege display is explained in [Section 5.7](ddl-priv "5.7. Privileges").
 
 * `\dP[itn+] [ pattern ]` [#](#APP-PSQL-META-COMMAND-DP-UC)
 
@@ -513,11 +513,11 @@ The following meta-commands are defined:
 
     Lists defined configuration settings. These settings can be role-specific, database-specific, or both. *`role-pattern`* and *`database-pattern`* are used to select specific roles and databases to list, respectively. If omitted, or if `*` is specified, all settings are listed, including those not role-specific or database-specific, respectively.
 
-    The [`ALTER ROLE`](sql-alterrole.html "ALTER ROLE") and [`ALTER DATABASE`](sql-alterdatabase.html "ALTER DATABASE") commands are used to define per-role and per-database configuration settings.
+    The [`ALTER ROLE`](sql-alterrole "ALTER ROLE") and [`ALTER DATABASE`](sql-alterdatabase "ALTER DATABASE") commands are used to define per-role and per-database configuration settings.
 
 * `\drg[S] [ pattern ]` [#](#APP-PSQL-META-COMMAND-DRG)
 
-    Lists information about each granted role membership, including assigned options (`ADMIN`, `INHERIT` and/or `SET`) and grantor. See the [`GRANT`](sql-grant.html "GRANT") command for information about role memberships.
+    Lists information about each granted role membership, including assigned options (`ADMIN`, `INHERIT` and/or `SET`) and grantor. See the [`GRANT`](sql-grant "GRANT") command for information about role memberships.
 
     By default, only grants to user-created roles are shown; supply the `S` modifier to include system roles. If *`pattern`* is specified, only grants to those roles whose names match the pattern are listed.
 
@@ -545,7 +545,7 @@ The following meta-commands are defined:
 
     Lists extended statistics. If *`pattern`* is specified, only those extended statistics whose names match the pattern are listed.
 
-    The status of each kind of extended statistics is shown in a column named after its statistic kind (e.g. Ndistinct). `defined` means that it was requested when creating the statistics, and NULL means it wasn't requested. You can use `pg_stats_ext` if you'd like to know whether [`ANALYZE`](sql-analyze.html "ANALYZE") was run and statistics are available to the planner.
+    The status of each kind of extended statistics is shown in a column named after its statistic kind (e.g. Ndistinct). `defined` means that it was requested when creating the statistics, and NULL means it wasn't requested. You can use `pg_stats_ext` if you'd like to know whether [`ANALYZE`](sql-analyze "ANALYZE") was run and statistics are available to the planner.
 
 * `\dy[+] [ pattern ]` [#](#APP-PSQL-META-COMMAND-DY)
 
@@ -563,7 +563,7 @@ The following meta-commands are defined:
 
 ### Tip
 
-    See [Environment](app-psql.html#APP-PSQL-ENVIRONMENT "Environment"), below, for how to configure and customize your editor.
+    See [Environment](app-psql#APP-PSQL-ENVIRONMENT "Environment"), below, for how to configure and customize your editor.
 
 * `\echo text [ ... ]` [#](#APP-PSQL-META-COMMAND-ECHO)
 
@@ -595,7 +595,7 @@ The following meta-commands are defined:
 
 ### Tip
 
-    See [Environment](app-psql.html#APP-PSQL-ENVIRONMENT "Environment"), below, for how to configure and customize your editor.
+    See [Environment](app-psql#APP-PSQL-ENVIRONMENT "Environment"), below, for how to configure and customize your editor.
 
 * `\encoding [ encoding ]` [#](#APP-PSQL-META-COMMAND-ENCODING)
 
@@ -671,7 +671,7 @@ The following meta-commands are defined:
 
 * `\gset [ prefix ]` [#](#APP-PSQL-META-COMMAND-GSET)
 
-    Sends the current query buffer to the server and stores the query's output into psql variables (see [Variables](app-psql.html#APP-PSQL-VARIABLES "Variables") below). The query to be executed must return exactly one row. Each column of the row is stored into a separate variable, named the same as the column. For example:
+    Sends the current query buffer to the server and stores the query's output into psql variables (see [Variables](app-psql#APP-PSQL-VARIABLES "Variables") below). The query to be executed must return exactly one row. Each column of the row is stored into a separate variable, named the same as the column. For example:
 
     ```
 
@@ -959,7 +959,7 @@ The following meta-commands are defined:
 
         *`integer value`*: specify the exact maximum width of the header line.
 
-    Illustrations of how these different formats look can be seen in [Examples](app-psql.html#APP-PSQL-EXAMPLES "Examples"), below.
+    Illustrations of how these different formats look can be seen in [Examples](app-psql#APP-PSQL-EXAMPLES "Examples"), below.
 
 ### Tip
 
@@ -987,13 +987,13 @@ The following meta-commands are defined:
 
     `\set` without any arguments displays the names and values of all currently-set psql variables.
 
-    Valid variable names can contain letters, digits, and underscores. See [Variables](app-psql.html#APP-PSQL-VARIABLES "Variables") below for details. Variable names are case-sensitive.
+    Valid variable names can contain letters, digits, and underscores. See [Variables](app-psql#APP-PSQL-VARIABLES "Variables") below for details. Variable names are case-sensitive.
 
-    Certain variables are special, in that they control psql's behavior or are automatically set to reflect connection state. These variables are documented in [Variables](app-psql.html#APP-PSQL-VARIABLES "Variables"), below.
+    Certain variables are special, in that they control psql's behavior or are automatically set to reflect connection state. These variables are documented in [Variables](app-psql#APP-PSQL-VARIABLES "Variables"), below.
 
 ### Note
 
-    This command is unrelated to the SQL command [`SET`](sql-set.html "SET").
+    This command is unrelated to the SQL command [`SET`](sql-set "SET").
 
 * `\setenv name [ value ]` [#](#APP-PSQL-META-COMMAND-SETENV)
 
@@ -1039,7 +1039,7 @@ The following meta-commands are defined:
 
     Unsets (deletes) the psql variable *`name`*.
 
-    Most variables that control psql's behavior cannot be unset; instead, an `\unset` command is interpreted as setting them to their default values. See [Variables](app-psql.html#APP-PSQL-VARIABLES "Variables") below.
+    Most variables that control psql's behavior cannot be unset; instead, an `\unset` command is interpreted as setting them to their default values. See [Variables](app-psql#APP-PSQL-VARIABLES "Variables") below.
 
 * `\w` or `\write` *`filename`*`\w` or `\write` `|`*`command`* [#](#APP-PSQL-META-COMMAND-WRITE)
 
@@ -1095,7 +1095,7 @@ The following meta-commands are defined:
     select 1\; select 2\; select 3;
     ```
 
-    results in sending the three SQL commands to the server in a single request, when the non-backslashed semicolon is reached. The server executes such a request as a single transaction, unless there are explicit `BEGIN`/`COMMIT` commands included in the string to divide it into multiple transactions. (See [Section 55.2.2.1](protocol-flow.html#PROTOCOL-FLOW-MULTI-STATEMENT "55.2.2.1. Multiple Statements in a Simple Query") for more details about how the server handles multi-query strings.)
+    results in sending the three SQL commands to the server in a single request, when the non-backslashed semicolon is reached. The server executes such a request as a single transaction, unless there are explicit `BEGIN`/`COMMIT` commands included in the string to divide it into multiple transactions. (See [Section 55.2.2.1](protocol-flow#PROTOCOL-FLOW-MULTI-STATEMENT "55.2.2.1. Multiple Statements in a Simple Query") for more details about how the server handles multi-query strings.)
 
 #### Patterns
 
@@ -1109,7 +1109,7 @@ A relation pattern that contains a dot (`.`) is interpreted as a schema name pat
 
 A schema pattern that contains a dot (`.`) is interpreted as a database name followed by a schema name pattern. For example, `\dn mydb.*foo*` displays all schemas whose schema name includes `foo`. The database name portion will not be treated as a pattern and must match the name of the currently connected database, else an error will be raised.
 
-Advanced users can use regular-expression notations such as character classes, for example `[0-9]` to match any digit. All regular expression special characters work as specified in [Section 9.7.3](functions-matching.html#FUNCTIONS-POSIX-REGEXP "9.7.3. POSIX Regular Expressions"), except for `.` which is taken as a separator as mentioned above, `*` which is translated to the regular-expression notation `.*`, `?` which is translated to `.`, and `$` which is matched literally. You can emulate these pattern characters at need by writing `?` for `.`, `(R+|)` for `R*`, or `(R|)` for `R?`. `$` is not needed as a regular-expression character since the pattern must match the whole name, unlike the usual interpretation of regular expressions (in other words, `$` is automatically appended to your pattern). Write `*` at the beginning and/or end if you don't wish the pattern to be anchored. Note that within double quotes, all regular expression special characters lose their special meanings and are matched literally. Also, the regular expression special characters are matched literally in operator name patterns (i.e., the argument of `\do`).
+Advanced users can use regular-expression notations such as character classes, for example `[0-9]` to match any digit. All regular expression special characters work as specified in [Section 9.7.3](functions-matching#FUNCTIONS-POSIX-REGEXP "9.7.3. POSIX Regular Expressions"), except for `.` which is taken as a separator as mentioned above, `*` which is translated to the regular-expression notation `.*`, `?` which is translated to `.`, and `$` which is matched literally. You can emulate these pattern characters at need by writing `?` for `.`, `(R+|)` for `R*`, or `(R|)` for `R?`. `$` is not needed as a regular-expression character since the pattern must match the whole name, unlike the usual interpretation of regular expressions (in other words, `$` is automatically appended to your pattern). Write `*` at the beginning and/or end if you don't wish the pattern to be anchored. Note that within double quotes, all regular expression special characters lose their special meanings and are matched literally. Also, the regular expression special characters are matched literally in operator name patterns (i.e., the argument of `\do`).
 
 ### Advanced Features
 
@@ -1132,7 +1132,7 @@ testdb=> \echo :foo
 bar
 ```
 
-This works in both regular SQL commands and meta-commands; there is more detail in [SQL Interpolation](app-psql.html#APP-PSQL-INTERPOLATION "SQL Interpolation"), below.
+This works in both regular SQL commands and meta-commands; there is more detail in [SQL Interpolation](app-psql#APP-PSQL-INTERPOLATION "SQL Interpolation"), below.
 
 If you call `\set` without a second argument, the variable is set to an empty-string value. To unset (i.e., delete) a variable, use the command `\unset`. To show the values of all variables, call `\set` without any argument.
 
@@ -1263,7 +1263,7 @@ The specially treated variables are:
 
 * `PROMPT1``PROMPT2``PROMPT3` [#](#APP-PSQL-VARIABLES-PROMPT)
 
-    These specify what the prompts psql issues should look like. See [Prompting](app-psql.html#APP-PSQL-PROMPTING "Prompting") below.
+    These specify what the prompts psql issues should look like. See [Prompting](app-psql#APP-PSQL-PROMPTING "Prompting") below.
 
 * `QUIET` [#](#APP-PSQL-VARIABLES-QUIET)
 
@@ -1303,7 +1303,7 @@ The specially treated variables are:
 
 * `SQLSTATE` [#](#APP-PSQL-VARIABLES-SQLSTATE)
 
-    The error code (see [Appendix A](errcodes-appendix.html "Appendix A. PostgreSQL Error Codes")) associated with the last SQL query's failure, or `00000` if it succeeded.
+    The error code (see [Appendix A](errcodes-appendix "Appendix A. PostgreSQL Error Codes")) associated with the last SQL query's failure, or `00000` if it succeeded.
 
 * `USER` [#](#APP-PSQL-VARIABLES-USER)
 
@@ -1411,7 +1411,7 @@ The value of the selected prompt variable is printed literally, except where a p
 
 * `%:`*`name`*`:` [#](#APP-PSQL-PROMPTING-NAME)
 
-    The value of the psql variable *`name`*. See [Variables](app-psql.html#APP-PSQL-VARIABLES "Variables"), above, for details.
+    The value of the psql variable *`name`*. See [Variables](app-psql#APP-PSQL-VARIABLES "Variables"), above, for details.
 
 * `` %` ``*`command`*`` ` `` [#](#APP-PSQL-PROMPTING-COMMAND)
 
@@ -1465,7 +1465,7 @@ The `-n` (`--no-readline`) command line option can also be useful to disable use
 
 * `PGDATABASE``PGHOST``PGPORT``PGUSER` [#](#APP-PSQL-ENVIRONMENT-PGDATABASE)
 
-    Default connection parameters (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+    Default connection parameters (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 * `PG_COLOR` [#](#APP-PSQL-ENVIRONMENT-PG-COLOR)
 
@@ -1511,7 +1511,7 @@ The `-n` (`--no-readline`) command line option can also be useful to disable use
 
     Directory for storing temporary files. The default is `/tmp`.
 
-This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 ## Files
 

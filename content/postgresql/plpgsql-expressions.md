@@ -14,7 +14,7 @@ PL/pgSQL will evaluate the expression by feeding a query like
 SELECT expression
 ```
 
-to the main SQL engine. While forming the `SELECT` command, any occurrences of PL/pgSQL variable names are replaced by query parameters, as discussed in detail in [Section 43.11.1](plpgsql-implementation.html#PLPGSQL-VAR-SUBST "43.11.1. Variable Substitution"). This allows the query plan for the `SELECT` to be prepared just once and then reused for subsequent evaluations with different values of the variables. Thus, what really happens on first use of an expression is essentially a `PREPARE` command. For example, if we have declared two integer variables `x` and `y`, and we write
+to the main SQL engine. While forming the `SELECT` command, any occurrences of PL/pgSQL variable names are replaced by query parameters, as discussed in detail in [Section 43.11.1](plpgsql-implementation#PLPGSQL-VAR-SUBST "43.11.1. Variable Substitution"). This allows the query plan for the `SELECT` to be prepared just once and then reused for subsequent evaluations with different values of the variables. Thus, what really happens on first use of an expression is essentially a `PREPARE` command. For example, if we have declared two integer variables `x` and `y`, and we write
 
 ```
 
@@ -28,7 +28,7 @@ what happens behind the scenes is equivalent to
 PREPARE statement_name(integer, integer) AS SELECT $1 < $2;
 ```
 
-and then this prepared statement is `EXECUTE`d for each execution of the `IF` statement, with the current values of the PL/pgSQL variables supplied as parameter values. Normally these details are not important to a PL/pgSQL user, but they are useful to know when trying to diagnose a problem. More information appears in [Section 43.11.2](plpgsql-implementation.html#PLPGSQL-PLAN-CACHING "43.11.2. Plan Caching").
+and then this prepared statement is `EXECUTE`d for each execution of the `IF` statement, with the current values of the PL/pgSQL variables supplied as parameter values. Normally these details are not important to a PL/pgSQL user, but they are useful to know when trying to diagnose a problem. More information appears in [Section 43.11.2](plpgsql-implementation#PLPGSQL-PLAN-CACHING "43.11.2. Plan Caching").
 
 Since an *`expression`* is converted to a `SELECT` command, it can contain the same clauses that an ordinary `SELECT` would, except that it cannot include a top-level `UNION`, `INTERSECT`, or `EXCEPT` clause. Thus for example one could test whether a table is non-empty with
 

@@ -36,4 +36,4 @@ There is no `ALTER SCHEMA` statement in the SQL standard.
 
 ## See Also
 
-[CREATE SCHEMA](sql-createschema.html "CREATE SCHEMA"), [DROP SCHEMA](sql-dropschema.html "DROP SCHEMA")
+[CREATE SCHEMA](sql-createschema "CREATE SCHEMA"), [DROP SCHEMA](sql-dropschema "DROP SCHEMA")

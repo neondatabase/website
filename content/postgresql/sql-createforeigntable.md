@@ -75,7 +75,7 @@ To be able to create a foreign table, you must have `USAGE` privilege on the for
 
 * *`data_type`*
 
-    The data type of the column. This can include array specifiers. For more information on the data types supported by PostgreSQL, refer to [Chapter 8](datatype.html "Chapter 8. Data Types").
+    The data type of the column. This can include array specifiers. For more information on the data types supported by PostgreSQL, refer to [Chapter 8](datatype "Chapter 8. Data Types").
 
 * `COLLATE collation`
 
@@ -83,11 +83,11 @@ To be able to create a foreign table, you must have `USAGE` privilege on the for
 
 * `INHERITS ( parent_table [, ... ] )`
 
-    The optional `INHERITS` clause specifies a list of tables from which the new foreign table automatically inherits all columns. Parent tables can be plain tables or foreign tables. See the similar form of [`CREATE TABLE`](sql-createtable.html "CREATE TABLE") for more details.
+    The optional `INHERITS` clause specifies a list of tables from which the new foreign table automatically inherits all columns. Parent tables can be plain tables or foreign tables. See the similar form of [`CREATE TABLE`](sql-createtable "CREATE TABLE") for more details.
 
 * `PARTITION OF parent_table { FOR VALUES partition_bound_spec | DEFAULT }`
 
-    This form can be used to create the foreign table as partition of the given parent table with specified partition bound values. See the similar form of [`CREATE TABLE`](sql-createtable.html "CREATE TABLE") for more details. Note that it is currently not allowed to create the foreign table as a partition of the parent table if there are `UNIQUE` indexes on the parent table. (See also [`ALTER TABLE ATTACH PARTITION`](sql-altertable.html "ALTER TABLE").)
+    This form can be used to create the foreign table as partition of the given parent table with specified partition bound values. See the similar form of [`CREATE TABLE`](sql-createtable "CREATE TABLE") for more details. Note that it is currently not allowed to create the foreign table as a partition of the parent table if there are `UNIQUE` indexes on the parent table. (See also [`ALTER TABLE ATTACH PARTITION`](sql-altertable "ALTER TABLE").)
 
 * `CONSTRAINT constraint_name`
 
@@ -127,7 +127,7 @@ To be able to create a foreign table, you must have `USAGE` privilege on the for
 
 * *`server_name`*
 
-    The name of an existing foreign server to use for the foreign table. For details on defining a server, see [CREATE SERVER](sql-createserver.html "CREATE SERVER").
+    The name of an existing foreign server to use for the foreign table. For details on defining a server, see [CREATE SERVER](sql-createserver "CREATE SERVER").
 
 * `OPTIONS ( option 'value' [, ...] )`
 
@@ -177,8 +177,8 @@ CREATE FOREIGN TABLE measurement_y2016m07
 
 ## Compatibility
 
-The `CREATE FOREIGN TABLE` command largely conforms to the SQL standard; however, much as with [`CREATE TABLE`](sql-createtable.html "CREATE TABLE"), `NULL` constraints and zero-column foreign tables are permitted. The ability to specify column default values is also a PostgreSQL extension. Table inheritance, in the form defined by PostgreSQL, is nonstandard.
+The `CREATE FOREIGN TABLE` command largely conforms to the SQL standard; however, much as with [`CREATE TABLE`](sql-createtable "CREATE TABLE"), `NULL` constraints and zero-column foreign tables are permitted. The ability to specify column default values is also a PostgreSQL extension. Table inheritance, in the form defined by PostgreSQL, is nonstandard.
 
 ## See Also
 
-[ALTER FOREIGN TABLE](sql-alterforeigntable.html "ALTER FOREIGN TABLE"), [DROP FOREIGN TABLE](sql-dropforeigntable.html "DROP FOREIGN TABLE"), [CREATE TABLE](sql-createtable.html "CREATE TABLE"), [CREATE SERVER](sql-createserver.html "CREATE SERVER"), [IMPORT FOREIGN SCHEMA](sql-importforeignschema.html "IMPORT FOREIGN SCHEMA")
+[ALTER FOREIGN TABLE](sql-alterforeigntable "ALTER FOREIGN TABLE"), [DROP FOREIGN TABLE](sql-dropforeigntable "DROP FOREIGN TABLE"), [CREATE TABLE](sql-createtable "CREATE TABLE"), [CREATE SERVER](sql-createserver "CREATE SERVER"), [IMPORT FOREIGN SCHEMA](sql-importforeignschema "IMPORT FOREIGN SCHEMA")

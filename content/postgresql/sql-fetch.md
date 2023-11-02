@@ -40,7 +40,7 @@ The forms using `FORWARD` and `BACKWARD` retrieve the indicated number of rows m
 
 ### Note
 
-This page describes usage of cursors at the SQL command level. If you are trying to use cursors inside a PL/pgSQL function, the rules are different — see [Section 43.7.3](plpgsql-cursors.html#PLPGSQL-CURSOR-USING "43.7.3. Using Cursors").
+This page describes usage of cursors at the SQL command level. If you are trying to use cursors inside a PL/pgSQL function, the rules are different — see [Section 43.7.3](plpgsql-cursors#PLPGSQL-CURSOR-USING "43.7.3. Using Cursors").
 
 ## Parameters
 
@@ -129,7 +129,7 @@ The cursor should be declared with the `SCROLL` option if one intends to use any
 
 `ABSOLUTE` fetches are not any faster than navigating to the desired row with a relative move: the underlying implementation must traverse all the intermediate rows anyway. Negative absolute fetches are even worse: the query must be read to the end to find the last row, and then traversed backward from there. However, rewinding to the start of the query (as with `FETCH ABSOLUTE 0`) is fast.
 
-[`DECLARE`](sql-declare.html "DECLARE") is used to define a cursor. Use [`MOVE`](sql-move.html "MOVE") to change cursor position without retrieving data.
+[`DECLARE`](sql-declare "DECLARE") is used to define a cursor. Use [`MOVE`](sql-move "MOVE") to change cursor position without retrieving data.
 
 ## Examples
 
@@ -175,4 +175,4 @@ The SQL standard allows only `FROM` preceding the cursor name; the option to use
 
 ## See Also
 
-[CLOSE](sql-close.html "CLOSE"), [DECLARE](sql-declare.html "DECLARE"), [MOVE](sql-move.html "MOVE")
+[CLOSE](sql-close "CLOSE"), [DECLARE](sql-declare "DECLARE"), [MOVE](sql-move "MOVE")

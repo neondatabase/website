@@ -88,7 +88,7 @@ The following options are only needed when `pg_resetwal` is unable to determine 
 
 * `--wal-segsize=wal_segment_size`
 
-    Set the new WAL segment size, in megabytes. The value must be set to a power of 2 between 1 and 1024 (megabytes). See the same option of [initdb](app-initdb.html "initdb") for more information.
+    Set the new WAL segment size, in megabytes. The value must be set to a power of 2 between 1 and 1024 (megabytes). See the same option of [initdb](app-initdb "initdb") for more information.
 
     This option can also be used to change the WAL segment size of an existing database cluster, avoiding the need to re-`initdb`.
 
@@ -122,4 +122,4 @@ This command must not be used when the server is running. `pg_resetwal` will ref
 
 ## See Also
 
-[pg\_controldata](app-pgcontroldata.html "pg_controldata")
+[pg\_controldata](app-pgcontroldata "pg_controldata")

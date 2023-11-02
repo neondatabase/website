@@ -40,7 +40,7 @@ ALTER DOMAIN name
 
 * `ADD domain_constraint [ NOT VALID ]`
 
-    This form adds a new constraint to a domain using the same syntax as [`CREATE DOMAIN`](sql-createdomain.html "CREATE DOMAIN"). When a new constraint is added to a domain, all columns using that domain will be checked against the newly added constraint. These checks can be suppressed by adding the new constraint using the `NOT VALID` option; the constraint can later be made valid using `ALTER DOMAIN ... VALIDATE CONSTRAINT`. Newly inserted or updated rows are always checked against all constraints, even those marked `NOT VALID`. `NOT VALID` is only accepted for `CHECK` constraints.
+    This form adds a new constraint to a domain using the same syntax as [`CREATE DOMAIN`](sql-createdomain "CREATE DOMAIN"). When a new constraint is added to a domain, all columns using that domain will be checked against the newly added constraint. These checks can be suppressed by adding the new constraint using the `NOT VALID` option; the constraint can later be made valid using `ALTER DOMAIN ... VALIDATE CONSTRAINT`. Newly inserted or updated rows are always checked against all constraints, even those marked `NOT VALID`. `NOT VALID` is only accepted for `CHECK` constraints.
 
 * `DROP CONSTRAINT [ IF EXISTS ]`
 
@@ -88,7 +88,7 @@ You must own the domain to use `ALTER DOMAIN`. To change the schema of a domain,
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the constraint, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the constraint, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -166,4 +166,4 @@ ALTER DOMAIN zipcode SET SCHEMA customers;
 
 ## See Also
 
-[CREATE DOMAIN](sql-createdomain.html "CREATE DOMAIN"), [DROP DOMAIN](sql-dropdomain.html "DROP DOMAIN")
+[CREATE DOMAIN](sql-createdomain "CREATE DOMAIN"), [DROP DOMAIN](sql-dropdomain "DROP DOMAIN")

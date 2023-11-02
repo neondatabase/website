@@ -32,7 +32,7 @@ The user that creates the procedure becomes the owner of the procedure.
 
 To be able to create a procedure, you must have `USAGE` privilege on the argument types.
 
-Refer to [Section 38.4](xproc.html "38.4. User-Defined Procedures") for further information on writing procedures.
+Refer to [Section 38.4](xproc "38.4. User-Defined Procedures") for further information on writing procedures.
 
 ## Parameters
 
@@ -66,7 +66,7 @@ Refer to [Section 38.4](xproc.html "38.4. User-Defined Procedures") for furthe
 
 * `TRANSFORM { FOR TYPE type_name } [, ... ] }`
 
-    Lists which transforms a call to the procedure should apply. Transforms convert between SQL types and language-specific data types; see [CREATE TRANSFORM](sql-createtransform.html "CREATE TRANSFORM"). Procedural language implementations usually have hardcoded knowledge of the built-in types, so those don't need to be listed here. If a procedural language implementation does not know how to handle a type and no transform is supplied, it will fall back to a default behavior for converting data types, but this depends on the implementation.
+    Lists which transforms a call to the procedure should apply. Transforms convert between SQL types and language-specific data types; see [CREATE TRANSFORM](sql-createtransform "CREATE TRANSFORM"). Procedural language implementations usually have hardcoded knowledge of the built-in types, so those don't need to be listed here. If a procedural language implementation does not know how to handle a type and no transform is supplied, it will fall back to a default behavior for converting data types, but this depends on the implementation.
 
 * `[EXTERNAL] SECURITY INVOKER``[EXTERNAL] SECURITY DEFINER`
 
@@ -84,17 +84,17 @@ Refer to [Section 38.4](xproc.html "38.4. User-Defined Procedures") for furthe
 
     If a `SET` clause is attached to a procedure, then that procedure cannot execute transaction control statements (for example, `COMMIT` and `ROLLBACK`, depending on the language).
 
-    See [SET](sql-set.html "SET") and [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
+    See [SET](sql-set "SET") and [Chapter 20](runtime-config "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
 
 * *`definition`*
 
     A string constant defining the procedure; the meaning depends on the language. It can be an internal procedure name, the path to an object file, an SQL command, or text in a procedural language.
 
-    It is often helpful to use dollar quoting (see [Section 4.1.2.4](sql-syntax-lexical.html#SQL-SYNTAX-DOLLAR-QUOTING "4.1.2.4. Dollar-Quoted String Constants")) to write the procedure definition string, rather than the normal single quote syntax. Without dollar quoting, any single quotes or backslashes in the procedure definition must be escaped by doubling them.
+    It is often helpful to use dollar quoting (see [Section 4.1.2.4](sql-syntax-lexical#SQL-SYNTAX-DOLLAR-QUOTING "4.1.2.4. Dollar-Quoted String Constants")) to write the procedure definition string, rather than the normal single quote syntax. Without dollar quoting, any single quotes or backslashes in the procedure definition must be escaped by doubling them.
 
 * `obj_file, link_symbol`
 
-    This form of the `AS` clause is used for dynamically loadable C language procedures when the procedure name in the C language source code is not the same as the name of the SQL procedure. The string *`obj_file`* is the name of the shared library file containing the compiled C procedure, and is interpreted as for the [`LOAD`](sql-load.html "LOAD") command. The string *`link_symbol`* is the procedure's link symbol, that is, the name of the procedure in the C language source code. If the link symbol is omitted, it is assumed to be the same as the name of the SQL procedure being defined.
+    This form of the `AS` clause is used for dynamically loadable C language procedures when the procedure name in the C language source code is not the same as the name of the SQL procedure. The string *`obj_file`* is the name of the shared library file containing the compiled C procedure, and is interpreted as for the [`LOAD`](sql-load "LOAD") command. The string *`link_symbol`* is the procedure's link symbol, that is, the name of the procedure in the C language source code. If the link symbol is omitted, it is assumed to be the same as the name of the SQL procedure being defined.
 
     When repeated `CREATE PROCEDURE` calls refer to the same object file, the file is only loaded once per session. To unload and reload the file (perhaps during development), start a new session.
 
@@ -116,9 +116,9 @@ Refer to [Section 38.4](xproc.html "38.4. User-Defined Procedures") for furthe
 
 ## Notes
 
-See [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") for more details on function creation that also apply to procedures.
+See [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION") for more details on function creation that also apply to procedures.
 
-Use [CALL](sql-call.html "CALL") to execute a procedure.
+Use [CALL](sql-call "CALL") to execute a procedure.
 
 ## Examples
 
@@ -153,8 +153,8 @@ CALL insert_data(1, 2);
 
 ## Compatibility
 
-A `CREATE PROCEDURE` command is defined in the SQL standard. The PostgreSQL implementation can be used in a compatible way but has many extensions. For details see also [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION").
+A `CREATE PROCEDURE` command is defined in the SQL standard. The PostgreSQL implementation can be used in a compatible way but has many extensions. For details see also [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION").
 
 ## See Also
 
-[ALTER PROCEDURE](sql-alterprocedure.html "ALTER PROCEDURE"), [DROP PROCEDURE](sql-dropprocedure.html "DROP PROCEDURE"), [CALL](sql-call.html "CALL"), [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION")
+[ALTER PROCEDURE](sql-alterprocedure "ALTER PROCEDURE"), [DROP PROCEDURE](sql-dropprocedure "DROP PROCEDURE"), [CALL](sql-call "CALL"), [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION")

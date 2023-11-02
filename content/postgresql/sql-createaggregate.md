@@ -70,13 +70,13 @@ CREATE [ OR REPLACE ] AGGREGATE name (
 
 ## Description
 
-`CREATE AGGREGATE` defines a new aggregate function. `CREATE OR REPLACE AGGREGATE` will either define a new aggregate function or replace an existing definition. Some basic and commonly-used aggregate functions are included with the distribution; they are documented in [Section 9.21](functions-aggregate.html "9.21. Aggregate Functions"). If one defines new types or needs an aggregate function not already provided, then `CREATE AGGREGATE` can be used to provide the desired features.
+`CREATE AGGREGATE` defines a new aggregate function. `CREATE OR REPLACE AGGREGATE` will either define a new aggregate function or replace an existing definition. Some basic and commonly-used aggregate functions are included with the distribution; they are documented in [Section 9.21](functions-aggregate "9.21. Aggregate Functions"). If one defines new types or needs an aggregate function not already provided, then `CREATE AGGREGATE` can be used to provide the desired features.
 
 When replacing an existing definition, the argument types, result type, and number of direct arguments may not be changed. Also, the new definition must be of the same kind (ordinary aggregate, ordered-set aggregate, or hypothetical-set aggregate) as the old one.
 
 If a schema name is given (for example, `CREATE AGGREGATE myschema.myagg ...`) then the aggregate function is created in the specified schema. Otherwise it is created in the current schema.
 
-An aggregate function is identified by its name and input data type(s). Two aggregates in the same schema can have the same name if they operate on different input types. The name and input data type(s) of an aggregate must also be distinct from the name and input data type(s) of every ordinary function in the same schema. This behavior is identical to overloading of ordinary function names (see [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION")).
+An aggregate function is identified by its name and input data type(s). Two aggregates in the same schema can have the same name if they operate on different input types. The name and input data type(s) of an aggregate must also be distinct from the name and input data type(s) of every ordinary function in the same schema. This behavior is identical to overloading of ordinary function names (see [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION")).
 
 A simple aggregate function is made from one or two ordinary functions: a state transition function *`sfunc`*, and an optional final calculation function *`ffunc`*. These are used as follows:
 
@@ -98,11 +98,11 @@ If the final function is declared “strict”, then it will not be called when 
 
 Sometimes it is useful to declare the final function as taking not just the state value, but extra parameters corresponding to the aggregate's input values. The main reason for doing this is if the final function is polymorphic and the state value's data type would be inadequate to pin down the result type. These extra parameters are always passed as NULL (and so the final function must not be strict when the `FINALFUNC_EXTRA` option is used), but nonetheless they are valid parameters. The final function could for example make use of `get_fn_expr_argtype` to identify the actual argument type in the current call.
 
-An aggregate can optionally support *moving-aggregate mode*, as described in [Section 38.12.1](xaggr.html#XAGGR-MOVING-AGGREGATES "38.12.1. Moving-Aggregate Mode"). This requires specifying the `MSFUNC`, `MINVFUNC`, and `MSTYPE` parameters, and optionally the `MSSPACE`, `MFINALFUNC`, `MFINALFUNC_EXTRA`, `MFINALFUNC_MODIFY`, and `MINITCOND` parameters. Except for `MINVFUNC`, these parameters work like the corresponding simple-aggregate parameters without `M`; they define a separate implementation of the aggregate that includes an inverse transition function.
+An aggregate can optionally support *moving-aggregate mode*, as described in [Section 38.12.1](xaggr#XAGGR-MOVING-AGGREGATES "38.12.1. Moving-Aggregate Mode"). This requires specifying the `MSFUNC`, `MINVFUNC`, and `MSTYPE` parameters, and optionally the `MSSPACE`, `MFINALFUNC`, `MFINALFUNC_EXTRA`, `MFINALFUNC_MODIFY`, and `MINITCOND` parameters. Except for `MINVFUNC`, these parameters work like the corresponding simple-aggregate parameters without `M`; they define a separate implementation of the aggregate that includes an inverse transition function.
 
 The syntax with `ORDER BY` in the parameter list creates a special type of aggregate called an *ordered-set aggregate*; or if `HYPOTHETICAL` is specified, then a *hypothetical-set aggregate* is created. These aggregates operate over groups of sorted values in order-dependent ways, so that specification of an input sort order is an essential part of a call. Also, they can have *direct* arguments, which are arguments that are evaluated only once per aggregation rather than once per input row. Hypothetical-set aggregates are a subclass of ordered-set aggregates in which some of the direct arguments are required to match, in number and data types, the aggregated argument columns. This allows the values of those direct arguments to be added to the collection of aggregate-input rows as an additional “hypothetical” row.
 
-An aggregate can optionally support *partial aggregation*, as described in [Section 38.12.4](xaggr.html#XAGGR-PARTIAL-AGGREGATES "38.12.4. Partial Aggregation"). This requires specifying the `COMBINEFUNC` parameter. If the *`state_data_type`* is `internal`, it's usually also appropriate to provide the `SERIALFUNC` and `DESERIALFUNC` parameters so that parallel aggregation is possible. Note that the aggregate must also be marked `PARALLEL SAFE` to enable parallel aggregation.
+An aggregate can optionally support *partial aggregation*, as described in [Section 38.12.4](xaggr#XAGGR-PARTIAL-AGGREGATES "38.12.4. Partial Aggregation"). This requires specifying the `COMBINEFUNC` parameter. If the *`state_data_type`* is `internal`, it's usually also appropriate to provide the `SERIALFUNC` and `DESERIALFUNC` parameters so that parallel aggregation is possible. Note that the aggregate must also be marked `PARALLEL SAFE` to enable parallel aggregation.
 
 Aggregates that behave like `MIN` or `MAX` can sometimes be optimized by looking into an index instead of scanning every input row. If this aggregate can be so optimized, indicate it by specifying a *sort operator*. The basic requirement is that the aggregate must yield the first element in the sort ordering induced by the operator; in other words:
 
@@ -168,7 +168,7 @@ To be able to create an aggregate function, you must have `USAGE` privilege on t
 
 * `FINALFUNC_MODIFY` = { `READ_ONLY` | `SHAREABLE` | `READ_WRITE` }
 
-    This option specifies whether the final function is a pure function that does not modify its arguments. `READ_ONLY` indicates it does not; the other two values indicate that it may change the transition state value. See [Notes](sql-createaggregate.html#SQL-CREATEAGGREGATE-NOTES "Notes") below for more detail. The default is `READ_ONLY`, except for ordered-set aggregates, for which the default is `READ_WRITE`.
+    This option specifies whether the final function is a pure function that does not modify its arguments. `READ_ONLY` indicates it does not; the other two values indicate that it may change the transition state value. See [Notes](sql-createaggregate#SQL-CREATEAGGREGATE-NOTES "Notes") below for more detail. The default is `READ_ONLY`, except for ordered-set aggregates, for which the default is `READ_WRITE`.
 
 * *`combinefunc`*
 
@@ -224,7 +224,7 @@ To be able to create an aggregate function, you must have `USAGE` privilege on t
 
 * `PARALLEL =` { `SAFE` | `RESTRICTED` | `UNSAFE` }
 
-    The meanings of `PARALLEL SAFE`, `PARALLEL RESTRICTED`, and `PARALLEL UNSAFE` are the same as in [`CREATE FUNCTION`](sql-createfunction.html "CREATE FUNCTION"). An aggregate will not be considered for parallelization if it is marked `PARALLEL UNSAFE` (which is the default!) or `PARALLEL RESTRICTED`. Note that the parallel-safety markings of the aggregate's support functions are not consulted by the planner, only the marking of the aggregate itself.
+    The meanings of `PARALLEL SAFE`, `PARALLEL RESTRICTED`, and `PARALLEL UNSAFE` are the same as in [`CREATE FUNCTION`](sql-createfunction "CREATE FUNCTION"). An aggregate will not be considered for parallelization if it is marked `PARALLEL UNSAFE` (which is the default!) or `PARALLEL RESTRICTED`. Note that the parallel-safety markings of the aggregate's support functions are not consulted by the planner, only the marking of the aggregate itself.
 
 * `HYPOTHETICAL`
 
@@ -254,7 +254,7 @@ Partial (including parallel) aggregation is currently not supported for ordered-
 
 ## Examples
 
-See [Section 38.12](xaggr.html "38.12. User-Defined Aggregates").
+See [Section 38.12](xaggr "38.12. User-Defined Aggregates").
 
 ## Compatibility
 
@@ -262,4 +262,4 @@ See [Section 38.12](xaggr.html "38.12. User-Defined Aggregates").
 
 ## See Also
 
-[ALTER AGGREGATE](sql-alteraggregate.html "ALTER AGGREGATE"), [DROP AGGREGATE](sql-dropaggregate.html "DROP AGGREGATE")
+[ALTER AGGREGATE](sql-alteraggregate "ALTER AGGREGATE"), [DROP AGGREGATE](sql-dropaggregate "DROP AGGREGATE")

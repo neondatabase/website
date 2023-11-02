@@ -1,6 +1,6 @@
 ## 47.6. Examples [#](#SPI-EXAMPLES)
 
-This section contains a very simple example of SPI usage. The C function `execq` takes an SQL command as its first argument and a row count as its second, executes the command using `SPI_exec` and returns the number of rows that were processed by the command. You can find more complex examples for SPI in the source tree in `src/test/regress/regress.c` and in the [spi](contrib-spi.html "F.40. spi — Server Programming Interface features/examples") module.
+This section contains a very simple example of SPI usage. The C function `execq` takes an SQL command as its first argument and a row count as its second, executes the command using `SPI_exec` and returns the number of rows that were processed by the command. You can find more complex examples for SPI in the source tree in `src/test/regress/regress.c` and in the [spi](contrib-spi "F.40. spi — Server Programming Interface features/examples") module.
 
 ```
 
@@ -61,7 +61,7 @@ execq(PG_FUNCTION_ARGS)
 }
 ```
 
-This is how you declare the function after having compiled it into a shared library (details are in [Section 38.10.5](xfunc-c.html#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions").):
+This is how you declare the function after having compiled it into a shared library (details are in [Section 38.10.5](xfunc-c#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions").):
 
 ```
 

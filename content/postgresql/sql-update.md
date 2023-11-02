@@ -31,7 +31,7 @@ You must have the `UPDATE` privilege on the table, or at least on the column(s) 
 
 * *`with_query`*
 
-    The `WITH` clause allows you to specify one or more subqueries that can be referenced by name in the `UPDATE` query. See [Section 7.8](queries-with.html "7.8. WITH Queries (Common Table Expressions)") and [SELECT](sql-select.html "SELECT") for details.
+    The `WITH` clause allows you to specify one or more subqueries that can be referenced by name in the `UPDATE` query. See [Section 7.8](queries-with "7.8. WITH Queries (Common Table Expressions)") and [SELECT](sql-select "SELECT") for details.
 
 * *`table_name`*
 
@@ -59,7 +59,7 @@ You must have the `UPDATE` privilege on the table, or at least on the column(s) 
 
 * *`from_item`*
 
-    A table expression allowing columns from other tables to appear in the `WHERE` condition and update expressions. This uses the same syntax as the [`FROM`](sql-select.html#SQL-FROM "FROM Clause") clause of a `SELECT` statement; for example, an alias for the table name can be specified. Do not repeat the target table as a *`from_item`* unless you intend a self-join (in which case it must appear with an alias in the *`from_item`*).
+    A table expression allowing columns from other tables to appear in the `WHERE` condition and update expressions. This uses the same syntax as the [`FROM`](sql-select#SQL-FROM "FROM Clause") clause of a `SELECT` statement; for example, an alias for the table name can be specified. Do not repeat the target table as a *`from_item`* unless you intend a self-join (in which case it must appear with an alias in the *`from_item`*).
 
 * *`condition`*
 
@@ -67,7 +67,7 @@ You must have the `UPDATE` privilege on the table, or at least on the column(s) 
 
 * *`cursor_name`*
 
-    The name of the cursor to use in a `WHERE CURRENT OF` condition. The row to be updated is the one most recently fetched from this cursor. The cursor must be a non-grouping query on the `UPDATE`'s target table. Note that `WHERE CURRENT OF` cannot be specified together with a Boolean condition. See [DECLARE](sql-declare.html "DECLARE") for more information about using cursors with `WHERE CURRENT OF`.
+    The name of the cursor to use in a `WHERE CURRENT OF` condition. The row to be updated is the one most recently fetched from this cursor. The cursor must be a non-grouping query on the `UPDATE`'s target table. Note that `WHERE CURRENT OF` cannot be specified together with a Boolean condition. See [DECLARE](sql-declare "DECLARE") for more information about using cursors with `WHERE CURRENT OF`.
 
 * *`output_expression`*
 
@@ -213,4 +213,4 @@ This command conforms to the SQL standard, except that the `FROM` and `RETURNING
 
 Some other database systems offer a `FROM` option in which the target table is supposed to be listed again within `FROM`. That is not how PostgreSQL interprets `FROM`. Be careful when porting applications that use this extension.
 
-According to the standard, the source value for a parenthesized sub-list of target column names can be any row-valued expression yielding the correct number of columns. PostgreSQL only allows the source value to be a [row constructor](sql-expressions.html#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors") or a sub-`SELECT`. An individual column's updated value can be specified as `DEFAULT` in the row-constructor case, but not inside a sub-`SELECT`.
+According to the standard, the source value for a parenthesized sub-list of target column names can be any row-valued expression yielding the correct number of columns. PostgreSQL only allows the source value to be a [row constructor](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors") or a sub-`SELECT`. An individual column's updated value can be specified as `DEFAULT` in the row-constructor case, but not inside a sub-`SELECT`.

@@ -15,7 +15,7 @@ Define a behavior which is called on the special cases (Rows not found, SQL warn
 
 ## Parameters
 
-See [Section 36.8.1](ecpg-errors.html#ECPG-WHENEVER "36.8.1. Setting Callbacks") for a description of the parameters.
+See [Section 36.8.1](ecpg-errors#ECPG-WHENEVER "36.8.1. Setting Callbacks") for a description of the parameters.
 
 ## Examples
 

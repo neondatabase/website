@@ -1,13 +1,13 @@
 ## 43.10. Trigger Functions [#](#PLPGSQL-TRIGGER)
 
-  * *   [43.10.1. Triggers on Data Changes](plpgsql-trigger.html#PLPGSQL-DML-TRIGGER)
-  * [43.10.2. Triggers on Events](plpgsql-trigger.html#PLPGSQL-EVENT-TRIGGER)
+  * *   [43.10.1. Triggers on Data Changes](plpgsql-trigger#PLPGSQL-DML-TRIGGER)
+  * [43.10.2. Triggers on Events](plpgsql-trigger#PLPGSQL-EVENT-TRIGGER)
 
 PL/pgSQL can be used to define trigger functions on data changes or database events. A trigger function is created with the `CREATE FUNCTION` command, declaring it as a function with no arguments and a return type of `trigger` (for data change triggers) or `event_trigger` (for database event triggers). Special local variables named `TG_something` are automatically defined to describe the condition that triggered the call.
 
 ### 43.10.1. Triggers on Data Changes [#](#PLPGSQL-DML-TRIGGER)
 
-A [data change trigger](triggers.html "Chapter 39. Triggers") is declared as a function with no arguments and a return type of `trigger`. Note that the function must be declared with no arguments even if it expects to receive some arguments specified in `CREATE TRIGGER` — such arguments are passed via `TG_ARGV`, as described below.
+A [data change trigger](triggers "Chapter 39. Triggers") is declared as a function with no arguments and a return type of `trigger`. Note that the function must be declared with no arguments even if it expects to receive some arguments specified in `CREATE TRIGGER` — such arguments are passed via `TG_ARGV`, as described below.
 
 When a PL/pgSQL function is called as a trigger, several special variables are created automatically in the top-level block. They are:
 
@@ -35,7 +35,7 @@ When a PL/pgSQL function is called as a trigger, several special variables are c
 
     operation for which the trigger was fired: `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE`.
 
-* `TG_RELID` `oid` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`oid`) [#](#PLPGSQL-DML-TRIGGER-TG-RELID)
+* `TG_RELID` `oid` (references [`pg_class`](catalog-pg-class "53.11. pg_class").`oid`) [#](#PLPGSQL-DML-TRIGGER-TG-RELID)
 
     object ID of the table that caused the trigger invocation.
 
@@ -67,7 +67,7 @@ Row-level triggers fired `BEFORE` can return null to signal the trigger manager 
 
 The return value of a row-level trigger fired `AFTER` or a statement-level trigger fired `BEFORE` or `AFTER` is always ignored; it might as well be null. However, any of these types of triggers might still abort the entire operation by raising an error.
 
-[Example 43.3](plpgsql-trigger.html#PLPGSQL-TRIGGER-EXAMPLE "Example 43.3. A PL/pgSQL Trigger Function") shows an example of a trigger function in PL/pgSQL.
+[Example 43.3](plpgsql-trigger#PLPGSQL-TRIGGER-EXAMPLE "Example 43.3. A PL/pgSQL Trigger Function") shows an example of a trigger function in PL/pgSQL.
 
 **Example 43.3. A PL/pgSQL Trigger Function**
 
@@ -110,7 +110,7 @@ CREATE TRIGGER emp_stamp BEFORE INSERT OR UPDATE ON emp
 
 \
 
-Another way to log changes to a table involves creating a new table that holds a row for each insert, update, or delete that occurs. This approach can be thought of as auditing changes to a table. [Example 43.4](plpgsql-trigger.html#PLPGSQL-TRIGGER-AUDIT-EXAMPLE "Example 43.4. A PL/pgSQL Trigger Function for Auditing") shows an example of an audit trigger function in PL/pgSQL.
+Another way to log changes to a table involves creating a new table that holds a row for each insert, update, or delete that occurs. This approach can be thought of as auditing changes to a table. [Example 43.4](plpgsql-trigger#PLPGSQL-TRIGGER-AUDIT-EXAMPLE "Example 43.4. A PL/pgSQL Trigger Function for Auditing") shows an example of an audit trigger function in PL/pgSQL.
 
 **Example 43.4. A PL/pgSQL Trigger Function for Auditing**
 
@@ -155,7 +155,7 @@ AFTER INSERT OR UPDATE OR DELETE ON emp
 
 \
 
-A variation of the previous example uses a view joining the main table to the audit table, to show when each entry was last modified. This approach still records the full audit trail of changes to the table, but also presents a simplified view of the audit trail, showing just the last modified timestamp derived from the audit trail for each entry. [Example 43.5](plpgsql-trigger.html#PLPGSQL-VIEW-TRIGGER-AUDIT-EXAMPLE "Example 43.5. A PL/pgSQL View Trigger Function for Auditing") shows an example of an audit trigger on a view in PL/pgSQL.
+A variation of the previous example uses a view joining the main table to the audit table, to show when each entry was last modified. This approach still records the full audit trail of changes to the table, but also presents a simplified view of the audit trail, showing just the last modified timestamp derived from the audit trail for each entry. [Example 43.5](plpgsql-trigger#PLPGSQL-VIEW-TRIGGER-AUDIT-EXAMPLE "Example 43.5. A PL/pgSQL View Trigger Function for Auditing") shows an example of an audit trigger on a view in PL/pgSQL.
 
 **Example 43.5. A PL/pgSQL View Trigger Function for Auditing**
 
@@ -221,7 +221,7 @@ INSTEAD OF INSERT OR UPDATE OR DELETE ON emp_view
 
 \
 
-One use of triggers is to maintain a summary table of another table. The resulting summary can be used in place of the original table for certain queries — often with vastly reduced run times. This technique is commonly used in Data Warehousing, where the tables of measured or observed data (called fact tables) might be extremely large. [Example 43.6](plpgsql-trigger.html#PLPGSQL-TRIGGER-SUMMARY-EXAMPLE "Example 43.6. A PL/pgSQL Trigger Function for Maintaining a Summary Table") shows an example of a trigger function in PL/pgSQL that maintains a summary table for a fact table in a data warehouse.
+One use of triggers is to maintain a summary table of another table. The resulting summary can be used in place of the original table for certain queries — often with vastly reduced run times. This technique is commonly used in Data Warehousing, where the tables of measured or observed data (called fact tables) might be extremely large. [Example 43.6](plpgsql-trigger#PLPGSQL-TRIGGER-SUMMARY-EXAMPLE "Example 43.6. A PL/pgSQL Trigger Function for Maintaining a Summary Table") shows an example of a trigger function in PL/pgSQL that maintains a summary table for a fact table in a data warehouse.
 
 **Example 43.6. A PL/pgSQL Trigger Function for Maintaining a Summary Table**
 
@@ -362,11 +362,11 @@ SELECT * FROM sales_summary_bytime;
 
 \
 
-`AFTER` triggers can also make use of *transition tables* to inspect the entire set of rows changed by the triggering statement. The `CREATE TRIGGER` command assigns names to one or both transition tables, and then the function can refer to those names as though they were read-only temporary tables. [Example 43.7](plpgsql-trigger.html#PLPGSQL-TRIGGER-AUDIT-TRANSITION-EXAMPLE "Example 43.7. Auditing with Transition Tables") shows an example.
+`AFTER` triggers can also make use of *transition tables* to inspect the entire set of rows changed by the triggering statement. The `CREATE TRIGGER` command assigns names to one or both transition tables, and then the function can refer to those names as though they were read-only temporary tables. [Example 43.7](plpgsql-trigger#PLPGSQL-TRIGGER-AUDIT-TRANSITION-EXAMPLE "Example 43.7. Auditing with Transition Tables") shows an example.
 
 **Example 43.7. Auditing with Transition Tables**
 
-This example produces the same results as [Example 43.4](plpgsql-trigger.html#PLPGSQL-TRIGGER-AUDIT-EXAMPLE "Example 43.4. A PL/pgSQL Trigger Function for Auditing"), but instead of using a trigger that fires for every row, it uses a trigger that fires once per statement, after collecting the relevant information in a transition table. This can be significantly faster than the row-trigger approach when the invoking statement has modified many rows. Notice that we must make a separate trigger declaration for each kind of event, since the `REFERENCING` clauses must be different for each case. But this does not stop us from using a single trigger function if we choose. (In practice, it might be better to use three separate functions and avoid the run-time tests on `TG_OP`.)
+This example produces the same results as [Example 43.4](plpgsql-trigger#PLPGSQL-TRIGGER-AUDIT-EXAMPLE "Example 43.4. A PL/pgSQL Trigger Function for Auditing"), but instead of using a trigger that fires for every row, it uses a trigger that fires once per statement, after collecting the relevant information in a transition table. This can be significantly faster than the row-trigger approach when the invoking statement has modified many rows. Notice that we must make a separate trigger declaration for each kind of event, since the `REFERENCING` clauses must be different for each case. But this does not stop us from using a single trigger function if we choose. (In practice, it might be better to use three separate functions and avoid the run-time tests on `TG_OP`.)
 
 ```
 
@@ -419,7 +419,7 @@ CREATE TRIGGER emp_audit_del
 
 ### 43.10.2. Triggers on Events [#](#PLPGSQL-EVENT-TRIGGER)
 
-PL/pgSQL can be used to define [event triggers](event-triggers.html "Chapter 40. Event Triggers"). PostgreSQL requires that a function that is to be called as an event trigger must be declared as a function with no arguments and a return type of `event_trigger`.
+PL/pgSQL can be used to define [event triggers](event-triggers "Chapter 40. Event Triggers"). PostgreSQL requires that a function that is to be called as an event trigger must be declared as a function with no arguments and a return type of `event_trigger`.
 
 When a PL/pgSQL function is called as an event trigger, several special variables are created automatically in the top-level block. They are:
 
@@ -431,7 +431,7 @@ When a PL/pgSQL function is called as an event trigger, several special variable
 
     command tag for which the trigger is fired.
 
-[Example 43.8](plpgsql-trigger.html#PLPGSQL-EVENT-TRIGGER-EXAMPLE "Example 43.8. A PL/pgSQL Event Trigger Function") shows an example of an event trigger function in PL/pgSQL.
+[Example 43.8](plpgsql-trigger#PLPGSQL-EVENT-TRIGGER-EXAMPLE "Example 43.8. A PL/pgSQL Event Trigger Function") shows an example of an event trigger function in PL/pgSQL.
 
 **Example 43.8. A PL/pgSQL Event Trigger Function**
 

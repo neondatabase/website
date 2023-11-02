@@ -1,10 +1,10 @@
 ## 36.15. Informix Compatibility Mode [#](#ECPG-INFORMIX-COMPAT)
 
-  * *   [36.15.1. Additional Types](ecpg-informix-compat.html#ECPG-INFORMIX-TYPES)
-  * [36.15.2. Additional/Missing Embedded SQL Statements](ecpg-informix-compat.html#ECPG-INFORMIX-STATEMENTS)
-  * [36.15.3. Informix-compatible SQLDA Descriptor Areas](ecpg-informix-compat.html#ECPG-INFORMIX-SQLDA)
-  * [36.15.4. Additional Functions](ecpg-informix-compat.html#ECPG-INFORMIX-FUNCTIONS)
-  * [36.15.5. Additional Constants](ecpg-informix-compat.html#ECPG-INFORMIX-CONSTANTS)
+  * *   [36.15.1. Additional Types](ecpg-informix-compat#ECPG-INFORMIX-TYPES)
+  * [36.15.2. Additional/Missing Embedded SQL Statements](ecpg-informix-compat#ECPG-INFORMIX-STATEMENTS)
+  * [36.15.3. Informix-compatible SQLDA Descriptor Areas](ecpg-informix-compat#ECPG-INFORMIX-SQLDA)
+  * [36.15.4. Additional Functions](ecpg-informix-compat#ECPG-INFORMIX-FUNCTIONS)
+  * [36.15.5. Additional Constants](ecpg-informix-compat#ECPG-INFORMIX-CONSTANTS)
 
 `ecpg` can be run in a so-called *Informix compatibility mode*. If this mode is active, it tries to behave as if it were the Informix precompiler for Informix E/SQL. Generally spoken this will allow you to use the dollar sign instead of the `EXEC SQL` primitive to introduce embedded SQL commands:
 
@@ -64,7 +64,7 @@ EXEC SQL FETCH MYCUR INTO :userid;
 
 ### 36.15.3. Informix-compatible SQLDA Descriptor Areas [#](#ECPG-INFORMIX-SQLDA)
 
-Informix-compatible mode supports a different structure than the one described in [Section 36.7.2](ecpg-descriptors.html#ECPG-SQLDA-DESCRIPTORS "36.7.2. SQLDA Descriptor Areas"). See below:
+Informix-compatible mode supports a different structure than the one described in [Section 36.7.2](ecpg-descriptors#ECPG-SQLDA-DESCRIPTORS "36.7.2. SQLDA Descriptor Areas"). See below:
 
 ```
 
@@ -174,7 +174,7 @@ The per-field properties are below, they are stored in the `sqlvar` array:
 
 * `sqlformat` [#](#ECPG-INFORMIX-SQLDA-SQLFORMAT)
 
-    Reserved in Informix, value of [`PQfformat`](libpq-exec.html#LIBPQ-PQFFORMAT) for the field.
+    Reserved in Informix, value of [`PQfformat`](libpq-exec#LIBPQ-PQFFORMAT) for the field.
 
 * `sqlitype` [#](#ECPG-INFORMIX-SQLDA-SQLITYPE)
 
@@ -186,7 +186,7 @@ The per-field properties are below, they are stored in the `sqlvar` array:
 
 * `sqlxid` [#](#ECPG-INFORMIX-SQLDA-SQLXID)
 
-    Extended type of the field, result of [`PQftype`](libpq-exec.html#LIBPQ-PQFTYPE).
+    Extended type of the field, result of [`PQftype`](libpq-exec#LIBPQ-PQFTYPE).
 
 * `sqltypename``sqltypelen``sqlownerlen``sqlsourcetype``sqlownername``sqlsourceid``sqlflags``sqlreserved` [#](#ECPG-INFORMIX-SQLDA-SQLTYPENAME)
 
@@ -463,7 +463,7 @@ For more information, see the `sqlda.h` header and the `src/interfaces/ecpg/test
 
     The function receives a pointer to a date variable (`d`) that it sets to the current date.
 
-    Internally this function uses the [`PGTYPESdate_today`](ecpg-pgtypes.html#PGTYPESDATETODAY) function.
+    Internally this function uses the [`PGTYPESdate_today`](ecpg-pgtypes#PGTYPESDATETODAY) function.
 
 * `rjulmdy` [#](#ECPG-INFORMIX-FUNCTIONS-RJULMDY)
 
@@ -478,7 +478,7 @@ For more information, see the `sqlda.h` header and the `src/interfaces/ecpg/test
 
     The function always returns 0 at the moment.
 
-    Internally the function uses the [`PGTYPESdate_julmdy`](ecpg-pgtypes.html#PGTYPESDATEJULMDY) function.
+    Internally the function uses the [`PGTYPESdate_julmdy`](ecpg-pgtypes#PGTYPESDATEJULMDY) function.
 
 * `rdefmtdate` [#](#ECPG-INFORMIX-FUNCTIONS-RDEFMTDATE)
 
@@ -500,7 +500,7 @@ For more information, see the `sqlda.h` header and the `src/interfaces/ecpg/test
   * `ECPG_INFORMIX_BAD_MONTH` - The input string does not contain a valid month.
   * `ECPG_INFORMIX_BAD_YEAR` - The input string does not contain a valid year.
 
-    Internally this function is implemented to use the [`PGTYPESdate_defmt_asc`](ecpg-pgtypes.html#PGTYPESDATEDEFMTASC) function. See the reference there for a table of example input.
+    Internally this function is implemented to use the [`PGTYPESdate_defmt_asc`](ecpg-pgtypes#PGTYPESDATEDEFMTASC) function. See the reference there for a table of example input.
 
 * `rfmtdate` [#](#ECPG-INFORMIX-FUNCTIONS-RFMTDATE)
 
@@ -515,7 +515,7 @@ For more information, see the `sqlda.h` header and the `src/interfaces/ecpg/test
 
     On success, 0 is returned and a negative value if an error occurred.
 
-    Internally this function uses the [`PGTYPESdate_fmt_asc`](ecpg-pgtypes.html#PGTYPESDATEFMTASC) function, see the reference there for examples.
+    Internally this function uses the [`PGTYPESdate_fmt_asc`](ecpg-pgtypes#PGTYPESDATEFMTASC) function, see the reference there for examples.
 
 * `rmdyjul` [#](#ECPG-INFORMIX-FUNCTIONS-RMDYJUL)
 
@@ -530,7 +530,7 @@ For more information, see the `sqlda.h` header and the `src/interfaces/ecpg/test
 
     Currently the function returns always 0.
 
-    Internally the function is implemented to use the function [`PGTYPESdate_mdyjul`](ecpg-pgtypes.html#PGTYPESDATEMDYJUL).
+    Internally the function is implemented to use the function [`PGTYPESdate_mdyjul`](ecpg-pgtypes#PGTYPESDATEMDYJUL).
 
 * `rdayofweek` [#](#ECPG-INFORMIX-FUNCTIONS-RDAYOFWEEK)
 
@@ -551,7 +551,7 @@ For more information, see the `sqlda.h` header and the `src/interfaces/ecpg/test
   * 5 - Friday
   * 6 - Saturday
 
-    Internally the function is implemented to use the function [`PGTYPESdate_dayofweek`](ecpg-pgtypes.html#PGTYPESDATEDAYOFWEEK).
+    Internally the function is implemented to use the function [`PGTYPESdate_dayofweek`](ecpg-pgtypes#PGTYPESDATEDAYOFWEEK).
 
 * `dtcurrent` [#](#ECPG-INFORMIX-FUNCTIONS-DTCURRENT)
 
@@ -577,7 +577,7 @@ For more information, see the `sqlda.h` header and the `src/interfaces/ecpg/test
 
     The function returns 0 on success and a negative value in case of error.
 
-    Internally this function uses the [`PGTYPEStimestamp_from_asc`](ecpg-pgtypes.html#PGTYPESTIMESTAMPFROMASC) function. See the reference there for a table with example inputs.
+    Internally this function uses the [`PGTYPEStimestamp_from_asc`](ecpg-pgtypes#PGTYPESTIMESTAMPFROMASC) function. See the reference there for a table with example inputs.
 
 * `dtcvfmtasc` [#](#ECPG-INFORMIX-FUNCTIONS-DTCVFMTASC)
 
@@ -590,7 +590,7 @@ For more information, see the `sqlda.h` header and the `src/interfaces/ecpg/test
 
     The function receives the string to parse (`inbuf`), the format mask to use (`fmtstr`) and a pointer to the timestamp variable that should hold the result of the operation (`dtvalue`).
 
-    This function is implemented by means of the [`PGTYPEStimestamp_defmt_asc`](ecpg-pgtypes.html#PGTYPESTIMESTAMPDEFMTASC) function. See the documentation there for a list of format specifiers that can be used.
+    This function is implemented by means of the [`PGTYPEStimestamp_defmt_asc`](ecpg-pgtypes#PGTYPESTIMESTAMPDEFMTASC) function. See the documentation there for a list of format specifiers that can be used.
 
     The function returns 0 on success and a negative value in case of error.
 
@@ -633,7 +633,7 @@ For more information, see the `sqlda.h` header and the `src/interfaces/ecpg/test
 
     Upon success, the function returns 0 and a negative value if an error occurred.
 
-    Internally, this function uses the [`PGTYPEStimestamp_fmt_asc`](ecpg-pgtypes.html#PGTYPESTIMESTAMPFMTASC) function. See the reference there for information on what format mask specifiers can be used.
+    Internally, this function uses the [`PGTYPEStimestamp_fmt_asc`](ecpg-pgtypes#PGTYPESTIMESTAMPFMTASC) function. See the reference there for information on what format mask specifiers can be used.
 
 * `intoasc` [#](#ECPG-INFORMIX-FUNCTIONS-INTOASC)
 
@@ -788,7 +788,7 @@ For more information, see the `sqlda.h` header and the `src/interfaces/ecpg/test
     int risnull(int t, char *ptr);
     ```
 
-    The function receives the type of the variable to test (`t`) as well a pointer to this variable (`ptr`). Note that the latter needs to be cast to a char\*. See the function [`rsetnull`](ecpg-informix-compat.html#RSETNULL) for a list of possible variable types.
+    The function receives the type of the variable to test (`t`) as well a pointer to this variable (`ptr`). Note that the latter needs to be cast to a char\*. See the function [`rsetnull`](ecpg-informix-compat#RSETNULL) for a list of possible variable types.
 
     Here is an example of how to use this function:
 

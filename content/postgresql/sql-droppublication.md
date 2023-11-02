@@ -44,4 +44,4 @@ DROP PUBLICATION mypublication;
 
 ## See Also
 
-[CREATE PUBLICATION](sql-createpublication.html "CREATE PUBLICATION"), [ALTER PUBLICATION](sql-alterpublication.html "ALTER PUBLICATION")
+[CREATE PUBLICATION](sql-createpublication "CREATE PUBLICATION"), [ALTER PUBLICATION](sql-alterpublication "ALTER PUBLICATION")

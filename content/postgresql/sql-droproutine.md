@@ -12,7 +12,7 @@ DROP ROUTINE [ IF EXISTS ] name [ ( [ [ argmode ] [ argname ] argtype [, ...] ] 
 
 ## Description
 
-`DROP ROUTINE` removes the definition of one or more existing routines. The term “routine” includes aggregate functions, normal functions, and procedures. See under [DROP AGGREGATE](sql-dropaggregate.html "DROP AGGREGATE"), [DROP FUNCTION](sql-dropfunction.html "DROP FUNCTION"), and [DROP PROCEDURE](sql-dropprocedure.html "DROP PROCEDURE") for the description of the parameters, more examples, and further details.
+`DROP ROUTINE` removes the definition of one or more existing routines. The term “routine” includes aggregate functions, normal functions, and procedures. See under [DROP AGGREGATE](sql-dropaggregate "DROP AGGREGATE"), [DROP FUNCTION](sql-dropfunction "DROP FUNCTION"), and [DROP PROCEDURE](sql-dropprocedure "DROP PROCEDURE") for the description of the parameters, more examples, and further details.
 
 ## Notes
 
@@ -44,6 +44,6 @@ This command conforms to the SQL standard, with these PostgreSQL extensions:
 
 ## See Also
 
-[DROP AGGREGATE](sql-dropaggregate.html "DROP AGGREGATE"), [DROP FUNCTION](sql-dropfunction.html "DROP FUNCTION"), [DROP PROCEDURE](sql-dropprocedure.html "DROP PROCEDURE"), [ALTER ROUTINE](sql-alterroutine.html "ALTER ROUTINE")
+[DROP AGGREGATE](sql-dropaggregate "DROP AGGREGATE"), [DROP FUNCTION](sql-dropfunction "DROP FUNCTION"), [DROP PROCEDURE](sql-dropprocedure "DROP PROCEDURE"), [ALTER ROUTINE](sql-alterroutine "ALTER ROUTINE")
 
 Note that there is no `CREATE ROUTINE` command.

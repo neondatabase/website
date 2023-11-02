@@ -44,4 +44,4 @@ ALTER RULE notify_all ON emp RENAME TO notify_me;
 
 ## See Also
 
-[CREATE RULE](sql-createrule.html "CREATE RULE"), [DROP RULE](sql-droprule.html "DROP RULE")
+[CREATE RULE](sql-createrule "CREATE RULE"), [DROP RULE](sql-droprule "DROP RULE")

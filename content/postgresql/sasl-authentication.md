@@ -1,6 +1,6 @@
 ## 55.3. SASL Authentication [#](#SASL-AUTHENTICATION)
 
-* [55.3.1. SCRAM-SHA-256 Authentication](sasl-authentication.html#SASL-SCRAM-SHA-256)
+* [55.3.1. SCRAM-SHA-256 Authentication](sasl-authentication#SASL-SCRAM-SHA-256)
 
 *SASL* is a framework for authentication in connection-oriented protocols. At the moment, PostgreSQL implements two SASL authentication mechanisms, SCRAM-SHA-256 and SCRAM-SHA-256-PLUS. More might be added in the future. The below steps illustrate how SASL authentication is performed in general, while the next subsection gives more details on SCRAM-SHA-256 and SCRAM-SHA-256-PLUS.
 

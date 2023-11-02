@@ -39,7 +39,7 @@ You must own the collation to use `ALTER COLLATION`. To alter the owner, you mus
 
 * `REFRESH VERSION`
 
-    Update the collation's version. See [Notes](sql-altercollation.html#SQL-ALTERCOLLATION-NOTES "Notes") below.
+    Update the collation's version. See [Notes](sql-altercollation#SQL-ALTERCOLLATION-NOTES "Notes") below.
 
 ## Notes
 
@@ -98,4 +98,4 @@ There is no `ALTER COLLATION` statement in the SQL standard.
 
 ## See Also
 
-[CREATE COLLATION](sql-createcollation.html "CREATE COLLATION"), [DROP COLLATION](sql-dropcollation.html "DROP COLLATION")
+[CREATE COLLATION](sql-createcollation "CREATE COLLATION"), [DROP COLLATION](sql-dropcollation "DROP COLLATION")

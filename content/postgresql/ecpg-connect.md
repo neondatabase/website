@@ -1,8 +1,8 @@
 ## 36.2. Managing Database Connections [#](#ECPG-CONNECT)
 
-  * *   [36.2.1. Connecting to the Database Server](ecpg-connect.html#ECPG-CONNECTING)
-  * [36.2.2. Choosing a Connection](ecpg-connect.html#ECPG-SET-CONNECTION)
-  * [36.2.3. Closing a Connection](ecpg-connect.html#ECPG-DISCONNECT)
+  * *   [36.2.1. Connecting to the Database Server](ecpg-connect#ECPG-CONNECTING)
+  * [36.2.2. Choosing a Connection](ecpg-connect#ECPG-SET-CONNECTION)
+  * [36.2.3. Closing a Connection](ecpg-connect#ECPG-DISCONNECT)
 
 This section describes how to open, close, and switch database connections.
 
@@ -37,7 +37,7 @@ There are also different ways to specify the user name:
 
 As above, the parameters *`username`* and *`password`* can be an SQL identifier, an SQL string literal, or a reference to a character variable.
 
-If the connection target includes any *`options`*, those consist of `keyword=value` specifications separated by ampersands (`&`). The allowed key words are the same ones recognized by libpq (see [Section 34.1.2](libpq-connect.html#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words")). Spaces are ignored before any *`keyword`* or *`value`*, though not within or after one. Note that there is no way to write `&` within a *`value`*.
+If the connection target includes any *`options`*, those consist of `keyword=value` specifications separated by ampersands (`&`). The allowed key words are the same ones recognized by libpq (see [Section 34.1.2](libpq-connect#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words")). Spaces are ignored before any *`keyword`* or *`value`*, though not within or after one. Note that there is no way to write `&` within a *`value`*.
 
 Notice that when specifying a socket connection (with the `unix:` prefix), the host name must be exactly `localhost`. To select a non-default socket directory, write the directory's pathname as the value of a `host` option in the *`options`* part of the target.
 
@@ -65,7 +65,7 @@ The last example makes use of the feature referred to above as character variabl
 
 Be advised that the format of the connection target is not specified in the SQL standard. So if you want to develop portable applications, you might want to use something based on the last example above to encapsulate the connection target string somewhere.
 
-If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas.html#DDL-SCHEMAS-PATTERNS "5.9.6. Usage Patterns"), begin each session by removing publicly-writable schemas from `search_path`. For example, add `options=-c search_path=` to `options`, or issue `EXEC SQL SELECT pg_catalog.set_config('search_path', '', false);` after connecting. This consideration is not specific to ECPG; it applies to every interface for executing arbitrary SQL commands.
+If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas#DDL-SCHEMAS-PATTERNS "5.9.6. Usage Patterns"), begin each session by removing publicly-writable schemas from `search_path`. For example, add `options=-c search_path=` to `options`, or issue `EXEC SQL SELECT pg_catalog.set_config('search_path', '', false);` after connecting. This consideration is not specific to ECPG; it applies to every interface for executing arbitrary SQL commands.
 
 ### 36.2.2. Choosing a Connection [#](#ECPG-SET-CONNECTION)
 

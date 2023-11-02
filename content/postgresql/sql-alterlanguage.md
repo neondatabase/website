@@ -34,4 +34,4 @@ There is no `ALTER LANGUAGE` statement in the SQL standard.
 
 ## See Also
 
-[CREATE LANGUAGE](sql-createlanguage.html "CREATE LANGUAGE"), [DROP LANGUAGE](sql-droplanguage.html "DROP LANGUAGE")
+[CREATE LANGUAGE](sql-createlanguage "CREATE LANGUAGE"), [DROP LANGUAGE](sql-droplanguage "DROP LANGUAGE")

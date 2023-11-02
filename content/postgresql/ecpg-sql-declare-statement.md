@@ -50,4 +50,4 @@ EXEC SQL CLOSE cursor_name;
 
 ## See Also
 
-[CONNECT](ecpg-sql-connect.html "CONNECT"), [DECLARE](ecpg-sql-declare.html "DECLARE"), [OPEN](ecpg-sql-open.html "OPEN")
+[CONNECT](ecpg-sql-connect "CONNECT"), [DECLARE](ecpg-sql-declare "DECLARE"), [OPEN](ecpg-sql-open "OPEN")

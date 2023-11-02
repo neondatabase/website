@@ -1,7 +1,7 @@
 ## 17.5. Post-Installation Setup [#](#INSTALL-POST)
 
-  * *   [17.5.1. Shared Libraries](install-post.html#INSTALL-POST-SHLIBS)
-  * [17.5.2. Environment Variables](install-post.html#INSTALL-POST-ENV-VARS)
+  * *   [17.5.1. Shared Libraries](install-post#INSTALL-POST-SHLIBS)
+  * [17.5.2. Environment Variables](install-post#INSTALL-POST-ENV-VARS)
 
 ### 17.5.1. Shared Libraries [#](#INSTALL-POST-SHLIBS)
 
@@ -22,7 +22,7 @@ or in `csh` or `tcsh`:
 setenv LD_LIBRARY_PATH /usr/local/pgsql/lib
 ```
 
-Replace `/usr/local/pgsql/lib` with whatever you set `--libdir` to in [Step 1](install-make.html#CONFIGURE "Configuration"). You should put these commands into a shell start-up file such as `/etc/profile` or `~/.bash_profile`. Some good information about the caveats associated with this method can be found at [http://xahlee.info/UnixResource_dir/_/ldpath.html](http://xahlee.info/UnixResource_dir/_/ldpath.html).
+Replace `/usr/local/pgsql/lib` with whatever you set `--libdir` to in [Step 1](install-make#CONFIGURE "Configuration"). You should put these commands into a shell start-up file such as `/etc/profile` or `~/.bash_profile`. Some good information about the caveats associated with this method can be found at [http://xahlee.info/UnixResource_dir/_/ldpath.html](http://xahlee.info/UnixResource_dir/_/ldpath.html).
 
 On some systems it might be preferable to set the environment variable `LD_RUN_PATH` *before* building.
 
@@ -56,7 +56,7 @@ instead. Other systems are not known to have an equivalent command.
 
 ### 17.5.2. Environment Variables [#](#INSTALL-POST-ENV-VARS)
 
-If you installed into `/usr/local/pgsql` or some other location that is not searched for programs by default, you should add `/usr/local/pgsql/bin` (or whatever you set `--bindir` to in [Step 1](install-make.html#CONFIGURE "Configuration")) into your `PATH`. Strictly speaking, this is not necessary, but it will make the use of PostgreSQL much more convenient.
+If you installed into `/usr/local/pgsql` or some other location that is not searched for programs by default, you should add `/usr/local/pgsql/bin` (or whatever you set `--bindir` to in [Step 1](install-make#CONFIGURE "Configuration")) into your `PATH`. Strictly speaking, this is not necessary, but it will make the use of PostgreSQL much more convenient.
 
 To do this, add the following to your shell start-up file, such as `~/.bash_profile` (or `/etc/profile`, if you want it to affect all users):
 

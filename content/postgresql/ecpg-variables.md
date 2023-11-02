@@ -1,15 +1,15 @@
 ## 36.4. Using Host Variables [#](#ECPG-VARIABLES)
 
-  * *   [36.4.1. Overview](ecpg-variables.html#ECPG-VARIABLES-OVERVIEW)
-  * [36.4.2. Declare Sections](ecpg-variables.html#ECPG-DECLARE-SECTIONS)
-  * [36.4.3. Retrieving Query Results](ecpg-variables.html#ECPG-RETRIEVING)
-  * [36.4.4. Type Mapping](ecpg-variables.html#ECPG-VARIABLES-TYPE-MAPPING)
-  * [36.4.5. Handling Nonprimitive SQL Data Types](ecpg-variables.html#ECPG-VARIABLES-NONPRIMITIVE-SQL)
-  * [36.4.6. Indicators](ecpg-variables.html#ECPG-INDICATORS)
+  * *   [36.4.1. Overview](ecpg-variables#ECPG-VARIABLES-OVERVIEW)
+  * [36.4.2. Declare Sections](ecpg-variables#ECPG-DECLARE-SECTIONS)
+  * [36.4.3. Retrieving Query Results](ecpg-variables#ECPG-RETRIEVING)
+  * [36.4.4. Type Mapping](ecpg-variables#ECPG-VARIABLES-TYPE-MAPPING)
+  * [36.4.5. Handling Nonprimitive SQL Data Types](ecpg-variables#ECPG-VARIABLES-NONPRIMITIVE-SQL)
+  * [36.4.6. Indicators](ecpg-variables#ECPG-INDICATORS)
 
-In [Section 36.3](ecpg-commands.html "36.3. Running SQL Commands") you saw how you can execute SQL statements from an embedded SQL program. Some of those statements only used fixed values and did not provide a way to insert user-supplied values into statements or have the program process the values returned by the query. Those kinds of statements are not really useful in real applications. This section explains in detail how you can pass data between your C program and the embedded SQL statements using a simple mechanism called *host variables*. In an embedded SQL program we consider the SQL statements to be *guests* in the C program code which is the *host language*. Therefore the variables of the C program are called *host variables*.
+In [Section 36.3](ecpg-commands "36.3. Running SQL Commands") you saw how you can execute SQL statements from an embedded SQL program. Some of those statements only used fixed values and did not provide a way to insert user-supplied values into statements or have the program process the values returned by the query. Those kinds of statements are not really useful in real applications. This section explains in detail how you can pass data between your C program and the embedded SQL statements using a simple mechanism called *host variables*. In an embedded SQL program we consider the SQL statements to be *guests* in the C program code which is the *host language*. Therefore the variables of the C program are called *host variables*.
 
-Another way to exchange values between PostgreSQL backends and ECPG applications is the use of SQL descriptors, described in [Section 36.7](ecpg-descriptors.html "36.7. Using Descriptor Areas").
+Another way to exchange values between PostgreSQL backends and ECPG applications is the use of SQL descriptors, described in [Section 36.7](ecpg-descriptors "36.7. Using Descriptor Areas").
 
 ### 36.4.1. Overview [#](#ECPG-VARIABLES-OVERVIEW)
 
@@ -117,9 +117,9 @@ Here the `INTO` clause appears after all the normal clauses.
 
 When ECPG applications exchange values between the PostgreSQL server and the C application, such as when retrieving query results from the server or executing SQL statements with input parameters, the values need to be converted between PostgreSQL data types and host language variable types (C language data types, concretely). One of the main points of ECPG is that it takes care of this automatically in most cases.
 
-In this respect, there are two kinds of data types: Some simple PostgreSQL data types, such as `integer` and `text`, can be read and written by the application directly. Other PostgreSQL data types, such as `timestamp` and `numeric` can only be accessed through special library functions; see [Section 36.4.4.2](ecpg-variables.html#ECPG-SPECIAL-TYPES "36.4.4.2. Accessing Special Data Types").
+In this respect, there are two kinds of data types: Some simple PostgreSQL data types, such as `integer` and `text`, can be read and written by the application directly. Other PostgreSQL data types, such as `timestamp` and `numeric` can only be accessed through special library functions; see [Section 36.4.4.2](ecpg-variables#ECPG-SPECIAL-TYPES "36.4.4.2. Accessing Special Data Types").
 
-[Table 36.1](ecpg-variables.html#ECPG-DATATYPE-HOSTVARS-TABLE "Table 36.1. Mapping Between PostgreSQL Data Types and C Variable Types") shows which PostgreSQL data types correspond to which C data types. When you wish to send or receive a value of a given PostgreSQL data type, you should declare a C variable of the corresponding C data type in the declare section.
+[Table 36.1](ecpg-variables#ECPG-DATATYPE-HOSTVARS-TABLE "Table 36.1. Mapping Between PostgreSQL Data Types and C Variable Types") shows which PostgreSQL data types correspond to which C data types. When you wish to send or receive a value of a given PostgreSQL data type, you should declare a C variable of the corresponding C data type in the declare section.
 
 **Table 36.1. Mapping Between PostgreSQL Data Types and C Variable Types**
 
@@ -129,7 +129,7 @@ In this respect, there are two kinds of data types: Some simple PostgreSQL data 
 | `integer`                                                                                                                                                                                                                                                                             | `int`                                                              |
 | `bigint`                                                                                                                                                                                                                                                                              | `long long int`                                                    |
 | `decimal`                                                                                                                                                                                                                                                                             | `decimal`[\[a\]](#ftn.ECPG-DATATYPE-TABLE-FN)                      |
-| `numeric`                                                                                                                                                                                                                                                                             | `numeric`[\[a\]](ecpg-variables.html#ftn.ECPG-DATATYPE-TABLE-FN)   |
+| `numeric`                                                                                                                                                                                                                                                                             | `numeric`[\[a\]](ecpg-variables#ftn.ECPG-DATATYPE-TABLE-FN)   |
 | `real`                                                                                                                                                                                                                                                                                | `float`                                                            |
 | `double precision`                                                                                                                                                                                                                                                                    | `double`                                                           |
 | `smallserial`                                                                                                                                                                                                                                                                         | `short`                                                            |
@@ -138,12 +138,12 @@ In this respect, there are two kinds of data types: Some simple PostgreSQL data 
 | `oid`                                                                                                                                                                                                                                                                                 | `unsigned int`                                                     |
 | `character(n)`, `varchar(n)`, `text`                                                                                                                                                                                                                                                  | `char[n+1]`, `VARCHAR[n+1]`                                        |
 | `name`                                                                                                                                                                                                                                                                                | `char[NAMEDATALEN]`                                                |
-| `timestamp`                                                                                                                                                                                                                                                                           | `timestamp`[\[a\]](ecpg-variables.html#ftn.ECPG-DATATYPE-TABLE-FN) |
-| `interval`                                                                                                                                                                                                                                                                            | `interval`[\[a\]](ecpg-variables.html#ftn.ECPG-DATATYPE-TABLE-FN)  |
-| `date`                                                                                                                                                                                                                                                                                | `date`[\[a\]](ecpg-variables.html#ftn.ECPG-DATATYPE-TABLE-FN)      |
+| `timestamp`                                                                                                                                                                                                                                                                           | `timestamp`[\[a\]](ecpg-variables#ftn.ECPG-DATATYPE-TABLE-FN) |
+| `interval`                                                                                                                                                                                                                                                                            | `interval`[\[a\]](ecpg-variables#ftn.ECPG-DATATYPE-TABLE-FN)  |
+| `date`                                                                                                                                                                                                                                                                                | `date`[\[a\]](ecpg-variables#ftn.ECPG-DATATYPE-TABLE-FN)      |
 | `boolean`                                                                                                                                                                                                                                                                             | `bool`[\[b\]](#ftn.id-1.7.5.10.7.5.2.2.17.2.2)                     |
 | `bytea`                                                                                                                                                                                                                                                                               | `char *`, `bytea[n]`                                               |
-| [\[a\] ](#ECPG-DATATYPE-TABLE-FN)This type can only be accessed through special library functions; see [Section 36.4.4.2](ecpg-variables.html#ECPG-SPECIAL-TYPES "36.4.4.2. Accessing Special Data Types").[\[b\] ](#id-1.7.5.10.7.5.2.2.17.2.2)declared in `ecpglib.h` if not native |                                                                    |
+| [\[a\] ](#ECPG-DATATYPE-TABLE-FN)This type can only be accessed through special library functions; see [Section 36.4.4.2](ecpg-variables#ECPG-SPECIAL-TYPES "36.4.4.2. Accessing Special Data Types").[\[b\] ](#id-1.7.5.10.7.5.2.2.17.2.2)declared in `ecpglib.h` if not native |                                                                    |
 
 \
 
@@ -184,9 +184,9 @@ The member `arr` hosts the string including a terminating zero byte. Thus, to st
 
 #### 36.4.4.2. Accessing Special Data Types [#](#ECPG-SPECIAL-TYPES)
 
-ECPG contains some special types that help you to interact easily with some special data types from the PostgreSQL server. In particular, it has implemented support for the `numeric`, `decimal`, `date`, `timestamp`, and `interval` types. These data types cannot usefully be mapped to primitive host variable types (such as `int`, `long long int`, or `char[]`), because they have a complex internal structure. Applications deal with these types by declaring host variables in special types and accessing them using functions in the pgtypes library. The pgtypes library, described in detail in [Section 36.6](ecpg-pgtypes.html "36.6. pgtypes Library") contains basic functions to deal with those types, such that you do not need to send a query to the SQL server just for adding an interval to a time stamp for example.
+ECPG contains some special types that help you to interact easily with some special data types from the PostgreSQL server. In particular, it has implemented support for the `numeric`, `decimal`, `date`, `timestamp`, and `interval` types. These data types cannot usefully be mapped to primitive host variable types (such as `int`, `long long int`, or `char[]`), because they have a complex internal structure. Applications deal with these types by declaring host variables in special types and accessing them using functions in the pgtypes library. The pgtypes library, described in detail in [Section 36.6](ecpg-pgtypes "36.6. pgtypes Library") contains basic functions to deal with those types, such that you do not need to send a query to the SQL server just for adding an interval to a time stamp for example.
 
-The follow subsections describe these special data types. For more details about pgtypes library functions, see [Section 36.6](ecpg-pgtypes.html "36.6. pgtypes Library").
+The follow subsections describe these special data types. For more details about pgtypes library functions, see [Section 36.6](ecpg-pgtypes "36.6. pgtypes Library").
 
 ##### 36.4.4.2.1. timestamp, date [#](#ECPG-SPECIAL-TYPES-TIMESTAMP-DATE)
 
@@ -224,7 +224,7 @@ This example will show some result like following:
 ts = 2010-06-27 18:03:56.949343
 ```
 
-In addition, the DATE type can be handled in the same way. The program has to include `pgtypes_date.h`, declare a host variable as the date type and convert a DATE value into a text form using `PGTYPESdate_to_asc()` function. For more details about the pgtypes library functions, see [Section 36.6](ecpg-pgtypes.html "36.6. pgtypes Library").
+In addition, the DATE type can be handled in the same way. The program has to include `pgtypes_date.h`, declare a host variable as the date type and convert a DATE value into a text form using `PGTYPESdate_to_asc()` function. For more details about the pgtypes library functions, see [Section 36.6](ecpg-pgtypes "36.6. pgtypes Library").
 
 ##### 36.4.4.2.2. interval [#](#ECPG-TYPE-INTERVAL)
 
@@ -261,7 +261,7 @@ EXEC SQL END DECLARE SECTION;
 
 ##### 36.4.4.2.3. numeric, decimal [#](#ECPG-TYPE-NUMERIC-DECIMAL)
 
-The handling of the `numeric` and `decimal` types is similar to the `interval` type: It requires defining a pointer, allocating some memory space on the heap, and accessing the variable using the pgtypes library functions. For more details about the pgtypes library functions, see [Section 36.6](ecpg-pgtypes.html "36.6. pgtypes Library").
+The handling of the `numeric` and `decimal` types is similar to the `interval` type: It requires defining a pointer, allocating some memory space on the heap, and accessing the variable using the pgtypes library functions. For more details about the pgtypes library functions, see [Section 36.6](ecpg-pgtypes "36.6. pgtypes Library").
 
 No functions are provided specifically for the `decimal` type. An application has to convert it to a `numeric` variable using a pgtypes library function to do further processing.
 
@@ -334,7 +334,7 @@ The member `arr` hosts binary format data. It can also handle `'\0'` as part of 
 
 ### Note
 
-`bytea` variable can be used only when [bytea\_output](runtime-config-client.html#GUC-BYTEA-OUTPUT) is set to `hex`.
+`bytea` variable can be used only when [bytea\_output](runtime-config-client#GUC-BYTEA-OUTPUT) is set to `hex`.
 
 #### 36.4.4.3. Host Variables with Nonprimitive Types [#](#ECPG-VARIABLES-NONPRIMITIVE-C)
 
@@ -342,7 +342,7 @@ As a host variable you can also use arrays, typedefs, structs, and pointers.
 
 ##### 36.4.4.3.1. Arrays [#](#ECPG-VARIABLES-ARRAYS)
 
-There are two use cases for arrays as host variables. The first is a way to store some text string in `char[]` or `VARCHAR[]`, as explained in [Section 36.4.4.1](ecpg-variables.html#ECPG-CHAR "36.4.4.1. Handling Character Strings"). The second use case is to retrieve multiple rows from a query result without using a cursor. Without an array, to process a query result consisting of multiple rows, it is required to use a cursor and the `FETCH` command. But with array host variables, multiple rows can be received at once. The length of the array has to be defined to be able to accommodate all rows, otherwise a buffer overflow will likely occur.
+There are two use cases for arrays as host variables. The first is a way to store some text string in `char[]` or `VARCHAR[]`, as explained in [Section 36.4.4.1](ecpg-variables#ECPG-CHAR "36.4.4.1. Handling Character Strings"). The second use case is to retrieve multiple rows from a query result without using a cursor. Without an array, to process a query result consisting of multiple rows, it is required to use a cursor and the `FETCH` command. But with array host variables, multiple rows can be received at once. The length of the array has to be defined to be able to accommodate all rows, otherwise a buffer overflow will likely occur.
 
 Following example scans the `pg_database` system table and shows all OIDs and names of the available databases:
 
@@ -504,7 +504,7 @@ EXEC SQL END DECLARE SECTION;
 EXEC SQL START TRANSACTION;
 ```
 
-ECPG will report a syntax error for `START TRANSACTION`, because it no longer recognizes `START` as an SQL keyword, only as a typedef. (If you have such a conflict, and renaming the typedef seems impractical, you could write the SQL command using [dynamic SQL](ecpg-dynamic.html "36.5. Dynamic SQL").)
+ECPG will report a syntax error for `START TRANSACTION`, because it no longer recognizes `START` as an SQL keyword, only as a typedef. (If you have such a conflict, and renaming the typedef seems impractical, you could write the SQL command using [dynamic SQL](ecpg-dynamic "36.5. Dynamic SQL").)
 
 ### Note
 
@@ -512,7 +512,7 @@ In PostgreSQL releases before v16, use of SQL keywords as typedef names was like
 
 ##### 36.4.4.3.4. Pointers [#](#ECPG-VARIABLES-NONPRIMITIVE-C-POINTERS)
 
-You can declare pointers to the most common types. Note however that you cannot use pointers as target variables of queries without auto-allocation. See [Section 36.7](ecpg-descriptors.html "36.7. Using Descriptor Areas") for more information on auto-allocation.
+You can declare pointers to the most common types. Note however that you cannot use pointers as target variables of queries without auto-allocation. See [Section 36.7](ecpg-descriptors "36.7. Using Descriptor Areas") for more information on auto-allocation.
 
 ```
 
@@ -619,7 +619,7 @@ while (1)
 
 would not work correctly in this case, because you cannot map an array type column to an array host variable directly.
 
-Another workaround is to store arrays in their external string representation in host variables of type `char[]` or `VARCHAR[]`. For more details about this representation, see [Section 8.15.2](arrays.html#ARRAYS-INPUT "8.15.2. Array Value Input"). Note that this means that the array cannot be accessed naturally as an array in the host program (without further processing that parses the text representation).
+Another workaround is to store arrays in their external string representation in host variables of type `char[]` or `VARCHAR[]`. For more details about this representation, see [Section 8.15.2](arrays#ARRAYS-INPUT "8.15.2. Array Value Input"). Note that this means that the array cannot be accessed naturally as an array in the host program (without further processing that parses the text representation).
 
 #### 36.4.5.2. Composite Types [#](#ECPG-VARIABLES-NONPRIMITIVE-SQL-COMPOSITE)
 
@@ -660,7 +660,7 @@ while (1)
 EXEC SQL CLOSE cur1;
 ```
 
-To enhance this example, the host variables to store values in the `FETCH` command can be gathered into one structure. For more details about the host variable in the structure form, see [Section 36.4.4.3.2](ecpg-variables.html#ECPG-VARIABLES-STRUCT "36.4.4.3.2. Structures"). To switch to the structure, the example can be modified as below. The two host variables, `intval` and `textval`, become members of the `comp_t` structure, and the structure is specified on the `FETCH` command.
+To enhance this example, the host variables to store values in the `FETCH` command can be gathered into one structure. For more details about the host variable in the structure form, see [Section 36.4.4.3.2](ecpg-variables#ECPG-VARIABLES-STRUCT "36.4.4.3.2. Structures"). To switch to the structure, the example can be modified as below. The two host variables, `intval` and `textval`, become members of the `comp_t` structure, and the structure is specified on the `FETCH` command.
 
 ```
 
@@ -719,7 +719,7 @@ Finally, it is also possible to store composite type values in their external st
 
 New user-defined base types are not directly supported by ECPG. You can use the external string representation and host variables of type `char[]` or `VARCHAR[]`, and this solution is indeed appropriate and sufficient for many types.
 
-Here is an example using the data type `complex` from the example in [Section 38.13](xtypes.html "38.13. User-Defined Types"). The external string representation of that type is `(%f,%f)`, which is defined in the functions `complex_in()` and `complex_out()` functions in [Section 38.13](xtypes.html "38.13. User-Defined Types"). The following example inserts the complex type values `(1,1)` and `(3,3)` into the columns `a` and `b`, and select them from the table after that.
+Here is an example using the data type `complex` from the example in [Section 38.13](xtypes "38.13. User-Defined Types"). The external string representation of that type is `(%f,%f)`, which is defined in the functions `complex_in()` and `complex_out()` functions in [Section 38.13](xtypes "38.13. User-Defined Types"). The following example inserts the complex type values `(1,1)` and `(3,3)` into the columns `a` and `b`, and select them from the table after that.
 
 ```
 
@@ -802,7 +802,7 @@ EXEC SQL END DECLARE SECTION:
 EXEC SQL SELECT b INTO :val :val_ind FROM test1;
 ```
 
-The indicator variable `val_ind` will be zero if the value was not null, and it will be negative if the value was null. (See [Section 36.16](ecpg-oracle-compat.html "36.16. Oracle Compatibility Mode") to enable Oracle-specific behavior.)
+The indicator variable `val_ind` will be zero if the value was not null, and it will be negative if the value was null. (See [Section 36.16](ecpg-oracle-compat "36.16. Oracle Compatibility Mode") to enable Oracle-specific behavior.)
 
 The indicator has another function: if the indicator value is positive, it means that the value is not null, but it was truncated when it was stored in the host variable.
 

@@ -1,10 +1,10 @@
 ## 10.2. Operators [#](#TYPECONV-OPER)
 
-The specific operator that is referenced by an operator expression is determined using the following procedure. Note that this procedure is indirectly affected by the precedence of the operators involved, since that will determine which sub-expressions are taken to be the inputs of which operators. See [Section 4.1.6](sql-syntax-lexical.html#SQL-PRECEDENCE "4.1.6. Operator Precedence") for more information.
+The specific operator that is referenced by an operator expression is determined using the following procedure. Note that this procedure is indirectly affected by the precedence of the operators involved, since that will determine which sub-expressions are taken to be the inputs of which operators. See [Section 4.1.6](sql-syntax-lexical#SQL-PRECEDENCE "4.1.6. Operator Precedence") for more information.
 
 **Operator Type Resolution**
 
-1. Select the operators to be considered from the `pg_operator` system catalog. If a non-schema-qualified operator name was used (the usual case), the operators considered are those with the matching name and argument count that are visible in the current search path (see [Section 5.9.3](ddl-schemas.html#DDL-SCHEMAS-PATH "5.9.3. The Schema Search Path")). If a qualified operator name was given, only operators in the specified schema are considered.
+1. Select the operators to be considered from the `pg_operator` system catalog. If a non-schema-qualified operator name was used (the usual case), the operators considered are those with the matching name and argument count that are visible in the current search path (see [Section 5.9.3](ddl-schemas#DDL-SCHEMAS-PATH "5.9.3. The Schema Search Path")). If a qualified operator name was given, only operators in the specified schema are considered.
 
     1. If the search path finds multiple operators with identical argument types, only the one appearing earliest in the path is considered. Operators with different argument types are considered on an equal footing regardless of search path position.
 
@@ -141,7 +141,7 @@ SELECT array[1,2] <@ '{1,2,3}' as "is subset";
 (1 row)
 ```
 
-The PostgreSQL operator catalog has several entries for the infix operator `<@`, but the only two that could possibly accept an integer array on the left-hand side are array inclusion (`anyarray` `<@` `anyarray`) and range inclusion (`anyelement` `<@` `anyrange`). Since none of these polymorphic pseudo-types (see [Section 8.21](datatype-pseudo.html "8.21. Pseudo-Types")) are considered preferred, the parser cannot resolve the ambiguity on that basis. However, [Step 3.f](typeconv-oper.html#OP-RESOL-LAST-UNKNOWN "Step 3.f") tells it to assume that the unknown-type literal is of the same type as the other input, that is, integer array. Now only one of the two operators can match, so array inclusion is selected. (Had range inclusion been selected, we would have gotten an error, because the string does not have the right format to be a range literal.)
+The PostgreSQL operator catalog has several entries for the infix operator `<@`, but the only two that could possibly accept an integer array on the left-hand side are array inclusion (`anyarray` `<@` `anyarray`) and range inclusion (`anyelement` `<@` `anyrange`). Since none of these polymorphic pseudo-types (see [Section 8.21](datatype-pseudo "8.21. Pseudo-Types")) are considered preferred, the parser cannot resolve the ambiguity on that basis. However, [Step 3.f](typeconv-oper#OP-RESOL-LAST-UNKNOWN "Step 3.f") tells it to assume that the unknown-type literal is of the same type as the other input, that is, integer array. Now only one of the two operators can match, so array inclusion is selected. (Had range inclusion been selected, we would have gotten an error, because the string does not have the right format to be a range literal.)
 
 \
 
@@ -159,7 +159,7 @@ CREATE TABLE mytable (val mytext);
 SELECT * FROM mytable WHERE val = 'foo';
 ```
 
-This query will not use the custom operator. The parser will first see if there is a `mytext` `=` `mytext` operator ([Step 2.a](typeconv-oper.html#OP-RESOL-EXACT-UNKNOWN "Step 2.a")), which there is not; then it will consider the domain's base type `text`, and see if there is a `text` `=` `text` operator ([Step 2.b](typeconv-oper.html#OP-RESOL-EXACT-DOMAIN "Step 2.b")), which there is; so it resolves the `unknown`-type literal as `text` and uses the `text` `=` `text` operator. The only way to get the custom operator to be used is to explicitly cast the literal:
+This query will not use the custom operator. The parser will first see if there is a `mytext` `=` `mytext` operator ([Step 2.a](typeconv-oper#OP-RESOL-EXACT-UNKNOWN "Step 2.a")), which there is not; then it will consider the domain's base type `text`, and see if there is a `text` `=` `text` operator ([Step 2.b](typeconv-oper#OP-RESOL-EXACT-DOMAIN "Step 2.b")), which there is; so it resolves the `unknown`-type literal as `text` and uses the `text` `=` `text` operator. The only way to get the custom operator to be used is to explicitly cast the literal:
 
 ```
 

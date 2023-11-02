@@ -8,9 +8,9 @@ The catalog `pg_foreign_server` stores foreign server definitions. A foreign ser
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `oid` `oid`Row identifier                                                                                                                                                                  |
 | `srvname` `name`Name of the foreign server                                                                                                                                                 |
-| `srvowner` `oid` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`oid`)Owner of the foreign server                                                                     |
-| `srvfdw` `oid` (references [`pg_foreign_data_wrapper`](catalog-pg-foreign-data-wrapper.html "53.23. pg_foreign_data_wrapper").`oid`)OID of the foreign-data wrapper of this foreign server |
+| `srvowner` `oid` (references [`pg_authid`](catalog-pg-authid "53.8. pg_authid").`oid`)Owner of the foreign server                                                                     |
+| `srvfdw` `oid` (references [`pg_foreign_data_wrapper`](catalog-pg-foreign-data-wrapper "53.23. pg_foreign_data_wrapper").`oid`)OID of the foreign-data wrapper of this foreign server |
 | `srvtype` `text`Type of the server (optional)                                                                                                                                              |
 | `srvversion` `text`Version of the server (optional)                                                                                                                                        |
-| `srvacl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv.html "5.7. Privileges") for details                                                                                      |
+| `srvacl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv "5.7. Privileges") for details                                                                                      |
 | `srvoptions` `text[]`Foreign server specific options, as “keyword=value” strings                                                                                                           |

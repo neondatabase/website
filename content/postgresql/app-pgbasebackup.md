@@ -8,15 +8,15 @@ pg\_basebackup — take a base backup of a PostgreSQL cluster
 
 ## Description
 
-pg\_basebackup is used to take a base backup of a running PostgreSQL database cluster. The backup is taken without affecting other clients of the database, and can be used both for point-in-time recovery (see [Section 26.3](continuous-archiving.html "26.3. Continuous Archiving and Point-in-Time Recovery (PITR)")) and as the starting point for a log-shipping or streaming-replication standby server (see [Section 27.2](warm-standby.html "27.2. Log-Shipping Standby Servers")).
+pg\_basebackup is used to take a base backup of a running PostgreSQL database cluster. The backup is taken without affecting other clients of the database, and can be used both for point-in-time recovery (see [Section 26.3](continuous-archiving "26.3. Continuous Archiving and Point-in-Time Recovery (PITR)")) and as the starting point for a log-shipping or streaming-replication standby server (see [Section 27.2](warm-standby "27.2. Log-Shipping Standby Servers")).
 
-pg\_basebackup makes an exact copy of the database cluster's files, while making sure the server is put into and out of backup mode automatically. Backups are always taken of the entire database cluster; it is not possible to back up individual databases or database objects. For selective backups, another tool such as [pg\_dump](app-pgdump.html "pg_dump") must be used.
+pg\_basebackup makes an exact copy of the database cluster's files, while making sure the server is put into and out of backup mode automatically. Backups are always taken of the entire database cluster; it is not possible to back up individual databases or database objects. For selective backups, another tool such as [pg\_dump](app-pgdump "pg_dump") must be used.
 
-The backup is made over a regular PostgreSQL connection that uses the replication protocol. The connection must be made with a user ID that has `REPLICATION` permissions (see [Section 22.2](role-attributes.html "22.2. Role Attributes")) or is a superuser, and [`pg_hba.conf`](auth-pg-hba-conf.html "21.1. The pg_hba.conf File") must permit the replication connection. The server must also be configured with [max\_wal\_senders](runtime-config-replication.html#GUC-MAX-WAL-SENDERS) set high enough to provide at least one walsender for the backup plus one for WAL streaming (if used).
+The backup is made over a regular PostgreSQL connection that uses the replication protocol. The connection must be made with a user ID that has `REPLICATION` permissions (see [Section 22.2](role-attributes "22.2. Role Attributes")) or is a superuser, and [`pg_hba.conf`](auth-pg-hba-conf "21.1. The pg_hba.conf File") must permit the replication connection. The server must also be configured with [max\_wal\_senders](runtime-config-replication#GUC-MAX-WAL-SENDERS) set high enough to provide at least one walsender for the backup plus one for WAL streaming (if used).
 
 There can be multiple `pg_basebackup`s running at the same time, but it is usually better from a performance point of view to take only one backup, and copy the result.
 
-pg\_basebackup can make a base backup from not only a primary server but also a standby. To take a backup from a standby, set up the standby so that it can accept replication connections (that is, set `max_wal_senders` and [hot\_standby](runtime-config-replication.html#GUC-HOT-STANDBY), and configure its `pg_hba.conf` appropriately). You will also need to enable [full\_page\_writes](runtime-config-wal.html#GUC-FULL-PAGE-WRITES) on the primary.
+pg\_basebackup can make a base backup from not only a primary server but also a standby. To take a backup from a standby, set up the standby so that it can accept replication connections (that is, set `max_wal_senders` and [hot\_standby](runtime-config-replication#GUC-HOT-STANDBY), and configure its `pg_hba.conf` appropriately). You will also need to enable [full\_page\_writes](runtime-config-wal#GUC-FULL-PAGE-WRITES) on the primary.
 
 Note that there are some limitations in taking a backup from a standby:
 
@@ -25,7 +25,7 @@ Note that there are some limitations in taking a backup from a standby:
 * If the standby is promoted to be primary during backup, the backup fails.
 * All WAL records required for the backup must contain sufficient full-page writes, which requires you to enable `full_page_writes` on the primary.
 
-Whenever pg\_basebackup is taking a base backup, the server's `pg_stat_progress_basebackup` view will report the progress of the backup. See [Section 28.4.6](progress-reporting.html#BASEBACKUP-PROGRESS-REPORTING "28.4.6. Base Backup Progress Reporting") for details.
+Whenever pg\_basebackup is taking a base backup, the server's `pg_stat_progress_basebackup` view will report the progress of the backup. See [Section 28.4.6](progress-reporting#BASEBACKUP-PROGRESS-REPORTING "28.4.6. Base Backup Progress Reporting") for details.
 
 ## Options
 
@@ -57,7 +57,7 @@ The following command-line options control the location and format of the output
 
 * `-R``--write-recovery-conf`
 
-    Creates a [`standby.signal`](warm-standby.html#FILE-STANDBY-SIGNAL) file and appends connection settings to the `postgresql.auto.conf` file in the target directory (or within the base archive file when using tar format). This eases setting up a standby server using the results of the backup.
+    Creates a [`standby.signal`](warm-standby#FILE-STANDBY-SIGNAL) file and appends connection settings to the `postgresql.auto.conf` file in the target directory (or within the base archive file when using tar format). This eases setting up a standby server using the results of the backup.
 
     The `postgresql.auto.conf` file will record the connection settings and, if specified, the replication slot that pg\_basebackup is using, so that streaming replication will use the same settings later on.
 
@@ -91,7 +91,7 @@ The following command-line options control the location and format of the output
 
   * `f``fetch`
 
-        The write-ahead log files are collected at the end of the backup. Therefore, it is necessary for the source server's [wal\_keep\_size](runtime-config-replication.html#GUC-WAL-KEEP-SIZE) parameter to be set high enough that the required log data is not removed before the end of the backup. If the required log data has been recycled before it's time to transfer it, the backup will fail and be unusable.
+        The write-ahead log files are collected at the end of the backup. Therefore, it is necessary for the source server's [wal\_keep\_size](runtime-config-replication#GUC-WAL-KEEP-SIZE) parameter to be set high enough that the required log data is not removed before the end of the backup. If the required log data has been recycled before it's time to transfer it, the backup will fail and be unusable.
 
         When tar format is used, the write-ahead log files will be included in the `base.tar` file.
 
@@ -123,7 +123,7 @@ The following command-line options control the generation of the backup and the 
 
 * `-c {fast|spread}``--checkpoint={fast|spread}`
 
-    Sets checkpoint mode to fast (immediate) or spread (the default) (see [Section 26.3.3](continuous-archiving.html#BACKUP-LOWLEVEL-BASE-BACKUP "26.3.3. Making a Base Backup Using the Low Level API")).
+    Sets checkpoint mode to fast (immediate) or spread (the default) (see [Section 26.3.3](continuous-archiving#BACKUP-LOWLEVEL-BASE-BACKUP "26.3.3. Making a Base Backup Using the Low Level API")).
 
 * `-C``--create-slot`
 
@@ -155,7 +155,7 @@ The following command-line options control the generation of the backup and the 
 
 * `-S slotname``--slot=slotname`
 
-    This option can only be used together with `-X stream`. It causes WAL streaming to use the specified replication slot. If the base backup is intended to be used as a streaming-replication standby using a replication slot, the standby should then use the same replication slot name as [primary\_slot\_name](runtime-config-replication.html#GUC-PRIMARY-SLOT-NAME). This ensures that the primary server does not remove any necessary WAL data in the time between the end of the base backup and the start of streaming replication on the new standby.
+    This option can only be used together with `-X stream`. It causes WAL streaming to use the specified replication slot. If the base backup is intended to be used as a streaming-replication standby using a replication slot, the standby should then use the same replication slot name as [primary\_slot\_name](runtime-config-replication#GUC-PRIMARY-SLOT-NAME). This ensures that the primary server does not remove any necessary WAL data in the time between the end of the base backup and the start of streaming replication on the new standby.
 
     The specified replication slot has to exist unless the option `-C` is also used.
 
@@ -165,7 +165,7 @@ The following command-line options control the generation of the backup and the 
 
     When set to `fsync`, which is the default, `pg_basebackup` will recursively open and synchronize all files in the backup directory. When the plain format is used, the search for files will follow symbolic links for the WAL directory and each configured tablespace.
 
-    On Linux, `syncfs` may be used instead to ask the operating system to synchronize the whole file system that contains the backup directory. When the plain format is used, `pg_basebackup` will also synchronize the file systems that contain the WAL files and each tablespace. See [Appendix O](syncfs.html "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
+    On Linux, `syncfs` may be used instead to ask the operating system to synchronize the whole file system that contains the backup directory. When the plain format is used, `pg_basebackup` will also synchronize the file systems that contain the WAL files and each tablespace. See [Appendix O](syncfs "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
 
     This option has no effect when `--no-sync` is used.
 
@@ -181,7 +181,7 @@ The following command-line options control the generation of the backup and the 
 
     Using a SHA hash function provides a cryptographically secure digest of each file for users who wish to verify that the backup has not been tampered with, while the CRC32C algorithm provides a checksum that is much faster to calculate; it is good at catching errors due to accidental changes but is not resistant to malicious modifications. Note that, to be useful against an adversary who has access to the backup, the backup manifest would need to be stored securely elsewhere or otherwise verified not to have been modified since the backup was taken.
 
-    [pg\_verifybackup](app-pgverifybackup.html "pg_verifybackup") can be used to check the integrity of a backup against the backup manifest.
+    [pg\_verifybackup](app-pgverifybackup "pg_verifybackup") can be used to check the integrity of a backup against the backup manifest.
 
 * `--manifest-force-encode`
 
@@ -197,7 +197,7 @@ The following command-line options control the generation of the backup and the 
 
 * `--no-manifest`
 
-    Disables generation of a backup manifest. If this option is not specified, the server will generate and send a backup manifest which can be verified using [pg\_verifybackup](app-pgverifybackup.html "pg_verifybackup"). The manifest is a list of every file present in the backup with the exception of any WAL files that may be included. It also stores the size, last modification time, and an optional checksum for each file.
+    Disables generation of a backup manifest. If this option is not specified, the server will generate and send a backup manifest which can be verified using [pg\_verifybackup](app-pgverifybackup "pg_verifybackup"). The manifest is a list of every file present in the backup with the exception of any WAL files that may be included. It also stores the size, last modification time, and an optional checksum for each file.
 
 * `--no-slot`
 
@@ -211,13 +211,13 @@ The following command-line options control the generation of the backup and the 
 
     Disables verification of checksums, if they are enabled on the server the base backup is taken from.
 
-    By default, checksums are verified and checksum failures will result in a non-zero exit status. However, the base backup will not be removed in such a case, as if the `--no-clean` option had been used. Checksum verification failures will also be reported in the [`pg_stat_database`](monitoring-stats.html#MONITORING-PG-STAT-DATABASE-VIEW "28.2.16. pg_stat_database") view.
+    By default, checksums are verified and checksum failures will result in a non-zero exit status. However, the base backup will not be removed in such a case, as if the `--no-clean` option had been used. Checksum verification failures will also be reported in the [`pg_stat_database`](monitoring-stats#MONITORING-PG-STAT-DATABASE-VIEW "28.2.16. pg_stat_database") view.
 
 The following command-line options control the connection to the source server:
 
 * `-d connstr``--dbname=connstr`
 
-    Specifies parameters used to connect to the server, as a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"); these will override any conflicting command line options.
+    Specifies parameters used to connect to the server, as a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"); these will override any conflicting command line options.
 
     The option is called `--dbname` for consistency with other client applications, but because pg\_basebackup doesn't connect to any particular database in the cluster, any database name in the connection string will be ignored by PostgreSQL. Middleware, or proxies, used in connecting to PostgreSQL might however utilize the value.
 
@@ -259,7 +259,7 @@ Other options are also available:
 
 ## Environment
 
-This utility, like most other PostgreSQL utilities, uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 The environment variable `PG_COLOR` specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 
@@ -267,7 +267,7 @@ The environment variable `PG_COLOR` specifies whether to use color in diagnostic
 
 At the beginning of the backup, a checkpoint needs to be performed on the source server. This can take some time (especially if the option `--checkpoint=fast` is not used), during which pg\_basebackup will appear to be idle.
 
-The backup will include all files in the data directory and tablespaces, including the configuration files and any additional files placed in the directory by third parties, except certain temporary files managed by PostgreSQL. But only regular files and directories are copied, except that symbolic links used for tablespaces are preserved. Symbolic links pointing to certain directories known to PostgreSQL are copied as empty directories. Other symbolic links and special device files are skipped. See [Section 55.4](protocol-replication.html "55.4. Streaming Replication Protocol") for the precise details.
+The backup will include all files in the data directory and tablespaces, including the configuration files and any additional files placed in the directory by third parties, except certain temporary files managed by PostgreSQL. But only regular files and directories are copied, except that symbolic links used for tablespaces are preserved. Symbolic links pointing to certain directories known to PostgreSQL are copied as empty directories. Other symbolic links and special device files are skipped. See [Section 55.4](protocol-replication "55.4. Streaming Replication Protocol") for the precise details.
 
 In plain format, tablespaces will be backed up to the same path they have on the source server, unless the option `--tablespace-mapping` is used. Without this option, running a plain format base backup on the same host as the server will not work if tablespaces are in use, because the backup would have to be written to the same directory locations as the original tablespaces.
 
@@ -318,4 +318,4 @@ pg_basebackup -D backup -Ft --compress=gzip:9
 
 ## See Also
 
-[pg\_dump](app-pgdump.html "pg_dump"), [Section 28.4.6](progress-reporting.html#BASEBACKUP-PROGRESS-REPORTING "28.4.6. Base Backup Progress Reporting")
+[pg\_dump](app-pgdump "pg_dump"), [Section 28.4.6](progress-reporting#BASEBACKUP-PROGRESS-REPORTING "28.4.6. Base Backup Progress Reporting")

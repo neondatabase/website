@@ -1,28 +1,28 @@
 ## F.31. pg\_stat\_statements — track statistics of SQL planning and execution [#](#PGSTATSTATEMENTS)
 
-  * *   [F.31.1. The `pg_stat_statements` View](pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
-  * [F.31.2. The `pg_stat_statements_info` View](pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO)
-  * [F.31.3. Functions](pgstatstatements.html#PGSTATSTATEMENTS-FUNCS)
-  * [F.31.4. Configuration Parameters](pgstatstatements.html#PGSTATSTATEMENTS-CONFIG-PARAMS)
-  * [F.31.5. Sample Output](pgstatstatements.html#PGSTATSTATEMENTS-SAMPLE-OUTPUT)
-  * [F.31.6. Authors](pgstatstatements.html#PGSTATSTATEMENTS-AUTHORS)
+  * *   [F.31.1. The `pg_stat_statements` View](pgstatstatements#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
+  * [F.31.2. The `pg_stat_statements_info` View](pgstatstatements#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO)
+  * [F.31.3. Functions](pgstatstatements#PGSTATSTATEMENTS-FUNCS)
+  * [F.31.4. Configuration Parameters](pgstatstatements#PGSTATSTATEMENTS-CONFIG-PARAMS)
+  * [F.31.5. Sample Output](pgstatstatements#PGSTATSTATEMENTS-SAMPLE-OUTPUT)
+  * [F.31.6. Authors](pgstatstatements#PGSTATSTATEMENTS-AUTHORS)
 
 The `pg_stat_statements` module provides a means for tracking planning and execution statistics of all SQL statements executed by a server.
 
-The module must be loaded by adding `pg_stat_statements` to [shared\_preload\_libraries](runtime-config-client.html#GUC-SHARED-PRELOAD-LIBRARIES) in `postgresql.conf`, because it requires additional shared memory. This means that a server restart is needed to add or remove the module. In addition, query identifier calculation must be enabled in order for the module to be active, which is done automatically if [compute\_query\_id](runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID) is set to `auto` or `on`, or any third-party module that calculates query identifiers is loaded.
+The module must be loaded by adding `pg_stat_statements` to [shared\_preload\_libraries](runtime-config-client#GUC-SHARED-PRELOAD-LIBRARIES) in `postgresql.conf`, because it requires additional shared memory. This means that a server restart is needed to add or remove the module. In addition, query identifier calculation must be enabled in order for the module to be active, which is done automatically if [compute\_query\_id](runtime-config-statistics#GUC-COMPUTE-QUERY-ID) is set to `auto` or `on`, or any third-party module that calculates query identifiers is loaded.
 
 When `pg_stat_statements` is active, it tracks statistics across all databases of the server. To access and manipulate these statistics, the module provides views `pg_stat_statements` and `pg_stat_statements_info`, and the utility functions `pg_stat_statements_reset` and `pg_stat_statements`. These are not available globally but can be enabled for a specific database with `CREATE EXTENSION pg_stat_statements`.
 
 ### F.31.1. The `pg_stat_statements` View [#](#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
 
-The statistics gathered by the module are made available via a view named `pg_stat_statements`. This view contains one row for each distinct combination of database ID, user ID, query ID and whether it's a top-level statement or not (up to the maximum number of distinct statements that the module can track). The columns of the view are shown in [Table F.22](pgstatstatements.html#PGSTATSTATEMENTS-COLUMNS "Table F.22. pg_stat_statements Columns").
+The statistics gathered by the module are made available via a view named `pg_stat_statements`. This view contains one row for each distinct combination of database ID, user ID, query ID and whether it's a top-level statement or not (up to the maximum number of distinct statements that the module can track). The columns of the view are shown in [Table F.22](pgstatstatements#PGSTATSTATEMENTS-COLUMNS "Table F.22. pg_stat_statements Columns").
 
 **Table F.22. `pg_stat_statements` Columns**
 
 | Column TypeDescription                                                                                                                                                                                                        |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `userid` `oid` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`oid`)OID of user who executed the statement                                                                                               |
-| `dbid` `oid` (references [`pg_database`](catalog-pg-database.html "53.15. pg_database").`oid`)OID of database in which the statement was executed                                                                             |
+| `userid` `oid` (references [`pg_authid`](catalog-pg-authid "53.8. pg_authid").`oid`)OID of user who executed the statement                                                                                               |
+| `dbid` `oid` (references [`pg_database`](catalog-pg-database "53.15. pg_database").`oid`)OID of database in which the statement was executed                                                                             |
 | `toplevel` `bool`True if the query was executed as a top-level statement (always true if `pg_stat_statements.track` is set to `top`)                                                                                          |
 | `queryid` `bigint`Hash code to identify identical normalized queries.                                                                                                                                                         |
 | `query` `text`Text of a representative statement                                                                                                                                                                              |
@@ -49,12 +49,12 @@ The statistics gathered by the module are made available via a view named `pg_st
 | `local_blks_written` `bigint`Total number of local blocks written by the statement                                                                                                                                            |
 | `temp_blks_read` `bigint`Total number of temp blocks read by the statement                                                                                                                                                    |
 | `temp_blks_written` `bigint`Total number of temp blocks written by the statement                                                                                                                                              |
-| `shared_blk_read_time` `double precision`Total time the statement spent reading shared blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)        |
-| `shared_blk_write_time` `double precision`Total time the statement spent writing shared blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)       |
-| `local_blk_read_time` `double precision`Total time the statement spent reading local blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)          |
-| `local_blk_write_time` `double precision`Total time the statement spent writing local blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)         |
-| `temp_blk_read_time` `double precision`Total time the statement spent reading temporary file blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)  |
-| `temp_blk_write_time` `double precision`Total time the statement spent writing temporary file blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled, otherwise zero) |
+| `shared_blk_read_time` `double precision`Total time the statement spent reading shared blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)        |
+| `shared_blk_write_time` `double precision`Total time the statement spent writing shared blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)       |
+| `local_blk_read_time` `double precision`Total time the statement spent reading local blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)          |
+| `local_blk_write_time` `double precision`Total time the statement spent writing local blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)         |
+| `temp_blk_read_time` `double precision`Total time the statement spent reading temporary file blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)  |
+| `temp_blk_write_time` `double precision`Total time the statement spent writing temporary file blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero) |
 | `wal_records` `bigint`Total number of WAL records generated by the statement                                                                                                                                                  |
 | `wal_fpi` `bigint`Total number of WAL full page images generated by the statement                                                                                                                                             |
 | `wal_bytes` `numeric`Total amount of WAL generated by the statement in bytes                                                                                                                                                  |
@@ -77,11 +77,11 @@ Plannable queries (that is, `SELECT`, `INSERT`, `UPDATE`, `DELETE`, and `MERGE`)
 
 ### Note
 
-The following details about constant replacement and `queryid` only apply when [compute\_query\_id](runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID) is enabled. If you use an external module instead to compute `queryid`, you should refer to its documentation for details.
+The following details about constant replacement and `queryid` only apply when [compute\_query\_id](runtime-config-statistics#GUC-COMPUTE-QUERY-ID) is enabled. If you use an external module instead to compute `queryid`, you should refer to its documentation for details.
 
 When a constant's value has been ignored for purposes of matching the query to other queries, the constant is replaced by a parameter symbol, such as `$1`, in the `pg_stat_statements` display. The rest of the query text is that of the first query that had the particular `queryid` hash value associated with the `pg_stat_statements` entry.
 
-Queries on which normalization can be applied may be observed with constant values in `pg_stat_statements`, especially when there is a high rate of entry deallocations. To reduce the likelihood of this happening, consider increasing `pg_stat_statements.max`. The `pg_stat_statements_info` view, discussed below in [Section F.31.2](pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO "F.31.2. The pg_stat_statements_info View"), provides statistics about entry deallocations.
+Queries on which normalization can be applied may be observed with constant values in `pg_stat_statements`, especially when there is a high rate of entry deallocations. To reduce the likelihood of this happening, consider increasing `pg_stat_statements.max`. The `pg_stat_statements_info` view, discussed below in [Section F.31.2](pgstatstatements#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO "F.31.2. The pg_stat_statements_info View"), provides statistics about entry deallocations.
 
 In some cases, queries with visibly different texts might get merged into a single `pg_stat_statements` entry. Normally this will happen only for semantically equivalent queries, but there is a small chance of hash collisions causing unrelated queries to be merged into one entry. (This cannot happen for queries belonging to different users or databases, however.)
 
@@ -99,7 +99,7 @@ The representative query texts are kept in an external disk file, and do not con
 
 ### F.31.2. The `pg_stat_statements_info` View [#](#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO)
 
-The statistics of the `pg_stat_statements` module itself are tracked and made available via a view named `pg_stat_statements_info`. This view contains only a single row. The columns of the view are shown in [Table F.23](pgstatstatements.html#PGSTATSTATEMENTSINFO-COLUMNS "Table F.23. pg_stat_statements_info Columns").
+The statistics of the `pg_stat_statements` module itself are tracked and made available via a view named `pg_stat_statements_info`. This view contains only a single row. The columns of the view are shown in [Table F.23](pgstatstatements#PGSTATSTATEMENTSINFO-COLUMNS "Table F.23. pg_stat_statements_info Columns").
 
 **Table F.23. `pg_stat_statements_info` Columns**
 

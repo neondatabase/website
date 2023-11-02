@@ -2,7 +2,7 @@
 
 Ordinarily, if a date/time string is syntactically valid but contains out-of-range field values, an error will be thrown. For example, input specifying the 31st of February will be rejected.
 
-During a daylight-savings-time transition, it is possible for a seemingly valid timestamp string to represent a nonexistent or ambiguous timestamp. Such cases are not rejected; the ambiguity is resolved by determining which UTC offset to apply. For example, supposing that the [TimeZone](runtime-config-client.html#GUC-TIMEZONE) parameter is set to `America/New_York`, consider
+During a daylight-savings-time transition, it is possible for a seemingly valid timestamp string to represent a nonexistent or ambiguous timestamp. Such cases are not rejected; the ambiguity is resolved by determining which UTC offset to apply. For example, supposing that the [TimeZone](runtime-config-client#GUC-TIMEZONE) parameter is set to `America/New_York`, consider
 
 ```
 

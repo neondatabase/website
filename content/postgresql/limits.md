@@ -1,6 +1,6 @@
 ## Appendix K. PostgreSQL Limits
 
-[Table K.1](limits.html#LIMITS-TABLE "Table K.1. PostgreSQL Limitations") describes various hard limits of PostgreSQL. However, practical limits, such as performance limitations or available disk space may apply before absolute hard limits are reached.
+[Table K.1](limits#LIMITS-TABLE "Table K.1. PostgreSQL Limitations") describes various hard limits of PostgreSQL. However, practical limits, such as performance limitations or available disk space may apply before absolute hard limits are reached.
 
 **Table K.1. PostgreSQL Limitations**
 

@@ -1,9 +1,9 @@
 ## 20.3. Connections and Authentication [#](#RUNTIME-CONFIG-CONNECTION)
 
-  * *   [20.3.1. Connection Settings](runtime-config-connection.html#RUNTIME-CONFIG-CONNECTION-SETTINGS)
-  * [20.3.2. TCP Settings](runtime-config-connection.html#RUNTIME-CONFIG-TCP-SETTINGS)
-  * [20.3.3. Authentication](runtime-config-connection.html#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
-  * [20.3.4. SSL](runtime-config-connection.html#RUNTIME-CONFIG-CONNECTION-SSL)
+  * *   [20.3.1. Connection Settings](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-SETTINGS)
+  * [20.3.2. TCP Settings](runtime-config-connection#RUNTIME-CONFIG-TCP-SETTINGS)
+  * [20.3.3. Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
+  * [20.3.4. SSL](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-SSL)
 
 ### 20.3.1. Connection Settings [#](#RUNTIME-CONFIG-CONNECTION-SETTINGS)
 
@@ -11,7 +11,7 @@
 
     Specifies the TCP/IP address(es) on which the server is to listen for connections from client applications. The value takes the form of a comma-separated list of host names and/or numeric IP addresses. The special entry `*` corresponds to all available IP interfaces. The entry `0.0.0.0` allows listening for all IPv4 addresses and `::` allows listening for all IPv6 addresses. If the list is empty, the server does not listen on any IP interface at all, in which case only Unix-domain sockets can be used to connect to it. If the list is not empty, the server will start if it can listen on at least one TCP/IP address. A warning will be emitted for any TCP/IP address which cannot be opened. The default value is localhost, which allows only local TCP/IP “loopback” connections to be made.
 
-    While client authentication ([Chapter 21](client-authentication.html "Chapter 21. Client Authentication")) allows fine-grained control over who can access the server, `listen_addresses` controls which interfaces accept connection attempts, which can help prevent repeated malicious connection requests on insecure network interfaces. This parameter can only be set at server start.
+    While client authentication ([Chapter 21](client-authentication "Chapter 21. Client Authentication")) allows fine-grained control over who can access the server, `listen_addresses` controls which interfaces accept connection attempts, which can help prevent repeated malicious connection requests on insecure network interfaces. This parameter can only be set at server start.
 
 * `port` (`integer`) [#](#GUC-PORT)
 
@@ -25,13 +25,13 @@
 
 * `reserved_connections` (`integer`) [#](#GUC-RESERVED-CONNECTIONS)
 
-    Determines the number of connection “slots” that are reserved for connections by roles with privileges of the [`pg_use_reserved_connections`](predefined-roles.html#PREDEFINED-ROLES-TABLE "Table 22.1. Predefined Roles") role. Whenever the number of free connection slots is greater than [superuser\_reserved\_connections](runtime-config-connection.html#GUC-SUPERUSER-RESERVED-CONNECTIONS) but less than or equal to the sum of `superuser_reserved_connections` and `reserved_connections`, new connections will be accepted only for superusers and roles with privileges of `pg_use_reserved_connections`. If `superuser_reserved_connections` or fewer connection slots are available, new connections will be accepted only for superusers.
+    Determines the number of connection “slots” that are reserved for connections by roles with privileges of the [`pg_use_reserved_connections`](predefined-roles#PREDEFINED-ROLES-TABLE "Table 22.1. Predefined Roles") role. Whenever the number of free connection slots is greater than [superuser\_reserved\_connections](runtime-config-connection#GUC-SUPERUSER-RESERVED-CONNECTIONS) but less than or equal to the sum of `superuser_reserved_connections` and `reserved_connections`, new connections will be accepted only for superusers and roles with privileges of `pg_use_reserved_connections`. If `superuser_reserved_connections` or fewer connection slots are available, new connections will be accepted only for superusers.
 
     The default value is zero connections. The value must be less than `max_connections` minus `superuser_reserved_connections`. This parameter can only be set at server start.
 
 * `superuser_reserved_connections` (`integer`) [#](#GUC-SUPERUSER-RESERVED-CONNECTIONS)
 
-    Determines the number of connection “slots” that are reserved for connections by PostgreSQL superusers. At most [max\_connections](runtime-config-connection.html#GUC-MAX-CONNECTIONS) connections can ever be active simultaneously. Whenever the number of active concurrent connections is at least `max_connections` minus `superuser_reserved_connections`, new connections will be accepted only for superusers. The connection slots reserved by this parameter are intended as final reserve for emergency use after the slots reserved by [reserved\_connections](runtime-config-connection.html#GUC-RESERVED-CONNECTIONS) have been exhausted.
+    Determines the number of connection “slots” that are reserved for connections by PostgreSQL superusers. At most [max\_connections](runtime-config-connection#GUC-MAX-CONNECTIONS) connections can ever be active simultaneously. Whenever the number of active concurrent connections is at least `max_connections` minus `superuser_reserved_connections`, new connections will be accepted only for superusers. The connection slots reserved by this parameter are intended as final reserve for emergency use after the slots reserved by [reserved\_connections](runtime-config-connection#GUC-RESERVED-CONNECTIONS) have been exhausted.
 
     The default value is three connections. The value must be less than `max_connections` minus `reserved_connections`. This parameter can only be set at server start.
 
@@ -57,7 +57,7 @@
 
     The default permissions are `0777`, meaning anyone can connect. Reasonable alternatives are `0770` (only user and group, see also `unix_socket_group`) and `0700` (only user). (Note that for a Unix-domain socket, only write permission matters, so there is no point in setting or revoking read or execute permissions.)
 
-    This access control mechanism is independent of the one described in [Chapter 21](client-authentication.html "Chapter 21. Client Authentication").
+    This access control mechanism is independent of the one described in [Chapter 21](client-authentication "Chapter 21. Client Authentication").
 
     This parameter can only be set at server start.
 
@@ -99,7 +99,7 @@
 
     If the value is specified without units, it is taken as milliseconds. The default value is `0`, which disables connection checks. Without connection checks, the server will detect the loss of the connection only at the next interaction with the socket, when it waits for, receives or sends data.
 
-    For the kernel itself to detect lost TCP connections reliably and within a known timeframe in all scenarios including network failure, it may also be necessary to adjust the TCP keepalive settings of the operating system, or the [tcp\_keepalives\_idle](runtime-config-connection.html#GUC-TCP-KEEPALIVES-IDLE), [tcp\_keepalives\_interval](runtime-config-connection.html#GUC-TCP-KEEPALIVES-INTERVAL) and [tcp\_keepalives\_count](runtime-config-connection.html#GUC-TCP-KEEPALIVES-COUNT) settings of PostgreSQL.
+    For the kernel itself to detect lost TCP connections reliably and within a known timeframe in all scenarios including network failure, it may also be necessary to adjust the TCP keepalive settings of the operating system, or the [tcp\_keepalives\_idle](runtime-config-connection#GUC-TCP-KEEPALIVES-IDLE), [tcp\_keepalives\_interval](runtime-config-connection#GUC-TCP-KEEPALIVES-INTERVAL) and [tcp\_keepalives\_count](runtime-config-connection#GUC-TCP-KEEPALIVES-COUNT) settings of PostgreSQL.
 
 ### 20.3.3. Authentication [#](#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
 
@@ -109,9 +109,9 @@
 
 * `password_encryption` (`enum`) [#](#GUC-PASSWORD-ENCRYPTION)
 
-    When a password is specified in [CREATE ROLE](sql-createrole.html "CREATE ROLE") or [ALTER ROLE](sql-alterrole.html "ALTER ROLE"), this parameter determines the algorithm to use to encrypt the password. Possible values are `scram-sha-256`, which will encrypt the password with SCRAM-SHA-256, and `md5`, which stores the password as an MD5 hash. The default is `scram-sha-256`.
+    When a password is specified in [CREATE ROLE](sql-createrole "CREATE ROLE") or [ALTER ROLE](sql-alterrole "ALTER ROLE"), this parameter determines the algorithm to use to encrypt the password. Possible values are `scram-sha-256`, which will encrypt the password with SCRAM-SHA-256, and `md5`, which stores the password as an MD5 hash. The default is `scram-sha-256`.
 
-    Note that older clients might lack support for the SCRAM authentication mechanism, and hence not work with passwords encrypted with SCRAM-SHA-256. See [Section 21.5](auth-password.html "21.5. Password Authentication") for more details.
+    Note that older clients might lack support for the SCRAM authentication mechanism, and hence not work with passwords encrypted with SCRAM-SHA-256. See [Section 21.5](auth-password "21.5. Password Authentication") for more details.
 
 * `scram_iterations` (`integer`) [#](#GUC-SCRAM-ITERATIONS)
 
@@ -119,7 +119,7 @@
 
 * `krb_server_keyfile` (`string`) [#](#GUC-KRB-SERVER-KEYFILE)
 
-    Sets the location of the server's Kerberos key file. The default is `FILE:/usr/local/pgsql/etc/krb5.keytab` (where the directory part is whatever was specified as `sysconfdir` at build time; use `pg_config --sysconfdir` to determine that). If this parameter is set to an empty string, it is ignored and a system-dependent default is used. This parameter can only be set in the `postgresql.conf` file or on the server command line. See [Section 21.6](gssapi-auth.html "21.6. GSSAPI Authentication") for more information.
+    Sets the location of the server's Kerberos key file. The default is `FILE:/usr/local/pgsql/etc/krb5.keytab` (where the directory part is whatever was specified as `sysconfdir` at build time; use `pg_config --sysconfdir` to determine that). If this parameter is set to an empty string, it is ignored and a system-dependent default is used. This parameter can only be set in the `postgresql.conf` file or on the server command line. See [Section 21.6](gssapi-auth "21.6. GSSAPI Authentication") for more information.
 
 * `krb_caseins_users` (`boolean`) [#](#GUC-KRB-CASEINS-USERS)
 
@@ -131,7 +131,7 @@
 
 ### 20.3.4. SSL [#](#RUNTIME-CONFIG-CONNECTION-SSL)
 
-See [Section 19.9](ssl-tcp.html "19.9. Secure TCP/IP Connections with SSL") for more information about setting up SSL. The configuration parameters for controlling transfer encryption using TLS protocols are named `ssl` for historic reasons, even though support for the SSL protocol has been deprecated. SSL is in this context used interchangeably with TLS.
+See [Section 19.9](ssl-tcp "19.9. Secure TCP/IP Connections with SSL") for more information about setting up SSL. The configuration parameters for controlling transfer encryption using TLS protocols are named `ssl` for historic reasons, even though support for the SSL protocol has been deprecated. SSL is in this context used interchangeably with TLS.
 
 * `ssl` (`boolean`) [#](#GUC-SSL)
 
@@ -147,15 +147,15 @@ See [Section 19.9](ssl-tcp.html "19.9. Secure TCP/IP Connections with SSL") fo
 
 * `ssl_crl_file` (`string`) [#](#GUC-SSL-CRL-FILE)
 
-    Specifies the name of the file containing the SSL client certificate revocation list (CRL). Relative paths are relative to the data directory. This parameter can only be set in the `postgresql.conf` file or on the server command line. The default is empty, meaning no CRL file is loaded (unless [ssl\_crl\_dir](runtime-config-connection.html#GUC-SSL-CRL-DIR) is set).
+    Specifies the name of the file containing the SSL client certificate revocation list (CRL). Relative paths are relative to the data directory. This parameter can only be set in the `postgresql.conf` file or on the server command line. The default is empty, meaning no CRL file is loaded (unless [ssl\_crl\_dir](runtime-config-connection#GUC-SSL-CRL-DIR) is set).
 
 * `ssl_crl_dir` (`string`) [#](#GUC-SSL-CRL-DIR)
 
-    Specifies the name of the directory containing the SSL client certificate revocation list (CRL). Relative paths are relative to the data directory. This parameter can only be set in the `postgresql.conf` file or on the server command line. The default is empty, meaning no CRLs are used (unless [ssl\_crl\_file](runtime-config-connection.html#GUC-SSL-CRL-FILE) is set).
+    Specifies the name of the directory containing the SSL client certificate revocation list (CRL). Relative paths are relative to the data directory. This parameter can only be set in the `postgresql.conf` file or on the server command line. The default is empty, meaning no CRLs are used (unless [ssl\_crl\_file](runtime-config-connection#GUC-SSL-CRL-FILE) is set).
 
     The directory needs to be prepared with the OpenSSL command `openssl rehash` or `c_rehash`. See its documentation for details.
 
-    When using this setting, CRLs in the specified directory are loaded on-demand at connection time. New CRLs can be added to the directory and will be used immediately. This is unlike [ssl\_crl\_file](runtime-config-connection.html#GUC-SSL-CRL-FILE), which causes the CRL in the file to be loaded at server start time or when the configuration is reloaded. Both settings can be used together.
+    When using this setting, CRLs in the specified directory are loaded on-demand at connection time. New CRLs can be added to the directory and will be used immediately. This is unlike [ssl\_crl\_file](runtime-config-connection#GUC-SSL-CRL-FILE), which causes the CRL in the file to be loaded at server start time or when the configuration is reloaded. Both settings can be used together.
 
 * `ssl_key_file` (`string`) [#](#GUC-SSL-KEY-FILE)
 
@@ -209,7 +209,7 @@ See [Section 19.9](ssl-tcp.html "19.9. Secure TCP/IP Connections with SSL") fo
 
 * `ssl_max_protocol_version` (`enum`) [#](#GUC-SSL-MAX-PROTOCOL-VERSION)
 
-    Sets the maximum SSL/TLS protocol version to use. Valid values are as for [ssl\_min\_protocol\_version](runtime-config-connection.html#GUC-SSL-MIN-PROTOCOL-VERSION), with addition of an empty string, which allows any protocol version. The default is to allow any version. Setting the maximum protocol version is mainly useful for testing or if some component has issues working with a newer protocol.
+    Sets the maximum SSL/TLS protocol version to use. Valid values are as for [ssl\_min\_protocol\_version](runtime-config-connection#GUC-SSL-MIN-PROTOCOL-VERSION), with addition of an empty string, which allows any protocol version. The default is to allow any version. Setting the maximum protocol version is mainly useful for testing or if some component has issues working with a newer protocol.
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line.
 

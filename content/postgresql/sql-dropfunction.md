@@ -38,7 +38,7 @@ DROP FUNCTION [ IF EXISTS ] name [ ( [ [ argmode ] [ argname ] argtype [, ...] ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the function (such as operators or triggers), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the function (such as operators or triggers), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -86,4 +86,4 @@ This command conforms to the SQL standard, with these PostgreSQL extensions:
 
 ## See Also
 
-[CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [ALTER FUNCTION](sql-alterfunction.html "ALTER FUNCTION"), [DROP PROCEDURE](sql-dropprocedure.html "DROP PROCEDURE"), [DROP ROUTINE](sql-droproutine.html "DROP ROUTINE")
+[CREATE FUNCTION](sql-createfunction "CREATE FUNCTION"), [ALTER FUNCTION](sql-alterfunction "ALTER FUNCTION"), [DROP PROCEDURE](sql-dropprocedure "DROP PROCEDURE"), [DROP ROUTINE](sql-droproutine "DROP ROUTINE")

@@ -32,7 +32,7 @@ This command has two forms: The first form applies to the descriptor “header�
 
 * *`descriptor_item`* [#](#ECPG-SQL-SET-DESCRIPTOR-DESCRIPTOR-ITEM)
 
-    A token identifying which item of information to set in the descriptor. See [Section 36.7.1](ecpg-descriptors.html#ECPG-NAMED-DESCRIPTORS "36.7.1. Named SQL Descriptor Areas") for a list of supported items.
+    A token identifying which item of information to set in the descriptor. See [Section 36.7.1](ecpg-descriptors#ECPG-NAMED-DESCRIPTORS "36.7.1. Named SQL Descriptor Areas") for a list of supported items.
 
 * *`value`* [#](#ECPG-SQL-SET-DESCRIPTOR-VALUE)
 
@@ -55,4 +55,4 @@ EXEC SQL SET DESCRIPTOR indesc VALUE 2 INDICATOR = :val2null, DATA = :val2;
 
 ## See Also
 
-[ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor.html "ALLOCATE DESCRIPTOR"), [GET DESCRIPTOR](ecpg-sql-get-descriptor.html "GET DESCRIPTOR")
+[ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor "ALLOCATE DESCRIPTOR"), [GET DESCRIPTOR](ecpg-sql-get-descriptor "GET DESCRIPTOR")

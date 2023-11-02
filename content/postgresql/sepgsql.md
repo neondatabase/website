@@ -1,20 +1,20 @@
 ## F.39. sepgsql — SELinux-, label-based mandatory access control (MAC) security module [#](#SEPGSQL)
 
-  * *   [F.39.1. Overview](sepgsql.html#SEPGSQL-OVERVIEW)
-  * [F.39.2. Installation](sepgsql.html#SEPGSQL-INSTALLATION)
-  * [F.39.3. Regression Tests](sepgsql.html#SEPGSQL-REGRESSION)
-  * [F.39.4. GUC Parameters](sepgsql.html#SEPGSQL-PARAMETERS)
-  * [F.39.5. Features](sepgsql.html#SEPGSQL-FEATURES)
-  * [F.39.6. Sepgsql Functions](sepgsql.html#SEPGSQL-FUNCTIONS)
-  * [F.39.7. Limitations](sepgsql.html#SEPGSQL-LIMITATIONS)
-  * [F.39.8. External Resources](sepgsql.html#SEPGSQL-RESOURCES)
-  * [F.39.9. Author](sepgsql.html#SEPGSQL-AUTHOR)
+  * *   [F.39.1. Overview](sepgsql#SEPGSQL-OVERVIEW)
+  * [F.39.2. Installation](sepgsql#SEPGSQL-INSTALLATION)
+  * [F.39.3. Regression Tests](sepgsql#SEPGSQL-REGRESSION)
+  * [F.39.4. GUC Parameters](sepgsql#SEPGSQL-PARAMETERS)
+  * [F.39.5. Features](sepgsql#SEPGSQL-FEATURES)
+  * [F.39.6. Sepgsql Functions](sepgsql#SEPGSQL-FUNCTIONS)
+  * [F.39.7. Limitations](sepgsql#SEPGSQL-LIMITATIONS)
+  * [F.39.8. External Resources](sepgsql#SEPGSQL-RESOURCES)
+  * [F.39.9. Author](sepgsql#SEPGSQL-AUTHOR)
 
 `sepgsql` is a loadable module that supports label-based mandatory access control (MAC) based on SELinux security policy.
 
 ### Warning
 
-The current implementation has significant limitations, and does not enforce mandatory access control for all actions. See [Section F.39.7](sepgsql.html#SEPGSQL-LIMITATIONS "F.39.7. Limitations").
+The current implementation has significant limitations, and does not enforce mandatory access control for all actions. See [Section F.39.7](sepgsql#SEPGSQL-LIMITATIONS "F.39.7. Limitations").
 
 ### F.39.1. Overview [#](#SEPGSQL-OVERVIEW)
 
@@ -22,7 +22,7 @@ This module integrates with SELinux to provide an additional layer of security c
 
 SELinux access control decisions are made using security labels, which are represented by strings such as `system_u:object_r:sepgsql_table_t:s0`. Each access control decision involves two labels: the label of the subject attempting to perform the action, and the label of the object on which the operation is to be performed. Since these labels can be applied to any sort of object, access control decisions for objects stored within the database can be (and, with this module, are) subjected to the same general criteria used for objects of any other type, such as files. This design is intended to allow a centralized security policy to protect information assets independent of the particulars of how those assets are stored.
 
-The [`SECURITY LABEL`](sql-security-label.html "SECURITY LABEL") statement allows assignment of a security label to a database object.
+The [`SECURITY LABEL`](sql-security-label "SECURITY LABEL") statement allows assignment of a security label to a database object.
 
 ### F.39.2. Installation [#](#SEPGSQL-INSTALLATION)
 
@@ -45,7 +45,7 @@ If SELinux is disabled or not installed, you must set that product up first befo
 
 To build this module, include the option `--with-selinux` in your PostgreSQL `configure` command. Be sure that the `libselinux-devel` RPM is installed at build time.
 
-To use this module, you must include `sepgsql` in the [shared\_preload\_libraries](runtime-config-client.html#GUC-SHARED-PRELOAD-LIBRARIES) parameter in `postgresql.conf`. The module will not function correctly if loaded in any other manner. Once the module is loaded, you should execute `sepgsql.sql` in each database. This will install functions needed for security label management, and assign initial security labels.
+To use this module, you must include `sepgsql` in the [shared\_preload\_libraries](runtime-config-client#GUC-SHARED-PRELOAD-LIBRARIES) parameter in `postgresql.conf`. The module will not function correctly if loaded in any other manner. Once the module is loaded, you should execute `sepgsql.sql` in each database. This will install functions needed for security label management, and assign initial security labels.
 
 Here is an example showing how to initialize a fresh database cluster with `sepgsql` functions and security labels installed. Adjust the paths shown as appropriate for your installation:
 
@@ -84,7 +84,7 @@ If the installation process completes without error, you can now start the serve
 
 Due to the nature of SELinux, running the regression tests for `sepgsql` requires several extra configuration steps, some of which must be done as root. The regression tests will not be run by an ordinary `make check` or `make installcheck` command; you must set up the configuration and then invoke the test script manually. The tests must be run in the `contrib/sepgsql` directory of a configured PostgreSQL build tree. Although they require a build tree, the tests are designed to be executed against an installed server, that is they are comparable to `make installcheck` not `make check`.
 
-First, set up `sepgsql` in a working database according to the instructions in [Section F.39.2](sepgsql.html#SEPGSQL-INSTALLATION "F.39.2. Installation"). Note that the current operating system user must be able to connect to the database as superuser without password authentication.
+First, set up `sepgsql` in a working database according to the instructions in [Section F.39.2](sepgsql#SEPGSQL-INSTALLATION "F.39.2. Installation"). Note that the current operating system user must be able to connect to the database as superuser without password authentication.
 
 Second, build and install the policy package for the regression test. The `sepgsql-regtest` policy is a special purpose policy package which provides a set of rules to be allowed during the regression tests. It should be built from the policy source file `sepgsql-regtest.te`, which is done using `make` with a Makefile supplied by SELinux. You will need to locate the appropriate Makefile on your system; the path shown below is only an example. (This Makefile is usually supplied by the `selinux-policy-devel` or `selinux-policy` RPM.) Once built, install this policy package using the `semodule` command, which loads supplied policy packages into the kernel. If the package is correctly installed, `semodule -l` should list `sepgsql-regtest` as an available policy package:
 
@@ -114,7 +114,7 @@ $ id -Z
 unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
 ```
 
-See [Section F.39.8](sepgsql.html#SEPGSQL-RESOURCES "F.39.8. External Resources") for details on adjusting your working domain, if necessary.
+See [Section F.39.8](sepgsql#SEPGSQL-RESOURCES "F.39.8. External Resources") for details on adjusting your working domain, if necessary.
 
 Finally, run the regression test script:
 
@@ -198,7 +198,7 @@ SELinux defines several permissions to control common operations for each object
 
 Creating a new database object requires `create` permission. SELinux will grant or deny this permission based on the client's security label and the proposed security label for the new object. In some cases, additional privileges are required:
 
-* [`CREATE DATABASE`](sql-createdatabase.html "CREATE DATABASE") additionally requires `getattr` permission for the source or template database.
+* [`CREATE DATABASE`](sql-createdatabase "CREATE DATABASE") additionally requires `getattr` permission for the source or template database.
 * Creating a schema object additionally requires `add_name` permission on the parent schema.
 * Creating a table additionally requires permission to create each individual table column, just as if each table column were a separate top-level object.
 * Creating a function marked as `LEAKPROOF` additionally requires `install` permission. (This permission is also checked when `LEAKPROOF` is set for an existing function.)
@@ -209,7 +209,7 @@ When `ALTER` command is executed, `setattr` will be checked on the object being 
 
 * Moving an object to a new schema additionally requires `remove_name` permission on the old schema and `add_name` permission on the new one.
 * Setting the `LEAKPROOF` attribute on a function requires `install` permission.
-* Using [`SECURITY LABEL`](sql-security-label.html "SECURITY LABEL") on an object additionally requires `relabelfrom` permission for the object in conjunction with its old security label and `relabelto` permission for the object in conjunction with its new security label. (In cases where multiple label providers are installed and the user tries to set a security label, but it is not managed by SELinux, only `setattr` should be checked here. This is currently not done due to implementation restrictions.)
+* Using [`SECURITY LABEL`](sql-security-label "SECURITY LABEL") on an object additionally requires `relabelfrom` permission for the object in conjunction with its old security label and `relabelto` permission for the object in conjunction with its new security label. (In cases where multiple label providers are installed and the user tries to set a security label, but it is not managed by SELinux, only `setattr` should be checked here. This is currently not done due to implementation restrictions.)
 
 #### F.39.5.4. Trusted Procedures [#](#SEPGSQL-FEATURES-TRUSTED-PROCEDURES)
 
@@ -282,11 +282,11 @@ A combination of dynamic domain transition and trusted procedure enables an inte
 
 #### F.39.5.6. Miscellaneous [#](#SEPGSQL-FEATURES-MISC)
 
-We reject the [`LOAD`](sql-load.html "LOAD") command across the board, because any module loaded could easily circumvent security policy enforcement.
+We reject the [`LOAD`](sql-load "LOAD") command across the board, because any module loaded could easily circumvent security policy enforcement.
 
 ### F.39.6. Sepgsql Functions [#](#SEPGSQL-FUNCTIONS)
 
-[Table F.31](sepgsql.html#SEPGSQL-FUNCTIONS-TABLE "Table F.31. Sepgsql Functions") shows the available functions.
+[Table F.31](sepgsql#SEPGSQL-FUNCTIONS-TABLE "Table F.31. Sepgsql Functions") shows the available functions.
 
 **Table F.31. Sepgsql Functions**
 

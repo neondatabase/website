@@ -8,11 +8,11 @@ The backup manifest JSON document contains the following keys.
 
 * `Files`
 
-    The associated value is always a list of objects, each describing one file that is present in the backup. No entries are present in this list for the WAL files that are needed in order to use the backup, or for the backup manifest itself. The structure of each object in the list is described in [Section 77.2](backup-manifest-files.html "77.2. Backup Manifest File Object").
+    The associated value is always a list of objects, each describing one file that is present in the backup. No entries are present in this list for the WAL files that are needed in order to use the backup, or for the backup manifest itself. The structure of each object in the list is described in [Section 77.2](backup-manifest-files "77.2. Backup Manifest File Object").
 
 * `WAL-Ranges`
 
-    The associated value is always a list of objects, each describing a range of WAL records that must be readable from a particular timeline in order to make use of the backup. The structure of these objects is further described in [Section 77.3](backup-manifest-wal-ranges.html "77.3. Backup Manifest WAL Range Object").
+    The associated value is always a list of objects, each describing a range of WAL records that must be readable from a particular timeline in order to make use of the backup. The structure of these objects is further described in [Section 77.3](backup-manifest-wal-ranges "77.3. Backup Manifest WAL Range Object").
 
 * `Manifest-Checksum`
 

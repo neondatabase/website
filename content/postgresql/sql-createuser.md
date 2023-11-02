@@ -30,7 +30,7 @@ where option can be:
 
 ## Description
 
-`CREATE USER` is now an alias for [`CREATE ROLE`](sql-createrole.html "CREATE ROLE"). The only difference is that when the command is spelled `CREATE USER`, `LOGIN` is assumed by default, whereas `NOLOGIN` is assumed when the command is spelled `CREATE ROLE`.
+`CREATE USER` is now an alias for [`CREATE ROLE`](sql-createrole "CREATE ROLE"). The only difference is that when the command is spelled `CREATE USER`, `LOGIN` is assumed by default, whereas `NOLOGIN` is assumed when the command is spelled `CREATE ROLE`.
 
 ## Compatibility
 
@@ -38,4 +38,4 @@ The `CREATE USER` statement is a PostgreSQL extension. The SQL standard leaves t
 
 ## See Also
 
-[CREATE ROLE](sql-createrole.html "CREATE ROLE")
+[CREATE ROLE](sql-createrole "CREATE ROLE")

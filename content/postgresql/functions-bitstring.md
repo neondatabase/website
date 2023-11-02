@@ -1,6 +1,6 @@
 ## 9.6. Bit String Functions and Operators [#](#FUNCTIONS-BITSTRING)
 
-This section describes functions and operators for examining and manipulating bit strings, that is values of the types `bit` and `bit varying`. (While only type `bit` is mentioned in these tables, values of type `bit varying` can be used interchangeably.) Bit strings support the usual comparison operators shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators"), as well as the operators shown in [Table 9.14](functions-bitstring.html#FUNCTIONS-BIT-STRING-OP-TABLE "Table 9.14. Bit String Operators").
+This section describes functions and operators for examining and manipulating bit strings, that is values of the types `bit` and `bit varying`. (While only type `bit` is mentioned in these tables, values of type `bit varying` can be used interchangeably.) Bit strings support the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators"), as well as the operators shown in [Table 9.14](functions-bitstring#FUNCTIONS-BIT-STRING-OP-TABLE "Table 9.14. Bit String Operators").
 
 **Table 9.14. Bit String Operators**
 
@@ -16,7 +16,7 @@ This section describes functions and operators for examining and manipulating bi
 
 \
 
-Some of the functions available for binary strings are also available for bit strings, as shown in [Table 9.15](functions-bitstring.html#FUNCTIONS-BIT-STRING-TABLE "Table 9.15. Bit String Functions").
+Some of the functions available for binary strings are also available for bit strings, as shown in [Table 9.15](functions-bitstring#FUNCTIONS-BIT-STRING-TABLE "Table 9.15. Bit String Functions").
 
 **Table 9.15. Bit String Functions**
 

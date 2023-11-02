@@ -106,4 +106,4 @@ The `IF NOT EXISTS` option is a PostgreSQL extension.
 
 ## See Also
 
-[ALTER SCHEMA](sql-alterschema.html "ALTER SCHEMA"), [DROP SCHEMA](sql-dropschema.html "DROP SCHEMA")
+[ALTER SCHEMA](sql-alterschema "ALTER SCHEMA"), [DROP SCHEMA](sql-dropschema "DROP SCHEMA")

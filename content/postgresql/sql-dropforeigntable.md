@@ -25,7 +25,7 @@ DROP FOREIGN TABLE [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the foreign table (such as views), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the foreign table (such as views), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -46,4 +46,4 @@ This command conforms to ISO/IEC 9075-9 (SQL/MED), except that the standard only
 
 ## See Also
 
-[ALTER FOREIGN TABLE](sql-alterforeigntable.html "ALTER FOREIGN TABLE"), [CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE")
+[ALTER FOREIGN TABLE](sql-alterforeigntable "ALTER FOREIGN TABLE"), [CREATE FOREIGN TABLE](sql-createforeigntable "CREATE FOREIGN TABLE")

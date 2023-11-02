@@ -188,4 +188,4 @@ Rationale: This will improve consistency.
 
 ### Localization [#](#ERROR-STYLE-GUIDE-LOCALIZATION)
 
-Keep in mind that error message texts need to be translated into other languages. Follow the guidelines in [Section 57.2.2](nls-programmer.html#NLS-GUIDELINES "57.2.2. Message-Writing Guidelines") to avoid making life difficult for translators.
+Keep in mind that error message texts need to be translated into other languages. Follow the guidelines in [Section 57.2.2](nls-programmer#NLS-GUIDELINES "57.2.2. Message-Writing Guidelines") to avoid making life difficult for translators.

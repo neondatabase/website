@@ -11,7 +11,7 @@ DROP EXTENSION [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 ## Description
 
-`DROP EXTENSION` removes extensions from the database. Dropping an extension causes its member objects, and other explicitly dependent routines (see [ALTER ROUTINE](sql-alterroutine.html "ALTER ROUTINE"), the `DEPENDS ON EXTENSION extension_name`action), to be dropped as well.
+`DROP EXTENSION` removes extensions from the database. Dropping an extension causes its member objects, and other explicitly dependent routines (see [ALTER ROUTINE](sql-alterroutine "ALTER ROUTINE"), the `DEPENDS ON EXTENSION extension_name`action), to be dropped as well.
 
 You must own the extension to use `DROP EXTENSION`.
 
@@ -27,7 +27,7 @@ You must own the extension to use `DROP EXTENSION`.
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the extension, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the extension, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -50,4 +50,4 @@ This command will fail if any of `hstore`'s objects are in use in the database, 
 
 ## See Also
 
-[CREATE EXTENSION](sql-createextension.html "CREATE EXTENSION"), [ALTER EXTENSION](sql-alterextension.html "ALTER EXTENSION")
+[CREATE EXTENSION](sql-createextension "CREATE EXTENSION"), [ALTER EXTENSION](sql-alterextension "ALTER EXTENSION")

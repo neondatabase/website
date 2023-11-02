@@ -19,7 +19,7 @@ If a schema name is given then the operator family is created in the specified s
 
 The user who defines an operator family becomes its owner. Presently, the creating user must be a superuser. (This restriction is made because an erroneous operator family definition could confuse or even crash the server.)
 
-Refer to [Section 38.16](xindex.html "38.16. Interfacing Extensions to Indexes") for further information.
+Refer to [Section 38.16](xindex "38.16. Interfacing Extensions to Indexes") for further information.
 
 ## Parameters
 
@@ -37,4 +37,4 @@ Refer to [Section 38.16](xindex.html "38.16. Interfacing Extensions to Indexes
 
 ## See Also
 
-[ALTER OPERATOR FAMILY](sql-alteropfamily.html "ALTER OPERATOR FAMILY"), [DROP OPERATOR FAMILY](sql-dropopfamily.html "DROP OPERATOR FAMILY"), [CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS"), [ALTER OPERATOR CLASS](sql-alteropclass.html "ALTER OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass.html "DROP OPERATOR CLASS")
+[ALTER OPERATOR FAMILY](sql-alteropfamily "ALTER OPERATOR FAMILY"), [DROP OPERATOR FAMILY](sql-dropopfamily "DROP OPERATOR FAMILY"), [CREATE OPERATOR CLASS](sql-createopclass "CREATE OPERATOR CLASS"), [ALTER OPERATOR CLASS](sql-alteropclass "ALTER OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass "DROP OPERATOR CLASS")

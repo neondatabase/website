@@ -1,9 +1,9 @@
 ## F.22. lo — manage large objects [#](#LO)
 
-  * *   [F.22.1. Rationale](lo.html#LO-RATIONALE)
-  * [F.22.2. How to Use It](lo.html#LO-HOW-TO-USE)
-  * [F.22.3. Limitations](lo.html#LO-LIMITATIONS)
-  * [F.22.4. Author](lo.html#LO-AUTHOR)
+  * *   [F.22.1. Rationale](lo#LO-RATIONALE)
+  * [F.22.2. How to Use It](lo#LO-HOW-TO-USE)
+  * [F.22.3. Limitations](lo#LO-LIMITATIONS)
+  * [F.22.4. Author](lo#LO-AUTHOR)
 
 The `lo` module provides support for managing Large Objects (also called LOs or BLOBs). This includes a data type `lo` and a trigger `lo_manage`.
 
@@ -19,7 +19,7 @@ Now this is fine for PostgreSQL-specific applications, but standard code using J
 
 The `lo` module allows fixing this by attaching a trigger to tables that contain LO reference columns. The trigger essentially just does a `lo_unlink` whenever you delete or modify a value referencing a large object. When you use this trigger, you are assuming that there is only one database reference to any large object that is referenced in a trigger-controlled column!
 
-The module also provides a data type `lo`, which is really just a [**](glossary.html#GLOSSARY-DOMAIN)*[domain](glossary.html#GLOSSARY-DOMAIN "Domain")* over the `oid` type. This is useful for differentiating database columns that hold large object references from those that are OIDs of other things. You don't have to use the `lo` type to use the trigger, but it may be convenient to use it to keep track of which columns in your database represent large objects that you are managing with the trigger. It is also rumored that the ODBC driver gets confused if you don't use `lo` for BLOB columns.
+The module also provides a data type `lo`, which is really just a [**](glossary#GLOSSARY-DOMAIN)*[domain](glossary#GLOSSARY-DOMAIN "Domain")* over the `oid` type. This is useful for differentiating database columns that hold large object references from those that are OIDs of other things. You don't have to use the `lo` type to use the trigger, but it may be convenient to use it to keep track of which columns in your database represent large objects that you are managing with the trigger. It is also rumored that the ODBC driver gets confused if you don't use `lo` for BLOB columns.
 
 ### F.22.2. How to Use It [#](#LO-HOW-TO-USE)
 
@@ -41,7 +41,7 @@ For each column that will contain unique references to large objects, create a `
 
     `TRUNCATE` has the same hazard.
 
-    If you already have, or suspect you have, orphaned large objects, see the [vacuumlo](vacuumlo.html "vacuumlo") module to help you clean them up. It's a good idea to run vacuumlo occasionally as a back-stop to the `lo_manage` trigger.
+    If you already have, or suspect you have, orphaned large objects, see the [vacuumlo](vacuumlo "vacuumlo") module to help you clean them up. It's a good idea to run vacuumlo occasionally as a back-stop to the `lo_manage` trigger.
 
 * Some frontends may create their own tables, and will not create the associated trigger(s). Also, users may not remember (or know) to create the triggers.
 

@@ -1,8 +1,8 @@
 ## F.47. unaccent — a text search dictionary which removes diacritics [#](#UNACCENT)
 
-  * *   [F.47.1. Configuration](unaccent.html#UNACCENT-CONFIGURATION)
-  * [F.47.2. Usage](unaccent.html#UNACCENT-USAGE)
-  * [F.47.3. Functions](unaccent.html#UNACCENT-FUNCTIONS)
+  * *   [F.47.1. Configuration](unaccent#UNACCENT-CONFIGURATION)
+  * [F.47.2. Usage](unaccent#UNACCENT-USAGE)
+  * [F.47.3. Functions](unaccent#UNACCENT-FUNCTIONS)
 
 `unaccent` is a text search dictionary that removes accents (diacritic signs) from lexemes. It's a filtering dictionary, which means its output is always passed to the next dictionary (if any), unlike the normal behavior of dictionaries. This allows accent-insensitive processing for full text search.
 

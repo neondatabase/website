@@ -76,7 +76,7 @@ You must own the operator to use `ALTER OPERATOR`. To alter the owner, you must 
 
 ## Notes
 
-Refer to [Section 38.14](xoper.html "38.14. User-Defined Operators") and [Section 38.15](xoper-optimization.html "38.15. Operator Optimization Information") for further information.
+Refer to [Section 38.14](xoper "38.14. User-Defined Operators") and [Section 38.15](xoper-optimization "38.15. Operator Optimization Information") for further information.
 
 Since commutators come in pairs that are commutators of each other, `ALTER OPERATOR SET COMMUTATOR` will also set the commutator of the *`com_op`* to be the target operator. Likewise, `ALTER OPERATOR SET NEGATOR` will also set the negator of the *`neg_op`* to be the target operator. Therefore, you must own the commutator or negator operator as well as the target operator.
 
@@ -109,4 +109,4 @@ There is no `ALTER OPERATOR` statement in the SQL standard.
 
 ## See Also
 
-[CREATE OPERATOR](sql-createoperator.html "CREATE OPERATOR"), [DROP OPERATOR](sql-dropoperator.html "DROP OPERATOR")
+[CREATE OPERATOR](sql-createoperator "CREATE OPERATOR"), [DROP OPERATOR](sql-dropoperator "DROP OPERATOR")

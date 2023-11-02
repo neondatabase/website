@@ -21,7 +21,7 @@ where option can be one of:
 `REINDEX` rebuilds an index using the data stored in the index's table, replacing the old copy of the index. There are several scenarios in which to use `REINDEX`:
 
 * An index has become corrupted, and no longer contains valid data. Although in theory this should never happen, in practice indexes can become corrupted due to software bugs or hardware failures. `REINDEX` provides a recovery method.
-* An index has become “bloated”, that is it contains many empty or nearly-empty pages. This can occur with B-tree indexes in PostgreSQL under certain uncommon access patterns. `REINDEX` provides a way to reduce the space consumption of the index by writing a new version of the index without the dead pages. See [Section 25.2](routine-reindex.html "25.2. Routine Reindexing") for more information.
+* An index has become “bloated”, that is it contains many empty or nearly-empty pages. This can occur with B-tree indexes in PostgreSQL under certain uncommon access patterns. `REINDEX` provides a way to reduce the space consumption of the index by writing a new version of the index without the dead pages. See [Section 25.2](routine-reindex "25.2. Routine Reindexing") for more information.
 * You have altered a storage parameter (such as fillfactor) for an index, and wish to ensure that the change has taken full effect.
 * If an index build fails with the `CONCURRENTLY` option, this index is left as “invalid”. Such indexes are useless but it can be convenient to use `REINDEX` to rebuild them. Note that only `REINDEX INDEX` is able to perform a concurrent build on an invalid index.
 
@@ -53,7 +53,7 @@ where option can be one of:
 
 * `CONCURRENTLY`
 
-    When this option is used, PostgreSQL will rebuild the index without taking any locks that prevent concurrent inserts, updates, or deletes on the table; whereas a standard index rebuild locks out writes (but not reads) on the table until it's done. There are several caveats to be aware of when using this option — see [Rebuilding Indexes Concurrently](sql-reindex.html#SQL-REINDEX-CONCURRENTLY "Rebuilding Indexes Concurrently") below.
+    When this option is used, PostgreSQL will rebuild the index without taking any locks that prevent concurrent inserts, updates, or deletes on the table; whereas a standard index rebuild locks out writes (but not reads) on the table until it's done. There are several caveats to be aware of when using this option — see [Rebuilding Indexes Concurrently](sql-reindex#SQL-REINDEX-CONCURRENTLY "Rebuilding Indexes Concurrently") below.
 
     For temporary tables, `REINDEX` is always non-concurrent, as no other session can access them, and non-concurrent reindex is cheaper.
 
@@ -79,7 +79,7 @@ If you suspect corruption of an index on a user table, you can simply rebuild th
 
 Things are more difficult if you need to recover from corruption of an index on a system table. In this case it's important for the system to not have used any of the suspect indexes itself. (Indeed, in this sort of scenario you might find that server processes are crashing immediately at start-up, due to reliance on the corrupted indexes.) To recover safely, the server must be started with the `-P` option, which prevents it from using indexes for system catalog lookups.
 
-One way to do this is to shut down the server and start a single-user PostgreSQL server with the `-P` option included on its command line. Then, `REINDEX DATABASE`, `REINDEX SYSTEM`, `REINDEX TABLE`, or `REINDEX INDEX` can be issued, depending on how much you want to reconstruct. If in doubt, use `REINDEX SYSTEM` to select reconstruction of all system indexes in the database. Then quit the single-user server session and restart the regular server. See the [postgres](app-postgres.html "postgres") reference page for more information about how to interact with the single-user server interface.
+One way to do this is to shut down the server and start a single-user PostgreSQL server with the `-P` option included on its command line. Then, `REINDEX DATABASE`, `REINDEX SYSTEM`, `REINDEX TABLE`, or `REINDEX INDEX` can be issued, depending on how much you want to reconstruct. If in doubt, use `REINDEX SYSTEM` to select reconstruction of all system indexes in the database. Then quit the single-user server session and restart the regular server. See the [postgres](app-postgres "postgres") reference page for more information about how to interact with the single-user server interface.
 
 Alternatively, a regular server session can be started with `-P` included in its command line options. The method for doing this varies across clients, but in all libpq-based clients, it is possible to set the `PGOPTIONS` environment variable to `-P` before starting the client. Note that while this method does not require locking out other clients, it might still be wise to prevent other users from connecting to the damaged database until repairs have been completed.
 
@@ -132,7 +132,7 @@ Like any long-running transaction, `REINDEX` on a table can affect which tuples 
 
 Furthermore, indexes for exclusion constraints cannot be reindexed concurrently. If such an index is named directly in this command, an error is raised. If a table or database with exclusion constraint indexes is reindexed concurrently, those indexes will be skipped. (It is possible to reindex such indexes without the `CONCURRENTLY` option.)
 
-Each backend running `REINDEX` will report its progress in the `pg_stat_progress_create_index` view. See [Section 28.4.4](progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting") for details.
+Each backend running `REINDEX` will report its progress in the `pg_stat_progress_create_index` view. See [Section 28.4.4](progress-reporting#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting") for details.
 
 ## Examples
 
@@ -174,4 +174,4 @@ There is no `REINDEX` command in the SQL standard.
 
 ## See Also
 
-[CREATE INDEX](sql-createindex.html "CREATE INDEX"), [DROP INDEX](sql-dropindex.html "DROP INDEX"), [reindexdb](app-reindexdb.html "reindexdb"), [Section 28.4.4](progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting")
+[CREATE INDEX](sql-createindex "CREATE INDEX"), [DROP INDEX](sql-dropindex "DROP INDEX"), [reindexdb](app-reindexdb "reindexdb"), [Section 28.4.4](progress-reporting#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting")

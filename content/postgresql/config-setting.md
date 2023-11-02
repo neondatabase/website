@@ -1,10 +1,10 @@
 ## 20.1. Setting Parameters [#](#CONFIG-SETTING)
 
-  * *   [20.1.1. Parameter Names and Values](config-setting.html#CONFIG-SETTING-NAMES-VALUES)
-  * [20.1.2. Parameter Interaction via the Configuration File](config-setting.html#CONFIG-SETTING-CONFIGURATION-FILE)
-  * [20.1.3. Parameter Interaction via SQL](config-setting.html#CONFIG-SETTING-SQL)
-  * [20.1.4. Parameter Interaction via the Shell](config-setting.html#CONFIG-SETTING-SHELL)
-  * [20.1.5. Managing Configuration File Contents](config-setting.html#CONFIG-INCLUDES)
+  * *   [20.1.1. Parameter Names and Values](config-setting#CONFIG-SETTING-NAMES-VALUES)
+  * [20.1.2. Parameter Interaction via the Configuration File](config-setting#CONFIG-SETTING-CONFIGURATION-FILE)
+  * [20.1.3. Parameter Interaction via SQL](config-setting#CONFIG-SETTING-SQL)
+  * [20.1.4. Parameter Interaction via the Shell](config-setting#CONFIG-SETTING-SHELL)
+  * [20.1.5. Managing Configuration File Contents](config-setting#CONFIG-INCLUDES)
 
 ### 20.1.1. Parameter Names and Values [#](#CONFIG-SETTING-NAMES-VALUES)
 
@@ -44,27 +44,27 @@ Parameters set in this way provide default values for the cluster. The settings 
 
 The configuration file is reread whenever the main server process receives a SIGHUP signal; this signal is most easily sent by running `pg_ctl reload` from the command line or by calling the SQL function `pg_reload_conf()`. The main server process also propagates this signal to all currently running server processes, so that existing sessions also adopt the new values (this will happen after they complete any currently-executing client command). Alternatively, you can send the signal to a single server process directly. Some parameters can only be set at server start; any changes to their entries in the configuration file will be ignored until the server is restarted. Invalid parameter settings in the configuration file are likewise ignored (but logged) during SIGHUP processing.
 
-In addition to `postgresql.conf`, a PostgreSQL data directory contains a file `postgresql.auto.conf`, which has the same format as `postgresql.conf` but is intended to be edited automatically, not manually. This file holds settings provided through the [`ALTER SYSTEM`](sql-altersystem.html "ALTER SYSTEM") command. This file is read whenever `postgresql.conf` is, and its settings take effect in the same way. Settings in `postgresql.auto.conf` override those in `postgresql.conf`.
+In addition to `postgresql.conf`, a PostgreSQL data directory contains a file `postgresql.auto.conf`, which has the same format as `postgresql.conf` but is intended to be edited automatically, not manually. This file holds settings provided through the [`ALTER SYSTEM`](sql-altersystem "ALTER SYSTEM") command. This file is read whenever `postgresql.conf` is, and its settings take effect in the same way. Settings in `postgresql.auto.conf` override those in `postgresql.conf`.
 
 External tools may also modify `postgresql.auto.conf`. It is not recommended to do this while the server is running, since a concurrent `ALTER SYSTEM` command could overwrite such changes. Such tools might simply append new settings to the end, or they might choose to remove duplicate settings and/or comments (as `ALTER SYSTEM` will).
 
-The system view [`pg_file_settings`](view-pg-file-settings.html "54.7. pg_file_settings") can be helpful for pre-testing changes to the configuration files, or for diagnosing problems if a SIGHUP signal did not have the desired effects.
+The system view [`pg_file_settings`](view-pg-file-settings "54.7. pg_file_settings") can be helpful for pre-testing changes to the configuration files, or for diagnosing problems if a SIGHUP signal did not have the desired effects.
 
 ### 20.1.3. Parameter Interaction via SQL [#](#CONFIG-SETTING-SQL)
 
 PostgreSQL provides three SQL commands to establish configuration defaults. The already-mentioned `ALTER SYSTEM` command provides an SQL-accessible means of changing global defaults; it is functionally equivalent to editing `postgresql.conf`. In addition, there are two commands that allow setting of defaults on a per-database or per-role basis:
 
-* The [`ALTER DATABASE`](sql-alterdatabase.html "ALTER DATABASE") command allows global settings to be overridden on a per-database basis.
-* The [`ALTER ROLE`](sql-alterrole.html "ALTER ROLE") command allows both global and per-database settings to be overridden with user-specific values.
+* The [`ALTER DATABASE`](sql-alterdatabase "ALTER DATABASE") command allows global settings to be overridden on a per-database basis.
+* The [`ALTER ROLE`](sql-alterrole "ALTER ROLE") command allows both global and per-database settings to be overridden with user-specific values.
 
 Values set with `ALTER DATABASE` and `ALTER ROLE` are applied only when starting a fresh database session. They override values obtained from the configuration files or server command line, and constitute defaults for the rest of the session. Note that some settings cannot be changed after server start, and so cannot be set with these commands (or the ones listed below).
 
 Once a client is connected to the database, PostgreSQL provides two additional SQL commands (and equivalent functions) to interact with session-local configuration settings:
 
-* The [`SHOW`](sql-show.html "SHOW") command allows inspection of the current value of any parameter. The corresponding SQL function is `current_setting(setting_name text)` (see [Section 9.27.1](functions-admin.html#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions")).
-* The [`SET`](sql-set.html "SET") command allows modification of the current value of those parameters that can be set locally to a session; it has no effect on other sessions. Many parameters can be set this way by any user, but some can only be set by superusers and users who have been granted `SET` privilege on that parameter. The corresponding SQL function is `set_config(setting_name, new_value, is_local)` (see [Section 9.27.1](functions-admin.html#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions")).
+* The [`SHOW`](sql-show "SHOW") command allows inspection of the current value of any parameter. The corresponding SQL function is `current_setting(setting_name text)` (see [Section 9.27.1](functions-admin#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions")).
+* The [`SET`](sql-set "SET") command allows modification of the current value of those parameters that can be set locally to a session; it has no effect on other sessions. Many parameters can be set this way by any user, but some can only be set by superusers and users who have been granted `SET` privilege on that parameter. The corresponding SQL function is `set_config(setting_name, new_value, is_local)` (see [Section 9.27.1](functions-admin#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions")).
 
-In addition, the system view [`pg_settings`](view-pg-settings.html "54.24. pg_settings") can be used to view and change session-local values:
+In addition, the system view [`pg_settings`](view-pg-settings "54.24. pg_settings") can be used to view and change session-local values:
 
 * Querying this view is similar to using `SHOW ALL` but provides more detail. It is also more flexible, since it's possible to specify filter conditions or join against other relations.
 

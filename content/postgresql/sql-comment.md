@@ -70,7 +70,7 @@ A `SHARE UPDATE EXCLUSIVE` lock is acquired on the object to be commented.
 
 For most kinds of object, only the object's owner can set the comment. Roles don't have owners, so the rule for `COMMENT ON ROLE` is that you must be superuser to comment on a superuser role, or have the `CREATEROLE` privilege and have been granted `ADMIN OPTION` on the target role. Likewise, access methods don't have owners either; you must be superuser to comment on an access method. Of course, a superuser can comment on anything.
 
-Comments can be viewed using psql's `\d` family of commands. Other user interfaces to retrieve comments can be built atop the same built-in functions that psql uses, namely `obj_description`, `col_description`, and `shobj_description` (see [Table 9.78](functions-info.html#FUNCTIONS-INFO-COMMENT-TABLE "Table 9.78. Comment Information Functions")).
+Comments can be viewed using psql's `\d` family of commands. Other user interfaces to retrieve comments can be built atop the same built-in functions that psql uses, namely `obj_description`, `col_description`, and `shobj_description` (see [Table 9.78](functions-info#FUNCTIONS-INFO-COMMENT-TABLE "Table 9.78. Comment Information Functions")).
 
 ## Parameters
 

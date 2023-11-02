@@ -1,6 +1,6 @@
 ## 70.7. Examples [#](#GIN-EXAMPLES)
 
-The core PostgreSQL distribution includes the GIN operator classes previously shown in [Table 70.1](gin-builtin-opclasses.html#GIN-BUILTIN-OPCLASSES-TABLE "Table 70.1. Built-in GIN Operator Classes"). The following `contrib` modules also contain GIN operator classes:
+The core PostgreSQL distribution includes the GIN operator classes previously shown in [Table 70.1](gin-builtin-opclasses#GIN-BUILTIN-OPCLASSES-TABLE "Table 70.1. Built-in GIN Operator Classes"). The following `contrib` modules also contain GIN operator classes:
 
 * `btree_gin`
 

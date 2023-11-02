@@ -65,4 +65,4 @@ SELECT am.amname AS index_method,
 
 ### Tip
 
-[psql](app-psql.html "psql") has commands `\dAc`, `\dAf`, and `\dAo`, which provide slightly more sophisticated versions of these queries.
+[psql](app-psql "psql") has commands `\dAc`, `\dAf`, and `\dAo`, which provide slightly more sophisticated versions of these queries.

@@ -1,11 +1,11 @@
 ## F.38. seg — a datatype for line segments or floating point intervals [#](#SEG)
 
-* *   [F.38.1. Rationale](seg.html#SEG-RATIONALE)
-* [F.38.2. Syntax](seg.html#SEG-SYNTAX)
-* [F.38.3. Precision](seg.html#SEG-PRECISION)
-* [F.38.4. Usage](seg.html#SEG-USAGE)
-* [F.38.5. Notes](seg.html#SEG-NOTES)
-* [F.38.6. Credits](seg.html#SEG-CREDITS)
+* *   [F.38.1. Rationale](seg#SEG-RATIONALE)
+* [F.38.2. Syntax](seg#SEG-SYNTAX)
+* [F.38.3. Precision](seg#SEG-PRECISION)
+* [F.38.4. Usage](seg#SEG-USAGE)
+* [F.38.5. Notes](seg#SEG-NOTES)
+* [F.38.6. Credits](seg#SEG-CREDITS)
 
 This module implements a data type `seg` for representing line segments, or floating point intervals. `seg` can represent uncertainty in the interval endpoints, making it especially useful for representing laboratory measurements.
 
@@ -45,9 +45,9 @@ test=> select '6.25 .. 6.50'::seg as "pH";
 
 ### F.38.2. Syntax [#](#SEG-SYNTAX)
 
-The external representation of an interval is formed using one or two floating-point numbers joined by the range operator (`..` or `...`). Alternatively, it can be specified as a center point plus or minus a deviation. Optional certainty indicators (`<`, `>` or `~`) can be stored as well. (Certainty indicators are ignored by all the built-in operators, however.) [Table F.28](seg.html#SEG-REPR-TABLE "Table F.28. seg External Representations") gives an overview of allowed representations; [Table F.29](seg.html#SEG-INPUT-EXAMPLES "Table F.29. Examples of Valid seg Input") shows some examples.
+The external representation of an interval is formed using one or two floating-point numbers joined by the range operator (`..` or `...`). Alternatively, it can be specified as a center point plus or minus a deviation. Optional certainty indicators (`<`, `>` or `~`) can be stored as well. (Certainty indicators are ignored by all the built-in operators, however.) [Table F.28](seg#SEG-REPR-TABLE "Table F.28. seg External Representations") gives an overview of allowed representations; [Table F.29](seg#SEG-INPUT-EXAMPLES "Table F.29. Examples of Valid seg Input") shows some examples.
 
-In [Table F.28](seg.html#SEG-REPR-TABLE "Table F.28. seg External Representations"), *`x`*, *`y`*, and *`delta`* denote floating-point numbers. *`x`* and *`y`*, but not *`delta`*, can be preceded by a certainty indicator.
+In [Table F.28](seg#SEG-REPR-TABLE "Table F.28. seg External Representations"), *`x`*, *`y`*, and *`delta`* denote floating-point numbers. *`x`* and *`y`*, but not *`delta`*, can be preceded by a certainty indicator.
 
 **Table F.28. `seg` External Representations**
 
@@ -89,7 +89,7 @@ Numbers with 7 or fewer significant digits retain their original precision. That
 
 ### F.38.4. Usage [#](#SEG-USAGE)
 
-The `seg` module includes a GiST index operator class for `seg` values. The operators supported by the GiST operator class are shown in [Table F.30](seg.html#SEG-GIST-OPERATORS "Table F.30. Seg GiST Operators").
+The `seg` module includes a GiST index operator class for `seg` values. The operators supported by the GiST operator class are shown in [Table F.30](seg#SEG-GIST-OPERATORS "Table F.30. Seg GiST Operators").
 
 **Table F.30. Seg GiST Operators**
 
@@ -106,7 +106,7 @@ The `seg` module includes a GiST index operator class for `seg` values. The oper
 
 \
 
-In addition to the above operators, the usual comparison operators shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for type `seg`. These operators first compare (a) to (c), and if these are equal, compare (b) to (d). That results in reasonably good sorting in most cases, which is useful if you want to use ORDER BY with this type.
+In addition to the above operators, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for type `seg`. These operators first compare (a) to (c), and if these are equal, compare (b) to (d). That results in reasonably good sorting in most cases, which is useful if you want to use ORDER BY with this type.
 
 ### F.38.5. Notes [#](#SEG-NOTES)
 

@@ -2,7 +2,7 @@
 
 When using an external authentication system such as Ident or GSSAPI, the name of the operating system user that initiated the connection might not be the same as the database user (role) that is to be used. In this case, a user name map can be applied to map the operating system user name to a database user. To use user name mapping, specify `map`=*`map-name`* in the options field in `pg_hba.conf`. This option is supported for all authentication methods that receive external user names. Since different mappings might be needed for different connections, the name of the map to be used is specified in the *`map-name`* parameter in `pg_hba.conf` to indicate which map to use for each individual connection.
 
-User name maps are defined in the ident map file, which by default is named `pg_ident.conf` and is stored in the cluster's data directory. (It is possible to place the map file elsewhere, however; see the [ident\_file](runtime-config-file-locations.html#GUC-IDENT-FILE) configuration parameter.) The ident map file contains lines of the general forms:
+User name maps are defined in the ident map file, which by default is named `pg_ident.conf` and is stored in the cluster's data directory. (It is possible to place the map file elsewhere, however; see the [ident\_file](runtime-config-file-locations#GUC-IDENT-FILE) configuration parameter.) The ident map file contains lines of the general forms:
 
 ```
 
@@ -20,7 +20,7 @@ There is no restriction regarding how many database users a given operating syst
 
 If the *`database-username`* begins with a `+` character, then the operating system user can login as any user belonging to that role, similarly to how user names beginning with `+` are treated in `pg_hba.conf`. Thus, a `+` mark means “match any of the roles that are directly or indirectly members of this role”, while a name without a `+` mark matches only that specific role. Quoting a username starting with a `+` makes the `+` lose its special meaning.
 
-If the *`system-username`* field starts with a slash (`/`), the remainder of the field is treated as a regular expression. (See [Section 9.7.3.1](functions-matching.html#POSIX-SYNTAX-DETAILS "9.7.3.1. Regular Expression Details") for details of PostgreSQL's regular expression syntax.) The regular expression can include a single capture, or parenthesized subexpression, which can then be referenced in the *`database-username`* field as `\1` (backslash-one). This allows the mapping of multiple user names in a single line, which is particularly useful for simple syntax substitutions. For example, these entries
+If the *`system-username`* field starts with a slash (`/`), the remainder of the field is treated as a regular expression. (See [Section 9.7.3.1](functions-matching#POSIX-SYNTAX-DETAILS "9.7.3.1. Regular Expression Details") for details of PostgreSQL's regular expression syntax.) The regular expression can include a single capture, or parenthesized subexpression, which can then be referenced in the *`database-username`* field as `\1` (backslash-one). This allows the mapping of multiple user names in a single line, which is particularly useful for simple syntax substitutions. For example, these entries
 
 ```
 
@@ -30,7 +30,7 @@ mymap   /^(.*)@otherdomain\.com$   guest
 
 will remove the domain part for users with system user names that end with `@mydomain.com`, and allow any user whose system name ends with `@otherdomain.com` to log in as `guest`. Quoting a *`database-username`* containing `\1` *does not* make `\1` lose its special meaning.
 
-If the *`database-username`* field starts with a slash (`/`), the remainder of the field is treated as a regular expression (see [Section 9.7.3.1](functions-matching.html#POSIX-SYNTAX-DETAILS "9.7.3.1. Regular Expression Details") for details of PostgreSQL's regular expression syntax. It is not possible to use `\1` to use a capture from regular expression on *`system-username`* for a regular expression on *`database-username`*.
+If the *`database-username`* field starts with a slash (`/`), the remainder of the field is treated as a regular expression (see [Section 9.7.3.1](functions-matching#POSIX-SYNTAX-DETAILS "9.7.3.1. Regular Expression Details") for details of PostgreSQL's regular expression syntax. It is not possible to use `\1` to use a capture from regular expression on *`system-username`* for a regular expression on *`database-username`*.
 
 ### Tip
 
@@ -38,9 +38,9 @@ Keep in mind that by default, a regular expression can match just part of a stri
 
 The `pg_ident.conf` file is read on start-up and when the main server process receives a SIGHUP signal. If you edit the file on an active system, you will need to signal the postmaster (using `pg_ctl reload`, calling the SQL function `pg_reload_conf()`, or using `kill -HUP`) to make it re-read the file.
 
-The system view [`pg_ident_file_mappings`](view-pg-ident-file-mappings.html "54.10. pg_ident_file_mappings") can be helpful for pre-testing changes to the `pg_ident.conf` file, or for diagnosing problems if loading of the file did not have the desired effects. Rows in the view with non-null `error` fields indicate problems in the corresponding lines of the file.
+The system view [`pg_ident_file_mappings`](view-pg-ident-file-mappings "54.10. pg_ident_file_mappings") can be helpful for pre-testing changes to the `pg_ident.conf` file, or for diagnosing problems if loading of the file did not have the desired effects. Rows in the view with non-null `error` fields indicate problems in the corresponding lines of the file.
 
-A `pg_ident.conf` file that could be used in conjunction with the `pg_hba.conf` file in [Example 21.1](auth-pg-hba-conf.html#EXAMPLE-PG-HBA.CONF "Example 21.1. Example pg_hba.conf Entries") is shown in [Example 21.2](auth-username-maps.html#EXAMPLE-PG-IDENT.CONF "Example 21.2. An Example pg_ident.conf File"). In this example, anyone logged in to a machine on the 192.168 network that does not have the operating system user name `bryanh`, `ann`, or `robert` would not be granted access. Unix user `robert` would only be allowed access when he tries to connect as PostgreSQL user `bob`, not as `robert` or anyone else. `ann` would only be allowed to connect as `ann`. User `bryanh` would be allowed to connect as either `bryanh` or as `guest1`.
+A `pg_ident.conf` file that could be used in conjunction with the `pg_hba.conf` file in [Example 21.1](auth-pg-hba-conf#EXAMPLE-PG-HBA.CONF "Example 21.1. Example pg_hba.conf Entries") is shown in [Example 21.2](auth-username-maps#EXAMPLE-PG-IDENT.CONF "Example 21.2. An Example pg_ident.conf File"). In this example, anyone logged in to a machine on the 192.168 network that does not have the operating system user name `bryanh`, `ann`, or `robert` would not be granted access. Unix user `robert` would only be allowed access when he tries to connect as PostgreSQL user `bob`, not as `robert` or anyone else. `ann` would only be allowed to connect as `ann`. User `bryanh` would be allowed to connect as either `bryanh` or as `guest1`.
 
 **Example 21.2. An Example `pg_ident.conf` File**
 

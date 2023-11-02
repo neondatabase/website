@@ -49,7 +49,7 @@ Creating a server requires `USAGE` privilege on the foreign-data wrapper being u
 
 ## Notes
 
-When using the [dblink](dblink.html "F.12. dblink — connect to other PostgreSQL databases") module, a foreign server's name can be used as an argument of the [dblink\_connect](contrib-dblink-connect.html "dblink_connect") function to indicate the connection parameters. It is necessary to have the `USAGE` privilege on the foreign server to be able to use it in this way.
+When using the [dblink](dblink "F.12. dblink — connect to other PostgreSQL databases") module, a foreign server's name can be used as an argument of the [dblink\_connect](contrib-dblink-connect "dblink_connect") function to indicate the connection parameters. It is necessary to have the `USAGE` privilege on the foreign server to be able to use it in this way.
 
 If the foreign server supports sort pushdown, it is necessary for it to have the same sort ordering as the local server.
 
@@ -62,7 +62,7 @@ Create a server `myserver` that uses the foreign-data wrapper `postgres_fdw`:
 CREATE SERVER myserver FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host 'foo', dbname 'foodb', port '5432');
 ```
 
-See [postgres\_fdw](postgres-fdw.html "F.37. postgres_fdw — access data stored in external PostgreSQL servers") for more details.
+See [postgres\_fdw](postgres-fdw "F.37. postgres_fdw — access data stored in external PostgreSQL servers") for more details.
 
 ## Compatibility
 
@@ -70,4 +70,4 @@ See [postgres\_fdw](postgres-fdw.html "F.37. postgres_fdw — access data store
 
 ## See Also
 
-[ALTER SERVER](sql-alterserver.html "ALTER SERVER"), [DROP SERVER](sql-dropserver.html "DROP SERVER"), [CREATE FOREIGN DATA WRAPPER](sql-createforeigndatawrapper.html "CREATE FOREIGN DATA WRAPPER"), [CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE"), [CREATE USER MAPPING](sql-createusermapping.html "CREATE USER MAPPING")
+[ALTER SERVER](sql-alterserver "ALTER SERVER"), [DROP SERVER](sql-dropserver "DROP SERVER"), [CREATE FOREIGN DATA WRAPPER](sql-createforeigndatawrapper "CREATE FOREIGN DATA WRAPPER"), [CREATE FOREIGN TABLE](sql-createforeigntable "CREATE FOREIGN TABLE"), [CREATE USER MAPPING](sql-createusermapping "CREATE USER MAPPING")

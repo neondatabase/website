@@ -48,7 +48,7 @@ The following command-line options are available:
 
     When set to `fsync`, which is the default, `pg_checksums` will recursively open and synchronize all files in the data directory. The search for files will follow symbolic links for the WAL directory and each configured tablespace.
 
-    On Linux, `syncfs` may be used instead to ask the operating system to synchronize the whole file systems that contain the data directory, the WAL files, and each tablespace. See [Appendix O](syncfs.html "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
+    On Linux, `syncfs` may be used instead to ask the operating system to synchronize the whole file systems that contain the data directory, the WAL files, and each tablespace. See [Appendix O](syncfs "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
 
     This option has no effect when `--no-sync` is used.
 
@@ -78,6 +78,6 @@ The following command-line options are available:
 
 Enabling checksums in a large cluster can potentially take a long time. During this operation, the cluster or other programs that write to the data directory must not be started or else data loss may occur.
 
-When using a replication setup with tools which perform direct copies of relation file blocks (for example [pg\_rewind](app-pgrewind.html "pg_rewind")), enabling or disabling checksums can lead to page corruptions in the shape of incorrect checksums if the operation is not done consistently across all nodes. When enabling or disabling checksums in a replication setup, it is thus recommended to stop all the clusters before switching them all consistently. Destroying all standbys, performing the operation on the primary and finally recreating the standbys from scratch is also safe.
+When using a replication setup with tools which perform direct copies of relation file blocks (for example [pg\_rewind](app-pgrewind "pg_rewind")), enabling or disabling checksums can lead to page corruptions in the shape of incorrect checksums if the operation is not done consistently across all nodes. When enabling or disabling checksums in a replication setup, it is thus recommended to stop all the clusters before switching them all consistently. Destroying all standbys, performing the operation on the primary and finally recreating the standbys from scratch is also safe.
 
 If pg\_checksums is aborted or killed while enabling or disabling checksums, the cluster's data checksum configuration remains unchanged, and pg\_checksums can be re-run to perform the same operation.

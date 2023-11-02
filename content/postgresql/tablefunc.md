@@ -1,7 +1,7 @@
 ## F.42. tablefunc — functions that return tables (`crosstab` and others) [#](#TABLEFUNC)
 
-  * *   [F.42.1. Functions Provided](tablefunc.html#TABLEFUNC-FUNCTIONS-SECT)
-  * [F.42.2. Author](tablefunc.html#TABLEFUNC-AUTHOR)
+  * *   [F.42.1. Functions Provided](tablefunc#TABLEFUNC-FUNCTIONS-SECT)
+  * [F.42.2. Author](tablefunc#TABLEFUNC-AUTHOR)
 
 The `tablefunc` module includes various functions that return tables (that is, multiple rows). These functions are useful both in their own right and as examples of how to write C functions that return multiple rows.
 
@@ -9,7 +9,7 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 
 ### F.42.1. Functions Provided [#](#TABLEFUNC-FUNCTIONS-SECT)
 
-[Table F.32](tablefunc.html#TABLEFUNC-FUNCTIONS "Table F.32. tablefunc Functions") summarizes the functions provided by the `tablefunc` module.
+[Table F.32](tablefunc#TABLEFUNC-FUNCTIONS "Table F.32. tablefunc Functions") summarizes the functions provided by the `tablefunc` module.
 
 **Table F.32. `tablefunc` Functions**
 
@@ -386,7 +386,7 @@ connectby(text relname, text keyid_fld, text parent_keyid_fld
 
 The `connectby` function produces a display of hierarchical data that is stored in a table. The table must have a key field that uniquely identifies rows, and a parent-key field that references the parent (if any) of each row. `connectby` can display the sub-tree descending from any row.
 
-[Table F.33](tablefunc.html#TABLEFUNC-CONNECTBY-PARAMETERS "Table F.33. connectby Parameters") explains the parameters.
+[Table F.33](tablefunc#TABLEFUNC-CONNECTBY-PARAMETERS "Table F.33. connectby Parameters") explains the parameters.
 
 **Table F.33. `connectby` Parameters**
 

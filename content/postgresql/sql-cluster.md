@@ -19,7 +19,7 @@ where option can be one of:
 
 When a table is clustered, it is physically reordered based on the index information. Clustering is a one-time operation: when the table is subsequently updated, the changes are not clustered. That is, no attempt is made to store new or updated rows according to their index order. (If one wishes, one can periodically recluster by issuing the command again. Also, setting the table's `fillfactor` storage parameter to less than 100% can aid in preserving cluster ordering during updates, since updated rows are kept on the same page if enough space is available there.)
 
-When a table is clustered, PostgreSQL remembers which index it was clustered by. The form `CLUSTER table_name` reclusters the table using the same index as before. You can also use the `CLUSTER` or `SET WITHOUT CLUSTER` forms of [`ALTER TABLE`](sql-altertable.html "ALTER TABLE") to set the index to be used for future cluster operations, or to clear any previous setting.
+When a table is clustered, PostgreSQL remembers which index it was clustered by. The form `CLUSTER table_name` reclusters the table using the same index as before. You can also use the `CLUSTER` or `SET WITHOUT CLUSTER` forms of [`ALTER TABLE`](sql-altertable "ALTER TABLE") to set the index to be used for future cluster operations, or to clear any previous setting.
 
 `CLUSTER` without a *`table_name`* reclusters all the previously-clustered tables in the current database that the calling user owns, or all such tables if called by a superuser. This form of `CLUSTER` cannot be executed inside a transaction block.
 
@@ -51,15 +51,15 @@ In cases where you are accessing single rows randomly within a table, the actual
 
 When an index scan is used, a temporary copy of the table is created that contains the table data in the index order. Temporary copies of each index on the table are created as well. Therefore, you need free space on disk at least equal to the sum of the table size and the index sizes.
 
-When a sequential scan and sort is used, a temporary sort file is also created, so that the peak temporary space requirement is as much as double the table size, plus the index sizes. This method is often faster than the index scan method, but if the disk space requirement is intolerable, you can disable this choice by temporarily setting [enable\_sort](runtime-config-query.html#GUC-ENABLE-SORT) to `off`.
+When a sequential scan and sort is used, a temporary sort file is also created, so that the peak temporary space requirement is as much as double the table size, plus the index sizes. This method is often faster than the index scan method, but if the disk space requirement is intolerable, you can disable this choice by temporarily setting [enable\_sort](runtime-config-query#GUC-ENABLE-SORT) to `off`.
 
-It is advisable to set [maintenance\_work\_mem](runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) to a reasonably large value (but not more than the amount of RAM you can dedicate to the `CLUSTER` operation) before clustering.
+It is advisable to set [maintenance\_work\_mem](runtime-config-resource#GUC-MAINTENANCE-WORK-MEM) to a reasonably large value (but not more than the amount of RAM you can dedicate to the `CLUSTER` operation) before clustering.
 
-Because the planner records statistics about the ordering of tables, it is advisable to run [`ANALYZE`](sql-analyze.html "ANALYZE") on the newly clustered table. Otherwise, the planner might make poor choices of query plans.
+Because the planner records statistics about the ordering of tables, it is advisable to run [`ANALYZE`](sql-analyze "ANALYZE") on the newly clustered table. Otherwise, the planner might make poor choices of query plans.
 
 Because `CLUSTER` remembers which indexes are clustered, one can cluster the tables one wants clustered manually the first time, then set up a periodic maintenance script that executes `CLUSTER` without any parameters, so that the desired tables are periodically reclustered.
 
-Each backend running `CLUSTER` will report its progress in the `pg_stat_progress_cluster` view. See [Section 28.4.2](progress-reporting.html#CLUSTER-PROGRESS-REPORTING "28.4.2. CLUSTER Progress Reporting") for details.
+Each backend running `CLUSTER` will report its progress in the `pg_stat_progress_cluster` view. See [Section 28.4.2](progress-reporting#CLUSTER-PROGRESS-REPORTING "28.4.2. CLUSTER Progress Reporting") for details.
 
 Clustering a partitioned table clusters each of its partitions using the partition of the specified partitioned index. When clustering a partitioned table, the index may not be omitted. `CLUSTER` on a partitioned table cannot be executed inside a transaction block.
 
@@ -106,4 +106,4 @@ CLUSTER index_name ON table_name
 
 ## See Also
 
-[clusterdb](app-clusterdb.html "clusterdb"), [Section 28.4.2](progress-reporting.html#CLUSTER-PROGRESS-REPORTING "28.4.2. CLUSTER Progress Reporting")
+[clusterdb](app-clusterdb "clusterdb"), [Section 28.4.2](progress-reporting#CLUSTER-PROGRESS-REPORTING "28.4.2. CLUSTER Progress Reporting")

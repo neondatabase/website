@@ -21,7 +21,7 @@ where publication_object is one of:
 
 `CREATE PUBLICATION` adds a new publication into the current database. The publication name must be distinct from the name of any existing publication in the current database.
 
-A publication is essentially a group of tables whose data changes are intended to be replicated through logical replication. See [Section 31.1](logical-replication-publication.html "31.1. Publication") for details about how publications fit into the logical replication setup.
+A publication is essentially a group of tables whose data changes are intended to be replicated through logical replication. See [Section 31.1](logical-replication-publication "31.1. Publication") for details about how publications fit into the logical replication setup.
 
 ## Parameters
 
@@ -35,7 +35,7 @@ A publication is essentially a group of tables whose data changes are intended t
 
     If the optional `WHERE` clause is specified, it defines a *row filter* expression. Rows for which the *`expression`* evaluates to false or null will not be published. Note that parentheses are required around the expression. It has no effect on `TRUNCATE` commands.
 
-    When a column list is specified, only the named columns are replicated. If no column list is specified, all columns of the table are replicated through this publication, including any columns added later. It has no effect on `TRUNCATE` commands. See [Section 31.4](logical-replication-col-lists.html "31.4. Column Lists") for details about column lists.
+    When a column list is specified, only the named columns are replicated. If no column list is specified, all columns of the table are replicated through this publication, including any columns added later. It has no effect on `TRUNCATE` commands. See [Section 31.4](logical-replication-col-lists "31.4. Column Lists") for details about column lists.
 
     Only persistent base tables and partitioned tables can be part of a publication. Temporary tables, unlogged tables, foreign tables, materialized views, and regular views cannot be part of a publication.
 
@@ -65,7 +65,7 @@ A publication is essentially a group of tables whose data changes are intended t
 
         This parameter determines which DML operations will be published by the new publication to the subscribers. The value is comma-separated list of operations. The allowed operations are `insert`, `update`, `delete`, and `truncate`. The default is to publish all actions, and so the default value for this option is `'insert, update, delete, truncate'`.
 
-        This parameter only affects DML operations. In particular, the initial data synchronization (see [Section 31.7.1](logical-replication-architecture.html#LOGICAL-REPLICATION-SNAPSHOT "31.7.1. Initial Snapshot")) for logical replication does not take this parameter into account when copying existing table data.
+        This parameter only affects DML operations. In particular, the initial data synchronization (see [Section 31.7.1](logical-replication-architecture#LOGICAL-REPLICATION-SNAPSHOT "31.7.1. Initial Snapshot")) for logical replication does not take this parameter into account when copying existing table data.
 
   * `publish_via_partition_root` (`boolean`) [#](#SQL-CREATEPUBLICATION-WITH-PUBLISH-VIA-PARTITION-ROOT)
 
@@ -97,7 +97,7 @@ A row filter expression (i.e., the `WHERE` clause) must contain only columns tha
 
 The row filter on a table becomes redundant if `FOR TABLES IN SCHEMA` is specified and the table belongs to the referred schema.
 
-For published partitioned tables, the row filter for each partition is taken from the published partitioned table if the publication parameter `publish_via_partition_root` is true, or from the partition itself if it is false (the default). See [Section 31.3](logical-replication-row-filter.html "31.3. Row Filters") for details about row filters. Similarly, for published partitioned tables, the column list for each partition is taken from the published partitioned table if the publication parameter `publish_via_partition_root` is true, or from the partition itself if it is false.
+For published partitioned tables, the row filter for each partition is taken from the published partitioned table if the publication parameter `publish_via_partition_root` is true, or from the partition itself if it is false (the default). See [Section 31.3](logical-replication-row-filter "31.3. Row Filters") for details about row filters. Similarly, for published partitioned tables, the column list for each partition is taken from the published partitioned table if the publication parameter `publish_via_partition_root` is true, or from the partition itself if it is false.
 
 For an `INSERT ... ON CONFLICT` command, the publication will publish the operation that results from the command. Depending on the outcome, it may be published as either `INSERT` or `UPDATE`, or it may not be published at all.
 
@@ -169,4 +169,4 @@ CREATE PUBLICATION users_filtered FOR TABLE users (user_id, firstname);
 
 ## See Also
 
-[ALTER PUBLICATION](sql-alterpublication.html "ALTER PUBLICATION"), [DROP PUBLICATION](sql-droppublication.html "DROP PUBLICATION"), [CREATE SUBSCRIPTION](sql-createsubscription.html "CREATE SUBSCRIPTION"), [ALTER SUBSCRIPTION](sql-altersubscription.html "ALTER SUBSCRIPTION")
+[ALTER PUBLICATION](sql-alterpublication "ALTER PUBLICATION"), [DROP PUBLICATION](sql-droppublication "DROP PUBLICATION"), [CREATE SUBSCRIPTION](sql-createsubscription "CREATE SUBSCRIPTION"), [ALTER SUBSCRIPTION](sql-altersubscription "ALTER SUBSCRIPTION")

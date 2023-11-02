@@ -1,8 +1,8 @@
 ## 46.7. Explicit Subtransactions [#](#PLPYTHON-SUBTRANSACTION)
 
-* [46.7.1. Subtransaction Context Managers](plpython-subtransaction.html#PLPYTHON-SUBTRANSACTION-CONTEXT-MANAGERS)
+* [46.7.1. Subtransaction Context Managers](plpython-subtransaction#PLPYTHON-SUBTRANSACTION-CONTEXT-MANAGERS)
 
-Recovering from errors caused by database access as described in [Section 46.6.2](plpython-database.html#PLPYTHON-TRAPPING "46.6.2. Trapping Errors") can lead to an undesirable situation where some operations succeed before one of them fails, and after recovering from that error the data is left in an inconsistent state. PL/Python offers a solution to this problem in the form of explicit subtransactions.
+Recovering from errors caused by database access as described in [Section 46.6.2](plpython-database#PLPYTHON-TRAPPING "46.6.2. Trapping Errors") can lead to an undesirable situation where some operations succeed before one of them fails, and after recovering from that error the data is left in an inconsistent state. PL/Python offers a solution to this problem in the form of explicit subtransactions.
 
 ### 46.7.1. Subtransaction Context Managers [#](#PLPYTHON-SUBTRANSACTION-CONTEXT-MANAGERS)
 

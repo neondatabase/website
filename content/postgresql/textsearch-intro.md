@@ -1,8 +1,8 @@
 ## 12.1. Introduction [#](#TEXTSEARCH-INTRO)
 
-  * *   [12.1.1. What Is a Document?](textsearch-intro.html#TEXTSEARCH-DOCUMENT)
-  * [12.1.2. Basic Text Matching](textsearch-intro.html#TEXTSEARCH-MATCHING)
-  * [12.1.3. Configurations](textsearch-intro.html#TEXTSEARCH-INTRO-CONFIGURATIONS)
+  * *   [12.1.1. What Is a Document?](textsearch-intro#TEXTSEARCH-DOCUMENT)
+  * [12.1.2. Basic Text Matching](textsearch-intro#TEXTSEARCH-MATCHING)
+  * [12.1.3. Configurations](textsearch-intro#TEXTSEARCH-INTRO-CONFIGURATIONS)
 
 Full Text Searching (or just *text search*) provides the capability to identify natural-language *documents* that satisfy a *query*, and optionally to sort them by relevance to the query. The most common type of search is to find all documents containing given *query terms* and return them in order of their *similarity* to the query. Notions of `query` and `similarity` are very flexible and depend on the specific application. The simplest search considers `query` as a set of words and `similarity` as the frequency of query words in the document.
 
@@ -26,7 +26,7 @@ Dictionaries allow fine-grained control over how tokens are normalized. With app
 * Map different variations of a word to a canonical form using an Ispell dictionary.
 * Map different variations of a word to a canonical form using Snowball stemmer rules.
 
-A data type `tsvector` is provided for storing preprocessed documents, along with a type `tsquery` for representing processed queries ([Section 8.11](datatype-textsearch.html "8.11. Text Search Types")). There are many functions and operators available for these data types ([Section 9.13](functions-textsearch.html "9.13. Text Search Functions and Operators")), the most important of which is the match operator `@@`, which we introduce in [Section 12.1.2](textsearch-intro.html#TEXTSEARCH-MATCHING "12.1.2. Basic Text Matching"). Full text searches can be accelerated using indexes ([Section 12.9](textsearch-indexes.html "12.9. Preferred Index Types for Text Search")).
+A data type `tsvector` is provided for storing preprocessed documents, along with a type `tsquery` for representing processed queries ([Section 8.11](datatype-textsearch "8.11. Text Search Types")). There are many functions and operators available for these data types ([Section 9.13](functions-textsearch "9.13. Text Search Functions and Operators")), the most important of which is the match operator `@@`, which we introduce in [Section 12.1.2](textsearch-intro#TEXTSEARCH-MATCHING "12.1.2. Basic Text Matching"). Full text searches can be accelerated using indexes ([Section 12.9](textsearch-indexes "12.9. Preferred Index Types for Text Search")).
 
 ### 12.1.1. What Is a Document? [#](#TEXTSEARCH-DOCUMENT)
 
@@ -70,7 +70,7 @@ SELECT 'fat & cow'::tsquery @@ 'a fat cat sat on a mat and ate a fat rat'::tsvec
  f
 ```
 
-As the above example suggests, a `tsquery` is not just raw text, any more than a `tsvector` is. A `tsquery` contains search terms, which must be already-normalized lexemes, and may combine multiple terms using AND, OR, NOT, and FOLLOWED BY operators. (For syntax details see [Section 8.11.2](datatype-textsearch.html#DATATYPE-TSQUERY "8.11.2. tsquery").) There are functions `to_tsquery`, `plainto_tsquery`, and `phraseto_tsquery` that are helpful in converting user-written text into a proper `tsquery`, primarily by normalizing words appearing in the text. Similarly, `to_tsvector` is used to parse and normalize a document string. So in practice a text search match would look more like this:
+As the above example suggests, a `tsquery` is not just raw text, any more than a `tsvector` is. A `tsquery` contains search terms, which must be already-normalized lexemes, and may combine multiple terms using AND, OR, NOT, and FOLLOWED BY operators. (For syntax details see [Section 8.11.2](datatype-textsearch#DATATYPE-TSQUERY "8.11.2. tsquery").) There are functions `to_tsquery`, `plainto_tsquery`, and `phraseto_tsquery` that are helpful in converting user-written text into a proper `tsquery`, primarily by normalizing words appearing in the text. Similarly, `to_tsvector` is used to parse and normalize a document string. So in practice a text search match would look more like this:
 
 ```
 
@@ -146,7 +146,7 @@ It's worth noticing that the AND/OR/NOT operators mean something subtly differen
 
 The above are all simple text search examples. As mentioned before, full text search functionality includes the ability to do many more things: skip indexing certain words (stop words), process synonyms, and use sophisticated parsing, e.g., parse based on more than just white space. This functionality is controlled by *text search configurations*. PostgreSQL comes with predefined configurations for many languages, and you can easily create your own configurations. (psql's `\dF` command shows all available configurations.)
 
-During installation an appropriate configuration is selected and [default\_text\_search\_config](runtime-config-client.html#GUC-DEFAULT-TEXT-SEARCH-CONFIG) is set accordingly in `postgresql.conf`. If you are using the same text search configuration for the entire cluster you can use the value in `postgresql.conf`. To use different configurations throughout the cluster but the same configuration within any one database, use `ALTER DATABASE ... SET`. Otherwise, you can set `default_text_search_config` in each session.
+During installation an appropriate configuration is selected and [default\_text\_search\_config](runtime-config-client#GUC-DEFAULT-TEXT-SEARCH-CONFIG) is set accordingly in `postgresql.conf`. If you are using the same text search configuration for the entire cluster you can use the value in `postgresql.conf`. To use different configurations throughout the cluster but the same configuration within any one database, use `ALTER DATABASE ... SET`. Otherwise, you can set `default_text_search_config` in each session.
 
 Each text search function that depends on a configuration has an optional `regconfig` argument, so that the configuration to use can be specified explicitly. `default_text_search_config` is used only when this argument is omitted.
 

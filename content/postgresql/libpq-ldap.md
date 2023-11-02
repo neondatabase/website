@@ -2,7 +2,7 @@
 
 If libpq has been compiled with LDAP support (option `--with-ldap` for `configure`) it is possible to retrieve connection options like `host` or `dbname` via LDAP from a central server. The advantage is that if the connection parameters for a database change, the connection information doesn't have to be updated on all client machines.
 
-LDAP connection parameter lookup uses the connection service file `pg_service.conf` (see [Section 34.17](libpq-pgservice.html "34.17. The Connection Service File")). A line in a `pg_service.conf` stanza that starts with `ldap://` will be recognized as an LDAP URL and an LDAP query will be performed. The result must be a list of `keyword = value` pairs which will be used to set connection options. The URL must conform to [RFC 1959](https://tools.ietf.org/html/rfc1959) and be of the form
+LDAP connection parameter lookup uses the connection service file `pg_service.conf` (see [Section 34.17](libpq-pgservice "34.17. The Connection Service File")). A line in a `pg_service.conf` stanza that starts with `ldap://` will be recognized as an LDAP URL and an LDAP query will be performed. The result must be a list of `keyword = value` pairs which will be used to set connection options. The URL must conform to [RFC 1959](https://tools.ietf.org/html/rfc1959) and be of the form
 
 ```
 

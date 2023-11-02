@@ -33,13 +33,13 @@ where option can be:
 
     Attempt to terminate all existing connections to the target database. It doesn't terminate if prepared transactions, active logical replication slots or subscriptions are present in the target database.
 
-    This will fail if the current user has no permissions to terminate other connections. Required permissions are the same as with `pg_terminate_backend`, described in [Section 9.27.2](functions-admin.html#FUNCTIONS-ADMIN-SIGNAL "9.27.2. Server Signaling Functions"). This will also fail if we are not able to terminate connections.
+    This will fail if the current user has no permissions to terminate other connections. Required permissions are the same as with `pg_terminate_backend`, described in [Section 9.27.2](functions-admin#FUNCTIONS-ADMIN-SIGNAL "9.27.2. Server Signaling Functions"). This will also fail if we are not able to terminate connections.
 
 ## Notes
 
 `DROP DATABASE` cannot be executed inside a transaction block.
 
-This command cannot be executed while connected to the target database. Thus, it might be more convenient to use the program [dropdb](app-dropdb.html "dropdb") instead, which is a wrapper around this command.
+This command cannot be executed while connected to the target database. Thus, it might be more convenient to use the program [dropdb](app-dropdb "dropdb") instead, which is a wrapper around this command.
 
 ## Compatibility
 
@@ -47,4 +47,4 @@ There is no `DROP DATABASE` statement in the SQL standard.
 
 ## See Also
 
-[CREATE DATABASE](sql-createdatabase.html "CREATE DATABASE")
+[CREATE DATABASE](sql-createdatabase "CREATE DATABASE")

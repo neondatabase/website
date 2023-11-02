@@ -31,7 +31,7 @@ DROP OPERATOR CLASS [ IF EXISTS ] name USING index_method [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the operator class (such as indexes), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the operator class (such as indexes), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -58,4 +58,4 @@ There is no `DROP OPERATOR CLASS` statement in the SQL standard.
 
 ## See Also
 
-[ALTER OPERATOR CLASS](sql-alteropclass.html "ALTER OPERATOR CLASS"), [CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS"), [DROP OPERATOR FAMILY](sql-dropopfamily.html "DROP OPERATOR FAMILY")
+[ALTER OPERATOR CLASS](sql-alteropclass "ALTER OPERATOR CLASS"), [CREATE OPERATOR CLASS](sql-createopclass "CREATE OPERATOR CLASS"), [DROP OPERATOR FAMILY](sql-dropopfamily "DROP OPERATOR FAMILY")

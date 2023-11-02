@@ -1,10 +1,10 @@
 ## 24.3. Character Set Support [#](#MULTIBYTE)
 
-  * *   [24.3.1. Supported Character Sets](multibyte.html#MULTIBYTE-CHARSET-SUPPORTED)
-  * [24.3.2. Setting the Character Set](multibyte.html#MULTIBYTE-SETTING)
-  * [24.3.3. Automatic Character Set Conversion Between Server and Client](multibyte.html#MULTIBYTE-AUTOMATIC-CONVERSION)
-  * [24.3.4. Available Character Set Conversions](multibyte.html#MULTIBYTE-CONVERSIONS-SUPPORTED)
-  * [24.3.5. Further Reading](multibyte.html#MULTIBYTE-FURTHER-READING)
+  * *   [24.3.1. Supported Character Sets](multibyte#MULTIBYTE-CHARSET-SUPPORTED)
+  * [24.3.2. Setting the Character Set](multibyte#MULTIBYTE-SETTING)
+  * [24.3.3. Automatic Character Set Conversion Between Server and Client](multibyte#MULTIBYTE-AUTOMATIC-CONVERSION)
+  * [24.3.4. Available Character Set Conversions](multibyte#MULTIBYTE-CONVERSIONS-SUPPORTED)
+  * [24.3.5. Further Reading](multibyte#MULTIBYTE-FURTHER-READING)
 
 The character set support in PostgreSQL allows you to store text in a variety of character sets (also called encodings), including single-byte character sets such as the ISO 8859 series and multiple-byte character sets such as EUC (Extended Unix Code), UTF-8, and Mule internal code. All supported character sets can be used transparently by clients, but a few are not supported for use within the server (that is, as a server-side encoding). The default character set is selected while initializing your PostgreSQL database cluster using `initdb`. It can be overridden when you create a database, so you can have multiple databases each with a different character set.
 
@@ -12,7 +12,7 @@ An important restriction, however, is that each database's character set must be
 
 ### 24.3.1. Supported Character Sets [#](#MULTIBYTE-CHARSET-SUPPORTED)
 
-[Table 24.3](multibyte.html#CHARSET-TABLE "Table 24.3. PostgreSQL Character Sets") shows the character sets available for use in PostgreSQL.
+[Table 24.3](multibyte#CHARSET-TABLE "Table 24.3. PostgreSQL Character Sets") shows the character sets available for use in PostgreSQL.
 
 **Table 24.3. PostgreSQL Character Sets**
 
@@ -92,7 +92,7 @@ This will create a database named `korean` that uses the character set `EUC_KR`,
 CREATE DATABASE korean WITH ENCODING 'EUC_KR' LC_COLLATE='ko_KR.euckr' LC_CTYPE='ko_KR.euckr' TEMPLATE=template0;
 ```
 
-Notice that the above commands specify copying the `template0` database. When copying any other database, the encoding and locale settings cannot be changed from those of the source database, because that might result in corrupt data. For more information see [Section 23.3](manage-ag-templatedbs.html "23.3. Template Databases").
+Notice that the above commands specify copying the `template0` database. When copying any other database, the encoding and locale settings cannot be changed from those of the source database, because that might result in corrupt data. For more information see [Section 23.3](manage-ag-templatedbs "23.3. Template Databases").
 
 The encoding for a database is stored in the system catalog `pg_database`. You can see it by using the `psql` `-l` option or the `\l` command.
 
@@ -120,7 +120,7 @@ PostgreSQL will allow superusers to create databases with `SQL_ASCII` encoding e
 
 ### 24.3.3. Automatic Character Set Conversion Between Server and Client [#](#MULTIBYTE-AUTOMATIC-CONVERSION)
 
-PostgreSQL supports automatic character set conversion between server and client for many combinations of character sets ([Section 24.3.4](multibyte.html#MULTIBYTE-CONVERSIONS-SUPPORTED "24.3.4. Available Character Set Conversions") shows which ones).
+PostgreSQL supports automatic character set conversion between server and client for many combinations of character sets ([Section 24.3.4](multibyte#MULTIBYTE-CONVERSIONS-SUPPORTED "24.3.4. Available Character Set Conversions") shows which ones).
 
 To enable automatic character set conversion, you have to tell PostgreSQL the character set (encoding) you would like to use in the client. There are several ways to accomplish this:
 
@@ -131,7 +131,7 @@ To enable automatic character set conversion, you have to tell PostgreSQL the ch
     \encoding SJIS
     ```
 
-* libpq ([Section 34.11](libpq-control.html "34.11. Control Functions")) has functions to control the client encoding.
+* libpq ([Section 34.11](libpq-control "34.11. Control Functions")) has functions to control the client encoding.
 
 * Using `SET client_encoding TO`. Setting the client encoding can be done with this SQL command:
 
@@ -163,7 +163,7 @@ To enable automatic character set conversion, you have to tell PostgreSQL the ch
 
 * Using `PGCLIENTENCODING`. If the environment variable `PGCLIENTENCODING` is defined in the client's environment, that client encoding is automatically selected when a connection to the server is made. (This can subsequently be overridden using any of the other methods mentioned above.)
 
-* Using the configuration variable [client\_encoding](runtime-config-client.html#GUC-CLIENT-ENCODING). If the `client_encoding` variable is set, that client encoding is automatically selected when a connection to the server is made. (This can subsequently be overridden using any of the other methods mentioned above.)
+* Using the configuration variable [client\_encoding](runtime-config-client#GUC-CLIENT-ENCODING). If the `client_encoding` variable is set, that client encoding is automatically selected when a connection to the server is made. (This can subsequently be overridden using any of the other methods mentioned above.)
 
 If the conversion of a particular character is not possible — suppose you chose `EUC_JP` for the server and `LATIN1` for the client, and some Japanese characters are returned that do not have a representation in `LATIN1` — an error is reported.
 
@@ -171,7 +171,7 @@ If the client character set is defined as `SQL_ASCII`, encoding conversion is di
 
 ### 24.3.4. Available Character Set Conversions [#](#MULTIBYTE-CONVERSIONS-SUPPORTED)
 
-PostgreSQL allows conversion between any two character sets for which a conversion function is listed in the [`pg_conversion`](catalog-pg-conversion.html "53.14. pg_conversion") system catalog. PostgreSQL comes with some predefined conversions, as summarized in [Table 24.4](multibyte.html#MULTIBYTE-TRANSLATION-TABLE "Table 24.4. Built-in Client/Server Character Set Conversions") and shown in more detail in [Table 24.5](multibyte.html#BUILTIN-CONVERSIONS-TABLE "Table 24.5. All Built-in Character Set Conversions"). You can create a new conversion using the SQL command [CREATE CONVERSION](sql-createconversion.html "CREATE CONVERSION"). (To be used for automatic client/server conversions, a conversion must be marked as “default” for its character set pair.)
+PostgreSQL allows conversion between any two character sets for which a conversion function is listed in the [`pg_conversion`](catalog-pg-conversion "53.14. pg_conversion") system catalog. PostgreSQL comes with some predefined conversions, as summarized in [Table 24.4](multibyte#MULTIBYTE-TRANSLATION-TABLE "Table 24.4. Built-in Client/Server Character Set Conversions") and shown in more detail in [Table 24.5](multibyte#BUILTIN-CONVERSIONS-TABLE "Table 24.5. All Built-in Character Set Conversions"). You can create a new conversion using the SQL command [CREATE CONVERSION](sql-createconversion "CREATE CONVERSION"). (To be used for automatic client/server conversions, a conversion must be marked as “default” for its character set pair.)
 
 **Table 24.4. Built-in Client/Server Character Set Conversions**
 
@@ -350,7 +350,7 @@ PostgreSQL allows conversion between any two character sets for which a conversi
 | `utf8_to_shift_jis_2004`                                                                                                                                                                                                                                                                                                                                                                                                                                    | `UTF8`           | `SHIFT_JIS_2004`     |
 | `euc_jis_2004_to_shift_jis_2004`                                                                                                                                                                                                                                                                                                                                                                                                                            | `EUC_JIS_2004`   | `SHIFT_JIS_2004`     |
 | `shift_jis_2004_to_euc_jis_2004`                                                                                                                                                                                                                                                                                                                                                                                                                            | `SHIFT_JIS_2004` | `EUC_JIS_2004`       |
-| [\[a\] ](#id-1.6.11.5.8.4.2.4.1.1.1)The conversion names follow a standard naming scheme: The official name of the source encoding with all non-alphanumeric characters replaced by underscores, followed by `_to_`, followed by the similarly processed destination encoding name. Therefore, these names sometimes deviate from the customary encoding names shown in [Table 24.3](multibyte.html#CHARSET-TABLE "Table 24.3. PostgreSQL Character Sets"). |                  |                      |
+| [\[a\] ](#id-1.6.11.5.8.4.2.4.1.1.1)The conversion names follow a standard naming scheme: The official name of the source encoding with all non-alphanumeric characters replaced by underscores, followed by `_to_`, followed by the similarly processed destination encoding name. Therefore, these names sometimes deviate from the customary encoding names shown in [Table 24.3](multibyte#CHARSET-TABLE "Table 24.3. PostgreSQL Character Sets"). |                  |                      |
 
 ### 24.3.5. Further Reading [#](#MULTIBYTE-FURTHER-READING)
 

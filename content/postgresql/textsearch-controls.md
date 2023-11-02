@@ -1,9 +1,9 @@
 ## 12.3. Controlling Text Search [#](#TEXTSEARCH-CONTROLS)
 
-  * *   [12.3.1. Parsing Documents](textsearch-controls.html#TEXTSEARCH-PARSING-DOCUMENTS)
-  * [12.3.2. Parsing Queries](textsearch-controls.html#TEXTSEARCH-PARSING-QUERIES)
-  * [12.3.3. Ranking Search Results](textsearch-controls.html#TEXTSEARCH-RANKING)
-  * [12.3.4. Highlighting Results](textsearch-controls.html#TEXTSEARCH-HEADLINE)
+  * *   [12.3.1. Parsing Documents](textsearch-controls#TEXTSEARCH-PARSING-DOCUMENTS)
+  * [12.3.2. Parsing Queries](textsearch-controls#TEXTSEARCH-PARSING-QUERIES)
+  * [12.3.3. Ranking Search Results](textsearch-controls#TEXTSEARCH-RANKING)
+  * [12.3.4. Highlighting Results](textsearch-controls#TEXTSEARCH-HEADLINE)
 
 To implement full text searching there must be a function to create a `tsvector` from a document and a `tsquery` from a user query. Also, we need to return results in a useful order, so we need a function that compares documents with respect to their relevance to the query. It's also important to be able to display the results nicely. PostgreSQL provides support for all of these functions.
 
@@ -28,7 +28,7 @@ SELECT to_tsvector('english', 'a fat  cat sat on a mat - it ate a fat rats');
 
 In the example above we see that the resulting `tsvector` does not contain the words `a`, `on`, or `it`, the word `rats` became `rat`, and the punctuation sign `-` was ignored.
 
-The `to_tsvector` function internally calls a parser which breaks the document text into tokens and assigns a type to each token. For each token, a list of dictionaries ([Section 12.6](textsearch-dictionaries.html "12.6. Dictionaries")) is consulted, where the list can vary depending on the token type. The first dictionary that *recognizes* the token emits one or more normalized *lexemes* to represent the token. For example, `rats` became `rat` because one of the dictionaries recognized that the word `rats` is a plural form of `rat`. Some words are recognized as *stop words* ([Section 12.6.1](textsearch-dictionaries.html#TEXTSEARCH-STOPWORDS "12.6.1. Stop Words")), which causes them to be ignored since they occur too frequently to be useful in searching. In our example these are `a`, `on`, and `it`. If no dictionary in the list recognizes the token then it is also ignored. In this example that happened to the punctuation sign `-` because there are in fact no dictionaries assigned for its token type (`Space symbols`), meaning space tokens will never be indexed. The choices of parser, dictionaries and which types of tokens to index are determined by the selected text search configuration ([Section 12.7](textsearch-configuration.html "12.7. Configuration Example")). It is possible to have many different configurations in the same database, and predefined configurations are available for various languages. In our example we used the default configuration `english` for the English language.
+The `to_tsvector` function internally calls a parser which breaks the document text into tokens and assigns a type to each token. For each token, a list of dictionaries ([Section 12.6](textsearch-dictionaries "12.6. Dictionaries")) is consulted, where the list can vary depending on the token type. The first dictionary that *recognizes* the token emits one or more normalized *lexemes* to represent the token. For example, `rats` became `rat` because one of the dictionaries recognized that the word `rats` is a plural form of `rat`. Some words are recognized as *stop words* ([Section 12.6.1](textsearch-dictionaries#TEXTSEARCH-STOPWORDS "12.6.1. Stop Words")), which causes them to be ignored since they occur too frequently to be useful in searching. In our example these are `a`, `on`, and `it`. If no dictionary in the list recognizes the token then it is also ignored. In this example that happened to the punctuation sign `-` because there are in fact no dictionaries assigned for its token type (`Space symbols`), meaning space tokens will never be indexed. The choices of parser, dictionaries and which types of tokens to index are determined by the selected text search configuration ([Section 12.7](textsearch-configuration "12.7. Configuration Example")). It is possible to have many different configurations in the same database, and predefined configurations are available for various languages. In our example we used the default configuration `english` for the English language.
 
 The function `setweight` can be used to label the entries of a `tsvector` with a given *weight*, where a weight is one of the letters `A`, `B`, `C`, or `D`. This is typically used to mark entries coming from different parts of a document, such as title versus body. Later, this information can be used for ranking of search results.
 
@@ -43,7 +43,7 @@ UPDATE tt SET ti =
     setweight(to_tsvector(coalesce(body,'')), 'D');
 ```
 
-Here we have used `setweight` to label the source of each lexeme in the finished `tsvector`, and then merged the labeled `tsvector` values using the `tsvector` concatenation operator `||`. ([Section 12.4.1](textsearch-features.html#TEXTSEARCH-MANIPULATE-TSVECTOR "12.4.1. Manipulating Documents") gives details about these operations.)
+Here we have used `setweight` to label the source of each lexeme in the finished `tsvector`, and then merged the labeled `tsvector` values using the `tsvector` concatenation operator `||`. ([Section 12.4.1](textsearch-features#TEXTSEARCH-MANIPULATE-TSVECTOR "12.4.1. Manipulating Documents") gives details about these operations.)
 
 ### 12.3.2. Parsing Queries [#](#TEXTSEARCH-PARSING-QUERIES)
 
@@ -54,7 +54,7 @@ PostgreSQL provides the functions `to_tsquery`, `plainto_tsquery`, `phraseto_tsq
 to_tsquery([ config regconfig, ] querytext text) returns tsquery
 ```
 
-`to_tsquery` creates a `tsquery` value from *`querytext`*, which must consist of single tokens separated by the `tsquery` operators `&` (AND), `|` (OR), `!` (NOT), and `<->` (FOLLOWED BY), possibly grouped using parentheses. In other words, the input to `to_tsquery` must already follow the general rules for `tsquery` input, as described in [Section 8.11.2](datatype-textsearch.html#DATATYPE-TSQUERY "8.11.2. tsquery"). The difference is that while basic `tsquery` input takes the tokens at face value, `to_tsquery` normalizes each token into a lexeme using the specified or default configuration, and discards any tokens that are stop words according to the configuration. For example:
+`to_tsquery` creates a `tsquery` value from *`querytext`*, which must consist of single tokens separated by the `tsquery` operators `&` (AND), `|` (OR), `!` (NOT), and `<->` (FOLLOWED BY), possibly grouped using parentheses. In other words, the input to `to_tsquery` must already follow the general rules for `tsquery` input, as described in [Section 8.11.2](datatype-textsearch#DATATYPE-TSQUERY "8.11.2. tsquery"). The difference is that while basic `tsquery` input takes the tokens at face value, `to_tsquery` normalizes each token into a lexeme using the specified or default configuration, and discards any tokens that are stop words according to the configuration. For example:
 
 ```
 
@@ -217,7 +217,7 @@ The two ranking functions currently available are:
 
     This function computes the *cover density* ranking for the given document vector and query, as described in Clarke, Cormack, and Tudhope's "Relevance Ranking for One to Three Term Queries" in the journal "Information Processing and Management", 1999. Cover density is similar to `ts_rank` ranking except that the proximity of matching lexemes to each other is taken into consideration.
 
-    This function requires lexeme positional information to perform its calculation. Therefore, it ignores any “stripped” lexemes in the `tsvector`. If there are no unstripped lexemes in the input, the result will be zero. (See [Section 12.4.1](textsearch-features.html#TEXTSEARCH-MANIPULATE-TSVECTOR "12.4.1. Manipulating Documents") for more information about the `strip` function and positional information in `tsvector`s.)
+    This function requires lexeme positional information to perform its calculation. Therefore, it ignores any “stripped” lexemes in the `tsvector`. If there are no unstripped lexemes in the input, the result will be zero. (See [Section 12.4.1](textsearch-features#TEXTSEARCH-MANIPULATE-TSVECTOR "12.4.1. Manipulating Documents") for more information about the `strip` function and positional information in `tsvector`s.)
 
 For both these functions, the optional *`weights`* argument offers the ability to weigh word instances more or less heavily depending on how they are labeled. The weight arrays specify how heavily to weigh each category of word, in the order:
 

@@ -50,4 +50,4 @@ There is no `ALTER OPERATOR CLASS` statement in the SQL standard.
 
 ## See Also
 
-[CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass.html "DROP OPERATOR CLASS"), [ALTER OPERATOR FAMILY](sql-alteropfamily.html "ALTER OPERATOR FAMILY")
+[CREATE OPERATOR CLASS](sql-createopclass "CREATE OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass "DROP OPERATOR CLASS"), [ALTER OPERATOR FAMILY](sql-alteropfamily "ALTER OPERATOR FAMILY")

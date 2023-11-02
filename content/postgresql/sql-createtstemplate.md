@@ -20,7 +20,7 @@ If a schema name is given then the text search template is created in the specif
 
 You must be a superuser to use `CREATE TEXT SEARCH TEMPLATE`. This restriction is made because an erroneous text search template definition could confuse or even crash the server. The reason for separating templates from dictionaries is that a template encapsulates the “unsafe” aspects of defining a dictionary. The parameters that can be set when defining a dictionary are safe for unprivileged users to set, and so creating a dictionary need not be a privileged operation.
 
-Refer to [Chapter 12](textsearch.html "Chapter 12. Full Text Search") for further information.
+Refer to [Chapter 12](textsearch "Chapter 12. Full Text Search") for further information.
 
 ## Parameters
 
@@ -46,4 +46,4 @@ There is no `CREATE TEXT SEARCH TEMPLATE` statement in the SQL standard.
 
 ## See Also
 
-[ALTER TEXT SEARCH TEMPLATE](sql-altertstemplate.html "ALTER TEXT SEARCH TEMPLATE"), [DROP TEXT SEARCH TEMPLATE](sql-droptstemplate.html "DROP TEXT SEARCH TEMPLATE")
+[ALTER TEXT SEARCH TEMPLATE](sql-altertstemplate "ALTER TEXT SEARCH TEMPLATE"), [DROP TEXT SEARCH TEMPLATE](sql-droptstemplate "DROP TEXT SEARCH TEMPLATE")

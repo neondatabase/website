@@ -1,8 +1,8 @@
 ## 36.8. Error Handling [#](#ECPG-ERRORS)
 
-  * *   [36.8.1. Setting Callbacks](ecpg-errors.html#ECPG-WHENEVER)
-  * [36.8.2. sqlca](ecpg-errors.html#ECPG-SQLCA)
-  * [36.8.3. `SQLSTATE` vs. `SQLCODE`](ecpg-errors.html#ECPG-SQLSTATE-SQLCODE)
+  * *   [36.8.1. Setting Callbacks](ecpg-errors#ECPG-WHENEVER)
+  * [36.8.2. sqlca](ecpg-errors#ECPG-SQLCA)
+  * [36.8.3. `SQLSTATE` vs. `SQLCODE`](ecpg-errors#ECPG-SQLSTATE-SQLCODE)
 
 This section describes how you can handle exceptional conditions and warnings in an embedded SQL program. There are two nonexclusive facilities for this.
 
@@ -191,9 +191,9 @@ sqlstate: 42P01
 
 The fields `sqlca.sqlstate` and `sqlca.sqlcode` are two different schemes that provide error codes. Both are derived from the SQL standard, but `SQLCODE` has been marked deprecated in the SQL-92 edition of the standard and has been dropped in later editions. Therefore, new applications are strongly encouraged to use `SQLSTATE`.
 
-`SQLSTATE` is a five-character array. The five characters contain digits or upper-case letters that represent codes of various error and warning conditions. `SQLSTATE` has a hierarchical scheme: the first two characters indicate the general class of the condition, the last three characters indicate a subclass of the general condition. A successful state is indicated by the code `00000`. The `SQLSTATE` codes are for the most part defined in the SQL standard. The PostgreSQL server natively supports `SQLSTATE` error codes; therefore a high degree of consistency can be achieved by using this error code scheme throughout all applications. For further information see [Appendix A](errcodes-appendix.html "Appendix A. PostgreSQL Error Codes").
+`SQLSTATE` is a five-character array. The five characters contain digits or upper-case letters that represent codes of various error and warning conditions. `SQLSTATE` has a hierarchical scheme: the first two characters indicate the general class of the condition, the last three characters indicate a subclass of the general condition. A successful state is indicated by the code `00000`. The `SQLSTATE` codes are for the most part defined in the SQL standard. The PostgreSQL server natively supports `SQLSTATE` error codes; therefore a high degree of consistency can be achieved by using this error code scheme throughout all applications. For further information see [Appendix A](errcodes-appendix "Appendix A. PostgreSQL Error Codes").
 
-`SQLCODE`, the deprecated error code scheme, is a simple integer. A value of 0 indicates success, a positive value indicates success with additional information, a negative value indicates an error. The SQL standard only defines the positive value +100, which indicates that the last command returned or affected zero rows, and no specific negative values. Therefore, this scheme can only achieve poor portability and does not have a hierarchical code assignment. Historically, the embedded SQL processor for PostgreSQL has assigned some specific `SQLCODE` values for its use, which are listed below with their numeric value and their symbolic name. Remember that these are not portable to other SQL implementations. To simplify the porting of applications to the `SQLSTATE` scheme, the corresponding `SQLSTATE` is also listed. There is, however, no one-to-one or one-to-many mapping between the two schemes (indeed it is many-to-many), so you should consult the global `SQLSTATE` listing in [Appendix A](errcodes-appendix.html "Appendix A. PostgreSQL Error Codes") in each case.
+`SQLCODE`, the deprecated error code scheme, is a simple integer. A value of 0 indicates success, a positive value indicates success with additional information, a negative value indicates an error. The SQL standard only defines the positive value +100, which indicates that the last command returned or affected zero rows, and no specific negative values. Therefore, this scheme can only achieve poor portability and does not have a hierarchical code assignment. Historically, the embedded SQL processor for PostgreSQL has assigned some specific `SQLCODE` values for its use, which are listed below with their numeric value and their symbolic name. Remember that these are not portable to other SQL implementations. To simplify the porting of applications to the `SQLSTATE` scheme, the corresponding `SQLSTATE` is also listed. There is, however, no one-to-one or one-to-many mapping between the two schemes (indeed it is many-to-many), so you should consult the global `SQLSTATE` listing in [Appendix A](errcodes-appendix "Appendix A. PostgreSQL Error Codes") in each case.
 
 These are the assigned `SQLCODE` values:
 

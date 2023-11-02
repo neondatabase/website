@@ -1,13 +1,13 @@
 ## 34.1. Database Connection Control Functions [#](#LIBPQ-CONNECT)
 
-  * *   [34.1.1. Connection Strings](libpq-connect.html#LIBPQ-CONNSTRING)
-  * [34.1.2. Parameter Key Words](libpq-connect.html#LIBPQ-PARAMKEYWORDS)
+  * *   [34.1.1. Connection Strings](libpq-connect#LIBPQ-CONNSTRING)
+  * [34.1.2. Parameter Key Words](libpq-connect#LIBPQ-PARAMKEYWORDS)
 
-The following functions deal with making a connection to a PostgreSQL backend server. An application program can have several backend connections open at one time. (One reason to do that is to access more than one database.) Each connection is represented by a `PGconn` object, which is obtained from the function [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB), [`PQconnectdbParams`](libpq-connect.html#LIBPQ-PQCONNECTDBPARAMS), or [`PQsetdbLogin`](libpq-connect.html#LIBPQ-PQSETDBLOGIN). Note that these functions will always return a non-null object pointer, unless perhaps there is too little memory even to allocate the `PGconn` object. The [`PQstatus`](libpq-status.html#LIBPQ-PQSTATUS) function should be called to check the return value for a successful connection before queries are sent via the connection object.
+The following functions deal with making a connection to a PostgreSQL backend server. An application program can have several backend connections open at one time. (One reason to do that is to access more than one database.) Each connection is represented by a `PGconn` object, which is obtained from the function [`PQconnectdb`](libpq-connect#LIBPQ-PQCONNECTDB), [`PQconnectdbParams`](libpq-connect#LIBPQ-PQCONNECTDBPARAMS), or [`PQsetdbLogin`](libpq-connect#LIBPQ-PQSETDBLOGIN). Note that these functions will always return a non-null object pointer, unless perhaps there is too little memory even to allocate the `PGconn` object. The [`PQstatus`](libpq-status#LIBPQ-PQSTATUS) function should be called to check the return value for a successful connection before queries are sent via the connection object.
 
 ### Warning
 
-If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas.html#DDL-SCHEMAS-PATTERNS "5.9.6. Usage Patterns"), begin each session by removing publicly-writable schemas from `search_path`. One can set parameter key word `options` to value `-csearch_path=`. Alternately, one can issue `PQexec(conn, "SELECT pg_catalog.set_config('search_path', '', false)")` after connecting. This consideration is not specific to libpq; it applies to every interface for executing arbitrary SQL commands.
+If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas#DDL-SCHEMAS-PATTERNS "5.9.6. Usage Patterns"), begin each session by removing publicly-writable schemas from `search_path`. One can set parameter key word `options` to value `-csearch_path=`. Alternately, one can issue `PQexec(conn, "SELECT pg_catalog.set_config('search_path', '', false)")` after connecting. This consideration is not specific to libpq; it applies to every interface for executing arbitrary SQL commands.
 
 ### Warning
 
@@ -24,17 +24,17 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
                               int expand_dbname);
     ```
 
-    This function opens a new database connection using the parameters taken from two `NULL`-terminated arrays. The first, `keywords`, is defined as an array of strings, each one being a key word. The second, `values`, gives the value for each key word. Unlike [`PQsetdbLogin`](libpq-connect.html#LIBPQ-PQSETDBLOGIN) below, the parameter set can be extended without changing the function signature, so use of this function (or its nonblocking analogs [`PQconnectStartParams`](libpq-connect.html#LIBPQ-PQCONNECTSTARTPARAMS) and `PQconnectPoll`) is preferred for new application programming.
+    This function opens a new database connection using the parameters taken from two `NULL`-terminated arrays. The first, `keywords`, is defined as an array of strings, each one being a key word. The second, `values`, gives the value for each key word. Unlike [`PQsetdbLogin`](libpq-connect#LIBPQ-PQSETDBLOGIN) below, the parameter set can be extended without changing the function signature, so use of this function (or its nonblocking analogs [`PQconnectStartParams`](libpq-connect#LIBPQ-PQCONNECTSTARTPARAMS) and `PQconnectPoll`) is preferred for new application programming.
 
-    The currently recognized parameter key words are listed in [Section 34.1.2](libpq-connect.html#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words").
+    The currently recognized parameter key words are listed in [Section 34.1.2](libpq-connect#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words").
 
     The passed arrays can be empty to use all default parameters, or can contain one or more parameter settings. They must be matched in length. Processing will stop at the first `NULL` entry in the `keywords` array. Also, if the `values` entry associated with a non-`NULL` `keywords` entry is `NULL` or an empty string, that entry is ignored and processing continues with the next pair of array entries.
 
-    When `expand_dbname` is non-zero, the value for the first *`dbname`* key word is checked to see if it is a *connection string*. If so, it is “expanded” into the individual connection parameters extracted from the string. The value is considered to be a connection string, rather than just a database name, if it contains an equal sign (`=`) or it begins with a URI scheme designator. (More details on connection string formats appear in [Section 34.1.1](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings").) Only the first occurrence of *`dbname`* is treated in this way; any subsequent *`dbname`* parameter is processed as a plain database name.
+    When `expand_dbname` is non-zero, the value for the first *`dbname`* key word is checked to see if it is a *connection string*. If so, it is “expanded” into the individual connection parameters extracted from the string. The value is considered to be a connection string, rather than just a database name, if it contains an equal sign (`=`) or it begins with a URI scheme designator. (More details on connection string formats appear in [Section 34.1.1](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings").) Only the first occurrence of *`dbname`* is treated in this way; any subsequent *`dbname`* parameter is processed as a plain database name.
 
     In general the parameter arrays are processed from start to end. If any key word is repeated, the last value (that is not `NULL` or empty) is used. This rule applies in particular when a key word found in a connection string conflicts with one appearing in the `keywords` array. Thus, the programmer may determine whether array entries can override or be overridden by values taken from a connection string. Array entries appearing before an expanded *`dbname`* entry can be overridden by fields of the connection string, and in turn those fields are overridden by array entries appearing after *`dbname`* (but, again, only if those entries supply non-empty values).
 
-    After processing all the array entries and any expanded connection string, any connection parameters that remain unset are filled with default values. If an unset parameter's corresponding environment variable (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")) is set, its value is used. If the environment variable is not set either, then the parameter's built-in default value is used.
+    After processing all the array entries and any expanded connection string, any connection parameters that remain unset are filled with default values. If an unset parameter's corresponding environment variable (see [Section 34.15](libpq-envars "34.15. Environment Variables")) is set, its value is used. If the environment variable is not set either, then the parameter's built-in default value is used.
 
 * `PQconnectdb` [#](#LIBPQ-PQCONNECTDB)
 
@@ -47,7 +47,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
     This function opens a new database connection using the parameters taken from the string `conninfo`.
 
-    The passed string can be empty to use all default parameters, or it can contain one or more parameter settings separated by whitespace, or it can contain a URI. See [Section 34.1.1](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings") for details.
+    The passed string can be empty to use all default parameters, or it can contain one or more parameter settings separated by whitespace, or it can contain a URI. See [Section 34.1.1](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings") for details.
 
 * `PQsetdbLogin` [#](#LIBPQ-PQSETDBLOGIN)
 
@@ -64,9 +64,9 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
                          const char *pwd);
     ```
 
-    This is the predecessor of [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB) with a fixed set of parameters. It has the same functionality except that the missing parameters will always take on default values. Write `NULL` or an empty string for any one of the fixed parameters that is to be defaulted.
+    This is the predecessor of [`PQconnectdb`](libpq-connect#LIBPQ-PQCONNECTDB) with a fixed set of parameters. It has the same functionality except that the missing parameters will always take on default values. Write `NULL` or an empty string for any one of the fixed parameters that is to be defaulted.
 
-    If the *`dbName`* contains an `=` sign or has a valid connection URI prefix, it is taken as a *`conninfo`* string in exactly the same way as if it had been passed to [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB), and the remaining parameters are then applied as specified for [`PQconnectdbParams`](libpq-connect.html#LIBPQ-PQCONNECTDBPARAMS).
+    If the *`dbName`* contains an `=` sign or has a valid connection URI prefix, it is taken as a *`conninfo`* string in exactly the same way as if it had been passed to [`PQconnectdb`](libpq-connect#LIBPQ-PQCONNECTDB), and the remaining parameters are then applied as specified for [`PQconnectdbParams`](libpq-connect#LIBPQ-PQCONNECTDBPARAMS).
 
     `pgtty` is no longer used and any value passed will be ignored.
 
@@ -83,7 +83,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
                     char *dbName);
     ```
 
-    This is a macro that calls [`PQsetdbLogin`](libpq-connect.html#LIBPQ-PQSETDBLOGIN) with null pointers for the *`login`* and *`pwd`* parameters. It is provided for backward compatibility with very old programs.
+    This is a macro that calls [`PQsetdbLogin`](libpq-connect#LIBPQ-PQSETDBLOGIN) with null pointers for the *`login`* and *`pwd`* parameters. It is provided for backward compatibility with very old programs.
 
 * `PQconnectStartParams``PQconnectStart``PQconnectPoll` [#](#LIBPQ-PQCONNECTSTARTPARAMS)
 
@@ -100,23 +100,23 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
     PostgresPollingStatusType PQconnectPoll(PGconn *conn);
     ```
 
-    These three functions are used to open a connection to a database server such that your application's thread of execution is not blocked on remote I/O whilst doing so. The point of this approach is that the waits for I/O to complete can occur in the application's main loop, rather than down inside [`PQconnectdbParams`](libpq-connect.html#LIBPQ-PQCONNECTDBPARAMS) or [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB), and so the application can manage this operation in parallel with other activities.
+    These three functions are used to open a connection to a database server such that your application's thread of execution is not blocked on remote I/O whilst doing so. The point of this approach is that the waits for I/O to complete can occur in the application's main loop, rather than down inside [`PQconnectdbParams`](libpq-connect#LIBPQ-PQCONNECTDBPARAMS) or [`PQconnectdb`](libpq-connect#LIBPQ-PQCONNECTDB), and so the application can manage this operation in parallel with other activities.
 
-    With [`PQconnectStartParams`](libpq-connect.html#LIBPQ-PQCONNECTSTARTPARAMS), the database connection is made using the parameters taken from the `keywords` and `values` arrays, and controlled by `expand_dbname`, as described above for [`PQconnectdbParams`](libpq-connect.html#LIBPQ-PQCONNECTDBPARAMS).
+    With [`PQconnectStartParams`](libpq-connect#LIBPQ-PQCONNECTSTARTPARAMS), the database connection is made using the parameters taken from the `keywords` and `values` arrays, and controlled by `expand_dbname`, as described above for [`PQconnectdbParams`](libpq-connect#LIBPQ-PQCONNECTDBPARAMS).
 
-    With `PQconnectStart`, the database connection is made using the parameters taken from the string `conninfo` as described above for [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB).
+    With `PQconnectStart`, the database connection is made using the parameters taken from the string `conninfo` as described above for [`PQconnectdb`](libpq-connect#LIBPQ-PQCONNECTDB).
 
-    Neither [`PQconnectStartParams`](libpq-connect.html#LIBPQ-PQCONNECTSTARTPARAMS) nor `PQconnectStart` nor `PQconnectPoll` will block, so long as a number of restrictions are met:
+    Neither [`PQconnectStartParams`](libpq-connect#LIBPQ-PQCONNECTSTARTPARAMS) nor `PQconnectStart` nor `PQconnectPoll` will block, so long as a number of restrictions are met:
 
-  * The `hostaddr` parameter must be used appropriately to prevent DNS queries from being made. See the documentation of this parameter in [Section 34.1.2](libpq-connect.html#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words") for details.
-  * If you call [`PQtrace`](libpq-control.html#LIBPQ-PQTRACE), ensure that the stream object into which you trace will not block.
+  * The `hostaddr` parameter must be used appropriately to prevent DNS queries from being made. See the documentation of this parameter in [Section 34.1.2](libpq-connect#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words") for details.
+  * If you call [`PQtrace`](libpq-control#LIBPQ-PQTRACE), ensure that the stream object into which you trace will not block.
   * You must ensure that the socket is in the appropriate state before calling `PQconnectPoll`, as described below.
 
-    To begin a nonblocking connection request, call `PQconnectStart` or [`PQconnectStartParams`](libpq-connect.html#LIBPQ-PQCONNECTSTARTPARAMS). If the result is null, then libpq has been unable to allocate a new `PGconn` structure. Otherwise, a valid `PGconn` pointer is returned (though not yet representing a valid connection to the database). Next call `PQstatus(conn)`. If the result is `CONNECTION_BAD`, the connection attempt has already failed, typically because of invalid connection parameters.
+    To begin a nonblocking connection request, call `PQconnectStart` or [`PQconnectStartParams`](libpq-connect#LIBPQ-PQCONNECTSTARTPARAMS). If the result is null, then libpq has been unable to allocate a new `PGconn` structure. Otherwise, a valid `PGconn` pointer is returned (though not yet representing a valid connection to the database). Next call `PQstatus(conn)`. If the result is `CONNECTION_BAD`, the connection attempt has already failed, typically because of invalid connection parameters.
 
-    If `PQconnectStart` or [`PQconnectStartParams`](libpq-connect.html#LIBPQ-PQCONNECTSTARTPARAMS) succeeds, the next stage is to poll libpq so that it can proceed with the connection sequence. Use `PQsocket(conn)` to obtain the descriptor of the socket underlying the database connection. (Caution: do not assume that the socket remains the same across `PQconnectPoll` calls.) Loop thus: If `PQconnectPoll(conn)` last returned `PGRES_POLLING_READING`, wait until the socket is ready to read (as indicated by `select()`, `poll()`, or similar system function). Then call `PQconnectPoll(conn)` again. Conversely, if `PQconnectPoll(conn)` last returned `PGRES_POLLING_WRITING`, wait until the socket is ready to write, then call `PQconnectPoll(conn)` again. On the first iteration, i.e., if you have yet to call `PQconnectPoll`, behave as if it last returned `PGRES_POLLING_WRITING`. Continue this loop until `PQconnectPoll(conn)` returns `PGRES_POLLING_FAILED`, indicating the connection procedure has failed, or `PGRES_POLLING_OK`, indicating the connection has been successfully made.
+    If `PQconnectStart` or [`PQconnectStartParams`](libpq-connect#LIBPQ-PQCONNECTSTARTPARAMS) succeeds, the next stage is to poll libpq so that it can proceed with the connection sequence. Use `PQsocket(conn)` to obtain the descriptor of the socket underlying the database connection. (Caution: do not assume that the socket remains the same across `PQconnectPoll` calls.) Loop thus: If `PQconnectPoll(conn)` last returned `PGRES_POLLING_READING`, wait until the socket is ready to read (as indicated by `select()`, `poll()`, or similar system function). Then call `PQconnectPoll(conn)` again. Conversely, if `PQconnectPoll(conn)` last returned `PGRES_POLLING_WRITING`, wait until the socket is ready to write, then call `PQconnectPoll(conn)` again. On the first iteration, i.e., if you have yet to call `PQconnectPoll`, behave as if it last returned `PGRES_POLLING_WRITING`. Continue this loop until `PQconnectPoll(conn)` returns `PGRES_POLLING_FAILED`, indicating the connection procedure has failed, or `PGRES_POLLING_OK`, indicating the connection has been successfully made.
 
-    At any time during connection, the status of the connection can be checked by calling [`PQstatus`](libpq-status.html#LIBPQ-PQSTATUS). If this call returns `CONNECTION_BAD`, then the connection procedure has failed; if the call returns `CONNECTION_OK`, then the connection is ready. Both of these states are equally detectable from the return value of `PQconnectPoll`, described above. Other states might also occur during (and only during) an asynchronous connection procedure. These indicate the current stage of the connection procedure and might be useful to provide feedback to the user for example. These statuses are:
+    At any time during connection, the status of the connection can be checked by calling [`PQstatus`](libpq-status#LIBPQ-PQSTATUS). If this call returns `CONNECTION_BAD`, then the connection procedure has failed; if the call returns `CONNECTION_OK`, then the connection is ready. Both of these states are equally detectable from the return value of `PQconnectPoll`, described above. Other states might also occur during (and only during) an asynchronous connection procedure. These indicate the current stage of the connection procedure and might be useful to provide feedback to the user for example. These statuses are:
 
   * `CONNECTION_STARTED` [#](#LIBPQ-CONNECTION-STARTED)
 
@@ -171,9 +171,9 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
     }
     ```
 
-    The `connect_timeout` connection parameter is ignored when using `PQconnectPoll`; it is the application's responsibility to decide whether an excessive amount of time has elapsed. Otherwise, `PQconnectStart` followed by a `PQconnectPoll` loop is equivalent to [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB).
+    The `connect_timeout` connection parameter is ignored when using `PQconnectPoll`; it is the application's responsibility to decide whether an excessive amount of time has elapsed. Otherwise, `PQconnectStart` followed by a `PQconnectPoll` loop is equivalent to [`PQconnectdb`](libpq-connect#LIBPQ-PQCONNECTDB).
 
-    Note that when `PQconnectStart` or [`PQconnectStartParams`](libpq-connect.html#LIBPQ-PQCONNECTSTARTPARAMS) returns a non-null pointer, you must call [`PQfinish`](libpq-connect.html#LIBPQ-PQFINISH) when you are finished with it, in order to dispose of the structure and any associated memory blocks. This must be done even if the connection attempt fails or is abandoned.
+    Note that when `PQconnectStart` or [`PQconnectStartParams`](libpq-connect#LIBPQ-PQCONNECTSTARTPARAMS) returns a non-null pointer, you must call [`PQfinish`](libpq-connect#LIBPQ-PQFINISH) when you are finished with it, in order to dispose of the structure and any associated memory blocks. This must be done even if the connection attempt fails or is abandoned.
 
 * `PQconndefaults` [#](#LIBPQ-PQCONNDEFAULTS)
 
@@ -199,9 +199,9 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
     } PQconninfoOption;
     ```
 
-    Returns a connection options array. This can be used to determine all possible [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB) options and their current default values. The return value points to an array of `PQconninfoOption` structures, which ends with an entry having a null `keyword` pointer. The null pointer is returned if memory could not be allocated. Note that the current default values (`val` fields) will depend on environment variables and other context. A missing or invalid service file will be silently ignored. Callers must treat the connection options data as read-only.
+    Returns a connection options array. This can be used to determine all possible [`PQconnectdb`](libpq-connect#LIBPQ-PQCONNECTDB) options and their current default values. The return value points to an array of `PQconninfoOption` structures, which ends with an entry having a null `keyword` pointer. The null pointer is returned if memory could not be allocated. Note that the current default values (`val` fields) will depend on environment variables and other context. A missing or invalid service file will be silently ignored. Callers must treat the connection options data as read-only.
 
-    After processing the options array, free it by passing it to [`PQconninfoFree`](libpq-misc.html#LIBPQ-PQCONNINFOFREE). If this is not done, a small amount of memory is leaked for each call to [`PQconndefaults`](libpq-connect.html#LIBPQ-PQCONNDEFAULTS).
+    After processing the options array, free it by passing it to [`PQconninfoFree`](libpq-misc#LIBPQ-PQCONNINFOFREE). If this is not done, a small amount of memory is leaked for each call to [`PQconndefaults`](libpq-connect#LIBPQ-PQCONNDEFAULTS).
 
 * `PQconninfo` [#](#LIBPQ-PQCONNINFO)
 
@@ -212,7 +212,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
     PQconninfoOption *PQconninfo(PGconn *conn);
     ```
 
-    Returns a connection options array. This can be used to determine all possible [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB) options and the values that were used to connect to the server. The return value points to an array of `PQconninfoOption` structures, which ends with an entry having a null `keyword` pointer. All notes above for [`PQconndefaults`](libpq-connect.html#LIBPQ-PQCONNDEFAULTS) also apply to the result of [`PQconninfo`](libpq-connect.html#LIBPQ-PQCONNINFO).
+    Returns a connection options array. This can be used to determine all possible [`PQconnectdb`](libpq-connect#LIBPQ-PQCONNECTDB) options and the values that were used to connect to the server. The return value points to an array of `PQconninfoOption` structures, which ends with an entry having a null `keyword` pointer. All notes above for [`PQconndefaults`](libpq-connect#LIBPQ-PQCONNDEFAULTS) also apply to the result of [`PQconninfo`](libpq-connect#LIBPQ-PQCONNINFO).
 
 * `PQconninfoParse` [#](#LIBPQ-PQCONNINFOPARSE)
 
@@ -223,13 +223,13 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
     PQconninfoOption *PQconninfoParse(const char *conninfo, char **errmsg);
     ```
 
-    Parses a connection string and returns the resulting options as an array; or returns `NULL` if there is a problem with the connection string. This function can be used to extract the [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB) options in the provided connection string. The return value points to an array of `PQconninfoOption` structures, which ends with an entry having a null `keyword` pointer.
+    Parses a connection string and returns the resulting options as an array; or returns `NULL` if there is a problem with the connection string. This function can be used to extract the [`PQconnectdb`](libpq-connect#LIBPQ-PQCONNECTDB) options in the provided connection string. The return value points to an array of `PQconninfoOption` structures, which ends with an entry having a null `keyword` pointer.
 
     All legal options will be present in the result array, but the `PQconninfoOption` for any option not present in the connection string will have `val` set to `NULL`; default values are not inserted.
 
     If `errmsg` is not `NULL`, then `*errmsg` is set to `NULL` on success, else to a `malloc`'d error string explaining the problem. (It is also possible for `*errmsg` to be set to `NULL` and the function to return `NULL`; this indicates an out-of-memory condition.)
 
-    After processing the options array, free it by passing it to [`PQconninfoFree`](libpq-misc.html#LIBPQ-PQCONNINFOFREE). If this is not done, some memory is leaked for each call to [`PQconninfoParse`](libpq-connect.html#LIBPQ-PQCONNINFOPARSE). Conversely, if an error occurs and `errmsg` is not `NULL`, be sure to free the error string using [`PQfreemem`](libpq-misc.html#LIBPQ-PQFREEMEM).
+    After processing the options array, free it by passing it to [`PQconninfoFree`](libpq-misc#LIBPQ-PQCONNINFOFREE). If this is not done, some memory is leaked for each call to [`PQconninfoParse`](libpq-connect#LIBPQ-PQCONNINFOPARSE). Conversely, if an error occurs and `errmsg` is not `NULL`, be sure to free the error string using [`PQfreemem`](libpq-misc#LIBPQ-PQFREEMEM).
 
 * `PQfinish` [#](#LIBPQ-PQFINISH)
 
@@ -240,7 +240,7 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
     void PQfinish(PGconn *conn);
     ```
 
-    Note that even if the server connection attempt fails (as indicated by [`PQstatus`](libpq-status.html#LIBPQ-PQSTATUS)), the application should call [`PQfinish`](libpq-connect.html#LIBPQ-PQFINISH) to free the memory used by the `PGconn` object. The `PGconn` pointer must not be used again after [`PQfinish`](libpq-connect.html#LIBPQ-PQFINISH) has been called.
+    Note that even if the server connection attempt fails (as indicated by [`PQstatus`](libpq-status#LIBPQ-PQSTATUS)), the application should call [`PQfinish`](libpq-connect#LIBPQ-PQFINISH) to free the memory used by the `PGconn` object. The `PGconn` pointer must not be used again after [`PQfinish`](libpq-connect#LIBPQ-PQFINISH) has been called.
 
 * `PQreset` [#](#LIBPQ-PQRESET)
 
@@ -264,13 +264,13 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
     PostgresPollingStatusType PQresetPoll(PGconn *conn);
     ```
 
-    These functions will close the connection to the server and attempt to establish a new connection, using all the same parameters previously used. This can be useful for error recovery if a working connection is lost. They differ from [`PQreset`](libpq-connect.html#LIBPQ-PQRESET) (above) in that they act in a nonblocking manner. These functions suffer from the same restrictions as [`PQconnectStartParams`](libpq-connect.html#LIBPQ-PQCONNECTSTARTPARAMS), `PQconnectStart` and `PQconnectPoll`.
+    These functions will close the connection to the server and attempt to establish a new connection, using all the same parameters previously used. This can be useful for error recovery if a working connection is lost. They differ from [`PQreset`](libpq-connect#LIBPQ-PQRESET) (above) in that they act in a nonblocking manner. These functions suffer from the same restrictions as [`PQconnectStartParams`](libpq-connect#LIBPQ-PQCONNECTSTARTPARAMS), `PQconnectStart` and `PQconnectPoll`.
 
-    To initiate a connection reset, call [`PQresetStart`](libpq-connect.html#LIBPQ-PQRESETSTART). If it returns 0, the reset has failed. If it returns 1, poll the reset using `PQresetPoll` in exactly the same way as you would create the connection using `PQconnectPoll`.
+    To initiate a connection reset, call [`PQresetStart`](libpq-connect#LIBPQ-PQRESETSTART). If it returns 0, the reset has failed. If it returns 1, poll the reset using `PQresetPoll` in exactly the same way as you would create the connection using `PQconnectPoll`.
 
 * `PQpingParams` [#](#LIBPQ-PQPINGPARAMS)
 
-    [`PQpingParams`](libpq-connect.html#LIBPQ-PQPINGPARAMS) reports the status of the server. It accepts connection parameters identical to those of [`PQconnectdbParams`](libpq-connect.html#LIBPQ-PQCONNECTDBPARAMS), described above. It is not necessary to supply correct user name, password, or database name values to obtain the server status; however, if incorrect values are provided, the server will log a failed connection attempt.
+    [`PQpingParams`](libpq-connect#LIBPQ-PQPINGPARAMS) reports the status of the server. It accepts connection parameters identical to those of [`PQconnectdbParams`](libpq-connect#LIBPQ-PQCONNECTDBPARAMS), described above. It is not necessary to supply correct user name, password, or database name values to obtain the server status; however, if incorrect values are provided, the server will log a failed connection attempt.
 
     ```
 
@@ -299,18 +299,18 @@ On Unix, forking a process with open libpq connections can lead to unpredictable
 
 * `PQping` [#](#LIBPQ-PQPING)
 
-    [`PQping`](libpq-connect.html#LIBPQ-PQPING) reports the status of the server. It accepts connection parameters identical to those of [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB), described above. It is not necessary to supply correct user name, password, or database name values to obtain the server status; however, if incorrect values are provided, the server will log a failed connection attempt.
+    [`PQping`](libpq-connect#LIBPQ-PQPING) reports the status of the server. It accepts connection parameters identical to those of [`PQconnectdb`](libpq-connect#LIBPQ-PQCONNECTDB), described above. It is not necessary to supply correct user name, password, or database name values to obtain the server status; however, if incorrect values are provided, the server will log a failed connection attempt.
 
     ```
 
     PGPing PQping(const char *conninfo);
     ```
 
-    The return values are the same as for [`PQpingParams`](libpq-connect.html#LIBPQ-PQPINGPARAMS).
+    The return values are the same as for [`PQpingParams`](libpq-connect#LIBPQ-PQPINGPARAMS).
 
 * `PQsetSSLKeyPassHook_OpenSSL` [#](#LIBPQ-PQSETSSLKEYPASSHOOK-OPENSSL)
 
-    `PQsetSSLKeyPassHook_OpenSSL` lets an application override libpq's [default handling of encrypted client certificate key files](libpq-ssl.html#LIBPQ-SSL-CLIENTCERT "34.19.2. Client Certificates") using [sslpassword](libpq-connect.html#LIBPQ-CONNECT-SSLPASSWORD) or interactive prompting.
+    `PQsetSSLKeyPassHook_OpenSSL` lets an application override libpq's [default handling of encrypted client certificate key files](libpq-ssl#LIBPQ-SSL-CLIENTCERT "34.19.2. Client Certificates") using [sslpassword](libpq-connect#LIBPQ-CONNECT-SSLPASSWORD) or interactive prompting.
 
     ```
 
@@ -356,7 +356,7 @@ Example:
 host=localhost port=5432 dbname=mydb connect_timeout=10
 ```
 
-The recognized parameter key words are listed in [Section 34.1.2](libpq-connect.html#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words").
+The recognized parameter key words are listed in [Section 34.1.2](libpq-connect#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words").
 
 #### 34.1.1.2. Connection URIs [#](#LIBPQ-CONNSTRING-URIS)
 
@@ -400,7 +400,7 @@ Values that would normally appear in the hierarchical part of the URI can altern
 postgresql:///mydb?host=localhost&port=5433
 ```
 
-All named parameters must match key words listed in [Section 34.1.2](libpq-connect.html#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words"), except that for compatibility with JDBC connection URIs, instances of `ssl=true` are translated into `sslmode=require`.
+All named parameters must match key words listed in [Section 34.1.2](libpq-connect#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words"), except that for compatibility with JDBC connection URIs, instances of `ssl=true` are translated into `sslmode=require`.
 
 The connection URI needs to be encoded with [percent-encoding](https://tools.ietf.org/html/rfc3986#section-2.1) if it includes symbols with special meaning in any of its parts. Here is an example where the equal sign (`=`) is replaced with `%3D` and the space character with `%20`:
 
@@ -416,7 +416,7 @@ The host part may be either a host name or an IP address. To specify an IPv6 add
 postgresql://[2001:db8::1234]/database
 ```
 
-The host part is interpreted as described for the parameter [host](libpq-connect.html#LIBPQ-CONNECT-HOST). In particular, a Unix-domain socket connection is chosen if the host part is either empty or looks like an absolute path name, otherwise a TCP/IP connection is initiated. Note, however, that the slash is a reserved character in the hierarchical part of the URI. So, to specify a non-standard Unix-domain socket directory, either omit the host part of the URI and specify the host as a named parameter, or percent-encode the path in the host part of the URI:
+The host part is interpreted as described for the parameter [host](libpq-connect#LIBPQ-CONNECT-HOST). In particular, a Unix-domain socket connection is chosen if the host part is either empty or looks like an absolute path name, otherwise a TCP/IP connection is initiated. Note, however, that the slash is a reserved character in the hierarchical part of the URI. So, to specify a non-standard Unix-domain socket directory, either omit the host part of the URI and specify the host as a named parameter, or percent-encode the path in the host part of the URI:
 
 ```
 
@@ -446,7 +446,7 @@ The currently recognized parameter key words are:
 
     Name of host to connect to. If a host name looks like an absolute path name, it specifies Unix-domain communication rather than TCP/IP communication; the value is the name of the directory in which the socket file is stored. (On Unix, an absolute path name begins with a slash. On Windows, paths starting with drive letters are also recognized.) If the host name starts with `@`, it is taken as a Unix-domain socket in the abstract namespace (currently supported on Linux and Windows). The default behavior when `host` is not specified, or is empty, is to connect to a Unix-domain socket in `/tmp` (or whatever socket directory was specified when PostgreSQL was built). On Windows, the default is to connect to `localhost`.
 
-    A comma-separated list of host names is also accepted, in which case each host name in the list is tried in order; an empty item in the list selects the default behavior as explained above. See [Section 34.1.1.3](libpq-connect.html#LIBPQ-MULTIPLE-HOSTS "34.1.1.3. Specifying Multiple Hosts") for details.
+    A comma-separated list of host names is also accepted, in which case each host name in the list is tried in order; an empty item in the list selects the default behavior as explained above. See [Section 34.1.1.3](libpq-connect#LIBPQ-MULTIPLE-HOSTS "34.1.1.3. Specifying Multiple Hosts") for details.
 
 * `hostaddr` [#](#LIBPQ-CONNECT-HOSTADDR)
 
@@ -458,9 +458,9 @@ The currently recognized parameter key words are:
   * If `hostaddr` is specified without `host`, the value for `hostaddr` gives the server network address. The connection attempt will fail if the authentication method requires a host name.
   * If both `host` and `hostaddr` are specified, the value for `hostaddr` gives the server network address. The value for `host` is ignored unless the authentication method requires it, in which case it will be used as the host name.
 
-    Note that authentication is likely to fail if `host` is not the name of the server at network address `hostaddr`. Also, when both `host` and `hostaddr` are specified, `host` is used to identify the connection in a password file (see [Section 34.16](libpq-pgpass.html "34.16. The Password File")).
+    Note that authentication is likely to fail if `host` is not the name of the server at network address `hostaddr`. Also, when both `host` and `hostaddr` are specified, `host` is used to identify the connection in a password file (see [Section 34.16](libpq-pgpass "34.16. The Password File")).
 
-    A comma-separated list of `hostaddr` values is also accepted, in which case each host in the list is tried in order. An empty item in the list causes the corresponding host name to be used, or the default host name if that is empty as well. See [Section 34.1.1.3](libpq-connect.html#LIBPQ-MULTIPLE-HOSTS "34.1.1.3. Specifying Multiple Hosts") for details.
+    A comma-separated list of `hostaddr` values is also accepted, in which case each host in the list is tried in order. An empty item in the list causes the corresponding host name to be used, or the default host name if that is empty as well. See [Section 34.1.1.3](libpq-connect#LIBPQ-MULTIPLE-HOSTS "34.1.1.3. Specifying Multiple Hosts") for details.
 
     Without either a host name or host address, libpq will connect using a local Unix-domain socket; or on Windows, it will attempt to connect to `localhost`.
 
@@ -470,7 +470,7 @@ The currently recognized parameter key words are:
 
 * `dbname` [#](#LIBPQ-CONNECT-DBNAME)
 
-    The database name. Defaults to be the same as the user name. In certain contexts, the value is checked for extended formats; see [Section 34.1.1](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings") for more details on those.
+    The database name. Defaults to be the same as the user name. In certain contexts, the value is checked for extended formats; see [Section 34.1.1](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings") for more details on those.
 
 * `user` [#](#LIBPQ-CONNECT-USER)
 
@@ -482,7 +482,7 @@ The currently recognized parameter key words are:
 
 * `passfile` [#](#LIBPQ-CONNECT-PASSFILE)
 
-    Specifies the name of the file used to store passwords (see [Section 34.16](libpq-pgpass.html "34.16. The Password File")). Defaults to `~/.pgpass`, or `%APPDATA%\postgresql\pgpass.conf` on Microsoft Windows. (No error is reported if this file does not exist.)
+    Specifies the name of the file used to store passwords (see [Section 34.16](libpq-pgpass "34.16. The Password File")). Defaults to `~/.pgpass`, or `%APPDATA%\postgresql\pgpass.conf` on Microsoft Windows. (No error is reported if this file does not exist.)
 
 * `require_auth` [#](#LIBPQ-CONNECT-REQUIRE-AUTH)
 
@@ -504,7 +504,7 @@ The currently recognized parameter key words are:
 
   * `gss`
 
-        The server must either request a Kerberos handshake via GSSAPI or establish a GSS-encrypted channel (see also [gssencmode](libpq-connect.html#LIBPQ-CONNECT-GSSENCMODE)).
+        The server must either request a Kerberos handshake via GSSAPI or establish a GSS-encrypted channel (see also [gssencmode](libpq-connect#LIBPQ-CONNECT-GSSENCMODE)).
 
   * `sspi`
 
@@ -534,15 +534,15 @@ The currently recognized parameter key words are:
 
 * `options` [#](#LIBPQ-CONNECT-OPTIONS)
 
-    Specifies command-line options to send to the server at connection start. For example, setting this to `-c geqo=off` sets the session's value of the `geqo` parameter to `off`. Spaces within this string are considered to separate command-line arguments, unless escaped with a backslash (`\`); write `\\` to represent a literal backslash. For a detailed discussion of the available options, consult [Chapter 20](runtime-config.html "Chapter 20. Server Configuration").
+    Specifies command-line options to send to the server at connection start. For example, setting this to `-c geqo=off` sets the session's value of the `geqo` parameter to `off`. Spaces within this string are considered to separate command-line arguments, unless escaped with a backslash (`\`); write `\\` to represent a literal backslash. For a detailed discussion of the available options, consult [Chapter 20](runtime-config "Chapter 20. Server Configuration").
 
 * `application_name` [#](#LIBPQ-CONNECT-APPLICATION-NAME)
 
-    Specifies a value for the [application\_name](runtime-config-logging.html#GUC-APPLICATION-NAME) configuration parameter.
+    Specifies a value for the [application\_name](runtime-config-logging#GUC-APPLICATION-NAME) configuration parameter.
 
 * `fallback_application_name` [#](#LIBPQ-CONNECT-FALLBACK-APPLICATION-NAME)
 
-    Specifies a fallback value for the [application\_name](runtime-config-logging.html#GUC-APPLICATION-NAME) configuration parameter. This value will be used if no value has been given for `application_name` via a connection parameter or the `PGAPPNAME` environment variable. Specifying a fallback name is useful in generic utility programs that wish to set a default application name but allow it to be overridden by the user.
+    Specifies a fallback value for the [application\_name](runtime-config-logging#GUC-APPLICATION-NAME) configuration parameter. This value will be used if no value has been given for `application_name` via a connection parameter or the `PGAPPNAME` environment variable. Specifying a fallback name is useful in generic utility programs that wish to set a default application name but allow it to be overridden by the user.
 
 * `keepalives` [#](#LIBPQ-KEEPALIVES)
 
@@ -566,7 +566,7 @@ The currently recognized parameter key words are:
 
 * `replication` [#](#LIBPQ-CONNECT-REPLICATION)
 
-    This option determines whether the connection should use the replication protocol instead of the normal protocol. This is what PostgreSQL replication connections as well as tools such as pg\_basebackup use internally, but it can also be used by third-party applications. For a description of the replication protocol, consult [Section 55.4](protocol-replication.html "55.4. Streaming Replication Protocol").
+    This option determines whether the connection should use the replication protocol instead of the normal protocol. This is what PostgreSQL replication connections as well as tools such as pg\_basebackup use internally, but it can also be used by third-party applications. For a description of the replication protocol, consult [Section 55.4](protocol-replication "55.4. Streaming Replication Protocol").
 
     The following values, which are case-insensitive, are supported:
 
@@ -630,7 +630,7 @@ The currently recognized parameter key words are:
 
         only try an SSL connection, verify that the server certificate is issued by a trusted CA and that the requested server host name matches that in the certificate
 
-    See [Section 34.19](libpq-ssl.html "34.19. SSL Support") for a detailed description of how these options work.
+    See [Section 34.19](libpq-ssl "34.19. SSL Support") for a detailed description of how these options work.
 
     `sslmode` is ignored for Unix domain socket communication. If PostgreSQL is compiled without SSL support, using options `require`, `verify-ca`, or `verify-full` will cause an error, while options `allow` and `prefer` will be accepted but libpq will not actually attempt an SSL connection.
 
@@ -674,7 +674,7 @@ The currently recognized parameter key words are:
 
   * `disable`
 
-        A client certificate is never sent, even if one is available (default location or provided via [sslcert](libpq-connect.html#LIBPQ-CONNECT-SSLCERT)).
+        A client certificate is never sent, even if one is available (default location or provided via [sslcert](libpq-connect#LIBPQ-CONNECT-SSLCERT)).
 
   * `allow` (default)
 
@@ -702,7 +702,7 @@ The currently recognized parameter key words are:
 
 * `sslcrl` [#](#LIBPQ-CONNECT-SSLCRL)
 
-    This parameter specifies the file name of the SSL server certificate revocation list (CRL). Certificates listed in this file, if it exists, will be rejected while attempting to authenticate the server's certificate. If neither [sslcrl](libpq-connect.html#LIBPQ-CONNECT-SSLCRL) nor [sslcrldir](libpq-connect.html#LIBPQ-CONNECT-SSLCRLDIR) is set, this setting is taken as `~/.postgresql/root.crl`.
+    This parameter specifies the file name of the SSL server certificate revocation list (CRL). Certificates listed in this file, if it exists, will be rejected while attempting to authenticate the server's certificate. If neither [sslcrl](libpq-connect#LIBPQ-CONNECT-SSLCRL) nor [sslcrldir](libpq-connect#LIBPQ-CONNECT-SSLCRLDIR) is set, this setting is taken as `~/.postgresql/root.crl`.
 
 * `sslcrldir` [#](#LIBPQ-CONNECT-SSLCRLDIR)
 
@@ -720,7 +720,7 @@ The currently recognized parameter key words are:
 
 * `requirepeer` [#](#LIBPQ-CONNECT-REQUIREPEER)
 
-    This parameter specifies the operating-system user name of the server, for example `requirepeer=postgres`. When making a Unix-domain socket connection, if this parameter is set, the client checks at the beginning of the connection that the server process is running under the specified user name; if it is not, the connection is aborted with an error. This parameter can be used to provide server authentication similar to that available with SSL certificates on TCP/IP connections. (Note that if the Unix-domain socket is in `/tmp` or another publicly writable location, any user could start a server listening there. Use this parameter to ensure that you are connected to a server run by a trusted user.) This option is only supported on platforms for which the `peer` authentication method is implemented; see [Section 21.9](auth-peer.html "21.9. Peer Authentication").
+    This parameter specifies the operating-system user name of the server, for example `requirepeer=postgres`. When making a Unix-domain socket connection, if this parameter is set, the client checks at the beginning of the connection that the server process is running under the specified user name; if it is not, the connection is aborted with an error. This parameter can be used to provide server authentication similar to that available with SSL certificates on TCP/IP connections. (Note that if the Unix-domain socket is in `/tmp` or another publicly writable location, any user could start a server listening there. Use this parameter to ensure that you are connected to a server run by a trusted user.) This option is only supported on platforms for which the `peer` authentication method is implemented; see [Section 21.9](auth-peer "21.9. Peer Authentication").
 
 * `ssl_min_protocol_version` [#](#LIBPQ-CONNECT-SSL-MIN-PROTOCOL-VERSION)
 
@@ -732,7 +732,7 @@ The currently recognized parameter key words are:
 
 * `krbsrvname` [#](#LIBPQ-CONNECT-KRBSRVNAME)
 
-    Kerberos service name to use when authenticating with GSSAPI. This must match the service name specified in the server configuration for Kerberos authentication to succeed. (See also [Section 21.6](gssapi-auth.html "21.6. GSSAPI Authentication").) The default value is normally `postgres`, but that can be changed when building PostgreSQL via the `--with-krb-srvnam` option of configure. In most environments, this parameter never needs to be changed. Some Kerberos implementations might require a different service name, such as Microsoft Active Directory which requires the service name to be in upper case (`POSTGRES`).
+    Kerberos service name to use when authenticating with GSSAPI. This must match the service name specified in the server configuration for Kerberos authentication to succeed. (See also [Section 21.6](gssapi-auth "21.6. GSSAPI Authentication").) The default value is normally `postgres`, but that can be changed when building PostgreSQL via the `--with-krb-srvnam` option of configure. In most environments, this parameter never needs to be changed. Some Kerberos implementations might require a different service name, such as Microsoft Active Directory which requires the service name to be in upper case (`POSTGRES`).
 
 * `gsslib` [#](#LIBPQ-CONNECT-GSSLIB)
 
@@ -744,7 +744,7 @@ The currently recognized parameter key words are:
 
 * `service` [#](#LIBPQ-CONNECT-SERVICE)
 
-    Service name to use for additional parameters. It specifies a service name in `pg_service.conf` that holds additional connection parameters. This allows applications to specify only a service name so connection parameters can be centrally maintained. See [Section 34.17](libpq-pgservice.html "34.17. The Connection Service File").
+    Service name to use for additional parameters. It specifies a service name in `pg_service.conf` that holds additional connection parameters. This allows applications to specify only a service name so connection parameters can be centrally maintained. See [Section 34.17](libpq-pgservice "34.17. The Connection Service File").
 
 * `target_session_attrs` [#](#LIBPQ-CONNECT-TARGET-SESSION-ATTRS)
 
@@ -776,7 +776,7 @@ The currently recognized parameter key words are:
 
 * `load_balance_hosts` [#](#LIBPQ-CONNECT-LOAD-BALANCE-HOSTS)
 
-    Controls the order in which the client tries to connect to the available hosts and addresses. Once a connection attempt is successful no other hosts and addresses will be tried. This parameter is typically used in combination with multiple host names or a DNS record that returns multiple IPs. This parameter can be used in combination with [target\_session\_attrs](libpq-connect.html#LIBPQ-CONNECT-TARGET-SESSION-ATTRS) to, for example, load balance over standby servers only. Once successfully connected, subsequent queries on the returned connection will all be sent to the same server. There are currently two modes:
+    Controls the order in which the client tries to connect to the available hosts and addresses. Once a connection attempt is successful no other hosts and addresses will be tried. This parameter is typically used in combination with multiple host names or a DNS record that returns multiple IPs. This parameter can be used in combination with [target\_session\_attrs](libpq-connect#LIBPQ-CONNECT-TARGET-SESSION-ATTRS) to, for example, load balance over standby servers only. Once successfully connected, subsequent queries on the returned connection will all be sent to the same server. There are currently two modes:
 
   * `disable` (default)
 
@@ -788,4 +788,4 @@ The currently recognized parameter key words are:
 
         While random load balancing, due to its random nature, will almost never result in a completely uniform distribution, it statistically gets quite close. One important aspect here is that this algorithm uses two levels of random choices: First the hosts will be resolved in random order. Then secondly, before resolving the next host, all resolved addresses for the current host will be tried in random order. This behaviour can skew the amount of connections each node gets greatly in certain cases, for instance when some hosts resolve to more addresses than others. But such a skew can also be used on purpose, e.g. to increase the number of connections a larger server gets by providing its hostname multiple times in the host string.
 
-        When using this value it's recommended to also configure a reasonable value for [connect\_timeout](libpq-connect.html#LIBPQ-CONNECT-CONNECT-TIMEOUT). Because then, if one of the nodes that are used for load balancing is not responding, a new node will be tried.
+        When using this value it's recommended to also configure a reasonable value for [connect\_timeout](libpq-connect#LIBPQ-CONNECT-CONNECT-TIMEOUT). Because then, if one of the nodes that are used for load balancing is not responding, a new node will be tried.

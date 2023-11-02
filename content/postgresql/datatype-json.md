@@ -1,16 +1,16 @@
 ## 8.14. JSON Types [#](#DATATYPE-JSON)
 
-  * *   [8.14.1. JSON Input and Output Syntax](datatype-json.html#JSON-KEYS-ELEMENTS)
-  * [8.14.2. Designing JSON Documents](datatype-json.html#JSON-DOC-DESIGN)
-  * [8.14.3. `jsonb` Containment and Existence](datatype-json.html#JSON-CONTAINMENT)
-  * [8.14.4. `jsonb` Indexing](datatype-json.html#JSON-INDEXING)
-  * [8.14.5. `jsonb` Subscripting](datatype-json.html#JSONB-SUBSCRIPTING)
-  * [8.14.6. Transforms](datatype-json.html#DATATYPE-JSON-TRANSFORMS)
-  * [8.14.7. jsonpath Type](datatype-json.html#DATATYPE-JSONPATH)
+  * *   [8.14.1. JSON Input and Output Syntax](datatype-json#JSON-KEYS-ELEMENTS)
+  * [8.14.2. Designing JSON Documents](datatype-json#JSON-DOC-DESIGN)
+  * [8.14.3. `jsonb` Containment and Existence](datatype-json#JSON-CONTAINMENT)
+  * [8.14.4. `jsonb` Indexing](datatype-json#JSON-INDEXING)
+  * [8.14.5. `jsonb` Subscripting](datatype-json#JSONB-SUBSCRIPTING)
+  * [8.14.6. Transforms](datatype-json#DATATYPE-JSON-TRANSFORMS)
+  * [8.14.7. jsonpath Type](datatype-json#DATATYPE-JSONPATH)
 
-JSON data types are for storing JSON (JavaScript Object Notation) data, as specified in [RFC 7159](https://tools.ietf.org/html/rfc7159). Such data can also be stored as `text`, but the JSON data types have the advantage of enforcing that each stored value is valid according to the JSON rules. There are also assorted JSON-specific functions and operators available for data stored in these data types; see [Section 9.16](functions-json.html "9.16. JSON Functions and Operators").
+JSON data types are for storing JSON (JavaScript Object Notation) data, as specified in [RFC 7159](https://tools.ietf.org/html/rfc7159). Such data can also be stored as `text`, but the JSON data types have the advantage of enforcing that each stored value is valid according to the JSON rules. There are also assorted JSON-specific functions and operators available for data stored in these data types; see [Section 9.16](functions-json "9.16. JSON Functions and Operators").
 
-PostgreSQL offers two types for storing JSON data: `json` and `jsonb`. To implement efficient query mechanisms for these data types, PostgreSQL also provides the `jsonpath` data type described in [Section 8.14.7](datatype-json.html#DATATYPE-JSONPATH "8.14.7. jsonpath Type").
+PostgreSQL offers two types for storing JSON data: `json` and `jsonb`. To implement efficient query mechanisms for these data types, PostgreSQL also provides the `jsonpath` data type described in [Section 8.14.7](datatype-json#DATATYPE-JSONPATH "8.14.7. jsonpath Type").
 
 The `json` and `jsonb` data types accept *almost* identical sets of values as input. The major practical difference is one of efficiency. The `json` data type stores an exact copy of the input text, which processing functions must reparse on each execution; while `jsonb` data is stored in a decomposed binary format that makes it slightly slower to input due to added conversion overhead, but significantly faster to process, since no reparsing is needed. `jsonb` also supports indexing, which can be a significant advantage.
 
@@ -24,9 +24,9 @@ RFC 7159 permits JSON strings to contain Unicode escape sequences denoted by `\u
 
 ### Note
 
-Many of the JSON processing functions described in [Section 9.16](functions-json.html "9.16. JSON Functions and Operators") will convert Unicode escapes to regular characters, and will therefore throw the same types of errors just described even if their input is of type `json` not `jsonb`. The fact that the `json` input function does not make these checks may be considered a historical artifact, although it does allow for simple storage (without processing) of JSON Unicode escapes in a database encoding that does not support the represented characters.
+Many of the JSON processing functions described in [Section 9.16](functions-json "9.16. JSON Functions and Operators") will convert Unicode escapes to regular characters, and will therefore throw the same types of errors just described even if their input is of type `json` not `jsonb`. The fact that the `json` input function does not make these checks may be considered a historical artifact, although it does allow for simple storage (without processing) of JSON Unicode escapes in a database encoding that does not support the represented characters.
 
-When converting textual JSON input into `jsonb`, the primitive types described by RFC 7159 are effectively mapped onto native PostgreSQL types, as shown in [Table 8.23](datatype-json.html#JSON-TYPE-MAPPING-TABLE "Table 8.23. JSON Primitive Types and Corresponding PostgreSQL Types"). Therefore, there are some minor additional constraints on what constitutes valid `jsonb` data that do not apply to the `json` type, nor to JSON in the abstract, corresponding to limits on what can be represented by the underlying data type. Notably, `jsonb` will reject numbers that are outside the range of the PostgreSQL `numeric` data type, while `json` will not. Such implementation-defined restrictions are permitted by RFC 7159. However, in practice such problems are far more likely to occur in other implementations, as it is common to represent JSON's `number` primitive type as IEEE 754 double precision floating point (which RFC 7159 explicitly anticipates and allows for). When using JSON as an interchange format with such systems, the danger of losing numeric precision compared to data originally stored by PostgreSQL should be considered.
+When converting textual JSON input into `jsonb`, the primitive types described by RFC 7159 are effectively mapped onto native PostgreSQL types, as shown in [Table 8.23](datatype-json#JSON-TYPE-MAPPING-TABLE "Table 8.23. JSON Primitive Types and Corresponding PostgreSQL Types"). Therefore, there are some minor additional constraints on what constitutes valid `jsonb` data that do not apply to the `json` type, nor to JSON in the abstract, corresponding to limits on what can be represented by the underlying data type. Notably, `jsonb` will reject numbers that are outside the range of the PostgreSQL `numeric` data type, while `json` will not. Such implementation-defined restrictions are permitted by RFC 7159. However, in practice such problems are far more likely to occur in other implementations, as it is common to represent JSON's `number` primitive type as IEEE 754 double precision floating point (which RFC 7159 explicitly anticipates and allows for). When using JSON as an interchange format with such systems, the danger of losing numeric precision compared to data originally stored by PostgreSQL should be considered.
 
 Conversely, as noted in the table there are some minor restrictions on the input format of JSON primitive types that do not apply to the corresponding PostgreSQL types.
 
@@ -94,7 +94,7 @@ SELECT '{"reading": 1.230e-5}'::json, '{"reading": 1.230e-5}'::jsonb;
 
 However, `jsonb` will preserve trailing fractional zeroes, as seen in this example, even though those are semantically insignificant for purposes such as equality checks.
 
-For the list of built-in functions and operators available for constructing and processing JSON values, see [Section 9.16](functions-json.html "9.16. JSON Functions and Operators").
+For the list of built-in functions and operators available for constructing and processing JSON values, see [Section 9.16](functions-json "9.16. JSON Functions and Operators").
 
 ### 8.14.2. Designing JSON Documents [#](#JSON-DOC-DESIGN)
 
@@ -195,13 +195,13 @@ but that approach is less flexible, and often less efficient as well.
 
 On the other hand, the JSON existence operator is not nested: it will only look for the specified key or array element at top level of the JSON value.
 
-The various containment and existence operators, along with all other JSON operators and functions are documented in [Section 9.16](functions-json.html "9.16. JSON Functions and Operators").
+The various containment and existence operators, along with all other JSON operators and functions are documented in [Section 9.16](functions-json "9.16. JSON Functions and Operators").
 
 ### 8.14.4. `jsonb` Indexing [#](#JSON-INDEXING)
 
 GIN indexes can be used to efficiently search for keys or key/value pairs occurring within a large number of `jsonb` documents (datums). Two GIN “operator classes” are provided, offering different performance and flexibility trade-offs.
 
-The default GIN operator class for `jsonb` supports queries with the key-exists operators `?`, `?|` and `?&`, the containment operator `@>`, and the `jsonpath` match operators `@?` and `@@`. (For details of the semantics that these operators implement, see [Table 9.46](functions-json.html#FUNCTIONS-JSONB-OP-TABLE "Table 9.46. Additional jsonb Operators").) An example of creating an index with this operator class is:
+The default GIN operator class for `jsonb` supports queries with the key-exists operators `?`, `?|` and `?&`, the containment operator `@>`, and the `jsonpath` match operators `@?` and `@@`. (For details of the semantics that these operators implement, see [Table 9.46](functions-json#FUNCTIONS-JSONB-OP-TABLE "Table 9.46. Additional jsonb Operators").) An example of creating an index with this operator class is:
 
 ```
 
@@ -259,7 +259,7 @@ Still, with appropriate use of expression indexes, the above query can use an in
 CREATE INDEX idxgintags ON api USING GIN ((jdoc -> 'tags'));
 ```
 
-Now, the `WHERE` clause `jdoc -> 'tags' ? 'qui'` will be recognized as an application of the indexable operator `?` to the indexed expression `jdoc -> 'tags'`. (More information on expression indexes can be found in [Section 11.7](indexes-expressional.html "11.7. Indexes on Expressions").)
+Now, the `WHERE` clause `jdoc -> 'tags' ? 'qui'` will be recognized as an application of the indexable operator `?` to the indexed expression `jdoc -> 'tags'`. (More information on expression indexes can be found in [Section 11.7](indexes-expressional "11.7. Indexes on Expressions").)
 
 Another approach to querying is to exploit containment, for example:
 
@@ -413,24 +413,24 @@ The semantics of SQL/JSON path predicates and operators generally follow SQL. At
 
 Numeric literals in SQL/JSON path expressions follow JavaScript rules, which are different from both SQL and JSON in some minor details. For example, SQL/JSON path allows `.1` and `1.`, which are invalid in JSON. Non-decimal integer literals and underscore separators are supported, for example, `1_000_000`, `0x1EEE_FFFF`, `0o273`, `0b100101`. In SQL/JSON path (and in JavaScript, but not in SQL proper), there must not be an underscore separator directly after the radix prefix.
 
-An SQL/JSON path expression is typically written in an SQL query as an SQL character string literal, so it must be enclosed in single quotes, and any single quotes desired within the value must be doubled (see [Section 4.1.2.1](sql-syntax-lexical.html#SQL-SYNTAX-STRINGS "4.1.2.1. String Constants")). Some forms of path expressions require string literals within them. These embedded string literals follow JavaScript/ECMAScript conventions: they must be surrounded by double quotes, and backslash escapes may be used within them to represent otherwise-hard-to-type characters. In particular, the way to write a double quote within an embedded string literal is `\"`, and to write a backslash itself, you must write `\\`. Other special backslash sequences include those recognized in JSON strings: `\b`, `\f`, `\n`, `\r`, `\t`, `\v` for various ASCII control characters, and `\uNNNN` for a Unicode character identified by its 4-hex-digit code point. The backslash syntax also includes two cases not allowed by JSON: `\xNN` for a character code written with only two hex digits, and `\u{N...}` for a character code written with 1 to 6 hex digits.
+An SQL/JSON path expression is typically written in an SQL query as an SQL character string literal, so it must be enclosed in single quotes, and any single quotes desired within the value must be doubled (see [Section 4.1.2.1](sql-syntax-lexical#SQL-SYNTAX-STRINGS "4.1.2.1. String Constants")). Some forms of path expressions require string literals within them. These embedded string literals follow JavaScript/ECMAScript conventions: they must be surrounded by double quotes, and backslash escapes may be used within them to represent otherwise-hard-to-type characters. In particular, the way to write a double quote within an embedded string literal is `\"`, and to write a backslash itself, you must write `\\`. Other special backslash sequences include those recognized in JSON strings: `\b`, `\f`, `\n`, `\r`, `\t`, `\v` for various ASCII control characters, and `\uNNNN` for a Unicode character identified by its 4-hex-digit code point. The backslash syntax also includes two cases not allowed by JSON: `\xNN` for a character code written with only two hex digits, and `\u{N...}` for a character code written with 1 to 6 hex digits.
 
 A path expression consists of a sequence of path elements, which can be any of the following:
 
 * Path literals of JSON primitive types: Unicode text, numeric, true, false, or null.
-* Path variables listed in [Table 8.24](datatype-json.html#TYPE-JSONPATH-VARIABLES "Table 8.24. jsonpath Variables").
-* Accessor operators listed in [Table 8.25](datatype-json.html#TYPE-JSONPATH-ACCESSORS "Table 8.25. jsonpath Accessors").
-* `jsonpath` operators and methods listed in [Section 9.16.2.2](functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS "9.16.2.2. SQL/JSON Path Operators and Methods").
+* Path variables listed in [Table 8.24](datatype-json#TYPE-JSONPATH-VARIABLES "Table 8.24. jsonpath Variables").
+* Accessor operators listed in [Table 8.25](datatype-json#TYPE-JSONPATH-ACCESSORS "Table 8.25. jsonpath Accessors").
+* `jsonpath` operators and methods listed in [Section 9.16.2.2](functions-json#FUNCTIONS-SQLJSON-PATH-OPERATORS "9.16.2.2. SQL/JSON Path Operators and Methods").
 * Parentheses, which can be used to provide filter expressions or define the order of path evaluation.
 
-For details on using `jsonpath` expressions with SQL/JSON query functions, see [Section 9.16.2](functions-json.html#FUNCTIONS-SQLJSON-PATH "9.16.2. The SQL/JSON Path Language").
+For details on using `jsonpath` expressions with SQL/JSON query functions, see [Section 9.16.2](functions-json#FUNCTIONS-SQLJSON-PATH "9.16.2. The SQL/JSON Path Language").
 
 **Table 8.24. `jsonpath` Variables**
 
 | Variable   | Description                                                                                                                                                                                                                       |
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `$`        | A variable representing the JSON value being queried (the *context item*).                                                                                                                                                        |
-| `$varname` | A named variable. Its value can be set by the parameter *`vars`* of several JSON processing functions; see [Table 9.49](functions-json.html#FUNCTIONS-JSON-PROCESSING-TABLE "Table 9.49. JSON Processing Functions") for details. |
+| `$varname` | A named variable. Its value can be set by the parameter *`vars`* of several JSON processing functions; see [Table 9.49](functions-json#FUNCTIONS-JSON-PROCESSING-TABLE "Table 9.49. JSON Processing Functions") for details. |
 | `@`        | A variable representing the result of path evaluation in filter expressions.                                                                                                                                                      |
 
 \

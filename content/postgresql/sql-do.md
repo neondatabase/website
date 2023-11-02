@@ -57,4 +57,4 @@ There is no `DO` statement in the SQL standard.
 
 ## See Also
 
-[CREATE LANGUAGE](sql-createlanguage.html "CREATE LANGUAGE")
+[CREATE LANGUAGE](sql-createlanguage "CREATE LANGUAGE")

@@ -4,7 +4,7 @@ Every operator is “syntactic sugar” for a call to an underlying function tha
 
 PostgreSQL supports prefix and infix operators. Operators can be overloaded;t is, the same operator name can be used for different operators that have different numbers and types of operands. When a query is executed, the system determines the operator to call from the number and types of the provided operands.
 
-Here is an example of creating an operator for adding two complex numbers. We assume we've already created the definition of type `complex` (see [Section 38.13](xtypes.html "38.13. User-Defined Types")). First we need a function that does the work, then we can define the operator:
+Here is an example of creating an operator for adding two complex numbers. We assume we've already created the definition of type `complex` (see [Section 38.13](xtypes "38.13. User-Defined Types")). First we need a function that does the work, then we can define the operator:
 
 ```
 

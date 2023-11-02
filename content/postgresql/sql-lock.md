@@ -26,7 +26,7 @@ To achieve a similar effect when running a transaction at the `REPEATABLE READ` 
 
 If a transaction of this sort is going to change the data in the table, then it should use `SHARE ROW EXCLUSIVE` lock mode instead of `SHARE` mode. This ensures that only one transaction of this type runs at a time. Without this, a deadlock is possible: two transactions might both acquire `SHARE` mode, and then be unable to also acquire `ROW EXCLUSIVE` mode to actually perform their updates. (Note that a transaction's own locks never conflict, so a transaction can acquire `ROW EXCLUSIVE` mode when it holds `SHARE` mode — but not if anyone else holds `SHARE` mode.) To avoid deadlocks, make sure all transactions acquire locks on the same objects in the same order, and if multiple lock modes are involved for a single object, then transactions should always acquire the most restrictive mode first.
 
-More information about the lock modes and locking strategies can be found in [Section 13.3](explicit-locking.html "13.3. Explicit Locking").
+More information about the lock modes and locking strategies can be found in [Section 13.3](explicit-locking "13.3. Explicit Locking").
 
 ## Parameters
 
@@ -38,7 +38,7 @@ More information about the lock modes and locking strategies can be found in [Se
 
 * *`lockmode`*
 
-    The lock mode specifies which locks this lock conflicts with. Lock modes are described in [Section 13.3](explicit-locking.html "13.3. Explicit Locking").
+    The lock mode specifies which locks this lock conflicts with. Lock modes are described in [Section 13.3](explicit-locking "13.3. Explicit Locking").
 
     If no lock mode is specified, then `ACCESS EXCLUSIVE`, the most restrictive mode, is used.
 
@@ -48,13 +48,13 @@ More information about the lock modes and locking strategies can be found in [Se
 
 ## Notes
 
-To lock a table, the user must have the right privilege for the specified *`lockmode`*, or be the table's owner or a superuser. If the user has `UPDATE`, `DELETE`, or `TRUNCATE` privileges on the table, any *`lockmode`* is permitted. If the user has `INSERT` privileges on the table, `ROW EXCLUSIVE MODE` (or a less-conflicting mode as described in [Section 13.3](explicit-locking.html "13.3. Explicit Locking")) is permitted. If a user has `SELECT` privileges on the table, `ACCESS SHARE MODE` is permitted.
+To lock a table, the user must have the right privilege for the specified *`lockmode`*, or be the table's owner or a superuser. If the user has `UPDATE`, `DELETE`, or `TRUNCATE` privileges on the table, any *`lockmode`* is permitted. If the user has `INSERT` privileges on the table, `ROW EXCLUSIVE MODE` (or a less-conflicting mode as described in [Section 13.3](explicit-locking "13.3. Explicit Locking")) is permitted. If a user has `SELECT` privileges on the table, `ACCESS SHARE MODE` is permitted.
 
-The user performing the lock on the view must have the corresponding privilege on the view. In addition, by default, the view's owner must have the relevant privileges on the underlying base relations, whereas the user performing the lock does not need any permissions on the underlying base relations. However, if the view has `security_invoker` set to `true` (see [`CREATE VIEW`](sql-createview.html "CREATE VIEW")), the user performing the lock, rather than the view owner, must have the relevant privileges on the underlying base relations.
+The user performing the lock on the view must have the corresponding privilege on the view. In addition, by default, the view's owner must have the relevant privileges on the underlying base relations, whereas the user performing the lock does not need any permissions on the underlying base relations. However, if the view has `security_invoker` set to `true` (see [`CREATE VIEW`](sql-createview "CREATE VIEW")), the user performing the lock, rather than the view owner, must have the relevant privileges on the underlying base relations.
 
-`LOCK TABLE` is useless outside a transaction block: the lock would remain held only to the completion of the statement. Therefore PostgreSQL reports an error if `LOCK` is used outside a transaction block. Use [`BEGIN`](sql-begin.html "BEGIN") and [`COMMIT`](sql-commit.html "COMMIT") (or [`ROLLBACK`](sql-rollback.html "ROLLBACK")) to define a transaction block.
+`LOCK TABLE` is useless outside a transaction block: the lock would remain held only to the completion of the statement. Therefore PostgreSQL reports an error if `LOCK` is used outside a transaction block. Use [`BEGIN`](sql-begin "BEGIN") and [`COMMIT`](sql-commit "COMMIT") (or [`ROLLBACK`](sql-rollback "ROLLBACK")) to define a transaction block.
 
-`LOCK TABLE` only deals with table-level locks, and so the mode names involving `ROW` are all misnomers. These mode names should generally be read as indicating the intention of the user to acquire row-level locks within the locked table. Also, `ROW EXCLUSIVE` mode is a shareable table lock. Keep in mind that all the lock modes have identical semantics so far as `LOCK TABLE` is concerned, differing only in the rules about which modes conflict with which. For information on how to acquire an actual row-level lock, see [Section 13.3.2](explicit-locking.html#LOCKING-ROWS "13.3.2. Row-Level Locks") and [The Locking Clause](sql-select.html#SQL-FOR-UPDATE-SHARE "The Locking Clause") in the [SELECT](sql-select.html "SELECT") documentation.
+`LOCK TABLE` only deals with table-level locks, and so the mode names involving `ROW` are all misnomers. These mode names should generally be read as indicating the intention of the user to acquire row-level locks within the locked table. Also, `ROW EXCLUSIVE` mode is a shareable table lock. Keep in mind that all the lock modes have identical semantics so far as `LOCK TABLE` is concerned, differing only in the rules about which modes conflict with which. For information on how to acquire an actual row-level lock, see [Section 13.3.2](explicit-locking#LOCKING-ROWS "13.3.2. Row-Level Locks") and [The Locking Clause](sql-select#SQL-FOR-UPDATE-SHARE "The Locking Clause") in the [SELECT](sql-select "SELECT") documentation.
 
 ## Examples
 
@@ -86,6 +86,6 @@ COMMIT WORK;
 
 ## Compatibility
 
-There is no `LOCK TABLE` in the SQL standard, which instead uses `SET TRANSACTION` to specify concurrency levels on transactions. PostgreSQL supports that too; see [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION") for details.
+There is no `LOCK TABLE` in the SQL standard, which instead uses `SET TRANSACTION` to specify concurrency levels on transactions. PostgreSQL supports that too; see [SET TRANSACTION](sql-set-transaction "SET TRANSACTION") for details.
 
 Except for `ACCESS SHARE`, `ACCESS EXCLUSIVE`, and `SHARE UPDATE EXCLUSIVE` lock modes, the PostgreSQL lock modes and the `LOCK TABLE` syntax are compatible with those present in Oracle.

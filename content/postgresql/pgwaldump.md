@@ -132,4 +132,4 @@ pg\_waldump cannot read WAL files with suffix `.partial`. If those files need to
 
 ## See Also
 
-[Section 30.6](wal-internals.html "30.6. WAL Internals")
+[Section 30.6](wal-internals "30.6. WAL Internals")

@@ -25,7 +25,7 @@ DROP SERVER [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the server (such as user mappings), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the server (such as user mappings), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -46,4 +46,4 @@ DROP SERVER IF EXISTS foo;
 
 ## See Also
 
-[CREATE SERVER](sql-createserver.html "CREATE SERVER"), [ALTER SERVER](sql-alterserver.html "ALTER SERVER")
+[CREATE SERVER](sql-createserver "CREATE SERVER"), [ALTER SERVER](sql-alterserver "ALTER SERVER")

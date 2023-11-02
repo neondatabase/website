@@ -1,15 +1,15 @@
 ## F.2. amcheck — tools to verify table and index consistency [#](#AMCHECK)
 
-  * *   [F.2.1. Functions](amcheck.html#AMCHECK-FUNCTIONS)
-  * [F.2.2. Optional *`heapallindexed`* Verification](amcheck.html#AMCHECK-OPTIONAL-HEAPALLINDEXED-VERIFICATION)
-  * [F.2.3. Using `amcheck` Effectively](amcheck.html#AMCHECK-USING-AMCHECK-EFFECTIVELY)
-  * [F.2.4. Repairing Corruption](amcheck.html#AMCHECK-REPAIRING-CORRUPTION)
+  * *   [F.2.1. Functions](amcheck#AMCHECK-FUNCTIONS)
+  * [F.2.2. Optional *`heapallindexed`* Verification](amcheck#AMCHECK-OPTIONAL-HEAPALLINDEXED-VERIFICATION)
+  * [F.2.3. Using `amcheck` Effectively](amcheck#AMCHECK-USING-AMCHECK-EFFECTIVELY)
+  * [F.2.4. Repairing Corruption](amcheck#AMCHECK-REPAIRING-CORRUPTION)
 
 The `amcheck` module provides functions that allow you to verify the logical consistency of the structure of relations.
 
 The B-Tree checking functions verify various *invariants* in the structure of the representation of particular relations. The correctness of the access method functions behind index scans and other important operations relies on these invariants always holding. For example, certain functions verify, among other things, that all B-Tree pages have items in “logical” order (e.g., for B-Tree indexes on `text`, index tuples should be in collated lexical order). If that particular invariant somehow fails to hold, we can expect binary searches on the affected page to incorrectly guide index scans, resulting in wrong answers to SQL queries. If the structure appears to be valid, no error is raised.
 
-Verification is performed using the same procedures as those used by index scans themselves, which may be user-defined operator class code. For example, B-Tree index verification relies on comparisons made with one or more B-Tree support function 1 routines. See [Section 38.16.3](xindex.html#XINDEX-SUPPORT "38.16.3. Index Method Support Routines") for details of operator class support functions.
+Verification is performed using the same procedures as those used by index scans themselves, which may be user-defined operator class code. For example, B-Tree index verification relies on comparisons made with one or more B-Tree support function 1 routines. See [Section 38.16.3](xindex#XINDEX-SUPPORT "38.16.3. Index Method Support Routines") for details of operator class support functions.
 
 Unlike the B-Tree checking functions which report corruption by raising errors, the heap checking function `verify_heapam` checks a table and attempts to return a set of rows, one row per corruption detected. Despite this, if facilities that `verify_heapam` relies upon are themselves corrupted, the function may be unable to continue and may instead raise an error.
 
@@ -141,13 +141,13 @@ The summarizing structure is bound in size by `maintenance_work_mem`. In order t
 
 ### F.2.3. Using `amcheck` Effectively [#](#AMCHECK-USING-AMCHECK-EFFECTIVELY)
 
-`amcheck` can be effective at detecting various types of failure modes that [data checksums](app-initdb.html#APP-INITDB-DATA-CHECKSUMS) will fail to catch. These include:
+`amcheck` can be effective at detecting various types of failure modes that [data checksums](app-initdb#APP-INITDB-DATA-CHECKSUMS) will fail to catch. These include:
 
 * Structural inconsistencies caused by incorrect operator class implementations.
 
     This includes issues caused by the comparison rules of operating system collations changing. Comparisons of datums of a collatable type like `text` must be immutable (just as all comparisons used for B-Tree index scans must be immutable), which implies that operating system collation rules must never change. Though rare, updates to operating system collation rules can cause these issues. More commonly, an inconsistency in the collation order between a primary server and a standby server is implicated, possibly because the *major* operating system version in use is inconsistent. Such inconsistencies will generally only arise on standby servers, and so can generally only be detected on standby servers.
 
-    If a problem like this arises, it may not affect each individual index that is ordered using an affected collation, simply because *indexed* values might happen to have the same absolute ordering regardless of the behavioral inconsistency. See [Section 24.1](locale.html "24.1. Locale Support") and [Section 24.2](collation.html "24.2. Collation Support") for further details about how PostgreSQL uses operating system locales and collations.
+    If a problem like this arises, it may not affect each individual index that is ordered using an affected collation, simply because *indexed* values might happen to have the same absolute ordering regardless of the behavioral inconsistency. See [Section 24.1](locale "24.1. Locale Support") and [Section 24.2](collation "24.2. Collation Support") for further details about how PostgreSQL uses operating system locales and collations.
 
 * Structural inconsistencies between indexes and the heap relations that are indexed (when *`heapallindexed`* verification is performed).
 
@@ -155,7 +155,7 @@ The summarizing structure is bound in size by `maintenance_work_mem`. In order t
 
 * Corruption caused by hypothetical undiscovered bugs in the underlying PostgreSQL access method code, sort code, or transaction management code.
 
-    Automatic verification of the structural integrity of indexes plays a role in the general testing of new or proposed PostgreSQL features that could plausibly allow a logical inconsistency to be introduced. Verification of table structure and associated visibility and transaction status information plays a similar role. One obvious testing strategy is to call `amcheck` functions continuously when running the standard regression tests. See [Section 33.1](regress-run.html "33.1. Running the Tests") for details on running the tests.
+    Automatic verification of the structural integrity of indexes plays a role in the general testing of new or proposed PostgreSQL features that could plausibly allow a logical inconsistency to be introduced. Verification of table structure and associated visibility and transaction status information plays a similar role. One obvious testing strategy is to call `amcheck` functions continuously when running the standard regression tests. See [Section 33.1](regress-run "33.1. Running the Tests") for details on running the tests.
 
 * File system or storage subsystem faults where checksums happen to simply not be enabled.
 
@@ -167,13 +167,13 @@ The summarizing structure is bound in size by `maintenance_work_mem`. In order t
 
     When *`heapallindexed`* verification is performed, there is generally a greatly increased chance of detecting single-bit errors, since strict binary equality is tested, and the indexed attributes within the heap are tested.
 
-Structural corruption can happen due to faulty storage hardware, or relation files being overwritten or modified by unrelated software. This kind of corruption can also be detected with [data page checksums](checksums.html "30.2. Data Checksums").
+Structural corruption can happen due to faulty storage hardware, or relation files being overwritten or modified by unrelated software. This kind of corruption can also be detected with [data page checksums](checksums "30.2. Data Checksums").
 
 Relation pages which are correctly formatted, internally consistent, and correct relative to their own internal checksums may still contain logical corruption. As such, this kind of corruption cannot be detected with checksums. Examples include toasted values in the main table which lack a corresponding entry in the toast table, and tuples in the main table with a Transaction ID that is older than the oldest valid Transaction ID in the database or cluster.
 
 Multiple causes of logical corruption have been observed in production systems, including bugs in the PostgreSQL server software, faulty and ill-conceived backup and restore tools, and user error.
 
-Corrupt relations are most concerning in live production environments, precisely the same environments where high risk activities are least welcome. For this reason, `verify_heapam` has been designed to diagnose corruption without undue risk. It cannot guard against all causes of backend crashes, as even executing the calling query could be unsafe on a badly corrupted system. Access to [catalog tables](catalogs-overview.html "53.1. Overview") is performed and could be problematic if the catalogs themselves are corrupted.
+Corrupt relations are most concerning in live production environments, precisely the same environments where high risk activities are least welcome. For this reason, `verify_heapam` has been designed to diagnose corruption without undue risk. It cannot guard against all causes of backend crashes, as even executing the calling query could be unsafe on a badly corrupted system. Access to [catalog tables](catalogs-overview "53.1. Overview") is performed and could be problematic if the catalogs themselves are corrupted.
 
 In general, `amcheck` can only prove the presence of corruption; it cannot prove its absence.
 
@@ -181,4 +181,4 @@ In general, `amcheck` can only prove the presence of corruption; it cannot prove
 
 No error concerning corruption raised by `amcheck` should ever be a false positive. `amcheck` raises errors in the event of conditions that, by definition, should never happen, and so careful analysis of `amcheck` errors is often required.
 
-There is no general method of repairing problems that `amcheck` detects. An explanation for the root cause of an invariant violation should be sought. [pageinspect](pageinspect.html "F.24. pageinspect — low-level inspection of database pages") may play a useful role in diagnosing corruption that `amcheck` detects. A `REINDEX` may not be effective in repairing corruption.
+There is no general method of repairing problems that `amcheck` detects. An explanation for the root cause of an invariant violation should be sought. [pageinspect](pageinspect "F.24. pageinspect — low-level inspection of database pages") may play a useful role in diagnosing corruption that `amcheck` detects. A `REINDEX` may not be effective in repairing corruption.

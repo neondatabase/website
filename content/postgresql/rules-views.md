@@ -1,9 +1,9 @@
 ## 41.2. Views and the Rule System [#](#RULES-VIEWS)
 
-  * *   [41.2.1. How `SELECT` Rules Work](rules-views.html#RULES-SELECT)
-  * [41.2.2. View Rules in Non-`SELECT` Statements](rules-views.html#RULES-VIEWS-NON-SELECT)
-  * [41.2.3. The Power of Views in PostgreSQL](rules-views.html#RULES-VIEWS-POWER)
-  * [41.2.4. Updating a View](rules-views.html#RULES-VIEWS-UPDATE)
+  * *   [41.2.1. How `SELECT` Rules Work](rules-views#RULES-SELECT)
+  * [41.2.2. View Rules in Non-`SELECT` Statements](rules-views#RULES-VIEWS-NON-SELECT)
+  * [41.2.3. The Power of Views in PostgreSQL](rules-views#RULES-VIEWS-POWER)
+  * [41.2.4. Updating a View](rules-views#RULES-VIEWS-UPDATE)
 
 Views in PostgreSQL are implemented using the rule system. A view is basically an empty table (having no actual storage) with an `ON SELECT DO INSTEAD` rule. Conventionally, that rule is named `_RETURN`. So a view like
 
@@ -23,7 +23,7 @@ CREATE RULE "_RETURN" AS ON SELECT TO myview DO INSTEAD
 
 although you can't actually write that, because tables are not allowed to have `ON SELECT` rules.
 
-A view can also have other kinds of `DO INSTEAD` rules, allowing `INSERT`, `UPDATE`, or `DELETE` commands to be performed on the view despite its lack of underlying storage. This is discussed further below, in [Section 41.2.4](rules-views.html#RULES-VIEWS-UPDATE "41.2.4. Updating a View").
+A view can also have other kinds of `DO INSTEAD` rules, allowing `INSERT`, `UPDATE`, or `DELETE` commands to be performed on the view despite its lack of underlying storage. This is discussed further below, in [Section 41.2.4](rules-views#RULES-VIEWS-UPDATE "41.2.4. Updating a View").
 
 ### 41.2.1. How `SELECT` Rules Work [#](#RULES-SELECT)
 
@@ -324,13 +324,13 @@ The benefit of implementing views with the rule system is that the planner has a
 
 What happens if a view is named as the target relation for an `INSERT`, `UPDATE`, or `DELETE`? Doing the substitutions described above would give a query tree in which the result relation points at a subquery range-table entry, which will not work. There are several ways in which PostgreSQL can support the appearance of updating a view, however. In order of user-experienced complexity those are: automatically substitute in the underlying table for the view, execute a user-defined trigger, or rewrite the query per a user-defined rule. These options are discussed below.
 
-If the subquery selects from a single base relation and is simple enough, the rewriter can automatically replace the subquery with the underlying base relation so that the `INSERT`, `UPDATE`, or `DELETE` is applied to the base relation in the appropriate way. Views that are “simple enough” for this are called *automatically updatable*. For detailed information on the kinds of view that can be automatically updated, see [CREATE VIEW](sql-createview.html "CREATE VIEW").
+If the subquery selects from a single base relation and is simple enough, the rewriter can automatically replace the subquery with the underlying base relation so that the `INSERT`, `UPDATE`, or `DELETE` is applied to the base relation in the appropriate way. Views that are “simple enough” for this are called *automatically updatable*. For detailed information on the kinds of view that can be automatically updated, see [CREATE VIEW](sql-createview "CREATE VIEW").
 
-Alternatively, the operation may be handled by a user-provided `INSTEAD OF` trigger on the view (see [CREATE TRIGGER](sql-createtrigger.html "CREATE TRIGGER")). Rewriting works slightly differently in this case. For `INSERT`, the rewriter does nothing at all with the view, leaving it as the result relation for the query. For `UPDATE` and `DELETE`, it's still necessary to expand the view query to produce the “old” rows that the command will attempt to update or delete. So the view is expanded as normal, but another unexpanded range-table entry is added to the query to represent the view in its capacity as the result relation.
+Alternatively, the operation may be handled by a user-provided `INSTEAD OF` trigger on the view (see [CREATE TRIGGER](sql-createtrigger "CREATE TRIGGER")). Rewriting works slightly differently in this case. For `INSERT`, the rewriter does nothing at all with the view, leaving it as the result relation for the query. For `UPDATE` and `DELETE`, it's still necessary to expand the view query to produce the “old” rows that the command will attempt to update or delete. So the view is expanded as normal, but another unexpanded range-table entry is added to the query to represent the view in its capacity as the result relation.
 
 The problem that now arises is how to identify the rows to be updated in the view. Recall that when the result relation is a table, a special CTID entry is added to the target list to identify the physical locations of the rows to be updated. This does not work if the result relation is a view, because a view does not have any CTID, since its rows do not have actual physical locations. Instead, for an `UPDATE` or `DELETE` operation, a special `wholerow` entry is added to the target list, which expands to include all columns from the view. The executor uses this value to supply the “old” row to the `INSTEAD OF` trigger. It is up to the trigger to work out what to update based on the old and new row values.
 
-Another possibility is for the user to define `INSTEAD` rules that specify substitute actions for `INSERT`, `UPDATE`, and `DELETE` commands on a view. These rules will rewrite the command, typically into a command that updates one or more tables, rather than views. That is the topic of [Section 41.4](rules-update.html "41.4. Rules on INSERT, UPDATE, and DELETE").
+Another possibility is for the user to define `INSTEAD` rules that specify substitute actions for `INSERT`, `UPDATE`, and `DELETE` commands on a view. These rules will rewrite the command, typically into a command that updates one or more tables, rather than views. That is the topic of [Section 41.4](rules-update "41.4. Rules on INSERT, UPDATE, and DELETE").
 
 Note that rules are evaluated first, rewriting the original query before it is planned and executed. Therefore, if a view has `INSTEAD OF` triggers as well as rules on `INSERT`, `UPDATE`, or `DELETE`, then the rules will be evaluated first, and depending on the result, the triggers may not be used at all.
 

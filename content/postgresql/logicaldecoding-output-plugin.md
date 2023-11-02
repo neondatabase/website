@@ -1,12 +1,12 @@
 ## 49.6. Logical Decoding Output Plugins [#](#LOGICALDECODING-OUTPUT-PLUGIN)
 
-  * *   [49.6.1. Initialization Function](logicaldecoding-output-plugin.html#LOGICALDECODING-OUTPUT-INIT)
-  * [49.6.2. Capabilities](logicaldecoding-output-plugin.html#LOGICALDECODING-CAPABILITIES)
-  * [49.6.3. Output Modes](logicaldecoding-output-plugin.html#LOGICALDECODING-OUTPUT-MODE)
-  * [49.6.4. Output Plugin Callbacks](logicaldecoding-output-plugin.html#LOGICALDECODING-OUTPUT-PLUGIN-CALLBACKS)
-  * [49.6.5. Functions for Producing Output](logicaldecoding-output-plugin.html#LOGICALDECODING-OUTPUT-PLUGIN-OUTPUT)
+  * *   [49.6.1. Initialization Function](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-INIT)
+  * [49.6.2. Capabilities](logicaldecoding-output-plugin#LOGICALDECODING-CAPABILITIES)
+  * [49.6.3. Output Modes](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-MODE)
+  * [49.6.4. Output Plugin Callbacks](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-PLUGIN-CALLBACKS)
+  * [49.6.5. Functions for Producing Output](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-PLUGIN-OUTPUT)
 
-An example output plugin can be found in the [`contrib/test_decoding`](test-decoding.html "F.44. test_decoding — SQL-based test/example module for WAL logical decoding")subdirectory of the PostgreSQL source tree.
+An example output plugin can be found in the [`contrib/test_decoding`](test-decoding "F.44. test_decoding — SQL-based test/example module for WAL logical decoding")subdirectory of the PostgreSQL source tree.
 
 ### 49.6.1. Initialization Function [#](#LOGICALDECODING-OUTPUT-INIT)
 
@@ -62,7 +62,7 @@ Note that access to user catalog tables or regular system catalog tables in the 
 
 ### 49.6.3. Output Modes [#](#LOGICALDECODING-OUTPUT-MODE)
 
-Output plugin callbacks can pass data to the consumer in nearly arbitrary formats. For some use cases, like viewing the changes via SQL, returning data in a data type that can contain arbitrary data (e.g., `bytea`) is cumbersome. If the output plugin only outputs textual data in the server's encoding, it can declare that by setting `OutputPluginOptions.output_type` to `OUTPUT_PLUGIN_TEXTUAL_OUTPUT` instead of `OUTPUT_PLUGIN_BINARY_OUTPUT` in the [startup callback](logicaldecoding-output-plugin.html#LOGICALDECODING-OUTPUT-PLUGIN-STARTUP "49.6.4.1. Startup Callback"). In that case, all the data has to be in the server's encoding so that a `text` datum can contain it. This is checked in assertion-enabled builds.
+Output plugin callbacks can pass data to the consumer in nearly arbitrary formats. For some use cases, like viewing the changes via SQL, returning data in a data type that can contain arbitrary data (e.g., `bytea`) is cumbersome. If the output plugin only outputs textual data in the server's encoding, it can declare that by setting `OutputPluginOptions.output_type` to `OUTPUT_PLUGIN_TEXTUAL_OUTPUT` instead of `OUTPUT_PLUGIN_BINARY_OUTPUT` in the [startup callback](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-PLUGIN-STARTUP "49.6.4.1. Startup Callback"). In that case, all the data has to be in the server's encoding so that a `text` datum can contain it. This is checked in assertion-enabled builds.
 
 ### 49.6.4. Output Plugin Callbacks [#](#LOGICALDECODING-OUTPUT-PLUGIN-CALLBACKS)
 
@@ -96,7 +96,7 @@ typedef struct OutputPluginOptions
 } OutputPluginOptions;
 ```
 
-`output_type` has to either be set to `OUTPUT_PLUGIN_TEXTUAL_OUTPUT` or `OUTPUT_PLUGIN_BINARY_OUTPUT`. See also [Section 49.6.3](logicaldecoding-output-plugin.html#LOGICALDECODING-OUTPUT-MODE "49.6.3. Output Modes"). If `receive_rewrites` is true, the output plugin will also be called for changes made by heap rewrites during certain DDL operations. These are of interest to plugins that handle DDL replication, but they require special handling.
+`output_type` has to either be set to `OUTPUT_PLUGIN_TEXTUAL_OUTPUT` or `OUTPUT_PLUGIN_BINARY_OUTPUT`. See also [Section 49.6.3](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-MODE "49.6.3. Output Modes"). If `receive_rewrites` is true, the output plugin will also be called for changes made by heap rewrites during certain DDL operations. These are of interest to plugins that handle DDL replication, but they require special handling.
 
 The startup callback should validate the options present in `ctx->output_plugin_options`. If the output plugin needs to have a state, it can use `ctx->output_plugin_private` to store it.
 
@@ -148,7 +148,7 @@ The *`ctx`* and *`txn`* parameters have the same contents as for the `begin_cb` 
 
 ### Note
 
-Only changes in user defined tables that are not unlogged (see [`UNLOGGED`](sql-createtable.html#SQL-CREATETABLE-UNLOGGED)) and not temporary (see [`TEMPORARY` or `TEMP`](sql-createtable.html#SQL-CREATETABLE-TEMPORARY)) can be extracted using logical decoding.
+Only changes in user defined tables that are not unlogged (see [`UNLOGGED`](sql-createtable#SQL-CREATETABLE-UNLOGGED)) and not temporary (see [`TEMPORARY` or `TEMP`](sql-createtable#SQL-CREATETABLE-TEMPORARY)) can be extracted using logical decoding.
 
 #### 49.6.4.6. Truncate Callback [#](#LOGICALDECODING-OUTPUT-PLUGIN-TRUNCATE)
 
@@ -163,7 +163,7 @@ typedef void (*LogicalDecodeTruncateCB) (struct LogicalDecodingContext *ctx,
                                          ReorderBufferChange *change);
 ```
 
-The parameters are analogous to the `change_cb` callback. However, because `TRUNCATE` actions on tables connected by foreign keys need to be executed together, this callback receives an array of relations instead of just a single one. See the description of the [TRUNCATE](sql-truncate.html "TRUNCATE") statement for details.
+The parameters are analogous to the `change_cb` callback. However, because `TRUNCATE` actions on tables connected by foreign keys need to be executed together, this callback receives an array of relations instead of just a single one. See the description of the [TRUNCATE](sql-truncate "TRUNCATE") statement for details.
 
 #### 49.6.4.7. Origin Filter Callback [#](#LOGICALDECODING-OUTPUT-PLUGIN-FILTER-ORIGIN)
 
@@ -350,7 +350,7 @@ typedef void (*LogicalDecodeStreamTruncateCB) (struct LogicalDecodingContext *ct
                                                ReorderBufferChange *change);
 ```
 
-The parameters are analogous to the `stream_change_cb` callback. However, because `TRUNCATE` actions on tables connected by foreign keys need to be executed together, this callback receives an array of relations instead of just a single one. See the description of the [TRUNCATE](sql-truncate.html "TRUNCATE") statement for details.
+The parameters are analogous to the `stream_change_cb` callback. However, because `TRUNCATE` actions on tables connected by foreign keys need to be executed together, this callback receives an array of relations instead of just a single one. See the description of the [TRUNCATE](sql-truncate "TRUNCATE") statement for details.
 
 ### 49.6.5. Functions for Producing Output [#](#LOGICALDECODING-OUTPUT-PLUGIN-OUTPUT)
 

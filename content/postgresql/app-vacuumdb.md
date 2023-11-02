@@ -14,7 +14,7 @@ vacuumdb — garbage-collect and analyze a PostgreSQL database
 
 vacuumdb is a utility for cleaning a PostgreSQL database. vacuumdb will also generate internal statistics used by the PostgreSQL query optimizer.
 
-vacuumdb is a wrapper around the SQL command [`VACUUM`](sql-vacuum.html "VACUUM"). There is no effective difference between vacuuming and analyzing databases via this utility and via other methods for accessing the server.
+vacuumdb is a wrapper around the SQL command [`VACUUM`](sql-vacuum "VACUUM"). There is no effective difference between vacuuming and analyzing databases via this utility and via other methods for accessing the server.
 
 ## Options
 
@@ -26,11 +26,11 @@ vacuumdb accepts the following command-line arguments:
 
 * `--buffer-usage-limit size`
 
-    Specifies the [**](glossary.html#GLOSSARY-BUFFER-ACCESS-STRATEGY)*[Buffer Access Strategy](glossary.html#GLOSSARY-BUFFER-ACCESS-STRATEGY "Buffer Access Strategy")* ring buffer size for a given invocation of vacuumdb. This size is used to calculate the number of shared buffers which will be reused as part of this strategy. See [VACUUM](sql-vacuum.html "VACUUM").
+    Specifies the [**](glossary#GLOSSARY-BUFFER-ACCESS-STRATEGY)*[Buffer Access Strategy](glossary#GLOSSARY-BUFFER-ACCESS-STRATEGY "Buffer Access Strategy")* ring buffer size for a given invocation of vacuumdb. This size is used to calculate the number of shared buffers which will be reused as part of this strategy. See [VACUUM](sql-vacuum "VACUUM").
 
 * `[-d] dbname``[--dbname=]dbname`
 
-    Specifies the name of the database to be cleaned or analyzed, when `-a`/`--all` is not used. If this is not specified, the database name is read from the environment variable `PGDATABASE`. If that is not set, the user name specified for the connection is used. The *`dbname`* can be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
+    Specifies the name of the database to be cleaned or analyzed, when `-a`/`--all` is not used. If this is not specified, the database name is read from the environment variable `PGDATABASE`. If that is not set, the user name specified for the connection is used. The *`dbname`* can be a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
 
 * `--disable-page-skipping`
 
@@ -56,19 +56,19 @@ vacuumdb accepts the following command-line arguments:
 
     Execute the vacuum or analyze commands in parallel by running *`njobs`* commands simultaneously. This option may reduce the processing time but it also increases the load on the database server.
 
-    vacuumdb will open *`njobs`* connections to the database, so make sure your [max\_connections](runtime-config-connection.html#GUC-MAX-CONNECTIONS) setting is high enough to accommodate all connections.
+    vacuumdb will open *`njobs`* connections to the database, so make sure your [max\_connections](runtime-config-connection#GUC-MAX-CONNECTIONS) setting is high enough to accommodate all connections.
 
     Note that using this mode together with the `-f` (`FULL`) option might cause deadlock failures if certain system catalogs are processed in parallel.
 
 * `--min-mxid-age mxid_age`
 
-    Only execute the vacuum or analyze commands on tables with a multixact ID age of at least *`mxid_age`*. This setting is useful for prioritizing tables to process to prevent multixact ID wraparound (see [Section 25.1.5.1](routine-vacuuming.html#VACUUM-FOR-MULTIXACT-WRAPAROUND "25.1.5.1. Multixacts and Wraparound")).
+    Only execute the vacuum or analyze commands on tables with a multixact ID age of at least *`mxid_age`*. This setting is useful for prioritizing tables to process to prevent multixact ID wraparound (see [Section 25.1.5.1](routine-vacuuming#VACUUM-FOR-MULTIXACT-WRAPAROUND "25.1.5.1. Multixacts and Wraparound")).
 
     For the purposes of this option, the multixact ID age of a relation is the greatest of the ages of the main relation and its associated TOAST table, if one exists. Since the commands issued by vacuumdb will also process the TOAST table for the relation if necessary, it does not need to be considered separately.
 
 * `--min-xid-age xid_age`
 
-    Only execute the vacuum or analyze commands on tables with a transaction ID age of at least *`xid_age`*. This setting is useful for prioritizing tables to process to prevent transaction ID wraparound (see [Section 25.1.5](routine-vacuuming.html#VACUUM-FOR-WRAPAROUND "25.1.5. Preventing Transaction ID Wraparound Failures")).
+    Only execute the vacuum or analyze commands on tables with a transaction ID age of at least *`xid_age`*. This setting is useful for prioritizing tables to process to prevent transaction ID wraparound (see [Section 25.1.5](routine-vacuuming#VACUUM-FOR-WRAPAROUND "25.1.5. Preventing Transaction ID Wraparound Failures")).
 
     For the purposes of this option, the transaction ID age of a relation is the greatest of the ages of the main relation and its associated TOAST table, if one exists. Since the commands issued by vacuumdb will also process the TOAST table for the relation if necessary, it does not need to be considered separately.
 
@@ -98,7 +98,7 @@ vacuumdb accepts the following command-line arguments:
 
 * `-P parallel_workers``--parallel=parallel_workers`
 
-    Specify the number of parallel workers for *parallel vacuum*. This allows the vacuum to leverage multiple CPUs to process indexes. See [VACUUM](sql-vacuum.html "VACUUM").
+    Specify the number of parallel workers for *parallel vacuum*. This allows the vacuum to leverage multiple CPUs to process indexes. See [VACUUM](sql-vacuum "VACUUM").
 
 * `-q``--quiet`
 
@@ -134,7 +134,7 @@ vacuumdb accepts the following command-line arguments:
 
 * `--analyze-in-stages`
 
-    Only calculate statistics for use by the optimizer (no vacuum), like `--analyze-only`. Run three stages of analyze; the first stage uses the lowest possible statistics target (see [default\_statistics\_target](runtime-config-query.html#GUC-DEFAULT-STATISTICS-TARGET)) to produce usable statistics faster, and subsequent stages build the full statistics.
+    Only calculate statistics for use by the optimizer (no vacuum), like `--analyze-only`. Run three stages of analyze; the first stage uses the lowest possible statistics target (see [default\_statistics\_target](runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET)) to produce usable statistics faster, and subsequent stages build the full statistics.
 
     This option is only useful to analyze a database that currently has no statistics or has wholly incorrect ones, such as if it is newly populated from a restored dump or by `pg_upgrade`. Be aware that running with this option in a database with existing statistics may cause the query optimizer choices to become transiently worse due to the low statistics targets of the early stages.
 
@@ -168,7 +168,7 @@ vacuumdb also accepts the following command-line arguments for connection parame
 
 * `--maintenance-db=dbname`
 
-    Specifies the name of the database to connect to to discover which databases should be vacuumed, when `-a`/`--all` is used. If not specified, the `postgres` database will be used, or if that does not exist, `template1` will be used. This can be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options. Also, connection string parameters other than the database name itself will be re-used when connecting to other databases.
+    Specifies the name of the database to connect to to discover which databases should be vacuumed, when `-a`/`--all` is used. If not specified, the `postgres` database will be used, or if that does not exist, `template1` will be used. This can be a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options. Also, connection string parameters other than the database name itself will be re-used when connecting to other databases.
 
 ## Environment
 
@@ -180,11 +180,11 @@ vacuumdb also accepts the following command-line arguments for connection parame
 
     Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 
-This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 ## Diagnostics
 
-In case of difficulty, see [VACUUM](sql-vacuum.html "VACUUM") and [psql](app-psql.html "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
+In case of difficulty, see [VACUUM](sql-vacuum "VACUUM") and [psql](app-psql "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
 
 ## Examples
 
@@ -218,4 +218,4 @@ vacuumdb --schema='foo' --schema='bar' xyzzy
 
 ## See Also
 
-[VACUUM](sql-vacuum.html "VACUUM")
+[VACUUM](sql-vacuum "VACUUM")

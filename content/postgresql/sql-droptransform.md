@@ -31,7 +31,7 @@ To be able to drop a transform, you must own the type and the language. These ar
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the transform, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the transform, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -48,8 +48,8 @@ DROP TRANSFORM FOR hstore LANGUAGE plpython3u;
 
 ## Compatibility
 
-This form of `DROP TRANSFORM` is a PostgreSQL extension. See [CREATE TRANSFORM](sql-createtransform.html "CREATE TRANSFORM") for details.
+This form of `DROP TRANSFORM` is a PostgreSQL extension. See [CREATE TRANSFORM](sql-createtransform "CREATE TRANSFORM") for details.
 
 ## See Also
 
-[CREATE TRANSFORM](sql-createtransform.html "CREATE TRANSFORM")
+[CREATE TRANSFORM](sql-createtransform "CREATE TRANSFORM")

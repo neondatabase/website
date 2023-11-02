@@ -25,7 +25,7 @@ DROP TEXT SEARCH CONFIGURATION [ IF EXISTS ] name [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the text search configuration, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the text search configuration, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -48,4 +48,4 @@ There is no `DROP TEXT SEARCH CONFIGURATION` statement in the SQL standard.
 
 ## See Also
 
-[ALTER TEXT SEARCH CONFIGURATION](sql-altertsconfig.html "ALTER TEXT SEARCH CONFIGURATION"), [CREATE TEXT SEARCH CONFIGURATION](sql-createtsconfig.html "CREATE TEXT SEARCH CONFIGURATION")
+[ALTER TEXT SEARCH CONFIGURATION](sql-altertsconfig "ALTER TEXT SEARCH CONFIGURATION"), [CREATE TEXT SEARCH CONFIGURATION](sql-createtsconfig "CREATE TEXT SEARCH CONFIGURATION")

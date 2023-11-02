@@ -25,7 +25,7 @@ DROP MATERIALIZED VIEW [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the materialized view (such as other materialized views, or regular views), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the materialized view (such as other materialized views, or regular views), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -46,4 +46,4 @@ DROP MATERIALIZED VIEW order_summary;
 
 ## See Also
 
-[CREATE MATERIALIZED VIEW](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW"), [ALTER MATERIALIZED VIEW](sql-altermaterializedview.html "ALTER MATERIALIZED VIEW"), [REFRESH MATERIALIZED VIEW](sql-refreshmaterializedview.html "REFRESH MATERIALIZED VIEW")
+[CREATE MATERIALIZED VIEW](sql-creatematerializedview "CREATE MATERIALIZED VIEW"), [ALTER MATERIALIZED VIEW](sql-altermaterializedview "ALTER MATERIALIZED VIEW"), [REFRESH MATERIALIZED VIEW](sql-refreshmaterializedview "REFRESH MATERIALIZED VIEW")

@@ -2,15 +2,15 @@
 
 JIT compilation is beneficial primarily for long-running CPU-bound queries. Frequently these will be analytical queries. For short queries the added overhead of performing JIT compilation will often be higher than the time it can save.
 
-To determine whether JIT compilation should be used, the total estimated cost of a query (see [Chapter 76](planner-stats-details.html "Chapter 76. How the Planner Uses Statistics") and [Section 20.7.2](runtime-config-query.html#RUNTIME-CONFIG-QUERY-CONSTANTS "20.7.2. Planner Cost Constants")) is used. The estimated cost of the query will be compared with the setting of [jit\_above\_cost](runtime-config-query.html#GUC-JIT-ABOVE-COST). If the cost is higher, JIT compilation will be performed. Two further decisions are then needed. Firstly, if the estimated cost is more than the setting of [jit\_inline\_above\_cost](runtime-config-query.html#GUC-JIT-INLINE-ABOVE-COST), short functions and operators used in the query will be inlined. Secondly, if the estimated cost is more than the setting of [jit\_optimize\_above\_cost](runtime-config-query.html#GUC-JIT-OPTIMIZE-ABOVE-COST), expensive optimizations are applied to improve the generated code. Each of these options increases the JIT compilation overhead, but can reduce query execution time considerably.
+To determine whether JIT compilation should be used, the total estimated cost of a query (see [Chapter 76](planner-stats-details "Chapter 76. How the Planner Uses Statistics") and [Section 20.7.2](runtime-config-query#RUNTIME-CONFIG-QUERY-CONSTANTS "20.7.2. Planner Cost Constants")) is used. The estimated cost of the query will be compared with the setting of [jit\_above\_cost](runtime-config-query#GUC-JIT-ABOVE-COST). If the cost is higher, JIT compilation will be performed. Two further decisions are then needed. Firstly, if the estimated cost is more than the setting of [jit\_inline\_above\_cost](runtime-config-query#GUC-JIT-INLINE-ABOVE-COST), short functions and operators used in the query will be inlined. Secondly, if the estimated cost is more than the setting of [jit\_optimize\_above\_cost](runtime-config-query#GUC-JIT-OPTIMIZE-ABOVE-COST), expensive optimizations are applied to improve the generated code. Each of these options increases the JIT compilation overhead, but can reduce query execution time considerably.
 
-These cost-based decisions will be made at plan time, not execution time. This means that when prepared statements are in use, and a generic plan is used (see [PREPARE](sql-prepare.html "PREPARE")), the values of the configuration parameters in effect at prepare time control the decisions, not the settings at execution time.
+These cost-based decisions will be made at plan time, not execution time. This means that when prepared statements are in use, and a generic plan is used (see [PREPARE](sql-prepare "PREPARE")), the values of the configuration parameters in effect at prepare time control the decisions, not the settings at execution time.
 
 ### Note
 
-If [jit](runtime-config-query.html#GUC-JIT) is set to `off`, or if no JIT implementation is available (for example because the server was compiled without `--with-llvm`), JIT will not be performed, even if it would be beneficial based on the above criteria. Setting [jit](runtime-config-query.html#GUC-JIT) to `off` has effects at both plan and execution time.
+If [jit](runtime-config-query#GUC-JIT) is set to `off`, or if no JIT implementation is available (for example because the server was compiled without `--with-llvm`), JIT will not be performed, even if it would be beneficial based on the above criteria. Setting [jit](runtime-config-query#GUC-JIT) to `off` has effects at both plan and execution time.
 
-[EXPLAIN](sql-explain.html "EXPLAIN") can be used to see whether JIT is used or not. As an example, here is a query that is not using JIT:
+[EXPLAIN](sql-explain "EXPLAIN") can be used to see whether JIT is used or not. As an example, here is a query that is not using JIT:
 
 ```
 
@@ -43,4 +43,4 @@ SET
  Execution Time: 7.416 ms
 ```
 
-As visible here, JIT was used, but inlining and expensive optimization were not. If [jit\_inline\_above\_cost](runtime-config-query.html#GUC-JIT-INLINE-ABOVE-COST) or [jit\_optimize\_above\_cost](runtime-config-query.html#GUC-JIT-OPTIMIZE-ABOVE-COST) were also lowered, that would change.
+As visible here, JIT was used, but inlining and expensive optimization were not. If [jit\_inline\_above\_cost](runtime-config-query#GUC-JIT-INLINE-ABOVE-COST) or [jit\_optimize\_above\_cost](runtime-config-query#GUC-JIT-OPTIMIZE-ABOVE-COST) were also lowered, that would change.

@@ -14,4 +14,4 @@ INSERT INTO mytable VALUES(-1);  -- fails
 
 When an operator or function of the underlying type is applied to a domain value, the domain is automatically down-cast to the underlying type. Thus, for example, the result of `mytable.id - 1` is considered to be of type `integer` not `posint`. We could write `(mytable.id - 1)::posint` to cast the result back to `posint`, causing the domain's constraints to be rechecked. In this case, that would result in an error if the expression had been applied to an `id` value of 1. Assigning a value of the underlying type to a field or variable of the domain type is allowed without writing an explicit cast, but the domain's constraints will be checked.
 
-For additional information see [CREATE DOMAIN](sql-createdomain.html "CREATE DOMAIN").
+For additional information see [CREATE DOMAIN](sql-createdomain "CREATE DOMAIN").

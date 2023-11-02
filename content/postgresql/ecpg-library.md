@@ -14,6 +14,6 @@ The `libecpg` library primarily contains “hidden” functions that are used to
 
     It is a bad idea to manipulate database connection handles made from ecpg directly with libpq routines.
 
-* `ECPGtransactionStatus(const char *connection_name)` returns the current transaction status of the given connection identified by *`connection_name`*. See [Section 34.2](libpq-status.html "34.2. Connection Status Functions") and libpq's [`PQtransactionStatus`](libpq-status.html#LIBPQ-PQTRANSACTIONSTATUS) for details about the returned status codes.
+* `ECPGtransactionStatus(const char *connection_name)` returns the current transaction status of the given connection identified by *`connection_name`*. See [Section 34.2](libpq-status "34.2. Connection Status Functions") and libpq's [`PQtransactionStatus`](libpq-status#LIBPQ-PQTRANSACTIONSTATUS) for details about the returned status codes.
 
 * `ECPGstatus(int lineno, const char* connection_name)` returns true if you are connected to a database and false if not. *`connection_name`* can be `NULL` if a single connection is being used.

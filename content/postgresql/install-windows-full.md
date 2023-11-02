@@ -1,10 +1,10 @@
 ## 18.1. Building with Visual C++ or the Microsoft Windows SDK [#](#INSTALL-WINDOWS-FULL)
 
-  * *   [18.1.1. Requirements](install-windows-full.html#INSTALL-WINDOWS-FULL-REQUIREMENTS)
-  * [18.1.2. Special Considerations for 64-Bit Windows](install-windows-full.html#INSTALL-WINDOWS-FULL-64-BIT)
-  * [18.1.3. Building](install-windows-full.html#INSTALL-WINDOWS-FULL-BUILD)
-  * [18.1.4. Cleaning and Installing](install-windows-full.html#INSTALL-WINDOWS-FULL-CLEAN-INST)
-  * [18.1.5. Running the Regression Tests](install-windows-full.html#INSTALL-WINDOWS-FULL-REG-TESTS)
+  * *   [18.1.1. Requirements](install-windows-full#INSTALL-WINDOWS-FULL-REQUIREMENTS)
+  * [18.1.2. Special Considerations for 64-Bit Windows](install-windows-full#INSTALL-WINDOWS-FULL-64-BIT)
+  * [18.1.3. Building](install-windows-full#INSTALL-WINDOWS-FULL-BUILD)
+  * [18.1.4. Cleaning and Installing](install-windows-full#INSTALL-WINDOWS-FULL-CLEAN-INST)
+  * [18.1.5. Running the Regression Tests](install-windows-full#INSTALL-WINDOWS-FULL-REG-TESTS)
 
 PostgreSQL can be built using the Visual C++ compiler suite from Microsoft. These compilers can be either from Visual Studio, Visual Studio Express or some versions of the Microsoft Windows SDK. If you do not already have a Visual Studio environment set up, the easiest ways are to use the compilers from Visual Studio 2022 or those in the Windows SDK 10, which are both free downloads from Microsoft.
 
@@ -205,7 +205,7 @@ vcregress check serial
 vcregress taptest src\bin\initdb\
 ```
 
-For more information about the regression tests, see [Chapter 33](regress.html "Chapter 33. Regression Tests").
+For more information about the regression tests, see [Chapter 33](regress "Chapter 33. Regression Tests").
 
 Running the regression tests on client programs with `vcregress bincheck`, on recovery tests with `vcregress recoverycheck`, or TAP tests specified with `vcregress taptest` requires an additional Perl module to be installed:
 
@@ -234,7 +234,7 @@ $ENV{PROVE_FLAGS}='--timer --jobs 2'
 $ENV{PROVE_TESTS}='t/020*.pl t/010*.pl'
 ```
 
-Additionally, the behavior of TAP tests can be controlled by a set of environment variables, see [Section 33.4.1](regress-tap.html#REGRESS-TAP-VARS "33.4.1. Environment Variables").
+Additionally, the behavior of TAP tests can be controlled by a set of environment variables, see [Section 33.4.1](regress-tap#REGRESS-TAP-VARS "33.4.1. Environment Variables").
 
 Some of the TAP tests depend on a set of external commands that would optionally trigger tests related to them. Each one of those variables can be set or unset in `buildenv.pl`:
 

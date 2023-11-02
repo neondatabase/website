@@ -29,7 +29,7 @@ DROP RULE [ IF EXISTS ] name ON table_name [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the rule, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the rule, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -50,4 +50,4 @@ DROP RULE newrule ON mytable;
 
 ## See Also
 
-[CREATE RULE](sql-createrule.html "CREATE RULE"), [ALTER RULE](sql-alterrule.html "ALTER RULE")
+[CREATE RULE](sql-createrule "CREATE RULE"), [ALTER RULE](sql-alterrule "ALTER RULE")

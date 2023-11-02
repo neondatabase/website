@@ -36,7 +36,7 @@ If a schema name is given (for example, `CREATE STATISTICS myschema.mystat ...`)
 
 * *`statistics_kind`*
 
-    A multivariate statistics kind to be computed in this statistics object. Currently supported kinds are `ndistinct`, which enables n-distinct statistics, `dependencies`, which enables functional dependency statistics, and `mcv` which enables most-common values lists. If this clause is omitted, all supported statistics kinds are included in the statistics object. Univariate expression statistics are built automatically if the statistics definition includes any complex expressions rather than just simple column references. For more information, see [Section 14.2.2](planner-stats.html#PLANNER-STATS-EXTENDED "14.2.2. Extended Statistics") and [Section 76.2](multivariate-statistics-examples.html "76.2. Multivariate Statistics Examples").
+    A multivariate statistics kind to be computed in this statistics object. Currently supported kinds are `ndistinct`, which enables n-distinct statistics, `dependencies`, which enables functional dependency statistics, and `mcv` which enables most-common values lists. If this clause is omitted, all supported statistics kinds are included in the statistics object. Univariate expression statistics are built automatically if the statistics definition includes any complex expressions rather than just simple column references. For more information, see [Section 14.2.2](planner-stats#PLANNER-STATS-EXTENDED "14.2.2. Extended Statistics") and [Section 76.2](multivariate-statistics-examples "76.2. Multivariate Statistics Examples").
 
 * *`column_name`*
 
@@ -48,7 +48,7 @@ If a schema name is given (for example, `CREATE STATISTICS myschema.mystat ...`)
 
 * *`table_name`*
 
-    The name (optionally schema-qualified) of the table containing the column(s) the statistics are computed on; see [ANALYZE](sql-analyze.html "ANALYZE") for an explanation of the handling of inheritance and partitions.
+    The name (optionally schema-qualified) of the table containing the column(s) the statistics are computed on; see [ANALYZE](sql-analyze "ANALYZE") for an explanation of the handling of inheritance and partitions.
 
 ## Notes
 
@@ -163,4 +163,4 @@ There is no `CREATE STATISTICS` command in the SQL standard.
 
 ## See Also
 
-[ALTER STATISTICS](sql-alterstatistics.html "ALTER STATISTICS"), [DROP STATISTICS](sql-dropstatistics.html "DROP STATISTICS")
+[ALTER STATISTICS](sql-alterstatistics "ALTER STATISTICS"), [DROP STATISTICS](sql-dropstatistics "DROP STATISTICS")

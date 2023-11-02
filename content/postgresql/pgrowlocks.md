@@ -1,8 +1,8 @@
 ## F.30. pgrowlocks — show a table's row locking information [#](#PGROWLOCKS)
 
-  * *   [F.30.1. Overview](pgrowlocks.html#PGROWLOCKS-OVERVIEW)
-  * [F.30.2. Sample Output](pgrowlocks.html#PGROWLOCKS-SAMPLE-OUTPUT)
-  * [F.30.3. Author](pgrowlocks.html#PGROWLOCKS-AUTHOR)
+  * *   [F.30.1. Overview](pgrowlocks#PGROWLOCKS-OVERVIEW)
+  * [F.30.2. Sample Output](pgrowlocks#PGROWLOCKS-SAMPLE-OUTPUT)
+  * [F.30.3. Author](pgrowlocks#PGROWLOCKS-AUTHOR)
 
 The `pgrowlocks` module provides a function to show row locking information for a specified table.
 
@@ -15,14 +15,14 @@ By default use is restricted to superusers, roles with privileges of the `pg_sta
 pgrowlocks(text) returns setof record
 ```
 
-The parameter is the name of a table. The result is a set of records, with one row for each locked row within the table. The output columns are shown in [Table F.21](pgrowlocks.html#PGROWLOCKS-COLUMNS "Table F.21. pgrowlocks Output Columns").
+The parameter is the name of a table. The result is a set of records, with one row for each locked row within the table. The output columns are shown in [Table F.21](pgrowlocks#PGROWLOCKS-COLUMNS "Table F.21. pgrowlocks Output Columns").
 
 **Table F.21. `pgrowlocks` Output Columns**
 
 | Name         | Type        | Description                                                                                                                                                       |
 | ------------ | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `locked_row` | `tid`       | Tuple ID (TID) of locked row                                                                                                                                      |
-| `locker`     | `xid`       | Transaction ID of locker, or multixact ID if multitransaction; see [Section 74.1](transaction-id.html "74.1. Transactions and Identifiers")                       |
+| `locker`     | `xid`       | Transaction ID of locker, or multixact ID if multitransaction; see [Section 74.1](transaction-id "74.1. Transactions and Identifiers")                       |
 | `multi`      | `boolean`   | True if locker is a multitransaction                                                                                                                              |
 | `xids`       | `xid[]`     | Transaction IDs of lockers (more than one if multitransaction)                                                                                                    |
 | `modes`      | `text[]`    | Lock mode of lockers (more than one if multitransaction), an array of `For Key Share`, `For Share`, `For No Key Update`, `No Key Update`, `For Update`, `Update`. |

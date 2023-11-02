@@ -6,6 +6,6 @@ The following configuration options are supported for `peer`:
 
 * `map`
 
-    Allows for mapping between system and database user names. See [Section 21.2](auth-username-maps.html "21.2. User Name Maps") for details.
+    Allows for mapping between system and database user names. See [Section 21.2](auth-username-maps "21.2. User Name Maps") for details.
 
 Peer authentication is only available on operating systems providing the `getpeereid()` function, the `SO_PEERCRED` socket parameter, or similar mechanisms. Currently that includes Linux, most flavors of BSD including macOS, and Solaris.

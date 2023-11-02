@@ -1,8 +1,8 @@
 ## 31.2. Subscription [#](#LOGICAL-REPLICATION-SUBSCRIPTION)
 
-  * *   [31.2.1. Replication Slot Management](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
-  * [31.2.2. Examples: Set Up Logical Replication](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
-  * [31.2.3. Examples: Deferred Replication Slot Creation](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT)
+  * *   [31.2.1. Replication Slot Management](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
+  * [31.2.2. Examples: Set Up Logical Replication](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
+  * [31.2.3. Examples: Deferred Replication Slot Creation](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT)
 
 A *subscription* is the downstream side of logical replication. The node where a subscription is defined is referred to as the *subscriber*. A subscription defines the connection to another database and set of publications (one or more) to which it wants to subscribe.
 
@@ -10,13 +10,13 @@ The subscriber database behaves in the same way as any other PostgreSQL instance
 
 A subscriber node may have multiple subscriptions if desired. It is possible to define multiple subscriptions between a single publisher-subscriber pair, in which case care must be taken to ensure that the subscribed publication objects don't overlap.
 
-Each subscription will receive changes via one replication slot (see [Section 27.2.6](warm-standby.html#STREAMING-REPLICATION-SLOTS "27.2.6. Replication Slots")). Additional replication slots may be required for the initial data synchronization of pre-existing table data and those will be dropped at the end of data synchronization.
+Each subscription will receive changes via one replication slot (see [Section 27.2.6](warm-standby#STREAMING-REPLICATION-SLOTS "27.2.6. Replication Slots")). Additional replication slots may be required for the initial data synchronization of pre-existing table data and those will be dropped at the end of data synchronization.
 
-A logical replication subscription can be a standby for synchronous replication (see [Section 27.2.8](warm-standby.html#SYNCHRONOUS-REPLICATION "27.2.8. Synchronous Replication")). The standby name is by default the subscription name. An alternative name can be specified as `application_name` in the connection information of the subscription.
+A logical replication subscription can be a standby for synchronous replication (see [Section 27.2.8](warm-standby#SYNCHRONOUS-REPLICATION "27.2.8. Synchronous Replication")). The standby name is by default the subscription name. An alternative name can be specified as `application_name` in the connection information of the subscription.
 
 Subscriptions are dumped by `pg_dump` if the current user is a superuser. Otherwise a warning is written and subscriptions are skipped, because non-superusers cannot read all subscription information from the `pg_subscription` catalog.
 
-The subscription is added using [`CREATE SUBSCRIPTION`](sql-createsubscription.html "CREATE SUBSCRIPTION") and can be stopped/resumed at any time using the [`ALTER SUBSCRIPTION`](sql-altersubscription.html "ALTER SUBSCRIPTION") command and removed using [`DROP SUBSCRIPTION`](sql-dropsubscription.html "DROP SUBSCRIPTION").
+The subscription is added using [`CREATE SUBSCRIPTION`](sql-createsubscription "CREATE SUBSCRIPTION") and can be stopped/resumed at any time using the [`ALTER SUBSCRIPTION`](sql-altersubscription "ALTER SUBSCRIPTION") command and removed using [`DROP SUBSCRIPTION`](sql-dropsubscription "DROP SUBSCRIPTION").
 
 When a subscription is dropped and recreated, the synchronization information is lost. This means that the data has to be resynchronized afterwards.
 
@@ -24,7 +24,7 @@ The schema definitions are not replicated, and the published tables must exist o
 
 The tables are matched between the publisher and the subscriber using the fully qualified table name. Replication to differently-named tables on the subscriber is not supported.
 
-Columns of a table are also matched by name. The order of columns in the subscriber table does not need to match that of the publisher. The data types of the columns do not need to match, as long as the text representation of the data can be converted to the target type. For example, you can replicate from a column of type `integer` to a column of type `bigint`. The target table can also have additional columns not provided by the published table. Any such columns will be filled with the default value as specified in the definition of the target table. However, logical replication in binary format is more restrictive. See the [`binary`](sql-createsubscription.html#SQL-CREATESUBSCRIPTION-WITH-BINARY) option of `CREATE SUBSCRIPTION` for details.
+Columns of a table are also matched by name. The order of columns in the subscriber table does not need to match that of the publisher. The data types of the columns do not need to match, as long as the text representation of the data can be converted to the target type. For example, you can replicate from a column of type `integer` to a column of type `bigint`. The target table can also have additional columns not provided by the published table. Any such columns will be filled with the default value as specified in the definition of the target table. However, logical replication in binary format is more restrictive. See the [`binary`](sql-createsubscription#SQL-CREATESUBSCRIPTION-WITH-BINARY) option of `CREATE SUBSCRIPTION` for details.
 
 ### 31.2.1. Replication Slot Management [#](#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
 
@@ -32,11 +32,11 @@ As mentioned earlier, each (active) subscription receives changes from a replica
 
 Additional table synchronization slots are normally transient, created internally to perform initial table synchronization and dropped automatically when they are no longer needed. These table synchronization slots have generated names: “`pg_%u_sync_%u_%llu`” (parameters: Subscription *`oid`*, Table *`relid`*, system identifier *`sysid`*)
 
-Normally, the remote replication slot is created automatically when the subscription is created using [`CREATE SUBSCRIPTION`](sql-createsubscription.html "CREATE SUBSCRIPTION") and it is dropped automatically when the subscription is dropped using [`DROP SUBSCRIPTION`](sql-dropsubscription.html "DROP SUBSCRIPTION"). In some situations, however, it can be useful or necessary to manipulate the subscription and the underlying replication slot separately. Here are some scenarios:
+Normally, the remote replication slot is created automatically when the subscription is created using [`CREATE SUBSCRIPTION`](sql-createsubscription "CREATE SUBSCRIPTION") and it is dropped automatically when the subscription is dropped using [`DROP SUBSCRIPTION`](sql-dropsubscription "DROP SUBSCRIPTION"). In some situations, however, it can be useful or necessary to manipulate the subscription and the underlying replication slot separately. Here are some scenarios:
 
 * When creating a subscription, the replication slot already exists. In that case, the subscription can be created using the `create_slot = false` option to associate with the existing slot.
 * When creating a subscription, the remote host is not reachable or in an unclear state. In that case, the subscription can be created using the `connect = false` option. The remote host will then not be contacted at all. This is what pg\_dump uses. The remote replication slot will then have to be created manually before the subscription can be activated.
-* When dropping a subscription, the replication slot should be kept. This could be useful when the subscriber database is being moved to a different host and will be activated from there. In that case, disassociate the slot from the subscription using [`ALTER SUBSCRIPTION`](sql-altersubscription.html "ALTER SUBSCRIPTION") before attempting to drop the subscription.
+* When dropping a subscription, the replication slot should be kept. This could be useful when the subscriber database is being moved to a different host and will be activated from there. In that case, disassociate the slot from the subscription using [`ALTER SUBSCRIPTION`](sql-altersubscription "ALTER SUBSCRIPTION") before attempting to drop the subscription.
 * When dropping a subscription, the remote host is not reachable. In that case, disassociate the slot from the subscription using `ALTER SUBSCRIPTION` before attempting to drop the subscription. If the remote database instance no longer exists, no further action is then necessary. If, however, the remote database instance is just unreachable, the replication slot (and any still remaining table synchronization slots) should then be dropped manually; otherwise it/they would continue to reserve WAL and might eventually cause the disk to fill up. Such cases should be carefully investigated.
 
 ### 31.2.2. Examples: Set Up Logical Replication [#](#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
@@ -77,7 +77,7 @@ test_pub=# INSERT INTO t3 VALUES (1, 'i'), (2, 'ii'), (3, 'iii');
 INSERT 0 3
 ```
 
-Create publications for the tables. The publications `pub2` and `pub3a` disallow some [`publish`](sql-createpublication.html#SQL-CREATEPUBLICATION-WITH-PUBLISH) operations. The publication `pub3b` has a row filter (see [Section 31.3](logical-replication-row-filter.html "31.3. Row Filters")).
+Create publications for the tables. The publications `pub2` and `pub3a` disallow some [`publish`](sql-createpublication#SQL-CREATEPUBLICATION-WITH-PUBLISH) operations. The publication `pub3b` has a row filter (see [Section 31.3](logical-replication-row-filter "31.3. Row Filters")).
 
 ```
 
@@ -228,7 +228,7 @@ test_sub=# SELECT * FROM t3;
 
 ### 31.2.3. Examples: Deferred Replication Slot Creation [#](#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT)
 
-There are some cases (e.g. [Section 31.2.1](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT "31.2.1. Replication Slot Management")) where, if the remote replication slot was not created automatically, the user must create it manually before the subscription can be activated. The steps to create the slot and activate the subscription are shown in the following examples. These examples specify the standard logical decoding plugin (`pgoutput`), which is what the built-in logical replication uses.
+There are some cases (e.g. [Section 31.2.1](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT "31.2.1. Replication Slot Management")) where, if the remote replication slot was not created automatically, the user must create it manually before the subscription can be activated. The steps to create the slot and activate the subscription are shown in the following examples. These examples specify the standard logical decoding plugin (`pgoutput`), which is what the built-in logical replication uses.
 
 First, create a publication for the examples to use.
 
@@ -274,7 +274,7 @@ Example 1: Where the subscription says `connect = false`
     ALTER SUBSCRIPTION
     ```
 
-Example 2: Where the subscription says `connect = false`, but also specifies the [`slot_name`](sql-createsubscription.html#SQL-CREATESUBSCRIPTION-WITH-SLOT-NAME) option.
+Example 2: Where the subscription says `connect = false`, but also specifies the [`slot_name`](sql-createsubscription#SQL-CREATESUBSCRIPTION-WITH-SLOT-NAME) option.
 
 * Create the subscription.
 

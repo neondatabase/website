@@ -1,6 +1,6 @@
 ## 9.10. Enum Support Functions [#](#FUNCTIONS-ENUM)
 
-For enum types (described in [Section 8.7](datatype-enum.html "8.7. Enumerated Types")), there are several functions that allow cleaner programming without hard-coding particular values of an enum type. These are listed in [Table 9.35](functions-enum.html#FUNCTIONS-ENUM-TABLE "Table 9.35. Enum Support Functions"). The examples assume an enum type created as:
+For enum types (described in [Section 8.7](datatype-enum "8.7. Enumerated Types")), there are several functions that allow cleaner programming without hard-coding particular values of an enum type. These are listed in [Table 9.35](functions-enum#FUNCTIONS-ENUM-TABLE "Table 9.35. Enum Support Functions"). The examples assume an enum type created as:
 
 ```
 

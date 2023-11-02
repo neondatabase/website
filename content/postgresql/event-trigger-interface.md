@@ -41,7 +41,7 @@ where the members are defined as follows:
 
 * `event`
 
-    Describes the event for which the function is called, one of `"ddl_command_start"`, `"ddl_command_end"`, `"sql_drop"`, `"table_rewrite"`. See [Section 40.1](event-trigger-definition.html "40.1. Overview of Event Trigger Behavior") for the meaning of these events.
+    Describes the event for which the function is called, one of `"ddl_command_start"`, `"ddl_command_end"`, `"sql_drop"`, `"table_rewrite"`. See [Section 40.1](event-trigger-definition "40.1. Overview of Event Trigger Behavior") for the meaning of these events.
 
 * `parsetree`
 

@@ -27,9 +27,9 @@ Every non-holdable open cursor is implicitly closed when a transaction is termin
 
 ## Notes
 
-PostgreSQL does not have an explicit `OPEN` cursor statement; a cursor is considered open when it is declared. Use the [`DECLARE`](sql-declare.html "DECLARE") statement to declare a cursor.
+PostgreSQL does not have an explicit `OPEN` cursor statement; a cursor is considered open when it is declared. Use the [`DECLARE`](sql-declare "DECLARE") statement to declare a cursor.
 
-You can see all available cursors by querying the [`pg_cursors`](view-pg-cursors.html "54.6. pg_cursors") system view.
+You can see all available cursors by querying the [`pg_cursors`](view-pg-cursors "54.6. pg_cursors") system view.
 
 If a cursor is closed after a savepoint which is later rolled back, the `CLOSE` is not rolled back; that is, the cursor remains closed.
 
@@ -48,4 +48,4 @@ CLOSE liahona;
 
 ## See Also
 
-[DECLARE](sql-declare.html "DECLARE"), [FETCH](sql-fetch.html "FETCH"), [MOVE](sql-move.html "MOVE")
+[DECLARE](sql-declare "DECLARE"), [FETCH](sql-fetch "FETCH"), [MOVE](sql-move "MOVE")

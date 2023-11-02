@@ -130,4 +130,4 @@ EXEC SQL END DECLARE SECTION;
 
 ## See Also
 
-[DISCONNECT](ecpg-sql-disconnect.html "DISCONNECT"), [SET CONNECTION](ecpg-sql-set-connection.html "SET CONNECTION")
+[DISCONNECT](ecpg-sql-disconnect "DISCONNECT"), [SET CONNECTION](ecpg-sql-set-connection "SET CONNECTION")

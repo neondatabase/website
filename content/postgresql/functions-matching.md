@@ -1,8 +1,8 @@
 ## 9.7. Pattern Matching [#](#FUNCTIONS-MATCHING)
 
-  * *   [9.7.1. `LIKE`](functions-matching.html#FUNCTIONS-LIKE)
-  * [9.7.2. `SIMILAR TO` Regular Expressions](functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP)
-  * [9.7.3. POSIX Regular Expressions](functions-matching.html#FUNCTIONS-POSIX-REGEXP)
+  * *   [9.7.1. `LIKE`](functions-matching#FUNCTIONS-LIKE)
+  * [9.7.2. `SIMILAR TO` Regular Expressions](functions-matching#FUNCTIONS-SIMILARTO-REGEXP)
+  * [9.7.3. POSIX Regular Expressions](functions-matching#FUNCTIONS-POSIX-REGEXP)
 
 There are three separate approaches to pattern matching provided by PostgreSQL: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), and POSIX-style regular expressions. Aside from the basic “does this string match this pattern?” operators, functions are available to extract or replace matching substrings and to split a string at matching locations.
 
@@ -48,7 +48,7 @@ To match a literal underscore or percent sign without matching other characters,
 
 ### Note
 
-If you have [standard\_conforming\_strings](runtime-config-compatible.html#GUC-STANDARD-CONFORMING-STRINGS) turned off, any backslashes you write in literal string constants will need to be doubled. See [Section 4.1.2.1](sql-syntax-lexical.html#SQL-SYNTAX-STRINGS "4.1.2.1. String Constants") for more information.
+If you have [standard\_conforming\_strings](runtime-config-compatible#GUC-STANDARD-CONFORMING-STRINGS) turned off, any backslashes you write in literal string constants will need to be doubled. See [Section 4.1.2.1](sql-syntax-lexical#SQL-SYNTAX-STRINGS "4.1.2.1. String Constants") for more information.
 
 It's also possible to select no escape character by writing `ESCAPE ''`. This effectively disables the escape mechanism, which makes it impossible to turn off the special meaning of underscore and percent signs in the pattern.
 
@@ -92,7 +92,7 @@ As with `LIKE`, a backslash disables the special meaning of any of these metacha
 
 According to the SQL standard, omitting `ESCAPE` means there is no escape character (rather than defaulting to a backslash), and a zero-length `ESCAPE` value is disallowed. PostgreSQL's behavior in this regard is therefore slightly nonstandard.
 
-Another nonstandard extension is that following the escape character with a letter or digit provides access to the escape sequences defined for POSIX regular expressions; see [Table 9.20](functions-matching.html#POSIX-CHARACTER-ENTRY-ESCAPES-TABLE "Table 9.20. Regular Expression Character-Entry Escapes"), [Table 9.21](functions-matching.html#POSIX-CLASS-SHORTHAND-ESCAPES-TABLE "Table 9.21. Regular Expression Class-Shorthand Escapes"), and [Table 9.22](functions-matching.html#POSIX-CONSTRAINT-ESCAPES-TABLE "Table 9.22. Regular Expression Constraint Escapes") below.
+Another nonstandard extension is that following the escape character with a letter or digit provides access to the escape sequences defined for POSIX regular expressions; see [Table 9.20](functions-matching#POSIX-CHARACTER-ENTRY-ESCAPES-TABLE "Table 9.20. Regular Expression Character-Entry Escapes"), [Table 9.21](functions-matching#POSIX-CLASS-SHORTHAND-ESCAPES-TABLE "Table 9.21. Regular Expression Class-Shorthand Escapes"), and [Table 9.22](functions-matching#POSIX-CONSTRAINT-ESCAPES-TABLE "Table 9.22. Regular Expression Constraint Escapes") below.
 
 Some examples:
 
@@ -143,7 +143,7 @@ substring('foobar' similar '#"o_b#"%' escape '#')    NULL
 
 ### 9.7.3. POSIX Regular Expressions [#](#FUNCTIONS-POSIX-REGEXP)
 
-[Table 9.16](functions-matching.html#FUNCTIONS-POSIX-TABLE "Table 9.16. Regular Expression Match Operators") lists the available operators for pattern matching using POSIX regular expressions.
+[Table 9.16](functions-matching#FUNCTIONS-POSIX-TABLE "Table 9.16. Regular Expression Match Operators") lists the available operators for pattern matching using POSIX regular expressions.
 
 **Table 9.16. Regular Expression Match Operators**
 
@@ -184,7 +184,7 @@ substring('foobar' from 'o.b')     oob
 substring('foobar' from 'o(.)b')   o
 ```
 
-The `regexp_count` function counts the number of places where a POSIX regular expression pattern matches a string. It has the syntax `regexp_count`(*`string`*, *`pattern`* \[, *`start`* \[, *`flags`* ]]). *`pattern`* is searched for in *`string`*, normally from the beginning of the string, but if the *`start`* parameter is provided then beginning from that character index. The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. For example, including `i` in *`flags`* specifies case-insensitive matching. Supported flags are described in [Table 9.24](functions-matching.html#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters").
+The `regexp_count` function counts the number of places where a POSIX regular expression pattern matches a string. It has the syntax `regexp_count`(*`string`*, *`pattern`* \[, *`start`* \[, *`flags`* ]]). *`pattern`* is searched for in *`string`*, normally from the beginning of the string, but if the *`start`* parameter is provided then beginning from that character index. The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. For example, including `i` in *`flags`* specifies case-insensitive matching. Supported flags are described in [Table 9.24](functions-matching#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters").
 
 Some examples:
 
@@ -194,7 +194,7 @@ regexp_count('ABCABCAXYaxy', 'A.')          3
 regexp_count('ABCABCAXYaxy', 'A.', 1, 'i')  4
 ```
 
-The `regexp_instr` function returns the starting or ending position of the *`N`*'th match of a POSIX regular expression pattern to a string, or zero if there is no such match. It has the syntax `regexp_instr`(*`string`*, *`pattern`* \[, *`start`* \[, *`N`* \[, *`endoption`* \[, *`flags`* \[, *`subexpr`* ]]]]]). *`pattern`* is searched for in *`string`*, normally from the beginning of the string, but if the *`start`* parameter is provided then beginning from that character index. If *`N`* is specified then the *`N`*'th match of the pattern is located, otherwise the first match is located. If the *`endoption`* parameter is omitted or specified as zero, the function returns the position of the first character of the match. Otherwise, *`endoption`* must be one, and the function returns the position of the character following the match. The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. Supported flags are described in [Table 9.24](functions-matching.html#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters"). For a pattern containing parenthesized subexpressions, *`subexpr`* is an integer indicating which subexpression is of interest: the result identifies the position of the substring matching that subexpression. Subexpressions are numbered in the order of their leading parentheses. When *`subexpr`* is omitted or zero, the result identifies the position of the whole match regardless of parenthesized subexpressions.
+The `regexp_instr` function returns the starting or ending position of the *`N`*'th match of a POSIX regular expression pattern to a string, or zero if there is no such match. It has the syntax `regexp_instr`(*`string`*, *`pattern`* \[, *`start`* \[, *`N`* \[, *`endoption`* \[, *`flags`* \[, *`subexpr`* ]]]]]). *`pattern`* is searched for in *`string`*, normally from the beginning of the string, but if the *`start`* parameter is provided then beginning from that character index. If *`N`* is specified then the *`N`*'th match of the pattern is located, otherwise the first match is located. If the *`endoption`* parameter is omitted or specified as zero, the function returns the position of the first character of the match. Otherwise, *`endoption`* must be one, and the function returns the position of the character following the match. The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. Supported flags are described in [Table 9.24](functions-matching#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters"). For a pattern containing parenthesized subexpressions, *`subexpr`* is an integer indicating which subexpression is of interest: the result identifies the position of the substring matching that subexpression. Subexpressions are numbered in the order of their leading parentheses. When *`subexpr`* is omitted or zero, the result identifies the position of the whole match regardless of parenthesized subexpressions.
 
 Some examples:
 
@@ -206,7 +206,7 @@ regexp_instr('ABCDEFGHI', '(c..)(...)', 1, 1, 0, 'i', 2)
                                    6
 ```
 
-The `regexp_like` function checks whether a match of a POSIX regular expression pattern occurs within a string, returning boolean true or false. It has the syntax `regexp_like`(*`string`*, *`pattern`* \[, *`flags`* ]). The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. Supported flags are described in [Table 9.24](functions-matching.html#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters"). This function has the same results as the `~` operator if no flags are specified. If only the `i` flag is specified, it has the same results as the `~*` operator.
+The `regexp_like` function checks whether a match of a POSIX regular expression pattern occurs within a string, returning boolean true or false. It has the syntax `regexp_like`(*`string`*, *`pattern`* \[, *`flags`* ]). The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. Supported flags are described in [Table 9.24](functions-matching#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters"). This function has the same results as the `~` operator if no flags are specified. If only the `i` flag is specified, it has the same results as the `~*` operator.
 
 Some examples:
 
@@ -216,7 +216,7 @@ regexp_like('Hello World', 'world')       false
 regexp_like('Hello World', 'world', 'i')  true
 ```
 
-The `regexp_match` function returns a text array of matching substring(s) within the first match of a POSIX regular expression pattern to a string. It has the syntax `regexp_match`(*`string`*, *`pattern`* \[, *`flags`* ]). If there is no match, the result is `NULL`. If a match is found, and the *`pattern`* contains no parenthesized subexpressions, then the result is a single-element text array containing the substring matching the whole pattern. If a match is found, and the *`pattern`* contains parenthesized subexpressions, then the result is a text array whose *`n`*'th element is the substring matching the *`n`*'th parenthesized subexpression of the *`pattern`* (not counting “non-capturing” parentheses; see below for details). The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. Supported flags are described in [Table 9.24](functions-matching.html#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters").
+The `regexp_match` function returns a text array of matching substring(s) within the first match of a POSIX regular expression pattern to a string. It has the syntax `regexp_match`(*`string`*, *`pattern`* \[, *`flags`* ]). If there is no match, the result is `NULL`. If a match is found, and the *`pattern`* contains no parenthesized subexpressions, then the result is a single-element text array containing the substring matching the whole pattern. If a match is found, and the *`pattern`* contains parenthesized subexpressions, then the result is a text array whose *`n`*'th element is the substring matching the *`n`*'th parenthesized subexpression of the *`pattern`* (not counting “non-capturing” parentheses; see below for details). The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. Supported flags are described in [Table 9.24](functions-matching#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters").
 
 Some examples:
 
@@ -248,7 +248,7 @@ SELECT (regexp_match('foobarbequebaz', 'bar.*que'))[1];
 (1 row)
 ```
 
-The `regexp_matches` function returns a set of text arrays of matching substring(s) within matches of a POSIX regular expression pattern to a string. It has the same syntax as `regexp_match`. This function returns no rows if there is no match, one row if there is a match and the `g` flag is not given, or *`N`* rows if there are *`N`* matches and the `g` flag is given. Each returned row is a text array containing the whole matched substring or the substrings matching parenthesized subexpressions of the *`pattern`*, just as described above for `regexp_match`. `regexp_matches` accepts all the flags shown in [Table 9.24](functions-matching.html#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters"), plus the `g` flag which commands it to return all matches, not just the first one.
+The `regexp_matches` function returns a set of text arrays of matching substring(s) within matches of a POSIX regular expression pattern to a string. It has the same syntax as `regexp_match`. This function returns no rows if there is no match, one row if there is a match and the `g` flag is not given, or *`N`* rows if there are *`N`* matches and the `g` flag is given. Each returned row is a text array containing the whole matched substring or the substrings matching parenthesized subexpressions of the *`pattern`*, just as described above for `regexp_match`. `regexp_matches` accepts all the flags shown in [Table 9.24](functions-matching#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters"), plus the `g` flag which commands it to return all matches, not just the first one.
 
 Some examples:
 
@@ -278,7 +278,7 @@ SELECT col1, (SELECT regexp_matches(col2, '(bar)(beque)')) FROM tab;
 
 This produces a text array if there's a match, or `NULL` if not, the same as `regexp_match()` would do. Without the sub-select, this query would produce no output at all for table rows without a match, which is typically not the desired behavior.
 
-The `regexp_replace` function provides substitution of new text for substrings that match POSIX regular expression patterns. It has the syntax `regexp_replace`(*`source`*, *`pattern`*, *`replacement`* \[, *`start`* \[, *`N`* ]] \[, *`flags`* ]). (Notice that *`N`* cannot be specified unless *`start`* is, but *`flags`* can be given in any case.) The *`source`* string is returned unchanged if there is no match to the *`pattern`*. If there is a match, the *`source`* string is returned with the *`replacement`* string substituted for the matching substring. The *`replacement`* string can contain `\`*`n`*, where *`n`* is 1 through 9, to indicate that the source substring matching the *`n`*'th parenthesized subexpression of the pattern should be inserted, and it can contain `\&` to indicate that the substring matching the entire pattern should be inserted. Write `\\` if you need to put a literal backslash in the replacement text. *`pattern`* is searched for in *`string`*, normally from the beginning of the string, but if the *`start`* parameter is provided then beginning from that character index. By default, only the first match of the pattern is replaced. If *`N`* is specified and is greater than zero, then the *`N`*'th match of the pattern is replaced. If the `g` flag is given, or if *`N`* is specified and is zero, then all matches at or after the *`start`* position are replaced. (The `g` flag is ignored when *`N`* is specified.) The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. Supported flags (though not `g`) are described in [Table 9.24](functions-matching.html#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters").
+The `regexp_replace` function provides substitution of new text for substrings that match POSIX regular expression patterns. It has the syntax `regexp_replace`(*`source`*, *`pattern`*, *`replacement`* \[, *`start`* \[, *`N`* ]] \[, *`flags`* ]). (Notice that *`N`* cannot be specified unless *`start`* is, but *`flags`* can be given in any case.) The *`source`* string is returned unchanged if there is no match to the *`pattern`*. If there is a match, the *`source`* string is returned with the *`replacement`* string substituted for the matching substring. The *`replacement`* string can contain `\`*`n`*, where *`n`* is 1 through 9, to indicate that the source substring matching the *`n`*'th parenthesized subexpression of the pattern should be inserted, and it can contain `\&` to indicate that the substring matching the entire pattern should be inserted. Write `\\` if you need to put a literal backslash in the replacement text. *`pattern`* is searched for in *`string`*, normally from the beginning of the string, but if the *`start`* parameter is provided then beginning from that character index. By default, only the first match of the pattern is replaced. If *`N`* is specified and is greater than zero, then the *`N`*'th match of the pattern is replaced. If the `g` flag is given, or if *`N`* is specified and is zero, then all matches at or after the *`start`* position are replaced. (The `g` flag is ignored when *`N`* is specified.) The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. Supported flags (though not `g`) are described in [Table 9.24](functions-matching#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters").
 
 Some examples:
 
@@ -296,7 +296,7 @@ regexp_replace('A PostgreSQL function', 'a|e|i|o|u', 'X', 1, 3, 'i')
                                    A PostgrXSQL function
 ```
 
-The `regexp_split_to_table` function splits a string using a POSIX regular expression pattern as a delimiter. It has the syntax `regexp_split_to_table`(*`string`*, *`pattern`* \[, *`flags`* ]). If there is no match to the *`pattern`*, the function returns the *`string`*. If there is at least one match, for each match it returns the text from the end of the last match (or the beginning of the string) to the beginning of the match. When there are no more matches, it returns the text from the end of the last match to the end of the string. The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. `regexp_split_to_table` supports the flags described in [Table 9.24](functions-matching.html#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters").
+The `regexp_split_to_table` function splits a string using a POSIX regular expression pattern as a delimiter. It has the syntax `regexp_split_to_table`(*`string`*, *`pattern`* \[, *`flags`* ]). If there is no match to the *`pattern`*, the function returns the *`string`*. If there is at least one match, for each match it returns the text from the end of the last match (or the beginning of the string) to the beginning of the match. When there are no more matches, it returns the text from the end of the last match to the end of the string. The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. `regexp_split_to_table` supports the flags described in [Table 9.24](functions-matching#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters").
 
 The `regexp_split_to_array` function behaves the same as `regexp_split_to_table`, except that `regexp_split_to_array` returns its result as an array of `text`. It has the syntax `regexp_split_to_array`(*`string`*, *`pattern`* \[, *`flags`* ]). The parameters are the same as for `regexp_split_to_table`.
 
@@ -348,7 +348,7 @@ SELECT foo FROM regexp_split_to_table('the quick brown fox', '\s*') AS foo;
 
 As the last example demonstrates, the regexp split functions ignore zero-length matches that occur at the start or end of the string or immediately after a previous match. This is contrary to the strict definition of regexp matching that is implemented by the other regexp functions, but is usually the most convenient behavior in practice. Other software systems such as Perl use similar definitions.
 
-The `regexp_substr` function returns the substring that matches a POSIX regular expression pattern, or `NULL` if there is no match. It has the syntax `regexp_substr`(*`string`*, *`pattern`* \[, *`start`* \[, *`N`* \[, *`flags`* \[, *`subexpr`* ]]]]). *`pattern`* is searched for in *`string`*, normally from the beginning of the string, but if the *`start`* parameter is provided then beginning from that character index. If *`N`* is specified then the *`N`*'th match of the pattern is returned, otherwise the first match is returned. The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. Supported flags are described in [Table 9.24](functions-matching.html#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters"). For a pattern containing parenthesized subexpressions, *`subexpr`* is an integer indicating which subexpression is of interest: the result is the substring matching that subexpression. Subexpressions are numbered in the order of their leading parentheses. When *`subexpr`* is omitted or zero, the result is the whole match regardless of parenthesized subexpressions.
+The `regexp_substr` function returns the substring that matches a POSIX regular expression pattern, or `NULL` if there is no match. It has the syntax `regexp_substr`(*`string`*, *`pattern`* \[, *`start`* \[, *`N`* \[, *`flags`* \[, *`subexpr`* ]]]]). *`pattern`* is searched for in *`string`*, normally from the beginning of the string, but if the *`start`* parameter is provided then beginning from that character index. If *`N`* is specified then the *`N`*'th match of the pattern is returned, otherwise the first match is returned. The *`flags`* parameter is an optional text string containing zero or more single-letter flags that change the function's behavior. Supported flags are described in [Table 9.24](functions-matching#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters"). For a pattern containing parenthesized subexpressions, *`subexpr`* is an integer indicating which subexpression is of interest: the result is the substring matching that subexpression. Subexpressions are numbered in the order of their leading parentheses. When *`subexpr`* is omitted or zero, the result is the whole match regardless of parenthesized subexpressions.
 
 Some examples:
 
@@ -368,15 +368,15 @@ Regular expressions (REs), as defined in POSIX 1003.2, come in two forms: *exten
 
 ### Note
 
-PostgreSQL always initially presumes that a regular expression follows the ARE rules. However, the more limited ERE or BRE rules can be chosen by prepending an *embedded option* to the RE pattern, as described in [Section 9.7.3.4](functions-matching.html#POSIX-METASYNTAX "9.7.3.4. Regular Expression Metasyntax"). This can be useful for compatibility with applications that expect exactly the POSIX 1003.2 rules.
+PostgreSQL always initially presumes that a regular expression follows the ARE rules. However, the more limited ERE or BRE rules can be chosen by prepending an *embedded option* to the RE pattern, as described in [Section 9.7.3.4](functions-matching#POSIX-METASYNTAX "9.7.3.4. Regular Expression Metasyntax"). This can be useful for compatibility with applications that expect exactly the POSIX 1003.2 rules.
 
 A regular expression is defined as one or more *branches*, separated by `|`. It matches anything that matches one of the branches.
 
 A branch is zero or more *quantified atoms* or *constraints*, concatenated. It matches a match for the first, followed by a match for the second, etc.; an empty branch matches the empty string.
 
-A quantified atom is an *atom* possibly followed by a single *quantifier*. Without a quantifier, it matches a match for the atom. With a quantifier, it can match some number of matches of the atom. An *atom* can be any of the possibilities shown in [Table 9.17](functions-matching.html#POSIX-ATOMS-TABLE "Table 9.17. Regular Expression Atoms"). The possible quantifiers and their meanings are shown in [Table 9.18](functions-matching.html#POSIX-QUANTIFIERS-TABLE "Table 9.18. Regular Expression Quantifiers").
+A quantified atom is an *atom* possibly followed by a single *quantifier*. Without a quantifier, it matches a match for the atom. With a quantifier, it can match some number of matches of the atom. An *atom* can be any of the possibilities shown in [Table 9.17](functions-matching#POSIX-ATOMS-TABLE "Table 9.17. Regular Expression Atoms"). The possible quantifiers and their meanings are shown in [Table 9.18](functions-matching#POSIX-QUANTIFIERS-TABLE "Table 9.18. Regular Expression Quantifiers").
 
-A *constraint* matches an empty string, but matches only when specific conditions are met. A constraint can be used where an atom could be used, except it cannot be followed by a quantifier. The simple constraints are shown in [Table 9.19](functions-matching.html#POSIX-CONSTRAINTS-TABLE "Table 9.19. Regular Expression Constraints"); some more constraints are described later.
+A *constraint* matches an empty string, but matches only when specific conditions are met. A constraint can be used where an atom could be used, except it cannot be followed by a quantifier. The simple constraints are shown in [Table 9.19](functions-matching#POSIX-CONSTRAINTS-TABLE "Table 9.19. Regular Expression Constraints"); some more constraints are described later.
 
 **Table 9.17. Regular Expression Atoms**
 
@@ -385,9 +385,9 @@ A *constraint* matches an empty string, but matches only when specific condition
 | `(`*`re`*`)`    | (where *`re`* is any regular expression) matches a match for *`re`*, with the match noted for possible reporting                                                                                                                                  |
 | `(?:`*`re`*`)`  | as above, but the match is not noted for reporting (a “non-capturing” set of parentheses) (AREs only)                                                                                                                                             |
 | `.`             | matches any single character                                                                                                                                                                                                                      |
-| `[`*`chars`*`]` | a *bracket expression*, matching any one of the *`chars`* (see [Section 9.7.3.2](functions-matching.html#POSIX-BRACKET-EXPRESSIONS "9.7.3.2. Bracket Expressions") for more detail)                                                               |
+| `[`*`chars`*`]` | a *bracket expression*, matching any one of the *`chars`* (see [Section 9.7.3.2](functions-matching#POSIX-BRACKET-EXPRESSIONS "9.7.3.2. Bracket Expressions") for more detail)                                                               |
 | `\`*`k`*        | (where *`k`* is a non-alphanumeric character) matches that character taken as an ordinary character, e.g., `\\` matches a backslash character                                                                                                     |
-| `\`*`c`*        | where *`c`* is alphanumeric (possibly followed by other characters) is an *escape*, see [Section 9.7.3.3](functions-matching.html#POSIX-ESCAPE-SEQUENCES "9.7.3.3. Regular Expression Escapes") (AREs only; in EREs and BREs, this matches *`c`*) |
+| `\`*`c`*        | where *`c`* is alphanumeric (possibly followed by other characters) is an *escape*, see [Section 9.7.3.3](functions-matching#POSIX-ESCAPE-SEQUENCES "9.7.3.3. Regular Expression Escapes") (AREs only; in EREs and BREs, this matches *`c`*) |
 | `{`             | when followed by a character other than a digit, matches the left-brace character `{`; when followed by a digit, it is the beginning of a *`bound`* (see below)                                                                                   |
 | *`x`*           | where *`x`* is a single character with no other significance, matches that character                                                                                                                                                              |
 
@@ -397,7 +397,7 @@ An RE cannot end with a backslash (`\`).
 
 ### Note
 
-If you have [standard\_conforming\_strings](runtime-config-compatible.html#GUC-STANDARD-CONFORMING-STRINGS) turned off, any backslashes you write in literal string constants will need to be doubled. See [Section 4.1.2.1](sql-syntax-lexical.html#SQL-SYNTAX-STRINGS "4.1.2.1. String Constants") for more information.
+If you have [standard\_conforming\_strings](runtime-config-compatible#GUC-STANDARD-CONFORMING-STRINGS) turned off, any backslashes you write in literal string constants will need to be doubled. See [Section 4.1.2.1](sql-syntax-lexical#SQL-SYNTAX-STRINGS "4.1.2.1. String Constants") for more information.
 
 **Table 9.18. Regular Expression Quantifiers**
 
@@ -420,7 +420,7 @@ If you have [standard\_conforming\_strings](runtime-config-compatible.html#GUC-S
 
 The forms using `{`*`...`*`}` are known as *bounds*. The numbers *`m`* and *`n`* within a bound are unsigned decimal integers with permissible values from 0 to 255 inclusive.
 
-*Non-greedy* quantifiers (available in AREs only) match the same possibilities as their corresponding normal (*greedy*) counterparts, but prefer the smallest number rather than the largest number of matches. See [Section 9.7.3.5](functions-matching.html#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules") for more detail.
+*Non-greedy* quantifiers (available in AREs only) match the same possibilities as their corresponding normal (*greedy*) counterparts, but prefer the smallest number rather than the largest number of matches. See [Section 9.7.3.5](functions-matching#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules") for more detail.
 
 ### Note
 
@@ -439,7 +439,7 @@ A quantifier cannot immediately follow another quantifier, e.g., `**` is invalid
 
 \
 
-Lookahead and lookbehind constraints cannot contain *back references* (see [Section 9.7.3.3](functions-matching.html#POSIX-ESCAPE-SEQUENCES "9.7.3.3. Regular Expression Escapes")), and all parentheses within them are considered non-capturing.
+Lookahead and lookbehind constraints cannot contain *back references* (see [Section 9.7.3.3](functions-matching#POSIX-ESCAPE-SEQUENCES "9.7.3.3. Regular Expression Escapes")), and all parentheses within them are considered non-capturing.
 
 #### 9.7.3.2. Bracket Expressions [#](#POSIX-BRACKET-EXPRESSIONS)
 
@@ -455,7 +455,7 @@ PostgreSQL currently does not support multi-character collating elements. This i
 
 Within a bracket expression, a collating element enclosed in `[=` and `=]` is an *equivalence class*, standing for the sequences of characters of all collating elements equivalent to that one, including itself. (If there are no other equivalent collating elements, the treatment is as if the enclosing delimiters were `[.` and `.]`.) For example, if `o` and `^` are the members of an equivalence class, then `[[=o=]]`, `[[=^=]]`, and `[o^]` are all synonymous. An equivalence class cannot be an endpoint of a range.
 
-Within a bracket expression, the name of a character class enclosed in `[:` and `:]` stands for the list of all characters belonging to that class. A character class cannot be used as an endpoint of a range. The POSIX standard defines these character class names: `alnum` (letters and numeric digits), `alpha` (letters), `blank` (space and tab), `cntrl` (control characters), `digit` (numeric digits), `graph` (printable characters except space), `lower` (lower-case letters), `print` (printable characters including space), `punct` (punctuation), `space` (any white space), `upper` (upper-case letters), and `xdigit` (hexadecimal digits). The behavior of these standard character classes is generally consistent across platforms for characters in the 7-bit ASCII set. Whether a given non-ASCII character is considered to belong to one of these classes depends on the *collation* that is used for the regular-expression function or operator (see [Section 24.2](collation.html "24.2. Collation Support")), or by default on the database's `LC_CTYPE` locale setting (see [Section 24.1](locale.html "24.1. Locale Support")). The classification of non-ASCII characters can vary across platforms even in similarly-named locales. (But the `C` locale never considers any non-ASCII characters to belong to any of these classes.) In addition to these standard character classes, PostgreSQL defines the `word` character class, which is the same as `alnum` plus the underscore (`_`) character, and the `ascii` character class, which contains exactly the 7-bit ASCII set.
+Within a bracket expression, the name of a character class enclosed in `[:` and `:]` stands for the list of all characters belonging to that class. A character class cannot be used as an endpoint of a range. The POSIX standard defines these character class names: `alnum` (letters and numeric digits), `alpha` (letters), `blank` (space and tab), `cntrl` (control characters), `digit` (numeric digits), `graph` (printable characters except space), `lower` (lower-case letters), `print` (printable characters including space), `punct` (punctuation), `space` (any white space), `upper` (upper-case letters), and `xdigit` (hexadecimal digits). The behavior of these standard character classes is generally consistent across platforms for characters in the 7-bit ASCII set. Whether a given non-ASCII character is considered to belong to one of these classes depends on the *collation* that is used for the regular-expression function or operator (see [Section 24.2](collation "24.2. Collation Support")), or by default on the database's `LC_CTYPE` locale setting (see [Section 24.1](locale "24.1. Locale Support")). The classification of non-ASCII characters can vary across platforms even in similarly-named locales. (But the `C` locale never considers any non-ASCII characters to belong to any of these classes.) In addition to these standard character classes, PostgreSQL defines the `word` character class, which is the same as `alnum` plus the underscore (`_`) character, and the `ascii` character class, which contains exactly the 7-bit ASCII set.
 
 There are two special cases of bracket expressions: the bracket expressions `[[:<:]]` and `[[:>:]]` are constraints, matching empty strings at the beginning and end of a word respectively. A word is defined as a sequence of word characters that is neither preceded nor followed by word characters. A word character is any character belonging to the `word` character class, that is, any letter, digit, or underscore. This is an extension, compatible with but not specified by POSIX 1003.2, and should be used with caution in software intended to be portable to other systems. The constraint escapes described below are usually preferable; they are no more standard, but are easier to type.
 
@@ -463,13 +463,13 @@ There are two special cases of bracket expressions: the bracket expressions `[[:
 
 *Escapes* are special sequences beginning with `\` followed by an alphanumeric character. Escapes come in several varieties: character entry, class shorthands, constraint escapes, and back references. A `\` followed by an alphanumeric character but not constituting a valid escape is illegal in AREs. In EREs, there are no escapes: outside a bracket expression, a `\` followed by an alphanumeric character merely stands for that character as an ordinary character, and inside a bracket expression, `\` is an ordinary character. (The latter is the one actual incompatibility between EREs and AREs.)
 
-*Character-entry escapes* exist to make it easier to specify non-printing and other inconvenient characters in REs. They are shown in [Table 9.20](functions-matching.html#POSIX-CHARACTER-ENTRY-ESCAPES-TABLE "Table 9.20. Regular Expression Character-Entry Escapes").
+*Character-entry escapes* exist to make it easier to specify non-printing and other inconvenient characters in REs. They are shown in [Table 9.20](functions-matching#POSIX-CHARACTER-ENTRY-ESCAPES-TABLE "Table 9.20. Regular Expression Character-Entry Escapes").
 
-*Class-shorthand escapes* provide shorthands for certain commonly-used character classes. They are shown in [Table 9.21](functions-matching.html#POSIX-CLASS-SHORTHAND-ESCAPES-TABLE "Table 9.21. Regular Expression Class-Shorthand Escapes").
+*Class-shorthand escapes* provide shorthands for certain commonly-used character classes. They are shown in [Table 9.21](functions-matching#POSIX-CLASS-SHORTHAND-ESCAPES-TABLE "Table 9.21. Regular Expression Class-Shorthand Escapes").
 
-A *constraint escape* is a constraint, matching the empty string if specific conditions are met, written as an escape. They are shown in [Table 9.22](functions-matching.html#POSIX-CONSTRAINT-ESCAPES-TABLE "Table 9.22. Regular Expression Constraint Escapes").
+A *constraint escape* is a constraint, matching the empty string if specific conditions are met, written as an escape. They are shown in [Table 9.22](functions-matching#POSIX-CONSTRAINT-ESCAPES-TABLE "Table 9.22. Regular Expression Constraint Escapes").
 
-A *back reference* (`\`*`n`*) matches the same string matched by the previous parenthesized subexpression specified by the number *`n`* (see [Table 9.23](functions-matching.html#POSIX-CONSTRAINT-BACKREF-TABLE "Table 9.23. Regular Expression Back References")). For example, `([bc])\1` matches `bb` or `cc` but not `bc` or `cb`. The subexpression must entirely precede the back reference in the RE. Subexpressions are numbered in the order of their leading parentheses. Non-capturing parentheses do not define subexpressions. The back reference considers only the string characters matched by the referenced subexpression, not any constraints contained in it. For example, `(^\d)\1` will match `22`.
+A *back reference* (`\`*`n`*) matches the same string matched by the previous parenthesized subexpression specified by the number *`n`* (see [Table 9.23](functions-matching#POSIX-CONSTRAINT-BACKREF-TABLE "Table 9.23. Regular Expression Back References")). For example, `([bc])\1` matches `bb` or `cc` but not `bc` or `cb`. The subexpression must entirely precede the back reference in the RE. Subexpressions are numbered in the order of their leading parentheses. Non-capturing parentheses do not define subexpressions. The back reference considers only the string characters matched by the referenced subexpression, not any constraints contained in it. For example, `(^\d)\1` will match `22`.
 
 **Table 9.20. Regular Expression Character-Entry Escapes**
 
@@ -519,12 +519,12 @@ The class-shorthand escapes also work within bracket expressions, although the d
 
 | Escape | Description                                                                                                                                                                                  |
 | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `\A`   | matches only at the beginning of the string (see [Section 9.7.3.5](functions-matching.html#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules") for how this differs from `^`) |
+| `\A`   | matches only at the beginning of the string (see [Section 9.7.3.5](functions-matching#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules") for how this differs from `^`) |
 | `\m`   | matches only at the beginning of a word                                                                                                                                                      |
 | `\M`   | matches only at the end of a word                                                                                                                                                            |
 | `\y`   | matches only at the beginning or end of a word                                                                                                                                               |
 | `\Y`   | matches only at a point that is not the beginning or end of a word                                                                                                                           |
-| `\Z`   | matches only at the end of the string (see [Section 9.7.3.5](functions-matching.html#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules") for how this differs from `$`)       |
+| `\Z`   | matches only at the end of the string (see [Section 9.7.3.5](functions-matching#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules") for how this differs from `$`)       |
 
 \
 
@@ -549,7 +549,7 @@ In addition to the main syntax described above, there are some special forms and
 
 An RE can begin with one of two special *director* prefixes. If an RE begins with `***:`, the rest of the RE is taken as an ARE. (This normally has no effect in PostgreSQL, since REs are assumed to be AREs; but it does have an effect if ERE or BRE mode had been specified by the *`flags`* parameter to a regex function.) If an RE begins with `***=`, the rest of the RE is taken to be a literal string, with all characters considered ordinary characters.
 
-An ARE can begin with *embedded options*: a sequence `(?`*`xyz`*`)` (where *`xyz`* is one or more alphabetic characters) specifies options affecting the rest of the RE. These options override any previously determined options — in particular, they can override the case-sensitivity behavior implied by a regex operator, or the *`flags`* parameter to a regex function. The available option letters are shown in [Table 9.24](functions-matching.html#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters"). Note that these same option letters are used in the *`flags`* parameters of regex functions.
+An ARE can begin with *embedded options*: a sequence `(?`*`xyz`*`)` (where *`xyz`* is one or more alphabetic characters) specifies options affecting the rest of the RE. These options override any previously determined options — in particular, they can override the case-sensitivity behavior implied by a regex operator, or the *`flags`* parameter to a regex function. The available option letters are shown in [Table 9.24](functions-matching#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters"). Note that these same option letters are used in the *`flags`* parameters of regex functions.
 
 **Table 9.24. ARE Embedded-Option Letters**
 
@@ -558,14 +558,14 @@ An ARE can begin with *embedded options*: a sequence `(?`*`xyz`*`)` (where *`xyz
 | `b`    | rest of RE is a BRE                                                                                                                                                     |
 | `c`    | case-sensitive matching (overrides operator type)                                                                                                                       |
 | `e`    | rest of RE is an ERE                                                                                                                                                    |
-| `i`    | case-insensitive matching (see [Section 9.7.3.5](functions-matching.html#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules")) (overrides operator type)  |
+| `i`    | case-insensitive matching (see [Section 9.7.3.5](functions-matching#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules")) (overrides operator type)  |
 | `m`    | historical synonym for `n`                                                                                                                                              |
-| `n`    | newline-sensitive matching (see [Section 9.7.3.5](functions-matching.html#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules"))                           |
-| `p`    | partial newline-sensitive matching (see [Section 9.7.3.5](functions-matching.html#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules"))                   |
+| `n`    | newline-sensitive matching (see [Section 9.7.3.5](functions-matching#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules"))                           |
+| `p`    | partial newline-sensitive matching (see [Section 9.7.3.5](functions-matching#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules"))                   |
 | `q`    | rest of RE is a literal (“quoted”) string, all ordinary characters                                                                                                      |
 | `s`    | non-newline-sensitive matching (default)                                                                                                                                |
 | `t`    | tight syntax (default; see below)                                                                                                                                       |
-| `w`    | inverse partial newline-sensitive (“weird”) matching (see [Section 9.7.3.5](functions-matching.html#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules")) |
+| `w`    | inverse partial newline-sensitive (“weird”) matching (see [Section 9.7.3.5](functions-matching#POSIX-MATCHING-RULES "9.7.3.5. Regular Expression Matching Rules")) |
 | `x`    | expanded syntax (see below)                                                                                                                                             |
 
 \
@@ -672,7 +672,7 @@ Since SQL:2008, the SQL standard includes regular expression operators and funct
 * `SUBSTRING_REGEX`
 * `TRANSLATE_REGEX`
 
-PostgreSQL does not currently implement these operators and functions. You can get approximately equivalent functionality in each case as shown in [Table 9.25](functions-matching.html#FUNCTIONS-REGEXP-SQL-TABLE "Table 9.25. Regular Expression Functions Equivalencies"). (Various optional clauses on both sides have been omitted in this table.)
+PostgreSQL does not currently implement these operators and functions. You can get approximately equivalent functionality in each case as shown in [Table 9.25](functions-matching#FUNCTIONS-REGEXP-SQL-TABLE "Table 9.25. Regular Expression Functions Equivalencies"). (Various optional clauses on both sides have been omitted in this table.)
 
 **Table 9.25. Regular Expression Functions Equivalencies**
 
@@ -696,19 +696,19 @@ The SQL-standard operators and functions use XQuery regular expressions, which a
 
 * XQuery character class elements using `\p{UnicodeProperty}` or the inverse `\P{UnicodeProperty}` are not supported.
 
-* POSIX interprets character classes such as `\w` (see [Table 9.21](functions-matching.html#POSIX-CLASS-SHORTHAND-ESCAPES-TABLE "Table 9.21. Regular Expression Class-Shorthand Escapes")) according to the prevailing locale (which you can control by attaching a `COLLATE` clause to the operator or function). XQuery specifies these classes by reference to Unicode character properties, so equivalent behavior is obtained only with a locale that follows the Unicode rules.
+* POSIX interprets character classes such as `\w` (see [Table 9.21](functions-matching#POSIX-CLASS-SHORTHAND-ESCAPES-TABLE "Table 9.21. Regular Expression Class-Shorthand Escapes")) according to the prevailing locale (which you can control by attaching a `COLLATE` clause to the operator or function). XQuery specifies these classes by reference to Unicode character properties, so equivalent behavior is obtained only with a locale that follows the Unicode rules.
 
 * The SQL standard (not XQuery itself) attempts to cater for more variants of “newline” than POSIX does. The newline-sensitive matching options described above consider only ASCII NL (`\n`) to be a newline, but SQL would have us treat CR (`\r`), CRLF (`\r\n`) (a Windows-style newline), and some Unicode-only characters like LINE SEPARATOR (U+2028) as newlines as well. Notably, `.` and `\s` should count `\r\n` as one character not two according to SQL.
 
-* Of the character-entry escapes described in [Table 9.20](functions-matching.html#POSIX-CHARACTER-ENTRY-ESCAPES-TABLE "Table 9.20. Regular Expression Character-Entry Escapes"), XQuery supports only `\n`, `\r`, and `\t`.
+* Of the character-entry escapes described in [Table 9.20](functions-matching#POSIX-CHARACTER-ENTRY-ESCAPES-TABLE "Table 9.20. Regular Expression Character-Entry Escapes"), XQuery supports only `\n`, `\r`, and `\t`.
 
 * XQuery does not support the `[:name:]` syntax for character classes within bracket expressions.
 
-* XQuery does not have lookahead or lookbehind constraints, nor any of the constraint escapes described in [Table 9.22](functions-matching.html#POSIX-CONSTRAINT-ESCAPES-TABLE "Table 9.22. Regular Expression Constraint Escapes").
+* XQuery does not have lookahead or lookbehind constraints, nor any of the constraint escapes described in [Table 9.22](functions-matching#POSIX-CONSTRAINT-ESCAPES-TABLE "Table 9.22. Regular Expression Constraint Escapes").
 
-* The metasyntax forms described in [Section 9.7.3.4](functions-matching.html#POSIX-METASYNTAX "9.7.3.4. Regular Expression Metasyntax") do not exist in XQuery.
+* The metasyntax forms described in [Section 9.7.3.4](functions-matching#POSIX-METASYNTAX "9.7.3.4. Regular Expression Metasyntax") do not exist in XQuery.
 
-* The regular expression flag letters defined by XQuery are related to but not the same as the option letters for POSIX ([Table 9.24](functions-matching.html#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters")). While the `i` and `q` options behave the same, others do not:
+* The regular expression flag letters defined by XQuery are related to but not the same as the option letters for POSIX ([Table 9.24](functions-matching#POSIX-EMBEDDED-OPTIONS-TABLE "Table 9.24. ARE Embedded-Option Letters")). While the `i` and `q` options behave the same, others do not:
 
   * XQuery's `s` (allow dot to match newline) and `m` (allow `^` and `$` to match at newlines) flags provide access to the same behaviors as POSIX's `n`, `p` and `w` flags, but they do *not* match the behavior of POSIX's `s` and `m` flags. Note in particular that dot-matches-newline is the default behavior in POSIX but not XQuery.
   * XQuery's `x` (ignore whitespace in pattern) flag is noticeably different from POSIX's expanded-mode flag. POSIX's `x` flag also allows `#` to begin a comment in the pattern, and POSIX will not ignore a whitespace character after a backslash.

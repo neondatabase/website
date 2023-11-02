@@ -13,7 +13,7 @@ UNLISTEN { channel | * }
 
 `UNLISTEN` is used to remove an existing registration for `NOTIFY` events. `UNLISTEN` cancels any existing registration of the current PostgreSQL session as a listener on the notification channel named *`channel`*. The special wildcard `*` cancels all listener registrations for the current session.
 
-[NOTIFY](sql-notify.html "NOTIFY") contains a more extensive discussion of the use of `LISTEN` and `NOTIFY`.
+[NOTIFY](sql-notify "NOTIFY") contains a more extensive discussion of the use of `LISTEN` and `NOTIFY`.
 
 ## Parameters
 
@@ -59,4 +59,4 @@ There is no `UNLISTEN` command in the SQL standard.
 
 ## See Also
 
-[LISTEN](sql-listen.html "LISTEN"), [NOTIFY](sql-notify.html "NOTIFY")
+[LISTEN](sql-listen "LISTEN"), [NOTIFY](sql-notify "NOTIFY")

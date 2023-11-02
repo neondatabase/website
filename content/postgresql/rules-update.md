@@ -1,7 +1,7 @@
 ## 41.4. Rules on `INSERT`, `UPDATE`, and `DELETE` [#](#RULES-UPDATE)
 
-  * *   [41.4.1. How Update Rules Work](rules-update.html#RULES-UPDATE-HOW)
-  * [41.4.2. Cooperation with Views](rules-update.html#RULES-UPDATE-VIEWS)
+  * *   [41.4.1. How Update Rules Work](rules-update#RULES-UPDATE-HOW)
+  * [41.4.2. Cooperation with Views](rules-update#RULES-UPDATE-VIEWS)
 
 Rules that are defined on `INSERT`, `UPDATE`, and `DELETE` are significantly different from the view rules described in the previous sections. First, their `CREATE RULE` command allows more:
 

@@ -50,9 +50,9 @@ Loading an extension ordinarily requires the same privileges that would be requi
 
 ## Notes
 
-Before you can use `CREATE EXTENSION` to load an extension into a database, the extension's supporting files must be installed. Information about installing the extensions supplied with PostgreSQL can be found in [Additional Supplied Modules](contrib.html "Appendix F. Additional Supplied Modules and Extensions").
+Before you can use `CREATE EXTENSION` to load an extension into a database, the extension's supporting files must be installed. Information about installing the extensions supplied with PostgreSQL can be found in [Additional Supplied Modules](contrib "Appendix F. Additional Supplied Modules and Extensions").
 
-The extensions currently available for loading can be identified from the [`pg_available_extensions`](view-pg-available-extensions.html "54.2. pg_available_extensions") or [`pg_available_extension_versions`](view-pg-available-extension-versions.html "54.3. pg_available_extension_versions") system views.
+The extensions currently available for loading can be identified from the [`pg_available_extensions`](view-pg-available-extensions "54.2. pg_available_extensions") or [`pg_available_extension_versions`](view-pg-available-extension-versions "54.3. pg_available_extension_versions") system views.
 
 ### Caution
 
@@ -60,11 +60,11 @@ Installing an extension as superuser requires trusting that the extension's auth
 
 The extensions supplied with PostgreSQL are believed to be secure against installation-time attacks of this sort, except for a few that depend on other extensions. As stated in the documentation for those extensions, they should be installed into secure schemas, or installed into the same schemas as the extensions they depend on, or both.
 
-For information about writing new extensions, see [Section 38.17](extend-extensions.html "38.17. Packaging Related Objects into an Extension").
+For information about writing new extensions, see [Section 38.17](extend-extensions "38.17. Packaging Related Objects into an Extension").
 
 ## Examples
 
-Install the [hstore](hstore.html "F.18. hstore — hstore key/value datatype") extension into the current database, placing its objects in schema `addons`:
+Install the [hstore](hstore "F.18. hstore — hstore key/value datatype") extension into the current database, placing its objects in schema `addons`:
 
 ```
 
@@ -85,4 +85,4 @@ CREATE EXTENSION hstore;
 
 ## See Also
 
-[ALTER EXTENSION](sql-alterextension.html "ALTER EXTENSION"), [DROP EXTENSION](sql-dropextension.html "DROP EXTENSION")
+[ALTER EXTENSION](sql-alterextension "ALTER EXTENSION"), [DROP EXTENSION](sql-dropextension "DROP EXTENSION")

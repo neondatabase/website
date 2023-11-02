@@ -18,7 +18,7 @@ When managing the server directly, you can control the type of shutdown by sendi
 
     This is the *Immediate Shutdown* mode. The server will send SIGQUIT to all child processes and wait for them to terminate. If any do not terminate within 5 seconds, they will be sent SIGKILL. The supervisor server process exits as soon as all child processes have exited, without doing normal database shutdown processing. This will lead to recovery (by replaying the WAL log) upon next start-up. This is recommended only in emergencies.
 
-The [pg\_ctl](app-pg-ctl.html "pg_ctl") program provides a convenient interface for sending these signals to shut down the server. Alternatively, you can send the signal directly using `kill` on non-Windows systems. The PID of the `postgres` process can be found using the `ps` program, or from the file `postmaster.pid` in the data directory. For example, to do a fast shutdown:
+The [pg\_ctl](app-pg-ctl "pg_ctl") program provides a convenient interface for sending these signals to shut down the server. Alternatively, you can send the signal directly using `kill` on non-Windows systems. The PID of the `postgres` process can be found using the `ps` program, or from the file `postmaster.pid` in the data directory. For example, to do a fast shutdown:
 
 ```
 
@@ -29,4 +29,4 @@ kill -INT `head -1 /usr/local/pgsql/data/postmaster.pid`
 
 It is best not to use SIGKILL to shut down the server. Doing so will prevent the server from releasing shared memory and semaphores. Furthermore, SIGKILL kills the `postgres` process without letting it relay the signal to its subprocesses, so it might be necessary to kill the individual subprocesses by hand as well.
 
-To terminate an individual session while allowing other sessions to continue, use `pg_terminate_backend()` (see [Table 9.90](functions-admin.html#FUNCTIONS-ADMIN-SIGNAL-TABLE "Table 9.90. Server Signaling Functions")) or send a SIGTERM signal to the child process associated with the session.
+To terminate an individual session while allowing other sessions to continue, use `pg_terminate_backend()` (see [Table 9.90](functions-admin#FUNCTIONS-ADMIN-SIGNAL-TABLE "Table 9.90. Server Signaling Functions")) or send a SIGTERM signal to the child process associated with the session.

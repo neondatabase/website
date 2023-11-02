@@ -80,4 +80,4 @@ ALTER FOREIGN DATA WRAPPER dbi VALIDATOR bob.myvalidator;
 
 ## See Also
 
-[CREATE FOREIGN DATA WRAPPER](sql-createforeigndatawrapper.html "CREATE FOREIGN DATA WRAPPER"), [DROP FOREIGN DATA WRAPPER](sql-dropforeigndatawrapper.html "DROP FOREIGN DATA WRAPPER")
+[CREATE FOREIGN DATA WRAPPER](sql-createforeigndatawrapper "CREATE FOREIGN DATA WRAPPER"), [DROP FOREIGN DATA WRAPPER](sql-dropforeigndatawrapper "DROP FOREIGN DATA WRAPPER")

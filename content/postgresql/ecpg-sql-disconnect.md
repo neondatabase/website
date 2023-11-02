@@ -60,4 +60,4 @@ main(void)
 
 ## See Also
 
-[CONNECT](ecpg-sql-connect.html "CONNECT"), [SET CONNECTION](ecpg-sql-set-connection.html "SET CONNECTION")
+[CONNECT](ecpg-sql-connect "CONNECT"), [SET CONNECTION](ecpg-sql-set-connection "SET CONNECTION")

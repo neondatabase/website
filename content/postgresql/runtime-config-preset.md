@@ -4,15 +4,15 @@ The following “parameters” are read-only. As such, they have been excluded f
 
 * `block_size` (`integer`) [#](#GUC-BLOCK-SIZE)
 
-    Reports the size of a disk block. It is determined by the value of `BLCKSZ` when building the server. The default value is 8192 bytes. The meaning of some configuration variables (such as [shared\_buffers](runtime-config-resource.html#GUC-SHARED-BUFFERS)) is influenced by `block_size`. See [Section 20.4](runtime-config-resource.html "20.4. Resource Consumption") for information.
+    Reports the size of a disk block. It is determined by the value of `BLCKSZ` when building the server. The default value is 8192 bytes. The meaning of some configuration variables (such as [shared\_buffers](runtime-config-resource#GUC-SHARED-BUFFERS)) is influenced by `block_size`. See [Section 20.4](runtime-config-resource "20.4. Resource Consumption") for information.
 
 * `data_checksums` (`boolean`) [#](#GUC-DATA-CHECKSUMS)
 
-    Reports whether data checksums are enabled for this cluster. See [data checksums](app-initdb.html#APP-INITDB-DATA-CHECKSUMS) for more information.
+    Reports whether data checksums are enabled for this cluster. See [data checksums](app-initdb#APP-INITDB-DATA-CHECKSUMS) for more information.
 
 * `data_directory_mode` (`integer`) [#](#GUC-DATA-DIRECTORY-MODE)
 
-    On Unix systems this parameter reports the permissions the data directory (defined by [data\_directory](runtime-config-file-locations.html#GUC-DATA-DIRECTORY)) had at server startup. (On Microsoft Windows this parameter will always display `0700`.) See [group access](app-initdb.html#APP-INITDB-ALLOW-GROUP-ACCESS) for more information.
+    On Unix systems this parameter reports the permissions the data directory (defined by [data\_directory](runtime-config-file-locations#GUC-DATA-DIRECTORY)) had at server startup. (On Microsoft Windows this parameter will always display `0700`.) See [group access](app-initdb#APP-INITDB-ALLOW-GROUP-ACCESS) for more information.
 
 * `debug_assertions` (`boolean`) [#](#GUC-DEBUG-ASSERTIONS)
 
@@ -20,7 +20,7 @@ The following “parameters” are read-only. As such, they have been excluded f
 
 * `huge_pages_status` (`enum`) [#](#GUC-HUGE-PAGES-STATUS)
 
-    Reports the state of huge pages in the current instance: `on`, `off`, or `unknown` (if displayed with `postgres -C`). This parameter is useful to determine whether allocation of huge pages was successful under `huge_pages=try`. See [huge\_pages](runtime-config-resource.html#GUC-HUGE-PAGES) for more information.
+    Reports the state of huge pages in the current instance: `on`, `off`, or `unknown` (if displayed with `postgres -C`). This parameter is useful to determine whether allocation of huge pages was successful under `huge_pages=try`. See [huge\_pages](runtime-config-resource#GUC-HUGE-PAGES) for more information.
 
 * `integer_datetimes` (`boolean`) [#](#GUC-INTEGER-DATETIMES)
 
@@ -28,7 +28,7 @@ The following “parameters” are read-only. As such, they have been excluded f
 
 * `in_hot_standby` (`boolean`) [#](#GUC-IN-HOT-STANDBY)
 
-    Reports whether the server is currently in hot standby mode. When this is `on`, all transactions are forced to be read-only. Within a session, this can change only if the server is promoted to be primary. See [Section 27.4](hot-standby.html "27.4. Hot Standby") for more information.
+    Reports whether the server is currently in hot standby mode. When this is `on`, all transactions are forced to be read-only. Within a session, this can change only if the server is promoted to be primary. See [Section 27.4](hot-standby "27.4. Hot Standby") for more information.
 
 * `max_function_args` (`integer`) [#](#GUC-MAX-FUNCTION-ARGS)
 
@@ -48,7 +48,7 @@ The following “parameters” are read-only. As such, they have been excluded f
 
 * `server_encoding` (`string`) [#](#GUC-SERVER-ENCODING)
 
-    Reports the database encoding (character set). It is determined when the database is created. Ordinarily, clients need only be concerned with the value of [client\_encoding](runtime-config-client.html#GUC-CLIENT-ENCODING).
+    Reports the database encoding (character set). It is determined when the database is created. Ordinarily, clients need only be concerned with the value of [client\_encoding](runtime-config-client#GUC-CLIENT-ENCODING).
 
 * `server_version` (`string`) [#](#GUC-SERVER-VERSION)
 
@@ -64,9 +64,9 @@ The following “parameters” are read-only. As such, they have been excluded f
 
 * `shared_memory_size_in_huge_pages` (`integer`) [#](#GUC-SHARED-MEMORY-SIZE-IN-HUGE-PAGES)
 
-    Reports the number of huge pages that are needed for the main shared memory area based on the specified [huge\_page\_size](runtime-config-resource.html#GUC-HUGE-PAGE-SIZE). If huge pages are not supported, this will be `-1`.
+    Reports the number of huge pages that are needed for the main shared memory area based on the specified [huge\_page\_size](runtime-config-resource#GUC-HUGE-PAGE-SIZE). If huge pages are not supported, this will be `-1`.
 
-    This setting is supported only on Linux. It is always set to `-1` on other platforms. For more details about using huge pages on Linux, see [Section 19.4.5](kernel-resources.html#LINUX-HUGE-PAGES "19.4.5. Linux Huge Pages").
+    This setting is supported only on Linux. It is always set to `-1` on other platforms. For more details about using huge pages on Linux, see [Section 19.4.5](kernel-resources#LINUX-HUGE-PAGES "19.4.5. Linux Huge Pages").
 
 * `ssl_library` (`string`) [#](#GUC-SSL-LIBRARY)
 
@@ -78,4 +78,4 @@ The following “parameters” are read-only. As such, they have been excluded f
 
 * `wal_segment_size` (`integer`) [#](#GUC-WAL-SEGMENT-SIZE)
 
-    Reports the size of write ahead log segments. The default value is 16MB. See [Section 30.5](wal-configuration.html "30.5. WAL Configuration") for more information.
+    Reports the size of write ahead log segments. The default value is 16MB. See [Section 30.5](wal-configuration "30.5. WAL Configuration") for more information.

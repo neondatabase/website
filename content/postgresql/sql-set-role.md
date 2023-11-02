@@ -17,9 +17,9 @@ This command sets the current user identifier of the current SQL session to be *
 
 The specified *`role_name`* must be a role that the current session user is a member of. (If the session user is a superuser, any role can be selected.)
 
-The `SESSION` and `LOCAL` modifiers act the same as for the regular [`SET`](sql-set.html "SET") command.
+The `SESSION` and `LOCAL` modifiers act the same as for the regular [`SET`](sql-set "SET") command.
 
-`SET ROLE NONE` sets the current user identifier to the current session user identifier, as returned by `session_user`. `RESET ROLE` sets the current user identifier to the connection-time setting specified by the [command-line options](libpq-connect.html#LIBPQ-CONNECT-OPTIONS), [`ALTER ROLE`](sql-alterrole.html "ALTER ROLE"), or [`ALTER DATABASE`](sql-alterdatabase.html "ALTER DATABASE"), if any such settings exist. Otherwise, `RESET ROLE` sets the current user identifier to the current session user identifier. These forms can be executed by any user.
+`SET ROLE NONE` sets the current user identifier to the current session user identifier, as returned by `session_user`. `RESET ROLE` sets the current user identifier to the connection-time setting specified by the [command-line options](libpq-connect#LIBPQ-CONNECT-OPTIONS), [`ALTER ROLE`](sql-alterrole "ALTER ROLE"), or [`ALTER DATABASE`](sql-alterdatabase "ALTER DATABASE"), if any such settings exist. Otherwise, `RESET ROLE` sets the current user identifier to the current session user identifier. These forms can be executed by any user.
 
 ## Notes
 
@@ -27,9 +27,9 @@ Using this command, it is possible to either add privileges or restrict one's pr
 
 Note that when a superuser chooses to `SET ROLE` to a non-superuser role, they lose their superuser privileges.
 
-`SET ROLE` has effects comparable to [`SET SESSION AUTHORIZATION`](sql-set-session-authorization.html "SET SESSION AUTHORIZATION"), but the privilege checks involved are quite different. Also, `SET SESSION AUTHORIZATION` determines which roles are allowable for later `SET ROLE` commands, whereas changing roles with `SET ROLE` does not change the set of roles allowed to a later `SET ROLE`.
+`SET ROLE` has effects comparable to [`SET SESSION AUTHORIZATION`](sql-set-session-authorization "SET SESSION AUTHORIZATION"), but the privilege checks involved are quite different. Also, `SET SESSION AUTHORIZATION` determines which roles are allowable for later `SET ROLE` commands, whereas changing roles with `SET ROLE` does not change the set of roles allowed to a later `SET ROLE`.
 
-`SET ROLE` does not process session variables as specified by the role's [`ALTER ROLE`](sql-alterrole.html "ALTER ROLE") settings; this only happens during login.
+`SET ROLE` does not process session variables as specified by the role's [`ALTER ROLE`](sql-alterrole "ALTER ROLE") settings; this only happens during login.
 
 `SET ROLE` cannot be used within a `SECURITY DEFINER` function.
 
@@ -58,4 +58,4 @@ PostgreSQL allows identifier syntax (`"rolename"`), while the SQL standard requi
 
 ## See Also
 
-[SET SESSION AUTHORIZATION](sql-set-session-authorization.html "SET SESSION AUTHORIZATION")
+[SET SESSION AUTHORIZATION](sql-set-session-authorization "SET SESSION AUTHORIZATION")

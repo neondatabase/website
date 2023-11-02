@@ -17,7 +17,7 @@ VALUES ( expression [, ...] ) [, ...]
 
 `VALUES` computes a row value or set of row values specified by value expressions. It is most commonly used to generate a “constant table” within a larger command, but it can be used on its own.
 
-When more than one row is specified, all the rows must have the same number of elements. The data types of the resulting table's columns are determined by combining the explicit or inferred types of the expressions appearing in that column, using the same rules as for `UNION` (see [Section 10.5](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs")).
+When more than one row is specified, all the rows must have the same number of elements. The data types of the resulting table's columns are determined by combining the explicit or inferred types of the expressions appearing in that column, using the same rules as for `UNION` (see [Section 10.5](typeconv-union-case "10.5. UNION, CASE, and Related Constructs")).
 
 Within larger commands, `VALUES` is syntactically allowed anywhere that `SELECT` is. Because it is treated like a `SELECT` by the grammar, it is possible to use the `ORDER BY`, `LIMIT` (or equivalently `FETCH FIRST`), and `OFFSET` clauses with a `VALUES` command.
 
@@ -29,19 +29,19 @@ Within larger commands, `VALUES` is syntactically allowed anywhere that `SELECT`
 
 * *`sort_expression`*
 
-    An expression or integer constant indicating how to sort the result rows. This expression can refer to the columns of the `VALUES` result as `column1`, `column2`, etc. For more details see [ORDER BY Clause](sql-select.html#SQL-ORDERBY "ORDER BY Clause") in the [SELECT](sql-select.html "SELECT") documentation.
+    An expression or integer constant indicating how to sort the result rows. This expression can refer to the columns of the `VALUES` result as `column1`, `column2`, etc. For more details see [ORDER BY Clause](sql-select#SQL-ORDERBY "ORDER BY Clause") in the [SELECT](sql-select "SELECT") documentation.
 
 * *`operator`*
 
-    A sorting operator. For details see [ORDER BY Clause](sql-select.html#SQL-ORDERBY "ORDER BY Clause") in the [SELECT](sql-select.html "SELECT") documentation.
+    A sorting operator. For details see [ORDER BY Clause](sql-select#SQL-ORDERBY "ORDER BY Clause") in the [SELECT](sql-select "SELECT") documentation.
 
 * *`count`*
 
-    The maximum number of rows to return. For details see [LIMIT Clause](sql-select.html#SQL-LIMIT "LIMIT Clause") in the [SELECT](sql-select.html "SELECT") documentation.
+    The maximum number of rows to return. For details see [LIMIT Clause](sql-select#SQL-LIMIT "LIMIT Clause") in the [SELECT](sql-select "SELECT") documentation.
 
 * *`start`*
 
-    The number of rows to skip before starting to return rows. For details see [LIMIT Clause](sql-select.html#SQL-LIMIT "LIMIT Clause") in the [SELECT](sql-select.html "SELECT") documentation.
+    The number of rows to skip before starting to return rows. For details see [LIMIT Clause](sql-select#SQL-LIMIT "LIMIT Clause") in the [SELECT](sql-select "SELECT") documentation.
 
 ## Notes
 
@@ -109,12 +109,12 @@ WHERE ip_address IN (VALUES('192.168.0.1'::inet), ('192.168.0.10'), ('192.168.1.
 
 ### Tip
 
-For simple `IN` tests, it's better to rely on the [list-of-scalars](functions-comparisons.html#FUNCTIONS-COMPARISONS-IN-SCALAR "9.24.1. IN") form of `IN` than to write a `VALUES` query as shown above. The list of scalars method requires less writing and is often more efficient.
+For simple `IN` tests, it's better to rely on the [list-of-scalars](functions-comparisons#FUNCTIONS-COMPARISONS-IN-SCALAR "9.24.1. IN") form of `IN` than to write a `VALUES` query as shown above. The list of scalars method requires less writing and is often more efficient.
 
 ## Compatibility
 
-`VALUES` conforms to the SQL standard. `LIMIT` and `OFFSET` are PostgreSQL extensions; see also under [SELECT](sql-select.html "SELECT").
+`VALUES` conforms to the SQL standard. `LIMIT` and `OFFSET` are PostgreSQL extensions; see also under [SELECT](sql-select "SELECT").
 
 ## See Also
 
-[INSERT](sql-insert.html "INSERT"), [SELECT](sql-select.html "SELECT")
+[INSERT](sql-insert "INSERT"), [SELECT](sql-select "SELECT")

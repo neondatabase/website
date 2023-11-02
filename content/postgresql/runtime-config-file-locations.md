@@ -1,6 +1,6 @@
 ## 20.2. File Locations [#](#RUNTIME-CONFIG-FILE-LOCATIONS)
 
-In addition to the `postgresql.conf` file already mentioned, PostgreSQL uses two other manually-edited configuration files, which control client authentication (their use is discussed in [Chapter 21](client-authentication.html "Chapter 21. Client Authentication")). By default, all three configuration files are stored in the database cluster's data directory. The parameters described in this section allow the configuration files to be placed elsewhere. (Doing so can ease administration. In particular it is often easier to ensure that the configuration files are properly backed-up when they are kept separate.)
+In addition to the `postgresql.conf` file already mentioned, PostgreSQL uses two other manually-edited configuration files, which control client authentication (their use is discussed in [Chapter 21](client-authentication "Chapter 21. Client Authentication")). By default, all three configuration files are stored in the database cluster's data directory. The parameters described in this section allow the configuration files to be placed elsewhere. (Doing so can ease administration. In particular it is often easier to ensure that the configuration files are properly backed-up when they are kept separate.)
 
 * `data_directory` (`string`) [#](#GUC-DATA-DIRECTORY)
 
@@ -16,7 +16,7 @@ In addition to the `postgresql.conf` file already mentioned, PostgreSQL uses two
 
 * `ident_file` (`string`) [#](#GUC-IDENT-FILE)
 
-    Specifies the configuration file for user name mapping (customarily called `pg_ident.conf`). This parameter can only be set at server start. See also [Section 21.2](auth-username-maps.html "21.2. User Name Maps").
+    Specifies the configuration file for user name mapping (customarily called `pg_ident.conf`). This parameter can only be set at server start. See also [Section 21.2](auth-username-maps "21.2. User Name Maps").
 
 * `external_pid_file` (`string`) [#](#GUC-EXTERNAL-PID-FILE)
 

@@ -25,7 +25,7 @@ DROP FOREIGN DATA WRAPPER [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the foreign-data wrapper (such as foreign tables and servers), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the foreign-data wrapper (such as foreign tables and servers), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -46,4 +46,4 @@ DROP FOREIGN DATA WRAPPER dbi;
 
 ## See Also
 
-[CREATE FOREIGN DATA WRAPPER](sql-createforeigndatawrapper.html "CREATE FOREIGN DATA WRAPPER"), [ALTER FOREIGN DATA WRAPPER](sql-alterforeigndatawrapper.html "ALTER FOREIGN DATA WRAPPER")
+[CREATE FOREIGN DATA WRAPPER](sql-createforeigndatawrapper "CREATE FOREIGN DATA WRAPPER"), [ALTER FOREIGN DATA WRAPPER](sql-alterforeigndatawrapper "ALTER FOREIGN DATA WRAPPER")

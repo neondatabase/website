@@ -10,6 +10,6 @@ Unlike most system catalogs, `pg_tablespace` is shared across all databases of a
 | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `oid` `oid`Row identifier                                                                                                                           |
 | `spcname` `name`Tablespace name                                                                                                                     |
-| `spcowner` `oid` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`oid`)Owner of the tablespace, usually the user who created it |
-| `spcacl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv.html "5.7. Privileges") for details                                               |
+| `spcowner` `oid` (references [`pg_authid`](catalog-pg-authid "53.8. pg_authid").`oid`)Owner of the tablespace, usually the user who created it |
+| `spcacl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv "5.7. Privileges") for details                                               |
 | `spcoptions` `text[]`Tablespace-level options, as “keyword=value” strings                                                                           |

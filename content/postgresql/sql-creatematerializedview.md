@@ -39,19 +39,19 @@ CREATE MATERIALIZED VIEW [ IF NOT EXISTS ] table_name
 
 * `USING method`
 
-    This optional clause specifies the table access method to use to store the contents for the new materialized view; the method needs be an access method of type `TABLE`. See [Chapter 63](tableam.html "Chapter 63. Table Access Method Interface Definition") for more information. If this option is not specified, the default table access method is chosen for the new materialized view. See [default\_table\_access\_method](runtime-config-client.html#GUC-DEFAULT-TABLE-ACCESS-METHOD) for more information.
+    This optional clause specifies the table access method to use to store the contents for the new materialized view; the method needs be an access method of type `TABLE`. See [Chapter 63](tableam "Chapter 63. Table Access Method Interface Definition") for more information. If this option is not specified, the default table access method is chosen for the new materialized view. See [default\_table\_access\_method](runtime-config-client#GUC-DEFAULT-TABLE-ACCESS-METHOD) for more information.
 
 * `WITH ( storage_parameter [= value] [, ... ] )`
 
-    This clause specifies optional storage parameters for the new materialized view; see [Storage Parameters](sql-createtable.html#SQL-CREATETABLE-STORAGE-PARAMETERS "Storage Parameters") in the [CREATE TABLE](sql-createtable.html "CREATE TABLE") documentation for more information. All parameters supported for `CREATE TABLE` are also supported for `CREATE MATERIALIZED VIEW`. See [CREATE TABLE](sql-createtable.html "CREATE TABLE") for more information.
+    This clause specifies optional storage parameters for the new materialized view; see [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS "Storage Parameters") in the [CREATE TABLE](sql-createtable "CREATE TABLE") documentation for more information. All parameters supported for `CREATE TABLE` are also supported for `CREATE MATERIALIZED VIEW`. See [CREATE TABLE](sql-createtable "CREATE TABLE") for more information.
 
 * `TABLESPACE tablespace_name`
 
-    The *`tablespace_name`* is the name of the tablespace in which the new materialized view is to be created. If not specified, [default\_tablespace](runtime-config-client.html#GUC-DEFAULT-TABLESPACE) is consulted.
+    The *`tablespace_name`* is the name of the tablespace in which the new materialized view is to be created. If not specified, [default\_tablespace](runtime-config-client#GUC-DEFAULT-TABLESPACE) is consulted.
 
 * *`query`*
 
-    A [`SELECT`](sql-select.html "SELECT"), [`TABLE`](sql-select.html#SQL-TABLE "TABLE Command"), or [`VALUES`](sql-values.html "VALUES") command. This query will run within a security-restricted operation; in particular, calls to functions that themselves create temporary tables will fail.
+    A [`SELECT`](sql-select "SELECT"), [`TABLE`](sql-select#SQL-TABLE "TABLE Command"), or [`VALUES`](sql-values "VALUES") command. This query will run within a security-restricted operation; in particular, calls to functions that themselves create temporary tables will fail.
 
 * `WITH [ NO ] DATA`
 
@@ -63,4 +63,4 @@ CREATE MATERIALIZED VIEW [ IF NOT EXISTS ] table_name
 
 ## See Also
 
-[ALTER MATERIALIZED VIEW](sql-altermaterializedview.html "ALTER MATERIALIZED VIEW"), [CREATE TABLE AS](sql-createtableas.html "CREATE TABLE AS"), [CREATE VIEW](sql-createview.html "CREATE VIEW"), [DROP MATERIALIZED VIEW](sql-dropmaterializedview.html "DROP MATERIALIZED VIEW"), [REFRESH MATERIALIZED VIEW](sql-refreshmaterializedview.html "REFRESH MATERIALIZED VIEW")
+[ALTER MATERIALIZED VIEW](sql-altermaterializedview "ALTER MATERIALIZED VIEW"), [CREATE TABLE AS](sql-createtableas "CREATE TABLE AS"), [CREATE VIEW](sql-createview "CREATE VIEW"), [DROP MATERIALIZED VIEW](sql-dropmaterializedview "DROP MATERIALIZED VIEW"), [REFRESH MATERIALIZED VIEW](sql-refreshmaterializedview "REFRESH MATERIALIZED VIEW")

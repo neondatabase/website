@@ -1,6 +1,6 @@
 ## 9.2. Comparison Functions and Operators [#](#FUNCTIONS-COMPARISON)
 
-The usual comparison operators are available, as shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators").
+The usual comparison operators are available, as shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators").
 
 **Table 9.1. Comparison Operators**
 
@@ -26,7 +26,7 @@ It is usually possible to compare values of related data types as well; for exam
 
 As shown above, all comparison operators are binary operators that return values of type `boolean`. Thus, expressions like `1 < 2 < 3` are not valid (because there is no `<` operator to compare a Boolean value with `3`). Use the `BETWEEN` predicates shown below to perform range tests.
 
-There are also some comparison predicates, as shown in [Table 9.2](functions-comparison.html#FUNCTIONS-COMPARISON-PRED-TABLE "Table 9.2. Comparison Predicates"). These behave much like operators, but have special syntax mandated by the SQL standard.
+There are also some comparison predicates, as shown in [Table 9.2](functions-comparison#FUNCTIONS-COMPARISON-PRED-TABLE "Table 9.2. Comparison Predicates"). These behave much like operators, but have special syntax mandated by the SQL standard.
 
 **Table 9.2. Comparison Predicates**
 
@@ -103,7 +103,7 @@ Do *not* write `expression = NULL` because `NULL` is not “equal to” `NULL`. 
 
 ### Tip
 
-Some applications might expect that `expression = NULL` returns true if *`expression`* evaluates to the null value. It is highly recommended that these applications be modified to comply with the SQL standard. However, if that cannot be done the [transform\_null\_equals](runtime-config-compatible.html#GUC-TRANSFORM-NULL-EQUALS) configuration variable is available. If it is enabled, PostgreSQL will convert `x = NULL` clauses to `x IS NULL`.
+Some applications might expect that `expression = NULL` returns true if *`expression`* evaluates to the null value. It is highly recommended that these applications be modified to comply with the SQL standard. However, if that cannot be done the [transform\_null\_equals](runtime-config-compatible#GUC-TRANSFORM-NULL-EQUALS) configuration variable is available. If it is enabled, PostgreSQL will convert `x = NULL` clauses to `x IS NULL`.
 
 If the *`expression`* is row-valued, then `IS NULL` is true when the row expression itself is null or when all the row's fields are null, while `IS NOT NULL` is true when the row expression itself is non-null and all the row's fields are non-null. Because of this behavior, `IS NULL` and `IS NOT NULL` do not always return inverse results for row-valued expressions; in particular, a row-valued expression that contains both null and non-null fields will return false for both tests. In some cases, it may be preferable to write *`row`* `IS DISTINCT FROM NULL` or *`row`* `IS NOT DISTINCT FROM NULL`, which will simply check whether the overall row value is null without any additional tests on the row fields.
 
@@ -121,7 +121,7 @@ boolean_expression IS NOT UNKNOWN
 
 These will always return true or false, never a null value, even when the operand is null. A null input is treated as the logical value “unknown”. Notice that `IS UNKNOWN` and `IS NOT UNKNOWN` are effectively the same as `IS NULL` and `IS NOT NULL`, respectively, except that the input expression must be of Boolean type.
 
-Some comparison-related functions are also available, as shown in [Table 9.3](functions-comparison.html#FUNCTIONS-COMPARISON-FUNC-TABLE "Table 9.3. Comparison Functions").
+Some comparison-related functions are also available, as shown in [Table 9.3](functions-comparison#FUNCTIONS-COMPARISON-FUNC-TABLE "Table 9.3. Comparison Functions").
 
 **Table 9.3. Comparison Functions**
 

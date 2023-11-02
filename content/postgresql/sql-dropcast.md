@@ -48,4 +48,4 @@ The `DROP CAST` command conforms to the SQL standard.
 
 ## See Also
 
-[CREATE CAST](sql-createcast.html "CREATE CAST")
+[CREATE CAST](sql-createcast "CREATE CAST")

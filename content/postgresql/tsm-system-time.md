@@ -1,8 +1,8 @@
 ## F.46. tsm\_system\_time — the `SYSTEM_TIME` sampling method for `TABLESAMPLE` [#](#TSM-SYSTEM-TIME)
 
-* [F.46.1. Examples](tsm-system-time.html#TSM-SYSTEM-TIME-EXAMPLES)
+* [F.46.1. Examples](tsm-system-time#TSM-SYSTEM-TIME-EXAMPLES)
 
-The `tsm_system_time` module provides the table sampling method `SYSTEM_TIME`, which can be used in the `TABLESAMPLE` clause of a [`SELECT`](sql-select.html "SELECT") command.
+The `tsm_system_time` module provides the table sampling method `SYSTEM_TIME`, which can be used in the `TABLESAMPLE` clause of a [`SELECT`](sql-select "SELECT") command.
 
 This table sampling method accepts a single floating-point argument that is the maximum number of milliseconds to spend reading the table. This gives you direct control over how long the query takes, at the price that the size of the sample becomes hard to predict. The resulting sample will contain as many rows as could be read in the specified time, unless the whole table has been read first.
 

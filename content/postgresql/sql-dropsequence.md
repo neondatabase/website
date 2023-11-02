@@ -25,7 +25,7 @@ DROP SEQUENCE [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the sequence, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the sequence, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -46,4 +46,4 @@ DROP SEQUENCE serial;
 
 ## See Also
 
-[CREATE SEQUENCE](sql-createsequence.html "CREATE SEQUENCE"), [ALTER SEQUENCE](sql-altersequence.html "ALTER SEQUENCE")
+[CREATE SEQUENCE](sql-createsequence "CREATE SEQUENCE"), [ALTER SEQUENCE](sql-altersequence "ALTER SEQUENCE")

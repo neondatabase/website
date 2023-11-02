@@ -33,7 +33,7 @@ DROP OPERATOR [ IF EXISTS ] name ( { left_type | NONE } , right_type ) [, ...] [
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the operator (such as views using it), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the operator (such as views using it), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -68,4 +68,4 @@ There is no `DROP OPERATOR` statement in the SQL standard.
 
 ## See Also
 
-[CREATE OPERATOR](sql-createoperator.html "CREATE OPERATOR"), [ALTER OPERATOR](sql-alteroperator.html "ALTER OPERATOR")
+[CREATE OPERATOR](sql-createoperator "CREATE OPERATOR"), [ALTER OPERATOR](sql-alteroperator "ALTER OPERATOR")

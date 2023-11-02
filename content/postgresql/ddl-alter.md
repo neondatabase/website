@@ -1,13 +1,13 @@
 ## 5.6. Modifying Tables [#](#DDL-ALTER)
 
-  * *   [5.6.1. Adding a Column](ddl-alter.html#DDL-ALTER-ADDING-A-COLUMN)
-  * [5.6.2. Removing a Column](ddl-alter.html#DDL-ALTER-REMOVING-A-COLUMN)
-  * [5.6.3. Adding a Constraint](ddl-alter.html#DDL-ALTER-ADDING-A-CONSTRAINT)
-  * [5.6.4. Removing a Constraint](ddl-alter.html#DDL-ALTER-REMOVING-A-CONSTRAINT)
-  * [5.6.5. Changing a Column's Default Value](ddl-alter.html#DDL-ALTER-COLUMN-DEFAULT)
-  * [5.6.6. Changing a Column's Data Type](ddl-alter.html#DDL-ALTER-COLUMN-TYPE)
-  * [5.6.7. Renaming a Column](ddl-alter.html#DDL-ALTER-RENAMING-COLUMN)
-  * [5.6.8. Renaming a Table](ddl-alter.html#DDL-ALTER-RENAMING-TABLE)
+  * *   [5.6.1. Adding a Column](ddl-alter#DDL-ALTER-ADDING-A-COLUMN)
+  * [5.6.2. Removing a Column](ddl-alter#DDL-ALTER-REMOVING-A-COLUMN)
+  * [5.6.3. Adding a Constraint](ddl-alter#DDL-ALTER-ADDING-A-CONSTRAINT)
+  * [5.6.4. Removing a Constraint](ddl-alter#DDL-ALTER-REMOVING-A-CONSTRAINT)
+  * [5.6.5. Changing a Column's Default Value](ddl-alter#DDL-ALTER-COLUMN-DEFAULT)
+  * [5.6.6. Changing a Column's Data Type](ddl-alter#DDL-ALTER-COLUMN-TYPE)
+  * [5.6.7. Renaming a Column](ddl-alter#DDL-ALTER-RENAMING-COLUMN)
+  * [5.6.8. Renaming a Table](ddl-alter#DDL-ALTER-RENAMING-TABLE)
 
 When you create a table and you realize that you made a mistake, or the requirements of the application change, you can drop the table and create it again. But this is not a convenient option if the table is already filled with data, or if the table is referenced by other database objects (for instance a foreign key constraint). Therefore PostgreSQL provides a family of commands to make modifications to existing tables. Note that this is conceptually distinct from altering the data contained in the table: here we are interested in altering the definition, or structure, of the table.
 
@@ -22,7 +22,7 @@ You can:
 * Rename columns
 * Rename tables
 
-All these actions are performed using the [ALTER TABLE](sql-altertable.html "ALTER TABLE") command, whose reference page contains details beyond those given here.
+All these actions are performed using the [ALTER TABLE](sql-altertable "ALTER TABLE") command, whose reference page contains details beyond those given here.
 
 ### 5.6.1. Adding a Column [#](#DDL-ALTER-ADDING-A-COLUMN)
 
@@ -66,7 +66,7 @@ Whatever data was in the column disappears. Table constraints involving the colu
 ALTER TABLE products DROP COLUMN description CASCADE;
 ```
 
-See [Section 5.14](ddl-depend.html "5.14. Dependency Tracking") for a description of the general mechanism behind this.
+See [Section 5.14](ddl-depend "5.14. Dependency Tracking") for a description of the general mechanism behind this.
 
 ### 5.6.3. Adding a Constraint [#](#DDL-ALTER-ADDING-A-CONSTRAINT)
 

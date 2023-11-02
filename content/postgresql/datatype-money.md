@@ -1,6 +1,6 @@
 ## 8.2. Monetary Types [#](#DATATYPE-MONEY)
 
-The `money` type stores a currency amount with a fixed fractional precision; see [Table 8.3](datatype-money.html#DATATYPE-MONEY-TABLE "Table 8.3. Monetary Types"). The fractional precision is determined by the database's [lc\_monetary](runtime-config-client.html#GUC-LC-MONETARY) setting. The range shown in the table assumes there are two fractional digits. Input is accepted in a variety of formats, including integer and floating-point literals, as well as typical currency formatting, such as `'$1,000.00'`. Output is generally in the latter form but depends on the locale.
+The `money` type stores a currency amount with a fixed fractional precision; see [Table 8.3](datatype-money#DATATYPE-MONEY-TABLE "Table 8.3. Monetary Types"). The fractional precision is determined by the database's [lc\_monetary](runtime-config-client#GUC-LC-MONETARY) setting. The range shown in the table assumes there are two fractional digits. Input is accepted in a variety of formats, including integer and floating-point literals, as well as typical currency formatting, such as `'$1,000.00'`. Output is generally in the latter form but depends on the locale.
 
 **Table 8.3. Monetary Types**
 

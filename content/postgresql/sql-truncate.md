@@ -46,13 +46,13 @@ You must have the `TRUNCATE` privilege on a table to truncate it.
 
 `TRUNCATE` will not fire any `ON DELETE` triggers that might exist for the tables. But it will fire `ON TRUNCATE` triggers. If `ON TRUNCATE` triggers are defined for any of the tables, then all `BEFORE TRUNCATE` triggers are fired before any truncation happens, and all `AFTER TRUNCATE` triggers are fired after the last truncation is performed and any sequences are reset. The triggers will fire in the order that the tables are to be processed (first those listed in the command, and then any that were added due to cascading).
 
-`TRUNCATE` is not MVCC-safe. After truncation, the table will appear empty to concurrent transactions, if they are using a snapshot taken before the truncation occurred. See [Section 13.6](mvcc-caveats.html "13.6. Caveats") for more details.
+`TRUNCATE` is not MVCC-safe. After truncation, the table will appear empty to concurrent transactions, if they are using a snapshot taken before the truncation occurred. See [Section 13.6](mvcc-caveats "13.6. Caveats") for more details.
 
 `TRUNCATE` is transaction-safe with respect to the data in the tables: the truncation will be safely rolled back if the surrounding transaction does not commit.
 
 When `RESTART IDENTITY` is specified, the implied `ALTER SEQUENCE RESTART` operations are also done transactionally; that is, they will be rolled back if the surrounding transaction does not commit. Be aware that if any additional sequence operations are done on the restarted sequences before the transaction rolls back, the effects of these operations on the sequences will be rolled back, but not their effects on `currval()`; that is, after the transaction `currval()` will continue to reflect the last sequence value obtained inside the failed transaction, even though the sequence itself may no longer be consistent with that. This is similar to the usual behavior of `currval()` after a failed transaction.
 
-`TRUNCATE` can be used for foreign tables if supported by the foreign data wrapper, for instance, see [postgres\_fdw](postgres-fdw.html "F.37. postgres_fdw — access data stored in external PostgreSQL servers").
+`TRUNCATE` can be used for foreign tables if supported by the foreign data wrapper, for instance, see [postgres\_fdw](postgres-fdw "F.37. postgres_fdw — access data stored in external PostgreSQL servers").
 
 ## Examples
 
@@ -83,4 +83,4 @@ The SQL:2008 standard includes a `TRUNCATE` command with the syntax `TRUNCATE TA
 
 ## See Also
 
-[DELETE](sql-delete.html "DELETE")
+[DELETE](sql-delete "DELETE")

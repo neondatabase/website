@@ -28,7 +28,7 @@ where option can be:
 
 ## Description
 
-`CREATE ROLE` adds a new role to a PostgreSQL database cluster. A role is an entity that can own database objects and have database privileges; a role can be considered a “user”, a “group”, or both depending on how it is used. Refer to [Chapter 22](user-manag.html "Chapter 22. Database Roles") and [Chapter 21](client-authentication.html "Chapter 21. Client Authentication") for information about managing users and authentication. You must have `CREATEROLE` privilege or be a database superuser to use this command.
+`CREATE ROLE` adds a new role to a PostgreSQL database cluster. A role is an entity that can own database objects and have database privileges; a role can be considered a “user”, a “group”, or both depending on how it is used. Refer to [Chapter 22](user-manag "Chapter 22. Database Roles") and [Chapter 21](client-authentication "Chapter 21. Client Authentication") for information about managing users and authentication. You must have `CREATEROLE` privilege or be a database superuser to use this command.
 
 Note that roles are defined at the database cluster level, and so are valid in all databases in the cluster.
 
@@ -48,7 +48,7 @@ Note that roles are defined at the database cluster level, and so are valid in a
 
 * `CREATEROLE``NOCREATEROLE`
 
-    These clauses determine whether a role will be permitted to create, alter, drop, comment on, and change the security label for other roles. See [role creation](role-attributes.html#ROLE-CREATION) for more details about what capabilities are conferred by this privilege. If not specified, `NOCREATEROLE` is the default.
+    These clauses determine whether a role will be permitted to create, alter, drop, comment on, and change the security label for other roles. See [role creation](role-attributes#ROLE-CREATION) for more details about what capabilities are conferred by this privilege. If not specified, `NOCREATEROLE` is the default.
 
 * `INHERIT``NOINHERIT`
 
@@ -58,7 +58,7 @@ Note that roles are defined at the database cluster level, and so are valid in a
 
 * `LOGIN``NOLOGIN`
 
-    These clauses determine whether a role is allowed to log in; that is, whether the role can be given as the initial session authorization name during client connection. A role having the `LOGIN` attribute can be thought of as a user. Roles without this attribute are useful for managing database privileges, but are not users in the usual sense of the word. If not specified, `NOLOGIN` is the default, except when `CREATE ROLE` is invoked through its alternative spelling [`CREATE USER`](sql-createuser.html "CREATE USER").
+    These clauses determine whether a role is allowed to log in; that is, whether the role can be given as the initial session authorization name during client connection. A role having the `LOGIN` attribute can be thought of as a user. Roles without this attribute are useful for managing database privileges, but are not users in the usual sense of the word. If not specified, `NOLOGIN` is the default, except when `CREATE ROLE` is invoked through its alternative spelling [`CREATE USER`](sql-createuser "CREATE USER").
 
 * `REPLICATION``NOREPLICATION`
 
@@ -82,7 +82,7 @@ Note that roles are defined at the database cluster level, and so are valid in a
 
     Specifying an empty string will also set the password to null, but that was not the case before PostgreSQL version 10. In earlier versions, an empty string could be used, or not, depending on the authentication method and the exact version, and libpq would refuse to use it in any case. To avoid the ambiguity, specifying an empty string should be avoided.
 
-    The password is always stored encrypted in the system catalogs. The `ENCRYPTED` keyword has no effect, but is accepted for backwards compatibility. The method of encryption is determined by the configuration parameter [password\_encryption](runtime-config-connection.html#GUC-PASSWORD-ENCRYPTION). If the presented password string is already in MD5-encrypted or SCRAM-encrypted format, then it is stored as-is regardless of `password_encryption` (since the system cannot decrypt the specified encrypted password string, to encrypt it in a different format). This allows reloading of encrypted passwords during dump/restore.
+    The password is always stored encrypted in the system catalogs. The `ENCRYPTED` keyword has no effect, but is accepted for backwards compatibility. The method of encryption is determined by the configuration parameter [password\_encryption](runtime-config-connection#GUC-PASSWORD-ENCRYPTION). If the presented password string is already in MD5-encrypted or SCRAM-encrypted format, then it is stored as-is regardless of `password_encryption` (since the system cannot decrypt the specified encrypted password string, to encrypt it in a different format). This allows reloading of encrypted passwords during dump/restore.
 
 * `VALID UNTIL` '*`timestamp`*'
 
@@ -106,21 +106,21 @@ Note that roles are defined at the database cluster level, and so are valid in a
 
 ## Notes
 
-Use [`ALTER ROLE`](sql-alterrole.html "ALTER ROLE") to change the attributes of a role, and [`DROP ROLE`](sql-droprole.html "DROP ROLE") to remove a role. All the attributes specified by `CREATE ROLE` can be modified by later `ALTER ROLE` commands.
+Use [`ALTER ROLE`](sql-alterrole "ALTER ROLE") to change the attributes of a role, and [`DROP ROLE`](sql-droprole "DROP ROLE") to remove a role. All the attributes specified by `CREATE ROLE` can be modified by later `ALTER ROLE` commands.
 
-The preferred way to add and remove members of roles that are being used as groups is to use [`GRANT`](sql-grant.html "GRANT") and [`REVOKE`](sql-revoke.html "REVOKE").
+The preferred way to add and remove members of roles that are being used as groups is to use [`GRANT`](sql-grant "GRANT") and [`REVOKE`](sql-revoke "REVOKE").
 
 The `VALID UNTIL` clause defines an expiration time for a password only, not for the role per se. In particular, the expiration time is not enforced when logging in using a non-password-based authentication method.
 
-The `INHERIT` attribute governs inheritance of grantable privileges (that is, access privileges for database objects and role memberships). It does not apply to the special role attributes set by `CREATE ROLE` and `ALTER ROLE`. For example, being a member of a role with `CREATEDB` privilege does not immediately grant the ability to create databases, even if `INHERIT` is set; it would be necessary to become that role via [`SET ROLE`](sql-set-role.html "SET ROLE") before creating a database.
+The `INHERIT` attribute governs inheritance of grantable privileges (that is, access privileges for database objects and role memberships). It does not apply to the special role attributes set by `CREATE ROLE` and `ALTER ROLE`. For example, being a member of a role with `CREATEDB` privilege does not immediately grant the ability to create databases, even if `INHERIT` is set; it would be necessary to become that role via [`SET ROLE`](sql-set-role "SET ROLE") before creating a database.
 
 The `INHERIT` attribute is the default for reasons of backwards compatibility: in prior releases of PostgreSQL, users always had access to all privileges of groups they were members of. However, `NOINHERIT` provides a closer match to the semantics specified in the SQL standard.
 
-PostgreSQL includes a program [createuser](app-createuser.html "createuser") that has the same functionality as `CREATE ROLE` (in fact, it calls this command) but can be run from the command shell.
+PostgreSQL includes a program [createuser](app-createuser "createuser") that has the same functionality as `CREATE ROLE` (in fact, it calls this command) but can be run from the command shell.
 
 The `CONNECTION LIMIT` option is only enforced approximately; if two new sessions start at about the same time when just one connection “slot” remains for the role, it is possible that both will fail. Also, the limit is never enforced for superusers.
 
-Caution must be exercised when specifying an unencrypted password with this command. The password will be transmitted to the server in cleartext, and it might also be logged in the client's command history or the server log. The command [createuser](app-createuser.html "createuser"), however, transmits the password encrypted. Also, [psql](app-psql.html "psql") contains a command `\password` that can be used to safely change the password later.
+Caution must be exercised when specifying an unencrypted password with this command. The password will be transmitted to the server in cleartext, and it might also be logged in the client's command history or the server log. The command [createuser](app-createuser "createuser"), however, transmits the password encrypted. Also, [psql](app-psql "psql") contains a command `\password` that can be used to safely change the password later.
 
 ## Examples
 
@@ -185,4 +185,4 @@ IN GROUP role_name [, ...]
 
 ## See Also
 
-[SET ROLE](sql-set-role.html "SET ROLE"), [ALTER ROLE](sql-alterrole.html "ALTER ROLE"), [DROP ROLE](sql-droprole.html "DROP ROLE"), [GRANT](sql-grant.html "GRANT"), [REVOKE](sql-revoke.html "REVOKE"), [createuser](app-createuser.html "createuser"), [createrole\_self\_grant](runtime-config-client.html#GUC-CREATEROLE-SELF-GRANT)
+[SET ROLE](sql-set-role "SET ROLE"), [ALTER ROLE](sql-alterrole "ALTER ROLE"), [DROP ROLE](sql-droprole "DROP ROLE"), [GRANT](sql-grant "GRANT"), [REVOKE](sql-revoke "REVOKE"), [createuser](app-createuser "createuser"), [createrole\_self\_grant](runtime-config-client#GUC-CREATEROLE-SELF-GRANT)

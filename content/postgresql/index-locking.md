@@ -6,7 +6,7 @@ Building an index type that supports concurrent updates usually requires extensi
 
 Aside from the index's own internal consistency requirements, concurrent updates create issues about consistency between the parent table (the *heap*) and the index. Because PostgreSQL separates accesses and updates of the heap from those of the index, there are windows in which the index might be inconsistent with the heap. We handle this problem with the following rules:
 
-* A new heap entry is made before making its index entries. (Therefore a concurrent index scan is likely to fail to see the heap entry. This is okay because the index reader would be uninterested in an uncommitted row anyway. But see [Section 64.5](index-unique-checks.html "64.5. Index Uniqueness Checks").)
+* A new heap entry is made before making its index entries. (Therefore a concurrent index scan is likely to fail to see the heap entry. This is okay because the index reader would be uninterested in an uncommitted row anyway. But see [Section 64.5](index-unique-checks "64.5. Index Uniqueness Checks").)
 * When a heap entry is to be deleted (by `VACUUM`), all its index entries must be removed first.
 * An index scan must maintain a pin on the index page holding the item last returned by `amgettuple`, and `ambulkdelete` cannot delete entries from pages that are pinned by other backends. The need for this rule is explained below.
 

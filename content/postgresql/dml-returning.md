@@ -2,9 +2,9 @@
 
 Sometimes it is useful to obtain data from modified rows while they are being manipulated. The `INSERT`, `UPDATE`, and `DELETE` commands all have an optional `RETURNING` clause that supports this. Use of `RETURNING` avoids performing an extra database query to collect the data, and is especially valuable when it would otherwise be difficult to identify the modified rows reliably.
 
-The allowed contents of a `RETURNING` clause are the same as a `SELECT` command's output list (see [Section 7.3](queries-select-lists.html "7.3. Select Lists")). It can contain column names of the command's target table, or value expressions using those columns. A common shorthand is `RETURNING *`, which selects all columns of the target table in order.
+The allowed contents of a `RETURNING` clause are the same as a `SELECT` command's output list (see [Section 7.3](queries-select-lists "7.3. Select Lists")). It can contain column names of the command's target table, or value expressions using those columns. A common shorthand is `RETURNING *`, which selects all columns of the target table in order.
 
-In an `INSERT`, the data available to `RETURNING` is the row as it was inserted. This is not so useful in trivial inserts, since it would just repeat the data provided by the client. But it can be very handy when relying on computed default values. For example, when using a [`serial`](datatype-numeric.html#DATATYPE-SERIAL "8.1.4. Serial Types") column to provide unique identifiers, `RETURNING` can return the ID assigned to a new row:
+In an `INSERT`, the data available to `RETURNING` is the row as it was inserted. This is not so useful in trivial inserts, since it would just repeat the data provided by the client. But it can be very handy when relying on computed default values. For example, when using a [`serial`](datatype-numeric#DATATYPE-SERIAL "8.1.4. Serial Types") column to provide unique identifiers, `RETURNING` can return the ID assigned to a new row:
 
 ```
 
@@ -33,4 +33,4 @@ DELETE FROM products
   RETURNING *;
 ```
 
-If there are triggers ([Chapter 39](triggers.html "Chapter 39. Triggers")) on the target table, the data available to `RETURNING` is the row as modified by the triggers. Thus, inspecting columns computed by triggers is another common use-case for `RETURNING`.
+If there are triggers ([Chapter 39](triggers "Chapter 39. Triggers")) on the target table, the data available to `RETURNING` is the row as modified by the triggers. Thus, inspecting columns computed by triggers is another common use-case for `RETURNING`.

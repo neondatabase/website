@@ -25,7 +25,7 @@ DROP TYPE [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the type (such as table columns, functions, and operators), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the type (such as table columns, functions, and operators), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -46,4 +46,4 @@ This command is similar to the corresponding command in the SQL standard, apart 
 
 ## See Also
 
-[ALTER TYPE](sql-altertype.html "ALTER TYPE"), [CREATE TYPE](sql-createtype.html "CREATE TYPE")
+[ALTER TYPE](sql-altertype "ALTER TYPE"), [CREATE TYPE](sql-createtype "CREATE TYPE")

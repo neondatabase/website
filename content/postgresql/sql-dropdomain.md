@@ -25,7 +25,7 @@ DROP DOMAIN [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the domain (such as table columns), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the domain (such as table columns), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -46,4 +46,4 @@ This command conforms to the SQL standard, except for the `IF EXISTS` option, wh
 
 ## See Also
 
-[CREATE DOMAIN](sql-createdomain.html "CREATE DOMAIN"), [ALTER DOMAIN](sql-alterdomain.html "ALTER DOMAIN")
+[CREATE DOMAIN](sql-createdomain "CREATE DOMAIN"), [ALTER DOMAIN](sql-alterdomain "ALTER DOMAIN")

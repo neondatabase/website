@@ -8,6 +8,6 @@ Unlike most system catalogs, `pg_db_role_setting` is shared across all databases
 
 | Column TypeDescription                                                                                                                                                                      |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `setdatabase` `oid` (references [`pg_database`](catalog-pg-database.html "53.15. pg_database").`oid`)The OID of the database the setting is applicable to, or zero if not database-specific |
-| `setrole` `oid` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`oid`)The OID of the role the setting is applicable to, or zero if not role-specific                    |
+| `setdatabase` `oid` (references [`pg_database`](catalog-pg-database "53.15. pg_database").`oid`)The OID of the database the setting is applicable to, or zero if not database-specific |
+| `setrole` `oid` (references [`pg_authid`](catalog-pg-authid "53.8. pg_authid").`oid`)The OID of the role the setting is applicable to, or zero if not role-specific                    |
 | `setconfig` `text[]`Defaults for run-time configuration variables                                                                                                                           |

@@ -44,7 +44,7 @@ The user that creates the function becomes the owner of the function.
 
 To be able to create a function, you must have `USAGE` privilege on the argument types and the return type.
 
-Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further information on writing functions.
+Refer to [Section 38.3](xfunc "38.3. User-Defined Functions") for further information on writing functions.
 
 ## Parameters
 
@@ -58,7 +58,7 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
 * *`argname`*
 
-    The name of an argument. Some languages (including SQL and PL/pgSQL) let you use the name in the function body. For other languages the name of an input argument is just extra documentation, so far as the function itself is concerned; but you can use input argument names when calling a function to improve readability (see [Section 4.3](sql-syntax-calling-funcs.html "4.3. Calling Functions")). In any case, the name of an output argument is significant, because it defines the column name in the result row type. (If you omit the name for an output argument, the system will choose a default column name.)
+    The name of an argument. Some languages (including SQL and PL/pgSQL) let you use the name in the function body. For other languages the name of an input argument is just extra documentation, so far as the function itself is concerned; but you can use input argument names when calling a function to improve readability (see [Section 4.3](sql-syntax-calling-funcs "4.3. Calling Functions")). In any case, the name of an output argument is significant, because it defines the column name in the result row type. (If you omit the name for an output argument, the system will choose a default column name.)
 
 * *`argtype`*
 
@@ -96,7 +96,7 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
 * `TRANSFORM { FOR TYPE type_name } [, ... ] }`
 
-    Lists which transforms a call to the function should apply. Transforms convert between SQL types and language-specific data types; see [CREATE TRANSFORM](sql-createtransform.html "CREATE TRANSFORM"). Procedural language implementations usually have hardcoded knowledge of the built-in types, so those don't need to be listed here. If a procedural language implementation does not know how to handle a type and no transform is supplied, it will fall back to a default behavior for converting data types, but this depends on the implementation.
+    Lists which transforms a call to the function should apply. Transforms convert between SQL types and language-specific data types; see [CREATE TRANSFORM](sql-createtransform "CREATE TRANSFORM"). Procedural language implementations usually have hardcoded knowledge of the built-in types, so those don't need to be listed here. If a procedural language implementation does not know how to handle a type and no transform is supplied, it will fall back to a default behavior for converting data types, but this depends on the implementation.
 
 * `WINDOW`
 
@@ -112,11 +112,11 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
     `VOLATILE` indicates that the function value can change even within a single table scan, so no optimizations can be made. Relatively few database functions are volatile in this sense; some examples are `random()`, `currval()`, `timeofday()`. But note that any function that has side-effects must be classified volatile, even if its result is quite predictable, to prevent calls from being optimized away; an example is `setval()`.
 
-    For additional details see [Section 38.7](xfunc-volatility.html "38.7. Function Volatility Categories").
+    For additional details see [Section 38.7](xfunc-volatility "38.7. Function Volatility Categories").
 
 * `LEAKPROOF`
 
-    `LEAKPROOF` indicates that the function has no side effects. It reveals no information about its arguments other than by its return value. For example, a function which throws an error message for some argument values but not others, or which includes the argument values in any error message, is not leakproof. This affects how the system executes queries against views created with the `security_barrier` option or tables with row level security enabled. The system will enforce conditions from security policies and security barrier views before any user-supplied conditions from the query itself that contain non-leakproof functions, in order to prevent the inadvertent exposure of data. Functions and operators marked as leakproof are assumed to be trustworthy, and may be executed before conditions from security policies and security barrier views. In addition, functions which do not take arguments or which are not passed any arguments from the security barrier view or table do not have to be marked as leakproof to be executed before security conditions. See [CREATE VIEW](sql-createview.html "CREATE VIEW") and [Section 41.5](rules-privileges.html "41.5. Rules and Privileges"). This option can only be set by the superuser.
+    `LEAKPROOF` indicates that the function has no side effects. It reveals no information about its arguments other than by its return value. For example, a function which throws an error message for some argument values but not others, or which includes the argument values in any error message, is not leakproof. This affects how the system executes queries against views created with the `security_barrier` option or tables with row level security enabled. The system will enforce conditions from security policies and security barrier views before any user-supplied conditions from the query itself that contain non-leakproof functions, in order to prevent the inadvertent exposure of data. Functions and operators marked as leakproof are assumed to be trustworthy, and may be executed before conditions from security policies and security barrier views. In addition, functions which do not take arguments or which are not passed any arguments from the security barrier view or table do not have to be marked as leakproof to be executed before security conditions. See [CREATE VIEW](sql-createview "CREATE VIEW") and [Section 41.5](rules-privileges "41.5. Rules and Privileges"). This option can only be set by the superuser.
 
 * `CALLED ON NULL INPUT``RETURNS NULL ON NULL INPUT``STRICT`
 
@@ -126,7 +126,7 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
 * `[EXTERNAL] SECURITY INVOKER``[EXTERNAL] SECURITY DEFINER`
 
-    `SECURITY INVOKER` indicates that the function is to be executed with the privileges of the user that calls it. That is the default. `SECURITY DEFINER` specifies that the function is to be executed with the privileges of the user that owns it. For information on how to write `SECURITY DEFINER` functions safely, [see below](sql-createfunction.html#SQL-CREATEFUNCTION-SECURITY "Writing SECURITY DEFINER Functions Safely").
+    `SECURITY INVOKER` indicates that the function is to be executed with the privileges of the user that calls it. That is the default. `SECURITY DEFINER` specifies that the function is to be executed with the privileges of the user that owns it. For information on how to write `SECURITY DEFINER` functions safely, [see below](sql-createfunction#SQL-CREATEFUNCTION-SECURITY "Writing SECURITY DEFINER Functions Safely").
 
     The key word `EXTERNAL` is allowed for SQL conformance, but it is optional since, unlike in SQL, this feature applies to all functions not only external ones.
 
@@ -138,7 +138,7 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
 * `COST` *`execution_cost`*
 
-    A positive number giving the estimated execution cost for the function, in units of [cpu\_operator\_cost](runtime-config-query.html#GUC-CPU-OPERATOR-COST). If the function returns a set, this is the cost per returned row. If the cost is not specified, 1 unit is assumed for C-language and internal functions, and 100 units for functions in all other languages. Larger values cause the planner to try to avoid evaluating the function more often than necessary.
+    A positive number giving the estimated execution cost for the function, in units of [cpu\_operator\_cost](runtime-config-query#GUC-CPU-OPERATOR-COST). If the function returns a set, this is the cost per returned row. If the cost is not specified, 1 unit is assumed for C-language and internal functions, and 100 units for functions in all other languages. Larger values cause the planner to try to avoid evaluating the function more often than necessary.
 
 * `ROWS` *`result_rows`*
 
@@ -146,7 +146,7 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
 * `SUPPORT` *`support_function`*
 
-    The name (optionally schema-qualified) of a *planner support function* to use for this function. See [Section 38.11](xfunc-optimization.html "38.11. Function Optimization Information") for details. You must be superuser to use this option.
+    The name (optionally schema-qualified) of a *planner support function* to use for this function. See [Section 38.11](xfunc-optimization "38.11. Function Optimization Information") for details. You must be superuser to use this option.
 
 * *`configuration_parameter`**`value`*
 
@@ -154,17 +154,17 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
     If a `SET` clause is attached to a function, then the effects of a `SET LOCAL` command executed inside the function for the same variable are restricted to the function: the configuration parameter's prior value is still restored at function exit. However, an ordinary `SET` command (without `LOCAL`) overrides the `SET` clause, much as it would do for a previous `SET LOCAL` command: the effects of such a command will persist after function exit, unless the current transaction is rolled back.
 
-    See [SET](sql-set.html "SET") and [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
+    See [SET](sql-set "SET") and [Chapter 20](runtime-config "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
 
 * *`definition`*
 
     A string constant defining the function; the meaning depends on the language. It can be an internal function name, the path to an object file, an SQL command, or text in a procedural language.
 
-    It is often helpful to use dollar quoting (see [Section 4.1.2.4](sql-syntax-lexical.html#SQL-SYNTAX-DOLLAR-QUOTING "4.1.2.4. Dollar-Quoted String Constants")) to write the function definition string, rather than the normal single quote syntax. Without dollar quoting, any single quotes or backslashes in the function definition must be escaped by doubling them.
+    It is often helpful to use dollar quoting (see [Section 4.1.2.4](sql-syntax-lexical#SQL-SYNTAX-DOLLAR-QUOTING "4.1.2.4. Dollar-Quoted String Constants")) to write the function definition string, rather than the normal single quote syntax. Without dollar quoting, any single quotes or backslashes in the function definition must be escaped by doubling them.
 
 * `obj_file, link_symbol`
 
-    This form of the `AS` clause is used for dynamically loadable C language functions when the function name in the C language source code is not the same as the name of the SQL function. The string *`obj_file`* is the name of the shared library file containing the compiled C function, and is interpreted as for the [`LOAD`](sql-load.html "LOAD") command. The string *`link_symbol`* is the function's link symbol, that is, the name of the function in the C language source code. If the link symbol is omitted, it is assumed to be the same as the name of the SQL function being defined. The C names of all functions must be different, so you must give overloaded C functions different C names (for example, use the argument types as part of the C names).
+    This form of the `AS` clause is used for dynamically loadable C language functions when the function name in the C language source code is not the same as the name of the SQL function. The string *`obj_file`* is the name of the shared library file containing the compiled C function, and is interpreted as for the [`LOAD`](sql-load "LOAD") command. The string *`link_symbol`* is the function's link symbol, that is, the name of the function in the C language source code. If the link symbol is omitted, it is assumed to be the same as the name of the SQL function being defined. The C names of all functions must be different, so you must give overloaded C functions different C names (for example, use the argument types as part of the C names).
 
     When repeated `CREATE FUNCTION` calls refer to the same object file, the file is only loaded once per session. To unload and reload the file (perhaps during development), start a new session.
 
@@ -193,7 +193,7 @@ Refer to [Section 38.3](xfunc.html "38.3. User-Defined Functions") for further
 
 ## Overloading
 
-PostgreSQL allows function *overloading*; that is, the same name can be used for several different functions so long as they have distinct input argument types. Whether or not you use it, this capability entails security precautions when calling functions in databases where some users mistrust other users; see [Section 10.3](typeconv-func.html "10.3. Functions").
+PostgreSQL allows function *overloading*; that is, the same name can be used for several different functions so long as they have distinct input argument types. Whether or not you use it, this capability entails security precautions when calling functions in databases where some users mistrust other users; see [Section 10.3](typeconv-func "10.3. Functions").
 
 Two functions are considered the same if they have the same names and *input* argument types, ignoring any `OUT` parameters. Thus for example these declarations conflict:
 
@@ -295,7 +295,7 @@ However, a `TABLE` function is different from the preceding examples, because it
 
 ## Writing `SECURITY DEFINER` Functions Safely
 
-Because a `SECURITY DEFINER` function is executed with the privileges of the user that owns it, care is needed to ensure that the function cannot be misused. For security, [search\_path](runtime-config-client.html#GUC-SEARCH-PATH) should be set to exclude any schemas writable by untrusted users. This prevents malicious users from creating objects (e.g., tables, functions, and operators) that mask objects intended to be used by the function. Particularly important in this regard is the temporary-table schema, which is searched first by default, and is normally writable by anyone. A secure arrangement can be obtained by forcing the temporary schema to be searched last. To do this, write `pg_temp` as the last entry in `search_path`. This function illustrates safe usage:
+Because a `SECURITY DEFINER` function is executed with the privileges of the user that owns it, care is needed to ensure that the function cannot be misused. For security, [search\_path](runtime-config-client#GUC-SEARCH-PATH) should be set to exclude any schemas writable by untrusted users. This prevents malicious users from creating objects (e.g., tables, functions, and operators) that mask objects intended to be used by the function. Particularly important in this regard is the temporary-table schema, which is searched first by default, and is normally writable by anyone. A secure arrangement can be obtained by forcing the temporary schema to be searched last. To do this, write `pg_temp` as the last entry in `search_path`. This function illustrates safe usage:
 
 ```
 
@@ -319,7 +319,7 @@ This function's intention is to access a table `admin.pwds`. But without the `SE
 
 If the security definer function intends to create roles, and if it is running as a non-superuser, `createrole_self_grant` should also be set to a known value using the `SET` clause.
 
-Another point to keep in mind is that by default, execute privilege is granted to `PUBLIC` for newly created functions (see [Section 5.7](ddl-priv.html "5.7. Privileges") for more information). Frequently you will wish to restrict use of a security definer function to only some users. To do that, you must revoke the default `PUBLIC` privileges and then grant execute privilege selectively. To avoid having a window where the new function is accessible to all, create it and set the privileges within a single transaction. For example:
+Another point to keep in mind is that by default, execute privilege is granted to `PUBLIC` for newly created functions (see [Section 5.7](ddl-priv "5.7. Privileges") for more information). Frequently you will wish to restrict use of a security definer function to only some users. To do that, you must revoke the default `PUBLIC` privileges and then grant execute privilege selectively. To avoid having a window where the new function is accessible to all, create it and set the privileges within a single transaction. For example:
 
 ```
 
@@ -348,4 +348,4 @@ Simple `LANGUAGE SQL` functions can be written in a way that is both standard-co
 
 ## See Also
 
-[ALTER FUNCTION](sql-alterfunction.html "ALTER FUNCTION"), [DROP FUNCTION](sql-dropfunction.html "DROP FUNCTION"), [GRANT](sql-grant.html "GRANT"), [LOAD](sql-load.html "LOAD"), [REVOKE](sql-revoke.html "REVOKE")
+[ALTER FUNCTION](sql-alterfunction "ALTER FUNCTION"), [DROP FUNCTION](sql-dropfunction "DROP FUNCTION"), [GRANT](sql-grant "GRANT"), [LOAD](sql-load "LOAD"), [REVOKE](sql-revoke "REVOKE")

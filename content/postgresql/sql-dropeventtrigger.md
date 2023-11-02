@@ -25,7 +25,7 @@ DROP EVENT TRIGGER [ IF EXISTS ] name [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the trigger, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the trigger, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -46,4 +46,4 @@ There is no `DROP EVENT TRIGGER` statement in the SQL standard.
 
 ## See Also
 
-[CREATE EVENT TRIGGER](sql-createeventtrigger.html "CREATE EVENT TRIGGER"), [ALTER EVENT TRIGGER](sql-altereventtrigger.html "ALTER EVENT TRIGGER")
+[CREATE EVENT TRIGGER](sql-createeventtrigger "CREATE EVENT TRIGGER"), [ALTER EVENT TRIGGER](sql-altereventtrigger "ALTER EVENT TRIGGER")

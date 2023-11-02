@@ -1,13 +1,13 @@
 ## F.9. btree\_gist — GiST operator classes with B-tree behavior [#](#BTREE-GIST)
 
-  * *   [F.9.1. Example Usage](btree-gist.html#BTREE-GIST-EXAMPLE-USAGE)
-  * [F.9.2. Authors](btree-gist.html#BTREE-GIST-AUTHORS)
+  * *   [F.9.1. Example Usage](btree-gist#BTREE-GIST-EXAMPLE-USAGE)
+  * [F.9.2. Authors](btree-gist#BTREE-GIST-AUTHORS)
 
 `btree_gist` provides GiST index operator classes that implement B-tree equivalent behavior for the data types `int2`, `int4`, `int8`, `float4`, `float8`, `numeric`, `timestamp with time zone`, `timestamp without time zone`, `time with time zone`, `time without time zone`, `date`, `interval`, `oid`, `money`, `char`, `varchar`, `text`, `bytea`, `bit`, `varbit`, `macaddr`, `macaddr8`, `inet`, `cidr`, `uuid`, `bool` and all `enum` types.
 
 In general, these operator classes will not outperform the equivalent standard B-tree index methods, and they lack one major feature of the standard B-tree code: the ability to enforce uniqueness. However, they provide some other features that are not available with a B-tree index, as described below. Also, these operator classes are useful when a multicolumn GiST index is needed, wherein some of the columns are of data types that are only indexable with GiST but other columns are just simple data types. Lastly, these operator classes are useful for GiST testing and as a base for developing other GiST operator classes.
 
-In addition to the typical B-tree search operators, `btree_gist` also provides index support for `<>` (“not equals”). This may be useful in combination with an [exclusion constraint](sql-createtable.html#SQL-CREATETABLE-EXCLUDE), as described below.
+In addition to the typical B-tree search operators, `btree_gist` also provides index support for `<>` (“not equals”). This may be useful in combination with an [exclusion constraint](sql-createtable#SQL-CREATETABLE-EXCLUDE), as described below.
 
 Also, for data types for which there is a natural distance metric, `btree_gist` defines a distance operator `<->`, and provides GiST index support for nearest-neighbor searches using this operator. Distance operators are provided for `int2`, `int4`, `int8`, `float4`, `float8`, `timestamp with time zone`, `timestamp without time zone`, `time without time zone`, `date`, `interval`, `oid`, and `money`.
 
@@ -28,7 +28,7 @@ SELECT * FROM test WHERE a < 10;
 SELECT *, a <-> 42 AS dist FROM test ORDER BY a <-> 42 LIMIT 10;
 ```
 
-Use an [exclusion constraint](sql-createtable.html#SQL-CREATETABLE-EXCLUDE) to enforce the rule that a cage at a zoo can contain only one kind of animal:
+Use an [exclusion constraint](sql-createtable#SQL-CREATETABLE-EXCLUDE) to enforce the rule that a cage at a zoo can contain only one kind of animal:
 
 ```
 

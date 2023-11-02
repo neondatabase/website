@@ -1,6 +1,6 @@
 ## 2.1. Introduction [#](#TUTORIAL-SQL-INTRO)
 
-This chapter provides an overview of how to use SQL to perform simple operations. This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL. Numerous books have been written on SQL, including [\[melt93\]](biblio.html#MELT93 "Understanding the New SQL") and [\[date97\]](biblio.html#DATE97 "A Guide to the SQL Standard"). You should be aware that some PostgreSQL language features are extensions to the standard.
+This chapter provides an overview of how to use SQL to perform simple operations. This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL. Numerous books have been written on SQL, including [\[melt93\]](biblio#MELT93 "Understanding the New SQL") and [\[date97\]](biblio#DATE97 "A Guide to the SQL Standard"). You should be aware that some PostgreSQL language features are extensions to the standard.
 
 In the examples that follow, we assume that you have created a database named `mydb`, as described in the previous chapter, and have been able to start psql.
 

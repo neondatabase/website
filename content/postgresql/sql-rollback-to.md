@@ -23,7 +23,7 @@ Roll back all commands that were executed after the savepoint was established an
 
 ## Notes
 
-Use [`RELEASE SAVEPOINT`](sql-release-savepoint.html "RELEASE SAVEPOINT") to destroy a savepoint without discarding the effects of commands executed after it was established.
+Use [`RELEASE SAVEPOINT`](sql-release-savepoint "RELEASE SAVEPOINT") to destroy a savepoint without discarding the effects of commands executed after it was established.
 
 Specifying a savepoint name that has not been established is an error.
 
@@ -69,4 +69,4 @@ The SQL standard specifies that the key word `SAVEPOINT` is mandatory, but Postg
 
 ## See Also
 
-[BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [RELEASE SAVEPOINT](sql-release-savepoint.html "RELEASE SAVEPOINT"), [ROLLBACK](sql-rollback.html "ROLLBACK"), [SAVEPOINT](sql-savepoint.html "SAVEPOINT")
+[BEGIN](sql-begin "BEGIN"), [COMMIT](sql-commit "COMMIT"), [RELEASE SAVEPOINT](sql-release-savepoint "RELEASE SAVEPOINT"), [ROLLBACK](sql-rollback "ROLLBACK"), [SAVEPOINT](sql-savepoint "SAVEPOINT")

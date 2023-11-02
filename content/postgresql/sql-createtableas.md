@@ -28,17 +28,17 @@ CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXI
 
 * `GLOBAL` or `LOCAL`
 
-    Ignored for compatibility. Use of these keywords is deprecated; refer to [CREATE TABLE](sql-createtable.html "CREATE TABLE") for details.
+    Ignored for compatibility. Use of these keywords is deprecated; refer to [CREATE TABLE](sql-createtable "CREATE TABLE") for details.
 
 
 
 * `TEMPORARY` or `TEMP`
 
-    If specified, the table is created as a temporary table. Refer to [CREATE TABLE](sql-createtable.html "CREATE TABLE") for details.
+    If specified, the table is created as a temporary table. Refer to [CREATE TABLE](sql-createtable "CREATE TABLE") for details.
 
 * `UNLOGGED`
 
-    If specified, the table is created as an unlogged table. Refer to [CREATE TABLE](sql-createtable.html "CREATE TABLE") for details.
+    If specified, the table is created as an unlogged table. Refer to [CREATE TABLE](sql-createtable "CREATE TABLE") for details.
 
 * `IF NOT EXISTS`
 
@@ -54,11 +54,11 @@ CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXI
 
 * `USING method`
 
-    This optional clause specifies the table access method to use to store the contents for the new table; the method needs be an access method of type `TABLE`. See [Chapter 63](tableam.html "Chapter 63. Table Access Method Interface Definition") for more information. If this option is not specified, the default table access method is chosen for the new table. See [default\_table\_access\_method](runtime-config-client.html#GUC-DEFAULT-TABLE-ACCESS-METHOD) for more information.
+    This optional clause specifies the table access method to use to store the contents for the new table; the method needs be an access method of type `TABLE`. See [Chapter 63](tableam "Chapter 63. Table Access Method Interface Definition") for more information. If this option is not specified, the default table access method is chosen for the new table. See [default\_table\_access\_method](runtime-config-client#GUC-DEFAULT-TABLE-ACCESS-METHOD) for more information.
 
 * `WITH ( storage_parameter [= value] [, ... ] )`
 
-    This clause specifies optional storage parameters for the new table; see [Storage Parameters](sql-createtable.html#SQL-CREATETABLE-STORAGE-PARAMETERS "Storage Parameters") in the [CREATE TABLE](sql-createtable.html "CREATE TABLE") documentation for more information. For backward-compatibility the `WITH` clause for a table can also include `OIDS=FALSE` to specify that rows of the new table should contain no OIDs (object identifiers), `OIDS=TRUE` is not supported anymore.
+    This clause specifies optional storage parameters for the new table; see [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS "Storage Parameters") in the [CREATE TABLE](sql-createtable "CREATE TABLE") documentation for more information. For backward-compatibility the `WITH` clause for a table can also include `OIDS=FALSE` to specify that rows of the new table should contain no OIDs (object identifiers), `OIDS=TRUE` is not supported anymore.
 
 * `WITHOUT OIDS`
 
@@ -74,7 +74,7 @@ CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXI
 
   * `DELETE ROWS`
 
-        All rows in the temporary table will be deleted at the end of each transaction block. Essentially, an automatic [`TRUNCATE`](sql-truncate.html "TRUNCATE") is done at each commit.
+        All rows in the temporary table will be deleted at the end of each transaction block. Essentially, an automatic [`TRUNCATE`](sql-truncate "TRUNCATE") is done at each commit.
 
   * `DROP`
 
@@ -82,11 +82,11 @@ CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXI
 
 * `TABLESPACE tablespace_name`
 
-    The *`tablespace_name`* is the name of the tablespace in which the new table is to be created. If not specified, [default\_tablespace](runtime-config-client.html#GUC-DEFAULT-TABLESPACE) is consulted, or [temp\_tablespaces](runtime-config-client.html#GUC-TEMP-TABLESPACES) if the table is temporary.
+    The *`tablespace_name`* is the name of the tablespace in which the new table is to be created. If not specified, [default\_tablespace](runtime-config-client#GUC-DEFAULT-TABLESPACE) is consulted, or [temp\_tablespaces](runtime-config-client#GUC-TEMP-TABLESPACES) if the table is temporary.
 
 * *`query`*
 
-    A [`SELECT`](sql-select.html "SELECT"), [`TABLE`](sql-select.html#SQL-TABLE "TABLE Command"), or [`VALUES`](sql-values.html "VALUES") command, or an [`EXECUTE`](sql-execute.html "EXECUTE") command that runs a prepared `SELECT`, `TABLE`, or `VALUES` query.
+    A [`SELECT`](sql-select "SELECT"), [`TABLE`](sql-select#SQL-TABLE "TABLE Command"), or [`VALUES`](sql-values "VALUES") command, or an [`EXECUTE`](sql-execute "EXECUTE") command that runs a prepared `SELECT`, `TABLE`, or `VALUES` query.
 
 * `WITH [ NO ] DATA`
 
@@ -94,7 +94,7 @@ CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXI
 
 ## Notes
 
-This command is functionally similar to [SELECT INTO](sql-selectinto.html "SELECT INTO"), but it is preferred since it is less likely to be confused with other uses of the `SELECT INTO` syntax. Furthermore, `CREATE TABLE AS` offers a superset of the functionality offered by `SELECT INTO`.
+This command is functionally similar to [SELECT INTO](sql-selectinto "SELECT INTO"), but it is preferred since it is less likely to be confused with other uses of the `SELECT INTO` syntax. Furthermore, `CREATE TABLE AS` offers a superset of the functionality offered by `SELECT INTO`.
 
 ## Examples
 
@@ -130,10 +130,10 @@ CREATE TEMP TABLE films_recent ON COMMIT DROP AS
 
 * The standard requires parentheses around the subquery clause; in PostgreSQL, these parentheses are optional.
 * In the standard, the `WITH [ NO ] DATA` clause is required; in PostgreSQL it is optional.
-* PostgreSQL handles temporary tables in a way rather different from the standard; see [CREATE TABLE](sql-createtable.html "CREATE TABLE") for details.
+* PostgreSQL handles temporary tables in a way rather different from the standard; see [CREATE TABLE](sql-createtable "CREATE TABLE") for details.
 * The `WITH` clause is a PostgreSQL extension; storage parameters are not in the standard.
 * The PostgreSQL concept of tablespaces is not part of the standard. Hence, the clause `TABLESPACE` is an extension.
 
 ## See Also
 
-[CREATE MATERIALIZED VIEW](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW"), [CREATE TABLE](sql-createtable.html "CREATE TABLE"), [EXECUTE](sql-execute.html "EXECUTE"), [SELECT](sql-select.html "SELECT"), [SELECT INTO](sql-selectinto.html "SELECT INTO"), [VALUES](sql-values.html "VALUES")
+[CREATE MATERIALIZED VIEW](sql-creatematerializedview "CREATE MATERIALIZED VIEW"), [CREATE TABLE](sql-createtable "CREATE TABLE"), [EXECUTE](sql-execute "EXECUTE"), [SELECT](sql-select "SELECT"), [SELECT INTO](sql-selectinto "SELECT INTO"), [VALUES](sql-values "VALUES")

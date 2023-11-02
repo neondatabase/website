@@ -65,7 +65,7 @@ It is wise to be conservative about marking casts as implicit. An overabundance 
 
 ### Note
 
-Sometimes it is necessary for usability or standards-compliance reasons to provide multiple implicit casts among a set of types, resulting in ambiguity that cannot be avoided as above. The parser has a fallback heuristic based on *type categories* and *preferred types* that can help to provide desired behavior in such cases. See [CREATE TYPE](sql-createtype.html "CREATE TYPE") for more information.
+Sometimes it is necessary for usability or standards-compliance reasons to provide multiple implicit casts among a set of types, resulting in ambiguity that cannot be avoided as above. The parser has a fallback heuristic based on *type categories* and *preferred types* that can help to provide desired behavior in such cases. See [CREATE TYPE](sql-createtype "CREATE TYPE") for more information.
 
 To be able to create a cast, you must own the source or the target data type and have `USAGE` privilege on the other type. To create a binary-coercible cast, you must be superuser. (This restriction is made because an erroneous binary-coercible cast conversion can easily crash the server.)
 
@@ -111,7 +111,7 @@ A cast to or from a domain type currently has no effect. Casting to or from a do
 
 ## Notes
 
-Use [`DROP CAST`](sql-dropcast.html "DROP CAST") to remove user-defined casts.
+Use [`DROP CAST`](sql-dropcast "DROP CAST") to remove user-defined casts.
 
 Remember that if you want to be able to convert types both ways you need to declare casts both ways explicitly.
 
@@ -144,4 +144,4 @@ The `CREATE CAST` command conforms to the SQL standard, except that SQL does not
 
 ## See Also
 
-[CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [CREATE TYPE](sql-createtype.html "CREATE TYPE"), [DROP CAST](sql-dropcast.html "DROP CAST")
+[CREATE FUNCTION](sql-createfunction "CREATE FUNCTION"), [CREATE TYPE](sql-createtype "CREATE TYPE"), [DROP CAST](sql-dropcast "DROP CAST")

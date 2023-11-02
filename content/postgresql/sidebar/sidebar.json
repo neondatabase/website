@@ -1448,55 +1448,55 @@
             "slug": "ecpg-sql-commands",
             "items": [
               {
-                "title": "* *   [](ecpg-sql-allocate-descriptor.html)"
+                "title": "* *   [](ecpg-sql-allocate-descriptor)"
               },
               {
-                "title": "* [](ecpg-sql-connect.html)"
+                "title": "* [](ecpg-sql-connect)"
               },
               {
-                "title": "* [](ecpg-sql-deallocate-descriptor.html)"
+                "title": "* [](ecpg-sql-deallocate-descriptor)"
               },
               {
-                "title": "* [](ecpg-sql-declare.html)"
+                "title": "* [](ecpg-sql-declare)"
               },
               {
-                "title": "* [](ecpg-sql-declare-statement.html)"
+                "title": "* [](ecpg-sql-declare-statement)"
               },
               {
-                "title": "* [](ecpg-sql-describe.html)"
+                "title": "* [](ecpg-sql-describe)"
               },
               {
-                "title": "* [](ecpg-sql-disconnect.html)"
+                "title": "* [](ecpg-sql-disconnect)"
               },
               {
-                "title": "* [](ecpg-sql-execute-immediate.html)"
+                "title": "* [](ecpg-sql-execute-immediate)"
               },
               {
-                "title": "* [](ecpg-sql-get-descriptor.html)"
+                "title": "* [](ecpg-sql-get-descriptor)"
               },
               {
-                "title": "* [](ecpg-sql-open.html)"
+                "title": "* [](ecpg-sql-open)"
               },
               {
-                "title": "* [](ecpg-sql-prepare.html)"
+                "title": "* [](ecpg-sql-prepare)"
               },
               {
-                "title": "* [](ecpg-sql-set-autocommit.html)"
+                "title": "* [](ecpg-sql-set-autocommit)"
               },
               {
-                "title": "* [](ecpg-sql-set-connection.html)"
+                "title": "* [](ecpg-sql-set-connection)"
               },
               {
-                "title": "* [](ecpg-sql-set-descriptor.html)"
+                "title": "* [](ecpg-sql-set-descriptor)"
               },
               {
-                "title": "* [](ecpg-sql-type.html)"
+                "title": "* [](ecpg-sql-type)"
               },
               {
-                "title": "* [](ecpg-sql-var.html)"
+                "title": "* [](ecpg-sql-var)"
               },
               {
-                "title": "* [](ecpg-sql-whenever.html)"
+                "title": "* [](ecpg-sql-whenever)"
               }
             ]
           },

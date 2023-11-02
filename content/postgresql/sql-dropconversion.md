@@ -42,4 +42,4 @@ There is no `DROP CONVERSION` statement in the SQL standard, but a `DROP TRANSLA
 
 ## See Also
 
-[ALTER CONVERSION](sql-alterconversion.html "ALTER CONVERSION"), [CREATE CONVERSION](sql-createconversion.html "CREATE CONVERSION")
+[ALTER CONVERSION](sql-alterconversion "ALTER CONVERSION"), [CREATE CONVERSION](sql-createconversion "CREATE CONVERSION")

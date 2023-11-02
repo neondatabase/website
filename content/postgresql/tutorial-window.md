@@ -138,4 +138,4 @@ SELECT sum(salary) OVER w, avg(salary) OVER w
   WINDOW w AS (PARTITION BY depname ORDER BY salary DESC);
 ```
 
-More details about window functions can be found in [Section 4.2.8](sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls"), [Section 9.22](functions-window.html "9.22. Window Functions"), [Section 7.2.5](queries-table-expressions.html#QUERIES-WINDOW "7.2.5. Window Function Processing"), and the [SELECT](sql-select.html "SELECT") reference page.
+More details about window functions can be found in [Section 4.2.8](sql-expressions#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls"), [Section 9.22](functions-window "9.22. Window Functions"), [Section 7.2.5](queries-table-expressions#QUERIES-WINDOW "7.2.5. Window Function Processing"), and the [SELECT](sql-select "SELECT") reference page.

@@ -75,35 +75,35 @@ You must own the function to use `ALTER FUNCTION`. To change a function's schema
 
 * `CALLED ON NULL INPUT``RETURNS NULL ON NULL INPUT``STRICT`
 
-    `CALLED ON NULL INPUT` changes the function so that it will be invoked when some or all of its arguments are null. `RETURNS NULL ON NULL INPUT` or `STRICT` changes the function so that it is not invoked if any of its arguments are null; instead, a null result is assumed automatically. See [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") for more information.
+    `CALLED ON NULL INPUT` changes the function so that it will be invoked when some or all of its arguments are null. `RETURNS NULL ON NULL INPUT` or `STRICT` changes the function so that it is not invoked if any of its arguments are null; instead, a null result is assumed automatically. See [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION") for more information.
 
 * `IMMUTABLE``STABLE``VOLATILE`
 
-    Change the volatility of the function to the specified setting. See [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") for details.
+    Change the volatility of the function to the specified setting. See [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION") for details.
 
 * `[ EXTERNAL ] SECURITY INVOKER``[ EXTERNAL ] SECURITY DEFINER`
 
-    Change whether the function is a security definer or not. The key word `EXTERNAL` is ignored for SQL conformance. See [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") for more information about this capability.
+    Change whether the function is a security definer or not. The key word `EXTERNAL` is ignored for SQL conformance. See [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION") for more information about this capability.
 
 * `PARALLEL`
 
-    Change whether the function is deemed safe for parallelism. See [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") for details.
+    Change whether the function is deemed safe for parallelism. See [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION") for details.
 
 * `LEAKPROOF`
 
-    Change whether the function is considered leakproof or not. See [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") for more information about this capability.
+    Change whether the function is considered leakproof or not. See [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION") for more information about this capability.
 
 * `COST` *`execution_cost`*
 
-    Change the estimated execution cost of the function. See [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") for more information.
+    Change the estimated execution cost of the function. See [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION") for more information.
 
 * `ROWS` *`result_rows`*
 
-    Change the estimated number of rows returned by a set-returning function. See [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") for more information.
+    Change the estimated number of rows returned by a set-returning function. See [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION") for more information.
 
 * `SUPPORT` *`support_function`*
 
-    Set or change the planner support function to use for this function. See [Section 38.11](xfunc-optimization.html "38.11. Function Optimization Information") for details. You must be superuser to use this option.
+    Set or change the planner support function to use for this function. See [Section 38.11](xfunc-optimization "38.11. Function Optimization Information") for details. You must be superuser to use this option.
 
     This option cannot be used to remove the support function altogether, since it must name a new support function. Use `CREATE OR REPLACE FUNCTION` if you need to do that.
 
@@ -111,7 +111,7 @@ You must own the function to use `ALTER FUNCTION`. To change a function's schema
 
     Add or change the assignment to be made to a configuration parameter when the function is called. If *`value`* is `DEFAULT` or, equivalently, `RESET` is used, the function-local setting is removed, so that the function executes with the value present in its environment. Use `RESET ALL` to clear all function-local settings. `SET FROM CURRENT` saves the value of the parameter that is current when `ALTER FUNCTION` is executed as the value to be applied when the function is entered.
 
-    See [SET](sql-set.html "SET") and [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
+    See [SET](sql-set "SET") and [Chapter 20](runtime-config "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
 
 * `RESTRICT`
 
@@ -169,4 +169,4 @@ This statement is partially compatible with the `ALTER FUNCTION` statement in th
 
 ## See Also
 
-[CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [DROP FUNCTION](sql-dropfunction.html "DROP FUNCTION"), [ALTER PROCEDURE](sql-alterprocedure.html "ALTER PROCEDURE"), [ALTER ROUTINE](sql-alterroutine.html "ALTER ROUTINE")
+[CREATE FUNCTION](sql-createfunction "CREATE FUNCTION"), [DROP FUNCTION](sql-dropfunction "DROP FUNCTION"), [ALTER PROCEDURE](sql-alterprocedure "ALTER PROCEDURE"), [ALTER ROUTINE](sql-alterroutine "ALTER ROUTINE")

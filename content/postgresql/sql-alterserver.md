@@ -62,4 +62,4 @@ ALTER SERVER foo VERSION '8.4' OPTIONS (SET host 'baz');
 
 ## See Also
 
-[CREATE SERVER](sql-createserver.html "CREATE SERVER"), [DROP SERVER](sql-dropserver.html "DROP SERVER")
+[CREATE SERVER](sql-createserver "CREATE SERVER"), [DROP SERVER](sql-dropserver "DROP SERVER")

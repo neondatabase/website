@@ -1,22 +1,22 @@
 ## 35.3. Client Interfaces [#](#LO-INTERFACES)
 
-  * *   [35.3.1. Creating a Large Object](lo-interfaces.html#LO-CREATE)
-  * [35.3.2. Importing a Large Object](lo-interfaces.html#LO-IMPORT)
-  * [35.3.3. Exporting a Large Object](lo-interfaces.html#LO-EXPORT)
-  * [35.3.4. Opening an Existing Large Object](lo-interfaces.html#LO-OPEN)
-  * [35.3.5. Writing Data to a Large Object](lo-interfaces.html#LO-WRITE)
-  * [35.3.6. Reading Data from a Large Object](lo-interfaces.html#LO-READ)
-  * [35.3.7. Seeking in a Large Object](lo-interfaces.html#LO-SEEK)
-  * [35.3.8. Obtaining the Seek Position of a Large Object](lo-interfaces.html#LO-TELL)
-  * [35.3.9. Truncating a Large Object](lo-interfaces.html#LO-TRUNCATE)
-  * [35.3.10. Closing a Large Object Descriptor](lo-interfaces.html#LO-CLOSE)
-  * [35.3.11. Removing a Large Object](lo-interfaces.html#LO-UNLINK)
+  * *   [35.3.1. Creating a Large Object](lo-interfaces#LO-CREATE)
+  * [35.3.2. Importing a Large Object](lo-interfaces#LO-IMPORT)
+  * [35.3.3. Exporting a Large Object](lo-interfaces#LO-EXPORT)
+  * [35.3.4. Opening an Existing Large Object](lo-interfaces#LO-OPEN)
+  * [35.3.5. Writing Data to a Large Object](lo-interfaces#LO-WRITE)
+  * [35.3.6. Reading Data from a Large Object](lo-interfaces#LO-READ)
+  * [35.3.7. Seeking in a Large Object](lo-interfaces#LO-SEEK)
+  * [35.3.8. Obtaining the Seek Position of a Large Object](lo-interfaces#LO-TELL)
+  * [35.3.9. Truncating a Large Object](lo-interfaces#LO-TRUNCATE)
+  * [35.3.10. Closing a Large Object Descriptor](lo-interfaces#LO-CLOSE)
+  * [35.3.11. Removing a Large Object](lo-interfaces#LO-UNLINK)
 
 This section describes the facilities that PostgreSQL's libpq client interface library provides for accessing large objects. The PostgreSQL large object interface is modeled after the Unix file-system interface, with analogues of `open`, `read`, `write`, `lseek`, etc.
 
 All large object manipulation using these functions *must* take place within an SQL transaction block, since large object file descriptors are only valid for the duration of a transaction. Write operations, including `lo_open` with the `INV_WRITE` mode, are not allowed in a read-only transaction.
 
-If an error occurs while executing any one of these functions, the function will return an otherwise-impossible value, typically 0 or -1. A message describing the error is stored in the connection object and can be retrieved with [`PQerrorMessage`](libpq-status.html#LIBPQ-PQERRORMESSAGE).
+If an error occurs while executing any one of these functions, the function will return an otherwise-impossible value, typically 0 or -1. A message describing the error is stored in the connection object and can be retrieved with [`PQerrorMessage`](libpq-status#LIBPQ-PQERRORMESSAGE).
 
 Client applications that use these functions should include the header file `libpq/libpq-fs.h` and link with the libpq library.
 
@@ -104,7 +104,7 @@ The *`lobjId`* argument specifies the OID of the large object to open. The *`mod
 
 The server currently does not distinguish between modes `INV_WRITE` and `INV_READ` `|` `INV_WRITE`: you are allowed to read from the descriptor in either case. However there is a significant difference between these modes and `INV_READ` alone: with `INV_READ` you cannot write on the descriptor, and the data read from it will reflect the contents of the large object at the time of the transaction snapshot that was active when `lo_open` was executed, regardless of later writes by this or other transactions. Reading from a descriptor opened with `INV_WRITE` returns data that reflects all writes of other committed transactions as well as writes of the current transaction. This is similar to the behavior of `REPEATABLE READ` versus `READ COMMITTED` transaction modes for ordinary SQL `SELECT` commands.
 
-`lo_open` will fail if `SELECT` privilege is not available for the large object, or if `INV_WRITE` is specified and `UPDATE` privilege is not available. (Prior to PostgreSQL 11, these privilege checks were instead performed at the first actual read or write call using the descriptor.) These privilege checks can be disabled with the [lo\_compat\_privileges](runtime-config-compatible.html#GUC-LO-COMPAT-PRIVILEGES) run-time parameter.
+`lo_open` will fail if `SELECT` privilege is not available for the large object, or if `INV_WRITE` is specified and `UPDATE` privilege is not available. (Prior to PostgreSQL 11, these privilege checks were instead performed at the first actual read or write call using the descriptor.) These privilege checks can be disabled with the [lo\_compat\_privileges](runtime-config-compatible#GUC-LO-COMPAT-PRIVILEGES) run-time parameter.
 
 An example:
 

@@ -1,10 +1,10 @@
 ## 46.2. Data Values [#](#PLPYTHON-DATA)
 
-  * *   [46.2.1. Data Type Mapping](plpython-data.html#PLPYTHON-DATA-TYPE-MAPPING)
-  * [46.2.2. Null, None](plpython-data.html#PLPYTHON-DATA-NULL)
-  * [46.2.3. Arrays, Lists](plpython-data.html#PLPYTHON-ARRAYS)
-  * [46.2.4. Composite Types](plpython-data.html#PLPYTHON-DATA-COMPOSITE-TYPES)
-  * [46.2.5. Set-Returning Functions](plpython-data.html#PLPYTHON-DATA-SET-RETURNING-FUNCS)
+  * *   [46.2.1. Data Type Mapping](plpython-data#PLPYTHON-DATA-TYPE-MAPPING)
+  * [46.2.2. Null, None](plpython-data#PLPYTHON-DATA-NULL)
+  * [46.2.3. Arrays, Lists](plpython-data#PLPYTHON-ARRAYS)
+  * [46.2.4. Composite Types](plpython-data#PLPYTHON-DATA-COMPOSITE-TYPES)
+  * [46.2.5. Set-Returning Functions](plpython-data#PLPYTHON-DATA-SET-RETURNING-FUNCS)
 
 Generally speaking, the aim of PL/Python is to provide a “natural” mapping between the PostgreSQL and the Python worlds. This informs the data mapping rules described below.
 
@@ -36,7 +36,7 @@ Note that logical mismatches between the declared PostgreSQL return type and the
 
 ### 46.2.2. Null, None [#](#PLPYTHON-DATA-NULL)
 
-If an SQL null value is passed to a function, the argument value will appear as `None` in Python. For example, the function definition of `pymax` shown in [Section 46.1](plpython-funcs.html "46.1. PL/Python Functions") will return the wrong answer for null inputs. We could add `STRICT` to the function definition to make PostgreSQL do something more reasonable: if a null value is passed, the function will not be called at all, but will just return a null result automatically. Alternatively, we could check for null inputs in the function body:
+If an SQL null value is passed to a function, the argument value will appear as `None` in Python. For example, the function definition of `pymax` shown in [Section 46.1](plpython-funcs "46.1. PL/Python Functions") will return the wrong answer for null inputs. We could add `STRICT` to the function definition to make PostgreSQL do something more reasonable: if a null value is passed, the function will not be called at all, but will just return a null result automatically. Alternatively, we could check for null inputs in the function body:
 
 ```
 

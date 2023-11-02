@@ -91,7 +91,7 @@ trigf(PG_FUNCTION_ARGS)
 }
 ```
 
-After you have compiled the source code (see [Section 38.10.5](xfunc-c.html#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions")), declare the function and the triggers:
+After you have compiled the source code (see [Section 38.10.5](xfunc-c#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions")), declare the function and the triggers:
 
 ```
 
@@ -174,4 +174,4 @@ DELETE 2
 (0 rows)
 ```
 
-There are more complex examples in `src/test/regress/regress.c` and in [spi](contrib-spi.html "F.40. spi — Server Programming Interface features/examples").
+There are more complex examples in `src/test/regress/regress.c` and in [spi](contrib-spi "F.40. spi — Server Programming Interface features/examples").

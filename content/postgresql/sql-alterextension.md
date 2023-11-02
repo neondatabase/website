@@ -69,7 +69,7 @@ and aggregate_signature is:
 
     This form removes a member object from the extension. This is mainly useful in extension update scripts. The object is not dropped, only disassociated from the extension.
 
-See [Section 38.17](extend-extensions.html "38.17. Packaging Related Objects into an Extension") for more information about these operations.
+See [Section 38.17](extend-extensions "38.17. Packaging Related Objects into an Extension") for more information about these operations.
 
 You must own the extension to use `ALTER EXTENSION`. The `ADD`/`DROP` forms require ownership of the added/dropped object as well.
 
@@ -156,4 +156,4 @@ ALTER EXTENSION hstore ADD FUNCTION populate_record(anyelement, hstore);
 
 ## See Also
 
-[CREATE EXTENSION](sql-createextension.html "CREATE EXTENSION"), [DROP EXTENSION](sql-dropextension.html "DROP EXTENSION")
+[CREATE EXTENSION](sql-createextension "CREATE EXTENSION"), [DROP EXTENSION](sql-dropextension "DROP EXTENSION")

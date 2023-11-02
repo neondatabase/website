@@ -1,7 +1,7 @@
 ## 45.3. Built-in Functions [#](#PLPERL-BUILTINS)
 
-  * *   [45.3.1. Database Access from PL/Perl](plperl-builtins.html#PLPERL-DATABASE)
-  * [45.3.2. Utility Functions in PL/Perl](plperl-builtins.html#PLPERL-UTILITY-FUNCTIONS)
+  * *   [45.3.1. Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
+  * [45.3.2. Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
 
 ### 45.3.1. Database Access from PL/Perl [#](#PLPERL-DATABASE)
 
@@ -228,7 +228,7 @@ Access to the database itself from your Perl function can be done via the follow
 
 * `elog(level, msg)`
 
-    Emit a log or error message. Possible levels are `DEBUG`, `LOG`, `INFO`, `NOTICE`, `WARNING`, and `ERROR`. `ERROR` raises an error condition; if this is not trapped by the surrounding Perl code, the error propagates out to the calling query, causing the current transaction or subtransaction to be aborted. This is effectively the same as the Perl `die` command. The other levels only generate messages of different priority levels. Whether messages of a particular priority are reported to the client, written to the server log, or both is controlled by the [log\_min\_messages](runtime-config-logging.html#GUC-LOG-MIN-MESSAGES) and [client\_min\_messages](runtime-config-client.html#GUC-CLIENT-MIN-MESSAGES) configuration variables. See [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for more information.
+    Emit a log or error message. Possible levels are `DEBUG`, `LOG`, `INFO`, `NOTICE`, `WARNING`, and `ERROR`. `ERROR` raises an error condition; if this is not trapped by the surrounding Perl code, the error propagates out to the calling query, causing the current transaction or subtransaction to be aborted. This is effectively the same as the Perl `die` command. The other levels only generate messages of different priority levels. Whether messages of a particular priority are reported to the client, written to the server log, or both is controlled by the [log\_min\_messages](runtime-config-logging#GUC-LOG-MIN-MESSAGES) and [client\_min\_messages](runtime-config-client#GUC-CLIENT-MIN-MESSAGES) configuration variables. See [Chapter 20](runtime-config "Chapter 20. Server Configuration") for more information.
 
 * `quote_literal(string)`
 
@@ -252,7 +252,7 @@ Access to the database itself from your Perl function can be done via the follow
 
 * `encode_array_literal(array)``encode_array_literal(array, delimiter)`
 
-    Returns the contents of the referenced array as a string in array literal format (see [Section 8.15.2](arrays.html#ARRAYS-INPUT "8.15.2. Array Value Input")). Returns the argument value unaltered if it's not a reference to an array. The delimiter used between elements of the array literal defaults to "`,`" if a delimiter is not specified or is undef.
+    Returns the contents of the referenced array as a string in array literal format (see [Section 8.15.2](arrays#ARRAYS-INPUT "8.15.2. Array Value Input")). Returns the argument value unaltered if it's not a reference to an array. The delimiter used between elements of the array literal defaults to "`,`" if a delimiter is not specified or is undef.
 
 * `encode_typed_literal(value, typename)`
 
@@ -260,7 +260,7 @@ Access to the database itself from your Perl function can be done via the follow
 
 * `encode_array_constructor(array)`
 
-    Returns the contents of the referenced array as a string in array constructor format (see [Section 4.2.12](sql-expressions.html#SQL-SYNTAX-ARRAY-CONSTRUCTORS "4.2.12. Array Constructors")). Individual values are quoted using `quote_nullable`. Returns the argument value, quoted using `quote_nullable`, if it's not a reference to an array.
+    Returns the contents of the referenced array as a string in array constructor format (see [Section 4.2.12](sql-expressions#SQL-SYNTAX-ARRAY-CONSTRUCTORS "4.2.12. Array Constructors")). Individual values are quoted using `quote_nullable`. Returns the argument value, quoted using `quote_nullable`, if it's not a reference to an array.
 
 * `looks_like_number(string)`
 

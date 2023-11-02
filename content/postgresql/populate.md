@@ -1,14 +1,14 @@
 ## 14.4. Populating a Database [#](#POPULATE)
 
-  * *   [14.4.1. Disable Autocommit](populate.html#DISABLE-AUTOCOMMIT)
-  * [14.4.2. Use `COPY`](populate.html#POPULATE-COPY-FROM)
-  * [14.4.3. Remove Indexes](populate.html#POPULATE-RM-INDEXES)
-  * [14.4.4. Remove Foreign Key Constraints](populate.html#POPULATE-RM-FKEYS)
-  * [14.4.5. Increase `maintenance_work_mem`](populate.html#POPULATE-WORK-MEM)
-  * [14.4.6. Increase `max_wal_size`](populate.html#POPULATE-MAX-WAL-SIZE)
-  * [14.4.7. Disable WAL Archival and Streaming Replication](populate.html#POPULATE-PITR)
-  * [14.4.8. Run `ANALYZE` Afterwards](populate.html#POPULATE-ANALYZE)
-  * [14.4.9. Some Notes about pg\_dump](populate.html#POPULATE-PG-DUMP)
+  * *   [14.4.1. Disable Autocommit](populate#DISABLE-AUTOCOMMIT)
+  * [14.4.2. Use `COPY`](populate#POPULATE-COPY-FROM)
+  * [14.4.3. Remove Indexes](populate#POPULATE-RM-INDEXES)
+  * [14.4.4. Remove Foreign Key Constraints](populate#POPULATE-RM-FKEYS)
+  * [14.4.5. Increase `maintenance_work_mem`](populate#POPULATE-WORK-MEM)
+  * [14.4.6. Increase `max_wal_size`](populate#POPULATE-MAX-WAL-SIZE)
+  * [14.4.7. Disable WAL Archival and Streaming Replication](populate#POPULATE-PITR)
+  * [14.4.8. Run `ANALYZE` Afterwards](populate#POPULATE-ANALYZE)
+  * [14.4.9. Some Notes about pg\_dump](populate#POPULATE-PG-DUMP)
 
 One might need to insert a large amount of data when first populating a database. This section contains some suggestions on how to make this process as efficient as possible.
 
@@ -18,13 +18,13 @@ When using multiple `INSERT`s, turn off autocommit and just do one commit at the
 
 ### 14.4.2. Use `COPY` [#](#POPULATE-COPY-FROM)
 
-Use [`COPY`](sql-copy.html "COPY") to load all the rows in one command, instead of using a series of `INSERT` commands. The `COPY` command is optimized for loading large numbers of rows; it is less flexible than `INSERT`, but incurs significantly less overhead for large data loads. Since `COPY` is a single command, there is no need to disable autocommit if you use this method to populate a table.
+Use [`COPY`](sql-copy "COPY") to load all the rows in one command, instead of using a series of `INSERT` commands. The `COPY` command is optimized for loading large numbers of rows; it is less flexible than `INSERT`, but incurs significantly less overhead for large data loads. Since `COPY` is a single command, there is no need to disable autocommit if you use this method to populate a table.
 
-If you cannot use `COPY`, it might help to use [`PREPARE`](sql-prepare.html "PREPARE") to create a prepared `INSERT` statement, and then use `EXECUTE` as many times as required. This avoids some of the overhead of repeatedly parsing and planning `INSERT`. Different interfaces provide this facility in different ways; look for “prepared statements” in the interface documentation.
+If you cannot use `COPY`, it might help to use [`PREPARE`](sql-prepare "PREPARE") to create a prepared `INSERT` statement, and then use `EXECUTE` as many times as required. This avoids some of the overhead of repeatedly parsing and planning `INSERT`. Different interfaces provide this facility in different ways; look for “prepared statements” in the interface documentation.
 
 Note that loading a large number of rows using `COPY` is almost always faster than using `INSERT`, even if `PREPARE` is used and multiple insertions are batched into a single transaction.
 
-`COPY` is fastest when used within the same transaction as an earlier `CREATE TABLE` or `TRUNCATE` command. In such cases no WAL needs to be written, because in case of an error, the files containing the newly loaded data will be removed anyway. However, this consideration only applies when [wal\_level](runtime-config-wal.html#GUC-WAL-LEVEL) is `minimal` as all commands must write WAL otherwise.
+`COPY` is fastest when used within the same transaction as an earlier `CREATE TABLE` or `TRUNCATE` command. In such cases no WAL needs to be written, because in case of an error, the files containing the newly loaded data will be removed anyway. However, this consideration only applies when [wal\_level](runtime-config-wal#GUC-WAL-LEVEL) is `minimal` as all commands must write WAL otherwise.
 
 ### 14.4.3. Remove Indexes [#](#POPULATE-RM-INDEXES)
 
@@ -40,21 +40,21 @@ What's more, when you load data into a table with existing foreign key constrain
 
 ### 14.4.5. Increase `maintenance_work_mem` [#](#POPULATE-WORK-MEM)
 
-Temporarily increasing the [maintenance\_work\_mem](runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) configuration variable when loading large amounts of data can lead to improved performance. This will help to speed up `CREATE INDEX` commands and `ALTER TABLE ADD FOREIGN KEY` commands. It won't do much for `COPY` itself, so this advice is only useful when you are using one or both of the above techniques.
+Temporarily increasing the [maintenance\_work\_mem](runtime-config-resource#GUC-MAINTENANCE-WORK-MEM) configuration variable when loading large amounts of data can lead to improved performance. This will help to speed up `CREATE INDEX` commands and `ALTER TABLE ADD FOREIGN KEY` commands. It won't do much for `COPY` itself, so this advice is only useful when you are using one or both of the above techniques.
 
 ### 14.4.6. Increase `max_wal_size` [#](#POPULATE-MAX-WAL-SIZE)
 
-Temporarily increasing the [max\_wal\_size](runtime-config-wal.html#GUC-MAX-WAL-SIZE) configuration variable can also make large data loads faster. This is because loading a large amount of data into PostgreSQL will cause checkpoints to occur more often than the normal checkpoint frequency (specified by the `checkpoint_timeout` configuration variable). Whenever a checkpoint occurs, all dirty pages must be flushed to disk. By increasing `max_wal_size` temporarily during bulk data loads, the number of checkpoints that are required can be reduced.
+Temporarily increasing the [max\_wal\_size](runtime-config-wal#GUC-MAX-WAL-SIZE) configuration variable can also make large data loads faster. This is because loading a large amount of data into PostgreSQL will cause checkpoints to occur more often than the normal checkpoint frequency (specified by the `checkpoint_timeout` configuration variable). Whenever a checkpoint occurs, all dirty pages must be flushed to disk. By increasing `max_wal_size` temporarily during bulk data loads, the number of checkpoints that are required can be reduced.
 
 ### 14.4.7. Disable WAL Archival and Streaming Replication [#](#POPULATE-PITR)
 
-When loading large amounts of data into an installation that uses WAL archiving or streaming replication, it might be faster to take a new base backup after the load has completed than to process a large amount of incremental WAL data. To prevent incremental WAL logging while loading, disable archiving and streaming replication, by setting [wal\_level](runtime-config-wal.html#GUC-WAL-LEVEL) to `minimal`, [archive\_mode](runtime-config-wal.html#GUC-ARCHIVE-MODE) to `off`, and [max\_wal\_senders](runtime-config-replication.html#GUC-MAX-WAL-SENDERS) to zero. But note that changing these settings requires a server restart, and makes any base backups taken before unavailable for archive recovery and standby server, which may lead to data loss.
+When loading large amounts of data into an installation that uses WAL archiving or streaming replication, it might be faster to take a new base backup after the load has completed than to process a large amount of incremental WAL data. To prevent incremental WAL logging while loading, disable archiving and streaming replication, by setting [wal\_level](runtime-config-wal#GUC-WAL-LEVEL) to `minimal`, [archive\_mode](runtime-config-wal#GUC-ARCHIVE-MODE) to `off`, and [max\_wal\_senders](runtime-config-replication#GUC-MAX-WAL-SENDERS) to zero. But note that changing these settings requires a server restart, and makes any base backups taken before unavailable for archive recovery and standby server, which may lead to data loss.
 
 Aside from avoiding the time for the archiver or WAL sender to process the WAL data, doing this will actually make certain commands faster, because they do not to write WAL at all if `wal_level` is `minimal` and the current subtransaction (or top-level transaction) created or truncated the table or index they change. (They can guarantee crash safety more cheaply by doing an `fsync` at the end than by writing WAL.)
 
 ### 14.4.8. Run `ANALYZE` Afterwards [#](#POPULATE-ANALYZE)
 
-Whenever you have significantly altered the distribution of data within a table, running [`ANALYZE`](sql-analyze.html "ANALYZE") is strongly recommended. This includes bulk loading large amounts of data into the table. Running `ANALYZE` (or `VACUUM ANALYZE`) ensures that the planner has up-to-date statistics about the table. With no statistics or obsolete statistics, the planner might make poor decisions during query planning, leading to poor performance on any tables with inaccurate or nonexistent statistics. Note that if the autovacuum daemon is enabled, it might run `ANALYZE` automatically; see [Section 25.1.3](routine-vacuuming.html#VACUUM-FOR-STATISTICS "25.1.3. Updating Planner Statistics") and [Section 25.1.6](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon") for more information.
+Whenever you have significantly altered the distribution of data within a table, running [`ANALYZE`](sql-analyze "ANALYZE") is strongly recommended. This includes bulk loading large amounts of data into the table. Running `ANALYZE` (or `VACUUM ANALYZE`) ensures that the planner has up-to-date statistics about the table. With no statistics or obsolete statistics, the planner might make poor decisions during query planning, leading to poor performance on any tables with inaccurate or nonexistent statistics. Note that if the autovacuum daemon is enabled, it might run `ANALYZE` automatically; see [Section 25.1.3](routine-vacuuming#VACUUM-FOR-STATISTICS "25.1.3. Updating Planner Statistics") and [Section 25.1.6](routine-vacuuming#AUTOVACUUM "25.1.6. The Autovacuum Daemon") for more information.
 
 ### 14.4.9. Some Notes about pg\_dump [#](#POPULATE-PG-DUMP)
 
@@ -69,4 +69,4 @@ By default, pg\_dump uses `COPY`, and when it is generating a complete schema-an
 * If multiple CPUs are available in the database server, consider using pg\_restore's `--jobs` option. This allows concurrent data loading and index creation.
 * Run `ANALYZE` afterwards.
 
-A data-only dump will still use `COPY`, but it does not drop or recreate indexes, and it does not normally touch foreign keys. [\[14\]](#ftn.id-1.5.13.7.11.4.2) So when loading a data-only dump, it is up to you to drop and recreate indexes and foreign keys if you wish to use those techniques. It's still useful to increase `max_wal_size` while loading the data, but don't bother increasing `maintenance_work_mem`; rather, you'd do that while manually recreating indexes and foreign keys afterwards. And don't forget to `ANALYZE` when you're done; see [Section 25.1.3](routine-vacuuming.html#VACUUM-FOR-STATISTICS "25.1.3. Updating Planner Statistics") and [Section 25.1.6](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon") for more information.
+A data-only dump will still use `COPY`, but it does not drop or recreate indexes, and it does not normally touch foreign keys. [\[14\]](#ftn.id-1.5.13.7.11.4.2) So when loading a data-only dump, it is up to you to drop and recreate indexes and foreign keys if you wish to use those techniques. It's still useful to increase `max_wal_size` while loading the data, but don't bother increasing `maintenance_work_mem`; rather, you'd do that while manually recreating indexes and foreign keys afterwards. And don't forget to `ANALYZE` when you're done; see [Section 25.1.3](routine-vacuuming#VACUUM-FOR-STATISTICS "25.1.3. Updating Planner Statistics") and [Section 25.1.6](routine-vacuuming#AUTOVACUUM "25.1.6. The Autovacuum Daemon") for more information.

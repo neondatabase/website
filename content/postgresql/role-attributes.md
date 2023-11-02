@@ -48,9 +48,9 @@ A database role can have a number of attributes that define its privileges and i
 
     Connection limit can specify how many concurrent connections a role can make. -1 (the default) means no limit. Specify connection limit upon role creation with `CREATE ROLE name CONNECTION LIMIT 'integer'`.
 
-A role's attributes can be modified after creation with `ALTER ROLE`. See the reference pages for the [CREATE ROLE](sql-createrole.html "CREATE ROLE") and [ALTER ROLE](sql-alterrole.html "ALTER ROLE") commands for details.
+A role's attributes can be modified after creation with `ALTER ROLE`. See the reference pages for the [CREATE ROLE](sql-createrole "CREATE ROLE") and [ALTER ROLE](sql-alterrole "ALTER ROLE") commands for details.
 
-A role can also have role-specific defaults for many of the run-time configuration settings described in [Chapter 20](runtime-config.html "Chapter 20. Server Configuration"). For example, if for some reason you want to disable index scans (hint: not a good idea) anytime you connect, you can use:
+A role can also have role-specific defaults for many of the run-time configuration settings described in [Chapter 20](runtime-config "Chapter 20. Server Configuration"). For example, if for some reason you want to disable index scans (hint: not a good idea) anytime you connect, you can use:
 
 ```
 

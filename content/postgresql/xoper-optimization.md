@@ -1,17 +1,17 @@
 ## 38.15. Operator Optimization Information [#](#XOPER-OPTIMIZATION)
 
-  * *   [38.15.1. `COMMUTATOR`](xoper-optimization.html#XOPER-COMMUTATOR)
-  * [38.15.2. `NEGATOR`](xoper-optimization.html#XOPER-NEGATOR)
-  * [38.15.3. `RESTRICT`](xoper-optimization.html#XOPER-RESTRICT)
-  * [38.15.4. `JOIN`](xoper-optimization.html#XOPER-JOIN)
-  * [38.15.5. `HASHES`](xoper-optimization.html#XOPER-HASHES)
-  * [38.15.6. `MERGES`](xoper-optimization.html#XOPER-MERGES)
+  * *   [38.15.1. `COMMUTATOR`](xoper-optimization#XOPER-COMMUTATOR)
+  * [38.15.2. `NEGATOR`](xoper-optimization#XOPER-NEGATOR)
+  * [38.15.3. `RESTRICT`](xoper-optimization#XOPER-RESTRICT)
+  * [38.15.4. `JOIN`](xoper-optimization#XOPER-JOIN)
+  * [38.15.5. `HASHES`](xoper-optimization#XOPER-HASHES)
+  * [38.15.6. `MERGES`](xoper-optimization#XOPER-MERGES)
 
 A PostgreSQL operator definition can include several optional clauses that tell the system useful things about how the operator behaves. These clauses should be provided whenever appropriate, because they can make for considerable speedups in execution of queries that use the operator. But if you provide them, you must be sure that they are right! Incorrect use of an optimization clause can result in slow queries, subtly wrong output, or other Bad Things. You can always leave out an optimization clause if you are not sure about it; the only consequence is that queries might run slower than they need to.
 
 Additional optimization clauses might be added in future versions of PostgreSQL. The ones described here are all the ones that release 17devel understands.
 
-It is also possible to attach a planner support function to the function that underlies an operator, providing another way of telling the system about the behavior of the operator. See [Section 38.11](xfunc-optimization.html "38.11. Function Optimization Information") for more information.
+It is also possible to attach a planner support function to the function that underlies an operator, providing another way of telling the system about the behavior of the operator. See [Section 38.11](xfunc-optimization "38.11. Function Optimization Information") for more information.
 
 ### 38.15.1. `COMMUTATOR` [#](#XOPER-COMMUTATOR)
 

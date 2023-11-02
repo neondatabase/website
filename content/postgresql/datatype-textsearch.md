@@ -1,13 +1,13 @@
 ## 8.11. Text Search Types [#](#DATATYPE-TEXTSEARCH)
 
-  * *   [8.11.1. `tsvector`](datatype-textsearch.html#DATATYPE-TSVECTOR)
-  * [8.11.2. `tsquery`](datatype-textsearch.html#DATATYPE-TSQUERY)
+  * *   [8.11.1. `tsvector`](datatype-textsearch#DATATYPE-TSVECTOR)
+  * [8.11.2. `tsquery`](datatype-textsearch#DATATYPE-TSQUERY)
 
-PostgreSQL provides two data types that are designed to support full text search, which is the activity of searching through a collection of natural-language *documents* to locate those that best match a *query*. The `tsvector` type represents a document in a form optimized for text search; the `tsquery` type similarly represents a text query. [Chapter 12](textsearch.html "Chapter 12. Full Text Search") provides a detailed explanation of this facility, and [Section 9.13](functions-textsearch.html "9.13. Text Search Functions and Operators") summarizes the related functions and operators.
+PostgreSQL provides two data types that are designed to support full text search, which is the activity of searching through a collection of natural-language *documents* to locate those that best match a *query*. The `tsvector` type represents a document in a form optimized for text search; the `tsquery` type similarly represents a text query. [Chapter 12](textsearch "Chapter 12. Full Text Search") provides a detailed explanation of this facility, and [Section 9.13](functions-textsearch "9.13. Text Search Functions and Operators") summarizes the related functions and operators.
 
 ### 8.11.1. `tsvector` [#](#DATATYPE-TSVECTOR)
 
-A `tsvector` value is a sorted list of distinct *lexemes*, which are words that have been *normalized* to merge different variants of the same word (see [Chapter 12](textsearch.html "Chapter 12. Full Text Search") for details). Sorting and duplicate-elimination are done automatically during input, as shown in this example:
+A `tsvector` value is a sorted list of distinct *lexemes*, which are words that have been *normalized* to merge different variants of the same word (see [Chapter 12](textsearch "Chapter 12. Full Text Search") for details). Sorting and duplicate-elimination are done automatically during input, as shown in this example:
 
 ```
 
@@ -81,7 +81,7 @@ SELECT to_tsvector('english', 'The Fat Rats');
  'fat':2 'rat':3
 ```
 
-Again, see [Chapter 12](textsearch.html "Chapter 12. Full Text Search") for more detail.
+Again, see [Chapter 12](textsearch "Chapter 12. Full Text Search") for more detail.
 
 ### 8.11.2. `tsquery` [#](#DATATYPE-TSQUERY)
 

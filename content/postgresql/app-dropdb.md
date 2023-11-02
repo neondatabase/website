@@ -10,7 +10,7 @@ dropdb — remove a PostgreSQL database
 
 dropdb destroys an existing PostgreSQL database. The user who executes this command must be a database superuser or the owner of the database.
 
-dropdb is a wrapper around the SQL command [`DROP DATABASE`](sql-dropdatabase.html "DROP DATABASE"). There is no effective difference between dropping databases via this utility and via other methods for accessing the server.
+dropdb is a wrapper around the SQL command [`DROP DATABASE`](sql-dropdatabase "DROP DATABASE"). There is no effective difference between dropping databases via this utility and via other methods for accessing the server.
 
 ## Options
 
@@ -26,7 +26,7 @@ dropdb accepts the following command-line arguments:
 
 * `-f``--force`
 
-    Attempt to terminate all existing connections to the target database before dropping it. See [DROP DATABASE](sql-dropdatabase.html "DROP DATABASE") for more information on this option.
+    Attempt to terminate all existing connections to the target database before dropping it. See [DROP DATABASE](sql-dropdatabase "DROP DATABASE") for more information on this option.
 
 * `-i``--interactive`
 
@@ -70,7 +70,7 @@ dropdb also accepts the following command-line arguments for connection paramete
 
 * `--maintenance-db=dbname`
 
-    Specifies the name of the database to connect to in order to drop the target database. If not specified, the `postgres` database will be used; if that does not exist (or is the database being dropped), `template1` will be used. This can be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
+    Specifies the name of the database to connect to in order to drop the target database. If not specified, the `postgres` database will be used; if that does not exist (or is the database being dropped), `template1` will be used. This can be a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
 
 ## Environment
 
@@ -82,11 +82,11 @@ dropdb also accepts the following command-line arguments for connection paramete
 
     Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 
-This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 ## Diagnostics
 
-In case of difficulty, see [DROP DATABASE](sql-dropdatabase.html "DROP DATABASE") and [psql](app-psql.html "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
+In case of difficulty, see [DROP DATABASE](sql-dropdatabase "DROP DATABASE") and [psql](app-psql "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
 
 ## Examples
 
@@ -109,4 +109,4 @@ DROP DATABASE demo;
 
 ## See Also
 
-[createdb](app-createdb.html "createdb"), [DROP DATABASE](sql-dropdatabase.html "DROP DATABASE")
+[createdb](app-createdb "createdb"), [DROP DATABASE](sql-dropdatabase "DROP DATABASE")

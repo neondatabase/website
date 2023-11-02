@@ -10,7 +10,7 @@ dropuser — remove a PostgreSQL user account
 
 dropuser removes an existing PostgreSQL user. Superusers can use this command to remove any role; otherwise, only non-superuser roles can be removed, and only by a user who possesses the `CREATEROLE` privilege and has been granted `ADMIN OPTION` on the target role.
 
-dropuser is a wrapper around the SQL command [`DROP ROLE`](sql-droprole.html "DROP ROLE"). There is no effective difference between dropping users via this utility and via other methods for accessing the server.
+dropuser is a wrapper around the SQL command [`DROP ROLE`](sql-droprole "DROP ROLE"). There is no effective difference between dropping users via this utility and via other methods for accessing the server.
 
 ## Options
 
@@ -74,11 +74,11 @@ dropuser also accepts the following command-line arguments for connection parame
 
     Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 
-This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 ## Diagnostics
 
-In case of difficulty, see [DROP ROLE](sql-droprole.html "DROP ROLE") and [psql](app-psql.html "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
+In case of difficulty, see [DROP ROLE](sql-droprole "DROP ROLE") and [psql](app-psql "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
 
 ## Examples
 
@@ -101,4 +101,4 @@ DROP ROLE joe;
 
 ## See Also
 
-[createuser](app-createuser.html "createuser"), [DROP ROLE](sql-droprole.html "DROP ROLE")
+[createuser](app-createuser "createuser"), [DROP ROLE](sql-droprole "DROP ROLE")

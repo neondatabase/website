@@ -41,7 +41,7 @@ where action is one of:
 
 You must own the materialized view to use `ALTER MATERIALIZED VIEW`. To change a materialized view's schema, you must also have `CREATE` privilege on the new schema. To alter the owner, you must be able to `SET ROLE` to the new owning role, and that role must have `CREATE` privilege on the materialized view's schema. (These restrictions enforce that altering the owner doesn't do anything you couldn't do by dropping and recreating the materialized view. However, a superuser can alter ownership of any view anyway.)
 
-The statement subforms and actions available for `ALTER MATERIALIZED VIEW` are a subset of those available for `ALTER TABLE`, and have the same meaning when used for materialized views. See the descriptions for [`ALTER TABLE`](sql-altertable.html "ALTER TABLE") for details.
+The statement subforms and actions available for `ALTER MATERIALIZED VIEW` are a subset of those available for `ALTER TABLE`, and have the same meaning when used for materialized views. See the descriptions for [`ALTER TABLE`](sql-altertable "ALTER TABLE") for details.
 
 ## Parameters
 
@@ -88,4 +88,4 @@ ALTER MATERIALIZED VIEW foo RENAME TO bar;
 
 ## See Also
 
-[CREATE MATERIALIZED VIEW](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW"), [DROP MATERIALIZED VIEW](sql-dropmaterializedview.html "DROP MATERIALIZED VIEW"), [REFRESH MATERIALIZED VIEW](sql-refreshmaterializedview.html "REFRESH MATERIALIZED VIEW")
+[CREATE MATERIALIZED VIEW](sql-creatematerializedview "CREATE MATERIALIZED VIEW"), [DROP MATERIALIZED VIEW](sql-dropmaterializedview "DROP MATERIALIZED VIEW"), [REFRESH MATERIALIZED VIEW](sql-refreshmaterializedview "REFRESH MATERIALIZED VIEW")

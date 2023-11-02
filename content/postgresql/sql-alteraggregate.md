@@ -56,7 +56,7 @@ You must own the aggregate function to use `ALTER AGGREGATE`. To change the sche
 
 ## Notes
 
-The recommended syntax for referencing an ordered-set aggregate is to write `ORDER BY` between the direct and aggregated argument specifications, in the same style as in [`CREATE AGGREGATE`](sql-createaggregate.html "CREATE AGGREGATE"). However, it will also work to omit `ORDER BY` and just run the direct and aggregated argument specifications into a single list. In this abbreviated form, if `VARIADIC "any"` was used in both the direct and aggregated argument lists, write `VARIADIC "any"` only once.
+The recommended syntax for referencing an ordered-set aggregate is to write `ORDER BY` between the direct and aggregated argument specifications, in the same style as in [`CREATE AGGREGATE`](sql-createaggregate "CREATE AGGREGATE"). However, it will also work to omit `ORDER BY` and just run the direct and aggregated argument specifications into a single list. In this abbreviated form, if `VARIADIC "any"` was used in both the direct and aggregated argument lists, write `VARIADIC "any"` only once.
 
 ## Examples
 
@@ -94,4 +94,4 @@ There is no `ALTER AGGREGATE` statement in the SQL standard.
 
 ## See Also
 
-[CREATE AGGREGATE](sql-createaggregate.html "CREATE AGGREGATE"), [DROP AGGREGATE](sql-dropaggregate.html "DROP AGGREGATE")
+[CREATE AGGREGATE](sql-createaggregate "CREATE AGGREGATE"), [DROP AGGREGATE](sql-dropaggregate "DROP AGGREGATE")

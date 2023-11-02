@@ -1,7 +1,7 @@
 ## 36.13. C++ Applications [#](#ECPG-CPP)
 
-  * *   [36.13.1. Scope for Host Variables](ecpg-cpp.html#ECPG-CPP-SCOPE)
-  * [36.13.2. C++ Application Development with External C Module](ecpg-cpp.html#ECPG-CPP-AND-C)
+  * *   [36.13.1. Scope for Host Variables](ecpg-cpp#ECPG-CPP-SCOPE)
+  * [36.13.2. C++ Application Development with External C Module](ecpg-cpp#ECPG-CPP-AND-C)
 
 ECPG has some limited support for C++ applications. This section describes some caveats.
 
@@ -9,7 +9,7 @@ The `ecpg` preprocessor takes an input file written in C (or something like C) a
 
 In general, however, the `ecpg` preprocessor only understands C; it does not handle the special syntax and reserved words of the C++ language. So, some embedded SQL code written in C++ application code that uses complicated features specific to C++ might fail to be preprocessed correctly or might not work as expected.
 
-A safe way to use the embedded SQL code in a C++ application is hiding the ECPG calls in a C module, which the C++ application code calls into to access the database, and linking that together with the rest of the C++ code. See [Section 36.13.2](ecpg-cpp.html#ECPG-CPP-AND-C "36.13.2. C++ Application Development with External C Module") about that.
+A safe way to use the embedded SQL code in a C++ application is hiding the ECPG calls in a C module, which the C++ application code calls into to access the database, and linking that together with the rest of the C++ code. See [Section 36.13.2](ecpg-cpp#ECPG-CPP-AND-C "36.13.2. C++ Application Development with External C Module") about that.
 
 ### 36.13.1. Scope for Host Variables [#](#ECPG-CPP-SCOPE)
 

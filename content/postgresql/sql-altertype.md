@@ -44,7 +44,7 @@ where action is one of:
 
 * `ADD ATTRIBUTE`
 
-    This form adds a new attribute to a composite type, using the same syntax as [`CREATE TYPE`](sql-createtype.html "CREATE TYPE").
+    This form adds a new attribute to a composite type, using the same syntax as [`CREATE TYPE`](sql-createtype "CREATE TYPE").
 
 * `DROP ATTRIBUTE [ IF EXISTS ]`
 
@@ -74,9 +74,9 @@ where action is one of:
   * `TYPMOD_OUT` can be set to the name of a type modifier output function, or `NONE` to remove the type's type modifier output function. Using this option requires superuser privilege.
   * `ANALYZE` can be set to the name of a type-specific statistics collection function, or `NONE` to remove the type's statistics collection function. Using this option requires superuser privilege.
   * `SUBSCRIPT` can be set to the name of a type-specific subscripting handler function, or `NONE` to remove the type's subscripting handler function. Using this option requires superuser privilege.
-  * `STORAGE` can be set to `plain`, `extended`, `external`, or `main` (see [Section 73.2](storage-toast.html "73.2. TOAST") for more information about what these mean). However, changing from `plain` to another setting requires superuser privilege (because it requires that the type's C functions all be TOAST-ready), and changing to `plain` from another setting is not allowed at all (since the type may already have TOASTed values present in the database). Note that changing this option doesn't by itself change any stored data, it just sets the default TOAST strategy to be used for table columns created in the future. See [ALTER TABLE](sql-altertable.html "ALTER TABLE") to change the TOAST strategy for existing table columns.
+  * `STORAGE` can be set to `plain`, `extended`, `external`, or `main` (see [Section 73.2](storage-toast "73.2. TOAST") for more information about what these mean). However, changing from `plain` to another setting requires superuser privilege (because it requires that the type's C functions all be TOAST-ready), and changing to `plain` from another setting is not allowed at all (since the type may already have TOASTed values present in the database). Note that changing this option doesn't by itself change any stored data, it just sets the default TOAST strategy to be used for table columns created in the future. See [ALTER TABLE](sql-altertable "ALTER TABLE") to change the TOAST strategy for existing table columns.
 
-    See [CREATE TYPE](sql-createtype.html "CREATE TYPE") for more details about these type properties. Note that where appropriate, a change in these properties for a base type will be propagated automatically to domains based on that type.
+    See [CREATE TYPE](sql-createtype "CREATE TYPE") for more details about these type properties. Note that where appropriate, a change in these properties for a base type will be propagated automatically to domains based on that type.
 
 The `ADD ATTRIBUTE`, `DROP ATTRIBUTE`, and `ALTER ATTRIBUTE` actions can be combined into a list of multiple alterations to apply in parallel. For example, it is possible to add several attributes and/or alter the type of several attributes in a single command.
 
@@ -204,4 +204,4 @@ The variants to add and drop attributes are part of the SQL standard; the other 
 
 ## See Also
 
-[CREATE TYPE](sql-createtype.html "CREATE TYPE"), [DROP TYPE](sql-droptype.html "DROP TYPE")
+[CREATE TYPE](sql-createtype "CREATE TYPE"), [DROP TYPE](sql-droptype "DROP TYPE")

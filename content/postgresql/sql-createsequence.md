@@ -20,7 +20,7 @@ CREATE [ { TEMPORARY | TEMP } | UNLOGGED ] SEQUENCE [ IF NOT EXISTS ] name
 
 If a schema name is given then the sequence is created in the specified schema. Otherwise it is created in the current schema. Temporary sequences exist in a special schema, so a schema name cannot be given when creating a temporary sequence. The sequence name must be distinct from the name of any other relation (table, sequence, index, view, materialized view, or foreign table) in the same schema.
 
-After a sequence is created, you use the functions `nextval`, `currval`, and `setval` to operate on the sequence. These functions are documented in [Section 9.17](functions-sequence.html "9.17. Sequence Manipulation Functions").
+After a sequence is created, you use the functions `nextval`, `currval`, and `setval` to operate on the sequence. These functions are documented in [Section 9.17](functions-sequence "9.17. Sequence Manipulation Functions").
 
 Although you cannot update a sequence directly, you can use a query like:
 
@@ -156,4 +156,4 @@ END;
 
 ## See Also
 
-[ALTER SEQUENCE](sql-altersequence.html "ALTER SEQUENCE"), [DROP SEQUENCE](sql-dropsequence.html "DROP SEQUENCE")
+[ALTER SEQUENCE](sql-altersequence "ALTER SEQUENCE"), [DROP SEQUENCE](sql-dropsequence "DROP SEQUENCE")

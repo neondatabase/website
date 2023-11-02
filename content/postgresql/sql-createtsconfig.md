@@ -22,7 +22,7 @@ If a schema name is given then the text search configuration is created in the s
 
 The user who defines a text search configuration becomes its owner.
 
-Refer to [Chapter 12](textsearch.html "Chapter 12. Full Text Search") for further information.
+Refer to [Chapter 12](textsearch "Chapter 12. Full Text Search") for further information.
 
 ## Parameters
 
@@ -48,4 +48,4 @@ There is no `CREATE TEXT SEARCH CONFIGURATION` statement in the SQL standard.
 
 ## See Also
 
-[ALTER TEXT SEARCH CONFIGURATION](sql-altertsconfig.html "ALTER TEXT SEARCH CONFIGURATION"), [DROP TEXT SEARCH CONFIGURATION](sql-droptsconfig.html "DROP TEXT SEARCH CONFIGURATION")
+[ALTER TEXT SEARCH CONFIGURATION](sql-altertsconfig "ALTER TEXT SEARCH CONFIGURATION"), [DROP TEXT SEARCH CONFIGURATION](sql-droptsconfig "DROP TEXT SEARCH CONFIGURATION")

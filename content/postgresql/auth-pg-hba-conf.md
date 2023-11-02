@@ -1,6 +1,6 @@
 ## 21.1. The `pg_hba.conf` File [#](#AUTH-PG-HBA-CONF)
 
-Client authentication is controlled by a configuration file, which traditionally is named `pg_hba.conf` and is stored in the database cluster's data directory. (HBA stands for host-based authentication.) A default `pg_hba.conf` file is installed when the data directory is initialized by [initdb](app-initdb.html "initdb"). It is possible to place the authentication configuration file elsewhere, however; see the [hba\_file](runtime-config-file-locations.html#GUC-HBA-FILE) configuration parameter.
+Client authentication is controlled by a configuration file, which traditionally is named `pg_hba.conf` and is stored in the database cluster's data directory. (HBA stands for host-based authentication.) A default `pg_hba.conf` file is installed when the data directory is initialized by [initdb](app-initdb "initdb"). It is possible to place the authentication configuration file elsewhere, however; see the [hba\_file](runtime-config-file-locations#GUC-HBA-FILE) configuration parameter.
 
 The general format of the `pg_hba.conf` file is a set of records, one per line. Blank lines are ignored, as is any text after the `#` comment character. A record can be continued onto the next line by ending the line with a backslash. (Backslashes are not special except at the end of a line.) A record is made up of a number of fields which are separated by spaces and/or tabs. Fields can contain white space if the field value is double-quoted. Quoting one of the keywords in a database, user, or address field (e.g., `all` or `replication`) makes the word lose its special meaning, and just match a database, user, or host with that name. Backslash line continuation applies even within quoted text or comments.
 
@@ -40,13 +40,13 @@ The meaning of the fields is as follows:
 
 ### Note
 
-    Remote TCP/IP connections will not be possible unless the server is started with an appropriate value for the [listen\_addresses](runtime-config-connection.html#GUC-LISTEN-ADDRESSES) configuration parameter, since the default behavior is to listen for TCP/IP connections only on the local loopback address `localhost`.
+    Remote TCP/IP connections will not be possible unless the server is started with an appropriate value for the [listen\_addresses](runtime-config-connection#GUC-LISTEN-ADDRESSES) configuration parameter, since the default behavior is to listen for TCP/IP connections only on the local loopback address `localhost`.
 
 * `hostssl`
 
     This record matches connection attempts made using TCP/IP, but only when the connection is made with SSL encryption.
 
-    To make use of this option the server must be built with SSL support. Furthermore, SSL must be enabled by setting the [ssl](runtime-config-connection.html#GUC-SSL) configuration parameter (see [Section 19.9](ssl-tcp.html "19.9. Secure TCP/IP Connections with SSL") for more information). Otherwise, the `hostssl` record is ignored except for logging a warning that it cannot match any connections.
+    To make use of this option the server must be built with SSL support. Furthermore, SSL must be enabled by setting the [ssl](runtime-config-connection#GUC-SSL) configuration parameter (see [Section 19.9](ssl-tcp "19.9. Secure TCP/IP Connections with SSL") for more information). Otherwise, the `hostssl` record is ignored except for logging a warning that it cannot match any connections.
 
 * `hostnossl`
 
@@ -66,7 +66,7 @@ The meaning of the fields is as follows:
 
     Specifies which database name(s) this record matches. The value `all` specifies that it matches all databases. The value `sameuser` specifies that the record matches if the requested database has the same name as the requested user. The value `samerole` specifies that the requested user must be a member of the role with the same name as the requested database. (`samegroup` is an obsolete but still accepted spelling of `samerole`.) Superusers are not considered to be members of a role for the purposes of `samerole` unless they are explicitly members of the role, directly or indirectly, and not just by virtue of being a superuser. The value `replication` specifies that the record matches if a physical replication connection is requested, however, it doesn't match with logical replication connections. Note that physical replication connections do not specify any particular database whereas logical replication connections do specify it. Otherwise, this is the name of a specific PostgreSQL database or a regular expression. Multiple database names and/or regular expressions can be supplied by separating them with commas.
 
-    If the database name starts with a slash (`/`), the remainder of the name is treated as a regular expression. (See [Section 9.7.3.1](functions-matching.html#POSIX-SYNTAX-DETAILS "9.7.3.1. Regular Expression Details") for details of PostgreSQL's regular expression syntax.)
+    If the database name starts with a slash (`/`), the remainder of the name is treated as a regular expression. (See [Section 9.7.3.1](functions-matching#POSIX-SYNTAX-DETAILS "9.7.3.1. Regular Expression Details") for details of PostgreSQL's regular expression syntax.)
 
     A separate file containing database names and/or regular expressions can be specified by preceding the file name with `@`.
 
@@ -74,7 +74,7 @@ The meaning of the fields is as follows:
 
     Specifies which database user name(s) this record matches. The value `all` specifies that it matches all users. Otherwise, this is either the name of a specific database user, a regular expression (when starting with a slash (`/`), or a group name preceded by `+`. (Recall that there is no real distinction between users and groups in PostgreSQL; a `+` mark really means “match any of the roles that are directly or indirectly members of this role”, while a name without a `+` mark matches only that specific role.) For this purpose, a superuser is only considered to be a member of a role if they are explicitly a member of the role, directly or indirectly, and not just by virtue of being a superuser. Multiple user names and/or regular expressions can be supplied by separating them with commas.
 
-    If the user name starts with a slash (`/`), the remainder of the name is treated as a regular expression. (See [Section 9.7.3.1](functions-matching.html#POSIX-SYNTAX-DETAILS "9.7.3.1. Regular Expression Details") for details of PostgreSQL's regular expression syntax.)
+    If the user name starts with a slash (`/`), the remainder of the name is treated as a regular expression. (See [Section 9.7.3.1](functions-matching#POSIX-SYNTAX-DETAILS "9.7.3.1. Regular Expression Details") for details of PostgreSQL's regular expression syntax.)
 
     A separate file containing user names and/or regular expressions can be specified by preceding the file name with `@`.
 
@@ -114,11 +114,11 @@ The meaning of the fields is as follows:
 
 * *`auth-method`*
 
-    Specifies the authentication method to use when a connection matches this record. The possible choices are summarized here; details are in [Section 21.3](auth-methods.html "21.3. Authentication Methods"). All the options are lower case and treated case sensitively, so even acronyms like `ldap` must be specified as lower case.
+    Specifies the authentication method to use when a connection matches this record. The possible choices are summarized here; details are in [Section 21.3](auth-methods "21.3. Authentication Methods"). All the options are lower case and treated case sensitively, so even acronyms like `ldap` must be specified as lower case.
 
   * `trust`
 
-        Allow the connection unconditionally. This method allows anyone that can connect to the PostgreSQL database server to login as any PostgreSQL user they wish, without the need for a password or any other authentication. See [Section 21.4](auth-trust.html "21.4. Trust Authentication") for details.
+        Allow the connection unconditionally. This method allows anyone that can connect to the PostgreSQL database server to login as any PostgreSQL user they wish, without the need for a password or any other authentication. See [Section 21.4](auth-trust "21.4. Trust Authentication") for details.
 
   * `reject`
 
@@ -126,57 +126,57 @@ The meaning of the fields is as follows:
 
   * `scram-sha-256`
 
-        Perform SCRAM-SHA-256 authentication to verify the user's password. See [Section 21.5](auth-password.html "21.5. Password Authentication") for details.
+        Perform SCRAM-SHA-256 authentication to verify the user's password. See [Section 21.5](auth-password "21.5. Password Authentication") for details.
 
   * `md5`
 
-        Perform SCRAM-SHA-256 or MD5 authentication to verify the user's password. See [Section 21.5](auth-password.html "21.5. Password Authentication") for details.
+        Perform SCRAM-SHA-256 or MD5 authentication to verify the user's password. See [Section 21.5](auth-password "21.5. Password Authentication") for details.
 
   * `password`
 
-        Require the client to supply an unencrypted password for authentication. Since the password is sent in clear text over the network, this should not be used on untrusted networks. See [Section 21.5](auth-password.html "21.5. Password Authentication") for details.
+        Require the client to supply an unencrypted password for authentication. Since the password is sent in clear text over the network, this should not be used on untrusted networks. See [Section 21.5](auth-password "21.5. Password Authentication") for details.
 
   * `gss`
 
-        Use GSSAPI to authenticate the user. This is only available for TCP/IP connections. See [Section 21.6](gssapi-auth.html "21.6. GSSAPI Authentication") for details. It can be used in conjunction with GSSAPI encryption.
+        Use GSSAPI to authenticate the user. This is only available for TCP/IP connections. See [Section 21.6](gssapi-auth "21.6. GSSAPI Authentication") for details. It can be used in conjunction with GSSAPI encryption.
 
   * `sspi`
 
-        Use SSPI to authenticate the user. This is only available on Windows. See [Section 21.7](sspi-auth.html "21.7. SSPI Authentication") for details.
+        Use SSPI to authenticate the user. This is only available on Windows. See [Section 21.7](sspi-auth "21.7. SSPI Authentication") for details.
 
   * `ident`
 
-        Obtain the operating system user name of the client by contacting the ident server on the client and check if it matches the requested database user name. Ident authentication can only be used on TCP/IP connections. When specified for local connections, peer authentication will be used instead. See [Section 21.8](auth-ident.html "21.8. Ident Authentication") for details.
+        Obtain the operating system user name of the client by contacting the ident server on the client and check if it matches the requested database user name. Ident authentication can only be used on TCP/IP connections. When specified for local connections, peer authentication will be used instead. See [Section 21.8](auth-ident "21.8. Ident Authentication") for details.
 
   * `peer`
 
-        Obtain the client's operating system user name from the operating system and check if it matches the requested database user name. This is only available for local connections. See [Section 21.9](auth-peer.html "21.9. Peer Authentication") for details.
+        Obtain the client's operating system user name from the operating system and check if it matches the requested database user name. This is only available for local connections. See [Section 21.9](auth-peer "21.9. Peer Authentication") for details.
 
   * `ldap`
 
-        Authenticate using an LDAP server. See [Section 21.10](auth-ldap.html "21.10. LDAP Authentication") for details.
+        Authenticate using an LDAP server. See [Section 21.10](auth-ldap "21.10. LDAP Authentication") for details.
 
   * `radius`
 
-        Authenticate using a RADIUS server. See [Section 21.11](auth-radius.html "21.11. RADIUS Authentication") for details.
+        Authenticate using a RADIUS server. See [Section 21.11](auth-radius "21.11. RADIUS Authentication") for details.
 
   * `cert`
 
-        Authenticate using SSL client certificates. See [Section 21.12](auth-cert.html "21.12. Certificate Authentication") for details.
+        Authenticate using SSL client certificates. See [Section 21.12](auth-cert "21.12. Certificate Authentication") for details.
 
   * `pam`
 
-        Authenticate using the Pluggable Authentication Modules (PAM) service provided by the operating system. See [Section 21.13](auth-pam.html "21.13. PAM Authentication") for details.
+        Authenticate using the Pluggable Authentication Modules (PAM) service provided by the operating system. See [Section 21.13](auth-pam "21.13. PAM Authentication") for details.
 
   * `bsd`
 
-        Authenticate using the BSD Authentication service provided by the operating system. See [Section 21.14](auth-bsd.html "21.14. BSD Authentication") for details.
+        Authenticate using the BSD Authentication service provided by the operating system. See [Section 21.14](auth-bsd "21.14. BSD Authentication") for details.
 
 * *`auth-options`*
 
     After the *`auth-method`* field, there can be field(s) of the form *`name`*`=`*`value`* that specify options for the authentication method. Details about which options are available for which authentication methods appear below.
 
-    In addition to the method-specific options listed below, there is a method-independent authentication option `clientcert`, which can be specified in any `hostssl` record. This option can be set to `verify-ca` or `verify-full`. Both options require the client to present a valid (trusted) SSL certificate, while `verify-full` additionally enforces that the `cn` (Common Name) in the certificate matches the username or an applicable mapping. This behavior is similar to the `cert` authentication method (see [Section 21.12](auth-cert.html "21.12. Certificate Authentication")) but enables pairing the verification of client certificates with any authentication method that supports `hostssl` entries.
+    In addition to the method-specific options listed below, there is a method-independent authentication option `clientcert`, which can be specified in any `hostssl` record. This option can be set to `verify-ca` or `verify-full`. Both options require the client to present a valid (trusted) SSL certificate, while `verify-full` additionally enforces that the `cn` (Common Name) in the certificate matches the username or an applicable mapping. This behavior is similar to the `cert` authentication method (see [Section 21.12](auth-cert "21.12. Certificate Authentication")) but enables pairing the verification of client certificates with any authentication method that supports `hostssl` entries.
 
     On any record using client certificate authentication (i.e. one using the `cert` authentication method or one using the `clientcert` option), you can specify which part of the client certificate credentials to match using the `clientname` option. This option can have one of two values. If you specify `clientname=CN`, which is the default, the username is matched against the certificate's `Common Name (CN)`. If instead you specify `clientname=DN` the username is matched against the entire `Distinguished Name (DN)` of the certificate. This option is probably best used in conjunction with a username map. The comparison is done with the `DN` in [RFC 2253](https://tools.ietf.org/html/rfc2253) format. To see the `DN` of a client certificate in this format, do
 
@@ -209,13 +209,13 @@ The `pg_hba.conf` file is read on start-up and when the main server process rece
 
 The preceding statement is not true on Microsoft Windows: there, any changes in the `pg_hba.conf` file are immediately applied by subsequent new connections.
 
-The system view [`pg_hba_file_rules`](view-pg-hba-file-rules.html "54.9. pg_hba_file_rules") can be helpful for pre-testing changes to the `pg_hba.conf` file, or for diagnosing problems if loading of the file did not have the desired effects. Rows in the view with non-null `error` fields indicate problems in the corresponding lines of the file.
+The system view [`pg_hba_file_rules`](view-pg-hba-file-rules "54.9. pg_hba_file_rules") can be helpful for pre-testing changes to the `pg_hba.conf` file, or for diagnosing problems if loading of the file did not have the desired effects. Rows in the view with non-null `error` fields indicate problems in the corresponding lines of the file.
 
 ### Tip
 
 To connect to a particular database, a user must not only pass the `pg_hba.conf` checks, but must have the `CONNECT` privilege for the database. If you wish to restrict which users can connect to which databases, it's usually easier to control this by granting/revoking `CONNECT` privilege than to put the rules in `pg_hba.conf` entries.
 
-Some examples of `pg_hba.conf` entries are shown in [Example 21.1](auth-pg-hba-conf.html#EXAMPLE-PG-HBA.CONF "Example 21.1. Example pg_hba.conf Entries"). See the next section for details on the different authentication methods.
+Some examples of `pg_hba.conf` entries are shown in [Example 21.1](auth-pg-hba-conf#EXAMPLE-PG-HBA.CONF "Example 21.1. Example pg_hba.conf Entries"). See the next section for details on the different authentication methods.
 
 **Example 21.1. Example `pg_hba.conf` Entries**
 

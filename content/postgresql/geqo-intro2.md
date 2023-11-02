@@ -4,7 +4,7 @@ The genetic algorithm (GA) is a heuristic optimization method which operates thr
 
 The coordinates of an individual in the search space are represented by *chromosomes*, in essence a set of character strings. A *gene* is a subsection of a chromosome which encodes the value of a single parameter being optimized. Typical encodings for a gene could be *binary* or *integer*.
 
-Through simulation of the evolutionary operations *recombination*, *mutation*, and *selection* new generations of search points are found that show a higher average fitness than their ancestors. [Figure 62.1](geqo-intro2.html#GEQO-FIGURE "Figure 62.1. Structure of a Genetic Algorithm") illustrates these steps.
+Through simulation of the evolutionary operations *recombination*, *mutation*, and *selection* new generations of search points are found that show a higher average fitness than their ancestors. [Figure 62.1](geqo-intro2#GEQO-FIGURE "Figure 62.1. Structure of a Genetic Algorithm") illustrates these steps.
 
 **Figure 62.1. Structure of a Genetic Algorithm**
 

@@ -8,7 +8,7 @@ pg\_test\_fsync — determine fastest `wal_sync_method` for PostgreSQL
 
 ## Description
 
-pg\_test\_fsync is intended to give you a reasonable idea of what the fastest [wal\_sync\_method](runtime-config-wal.html#GUC-WAL-SYNC-METHOD) is on your specific system, as well as supplying diagnostic information in the event of an identified I/O problem. However, differences shown by pg\_test\_fsync might not make any significant difference in real database throughput, especially since many database servers are not speed-limited by their write-ahead logs. pg\_test\_fsync reports average file sync operation time in microseconds for each `wal_sync_method`, which can also be used to inform efforts to optimize the value of [commit\_delay](runtime-config-wal.html#GUC-COMMIT-DELAY).
+pg\_test\_fsync is intended to give you a reasonable idea of what the fastest [wal\_sync\_method](runtime-config-wal#GUC-WAL-SYNC-METHOD) is on your specific system, as well as supplying diagnostic information in the event of an identified I/O problem. However, differences shown by pg\_test\_fsync might not make any significant difference in real database throughput, especially since many database servers are not speed-limited by their write-ahead logs. pg\_test\_fsync reports average file sync operation time in microseconds for each `wal_sync_method`, which can also be used to inform efforts to optimize the value of [commit\_delay](runtime-config-wal#GUC-COMMIT-DELAY).
 
 ## Options
 
@@ -36,4 +36,4 @@ The environment variable `PG_COLOR` specifies whether to use color in diagnostic
 
 ## See Also
 
-[postgres](app-postgres.html "postgres")
+[postgres](app-postgres "postgres")

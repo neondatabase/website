@@ -10,9 +10,9 @@ createuser — define a new PostgreSQL user account
 
 createuser creates a new PostgreSQL user (or more precisely, a role). Only superusers and users with `CREATEROLE` privilege can create new users, so createuser must be invoked by someone who can connect as a superuser or a user with `CREATEROLE` privilege.
 
-If you wish to create a role with the `SUPERUSER`, `REPLICATION`, or `BYPASSRLS` privilege, you must connect as a superuser, not merely with `CREATEROLE` privilege. Being a superuser implies the ability to bypass all access permission checks within the database, so superuser access should not be granted lightly. `CREATEROLE` also conveys [very extensive privileges](role-attributes.html#ROLE-CREATION).
+If you wish to create a role with the `SUPERUSER`, `REPLICATION`, or `BYPASSRLS` privilege, you must connect as a superuser, not merely with `CREATEROLE` privilege. Being a superuser implies the ability to bypass all access permission checks within the database, so superuser access should not be granted lightly. `CREATEROLE` also conveys [very extensive privileges](role-attributes#ROLE-CREATION).
 
-createuser is a wrapper around the SQL command [`CREATE ROLE`](sql-createrole.html "CREATE ROLE"). There is no effective difference between creating users via this utility and via other methods for accessing the server.
+createuser is a wrapper around the SQL command [`CREATE ROLE`](sql-createrole "CREATE ROLE"). There is no effective difference between creating users via this utility and via other methods for accessing the server.
 
 ## Options
 
@@ -80,7 +80,7 @@ createuser accepts the following command-line arguments:
 
 * `-r``--createrole`
 
-    The new user will be allowed to create, alter, drop, comment on, change the security label for other roles; that is, this user will have `CREATEROLE` privilege. See [role creation](role-attributes.html#ROLE-CREATION) for more details about what capabilities are conferred by this privilege.
+    The new user will be allowed to create, alter, drop, comment on, change the security label for other roles; that is, this user will have `CREATEROLE` privilege. See [role creation](role-attributes#ROLE-CREATION) for more details about what capabilities are conferred by this privilege.
 
 * `-R``--no-createrole`
 
@@ -112,11 +112,11 @@ createuser accepts the following command-line arguments:
 
 * `--replication`
 
-    The new user will have the `REPLICATION` privilege, which is described more fully in the documentation for [CREATE ROLE](sql-createrole.html "CREATE ROLE").
+    The new user will have the `REPLICATION` privilege, which is described more fully in the documentation for [CREATE ROLE](sql-createrole "CREATE ROLE").
 
 * `--no-replication`
 
-    The new user will not have the `REPLICATION` privilege, which is described more fully in the documentation for [CREATE ROLE](sql-createrole.html "CREATE ROLE"). This is the default.
+    The new user will not have the `REPLICATION` privilege, which is described more fully in the documentation for [CREATE ROLE](sql-createrole "CREATE ROLE"). This is the default.
 
 * `-?``--help`
 
@@ -156,11 +156,11 @@ createuser also accepts the following command-line arguments for connection para
 
     Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 
-This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 ## Diagnostics
 
-In case of difficulty, see [CREATE ROLE](sql-createrole.html "CREATE ROLE") and [psql](app-psql.html "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
+In case of difficulty, see [CREATE ROLE](sql-createrole "CREATE ROLE") and [psql](app-psql "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
 
 ## Examples
 
@@ -203,4 +203,4 @@ In the above example, the new password isn't actually echoed when typed, but we 
 
 ## See Also
 
-[dropuser](app-dropuser.html "dropuser"), [CREATE ROLE](sql-createrole.html "CREATE ROLE"), [createrole\_self\_grant](runtime-config-client.html#GUC-CREATEROLE-SELF-GRANT)
+[dropuser](app-dropuser "dropuser"), [CREATE ROLE](sql-createrole "CREATE ROLE"), [createrole\_self\_grant](runtime-config-client#GUC-CREATEROLE-SELF-GRANT)

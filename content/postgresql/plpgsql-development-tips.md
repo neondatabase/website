@@ -1,7 +1,7 @@
 ## 43.12. Tips for Developing in PL/pgSQL [#](#PLPGSQL-DEVELOPMENT-TIPS)
 
-  * *   [43.12.1. Handling of Quotation Marks](plpgsql-development-tips.html#PLPGSQL-QUOTE-TIPS)
-  * [43.12.2. Additional Compile-Time and Run-Time Checks](plpgsql-development-tips.html#PLPGSQL-EXTRA-CHECKS)
+  * *   [43.12.1. Handling of Quotation Marks](plpgsql-development-tips#PLPGSQL-QUOTE-TIPS)
+  * [43.12.2. Additional Compile-Time and Run-Time Checks](plpgsql-development-tips#PLPGSQL-EXTRA-CHECKS)
 
 One good way to develop in PL/pgSQL is to use the text editor of your choice to create your functions, and in another window, use psql to load and test those functions. If you are doing it this way, it is a good idea to write the function using `CREATE OR REPLACE FUNCTION`. That way you can just reload the file to update the function definition. For example:
 
@@ -25,7 +25,7 @@ Another good way to develop in PL/pgSQL is with a GUI database access tool that 
 
 ### 43.12.1. Handling of Quotation Marks [#](#PLPGSQL-QUOTE-TIPS)
 
-The code of a PL/pgSQL function is specified in `CREATE FUNCTION` as a string literal. If you write the string literal in the ordinary way with surrounding single quotes, then any single quotes inside the function body must be doubled; likewise any backslashes must be doubled (assuming escape string syntax is used). Doubling quotes is at best tedious, and in more complicated cases the code can become downright incomprehensible, because you can easily find yourself needing half a dozen or more adjacent quote marks. It's recommended that you instead write the function body as a “dollar-quoted” string literal (see [Section 4.1.2.4](sql-syntax-lexical.html#SQL-SYNTAX-DOLLAR-QUOTING "4.1.2.4. Dollar-Quoted String Constants")). In the dollar-quoting approach, you never double any quote marks, but instead take care to choose a different dollar-quoting delimiter for each level of nesting you need. For example, you might write the `CREATE FUNCTION` command as:
+The code of a PL/pgSQL function is specified in `CREATE FUNCTION` as a string literal. If you write the string literal in the ordinary way with surrounding single quotes, then any single quotes inside the function body must be doubled; likewise any backslashes must be doubled (assuming escape string syntax is used). Doubling quotes is at best tedious, and in more complicated cases the code can become downright incomprehensible, because you can easily find yourself needing half a dozen or more adjacent quote marks. It's recommended that you instead write the function body as a “dollar-quoted” string literal (see [Section 4.1.2.4](sql-syntax-lexical#SQL-SYNTAX-DOLLAR-QUOTING "4.1.2.4. Dollar-Quoted String Constants")). In the dollar-quoting approach, you never double any quote marks, but instead take care to choose a different dollar-quoting delimiter for each level of nesting you need. For example, you might write the `CREATE FUNCTION` command as:
 
 ```
 
@@ -111,7 +111,7 @@ The following chart shows what you have to do when writing quote marks without d
 
 * 10 quotation marks [#](#PLPGSQL-QUOTE-TIPS-10-QUOT)
 
-    When you want two single quotation marks in a string constant (which accounts for 8 quotation marks) and this is adjacent to the end of that string constant (2 more). You will probably only need that if you are writing a function that generates other functions, as in [Example 43.10](plpgsql-porting.html#PLPGSQL-PORTING-EX2 "Example 43.10. Porting a Function that Creates Another Function from PL/SQL to PL/pgSQL"). For example:
+    When you want two single quotation marks in a string constant (which accounts for 8 quotation marks) and this is adjacent to the end of that string constant (2 more). You will probably only need that if you are writing a function that generates other functions, as in [Example 43.10](plpgsql-porting#PLPGSQL-PORTING-EX2 "Example 43.10. Porting a Function that Creates Another Function from PL/SQL to PL/pgSQL"). For example:
 
     ```
 

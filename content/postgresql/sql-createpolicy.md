@@ -24,7 +24,7 @@ For `INSERT`, `UPDATE`, and `MERGE` statements, `WITH CHECK` expressions are enf
 
 Policy names are per-table. Therefore, one policy name can be used for many different tables and have a definition for each table which is appropriate to that table.
 
-Policies can be applied for specific commands or for specific roles. The default for newly created policies is that they apply for all commands and roles, unless otherwise specified. Multiple policies may apply to a single command; see below for more details. [Table 292](sql-createpolicy.html#SQL-CREATEPOLICY-SUMMARY "Table 292. Policies Applied by Command Type") summarizes how the different types of policy apply to specific commands.
+Policies can be applied for specific commands or for specific roles. The default for newly created policies is that they apply for all commands and roles, unless otherwise specified. Multiple policies may apply to a single command; see below for more details. [Table 292](sql-createpolicy#SQL-CREATEPOLICY-SUMMARY "Table 292. Policies Applied by Command Type") summarizes how the different types of policy apply to specific commands.
 
 For policies that can have both `USING` and `WITH CHECK` expressions (`ALL` and `UPDATE`), if no `WITH CHECK` expression is defined, then the `USING` expression will be used both to determine which rows are visible (normal `USING` case) and which new rows will be allowed to be added (`WITH CHECK` case).
 
@@ -111,8 +111,8 @@ If row-level security is enabled for a table, but no applicable policies exist, 
 | `SELECT FOR UPDATE/SHARE`                                                                                                                                                | Existing row                                                           | —                       | Existing row        | —                       | —                   |
 | `INSERT` / `MERGE ... THEN INSERT`                                                                                                                                       | —                                                                      | New row                 | —                   | —                       | —                   |
 | `INSERT ... RETURNING`                                                                                                                                                   | New row [\[a\]](#ftn.RLS-SELECT-PRIV)                                  | New row                 | —                   | —                       | —                   |
-| `UPDATE` / `MERGE ... THEN UPDATE`                                                                                                                                       | Existing & new rows [\[a\]](sql-createpolicy.html#ftn.RLS-SELECT-PRIV) | —                       | Existing row        | New row                 | —                   |
-| `DELETE`                                                                                                                                                                 | Existing row [\[a\]](sql-createpolicy.html#ftn.RLS-SELECT-PRIV)        | —                       | —                   | —                       | Existing row        |
+| `UPDATE` / `MERGE ... THEN UPDATE`                                                                                                                                       | Existing & new rows [\[a\]](sql-createpolicy#ftn.RLS-SELECT-PRIV) | —                       | Existing row        | New row                 | —                   |
+| `DELETE`                                                                                                                                                                 | Existing row [\[a\]](sql-createpolicy#ftn.RLS-SELECT-PRIV)        | —                       | —                   | —                       | Existing row        |
 | `ON CONFLICT DO UPDATE`                                                                                                                                                  | Existing & new rows                                                    | —                       | Existing row        | New row                 | —                   |
 | [\[a\] ](#RLS-SELECT-PRIV)If read access is required to the existing or new row (for example, a `WHERE` or `RETURNING` clause that refers to columns from the relation). |                                                                        |                         |                     |                         |                     |
 
@@ -165,11 +165,11 @@ While policies will be applied for explicit queries against tables in the databa
 
 Generally, the system will enforce filter conditions imposed using security policies prior to qualifications that appear in user queries, in order to prevent inadvertent exposure of the protected data to user-defined functions which might not be trustworthy. However, functions and operators marked by the system (or the system administrator) as `LEAKPROOF` may be evaluated before policy expressions, as they are assumed to be trustworthy.
 
-Since policy expressions are added to the user's query directly, they will be run with the rights of the user running the overall query. Therefore, users who are using a given policy must be able to access any tables or functions referenced in the expression or they will simply receive a permission denied error when attempting to query the table that has row-level security enabled. This does not change how views work, however. As with normal queries and views, permission checks and policies for the tables which are referenced by a view will use the view owner's rights and any policies which apply to the view owner, except if the view is defined using the `security_invoker` option (see [`CREATE VIEW`](sql-createview.html "CREATE VIEW")).
+Since policy expressions are added to the user's query directly, they will be run with the rights of the user running the overall query. Therefore, users who are using a given policy must be able to access any tables or functions referenced in the expression or they will simply receive a permission denied error when attempting to query the table that has row-level security enabled. This does not change how views work, however. As with normal queries and views, permission checks and policies for the tables which are referenced by a view will use the view owner's rights and any policies which apply to the view owner, except if the view is defined using the `security_invoker` option (see [`CREATE VIEW`](sql-createview "CREATE VIEW")).
 
 No separate policy exists for `MERGE`. Instead, the policies defined for `SELECT`, `INSERT`, `UPDATE`, and `DELETE` are applied while executing `MERGE`, depending on the actions that are performed.
 
-Additional discussion and practical examples can be found in [Section 5.8](ddl-rowsecurity.html "5.8. Row Security Policies").
+Additional discussion and practical examples can be found in [Section 5.8](ddl-rowsecurity "5.8. Row Security Policies").
 
 ## Compatibility
 
@@ -177,4 +177,4 @@ Additional discussion and practical examples can be found in [Section 5.8](ddl-
 
 ## See Also
 
-[ALTER POLICY](sql-alterpolicy.html "ALTER POLICY"), [DROP POLICY](sql-droppolicy.html "DROP POLICY"), [ALTER TABLE](sql-altertable.html "ALTER TABLE")
+[ALTER POLICY](sql-alterpolicy "ALTER POLICY"), [DROP POLICY](sql-droppolicy "DROP POLICY"), [ALTER TABLE](sql-altertable "ALTER TABLE")

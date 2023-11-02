@@ -31,4 +31,4 @@ There is no `ALTER LARGE OBJECT` statement in the SQL standard.
 
 ## See Also
 
-[Chapter 35](largeobjects.html "Chapter 35. Large Objects")
+[Chapter 35](largeobjects "Chapter 35. Large Objects")

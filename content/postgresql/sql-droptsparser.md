@@ -25,7 +25,7 @@ DROP TEXT SEARCH PARSER [ IF EXISTS ] name [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the text search parser, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the text search parser, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -48,4 +48,4 @@ There is no `DROP TEXT SEARCH PARSER` statement in the SQL standard.
 
 ## See Also
 
-[ALTER TEXT SEARCH PARSER](sql-altertsparser.html "ALTER TEXT SEARCH PARSER"), [CREATE TEXT SEARCH PARSER](sql-createtsparser.html "CREATE TEXT SEARCH PARSER")
+[ALTER TEXT SEARCH PARSER](sql-altertsparser "ALTER TEXT SEARCH PARSER"), [CREATE TEXT SEARCH PARSER](sql-createtsparser "CREATE TEXT SEARCH PARSER")

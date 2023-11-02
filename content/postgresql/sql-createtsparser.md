@@ -23,7 +23,7 @@ If a schema name is given then the text search parser is created in the specifie
 
 You must be a superuser to use `CREATE TEXT SEARCH PARSER`. (This restriction is made because an erroneous text search parser definition could confuse or even crash the server.)
 
-Refer to [Chapter 12](textsearch.html "Chapter 12. Full Text Search") for further information.
+Refer to [Chapter 12](textsearch "Chapter 12. Full Text Search") for further information.
 
 ## Parameters
 
@@ -61,4 +61,4 @@ There is no `CREATE TEXT SEARCH PARSER` statement in the SQL standard.
 
 ## See Also
 
-[ALTER TEXT SEARCH PARSER](sql-altertsparser.html "ALTER TEXT SEARCH PARSER"), [DROP TEXT SEARCH PARSER](sql-droptsparser.html "DROP TEXT SEARCH PARSER")
+[ALTER TEXT SEARCH PARSER](sql-altertsparser "ALTER TEXT SEARCH PARSER"), [DROP TEXT SEARCH PARSER](sql-droptsparser "DROP TEXT SEARCH PARSER")

@@ -1,11 +1,11 @@
 ## 12.6. Dictionaries [#](#TEXTSEARCH-DICTIONARIES)
 
-  * *   [12.6.1. Stop Words](textsearch-dictionaries.html#TEXTSEARCH-STOPWORDS)
-  * [12.6.2. Simple Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SIMPLE-DICTIONARY)
-  * [12.6.3. Synonym Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SYNONYM-DICTIONARY)
-  * [12.6.4. Thesaurus Dictionary](textsearch-dictionaries.html#TEXTSEARCH-THESAURUS)
-  * [12.6.5. Ispell Dictionary](textsearch-dictionaries.html#TEXTSEARCH-ISPELL-DICTIONARY)
-  * [12.6.6. Snowball Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SNOWBALL-DICTIONARY)
+  * *   [12.6.1. Stop Words](textsearch-dictionaries#TEXTSEARCH-STOPWORDS)
+  * [12.6.2. Simple Dictionary](textsearch-dictionaries#TEXTSEARCH-SIMPLE-DICTIONARY)
+  * [12.6.3. Synonym Dictionary](textsearch-dictionaries#TEXTSEARCH-SYNONYM-DICTIONARY)
+  * [12.6.4. Thesaurus Dictionary](textsearch-dictionaries#TEXTSEARCH-THESAURUS)
+  * [12.6.5. Ispell Dictionary](textsearch-dictionaries#TEXTSEARCH-ISPELL-DICTIONARY)
+  * [12.6.6. Snowball Dictionary](textsearch-dictionaries#TEXTSEARCH-SNOWBALL-DICTIONARY)
 
 Dictionaries are used to eliminate words that should not be considered in a search (*stop words*), and to *normalize* words so that different derived forms of the same word will match. A successfully normalized word is called a *lexeme*. Aside from improving search quality, normalization and removal of stop words reduce the size of the `tsvector` representation of a document, thereby improving performance. Normalization does not always have linguistic meaning and usually depends on application semantics.
 
@@ -42,7 +42,7 @@ ALTER TEXT SEARCH CONFIGURATION astro_en
     ADD MAPPING FOR asciiword WITH astrosyn, english_ispell, english_stem;
 ```
 
-A filtering dictionary can be placed anywhere in the list, except at the end where it'd be useless. Filtering dictionaries are useful to partially normalize words to simplify the task of later dictionaries. For example, a filtering dictionary could be used to remove accents from accented letters, as is done by the [unaccent](unaccent.html "F.47. unaccent — a text search dictionary which removes diacritics") module.
+A filtering dictionary can be placed anywhere in the list, except at the end where it'd be useless. Filtering dictionaries are useful to partially normalize words to simplify the task of later dictionaries. For example, a filtering dictionary could be used to remove accents from accented letters, as is done by the [unaccent](unaccent "F.47. unaccent — a text search dictionary which removes diacritics") module.
 
 ### 12.6.1. Stop Words [#](#TEXTSEARCH-STOPWORDS)
 
@@ -133,7 +133,7 @@ Normally, a database session will read a dictionary configuration file only once
 
 ### 12.6.3. Synonym Dictionary [#](#TEXTSEARCH-SYNONYM-DICTIONARY)
 
-This dictionary template is used to create dictionaries that replace a word with a synonym. Phrases are not supported (use the thesaurus template ([Section 12.6.4](textsearch-dictionaries.html#TEXTSEARCH-THESAURUS "12.6.4. Thesaurus Dictionary")) for that). A synonym dictionary can be used to overcome linguistic problems, for example, to prevent an English stemmer dictionary from reducing the word “Paris” to “pari”. It is enough to have a `Paris paris` line in the synonym dictionary and put it before the `english_stem` dictionary. For example:
+This dictionary template is used to create dictionaries that replace a word with a synonym. Phrases are not supported (use the thesaurus template ([Section 12.6.4](textsearch-dictionaries#TEXTSEARCH-THESAURUS "12.6.4. Thesaurus Dictionary")) for that). A synonym dictionary can be used to overcome linguistic problems, for example, to prevent an English stemmer dictionary from reducing the word “Paris” to “pari”. It is enough to have a `Paris paris` line in the synonym dictionary and put it before the `english_stem` dictionary. For example:
 
 ```
 
@@ -161,7 +161,7 @@ The only parameter required by the `synonym` template is `SYNONYMS`, which is th
 
 The `synonym` template also has an optional parameter `CaseSensitive`, which defaults to `false`. When `CaseSensitive` is `false`, words in the synonym file are folded to lower case, as are input tokens. When it is `true`, words and tokens are not folded to lower case, but are compared as-is.
 
-An asterisk (`*`) can be placed at the end of a synonym in the configuration file. This indicates that the synonym is a prefix. The asterisk is ignored when the entry is used in `to_tsvector()`, but when it is used in `to_tsquery()`, the result will be a query item with the prefix match marker (see [Section 12.3.2](textsearch-controls.html#TEXTSEARCH-PARSING-QUERIES "12.3.2. Parsing Queries")). For example, suppose we have these entries in `$SHAREDIR/tsearch_data/synonym_sample.syn`:
+An asterisk (`*`) can be placed at the end of a synonym in the configuration file. This indicates that the synonym is a prefix. The asterisk is ignored when the entry is used in `to_tsvector()`, but when it is used in `to_tsquery()`, the result will be a query item with the prefix match marker (see [Section 12.3.2](textsearch-controls#TEXTSEARCH-PARSING-QUERIES "12.3.2. Parsing Queries")). For example, suppose we have these entries in `$SHAREDIR/tsearch_data/synonym_sample.syn`:
 
 ```
 

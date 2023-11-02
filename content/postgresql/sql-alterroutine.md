@@ -33,7 +33,7 @@ where action is one of:
 
 ## Description
 
-`ALTER ROUTINE` changes the definition of a routine, which can be an aggregate function, a normal function, or a procedure. See under [ALTER AGGREGATE](sql-alteraggregate.html "ALTER AGGREGATE"), [ALTER FUNCTION](sql-alterfunction.html "ALTER FUNCTION"), and [ALTER PROCEDURE](sql-alterprocedure.html "ALTER PROCEDURE") for the description of the parameters, more examples, and further details.
+`ALTER ROUTINE` changes the definition of a routine, which can be an aggregate function, a normal function, or a procedure. See under [ALTER AGGREGATE](sql-alteraggregate "ALTER AGGREGATE"), [ALTER FUNCTION](sql-alterfunction "ALTER FUNCTION"), and [ALTER PROCEDURE](sql-alterprocedure "ALTER PROCEDURE") for the description of the parameters, more examples, and further details.
 
 ## Examples
 
@@ -48,10 +48,10 @@ This command will work independent of whether `foo` is an aggregate, function, o
 
 ## Compatibility
 
-This statement is partially compatible with the `ALTER ROUTINE` statement in the SQL standard. See under [ALTER FUNCTION](sql-alterfunction.html "ALTER FUNCTION") and [ALTER PROCEDURE](sql-alterprocedure.html "ALTER PROCEDURE") for more details. Allowing routine names to refer to aggregate functions is a PostgreSQL extension.
+This statement is partially compatible with the `ALTER ROUTINE` statement in the SQL standard. See under [ALTER FUNCTION](sql-alterfunction "ALTER FUNCTION") and [ALTER PROCEDURE](sql-alterprocedure "ALTER PROCEDURE") for more details. Allowing routine names to refer to aggregate functions is a PostgreSQL extension.
 
 ## See Also
 
-[ALTER AGGREGATE](sql-alteraggregate.html "ALTER AGGREGATE"), [ALTER FUNCTION](sql-alterfunction.html "ALTER FUNCTION"), [ALTER PROCEDURE](sql-alterprocedure.html "ALTER PROCEDURE"), [DROP ROUTINE](sql-droproutine.html "DROP ROUTINE")
+[ALTER AGGREGATE](sql-alteraggregate "ALTER AGGREGATE"), [ALTER FUNCTION](sql-alterfunction "ALTER FUNCTION"), [ALTER PROCEDURE](sql-alterprocedure "ALTER PROCEDURE"), [DROP ROUTINE](sql-droproutine "DROP ROUTINE")
 
 Note that there is no `CREATE ROUTINE` command.

@@ -1,8 +1,8 @@
 ## 12.8. Testing and Debugging Text Search [#](#TEXTSEARCH-DEBUGGING)
 
-  * *   [12.8.1. Configuration Testing](textsearch-debugging.html#TEXTSEARCH-CONFIGURATION-TESTING)
-  * [12.8.2. Parser Testing](textsearch-debugging.html#TEXTSEARCH-PARSER-TESTING)
-  * [12.8.3. Dictionary Testing](textsearch-debugging.html#TEXTSEARCH-DICTIONARY-TESTING)
+  * *   [12.8.1. Configuration Testing](textsearch-debugging#TEXTSEARCH-CONFIGURATION-TESTING)
+  * [12.8.2. Parser Testing](textsearch-debugging#TEXTSEARCH-PARSER-TESTING)
+  * [12.8.3. Dictionary Testing](textsearch-debugging#TEXTSEARCH-DICTIONARY-TESTING)
 
 The behavior of a custom text search configuration can easily become confusing. The functions described in this section are useful for testing text search objects. You can test a complete configuration, or test parsers and dictionaries separately.
 
@@ -97,7 +97,7 @@ SELECT * FROM ts_debug('public.english', 'The Brightest supernovaes');
 
 In this example, the word `Brightest` was recognized by the parser as an `ASCII word` (alias `asciiword`). For this token type the dictionary list is `english_ispell` and `english_stem`. The word was recognized by `english_ispell`, which reduced it to the noun `bright`. The word `supernovaes` is unknown to the `english_ispell` dictionary so it was passed to the next dictionary, and, fortunately, was recognized (in fact, `english_stem` is a Snowball dictionary which recognizes everything; that is why it was placed at the end of the dictionary list).
 
-The word `The` was recognized by the `english_ispell` dictionary as a stop word ([Section 12.6.1](textsearch-dictionaries.html#TEXTSEARCH-STOPWORDS "12.6.1. Stop Words")) and will not be indexed. The spaces are discarded too, since the configuration provides no dictionaries at all for them.
+The word `The` was recognized by the `english_ispell` dictionary as a stop word ([Section 12.6.1](textsearch-dictionaries#TEXTSEARCH-STOPWORDS "12.6.1. Stop Words")) and will not be indexed. The spaces are discarded too, since the configuration provides no dictionaries at all for them.
 
 You can reduce the width of the output by explicitly specifying which columns you want to see:
 

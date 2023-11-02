@@ -1,11 +1,11 @@
 ## F.23. ltree — hierarchical tree-like data type [#](#LTREE)
 
-  * *   [F.23.1. Definitions](ltree.html#LTREE-DEFINITIONS)
-  * [F.23.2. Operators and Functions](ltree.html#LTREE-OPS-FUNCS)
-  * [F.23.3. Indexes](ltree.html#LTREE-INDEXES)
-  * [F.23.4. Example](ltree.html#LTREE-EXAMPLE)
-  * [F.23.5. Transforms](ltree.html#LTREE-TRANSFORMS)
-  * [F.23.6. Authors](ltree.html#LTREE-AUTHORS)
+  * *   [F.23.1. Definitions](ltree#LTREE-DEFINITIONS)
+  * [F.23.2. Operators and Functions](ltree#LTREE-OPS-FUNCS)
+  * [F.23.3. Indexes](ltree#LTREE-INDEXES)
+  * [F.23.4. Example](ltree#LTREE-EXAMPLE)
+  * [F.23.5. Transforms](ltree#LTREE-TRANSFORMS)
+  * [F.23.6. Authors](ltree#LTREE-AUTHORS)
 
 This module implements a data type `ltree` for representing labels of data stored in a hierarchical tree-like structure. Extensive facilities for searching through label trees are provided.
 
@@ -92,7 +92,7 @@ Note: `ltxtquery` allows whitespace between symbols, but `ltree` and `lquery` do
 
 ### F.23.2. Operators and Functions [#](#LTREE-OPS-FUNCS)
 
-Type `ltree` has the usual comparison operators `=`, `<>`, `<`, `>`, `<=`, `>=`. Comparison sorts in the order of a tree traversal, with the children of a node sorted by label text. In addition, the specialized operators shown in [Table F.13](ltree.html#LTREE-OP-TABLE "Table F.13. ltree Operators") are available.
+Type `ltree` has the usual comparison operators `=`, `<>`, `<`, `>`, `<=`, `>=`. Comparison sorts in the order of a tree traversal, with the children of a node sorted by label text. In addition, the specialized operators shown in [Table F.13](ltree#LTREE-OP-TABLE "Table F.13. ltree Operators") are available.
 
 **Table F.13. `ltree` Operators**
 
@@ -119,7 +119,7 @@ Type `ltree` has the usual comparison operators `=`, `<>`, `<`, `>`, `<=`, `>=`.
 
 The operators `<@`, `@>`, `@` and `~` have analogues `^<@`, `^@>`, `^@`, `^~`, which are the same except they do not use indexes. These are useful only for testing purposes.
 
-The available functions are shown in [Table F.14](ltree.html#LTREE-FUNC-TABLE "Table F.14. ltree Functions").
+The available functions are shown in [Table F.14](ltree#LTREE-FUNC-TABLE "Table F.14. ltree Functions").
 
 **Table F.14. `ltree` Functions**
 

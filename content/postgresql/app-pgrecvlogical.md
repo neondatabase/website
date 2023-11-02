@@ -10,9 +10,9 @@ pg\_recvlogical — control PostgreSQL logical decoding streams
 
 `pg_recvlogical` controls logical decoding replication slots and streams data from such replication slots.
 
-It creates a replication-mode connection, so it is subject to the same constraints as [pg\_receivewal](app-pgreceivewal.html "pg_receivewal"), plus those for logical replication (see [Chapter 49](logicaldecoding.html "Chapter 49. Logical Decoding")).
+It creates a replication-mode connection, so it is subject to the same constraints as [pg\_receivewal](app-pgreceivewal "pg_receivewal"), plus those for logical replication (see [Chapter 49](logicaldecoding "Chapter 49. Logical Decoding")).
 
-`pg_recvlogical` has no equivalent to the logical decoding SQL interface's peek and get modes. It sends replay confirmations for data lazily as it receives it and on clean exit. To examine pending data on a slot without consuming it, use [`pg_logical_slot_peek_changes`](functions-admin.html#FUNCTIONS-REPLICATION "9.27.6. Replication Management Functions").
+`pg_recvlogical` has no equivalent to the logical decoding SQL interface's peek and get modes. It sends replay confirmations for data lazily as it receives it and on clean exit. To examine pending data on a slot without consuming it, use [`pg_logical_slot_peek_changes`](functions-admin#FUNCTIONS-REPLICATION "9.27.6. Replication Management Functions").
 
 In the absence of fatal errors, pg\_recvlogical will run until terminated by the SIGINT (**Control**+**C**) or SIGTERM signal.
 
@@ -64,7 +64,7 @@ The following command-line options control the location and format of the output
 
 * `-I lsn``--startpos=lsn`
 
-    In `--start` mode, start replication from the given LSN. For details on the effect of this, see the documentation in [Chapter 49](logicaldecoding.html "Chapter 49. Logical Decoding") and [Section 55.4](protocol-replication.html "55.4. Streaming Replication Protocol"). Ignored in other modes.
+    In `--start` mode, start replication from the given LSN. For details on the effect of this, see the documentation in [Chapter 49](logicaldecoding "Chapter 49. Logical Decoding") and [Section 55.4](protocol-replication "55.4. Streaming Replication Protocol"). Ignored in other modes.
 
 * `--if-not-exists`
 
@@ -80,11 +80,11 @@ The following command-line options control the location and format of the output
 
 * `-P plugin``--plugin=plugin`
 
-    When creating a slot, use the specified logical decoding output plugin. See [Chapter 49](logicaldecoding.html "Chapter 49. Logical Decoding"). This option has no effect if the slot already exists.
+    When creating a slot, use the specified logical decoding output plugin. See [Chapter 49](logicaldecoding "Chapter 49. Logical Decoding"). This option has no effect if the slot already exists.
 
 * `-s interval_seconds``--status-interval=interval_seconds`
 
-    This option has the same effect as the option of the same name in [pg\_receivewal](app-pgreceivewal.html "pg_receivewal"). See the description there.
+    This option has the same effect as the option of the same name in [pg\_receivewal](app-pgreceivewal "pg_receivewal"). See the description there.
 
 * `-S slot_name``--slot=slot_name`
 
@@ -102,7 +102,7 @@ The following command-line options control the database connection parameters.
 
 * `-d dbname``--dbname=dbname`
 
-    The database to connect to. See the description of the actions for what this means in detail. The *`dbname`* can be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options. Defaults to the user name.
+    The database to connect to. See the description of the actions for what this means in detail. The *`dbname`* can be a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options. Defaults to the user name.
 
 * `-h hostname-or-ip``--host=hostname-or-ip`
 
@@ -142,7 +142,7 @@ pg\_recvlogical will exit with status 0 when terminated by the SIGINT or SIGTERM
 
 ## Environment
 
-This utility, like most other PostgreSQL utilities, uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 The environment variable `PG_COLOR` specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 
@@ -152,8 +152,8 @@ pg\_recvlogical will preserve group permissions on the received WAL files if gro
 
 ## Examples
 
-See [Section 49.1](logicaldecoding-example.html "49.1. Logical Decoding Examples") for an example.
+See [Section 49.1](logicaldecoding-example "49.1. Logical Decoding Examples") for an example.
 
 ## See Also
 
-[pg\_receivewal](app-pgreceivewal.html "pg_receivewal")
+[pg\_receivewal](app-pgreceivewal "pg_receivewal")

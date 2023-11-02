@@ -32,7 +32,7 @@ This command has two forms: The first form retrieves descriptor “header” ite
 
 * *`descriptor_item`* [#](#ECPG-SQL-GET-DESCRIPTOR-DESCRIPTOR-ITEM)
 
-    A token identifying which item of information about a column to retrieve. See [Section 36.7.1](ecpg-descriptors.html#ECPG-NAMED-DESCRIPTORS "36.7.1. Named SQL Descriptor Areas") for a list of supported items.
+    A token identifying which item of information about a column to retrieve. See [Section 36.7.1](ecpg-descriptors#ECPG-NAMED-DESCRIPTORS "36.7.1. Named SQL Descriptor Areas") for a list of supported items.
 
 * *`cvariable`* [#](#ECPG-SQL-GET-DESCRIPTOR-CVARIABLE)
 
@@ -121,4 +121,4 @@ d_data                  = testdb
 
 ## See Also
 
-[ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor.html "ALLOCATE DESCRIPTOR"), [SET DESCRIPTOR](ecpg-sql-set-descriptor.html "SET DESCRIPTOR")
+[ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor "ALLOCATE DESCRIPTOR"), [SET DESCRIPTOR](ecpg-sql-set-descriptor "SET DESCRIPTOR")

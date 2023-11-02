@@ -1,10 +1,10 @@
 ## J.2. Tool Sets [#](#DOCGUIDE-TOOLSETS)
 
-  * *   [J.2.1. Installation on Fedora, RHEL, and Derivatives](docguide-toolsets.html#DOCGUIDE-TOOLSETS-INST-FEDORA-ET-AL)
-  * [J.2.2. Installation on FreeBSD](docguide-toolsets.html#DOCGUIDE-TOOLSETS-INST-FREEBSD)
-  * [J.2.3. Debian Packages](docguide-toolsets.html#DOCGUIDE-TOOLSETS-INST-DEBIAN)
-  * [J.2.4. macOS](docguide-toolsets.html#DOCGUIDE-TOOLSETS-INST-MACOS)
-  * [J.2.5. Detection by `configure`](docguide-toolsets.html#DOCGUIDE-TOOLSETS-CONFIGURE)
+  * *   [J.2.1. Installation on Fedora, RHEL, and Derivatives](docguide-toolsets#DOCGUIDE-TOOLSETS-INST-FEDORA-ET-AL)
+  * [J.2.2. Installation on FreeBSD](docguide-toolsets#DOCGUIDE-TOOLSETS-INST-FREEBSD)
+  * [J.2.3. Debian Packages](docguide-toolsets#DOCGUIDE-TOOLSETS-INST-DEBIAN)
+  * [J.2.4. macOS](docguide-toolsets#DOCGUIDE-TOOLSETS-INST-MACOS)
+  * [J.2.5. Detection by `configure`](docguide-toolsets#DOCGUIDE-TOOLSETS-CONFIGURE)
 
 The following tools are used to process the documentation. Some might be optional, as noted.
 
@@ -123,4 +123,4 @@ If necessary, you can tell `configure` where to find these programs, for example
 ./configure ... XMLLINT=/opt/local/bin/xmllint ...
 ```
 
-If you prefer to build PostgreSQL using Meson, instead run `meson setup` as described in [Section 17.4](install-meson.html "17.4. Building and Installation with Meson"), and then see [Section J.4](docguide-build-meson.html "J.4. Building the Documentation with Meson").
+If you prefer to build PostgreSQL using Meson, instead run `meson setup` as described in [Section 17.4](install-meson "17.4. Building and Installation with Meson"), and then see [Section J.4](docguide-build-meson "J.4. Building the Documentation with Meson").

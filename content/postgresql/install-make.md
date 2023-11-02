@@ -1,9 +1,9 @@
 ## 17.3. Building and Installation with Autoconf and Make [#](#INSTALL-MAKE)
 
-  * *   [17.3.1. Short Version](install-make.html#INSTALL-SHORT-MAKE)
-  * [17.3.2. Installation Procedure](install-make.html#INSTALL-PROCEDURE-MAKE)
-  * [17.3.3. `configure` Options](install-make.html#CONFIGURE-OPTIONS)
-  * [17.3.4. `configure` Environment Variables](install-make.html#CONFIGURE-ENVVARS)
+  * *   [17.3.1. Short Version](install-make#INSTALL-SHORT-MAKE)
+  * [17.3.2. Installation Procedure](install-make#INSTALL-PROCEDURE-MAKE)
+  * [17.3.3. `configure` Options](install-make#CONFIGURE-OPTIONS)
+  * [17.3.4. `configure` Environment Variables](install-make#CONFIGURE-ENVVARS)
 
 ### 17.3.1. Short Version [#](#INSTALL-SHORT-MAKE)
 
@@ -50,9 +50,9 @@ The long version is the rest of this section.
 
     The default configuration will build the server and utilities, as well as all client applications and interfaces that require only a C compiler. All files will be installed under `/usr/local/pgsql` by default.
 
-    You can customize the build and installation process by supplying one or more command line options to `configure`. Typically you would customize the install location, or the set of optional features that are built. `configure` has a large number of options, which are described in [Section 17.3.3](install-make.html#CONFIGURE-OPTIONS "17.3.3. configure Options").
+    You can customize the build and installation process by supplying one or more command line options to `configure`. Typically you would customize the install location, or the set of optional features that are built. `configure` has a large number of options, which are described in [Section 17.3.3](install-make#CONFIGURE-OPTIONS "17.3.3. configure Options").
 
-    Also, `configure` responds to certain environment variables, as described in [Section 17.3.4](install-make.html#CONFIGURE-ENVVARS "17.3.4. configure Environment Variables"). These provide additional ways to customize the configuration.
+    Also, `configure` responds to certain environment variables, as described in [Section 17.3.4](install-make#CONFIGURE-ENVVARS "17.3.4. configure Environment Variables"). These provide additional ways to customize the configuration.
 
 2. **Build**
 
@@ -99,13 +99,13 @@ The long version is the rest of this section.
     make check
     ```
 
-    (This won't work as root; do it as an unprivileged user.) See [Chapter 33](regress.html "Chapter 33. Regression Tests") for detailed information about interpreting the test results. You can repeat this test at any later time by issuing the same command.
+    (This won't work as root; do it as an unprivileged user.) See [Chapter 33](regress "Chapter 33. Regression Tests") for detailed information about interpreting the test results. You can repeat this test at any later time by issuing the same command.
 
 4. **Installing the Files**
 
 ### Note
 
-    If you are upgrading an existing system be sure to read [Section 19.6](upgrading.html "19.6. Upgrading a PostgreSQL Cluster"), which has instructions about upgrading a cluster.
+    If you are upgrading an existing system be sure to read [Section 19.6](upgrading "19.6. Upgrading a PostgreSQL Cluster"), which has instructions about upgrading a cluster.
 
     To install PostgreSQL enter:
 
@@ -114,7 +114,7 @@ The long version is the rest of this section.
     make install
     ```
 
-    This will install files into the directories that were specified in [Step 1](install-make.html#CONFIGURE "Configuration"). Make sure that you have appropriate permissions to write into that area. Normally you need to do this step as root. Alternatively, you can create the target directories in advance and arrange for appropriate permissions to be granted.
+    This will install files into the directories that were specified in [Step 1](install-make#CONFIGURE "Configuration"). Make sure that you have appropriate permissions to write into that area. Normally you need to do this step as root. Alternatively, you can create the target directories in advance and arrange for appropriate permissions to be granted.
 
     To install the documentation (HTML and man pages), enter:
 
@@ -223,7 +223,7 @@ Care has been taken to make it possible to install PostgreSQL into shared instal
 
 #### 17.3.3.2. PostgreSQL Features [#](#CONFIGURE-OPTIONS-FEATURES)
 
-The options described in this section enable building of various PostgreSQL features that are not built by default. Most of these are non-default only because they require additional software, as described in [Section 17.1](install-requirements.html "17.1. Requirements").
+The options described in this section enable building of various PostgreSQL features that are not built by default. Most of these are non-default only because they require additional software, as described in [Section 17.1](install-requirements "17.1. Requirements").
 
 * `--enable-nls[=LANGUAGES]` [#](#CONFIGURE-OPTION-ENABLE-NLS)
 
@@ -249,7 +249,7 @@ The options described in this section enable building of various PostgreSQL feat
 
 * `--with-llvm` [#](#CONFIGURE-WITH-LLVM)
 
-    Build with support for LLVM based JIT compilation (see [Chapter 32](jit.html "Chapter 32. Just-in-Time Compilation (JIT)")). This requires the LLVM library to be installed. The minimum required version of LLVM is currently 3.9.
+    Build with support for LLVM based JIT compilation (see [Chapter 32](jit "Chapter 32. Just-in-Time Compilation (JIT)")). This requires the LLVM library to be installed. The minimum required version of LLVM is currently 3.9.
 
     `llvm-config` will be used to find the required compilation options. `llvm-config`, and then `llvm-config-$major-$minor` for all supported versions, will be searched for in your `PATH`. If that would not yield the desired program, use `LLVM_CONFIG` to specify a path to the correct `llvm-config`. For example
 
@@ -282,7 +282,7 @@ The options described in this section enable building of various PostgreSQL feat
 
 * `--with-ldap` [#](#CONFIGURE-OPTION-WITH-LDAP)
 
-    Build with LDAP support for authentication and connection parameter lookup (see [Section 34.18](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters") and [Section 21.10](auth-ldap.html "21.10. LDAP Authentication") for more information). On Unix, this requires the OpenLDAP package to be installed. On Windows, the default WinLDAP library is used. `configure` will check for the required header files and libraries to make sure that your OpenLDAP installation is sufficient before proceeding.
+    Build with LDAP support for authentication and connection parameter lookup (see [Section 34.18](libpq-ldap "34.18. LDAP Lookup of Connection Parameters") and [Section 21.10](auth-ldap "21.10. LDAP Authentication") for more information). On Unix, this requires the OpenLDAP package to be installed. On Windows, the default WinLDAP library is used. `configure` will check for the required header files and libraries to make sure that your OpenLDAP installation is sufficient before proceeding.
 
 * `--with-pam` [#](#CONFIGURE-OPTION-WITH-PAM)
 
@@ -294,7 +294,7 @@ The options described in this section enable building of various PostgreSQL feat
 
 * `--with-systemd` [#](#CONFIGURE-OPTION-WITH-SYSTEMD)
 
-    Build with support for systemd service notifications. This improves integration if the server is started under systemd but has no impact otherwise; see [Section 19.3](server-start.html "19.3. Starting the Database Server") for more information. libsystemd and the associated header files need to be installed to use this option.
+    Build with support for systemd service notifications. This improves integration if the server is started under systemd but has no impact otherwise; see [Section 19.3](server-start "19.3. Starting the Database Server") for more information. libsystemd and the associated header files need to be installed to use this option.
 
 * `--with-bonjour` [#](#CONFIGURE-OPTION-WITH-BONJOUR)
 
@@ -302,7 +302,7 @@ The options described in this section enable building of various PostgreSQL feat
 
 * `--with-uuid=LIBRARY` [#](#CONFIGURE-OPTION-WITH-UUID)
 
-    Build the [uuid-ossp](uuid-ossp.html "F.48. uuid-ossp — a UUID generator") module (which provides functions to generate UUIDs), using the specified UUID library. *`LIBRARY`* must be one of:
+    Build the [uuid-ossp](uuid-ossp "F.48. uuid-ossp — a UUID generator") module (which provides functions to generate UUIDs), using the specified UUID library. *`LIBRARY`* must be one of:
 
   * `bsd` to use the UUID functions found in FreeBSD and some other BSD-derived systems
   * `e2fs` to use the UUID library created by the `e2fsprogs` project; this library is present in most Linux systems and in macOS, and can be obtained for other platforms as well
@@ -322,7 +322,7 @@ The options described in this section enable building of various PostgreSQL feat
 
 * `--with-libxslt` [#](#CONFIGURE-OPTION-WITH-LIBXSLT)
 
-    Build with libxslt, enabling the [xml2](xml2.html "F.49. xml2 — XPath querying and XSLT functionality") module to perform XSL transformations of XML. `--with-libxml` must be specified as well.
+    Build with libxslt, enabling the [xml2](xml2 "F.49. xml2 — XPath querying and XSLT functionality") module to perform XSL transformations of XML. `--with-libxml` must be specified as well.
 
 #### 17.3.3.3. Anti-Features [#](#CONFIGURE-OPTIONS-ANTI-FEATURES)
 
@@ -330,7 +330,7 @@ The options described in this section allow disabling certain PostgreSQL feature
 
 * `--without-icu` [#](#CONFIGURE-OPTION-WITHOUT-ICU)
 
-    Build without support for the ICU library, disabling the use of ICU collation features (see [Section 24.2](collation.html "24.2. Collation Support")).
+    Build without support for the ICU library, disabling the use of ICU collation features (see [Section 24.2](collation "24.2. Collation Support")).
 
 * `--without-readline` [#](#CONFIGURE-OPTION-WITHOUT-READLINE)
 
@@ -378,7 +378,7 @@ The options described in this section allow disabling certain PostgreSQL feature
 
 * `--disable-rpath` [#](#CONFIGURE-OPTION-DISABLE-RPATH)
 
-    Do not mark PostgreSQL's executables to indicate that they should search for shared libraries in the installation's library directory (see `--libdir`). On most platforms, this marking uses an absolute path to the library directory, so that it will be unhelpful if you relocate the installation later. However, you will then need to provide some other way for the executables to find the shared libraries. Typically this requires configuring the operating system's dynamic linker to search the library directory; see [Section 17.5.1](install-post.html#INSTALL-POST-SHLIBS "17.5.1. Shared Libraries") for more detail.
+    Do not mark PostgreSQL's executables to indicate that they should search for shared libraries in the installation's library directory (see `--libdir`). On most platforms, this marking uses an absolute path to the library directory, so that it will be unhelpful if you relocate the installation later. However, you will then need to provide some other way for the executables to find the shared libraries. Typically this requires configuring the operating system's dynamic linker to search the library directory; see [Section 17.5.1](install-post#INSTALL-POST-SHLIBS "17.5.1. Shared Libraries") for more detail.
 
 #### 17.3.3.5. Miscellaneous [#](#CONFIGURE-OPTIONS-MISC)
 
@@ -420,7 +420,7 @@ When building an installation that will be used to develop code inside the serve
 
 * `--enable-tap-tests` [#](#CONFIGURE-OPTION-ENABLE-TAP-TESTS)
 
-    Enable tests using the Perl TAP tools. This requires a Perl installation and the Perl module `IPC::Run`. See [Section 33.4](regress-tap.html "33.4. TAP Tests") for more information.
+    Enable tests using the Perl TAP tools. This requires a Perl installation and the Perl module `IPC::Run`. See [Section 33.4](regress-tap "33.4. TAP Tests") for more information.
 
 * `--enable-depend` [#](#CONFIGURE-OPTION-ENABLE-DEPEND)
 
@@ -428,7 +428,7 @@ When building an installation that will be used to develop code inside the serve
 
 * `--enable-coverage` [#](#CONFIGURE-OPTION-ENABLE-COVERAGE)
 
-    If using GCC, all programs and libraries are compiled with code coverage testing instrumentation. When run, they generate files in the build directory with code coverage metrics. See [Section 33.5](regress-coverage.html "33.5. Test Coverage Examination") for more information. This option is for use only with GCC and when doing development work.
+    If using GCC, all programs and libraries are compiled with code coverage testing instrumentation. When run, they generate files in the build directory with code coverage metrics. See [Section 33.5](regress-coverage "33.5. Test Coverage Examination") for more information. This option is for use only with GCC and when doing development work.
 
 * `--enable-profiling` [#](#CONFIGURE-OPTION-ENABLE-PROFILING)
 
@@ -436,7 +436,7 @@ When building an installation that will be used to develop code inside the serve
 
 * `--enable-dtrace` [#](#CONFIGURE-OPTION-ENABLE-DTRACE)
 
-    Compiles PostgreSQL with support for the dynamic tracing tool DTrace. See [Section 28.5](dynamic-trace.html "28.5. Dynamic Tracing") for more information.
+    Compiles PostgreSQL with support for the dynamic tracing tool DTrace. See [Section 28.5](dynamic-trace "28.5. Dynamic Tracing") for more information.
 
     To point to the `dtrace` program, the environment variable `DTRACE` can be set. This will often be necessary because `dtrace` is typically installed under `/usr/sbin`, which might not be in your `PATH`.
 

@@ -1,13 +1,13 @@
 ## 14.2. Statistics Used by the Planner [#](#PLANNER-STATS)
 
-  * *   [14.2.1. Single-Column Statistics](planner-stats.html#PLANNER-STATS-SINGLE-COLUMN)
-  * [14.2.2. Extended Statistics](planner-stats.html#PLANNER-STATS-EXTENDED)
+  * *   [14.2.1. Single-Column Statistics](planner-stats#PLANNER-STATS-SINGLE-COLUMN)
+  * [14.2.2. Extended Statistics](planner-stats#PLANNER-STATS-EXTENDED)
 
 ### 14.2.1. Single-Column Statistics [#](#PLANNER-STATS-SINGLE-COLUMN)
 
 As we saw in the previous section, the query planner needs to estimate the number of rows retrieved by a query in order to make good choices of query plans. This section provides a quick look at the statistics that the system uses for these estimates.
 
-One component of the statistics is the total number of entries in each table and index, as well as the number of disk blocks occupied by each table and index. This information is kept in the table [`pg_class`](catalog-pg-class.html "53.11. pg_class"), in the columns `reltuples` and `relpages`. We can look at it with queries similar to this one:
+One component of the statistics is the total number of entries in each table and index, as well as the number of disk blocks occupied by each table and index. This information is kept in the table [`pg_class`](catalog-pg-class "53.11. pg_class"), in the columns `reltuples` and `relpages`. We can look at it with queries similar to this one:
 
 ```
 
@@ -29,9 +29,9 @@ Here we can see that `tenk1` contains 10000 rows, as do its indexes, but the ind
 
 For efficiency reasons, `reltuples` and `relpages` are not updated on-the-fly, and so they usually contain somewhat out-of-date values. They are updated by `VACUUM`, `ANALYZE`, and a few DDL commands such as `CREATE INDEX`. A `VACUUM` or `ANALYZE` operation that does not scan the entire table (which is commonly the case) will incrementally update the `reltuples` count on the basis of the part of the table it did scan, resulting in an approximate value. In any case, the planner will scale the values it finds in `pg_class` to match the current physical table size, thus obtaining a closer approximation.
 
-Most queries retrieve only a fraction of the rows in a table, due to `WHERE` clauses that restrict the rows to be examined. The planner thus needs to make an estimate of the *selectivity* of `WHERE` clauses, that is, the fraction of rows that match each condition in the `WHERE` clause. The information used for this task is stored in the [`pg_statistic`](catalog-pg-statistic.html "53.51. pg_statistic") system catalog. Entries in `pg_statistic` are updated by the `ANALYZE` and `VACUUM ANALYZE` commands, and are always approximate even when freshly updated.
+Most queries retrieve only a fraction of the rows in a table, due to `WHERE` clauses that restrict the rows to be examined. The planner thus needs to make an estimate of the *selectivity* of `WHERE` clauses, that is, the fraction of rows that match each condition in the `WHERE` clause. The information used for this task is stored in the [`pg_statistic`](catalog-pg-statistic "53.51. pg_statistic") system catalog. Entries in `pg_statistic` are updated by the `ANALYZE` and `VACUUM ANALYZE` commands, and are always approximate even when freshly updated.
 
-Rather than look at `pg_statistic` directly, it's better to look at its view [`pg_stats`](view-pg-stats.html "54.27. pg_stats") when examining the statistics manually. `pg_stats` is designed to be more easily readable. Furthermore, `pg_stats` is readable by all, whereas `pg_statistic` is only readable by a superuser. (This prevents unprivileged users from learning something about the contents of other people's tables from the statistics. The `pg_stats` view is restricted to show only rows about tables that the current user can read.) For example, we might do:
+Rather than look at `pg_statistic` directly, it's better to look at its view [`pg_stats`](view-pg-stats "54.27. pg_stats") when examining the statistics manually. `pg_stats` is designed to be more easily readable. Furthermore, `pg_stats` is readable by all, whereas `pg_statistic` is only readable by a superuser. (This prevents unprivileged users from learning something about the contents of other people's tables from the statistics. The `pg_stats` view is restricted to show only rows about tables that the current user can read.) For example, we might do:
 
 ```
 
@@ -57,9 +57,9 @@ WHERE tablename = 'road';
 
 Note that two rows are displayed for the same column, one corresponding to the complete inheritance hierarchy starting at the `road` table (`inherited`=`t`), and another one including only the `road` table itself (`inherited`=`f`).
 
-The amount of information stored in `pg_statistic` by `ANALYZE`, in particular the maximum number of entries in the `most_common_vals` and `histogram_bounds` arrays for each column, can be set on a column-by-column basis using the `ALTER TABLE SET STATISTICS` command, or globally by setting the [default\_statistics\_target](runtime-config-query.html#GUC-DEFAULT-STATISTICS-TARGET) configuration variable. The default limit is presently 100 entries. Raising the limit might allow more accurate planner estimates to be made, particularly for columns with irregular data distributions, at the price of consuming more space in `pg_statistic` and slightly more time to compute the estimates. Conversely, a lower limit might be sufficient for columns with simple data distributions.
+The amount of information stored in `pg_statistic` by `ANALYZE`, in particular the maximum number of entries in the `most_common_vals` and `histogram_bounds` arrays for each column, can be set on a column-by-column basis using the `ALTER TABLE SET STATISTICS` command, or globally by setting the [default\_statistics\_target](runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET) configuration variable. The default limit is presently 100 entries. Raising the limit might allow more accurate planner estimates to be made, particularly for columns with irregular data distributions, at the price of consuming more space in `pg_statistic` and slightly more time to compute the estimates. Conversely, a lower limit might be sufficient for columns with simple data distributions.
 
-Further details about the planner's use of statistics can be found in [Chapter 76](planner-stats-details.html "Chapter 76. How the Planner Uses Statistics").
+Further details about the planner's use of statistics can be found in [Chapter 76](planner-stats-details "Chapter 76. How the Planner Uses Statistics").
 
 ### 14.2.2. Extended Statistics [#](#PLANNER-STATS-EXTENDED)
 
@@ -67,7 +67,7 @@ It is common to see slow queries running bad execution plans because multiple co
 
 Because the number of possible column combinations is very large, it's impractical to compute multivariate statistics automatically. Instead, *extended statistics objects*, more often called just *statistics objects*, can be created to instruct the server to obtain statistics across interesting sets of columns.
 
-Statistics objects are created using the [`CREATE STATISTICS`](sql-createstatistics.html "CREATE STATISTICS") command. Creation of such an object merely creates a catalog entry expressing interest in the statistics. Actual data collection is performed by `ANALYZE` (either a manual command, or background auto-analyze). The collected values can be examined in the [`pg_statistic_ext_data`](catalog-pg-statistic-ext-data.html "53.53. pg_statistic_ext_data") catalog.
+Statistics objects are created using the [`CREATE STATISTICS`](sql-createstatistics "CREATE STATISTICS") command. Creation of such an object merely creates a catalog entry expressing interest in the statistics. Actual data collection is performed by `ANALYZE` (either a manual command, or background auto-analyze). The collected values can be examined in the [`pg_statistic_ext_data`](catalog-pg-statistic-ext-data "53.53. pg_statistic_ext_data") catalog.
 
 `ANALYZE` computes extended statistics based on the same sample of table rows that it takes for computing regular single-column statistics. Since the sample size is increased by increasing the statistics target for the table or any of its columns (as described in the previous section), a larger statistics target will normally result in more accurate extended statistics, as well as more time spent calculating them.
 

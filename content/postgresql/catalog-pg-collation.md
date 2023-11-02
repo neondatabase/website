@@ -1,6 +1,6 @@
 ## 53.12. `pg_collation` [#](#CATALOG-PG-COLLATION)
 
-The catalog `pg_collation` describes the available collations, which are essentially mappings from an SQL name to operating system locale categories. See [Section 24.2](collation.html "24.2. Collation Support") for more information.
+The catalog `pg_collation` describes the available collations, which are essentially mappings from an SQL name to operating system locale categories. See [Section 24.2](collation "24.2. Collation Support") for more information.
 
 **Table 53.12. `pg_collation` Columns**
 
@@ -8,8 +8,8 @@ The catalog `pg_collation` describes the available collations, which are essenti
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `oid` `oid`Row identifier                                                                                                                                                                                                          |
 | `collname` `name`Collation name (unique per namespace and encoding)                                                                                                                                                                |
-| `collnamespace` `oid` (references [`pg_namespace`](catalog-pg-namespace.html "53.32. pg_namespace").`oid`)The OID of the namespace that contains this collation                                                                    |
-| `collowner` `oid` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`oid`)Owner of the collation                                                                                                                 |
+| `collnamespace` `oid` (references [`pg_namespace`](catalog-pg-namespace "53.32. pg_namespace").`oid`)The OID of the namespace that contains this collation                                                                    |
+| `collowner` `oid` (references [`pg_authid`](catalog-pg-authid "53.8. pg_authid").`oid`)Owner of the collation                                                                                                                 |
 | `collprovider` `char`Provider of the collation: `d` = database default, `c` = libc, `i` = icu                                                                                                                                      |
 | `collisdeterministic` `bool`Is the collation deterministic?                                                                                                                                                                        |
 | `collencoding` `int4`Encoding in which the collation is applicable, or -1 if it works for any encoding                                                                                                                             |

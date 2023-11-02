@@ -1,11 +1,11 @@
 ## 9.24. Row and Array Comparisons [#](#FUNCTIONS-COMPARISONS)
 
-  * *   [9.24.1. `IN`](functions-comparisons.html#FUNCTIONS-COMPARISONS-IN-SCALAR)
-  * [9.24.2. `NOT IN`](functions-comparisons.html#FUNCTIONS-COMPARISONS-NOT-IN)
-  * [9.24.3. `ANY`/`SOME` (array)](functions-comparisons.html#FUNCTIONS-COMPARISONS-ANY-SOME)
-  * [9.24.4. `ALL` (array)](functions-comparisons.html#FUNCTIONS-COMPARISONS-ALL)
-  * [9.24.5. Row Constructor Comparison](functions-comparisons.html#ROW-WISE-COMPARISON)
-  * [9.24.6. Composite Type Comparison](functions-comparisons.html#COMPOSITE-TYPE-COMPARISON)
+  * *   [9.24.1. `IN`](functions-comparisons#FUNCTIONS-COMPARISONS-IN-SCALAR)
+  * [9.24.2. `NOT IN`](functions-comparisons#FUNCTIONS-COMPARISONS-NOT-IN)
+  * [9.24.3. `ANY`/`SOME` (array)](functions-comparisons#FUNCTIONS-COMPARISONS-ANY-SOME)
+  * [9.24.4. `ALL` (array)](functions-comparisons#FUNCTIONS-COMPARISONS-ALL)
+  * [9.24.5. Row Constructor Comparison](functions-comparisons#ROW-WISE-COMPARISON)
+  * [9.24.6. Composite Type Comparison](functions-comparisons#COMPOSITE-TYPE-COMPARISON)
 
 This section describes several specialized constructs for making multiple comparisons between groups of values. These forms are syntactically related to the subquery forms of the previous section, but do not involve subqueries. The forms involving array subexpressions are PostgreSQL extensions; the rest are SQL-compliant. All of the expression forms documented in this section return Boolean (true/false) results.
 
@@ -85,7 +85,7 @@ If the array expression yields a null array, the result of `ALL` will be null. I
 row_constructor operator row_constructor
 ```
 
-Each side is a row constructor, as described in [Section 4.2.13](sql-expressions.html#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors"). The two row constructors must have the same number of fields. The given *`operator`* is applied to each pair of corresponding fields. (Since the fields could be of different types, this means that a different specific operator could be selected for each pair.) All the selected operators must be members of some B-tree operator class, or be the negator of an `=` member of a B-tree operator class, meaning that row constructor comparison is only possible when the *`operator`* is `=`, `<>`, `<`, `<=`, `>`, or `>=`, or has semantics similar to one of these.
+Each side is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors"). The two row constructors must have the same number of fields. The given *`operator`* is applied to each pair of corresponding fields. (Since the fields could be of different types, this means that a different specific operator could be selected for each pair.) All the selected operators must be members of some B-tree operator class, or be the negator of an `=` member of a B-tree operator class, meaning that row constructor comparison is only possible when the *`operator`* is `=`, `<>`, `<`, `<=`, `>`, or `>=`, or has semantics similar to one of these.
 
 The `=` and `<>` cases work slightly differently from the others. Two rows are considered equal if all their corresponding members are non-null and equal; the rows are unequal if any corresponding members are non-null and unequal; otherwise the result of the row comparison is unknown (null).
 
@@ -112,8 +112,8 @@ This construct is similar to a `=` row comparison, but it does not yield null fo
 record operator record
 ```
 
-The SQL specification requires row-wise comparison to return NULL if the result depends on comparing two NULL values or a NULL and a non-NULL. PostgreSQL does this only when comparing the results of two row constructors (as in [Section 9.24.5](functions-comparisons.html#ROW-WISE-COMPARISON "9.24.5. Row Constructor Comparison")) or comparing a row constructor to the output of a subquery (as in [Section 9.23](functions-subquery.html "9.23. Subquery Expressions")). In other contexts where two composite-type values are compared, two NULL field values are considered equal, and a NULL is considered larger than a non-NULL. This is necessary in order to have consistent sorting and indexing behavior for composite types.
+The SQL specification requires row-wise comparison to return NULL if the result depends on comparing two NULL values or a NULL and a non-NULL. PostgreSQL does this only when comparing the results of two row constructors (as in [Section 9.24.5](functions-comparisons#ROW-WISE-COMPARISON "9.24.5. Row Constructor Comparison")) or comparing a row constructor to the output of a subquery (as in [Section 9.23](functions-subquery "9.23. Subquery Expressions")). In other contexts where two composite-type values are compared, two NULL field values are considered equal, and a NULL is considered larger than a non-NULL. This is necessary in order to have consistent sorting and indexing behavior for composite types.
 
-Each side is evaluated and they are compared row-wise. Composite type comparisons are allowed when the *`operator`* is `=`, `<>`, `<`, `<=`, `>` or `>=`, or has semantics similar to one of these. (To be specific, an operator can be a row comparison operator if it is a member of a B-tree operator class, or is the negator of the `=` member of a B-tree operator class.) The default behavior of the above operators is the same as for `IS [ NOT ] DISTINCT FROM` for row constructors (see [Section 9.24.5](functions-comparisons.html#ROW-WISE-COMPARISON "9.24.5. Row Constructor Comparison")).
+Each side is evaluated and they are compared row-wise. Composite type comparisons are allowed when the *`operator`* is `=`, `<>`, `<`, `<=`, `>` or `>=`, or has semantics similar to one of these. (To be specific, an operator can be a row comparison operator if it is a member of a B-tree operator class, or is the negator of the `=` member of a B-tree operator class.) The default behavior of the above operators is the same as for `IS [ NOT ] DISTINCT FROM` for row constructors (see [Section 9.24.5](functions-comparisons#ROW-WISE-COMPARISON "9.24.5. Row Constructor Comparison")).
 
-To support matching of rows which include elements without a default B-tree operator class, the following operators are defined for composite type comparison: `*=`, `*<>`, `*<`, `*<=`, `*>`, and `*>=`. These operators compare the internal binary representation of the two rows. Two rows might have a different binary representation even though comparisons of the two rows with the equality operator is true. The ordering of rows under these comparison operators is deterministic but not otherwise meaningful. These operators are used internally for materialized views and might be useful for other specialized purposes such as replication and B-Tree deduplication (see [Section 67.4.3](btree-implementation.html#BTREE-DEDUPLICATION "67.4.3. Deduplication")). They are not intended to be generally useful for writing queries, though.
+To support matching of rows which include elements without a default B-tree operator class, the following operators are defined for composite type comparison: `*=`, `*<>`, `*<`, `*<=`, `*>`, and `*>=`. These operators compare the internal binary representation of the two rows. Two rows might have a different binary representation even though comparisons of the two rows with the equality operator is true. The ordering of rows under these comparison operators is deterministic but not otherwise meaningful. These operators are used internally for materialized views and might be useful for other specialized purposes such as replication and B-Tree deduplication (see [Section 67.4.3](btree-implementation#BTREE-DEDUPLICATION "67.4.3. Deduplication")). They are not intended to be generally useful for writing queries, though.

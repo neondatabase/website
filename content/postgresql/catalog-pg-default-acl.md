@@ -7,8 +7,8 @@ The catalog `pg_default_acl` stores initial privileges to be assigned to newly c
 | Column TypeDescription                                                                                                                                                           |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `oid` `oid`Row identifier                                                                                                                                                        |
-| `defaclrole` `oid` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`oid`)The OID of the role associated with this entry                                      |
-| `defaclnamespace` `oid` (references [`pg_namespace`](catalog-pg-namespace.html "53.32. pg_namespace").`oid`)The OID of the namespace associated with this entry, or zero if none |
+| `defaclrole` `oid` (references [`pg_authid`](catalog-pg-authid "53.8. pg_authid").`oid`)The OID of the role associated with this entry                                      |
+| `defaclnamespace` `oid` (references [`pg_namespace`](catalog-pg-namespace "53.32. pg_namespace").`oid`)The OID of the namespace associated with this entry, or zero if none |
 | `defaclobjtype` `char`Type of object this entry is for: `r` = relation (table, view), `S` = sequence, `f` = function, `T` = type, `n` = schema                                   |
 | `defaclacl` `aclitem[]`Access privileges that this type of object should have on creation                                                                                        |
 

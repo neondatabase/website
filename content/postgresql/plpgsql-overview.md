@@ -1,7 +1,7 @@
 ## 43.1. Overview [#](#PLPGSQL-OVERVIEW)
 
-  * *   [43.1.1. Advantages of Using PL/pgSQL](plpgsql-overview.html#PLPGSQL-ADVANTAGES)
-  * [43.1.2. Supported Argument and Result Data Types](plpgsql-overview.html#PLPGSQL-ARGS-RESULTS)
+  * *   [43.1.1. Advantages of Using PL/pgSQL](plpgsql-overview#PLPGSQL-ADVANTAGES)
+  * [43.1.2. Supported Argument and Result Data Types](plpgsql-overview#PLPGSQL-ARGS-RESULTS)
 
 PL/pgSQL is a loadable procedural language for the PostgreSQL database system. The design goals of PL/pgSQL were to create a loadable procedural language that
 
@@ -34,11 +34,11 @@ Also, with PL/pgSQL you can use all the data types, operators and functions of S
 
 ### 43.1.2. Supported Argument and Result Data Types [#](#PLPGSQL-ARGS-RESULTS)
 
-Functions written in PL/pgSQL can accept as arguments any scalar or array data type supported by the server, and they can return a result of any of these types. They can also accept or return any composite type (row type) specified by name. It is also possible to declare a PL/pgSQL function as accepting `record`, which means that any composite type will do as input, or as returning `record`, which means that the result is a row type whose columns are determined by specification in the calling query, as discussed in [Section 7.2.1.4](queries-table-expressions.html#QUERIES-TABLEFUNCTIONS "7.2.1.4. Table Functions").
+Functions written in PL/pgSQL can accept as arguments any scalar or array data type supported by the server, and they can return a result of any of these types. They can also accept or return any composite type (row type) specified by name. It is also possible to declare a PL/pgSQL function as accepting `record`, which means that any composite type will do as input, or as returning `record`, which means that the result is a row type whose columns are determined by specification in the calling query, as discussed in [Section 7.2.1.4](queries-table-expressions#QUERIES-TABLEFUNCTIONS "7.2.1.4. Table Functions").
 
-PL/pgSQL functions can be declared to accept a variable number of arguments by using the `VARIADIC` marker. This works exactly the same way as for SQL functions, as discussed in [Section 38.5.6](xfunc-sql.html#XFUNC-SQL-VARIADIC-FUNCTIONS "38.5.6. SQL Functions with Variable Numbers of Arguments").
+PL/pgSQL functions can be declared to accept a variable number of arguments by using the `VARIADIC` marker. This works exactly the same way as for SQL functions, as discussed in [Section 38.5.6](xfunc-sql#XFUNC-SQL-VARIADIC-FUNCTIONS "38.5.6. SQL Functions with Variable Numbers of Arguments").
 
-PL/pgSQL functions can also be declared to accept and return the polymorphic types described in [Section 38.2.5](extend-type-system.html#EXTEND-TYPES-POLYMORPHIC "38.2.5. Polymorphic Types"), thus allowing the actual data types handled by the function to vary from call to call. Examples appear in [Section 43.3.1](plpgsql-declarations.html#PLPGSQL-DECLARATION-PARAMETERS "43.3.1. Declaring Function Parameters").
+PL/pgSQL functions can also be declared to accept and return the polymorphic types described in [Section 38.2.5](extend-type-system#EXTEND-TYPES-POLYMORPHIC "38.2.5. Polymorphic Types"), thus allowing the actual data types handled by the function to vary from call to call. Examples appear in [Section 43.3.1](plpgsql-declarations#PLPGSQL-DECLARATION-PARAMETERS "43.3.1. Declaring Function Parameters").
 
 PL/pgSQL functions can also be declared to return a “set” (or table) of any data type that can be returned as a single instance. Such a function generates its output by executing `RETURN NEXT` for each desired element of the result set, or by using `RETURN QUERY` to output the result of evaluating a query.
 
@@ -46,4 +46,4 @@ Finally, a PL/pgSQL function can be declared to return `void` if it has no usefu
 
 PL/pgSQL functions can also be declared with output parameters in place of an explicit specification of the return type. This does not add any fundamental capability to the language, but it is often convenient, especially for returning multiple values. The `RETURNS TABLE` notation can also be used in place of `RETURNS SETOF`.
 
-Specific examples appear in [Section 43.3.1](plpgsql-declarations.html#PLPGSQL-DECLARATION-PARAMETERS "43.3.1. Declaring Function Parameters") and [Section 43.6.1](plpgsql-control-structures.html#PLPGSQL-STATEMENTS-RETURNING "43.6.1. Returning from a Function").
+Specific examples appear in [Section 43.3.1](plpgsql-declarations#PLPGSQL-DECLARATION-PARAMETERS "43.3.1. Declaring Function Parameters") and [Section 43.6.1](plpgsql-control-structures#PLPGSQL-STATEMENTS-RETURNING "43.6.1. Returning from a Function").

@@ -1,11 +1,11 @@
 ## 4.1. Lexical Structure [#](#SQL-SYNTAX-LEXICAL)
 
-  * *   [4.1.1. Identifiers and Key Words](sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS)
-* [4.1.2. Constants](sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS)
-* [4.1.3. Operators](sql-syntax-lexical.html#SQL-SYNTAX-OPERATORS)
-* [4.1.4. Special Characters](sql-syntax-lexical.html#SQL-SYNTAX-SPECIAL-CHARS)
-* [4.1.5. Comments](sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS)
-* [4.1.6. Operator Precedence](sql-syntax-lexical.html#SQL-PRECEDENCE)
+  * *   [4.1.1. Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
+* [4.1.2. Constants](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS)
+* [4.1.3. Operators](sql-syntax-lexical#SQL-SYNTAX-OPERATORS)
+* [4.1.4. Special Characters](sql-syntax-lexical#SQL-SYNTAX-SPECIAL-CHARS)
+* [4.1.5. Comments](sql-syntax-lexical#SQL-SYNTAX-COMMENTS)
+* [4.1.6. Operator Precedence](sql-syntax-lexical#SQL-PRECEDENCE)
 
 SQL input consists of a sequence of *commands*. A command is composed of a sequence of *tokens*, terminated by a semicolon (“;”). The end of the input stream also terminates a command. Which tokens are valid depends on the syntax of the particular command.
 
@@ -24,11 +24,11 @@ This is a sequence of three commands, one per line (although this is not require
 
 Additionally, *comments* can occur in SQL input. They are not tokens, they are effectively equivalent to whitespace.
 
-The SQL syntax is not very consistent regarding what tokens identify commands and which are operands or parameters. The first few tokens are generally the command name, so in the above example we would usually speak of a “SELECT”, an “UPDATE”, and an “INSERT” command. But for instance the `UPDATE` command always requires a `SET` token to appear in a certain position, and this particular variation of `INSERT` also requires a `VALUES` in order to be complete. The precise syntax rules for each command are described in [Part VI](reference.html "Part VI. Reference").
+The SQL syntax is not very consistent regarding what tokens identify commands and which are operands or parameters. The first few tokens are generally the command name, so in the above example we would usually speak of a “SELECT”, an “UPDATE”, and an “INSERT” command. But for instance the `UPDATE` command always requires a `SET` token to appear in a certain position, and this particular variation of `INSERT` also requires a `VALUES` in order to be complete. The precise syntax rules for each command are described in [Part VI](reference "Part VI. Reference").
 
 ### 4.1.1. Identifiers and Key Words [#](#SQL-SYNTAX-IDENTIFIERS)
 
-Tokens such as `SELECT`, `UPDATE`, or `VALUES` in the example above are examples of *key words*, that is, words that have a fixed meaning in the SQL language. The tokens `MY_TABLE` and `A` are examples of *identifiers*. They identify names of tables, columns, or other database objects, depending on the command they are used in. Therefore they are sometimes simply called “names”. Key words and identifiers have the same lexical structure, meaning that one cannot know whether a token is an identifier or a key word without knowing the language. A complete list of key words can be found in [Appendix C](sql-keywords-appendix.html "Appendix C. SQL Key Words").
+Tokens such as `SELECT`, `UPDATE`, or `VALUES` in the example above are examples of *key words*, that is, words that have a fixed meaning in the SQL language. The tokens `MY_TABLE` and `A` are examples of *identifiers*. They identify names of tables, columns, or other database objects, depending on the command they are used in. Therefore they are sometimes simply called “names”. Key words and identifiers have the same lexical structure, meaning that one cannot know whether a token is an identifier or a key word without knowing the language. A complete list of key words can be found in [Appendix C](sql-keywords-appendix "Appendix C. SQL Key Words").
 
 SQL identifiers and key words must begin with a letter (`a`-`z`, but also letters with diacritical marks and non-Latin letters) or an underscore (`_`). Subsequent characters in an identifier or key word can be letters, underscores, digits (`0`-`9`), or dollar signs (`$`). Note that dollar signs are not allowed in identifiers according to the letter of the SQL standard, so their use might render applications less portable. The SQL standard will not define a key word that contains digits or starts or ends with an underscore, so identifiers of this form are safe against possible conflict with future extensions of the standard.
 
@@ -129,7 +129,7 @@ is not valid syntax. (This slightly bizarre behavior is specified by SQL; Postgr
 
 #### 4.1.2.2. String Constants with C-Style Escapes [#](#SQL-SYNTAX-STRINGS-ESCAPE)
 
-PostgreSQL also accepts “escape” string constants, which are an extension to the SQL standard. An escape string constant is specified by writing the letter `E` (upper or lower case) just before the opening single quote, e.g., `E'foo'`. (When continuing an escape string constant across lines, write `E` only before the first opening quote.) Within an escape string, a backslash character (`\`) begins a C-like *backslash escape* sequence, in which the combination of backslash and following character(s) represent a special byte value, as shown in [Table 4.1](sql-syntax-lexical.html#SQL-BACKSLASH-TABLE "Table 4.1. Backslash Escape Sequences").
+PostgreSQL also accepts “escape” string constants, which are an extension to the SQL standard. An escape string constant is specified by writing the letter `E` (upper or lower case) just before the opening single quote, e.g., `E'foo'`. (When continuing an escape string constant across lines, write `E` only before the first opening quote.) Within an escape string, a backslash character (`\`) begins a C-like *backslash escape* sequence, in which the combination of backslash and following character(s) represent a special byte value, as shown in [Table 4.1](sql-syntax-lexical#SQL-BACKSLASH-TABLE "Table 4.1. Backslash Escape Sequences").
 
 **Table 4.1. Backslash Escape Sequences**
 
@@ -148,13 +148,13 @@ PostgreSQL also accepts “escape” string constants, which are an extension to
 
 Any other character following a backslash is taken literally. Thus, to include a backslash character, write two backslashes (`\\`). Also, a single quote can be included in an escape string by writing `\'`, in addition to the normal way of `''`.
 
-It is your responsibility that the byte sequences you create, especially when using the octal or hexadecimal escapes, compose valid characters in the server character set encoding. A useful alternative is to use Unicode escapes or the alternative Unicode escape syntax, explained in [Section 4.1.2.3](sql-syntax-lexical.html#SQL-SYNTAX-STRINGS-UESCAPE "4.1.2.3. String Constants with Unicode Escapes"); then the server will check that the character conversion is possible.
+It is your responsibility that the byte sequences you create, especially when using the octal or hexadecimal escapes, compose valid characters in the server character set encoding. A useful alternative is to use Unicode escapes or the alternative Unicode escape syntax, explained in [Section 4.1.2.3](sql-syntax-lexical#SQL-SYNTAX-STRINGS-UESCAPE "4.1.2.3. String Constants with Unicode Escapes"); then the server will check that the character conversion is possible.
 
 ### Caution
 
-If the configuration parameter [standard\_conforming\_strings](runtime-config-compatible.html#GUC-STANDARD-CONFORMING-STRINGS) is `off`, then PostgreSQL recognizes backslash escapes in both regular and escape string constants. However, as of PostgreSQL 9.1, the default is `on`, meaning that backslash escapes are recognized only in escape string constants. This behavior is more standards-compliant, but might break applications which rely on the historical behavior, where backslash escapes were always recognized. As a workaround, you can set this parameter to `off`, but it is better to migrate away from using backslash escapes. If you need to use a backslash escape to represent a special character, write the string constant with an `E`.
+If the configuration parameter [standard\_conforming\_strings](runtime-config-compatible#GUC-STANDARD-CONFORMING-STRINGS) is `off`, then PostgreSQL recognizes backslash escapes in both regular and escape string constants. However, as of PostgreSQL 9.1, the default is `on`, meaning that backslash escapes are recognized only in escape string constants. This behavior is more standards-compliant, but might break applications which rely on the historical behavior, where backslash escapes were always recognized. As a workaround, you can set this parameter to `off`, but it is better to migrate away from using backslash escapes. If you need to use a backslash escape to represent a special character, write the string constant with an `E`.
 
-In addition to `standard_conforming_strings`, the configuration parameters [escape\_string\_warning](runtime-config-compatible.html#GUC-ESCAPE-STRING-WARNING) and [backslash\_quote](runtime-config-compatible.html#GUC-BACKSLASH-QUOTE) govern treatment of backslashes in string constants.
+In addition to `standard_conforming_strings`, the configuration parameters [escape\_string\_warning](runtime-config-compatible#GUC-ESCAPE-STRING-WARNING) and [backslash\_quote](runtime-config-compatible#GUC-BACKSLASH-QUOTE) govern treatment of backslashes in string constants.
 
 The character with the code zero cannot be in a string constant.
 
@@ -189,7 +189,7 @@ Either the 4-digit or the 6-digit escape form can be used to specify UTF-16 surr
 
 If the server encoding is not UTF-8, the Unicode code point identified by one of these escape sequences is converted to the actual server encoding; an error is reported if that's not possible.
 
-Also, the Unicode escape syntax for string constants only works when the configuration parameter [standard\_conforming\_strings](runtime-config-compatible.html#GUC-STANDARD-CONFORMING-STRINGS) is turned on. This is because otherwise this syntax could confuse clients that parse the SQL statements to the point that it could lead to SQL injections and similar security issues. If the parameter is set to off, this syntax will be rejected with an error message.
+Also, the Unicode escape syntax for string constants only works when the configuration parameter [standard\_conforming\_strings](runtime-config-compatible#GUC-STANDARD-CONFORMING-STRINGS) is turned on. This is because otherwise this syntax could confuse clients that parse the SQL statements to the point that it could lead to SQL injections and similar security issues. If the parameter is set to off, this syntax will be rejected with an error message.
 
 #### 4.1.2.4. Dollar-Quoted String Constants [#](#SQL-SYNTAX-DOLLAR-QUOTING)
 
@@ -317,9 +317,9 @@ It is also possible to specify a type coercion using a function-like syntax:
 typename ( 'string' )
 ```
 
-but not all type names can be used in this way; see [Section 4.2.9](sql-expressions.html#SQL-SYNTAX-TYPE-CASTS "4.2.9. Type Casts") for details.
+but not all type names can be used in this way; see [Section 4.2.9](sql-expressions#SQL-SYNTAX-TYPE-CASTS "4.2.9. Type Casts") for details.
 
-The `::`, `CAST()`, and function-call syntaxes can also be used to specify run-time type conversions of arbitrary expressions, as discussed in [Section 4.2.9](sql-expressions.html#SQL-SYNTAX-TYPE-CASTS "4.2.9. Type Casts"). To avoid syntactic ambiguity, the `type 'string'` syntax can only be used to specify the type of a simple literal constant. Another restriction on the `type 'string'` syntax is that it does not work for array types; use `::` or `CAST()` to specify the type of an array constant.
+The `::`, `CAST()`, and function-call syntaxes can also be used to specify run-time type conversions of arbitrary expressions, as discussed in [Section 4.2.9](sql-expressions#SQL-SYNTAX-TYPE-CASTS "4.2.9. Type Casts"). To avoid syntactic ambiguity, the `type 'string'` syntax can only be used to specify the type of a simple literal constant. Another restriction on the `type 'string'` syntax is that it does not work for array types; use `::` or `CAST()` to specify the type of an array constant.
 
 The `CAST()` syntax conforms to SQL. The `type 'string'` syntax is a generalization of the standard: SQL specifies this syntax only for a few data types, but PostgreSQL allows it for all types. The syntax with `::` is historical PostgreSQL usage, as is the function-call syntax.
 
@@ -347,10 +347,10 @@ Some characters that are not alphanumeric have a special meaning that is differe
 
 * A dollar sign (`$`) followed by digits is used to represent a positional parameter in the body of a function definition or a prepared statement. In other contexts the dollar sign can be part of an identifier or a dollar-quoted string constant.
 * Parentheses (`()`) have their usual meaning to group expressions and enforce precedence. In some cases parentheses are required as part of the fixed syntax of a particular SQL command.
-* Brackets (`[]`) are used to select the elements of an array. See [Section 8.15](arrays.html "8.15. Arrays") for more information on arrays.
+* Brackets (`[]`) are used to select the elements of an array. See [Section 8.15](arrays "8.15. Arrays") for more information on arrays.
 * Commas (`,`) are used in some syntactical constructs to separate the elements of a list.
 * The semicolon (`;`) terminates an SQL command. It cannot appear anywhere within a command, except within a string constant or quoted identifier.
-* The colon (`:`) is used to select “slices” from arrays. (See [Section 8.15](arrays.html "8.15. Arrays").) In certain SQL dialects (such as Embedded SQL), the colon is used to prefix variable names.
+* The colon (`:`) is used to select “slices” from arrays. (See [Section 8.15](arrays "8.15. Arrays").) In certain SQL dialects (such as Embedded SQL), the colon is used to prefix variable names.
 * The asterisk (`*`) is used in some contexts to denote all the fields of a table row or composite value. It also has a special meaning when used as the argument of an aggregate function, namely that the aggregate does not require any explicit parameter.
 * The period (`.`) is used in numeric constants, and to separate schema, table, and column names.
 
@@ -378,7 +378,7 @@ A comment is removed from the input stream before further syntax analysis and is
 
 ### 4.1.6. Operator Precedence [#](#SQL-PRECEDENCE)
 
-[Table 4.2](sql-syntax-lexical.html#SQL-PRECEDENCE-TABLE "Table 4.2. Operator Precedence (highest to lowest)") shows the precedence and associativity of the operators in PostgreSQL. Most operators have the same precedence and are left-associative. The precedence and associativity of the operators is hard-wired into the parser. Add parentheses if you want an expression with multiple operators to be parsed in some other way than what the precedence rules imply.
+[Table 4.2](sql-syntax-lexical#SQL-PRECEDENCE-TABLE "Table 4.2. Operator Precedence (highest to lowest)") shows the precedence and associativity of the operators in PostgreSQL. Most operators have the same precedence and are left-associative. The precedence and associativity of the operators is hard-wired into the parser. Add parentheses if you want an expression with multiple operators to be parsed in some other way than what the precedence rules imply.
 
 **Table 4.2. Operator Precedence (highest to lowest)**
 
@@ -410,7 +410,7 @@ When a schema-qualified operator name is used in the `OPERATOR` syntax, as for e
 SELECT 3 OPERATOR(pg_catalog.+) 4;
 ```
 
-the `OPERATOR` construct is taken to have the default precedence shown in [Table 4.2](sql-syntax-lexical.html#SQL-PRECEDENCE-TABLE "Table 4.2. Operator Precedence (highest to lowest)") for “any other operator”. This is true no matter which specific operator appears inside `OPERATOR()`.
+the `OPERATOR` construct is taken to have the default precedence shown in [Table 4.2](sql-syntax-lexical#SQL-PRECEDENCE-TABLE "Table 4.2. Operator Precedence (highest to lowest)") for “any other operator”. This is true no matter which specific operator appears inside `OPERATOR()`.
 
 ### Note
 

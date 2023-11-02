@@ -32,13 +32,13 @@ ALTER OPERATOR FAMILY name USING index_method
 
 `ALTER OPERATOR FAMILY` changes the definition of an operator family. You can add operators and support functions to the family, remove them from the family, or change the family's name or owner.
 
-When operators and support functions are added to a family with `ALTER OPERATOR FAMILY`, they are not part of any specific operator class within the family, but are just “loose” within the family. This indicates that these operators and functions are compatible with the family's semantics, but are not required for correct functioning of any specific index. (Operators and functions that are so required should be declared as part of an operator class, instead; see [CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS").) PostgreSQL will allow loose members of a family to be dropped from the family at any time, but members of an operator class cannot be dropped without dropping the whole class and any indexes that depend on it. Typically, single-data-type operators and functions are part of operator classes because they are needed to support an index on that specific data type, while cross-data-type operators and functions are made loose members of the family.
+When operators and support functions are added to a family with `ALTER OPERATOR FAMILY`, they are not part of any specific operator class within the family, but are just “loose” within the family. This indicates that these operators and functions are compatible with the family's semantics, but are not required for correct functioning of any specific index. (Operators and functions that are so required should be declared as part of an operator class, instead; see [CREATE OPERATOR CLASS](sql-createopclass "CREATE OPERATOR CLASS").) PostgreSQL will allow loose members of a family to be dropped from the family at any time, but members of an operator class cannot be dropped without dropping the whole class and any indexes that depend on it. Typically, single-data-type operators and functions are part of operator classes because they are needed to support an index on that specific data type, while cross-data-type operators and functions are made loose members of the family.
 
 You must be a superuser to use `ALTER OPERATOR FAMILY`. (This restriction is made because an erroneous operator family definition could confuse or even crash the server.)
 
 `ALTER OPERATOR FAMILY` does not presently check whether the operator family definition includes all the operators and functions required by the index method, nor whether the operators and functions form a self-consistent set. It is the user's responsibility to define a valid operator family.
 
-Refer to [Section 38.16](xindex.html "38.16. Interfacing Extensions to Indexes") for further information.
+Refer to [Section 38.16](xindex "38.16. Interfacing Extensions to Indexes") for further information.
 
 ## Parameters
 
@@ -162,4 +162,4 @@ There is no `ALTER OPERATOR FAMILY` statement in the SQL standard.
 
 ## See Also
 
-[CREATE OPERATOR FAMILY](sql-createopfamily.html "CREATE OPERATOR FAMILY"), [DROP OPERATOR FAMILY](sql-dropopfamily.html "DROP OPERATOR FAMILY"), [CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS"), [ALTER OPERATOR CLASS](sql-alteropclass.html "ALTER OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass.html "DROP OPERATOR CLASS")
+[CREATE OPERATOR FAMILY](sql-createopfamily "CREATE OPERATOR FAMILY"), [DROP OPERATOR FAMILY](sql-dropopfamily "DROP OPERATOR FAMILY"), [CREATE OPERATOR CLASS](sql-createopclass "CREATE OPERATOR CLASS"), [ALTER OPERATOR CLASS](sql-alteropclass "ALTER OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass "DROP OPERATOR CLASS")

@@ -22,7 +22,7 @@ A logical replication worker will be started to replicate data for the new subsc
 
 To be able to create a subscription, you must have the privileges of the `pg_create_subscription` role, as well as `CREATE` privileges on the current database.
 
-Additional information about subscriptions and logical replication as a whole is available at [Section 31.2](logical-replication-subscription.html "31.2. Subscription") and [Chapter 31](logical-replication.html "Chapter 31. Logical Replication").
+Additional information about subscriptions and logical replication as a whole is available at [Section 31.2](logical-replication-subscription "31.2. Subscription") and [Chapter 31](logical-replication "Chapter 31. Logical Replication").
 
 ## Parameters
 
@@ -32,7 +32,7 @@ Additional information about subscriptions and logical replication as a whole is
 
 * `CONNECTION 'conninfo'` [#](#SQL-CREATESUBSCRIPTION-CONNECTION)
 
-    The libpq connection string defining how to connect to the publisher database. For details see [Section 34.1.1](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings").
+    The libpq connection string defining how to connect to the publisher database. For details see [Section 34.1.1](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings").
 
 * `PUBLICATION publication_name [, ...]` [#](#SQL-CREATESUBSCRIPTION-PUBLICATION)
 
@@ -48,13 +48,13 @@ Additional information about subscriptions and logical replication as a whole is
 
         Specifies whether the `CREATE SUBSCRIPTION` command should connect to the publisher at all. The default is `true`. Setting this to `false` will force the values of `create_slot`, `enabled` and `copy_data` to `false`. (You cannot combine setting `connect` to `false` with setting `create_slot`, `enabled`, or `copy_data` to `true`.)
 
-        Since no connection is made when this option is `false`, no tables are subscribed. To initiate replication, you must manually create the replication slot, enable the subscription, and refresh the subscription. See [Section 31.2.3](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT "31.2.3. Examples: Deferred Replication Slot Creation") for examples.
+        Since no connection is made when this option is `false`, no tables are subscribed. To initiate replication, you must manually create the replication slot, enable the subscription, and refresh the subscription. See [Section 31.2.3](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT "31.2.3. Examples: Deferred Replication Slot Creation") for examples.
 
   * `create_slot` (`boolean`) [#](#SQL-CREATESUBSCRIPTION-WITH-CREATE-SLOT)
 
         Specifies whether the command should create the replication slot on the publisher. The default is `true`.
 
-        If set to `false`, you are responsible for creating the publisher's slot in some other way. See [Section 31.2.3](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT "31.2.3. Examples: Deferred Replication Slot Creation") for examples.
+        If set to `false`, you are responsible for creating the publisher's slot in some other way. See [Section 31.2.3](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT "31.2.3. Examples: Deferred Replication Slot Creation") for examples.
 
   * `enabled` (`boolean`) [#](#SQL-CREATESUBSCRIPTION-WITH-ENABLED)
 
@@ -64,13 +64,13 @@ Additional information about subscriptions and logical replication as a whole is
 
         Name of the publisher's replication slot to use. The default is to use the name of the subscription for the slot name.
 
-        Setting `slot_name` to `NONE` means there will be no replication slot associated with the subscription. Such subscriptions must also have both `enabled` and `create_slot` set to `false`. Use this when you will be creating the replication slot later manually. See [Section 31.2.3](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT "31.2.3. Examples: Deferred Replication Slot Creation") for examples.
+        Setting `slot_name` to `NONE` means there will be no replication slot associated with the subscription. Such subscriptions must also have both `enabled` and `create_slot` set to `false`. Use this when you will be creating the replication slot later manually. See [Section 31.2.3](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT "31.2.3. Examples: Deferred Replication Slot Creation") for examples.
 
     The following parameters control the subscription's replication behavior after it has been created:
 
   * `binary` (`boolean`) [#](#SQL-CREATESUBSCRIPTION-WITH-BINARY)
 
-        Specifies whether the subscription will request the publisher to send the data in binary format (as opposed to text). The default is `false`. Any initial table synchronization copy (see `copy_data`) also uses the same format. Binary format can be faster than the text format, but it is less portable across machine architectures and PostgreSQL versions. Binary format is very data type specific; for example, it will not allow copying from a `smallint` column to an `integer` column, even though that would work fine in text format. Even when this option is enabled, only data types having binary send and receive functions will be transferred in binary. Note that the initial synchronization requires all data types to have binary send and receive functions, otherwise the synchronization will fail (see [CREATE TYPE](sql-createtype.html "CREATE TYPE") for more about send/receive functions).
+        Specifies whether the subscription will request the publisher to send the data in binary format (as opposed to text). The default is `false`. Any initial table synchronization copy (see `copy_data`) also uses the same format. Binary format can be faster than the text format, but it is less portable across machine architectures and PostgreSQL versions. Binary format is very data type specific; for example, it will not allow copying from a `smallint` column to an `integer` column, even though that would work fine in text format. Even when this option is enabled, only data types having binary send and receive functions will be transferred in binary. Note that the initial synchronization requires all data types to have binary send and receive functions, otherwise the synchronization will fail (see [CREATE TYPE](sql-createtype "CREATE TYPE") for more about send/receive functions).
 
         When doing cross-version replication, it could be that the publisher has a binary send function for some data type, but the subscriber lacks a binary receive function for that type. In such a case, data transfer will fail, and the `binary` option cannot be used.
 
@@ -80,9 +80,9 @@ Additional information about subscriptions and logical replication as a whole is
 
         Specifies whether to copy pre-existing data in the publications that are being subscribed to when the replication starts. The default is `true`.
 
-        If the publications contain `WHERE` clauses, it will affect what data is copied. Refer to the [Notes](sql-createsubscription.html#SQL-CREATESUBSCRIPTION-NOTES "Notes") for details.
+        If the publications contain `WHERE` clauses, it will affect what data is copied. Refer to the [Notes](sql-createsubscription#SQL-CREATESUBSCRIPTION-NOTES "Notes") for details.
 
-        See [Notes](sql-createsubscription.html#SQL-CREATESUBSCRIPTION-NOTES "Notes") for details of how `copy_data = true` can interact with the `origin` parameter.
+        See [Notes](sql-createsubscription#SQL-CREATESUBSCRIPTION-NOTES "Notes") for details of how `copy_data = true` can interact with the `origin` parameter.
 
   * `streaming` (`enum`) [#](#SQL-CREATESUBSCRIPTION-WITH-STREAMING)
 
@@ -94,7 +94,7 @@ Additional information about subscriptions and logical replication as a whole is
 
   * `synchronous_commit` (`enum`) [#](#SQL-CREATESUBSCRIPTION-WITH-SYNCHRONOUS-COMMIT)
 
-        The value of this parameter overrides the [synchronous\_commit](runtime-config-wal.html#GUC-SYNCHRONOUS-COMMIT) setting within this subscription's apply worker processes. The default value is `off`.
+        The value of this parameter overrides the [synchronous\_commit](runtime-config-wal#GUC-SYNCHRONOUS-COMMIT) setting within this subscription's apply worker processes. The default value is `off`.
 
         It is safe to use `off` for logical replication: If the subscriber loses transactions because of missing synchronization, the data will be sent again from the publisher.
 
@@ -106,7 +106,7 @@ Additional information about subscriptions and logical replication as a whole is
 
         When two-phase commit is enabled, prepared transactions are sent to the subscriber at the time of `PREPARE TRANSACTION`, and are processed as two-phase transactions on the subscriber too. Otherwise, prepared transactions are sent to the subscriber only when committed, and are then processed immediately by the subscriber.
 
-        The implementation of two-phase commit requires that replication has successfully finished the initial table synchronization phase. So even when `two_phase` is enabled for a subscription, the internal two-phase state remains temporarily “pending” until the initialization phase completes. See column `subtwophasestate` of [`pg_subscription`](catalog-pg-subscription.html "53.54. pg_subscription") to know the actual two-phase state.
+        The implementation of two-phase commit requires that replication has successfully finished the initial table synchronization phase. So even when `two_phase` is enabled for a subscription, the internal two-phase state remains temporarily “pending” until the initialization phase completes. See column `subtwophasestate` of [`pg_subscription`](catalog-pg-subscription "53.54. pg_subscription") to know the actual two-phase state.
 
   * `disable_on_error` (`boolean`) [#](#SQL-CREATESUBSCRIPTION-WITH-DISABLE-ON-ERROR)
 
@@ -118,29 +118,29 @@ Additional information about subscriptions and logical replication as a whole is
 
   * `run_as_owner` (`boolean`) [#](#SQL-CREATESUBSCRIPTION-WITH-RUN-AS-OWNER)
 
-        If true, all replication actions are performed as the subscription owner. If false, replication workers will perform actions on each table as the owner of that table. The latter configuration is generally much more secure; for details, see [Section 31.9](logical-replication-security.html "31.9. Security"). The default is `false`.
+        If true, all replication actions are performed as the subscription owner. If false, replication workers will perform actions on each table as the owner of that table. The latter configuration is generally much more secure; for details, see [Section 31.9](logical-replication-security "31.9. Security"). The default is `false`.
 
   * `origin` (`string`) [#](#SQL-CREATESUBSCRIPTION-WITH-ORIGIN)
 
         Specifies whether the subscription will request the publisher to only send changes that don't have an origin or send changes regardless of origin. Setting `origin` to `none` means that the subscription will request the publisher to only send changes that don't have an origin. Setting `origin` to `any` means that the publisher sends changes regardless of their origin. The default is `any`.
 
-        See [Notes](sql-createsubscription.html#SQL-CREATESUBSCRIPTION-NOTES "Notes") for details of how `copy_data = true` can interact with the `origin` parameter.
+        See [Notes](sql-createsubscription#SQL-CREATESUBSCRIPTION-NOTES "Notes") for details of how `copy_data = true` can interact with the `origin` parameter.
 
 When specifying a parameter of type `boolean`, the `=` *`value`* part can be omitted, which is equivalent to specifying `TRUE`.
 
 ## Notes
 
-See [Section 31.9](logical-replication-security.html "31.9. Security") for details on how to configure access control between the subscription and the publication instance.
+See [Section 31.9](logical-replication-security "31.9. Security") for details on how to configure access control between the subscription and the publication instance.
 
 When creating a replication slot (the default behavior), `CREATE SUBSCRIPTION` cannot be executed inside a transaction block.
 
-Creating a subscription that connects to the same database cluster (for example, to replicate between databases in the same cluster or to replicate within the same database) will only succeed if the replication slot is not created as part of the same command. Otherwise, the `CREATE SUBSCRIPTION` call will hang. To make this work, create the replication slot separately (using the function `pg_create_logical_replication_slot` with the plugin name `pgoutput`) and create the subscription using the parameter `create_slot = false`. See [Section 31.2.3](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT "31.2.3. Examples: Deferred Replication Slot Creation") for examples. This is an implementation restriction that might be lifted in a future release.
+Creating a subscription that connects to the same database cluster (for example, to replicate between databases in the same cluster or to replicate within the same database) will only succeed if the replication slot is not created as part of the same command. Otherwise, the `CREATE SUBSCRIPTION` call will hang. To make this work, create the replication slot separately (using the function `pg_create_logical_replication_slot` with the plugin name `pgoutput`) and create the subscription using the parameter `create_slot = false`. See [Section 31.2.3](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT "31.2.3. Examples: Deferred Replication Slot Creation") for examples. This is an implementation restriction that might be lifted in a future release.
 
-If any table in the publication has a `WHERE` clause, rows for which the *`expression`* evaluates to false or null will not be published. If the subscription has several publications in which the same table has been published with different `WHERE` clauses, a row will be published if any of the expressions (referring to that publish operation) are satisfied. In the case of different `WHERE` clauses, if one of the publications has no `WHERE` clause (referring to that publish operation) or the publication is declared as [`FOR ALL TABLES`](sql-createpublication.html#SQL-CREATEPUBLICATION-FOR-ALL-TABLES) or [`FOR TABLES IN SCHEMA`](sql-createpublication.html#SQL-CREATEPUBLICATION-FOR-TABLES-IN-SCHEMA), rows are always published regardless of the definition of the other expressions. If the subscriber is a PostgreSQL version before 15, then any row filtering is ignored during the initial data synchronization phase. For this case, the user might want to consider deleting any initially copied data that would be incompatible with subsequent filtering. Because initial data synchronization does not take into account the publication [`publish`](sql-createpublication.html#SQL-CREATEPUBLICATION-WITH-PUBLISH) parameter when copying existing table data, some rows may be copied that would not be replicated using DML. See [Section 31.2.2](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES "31.2.2. Examples: Set Up Logical Replication") for examples.
+If any table in the publication has a `WHERE` clause, rows for which the *`expression`* evaluates to false or null will not be published. If the subscription has several publications in which the same table has been published with different `WHERE` clauses, a row will be published if any of the expressions (referring to that publish operation) are satisfied. In the case of different `WHERE` clauses, if one of the publications has no `WHERE` clause (referring to that publish operation) or the publication is declared as [`FOR ALL TABLES`](sql-createpublication#SQL-CREATEPUBLICATION-FOR-ALL-TABLES) or [`FOR TABLES IN SCHEMA`](sql-createpublication#SQL-CREATEPUBLICATION-FOR-TABLES-IN-SCHEMA), rows are always published regardless of the definition of the other expressions. If the subscriber is a PostgreSQL version before 15, then any row filtering is ignored during the initial data synchronization phase. For this case, the user might want to consider deleting any initially copied data that would be incompatible with subsequent filtering. Because initial data synchronization does not take into account the publication [`publish`](sql-createpublication#SQL-CREATEPUBLICATION-WITH-PUBLISH) parameter when copying existing table data, some rows may be copied that would not be replicated using DML. See [Section 31.2.2](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES "31.2.2. Examples: Set Up Logical Replication") for examples.
 
 Subscriptions having several publications in which the same table has been published with different column lists are not supported.
 
-We allow non-existent publications to be specified so that users can add those later. This means [`pg_subscription`](catalog-pg-subscription.html "53.54. pg_subscription") can have non-existent publications.
+We allow non-existent publications to be specified so that users can add those later. This means [`pg_subscription`](catalog-pg-subscription "53.54. pg_subscription") can have non-existent publications.
 
 When using a subscription parameter combination of `copy_data = true` and `origin = NONE`, the initial sync table data is copied directly from the publisher, meaning that knowledge of the true origin of that data is not possible. If the publisher also has subscriptions then the copied table data might have originated from further upstream. This scenario is detected and a WARNING is logged to the user, but the warning is only an indication of a potential problem; it is the user's responsibility to make the necessary checks to ensure the copied data origins are really as wanted or not.
 
@@ -186,4 +186,4 @@ CREATE SUBSCRIPTION mysub
 
 ## See Also
 
-[ALTER SUBSCRIPTION](sql-altersubscription.html "ALTER SUBSCRIPTION"), [DROP SUBSCRIPTION](sql-dropsubscription.html "DROP SUBSCRIPTION"), [CREATE PUBLICATION](sql-createpublication.html "CREATE PUBLICATION"), [ALTER PUBLICATION](sql-alterpublication.html "ALTER PUBLICATION")
+[ALTER SUBSCRIPTION](sql-altersubscription "ALTER SUBSCRIPTION"), [DROP SUBSCRIPTION](sql-dropsubscription "DROP SUBSCRIPTION"), [CREATE PUBLICATION](sql-createpublication "CREATE PUBLICATION"), [ALTER PUBLICATION](sql-alterpublication "ALTER PUBLICATION")

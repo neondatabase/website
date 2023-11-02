@@ -1,10 +1,10 @@
 ## F.49. xml2 — XPath querying and XSLT functionality [#](#XML2)
 
-  * *   [F.49.1. Deprecation Notice](xml2.html#XML2-DEPRECATION)
-  * [F.49.2. Description of Functions](xml2.html#XML2-FUNCTIONS)
-  * [F.49.3. `xpath_table`](xml2.html#XML2-XPATH-TABLE)
-  * [F.49.4. XSLT Functions](xml2.html#XML2-XSLT)
-  * [F.49.5. Author](xml2.html#XML2-AUTHOR)
+  * *   [F.49.1. Deprecation Notice](xml2#XML2-DEPRECATION)
+  * [F.49.2. Description of Functions](xml2#XML2-FUNCTIONS)
+  * [F.49.3. `xpath_table`](xml2#XML2-XPATH-TABLE)
+  * [F.49.4. XSLT Functions](xml2#XML2-XSLT)
+  * [F.49.5. Author](xml2#XML2-AUTHOR)
 
 The `xml2` module provides XPath querying and XSLT functionality.
 
@@ -14,7 +14,7 @@ From PostgreSQL 8.3 on, there is XML-related functionality based on the SQL/XML 
 
 ### F.49.2. Description of Functions [#](#XML2-FUNCTIONS)
 
-[Table F.36](xml2.html#XML2-FUNCTIONS-TABLE "Table F.36. xml2 Functions") shows the functions provided by this module. These functions provide straightforward XML parsing and XPath queries.
+[Table F.36](xml2#XML2-FUNCTIONS-TABLE "Table F.36. xml2 Functions") shows the functions provided by this module. These functions provide straightforward XML parsing and XPath queries.
 
 **Table F.36. `xml2` Functions**
 
@@ -37,7 +37,7 @@ From PostgreSQL 8.3 on, there is XML-related functionality based on the SQL/XML 
 xpath_table(text key, text document, text relation, text xpaths, text criteria) returns setof record
 ```
 
-`xpath_table` is a table function that evaluates a set of XPath queries on each of a set of documents and returns the results as a table. The primary key field from the original document table is returned as the first column of the result so that the result set can readily be used in joins. The parameters are described in [Table F.37](xml2.html#XML2-XPATH-TABLE-PARAMETERS "Table F.37. xpath_table Parameters").
+`xpath_table` is a table function that evaluates a set of XPath queries on each of a set of documents and returns the results as a table. The primary key field from the original document table is returned as the first column of the result so that the result set can readily be used in joins. The parameters are described in [Table F.37](xml2#XML2-XPATH-TABLE-PARAMETERS "Table F.37. xpath_table Parameters").
 
 **Table F.37. `xpath_table` Parameters**
 

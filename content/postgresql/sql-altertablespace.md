@@ -34,7 +34,7 @@ You must own the tablespace to change the definition of a tablespace. To alter t
 
 * *`tablespace_option`*
 
-    A tablespace parameter to be set or reset. Currently, the only available parameters are `seq_page_cost`, `random_page_cost`, `effective_io_concurrency` and `maintenance_io_concurrency`. Setting these values for a particular tablespace will override the planner's usual estimate of the cost of reading pages from tables in that tablespace, and the executor's prefetching behavior, as established by the configuration parameters of the same name (see [seq\_page\_cost](runtime-config-query.html#GUC-SEQ-PAGE-COST), [random\_page\_cost](runtime-config-query.html#GUC-RANDOM-PAGE-COST), [effective\_io\_concurrency](runtime-config-resource.html#GUC-EFFECTIVE-IO-CONCURRENCY), [maintenance\_io\_concurrency](runtime-config-resource.html#GUC-MAINTENANCE-IO-CONCURRENCY)). This may be useful if one tablespace is located on a disk which is faster or slower than the remainder of the I/O subsystem.
+    A tablespace parameter to be set or reset. Currently, the only available parameters are `seq_page_cost`, `random_page_cost`, `effective_io_concurrency` and `maintenance_io_concurrency`. Setting these values for a particular tablespace will override the planner's usual estimate of the cost of reading pages from tables in that tablespace, and the executor's prefetching behavior, as established by the configuration parameters of the same name (see [seq\_page\_cost](runtime-config-query#GUC-SEQ-PAGE-COST), [random\_page\_cost](runtime-config-query#GUC-RANDOM-PAGE-COST), [effective\_io\_concurrency](runtime-config-resource#GUC-EFFECTIVE-IO-CONCURRENCY), [maintenance\_io\_concurrency](runtime-config-resource#GUC-MAINTENANCE-IO-CONCURRENCY)). This may be useful if one tablespace is located on a disk which is faster or slower than the remainder of the I/O subsystem.
 
 ## Examples
 
@@ -58,4 +58,4 @@ There is no `ALTER TABLESPACE` statement in the SQL standard.
 
 ## See Also
 
-[CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE"), [DROP TABLESPACE](sql-droptablespace.html "DROP TABLESPACE")
+[CREATE TABLESPACE](sql-createtablespace "CREATE TABLESPACE"), [DROP TABLESPACE](sql-droptablespace "DROP TABLESPACE")

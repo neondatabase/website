@@ -1,6 +1,6 @@
 ## 61.1. Creating Custom Scan Paths [#](#CUSTOM-SCAN-PATH)
 
-* [61.1.1. Custom Scan Path Callbacks](custom-scan-path.html#CUSTOM-SCAN-PATH-CALLBACKS)
+* [61.1.1. Custom Scan Path Callbacks](custom-scan-path#CUSTOM-SCAN-PATH-CALLBACKS)
 
 A custom scan provider will typically add paths for a base relation by setting the following hook, which is called after the core code has generated all the access paths it can for the relation (except for Gather and Gather Merge paths, which are made after this call so that they can use partial paths added by the hook):
 
@@ -59,7 +59,7 @@ Plan *(*PlanCustomPath) (PlannerInfo *root,
                          List *custom_plans);
 ```
 
-Convert a custom path to a finished plan. The return value will generally be a `CustomScan` object, which the callback must allocate and initialize. See [Section 61.2](custom-scan-plan.html "61.2. Creating Custom Scan Plans") for more details.
+Convert a custom path to a finished plan. The return value will generally be a `CustomScan` object, which the callback must allocate and initialize. See [Section 61.2](custom-scan-plan "61.2. Creating Custom Scan Plans") for more details.
 
 ```
 

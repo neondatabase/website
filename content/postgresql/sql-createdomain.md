@@ -82,7 +82,7 @@ The empty scalar sub-SELECT will produce a null value that is considered to be o
 
 It is very difficult to avoid such problems, because of SQL's general assumption that a null value is a valid value of every data type. Best practice therefore is to design a domain's constraints so that a null value is allowed, and then to apply column `NOT NULL` constraints to columns of the domain type as needed, rather than directly to the domain type.
 
-PostgreSQL assumes that `CHECK` constraints' conditions are immutable, that is, they will always give the same result for the same input value. This assumption is what justifies examining `CHECK` constraints only when a value is first converted to be of a domain type, and not at other times. (This is essentially the same as the treatment of table `CHECK` constraints, as described in [Section 5.4.1](ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS "5.4.1. Check Constraints").)
+PostgreSQL assumes that `CHECK` constraints' conditions are immutable, that is, they will always give the same result for the same input value. This assumption is what justifies examining `CHECK` constraints only when a value is first converted to be of a domain type, and not at other times. (This is essentially the same as the treatment of table `CHECK` constraints, as described in [Section 5.4.1](ddl-constraints#DDL-CONSTRAINTS-CHECK-CONSTRAINTS "5.4.1. Check Constraints").)
 
 An example of a common way to break this assumption is to reference a user-defined function in a `CHECK` expression, and then change the behavior of that function. PostgreSQL does not disallow that, but it will not notice if there are stored values of the domain type that now violate the `CHECK` constraint. That would cause a subsequent database dump and restore to fail. The recommended way to handle such a change is to drop the constraint (using `ALTER DOMAIN`), adjust the function definition, and re-add the constraint, thereby rechecking it against stored data.
 
@@ -116,4 +116,4 @@ The command `CREATE DOMAIN` conforms to the SQL standard.
 
 ## See Also
 
-[ALTER DOMAIN](sql-alterdomain.html "ALTER DOMAIN"), [DROP DOMAIN](sql-dropdomain.html "DROP DOMAIN")
+[ALTER DOMAIN](sql-alterdomain "ALTER DOMAIN"), [DROP DOMAIN](sql-dropdomain "DROP DOMAIN")

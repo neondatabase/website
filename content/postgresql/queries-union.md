@@ -17,7 +17,7 @@ where *`query1`* and *`query2`* are queries that can use any of the features dis
 
 `EXCEPT` returns all rows that are in the result of *`query1`* but not in the result of *`query2`*. (This is sometimes called the *difference* between two queries.) Again, duplicates are eliminated unless `EXCEPT ALL` is used.
 
-In order to calculate the union, intersection, or difference of two queries, the two queries must be “union compatible”, which means that they return the same number of columns and the corresponding columns have compatible data types, as described in [Section 10.5](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs").
+In order to calculate the union, intersection, or difference of two queries, the two queries must be “union compatible”, which means that they return the same number of columns and the corresponding columns have compatible data types, as described in [Section 10.5](typeconv-union-case "10.5. UNION, CASE, and Related Constructs").
 
 Set operations can be combined, for example
 

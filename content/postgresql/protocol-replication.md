@@ -13,9 +13,9 @@ For the purpose of testing replication commands, you can make a replication conn
 psql "dbname=postgres replication=database" -c "IDENTIFY_SYSTEM;"
 ```
 
-However, it is often more useful to use [pg\_receivewal](app-pgreceivewal.html "pg_receivewal") (for physical replication) or [pg\_recvlogical](app-pgrecvlogical.html "pg_recvlogical") (for logical replication).
+However, it is often more useful to use [pg\_receivewal](app-pgreceivewal "pg_receivewal") (for physical replication) or [pg\_recvlogical](app-pgrecvlogical "pg_recvlogical") (for logical replication).
 
-Replication commands are logged in the server log when [log\_replication\_commands](runtime-config-logging.html#GUC-LOG-REPLICATION-COMMANDS) is enabled.
+Replication commands are logged in the server log when [log\_replication\_commands](runtime-config-logging#GUC-LOG-REPLICATION-COMMANDS) is enabled.
 
 The commands accepted in replication mode are:
 
@@ -41,11 +41,11 @@ The commands accepted in replication mode are:
 
 * `SHOW` *`name`* [#](#PROTOCOL-REPLICATION-SHOW)
 
-    Requests the server to send the current setting of a run-time parameter. This is similar to the SQL command [SHOW](sql-show.html "SHOW").
+    Requests the server to send the current setting of a run-time parameter. This is similar to the SQL command [SHOW](sql-show "SHOW").
 
   * *`name`*
 
-        The name of a run-time parameter. Available parameters are documented in [Chapter 20](runtime-config.html "Chapter 20. Server Configuration").
+        The name of a run-time parameter. Available parameters are documented in [Chapter 20](runtime-config "Chapter 20. Server Configuration").
 
 * `TIMELINE_HISTORY` *`tli`* [#](#PROTOCOL-REPLICATION-TIMELINE-HISTORY)
 
@@ -61,15 +61,15 @@ The commands accepted in replication mode are:
 
 * `CREATE_REPLICATION_SLOT` *`slot_name`* \[ `TEMPORARY` ] \{ `PHYSICAL` | `LOGICAL` *`output_plugin`* \} \[ ( *`option`* \[, ...] ) ] [#](#PROTOCOL-REPLICATION-CREATE-REPLICATION-SLOT)
 
-    Create a physical or logical replication slot. See [Section 27.2.6](warm-standby.html#STREAMING-REPLICATION-SLOTS "27.2.6. Replication Slots") for more about replication slots.
+    Create a physical or logical replication slot. See [Section 27.2.6](warm-standby#STREAMING-REPLICATION-SLOTS "27.2.6. Replication Slots") for more about replication slots.
 
   * *`slot_name`*
 
-        The name of the slot to create. Must be a valid replication slot name (see [Section 27.2.6.1](warm-standby.html#STREAMING-REPLICATION-SLOTS-MANIPULATION "27.2.6.1. Querying and Manipulating Replication Slots")).
+        The name of the slot to create. Must be a valid replication slot name (see [Section 27.2.6.1](warm-standby#STREAMING-REPLICATION-SLOTS-MANIPULATION "27.2.6.1. Querying and Manipulating Replication Slots")).
 
   * *`output_plugin`*
 
-        The name of the output plugin used for logical decoding (see [Section 49.6](logicaldecoding-output-plugin.html "49.6. Logical Decoding Output Plugins")).
+        The name of the output plugin used for logical decoding (see [Section 49.6](logicaldecoding-output-plugin "49.6. Logical Decoding Output Plugins")).
 
   * `TEMPORARY`
 
@@ -239,7 +239,7 @@ The commands accepted in replication mode are:
 
 * `START_REPLICATION` `SLOT` *`slot_name`* `LOGICAL` *`XXX/XXX`* \[ ( *`option_name`* \[ *`option_value`* ] \[, ...] ) ] [#](#PROTOCOL-REPLICATION-START-REPLICATION-SLOT-LOGICAL)
 
-    Instructs server to start streaming WAL for logical replication, starting at either WAL location *`XXX/XXX`* or the slot's `confirmed_flush_lsn` (see [Section 54.19](view-pg-replication-slots.html "54.19. pg_replication_slots")), whichever is greater. This behavior makes it easier for clients to avoid updating their local LSN status when there is no data to process. However, starting at a different LSN than requested might not catch certain kinds of client errors; so the client may wish to check that `confirmed_flush_lsn` matches its expectations before issuing `START_REPLICATION`.
+    Instructs server to start streaming WAL for logical replication, starting at either WAL location *`XXX/XXX`* or the slot's `confirmed_flush_lsn` (see [Section 54.19](view-pg-replication-slots "54.19. pg_replication_slots")), whichever is greater. This behavior makes it easier for clients to avoid updating their local LSN status when there is no data to process. However, starting at a different LSN than requested might not catch certain kinds of client errors; so the client may wish to check that `confirmed_flush_lsn` matches its expectations before issuing `START_REPLICATION`.
 
     The server can reply with an error, for example if the slot does not exist. On success, the server responds with a CopyBothResponse message, and then starts to stream WAL to the frontend.
 
@@ -281,7 +281,7 @@ The commands accepted in replication mode are:
 
   * `LABEL` *`'label'`*
 
-        Sets the label of the backup. If none is specified, a backup label of `base backup` will be used. The quoting rules for the label are the same as a standard SQL string with [standard\_conforming\_strings](runtime-config-compatible.html#GUC-STANDARD-CONFORMING-STRINGS) turned on.
+        Sets the label of the backup. If none is specified, a backup label of `base backup` will be used. The quoting rules for the label are the same as a standard SQL string with [standard\_conforming\_strings](runtime-config-compatible#GUC-STANDARD-CONFORMING-STRINGS) turned on.
 
   * `TARGET` *`'target'`*
 

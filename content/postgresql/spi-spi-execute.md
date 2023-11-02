@@ -131,7 +131,7 @@ If the execution of the command was successful then one of the following (nonneg
 
 * `SPI_OK_REWRITTEN`
 
-    if the command was rewritten into another kind of command (e.g., `UPDATE` became an `INSERT`) by a [rule](rules.html "Chapter 41. The Rule System").
+    if the command was rewritten into another kind of command (e.g., `UPDATE` became an `INSERT`) by a [rule](rules "Chapter 41. The Rule System").
 
 On error, one of the following negative values is returned:
 

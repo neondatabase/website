@@ -16,7 +16,7 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * BKI
 
-    [Backend Interface](bki.html "Chapter 75. System Catalog Declarations and Initial Contents")
+    [Backend Interface](bki "Chapter 75. System Catalog Declarations and Initial Contents")
 
 * CA
 
@@ -40,7 +40,7 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * CTE
 
-    [Common Table Expression](queries-with.html "7.8. WITH Queries (Common Table Expressions)")
+    [Common Table Expression](queries-with "7.8. WITH Queries (Common Table Expressions)")
 
 * CVE
 
@@ -72,7 +72,7 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * ECPG
 
-    [Embedded C for PostgreSQL](ecpg.html "Chapter 36. ECPG — Embedded SQL in C")
+    [Embedded C for PostgreSQL](ecpg "Chapter 36. ECPG — Embedded SQL in C")
 
 * ESQL
 
@@ -84,19 +84,19 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * FSM
 
-    [Free Space Map](storage-fsm.html "73.3. Free Space Map")
+    [Free Space Map](storage-fsm "73.3. Free Space Map")
 
 * GEQO
 
-    [Genetic Query Optimizer](geqo.html "Chapter 62. Genetic Query Optimizer")
+    [Genetic Query Optimizer](geqo "Chapter 62. Genetic Query Optimizer")
 
 * GIN
 
-    [Generalized Inverted Index](gin.html "Chapter 70. GIN Indexes")
+    [Generalized Inverted Index](gin "Chapter 70. GIN Indexes")
 
 * GiST
 
-    [Generalized Search Tree](gist.html "Chapter 68. GiST Indexes")
+    [Generalized Search Tree](gist "Chapter 68. GiST Indexes")
 
 * Git
 
@@ -112,15 +112,15 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * GUC
 
-    [Grand Unified Configuration](config-setting.html "20.1. Setting Parameters"), the PostgreSQL subsystem that handles server configuration
+    [Grand Unified Configuration](config-setting "20.1. Setting Parameters"), the PostgreSQL subsystem that handles server configuration
 
 * HBA
 
-    [Host-Based Authentication](auth-pg-hba-conf.html "21.1. The pg_hba.conf File")
+    [Host-Based Authentication](auth-pg-hba-conf "21.1. The pg_hba.conf File")
 
 * HOT
 
-    [Heap-Only Tuples](storage-hot.html "73.7. Heap-Only Tuples (HOT)")
+    [Heap-Only Tuples](storage-hot "73.7. Heap-Only Tuples (HOT)")
 
 * IEC
 
@@ -160,7 +160,7 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * LSN
 
-    [**](glossary.html#GLOSSARY-LOG-SEQUENCE-NUMBER)*[Log Sequence Number](glossary.html#GLOSSARY-LOG-SEQUENCE-NUMBER "Log sequence number")*
+    [**](glossary#GLOSSARY-LOG-SEQUENCE-NUMBER)*[Log Sequence Number](glossary#GLOSSARY-LOG-SEQUENCE-NUMBER "Log sequence number")*
 
 * MCF
 
@@ -180,7 +180,7 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * MVCC
 
-    [Multi-Version Concurrency Control](mvcc.html "Chapter 13. Concurrency Control")
+    [Multi-Version Concurrency Control](mvcc "Chapter 13. Concurrency Control")
 
 * NLS
 
@@ -192,7 +192,7 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * OID
 
-    [Object Identifier](datatype-oid.html "8.19. Object Identifier Types")
+    [Object Identifier](datatype-oid "8.19. Object Identifier Types")
 
 * OLAP
 
@@ -212,11 +212,11 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * PGSQL
 
-    [PostgreSQL](index.html "PostgreSQL 17devel Documentation")
+    [PostgreSQL](index "PostgreSQL 17devel Documentation")
 
 * PGXS
 
-    [PostgreSQL Extension System](extend-pgxs.html "38.18. Extension Building Infrastructure")
+    [PostgreSQL Extension System](extend-pgxs "38.18. Extension Building Infrastructure")
 
 * PID
 
@@ -224,11 +224,11 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * PITR
 
-    [Point-In-Time Recovery](continuous-archiving.html "26.3. Continuous Archiving and Point-in-Time Recovery (PITR)") (Continuous Archiving)
+    [Point-In-Time Recovery](continuous-archiving "26.3. Continuous Archiving and Point-in-Time Recovery (PITR)") (Continuous Archiving)
 
 * PL
 
-    [Procedural Languages (server-side)](server-programming.html "Part V. Server Programming")
+    [Procedural Languages (server-side)](server-programming "Part V. Server Programming")
 
 * POSIX
 
@@ -252,11 +252,11 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * SPI
 
-    [Server Programming Interface](spi.html "Chapter 47. Server Programming Interface")
+    [Server Programming Interface](spi "Chapter 47. Server Programming Interface")
 
 * SP-GiST
 
-    [Space-Partitioned Generalized Search Tree](spgist.html "Chapter 69. SP-GiST Indexes")
+    [Space-Partitioned Generalized Search Tree](spgist "Chapter 69. SP-GiST Indexes")
 
 * SQL
 
@@ -264,7 +264,7 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * SRF
 
-    [Set-Returning Function](xfunc-c.html#XFUNC-C-RETURN-SET "38.10.8. Returning Sets")
+    [Set-Returning Function](xfunc-c#XFUNC-C-RETURN-SET "38.10.8. Returning Sets")
 
 * SSH
 
@@ -288,7 +288,7 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * TID
 
-    [Tuple Identifier](datatype-oid.html "8.19. Object Identifier Types")
+    [Tuple Identifier](datatype-oid "8.19. Object Identifier Types")
 
 * TLS
 
@@ -296,7 +296,7 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * TOAST
 
-    [The Oversized-Attribute Storage Technique](storage-toast.html "73.2. TOAST")
+    [The Oversized-Attribute Storage Technique](storage-toast "73.2. TOAST")
 
 * TPC
 
@@ -320,15 +320,15 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * UUID
 
-    [Universally Unique Identifier](datatype-uuid.html "8.12. UUID Type")
+    [Universally Unique Identifier](datatype-uuid "8.12. UUID Type")
 
 * WAL
 
-    [Write-Ahead Log](wal.html "Chapter 30. Reliability and the Write-Ahead Log")
+    [Write-Ahead Log](wal "Chapter 30. Reliability and the Write-Ahead Log")
 
 * XID
 
-    [Transaction Identifier](datatype-oid.html "8.19. Object Identifier Types")
+    [Transaction Identifier](datatype-oid "8.19. Object Identifier Types")
 
 * XML
 

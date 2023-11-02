@@ -154,6 +154,6 @@ where the members are defined as follows:
 
     For triggers other than `UPDATE` triggers, this will be `NULL`.
 
-To allow queries issued through SPI to reference transition tables, see [SPI\_register\_trigger\_data](spi-spi-register-trigger-data.html "SPI_register_trigger_data").
+To allow queries issued through SPI to reference transition tables, see [SPI\_register\_trigger\_data](spi-spi-register-trigger-data "SPI_register_trigger_data").
 
 A trigger function must return either a `HeapTuple` pointer or a `NULL` pointer (*not* an SQL null value, that is, do not set *`isNull`* true). Be careful to return either `tg_trigtuple` or `tg_newtuple`, as appropriate, if you don't want to modify the row being operated on.

@@ -14,9 +14,9 @@ After a successful rewind, the state of the target data directory is analogous t
 
 pg\_rewind examines the timeline histories of the source and target clusters to determine the point where they diverged, and expects to find WAL in the target cluster's `pg_wal` directory reaching all the way back to the point of divergence. The point of divergence can be found either on the target timeline, the source timeline, or their common ancestor. In the typical failover scenario where the target cluster was shut down soon after the divergence, this is not a problem, but if the target cluster ran for a long time after the divergence, its old WAL files might no longer be present. In this case, you can manually copy them from the WAL archive to the `pg_wal` directory, or run pg\_rewind with the `-c` option to automatically retrieve them from the WAL archive. The use of pg\_rewind is not limited to failover, e.g., a standby server can be promoted, run some write transactions, and then rewound to become a standby again.
 
-After running pg\_rewind, WAL replay needs to complete for the data directory to be in a consistent state. When the target server is started again it will enter archive recovery and replay all WAL generated in the source server from the last checkpoint before the point of divergence. If some of the WAL was no longer available in the source server when pg\_rewind was run, and therefore could not be copied by the pg\_rewind session, it must be made available when the target server is started. This can be done by creating a `recovery.signal` file in the target data directory and by configuring a suitable [restore\_command](runtime-config-wal.html#GUC-RESTORE-COMMAND) in `postgresql.conf`.
+After running pg\_rewind, WAL replay needs to complete for the data directory to be in a consistent state. When the target server is started again it will enter archive recovery and replay all WAL generated in the source server from the last checkpoint before the point of divergence. If some of the WAL was no longer available in the source server when pg\_rewind was run, and therefore could not be copied by the pg\_rewind session, it must be made available when the target server is started. This can be done by creating a `recovery.signal` file in the target data directory and by configuring a suitable [restore\_command](runtime-config-wal#GUC-RESTORE-COMMAND) in `postgresql.conf`.
 
-pg\_rewind requires that the target server either has the [wal\_log\_hints](runtime-config-wal.html#GUC-WAL-LOG-HINTS) option enabled in `postgresql.conf` or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. [full\_page\_writes](runtime-config-wal.html#GUC-FULL-PAGE-WRITES) must also be set to `on`, but is enabled by default.
+pg\_rewind requires that the target server either has the [wal\_log\_hints](runtime-config-wal#GUC-WAL-LOG-HINTS) option enabled in `postgresql.conf` or data checksums enabled when the cluster was initialized with initdb. Neither of these are currently on by default. [full\_page\_writes](runtime-config-wal#GUC-FULL-PAGE-WRITES) must also be set to `on`, but is enabled by default.
 
 ### Warning: Failures While Rewinding
 
@@ -78,7 +78,7 @@ pg\_rewind accepts the following command-line arguments:
 
     When set to `fsync`, which is the default, `pg_rewind` will recursively open and synchronize all files in the data directory. The search for files will follow symbolic links for the WAL directory and each configured tablespace.
 
-    On Linux, `syncfs` may be used instead to ask the operating system to synchronize the whole file systems that contain the data directory, the WAL files, and each tablespace. See [Appendix O](syncfs.html "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
+    On Linux, `syncfs` may be used instead to ask the operating system to synchronize the whole file systems that contain the data directory, the WAL files, and each tablespace. See [Appendix O](syncfs "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
 
     This option has no effect when `--no-sync` is used.
 
@@ -92,7 +92,7 @@ pg\_rewind accepts the following command-line arguments:
 
 ## Environment
 
-When `--source-server` option is used, pg\_rewind also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+When `--source-server` option is used, pg\_rewind also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 The environment variable `PG_COLOR` specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 

@@ -7,4 +7,4 @@ Tables are the central objects in a relational database structure, because they 
 * Data types and domains
 * Triggers and rewrite rules
 
-Detailed information on these topics appears in [Part V](server-programming.html "Part V. Server Programming").
+Detailed information on these topics appears in [Part V](server-programming "Part V. Server Programming").

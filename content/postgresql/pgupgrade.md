@@ -80,7 +80,7 @@ pg\_upgrade accepts the following command-line arguments:
 
     When set to `fsync`, which is the default, `pg_upgrade` will recursively open and synchronize all files in the upgraded cluster's data directory. The search for files will follow symbolic links for the WAL directory and each configured tablespace.
 
-    On Linux, `syncfs` may be used instead to ask the operating system to synchronize the whole file systems that contain the upgraded cluster's data directory, its WAL files, and each tablespace. See [Appendix O](syncfs.html "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
+    On Linux, `syncfs` may be used instead to ask the operating system to synchronize the whole file systems that contain the upgraded cluster's data directory, its WAL files, and each tablespace. See [Appendix O](syncfs "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
 
     This option has no effect when `--no-sync` is used.
 
@@ -156,7 +156,7 @@ These are the steps to perform an upgrade with pg\_upgrade:
 
 7. **Adjust authentication**
 
-    `pg_upgrade` will connect to the old and new servers several times, so you might want to set authentication to `peer` in `pg_hba.conf` or use a `~/.pgpass` file (see [Section 34.16](libpq-pgpass.html "34.16. The Password File")).
+    `pg_upgrade` will connect to the old and new servers several times, so you might want to set authentication to `peer` in `pg_hba.conf` or use a `~/.pgpass` file (see [Section 34.16](libpq-pgpass "34.16. The Password File")).
 
 8. **Stop both servers**
 
@@ -180,7 +180,7 @@ These are the steps to perform an upgrade with pg\_upgrade:
 
 9. **Prepare for standby server upgrades**
 
-    If you are upgrading standby servers using methods outlined in section [Step 11](pgupgrade.html#PGUPGRADE-STEP-REPLICAS "Upgrade streaming replication and log-shipping standby servers"), verify that the old standby servers are caught up by running pg\_controldata against the old primary and standby clusters. Verify that the “Latest checkpoint location” values match in all clusters. Also, make sure `wal_level` is not set to `minimal` in the `postgresql.conf` file on the new primary cluster.
+    If you are upgrading standby servers using methods outlined in section [Step 11](pgupgrade#PGUPGRADE-STEP-REPLICAS "Upgrade streaming replication and log-shipping standby servers"), verify that the old standby servers are caught up by running pg\_controldata against the old primary and standby clusters. Verify that the “Latest checkpoint location” values match in all clusters. Also, make sure `wal_level` is not set to `minimal` in the `postgresql.conf` file on the new primary cluster.
 
 10. **Run pg\_upgrade**
 
@@ -213,11 +213,11 @@ These are the steps to perform an upgrade with pg\_upgrade:
 
     Obviously, no one should be accessing the clusters during the upgrade. pg\_upgrade defaults to running servers on port 50432 to avoid unintended client connections. You can use the same port number for both clusters when doing an upgrade because the old and new clusters will not be running at the same time. However, when checking an old running server, the old and new port numbers must be different.
 
-    If an error occurs while restoring the database schema, `pg_upgrade` will exit and you will have to revert to the old cluster as outlined in [Step 17](pgupgrade.html#PGUPGRADE-STEP-REVERT "Reverting to old cluster") below. To try `pg_upgrade` again, you will need to modify the old cluster so the pg\_upgrade schema restore succeeds. If the problem is a `contrib` module, you might need to uninstall the `contrib` module from the old cluster and install it in the new cluster after the upgrade, assuming the module is not being used to store user data.
+    If an error occurs while restoring the database schema, `pg_upgrade` will exit and you will have to revert to the old cluster as outlined in [Step 17](pgupgrade#PGUPGRADE-STEP-REVERT "Reverting to old cluster") below. To try `pg_upgrade` again, you will need to modify the old cluster so the pg\_upgrade schema restore succeeds. If the problem is a `contrib` module, you might need to uninstall the `contrib` module from the old cluster and install it in the new cluster after the upgrade, assuming the module is not being used to store user data.
 
 11. **Upgrade streaming replication and log-shipping standby servers**
 
-    If you used link mode and have Streaming Replication (see [Section 27.2.5](warm-standby.html#STREAMING-REPLICATION "27.2.5. Streaming Replication")) or Log-Shipping (see [Section 27.2](warm-standby.html "27.2. Log-Shipping Standby Servers")) standby servers, you can follow these steps to quickly upgrade them. You will not be running pg\_upgrade on the standby servers, but rather rsync on the primary. Do not start any servers yet.
+    If you used link mode and have Streaming Replication (see [Section 27.2.5](warm-standby#STREAMING-REPLICATION "27.2.5. Streaming Replication")) or Log-Shipping (see [Section 27.2](warm-standby "27.2. Log-Shipping Standby Servers")) standby servers, you can follow these steps to quickly upgrade them. You will not be running pg\_upgrade on the standby servers, but rather rsync on the primary. Do not start any servers yet.
 
     If you did *not* use link mode, do not have or do not want to use rsync, or want an easier solution, skip the instructions in this section and simply recreate the standby servers once pg\_upgrade completes and the new primary is running.
 
@@ -346,8 +346,8 @@ pg\_upgrade does not support upgrading of databases containing table columns usi
 
 (`regclass`, `regrole`, and `regtype` can be upgraded.)
 
-If you want to use link mode and you do not want your old cluster to be modified when the new cluster is started, consider using the clone mode. If that is not available, make a copy of the old cluster and upgrade that in link mode. To make a valid copy of the old cluster, use `rsync` to create a dirty copy of the old cluster while the server is running, then shut down the old server and run `rsync --checksum` again to update the copy with any changes to make it consistent. (`--checksum` is necessary because `rsync` only has file modification-time granularity of one second.) You might want to exclude some files, e.g., `postmaster.pid`, as documented in [Section 26.3.3](continuous-archiving.html#BACKUP-LOWLEVEL-BASE-BACKUP "26.3.3. Making a Base Backup Using the Low Level API"). If your file system supports file system snapshots or copy-on-write file copies, you can use that to make a backup of the old cluster and tablespaces, though the snapshot and copies must be created simultaneously or while the database server is down.
+If you want to use link mode and you do not want your old cluster to be modified when the new cluster is started, consider using the clone mode. If that is not available, make a copy of the old cluster and upgrade that in link mode. To make a valid copy of the old cluster, use `rsync` to create a dirty copy of the old cluster while the server is running, then shut down the old server and run `rsync --checksum` again to update the copy with any changes to make it consistent. (`--checksum` is necessary because `rsync` only has file modification-time granularity of one second.) You might want to exclude some files, e.g., `postmaster.pid`, as documented in [Section 26.3.3](continuous-archiving#BACKUP-LOWLEVEL-BASE-BACKUP "26.3.3. Making a Base Backup Using the Low Level API"). If your file system supports file system snapshots or copy-on-write file copies, you can use that to make a backup of the old cluster and tablespaces, though the snapshot and copies must be created simultaneously or while the database server is down.
 
 ## See Also
 
-[initdb](app-initdb.html "initdb"), [pg\_ctl](app-pg-ctl.html "pg_ctl"), [pg\_dump](app-pgdump.html "pg_dump"), [postgres](app-postgres.html "postgres")
+[initdb](app-initdb "initdb"), [pg\_ctl](app-pg-ctl "pg_ctl"), [pg\_dump](app-pgdump "pg_dump"), [postgres](app-postgres "postgres")

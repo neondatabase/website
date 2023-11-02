@@ -1,12 +1,12 @@
 ## 17.7. Platform-Specific Notes [#](#INSTALLATION-PLATFORM-NOTES)
 
-* *   [17.7.1. AIX](installation-platform-notes.html#INSTALLATION-NOTES-AIX)
-* [17.7.2. Cygwin](installation-platform-notes.html#INSTALLATION-NOTES-CYGWIN)
-* [17.7.3. macOS](installation-platform-notes.html#INSTALLATION-NOTES-MACOS)
-* [17.7.4. MinGW/Native Windows](installation-platform-notes.html#INSTALLATION-NOTES-MINGW)
-* [17.7.5. Solaris](installation-platform-notes.html#INSTALLATION-NOTES-SOLARIS)
+* *   [17.7.1. AIX](installation-platform-notes#INSTALLATION-NOTES-AIX)
+* [17.7.2. Cygwin](installation-platform-notes#INSTALLATION-NOTES-CYGWIN)
+* [17.7.3. macOS](installation-platform-notes#INSTALLATION-NOTES-MACOS)
+* [17.7.4. MinGW/Native Windows](installation-platform-notes#INSTALLATION-NOTES-MINGW)
+* [17.7.5. Solaris](installation-platform-notes#INSTALLATION-NOTES-SOLARIS)
 
-This section documents additional platform-specific issues regarding the installation and setup of PostgreSQL. Be sure to read the installation instructions, and in particular [Section 17.1](install-requirements.html "17.1. Requirements") as well. Also, check [Chapter 33](regress.html "Chapter 33. Regression Tests") regarding the interpretation of regression test results.
+This section documents additional platform-specific issues regarding the installation and setup of PostgreSQL. Be sure to read the installation instructions, and in particular [Section 17.1](install-requirements "17.1. Requirements") as well. Also, check [Chapter 33](regress "Chapter 33. Regression Tests") regarding the interpretation of regression test results.
 
 Platforms that are not covered here have no known platform-specific installation issues.
 
@@ -50,7 +50,7 @@ By default, overcommit of paging space can happen. While we have not seen this o
 
 ### 17.7.2. Cygwin [#](#INSTALLATION-NOTES-CYGWIN)
 
-PostgreSQL can be built using Cygwin, a Linux-like environment for Windows, but that method is inferior to the native Windows build (see [Chapter 18](install-windows.html "Chapter 18. Installation from Source Code on Windows")) and running a server under Cygwin is no longer recommended.
+PostgreSQL can be built using Cygwin, a Linux-like environment for Windows, but that method is inferior to the native Windows build (see [Chapter 18](install-windows "Chapter 18. Installation from Source Code on Windows")) and running a server under Cygwin is no longer recommended.
 
 When building from source, proceed according to the Unix-style installation procedure (i.e., `./configure; make`; etc.), noting the following Cygwin-specific differences:
 
@@ -126,7 +126,7 @@ macOS's “System Integrity Protection” (SIP) feature breaks `make check`, bec
 
 ### 17.7.4. MinGW/Native Windows [#](#INSTALLATION-NOTES-MINGW)
 
-PostgreSQL for Windows can be built using MinGW, a Unix-like build environment for Microsoft operating systems, or using Microsoft's Visual C++ compiler suite. The MinGW build procedure uses the normal build system described in this chapter; the Visual C++ build works completely differently and is described in [Chapter 18](install-windows.html "Chapter 18. Installation from Source Code on Windows").
+PostgreSQL for Windows can be built using MinGW, a Unix-like build environment for Microsoft operating systems, or using Microsoft's Visual C++ compiler suite. The MinGW build procedure uses the normal build system described in this chapter; the Visual C++ build works completely differently and is described in [Chapter 18](install-windows "Chapter 18. Installation from Source Code on Windows").
 
 The native Windows port requires a 32 or 64-bit version of Windows 2000 or later. Earlier operating systems do not have sufficient infrastructure (but Cygwin may be used on those). MinGW, the Unix-like build tools, and MSYS, a collection of Unix tools required to run shell scripts like `configure`, can be downloaded from [http://www.mingw.org/](http://www.mingw.org/). Neither is required to run the resulting binaries; they are needed only for creating the binaries.
 
@@ -167,7 +167,7 @@ If you do not have a reason to use 64-bit binaries on SPARC, prefer the 32-bit v
 
 #### 17.7.5.4. Using DTrace for Tracing PostgreSQL [#](#INSTALLATION-NOTES-SOLARIS-USING-DTRACE)
 
-Yes, using DTrace is possible. See [Section 28.5](dynamic-trace.html "28.5. Dynamic Tracing") for further information.
+Yes, using DTrace is possible. See [Section 28.5](dynamic-trace "28.5. Dynamic Tracing") for further information.
 
 If you see the linking of the `postgres` executable abort with an error message like:
 

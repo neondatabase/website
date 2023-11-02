@@ -1,9 +1,9 @@
 ## 9.18. Conditional Expressions [#](#FUNCTIONS-CONDITIONAL)
 
-  * *   [9.18.1. `CASE`](functions-conditional.html#FUNCTIONS-CASE)
-  * [9.18.2. `COALESCE`](functions-conditional.html#FUNCTIONS-COALESCE-NVL-IFNULL)
-  * [9.18.3. `NULLIF`](functions-conditional.html#FUNCTIONS-NULLIF)
-  * [9.18.4. `GREATEST` and `LEAST`](functions-conditional.html#FUNCTIONS-GREATEST-LEAST)
+  * *   [9.18.1. `CASE`](functions-conditional#FUNCTIONS-CASE)
+  * [9.18.2. `COALESCE`](functions-conditional#FUNCTIONS-COALESCE-NVL-IFNULL)
+  * [9.18.3. `NULLIF`](functions-conditional#FUNCTIONS-NULLIF)
+  * [9.18.4. `GREATEST` and `LEAST`](functions-conditional#FUNCTIONS-GREATEST-LEAST)
 
 This section describes the SQL-compliant conditional expressions available in PostgreSQL.
 
@@ -56,7 +56,7 @@ SELECT a,
  3 | other
 ```
 
-The data types of all the *`result`* expressions must be convertible to a single output type. See [Section 10.5](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs") for more details.
+The data types of all the *`result`* expressions must be convertible to a single output type. See [Section 10.5](typeconv-union-case "10.5. UNION, CASE, and Related Constructs") for more details.
 
 There is a “simple” form of `CASE` expression that is a variant of the general form above:
 
@@ -98,7 +98,7 @@ SELECT ... WHERE CASE WHEN x <> 0 THEN y/x > 1.5 ELSE false END;
 
 ### Note
 
-As described in [Section 4.2.14](sql-expressions.html#SYNTAX-EXPRESS-EVAL "4.2.14. Expression Evaluation Rules"), there are various situations in which subexpressions of an expression are evaluated at different times, so that the principle that “`CASE` evaluates only necessary subexpressions” is not ironclad. For example a constant `1/0` subexpression will usually result in a division-by-zero failure at planning time, even if it's within a `CASE` arm that would never be entered at run time.
+As described in [Section 4.2.14](sql-expressions#SYNTAX-EXPRESS-EVAL "4.2.14. Expression Evaluation Rules"), there are various situations in which subexpressions of an expression are evaluated at different times, so that the principle that “`CASE` evaluates only necessary subexpressions” is not ironclad. For example a constant `1/0` subexpression will usually result in a division-by-zero failure at planning time, even if it's within a `CASE` arm that would never be entered at run time.
 
 ### 9.18.2. `COALESCE` [#](#FUNCTIONS-COALESCE-NVL-IFNULL)
 
@@ -116,7 +116,7 @@ SELECT COALESCE(description, short_description, '(none)') ...
 
 This returns `description` if it is not null, otherwise `short_description` if it is not null, otherwise `(none)`.
 
-The arguments must all be convertible to a common data type, which will be the type of the result (see [Section 10.5](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs") for details).
+The arguments must all be convertible to a common data type, which will be the type of the result (see [Section 10.5](typeconv-union-case "10.5. UNION, CASE, and Related Constructs") for details).
 
 Like a `CASE` expression, `COALESCE` only evaluates the arguments that are needed to determine the result; that is, arguments to the right of the first non-null argument are not evaluated. This SQL-standard function provides capabilities similar to `NVL` and `IFNULL`, which are used in some other database systems.
 
@@ -152,6 +152,6 @@ GREATEST(value [, ...])
 LEAST(value [, ...])
 ```
 
-The `GREATEST` and `LEAST` functions select the largest or smallest value from a list of any number of expressions. The expressions must all be convertible to a common data type, which will be the type of the result (see [Section 10.5](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs") for details).
+The `GREATEST` and `LEAST` functions select the largest or smallest value from a list of any number of expressions. The expressions must all be convertible to a common data type, which will be the type of the result (see [Section 10.5](typeconv-union-case "10.5. UNION, CASE, and Related Constructs") for details).
 
 NULL values in the argument list are ignored. The result will be NULL only if all the expressions evaluate to NULL. (This is a deviation from the SQL standard. According to the standard, the return value is NULL if any argument is NULL. Some other databases behave this way.)

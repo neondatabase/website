@@ -22,7 +22,7 @@ A user with appropriate privileges can pass *`tablespace_name`* to `CREATE DATAB
 
 ### Warning
 
-A tablespace cannot be used independently of the cluster in which it is defined; see [Section 23.6](manage-ag-tablespaces.html "23.6. Tablespaces").
+A tablespace cannot be used independently of the cluster in which it is defined; see [Section 23.6](manage-ag-tablespaces "23.6. Tablespaces").
 
 ## Parameters
 
@@ -40,7 +40,7 @@ A tablespace cannot be used independently of the cluster in which it is defined;
 
 * *`tablespace_option`*
 
-    A tablespace parameter to be set or reset. Currently, the only available parameters are `seq_page_cost`, `random_page_cost`, `effective_io_concurrency` and `maintenance_io_concurrency`. Setting these values for a particular tablespace will override the planner's usual estimate of the cost of reading pages from tables in that tablespace, and the executor's prefetching behavior, as established by the configuration parameters of the same name (see [seq\_page\_cost](runtime-config-query.html#GUC-SEQ-PAGE-COST), [random\_page\_cost](runtime-config-query.html#GUC-RANDOM-PAGE-COST), [effective\_io\_concurrency](runtime-config-resource.html#GUC-EFFECTIVE-IO-CONCURRENCY), [maintenance\_io\_concurrency](runtime-config-resource.html#GUC-MAINTENANCE-IO-CONCURRENCY)). This may be useful if one tablespace is located on a disk which is faster or slower than the remainder of the I/O subsystem.
+    A tablespace parameter to be set or reset. Currently, the only available parameters are `seq_page_cost`, `random_page_cost`, `effective_io_concurrency` and `maintenance_io_concurrency`. Setting these values for a particular tablespace will override the planner's usual estimate of the cost of reading pages from tables in that tablespace, and the executor's prefetching behavior, as established by the configuration parameters of the same name (see [seq\_page\_cost](runtime-config-query#GUC-SEQ-PAGE-COST), [random\_page\_cost](runtime-config-query#GUC-RANDOM-PAGE-COST), [effective\_io\_concurrency](runtime-config-resource#GUC-EFFECTIVE-IO-CONCURRENCY), [maintenance\_io\_concurrency](runtime-config-resource#GUC-MAINTENANCE-IO-CONCURRENCY)). This may be useful if one tablespace is located on a disk which is faster or slower than the remainder of the I/O subsystem.
 
 ## Notes
 
@@ -76,4 +76,4 @@ CREATE TABLESPACE indexspace OWNER genevieve LOCATION '/data/indexes';
 
 ## See Also
 
-[CREATE DATABASE](sql-createdatabase.html "CREATE DATABASE"), [CREATE TABLE](sql-createtable.html "CREATE TABLE"), [CREATE INDEX](sql-createindex.html "CREATE INDEX"), [DROP TABLESPACE](sql-droptablespace.html "DROP TABLESPACE"), [ALTER TABLESPACE](sql-altertablespace.html "ALTER TABLESPACE")
+[CREATE DATABASE](sql-createdatabase "CREATE DATABASE"), [CREATE TABLE](sql-createtable "CREATE TABLE"), [CREATE INDEX](sql-createindex "CREATE INDEX"), [DROP TABLESPACE](sql-droptablespace "DROP TABLESPACE"), [ALTER TABLESPACE](sql-altertablespace "ALTER TABLESPACE")

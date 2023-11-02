@@ -1,8 +1,8 @@
 ## 5. Bug Reporting Guidelines [#](#BUG-REPORTING)
 
-  * *   [5.1. Identifying Bugs](bug-reporting.html#BUG-REPORTING-IDENTIFYING-BUGS)
-  * [5.2. What to Report](bug-reporting.html#BUG-REPORTING-WHAT-TO-REPORT)
-  * [5.3. Where to Report Bugs](bug-reporting.html#BUG-REPORTING-WHERE-TO-REPORT-BUGS)
+  * *   [5.1. Identifying Bugs](bug-reporting#BUG-REPORTING-IDENTIFYING-BUGS)
+  * [5.2. What to Report](bug-reporting#BUG-REPORTING-WHAT-TO-REPORT)
+  * [5.3. Where to Report Bugs](bug-reporting#BUG-REPORTING-WHERE-TO-REPORT-BUGS)
 
 When you find a bug in PostgreSQL we want to hear about it. Your bug reports play an important part in making PostgreSQL more reliable because even the utmost care cannot guarantee that every part of PostgreSQL will work on every platform under every circumstance.
 
@@ -42,7 +42,7 @@ The following items should be contained in every bug report:
 
 ### Note
 
-    If you are reporting an error message, please obtain the most verbose form of the message. In psql, say `\set VERBOSITY verbose` beforehand. If you are extracting the message from the server log, set the run-time parameter [log\_error\_verbosity](runtime-config-logging.html#GUC-LOG-ERROR-VERBOSITY) to `verbose` so that all details are logged.
+    If you are reporting an error message, please obtain the most verbose form of the message. In psql, say `\set VERBOSITY verbose` beforehand. If you are extracting the message from the server log, set the run-time parameter [log\_error\_verbosity](runtime-config-logging#GUC-LOG-ERROR-VERBOSITY) to `verbose` so that all details are logged.
 
 ### Note
 

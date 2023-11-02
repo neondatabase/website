@@ -1,6 +1,6 @@
 ## 68.2. Built-in Operator Classes [#](#GIST-BUILTIN-OPCLASSES)
 
-The core PostgreSQL distribution includes the GiST operator classes shown in [Table 68.1](gist-builtin-opclasses.html#GIST-BUILTIN-OPCLASSES-TABLE "Table 68.1. Built-in GiST Operator Classes"). (Some of the optional modules described in [Appendix F](contrib.html "Appendix F. Additional Supplied Modules and Extensions") provide additional GiST operator classes.)
+The core PostgreSQL distribution includes the GiST operator classes shown in [Table 68.1](gist-builtin-opclasses#GIST-BUILTIN-OPCLASSES-TABLE "Table 68.1. Built-in GiST Operator Classes"). (Some of the optional modules described in [Appendix F](contrib "Appendix F. Additional Supplied Modules and Extensions") provide additional GiST operator classes.)
 
 **Table 68.1. Built-in GiST Operator Classes**
 

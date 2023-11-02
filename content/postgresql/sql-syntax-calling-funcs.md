@@ -1,10 +1,10 @@
 ## 4.3. Calling Functions [#](#SQL-SYNTAX-CALLING-FUNCS)
 
-  * *   [4.3.1. Using Positional Notation](sql-syntax-calling-funcs.html#SQL-SYNTAX-CALLING-FUNCS-POSITIONAL)
-  * [4.3.2. Using Named Notation](sql-syntax-calling-funcs.html#SQL-SYNTAX-CALLING-FUNCS-NAMED)
-  * [4.3.3. Using Mixed Notation](sql-syntax-calling-funcs.html#SQL-SYNTAX-CALLING-FUNCS-MIXED)
+  * *   [4.3.1. Using Positional Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-POSITIONAL)
+  * [4.3.2. Using Named Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-NAMED)
+  * [4.3.3. Using Mixed Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-MIXED)
 
-PostgreSQL allows functions that have named parameters to be called using either *positional* or *named* notation. Named notation is especially useful for functions that have a large number of parameters, since it makes the associations between parameters and actual arguments more explicit and reliable. In positional notation, a function call is written with its argument values in the same order as they are defined in the function declaration. In named notation, the arguments are matched to the function parameters by name and can be written in any order. For each notation, also consider the effect of function argument types, documented in [Section 10.3](typeconv-func.html "10.3. Functions").
+PostgreSQL allows functions that have named parameters to be called using either *positional* or *named* notation. Named notation is especially useful for functions that have a large number of parameters, since it makes the associations between parameters and actual arguments more explicit and reliable. In positional notation, a function call is written with its argument values in the same order as they are defined in the function declaration. In named notation, the arguments are matched to the function parameters by name and can be written in any order. For each notation, also consider the effect of function argument types, documented in [Section 10.3](typeconv-func "10.3. Functions").
 
 In either notation, parameters that have default values given in the function declaration need not be written in the call at all. But this is particularly useful in named notation, since any combination of parameters can be omitted; while in positional notation parameters can only be omitted from right to left.
 
@@ -26,7 +26,7 @@ $$
 LANGUAGE SQL IMMUTABLE STRICT;
 ```
 
-Function `concat_lower_or_upper` has two mandatory parameters, `a` and `b`. Additionally there is one optional parameter `uppercase` which defaults to `false`. The `a` and `b` inputs will be concatenated, and forced to either upper or lower case depending on the `uppercase` parameter. The remaining details of this function definition are not important here (see [Chapter 38](extend.html "Chapter 38. Extending SQL") for more information).
+Function `concat_lower_or_upper` has two mandatory parameters, `a` and `b`. Additionally there is one optional parameter `uppercase` which defaults to `false`. The `a` and `b` inputs will be concatenated, and forced to either upper or lower case depending on the `uppercase` parameter. The remaining details of this function definition are not important here (see [Chapter 38](extend "Chapter 38. Extending SQL") for more information).
 
 ### 4.3.1. Using Positional Notation [#](#SQL-SYNTAX-CALLING-FUNCS-POSITIONAL)
 

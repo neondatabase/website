@@ -1,19 +1,19 @@
 ## 4.2. Value Expressions [#](#SQL-EXPRESSIONS)
 
-  * *   [4.2.1. Column References](sql-expressions.html#SQL-EXPRESSIONS-COLUMN-REFS)
-  * [4.2.2. Positional Parameters](sql-expressions.html#SQL-EXPRESSIONS-PARAMETERS-POSITIONAL)
-  * [4.2.3. Subscripts](sql-expressions.html#SQL-EXPRESSIONS-SUBSCRIPTS)
-  * [4.2.4. Field Selection](sql-expressions.html#FIELD-SELECTION)
-  * [4.2.5. Operator Invocations](sql-expressions.html#SQL-EXPRESSIONS-OPERATOR-CALLS)
-  * [4.2.6. Function Calls](sql-expressions.html#SQL-EXPRESSIONS-FUNCTION-CALLS)
-  * [4.2.7. Aggregate Expressions](sql-expressions.html#SYNTAX-AGGREGATES)
-  * [4.2.8. Window Function Calls](sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS)
-  * [4.2.9. Type Casts](sql-expressions.html#SQL-SYNTAX-TYPE-CASTS)
-  * [4.2.10. Collation Expressions](sql-expressions.html#SQL-SYNTAX-COLLATE-EXPRS)
-  * [4.2.11. Scalar Subqueries](sql-expressions.html#SQL-SYNTAX-SCALAR-SUBQUERIES)
-  * [4.2.12. Array Constructors](sql-expressions.html#SQL-SYNTAX-ARRAY-CONSTRUCTORS)
-  * [4.2.13. Row Constructors](sql-expressions.html#SQL-SYNTAX-ROW-CONSTRUCTORS)
-  * [4.2.14. Expression Evaluation Rules](sql-expressions.html#SYNTAX-EXPRESS-EVAL)
+  * *   [4.2.1. Column References](sql-expressions#SQL-EXPRESSIONS-COLUMN-REFS)
+  * [4.2.2. Positional Parameters](sql-expressions#SQL-EXPRESSIONS-PARAMETERS-POSITIONAL)
+  * [4.2.3. Subscripts](sql-expressions#SQL-EXPRESSIONS-SUBSCRIPTS)
+  * [4.2.4. Field Selection](sql-expressions#FIELD-SELECTION)
+  * [4.2.5. Operator Invocations](sql-expressions#SQL-EXPRESSIONS-OPERATOR-CALLS)
+  * [4.2.6. Function Calls](sql-expressions#SQL-EXPRESSIONS-FUNCTION-CALLS)
+  * [4.2.7. Aggregate Expressions](sql-expressions#SYNTAX-AGGREGATES)
+  * [4.2.8. Window Function Calls](sql-expressions#SYNTAX-WINDOW-FUNCTIONS)
+  * [4.2.9. Type Casts](sql-expressions#SQL-SYNTAX-TYPE-CASTS)
+  * [4.2.10. Collation Expressions](sql-expressions#SQL-SYNTAX-COLLATE-EXPRS)
+  * [4.2.11. Scalar Subqueries](sql-expressions#SQL-SYNTAX-SCALAR-SUBQUERIES)
+  * [4.2.12. Array Constructors](sql-expressions#SQL-SYNTAX-ARRAY-CONSTRUCTORS)
+  * [4.2.13. Row Constructors](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS)
+  * [4.2.14. Expression Evaluation Rules](sql-expressions#SYNTAX-EXPRESS-EVAL)
 
 Value expressions are used in a variety of contexts, such as in the target list of the `SELECT` command, as new column values in `INSERT` or `UPDATE`, or in search conditions in a number of commands. The result of a value expression is sometimes called a *scalar*, to distinguish it from the result of a table expression (which is a table). Value expressions are therefore also called *scalar expressions* (or even simply *expressions*). The expression syntax allows the calculation of values from primitive parts using arithmetic, logical, set, and other operations.
 
@@ -35,9 +35,9 @@ A value expression is one of the following:
 * A row constructor
 * Another value expression in parentheses (used to group subexpressions and override precedence)
 
-In addition to this list, there are a number of constructs that can be classified as an expression but do not follow any general syntax rules. These generally have the semantics of a function or operator and are explained in the appropriate location in [Chapter 9](functions.html "Chapter 9. Functions and Operators"). An example is the `IS NULL` clause.
+In addition to this list, there are a number of constructs that can be classified as an expression but do not follow any general syntax rules. These generally have the semantics of a function or operator and are explained in the appropriate location in [Chapter 9](functions "Chapter 9. Functions and Operators"). An example is the `IS NULL` clause.
 
-We have already discussed constants in [Section 4.1.2](sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS "4.1.2. Constants"). The following sections discuss the remaining options.
+We have already discussed constants in [Section 4.1.2](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS "4.1.2. Constants"). The following sections discuss the remaining options.
 
 ### 4.2.1. Column References [#](#SQL-EXPRESSIONS-COLUMN-REFS)
 
@@ -48,7 +48,7 @@ A column can be referenced in the form:
 correlation.columnname
 ```
 
-*`correlation`* is the name of a table (possibly qualified with a schema name), or an alias for a table defined by means of a `FROM` clause. The correlation name and separating dot can be omitted if the column name is unique across all the tables being used in the current query. (See also [Chapter 7](queries.html "Chapter 7. Queries").)
+*`correlation`* is the name of a table (possibly qualified with a schema name), or an alias for a table defined by means of a `FROM` clause. The correlation name and separating dot can be omitted if the column name is unique across all the tables being used in the current query. (See also [Chapter 7](queries "Chapter 7. Queries").)
 
 ### 4.2.2. Positional Parameters [#](#SQL-EXPRESSIONS-PARAMETERS-POSITIONAL)
 
@@ -98,7 +98,7 @@ $1[10:42]
 (arrayfunction(a,b))[42]
 ```
 
-The parentheses in the last example are required. See [Section 8.15](arrays.html "8.15. Arrays") for more about arrays.
+The parentheses in the last example are required. See [Section 8.15](arrays "8.15. Arrays") for more about arrays.
 
 ### 4.2.4. Field Selection [#](#FIELD-SELECTION)
 
@@ -135,7 +135,7 @@ You can ask for all fields of a composite value by writing `.*`:
 (compositecol).*
 ```
 
-This notation behaves differently depending on context; see [Section 8.16.5](rowtypes.html#ROWTYPES-USAGE "8.16.5. Using Composite Types in Queries") for details.
+This notation behaves differently depending on context; see [Section 8.16.5](rowtypes#ROWTYPES-USAGE "8.16.5. Using Composite Types in Queries") for details.
 
 ### 4.2.5. Operator Invocations [#](#SQL-EXPRESSIONS-OPERATOR-CALLS)
 
@@ -146,14 +146,14 @@ There are two possible syntaxes for an operator invocation:
 | *`expression`* *`operator`* *`expression`* (binary infix operator) |
 | *`operator`* *`expression`* (unary prefix operator)                |
 
-where the *`operator`* token follows the syntax rules of [Section 4.1.3](sql-syntax-lexical.html#SQL-SYNTAX-OPERATORS "4.1.3. Operators"), or is one of the key words `AND`, `OR`, and `NOT`, or is a qualified operator name in the form:
+where the *`operator`* token follows the syntax rules of [Section 4.1.3](sql-syntax-lexical#SQL-SYNTAX-OPERATORS "4.1.3. Operators"), or is one of the key words `AND`, `OR`, and `NOT`, or is a qualified operator name in the form:
 
 ```
 
 OPERATOR(schema.operatorname)
 ```
 
-Which particular operators exist and whether they are unary or binary depends on what operators have been defined by the system or the user. [Chapter 9](functions.html "Chapter 9. Functions and Operators") describes the built-in operators.
+Which particular operators exist and whether they are unary or binary depends on what operators have been defined by the system or the user. [Chapter 9](functions "Chapter 9. Functions and Operators") describes the built-in operators.
 
 ### 4.2.6. Function Calls [#](#SQL-EXPRESSIONS-FUNCTION-CALLS)
 
@@ -171,15 +171,15 @@ For example, the following computes the square root of 2:
 sqrt(2)
 ```
 
-The list of built-in functions is in [Chapter 9](functions.html "Chapter 9. Functions and Operators"). Other functions can be added by the user.
+The list of built-in functions is in [Chapter 9](functions "Chapter 9. Functions and Operators"). Other functions can be added by the user.
 
-When issuing queries in a database where some users mistrust other users, observe security precautions from [Section 10.3](typeconv-func.html "10.3. Functions") when writing function calls.
+When issuing queries in a database where some users mistrust other users, observe security precautions from [Section 10.3](typeconv-func "10.3. Functions") when writing function calls.
 
-The arguments can optionally have names attached. See [Section 4.3](sql-syntax-calling-funcs.html "4.3. Calling Functions") for details.
+The arguments can optionally have names attached. See [Section 4.3](sql-syntax-calling-funcs "4.3. Calling Functions") for details.
 
 ### Note
 
-A function that takes a single argument of composite type can optionally be called using field-selection syntax, and conversely field selection can be written in functional style. That is, the notations `col(table)` and `table.col` are interchangeable. This behavior is not SQL-standard but is provided in PostgreSQL because it allows use of functions to emulate “computed fields”. For more information see [Section 8.16.5](rowtypes.html#ROWTYPES-USAGE "8.16.5. Using Composite Types in Queries").
+A function that takes a single argument of composite type can optionally be called using field-selection syntax, and conversely field selection can be written in functional style. That is, the notations `col(table)` and `table.col` are interchangeable. This behavior is not SQL-standard but is provided in PostgreSQL because it allows use of functions to emulate “computed fields”. For more information see [Section 8.16.5](rowtypes#ROWTYPES-USAGE "8.16.5. Using Composite Types in Queries").
 
 ### 4.2.7. Aggregate Expressions [#](#SYNTAX-AGGREGATES)
 
@@ -202,7 +202,7 @@ Most aggregate functions ignore null inputs, so that rows in which one or more o
 
 For example, `count(*)` yields the total number of input rows; `count(f1)` yields the number of input rows in which `f1` is non-null, since `count` ignores nulls; and `count(distinct f1)` yields the number of distinct non-null values of `f1`.
 
-Ordinarily, the input rows are fed to the aggregate function in an unspecified order. In many cases this does not matter; for example, `min` produces the same result no matter what order it receives the inputs in. However, some aggregate functions (such as `array_agg` and `string_agg`) produce results that depend on the ordering of the input rows. When using such an aggregate, the optional *`order_by_clause`* can be used to specify the desired ordering. The *`order_by_clause`* has the same syntax as for a query-level `ORDER BY` clause, as described in [Section 7.5](queries-order.html "7.5. Sorting Rows (ORDER BY)"), except that its expressions are always just expressions and cannot be output-column names or numbers. For example:
+Ordinarily, the input rows are fed to the aggregate function in an unspecified order. In many cases this does not matter; for example, `min` produces the same result no matter what order it receives the inputs in. However, some aggregate functions (such as `array_agg` and `string_agg`) produce results that depend on the ordering of the input rows. When using such an aggregate, the optional *`order_by_clause`* can be used to specify the desired ordering. The *`order_by_clause`* has the same syntax as for a query-level `ORDER BY` clause, as described in [Section 7.5](queries-order "7.5. Sorting Rows (ORDER BY)"), except that its expressions are always just expressions and cannot be output-column names or numbers. For example:
 
 ```
 
@@ -259,11 +259,11 @@ FROM generate_series(1,10) AS s(i);
 (1 row)
 ```
 
-The predefined aggregate functions are described in [Section 9.21](functions-aggregate.html "9.21. Aggregate Functions"). Other aggregate functions can be added by the user.
+The predefined aggregate functions are described in [Section 9.21](functions-aggregate "9.21. Aggregate Functions"). Other aggregate functions can be added by the user.
 
 An aggregate expression can only appear in the result list or `HAVING` clause of a `SELECT` command. It is forbidden in other clauses, such as `WHERE`, because those clauses are logically evaluated before the results of aggregates are formed.
 
-When an aggregate expression appears in a subquery (see [Section 4.2.11](sql-expressions.html#SQL-SYNTAX-SCALAR-SUBQUERIES "4.2.11. Scalar Subqueries") and [Section 9.23](functions-subquery.html "9.23. Subquery Expressions")), the aggregate is normally evaluated over the rows of the subquery. But an exception occurs if the aggregate's arguments (and *`filter_clause`* if any) contain only outer-level variables: the aggregate then belongs to the nearest such outer level, and is evaluated over the rows of that query. The aggregate expression as a whole is then an outer reference for the subquery it appears in, and acts as a constant over any one evaluation of that subquery. The restriction about appearing only in the result list or `HAVING` clause applies with respect to the query level that the aggregate belongs to.
+When an aggregate expression appears in a subquery (see [Section 4.2.11](sql-expressions#SQL-SYNTAX-SCALAR-SUBQUERIES "4.2.11. Scalar Subqueries") and [Section 9.23](functions-subquery "9.23. Subquery Expressions")), the aggregate is normally evaluated over the rows of the subquery. But an exception occurs if the aggregate's arguments (and *`filter_clause`* if any) contain only outer-level variables: the aggregate then belongs to the nearest such outer level, and is evaluated over the rows of that query. The aggregate expression as a whole is then an outer reference for the subquery it appears in, and acts as a constant over any one evaluation of that subquery. The restriction about appearing only in the result list or `HAVING` clause applies with respect to the query level that the aggregate belongs to.
 
 ### 4.2.8. Window Function Calls [#](#SYNTAX-WINDOW-FUNCTIONS)
 
@@ -318,7 +318,7 @@ EXCLUDE NO OTHERS
 
 Here, *`expression`* represents any value expression that does not itself contain window function calls.
 
-*`window_name`* is a reference to a named window specification defined in the query's `WINDOW` clause. Alternatively, a full *`window_definition`* can be given within parentheses, using the same syntax as for defining a named window in the `WINDOW` clause; see the [SELECT](sql-select.html "SELECT") reference page for details. It's worth pointing out that `OVER wname` is not exactly equivalent to `OVER (wname ...)`; the latter implies copying and modifying the window definition, and will be rejected if the referenced window specification includes a frame clause.
+*`window_name`* is a reference to a named window specification defined in the query's `WINDOW` clause. Alternatively, a full *`window_definition`* can be given within parentheses, using the same syntax as for defining a named window in the `WINDOW` clause; see the [SELECT](sql-select "SELECT") reference page for details. It's worth pointing out that `OVER wname` is not exactly equivalent to `OVER (wname ...)`; the latter implies copying and modifying the window definition, and will be rejected if the referenced window specification includes a frame clause.
 
 The `PARTITION BY` clause groups the rows of the query into *partitions*, which are processed separately by the window function. `PARTITION BY` works similarly to a query-level `GROUP BY` clause, except that its expressions are always just expressions and cannot be output-column names or numbers. Without `PARTITION BY`, all rows produced by the query are treated as a single partition. The `ORDER BY` clause determines the order in which the rows of a partition are processed by the window function. It works similarly to a query-level `ORDER BY` clause, but likewise cannot use output-column names or numbers. Without `ORDER BY`, rows are processed in an unspecified order.
 
@@ -346,13 +346,13 @@ Restrictions are that *`frame_start`* cannot be `UNBOUNDED FOLLOWING`, *`frame_e
 
 If `FILTER` is specified, then only the input rows for which the *`filter_clause`* evaluates to true are fed to the window function; other rows are discarded. Only window functions that are aggregates accept a `FILTER` clause.
 
-The built-in window functions are described in [Table 9.64](functions-window.html#FUNCTIONS-WINDOW-TABLE "Table 9.64. General-Purpose Window Functions"). Other window functions can be added by the user. Also, any built-in or user-defined general-purpose or statistical aggregate can be used as a window function. (Ordered-set and hypothetical-set aggregates cannot presently be used as window functions.)
+The built-in window functions are described in [Table 9.64](functions-window#FUNCTIONS-WINDOW-TABLE "Table 9.64. General-Purpose Window Functions"). Other window functions can be added by the user. Also, any built-in or user-defined general-purpose or statistical aggregate can be used as a window function. (Ordered-set and hypothetical-set aggregates cannot presently be used as window functions.)
 
 The syntaxes using `*` are used for calling parameter-less aggregate functions as window functions, for example `count(*) OVER (PARTITION BY x ORDER BY y)`. The asterisk (`*`) is customarily not used for window-specific functions. Window-specific functions do not allow `DISTINCT` or `ORDER BY` to be used within the function argument list.
 
 Window function calls are permitted only in the `SELECT` list and the `ORDER BY` clause of the query.
 
-More information about window functions can be found in [Section 3.5](tutorial-window.html "3.5. Window Functions"), [Section 9.22](functions-window.html "9.22. Window Functions"), and [Section 7.2.5](queries-table-expressions.html#QUERIES-WINDOW "7.2.5. Window Function Processing").
+More information about window functions can be found in [Section 3.5](tutorial-window "3.5. Window Functions"), [Section 9.22](functions-window "9.22. Window Functions"), and [Section 7.2.5](queries-table-expressions#QUERIES-WINDOW "7.2.5. Window Function Processing").
 
 ### 4.2.9. Type Casts [#](#SQL-SYNTAX-TYPE-CASTS)
 
@@ -366,7 +366,7 @@ expression::type
 
 The `CAST` syntax conforms to SQL; the syntax with `::` is historical PostgreSQL usage.
 
-When a cast is applied to a value expression of a known type, it represents a run-time type conversion. The cast will succeed only if a suitable type conversion operation has been defined. Notice that this is subtly different from the use of casts with constants, as shown in [Section 4.1.2.7](sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS-GENERIC "4.1.2.7. Constants of Other Types"). A cast applied to an unadorned string literal represents the initial assignment of a type to a literal constant value, and so it will succeed for any type (if the contents of the string literal are acceptable input syntax for the data type).
+When a cast is applied to a value expression of a known type, it represents a run-time type conversion. The cast will succeed only if a suitable type conversion operation has been defined. Notice that this is subtly different from the use of casts with constants, as shown in [Section 4.1.2.7](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS-GENERIC "4.1.2.7. Constants of Other Types"). A cast applied to an unadorned string literal represents the initial assignment of a type to a literal constant value, and so it will succeed for any type (if the contents of the string literal are acceptable input syntax for the data type).
 
 An explicit type cast can usually be omitted if there is no ambiguity as to the type that a value expression must produce (for example, when it is assigned to a table column); the system will automatically apply a type cast in such cases. However, automatic casting is only done for casts that are marked “OK to apply implicitly” in the system catalogs. Other casts must be invoked with explicit casting syntax. This restriction is intended to prevent surprising conversions from being applied silently.
 
@@ -381,7 +381,7 @@ However, this only works for types whose names are also valid as function names.
 
 ### Note
 
-The function-like syntax is in fact just a function call. When one of the two standard cast syntaxes is used to do a run-time conversion, it will internally invoke a registered function to perform the conversion. By convention, these conversion functions have the same name as their output type, and thus the “function-like syntax” is nothing more than a direct invocation of the underlying conversion function. Obviously, this is not something that a portable application should rely on. For further details see [CREATE CAST](sql-createcast.html "CREATE CAST").
+The function-like syntax is in fact just a function call. When one of the two standard cast syntaxes is used to do a run-time conversion, it will internally invoke a registered function to perform the conversion. By convention, these conversion functions have the same name as their output type, and thus the “function-like syntax” is nothing more than a direct invocation of the underlying conversion function. Obviously, this is not something that a portable application should rely on. For further details see [CREATE CAST](sql-createcast "CREATE CAST").
 
 ### 4.2.10. Collation Expressions [#](#SQL-SYNTAX-COLLATE-EXPRS)
 
@@ -410,7 +410,7 @@ and overriding the collation of a function or operator call that has locale-sens
 SELECT * FROM tbl WHERE a > 'foo' COLLATE "C";
 ```
 
-Note that in the latter case the `COLLATE` clause is attached to an input argument of the operator we wish to affect. It doesn't matter which argument of the operator or function call the `COLLATE` clause is attached to, because the collation that is applied by the operator or function is derived by considering all arguments, and an explicit `COLLATE` clause will override the collations of all other arguments. (Attaching non-matching `COLLATE` clauses to more than one argument, however, is an error. For more details see [Section 24.2](collation.html "24.2. Collation Support").) Thus, this gives the same result as the previous example:
+Note that in the latter case the `COLLATE` clause is attached to an input argument of the operator we wish to affect. It doesn't matter which argument of the operator or function call the `COLLATE` clause is attached to, because the collation that is applied by the operator or function is derived by considering all arguments, and an explicit `COLLATE` clause will override the collations of all other arguments. (Attaching non-matching `COLLATE` clauses to more than one argument, however, is an error. For more details see [Section 24.2](collation "24.2. Collation Support").) Thus, this gives the same result as the previous example:
 
 ```
 
@@ -428,7 +428,7 @@ because it attempts to apply a collation to the result of the `>` operator, whic
 
 ### 4.2.11. Scalar Subqueries [#](#SQL-SYNTAX-SCALAR-SUBQUERIES)
 
-A scalar subquery is an ordinary `SELECT` query in parentheses that returns exactly one row with one column. (See [Chapter 7](queries.html "Chapter 7. Queries") for information about writing queries.) The `SELECT` query is executed and the single returned value is used in the surrounding value expression. It is an error to use a query that returns more than one row or more than one column as a scalar subquery. (But if, during a particular execution, the subquery returns no rows, there is no error; the scalar result is taken to be null.) The subquery can refer to variables from the surrounding query, which will act as constants during any one evaluation of the subquery. See also [Section 9.23](functions-subquery.html "9.23. Subquery Expressions") for other expressions involving subqueries.
+A scalar subquery is an ordinary `SELECT` query in parentheses that returns exactly one row with one column. (See [Chapter 7](queries "Chapter 7. Queries") for information about writing queries.) The `SELECT` query is executed and the single returned value is used in the surrounding value expression. It is an error to use a query that returns more than one row or more than one column as a scalar subquery. (But if, during a particular execution, the subquery returns no rows, there is no error; the scalar result is taken to be null.) The subquery can refer to variables from the surrounding query, which will act as constants during any one evaluation of the subquery. See also [Section 9.23](functions-subquery "9.23. Subquery Expressions") for other expressions involving subqueries.
 
 For example, the following finds the largest city population in each state:
 
@@ -451,7 +451,7 @@ SELECT ARRAY[1,2,3+4];
 (1 row)
 ```
 
-By default, the array element type is the common type of the member expressions, determined using the same rules as for `UNION` or `CASE` constructs (see [Section 10.5](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs")). You can override this by explicitly casting the array constructor to the desired type, for example:
+By default, the array element type is the common type of the member expressions, determined using the same rules as for `UNION` or `CASE` constructs (see [Section 10.5](typeconv-union-case "10.5. UNION, CASE, and Related Constructs")). You can override this by explicitly casting the array constructor to the desired type, for example:
 
 ```
 
@@ -462,7 +462,7 @@ SELECT ARRAY[1,2,22.7]::integer[];
 (1 row)
 ```
 
-This has the same effect as casting each expression to the array element type individually. For more on casting, see [Section 4.2.9](sql-expressions.html#SQL-SYNTAX-TYPE-CASTS "4.2.9. Type Casts").
+This has the same effect as casting each expression to the array element type individually. For more on casting, see [Section 4.2.9](sql-expressions#SQL-SYNTAX-TYPE-CASTS "4.2.9. Type Casts").
 
 Multidimensional array values can be built by nesting array constructors. In the inner constructors, the key word `ARRAY` can be omitted. For example, these produce the same result:
 
@@ -528,7 +528,7 @@ SELECT ARRAY(SELECT ARRAY[i, i*2] FROM generate_series(1,5) AS a(i));
 
 The subquery must return a single column. If the subquery's output column is of a non-array type, the resulting one-dimensional array will have an element for each row in the subquery result, with an element type matching that of the subquery's output column. If the subquery's output column is of an array type, the result will be an array of the same type but one higher dimension; in this case all the subquery rows must yield arrays of identical dimensionality, else the result would not be rectangular.
 
-The subscripts of an array value built with `ARRAY` always begin with one. For more information about arrays, see [Section 8.15](arrays.html "8.15. Arrays").
+The subscripts of an array value built with `ARRAY` always begin with one. For more information about arrays, see [Section 8.15](arrays "8.15. Arrays").
 
 ### 4.2.13. Row Constructors [#](#SQL-SYNTAX-ROW-CONSTRUCTORS)
 
@@ -541,7 +541,7 @@ SELECT ROW(1,2.5,'this is a test');
 
 The key word `ROW` is optional when there is more than one expression in the list.
 
-A row constructor can include the syntax *`rowvalue`*`.*`, which will be expanded to a list of the elements of the row value, just as occurs when the `.*` syntax is used at the top level of a `SELECT` list (see [Section 8.16.5](rowtypes.html#ROWTYPES-USAGE "8.16.5. Using Composite Types in Queries")). For example, if table `t` has columns `f1` and `f2`, these are the same:
+A row constructor can include the syntax *`rowvalue`*`.*`, which will be expanded to a list of the elements of the row value, just as occurs when the `.*` syntax is used at the top level of a `SELECT` list (see [Section 8.16.5](rowtypes#ROWTYPES-USAGE "8.16.5. Using Composite Types in Queries")). For example, if table `t` has columns `f1` and `f2`, these are the same:
 
 ```
 
@@ -598,7 +598,7 @@ SELECT ROW(1,2.5,'this is a test') = ROW(1, 3, 'not the same');
 SELECT ROW(table.*) IS NULL FROM table;  -- detect all-null rows
 ```
 
-For more detail see [Section 9.24](functions-comparisons.html "9.24. Row and Array Comparisons"). Row constructors can also be used in connection with subqueries, as discussed in [Section 9.23](functions-subquery.html "9.23. Subquery Expressions").
+For more detail see [Section 9.24](functions-comparisons "9.24. Row and Array Comparisons"). Row constructors can also be used in connection with subqueries, as discussed in [Section 9.23](functions-subquery "9.23. Subquery Expressions").
 
 ### 4.2.14. Expression Evaluation Rules [#](#SYNTAX-EXPRESS-EVAL)
 
@@ -622,7 +622,7 @@ Note that this is not the same as the left-to-right “short-circuiting” of Bo
 
 As a consequence, it is unwise to use functions with side effects as part of complex expressions. It is particularly dangerous to rely on side effects or evaluation order in `WHERE` and `HAVING` clauses, since those clauses are extensively reprocessed as part of developing an execution plan. Boolean expressions (`AND`/`OR`/`NOT` combinations) in those clauses can be reorganized in any manner allowed by the laws of Boolean algebra.
 
-When it is essential to force evaluation order, a `CASE` construct (see [Section 9.18](functions-conditional.html "9.18. Conditional Expressions")) can be used. For example, this is an untrustworthy way of trying to avoid division by zero in a `WHERE` clause:
+When it is essential to force evaluation order, a `CASE` construct (see [Section 9.18](functions-conditional "9.18. Conditional Expressions")) can be used. For example, this is an untrustworthy way of trying to avoid division by zero in a `WHERE` clause:
 
 ```
 
@@ -638,7 +638,7 @@ SELECT ... WHERE CASE WHEN x > 0 THEN y/x > 1.5 ELSE false END;
 
 A `CASE` construct used in this fashion will defeat optimization attempts, so it should only be done when necessary. (In this particular example, it would be better to sidestep the problem by writing `y > 1.5*x` instead.)
 
-`CASE` is not a cure-all for such issues, however. One limitation of the technique illustrated above is that it does not prevent early evaluation of constant subexpressions. As described in [Section 38.7](xfunc-volatility.html "38.7. Function Volatility Categories"), functions and operators marked `IMMUTABLE` can be evaluated when the query is planned rather than when it is executed. Thus for example
+`CASE` is not a cure-all for such issues, however. One limitation of the technique illustrated above is that it does not prevent early evaluation of constant subexpressions. As described in [Section 38.7](xfunc-volatility "38.7. Function Volatility Categories"), functions and operators marked `IMMUTABLE` can be evaluated when the query is planned rather than when it is executed. Thus for example
 
 ```
 

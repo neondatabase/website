@@ -1,7 +1,7 @@
 ## 43.9. Errors and Messages [#](#PLPGSQL-ERRORS-AND-MESSAGES)
 
-  * *   [43.9.1. Reporting Errors and Messages](plpgsql-errors-and-messages.html#PLPGSQL-STATEMENTS-RAISE)
-  * [43.9.2. Checking Assertions](plpgsql-errors-and-messages.html#PLPGSQL-STATEMENTS-ASSERT)
+  * *   [43.9.1. Reporting Errors and Messages](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-RAISE)
+  * [43.9.2. Checking Assertions](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-ASSERT)
 
 ### 43.9.1. Reporting Errors and Messages [#](#PLPGSQL-STATEMENTS-RAISE)
 
@@ -16,7 +16,7 @@ RAISE [ level ] USING option = expression [, ... ];
 RAISE ;
 ```
 
-The *`level`* option specifies the error severity. Allowed levels are `DEBUG`, `LOG`, `INFO`, `NOTICE`, `WARNING`, and `EXCEPTION`, with `EXCEPTION` being the default. `EXCEPTION` raises an error (which normally aborts the current transaction); the other levels only generate messages of different priority levels. Whether messages of a particular priority are reported to the client, written to the server log, or both is controlled by the [log\_min\_messages](runtime-config-logging.html#GUC-LOG-MIN-MESSAGES) and [client\_min\_messages](runtime-config-client.html#GUC-CLIENT-MIN-MESSAGES) configuration variables. See [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for more information.
+The *`level`* option specifies the error severity. Allowed levels are `DEBUG`, `LOG`, `INFO`, `NOTICE`, `WARNING`, and `EXCEPTION`, with `EXCEPTION` being the default. `EXCEPTION` raises an error (which normally aborts the current transaction); the other levels only generate messages of different priority levels. Whether messages of a particular priority are reported to the client, written to the server log, or both is controlled by the [log\_min\_messages](runtime-config-logging#GUC-LOG-MIN-MESSAGES) and [client\_min\_messages](runtime-config-client#GUC-CLIENT-MIN-MESSAGES) configuration variables. See [Chapter 20](runtime-config "Chapter 20. Server Configuration") for more information.
 
 After *`level`* if any, you can specify a *`format`* string (which must be a simple string literal, not an expression). The format string specifies the error message text to be reported. The format string can be followed by optional argument expressions to be inserted into the message. Inside the format string, `%` is replaced by the string representation of the next optional argument's value. Write `%%` to emit a literal `%`. The number of arguments must match the number of `%` placeholders in the format string, or an error is raised during the compilation of the function.
 
@@ -43,7 +43,7 @@ You can attach additional information to the error report by writing `USING` fol
 
 * `ERRCODE` [#](#RAISE-USING-OPTION-ERRCODE)
 
-    Specifies the error code (SQLSTATE) to report, either by condition name, as shown in [Appendix A](errcodes-appendix.html "Appendix A. PostgreSQL Error Codes"), or directly as a five-character SQLSTATE code.
+    Specifies the error code (SQLSTATE) to report, either by condition name, as shown in [Appendix A](errcodes-appendix "Appendix A. PostgreSQL Error Codes"), or directly as a five-character SQLSTATE code.
 
 * `COLUMN``CONSTRAINT``DATATYPE``TABLE``SCHEMA` [#](#RAISE-USING-OPTION-COLUMN)
 

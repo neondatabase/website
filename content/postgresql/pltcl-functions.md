@@ -1,6 +1,6 @@
 ## 44.2. PL/Tcl Functions and Arguments [#](#PLTCL-FUNCTIONS)
 
-To create a function in the PL/Tcl language, use the standard [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") syntax:
+To create a function in the PL/Tcl language, use the standard [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION") syntax:
 
 ```
 

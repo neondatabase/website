@@ -2,7 +2,7 @@
 
 The catalog `pg_shdepend` records the dependency relationships between database objects and shared objects, such as roles. This information allows PostgreSQL to ensure that those objects are unreferenced before attempting to delete them.
 
-See also [`pg_depend`](catalog-pg-depend.html "53.18. pg_depend"), which performs a similar function for dependencies involving objects within a single database.
+See also [`pg_depend`](catalog-pg-depend "53.18. pg_depend"), which performs a similar function for dependencies involving objects within a single database.
 
 Unlike most system catalogs, `pg_shdepend` is shared across all databases of a cluster: there is only one copy of `pg_shdepend` per cluster, not one per database.
 
@@ -10,11 +10,11 @@ Unlike most system catalogs, `pg_shdepend` is shared across all databases of a c
 
 | Column TypeDescription                                                                                                                                                          |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dbid` `oid` (references [`pg_database`](catalog-pg-database.html "53.15. pg_database").`oid`)The OID of the database the dependent object is in, or zero for a shared object   |
-| `classid` `oid` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`oid`)The OID of the system catalog the dependent object is in                                |
+| `dbid` `oid` (references [`pg_database`](catalog-pg-database "53.15. pg_database").`oid`)The OID of the database the dependent object is in, or zero for a shared object   |
+| `classid` `oid` (references [`pg_class`](catalog-pg-class "53.11. pg_class").`oid`)The OID of the system catalog the dependent object is in                                |
 | `objid` `oid` (references any OID column)The OID of the specific dependent object                                                                                               |
 | `objsubid` `int4`For a table column, this is the column number (the `objid` and `classid` refer to the table itself). For all other object types, this column is zero.          |
-| `refclassid` `oid` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`oid`)The OID of the system catalog the referenced object is in (must be a shared catalog) |
+| `refclassid` `oid` (references [`pg_class`](catalog-pg-class "53.11. pg_class").`oid`)The OID of the system catalog the referenced object is in (must be a shared catalog) |
 | `refobjid` `oid` (references any OID column)The OID of the specific referenced object                                                                                           |
 | `deptype` `char`A code defining the specific semantics of this dependency relationship; see text                                                                                |
 

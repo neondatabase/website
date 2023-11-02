@@ -38,7 +38,7 @@ You must own the statistics object to use `ALTER STATISTICS`. To change a statis
 
 * *`new_target`*
 
-    The statistic-gathering target for this statistics object for subsequent [`ANALYZE`](sql-analyze.html "ANALYZE") operations. The target can be set in the range 0 to 10000; alternatively, set it to -1 to revert to using the maximum of the statistics target of the referenced columns, if set, or the system default statistics target ([default\_statistics\_target](runtime-config-query.html#GUC-DEFAULT-STATISTICS-TARGET)). For more information on the use of statistics by the PostgreSQL query planner, refer to [Section 14.2](planner-stats.html "14.2. Statistics Used by the Planner").
+    The statistic-gathering target for this statistics object for subsequent [`ANALYZE`](sql-analyze "ANALYZE") operations. The target can be set in the range 0 to 10000; alternatively, set it to -1 to revert to using the maximum of the statistics target of the referenced columns, if set, or the system default statistics target ([default\_statistics\_target](runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET)). For more information on the use of statistics by the PostgreSQL query planner, refer to [Section 14.2](planner-stats "14.2. Statistics Used by the Planner").
 
 ## Compatibility
 
@@ -46,4 +46,4 @@ There is no `ALTER STATISTICS` command in the SQL standard.
 
 ## See Also
 
-[CREATE STATISTICS](sql-createstatistics.html "CREATE STATISTICS"), [DROP STATISTICS](sql-dropstatistics.html "DROP STATISTICS")
+[CREATE STATISTICS](sql-createstatistics "CREATE STATISTICS"), [DROP STATISTICS](sql-dropstatistics "DROP STATISTICS")

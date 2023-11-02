@@ -20,7 +20,7 @@ If a schema name is given then the text search dictionary is created in the spec
 
 The user who defines a text search dictionary becomes its owner.
 
-Refer to [Chapter 12](textsearch.html "Chapter 12. Full Text Search") for further information.
+Refer to [Chapter 12](textsearch "Chapter 12. Full Text Search") for further information.
 
 ## Parameters
 
@@ -61,4 +61,4 @@ There is no `CREATE TEXT SEARCH DICTIONARY` statement in the SQL standard.
 
 ## See Also
 
-[ALTER TEXT SEARCH DICTIONARY](sql-altertsdictionary.html "ALTER TEXT SEARCH DICTIONARY"), [DROP TEXT SEARCH DICTIONARY](sql-droptsdictionary.html "DROP TEXT SEARCH DICTIONARY")
+[ALTER TEXT SEARCH DICTIONARY](sql-altertsdictionary "ALTER TEXT SEARCH DICTIONARY"), [DROP TEXT SEARCH DICTIONARY](sql-droptsdictionary "DROP TEXT SEARCH DICTIONARY")

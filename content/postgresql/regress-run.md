@@ -1,11 +1,11 @@
 ## 33.1. Running the Tests [#](#REGRESS-RUN)
 
-  * *   [33.1.1. Running the Tests Against a Temporary Installation](regress-run.html#REGRESS-RUN-TEMP-INST)
-  * [33.1.2. Running the Tests Against an Existing Installation](regress-run.html#REGRESS-RUN-EXISTING-INST)
-  * [33.1.3. Additional Test Suites](regress-run.html#REGRESS-ADDITIONAL)
-  * [33.1.4. Locale and Encoding](regress-run.html#REGRESS-RUN-LOCALE)
-  * [33.1.5. Custom Server Settings](regress-run.html#REGRESS-RUN-CUSTOM-SETTINGS)
-  * [33.1.6. Extra Tests](regress-run.html#REGRESS-RUN-EXTRA-TESTS)
+  * *   [33.1.1. Running the Tests Against a Temporary Installation](regress-run#REGRESS-RUN-TEMP-INST)
+  * [33.1.2. Running the Tests Against an Existing Installation](regress-run#REGRESS-RUN-EXISTING-INST)
+  * [33.1.3. Additional Test Suites](regress-run#REGRESS-ADDITIONAL)
+  * [33.1.4. Locale and Encoding](regress-run#REGRESS-RUN-LOCALE)
+  * [33.1.5. Custom Server Settings](regress-run#REGRESS-RUN-CUSTOM-SETTINGS)
+  * [33.1.6. Extra Tests](regress-run#REGRESS-RUN-EXTRA-TESTS)
 
 The regression tests can be run against an already installed and running server, or using a temporary installation within the build tree. Furthermore, there is a “parallel” and a “sequential” mode for running the tests. The sequential method runs each test script alone, while the parallel method starts up multiple server processes to run groups of tests in parallel. Parallel testing adds confidence that interprocess communication and locking are working correctly. Some tests may run sequentially even in the “parallel” mode in case this is required by the test.
 
@@ -26,7 +26,7 @@ in the top-level directory. (Or you can change to `src/test/regress` and run the
 # All 213 tests passed.
 ```
 
-or otherwise a note about which tests failed. See [Section 33.2](regress-evaluation.html "33.2. Test Evaluation") below before assuming that a “failure” represents a serious problem.
+or otherwise a note about which tests failed. See [Section 33.2](regress-evaluation "33.2. Test Evaluation") below before assuming that a “failure” represents a serious problem.
 
 Because this test method runs a temporary server, it will not work if you did the build as the root user, since the server will not start as root. Recommended procedure is not to do the build as root, or else to perform testing after completing the installation.
 
@@ -43,7 +43,7 @@ runs no more than ten tests concurrently.
 
 ### 33.1.2. Running the Tests Against an Existing Installation [#](#REGRESS-RUN-EXISTING-INST)
 
-To run the tests after installation (see [Chapter 17](installation.html "Chapter 17. Installation from Source Code")), initialize a data directory and start the server as explained in [Chapter 19](runtime.html "Chapter 19. Server Setup and Operation"), then type:
+To run the tests after installation (see [Chapter 17](installation "Chapter 17. Installation from Source Code")), initialize a data directory and start the server as explained in [Chapter 19](runtime "Chapter 19. Server Setup and Operation"), then type:
 
 ```
 
@@ -99,7 +99,7 @@ The additional tests that can be invoked this way include:
 
 When using `installcheck` mode, these tests will create and destroy test databases whose names include `regression`, for example `pl_regression` or `contrib_regression`. Beware of using `installcheck` mode with an installation that has any non-test databases named that way.
 
-Some of these auxiliary test suites use the TAP infrastructure explained in [Section 33.4](regress-tap.html "33.4. TAP Tests"). The TAP-based tests are run only when PostgreSQL was configured with the option `--enable-tap-tests`. This is recommended for development, but can be omitted if there is no suitable Perl installation.
+Some of these auxiliary test suites use the TAP infrastructure explained in [Section 33.4](regress-tap "33.4. TAP Tests"). The TAP-based tests are run only when PostgreSQL was configured with the option `--enable-tap-tests`. This is recommended for development, but can be omitted if there is no suitable Perl installation.
 
 Some test suites are not run by default, either because they are not secure to run on a multiuser system, because they require special software or because they are resource intensive. You can decide which test suites to run additionally by setting the `make` or environment variable `PG_TEST_EXTRA` to a whitespace-separated list, for example:
 
@@ -177,7 +177,7 @@ echo 'work_mem = 50MB' >> test_postgresql.conf
 make check EXTRA_REGRESS_OPTS="--temp-config=test_postgresql.conf"
 ```
 
-This can be useful to enable additional logging, adjust resource limits, or enable extra run-time checks such as [debug\_discard\_caches](runtime-config-developer.html#GUC-DEBUG-DISCARD-CACHES).
+This can be useful to enable additional logging, adjust resource limits, or enable extra run-time checks such as [debug\_discard\_caches](runtime-config-developer#GUC-DEBUG-DISCARD-CACHES).
 
 ### 33.1.6. Extra Tests [#](#REGRESS-RUN-EXTRA-TESTS)
 

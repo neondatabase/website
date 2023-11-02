@@ -11,7 +11,7 @@ PREPARE prepared_name FROM string
 
 ## Description
 
-`PREPARE` prepares a statement dynamically specified as a string for execution. This is different from the direct SQL statement [PREPARE](sql-prepare.html "PREPARE"), which can also be used in embedded programs. The [EXECUTE](sql-execute.html "EXECUTE") command is used to execute either kind of prepared statement.
+`PREPARE` prepares a statement dynamically specified as a string for execution. This is different from the direct SQL statement [PREPARE](sql-prepare "PREPARE"), which can also be used in embedded programs. The [EXECUTE](sql-execute "EXECUTE") command is used to execute either kind of prepared statement.
 
 ## Parameters
 
@@ -47,4 +47,4 @@ EXEC SQL EXECUTE foo USING SQL DESCRIPTOR indesc INTO SQL DESCRIPTOR outdesc;
 
 ## See Also
 
-[EXECUTE](sql-execute.html "EXECUTE")
+[EXECUTE](sql-execute "EXECUTE")

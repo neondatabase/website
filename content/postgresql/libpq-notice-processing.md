@@ -25,9 +25,9 @@ PQsetNoticeProcessor(PGconn *conn,
 
 Each of these functions returns the previous notice receiver or processor function pointer, and sets the new value. If you supply a null function pointer, no action is taken, but the current pointer is returned.
 
-When a notice or warning message is received from the server, or generated internally by libpq, the notice receiver function is called. It is passed the message in the form of a `PGRES_NONFATAL_ERROR` `PGresult`. (This allows the receiver to extract individual fields using [`PQresultErrorField`](libpq-exec.html#LIBPQ-PQRESULTERRORFIELD), or obtain a complete preformatted message using [`PQresultErrorMessage`](libpq-exec.html#LIBPQ-PQRESULTERRORMESSAGE) or [`PQresultVerboseErrorMessage`](libpq-exec.html#LIBPQ-PQRESULTVERBOSEERRORMESSAGE).) The same void pointer passed to `PQsetNoticeReceiver` is also passed. (This pointer can be used to access application-specific state if needed.)
+When a notice or warning message is received from the server, or generated internally by libpq, the notice receiver function is called. It is passed the message in the form of a `PGRES_NONFATAL_ERROR` `PGresult`. (This allows the receiver to extract individual fields using [`PQresultErrorField`](libpq-exec#LIBPQ-PQRESULTERRORFIELD), or obtain a complete preformatted message using [`PQresultErrorMessage`](libpq-exec#LIBPQ-PQRESULTERRORMESSAGE) or [`PQresultVerboseErrorMessage`](libpq-exec#LIBPQ-PQRESULTVERBOSEERRORMESSAGE).) The same void pointer passed to `PQsetNoticeReceiver` is also passed. (This pointer can be used to access application-specific state if needed.)
 
-The default notice receiver simply extracts the message (using [`PQresultErrorMessage`](libpq-exec.html#LIBPQ-PQRESULTERRORMESSAGE)) and passes it to the notice processor.
+The default notice receiver simply extracts the message (using [`PQresultErrorMessage`](libpq-exec#LIBPQ-PQRESULTERRORMESSAGE)) and passes it to the notice processor.
 
 The notice processor is responsible for handling a notice or warning message given in text form. It is passed the string text of the message (including a trailing newline), plus a void pointer that is the same one passed to `PQsetNoticeProcessor`. (This pointer can be used to access application-specific state if needed.)
 
@@ -42,4 +42,4 @@ defaultNoticeProcessor(void *arg, const char *message)
 }
 ```
 
-Once you have set a notice receiver or processor, you should expect that that function could be called as long as either the `PGconn` object or `PGresult` objects made from it exist. At creation of a `PGresult`, the `PGconn`'s current notice handling pointers are copied into the `PGresult` for possible use by functions like [`PQgetvalue`](libpq-exec.html#LIBPQ-PQGETVALUE).
+Once you have set a notice receiver or processor, you should expect that that function could be called as long as either the `PGconn` object or `PGresult` objects made from it exist. At creation of a `PGresult`, the `PGconn`'s current notice handling pointers are copied into the `PGresult` for possible use by functions like [`PQgetvalue`](libpq-exec#LIBPQ-PQGETVALUE).

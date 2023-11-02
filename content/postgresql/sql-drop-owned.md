@@ -21,7 +21,7 @@ DROP OWNED BY { name | CURRENT_ROLE | CURRENT_USER | SESSION_USER } [, ...] [ CA
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the affected objects, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the affected objects, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -33,11 +33,11 @@ DROP OWNED BY { name | CURRENT_ROLE | CURRENT_USER | SESSION_USER } [, ...] [ CA
 
 Using the `CASCADE` option might make the command recurse to objects owned by other users.
 
-The [`REASSIGN OWNED`](sql-reassign-owned.html "REASSIGN OWNED") command is an alternative that reassigns the ownership of all the database objects owned by one or more roles. However, `REASSIGN OWNED` does not deal with privileges for other objects.
+The [`REASSIGN OWNED`](sql-reassign-owned "REASSIGN OWNED") command is an alternative that reassigns the ownership of all the database objects owned by one or more roles. However, `REASSIGN OWNED` does not deal with privileges for other objects.
 
 Databases and tablespaces owned by the role(s) will not be removed.
 
-See [Section 22.4](role-removal.html "22.4. Dropping Roles") for more discussion.
+See [Section 22.4](role-removal "22.4. Dropping Roles") for more discussion.
 
 ## Compatibility
 
@@ -45,4 +45,4 @@ The `DROP OWNED` command is a PostgreSQL extension.
 
 ## See Also
 
-[REASSIGN OWNED](sql-reassign-owned.html "REASSIGN OWNED"), [DROP ROLE](sql-droprole.html "DROP ROLE")
+[REASSIGN OWNED](sql-reassign-owned "REASSIGN OWNED"), [DROP ROLE](sql-droprole "DROP ROLE")

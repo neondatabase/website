@@ -1,10 +1,10 @@
 ## 7.2. Table Expressions [#](#QUERIES-TABLE-EXPRESSIONS)
 
-  * *   [7.2.1. The `FROM` Clause](queries-table-expressions.html#QUERIES-FROM)
-  * [7.2.2. The `WHERE` Clause](queries-table-expressions.html#QUERIES-WHERE)
-  * [7.2.3. The `GROUP BY` and `HAVING` Clauses](queries-table-expressions.html#QUERIES-GROUP)
-  * [7.2.4. `GROUPING SETS`, `CUBE`, and `ROLLUP`](queries-table-expressions.html#QUERIES-GROUPING-SETS)
-  * [7.2.5. Window Function Processing](queries-table-expressions.html#QUERIES-WINDOW)
+  * *   [7.2.1. The `FROM` Clause](queries-table-expressions#QUERIES-FROM)
+  * [7.2.2. The `WHERE` Clause](queries-table-expressions#QUERIES-WHERE)
+  * [7.2.3. The `GROUP BY` and `HAVING` Clauses](queries-table-expressions#QUERIES-GROUP)
+  * [7.2.4. `GROUPING SETS`, `CUBE`, and `ROLLUP`](queries-table-expressions#QUERIES-GROUPING-SETS)
+  * [7.2.5. Window Function Processing](queries-table-expressions#QUERIES-WINDOW)
 
 A *table expression* computes a table. The table expression contains a `FROM` clause that is optionally followed by `WHERE`, `GROUP BY`, and `HAVING` clauses. Trivial table expressions simply refer to a table on disk, a so-called base table, but more complex expressions can be used to modify or combine base tables in various ways.
 
@@ -12,7 +12,7 @@ The optional `WHERE`, `GROUP BY`, and `HAVING` clauses in the table expression s
 
 ### 7.2.1. The `FROM` Clause [#](#QUERIES-FROM)
 
-The [`FROM`](sql-select.html#SQL-FROM "FROM Clause") clause derives a table from one or more other tables given in a comma-separated table reference list.
+The [`FROM`](sql-select#SQL-FROM "FROM Clause") clause derives a table from one or more other tables given in a comma-separated table reference list.
 
 ```
 
@@ -293,7 +293,7 @@ is not valid; the table alias `a` is not visible outside the alias `c`.
 
 #### 7.2.1.3. Subqueries [#](#QUERIES-SUBQUERIES)
 
-Subqueries specifying a derived table must be enclosed in parentheses. They may be assigned a table alias name, and optionally column alias names (as in [Section 7.2.1.2](queries-table-expressions.html#QUERIES-TABLE-ALIASES "7.2.1.2. Table and Column Aliases")). For example:
+Subqueries specifying a derived table must be enclosed in parentheses. They may be assigned a table alias name, and optionally column alias names (as in [Section 7.2.1.2](queries-table-expressions#QUERIES-TABLE-ALIASES "7.2.1.2. Table and Column Aliases")). For example:
 
 ```
 
@@ -310,7 +310,7 @@ FROM (VALUES ('anne', 'smith'), ('bob', 'jones'), ('joe', 'blow'))
      AS names(first, last)
 ```
 
-Again, a table alias is optional. Assigning alias names to the columns of the `VALUES` list is optional, but is good practice. For more information see [Section 7.7](queries-values.html "7.7. VALUES Lists").
+Again, a table alias is optional. Assigning alias names to the columns of the `VALUES` list is optional, but is good practice. For more information see [Section 7.7](queries-values "7.7. VALUES Lists").
 
 According to the SQL standard, a table alias name must be supplied for a subquery. PostgreSQL allows `AS` and the alias to be omitted, but writing one is good practice in SQL code that might be ported to another system.
 
@@ -328,7 +328,7 @@ ROWS FROM( function_call [, ... ] ) [WITH ORDINALITY] [[AS] table_alias [(column
 
 If the `WITH ORDINALITY` clause is specified, an additional column of type `bigint` will be added to the function result columns. This column numbers the rows of the function result set, starting from 1. (This is a generalization of the SQL-standard syntax for `UNNEST ... WITH ORDINALITY`.) By default, the ordinal column is called `ordinality`, but a different column name can be assigned to it using an `AS` clause.
 
-The special table function `UNNEST` may be called with any number of array parameters, and it returns a corresponding number of columns, as if `UNNEST` ([Section 9.19](functions-array.html "9.19. Array Functions and Operators")) had been called on each parameter separately and combined using the `ROWS FROM` construct.
+The special table function `UNNEST` may be called with any number of array parameters, and it returns a corresponding number of columns, as if `UNNEST` ([Section 9.19](functions-array "9.19. Array Functions and Operators")) had been called on each parameter separately and combined using the `ROWS FROM` construct.
 
 ```
 
@@ -384,7 +384,7 @@ SELECT *
     WHERE proname LIKE 'bytea%';
 ```
 
-The [dblink](contrib-dblink-function.html "dblink") function (part of the [dblink](dblink.html "F.12. dblink — connect to other PostgreSQL databases") module) executes a remote query. It is declared to return `record` since it might be used for any kind of query. The actual column set must be specified in the calling query so that the parser knows, for example, what `*` should expand to.
+The [dblink](contrib-dblink-function "dblink") function (part of the [dblink](dblink "F.12. dblink — connect to other PostgreSQL databases") module) executes a remote query. It is declared to return `record` since it might be used for any kind of query. The actual column set must be specified in the calling query so that the parser knows, for example, what `*` should expand to.
 
 This example uses `ROWS FROM`:
 
@@ -466,14 +466,14 @@ WHERE pname IS NULL;
 
 ### 7.2.2. The `WHERE` Clause [#](#QUERIES-WHERE)
 
-The syntax of the [`WHERE`](sql-select.html#SQL-WHERE "WHERE Clause") clause is
+The syntax of the [`WHERE`](sql-select#SQL-WHERE "WHERE Clause") clause is
 
 ```
 
 WHERE search_condition
 ```
 
-where *`search_condition`* is any value expression (see [Section 4.2](sql-expressions.html "4.2. Value Expressions")) that returns a value of type `boolean`.
+where *`search_condition`* is any value expression (see [Section 4.2](sql-expressions "4.2. Value Expressions")) that returns a value of type `boolean`.
 
 After the processing of the `FROM` clause is done, each row of the derived virtual table is checked against the search condition. If the result of the condition is true, the row is kept in the output table, otherwise (i.e., if the result is false or null) it is discarded. The search condition typically references at least one column of the table generated in the `FROM` clause; this is not required, but otherwise the `WHERE` clause will be fairly useless.
 
@@ -533,7 +533,7 @@ SELECT select_list
     GROUP BY grouping_column_reference [, grouping_column_reference]...
 ```
 
-The [`GROUP BY`](sql-select.html#SQL-GROUPBY "GROUP BY Clause") clause is used to group together those rows in a table that have the same values in all the columns listed. The order in which the columns are listed does not matter. The effect is to combine each set of rows having common values into one group row that represents all rows in the group. This is done to eliminate redundancy in the output and/or compute aggregates that apply to these groups. For instance:
+The [`GROUP BY`](sql-select#SQL-GROUPBY "GROUP BY Clause") clause is used to group together those rows in a table that have the same values in all the columns listed. The order in which the columns are listed does not matter. The effect is to combine each set of rows having common values into one group row that represents all rows in the group. This is done to eliminate redundancy in the output and/or compute aggregates that apply to these groups. For instance:
 
 ```
 
@@ -570,11 +570,11 @@ In general, if a table is grouped, columns that are not listed in `GROUP BY` can
 (3 rows)
 ```
 
-Here `sum` is an aggregate function that computes a single value over the entire group. More information about the available aggregate functions can be found in [Section 9.21](functions-aggregate.html "9.21. Aggregate Functions").
+Here `sum` is an aggregate function that computes a single value over the entire group. More information about the available aggregate functions can be found in [Section 9.21](functions-aggregate "9.21. Aggregate Functions").
 
 ### Tip
 
-Grouping without aggregate expressions effectively calculates the set of distinct values in a column. This can also be achieved using the `DISTINCT` clause (see [Section 7.3.3](queries-select-lists.html#QUERIES-DISTINCT "7.3.3. DISTINCT")).
+Grouping without aggregate expressions effectively calculates the set of distinct values in a column. This can also be achieved using the `DISTINCT` clause (see [Section 7.3.3](queries-select-lists#QUERIES-DISTINCT "7.3.3. DISTINCT")).
 
 Here is another example: it calculates the total sales for each product (rather than the total sales of all products):
 
@@ -662,7 +662,7 @@ More complex grouping operations than those described above are possible using t
 
 Each sublist of `GROUPING SETS` may specify zero or more columns or expressions and is interpreted the same way as though it were directly in the `GROUP BY` clause. An empty grouping set means that all rows are aggregated down to a single group (which is output even if no input rows were present), as described above for the case of aggregate functions with no `GROUP BY` clause.
 
-References to the grouping columns or expressions are replaced by null values in result rows for grouping sets in which those columns do not appear. To distinguish which grouping a particular output row resulted from, see [Table 9.63](functions-aggregate.html#FUNCTIONS-GROUPING-TABLE "Table 9.63. Grouping Operations").
+References to the grouping columns or expressions are replaced by null values in result rows for grouping sets in which those columns do not appear. To distinguish which grouping a particular output row resulted from, see [Table 9.63](functions-aggregate#FUNCTIONS-GROUPING-TABLE "Table 9.63. Grouping Operations").
 
 A shorthand notation is provided for specifying two common types of grouping set. A clause of the form
 
@@ -823,11 +823,11 @@ This is not the same as using `SELECT DISTINCT` because the output rows may stil
 
 ### Note
 
-The construct `(a, b)` is normally recognized in expressions as a [row constructor](sql-expressions.html#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors"). Within the `GROUP BY` clause, this does not apply at the top levels of expressions, and `(a, b)` is parsed as a list of expressions as described above. If for some reason you *need* a row constructor in a grouping expression, use `ROW(a, b)`.
+The construct `(a, b)` is normally recognized in expressions as a [row constructor](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors"). Within the `GROUP BY` clause, this does not apply at the top levels of expressions, and `(a, b)` is parsed as a list of expressions as described above. If for some reason you *need* a row constructor in a grouping expression, use `ROW(a, b)`.
 
 ### 7.2.5. Window Function Processing [#](#QUERIES-WINDOW)
 
-If the query contains any window functions (see [Section 3.5](tutorial-window.html "3.5. Window Functions"), [Section 9.22](functions-window.html "9.22. Window Functions") and [Section 4.2.8](sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls")), these functions are evaluated after any grouping, aggregation, and `HAVING` filtering is performed. That is, if the query uses any aggregates, `GROUP BY`, or `HAVING`, then the rows seen by the window functions are the group rows instead of the original table rows from `FROM`/`WHERE`.
+If the query contains any window functions (see [Section 3.5](tutorial-window "3.5. Window Functions"), [Section 9.22](functions-window "9.22. Window Functions") and [Section 4.2.8](sql-expressions#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls")), these functions are evaluated after any grouping, aggregation, and `HAVING` filtering is performed. That is, if the query uses any aggregates, `GROUP BY`, or `HAVING`, then the rows seen by the window functions are the group rows instead of the original table rows from `FROM`/`WHERE`.
 
 When multiple window functions are used, all the window functions having syntactically equivalent `PARTITION BY` and `ORDER BY` clauses in their window definitions are guaranteed to be evaluated in a single pass over the data. Therefore they will see the same sort ordering, even if the `ORDER BY` does not uniquely determine an ordering. However, no guarantees are made about the evaluation of functions having different `PARTITION BY` or `ORDER BY` specifications. (In such cases a sort step is typically required between the passes of window function evaluations, and the sort is not guaranteed to preserve ordering of rows that its `ORDER BY` sees as equivalent.)
 

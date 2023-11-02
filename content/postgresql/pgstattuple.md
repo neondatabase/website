@@ -1,7 +1,7 @@
 ## F.32. pgstattuple — obtain tuple-level statistics [#](#PGSTATTUPLE)
 
-  * *   [F.32.1. Functions](pgstattuple.html#PGSTATTUPLE-FUNCS)
-  * [F.32.2. Authors](pgstattuple.html#PGSTATTUPLE-AUTHORS)
+  * *   [F.32.1. Functions](pgstattuple#PGSTATTUPLE-FUNCS)
+  * [F.32.2. Authors](pgstattuple#PGSTATTUPLE-AUTHORS)
 
 The `pgstattuple` module provides various functions to obtain tuple-level statistics.
 
@@ -28,7 +28,7 @@ Because these functions return detailed page-level information, access is restri
     free_percent       | 1.95
     ```
 
-    The output columns are described in [Table F.24](pgstattuple.html#PGSTATTUPLE-COLUMNS "Table F.24. pgstattuple Output Columns").
+    The output columns are described in [Table F.24](pgstattuple#PGSTATTUPLE-COLUMNS "Table F.24. pgstattuple Output Columns").
 
     **Table F.24. `pgstattuple` Output Columns**
 
@@ -181,7 +181,7 @@ Because these functions return detailed page-level information, access is restri
     approx_free_percent  | 2.09
     ```
 
-    The output columns are described in [Table F.25](pgstattuple.html#PGSTATAPPROX-COLUMNS "Table F.25. pgstattuple_approx Output Columns").
+    The output columns are described in [Table F.25](pgstattuple#PGSTATAPPROX-COLUMNS "Table F.25. pgstattuple_approx Output Columns").
 
     Whereas `pgstattuple` always performs a full-table scan and returns an exact count of live and dead tuples (and their sizes) and free space, `pgstattuple_approx` tries to avoid the full-table scan and returns exact dead tuple statistics along with an approximation of the number and size of live tuples and free space.
 

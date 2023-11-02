@@ -136,4 +136,4 @@ Timers used on older PC hardware include the 8254 Programmable Interval Timer (P
 
 ## See Also
 
-[EXPLAIN](sql-explain.html "EXPLAIN")
+[EXPLAIN](sql-explain "EXPLAIN")

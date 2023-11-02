@@ -31,7 +31,7 @@ initial connection time = 45.758 ms
 tps = 896.967014 (without initial connection time)
 ```
 
-The first seven lines report some of the most important parameter settings. The sixth line reports the maximum number of tries for transactions with serialization or deadlock errors (see [Failures and Serialization/Deadlock Retries](pgbench.html#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information). The eighth line reports the number of transactions completed and intended (the latter being just the product of number of clients and number of transactions per client); these will be equal unless the run failed before completion or some SQL command(s) failed. (In `-T` mode, only the actual number of transactions is printed.) The next line reports the number of failed transactions due to serialization or deadlock errors (see [Failures and Serialization/Deadlock Retries](pgbench.html#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information). The last line reports the number of transactions per second.
+The first seven lines report some of the most important parameter settings. The sixth line reports the maximum number of tries for transactions with serialization or deadlock errors (see [Failures and Serialization/Deadlock Retries](pgbench#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information). The eighth line reports the number of transactions completed and intended (the latter being just the product of number of clients and number of transactions per client); these will be equal unless the run failed before completion or some SQL command(s) failed. (In `-T` mode, only the actual number of transactions is printed.) The next line reports the number of failed transactions due to serialization or deadlock errors (see [Failures and Serialization/Deadlock Retries](pgbench#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information). The last line reports the number of transactions per second.
 
 The default TPC-B-like transaction test requires specific tables to be set up beforehand. pgbench should be invoked with the `-i` (initialize) option to create and populate these tables. (When you are testing a custom script, you don't need this step, but will instead need to do whatever setup your test needs.) Initialization looks like:
 
@@ -207,7 +207,7 @@ pgbench accepts the following command-line benchmarking arguments:
 
     When throttling is used (`--rate=...`), transactions that lag behind schedule by more than *`limit`* ms, and thus have no hope of meeting the latency limit, are not sent to the server at all. They are counted and reported separately as *skipped*.
 
-    When the `--max-tries` option is used, a transaction which fails due to a serialization anomaly or from a deadlock will not be retried if the total time of all its tries is greater than *`limit`* ms. To limit only the time of tries and not their number, use `--max-tries=0`. By default, the option `--max-tries` is set to 1 and transactions with serialization/deadlock errors are not retried. See [Failures and Serialization/Deadlock Retries](pgbench.html#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information about retrying such transactions.
+    When the `--max-tries` option is used, a transaction which fails due to a serialization anomaly or from a deadlock will not be retried if the total time of all its tries is greater than *`limit`* ms. To limit only the time of tries and not their number, use `--max-tries=0`. By default, the option `--max-tries` is set to 1 and transactions with serialization/deadlock errors are not retried. See [Failures and Serialization/Deadlock Retries](pgbench#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information about retrying such transactions.
 
 * `-M` *`querymode`*`--protocol=`*`querymode`* [#](#PGBENCH-OPTION-PROTOCOL)
 
@@ -219,7 +219,7 @@ pgbench accepts the following command-line benchmarking arguments:
 
     In the `prepared` mode, pgbench reuses the parse analysis result starting from the second query iteration, so pgbench runs faster than in other modes.
 
-    The default is simple query protocol. (See [Chapter 55](protocol.html "Chapter 55. Frontend/Backend Protocol") for more information.)
+    The default is simple query protocol. (See [Chapter 55](protocol "Chapter 55. Frontend/Backend Protocol") for more information.)
 
 * `-n``--no-vacuum` [#](#PGBENCH-OPTION-NO-VACUUM-RUN)
 
@@ -277,7 +277,7 @@ pgbench accepts the following command-line benchmarking arguments:
 
     Exit immediately when any client is aborted due to some error. Without this option, even when a client is aborted, other clients could continue their run as specified by `-t` or `-T` option, and pgbench will print an incomplete results in this case.
 
-    Note that serialization failures or deadlock failures do not abort the client, so they are not affected by this option. See [Failures and Serialization/Deadlock Retries](pgbench.html#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information.
+    Note that serialization failures or deadlock failures do not abort the client, so they are not affected by this option. See [Failures and Serialization/Deadlock Retries](pgbench#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information.
 
 * `--failures-detailed` [#](#PGBENCH-OPTION-FAILURES-DETAILED)
 
@@ -286,7 +286,7 @@ pgbench accepts the following command-line benchmarking arguments:
   * serialization failures;
   * deadlock failures;
 
-    See [Failures and Serialization/Deadlock Retries](pgbench.html#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information.
+    See [Failures and Serialization/Deadlock Retries](pgbench#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information.
 
 * `--log-prefix=prefix` [#](#PGBENCH-OPTION-LOG-PREFIX)
 
@@ -294,7 +294,7 @@ pgbench accepts the following command-line benchmarking arguments:
 
 * `--max-tries=number_of_tries` [#](#PGBENCH-OPTION-MAX-TRIES)
 
-    Enable retries for transactions with serialization/deadlock errors and set the maximum number of these tries. This option can be combined with the `--latency-limit` option which limits the total time of all transaction tries; moreover, you cannot use an unlimited number of tries (`--max-tries=0`) without `--latency-limit` or `--time`. The default value is 1 and transactions with serialization/deadlock errors are not retried. See [Failures and Serialization/Deadlock Retries](pgbench.html#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information about retrying such transactions.
+    Enable retries for transactions with serialization/deadlock errors and set the maximum number of these tries. This option can be combined with the `--latency-limit` option which limits the total time of all transaction tries; moreover, you cannot use an unlimited number of tries (`--max-tries=0`) without `--latency-limit` or `--time`. The default value is 1 and transactions with serialization/deadlock errors are not retried. See [Failures and Serialization/Deadlock Retries](pgbench#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information about retrying such transactions.
 
 * `--progress-timestamp` [#](#PGBENCH-OPTION-PROGRESS-TIMESTAMP)
 
@@ -318,7 +318,7 @@ pgbench accepts the following command-line benchmarking arguments:
 
 * `--verbose-errors` [#](#PGBENCH-OPTION-VERBOSE-ERRORS)
 
-    Print messages about all errors and failures (errors without retrying) including which limit for retries was exceeded and how far it was exceeded for the serialization/deadlock failures. (Note that in this case the output can be significantly increased.). See [Failures and Serialization/Deadlock Retries](pgbench.html#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information.
+    Print messages about all errors and failures (errors without retrying) including which limit for retries was exceeded and how far it was exceeded for the serialization/deadlock failures. (Note that in this case the output can be significantly increased.). See [Failures and Serialization/Deadlock Retries](pgbench#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information.
 
 ### Common Options
 
@@ -354,7 +354,7 @@ A successful run will exit with status 0. Exit status 1 indicates static problem
 
     Default connection parameters.
 
-This utility, like most other PostgreSQL utilities, uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 The environment variable `PG_COLOR` specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 
@@ -390,7 +390,7 @@ Before PostgreSQL 9.6, SQL commands in script files were terminated by newlines,
 
 It is assumed that pgbench scripts do not contain incomplete blocks of SQL transactions. If at runtime the client reaches the end of the script without completing the last transaction block, it will be aborted.
 
-There is a simple variable-substitution facility for script files. Variable names must consist of letters (including non-Latin letters), digits, and underscores, with the first character not being a digit. Variables can be set by the command-line `-D` option, explained above, or by the meta commands explained below. In addition to any variables preset by `-D` command-line options, there are a few variables that are preset automatically, listed in [Table 293](pgbench.html#PGBENCH-AUTOMATIC-VARIABLES "Table 293. pgbench Automatic Variables"). A value specified for these variables using `-D` takes precedence over the automatic presets. Once set, a variable's value can be inserted into an SQL command by writing `:`*`variablename`*. When running more than one client session, each session has its own set of variables. pgbench supports up to 255 variable uses in one statement.
+There is a simple variable-substitution facility for script files. Variable names must consist of letters (including non-Latin letters), digits, and underscores, with the first character not being a digit. Variables can be set by the command-line `-D` option, explained above, or by the meta commands explained below. In addition to any variables preset by `-D` command-line options, there are a few variables that are preset automatically, listed in [Table 293](pgbench#PGBENCH-AUTOMATIC-VARIABLES "Table 293. pgbench Automatic Variables"). A value specified for these variables using `-D` takes precedence over the automatic presets. Once set, a variable's value can be inserted into an SQL command by writing `:`*`variablename`*. When running more than one client session, each session has its own set of variables. pgbench supports up to 255 variable uses in one statement.
 
 **Table 293. pgbench Automatic Variables**
 
@@ -431,11 +431,11 @@ Script file meta commands begin with a backslash (`\`) and normally extend to th
 
 * `\if` *`expression`*`\elif` *`expression`*`\else``\endif` [#](#PGBENCH-METACOMMAND-IF-ELSE)
 
-    This group of commands implements nestable conditional blocks, similarly to `psql`'s [`\if` *`expression`*](app-psql.html#PSQL-METACOMMAND-IF). Conditional expressions are identical to those with `\set`, with non-zero values interpreted as true.
+    This group of commands implements nestable conditional blocks, similarly to `psql`'s [`\if` *`expression`*](app-psql#PSQL-METACOMMAND-IF). Conditional expressions are identical to those with `\set`, with non-zero values interpreted as true.
 
 * `\set varname expression` [#](#PGBENCH-METACOMMAND-SET)
 
-    Sets variable *`varname`* to a value calculated from *`expression`*. The expression may contain the `NULL` constant, Boolean constants `TRUE` and `FALSE`, integer constants such as `5432`, double constants such as `3.14159`, references to variables `:`*`variablename`*, [operators](pgbench.html#PGBENCH-BUILTIN-OPERATORS "Built-in Operators") with their usual SQL precedence and associativity, [function calls](pgbench.html#PGBENCH-BUILTIN-FUNCTIONS "Built-In Functions"), SQL [`CASE` generic conditional expressions](functions-conditional.html#FUNCTIONS-CASE "9.18.1. CASE") and parentheses.
+    Sets variable *`varname`* to a value calculated from *`expression`*. The expression may contain the `NULL` constant, Boolean constants `TRUE` and `FALSE`, integer constants such as `5432`, double constants such as `3.14159`, references to variables `:`*`variablename`*, [operators](pgbench#PGBENCH-BUILTIN-OPERATORS "Built-in Operators") with their usual SQL precedence and associativity, [function calls](pgbench#PGBENCH-BUILTIN-FUNCTIONS "Built-In Functions"), SQL [`CASE` generic conditional expressions](functions-conditional#FUNCTIONS-CASE "9.18.1. CASE") and parentheses.
 
     Functions and most operators return `NULL` on `NULL` input.
 
@@ -492,11 +492,11 @@ Script file meta commands begin with a backslash (`\`) and normally extend to th
 
 * `\startpipeline``\endpipeline` [#](#PGBENCH-METACOMMAND-PIPELINE)
 
-    These commands delimit the start and end of a pipeline of SQL statements. In pipeline mode, statements are sent to the server without waiting for the results of previous statements. See [Section 34.5](libpq-pipeline-mode.html "34.5. Pipeline Mode") for more details. Pipeline mode requires the use of extended query protocol.
+    These commands delimit the start and end of a pipeline of SQL statements. In pipeline mode, statements are sent to the server without waiting for the results of previous statements. See [Section 34.5](libpq-pipeline-mode "34.5. Pipeline Mode") for more details. Pipeline mode requires the use of extended query protocol.
 
 ### Built-in Operators
 
-The arithmetic, bitwise, comparison and logical operators listed in [Table 294](pgbench.html#PGBENCH-OPERATORS "Table 294. pgbench Operators") are built into pgbench and may be used in expressions appearing in [`\set`](pgbench.html#PGBENCH-METACOMMAND-SET). The operators are listed in increasing precedence order. Except as noted, operators taking two numeric inputs will produce a double value if either input is double, otherwise they produce an integer result.
+The arithmetic, bitwise, comparison and logical operators listed in [Table 294](pgbench#PGBENCH-OPERATORS "Table 294. pgbench Operators") are built into pgbench and may be used in expressions appearing in [`\set`](pgbench#PGBENCH-METACOMMAND-SET). The operators are listed in increasing precedence order. Except as noted, operators taking two numeric inputs will produce a double value if either input is double, otherwise they produce an integer result.
 
 **Table 294. pgbench Operators**
 
@@ -529,7 +529,7 @@ The arithmetic, bitwise, comparison and logical operators listed in [Table 294]
 
 ### Built-In Functions
 
-The functions listed in [Table 295](pgbench.html#PGBENCH-FUNCTIONS "Table 295. pgbench Functions") are built into pgbench and may be used in expressions appearing in [`\set`](pgbench.html#PGBENCH-METACOMMAND-SET).
+The functions listed in [Table 295](pgbench#PGBENCH-FUNCTIONS "Table 295. pgbench Functions") are built into pgbench and may be used in expressions appearing in [`\set`](pgbench#PGBENCH-METACOMMAND-SET).
 
 **Table 295. pgbench Functions**
 
@@ -672,7 +672,7 @@ Each line in a log file describes one transaction. It contains the following spa
 
     count of retries after serialization or deadlock errors during the transaction (present only if `--max-tries` is not equal to one)
 
-When both `--rate` and `--latency-limit` are used, the *`time`* for a skipped transaction will be reported as `skipped`. If the transaction ends with a failure, its *`time`* will be reported as `failed`. If you use the `--failures-detailed` option, the *`time`* of the failed transaction will be reported as `serialization` or `deadlock` depending on the type of failure (see [Failures and Serialization/Deadlock Retries](pgbench.html#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information).
+When both `--rate` and `--latency-limit` are used, the *`time`* for a skipped transaction will be reported as `skipped`. If the transaction ends with a failure, its *`time`* will be reported as `failed`. If you use the `--failures-detailed` option, the *`time`* of the failed transaction will be reported as `serialization` or `deadlock` depending on the type of failure (see [Failures and Serialization/Deadlock Retries](pgbench#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information).
 
 Here is a snippet of a log file generated in a single-client run:
 
@@ -814,8 +814,8 @@ Notice that while the plain (unaggregated) log format shows which script was use
 With the `-r` option, pgbench collects the following statistics for each statement:
 
 * `latency` — elapsed transaction time for each statement. pgbench reports an average value of all successful runs of the statement.
-* The number of failures in this statement. See [Failures and Serialization/Deadlock Retries](pgbench.html#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information.
-* The number of retries after a serialization or a deadlock error in this statement. See [Failures and Serialization/Deadlock Retries](pgbench.html#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information.
+* The number of failures in this statement. See [Failures and Serialization/Deadlock Retries](pgbench#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information.
+* The number of retries after a serialization or a deadlock error in this statement. See [Failures and Serialization/Deadlock Retries](pgbench#FAILURES-AND-RETRIES "Failures and Serialization/Deadlock Retries") for more information.
 
 The report displays retry statistics only if the `--max-tries` option is not equal to 1.
 
@@ -908,7 +908,7 @@ When executing pgbench, there are three main types of errors:
 
 * Direct client errors. They lead to immediate exit from pgbench with the corresponding error message in the case of an internal pgbench error (which are supposed to never occur...) or when `--exit-on-abort` is specified. Otherwise in the worst case they only lead to the abortion of the failed client while other clients continue their run (but some client errors are handled without an abortion of the client and reported separately, see below). Later in this section it is assumed that the discussed errors are only the direct client errors and they are not internal pgbench errors.
 
-A client's run is aborted in case of a serious error; for example, the connection with the database server was lost or the end of script was reached without completing the last transaction. In addition, if execution of an SQL or meta command fails for reasons other than serialization or deadlock errors, the client is aborted. Otherwise, if an SQL command fails with serialization or deadlock errors, the client is not aborted. In such cases, the current transaction is rolled back, which also includes setting the client variables as they were before the run of this transaction (it is assumed that one transaction script contains only one transaction; see [What Is the "Transaction" Actually Performed in pgbench?](pgbench.html#TRANSACTIONS-AND-SCRIPTS "What Is the “Transaction” Actually Performed in pgbench?") for more information). Transactions with serialization or deadlock errors are repeated after rollbacks until they complete successfully or reach the maximum number of tries (specified by the `--max-tries` option) / the maximum time of retries (specified by the `--latency-limit` option) / the end of benchmark (specified by the `--time` option). If the last trial run fails, this transaction will be reported as failed but the client is not aborted and continues to work.
+A client's run is aborted in case of a serious error; for example, the connection with the database server was lost or the end of script was reached without completing the last transaction. In addition, if execution of an SQL or meta command fails for reasons other than serialization or deadlock errors, the client is aborted. Otherwise, if an SQL command fails with serialization or deadlock errors, the client is not aborted. In such cases, the current transaction is rolled back, which also includes setting the client variables as they were before the run of this transaction (it is assumed that one transaction script contains only one transaction; see [What Is the "Transaction" Actually Performed in pgbench?](pgbench#TRANSACTIONS-AND-SCRIPTS "What Is the “Transaction” Actually Performed in pgbench?") for more information). Transactions with serialization or deadlock errors are repeated after rollbacks until they complete successfully or reach the maximum number of tries (specified by the `--max-tries` option) / the maximum time of retries (specified by the `--latency-limit` option) / the end of benchmark (specified by the `--time` option). If the last trial run fails, this transaction will be reported as failed but the client is not aborted and continues to work.
 
 ### Note
 
@@ -926,7 +926,7 @@ If you want to group failures by basic types in per-transaction and aggregation 
 
 ### Table Access Methods
 
-You may specify the [Table Access Method](tableam.html "Chapter 63. Table Access Method Interface Definition") for the pgbench tables. The environment variable `PGOPTIONS` specifies database configuration options that are passed to PostgreSQL via the command line (See [Section 20.1.4](config-setting.html#CONFIG-SETTING-SHELL "20.1.4. Parameter Interaction via the Shell")). For example, a hypothetical default Table Access Method for the tables that pgbench creates called `wuzza` can be specified with:
+You may specify the [Table Access Method](tableam "Chapter 63. Table Access Method Interface Definition") for the pgbench tables. The environment variable `PGOPTIONS` specifies database configuration options that are passed to PostgreSQL via the command line (See [Section 20.1.4](config-setting#CONFIG-SETTING-SHELL "20.1.4. Parameter Interaction via the Shell")). For example, a hypothetical default Table Access Method for the tables that pgbench creates called `wuzza` can be specified with:
 
 ```
 
@@ -947,4 +947,4 @@ A limitation of pgbench is that it can itself become the bottleneck when trying 
 
 ### Security
 
-If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas.html#DDL-SCHEMAS-PATTERNS "5.9.6. Usage Patterns"), do not run pgbench in that database. pgbench uses unqualified names and does not manipulate the search path.
+If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas#DDL-SCHEMAS-PATTERNS "5.9.6. Usage Patterns"), do not run pgbench in that database. pgbench uses unqualified names and does not manipulate the search path.

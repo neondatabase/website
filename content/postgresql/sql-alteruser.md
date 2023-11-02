@@ -38,7 +38,7 @@ where role_specification can be:
 
 ## Description
 
-`ALTER USER` is now an alias for [`ALTER ROLE`](sql-alterrole.html "ALTER ROLE").
+`ALTER USER` is now an alias for [`ALTER ROLE`](sql-alterrole "ALTER ROLE").
 
 ## Compatibility
 
@@ -46,4 +46,4 @@ The `ALTER USER` statement is a PostgreSQL extension. The SQL standard leaves th
 
 ## See Also
 
-[ALTER ROLE](sql-alterrole.html "ALTER ROLE")
+[ALTER ROLE](sql-alterrole "ALTER ROLE")

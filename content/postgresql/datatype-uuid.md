@@ -22,4 +22,4 @@ a0ee-bc99-9c0b-4ef8-bb6d-6bb9-bd38-0a11
 
 Output is always in the standard form.
 
-See [Section 9.14](functions-uuid.html "9.14. UUID Functions") for how to generate a UUID in PostgreSQL.
+See [Section 9.14](functions-uuid "9.14. UUID Functions") for how to generate a UUID in PostgreSQL.

@@ -37,4 +37,4 @@ EXEC SQL SET CONNECTION = con1;
 
 ## See Also
 
-[CONNECT](ecpg-sql-connect.html "CONNECT"), [DISCONNECT](ecpg-sql-disconnect.html "DISCONNECT")
+[CONNECT](ecpg-sql-connect "CONNECT"), [DISCONNECT](ecpg-sql-disconnect "DISCONNECT")

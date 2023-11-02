@@ -1,6 +1,6 @@
 ## 54.16. `pg_prepared_xacts` [#](#VIEW-PG-PREPARED-XACTS)
 
-The view `pg_prepared_xacts` displays information about transactions that are currently prepared for two-phase commit (see [PREPARE TRANSACTION](sql-prepare-transaction.html "PREPARE TRANSACTION") for details).
+The view `pg_prepared_xacts` displays information about transactions that are currently prepared for two-phase commit (see [PREPARE TRANSACTION](sql-prepare-transaction "PREPARE TRANSACTION") for details).
 
 `pg_prepared_xacts` contains one row per prepared transaction. An entry is removed when the transaction is committed or rolled back.
 
@@ -11,8 +11,8 @@ The view `pg_prepared_xacts` displays information about transactions that are cu
 | `transaction` `xid`Numeric transaction identifier of the prepared transaction                                                                                     |
 | `gid` `text`Global transaction identifier that was assigned to the transaction                                                                                    |
 | `prepared` `timestamptz`Time at which the transaction was prepared for commit                                                                                     |
-| `owner` `name` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`rolname`)Name of the user that executed the transaction                       |
-| `database` `name` (references [`pg_database`](catalog-pg-database.html "53.15. pg_database").`datname`)Name of the database in which the transaction was executed |
+| `owner` `name` (references [`pg_authid`](catalog-pg-authid "53.8. pg_authid").`rolname`)Name of the user that executed the transaction                       |
+| `database` `name` (references [`pg_database`](catalog-pg-database "53.15. pg_database").`datname`)Name of the database in which the transaction was executed |
 
 \
 

@@ -1,7 +1,7 @@
 ## F.35. pg\_visibility — visibility map information and utilities [#](#PGVISIBILITY)
 
-  * *   [F.35.1. Functions](pgvisibility.html#PGVISIBILITY-FUNCS)
-  * [F.35.2. Author](pgvisibility.html#PGVISIBILITY-AUTHOR)
+  * *   [F.35.1. Functions](pgvisibility#PGVISIBILITY-FUNCS)
+  * [F.35.2. Author](pgvisibility#PGVISIBILITY-AUTHOR)
 
 The `pg_visibility` module provides a means for examining the visibility map (VM) and page-level visibility information of a table. It also provides functions to check the integrity of a visibility map and to force it to be rebuilt.
 

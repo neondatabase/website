@@ -57,4 +57,4 @@ There is no `ALTER CONVERSION` statement in the SQL standard.
 
 ## See Also
 
-[CREATE CONVERSION](sql-createconversion.html "CREATE CONVERSION"), [DROP CONVERSION](sql-dropconversion.html "DROP CONVERSION")
+[CREATE CONVERSION](sql-createconversion "CREATE CONVERSION"), [DROP CONVERSION](sql-dropconversion "DROP CONVERSION")

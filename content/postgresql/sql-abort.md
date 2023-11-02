@@ -11,7 +11,7 @@ ABORT [ WORK | TRANSACTION ] [ AND [ NO ] CHAIN ]
 
 ## Description
 
-`ABORT` rolls back the current transaction and causes all the updates made by the transaction to be discarded. This command is identical in behavior to the standard SQL command [`ROLLBACK`](sql-rollback.html "ROLLBACK"), and is present only for historical reasons.
+`ABORT` rolls back the current transaction and causes all the updates made by the transaction to be discarded. This command is identical in behavior to the standard SQL command [`ROLLBACK`](sql-rollback "ROLLBACK"), and is present only for historical reasons.
 
 ## Parameters
 
@@ -21,11 +21,11 @@ ABORT [ WORK | TRANSACTION ] [ AND [ NO ] CHAIN ]
 
 * `AND CHAIN`
 
-    If `AND CHAIN` is specified, a new transaction is immediately started with the same transaction characteristics (see [`SET TRANSACTION`](sql-set-transaction.html "SET TRANSACTION")) as the just finished one. Otherwise, no new transaction is started.
+    If `AND CHAIN` is specified, a new transaction is immediately started with the same transaction characteristics (see [`SET TRANSACTION`](sql-set-transaction "SET TRANSACTION")) as the just finished one. Otherwise, no new transaction is started.
 
 ## Notes
 
-Use [`COMMIT`](sql-commit.html "COMMIT") to successfully terminate a transaction.
+Use [`COMMIT`](sql-commit "COMMIT") to successfully terminate a transaction.
 
 Issuing `ABORT` outside of a transaction block emits a warning and otherwise has no effect.
 
@@ -44,4 +44,4 @@ This command is a PostgreSQL extension present for historical reasons. `ROLLBACK
 
 ## See Also
 
-[BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [ROLLBACK](sql-rollback.html "ROLLBACK")
+[BEGIN](sql-begin "BEGIN"), [COMMIT](sql-commit "COMMIT"), [ROLLBACK](sql-rollback "ROLLBACK")

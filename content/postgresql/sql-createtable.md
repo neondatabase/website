@@ -116,13 +116,13 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
     If specified, the table is created as a temporary table. Temporary tables are automatically dropped at the end of a session, or optionally at the end of the current transaction (see `ON COMMIT` below). The default search\_path includes the temporary schema first and so identically named existing permanent tables are not chosen for new plans while the temporary table exists, unless they are referenced with schema-qualified names. Any indexes created on a temporary table are automatically temporary as well.
 
-    The [autovacuum daemon](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon") cannot access and therefore cannot vacuum or analyze temporary tables. For this reason, appropriate vacuum and analyze operations should be performed via session SQL commands. For example, if a temporary table is going to be used in complex queries, it is wise to run `ANALYZE` on the temporary table after it is populated.
+    The [autovacuum daemon](routine-vacuuming#AUTOVACUUM "25.1.6. The Autovacuum Daemon") cannot access and therefore cannot vacuum or analyze temporary tables. For this reason, appropriate vacuum and analyze operations should be performed via session SQL commands. For example, if a temporary table is going to be used in complex queries, it is wise to run `ANALYZE` on the temporary table after it is populated.
 
-    Optionally, `GLOBAL` or `LOCAL` can be written before `TEMPORARY` or `TEMP`. This presently makes no difference in PostgreSQL and is deprecated; see [Compatibility](sql-createtable.html#SQL-CREATETABLE-COMPATIBILITY "Compatibility") below.
+    Optionally, `GLOBAL` or `LOCAL` can be written before `TEMPORARY` or `TEMP`. This presently makes no difference in PostgreSQL and is deprecated; see [Compatibility](sql-createtable#SQL-CREATETABLE-COMPATIBILITY "Compatibility") below.
 
 * `UNLOGGED` [#](#SQL-CREATETABLE-UNLOGGED)
 
-    If specified, the table is created as an unlogged table. Data written to unlogged tables is not written to the write-ahead log (see [Chapter 30](wal.html "Chapter 30. Reliability and the Write-Ahead Log")), which makes them considerably faster than ordinary tables. However, they are not crash-safe: an unlogged table is automatically truncated after a crash or unclean shutdown. The contents of an unlogged table are also not replicated to standby servers. Any indexes created on an unlogged table are automatically unlogged as well.
+    If specified, the table is created as an unlogged table. Data written to unlogged tables is not written to the write-ahead log (see [Chapter 30](wal "Chapter 30. Reliability and the Write-Ahead Log")), which makes them considerably faster than ordinary tables. However, they are not crash-safe: an unlogged table is automatically truncated after a crash or unclean shutdown. The contents of an unlogged table are also not replicated to standby servers. Any indexes created on an unlogged table are automatically unlogged as well.
 
     If this is specified, any sequences created together with the unlogged table (for identity or serial columns) are also created as unlogged.
 
@@ -146,7 +146,7 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
 * *`data_type`* [#](#SQL-CREATETABLE-PARMS-DATA-TYPE)
 
-    The data type of the column. This can include array specifiers. For more information on the data types supported by PostgreSQL, refer to [Chapter 8](datatype.html "Chapter 8. Data Types").
+    The data type of the column. This can include array specifiers. For more information on the data types supported by PostgreSQL, refer to [Chapter 8](datatype "Chapter 8. Data Types").
 
 * `COLLATE collation` [#](#SQL-CREATETABLE-PARMS-COLLATE)
 
@@ -154,11 +154,11 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
 * `STORAGE { PLAIN | EXTERNAL | EXTENDED | MAIN | DEFAULT }` [#](#SQL-CREATETABLE-PARMS-STORAGE)
 
-    This form sets the storage mode for the column. This controls whether this column is held inline or in a secondary TOAST table, and whether the data should be compressed or not. `PLAIN` must be used for fixed-length values such as `integer` and is inline, uncompressed. `MAIN` is for inline, compressible data. `EXTERNAL` is for external, uncompressed data, and `EXTENDED` is for external, compressed data. Writing `DEFAULT` sets the storage mode to the default mode for the column's data type. `EXTENDED` is the default for most data types that support non-`PLAIN` storage. Use of `EXTERNAL` will make substring operations on very large `text` and `bytea` values run faster, at the penalty of increased storage space. See [Section 73.2](storage-toast.html "73.2. TOAST") for more information.
+    This form sets the storage mode for the column. This controls whether this column is held inline or in a secondary TOAST table, and whether the data should be compressed or not. `PLAIN` must be used for fixed-length values such as `integer` and is inline, uncompressed. `MAIN` is for inline, compressible data. `EXTERNAL` is for external, uncompressed data, and `EXTENDED` is for external, compressed data. Writing `DEFAULT` sets the storage mode to the default mode for the column's data type. `EXTENDED` is the default for most data types that support non-`PLAIN` storage. Use of `EXTERNAL` will make substring operations on very large `text` and `bytea` values run faster, at the penalty of increased storage space. See [Section 73.2](storage-toast "73.2. TOAST") for more information.
 
 * `COMPRESSION compression_method` [#](#SQL-CREATETABLE-PARMS-COMPRESSION)
 
-    The `COMPRESSION` clause sets the compression method for the column. Compression is supported only for variable-width data types, and is used only when the column's storage mode is `main` or `extended`. (See [ALTER TABLE](sql-altertable.html "ALTER TABLE") for information on column storage modes.) Setting this property for a partitioned table has no direct effect, because such tables have no storage of their own, but the configured value will be inherited by newly-created partitions. The supported compression methods are `pglz` and `lz4`. (`lz4` is available only if `--with-lz4` was used when building PostgreSQL.) In addition, *`compression_method`* can be `default` to explicitly specify the default behavior, which is to consult the [default\_toast\_compression](runtime-config-client.html#GUC-DEFAULT-TOAST-COMPRESSION) setting at the time of data insertion to determine the method to use.
+    The `COMPRESSION` clause sets the compression method for the column. Compression is supported only for variable-width data types, and is used only when the column's storage mode is `main` or `extended`. (See [ALTER TABLE](sql-altertable "ALTER TABLE") for information on column storage modes.) Setting this property for a partitioned table has no direct effect, because such tables have no storage of their own, but the configured value will be inherited by newly-created partitions. The supported compression methods are `pglz` and `lz4`. (`lz4` is available only if `--with-lz4` was used when building PostgreSQL.) In addition, *`compression_method`* can be `default` to explicitly specify the default behavior, which is to consult the [default\_toast\_compression](runtime-config-client#GUC-DEFAULT-TOAST-COMPRESSION) setting at the time of data insertion to determine the method to use.
 
 * `INHERITS ( parent_table [, ... ] )` [#](#SQL-CREATETABLE-PARMS-INHERITS)
 
@@ -178,13 +178,13 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
     The optional `PARTITION BY` clause specifies a strategy of partitioning the table. The table thus created is called a *partitioned* table. The parenthesized list of columns or expressions forms the *partition key* for the table. When using range or hash partitioning, the partition key can include multiple columns or expressions (up to 32, but this limit can be altered when building PostgreSQL), but for list partitioning, the partition key must consist of a single column or expression.
 
-    Range and list partitioning require a btree operator class, while hash partitioning requires a hash operator class. If no operator class is specified explicitly, the default operator class of the appropriate type will be used; if no default operator class exists, an error will be raised. When hash partitioning is used, the operator class used must implement support function 2 (see [Section 38.16.3](xindex.html#XINDEX-SUPPORT "38.16.3. Index Method Support Routines") for details).
+    Range and list partitioning require a btree operator class, while hash partitioning requires a hash operator class. If no operator class is specified explicitly, the default operator class of the appropriate type will be used; if no default operator class exists, an error will be raised. When hash partitioning is used, the operator class used must implement support function 2 (see [Section 38.16.3](xindex#XINDEX-SUPPORT "38.16.3. Index Method Support Routines") for details).
 
     A partitioned table is divided into sub-tables (called partitions), which are created using separate `CREATE TABLE` commands. The partitioned table is itself empty. A data row inserted into the table is routed to a partition based on the value of columns or expressions in the partition key. If no existing partition matches the values in the new row, an error will be reported.
 
     Partitioned tables do not support `EXCLUDE` constraints; however, you can define these constraints on individual partitions.
 
-    See [Section 5.11](ddl-partitioning.html "5.11. Table Partitioning") for more discussion on table partitioning.
+    See [Section 5.11](ddl-partitioning "5.11. Table Partitioning") for more discussion on table partitioning.
 
 * `PARTITION OF parent_table { FOR VALUES partition_bound_spec | DEFAULT }` [#](#SQL-CREATETABLE-PARTITION)
 
@@ -196,7 +196,7 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
     When creating a list partition, `NULL` can be specified to signify that the partition allows the partition key column to be null. However, there cannot be more than one such list partition for a given parent table. `NULL` cannot be specified for range partitions.
 
-    When creating a range partition, the lower bound specified with `FROM` is an inclusive bound, whereas the upper bound specified with `TO` is an exclusive bound. That is, the values specified in the `FROM` list are valid values of the corresponding partition key columns for this partition, whereas those in the `TO` list are not. Note that this statement must be understood according to the rules of row-wise comparison ([Section 9.24.5](functions-comparisons.html#ROW-WISE-COMPARISON "9.24.5. Row Constructor Comparison")). For example, given `PARTITION BY RANGE (x,y)`, a partition bound `FROM (1, 2) TO (3, 4)` allows `x=1` with any `y>=2`, `x=2` with any non-null `y`, and `x=3` with any `y<4`.
+    When creating a range partition, the lower bound specified with `FROM` is an inclusive bound, whereas the upper bound specified with `TO` is an exclusive bound. That is, the values specified in the `FROM` list are valid values of the corresponding partition key columns for this partition, whereas those in the `TO` list are not. Note that this statement must be understood according to the rules of row-wise comparison ([Section 9.24.5](functions-comparisons#ROW-WISE-COMPARISON "9.24.5. Row Constructor Comparison")). For example, given `PARTITION BY RANGE (x,y)`, a partition bound `FROM (1, 2) TO (3, 4)` allows `x=1` with any `y>=2`, `x=2` with any non-null `y`, and `x=3` with any `y<4`.
 
     The special values `MINVALUE` and `MAXVALUE` may be used when creating a range partition to indicate that there is no lower or upper bound on the column's value. For example, a partition defined using `FROM (MINVALUE) TO (10)` allows any values less than 10, and a partition defined using `FROM (10) TO (MAXVALUE)` allows any values greater than or equal to 10.
 
@@ -218,7 +218,7 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
     Operations such as `TRUNCATE` which normally affect a table and all of its inheritance children will cascade to all partitions, but may also be performed on an individual partition.
 
-    Note that creating a partition using `PARTITION OF` requires taking an `ACCESS EXCLUSIVE` lock on the parent partitioned table. Likewise, dropping a partition with `DROP TABLE` requires taking an `ACCESS EXCLUSIVE` lock on the parent table. It is possible to use [`ALTER TABLE ATTACH/DETACH PARTITION`](sql-altertable.html "ALTER TABLE") to perform these operations with a weaker lock, thus reducing interference with concurrent operations on the partitioned table.
+    Note that creating a partition using `PARTITION OF` requires taking an `ACCESS EXCLUSIVE` lock on the parent partitioned table. Likewise, dropping a partition with `DROP TABLE` requires taking an `ACCESS EXCLUSIVE` lock on the parent table. It is possible to use [`ALTER TABLE ATTACH/DETACH PARTITION`](sql-altertable "ALTER TABLE") to perform these operations with a weaker lock, thus reducing interference with concurrent operations on the partitioned table.
 
 * `LIKE source_table [ like_option ... ]` [#](#SQL-CREATETABLE-PARMS-LIKE)
 
@@ -264,7 +264,7 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
   * `INCLUDING STORAGE` [#](#SQL-CREATETABLE-PARMS-LIKE-OPT-STORAGE)
 
-        `STORAGE` settings for the copied column definitions will be copied. The default behavior is to exclude `STORAGE` settings, resulting in the copied columns in the new table having type-specific default settings. For more on `STORAGE` settings, see [Section 73.2](storage-toast.html "73.2. TOAST").
+        `STORAGE` settings for the copied column definitions will be copied. The default behavior is to exclude `STORAGE` settings, resulting in the copied columns in the new table having type-specific default settings. For more on `STORAGE` settings, see [Section 73.2](storage-toast "73.2. TOAST").
 
   * `INCLUDING ALL` [#](#SQL-CREATETABLE-PARMS-LIKE-OPT-ALL)
 
@@ -290,7 +290,7 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
     The `CHECK` clause specifies an expression producing a Boolean result which new or updated rows must satisfy for an insert or update operation to succeed. Expressions evaluating to TRUE or UNKNOWN succeed. Should any row of an insert or update operation produce a FALSE result, an error exception is raised and the insert or update does not alter the database. A check constraint specified as a column constraint should reference that column's value only, while an expression appearing in a table constraint can reference multiple columns.
 
-    Currently, `CHECK` expressions cannot contain subqueries nor refer to variables other than columns of the current row (see [Section 5.4.1](ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS "5.4.1. Check Constraints")). The system column `tableoid` may be referenced, but not any other system column.
+    Currently, `CHECK` expressions cannot contain subqueries nor refer to variables other than columns of the current row (see [Section 5.4.1](ddl-constraints#DDL-CONSTRAINTS-CHECK-CONSTRAINTS "5.4.1. Check Constraints")). The system column `tableoid` may be referenced, but not any other system column.
 
     A constraint marked with `NO INHERIT` will not propagate to child tables.
 
@@ -316,11 +316,11 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
     The clauses `ALWAYS` and `BY DEFAULT` determine how explicitly user-specified values are handled in `INSERT` and `UPDATE` commands.
 
-    In an `INSERT` command, if `ALWAYS` is selected, a user-specified value is only accepted if the `INSERT` statement specifies `OVERRIDING SYSTEM VALUE`. If `BY DEFAULT` is selected, then the user-specified value takes precedence. See [INSERT](sql-insert.html "INSERT") for details. (In the `COPY` command, user-specified values are always used regardless of this setting.)
+    In an `INSERT` command, if `ALWAYS` is selected, a user-specified value is only accepted if the `INSERT` statement specifies `OVERRIDING SYSTEM VALUE`. If `BY DEFAULT` is selected, then the user-specified value takes precedence. See [INSERT](sql-insert "INSERT") for details. (In the `COPY` command, user-specified values are always used regardless of this setting.)
 
     In an `UPDATE` command, if `ALWAYS` is selected, any update of the column to any value other than `DEFAULT` will be rejected. If `BY DEFAULT` is selected, the column can be updated normally. (There is no `OVERRIDING` clause for the `UPDATE` command.)
 
-    The optional *`sequence_options`* clause can be used to override the options of the sequence. See [CREATE SEQUENCE](sql-createsequence.html "CREATE SEQUENCE") for details.
+    The optional *`sequence_options`* clause can be used to override the options of the sequence. See [CREATE SEQUENCE](sql-createsequence "CREATE SEQUENCE") for details.
 
 * `UNIQUE [ NULLS [ NOT ] DISTINCT ]` (column constraint)`UNIQUE [ NULLS [ NOT ] DISTINCT ] ( column_name [, ... ] )` \[ `INCLUDE ( column_name [, ...])` ] (table constraint) [#](#SQL-CREATETABLE-PARMS-UNIQUE)
 
@@ -352,11 +352,11 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
 * `EXCLUDE [ USING index_method ] ( exclude_element WITH operator [, ... ] ) index_parameters [ WHERE ( predicate ) ]` [#](#SQL-CREATETABLE-EXCLUDE)
 
-    The `EXCLUDE` clause defines an exclusion constraint, which guarantees that if any two rows are compared on the specified column(s) or expression(s) using the specified operator(s), not all of these comparisons will return `TRUE`. If all of the specified operators test for equality, this is equivalent to a `UNIQUE` constraint, although an ordinary unique constraint will be faster. However, exclusion constraints can specify constraints that are more general than simple equality. For example, you can specify a constraint that no two rows in the table contain overlapping circles (see [Section 8.8](datatype-geometric.html "8.8. Geometric Types")) by using the `&&` operator.
+    The `EXCLUDE` clause defines an exclusion constraint, which guarantees that if any two rows are compared on the specified column(s) or expression(s) using the specified operator(s), not all of these comparisons will return `TRUE`. If all of the specified operators test for equality, this is equivalent to a `UNIQUE` constraint, although an ordinary unique constraint will be faster. However, exclusion constraints can specify constraints that are more general than simple equality. For example, you can specify a constraint that no two rows in the table contain overlapping circles (see [Section 8.8](datatype-geometric "8.8. Geometric Types")) by using the `&&` operator.
 
-    Exclusion constraints are implemented using an index, so each specified operator must be associated with an appropriate operator class (see [Section 11.10](indexes-opclass.html "11.10. Operator Classes and Operator Families")) for the index access method *`index_method`*. The operators are required to be commutative. Each *`exclude_element`* can optionally specify an operator class and/or ordering options; these are described fully under [CREATE INDEX](sql-createindex.html "CREATE INDEX").
+    Exclusion constraints are implemented using an index, so each specified operator must be associated with an appropriate operator class (see [Section 11.10](indexes-opclass "11.10. Operator Classes and Operator Families")) for the index access method *`index_method`*. The operators are required to be commutative. Each *`exclude_element`* can optionally specify an operator class and/or ordering options; these are described fully under [CREATE INDEX](sql-createindex "CREATE INDEX").
 
-    The access method must support `amgettuple` (see [Chapter 64](indexam.html "Chapter 64. Index Access Method Interface Definition")); at present this means GIN cannot be used. Although it's allowed, there is little point in using B-tree or hash indexes with an exclusion constraint, because this does nothing that an ordinary unique constraint doesn't do better. So in practice the access method will always be GiST or SP-GiST.
+    The access method must support `amgettuple` (see [Chapter 64](indexam "Chapter 64. Index Access Method Interface Definition")); at present this means GIN cannot be used. Although it's allowed, there is little point in using B-tree or hash indexes with an exclusion constraint, because this does nothing that an ordinary unique constraint doesn't do better. So in practice the access method will always be GiST or SP-GiST.
 
     The *`predicate`* allows you to specify an exclusion constraint on a subset of the table; internally this creates a partial index. Note that parentheses are required around the predicate.
 
@@ -392,19 +392,19 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
 * `DEFERRABLE``NOT DEFERRABLE` [#](#SQL-CREATETABLE-PARMS-DEFERRABLE)
 
-    This controls whether the constraint can be deferred. A constraint that is not deferrable will be checked immediately after every command. Checking of constraints that are deferrable can be postponed until the end of the transaction (using the [`SET CONSTRAINTS`](sql-set-constraints.html "SET CONSTRAINTS") command). `NOT DEFERRABLE` is the default. Currently, only `UNIQUE`, `PRIMARY KEY`, `EXCLUDE`, and `REFERENCES` (foreign key) constraints accept this clause. `NOT NULL` and `CHECK` constraints are not deferrable. Note that deferrable constraints cannot be used as conflict arbitrators in an `INSERT` statement that includes an `ON CONFLICT DO UPDATE` clause.
+    This controls whether the constraint can be deferred. A constraint that is not deferrable will be checked immediately after every command. Checking of constraints that are deferrable can be postponed until the end of the transaction (using the [`SET CONSTRAINTS`](sql-set-constraints "SET CONSTRAINTS") command). `NOT DEFERRABLE` is the default. Currently, only `UNIQUE`, `PRIMARY KEY`, `EXCLUDE`, and `REFERENCES` (foreign key) constraints accept this clause. `NOT NULL` and `CHECK` constraints are not deferrable. Note that deferrable constraints cannot be used as conflict arbitrators in an `INSERT` statement that includes an `ON CONFLICT DO UPDATE` clause.
 
 * `INITIALLY IMMEDIATE``INITIALLY DEFERRED` [#](#SQL-CREATETABLE-PARMS-INITIALLY)
 
-    If a constraint is deferrable, this clause specifies the default time to check the constraint. If the constraint is `INITIALLY IMMEDIATE`, it is checked after each statement. This is the default. If the constraint is `INITIALLY DEFERRED`, it is checked only at the end of the transaction. The constraint check time can be altered with the [`SET CONSTRAINTS`](sql-set-constraints.html "SET CONSTRAINTS") command.
+    If a constraint is deferrable, this clause specifies the default time to check the constraint. If the constraint is `INITIALLY IMMEDIATE`, it is checked after each statement. This is the default. If the constraint is `INITIALLY DEFERRED`, it is checked only at the end of the transaction. The constraint check time can be altered with the [`SET CONSTRAINTS`](sql-set-constraints "SET CONSTRAINTS") command.
 
 * `USING method` [#](#SQL-CREATETABLE-METHOD)
 
-    This optional clause specifies the table access method to use to store the contents for the new table; the method needs be an access method of type `TABLE`. See [Chapter 63](tableam.html "Chapter 63. Table Access Method Interface Definition") for more information. If this option is not specified, the default table access method is chosen for the new table. See [default\_table\_access\_method](runtime-config-client.html#GUC-DEFAULT-TABLE-ACCESS-METHOD) for more information.
+    This optional clause specifies the table access method to use to store the contents for the new table; the method needs be an access method of type `TABLE`. See [Chapter 63](tableam "Chapter 63. Table Access Method Interface Definition") for more information. If this option is not specified, the default table access method is chosen for the new table. See [default\_table\_access\_method](runtime-config-client#GUC-DEFAULT-TABLE-ACCESS-METHOD) for more information.
 
 * `WITH ( storage_parameter [= value] [, ... ] )` [#](#SQL-CREATETABLE-PARMS-WITH)
 
-    This clause specifies optional storage parameters for a table or index; see [Storage Parameters](sql-createtable.html#SQL-CREATETABLE-STORAGE-PARAMETERS "Storage Parameters") below for more information. For backward-compatibility the `WITH` clause for a table can also include `OIDS=FALSE` to specify that rows of the new table should not contain OIDs (object identifiers), `OIDS=TRUE` is not supported anymore.
+    This clause specifies optional storage parameters for a table or index; see [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS "Storage Parameters") below for more information. For backward-compatibility the `WITH` clause for a table can also include `OIDS=FALSE` to specify that rows of the new table should not contain OIDs (object identifiers), `OIDS=TRUE` is not supported anymore.
 
 * `WITHOUT OIDS` [#](#SQL-CREATETABLE-PARMS-WITHOUT-OIDS)
 
@@ -420,7 +420,7 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
   * `DELETE ROWS` [#](#SQL-CREATETABLE-PARMS-ON-COMMIT-DELETE-ROWS)
 
-        All rows in the temporary table will be deleted at the end of each transaction block. Essentially, an automatic [`TRUNCATE`](sql-truncate.html "TRUNCATE") is done at each commit. When used on a partitioned table, this is not cascaded to its partitions.
+        All rows in the temporary table will be deleted at the end of each transaction block. Essentially, an automatic [`TRUNCATE`](sql-truncate "TRUNCATE") is done at each commit. When used on a partitioned table, this is not cascaded to its partitions.
 
   * `DROP` [#](#SQL-CREATETABLE-PARMS-ON-COMMIT-DROP)
 
@@ -428,19 +428,19 @@ To be able to create a table, you must have `USAGE` privilege on all column type
 
 * `TABLESPACE tablespace_name` [#](#SQL-CREATETABLE-TABLESPACE)
 
-    The *`tablespace_name`* is the name of the tablespace in which the new table is to be created. If not specified, [default\_tablespace](runtime-config-client.html#GUC-DEFAULT-TABLESPACE) is consulted, or [temp\_tablespaces](runtime-config-client.html#GUC-TEMP-TABLESPACES) if the table is temporary. For partitioned tables, since no storage is required for the table itself, the tablespace specified overrides `default_tablespace` as the default tablespace to use for any newly created partitions when no other tablespace is explicitly specified.
+    The *`tablespace_name`* is the name of the tablespace in which the new table is to be created. If not specified, [default\_tablespace](runtime-config-client#GUC-DEFAULT-TABLESPACE) is consulted, or [temp\_tablespaces](runtime-config-client#GUC-TEMP-TABLESPACES) if the table is temporary. For partitioned tables, since no storage is required for the table itself, the tablespace specified overrides `default_tablespace` as the default tablespace to use for any newly created partitions when no other tablespace is explicitly specified.
 
 * `USING INDEX TABLESPACE tablespace_name` [#](#SQL-CREATETABLE-PARMS-USING-INDEX-TABLESPACE)
 
-    This clause allows selection of the tablespace in which the index associated with a `UNIQUE`, `PRIMARY KEY`, or `EXCLUDE` constraint will be created. If not specified, [default\_tablespace](runtime-config-client.html#GUC-DEFAULT-TABLESPACE) is consulted, or [temp\_tablespaces](runtime-config-client.html#GUC-TEMP-TABLESPACES) if the table is temporary.
+    This clause allows selection of the tablespace in which the index associated with a `UNIQUE`, `PRIMARY KEY`, or `EXCLUDE` constraint will be created. If not specified, [default\_tablespace](runtime-config-client#GUC-DEFAULT-TABLESPACE) is consulted, or [temp\_tablespaces](runtime-config-client#GUC-TEMP-TABLESPACES) if the table is temporary.
 
 ### Storage Parameters
 
-The `WITH` clause can specify *storage parameters* for tables, and for indexes associated with a `UNIQUE`, `PRIMARY KEY`, or `EXCLUDE` constraint. Storage parameters for indexes are documented in [CREATE INDEX](sql-createindex.html "CREATE INDEX"). The storage parameters currently available for tables are listed below. For many of these parameters, as shown, there is an additional parameter with the same name prefixed with `toast.`, which controls the behavior of the table's secondary TOAST table, if any (see [Section 73.2](storage-toast.html "73.2. TOAST") for more information about TOAST). If a table parameter value is set and the equivalent `toast.` parameter is not, the TOAST table will use the table's parameter value. Specifying these parameters for partitioned tables is not supported, but you may specify them for individual leaf partitions.
+The `WITH` clause can specify *storage parameters* for tables, and for indexes associated with a `UNIQUE`, `PRIMARY KEY`, or `EXCLUDE` constraint. Storage parameters for indexes are documented in [CREATE INDEX](sql-createindex "CREATE INDEX"). The storage parameters currently available for tables are listed below. For many of these parameters, as shown, there is an additional parameter with the same name prefixed with `toast.`, which controls the behavior of the table's secondary TOAST table, if any (see [Section 73.2](storage-toast "73.2. TOAST") for more information about TOAST). If a table parameter value is set and the equivalent `toast.` parameter is not, the TOAST table will use the table's parameter value. Specifying these parameters for partitioned tables is not supported, but you may specify them for individual leaf partitions.
 
 * `fillfactor` (`integer`) [#](#RELOPTION-FILLFACTOR)
 
-    The fillfactor for a table is a percentage between 10 and 100. 100 (complete packing) is the default. When a smaller fillfactor is specified, `INSERT` operations pack table pages only to the indicated percentage; the remaining space on each page is reserved for updating rows on that page. This gives `UPDATE` a chance to place the updated copy of a row on the same page as the original, which is more efficient than placing it on a different page, and makes [heap-only tuple updates](storage-hot.html "73.7. Heap-Only Tuples (HOT)") more likely. For a table whose entries are never updated, complete packing is the best choice, but in heavily updated tables smaller fillfactors are appropriate. This parameter cannot be set for TOAST tables.
+    The fillfactor for a table is a percentage between 10 and 100. 100 (complete packing) is the default. When a smaller fillfactor is specified, `INSERT` operations pack table pages only to the indicated percentage; the remaining space on each page is reserved for updating rows on that page. This gives `UPDATE` a chance to place the updated copy of a row on the same page as the original, which is more efficient than placing it on a different page, and makes [heap-only tuple updates](storage-hot "73.7. Heap-Only Tuples (HOT)") more likely. For a table whose entries are never updated, complete packing is the best choice, but in heavily updated tables smaller fillfactors are appropriate. This parameter cannot be set for TOAST tables.
 
 * `toast_tuple_target` (`integer`) [#](#RELOPTION-TOAST-TUPLE-TARGET)
 
@@ -448,87 +448,87 @@ The `WITH` clause can specify *storage parameters* for tables, and for indexes a
 
 * `parallel_workers` (`integer`) [#](#RELOPTION-PARALLEL-WORKERS)
 
-    This sets the number of workers that should be used to assist a parallel scan of this table. If not set, the system will determine a value based on the relation size. The actual number of workers chosen by the planner or by utility statements that use parallel scans may be less, for example due to the setting of [max\_worker\_processes](runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES).
+    This sets the number of workers that should be used to assist a parallel scan of this table. If not set, the system will determine a value based on the relation size. The actual number of workers chosen by the planner or by utility statements that use parallel scans may be less, for example due to the setting of [max\_worker\_processes](runtime-config-resource#GUC-MAX-WORKER-PROCESSES).
 
 * `autovacuum_enabled`, `toast.autovacuum_enabled` (`boolean`) [#](#RELOPTION-AUTOVACUUM-ENABLED)
 
-    Enables or disables the autovacuum daemon for a particular table. If true, the autovacuum daemon will perform automatic `VACUUM` and/or `ANALYZE` operations on this table following the rules discussed in [Section 25.1.6](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon"). If false, this table will not be autovacuumed, except to prevent transaction ID wraparound. See [Section 25.1.5](routine-vacuuming.html#VACUUM-FOR-WRAPAROUND "25.1.5. Preventing Transaction ID Wraparound Failures") for more about wraparound prevention. Note that the autovacuum daemon does not run at all (except to prevent transaction ID wraparound) if the [autovacuum](runtime-config-autovacuum.html#GUC-AUTOVACUUM) parameter is false; setting individual tables' storage parameters does not override that. Therefore there is seldom much point in explicitly setting this storage parameter to `true`, only to `false`.
+    Enables or disables the autovacuum daemon for a particular table. If true, the autovacuum daemon will perform automatic `VACUUM` and/or `ANALYZE` operations on this table following the rules discussed in [Section 25.1.6](routine-vacuuming#AUTOVACUUM "25.1.6. The Autovacuum Daemon"). If false, this table will not be autovacuumed, except to prevent transaction ID wraparound. See [Section 25.1.5](routine-vacuuming#VACUUM-FOR-WRAPAROUND "25.1.5. Preventing Transaction ID Wraparound Failures") for more about wraparound prevention. Note that the autovacuum daemon does not run at all (except to prevent transaction ID wraparound) if the [autovacuum](runtime-config-autovacuum#GUC-AUTOVACUUM) parameter is false; setting individual tables' storage parameters does not override that. Therefore there is seldom much point in explicitly setting this storage parameter to `true`, only to `false`.
 
 * `vacuum_index_cleanup`, `toast.vacuum_index_cleanup` (`enum`) [#](#RELOPTION-VACUUM-INDEX-CLEANUP)
 
-    Forces or disables index cleanup when `VACUUM` is run on this table. The default value is `AUTO`. With `OFF`, index cleanup is disabled, with `ON` it is enabled, and with `AUTO` a decision is made dynamically, each time `VACUUM` runs. The dynamic behavior allows `VACUUM` to avoid needlessly scanning indexes to remove very few dead tuples. Forcibly disabling all index cleanup can speed up `VACUUM` very significantly, but may also lead to severely bloated indexes if table modifications are frequent. The `INDEX_CLEANUP` parameter of [`VACUUM`](sql-vacuum.html "VACUUM"), if specified, overrides the value of this option.
+    Forces or disables index cleanup when `VACUUM` is run on this table. The default value is `AUTO`. With `OFF`, index cleanup is disabled, with `ON` it is enabled, and with `AUTO` a decision is made dynamically, each time `VACUUM` runs. The dynamic behavior allows `VACUUM` to avoid needlessly scanning indexes to remove very few dead tuples. Forcibly disabling all index cleanup can speed up `VACUUM` very significantly, but may also lead to severely bloated indexes if table modifications are frequent. The `INDEX_CLEANUP` parameter of [`VACUUM`](sql-vacuum "VACUUM"), if specified, overrides the value of this option.
 
 * `vacuum_truncate`, `toast.vacuum_truncate` (`boolean`) [#](#RELOPTION-VACUUM-TRUNCATE)
 
-    Enables or disables vacuum to try to truncate off any empty pages at the end of this table. The default value is `true`. If `true`, `VACUUM` and autovacuum do the truncation and the disk space for the truncated pages is returned to the operating system. Note that the truncation requires `ACCESS EXCLUSIVE` lock on the table. The `TRUNCATE` parameter of [`VACUUM`](sql-vacuum.html "VACUUM"), if specified, overrides the value of this option.
+    Enables or disables vacuum to try to truncate off any empty pages at the end of this table. The default value is `true`. If `true`, `VACUUM` and autovacuum do the truncation and the disk space for the truncated pages is returned to the operating system. Note that the truncation requires `ACCESS EXCLUSIVE` lock on the table. The `TRUNCATE` parameter of [`VACUUM`](sql-vacuum "VACUUM"), if specified, overrides the value of this option.
 
 * `autovacuum_vacuum_threshold`, `toast.autovacuum_vacuum_threshold` (`integer`) [#](#RELOPTION-AUTOVACUUM-VACUUM-THRESHOLD)
 
-    Per-table value for [autovacuum\_vacuum\_threshold](runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-THRESHOLD) parameter.
+    Per-table value for [autovacuum\_vacuum\_threshold](runtime-config-autovacuum#GUC-AUTOVACUUM-VACUUM-THRESHOLD) parameter.
 
 * `autovacuum_vacuum_scale_factor`, `toast.autovacuum_vacuum_scale_factor` (`floating point`) [#](#RELOPTION-AUTOVACUUM-VACUUM-SCALE-FACTOR)
 
-    Per-table value for [autovacuum\_vacuum\_scale\_factor](runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-SCALE-FACTOR) parameter.
+    Per-table value for [autovacuum\_vacuum\_scale\_factor](runtime-config-autovacuum#GUC-AUTOVACUUM-VACUUM-SCALE-FACTOR) parameter.
 
 * `autovacuum_vacuum_insert_threshold`, `toast.autovacuum_vacuum_insert_threshold` (`integer`) [#](#RELOPTION-AUTOVACUUM-VACUUM-INSERT-THRESHOLD)
 
-    Per-table value for [autovacuum\_vacuum\_insert\_threshold](runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-INSERT-THRESHOLD) parameter. The special value of -1 may be used to disable insert vacuums on the table.
+    Per-table value for [autovacuum\_vacuum\_insert\_threshold](runtime-config-autovacuum#GUC-AUTOVACUUM-VACUUM-INSERT-THRESHOLD) parameter. The special value of -1 may be used to disable insert vacuums on the table.
 
 * `autovacuum_vacuum_insert_scale_factor`, `toast.autovacuum_vacuum_insert_scale_factor` (`floating point`) [#](#RELOPTION-AUTOVACUUM-VACUUM-INSERT-SCALE-FACTOR)
 
-    Per-table value for [autovacuum\_vacuum\_insert\_scale\_factor](runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-INSERT-SCALE-FACTOR) parameter.
+    Per-table value for [autovacuum\_vacuum\_insert\_scale\_factor](runtime-config-autovacuum#GUC-AUTOVACUUM-VACUUM-INSERT-SCALE-FACTOR) parameter.
 
 * `autovacuum_analyze_threshold` (`integer`) [#](#RELOPTION-AUTOVACUUM-ANALYZE-THRESHOLD)
 
-    Per-table value for [autovacuum\_analyze\_threshold](runtime-config-autovacuum.html#GUC-AUTOVACUUM-ANALYZE-THRESHOLD) parameter.
+    Per-table value for [autovacuum\_analyze\_threshold](runtime-config-autovacuum#GUC-AUTOVACUUM-ANALYZE-THRESHOLD) parameter.
 
 * `autovacuum_analyze_scale_factor` (`floating point`) [#](#RELOPTION-AUTOVACUUM-ANALYZE-SCALE-FACTOR)
 
-    Per-table value for [autovacuum\_analyze\_scale\_factor](runtime-config-autovacuum.html#GUC-AUTOVACUUM-ANALYZE-SCALE-FACTOR) parameter.
+    Per-table value for [autovacuum\_analyze\_scale\_factor](runtime-config-autovacuum#GUC-AUTOVACUUM-ANALYZE-SCALE-FACTOR) parameter.
 
 * `autovacuum_vacuum_cost_delay`, `toast.autovacuum_vacuum_cost_delay` (`floating point`) [#](#RELOPTION-AUTOVACUUM-VACUUM-COST-DELAY)
 
-    Per-table value for [autovacuum\_vacuum\_cost\_delay](runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-DELAY) parameter.
+    Per-table value for [autovacuum\_vacuum\_cost\_delay](runtime-config-autovacuum#GUC-AUTOVACUUM-VACUUM-COST-DELAY) parameter.
 
 * `autovacuum_vacuum_cost_limit`, `toast.autovacuum_vacuum_cost_limit` (`integer`) [#](#RELOPTION-AUTOVACUUM-VACUUM-COST-LIMIT)
 
-    Per-table value for [autovacuum\_vacuum\_cost\_limit](runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-LIMIT) parameter.
+    Per-table value for [autovacuum\_vacuum\_cost\_limit](runtime-config-autovacuum#GUC-AUTOVACUUM-VACUUM-COST-LIMIT) parameter.
 
 * `autovacuum_freeze_min_age`, `toast.autovacuum_freeze_min_age` (`integer`) [#](#RELOPTION-AUTOVACUUM-FREEZE-MIN-AGE)
 
-    Per-table value for [vacuum\_freeze\_min\_age](runtime-config-client.html#GUC-VACUUM-FREEZE-MIN-AGE) parameter. Note that autovacuum will ignore per-table `autovacuum_freeze_min_age` parameters that are larger than half the system-wide [autovacuum\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE) setting.
+    Per-table value for [vacuum\_freeze\_min\_age](runtime-config-client#GUC-VACUUM-FREEZE-MIN-AGE) parameter. Note that autovacuum will ignore per-table `autovacuum_freeze_min_age` parameters that are larger than half the system-wide [autovacuum\_freeze\_max\_age](runtime-config-autovacuum#GUC-AUTOVACUUM-FREEZE-MAX-AGE) setting.
 
 * `autovacuum_freeze_max_age`, `toast.autovacuum_freeze_max_age` (`integer`) [#](#RELOPTION-AUTOVACUUM-FREEZE-MAX-AGE)
 
-    Per-table value for [autovacuum\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE) parameter. Note that autovacuum will ignore per-table `autovacuum_freeze_max_age` parameters that are larger than the system-wide setting (it can only be set smaller).
+    Per-table value for [autovacuum\_freeze\_max\_age](runtime-config-autovacuum#GUC-AUTOVACUUM-FREEZE-MAX-AGE) parameter. Note that autovacuum will ignore per-table `autovacuum_freeze_max_age` parameters that are larger than the system-wide setting (it can only be set smaller).
 
 * `autovacuum_freeze_table_age`, `toast.autovacuum_freeze_table_age` (`integer`) [#](#RELOPTION-AUTOVACUUM-FREEZE-TABLE-AGE)
 
-    Per-table value for [vacuum\_freeze\_table\_age](runtime-config-client.html#GUC-VACUUM-FREEZE-TABLE-AGE) parameter.
+    Per-table value for [vacuum\_freeze\_table\_age](runtime-config-client#GUC-VACUUM-FREEZE-TABLE-AGE) parameter.
 
 * `autovacuum_multixact_freeze_min_age`, `toast.autovacuum_multixact_freeze_min_age` (`integer`) [#](#RELOPTION-AUTOVACUUM-MULTIXACT-FREEZE-MIN-AGE)
 
-    Per-table value for [vacuum\_multixact\_freeze\_min\_age](runtime-config-client.html#GUC-VACUUM-MULTIXACT-FREEZE-MIN-AGE) parameter. Note that autovacuum will ignore per-table `autovacuum_multixact_freeze_min_age` parameters that are larger than half the system-wide [autovacuum\_multixact\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-MULTIXACT-FREEZE-MAX-AGE) setting.
+    Per-table value for [vacuum\_multixact\_freeze\_min\_age](runtime-config-client#GUC-VACUUM-MULTIXACT-FREEZE-MIN-AGE) parameter. Note that autovacuum will ignore per-table `autovacuum_multixact_freeze_min_age` parameters that are larger than half the system-wide [autovacuum\_multixact\_freeze\_max\_age](runtime-config-autovacuum#GUC-AUTOVACUUM-MULTIXACT-FREEZE-MAX-AGE) setting.
 
 * `autovacuum_multixact_freeze_max_age`, `toast.autovacuum_multixact_freeze_max_age` (`integer`) [#](#RELOPTION-AUTOVACUUM-MULTIXACT-FREEZE-MAX-AGE)
 
-    Per-table value for [autovacuum\_multixact\_freeze\_max\_age](runtime-config-autovacuum.html#GUC-AUTOVACUUM-MULTIXACT-FREEZE-MAX-AGE) parameter. Note that autovacuum will ignore per-table `autovacuum_multixact_freeze_max_age` parameters that are larger than the system-wide setting (it can only be set smaller).
+    Per-table value for [autovacuum\_multixact\_freeze\_max\_age](runtime-config-autovacuum#GUC-AUTOVACUUM-MULTIXACT-FREEZE-MAX-AGE) parameter. Note that autovacuum will ignore per-table `autovacuum_multixact_freeze_max_age` parameters that are larger than the system-wide setting (it can only be set smaller).
 
 * `autovacuum_multixact_freeze_table_age`, `toast.autovacuum_multixact_freeze_table_age` (`integer`) [#](#RELOPTION-AUTOVACUUM-MULTIXACT-FREEZE-TABLE-AGE)
 
-    Per-table value for [vacuum\_multixact\_freeze\_table\_age](runtime-config-client.html#GUC-VACUUM-MULTIXACT-FREEZE-TABLE-AGE) parameter.
+    Per-table value for [vacuum\_multixact\_freeze\_table\_age](runtime-config-client#GUC-VACUUM-MULTIXACT-FREEZE-TABLE-AGE) parameter.
 
 * `log_autovacuum_min_duration`, `toast.log_autovacuum_min_duration` (`integer`) [#](#RELOPTION-LOG-AUTOVACUUM-MIN-DURATION)
 
-    Per-table value for [log\_autovacuum\_min\_duration](runtime-config-logging.html#GUC-LOG-AUTOVACUUM-MIN-DURATION) parameter.
+    Per-table value for [log\_autovacuum\_min\_duration](runtime-config-logging#GUC-LOG-AUTOVACUUM-MIN-DURATION) parameter.
 
 * `user_catalog_table` (`boolean`) [#](#RELOPTION-USER-CATALOG-TABLE)
 
-    Declare the table as an additional catalog table for purposes of logical replication. See [Section 49.6.2](logicaldecoding-output-plugin.html#LOGICALDECODING-CAPABILITIES "49.6.2. Capabilities") for details. This parameter cannot be set for TOAST tables.
+    Declare the table as an additional catalog table for purposes of logical replication. See [Section 49.6.2](logicaldecoding-output-plugin#LOGICALDECODING-CAPABILITIES "49.6.2. Capabilities") for details. This parameter cannot be set for TOAST tables.
 
 ## Notes
 
-PostgreSQL automatically creates an index for each unique constraint and primary key constraint to enforce uniqueness. Thus, it is not necessary to create an index explicitly for primary key columns. (See [CREATE INDEX](sql-createindex.html "CREATE INDEX") for more information.)
+PostgreSQL automatically creates an index for each unique constraint and primary key constraint to enforce uniqueness. Thus, it is not necessary to create an index explicitly for primary key columns. (See [CREATE INDEX](sql-createindex "CREATE INDEX") for more information.)
 
 Unique constraints and primary keys are not inherited in the current implementation. This makes the combination of inheritance and unique constraints rather dysfunctional.
 
@@ -920,4 +920,4 @@ The `PARTITION OF` clause is a PostgreSQL extension.
 
 ## See Also
 
-[ALTER TABLE](sql-altertable.html "ALTER TABLE"), [DROP TABLE](sql-droptable.html "DROP TABLE"), [CREATE TABLE AS](sql-createtableas.html "CREATE TABLE AS"), [CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE"), [CREATE TYPE](sql-createtype.html "CREATE TYPE")
+[ALTER TABLE](sql-altertable "ALTER TABLE"), [DROP TABLE](sql-droptable "DROP TABLE"), [CREATE TABLE AS](sql-createtableas "CREATE TABLE AS"), [CREATE TABLESPACE](sql-createtablespace "CREATE TABLESPACE"), [CREATE TYPE](sql-createtype "CREATE TYPE")

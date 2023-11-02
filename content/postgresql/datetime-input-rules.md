@@ -11,7 +11,7 @@ Date/time input strings are decoded using the following procedure.
 
 2. If the token is an alphabetic string, match up with possible strings:
 
-    1. See if the token matches any known time zone abbreviation. These abbreviations are supplied by the configuration file described in [Section B.4](datetime-config-files.html "B.4. Date/Time Configuration Files").
+    1. See if the token matches any known time zone abbreviation. These abbreviations are supplied by the configuration file described in [Section B.4](datetime-config-files "B.4. Date/Time Configuration Files").
     2. If not found, search an internal table to match the token as either a special string (e.g., `today`), day (e.g., `Thursday`), month (e.g., `January`), or noise word (e.g., `at`, `on`).
     3. If still not found, throw an error.
 

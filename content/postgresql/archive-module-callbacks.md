@@ -1,9 +1,9 @@
 ## 51.2. Archive Module Callbacks [#](#ARCHIVE-MODULE-CALLBACKS)
 
-  * *   [51.2.1. Startup Callback](archive-module-callbacks.html#ARCHIVE-MODULE-STARTUP)
-  * [51.2.2. Check Callback](archive-module-callbacks.html#ARCHIVE-MODULE-CHECK)
-  * [51.2.3. Archive Callback](archive-module-callbacks.html#ARCHIVE-MODULE-ARCHIVE)
-  * [51.2.4. Shutdown Callback](archive-module-callbacks.html#ARCHIVE-MODULE-SHUTDOWN)
+  * *   [51.2.1. Startup Callback](archive-module-callbacks#ARCHIVE-MODULE-STARTUP)
+  * [51.2.2. Check Callback](archive-module-callbacks#ARCHIVE-MODULE-CHECK)
+  * [51.2.3. Archive Callback](archive-module-callbacks#ARCHIVE-MODULE-ARCHIVE)
+  * [51.2.4. Shutdown Callback](archive-module-callbacks#ARCHIVE-MODULE-SHUTDOWN)
 
 The archive callbacks define the actual archiving behavior of the module. The server will call them as required to process each individual WAL file.
 
@@ -47,7 +47,7 @@ If `true` is returned, the server proceeds as if the file was successfully archi
 
 ### 51.2.4. Shutdown Callback [#](#ARCHIVE-MODULE-SHUTDOWN)
 
-The `shutdown_cb` callback is called when the archiver process exits (e.g., after an error) or the value of [archive\_library](runtime-config-wal.html#GUC-ARCHIVE-LIBRARY) changes. If no `shutdown_cb` is defined, no special action is taken in these situations. If the archive module has any state, this callback should free it to avoid leaks.
+The `shutdown_cb` callback is called when the archiver process exits (e.g., after an error) or the value of [archive\_library](runtime-config-wal#GUC-ARCHIVE-LIBRARY) changes. If no `shutdown_cb` is defined, no special action is taken in these situations. If the archive module has any state, this callback should free it to avoid leaks.
 
 ```
 

@@ -1,15 +1,15 @@
 ## 12.4. Additional Features [#](#TEXTSEARCH-FEATURES)
 
-  * *   [12.4.1. Manipulating Documents](textsearch-features.html#TEXTSEARCH-MANIPULATE-TSVECTOR)
-  * [12.4.2. Manipulating Queries](textsearch-features.html#TEXTSEARCH-MANIPULATE-TSQUERY)
-  * [12.4.3. Triggers for Automatic Updates](textsearch-features.html#TEXTSEARCH-UPDATE-TRIGGERS)
-  * [12.4.4. Gathering Document Statistics](textsearch-features.html#TEXTSEARCH-STATISTICS)
+  * *   [12.4.1. Manipulating Documents](textsearch-features#TEXTSEARCH-MANIPULATE-TSVECTOR)
+  * [12.4.2. Manipulating Queries](textsearch-features#TEXTSEARCH-MANIPULATE-TSQUERY)
+  * [12.4.3. Triggers for Automatic Updates](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS)
+  * [12.4.4. Gathering Document Statistics](textsearch-features#TEXTSEARCH-STATISTICS)
 
 This section describes additional functions and operators that are useful in connection with text search.
 
 ### 12.4.1. Manipulating Documents [#](#TEXTSEARCH-MANIPULATE-TSVECTOR)
 
-[Section 12.3.1](textsearch-controls.html#TEXTSEARCH-PARSING-DOCUMENTS "12.3.1. Parsing Documents") showed how raw textual documents can be converted into `tsvector` values. PostgreSQL also provides functions and operators that can be used to manipulate documents that are already in `tsvector` form.
+[Section 12.3.1](textsearch-controls#TEXTSEARCH-PARSING-DOCUMENTS "12.3.1. Parsing Documents") showed how raw textual documents can be converted into `tsvector` values. PostgreSQL also provides functions and operators that can be used to manipulate documents that are already in `tsvector` form.
 
 * `tsvector || tsvector`
 
@@ -31,11 +31,11 @@ This section describes additional functions and operators that are useful in con
 
     Returns a vector that lists the same lexemes as the given vector, but lacks any position or weight information. The result is usually much smaller than an unstripped vector, but it is also less useful. Relevance ranking does not work as well on stripped vectors as unstripped ones. Also, the `<->` (FOLLOWED BY) `tsquery` operator will never match stripped input, since it cannot determine the distance between lexeme occurrences.
 
-A full list of `tsvector`-related functions is available in [Table 9.43](functions-textsearch.html#TEXTSEARCH-FUNCTIONS-TABLE "Table 9.43. Text Search Functions").
+A full list of `tsvector`-related functions is available in [Table 9.43](functions-textsearch#TEXTSEARCH-FUNCTIONS-TABLE "Table 9.43. Text Search Functions").
 
 ### 12.4.2. Manipulating Queries [#](#TEXTSEARCH-MANIPULATE-TSQUERY)
 
-[Section 12.3.2](textsearch-controls.html#TEXTSEARCH-PARSING-QUERIES "12.3.2. Parsing Queries") showed how raw textual queries can be converted into `tsquery` values. PostgreSQL also provides functions and operators that can be used to manipulate queries that are already in `tsquery` form.
+[Section 12.3.2](textsearch-controls#TEXTSEARCH-PARSING-QUERIES "12.3.2. Parsing Queries") showed how raw textual queries can be converted into `tsquery` values. PostgreSQL also provides functions and operators that can be used to manipulate queries that are already in `tsquery` form.
 
 * `tsquery && tsquery`
 
@@ -110,7 +110,7 @@ A full list of `tsvector`-related functions is available in [Table 9.43](functi
 
 #### 12.4.2.1. Query Rewriting [#](#TEXTSEARCH-QUERY-REWRITING)
 
-The `ts_rewrite` family of functions search a given `tsquery` for occurrences of a target subquery, and replace each occurrence with a substitute subquery. In essence this operation is a `tsquery`-specific version of substring replacement. A target and substitute combination can be thought of as a *query rewrite rule*. A collection of such rewrite rules can be a powerful search aid. For example, you can expand the search using synonyms (e.g., `new york`, `big apple`, `nyc`, `gotham`) or narrow the search to direct the user to some hot topic. There is some overlap in functionality between this feature and thesaurus dictionaries ([Section 12.6.4](textsearch-dictionaries.html#TEXTSEARCH-THESAURUS "12.6.4. Thesaurus Dictionary")). However, you can modify a set of rewrite rules on-the-fly without reindexing, whereas updating a thesaurus requires reindexing to be effective.
+The `ts_rewrite` family of functions search a given `tsquery` for occurrences of a target subquery, and replace each occurrence with a substitute subquery. In essence this operation is a `tsquery`-specific version of substring replacement. A target and substitute combination can be thought of as a *query rewrite rule*. A collection of such rewrite rules can be a powerful search aid. For example, you can expand the search using synonyms (e.g., `new york`, `big apple`, `nyc`, `gotham`) or narrow the search to direct the user to some hot topic. There is some overlap in functionality between this feature and thesaurus dictionaries ([Section 12.6.4](textsearch-dictionaries#TEXTSEARCH-THESAURUS "12.6.4. Thesaurus Dictionary")). However, you can modify a set of rewrite rules on-the-fly without reindexing, whereas updating a thesaurus requires reindexing to be effective.
 
 * `ts_rewrite (query tsquery, target tsquery, substitute tsquery) returns tsquery`
 
@@ -183,7 +183,7 @@ SELECT ts_rewrite('a & b'::tsquery,
 
 ### Note
 
-The method described in this section has been obsoleted by the use of stored generated columns, as described in [Section 12.2.2](textsearch-tables.html#TEXTSEARCH-TABLES-INDEX "12.2.2. Creating Indexes").
+The method described in this section has been obsoleted by the use of stored generated columns, as described in [Section 12.2.2](textsearch-tables#TEXTSEARCH-TABLES-INDEX "12.2.2. Creating Indexes").
 
 When using a separate column to store the `tsvector` representation of your documents, it is necessary to create a trigger to update the `tsvector` column when the document content columns change. Two built-in trigger functions are available for this, or you can write your own.
 

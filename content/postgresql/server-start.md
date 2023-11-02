@@ -1,7 +1,7 @@
 ## 19.3. Starting the Database Server [#](#SERVER-START)
 
-  * *   [19.3.1. Server Start-up Failures](server-start.html#SERVER-START-FAILURES)
-  * [19.3.2. Client Connection Problems](server-start.html#CLIENT-CONNECTION-PROBLEMS)
+  * *   [19.3.1. Server Start-up Failures](server-start#SERVER-START-FAILURES)
+  * [19.3.2. Client Connection Problems](server-start#CLIENT-CONNECTION-PROBLEMS)
 
 Before anyone can access the database, you must start the database server. The database server program is called `postgres`.
 
@@ -23,11 +23,11 @@ Normally it is better to start `postgres` in the background. For this, use the u
 postgres -D /usr/local/pgsql/data >logfile 2>&1 &
 ```
 
-It is important to store the server's stdout and stderr output somewhere, as shown above. It will help for auditing purposes and to diagnose problems. (See [Section 25.3](logfile-maintenance.html "25.3. Log File Maintenance") for a more thorough discussion of log file handling.)
+It is important to store the server's stdout and stderr output somewhere, as shown above. It will help for auditing purposes and to diagnose problems. (See [Section 25.3](logfile-maintenance "25.3. Log File Maintenance") for a more thorough discussion of log file handling.)
 
-The `postgres` program also takes a number of other command-line options. For more information, see the [postgres](app-postgres.html "postgres") reference page and [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") below.
+The `postgres` program also takes a number of other command-line options. For more information, see the [postgres](app-postgres "postgres") reference page and [Chapter 20](runtime-config "Chapter 20. Server Configuration") below.
 
-This shell syntax can get tedious quickly. Therefore the wrapper program [pg\_ctl](app-pg-ctl.html "pg_ctl") is provided to simplify some tasks. For example:
+This shell syntax can get tedious quickly. Therefore the wrapper program [pg\_ctl](app-pg-ctl "pg_ctl") is provided to simplify some tasks. For example:
 
 ```
 
@@ -137,7 +137,7 @@ FATAL:  could not create shared memory segment: Invalid argument
 DETAIL:  Failed system call was shmget(key=5440001, size=4011376640, 03600).
 ```
 
-probably means your kernel's limit on the size of shared memory is smaller than the work area PostgreSQL is trying to create (4011376640 bytes in this example). This is only likely to happen if you have set `shared_memory_type` to `sysv`. In that case, you can try starting the server with a smaller-than-normal number of buffers ([shared\_buffers](runtime-config-resource.html#GUC-SHARED-BUFFERS)), or reconfigure your kernel to increase the allowed shared memory size. You might also see this message when trying to start multiple servers on the same machine, if their total space requested exceeds the kernel limit.
+probably means your kernel's limit on the size of shared memory is smaller than the work area PostgreSQL is trying to create (4011376640 bytes in this example). This is only likely to happen if you have set `shared_memory_type` to `sysv`. In that case, you can try starting the server with a smaller-than-normal number of buffers ([shared\_buffers](runtime-config-resource#GUC-SHARED-BUFFERS)), or reconfigure your kernel to increase the allowed shared memory size. You might also see this message when trying to start multiple servers on the same machine, if their total space requested exceeds the kernel limit.
 
 An error like:
 
@@ -147,9 +147,9 @@ FATAL:  could not create semaphores: No space left on device
 DETAIL:  Failed system call was semget(5440126, 17, 03600).
 ```
 
-does *not* mean you've run out of disk space. It means your kernel's limit on the number of System V semaphores is smaller than the number PostgreSQL wants to create. As above, you might be able to work around the problem by starting the server with a reduced number of allowed connections ([max\_connections](runtime-config-connection.html#GUC-MAX-CONNECTIONS)), but you'll eventually want to increase the kernel limit.
+does *not* mean you've run out of disk space. It means your kernel's limit on the number of System V semaphores is smaller than the number PostgreSQL wants to create. As above, you might be able to work around the problem by starting the server with a reduced number of allowed connections ([max\_connections](runtime-config-connection#GUC-MAX-CONNECTIONS)), but you'll eventually want to increase the kernel limit.
 
-Details about configuring System V IPC facilities are given in [Section 19.4.1](kernel-resources.html#SYSVIPC "19.4.1. Shared Memory and Semaphores").
+Details about configuring System V IPC facilities are given in [Section 19.4.1](kernel-resources#SYSVIPC "19.4.1. Shared Memory and Semaphores").
 
 ### 19.3.2. Client Connection Problems [#](#CLIENT-CONNECTION-PROBLEMS)
 
@@ -171,6 +171,6 @@ psql: error: connection to server on socket "/tmp/.s.PGSQL.5432" failed: No such
         Is the server running locally and accepting connections on that socket?
 ```
 
-If the server is indeed running, check that the client's idea of the socket path (here `/tmp`) agrees with the server's [unix\_socket\_directories](runtime-config-connection.html#GUC-UNIX-SOCKET-DIRECTORIES) setting.
+If the server is indeed running, check that the client's idea of the socket path (here `/tmp`) agrees with the server's [unix\_socket\_directories](runtime-config-connection#GUC-UNIX-SOCKET-DIRECTORIES) setting.
 
-A connection failure message always shows the server address or socket path name, which is useful in verifying that the client is trying to connect to the right place. If there is in fact no server listening there, the kernel error message will typically be either `Connection refused` or `No such file or directory`, as illustrated. (It is important to realize that `Connection refused` in this context does *not* mean that the server got your connection request and rejected it. That case will produce a different message, as shown in [Section 21.15](client-authentication-problems.html "21.15. Authentication Problems").) Other error messages such as `Connection timed out` might indicate more fundamental problems, like lack of network connectivity, or a firewall blocking the connection.
+A connection failure message always shows the server address or socket path name, which is useful in verifying that the client is trying to connect to the right place. If there is in fact no server listening there, the kernel error message will typically be either `Connection refused` or `No such file or directory`, as illustrated. (It is important to realize that `Connection refused` in this context does *not* mean that the server got your connection request and rejected it. That case will produce a different message, as shown in [Section 21.15](client-authentication-problems "21.15. Authentication Problems").) Other error messages such as `Connection timed out` might indicate more fundamental problems, like lack of network connectivity, or a firewall blocking the connection.

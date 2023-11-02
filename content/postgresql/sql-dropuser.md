@@ -11,7 +11,7 @@ DROP USER [ IF EXISTS ] name [, ...]
 
 ## Description
 
-`DROP USER` is simply an alternate spelling of [`DROP ROLE`](sql-droprole.html "DROP ROLE").
+`DROP USER` is simply an alternate spelling of [`DROP ROLE`](sql-droprole "DROP ROLE").
 
 ## Compatibility
 
@@ -19,4 +19,4 @@ The `DROP USER` statement is a PostgreSQL extension. The SQL standard leaves the
 
 ## See Also
 
-[DROP ROLE](sql-droprole.html "DROP ROLE")
+[DROP ROLE](sql-droprole "DROP ROLE")

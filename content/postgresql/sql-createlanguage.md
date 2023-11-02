@@ -15,7 +15,7 @@ CREATE [ OR REPLACE ] [ TRUSTED ] [ PROCEDURAL ] LANGUAGE name
 
 `CREATE LANGUAGE` registers a new procedural language with a PostgreSQL database. Subsequently, functions and procedures can be defined in this new language.
 
-`CREATE LANGUAGE` effectively associates the language name with handler function(s) that are responsible for executing functions written in the language. Refer to [Chapter 58](plhandler.html "Chapter 58. Writing a Procedural Language Handler") for more information about language handlers.
+`CREATE LANGUAGE` effectively associates the language name with handler function(s) that are responsible for executing functions written in the language. Refer to [Chapter 58](plhandler "Chapter 58. Writing a Procedural Language Handler") for more information about language handlers.
 
 `CREATE OR REPLACE LANGUAGE` will either create a new language, or replace an existing definition. If the language already exists, its parameters are updated according to the command, but the language's ownership and permissions settings do not change, and any existing functions written in the language are assumed to still be valid.
 
@@ -43,7 +43,7 @@ The form of `CREATE LANGUAGE` that does not supply any handler function is obsol
 
 * `INLINE` *`inline_handler`*
 
-    *`inline_handler`* is the name of a previously registered function that will be called to execute an anonymous code block ([`DO`](sql-do.html "DO") command) in this language. If no *`inline_handler`* function is specified, the language does not support anonymous code blocks. The handler function must take one argument of type `internal`, which will be the `DO` command's internal representation, and it will typically return `void`. The return value of the handler is ignored.
+    *`inline_handler`* is the name of a previously registered function that will be called to execute an anonymous code block ([`DO`](sql-do "DO") command) in this language. If no *`inline_handler`* function is specified, the language does not support anonymous code blocks. The handler function must take one argument of type `internal`, which will be the `DO` command's internal representation, and it will typically return `void`. The return value of the handler is ignored.
 
 * `VALIDATOR` *`valfunction`*
 
@@ -53,9 +53,9 @@ The form of `CREATE LANGUAGE` that does not supply any handler function is obsol
 
 ## Notes
 
-Use [`DROP LANGUAGE`](sql-droplanguage.html "DROP LANGUAGE") to drop procedural languages.
+Use [`DROP LANGUAGE`](sql-droplanguage "DROP LANGUAGE") to drop procedural languages.
 
-The system catalog `pg_language` (see [Section 53.29](catalog-pg-language.html "53.29. pg_language")) records information about the currently installed languages. Also, the psql command `\dL` lists the installed languages.
+The system catalog `pg_language` (see [Section 53.29](catalog-pg-language "53.29. pg_language")) records information about the currently installed languages. Also, the psql command `\dL` lists the installed languages.
 
 To create functions in a procedural language, a user must have the `USAGE` privilege for the language. By default, `USAGE` is granted to `PUBLIC` (i.e., everyone) for trusted languages. This can be revoked if desired.
 
@@ -87,4 +87,4 @@ CREATE EXTENSION plsample;
 
 ## See Also
 
-[ALTER LANGUAGE](sql-alterlanguage.html "ALTER LANGUAGE"), [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [DROP LANGUAGE](sql-droplanguage.html "DROP LANGUAGE"), [GRANT](sql-grant.html "GRANT"), [REVOKE](sql-revoke.html "REVOKE")
+[ALTER LANGUAGE](sql-alterlanguage "ALTER LANGUAGE"), [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION"), [DROP LANGUAGE](sql-droplanguage "DROP LANGUAGE"), [GRANT](sql-grant "GRANT"), [REVOKE](sql-revoke "REVOKE")

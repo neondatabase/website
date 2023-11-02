@@ -87,4 +87,4 @@ Here the `ONLY` before `cities` indicates that the query should be run over only
 
 ### Note
 
-Although inheritance is frequently useful, it has not been integrated with unique constraints or foreign keys, which limits its usefulness. See [Section 5.10](ddl-inherit.html "5.10. Inheritance") for more detail.
+Although inheritance is frequently useful, it has not been integrated with unique constraints or foreign keys, which limits its usefulness. See [Section 5.10](ddl-inherit "5.10. Inheritance") for more detail.

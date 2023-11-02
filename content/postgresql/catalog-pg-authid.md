@@ -1,10 +1,10 @@
 ## 53.8. `pg_authid` [#](#CATALOG-PG-AUTHID)
 
-The catalog `pg_authid` contains information about database authorization identifiers (roles). A role subsumes the concepts of “users” and “groups”. A user is essentially just a role with the `rolcanlogin` flag set. Any role (with or without `rolcanlogin`) can have other roles as members; see [`pg_auth_members`](catalog-pg-auth-members.html "53.9. pg_auth_members").
+The catalog `pg_authid` contains information about database authorization identifiers (roles). A role subsumes the concepts of “users” and “groups”. A user is essentially just a role with the `rolcanlogin` flag set. Any role (with or without `rolcanlogin`) can have other roles as members; see [`pg_auth_members`](catalog-pg-auth-members "53.9. pg_auth_members").
 
-Since this catalog contains passwords, it must not be publicly readable. [`pg_roles`](view-pg-roles.html "54.20. pg_roles") is a publicly readable view on `pg_authid` that blanks out the password field.
+Since this catalog contains passwords, it must not be publicly readable. [`pg_roles`](view-pg-roles "54.20. pg_roles") is a publicly readable view on `pg_authid` that blanks out the password field.
 
-[Chapter 22](user-manag.html "Chapter 22. Database Roles") contains detailed information about user and privilege management.
+[Chapter 22](user-manag "Chapter 22. Database Roles") contains detailed information about user and privilege management.
 
 Because user identities are cluster-wide, `pg_authid` is shared across all databases of a cluster: there is only one copy of `pg_authid` per cluster, not one per database.
 
@@ -20,7 +20,7 @@ Because user identities are cluster-wide, `pg_authid` is shared across all datab
 | `rolcreatedb` `bool`Role can create databases                                                                                                                  |
 | `rolcanlogin` `bool`Role can log in. That is, this role can be given as the initial session authorization identifier.                                          |
 | `rolreplication` `bool`Role is a replication role. A replication role can initiate replication connections and create and drop replication slots.              |
-| `rolbypassrls` `bool`Role bypasses every row-level security policy, see [Section 5.8](ddl-rowsecurity.html "5.8. Row Security Policies") for more information. |
+| `rolbypassrls` `bool`Role bypasses every row-level security policy, see [Section 5.8](ddl-rowsecurity "5.8. Row Security Policies") for more information. |
 | `rolconnlimit` `int4`For roles that can log in, this sets maximum number of concurrent connections this role can make. -1 means no limit.                      |
 | `rolpassword` `text`Password (possibly encrypted); null if none. The format depends on the form of encryption used.                                            |
 | `rolvaliduntil` `timestamptz`Password expiry time (only used for password authentication); null if no expiration                                               |

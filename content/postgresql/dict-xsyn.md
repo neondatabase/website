@@ -1,7 +1,7 @@
 ## F.14. dict\_xsyn — example synonym full-text search dictionary [#](#DICT-XSYN)
 
-  * *   [F.14.1. Configuration](dict-xsyn.html#DICT-XSYN-CONFIG)
-  * [F.14.2. Usage](dict-xsyn.html#DICT-XSYN-USAGE)
+  * *   [F.14.1. Configuration](dict-xsyn#DICT-XSYN-CONFIG)
+  * [F.14.2. Usage](dict-xsyn#DICT-XSYN-USAGE)
 
 `dict_xsyn` (Extended Synonym Dictionary) is an example of an add-on dictionary template for full-text search. This dictionary type replaces words with groups of their synonyms, and so makes it possible to search for a word using any of its synonyms.
 
@@ -74,7 +74,7 @@ mydb=# SELECT ts_lexize('xsyn', 'syn1');
  {word}
 ```
 
-Real-world usage will involve including it in a text search configuration as described in [Chapter 12](textsearch.html "Chapter 12. Full Text Search"). That might look like this:
+Real-world usage will involve including it in a text search configuration as described in [Chapter 12](textsearch "Chapter 12. Full Text Search"). That might look like this:
 
 ```
 

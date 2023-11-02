@@ -25,7 +25,7 @@ An index field can be an expression computed from the values of one or more colu
 
 PostgreSQL provides the index methods B-tree, hash, GiST, SP-GiST, GIN, and BRIN. Users can also define their own index methods, but that is fairly complicated.
 
-When the `WHERE` clause is present, a *partial index* is created. A partial index is an index that contains entries for only a portion of a table, usually a portion that is more useful for indexing than the rest of the table. For example, if you have a table that contains both billed and unbilled orders where the unbilled orders take up a small fraction of the total table and yet that is an often used section, you can improve performance by creating an index on just that portion. Another possible application is to use `WHERE` with `UNIQUE` to enforce uniqueness over a subset of a table. See [Section 11.8](indexes-partial.html "11.8. Partial Indexes") for more discussion.
+When the `WHERE` clause is present, a *partial index* is created. A partial index is an index that contains entries for only a portion of a table, usually a portion that is more useful for indexing than the rest of the table. For example, if you have a table that contains both billed and unbilled orders where the unbilled orders take up a small fraction of the total table and yet that is an often used section, you can improve performance by creating an index on just that portion. Another possible application is to use `WHERE` with `UNIQUE` to enforce uniqueness over a subset of a table. See [Section 11.8](indexes-partial "11.8. Partial Indexes") for more discussion.
 
 The expression used in the `WHERE` clause can refer only to columns of the underlying table, but it can use all columns, not just the ones being indexed. Presently, subqueries and aggregate expressions are also forbidden in `WHERE`. The same restrictions apply to index fields that are expressions.
 
@@ -37,11 +37,11 @@ All functions and operators used in an index definition must be “immutable”,
 
     Causes the system to check for duplicate values in the table when the index is created (if data already exist) and each time data is added. Attempts to insert or update data which would result in duplicate entries will generate an error.
 
-    Additional restrictions apply when unique indexes are applied to partitioned tables; see [CREATE TABLE](sql-createtable.html "CREATE TABLE").
+    Additional restrictions apply when unique indexes are applied to partitioned tables; see [CREATE TABLE](sql-createtable "CREATE TABLE").
 
 * `CONCURRENTLY`
 
-    When this option is used, PostgreSQL will build the index without taking any locks that prevent concurrent inserts, updates, or deletes on the table; whereas a standard index build locks out writes (but not reads) on the table until it's done. There are several caveats to be aware of when using this option — see [Building Indexes Concurrently](sql-createindex.html#SQL-CREATEINDEX-CONCURRENTLY "Building Indexes Concurrently") below.
+    When this option is used, PostgreSQL will build the index without taking any locks that prevent concurrent inserts, updates, or deletes on the table; whereas a standard index build locks out writes (but not reads) on the table until it's done. There are several caveats to be aware of when using this option — see [Building Indexes Concurrently](sql-createindex#SQL-CREATEINDEX-CONCURRENTLY "Building Indexes Concurrently") below.
 
     For temporary tables, `CREATE INDEX` is always non-concurrent, as no other session can access them, and non-concurrent index creation is cheaper.
 
@@ -75,7 +75,7 @@ All functions and operators used in an index definition must be “immutable”,
 
 * *`method`*
 
-    The name of the index method to be used. Choices are `btree`, `hash`, `gist`, `spgist`, `gin`, `brin`, or user-installed access methods like [bloom](bloom.html "F.7. bloom — bloom filter index access method"). The default method is `btree`.
+    The name of the index method to be used. Choices are `btree`, `hash`, `gist`, `spgist`, `gin`, `brin`, or user-installed access methods like [bloom](bloom "F.7. bloom — bloom filter index access method"). The default method is `btree`.
 
 * *`column_name`*
 
@@ -119,11 +119,11 @@ All functions and operators used in an index definition must be “immutable”,
 
 * *`storage_parameter`*
 
-    The name of an index-method-specific storage parameter. See [Index Storage Parameters](sql-createindex.html#SQL-CREATEINDEX-STORAGE-PARAMETERS "Index Storage Parameters") below for details.
+    The name of an index-method-specific storage parameter. See [Index Storage Parameters](sql-createindex#SQL-CREATEINDEX-STORAGE-PARAMETERS "Index Storage Parameters") below for details.
 
 * *`tablespace_name`*
 
-    The tablespace in which to create the index. If not specified, [default\_tablespace](runtime-config-client.html#GUC-DEFAULT-TABLESPACE) is consulted, or [temp\_tablespaces](runtime-config-client.html#GUC-TEMP-TABLESPACES) for indexes on temporary tables.
+    The tablespace in which to create the index. If not specified, [default\_tablespace](runtime-config-client#GUC-DEFAULT-TABLESPACE) is consulted, or [temp\_tablespaces](runtime-config-client#GUC-TEMP-TABLESPACES) for indexes on temporary tables.
 
 * *`predicate`*
 
@@ -137,7 +137,7 @@ The optional `WITH` clause specifies *storage parameters* for the index. Each in
 
     The fillfactor for an index is a percentage that determines how full the index method will try to pack index pages. For B-trees, leaf pages are filled to this percentage during initial index builds, and also when extending the index at the right (adding new largest key values). If pages subsequently become completely full, they will be split, leading to fragmentation of the on-disk index structure. B-trees use a default fillfactor of 90, but any integer value from 10 to 100 can be selected.
 
-    B-tree indexes on tables where many inserts and/or updates are anticipated can benefit from lower fillfactor settings at `CREATE INDEX` time (following bulk loading into the table). Values in the range of 50 - 90 can usefully “smooth out” the *rate* of page splits during the early life of the B-tree index (lowering fillfactor like this may even lower the absolute number of page splits, though this effect is highly workload dependent). The B-tree bottom-up index deletion technique described in [Section 67.4.2](btree-implementation.html#BTREE-DELETION "67.4.2. Bottom-up Index Deletion") is dependent on having some “extra” space on pages to store “extra” tuple versions, and so can be affected by fillfactor (though the effect is usually not significant).
+    B-tree indexes on tables where many inserts and/or updates are anticipated can benefit from lower fillfactor settings at `CREATE INDEX` time (following bulk loading into the table). Values in the range of 50 - 90 can usefully “smooth out” the *rate* of page splits during the early life of the B-tree index (lowering fillfactor like this may even lower the absolute number of page splits, though this effect is highly workload dependent). The B-tree bottom-up index deletion technique described in [Section 67.4.2](btree-implementation#BTREE-DELETION "67.4.2. Bottom-up Index Deletion") is dependent on having some “extra” space on pages to store “extra” tuple versions, and so can be affected by fillfactor (though the effect is usually not significant).
 
     In other specific cases it might be useful to increase fillfactor to 100 at `CREATE INDEX` time as a way of maximizing space utilization. You should only consider this when you are completely sure that the table is static (i.e. that it will never be affected by either inserts or updates). A fillfactor setting of 100 otherwise risks *harming* performance: even a few updates or inserts will cause a sudden flood of page splits.
 
@@ -147,7 +147,7 @@ B-tree indexes additionally accept this parameter:
 
 * `deduplicate_items` (`boolean`) [#](#INDEX-RELOPTION-DEDUPLICATE-ITEMS)
 
-    Controls usage of the B-tree deduplication technique described in [Section 67.4.3](btree-implementation.html#BTREE-DEDUPLICATION "67.4.3. Deduplication"). Set to `ON` or `OFF` to enable or disable the optimization. (Alternative spellings of `ON` and `OFF` are allowed as described in [Section 20.1](config-setting.html "20.1. Setting Parameters").) The default is `ON`.
+    Controls usage of the B-tree deduplication technique described in [Section 67.4.3](btree-implementation#BTREE-DEDUPLICATION "67.4.3. Deduplication"). Set to `ON` or `OFF` to enable or disable the optimization. (Alternative spellings of `ON` and `OFF` are allowed as described in [Section 20.1](config-setting "20.1. Setting Parameters").) The default is `ON`.
 
 ### Note
 
@@ -157,13 +157,13 @@ GiST indexes additionally accept this parameter:
 
 * `buffering` (`enum`) [#](#INDEX-RELOPTION-BUFFERING)
 
-    Determines whether the buffered build technique described in [Section 68.4.1](gist-implementation.html#GIST-BUFFERING-BUILD "68.4.1. GiST Index Build Methods") is used to build the index. With `OFF` buffering is disabled, with `ON` it is enabled, and with `AUTO` it is initially disabled, but is turned on on-the-fly once the index size reaches [effective\_cache\_size](runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE). The default is `AUTO`. Note that if sorted build is possible, it will be used instead of buffered build unless `buffering=ON` is specified.
+    Determines whether the buffered build technique described in [Section 68.4.1](gist-implementation#GIST-BUFFERING-BUILD "68.4.1. GiST Index Build Methods") is used to build the index. With `OFF` buffering is disabled, with `ON` it is enabled, and with `AUTO` it is initially disabled, but is turned on on-the-fly once the index size reaches [effective\_cache\_size](runtime-config-query#GUC-EFFECTIVE-CACHE-SIZE). The default is `AUTO`. Note that if sorted build is possible, it will be used instead of buffered build unless `buffering=ON` is specified.
 
 GIN indexes accept different parameters:
 
 * `fastupdate` (`boolean`) [#](#INDEX-RELOPTION-FASTUPDATE)
 
-    This setting controls usage of the fast update technique described in [Section 70.4.1](gin-implementation.html#GIN-FAST-UPDATE "70.4.1. GIN Fast Update Technique"). It is a Boolean parameter: `ON` enables fast update, `OFF` disables it. The default is `ON`.
+    This setting controls usage of the fast update technique described in [Section 70.4.1](gin-implementation#GIN-FAST-UPDATE "70.4.1. GIN Fast Update Technique"). It is a Boolean parameter: `ON` enables fast update, `OFF` disables it. The default is `ON`.
 
 ### Note
 
@@ -173,17 +173,17 @@ GIN indexes accept different parameters:
 
 * `gin_pending_list_limit` (`integer`) [#](#INDEX-RELOPTION-GIN-PENDING-LIST-LIMIT)
 
-    Custom [gin\_pending\_list\_limit](runtime-config-client.html#GUC-GIN-PENDING-LIST-LIMIT) parameter. This value is specified in kilobytes.
+    Custom [gin\_pending\_list\_limit](runtime-config-client#GUC-GIN-PENDING-LIST-LIMIT) parameter. This value is specified in kilobytes.
 
 BRIN indexes accept different parameters:
 
 * `pages_per_range` (`integer`) [#](#INDEX-RELOPTION-PAGES-PER-RANGE)
 
-    Defines the number of table blocks that make up one block range for each entry of a BRIN index (see [Section 71.1](brin-intro.html "71.1. Introduction") for more details). The default is `128`.
+    Defines the number of table blocks that make up one block range for each entry of a BRIN index (see [Section 71.1](brin-intro "71.1. Introduction") for more details). The default is `128`.
 
 * `autosummarize` (`boolean`) [#](#INDEX-RELOPTION-AUTOSUMMARIZE)
 
-    Defines whether a summarization run is queued for the previous page range whenever an insertion is detected on the next one. See [Section 71.1.1](brin-intro.html#BRIN-OPERATION "71.1.1. Index Maintenance") for more details. The default is `off`.
+    Defines whether a summarization run is queued for the previous page range whenever an insertion is detected on the next one. See [Section 71.1.1](brin-intro#BRIN-OPERATION "71.1.1. Index Maintenance") for more details. The default is `off`.
 
 ### Building Indexes Concurrently
 
@@ -191,7 +191,7 @@ Creating an index can interfere with regular operation of a database. Normally P
 
 PostgreSQL supports building indexes without locking out writes. This method is invoked by specifying the `CONCURRENTLY` option of `CREATE INDEX`. When this option is used, PostgreSQL must perform two scans of the table, and in addition it must wait for all existing transactions that could potentially modify or use the index to terminate. Thus this method requires more total work than a standard index build and takes significantly longer to complete. However, since it allows normal operations to continue while the index is built, this method is useful for adding new indexes in a production environment. Of course, the extra CPU and I/O load imposed by the index creation might slow other operations.
 
-In a concurrent index build, the index is actually entered as an “invalid” index into the system catalogs in one transaction, then two table scans occur in two more transactions. Before each table scan, the index build must wait for existing transactions that have modified the table to terminate. After the second scan, the index build must wait for any transactions that have a snapshot (see [Chapter 13](mvcc.html "Chapter 13. Concurrency Control")) predating the second scan to terminate, including transactions used by any phase of concurrent index builds on other tables, if the indexes involved are partial or have columns that are not simple column references. Then finally the index can be marked “valid” and ready for use, and the `CREATE INDEX` command terminates. Even then, however, the index may not be immediately usable for queries: in the worst case, it cannot be used as long as transactions exist that predate the start of the index build.
+In a concurrent index build, the index is actually entered as an “invalid” index into the system catalogs in one transaction, then two table scans occur in two more transactions. Before each table scan, the index build must wait for existing transactions that have modified the table to terminate. After the second scan, the index build must wait for any transactions that have a snapshot (see [Chapter 13](mvcc "Chapter 13. Concurrency Control")) predating the second scan to terminate, including transactions used by any phase of concurrent index builds on other tables, if the indexes involved are partial or have columns that are not simple column references. Then finally the index can be marked “valid” and ready for use, and the `CREATE INDEX` command terminates. Even then, however, the index may not be immediately usable for queries: in the worst case, it cannot be used as long as transactions exist that predate the start of the index build.
 
 If a problem arises while scanning the table, such as a deadlock or a uniqueness violation in a unique index, the `CREATE INDEX` command will fail but leave behind an “invalid” index. This index will be ignored for querying purposes because it might be incomplete; however it will still consume update overhead. The psql `\d` command will report such an index as `INVALID`:
 
@@ -218,25 +218,25 @@ Concurrent builds for indexes on partitioned tables are currently not supported.
 
 ## Notes
 
-See [Chapter 11](indexes.html "Chapter 11. Indexes") for information about when indexes can be used, when they are not used, and in which particular situations they can be useful.
+See [Chapter 11](indexes "Chapter 11. Indexes") for information about when indexes can be used, when they are not used, and in which particular situations they can be useful.
 
 Currently, only the B-tree, GiST, GIN, and BRIN index methods support multiple-key-column indexes. Whether there can be multiple key columns is independent of whether `INCLUDE` columns can be added to the index. Indexes can have up to 32 columns, including `INCLUDE` columns. (This limit can be altered when building PostgreSQL.) Only B-tree currently supports unique indexes.
 
-An *operator class* with optional parameters can be specified for each column of an index. The operator class identifies the operators to be used by the index for that column. For example, a B-tree index on four-byte integers would use the `int4_ops` class; this operator class includes comparison functions for four-byte integers. In practice the default operator class for the column's data type is usually sufficient. The main point of having operator classes is that for some data types, there could be more than one meaningful ordering. For example, we might want to sort a complex-number data type either by absolute value or by real part. We could do this by defining two operator classes for the data type and then selecting the proper class when creating an index. More information about operator classes is in [Section 11.10](indexes-opclass.html "11.10. Operator Classes and Operator Families") and in [Section 38.16](xindex.html "38.16. Interfacing Extensions to Indexes").
+An *operator class* with optional parameters can be specified for each column of an index. The operator class identifies the operators to be used by the index for that column. For example, a B-tree index on four-byte integers would use the `int4_ops` class; this operator class includes comparison functions for four-byte integers. In practice the default operator class for the column's data type is usually sufficient. The main point of having operator classes is that for some data types, there could be more than one meaningful ordering. For example, we might want to sort a complex-number data type either by absolute value or by real part. We could do this by defining two operator classes for the data type and then selecting the proper class when creating an index. More information about operator classes is in [Section 11.10](indexes-opclass "11.10. Operator Classes and Operator Families") and in [Section 38.16](xindex "38.16. Interfacing Extensions to Indexes").
 
 When `CREATE INDEX` is invoked on a partitioned table, the default behavior is to recurse to all partitions to ensure they all have matching indexes. Each partition is first checked to determine whether an equivalent index already exists, and if so, that index will become attached as a partition index to the index being created, which will become its parent index. If no matching index exists, a new index will be created and automatically attached; the name of the new index in each partition will be determined as if no index name had been specified in the command. If the `ONLY` option is specified, no recursion is done, and the index is marked invalid. (`ALTER INDEX ... ATTACH PARTITION` marks the index valid, once all partitions acquire matching indexes.) Note, however, that any partition that is created in the future using `CREATE TABLE ... PARTITION OF` will automatically have a matching index, regardless of whether `ONLY` is specified.
 
 For index methods that support ordered scans (currently, only B-tree), the optional clauses `ASC`, `DESC`, `NULLS FIRST`, and/or `NULLS LAST` can be specified to modify the sort ordering of the index. Since an ordered index can be scanned either forward or backward, it is not normally useful to create a single-column `DESC` index — that sort ordering is already available with a regular index. The value of these options is that multicolumn indexes can be created that match the sort ordering requested by a mixed-ordering query, such as `SELECT ... ORDER BY x ASC, y DESC`. The `NULLS` options are useful if you need to support “nulls sort low” behavior, rather than the default “nulls sort high”, in queries that depend on indexes to avoid sorting steps.
 
-The system regularly collects statistics on all of a table's columns. Newly-created non-expression indexes can immediately use these statistics to determine an index's usefulness. For new expression indexes, it is necessary to run [`ANALYZE`](sql-analyze.html "ANALYZE") or wait for the [autovacuum daemon](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon") to analyze the table to generate statistics for these indexes.
+The system regularly collects statistics on all of a table's columns. Newly-created non-expression indexes can immediately use these statistics to determine an index's usefulness. For new expression indexes, it is necessary to run [`ANALYZE`](sql-analyze "ANALYZE") or wait for the [autovacuum daemon](routine-vacuuming#AUTOVACUUM "25.1.6. The Autovacuum Daemon") to analyze the table to generate statistics for these indexes.
 
-For most index methods, the speed of creating an index is dependent on the setting of [maintenance\_work\_mem](runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM). Larger values will reduce the time needed for index creation, so long as you don't make it larger than the amount of memory really available, which would drive the machine into swapping.
+For most index methods, the speed of creating an index is dependent on the setting of [maintenance\_work\_mem](runtime-config-resource#GUC-MAINTENANCE-WORK-MEM). Larger values will reduce the time needed for index creation, so long as you don't make it larger than the amount of memory really available, which would drive the machine into swapping.
 
 PostgreSQL can build indexes while leveraging multiple CPUs in order to process the table rows faster. This feature is known as *parallel index build*. For index methods that support building indexes in parallel (currently, only B-tree), `maintenance_work_mem` specifies the maximum amount of memory that can be used by each index build operation as a whole, regardless of how many worker processes were started. Generally, a cost model automatically determines how many worker processes should be requested, if any.
 
-Parallel index builds may benefit from increasing `maintenance_work_mem` where an equivalent serial index build will see little or no benefit. Note that `maintenance_work_mem` may influence the number of worker processes requested, since parallel workers must have at least a `32MB` share of the total `maintenance_work_mem` budget. There must also be a remaining `32MB` share for the leader process. Increasing [max\_parallel\_maintenance\_workers](runtime-config-resource.html#GUC-MAX-PARALLEL-MAINTENANCE-WORKERS) may allow more workers to be used, which will reduce the time needed for index creation, so long as the index build is not already I/O bound. Of course, there should also be sufficient CPU capacity that would otherwise lie idle.
+Parallel index builds may benefit from increasing `maintenance_work_mem` where an equivalent serial index build will see little or no benefit. Note that `maintenance_work_mem` may influence the number of worker processes requested, since parallel workers must have at least a `32MB` share of the total `maintenance_work_mem` budget. There must also be a remaining `32MB` share for the leader process. Increasing [max\_parallel\_maintenance\_workers](runtime-config-resource#GUC-MAX-PARALLEL-MAINTENANCE-WORKERS) may allow more workers to be used, which will reduce the time needed for index creation, so long as the index build is not already I/O bound. Of course, there should also be sufficient CPU capacity that would otherwise lie idle.
 
-Setting a value for `parallel_workers` via [`ALTER TABLE`](sql-altertable.html "ALTER TABLE") directly controls how many parallel worker processes will be requested by a `CREATE INDEX` against the table. This bypasses the cost model completely, and prevents `maintenance_work_mem` from affecting how many parallel workers are requested. Setting `parallel_workers` to 0 via `ALTER TABLE` will disable parallel index builds on the table in all cases.
+Setting a value for `parallel_workers` via [`ALTER TABLE`](sql-altertable "ALTER TABLE") directly controls how many parallel worker processes will be requested by a `CREATE INDEX` against the table. This bypasses the cost model completely, and prevents `maintenance_work_mem` from affecting how many parallel workers are requested. Setting `parallel_workers` to 0 via `ALTER TABLE` will disable parallel index builds on the table in all cases.
 
 ### Tip
 
@@ -244,13 +244,13 @@ You might want to reset `parallel_workers` after setting it as part of tuning an
 
 While `CREATE INDEX` with the `CONCURRENTLY` option supports parallel builds without special restrictions, only the first table scan is actually performed in parallel.
 
-Use [`DROP INDEX`](sql-dropindex.html "DROP INDEX") to remove an index.
+Use [`DROP INDEX`](sql-dropindex "DROP INDEX") to remove an index.
 
 Like any long-running transaction, `CREATE INDEX` on a table can affect which tuples can be removed by concurrent `VACUUM` on any other table.
 
 Prior releases of PostgreSQL also had an R-tree index method. This method has been removed because it had no significant advantages over the GiST method. If `USING rtree` is specified, `CREATE INDEX` will interpret it as `USING gist`, to simplify conversion of old databases to GiST.
 
-Each backend running `CREATE INDEX` will report its progress in the `pg_stat_progress_create_index` view. See [Section 28.4.4](progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting") for details.
+Each backend running `CREATE INDEX` will report its progress in the `pg_stat_progress_create_index` view. See [Section 28.4.4](progress-reporting#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting") for details.
 
 ## Examples
 
@@ -342,4 +342,4 @@ CREATE INDEX CONCURRENTLY sales_quantity_index ON sales_table (quantity);
 
 ## See Also
 
-[ALTER INDEX](sql-alterindex.html "ALTER INDEX"), [DROP INDEX](sql-dropindex.html "DROP INDEX"), [REINDEX](sql-reindex.html "REINDEX"), [Section 28.4.4](progress-reporting.html#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting")
+[ALTER INDEX](sql-alterindex "ALTER INDEX"), [DROP INDEX](sql-dropindex "DROP INDEX"), [REINDEX](sql-reindex "REINDEX"), [Section 28.4.4](progress-reporting#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting")

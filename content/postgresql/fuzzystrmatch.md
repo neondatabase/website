@@ -1,10 +1,10 @@
 ## F.17. fuzzystrmatch — determine string similarities and distance [#](#FUZZYSTRMATCH)
 
-  * *   [F.17.1. Soundex](fuzzystrmatch.html#FUZZYSTRMATCH-SOUNDEX)
-  * [F.17.2. Daitch-Mokotoff Soundex](fuzzystrmatch.html#FUZZYSTRMATCH-DAITCH-MOKOTOFF)
-  * [F.17.3. Levenshtein](fuzzystrmatch.html#FUZZYSTRMATCH-LEVENSHTEIN)
-  * [F.17.4. Metaphone](fuzzystrmatch.html#FUZZYSTRMATCH-METAPHONE)
-  * [F.17.5. Double Metaphone](fuzzystrmatch.html#FUZZYSTRMATCH-DOUBLE-METAPHONE)
+  * *   [F.17.1. Soundex](fuzzystrmatch#FUZZYSTRMATCH-SOUNDEX)
+  * [F.17.2. Daitch-Mokotoff Soundex](fuzzystrmatch#FUZZYSTRMATCH-DAITCH-MOKOTOFF)
+  * [F.17.3. Levenshtein](fuzzystrmatch#FUZZYSTRMATCH-LEVENSHTEIN)
+  * [F.17.4. Metaphone](fuzzystrmatch#FUZZYSTRMATCH-METAPHONE)
+  * [F.17.5. Double Metaphone](fuzzystrmatch#FUZZYSTRMATCH-DOUBLE-METAPHONE)
 
 The `fuzzystrmatch` module provides several functions to determine similarities and distance between strings.
 
@@ -95,7 +95,7 @@ SELECT daitch_mokotoff('Schwartzenegger');
  {479465}
 ```
 
-For matching of single names, returned text arrays can be matched directly using the `&&` operator: any overlap can be considered a match. A GIN index may be used for efficiency, see [Chapter 70](gin.html "Chapter 70. GIN Indexes") and this example:
+For matching of single names, returned text arrays can be matched directly using the `&&` operator: any overlap can be considered a match. A GIN index may be used for efficiency, see [Chapter 70](gin "Chapter 70. GIN Indexes") and this example:
 
 ```
 
@@ -114,7 +114,7 @@ SELECT * FROM s WHERE daitch_mokotoff(nm) && daitch_mokotoff('Jane');
 SELECT * FROM s WHERE daitch_mokotoff(nm) && daitch_mokotoff('Jens');
 ```
 
-For indexing and matching of any number of names in any order, Full Text Search features can be used. See [Chapter 12](textsearch.html "Chapter 12. Full Text Search") and this example:
+For indexing and matching of any number of names in any order, Full Text Search features can be used. See [Chapter 12](textsearch "Chapter 12. Full Text Search") and this example:
 
 ```
 
@@ -148,7 +148,7 @@ SELECT * FROM s WHERE soundex_tsvector(nm) @@ soundex_tsquery('besst, giorgio');
 SELECT * FROM s WHERE soundex_tsvector(nm) @@ soundex_tsquery('Jameson John');
 ```
 
-If it is desired to avoid recalculation of soundex codes during index rechecks, an index on a separate column can be used instead of an index on an expression. A stored generated column can be used for this; see [Section 5.3](ddl-generated-columns.html "5.3. Generated Columns").
+If it is desired to avoid recalculation of soundex codes during index rechecks, an index on a separate column can be used instead of an index on an expression. A stored generated column can be used for this; see [Section 5.3](ddl-generated-columns "5.3. Generated Columns").
 
 ### F.17.3. Levenshtein [#](#FUZZYSTRMATCH-LEVENSHTEIN)
 

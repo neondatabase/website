@@ -38,7 +38,7 @@ Each column not present in the explicit or implicit column list will be filled w
 
 If the expression for any column is not of the correct data type, automatic type conversion will be attempted.
 
-`INSERT` into tables that lack unique indexes will not be blocked by concurrent activity. Tables with unique indexes might block if concurrent sessions perform actions that lock or modify rows matching the unique index values being inserted; the details are covered in [Section 64.5](index-unique-checks.html "64.5. Index Uniqueness Checks"). `ON CONFLICT` can be used to specify an alternative action to raising a unique constraint or exclusion constraint violation error. (See [ON CONFLICT Clause](sql-insert.html#SQL-ON-CONFLICT "ON CONFLICT Clause") below.)
+`INSERT` into tables that lack unique indexes will not be blocked by concurrent activity. Tables with unique indexes might block if concurrent sessions perform actions that lock or modify rows matching the unique index values being inserted; the details are covered in [Section 64.5](index-unique-checks "64.5. Index Uniqueness Checks"). `ON CONFLICT` can be used to specify an alternative action to raising a unique constraint or exclusion constraint violation error. (See [ON CONFLICT Clause](sql-insert#SQL-ON-CONFLICT "ON CONFLICT Clause") below.)
 
 The optional `RETURNING` clause causes `INSERT` to compute and return value(s) based on each row actually inserted (or updated, if an `ON CONFLICT DO UPDATE` clause was used). This is primarily useful for obtaining values that were supplied by defaults, such as a serial sequence number. However, any expression using the table's columns is allowed. The syntax of the `RETURNING` list is identical to that of the output list of `SELECT`. Only rows that were successfully inserted or updated will be returned. For example, if a row was locked but not updated because an `ON CONFLICT DO UPDATE ... WHERE` clause *`condition`* was not satisfied, the row will not be returned.
 
@@ -56,7 +56,7 @@ This section covers parameters that may be used when only inserting new rows. Pa
 
 * *`with_query`*
 
-    The `WITH` clause allows you to specify one or more subqueries that can be referenced by name in the `INSERT` query. See [Section 7.8](queries-with.html "7.8. WITH Queries (Common Table Expressions)") and [SELECT](sql-select.html "SELECT") for details.
+    The `WITH` clause allows you to specify one or more subqueries that can be referenced by name in the `INSERT` query. See [Section 7.8](queries-with "7.8. WITH Queries (Common Table Expressions)") and [SELECT](sql-select "SELECT") for details.
 
     It is possible for the *`query`* (`SELECT` statement) to also contain a `WITH` clause. In such a case both sets of *`with_query`* can be referenced within the *`query`*, but the second one takes precedence since it is more closely nested.
 
@@ -98,7 +98,7 @@ This section covers parameters that may be used when only inserting new rows. Pa
 
 * *`query`*
 
-    A query (`SELECT` statement) that supplies the rows to be inserted. Refer to the [SELECT](sql-select.html "SELECT") statement for a description of the syntax.
+    A query (`SELECT` statement) that supplies the rows to be inserted. Refer to the [SELECT](sql-select "SELECT") statement for a description of the syntax.
 
 * *`output_expression`*
 
@@ -181,7 +181,7 @@ If the `INSERT` command contains a `RETURNING` clause, the result will be simila
 
 If the specified table is a partitioned table, each row is routed to the appropriate partition and inserted into it. If the specified table is a partition, an error will occur if one of the input rows violates the partition constraint.
 
-You may also wish to consider using `MERGE`, since that allows mixing `INSERT`, `UPDATE`, and `DELETE` within a single statement. See [MERGE](sql-merge.html "MERGE").
+You may also wish to consider using `MERGE`, since that allows mixing `INSERT`, `UPDATE`, and `DELETE` within a single statement. See [MERGE](sql-merge "MERGE").
 
 ## Examples
 
@@ -312,8 +312,8 @@ INSERT INTO distributors (did, dname) VALUES (10, 'Conrad International')
 
 ## Compatibility
 
-`INSERT` conforms to the SQL standard, except that the `RETURNING` clause is a PostgreSQL extension, as is the ability to use `WITH` with `INSERT`, and the ability to specify an alternative action with `ON CONFLICT`. Also, the case in which a column name list is omitted, but not all the columns are filled from the `VALUES` clause or *`query`*, is disallowed by the standard. If you prefer a more SQL standard conforming statement than `ON CONFLICT`, see [MERGE](sql-merge.html "MERGE").
+`INSERT` conforms to the SQL standard, except that the `RETURNING` clause is a PostgreSQL extension, as is the ability to use `WITH` with `INSERT`, and the ability to specify an alternative action with `ON CONFLICT`. Also, the case in which a column name list is omitted, but not all the columns are filled from the `VALUES` clause or *`query`*, is disallowed by the standard. If you prefer a more SQL standard conforming statement than `ON CONFLICT`, see [MERGE](sql-merge "MERGE").
 
 The SQL standard specifies that `OVERRIDING SYSTEM VALUE` can only be specified if an identity column that is generated always exists. PostgreSQL allows the clause in any case and ignores it if it is not applicable.
 
-Possible limitations of the *`query`* clause are documented under [SELECT](sql-select.html "SELECT").
+Possible limitations of the *`query`* clause are documented under [SELECT](sql-select "SELECT").

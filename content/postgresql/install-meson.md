@@ -1,8 +1,8 @@
 ## 17.4. Building and Installation with Meson [#](#INSTALL-MESON)
 
-  * *   [17.4.1. Short Version](install-meson.html#INSTALL-SHORT-MESON)
-  * [17.4.2. Installation Procedure](install-meson.html#INSTALL-PROCEDURE-MESON)
-  * [17.4.3. `meson setup` Options](install-meson.html#MESON-OPTIONS)
+  * *   [17.4.1. Short Version](install-meson#INSTALL-SHORT-MESON)
+  * [17.4.2. Installation Procedure](install-meson#INSTALL-PROCEDURE-MESON)
+  * [17.4.3. `meson setup` Options](install-meson#MESON-OPTIONS)
 
 ### 17.4.1. Short Version [#](#INSTALL-SHORT-MESON)
 
@@ -59,7 +59,7 @@ The long version is the rest of this section.
     meson configure -Dcassert=true
     ```
 
-    `meson configure`'s commonly used command-line options are explained in [Section 17.4.3](install-meson.html#MESON-OPTIONS "17.4.3. meson setup Options").
+    `meson configure`'s commonly used command-line options are explained in [Section 17.4.3](install-meson#MESON-OPTIONS "17.4.3. meson setup Options").
 
 2. **Build**
 
@@ -85,7 +85,7 @@ The long version is the rest of this section.
     meson test
     ```
 
-    (This won't work as root; do it as an unprivileged user.) See [Chapter 33](regress.html "Chapter 33. Regression Tests") for detailed information about interpreting the test results. You can repeat this test at any later time by issuing the same command.
+    (This won't work as root; do it as an unprivileged user.) See [Chapter 33](regress "Chapter 33. Regression Tests") for detailed information about interpreting the test results. You can repeat this test at any later time by issuing the same command.
 
     To run pg\_regress and pg\_isolation\_regress tests against a running postgres instance, specify **`--setup running`** as an argument to **`meson test`**.
 
@@ -93,7 +93,7 @@ The long version is the rest of this section.
 
 ### Note
 
-    If you are upgrading an existing system be sure to read [Section 19.6](upgrading.html "19.6. Upgrading a PostgreSQL Cluster"), which has instructions about upgrading a cluster.
+    If you are upgrading an existing system be sure to read [Section 19.6](upgrading "19.6. Upgrading a PostgreSQL Cluster"), which has instructions about upgrading a cluster.
 
     Once PostgreSQL is built, you can install it by simply running the `ninja install` command.
 
@@ -102,7 +102,7 @@ The long version is the rest of this section.
     ninja install
     ```
 
-    This will install files into the directories that were specified in [Step 1](install-meson.html#MESON-CONFIGURE "Configuration"). Make sure that you have appropriate permissions to write into that area. You might need to do this step as root. Alternatively, you can create the target directories in advance and arrange for appropriate permissions to be granted. The standard installation provides all the header files needed for client application development as well as for server-side program development, such as custom functions or data types written in C.
+    This will install files into the directories that were specified in [Step 1](install-meson#MESON-CONFIGURE "Configuration"). Make sure that you have appropriate permissions to write into that area. You might need to do this step as root. Alternatively, you can create the target directories in advance and arrange for appropriate permissions to be granted. The standard installation provides all the header files needed for client application development as well as for server-side program development, such as custom functions or data types written in C.
 
     `ninja install` should work for most cases, but if you'd like to use more options (such as `--quiet` to suppress extra output), you could also use `meson install` instead. You can learn more about [meson install](https://mesonbuild.com/Commands.html#install) and its options in the Meson documentation.
 
@@ -116,7 +116,7 @@ The long version is the rest of this section.
 
 #### 17.4.3.1. Installation Locations [#](#MESON-OPTIONS-LOCATIONS)
 
-These options control where `ninja install` (or `meson install`) will put the files. The `--prefix` option (example [Section 17.4.1](install-meson.html#INSTALL-SHORT-MESON "17.4.1. Short Version")) is sufficient for most cases. If you have special needs, you can customize the installation subdirectories with the other options described in this section. Beware however that changing the relative locations of the different subdirectories may render the installation non-relocatable, meaning you won't be able to move it after installation. (The `man` and `doc` locations are not affected by this restriction.) For relocatable installs, you might want to use the `-Drpath=false` option described later.
+These options control where `ninja install` (or `meson install`) will put the files. The `--prefix` option (example [Section 17.4.1](install-meson#INSTALL-SHORT-MESON "17.4.1. Short Version")) is sufficient for most cases. If you have special needs, you can customize the installation subdirectories with the other options described in this section. Beware however that changing the relative locations of the different subdirectories may render the installation non-relocatable, meaning you won't be able to move it after installation. (The `man` and `doc` locations are not affected by this restriction.) For relocatable installs, you might want to use the `-Drpath=false` option described later.
 
 * `--prefix=PREFIX` [#](#CONFIGURE-PREFIX-MESON)
 
@@ -156,7 +156,7 @@ Care has been taken to make it possible to install PostgreSQL into shared instal
 
 #### 17.4.3.2. PostgreSQL Features [#](#MESON-OPTIONS-FEATURES)
 
-The options described in this section enable building of various optional PostgreSQL features. Most of these require additional software, as described in [Section 17.1](install-requirements.html "17.1. Requirements"), and will be automatically enabled if the required software is found. You can change this behavior by manually setting these features to `enabled` to require them or `disabled` to not build with them.
+The options described in this section enable building of various optional PostgreSQL features. Most of these require additional software, as described in [Section 17.1](install-requirements "17.1. Requirements"), and will be automatically enabled if the required software is found. You can change this behavior by manually setting these features to `enabled` to require them or `disabled` to not build with them.
 
 To specify PostgreSQL-specific options, the name of the option must be prefixed by `-D`.
 
@@ -182,11 +182,11 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
 * `-Dicu={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-ICU-MESON)
 
-    Build with support for the ICU library, enabling use of ICU collation features (see [Section 24.2](collation.html "24.2. Collation Support")). Defaults to auto and requires the ICU4C package to be installed. The minimum required version of ICU4C is currently 4.2.
+    Build with support for the ICU library, enabling use of ICU collation features (see [Section 24.2](collation "24.2. Collation Support")). Defaults to auto and requires the ICU4C package to be installed. The minimum required version of ICU4C is currently 4.2.
 
 * `-Dllvm={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-LLVM-MESON)
 
-    Build with support for LLVM based JIT compilation (see [Chapter 32](jit.html "Chapter 32. Just-in-Time Compilation (JIT)")). This requires the LLVM library to be installed. The minimum required version of LLVM is currently 3.9. Disabled by default.
+    Build with support for LLVM based JIT compilation (see [Chapter 32](jit "Chapter 32. Just-in-Time Compilation (JIT)")). This requires the LLVM library to be installed. The minimum required version of LLVM is currently 3.9. Disabled by default.
 
     `llvm-config` will be used to find the required compilation options. `llvm-config`, and then `llvm-config-$version` for all supported versions, will be searched for in your `PATH`. If that would not yield the desired program, use `LLVM_CONFIG` to specify a path to the correct `llvm-config`.
 
@@ -208,7 +208,7 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
 * `-Dldap={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-LDAP-MESON)
 
-    Build with LDAP support for authentication and connection parameter lookup (see [Section 34.18](libpq-ldap.html "34.18. LDAP Lookup of Connection Parameters") and [Section 21.10](auth-ldap.html "21.10. LDAP Authentication") for more information). On Unix, this requires the OpenLDAP package to be installed. On Windows, the default WinLDAP library is used. Defaults to auto. `meson configure` will check for the required header files and libraries to make sure that your OpenLDAP installation is sufficient before proceeding.
+    Build with LDAP support for authentication and connection parameter lookup (see [Section 34.18](libpq-ldap "34.18. LDAP Lookup of Connection Parameters") and [Section 21.10](auth-ldap "21.10. LDAP Authentication") for more information). On Unix, this requires the OpenLDAP package to be installed. On Windows, the default WinLDAP library is used. Defaults to auto. `meson configure` will check for the required header files and libraries to make sure that your OpenLDAP installation is sufficient before proceeding.
 
 * `-Dpam={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-PAM-MESON)
 
@@ -220,7 +220,7 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
 * `-Dsystemd={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-SYSTEMD-MESON)
 
-    Build with support for systemd service notifications. This improves integration if the server is started under systemd but has no impact otherwise; see [Section 19.3](server-start.html "19.3. Starting the Database Server") for more information. Defaults to auto. libsystemd and the associated header files need to be installed to use this option.
+    Build with support for systemd service notifications. This improves integration if the server is started under systemd but has no impact otherwise; see [Section 19.3](server-start "19.3. Starting the Database Server") for more information. Defaults to auto. libsystemd and the associated header files need to be installed to use this option.
 
 * `-Dbonjour={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-BONJOUR-MESON)
 
@@ -228,7 +228,7 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
 * `-Duuid=LIBRARY` [#](#CONFIGURE-WITH-UUID-MESON)
 
-    Build the [uuid-ossp](uuid-ossp.html "F.48. uuid-ossp — a UUID generator") module (which provides functions to generate UUIDs), using the specified UUID library. *`LIBRARY`* must be one of:
+    Build the [uuid-ossp](uuid-ossp "F.48. uuid-ossp — a UUID generator") module (which provides functions to generate UUIDs), using the specified UUID library. *`LIBRARY`* must be one of:
 
   * `none` to not build the uuid module. This is the default.
   * `bsd` to use the UUID functions found in FreeBSD, and some other BSD-derived systems
@@ -243,7 +243,7 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
 * `-Dlibxslt={ auto | enabled | disabled }` [#](#CONFIGURE-WITH-LIBXSLT-MESON)
 
-    Build with libxslt, enabling the [xml2](xml2.html "F.49. xml2 — XPath querying and XSLT functionality") module to perform XSL transformations of XML. `-Dlibxml` must be specified as well. Defaults to auto.
+    Build with libxslt, enabling the [xml2](xml2 "F.49. xml2 — XPath querying and XSLT functionality") module to perform XSL transformations of XML. `-Dlibxml` must be specified as well. Defaults to auto.
 
 #### 17.4.3.3. Anti-Features [#](#MESON-OPTIONS-ANTI-FEATURES)
 
@@ -309,7 +309,7 @@ To specify PostgreSQL-specific options, the name of the option must be prefixed 
 
 * `-Drpath={ true | false }` [#](#CONFIGURE-RPATH-MESON)
 
-    This option is set to true by default. If set to false, do not mark PostgreSQL's executables to indicate that they should search for shared libraries in the installation's library directory (see `--libdir`). On most platforms, this marking uses an absolute path to the library directory, so that it will be unhelpful if you relocate the installation later. However, you will then need to provide some other way for the executables to find the shared libraries. Typically this requires configuring the operating system's dynamic linker to search the library directory; see [Section 17.5.1](install-post.html#INSTALL-POST-SHLIBS "17.5.1. Shared Libraries") for more detail.
+    This option is set to true by default. If set to false, do not mark PostgreSQL's executables to indicate that they should search for shared libraries in the installation's library directory (see `--libdir`). On most platforms, this marking uses an absolute path to the library directory, so that it will be unhelpful if you relocate the installation later. However, you will then need to provide some other way for the executables to find the shared libraries. Typically this requires configuring the operating system's dynamic linker to search the library directory; see [Section 17.5.1](install-post#INSTALL-POST-SHLIBS "17.5.1. Shared Libraries") for more detail.
 
 * `-DBINARY_NAME=PATH` [#](#CONFIGURE-BINARY-NAME-MESON)
 

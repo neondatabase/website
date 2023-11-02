@@ -1,12 +1,12 @@
 ## F.27. pgcrypto — cryptographic functions [#](#PGCRYPTO)
 
-  * *   [F.27.1. General Hashing Functions](pgcrypto.html#PGCRYPTO-GENERAL-HASHING-FUNCS)
-  * [F.27.2. Password Hashing Functions](pgcrypto.html#PGCRYPTO-PASSWORD-HASHING-FUNCS)
-  * [F.27.3. PGP Encryption Functions](pgcrypto.html#PGCRYPTO-PGP-ENC-FUNCS)
-  * [F.27.4. Raw Encryption Functions](pgcrypto.html#PGCRYPTO-RAW-ENC-FUNCS)
-  * [F.27.5. Random-Data Functions](pgcrypto.html#PGCRYPTO-RANDOM-DATA-FUNCS)
-  * [F.27.6. Notes](pgcrypto.html#PGCRYPTO-NOTES)
-  * [F.27.7. Author](pgcrypto.html#PGCRYPTO-AUTHOR)
+  * *   [F.27.1. General Hashing Functions](pgcrypto#PGCRYPTO-GENERAL-HASHING-FUNCS)
+  * [F.27.2. Password Hashing Functions](pgcrypto#PGCRYPTO-PASSWORD-HASHING-FUNCS)
+  * [F.27.3. PGP Encryption Functions](pgcrypto#PGCRYPTO-PGP-ENC-FUNCS)
+  * [F.27.4. Raw Encryption Functions](pgcrypto#PGCRYPTO-RAW-ENC-FUNCS)
+  * [F.27.5. Random-Data Functions](pgcrypto#PGCRYPTO-RANDOM-DATA-FUNCS)
+  * [F.27.6. Notes](pgcrypto#PGCRYPTO-NOTES)
+  * [F.27.7. Author](pgcrypto#PGCRYPTO-AUTHOR)
 
 The `pgcrypto` module provides cryptographic functions for PostgreSQL.
 
@@ -60,7 +60,7 @@ The algorithms in `crypt()` differ from the usual MD5 or SHA1 hashing algorithms
 3. They include the algorithm type in the result, so passwords hashed with different algorithms can co-exist.
 4. Some of them are adaptive — that means when computers get faster, you can tune the algorithm to be slower, without introducing incompatibility with existing passwords.
 
-[Table F.18](pgcrypto.html#PGCRYPTO-CRYPT-ALGORITHMS "Table F.18. Supported Algorithms for crypt()") lists the algorithms supported by the `crypt()` function.
+[Table F.18](pgcrypto#PGCRYPTO-CRYPT-ALGORITHMS "Table F.18. Supported Algorithms for crypt()") lists the algorithms supported by the `crypt()` function.
 
 **Table F.18. Supported Algorithms for `crypt()`**
 
@@ -109,7 +109,7 @@ Generates a new random salt string for use in `crypt()`. The salt string also te
 
 The *`type`* parameter specifies the hashing algorithm. The accepted types are: `des`, `xdes`, `md5` and `bf`.
 
-The *`iter_count`* parameter lets the user specify the iteration count, for algorithms that have one. The higher the count, the more time it takes to hash the password and therefore the more time to break it. Although with too high a count the time to calculate a hash may be several years — which is somewhat impractical. If the *`iter_count`* parameter is omitted, the default iteration count is used. Allowed values for *`iter_count`* depend on the algorithm and are shown in [Table F.19](pgcrypto.html#PGCRYPTO-ICFC-TABLE "Table F.19. Iteration Counts for crypt()").
+The *`iter_count`* parameter lets the user specify the iteration count, for algorithms that have one. The higher the count, the more time it takes to hash the password and therefore the more time to break it. Although with too high a count the time to calculate a hash may be several years — which is somewhat impractical. If the *`iter_count`* parameter is omitted, the default iteration count is used. Allowed values for *`iter_count`* depend on the algorithm and are shown in [Table F.19](pgcrypto#PGCRYPTO-ICFC-TABLE "Table F.19. Iteration Counts for crypt()").
 
 **Table F.19. Iteration Counts for `crypt()`**
 
@@ -124,7 +124,7 @@ For `xdes` there is an additional limitation that the iteration count must be an
 
 To pick an appropriate iteration count, consider that the original DES crypt was designed to have the speed of 4 hashes per second on the hardware of that time. Slower than 4 hashes per second would probably dampen usability. Faster than 100 hashes per second is probably too fast.
 
-[Table F.20](pgcrypto.html#PGCRYPTO-HASH-SPEED-TABLE "Table F.20. Hash Algorithm Speeds") gives an overview of the relative slowness of different hashing algorithms. The table shows how much time it would take to try all combinations of characters in an 8-character password, assuming that the password contains either only lower case letters, or upper- and lower-case letters and numbers. In the `crypt-bf` entries, the number after a slash is the *`iter_count`* parameter of `gen_salt`.
+[Table F.20](pgcrypto#PGCRYPTO-HASH-SPEED-TABLE "Table F.20. Hash Algorithm Speeds") gives an overview of the relative slowness of different hashing algorithms. The table shows how much time it would take to try all combinations of characters in an 8-character password, assuming that the password contains either only lower case letters, or upper- and lower-case letters and numbers. In the `crypt-bf` entries, the number after a slash is the *`iter_count`* parameter of `gen_salt`.
 
 **Table F.20. Hash Algorithm Speeds**
 
@@ -486,7 +486,7 @@ Returns *`count`* cryptographically strong random bytes. At most 1024 bytes can 
 gen_random_uuid() returns uuid
 ```
 
-Returns a version 4 (random) UUID. (Obsolete, this function internally calls the [core function](functions-uuid.html "9.14. UUID Functions") of the same name.)
+Returns a version 4 (random) UUID. (Obsolete, this function internally calls the [core function](functions-uuid "9.14. UUID Functions") of the same name.)
 
 ### F.27.6. Notes [#](#PGCRYPTO-NOTES)
 

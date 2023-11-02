@@ -8,7 +8,7 @@ For the languages supplied with the standard distribution, it is only necessary 
 
 A procedural language is installed in a database in five steps, which must be carried out by a database superuser. In most cases the required SQL commands should be packaged as the installation script of an “extension”, so that `CREATE EXTENSION` can be used to execute them.
 
-1. The shared object for the language handler must be compiled and installed into an appropriate library directory. This works in the same way as building and installing modules with regular user-defined C functions does; see [Section 38.10.5](xfunc-c.html#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions"). Often, the language handler will depend on an external library that provides the actual programming language engine; if so, that must be installed as well.
+1. The shared object for the language handler must be compiled and installed into an appropriate library directory. This works in the same way as building and installing modules with regular user-defined C functions does; see [Section 38.10.5](xfunc-c#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions"). Often, the language handler will depend on an external library that provides the actual programming language engine; if so, that must be installed as well.
 
 2. The handler must be declared with the command
 
@@ -22,7 +22,7 @@ A procedural language is installed in a database in five steps, which must be ca
 
     The special return type of `language_handler` tells the database system that this function does not return one of the defined SQL data types and is not directly usable in SQL statements.
 
-3. Optionally, the language handler can provide an “inline” handler function that executes anonymous code blocks ([`DO`](sql-do.html "DO") commands) written in this language. If an inline handler function is provided by the language, declare it with a command like
+3. Optionally, the language handler can provide an “inline” handler function that executes anonymous code blocks ([`DO`](sql-do "DO") commands) written in this language. If an inline handler function is provided by the language, declare it with a command like
 
     ```
 
@@ -54,7 +54,7 @@ A procedural language is installed in a database in five steps, which must be ca
 
     The optional key word `TRUSTED` specifies that the language does not grant access to data that the user would not otherwise have. Trusted languages are designed for ordinary database users (those without superuser privilege) and allows them to safely create functions and procedures. Since PL functions are executed inside the database server, the `TRUSTED` flag should only be given for languages that do not allow access to database server internals or the file system. The languages PL/pgSQL, PL/Tcl, and PL/Perl are considered trusted; the languages PL/TclU, PL/PerlU, and PL/PythonU are designed to provide unlimited functionality and should *not* be marked trusted.
 
-[Example 42.1](xplang-install.html#XPLANG-INSTALL-EXAMPLE "Example 42.1. Manual Installation of PL/Perl") shows how the manual installation procedure would work with the language PL/Perl.
+[Example 42.1](xplang-install#XPLANG-INSTALL-EXAMPLE "Example 42.1. Manual Installation of PL/Perl") shows how the manual installation procedure would work with the language PL/Perl.
 
 **Example 42.1. Manual Installation of PL/Perl**
 

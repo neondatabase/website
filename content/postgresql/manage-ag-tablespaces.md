@@ -10,7 +10,7 @@ Second, tablespaces allow an administrator to use knowledge of the usage pattern
 
 Even though located outside the main PostgreSQL data directory, tablespaces are an integral part of the database cluster and *cannot* be treated as an autonomous collection of data files. They are dependent on metadata contained in the main data directory, and therefore cannot be attached to a different database cluster or backed up individually. Similarly, if you lose a tablespace (file deletion, disk failure, etc.), the database cluster might become unreadable or unable to start. Placing a tablespace on a temporary file system like a RAM disk risks the reliability of the entire cluster.
 
-To define a tablespace, use the [CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE") command, for example::
+To define a tablespace, use the [CREATE TABLESPACE](sql-createtablespace "CREATE TABLESPACE") command, for example::
 
 ```
 
@@ -32,7 +32,7 @@ Tables, indexes, and entire databases can be assigned to particular tablespaces.
 CREATE TABLE foo(i int) TABLESPACE space1;
 ```
 
-Alternatively, use the [default\_tablespace](runtime-config-client.html#GUC-DEFAULT-TABLESPACE) parameter:
+Alternatively, use the [default\_tablespace](runtime-config-client#GUC-DEFAULT-TABLESPACE) parameter:
 
 ```
 
@@ -42,7 +42,7 @@ CREATE TABLE foo(i int);
 
 When `default_tablespace` is set to anything but an empty string, it supplies an implicit `TABLESPACE` clause for `CREATE TABLE` and `CREATE INDEX` commands that do not have an explicit one.
 
-There is also a [temp\_tablespaces](runtime-config-client.html#GUC-TEMP-TABLESPACES) parameter, which determines the placement of temporary tables and indexes, as well as temporary files that are used for purposes such as sorting large data sets. This can be a list of tablespace names, rather than only one, so that the load associated with temporary objects can be spread over multiple tablespaces. A random member of the list is picked each time a temporary object is to be created.
+There is also a [temp\_tablespaces](runtime-config-client#GUC-TEMP-TABLESPACES) parameter, which determines the placement of temporary tables and indexes, as well as temporary files that are used for purposes such as sorting large data sets. This can be a list of tablespace names, rather than only one, so that the load associated with temporary objects can be spread over multiple tablespaces. A random member of the list is picked each time a temporary object is to be created.
 
 The tablespace associated with a database is used to store the system catalogs of that database. Furthermore, it is the default tablespace used for tables, indexes, and temporary files created within the database, if no `TABLESPACE` clause is given and no other selection is specified by `default_tablespace` or `temp_tablespaces` (as appropriate). If a database is created without specifying a tablespace for it, it uses the same tablespace as the template database it is copied from.
 
@@ -50,15 +50,15 @@ Two tablespaces are automatically created when the database cluster is initializ
 
 Once created, a tablespace can be used from any database, provided the requesting user has sufficient privilege. This means that a tablespace cannot be dropped until all objects in all databases using the tablespace have been removed.
 
-To remove an empty tablespace, use the [DROP TABLESPACE](sql-droptablespace.html "DROP TABLESPACE") command.
+To remove an empty tablespace, use the [DROP TABLESPACE](sql-droptablespace "DROP TABLESPACE") command.
 
-To determine the set of existing tablespaces, examine the [`pg_tablespace`](catalog-pg-tablespace.html "53.56. pg_tablespace")system catalog, for example
+To determine the set of existing tablespaces, examine the [`pg_tablespace`](catalog-pg-tablespace "53.56. pg_tablespace")system catalog, for example
 
 ```
 
 SELECT spcname FROM pg_tablespace;
 ```
 
-The [psql](app-psql.html "psql") program's `\db` meta-command is also useful for listing the existing tablespaces.
+The [psql](app-psql "psql") program's `\db` meta-command is also useful for listing the existing tablespaces.
 
 The directory `$PGDATA/pg_tblspc` contains symbolic links that point to each of the non-built-in tablespaces defined in the cluster. Although not recommended, it is possible to adjust the tablespace layout by hand by redefining these links. Under no circumstances perform this operation while the server is running. Note that in PostgreSQL 9.1 and earlier you will also need to update the `pg_tablespace` catalog with the new locations. (If you do not, `pg_dump` will continue to output the old tablespace locations.)

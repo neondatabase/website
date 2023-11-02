@@ -19,9 +19,9 @@ RESET ALL
 SET configuration_parameter TO DEFAULT
 ```
 
-Refer to [SET](sql-set.html "SET") for details.
+Refer to [SET](sql-set "SET") for details.
 
-The default value is defined as the value that the parameter would have had, if no `SET` had ever been issued for it in the current session. The actual source of this value might be a compiled-in default, the configuration file, command-line options, or per-database or per-user default settings. This is subtly different from defining it as “the value that the parameter had at session start”, because if the value came from the configuration file, it will be reset to whatever is specified by the configuration file now. See [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for details.
+The default value is defined as the value that the parameter would have had, if no `SET` had ever been issued for it in the current session. The actual source of this value might be a compiled-in default, the configuration file, command-line options, or per-database or per-user default settings. This is subtly different from defining it as “the value that the parameter had at session start”, because if the value came from the configuration file, it will be reset to whatever is specified by the configuration file now. See [Chapter 20](runtime-config "Chapter 20. Server Configuration") for details.
 
 The transactional behavior of `RESET` is the same as `SET`: its effects will be undone by transaction rollback.
 
@@ -29,7 +29,7 @@ The transactional behavior of `RESET` is the same as `SET`: its effects will be 
 
 * *`configuration_parameter`*
 
-    Name of a settable run-time parameter. Available parameters are documented in [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") and on the [SET](sql-set.html "SET") reference page.
+    Name of a settable run-time parameter. Available parameters are documented in [Chapter 20](runtime-config "Chapter 20. Server Configuration") and on the [SET](sql-set "SET") reference page.
 
 * `ALL`
 
@@ -50,4 +50,4 @@ RESET timezone;
 
 ## See Also
 
-[SET](sql-set.html "SET"), [SHOW](sql-show.html "SHOW")
+[SET](sql-set "SET"), [SHOW](sql-show "SHOW")

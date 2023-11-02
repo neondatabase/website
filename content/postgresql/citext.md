@@ -1,16 +1,16 @@
 ## F.10. citext — a case-insensitive character string type [#](#CITEXT)
 
-  * *   [F.10.1. Rationale](citext.html#CITEXT-RATIONALE)
-  * [F.10.2. How to Use It](citext.html#CITEXT-HOW-TO-USE-IT)
-  * [F.10.3. String Comparison Behavior](citext.html#CITEXT-STRING-COMPARISON-BEHAVIOR)
-  * [F.10.4. Limitations](citext.html#CITEXT-LIMITATIONS)
-  * [F.10.5. Author](citext.html#CITEXT-AUTHOR)
+  * *   [F.10.1. Rationale](citext#CITEXT-RATIONALE)
+  * [F.10.2. How to Use It](citext#CITEXT-HOW-TO-USE-IT)
+  * [F.10.3. String Comparison Behavior](citext#CITEXT-STRING-COMPARISON-BEHAVIOR)
+  * [F.10.4. Limitations](citext#CITEXT-LIMITATIONS)
+  * [F.10.5. Author](citext#CITEXT-AUTHOR)
 
 The `citext` module provides a case-insensitive character string type, `citext`. Essentially, it internally calls `lower` when comparing values. Otherwise, it behaves almost exactly like `text`.
 
 ### Tip
 
-Consider using *nondeterministic collations* (see [Section 24.2.2.4](collation.html#COLLATION-NONDETERMINISTIC "24.2.2.4. Nondeterministic Collations")) instead of this module. They can be used for case-insensitive comparisons, accent-insensitive comparisons, and other combinations, and they handle more Unicode special cases correctly.
+Consider using *nondeterministic collations* (see [Section 24.2.2.4](collation#COLLATION-NONDETERMINISTIC "24.2.2.4. Nondeterministic Collations")) instead of this module. They can be used for case-insensitive comparisons, accent-insensitive comparisons, and other combinations, and they handle more Unicode special cases correctly.
 
 This module is considered “trusted”, that is, it can be installed by non-superusers who have `CREATE` privilege on the current database.
 

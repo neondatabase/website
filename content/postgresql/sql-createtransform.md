@@ -47,7 +47,7 @@ To be able to create a transform, you must own and have `USAGE` privilege on the
 
 ## Notes
 
-Use [`DROP TRANSFORM`](sql-droptransform.html "DROP TRANSFORM") to remove transforms.
+Use [`DROP TRANSFORM`](sql-droptransform "DROP TRANSFORM") to remove transforms.
 
 ## Examples
 
@@ -93,4 +93,4 @@ This form of `CREATE TRANSFORM` is a PostgreSQL extension. There is a `CREATE TR
 
 ## See Also
 
-[CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [CREATE LANGUAGE](sql-createlanguage.html "CREATE LANGUAGE"), [CREATE TYPE](sql-createtype.html "CREATE TYPE"), [DROP TRANSFORM](sql-droptransform.html "DROP TRANSFORM")
+[CREATE FUNCTION](sql-createfunction "CREATE FUNCTION"), [CREATE LANGUAGE](sql-createlanguage "CREATE LANGUAGE"), [CREATE TYPE](sql-createtype "CREATE TYPE"), [DROP TRANSFORM](sql-droptransform "DROP TRANSFORM")

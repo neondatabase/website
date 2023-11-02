@@ -12,7 +12,7 @@ clusterdb — cluster a PostgreSQL database
 
 clusterdb is a utility for reclustering tables in a PostgreSQL database. It finds tables that have previously been clustered, and clusters them again on the same index that was last used. Tables that have never been clustered are not affected.
 
-clusterdb is a wrapper around the SQL command [CLUSTER](sql-cluster.html "CLUSTER"). There is no effective difference between clustering databases via this utility and via other methods for accessing the server.
+clusterdb is a wrapper around the SQL command [CLUSTER](sql-cluster "CLUSTER"). There is no effective difference between clustering databases via this utility and via other methods for accessing the server.
 
 ## Options
 
@@ -24,7 +24,7 @@ clusterdb accepts the following command-line arguments:
 
 * `[-d] dbname``[--dbname=]dbname`
 
-    Specifies the name of the database to be clustered, when `-a`/`--all` is not used. If this is not specified, the database name is read from the environment variable `PGDATABASE`. If that is not set, the user name specified for the connection is used. The *`dbname`* can be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
+    Specifies the name of the database to be clustered, when `-a`/`--all` is not used. If this is not specified, the database name is read from the environment variable `PGDATABASE`. If that is not set, the user name specified for the connection is used. The *`dbname`* can be a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
 
 * `-e``--echo`
 
@@ -76,7 +76,7 @@ clusterdb also accepts the following command-line arguments for connection param
 
 * `--maintenance-db=dbname`
 
-    Specifies the name of the database to connect to to discover which databases should be clustered, when `-a`/`--all` is used. If not specified, the `postgres` database will be used, or if that does not exist, `template1` will be used. This can be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options. Also, connection string parameters other than the database name itself will be re-used when connecting to other databases.
+    Specifies the name of the database to connect to to discover which databases should be clustered, when `-a`/`--all` is used. If not specified, the `postgres` database will be used, or if that does not exist, `template1` will be used. This can be a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options. Also, connection string parameters other than the database name itself will be re-used when connecting to other databases.
 
 ## Environment
 
@@ -88,11 +88,11 @@ clusterdb also accepts the following command-line arguments for connection param
 
     Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 
-This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 ## Diagnostics
 
-In case of difficulty, see [CLUSTER](sql-cluster.html "CLUSTER") and [psql](app-psql.html "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
+In case of difficulty, see [CLUSTER](sql-cluster "CLUSTER") and [psql](app-psql "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
 
 ## Examples
 
@@ -112,4 +112,4 @@ clusterdb --table=foo xyzzy
 
 ## See Also
 
-[CLUSTER](sql-cluster.html "CLUSTER")
+[CLUSTER](sql-cluster "CLUSTER")

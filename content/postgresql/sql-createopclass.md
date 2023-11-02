@@ -26,7 +26,7 @@ The user who defines an operator class becomes its owner. Presently, the creatin
 
 Related operator classes can be grouped into *operator families*. To add a new operator class to an existing family, specify the `FAMILY` option in `CREATE OPERATOR CLASS`. Without this option, the new class is placed into a family named the same as the new class (creating that family if it doesn't already exist).
 
-Refer to [Section 38.16](xindex.html "38.16. Interfacing Extensions to Indexes") for further information.
+Refer to [Section 38.16](xindex "38.16. Interfacing Extensions to Indexes") for further information.
 
 ## Parameters
 
@@ -98,7 +98,7 @@ Before PostgreSQL 8.4, the `OPERATOR` clause could include a `RECHECK` option. T
 
 ## Examples
 
-The following example command defines a GiST index operator class for the data type `_int4` (array of `int4`). See the [intarray](intarray.html "F.20. intarray — manipulate arrays of integers") module for the complete example.
+The following example command defines a GiST index operator class for the data type `_int4` (array of `int4`). See the [intarray](intarray "F.20. intarray — manipulate arrays of integers") module for the complete example.
 
 ```
 
@@ -124,4 +124,4 @@ CREATE OPERATOR CLASS gist__int_ops
 
 ## See Also
 
-[ALTER OPERATOR CLASS](sql-alteropclass.html "ALTER OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass.html "DROP OPERATOR CLASS"), [CREATE OPERATOR FAMILY](sql-createopfamily.html "CREATE OPERATOR FAMILY"), [ALTER OPERATOR FAMILY](sql-alteropfamily.html "ALTER OPERATOR FAMILY")
+[ALTER OPERATOR CLASS](sql-alteropclass "ALTER OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass "DROP OPERATOR CLASS"), [CREATE OPERATOR FAMILY](sql-createopfamily "CREATE OPERATOR FAMILY"), [ALTER OPERATOR FAMILY](sql-alteropfamily "ALTER OPERATOR FAMILY")

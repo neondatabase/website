@@ -12,11 +12,11 @@ DECLARE name [ BINARY ] [ ASENSITIVE | INSENSITIVE ] [ [ NO ] SCROLL ]
 
 ## Description
 
-`DECLARE` allows a user to create cursors, which can be used to retrieve a small number of rows at a time out of a larger query. After the cursor is created, rows are fetched from it using [`FETCH`](sql-fetch.html "FETCH").
+`DECLARE` allows a user to create cursors, which can be used to retrieve a small number of rows at a time out of a larger query. After the cursor is created, rows are fetched from it using [`FETCH`](sql-fetch "FETCH").
 
 ### Note
 
-This page describes usage of cursors at the SQL command level. If you are trying to use cursors inside a PL/pgSQL function, the rules are different — see [Section 43.7](plpgsql-cursors.html "43.7. Cursors").
+This page describes usage of cursors at the SQL command level. If you are trying to use cursors inside a PL/pgSQL function, the rules are different — see [Section 43.7](plpgsql-cursors "43.7. Cursors").
 
 ## Parameters
 
@@ -36,7 +36,7 @@ This page describes usage of cursors at the SQL command level. If you are trying
 
 * `SCROLL``NO SCROLL`
 
-    `SCROLL` specifies that the cursor can be used to retrieve rows in a nonsequential fashion (e.g., backward). Depending upon the complexity of the query's execution plan, specifying `SCROLL` might impose a performance penalty on the query's execution time. `NO SCROLL` specifies that the cursor cannot be used to retrieve rows in a nonsequential fashion. The default is to allow scrolling in some cases; this is not the same as specifying `SCROLL`. See [Notes](sql-declare.html#SQL-DECLARE-NOTES "Notes") below for details.
+    `SCROLL` specifies that the cursor can be used to retrieve rows in a nonsequential fashion (e.g., backward). Depending upon the complexity of the query's execution plan, specifying `SCROLL` might impose a performance penalty on the query's execution time. `NO SCROLL` specifies that the cursor cannot be used to retrieve rows in a nonsequential fashion. The default is to allow scrolling in some cases; this is not the same as specifying `SCROLL`. See [Notes](sql-declare#SQL-DECLARE-NOTES "Notes") below for details.
 
 * `WITH HOLD``WITHOUT HOLD`
 
@@ -44,7 +44,7 @@ This page describes usage of cursors at the SQL command level. If you are trying
 
 * *`query`*
 
-    A [`SELECT`](sql-select.html "SELECT") or [`VALUES`](sql-values.html "VALUES") command which will provide the rows to be returned by the cursor.
+    A [`SELECT`](sql-select "SELECT") or [`VALUES`](sql-values "VALUES") command which will provide the rows to be returned by the cursor.
 
 The key words `ASENSITIVE`, `BINARY`, `INSENSITIVE`, and `SCROLL` can appear in any order.
 
@@ -58,7 +58,7 @@ Binary cursors should be used carefully. Many applications, including psql, are 
 
 When the client application uses the “extended query” protocol to issue a `FETCH` command, the Bind protocol message specifies whether data is to be retrieved in text or binary format. This choice overrides the way that the cursor is defined. The concept of a binary cursor as such is thus obsolete when using extended query protocol — any cursor can be treated as either text or binary.
 
-Unless `WITH HOLD` is specified, the cursor created by this command can only be used within the current transaction. Thus, `DECLARE` without `WITH HOLD` is useless outside a transaction block: the cursor would survive only to the completion of the statement. Therefore PostgreSQL reports an error if such a command is used outside a transaction block. Use [`BEGIN`](sql-begin.html "BEGIN") and [`COMMIT`](sql-commit.html "COMMIT") (or [`ROLLBACK`](sql-rollback.html "ROLLBACK")) to define a transaction block.
+Unless `WITH HOLD` is specified, the cursor created by this command can only be used within the current transaction. Thus, `DECLARE` without `WITH HOLD` is useless outside a transaction block: the cursor would survive only to the completion of the statement. Therefore PostgreSQL reports an error if such a command is used outside a transaction block. Use [`BEGIN`](sql-begin "BEGIN") and [`COMMIT`](sql-commit "COMMIT") (or [`ROLLBACK`](sql-rollback "ROLLBACK")) to define a transaction block.
 
 If `WITH HOLD` is specified and the transaction that created the cursor successfully commits, the cursor can continue to be accessed by subsequent transactions in the same session. (But if the creating transaction is aborted, the cursor is removed.) A cursor created with `WITH HOLD` is closed when an explicit `CLOSE` command is issued on it, or the session ends. In the current implementation, the rows represented by a held cursor are copied into a temporary file or memory area so that they remain available for subsequent transactions.
 
@@ -70,9 +70,9 @@ Backward fetches are also disallowed when the query includes `FOR UPDATE` or `FO
 
 ### Caution
 
-Scrollable cursors may give unexpected results if they invoke any volatile functions (see [Section 38.7](xfunc-volatility.html "38.7. Function Volatility Categories")). When a previously fetched row is re-fetched, the functions might be re-executed, perhaps leading to results different from the first time. It's best to specify `NO SCROLL` for a query involving volatile functions. If that is not practical, one workaround is to declare the cursor `SCROLL WITH HOLD` and commit the transaction before reading any rows from it. This will force the entire output of the cursor to be materialized in temporary storage, so that volatile functions are executed exactly once for each row.
+Scrollable cursors may give unexpected results if they invoke any volatile functions (see [Section 38.7](xfunc-volatility "38.7. Function Volatility Categories")). When a previously fetched row is re-fetched, the functions might be re-executed, perhaps leading to results different from the first time. It's best to specify `NO SCROLL` for a query involving volatile functions. If that is not practical, one workaround is to declare the cursor `SCROLL WITH HOLD` and commit the transaction before reading any rows from it. This will force the entire output of the cursor to be materialized in temporary storage, so that volatile functions are executed exactly once for each row.
 
-If the cursor's query includes `FOR UPDATE` or `FOR SHARE`, then returned rows are locked at the time they are first fetched, in the same way as for a regular [`SELECT`](sql-select.html "SELECT") command with these options. In addition, the returned rows will be the most up-to-date versions.
+If the cursor's query includes `FOR UPDATE` or `FOR SHARE`, then returned rows are locked at the time they are first fetched, in the same way as for a regular [`SELECT`](sql-select "SELECT") command with these options. In addition, the returned rows will be the most up-to-date versions.
 
 ### Caution
 
@@ -86,7 +86,7 @@ The SQL standard only makes provisions for cursors in embedded SQL. The PostgreS
 
 The server data structure underlying an open cursor is called a *portal*. Portal names are exposed in the client protocol: a client can fetch rows directly from an open portal, if it knows the portal name. When creating a cursor with `DECLARE`, the portal name is the same as the cursor name.
 
-You can see all available cursors by querying the [`pg_cursors`](view-pg-cursors.html "54.6. pg_cursors") system view.
+You can see all available cursors by querying the [`pg_cursors`](view-pg-cursors "54.6. pg_cursors") system view.
 
 ## Examples
 
@@ -97,7 +97,7 @@ To declare a cursor:
 DECLARE liahona CURSOR FOR SELECT * FROM films;
 ```
 
-See [FETCH](sql-fetch.html "FETCH") for more examples of cursor usage.
+See [FETCH](sql-fetch "FETCH") for more examples of cursor usage.
 
 ## Compatibility
 
@@ -109,4 +109,4 @@ Binary cursors are a PostgreSQL extension.
 
 ## See Also
 
-[CLOSE](sql-close.html "CLOSE"), [FETCH](sql-fetch.html "FETCH"), [MOVE](sql-move.html "MOVE")
+[CLOSE](sql-close "CLOSE"), [FETCH](sql-fetch "FETCH"), [MOVE](sql-move "MOVE")

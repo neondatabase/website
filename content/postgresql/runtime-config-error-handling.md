@@ -22,6 +22,6 @@
 
     When set to `fsync`, which is the default, PostgreSQL will recursively open and synchronize all files in the data directory before crash recovery begins. The search for files will follow symbolic links for the WAL directory and each configured tablespace (but not any other symbolic links). This is intended to make sure that all WAL and data files are durably stored on disk before replaying changes. This applies whenever starting a database cluster that did not shut down cleanly, including copies created with pg\_basebackup.
 
-    On Linux, `syncfs` may be used instead, to ask the operating system to synchronize the whole file systems that contain the data directory, the WAL files and each tablespace (but not any other file systems that may be reachable through symbolic links). See [Appendix O](syncfs.html "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
+    On Linux, `syncfs` may be used instead, to ask the operating system to synchronize the whole file systems that contain the data directory, the WAL files and each tablespace (but not any other file systems that may be reachable through symbolic links). See [Appendix O](syncfs "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line.

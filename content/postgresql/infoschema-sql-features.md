@@ -1,6 +1,6 @@
 ## 37.48. `sql_features` [#](#INFOSCHEMA-SQL-FEATURES)
 
-The table `sql_features` contains information about which formal features defined in the SQL standard are supported by PostgreSQL. This is the same information that is presented in [Appendix D](features.html "Appendix D. SQL Conformance"). There you can also find some additional background information.
+The table `sql_features` contains information about which formal features defined in the SQL standard are supported by PostgreSQL. This is the same information that is presented in [Appendix D](features "Appendix D. SQL Conformance"). There you can also find some additional background information.
 
 **Table 37.46. `sql_features` Columns**
 

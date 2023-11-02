@@ -12,7 +12,7 @@ createdb creates a new PostgreSQL database.
 
 Normally, the database user who executes this command becomes the owner of the new database. However, a different owner can be specified via the `-O` option, if the executing user has appropriate privileges.
 
-createdb is a wrapper around the SQL command [`CREATE DATABASE`](sql-createdatabase.html "CREATE DATABASE"). There is no effective difference between creating databases via this utility and via other methods for accessing the server.
+createdb is a wrapper around the SQL command [`CREATE DATABASE`](sql-createdatabase "CREATE DATABASE"). There is no effective difference between creating databases via this utility and via other methods for accessing the server.
 
 ## Options
 
@@ -36,7 +36,7 @@ createdb accepts the following command-line arguments:
 
 * `-E encoding``--encoding=encoding`
 
-    Specifies the character encoding scheme to be used in this database. The character sets supported by the PostgreSQL server are described in [Section 24.3.1](multibyte.html#MULTIBYTE-CHARSET-SUPPORTED "24.3.1. Supported Character Sets").
+    Specifies the character encoding scheme to be used in this database. The character sets supported by the PostgreSQL server are described in [Section 24.3.1](multibyte#MULTIBYTE-CHARSET-SUPPORTED "24.3.1. Supported Character Sets").
 
 * `-l locale``--locale=locale`
 
@@ -68,7 +68,7 @@ createdb accepts the following command-line arguments:
 
 * `-S template``--strategy=strategy`
 
-    Specifies the database creation strategy. See [CREATE DATABASE STRATEGY](sql-createdatabase.html#CREATE-DATABASE-STRATEGY) for more details.
+    Specifies the database creation strategy. See [CREATE DATABASE STRATEGY](sql-createdatabase#CREATE-DATABASE-STRATEGY) for more details.
 
 * `-T template``--template=template`
 
@@ -82,7 +82,7 @@ createdb accepts the following command-line arguments:
 
     Show help about createdb command line arguments, and exit.
 
-The options `-D`, `-l`, `-E`, `-O`, and `-T` correspond to options of the underlying SQL command [`CREATE DATABASE`](sql-createdatabase.html "CREATE DATABASE"); see there for more information about them.
+The options `-D`, `-l`, `-E`, `-O`, and `-T` correspond to options of the underlying SQL command [`CREATE DATABASE`](sql-createdatabase "CREATE DATABASE"); see there for more information about them.
 
 createdb also accepts the following command-line arguments for connection parameters:
 
@@ -110,7 +110,7 @@ createdb also accepts the following command-line arguments for connection parame
 
 * `--maintenance-db=dbname`
 
-    Specifies the name of the database to connect to when creating the new database. If not specified, the `postgres` database will be used; if that does not exist (or if it is the name of the new database being created), `template1` will be used. This can be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
+    Specifies the name of the database to connect to when creating the new database. If not specified, the `postgres` database will be used; if that does not exist (or if it is the name of the new database being created), `template1` will be used. This can be a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
 
 ## Environment
 
@@ -126,11 +126,11 @@ createdb also accepts the following command-line arguments for connection parame
 
     Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 
-This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 ## Diagnostics
 
-In case of difficulty, see [CREATE DATABASE](sql-createdatabase.html "CREATE DATABASE") and [psql](app-psql.html "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
+In case of difficulty, see [CREATE DATABASE](sql-createdatabase "CREATE DATABASE") and [psql](app-psql "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
 
 ## Examples
 
@@ -151,4 +151,4 @@ CREATE DATABASE demo TEMPLATE template0;
 
 ## See Also
 
-[dropdb](app-dropdb.html "dropdb"), [CREATE DATABASE](sql-createdatabase.html "CREATE DATABASE")
+[dropdb](app-dropdb "dropdb"), [CREATE DATABASE](sql-createdatabase "CREATE DATABASE")

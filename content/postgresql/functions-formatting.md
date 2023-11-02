@@ -1,6 +1,6 @@
 ## 9.8. Data Type Formatting Functions [#](#FUNCTIONS-FORMATTING)
 
-The PostgreSQL formatting functions provide a powerful set of tools for converting various data types (date/time, integer, floating point, numeric) to formatted strings and for converting from formatted strings to specific data types. [Table 9.26](functions-formatting.html#FUNCTIONS-FORMATTING-TABLE "Table 9.26. Formatting Functions") lists them. These functions all follow a common calling convention: the first argument is the value to be formatted and the second argument is a template that defines the output or input format.
+The PostgreSQL formatting functions provide a powerful set of tools for converting various data types (date/time, integer, floating point, numeric) to formatted strings and for converting from formatted strings to specific data types. [Table 9.26](functions-formatting#FUNCTIONS-FORMATTING-TABLE "Table 9.26. Formatting Functions") lists them. These functions all follow a common calling convention: the first argument is the value to be formatted and the second argument is a template that defines the output or input format.
 
 **Table 9.26. Formatting Functions**
 
@@ -11,7 +11,7 @@ The PostgreSQL formatting functions provide a powerful set of tools for converti
 | `to_char` ( *`numeric_type`*, `text` ) → `text`Converts number to string according to the given format; available for `integer`, `bigint`, `numeric`, `real`, `double precision`.`to_char(125, '999')` → `125``to_char(125.8::real, '999D9')` → `125.8``to_char(-125.8, '999D99S')` → `125.80-`                                                        |
 | `to_date` ( `text`, `text` ) → `date`Converts string to date according to the given format.`to_date('05 Dec 2000', 'DD Mon YYYY')` → `2000-12-05`                                                                                                                                                                                                  |
 | `to_number` ( `text`, `text` ) → `numeric`Converts string to numeric according to the given format.`to_number('12,454.8-', '99G999D9S')` → `-12454.8`                                                                                                                                                                                              |
-| `to_timestamp` ( `text`, `text` ) → `timestamp with time zone`Converts string to time stamp according to the given format. (See also `to_timestamp(double precision)` in [Table 9.33](functions-datetime.html#FUNCTIONS-DATETIME-TABLE "Table 9.33. Date/Time Functions").)`to_timestamp('05 Dec 2000', 'DD Mon YYYY')` → `2000-12-05 00:00:00-05` |
+| `to_timestamp` ( `text`, `text` ) → `timestamp with time zone`Converts string to time stamp according to the given format. (See also `to_timestamp(double precision)` in [Table 9.33](functions-datetime#FUNCTIONS-DATETIME-TABLE "Table 9.33. Date/Time Functions").)`to_timestamp('05 Dec 2000', 'DD Mon YYYY')` → `2000-12-05 00:00:00-05` |
 
 \
 
@@ -21,7 +21,7 @@ The PostgreSQL formatting functions provide a powerful set of tools for converti
 
 In a `to_char` output template string, there are certain patterns that are recognized and replaced with appropriately-formatted data based on the given value. Any text that is not a template pattern is simply copied verbatim. Similarly, in an input template string (for the other functions), template patterns identify the values to be supplied by the input data string. If there are characters in the template string that are not template patterns, the corresponding characters in the input data string are simply skipped over (whether or not they are equal to the template string characters).
 
-[Table 9.27](functions-formatting.html#FUNCTIONS-FORMATTING-DATETIME-TABLE "Table 9.27. Template Patterns for Date/Time Formatting") shows the template patterns available for formatting date and time values.
+[Table 9.27](functions-formatting#FUNCTIONS-FORMATTING-DATETIME-TABLE "Table 9.27. Template Patterns for Date/Time Formatting") shows the template patterns available for formatting date and time values.
 
 **Table 9.27. Template Patterns for Date/Time Formatting**
 
@@ -76,7 +76,7 @@ In a `to_char` output template string, there are certain patterns that are recog
 | `WW`                             | week number of year (1–53) (the first week starts on the first day of the year)                                                            |
 | `IW`                             | week number of ISO 8601 week-numbering year (01–53; the first Thursday of the year is in week 1)                                           |
 | `CC`                             | century (2 digits) (the twenty-first century starts on 2001-01-01)                                                                         |
-| `J`                              | Julian Date (integer days since November 24, 4714 BC at local midnight; see [Section B.7](datetime-julian-dates.html "B.7. Julian Dates")) |
+| `J`                              | Julian Date (integer days since November 24, 4714 BC at local midnight; see [Section B.7](datetime-julian-dates "B.7. Julian Dates")) |
 | `Q`                              | quarter                                                                                                                                    |
 | `RM`                             | month in upper case Roman numerals (I–XII; I=January)                                                                                      |
 | `rm`                             | month in lower case Roman numerals (i–xii; i=January)                                                                                      |
@@ -88,7 +88,7 @@ In a `to_char` output template string, there are certain patterns that are recog
 
 \
 
-Modifiers can be applied to any template pattern to alter its behavior. For example, `FMMonth` is the `Month` pattern with the `FM` modifier. [Table 9.28](functions-formatting.html#FUNCTIONS-FORMATTING-DATETIMEMOD-TABLE "Table 9.28. Template Pattern Modifiers for Date/Time Formatting") shows the modifier patterns for date/time formatting.
+Modifiers can be applied to any template pattern to alter its behavior. For example, `FMMonth` is the `Month` pattern with the `FM` modifier. [Table 9.28](functions-formatting#FUNCTIONS-FORMATTING-DATETIMEMOD-TABLE "Table 9.28. Template Pattern Modifiers for Date/Time Formatting") shows the modifier patterns for date/time formatting.
 
 **Table 9.28. Template Pattern Modifiers for Date/Time Formatting**
 
@@ -98,7 +98,7 @@ Modifiers can be applied to any template pattern to alter its behavior. For exam
 | `TH` suffix | upper case ordinal number suffix                                                                                 | `DDTH`, e.g., `12TH` |
 | `th` suffix | lower case ordinal number suffix                                                                                 | `DDth`, e.g., `12th` |
 | `FX` prefix | fixed format global option (see usage notes)                                                                     | `FX Month DD Day`    |
-| `TM` prefix | translation mode (use localized day and month names based on [lc\_time](runtime-config-client.html#GUC-LC-TIME)) | `TMMonth`            |
+| `TM` prefix | translation mode (use localized day and month names based on [lc\_time](runtime-config-client#GUC-LC-TIME)) | `TMMonth`            |
 | `SP` suffix | spell mode (not implemented)                                                                                     | `DDSP`               |
 
 \
@@ -109,7 +109,7 @@ Usage notes for date/time formatting:
 
 * `TM` suppresses trailing blanks whether or not `FM` is specified.
 
-* `to_timestamp` and `to_date` ignore letter case in the input; so for example `MON`, `Mon`, and `mon` all accept the same strings. When using the `TM` modifier, case-folding is done according to the rules of the function's input collation (see [Section 24.2](collation.html "24.2. Collation Support")).
+* `to_timestamp` and `to_date` ignore letter case in the input; so for example `MON`, `Mon`, and `mon` all accept the same strings. When using the `TM` modifier, case-folding is done according to the rules of the function's input collation (see [Section 24.2](collation "24.2. Collation Support")).
 
 * `to_timestamp` and `to_date` skip multiple blank spaces at the beginning of the input string and around date and time values unless the `FX` option is used. For example, `to_timestamp(' 2000    JUN', 'YYYY MON')` and `to_timestamp('2000 - JUN', 'YYYY-MON')` work, but `to_timestamp('2000    JUN', 'FXYYYY MON')` returns an error because `to_timestamp` expects only a single space. `FX` must be specified as the first item in the template.
 
@@ -146,7 +146,7 @@ Usage notes for date/time formatting:
 
 ### Caution
 
-    While `to_date` will reject a mixture of Gregorian and ISO week-numbering date fields, `to_char` will not, since output format specifications like `YYYY-MM-DD (IYYY-IDDD)` can be useful. But avoid writing something like `IYYY-MM-DD`; that would yield surprising results near the start of the year. (See [Section 9.9.1](functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT "9.9.1. EXTRACT, date_part") for more information.)
+    While `to_date` will reject a mixture of Gregorian and ISO week-numbering date fields, `to_char` will not, since output format specifications like `YYYY-MM-DD (IYYY-IDDD)` can be useful. But avoid writing something like `IYYY-MM-DD`; that would yield surprising results near the start of the year. (See [Section 9.9.1](functions-datetime#FUNCTIONS-DATETIME-EXTRACT "9.9.1. EXTRACT, date_part") for more information.)
 
 * In `to_timestamp`, millisecond (`MS`) or microsecond (`US`) fields are used as the seconds digits after the decimal point. For example `to_timestamp('12.3', 'SS.MS')` is not 3 milliseconds, but 300, because the conversion treats it as 12 + 0.3 seconds. So, for the format `SS.MS`, the input values `12.3`, `12.30`, and `12.300` specify the same number of milliseconds. To get three milliseconds, one must write `12.003`, which the conversion treats as 12 + 0.003 = 12.003 seconds.
 
@@ -156,7 +156,7 @@ Usage notes for date/time formatting:
 
 * `to_char(interval)` formats `HH` and `HH12` as shown on a 12-hour clock, for example zero hours and 36 hours both output as `12`, while `HH24` outputs the full hour value, which can exceed 23 in an `interval` value.
 
-[Table 9.29](functions-formatting.html#FUNCTIONS-FORMATTING-NUMERIC-TABLE "Table 9.29. Template Patterns for Numeric Formatting") shows the template patterns available for formatting numeric values.
+[Table 9.29](functions-formatting#FUNCTIONS-FORMATTING-NUMERIC-TABLE "Table 9.29. Template Patterns for Numeric Formatting") shows the template patterns available for formatting numeric values.
 
 **Table 9.29. Template Patterns for Numeric Formatting**
 
@@ -185,7 +185,7 @@ Usage notes for numeric formatting:
 
 * `0` specifies a digit position that will always be printed, even if it contains a leading/trailing zero. `9` also specifies a digit position, but if it is a leading zero then it will be replaced by a space, while if it is a trailing zero and fill mode is specified then it will be deleted. (For `to_number()`, these two pattern characters are equivalent.)
 * If the format provides fewer fractional digits than the number being formatted, `to_char()` will round the number to the specified number of fractional digits.
-* The pattern characters `S`, `L`, `D`, and `G` represent the sign, currency symbol, decimal point, and thousands separator characters defined by the current locale (see [lc\_monetary](runtime-config-client.html#GUC-LC-MONETARY) and [lc\_numeric](runtime-config-client.html#GUC-LC-NUMERIC)). The pattern characters period and comma represent those exact characters, with the meanings of decimal point and thousands separator, regardless of locale.
+* The pattern characters `S`, `L`, `D`, and `G` represent the sign, currency symbol, decimal point, and thousands separator characters defined by the current locale (see [lc\_monetary](runtime-config-client#GUC-LC-MONETARY) and [lc\_numeric](runtime-config-client#GUC-LC-NUMERIC)). The pattern characters period and comma represent those exact characters, with the meanings of decimal point and thousands separator, regardless of locale.
 * If no explicit provision is made for a sign in `to_char()`'s pattern, one column will be reserved for the sign, and it will be anchored to (appear just left of) the number. If `S` appears just left of some `9`'s, it will likewise be anchored to the number.
 * A sign formatted using `SG`, `PL`, or `MI` is not anchored to the number; for example, `to_char(-12, 'MI9999')` produces `'-  12'` but `to_char(-12, 'S9999')` produces `'  -12'`. (The Oracle implementation does not allow the use of `MI` before `9`, but rather requires that `9` precede `MI`.)
 * `TH` does not convert values less than zero and does not convert fractional numbers.
@@ -194,7 +194,7 @@ Usage notes for numeric formatting:
 * `V` with `to_char` multiplies the input values by `10^n`, where *`n`* is the number of digits following `V`. `V` with `to_number` divides in a similar manner. `to_char` and `to_number` do not support the use of `V` combined with a decimal point (e.g., `99.9V99` is not allowed).
 * `EEEE` (scientific notation) cannot be used in combination with any of the other formatting patterns or modifiers other than digit and decimal point patterns, and must be at the end of the format string (e.g., `9.99EEEE` is a valid pattern).
 
-Certain modifiers can be applied to any template pattern to alter its behavior. For example, `FM99.99` is the `99.99` pattern with the `FM` modifier. [Table 9.30](functions-formatting.html#FUNCTIONS-FORMATTING-NUMERICMOD-TABLE "Table 9.30. Template Pattern Modifiers for Numeric Formatting") shows the modifier patterns for numeric formatting.
+Certain modifiers can be applied to any template pattern to alter its behavior. For example, `FM99.99` is the `99.99` pattern with the `FM` modifier. [Table 9.30](functions-formatting#FUNCTIONS-FORMATTING-NUMERICMOD-TABLE "Table 9.30. Template Pattern Modifiers for Numeric Formatting") shows the modifier patterns for numeric formatting.
 
 **Table 9.30. Template Pattern Modifiers for Numeric Formatting**
 
@@ -206,7 +206,7 @@ Certain modifiers can be applied to any template pattern to alter its behavior. 
 
 \
 
-[Table 9.31](functions-formatting.html#FUNCTIONS-FORMATTING-EXAMPLES-TABLE "Table 9.31. to_char Examples") shows some examples of the use of the `to_char` function.
+[Table 9.31](functions-formatting#FUNCTIONS-FORMATTING-EXAMPLES-TABLE "Table 9.31. to_char Examples") shows some examples of the use of the `to_char` function.
 
 **Table 9.31. `to_char` Examples**
 

@@ -48,7 +48,7 @@ You must own the procedure to use `ALTER PROCEDURE`. To change a procedure's sch
 
 * *`argtype`*
 
-    The data type(s) of the procedure's arguments (optionally schema-qualified), if any. See [DROP PROCEDURE](sql-dropprocedure.html "DROP PROCEDURE") for the details of how the procedure is looked up using the argument data type(s).
+    The data type(s) of the procedure's arguments (optionally schema-qualified), if any. See [DROP PROCEDURE](sql-dropprocedure "DROP PROCEDURE") for the details of how the procedure is looked up using the argument data type(s).
 
 * *`new_name`*
 
@@ -68,13 +68,13 @@ You must own the procedure to use `ALTER PROCEDURE`. To change a procedure's sch
 
 * `[ EXTERNAL ] SECURITY INVOKER``[ EXTERNAL ] SECURITY DEFINER`
 
-    Change whether the procedure is a security definer or not. The key word `EXTERNAL` is ignored for SQL conformance. See [CREATE PROCEDURE](sql-createprocedure.html "CREATE PROCEDURE") for more information about this capability.
+    Change whether the procedure is a security definer or not. The key word `EXTERNAL` is ignored for SQL conformance. See [CREATE PROCEDURE](sql-createprocedure "CREATE PROCEDURE") for more information about this capability.
 
 * *`configuration_parameter`**`value`*
 
     Add or change the assignment to be made to a configuration parameter when the procedure is called. If *`value`* is `DEFAULT` or, equivalently, `RESET` is used, the procedure-local setting is removed, so that the procedure executes with the value present in its environment. Use `RESET ALL` to clear all procedure-local settings. `SET FROM CURRENT` saves the value of the parameter that is current when `ALTER PROCEDURE` is executed as the value to be applied when the procedure is entered.
 
-    See [SET](sql-set.html "SET") and [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
+    See [SET](sql-set "SET") and [Chapter 20](runtime-config "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
 
 * `RESTRICT`
 
@@ -132,4 +132,4 @@ This statement is partially compatible with the `ALTER PROCEDURE` statement in t
 
 ## See Also
 
-[CREATE PROCEDURE](sql-createprocedure.html "CREATE PROCEDURE"), [DROP PROCEDURE](sql-dropprocedure.html "DROP PROCEDURE"), [ALTER FUNCTION](sql-alterfunction.html "ALTER FUNCTION"), [ALTER ROUTINE](sql-alterroutine.html "ALTER ROUTINE")
+[CREATE PROCEDURE](sql-createprocedure "CREATE PROCEDURE"), [DROP PROCEDURE](sql-dropprocedure "DROP PROCEDURE"), [ALTER FUNCTION](sql-alterfunction "ALTER FUNCTION"), [ALTER ROUTINE](sql-alterroutine "ALTER ROUTINE")

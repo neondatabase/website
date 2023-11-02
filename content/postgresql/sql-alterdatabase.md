@@ -76,17 +76,17 @@ The remaining forms change the session default for a run-time configuration vari
 
 * `REFRESH COLLATION VERSION`
 
-    Update the database collation version. See [Notes](sql-altercollation.html#SQL-ALTERCOLLATION-NOTES "Notes") for background.
+    Update the database collation version. See [Notes](sql-altercollation#SQL-ALTERCOLLATION-NOTES "Notes") for background.
 
 * *`configuration_parameter`**`value`*
 
     Set this database's session default for the specified configuration parameter to the given value. If *`value`* is `DEFAULT` or, equivalently, `RESET` is used, the database-specific setting is removed, so the system-wide default setting will be inherited in new sessions. Use `RESET ALL` to clear all database-specific settings. `SET FROM CURRENT` saves the session's current value of the parameter as the database-specific value.
 
-    See [SET](sql-set.html "SET") and [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
+    See [SET](sql-set "SET") and [Chapter 20](runtime-config "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
 
 ## Notes
 
-It is also possible to tie a session default to a specific role rather than to a database; see [ALTER ROLE](sql-alterrole.html "ALTER ROLE"). Role-specific settings override database-specific ones if there is a conflict.
+It is also possible to tie a session default to a specific role rather than to a database; see [ALTER ROLE](sql-alterrole "ALTER ROLE"). Role-specific settings override database-specific ones if there is a conflict.
 
 ## Examples
 
@@ -103,4 +103,4 @@ The `ALTER DATABASE` statement is a PostgreSQL extension.
 
 ## See Also
 
-[CREATE DATABASE](sql-createdatabase.html "CREATE DATABASE"), [DROP DATABASE](sql-dropdatabase.html "DROP DATABASE"), [SET](sql-set.html "SET"), [CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE")
+[CREATE DATABASE](sql-createdatabase "CREATE DATABASE"), [DROP DATABASE](sql-dropdatabase "DROP DATABASE"), [SET](sql-set "SET"), [CREATE TABLESPACE](sql-createtablespace "CREATE TABLESPACE")

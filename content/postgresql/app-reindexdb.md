@@ -14,7 +14,7 @@ reindexdb — reindex a PostgreSQL database
 
 reindexdb is a utility for rebuilding indexes in a PostgreSQL database.
 
-reindexdb is a wrapper around the SQL command [`REINDEX`](sql-reindex.html "REINDEX"). There is no effective difference between reindexing databases via this utility and via other methods for accessing the server.
+reindexdb is a wrapper around the SQL command [`REINDEX`](sql-reindex "REINDEX"). There is no effective difference between reindexing databases via this utility and via other methods for accessing the server.
 
 ## Options
 
@@ -26,11 +26,11 @@ reindexdb accepts the following command-line arguments:
 
 * `--concurrently`
 
-    Use the `CONCURRENTLY` option. See [REINDEX](sql-reindex.html "REINDEX"), where all the caveats of this option are explained in detail.
+    Use the `CONCURRENTLY` option. See [REINDEX](sql-reindex "REINDEX"), where all the caveats of this option are explained in detail.
 
 * `[-d] dbname``[--dbname=]dbname`
 
-    Specifies the name of the database to be reindexed, when `-a`/`--all` is not used. If this is not specified, the database name is read from the environment variable `PGDATABASE`. If that is not set, the user name specified for the connection is used. The *`dbname`* can be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
+    Specifies the name of the database to be reindexed, when `-a`/`--all` is not used. If this is not specified, the database name is read from the environment variable `PGDATABASE`. If that is not set, the user name specified for the connection is used. The *`dbname`* can be a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
 
 * `-e``--echo`
 
@@ -44,7 +44,7 @@ reindexdb accepts the following command-line arguments:
 
     Execute the reindex commands in parallel by running *`njobs`* commands simultaneously. This option may reduce the processing time but it also increases the load on the database server.
 
-    reindexdb will open *`njobs`* connections to the database, so make sure your [max\_connections](runtime-config-connection.html#GUC-MAX-CONNECTIONS) setting is high enough to accommodate all connections.
+    reindexdb will open *`njobs`* connections to the database, so make sure your [max\_connections](runtime-config-connection#GUC-MAX-CONNECTIONS) setting is high enough to accommodate all connections.
 
     Note that this option is incompatible with the `--index` and `--system` options.
 
@@ -106,7 +106,7 @@ reindexdb also accepts the following command-line arguments for connection param
 
 * `--maintenance-db=dbname`
 
-    Specifies the name of the database to connect to to discover which databases should be reindexed, when `-a`/`--all` is used. If not specified, the `postgres` database will be used, or if that does not exist, `template1` will be used. This can be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options. Also, connection string parameters other than the database name itself will be re-used when connecting to other databases.
+    Specifies the name of the database to connect to to discover which databases should be reindexed, when `-a`/`--all` is used. If not specified, the `postgres` database will be used, or if that does not exist, `template1` will be used. This can be a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options. Also, connection string parameters other than the database name itself will be re-used when connecting to other databases.
 
 ## Environment
 
@@ -118,11 +118,11 @@ reindexdb also accepts the following command-line arguments for connection param
 
     Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 
-This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 ## Diagnostics
 
-In case of difficulty, see [REINDEX](sql-reindex.html "REINDEX") and [psql](app-psql.html "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
+In case of difficulty, see [REINDEX](sql-reindex "REINDEX") and [psql](app-psql "psql") for discussions of potential problems and error messages. The database server must be running at the targeted host. Also, any default connection settings and environment variables used by the libpq front-end library will apply.
 
 ## Examples
 
@@ -142,4 +142,4 @@ reindexdb --table=foo --index=bar abcd
 
 ## See Also
 
-[REINDEX](sql-reindex.html "REINDEX")
+[REINDEX](sql-reindex "REINDEX")

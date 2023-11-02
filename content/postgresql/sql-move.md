@@ -30,7 +30,7 @@ where direction can be one of:
 
 `MOVE` repositions a cursor without retrieving any data. `MOVE` works exactly like the `FETCH` command, except it only positions the cursor and does not return rows.
 
-The parameters for the `MOVE` command are identical to those of the `FETCH` command; refer to [FETCH](sql-fetch.html "FETCH") for details on syntax and usage.
+The parameters for the `MOVE` command are identical to those of the `FETCH` command; refer to [FETCH](sql-fetch "FETCH") for details on syntax and usage.
 
 ## Outputs
 
@@ -72,4 +72,4 @@ There is no `MOVE` statement in the SQL standard.
 
 ## See Also
 
-[CLOSE](sql-close.html "CLOSE"), [DECLARE](sql-declare.html "DECLARE"), [FETCH](sql-fetch.html "FETCH")
+[CLOSE](sql-close "CLOSE"), [DECLARE](sql-declare "DECLARE"), [FETCH](sql-fetch "FETCH")

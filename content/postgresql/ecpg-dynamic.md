@@ -1,8 +1,8 @@
 ## 36.5. Dynamic SQL [#](#ECPG-DYNAMIC)
 
-  * *   [36.5.1. Executing Statements without a Result Set](ecpg-dynamic.html#ECPG-DYNAMIC-WITHOUT-RESULT)
-  * [36.5.2. Executing a Statement with Input Parameters](ecpg-dynamic.html#ECPG-DYNAMIC-INPUT)
-  * [36.5.3. Executing a Statement with a Result Set](ecpg-dynamic.html#ECPG-DYNAMIC-WITH-RESULT)
+  * *   [36.5.1. Executing Statements without a Result Set](ecpg-dynamic#ECPG-DYNAMIC-WITHOUT-RESULT)
+  * [36.5.2. Executing a Statement with Input Parameters](ecpg-dynamic#ECPG-DYNAMIC-INPUT)
+  * [36.5.3. Executing a Statement with a Result Set](ecpg-dynamic#ECPG-DYNAMIC-WITH-RESULT)
 
 In many cases, the particular SQL statements that an application has to execute are known at the time the application is written. In some cases, however, the SQL statements are composed at run time or provided by an external source. In these cases you cannot embed the SQL statements directly into the C source code, but there is a facility that allows you to call arbitrary SQL statements that you provide in a string variable.
 
@@ -62,7 +62,7 @@ EXEC SQL EXECUTE mystmt INTO :v1, :v2, :v3 USING 37;
 
 An `EXECUTE` command can have an `INTO` clause, a `USING` clause, both, or neither.
 
-If a query is expected to return more than one result row, a cursor should be used, as in the following example. (See [Section 36.3.2](ecpg-commands.html#ECPG-CURSORS "36.3.2. Using Cursors") for more details about the cursor.)
+If a query is expected to return more than one result row, a cursor should be used, as in the following example. (See [Section 36.3.2](ecpg-commands#ECPG-CURSORS "36.3.2. Using Cursors") for more details about the cursor.)
 
 ```
 

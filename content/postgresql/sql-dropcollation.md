@@ -25,7 +25,7 @@ DROP COLLATION [ IF EXISTS ] name [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the collation, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the collation, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -46,4 +46,4 @@ The `DROP COLLATION` command conforms to the SQL standard, apart from the `IF EX
 
 ## See Also
 
-[ALTER COLLATION](sql-altercollation.html "ALTER COLLATION"), [CREATE COLLATION](sql-createcollation.html "CREATE COLLATION")
+[ALTER COLLATION](sql-altercollation "ALTER COLLATION"), [CREATE COLLATION](sql-createcollation "CREATE COLLATION")

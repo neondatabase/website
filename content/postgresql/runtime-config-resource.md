@@ -1,11 +1,11 @@
 ## 20.4. Resource Consumption [#](#RUNTIME-CONFIG-RESOURCE)
 
-  * *   [20.4.1. Memory](runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-MEMORY)
-  * [20.4.2. Disk](runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-DISK)
-  * [20.4.3. Kernel Resource Usage](runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-KERNEL)
-  * [20.4.4. Cost-based Vacuum Delay](runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-VACUUM-COST)
-  * [20.4.5. Background Writer](runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-BACKGROUND-WRITER)
-  * [20.4.6. Asynchronous Behavior](runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-ASYNC-BEHAVIOR)
+  * *   [20.4.1. Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
+  * [20.4.2. Disk](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-DISK)
+  * [20.4.3. Kernel Resource Usage](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-KERNEL)
+  * [20.4.4. Cost-based Vacuum Delay](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-VACUUM-COST)
+  * [20.4.5. Background Writer](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-BACKGROUND-WRITER)
+  * [20.4.6. Asynchronous Behavior](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-ASYNC-BEHAVIOR)
 
 ### 20.4.1. Memory [#](#RUNTIME-CONFIG-RESOURCE-MEMORY)
 
@@ -19,11 +19,11 @@
 
 * `huge_pages` (`enum`) [#](#GUC-HUGE-PAGES)
 
-    Controls whether huge pages are requested for the main shared memory area. Valid values are `try` (the default), `on`, and `off`. With `huge_pages` set to `try`, the server will try to request huge pages, but fall back to the default if that fails. With `on`, failure to request huge pages will prevent the server from starting up. With `off`, huge pages will not be requested. The actual state of huge pages is indicated by the server variable [huge\_pages\_status](runtime-config-preset.html#GUC-HUGE-PAGES-STATUS).
+    Controls whether huge pages are requested for the main shared memory area. Valid values are `try` (the default), `on`, and `off`. With `huge_pages` set to `try`, the server will try to request huge pages, but fall back to the default if that fails. With `on`, failure to request huge pages will prevent the server from starting up. With `off`, huge pages will not be requested. The actual state of huge pages is indicated by the server variable [huge\_pages\_status](runtime-config-preset#GUC-HUGE-PAGES-STATUS).
 
     At present, this setting is supported only on Linux and Windows. The setting is ignored on other systems when set to `try`. On Linux, it is only supported when `shared_memory_type` is set to `mmap` (the default).
 
-    The use of huge pages results in smaller page tables and less CPU time spent on memory management, increasing performance. For more details about using huge pages on Linux, see [Section 19.4.5](kernel-resources.html#LINUX-HUGE-PAGES "19.4.5. Linux Huge Pages").
+    The use of huge pages results in smaller page tables and less CPU time spent on memory management, increasing performance. For more details about using huge pages on Linux, see [Section 19.4.5](kernel-resources#LINUX-HUGE-PAGES "19.4.5. Linux Huge Pages").
 
     Huge pages are known as large pages on Windows. To use them, you need to assign the user right “Lock pages in memory” to the Windows user account that runs PostgreSQL. You can use Windows Group Policy tool (gpedit.msc) to assign the user right “Lock pages in memory”. To start the database server on the command prompt as a standalone process, not as a Windows service, the command prompt must be run as an administrator or User Access Control (UAC) must be disabled. When the UAC is enabled, the normal command prompt revokes the user right “Lock pages in memory” when started.
 
@@ -31,9 +31,9 @@
 
 * `huge_page_size` (`integer`) [#](#GUC-HUGE-PAGE-SIZE)
 
-    Controls the size of huge pages, when they are enabled with [huge\_pages](runtime-config-resource.html#GUC-HUGE-PAGES). The default is zero (`0`). When set to `0`, the default huge page size on the system will be used. This parameter can only be set at server start.
+    Controls the size of huge pages, when they are enabled with [huge\_pages](runtime-config-resource#GUC-HUGE-PAGES). The default is zero (`0`). When set to `0`, the default huge page size on the system will be used. This parameter can only be set at server start.
 
-    Some commonly available page sizes on modern 64 bit server architectures include: `2MB` and `1GB` (Intel and AMD), `16MB` and `16GB` (IBM POWER), and `64kB`, `2MB`, `32MB` and `1GB` (ARM). For more information about usage and support, see [Section 19.4.5](kernel-resources.html#LINUX-HUGE-PAGES "19.4.5. Linux Huge Pages").
+    Some commonly available page sizes on modern 64 bit server architectures include: `2MB` and `1GB` (Intel and AMD), `16MB` and `16GB` (IBM POWER), and `64kB`, `2MB`, `32MB` and `1GB` (ARM). For more information about usage and support, see [Section 19.4.5](kernel-resources#LINUX-HUGE-PAGES "19.4.5. Linux Huge Pages").
 
     Non-default settings are currently supported only on Linux.
 
@@ -45,9 +45,9 @@
 
 * `max_prepared_transactions` (`integer`) [#](#GUC-MAX-PREPARED-TRANSACTIONS)
 
-    Sets the maximum number of transactions that can be in the “prepared” state simultaneously (see [PREPARE TRANSACTION](sql-prepare-transaction.html "PREPARE TRANSACTION")). Setting this parameter to zero (which is the default) disables the prepared-transaction feature. This parameter can only be set at server start.
+    Sets the maximum number of transactions that can be in the “prepared” state simultaneously (see [PREPARE TRANSACTION](sql-prepare-transaction "PREPARE TRANSACTION")). Setting this parameter to zero (which is the default) disables the prepared-transaction feature. This parameter can only be set at server start.
 
-    If you are not planning to use prepared transactions, this parameter should be set to zero to prevent accidental creation of prepared transactions. If you are using prepared transactions, you will probably want `max_prepared_transactions` to be at least as large as [max\_connections](runtime-config-connection.html#GUC-MAX-CONNECTIONS), so that every session can have a prepared transaction pending.
+    If you are not planning to use prepared transactions, this parameter should be set to zero to prevent accidental creation of prepared transactions. If you are using prepared transactions, you will probably want `max_prepared_transactions` to be at least as large as [max\_connections](runtime-config-connection#GUC-MAX-CONNECTIONS), so that every session can have a prepared transaction pending.
 
     When running a standby server, you must set this parameter to the same or higher value than on the primary server. Otherwise, queries will not be allowed in the standby server.
 
@@ -67,19 +67,19 @@
 
     Specifies the maximum amount of memory to be used by maintenance operations, such as `VACUUM`, `CREATE INDEX`, and `ALTER TABLE ADD FOREIGN KEY`. If this value is specified without units, it is taken as kilobytes. It defaults to 64 megabytes (`64MB`). Since only one of these operations can be executed at a time by a database session, and an installation normally doesn't have many of them running concurrently, it's safe to set this value significantly larger than `work_mem`. Larger settings might improve performance for vacuuming and for restoring database dumps.
 
-    Note that when autovacuum runs, up to [autovacuum\_max\_workers](runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS) times this memory may be allocated, so be careful not to set the default value too high. It may be useful to control for this by separately setting [autovacuum\_work\_mem](runtime-config-resource.html#GUC-AUTOVACUUM-WORK-MEM).
+    Note that when autovacuum runs, up to [autovacuum\_max\_workers](runtime-config-autovacuum#GUC-AUTOVACUUM-MAX-WORKERS) times this memory may be allocated, so be careful not to set the default value too high. It may be useful to control for this by separately setting [autovacuum\_work\_mem](runtime-config-resource#GUC-AUTOVACUUM-WORK-MEM).
 
     Note that for the collection of dead tuple identifiers, `VACUUM` is only able to utilize up to a maximum of `1GB` of memory.
 
 * `autovacuum_work_mem` (`integer`) [#](#GUC-AUTOVACUUM-WORK-MEM)
 
-    Specifies the maximum amount of memory to be used by each autovacuum worker process. If this value is specified without units, it is taken as kilobytes. It defaults to -1, indicating that the value of [maintenance\_work\_mem](runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) should be used instead. The setting has no effect on the behavior of `VACUUM` when run in other contexts. This parameter can only be set in the `postgresql.conf` file or on the server command line.
+    Specifies the maximum amount of memory to be used by each autovacuum worker process. If this value is specified without units, it is taken as kilobytes. It defaults to -1, indicating that the value of [maintenance\_work\_mem](runtime-config-resource#GUC-MAINTENANCE-WORK-MEM) should be used instead. The setting has no effect on the behavior of `VACUUM` when run in other contexts. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
     For the collection of dead tuple identifiers, autovacuum is only able to utilize up to a maximum of `1GB` of memory, so setting `autovacuum_work_mem` to a value higher than that has no effect on the number of dead tuples that autovacuum can collect while scanning a table.
 
 * `vacuum_buffer_usage_limit` (`integer`) [#](#GUC-VACUUM-BUFFER-USAGE-LIMIT)
 
-    Specifies the size of the [**](glossary.html#GLOSSARY-BUFFER-ACCESS-STRATEGY)*[Buffer Access Strategy](glossary.html#GLOSSARY-BUFFER-ACCESS-STRATEGY "Buffer Access Strategy")* used by the `VACUUM` and `ANALYZE` commands. A setting of `0` will allow the operation to use any number of `shared_buffers`. Otherwise valid sizes range from `128 kB` to `16 GB`. If the specified size would exceed 1/8 the size of `shared_buffers`, the size is silently capped to that value. The default value is `256 kB`. If this value is specified without units, it is taken as kilobytes. This parameter can be set at any time. It can be overridden for [VACUUM](sql-vacuum.html "VACUUM") and [ANALYZE](sql-analyze.html "ANALYZE") when passing the `BUFFER_USAGE_LIMIT` option. Higher settings can allow `VACUUM` and `ANALYZE` to run more quickly, but having too large a setting may cause too many other useful pages to be evicted from shared buffers.
+    Specifies the size of the [**](glossary#GLOSSARY-BUFFER-ACCESS-STRATEGY)*[Buffer Access Strategy](glossary#GLOSSARY-BUFFER-ACCESS-STRATEGY "Buffer Access Strategy")* used by the `VACUUM` and `ANALYZE` commands. A setting of `0` will allow the operation to use any number of `shared_buffers`. Otherwise valid sizes range from `128 kB` to `16 GB`. If the specified size would exceed 1/8 the size of `shared_buffers`, the size is silently capped to that value. The default value is `256 kB`. If this value is specified without units, it is taken as kilobytes. This parameter can be set at any time. It can be overridden for [VACUUM](sql-vacuum "VACUUM") and [ANALYZE](sql-analyze "ANALYZE") when passing the `BUFFER_USAGE_LIMIT` option. Higher settings can allow `VACUUM` and `ANALYZE` to run more quickly, but having too large a setting may cause too many other useful pages to be evicted from shared buffers.
 
 * `logical_decoding_work_mem` (`integer`) [#](#GUC-LOGICAL-DECODING-WORK-MEM)
 
@@ -93,7 +93,7 @@
 
 * `shared_memory_type` (`enum`) [#](#GUC-SHARED-MEMORY-TYPE)
 
-    Specifies the shared memory implementation that the server should use for the main shared memory region that holds PostgreSQL's shared buffers and other shared data. Possible values are `mmap` (for anonymous shared memory allocated using `mmap`), `sysv` (for System V shared memory allocated via `shmget`) and `windows` (for Windows shared memory). Not all values are supported on all platforms; the first supported option is the default for that platform. The use of the `sysv` option, which is not the default on any platform, is generally discouraged because it typically requires non-default kernel settings to allow for large allocations (see [Section 19.4.1](kernel-resources.html#SYSVIPC "19.4.1. Shared Memory and Semaphores")).
+    Specifies the shared memory implementation that the server should use for the main shared memory region that holds PostgreSQL's shared buffers and other shared data. Possible values are `mmap` (for anonymous shared memory allocated using `mmap`), `sysv` (for System V shared memory allocated via `shmget`) and `windows` (for Windows shared memory). Not all values are supported on all platforms; the first supported option is the default for that platform. The use of the `sysv` option, which is not the default on any platform, is generally discouraged because it typically requires non-default kernel settings to allow for large allocations (see [Section 19.4.1](kernel-resources#SYSVIPC "19.4.1. Shared Memory and Semaphores")).
 
 * `dynamic_shared_memory_type` (`enum`) [#](#GUC-DYNAMIC-SHARED-MEMORY-TYPE)
 
@@ -119,7 +119,7 @@
 
 ### 20.4.4. Cost-based Vacuum Delay [#](#RUNTIME-CONFIG-RESOURCE-VACUUM-COST)
 
-During the execution of [VACUUM](sql-vacuum.html "VACUUM") and [ANALYZE](sql-analyze.html "ANALYZE") commands, the system maintains an internal counter that keeps track of the estimated cost of the various I/O operations that are performed. When the accumulated cost reaches a limit (specified by `vacuum_cost_limit`), the process performing the operation will sleep for a short period of time, as specified by `vacuum_cost_delay`. Then it will reset the counter and continue execution.
+During the execution of [VACUUM](sql-vacuum "VACUUM") and [ANALYZE](sql-analyze "ANALYZE") commands, the system maintains an internal counter that keeps track of the estimated cost of the various I/O operations that are performed. When the accumulated cost reaches a limit (specified by `vacuum_cost_limit`), the process performing the operation will sleep for a short period of time, as specified by `vacuum_cost_delay`. Then it will reset the counter and continue execution.
 
 The intent of this feature is to allow administrators to reduce the I/O impact of these commands on concurrent database activity. There are many situations where it is not important that maintenance commands like `VACUUM` and `ANALYZE` finish quickly; however, it is usually very important that these commands do not significantly interfere with the ability of the system to perform other database operations. Cost-based vacuum delay provides a way for administrators to achieve this.
 
@@ -169,7 +169,7 @@ There is a separate server process called the *background writer*, whose functio
 
 * `bgwriter_flush_after` (`integer`) [#](#GUC-BGWRITER-FLUSH-AFTER)
 
-    Whenever more than this amount of data has been written by the background writer, attempt to force the OS to issue these writes to the underlying storage. Doing so will limit the amount of dirty data in the kernel's page cache, reducing the likelihood of stalls when an `fsync` is issued at the end of a checkpoint, or when the OS writes data back in larger batches in the background. Often that will result in greatly reduced transaction latency, but there also are some cases, especially with workloads that are bigger than [shared\_buffers](runtime-config-resource.html#GUC-SHARED-BUFFERS), but smaller than the OS's page cache, where performance might degrade. This setting may have no effect on some platforms. If this value is specified without units, it is taken as blocks, that is `BLCKSZ` bytes, typically 8kB. The valid range is between `0`, which disables forced writeback, and `2MB`. The default is `512kB` on Linux, `0` elsewhere. (If `BLCKSZ` is not 8kB, the default and maximum values scale proportionally to it.) This parameter can only be set in the `postgresql.conf` file or on the server command line.
+    Whenever more than this amount of data has been written by the background writer, attempt to force the OS to issue these writes to the underlying storage. Doing so will limit the amount of dirty data in the kernel's page cache, reducing the likelihood of stalls when an `fsync` is issued at the end of a checkpoint, or when the OS writes data back in larger batches in the background. Often that will result in greatly reduced transaction latency, but there also are some cases, especially with workloads that are bigger than [shared\_buffers](runtime-config-resource#GUC-SHARED-BUFFERS), but smaller than the OS's page cache, where performance might degrade. This setting may have no effect on some platforms. If this value is specified without units, it is taken as blocks, that is `BLCKSZ` bytes, typically 8kB. The valid range is between `0`, which disables forced writeback, and `2MB`. The default is `512kB` on Linux, `0` elsewhere. (If `BLCKSZ` is not 8kB, the default and maximum values scale proportionally to it.) This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
 Smaller values of `bgwriter_lru_maxpages` and `bgwriter_lru_multiplier` reduce the extra I/O load caused by the background writer, but make it more likely that server processes will have to issue writes for themselves, delaying interactive queries.
 
@@ -177,7 +177,7 @@ Smaller values of `bgwriter_lru_maxpages` and `bgwriter_lru_multiplier` reduce t
 
 * `backend_flush_after` (`integer`) [#](#GUC-BACKEND-FLUSH-AFTER)
 
-    Whenever more than this amount of data has been written by a single backend, attempt to force the OS to issue these writes to the underlying storage. Doing so will limit the amount of dirty data in the kernel's page cache, reducing the likelihood of stalls when an `fsync` is issued at the end of a checkpoint, or when the OS writes data back in larger batches in the background. Often that will result in greatly reduced transaction latency, but there also are some cases, especially with workloads that are bigger than [shared\_buffers](runtime-config-resource.html#GUC-SHARED-BUFFERS), but smaller than the OS's page cache, where performance might degrade. This setting may have no effect on some platforms. If this value is specified without units, it is taken as blocks, that is `BLCKSZ` bytes, typically 8kB. The valid range is between `0`, which disables forced writeback, and `2MB`. The default is `0`, i.e., no forced writeback. (If `BLCKSZ` is not 8kB, the maximum value scales proportionally to it.)
+    Whenever more than this amount of data has been written by a single backend, attempt to force the OS to issue these writes to the underlying storage. Doing so will limit the amount of dirty data in the kernel's page cache, reducing the likelihood of stalls when an `fsync` is issued at the end of a checkpoint, or when the OS writes data back in larger batches in the background. Often that will result in greatly reduced transaction latency, but there also are some cases, especially with workloads that are bigger than [shared\_buffers](runtime-config-resource#GUC-SHARED-BUFFERS), but smaller than the OS's page cache, where performance might degrade. This setting may have no effect on some platforms. If this value is specified without units, it is taken as blocks, that is `BLCKSZ` bytes, typically 8kB. The valid range is between `0`, which disables forced writeback, and `2MB`. The default is `0`, i.e., no forced writeback. (If `BLCKSZ` is not 8kB, the maximum value scales proportionally to it.)
 
 * `effective_io_concurrency` (`integer`) [#](#GUC-EFFECTIVE-IO-CONCURRENCY)
 
@@ -187,13 +187,13 @@ Smaller values of `bgwriter_lru_maxpages` and `bgwriter_lru_multiplier` reduce t
 
     Asynchronous I/O depends on an effective `posix_fadvise` function, which some operating systems lack. If the function is not present then setting this parameter to anything but zero will result in an error. On some operating systems (e.g., Solaris), the function is present but does not actually do anything.
 
-    The default is 1 on supported systems, otherwise 0. This value can be overridden for tables in a particular tablespace by setting the tablespace parameter of the same name (see [ALTER TABLESPACE](sql-altertablespace.html "ALTER TABLESPACE")).
+    The default is 1 on supported systems, otherwise 0. This value can be overridden for tables in a particular tablespace by setting the tablespace parameter of the same name (see [ALTER TABLESPACE](sql-altertablespace "ALTER TABLESPACE")).
 
 * `maintenance_io_concurrency` (`integer`) [#](#GUC-MAINTENANCE-IO-CONCURRENCY)
 
     Similar to `effective_io_concurrency`, but used for maintenance work that is done on behalf of many client sessions.
 
-    The default is 10 on supported systems, otherwise 0. This value can be overridden for tables in a particular tablespace by setting the tablespace parameter of the same name (see [ALTER TABLESPACE](sql-altertablespace.html "ALTER TABLESPACE")).
+    The default is 10 on supported systems, otherwise 0. This value can be overridden for tables in a particular tablespace by setting the tablespace parameter of the same name (see [ALTER TABLESPACE](sql-altertablespace "ALTER TABLESPACE")).
 
 * `max_worker_processes` (`integer`) [#](#GUC-MAX-WORKER-PROCESSES)
 
@@ -201,25 +201,25 @@ Smaller values of `bgwriter_lru_maxpages` and `bgwriter_lru_multiplier` reduce t
 
     When running a standby server, you must set this parameter to the same or higher value than on the primary server. Otherwise, queries will not be allowed in the standby server.
 
-    When changing this value, consider also adjusting [max\_parallel\_workers](runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS), [max\_parallel\_maintenance\_workers](runtime-config-resource.html#GUC-MAX-PARALLEL-MAINTENANCE-WORKERS), and [max\_parallel\_workers\_per\_gather](runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS-PER-GATHER).
+    When changing this value, consider also adjusting [max\_parallel\_workers](runtime-config-resource#GUC-MAX-PARALLEL-WORKERS), [max\_parallel\_maintenance\_workers](runtime-config-resource#GUC-MAX-PARALLEL-MAINTENANCE-WORKERS), and [max\_parallel\_workers\_per\_gather](runtime-config-resource#GUC-MAX-PARALLEL-WORKERS-PER-GATHER).
 
 * `max_parallel_workers_per_gather` (`integer`) [#](#GUC-MAX-PARALLEL-WORKERS-PER-GATHER)
 
-    Sets the maximum number of workers that can be started by a single `Gather` or `Gather Merge` node. Parallel workers are taken from the pool of processes established by [max\_worker\_processes](runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES), limited by [max\_parallel\_workers](runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS). Note that the requested number of workers may not actually be available at run time. If this occurs, the plan will run with fewer workers than expected, which may be inefficient. The default value is 2. Setting this value to 0 disables parallel query execution.
+    Sets the maximum number of workers that can be started by a single `Gather` or `Gather Merge` node. Parallel workers are taken from the pool of processes established by [max\_worker\_processes](runtime-config-resource#GUC-MAX-WORKER-PROCESSES), limited by [max\_parallel\_workers](runtime-config-resource#GUC-MAX-PARALLEL-WORKERS). Note that the requested number of workers may not actually be available at run time. If this occurs, the plan will run with fewer workers than expected, which may be inefficient. The default value is 2. Setting this value to 0 disables parallel query execution.
 
-    Note that parallel queries may consume very substantially more resources than non-parallel queries, because each worker process is a completely separate process which has roughly the same impact on the system as an additional user session. This should be taken into account when choosing a value for this setting, as well as when configuring other settings that control resource utilization, such as [work\_mem](runtime-config-resource.html#GUC-WORK-MEM). Resource limits such as `work_mem` are applied individually to each worker, which means the total utilization may be much higher across all processes than it would normally be for any single process. For example, a parallel query using 4 workers may use up to 5 times as much CPU time, memory, I/O bandwidth, and so forth as a query which uses no workers at all.
+    Note that parallel queries may consume very substantially more resources than non-parallel queries, because each worker process is a completely separate process which has roughly the same impact on the system as an additional user session. This should be taken into account when choosing a value for this setting, as well as when configuring other settings that control resource utilization, such as [work\_mem](runtime-config-resource#GUC-WORK-MEM). Resource limits such as `work_mem` are applied individually to each worker, which means the total utilization may be much higher across all processes than it would normally be for any single process. For example, a parallel query using 4 workers may use up to 5 times as much CPU time, memory, I/O bandwidth, and so forth as a query which uses no workers at all.
 
-    For more information on parallel query, see [Chapter 15](parallel-query.html "Chapter 15. Parallel Query").
+    For more information on parallel query, see [Chapter 15](parallel-query "Chapter 15. Parallel Query").
 
 * `max_parallel_maintenance_workers` (`integer`) [#](#GUC-MAX-PARALLEL-MAINTENANCE-WORKERS)
 
-    Sets the maximum number of parallel workers that can be started by a single utility command. Currently, the parallel utility commands that support the use of parallel workers are `CREATE INDEX` only when building a B-tree index, and `VACUUM` without `FULL` option. Parallel workers are taken from the pool of processes established by [max\_worker\_processes](runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES), limited by [max\_parallel\_workers](runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS). Note that the requested number of workers may not actually be available at run time. If this occurs, the utility operation will run with fewer workers than expected. The default value is 2. Setting this value to 0 disables the use of parallel workers by utility commands.
+    Sets the maximum number of parallel workers that can be started by a single utility command. Currently, the parallel utility commands that support the use of parallel workers are `CREATE INDEX` only when building a B-tree index, and `VACUUM` without `FULL` option. Parallel workers are taken from the pool of processes established by [max\_worker\_processes](runtime-config-resource#GUC-MAX-WORKER-PROCESSES), limited by [max\_parallel\_workers](runtime-config-resource#GUC-MAX-PARALLEL-WORKERS). Note that the requested number of workers may not actually be available at run time. If this occurs, the utility operation will run with fewer workers than expected. The default value is 2. Setting this value to 0 disables the use of parallel workers by utility commands.
 
     Note that parallel utility commands should not consume substantially more memory than equivalent non-parallel operations. This strategy differs from that of parallel query, where resource limits generally apply per worker process. Parallel utility commands treat the resource limit `maintenance_work_mem` as a limit to be applied to the entire utility command, regardless of the number of parallel worker processes. However, parallel utility commands may still consume substantially more CPU resources and I/O bandwidth.
 
 * `max_parallel_workers` (`integer`) [#](#GUC-MAX-PARALLEL-WORKERS)
 
-    Sets the maximum number of workers that the system can support for parallel operations. The default value is 8. When increasing or decreasing this value, consider also adjusting [max\_parallel\_maintenance\_workers](runtime-config-resource.html#GUC-MAX-PARALLEL-MAINTENANCE-WORKERS) and [max\_parallel\_workers\_per\_gather](runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS-PER-GATHER). Also, note that a setting for this value which is higher than [max\_worker\_processes](runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES) will have no effect, since parallel workers are taken from the pool of worker processes established by that setting.
+    Sets the maximum number of workers that the system can support for parallel operations. The default value is 8. When increasing or decreasing this value, consider also adjusting [max\_parallel\_maintenance\_workers](runtime-config-resource#GUC-MAX-PARALLEL-MAINTENANCE-WORKERS) and [max\_parallel\_workers\_per\_gather](runtime-config-resource#GUC-MAX-PARALLEL-WORKERS-PER-GATHER). Also, note that a setting for this value which is higher than [max\_worker\_processes](runtime-config-resource#GUC-MAX-WORKER-PROCESSES) will have no effect, since parallel workers are taken from the pool of worker processes established by that setting.
 
 * `parallel_leader_participation` (`boolean`) [#](#GUC-PARALLEL-LEADER-PARTICIPATION)
 

@@ -2,7 +2,7 @@
 
 **Table of Contents**
 
-* [60.1. Sampling Method Support Functions](tablesample-support-functions.html)
+* [60.1. Sampling Method Support Functions](tablesample-support-functions)
 
 PostgreSQL's implementation of the `TABLESAMPLE` clause supports custom table sampling methods, in addition to the `BERNOULLI` and `SYSTEM` methods that are required by the SQL standard. The sampling method determines which rows of the table will be selected when the `TABLESAMPLE` clause is used.
 
@@ -13,7 +13,7 @@ At the SQL level, a table sampling method is represented by a single SQL functio
 method_name(internal) RETURNS tsm_handler
 ```
 
-The name of the function is the same method name appearing in the `TABLESAMPLE` clause. The `internal` argument is a dummy (always having value zero) that simply serves to prevent this function from being called directly from an SQL command. The result of the function must be a palloc'd struct of type `TsmRoutine`, which contains pointers to support functions for the sampling method. These support functions are plain C functions and are not visible or callable at the SQL level. The support functions are described in [Section 60.1](tablesample-support-functions.html "60.1. Sampling Method Support Functions").
+The name of the function is the same method name appearing in the `TABLESAMPLE` clause. The `internal` argument is a dummy (always having value zero) that simply serves to prevent this function from being called directly from an SQL command. The result of the function must be a palloc'd struct of type `TsmRoutine`, which contains pointers to support functions for the sampling method. These support functions are plain C functions and are not visible or callable at the SQL level. The support functions are described in [Section 60.1](tablesample-support-functions "60.1. Sampling Method Support Functions").
 
 In addition to function pointers, the `TsmRoutine` struct must provide these additional fields:
 

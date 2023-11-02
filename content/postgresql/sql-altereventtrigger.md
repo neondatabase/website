@@ -34,7 +34,7 @@ You must be superuser to alter an event trigger.
 
 * `DISABLE`/`ENABLE [ REPLICA | ALWAYS ] TRIGGER`
 
-    These forms configure the firing of event triggers. A disabled trigger is still known to the system, but is not executed when its triggering event occurs. See also [session\_replication\_role](runtime-config-client.html#GUC-SESSION-REPLICATION-ROLE).
+    These forms configure the firing of event triggers. A disabled trigger is still known to the system, but is not executed when its triggering event occurs. See also [session\_replication\_role](runtime-config-client#GUC-SESSION-REPLICATION-ROLE).
 
 ## Compatibility
 
@@ -42,4 +42,4 @@ There is no `ALTER EVENT TRIGGER` statement in the SQL standard.
 
 ## See Also
 
-[CREATE EVENT TRIGGER](sql-createeventtrigger.html "CREATE EVENT TRIGGER"), [DROP EVENT TRIGGER](sql-dropeventtrigger.html "DROP EVENT TRIGGER")
+[CREATE EVENT TRIGGER](sql-createeventtrigger "CREATE EVENT TRIGGER"), [DROP EVENT TRIGGER](sql-dropeventtrigger "DROP EVENT TRIGGER")

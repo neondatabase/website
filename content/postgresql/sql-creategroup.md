@@ -30,7 +30,7 @@ where option can be:
 
 ## Description
 
-`CREATE GROUP` is now an alias for [CREATE ROLE](sql-createrole.html "CREATE ROLE").
+`CREATE GROUP` is now an alias for [CREATE ROLE](sql-createrole "CREATE ROLE").
 
 ## Compatibility
 
@@ -38,4 +38,4 @@ There is no `CREATE GROUP` statement in the SQL standard.
 
 ## See Also
 
-[CREATE ROLE](sql-createrole.html "CREATE ROLE")
+[CREATE ROLE](sql-createrole "CREATE ROLE")

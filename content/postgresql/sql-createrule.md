@@ -19,7 +19,7 @@ where event can be one of:
 
 `CREATE RULE` defines a new rule applying to a specified table or view. `CREATE OR REPLACE RULE` will either create a new rule, or replace an existing rule of the same name for the same table.
 
-The PostgreSQL rule system allows one to define an alternative action to be performed on insertions, updates, or deletions in database tables. Roughly speaking, a rule causes additional commands to be executed when a given command on a given table is executed. Alternatively, an `INSTEAD` rule can replace a given command by another, or cause a command not to be executed at all. Rules are used to implement SQL views as well. It is important to realize that a rule is really a command transformation mechanism, or command macro. The transformation happens before the execution of the command starts. If you actually want an operation that fires independently for each physical row, you probably want to use a trigger, not a rule. More information about the rules system is in [Chapter 41](rules.html "Chapter 41. The Rule System").
+The PostgreSQL rule system allows one to define an alternative action to be performed on insertions, updates, or deletions in database tables. Roughly speaking, a rule causes additional commands to be executed when a given command on a given table is executed. Alternatively, an `INSTEAD` rule can replace a given command by another, or cause a command not to be executed at all. Rules are used to implement SQL views as well. It is important to realize that a rule is really a command transformation mechanism, or command macro. The transformation happens before the execution of the command starts. If you actually want an operation that fires independently for each physical row, you probably want to use a trigger, not a rule. More information about the rules system is in [Chapter 41](rules "Chapter 41. The Rule System").
 
 Presently, `ON SELECT` rules must be unconditional `INSTEAD` rules and must have actions that consist of a single `SELECT` command. Thus, an `ON SELECT` rule effectively turns the table into a view, whose visible contents are the rows returned by the rule's `SELECT` command rather than whatever had been stored in the table (if anything). It is considered better style to write a `CREATE VIEW` command than to create a real table and define an `ON SELECT` rule for it.
 
@@ -29,9 +29,9 @@ There is a catch if you try to use conditional rules for complex view updates: t
 
 ### Note
 
-A view that is simple enough to be automatically updatable (see [CREATE VIEW](sql-createview.html "CREATE VIEW")) does not require a user-created rule in order to be updatable. While you can create an explicit rule anyway, the automatic update transformation will generally outperform an explicit rule.
+A view that is simple enough to be automatically updatable (see [CREATE VIEW](sql-createview "CREATE VIEW")) does not require a user-created rule in order to be updatable. While you can create an explicit rule anyway, the automatic update transformation will generally outperform an explicit rule.
 
-Another alternative worth considering is to use `INSTEAD OF` triggers (see [CREATE TRIGGER](sql-createtrigger.html "CREATE TRIGGER")) in place of rules.
+Another alternative worth considering is to use `INSTEAD OF` triggers (see [CREATE TRIGGER](sql-createtrigger "CREATE TRIGGER")) in place of rules.
 
 ## Parameters
 
@@ -107,4 +107,4 @@ one `NOTIFY` event will be sent during the `UPDATE`, whether or not there are an
 
 ## See Also
 
-[ALTER RULE](sql-alterrule.html "ALTER RULE"), [DROP RULE](sql-droprule.html "DROP RULE")
+[ALTER RULE](sql-alterrule "ALTER RULE"), [DROP RULE](sql-droprule "DROP RULE")

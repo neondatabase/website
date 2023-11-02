@@ -2,27 +2,27 @@
 
 **Table of Contents**
 
-  * *   [21.1. The `pg_hba.conf` File](auth-pg-hba-conf.html)
-  * [21.2. User Name Maps](auth-username-maps.html)
-  * [21.3. Authentication Methods](auth-methods.html)
-  * [21.4. Trust Authentication](auth-trust.html)
-  * [21.5. Password Authentication](auth-password.html)
-  * [21.6. GSSAPI Authentication](gssapi-auth.html)
-  * [21.7. SSPI Authentication](sspi-auth.html)
-  * [21.8. Ident Authentication](auth-ident.html)
-  * [21.9. Peer Authentication](auth-peer.html)
-  * [21.10. LDAP Authentication](auth-ldap.html)
-  * [21.11. RADIUS Authentication](auth-radius.html)
-  * [21.12. Certificate Authentication](auth-cert.html)
-  * [21.13. PAM Authentication](auth-pam.html)
-  * [21.14. BSD Authentication](auth-bsd.html)
-  * [21.15. Authentication Problems](client-authentication-problems.html)
+  * *   [21.1. The `pg_hba.conf` File](auth-pg-hba-conf)
+  * [21.2. User Name Maps](auth-username-maps)
+  * [21.3. Authentication Methods](auth-methods)
+  * [21.4. Trust Authentication](auth-trust)
+  * [21.5. Password Authentication](auth-password)
+  * [21.6. GSSAPI Authentication](gssapi-auth)
+  * [21.7. SSPI Authentication](sspi-auth)
+  * [21.8. Ident Authentication](auth-ident)
+  * [21.9. Peer Authentication](auth-peer)
+  * [21.10. LDAP Authentication](auth-ldap)
+  * [21.11. RADIUS Authentication](auth-radius)
+  * [21.12. Certificate Authentication](auth-cert)
+  * [21.13. PAM Authentication](auth-pam)
+  * [21.14. BSD Authentication](auth-bsd)
+  * [21.15. Authentication Problems](client-authentication-problems)
 
-When a client application connects to the database server, it specifies which PostgreSQL database user name it wants to connect as, much the same way one logs into a Unix computer as a particular user. Within the SQL environment the active database user name determines access privileges to database objects — see [Chapter 22](user-manag.html "Chapter 22. Database Roles") for more information. Therefore, it is essential to restrict which database users can connect.
+When a client application connects to the database server, it specifies which PostgreSQL database user name it wants to connect as, much the same way one logs into a Unix computer as a particular user. Within the SQL environment the active database user name determines access privileges to database objects — see [Chapter 22](user-manag "Chapter 22. Database Roles") for more information. Therefore, it is essential to restrict which database users can connect.
 
 ### Note
 
-As explained in [Chapter 22](user-manag.html "Chapter 22. Database Roles"), PostgreSQL actually does privilege management in terms of “roles”. In this chapter, we consistently use *database user* to mean “role with the `LOGIN` privilege”.
+As explained in [Chapter 22](user-manag "Chapter 22. Database Roles"), PostgreSQL actually does privilege management in terms of “roles”. In this chapter, we consistently use *database user* to mean “role with the `LOGIN` privilege”.
 
 *Authentication* is the process by which the database server establishes the identity of the client, and by extension determines whether the client application (or the user who runs the client application) is permitted to connect with the database user name that was requested.
 

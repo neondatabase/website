@@ -33,7 +33,7 @@ DROP INDEX [ CONCURRENTLY ] [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the index, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the index, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -54,4 +54,4 @@ DROP INDEX title_idx;
 
 ## See Also
 
-[CREATE INDEX](sql-createindex.html "CREATE INDEX")
+[CREATE INDEX](sql-createindex "CREATE INDEX")

@@ -1,11 +1,11 @@
 ## 20.8. Error Reporting and Logging [#](#RUNTIME-CONFIG-LOGGING)
 
-  * *   [20.8.1. Where to Log](runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHERE)
-  * [20.8.2. When to Log](runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHEN)
-  * [20.8.3. What to Log](runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHAT)
-  * [20.8.4. Using CSV-Format Log Output](runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-CSVLOG)
-  * [20.8.5. Using JSON-Format Log Output](runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-JSONLOG)
-  * [20.8.6. Process Title](runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-PROC-TITLE)
+  * *   [20.8.1. Where to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE)
+  * [20.8.2. When to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHEN)
+  * [20.8.3. What to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHAT)
+  * [20.8.4. Using CSV-Format Log Output](runtime-config-logging#RUNTIME-CONFIG-LOGGING-CSVLOG)
+  * [20.8.5. Using JSON-Format Log Output](runtime-config-logging#RUNTIME-CONFIG-LOGGING-JSONLOG)
+  * [20.8.6. Process Title](runtime-config-logging#RUNTIME-CONFIG-LOGGING-PROC-TITLE)
 
 ### 20.8.1. Where to Log [#](#RUNTIME-CONFIG-LOGGING-WHERE)
 
@@ -13,9 +13,9 @@
 
     PostgreSQL supports several methods for logging server messages, including stderr, csvlog, jsonlog, and syslog. On Windows, eventlog is also supported. Set this parameter to a list of desired log destinations separated by commas. The default is to log to stderr only. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
-    If csvlog is included in `log_destination`, log entries are output in “comma separated value” (CSV) format, which is convenient for loading logs into programs. See [Section 20.8.4](runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-CSVLOG "20.8.4. Using CSV-Format Log Output") for details. [logging\_collector](runtime-config-logging.html#GUC-LOGGING-COLLECTOR) must be enabled to generate CSV-format log output.
+    If csvlog is included in `log_destination`, log entries are output in “comma separated value” (CSV) format, which is convenient for loading logs into programs. See [Section 20.8.4](runtime-config-logging#RUNTIME-CONFIG-LOGGING-CSVLOG "20.8.4. Using CSV-Format Log Output") for details. [logging\_collector](runtime-config-logging#GUC-LOGGING-COLLECTOR) must be enabled to generate CSV-format log output.
 
-    If jsonlog is included in `log_destination`, log entries are output in JSON format, which is convenient for loading logs into programs. See [Section 20.8.5](runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-JSONLOG "20.8.5. Using JSON-Format Log Output") for details. [logging\_collector](runtime-config-logging.html#GUC-LOGGING-COLLECTOR) must be enabled to generate JSON-format log output.
+    If jsonlog is included in `log_destination`, log entries are output in JSON format, which is convenient for loading logs into programs. See [Section 20.8.5](runtime-config-logging#RUNTIME-CONFIG-LOGGING-JSONLOG "20.8.5. Using JSON-Format Log Output") for details. [logging\_collector](runtime-config-logging#GUC-LOGGING-COLLECTOR) must be enabled to generate JSON-format log output.
 
     When either stderr, csvlog or jsonlog are included, the file `current_logfiles` is created to record the location of the log file(s) currently in use by the logging collector and the associated logging destination. This provides a convenient way to find the logs currently in use by the instance. Here is an example of this file's content:
 
@@ -30,7 +30,7 @@
 
 ### Note
 
-    On most Unix systems, you will need to alter the configuration of your system's syslog daemon in order to make use of the syslog option for `log_destination`. PostgreSQL can log to syslog facilities `LOCAL0` through `LOCAL7` (see [syslog\_facility](runtime-config-logging.html#GUC-SYSLOG-FACILITY)), but the default syslog configuration on most platforms will discard all such messages. You will need to add something like:
+    On most Unix systems, you will need to alter the configuration of your system's syslog daemon in order to make use of the syslog option for `log_destination`. PostgreSQL can log to syslog facilities `LOCAL0` through `LOCAL7` (see [syslog\_facility](runtime-config-logging#GUC-SYSLOG-FACILITY)), but the default syslog configuration on most platforms will discard all such messages. You will need to add something like:
 
     ```
 
@@ -39,7 +39,7 @@
 
     to the syslog daemon's configuration file to make it work.
 
-    On Windows, when you use the `eventlog` option for `log_destination`, you should register an event source and its library with the operating system so that the Windows Event Viewer can display event log messages cleanly. See [Section 19.12](event-log-registration.html "19.12. Registering Event Log on Windows") for details.
+    On Windows, when you use the `eventlog` option for `log_destination`, you should register an event source and its library with the operating system so that the Windows Event Viewer can display event log messages cleanly. See [Section 19.12](event-log-registration "19.12. Registering Event Log on Windows") for details.
 
 * `logging_collector` (`boolean`) [#](#GUC-LOGGING-COLLECTOR)
 
@@ -59,7 +59,7 @@
 
 * `log_filename` (`string`) [#](#GUC-LOG-FILENAME)
 
-    When `logging_collector` is enabled, this parameter sets the file names of the created log files. The value is treated as a `strftime` pattern, so `%`-escapes can be used to specify time-varying file names. (Note that if there are any time-zone-dependent `%`-escapes, the computation is done in the zone specified by [log\_timezone](runtime-config-logging.html#GUC-LOG-TIMEZONE).) The supported `%`-escapes are similar to those listed in the Open Group's [strftime](https://pubs.opengroup.org/onlinepubs/009695399/functions/strftime.html)specification. Note that the system's `strftime` is not used directly, so platform-specific (nonstandard) extensions do not work. The default is `postgresql-%Y-%m-%d_%H%M%S.log`.
+    When `logging_collector` is enabled, this parameter sets the file names of the created log files. The value is treated as a `strftime` pattern, so `%`-escapes can be used to specify time-varying file names. (Note that if there are any time-zone-dependent `%`-escapes, the computation is done in the zone specified by [log\_timezone](runtime-config-logging#GUC-LOG-TIMEZONE).) The supported `%`-escapes are similar to those listed in the Open Group's [strftime](https://pubs.opengroup.org/onlinepubs/009695399/functions/strftime.html)specification. Note that the system's `strftime` is not used directly, so platform-specific (nonstandard) extensions do not work. The default is `postgresql-%Y-%m-%d_%H%M%S.log`.
 
     If you specify a file name without escapes, you should plan to use a log rotation utility to avoid eventually filling the entire disk. In releases prior to 8.4, if no `%` escapes were present, PostgreSQL would append the epoch of the new log file's creation time, but this is no longer the case.
 
@@ -73,7 +73,7 @@
 
     On Unix systems this parameter sets the permissions for log files when `logging_collector` is enabled. (On Microsoft Windows this parameter is ignored.) The parameter value is expected to be a numeric mode specified in the format accepted by the `chmod` and `umask` system calls. (To use the customary octal format the number must start with a `0` (zero).)
 
-    The default permissions are `0600`, meaning only the server owner can read or write the log files. The other commonly useful setting is `0640`, allowing members of the owner's group to read the files. Note however that to make use of such a setting, you'll need to alter [log\_directory](runtime-config-logging.html#GUC-LOG-DIRECTORY) to store the files somewhere outside the cluster data directory. In any case, it's unwise to make the log files world-readable, since they might contain sensitive data.
+    The default permissions are `0600`, meaning only the server owner can read or write the log files. The other commonly useful setting is `0640`, allowing members of the owner's group to read the files. Note however that to make use of such a setting, you'll need to alter [log\_directory](runtime-config-logging#GUC-LOG-DIRECTORY) to store the files somewhere outside the cluster data directory. In any case, it's unwise to make the log files world-readable, since they might contain sensitive data.
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
@@ -123,27 +123,27 @@
 
 * `log_min_messages` (`enum`) [#](#GUC-LOG-MIN-MESSAGES)
 
-    Controls which [message levels](runtime-config-logging.html#RUNTIME-CONFIG-SEVERITY-LEVELS "Table 20.2. Message Severity Levels") are written to the server log. Valid values are `DEBUG5`, `DEBUG4`, `DEBUG3`, `DEBUG2`, `DEBUG1`, `INFO`, `NOTICE`, `WARNING`, `ERROR`, `LOG`, `FATAL`, and `PANIC`. Each level includes all the levels that follow it. The later the level, the fewer messages are sent to the log. The default is `WARNING`. Note that `LOG` has a different rank here than in [client\_min\_messages](runtime-config-client.html#GUC-CLIENT-MIN-MESSAGES). Only superusers and users with the appropriate `SET` privilege can change this setting.
+    Controls which [message levels](runtime-config-logging#RUNTIME-CONFIG-SEVERITY-LEVELS "Table 20.2. Message Severity Levels") are written to the server log. Valid values are `DEBUG5`, `DEBUG4`, `DEBUG3`, `DEBUG2`, `DEBUG1`, `INFO`, `NOTICE`, `WARNING`, `ERROR`, `LOG`, `FATAL`, and `PANIC`. Each level includes all the levels that follow it. The later the level, the fewer messages are sent to the log. The default is `WARNING`. Note that `LOG` has a different rank here than in [client\_min\_messages](runtime-config-client#GUC-CLIENT-MIN-MESSAGES). Only superusers and users with the appropriate `SET` privilege can change this setting.
 
 * `log_min_error_statement` (`enum`) [#](#GUC-LOG-MIN-ERROR-STATEMENT)
 
-    Controls which SQL statements that cause an error condition are recorded in the server log. The current SQL statement is included in the log entry for any message of the specified [severity](runtime-config-logging.html#RUNTIME-CONFIG-SEVERITY-LEVELS "Table 20.2. Message Severity Levels") or higher. Valid values are `DEBUG5`, `DEBUG4`, `DEBUG3`, `DEBUG2`, `DEBUG1`, `INFO`, `NOTICE`, `WARNING`, `ERROR`, `LOG`, `FATAL`, and `PANIC`. The default is `ERROR`, which means statements causing errors, log messages, fatal errors, or panics will be logged. To effectively turn off logging of failing statements, set this parameter to `PANIC`. Only superusers and users with the appropriate `SET` privilege can change this setting.
+    Controls which SQL statements that cause an error condition are recorded in the server log. The current SQL statement is included in the log entry for any message of the specified [severity](runtime-config-logging#RUNTIME-CONFIG-SEVERITY-LEVELS "Table 20.2. Message Severity Levels") or higher. Valid values are `DEBUG5`, `DEBUG4`, `DEBUG3`, `DEBUG2`, `DEBUG1`, `INFO`, `NOTICE`, `WARNING`, `ERROR`, `LOG`, `FATAL`, and `PANIC`. The default is `ERROR`, which means statements causing errors, log messages, fatal errors, or panics will be logged. To effectively turn off logging of failing statements, set this parameter to `PANIC`. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
 * `log_min_duration_statement` (`integer`) [#](#GUC-LOG-MIN-DURATION-STATEMENT)
 
     Causes the duration of each completed statement to be logged if the statement ran for at least the specified amount of time. For example, if you set it to `250ms` then all SQL statements that run 250ms or longer will be logged. Enabling this parameter can be helpful in tracking down unoptimized queries in your applications. If this value is specified without units, it is taken as milliseconds. Setting this to zero prints all statement durations. `-1` (the default) disables logging statement durations. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
-    This overrides [log\_min\_duration\_sample](runtime-config-logging.html#GUC-LOG-MIN-DURATION-SAMPLE), meaning that queries with duration exceeding this setting are not subject to sampling and are always logged.
+    This overrides [log\_min\_duration\_sample](runtime-config-logging#GUC-LOG-MIN-DURATION-SAMPLE), meaning that queries with duration exceeding this setting are not subject to sampling and are always logged.
 
     For clients using extended query protocol, durations of the Parse, Bind, and Execute steps are logged independently.
 
 ### Note
 
-    When using this option together with [log\_statement](runtime-config-logging.html#GUC-LOG-STATEMENT), the text of statements that are logged because of `log_statement` will not be repeated in the duration log message. If you are not using syslog, it is recommended that you log the PID or session ID using [log\_line\_prefix](runtime-config-logging.html#GUC-LOG-LINE-PREFIX) so that you can link the statement message to the later duration message using the process ID or session ID.
+    When using this option together with [log\_statement](runtime-config-logging#GUC-LOG-STATEMENT), the text of statements that are logged because of `log_statement` will not be repeated in the duration log message. If you are not using syslog, it is recommended that you log the PID or session ID using [log\_line\_prefix](runtime-config-logging#GUC-LOG-LINE-PREFIX) so that you can link the statement message to the later duration message using the process ID or session ID.
 
 * `log_min_duration_sample` (`integer`) [#](#GUC-LOG-MIN-DURATION-SAMPLE)
 
-    Allows sampling the duration of completed statements that ran for at least the specified amount of time. This produces the same kind of log entries as [log\_min\_duration\_statement](runtime-config-logging.html#GUC-LOG-MIN-DURATION-STATEMENT), but only for a subset of the executed statements, with sample rate controlled by [log\_statement\_sample\_rate](runtime-config-logging.html#GUC-LOG-STATEMENT-SAMPLE-RATE). For example, if you set it to `100ms` then all SQL statements that run 100ms or longer will be considered for sampling. Enabling this parameter can be helpful when the traffic is too high to log all queries. If this value is specified without units, it is taken as milliseconds. Setting this to zero samples all statement durations. `-1` (the default) disables sampling statement durations. Only superusers and users with the appropriate `SET` privilege can change this setting.
+    Allows sampling the duration of completed statements that ran for at least the specified amount of time. This produces the same kind of log entries as [log\_min\_duration\_statement](runtime-config-logging#GUC-LOG-MIN-DURATION-STATEMENT), but only for a subset of the executed statements, with sample rate controlled by [log\_statement\_sample\_rate](runtime-config-logging#GUC-LOG-STATEMENT-SAMPLE-RATE). For example, if you set it to `100ms` then all SQL statements that run 100ms or longer will be considered for sampling. Enabling this parameter can be helpful when the traffic is too high to log all queries. If this value is specified without units, it is taken as milliseconds. Setting this to zero samples all statement durations. `-1` (the default) disables sampling statement durations. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
     This setting has lower priority than `log_min_duration_statement`, meaning that statements with durations exceeding `log_min_duration_statement` are not subject to sampling and are always logged.
 
@@ -151,7 +151,7 @@
 
 * `log_statement_sample_rate` (`floating point`) [#](#GUC-LOG-STATEMENT-SAMPLE-RATE)
 
-    Determines the fraction of statements with duration exceeding [log\_min\_duration\_sample](runtime-config-logging.html#GUC-LOG-MIN-DURATION-SAMPLE) that will be logged. Sampling is stochastic, for example `0.5` means there is statistically one chance in two that any given statement will be logged. The default is `1.0`, meaning to log all sampled statements. Setting this to zero disables sampled statement-duration logging, the same as setting `log_min_duration_sample` to `-1`. Only superusers and users with the appropriate `SET` privilege can change this setting.
+    Determines the fraction of statements with duration exceeding [log\_min\_duration\_sample](runtime-config-logging#GUC-LOG-MIN-DURATION-SAMPLE) that will be logged. Sampling is stochastic, for example `0.5` means there is statistically one chance in two that any given statement will be logged. The default is `1.0`, meaning to log all sampled statements. Setting this to zero disables sampled statement-duration logging, the same as setting `log_min_duration_sample` to `-1`. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
 * `log_transaction_sample_rate` (`floating point`) [#](#GUC-LOG-TRANSACTION-SAMPLE-RATE)
 
@@ -167,7 +167,7 @@
 
     For example, if syncing the data directory takes 25 seconds and thereafter resetting unlogged relations takes 8 seconds, and if this setting has the default value of 10 seconds, then a messages will be logged for syncing the data directory after it has been in progress for 10 seconds and again after it has been in progress for 20 seconds, but nothing will be logged for resetting unlogged relations.
 
-[Table 20.2](runtime-config-logging.html#RUNTIME-CONFIG-SEVERITY-LEVELS "Table 20.2. Message Severity Levels") explains the message severity levels used by PostgreSQL. If logging output is sent to syslog or Windows' eventlog, the severity levels are translated as shown in the table.
+[Table 20.2](runtime-config-logging#RUNTIME-CONFIG-SEVERITY-LEVELS "Table 20.2. Message Severity Levels") explains the message severity levels used by PostgreSQL. If logging output is sent to syslog or Windows' eventlog, the severity levels are translated as shown in the table.
 
 **Table 20.2. Message Severity Levels**
 
@@ -186,15 +186,15 @@
 
 ### Note
 
-What you choose to log can have security implications; see [Section 25.3](logfile-maintenance.html "25.3. Log File Maintenance").
+What you choose to log can have security implications; see [Section 25.3](logfile-maintenance "25.3. Log File Maintenance").
 
 * `application_name` (`string`) [#](#GUC-APPLICATION-NAME)
 
-    The `application_name` can be any string of less than `NAMEDATALEN` characters (64 characters in a standard build). It is typically set by an application upon connection to the server. The name will be displayed in the `pg_stat_activity` view and included in CSV log entries. It can also be included in regular log entries via the [log\_line\_prefix](runtime-config-logging.html#GUC-LOG-LINE-PREFIX) parameter. Only printable ASCII characters may be used in the `application_name` value. Other characters are replaced with [C-style hexadecimal escapes](sql-syntax-lexical.html#SQL-SYNTAX-STRINGS-ESCAPE "4.1.2.2. String Constants with C-Style Escapes").
+    The `application_name` can be any string of less than `NAMEDATALEN` characters (64 characters in a standard build). It is typically set by an application upon connection to the server. The name will be displayed in the `pg_stat_activity` view and included in CSV log entries. It can also be included in regular log entries via the [log\_line\_prefix](runtime-config-logging#GUC-LOG-LINE-PREFIX) parameter. Only printable ASCII characters may be used in the `application_name` value. Other characters are replaced with [C-style hexadecimal escapes](sql-syntax-lexical#SQL-SYNTAX-STRINGS-ESCAPE "4.1.2.2. String Constants with C-Style Escapes").
 
 * `debug_print_parse` (`boolean`)`debug_print_rewritten` (`boolean`)`debug_print_plan` (`boolean`) [#](#GUC-DEBUG-PRINT-PARSE)
 
-    These parameters enable various debugging output to be emitted. When set, they print the resulting parse tree, the query rewriter output, or the execution plan for each executed query. These messages are emitted at `LOG` message level, so by default they will appear in the server log but will not be sent to the client. You can change that by adjusting [client\_min\_messages](runtime-config-client.html#GUC-CLIENT-MIN-MESSAGES) and/or [log\_min\_messages](runtime-config-logging.html#GUC-LOG-MIN-MESSAGES). These parameters are off by default.
+    These parameters enable various debugging output to be emitted. When set, they print the resulting parse tree, the query rewriter output, or the execution plan for each executed query. These messages are emitted at `LOG` message level, so by default they will appear in the server log but will not be sent to the client. You can change that by adjusting [client\_min\_messages](runtime-config-client#GUC-CLIENT-MIN-MESSAGES) and/or [log\_min\_messages](runtime-config-logging#GUC-LOG-MIN-MESSAGES). These parameters are off by default.
 
 * `debug_pretty_print` (`boolean`) [#](#GUC-DEBUG-PRETTY-PRINT)
 
@@ -228,11 +228,11 @@ What you choose to log can have security implications; see [Section 25.3](logfi
 
 ### Note
 
-    The difference between enabling `log_duration` and setting [log\_min\_duration\_statement](runtime-config-logging.html#GUC-LOG-MIN-DURATION-STATEMENT) to zero is that exceeding `log_min_duration_statement` forces the text of the query to be logged, but this option doesn't. Thus, if `log_duration` is `on` and `log_min_duration_statement` has a positive value, all durations are logged but the query text is included only for statements exceeding the threshold. This behavior can be useful for gathering statistics in high-load installations.
+    The difference between enabling `log_duration` and setting [log\_min\_duration\_statement](runtime-config-logging#GUC-LOG-MIN-DURATION-STATEMENT) to zero is that exceeding `log_min_duration_statement` forces the text of the query to be logged, but this option doesn't. Thus, if `log_duration` is `on` and `log_min_duration_statement` has a positive value, all durations are logged but the query text is included only for statements exceeding the threshold. This behavior can be useful for gathering statistics in high-load installations.
 
 * `log_error_verbosity` (`enum`) [#](#GUC-LOG-ERROR-VERBOSITY)
 
-    Controls the amount of detail written in the server log for each message that is logged. Valid values are `TERSE`, `DEFAULT`, and `VERBOSE`, each adding more fields to displayed messages. `TERSE` excludes the logging of `DETAIL`, `HINT`, `QUERY`, and `CONTEXT` error information. `VERBOSE` output includes the `SQLSTATE` error code (see also [Appendix A](errcodes-appendix.html "Appendix A. PostgreSQL Error Codes")) and the source code file name, function name, and line number that generated the error. Only superusers and users with the appropriate `SET` privilege can change this setting.
+    Controls the amount of detail written in the server log for each message that is logged. Valid values are `TERSE`, `DEFAULT`, and `VERBOSE`, each adding more fields to displayed messages. `TERSE` excludes the logging of `DETAIL`, `HINT`, `QUERY`, and `CONTEXT` error information. `VERBOSE` output includes the `SQLSTATE` error code (see also [Appendix A](errcodes-appendix "Appendix A. PostgreSQL Error Codes")) and the source code file name, function name, and line number that generated the error. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
 * `log_hostname` (`boolean`) [#](#GUC-LOG-HOSTNAME)
 
@@ -262,13 +262,13 @@ What you choose to log can have security implications; see [Section 25.3](logfi
     | `%c`   | Session ID: see below                                                                                                                                                                                                                                                                         | no           |
     | `%l`   | Number of the log line for each session or process, starting at 1                                                                                                                                                                                                                             | no           |
     | `%s`   | Process start time stamp                                                                                                                                                                                                                                                                      | no           |
-    | `%v`   | Virtual transaction ID (backendID/localXID); see [Section 74.1](transaction-id.html "74.1. Transactions and Identifiers")                                                                                                                                                                     | no           |
-    | `%x`   | Transaction ID (0 if none is assigned); see [Section 74.1](transaction-id.html "74.1. Transactions and Identifiers")                                                                                                                                                                          | no           |
+    | `%v`   | Virtual transaction ID (backendID/localXID); see [Section 74.1](transaction-id "74.1. Transactions and Identifiers")                                                                                                                                                                     | no           |
+    | `%x`   | Transaction ID (0 if none is assigned); see [Section 74.1](transaction-id "74.1. Transactions and Identifiers")                                                                                                                                                                          | no           |
     | `%q`   | Produces no output, but tells non-session processes to stop at this point in the string; ignored by session processes                                                                                                                                                                         | no           |
-    | `%Q`   | Query identifier of the current query. Query identifiers are not computed by default, so this field will be zero unless [compute\_query\_id](runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID) parameter is enabled or a third-party module that computes query identifiers is configured. | yes          |
+    | `%Q`   | Query identifier of the current query. Query identifiers are not computed by default, so this field will be zero unless [compute\_query\_id](runtime-config-statistics#GUC-COMPUTE-QUERY-ID) parameter is enabled or a third-party module that computes query identifiers is configured. | yes          |
     | `%%`   | Literal `%`                                                                                                                                                                                                                                                                                   | no           |
 
-    The backend type corresponds to the column `backend_type` in the view [`pg_stat_activity`](monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity"), but additional types can appear in the log that don't show in that view.
+    The backend type corresponds to the column `backend_type` in the view [`pg_stat_activity`](monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity"), but additional types can appear in the log that don't show in that view.
 
     The `%c` escape prints a quasi-unique session identifier, consisting of two 4-byte hexadecimal numbers (without leading zeros) separated by a dot. The numbers are the process start time and the process ID, so `%c` can also be used as a space saving way of printing those items. For example, to generate the session identifier from `pg_stat_activity`, use this query:
 
@@ -298,11 +298,11 @@ What you choose to log can have security implications; see [Section 25.3](logfi
 
 ### Note
 
-    The `%Q` escape always reports a zero identifier for lines output by [log\_statement](runtime-config-logging.html#GUC-LOG-STATEMENT) because `log_statement` generates output before an identifier can be calculated, including invalid statements for which an identifier cannot be calculated.
+    The `%Q` escape always reports a zero identifier for lines output by [log\_statement](runtime-config-logging#GUC-LOG-STATEMENT) because `log_statement` generates output before an identifier can be calculated, including invalid statements for which an identifier cannot be calculated.
 
 * `log_lock_waits` (`boolean`) [#](#GUC-LOG-LOCK-WAITS)
 
-    Controls whether a log message is produced when a session waits longer than [deadlock\_timeout](runtime-config-locks.html#GUC-DEADLOCK-TIMEOUT) to acquire a lock. This is useful in determining if lock waits are causing poor performance. The default is `off`. Only superusers and users with the appropriate `SET` privilege can change this setting.
+    Controls whether a log message is produced when a session waits longer than [deadlock\_timeout](runtime-config-locks#GUC-DEADLOCK-TIMEOUT) to acquire a lock. This is useful in determining if lock waits are causing poor performance. The default is `off`. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
 * `log_recovery_conflict_waits` (`boolean`) [#](#GUC-LOG-RECOVERY-CONFLICT-WAITS)
 
@@ -314,7 +314,7 @@ What you choose to log can have security implications; see [Section 25.3](logfi
 
     If greater than zero, each bind parameter value logged with a non-error statement-logging message is trimmed to this many bytes. Zero disables logging of bind parameters for non-error statement logs. `-1` (the default) allows bind parameters to be logged in full. If this value is specified without units, it is taken as bytes. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
-    This setting only affects log messages printed as a result of [log\_statement](runtime-config-logging.html#GUC-LOG-STATEMENT), [log\_duration](runtime-config-logging.html#GUC-LOG-DURATION), and related settings. Non-zero values of this setting add some overhead, particularly if parameters are sent in binary form, since then conversion to text is required.
+    This setting only affects log messages printed as a result of [log\_statement](runtime-config-logging#GUC-LOG-STATEMENT), [log\_duration](runtime-config-logging#GUC-LOG-DURATION), and related settings. Non-zero values of this setting add some overhead, particularly if parameters are sent in binary form, since then conversion to text is required.
 
 * `log_parameter_max_length_on_error` (`integer`) [#](#GUC-LOG-PARAMETER-MAX-LENGTH-ON-ERROR)
 
@@ -336,7 +336,7 @@ What you choose to log can have security implications; see [Section 25.3](logfi
 
 * `log_replication_commands` (`boolean`) [#](#GUC-LOG-REPLICATION-COMMANDS)
 
-    Causes each replication command to be logged in the server log. See [Section 55.4](protocol-replication.html "55.4. Streaming Replication Protocol") for more information about replication command. The default value is `off`. Only superusers and users with the appropriate `SET` privilege can change this setting.
+    Causes each replication command to be logged in the server log. See [Section 55.4](protocol-replication "55.4. Streaming Replication Protocol") for more information about replication command. The default value is `off`. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
 * `log_temp_files` (`integer`) [#](#GUC-LOG-TEMP-FILES)
 
@@ -344,7 +344,7 @@ What you choose to log can have security implications; see [Section 25.3](logfi
 
 * `log_timezone` (`string`) [#](#GUC-LOG-TIMEZONE)
 
-    Sets the time zone used for timestamps written in the server log. Unlike [TimeZone](runtime-config-client.html#GUC-TIMEZONE), this value is cluster-wide, so that all sessions will report timestamps consistently. The built-in default is `GMT`, but that is typically overridden in `postgresql.conf`; initdb will install a setting there corresponding to its system environment. See [Section 8.5.3](datatype-datetime.html#DATATYPE-TIMEZONES "8.5.3. Time Zones") for more information. This parameter can only be set in the `postgresql.conf` file or on the server command line.
+    Sets the time zone used for timestamps written in the server log. Unlike [TimeZone](runtime-config-client#GUC-TIMEZONE), this value is cluster-wide, so that all sessions will report timestamps consistently. The built-in default is `GMT`, but that is typically overridden in `postgresql.conf`; initdb will install a setting there corresponding to its system environment. See [Section 8.5.3](datatype-datetime#DATATYPE-TIMEZONES "8.5.3. Time Zones") for more information. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
 ### 20.8.4. Using CSV-Format Log Output [#](#RUNTIME-CONFIG-LOGGING-CSVLOG)
 
@@ -391,7 +391,7 @@ To import a log file into this table, use the `COPY FROM` command:
 COPY postgres_log FROM '/full/path/to/logfile.csv' WITH csv;
 ```
 
-It is also possible to access the file as a foreign table, using the supplied [file\_fdw](file-fdw.html "F.16. file_fdw — access data files in the server's file system") module.
+It is also possible to access the file as a foreign table, using the supplied [file\_fdw](file-fdw "F.16. file_fdw — access data files in the server's file system") module.
 
 There are a few things you need to do to simplify importing CSV log files:
 
@@ -406,7 +406,7 @@ Including `jsonlog` in the `log_destination` list provides a convenient way to i
 
 String fields with null values are excluded from output. Additional fields may be added in the future. User applications that process `jsonlog` output should ignore unknown fields.
 
-Each log line is serialized as a JSON object with the set of keys and their associated values shown in [Table 20.3](runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-JSONLOG-KEYS-VALUES "Table 20.3. Keys and Values of JSON Log Entries").
+Each log line is serialized as a JSON object with the set of keys and their associated values shown in [Table 20.3](runtime-config-logging#RUNTIME-CONFIG-LOGGING-JSONLOG-KEYS-VALUES "Table 20.3. Keys and Values of JSON Log Entries").
 
 **Table 20.3. Keys and Values of JSON Log Entries**
 
@@ -444,13 +444,13 @@ Each log line is serialized as a JSON object with the set of keys and their asso
 
 ### 20.8.6. Process Title [#](#RUNTIME-CONFIG-LOGGING-PROC-TITLE)
 
-These settings control how process titles of server processes are modified. Process titles are typically viewed using programs like ps or, on Windows, Process Explorer. See [Section 28.1](monitoring-ps.html "28.1. Standard Unix Tools") for details.
+These settings control how process titles of server processes are modified. Process titles are typically viewed using programs like ps or, on Windows, Process Explorer. See [Section 28.1](monitoring-ps "28.1. Standard Unix Tools") for details.
 
 * `cluster_name` (`string`) [#](#GUC-CLUSTER-NAME)
 
-    Sets a name that identifies this database cluster (instance) for various purposes. The cluster name appears in the process title for all server processes in this cluster. Moreover, it is the default application name for a standby connection (see [synchronous\_standby\_names](runtime-config-replication.html#GUC-SYNCHRONOUS-STANDBY-NAMES).)
+    Sets a name that identifies this database cluster (instance) for various purposes. The cluster name appears in the process title for all server processes in this cluster. Moreover, it is the default application name for a standby connection (see [synchronous\_standby\_names](runtime-config-replication#GUC-SYNCHRONOUS-STANDBY-NAMES).)
 
-    The name can be any string of less than `NAMEDATALEN` characters (64 characters in a standard build). Only printable ASCII characters may be used in the `cluster_name` value. Other characters are replaced with [C-style hexadecimal escapes](sql-syntax-lexical.html#SQL-SYNTAX-STRINGS-ESCAPE "4.1.2.2. String Constants with C-Style Escapes"). No name is shown if this parameter is set to the empty string `''` (which is the default). This parameter can only be set at server start.
+    The name can be any string of less than `NAMEDATALEN` characters (64 characters in a standard build). Only printable ASCII characters may be used in the `cluster_name` value. Other characters are replaced with [C-style hexadecimal escapes](sql-syntax-lexical#SQL-SYNTAX-STRINGS-ESCAPE "4.1.2.2. String Constants with C-Style Escapes"). No name is shown if this parameter is set to the empty string `''` (which is the default). This parameter can only be set at server start.
 
 * `update_process_title` (`boolean`) [#](#GUC-UPDATE-PROCESS-TITLE)
 

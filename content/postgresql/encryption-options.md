@@ -4,11 +4,11 @@ PostgreSQL offers encryption at several levels, and provides flexibility in prot
 
 * Password Encryption
 
-    Database user passwords are stored as hashes (determined by the setting [password\_encryption](runtime-config-connection.html#GUC-PASSWORD-ENCRYPTION)), so the administrator cannot determine the actual password assigned to the user. If SCRAM or MD5 encryption is used for client authentication, the unencrypted password is never even temporarily present on the server because the client encrypts it before being sent across the network. SCRAM is preferred, because it is an Internet standard and is more secure than the PostgreSQL-specific MD5 authentication protocol.
+    Database user passwords are stored as hashes (determined by the setting [password\_encryption](runtime-config-connection#GUC-PASSWORD-ENCRYPTION)), so the administrator cannot determine the actual password assigned to the user. If SCRAM or MD5 encryption is used for client authentication, the unencrypted password is never even temporarily present on the server because the client encrypts it before being sent across the network. SCRAM is preferred, because it is an Internet standard and is more secure than the PostgreSQL-specific MD5 authentication protocol.
 
 * Encryption For Specific Columns
 
-    The [pgcrypto](pgcrypto.html "F.27. pgcrypto — cryptographic functions") module allows certain fields to be stored encrypted. This is useful if only some of the data is sensitive. The client supplies the decryption key and the data is decrypted on the server and then sent to the client.
+    The [pgcrypto](pgcrypto "F.27. pgcrypto — cryptographic functions") module allows certain fields to be stored encrypted. This is useful if only some of the data is sensitive. The client supplies the decryption key and the data is decrypted on the server and then sent to the client.
 
     The decrypted data and the decryption key are present on the server for a brief time while it is being decrypted and communicated between the client and server. This presents a brief moment where the data and keys can be intercepted by someone with complete access to the database server, such as the system administrator.
 

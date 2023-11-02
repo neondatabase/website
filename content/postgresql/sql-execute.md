@@ -15,7 +15,7 @@ EXECUTE name [ ( parameter [, ...] ) ]
 
 If the `PREPARE` statement that created the statement specified some parameters, a compatible set of parameters must be passed to the `EXECUTE` statement, or else an error is raised. Note that (unlike functions) prepared statements are not overloaded based on the type or number of their parameters; the name of a prepared statement must be unique within a database session.
 
-For more information on the creation and usage of prepared statements, see [PREPARE](sql-prepare.html "PREPARE").
+For more information on the creation and usage of prepared statements, see [PREPARE](sql-prepare "PREPARE").
 
 ## Parameters
 
@@ -33,7 +33,7 @@ The command tag returned by `EXECUTE` is that of the prepared statement, and not
 
 ## Examples
 
-Examples are given in [Examples](sql-prepare.html#SQL-PREPARE-EXAMPLES "Examples") in the [PREPARE](sql-prepare.html "PREPARE") documentation.
+Examples are given in [Examples](sql-prepare#SQL-PREPARE-EXAMPLES "Examples") in the [PREPARE](sql-prepare "PREPARE") documentation.
 
 ## Compatibility
 
@@ -41,4 +41,4 @@ The SQL standard includes an `EXECUTE` statement, but it is only for use in embe
 
 ## See Also
 
-[DEALLOCATE](sql-deallocate.html "DEALLOCATE"), [PREPARE](sql-prepare.html "PREPARE")
+[DEALLOCATE](sql-deallocate "DEALLOCATE"), [PREPARE](sql-prepare "PREPARE")

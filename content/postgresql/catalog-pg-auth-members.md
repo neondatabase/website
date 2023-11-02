@@ -9,9 +9,9 @@ Because user identities are cluster-wide, `pg_auth_members` is shared across all
 | Column TypeDescription                                                                                                                |
 | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `oid` `oid`Row identifier                                                                                                             |
-| `roleid` `oid` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`oid`)ID of a role that has a member               |
-| `member` `oid` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`oid`)ID of a role that is a member of `roleid`    |
-| `grantor` `oid` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`oid`)ID of the role that granted this membership |
+| `roleid` `oid` (references [`pg_authid`](catalog-pg-authid "53.8. pg_authid").`oid`)ID of a role that has a member               |
+| `member` `oid` (references [`pg_authid`](catalog-pg-authid "53.8. pg_authid").`oid`)ID of a role that is a member of `roleid`    |
+| `grantor` `oid` (references [`pg_authid`](catalog-pg-authid "53.8. pg_authid").`oid`)ID of the role that granted this membership |
 | `admin_option` `bool`True if `member` can grant membership in `roleid` to others                                                      |
 | `inherit_option` `bool`True if the member automatically inherits the privileges of the granted role                                   |
-| `set_option` `bool`True if the member can [`SET ROLE`](sql-set-role.html "SET ROLE") to the granted role                              |
+| `set_option` `bool`True if the member can [`SET ROLE`](sql-set-role "SET ROLE") to the granted role                              |

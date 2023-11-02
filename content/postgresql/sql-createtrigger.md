@@ -52,13 +52,13 @@ Also, a trigger definition can specify a Boolean `WHEN` condition, which will be
 
 If multiple triggers of the same kind are defined for the same event, they will be fired in alphabetical order by name.
 
-When the `CONSTRAINT` option is specified, this command creates a *constraint trigger*. This is the same as a regular trigger except that the timing of the trigger firing can be adjusted using [`SET CONSTRAINTS`](sql-set-constraints.html "SET CONSTRAINTS"). Constraint triggers must be `AFTER ROW` triggers on plain tables (not foreign tables). They can be fired either at the end of the statement causing the triggering event, or at the end of the containing transaction; in the latter case they are said to be *deferred*. A pending deferred-trigger firing can also be forced to happen immediately by using `SET CONSTRAINTS`. Constraint triggers are expected to raise an exception when the constraints they implement are violated.
+When the `CONSTRAINT` option is specified, this command creates a *constraint trigger*. This is the same as a regular trigger except that the timing of the trigger firing can be adjusted using [`SET CONSTRAINTS`](sql-set-constraints "SET CONSTRAINTS"). Constraint triggers must be `AFTER ROW` triggers on plain tables (not foreign tables). They can be fired either at the end of the statement causing the triggering event, or at the end of the containing transaction; in the latter case they are said to be *deferred*. A pending deferred-trigger firing can also be forced to happen immediately by using `SET CONSTRAINTS`. Constraint triggers are expected to raise an exception when the constraints they implement are violated.
 
 The `REFERENCING` option enables collection of *transition relations*, which are row sets that include all of the rows inserted, deleted, or modified by the current SQL statement. This feature lets the trigger see a global view of what the statement did, not just one row at a time. This option is only allowed for an `AFTER` trigger that is not a constraint trigger; also, if the trigger is an `UPDATE` trigger, it must not specify a *`column_name`* list. `OLD TABLE` may only be specified once, and only for a trigger that can fire on `UPDATE` or `DELETE`; it creates a transition relation containing the *before-images* of all rows updated or deleted by the statement. Similarly, `NEW TABLE` may only be specified once, and only for a trigger that can fire on `UPDATE` or `INSERT`; it creates a transition relation containing the *after-images* of all rows updated or inserted by the statement.
 
 `SELECT` does not modify any rows so you cannot create `SELECT` triggers. Rules and views may provide workable solutions to problems that seem to need `SELECT` triggers.
 
-Refer to [Chapter 39](triggers.html "Chapter 39. Triggers") for more information about triggers.
+Refer to [Chapter 39](triggers "Chapter 39. Triggers") for more information about triggers.
 
 ## Parameters
 
@@ -95,7 +95,7 @@ Refer to [Chapter 39](triggers.html "Chapter 39. Triggers") for more informat
 
 * `DEFERRABLE``NOT DEFERRABLE``INITIALLY IMMEDIATE``INITIALLY DEFERRED`
 
-    The default timing of the trigger. See the [CREATE TABLE](sql-createtable.html "CREATE TABLE") documentation for details of these constraint options. This can only be specified for constraint triggers.
+    The default timing of the trigger. See the [CREATE TABLE](sql-createtable "CREATE TABLE") documentation for details of these constraint options. This can only be specified for constraint triggers.
 
 * `REFERENCING`
 
@@ -137,7 +137,7 @@ Refer to [Chapter 39](triggers.html "Chapter 39. Triggers") for more informat
 
 To create or replace a trigger on a table, the user must have the `TRIGGER` privilege on the table. The user must also have `EXECUTE` privilege on the trigger function.
 
-Use [`DROP TRIGGER`](sql-droptrigger.html "DROP TRIGGER") to remove a trigger.
+Use [`DROP TRIGGER`](sql-droptrigger "DROP TRIGGER") to remove a trigger.
 
 Creating a row-level trigger on a partitioned table will cause an identical “clone” trigger to be created on each of its existing partitions; and any partitions created or attached later will have an identical trigger, too. If there is a conflictingly-named trigger on a child partition already, an error occurs unless `CREATE OR REPLACE TRIGGER` is used, in which case that trigger is replaced with a clone trigger. When a partition is detached from its parent, its clone triggers are removed.
 
@@ -161,7 +161,7 @@ Currently, the `OR REPLACE` option is not supported for constraint triggers.
 
 Replacing an existing trigger within a transaction that has already performed updating actions on the trigger's table is not recommended. Trigger firing decisions, or portions of firing decisions, that have already been made will not be reconsidered, so the effects could be surprising.
 
-There are a few built-in trigger functions that can be used to solve common problems without having to write your own trigger code; see [Section 9.28](functions-trigger.html "9.28. Trigger Functions").
+There are a few built-in trigger functions that can be used to solve common problems without having to write your own trigger code; see [Section 9.28](functions-trigger "9.28. Trigger Functions").
 
 ## Examples
 
@@ -239,7 +239,7 @@ CREATE TRIGGER paired_items_update
     EXECUTE FUNCTION check_matching_pairs();
 ```
 
-[Section 39.4](trigger-example.html "39.4. A Complete Trigger Example") contains a complete example of a trigger function written in C.
+[Section 39.4](trigger-example "39.4. A Complete Trigger Example") contains a complete example of a trigger function written in C.
 
 ## Compatibility
 
@@ -261,4 +261,4 @@ The ability to fire triggers for `TRUNCATE` is a PostgreSQL extension of the SQL
 
 ## See Also
 
-[ALTER TRIGGER](sql-altertrigger.html "ALTER TRIGGER"), [DROP TRIGGER](sql-droptrigger.html "DROP TRIGGER"), [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [SET CONSTRAINTS](sql-set-constraints.html "SET CONSTRAINTS")
+[ALTER TRIGGER](sql-altertrigger "ALTER TRIGGER"), [DROP TRIGGER](sql-droptrigger "DROP TRIGGER"), [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION"), [SET CONSTRAINTS](sql-set-constraints "SET CONSTRAINTS")

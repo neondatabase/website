@@ -23,9 +23,9 @@ ALTER GROUP group_name RENAME TO new_name
 
 `ALTER GROUP` changes the attributes of a user group. This is an obsolete command, though still accepted for backwards compatibility, because groups (and users too) have been superseded by the more general concept of roles.
 
-The first two variants add users to a group or remove them from a group. (Any role can play the part of either a “user” or a “group” for this purpose.) These variants are effectively equivalent to granting or revoking membership in the role named as the “group”; so the preferred way to do this is to use [`GRANT`](sql-grant.html "GRANT") or [`REVOKE`](sql-revoke.html "REVOKE"). Note that `GRANT` and `REVOKE` have additional options which are not available with this command, such as the ability to grant and revoke `ADMIN OPTION`, and the ability to specify the grantor.
+The first two variants add users to a group or remove them from a group. (Any role can play the part of either a “user” or a “group” for this purpose.) These variants are effectively equivalent to granting or revoking membership in the role named as the “group”; so the preferred way to do this is to use [`GRANT`](sql-grant "GRANT") or [`REVOKE`](sql-revoke "REVOKE"). Note that `GRANT` and `REVOKE` have additional options which are not available with this command, such as the ability to grant and revoke `ADMIN OPTION`, and the ability to specify the grantor.
 
-The third variant changes the name of the group. This is exactly equivalent to renaming the role with [`ALTER ROLE`](sql-alterrole.html "ALTER ROLE").
+The third variant changes the name of the group. This is exactly equivalent to renaming the role with [`ALTER ROLE`](sql-alterrole "ALTER ROLE").
 
 ## Parameters
 
@@ -63,4 +63,4 @@ There is no `ALTER GROUP` statement in the SQL standard.
 
 ## See Also
 
-[GRANT](sql-grant.html "GRANT"), [REVOKE](sql-revoke.html "REVOKE"), [ALTER ROLE](sql-alterrole.html "ALTER ROLE")
+[GRANT](sql-grant "GRANT"), [REVOKE](sql-revoke "REVOKE"), [ALTER ROLE](sql-alterrole "ALTER ROLE")

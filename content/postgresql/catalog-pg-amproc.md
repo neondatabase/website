@@ -7,11 +7,11 @@ The catalog `pg_amproc` stores information about support functions associated wi
 | Column TypeDescription                                                                                                                         |
 | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `oid` `oid`Row identifier                                                                                                                      |
-| `amprocfamily` `oid` (references [`pg_opfamily`](catalog-pg-opfamily.html "53.35. pg_opfamily").`oid`)The operator family this entry is for    |
-| `amproclefttype` `oid` (references [`pg_type`](catalog-pg-type.html "53.64. pg_type").`oid`)Left-hand input data type of associated operator   |
-| `amprocrighttype` `oid` (references [`pg_type`](catalog-pg-type.html "53.64. pg_type").`oid`)Right-hand input data type of associated operator |
+| `amprocfamily` `oid` (references [`pg_opfamily`](catalog-pg-opfamily "53.35. pg_opfamily").`oid`)The operator family this entry is for    |
+| `amproclefttype` `oid` (references [`pg_type`](catalog-pg-type "53.64. pg_type").`oid`)Left-hand input data type of associated operator   |
+| `amprocrighttype` `oid` (references [`pg_type`](catalog-pg-type "53.64. pg_type").`oid`)Right-hand input data type of associated operator |
 | `amprocnum` `int2`Support function number                                                                                                      |
-| `amproc` `regproc` (references [`pg_proc`](catalog-pg-proc.html "53.39. pg_proc").`oid`)OID of the function                                    |
+| `amproc` `regproc` (references [`pg_proc`](catalog-pg-proc "53.39. pg_proc").`oid`)OID of the function                                    |
 
 \
 

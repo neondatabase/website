@@ -27,7 +27,7 @@ A schema can only be dropped by its owner or a superuser. Note that the owner ca
 
 * `CASCADE`
 
-    Automatically drop objects (tables, functions, etc.) that are contained in the schema, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects (tables, functions, etc.) that are contained in the schema, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -52,4 +52,4 @@ DROP SCHEMA mystuff CASCADE;
 
 ## See Also
 
-[ALTER SCHEMA](sql-alterschema.html "ALTER SCHEMA"), [CREATE SCHEMA](sql-createschema.html "CREATE SCHEMA")
+[ALTER SCHEMA](sql-alterschema "ALTER SCHEMA"), [CREATE SCHEMA](sql-createschema "CREATE SCHEMA")

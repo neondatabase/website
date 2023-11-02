@@ -10,11 +10,11 @@ pg\_dump — extract a PostgreSQL database into a script file or other archive f
 
 pg\_dump is a utility for backing up a PostgreSQL database. It makes consistent backups even if the database is being used concurrently. pg\_dump does not block other users accessing the database (readers or writers).
 
-pg\_dump only dumps a single database. To back up an entire cluster, or to back up global objects that are common to all databases in a cluster (such as roles and tablespaces), use [pg\_dumpall](app-pg-dumpall.html "pg_dumpall").
+pg\_dump only dumps a single database. To back up an entire cluster, or to back up global objects that are common to all databases in a cluster (such as roles and tablespaces), use [pg\_dumpall](app-pg-dumpall "pg_dumpall").
 
-Dumps can be output in script or archive file formats. Script dumps are plain-text files containing the SQL commands required to reconstruct the database to the state it was in at the time it was saved. To restore from such a script, feed it to [psql](app-psql.html "psql"). Script files can be used to reconstruct the database even on other machines and other architectures; with some modifications, even on other SQL database products.
+Dumps can be output in script or archive file formats. Script dumps are plain-text files containing the SQL commands required to reconstruct the database to the state it was in at the time it was saved. To restore from such a script, feed it to [psql](app-psql "psql"). Script files can be used to reconstruct the database even on other machines and other architectures; with some modifications, even on other SQL database products.
 
-The alternative archive file formats must be used with [pg\_restore](app-pgrestore.html "pg_restore") to rebuild the database. They allow pg\_restore to be selective about what is restored, or even to reorder the items prior to being restored. The archive file formats are designed to be portable across architectures.
+The alternative archive file formats must be used with [pg\_restore](app-pgrestore "pg_restore") to rebuild the database. They allow pg\_restore to be selective about what is restored, or even to reorder the items prior to being restored. The archive file formats are designed to be portable across architectures.
 
 When used with one of the archive file formats and combined with pg\_restore, pg\_dump provides a flexible archival and transfer mechanism. pg\_dump can be used to backup an entire database, then pg\_restore can be used to examine the archive and/or select which parts of the database are to be restored. The most flexible output file formats are the “custom” format (`-Fc`) and the “directory” format (`-Fd`). They allow for selection and reordering of all archived items, support parallel restoration, and are compressed by default. The “directory” format is the only format that supports parallel dumps.
 
@@ -60,7 +60,7 @@ The following command-line options control the content and format of the output.
 
 * `-e pattern``--extension=pattern`
 
-    Dump only extensions matching *`pattern`*. When this option is not specified, all non-system extensions in the target database will be dumped. Multiple extensions can be selected by writing multiple `-e` switches. The *`pattern`* parameter is interpreted as a pattern according to the same rules used by psql's `\d` commands (see [Patterns](app-psql.html#APP-PSQL-PATTERNS "Patterns")), so multiple extensions can also be selected by writing wildcard characters in the pattern. When using wildcards, be careful to quote the pattern if needed to prevent the shell from expanding the wildcards.
+    Dump only extensions matching *`pattern`*. When this option is not specified, all non-system extensions in the target database will be dumped. Multiple extensions can be selected by writing multiple `-e` switches. The *`pattern`* parameter is interpreted as a pattern according to the same rules used by psql's `\d` commands (see [Patterns](app-psql#APP-PSQL-PATTERNS "Patterns")), so multiple extensions can also be selected by writing wildcard characters in the pattern. When using wildcards, be careful to quote the pattern if needed to prevent the shell from expanding the wildcards.
 
     Any configuration relation registered by `pg_extension_config_dump` is included in the dump if its extension is specified by `--extension`.
 
@@ -70,7 +70,7 @@ The following command-line options control the content and format of the output.
 
 * `-E encoding``--encoding=encoding`
 
-    Create the dump in the specified character set encoding. By default, the dump is created in the database encoding. (Another way to get the same result is to set the `PGCLIENTENCODING` environment variable to the desired dump encoding.) The supported encodings are described in [Section 24.3.1](multibyte.html#MULTIBYTE-CHARSET-SUPPORTED "24.3.1. Supported Character Sets").
+    Create the dump in the specified character set encoding. By default, the dump is created in the database encoding. (Another way to get the same result is to set the `PGCLIENTENCODING` environment variable to the desired dump encoding.) The supported encodings are described in [Section 24.3.1](multibyte#MULTIBYTE-CHARSET-SUPPORTED "24.3.1. Supported Character Sets").
 
 * `-f file``--file=file`
 
@@ -100,15 +100,15 @@ The following command-line options control the content and format of the output.
 
     Run the dump in parallel by dumping *`njobs`* tables simultaneously. This option may reduce the time needed to perform the dump but it also increases the load on the database server. You can only use this option with the directory output format because this is the only output format where multiple processes can write their data at the same time.
 
-    pg\_dump will open *`njobs`* + 1 connections to the database, so make sure your [max\_connections](runtime-config-connection.html#GUC-MAX-CONNECTIONS) setting is high enough to accommodate all connections.
+    pg\_dump will open *`njobs`* + 1 connections to the database, so make sure your [max\_connections](runtime-config-connection#GUC-MAX-CONNECTIONS) setting is high enough to accommodate all connections.
 
-    Requesting exclusive locks on database objects while running a parallel dump could cause the dump to fail. The reason is that the pg\_dump leader process requests shared locks ([ACCESS SHARE](explicit-locking.html#LOCKING-TABLES "13.3.1. Table-Level Locks")) on the objects that the worker processes are going to dump later in order to make sure that nobody deletes them and makes them go away while the dump is running. If another client then requests an exclusive lock on a table, that lock will not be granted but will be queued waiting for the shared lock of the leader process to be released. Consequently any other access to the table will not be granted either and will queue after the exclusive lock request. This includes the worker process trying to dump the table. Without any precautions this would be a classic deadlock situation. To detect this conflict, the pg\_dump worker process requests another shared lock using the `NOWAIT` option. If the worker process is not granted this shared lock, somebody else must have requested an exclusive lock in the meantime and there is no way to continue with the dump, so pg\_dump has no choice but to abort the dump.
+    Requesting exclusive locks on database objects while running a parallel dump could cause the dump to fail. The reason is that the pg\_dump leader process requests shared locks ([ACCESS SHARE](explicit-locking#LOCKING-TABLES "13.3.1. Table-Level Locks")) on the objects that the worker processes are going to dump later in order to make sure that nobody deletes them and makes them go away while the dump is running. If another client then requests an exclusive lock on a table, that lock will not be granted but will be queued waiting for the shared lock of the leader process to be released. Consequently any other access to the table will not be granted either and will queue after the exclusive lock request. This includes the worker process trying to dump the table. Without any precautions this would be a classic deadlock situation. To detect this conflict, the pg\_dump worker process requests another shared lock using the `NOWAIT` option. If the worker process is not granted this shared lock, somebody else must have requested an exclusive lock in the meantime and there is no way to continue with the dump, so pg\_dump has no choice but to abort the dump.
 
     To perform a parallel dump, the database server needs to support synchronized snapshots, a feature that was introduced in PostgreSQL 9.2 for primary servers and 10 for standbys. With this feature, database clients can ensure they see the same data set even though they use different connections. `pg_dump -j` uses multiple database connections; it connects to the database once with the leader process and once again for each worker job. Without the synchronized snapshot feature, the different worker jobs wouldn't be guaranteed to see the same data in each connection, which could lead to an inconsistent backup.
 
 * `-n pattern``--schema=pattern`
 
-    Dump only schemas matching *`pattern`*; this selects both the schema itself, and all its contained objects. When this option is not specified, all non-system schemas in the target database will be dumped. Multiple schemas can be selected by writing multiple `-n` switches. The *`pattern`* parameter is interpreted as a pattern according to the same rules used by psql's `\d` commands (see [Patterns](app-psql.html#APP-PSQL-PATTERNS "Patterns")), so multiple schemas can also be selected by writing wildcard characters in the pattern. When using wildcards, be careful to quote the pattern if needed to prevent the shell from expanding the wildcards; see [Examples](app-pgdump.html#PG-DUMP-EXAMPLES "Examples") below.
+    Dump only schemas matching *`pattern`*; this selects both the schema itself, and all its contained objects. When this option is not specified, all non-system schemas in the target database will be dumped. Multiple schemas can be selected by writing multiple `-n` switches. The *`pattern`* parameter is interpreted as a pattern according to the same rules used by psql's `\d` commands (see [Patterns](app-psql#APP-PSQL-PATTERNS "Patterns")), so multiple schemas can also be selected by writing wildcard characters in the pattern. When using wildcards, be careful to quote the pattern if needed to prevent the shell from expanding the wildcards; see [Examples](app-pgdump#PG-DUMP-EXAMPLES "Examples") below.
 
 ### Note
 
@@ -150,7 +150,7 @@ The following command-line options control the content and format of the output.
 
 * `-t pattern``--table=pattern`
 
-    Dump only tables with names matching *`pattern`*. Multiple tables can be selected by writing multiple `-t` switches. The *`pattern`* parameter is interpreted as a pattern according to the same rules used by psql's `\d` commands (see [Patterns](app-psql.html#APP-PSQL-PATTERNS "Patterns")), so multiple tables can also be selected by writing wildcard characters in the pattern. When using wildcards, be careful to quote the pattern if needed to prevent the shell from expanding the wildcards; see [Examples](app-pgdump.html#PG-DUMP-EXAMPLES "Examples") below.
+    Dump only tables with names matching *`pattern`*. Multiple tables can be selected by writing multiple `-t` switches. The *`pattern`* parameter is interpreted as a pattern according to the same rules used by psql's `\d` commands (see [Patterns](app-psql#APP-PSQL-PATTERNS "Patterns")), so multiple tables can also be selected by writing wildcard characters in the pattern. When using wildcards, be careful to quote the pattern if needed to prevent the shell from expanding the wildcards; see [Examples](app-pgdump#PG-DUMP-EXAMPLES "Examples") below.
 
     As well as tables, this option can be used to dump the definition of matching views, materialized views, foreign tables, and sequences. It will not dump the contents of views or materialized views, and the contents of foreign tables will only be dumped if the corresponding foreign server is specified with `--include-foreign-data`.
 
@@ -210,7 +210,7 @@ The following command-line options control the content and format of the output.
 
 * `--enable-row-security`
 
-    This option is relevant only when dumping the contents of a table which has row security. By default, pg\_dump will set [row\_security](runtime-config-client.html#GUC-ROW-SECURITY) to off, to ensure that all data is dumped from the table. If the user does not have sufficient privileges to bypass row security, then an error is thrown. This parameter instructs pg\_dump to set [row\_security](runtime-config-client.html#GUC-ROW-SECURITY) to on instead, allowing the user to dump the parts of the contents of the table that they have access to.
+    This option is relevant only when dumping the contents of a table which has row security. By default, pg\_dump will set [row\_security](runtime-config-client#GUC-ROW-SECURITY) to off, to ensure that all data is dumped from the table. If the user does not have sufficient privileges to bypass row security, then an error is thrown. This parameter instructs pg\_dump to set [row\_security](runtime-config-client#GUC-ROW-SECURITY) to on instead, allowing the user to dump the parts of the contents of the table that they have access to.
 
     Note that if you use this option currently, you probably also want the dump be in `INSERT` format, as the `COPY FROM` during restore does not support row security.
 
@@ -238,7 +238,7 @@ The following command-line options control the content and format of the output.
 
 * `--include-foreign-data=foreignserver`
 
-    Dump the data for any foreign table with a foreign server matching *`foreignserver`* pattern. Multiple foreign servers can be selected by writing multiple `--include-foreign-data` switches. Also, the *`foreignserver`* parameter is interpreted as a pattern according to the same rules used by psql's `\d` commands (see [Patterns](app-psql.html#APP-PSQL-PATTERNS "Patterns")), so multiple foreign servers can also be selected by writing wildcard characters in the pattern. When using wildcards, be careful to quote the pattern if needed to prevent the shell from expanding the wildcards; see [Examples](app-pgdump.html#PG-DUMP-EXAMPLES "Examples") below. The only exception is that an empty pattern is disallowed.
+    Dump the data for any foreign table with a foreign server matching *`foreignserver`* pattern. Multiple foreign servers can be selected by writing multiple `--include-foreign-data` switches. Also, the *`foreignserver`* parameter is interpreted as a pattern according to the same rules used by psql's `\d` commands (see [Patterns](app-psql#APP-PSQL-PATTERNS "Patterns")), so multiple foreign servers can also be selected by writing wildcard characters in the pattern. When using wildcards, be careful to quote the pattern if needed to prevent the shell from expanding the wildcards; see [Examples](app-pgdump#PG-DUMP-EXAMPLES "Examples") below. The only exception is that an empty pattern is disallowed.
 
 ### Note
 
@@ -316,7 +316,7 @@ The following command-line options control the content and format of the output.
 
 * `--serializable-deferrable`
 
-    Use a `serializable` transaction for the dump, to ensure that the snapshot used is consistent with later database states; but do this by waiting for a point in the transaction stream at which no anomalies can be present, so that there isn't a risk of the dump failing or causing other transactions to roll back with a `serialization_failure`. See [Chapter 13](mvcc.html "Chapter 13. Concurrency Control") for more information about transaction isolation and concurrency control.
+    Use a `serializable` transaction for the dump, to ensure that the snapshot used is consistent with later database states; but do this by waiting for a point in the transaction stream at which no anomalies can be present, so that there isn't a risk of the dump failing or causing other transactions to roll back with a `serialization_failure`. See [Chapter 13](mvcc "Chapter 13. Concurrency Control") for more information about transaction isolation and concurrency control.
 
     This option is not beneficial for a dump which is intended only for disaster recovery. It could be useful for a dump used to load a copy of the database for reporting or other read-only load sharing while the original database continues to be updated. Without it the dump may reflect a state which is not consistent with any serial execution of the transactions eventually committed. For example, if batch processing techniques are used, a batch may show as closed in the dump without all of the items which are in the batch appearing.
 
@@ -324,9 +324,9 @@ The following command-line options control the content and format of the output.
 
 * `--snapshot=snapshotname`
 
-    Use the specified synchronized snapshot when making a dump of the database (see [Table 9.94](functions-admin.html#FUNCTIONS-SNAPSHOT-SYNCHRONIZATION-TABLE "Table 9.94. Snapshot Synchronization Functions") for more details).
+    Use the specified synchronized snapshot when making a dump of the database (see [Table 9.94](functions-admin#FUNCTIONS-SNAPSHOT-SYNCHRONIZATION-TABLE "Table 9.94. Snapshot Synchronization Functions") for more details).
 
-    This option is useful when needing to synchronize the dump with a logical replication slot (see [Chapter 49](logicaldecoding.html "Chapter 49. Logical Decoding")) or with a concurrent session.
+    This option is useful when needing to synchronize the dump with a logical replication slot (see [Chapter 49](logicaldecoding "Chapter 49. Logical Decoding")) or with a concurrent session.
 
     In the case of a parallel dump, the snapshot name defined by this option is used rather than taking a new snapshot.
 
@@ -340,7 +340,7 @@ The following command-line options control the content and format of the output.
 
     When set to `fsync`, which is the default, `pg_dump --format=directory` will recursively open and synchronize all files in the archive directory.
 
-    On Linux, `syncfs` may be used instead to ask the operating system to synchronize the whole file system that contains the archive directory. See [Appendix O](syncfs.html "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
+    On Linux, `syncfs` may be used instead to ask the operating system to synchronize the whole file system that contains the archive directory. See [Appendix O](syncfs "Appendix O. syncfs() Caveats") for more information about using `syncfs()`.
 
     This option has no effect when `--no-sync` is used or `--format` is not set to `directory`.
 
@@ -360,7 +360,7 @@ The following command-line options control the database connection parameters.
 
 * `-d dbname``--dbname=dbname`
 
-    Specifies the name of the database to connect to. This is equivalent to specifying *`dbname`* as the first non-option argument on the command line. The *`dbname`* can be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
+    Specifies the name of the database to connect to. This is equivalent to specifying *`dbname`* as the first non-option argument on the command line. The *`dbname`* can be a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). If so, connection string parameters will override any conflicting command line options.
 
 * `-h host``--host=host`
 
@@ -398,11 +398,11 @@ The following command-line options control the database connection parameters.
 
     Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 
-This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 ## Diagnostics
 
-pg\_dump internally executes `SELECT` statements. If you have problems running pg\_dump, make sure you are able to select information from the database using, for example, [psql](app-psql.html "psql"). Also, any default connection settings and environment variables used by the libpq front-end library will apply.
+pg\_dump internally executes `SELECT` statements. If you have problems running pg\_dump, make sure you are able to select information from the database using, for example, [psql](app-psql "psql"). Also, any default connection settings and environment variables used by the libpq front-end library will apply.
 
 The database activity of pg\_dump is normally collected by the cumulative statistics system. If this is undesirable, you can set parameter `track_counts` to false via `PGOPTIONS` or the `ALTER USER` command.
 
@@ -417,11 +417,11 @@ CREATE DATABASE foo WITH TEMPLATE template0;
 
 When a data-only dump is chosen and the option `--disable-triggers` is used, pg\_dump emits commands to disable triggers on user tables before inserting the data, and then commands to re-enable them after the data has been inserted. If the restore is stopped in the middle, the system catalogs might be left in the wrong state.
 
-The dump file produced by pg\_dump does not contain the statistics used by the optimizer to make query planning decisions. Therefore, it is wise to run `ANALYZE` after restoring from a dump file to ensure optimal performance; see [Section 25.1.3](routine-vacuuming.html#VACUUM-FOR-STATISTICS "25.1.3. Updating Planner Statistics") and [Section 25.1.6](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon") for more information.
+The dump file produced by pg\_dump does not contain the statistics used by the optimizer to make query planning decisions. Therefore, it is wise to run `ANALYZE` after restoring from a dump file to ensure optimal performance; see [Section 25.1.3](routine-vacuuming#VACUUM-FOR-STATISTICS "25.1.3. Updating Planner Statistics") and [Section 25.1.6](routine-vacuuming#AUTOVACUUM "25.1.6. The Autovacuum Daemon") for more information.
 
 Because pg\_dump is used to transfer data to newer versions of PostgreSQL, the output of pg\_dump can be expected to load into PostgreSQL server versions newer than pg\_dump's version. pg\_dump can also dump from PostgreSQL servers older than its own version. (Currently, servers back to version 9.2 are supported.) However, pg\_dump cannot dump from PostgreSQL servers newer than its own major version; it will refuse to even try, rather than risk making an invalid dump. Also, it is not guaranteed that pg\_dump's output can be loaded into a server of an older major version — not even if the dump was taken from a server of that version. Loading a dump file into an older server may require manual editing of the dump file to remove syntax not understood by the older server. Use of the `--quote-all-identifiers` option is recommended in cross-version cases, as it can prevent problems arising from varying reserved-word lists in different PostgreSQL versions.
 
-When dumping logical replication subscriptions, pg\_dump will generate `CREATE SUBSCRIPTION` commands that use the `connect = false` option, so that restoring the subscription does not make remote connections for creating a replication slot or for initial table copy. That way, the dump can be restored without requiring network access to the remote servers. It is then up to the user to reactivate the subscriptions in a suitable way. If the involved hosts have changed, the connection information might have to be changed. It might also be appropriate to truncate the target tables before initiating a new full table copy. If users intend to copy initial data during refresh they must create the slot with `two_phase = false`. After the initial sync, the [`two_phase`](sql-createsubscription.html#SQL-CREATESUBSCRIPTION-WITH-TWO-PHASE) option will be automatically enabled by the subscriber if the subscription had been originally created with `two_phase = true` option.
+When dumping logical replication subscriptions, pg\_dump will generate `CREATE SUBSCRIPTION` commands that use the `connect = false` option, so that restoring the subscription does not make remote connections for creating a replication slot or for initial table copy. That way, the dump can be restored without requiring network access to the remote servers. It is then up to the user to reactivate the subscriptions in a suitable way. If the involved hosts have changed, the connection information might have to be changed. It might also be appropriate to truncate the target tables before initiating a new full table copy. If users intend to copy initial data during refresh they must create the slot with `two_phase = false`. After the initial sync, the [`two_phase`](sql-createsubscription#SQL-CREATESUBSCRIPTION-WITH-TWO-PHASE) option will be automatically enabled by the subscriber if the subscription had been originally created with `two_phase = true` option.
 
 ## Examples
 
@@ -509,7 +509,7 @@ To dump all database objects except for tables whose names begin with `ts_`:
 pg_dump -T 'ts_*' mydb > db.sql
 ```
 
-To specify an upper-case or mixed-case name in `-t` and related switches, you need to double-quote the name; else it will be folded to lower case (see [Patterns](app-psql.html#APP-PSQL-PATTERNS "Patterns")). But double quotes are special to the shell, so in turn they must be quoted. Thus, to dump a single table with a mixed-case name, you need something like
+To specify an upper-case or mixed-case name in `-t` and related switches, you need to double-quote the name; else it will be folded to lower case (see [Patterns](app-psql#APP-PSQL-PATTERNS "Patterns")). But double quotes are special to the shell, so in turn they must be quoted. Thus, to dump a single table with a mixed-case name, you need something like
 
 ```
 
@@ -518,4 +518,4 @@ pg_dump -t "\"MixedCaseName\"" mydb > mytab.sql
 
 ## See Also
 
-[pg\_dumpall](app-pg-dumpall.html "pg_dumpall"), [pg\_restore](app-pgrestore.html "pg_restore"), [psql](app-psql.html "psql")
+[pg\_dumpall](app-pg-dumpall "pg_dumpall"), [pg\_restore](app-pgrestore "pg_restore"), [psql](app-psql "psql")

@@ -368,7 +368,7 @@ This section describes the detailed format of each message. Each is marked to in
 
   * Int8
 
-        0 indicates the overall `COPY` format is textual (rows separated by newlines, columns separated by separator characters, etc.). 1 indicates the overall copy format is binary (similar to DataRow format). See [COPY](sql-copy.html "COPY") for more information.
+        0 indicates the overall `COPY` format is textual (rows separated by newlines, columns separated by separator characters, etc.). 1 indicates the overall copy format is binary (similar to DataRow format). See [COPY](sql-copy "COPY") for more information.
 
   * Int16
 
@@ -390,7 +390,7 @@ This section describes the detailed format of each message. Each is marked to in
 
   * Int8
 
-        0 indicates the overall `COPY` format is textual (rows separated by newlines, columns separated by separator characters, etc.). 1 indicates the overall copy format is binary (similar to DataRow format). See [COPY](sql-copy.html "COPY") for more information.
+        0 indicates the overall `COPY` format is textual (rows separated by newlines, columns separated by separator characters, etc.). 1 indicates the overall copy format is binary (similar to DataRow format). See [COPY](sql-copy "COPY") for more information.
 
   * Int16
 
@@ -412,7 +412,7 @@ This section describes the detailed format of each message. Each is marked to in
 
   * Int8
 
-        0 indicates the overall `COPY` format is textual (rows separated by newlines, columns separated by separator characters, etc.). 1 indicates the overall copy format is binary (similar to DataRow format). See [COPY](sql-copy.html "COPY") for more information.
+        0 indicates the overall `COPY` format is textual (rows separated by newlines, columns separated by separator characters, etc.). 1 indicates the overall copy format is binary (similar to DataRow format). See [COPY](sql-copy "COPY") for more information.
 
   * Int16
 
@@ -488,7 +488,7 @@ This section describes the detailed format of each message. Each is marked to in
 
   * Byte1
 
-        A code identifying the field type; if zero, this is the message terminator and no string follows. The presently defined field types are listed in [Section 55.8](protocol-error-fields.html "55.8. Error and Notice Message Fields"). Since more field types might be added in future, frontends should silently ignore fields of unrecognized type.
+        A code identifying the field type; if zero, this is the message terminator and no string follows. The presently defined field types are listed in [Section 55.8](protocol-error-fields "55.8. Error and Notice Message Fields"). Since more field types might be added in future, frontends should silently ignore fields of unrecognized type.
 
   * String
 
@@ -654,7 +654,7 @@ This section describes the detailed format of each message. Each is marked to in
 
   * Byte1
 
-        A code identifying the field type; if zero, this is the message terminator and no string follows. The presently defined field types are listed in [Section 55.8](protocol-error-fields.html "55.8. Error and Notice Message Fields"). Since more field types might be added in future, frontends should silently ignore fields of unrecognized type.
+        A code identifying the field type; if zero, this is the message terminator and no string follows. The presently defined field types are listed in [Section 55.8](protocol-error-fields "55.8. Error and Notice Message Fields"). Since more field types might be added in future, frontends should silently ignore fields of unrecognized type.
 
   * String
 
@@ -930,7 +930,7 @@ This section describes the detailed format of each message. Each is marked to in
 
     * `replication`
 
-            Used to connect in streaming replication mode, where a small set of replication commands can be issued instead of SQL statements. Value can be `true`, `false`, or `database`, and the default is `false`. See [Section 55.4](protocol-replication.html "55.4. Streaming Replication Protocol") for details.
+            Used to connect in streaming replication mode, where a small set of replication commands can be issued instead of SQL statements. Value can be `true`, `false`, or `database`, and the default is `false`. See [Section 55.4](protocol-replication "55.4. Streaming Replication Protocol") for details.
 
         In addition to the above, other parameters may be listed. Parameter names beginning with `_pq_.` are reserved for use as protocol extensions, while others are treated as run-time parameters to be set at backend start time. Such settings will be applied during backend start (after parsing the command-line arguments if any) and will act as session defaults.
 

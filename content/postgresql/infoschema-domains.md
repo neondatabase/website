@@ -1,6 +1,6 @@
 ## 37.23. `domains` [#](#INFOSCHEMA-DOMAINS)
 
-The view `domains` contains all [**](glossary.html#GLOSSARY-DOMAIN)*[domains](glossary.html#GLOSSARY-DOMAIN "Domain")* defined in the current database. Only those domains are shown that the current user has access to (by way of being the owner or having some privilege).
+The view `domains` contains all [**](glossary#GLOSSARY-DOMAIN)*[domains](glossary#GLOSSARY-DOMAIN "Domain")* defined in the current database. Only those domains are shown that the current user has access to (by way of being the owner or having some privilege).
 
 **Table 37.21. `domains` Columns**
 

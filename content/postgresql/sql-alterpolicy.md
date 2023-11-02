@@ -42,11 +42,11 @@ In the second form of `ALTER POLICY`, the role list, *`using_expression`*, and *
 
 * *`using_expression`*
 
-    The `USING` expression for the policy. See [CREATE POLICY](sql-createpolicy.html "CREATE POLICY") for details.
+    The `USING` expression for the policy. See [CREATE POLICY](sql-createpolicy "CREATE POLICY") for details.
 
 * *`check_expression`*
 
-    The `WITH CHECK` expression for the policy. See [CREATE POLICY](sql-createpolicy.html "CREATE POLICY") for details.
+    The `WITH CHECK` expression for the policy. See [CREATE POLICY](sql-createpolicy "CREATE POLICY") for details.
 
 ## Compatibility
 
@@ -54,4 +54,4 @@ In the second form of `ALTER POLICY`, the role list, *`using_expression`*, and *
 
 ## See Also
 
-[CREATE POLICY](sql-createpolicy.html "CREATE POLICY"), [DROP POLICY](sql-droppolicy.html "DROP POLICY")
+[CREATE POLICY](sql-createpolicy "CREATE POLICY"), [DROP POLICY](sql-droppolicy "DROP POLICY")

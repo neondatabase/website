@@ -1,10 +1,10 @@
 ## F.28. pg\_freespacemap — examine the free space map [#](#PGFREESPACEMAP)
 
-  * *   [F.28.1. Functions](pgfreespacemap.html#PGFREESPACEMAP-FUNCS)
-  * [F.28.2. Sample Output](pgfreespacemap.html#PGFREESPACEMAP-SAMPLE-OUTPUT)
-  * [F.28.3. Author](pgfreespacemap.html#PGFREESPACEMAP-AUTHOR)
+  * *   [F.28.1. Functions](pgfreespacemap#PGFREESPACEMAP-FUNCS)
+  * [F.28.2. Sample Output](pgfreespacemap#PGFREESPACEMAP-SAMPLE-OUTPUT)
+  * [F.28.3. Author](pgfreespacemap#PGFREESPACEMAP-AUTHOR)
 
-The `pg_freespacemap` module provides a means for examining the [free space map](storage-fsm.html "73.3. Free Space Map") (FSM). It provides a function called `pg_freespace`, or two overloaded functions, to be precise. The functions show the value recorded in the free space map for a given page, or for all pages in the relation.
+The `pg_freespacemap` module provides a means for examining the [free space map](storage-fsm "73.3. Free Space Map") (FSM). It provides a function called `pg_freespace`, or two overloaded functions, to be precise. The functions show the value recorded in the free space map for a given page, or for all pages in the relation.
 
 By default use is restricted to superusers and roles with privileges of the `pg_stat_scan_tables` role. Access may be granted to others using `GRANT`.
 

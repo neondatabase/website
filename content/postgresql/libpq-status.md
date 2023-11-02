@@ -6,7 +6,7 @@ These functions can be used to interrogate the status of an existing database co
 
 libpq application programmers should be careful to maintain the `PGconn` abstraction. Use the accessor functions described below to get at the contents of `PGconn`. Reference to internal `PGconn` fields using `libpq-int.h` is not recommended because they are subject to change in the future.
 
-The following functions return parameter values established at connection. These values are fixed for the life of the connection. If a multi-host connection string is used, the values of [`PQhost`](libpq-status.html#LIBPQ-PQHOST), [`PQport`](libpq-status.html#LIBPQ-PQPORT), and [`PQpass`](libpq-status.html#LIBPQ-PQPASS) can change if a new connection is established using the same `PGconn` object. Other values are fixed for the lifetime of the `PGconn` object.
+The following functions return parameter values established at connection. These values are fixed for the life of the connection. If a multi-host connection string is used, the values of [`PQhost`](libpq-status#LIBPQ-PQHOST), [`PQport`](libpq-status#LIBPQ-PQPORT), and [`PQpass`](libpq-status#LIBPQ-PQPASS) can change if a new connection is established using the same `PGconn` object. Other values are fixed for the lifetime of the `PGconn` object.
 
 * `PQdb` [#](#LIBPQ-PQDB)
 
@@ -35,7 +35,7 @@ The following functions return parameter values established at connection. These
     char *PQpass(const PGconn *conn);
     ```
 
-    [`PQpass`](libpq-status.html#LIBPQ-PQPASS) will return either the password specified in the connection parameters, or if there was none and the password was obtained from the [password file](libpq-pgpass.html "34.16. The Password File"), it will return that. In the latter case, if multiple hosts were specified in the connection parameters, it is not possible to rely on the result of [`PQpass`](libpq-status.html#LIBPQ-PQPASS) until the connection is established. The status of the connection can be checked using the function [`PQstatus`](libpq-status.html#LIBPQ-PQSTATUS).
+    [`PQpass`](libpq-status#LIBPQ-PQPASS) will return either the password specified in the connection parameters, or if there was none and the password was obtained from the [password file](libpq-pgpass "34.16. The Password File"), it will return that. In the latter case, if multiple hosts were specified in the connection parameters, it is not possible to rely on the result of [`PQpass`](libpq-status#LIBPQ-PQPASS) until the connection is established. The status of the connection can be checked using the function [`PQstatus`](libpq-status#LIBPQ-PQSTATUS).
 
 * `PQhost` [#](#LIBPQ-PQHOST)
 
@@ -46,11 +46,11 @@ The following functions return parameter values established at connection. These
     char *PQhost(const PGconn *conn);
     ```
 
-    If the connection parameters specified both `host` and `hostaddr`, then [`PQhost`](libpq-status.html#LIBPQ-PQHOST) will return the `host` information. If only `hostaddr` was specified, then that is returned. If multiple hosts were specified in the connection parameters, [`PQhost`](libpq-status.html#LIBPQ-PQHOST) returns the host actually connected to.
+    If the connection parameters specified both `host` and `hostaddr`, then [`PQhost`](libpq-status#LIBPQ-PQHOST) will return the `host` information. If only `hostaddr` was specified, then that is returned. If multiple hosts were specified in the connection parameters, [`PQhost`](libpq-status#LIBPQ-PQHOST) returns the host actually connected to.
 
-    [`PQhost`](libpq-status.html#LIBPQ-PQHOST) returns `NULL` if the *`conn`* argument is `NULL`. Otherwise, if there is an error producing the host information (perhaps if the connection has not been fully established or there was an error), it returns an empty string.
+    [`PQhost`](libpq-status#LIBPQ-PQHOST) returns `NULL` if the *`conn`* argument is `NULL`. Otherwise, if there is an error producing the host information (perhaps if the connection has not been fully established or there was an error), it returns an empty string.
 
-    If multiple hosts were specified in the connection parameters, it is not possible to rely on the result of [`PQhost`](libpq-status.html#LIBPQ-PQHOST) until the connection is established. The status of the connection can be checked using the function [`PQstatus`](libpq-status.html#LIBPQ-PQSTATUS).
+    If multiple hosts were specified in the connection parameters, it is not possible to rely on the result of [`PQhost`](libpq-status#LIBPQ-PQHOST) until the connection is established. The status of the connection can be checked using the function [`PQstatus`](libpq-status#LIBPQ-PQSTATUS).
 
 * `PQhostaddr` [#](#LIBPQ-PQHOSTADDR)
 
@@ -61,7 +61,7 @@ The following functions return parameter values established at connection. These
     char *PQhostaddr(const PGconn *conn);
     ```
 
-    [`PQhostaddr`](libpq-status.html#LIBPQ-PQHOSTADDR) returns `NULL` if the *`conn`* argument is `NULL`. Otherwise, if there is an error producing the host information (perhaps if the connection has not been fully established or there was an error), it returns an empty string.
+    [`PQhostaddr`](libpq-status#LIBPQ-PQHOSTADDR) returns `NULL` if the *`conn`* argument is `NULL`. Otherwise, if there is an error producing the host information (perhaps if the connection has not been fully established or there was an error), it returns an empty string.
 
 * `PQport` [#](#LIBPQ-PQPORT)
 
@@ -72,11 +72,11 @@ The following functions return parameter values established at connection. These
     char *PQport(const PGconn *conn);
     ```
 
-    If multiple ports were specified in the connection parameters, [`PQport`](libpq-status.html#LIBPQ-PQPORT) returns the port actually connected to.
+    If multiple ports were specified in the connection parameters, [`PQport`](libpq-status#LIBPQ-PQPORT) returns the port actually connected to.
 
-    [`PQport`](libpq-status.html#LIBPQ-PQPORT) returns `NULL` if the *`conn`* argument is `NULL`. Otherwise, if there is an error producing the port information (perhaps if the connection has not been fully established or there was an error), it returns an empty string.
+    [`PQport`](libpq-status#LIBPQ-PQPORT) returns `NULL` if the *`conn`* argument is `NULL`. Otherwise, if there is an error producing the port information (perhaps if the connection has not been fully established or there was an error), it returns an empty string.
 
-    If multiple ports were specified in the connection parameters, it is not possible to rely on the result of [`PQport`](libpq-status.html#LIBPQ-PQPORT) until the connection is established. The status of the connection can be checked using the function [`PQstatus`](libpq-status.html#LIBPQ-PQSTATUS).
+    If multiple ports were specified in the connection parameters, it is not possible to rely on the result of [`PQport`](libpq-status#LIBPQ-PQPORT) until the connection is established. The status of the connection can be checked using the function [`PQstatus`](libpq-status#LIBPQ-PQSTATUS).
 
 * `PQtty` [#](#LIBPQ-PQTTY)
 
@@ -107,9 +107,9 @@ The following functions return status data that can change as operations are exe
     ConnStatusType PQstatus(const PGconn *conn);
     ```
 
-    The status can be one of a number of values. However, only two of these are seen outside of an asynchronous connection procedure: `CONNECTION_OK` and `CONNECTION_BAD`. A good connection to the database has the status `CONNECTION_OK`. A failed connection attempt is signaled by status `CONNECTION_BAD`. Ordinarily, an OK status will remain so until [`PQfinish`](libpq-connect.html#LIBPQ-PQFINISH), but a communications failure might result in the status changing to `CONNECTION_BAD` prematurely. In that case the application could try to recover by calling [`PQreset`](libpq-connect.html#LIBPQ-PQRESET).
+    The status can be one of a number of values. However, only two of these are seen outside of an asynchronous connection procedure: `CONNECTION_OK` and `CONNECTION_BAD`. A good connection to the database has the status `CONNECTION_OK`. A failed connection attempt is signaled by status `CONNECTION_BAD`. Ordinarily, an OK status will remain so until [`PQfinish`](libpq-connect#LIBPQ-PQFINISH), but a communications failure might result in the status changing to `CONNECTION_BAD` prematurely. In that case the application could try to recover by calling [`PQreset`](libpq-connect#LIBPQ-PQRESET).
 
-    See the entry for [`PQconnectStartParams`](libpq-connect.html#LIBPQ-PQCONNECTSTARTPARAMS), `PQconnectStart` and `PQconnectPoll` with regards to other status codes that might be returned.
+    See the entry for [`PQconnectStartParams`](libpq-connect#LIBPQ-PQCONNECTSTARTPARAMS), `PQconnectStart` and `PQconnectPoll` with regards to other status codes that might be returned.
 
 * `PQtransactionStatus` [#](#LIBPQ-PQTRANSACTIONSTATUS)
 
@@ -131,7 +131,7 @@ The following functions return status data that can change as operations are exe
     const char *PQparameterStatus(const PGconn *conn, const char *paramName);
     ```
 
-    Certain parameter values are reported by the server automatically at connection startup or whenever their values change. [`PQparameterStatus`](libpq-status.html#LIBPQ-PQPARAMETERSTATUS) can be used to interrogate these settings. It returns the current value of a parameter if known, or `NULL` if the parameter is not known.
+    Certain parameter values are reported by the server automatically at connection startup or whenever their values change. [`PQparameterStatus`](libpq-status#LIBPQ-PQPARAMETERSTATUS) can be used to interrogate these settings. It returns the current value of a parameter if known, or `NULL` if the parameter is not known.
 
     Parameters reported as of the current release include `server_version`, `server_encoding`, `client_encoding`, `application_name`, `default_transaction_read_only`, `in_hot_standby`, `is_superuser`, `session_authorization`, `DateStyle`, `IntervalStyle`, `TimeZone`, `integer_datetimes`, and `standard_conforming_strings`. (`server_encoding`, `TimeZone`, and `integer_datetimes` were not reported by releases before 8.0; `standard_conforming_strings` was not reported by releases before 8.1; `IntervalStyle` was not reported by releases before 8.4; `application_name` was not reported by releases before 9.0; `default_transaction_read_only` and `in_hot_standby` were not reported by releases before 14.) Note that `server_version`, `server_encoding` and `integer_datetimes` cannot change after startup.
 
@@ -161,9 +161,9 @@ The following functions return status data that can change as operations are exe
 
     Applications might use this function to determine the version of the database server they are connected to. The result is formed by multiplying the server's major version number by 10000 and adding the minor version number. For example, version 10.1 will be returned as 100001, and version 11.0 will be returned as 110000. Zero is returned if the connection is bad.
 
-    Prior to major version 10, PostgreSQL used three-part version numbers in which the first two parts together represented the major version. For those versions, [`PQserverVersion`](libpq-status.html#LIBPQ-PQSERVERVERSION) uses two digits for each part; for example version 9.1.5 will be returned as 90105, and version 9.2.0 will be returned as 90200.
+    Prior to major version 10, PostgreSQL used three-part version numbers in which the first two parts together represented the major version. For those versions, [`PQserverVersion`](libpq-status#LIBPQ-PQSERVERVERSION) uses two digits for each part; for example version 9.1.5 will be returned as 90105, and version 9.2.0 will be returned as 90200.
 
-    Therefore, for purposes of determining feature compatibility, applications should divide the result of [`PQserverVersion`](libpq-status.html#LIBPQ-PQSERVERVERSION) by 100 not 10000 to determine a logical major version number. In all release series, only the last two digits differ between minor releases (bug-fix releases).
+    Therefore, for purposes of determining feature compatibility, applications should divide the result of [`PQserverVersion`](libpq-status#LIBPQ-PQSERVERVERSION) by 100 not 10000 to determine a logical major version number. In all release series, only the last two digits differ between minor releases (bug-fix releases).
 
 * `PQerrorMessage` [#](#LIBPQ-PQERRORMESSAGE)
 
@@ -174,7 +174,7 @@ The following functions return status data that can change as operations are exe
     char *PQerrorMessage(const PGconn *conn);
     ```
 
-    Nearly all libpq functions will set a message for [`PQerrorMessage`](libpq-status.html#LIBPQ-PQERRORMESSAGE) if they fail. Note that by libpq convention, a nonempty [`PQerrorMessage`](libpq-status.html#LIBPQ-PQERRORMESSAGE) result can consist of multiple lines, and will include a trailing newline. The caller should not free the result directly. It will be freed when the associated `PGconn` handle is passed to [`PQfinish`](libpq-connect.html#LIBPQ-PQFINISH). The result string should not be expected to remain the same across operations on the `PGconn` structure.
+    Nearly all libpq functions will set a message for [`PQerrorMessage`](libpq-status#LIBPQ-PQERRORMESSAGE) if they fail. Note that by libpq convention, a nonempty [`PQerrorMessage`](libpq-status#LIBPQ-PQERRORMESSAGE) result can consist of multiple lines, and will include a trailing newline. The caller should not free the result directly. It will be freed when the associated `PGconn` handle is passed to [`PQfinish`](libpq-connect#LIBPQ-PQFINISH). The result string should not be expected to remain the same across operations on the `PGconn` structure.
 
 * `PQsocket` [#](#LIBPQ-PQSOCKET)
 
@@ -327,4 +327,4 @@ The following functions return information related to SSL. This information usua
     void *PQgetssl(const PGconn *conn);
     ```
 
-    This function is equivalent to `PQsslStruct(conn, "OpenSSL")`. It should not be used in new applications, because the returned struct is specific to OpenSSL and will not be available if another SSL implementation is used. To check if a connection uses SSL, call [`PQsslInUse`](libpq-status.html#LIBPQ-PQSSLINUSE) instead, and for more details about the connection, use [`PQsslAttribute`](libpq-status.html#LIBPQ-PQSSLATTRIBUTE).
+    This function is equivalent to `PQsslStruct(conn, "OpenSSL")`. It should not be used in new applications, because the returned struct is specific to OpenSSL and will not be available if another SSL implementation is used. To check if a connection uses SSL, call [`PQsslInUse`](libpq-status#LIBPQ-PQSSLINUSE) instead, and for more details about the connection, use [`PQsslAttribute`](libpq-status#LIBPQ-PQSSLATTRIBUTE).

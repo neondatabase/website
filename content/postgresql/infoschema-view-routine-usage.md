@@ -11,4 +11,4 @@ The view `view_routine_usage` identifies all routines (functions and procedures)
 | `table_name` `sql_identifier`Name of the view                                                                                                              |
 | `specific_catalog` `sql_identifier`Name of the database containing the function (always the current database)                                              |
 | `specific_schema` `sql_identifier`Name of the schema containing the function                                                                               |
-| `specific_name` `sql_identifier`The “specific name” of the function. See [Section 37.45](infoschema-routines.html "37.45. routines") for more information. |
+| `specific_name` `sql_identifier`The “specific name” of the function. See [Section 37.45](infoschema-routines "37.45. routines") for more information. |

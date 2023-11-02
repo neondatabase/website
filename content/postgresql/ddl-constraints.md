@@ -1,11 +1,11 @@
 ## 5.4. Constraints [#](#DDL-CONSTRAINTS)
 
-  * *   [5.4.1. Check Constraints](ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
-  * [5.4.2. Not-Null Constraints](ddl-constraints.html#DDL-CONSTRAINTS-NOT-NULL)
-  * [5.4.3. Unique Constraints](ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS)
-  * [5.4.4. Primary Keys](ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS)
-  * [5.4.5. Foreign Keys](ddl-constraints.html#DDL-CONSTRAINTS-FK)
-  * [5.4.6. Exclusion Constraints](ddl-constraints.html#DDL-CONSTRAINTS-EXCLUSION)
+  * *   [5.4.1. Check Constraints](ddl-constraints#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
+  * [5.4.2. Not-Null Constraints](ddl-constraints#DDL-CONSTRAINTS-NOT-NULL)
+  * [5.4.3. Unique Constraints](ddl-constraints#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS)
+  * [5.4.4. Primary Keys](ddl-constraints#DDL-CONSTRAINTS-PRIMARY-KEYS)
+  * [5.4.5. Foreign Keys](ddl-constraints#DDL-CONSTRAINTS-FK)
+  * [5.4.6. Exclusion Constraints](ddl-constraints#DDL-CONSTRAINTS-EXCLUSION)
 
 Data types are a way to limit the kind of data that can be stored in a table. For many applications, however, the constraint they provide is too coarse. For example, a column containing a product price should probably only accept positive values. But there is no standard data type that accepts only positive numbers. Another issue is that you might want to constrain column data with respect to other columns or rows. For example, in a table containing product information, there should be only one row for each product number.
 
@@ -105,7 +105,7 @@ It should be noted that a check constraint is satisfied if the check expression 
 
 PostgreSQL does not support `CHECK` constraints that reference table data other than the new or updated row being checked. While a `CHECK` constraint that violates this rule may appear to work in simple tests, it cannot guarantee that the database will not reach a state in which the constraint condition is false (due to subsequent changes of the other row(s) involved). This would cause a database dump and restore to fail. The restore could fail even when the complete database state is consistent with the constraint, due to rows not being loaded in an order that will satisfy the constraint. If possible, use `UNIQUE`, `EXCLUDE`, or `FOREIGN KEY` constraints to express cross-row and cross-table restrictions.
 
-If what you desire is a one-time check against other rows at row insertion, rather than a continuously-maintained consistency guarantee, a custom [trigger](triggers.html "Chapter 39. Triggers") can be used to implement that. (This approach avoids the dump/restore problem because pg\_dump does not reinstall triggers until after restoring data, so that the check will not be enforced during a dump/restore.)
+If what you desire is a one-time check against other rows at row insertion, rather than a continuously-maintained consistency guarantee, a custom [trigger](triggers "Chapter 39. Triggers") can be used to implement that. (This approach avoids the dump/restore problem because pg\_dump does not reinstall triggers until after restoring data, so that the check will not be enforced during a dump/restore.)
 
 ### Note
 
@@ -238,7 +238,7 @@ CREATE TABLE products (
 );
 ```
 
-Adding a unique constraint will automatically create a unique B-tree index on the column or group of columns listed in the constraint. A uniqueness restriction covering only some rows cannot be written as a unique constraint, but it is possible to enforce such a restriction by creating a unique [partial index](indexes-partial.html "11.8. Partial Indexes").
+Adding a unique constraint will automatically create a unique B-tree index on the column or group of columns listed in the constraint. A uniqueness restriction covering only some rows cannot be written as a unique constraint, but it is possible to enforce such a restriction by creating a unique [partial index](indexes-partial "11.8. Partial Indexes").
 
 In general, a unique constraint is violated if there is more than one row in the table where the values of all of the columns included in the constraint are equal. By default, two null values are not considered equal in this comparison. That means even in the presence of a unique constraint it is possible to store duplicate rows that contain a null value in at least one of the constrained columns. This behavior can be changed by adding the clause `NULLS NOT DISTINCT`, like
 
@@ -469,7 +469,7 @@ Normally, a referencing row need not satisfy the foreign key constraint if any o
 
 A foreign key must reference columns that either are a primary key or form a unique constraint. This means that the referenced columns always have an index (the one underlying the primary key or unique constraint); so checks on whether a referencing row has a match will be efficient. Since a `DELETE` of a row from the referenced table or an `UPDATE` of a referenced column will require a scan of the referencing table for rows matching the old value, it is often a good idea to index the referencing columns too. Because this is not always needed, and there are many choices available on how to index, declaration of a foreign key constraint does not automatically create an index on the referencing columns.
 
-More information about updating and deleting data is in [Chapter 6](dml.html "Chapter 6. Data Manipulation"). Also see the description of foreign key constraint syntax in the reference documentation for [CREATE TABLE](sql-createtable.html "CREATE TABLE").
+More information about updating and deleting data is in [Chapter 6](dml "Chapter 6. Data Manipulation"). Also see the description of foreign key constraint syntax in the reference documentation for [CREATE TABLE](sql-createtable "CREATE TABLE").
 
 ### 5.4.6. Exclusion Constraints [#](#DDL-CONSTRAINTS-EXCLUSION)
 
@@ -483,6 +483,6 @@ CREATE TABLE circles (
 );
 ```
 
-See also [`CREATE TABLE ... CONSTRAINT ... EXCLUDE`](sql-createtable.html#SQL-CREATETABLE-EXCLUDE) for details.
+See also [`CREATE TABLE ... CONSTRAINT ... EXCLUDE`](sql-createtable#SQL-CREATETABLE-EXCLUDE) for details.
 
 Adding an exclusion constraint will automatically create an index of the type specified in the constraint declaration.

@@ -1,13 +1,13 @@
 ## 36.6. pgtypes Library [#](#ECPG-PGTYPES)
 
-  * *   [36.6.1. Character Strings](ecpg-pgtypes.html#ECPG-PGTYPES-CSTRINGS)
-  * [36.6.2. The numeric Type](ecpg-pgtypes.html#ECPG-PGTYPES-NUMERIC)
-  * [36.6.3. The date Type](ecpg-pgtypes.html#ECPG-PGTYPES-DATE)
-  * [36.6.4. The timestamp Type](ecpg-pgtypes.html#ECPG-PGTYPES-TIMESTAMP)
-  * [36.6.5. The interval Type](ecpg-pgtypes.html#ECPG-PGTYPES-INTERVAL)
-  * [36.6.6. The decimal Type](ecpg-pgtypes.html#ECPG-PGTYPES-DECIMAL)
-  * [36.6.7. errno Values of pgtypeslib](ecpg-pgtypes.html#ECPG-PGTYPES-ERRNO)
-  * [36.6.8. Special Constants of pgtypeslib](ecpg-pgtypes.html#ECPG-PGTYPES-CONSTANTS)
+  * *   [36.6.1. Character Strings](ecpg-pgtypes#ECPG-PGTYPES-CSTRINGS)
+  * [36.6.2. The numeric Type](ecpg-pgtypes#ECPG-PGTYPES-NUMERIC)
+  * [36.6.3. The date Type](ecpg-pgtypes#ECPG-PGTYPES-DATE)
+  * [36.6.4. The timestamp Type](ecpg-pgtypes#ECPG-PGTYPES-TIMESTAMP)
+  * [36.6.5. The interval Type](ecpg-pgtypes#ECPG-PGTYPES-INTERVAL)
+  * [36.6.6. The decimal Type](ecpg-pgtypes#ECPG-PGTYPES-DECIMAL)
+  * [36.6.7. errno Values of pgtypeslib](ecpg-pgtypes#ECPG-PGTYPES-ERRNO)
+  * [36.6.8. Special Constants of pgtypeslib](ecpg-pgtypes#ECPG-PGTYPES-CONSTANTS)
 
 The pgtypes library maps PostgreSQL database types to C equivalents that can be used in C programs. It also offers functions to do basic calculations with those types within C, i.e., without the help of the PostgreSQL server. See the following example:
 
@@ -34,7 +34,7 @@ Some functions such as `PGTYPESnumeric_to_asc` return a pointer to a freshly all
 
 ### 36.6.2. The numeric Type [#](#ECPG-PGTYPES-NUMERIC)
 
-The numeric type offers to do calculations with arbitrary precision. See [Section 8.1](datatype-numeric.html "8.1. Numeric Types") for the equivalent type in the PostgreSQL server. Because of the arbitrary precision this variable needs to be able to expand and shrink dynamically. That's why you can only create numeric variables on the heap, by means of the `PGTYPESnumeric_new` and `PGTYPESnumeric_free` functions. The decimal type, which is similar but limited in precision, can be created on the stack as well as on the heap.
+The numeric type offers to do calculations with arbitrary precision. See [Section 8.1](datatype-numeric "8.1. Numeric Types") for the equivalent type in the PostgreSQL server. Because of the arbitrary precision this variable needs to be able to expand and shrink dynamically. That's why you can only create numeric variables on the heap, by means of the `PGTYPESnumeric_new` and `PGTYPESnumeric_free` functions. The decimal type, which is similar but limited in precision, can be created on the stack as well as on the heap.
 
 The following functions can be used to work with the numeric type:
 
@@ -238,7 +238,7 @@ The following functions can be used to work with the numeric type:
 
 ### 36.6.3. The date Type [#](#ECPG-PGTYPES-DATE)
 
-The date type in C enables your programs to deal with data of the SQL type date. See [Section 8.5](datatype-datetime.html "8.5. Date/Time Types") for the equivalent type in the PostgreSQL server.
+The date type in C enables your programs to deal with data of the SQL type date. See [Section 8.5](datatype-datetime "8.5. Date/Time Types") for the equivalent type in the PostgreSQL server.
 
 The following functions can be used to work with the date type:
 
@@ -266,7 +266,7 @@ The following functions can be used to work with the date type:
 
     Note that the function always assumes MDY-formatted dates and there is currently no variable to change that within ECPG.
 
-    [Table 36.2](ecpg-pgtypes.html#ECPG-PGTYPESDATE-FROM-ASC-TABLE "Table 36.2. Valid Input Formats for PGTYPESdate_from_asc") shows the allowed input formats.
+    [Table 36.2](ecpg-pgtypes#ECPG-PGTYPESDATE-FROM-ASC-TABLE "Table 36.2. Valid Input Formats for PGTYPESdate_from_asc") shows the allowed input formats.
 
     **Table 36.2. Valid Input Formats for `PGTYPESdate_from_asc`**
 
@@ -377,7 +377,7 @@ The following functions can be used to work with the date type:
 
     All other characters are copied 1:1 to the output string.
 
-    [Table 36.3](ecpg-pgtypes.html#ECPG-PGTYPESDATE-FMT-ASC-EXAMPLE-TABLE "Table 36.3. Valid Input Formats for PGTYPESdate_fmt_asc") indicates a few possible formats. This will give you an idea of how to use this function. All output lines are based on the same date: November 23, 1959.
+    [Table 36.3](ecpg-pgtypes#ECPG-PGTYPESDATE-FMT-ASC-EXAMPLE-TABLE "Table 36.3. Valid Input Formats for PGTYPESdate_fmt_asc") indicates a few possible formats. This will give you an idea of how to use this function. All output lines are based on the same date: November 23, 1959.
 
     **Table 36.3. Valid Input Formats for `PGTYPESdate_fmt_asc`**
 
@@ -407,7 +407,7 @@ The following functions can be used to work with the date type:
 
     The function receives a pointer to the date value that should hold the result of the operation (`d`), the format mask to use for parsing the date (`fmt`) and the C char\* string containing the textual representation of the date (`str`). The textual representation is expected to match the format mask. However you do not need to have a 1:1 mapping of the string to the format mask. The function only analyzes the sequential order and looks for the literals `yy` or `yyyy` that indicate the position of the year, `mm` to indicate the position of the month and `dd` to indicate the position of the day.
 
-    [Table 36.4](ecpg-pgtypes.html#ECPG-RDEFMTDATE-EXAMPLE-TABLE "Table 36.4. Valid Input Formats for rdefmtdate") indicates a few possible formats. This will give you an idea of how to use this function.
+    [Table 36.4](ecpg-pgtypes#ECPG-RDEFMTDATE-EXAMPLE-TABLE "Table 36.4. Valid Input Formats for rdefmtdate") indicates a few possible formats. This will give you an idea of how to use this function.
 
     **Table 36.4. Valid Input Formats for `rdefmtdate`**
 
@@ -429,7 +429,7 @@ The following functions can be used to work with the date type:
 
 ### 36.6.4. The timestamp Type [#](#ECPG-PGTYPES-TIMESTAMP)
 
-The timestamp type in C enables your programs to deal with data of the SQL type timestamp. See [Section 8.5](datatype-datetime.html "8.5. Date/Time Types") for the equivalent type in the PostgreSQL server.
+The timestamp type in C enables your programs to deal with data of the SQL type timestamp. See [Section 8.5](datatype-datetime "8.5. Date/Time Types") for the equivalent type in the PostgreSQL server.
 
 The following functions can be used to work with the timestamp type:
 
@@ -444,11 +444,11 @@ The following functions can be used to work with the timestamp type:
 
     The function receives the string to parse (`str`) and a pointer to a C char\* (`endptr`). At the moment ECPG always parses the complete string and so it currently does not support to store the address of the first invalid character in `*endptr`. You can safely set `endptr` to NULL.
 
-    The function returns the parsed timestamp on success. On error, `PGTYPESInvalidTimestamp` is returned and `errno` is set to `PGTYPES_TS_BAD_TIMESTAMP`. See [`PGTYPESInvalidTimestamp`](ecpg-pgtypes.html#PGTYPESINVALIDTIMESTAMP) for important notes on this value.
+    The function returns the parsed timestamp on success. On error, `PGTYPESInvalidTimestamp` is returned and `errno` is set to `PGTYPES_TS_BAD_TIMESTAMP`. See [`PGTYPESInvalidTimestamp`](ecpg-pgtypes#PGTYPESINVALIDTIMESTAMP) for important notes on this value.
 
     In general, the input string can contain any combination of an allowed date specification, a whitespace character and an allowed time specification. Note that time zones are not supported by ECPG. It can parse them but does not apply any calculation as the PostgreSQL server does for example. Timezone specifiers are silently discarded.
 
-    [Table 36.5](ecpg-pgtypes.html#ECPG-PGTYPESTIMESTAMP-FROM-ASC-EXAMPLE-TABLE "Table 36.5. Valid Input Formats for PGTYPEStimestamp_from_asc") contains a few examples for input strings.
+    [Table 36.5](ecpg-pgtypes#ECPG-PGTYPESTIMESTAMP-FROM-ASC-EXAMPLE-TABLE "Table 36.5. Valid Input Formats for PGTYPEStimestamp_from_asc") contains a few examples for input strings.
 
     **Table 36.5. Valid Input Formats for `PGTYPEStimestamp_from_asc`**
 
@@ -618,7 +618,7 @@ The following functions can be used to work with the timestamp type:
 
     If the formatting mask `fmt` is NULL, the function will fall back to the default formatting mask which is `%Y-%m-%d %H:%M:%S`.
 
-    This is the reverse function to [`PGTYPEStimestamp_fmt_asc`](ecpg-pgtypes.html#PGTYPESTIMESTAMPFMTASC). See the documentation there in order to find out about the possible formatting mask entries.
+    This is the reverse function to [`PGTYPEStimestamp_fmt_asc`](ecpg-pgtypes#PGTYPESTIMESTAMPFMTASC). See the documentation there in order to find out about the possible formatting mask entries.
 
 * `PGTYPEStimestamp_add_interval` [#](#PGTYPESTIMESTAMPADDINTERVAL)
 
@@ -648,7 +648,7 @@ The following functions can be used to work with the timestamp type:
 
 ### 36.6.5. The interval Type [#](#ECPG-PGTYPES-INTERVAL)
 
-The interval type in C enables your programs to deal with data of the SQL type interval. See [Section 8.5](datatype-datetime.html "8.5. Date/Time Types") for the equivalent type in the PostgreSQL server.
+The interval type in C enables your programs to deal with data of the SQL type interval. See [Section 8.5](datatype-datetime "8.5. Date/Time Types") for the equivalent type in the PostgreSQL server.
 
 The following functions can be used to work with the interval type:
 
@@ -705,7 +705,7 @@ The following functions can be used to work with the interval type:
 
 ### 36.6.6. The decimal Type [#](#ECPG-PGTYPES-DECIMAL)
 
-The decimal type is similar to the numeric type. However it is limited to a maximum precision of 30 significant digits. In contrast to the numeric type which can be created on the heap only, the decimal type can be created either on the stack or on the heap (by means of the functions `PGTYPESdecimal_new` and `PGTYPESdecimal_free`). There are a lot of other functions that deal with the decimal type in the Informix compatibility mode described in [Section 36.15](ecpg-informix-compat.html "36.15. Informix Compatibility Mode").
+The decimal type is similar to the numeric type. However it is limited to a maximum precision of 30 significant digits. In contrast to the numeric type which can be created on the heap only, the decimal type can be created either on the stack or on the heap (by means of the functions `PGTYPESdecimal_new` and `PGTYPESdecimal_free`). There are a lot of other functions that deal with the decimal type in the Informix compatibility mode described in [Section 36.15](ecpg-informix-compat "36.15. Informix Compatibility Mode").
 
 The following functions can be used to work with the decimal type and are not only contained in the `libcompat` library.
 

@@ -1,11 +1,11 @@
 ## F.21. isn — data types for international standard numbers (ISBN, EAN, UPC, etc.) [#](#ISN)
 
-* *   [F.21.1. Data Types](isn.html#ISN-DATA-TYPES)
-* [F.21.2. Casts](isn.html#ISN-CASTS)
-* [F.21.3. Functions and Operators](isn.html#ISN-FUNCS-OPS)
-* [F.21.4. Examples](isn.html#ISN-EXAMPLES)
-* [F.21.5. Bibliography](isn.html#ISN-BIBLIOGRAPHY)
-* [F.21.6. Author](isn.html#ISN-AUTHOR)
+* *   [F.21.1. Data Types](isn#ISN-DATA-TYPES)
+* [F.21.2. Casts](isn#ISN-CASTS)
+* [F.21.3. Functions and Operators](isn#ISN-FUNCS-OPS)
+* [F.21.4. Examples](isn#ISN-EXAMPLES)
+* [F.21.5. Bibliography](isn#ISN-BIBLIOGRAPHY)
+* [F.21.6. Author](isn#ISN-AUTHOR)
 
 The `isn` module provides data types for the following international product numbering standards: EAN13, UPC, ISBN (books), ISMN (music), and ISSN (serials). Numbers are validated on input according to a hard-coded list of prefixes; this list of prefixes is also used to hyphenate numbers on output. Since new prefixes are assigned from time to time, the list of prefixes may be out of date. It is hoped that a future version of this module will obtain the prefix list from one or more tables that can be easily updated by users as needed; however, at present, the list can only be updated by modifying the source code and recompiling. Alternatively, prefix validation and hyphenation support may be dropped from a future version of this module.
 
@@ -13,7 +13,7 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 
 ### F.21.1. Data Types [#](#ISN-DATA-TYPES)
 
-[Table F.11](isn.html#ISN-DATATYPES "Table F.11. isn Data Types") shows the data types provided by the `isn` module.
+[Table F.11](isn#ISN-DATATYPES "Table F.11. isn Data Types") shows the data types provided by the `isn` module.
 
 **Table F.11. `isn` Data Types**
 
@@ -63,7 +63,7 @@ When casting from `EAN13` to another type, there is a run-time check that the va
 
 ### F.21.3. Functions and Operators [#](#ISN-FUNCS-OPS)
 
-The `isn` module provides the standard comparison operators, plus B-tree and hash indexing support for all these data types. In addition there are several specialized functions; shown in [Table F.12](isn.html#ISN-FUNCTIONS "Table F.12. isn Functions"). In this table, `isn` means any one of the module's data types.
+The `isn` module provides the standard comparison operators, plus B-tree and hash indexing support for all these data types. In addition there are several specialized functions; shown in [Table F.12](isn#ISN-FUNCTIONS "Table F.12. isn Functions"). In this table, `isn` means any one of the module's data types.
 
 **Table F.12. `isn` Functions**
 

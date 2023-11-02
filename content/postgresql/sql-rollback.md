@@ -21,11 +21,11 @@ ROLLBACK [ WORK | TRANSACTION ] [ AND [ NO ] CHAIN ]
 
 * `AND CHAIN` [#](#SQL-ROLLBACK-CHAIN)
 
-    If `AND CHAIN` is specified, a new (not aborted) transaction is immediately started with the same transaction characteristics (see [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION")) as the just finished one. Otherwise, no new transaction is started.
+    If `AND CHAIN` is specified, a new (not aborted) transaction is immediately started with the same transaction characteristics (see [SET TRANSACTION](sql-set-transaction "SET TRANSACTION")) as the just finished one. Otherwise, no new transaction is started.
 
 ## Notes
 
-Use [`COMMIT`](sql-commit.html "COMMIT") to successfully terminate a transaction.
+Use [`COMMIT`](sql-commit "COMMIT") to successfully terminate a transaction.
 
 Issuing `ROLLBACK` outside of a transaction block emits a warning and otherwise has no effect. `ROLLBACK AND CHAIN` outside of a transaction block is an error.
 
@@ -44,4 +44,4 @@ The command `ROLLBACK` conforms to the SQL standard. The form `ROLLBACK TRANSACT
 
 ## See Also
 
-[BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [ROLLBACK TO SAVEPOINT](sql-rollback-to.html "ROLLBACK TO SAVEPOINT")
+[BEGIN](sql-begin "BEGIN"), [COMMIT](sql-commit "COMMIT"), [ROLLBACK TO SAVEPOINT](sql-rollback-to "ROLLBACK TO SAVEPOINT")

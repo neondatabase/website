@@ -9,4 +9,4 @@ tar xf postgresql-version.tar.bz2
 
 This will create a directory `postgresql-version` under the current directory with the PostgreSQL sources. Change into that directory for the rest of the installation procedure.
 
-Alternatively, you can use the Git version control system; see [Section I.1](git.html "I.1. Getting the Source via Git") for more information.
+Alternatively, you can use the Git version control system; see [Section I.1](git "I.1. Getting the Source via Git") for more information.

@@ -1,12 +1,12 @@
 ## F.24. pageinspect — low-level inspection of database pages [#](#PAGEINSPECT)
 
-  * *   [F.24.1. General Functions](pageinspect.html#PAGEINSPECT-GENERAL-FUNCS)
-  * [F.24.2. Heap Functions](pageinspect.html#PAGEINSPECT-HEAP-FUNCS)
-  * [F.24.3. B-Tree Functions](pageinspect.html#PAGEINSPECT-B-TREE-FUNCS)
-  * [F.24.4. BRIN Functions](pageinspect.html#PAGEINSPECT-BRIN-FUNCS)
-  * [F.24.5. GIN Functions](pageinspect.html#PAGEINSPECT-GIN-FUNCS)
-  * [F.24.6. GiST Functions](pageinspect.html#PAGEINSPECT-GIST-FUNCS)
-  * [F.24.7. Hash Functions](pageinspect.html#PAGEINSPECT-HASH-FUNCS)
+  * *   [F.24.1. General Functions](pageinspect#PAGEINSPECT-GENERAL-FUNCS)
+  * [F.24.2. Heap Functions](pageinspect#PAGEINSPECT-HEAP-FUNCS)
+  * [F.24.3. B-Tree Functions](pageinspect#PAGEINSPECT-B-TREE-FUNCS)
+  * [F.24.4. BRIN Functions](pageinspect#PAGEINSPECT-BRIN-FUNCS)
+  * [F.24.5. GIN Functions](pageinspect#PAGEINSPECT-GIN-FUNCS)
+  * [F.24.6. GiST Functions](pageinspect#PAGEINSPECT-GIST-FUNCS)
+  * [F.24.7. Hash Functions](pageinspect#PAGEINSPECT-HASH-FUNCS)
 
 The `pageinspect` module provides functions that allow you to inspect the contents of database pages at a low level, which is useful for debugging purposes. All of these functions may be used only by superusers.
 
@@ -14,7 +14,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
 * `get_raw_page(relname text, fork text, blkno bigint) returns bytea`
 
-    `get_raw_page` reads the specified block of the named relation and returns a copy as a `bytea` value. This allows a single time-consistent copy of the block to be obtained. *`fork`* should be `'main'` for the main data fork, `'fsm'` for the [free space map](storage-fsm.html "73.3. Free Space Map"), `'vm'` for the [visibility map](storage-vm.html "73.4. Visibility Map"), or `'init'` for the initialization fork.
+    `get_raw_page` reads the specified block of the named relation and returns a copy as a `bytea` value. This allows a single time-consistent copy of the block to be obtained. *`fork`* should be `'main'` for the main data fork, `'fsm'` for the [free space map](storage-fsm "73.3. Free Space Map"), `'vm'` for the [visibility map](storage-vm "73.4. Visibility Map"), or `'init'` for the initialization fork.
 
 * `get_raw_page(relname text, blkno bigint) returns bytea`
 
@@ -237,7 +237,7 @@ The `pageinspect` module provides functions that allow you to inspect the conten
 
     Note that the first item on any non-rightmost page (any page with a non-zero value in the `btpo_next` field) is the page's “high key”, meaning its `data` serves as an upper bound on all items appearing on the page, while its `ctid` field does not point to another block. Also, on internal pages, the first real data item (the first item that is not a high key) reliably has every column truncated away, leaving no actual value in its `data` field. Such an item does have a valid downlink in its `ctid` field, however.
 
-    For more details about the structure of B-tree indexes, see [Section 67.4.1](btree-implementation.html#BTREE-STRUCTURE "67.4.1. B-Tree Structure"). For more details about deduplication and posting lists, see [Section 67.4.3](btree-implementation.html#BTREE-DEDUPLICATION "67.4.3. Deduplication").
+    For more details about the structure of B-tree indexes, see [Section 67.4.1](btree-implementation#BTREE-STRUCTURE "67.4.1. B-Tree Structure"). For more details about deduplication and posting lists, see [Section 67.4.3](btree-implementation#BTREE-DEDUPLICATION "67.4.3. Deduplication").
 
 * `bt_page_items(page bytea) returns setof record`
 

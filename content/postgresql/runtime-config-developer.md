@@ -58,11 +58,11 @@ The following parameters are intended for developer testing, and should never be
 
 * `trace_notify` (`boolean`) [#](#GUC-TRACE-NOTIFY)
 
-    Generates a great amount of debugging output for the `LISTEN` and `NOTIFY` commands. [client\_min\_messages](runtime-config-client.html#GUC-CLIENT-MIN-MESSAGES) or [log\_min\_messages](runtime-config-logging.html#GUC-LOG-MIN-MESSAGES) must be `DEBUG1` or lower to send this output to the client or server logs, respectively.
+    Generates a great amount of debugging output for the `LISTEN` and `NOTIFY` commands. [client\_min\_messages](runtime-config-client#GUC-CLIENT-MIN-MESSAGES) or [log\_min\_messages](runtime-config-logging#GUC-LOG-MIN-MESSAGES) must be `DEBUG1` or lower to send this output to the client or server logs, respectively.
 
 * `trace_recovery_messages` (`enum`) [#](#GUC-TRACE-RECOVERY-MESSAGES)
 
-    Enables logging of recovery-related debugging output that otherwise would not be logged. This parameter allows the user to override the normal setting of [log\_min\_messages](runtime-config-logging.html#GUC-LOG-MIN-MESSAGES), but only for specific messages. This is intended for use in debugging hot standby. Valid values are `DEBUG5`, `DEBUG4`, `DEBUG3`, `DEBUG2`, `DEBUG1`, and `LOG`. The default, `LOG`, does not affect logging decisions at all. The other values cause recovery-related debug messages of that priority or higher to be logged as though they had `LOG` priority; for common settings of `log_min_messages` this results in unconditionally sending them to the server log. This parameter can only be set in the `postgresql.conf` file or on the server command line.
+    Enables logging of recovery-related debugging output that otherwise would not be logged. This parameter allows the user to override the normal setting of [log\_min\_messages](runtime-config-logging#GUC-LOG-MIN-MESSAGES), but only for specific messages. This is intended for use in debugging hot standby. Valid values are `DEBUG5`, `DEBUG4`, `DEBUG3`, `DEBUG2`, `DEBUG1`, and `LOG`. The default, `LOG`, does not affect logging decisions at all. The other values cause recovery-related debug messages of that priority or higher to be logged as though they had `LOG` priority; for common settings of `log_min_messages` this results in unconditionally sending them to the server log. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
 * `trace_sort` (`boolean`) [#](#GUC-TRACE-SORT)
 
@@ -140,7 +140,7 @@ The following parameters are intended for developer testing, and should never be
 
 * `ignore_checksum_failure` (`boolean`) [#](#GUC-IGNORE-CHECKSUM-FAILURE)
 
-    Only has effect if [data checksums](app-initdb.html#APP-INITDB-DATA-CHECKSUMS) are enabled.
+    Only has effect if [data checksums](app-initdb#APP-INITDB-DATA-CHECKSUMS) are enabled.
 
     Detection of a checksum failure during a read normally causes PostgreSQL to report an error, aborting the current transaction. Setting `ignore_checksum_failure` to on causes the system to ignore the failure (but still report a warning), and continue processing. This behavior may *cause crashes, propagate or hide corruption, or other serious problems*. However, it may allow you to get past the error and retrieve undamaged tuples that might still be present in the table if the block header is still sane. If the header is corrupt an error will be reported even if this option is enabled. The default setting is `off`. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
@@ -158,11 +158,11 @@ The following parameters are intended for developer testing, and should never be
 
 * `jit_dump_bitcode` (`boolean`) [#](#GUC-JIT-DUMP-BITCODE)
 
-    Writes the generated LLVM IR out to the file system, inside [data\_directory](runtime-config-file-locations.html#GUC-DATA-DIRECTORY). This is only useful for working on the internals of the JIT implementation. The default setting is `off`. Only superusers and users with the appropriate `SET` privilege can change this setting.
+    Writes the generated LLVM IR out to the file system, inside [data\_directory](runtime-config-file-locations#GUC-DATA-DIRECTORY). This is only useful for working on the internals of the JIT implementation. The default setting is `off`. Only superusers and users with the appropriate `SET` privilege can change this setting.
 
 * `jit_expressions` (`boolean`) [#](#GUC-JIT-EXPRESSIONS)
 
-    Determines whether expressions are JIT compiled, when JIT compilation is activated (see [Section 32.2](jit-decision.html "32.2. When to JIT?")). The default is `on`.
+    Determines whether expressions are JIT compiled, when JIT compilation is activated (see [Section 32.2](jit-decision "32.2. When to JIT?")). The default is `on`.
 
 * `jit_profiling_support` (`boolean`) [#](#GUC-JIT-PROFILING-SUPPORT)
 
@@ -170,7 +170,7 @@ The following parameters are intended for developer testing, and should never be
 
 * `jit_tuple_deforming` (`boolean`) [#](#GUC-JIT-TUPLE-DEFORMING)
 
-    Determines whether tuple deforming is JIT compiled, when JIT compilation is activated (see [Section 32.2](jit-decision.html "32.2. When to JIT?")). The default is `on`.
+    Determines whether tuple deforming is JIT compiled, when JIT compilation is activated (see [Section 32.2](jit-decision "32.2. When to JIT?")). The default is `on`.
 
 * `remove_temp_files_after_crash` (`boolean`) [#](#GUC-REMOVE-TEMP-FILES-AFTER-CRASH)
 
@@ -188,6 +188,6 @@ The following parameters are intended for developer testing, and should never be
 
     The allowed values are `buffered` and `immediate`. The default is `buffered`. This parameter is intended to be used to test logical decoding and replication of large transactions. The effect of `debug_logical_replication_streaming` is different for the publisher and subscriber:
 
-    On the publisher side, `debug_logical_replication_streaming` allows streaming or serializing changes immediately in logical decoding. When set to `immediate`, stream each change if the [`streaming`](sql-createsubscription.html#SQL-CREATESUBSCRIPTION-WITH-STREAMING) option of [`CREATE SUBSCRIPTION`](sql-createsubscription.html "CREATE SUBSCRIPTION") is enabled, otherwise, serialize each change. When set to `buffered`, the decoding will stream or serialize changes when `logical_decoding_work_mem` is reached.
+    On the publisher side, `debug_logical_replication_streaming` allows streaming or serializing changes immediately in logical decoding. When set to `immediate`, stream each change if the [`streaming`](sql-createsubscription#SQL-CREATESUBSCRIPTION-WITH-STREAMING) option of [`CREATE SUBSCRIPTION`](sql-createsubscription "CREATE SUBSCRIPTION") is enabled, otherwise, serialize each change. When set to `buffered`, the decoding will stream or serialize changes when `logical_decoding_work_mem` is reached.
 
     On the subscriber side, if the `streaming` option is set to `parallel`, `debug_logical_replication_streaming` can be used to direct the leader apply worker to send changes to the shared memory queue or to serialize all changes to the file. When set to `buffered`, the leader sends changes to parallel apply workers via a shared memory queue. When set to `immediate`, the leader serializes all changes to files and notifies the parallel apply workers to read and apply them at the end of the transaction.

@@ -30,11 +30,11 @@ REASSIGN OWNED BY { old_role | CURRENT_ROLE | CURRENT_USER | SESSION_USER } [, .
 
 `REASSIGN OWNED` requires membership on both the source role(s) and the target role.
 
-The [`DROP OWNED`](sql-drop-owned.html "DROP OWNED") command is an alternative that simply drops all the database objects owned by one or more roles.
+The [`DROP OWNED`](sql-drop-owned "DROP OWNED") command is an alternative that simply drops all the database objects owned by one or more roles.
 
 The `REASSIGN OWNED` command does not affect any privileges granted to the *`old_roles`* on objects that are not owned by them. Likewise, it does not affect default privileges created with `ALTER DEFAULT PRIVILEGES`. Use `DROP OWNED` to revoke such privileges.
 
-See [Section 22.4](role-removal.html "22.4. Dropping Roles") for more discussion.
+See [Section 22.4](role-removal "22.4. Dropping Roles") for more discussion.
 
 ## Compatibility
 
@@ -42,4 +42,4 @@ The `REASSIGN OWNED` command is a PostgreSQL extension.
 
 ## See Also
 
-[DROP OWNED](sql-drop-owned.html "DROP OWNED"), [DROP ROLE](sql-droprole.html "DROP ROLE"), [ALTER DATABASE](sql-alterdatabase.html "ALTER DATABASE")
+[DROP OWNED](sql-drop-owned "DROP OWNED"), [DROP ROLE](sql-droprole "DROP ROLE"), [ALTER DATABASE](sql-alterdatabase "ALTER DATABASE")

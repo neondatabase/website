@@ -2,7 +2,7 @@
 
 When a table is created, it contains no data. The first thing to do before a database can be of much use is to insert data. Data is inserted one row at a time. You can also insert more than one row in a single command, but it is not possible to insert something that is not a complete row. Even if you know only some column values, a complete row must be created.
 
-To create a new row, use the [INSERT](sql-insert.html "INSERT") command. The command requires the table name and column values. For example, consider the products table from [Chapter 5](ddl.html "Chapter 5. Data Definition"):
+To create a new row, use the [INSERT](sql-insert "INSERT") command. The command requires the table name and column values. For example, consider the products table from [Chapter 5](ddl "Chapter 5. Data Definition"):
 
 ```
 
@@ -69,8 +69,8 @@ INSERT INTO products (product_no, name, price)
     WHERE release_date = 'today';
 ```
 
-This provides the full power of the SQL query mechanism ([Chapter 7](queries.html "Chapter 7. Queries")) for computing the rows to be inserted.
+This provides the full power of the SQL query mechanism ([Chapter 7](queries "Chapter 7. Queries")) for computing the rows to be inserted.
 
 ### Tip
 
-When inserting a lot of data at the same time, consider using the [COPY](sql-copy.html "COPY") command. It is not as flexible as the [INSERT](sql-insert.html "INSERT") command, but is more efficient. Refer to [Section 14.4](populate.html "14.4. Populating a Database") for more information on improving bulk loading performance.
+When inserting a lot of data at the same time, consider using the [COPY](sql-copy "COPY") command. It is not as flexible as the [INSERT](sql-insert "INSERT") command, but is more efficient. Refer to [Section 14.4](populate "14.4. Populating a Database") for more information on improving bulk loading performance.

@@ -8,5 +8,5 @@ The catalog `pg_namespace` stores namespaces. A namespace is the structure under
 | ----------------------------------------------------------------------------------------------------------------- |
 | `oid` `oid`Row identifier                                                                                         |
 | `nspname` `name`Name of the namespace                                                                             |
-| `nspowner` `oid` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`oid`)Owner of the namespace |
-| `nspacl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv.html "5.7. Privileges") for details             |
+| `nspowner` `oid` (references [`pg_authid`](catalog-pg-authid "53.8. pg_authid").`oid`)Owner of the namespace |
+| `nspacl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv "5.7. Privileges") for details             |

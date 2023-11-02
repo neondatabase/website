@@ -6,4 +6,4 @@ Another useful tool for monitoring database activity is the `pg_locks` system ta
 * Determine the relation in the current database with the most ungranted locks (which might be a source of contention among database clients).
 * Determine the effect of lock contention on overall database performance, as well as the extent to which contention varies with overall database traffic.
 
-Details of the `pg_locks` view appear in [Section 54.12](view-pg-locks.html "54.12. pg_locks"). For more information on locking and managing concurrency with PostgreSQL, refer to [Chapter 13](mvcc.html "Chapter 13. Concurrency Control").
+Details of the `pg_locks` view appear in [Section 54.12](view-pg-locks "54.12. pg_locks"). For more information on locking and managing concurrency with PostgreSQL, refer to [Chapter 13](mvcc "Chapter 13. Concurrency Control").

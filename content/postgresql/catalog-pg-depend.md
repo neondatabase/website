@@ -2,16 +2,16 @@
 
 The catalog `pg_depend` records the dependency relationships between database objects. This information allows `DROP` commands to find which other objects must be dropped by `DROP CASCADE` or prevent dropping in the `DROP RESTRICT` case.
 
-See also [`pg_shdepend`](catalog-pg-shdepend.html "53.48. pg_shdepend"), which performs a similar function for dependencies involving objects that are shared across a database cluster.
+See also [`pg_shdepend`](catalog-pg-shdepend "53.48. pg_shdepend"), which performs a similar function for dependencies involving objects that are shared across a database cluster.
 
 **Table 53.18. `pg_depend` Columns**
 
 | Column TypeDescription                                                                                                                                                          |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `classid` `oid` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`oid`)The OID of the system catalog the dependent object is in                                |
+| `classid` `oid` (references [`pg_class`](catalog-pg-class "53.11. pg_class").`oid`)The OID of the system catalog the dependent object is in                                |
 | `objid` `oid` (references any OID column)The OID of the specific dependent object                                                                                               |
 | `objsubid` `int4`For a table column, this is the column number (the `objid` and `classid` refer to the table itself). For all other object types, this column is zero.          |
-| `refclassid` `oid` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`oid`)The OID of the system catalog the referenced object is in                            |
+| `refclassid` `oid` (references [`pg_class`](catalog-pg-class "53.11. pg_class").`oid`)The OID of the system catalog the referenced object is in                            |
 | `refobjid` `oid` (references any OID column)The OID of the specific referenced object                                                                                           |
 | `refobjsubid` `int4`For a table column, this is the column number (the `refobjid` and `refclassid` refer to the table itself). For all other object types, this column is zero. |
 | `deptype` `char`A code defining the specific semantics of this dependency relationship; see text                                                                                |
@@ -38,7 +38,7 @@ In all cases, a `pg_depend` entry indicates that the referenced object cannot be
 
 * `DEPENDENCY_EXTENSION` (`e`)
 
-    The dependent object is a member of the *extension* that is the referenced object (see [`pg_extension`](catalog-pg-extension.html "53.22. pg_extension")). The dependent object can be dropped only via [`DROP EXTENSION`](sql-dropextension.html "DROP EXTENSION") on the referenced object. Functionally this dependency type acts the same as an `INTERNAL` dependency, but it's kept separate for clarity and to simplify pg\_dump.
+    The dependent object is a member of the *extension* that is the referenced object (see [`pg_extension`](catalog-pg-extension "53.22. pg_extension")). The dependent object can be dropped only via [`DROP EXTENSION`](sql-dropextension "DROP EXTENSION") on the referenced object. Functionally this dependency type acts the same as an `INTERNAL` dependency, but it's kept separate for clarity and to simplify pg\_dump.
 
 * `DEPENDENCY_AUTO_EXTENSION` (`x`)
 

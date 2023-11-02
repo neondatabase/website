@@ -1,10 +1,10 @@
 ## F.7. bloom — bloom filter index access method [#](#BLOOM)
 
-  * *   [F.7.1. Parameters](bloom.html#BLOOM-PARAMETERS)
-  * [F.7.2. Examples](bloom.html#BLOOM-EXAMPLES)
-  * [F.7.3. Operator Class Interface](bloom.html#BLOOM-OPERATOR-CLASS-INTERFACE)
-  * [F.7.4. Limitations](bloom.html#BLOOM-LIMITATIONS)
-  * [F.7.5. Authors](bloom.html#BLOOM-AUTHORS)
+  * *   [F.7.1. Parameters](bloom#BLOOM-PARAMETERS)
+  * [F.7.2. Examples](bloom#BLOOM-EXAMPLES)
+  * [F.7.3. Operator Class Interface](bloom#BLOOM-OPERATOR-CLASS-INTERFACE)
+  * [F.7.4. Limitations](bloom#BLOOM-LIMITATIONS)
+  * [F.7.5. Authors](bloom#BLOOM-AUTHORS)
 
 `bloom` provides an index access method based on [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter).
 

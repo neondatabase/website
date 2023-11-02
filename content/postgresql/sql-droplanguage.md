@@ -15,7 +15,7 @@ DROP [ PROCEDURAL ] LANGUAGE [ IF EXISTS ] name [ CASCADE | RESTRICT ]
 
 ### Note
 
-As of PostgreSQL 9.1, most procedural languages have been made into “extensions”, and should therefore be removed with [`DROP EXTENSION`](sql-dropextension.html "DROP EXTENSION") not `DROP LANGUAGE`.
+As of PostgreSQL 9.1, most procedural languages have been made into “extensions”, and should therefore be removed with [`DROP EXTENSION`](sql-dropextension "DROP EXTENSION") not `DROP LANGUAGE`.
 
 ## Parameters
 
@@ -29,7 +29,7 @@ As of PostgreSQL 9.1, most procedural languages have been made into “extension
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the language (such as functions in the language), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the language (such as functions in the language), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -50,4 +50,4 @@ There is no `DROP LANGUAGE` statement in the SQL standard.
 
 ## See Also
 
-[ALTER LANGUAGE](sql-alterlanguage.html "ALTER LANGUAGE"), [CREATE LANGUAGE](sql-createlanguage.html "CREATE LANGUAGE")
+[ALTER LANGUAGE](sql-alterlanguage "ALTER LANGUAGE"), [CREATE LANGUAGE](sql-createlanguage "CREATE LANGUAGE")

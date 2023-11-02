@@ -44,4 +44,4 @@ DROP USER MAPPING IF EXISTS FOR bob SERVER foo;
 
 ## See Also
 
-[CREATE USER MAPPING](sql-createusermapping.html "CREATE USER MAPPING"), [ALTER USER MAPPING](sql-alterusermapping.html "ALTER USER MAPPING")
+[CREATE USER MAPPING](sql-createusermapping "CREATE USER MAPPING"), [ALTER USER MAPPING](sql-alterusermapping "ALTER USER MAPPING")

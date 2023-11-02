@@ -64,17 +64,17 @@ If a schema name is given (for example, `CREATE VIEW myschema.myview ...`) then 
 
   * `security_barrier` (`boolean`)
 
-        This should be used if the view is intended to provide row-level security. See [Section 41.5](rules-privileges.html "41.5. Rules and Privileges") for full details.
+        This should be used if the view is intended to provide row-level security. See [Section 41.5](rules-privileges "41.5. Rules and Privileges") for full details.
 
   * `security_invoker` (`boolean`)
 
         This option causes the underlying base relations to be checked against the privileges of the user of the view rather than the view owner. See the notes below for full details.
 
-    All of the above options can be changed on existing views using [`ALTER VIEW`](sql-alterview.html "ALTER VIEW").
+    All of the above options can be changed on existing views using [`ALTER VIEW`](sql-alterview "ALTER VIEW").
 
 * *`query`*
 
-    A [`SELECT`](sql-select.html "SELECT") or [`VALUES`](sql-values.html "VALUES") command which will provide the columns and rows of the view.
+    A [`SELECT`](sql-select "SELECT") or [`VALUES`](sql-values "VALUES") command which will provide the columns and rows of the view.
 
 * `WITH [ CASCADED | LOCAL ] CHECK OPTION`
 
@@ -94,7 +94,7 @@ If a schema name is given (for example, `CREATE VIEW myschema.myview ...`) then 
 
 ## Notes
 
-Use the [`DROP VIEW`](sql-dropview.html "DROP VIEW") statement to drop views.
+Use the [`DROP VIEW`](sql-dropview "DROP VIEW") statement to drop views.
 
 Be careful that the names and types of the view's columns will be assigned the way you want. For example:
 
@@ -110,13 +110,13 @@ is bad form because the column name defaults to `?column?`; also, the column dat
 CREATE VIEW vista AS SELECT text 'Hello World' AS hello;
 ```
 
-By default, access to the underlying base relations referenced in the view is determined by the permissions of the view owner. In some cases, this can be used to provide secure but restricted access to the underlying tables. However, not all views are secure against tampering; see [Section 41.5](rules-privileges.html "41.5. Rules and Privileges") for details.
+By default, access to the underlying base relations referenced in the view is determined by the permissions of the view owner. In some cases, this can be used to provide secure but restricted access to the underlying tables. However, not all views are secure against tampering; see [Section 41.5](rules-privileges "41.5. Rules and Privileges") for details.
 
 If the view has the `security_invoker` property set to `true`, access to the underlying base relations is determined by the permissions of the user executing the query, rather than the view owner. Thus, the user of a security invoker view must have the relevant permissions on the view and its underlying base relations.
 
 If any of the underlying base relations is a security invoker view, it will be treated as if it had been accessed directly from the original query. Thus, a security invoker view will always check its underlying base relations using the permissions of the current user, even if it is accessed from a view without the `security_invoker` property.
 
-If any of the underlying base relations has [row-level security](ddl-rowsecurity.html "5.8. Row Security Policies") enabled, then by default, the row-level security policies of the view owner are applied, and access to any additional relations referred to by those policies is determined by the permissions of the view owner. However, if the view has `security_invoker` set to `true`, then the policies and permissions of the invoking user are used instead, as if the base relations had been referenced directly from the query using the view.
+If any of the underlying base relations has [row-level security](ddl-rowsecurity "5.8. Row Security Policies") enabled, then by default, the row-level security policies of the view owner are applied, and access to any additional relations referred to by those policies is determined by the permissions of the view owner. However, if the view has `security_invoker` set to `true`, then the policies and permissions of the invoking user are used instead, as if the base relations had been referenced directly from the query using the view.
 
 Functions called in the view are treated the same as if they had been called directly from the query using the view. Therefore, the user of a view must have permissions to call all functions used by the view. Functions in the view are executed with the privileges of the user executing the query or the function owner, depending on whether the functions are defined as `SECURITY INVOKER` or `SECURITY DEFINER`. Thus, for example, calling `CURRENT_USER` directly in a view will always return the invoking user, not the view owner. This is not affected by the view's `security_invoker` setting, and so a view with `security_invoker` set to `false` is *not* equivalent to a `SECURITY DEFINER` function and those concepts should not be confused.
 
@@ -139,11 +139,11 @@ If the view is automatically updatable the system will convert any `INSERT`, `UP
 
 If an automatically updatable view contains a `WHERE` condition, the condition restricts which rows of the base relation are available to be modified by `UPDATE` and `DELETE` statements on the view. However, an `UPDATE` is allowed to change a row so that it no longer satisfies the `WHERE` condition, and thus is no longer visible through the view. Similarly, an `INSERT` command can potentially insert base-relation rows that do not satisfy the `WHERE` condition and thus are not visible through the view (`ON CONFLICT UPDATE` may similarly affect an existing row not visible through the view). The `CHECK OPTION` may be used to prevent `INSERT` and `UPDATE` commands from creating such rows that are not visible through the view.
 
-If an automatically updatable view is marked with the `security_barrier` property then all the view's `WHERE` conditions (and any conditions using operators which are marked as `LEAKPROOF`) will always be evaluated before any conditions that a user of the view has added. See [Section 41.5](rules-privileges.html "41.5. Rules and Privileges") for full details. Note that, due to this, rows which are not ultimately returned (because they do not pass the user's `WHERE` conditions) may still end up being locked. `EXPLAIN` can be used to see which conditions are applied at the relation level (and therefore do not lock rows) and which are not.
+If an automatically updatable view is marked with the `security_barrier` property then all the view's `WHERE` conditions (and any conditions using operators which are marked as `LEAKPROOF`) will always be evaluated before any conditions that a user of the view has added. See [Section 41.5](rules-privileges "41.5. Rules and Privileges") for full details. Note that, due to this, rows which are not ultimately returned (because they do not pass the user's `WHERE` conditions) may still end up being locked. `EXPLAIN` can be used to see which conditions are applied at the relation level (and therefore do not lock rows) and which are not.
 
-A more complex view that does not satisfy all these conditions is read-only by default: the system will not allow an insert, update, or delete on the view. You can get the effect of an updatable view by creating `INSTEAD OF` triggers on the view, which must convert attempted inserts, etc. on the view into appropriate actions on other tables. For more information see [CREATE TRIGGER](sql-createtrigger.html "CREATE TRIGGER"). Another possibility is to create rules (see [CREATE RULE](sql-createrule.html "CREATE RULE")), but in practice triggers are easier to understand and use correctly.
+A more complex view that does not satisfy all these conditions is read-only by default: the system will not allow an insert, update, or delete on the view. You can get the effect of an updatable view by creating `INSTEAD OF` triggers on the view, which must convert attempted inserts, etc. on the view into appropriate actions on other tables. For more information see [CREATE TRIGGER](sql-createtrigger "CREATE TRIGGER"). Another possibility is to create rules (see [CREATE RULE](sql-createrule "CREATE RULE")), but in practice triggers are easier to understand and use correctly.
 
-Note that the user performing the insert, update or delete on the view must have the corresponding insert, update or delete privilege on the view. In addition, by default, the view's owner must have the relevant privileges on the underlying base relations, whereas the user performing the update does not need any permissions on the underlying base relations (see [Section 41.5](rules-privileges.html "41.5. Rules and Privileges")). However, if the view has `security_invoker` set to `true`, the user performing the update, rather than the view owner, must have the relevant privileges on the underlying base relations.
+Note that the user performing the insert, update or delete on the view must have the corresponding insert, update or delete privilege on the view. In addition, by default, the view's owner must have the relevant privileges on the underlying base relations, whereas the user performing the update does not need any permissions on the underlying base relations (see [Section 41.5](rules-privileges "41.5. Rules and Privileges")). However, if the view has `security_invoker` set to `true`, the user performing the update, rather than the view owner, must have the relevant privileges on the underlying base relations.
 
 ## Examples
 
@@ -219,4 +219,4 @@ Notice that although the recursive view's name is schema-qualified in this `CREA
 
 ## See Also
 
-[ALTER VIEW](sql-alterview.html "ALTER VIEW"), [DROP VIEW](sql-dropview.html "DROP VIEW"), [CREATE MATERIALIZED VIEW](sql-creatematerializedview.html "CREATE MATERIALIZED VIEW")
+[ALTER VIEW](sql-alterview "ALTER VIEW"), [DROP VIEW](sql-dropview "DROP VIEW"), [CREATE MATERIALIZED VIEW](sql-creatematerializedview "CREATE MATERIALIZED VIEW")

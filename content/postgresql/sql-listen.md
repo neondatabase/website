@@ -33,7 +33,7 @@ A transaction that has executed `LISTEN` cannot be prepared for two-phase commit
 
 There is a race condition when first setting up a listening session: if concurrently-committing transactions are sending notify events, exactly which of those will the newly listening session receive? The answer is that the session will receive all events committed after an instant during the transaction's commit step. But that is slightly later than any database state that the transaction could have observed in queries. This leads to the following rule for using `LISTEN`: first execute (and commit!) that command, then in a new transaction inspect the database state as needed by the application logic, then rely on notifications to find out about subsequent changes to the database state. The first few received notifications might refer to updates already observed in the initial database inspection, but this is usually harmless.
 
-[NOTIFY](sql-notify.html "NOTIFY") contains a more extensive discussion of the use of `LISTEN` and `NOTIFY`.
+[NOTIFY](sql-notify "NOTIFY") contains a more extensive discussion of the use of `LISTEN` and `NOTIFY`.
 
 ## Examples
 
@@ -52,4 +52,4 @@ There is no `LISTEN` statement in the SQL standard.
 
 ## See Also
 
-[NOTIFY](sql-notify.html "NOTIFY"), [UNLISTEN](sql-unlisten.html "UNLISTEN")
+[NOTIFY](sql-notify "NOTIFY"), [UNLISTEN](sql-unlisten "UNLISTEN")

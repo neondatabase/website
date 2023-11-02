@@ -1,7 +1,7 @@
 ## 36.7. Using Descriptor Areas [#](#ECPG-DESCRIPTORS)
 
-  * *   [36.7.1. Named SQL Descriptor Areas](ecpg-descriptors.html#ECPG-NAMED-DESCRIPTORS)
-  * [36.7.2. SQLDA Descriptor Areas](ecpg-descriptors.html#ECPG-SQLDA-DESCRIPTORS)
+  * *   [36.7.1. Named SQL Descriptor Areas](ecpg-descriptors#ECPG-NAMED-DESCRIPTORS)
+  * [36.7.2. SQLDA Descriptor Areas](ecpg-descriptors#ECPG-SQLDA-DESCRIPTORS)
 
 An SQL descriptor area is a more sophisticated method for processing the result of a `SELECT`, `FETCH` or a `DESCRIBE` statement. An SQL descriptor area groups the data of one row of data together with metadata items into one data structure. The metadata is particularly useful when executing dynamic SQL statements, where the nature of the result columns might not be known ahead of time. PostgreSQL provides two ways to use Descriptor Areas: the named SQL Descriptor Areas and the C-structure SQLDAs.
 
@@ -44,7 +44,7 @@ EXEC SQL PREPARE stmt1 FROM :sql_stmt;
 EXEC SQL DESCRIBE stmt1 INTO SQL DESCRIPTOR mydesc;
 ```
 
-Before PostgreSQL 9.0, the `SQL` keyword was optional, so using `DESCRIPTOR` and `SQL DESCRIPTOR` produced named SQL Descriptor Areas. Now it is mandatory, omitting the `SQL` keyword produces SQLDA Descriptor Areas, see [Section 36.7.2](ecpg-descriptors.html#ECPG-SQLDA-DESCRIPTORS "36.7.2. SQLDA Descriptor Areas").
+Before PostgreSQL 9.0, the `SQL` keyword was optional, so using `DESCRIPTOR` and `SQL DESCRIPTOR` produced named SQL Descriptor Areas. Now it is mandatory, omitting the `SQL` keyword produces SQLDA Descriptor Areas, see [Section 36.7.2](ecpg-descriptors#ECPG-SQLDA-DESCRIPTORS "36.7.2. SQLDA Descriptor Areas").
 
 In `DESCRIBE` and `FETCH` statements, the `INTO` and `USING` keywords can be used to similarly: they produce the result set and the metadata in a Descriptor Area.
 
@@ -156,7 +156,7 @@ sqlda_t         *mysqlda;
 EXEC SQL FETCH 3 FROM mycursor INTO DESCRIPTOR mysqlda;
 ```
 
-Note that the `SQL` keyword is omitted. The paragraphs about the use cases of the `INTO` and `USING` keywords in [Section 36.7.1](ecpg-descriptors.html#ECPG-NAMED-DESCRIPTORS "36.7.1. Named SQL Descriptor Areas") also apply here with an addition. In a `DESCRIBE` statement the `DESCRIPTOR` keyword can be completely omitted if the `INTO` keyword is used:
+Note that the `SQL` keyword is omitted. The paragraphs about the use cases of the `INTO` and `USING` keywords in [Section 36.7.1](ecpg-descriptors#ECPG-NAMED-DESCRIPTORS "36.7.1. Named SQL Descriptor Areas") also apply here with an addition. In a `DESCRIBE` statement the `DESCRIPTOR` keyword can be completely omitted if the `INTO` keyword is used:
 
 ```
 
@@ -259,7 +259,7 @@ The meaning of the fields is:
 
 * `sqldata` [#](#ECPG-SQLDA-SQLVAR-SQLDATA)
 
-    Points to the data. The format of the data is described in [Section 36.4.4](ecpg-variables.html#ECPG-VARIABLES-TYPE-MAPPING "36.4.4. Type Mapping").
+    Points to the data. The format of the data is described in [Section 36.4.4](ecpg-variables#ECPG-VARIABLES-TYPE-MAPPING "36.4.4. Type Mapping").
 
 * `sqlind` [#](#ECPG-SQLDA-SQLVAR-SQLIND)
 
@@ -571,7 +571,7 @@ Close the cursor after processing all of records, and disconnect from the databa
     EXEC SQL DISCONNECT ALL;
 ```
 
-The whole program is shown in [Example 36.1](ecpg-descriptors.html#ECPG-SQLDA-EXAMPLE-EXAMPLE "Example 36.1. Example SQLDA Program").
+The whole program is shown in [Example 36.1](ecpg-descriptors#ECPG-SQLDA-EXAMPLE-EXAMPLE "Example 36.1. Example SQLDA Program").
 
 **Example 36.1. Example SQLDA Program**
 

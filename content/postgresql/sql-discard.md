@@ -21,7 +21,7 @@ DISCARD { ALL | PLANS | SEQUENCES | TEMPORARY | TEMP }
 
 * `SEQUENCES`
 
-    Discards all cached sequence-related state, including `currval()`/`lastval()` information and any preallocated sequence values that have not yet been returned by `nextval()`. (See [CREATE SEQUENCE](sql-createsequence.html "CREATE SEQUENCE") for a description of preallocated sequence values.)
+    Discards all cached sequence-related state, including `currval()`/`lastval()` information and any preallocated sequence values that have not yet been returned by `nextval()`. (See [CREATE SEQUENCE](sql-createsequence "CREATE SEQUENCE") for a description of preallocated sequence values.)
 
 * `TEMPORARY` or `TEMP`
 

@@ -13,7 +13,7 @@ DEALLOCATE [ PREPARE ] { name | ALL }
 
 `DEALLOCATE` is used to deallocate a previously prepared SQL statement. If you do not explicitly deallocate a prepared statement, it is deallocated when the session ends.
 
-For more information on prepared statements, see [PREPARE](sql-prepare.html "PREPARE").
+For more information on prepared statements, see [PREPARE](sql-prepare "PREPARE").
 
 ## Parameters
 
@@ -35,4 +35,4 @@ The SQL standard includes a `DEALLOCATE` statement, but it is only for use in em
 
 ## See Also
 
-[EXECUTE](sql-execute.html "EXECUTE"), [PREPARE](sql-prepare.html "PREPARE")
+[EXECUTE](sql-execute "EXECUTE"), [PREPARE](sql-prepare "PREPARE")

@@ -40,7 +40,7 @@ You must own the table on which the trigger acts to be allowed to change its pro
 
 ## Notes
 
-The ability to temporarily enable or disable a trigger is provided by [`ALTER TABLE`](sql-altertable.html "ALTER TABLE"), not by `ALTER TRIGGER`, because `ALTER TRIGGER` has no convenient way to express the option of enabling or disabling all of a table's triggers at once.
+The ability to temporarily enable or disable a trigger is provided by [`ALTER TABLE`](sql-altertable "ALTER TABLE"), not by `ALTER TRIGGER`, because `ALTER TRIGGER` has no convenient way to express the option of enabling or disabling all of a table's triggers at once.
 
 ## Examples
 
@@ -64,4 +64,4 @@ ALTER TRIGGER emp_stamp ON emp DEPENDS ON EXTENSION emplib;
 
 ## See Also
 
-[ALTER TABLE](sql-altertable.html "ALTER TABLE")
+[ALTER TABLE](sql-altertable "ALTER TABLE")

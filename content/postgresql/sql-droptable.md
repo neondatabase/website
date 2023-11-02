@@ -11,7 +11,7 @@ DROP TABLE [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 ## Description
 
-`DROP TABLE` removes tables from the database. Only the table owner, the schema owner, and superuser can drop a table. To empty a table of rows without destroying the table, use [`DELETE`](sql-delete.html "DELETE") or [`TRUNCATE`](sql-truncate.html "TRUNCATE").
+`DROP TABLE` removes tables from the database. Only the table owner, the schema owner, and superuser can drop a table. To empty a table of rows without destroying the table, use [`DELETE`](sql-delete "DELETE") or [`TRUNCATE`](sql-truncate "TRUNCATE").
 
 `DROP TABLE` always removes any indexes, rules, triggers, and constraints that exist for the target table. However, to drop a table that is referenced by a view or a foreign-key constraint of another table, `CASCADE` must be specified. (`CASCADE` will remove a dependent view entirely, but in the foreign-key case it will only remove the foreign-key constraint, not the other table entirely.)
 
@@ -27,7 +27,7 @@ DROP TABLE [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the table (such as views), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the table (such as views), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -48,4 +48,4 @@ This command conforms to the SQL standard, except that the standard only allows 
 
 ## See Also
 
-[ALTER TABLE](sql-altertable.html "ALTER TABLE"), [CREATE TABLE](sql-createtable.html "CREATE TABLE")
+[ALTER TABLE](sql-altertable "ALTER TABLE"), [CREATE TABLE](sql-createtable "CREATE TABLE")

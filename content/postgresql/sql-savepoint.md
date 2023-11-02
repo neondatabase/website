@@ -23,7 +23,7 @@ A savepoint is a special mark inside a transaction that allows all commands that
 
 ## Notes
 
-Use [`ROLLBACK TO`](sql-rollback-to.html "ROLLBACK TO SAVEPOINT") to rollback to a savepoint. Use [`RELEASE SAVEPOINT`](sql-release-savepoint.html "RELEASE SAVEPOINT") to destroy a savepoint, keeping the effects of commands executed after it was established.
+Use [`ROLLBACK TO`](sql-rollback-to "ROLLBACK TO SAVEPOINT") to rollback to a savepoint. Use [`RELEASE SAVEPOINT`](sql-release-savepoint "RELEASE SAVEPOINT") to destroy a savepoint, keeping the effects of commands executed after it was established.
 
 Savepoints can only be established when inside a transaction block. There can be multiple savepoints defined within a transaction.
 
@@ -90,4 +90,4 @@ SQL requires a savepoint to be destroyed automatically when another savepoint wi
 
 ## See Also
 
-[BEGIN](sql-begin.html "BEGIN"), [COMMIT](sql-commit.html "COMMIT"), [RELEASE SAVEPOINT](sql-release-savepoint.html "RELEASE SAVEPOINT"), [ROLLBACK](sql-rollback.html "ROLLBACK"), [ROLLBACK TO SAVEPOINT](sql-rollback-to.html "ROLLBACK TO SAVEPOINT")
+[BEGIN](sql-begin "BEGIN"), [COMMIT](sql-commit "COMMIT"), [RELEASE SAVEPOINT](sql-release-savepoint "RELEASE SAVEPOINT"), [ROLLBACK](sql-rollback "ROLLBACK"), [ROLLBACK TO SAVEPOINT](sql-rollback-to "ROLLBACK TO SAVEPOINT")

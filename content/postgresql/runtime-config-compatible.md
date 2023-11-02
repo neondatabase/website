@@ -1,7 +1,7 @@
 ## 20.13. Version and Platform Compatibility [#](#RUNTIME-CONFIG-COMPATIBLE)
 
-  * *   [20.13.1. Previous PostgreSQL Versions](runtime-config-compatible.html#RUNTIME-CONFIG-COMPATIBLE-VERSION)
-  * [20.13.2. Platform and Client Compatibility](runtime-config-compatible.html#RUNTIME-CONFIG-COMPATIBLE-CLIENTS)
+  * *   [20.13.1. Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
+  * [20.13.2. Platform and Client Compatibility](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-CLIENTS)
 
 ### 20.13.1. Previous PostgreSQL Versions [#](#RUNTIME-CONFIG-COMPATIBLE-VERSION)
 
@@ -31,11 +31,11 @@
 
 * `quote_all_identifiers` (`boolean`) [#](#GUC-QUOTE-ALL-IDENTIFIERS)
 
-    When the database generates SQL, force all identifiers to be quoted, even if they are not (currently) keywords. This will affect the output of `EXPLAIN` as well as the results of functions like `pg_get_viewdef`. See also the `--quote-all-identifiers` option of [pg\_dump](app-pgdump.html "pg_dump") and [pg\_dumpall](app-pg-dumpall.html "pg_dumpall").
+    When the database generates SQL, force all identifiers to be quoted, even if they are not (currently) keywords. This will affect the output of `EXPLAIN` as well as the results of functions like `pg_get_viewdef`. See also the `--quote-all-identifiers` option of [pg\_dump](app-pgdump "pg_dump") and [pg\_dumpall](app-pg-dumpall "pg_dumpall").
 
 * `standard_conforming_strings` (`boolean`) [#](#GUC-STANDARD-CONFORMING-STRINGS)
 
-    This controls whether ordinary string literals (`'...'`) treat backslashes literally, as specified in the SQL standard. Beginning in PostgreSQL 9.1, the default is `on` (prior releases defaulted to `off`). Applications can check this parameter to determine how string literals will be processed. The presence of this parameter can also be taken as an indication that the escape string syntax (`E'...'`) is supported. Escape string syntax ([Section 4.1.2.2](sql-syntax-lexical.html#SQL-SYNTAX-STRINGS-ESCAPE "4.1.2.2. String Constants with C-Style Escapes")) should be used if an application desires backslashes to be treated as escape characters.
+    This controls whether ordinary string literals (`'...'`) treat backslashes literally, as specified in the SQL standard. Beginning in PostgreSQL 9.1, the default is `on` (prior releases defaulted to `off`). Applications can check this parameter to determine how string literals will be processed. The presence of this parameter can also be taken as an indication that the escape string syntax (`E'...'`) is supported. Escape string syntax ([Section 4.1.2.2](sql-syntax-lexical#SQL-SYNTAX-STRINGS-ESCAPE "4.1.2.2. String Constants with C-Style Escapes")) should be used if an application desires backslashes to be treated as escape characters.
 
 * `synchronize_seqscans` (`boolean`) [#](#GUC-SYNCHRONIZE-SEQSCANS)
 
@@ -51,4 +51,4 @@
 
     Note that this option only affects the exact form `= NULL`, not other comparison operators or other expressions that are computationally equivalent to some expression involving the equals operator (such as `IN`). Thus, this option is not a general fix for bad programming.
 
-    Refer to [Section 9.2](functions-comparison.html "9.2. Comparison Functions and Operators") for related information.
+    Refer to [Section 9.2](functions-comparison "9.2. Comparison Functions and Operators") for related information.

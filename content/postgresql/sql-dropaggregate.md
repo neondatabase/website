@@ -43,7 +43,7 @@ where aggregate_signature is:
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the aggregate function (such as views using it), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the aggregate function (such as views using it), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -51,7 +51,7 @@ where aggregate_signature is:
 
 ## Notes
 
-Alternative syntaxes for referencing ordered-set aggregates are described under [ALTER AGGREGATE](sql-alteraggregate.html "ALTER AGGREGATE").
+Alternative syntaxes for referencing ordered-set aggregates are described under [ALTER AGGREGATE](sql-alteraggregate "ALTER AGGREGATE").
 
 ## Examples
 
@@ -82,4 +82,4 @@ There is no `DROP AGGREGATE` statement in the SQL standard.
 
 ## See Also
 
-[ALTER AGGREGATE](sql-alteraggregate.html "ALTER AGGREGATE"), [CREATE AGGREGATE](sql-createaggregate.html "CREATE AGGREGATE")
+[ALTER AGGREGATE](sql-alteraggregate "ALTER AGGREGATE"), [CREATE AGGREGATE](sql-createaggregate "CREATE AGGREGATE")

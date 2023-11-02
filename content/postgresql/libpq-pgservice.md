@@ -4,7 +4,7 @@ The connection service file allows libpq connection parameters to be associated 
 
 Service names can be defined in either a per-user service file or a system-wide file. If the same service name exists in both the user and the system file, the user file takes precedence. By default, the per-user service file is named `~/.pg_service.conf`. On Microsoft Windows, it is named `%APPDATA%\postgresql\.pg_service.conf` (where `%APPDATA%` refers to the Application Data subdirectory in the user's profile). A different file name can be specified by setting the environment variable `PGSERVICEFILE`. The system-wide file is named `pg_service.conf`. By default it is sought in the `etc` directory of the PostgreSQL installation (use `pg_config --sysconfdir` to identify this directory precisely). Another directory, but not a different file name, can be specified by setting the environment variable `PGSYSCONFDIR`.
 
-Either service file uses an “INI file” format where the section name is the service name and the parameters are connection parameters; see [Section 34.1.2](libpq-connect.html#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words") for a list. For example:
+Either service file uses an “INI file” format where the section name is the service name and the parameters are connection parameters; see [Section 34.1.2](libpq-connect#LIBPQ-PARAMKEYWORDS "34.1.2. Parameter Key Words") for a list. For example:
 
 ```
 

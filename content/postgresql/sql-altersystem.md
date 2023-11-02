@@ -24,7 +24,7 @@ Only superusers and users granted `ALTER SYSTEM` privilege on a parameter can ch
 
 * *`configuration_parameter`*
 
-    Name of a settable configuration parameter. Available parameters are documented in [Chapter 20](runtime-config.html "Chapter 20. Server Configuration").
+    Name of a settable configuration parameter. Available parameters are documented in [Chapter 20](runtime-config "Chapter 20. Server Configuration").
 
 * *`value`*
 
@@ -32,9 +32,9 @@ Only superusers and users granted `ALTER SYSTEM` privilege on a parameter can ch
 
 ## Notes
 
-This command can't be used to set [data\_directory](runtime-config-file-locations.html#GUC-DATA-DIRECTORY), nor parameters that are not allowed in `postgresql.conf` (e.g., [preset options](runtime-config-preset.html "20.15. Preset Options")).
+This command can't be used to set [data\_directory](runtime-config-file-locations#GUC-DATA-DIRECTORY), nor parameters that are not allowed in `postgresql.conf` (e.g., [preset options](runtime-config-preset "20.15. Preset Options")).
 
-See [Section 20.1](config-setting.html "20.1. Setting Parameters") for other ways to set the parameters.
+See [Section 20.1](config-setting "20.1. Setting Parameters") for other ways to set the parameters.
 
 ## Examples
 
@@ -58,4 +58,4 @@ The `ALTER SYSTEM` statement is a PostgreSQL extension.
 
 ## See Also
 
-[SET](sql-set.html "SET"), [SHOW](sql-show.html "SHOW")
+[SET](sql-set "SET"), [SHOW](sql-show "SHOW")

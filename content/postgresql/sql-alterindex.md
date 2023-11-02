@@ -30,7 +30,7 @@ ALTER INDEX ALL IN TABLESPACE name [ OWNED BY role_name [, ... ] ]
 
 * `SET TABLESPACE`
 
-    This form changes the index's tablespace to the specified tablespace and moves the data file(s) associated with the index to the new tablespace. To change the tablespace of an index, you must own the index and have `CREATE` privilege on the new tablespace. All indexes in the current database in a tablespace can be moved by using the `ALL IN TABLESPACE` form, which will lock all indexes to be moved and then move each one. This form also supports `OWNED BY`, which will only move indexes owned by the roles specified. If the `NOWAIT` option is specified then the command will fail if it is unable to acquire all of the locks required immediately. Note that system catalogs will not be moved by this command, use `ALTER DATABASE` or explicit `ALTER INDEX` invocations instead if desired. See also [`CREATE TABLESPACE`](sql-createtablespace.html "CREATE TABLESPACE").
+    This form changes the index's tablespace to the specified tablespace and moves the data file(s) associated with the index to the new tablespace. To change the tablespace of an index, you must own the index and have `CREATE` privilege on the new tablespace. All indexes in the current database in a tablespace can be moved by using the `ALL IN TABLESPACE` form, which will lock all indexes to be moved and then move each one. This form also supports `OWNED BY`, which will only move indexes owned by the roles specified. If the `NOWAIT` option is specified then the command will fail if it is unable to acquire all of the locks required immediately. Note that system catalogs will not be moved by this command, use `ALTER DATABASE` or explicit `ALTER INDEX` invocations instead if desired. See also [`CREATE TABLESPACE`](sql-createtablespace "CREATE TABLESPACE").
 
 * `ATTACH PARTITION`
 
@@ -42,7 +42,7 @@ ALTER INDEX ALL IN TABLESPACE name [ OWNED BY role_name [, ... ] ]
 
 * `SET ( storage_parameter [= value] [, ... ] )`
 
-    This form changes one or more index-method-specific storage parameters for the index. See [`CREATE INDEX`](sql-createindex.html "CREATE INDEX") for details on the available parameters. Note that the index contents will not be modified immediately by this command; depending on the parameter you might need to rebuild the index with [`REINDEX`](sql-reindex.html "REINDEX") to get the desired effects.
+    This form changes one or more index-method-specific storage parameters for the index. See [`CREATE INDEX`](sql-createindex "CREATE INDEX") for details on the available parameters. Note that the index contents will not be modified immediately by this command; depending on the parameter you might need to rebuild the index with [`REINDEX`](sql-reindex "REINDEX") to get the desired effects.
 
 * `RESET ( storage_parameter [, ... ] )`
 
@@ -50,7 +50,7 @@ ALTER INDEX ALL IN TABLESPACE name [ OWNED BY role_name [, ... ] ]
 
 * `ALTER [ COLUMN ] column_number SET STATISTICS integer`
 
-    This form sets the per-column statistics-gathering target for subsequent [`ANALYZE`](sql-analyze.html "ANALYZE") operations, though can be used only on index columns that are defined as an expression. Since expressions lack a unique name, we refer to them using the ordinal number of the index column. The target can be set in the range 0 to 10000; alternatively, set it to -1 to revert to using the system default statistics target ([default\_statistics\_target](runtime-config-query.html#GUC-DEFAULT-STATISTICS-TARGET)). For more information on the use of statistics by the PostgreSQL query planner, refer to [Section 14.2](planner-stats.html "14.2. Statistics Used by the Planner").
+    This form sets the per-column statistics-gathering target for subsequent [`ANALYZE`](sql-analyze "ANALYZE") operations, though can be used only on index columns that are defined as an expression. Since expressions lack a unique name, we refer to them using the ordinal number of the index column. The target can be set in the range 0 to 10000; alternatively, set it to -1 to revert to using the system default statistics target ([default\_statistics\_target](runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET)). For more information on the use of statistics by the PostgreSQL query planner, refer to [Section 14.2](planner-stats "14.2. Statistics Used by the Planner").
 
 ## Parameters
 
@@ -88,7 +88,7 @@ ALTER INDEX ALL IN TABLESPACE name [ OWNED BY role_name [, ... ] ]
 
 ## Notes
 
-These operations are also possible using [`ALTER TABLE`](sql-altertable.html "ALTER TABLE"). `ALTER INDEX` is in fact just an alias for the forms of `ALTER TABLE` that apply to indexes.
+These operations are also possible using [`ALTER TABLE`](sql-altertable "ALTER TABLE"). `ALTER INDEX` is in fact just an alias for the forms of `ALTER TABLE` that apply to indexes.
 
 There was formerly an `ALTER INDEX OWNER` variant, but this is now ignored (with a warning). An index cannot have an owner different from its table's owner. Changing the table's owner automatically changes the index as well.
 
@@ -132,4 +132,4 @@ ALTER INDEX coord_idx ALTER COLUMN 3 SET STATISTICS 1000;
 
 ## See Also
 
-[CREATE INDEX](sql-createindex.html "CREATE INDEX"), [REINDEX](sql-reindex.html "REINDEX")
+[CREATE INDEX](sql-createindex "CREATE INDEX"), [REINDEX](sql-reindex "REINDEX")

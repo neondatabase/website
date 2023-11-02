@@ -2,26 +2,26 @@
 
 **Table of Contents**
 
-  * *   [35.1. Introduction](lo-intro.html)
-  * [35.2. Implementation Features](lo-implementation.html)
-  * [35.3. Client Interfaces](lo-interfaces.html)
+  * *   [35.1. Introduction](lo-intro)
+  * [35.2. Implementation Features](lo-implementation)
+  * [35.3. Client Interfaces](lo-interfaces)
 
     
 
-  * *   [35.3.1. Creating a Large Object](lo-interfaces.html#LO-CREATE)
-    * [35.3.2. Importing a Large Object](lo-interfaces.html#LO-IMPORT)
-    * [35.3.3. Exporting a Large Object](lo-interfaces.html#LO-EXPORT)
-    * [35.3.4. Opening an Existing Large Object](lo-interfaces.html#LO-OPEN)
-    * [35.3.5. Writing Data to a Large Object](lo-interfaces.html#LO-WRITE)
-    * [35.3.6. Reading Data from a Large Object](lo-interfaces.html#LO-READ)
-    * [35.3.7. Seeking in a Large Object](lo-interfaces.html#LO-SEEK)
-    * [35.3.8. Obtaining the Seek Position of a Large Object](lo-interfaces.html#LO-TELL)
-    * [35.3.9. Truncating a Large Object](lo-interfaces.html#LO-TRUNCATE)
-    * [35.3.10. Closing a Large Object Descriptor](lo-interfaces.html#LO-CLOSE)
-    * [35.3.11. Removing a Large Object](lo-interfaces.html#LO-UNLINK)
+  * *   [35.3.1. Creating a Large Object](lo-interfaces#LO-CREATE)
+    * [35.3.2. Importing a Large Object](lo-interfaces#LO-IMPORT)
+    * [35.3.3. Exporting a Large Object](lo-interfaces#LO-EXPORT)
+    * [35.3.4. Opening an Existing Large Object](lo-interfaces#LO-OPEN)
+    * [35.3.5. Writing Data to a Large Object](lo-interfaces#LO-WRITE)
+    * [35.3.6. Reading Data from a Large Object](lo-interfaces#LO-READ)
+    * [35.3.7. Seeking in a Large Object](lo-interfaces#LO-SEEK)
+    * [35.3.8. Obtaining the Seek Position of a Large Object](lo-interfaces#LO-TELL)
+    * [35.3.9. Truncating a Large Object](lo-interfaces#LO-TRUNCATE)
+    * [35.3.10. Closing a Large Object Descriptor](lo-interfaces#LO-CLOSE)
+    * [35.3.11. Removing a Large Object](lo-interfaces#LO-UNLINK)
 
-  * *   [35.4. Server-Side Functions](lo-funcs.html)
-  * [35.5. Example Program](lo-examplesect.html)
+  * *   [35.4. Server-Side Functions](lo-funcs)
+  * [35.5. Example Program](lo-examplesect)
 
 PostgreSQL has a *large object* facility, which provides stream-style access to user data that is stored in a special large-object structure. Streaming access is useful when working with data values that are too large to manipulate conveniently as a whole.
 

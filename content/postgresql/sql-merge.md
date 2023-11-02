@@ -66,7 +66,7 @@ There is no separate `MERGE` privilege. If you specify an update action, you mus
 
 * *`source_query`*
 
-    A query (`SELECT` statement or `VALUES` statement) that supplies the rows to be merged into the *`target_table_name`*. Refer to the [SELECT](sql-select.html "SELECT") statement or [VALUES](sql-values.html "VALUES") statement for a description of the syntax.
+    A query (`SELECT` statement or `VALUES` statement) that supplies the rows to be merged into the *`target_table_name`*. Refer to the [SELECT](sql-select "SELECT") statement or [VALUES](sql-values "VALUES") statement for a description of the syntax.
 
 * *`source_alias`*
 
@@ -114,7 +114,7 @@ There is no separate `MERGE` privilege. If you specify an update action, you mus
 
 * *`merge_delete`*
 
-    Specifies a `DELETE` action that deletes the current row of the *`target_table_name`*. Do not include the table name or any other clauses, as you would normally do with a [DELETE](sql-delete.html "DELETE") command.
+    Specifies a `DELETE` action that deletes the current row of the *`target_table_name`*. Do not include the table name or any other clauses, as you would normally do with a [DELETE](sql-delete "DELETE") command.
 
 * *`column_name`*
 
@@ -142,7 +142,7 @@ There is no separate `MERGE` privilege. If you specify an update action, you mus
 
 * *`with_query`*
 
-    The `WITH` clause allows you to specify one or more subqueries that can be referenced by name in the `MERGE` query. See [Section 7.8](queries-with.html "7.8. WITH Queries (Common Table Expressions)") and [SELECT](sql-select.html "SELECT") for details.
+    The `WITH` clause allows you to specify one or more subqueries that can be referenced by name in the `MERGE` query. See [Section 7.8](queries-with "7.8. WITH Queries (Common Table Expressions)") and [SELECT](sql-select "SELECT") for details.
 
 ## Outputs
 
@@ -185,7 +185,7 @@ The order in which rows are generated from the data source is indeterminate by d
 
 There is no `RETURNING` clause with `MERGE`. Actions of `INSERT`, `UPDATE` and `DELETE` cannot contain `RETURNING` or `WITH` clauses.
 
-When `MERGE` is run concurrently with other commands that modify the target table, the usual transaction isolation rules apply; see [Section 13.2](transaction-iso.html "13.2. Transaction Isolation") for an explanation on the behavior at each isolation level. You may also wish to consider using `INSERT ... ON CONFLICT` as an alternative statement which offers the ability to run an `UPDATE` if a concurrent `INSERT` occurs. There are a variety of differences and restrictions between the two statement types and they are not interchangeable.
+When `MERGE` is run concurrently with other commands that modify the target table, the usual transaction isolation rules apply; see [Section 13.2](transaction-iso "13.2. Transaction Isolation") for an explanation on the behavior at each isolation level. You may also wish to consider using `INSERT ... ON CONFLICT` as an alternative statement which offers the ability to run an `UPDATE` if a concurrent `INSERT` occurs. There are a variety of differences and restrictions between the two statement types and they are not interchangeable.
 
 ## Examples
 

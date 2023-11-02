@@ -76,4 +76,4 @@ Note, however, that the SQL/MED functionality as a whole is not yet conforming.
 
 ## See Also
 
-[ALTER FOREIGN DATA WRAPPER](sql-alterforeigndatawrapper.html "ALTER FOREIGN DATA WRAPPER"), [DROP FOREIGN DATA WRAPPER](sql-dropforeigndatawrapper.html "DROP FOREIGN DATA WRAPPER"), [CREATE SERVER](sql-createserver.html "CREATE SERVER"), [CREATE USER MAPPING](sql-createusermapping.html "CREATE USER MAPPING"), [CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE")
+[ALTER FOREIGN DATA WRAPPER](sql-alterforeigndatawrapper "ALTER FOREIGN DATA WRAPPER"), [DROP FOREIGN DATA WRAPPER](sql-dropforeigndatawrapper "DROP FOREIGN DATA WRAPPER"), [CREATE SERVER](sql-createserver "CREATE SERVER"), [CREATE USER MAPPING](sql-createusermapping "CREATE USER MAPPING"), [CREATE FOREIGN TABLE](sql-createforeigntable "CREATE FOREIGN TABLE")

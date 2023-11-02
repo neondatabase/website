@@ -12,7 +12,7 @@ This section describes the fields that can appear in ErrorResponse and NoticeRes
 
 * `C`
 
-    Code: the SQLSTATE code for the error (see [Appendix A](errcodes-appendix.html "Appendix A. PostgreSQL Error Codes")). Not localizable. Always present.
+    Code: the SQLSTATE code for the error (see [Appendix A](errcodes-appendix "Appendix A. PostgreSQL Error Codes")). Not localizable. Always present.
 
 * `M`
 
@@ -76,6 +76,6 @@ This section describes the fields that can appear in ErrorResponse and NoticeRes
 
 ### Note
 
-The fields for schema name, table name, column name, data type name, and constraint name are supplied only for a limited number of error types; see [Appendix A](errcodes-appendix.html "Appendix A. PostgreSQL Error Codes"). Frontends should not assume that the presence of any of these fields guarantees the presence of another field. Core error sources observe the interrelationships noted above, but user-defined functions may use these fields in other ways. In the same vein, clients should not assume that these fields denote contemporary objects in the current database.
+The fields for schema name, table name, column name, data type name, and constraint name are supplied only for a limited number of error types; see [Appendix A](errcodes-appendix "Appendix A. PostgreSQL Error Codes"). Frontends should not assume that the presence of any of these fields guarantees the presence of another field. Core error sources observe the interrelationships noted above, but user-defined functions may use these fields in other ways. In the same vein, clients should not assume that these fields denote contemporary objects in the current database.
 
 The client is responsible for formatting displayed information to meet its needs; in particular it should break long lines as needed. Newline characters appearing in the error message fields should be treated as paragraph breaks, not line breaks.

@@ -1,11 +1,11 @@
 ## 49.8. Synchronous Replication Support for Logical Decoding [#](#LOGICALDECODING-SYNCHRONOUS)
 
-  * *   [49.8.1. Overview](logicaldecoding-synchronous.html#LOGICALDECODING-SYNCHRONOUS-OVERVIEW)
-  * [49.8.2. Caveats](logicaldecoding-synchronous.html#LOGICALDECODING-SYNCHRONOUS-CAVEATS)
+  * *   [49.8.1. Overview](logicaldecoding-synchronous#LOGICALDECODING-SYNCHRONOUS-OVERVIEW)
+  * [49.8.2. Caveats](logicaldecoding-synchronous#LOGICALDECODING-SYNCHRONOUS-CAVEATS)
 
 ### 49.8.1. Overview [#](#LOGICALDECODING-SYNCHRONOUS-OVERVIEW)
 
-Logical decoding can be used to build [synchronous replication](warm-standby.html#SYNCHRONOUS-REPLICATION "27.2.8. Synchronous Replication") solutions with the same user interface as synchronous replication for [streaming replication](warm-standby.html#STREAMING-REPLICATION "27.2.5. Streaming Replication"). To do this, the streaming replication interface (see [Section 49.3](logicaldecoding-walsender.html "49.3. Streaming Replication Protocol Interface")) must be used to stream out data. Clients have to send `Standby status update (F)` (see [Section 55.4](protocol-replication.html "55.4. Streaming Replication Protocol")) messages, just like streaming replication clients do.
+Logical decoding can be used to build [synchronous replication](warm-standby#SYNCHRONOUS-REPLICATION "27.2.8. Synchronous Replication") solutions with the same user interface as synchronous replication for [streaming replication](warm-standby#STREAMING-REPLICATION "27.2.5. Streaming Replication"). To do this, the streaming replication interface (see [Section 49.3](logicaldecoding-walsender "49.3. Streaming Replication Protocol Interface")) must be used to stream out data. Clients have to send `Standby status update (F)` (see [Section 55.4](protocol-replication "55.4. Streaming Replication Protocol")) messages, just like streaming replication clients do.
 
 ### Note
 
@@ -13,7 +13,7 @@ A synchronous replica receiving changes via logical decoding will work in the sc
 
 ### 49.8.2. Caveats [#](#LOGICALDECODING-SYNCHRONOUS-CAVEATS)
 
-In synchronous replication setup, a deadlock can happen, if the transaction has locked \[user] catalog tables exclusively. See [Section 49.6.2](logicaldecoding-output-plugin.html#LOGICALDECODING-CAPABILITIES "49.6.2. Capabilities") for information on user catalog tables. This is because logical decoding of transactions can lock catalog tables to access them. To avoid this users must refrain from taking an exclusive lock on \[user] catalog tables. This can happen in the following ways:
+In synchronous replication setup, a deadlock can happen, if the transaction has locked \[user] catalog tables exclusively. See [Section 49.6.2](logicaldecoding-output-plugin#LOGICALDECODING-CAPABILITIES "49.6.2. Capabilities") for information on user catalog tables. This is because logical decoding of transactions can lock catalog tables to access them. To avoid this users must refrain from taking an exclusive lock on \[user] catalog tables. This can happen in the following ways:
 
 * Issuing an explicit `LOCK` on `pg_class` in a transaction.
 * Perform `CLUSTER` on `pg_class` in a transaction.

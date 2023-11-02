@@ -7,5 +7,5 @@ The catalog `pg_publication_namespace` contains the mapping between schemas and 
 | Column TypeDescription                                                                                                             |
 | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `oid` `oid`Row identifier                                                                                                          |
-| `pnpubid` `oid` (references [`pg_publication`](catalog-pg-publication.html "53.40. pg_publication").`oid`)Reference to publication |
-| `pnnspid` `oid` (references [`pg_namespace`](catalog-pg-namespace.html "53.32. pg_namespace").`oid`)Reference to schema            |
+| `pnpubid` `oid` (references [`pg_publication`](catalog-pg-publication "53.40. pg_publication").`oid`)Reference to publication |
+| `pnnspid` `oid` (references [`pg_namespace`](catalog-pg-namespace "53.32. pg_namespace").`oid`)Reference to schema            |

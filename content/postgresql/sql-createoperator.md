@@ -41,7 +41,7 @@ For binary operators, both `LEFTARG` and `RIGHTARG` must be defined. For prefix 
 
 In the syntax of `CREATE OPERATOR`, the keywords `FUNCTION` and `PROCEDURE` are equivalent, but the referenced function must in any case be a function, not a procedure. The use of the keyword `PROCEDURE` here is historical and deprecated.
 
-The other clauses specify optional operator optimization attributes. Their meaning is detailed in [Section 38.15](xoper-optimization.html "38.15. Operator Optimization Information").
+The other clauses specify optional operator optimization attributes. Their meaning is detailed in [Section 38.15](xoper-optimization "38.15. Operator Optimization Information").
 
 To be able to create an operator, you must have `USAGE` privilege on the argument types and the return type, as well as `EXECUTE` privilege on the underlying function. If a commutator or negator operator is specified, you must own those operators.
 
@@ -96,7 +96,7 @@ COMMUTATOR = OPERATOR(myschema.===) ,
 
 ## Notes
 
-Refer to [Section 38.14](xoper.html "38.14. User-Defined Operators") and [Section 38.15](xoper-optimization.html "38.15. Operator Optimization Information") for further information.
+Refer to [Section 38.14](xoper "38.14. User-Defined Operators") and [Section 38.15](xoper-optimization "38.15. Operator Optimization Information") for further information.
 
 When you are defining a self-commutative operator, you just do it. When you are defining a pair of commutative operators, things are a little trickier: how can the first one to be defined refer to the other one, which you haven't defined yet? There are three solutions to this problem:
 
@@ -108,11 +108,11 @@ In all three cases, you must own both operators in order to mark them as commuta
 
 Pairs of negator operators can be defined using the same methods as for commutator pairs.
 
-It is not possible to specify an operator's lexical precedence in `CREATE OPERATOR`, because the parser's precedence behavior is hard-wired. See [Section 4.1.6](sql-syntax-lexical.html#SQL-PRECEDENCE "4.1.6. Operator Precedence") for precedence details.
+It is not possible to specify an operator's lexical precedence in `CREATE OPERATOR`, because the parser's precedence behavior is hard-wired. See [Section 4.1.6](sql-syntax-lexical#SQL-PRECEDENCE "4.1.6. Operator Precedence") for precedence details.
 
 The obsolete options `SORT1`, `SORT2`, `LTCMP`, and `GTCMP` were formerly used to specify the names of sort operators associated with a merge-joinable operator. This is no longer necessary, since information about associated operators is found by looking at B-tree operator families instead. If one of these options is given, it is ignored except for implicitly setting `MERGES` true.
 
-Use [`DROP OPERATOR`](sql-dropoperator.html "DROP OPERATOR") to delete user-defined operators from a database. Use [`ALTER OPERATOR`](sql-alteroperator.html "ALTER OPERATOR") to modify operators in a database.
+Use [`DROP OPERATOR`](sql-dropoperator "DROP OPERATOR") to delete user-defined operators from a database. Use [`ALTER OPERATOR`](sql-alteroperator "ALTER OPERATOR") to modify operators in a database.
 
 ## Examples
 
@@ -138,4 +138,4 @@ CREATE OPERATOR === (
 
 ## See Also
 
-[ALTER OPERATOR](sql-alteroperator.html "ALTER OPERATOR"), [CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS"), [DROP OPERATOR](sql-dropoperator.html "DROP OPERATOR")
+[ALTER OPERATOR](sql-alteroperator "ALTER OPERATOR"), [CREATE OPERATOR CLASS](sql-createopclass "CREATE OPERATOR CLASS"), [DROP OPERATOR](sql-dropoperator "DROP OPERATOR")

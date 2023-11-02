@@ -11,11 +11,11 @@ As always, there are some functions that just don't fit anywhere.
     void PQfreemem(void *ptr);
     ```
 
-    Frees memory allocated by libpq, particularly [`PQescapeByteaConn`](libpq-exec.html#LIBPQ-PQESCAPEBYTEACONN), [`PQescapeBytea`](libpq-exec.html#LIBPQ-PQESCAPEBYTEA), [`PQunescapeBytea`](libpq-exec.html#LIBPQ-PQUNESCAPEBYTEA), and `PQnotifies`. It is particularly important that this function, rather than `free()`, be used on Microsoft Windows. This is because allocating memory in a DLL and releasing it in the application works only if multithreaded/single-threaded, release/debug, and static/dynamic flags are the same for the DLL and the application. On non-Microsoft Windows platforms, this function is the same as the standard library function `free()`.
+    Frees memory allocated by libpq, particularly [`PQescapeByteaConn`](libpq-exec#LIBPQ-PQESCAPEBYTEACONN), [`PQescapeBytea`](libpq-exec#LIBPQ-PQESCAPEBYTEA), [`PQunescapeBytea`](libpq-exec#LIBPQ-PQUNESCAPEBYTEA), and `PQnotifies`. It is particularly important that this function, rather than `free()`, be used on Microsoft Windows. This is because allocating memory in a DLL and releasing it in the application works only if multithreaded/single-threaded, release/debug, and static/dynamic flags are the same for the DLL and the application. On non-Microsoft Windows platforms, this function is the same as the standard library function `free()`.
 
 * `PQconninfoFree` [#](#LIBPQ-PQCONNINFOFREE)
 
-    Frees the data structures allocated by [`PQconndefaults`](libpq-connect.html#LIBPQ-PQCONNDEFAULTS) or [`PQconninfoParse`](libpq-connect.html#LIBPQ-PQCONNINFOPARSE).
+    Frees the data structures allocated by [`PQconndefaults`](libpq-connect#LIBPQ-PQCONNDEFAULTS) or [`PQconninfoParse`](libpq-connect#LIBPQ-PQCONNINFOPARSE).
 
     ```
 
@@ -24,7 +24,7 @@ As always, there are some functions that just don't fit anywhere.
 
     If the argument is a `NULL` pointer, no operation is performed.
 
-    A simple [`PQfreemem`](libpq-misc.html#LIBPQ-PQFREEMEM) will not do for this, since the array contains references to subsidiary strings.
+    A simple [`PQfreemem`](libpq-misc#LIBPQ-PQFREEMEM) will not do for this, since the array contains references to subsidiary strings.
 
 * `PQencryptPasswordConn` [#](#LIBPQ-PQENCRYPTPASSWORDCONN)
 
@@ -37,9 +37,9 @@ As always, there are some functions that just don't fit anywhere.
 
     This function is intended to be used by client applications that wish to send commands like `ALTER USER joe PASSWORD 'pwd'`. It is good practice not to send the original cleartext password in such a command, because it might be exposed in command logs, activity displays, and so on. Instead, use this function to convert the password to encrypted form before it is sent.
 
-    The *`passwd`* and *`user`* arguments are the cleartext password, and the SQL name of the user it is for. *`algorithm`* specifies the encryption algorithm to use to encrypt the password. Currently supported algorithms are `md5` and `scram-sha-256` (`on` and `off` are also accepted as aliases for `md5`, for compatibility with older server versions). Note that support for `scram-sha-256` was introduced in PostgreSQL version 10, and will not work correctly with older server versions. If *`algorithm`* is `NULL`, this function will query the server for the current value of the [password\_encryption](runtime-config-connection.html#GUC-PASSWORD-ENCRYPTION) setting. That can block, and will fail if the current transaction is aborted, or if the connection is busy executing another query. If you wish to use the default algorithm for the server but want to avoid blocking, query `password_encryption` yourself before calling [`PQencryptPasswordConn`](libpq-misc.html#LIBPQ-PQENCRYPTPASSWORDCONN), and pass that value as the *`algorithm`*.
+    The *`passwd`* and *`user`* arguments are the cleartext password, and the SQL name of the user it is for. *`algorithm`* specifies the encryption algorithm to use to encrypt the password. Currently supported algorithms are `md5` and `scram-sha-256` (`on` and `off` are also accepted as aliases for `md5`, for compatibility with older server versions). Note that support for `scram-sha-256` was introduced in PostgreSQL version 10, and will not work correctly with older server versions. If *`algorithm`* is `NULL`, this function will query the server for the current value of the [password\_encryption](runtime-config-connection#GUC-PASSWORD-ENCRYPTION) setting. That can block, and will fail if the current transaction is aborted, or if the connection is busy executing another query. If you wish to use the default algorithm for the server but want to avoid blocking, query `password_encryption` yourself before calling [`PQencryptPasswordConn`](libpq-misc#LIBPQ-PQENCRYPTPASSWORDCONN), and pass that value as the *`algorithm`*.
 
-    The return value is a string allocated by `malloc`. The caller can assume the string doesn't contain any special characters that would require escaping. Use [`PQfreemem`](libpq-misc.html#LIBPQ-PQFREEMEM) to free the result when done with it. On error, returns `NULL`, and a suitable message is stored in the connection object.
+    The return value is a string allocated by `malloc`. The caller can assume the string doesn't contain any special characters that would require escaping. Use [`PQfreemem`](libpq-misc#LIBPQ-PQFREEMEM) to free the result when done with it. On error, returns `NULL`, and a suitable message is stored in the connection object.
 
 * `PQencryptPassword` [#](#LIBPQ-PQENCRYPTPASSWORD)
 
@@ -50,7 +50,7 @@ As always, there are some functions that just don't fit anywhere.
     char *PQencryptPassword(const char *passwd, const char *user);
     ```
 
-    [`PQencryptPassword`](libpq-misc.html#LIBPQ-PQENCRYPTPASSWORD) is an older, deprecated version of [`PQencryptPasswordConn`](libpq-misc.html#LIBPQ-PQENCRYPTPASSWORDCONN). The difference is that [`PQencryptPassword`](libpq-misc.html#LIBPQ-PQENCRYPTPASSWORD) does not require a connection object, and `md5` is always used as the encryption algorithm.
+    [`PQencryptPassword`](libpq-misc#LIBPQ-PQENCRYPTPASSWORD) is an older, deprecated version of [`PQencryptPasswordConn`](libpq-misc#LIBPQ-PQENCRYPTPASSWORDCONN). The difference is that [`PQencryptPassword`](libpq-misc#LIBPQ-PQENCRYPTPASSWORD) does not require a connection object, and `md5` is always used as the encryption algorithm.
 
 * `PQmakeEmptyPGresult` [#](#LIBPQ-PQMAKEEMPTYPGRESULT)
 
@@ -61,11 +61,11 @@ As always, there are some functions that just don't fit anywhere.
     PGresult *PQmakeEmptyPGresult(PGconn *conn, ExecStatusType status);
     ```
 
-    This is libpq's internal function to allocate and initialize an empty `PGresult` object. This function returns `NULL` if memory could not be allocated. It is exported because some applications find it useful to generate result objects (particularly objects with error status) themselves. If *`conn`* is not null and *`status`* indicates an error, the current error message of the specified connection is copied into the `PGresult`. Also, if *`conn`* is not null, any event procedures registered in the connection are copied into the `PGresult`. (They do not get `PGEVT_RESULTCREATE` calls, but see [`PQfireResultCreateEvents`](libpq-misc.html#LIBPQ-PQFIRERESULTCREATEEVENTS).) Note that [`PQclear`](libpq-exec.html#LIBPQ-PQCLEAR) should eventually be called on the object, just as with a `PGresult` returned by libpq itself.
+    This is libpq's internal function to allocate and initialize an empty `PGresult` object. This function returns `NULL` if memory could not be allocated. It is exported because some applications find it useful to generate result objects (particularly objects with error status) themselves. If *`conn`* is not null and *`status`* indicates an error, the current error message of the specified connection is copied into the `PGresult`. Also, if *`conn`* is not null, any event procedures registered in the connection are copied into the `PGresult`. (They do not get `PGEVT_RESULTCREATE` calls, but see [`PQfireResultCreateEvents`](libpq-misc#LIBPQ-PQFIRERESULTCREATEEVENTS).) Note that [`PQclear`](libpq-exec#LIBPQ-PQCLEAR) should eventually be called on the object, just as with a `PGresult` returned by libpq itself.
 
 * `PQfireResultCreateEvents` [#](#LIBPQ-PQFIRERESULTCREATEEVENTS)
 
-    Fires a `PGEVT_RESULTCREATE` event (see [Section 34.14](libpq-events.html "34.14. Event System")) for each event procedure registered in the `PGresult` object. Returns non-zero for success, zero if any event procedure fails.
+    Fires a `PGEVT_RESULTCREATE` event (see [Section 34.14](libpq-events "34.14. Event System")) for each event procedure registered in the `PGresult` object. Returns non-zero for success, zero if any event procedure fails.
 
     ```
 
@@ -76,11 +76,11 @@ As always, there are some functions that just don't fit anywhere.
 
     Event procedures that have already received a `PGEVT_RESULTCREATE` or `PGEVT_RESULTCOPY` event for this object are not fired again.
 
-    The main reason that this function is separate from [`PQmakeEmptyPGresult`](libpq-misc.html#LIBPQ-PQMAKEEMPTYPGRESULT) is that it is often appropriate to create a `PGresult` and fill it with data before invoking the event procedures.
+    The main reason that this function is separate from [`PQmakeEmptyPGresult`](libpq-misc#LIBPQ-PQMAKEEMPTYPGRESULT) is that it is often appropriate to create a `PGresult` and fill it with data before invoking the event procedures.
 
 * `PQcopyResult` [#](#LIBPQ-PQCOPYRESULT)
 
-    Makes a copy of a `PGresult` object. The copy is not linked to the source result in any way and [`PQclear`](libpq-exec.html#LIBPQ-PQCLEAR) must be called when the copy is no longer needed. If the function fails, `NULL` is returned.
+    Makes a copy of a `PGresult` object. The copy is not linked to the source result in any way and [`PQclear`](libpq-exec#LIBPQ-PQCLEAR) must be called when the copy is no longer needed. If the function fails, `NULL` is returned.
 
     ```
 
@@ -109,7 +109,7 @@ As always, there are some functions that just don't fit anywhere.
     int PQsetvalue(PGresult *res, int tup_num, int field_num, char *value, int len);
     ```
 
-    The function will automatically grow the result's internal tuples array as needed. However, the *`tup_num`* argument must be less than or equal to [`PQntuples`](libpq-exec.html#LIBPQ-PQNTUPLES), meaning this function can only grow the tuples array one tuple at a time. But any field of any existing tuple can be modified in any order. If a value at *`field_num`* already exists, it will be overwritten. If *`len`* is -1 or *`value`* is `NULL`, the field value will be set to an SQL null value. The *`value`* is copied into the result's private storage, thus is no longer needed after the function returns. If the function fails, the return value is zero. If the function succeeds, the return value is non-zero.
+    The function will automatically grow the result's internal tuples array as needed. However, the *`tup_num`* argument must be less than or equal to [`PQntuples`](libpq-exec#LIBPQ-PQNTUPLES), meaning this function can only grow the tuples array one tuple at a time. But any field of any existing tuple can be modified in any order. If a value at *`field_num`* already exists, it will be overwritten. If *`len`* is -1 or *`value`* is `NULL`, the field value will be set to an SQL null value. The *`value`* is copied into the result's private storage, thus is no longer needed after the function returns. If the function fails, the return value is zero. If the function succeeds, the return value is non-zero.
 
 * `PQresultAlloc` [#](#LIBPQ-PQRESULTALLOC)
 
@@ -131,7 +131,7 @@ As always, there are some functions that just don't fit anywhere.
     size_t PQresultMemorySize(const PGresult *res);
     ```
 
-    This value is the sum of all `malloc` requests associated with the `PGresult` object, that is, all the space that will be freed by [`PQclear`](libpq-exec.html#LIBPQ-PQCLEAR). This information can be useful for managing memory consumption.
+    This value is the sum of all `malloc` requests associated with the `PGresult` object, that is, all the space that will be freed by [`PQclear`](libpq-exec#LIBPQ-PQCLEAR). This information can be useful for managing memory consumption.
 
 * `PQlibVersion` [#](#LIBPQ-PQLIBVERSION)
 
@@ -142,13 +142,13 @@ As always, there are some functions that just don't fit anywhere.
     int PQlibVersion(void);
     ```
 
-    The result of this function can be used to determine, at run time, whether specific functionality is available in the currently loaded version of libpq. The function can be used, for example, to determine which connection options are available in [`PQconnectdb`](libpq-connect.html#LIBPQ-PQCONNECTDB).
+    The result of this function can be used to determine, at run time, whether specific functionality is available in the currently loaded version of libpq. The function can be used, for example, to determine which connection options are available in [`PQconnectdb`](libpq-connect#LIBPQ-PQCONNECTDB).
 
     The result is formed by multiplying the library's major version number by 10000 and adding the minor version number. For example, version 10.1 will be returned as 100001, and version 11.0 will be returned as 110000.
 
-    Prior to major version 10, PostgreSQL used three-part version numbers in which the first two parts together represented the major version. For those versions, [`PQlibVersion`](libpq-misc.html#LIBPQ-PQLIBVERSION) uses two digits for each part; for example version 9.1.5 will be returned as 90105, and version 9.2.0 will be returned as 90200.
+    Prior to major version 10, PostgreSQL used three-part version numbers in which the first two parts together represented the major version. For those versions, [`PQlibVersion`](libpq-misc#LIBPQ-PQLIBVERSION) uses two digits for each part; for example version 9.1.5 will be returned as 90105, and version 9.2.0 will be returned as 90200.
 
-    Therefore, for purposes of determining feature compatibility, applications should divide the result of [`PQlibVersion`](libpq-misc.html#LIBPQ-PQLIBVERSION) by 100 not 10000 to determine a logical major version number. In all release series, only the last two digits differ between minor releases (bug-fix releases).
+    Therefore, for purposes of determining feature compatibility, applications should divide the result of [`PQlibVersion`](libpq-misc#LIBPQ-PQLIBVERSION) by 100 not 10000 to determine a logical major version number. In all release series, only the last two digits differ between minor releases (bug-fix releases).
 
 ### Note
 

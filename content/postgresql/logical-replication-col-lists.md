@@ -1,8 +1,8 @@
 ## 31.4. Column Lists [#](#LOGICAL-REPLICATION-COL-LISTS)
 
-* [31.4.1. Examples](logical-replication-col-lists.html#LOGICAL-REPLICATION-COL-LIST-EXAMPLES)
+* [31.4.1. Examples](logical-replication-col-lists#LOGICAL-REPLICATION-COL-LIST-EXAMPLES)
 
-Each publication can optionally specify which columns of each table are replicated to subscribers. The table on the subscriber side must have at least all the columns that are published. If no column list is specified, then all columns on the publisher are replicated. See [CREATE PUBLICATION](sql-createpublication.html "CREATE PUBLICATION") for details on the syntax.
+Each publication can optionally specify which columns of each table are replicated to subscribers. The table on the subscriber side must have at least all the columns that are published. If no column list is specified, then all columns on the publisher are replicated. See [CREATE PUBLICATION](sql-createpublication "CREATE PUBLICATION") for details on the syntax.
 
 The choice of columns can be based on behavioral or performance reasons. However, do not rely on this feature for security: a malicious subscriber is able to obtain data from columns that are not specifically published. If security is a consideration, protections can be applied at the publisher side.
 
@@ -10,11 +10,11 @@ If no column list is specified, any columns added later are automatically replic
 
 A column list can contain only simple column references. The order of columns in the list is not preserved.
 
-Specifying a column list when the publication also publishes [`FOR TABLES IN SCHEMA`](sql-createpublication.html#SQL-CREATEPUBLICATION-FOR-TABLES-IN-SCHEMA) is not supported.
+Specifying a column list when the publication also publishes [`FOR TABLES IN SCHEMA`](sql-createpublication#SQL-CREATEPUBLICATION-FOR-TABLES-IN-SCHEMA) is not supported.
 
-For partitioned tables, the publication parameter [`publish_via_partition_root`](sql-createpublication.html#SQL-CREATEPUBLICATION-WITH-PUBLISH-VIA-PARTITION-ROOT) determines which column list is used. If `publish_via_partition_root` is `true`, the root partitioned table's column list is used. Otherwise, if `publish_via_partition_root` is `false` (the default), each partition's column list is used.
+For partitioned tables, the publication parameter [`publish_via_partition_root`](sql-createpublication#SQL-CREATEPUBLICATION-WITH-PUBLISH-VIA-PARTITION-ROOT) determines which column list is used. If `publish_via_partition_root` is `true`, the root partitioned table's column list is used. Otherwise, if `publish_via_partition_root` is `false` (the default), each partition's column list is used.
 
-If a publication publishes `UPDATE` or `DELETE` operations, any column list must include the table's replica identity columns (see [`REPLICA IDENTITY`](sql-altertable.html#SQL-ALTERTABLE-REPLICA-IDENTITY)). If a publication publishes only `INSERT` operations, then the column list may omit replica identity columns.
+If a publication publishes `UPDATE` or `DELETE` operations, any column list must include the table's replica identity columns (see [`REPLICA IDENTITY`](sql-altertable#SQL-ALTERTABLE-REPLICA-IDENTITY)). If a publication publishes only `INSERT` operations, then the column list may omit replica identity columns.
 
 Column lists have no effect for the `TRUNCATE` command.
 
@@ -22,11 +22,11 @@ During initial data synchronization, only the published columns are copied. Howe
 
 ### Warning: Combining Column Lists from Multiple Publications
 
-There's currently no support for subscriptions comprising several publications where the same table has been published with different column lists. [CREATE SUBSCRIPTION](sql-createsubscription.html "CREATE SUBSCRIPTION") disallows creating such subscriptions, but it is still possible to get into that situation by adding or altering column lists on the publication side after a subscription has been created.
+There's currently no support for subscriptions comprising several publications where the same table has been published with different column lists. [CREATE SUBSCRIPTION](sql-createsubscription "CREATE SUBSCRIPTION") disallows creating such subscriptions, but it is still possible to get into that situation by adding or altering column lists on the publication side after a subscription has been created.
 
 This means changing the column lists of tables on publications that are already subscribed could lead to errors being thrown on the subscriber side.
 
-If a subscription is affected by this problem, the only way to resume replication is to adjust one of the column lists on the publication side so that they all match; and then either recreate the subscription, or use [`ALTER SUBSCRIPTION ... DROP PUBLICATION`](sql-altersubscription.html#SQL-ALTERSUBSCRIPTION-PARAMS-SETADDDROP-PUBLICATION) to remove one of the offending publications and add it again.
+If a subscription is affected by this problem, the only way to resume replication is to adjust one of the column lists on the publication side so that they all match; and then either recreate the subscription, or use [`ALTER SUBSCRIPTION ... DROP PUBLICATION`](sql-altersubscription#SQL-ALTERSUBSCRIPTION-PARAMS-SETADDDROP-PUBLICATION) to remove one of the offending publications and add it again.
 
 ### 31.4.1. Examples [#](#LOGICAL-REPLICATION-COL-LIST-EXAMPLES)
 

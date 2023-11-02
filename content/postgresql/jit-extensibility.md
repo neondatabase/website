@@ -1,11 +1,11 @@
 ## 32.4. Extensibility [#](#JIT-EXTENSIBILITY)
 
-  * *   [32.4.1. Inlining Support for Extensions](jit-extensibility.html#JIT-EXTENSIBILITY-BITCODE)
-  * [32.4.2. Pluggable JIT Providers](jit-extensibility.html#JIT-PLUGGABLE)
+  * *   [32.4.1. Inlining Support for Extensions](jit-extensibility#JIT-EXTENSIBILITY-BITCODE)
+  * [32.4.2. Pluggable JIT Providers](jit-extensibility#JIT-PLUGGABLE)
 
 ### 32.4.1. Inlining Support for Extensions [#](#JIT-EXTENSIBILITY-BITCODE)
 
-PostgreSQL's JIT implementation can inline the bodies of functions of types `C` and `internal`, as well as operators based on such functions. To do so for functions in extensions, the definitions of those functions need to be made available. When using [PGXS](extend-pgxs.html "38.18. Extension Building Infrastructure") to build an extension against a server that has been compiled with LLVM JIT support, the relevant files will be built and installed automatically.
+PostgreSQL's JIT implementation can inline the bodies of functions of types `C` and `internal`, as well as operators based on such functions. To do so for functions in extensions, the definitions of those functions need to be made available. When using [PGXS](extend-pgxs "38.18. Extension Building Infrastructure") to build an extension against a server that has been compiled with LLVM JIT support, the relevant files will be built and installed automatically.
 
 The relevant files have to be installed into `$pkglibdir/bitcode/$extension/` and a summary of them into `$pkglibdir/bitcode/$extension.index.bc`, where `$pkglibdir` is the directory returned by `pg_config --pkglibdir` and `$extension` is the base name of the extension's shared library.
 
@@ -15,7 +15,7 @@ For functions built into PostgreSQL itself, the bitcode is installed into `$pkgl
 
 ### 32.4.2. Pluggable JIT Providers [#](#JIT-PLUGGABLE)
 
-PostgreSQL provides a JIT implementation based on LLVM. The interface to the JIT provider is pluggable and the provider can be changed without recompiling (although currently, the build process only provides inlining support data for LLVM). The active provider is chosen via the setting [jit\_provider](runtime-config-client.html#GUC-JIT-PROVIDER).
+PostgreSQL provides a JIT implementation based on LLVM. The interface to the JIT provider is pluggable and the provider can be changed without recompiling (although currently, the build process only provides inlining support data for LLVM). The active provider is chosen via the setting [jit\_provider](runtime-config-client#GUC-JIT-PROVIDER).
 
 #### 32.4.2.1. JIT Provider Interface [#](#JIT-PLUGGABLE-PROVIDER-INTERFACE)
 

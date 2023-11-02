@@ -1,12 +1,12 @@
 ## 9.29. Event Trigger Functions [#](#FUNCTIONS-EVENT-TRIGGERS)
 
-  * *   [9.29.1. Capturing Changes at Command End](functions-event-triggers.html#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
-  * [9.29.2. Processing Objects Dropped by a DDL Command](functions-event-triggers.html#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
-  * [9.29.3. Handling a Table Rewrite Event](functions-event-triggers.html#PG-EVENT-TRIGGER-TABLE-REWRITE-FUNCTIONS)
+  * *   [9.29.1. Capturing Changes at Command End](functions-event-triggers#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
+  * [9.29.2. Processing Objects Dropped by a DDL Command](functions-event-triggers#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
+  * [9.29.3. Handling a Table Rewrite Event](functions-event-triggers#PG-EVENT-TRIGGER-TABLE-REWRITE-FUNCTIONS)
 
 PostgreSQL provides these helper functions to retrieve information from event triggers.
 
-For more information about event triggers, see [Chapter 40](event-triggers.html "Chapter 40. Event Triggers").
+For more information about event triggers, see [Chapter 40](event-triggers "Chapter 40. Event Triggers").
 
 ### 9.29.1. Capturing Changes at Command End [#](#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
 
@@ -80,7 +80,7 @@ CREATE EVENT TRIGGER test_event_trigger_for_drops
 
 ### 9.29.3. Handling a Table Rewrite Event [#](#PG-EVENT-TRIGGER-TABLE-REWRITE-FUNCTIONS)
 
-The functions shown in [Table 9.104](functions-event-triggers.html#FUNCTIONS-EVENT-TRIGGER-TABLE-REWRITE "Table 9.104. Table Rewrite Information Functions") provide information about a table for which a `table_rewrite` event has just been called. If called in any other context, an error is raised.
+The functions shown in [Table 9.104](functions-event-triggers#FUNCTIONS-EVENT-TRIGGER-TABLE-REWRITE "Table 9.104. Table Rewrite Information Functions") provide information about a table for which a `table_rewrite` event has just been called. If called in any other context, an error is raised.
 
 **Table 9.104. Table Rewrite Information Functions**
 

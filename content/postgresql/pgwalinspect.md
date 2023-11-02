@@ -1,9 +1,9 @@
 ## F.36. pg\_walinspect — low-level WAL inspection [#](#PGWALINSPECT)
 
-  * *   [F.36.1. General Functions](pgwalinspect.html#PGWALINSPECT-FUNCS)
-  * [F.36.2. Author](pgwalinspect.html#PGWALINSPECT-AUTHOR)
+  * *   [F.36.1. General Functions](pgwalinspect#PGWALINSPECT-FUNCS)
+  * [F.36.2. Author](pgwalinspect#PGWALINSPECT-AUTHOR)
 
-The `pg_walinspect` module provides SQL functions that allow you to inspect the contents of write-ahead log of a running PostgreSQL database cluster at a low level, which is useful for debugging, analytical, reporting or educational purposes. It is similar to [pg\_waldump](pgwaldump.html "pg_waldump"), but accessible through SQL rather than a separate utility.
+The `pg_walinspect` module provides SQL functions that allow you to inspect the contents of write-ahead log of a running PostgreSQL database cluster at a low level, which is useful for debugging, analytical, reporting or educational purposes. It is similar to [pg\_waldump](pgwaldump "pg_waldump"), but accessible through SQL rather than a separate utility.
 
 All the functions of this module will provide the WAL information using the server's current timeline ID.
 
@@ -101,11 +101,11 @@ By default, use of these functions is restricted to superusers and members of th
 
     Much of the information shown here matches the output that `pg_get_wal_records_info` would show, given the same arguments. However, `pg_get_wal_block_info` unnests the information from each WAL record into an expanded form by outputting one row per block reference, so certain details are tracked at the block reference level rather than at the whole-record level. This structure is useful with queries that track how individual blocks changed over time. Note that records with no block references (e.g., `COMMIT` WAL records) will have no rows returned, so `pg_get_wal_block_info` may actually return *fewer* rows than `pg_get_wal_records_info`.
 
-    The `reltablespace`, `reldatabase`, and `relfilenode` parameters reference [`pg_tablespace`](catalog-pg-tablespace.html "53.56. pg_tablespace").`oid`, [`pg_database`](catalog-pg-database.html "53.15. pg_database").`oid`, and [`pg_class`](catalog-pg-class.html "53.11. pg_class").`relfilenode` respectively. The `relforknumber` field is the fork number within the relation for the block reference; see `common/relpath.h` for details.
+    The `reltablespace`, `reldatabase`, and `relfilenode` parameters reference [`pg_tablespace`](catalog-pg-tablespace "53.56. pg_tablespace").`oid`, [`pg_database`](catalog-pg-database "53.15. pg_database").`oid`, and [`pg_class`](catalog-pg-class "53.11. pg_class").`relfilenode` respectively. The `relforknumber` field is the fork number within the relation for the block reference; see `common/relpath.h` for details.
 
 ### Tip
 
-    The `pg_filenode_relation` function (see [Table 9.97](functions-admin.html#FUNCTIONS-ADMIN-DBLOCATION "Table 9.97. Database Object Location Functions")) can help you to determine which relation was modified during original execution
+    The `pg_filenode_relation` function (see [Table 9.97](functions-admin#FUNCTIONS-ADMIN-DBLOCATION "Table 9.97. Database Object Location Functions")) can help you to determine which relation was modified during original execution
 
     It is possible for clients to avoid the overhead of materializing block data. This may make function execution significantly faster. When *`show_data`* is set to `false`, `block_data` and `block_fpi_data` values are omitted (that is, the `block_data` and `block_fpi_data` `OUT` arguments are `NULL` for all rows returned). Obviously, this optimization is only feasible with queries where block data isn't truly required.
 

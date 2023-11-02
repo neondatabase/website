@@ -14,7 +14,7 @@ CREATE EVENT TRIGGER name
 
 ## Description
 
-`CREATE EVENT TRIGGER` creates a new event trigger. Whenever the designated event occurs and the `WHEN` condition associated with the trigger, if any, is satisfied, the trigger function will be executed. For a general introduction to event triggers, see [Chapter 40](event-triggers.html "Chapter 40. Event Triggers"). The user who creates an event trigger becomes its owner.
+`CREATE EVENT TRIGGER` creates a new event trigger. Whenever the designated event occurs and the `WHEN` condition associated with the trigger, if any, is satisfied, the trigger function will be executed. For a general introduction to event triggers, see [Chapter 40](event-triggers "Chapter 40. Event Triggers"). The user who creates an event trigger becomes its owner.
 
 ## Parameters
 
@@ -24,7 +24,7 @@ CREATE EVENT TRIGGER name
 
 * *`event`*
 
-    The name of the event that triggers a call to the given function. See [Section 40.1](event-trigger-definition.html "40.1. Overview of Event Trigger Behavior") for more information on event names.
+    The name of the event that triggers a call to the given function. See [Section 40.1](event-trigger-definition "40.1. Overview of Event Trigger Behavior") for more information on event names.
 
 * *`filter_variable`*
 
@@ -44,11 +44,11 @@ CREATE EVENT TRIGGER name
 
 Only superusers can create event triggers.
 
-Event triggers are disabled in single-user mode (see [postgres](app-postgres.html "postgres")) as well as when [event\_triggers](runtime-config-client.html#GUC-EVENT-TRIGGERS) is set to `false`. If an erroneous event trigger disables the database so much that you can't even drop the trigger, restart with [event\_triggers](runtime-config-client.html#GUC-EVENT-TRIGGERS) set to `false` to temporarily disable event triggers, or in single-user mode, and you'll be able to do that.
+Event triggers are disabled in single-user mode (see [postgres](app-postgres "postgres")) as well as when [event\_triggers](runtime-config-client#GUC-EVENT-TRIGGERS) is set to `false`. If an erroneous event trigger disables the database so much that you can't even drop the trigger, restart with [event\_triggers](runtime-config-client#GUC-EVENT-TRIGGERS) set to `false` to temporarily disable event triggers, or in single-user mode, and you'll be able to do that.
 
 ## Examples
 
-Forbid the execution of any [DDL](ddl.html "Chapter 5. Data Definition") command:
+Forbid the execution of any [DDL](ddl "Chapter 5. Data Definition") command:
 
 ```
 
@@ -71,4 +71,4 @@ There is no `CREATE EVENT TRIGGER` statement in the SQL standard.
 
 ## See Also
 
-[ALTER EVENT TRIGGER](sql-altereventtrigger.html "ALTER EVENT TRIGGER"), [DROP EVENT TRIGGER](sql-dropeventtrigger.html "DROP EVENT TRIGGER"), [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION")
+[ALTER EVENT TRIGGER](sql-altereventtrigger "ALTER EVENT TRIGGER"), [DROP EVENT TRIGGER](sql-dropeventtrigger "DROP EVENT TRIGGER"), [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION")

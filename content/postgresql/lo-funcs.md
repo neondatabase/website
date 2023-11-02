@@ -1,6 +1,6 @@
 ## 35.4. Server-Side Functions [#](#LO-FUNCS)
 
-Server-side functions tailored for manipulating large objects from SQL are listed in [Table 35.1](lo-funcs.html#LO-FUNCS-TABLE "Table 35.1. SQL-Oriented Large Object Functions").
+Server-side functions tailored for manipulating large objects from SQL are listed in [Table 35.1](lo-funcs#LO-FUNCS-TABLE "Table 35.1. SQL-Oriented Large Object Functions").
 
 **Table 35.1. SQL-Oriented Large Object Functions**
 
@@ -41,6 +41,6 @@ The server-side `lo_import` and `lo_export` functions behave considerably differ
 
 ### Caution
 
-It is possible to [GRANT](sql-grant.html "GRANT") use of the server-side `lo_import` and `lo_export` functions to non-superusers, but careful consideration of the security implications is required. A malicious user of such privileges could easily parlay them into becoming superuser (for example by rewriting server configuration files), or could attack the rest of the server's file system without bothering to obtain database superuser privileges as such. *Access to roles having such privilege must therefore be guarded just as carefully as access to superuser roles.* Nonetheless, if use of server-side `lo_import` or `lo_export` is needed for some routine task, it's safer to use a role with such privileges than one with full superuser privileges, as that helps to reduce the risk of damage from accidental errors.
+It is possible to [GRANT](sql-grant "GRANT") use of the server-side `lo_import` and `lo_export` functions to non-superusers, but careful consideration of the security implications is required. A malicious user of such privileges could easily parlay them into becoming superuser (for example by rewriting server configuration files), or could attack the rest of the server's file system without bothering to obtain database superuser privileges as such. *Access to roles having such privilege must therefore be guarded just as carefully as access to superuser roles.* Nonetheless, if use of server-side `lo_import` or `lo_export` is needed for some routine task, it's safer to use a role with such privileges than one with full superuser privileges, as that helps to reduce the risk of damage from accidental errors.
 
 The functionality of `lo_read` and `lo_write` is also available via server-side calls, but the names of the server-side functions differ from the client side interfaces in that they do not contain underscores. You must call these functions as `loread` and `lowrite`.

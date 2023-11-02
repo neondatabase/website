@@ -40,4 +40,4 @@ The view `attributes` contains information about the attributes of composite dat
 
 \
 
-See also under [Section 37.17](infoschema-columns.html "37.17. columns"), a similarly structured view, for further information on some of the columns.
+See also under [Section 37.17](infoschema-columns "37.17. columns"), a similarly structured view, for further information on some of the columns.

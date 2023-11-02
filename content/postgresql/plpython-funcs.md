@@ -1,6 +1,6 @@
 ## 46.1. PL/Python Functions [#](#PLPYTHON-FUNCS)
 
-Functions in PL/Python are declared via the standard [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") syntax:
+Functions in PL/Python are declared via the standard [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION") syntax:
 
 ```
 

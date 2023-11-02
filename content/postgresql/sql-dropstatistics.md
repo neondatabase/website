@@ -44,4 +44,4 @@ There is no `DROP STATISTICS` command in the SQL standard.
 
 ## See Also
 
-[ALTER STATISTICS](sql-alterstatistics.html "ALTER STATISTICS"), [CREATE STATISTICS](sql-createstatistics.html "CREATE STATISTICS")
+[ALTER STATISTICS](sql-alterstatistics "ALTER STATISTICS"), [CREATE STATISTICS](sql-createstatistics "CREATE STATISTICS")

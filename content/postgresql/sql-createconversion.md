@@ -79,4 +79,4 @@ CREATE CONVERSION myconv FOR 'UTF8' TO 'LATIN1' FROM myfunc;
 
 ## See Also
 
-[ALTER CONVERSION](sql-alterconversion.html "ALTER CONVERSION"), [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [DROP CONVERSION](sql-dropconversion.html "DROP CONVERSION")
+[ALTER CONVERSION](sql-alterconversion "ALTER CONVERSION"), [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION"), [DROP CONVERSION](sql-dropconversion "DROP CONVERSION")

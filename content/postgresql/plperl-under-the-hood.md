@@ -1,7 +1,7 @@
 ## 45.8. PL/Perl Under the Hood [#](#PLPERL-UNDER-THE-HOOD)
 
-  * *   [45.8.1. Configuration](plperl-under-the-hood.html#PLPERL-CONFIG)
-  * [45.8.2. Limitations and Missing Features](plperl-under-the-hood.html#PLPERL-MISSING)
+  * *   [45.8.1. Configuration](plperl-under-the-hood#PLPERL-CONFIG)
+  * [45.8.2. Limitations and Missing Features](plperl-under-the-hood#PLPERL-MISSING)
 
 ### 45.8.1. Configuration [#](#PLPERL-CONFIG)
 
@@ -26,7 +26,7 @@ This section lists configuration parameters that affect PL/Perl.
     DO 'elog(WARNING, join ", ", sort keys %INC)' LANGUAGE plperl;
     ```
 
-    Initialization will happen in the postmaster if the `plperl` library is included in [shared\_preload\_libraries](runtime-config-client.html#GUC-SHARED-PRELOAD-LIBRARIES), in which case extra consideration should be given to the risk of destabilizing the postmaster. The principal reason for making use of this feature is that Perl modules loaded by `plperl.on_init` need be loaded only at postmaster start, and will be instantly available without loading overhead in individual database sessions. However, keep in mind that the overhead is avoided only for the first Perl interpreter used by a database session — either PL/PerlU, or PL/Perl for the first SQL role that calls a PL/Perl function. Any additional Perl interpreters created in a database session will have to execute `plperl.on_init` afresh. Also, on Windows there will be no savings whatsoever from preloading, since the Perl interpreter created in the postmaster process does not propagate to child processes.
+    Initialization will happen in the postmaster if the `plperl` library is included in [shared\_preload\_libraries](runtime-config-client#GUC-SHARED-PRELOAD-LIBRARIES), in which case extra consideration should be given to the risk of destabilizing the postmaster. The principal reason for making use of this feature is that Perl modules loaded by `plperl.on_init` need be loaded only at postmaster start, and will be instantly available without loading overhead in individual database sessions. However, keep in mind that the overhead is avoided only for the first Perl interpreter used by a database session — either PL/PerlU, or PL/Perl for the first SQL role that calls a PL/Perl function. Any additional Perl interpreters created in a database session will have to execute `plperl.on_init` afresh. Also, on Windows there will be no savings whatsoever from preloading, since the Perl interpreter created in the postmaster process does not propagate to child processes.
 
     This parameter can only be set in the `postgresql.conf` file or on the server command line.
 

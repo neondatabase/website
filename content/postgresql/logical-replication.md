@@ -2,49 +2,49 @@
 
 **Table of Contents**
 
-  * *   [31.1. Publication](logical-replication-publication.html)
-  * [31.2. Subscription](logical-replication-subscription.html)
+  * *   [31.1. Publication](logical-replication-publication)
+  * [31.2. Subscription](logical-replication-subscription)
 
     
 
-  * *   [31.2.1. Replication Slot Management](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
-    * [31.2.2. Examples: Set Up Logical Replication](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
-    * [31.2.3. Examples: Deferred Replication Slot Creation](logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT)
+  * *   [31.2.1. Replication Slot Management](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
+    * [31.2.2. Examples: Set Up Logical Replication](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
+    * [31.2.3. Examples: Deferred Replication Slot Creation](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT)
 
-* [31.3. Row Filters](logical-replication-row-filter.html)
+* [31.3. Row Filters](logical-replication-row-filter)
 
-  * *   [31.3.1. Row Filter Rules](logical-replication-row-filter.html#LOGICAL-REPLICATION-ROW-FILTER-RULES)
-    * [31.3.2. Expression Restrictions](logical-replication-row-filter.html#LOGICAL-REPLICATION-ROW-FILTER-RESTRICTIONS)
-    * [31.3.3. UPDATE Transformations](logical-replication-row-filter.html#LOGICAL-REPLICATION-ROW-FILTER-TRANSFORMATIONS)
-    * [31.3.4. Partitioned Tables](logical-replication-row-filter.html#LOGICAL-REPLICATION-ROW-FILTER-PARTITIONED-TABLE)
-    * [31.3.5. Initial Data Synchronization](logical-replication-row-filter.html#LOGICAL-REPLICATION-ROW-FILTER-INITIAL-DATA-SYNC)
-    * [31.3.6. Combining Multiple Row Filters](logical-replication-row-filter.html#LOGICAL-REPLICATION-ROW-FILTER-COMBINING)
-    * [31.3.7. Examples](logical-replication-row-filter.html#LOGICAL-REPLICATION-ROW-FILTER-EXAMPLES)
+  * *   [31.3.1. Row Filter Rules](logical-replication-row-filter#LOGICAL-REPLICATION-ROW-FILTER-RULES)
+    * [31.3.2. Expression Restrictions](logical-replication-row-filter#LOGICAL-REPLICATION-ROW-FILTER-RESTRICTIONS)
+    * [31.3.3. UPDATE Transformations](logical-replication-row-filter#LOGICAL-REPLICATION-ROW-FILTER-TRANSFORMATIONS)
+    * [31.3.4. Partitioned Tables](logical-replication-row-filter#LOGICAL-REPLICATION-ROW-FILTER-PARTITIONED-TABLE)
+    * [31.3.5. Initial Data Synchronization](logical-replication-row-filter#LOGICAL-REPLICATION-ROW-FILTER-INITIAL-DATA-SYNC)
+    * [31.3.6. Combining Multiple Row Filters](logical-replication-row-filter#LOGICAL-REPLICATION-ROW-FILTER-COMBINING)
+    * [31.3.7. Examples](logical-replication-row-filter#LOGICAL-REPLICATION-ROW-FILTER-EXAMPLES)
 
-* [31.4. Column Lists](logical-replication-col-lists.html)
+* [31.4. Column Lists](logical-replication-col-lists)
 
-  * [31.4.1. Examples](logical-replication-col-lists.html#LOGICAL-REPLICATION-COL-LIST-EXAMPLES)
+  * [31.4.1. Examples](logical-replication-col-lists#LOGICAL-REPLICATION-COL-LIST-EXAMPLES)
 
-  * *   [31.5. Conflicts](logical-replication-conflicts.html)
-  * [31.6. Restrictions](logical-replication-restrictions.html)
-  * [31.7. Architecture](logical-replication-architecture.html)
-
-    
-
-  * [31.7.1. Initial Snapshot](logical-replication-architecture.html#LOGICAL-REPLICATION-SNAPSHOT)
-
-  * *   [31.8. Monitoring](logical-replication-monitoring.html)
-  * [31.9. Security](logical-replication-security.html)
-  * [31.10. Configuration Settings](logical-replication-config.html)
+  * *   [31.5. Conflicts](logical-replication-conflicts)
+  * [31.6. Restrictions](logical-replication-restrictions)
+  * [31.7. Architecture](logical-replication-architecture)
 
     
 
-  * *   [31.10.1. Publishers](logical-replication-config.html#LOGICAL-REPLICATION-CONFIG-PUBLISHER)
-    * [31.10.2. Subscribers](logical-replication-config.html#LOGICAL-REPLICATION-CONFIG-SUBSCRIBER)
+  * [31.7.1. Initial Snapshot](logical-replication-architecture#LOGICAL-REPLICATION-SNAPSHOT)
 
-* [31.11. Quick Setup](logical-replication-quick-setup.html)
+  * *   [31.8. Monitoring](logical-replication-monitoring)
+  * [31.9. Security](logical-replication-security)
+  * [31.10. Configuration Settings](logical-replication-config)
 
-Logical replication is a method of replicating data objects and their changes, based upon their replication identity (usually a primary key). We use the term logical in contrast to physical replication, which uses exact block addresses and byte-by-byte replication. PostgreSQL supports both mechanisms concurrently, see [Chapter 27](high-availability.html "Chapter 27. High Availability, Load Balancing, and Replication"). Logical replication allows fine-grained control over both data replication and security.
+    
+
+  * *   [31.10.1. Publishers](logical-replication-config#LOGICAL-REPLICATION-CONFIG-PUBLISHER)
+    * [31.10.2. Subscribers](logical-replication-config#LOGICAL-REPLICATION-CONFIG-SUBSCRIBER)
+
+* [31.11. Quick Setup](logical-replication-quick-setup)
+
+Logical replication is a method of replicating data objects and their changes, based upon their replication identity (usually a primary key). We use the term logical in contrast to physical replication, which uses exact block addresses and byte-by-byte replication. PostgreSQL supports both mechanisms concurrently, see [Chapter 27](high-availability "Chapter 27. High Availability, Load Balancing, and Replication"). Logical replication allows fine-grained control over both data replication and security.
 
 Logical replication uses a *publish* and *subscribe* model with one or more *subscribers* subscribing to one or more *publications* on a *publisher* node. Subscribers pull data from the publications they subscribe to and may subsequently re-publish data to allow cascading replication or more complex configurations.
 

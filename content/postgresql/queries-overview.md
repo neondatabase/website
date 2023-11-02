@@ -1,6 +1,6 @@
 ## 7.1. Overview [#](#QUERIES-OVERVIEW)
 
-The process of retrieving or the command to retrieve data from a database is called a *query*. In SQL the [`SELECT`](sql-select.html "SELECT") command is used to specify queries. The general syntax of the `SELECT` command is
+The process of retrieving or the command to retrieve data from a database is called a *query*. In SQL the [`SELECT`](sql-select "SELECT") command is used to specify queries. The general syntax of the `SELECT` command is
 
 ```
 
@@ -23,7 +23,7 @@ Assuming that there is a table called `table1`, this command would retrieve all 
 SELECT a, b + c FROM table1;
 ```
 
-(assuming that `b` and `c` are of a numerical data type). See [Section 7.3](queries-select-lists.html "7.3. Select Lists") for more details.
+(assuming that `b` and `c` are of a numerical data type). See [Section 7.3](queries-select-lists "7.3. Select Lists") for more details.
 
 `FROM table1` is a simple kind of table expression: it reads just one table. In general, table expressions can be complex constructs of base tables, joins, and subqueries. But you can also omit the table expression entirely and use the `SELECT` command as a calculator:
 

@@ -26,9 +26,9 @@ DECLARE cursor_name [ BINARY ] [ ASENSITIVE | INSENSITIVE ] [ [ NO ] SCROLL ] CU
 
 * *`query`* [#](#ECPG-SQL-DECLARE-QUERY)
 
-    A [SELECT](sql-select.html "SELECT") or [VALUES](sql-values.html "VALUES") command which will provide the rows to be returned by the cursor.
+    A [SELECT](sql-select "SELECT") or [VALUES](sql-values "VALUES") command which will provide the rows to be returned by the cursor.
 
-For the meaning of the cursor options, see [DECLARE](sql-declare.html "DECLARE").
+For the meaning of the cursor options, see [DECLARE](sql-declare "DECLARE").
 
 ## Examples
 
@@ -55,4 +55,4 @@ EXEC SQL DECLARE cur1 CURSOR FOR stmt1;
 
 ## See Also
 
-[OPEN](ecpg-sql-open.html "OPEN"), [CLOSE](sql-close.html "CLOSE"), [DECLARE](sql-declare.html "DECLARE")
+[OPEN](ecpg-sql-open "OPEN"), [CLOSE](sql-close "CLOSE"), [DECLARE](sql-declare "DECLARE")

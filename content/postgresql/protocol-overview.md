@@ -1,8 +1,8 @@
 ## 55.1. Overview [#](#PROTOCOL-OVERVIEW)
 
-  * *   [55.1.1. Messaging Overview](protocol-overview.html#PROTOCOL-MESSAGE-CONCEPTS)
-  * [55.1.2. Extended Query Overview](protocol-overview.html#PROTOCOL-QUERY-CONCEPTS)
-  * [55.1.3. Formats and Format Codes](protocol-overview.html#PROTOCOL-FORMAT-CODES)
+  * *   [55.1.1. Messaging Overview](protocol-overview#PROTOCOL-MESSAGE-CONCEPTS)
+  * [55.1.2. Extended Query Overview](protocol-overview#PROTOCOL-QUERY-CONCEPTS)
+  * [55.1.3. Formats and Format Codes](protocol-overview#PROTOCOL-FORMAT-CODES)
 
 The protocol has separate phases for startup and normal operation. In the startup phase, the frontend opens a connection to the server and authenticates itself to the satisfaction of the server. (This might involve a single message, or multiple messages depending on the authentication method being used.) If all goes well, the server then sends status information to the frontend, and finally enters normal operation. Except for the initial startup-request message, this part of the protocol is driven by the server.
 

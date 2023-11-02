@@ -1,12 +1,12 @@
 ## F.34. pg\_trgm — support for similarity of text using trigram matching [#](#PGTRGM)
 
-  * *   [F.34.1. Trigram (or Trigraph) Concepts](pgtrgm.html#PGTRGM-CONCEPTS)
-  * [F.34.2. Functions and Operators](pgtrgm.html#PGTRGM-FUNCS-OPS)
-  * [F.34.3. GUC Parameters](pgtrgm.html#PGTRGM-GUC)
-  * [F.34.4. Index Support](pgtrgm.html#PGTRGM-INDEX)
-  * [F.34.5. Text Search Integration](pgtrgm.html#PGTRGM-TEXT-SEARCH)
-  * [F.34.6. References](pgtrgm.html#PGTRGM-REFERENCES)
-  * [F.34.7. Authors](pgtrgm.html#PGTRGM-AUTHORS)
+  * *   [F.34.1. Trigram (or Trigraph) Concepts](pgtrgm#PGTRGM-CONCEPTS)
+  * [F.34.2. Functions and Operators](pgtrgm#PGTRGM-FUNCS-OPS)
+  * [F.34.3. GUC Parameters](pgtrgm#PGTRGM-GUC)
+  * [F.34.4. Index Support](pgtrgm#PGTRGM-INDEX)
+  * [F.34.5. Text Search Integration](pgtrgm#PGTRGM-TEXT-SEARCH)
+  * [F.34.6. References](pgtrgm#PGTRGM-REFERENCES)
+  * [F.34.7. Authors](pgtrgm#PGTRGM-AUTHORS)
 
 The `pg_trgm` module provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, as well as index operator classes that support fast searching for similar strings.
 
@@ -22,7 +22,7 @@ A trigram is a group of three consecutive characters taken from a string. We can
 
 ### F.34.2. Functions and Operators [#](#PGTRGM-FUNCS-OPS)
 
-The functions provided by the `pg_trgm` module are shown in [Table F.26](pgtrgm.html#PGTRGM-FUNC-TABLE "Table F.26. pg_trgm Functions"), the operators in [Table F.27](pgtrgm.html#PGTRGM-OP-TABLE "Table F.27. pg_trgm Operators").
+The functions provided by the `pg_trgm` module are shown in [Table F.26](pgtrgm#PGTRGM-FUNC-TABLE "Table F.26. pg_trgm Functions"), the operators in [Table F.27](pgtrgm#PGTRGM-OP-TABLE "Table F.27. pg_trgm Operators").
 
 **Table F.26. `pg_trgm` Functions**
 

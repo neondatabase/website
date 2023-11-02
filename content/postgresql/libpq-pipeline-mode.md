@@ -1,8 +1,8 @@
 ## 34.5. Pipeline Mode [#](#LIBPQ-PIPELINE-MODE)
 
-  * *   [34.5.1. Using Pipeline Mode](libpq-pipeline-mode.html#LIBPQ-PIPELINE-USING)
-  * [34.5.2. Functions Associated with Pipeline Mode](libpq-pipeline-mode.html#LIBPQ-PIPELINE-FUNCTIONS)
-  * [34.5.3. When to Use Pipeline Mode](libpq-pipeline-mode.html#LIBPQ-PIPELINE-TIPS)
+  * *   [34.5.1. Using Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-USING)
+  * [34.5.2. Functions Associated with Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-FUNCTIONS)
+  * [34.5.3. When to Use Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-TIPS)
 
 libpq pipeline mode allows applications to send a query without having to read the result of the previously sent query. Taking advantage of the pipeline mode, a client will wait less for the server, since multiple queries/results can be sent/received in a single network transaction.
 
@@ -10,19 +10,19 @@ While pipeline mode provides a significant performance boost, writing clients us
 
 Pipeline mode also generally consumes more memory on both the client and server, though careful and aggressive management of the send/receive queue can mitigate this. This applies whether or not the connection is in blocking or non-blocking mode.
 
-While libpq's pipeline API was introduced in PostgreSQL 14, it is a client-side feature which doesn't require special server support and works on any server that supports the v3 extended query protocol. For more information see [Section 55.2.4](protocol-flow.html#PROTOCOL-FLOW-PIPELINING "55.2.4. Pipelining").
+While libpq's pipeline API was introduced in PostgreSQL 14, it is a client-side feature which doesn't require special server support and works on any server that supports the v3 extended query protocol. For more information see [Section 55.2.4](protocol-flow#PROTOCOL-FLOW-PIPELINING "55.2.4. Pipelining").
 
 ### 34.5.1. Using Pipeline Mode [#](#LIBPQ-PIPELINE-USING)
 
-To issue pipelines, the application must switch the connection into pipeline mode, which is done with [`PQenterPipelineMode`](libpq-pipeline-mode.html#LIBPQ-PQENTERPIPELINEMODE). [`PQpipelineStatus`](libpq-pipeline-mode.html#LIBPQ-PQPIPELINESTATUS) can be used to test whether pipeline mode is active. In pipeline mode, only [asynchronous operations](libpq-async.html "34.4. Asynchronous Command Processing") that utilize the extended query protocol are permitted, command strings containing multiple SQL commands are disallowed, and so is `COPY`. Using synchronous command execution functions such as `PQfn`, `PQexec`, `PQexecParams`, `PQprepare`, `PQexecPrepared`, `PQdescribePrepared`, `PQdescribePortal`, `PQclosePrepared`, `PQclosePortal`, is an error condition. `PQsendQuery` is also disallowed, because it uses the simple query protocol. Once all dispatched commands have had their results processed, and the end pipeline result has been consumed, the application may return to non-pipelined mode with [`PQexitPipelineMode`](libpq-pipeline-mode.html#LIBPQ-PQEXITPIPELINEMODE).
+To issue pipelines, the application must switch the connection into pipeline mode, which is done with [`PQenterPipelineMode`](libpq-pipeline-mode#LIBPQ-PQENTERPIPELINEMODE). [`PQpipelineStatus`](libpq-pipeline-mode#LIBPQ-PQPIPELINESTATUS) can be used to test whether pipeline mode is active. In pipeline mode, only [asynchronous operations](libpq-async "34.4. Asynchronous Command Processing") that utilize the extended query protocol are permitted, command strings containing multiple SQL commands are disallowed, and so is `COPY`. Using synchronous command execution functions such as `PQfn`, `PQexec`, `PQexecParams`, `PQprepare`, `PQexecPrepared`, `PQdescribePrepared`, `PQdescribePortal`, `PQclosePrepared`, `PQclosePortal`, is an error condition. `PQsendQuery` is also disallowed, because it uses the simple query protocol. Once all dispatched commands have had their results processed, and the end pipeline result has been consumed, the application may return to non-pipelined mode with [`PQexitPipelineMode`](libpq-pipeline-mode#LIBPQ-PQEXITPIPELINEMODE).
 
 ### Note
 
-It is best to use pipeline mode with libpq in [non-blocking mode](libpq-async.html#LIBPQ-PQSETNONBLOCKING). If used in blocking mode it is possible for a client/server deadlock to occur. [\[15\]](#ftn.id-1.7.3.12.9.3.1.3)
+It is best to use pipeline mode with libpq in [non-blocking mode](libpq-async#LIBPQ-PQSETNONBLOCKING). If used in blocking mode it is possible for a client/server deadlock to occur. [\[15\]](#ftn.id-1.7.3.12.9.3.1.3)
 
 #### 34.5.1.1. Issuing Queries [#](#LIBPQ-PIPELINE-SENDING)
 
-After entering pipeline mode, the application dispatches requests using [`PQsendQueryParams`](libpq-async.html#LIBPQ-PQSENDQUERYPARAMS) or its prepared-query sibling [`PQsendQueryPrepared`](libpq-async.html#LIBPQ-PQSENDQUERYPREPARED). These requests are queued on the client-side until flushed to the server; this occurs when [`PQpipelineSync`](libpq-pipeline-mode.html#LIBPQ-PQPIPELINESYNC) is used to establish a synchronization point in the pipeline, or when [`PQflush`](libpq-async.html#LIBPQ-PQFLUSH) is called. The functions [`PQsendPrepare`](libpq-async.html#LIBPQ-PQSENDPREPARE), [`PQsendDescribePrepared`](libpq-async.html#LIBPQ-PQSENDDESCRIBEPREPARED), [`PQsendDescribePortal`](libpq-async.html#LIBPQ-PQSENDDESCRIBEPORTAL), [`PQsendClosePrepared`](libpq-async.html#LIBPQ-PQSENDCLOSEPREPARED), and [`PQsendClosePortal`](libpq-async.html#LIBPQ-PQSENDCLOSEPORTAL) also work in pipeline mode. Result processing is described below.
+After entering pipeline mode, the application dispatches requests using [`PQsendQueryParams`](libpq-async#LIBPQ-PQSENDQUERYPARAMS) or its prepared-query sibling [`PQsendQueryPrepared`](libpq-async#LIBPQ-PQSENDQUERYPREPARED). These requests are queued on the client-side until flushed to the server; this occurs when [`PQpipelineSync`](libpq-pipeline-mode#LIBPQ-PQPIPELINESYNC) is used to establish a synchronization point in the pipeline, or when [`PQflush`](libpq-async#LIBPQ-PQFLUSH) is called. The functions [`PQsendPrepare`](libpq-async#LIBPQ-PQSENDPREPARE), [`PQsendDescribePrepared`](libpq-async#LIBPQ-PQSENDDESCRIBEPREPARED), [`PQsendDescribePortal`](libpq-async#LIBPQ-PQSENDDESCRIBEPORTAL), [`PQsendClosePrepared`](libpq-async#LIBPQ-PQSENDCLOSEPREPARED), and [`PQsendClosePortal`](libpq-async#LIBPQ-PQSENDCLOSEPORTAL) also work in pipeline mode. Result processing is described below.
 
 The server executes statements, and returns results, in the order the client sends them. The server will begin executing the commands in the pipeline immediately, not waiting for the end of the pipeline. Note that results are buffered on the server side; the server flushes that buffer when a synchronization point is established with `PQpipelineSync`, or when `PQsendFlushRequest` is called. If any statement encounters an error, the server aborts the current transaction and does not execute any subsequent command in the queue until the next synchronization point; a `PGRES_PIPELINE_ABORTED` result is produced for each such command. (This remains true even if the commands in the pipeline would rollback the transaction.) Query processing resumes after the synchronization point.
 
@@ -32,11 +32,11 @@ It's fine for one operation to depend on the results of a prior one; for example
 
 To process the result of one query in a pipeline, the application calls `PQgetResult` repeatedly and handles each result until `PQgetResult` returns null. The result from the next query in the pipeline may then be retrieved using `PQgetResult` again and the cycle repeated. The application handles individual statement results as normal. When the results of all the queries in the pipeline have been returned, `PQgetResult` returns a result containing the status value `PGRES_PIPELINE_SYNC`
 
-The client may choose to defer result processing until the complete pipeline has been sent, or interleave that with sending further queries in the pipeline; see [Section 34.5.1.4](libpq-pipeline-mode.html#LIBPQ-PIPELINE-INTERLEAVE "34.5.1.4. Interleaving Result Processing and Query Dispatch").
+The client may choose to defer result processing until the complete pipeline has been sent, or interleave that with sending further queries in the pipeline; see [Section 34.5.1.4](libpq-pipeline-mode#LIBPQ-PIPELINE-INTERLEAVE "34.5.1.4. Interleaving Result Processing and Query Dispatch").
 
-To enter single-row mode, call `PQsetSingleRowMode` before retrieving results with `PQgetResult`. This mode selection is effective only for the query currently being processed. For more information on the use of `PQsetSingleRowMode`, refer to [Section 34.6](libpq-single-row-mode.html "34.6. Retrieving Query Results Row-by-Row").
+To enter single-row mode, call `PQsetSingleRowMode` before retrieving results with `PQgetResult`. This mode selection is effective only for the query currently being processed. For more information on the use of `PQsetSingleRowMode`, refer to [Section 34.6](libpq-single-row-mode "34.6. Retrieving Query Results Row-by-Row").
 
-`PQgetResult` behaves the same as for normal asynchronous processing except that it may contain the new `PGresult` types `PGRES_PIPELINE_SYNC` and `PGRES_PIPELINE_ABORTED`. `PGRES_PIPELINE_SYNC` is reported exactly once for each `PQpipelineSync` at the corresponding point in the pipeline. `PGRES_PIPELINE_ABORTED` is emitted in place of a normal query result for the first error and all subsequent results until the next `PGRES_PIPELINE_SYNC`; see [Section 34.5.1.3](libpq-pipeline-mode.html#LIBPQ-PIPELINE-ERRORS "34.5.1.3. Error Handling").
+`PQgetResult` behaves the same as for normal asynchronous processing except that it may contain the new `PGresult` types `PGRES_PIPELINE_SYNC` and `PGRES_PIPELINE_ABORTED`. `PGRES_PIPELINE_SYNC` is reported exactly once for each `PQpipelineSync` at the corresponding point in the pipeline. `PGRES_PIPELINE_ABORTED` is emitted in place of a normal query result for the first error and all subsequent results until the next `PGRES_PIPELINE_SYNC`; see [Section 34.5.1.3](libpq-pipeline-mode#LIBPQ-PIPELINE-ERRORS "34.5.1.3. Error Handling").
 
 `PQisBusy`, `PQconsumeInput`, etc operate as normal when processing pipeline results. In particular, a call to `PQisBusy` in the middle of a pipeline returns 0 if the results for all the queries issued so far have been consumed.
 
@@ -107,18 +107,18 @@ An example using `select()` and a simple state machine to track sent and receive
     int PQexitPipelineMode(PGconn *conn);
     ```
 
-    Returns 1 for success. Returns 1 and takes no action if not in pipeline mode. If the current statement isn't finished processing, or `PQgetResult` has not been called to collect results from all previously sent query, returns 0 (in which case, use [`PQerrorMessage`](libpq-status.html#LIBPQ-PQERRORMESSAGE) to get more information about the failure).
+    Returns 1 for success. Returns 1 and takes no action if not in pipeline mode. If the current statement isn't finished processing, or `PQgetResult` has not been called to collect results from all previously sent query, returns 0 (in which case, use [`PQerrorMessage`](libpq-status#LIBPQ-PQERRORMESSAGE) to get more information about the failure).
 
 * `PQpipelineSync` [#](#LIBPQ-PQPIPELINESYNC)
 
-    Marks a synchronization point in a pipeline by sending a [sync message](protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY "55.2.3. Extended Query") and flushing the send buffer. This serves as the delimiter of an implicit transaction and an error recovery point; see [Section 34.5.1.3](libpq-pipeline-mode.html#LIBPQ-PIPELINE-ERRORS "34.5.1.3. Error Handling").
+    Marks a synchronization point in a pipeline by sending a [sync message](protocol-flow#PROTOCOL-FLOW-EXT-QUERY "55.2.3. Extended Query") and flushing the send buffer. This serves as the delimiter of an implicit transaction and an error recovery point; see [Section 34.5.1.3](libpq-pipeline-mode#LIBPQ-PIPELINE-ERRORS "34.5.1.3. Error Handling").
 
     ```
 
     int PQpipelineSync(PGconn *conn);
     ```
 
-    Returns 1 for success. Returns 0 if the connection is not in pipeline mode or sending a [sync message](protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY "55.2.3. Extended Query") failed.
+    Returns 1 for success. Returns 0 if the connection is not in pipeline mode or sending a [sync message](protocol-flow#PROTOCOL-FLOW-EXT-QUERY "55.2.3. Extended Query") failed.
 
 * `PQsendFlushRequest` [#](#LIBPQ-PQSENDFLUSHREQUEST)
 
@@ -160,4 +160,4 @@ could be much more efficiently done with:
 UPDATE mytable SET x = x + 1 WHERE id = 42;
 ```
 
-Pipelining is less useful, and more complex, when a single pipeline contains multiple transactions (see [Section 34.5.1.3](libpq-pipeline-mode.html#LIBPQ-PIPELINE-ERRORS "34.5.1.3. Error Handling")).
+Pipelining is less useful, and more complex, when a single pipeline contains multiple transactions (see [Section 34.5.1.3](libpq-pipeline-mode#LIBPQ-PIPELINE-ERRORS "34.5.1.3. Error Handling")).

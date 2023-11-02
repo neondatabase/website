@@ -1,8 +1,8 @@
 ## 71.2. Built-in Operator Classes [#](#BRIN-BUILTIN-OPCLASSES)
 
-* [71.2.1. Operator Class Parameters](brin-builtin-opclasses.html#BRIN-BUILTIN-OPCLASSES--PARAMETERS)
+* [71.2.1. Operator Class Parameters](brin-builtin-opclasses#BRIN-BUILTIN-OPCLASSES--PARAMETERS)
 
-The core PostgreSQL distribution includes the BRIN operator classes shown in [Table 71.1](brin-builtin-opclasses.html#BRIN-BUILTIN-OPCLASSES-TABLE "Table 71.1. Built-in BRIN Operator Classes").
+The core PostgreSQL distribution includes the BRIN operator classes shown in [Table 71.1](brin-builtin-opclasses#BRIN-BUILTIN-OPCLASSES-TABLE "Table 71.1. Built-in BRIN Operator Classes").
 
 The *minmax* operator classes store the minimum and the maximum values appearing in the indexed column within the range. The *inclusion* operator classes store a value which includes the values in the indexed column within the range. The *bloom* operator classes build a Bloom filter for all values in the range. The *minmax-multi* operator classes store multiple minimum and maximum values, representing values appearing in the indexed column within the range.
 
@@ -303,7 +303,7 @@ bloom operator classes accept these parameters:
 
 * `n_distinct_per_range`
 
-    Defines the estimated number of distinct non-null values in the block range, used by BRIN bloom indexes for sizing of the Bloom filter. It behaves similarly to `n_distinct` option for [ALTER TABLE](sql-altertable.html "ALTER TABLE"). When set to a positive value, each block range is assumed to contain this number of distinct non-null values. When set to a negative value, which must be greater than or equal to -1, the number of distinct non-null values is assumed to grow linearly with the maximum possible number of tuples in the block range (about 290 rows per block). The default value is `-0.1`, and the minimum number of distinct non-null values is `16`.
+    Defines the estimated number of distinct non-null values in the block range, used by BRIN bloom indexes for sizing of the Bloom filter. It behaves similarly to `n_distinct` option for [ALTER TABLE](sql-altertable "ALTER TABLE"). When set to a positive value, each block range is assumed to contain this number of distinct non-null values. When set to a negative value, which must be greater than or equal to -1, the number of distinct non-null values is assumed to grow linearly with the maximum possible number of tuples in the block range (about 290 rows per block). The default value is `-0.1`, and the minimum number of distinct non-null values is `16`.
 
 * `false_positive_rate`
 

@@ -49,7 +49,7 @@ ROLLBACK;
 
 * `VERBOSE`
 
-    Display additional information regarding the plan. Specifically, include the output column list for each node in the plan tree, schema-qualify table and function names, always label variables in expressions with their range table alias, and always print the name of each trigger for which statistics are displayed. The query identifier will also be displayed if one has been computed, see [compute\_query\_id](runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID) for more details. This parameter defaults to `FALSE`.
+    Display additional information regarding the plan. Specifically, include the output column list for each node in the plan tree, schema-qualify table and function names, always label variables in expressions with their range table alias, and always print the name of each trigger for which statistics are displayed. The query identifier will also be displayed if one has been computed, see [compute\_query\_id](runtime-config-statistics#GUC-COMPUTE-QUERY-ID) for more details. This parameter defaults to `FALSE`.
 
 * `COSTS`
 
@@ -61,11 +61,11 @@ ROLLBACK;
 
 * `GENERIC_PLAN`
 
-    Allow the statement to contain parameter placeholders like `$1`, and generate a generic plan that does not depend on the values of those parameters. See [`PREPARE`](sql-prepare.html "PREPARE") for details about generic plans and the types of statement that support parameters. This parameter cannot be used together with `ANALYZE`. It defaults to `FALSE`.
+    Allow the statement to contain parameter placeholders like `$1`, and generate a generic plan that does not depend on the values of those parameters. See [`PREPARE`](sql-prepare "PREPARE") for details about generic plans and the types of statement that support parameters. This parameter cannot be used together with `ANALYZE`. It defaults to `FALSE`.
 
 * `BUFFERS`
 
-    Include information on buffer usage. Specifically, include the number of shared blocks hit, read, dirtied, and written, the number of local blocks hit, read, dirtied, and written, the number of temp blocks read and written, and the time spent reading and writing data file blocks, local blocks and temporary file blocks (in milliseconds) if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled. A *hit* means that a read was avoided because the block was found already in cache when needed. Shared blocks contain data from regular tables and indexes; local blocks contain data from temporary tables and indexes; while temporary blocks contain short-term working data used in sorts, hashes, Materialize plan nodes, and similar cases. The number of blocks *dirtied* indicates the number of previously unmodified blocks that were changed by this query; while the number of blocks *written* indicates the number of previously-dirtied blocks evicted from cache by this backend during query processing. The number of blocks shown for an upper-level node includes those used by all its child nodes. In text format, only non-zero values are printed. This parameter defaults to `FALSE`.
+    Include information on buffer usage. Specifically, include the number of shared blocks hit, read, dirtied, and written, the number of local blocks hit, read, dirtied, and written, the number of temp blocks read and written, and the time spent reading and writing data file blocks, local blocks and temporary file blocks (in milliseconds) if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled. A *hit* means that a read was avoided because the block was found already in cache when needed. Shared blocks contain data from regular tables and indexes; local blocks contain data from temporary tables and indexes; while temporary blocks contain short-term working data used in sorts, hashes, Materialize plan nodes, and similar cases. The number of blocks *dirtied* indicates the number of previously unmodified blocks that were changed by this query; while the number of blocks *written* indicates the number of previously-dirtied blocks evicted from cache by this backend during query processing. The number of blocks shown for an upper-level node includes those used by all its child nodes. In text format, only non-zero values are printed. This parameter defaults to `FALSE`.
 
 * `WAL`
 
@@ -93,11 +93,11 @@ ROLLBACK;
 
 ## Outputs
 
-The command's result is a textual description of the plan selected for the *`statement`*, optionally annotated with execution statistics. [Section 14.1](using-explain.html "14.1. Using EXPLAIN") describes the information provided.
+The command's result is a textual description of the plan selected for the *`statement`*, optionally annotated with execution statistics. [Section 14.1](using-explain "14.1. Using EXPLAIN") describes the information provided.
 
 ## Notes
 
-In order to allow the PostgreSQL query planner to make reasonably informed decisions when optimizing queries, the [`pg_statistic`](catalog-pg-statistic.html "53.51. pg_statistic") data should be up-to-date for all tables used in the query. Normally the [autovacuum daemon](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon") will take care of that automatically. But if a table has recently had substantial changes in its contents, you might need to do a manual [`ANALYZE`](sql-analyze.html "ANALYZE") rather than wait for autovacuum to catch up with the changes.
+In order to allow the PostgreSQL query planner to make reasonably informed decisions when optimizing queries, the [`pg_statistic`](catalog-pg-statistic "53.51. pg_statistic") data should be up-to-date for all tables used in the query. Normally the [autovacuum daemon](routine-vacuuming#AUTOVACUUM "25.1.6. The Autovacuum Daemon") will take care of that automatically. But if a table has recently had substantial changes in its contents, you might need to do a manual [`ANALYZE`](sql-analyze "ANALYZE") rather than wait for autovacuum to catch up with the changes.
 
 In order to measure the run-time cost of each node in the execution plan, the current implementation of `EXPLAIN ANALYZE` adds profiling overhead to query execution. As a result, running `EXPLAIN ANALYZE` on a query can sometimes take significantly longer than executing the query normally. The amount of overhead depends on the nature of the query, as well as the platform being used. The worst case occurs for plan nodes that in themselves require very little time per execution, and on machines that have relatively slow operating system calls for obtaining the time of day.
 
@@ -268,4 +268,4 @@ Note that in this syntax, the options must be specified in exactly the order sho
 
 ## See Also
 
-[ANALYZE](sql-analyze.html "ANALYZE")
+[ANALYZE](sql-analyze "ANALYZE")

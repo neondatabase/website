@@ -100,4 +100,4 @@ pg_verifybackup --ignore=note.to.self --skip-checksums /usr/local/pgsql/data
 
 ## See Also
 
-[pg\_basebackup](app-pgbasebackup.html "pg_basebackup")
+[pg\_basebackup](app-pgbasebackup "pg_basebackup")

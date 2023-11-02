@@ -57,7 +57,7 @@ The core distribution includes support for four types of operator classes: minma
 
 Operator classes that implement completely different semantics are also possible, provided implementations of the four main support functions described above are written. Note that backwards compatibility across major releases is not guaranteed: for example, additional support functions might be required in later releases.
 
-To write an operator class for a data type that implements a totally ordered set, it is possible to use the minmax support functions alongside the corresponding operators, as shown in [Table 71.2](brin-extensibility.html#BRIN-EXTENSIBILITY-MINMAX-TABLE "Table 71.2. Function and Support Numbers for Minmax Operator Classes"). All operator class members (functions and operators) are mandatory.
+To write an operator class for a data type that implements a totally ordered set, it is possible to use the minmax support functions alongside the corresponding operators, as shown in [Table 71.2](brin-extensibility#BRIN-EXTENSIBILITY-MINMAX-TABLE "Table 71.2. Function and Support Numbers for Minmax Operator Classes"). All operator class members (functions and operators) are mandatory.
 
 **Table 71.2. Function and Support Numbers for Minmax Operator Classes**
 
@@ -75,7 +75,7 @@ To write an operator class for a data type that implements a totally ordered set
 
 \
 
-To write an operator class for a complex data type which has values included within another type, it's possible to use the inclusion support functions alongside the corresponding operators, as shown in [Table 71.3](brin-extensibility.html#BRIN-EXTENSIBILITY-INCLUSION-TABLE "Table 71.3. Function and Support Numbers for Inclusion Operator Classes"). It requires only a single additional function, which can be written in any language. More functions can be defined for additional functionality. All operators are optional. Some operators require other operators, as shown as dependencies on the table.
+To write an operator class for a complex data type which has values included within another type, it's possible to use the inclusion support functions alongside the corresponding operators, as shown in [Table 71.3](brin-extensibility#BRIN-EXTENSIBILITY-INCLUSION-TABLE "Table 71.3. Function and Support Numbers for Inclusion Operator Classes"). It requires only a single additional function, which can be written in any language. More functions can be defined for additional functionality. All operators are optional. Some operators require other operators, as shown as dependencies on the table.
 
 **Table 71.3. Function and Support Numbers for Inclusion Operator Classes**
 
@@ -112,7 +112,7 @@ Support function numbers 1 through 10 are reserved for the BRIN internal functio
 
 Support function numbers 12 and 14 are provided to support irregularities of built-in data types. Function number 12 is used to support network addresses from different families which are not mergeable. Function number 14 is used to support empty ranges. Function number 13 is an optional but recommended one, which allows the new value to be checked before it is passed to the union function. As the BRIN framework can shortcut some operations when the union is not changed, using this function can improve index performance.
 
-To write an operator class for a data type that implements only an equality operator and supports hashing, it is possible to use the bloom support procedures alongside the corresponding operators, as shown in [Table 71.4](brin-extensibility.html#BRIN-EXTENSIBILITY-BLOOM-TABLE "Table 71.4. Procedure and Support Numbers for Bloom Operator Classes"). All operator class members (procedures and operators) are mandatory.
+To write an operator class for a data type that implements only an equality operator and supports hashing, it is possible to use the bloom support procedures alongside the corresponding operators, as shown in [Table 71.4](brin-extensibility#BRIN-EXTENSIBILITY-BLOOM-TABLE "Table 71.4. Procedure and Support Numbers for Bloom Operator Classes"). All operator class members (procedures and operators) are mandatory.
 
 **Table 71.4. Procedure and Support Numbers for Bloom Operator Classes**
 
@@ -130,7 +130,7 @@ To write an operator class for a data type that implements only an equality oper
 
 Support procedure numbers 1-10 are reserved for the BRIN internal functions, so the SQL level functions start with number 11. Support function number 11 is the main function required to build the index. It should accept one argument with the same data type as the operator class, and return a hash of the value.
 
-The minmax-multi operator class is also intended for data types implementing a totally ordered set, and may be seen as a simple extension of the minmax operator class. While minmax operator class summarizes values from each block range into a single contiguous interval, minmax-multi allows summarization into multiple smaller intervals to improve handling of outlier values. It is possible to use the minmax-multi support procedures alongside the corresponding operators, as shown in [Table 71.5](brin-extensibility.html#BRIN-EXTENSIBILITY-MINMAX-MULTI-TABLE "Table 71.5. Procedure and Support Numbers for minmax-multi Operator Classes"). All operator class members (procedures and operators) are mandatory.
+The minmax-multi operator class is also intended for data types implementing a totally ordered set, and may be seen as a simple extension of the minmax operator class. While minmax operator class summarizes values from each block range into a single contiguous interval, minmax-multi allows summarization into multiple smaller intervals to improve handling of outlier values. It is possible to use the minmax-multi support procedures alongside the corresponding operators, as shown in [Table 71.5](brin-extensibility#BRIN-EXTENSIBILITY-MINMAX-MULTI-TABLE "Table 71.5. Procedure and Support Numbers for minmax-multi Operator Classes"). All operator class members (procedures and operators) are mandatory.
 
 **Table 71.5. Procedure and Support Numbers for minmax-multi Operator Classes**
 
@@ -150,4 +150,4 @@ The minmax-multi operator class is also intended for data types implementing a t
 
 \
 
-Both minmax and inclusion operator classes support cross-data-type operators, though with these the dependencies become more complicated. The minmax operator class requires a full set of operators to be defined with both arguments having the same data type. It allows additional data types to be supported by defining extra sets of operators. Inclusion operator class operator strategies are dependent on another operator strategy as shown in [Table 71.3](brin-extensibility.html#BRIN-EXTENSIBILITY-INCLUSION-TABLE "Table 71.3. Function and Support Numbers for Inclusion Operator Classes"), or the same operator strategy as themselves. They require the dependency operator to be defined with the `STORAGE` data type as the left-hand-side argument and the other supported data type to be the right-hand-side argument of the supported operator. See `float4_minmax_ops` as an example of minmax, and `box_inclusion_ops` as an example of inclusion.
+Both minmax and inclusion operator classes support cross-data-type operators, though with these the dependencies become more complicated. The minmax operator class requires a full set of operators to be defined with both arguments having the same data type. It allows additional data types to be supported by defining extra sets of operators. Inclusion operator class operator strategies are dependent on another operator strategy as shown in [Table 71.3](brin-extensibility#BRIN-EXTENSIBILITY-INCLUSION-TABLE "Table 71.3. Function and Support Numbers for Inclusion Operator Classes"), or the same operator strategy as themselves. They require the dependency operator to be defined with the `STORAGE` data type as the left-hand-side argument and the other supported data type to be the right-hand-side argument of the supported operator. See `float4_minmax_ops` as an example of minmax, and `box_inclusion_ops` as an example of inclusion.

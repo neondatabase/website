@@ -1,15 +1,15 @@
 ## 8.17. Range Types [#](#RANGETYPES)
 
-  * *   [8.17.1. Built-in Range and Multirange Types](rangetypes.html#RANGETYPES-BUILTIN)
-  * [8.17.2. Examples](rangetypes.html#RANGETYPES-EXAMPLES)
-  * [8.17.3. Inclusive and Exclusive Bounds](rangetypes.html#RANGETYPES-INCLUSIVITY)
-  * [8.17.4. Infinite (Unbounded) Ranges](rangetypes.html#RANGETYPES-INFINITE)
-  * [8.17.5. Range Input/Output](rangetypes.html#RANGETYPES-IO)
-  * [8.17.6. Constructing Ranges and Multiranges](rangetypes.html#RANGETYPES-CONSTRUCT)
-  * [8.17.7. Discrete Range Types](rangetypes.html#RANGETYPES-DISCRETE)
-  * [8.17.8. Defining New Range Types](rangetypes.html#RANGETYPES-DEFINING)
-  * [8.17.9. Indexing](rangetypes.html#RANGETYPES-INDEXING)
-  * [8.17.10. Constraints on Ranges](rangetypes.html#RANGETYPES-CONSTRAINT)
+  * *   [8.17.1. Built-in Range and Multirange Types](rangetypes#RANGETYPES-BUILTIN)
+  * [8.17.2. Examples](rangetypes#RANGETYPES-EXAMPLES)
+  * [8.17.3. Inclusive and Exclusive Bounds](rangetypes#RANGETYPES-INCLUSIVITY)
+  * [8.17.4. Infinite (Unbounded) Ranges](rangetypes#RANGETYPES-INFINITE)
+  * [8.17.5. Range Input/Output](rangetypes#RANGETYPES-IO)
+  * [8.17.6. Constructing Ranges and Multiranges](rangetypes#RANGETYPES-CONSTRUCT)
+  * [8.17.7. Discrete Range Types](rangetypes#RANGETYPES-DISCRETE)
+  * [8.17.8. Defining New Range Types](rangetypes#RANGETYPES-DEFINING)
+  * [8.17.9. Indexing](rangetypes#RANGETYPES-INDEXING)
+  * [8.17.10. Constraints on Ranges](rangetypes#RANGETYPES-CONSTRAINT)
 
 Range types are data types representing a range of values of some element type (called the range's *subtype*). For instance, ranges of `timestamp` might be used to represent the ranges of time that a meeting room is reserved. In this case the data type is `tsrange` (short for “timestamp range”), and `timestamp` is the subtype. The subtype must have a total order so that it is well-defined whether element values are within, before, or after a range of values.
 
@@ -28,7 +28,7 @@ PostgreSQL comes with the following built-in range types:
 * `tstzrange` — Range of `timestamp with time zone`, `tstzmultirange` — corresponding Multirange
 * `daterange` — Range of `date`, `datemultirange` — corresponding Multirange
 
-In addition, you can define your own range types; see [CREATE TYPE](sql-createtype.html "CREATE TYPE") for more information.
+In addition, you can define your own range types; see [CREATE TYPE](sql-createtype "CREATE TYPE") for more information.
 
 ### 8.17.2. Examples [#](#RANGETYPES-EXAMPLES)
 
@@ -54,13 +54,13 @@ SELECT int4range(10, 20) * int4range(15, 25);
 SELECT isempty(numrange(1, 5));
 ```
 
-See [Table 9.55](functions-range.html#RANGE-OPERATORS-TABLE "Table 9.55. Range Operators") and [Table 9.57](functions-range.html#RANGE-FUNCTIONS-TABLE "Table 9.57. Range Functions") for complete lists of operators and functions on range types.
+See [Table 9.55](functions-range#RANGE-OPERATORS-TABLE "Table 9.55. Range Operators") and [Table 9.57](functions-range#RANGE-FUNCTIONS-TABLE "Table 9.57. Range Functions") for complete lists of operators and functions on range types.
 
 ### 8.17.3. Inclusive and Exclusive Bounds [#](#RANGETYPES-INCLUSIVITY)
 
 Every non-empty range has two bounds, the lower bound and the upper bound. All points between these values are included in the range. An inclusive bound means that the boundary point itself is included in the range as well, while an exclusive bound means that the boundary point is not included in the range.
 
-In the text form of a range, an inclusive lower bound is represented by “`[`” while an exclusive lower bound is represented by “`(`”. Likewise, an inclusive upper bound is represented by “`]`”, while an exclusive upper bound is represented by “`)`”. (See [Section 8.17.5](rangetypes.html#RANGETYPES-IO "8.17.5. Range Input/Output") for more details.)
+In the text form of a range, an inclusive lower bound is represented by “`[`” while an exclusive lower bound is represented by “`(`”. Likewise, an inclusive upper bound is represented by “`]`”, while an exclusive upper bound is represented by “`)`”. (See [Section 8.17.5](rangetypes#RANGETYPES-IO "8.17.5. Range Input/Output") for more details.)
 
 The functions `lower_inc` and `upper_inc` test the inclusivity of the lower and upper bounds of a range value, respectively.
 
@@ -95,7 +95,7 @@ Whitespace is allowed before and after the range value, but any whitespace betwe
 
 ### Note
 
-These rules are very similar to those for writing field values in composite-type literals. See [Section 8.16.6](rowtypes.html#ROWTYPES-IO-SYNTAX "8.16.6. Composite Type Input and Output Syntax") for additional commentary.
+These rules are very similar to those for writing field values in composite-type literals. See [Section 8.16.6](rowtypes#ROWTYPES-IO-SYNTAX "8.16.6. Composite Type Input and Output Syntax") for additional commentary.
 
 Examples:
 
@@ -204,7 +204,7 @@ CREATE TYPE timerange AS RANGE (
 SELECT '[11:10, 23:00]'::timerange;
 ```
 
-See [CREATE TYPE](sql-createtype.html "CREATE TYPE") for more information about creating range types.
+See [CREATE TYPE](sql-createtype "CREATE TYPE") for more information about creating range types.
 
 ### 8.17.9. Indexing [#](#RANGETYPES-INDEXING)
 
@@ -215,13 +215,13 @@ GiST and SP-GiST indexes can be created for table columns of range types. GiST i
 CREATE INDEX reservation_idx ON reservation USING GIST (during);
 ```
 
-A GiST or SP-GiST index on ranges can accelerate queries involving these range operators: `=`, `&&`, `<@`, `@>`, `<<`, `>>`, `-|-`, `&<`, and `&>`. A GiST index on multiranges can accelerate queries involving the same set of multirange operators. A GiST index on ranges and GiST index on multiranges can also accelerate queries involving these cross-type range to multirange and multirange to range operators correspondingly: `&&`, `<@`, `@>`, `<<`, `>>`, `-|-`, `&<`, and `&>`. See [Table 9.55](functions-range.html#RANGE-OPERATORS-TABLE "Table 9.55. Range Operators") for more information.
+A GiST or SP-GiST index on ranges can accelerate queries involving these range operators: `=`, `&&`, `<@`, `@>`, `<<`, `>>`, `-|-`, `&<`, and `&>`. A GiST index on multiranges can accelerate queries involving the same set of multirange operators. A GiST index on ranges and GiST index on multiranges can also accelerate queries involving these cross-type range to multirange and multirange to range operators correspondingly: `&&`, `<@`, `@>`, `<<`, `>>`, `-|-`, `&<`, and `&>`. See [Table 9.55](functions-range#RANGE-OPERATORS-TABLE "Table 9.55. Range Operators") for more information.
 
 In addition, B-tree and hash indexes can be created for table columns of range types. For these index types, basically the only useful range operation is equality. There is a B-tree sort ordering defined for range values, with corresponding `<` and `>` operators, but the ordering is rather arbitrary and not usually useful in the real world. Range types' B-tree and hash support is primarily meant to allow sorting and hashing internally in queries, rather than creation of actual indexes.
 
 ### 8.17.10. Constraints on Ranges [#](#RANGETYPES-CONSTRAINT)
 
-While `UNIQUE` is a natural constraint for scalar values, it is usually unsuitable for range types. Instead, an exclusion constraint is often more appropriate (see [CREATE TABLE ... CONSTRAINT ... EXCLUDE](sql-createtable.html#SQL-CREATETABLE-EXCLUDE)). Exclusion constraints allow the specification of constraints such as “non-overlapping” on a range type. For example:
+While `UNIQUE` is a natural constraint for scalar values, it is usually unsuitable for range types. Instead, an exclusion constraint is often more appropriate (see [CREATE TABLE ... CONSTRAINT ... EXCLUDE](sql-createtable#SQL-CREATETABLE-EXCLUDE)). Exclusion constraints allow the specification of constraints such as “non-overlapping” on a range type. For example:
 
 ```
 
@@ -246,7 +246,7 @@ DETAIL:  Key (during)=(["2010-01-01 14:45:00","2010-01-01 15:45:00")) conflicts
 with existing key (during)=(["2010-01-01 11:30:00","2010-01-01 15:00:00")).
 ```
 
-You can use the [`btree_gist`](btree-gist.html "F.9. btree_gist — GiST operator classes with B-tree behavior") extension to define exclusion constraints on plain scalar data types, which can then be combined with range exclusions for maximum flexibility. For example, after `btree_gist` is installed, the following constraint will reject overlapping ranges only if the meeting room numbers are equal:
+You can use the [`btree_gist`](btree-gist "F.9. btree_gist — GiST operator classes with B-tree behavior") extension to define exclusion constraints on plain scalar data types, which can then be combined with range exclusions for maximum flexibility. For example, after `btree_gist` is installed, the following constraint will reject overlapping ranges only if the meeting room numbers are equal:
 
 ```
 

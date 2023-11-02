@@ -1,10 +1,10 @@
 ## 26.1. SQL Dump [#](#BACKUP-DUMP)
 
-  * *   [26.1.1. Restoring the Dump](backup-dump.html#BACKUP-DUMP-RESTORE)
-  * [26.1.2. Using pg\_dumpall](backup-dump.html#BACKUP-DUMP-ALL)
-  * [26.1.3. Handling Large Databases](backup-dump.html#BACKUP-DUMP-LARGE)
+  * *   [26.1.1. Restoring the Dump](backup-dump#BACKUP-DUMP-RESTORE)
+  * [26.1.2. Using pg\_dumpall](backup-dump#BACKUP-DUMP-ALL)
+  * [26.1.3. Handling Large Databases](backup-dump#BACKUP-DUMP-LARGE)
 
-The idea behind this dump method is to generate a file with SQL commands that, when fed back to the server, will recreate the database in the same state as it was at the time of the dump. PostgreSQL provides the utility program [pg\_dump](app-pgdump.html "pg_dump") for this purpose. The basic usage of this command is:
+The idea behind this dump method is to generate a file with SQL commands that, when fed back to the server, will recreate the database in the same state as it was at the time of the dump. PostgreSQL provides the utility program [pg\_dump](app-pgdump "pg_dump") for this purpose. The basic usage of this command is:
 
 ```
 
@@ -17,7 +17,7 @@ pg\_dump is a regular PostgreSQL client application (albeit a particularly cleve
 
 To specify which database server pg\_dump should contact, use the command line options `-h host` and `-p port`. The default host is the local host or whatever your `PGHOST` environment variable specifies. Similarly, the default port is indicated by the `PGPORT` environment variable or, failing that, by the compiled-in default. (Conveniently, the server will normally have the same compiled-in default.)
 
-Like any other PostgreSQL client application, pg\_dump will by default connect with the database user name that is equal to the current operating system user name. To override this, either specify the `-U` option or set the environment variable `PGUSER`. Remember that pg\_dump connections are subject to the normal client authentication mechanisms (which are described in [Chapter 21](client-authentication.html "Chapter 21. Client Authentication")).
+Like any other PostgreSQL client application, pg\_dump will by default connect with the database user name that is equal to the current operating system user name. To override this, either specify the `-U` option or set the environment variable `PGUSER`. Remember that pg\_dump connections are subject to the normal client authentication mechanisms (which are described in [Chapter 21](client-authentication "Chapter 21. Client Authentication")).
 
 An important advantage of pg\_dump over the other backup methods described later is that pg\_dump's output can generally be re-loaded into newer versions of PostgreSQL, whereas file-level backups and continuous archiving are both extremely server-version-specific. pg\_dump is also the only method that will work when transferring a database to a different machine architecture, such as going from a 32-bit to a 64-bit server.
 
@@ -32,7 +32,7 @@ Text files created by pg\_dump are intended to be read in by the psql program. T
 psql dbname < dumpfile
 ```
 
-where *`dumpfile`* is the file output by the pg\_dump command. The database *`dbname`* will not be created by this command, so you must create it yourself from `template0` before executing psql (e.g., with `createdb -T template0 dbname`). psql supports options similar to pg\_dump for specifying the database server to connect to and the user name to use. See the [psql](app-psql.html "psql") reference page for more information. Non-text file dumps are restored using the [pg\_restore](app-pgrestore.html "pg_restore") utility.
+where *`dumpfile`* is the file output by the pg\_dump command. The database *`dbname`* will not be created by this command, so you must create it yourself from `template0` before executing psql (e.g., with `createdb -T template0 dbname`). psql supports options similar to pg\_dump for specifying the database server to connect to and the user name to use. See the [psql](app-psql "psql") reference page for more information. Non-text file dumps are restored using the [pg\_restore](app-pgrestore "pg_restore") utility.
 
 Before restoring an SQL dump, all the users who own objects or were granted permissions on objects in the dumped database must already exist. If they do not, the restore will fail to recreate the objects with the original ownership and/or permissions. (Sometimes this is what you want, but usually it is not.)
 
@@ -56,11 +56,11 @@ pg_dump -h host1 dbname | psql -h host2 dbname
 
 The dumps produced by pg\_dump are relative to `template0`. This means that any languages, procedures, etc. added via `template1` will also be dumped by pg\_dump. As a result, when restoring, if you are using a customized `template1`, you must create the empty database from `template0`, as in the example above.
 
-After restoring a backup, it is wise to run [`ANALYZE`](sql-analyze.html "ANALYZE") on each database so the query optimizer has useful statistics; see [Section 25.1.3](routine-vacuuming.html#VACUUM-FOR-STATISTICS "25.1.3. Updating Planner Statistics") and [Section 25.1.6](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon") for more information. For more advice on how to load large amounts of data into PostgreSQL efficiently, refer to [Section 14.4](populate.html "14.4. Populating a Database").
+After restoring a backup, it is wise to run [`ANALYZE`](sql-analyze "ANALYZE") on each database so the query optimizer has useful statistics; see [Section 25.1.3](routine-vacuuming#VACUUM-FOR-STATISTICS "25.1.3. Updating Planner Statistics") and [Section 25.1.6](routine-vacuuming#AUTOVACUUM "25.1.6. The Autovacuum Daemon") for more information. For more advice on how to load large amounts of data into PostgreSQL efficiently, refer to [Section 14.4](populate "14.4. Populating a Database").
 
 ### 26.1.2. Using pg\_dumpall [#](#BACKUP-DUMP-ALL)
 
-pg\_dump dumps only a single database at a time, and it does not dump information about roles or tablespaces (because those are cluster-wide rather than per-database). To support convenient dumping of the entire contents of a database cluster, the [pg\_dumpall](app-pg-dumpall.html "pg_dumpall") program is provided. pg\_dumpall backs up each database in a given cluster, and also preserves cluster-wide data such as role and tablespace definitions. The basic usage of this command is:
+pg\_dump dumps only a single database at a time, and it does not dump information about roles or tablespaces (because those are cluster-wide rather than per-database). To support convenient dumping of the entire contents of a database cluster, the [pg\_dumpall](app-pg-dumpall "pg_dumpall") program is provided. pg\_dumpall backs up each database in a given cluster, and also preserves cluster-wide data such as role and tablespace definitions. The basic usage of this command is:
 
 ```
 
@@ -142,7 +142,7 @@ A custom-format dump is not a script for psql, but instead must be restored with
 pg_restore -d dbname filename
 ```
 
-See the [pg\_dump](app-pgdump.html "pg_dump") and [pg\_restore](app-pgrestore.html "pg_restore") reference pages for details.
+See the [pg\_dump](app-pgdump "pg_dump") and [pg\_restore](app-pgrestore "pg_restore") reference pages for details.
 
 For very large databases, you might need to combine `split` with one of the other two approaches.
 

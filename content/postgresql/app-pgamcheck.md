@@ -8,13 +8,13 @@ pg\_amcheck — checks for corruption in one or more PostgreSQL databases
 
 ## Description
 
-pg\_amcheck supports running [amcheck](amcheck.html "F.2. amcheck — tools to verify table and index consistency")'s corruption checking functions against one or more databases, with options to select which schemas, tables and indexes to check, which kinds of checking to perform, and whether to perform the checks in parallel, and if so, the number of parallel connections to establish and use.
+pg\_amcheck supports running [amcheck](amcheck "F.2. amcheck — tools to verify table and index consistency")'s corruption checking functions against one or more databases, with options to select which schemas, tables and indexes to check, which kinds of checking to perform, and whether to perform the checks in parallel, and if so, the number of parallel connections to establish and use.
 
 Only ordinary and toast table relations, materialized views, sequences, and btree indexes are currently supported. Other relation types are silently skipped.
 
 If `dbname` is specified, it should be the name of a single database to check, and no other database selection options should be present. Otherwise, if any database selection options are present, all matching databases will be checked. If no such options are present, the default database will be checked. Database selection options include `--all`, `--database` and `--exclude-database`. They also include `--relation`, `--exclude-relation`, `--table`, `--exclude-table`, `--index`, and `--exclude-index`, but only when such options are used with a three-part pattern (e.g. `mydb*.myschema*.myrel*`). Finally, they include `--schema` and `--exclude-schema` when such options are used with a two-part pattern (e.g. `mydb*.myschema*`).
 
-*`dbname`* can also be a [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings").
+*`dbname`* can also be a [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings").
 
 ## Options
 
@@ -26,39 +26,39 @@ The following command-line options control what is checked:
 
 * `-d pattern``--database=pattern`
 
-    Check databases matching the specified [*`pattern`*](app-psql.html#APP-PSQL-PATTERNS "Patterns"), except for any excluded by `--exclude-database`. This option can be specified more than once.
+    Check databases matching the specified [*`pattern`*](app-psql#APP-PSQL-PATTERNS "Patterns"), except for any excluded by `--exclude-database`. This option can be specified more than once.
 
 * `-D pattern``--exclude-database=pattern`
 
-    Exclude databases matching the given [*`pattern`*](app-psql.html#APP-PSQL-PATTERNS "Patterns"). This option can be specified more than once.
+    Exclude databases matching the given [*`pattern`*](app-psql#APP-PSQL-PATTERNS "Patterns"). This option can be specified more than once.
 
 * `-i pattern``--index=pattern`
 
-    Check indexes matching the specified [*`pattern`*](app-psql.html#APP-PSQL-PATTERNS "Patterns"), unless they are otherwise excluded. This option can be specified more than once.
+    Check indexes matching the specified [*`pattern`*](app-psql#APP-PSQL-PATTERNS "Patterns"), unless they are otherwise excluded. This option can be specified more than once.
 
     This is similar to the `--relation` option, except that it applies only to indexes, not to other relation types.
 
 * `-I pattern``--exclude-index=pattern`
 
-    Exclude indexes matching the specified [*`pattern`*](app-psql.html#APP-PSQL-PATTERNS "Patterns"). This option can be specified more than once.
+    Exclude indexes matching the specified [*`pattern`*](app-psql#APP-PSQL-PATTERNS "Patterns"). This option can be specified more than once.
 
     This is similar to the `--exclude-relation` option, except that it applies only to indexes, not other relation types.
 
 * `-r pattern``--relation=pattern`
 
-    Check relations matching the specified [*`pattern`*](app-psql.html#APP-PSQL-PATTERNS "Patterns"), unless they are otherwise excluded. This option can be specified more than once.
+    Check relations matching the specified [*`pattern`*](app-psql#APP-PSQL-PATTERNS "Patterns"), unless they are otherwise excluded. This option can be specified more than once.
 
     Patterns may be unqualified, e.g. `myrel*`, or they may be schema-qualified, e.g. `myschema*.myrel*` or database-qualified and schema-qualified, e.g. `mydb*.myschema*.myrel*`. A database-qualified pattern will add matching databases to the list of databases to be checked.
 
 * `-R pattern``--exclude-relation=pattern`
 
-    Exclude relations matching the specified [*`pattern`*](app-psql.html#APP-PSQL-PATTERNS "Patterns"). This option can be specified more than once.
+    Exclude relations matching the specified [*`pattern`*](app-psql#APP-PSQL-PATTERNS "Patterns"). This option can be specified more than once.
 
-    As with `--relation`, the [*`pattern`*](app-psql.html#APP-PSQL-PATTERNS "Patterns") may be unqualified, schema-qualified, or database- and schema-qualified.
+    As with `--relation`, the [*`pattern`*](app-psql#APP-PSQL-PATTERNS "Patterns") may be unqualified, schema-qualified, or database- and schema-qualified.
 
 * `-s pattern``--schema=pattern`
 
-    Check tables and indexes in schemas matching the specified [*`pattern`*](app-psql.html#APP-PSQL-PATTERNS "Patterns"), unless they are otherwise excluded. This option can be specified more than once.
+    Check tables and indexes in schemas matching the specified [*`pattern`*](app-psql#APP-PSQL-PATTERNS "Patterns"), unless they are otherwise excluded. This option can be specified more than once.
 
     To select only tables in schemas matching a particular pattern, consider using something like `--table=SCHEMAPAT.* --no-dependent-indexes`. To select only indexes, consider using something like `--index=SCHEMAPAT.*`.
 
@@ -66,19 +66,19 @@ The following command-line options control what is checked:
 
 * `-S pattern``--exclude-schema=pattern`
 
-    Exclude tables and indexes in schemas matching the specified [*`pattern`*](app-psql.html#APP-PSQL-PATTERNS "Patterns"). This option can be specified more than once.
+    Exclude tables and indexes in schemas matching the specified [*`pattern`*](app-psql#APP-PSQL-PATTERNS "Patterns"). This option can be specified more than once.
 
     As with `--schema`, the pattern may be database-qualified.
 
 * `-t pattern``--table=pattern`
 
-    Check tables matching the specified [*`pattern`*](app-psql.html#APP-PSQL-PATTERNS "Patterns"), unless they are otherwise excluded. This option can be specified more than once.
+    Check tables matching the specified [*`pattern`*](app-psql#APP-PSQL-PATTERNS "Patterns"), unless they are otherwise excluded. This option can be specified more than once.
 
     This is similar to the `--relation` option, except that it applies only to tables, materialized views, and sequences, not to indexes.
 
 * `-T pattern``--exclude-table=pattern`
 
-    Exclude tables matching the specified [*`pattern`*](app-psql.html#APP-PSQL-PATTERNS "Patterns"). This option can be specified more than once.
+    Exclude tables matching the specified [*`pattern`*](app-psql#APP-PSQL-PATTERNS "Patterns"). This option can be specified more than once.
 
     This is similar to the `--exclude-relation` option, except that it applies only to tables, materialized views, and sequences, not to indexes.
 
@@ -126,17 +126,17 @@ The following command-line options control checking of B-tree indexes:
 
 * `--heapallindexed`
 
-    For each index checked, verify the presence of all heap tuples as index tuples in the index using [amcheck](amcheck.html "F.2. amcheck — tools to verify table and index consistency")'s `heapallindexed` option.
+    For each index checked, verify the presence of all heap tuples as index tuples in the index using [amcheck](amcheck "F.2. amcheck — tools to verify table and index consistency")'s `heapallindexed` option.
 
 * `--parent-check`
 
-    For each btree index checked, use [amcheck](amcheck.html "F.2. amcheck — tools to verify table and index consistency")'s `bt_index_parent_check` function, which performs additional checks of parent/child relationships during index checking.
+    For each btree index checked, use [amcheck](amcheck "F.2. amcheck — tools to verify table and index consistency")'s `bt_index_parent_check` function, which performs additional checks of parent/child relationships during index checking.
 
     The default is to use amcheck's `bt_index_check` function, but note that use of the `--rootdescend` option implicitly selects `bt_index_parent_check`.
 
 * `--rootdescend`
 
-    For each index checked, re-find tuples on the leaf level by performing a new search from the root page for each tuple using [amcheck](amcheck.html "F.2. amcheck — tools to verify table and index consistency")'s `rootdescend` option.
+    For each index checked, re-find tuples on the leaf level by performing a new search from the root page for each tuple using [amcheck](amcheck "F.2. amcheck — tools to verify table and index consistency")'s `rootdescend` option.
 
     Use of this option implicitly also selects the `--parent-check` option.
 
@@ -172,7 +172,7 @@ The following command-line options control the connection to the server:
 
 * `--maintenance-db=dbname`
 
-    Specifies a database or [connection string](libpq-connect.html#LIBPQ-CONNSTRING "34.1.1. Connection Strings") to be used to discover the list of databases to be checked. If neither `--all` nor any option including a database pattern is used, no such connection is required and this option does nothing. Otherwise, any connection string parameters other than the database name which are included in the value for this option will also be used when connecting to the databases being checked. If this option is omitted, the default is `postgres` or, if that fails, `template1`.
+    Specifies a database or [connection string](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings") to be used to discover the list of databases to be checked. If neither `--all` nor any option including a database pattern is used, no such connection is required and this option does nothing. Otherwise, any connection string parameters other than the database name which are included in the value for this option will also be used when connecting to the databases being checked. If this option is omitted, the default is `postgres` or, if that fails, `template1`.
 
 Other options are also available:
 
@@ -202,7 +202,7 @@ Other options are also available:
 
     Install any missing extensions that are required to check the database(s). If not yet installed, each extension's objects will be installed into the given *`schema`*, or if not specified into schema `pg_catalog`.
 
-    At present, the only required extension is [amcheck](amcheck.html "F.2. amcheck — tools to verify table and index consistency").
+    At present, the only required extension is [amcheck](amcheck "F.2. amcheck — tools to verify table and index consistency").
 
 * `-?``--help`
 
@@ -214,4 +214,4 @@ pg\_amcheck is designed to work with PostgreSQL 14.0 and later.
 
 ## See Also
 
-[amcheck](amcheck.html "F.2. amcheck — tools to verify table and index consistency")
+[amcheck](amcheck "F.2. amcheck — tools to verify table and index consistency")

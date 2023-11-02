@@ -1,21 +1,21 @@
 ## 7.3. Select Lists [#](#QUERIES-SELECT-LISTS)
 
-  * *   [7.3.1. Select-List Items](queries-select-lists.html#QUERIES-SELECT-LIST-ITEMS)
-  * [7.3.2. Column Labels](queries-select-lists.html#QUERIES-COLUMN-LABELS)
-  * [7.3.3. `DISTINCT`](queries-select-lists.html#QUERIES-DISTINCT)
+  * *   [7.3.1. Select-List Items](queries-select-lists#QUERIES-SELECT-LIST-ITEMS)
+  * [7.3.2. Column Labels](queries-select-lists#QUERIES-COLUMN-LABELS)
+  * [7.3.3. `DISTINCT`](queries-select-lists#QUERIES-DISTINCT)
 
 As shown in the previous section, the table expression in the `SELECT` command constructs an intermediate virtual table by possibly combining tables, views, eliminating rows, grouping, etc. This table is finally passed on to processing by the *select list*. The select list determines which *columns* of the intermediate table are actually output.
 
 ### 7.3.1. Select-List Items [#](#QUERIES-SELECT-LIST-ITEMS)
 
-The simplest kind of select list is `*` which emits all columns that the table expression produces. Otherwise, a select list is a comma-separated list of value expressions (as defined in [Section 4.2](sql-expressions.html "4.2. Value Expressions")). For instance, it could be a list of column names:
+The simplest kind of select list is `*` which emits all columns that the table expression produces. Otherwise, a select list is a comma-separated list of value expressions (as defined in [Section 4.2](sql-expressions "4.2. Value Expressions")). For instance, it could be a list of column names:
 
 ```
 
 SELECT a, b, c FROM ...
 ```
 
-The columns names `a`, `b`, and `c` are either the actual names of the columns of tables referenced in the `FROM` clause, or the aliases given to them as explained in [Section 7.2.1.2](queries-table-expressions.html#QUERIES-TABLE-ALIASES "7.2.1.2. Table and Column Aliases"). The name space available in the select list is the same as in the `WHERE` clause, unless grouping is used, in which case it is the same as in the `HAVING` clause.
+The columns names `a`, `b`, and `c` are either the actual names of the columns of tables referenced in the `FROM` clause, or the aliases given to them as explained in [Section 7.2.1.2](queries-table-expressions#QUERIES-TABLE-ALIASES "7.2.1.2. Table and Column Aliases"). The name space available in the select list is the same as in the `WHERE` clause, unless grouping is used, in which case it is the same as in the `HAVING` clause.
 
 If more than one table has a column of the same name, the table name must also be given, as in:
 
@@ -31,7 +31,7 @@ When working with multiple tables, it can also be useful to ask for all the colu
 SELECT tbl1.*, tbl2.a FROM ...
 ```
 
-See [Section 8.16.5](rowtypes.html#ROWTYPES-USAGE "8.16.5. Using Composite Types in Queries") for more about the *`table_name`*`.*` notation.
+See [Section 8.16.5](rowtypes#ROWTYPES-USAGE "8.16.5. Using Composite Types in Queries") for more about the *`table_name`*`.*` notation.
 
 If an arbitrary value expression is used in the select list, it conceptually adds a new virtual column to the returned table. The value expression is evaluated once for each result row, with the row's values substituted for any column references. But the expressions in the select list do not have to reference any columns in the table expression of the `FROM` clause; they can be constant arithmetic expressions, for instance.
 
@@ -46,7 +46,7 @@ SELECT a AS value, b + c AS sum FROM ...
 
 If no output column name is specified using `AS`, the system assigns a default column name. For simple column references, this is the name of the referenced column. For function calls, this is the name of the function. For complex expressions, the system will generate a generic name.
 
-The `AS` key word is usually optional, but in some cases where the desired column name matches a PostgreSQL key word, you must write `AS` or double-quote the column name in order to avoid ambiguity. ([Appendix C](sql-keywords-appendix.html "Appendix C. SQL Key Words") shows which key words require `AS` to be used as a column label.) For example, `FROM` is one such key word, so this does not work:
+The `AS` key word is usually optional, but in some cases where the desired column name matches a PostgreSQL key word, you must write `AS` or double-quote the column name in order to avoid ambiguity. ([Appendix C](sql-keywords-appendix "Appendix C. SQL Key Words") shows which key words require `AS` to be used as a column label.) For example, `FROM` is one such key word, so this does not work:
 
 ```
 
@@ -65,7 +65,7 @@ For greatest safety against possible future key word additions, it is recommende
 
 ### Note
 
-The naming of output columns here is different from that done in the `FROM` clause (see [Section 7.2.1.2](queries-table-expressions.html#QUERIES-TABLE-ALIASES "7.2.1.2. Table and Column Aliases")). It is possible to rename the same column twice, but the name assigned in the select list is the one that will be passed on.
+The naming of output columns here is different from that done in the `FROM` clause (see [Section 7.2.1.2](queries-table-expressions#QUERIES-TABLE-ALIASES "7.2.1.2. Table and Column Aliases")). It is possible to rename the same column twice, but the name assigned in the select list is the one that will be passed on.
 
 ### 7.3.3. `DISTINCT` [#](#QUERIES-DISTINCT)
 

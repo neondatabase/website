@@ -1,10 +1,10 @@
 ## F.4. auto\_explain — log execution plans of slow queries [#](#AUTO-EXPLAIN)
 
-* *   [F.4.1. Configuration Parameters](auto-explain.html#AUTO-EXPLAIN-CONFIGURATION-PARAMETERS)
-* [F.4.2. Example](auto-explain.html#AUTO-EXPLAIN-EXAMPLE)
-* [F.4.3. Author](auto-explain.html#AUTO-EXPLAIN-AUTHOR)
+* *   [F.4.1. Configuration Parameters](auto-explain#AUTO-EXPLAIN-CONFIGURATION-PARAMETERS)
+* [F.4.2. Example](auto-explain#AUTO-EXPLAIN-EXAMPLE)
+* [F.4.3. Author](auto-explain#AUTO-EXPLAIN-AUTHOR)
 
-The `auto_explain` module provides a means for logging execution plans of slow statements automatically, without having to run [EXPLAIN](sql-explain.html "EXPLAIN") by hand. This is especially helpful for tracking down un-optimized queries in large applications.
+The `auto_explain` module provides a means for logging execution plans of slow statements automatically, without having to run [EXPLAIN](sql-explain "EXPLAIN") by hand. This is especially helpful for tracking down un-optimized queries in large applications.
 
 The module provides no SQL-accessible functions. To use it, simply load it into the server. You can load it into an individual session:
 
@@ -13,7 +13,7 @@ The module provides no SQL-accessible functions. To use it, simply load it into 
 LOAD 'auto_explain';
 ```
 
-(You must be superuser to do that.) More typical usage is to preload it into some or all sessions by including `auto_explain` in [session\_preload\_libraries](runtime-config-client.html#GUC-SESSION-PRELOAD-LIBRARIES) or [shared\_preload\_libraries](runtime-config-client.html#GUC-SHARED-PRELOAD-LIBRARIES) in `postgresql.conf`. Then you can track unexpectedly slow queries no matter when they happen. Of course there is a price in overhead for that.
+(You must be superuser to do that.) More typical usage is to preload it into some or all sessions by including `auto_explain` in [session\_preload\_libraries](runtime-config-client#GUC-SESSION-PRELOAD-LIBRARIES) or [shared\_preload\_libraries](runtime-config-client#GUC-SHARED-PRELOAD-LIBRARIES) in `postgresql.conf`. Then you can track unexpectedly slow queries no matter when they happen. Of course there is a price in overhead for that.
 
 ### F.4.1. Configuration Parameters [#](#AUTO-EXPLAIN-CONFIGURATION-PARAMETERS)
 

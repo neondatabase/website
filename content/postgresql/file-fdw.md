@@ -1,6 +1,6 @@
 ## F.16. file\_fdw — access data files in the server's file system [#](#FILE-FDW)
 
-The `file_fdw` module provides the foreign-data wrapper `file_fdw`, which can be used to access data files in the server's file system, or to execute programs on the server and read their output. The data file or program output must be in a format that can be read by `COPY FROM`; see [COPY](sql-copy.html "COPY") for details. Access to data files is currently read-only.
+The `file_fdw` module provides the foreign-data wrapper `file_fdw`, which can be used to access data files in the server's file system, or to execute programs on the server and read their output. The data file or program output must be in a format that can be read by `COPY FROM`; see [COPY](sql-copy "COPY") for details. Access to data files is currently read-only.
 
 A foreign table created using this wrapper can have the following options:
 
@@ -64,7 +64,7 @@ For a foreign table using `file_fdw`, `EXPLAIN` shows the name of the file to be
 
 **Example F.1. Create a Foreign Table for PostgreSQL CSV Logs**
 
-One of the obvious uses for `file_fdw` is to make the PostgreSQL activity log available as a table for querying. To do this, first you must be [logging to a CSV file,](runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-CSVLOG "20.8.4. Using CSV-Format Log Output") which here we will call `pglog.csv`. First, install `file_fdw` as an extension:
+One of the obvious uses for `file_fdw` is to make the PostgreSQL activity log available as a table for querying. To do this, first you must be [logging to a CSV file,](runtime-config-logging#RUNTIME-CONFIG-LOGGING-CSVLOG "20.8.4. Using CSV-Format Log Output") which here we will call `pglog.csv`. First, install `file_fdw` as an extension:
 
 ```
 

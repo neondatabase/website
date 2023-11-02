@@ -1,10 +1,10 @@
 ## F.26. pg\_buffercache — inspect PostgreSQL buffer cache state [#](#PGBUFFERCACHE)
 
-  * *   [F.26.1. The `pg_buffercache` View](pgbuffercache.html#PGBUFFERCACHE-PG-BUFFERCACHE)
-  * [F.26.2. The `pg_buffercache_summary()` Function](pgbuffercache.html#PGBUFFERCACHE-SUMMARY)
-  * [F.26.3. The `pg_buffercache_usage_counts()` Function](pgbuffercache.html#PGBUFFERCACHE-USAGE-COUNTS)
-  * [F.26.4. Sample Output](pgbuffercache.html#PGBUFFERCACHE-SAMPLE-OUTPUT)
-  * [F.26.5. Authors](pgbuffercache.html#PGBUFFERCACHE-AUTHORS)
+  * *   [F.26.1. The `pg_buffercache` View](pgbuffercache#PGBUFFERCACHE-PG-BUFFERCACHE)
+  * [F.26.2. The `pg_buffercache_summary()` Function](pgbuffercache#PGBUFFERCACHE-SUMMARY)
+  * [F.26.3. The `pg_buffercache_usage_counts()` Function](pgbuffercache#PGBUFFERCACHE-USAGE-COUNTS)
+  * [F.26.4. Sample Output](pgbuffercache#PGBUFFERCACHE-SAMPLE-OUTPUT)
+  * [F.26.5. Authors](pgbuffercache#PGBUFFERCACHE-AUTHORS)
 
 The `pg_buffercache` module provides a means for examining what's happening in the shared buffer cache in real time.
 
@@ -20,16 +20,16 @@ By default, use is restricted to superusers and roles with privileges of the `pg
 
 ### F.26.1. The `pg_buffercache` View [#](#PGBUFFERCACHE-PG-BUFFERCACHE)
 
-The definitions of the columns exposed by the view are shown in [Table F.15](pgbuffercache.html#PGBUFFERCACHE-COLUMNS "Table F.15. pg_buffercache Columns").
+The definitions of the columns exposed by the view are shown in [Table F.15](pgbuffercache#PGBUFFERCACHE-COLUMNS "Table F.15. pg_buffercache Columns").
 
 **Table F.15. `pg_buffercache` Columns**
 
 | Column TypeDescription                                                                                                                      |
 | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `bufferid` `integer`ID, in the range 1..`shared_buffers`                                                                                    |
-| `relfilenode` `oid` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`relfilenode`)Filenode number of the relation         |
-| `reltablespace` `oid` (references [`pg_tablespace`](catalog-pg-tablespace.html "53.56. pg_tablespace").`oid`)Tablespace OID of the relation |
-| `reldatabase` `oid` (references [`pg_database`](catalog-pg-database.html "53.15. pg_database").`oid`)Database OID of the relation           |
+| `relfilenode` `oid` (references [`pg_class`](catalog-pg-class "53.11. pg_class").`relfilenode`)Filenode number of the relation         |
+| `reltablespace` `oid` (references [`pg_tablespace`](catalog-pg-tablespace "53.56. pg_tablespace").`oid`)Tablespace OID of the relation |
+| `reldatabase` `oid` (references [`pg_database`](catalog-pg-database "53.15. pg_database").`oid`)Database OID of the relation           |
 | `relforknumber` `smallint`Fork number within the relation; see `common/relpath.h`                                                           |
 | `relblocknumber` `bigint`Page number within the relation                                                                                    |
 | `isdirty` `boolean`Is the page dirty?                                                                                                       |
@@ -46,7 +46,7 @@ Since buffer manager locks are not taken to copy the buffer state data that the 
 
 ### F.26.2. The `pg_buffercache_summary()` Function [#](#PGBUFFERCACHE-SUMMARY)
 
-The definitions of the columns exposed by the function are shown in [Table F.16](pgbuffercache.html#PGBUFFERCACHE-SUMMARY-COLUMNS "Table F.16. pg_buffercache_summary() Output Columns").
+The definitions of the columns exposed by the function are shown in [Table F.16](pgbuffercache#PGBUFFERCACHE-SUMMARY-COLUMNS "Table F.16. pg_buffercache_summary() Output Columns").
 
 **Table F.16. `pg_buffercache_summary()` Output Columns**
 
@@ -66,7 +66,7 @@ Like the `pg_buffercache` view, `pg_buffercache_summary()` does not acquire buff
 
 ### F.26.3. The `pg_buffercache_usage_counts()` Function [#](#PGBUFFERCACHE-USAGE-COUNTS)
 
-The definitions of the columns exposed by the function are shown in [Table F.17](pgbuffercache.html#PGBUFFERCACHE_USAGE_COUNTS-COLUMNS "Table F.17. pg_buffercache_usage_counts() Output Columns").
+The definitions of the columns exposed by the function are shown in [Table F.17](pgbuffercache#PGBUFFERCACHE_USAGE_COUNTS-COLUMNS "Table F.17. pg_buffercache_usage_counts() Output Columns").
 
 **Table F.17. `pg_buffercache_usage_counts()` Output Columns**
 

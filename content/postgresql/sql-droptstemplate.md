@@ -25,7 +25,7 @@ DROP TEXT SEARCH TEMPLATE [ IF EXISTS ] name [ CASCADE | RESTRICT ]
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the text search template, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the text search template, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -48,4 +48,4 @@ There is no `DROP TEXT SEARCH TEMPLATE` statement in the SQL standard.
 
 ## See Also
 
-[ALTER TEXT SEARCH TEMPLATE](sql-altertstemplate.html "ALTER TEXT SEARCH TEMPLATE"), [CREATE TEXT SEARCH TEMPLATE](sql-createtstemplate.html "CREATE TEXT SEARCH TEMPLATE")
+[ALTER TEXT SEARCH TEMPLATE](sql-altertstemplate "ALTER TEXT SEARCH TEMPLATE"), [CREATE TEXT SEARCH TEMPLATE](sql-createtstemplate "CREATE TEXT SEARCH TEMPLATE")

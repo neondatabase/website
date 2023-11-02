@@ -48,7 +48,7 @@ where action is one of:
 
 * `ADD COLUMN`
 
-    This form adds a new column to the foreign table, using the same syntax as [`CREATE FOREIGN TABLE`](sql-createforeigntable.html "CREATE FOREIGN TABLE"). Unlike the case when adding a column to a regular table, nothing happens to the underlying storage: this action simply declares that some new column is now accessible through the foreign table.
+    This form adds a new column to the foreign table, using the same syntax as [`CREATE FOREIGN TABLE`](sql-createforeigntable "CREATE FOREIGN TABLE"). Unlike the case when adding a column to a regular table, nothing happens to the underlying storage: this action simply declares that some new column is now accessible through the foreign table.
 
 * `DROP COLUMN [ IF EXISTS ]`
 
@@ -68,21 +68,21 @@ where action is one of:
 
 * `SET STATISTICS`
 
-    This form sets the per-column statistics-gathering target for subsequent [`ANALYZE`](sql-analyze.html "ANALYZE") operations. See the similar form of [`ALTER TABLE`](sql-altertable.html "ALTER TABLE") for more details.
+    This form sets the per-column statistics-gathering target for subsequent [`ANALYZE`](sql-analyze "ANALYZE") operations. See the similar form of [`ALTER TABLE`](sql-altertable "ALTER TABLE") for more details.
 
 * `SET ( attribute_option = value [, ... ] )``RESET ( attribute_option [, ... ] )`
 
-    This form sets or resets per-attribute options. See the similar form of [`ALTER TABLE`](sql-altertable.html "ALTER TABLE") for more details.
+    This form sets or resets per-attribute options. See the similar form of [`ALTER TABLE`](sql-altertable "ALTER TABLE") for more details.
 
 * `SET STORAGE`
 
-    This form sets the storage mode for a column. See the similar form of [`ALTER TABLE`](sql-altertable.html "ALTER TABLE") for more details. Note that the storage mode has no effect unless the table's foreign-data wrapper chooses to pay attention to it.
+    This form sets the storage mode for a column. See the similar form of [`ALTER TABLE`](sql-altertable "ALTER TABLE") for more details. Note that the storage mode has no effect unless the table's foreign-data wrapper chooses to pay attention to it.
 
 * `ADD table_constraint [ NOT VALID ]`
 
-    This form adds a new constraint to a foreign table, using the same syntax as [`CREATE FOREIGN TABLE`](sql-createforeigntable.html "CREATE FOREIGN TABLE"). Currently only `CHECK` constraints are supported.
+    This form adds a new constraint to a foreign table, using the same syntax as [`CREATE FOREIGN TABLE`](sql-createforeigntable "CREATE FOREIGN TABLE"). Currently only `CHECK` constraints are supported.
 
-    Unlike the case when adding a constraint to a regular table, nothing is done to verify the constraint is correct; rather, this action simply declares that some new condition should be assumed to hold for all rows in the foreign table. (See the discussion in [`CREATE FOREIGN TABLE`](sql-createforeigntable.html "CREATE FOREIGN TABLE").) If the constraint is marked `NOT VALID`, then it isn't assumed to hold, but is only recorded for possible future use.
+    Unlike the case when adding a constraint to a regular table, nothing is done to verify the constraint is correct; rather, this action simply declares that some new condition should be assumed to hold for all rows in the foreign table. (See the discussion in [`CREATE FOREIGN TABLE`](sql-createforeigntable "CREATE FOREIGN TABLE").) If the constraint is marked `NOT VALID`, then it isn't assumed to hold, but is only recorded for possible future use.
 
 * `VALIDATE CONSTRAINT`
 
@@ -94,7 +94,7 @@ where action is one of:
 
 * `DISABLE`/`ENABLE [ REPLICA | ALWAYS ] TRIGGER`
 
-    These forms configure the firing of trigger(s) belonging to the foreign table. See the similar form of [`ALTER TABLE`](sql-altertable.html "ALTER TABLE") for more details.
+    These forms configure the firing of trigger(s) belonging to the foreign table. See the similar form of [`ALTER TABLE`](sql-altertable "ALTER TABLE") for more details.
 
 * `SET WITHOUT OIDS`
 
@@ -102,7 +102,7 @@ where action is one of:
 
 * `INHERIT parent_table`
 
-    This form adds the target foreign table as a new child of the specified parent table. See the similar form of [`ALTER TABLE`](sql-altertable.html "ALTER TABLE") for more details.
+    This form adds the target foreign table as a new child of the specified parent table. See the similar form of [`ALTER TABLE`](sql-altertable "ALTER TABLE") for more details.
 
 * `NO INHERIT parent_table`
 
@@ -162,7 +162,7 @@ You must own the table to use `ALTER FOREIGN TABLE`. To change the schema of a f
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the dropped column or constraint (for example, views referencing the column), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the dropped column or constraint (for example, views referencing the column), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -198,7 +198,7 @@ The key word `COLUMN` is noise and can be omitted.
 
 Consistency with the foreign server is not checked when a column is added or removed with `ADD COLUMN` or `DROP COLUMN`, a `NOT NULL` or `CHECK` constraint is added, or a column type is changed with `SET DATA TYPE`. It is the user's responsibility to ensure that the table definition matches the remote side.
 
-Refer to [`CREATE FOREIGN TABLE`](sql-createforeigntable.html "CREATE FOREIGN TABLE") for a further description of valid parameters.
+Refer to [`CREATE FOREIGN TABLE`](sql-createforeigntable "CREATE FOREIGN TABLE") for a further description of valid parameters.
 
 ## Examples
 
@@ -224,4 +224,4 @@ The forms `ADD`, `DROP`, and `SET DATA TYPE` conform with the SQL standard. The 
 
 ## See Also
 
-[CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE"), [DROP FOREIGN TABLE](sql-dropforeigntable.html "DROP FOREIGN TABLE")
+[CREATE FOREIGN TABLE](sql-createforeigntable "CREATE FOREIGN TABLE"), [DROP FOREIGN TABLE](sql-dropforeigntable "DROP FOREIGN TABLE")

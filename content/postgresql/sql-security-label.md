@@ -108,4 +108,4 @@ There is no `SECURITY LABEL` command in the SQL standard.
 
 ## See Also
 
-[sepgsql](sepgsql.html "F.39. sepgsql — SELinux-, label-based mandatory access control (MAC) security module"), `src/test/modules/dummy_seclabel`
+[sepgsql](sepgsql "F.39. sepgsql — SELinux-, label-based mandatory access control (MAC) security module"), `src/test/modules/dummy_seclabel`

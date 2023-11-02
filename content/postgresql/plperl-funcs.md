@@ -1,6 +1,6 @@
 ## 45.1. PL/Perl Functions and Arguments [#](#PLPERL-FUNCS)
 
-To create a function in the PL/Perl language, use the standard [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") syntax:
+To create a function in the PL/Perl language, use the standard [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION") syntax:
 
 ```
 
@@ -16,7 +16,7 @@ The body of the function is ordinary Perl code. In fact, the PL/Perl glue code w
 
 In a PL/Perl procedure, any return value from the Perl code is ignored.
 
-PL/Perl also supports anonymous code blocks called with the [DO](sql-do.html "DO") statement:
+PL/Perl also supports anonymous code blocks called with the [DO](sql-do "DO") statement:
 
 ```
 
@@ -31,7 +31,7 @@ An anonymous code block receives no arguments, and whatever value it might retur
 
 The use of named nested subroutines is dangerous in Perl, especially if they refer to lexical variables in the enclosing scope. Because a PL/Perl function is wrapped in a subroutine, any named subroutine you place inside one will be nested. In general, it is far safer to create anonymous subroutines which you call via a coderef. For more information, see the entries for `Variable "%s" will not stay shared` and `Variable "%s" is not available` in the perldiag man page, or search the Internet for “perl nested named subroutine”.
 
-The syntax of the `CREATE FUNCTION` command requires the function body to be written as a string constant. It is usually most convenient to use dollar quoting (see [Section 4.1.2.4](sql-syntax-lexical.html#SQL-SYNTAX-DOLLAR-QUOTING "4.1.2.4. Dollar-Quoted String Constants")) for the string constant. If you choose to use escape string syntax `E''`, you must double any single quote marks (`'`) and backslashes (`\`) used in the body of the function (see [Section 4.1.2.1](sql-syntax-lexical.html#SQL-SYNTAX-STRINGS "4.1.2.1. String Constants")).
+The syntax of the `CREATE FUNCTION` command requires the function body to be written as a string constant. It is usually most convenient to use dollar quoting (see [Section 4.1.2.4](sql-syntax-lexical#SQL-SYNTAX-DOLLAR-QUOTING "4.1.2.4. Dollar-Quoted String Constants")) for the string constant. If you choose to use escape string syntax `E''`, you must double any single quote marks (`'`) and backslashes (`\`) used in the body of the function (see [Section 4.1.2.1](sql-syntax-lexical#SQL-SYNTAX-STRINGS "4.1.2.1. String Constants")).
 
 Arguments and results are handled as in any other Perl subroutine: arguments are passed in `@_`, and a result value is returned with `return` or as the last expression evaluated in the function.
 
@@ -71,7 +71,7 @@ Anything in a function argument that is not a reference is a string, which is in
 
 Similarly, values passed back to PostgreSQL must be in the external text representation format. For example, the `encode_bytea` function can be used to escape binary data for a return value of type `bytea`.
 
-One case that is particularly important is boolean values. As just stated, the default behavior for `bool` values is that they are passed to Perl as text, thus either `'t'` or `'f'`. This is problematic, since Perl will not treat `'f'` as false! It is possible to improve matters by using a “transform” (see [CREATE TRANSFORM](sql-createtransform.html "CREATE TRANSFORM")). Suitable transforms are provided by the `bool_plperl` extension. To use it, install the extension:
+One case that is particularly important is boolean values. As just stated, the default behavior for `bool` values is that they are passed to Perl as text, thus either `'t'` or `'f'`. This is problematic, since Perl will not treat `'f'` as false! It is possible to improve matters by using a “transform” (see [CREATE TRANSFORM](sql-createtransform "CREATE TRANSFORM")). Suitable transforms are provided by the `bool_plperl` extension. To use it, install the extension:
 
 ```
 
@@ -90,7 +90,7 @@ AS $$
 $$ LANGUAGE plperl;
 ```
 
-When this transform is applied, `bool` arguments will be seen by Perl as being `1` or empty, thus properly true or false. If the function result is type `bool`, it will be true or false according to whether Perl would evaluate the returned value as true. Similar transformations are also performed for boolean query arguments and results of SPI queries performed inside the function ([Section 45.3.1](plperl-builtins.html#PLPERL-DATABASE "45.3.1. Database Access from PL/Perl")).
+When this transform is applied, `bool` arguments will be seen by Perl as being `1` or empty, thus properly true or false. If the function result is type `bool`, it will be true or false according to whether Perl would evaluate the returned value as true. Similar transformations are also performed for boolean query arguments and results of SPI queries performed inside the function ([Section 45.3.1](plperl-builtins#PLPERL-DATABASE "45.3.1. Database Access from PL/Perl")).
 
 Perl can return PostgreSQL arrays as references to Perl arrays. Here is an example:
 

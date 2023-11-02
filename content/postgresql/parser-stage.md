@@ -1,7 +1,7 @@
 ## 52.3. The Parser Stage [#](#PARSER-STAGE)
 
-  * *   [52.3.1. Parser](parser-stage.html#PARSER-STAGE-PARSER)
-  * [52.3.2. Transformation Process](parser-stage.html#PARSER-STAGE-TRANSFORMATION-PROCESS)
+  * *   [52.3.1. Parser](parser-stage#PARSER-STAGE-PARSER)
+  * [52.3.2. Transformation Process](parser-stage#PARSER-STAGE-TRANSFORMATION-PROCESS)
 
 The *parser stage* consists of two parts:
 

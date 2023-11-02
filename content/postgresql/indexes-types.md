@@ -1,13 +1,13 @@
 ## 11.2. Index Types [#](#INDEXES-TYPES)
 
-  * *   [11.2.1. B-Tree](indexes-types.html#INDEXES-TYPES-BTREE)
-  * [11.2.2. Hash](indexes-types.html#INDEXES-TYPES-HASH)
-  * [11.2.3. GiST](indexes-types.html#INDEXES-TYPE-GIST)
-  * [11.2.4. SP-GiST](indexes-types.html#INDEXES-TYPE-SPGIST)
-  * [11.2.5. GIN](indexes-types.html#INDEXES-TYPES-GIN)
-  * [11.2.6. BRIN](indexes-types.html#INDEXES-TYPES-BRIN)
+  * *   [11.2.1. B-Tree](indexes-types#INDEXES-TYPES-BTREE)
+  * [11.2.2. Hash](indexes-types#INDEXES-TYPES-HASH)
+  * [11.2.3. GiST](indexes-types#INDEXES-TYPE-GIST)
+  * [11.2.4. SP-GiST](indexes-types#INDEXES-TYPE-SPGIST)
+  * [11.2.5. GIN](indexes-types#INDEXES-TYPES-GIN)
+  * [11.2.6. BRIN](indexes-types#INDEXES-TYPES-BRIN)
 
-PostgreSQL provides several index types: B-tree, Hash, GiST, SP-GiST, GIN, BRIN, and the extension [bloom](bloom.html "F.7. bloom — bloom filter index access method"). Each index type uses a different algorithm that is best suited to different types of queries. By default, the [`CREATE INDEX`](sql-createindex.html "CREATE INDEX") command creates B-tree indexes, which fit the most common situations. The other index types are selected by writing the keyword `USING` followed by the index type name. For example, to create a Hash index:
+PostgreSQL provides several index types: B-tree, Hash, GiST, SP-GiST, GIN, BRIN, and the extension [bloom](bloom "F.7. bloom — bloom filter index access method"). Each index type uses a different algorithm that is best suited to different types of queries. By default, the [`CREATE INDEX`](sql-createindex "CREATE INDEX") command creates B-tree indexes, which fit the most common situations. The other index types are selected by writing the keyword `USING` followed by the index type name. For example, to create a Hash index:
 
 ```
 
@@ -25,7 +25,7 @@ B-trees can handle equality and range queries on data that can be sorted into so
 
 Constructs equivalent to combinations of these operators, such as `BETWEEN` and `IN`, can also be implemented with a B-tree index search. Also, an `IS NULL` or `IS NOT NULL` condition on an index column can be used with a B-tree index.
 
-The optimizer can also use a B-tree index for queries involving the pattern matching operators `LIKE` and `~` *if* the pattern is a constant and is anchored to the beginning of the string — for example, `col LIKE 'foo%'` or `col ~ '^foo'`, but not `col LIKE '%bar'`. However, if your database does not use the C locale you will need to create the index with a special operator class to support indexing of pattern-matching queries; see [Section 11.10](indexes-opclass.html "11.10. Operator Classes and Operator Families") below. It is also possible to use B-tree indexes for `ILIKE` and `~*`, but only if the pattern starts with non-alphabetic characters, i.e., characters that are not affected by upper/lower case conversion.
+The optimizer can also use a B-tree index for queries involving the pattern matching operators `LIKE` and `~` *if* the pattern is a constant and is anchored to the beginning of the string — for example, `col LIKE 'foo%'` or `col ~ '^foo'`, but not `col LIKE '%bar'`. However, if your database does not use the C locale you will need to create the index with a special operator class to support indexing of pattern-matching queries; see [Section 11.10](indexes-opclass "11.10. Operator Classes and Operator Families") below. It is also possible to use B-tree indexes for `ILIKE` and `~*`, but only if the pattern starts with non-alphabetic characters, i.e., characters that are not affected by upper/lower case conversion.
 
 B-tree indexes can also be used to retrieve data in sorted order. This is not always faster than a simple scan and sort, but it is often helpful.
 
@@ -47,7 +47,7 @@ GiST indexes are not a single kind of index, but rather an infrastructure within
 <<   &<   &>   >>   <<|   &<|   |&>   |>>   @>   <@   ~=   &&
 ```
 
-(See [Section 9.11](functions-geometry.html "9.11. Geometric Functions and Operators") for the meaning of these operators.) The GiST operator classes included in the standard distribution are documented in [Table 68.1](gist-builtin-opclasses.html#GIST-BUILTIN-OPCLASSES-TABLE "Table 68.1. Built-in GiST Operator Classes"). Many other GiST operator classes are available in the `contrib` collection or as separate projects. For more information see [Chapter 68](gist.html "Chapter 68. GiST Indexes").
+(See [Section 9.11](functions-geometry "9.11. Geometric Functions and Operators") for the meaning of these operators.) The GiST operator classes included in the standard distribution are documented in [Table 68.1](gist-builtin-opclasses#GIST-BUILTIN-OPCLASSES-TABLE "Table 68.1. Built-in GiST Operator Classes"). Many other GiST operator classes are available in the `contrib` collection or as separate projects. For more information see [Chapter 68](gist "Chapter 68. GiST Indexes").
 
 GiST indexes are also capable of optimizing “nearest-neighbor” searches, such as
 
@@ -56,7 +56,7 @@ GiST indexes are also capable of optimizing “nearest-neighbor” searches, suc
 SELECT * FROM places ORDER BY location <-> point '(101,456)' LIMIT 10;
 ```
 
-which finds the ten places closest to a given target point. The ability to do this is again dependent on the particular operator class being used. In [Table 68.1](gist-builtin-opclasses.html#GIST-BUILTIN-OPCLASSES-TABLE "Table 68.1. Built-in GiST Operator Classes"), operators that can be used in this way are listed in the column “Ordering Operators”.
+which finds the ten places closest to a given target point. The ability to do this is again dependent on the particular operator class being used. In [Table 68.1](gist-builtin-opclasses#GIST-BUILTIN-OPCLASSES-TABLE "Table 68.1. Built-in GiST Operator Classes"), operators that can be used in this way are listed in the column “Ordering Operators”.
 
 ### 11.2.4. SP-GiST [#](#INDEXES-TYPE-SPGIST)
 
@@ -67,9 +67,9 @@ SP-GiST indexes, like GiST indexes, offer an infrastructure that supports variou
 <<   >>   ~=   <@   <<|   |>>
 ```
 
-(See [Section 9.11](functions-geometry.html "9.11. Geometric Functions and Operators") for the meaning of these operators.) The SP-GiST operator classes included in the standard distribution are documented in [Table 69.1](spgist-builtin-opclasses.html#SPGIST-BUILTIN-OPCLASSES-TABLE "Table 69.1. Built-in SP-GiST Operator Classes"). For more information see [Chapter 69](spgist.html "Chapter 69. SP-GiST Indexes").
+(See [Section 9.11](functions-geometry "9.11. Geometric Functions and Operators") for the meaning of these operators.) The SP-GiST operator classes included in the standard distribution are documented in [Table 69.1](spgist-builtin-opclasses#SPGIST-BUILTIN-OPCLASSES-TABLE "Table 69.1. Built-in SP-GiST Operator Classes"). For more information see [Chapter 69](spgist "Chapter 69. SP-GiST Indexes").
 
-Like GiST, SP-GiST supports “nearest-neighbor” searches. For SP-GiST operator classes that support distance ordering, the corresponding operator is listed in the “Ordering Operators” column in [Table 69.1](spgist-builtin-opclasses.html#SPGIST-BUILTIN-OPCLASSES-TABLE "Table 69.1. Built-in SP-GiST Operator Classes").
+Like GiST, SP-GiST supports “nearest-neighbor” searches. For SP-GiST operator classes that support distance ordering, the corresponding operator is listed in the “Ordering Operators” column in [Table 69.1](spgist-builtin-opclasses#SPGIST-BUILTIN-OPCLASSES-TABLE "Table 69.1. Built-in SP-GiST Operator Classes").
 
 ### 11.2.5. GIN [#](#INDEXES-TYPES-GIN)
 
@@ -82,7 +82,7 @@ Like GiST and SP-GiST, GIN can support many different user-defined indexing stra
 <@   @>   =   &&
 ```
 
-(See [Section 9.19](functions-array.html "9.19. Array Functions and Operators") for the meaning of these operators.) The GIN operator classes included in the standard distribution are documented in [Table 70.1](gin-builtin-opclasses.html#GIN-BUILTIN-OPCLASSES-TABLE "Table 70.1. Built-in GIN Operator Classes"). Many other GIN operator classes are available in the `contrib` collection or as separate projects. For more information see [Chapter 70](gin.html "Chapter 70. GIN Indexes").
+(See [Section 9.19](functions-array "9.19. Array Functions and Operators") for the meaning of these operators.) The GIN operator classes included in the standard distribution are documented in [Table 70.1](gin-builtin-opclasses#GIN-BUILTIN-OPCLASSES-TABLE "Table 70.1. Built-in GIN Operator Classes"). Many other GIN operator classes are available in the `contrib` collection or as separate projects. For more information see [Chapter 70](gin "Chapter 70. GIN Indexes").
 
 ### 11.2.6. BRIN [#](#INDEXES-TYPES-BRIN)
 
@@ -93,4 +93,4 @@ BRIN indexes (a shorthand for Block Range INdexes) store summaries about the val
 <   <=   =   >=   >
 ```
 
-The BRIN operator classes included in the standard distribution are documented in [Table 71.1](brin-builtin-opclasses.html#BRIN-BUILTIN-OPCLASSES-TABLE "Table 71.1. Built-in BRIN Operator Classes"). For more information see [Chapter 71](brin.html "Chapter 71. BRIN Indexes").
+The BRIN operator classes included in the standard distribution are documented in [Table 71.1](brin-builtin-opclasses#BRIN-BUILTIN-OPCLASSES-TABLE "Table 71.1. Built-in BRIN Operator Classes"). For more information see [Chapter 71](brin "Chapter 71. BRIN Indexes").

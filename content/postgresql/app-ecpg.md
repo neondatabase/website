@@ -14,7 +14,7 @@ ecpg — embedded SQL C preprocessor
 
 If an input file name is just `-`, `ecpg` reads the program from standard input (and writes to standard output, unless that is overridden with `-o`).
 
-This reference page does not describe the embedded SQL language. See [Chapter 36](ecpg.html "Chapter 36. ECPG — Embedded SQL in C") for more information on that topic.
+This reference page does not describe the embedded SQL language. See [Chapter 36](ecpg "Chapter 36. ECPG — Embedded SQL in C") for more information on that topic.
 
 ## Options
 
@@ -86,7 +86,7 @@ When compiling the preprocessed C code files, the compiler needs to be able to f
 
 Programs using C code with embedded SQL have to be linked against the `libecpg` library, for example using the linker options `-L/usr/local/pgsql/lib -lecpg`.
 
-The value of either of these directories that is appropriate for the installation can be found out using [pg\_config](app-pgconfig.html "pg_config").
+The value of either of these directories that is appropriate for the installation can be found out using [pg\_config](app-pgconfig "pg_config").
 
 ## Examples
 

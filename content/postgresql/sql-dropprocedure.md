@@ -38,7 +38,7 @@ DROP PROCEDURE [ IF EXISTS ] name [ ( [ [ argmode ] [ argname ] argtype [, ...] 
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the procedure, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+    Automatically drop objects that depend on the procedure, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend "5.14. Dependency Tracking")).
 
 * `RESTRICT`
 
@@ -98,4 +98,4 @@ This command conforms to the SQL standard, with these PostgreSQL extensions:
 
 ## See Also
 
-[CREATE PROCEDURE](sql-createprocedure.html "CREATE PROCEDURE"), [ALTER PROCEDURE](sql-alterprocedure.html "ALTER PROCEDURE"), [DROP FUNCTION](sql-dropfunction.html "DROP FUNCTION"), [DROP ROUTINE](sql-droproutine.html "DROP ROUTINE")
+[CREATE PROCEDURE](sql-createprocedure "CREATE PROCEDURE"), [ALTER PROCEDURE](sql-alterprocedure "ALTER PROCEDURE"), [DROP FUNCTION](sql-dropfunction "DROP FUNCTION"), [DROP ROUTINE](sql-droproutine "DROP ROUTINE")

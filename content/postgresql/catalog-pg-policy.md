@@ -8,10 +8,10 @@ The catalog `pg_policy` stores row-level security policies for tables. A policy 
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `oid` `oid`Row identifier                                                                                                                                                                                                                                      |
 | `polname` `name`The name of the policy                                                                                                                                                                                                                         |
-| `polrelid` `oid` (references [`pg_class`](catalog-pg-class.html "53.11. pg_class").`oid`)The table to which the policy applies                                                                                                                                 |
-| `polcmd` `char`The command type to which the policy is applied: `r` for [SELECT](sql-select.html "SELECT"), `a` for [INSERT](sql-insert.html "INSERT"), `w` for [UPDATE](sql-update.html "UPDATE"), `d` for [DELETE](sql-delete.html "DELETE"), or `*` for all |
+| `polrelid` `oid` (references [`pg_class`](catalog-pg-class "53.11. pg_class").`oid`)The table to which the policy applies                                                                                                                                 |
+| `polcmd` `char`The command type to which the policy is applied: `r` for [SELECT](sql-select "SELECT"), `a` for [INSERT](sql-insert "INSERT"), `w` for [UPDATE](sql-update "UPDATE"), `d` for [DELETE](sql-delete "DELETE"), or `*` for all |
 | `polpermissive` `bool`Is the policy permissive or restrictive?                                                                                                                                                                                                 |
-| `polroles` `oid[]` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`oid`)The roles to which the policy is applied; zero means `PUBLIC` (and normally appears alone in the array)                                                           |
+| `polroles` `oid[]` (references [`pg_authid`](catalog-pg-authid "53.8. pg_authid").`oid`)The roles to which the policy is applied; zero means `PUBLIC` (and normally appears alone in the array)                                                           |
 | `polqual` `pg_node_tree`The expression tree to be added to the security barrier qualifications for queries that use the table                                                                                                                                  |
 | `polwithcheck` `pg_node_tree`The expression tree to be added to the WITH CHECK qualifications for queries that attempt to add rows to the table                                                                                                                |
 
@@ -19,4 +19,4 @@ The catalog `pg_policy` stores row-level security policies for tables. A policy 
 
 ### Note
 
-Policies stored in `pg_policy` are applied only when [`pg_class`](catalog-pg-class.html "53.11. pg_class").`relrowsecurity` is set for their table.
+Policies stored in `pg_policy` are applied only when [`pg_class`](catalog-pg-class "53.11. pg_class").`relrowsecurity` is set for their table.

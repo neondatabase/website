@@ -1,8 +1,8 @@
 ## 55.5. Logical Streaming Replication Protocol [#](#PROTOCOL-LOGICAL-REPLICATION)
 
-  * *   [55.5.1. Logical Streaming Replication Parameters](protocol-logical-replication.html#PROTOCOL-LOGICAL-REPLICATION-PARAMS)
-  * [55.5.2. Logical Replication Protocol Messages](protocol-logical-replication.html#PROTOCOL-LOGICAL-MESSAGES)
-  * [55.5.3. Logical Replication Protocol Message Flow](protocol-logical-replication.html#PROTOCOL-LOGICAL-MESSAGES-FLOW)
+  * *   [55.5.1. Logical Streaming Replication Parameters](protocol-logical-replication#PROTOCOL-LOGICAL-REPLICATION-PARAMS)
+  * [55.5.2. Logical Replication Protocol Messages](protocol-logical-replication#PROTOCOL-LOGICAL-MESSAGES)
+  * [55.5.3. Logical Replication Protocol Message Flow](protocol-logical-replication#PROTOCOL-LOGICAL-MESSAGES-FLOW)
 
 This section describes the logical replication protocol, which is the message flow started by the `START_REPLICATION` `SLOT` *`slot_name`* `LOGICAL` replication command.
 
@@ -28,7 +28,7 @@ The logical replication `START_REPLICATION` command accepts following parameters
 
 ### 55.5.2. Logical Replication Protocol Messages [#](#PROTOCOL-LOGICAL-MESSAGES)
 
-The individual protocol messages are discussed in the following subsections. Individual messages are described in [Section 55.9](protocol-logicalrep-message-formats.html "55.9. Logical Replication Message Formats").
+The individual protocol messages are discussed in the following subsections. Individual messages are described in [Section 55.9](protocol-logicalrep-message-formats "55.9. Logical Replication Message Formats").
 
 All top-level protocol messages begin with a message type byte. While represented in code as a character, this is a signed byte with no associated encoding.
 

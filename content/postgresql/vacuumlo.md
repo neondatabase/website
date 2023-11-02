@@ -10,7 +10,7 @@ vacuumlo — remove orphaned large objects from a PostgreSQL database
 
 vacuumlo is a simple utility program that will remove any “orphaned” large objects from a PostgreSQL database. An orphaned large object (LO) is considered to be any LO whose OID does not appear in any `oid` or `lo` data column of the database.
 
-If you use this, you may also be interested in the `lo_manage` trigger in the [lo](lo.html "F.22. lo — manage large objects") module. `lo_manage` is useful to try to avoid creating orphaned LOs in the first place.
+If you use this, you may also be interested in the `lo_manage` trigger in the [lo](lo "F.22. lo — manage large objects") module. `lo_manage` is useful to try to avoid creating orphaned LOs in the first place.
 
 All databases named on the command line are processed.
 
@@ -20,7 +20,7 @@ vacuumlo accepts the following command-line arguments:
 
 * `-l limit``--limit=limit`
 
-    Remove no more than *`limit`* large objects per transaction (default 1000). Since the server acquires a lock per LO removed, removing too many LOs in one transaction risks exceeding [max\_locks\_per\_transaction](runtime-config-locks.html#GUC-MAX-LOCKS-PER-TRANSACTION). Set the limit to zero if you want all removals done in a single transaction.
+    Remove no more than *`limit`* large objects per transaction (default 1000). Since the server acquires a lock per LO removed, removing too many LOs in one transaction risks exceeding [max\_locks\_per\_transaction](runtime-config-locks#GUC-MAX-LOCKS-PER-TRANSACTION). Set the limit to zero if you want all removals done in a single transaction.
 
 * `-n``--dry-run`
 
@@ -68,7 +68,7 @@ vacuumlo also accepts the following command-line arguments for connection parame
 
     Default connection parameters.
 
-This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars "34.15. Environment Variables")).
 
 The environment variable `PG_COLOR` specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 

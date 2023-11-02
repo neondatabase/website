@@ -13,7 +13,7 @@ EXPLAIN SELECT * FROM tenk1;
  Seq Scan on tenk1  (cost=0.00..458.00 rows=10000 width=244)
 ```
 
-How the planner determines the cardinality of `tenk1` is covered in [Section 14.2](planner-stats.html "14.2. Statistics Used by the Planner"), but is repeated here for completeness. The number of pages and rows is looked up in `pg_class`:
+How the planner determines the cardinality of `tenk1` is covered in [Section 14.2](planner-stats "14.2. Statistics Used by the Planner"), but is repeated here for completeness. The number of pages and rows is looked up in `pg_class`:
 
 ```
 

@@ -32,4 +32,4 @@ EXEC SQL DEALLOCATE DESCRIPTOR mydesc;
 
 ## See Also
 
-[ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor.html "ALLOCATE DESCRIPTOR"), [GET DESCRIPTOR](ecpg-sql-get-descriptor.html "GET DESCRIPTOR"), [SET DESCRIPTOR](ecpg-sql-set-descriptor.html "SET DESCRIPTOR")
+[ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor "ALLOCATE DESCRIPTOR"), [GET DESCRIPTOR](ecpg-sql-get-descriptor "GET DESCRIPTOR"), [SET DESCRIPTOR](ecpg-sql-set-descriptor "SET DESCRIPTOR")

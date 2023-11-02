@@ -2,13 +2,13 @@
 
 The `pg_ts_config_map` catalog contains entries showing which text search dictionaries should be consulted, and in what order, for each output token type of each text search configuration's parser.
 
-PostgreSQL's text search features are described at length in [Chapter 12](textsearch.html "Chapter 12. Full Text Search").
+PostgreSQL's text search features are described at length in [Chapter 12](textsearch "Chapter 12. Full Text Search").
 
 **Table 53.60. `pg_ts_config_map` Columns**
 
 | Column TypeDescription                                                                                                                                                                                          |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `mapcfg` `oid` (references [`pg_ts_config`](catalog-pg-ts-config.html "53.59. pg_ts_config").`oid`)The OID of the [`pg_ts_config`](catalog-pg-ts-config.html "53.59. pg_ts_config") entry owning this map entry |
+| `mapcfg` `oid` (references [`pg_ts_config`](catalog-pg-ts-config "53.59. pg_ts_config").`oid`)The OID of the [`pg_ts_config`](catalog-pg-ts-config "53.59. pg_ts_config") entry owning this map entry |
 | `maptokentype` `int4`A token type emitted by the configuration's parser                                                                                                                                         |
 | `mapseqno` `int4`Order in which to consult this entry (lower `mapseqno`s first)                                                                                                                                 |
-| `mapdict` `oid` (references [`pg_ts_dict`](catalog-pg-ts-dict.html "53.61. pg_ts_dict").`oid`)The OID of the text search dictionary to consult                                                                  |
+| `mapdict` `oid` (references [`pg_ts_dict`](catalog-pg-ts-dict "53.61. pg_ts_dict").`oid`)The OID of the text search dictionary to consult                                                                  |

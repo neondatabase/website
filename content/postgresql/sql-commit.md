@@ -21,11 +21,11 @@ COMMIT [ WORK | TRANSACTION ] [ AND [ NO ] CHAIN ]
 
 * `AND CHAIN` [#](#SQL-COMMIT-CHAIN)
 
-    If `AND CHAIN` is specified, a new transaction is immediately started with the same transaction characteristics (see [SET TRANSACTION](sql-set-transaction.html "SET TRANSACTION")) as the just finished one. Otherwise, no new transaction is started.
+    If `AND CHAIN` is specified, a new transaction is immediately started with the same transaction characteristics (see [SET TRANSACTION](sql-set-transaction "SET TRANSACTION")) as the just finished one. Otherwise, no new transaction is started.
 
 ## Notes
 
-Use [ROLLBACK](sql-rollback.html "ROLLBACK") to abort a transaction.
+Use [ROLLBACK](sql-rollback "ROLLBACK") to abort a transaction.
 
 Issuing `COMMIT` when not inside a transaction does no harm, but it will provoke a warning message. `COMMIT AND CHAIN` when not inside a transaction is an error.
 
@@ -44,4 +44,4 @@ The command `COMMIT` conforms to the SQL standard. The form `COMMIT TRANSACTION`
 
 ## See Also
 
-[BEGIN](sql-begin.html "BEGIN"), [ROLLBACK](sql-rollback.html "ROLLBACK")
+[BEGIN](sql-begin "BEGIN"), [ROLLBACK](sql-rollback "ROLLBACK")

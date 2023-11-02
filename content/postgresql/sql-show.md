@@ -12,13 +12,13 @@ SHOW ALL
 
 ## Description
 
-`SHOW` will display the current setting of run-time parameters. These variables can be set using the `SET` statement, by editing the `postgresql.conf` configuration file, through the `PGOPTIONS` environmental variable (when using libpq or a libpq-based application), or through command-line flags when starting the `postgres` server. See [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for details.
+`SHOW` will display the current setting of run-time parameters. These variables can be set using the `SET` statement, by editing the `postgresql.conf` configuration file, through the `PGOPTIONS` environmental variable (when using libpq or a libpq-based application), or through command-line flags when starting the `postgres` server. See [Chapter 20](runtime-config "Chapter 20. Server Configuration") for details.
 
 ## Parameters
 
 * *`name`*
 
-    The name of a run-time parameter. Available parameters are documented in [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") and on the [SET](sql-set.html "SET") reference page. In addition, there are a few parameters that can be shown but not set:
+    The name of a run-time parameter. Available parameters are documented in [Chapter 20](runtime-config "Chapter 20. Server Configuration") and on the [SET](sql-set "SET") reference page. In addition, there are a few parameters that can be shown but not set:
 
   * `SERVER_VERSION`
 
@@ -46,7 +46,7 @@ SHOW ALL
 
 ## Notes
 
-The function `current_setting` produces equivalent output; see [Section 9.27.1](functions-admin.html#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions"). Also, the [`pg_settings`](view-pg-settings.html "54.24. pg_settings") system view produces the same information.
+The function `current_setting` produces equivalent output; see [Section 9.27.1](functions-admin#FUNCTIONS-ADMIN-SET "9.27.1. Configuration Settings Functions"). Also, the [`pg_settings`](view-pg-settings "54.24. pg_settings") system view produces the same information.
 
 ## Examples
 
@@ -94,4 +94,4 @@ The `SHOW` command is a PostgreSQL extension.
 
 ## See Also
 
-[SET](sql-set.html "SET"), [RESET](sql-reset.html "RESET")
+[SET](sql-set "SET"), [RESET](sql-reset "RESET")

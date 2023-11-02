@@ -8,7 +8,7 @@ pg\_archivecleanup — clean up PostgreSQL WAL archive files
 
 ## Description
 
-pg\_archivecleanup is designed to be used as an `archive_cleanup_command` to clean up WAL file archives when running as a standby server (see [Section 27.2](warm-standby.html "27.2. Log-Shipping Standby Servers")). pg\_archivecleanup can also be used as a standalone program to clean WAL file archives.
+pg\_archivecleanup is designed to be used as an `archive_cleanup_command` to clean up WAL file archives when running as a standby server (see [Section 27.2](warm-standby "27.2. Log-Shipping Standby Servers")). pg\_archivecleanup can also be used as a standalone program to clean WAL file archives.
 
 To configure a standby server to use pg\_archivecleanup, put this into its `postgresql.conf` configuration file:
 
@@ -19,7 +19,7 @@ archive_cleanup_command = 'pg_archivecleanup archivelocation %r'
 
 where *`archivelocation`* is the directory from which WAL segment files should be removed.
 
-When used within [archive\_cleanup\_command](runtime-config-wal.html#GUC-ARCHIVE-CLEANUP-COMMAND), all WAL files logically preceding the value of the `%r` argument will be removed from *`archivelocation`*. This minimizes the number of files that need to be retained, while preserving crash-restart capability. Use of this parameter is appropriate if the *`archivelocation`* is a transient staging area for this particular standby server, but *not* when the *`archivelocation`* is intended as a long-term WAL archive area, or when multiple standby servers are recovering from the same archive location.
+When used within [archive\_cleanup\_command](runtime-config-wal#GUC-ARCHIVE-CLEANUP-COMMAND), all WAL files logically preceding the value of the `%r` argument will be removed from *`archivelocation`*. This minimizes the number of files that need to be retained, while preserving crash-restart capability. Use of this parameter is appropriate if the *`archivelocation`* is a transient staging area for this particular standby server, but *not* when the *`archivelocation`* is intended as a long-term WAL archive area, or when multiple standby servers are recovering from the same archive location.
 
 When used as a standalone program all WAL files logically preceding the *`oldestkeptwalfile`* will be removed from *`archivelocation`*. In this mode, if you specify a `.partial` or `.backup` file name, then only the file prefix will be used as the *`oldestkeptwalfile`*. This treatment of `.backup` file name allows you to remove all WAL files archived prior to a specific base backup without error. For example, the following example will remove all files older than WAL file name `000000010000003700000010`:
 
@@ -40,7 +40,7 @@ pg\_archivecleanup accepts the following command-line arguments:
 
 * `-b``--clean-backup-history`
 
-    Remove backup history files as well. See [Section 26.3.2](continuous-archiving.html#BACKUP-BASE-BACKUP "26.3.2. Making a Base Backup") for details about backup history files.
+    Remove backup history files as well. See [Section 26.3.2](continuous-archiving#BACKUP-BASE-BACKUP "26.3.2. Making a Base Backup") for details about backup history files.
 
 * `-d``--debug`
 

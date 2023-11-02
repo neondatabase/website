@@ -45,4 +45,4 @@ EXEC SQL OPEN :curname1;
 
 ## See Also
 
-[DECLARE](ecpg-sql-declare.html "DECLARE"), [CLOSE](sql-close.html "CLOSE")
+[DECLARE](ecpg-sql-declare "DECLARE"), [CLOSE](sql-close "CLOSE")

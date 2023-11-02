@@ -1,7 +1,7 @@
 ## 46.6. Database Access [#](#PLPYTHON-DATABASE)
 
-  * *   [46.6.1. Database Access Functions](plpython-database.html#PLPYTHON-DATABASE-ACCESS-FUNCS)
-  * [46.6.2. Trapping Errors](plpython-database.html#PLPYTHON-TRAPPING)
+  * *   [46.6.1. Database Access Functions](plpython-database#PLPYTHON-DATABASE-ACCESS-FUNCS)
+  * [46.6.2. Trapping Errors](plpython-database#PLPYTHON-TRAPPING)
 
 The PL/Python language module automatically imports a Python module called `plpy`. The functions and constants in this module are available to you in the Python code as `plpy.foo`.
 
@@ -82,9 +82,9 @@ The `plpy` module provides several functions to execute database commands:
     rv = plan.execute(["name"], 5)
     ```
 
-    Query parameters and result row fields are converted between PostgreSQL and Python data types as described in [Section 46.2](plpython-data.html "46.2. Data Values").
+    Query parameters and result row fields are converted between PostgreSQL and Python data types as described in [Section 46.2](plpython-data "46.2. Data Values").
 
-    When you prepare a plan using the PL/Python module it is automatically saved. Read the SPI documentation ([Chapter 47](spi.html "Chapter 47. Server Programming Interface")) for a description of what this means. In order to make effective use of this across function calls one needs to use one of the persistent storage dictionaries `SD` or `GD` (see [Section 46.3](plpython-sharing.html "46.3. Sharing Data")). For example:
+    When you prepare a plan using the PL/Python module it is automatically saved. Read the SPI documentation ([Chapter 47](spi "Chapter 47. Server Programming Interface")) for a description of what this means. In order to make effective use of this across function calls one needs to use one of the persistent storage dictionaries `SD` or `GD` (see [Section 46.3](plpython-sharing "46.3. Sharing Data")). For example:
 
     ```
 
@@ -160,7 +160,7 @@ CREATE FUNCTION try_adding_joe() RETURNS text AS $$
 $$ LANGUAGE plpython3u;
 ```
 
-The actual class of the exception being raised corresponds to the specific condition that caused the error. Refer to [Table A.1](errcodes-appendix.html#ERRCODES-TABLE "Table A.1. PostgreSQL Error Codes") for a list of possible conditions. The module `plpy.spiexceptions` defines an exception class for each PostgreSQL condition, deriving their names from the condition name. For instance, `division_by_zero` becomes `DivisionByZero`, `unique_violation` becomes `UniqueViolation`, `fdw_error` becomes `FdwError`, and so on. Each of these exception classes inherits from `SPIError`. This separation makes it easier to handle specific errors, for instance:
+The actual class of the exception being raised corresponds to the specific condition that caused the error. Refer to [Table A.1](errcodes-appendix#ERRCODES-TABLE "Table A.1. PostgreSQL Error Codes") for a list of possible conditions. The module `plpy.spiexceptions` defines an exception class for each PostgreSQL condition, deriving their names from the condition name. For instance, `division_by_zero` becomes `DivisionByZero`, `unique_violation` becomes `UniqueViolation`, `fdw_error` becomes `FdwError`, and so on. Each of these exception classes inherits from `SPIError`. This separation makes it easier to handle specific errors, for instance:
 
 ```
 

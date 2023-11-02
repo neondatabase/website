@@ -41,6 +41,6 @@ ECPG = ecpg
         $(ECPG) $<
 ```
 
-The complete syntax of the `ecpg` command is detailed in [ecpg](app-ecpg.html "ecpg").
+The complete syntax of the `ecpg` command is detailed in [ecpg](app-ecpg "ecpg").
 
 The ecpg library is thread-safe by default. However, you might need to use some threading command-line options to compile your client code.

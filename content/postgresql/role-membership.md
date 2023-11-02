@@ -11,7 +11,7 @@ CREATE ROLE name;
 
 Typically a role being used as a group would not have the `LOGIN` attribute, though you can set it if you wish.
 
-Once the group role exists, you can add and remove members using the [`GRANT`](sql-grant.html "GRANT") and [`REVOKE`](sql-revoke.html "REVOKE") commands:
+Once the group role exists, you can add and remove members using the [`GRANT`](sql-grant "GRANT") and [`REVOKE`](sql-revoke "REVOKE") commands:
 
 ```
 
@@ -21,7 +21,7 @@ REVOKE group_role FROM role1, ... ;
 
 You can grant membership to other group roles, too (since there isn't really any distinction between group roles and non-group roles). The database will not let you set up circular membership loops. Also, it is not permitted to grant membership in a role to `PUBLIC`.
 
-The members of a group role can use the privileges of the role in two ways. First, member roles that have been granted membership with the `SET` option can do [`SET ROLE`](sql-set-role.html "SET ROLE") to temporarily “become” the group role. In this state, the database session has access to the privileges of the group role rather than the original login role, and any database objects created are considered owned by the group role not the login role. Second, member roles that have been granted membership with the `INHERIT` option automatically have use of the privileges of those roles, including any privileges inherited by those roles. As an example, suppose we have done:
+The members of a group role can use the privileges of the role in two ways. First, member roles that have been granted membership with the `SET` option can do [`SET ROLE`](sql-set-role "SET ROLE") to temporarily “become” the group role. In this state, the database session has access to the privileges of the group role rather than the original login role, and any database objects created are considered owned by the group role not the login role. Second, member roles that have been granted membership with the `INHERIT` option automatically have use of the privileges of those roles, including any privileges inherited by those roles. As an example, suppose we have done:
 
 ```
 
@@ -67,7 +67,7 @@ In the SQL standard, there is a clear distinction between users and roles, and u
 
 The role attributes `LOGIN`, `SUPERUSER`, `CREATEDB`, and `CREATEROLE` can be thought of as special privileges, but they are never inherited as ordinary privileges on database objects are. You must actually `SET ROLE` to a specific role having one of these attributes in order to make use of the attribute. Continuing the above example, we might choose to grant `CREATEDB` and `CREATEROLE` to the `admin` role. Then a session connecting as role `joe` would not have these privileges immediately, only after doing `SET ROLE admin`.
 
-To destroy a group role, use [`DROP ROLE`](sql-droprole.html "DROP ROLE"):
+To destroy a group role, use [`DROP ROLE`](sql-droprole "DROP ROLE"):
 
 ```
 
