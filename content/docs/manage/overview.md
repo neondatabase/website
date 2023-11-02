@@ -36,7 +36,7 @@ Neon account
 
 ## Neon account
 
-This is the account you used to sign up with Neon. Neon currently supports signing up with GitHub, Google, or partner accounts.
+This is the account you used to sign up with Neon. Neon supports signing up with an email, GitHub, Google, or partner account.
 
 ## API keys
 

@@ -231,7 +231,7 @@ A usage-based paid plan offered by Neon. See [Neon plans](/docs/introduction/pla
 
 ### Neon user
 
-The user account that registers and authenticates with Neon using a GitHub or Google account. After authenticating, a Neon user account can create and manage projects, branches, users, databases, and other project resources.
+The user account that registers and authenticates with Neon using an email, GitHub, Google, or partner account. After authenticating, a Neon user account can create and manage projects, branches, users, databases, and other project resources.
 
 ### NeonVM
 
