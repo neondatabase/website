@@ -2,9 +2,9 @@
 
 import { DocSearchButton, DocSearchModal, useDocSearchKeyboardEvents } from '@docsearch/react';
 import clsx from 'clsx';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import Link from 'components/shared/link';
@@ -37,7 +37,25 @@ Hit.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const Search = ({ className = null, indexName, isBlog = false }) => {
+const Search = ({ className = null, isBlog = false }) => {
+  const pathname = usePathname();
+
+  const indexName = useMemo(() => {
+    if (pathname.includes('/docs/postgres/')) {
+      return process.env.NEXT_PUBLIC_ALGOLIA_POSTGRES_INDEX_NAME;
+    }
+
+    if (pathname.includes('/docs/')) {
+      return process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME;
+    }
+
+    if (pathname.includes('/blog')) {
+      return process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME;
+    }
+
+    return null;
+  }, [pathname]);
+
   const router = useRouter();
   const searchButtonRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -151,7 +169,6 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
 
 Search.propTypes = {
   className: PropTypes.string,
-  indexName: PropTypes.string.isRequired,
   isBlog: PropTypes.bool,
 };
 

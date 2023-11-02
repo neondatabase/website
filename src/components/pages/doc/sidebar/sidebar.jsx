@@ -3,10 +3,11 @@ import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
+import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
 
 import { ChatWidgetTrigger } from '../chat-widget';
-// import DocNavLink from '../doc-nav-link';
+import DocNavLink from '../doc-nav-link';
 
 import Item from './item';
 
@@ -20,13 +21,13 @@ const Sidebar = ({ className = null, sidebar, basePath }) => (
     )}
   >
     <div className="sticky top-10 z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-10 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-gray-new-10 dark:after:to-gray-new-10">
-      {/* <div className="">
-        <DocNavLink className="" to="/docs">
+      <div className="">
+        <DocNavLink className="" to={LINKS.docs}>
           Neon
         </DocNavLink>
-        <DocNavLink to="/docs/postgres/preface">Postgres</DocNavLink>
-      </div> */}
-      <Search className="z-30" indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME} />
+        <DocNavLink to={LINKS.postgres}>Postgres</DocNavLink>
+      </div>
+      <Search className="z-30" />
       <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-8">
         <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
         <ul>
