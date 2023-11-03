@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2023-11-02T12:40:35.091Z'
 ---
 
-[Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from Quarkus using JDBC. Unlike traditional Java stacks designed for monolithic applications, Quarkus addresses the challenges of long startup times and high memory usage. It's tailored for both OpenJDK HotSpot and GraalVM and is built upon established Java libraries and standards. Its creation was driven by the need for a Java solution that is more compatible with modern, cloud-native architectures.
+[Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using the PostgreSQL JDBC driver.
 
 To connect to Neon from a Quarkus application using the Postgres JDBC Driver:
 
