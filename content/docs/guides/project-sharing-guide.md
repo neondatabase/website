@@ -12,7 +12,7 @@ The [Neon Pro Plan](/docs/introduction/pro-plan) lets you share your Neon projec
 You can share your Neon project with anyone. The only requirement is that the user has a Neon account. The account can be a Neon Free Tier account or Neon Pro Plan account.
 
 1. If the user does not have a Neon account, ask them to sign up. You can provide your users with the following instructions: [Sign up](/docs/get-started-with-neon/signing-up).
-2. Request the email address the user signed up with. If the user signed up with a Google or GitHub account account, ask for the email address associated with that account.
+2. Request the email address the user signed up with. If the user signed up with a Google or GitHub account, ask for the email address associated with that account.
 
 ## Share your project
 
