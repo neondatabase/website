@@ -13,7 +13,7 @@ import Item from './item';
 
 const Search = dynamic(() => import('components/shared/search/search'));
 
-const Sidebar = ({ className = null, sidebar, basePath }) => (
+const Sidebar = ({ className = null, sidebar, basePath, isPostgres = false }) => (
   <aside
     className={clsx(
       'relative col-start-1 col-end-4 max-w-[254px] before:absolute before:-bottom-20 before:-right-5 before:-top-[110px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-gray-new-10 lg:hidden',
@@ -21,30 +21,35 @@ const Sidebar = ({ className = null, sidebar, basePath }) => (
     )}
   >
     <div className="sticky top-10 z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-10 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-gray-new-10 dark:after:to-gray-new-10">
-      <div className="">
+      <div className="flex gap-x-8 border-b dark:border-gray-new-20 border-gray-new-90">
         <DocNavLink className="" to={LINKS.docs}>
-          Neon
+          Neon Docs
         </DocNavLink>
-        <DocNavLink to={LINKS.postgres}>Postgres</DocNavLink>
+        <DocNavLink to={LINKS.postgres}>Postgres Docs</DocNavLink>
       </div>
-      <Search className="z-30" />
+      <Search className="z-30 mt-5" />
       <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-8">
-        <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
-        <ul>
-          {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
-            <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
-              <Link className="group flex items-center space-x-3" to={slug}>
-                <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
-                  <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
-                </span>
-                <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
-                  {title}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <ul className="mt-9">
+        {!isPostgres && (
+          <>
+            <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
+            <ul className="mb-9">
+              {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
+                <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
+                  <Link className="group flex items-center space-x-3" to={slug}>
+                    <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
+                      <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
+                    </span>
+                    <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
+                      {title}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        <ul className="">
           {sidebar.map((item, index) => (
             <Item {...item} key={index} basePath={basePath} />
           ))}
@@ -74,6 +79,7 @@ Sidebar.propTypes = {
   className: PropTypes.string,
   sidebar: sidebarPropTypes,
   basePath: PropTypes.string.isRequired,
+  isPostgres: PropTypes.bool,
 };
 
 export default Sidebar;

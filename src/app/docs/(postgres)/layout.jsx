@@ -33,7 +33,7 @@ const PostgresDocsLayout = async ({ children }) => {
             className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-[110px] xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
             size="medium"
           >
-            <Sidebar sidebar={sidebar} basePath={POSTGRES_DOCS_BASE_PATH} />
+            <Sidebar sidebar={sidebar} basePath={POSTGRES_DOCS_BASE_PATH} isPostgres />
             {children}
             <ChatWidget />
           </Container>
