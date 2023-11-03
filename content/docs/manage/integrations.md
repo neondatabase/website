@@ -9,7 +9,7 @@ The **Integrations** page in the Neon Console provides an interface for managing
 
 When visiting the **Integrations** page in your console, you'll notice different categories:
 
-- **Available**: These are integrations that are ready for you to add and use immediately.
+- **Available**: These are integrations available for you to add and use immediately.
 - **Coming soon**: These are the integrations that will be available in the near future.
 - **Request an integration**: An option for you to request new integrations.
 
