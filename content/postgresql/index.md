@@ -1,4 +1,4 @@
-# PostgreSQL 16.0 Documentation
+# PostgreSQL 17devel Documentation
 
 ## The PostgreSQL Global Development Group
 
