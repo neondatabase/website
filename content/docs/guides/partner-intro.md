@@ -3,7 +3,7 @@ title: Partner guide
 subtitle: Learn how you can partner with Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-11-01T19:04:17.188Z'
+updatedOn: '2023-11-03T14:56:23.454Z'
 ---
 
 Find relevant documentation explaining how partners can integrate with Neon, how to set usage quotas, and links to where you can apply to become a Neon partner.
