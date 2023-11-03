@@ -154,7 +154,7 @@ subtitle: Set up a Neon project and connect from a Next.js application
 enableTableOfContents: true
 redirectFrom:
   - /docs/content/<old_directory_name>
-`updatedOn: '2023-10-07T12:25:27.662Z'`
+updatedOn: '2023-10-07T12:25:27.662Z'
 ---
 ```
 
