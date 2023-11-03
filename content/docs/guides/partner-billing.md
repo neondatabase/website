@@ -9,7 +9,7 @@ updatedOn: '2023-11-03T13:00:07.312Z'
 When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute size a given project can consume. For example, you may want to cap how much usage your free tier users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#what-happens-when-the-quota-is-met). 
 
 ## Metrics and quotas
-By default, Neon tracks a variety of consumption metrics at the project level. If you want to set quotas (max limits) for these metrics, you need to explictly [configure](#configuring-quotas) them. 
+By default, Neon tracks a variety of consumption metrics at the project level. If you want to set quotas (max limits) for these metrics, you need to explicitly [configure](#configuring-quotas) them. 
 
 ### Available metrics
 
@@ -43,7 +43,7 @@ There is one additional `quota` parameter, `logical_size_bytes`, which applies t
 
 ### Sample quotas
 
-Let's say you want to set limits for an appliction with two tiers, Trial and Pro, you might set limits like the following:
+Let's say you want to set limits for an application with two tiers, Trial and Pro, you might set limits like the following:
 
 | Parameter (project)                 | Trial                     | Pro                      |
 |------------------------|---------------------------|--------------------------|
@@ -59,13 +59,13 @@ Let's say you want to set limits for an appliction with two tiers, Trial and Pro
 
 ### Guidelines
 
-Generally, the most effective quotas for controlling spend per project are those controlling maximum compute (`active_time_seconds` and `compute_time_seconds`) and maximum written storage (`written_data_bytes`). In practice, it is possible that `data_transfer_bytes` could introduce unintended logical constraints against your usage. For example, let's say you want to run a cleanup operation to reduce your storage. If part of this cleanup operation involves moving data across the network (for instance, to create an offiste backup before deletion), the `data_transfer_bytes` limit could prevent you from completing the operation &#8212; an undesirable situation where two measure meant to control cost interfere with one another.
+Generally, the most effective quotas for controlling spend per project are those controlling maximum compute (`active_time_seconds` and `compute_time_seconds`) and maximum written storage (`written_data_bytes`). In practice, it is possible that `data_transfer_bytes` could introduce unintended logical constraints against your usage. For example, let's say you want to run a cleanup operation to reduce your storage. If part of this cleanup operation involves moving data across the network (for instance, to create an offsite backup before deletion), the `data_transfer_bytes` limit could prevent you from completing the operation &#8212; an undesirable situation where two measures meant to control cost interfere with one another.
 
 ## Suspending active computes
 
 _**What happens when the quota is met?**_
 
-When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspend is persistent. It works differently than the inactivity-based [autosuspend](/docs/guides/auto-suspend-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming proxy connection. Without intervention, the suspension remains in place until the next billing period starts (`quota_reset_at`).
+When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [autosuspend](/docs/guides/auto-suspend-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming proxy connection. Without intervention, the suspension remains in place until the next billing period starts (`quota_reset_at`).
 
 See [Querying metrics and quotas](#querying-metrics-and-quotas) to find your reset date, billing period, and other values related to the project's consumption.
 
@@ -138,7 +138,7 @@ curl --request PATCH \
 
 ## Querying metrics and quotas
 
-You can get metric and quota details for a single project or a list of metrics for all projects at once:
+You can get metrics and quota details for a single project or a list of metrics for all projects at once:
 * [Per project](#retrieving-details-about-a-project)
 * [All projects](#retrieving-metrics-for-all-projects)
 
@@ -224,14 +224,14 @@ Looking at this response, here are some conclusions we can draw:
 
 * **This project is _1 day away_ from a quota refresh.**
 
-  If today's date is _October 31th, 2023_, and the `quota_reset_at` parameter is _2023-11-01T00:00:00Z_ (November 1st, 2023), then the project has _1 day_ left before all quota parameters (except for `logical_byte_size`) are refreshed.
+  If today's date is _October 31st, 2023_, and the `quota_reset_at` parameter is _2023-11-01T00:00:00Z_ (November 1st, 2023), then the project has _1 day_ left before all quota parameters (except for `logical_byte_size`) are refreshed.
 
 ### Retrieving metrics for all projects
 
-Instead of retrieving metrics for an individual project, you can instead get a full list of key consumption metrics for all the projects in your Neon integration in a single API request.
+Instead of retrieving metrics for an individual project, you can get a full list of key consumption metrics for all the projects in your Neon integration in a single API request.
 
 <Admonition type="Warning" title="Preview API">
-This funtionality is part of the preview API and is subject to change in the future.
+This functionality is part of the preview API and is subject to change in the future.
 </Admonition>
 
 Here is the URL in the Neon API where you can get details for all projects in your account:
@@ -248,7 +248,7 @@ Here is a sample URL with both query parameters included, asking for the next 10
 https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100
 ```
 
-To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page n the Microsoft docs gives a helpful overview.
+To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
 
 Here is an example Neon API `GET` request, with a limit of 2 projects in the response:
 
@@ -343,4 +343,4 @@ Generally, projects remain suspended until the next billing period. It is good p
 Alternatively, you can actively reset a suspended compute by changing the impacted quota to `0`: this effectively removes the limit entirely. You will need to reset this quota at some point if you want to maintain limits.
 
 ### Using quotas to actively suspend a user
-If you want to suspend a user for any reason &#8212; for example, suspicious activity or payment issues &#8212; you can use these quotas to actively suspend a given user. For example, setting `active_time_limit` to a very low threshold (e.g., `1`) will force a suspend if the user has 1 second of active compute for that month. To remove this suspend, you can set the threshold temporarily to `0` (infinite) or some value larger than their currently consumed usage.
+If you want to suspend a user for any reason &#8212; for example, suspicious activity or payment issues &#8212; you can use these quotas to actively suspend a given user. For example, setting `active_time_limit` to a very low threshold (e.g., `1`) will force a suspension if the user has 1 second of active compute for that month. To remove this suspension, you can set the threshold temporarily to `0` (infinite) or some value larger than their currently consumed usage.
