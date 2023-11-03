@@ -112,7 +112,7 @@ const getTableOfContents = (content) => {
     // replace mdx inline code with html inline code
     const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-    if (title && depth && depth <= 3) {
+    if (title && depth && depth <= 2) {
       toc.push({
         title: titleWithInlineCode,
         id: slugify(title, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
