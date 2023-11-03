@@ -26,10 +26,11 @@ const AnchorHeading =
   (Tag) =>
   // eslint-disable-next-line react/prop-types
   ({ children, className = null }) => {
-    const id = slugify(extractText(children), { lower: true, remove: /[*+~.()'"!?:@]/g }).replace(
-      /_/g,
-      ''
-    );
+    const id = slugify(extractText(children), {
+      lower: true,
+      strict: true,
+      remove: /[*+~.()'"!:@]/g,
+    }).replace(/_/g, '');
 
     return (
       <Tag id={id} className={clsx('not-prose group relative w-fit lg:scroll-mt-5', className)}>
