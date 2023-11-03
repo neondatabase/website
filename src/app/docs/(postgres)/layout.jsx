@@ -27,6 +27,7 @@ const PostgresDocsLayout = async ({ children }) => {
             className="hidden lg:block"
             sidebar={sidebar}
             basePath={POSTGRES_DOCS_BASE_PATH}
+            isPostgres
           />
 
           <Container

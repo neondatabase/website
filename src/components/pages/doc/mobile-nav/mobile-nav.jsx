@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import Item from 'components/pages/doc/sidebar/item';
 import Link from 'components/shared/link/link';
+import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
@@ -14,6 +15,7 @@ import useWindowSize from 'hooks/use-window-size';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 import { ChatWidgetTrigger } from '../chat-widget';
+import DocNavLink from '../doc-nav-link';
 import { sidebarPropTypes } from '../sidebar/sidebar';
 
 const ANIMATION_DURATION = 0.2;
@@ -40,7 +42,7 @@ const variants = {
   },
 };
 
-const MobileNav = ({ className = null, sidebar, basePath }) => {
+const MobileNav = ({ className = null, sidebar, basePath, isPostgres = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [containerHeight, setContainerHeight] = useState(null);
   const [buttonTop, setButtonTop] = useState(null);
@@ -117,22 +119,32 @@ const MobileNav = ({ className = null, sidebar, basePath }) => {
           variants={variants}
           style={{ height: containerHeight }}
         >
-          <ChatWidgetTrigger className="mb-3.5 mt-[18px] flex" isSidebar />
+          <div className="flex mt-5 mb-9 gap-x-8 border-b dark:border-gray-new-20 border-gray-new-90">
+            <DocNavLink className="" to={LINKS.docs}>
+              Neon Docs
+            </DocNavLink>
+            <DocNavLink to={LINKS.postgres}>Postgres Docs</DocNavLink>
+          </div>
+          {!isPostgres && (
+            <>
+              <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
+              <ul className="mb-7">
+                {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
+                  <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
+                    <Link className="group flex items-center space-x-3" to={slug}>
+                      <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
+                        <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
+                      </span>
+                      <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
+                        {title}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
           <ul>
-            {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
-              <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
-                <Link className="group flex items-center space-x-3" to={slug}>
-                  <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
-                    <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
-                  </span>
-                  <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
-                    {title}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <ul className="mt-7">
             {sidebar.map((item, index) => (
               <Item {...item} key={index} closeMenu={toggleMenu} basePath={basePath} />
             ))}
@@ -147,6 +159,7 @@ MobileNav.propTypes = {
   className: PropTypes.string,
   sidebar: sidebarPropTypes,
   basePath: PropTypes.string.isRequired,
+  isPostgres: PropTypes.bool,
 };
 
 export default MobileNav;

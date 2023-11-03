@@ -271,7 +271,7 @@ const ChatWidgetTrigger = ({ className, isSidebar }) => {
   return (
     <button
       className={clsx(
-        'chat-widget group flex text-sm focus:outline-none',
+        'chat-widget group flex text-sm w-full focus:outline-none',
         isSidebar
           ? 'items-center space-x-3'
           : 'flex-col xl:flex-row xl:items-center xl:space-x-1.5',
