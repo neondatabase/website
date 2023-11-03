@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2023-10-24T18:56:54.993Z'
+updatedOn: '2023-11-02T10:54:40.459Z'
 ---
 
 ### Access token
@@ -273,7 +273,7 @@ An open-source relational database management system (RDBMS) emphasizing extensi
 
 ### Postgres role
 
-A Postgres role named for the registered Neon account is created with each Neon project. This role and any additional role created in the Neon Console, API, or CLI is assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, sequences. Roles created with SQL are created with the same basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-acess).
+A Postgres role named for the registered Neon account is created with each Neon project. This role and any additional role created in the Neon Console, API, or CLI is assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, sequences. Roles created with SQL are created with the same basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-access).
 
 Older projects may have a `web-access` system role, used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth). The `web-access` role is system managed. It cannot be modified, removed, or used in other authentication scenarios.
 

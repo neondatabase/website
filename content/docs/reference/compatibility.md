@@ -24,7 +24,7 @@ Roles created in the Neon console, CLI, or API, including the default role creat
 
 Roles created in Neon with SQL syntax, from a command-line tool like `psql` or the [Neon SQL Editor](/docs/connect/query-with-psql-editor), have the same privileges as newly created roles in a standalone Postgres installation. These roles are not granted membership in the `neon_superuser` role. You must grant these roles the privileges you want them to have. For more information, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
-Neon roles cannot access replication methods or install Postgres extensions other than those supported by by Neon.
+Neon roles cannot access replication methods or install Postgres extensions other than those supported by Neon.
 
 <a id="default-parameters/"></a>
 
@@ -40,7 +40,7 @@ The following table lists Neon Postgres parameter settings that may differ from 
 | wal_level       | replica | Logical replication is currently not supported                                    |
 
 <Admonition type="note">
-You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling]../connect/connection-pooling).
+You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
 ## Unlogged tables
