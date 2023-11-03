@@ -1,6 +1,6 @@
 ---
 title: Partner guide
-subtitle: Find information about how you can manage your intergration with Neon
+subtitle: Learn how you can partner with Neon
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2023-11-01T19:04:17.188Z'
@@ -14,7 +14,7 @@ Apply for partnership with Neon.
 
 <DetailIconCards>
 
-<a href="https://neon.tech/partners" description="Discover how Neon can reduce your compute to zero when not in use" icon="hourglass">Partner Page</a>
+<a href="https://neon.tech/partners" description="Discover the benefits of partnering with Neon for serverless Postgres" icon="hourglass">Partner Page</a>
 
 <a href="https://neon.tech/partners#partners-apply" description="Request partnership online" icon="setup">Apply</a>
 
@@ -35,10 +35,10 @@ Find details about the different ways you can integrate with Neon.
 
 ## Billing
 
-Find details about how to set up quotas on key consumption metrics for your projects.
+Learn how to set up quotas on key consumption metrics for your projects.
 
 <DetailIconCards>
 
-<a href="/docs/guides/autoscaling-guide" description="Use the API to configure billing quotas for your customers" icon="setup">Setup usage quotas</a>
+<a href="/docs/guides/autoscaling-guide" description="Use the Neon API to configure billing quotas for your customers" icon="setup">Set up usage quotas</a>
 
 </DetailIconCards>
