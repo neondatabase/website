@@ -18,7 +18,7 @@ Also, Postgres shared memory buffers are cold after a compute wakes up from the 
 
 After a period of time in the `Idle` state, Neon occasionally activates your compute to check for data availability. The time between checks gradually increases if the compute does not receive any client connections over an extended period of time.
 
-You can check if a compute is `Active` or `Idle` and watch as a compute transitions form one state to another in the **Branches** widget on the Neon **Dashboard** or on the **Branches** page.
+You can check if a compute is `Active` or `Idle` and watch as a compute transitions from one state to another in the **Branches** widget on the Neon **Dashboard** or on the **Branches** page.
 
 ## Compute configuration
 
