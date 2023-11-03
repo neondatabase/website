@@ -5,7 +5,7 @@ isDraft: false
 updatedOn: '2023-11-03T11:47:31.853Z'
 ---
 
-The **Integrations** page in the Neon Console provides an interface for managing third-party integrations with your Neon project. Through Neon's supported integrations, you can optimize and extend Neon's functionality.
+The **Integrations** page in the Neon Console provides a hub for managing third-party integrations with your Neon project. Use these supported integrations to optimize and extend Neon's functionality and streamline your workflow.
 
 When visiting the **Integrations** page in your console, you'll notice different categories:
 
