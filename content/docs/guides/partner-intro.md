@@ -3,7 +3,7 @@ title: Partner guide
 subtitle: Learn how you can partner with Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-11-03T14:27:22.133Z'
+updatedOn: '2023-11-01T19:04:17.188Z'
 ---
 
 Find relevant documentation explaining how partners can integrate with Neon, how to set usage quotas, and links to where you can apply to become a Neon partner.
@@ -39,6 +39,6 @@ Learn how to set up quotas on key consumption metrics for your projects.
 
 <DetailIconCards>
 
-<a href="/docs/guides/autoscaling-guide" description="Use the Neon API to configure billing quotas for your customers" icon="setup">Set up usage quotas</a>
+<a href="/docs/guides/partner-billing" description="Use the Neon API to configure billing quotas for your customers" icon="setup">Set up usage quotas</a>
 
 </DetailIconCards>
