@@ -234,7 +234,7 @@
       items: 
         - title: OAuth
           slug: guides/oauth-integration
-        - title: Manage reseller billing
+        - title: Manage billing with quotas
           slug: guides/partner-billing
 - title: AI & embeddings
   items:
