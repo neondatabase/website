@@ -21,13 +21,13 @@ const Sidebar = ({ className = null, sidebar, basePath, isPostgres = false }) =>
     )}
   >
     <div className="sticky top-10 z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-10 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-gray-new-10 dark:after:to-gray-new-10">
-      <div className="flex gap-x-8 border-b dark:border-gray-new-20 border-gray-new-90">
+      <Search className="z-30" />
+      <div className="flex mt-9 gap-x-8 border-b dark:border-gray-new-20 border-gray-new-90">
         <DocNavLink className="" to={LINKS.docs}>
           Neon Docs
         </DocNavLink>
         <DocNavLink to={LINKS.postgres}>Postgres Docs</DocNavLink>
       </div>
-      <Search className="z-30 mt-5" />
       <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-8">
         {!isPostgres && (
           <>
