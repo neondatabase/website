@@ -172,7 +172,7 @@ const Header = ({
             )}
           </div>
           {isMobile && (
-            <div className="hidden items-center lg:flex lg:gap-x-3 md:gap-x-5">
+            <div className="items-center lg:gap-x-3 md:gap-x-5">
               {(isDocPage || isPostgresPage || isBlogPage) && (
                 <Search className="mobile-search" indexName={findIndexName()} isBlog={isBlogPage} />
               )}
