@@ -11,7 +11,7 @@ This section describes how to install the Neon CLI and connect via web authentic
 
 Before installing, ensure that you have met the following prerequisites:
 
-- Node.js 16.0 or higher. To check if you already have Node.js, run the following command:
+- Node.js 18.0 or higher. To check if you already have Node.js, run the following command:
 
     ```shell
     node -v
