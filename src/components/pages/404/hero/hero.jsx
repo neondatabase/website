@@ -14,17 +14,16 @@ import illustration from './images/illustration.png';
 
 const Search = dynamic(() => import('components/shared/search'), { ssr: false });
 
-const CTA = ({ isDocsPage = false, isPostgresPage = false }) =>
-  isDocsPage || isPostgresPage ? (
+const CTA = ({ isDocsPage = false, isPostgresPage = false }) => {
+  const findIndexName = () => {
+    if (isPostgresPage) return process.env.NEXT_PUBLIC_ALGOLIA_POSTGRES_INDEX_NAME;
+    if (isDocsPage) return process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME;
+    return null;
+  };
+
+  return isDocsPage || isPostgresPage ? (
     <div className="flex w-full flex-col">
-      <Search
-        className="DocSearch-notFound my-8"
-        indexName={
-          isDocsPage
-            ? process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME
-            : process.env.NEXT_PUBLIC_ALGOLIA_POSTGRES_INDEX_NAME
-        }
-      />
+      <Search className="DocSearch-notFound my-8" indexName={findIndexName()} />
       <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
         Back to home
       </Link>
@@ -34,6 +33,7 @@ const CTA = ({ isDocsPage = false, isPostgresPage = false }) =>
       Back to Home
     </Button>
   );
+};
 
 CTA.propTypes = {
   isDocsPage: PropTypes.bool,
