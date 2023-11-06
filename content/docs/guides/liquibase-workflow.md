@@ -64,7 +64,6 @@ To create a branch:
 
 1. In the Neon Console, select **Branches**. You will see your `main` branch, where you just created your `blog` database and tables.
 3. Click **New Branch** to open the branch creation dialog.
-   ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch. Let's call it `dev1`.
 5. Leave `main` selected as the parent branch. This is where you created the `blog` database.
 6. Leave the remaining default settings. Creating a branch from **Head** creates a branch with the latest data, and a compute endpoint is required to connect to the database on the branch.
@@ -75,7 +74,7 @@ To create a branch:
 From the [Neon console](https://console.neon.tech/app/projects), select your project and retrieve connection strings for your target and source databases from the **Connection Details** widget on the Neon **Dashboard**.
 
 <Admonition type="note">
-The target database is the database on your `dev1` branch where you will will do your development work, evolving your database schema. Your source database is where you will apply your schema changes later, once you are satisfied with the changes on your development branch.
+The target database is the database on your `dev1` branch where you will will do your development work. Your source database is where you will apply your schema changes later, once you are satisfied with the changes on your development branch.
 </Admonition>
 
 1. Select the `dev1` branch, the `blog` database, and copy the connection string.
@@ -108,6 +107,8 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
 
 3. Change the target database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `dev1` branch. You can obtain the required details from the connection string you copied previously. You will need to swap out the hostname (`ep-silent-hill-85675036.us-east-2.aws.neon.tech`), username, and password for your own.
 
+    <CodeBlock shouldWrap>
+
     ```env
     liquibase.command.url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
 
@@ -116,7 +117,11 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
     liquibase.command.password: AbC123dEf
     ```
 
+    </CodeBlock>
+
 4. Change the source database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `main` branch. You can obtain the required details from the connection string you copied previously. You will need to swap out the hostname (`ep-cool-darkness-123456.us-east-2.aws.neon.tech`), username, and password for your own.
+
+    <CodeBlock shouldWrap>
 
     ```env
     liquibase.command.referenceUrl: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
@@ -125,6 +130,8 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
 
     liquibase.command.referencePassword: AbC123dEf
     ```
+
+    </CodeBlock>
 
 ## Take a snapshot of your target database
 
@@ -268,9 +275,13 @@ It is a best practice to review schema changes before saving and applying them t
 
 You can run the [status](https://docs.liquibase.com/commands/change-tracking/status.html) command to see if there are any changesets that haven't been applied to the source database. Notice that the command specifies the hostname of the source database:
 
+<CodeBlock shouldWrap>
+
 ```bash
 liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog status --verbose
 ```
+
+</CodeBlock>
 
 <details>
 <summary>Command output</summary>
@@ -292,9 +303,13 @@ Liquibase command 'status' was executed successfully.
 
 Before applying the update, you can run the [updateSQL](https://docs.liquibase.com/commands/update/update-sql.html) command to inspect the SQL Liquibase will apply when running the update command:
 
+<CodeBlock shouldWrap>
+
 ```bash
 liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog updateSQL
 ```
+
+</CodeBlock>
 
 <details>
 <summary>Command output</summary>
@@ -346,9 +361,13 @@ Liquibase command 'updateSql' was executed successfully.
 
 You can also run a `diff` command to compare your source and target databases.
 
+<CodeBlock shouldWrap>
+
 ```bash
 liquibase --referenceUrl=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog --referenceUsername alex --referencePassword IwMdnTs1R6kH diff
 ```
+
+</CodeBlock>
 
 <details>
 <summary>Command output</summary>
@@ -420,9 +439,13 @@ When you are satisfied with the changes that will be applied, save your changelo
 
 Apply the new changesets to the source database on your primary branch:
 
+<CodeBlock shouldWrap>
+
 ```bash
 liquibase --url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog update
 ```
+
+</CodeBlock>
 
 <details>
 <summary>Command output</summary>

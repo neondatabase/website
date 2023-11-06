@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
-This guide steps you through installing the Liquibase CLI, configuring Liquibase to connect to a Neon database, deploying a database schema change, and rolling back the schema change. The guide follows the setup described in the [Liquibase Quickstart](https://www.liquibase.org/get-started/quickstart).
+This guide steps you through installing the Liquibase CLI, configuring Liquibase to connect to a Neon database, deploying a database schema change, and rolling back the schema change. The guide follows the setup described in the [Liquibase Get Started](https://www.liquibase.org/get-started/quickstart).
 
 ## Prerequisites
 
@@ -96,9 +96,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 
 From the Neon **Dashboard**, retrieve your password and a Java connection string from the **Connection Details** widget. Use the selection drop-down menu.
 
-![Java connection string](/docs/guides/liquibase_java_connection.png)
-
-Your Java connection string should look something like the one shown below. You will have to add your password it.
+Your Java connection string should look something like the one shown below.
 
 <CodeBlock shouldWrap>
 

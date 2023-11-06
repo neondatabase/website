@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 Flyway is a database migration tool that facilitates version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
 
-When automating releases, there are often multiple environments or a chain of environments that changes must be delivered to in a particular order. Such environments might include _development_, _staging_, and _production_.
+When automating releases, there are often multiple environments or a chain of environments that you must deliver changes to in a particular order. Such environments might include _development_, _staging_, and _production_.
 
 In this guide, we'll show you how to use Neon's branching feature to spin up a branch for each environment and how to configure Flyway to manage schema changes across those environments.
 
@@ -157,7 +157,7 @@ insert into person (ID, NAME) values (2, 'Mr. Lopez');
 insert into person (ID, NAME) values (3, 'Ms. Smith');
 ```
 
-In the following steps, you'll run the migration on each environment, in order, by specifying the environment's configuration file in the `flyway migrate` command. You'll start with your `development` environment, then `staging`, and then finally, `production`.
+In the following steps, you'll run the migration on each environment in order by specifying the environment's configuration file in the `flyway migrate` command. You'll start with your `development` environment, then `staging`, and then finally, `production`.
 
 ### Run the migration on your development environment
 
@@ -185,7 +185,7 @@ A Flyway report has been generated here: /home/alex/flyway-9.22.3/report.html
 flyway migrate -configFiles="conf/env_staging.conf"
 ```
 
-If the command was successful, you’ll see output similar to the output shown above.
+If the command was successful, you’ll see output similar to that shown above.
 
 ### Run the migration on your product environment
 
@@ -193,13 +193,13 @@ If the command was successful, you’ll see output similar to the output shown a
 flyway migrate -configFiles="conf/env_prod.conf"
 ```
 
-If the command was successful, you’ll agin see output similar to the output shown above.
+If the command was successful, you’ll again see output similar to that shown above.
 
 Your database should now be consistent across all three environments. You can verify that the data was added to each by viewing the branch and table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
 
 ## Conclusion
 
-You've seen how you can instantly create new database environment with Neon's branching feature and how to keep schemas consistent across different environments using Flyway. The steps in this guide were performed manually from the command line but could be easily integrated into your release management pipeline. Neon provides a [CLI](https://neon.tech/docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for automating various tasks in Neon such as branch creation, which you can also integrate into your release automation.
+You've seen how you can instantly create new database environment with Neon's branching feature and how to keep schemas consistent across different environments using Flyway. The steps in this guide were performed manually from the command line but could be easily integrated into your release management pipeline. Neon provides a [CLI](https://neon.tech/docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for automating various tasks in Neon, such as branch creation, which you can also integrate into your release automation.
 
 ## References
 
