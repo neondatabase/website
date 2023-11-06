@@ -1,12 +1,7 @@
-|        9.16. JSON Functions and Operators         |                                                           |                                    |                                                       |                                                                          |
-| :-----------------------------------------------: | :-------------------------------------------------------- | :--------------------------------: | ----------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](functions-xml '9.15. XML Functions')  | [Up](functions 'Chapter 9. Functions and Operators') | Chapter 9. Functions and Operators | [Home](index 'PostgreSQL 17devel Documentation') |  [Next](functions-sequence '9.17. Sequence Manipulation Functions') |
-
----
 
 ## 9.16. JSON Functions and Operators [#](#FUNCTIONS-JSON)
 
-  - - [9.16.1. Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
+- - [9.16.1. Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
 - [9.16.2. The SQL/JSON Path Language](functions-json#FUNCTIONS-SQLJSON-PATH)
 
 This section describes:
@@ -382,10 +377,3 @@ Keep in mind that the pattern argument of `like_regex` is a JSON path string lit
 
 $.* ? (@ like_regex "^\\d+$")
 ```
-
----
-
-|                                                   |                                                           |                                                                          |
-| :------------------------------------------------ | :-------------------------------------------------------: | -----------------------------------------------------------------------: |
-| [Prev](functions-xml '9.15. XML Functions')  | [Up](functions 'Chapter 9. Functions and Operators') |  [Next](functions-sequence '9.17. Sequence Manipulation Functions') |
-| 9.15. XML Functions                               |   [Home](index 'PostgreSQL 17devel Documentation')   |                                    9.17. Sequence Manipulation Functions |

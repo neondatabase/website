@@ -1,17 +1,17 @@
 ## 38.15. Operator Optimization Information [#](#XOPER-OPTIMIZATION)
 
-  * *   [38.15.1. `COMMUTATOR`](xoper-optimization#XOPER-COMMUTATOR)
-  * [38.15.2. `NEGATOR`](xoper-optimization#XOPER-NEGATOR)
-  * [38.15.3. `RESTRICT`](xoper-optimization#XOPER-RESTRICT)
-  * [38.15.4. `JOIN`](xoper-optimization#XOPER-JOIN)
-  * [38.15.5. `HASHES`](xoper-optimization#XOPER-HASHES)
-  * [38.15.6. `MERGES`](xoper-optimization#XOPER-MERGES)
+- [38.15.1. `COMMUTATOR`](xoper-optimization#XOPER-COMMUTATOR)
+- [38.15.2. `NEGATOR`](xoper-optimization#XOPER-NEGATOR)
+- [38.15.3. `RESTRICT`](xoper-optimization#XOPER-RESTRICT)
+- [38.15.4. `JOIN`](xoper-optimization#XOPER-JOIN)
+- [38.15.5. `HASHES`](xoper-optimization#XOPER-HASHES)
+- [38.15.6. `MERGES`](xoper-optimization#XOPER-MERGES)
 
 A PostgreSQL operator definition can include several optional clauses that tell the system useful things about how the operator behaves. These clauses should be provided whenever appropriate, because they can make for considerable speedups in execution of queries that use the operator. But if you provide them, you must be sure that they are right! Incorrect use of an optimization clause can result in slow queries, subtly wrong output, or other Bad Things. You can always leave out an optimization clause if you are not sure about it; the only consequence is that queries might run slower than they need to.
 
-Additional optimization clauses might be added in future versions of PostgreSQL. The ones described here are all the ones that release 17devel understands.
+Additional optimization clauses might be added in future versions of PostgreSQL. The ones described here are all the ones that release 16.0 understands.
 
-It is also possible to attach a planner support function to the function that underlies an operator, providing another way of telling the system about the behavior of the operator. See [Section 38.11](xfunc-optimization "38.11. Function Optimization Information") for more information.
+It is also possible to attach a planner support function to the function that underlies an operator, providing another way of telling the system about the behavior of the operator. See [Section 38.11](xfunc-optimization '38.11. Function Optimization Information') for more information.
 
 ### 38.15.1. `COMMUTATOR` [#](#XOPER-COMMUTATOR)
 
@@ -19,7 +19,7 @@ The `COMMUTATOR` clause, if provided, names an operator that is the commutator o
 
 The left operand type of a commutable operator is the same as the right operand type of its commutator, and vice versa. So the name of the commutator operator is all that PostgreSQL needs to be given to look up the commutator, and that's all that needs to be provided in the `COMMUTATOR` clause.
 
-It's critical to provide commutator information for operators that will be used in indexes and join clauses, because this allows the query optimizer to “flip around” such a clause to the forms needed for different plan types. For example, consider a query with a WHERE clause like `tab1.x = tab2.y`, where `tab1.x` and `tab2.y` are of a user-defined type, and suppose that `tab2.y` is indexed. The optimizer cannot generate an index scan unless it can determine how to flip the clause around to `tab2.y = tab1.x`, because the index-scan machinery expects to see the indexed column on the left of the operator it is given. PostgreSQL will *not* simply assume that this is a valid transformation — the creator of the `=` operator must specify that it is valid, by marking the operator with commutator information.
+It's critical to provide commutator information for operators that will be used in indexes and join clauses, because this allows the query optimizer to “flip around” such a clause to the forms needed for different plan types. For example, consider a query with a WHERE clause like `tab1.x = tab2.y`, where `tab1.x` and `tab2.y` are of a user-defined type, and suppose that `tab2.y` is indexed. The optimizer cannot generate an index scan unless it can determine how to flip the clause around to `tab2.y = tab1.x`, because the index-scan machinery expects to see the indexed column on the left of the operator it is given. PostgreSQL will _not_ simply assume that this is a valid transformation — the creator of the `=` operator must specify that it is valid, by marking the operator with commutator information.
 
 ### 38.15.2. `NEGATOR` [#](#XOPER-NEGATOR)
 

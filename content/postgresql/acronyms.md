@@ -212,7 +212,7 @@ This is a list of acronyms commonly used in the PostgreSQL documentation and in 
 
 * PGSQL
 
-    [PostgreSQL](index "PostgreSQL 17devel Documentation")
+    [PostgreSQL](index "PostgreSQL 16.0 Documentation")
 
 * PGXS
 

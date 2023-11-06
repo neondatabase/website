@@ -22,7 +22,7 @@
 
 - [E. Release Notes](release)
 
-  - [E.1. Release 17](release-17)
+  - [E.1. Release 16](release-16)
   - [E.2. Prior Releases](release-prior)
 
 - [F. Additional Supplied Modules and Extensions](contrib)

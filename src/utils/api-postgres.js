@@ -17,7 +17,7 @@ const findTitle = (sidebar, currentSlug) => {
   let title = '';
   sidebar.forEach((item) => {
     if (item.slug === 'index') {
-      title = 'PostgreSQL 17devel Documentation';
+      title = 'PostgreSQL 16.0 Documentation';
     }
     if (item.slug === 'legalnotice') {
       title = 'Legal Notice';

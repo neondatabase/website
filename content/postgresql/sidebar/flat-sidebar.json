@@ -7,7 +7,7 @@
   },
   {
     "currentSlug": "index",
-    "title": "PostgreSQL 17devel Documentation",
+    "title": "PostgreSQL 16.0 Documentation",
     "prevSlug": null,
     "nextSlug": "preface"
   },
@@ -6302,18 +6302,18 @@
   {
     "currentSlug": "release",
     "prevSlug": "xml-limits-conformance",
-    "nextSlug": "release-17",
+    "nextSlug": "release-16",
     "title": "Appendix E. Release Notes"
   },
   {
-    "currentSlug": "release-17",
+    "currentSlug": "release-16",
     "prevSlug": "release",
     "nextSlug": "release-prior",
-    "title": "E.1. Release 17"
+    "title": "E.1. Release 16"
   },
   {
     "currentSlug": "release-prior",
-    "prevSlug": "release-17",
+    "prevSlug": "release-16",
     "nextSlug": "contrib",
     "title": "E.2. Prior Releases"
   },
