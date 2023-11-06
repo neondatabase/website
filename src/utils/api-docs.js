@@ -84,8 +84,8 @@ const getDocPreviousAndNextLinks = (slug, flatSidebar) => {
   const nextItem = items[currentItemIndex + 1];
 
   return {
-    previousLink: { title: previousItem.title, slug: previousItem.slug },
-    nextLink: { title: nextItem.title, slug: nextItem.slug },
+    previousLink: { title: previousItem?.title, slug: previousItem?.slug },
+    nextLink: { title: nextItem?.title, slug: nextItem?.slug },
   };
 };
 
