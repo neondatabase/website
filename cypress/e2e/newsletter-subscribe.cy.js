@@ -10,6 +10,8 @@ describe('Newsletter Subscribe Form', () => {
 
     cy.wait('@formSuccessSubmit');
     cy.getByData('success-message').should('exist');
+    // check that the form is cleared after successful submit
+    cy.get("input[name='email']").should('have.value', '');
   });
 
   it('displays an error message when the form is submitted with no valid email', () => {
