@@ -3,12 +3,12 @@ name: E2E on Chrome
 on:
   push:
     paths:
-      - 'src/components/pages/contact-sales/hero/**/*.{js,jsx}'
-      - 'src/components/pages/partners/apply/**/*.{js,jsx}'
-      - 'src/components/pages/blog-post/subscribe-form/**/*.{js,jsx}'
-      - 'src/components/shared/subscribe/**/*.{js,jsx}'
-      - 'src/components/shared/subscribe-minimalistic/**/*.{js,jsx}'
-      - 'src/components/shared/subscription-form/**/*.{js,jsx}'
+      - 'src/components/pages/contact-sales/hero/**'
+      - 'src/components/pages/partners/apply/**'
+      - 'src/components/pages/blog-post/subscribe-form/**'
+      - 'src/components/shared/subscribe/**'
+      - 'src/components/shared/subscribe-minimalistic/**'
+      - 'src/components/shared/subscription-form/**'
       - 'src/utils/forms.js'
       - 'src/constants/forms.js'
 
