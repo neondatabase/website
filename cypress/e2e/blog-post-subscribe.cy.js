@@ -2,7 +2,7 @@ describe('Blog Post Subscribe Form', () => {
   beforeEach(() => {
     cy.intercept('GET', 'blog/**').as('loadFeaturedPost');
     cy.visit('/blog');
-
+    cy.getByData('featured-post').should('be.visible');
     cy.getByData('featured-post').first().click();
     cy.wait('@loadFeaturedPost');
     cy.getByData('blog-post-subscribe-form').should('be.visible');
