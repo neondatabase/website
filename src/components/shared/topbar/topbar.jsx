@@ -21,7 +21,7 @@ const TopBar = () => {
       onClick={() => sendGtagEvent('click_announcement_banner')}
     >
       <span className="mr-4 truncate border-r border-black border-opacity-20 py-1 pr-4 text-sm font-semibold">
-        Neon Developer Days #3 is happening on November 2nd 🚀
+        Watch the Neon Developer Days #3 🚀
       </span>
       <span className="inline-flex items-center text-sm font-bold sm:hidden">
         <span>Get your ticket</span>
