@@ -8,7 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import TOCIcon from './images/toc.inline.svg';
 import Item from './item';
 
-const CURRENT_ANCHOR_GAP_PX = 16;
+const CURRENT_ANCHOR_GAP_PX = 32;
 
 const TableOfContents = ({ items }) => {
   const titles = useRef([]);
