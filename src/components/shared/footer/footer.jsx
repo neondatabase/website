@@ -11,7 +11,7 @@ import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus.js';
 
-const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) => {
+const Footer = ({ isDocPage = false, isPostgresPage, withTopBorder = false, theme = 'white' }) => {
   const isDarkTheme = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
   const [ref, inView] = useInView({ triggerOnce: true });
   return (
@@ -34,9 +34,9 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
                 <span className="sr-only">Neon</span>
                 <Logo className="w-auto sm:h-6" isThemeBlack={isDarkTheme} />
               </Link>
-              <StatusBadge isDocPage={isDocPage} inView={inView} />
+              <StatusBadge isDocPage={isDocPage || isPostgresPage} inView={inView} />
             </div>
-            {isDocPage && <ThemeSelect className="mt-7 xl:mt-6 md:mt-0" />}
+            {(isDocPage || isPostgresPage) && <ThemeSelect className="mt-7 xl:mt-6 md:mt-0" />}
           </div>
           <div
             className={clsx(
@@ -101,6 +101,7 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
 
 Footer.propTypes = {
   isDocPage: PropTypes.bool,
+  isPostgresPage: PropTypes.bool,
   withTopBorder: PropTypes.bool,
   theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']),
 };

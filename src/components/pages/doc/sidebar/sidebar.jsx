@@ -13,7 +13,7 @@ import Item from './item';
 
 const Search = dynamic(() => import('components/shared/search/search'));
 
-const Sidebar = ({ className = null, sidebar, basePath, isPostgres = false }) => (
+const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = false }) => (
   <aside
     className={clsx(
       'relative col-start-1 col-end-4 max-w-[254px] before:absolute before:-bottom-20 before:-right-5 before:-top-[110px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-gray-new-10 lg:hidden',
@@ -21,7 +21,7 @@ const Sidebar = ({ className = null, sidebar, basePath, isPostgres = false }) =>
     )}
   >
     <div className="sticky top-10 z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-10 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-gray-new-10 dark:after:to-gray-new-10">
-      <Search className="z-30" />
+      <Search className="z-30" indexName={indexName} />
       <div className="flex mt-9 gap-x-8 border-b dark:border-gray-new-20 border-gray-new-90">
         <DocNavLink className="" to={LINKS.docs}>
           Neon Docs
@@ -80,6 +80,7 @@ Sidebar.propTypes = {
   sidebar: sidebarPropTypes,
   basePath: PropTypes.string.isRequired,
   isPostgres: PropTypes.bool,
+  indexName: PropTypes.string.isRequired,
 };
 
 export default Sidebar;
