@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
+import useMedia from 'react-use/lib/useMedia';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -31,6 +32,7 @@ const Header = ({
 }) => {
   const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
   const headerRef = useRef(null);
+  const isMobile = useMedia('(max-width: 1023px)');
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -169,17 +171,19 @@ const Header = ({
               </Button>
             )}
           </div>
-          <div className="hidden items-center lg:flex lg:gap-x-3 md:gap-x-5">
-            {(isDocPage || isPostgresPage || isBlogPage) && (
-              <Search className="mobile-search" indexName={findIndexName()} isBlog={isBlogPage} />
-            )}
+          {isMobile && (
+            <div className="hidden items-center lg:flex lg:gap-x-3 md:gap-x-5">
+              {(isDocPage || isPostgresPage || isBlogPage) && (
+                <Search className="mobile-search" indexName={findIndexName()} isBlog={isBlogPage} />
+              )}
 
-            <Burger
-              className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
-              isToggled={isMobileMenuOpen}
-              onClick={handleBurgerClick}
-            />
-          </div>
+              <Burger
+                className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
+                isToggled={isMobileMenuOpen}
+                onClick={handleBurgerClick}
+              />
+            </div>
+          )}
         </Container>
       </header>
       <MobileMenu

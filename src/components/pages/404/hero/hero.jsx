@@ -14,10 +14,17 @@ import illustration from './images/illustration.png';
 
 const Search = dynamic(() => import('components/shared/search'), { ssr: false });
 
-const CTA = ({ isDocsPage = false }) =>
-  isDocsPage ? (
+const CTA = ({ isDocsPage = false, isPostgresPage = false }) =>
+  isDocsPage || isPostgresPage ? (
     <div className="flex w-full flex-col">
-      <Search className="DocSearch-notFound my-8" />
+      <Search
+        className="DocSearch-notFound my-8"
+        indexName={
+          isDocsPage
+            ? process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME
+            : process.env.NEXT_PUBLIC_ALGOLIA_POSTGRES_INDEX_NAME
+        }
+      />
       <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
         Back to home
       </Link>
@@ -30,6 +37,7 @@ const CTA = ({ isDocsPage = false }) =>
 
 CTA.propTypes = {
   isDocsPage: PropTypes.bool,
+  isPostgresPage: PropTypes.bool,
 };
 
 const Skeleton = () => (
@@ -43,10 +51,12 @@ const Skeleton = () => (
 const Hero = () => {
   const pathname = usePathname();
   const [isDocsPage, setIsDocsPage] = useState(false);
+  const [isPostgresPage, setIsPostgresPage] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsDocsPage(pathname.includes('/docs/'));
+    setIsPostgresPage(pathname.includes('/docs/postgres/'));
     setIsLoading(false);
   }, [pathname]);
 
@@ -62,7 +72,11 @@ const Hero = () => {
             Sorry, the page you are looking for doesn’t exist or has been moved.
           </p>
 
-          {isLoading ? <Skeleton /> : <CTA isDocsPage={isDocsPage} />}
+          {isLoading ? (
+            <Skeleton />
+          ) : (
+            <CTA isDocsPage={isDocsPage} isPostgresPage={isPostgresPage} />
+          )}
         </div>
 
         <div className="col-start-6 col-end-12 2xl:col-end-13 md:col-span-full">
