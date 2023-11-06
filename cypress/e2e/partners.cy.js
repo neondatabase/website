@@ -17,6 +17,11 @@ describe('Apply Form', () => {
     cy.wait('@formSuccessSubmit');
 
     cy.getByData('submit-button').should('exist').contains('Applied!');
+    cy.get("input[name='firstname']").should('have.value', '');
+    cy.get("input[name='lastname']").should('have.value', '');
+    cy.get("input[name='email']").should('have.value', '');
+    cy.get("input[name='company']").should('have.value', '');
+    cy.get("textarea[name='message']").should('have.value', '');
   });
 
   it('displays an error message when the form is submitted with no required fields filled in', () => {
