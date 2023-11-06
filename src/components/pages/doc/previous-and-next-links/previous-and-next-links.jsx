@@ -13,8 +13,8 @@ const getUrl = (slug, basePath) => {
 };
 
 const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }) => {
-  const previousLinkUrl = previousLink.slug && getUrl(previousLink.slug, basePath);
-  const nextLinkUrl = nextLink.slug && getUrl(nextLink.slug, basePath);
+  const previousLinkUrl = previousLink?.slug && getUrl(previousLink.slug, basePath);
+  const nextLinkUrl = nextLink?.slug && getUrl(nextLink.slug, basePath);
 
   return (
     <div className="mt-10 flex w-full space-x-10 sm:mt-7 sm:space-x-0">
