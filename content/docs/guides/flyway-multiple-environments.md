@@ -32,7 +32,7 @@ create table person (
 
 ## Create databases for development and staging
 
-Using Neon's branching feature, create your _development_ and _staging_ databases. When you create a branch in Neon, you are creating a copy-on-write clone of the parent branch that incudes all databases and roles that exist on the parent, and each branch is an isolated Postgres instance with it's own compute resources.
+Using Neon's branching feature, create your _development_ and _staging_ databases. When you create a branch in Neon, you are creating a copy-on-write clone of the parent branch that incudes all databases and roles that exist on the parent, and each branch is an isolated Postgres instance with its own compute resources.
 
 Perform these steps twice, once for your _development_ branch and once for your _staging_ branch.
 
@@ -40,10 +40,38 @@ Perform these steps twice, once for your _development_ branch and once for your 
 2. Select **Branches**.
 3. Click **New Branch** to open the branch creation dialog.
 4. Enter a name for the branch. For example, name the branch for the environment (_development_ or _staging_).
-5. Select a parent branch. Select the branch where you created the `person` table.
+5. Select a parent branch. This should be the branch where you created the `person` table.
 6. Leave the other default settings and click **Create Branch**.
 
 When you are finished, you should have a _development_ branch and a _staging_ branch.
+
+Alternatively, you can create your _development_ and _staging_ branches using the [Neon API](https://api-docs.neon.tech/reference/createprojectbranch) or [Neon CLI](/docs/reference/cli-branches#create).
+
+<CodeTabs labels={["API", "CLI"]}>
+
+```bash
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/project_id/branches \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "branch": {
+    "name": "development"
+  },
+  "endpoints": [
+    {
+      "type": "read_only"
+    }
+  ]
+}
+' | jq
+```
+
+```bash
+neonctl branches create --name development
+```
 
 ## Retrieve your Neon database connection strings
 
@@ -51,7 +79,7 @@ From the Neon **Dashboard**, retrieve the connection string for each branch (`ma
 
 Your connection strings should look something like the ones shown below. Note that the hostname differs for each (the part starting with `ep-` and ending with `aws.neon.tech`). That's because each branch is hosted on its own compute instance.
 
-- **main**:
+- **main**
 
     <CodeBlock shouldWrap>
 
@@ -61,7 +89,7 @@ Your connection strings should look something like the ones shown below. Note th
 
     </CodeBlock>
 
-- **development**:
+- **development**
 
     <CodeBlock shouldWrap>
 
@@ -71,7 +99,7 @@ Your connection strings should look something like the ones shown below. Note th
 
     </CodeBlock>
 
-- **staging**:
+- **staging**
 
     <CodeBlock shouldWrap>
 
@@ -83,7 +111,7 @@ Your connection strings should look something like the ones shown below. Note th
 
 ## Configure flyway to connect each environment
 
-To enable Flyway to connect to multiple environment environments, we'll create a configuration file for each environment and add the environment-specific connection details. When running Flyway, you'll specify the configuration file to be used.
+To enable Flyway to connect to multiple environments, we'll create a configuration file for each environment and add the environment-specific connection details. When running Flyway, you'll specify the configuration file to be used.
 
 <Admonition type="note">
 By default, Flyway loads its configuration from the default `conf/flyway.conf` file. This is true even if you specify another configuration file when running Flyway. You can take advantage of this behavior by defining non-environment specific configuration settings in the default `conf/flyway.conf` file, and placing your environment-specific settings in separate configuration files, as we'll do here.
@@ -98,7 +126,7 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
     cp flyway.conf env_prod.conf
     ```
 
-2. In each configuration file, update the following items with the correct connection details for the database environment. The `url` setting will differ for each environment. In this example, where you are the only user, the `user` and `password` settings should be the same for each of yur three database environments.
+2. In each configuration file, update the following items with the correct connection details for the database environment. The `url` setting will differ for each environment. In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
 
      <CodeBlock shouldWrap>
 
@@ -157,19 +185,7 @@ A Flyway report has been generated here: /home/alex/flyway-9.22.3/report.html
 flyway migrate -configFiles="conf/env_staging.conf"
 ```
 
-If the command was successful, you’ll see output similar to the following:
-
-```bash
-Database: jdbc:postgresql://ep-mute-night-47642501.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
-Schema history table "public"."flyway_schema_history" does not exist yet
-Successfully validated 1 migration (execution time 00:00.183s)
-Creating Schema History table "public"."flyway_schema_history" with baseline ...
-Successfully baselined schema with version: 1
-Current version of schema "public": 1
-Migrating schema "public" to version "2 - Add people"
-Successfully applied 1 migration to schema "public", now at version v2 (execution time 00:00.389s)
-A Flyway report has been generated here: /home/alex/flyway-9.22.3/report.html
-```
+If the command was successful, you’ll see output similar to the output shown above.
 
 ### Run the migration on your product environment
 
@@ -177,25 +193,13 @@ A Flyway report has been generated here: /home/alex/flyway-9.22.3/report.html
 flyway migrate -configFiles="conf/env_prod.conf"
 ```
 
-If the command was successful, you’ll see output similar to the following:
-
-```bash
-Database: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
-Schema history table "public"."flyway_schema_history" does not exist yet
-Successfully validated 1 migration (execution time 00:00.170s)
-Creating Schema History table "public"."flyway_schema_history" with baseline ...
-Successfully baselined schema with version: 1
-Current version of schema "public": 1
-Migrating schema "public" to version "2 - Add people"
-Successfully applied 1 migration to schema "public", now at version v2 (execution time 00:00.401s)
-A Flyway report has been generated here: /home/alex/flyway-9.22.3/report.html
-```
+If the command was successful, you’ll agin see output similar to the output shown above.
 
 Your database should now be consistent across all three environments. You can verify that the data was added to each by viewing the branch and table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
 
 ## Conclusion
 
-You've seen how you can instantly create new database environment with Neon's branching feature and how to keep schemas consistent across different environments using Flyway. The steps in this guide were performed manually from the command line but could be integrated into your release management pipeline. Neon provides a [CLI](https://neon.tech/docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for automating various tasks in Neon such as branch creation, which you can also integrate into your release automation.
+You've seen how you can instantly create new database environment with Neon's branching feature and how to keep schemas consistent across different environments using Flyway. The steps in this guide were performed manually from the command line but could be easily integrated into your release management pipeline. Neon provides a [CLI](https://neon.tech/docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for automating various tasks in Neon such as branch creation, which you can also integrate into your release automation.
 
 ## References
 

@@ -205,6 +205,8 @@
           items:
             - title: Get started
               slug: guides/flyway  
+            - title: Manage multiple environments
+              slug: guides/flyway-multiple-environments 
         - title: Liquibase
           items:
              - title: Get started

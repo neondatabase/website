@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 Flyway is a database migration tool that facilitates version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
 
-This guide steps you through installing the Flyway command-line tool, configuring Flyway to connect to a Neon database, and running database migrations, following the setup described in the [Flyway command-line quickstart](https://documentation.red-gate.com/fd/quickstart-command-line-184127576.html).
+This guide steps you through installing the Flyway command-line tool, configuring Flyway to connect to a Neon database, and running database migrations. The guide follows the setup described in the [Flyway command-line quickstart](https://documentation.red-gate.com/fd/quickstart-command-line-184127576.html).
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ This guide steps you through installing the Flyway command-line tool, configurin
 
 ## Download and extract Flyway
 
-1. Download the Flyway command-line tool from [https://documentation.red-gate.com/fd/command-line-184127404.html](https://documentation.red-gate.com/fd/command-line-184127404.html).
+1. Download the [Flyway command-line tool](https://documentation.red-gate.com/fd/command-line-184127404.html).
 
 2. Extract the Flyway files. For example:
 
@@ -143,9 +143,9 @@ A Flyway report has been generated here: /home/alex/flyway-9.22.3/sql/report.htm
 
 You can verify that the data was added by viewing the table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
 
-## View schema migration history
+## View your schema migration history
 
-When you run the `flyway migrate` command, Flyway registers the schema changes in the `flyway_schema_history` table, which Flyway automatically creates in your database. You can view the table by running the `flyway info` command.
+When you run the `flyway migrate` command, Flyway registers the schema changes in the `flyway_schema_history` table, which Flyway automatically creates in your database. You can view the table by running the [flyway info](https://documentation.red-gate.com/fd/command-line-info-184127413.html) command.
 
 ```bash
 flyway info
