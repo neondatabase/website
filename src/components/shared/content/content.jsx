@@ -85,6 +85,14 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
       style={{ width: '100%', height: '100%' }}
     />
   ),
+  p: (props) => {
+    const { children, className } = props;
+    const href =
+      // eslint-disable-next-line react/prop-types
+      Array.isArray(children) ? children.find((child) => child?.props?.href)?.props?.href : null;
+    const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
+    return <p className={clsx(className, { 'postgres-paragraph': id })} id={id} {...props} />;
+  },
   YoutubeIframe,
   DefinitionList,
   Admonition,

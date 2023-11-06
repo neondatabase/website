@@ -12,7 +12,8 @@
     }
   }
 
-  .postgres-heading {
+  .postgres-heading,
+  .postgres-paragraph {
     > a {
       @apply border-b-0 opacity-0 text-green-45 hover:opacity-100 transition-opacity duration-200 ease-in-out;
     }
