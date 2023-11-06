@@ -1,6 +1,16 @@
 name: E2E on Chrome
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'src/components/pages/contact-sales/hero/**/*.{js,jsx}'
+      - 'src/components/pages/partners/apply/**/*.{js,jsx}'
+      - 'src/components/pages/blog-post/subscribe-form/**/*.{js,jsx}'
+      - 'src/components/shared/subscribe/**/*.{js,jsx}'
+      - 'src/components/shared/subscribe-minimalistic/**/*.{js,jsx}'
+      - 'src/components/shared/subscription-form/**/*.{js,jsx}'
+      - 'src/utils/forms.js'
+      - 'src/constants/forms.js'
 
 jobs:
   install:
