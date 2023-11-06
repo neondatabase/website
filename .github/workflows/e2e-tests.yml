@@ -11,7 +11,7 @@ on:
       - 'src/components/shared/subscription-form/**'
       - 'src/utils/forms.js'
       - 'src/constants/forms.js'
-
+      - 'cypress/**'
 jobs:
   install:
     runs-on: ubuntu-latest
