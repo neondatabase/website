@@ -39,6 +39,7 @@ const BlogPostCard = ({
   isPriority = false,
   imageWidth = null,
   imageHeight = null,
+  dataTest = null,
 }) => {
   const category = categories?.nodes[0];
   const postAuthor = authors?.[0]?.author || author;
@@ -73,6 +74,7 @@ const BlogPostCard = ({
           to={link}
           target={url ? '_blank' : undefined}
           rel={url ? 'noopener noreferrer' : undefined}
+          data-test={dataTest}
         >
           {largeCover?.mediaItemUrl ? (
             <Image
@@ -250,6 +252,7 @@ BlogPostCard.propTypes = {
   className: PropTypes.string,
   size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm', 'xs']),
   ...BlogPostCardPropTypes,
+  dataTest: PropTypes.string,
 };
 
 export default BlogPostCard;

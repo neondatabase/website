@@ -1,6 +1,11 @@
 describe('Blog Post Subscribe Form', () => {
   beforeEach(() => {
-    cy.visit('/blog/neon-serverless-postgres-is-live');
+    cy.intercept('GET', 'blog/**').as('loadFeaturedPost');
+    cy.visit('/blog');
+
+    cy.getByData('featured-post').first().click();
+    cy.wait('@loadFeaturedPost');
+    cy.getByData('blog-post-subscribe-form').should('be.visible');
   });
 
   it('allows users to subscribe to blog post', () => {

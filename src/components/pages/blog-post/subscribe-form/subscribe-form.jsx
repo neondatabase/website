@@ -30,7 +30,7 @@ const appearAndExitAnimationVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const SubscribeForm = ({ className = null, size = 'lg' }) => {
+const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState(STATES.DEFAULT);
   const [submittedEmail, setSubmittedEmail] = useLocalStorage('submittedEmailNewsletterForm', []);
@@ -157,6 +157,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
             'max-w-[350px]': size === 'sm',
           })}
           method="POST"
+          data-test={dataTest}
           noValidate
           onSubmit={handleSubmit}
         >
@@ -275,6 +276,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
 SubscribeForm.propTypes = {
   className: PropTypes.string,
   size: PropTypes.oneOf(['lg', 'md', 'sm']),
+  dataTest: PropTypes.string,
 };
 
 export default SubscribeForm;
