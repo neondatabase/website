@@ -105,6 +105,7 @@ const BlogPage = async ({ params, searchParams }) => {
           <SubscribeForm
             size="sm"
             className="mt-16 col-span-6 col-start-4 xl:col-span-8 lg:col-span-full"
+            dataTest="blog-post-subscribe-form"
           />
           <MoreArticles
             className="col-span-10 col-start-2 mt-16 xl:col-span-full xl:mt-14 lg:mt-12 md:mt-11"
