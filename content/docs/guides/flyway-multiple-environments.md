@@ -73,6 +73,8 @@ curl --request POST \
 neonctl branches create --name development
 ```
 
+</CodeTabs>
+
 ## Retrieve your Neon database connection strings
 
 From the Neon **Dashboard**, retrieve the connection string for each branch (`main`, `development`, and `staging`) from the **Connection Details** widget. Use the **Branch** drop-down menu to select each branch before copying the connection string.
