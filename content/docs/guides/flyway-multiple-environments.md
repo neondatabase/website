@@ -93,15 +93,23 @@ Your connection strings should look something like the ones shown below. Note th
 
 - **development**
 
+    <CodeBlock shouldWrap>
+
     ```bash
     jdbc:postgresql://ep-mute-night-47642501.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
     ```
 
+    </CodeBlock>
+
 - **staging**
+
+    <CodeBlock shouldWrap>
 
     ```bash
     jdbc:postgresql://ep-shrill-shape-27763949.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
     ```
+
+    </CodeBlock>
 
 ## Configure flyway to connect each environment
 
