@@ -1,3 +1,6 @@
+---
+updatedOn: '2023-11-07T12:03:57.306Z'
+---
 # Docs
 
 Welcome to Neon docs! This folder contains the source code of the [Neon docs](https://neon.tech/docs/).
