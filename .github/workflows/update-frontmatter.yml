@@ -7,7 +7,7 @@ on:
       - '!main' # Exclude the main branch
     paths:
       - 'content/docs/**/*.md'
-      - '!content/docs/postgresql/**/*.md' # Exclude the PostgreSQL docs
+      - '!content/postgresql/**/*.md' # Exclude the PostgreSQL docs
       - '!content/docs/README.md' # Exclude the README.md file
 
 jobs:
