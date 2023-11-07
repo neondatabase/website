@@ -83,9 +83,13 @@ Your connection strings should look something like the ones shown below. Note th
 
 - **main**
 
+    <CodeBlock shouldWrap>
+
     ```bash
     jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
     ```
+
+    </CodeBlock>
 
 
 - **development**
