@@ -17,7 +17,7 @@ export async function generateMetadata({ params }) {
 
   const { title, excerpt } = await getPostBySlug(`/${currentSlug}`, POSTGRES_DIR_PATH);
 
-  const encodedTitle = Buffer.from(title).toString('base64');
+  const encodedTitle = Buffer.from(title || 'PostgreSQL').toString('base64');
 
   return getMetadata({
     title: `${title || 'PostgreSQL'} - PostgreSQL Docs`,
