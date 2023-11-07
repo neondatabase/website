@@ -45,10 +45,10 @@ const Item = ({
   const Tag = slug ? Link : 'button';
 
   return (
-    <li className="flex flex-col">
+    <li className="flex flex-col group">
       <Tag
         className={clsx(
-          'group flex w-full items-start justify-between py-2 text-left text-sm transition-colors duration-200',
+          'group flex w-full items-start justify-between py-2 group-first:pt-0 text-left text-sm transition-colors duration-200',
           currentSlug === slug
             ? 'font-medium text-black-new dark:text-white'
             : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white'

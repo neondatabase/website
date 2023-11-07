@@ -32,7 +32,7 @@ const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = 
         {!isPostgres && (
           <>
             <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
-            <ul className="mb-9">
+            <ul className="mb-11">
               {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
                 <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
                   <Link className="group flex items-center space-x-3" to={slug}>
@@ -49,7 +49,7 @@ const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = 
           </>
         )}
 
-        <ul className="">
+        <ul>
           {sidebar.map((item, index) => (
             <Item {...item} key={index} basePath={basePath} />
           ))}
