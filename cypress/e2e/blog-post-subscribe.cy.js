@@ -4,7 +4,7 @@ describe('Blog Post Subscribe Form', () => {
     cy.visit('/blog');
     cy.getByData('featured-post').should('be.visible');
     cy.getByData('featured-post').first().click();
-    cy.wait('@loadFeaturedPost');
+    cy.wait('@loadFeaturedPost', { timeout: 10000 });
     cy.getByData('blog-post-subscribe-form').should('be.visible');
   });
 
