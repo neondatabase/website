@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Link from 'components/shared/link/link';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 import ArrowIcon from '../svg/arrow.inline.svg';
 
@@ -27,6 +28,10 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, index }) => {
 
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
+    sendGtagEvent('pricing_faq', {
+      faq_question: question,
+      faq_answer: answer,
+    });
   };
 
   return (
