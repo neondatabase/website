@@ -10,7 +10,6 @@ const FeaturedPostsList = ({ posts }) => {
     <section className="grid grid-cols-10 gap-x-10 2xl:gap-x-6 md:gap-y-10">
       <BlogPostCard
         className="col-span-6 xl:col-span-5 md:col-span-full"
-        dataTest="featured-post"
         {...primaryPost.post}
         isPriority
       />
