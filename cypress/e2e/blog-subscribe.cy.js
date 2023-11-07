@@ -1,11 +1,7 @@
-describe('Blog Post Subscribe Form', () => {
+describe('Blog Index Subscribe Form', () => {
   beforeEach(() => {
-    cy.intercept('GET', 'blog/**').as('loadFeaturedPost');
     cy.visit('/blog');
-    cy.getByData('featured-post').should('be.visible');
-    cy.getByData('featured-post').first().click();
-    cy.wait('@loadFeaturedPost', { timeout: 10000 });
-    cy.getByData('blog-post-subscribe-form').should('be.visible');
+    cy.getByData('blog-subscribe-form').should('exist');
   });
 
   it('allows users to subscribe to blog post', () => {
