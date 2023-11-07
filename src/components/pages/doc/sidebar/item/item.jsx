@@ -1,13 +1,12 @@
 'use client';
 
 import clsx from 'clsx';
+import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Link from 'components/shared/link';
-import { DOCS_BASE_PATH } from 'constants/docs';
-import links from 'constants/links';
 
 const isActiveItem = (items, currentSlug) =>
   items?.some(
@@ -15,6 +14,7 @@ const isActiveItem = (items, currentSlug) =>
   );
 
 const Item = ({
+  basePath,
   title,
   slug = null,
   ariaLabel = null,
@@ -23,7 +23,7 @@ const Item = ({
   closeMenu = null,
 }) => {
   const pathname = usePathname();
-  const currentSlug = pathname.replace(`${links.docs}/`, '');
+  const currentSlug = pathname.replace(basePath, '');
 
   const hasActiveChild = isActiveItem(items, currentSlug);
   const [isOpen, setIsOpen] = useState(() => hasActiveChild);
@@ -40,7 +40,8 @@ const Item = ({
   };
 
   const externalSlug = slug && slug.startsWith('http') ? slug : null;
-  const docSlug = isStandalone ? `/${slug}` : `${DOCS_BASE_PATH}${slug}/`;
+  const docSlug = isStandalone ? `/${slug}` : `${basePath}${slug}/`;
+
   const Tag = slug ? Link : 'button';
 
   return (
@@ -58,9 +59,11 @@ const Item = ({
         onClick={handleClick}
       >
         {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
-        <span className="leading-snug" aria-hidden={!!ariaLabel}>
-          {title}
-        </span>
+        <span
+          className="leading-snug [&_code]:rounded-sm [&_code]:leading-none [&_code]:py-px [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:font-mono [&_code]:font-normal dark:[&_code]:bg-gray-new-15"
+          aria-hidden={!!ariaLabel}
+          dangerouslySetInnerHTML={{ __html: title }}
+        />
         <span
           className={clsx(
             'arrow-mask block h-4 w-4 transition-[transform,background-color] duration-200',
@@ -73,22 +76,35 @@ const Item = ({
         />
       </Tag>
       {!!items?.length && (
-        <ul
-          className={clsx(
-            'relative pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-new-90 dark:before:bg-gray-new-20',
-            !isOpen && 'sr-only h-0'
-          )}
-        >
-          {items.map((item, index) => (
-            <Item {...item} key={index} closeMenu={closeMenu} />
-          ))}
-        </ul>
+        <LazyMotion features={domAnimation}>
+          <AnimatePresence initial={false}>
+            {isOpen ? (
+              <m.ul
+                className={clsx(
+                  'relative pl-5 before:absolute before:left-[3px] before:h-full before:w-px before:bg-gray-new-90 dark:before:bg-gray-new-20'
+                )}
+                initial="from"
+                animate="to"
+                exit="from"
+                variants={{
+                  from: { opacity: 0, height: 0 },
+                  to: { opacity: 1, height: 'auto' },
+                }}
+              >
+                {items.map((item, index) => (
+                  <Item {...item} key={index} closeMenu={closeMenu} basePath={basePath} />
+                ))}
+              </m.ul>
+            ) : null}
+          </AnimatePresence>
+        </LazyMotion>
       )}
     </li>
   );
 };
 
 Item.propTypes = {
+  basePath: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   isStandalone: PropTypes.bool,
   slug: PropTypes.string,

@@ -160,7 +160,13 @@
           slug: guides/go
           ariaLabel: Connect a Go application to Neon
         - title: Java
-          slug: guides/java
+          items:
+            - title: Quarkus (JDBC)
+              slug: guides/quarkus-jdbc
+            - title: Quarkus (Reactive)
+              slug: guides/quarkus-reactive
+            - title: JDBC
+              slug: guides/java
         - title: Javascript
           items:
             - title: Node.js

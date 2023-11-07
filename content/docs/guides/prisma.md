@@ -128,7 +128,7 @@ You can disable the pool timeouts by setting `pool_timeout=0`.
 
 ## JSON protocol for large Prisma schemas
 
-If you are working with a large Prisma schema, Prisma recently introduced a new preview feature that expresses queries using `JSON` instead of GraphQL. The JSON implementation uses less CPU and memory, which can help reduce latencies when connecting from Prisma.
+If you are working with a large Prisma schema, Prisma recently introduced a new Preview feature that expresses queries using `JSON` instead of GraphQL. The JSON implementation uses less CPU and memory, which can help reduce latencies when connecting from Prisma.
 
 To try the new protocol, enable the `jsonProtocol` Preview feature in your Prisma schema:
 
@@ -138,6 +138,12 @@ generator client {
   previewFeatures = ["jsonProtocol"]
 }
 ```
+
+<Admonition type="note">
+
+The `jsonProtocol` Preview feature is Generally Available from Prisma version 5.0.0 upwards and is the default wire protocol. This feature is available in Preview from version 4.8.0 and 4.16.2.
+
+</Admonition>
 
 You can read more about this feature here: [Preview feature feedback](https://github.com/prisma/prisma/issues/18095).
 
