@@ -7,6 +7,8 @@ on:
       - '!main' # Exclude the main branch
     paths:
       - 'content/docs/**/*.md'
+      - '!content/postgresql/**/*.md' # Exclude the PostgreSQL docs
+      - '!content/docs/README.md' # Exclude the README.md file
 
 jobs:
   update-date:
@@ -16,27 +18,40 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
-        fetch-depth: 2
+        fetch-depth: 0 # We fetch all history so that merge commits can be identified
+
+    - name: Check for merge commit
+      id: check-merge
+      run: |
+        commit_parents=$(git rev-list --parents -n 1 HEAD)
+        echo "Commit Parents: $commit_parents"
+        [[ $(echo "$commit_parents" | wc -w) -gt 2 ]] && echo "This is a merge commit." && echo "is_merge_commit=true" >> $GITHUB_ENV || echo "is_merge_commit=false" >> $GITHUB_ENV
 
     - name: Set up Node.js
+      if: env.is_merge_commit == 'false'
       uses: actions/setup-node@v2
       with:
         node-version: 18
 
+    # Rest of the steps will also have the 'if' condition
     - name: Get list of modified files
+      if: env.is_merge_commit == 'false'
       id: get-modified-files
       run: |
         modified_files=$(git diff --name-only HEAD^ HEAD | grep '^content/docs/.*\.md$' | xargs)
         echo "Modified files: $modified_files"
-        echo "modified_files=$modified_files" >> $GITHUB_OUTPUT
+        echo "modified_files=$modified_files" >> $GITHUB_ENV
 
     - name: Install packages
+      if: env.is_merge_commit == 'false'
       run: npm ci
       
     - name: Run update script
-      run: node src/scripts/update-frontmatter.js ${{ steps.get-modified-files.outputs.modified_files }}
+      if: env.is_merge_commit == 'false'
+      run: node src/scripts/update-frontmatter.js ${{ env.modified_files }}
 
     - name: Commit changes
+      if: env.is_merge_commit == 'false'
       run: |
         git config user.name "GitHub Action"
         git config user.email "action@github.com"
