@@ -22,6 +22,8 @@ Here are the relevant metrics that you can set project-level quotas for:
 
 These consumption metrics represent total cumulated usage across all branches and computes in a given project, accrued so far in a given monthly billing period. They are refreshed on a set day every month, on whichever date your new billing period starts. 
 
+Neon updates these metrics every 15 minutes but could take up to 1 hour before reflected in your metrics.
+
 To find the current usage level for any of these metrics, see [retrieving details about a project](#retrieving-details-about-a-project). You can read more about these metrics and how they impact billing [here](/docs/billing).
 
 ### Corresponding quotas
@@ -65,12 +67,12 @@ Generally, the most effective quotas for controlling spend per project are those
 
 _**What happens when the quota is met?**_
 
-When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [autosuspend](/docs/guides/auto-suspend-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming proxy connection. Without intervention, the suspension remains in place until the next billing period starts (`quota_reset_at`).
+When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [autosuspend](/docs/guides/auto-suspend-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming proxy connection. Without intervention, the suspension remains in place until the end of the current billing period starts (`consumption_period_end`).
 
 See [Querying metrics and quotas](#querying-metrics-and-quotas) to find your reset date, billing period, and other values related to the project's consumption.
 
 <Admonition type="Note">
-Neon tracks these consumption metrics on a monthly cycle. If you want to track metrics based on a different time range, you need to use external storage.
+Neon tracks these consumption metrics on a monthly cycle. If you want to track metrics on a specific time range,  time range, you need to store your metrics as snapshots.
 </Admonition>
 
 ## Configuring quotas
@@ -165,7 +167,7 @@ And here is what the response might look like. The key fields are highlighted.
 
 <details>
 <summary>Response body</summary>
-<CodeBlock highlight="3-7,21-22,35-37">
+<CodeBlock highlight="3-7,21-22,35-36">
 ```json
 {
   "project": {
@@ -203,7 +205,6 @@ And here is what the response might look like. The key fields are highlighted.
     "synthetic_storage_size": 0,
     "consumption_period_start": "2023-10-01T00:00:00Z",
     "consumption_period_end": "2023-11-01T00:00:00Z",
-    "quota_reset_at": "2023-11-01T00:00:00Z",
     "owner_id": "1232111",
     "owner": {
       "email": "some@email.com",
@@ -224,7 +225,7 @@ Looking at this response, here are some conclusions we can draw:
 
 * **This project is _1 day away_ from a quota refresh.**
 
-  If today's date is _October 31st, 2023_, and the `quota_reset_at` parameter is _2023-11-01T00:00:00Z_ (November 1st, 2023), then the project has _1 day_ left before all quota parameters (except for `logical_byte_size`) are refreshed.
+  If today's date is _October 31st, 2023_, and the `consumption_period_end` parameter is _2023-11-01T00:00:00Z_ (November 1st, 2023), then the project has _1 day_ left before all quota parameters (except for `logical_byte_size`) are refreshed.
 
 ### Retrieving metrics for all projects
 
