@@ -2,7 +2,7 @@
 title: Neon CLI — Install and connect
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.423Z'
+updatedOn: '2023-11-08T18:42:10.264Z'
 ---
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
