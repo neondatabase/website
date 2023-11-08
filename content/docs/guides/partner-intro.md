@@ -14,7 +14,7 @@ Apply for partnership with Neon.
 
 <DetailIconCards>
 
-<a href="https://neon.tech/partners" description="Discover the benefits of partnering with Neon for serverless Postgres" icon="hourglass">Partner Page</a>
+<a href="https://neon.tech/partners" description="Discover the benefits of partnering with Neon for serverless Postgres" icon="hourglass">Partner page</a>
 
 <a href="https://neon.tech/partners#partners-apply" description="Request partnership online" icon="setup">Apply</a>
 
