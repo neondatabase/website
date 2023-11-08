@@ -58,7 +58,7 @@ curl --request POST \
 neonctl branches add-compute mybranch --type read_only
 ```
 
-````plain
+````content
 In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
 
 ```bash

@@ -181,7 +181,7 @@ int main() {
     std::cout << "Hello World";
     return 0;
 }
-```
+````
 
 Multiple lines
 
@@ -265,7 +265,7 @@ class GFG {
 }
 ```
 
-````plain
+````content
 In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
 
 ```bash
