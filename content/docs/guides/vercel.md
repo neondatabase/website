@@ -123,7 +123,7 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
 The Neon Free Tier allows you to create up to 10 branches. To avoid running out of branches for new preview deployments, remove old branches regularly. See [Manage branches](/docs/manage/branches) for instructions.
 </Admonition>
 
-## Make the integration available for use with other Vercel projects
+## Make the integration available to other Vercel projects
 
 If you added the Neon Vercel Integration to a single Vercel project but would like to make it available for use with your other Vercel projects, complete the steps outlined below.
 
