@@ -20,9 +20,9 @@ Here are the relevant metrics that you can set project-level quotas for:
 * `written_data_bytes`
 * `data_transfer_bytes` 
 
-These consumption metrics represent total cumulated usage across all branches and computes in a given project, accrued so far in a given monthly billing period. They are refreshed on a set day every month, on whichever date your new billing period starts. 
+These consumption metrics represent total cumulated usage across all branches and computes in a given project, accrued so far in a given monthly billing period. Metrics are refreshed on the first day of the following month. 
 
-Neon updates these metrics every 15 minutes but could take up to 1 hour before reflected in your metrics.
+Neon updates these metrics every 15 minutes but could take up to 1 hour before reflected in your view.
 
 To find the current usage level for any of these metrics, see [retrieving details about a project](#retrieving-details-about-a-project). You can read more about these metrics and how they impact billing [here](/docs/billing).
 
@@ -37,7 +37,11 @@ You can set quotas for these consumption metrics per project using the following
 The `quota` object includes the array of parameters used to set threshold limits. Their names generally match their corresponding metric:
 
 * `active_time_seconds` &#8212; Sets the maximum amount of wall-clock time allowed in total across all of a project's compute endpoints. This means the total elapsed time, in seconds, from start to finish for each transaction handled by the project's endpoints, accumulated before the one-month refresh date.
-* `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's compute endpoints. This differs from `active_time_seconds` in that it only counts the time the CPU spends executing a process. It excludes time spent waiting for external resources, I/O operations, or time spent in a blocked or idle state.
+* `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's compute endpoints, including any endpoints deleted during the current billing period. Note that the larger your compute endpoints, the faster you'll consume through `compute_time_seconds`. For example, a compute instance with 0.25 vCPU uses 0.25 seconds of compute time for every second it's active. If it has 4 vCPUs, it uses 4 seconds of compute time in one active second.
+   | vCPUs  | `active_time_seconds` | `compute_time_seconds` |
+   |--------|-----------------------|------------------------|
+   | 0.25   | 1                     | 0.25                   |
+   | 4      | 1                     | 4                      |
 * `written_data_bytes` &#8212; Sets the maximum amount of data in total, measured in bytes, that can be written across all of a project's branches for the month.
 * `data_transfer_bytes` &#8212; Sets the maximum amount of egress data, measured in bytes, that can be transferred out of Neon from across all of a project's branches using the proxy.
 
@@ -47,16 +51,16 @@ There is one additional `quota` parameter, `logical_size_bytes`, which applies t
 
 Let's say you want to set limits for an application with two tiers, Trial and Pro, you might set limits like the following:
 
-| Parameter (project)                 | Trial                     | Pro                      |
-|------------------------|---------------------------|--------------------------|
-| `active_time_seconds`  | 86,400 (1 day)            | 2,592,000 (30 days)      |
-| `compute_time_seconds` | 3,600 (1 hour)            | 50,000 (approx. 14 hours)|
-| `written_data_bytes`   | 1,000,000,000 (approx. 1 GiB)| 50,000,000,000 (approx. 50 GiB) |
-| `data_transfer_bytes`  | 500,000,000 (approx. 500 MiB)| 10,000,000,000 (approx. 10 GiB)  |
+| Parameter (project)       | Trial  (.25 vCPU)               | Pro  (max 4 vCPU)                |
+|---------------------------|---------------------------------|----------------------------------|
+| `active_time_seconds`     | 633,600 (business month 22 days)| 2,592,000 (30 days)              |
+| `compute_time_seconds`    | 158,400 (approx 44 hours)       | 10,368,000 (up to 4 times the active time)|
+| `written_data_bytes`      | 1,000,000,000 (approx. 1 GiB)   | 50,000,000,000 (approx. 50 GiB)  |
+| `data_transfer_bytes`     | 500,000,000 (approx. 500 MiB)   | 10,000,000,000 (approx. 10 GiB)  |
 
-| Parameter (branch)             | Trial                    | Pro                      |
-|------------------------|---------------------------|--------------------------|
-| `logical_size_bytes`   | 100,000,000 (approx. 100 MiB)| 10,000,000,000 (approx. 10 GiB)  |
+| Parameter (branch)        | Trial                           | Pro                              |
+|---------------------------|---------------------------------|----------------------------------|
+| `logical_size_bytes`      | 100,000,000 (approx. 100 MiB)   | 10,000,000,000 (approx. 10 GiB)  |
 
 
 ### Guidelines
@@ -67,7 +71,7 @@ Generally, the most effective quotas for controlling spend per project are those
 
 _**What happens when the quota is met?**_
 
-When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [autosuspend](/docs/guides/auto-suspend-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming proxy connection. Without intervention, the suspension remains in place until the end of the current billing period starts (`consumption_period_end`).
+When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [autosuspend](/docs/guides/auto-suspend-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming proxy connection. If you don't take explicit action otherwise, the suspension remains in place until the end of the current billing period starts (`consumption_period_end`).
 
 See [Querying metrics and quotas](#querying-metrics-and-quotas) to find your reset date, billing period, and other values related to the project's consumption.
 
@@ -229,7 +233,7 @@ Looking at this response, here are some conclusions we can draw:
 
 ### Retrieving metrics for all projects
 
-Instead of retrieving metrics for an individual project, you can get a full list of key consumption metrics for all the projects in your Neon integration in a single API request.
+Instead of retrieving metrics for an individual project, you can get a full list of key consumption metrics for all the projects in your Neon integration in a single API request. You can specify a date range if you want to get metrics from multiple billing periods.
 
 <Admonition type="Warning" title="Preview API">
 This functionality is part of the preview API and is subject to change in the future.
@@ -240,6 +244,27 @@ Here is the URL in the Neon API where you can get details for all projects in yo
 ```bash
 https://console.neon.tech/api/v2/consumption/projects
 ```
+#### Setting a date range across multiple billing periods
+
+You can set `from` and `to` query parameters to define a time range that can span across multiple billing periods. 
+* `from` — Sets the start date and time of the time period for which you are seeking metrics.
+* `to` — Sets the end date and time for the  the interval for which you desire metrics.
+
+The response is organized by project and billing period: one object per project, per active billing period within the range. For example, if you choose a 6-month time range you will get up to 6 objects for every project active within those months. The response includes any projects deleted within that time range.
+
+If you do not include these parameters, the query defaults to the current consumption period. 
+
+Here is an example query that returns metrics from September 1st and December 1st, 2023.
+
+```bash
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/consumption/projects?limit=10&from=2023-09-01T00%3A00%3A00Z&to=2023-12-01T00%3A00%3A00Z' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' | jq
+```
+
+#### Controlling pagination for large result sets
+
 To control pagination (number of results per response), you can include these query parameters:
 * `limit` &#8212; sets the number of projects to be included in the response
 * `cursor` &#8212; by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
@@ -262,84 +287,63 @@ curl --request GET \
 And here is a sample response (with key lines highlighted):
 <details>
 <summary>Response body</summary>
-<CodeBlock highlight="16-17,31,47-48,62,66-67">
+<CodeBlock highlight="5,10,11,13,15,18-20,24,29,30,32,33,35-37,40,42">
 ```json
 {
   "projects": [
     {
-      "id": "wispy-wind-94231251",
-      "platform_id": "aws",
-      "region_id": "aws-us-east-2",
-      "name": "UserProjectRenamed",
-      "provisioner": "k8s-pod",
-      "default_endpoint_settings": {
-        "autoscaling_limit_min_cu": 1,
-        "autoscaling_limit_max_cu": 1,
-        "suspend_timeout_seconds": 0
-      },
-      "settings": {
-        "quota": {
-          "active_time_seconds": 200000000,
-          "compute_time_seconds": 18000
-        }
-      },
-      "pg_version": 15,
-      "proxy_host": "us-east-2.aws.neon.tech",
-      "branch_logical_size_limit": 204800,
-      "branch_logical_size_limit_bytes": 214748364800,
-      "store_passwords": true,
-      "active_time": 0,
-      "cpu_used_sec": 0,
-      "creation_source": "console",
-      "created_at": "2023-10-29T16:48:31Z",
-      "updated_at": "2023-11-01T11:44:56Z",
-      "synthetic_storage_size": 32605352,
-      "quota_reset_at": "2023-11-01T00:00:00Z",
-      "owner_id": "cf80d675-bb06-4e0c-9327-48ccfe84e7be"
+      "project_id": "wispy-wind-94231251",
+      "period_id": "6fa781c3-fe37-45fa-9987-26a0d06edbd9",
+      "data_storage_bytes_hour": 6097554392,
+      "data_storage_bytes_hour_updated_at": "2023-11-08T19:07:53Z",
+      "synthetic_storage_size": 32616552,
+      "synthetic_storage_size_updated_at": "2023-11-08T13:37:53Z",
+      "data_transfer_bytes": 0,
+      "written_data_bytes": 6296,
+      "written_data_bytes_updated_at": "2023-11-08T13:37:53Z",
+      "compute_time_seconds": 708,
+      "compute_time_seconds_updated_at": "2023-11-07T19:43:17Z",
+      "active_time_seconds": 672,
+      "active_time_seconds_updated_at": "2023-11-07T19:43:17Z",
+      "updated_at": "2023-11-08T19:08:56Z",
+      "period_start": "2023-11-01T00:00:00Z",
+      "period_end": null,
+      "previous_period_id": "4abcae52-490c-4144-a657-ed93139e2b4e"
     },
     {
-      "id": "divine-tree-77657175",
-      "platform_id": "aws",
-      "region_id": "aws-us-east-2",
-      "name": "RnameII",
-      "provisioner": "k8s-pod",
-      "default_endpoint_settings": {
-        "autoscaling_limit_min_cu": 1,
-        "autoscaling_limit_max_cu": 1,
-        "suspend_timeout_seconds": 0
-      },
-      "settings": {
-        "quota": {
-          "active_time_seconds": 36000,
-          "compute_time_seconds": 18000
-        }
-      },
-      "pg_version": 15,
-      "proxy_host": "us-east-2.aws.neon.tech",
-      "branch_logical_size_limit": 204800,
-      "branch_logical_size_limit_bytes": 214748364800,
-      "store_passwords": true,
-      "active_time": 0,
-      "cpu_used_sec": 0,
-      "creation_source": "console",
-      "created_at": "2023-10-29T16:33:39Z",
-      "updated_at": "2023-10-31T17:08:13Z",
-      "synthetic_storage_size": 32671528,
-      "quota_reset_at": "2023-11-01T00:00:00Z",
-      "owner_id": "cf80d675-bb06-4e0c-9327-48ccfe84e7be"
+      "project_id": "divine-tree-77657175",
+      "period_id": "f8f50267-69d2-4891-8359-847c138dbf80",
+      "data_storage_bytes_hour": 6109745400,
+      "data_storage_bytes_hour_updated_at": "2023-11-08T19:07:53Z",
+      "synthetic_storage_size": 32673288,
+      "synthetic_storage_size_updated_at": "2023-11-06T22:58:17Z",
+      "data_transfer_bytes": 0,
+      "written_data_bytes": 2256,
+      "written_data_bytes_updated_at": "2023-11-06T22:43:17Z",
+      "compute_time_seconds": 0,
+      "active_time_seconds": 0,
+      "updated_at": "2023-11-08T19:08:56Z",
+      "period_start": "2023-11-01T00:00:00Z",
+      "period_end": null,
+      "previous_period_id": "385be9ab-5d6c-493e-b77f-d8f28a5191ca"
     }
   ],
+  "periods_in_response": 2,
   "pagination": {
-    "cursor": "patient-frost-50125040"
+    "cursor": "divine-tree-77657175"
   }
 }
 ```
 </CodeBlock>
 </details>
 
+Key details:
+* The `period_id` key and `previous_period_id` are unique values used to identify and connect periods across the time range. 
+* The `period_start` and `period_end` keys show the dates for that particular billing period.A `null` value indicates that the object is for the current billing period.
+* The `cursor` object under `pagination` shows the last project Id in the response.
 
 ## Resetting a project after suspend
-Generally, projects remain suspended until the next billing period. It is good practice to notify your users when they are close to reaching a limit; if the user is then suspended and loses access to their database, it will not be unexpected. If you have configured no further actions, the user will have to wait until the next billing period starts to resume usage.
+Projects remain suspended until the next billing period. It is good practice to notify your users when they are close to reaching a limit; if the user is then suspended and loses access to their database, it will not be unexpected. If you have configured no further actions, the user will have to wait until the next billing period starts to resume usage.
 
 Alternatively, you can actively reset a suspended compute by changing the impacted quota to `0`: this effectively removes the limit entirely. You will need to reset this quota at some point if you want to maintain limits.
 

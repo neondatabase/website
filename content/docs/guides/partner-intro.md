@@ -39,6 +39,6 @@ Learn how to set up quotas on key consumption metrics for your projects.
 
 <DetailIconCards>
 
-<a href="/docs/guides/partner-billing" description="Use the Neon API to configure billing quotas for your customers" icon="setup">Set up usage quotas</a>
+<a href="/docs/guides/partner-billing" description="Use the Neon API to configure consumption quotas for your customers" icon="setup">Set up usage quotas</a>
 
 </DetailIconCards>
