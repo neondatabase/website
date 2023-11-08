@@ -20,13 +20,13 @@ const TopBar = () => {
       to="/developer-days"
       onClick={() => sendGtagEvent('click_announcement_banner')}
     >
-      <span className="mr-4 truncate border-r border-black border-opacity-20 py-1 pr-4 text-sm font-semibold">
-        Watch the Neon Developer Days #3 🚀
+      <span className="mr-4 truncate py-1 pr-4 text-sm font-semibold">
+        Watch Neon Developer Days #3 🚀
       </span>
-      <span className="inline-flex items-center text-sm font-bold sm:hidden">
+      {/* <span className="inline-flex items-center text-sm font-bold sm:hidden">
         <span>Get your ticket</span>
         <ArrowRightIcon className="ml-1" />
-      </span>
+      </span> */}
       <ArrowRightIcon className="ml-2 hidden sm:flex" />
     </Link>
   );
