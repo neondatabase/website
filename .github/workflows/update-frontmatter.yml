@@ -6,7 +6,7 @@ on:
       - 'main'
     paths:
       - 'content/docs/**/*.md'
-      - '!content/docs/README.md'
+      - '!content/docs/README.md' # Exclude the README.md file
 
 jobs:
   update-date:
