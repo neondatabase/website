@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import clsx from "clsx";
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 
-import CodeBlock from "components/shared/code-block";
-import Content from "components/shared/content";
-import serializeMdx from "utils/serialize-mdx";
+import CodeBlock from 'components/shared/code-block';
+import Content from 'components/shared/content';
+import serializeMdx from 'utils/serialize-mdx';
 
 const TabItem = ({ children }) => {
   const [mdxSource, setMdxSource] = useState(null);
@@ -36,12 +36,12 @@ TabItem.propTypes = {
 
 const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [highlighted, setHighlighted] = useState("");
+  const [highlighted, setHighlighted] = useState('');
 
   useEffect(() => {
     const { highlight } = children[currentIndex].props ?? {};
 
-    setHighlighted(highlight || "");
+    setHighlighted(highlight || '');
   }, [children, currentIndex]);
 
   return (
@@ -50,10 +50,10 @@ const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
         {labels.map((label, index) => (
           <div
             className={clsx(
-              "relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pb-3.5 pt-3 font-semibold leading-none transition-colors duration-200",
+              'relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pb-3.5 pt-3 font-semibold leading-none transition-colors duration-200',
               index === currentIndex
-                ? "border-secondary-8 text-secondary-8 after:opacity-100 dark:border-primary-1 dark:text-primary-1"
-                : "border-transparent text-gray-new-40 dark:text-gray-7",
+                ? 'border-secondary-8 text-secondary-8 after:opacity-100 dark:border-primary-1 dark:text-primary-1'
+                : 'border-transparent text-gray-new-40 dark:text-gray-7'
             )}
             key={`lb-${index}`}
             tabIndex="0"
@@ -72,19 +72,17 @@ const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
         }
 
         const { children, className } =
-          child.props?.children.props?.children.props ||
-          child.props?.children.props ||
-          {};
-        const match = /language-(\w+)/.exec(className || "");
+          child.props?.children.props?.children.props || child.props?.children.props || {};
+        const match = /language-(\w+)/.exec(className || '');
 
-        if (match[1] === "plain") {
+        if (match[1] === 'content') {
           return <TabItem>{children}</TabItem>;
         }
 
         return (
           <CodeBlock
-            className={clsx(className, { "code-wrap": shouldWrap }, "code-tab")}
-            highlight={highlighted || ""}
+            className={clsx(className, { 'code-wrap': shouldWrap }, 'code-tab')}
+            highlight={highlighted || ''}
             showLineNumbers
           >
             {children}
