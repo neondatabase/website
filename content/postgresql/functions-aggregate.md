@@ -4,7 +4,7 @@
 
 Aggregate functions that support *Partial Mode* are eligible to participate in various optimizations, such as parallel aggregation.
 
-**Table 9.59. General-Purpose Aggregate Functions**
+**Table 9.59. General-Purpose Aggregate Functions** [#](#FUNCTIONS-AGGREGATE-TABLE)
 
 | FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Partial Mode |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
@@ -35,8 +35,6 @@ Aggregate functions that support *Partial Mode* are eligible to participate in v
 | `string_agg` ( *`value`* `text`, *`delimiter`* `text` ) → `text``string_agg` ( *`value`* `bytea`, *`delimiter`* `bytea` ) → `bytea`Concatenates the non-null input values into a string. Each value after the first is preceded by the corresponding *`delimiter`* (if it's not null).                                                                                                                                                                                                                                                                              | Yes          |
 | `sum` ( `smallint` ) → `bigint``sum` ( `integer` ) → `bigint``sum` ( `bigint` ) → `numeric``sum` ( `numeric` ) → `numeric``sum` ( `real` ) → `real``sum` ( `double precision` ) → `double precision``sum` ( `interval` ) → `interval``sum` ( `money` ) → `money`Computes the sum of the non-null input values.                                                                                                                                                                                                                                                      | Yes          |
 | `xmlagg` ( `xml` ) → `xml`Concatenates the non-null XML input values (see [Section 9.15.1.7](functions-xml#FUNCTIONS-XML-XMLAGG "9.15.1.7. xmlagg")).                                                                                                                                                                                                                                                                                                                                                                                                          | No           |
-
-\
 
 It should be noted that except for `count`, these functions return a null value when no rows are selected. In particular, `sum` of no rows returns null, not zero as one might expect, and `array_agg` returns null rather than an empty array when there are no input rows. The `coalesce` function can be used to substitute zero or an empty array for null when necessary.
 
@@ -73,7 +71,7 @@ will require effort proportional to the size of the table: PostgreSQL will need 
 
 [Table 9.60](functions-aggregate#FUNCTIONS-AGGREGATE-STATISTICS-TABLE "Table 9.60. Aggregate Functions for Statistics") shows aggregate functions typically used in statistical analysis. (These are separated out merely to avoid cluttering the listing of more-commonly-used aggregates.) Functions shown as accepting *`numeric_type`* are available for all the types `smallint`, `integer`, `bigint`, `numeric`, `real`, and `double precision`. Where the description mentions *`N`*, it means the number of input rows for which all the input expressions are non-null. In all cases, null is returned if the computation is meaningless, for example when *`N`* is zero.
 
-**Table 9.60. Aggregate Functions for Statistics**
+**Table 9.60. Aggregate Functions for Statistics** [#](#FUNCTIONS-AGGREGATE-STATISTICS-TABLE)
 
 | FunctionDescription                                                                                                                                                                                                    | Partial Mode |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
@@ -100,7 +98,7 @@ will require effort proportional to the size of the table: PostgreSQL will need 
 
 [Table 9.61](functions-aggregate#FUNCTIONS-ORDEREDSET-TABLE "Table 9.61. Ordered-Set Aggregate Functions") shows some aggregate functions that use the *ordered-set aggregate* syntax. These functions are sometimes referred to as “inverse distribution” functions. Their aggregated input is introduced by `ORDER BY`, and they may also take a *direct argument* that is not aggregated, but is computed only once. All these functions ignore null values in their aggregated input. For those that take a *`fraction`* parameter, the fraction value must be between 0 and 1; an error is thrown if not. However, a null *`fraction`* value simply produces a null result.
 
-**Table 9.61. Ordered-Set Aggregate Functions**
+**Table 9.61. Ordered-Set Aggregate Functions** [#](#FUNCTIONS-ORDEREDSET-TABLE)
 
 | FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Partial Mode |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
@@ -114,7 +112,7 @@ will require effort proportional to the size of the table: PostgreSQL will need 
 
 Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-aggregate#FUNCTIONS-HYPOTHETICAL-TABLE "Table 9.62. Hypothetical-Set Aggregate Functions") is associated with a window function of the same name defined in [Section 9.22](functions-window "9.22. Window Functions"). In each case, the aggregate's result is the value that the associated window function would have returned for the “hypothetical” row constructed from *`args`*, if such a row had been added to the sorted group of rows represented by the *`sorted_args`*. For each of these functions, the list of direct arguments given in *`args`* must match the number and types of the aggregated arguments given in *`sorted_args`*. Unlike most built-in aggregates, these aggregates are not strict, that is they do not drop input rows containing nulls. Null values sort according to the rule specified in the `ORDER BY` clause.
 
-**Table 9.62. Hypothetical-Set Aggregate Functions**
+**Table 9.62. Hypothetical-Set Aggregate Functions** [#](#FUNCTIONS-HYPOTHETICAL-TABLE)
 
 | FunctionDescription                                                                                                                                                                                                                                             | Partial Mode |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
@@ -123,9 +121,7 @@ Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-
 | `percent_rank` ( *`args`* ) `WITHIN GROUP` ( `ORDER BY` *`sorted_args`* ) → `double precision`Computes the relative rank of the hypothetical row, that is (`rank` - 1) / (total rows - 1). The value thus ranges from 0 to 1 inclusive.                     | No           |
 | `cume_dist` ( *`args`* ) `WITHIN GROUP` ( `ORDER BY` *`sorted_args`* ) → `double precision`Computes the cumulative distribution, that is (number of rows preceding or peers with hypothetical row) / (total rows). The value thus ranges from 1/*`N`* to 1. | No           |
 
-\
-
-**Table 9.63. Grouping Operations**
+**Table 9.63. Grouping Operations** [#](#FUNCTIONS-GROUPING-TABLE)
 
 | FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
