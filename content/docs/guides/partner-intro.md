@@ -3,7 +3,7 @@ title: Partner guide
 subtitle: Learn how you can partner with Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-11-03T15:15:02.553Z'
+updatedOn: '2023-11-08T15:51:36.229Z'
 ---
 
 Find relevant documentation explaining how partners can integrate with Neon, how to set usage quotas, and links to where you can apply to become a Neon partner.
@@ -14,7 +14,7 @@ Apply for partnership with Neon.
 
 <DetailIconCards>
 
-<a href="https://neon.tech/partners" description="Discover the benefits of partnering with Neon for serverless Postgres" icon="hourglass">Partner Page</a>
+<a href="https://neon.tech/partners" description="Discover the benefits of partnering with Neon for serverless Postgres" icon="hourglass">Partner page</a>
 
 <a href="https://neon.tech/partners#partners-apply" description="Request partnership online" icon="setup">Apply</a>
 
