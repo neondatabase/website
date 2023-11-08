@@ -28,7 +28,6 @@ const Header = ({
   withBottomBorder = false,
   isDocPage = false,
   isBlogPage = false,
-  isPostgresPage = false,
 }) => {
   const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
   const headerRef = useRef(null);
@@ -46,7 +45,6 @@ const Header = ({
 
   const findIndexName = () => {
     if (isDocPage) return process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME;
-    if (isPostgresPage) return process.env.NEXT_PUBLIC_ALGOLIA_POSTGRES_INDEX_NAME;
     if (isBlogPage) return process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME;
     return null;
   };
@@ -173,7 +171,7 @@ const Header = ({
           </div>
           {isMobile && (
             <div className="items-center flex gap-x-3 md:gap-x-5">
-              {(isDocPage || isPostgresPage || isBlogPage) && (
+              {(isDocPage || isBlogPage) && (
                 <Search className="mobile-search" indexName={findIndexName()} isBlog={isBlogPage} />
               )}
 
@@ -203,7 +201,6 @@ Header.propTypes = {
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
   isBlogPage: PropTypes.bool,
-  isPostgresPage: PropTypes.bool,
 };
 
 export default Header;

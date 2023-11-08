@@ -17,7 +17,6 @@ const Layout = ({
   footerWithTopBorder = false,
   isDocPage = false,
   isBlogPage = false,
-  isPostgresPage = false,
 }) => (
   // 44px is the height of the topbar
   <div className="relative flex min-h-[calc(100vh-44px)] flex-col">
@@ -29,7 +28,6 @@ const Layout = ({
       isSticky={isHeaderSticky}
       isDocPage={isDocPage}
       isBlogPage={isBlogPage}
-      isPostgresPage={isPostgresPage}
     />
     <main
       className={clsx(
@@ -40,12 +38,7 @@ const Layout = ({
     >
       {children}
     </main>
-    <Footer
-      isDocPage={isDocPage}
-      isPostgresPage={isPostgresPage}
-      theme={footerTheme}
-      withTopBorder={footerWithTopBorder}
-    />
+    <Footer isDocPage={isDocPage} theme={footerTheme} withTopBorder={footerWithTopBorder} />
   </div>
 );
 
@@ -62,7 +55,6 @@ Layout.propTypes = {
   footerWithTopBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
   isBlogPage: PropTypes.bool,
-  isPostgresPage: PropTypes.bool,
 };
 
 export default Layout;
