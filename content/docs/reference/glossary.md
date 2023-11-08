@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2023-11-02T17:14:39.704Z'
+updatedOn: '2023-11-08T13:26:01.334Z'
 ---
 
 ### Access token

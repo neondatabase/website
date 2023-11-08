@@ -2,7 +2,7 @@
 title: Autoscaling
 subtitle: Learn how Neon automatically scales compute resources on demand
 enableTableOfContents: true
-updatedOn: '2023-11-03T11:49:30.941Z'
+updatedOn: '2023-11-08T13:26:01.330Z'
 ---
 
 Neon's _Autoscaling_ feature, available for [Neon Pro Plan](/docs/introduction/pro-plan) users, dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current load, eliminating the need for manual intervention.
