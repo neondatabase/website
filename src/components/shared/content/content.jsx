@@ -22,7 +22,11 @@ const Heading =
   (Tag) =>
   // eslint-disable-next-line react/prop-types
   ({ children, className = null }) => (
-    <Tag className={clsx(className, 'postgres-heading')}>{children}</Tag>
+    <Tag
+      className={clsx(className, 'postgres-heading not-prose')}
+    >
+      {children}
+    </Tag>
   );
 
 const getHeadingComponent = (heading, withoutAnchorHeading, isPostgres) => {
@@ -62,7 +66,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
     const { href, children, ...otherProps } = props;
     if (children === '#id') {
       const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
-      return <span id={id} />
+      return <span id={id} />;
     }
     return (
       <Link to={href} {...otherProps}>
@@ -84,7 +88,9 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
     const href =
       // eslint-disable-next-line react/prop-types
       Array.isArray(children) ? children.find((child) => child?.props?.href)?.props?.href : null;
+
     const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
+
     return <p className={clsx(className, { 'postgres-paragraph': id })} id={id} {...props} />;
   },
   YoutubeIframe,
