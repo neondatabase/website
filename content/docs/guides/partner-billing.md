@@ -278,6 +278,18 @@ To learn more about using pagination to control large response sizes, the [Keyse
 
 Here is an example Neon API `GET` request, with a limit of 2 projects in the response:
 
+TEST
+
+<CodeTabs labels={["Tab1", "Tab2"]}>
+
+* step 1
+* step 2
+
+* step 1
+* step 2
+
+</CodeTabs>
+
 ```bash
 curl --request GET \
      --url https://console.neon.tech/api/v2/consumption/projects?limit=2 \
@@ -339,7 +351,7 @@ And here is a sample response (with key lines highlighted):
 
 Key details:
 * The `period_id` key and `previous_period_id` are unique values used to identify and connect periods across the time range. 
-* The `period_start` and `period_end` keys show the dates for that particular billing period.A `null` value indicates that the object is for the current billing period.
+* The `period_start` and `period_end` keys show the dates for that particular billing period. A `null` value indicates that the object is for the current billing period.
 * The `cursor` object under `pagination` shows the last project Id in the response.
 
 ## Resetting a project after suspend
