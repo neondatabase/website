@@ -183,6 +183,9 @@ int main() {
 }
 ```
 
+</CodeBlock>
+````
+
 Multiple lines
 
 ````md
@@ -221,7 +224,7 @@ int main() {
 
 To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and write labels of code tabs in order:
 
-````md
+`````md
 <CodeTabs labels={["Shell", "C++", "C#", "Java"]}>
 
 <CodeBlock highlight="2-4">
@@ -265,8 +268,41 @@ class GFG {
 }
 ```
 
-</CodeTabs>
+````content
+In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
+
+```bash
+- name: <db_name>
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url:
+        from_env: <DB_URL_ENV_VAR>
+    pool_settings:
+      idle_timeout: 180
+      max_connections: 50
+      retries: 1
+  tables: []
+  functions: []
+```
+Apply the Metadata by running:
+
+```bash
+hasura metadata apply
+```
+
+If you've spun up the Hasura Engine with Docker, you can access the Hasura Console by accessing it in a browser at the URL of your Hasura Engine instance, usually http://localhost:8080.
+
+<Admonition type="note">
+To access the Hasura Console via the URL the HASURA_GRAPHQL_ENABLE_CONSOLE environment variable or the `--enable-console` flag must be set to true.
+</Admonition>
+
 ````
+
+</CodeTabs>
+`````
+
+To display the tab that contains the plain text and code block, set `content` label as an example above.
 
 <details>
 <summary>Examples</summary>
