@@ -6,7 +6,7 @@ isDraft: false
 updatedOn: '2023-11-07T17:34:43.264Z'
 ---
 
-When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute size a given project can consume. For example, you may want to cap how much usage your free tier users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#what-happens-when-the-quota-is-met). 
+When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute size a given project can consume. For example, you may want to cap how much usage your free tier users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes). 
 
 ## Metrics and quotas
 By default, Neon tracks a variety of consumption metrics at the project level. If you want to set quotas (max limits) for these metrics, you need to explicitly [configure](#configuring-quotas) them. 
@@ -20,9 +20,9 @@ Here are the relevant metrics that you can set project-level quotas for:
 * `written_data_bytes`
 * `data_transfer_bytes` 
 
-These consumption metrics represent total cumulated usage across all branches and computes in a given project, accrued so far in a given monthly billing period. Metrics are refreshed on the first day of the following month. 
+These consumption metrics represent total cumulative usage across all branches and computes in a given project, accrued so far in a given monthly billing period. Metrics are refreshed on the first day of the following month, when the new billing period starts. 
 
-Neon updates these metrics every 15 minutes but could take up to 1 hour before reflected in your view.
+Neon updates these metrics every 15 minutes but it could take up to 1 hour before they are reportable.
 
 To find the current usage level for any of these metrics, see [retrieving details about a project](#retrieving-details-about-a-project). You can read more about these metrics and how they impact billing [here](/docs/billing).
 
@@ -34,11 +34,11 @@ You can set quotas for these consumption metrics per project using the following
 /projects/{project_id}/settings/quota
 ```
 
-The `quota` object includes the array of parameters used to set threshold limits. Their names generally match their corresponding metric:
+The `quota` object includes an array of parameters used to set threshold limits. Their names generally match their corresponding metric:
 
-* `active_time_seconds` &#8212; Sets the maximum amount of wall-clock time allowed in total across all of a project's compute endpoints. This means the total elapsed time, in seconds, from start to finish for each transaction handled by the project's endpoints, accumulated before the one-month refresh date.
-* `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's compute endpoints, including any endpoints deleted during the current billing period. Note that the larger your compute endpoints, the faster you'll consume through `compute_time_seconds`. For example, a compute instance with 0.25 vCPU uses 0.25 seconds of compute time for every second it's active. If it has 4 vCPUs, it uses 4 seconds of compute time in one active second.
-   | vCPUs  | `active_time_seconds` | `compute_time_seconds` |
+* `active_time_seconds` &#8212; Sets the maximum amount of wall-clock time allowed in total across all of a project's compute endpoints. This means the total elapsed time, in seconds, from start to finish for each transaction handled by the project's endpoints, accumulated so far during the current billing period.
+* `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's compute endpoints. This includes any endpoints deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes through `compute_time_seconds`. For example, 1 second at .25 vCPU uses .25 `compute_time_seconds`, while 1 second at 4 vCPU consumes 4 `compute_time_seconds`.
+   | vCPUs  | active_time_seconds | compute_time_seconds |
    |--------|-----------------------|------------------------|
    | 0.25   | 1                     | 0.25                   |
    | 4      | 1                     | 4                      |
@@ -53,14 +53,14 @@ Let's say you want to set limits for an application with two tiers, Trial and Pr
 
 | Parameter (project)       | Trial  (.25 vCPU)               | Pro  (max 4 vCPU)                |
 |---------------------------|---------------------------------|----------------------------------|
-| `active_time_seconds`     | 633,600 (business month 22 days)| 2,592,000 (30 days)              |
-| `compute_time_seconds`    | 158,400 (approx 44 hours)       | 10,368,000 (up to 4 times the active time)|
-| `written_data_bytes`      | 1,000,000,000 (approx. 1 GiB)   | 50,000,000,000 (approx. 50 GiB)  |
-| `data_transfer_bytes`     | 500,000,000 (approx. 500 MiB)   | 10,000,000,000 (approx. 10 GiB)  |
+| active_time_seconds     | 633,600 (business month 22 days)| 2,592,000 (30 days)              |
+| compute_time_seconds    | 158,400 (approx 44 hours)       | 10,368,000 (up to 4 times the active time)|
+| written_data_bytes      | 1,000,000,000 (approx. 1 GiB)   | 50,000,000,000 (approx. 50 GiB)  |
+| data_transfer_bytes     | 500,000,000 (approx. 500 MiB)   | 10,000,000,000 (approx. 10 GiB)  |
 
 | Parameter (branch)        | Trial                           | Pro                              |
 |---------------------------|---------------------------------|----------------------------------|
-| `logical_size_bytes`      | 100,000,000 (approx. 100 MiB)   | 10,000,000,000 (approx. 10 GiB)  |
+| logical_size_bytes      | 100,000,000 (approx. 100 MiB)   | 10,000,000,000 (approx. 10 GiB)  |
 
 
 ### Guidelines
@@ -76,7 +76,7 @@ When any configured metric reaches its quota limit, all active computes for that
 See [Querying metrics and quotas](#querying-metrics-and-quotas) to find your reset date, billing period, and other values related to the project's consumption.
 
 <Admonition type="Note">
-Neon tracks these consumption metrics on a monthly cycle. If you want to track metrics on a specific time range,  time range, you need to store your metrics as snapshots.
+Neon tracks these consumption metrics on a monthly cycle. If you want to track metrics on a specific time range, you need to store your metrics as snapshots. You can also use the Preview [Consumption API](#retrieving-metrics-for-all-projects) to collect metrics from across a range of billing periods. 
 </Admonition>
 
 ## Configuring quotas
@@ -88,7 +88,7 @@ You can set quotas using the Neon API either in a `POST` when you create a proje
 ### Set quotas when you create the project
 For performance reasons, you might want to configure these quotas at the same time that you create a new project for your user, reducing the number of API calls you need to make.
 
-Here is a sample `POST` in `curl` that creates a new project called `UserNew` and sets the `active_time_seconds` quota to a total allowed time of 10 hours (36,000 seconds) for the month, and a total allowed `compute_time_seconds` set to 5 hours (18,000 seconds) for the month.  
+Here is a sample `POST` in `curl` that creates a new project called `UserNew` and sets the `active_time_seconds` quota to a total allowed time of 10 hours (36,000 seconds) for the month, and a total allowed `compute_time_seconds` set to 2.5 hours (9,000 seconds) for the month.  
 
 <CodeBlock highlight="11,12">
 ```bash
@@ -103,7 +103,7 @@ curl --request POST \
     "settings": {
       "quota": {
         "active_time_seconds": 36000,
-        "compute_time_seconds": 18000
+        "compute_time_seconds": 9000
       }
     },
     "pg_version": 15,
@@ -118,7 +118,7 @@ curl --request POST \
 ### Update an existing project
 If you need to change the quota limits for an existing project &#8212; for example, if a user switches their plan to a higher usage tier &#8212; you can reset those limits via `PATCH` request. See [Update a project](https://api-docs.neon.tech/reference/updateproject) in the Neon API.
 
-Example: updating the `active_time_seconds` quota to 30 hours (108,000 seconds) and `compute_time_seconds` to 20 hours (72,000 seconds) compute time:
+Here is a sample `PATCH` that updates both the `active_time_seconds` and `compute_time_seconds` quotas to 30 hours (108,000):
 
 <CodeBlock highlight="11,12">
 ```bash
@@ -133,7 +133,7 @@ curl --request PATCH \
     "settings": {
       "quota": {
         "active_time_seconds": 108000,
-        "compute_time_seconds": 72000
+        "compute_time_seconds": 108000
       }
     }
   }
@@ -153,7 +153,6 @@ You can get metrics and quota details for a single project or a list of metrics 
 Using a `GET` request from the Neon API (see [Get project details](https://api-docs.neon.tech/reference/getproject)), you can find the following consumption details for a given project:
 * Current consumption metrics accumulated for the billing period
 * Start and end dates for the billing period
-* Exact date the billing period will reset
 * Current usage quotas (max limits) configured for the project
 
 Using these details, you can set up the logic for when to send notification warnings, when to reset a quota, and other possible actions related to the pending or current suspension of a project's active computes.
@@ -233,7 +232,7 @@ Looking at this response, here are some conclusions we can draw:
 
 ### Retrieving metrics for all projects
 
-Instead of retrieving metrics for an individual project, you can get a full list of key consumption metrics for all the projects in your Neon integration in a single API request. You can specify a date range if you want to get metrics from multiple billing periods.
+Instead of retrieving metrics for an individual project, use the [Consumption API](https://api-docs.neon.tech/reference/listprojectsconsumption) to get a full list of key consumption metrics for all the projects in your Neon integration in a single API request. You can specify a date range to get metrics from across multiple billing periods and control pagination for large result sets.
 
 <Admonition type="Warning" title="Preview API">
 This functionality is part of the preview API and is subject to change in the future.
@@ -244,6 +243,10 @@ Here is the URL in the Neon API where you can get details for all projects in yo
 ```bash
 https://console.neon.tech/api/v2/consumption/projects
 ```
+This API endpoint accepts the following query parameters:
+* `from` and `to`&#8212;  used to [set dates across billing periods](#setting-a-date-range-across-multiple-billing-periods)
+* `limit` and `cursor` &#8212; used to configure [pagination](#controlling-pagination-for-large-result-sets)
+
 #### Setting a date range across multiple billing periods
 
 You can set `from` and `to` query parameters to define a time range that can span across multiple billing periods. 
@@ -261,28 +264,6 @@ curl --request GET \
      --url 'https://console.neon.tech/api/v2/consumption/projects?limit=10&from=2023-09-01T00%3A00%3A00Z&to=2023-12-01T00%3A00%3A00Z' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq
-```
-
-#### Controlling pagination for large result sets
-
-To control pagination (number of results per response), you can include these query parameters:
-* `limit` &#8212; sets the number of projects to be included in the response
-* `cursor` &#8212; by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
-
-Here is a sample URL with both query parameters included, asking for the next 100 projects, starting with project id  `divine-tree-77657175`:
-```bash
-https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100
-```
-
-To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
-
-Here is an example Neon API `GET` request, with a limit of 2 projects in the response:
-
-```bash
-curl --request GET \
-     --url https://console.neon.tech/api/v2/consumption/projects?limit=2 \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' | jq'
 ```
 And here is a sample response (with key lines highlighted):
 <details>
@@ -340,7 +321,29 @@ And here is a sample response (with key lines highlighted):
 Key details:
 * The `period_id` key and `previous_period_id` are unique values used to identify and connect periods across the time range. 
 * The `period_start` and `period_end` keys show the dates for that particular billing period. A `null` value indicates that the object is for the current billing period.
-* The `cursor` object under `pagination` shows the last project Id in the response.
+* The `cursor` object under `pagination` shows the last project Id in the response. See more about pagination in the next section.
+
+#### Controlling pagination for large result sets
+
+To control pagination (number of results per response), you can include these query parameters:
+* `limit` &#8212; sets the number of projects to be included in the response
+* `cursor` &#8212; by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
+
+Here is a sample URL with both query parameters included, asking for the next 100 projects, starting with project id  `divine-tree-77657175`:
+```bash
+https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100
+```
+
+To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
+
+Here is an example Neon API `GET` request, with a limit of 2 projects in the response:
+
+```bash
+curl --request GET \
+     --url https://console.neon.tech/api/v2/consumption/projects?limit=2 \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' | jq'
+```
 
 ## Resetting a project after suspend
 Projects remain suspended until the next billing period. It is good practice to notify your users when they are close to reaching a limit; if the user is then suspended and loses access to their database, it will not be unexpected. If you have configured no further actions, the user will have to wait until the next billing period starts to resume usage.
