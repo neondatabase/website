@@ -89,7 +89,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
-    "postcss": "^8.4.28",
+    "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
     "prettier": "^3.0.2",
     "prettier-plugin-tailwindcss": "^0.5.3",
