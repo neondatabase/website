@@ -24,8 +24,6 @@ Every table and index is stored as an array of *pages* of a fixed size (usually 
 | Items          | The actual items themselves.                                                                                     |
 | Special space  | Index access method specific data. Different methods store different data. Empty in ordinary tables.             |
 
-\
-
 
 The first 24 bytes of each page consists of a page header (`PageHeaderData`). Its format is detailed in [Table 73.3](storage-page-layout#PAGEHEADERDATA-TABLE). The first field tracks the most recent WAL entry related to this page. The second field contains the page checksum if [data checksums](app-initdb#APP-INITDB-DATA-CHECKSUMS) are enabled. Next is a 2-byte field containing flag bits. This is followed by three 2-byte integer fields (`pd_lower`, `pd_upper`, and `pd_special`). These contain byte offsets from the page start to the start of unallocated space, to the end of unallocated space, and to the start of the special space. The next 2 bytes of the page header, `pd_pagesize_version`, store both the page size and a version indicator. Beginning with PostgreSQL 8.3 the version number is 4; PostgreSQL 8.1 and 8.2 used version number 3; PostgreSQL 8.0 used version number 2; PostgreSQL 7.3 and 7.4 used version number 1; prior releases used version number 0. (The basic page layout and header format has not changed in most of these versions, but the layout of heap row headers has.) The page size is basically only present as a cross-check; there is no support for having more than one page size in an installation. The last field is a hint that shows whether pruning the page is likely to be profitable: it tracks the oldest un-pruned XMAX on the page.
 
@@ -44,8 +42,6 @@ The first 24 bytes of each page consists of a page header (`PageHeaderData`). It
 | pd\_pagesize\_version | uint16         | 2 bytes | Page size and layout version number information                           |
 | pd\_prune\_xid        | TransactionId  | 4 bytes | Oldest unpruned XMAX on page, or zero if none                             |
 
-\
-
 
 All the details can be found in `src/include/storage/bufpage.h`.
 
@@ -60,8 +56,6 @@ The final section is the “special section” which can contain anything the ac
 [#id](#STORAGE-PAGE-LAYOUT-FIGURE)
 
 **Figure 73.1. Page Layout**
-
-\
 
 
 [#id](#STORAGE-TUPLE-LAYOUT)
@@ -84,8 +78,6 @@ All table rows are structured in the same way. There is a fixed-size header (occ
 | t\_infomask2 | uint16          | 2 bytes | number of attributes, plus various flag bits           |
 | t\_infomask  | uint16          | 2 bytes | various flag bits                                      |
 | t\_hoff      | uint8           | 1 byte  | offset to user data                                    |
-
-\
 
 
 All the details can be found in `src/include/access/htup_details.h`.

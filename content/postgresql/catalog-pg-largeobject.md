@@ -18,7 +18,5 @@ Prior to PostgreSQL 9.0, there was no permission structure associated with large
 | `pageno` `int4`Page number of this page within its large object (counting from zero)                                                                    |
 | `data` `bytea`Actual data stored in the large object. This will never be more than `LOBLKSIZE` bytes and might be less.                                 |
 
-\
-
 
 Each row of `pg_largeobject` holds data for one page of a large object, beginning at byte offset (`pageno * LOBLKSIZE`) within the object. The implementation allows sparse storage: pages might be missing, and might be shorter than `LOBLKSIZE` bytes even if they are not the last page of the object. Missing regions within a large object read as zeroes.

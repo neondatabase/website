@@ -173,8 +173,6 @@ memcpy(destination->data, buffer, 40);
 | `varchar`                     | `VarChar*`      | `postgres.h`                           |
 | `xid`                         | `TransactionId` | `postgres.h`                           |
 
-\
-
 
 Now that we've gone over all of the possible structures for base types, we can show some examples of real functions.
 

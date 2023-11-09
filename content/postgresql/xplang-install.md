@@ -88,7 +88,5 @@ CREATE TRUSTED LANGUAGE plperl
 
 then defines that the previously declared functions should be invoked for functions and procedures where the language attribute is `plperl`.
 
-\
-
 
 In a default PostgreSQL installation, the handler for the PL/pgSQL language is built and installed into the “library” directory; furthermore, the PL/pgSQL language itself is installed in all databases. If Tcl support is configured in, the handlers for PL/Tcl and PL/TclU are built and installed in the library directory, but the language itself is not installed in any database by default. Likewise, the PL/Perl and PL/PerlU handlers are built and installed if Perl support is configured, and the PL/PythonU handler is installed if Python support is configured, but these languages are not installed by default.

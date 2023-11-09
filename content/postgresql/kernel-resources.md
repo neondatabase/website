@@ -39,8 +39,6 @@ System V IPC features are typically constrained by system-wide allocation limits
 | `SEMMAP` | Number of entries in semaphore map                       | see text                                                                                                                                       |
 | `SEMVMX` | Maximum value of semaphore                               | at least 1000 (The default is often 32767; do not change unless necessary)                                                                     |
 
-\
-
 
 PostgreSQL requires a few bytes of System V shared memory (typically 48 bytes, on 64-bit platforms) for each copy of the server. On most modern operating systems, this amount can easily be allocated. However, if you are running many copies of the server or you explicitly configure the server to use large amounts of System V shared memory (see [shared\_memory\_type](runtime-config-resource#GUC-SHARED-MEMORY-TYPE) and [dynamic\_shared\_memory\_type](runtime-config-resource#GUC-DYNAMIC-SHARED-MEMORY-TYPE)), it may be necessary to increase `SHMALL`, which is the total amount of System V shared memory system-wide. Note that `SHMALL` is measured in pages rather than bytes on many systems.
 

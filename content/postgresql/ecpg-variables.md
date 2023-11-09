@@ -157,8 +157,6 @@ In this respect, there are two kinds of data types: Some simple PostgreSQL data 
 | `bytea`                                                                                                                                                                                                                                                                                                                  | `char *`, `bytea[n]`                                               |
 | [#id](#ftn.ECPG-DATATYPE-TABLE-FN)[\[a\] ](#ECPG-DATATYPE-TABLE-FN)This type can only be accessed through special library functions; see [Section 36.4.4.2](ecpg-variables#ECPG-SPECIAL-TYPES).[#id](#ftn.id-1.7.5.10.7.5.2.2.17.2.2)[\[b\] ](#id-1.7.5.10.7.5.2.2.17.2.2)declared in `ecpglib.h` if not native |                                                                    |
 
-\
-
 
 [#id](#ECPG-CHAR)
 

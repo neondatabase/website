@@ -24,8 +24,6 @@ By default, the `pg_file_settings` view can be read only by superusers.
 | `applied` `bool`True if the value can be applied successfully                              |
 | `error` `text`If not null, an error message indicating why this entry could not be applied |
 
-\
-
 
 If the configuration file contains syntax errors or invalid parameter names, the server will not attempt to apply any settings from it, and therefore all the `applied` fields will read as false. In such a case there will be one or more rows with non-null `error` fields indicating the problem(s). Otherwise, individual settings will be applied if possible. If an individual setting cannot be applied (e.g., invalid value, or the setting cannot be changed after server start) it will have an appropriate message in the `error` field. Another way that an entry might have `applied` = false is that it is overridden by a later entry for the same parameter name; this case is not considered an error so nothing appears in the `error` field.
 

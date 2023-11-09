@@ -78,8 +78,6 @@ The core PostgreSQL distribution includes the SP-GiST operator classes shown in 
 | `~>~ (text,text)`          |                         |                       |
 | `^@ (text,text)`           |                         |                       |
 
-\
-
 
 Of the two operator classes for type `point`, `quad_point_ops` is the default. `kd_point_ops` supports the same operators but uses a different index data structure that may offer better performance in some applications.
 

@@ -32,7 +32,5 @@ The view `pg_stats_ext_exprs` provides access to information about all expressio
 | `most_common_elem_freqs` `float4[]`A list of the frequencies of the most common element values, i.e., the fraction of rows containing at least one instance of the given value. Two or three additional values follow the per-element frequencies; these are the minimum and maximum of the preceding per-element frequencies, and optionally the frequency of null elements. (Null when `most_common_elems` is.)                                                                                                                                            |
 | `elem_count_histogram` `float4[]`A histogram of the counts of distinct non-null element values within the values of the expression, followed by the average number of distinct non-null elements. (Null for scalar types.)                                                                                                                                                                                                                                                                                                                                   |
 
-\
-
 
 The maximum number of entries in the array fields can be controlled on a column-by-column basis using the [`ALTER TABLE SET STATISTICS`](sql-altertable) command, or globally by setting the [default\_statistics\_target](runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET) run-time parameter.

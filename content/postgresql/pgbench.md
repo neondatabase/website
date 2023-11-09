@@ -424,8 +424,6 @@ There is a simple variable-substitution facility for script files. Variable name
 | `random_seed`  | random generator seed (unless overwritten with `-D`)                |
 | `scale`        | current scale factor                                                |
 
-\
-
 
 Script file meta commands begin with a backslash (`\`) and normally extend to the end of the line, although they can be continued to additional lines by writing backslash-return. Arguments to a meta command are separated by white space. These meta commands are supported:
 
@@ -582,8 +580,6 @@ The functions listed in [Table 295](pgbench#PGBENCH-FUNCTIONS) are built into p
 | `random_gaussian` ( *`lb`*, *`ub`*, *`parameter`* ) → `integer`Computes a Gaussian-distributed random integer in `[lb, ub]`, see below.`random_gaussian(1, 10, 2.5)` → `an integer between 1 and 10`                                                                                                           |
 | `random_zipfian` ( *`lb`*, *`ub`*, *`parameter`* ) → `integer`Computes a Zipfian-distributed random integer in `[lb, ub]`, see below.`random_zipfian(1, 10, 1.5)` → `an integer between 1 and 10`                                                                                                              |
 | `sqrt` ( *`number`* ) → `double`Square root`sqrt(2.0)` → `1.414213562`                                                                                                                                                                                                                                         |
-
-\
 
 
 The `random` function generates values using a uniform distribution, that is all the values are drawn within the specified range with equal probability. The `random_exponential`, `random_gaussian` and `random_zipfian` functions require an additional double parameter which determines the precise shape of the distribution.

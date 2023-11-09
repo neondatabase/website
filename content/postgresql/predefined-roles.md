@@ -29,8 +29,6 @@ The predefined roles are described in [Table 22.1](predefined-roles#PREDEFINED-
 | pg\_use\_reserved\_connections | Allow use of connection slots reserved via [reserved\_connections](runtime-config-connection#GUC-RESERVED-CONNECTIONS).                                                                                                                                                                                                                                 |
 | pg\_create\_subscription       | Allow users with `CREATE` permission on the database to issue [`CREATE SUBSCRIPTION`](sql-createsubscription).                                                                                                                                                                                                                                          |
 
-\
-
 
 The `pg_monitor`, `pg_read_all_settings`, `pg_read_all_stats` and `pg_stat_scan_tables` roles are intended to allow administrators to easily configure a role for the purpose of monitoring the database server. They grant a set of common privileges allowing the role to read various useful configuration settings, statistics and other system information normally restricted to superusers.
 

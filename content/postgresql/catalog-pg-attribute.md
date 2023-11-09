@@ -41,7 +41,5 @@ The term attribute is equivalent to column and is used for historical reasons.
 | `attfdwoptions` `text[]`Attribute-level foreign data wrapper options, as “keyword=value” strings                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `attmissingval` `anyarray`This column has a one element array containing the value used when the column is entirely missing from the row, as happens when the column is added with a non-volatile `DEFAULT` value after the row is created. The value is only used when `atthasmissing` is true. If there is no value the column is null.                                                                                                                                                             |
 
-\
-
 
 In a dropped column's `pg_attribute` entry, `atttypid` is reset to zero, but `attlen` and the other fields copied from [`pg_type`](catalog-pg-type) are still valid. This arrangement is needed to cope with the situation where the dropped column's data type was later dropped, and so there is no `pg_type` row anymore. `attlen` and the other fields can be used to interpret the contents of a row of the table.

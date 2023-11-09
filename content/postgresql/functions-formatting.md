@@ -19,8 +19,6 @@ The PostgreSQL formatting functions provide a powerful set of tools for converti
 | `to_number` ( `text`, `text` ) → `numeric`Converts string to numeric according to the given format.`to_number('12,454.8-', '99G999D9S')` → `-12454.8`                                                                                                                                                            |
 | `to_timestamp` ( `text`, `text` ) → `timestamp with time zone`Converts string to time stamp according to the given format. (See also `to_timestamp(double precision)` in [Table 9.33](functions-datetime#FUNCTIONS-DATETIME-TABLE).)`to_timestamp('05 Dec 2000', 'DD Mon YYYY')` → `2000-12-05 00:00:00-05` |
 
-\
-
 
 ### Tip
 
@@ -95,8 +93,6 @@ In a `to_char` output template string, there are certain patterns that are recog
 | `TZM`                            | time-zone minutes                                                                                                      |
 | `OF`                             | time-zone offset from UTC (only supported in `to_char`)                                                                |
 
-\
-
 
 Modifiers can be applied to any template pattern to alter its behavior. For example, `FMMonth` is the `Month` pattern with the `FM` modifier. [Table 9.28](functions-formatting#FUNCTIONS-FORMATTING-DATETIMEMOD-TABLE) shows the modifier patterns for date/time formatting.
 
@@ -112,8 +108,6 @@ Modifiers can be applied to any template pattern to alter its behavior. For exam
 | `FX` prefix | fixed format global option (see usage notes)                                                                     | `FX Month DD Day`    |
 | `TM` prefix | translation mode (use localized day and month names based on [lc\_time](runtime-config-client#GUC-LC-TIME)) | `TMMonth`            |
 | `SP` suffix | spell mode (not implemented)                                                                                     | `DDSP`               |
-
-\
 
 
 Usage notes for date/time formatting:
@@ -195,8 +189,6 @@ Usage notes for date/time formatting:
 | `V`          | shift specified number of digits (see notes)                |
 | `EEEE`       | exponent for scientific notation                            |
 
-\
-
 
 Usage notes for numeric formatting:
 
@@ -231,8 +223,6 @@ Certain modifiers can be applied to any template pattern to alter its behavior. 
 | `FM` prefix | fill mode (suppress trailing zeroes and padding blanks) | `FM99.99` |
 | `TH` suffix | upper case ordinal number suffix                        | `999TH`   |
 | `th` suffix | lower case ordinal number suffix                        | `999th`   |
-
-\
 
 
 [Table 9.31](functions-formatting#FUNCTIONS-FORMATTING-EXAMPLES-TABLE) shows some examples of the use of the `to_char` function.

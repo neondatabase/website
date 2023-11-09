@@ -103,8 +103,6 @@ The functions shown in [Table 9.104](functions-event-triggers#FUNCTIONS-EVENT-T
 | `pg_event_trigger_table_rewrite_oid` () → `oid`Returns the OID of the table about to be rewritten.                                                                |
 | `pg_event_trigger_table_rewrite_reason` () → `integer`Returns a code explaining the reason(s) for rewriting. The exact meaning of the codes is release dependent. |
 
-\
-
 
 These functions can be used in an event trigger like this:
 

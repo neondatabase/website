@@ -22,8 +22,6 @@ The catalog `pg_amop` stores information about operators associated with access 
 | `amopmethod` `oid` (references [`pg_am`](catalog-pg-am).`oid`)Index access method operator family is for                                                                                   |
 | `amopsortfamily` `oid` (references [`pg_opfamily`](catalog-pg-opfamily).`oid`)The B-tree operator family this entry sorts according to, if an ordering operator; zero if a search operator |
 
-\
-
 
 A “search” operator entry indicates that an index of this operator family can be searched to find all rows satisfying `WHERE` *`indexed_column`* *`operator`* *`constant`*. Obviously, such an operator must return `boolean`, and its left-hand input type must match the index's column data type.
 

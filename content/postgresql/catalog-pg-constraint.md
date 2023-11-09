@@ -43,8 +43,6 @@ Check constraints on domains are stored here, too.
 | `conexclop` `oid[]` (references [`pg_operator`](catalog-pg-operator).`oid`)If an exclusion constraint, list of the per-column exclusion operators                                                                                                   |
 | `conbin` `pg_node_tree`If a check constraint, an internal representation of the expression. (It's recommended to use `pg_get_constraintdef()` to extract the definition of a check constraint.)                                                          |
 
-\
-
 
 In the case of an exclusion constraint, `conkey` is only useful for constraint elements that are simple column references. For other cases, a zero appears in `conkey` and the associated index must be consulted to discover the expression that is constrained. (`conkey` thus has the same contents as [`pg_index`](catalog-pg-index).`indkey` for the index.)
 

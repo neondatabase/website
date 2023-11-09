@@ -143,8 +143,6 @@ main(int argc, char **argv)
 }
 ```
 
-\
-
 
 [#id](#LIBPQ-EXAMPLE-2)
 
@@ -303,8 +301,6 @@ main(int argc, char **argv)
     return 0;
 }
 ```
-
-\
 
 
 [#id](#LIBPQ-EXAMPLE-3)

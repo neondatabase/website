@@ -17,8 +17,6 @@
 | `anycompatible` `\|\|` `anycompatiblearray` → `anycompatiblearray`Concatenates an element onto the front of an array (which must be empty or one-dimensional).`3 \|\| ARRAY[4,5,6]` → `{3,4,5,6}`                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `anycompatiblearray` `\|\|` `anycompatible` → `anycompatiblearray`Concatenates an element onto the end of an array (which must be empty or one-dimensional).`ARRAY[4,5,6] \|\| 7` → `{4,5,6,7}`                                                                                                                                                                                                                                                                                                                                                                                                           |
 
-\
-
 
 See [Section 8.15](arrays) for more details about array operator behavior. See [Section 11.2](indexes-types) for more details about which operators support indexed operations.
 
@@ -67,8 +65,6 @@ See [Section 8.15](arrays) for more details about array operator behavior. See 
  2 | bar
    | baz
 ``` |
-
-\
 
 
 See also [Section 9.21](functions-aggregate) about the aggregate function `array_agg` for use with arrays.

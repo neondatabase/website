@@ -30,8 +30,6 @@ Mathematical operators are provided for many PostgreSQL types. For types without
 | *`integral_type`* `<<` `integer` → `integral_type`Bitwise shift left`1 << 4` → `16`                                                                                                                                                                                           |
 | *`integral_type`* `>>` `integer` → `integral_type`Bitwise shift right`8 >> 2` → `2`                                                                                                                                                                                           |
 
-\
-
 [Table 9.5](functions-math#FUNCTIONS-MATH-FUNC-TABLE) shows the available mathematical functions. Many of these functions are provided in multiple forms with different argument types. Except where noted, any given form of a function returns the same data type as its argument(s); cross-type cases are resolved in the same way as explained above for operators. The functions working with `double precision` data are mostly implemented on top of the host system's C library; accuracy and behavior in boundary cases can therefore vary depending on the host system.
 
 [#id](#FUNCTIONS-MATH-FUNC-TABLE)
@@ -111,8 +109,6 @@ The `random()` function uses a deterministic pseudo-random number generator. It 
 | `sind` ( `double precision` ) → `double precision`Sine, argument in degrees`sind(30)` → `0.5`                                                                            |
 | `tan` ( `double precision` ) → `double precision`Tangent, argument in radians`tan(1)` → `1.5574077246549023`                                                             |
 | `tand` ( `double precision` ) → `double precision`Tangent, argument in degrees`tand(45)` → `1`                                                                           |
-
-\
 
 ### Note
 

@@ -19,7 +19,5 @@ The catalog `pg_amproc` stores information about support functions associated wi
 | `amprocnum` `int2`Support function number                                                                                     |
 | `amproc` `regproc` (references [`pg_proc`](catalog-pg-proc).`oid`)OID of the function                                    |
 
-\
-
 
 The usual interpretation of the `amproclefttype` and `amprocrighttype` fields is that they identify the left and right input types of the operator(s) that a particular support function supports. For some access methods these match the input data type(s) of the support function itself, for others not. There is a notion of “default” support functions for an index, which are those with `amproclefttype` and `amprocrighttype` both equal to the index operator class's `opcintype`.

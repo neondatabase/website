@@ -15,8 +15,6 @@ Multicolumn GIN indexes are implemented by building a single B-tree over composi
 
 **Figure 70.1. GIN Internals**
 
-\
-
 
 [#id](#GIN-FAST-UPDATE)
 

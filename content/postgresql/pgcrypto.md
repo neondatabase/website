@@ -89,8 +89,6 @@ The algorithms in `crypt()` differ from the usual MD5 or SHA1 hashing algorithms
 | `xdes`    | 8                   | yes       | 24        | 20            | Extended DES               |
 | `des`     | 8                   | no        | 12        | 13            | Original UNIX crypt        |
 
-\
-
 
 [#id](#PGCRYPTO-PASSWORD-HASHING-FUNCS-CRYPT)
 
@@ -143,8 +141,6 @@ The *`iter_count`* parameter lets the user specify the iteration count, for algo
 | `xdes`    | 725     | 1   | 16777215 |
 | `bf`      | 6       | 4   | 31       |
 
-\
-
 
 For `xdes` there is an additional limitation that the iteration count must be an odd number.
 
@@ -166,8 +162,6 @@ To pick an appropriate iteration count, consider that the original DES crypt was
 | `crypt-des`  | 23221568   | 157.5 minutes | 108 days          | 7                               |
 | `sha1`       | 37774272   | 90 minutes    | 68 days           | 4                               |
 | `md5` (hash) | 150085504  | 22.5 minutes  | 17 days           | 1                               |
-
-\
 
 
 Notes:

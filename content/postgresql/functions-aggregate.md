@@ -100,8 +100,6 @@ will require effort proportional to the size of the table: PostgreSQL will need 
 | `var_pop` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`Computes the population variance of the input values (square of the population standard deviation). | Yes          |
 | `var_samp` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`Computes the sample variance of the input values (square of the sample standard deviation).        | Yes          |
 
-\
-
 [Table 9.61](functions-aggregate#FUNCTIONS-ORDEREDSET-TABLE) shows some aggregate functions that use the *ordered-set aggregate* syntax. These functions are sometimes referred to as “inverse distribution” functions. Their aggregated input is introduced by `ORDER BY`, and they may also take a *direct argument* that is not aggregated, but is computed only once. All these functions ignore null values in their aggregated input. For those that take a *`fraction`* parameter, the fraction value must be between 0 and 1; an error is thrown if not. However, a null *`fraction`* value simply produces a null result.
 
 [#id](#FUNCTIONS-ORDEREDSET-TABLE)
@@ -116,8 +114,6 @@ will require effort proportional to the size of the table: PostgreSQL will need 
 | `percentile_disc` ( *`fraction`* `double precision` ) `WITHIN GROUP` ( `ORDER BY` `anyelement` ) → `anyelement`Computes the *discrete percentile*, the first value within the ordered set of aggregated argument values whose position in the ordering equals or exceeds the specified *`fraction`*. The aggregated argument must be of a sortable type.                                                                                                                       | No           |
 | `percentile_disc` ( *`fractions`* `double precision[]` ) `WITHIN GROUP` ( `ORDER BY` `anyelement` ) → `anyarray`Computes multiple discrete percentiles. The result is an array of the same dimensions as the *`fractions`* parameter, with each non-null element replaced by the input value corresponding to that percentile. The aggregated argument must be of a sortable type.                                                                                                 | No           |
 
-\
-
 Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-aggregate#FUNCTIONS-HYPOTHETICAL-TABLE) is associated with a window function of the same name defined in [Section 9.22](functions-window). In each case, the aggregate's result is the value that the associated window function would have returned for the “hypothetical” row constructed from *`args`*, if such a row had been added to the sorted group of rows represented by the *`sorted_args`*. For each of these functions, the list of direct arguments given in *`args`* must match the number and types of the aggregated arguments given in *`sorted_args`*. Unlike most built-in aggregates, these aggregates are not strict, that is they do not drop input rows containing nulls. Null values sort according to the rule specified in the `ORDER BY` clause.
 
 [#id](#FUNCTIONS-HYPOTHETICAL-TABLE)
@@ -131,8 +127,6 @@ Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-
 | `percent_rank` ( *`args`* ) `WITHIN GROUP` ( `ORDER BY` *`sorted_args`* ) → `double precision`Computes the relative rank of the hypothetical row, that is (`rank` - 1) / (total rows - 1). The value thus ranges from 0 to 1 inclusive.                     | No           |
 | `cume_dist` ( *`args`* ) `WITHIN GROUP` ( `ORDER BY` *`sorted_args`* ) → `double precision`Computes the cumulative distribution, that is (number of rows preceding or peers with hypothetical row) / (total rows). The value thus ranges from 1/*`N`* to 1. | No           |
 
-\
-
 [#id](#FUNCTIONS-GROUPING-TABLE)
 
 **Table 9.63. Grouping Operations**
@@ -140,8 +134,6 @@ Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-
 | FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `GROUPING` ( *`group_by_expression(s)`* ) → `integer`Returns a bit mask indicating which `GROUP BY` expressions are not included in the current grouping set. Bits are assigned with the rightmost argument corresponding to the least-significant bit; each bit is 0 if the corresponding expression is included in the grouping criteria of the grouping set generating the current result row, and 1 if it is not included. |
-
-\
 
 The grouping operations shown in [Table 9.63](functions-aggregate#FUNCTIONS-GROUPING-TABLE) are used in conjunction with grouping sets (see [Section 7.2.4](queries-table-expressions#QUERIES-GROUPING-SETS)) to distinguish result rows. The arguments to the `GROUPING` function are not actually evaluated, but they must exactly match expressions given in the `GROUP BY` clause of the associated query level. For example:
 

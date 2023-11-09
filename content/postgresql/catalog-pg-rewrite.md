@@ -21,8 +21,6 @@ The catalog `pg_rewrite` stores rewrite rules for tables and views.
 | `ev_qual` `pg_node_tree`Expression tree (in the form of a `nodeToString()` representation) for the rule's qualifying condition                                                                                                                                                        |
 | `ev_action` `pg_node_tree`Query tree (in the form of a `nodeToString()` representation) for the rule's action                                                                                                                                                                         |
 
-\
-
 
 ### Note
 

@@ -56,8 +56,6 @@ In addition to the functions listed in this section, there are a number of funct
 | `user` → `name`This is equivalent to `current_user`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `version` () → `text`Returns a string describing the PostgreSQL server's version. You can also get this information from [server\_version](runtime-config-preset#GUC-SERVER-VERSION), or for a machine-readable version use [server\_version\_num](runtime-config-preset#GUC-SERVER-VERSION-NUM). Software developers should use `server_version_num` (available since 8.2) or [`PQserverVersion`](libpq-status#LIBPQ-PQSERVERVERSION) instead of parsing the text version.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
-\
-
 
 ### Note
 
@@ -104,8 +102,6 @@ SELECT has_function_privilege('joeuser', 'myfunc(int, text)', 'execute');
 | `pg_has_role` ( \[ *`user`* `name` or `oid`, ] *`role`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for role? Allowable privilege types are `MEMBER`, `USAGE`, and `SET`. `MEMBER` denotes direct or indirect membership in the role without regard to what specific privileges may be conferred. `USAGE` denotes whether the privileges of the role are immediately available without doing `SET ROLE`, while `SET` denotes whether it is possible to change to the role using the `SET ROLE` command. This function does not allow the special case of setting *`user`* to `public`, because the PUBLIC pseudo-role can never be a member of real roles. |
 | `row_security_active` ( *`table`* `text` or `oid` ) → `boolean`Is row-level security active for the specified table in the context of the current user and current environment?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
-\
-
 
 [Table 9.69](functions-info#FUNCTIONS-ACLITEM-OP-TABLE) shows the operators available for the `aclitem` type, which is the catalog representation of access privileges. See [Section 5.7](ddl-priv) for information about how to read access privilege values.
 
@@ -118,8 +114,6 @@ SELECT has_function_privilege('joeuser', 'myfunc(int, text)', 'execute');
 | `aclitem` `=` `aclitem` → `boolean`Are `aclitem`s equal? (Notice that type `aclitem` lacks the usual set of comparison operators; it has only equality. In turn, `aclitem` arrays can only be compared for equality.)`'calvin=r*w/hobbes'::aclitem = 'calvin=r*w*/hobbes'::aclitem` → `f`                                    |
 | `aclitem[]` `@>` `aclitem` → `boolean`Does array contain the specified privileges? (This is true if there is an array entry that matches the `aclitem`'s grantee and grantor, and has at least the specified set of privileges.)`'{calvin=r*w/hobbes,hobbes=r*w*/postgres}'::aclitem[] @> 'calvin=r*/hobbes'::aclitem` → `t` |
 | `aclitem[]` `~` `aclitem` → `boolean`This is a deprecated alias for `@>`.`'{calvin=r*w/hobbes,hobbes=r*w*/postgres}'::aclitem[] ~ 'calvin=r*/hobbes'::aclitem` → `t`                                                                                                                                                             |
-
-\
 
 
 [Table 9.70](functions-info#FUNCTIONS-ACLITEM-FN-TABLE) shows some additional functions to manage the `aclitem` type.
@@ -168,8 +162,6 @@ For functions and operators, an object in the search path is said to be visible 
 | `pg_ts_parser_is_visible` ( *`parser`* `oid` ) → `boolean`Is text search parser visible in search path?                                                                                                    |
 | `pg_ts_template_is_visible` ( *`template`* `oid` ) → `boolean`Is text search template visible in search path?                                                                                              |
 | `pg_type_is_visible` ( *`type`* `oid` ) → `boolean`Is type (or domain) visible in search path?                                                                                                             |
-
-\
 
 
 All these functions require object OIDs to identify the object to be checked. If you want to test an object by name, it is convenient to use the OID alias types (`regclass`, `regtype`, `regprocedure`, `regoperator`, `regconfig`, or `regdictionary`), for example:
@@ -258,8 +250,6 @@ SELECT collation for ('foo' COLLATE "de_DE");
 | `to_regrole` ( `text` ) → `regrole`Translates a textual role name to its OID. A similar result is obtained by casting the string to type `regrole` (see [Section 8.19](datatype-oid)); however, this function will return `NULL` rather than throwing an error if the name is not found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `to_regtype` ( `text` ) → `regtype`Translates a textual type name to its OID. A similar result is obtained by casting the string to type `regtype` (see [Section 8.19](datatype-oid)); however, this function will return `NULL` rather than throwing an error if the name is not found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
-\
-
 
 Most of the functions that reconstruct (decompile) database objects have an optional *`pretty`* flag, which if `true` causes the result to be “pretty-printed”. Pretty-printing suppresses unnecessary parentheses and adds whitespace for legibility. The pretty-printed format is more readable, but the default format is more likely to be interpreted the same way by future versions of PostgreSQL; so avoid using pretty-printed output for dump purposes. Passing `false` for the *`pretty`* parameter yields the same result as omitting the parameter.
 
@@ -279,8 +269,6 @@ Most of the functions that reconstruct (decompile) database objects have an opti
 | `search_array`       | Does the column natively support `col = ANY(array)` searches?                                          |
 | `search_nulls`       | Does the column support `IS NULL` and `IS NOT NULL` searches?                                          |
 
-\
-
 
 [#id](#FUNCTIONS-INFO-INDEX-PROPS)
 
@@ -292,8 +280,6 @@ Most of the functions that reconstruct (decompile) database objects have an opti
 | `index_scan`    | Does the index support plain (non-bitmap) scans?                                                                         |
 | `bitmap_scan`   | Does the index support bitmap scans?                                                                                     |
 | `backward_scan` | Can the scan direction be changed in mid-scan (to support `FETCH BACKWARD` on a cursor without needing materialization)? |
-
-\
 
 
 [#id](#FUNCTIONS-INFO-INDEXAM-PROPS)
@@ -307,8 +293,6 @@ Most of the functions that reconstruct (decompile) database objects have an opti
 | `can_multi_col` | Does the access method support indexes with multiple columns?                        |
 | `can_exclude`   | Does the access method support exclusion constraints?                                |
 | `can_include`   | Does the access method support the `INCLUDE` clause of `CREATE INDEX`?               |
-
-\
 
 
 [#id](#FUNCTIONS-PG-SETTINGS-FLAGS)
@@ -406,8 +390,6 @@ The functions shown in [Table 9.80](functions-info#FUNCTIONS-PG-SNAPSHOT) provi
 | `pg_snapshot_xmin` ( `pg_snapshot` ) → `xid8`Returns the `xmin` of a snapshot.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `pg_visible_in_snapshot` ( `xid8`, `pg_snapshot` ) → `boolean`Is the given transaction ID *visible* according to this snapshot (that is, was it completed before the snapshot was taken)? Note that this function will not give the correct answer for a subtransaction ID (subxid); see [Section 74.3](subxacts) for details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
-\
-
 
 The internal transaction ID type `xid` is 32 bits wide and wraps around every 4 billion transactions. However, the functions shown in [Table 9.80](functions-info#FUNCTIONS-PG-SNAPSHOT) use a 64-bit type `xid8` that does not wrap around during the life of an installation and can be converted to `xid` by casting if required; see [Section 74.1](transaction-id) for details. The data type `pg_snapshot` stores information about transaction ID visibility at a particular moment in time. Its components are described in [Table 9.81](functions-info#FUNCTIONS-PG-SNAPSHOT-PARTS). `pg_snapshot`'s textual representation is `xmin:xmax:xip_list`. For example `10:20:10,14,15` means `xmin=10, xmax=20, xip_list=10, 14, 15`.
 
@@ -420,8 +402,6 @@ The internal transaction ID type `xid` is 32 bits wide and wraps around every 4 
 | `xmin`     | Lowest transaction ID that was still active. All transaction IDs less than `xmin` are either committed and visible, or rolled back and dead.                                                                                                                                                                              |
 | `xmax`     | One past the highest completed transaction ID. All transaction IDs greater than or equal to `xmax` had not yet completed as of the time of the snapshot, and thus are invisible.                                                                                                                                          |
 | `xip_list` | Transactions in progress at the time of the snapshot. A transaction ID that is `xmin <= X < xmax` and not in this list was already completed at the time of the snapshot, and thus is either visible or dead according to its commit status. This list does not include the transaction IDs of subtransactions (subxids). |
-
-\
 
 
 In releases of PostgreSQL before 13 there was no `xid8` type, so variants of these functions were provided that used `bigint` to represent a 64-bit XID, with a correspondingly distinct snapshot data type `txid_snapshot`. These older functions have `txid` in their names. They are still supported for backward compatibility, but may be removed from a future release. See [Table 9.82](functions-info#FUNCTIONS-TXID-SNAPSHOT).
@@ -474,8 +454,6 @@ The functions shown in [Table 9.84](functions-info#FUNCTIONS-CONTROLDATA) print
 | `pg_control_init` () → `record`Returns information about cluster initialization state, as shown in [Table 9.87](functions-info#FUNCTIONS-PG-CONTROL-INIT).         |
 | `pg_control_recovery` () → `record`Returns information about recovery state, as shown in [Table 9.88](functions-info#FUNCTIONS-PG-CONTROL-RECOVERY).               |
 
-\
-
 
 [#id](#FUNCTIONS-PG-CONTROL-CHECKPOINT)
 
@@ -502,8 +480,6 @@ The functions shown in [Table 9.84](functions-info#FUNCTIONS-CONTROLDATA) print
 | `newest_commit_ts_xid` | `xid`                      |
 | `checkpoint_time`      | `timestamp with time zone` |
 
-\
-
 
 [#id](#FUNCTIONS-PG-CONTROL-SYSTEM)
 
@@ -515,8 +491,6 @@ The functions shown in [Table 9.84](functions-info#FUNCTIONS-CONTROLDATA) print
 | `catalog_version_no`       | `integer`                  |
 | `system_identifier`        | `bigint`                   |
 | `pg_control_last_modified` | `timestamp with time zone` |
-
-\
 
 
 [#id](#FUNCTIONS-PG-CONTROL-INIT)
@@ -536,8 +510,6 @@ The functions shown in [Table 9.84](functions-info#FUNCTIONS-CONTROLDATA) print
 | `large_object_chunk_size`    | `integer` |
 | `float8_pass_by_value`       | `boolean` |
 | `data_page_checksum_version` | `integer` |
-
-\
 
 
 [#id](#FUNCTIONS-PG-CONTROL-RECOVERY)

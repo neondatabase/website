@@ -45,8 +45,6 @@ The geometric types `point`, `box`, `lseg`, `line`, `path`, `polygon`, and `circ
 | *`geometric_type`* `~=` *`geometric_type`* → `boolean`Are these objects the same? Available for `point`, `box`, `polygon`, `circle`.`polygon '((0,0),(1,1))' ~= polygon '((1,1),(0,0))'` → `t`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [#id](#ftn.FUNCTIONS-GEOMETRY-ROTATION-FN)[\[a\] ](#FUNCTIONS-GEOMETRY-ROTATION-FN)“Rotating” a box with these operators only moves its corner points: the box is still considered to have sides parallel to the axes. Hence the box's size is not preserved, as a true rotation would do.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
-\
-
 
 ### Caution
 
@@ -77,8 +75,6 @@ Before PostgreSQL 14, the point is strictly below/above comparison operators `po
 | `slope` ( `point`, `point` ) → `double precision`Computes slope of a line drawn through the two points.`slope(point '(0,0)', point '(2,1)')` → `0.5`                                                                                                                  |
 | `width` ( `box` ) → `double precision`Computes horizontal size of box.`width(box '(1,2),(0,0)')` → `1`                                                                                                                                                                |
 
-\
-
 
 [#id](#FUNCTIONS-GEOMETRY-CONV-TABLE)
 
@@ -107,8 +103,6 @@ Before PostgreSQL 14, the point is strictly below/above comparison operators `po
 | `polygon` ( `circle` ) → `polygon`Converts circle to a 12-point polygon.`polygon(circle '<(0,0),2>')` → `((-2,0),​(-1.7320508075688774,0.9999999999999999),​(-1.0000000000000002,1.7320508075688772),​(-1.2246063538223773e-16,2),​(0.9999999999999996,1.7320508075688774),​(1.732050807568877,1.0000000000000007),​(2,2.4492127076447545e-16),​(1.7320508075688776,-0.9999999999999994),​(1.0000000000000009,-1.7320508075688767),​(3.673819061467132e-16,-2),​(-0.9999999999999987,-1.732050807568878),​(-1.7320508075688767,-1.0000000000000009))` |
 | `polygon` ( `integer`, `circle` ) → `polygon`Converts circle to an *`n`*-point polygon.`polygon(4, circle '<(3,0),1>')` → `((2,0),​(3,1),​(4,1.2246063538223773e-16),​(3,-1))`                                                                                                                                                                                                                                                                                                                                                                        |
 | `polygon` ( `path` ) → `polygon`Converts closed path to a polygon with the same list of points.`polygon(path '((0,0),(1,1),(2,0))')` → `((0,0),(1,1),(2,0))`                                                                                                                                                                                                                                                                                                                                                                                          |
-
-\
 
 
 It is possible to access the two component numbers of a `point` as though the point were an array with indexes 0 and 1. For example, if `t.p` is a `point` column then `SELECT p[0] FROM t` retrieves the X coordinate and `UPDATE t SET p[1] = ...` changes the Y coordinate. In the same way, a value of type `box` or `lseg` can be treated as an array of two `point` values.

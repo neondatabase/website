@@ -46,8 +46,6 @@ The definitions of the columns exposed by the view are shown in [Table F.15](pg
 | `usagecount` `smallint`Clock-sweep access count                                                                      |
 | `pinning_backends` `integer`Number of backends pinning this buffer                                                   |
 
-\
-
 
 There is one row for each buffer in the shared cache. Unused buffers are shown with all fields null except `bufferid`. Shared system catalogs are shown as belonging to database zero.
 
@@ -73,8 +71,6 @@ The definitions of the columns exposed by the function are shown in [Table F.16
 | `buffers_pinned` `int4`Number of pinned shared buffers              |
 | `usagecount_avg` `float8`Average usage count of used shared buffers |
 
-\
-
 
 The `pg_buffercache_summary()` function returns a single row summarizing the state of all shared buffers. Similar and more detailed information is provided by the `pg_buffercache` view, but `pg_buffercache_summary()` is significantly cheaper.
 
@@ -96,8 +92,6 @@ The definitions of the columns exposed by the function are shown in [Table F.17
 | `buffers` `int4`Number of buffers with the usage count       |
 | `dirty` `int4`Number of dirty buffers with the usage count   |
 | `pinned` `int4`Number of pinned buffers with the usage count |
-
-\
 
 
 The `pg_buffercache_usage_counts()` function returns a set of rows summarizing the states of all shared buffers, aggregated over the possible usage count values. Similar and more detailed information is provided by the `pg_buffercache` view, but `pg_buffercache_usage_counts()` is significantly cheaper.

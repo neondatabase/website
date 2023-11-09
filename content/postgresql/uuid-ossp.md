@@ -32,8 +32,6 @@ SELECT uuid_generate_v3(uuid_ns_url(), 'http://www.postgresql.org');
 | `uuid_generate_v4` () → `uuid`Generates a version 4 UUID, which is derived entirely from random numbers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `uuid_generate_v5` ( *`namespace`* `uuid`, *`name`* `text` ) → `uuid`Generates a version 5 UUID, which works like a version 3 UUID except that SHA-1 is used as a hashing method. Version 5 should be preferred over version 3 because SHA-1 is thought to be more secure than MD5.                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
-\
-
 
 [#id](#UUID-OSSP-CONSTANTS)
 

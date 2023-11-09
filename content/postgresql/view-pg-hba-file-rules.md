@@ -28,8 +28,6 @@ By default, the `pg_hba_file_rules` view can be read only by superusers.
 | `options` `text[]`Options specified for authentication method, if any                                                                                                        |
 | `error` `text`If not null, an error message indicating why this line could not be processed                                                                                  |
 
-\
-
 
 Usually, a row reflecting an incorrect entry will have values for only the `line_number` and `error` fields.
 

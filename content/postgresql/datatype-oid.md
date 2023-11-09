@@ -46,8 +46,6 @@ While that doesn't look all that bad by itself, it's still oversimplified. A far
 | `regrole`       | `pg_authid`    | role name                    | `smithee`                                   |
 | `regtype`       | `pg_type`      | data type name               | `integer`                                   |
 
-\
-
 
 All of the OID alias types for objects that are grouped by namespace accept schema-qualified names, and will display schema-qualified names on output if the object would not be found in the current search path without being qualified. For example, `myschema.mytable` is acceptable input for `regclass` (if there is such a table). That value might be output as `myschema.mytable`, or just `mytable`, depending on the current search path. The `regproc` and `regoper` alias types will only accept input names that are unique (not overloaded), so they are of limited use; for most uses `regprocedure` or `regoperator` are more appropriate. For `regoperator`, unary operators are identified by writing `NONE` for the unused operand.
 

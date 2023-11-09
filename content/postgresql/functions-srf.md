@@ -15,8 +15,6 @@ This section describes functions that possibly return more than one row. The mos
 | `generate_series` ( *`start`* `integer`, *`stop`* `integer` \[, *`step`* `integer` ] ) → `setof integer``generate_series` ( *`start`* `bigint`, *`stop`* `bigint` \[, *`step`* `bigint` ] ) → `setof bigint``generate_series` ( *`start`* `numeric`, *`stop`* `numeric` \[, *`step`* `numeric` ] ) → `setof numeric`Generates a series of values from *`start`* to *`stop`*, with a step size of *`step`*. *`step`* defaults to 1.                                                                                                                                                                                                 |
 | `generate_series` ( *`start`* `timestamp`, *`stop`* `timestamp`, *`step`* `interval` ) → `setof timestamp``generate_series` ( *`start`* `timestamp with time zone`, *`stop`* `timestamp with time zone`, *`step`* `interval` \[, *`timezone`* `text` ] ) → `setof timestamp with time zone`Generates a series of values from *`start`* to *`stop`*, with a step size of *`step`*. In the timezone-aware form, times of day and daylight-savings adjustments are computed according to the time zone named by the *`timezone`* argument, or the current [TimeZone](runtime-config-client#GUC-TIMEZONE) setting if that is omitted. |
 
-\
-
 
 When *`step`* is positive, zero rows are returned if *`start`* is greater than *`stop`*. Conversely, when *`step`* is negative, zero rows are returned if *`start`* is less than *`stop`*. Zero rows are also returned if any input is `NULL`. It is an error for *`step`* to be zero. Some examples follow:
 
@@ -103,8 +101,6 @@ SELECT * FROM generate_series('2001-10-22 00:00 -04:00'::timestamptz,
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `generate_subscripts` ( *`array`* `anyarray`, *`dim`* `integer` ) → `setof integer`Generates a series comprising the valid subscripts of the *`dim`*'th dimension of the given array.                                                                                   |
 | `generate_subscripts` ( *`array`* `anyarray`, *`dim`* `integer`, *`reverse`* `boolean` ) → `setof integer`Generates a series comprising the valid subscripts of the *`dim`*'th dimension of the given array. When *`reverse`* is true, returns the series in reverse order. |
-
-\
 
 
 `generate_subscripts` is a convenience function that generates the set of valid subscripts for the specified dimension of the given array. Zero rows are returned for arrays that do not have the requested dimension, or if any input is `NULL`. Some examples follow:

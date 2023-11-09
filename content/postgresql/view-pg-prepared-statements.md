@@ -23,7 +23,5 @@ The `pg_prepared_statements` view displays all the prepared statements that are 
 | `generic_plans` `int8`Number of times generic plan was chosen                                                                                                                                                                                                                                                                                     |
 | `custom_plans` `int8`Number of times custom plan was chosen                                                                                                                                                                                                                                                                                       |
 
-\
-
 
 The `pg_prepared_statements` view is read-only.

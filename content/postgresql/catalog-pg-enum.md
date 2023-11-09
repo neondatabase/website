@@ -17,8 +17,6 @@ The `pg_enum` catalog contains entries showing the values and labels for each en
 | `enumsortorder` `float4`The sort position of this enum value within its enum type                                                                   |
 | `enumlabel` `name`The textual label for this enum value                                                                                             |
 
-\
-
 
 The OIDs for `pg_enum` rows follow a special rule: even-numbered OIDs are guaranteed to be ordered in the same way as the sort ordering of their enum type. That is, if two even OIDs belong to the same enum type, the smaller OID must have the smaller `enumsortorder` value. Odd-numbered OID values need bear no relationship to the sort order. This rule allows the enum comparison routines to avoid catalog lookups in many common cases. The routines that create and alter enum types attempt to assign even OIDs to enum values whenever possible.
 

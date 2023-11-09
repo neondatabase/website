@@ -20,8 +20,6 @@ This section describes functions and operators for examining and manipulating bi
 | `bit` `<<` `integer` → `bit`Bitwise shift left (string length is preserved)`B'10001' << 3` → `01000`        |
 | `bit` `>>` `integer` → `bit`Bitwise shift right (string length is preserved)`B'10001' >> 2` → `00100`       |
 
-\
-
 
 Some of the functions available for binary strings are also available for bit strings, as shown in [Table 9.15](functions-bitstring#FUNCTIONS-BIT-STRING-TABLE).
 
@@ -40,8 +38,6 @@ Some of the functions available for binary strings are also available for bit st
 | `substring` ( *`bits`* `bit` \[ `FROM` *`start`* `integer` ] \[ `FOR` *`count`* `integer` ] ) → `bit`Extracts the substring of *`bits`* starting at the *`start`*'th bit if that is specified, and stopping after *`count`* bits if that is specified. Provide at least one of *`start`* and *`count`*.`substring(B'110010111111' from 3 for 2)` → `00`                                                                  |
 | `get_bit` ( *`bits`* `bit`, *`n`* `integer` ) → `integer`Extracts *`n`*'th bit from bit string; the first (leftmost) bit is bit 0.`get_bit(B'101010101010101010', 6)` → `1`                                                                                                                                                                                                                                              |
 | `set_bit` ( *`bits`* `bit`, *`n`* `integer`, *`newvalue`* `integer` ) → `bit`Sets *`n`*'th bit in bit string to *`newvalue`*; the first (leftmost) bit is bit 0.`set_bit(B'101010101010101010', 6, 0)` → `101010001010101010`                                                                                                                                                                                            |
-
-\
 
 
 In addition, it is possible to cast integral values to and from type `bit`. Casting an integer to `bit(n)` copies the rightmost `n` bits. Casting an integer to a bit string width wider than the integer itself will sign-extend on the left. Some examples:

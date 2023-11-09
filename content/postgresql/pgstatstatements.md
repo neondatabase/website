@@ -73,8 +73,6 @@ The statistics gathered by the module are made available via a view named `pg_st
 | `jit_emission_count` `bigint`Number of times code has been emitted                                                                                                                                                            |
 | `jit_emission_time` `double precision`Total time spent by the statement on emitting code, in milliseconds                                                                                                                     |
 
-\
-
 
 For security reasons, only superusers and roles with privileges of the `pg_read_all_stats` role are allowed to see the SQL text and `queryid` of queries executed by other users. Other users can see the statistics, however, if the view has been installed in their database.
 

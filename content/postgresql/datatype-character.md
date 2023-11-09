@@ -12,8 +12,6 @@
 | `character(n)`, `char(n)`, `bpchar(n)` | fixed-length, blank padded |
 | `text`                                 | variable unlimited length  |
 
-\
-
 [Table 8.4](datatype-character#DATATYPE-CHARACTER-TABLE) shows the general-purpose character types available in PostgreSQL.
 
 SQL defines two primary character types: `character varying(n)` and `character(n)`, where *`n`* is a positive integer. Both of these types can store strings up to *`n`* characters (not bytes) in length. An attempt to store a longer string into a column of these types will result in an error, unless the excess characters are all spaces, in which case the string will be truncated to the maximum length. (This somewhat bizarre exception is required by the SQL standard.) However, if one explicitly casts a value to `character varying(n)` or `character(n)`, then an over-length value will be truncated to *`n`* characters without raising an error. (This too is required by the SQL standard.) If the string to be stored is shorter than the declared length, values of type `character` will be space-padded; values of type `character varying` will simply store the shorter string.
@@ -69,8 +67,6 @@ SELECT b, char_length(b) FROM test2;
 |                          |                                                                                  |
 | ------------------------ | -------------------------------------------------------------------------------- |
 | [(1)](#co.datatype-char) | The `char_length` function is discussed in [Section 9.4](functions-string). |
-
-\
 
 There are two other fixed-length character types in PostgreSQL, shown in [Table 8.5](datatype-character#DATATYPE-CHARACTER-SPECIAL-TABLE). These are not intended for general-purpose use, only for use in the internal system catalogs. The `name` type is used to store identifiers. Its length is currently defined as 64 bytes (63 usable characters plus terminator) but should be referenced using the constant `NAMEDATALEN` in `C` source code. The length is set at compile time (and is therefore adjustable for special uses); the default maximum length might change in a future release. The type `"char"` (note the quotes) is different from `char(1)` in that it only uses one byte of storage, and therefore can store only a single ASCII character. It is used in the system catalogs as a simplistic enumeration type.
 

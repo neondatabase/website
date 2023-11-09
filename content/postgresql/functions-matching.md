@@ -180,8 +180,6 @@ substring('foobar' similar '#"o_b#"%' escape '#')    NULL
 | `text` `!~` `text` → `boolean`String does not match regular expression, case sensitively`'thomas' !~ 't.*max'` → `t`    |
 | `text` `!~*` `text` → `boolean`String does not match regular expression, case-insensitively`'thomas' !~* 'T.*ma'` → `f` |
 
-\
-
 
 POSIX regular expressions provide a more powerful means for pattern matching than the `LIKE` and `SIMILAR TO` operators. Many Unix tools such as `egrep`, `sed`, or `awk` use a pattern matching language that is similar to the one described here.
 
@@ -422,8 +420,6 @@ A *constraint* matches an empty string, but matches only when specific condition
 | `{`             | when followed by a character other than a digit, matches the left-brace character `{`; when followed by a digit, it is the beginning of a *`bound`* (see below)                                             |
 | *`x`*           | where *`x`* is a single character with no other significance, matches that character                                                                                                                        |
 
-\
-
 
 An RE cannot end with a backslash (`\`).
 
@@ -450,8 +446,6 @@ If you have [standard\_conforming\_strings](runtime-config-compatible#GUC-STANDA
 | `{`*`m`*`,}?`        | non-greedy version of `{`*`m`*`,}`                                                           |
 | `{`*`m`*`,`*`n`*`}?` | non-greedy version of `{`*`m`*`,`*`n`*`}`                                                    |
 
-\
-
 
 The forms using `{`*`...`*`}` are known as *bounds*. The numbers *`m`* and *`n`* within a bound are unsigned decimal integers with permissible values from 0 to 255 inclusive.
 
@@ -473,8 +467,6 @@ A quantifier cannot immediately follow another quantifier, e.g., `**` is invalid
 | `(?!`*`re`*`)`  | *negative lookahead* matches at any point where no substring matching *`re`* begins (AREs only) |
 | `(?<=`*`re`*`)` | *positive lookbehind* matches at any point where a substring matching *`re`* ends (AREs only)   |
 | `(?<!`*`re`*`)` | *negative lookbehind* matches at any point where no substring matching *`re`* ends (AREs only)  |
-
-\
 
 
 Lookahead and lookbehind constraints cannot contain *back references* (see [Section 9.7.3.3](functions-matching#POSIX-ESCAPE-SEQUENCES)), and all parentheses within them are considered non-capturing.
@@ -536,8 +528,6 @@ A *back reference* (`\`*`n`*) matches the same string matched by the previous pa
 | `\`*`xy`*        | (where *`xy`* is exactly two octal digits, and is not a *back reference*) the character whose octal value is `0`*`xy`*                                                         |
 | `\`*`xyz`*       | (where *`xyz`* is exactly three octal digits, and is not a *back reference*) the character whose octal value is `0`*`xyz`*                                                     |
 
-\
-
 
 Hexadecimal digits are `0`-`9`, `a`-`f`, and `A`-`F`. Octal digits are `0`-`7`.
 
@@ -558,8 +548,6 @@ The character-entry escapes are always taken as ordinary characters. For example
 | `\S`   | matches any non-whitespace character, like `[^[:space:]]` |
 | `\W`   | matches any non-word character, like `[^[:word:]]`        |
 
-\
-
 
 The class-shorthand escapes also work within bracket expressions, although the definitions shown above are not quite syntactically valid in that context. For example, `[a-c\d]` is equivalent to `[a-c[:digit:]]`.
 
@@ -576,8 +564,6 @@ The class-shorthand escapes also work within bracket expressions, although the d
 | `\Y`   | matches only at a point that is not the beginning or end of a word                                                                              |
 | `\Z`   | matches only at the end of the string (see [Section 9.7.3.5](functions-matching#POSIX-MATCHING-RULES) for how this differs from `$`)       |
 
-\
-
 
 A word is defined as in the specification of `[[:<:]]` and `[[:>:]]` above. Constraint escapes are illegal within bracket expressions.
 
@@ -589,8 +575,6 @@ A word is defined as in the specification of `[[:<:]]` and `[[:>:]]` above. Cons
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `\`*`m`*   | (where *`m`* is a nonzero digit) a back reference to the *`m`*'th subexpression                                                                                                                                              |
 | `\`*`mnn`* | (where *`m`* is a nonzero digit, and *`nn`* is some more digits, and the decimal value *`mnn`* is not greater than the number of closing capturing parentheses seen so far) a back reference to the *`mnn`*'th subexpression |
-
-\
 
 
 ### Note
@@ -625,8 +609,6 @@ An ARE can begin with *embedded options*: a sequence `(?`*`xyz`*`)` (where *`xyz
 | `t`    | tight syntax (default; see below)                                                                                          |
 | `w`    | inverse partial newline-sensitive (“weird”) matching (see [Section 9.7.3.5](functions-matching#POSIX-MATCHING-RULES)) |
 | `x`    | expanded syntax (see below)                                                                                                |
-
-\
 
 
 Embedded options take effect at the `)` terminating the sequence. They can appear only at the start of an ARE (after the `***:` director if any).
@@ -766,8 +748,6 @@ PostgreSQL does not currently implement these operators and functions. You can g
 | `POSITION_REGEX(pattern IN string)`                   | `regexp_instr(string, pattern)`                      |
 | `SUBSTRING_REGEX(pattern IN string)`                  | `regexp_substr(string, pattern)`                     |
 | `TRANSLATE_REGEX(pattern IN string WITH replacement)` | `regexp_replace(string, pattern, replacement)`       |
-
-\
 
 
 Regular expression functions similar to those provided by PostgreSQL are also available in a number of other SQL implementations, whereas the SQL-standard functions are not as widely implemented. Some of the details of the regular expression syntax will likely differ in each implementation.

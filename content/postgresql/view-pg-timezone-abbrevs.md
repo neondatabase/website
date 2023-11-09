@@ -16,7 +16,5 @@ The view `pg_timezone_abbrevs` provides a list of time zone abbreviations that a
 | `utc_offset` `interval`Offset from UTC (positive means east of Greenwich) |
 | `is_dst` `bool`True if this is a daylight-savings abbreviation            |
 
-\
-
 
 While most timezone abbreviations represent fixed offsets from UTC, there are some that have historically varied in value (see [Section B.4](datetime-config-files) for more information). In such cases this view presents their current meaning.

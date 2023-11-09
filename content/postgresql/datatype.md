@@ -167,8 +167,6 @@ PostgreSQL has a rich set of native data types available to users. Users can add
 | `uuid`                                    |                      | universally unique identifier                                      |
 | `xml`                                     |                      | XML data                                                           |
 
-\
-
 
 ### Compatibility
 

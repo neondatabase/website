@@ -31,7 +31,5 @@ Cursors are used internally to implement some of the components of PostgreSQL, s
 | `is_scrollable` `bool``true` if the cursor is scrollable (that is, it allows rows to be retrieved in a nonsequential manner); `false` otherwise                    |
 | `creation_time` `timestamptz`The time at which the cursor was declared                                                                                             |
 
-\
-
 
 The `pg_cursors` view is read-only.

@@ -20,7 +20,5 @@ The view `pg_prepared_xacts` displays information about transactions that are cu
 | `owner` `name` (references [`pg_authid`](catalog-pg-authid).`rolname`)Name of the user that executed the transaction                    |
 | `database` `name` (references [`pg_database`](catalog-pg-database).`datname`)Name of the database in which the transaction was executed |
 
-\
-
 
 When the `pg_prepared_xacts` view is accessed, the internal transaction manager data structures are momentarily locked, and a copy is made for the view to display. This ensures that the view produces a consistent set of results, while not blocking normal operations longer than necessary. Nonetheless there could be some impact on database performance if this view is frequently accessed.

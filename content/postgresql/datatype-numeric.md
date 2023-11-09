@@ -28,8 +28,6 @@ Numeric types consist of two-, four-, and eight-byte integers, four- and eight-b
 | `serial`           | 4 bytes      | autoincrementing integer        | 1 to 2147483647                                                                          |
 | `bigserial`        | 8 bytes      | large autoincrementing integer  | 1 to 9223372036854775807                                                                 |
 
-\
-
 
 The syntax of constants for the numeric types is described in [Section 4.1.2](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS). The numeric types have a full set of corresponding arithmetic operators and functions. Refer to [Chapter 9](functions) for more information. The following sections describe the types in detail.
 

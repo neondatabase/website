@@ -39,8 +39,6 @@ All the functions and operators described below that take `time` or `timestamp` 
 | `interval` `*` `double precision` → `interval`Multiply an interval by a scalar`interval '1 second' * 900` → `00:15:00``interval '1 day' * 21` → `21 days``interval '1 hour' * 3.5` → `03:30:00`                        |
 | `interval` `/` `double precision` → `interval`Divide an interval by a scalar`interval '1 hour' / 1.5` → `00:40:00`                                                                                                     |
 
-\
-
 
 [#id](#FUNCTIONS-DATETIME-TABLE)
 
@@ -86,8 +84,6 @@ All the functions and operators described below that take `time` or `timestamp` 
 | `timeofday` ( ) → `text`Current date and time (like `clock_timestamp`, but as a `text` string); see [Section 9.9.5](functions-datetime#FUNCTIONS-DATETIME-CURRENT)`timeofday()` → `Mon Dec 23 14:39:53.662522 2019 EST`                                                                                                                                                                                                                                                                                                                                                                                   |
 | `transaction_timestamp` ( ) → `timestamp with time zone`Current date and time (start of current transaction); see [Section 9.9.5](functions-datetime#FUNCTIONS-DATETIME-CURRENT)`transaction_timestamp()` → `2019-12-23 14:39:53.662522-05`                                                                                                                                                                                                                                                                                                                                                               |
 | `to_timestamp` ( `double precision` ) → `timestamp with time zone`Convert Unix epoch (seconds since 1970-01-01 00:00:00+00) to timestamp with time zone`to_timestamp(1284352323)` → `2010-09-13 04:32:03+00`                                                                                                                                                                                                                                                                                                                                                                                                   |
-
-\
 
 
 In addition to these functions, the SQL `OVERLAPS` operator is supported:
@@ -538,8 +534,6 @@ The `AT TIME ZONE` operator converts time stamp *without* time zone to/from time
 | `timestamp without time zone` `AT TIME ZONE` *`zone`* → `timestamp with time zone`Converts given time stamp *without* time zone to time stamp *with* time zone, assuming the given value is in the named time zone.`timestamp '2001-02-16 20:38:40' at time zone 'America/Denver'` → `2001-02-17 03:38:40+00`   |
 | `timestamp with time zone` `AT TIME ZONE` *`zone`* → `timestamp without time zone`Converts given time stamp *with* time zone to time stamp *without* time zone, as the time would appear in that zone.`timestamp with time zone '2001-02-16 20:38:40-05' at time zone 'America/Denver'` → `2001-02-16 18:38:40` |
 | `time with time zone` `AT TIME ZONE` *`zone`* → `time with time zone`Converts given time *with* time zone to a new time zone. Since no date is supplied, this uses the currently active UTC offset for the named destination zone.`time with time zone '05:34:17-05' at time zone 'UTC'` → `10:34:17+00`        |
-
-\
 
 
 In these expressions, the desired time zone *`zone`* can be specified either as a text value (e.g., `'America/Los_Angeles'`) or as an interval (e.g., `INTERVAL '-08:00'`). In the text case, a time zone name can be specified in any of the ways described in [Section 8.5.3](datatype-datetime#DATATYPE-TIMEZONES). The interval case is only useful for zones that have fixed offsets from UTC, so it is not very common in practice.

@@ -298,8 +298,6 @@ EXECUTE format('UPDATE tbl SET %I = $1 WHERE key = $2', colname)
 
 This form is better because the variables are handled in their native data type format, rather than unconditionally converting them to text and quoting them via `%L`. It is also more efficient.
 
-\
-
 
 A much larger example of a dynamic command and `EXECUTE` can be seen in [Example 43.10](plpgsql-porting#PLPGSQL-PORTING-EX2), which builds and executes a `CREATE FUNCTION` command to define a new function.
 
@@ -328,8 +326,6 @@ GET DIAGNOSTICS integer_var = ROW_COUNT;
 | `ROW_COUNT`      | `bigint` | the number of rows processed by the most recent SQL command                                                                  |
 | `PG_CONTEXT`     | `text`   | line(s) of text describing the current call stack (see [Section 43.6.9](plpgsql-control-structures#PLPGSQL-CALL-STACK)) |
 | `PG_ROUTINE_OID` | `oid`    | OID of the current function                                                                                                  |
-
-\
 
 
 The second method to determine the effects of a command is to check the special variable named `FOUND`, which is of type `boolean`. `FOUND` starts out false within each PL/pgSQL function call. It is set by each of the following types of statements:

@@ -88,8 +88,6 @@ Some of the information in the dynamic statistics views shown in [Table 28.1](m
 | `pg_stat_progress_basebackup`   | One row for each WAL sender process streaming a base backup, showing current progress. See [Section 28.4.6](progress-reporting#BASEBACKUP-PROGRESS-REPORTING).                                                                 |
 | `pg_stat_progress_copy`         | One row for each backend running `COPY`, showing current progress. See [Section 28.4.3](progress-reporting#COPY-PROGRESS-REPORTING).                                                                                           |
 
-\
-
 
 [#id](#MONITORING-STATS-VIEWS-TABLE)
 
@@ -126,8 +124,6 @@ Some of the information in the dynamic statistics views shown in [Table 28.1](m
 | `pg_statio_all_sequences`     | One row for each sequence in the current database, showing statistics about I/O on that specific sequence. See [`pg_statio_all_sequences`](monitoring-stats#MONITORING-PG-STATIO-ALL-SEQUENCES-VIEW) for details.                                                               |
 | `pg_statio_sys_sequences`     | Same as `pg_statio_all_sequences`, except that only system sequences are shown. (Presently, no system sequences are defined, so this view is always empty.)                                                                                                                          |
 | `pg_statio_user_sequences`    | Same as `pg_statio_all_sequences`, except that only user sequences are shown.                                                                                                                                                                                                        |
-
-\
 
 
 The per-index statistics are particularly useful to determine which indexes are being used and how effective they are.
@@ -181,8 +177,6 @@ The `pg_stat_activity` view will have one row per server process, showing inform
 | `query` `text`Text of this backend's most recent query. If `state` is `active` this field shows the currently executing query. In all other states, it shows the last query that was executed. By default the query text is truncated at 1024 bytes; this value can be changed via the parameter [track\_activity\_query\_size](runtime-config-statistics#GUC-TRACK-ACTIVITY-QUERY-SIZE).                                                                                                                                                                                                                                                                        |
 | `backend_type` `text`Type of current backend. Possible types are `autovacuum launcher`, `autovacuum worker`, `logical replication launcher`, `logical replication worker`, `parallel worker`, `background writer`, `client backend`, `checkpointer`, `archiver`, `standalone backend`, `startup`, `walreceiver`, `walsender` and `walwriter`. In addition, background workers registered by extensions may have additional types.                                                                                                                                                                                                                                     |
 
-\
-
 
 ### Note
 
@@ -203,8 +197,6 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `Lock`          | The server process is waiting for a heavyweight lock. Heavyweight locks, also known as lock manager locks or simply locks, primarily protect SQL-visible objects such as tables. However, they are also used to ensure mutual exclusion for certain internal operations such as relation extension. `wait_event` will identify the type of lock awaited; see [Table 28.11](monitoring-stats#WAIT-EVENT-LOCK-TABLE). |
 | `LWLock`        | The server process is waiting for a lightweight lock. Most such locks protect a particular data structure in shared memory. `wait_event` will contain a name identifying the purpose of the lightweight lock. (Some locks have specific names; others are part of a group of locks each with a similar purpose.) See [Table 28.12](monitoring-stats#WAIT-EVENT-LWLOCK-TABLE).                                       |
 | `Timeout`       | The server process is waiting for a timeout to expire. `wait_event` will identify the specific wait point; see [Table 28.13](monitoring-stats#WAIT-EVENT-TIMEOUT-TABLE).                                                                                                                                                                                                                                            |
-
-\
 
 
 [#id](#WAIT-EVENT-ACTIVITY-TABLE)
@@ -227,8 +219,6 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `WalSenderMain`            | Waiting in main loop of WAL sender process.                                           |
 | `WalWriterMain`            | Waiting in main loop of WAL writer process.                                           |
 
-\
-
 
 [#id](#WAIT-EVENT-BUFFERPIN-TABLE)
 
@@ -237,8 +227,6 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `BufferPin` Wait Event | Description                                      |
 | ---------------------- | ------------------------------------------------ |
 | `BufferPin`            | Waiting to acquire an exclusive pin on a buffer. |
-
-\
 
 
 [#id](#WAIT-EVENT-CLIENT-TABLE)
@@ -256,8 +244,6 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `WalSenderWaitForWAL`     | Waiting for WAL to be flushed in WAL sender process.                                      |
 | `WalSenderWriteData`      | Waiting for any activity when processing replies from WAL receiver in WAL sender process. |
 
-\
-
 
 [#id](#WAIT-EVENT-EXTENSION-TABLE)
 
@@ -266,8 +252,6 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `Extension` Wait Event | Description              |
 | ---------------------- | ------------------------ |
 | `Extension`            | Waiting in an extension. |
-
-\
 
 
 [#id](#WAIT-EVENT-IO-TABLE)
@@ -351,8 +335,6 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `WALSyncMethodAssign`          | Waiting for data to reach durable storage while assigning a new WAL sync method.                   |
 | `WALWrite`                     | Waiting for a write to a WAL file.                                                                 |
 
-\
-
 
 [#id](#WAIT-EVENT-IPC-TABLE)
 
@@ -414,8 +396,6 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `WalReceiverWaitStart`            | Waiting for startup process to send initial data for streaming replication.                               |
 | `XactGroupUpdate`                 | Waiting for the group leader to update transaction status at end of a parallel operation.                 |
 
-\
-
 
 [#id](#WAIT-EVENT-LOCK-TABLE)
 
@@ -435,8 +415,6 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `tuple`            | Waiting to acquire a lock on a tuple.                                                                |
 | `userlock`         | Waiting to acquire a user lock.                                                                      |
 | `virtualxid`       | Waiting to acquire a virtual transaction ID lock; see [Section 74.1](transaction-id).           |
-
-\
 
 
 [#id](#WAIT-EVENT-LWLOCK-TABLE)
@@ -520,8 +498,6 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `XactTruncation`             | Waiting to execute `pg_xact_status` or update the oldest transaction ID available to it.                                      |
 | `XidGen`                     | Waiting to allocate a new transaction ID.                                                                                     |
 
-\
-
 
 ### Note
 
@@ -542,8 +518,6 @@ Extensions can add `LWLock` types to the list shown in [Table 28.12](monitoring
 | `SpinDelay`                     | Waiting while acquiring a contended spinlock.                                                          |
 | `VacuumDelay`                   | Waiting in a cost-based vacuum delay point.                                                            |
 | `VacuumTruncate`                | Waiting to acquire an exclusive lock to truncate off any empty pages at the end of a table vacuumed.   |
-
-\
 
 
 Here is an example of how wait events can be viewed:
@@ -605,8 +579,6 @@ The `pg_stat_replication` view will contain one row per WAL sender process, show
 
 - `quorum`: This standby server is considered as a candidate for quorum standbys.      |
 | `reply_time` `timestamp with time zone`Send time of last reply message received from standby server                                                                                                                                                                                                                                                                                                               |
-
-\
 
 
 The lag times reported in the `pg_stat_replication` view are measurements of the time taken for recent WAL to be written, flushed and replayed and for the sender to know about it. These times represent the commit delay that was (or would have been) introduced by each synchronous commit level, if the remote server was configured as a synchronous standby. For an asynchronous standby, the `replay_lag` column approximates the delay before recent transactions became visible to queries. If the standby server has entirely caught up with the sending server and there is no more WAL activity, the most recently measured lag times will continue to be displayed for a short time and then show NULL.
@@ -805,8 +777,6 @@ The `pg_stat_archiver` view will always have a single row, containing data about
 | `last_failed_time` `timestamp with time zone`Time of the most recent failed archival operation      |
 | `stats_reset` `timestamp with time zone`Time at which these statistics were last reset              |
 
-\
-
 
 Normally, WAL files are archived in order, oldest to newest, but that is not guaranteed, and does not hold under special circumstances like when promoting a standby or after crash recovery. Therefore it is not safe to assume that all files older than `last_archived_wal` have also been successfully archived.
 
@@ -852,8 +822,6 @@ Currently, I/O on relations (e.g. tables, indexes) is tracked. However, relation
 | `fsyncs` `bigint`Number of `fsync` calls. These are only tracked in `context` `normal`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `fsync_time` `double precision`Time spent in fsync operations in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `stats_reset` `timestamp with time zone`Time at which these statistics were last reset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-
-\
 
 
 Some backend types never perform I/O operations on some I/O objects and/or in some I/O contexts. These rows are omitted from the view. For example, the checkpointer does not checkpoint temporary tables, so there will be no rows for `backend_type` `checkpointer` and `object` `temp relation`.
@@ -1053,8 +1021,6 @@ The `pg_stat_all_indexes` view will contain one row for each index in the curren
 | `idx_tup_read` `bigint`Number of index entries returned by scans on this index                                                    |
 | `idx_tup_fetch` `bigint`Number of live table rows fetched by simple index scans using this index                                  |
 
-\
-
 
 Indexes can be used by simple index scans, “bitmap” index scans, and the optimizer. In a bitmap scan the output of several indexes can be combined via AND or OR rules, so it is difficult to associate individual heap row fetches with specific indexes when a bitmap scan is used. Therefore, a bitmap scan increments the `pg_stat_all_indexes`.`idx_tup_read` count(s) for the index(es) it uses, and it increments the `pg_stat_all_tables`.`idx_tup_fetch` count for the table, but it does not affect `pg_stat_all_indexes`.`idx_tup_fetch`. The optimizer also accesses indexes to check for supplied constants whose values are outside the recorded range of the optimizer statistics because the optimizer statistics might be stale.
 
@@ -1202,8 +1168,6 @@ Additional functions related to the cumulative statistics system are listed in [
 | `pg_stat_reset_slru` ( `text` ) → `void`Resets statistics to zero for a single SLRU cache, or for all SLRUs in the cluster. If the argument is NULL, all counters shown in the `pg_stat_slru` view for all SLRU caches are reset. The argument can be one of `CommitTs`, `MultiXactMember`, `MultiXactOffset`, `Notify`, `Serial`, `Subtrans`, or `Xact` to reset the counters for only that entry. If the argument is `other` (or indeed, any unrecognized name), then the counters for all other SLRU caches, such as extension-defined caches, are reset.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function. |
 | `pg_stat_reset_replication_slot` ( `text` ) → `void`Resets statistics of the replication slot defined by the argument. If the argument is `NULL`, resets statistics for all the replication slots.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                                           |
 | `pg_stat_reset_subscription_stats` ( `oid` ) → `void`Resets statistics for a single subscription shown in the `pg_stat_subscription_stats` view to zero. If the argument is `NULL`, reset statistics for all subscriptions.This function is restricted to superusers by default, but other users can be granted EXECUTE to run the function.                                                                                                                                                                                                                                                                                                                                  |
-
-\
 
 
 ### Warning

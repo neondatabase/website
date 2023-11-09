@@ -70,8 +70,6 @@ Some pseudo-types of special interest are the *polymorphic types*, which are use
 | `anycompatiblerange`      | Common | Indicates that a function accepts any range data type, with automatic promotion of multiple arguments to a common data type      |
 | `anycompatiblemultirange` | Common | Indicates that a function accepts any multirange data type, with automatic promotion of multiple arguments to a common data type |
 
-\
-
 
 Polymorphic arguments and results are tied to each other and are resolved to specific data types when a query calling a polymorphic function is parsed. When there is more than one polymorphic argument, the actual data types of the input values must match up as described below. If the function's result type is polymorphic, or it has output parameters of polymorphic types, the types of those results are deduced from the actual types of the polymorphic inputs as described below.
 

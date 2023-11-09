@@ -26,8 +26,6 @@ SQL defines some string functions that use key words, rather than commas, to sep
 | `trim` ( \[ `LEADING` \| `TRAILING` \| `BOTH` ] *`bytesremoved`* `bytea` `FROM` *`bytes`* `bytea` ) → `bytea`Removes the longest string containing only bytes appearing in *`bytesremoved`* from the start, end, or both ends (`BOTH` is the default) of *`bytes`*.`trim('\x9012'::bytea from '\x1234567890'::bytea)` → `\x345678`                                                                                                  |
 | `trim` ( \[ `LEADING` \| `TRAILING` \| `BOTH` ] \[ `FROM` ] *`bytes`* `bytea`, *`bytesremoved`* `bytea` ) → `bytea`This is a non-standard syntax for `trim()`.`trim(both from '\x1234567890'::bytea, '\x9012'::bytea)` → `\x345678`                                                                                                                                                                                                     |
 
-\
-
 
 Additional binary string manipulation functions are available and are listed in [Table 9.12](functions-binarystring#FUNCTIONS-BINARYSTRING-OTHER). Some of them are used internally to implement the SQL-standard string functions listed in [Table 9.11](functions-binarystring#FUNCTIONS-BINARYSTRING-SQL).
 
@@ -51,8 +49,6 @@ Additional binary string manipulation functions are available and are listed in 
 | `sha512` ( `bytea` ) → `bytea`Computes the SHA-512 [hash](functions-binarystring#FUNCTIONS-HASH-NOTE) of the binary string.`sha512('abc'::bytea)` → `\xddaf35a193617abacc417349ae204131​12e6fa4e89a97ea20a9eeee64b55d39a​2192992a274fc1a836ba3c23a3feebbd​454d4423643ce80e2a9ac94fa54ca49f`                         |
 | `substr` ( *`bytes`* `bytea`, *`start`* `integer` \[, *`count`* `integer` ] ) → `bytea`Extracts the substring of *`bytes`* starting at the *`start`*'th byte, and extending for *`count`* bytes if that is specified. (Same as `substring(bytes from start for count)`.)`substr('\x1234567890'::bytea, 3, 2)` → `\x5678` |
 
-\
-
 
 Functions `get_byte` and `set_byte` number the first byte of a binary string as byte 0. Functions `get_bit` and `set_bit` number bits from the right within each byte; for example bit 0 is the least significant bit of the first byte, and bit 15 is the most significant bit of the second byte.
 
@@ -71,8 +67,6 @@ Functions for converting strings between different character sets (encodings), a
 | `convert_to` ( *`string`* `text`, *`dest_encoding`* `name` ) → `bytea`Converts a `text` string (in the database encoding) to a binary string encoded in encoding *`dest_encoding`* (see [Section 24.3.4](multibyte#MULTIBYTE-CONVERSIONS-SUPPORTED) for available conversions).`convert_to('some_text', 'UTF8')` → `\x736f6d655f74657874`                                                   |
 | `encode` ( *`bytes`* `bytea`, *`format`* `text` ) → `text`Encodes binary data into a textual representation; supported *`format`* values are: [`base64`](functions-binarystring#ENCODE-FORMAT-BASE64), [`escape`](functions-binarystring#ENCODE-FORMAT-ESCAPE), [`hex`](functions-binarystring#ENCODE-FORMAT-HEX).`encode('123\000\001', 'base64')` → `MTIzAAE=`                  |
 | `decode` ( *`string`* `text`, *`format`* `text` ) → `bytea`Decodes binary data from a textual representation; supported *`format`* values are the same as for `encode`.`decode('MTIzAAE=', 'base64')` → `\x3132330001`                                                                                                                                                                           |
-
-\
 
 
 The `encode` and `decode` functions support the following textual formats:

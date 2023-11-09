@@ -12,8 +12,6 @@ The `money` type stores a currency amount with a fixed fractional precision; see
 | ------- | ------------ | --------------- | ---------------------------------------------- |
 | `money` | 8 bytes      | currency amount | -92233720368547758.08 to +92233720368547758.07 |
 
-\
-
 
 Since the output of this data type is locale-sensitive, it might not work to load `money` data into a database that has a different setting of `lc_monetary`. To avoid problems, before restoring a dump into a new database make sure `lc_monetary` has the same or equivalent value as in the database that was dumped.
 

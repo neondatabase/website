@@ -69,8 +69,6 @@ xpath_table(text key, text document, text relation, text xpaths, text criteria) 
 | *`xpaths`*   | one or more XPath expressions, separated by `\|`                                                                                                                                                             |
 | *`criteria`* | the contents of the WHERE clause. This cannot be omitted, so use `true` or `1=1` if you want to process all the rows in the relation                                                                         |
 
-\
-
 
 These parameters (except the XPath strings) are just substituted into a plain SQL SELECT statement, so you have some flexibility — the statement is
 

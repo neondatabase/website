@@ -22,8 +22,6 @@ See also [`pg_shdepend`](catalog-pg-shdepend), which performs a similar function
 | `refobjsubid` `int4`For a table column, this is the column number (the `refobjid` and `refclassid` refer to the table itself). For all other object types, this column is zero. |
 | `deptype` `char`A code defining the specific semantics of this dependency relationship; see text                                                                                |
 
-\
-
 
 In all cases, a `pg_depend` entry indicates that the referenced object cannot be dropped without also dropping the dependent object. However, there are several subflavors identified by `deptype`:
 

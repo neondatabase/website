@@ -38,8 +38,6 @@ The PostgreSQL type system contains a number of special-purpose entries that are
 | `void`                    | Indicates that a function returns no value.                                                                                                                                                                                                    |
 | `unknown`                 | Identifies a not-yet-resolved type, e.g., of an undecorated string literal.                                                                                                                                                                    |
 
-\
-
 
 Functions coded in C (whether built-in or dynamically loaded) can be declared to accept or return any of these pseudo-types. It is up to the function author to ensure that the function will behave safely when a pseudo-type is used as an argument type.
 

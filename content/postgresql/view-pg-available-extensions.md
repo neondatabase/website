@@ -17,7 +17,5 @@ The `pg_available_extensions` view lists the extensions that are available for i
 | `installed_version` `text`Currently installed version of the extension, or `NULL` if not installed |
 | `comment` `text`Comment string from the extension's control file                                   |
 
-\
-
 
 The `pg_available_extensions` view is read-only.

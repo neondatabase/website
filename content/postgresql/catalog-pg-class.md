@@ -46,7 +46,5 @@ The catalog `pg_class` catalogs tables and most everything else that has columns
 | `reloptions` `text[]`Access-method-specific options, as “keyword=value” strings                                                                                                                                                                                                                                                                                                   |
 | `relpartbound` `pg_node_tree`If table is a partition (see `relispartition`), internal representation of the partition bound                                                                                                                                                                                                                                                       |
 
-\
-
 
 Several of the Boolean flags in `pg_class` are maintained lazily: they are guaranteed to be true if that's the correct state, but may not be reset to false immediately when the condition is no longer true. For example, `relhasindex` is set by [`CREATE INDEX`](sql-createindex), but it is never cleared by [`DROP INDEX`](sql-dropindex). Instead, [`VACUUM`](sql-vacuum) clears `relhasindex` if it finds the table has no indexes. This arrangement avoids race conditions and improves concurrency.

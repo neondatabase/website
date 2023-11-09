@@ -89,8 +89,6 @@ A number of standard probes are provided in the source code, as shown in [TableÂ
 | `lock-wait-done`               | `(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, LOCKMODE)` | Probe that fires when a request for a heavyweight lock (lmgr lock) has finished waiting (i.e., has acquired the lock). The arguments are the same as for `lock-wait-start`.                                                                                                                                                                                                                                                                                                                                                                          |
 | `deadlock-found`               | `()`                                                                               | Probe that fires when a deadlock is found by the deadlock detector.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
-\
-
 
 [#id](#TYPEDEFS-TABLE)
 

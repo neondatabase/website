@@ -63,8 +63,6 @@
 | Per-table granularity                |             |                   |                          | •                                 | •                    |                       | •               | •                        |
 | No conflict resolution necessary     | •           | •                 | •                        |                                   | •                    | •                     |                 | •                        |
 
-\
-
 
 There are a few solutions that do not fit into the above categories:
 

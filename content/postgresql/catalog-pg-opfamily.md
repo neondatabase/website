@@ -20,7 +20,5 @@ Operator families are described at length in [Section 38.16](xindex).
 | `opfnamespace` `oid` (references [`pg_namespace`](catalog-pg-namespace).`oid`)Namespace of this operator family |
 | `opfowner` `oid` (references [`pg_authid`](catalog-pg-authid).`oid`)Owner of the operator family                |
 
-\
-
 
 The majority of the information defining an operator family is not in its `pg_opfamily` row, but in the associated rows in [`pg_amop`](catalog-pg-amop), [`pg_amproc`](catalog-pg-amproc), and [`pg_opclass`](catalog-pg-opclass).

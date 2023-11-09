@@ -25,8 +25,6 @@ Any `cidr` value can be cast to `inet` implicitly; therefore, the operators and 
 | `inet` `-` `bigint` → `inet`Subtracts an offset from an address.`inet '192.168.1.43' - 36` → `192.168.1.7`                                                                                                                                                                                                                                                                                                                                                                    |
 | `inet` `-` `inet` → `bigint`Computes the difference of two addresses.`inet '192.168.1.43' - inet '192.168.1.19'` → `24``inet '::1' - inet '::ffff:1'` → `-4294901760`                                                                                                                                                                                                                                                                                                         |
 
-\
-
 
 [#id](#CIDR-INET-FUNCTIONS-TABLE)
 
@@ -48,8 +46,6 @@ Any `cidr` value can be cast to `inet` implicitly; therefore, the operators and 
 | `set_masklen` ( `inet`, `integer` ) → `inet`Sets the netmask length for an `inet` value. The address part does not change.`set_masklen(inet '192.168.1.5/24', 16)` → `192.168.1.5/16`                                                                                                                                                       |
 | `set_masklen` ( `cidr`, `integer` ) → `cidr`Sets the netmask length for a `cidr` value. Address bits to the right of the new netmask are set to zero.`set_masklen(cidr '192.168.1.0/24', 16)` → `192.168.0.0/16`                                                                                                                                |
 | `text` ( `inet` ) → `text`Returns the unabbreviated IP address and netmask length as text. (This has the same result as an explicit cast to `text`.)`text(inet '192.168.1.5')` → `192.168.1.5/32`                                                                                                                                           |
-
-\
 
 
 ### Tip

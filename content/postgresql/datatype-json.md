@@ -45,8 +45,6 @@ Conversely, as noted in the table there are some minor restrictions on the input
 | `boolean`           | `boolean`       | Only lowercase `true` and `false` spellings are accepted                                                      |
 | `null`              | (none)          | SQL `NULL` is a different concept                                                                             |
 
-\
-
 
 [#id](#JSON-KEYS-ELEMENTS)
 
@@ -467,8 +465,6 @@ For details on using `jsonpath` expressions with SQL/JSON query functions, see [
 | `$`        | A variable representing the JSON value being queried (the *context item*).                                                                                                                |
 | `$varname` | A named variable. Its value can be set by the parameter *`vars`* of several JSON processing functions; see [Table 9.49](functions-json#FUNCTIONS-JSON-PROCESSING-TABLE) for details. |
 | `@`        | A variable representing the result of path evaluation in filter expressions.                                                                                                              |
-
-\
 
 
 [#id](#TYPE-JSONPATH-ACCESSORS)

@@ -84,8 +84,6 @@ The operators provided by the `hstore` module are shown in [Table F.7](hstore#H
 | `%%` `hstore` → `text[]`Converts `hstore` to an array of alternating keys and values.`%% 'a=>foo, b=>bar'::hstore` → `{a,foo,b,bar}`                                                       |
 | `%#` `hstore` → `text[]`Converts `hstore` to a two-dimensional key/value array.`%# 'a=>foo, b=>bar'::hstore` → `{{a,foo},{b,bar}}`                                                         |
 
-\
-
 
 [#id](#HSTORE-FUNC-TABLE)
 
@@ -129,8 +127,6 @@ b
 | `delete` ( `hstore`, `text[]` ) → `hstore`Deletes pairs with matching keys.`delete('a=>1,b=>2,c=>3', ARRAY['a','b'])` → `"c"=>"3"`                                                                                                                                                                                                                                                                            |
 | `delete` ( `hstore`, `hstore` ) → `hstore`Deletes pairs matching those in the second argument.`delete('a=>1,b=>2', 'a=>4,b=>2'::hstore)` → `"a"=>"1"`                                                                                                                                                                                                                                                         |
 | `populate_record` ( `anyelement`, `hstore` ) → `anyelement`Replaces fields in the left operand (which must be a composite type) with matching values from `hstore`.`populate_record(ROW(1,2), 'f1=>42'::hstore)` → `(42,2)`                                                                                                                                                                               |
-
-\
 
 
 In addition to these operators and functions, values of the `hstore` type can be subscripted, allowing them to act like associative arrays. Only a single subscript of type `text` can be specified; it is interpreted as a key and the corresponding value is fetched or stored. For example,

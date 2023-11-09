@@ -26,8 +26,6 @@ See [Section 8.17](rangetypes) for an overview of range types.
 | `anyrange` `*` `anyrange` → `anyrange`Computes the intersection of the ranges.`int8range(5,15) * int8range(10,20)` → `[10,15)`                                                                                                                 |
 | `anyrange` `-` `anyrange` → `anyrange`Computes the difference of the ranges. The second range must not be contained in the first in such a way that the difference would not be a single range.`int8range(5,15) - int8range(10,20)` → `[5,10)` |
 
-\
-
 
 [#id](#MULTIRANGE-OPERATORS-TABLE)
 
@@ -65,8 +63,6 @@ See [Section 8.17](rangetypes) for an overview of range types.
 | `anymultirange` `*` `anymultirange` → `anymultirange`Computes the intersection of the multiranges.`'{[5,15)}'::int8multirange * '{[10,20)}'::int8multirange` → `{[10,15)}`                                                 |
 | `anymultirange` `-` `anymultirange` → `anymultirange`Computes the difference of the multiranges.`'{[5,20)}'::int8multirange - '{[10,15)}'::int8multirange` → `{[5,10), [15,20)}`                                           |
 
-\
-
 
 The left-of/right-of/adjacent operators always return false when an empty range or multirange is involved; that is, an empty range is not considered to be either before or after any other range.
 
@@ -91,8 +87,6 @@ The range union and difference operators will fail if the resulting range would 
 | `upper_inf` ( `anyrange` ) → `boolean`Is the range's upper bound infinite?`upper_inf('(,)'::daterange)` → `t`                                                                           |
 | `range_merge` ( `anyrange`, `anyrange` ) → `anyrange`Computes the smallest range that includes both of the given ranges.`range_merge('[1,2)'::int4range, '[3,4)'::int4range)` → `[1,4)` |
 
-\
-
 
 [#id](#MULTIRANGE-FUNCTIONS-TABLE)
 
@@ -114,8 +108,6 @@ The range union and difference operators will fail if the resulting range would 
  [1,2)
  [3,4)
 ``` |
-
-\
 
 
 The `lower_inc`, `upper_inc`, `lower_inf`, and `upper_inf` functions all return false for an empty range or multirange.

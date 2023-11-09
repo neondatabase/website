@@ -20,8 +20,6 @@ The usual comparison operators are available, as shown in [Table 9.1](functions
 | *`datatype`* `<>` *`datatype`* → `boolean` | Not equal                |
 | *`datatype`* `!=` *`datatype`* → `boolean` | Not equal                |
 
-\
-
 
 ### Note
 
@@ -57,8 +55,6 @@ There are also some comparison predicates, as shown in [Table 9.2](functions-co
 | `boolean` `IS NOT FALSE` → `boolean`Test whether boolean expression yields true or unknown.`true IS NOT FALSE` → `t``NULL::boolean IS NOT FALSE` → `t` (rather than `NULL`)                                                |
 | `boolean` `IS UNKNOWN` → `boolean`Test whether boolean expression yields unknown.`true IS UNKNOWN` → `f``NULL::boolean IS UNKNOWN` → `t` (rather than `NULL`)                                                              |
 | `boolean` `IS NOT UNKNOWN` → `boolean`Test whether boolean expression yields true or false.`true IS NOT UNKNOWN` → `t``NULL::boolean IS NOT UNKNOWN` → `f` (rather than `NULL`)                                            |
-
-\
 
 
 The `BETWEEN` predicate simplifies range tests:

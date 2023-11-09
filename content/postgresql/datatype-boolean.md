@@ -14,8 +14,6 @@ PostgreSQL provides the standard SQL type `boolean`; see [Table 8.19](datatype-
 | --------- | ------------ | ---------------------- |
 | `boolean` | 1 byte       | state of true or false |
 
-\
-
 
 Boolean constants can be represented in SQL queries by the SQL key words `TRUE`, `FALSE`, and `NULL`.
 
@@ -61,8 +59,6 @@ SELECT * FROM test1 WHERE a;
 ---+---------
  t | sic est
 ```
-
-\
 
 
 The key words `TRUE` and `FALSE` are the preferred (SQL-compliant) method for writing Boolean constants in SQL queries. But you can also use the string representations by following the generic string-literal constant syntax described in [Section 4.1.2.7](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS-GENERIC), for example `'yes'::boolean`.

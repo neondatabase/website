@@ -79,8 +79,6 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-\
-
 
 [Example 43.10](plpgsql-porting#PLPGSQL-PORTING-EX2) shows how to port a function that creates another function and how to handle the ensuing quoting problems.
 
@@ -155,8 +153,6 @@ $func$ LANGUAGE plpgsql;
 ```
 
 Notice how the body of the function is built separately and passed through `quote_literal` to double any quote marks in it. This technique is needed because we cannot safely use dollar quoting for defining the new function: we do not know for sure what strings will be interpolated from the `referrer_key.key_string` field. (We are assuming here that `referrer_key.kind` can be trusted to always be `host`, `domain`, or `url`, but `referrer_key.key_string` might be anything, in particular it might contain dollar signs.) This function is actually an improvement on the Oracle original, because it will not generate broken code when `referrer_key.key_string` or `referrer_key.referrer_type` contain quote marks.
-
-\
 
 
 [Example 43.11](plpgsql-porting#PLPGSQL-PORTING-EX3) shows how to port a function with `OUT` parameters and string manipulation. PostgreSQL does not have a built-in `instr` function, but you can create one using a combination of other functions. In [Section 43.13.3](plpgsql-porting#PLPGSQL-PORTING-APPENDIX) there is a PL/pgSQL implementation of `instr` that you can use to make your porting easier.
@@ -256,8 +252,6 @@ This function could be used like this:
 ```
 SELECT * FROM cs_parse_url('http://foobar.com/query.cgi?baz');
 ```
-
-\
 
 
 [Example 43.12](plpgsql-porting#PLPGSQL-PORTING-EX4) shows how to port a procedure that uses numerous features that are specific to Oracle.

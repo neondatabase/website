@@ -38,8 +38,6 @@ Whenever `ANALYZE` is running, the `pg_stat_progress_analyze` view will contain 
 | `child_tables_done` `bigint`Number of child tables scanned. This counter only advances when the phase is `acquiring inherited sample rows`.                    |
 | `current_child_table_relid` `oid`OID of the child table currently being scanned. This field is only valid when the phase is `acquiring inherited sample rows`. |
 
-\
-
 
 [#id](#ANALYZE-PHASES)
 
@@ -53,8 +51,6 @@ Whenever `ANALYZE` is running, the `pg_stat_progress_analyze` view will contain 
 | `computing statistics`            | The command is computing statistics from the sample rows obtained during the table scan.                                                                                                                  |
 | `computing extended statistics`   | The command is computing extended statistics from the sample rows obtained during the table scan.                                                                                                         |
 | `finalizing analyze`              | The command is updating `pg_class`. When this phase is completed, `ANALYZE` will end.                                                                                                                     |
-
-\
 
 
 ### Note
@@ -87,8 +83,6 @@ Whenever `CLUSTER` or `VACUUM FULL` is running, the `pg_stat_progress_cluster` v
 | `heap_blks_total` `bigint`Total number of heap blocks in the table. This number is reported as of the beginning of `seq scanning heap`.                                     |
 | `heap_blks_scanned` `bigint`Number of heap blocks scanned. This counter only advances when the phase is `seq scanning heap`.                                                |
 | `index_rebuild_count` `bigint`Number of indexes rebuilt. This counter only advances when the phase is `rebuilding index`.                                                   |
-
-\
 
 
 [#id](#CLUSTER-PHASES)
@@ -162,8 +156,6 @@ Whenever `CREATE INDEX` or `REINDEX` is running, the `pg_stat_progress_create_in
 | `partitions_total` `bigint`Total number of partitions on which the index is to be created or attached, including both direct and indirect partitions. `0` during a `REINDEX`, or when the index is not partitioned.  |
 | `partitions_done` `bigint`Number of partitions on which the index has already been created or attached, including both direct and indirect partitions. `0` during a `REINDEX`, or when the index is not partitioned. |
 
-\
-
 
 [#id](#CREATE-INDEX-PHASES)
 
@@ -208,8 +200,6 @@ Whenever `VACUUM` is running, the `pg_stat_progress_vacuum` view will contain on
 | `max_dead_tuples` `bigint`Number of dead tuples that we can store before needing to perform an index vacuum cycle, based on [maintenance\_work\_mem](runtime-config-resource#GUC-MAINTENANCE-WORK-MEM).                                                                                                                                                                                    |
 | `num_dead_tuples` `bigint`Number of dead tuples collected since the last index vacuum cycle.                                                                                                                                                                                                                                                                                                    |
 
-\
-
 
 [#id](#VACUUM-PHASES)
 
@@ -245,8 +235,6 @@ Whenever an application like pg\_basebackup is taking a base backup, the `pg_sta
 | `backup_streamed` `bigint`Amount of data streamed. This counter only advances when the phase is `streaming database files` or `transferring wal files`.                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `tablespaces_total` `bigint`Total number of tablespaces that will be streamed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `tablespaces_streamed` `bigint`Number of tablespaces streamed. This counter only advances when the phase is `streaming database files`.                                                                                                                                                                                                                                                                                                                                                                                                                           |
-
-\
 
 
 [#id](#BASEBACKUP-PHASES)

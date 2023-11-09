@@ -222,8 +222,6 @@ PostgreSQL supports several special date/time input values for convenience, as s
 | `yesterday`  | `date`, `timestamp`         | midnight (`00:00`) yesterday                   |
 | `allballs`   | `time`                      | 00:00:00.00 UTC                                |
 
-\
-
 The following SQL-compatible functions can also be used to obtain the current time value for the corresponding data type: `CURRENT_DATE`, `CURRENT_TIME`, `CURRENT_TIMESTAMP`, `LOCALTIME`, `LOCALTIMESTAMP`. (See [Section 9.9.5](functions-datetime#FUNCTIONS-DATETIME-CURRENT).) Note that these are SQL functions and are *not* recognized in data input strings.
 
 ### Caution
@@ -247,8 +245,6 @@ The output format of the date/time types can be set to one of the four styles IS
 | `Postgres`          | original style         | `Wed Dec 17 07:37:16 1997 PST` |
 | `German`            | regional style         | `17.12.1997 07:37:16.00 PST`   |
 
-\
-
 ### Note
 
 ISO 8601 specifies the use of uppercase letter `T` to separate the date and time. PostgreSQL accepts that format on input, but on output it uses a space rather than `T`, as shown above. This is for readability and for consistency with [RFC 3339](https://tools.ietf.org/html/rfc3339) as well as some other database systems.
@@ -264,8 +260,6 @@ In the SQL and POSTGRES styles, day appears before month if DMY field ordering h
 | `SQL, DMY`          | *`day`*/*`month`*/*`year`* | `17/12/1997 15:37:16.00 CET`   |
 | `SQL, MDY`          | *`month`*/*`day`*/*`year`* | `12/17/1997 07:37:16.00 PST`   |
 | `Postgres, DMY`     | *`day`*/*`month`*/*`year`* | `Wed 17 Dec 07:37:16 1997 PST` |
-
-\
 
 In the ISO style, the time zone is always shown as a signed numeric offset from UTC, with positive sign used for zones east of Greenwich. The offset will be shown as *`hh`* (hours only) if it is an integral number of hours, else as *`hh`*:*`mm`* if it is an integral number of minutes, else as *`hh`*:*`mm`*:*`ss`*. (The third case is not possible with any modern time zone standard, but it can appear when working with timestamps that predate the adoption of standardized time zones.) In the other date styles, the time zone is shown as an alphabetic abbreviation if one is in common use in the current zone. Otherwise it appears as a signed numeric offset in ISO 8601 basic format (*`hh`* or *`hhmm`*).
 
@@ -349,8 +343,6 @@ The string must start with a `P`, and may include a `T` that introduces the time
 | M            | Minutes (in the time part) |
 | S            | Seconds                    |
 
-\
-
 In the alternative format:
 
 ```
@@ -379,8 +371,6 @@ Field values can have fractional parts: for example, `'1.5 weeks'` or `'01:02:03
 | `1 year 2 months 3 days 4 hours 5 minutes 6 seconds` | Traditional Postgres format: 1 year 2 months 3 days 4 hours 5 minutes 6 seconds |
 | `P1Y2M3DT4H5M6S`                                     | ISO 8601 “format with designators”: same meaning as above                       |
 | `P0001-02-03T04:05:06`                               | ISO 8601 “alternative format”: same meaning as above                            |
-
-\
 
 Internally `interval` values are stored as months, days, and microseconds. This is done because the number of days in a month varies, and a day can have 23 or 25 hours if a daylight savings time adjustment is involved. The months and days fields are integers while the microseconds field can store fractional seconds. Because intervals are usually created from constant strings or `timestamp` subtraction, this storage method works well in most cases, but can cause unexpected results:
 

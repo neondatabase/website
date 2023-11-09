@@ -115,8 +115,6 @@ CREATE TRIGGER emp_stamp BEFORE INSERT OR UPDATE ON emp
     FOR EACH ROW EXECUTE FUNCTION emp_stamp();
 ```
 
-\
-
 
 Another way to log changes to a table involves creating a new table that holds a row for each insert, update, or delete that occurs. This approach can be thought of as auditing changes to a table. [Example 43.4](plpgsql-trigger#PLPGSQL-TRIGGER-AUDIT-EXAMPLE) shows an example of an audit trigger function in PL/pgSQL.
 
@@ -161,8 +159,6 @@ CREATE TRIGGER emp_audit
 AFTER INSERT OR UPDATE OR DELETE ON emp
     FOR EACH ROW EXECUTE FUNCTION process_emp_audit();
 ```
-
-\
 
 
 A variation of the previous example uses a view joining the main table to the audit table, to show when each entry was last modified. This approach still records the full audit trail of changes to the table, but also presents a simplified view of the audit trail, showing just the last modified timestamp derived from the audit trail for each entry. [Example 43.5](plpgsql-trigger#PLPGSQL-VIEW-TRIGGER-AUDIT-EXAMPLE) shows an example of an audit trigger on a view in PL/pgSQL.
@@ -229,8 +225,6 @@ CREATE TRIGGER emp_audit
 INSTEAD OF INSERT OR UPDATE OR DELETE ON emp_view
     FOR EACH ROW EXECUTE FUNCTION update_emp_view();
 ```
-
-\
 
 
 One use of triggers is to maintain a summary table of another table. The resulting summary can be used in place of the original table for certain queries — often with vastly reduced run times. This technique is commonly used in Data Warehousing, where the tables of measured or observed data (called fact tables) might be extremely large. [Example 43.6](plpgsql-trigger#PLPGSQL-TRIGGER-SUMMARY-EXAMPLE) shows an example of a trigger function in PL/pgSQL that maintains a summary table for a fact table in a data warehouse.
@@ -372,8 +366,6 @@ SELECT * FROM sales_summary_bytime;
 UPDATE sales_fact SET units_sold = units_sold * 2;
 SELECT * FROM sales_summary_bytime;
 ```
-
-\
 
 
 `AFTER` triggers can also make use of *transition tables* to inspect the entire set of rows changed by the triggering statement. The `CREATE TRIGGER` command assigns names to one or both transition tables, and then the function can refer to those names as though they were read-only temporary tables. [Example 43.7](plpgsql-trigger#PLPGSQL-TRIGGER-AUDIT-TRANSITION-EXAMPLE) shows an example.

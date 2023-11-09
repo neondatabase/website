@@ -79,8 +79,6 @@ The second approach combines any authentication method for `hostssl` entries wit
 | [ssl\_ca\_file](runtime-config-connection#GUC-SSL-CA-FILE)                            | trusted certificate authorities                 | checks that client certificate is signed by a trusted certificate authority                         |
 | [ssl\_crl\_file](runtime-config-connection#GUC-SSL-CRL-FILE)                          | certificates revoked by certificate authorities | client certificate must not be on this list                                                         |
 
-\
-
 
 The server reads these files at server start and whenever the server configuration is reloaded. On Windows systems, they are also re-read whenever a new backend process is spawned for a new client connection.
 

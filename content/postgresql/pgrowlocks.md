@@ -37,8 +37,6 @@ The parameter is the name of a table. The result is a set of records, with one r
 | `modes`      | `text[]`    | Lock mode of lockers (more than one if multitransaction), an array of `Key Share`, `Share`, `For No Key Update`, `No Key Update`, `For Update`, `Update`. |
 | `pids`       | `integer[]` | Process IDs of locking backends (more than one if multitransaction)                                                                                       |
 
-\
-
 
 `pgrowlocks` takes `AccessShareLock` for the target table and reads each row one by one to collect the row locking information. This is not very speedy for a large table. Note that:
 

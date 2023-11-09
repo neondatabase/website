@@ -297,9 +297,6 @@ The *minmax* operator classes store the minimum and the maximum values appearing
 | `<= (varbit,varbit)`           |                               |
 | `>= (varbit,varbit)`           |                               |
 
-\
-
-
 [#id](#BRIN-BUILTIN-OPCLASSES--PARAMETERS)
 
 ### 71.2.1. Operator Class Parameters [#](#BRIN-BUILTIN-OPCLASSES--PARAMETERS)

@@ -62,8 +62,6 @@ A single operator is provided, shown in [Table F.6](earthdistance#EARTHDISTANCE
 | ----------------------------------------------------------------------------------------------------------------- |
 | `point` `<@>` `point` → `float8`Computes the distance in statute miles between two points on the Earth's surface. |
 
-\
-
 
 Note that unlike the `cube`-based part of the module, units are hardwired here: changing the `earth()` function will not affect the results of this operator.
 

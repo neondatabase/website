@@ -40,8 +40,6 @@ The functions provided by the `intarray` module are shown in [Table F.9](intarr
 | `subarray` ( `integer[]`, *`start`* `integer` ) → `integer[]`Extracts the portion of the array starting at position *`start`*.`subarray('{1,2,3,2,1}'::integer[], 2)` → `{2,3,2,1}`                                                |
 | `intset` ( `integer` ) → `integer[]`Makes a single-element array.`intset(42)` → `{42}`                                                                                                                                         |
 
-\
-
 
 [#id](#INTARRAY-OP-TABLE)
 
@@ -63,8 +61,6 @@ The functions provided by the `intarray` module are shown in [Table F.9](intarr
 | `integer[]` `&` `integer[]` → `integer[]`Computes the intersection of the arguments.                                                                   |
 | `integer[]` `@@` `query_int` → `boolean`Does array satisfy query? (see below)                                                                          |
 | `query_int` `~~` `integer[]` → `boolean`Does array satisfy query? (commutator of `@@`)                                                                 |
-
-\
 
 
 The operators `&&`, `@>` and `<@` are equivalent to PostgreSQL's built-in operators of the same names, except that they work only on integer arrays that do not contain nulls, while the built-in operators work for any array type. This restriction makes them faster than the built-in operators in many cases.

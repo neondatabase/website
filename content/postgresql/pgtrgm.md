@@ -45,8 +45,6 @@ The functions provided by the `pg_trgm` module are shown in [Table F.26](pgtrgm
 | `show_limit` () → `real`Returns the current similarity threshold used by the `%` operator. This sets the minimum similarity between two words for them to be considered similar enough to be misspellings of each other, for example. (*Deprecated*; instead use `SHOW` `pg_trgm.similarity_threshold`.)        |
 | `set_limit` ( `real` ) → `real`Sets the current similarity threshold that is used by the `%` operator. The threshold must be between 0 and 1 (default is 0.3). Returns the same value passed in. (*Deprecated*; instead use `SET` `pg_trgm.similarity_threshold`.)                                              |
 
-\
-
 
 Consider the following example:
 

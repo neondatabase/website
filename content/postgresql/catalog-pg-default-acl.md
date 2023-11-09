@@ -18,8 +18,6 @@ The catalog `pg_default_acl` stores initial privileges to be assigned to newly c
 | `defaclobjtype` `char`Type of object this entry is for: `r` = relation (table, view), `S` = sequence, `f` = function, `T` = type, `n` = schema             |
 | `defaclacl` `aclitem[]`Access privileges that this type of object should have on creation                                                                  |
 
-\
-
 
 A `pg_default_acl` entry shows the initial privileges to be assigned to an object belonging to the indicated user. There are currently two types of entry: “global” entries with `defaclnamespace` = zero, and “per-schema” entries that reference a particular schema. If a global entry is present then it *overrides* the normal hard-wired default privileges for the object type. A per-schema entry, if present, represents privileges to be *added to* the global or hard-wired default privileges.
 

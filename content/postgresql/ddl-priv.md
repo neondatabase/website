@@ -142,8 +142,6 @@ PostgreSQL grants privileges on some types of objects to `PUBLIC` by default whe
 | `SET`          | `s`            | `PARAMETER`                                                                                  |
 | `ALTER SYSTEM` | `A`            | `PARAMETER`                                                                                  |
 
-\
-
 
 [Table 5.2](ddl-priv#PRIVILEGES-SUMMARY-TABLE) summarizes the privileges available for each type of SQL object, using the abbreviations shown above. It also shows the psql command that can be used to examine privilege settings for each object type.
 
@@ -167,8 +165,6 @@ PostgreSQL grants privileges on some types of objects to `PUBLIC` by default whe
 | Table column                     | `arwx`         | none                        | `\dp`        |
 | `TABLESPACE`                     | `C`            | none                        | `\db+`       |
 | `TYPE`                           | `U`            | `U`                         | `\dT+`       |
-
-\
 
 
 The privileges that have been granted for a particular object are displayed as a list of `aclitem` entries, where each `aclitem` describes the permissions of one grantee that have been granted by a particular grantor. For example, `calvin=r*w/hobbes` specifies that the role `calvin` has the privilege `SELECT` (`r`) with grant option (`*`) as well as the non-grantable privilege `UPDATE` (`w`), both granted by the role `hobbes`. If `calvin` also has some privileges on the same object granted by a different grantor, those would appear as a separate `aclitem` entry. An empty grantee field in an `aclitem` stands for `PUBLIC`.

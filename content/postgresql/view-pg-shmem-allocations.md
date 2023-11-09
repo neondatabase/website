@@ -19,8 +19,6 @@ Note that this view does not include memory allocated using the dynamic shared m
 | `size` `int8`Size of the allocation in bytes                                                                                                                                                                                                                                                                |
 | `allocated_size` `int8`Size of the allocation in bytes including padding. For anonymous allocations, no information about padding is available, so the `size` and `allocated_size` columns will always be equal. Padding is not meaningful for free memory, so the columns will be equal in that case also. |
 
-\
-
 
 Anonymous allocations are allocations that have been made with `ShmemAlloc()` directly, rather than via `ShmemInitStruct()` or `ShmemInitHash()`.
 

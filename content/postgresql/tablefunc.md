@@ -30,8 +30,6 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 | `crosstab` ( *`sql`* `text`, *`N`* `integer` ) → `setof record`Obsolete version of `crosstab(text)`. The parameter *`N`* is now ignored, since the number of value columns is always determined by the calling query.                                                            |
 | `connectby` ( *`relname`* `text`, *`keyid_fld`* `text`, *`parent_keyid_fld`* `text` \[, *`orderby_fld`* `text` ], *`start_with`* `text`, *`max_depth`* `integer` \[, *`branch_delim`* `text` ] ) → `setof record`Produces a representation of a hierarchical tree structure. |
 
-\
-
 
 [#id](#TABLEFUNC-FUNCTIONS-NORMAL-RAND)
 
@@ -408,8 +406,6 @@ The `connectby` function produces a display of hierarchical data that is stored 
 | *`start_with`*       | Key value of the row to start at                         |
 | *`max_depth`*        | Maximum depth to descend to, or zero for unlimited depth |
 | *`branch_delim`*     | String to separate keys with in branch output (optional) |
-
-\
 
 
 The key and parent-key fields can be any data type, but they must be the same type. Note that the *`start_with`* value must be entered as a text string, regardless of the type of the key field.

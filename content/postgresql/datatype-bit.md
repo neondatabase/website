@@ -35,7 +35,5 @@ SELECT * FROM test;
  100 | 101
 ```
 
-\
-
 
 A bit string value requires 1 byte for each group of 8 bits, plus 5 or 8 bytes overhead depending on the length of the string (but long values may be compressed or moved out-of-line, as explained in [Section 8.3](datatype-character) for character strings).

@@ -19,8 +19,6 @@ The view `pg_user_mappings` provides access to information about user mappings. 
 | `usename` `name`Name of the local user to be mapped                                                                                              |
 | `umoptions` `text[]`User mapping specific options, as “keyword=value” strings                                                                    |
 
-\
-
 
 To protect password information stored as a user mapping option, the `umoptions` column will read as null unless one of the following applies:
 

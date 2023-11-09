@@ -36,8 +36,6 @@ The built-in parser is named `pg_catalog.default`. It recognizes 23 token types,
 | `entity`          | XML entity                               | `&amp;`                                                     |
 | `blank`           | Space symbols                            | (any whitespace or punctuation not otherwise recognized)    |
 
-\
-
 
 ### Note
 

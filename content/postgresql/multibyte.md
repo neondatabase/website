@@ -69,8 +69,6 @@ An important restriction, however, is that each database's character set must be
 | `WIN1257`        | Windows CP1257                    | Baltic                         | Yes     | Yes  | 1           |                                               |
 | `WIN1258`        | Windows CP1258                    | Vietnamese                     | Yes     | Yes  | 1           | `ABC`, `TCVN`, `TCVN5712`, `VSCII`            |
 
-\
-
 
 Not all client APIs support all the listed character sets. For example, the PostgreSQL JDBC driver does not support `MULE_INTERNAL`, `LATIN6`, `LATIN8`, and `LATIN10`.
 
@@ -227,8 +225,6 @@ PostgreSQL allows conversion between any two character sets for which a conversi
 | `WIN1256`            | *WIN1256*, `UTF8`                                                                                                                                     |
 | `WIN1257`            | *WIN1257*, `UTF8`                                                                                                                                     |
 | `WIN1258`            | *WIN1258*, `UTF8`                                                                                                                                     |
-
-\
 
 
 [#id](#BUILTIN-CONVERSIONS-TABLE)

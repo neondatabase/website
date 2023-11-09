@@ -16,8 +16,6 @@ For more information about creating triggers, see [CREATE TRIGGER](sql-createtri
 | `tsvector_update_trigger` ( ) → `trigger`Automatically updates a `tsvector` column from associated plain-text document column(s). The text search configuration to use is specified by name as a trigger argument. See [Section 12.4.3](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS) for details.`CREATE TRIGGER ... tsvector_update_trigger(tsvcol, 'pg_catalog.swedish', title, body)`           |
 | `tsvector_update_trigger_column` ( ) → `trigger`Automatically updates a `tsvector` column from associated plain-text document column(s). The text search configuration to use is taken from a `regconfig` column of the table. See [Section 12.4.3](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS) for details.`CREATE TRIGGER ... tsvector_update_trigger_column(tsvcol, tsconfigcol, title, body)` |
 
-\
-
 
 The `suppress_redundant_updates_trigger` function, when applied as a row-level `BEFORE UPDATE` trigger, will prevent any update that does not actually change the data in the row from taking place. This overrides the normal behavior which always performs a physical row update regardless of whether or not the data has changed. (This normal behavior makes updates run faster, since no checking is required, and is also useful in certain cases.)
 

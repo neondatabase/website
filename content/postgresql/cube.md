@@ -36,8 +36,6 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 | `(x1,...,xn),(y1,...,yn)`   | An n-dimensional cube represented by a pair of its diagonally opposite corners                            |
 | `[(x1,...,xn),(y1,...,yn)]` | Same as above                                                                                             |
 
-\
-
 
 It does not matter which order the opposite corners of a cube are entered in. The `cube` functions automatically swap values if needed to create a uniform “lower left — upper right” internal representation. When the corners coincide, `cube` stores only one corner along with an “is point” flag to avoid wasting space.
 
@@ -69,8 +67,6 @@ Values are stored internally as 64-bit floating point numbers. This means that n
 | `cube` `<->` `cube` → `float8`Computes the Euclidean distance between the two cubes.                                                                                                                                                                                                                                                                                        |
 | `cube` `<#>` `cube` → `float8`Computes the taxicab (L-1 metric) distance between the two cubes.                                                                                                                                                                                                                                                                             |
 | `cube` `<=>` `cube` → `float8`Computes the Chebyshev (L-inf metric) distance between the two cubes.                                                                                                                                                                                                                                                                         |
-
-\
 
 
 In addition to the above operators, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE) are available for type `cube`. These operators first compare the first coordinates, and if those are equal, compare the second coordinates, etc. They exist mainly to support the b-tree index operator class for `cube`, which can be useful for example if you would like a UNIQUE constraint on a `cube` column. Otherwise, this ordering is not of much practical use.

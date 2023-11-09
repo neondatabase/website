@@ -57,8 +57,6 @@ The catalog `pg_type` stores information about data types. Base types and enum t
 | `typdefault` `text``typdefault` is null if the type has no associated default value. If `typdefaultbin` is not null, `typdefault` must contain a human-readable version of the default expression represented by `typdefaultbin`. If `typdefaultbin` is null and `typdefault` is not, then `typdefault` is the external representation of the type's default value, which can be fed to the type's input converter to produce a constant.                                                                                                                                                                                                                                                                                                                             |
 | `typacl` `aclitem[]`Access privileges; see [Section 5.7](ddl-priv) for details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
-\
-
 
 ### Note
 

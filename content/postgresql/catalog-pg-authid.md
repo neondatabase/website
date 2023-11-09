@@ -2,8 +2,6 @@
 
 ## 53.8. `pg_authid` [#](#CATALOG-PG-AUTHID)
 
-
-
 The catalog `pg_authid` contains information about database authorization identifiers (roles). A role subsumes the concepts of “users” and “groups”. A user is essentially just a role with the `rolcanlogin` flag set. Any role (with or without `rolcanlogin`) can have other roles as members; see [`pg_auth_members`](catalog-pg-auth-members).
 
 Since this catalog contains passwords, it must not be publicly readable. [`pg_roles`](view-pg-roles) is a publicly readable view on `pg_authid` that blanks out the password field.
@@ -30,9 +28,6 @@ Because user identities are cluster-wide, `pg_authid` is shared across all datab
 | `rolconnlimit` `int4`For roles that can log in, this sets maximum number of concurrent connections this role can make. -1 means no limit.         |
 | `rolpassword` `text`Password (possibly encrypted); null if none. The format depends on the form of encryption used.                               |
 | `rolvaliduntil` `timestamptz`Password expiry time (only used for password authentication); null if no expiration                                  |
-
-\
-
 
 For an MD5 encrypted password, `rolpassword` column will begin with the string `md5` followed by a 32-character hexadecimal MD5 hash. The MD5 hash will be of the user's password concatenated to their user name. For example, if user `joe` has password `xyzzy`, PostgreSQL will store the md5 hash of `xyzzyjoe`.
 

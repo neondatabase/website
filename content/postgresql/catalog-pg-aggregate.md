@@ -35,7 +35,5 @@ The catalog `pg_aggregate` stores information about aggregate functions. An aggr
 | `agginitval` `text`The initial value of the transition state. This is a text field containing the initial value in its external string representation. If this field is null, the transition state value starts out null.                                                                                                                                   |
 | `aggminitval` `text`The initial value of the transition state for moving-aggregate mode. This is a text field containing the initial value in its external string representation. If this field is null, the transition state value starts out null.                                                                                                        |
 
-\
-
 
 New aggregate functions are registered with the [`CREATE AGGREGATE`](sql-createaggregate) command. See [Section 38.12](xaggr) for more information about writing aggregate functions and the meaning of the transition functions, etc.

@@ -17,8 +17,6 @@ The `bytea` data type allows storage of binary strings; see [Table 8.6](datatyp
 | ------- | ------------------------------------------ | ----------------------------- |
 | `bytea` | 1 or 4 bytes plus the actual binary string | variable-length binary string |
 
-\
-
 
 A binary string is a sequence of octets (or bytes). Binary strings are distinguished from character strings in two ways. First, binary strings specifically allow storing octets of value zero and other “non-printable” octets (usually, octets outside the decimal range 32 to 126). Character strings disallow zero octets, and also disallow any other octet values and sequences of octet values that are invalid according to the database's selected character set encoding. Second, operations on binary strings process the actual bytes, whereas the processing of character strings depends on locale settings. In short, binary strings are appropriate for storing data that the programmer thinks of as “raw bytes”, whereas character strings are appropriate for storing text.
 
@@ -63,8 +61,6 @@ When entering `bytea` values in escape format, octets of certain values *must* b
 | 92                     | backslash              | `'\\'` or `'\134'`           | `'\\'::bytea`   | `\x5c`             |
 | 0 to 31 and 127 to 255 | “non-printable” octets | `'\xxx'` (octal value)       | `'\001'::bytea` | `\x01`             |
 
-\
-
 
 The requirement to escape *non-printable* octets varies depending on locale settings. In some instances you can get away with leaving them unescaped.
 
@@ -95,8 +91,6 @@ The octet with decimal value 92 (backslash) is doubled in the output. Details ar
 | 92                     | backslash              | `\\`                                | `'\134'::bytea` | `\\`          |
 | 0 to 31 and 127 to 255 | “non-printable” octets | `\xxx` (octal value)                | `'\001'::bytea` | `\001`        |
 | 32 to 126              | “printable” octets     | client character set representation | `'\176'::bytea` | `~`           |
-
-\
 
 
 Depending on the front end to PostgreSQL you use, you might have additional work to do in terms of escaping and unescaping `bytea` strings. For example, you might also have to escape line feeds and carriage returns if your interface automatically translates these.

@@ -49,8 +49,6 @@ The B-tree index method defines five strategies, shown in [Table 38.3](xindex#X
 | greater than or equal | 4               |
 | greater than          | 5               |
 
-\
-
 
 Hash indexes support only equality comparisons, and so they use only one strategy, shown in [Table 38.4](xindex#XINDEX-HASH-STRAT-TABLE).
 
@@ -61,8 +59,6 @@ Hash indexes support only equality comparisons, and so they use only one strateg
 | Operation | Strategy Number |
 | --------- | --------------- |
 | equal     | 1               |
-
-\
 
 
 GiST indexes are more flexible: they do not have a fixed set of strategies at all. Instead, the “consistency” support routine of each particular GiST operator class interprets the strategy numbers however it likes. As an example, several of the built-in GiST index operator classes index two-dimensional geometric objects, providing the “R-tree” strategies shown in [Table 38.5](xindex#XINDEX-RTREE-STRAT-TABLE). Four of these are true two-dimensional tests (overlaps, same, contains, contained by); four of them consider only the X direction; and the other four provide the same tests in the Y direction.
@@ -86,8 +82,6 @@ GiST indexes are more flexible: they do not have a fixed set of strategies at al
 | strictly above              | 11              |
 | does not extend below       | 12              |
 
-\
-
 
 SP-GiST indexes are similar to GiST indexes in flexibility: they don't have a fixed set of strategies. Instead the support routines of each operator class interpret the strategy numbers according to the operator class's definition. As an example, the strategy numbers used by the built-in operator classes for points are shown in [Table 38.6](xindex#XINDEX-SPGIST-POINT-STRAT-TABLE).
 
@@ -104,8 +98,6 @@ SP-GiST indexes are similar to GiST indexes in flexibility: they don't have a fi
 | strictly below    | 10              |
 | strictly above    | 11              |
 
-\
-
 
 GIN indexes are similar to GiST and SP-GiST indexes, in that they don't have a fixed set of strategies either. Instead the support routines of each operator class interpret the strategy numbers according to the operator class's definition. As an example, the strategy numbers used by the built-in operator class for arrays are shown in [Table 38.7](xindex#XINDEX-GIN-ARRAY-STRAT-TABLE).
 
@@ -119,8 +111,6 @@ GIN indexes are similar to GiST and SP-GiST indexes, in that they don't have a f
 | contains        | 2               |
 | is contained by | 3               |
 | equal           | 4               |
-
-\
 
 
 BRIN indexes are similar to GiST, SP-GiST and GIN indexes in that they don't have a fixed set of strategies either. Instead the support routines of each operator class interpret the strategy numbers according to the operator class's definition. As an example, the strategy numbers used by the built-in `Minmax` operator classes are shown in [Table 38.8](xindex#XINDEX-BRIN-MINMAX-STRAT-TABLE).
@@ -136,8 +126,6 @@ BRIN indexes are similar to GiST, SP-GiST and GIN indexes in that they don't hav
 | equal                 | 3               |
 | greater than or equal | 4               |
 | greater than          | 5               |
-
-\
 
 
 Notice that all the operators listed above return Boolean values. In practice, all operators defined as index method search operators must return type `boolean`, since they must appear at the top level of a `WHERE` clause to be used with an index. (Some index access methods also support *ordering operators*, which typically don't return Boolean values; that feature is discussed in [Section 38.16.7](xindex#XINDEX-ORDERING-OPS).)
@@ -166,8 +154,6 @@ B-trees require a comparison support function, and allow four additional support
 | Determine if it is safe for indexes that use the operator class to apply the btree deduplication optimization (optional)                                               | 4              |
 | Define options that are specific to this operator class (optional)                                                                                                     | 5              |
 
-\
-
 
 Hash indexes require one support function, and allow two additional ones to be supplied at the operator class author's option, as shown in [Table 38.10](xindex#XINDEX-HASH-SUPPORT-TABLE).
 
@@ -180,8 +166,6 @@ Hash indexes require one support function, and allow two additional ones to be s
 | Compute the 32-bit hash value for a key                                                                                                                                                  | 1              |
 | Compute the 64-bit hash value for a key given a 64-bit salt; if the salt is 0, the low 32 bits of the result must match the value that would have been computed by function 1 (optional) | 2              |
 | Define options that are specific to this operator class (optional)                                                                                                                       | 3              |
-
-\
 
 
 GiST indexes have eleven support functions, six of which are optional, as shown in [Table 38.11](xindex#XINDEX-GIST-SUPPORT-TABLE). (For more information see [Chapter 68](gist).)
@@ -204,8 +188,6 @@ GiST indexes have eleven support functions, six of which are optional, as shown 
 | `options`     | define options that are specific to this operator class (optional)                                               | 10             |
 | `sortsupport` | provide a sort comparator to be used in fast index builds (optional)                                             | 11             |
 
-\
-
 
 SP-GiST indexes have six support functions, one of which is optional, as shown in [Table 38.12](xindex#XINDEX-SPGIST-SUPPORT-TABLE). (For more information see [Chapter 69](spgist).)
 
@@ -221,8 +203,6 @@ SP-GiST indexes have six support functions, one of which is optional, as shown i
 | `inner_consistent` | determine which sub-partitions need to be searched for a query     | 4              |
 | `leaf_consistent`  | determine whether key satisfies the query qualifier                | 5              |
 | `options`          | define options that are specific to this operator class (optional) | 6              |
-
-\
 
 
 GIN indexes have seven support functions, four of which are optional, as shown in [Table 38.13](xindex#XINDEX-GIN-SUPPORT-TABLE). (For more information see [Chapter 70](gin).)
@@ -241,8 +221,6 @@ GIN indexes have seven support functions, four of which are optional, as shown i
 | `triConsistent`  | determine whether value matches query condition (ternary variant) (optional if support function 4 is present)                                                                                                                             | 6              |
 | `options`        | define options that are specific to this operator class (optional)                                                                                                                                                                        | 7              |
 
-\
-
 
 BRIN indexes have five basic support functions, one of which is optional, as shown in [Table 38.14](xindex#XINDEX-BRIN-SUPPORT-TABLE). Some versions of the basic functions require additional support functions to be provided. (For more information see [Section 71.3](brin-extensibility).)
 
@@ -257,8 +235,6 @@ BRIN indexes have five basic support functions, one of which is optional, as sho
 | `consistent` | determine whether value matches query condition                          | 3              |
 | `union`      | compute union of two summary tuples                                      | 4              |
 | `options`    | define options that are specific to this operator class (optional)       | 5              |
-
-\
 
 
 Unlike search operators, support functions return whichever data type the particular index method expects; for example in the case of the comparison function for B-trees, a signed integer. The number and types of the arguments to each support function are likewise dependent on the index method. For B-tree and hash the comparison and hashing support functions take the same input data types as do the operators included in the operator class, but this is not the case for most GiST, SP-GiST, GIN, and BRIN support functions.

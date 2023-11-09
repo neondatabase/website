@@ -24,8 +24,6 @@ Unlike most system catalogs, `pg_shdepend` is shared across all databases of a c
 | `refobjid` `oid` (references any OID column)The OID of the specific referenced object                                                                                  |
 | `deptype` `char`A code defining the specific semantics of this dependency relationship; see text                                                                       |
 
-\
-
 
 In all cases, a `pg_shdepend` entry indicates that the referenced object cannot be dropped without also dropping the dependent object. However, there are several subflavors identified by `deptype`:
 

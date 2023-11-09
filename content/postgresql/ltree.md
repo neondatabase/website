@@ -124,8 +124,6 @@ Type `ltree` has the usual comparison operators `=`, `<>`, `<`, `>`, `<=`, `>=`.
 | `ltree[]` `?~` `lquery` → `ltree`Returns first array entry that matches `lquery`, or `NULL` if none.                               |
 | `ltree[]` `?@` `ltxtquery` → `ltree`Returns first array entry that matches `ltxtquery`, or `NULL` if none.                         |
 
-\
-
 
 The operators `<@`, `@>`, `@` and `~` have analogues `^<@`, `^@>`, `^@`, `^~`, which are the same except they do not use indexes. These are useful only for testing purposes.
 

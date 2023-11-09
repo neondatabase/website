@@ -77,8 +77,6 @@ To write an operator class for a data type that implements a totally ordered set
 | Operator Strategy 4   | operator greater-than-or-equal-to            |
 | Operator Strategy 5   | operator greater-than                        |
 
-\
-
 
 To write an operator class for a complex data type which has values included within another type, it's possible to use the inclusion support functions alongside the corresponding operators, as shown in [Table 71.3](brin-extensibility#BRIN-EXTENSIBILITY-INCLUSION-TABLE). It requires only a single additional function, which can be written in any language. More functions can be defined for additional functionality. All operators are optional. Some operators require other operators, as shown as dependencies on the table.
 
@@ -113,8 +111,6 @@ To write an operator class for a complex data type which has values included wit
 | Operator Strategy 22            | operator greater-than                                                | Operator Strategy 1  |
 | Operator Strategy 23            | operator greater-than-or-equal-to                                    | Operator Strategy 1  |
 
-\
-
 
 Support function numbers 1 through 10 are reserved for the BRIN internal functions, so the SQL level functions start with number 11. Support function number 11 is the main function required to build the index. It should accept two arguments with the same data type as the operator class, and return the union of them. The inclusion operator class can store union values with different data types if it is defined with the `STORAGE` parameter. The return value of the union function should match the `STORAGE` data type.
 
@@ -135,8 +131,6 @@ To write an operator class for a data type that implements only an equality oper
 | Support Procedure 5   | internal function `brin_bloom_options()`    |
 | Support Procedure 11  | function to compute hash of an element      |
 | Operator Strategy 1   | operator equal-to                           |
-
-\
 
 
 Support procedure numbers 1-10 are reserved for the BRIN internal functions, so the SQL level functions start with number 11. Support function number 11 is the main function required to build the index. It should accept one argument with the same data type as the operator class, and return a hash of the value.
@@ -160,8 +154,6 @@ The minmax-multi operator class is also intended for data types implementing a t
 | Operator Strategy 3   | operator equal-to                                                   |
 | Operator Strategy 4   | operator greater-than-or-equal-to                                   |
 | Operator Strategy 5   | operator greater-than                                               |
-
-\
 
 
 Both minmax and inclusion operator classes support cross-data-type operators, though with these the dependencies become more complicated. The minmax operator class requires a full set of operators to be defined with both arguments having the same data type. It allows additional data types to be supported by defining extra sets of operators. Inclusion operator class operator strategies are dependent on another operator strategy as shown in [Table 71.3](brin-extensibility#BRIN-EXTENSIBILITY-INCLUSION-TABLE), or the same operator strategy as themselves. They require the dependency operator to be defined with the `STORAGE` data type as the left-hand-side argument and the other supported data type to be the right-hand-side argument of the supported operator. See `float4_minmax_ops` as an example of minmax, and `box_inclusion_ops` as an example of inclusion.

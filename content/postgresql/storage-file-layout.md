@@ -37,8 +37,6 @@ The `PGDATA` directory contains several subdirectories and control files, as sho
 | `postmaster.opts`      | A file recording the command-line options the server was last started with                                                                                                                                                                                                                                                                                |
 | `postmaster.pid`       | A lock file recording the current postmaster process ID (PID), cluster data directory path, postmaster start timestamp, port number, Unix-domain socket directory path (could be empty), first valid listen\_address (IP address or `*`, or empty if not listening on TCP), and shared memory segment ID (this file is not present after server shutdown) |
 
-\
-
 
 For each database in the cluster there is a subdirectory within `PGDATA``/base`, named after the database's OID in `pg_database`. This subdirectory is the default location for the database's files; in particular, its system catalogs are stored there.
 

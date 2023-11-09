@@ -22,7 +22,5 @@ The catalog `pg_statistic_ext` holds definitions of extended planner statistics.
 | `stxkind` `char[]`An array containing codes for the enabled statistics kinds; valid values are: `d` for n-distinct statistics, `f` for functional dependency statistics, `m` for most common values (MCV) list statistics, and `e` for expression statistics                                                                                                                                                                                                               |
 | `stxexprs` `pg_node_tree`Expression trees (in `nodeToString()` representation) for statistics object attributes that are not simple column references. This is a list with one element per expression. Null if all statistics object attributes are simple references.                                                                                                                                                                                                     |
 
-\
-
 
 The `pg_statistic_ext` entry is filled in completely during [`CREATE STATISTICS`](sql-createstatistics), but the actual statistical values are not computed then. Subsequent [`ANALYZE`](sql-analyze) commands compute the desired values and populate an entry in the [`pg_statistic_ext_data`](catalog-pg-statistic-ext-data) catalog.

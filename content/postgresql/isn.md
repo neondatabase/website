@@ -34,8 +34,6 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 | `ISSN`    | International Standard Serial Numbers to be displayed in the old short display format |
 | `UPC`     | Universal Product Codes                                                               |
 
-\
-
 Some notes:
 
 1. ISBN13, ISMN13, ISSN13 numbers are all EAN13 numbers.

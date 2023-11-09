@@ -22,7 +22,5 @@ The `pg_available_extension_versions` view lists the specific extension versions
 | `requires` `name[]`Names of prerequisite extensions, or `NULL` if none                                                   |
 | `comment` `text`Comment string from the extension's control file                                                         |
 
-\
-
 
 The `pg_available_extension_versions` view is read-only.

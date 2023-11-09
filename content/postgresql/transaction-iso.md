@@ -41,8 +41,6 @@ The SQL standard and PostgreSQL-implemented transaction isolation levels are des
 | Repeatable read  | Not possible           | Not possible       | Allowed, but not in PG | Possible              |
 | Serializable     | Not possible           | Not possible       | Not possible           | Not possible          |
 
-\
-
 
 In PostgreSQL, you can request any of the four standard transaction isolation levels, but internally only three distinct isolation levels are implemented, i.e., PostgreSQL's Read Uncommitted mode behaves like Read Committed. This is because it is the only sensible way to map the standard isolation levels to PostgreSQL's multiversion concurrency control architecture.
 

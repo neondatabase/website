@@ -709,8 +709,6 @@ SELECT merge_db(1, 'dennis');
 
 This coding assumes the `unique_violation` error is caused by the `INSERT`, and not by, say, an `INSERT` in a trigger function on the table. It might also misbehave if there is more than one unique index on the table, since it will retry the operation regardless of which index caused the error. More safety could be had by using the features discussed next to check that the trapped error was the one expected.
 
-\
-
 
 [#id](#PLPGSQL-EXCEPTION-DIAGNOSTICS)
 
@@ -744,8 +742,6 @@ Each *`item`* is a key word identifying a status value to be assigned to the spe
 | `PG_EXCEPTION_DETAIL`  | `text` | the text of the exception's detail message, if any                                                                                                |
 | `PG_EXCEPTION_HINT`    | `text` | the text of the exception's hint message, if any                                                                                                  |
 | `PG_EXCEPTION_CONTEXT` | `text` | line(s) of text describing the call stack at the time of the exception (see [Section 43.6.9](plpgsql-control-structures#PLPGSQL-CALL-STACK)) |
-
-\
 
 
 If the exception did not set a value for an item, an empty string will be returned.

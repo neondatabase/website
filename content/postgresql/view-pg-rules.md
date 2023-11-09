@@ -17,7 +17,5 @@ The view `pg_rules` provides access to useful information about query rewrite ru
 | `rulename` `name` (references [`pg_rewrite`](catalog-pg-rewrite).`rulename`)Name of rule                         |
 | `definition` `text`Rule definition (a reconstructed creation command)                                                 |
 
-\
-
 
 The `pg_rules` view excludes the `ON SELECT` rules of views and materialized views; those can be seen in [`pg_views`](view-pg-views) and [`pg_matviews`](view-pg-matviews).

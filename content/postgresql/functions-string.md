@@ -41,8 +41,6 @@ The string concatenation operator (`||`) will accept non-string input, so long a
 | `trim` ( \[ `LEADING` \| `TRAILING` \| `BOTH` ] \[ `FROM` ] *`string`* `text` \[, *`characters`* `text` ] ) → `text`This is a non-standard syntax for `trim()`.`trim(both from 'yxTomxx', 'xyz')` → `Tom`                                                                                                                                                                                                                                                                                                                  |
 | `upper` ( `text` ) → `text`Converts the string to all upper case, according to the rules of the database's locale.`upper('tom')` → `TOM`                                                                                                                                                                                                                                                                                                                                                                               |
 
-\
-
 Additional string manipulation functions and operators are available and are listed in [Table 9.10](functions-string#FUNCTIONS-STRING-OTHER). (Some of these are used internally to implement the SQL-standard string functions listed in [Table 9.9](functions-string#FUNCTIONS-STRING-SQL).) There are also pattern-matching operators, which are described in [Section 9.7](functions-matching), and operators for full-text search, which are described in [Chapter 12](textsearch).
 
 [#id](#FUNCTIONS-STRING-OTHER)

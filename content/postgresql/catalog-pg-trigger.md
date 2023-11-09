@@ -32,8 +32,6 @@ The catalog `pg_trigger` stores triggers on tables and views. See [CREATE TRIGGE
 | `tgoldtable` `name``REFERENCING` clause name for `OLD TABLE`, or null if none                                                                                                                                                                                                                       |
 | `tgnewtable` `name``REFERENCING` clause name for `NEW TABLE`, or null if none                                                                                                                                                                                                                       |
 
-\
-
 
 Currently, column-specific triggering is supported only for `UPDATE` events, and so `tgattr` is relevant only for that event type. `tgtype` might contain bits for other event types as well, but those are presumed to be table-wide regardless of what is in `tgattr`.
 

@@ -40,8 +40,6 @@ SELECT text 'a' AS "text" UNION SELECT 'b';
 
 Here, the unknown-type literal `'b'` will be resolved to type `text`.
 
-\
-
 
 [#id](#id-1.5.9.10.12)
 
@@ -59,8 +57,6 @@ SELECT 1.2 AS "numeric" UNION SELECT 1;
 
 The literal `1.2` is of type `numeric`, and the `integer` value `1` can be cast implicitly to `numeric`, so that type is used.
 
-\
-
 
 [#id](#id-1.5.9.10.13)
 
@@ -77,8 +73,6 @@ SELECT 1 AS "real" UNION SELECT CAST('2.2' AS REAL);
 ```
 
 Here, since type `real` cannot be implicitly cast to `integer`, but `integer` can be implicitly cast to `real`, the union result type is resolved as `real`.
-
-\
 
 
 [#id](#id-1.5.9.10.14)

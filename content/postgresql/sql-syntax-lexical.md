@@ -145,8 +145,6 @@ PostgreSQL also accepts “escape” string constants, which are an extension to
 | `\xh`, `\xhh` (*`h`* = 0–9, A–F)          | hexadecimal byte value                           |
 | `\uxxxx`, `\Uxxxxxxxx` (*`x`* = 0–9, A–F) | 16 or 32-bit hexadecimal Unicode character value |
 
-\
-
 Any other character following a backslash is taken literally. Thus, to include a backslash character, write two backslashes (`\\`). Also, a single quote can be included in an escape string by writing `\'`, in addition to the normal way of `''`.
 
 It is your responsibility that the byte sequences you create, especially when using the octal or hexadecimal escapes, compose valid characters in the server character set encoding. A useful alternative is to use Unicode escapes or the alternative Unicode escape syntax, explained in [Section 4.1.2.3](sql-syntax-lexical#SQL-SYNTAX-STRINGS-UESCAPE); then the server will check that the character conversion is possible.
@@ -414,8 +412,6 @@ A comment is removed from the input stream before further syntax analysis and is
 | `NOT`                                   | right         | logical negation                                           |
 | `AND`                                   | left          | logical conjunction                                        |
 | `OR`                                    | left          | logical disjunction                                        |
-
-\
 
 Note that the operator precedence rules also apply to user-defined operators that have the same names as the built-in operators mentioned above. For example, if you define a “+” operator for some custom data type it will have the same precedence as the built-in “+” operator, no matter what yours does.
 

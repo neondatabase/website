@@ -309,8 +309,6 @@ Comparison of two strings (collation) in ICU is determined by a multi-level proc
 | level4  | Punctuation    | `true`      | `true`               | `false`         | `false`     | `false`     | `false`     |
 | identic | All            | `true`      | `false`              | `false`         | `false`     | `false`     | `false`     |
 
-\
-
 
 At every level, even with full normalization off, basic normalization is performed. For example, `'á'` may be composed of the code points `U&'\0061\0301'` or the single code point `U&'\00E1'`, and those sequences will be considered equal even at the `identic` level. To treat any difference in code point representation as distinct, use a collation created with `deterministic` set to `true`.
 
@@ -355,8 +353,6 @@ SELECT 'x-y' = 'x_y' COLLATE level4; -- false
 | `kr` | `space`, `punct`, `symbol`, `currency`, `digit`, *`script-id`* |            | Set to one or more of the valid values, or any BCP 47 *`script-id`*, e.g. `latn` ("Latin") or `grek` ("Greek"). Multiple values are separated by "`-`".Redefines the ordering of classes of characters; those characters belonging to a class earlier in the list sort before characters belonging to a class later in the list. For instance, the value `digit-currency-space` (as part of a language tag like `und-u-kr-digit-currency-space`) sorts punctuation before digits and spaces.                                                                                                          |
 | `ks` | `level1`, `level2`, `level3`, `level4`, `identic`              | `level3`   | Sensitivity (or "strength") when determining equality, with `level1` the least sensitive to differences and `identic` the most sensitive to differences. See [Table 24.1](collation#ICU-COLLATION-LEVELS) for details.                                                                                                                                                                                                                                                                                                                                                                           |
 | `kv` | `space`, `punct`, `symbol`, `currency`                         | `punct`    | Classes of characters ignored during comparison at level 3. Setting to a later value includes earlier values; e.g. `symbol` also includes `punct` and `space` in the characters to be ignored. Key `ka` must be set to `shifted` and key `ks` must be set to `level3` or lower to take effect.                                                                                                                                                                                                                                                                                                        |
-
-\
 
 
 Defaults may depend on locale. The above table is not meant to be complete. See [Section 24.2.3.5](collation#ICU-EXTERNAL-REFERENCES) for additional options and details.

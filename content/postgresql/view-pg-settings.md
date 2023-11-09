@@ -30,8 +30,6 @@ The view `pg_settings` provides access to run-time parameters of the server. It 
 | `sourceline` `int4`Line number within the configuration file the current value was set at (null for values set from sources other than configuration files, or when examined by a user who neither is a superuser nor has privileges of `pg_read_all_settings`).                                         |
 | `pending_restart` `bool``true` if the value has been changed in the configuration file but needs a restart; or `false` otherwise.                                                                                                                                                                        |
 
-\
-
 
 There are several possible values of `context`. In order of decreasing difficulty of changing the setting, they are:
 
