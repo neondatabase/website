@@ -9,7 +9,7 @@ This page provides guidelines for contributing to the Neon documentation. Our go
 
 <Admonition type="note" title="TL;DR: Contributing to the Neon Docs">
 - You can edit files on GitHub via the **Edit this page** link on our documentation pages or by forking the [neondatabase/website](https://github.com/neondatabase/website) repository and submitting a pull request.
-- If you want to contribute a guide, we provide a template to help you get started. See [How to contribute](#how-to-contribute) for details.
+- If you want to contribute a guide, we provide a [template](https://github.com/neondatabase/website/blob/main/content/docs/guides/GUIDE_TEMPLATE.md) to help you get started. See [How to contribute](#how-to-contribute) for details.
 - Reference this contribution guide as needed for Markdown and style guidelines.
 </Admonition>
 
