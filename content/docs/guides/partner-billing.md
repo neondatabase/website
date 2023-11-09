@@ -336,7 +336,8 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY' | jq'
 ```
 
-<Admonition>To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
+<Admonition type="Note">
+To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
 </Admonition>
 
 
