@@ -42,7 +42,7 @@
     "file-loader": "^6.2.0",
     "framer-motion": "^10.16.1",
     "glob": "^10.3.3",
-    "graphql": "^16.8.0",
+    "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
     "gray-matter": "^4.0.3",
     "html-react-parser": "^4.2.1",
