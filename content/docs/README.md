@@ -181,6 +181,7 @@ int main() {
     std::cout << "Hello World";
     return 0;
 }
+```
 ````
 
 Multiple lines
@@ -283,6 +284,7 @@ In your config v3 project, head to the `/metadata/databases/databases.yaml` file
   functions: []
 ```
 Apply the Metadata by running:
+
 ```bash
 hasura metadata apply
 ```
