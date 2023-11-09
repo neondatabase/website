@@ -2,7 +2,7 @@
 title: Use Neon read replicas with Prisma
 subtitle: Learn how to scale Prisma applications with Neon read replicas
 enableTableOfContents: true
-updatedOn: '2023-11-08T15:41:23.878Z'
+updatedOn: '2023-10-24T18:56:54.985Z'
 ---
 
 A Neon read replica is an independent read-only compute instance that performs read operations on the same data as your read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -57,36 +57,6 @@ curl --request POST \
 ```bash
 neonctl branches add-compute mybranch --type read_only
 ```
-
-````content
-In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
-
-```bash
-- name: <db_name>
-  kind: postgres
-  configuration:
-    connection_info:
-      database_url:
-        from_env: <DB_URL_ENV_VAR>
-    pool_settings:
-      idle_timeout: 180
-      max_connections: 50
-      retries: 1
-  tables: []
-  functions: []
-```
-Apply the Metadata by running:
-```bash
-hasura metadata apply
-```
-
-If you've spun up the Hasura Engine with Docker, you can access the Hasura Console by accessing it in a browser at the URL of your Hasura Engine instance, usually http://localhost:8080.
-
-<Admonition type="note">
-To access the Hasura Console via the URL the HASURA_GRAPHQL_ENABLE_CONSOLE environment variable or the `--enable-console` flag must be set to true.
-</Admonition>
-
-````
 
 </CodeTabs>
 
