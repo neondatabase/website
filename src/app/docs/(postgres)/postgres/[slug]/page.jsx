@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
 import Content from 'components/shared/content';
-import { POSTGRES_DOCS_BASE_PATH, VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/docs';
+import { MAX_TITLE_LENGTH, POSTGRES_DOCS_BASE_PATH, VERCEL_URL } from 'constants/docs';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import {
   POSTGRES_DIR_PATH,
@@ -27,6 +27,7 @@ export async function generateMetadata({ params }) {
       title.length < MAX_TITLE_LENGTH
         ? `${VERCEL_URL}/docs/og?title=${encodedTitle}`
         : DEFAULT_IMAGE_PATH,
+    robotsNoindex: 'noindex',
   });
 }
 
