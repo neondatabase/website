@@ -2,7 +2,7 @@
 title: Connect a GUI application
 subtitle: Learn how to connect a GUI application to Neon
 enableTableOfContents: true
-updatedOn: '2023-10-19T23:10:12.813Z'
+updatedOn: '2023-11-08T17:43:55.578Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.
@@ -78,7 +78,7 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [Luna Modeler](https://www.datensen.com/data-modeling/luna-modeler-for-relational-databases.html) | Requires enabling the SSL/TLS option |
 | [Metabase](https://www.metabase.com/) | |
 | [PopSQL](https://popsql.com/) | No SNI support. Use [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field). |
-| [Postico](https://eggerapps.at/postico2/) | SNI support since v1.5.21. For older versions, use [SNI workaround B](/docs/connect/connection-errors#b-use-libpq-keyvalue-syntax-in-the-database-field). |
+| [Postico](https://eggerapps.at/postico2/) | SNI support since v1.5.21. For older versions, use [SNI workaround B](/docs/connect/connection-errors#b-use-libpq-keyvalue-syntax-in-the-database-field). Postico's [keep-connection-alive mechanism](https://eggerapps.at/postico/docs/v1.2/changelist.html), enabled by default, may prevent your compute from scaling to zero. |
 | [PostgreSQL VS Code Extension by Chris Kolkman](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres) | |
 | [pgAdmin 4](https://www.pgadmin.org/) | |
 | [Retool](https://retool.com/) | |
