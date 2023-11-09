@@ -1,6 +1,6 @@
 ## 9.26. System Information Functions and Operators [#](#FUNCTIONS-INFO)
 
-  * *   [9.26.1. Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
+  * [9.26.1. Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
   * [9.26.2. Access Privilege Inquiry Functions](functions-info#FUNCTIONS-INFO-ACCESS)
   * [9.26.3. Schema Visibility Inquiry Functions](functions-info#FUNCTIONS-INFO-SCHEMA)
   * [9.26.4. System Catalog Information Functions](functions-info#FUNCTIONS-INFO-CATALOG)

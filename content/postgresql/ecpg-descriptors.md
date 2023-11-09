@@ -1,6 +1,6 @@
 ## 36.7. Using Descriptor Areas [#](#ECPG-DESCRIPTORS)
 
-  * *   [36.7.1. Named SQL Descriptor Areas](ecpg-descriptors#ECPG-NAMED-DESCRIPTORS)
+  * [36.7.1. Named SQL Descriptor Areas](ecpg-descriptors#ECPG-NAMED-DESCRIPTORS)
   * [36.7.2. SQLDA Descriptor Areas](ecpg-descriptors#ECPG-SQLDA-DESCRIPTORS)
 
 An SQL descriptor area is a more sophisticated method for processing the result of a `SELECT`, `FETCH` or a `DESCRIBE` statement. An SQL descriptor area groups the data of one row of data together with metadata items into one data structure. The metadata is particularly useful when executing dynamic SQL statements, where the nature of the result columns might not be known ahead of time. PostgreSQL provides two ways to use Descriptor Areas: the named SQL Descriptor Areas and the C-structure SQLDAs.

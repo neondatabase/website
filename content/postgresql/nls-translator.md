@@ -1,6 +1,6 @@
 ## 57.1. For the Translator [#](#NLS-TRANSLATOR)
 
-  * *   [57.1.1. Requirements](nls-translator#NLS-TRANSLATOR-REQUIREMENTS)
+  * [57.1.1. Requirements](nls-translator#NLS-TRANSLATOR-REQUIREMENTS)
   * [57.1.2. Concepts](nls-translator#NLS-TRANSLATOR-CONCEPTS)
   * [57.1.3. Creating and Maintaining Message Catalogs](nls-translator#NLS-TRANSLATOR-MESSAGE-CATALOGS)
   * [57.1.4. Editing the PO Files](nls-translator#NLS-TRANSLATOR-EDITING-PO)

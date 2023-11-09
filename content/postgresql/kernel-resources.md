@@ -1,6 +1,6 @@
 ## 19.4. Managing Kernel Resources [#](#KERNEL-RESOURCES)
 
-  * *   [19.4.1. Shared Memory and Semaphores](kernel-resources#SYSVIPC)
+  * [19.4.1. Shared Memory and Semaphores](kernel-resources#SYSVIPC)
   * [19.4.2. systemd RemoveIPC](kernel-resources#SYSTEMD-REMOVEIPC)
   * [19.4.3. Resource Limits](kernel-resources#KERNEL-RESOURCES-LIMITS)
   * [19.4.4. Linux Memory Overcommit](kernel-resources#LINUX-MEMORY-OVERCOMMIT)

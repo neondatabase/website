@@ -1,6 +1,6 @@
 ## 43.12. Tips for Developing in PL/pgSQL [#](#PLPGSQL-DEVELOPMENT-TIPS)
 
-  * *   [43.12.1. Handling of Quotation Marks](plpgsql-development-tips#PLPGSQL-QUOTE-TIPS)
+  * [43.12.1. Handling of Quotation Marks](plpgsql-development-tips#PLPGSQL-QUOTE-TIPS)
   * [43.12.2. Additional Compile-Time and Run-Time Checks](plpgsql-development-tips#PLPGSQL-EXTRA-CHECKS)
 
 One good way to develop in PL/pgSQL is to use the text editor of your choice to create your functions, and in another window, use psql to load and test those functions. If you are doing it this way, it is a good idea to write the function using `CREATE OR REPLACE FUNCTION`. That way you can just reload the file to update the function definition. For example:

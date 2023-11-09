@@ -1,6 +1,6 @@
 ## 27.4. Hot Standby [#](#HOT-STANDBY)
 
-  * *   [27.4.1. User's Overview](hot-standby#HOT-STANDBY-USERS)
+  * [27.4.1. User's Overview](hot-standby#HOT-STANDBY-USERS)
   * [27.4.2. Handling Query Conflicts](hot-standby#HOT-STANDBY-CONFLICT)
   * [27.4.3. Administrator's Overview](hot-standby#HOT-STANDBY-ADMIN)
   * [27.4.4. Hot Standby Parameter Reference](hot-standby#HOT-STANDBY-PARAMETERS)

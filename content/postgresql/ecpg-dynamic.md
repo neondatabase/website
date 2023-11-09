@@ -1,6 +1,6 @@
 ## 36.5. Dynamic SQL [#](#ECPG-DYNAMIC)
 
-  * *   [36.5.1. Executing Statements without a Result Set](ecpg-dynamic#ECPG-DYNAMIC-WITHOUT-RESULT)
+  * [36.5.1. Executing Statements without a Result Set](ecpg-dynamic#ECPG-DYNAMIC-WITHOUT-RESULT)
   * [36.5.2. Executing a Statement with Input Parameters](ecpg-dynamic#ECPG-DYNAMIC-INPUT)
   * [36.5.3. Executing a Statement with a Result Set](ecpg-dynamic#ECPG-DYNAMIC-WITH-RESULT)
 

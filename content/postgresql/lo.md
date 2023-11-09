@@ -1,6 +1,6 @@
 ## F.22. lo — manage large objects [#](#LO)
 
-  * *   [F.22.1. Rationale](lo#LO-RATIONALE)
+  * [F.22.1. Rationale](lo#LO-RATIONALE)
   * [F.22.2. How to Use It](lo#LO-HOW-TO-USE)
   * [F.22.3. Limitations](lo#LO-LIMITATIONS)
   * [F.22.4. Author](lo#LO-AUTHOR)

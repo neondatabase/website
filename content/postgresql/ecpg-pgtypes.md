@@ -1,6 +1,6 @@
 ## 36.6. pgtypes Library [#](#ECPG-PGTYPES)
 
-  * *   [36.6.1. Character Strings](ecpg-pgtypes#ECPG-PGTYPES-CSTRINGS)
+  * [36.6.1. Character Strings](ecpg-pgtypes#ECPG-PGTYPES-CSTRINGS)
   * [36.6.2. The numeric Type](ecpg-pgtypes#ECPG-PGTYPES-NUMERIC)
   * [36.6.3. The date Type](ecpg-pgtypes#ECPG-PGTYPES-DATE)
   * [36.6.4. The timestamp Type](ecpg-pgtypes#ECPG-PGTYPES-TIMESTAMP)

@@ -1,6 +1,6 @@
 ## 5. Bug Reporting Guidelines [#](#BUG-REPORTING)
 
-  * *   [5.1. Identifying Bugs](bug-reporting#BUG-REPORTING-IDENTIFYING-BUGS)
+  * [5.1. Identifying Bugs](bug-reporting#BUG-REPORTING-IDENTIFYING-BUGS)
   * [5.2. What to Report](bug-reporting#BUG-REPORTING-WHAT-TO-REPORT)
   * [5.3. Where to Report Bugs](bug-reporting#BUG-REPORTING-WHERE-TO-REPORT-BUGS)
 

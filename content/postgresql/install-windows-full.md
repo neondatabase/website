@@ -1,6 +1,6 @@
 ## 18.1. Building with Visual C++ or the Microsoft Windows SDK [#](#INSTALL-WINDOWS-FULL)
 
-  * *   [18.1.1. Requirements](install-windows-full#INSTALL-WINDOWS-FULL-REQUIREMENTS)
+  * [18.1.1. Requirements](install-windows-full#INSTALL-WINDOWS-FULL-REQUIREMENTS)
   * [18.1.2. Special Considerations for 64-Bit Windows](install-windows-full#INSTALL-WINDOWS-FULL-64-BIT)
   * [18.1.3. Building](install-windows-full#INSTALL-WINDOWS-FULL-BUILD)
   * [18.1.4. Cleaning and Installing](install-windows-full#INSTALL-WINDOWS-FULL-CLEAN-INST)

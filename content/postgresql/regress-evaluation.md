@@ -1,6 +1,6 @@
 ## 33.2. Test Evaluation [#](#REGRESS-EVALUATION)
 
-  * *   [33.2.1. Error Message Differences](regress-evaluation#REGRESS-EVALUATION-MESSAGE-DIFFERENCES)
+  * [33.2.1. Error Message Differences](regress-evaluation#REGRESS-EVALUATION-MESSAGE-DIFFERENCES)
   * [33.2.2. Locale Differences](regress-evaluation#REGRESS-EVALUATION-LOCALE-DIFFERENCES)
   * [33.2.3. Date and Time Differences](regress-evaluation#REGRESS-EVALUATION-DATE-TIME-DIFFERENCES)
   * [33.2.4. Floating-Point Differences](regress-evaluation#REGRESS-EVALUATION-FLOAT-DIFFERENCES)

@@ -1,6 +1,6 @@
 ## 17.4. Building and Installation with Meson [#](#INSTALL-MESON)
 
-  * *   [17.4.1. Short Version](install-meson#INSTALL-SHORT-MESON)
+  * [17.4.1. Short Version](install-meson#INSTALL-SHORT-MESON)
   * [17.4.2. Installation Procedure](install-meson#INSTALL-PROCEDURE-MESON)
   * [17.4.3. `meson setup` Options](install-meson#MESON-OPTIONS)
 

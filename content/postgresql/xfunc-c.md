@@ -1,6 +1,6 @@
 ## 38.10. C-Language Functions [#](#XFUNC-C)
 
-  * *   [38.10.1. Dynamic Loading](xfunc-c#XFUNC-C-DYNLOAD)
+  * [38.10.1. Dynamic Loading](xfunc-c#XFUNC-C-DYNLOAD)
   * [38.10.2. Base Types in C-Language Functions](xfunc-c#XFUNC-C-BASETYPE)
   * [38.10.3. Version 1 Calling Conventions](xfunc-c#XFUNC-C-V1-CALL-CONV)
   * [38.10.4. Writing Code](xfunc-c#XFUNC-C-CODE)

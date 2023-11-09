@@ -1,6 +1,6 @@
 ## 14.2. Statistics Used by the Planner [#](#PLANNER-STATS)
 
-  * *   [14.2.1. Single-Column Statistics](planner-stats#PLANNER-STATS-SINGLE-COLUMN)
+  * [14.2.1. Single-Column Statistics](planner-stats#PLANNER-STATS-SINGLE-COLUMN)
   * [14.2.2. Extended Statistics](planner-stats#PLANNER-STATS-EXTENDED)
 
 ### 14.2.1. Single-Column Statistics [#](#PLANNER-STATS-SINGLE-COLUMN)

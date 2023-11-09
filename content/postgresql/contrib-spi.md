@@ -1,6 +1,6 @@
 ## F.40. spi — Server Programming Interface features/examples [#](#CONTRIB-SPI)
 
-  * *   [F.40.1. refint — Functions for Implementing Referential Integrity](contrib-spi#CONTRIB-SPI-REFINT)
+  * [F.40.1. refint — Functions for Implementing Referential Integrity](contrib-spi#CONTRIB-SPI-REFINT)
   * [F.40.2. autoinc — Functions for Autoincrementing Fields](contrib-spi#CONTRIB-SPI-AUTOINC)
   * [F.40.3. insert\_username — Functions for Tracking Who Changed a Table](contrib-spi#CONTRIB-SPI-INSERT-USERNAME)
   * [F.40.4. moddatetime — Functions for Tracking Last Modification Time](contrib-spi#CONTRIB-SPI-MODDATETIME)

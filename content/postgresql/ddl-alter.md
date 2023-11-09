@@ -1,6 +1,6 @@
 ## 5.6. Modifying Tables [#](#DDL-ALTER)
 
-  * *   [5.6.1. Adding a Column](ddl-alter#DDL-ALTER-ADDING-A-COLUMN)
+  * [5.6.1. Adding a Column](ddl-alter#DDL-ALTER-ADDING-A-COLUMN)
   * [5.6.2. Removing a Column](ddl-alter#DDL-ALTER-REMOVING-A-COLUMN)
   * [5.6.3. Adding a Constraint](ddl-alter#DDL-ALTER-ADDING-A-CONSTRAINT)
   * [5.6.4. Removing a Constraint](ddl-alter#DDL-ALTER-REMOVING-A-CONSTRAINT)

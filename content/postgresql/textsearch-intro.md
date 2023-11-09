@@ -1,6 +1,6 @@
 ## 12.1. Introduction [#](#TEXTSEARCH-INTRO)
 
-  * *   [12.1.1. What Is a Document?](textsearch-intro#TEXTSEARCH-DOCUMENT)
+  * [12.1.1. What Is a Document?](textsearch-intro#TEXTSEARCH-DOCUMENT)
   * [12.1.2. Basic Text Matching](textsearch-intro#TEXTSEARCH-MATCHING)
   * [12.1.3. Configurations](textsearch-intro#TEXTSEARCH-INTRO-CONFIGURATIONS)
 

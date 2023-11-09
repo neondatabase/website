@@ -1,6 +1,6 @@
 ## 28.2. The Cumulative Statistics System [#](#MONITORING-STATS)
 
-  * *   [28.2.1. Statistics Collection Configuration](monitoring-stats#MONITORING-STATS-SETUP)
+  * [28.2.1. Statistics Collection Configuration](monitoring-stats#MONITORING-STATS-SETUP)
   * [28.2.2. Viewing Statistics](monitoring-stats#MONITORING-STATS-VIEWS)
   * [28.2.3. `pg_stat_activity`](monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW)
   * [28.2.4. `pg_stat_replication`](monitoring-stats#MONITORING-PG-STAT-REPLICATION-VIEW)

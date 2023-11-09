@@ -1,6 +1,6 @@
 ## 34.14. Event System [#](#LIBPQ-EVENTS)
 
-  * *   [34.14.1. Event Types](libpq-events#LIBPQ-EVENTS-TYPES)
+  * [34.14.1. Event Types](libpq-events#LIBPQ-EVENTS-TYPES)
   * [34.14.2. Event Callback Procedure](libpq-events#LIBPQ-EVENTS-PROC)
   * [34.14.3. Event Support Functions](libpq-events#LIBPQ-EVENTS-FUNCS)
   * [34.14.4. Event Example](libpq-events#LIBPQ-EVENTS-EXAMPLE)

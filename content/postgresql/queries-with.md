@@ -1,6 +1,6 @@
 ## 7.8. `WITH` Queries (Common Table Expressions) [#](#QUERIES-WITH)
 
-  * *   [7.8.1. `SELECT` in `WITH`](queries-with#QUERIES-WITH-SELECT)
+  * [7.8.1. `SELECT` in `WITH`](queries-with#QUERIES-WITH-SELECT)
   * [7.8.2. Recursive Queries](queries-with#QUERIES-WITH-RECURSIVE)
   * [7.8.3. Common Table Expression Materialization](queries-with#QUERIES-WITH-CTE-MATERIALIZATION)
   * [7.8.4. Data-Modifying Statements in `WITH`](queries-with#QUERIES-WITH-MODIFYING)

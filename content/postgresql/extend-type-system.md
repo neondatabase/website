@@ -1,6 +1,6 @@
 ## 38.2. The PostgreSQL Type System [#](#EXTEND-TYPE-SYSTEM)
 
-  * *   [38.2.1. Base Types](extend-type-system#EXTEND-TYPE-SYSTEM-BASE)
+  * [38.2.1. Base Types](extend-type-system#EXTEND-TYPE-SYSTEM-BASE)
   * [38.2.2. Container Types](extend-type-system#EXTEND-TYPE-SYSTEM-CONTAINER)
   * [38.2.3. Domains](extend-type-system#EXTEND-TYPE-SYSTEM-DOMAINS)
   * [38.2.4. Pseudo-Types](extend-type-system#EXTEND-TYPE-SYSTEM-PSEUDO)

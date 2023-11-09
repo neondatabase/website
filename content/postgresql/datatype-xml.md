@@ -1,6 +1,6 @@
 ## 8.13. XML Type [#](#DATATYPE-XML)
 
-  * *   [8.13.1. Creating XML Values](datatype-xml#DATATYPE-XML-CREATING)
+  * [8.13.1. Creating XML Values](datatype-xml#DATATYPE-XML-CREATING)
   * [8.13.2. Encoding Handling](datatype-xml#DATATYPE-XML-ENCODING-HANDLING)
   * [8.13.3. Accessing XML Values](datatype-xml#DATATYPE-XML-ACCESSING-XML-VALUES)
 

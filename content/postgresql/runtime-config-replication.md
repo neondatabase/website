@@ -1,6 +1,6 @@
 ## 20.6. Replication [#](#RUNTIME-CONFIG-REPLICATION)
 
-  * *   [20.6.1. Sending Servers](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-SENDER)
+  * [20.6.1. Sending Servers](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-SENDER)
   * [20.6.2. Primary Server](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-PRIMARY)
   * [20.6.3. Standby Servers](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-STANDBY)
   * [20.6.4. Subscribers](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-SUBSCRIBER)

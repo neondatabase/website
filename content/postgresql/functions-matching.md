@@ -1,6 +1,6 @@
 ## 9.7. Pattern Matching [#](#FUNCTIONS-MATCHING)
 
-  * *   [9.7.1. `LIKE`](functions-matching#FUNCTIONS-LIKE)
+  * [9.7.1. `LIKE`](functions-matching#FUNCTIONS-LIKE)
   * [9.7.2. `SIMILAR TO` Regular Expressions](functions-matching#FUNCTIONS-SIMILARTO-REGEXP)
   * [9.7.3. POSIX Regular Expressions](functions-matching#FUNCTIONS-POSIX-REGEXP)
 

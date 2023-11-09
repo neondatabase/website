@@ -1,6 +1,6 @@
 ## F.7. bloom — bloom filter index access method [#](#BLOOM)
 
-  * *   [F.7.1. Parameters](bloom#BLOOM-PARAMETERS)
+  * [F.7.1. Parameters](bloom#BLOOM-PARAMETERS)
   * [F.7.2. Examples](bloom#BLOOM-EXAMPLES)
   * [F.7.3. Operator Class Interface](bloom#BLOOM-OPERATOR-CLASS-INTERFACE)
   * [F.7.4. Limitations](bloom#BLOOM-LIMITATIONS)

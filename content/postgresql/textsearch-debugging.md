@@ -1,6 +1,6 @@
 ## 12.8. Testing and Debugging Text Search [#](#TEXTSEARCH-DEBUGGING)
 
-  * *   [12.8.1. Configuration Testing](textsearch-debugging#TEXTSEARCH-CONFIGURATION-TESTING)
+  * [12.8.1. Configuration Testing](textsearch-debugging#TEXTSEARCH-CONFIGURATION-TESTING)
   * [12.8.2. Parser Testing](textsearch-debugging#TEXTSEARCH-PARSER-TESTING)
   * [12.8.3. Dictionary Testing](textsearch-debugging#TEXTSEARCH-DICTIONARY-TESTING)
 

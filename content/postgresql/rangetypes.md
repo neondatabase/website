@@ -1,6 +1,6 @@
 ## 8.17. Range Types [#](#RANGETYPES)
 
-  * *   [8.17.1. Built-in Range and Multirange Types](rangetypes#RANGETYPES-BUILTIN)
+  * [8.17.1. Built-in Range and Multirange Types](rangetypes#RANGETYPES-BUILTIN)
   * [8.17.2. Examples](rangetypes#RANGETYPES-EXAMPLES)
   * [8.17.3. Inclusive and Exclusive Bounds](rangetypes#RANGETYPES-INCLUSIVITY)
   * [8.17.4. Infinite (Unbounded) Ranges](rangetypes#RANGETYPES-INFINITE)

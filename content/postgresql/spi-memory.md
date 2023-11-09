@@ -1,6 +1,6 @@
 ## 47.3. Memory Management [#](#SPI-MEMORY)
 
-  * *   [SPI\_palloc](spi-spi-palloc) — allocate memory in the upper executor context
+  * [SPI\_palloc](spi-spi-palloc) — allocate memory in the upper executor context
   * [SPI\_repalloc](spi-realloc) — reallocate memory in the upper executor context
   * [SPI\_pfree](spi-spi-pfree) — free memory in the upper executor context
   * [SPI\_copytuple](spi-spi-copytuple) — make a copy of a row in the upper executor context

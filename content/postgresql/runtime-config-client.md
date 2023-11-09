@@ -1,6 +1,6 @@
 ## 20.11. Client Connection Defaults [#](#RUNTIME-CONFIG-CLIENT)
 
-  * *   [20.11.1. Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
+  * [20.11.1. Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
   * [20.11.2. Locale and Formatting](runtime-config-client#RUNTIME-CONFIG-CLIENT-FORMAT)
   * [20.11.3. Shared Library Preloading](runtime-config-client#RUNTIME-CONFIG-CLIENT-PRELOAD)
   * [20.11.4. Other Defaults](runtime-config-client#RUNTIME-CONFIG-CLIENT-OTHER)

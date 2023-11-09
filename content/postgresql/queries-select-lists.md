@@ -1,6 +1,6 @@
 ## 7.3. Select Lists [#](#QUERIES-SELECT-LISTS)
 
-  * *   [7.3.1. Select-List Items](queries-select-lists#QUERIES-SELECT-LIST-ITEMS)
+  * [7.3.1. Select-List Items](queries-select-lists#QUERIES-SELECT-LIST-ITEMS)
   * [7.3.2. Column Labels](queries-select-lists#QUERIES-COLUMN-LABELS)
   * [7.3.3. `DISTINCT`](queries-select-lists#QUERIES-DISTINCT)
 

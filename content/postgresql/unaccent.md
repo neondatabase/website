@@ -1,6 +1,6 @@
 ## F.47. unaccent — a text search dictionary which removes diacritics [#](#UNACCENT)
 
-  * *   [F.47.1. Configuration](unaccent#UNACCENT-CONFIGURATION)
+  * [F.47.1. Configuration](unaccent#UNACCENT-CONFIGURATION)
   * [F.47.2. Usage](unaccent#UNACCENT-USAGE)
   * [F.47.3. Functions](unaccent#UNACCENT-FUNCTIONS)
 

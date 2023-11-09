@@ -1,6 +1,6 @@
 ## F.48. uuid-ossp — a UUID generator [#](#UUID-OSSP)
 
-  * *   [F.48.1. `uuid-ossp` Functions](uuid-ossp#UUID-OSSP-FUNCTIONS-SECT)
+  * [F.48.1. `uuid-ossp` Functions](uuid-ossp#UUID-OSSP-FUNCTIONS-SECT)
   * [F.48.2. Building `uuid-ossp`](uuid-ossp#UUID-OSSP-BUILDING)
   * [F.48.3. Author](uuid-ossp#UUID-OSSP-AUTHOR)
 

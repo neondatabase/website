@@ -1,6 +1,6 @@
 ## 20.7. Query Planning [#](#RUNTIME-CONFIG-QUERY)
 
-  * *   [20.7.1. Planner Method Configuration](runtime-config-query#RUNTIME-CONFIG-QUERY-ENABLE)
+  * [20.7.1. Planner Method Configuration](runtime-config-query#RUNTIME-CONFIG-QUERY-ENABLE)
   * [20.7.2. Planner Cost Constants](runtime-config-query#RUNTIME-CONFIG-QUERY-CONSTANTS)
   * [20.7.3. Genetic Query Optimizer](runtime-config-query#RUNTIME-CONFIG-QUERY-GEQO)
   * [20.7.4. Other Planner Options](runtime-config-query#RUNTIME-CONFIG-QUERY-OTHER)

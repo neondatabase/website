@@ -1,6 +1,6 @@
 ## 32.4. Extensibility [#](#JIT-EXTENSIBILITY)
 
-  * *   [32.4.1. Inlining Support for Extensions](jit-extensibility#JIT-EXTENSIBILITY-BITCODE)
+  * [32.4.1. Inlining Support for Extensions](jit-extensibility#JIT-EXTENSIBILITY-BITCODE)
   * [32.4.2. Pluggable JIT Providers](jit-extensibility#JIT-PLUGGABLE)
 
 ### 32.4.1. Inlining Support for Extensions [#](#JIT-EXTENSIBILITY-BITCODE)

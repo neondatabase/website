@@ -1,6 +1,6 @@
 ## 33.1. Running the Tests [#](#REGRESS-RUN)
 
-  * *   [33.1.1. Running the Tests Against a Temporary Installation](regress-run#REGRESS-RUN-TEMP-INST)
+  * [33.1.1. Running the Tests Against a Temporary Installation](regress-run#REGRESS-RUN-TEMP-INST)
   * [33.1.2. Running the Tests Against an Existing Installation](regress-run#REGRESS-RUN-EXISTING-INST)
   * [33.1.3. Additional Test Suites](regress-run#REGRESS-ADDITIONAL)
   * [33.1.4. Locale and Encoding](regress-run#REGRESS-RUN-LOCALE)

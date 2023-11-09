@@ -1,6 +1,6 @@
 ## F.23. ltree — hierarchical tree-like data type [#](#LTREE)
 
-  * *   [F.23.1. Definitions](ltree#LTREE-DEFINITIONS)
+  * [F.23.1. Definitions](ltree#LTREE-DEFINITIONS)
   * [F.23.2. Operators and Functions](ltree#LTREE-OPS-FUNCS)
   * [F.23.3. Indexes](ltree#LTREE-INDEXES)
   * [F.23.4. Example](ltree#LTREE-EXAMPLE)

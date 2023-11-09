@@ -1,6 +1,6 @@
 ## F.29. pg\_prewarm — preload relation data into buffer caches [#](#PGPREWARM)
 
-  * *   [F.29.1. Functions](pgprewarm#PGPREWARM-FUNCS)
+  * [F.29.1. Functions](pgprewarm#PGPREWARM-FUNCS)
   * [F.29.2. Configuration Parameters](pgprewarm#PGPREWARM-CONFIG-PARAMS)
   * [F.29.3. Author](pgprewarm#PGPREWARM-AUTHOR)
 

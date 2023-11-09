@@ -1,6 +1,6 @@
 ## 34.3. Command Execution Functions [#](#LIBPQ-EXEC)
 
-  * *   [34.3.1. Main Functions](libpq-exec#LIBPQ-EXEC-MAIN)
+  * [34.3.1. Main Functions](libpq-exec#LIBPQ-EXEC-MAIN)
   * [34.3.2. Retrieving Query Result Information](libpq-exec#LIBPQ-EXEC-SELECT-INFO)
   * [34.3.3. Retrieving Other Result Information](libpq-exec#LIBPQ-EXEC-NONSELECT)
   * [34.3.4. Escaping Strings for Inclusion in SQL Commands](libpq-exec#LIBPQ-EXEC-ESCAPE-STRING)

@@ -1,6 +1,6 @@
 ## F.39. sepgsql — SELinux-, label-based mandatory access control (MAC) security module [#](#SEPGSQL)
 
-  * *   [F.39.1. Overview](sepgsql#SEPGSQL-OVERVIEW)
+  * [F.39.1. Overview](sepgsql#SEPGSQL-OVERVIEW)
   * [F.39.2. Installation](sepgsql#SEPGSQL-INSTALLATION)
   * [F.39.3. Regression Tests](sepgsql#SEPGSQL-REGRESSION)
   * [F.39.4. GUC Parameters](sepgsql#SEPGSQL-PARAMETERS)

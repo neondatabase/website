@@ -1,6 +1,6 @@
 ## 34.1. Database Connection Control Functions [#](#LIBPQ-CONNECT)
 
-  * *   [34.1.1. Connection Strings](libpq-connect#LIBPQ-CONNSTRING)
+  * [34.1.1. Connection Strings](libpq-connect#LIBPQ-CONNSTRING)
   * [34.1.2. Parameter Key Words](libpq-connect#LIBPQ-PARAMKEYWORDS)
 
 The following functions deal with making a connection to a PostgreSQL backend server. An application program can have several backend connections open at one time. (One reason to do that is to access more than one database.) Each connection is represented by a `PGconn` object, which is obtained from the function [`PQconnectdb`](libpq-connect#LIBPQ-PQCONNECTDB), [`PQconnectdbParams`](libpq-connect#LIBPQ-PQCONNECTDBPARAMS), or [`PQsetdbLogin`](libpq-connect#LIBPQ-PQSETDBLOGIN). Note that these functions will always return a non-null object pointer, unless perhaps there is too little memory even to allocate the `PGconn` object. The [`PQstatus`](libpq-status#LIBPQ-PQSTATUS) function should be called to check the return value for a successful connection before queries are sent via the connection object.

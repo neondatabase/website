@@ -1,6 +1,6 @@
 ## F.28. pg\_freespacemap — examine the free space map [#](#PGFREESPACEMAP)
 
-  * *   [F.28.1. Functions](pgfreespacemap#PGFREESPACEMAP-FUNCS)
+  * [F.28.1. Functions](pgfreespacemap#PGFREESPACEMAP-FUNCS)
   * [F.28.2. Sample Output](pgfreespacemap#PGFREESPACEMAP-SAMPLE-OUTPUT)
   * [F.28.3. Author](pgfreespacemap#PGFREESPACEMAP-AUTHOR)
 

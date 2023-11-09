@@ -1,6 +1,6 @@
 ## 49.2. Logical Decoding Concepts [#](#LOGICALDECODING-EXPLANATION)
 
-  * *   [49.2.1. Logical Decoding](logicaldecoding-explanation#LOGICALDECODING-EXPLANATION-LOG-DEC)
+  * [49.2.1. Logical Decoding](logicaldecoding-explanation#LOGICALDECODING-EXPLANATION-LOG-DEC)
   * [49.2.2. Replication Slots](logicaldecoding-explanation#LOGICALDECODING-REPLICATION-SLOTS)
   * [49.2.3. Output Plugins](logicaldecoding-explanation#LOGICALDECODING-EXPLANATION-OUTPUT-PLUGINS)
   * [49.2.4. Exported Snapshots](logicaldecoding-explanation#LOGICALDECODING-EXPLANATION-EXPORTED-SNAPSHOTS)

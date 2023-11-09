@@ -1,6 +1,6 @@
 ## F.24. pageinspect — low-level inspection of database pages [#](#PAGEINSPECT)
 
-  * *   [F.24.1. General Functions](pageinspect#PAGEINSPECT-GENERAL-FUNCS)
+  * [F.24.1. General Functions](pageinspect#PAGEINSPECT-GENERAL-FUNCS)
   * [F.24.2. Heap Functions](pageinspect#PAGEINSPECT-HEAP-FUNCS)
   * [F.24.3. B-Tree Functions](pageinspect#PAGEINSPECT-B-TREE-FUNCS)
   * [F.24.4. BRIN Functions](pageinspect#PAGEINSPECT-BRIN-FUNCS)

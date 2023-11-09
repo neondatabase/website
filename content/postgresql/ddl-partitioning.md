@@ -1,6 +1,6 @@
 ## 5.11. Table Partitioning [#](#DDL-PARTITIONING)
 
-  * *   [5.11.1. Overview](ddl-partitioning#DDL-PARTITIONING-OVERVIEW)
+  * [5.11.1. Overview](ddl-partitioning#DDL-PARTITIONING-OVERVIEW)
   * [5.11.2. Declarative Partitioning](ddl-partitioning#DDL-PARTITIONING-DECLARATIVE)
   * [5.11.3. Partitioning Using Inheritance](ddl-partitioning#DDL-PARTITIONING-USING-INHERITANCE)
   * [5.11.4. Partition Pruning](ddl-partitioning#DDL-PARTITION-PRUNING)

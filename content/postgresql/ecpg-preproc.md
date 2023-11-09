@@ -1,6 +1,6 @@
 ## 36.9. Preprocessor Directives [#](#ECPG-PREPROC)
 
-  * *   [36.9.1. Including Files](ecpg-preproc#ECPG-INCLUDE)
+  * [36.9.1. Including Files](ecpg-preproc#ECPG-INCLUDE)
   * [36.9.2. The define and undef Directives](ecpg-preproc#ECPG-DEFINE)
   * [36.9.3. ifdef, ifndef, elif, else, and endif Directives](ecpg-preproc#ECPG-IFDEF)
 

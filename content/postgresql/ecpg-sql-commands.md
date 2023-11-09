@@ -1,6 +1,6 @@
 ## 36.14. Embedded SQL Commands [#](#ECPG-SQL-COMMANDS)
 
-  * *   [ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor) — allocate an SQL descriptor area
+  * [ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor) — allocate an SQL descriptor area
   * [CONNECT](ecpg-sql-connect) — establish a database connection
   * [DEALLOCATE DESCRIPTOR](ecpg-sql-deallocate-descriptor) — deallocate an SQL descriptor area
   * [DECLARE](ecpg-sql-declare) — define a cursor

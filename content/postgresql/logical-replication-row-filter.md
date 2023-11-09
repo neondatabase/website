@@ -1,6 +1,6 @@
 ## 31.3. Row Filters [#](#LOGICAL-REPLICATION-ROW-FILTER)
 
-  * *   [31.3.1. Row Filter Rules](logical-replication-row-filter#LOGICAL-REPLICATION-ROW-FILTER-RULES)
+  * [31.3.1. Row Filter Rules](logical-replication-row-filter#LOGICAL-REPLICATION-ROW-FILTER-RULES)
   * [31.3.2. Expression Restrictions](logical-replication-row-filter#LOGICAL-REPLICATION-ROW-FILTER-RESTRICTIONS)
   * [31.3.3. UPDATE Transformations](logical-replication-row-filter#LOGICAL-REPLICATION-ROW-FILTER-TRANSFORMATIONS)
   * [31.3.4. Partitioned Tables](logical-replication-row-filter#LOGICAL-REPLICATION-ROW-FILTER-PARTITIONED-TABLE)

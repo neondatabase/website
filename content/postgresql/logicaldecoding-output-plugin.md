@@ -1,6 +1,6 @@
 ## 49.6. Logical Decoding Output Plugins [#](#LOGICALDECODING-OUTPUT-PLUGIN)
 
-  * *   [49.6.1. Initialization Function](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-INIT)
+  * [49.6.1. Initialization Function](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-INIT)
   * [49.6.2. Capabilities](logicaldecoding-output-plugin#LOGICALDECODING-CAPABILITIES)
   * [49.6.3. Output Modes](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-MODE)
   * [49.6.4. Output Plugin Callbacks](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-PLUGIN-CALLBACKS)

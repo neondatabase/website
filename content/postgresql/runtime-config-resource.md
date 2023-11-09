@@ -1,6 +1,6 @@
 ## 20.4. Resource Consumption [#](#RUNTIME-CONFIG-RESOURCE)
 
-  * *   [20.4.1. Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
+  * [20.4.1. Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
   * [20.4.2. Disk](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-DISK)
   * [20.4.3. Kernel Resource Usage](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-KERNEL)
   * [20.4.4. Cost-based Vacuum Delay](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-VACUUM-COST)

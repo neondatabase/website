@@ -1,6 +1,6 @@
 ## 9.23. Subquery Expressions [#](#FUNCTIONS-SUBQUERY)
 
-  * *   [9.23.1. `EXISTS`](functions-subquery#FUNCTIONS-SUBQUERY-EXISTS)
+  * [9.23.1. `EXISTS`](functions-subquery#FUNCTIONS-SUBQUERY-EXISTS)
   * [9.23.2. `IN`](functions-subquery#FUNCTIONS-SUBQUERY-IN)
   * [9.23.3. `NOT IN`](functions-subquery#FUNCTIONS-SUBQUERY-NOTIN)
   * [9.23.4. `ANY`/`SOME`](functions-subquery#FUNCTIONS-SUBQUERY-ANY-SOME)

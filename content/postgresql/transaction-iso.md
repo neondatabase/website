@@ -1,6 +1,6 @@
 ## 13.2. Transaction Isolation [#](#TRANSACTION-ISO)
 
-  * *   [13.2.1. Read Committed Isolation Level](transaction-iso#XACT-READ-COMMITTED)
+  * [13.2.1. Read Committed Isolation Level](transaction-iso#XACT-READ-COMMITTED)
   * [13.2.2. Repeatable Read Isolation Level](transaction-iso#XACT-REPEATABLE-READ)
   * [13.2.3. Serializable Isolation Level](transaction-iso#XACT-SERIALIZABLE)
 

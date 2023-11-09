@@ -1,6 +1,6 @@
 ## 51.2. Archive Module Callbacks [#](#ARCHIVE-MODULE-CALLBACKS)
 
-  * *   [51.2.1. Startup Callback](archive-module-callbacks#ARCHIVE-MODULE-STARTUP)
+  * [51.2.1. Startup Callback](archive-module-callbacks#ARCHIVE-MODULE-STARTUP)
   * [51.2.2. Check Callback](archive-module-callbacks#ARCHIVE-MODULE-CHECK)
   * [51.2.3. Archive Callback](archive-module-callbacks#ARCHIVE-MODULE-ARCHIVE)
   * [51.2.4. Shutdown Callback](archive-module-callbacks#ARCHIVE-MODULE-SHUTDOWN)

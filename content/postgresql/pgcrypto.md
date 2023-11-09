@@ -1,6 +1,6 @@
 ## F.27. pgcrypto — cryptographic functions [#](#PGCRYPTO)
 
-  * *   [F.27.1. General Hashing Functions](pgcrypto#PGCRYPTO-GENERAL-HASHING-FUNCS)
+  * [F.27.1. General Hashing Functions](pgcrypto#PGCRYPTO-GENERAL-HASHING-FUNCS)
   * [F.27.2. Password Hashing Functions](pgcrypto#PGCRYPTO-PASSWORD-HASHING-FUNCS)
   * [F.27.3. PGP Encryption Functions](pgcrypto#PGCRYPTO-PGP-ENC-FUNCS)
   * [F.27.4. Raw Encryption Functions](pgcrypto#PGCRYPTO-RAW-ENC-FUNCS)

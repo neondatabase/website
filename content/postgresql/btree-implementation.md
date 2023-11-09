@@ -1,6 +1,6 @@
 ## 67.4. Implementation [#](#BTREE-IMPLEMENTATION)
 
-  * *   [67.4.1. B-Tree Structure](btree-implementation#BTREE-STRUCTURE)
+  * [67.4.1. B-Tree Structure](btree-implementation#BTREE-STRUCTURE)
   * [67.4.2. Bottom-up Index Deletion](btree-implementation#BTREE-DELETION)
   * [67.4.3. Deduplication](btree-implementation#BTREE-DEDUPLICATION)
 

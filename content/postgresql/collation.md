@@ -1,6 +1,6 @@
 ## 24.2. Collation Support [#](#COLLATION)
 
-  * *   [24.2.1. Concepts](collation#COLLATION-CONCEPTS)
+  * [24.2.1. Concepts](collation#COLLATION-CONCEPTS)
   * [24.2.2. Managing Collations](collation#COLLATION-MANAGING)
   * [24.2.3. ICU Custom Collations](collation#ICU-CUSTOM-COLLATIONS)
 

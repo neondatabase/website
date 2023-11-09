@@ -1,6 +1,6 @@
 ## 4.2. Value Expressions [#](#SQL-EXPRESSIONS)
 
-  * *   [4.2.1. Column References](sql-expressions#SQL-EXPRESSIONS-COLUMN-REFS)
+  * [4.2.1. Column References](sql-expressions#SQL-EXPRESSIONS-COLUMN-REFS)
   * [4.2.2. Positional Parameters](sql-expressions#SQL-EXPRESSIONS-PARAMETERS-POSITIONAL)
   * [4.2.3. Subscripts](sql-expressions#SQL-EXPRESSIONS-SUBSCRIPTS)
   * [4.2.4. Field Selection](sql-expressions#FIELD-SELECTION)

@@ -1,6 +1,6 @@
 ## 75.2. System Catalog Initial Data [#](#SYSTEM-CATALOG-INITIAL-DATA)
 
-  * *   [75.2.1. Data File Format](system-catalog-initial-data#SYSTEM-CATALOG-INITIAL-DATA-FORMAT)
+  * [75.2.1. Data File Format](system-catalog-initial-data#SYSTEM-CATALOG-INITIAL-DATA-FORMAT)
   * [75.2.2. OID Assignment](system-catalog-initial-data#SYSTEM-CATALOG-OID-ASSIGNMENT)
   * [75.2.3. OID Reference Lookup](system-catalog-initial-data#SYSTEM-CATALOG-OID-REFERENCES)
   * [75.2.4. Automatic Creation of Array Types](system-catalog-initial-data#SYSTEM-CATALOG-AUTO-ARRAY-TYPES)

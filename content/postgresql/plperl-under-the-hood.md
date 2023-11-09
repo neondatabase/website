@@ -1,6 +1,6 @@
 ## 45.8. PL/Perl Under the Hood [#](#PLPERL-UNDER-THE-HOOD)
 
-  * *   [45.8.1. Configuration](plperl-under-the-hood#PLPERL-CONFIG)
+  * [45.8.1. Configuration](plperl-under-the-hood#PLPERL-CONFIG)
   * [45.8.2. Limitations and Missing Features](plperl-under-the-hood#PLPERL-MISSING)
 
 ### 45.8.1. Configuration [#](#PLPERL-CONFIG)

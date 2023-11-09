@@ -1,6 +1,6 @@
 ## 55.1. Overview [#](#PROTOCOL-OVERVIEW)
 
-  * *   [55.1.1. Messaging Overview](protocol-overview#PROTOCOL-MESSAGE-CONCEPTS)
+  * [55.1.1. Messaging Overview](protocol-overview#PROTOCOL-MESSAGE-CONCEPTS)
   * [55.1.2. Extended Query Overview](protocol-overview#PROTOCOL-QUERY-CONCEPTS)
   * [55.1.3. Formats and Format Codes](protocol-overview#PROTOCOL-FORMAT-CODES)
 

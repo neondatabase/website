@@ -1,6 +1,6 @@
 ## 38.12. User-Defined Aggregates [#](#XAGGR)
 
-  * *   [38.12.1. Moving-Aggregate Mode](xaggr#XAGGR-MOVING-AGGREGATES)
+  * [38.12.1. Moving-Aggregate Mode](xaggr#XAGGR-MOVING-AGGREGATES)
   * [38.12.2. Polymorphic and Variadic Aggregates](xaggr#XAGGR-POLYMORPHIC-AGGREGATES)
   * [38.12.3. Ordered-Set Aggregates](xaggr#XAGGR-ORDERED-SET-AGGREGATES)
   * [38.12.4. Partial Aggregation](xaggr#XAGGR-PARTIAL-AGGREGATES)

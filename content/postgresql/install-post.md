@@ -1,6 +1,6 @@
 ## 17.5. Post-Installation Setup [#](#INSTALL-POST)
 
-  * *   [17.5.1. Shared Libraries](install-post#INSTALL-POST-SHLIBS)
+  * [17.5.1. Shared Libraries](install-post#INSTALL-POST-SHLIBS)
   * [17.5.2. Environment Variables](install-post#INSTALL-POST-ENV-VARS)
 
 ### 17.5.1. Shared Libraries [#](#INSTALL-POST-SHLIBS)

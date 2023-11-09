@@ -1,6 +1,6 @@
 ## 20.5. Write Ahead Log [#](#RUNTIME-CONFIG-WAL)
 
-  * *   [20.5.1. Settings](runtime-config-wal#RUNTIME-CONFIG-WAL-SETTINGS)
+  * [20.5.1. Settings](runtime-config-wal#RUNTIME-CONFIG-WAL-SETTINGS)
   * [20.5.2. Checkpoints](runtime-config-wal#RUNTIME-CONFIG-WAL-CHECKPOINTS)
   * [20.5.3. Archiving](runtime-config-wal#RUNTIME-CONFIG-WAL-ARCHIVING)
   * [20.5.4. Recovery](runtime-config-wal#RUNTIME-CONFIG-WAL-RECOVERY)

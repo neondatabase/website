@@ -1,6 +1,6 @@
 ## 32.1. What Is JIT compilation? [#](#JIT-REASON)
 
-  * *   [32.1.1. JIT Accelerated Operations](jit-reason#JIT-ACCELERATED-OPERATIONS)
+  * [32.1.1. JIT Accelerated Operations](jit-reason#JIT-ACCELERATED-OPERATIONS)
   * [32.1.2. Inlining](jit-reason#JIT-INLINING)
   * [32.1.3. Optimization](jit-reason#JIT-OPTIMIZATION)
 

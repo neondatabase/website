@@ -1,6 +1,6 @@
 ## 15.3. Parallel Plans [#](#PARALLEL-PLANS)
 
-  * *   [15.3.1. Parallel Scans](parallel-plans#PARALLEL-SCANS)
+  * [15.3.1. Parallel Scans](parallel-plans#PARALLEL-SCANS)
   * [15.3.2. Parallel Joins](parallel-plans#PARALLEL-JOINS)
   * [15.3.3. Parallel Aggregation](parallel-plans#PARALLEL-AGGREGATION)
   * [15.3.4. Parallel Append](parallel-plans#PARALLEL-APPEND)

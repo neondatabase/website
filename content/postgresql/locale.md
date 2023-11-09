@@ -1,6 +1,6 @@
 ## 24.1. Locale Support [#](#LOCALE)
 
-  * *   [24.1.1. Overview](locale#LOCALE-OVERVIEW)
+  * [24.1.1. Overview](locale#LOCALE-OVERVIEW)
   * [24.1.2. Behavior](locale#LOCALE-BEHAVIOR)
   * [24.1.3. Selecting Locales](locale#LOCALE-SELECTING-LOCALES)
   * [24.1.4. Locale Providers](locale#LOCALE-PROVIDERS)

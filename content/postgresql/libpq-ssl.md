@@ -1,6 +1,6 @@
 ## 34.19. SSL Support [#](#LIBPQ-SSL)
 
-  * *   [34.19.1. Client Verification of Server Certificates](libpq-ssl#LIBQ-SSL-CERTIFICATES)
+  * [34.19.1. Client Verification of Server Certificates](libpq-ssl#LIBQ-SSL-CERTIFICATES)
   * [34.19.2. Client Certificates](libpq-ssl#LIBPQ-SSL-CLIENTCERT)
   * [34.19.3. Protection Provided in Different Modes](libpq-ssl#LIBPQ-SSL-PROTECTION)
   * [34.19.4. SSL Client File Usage](libpq-ssl#LIBPQ-SSL-FILEUSAGE)

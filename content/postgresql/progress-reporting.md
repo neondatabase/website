@@ -1,6 +1,6 @@
 ## 28.4. Progress Reporting [#](#PROGRESS-REPORTING)
 
-  * *   [28.4.1. ANALYZE Progress Reporting](progress-reporting#ANALYZE-PROGRESS-REPORTING)
+  * [28.4.1. ANALYZE Progress Reporting](progress-reporting#ANALYZE-PROGRESS-REPORTING)
   * [28.4.2. CLUSTER Progress Reporting](progress-reporting#CLUSTER-PROGRESS-REPORTING)
   * [28.4.3. COPY Progress Reporting](progress-reporting#COPY-PROGRESS-REPORTING)
   * [28.4.4. CREATE INDEX Progress Reporting](progress-reporting#CREATE-INDEX-PROGRESS-REPORTING)

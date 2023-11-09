@@ -1,6 +1,6 @@
 ## 62.3. Genetic Query Optimization (GEQO) in PostgreSQL [#](#GEQO-PG-INTRO)
 
-  * *   [62.3.1. Generating Possible Plans with GEQO](geqo-pg-intro#GEQO-PG-INTRO-GEN-POSSIBLE-PLANS)
+  * [62.3.1. Generating Possible Plans with GEQO](geqo-pg-intro#GEQO-PG-INTRO-GEN-POSSIBLE-PLANS)
   * [62.3.2. Future Implementation Tasks for PostgreSQL GEQO](geqo-pg-intro#GEQO-FUTURE)
 
 The GEQO module approaches the query optimization problem as though it were the well-known traveling salesman problem (TSP). Possible query plans are encoded as integer strings. Each string represents the join order from one relation of the query to the next. For example, the join tree

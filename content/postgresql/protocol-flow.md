@@ -1,6 +1,6 @@
 ## 55.2. Message Flow [#](#PROTOCOL-FLOW)
 
-  * *   [55.2.1. Start-up](protocol-flow#PROTOCOL-FLOW-START-UP)
+  * [55.2.1. Start-up](protocol-flow#PROTOCOL-FLOW-START-UP)
   * [55.2.2. Simple Query](protocol-flow#PROTOCOL-FLOW-SIMPLE-QUERY)
   * [55.2.3. Extended Query](protocol-flow#PROTOCOL-FLOW-EXT-QUERY)
   * [55.2.4. Pipelining](protocol-flow#PROTOCOL-FLOW-PIPELINING)

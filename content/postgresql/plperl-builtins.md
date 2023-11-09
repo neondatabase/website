@@ -1,6 +1,6 @@
 ## 45.3. Built-in Functions [#](#PLPERL-BUILTINS)
 
-  * *   [45.3.1. Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
+  * [45.3.1. Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
   * [45.3.2. Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
 
 ### 45.3.1. Database Access from PL/Perl [#](#PLPERL-DATABASE)

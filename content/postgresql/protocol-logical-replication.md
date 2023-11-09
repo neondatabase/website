@@ -1,6 +1,6 @@
 ## 55.5. Logical Streaming Replication Protocol [#](#PROTOCOL-LOGICAL-REPLICATION)
 
-  * *   [55.5.1. Logical Streaming Replication Parameters](protocol-logical-replication#PROTOCOL-LOGICAL-REPLICATION-PARAMS)
+  * [55.5.1. Logical Streaming Replication Parameters](protocol-logical-replication#PROTOCOL-LOGICAL-REPLICATION-PARAMS)
   * [55.5.2. Logical Replication Protocol Messages](protocol-logical-replication#PROTOCOL-LOGICAL-MESSAGES)
   * [55.5.3. Logical Replication Protocol Message Flow](protocol-logical-replication#PROTOCOL-LOGICAL-MESSAGES-FLOW)
 

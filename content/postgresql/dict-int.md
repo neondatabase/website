@@ -1,6 +1,6 @@
 ## F.13. dict\_int — example full-text search dictionary for integers [#](#DICT-INT)
 
-  * *   [F.13.1. Configuration](dict-int#DICT-INT-CONFIG)
+  * [F.13.1. Configuration](dict-int#DICT-INT-CONFIG)
   * [F.13.2. Usage](dict-int#DICT-INT-USAGE)
 
 `dict_int` is an example of an add-on dictionary template for full-text search. The motivation for this example dictionary is to control the indexing of integers (signed and unsigned), allowing such numbers to be indexed while preventing excessive growth in the number of unique words, which greatly affects the performance of searching.

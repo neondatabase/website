@@ -1,6 +1,6 @@
 ## 35.3. Client Interfaces [#](#LO-INTERFACES)
 
-  * *   [35.3.1. Creating a Large Object](lo-interfaces#LO-CREATE)
+  * [35.3.1. Creating a Large Object](lo-interfaces#LO-CREATE)
   * [35.3.2. Importing a Large Object](lo-interfaces#LO-IMPORT)
   * [35.3.3. Exporting a Large Object](lo-interfaces#LO-EXPORT)
   * [35.3.4. Opening an Existing Large Object](lo-interfaces#LO-OPEN)

@@ -1,6 +1,6 @@
 ## 38.16. Interfacing Extensions to Indexes [#](#XINDEX)
 
-  * *   [38.16.1. Index Methods and Operator Classes](xindex#XINDEX-OPCLASS)
+  * [38.16.1. Index Methods and Operator Classes](xindex#XINDEX-OPCLASS)
   * [38.16.2. Index Method Strategies](xindex#XINDEX-STRATEGIES)
   * [38.16.3. Index Method Support Routines](xindex#XINDEX-SUPPORT)
   * [38.16.4. An Example](xindex#XINDEX-EXAMPLE)

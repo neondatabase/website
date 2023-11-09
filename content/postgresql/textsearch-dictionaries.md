@@ -1,6 +1,6 @@
 ## 12.6. Dictionaries [#](#TEXTSEARCH-DICTIONARIES)
 
-  * *   [12.6.1. Stop Words](textsearch-dictionaries#TEXTSEARCH-STOPWORDS)
+  * [12.6.1. Stop Words](textsearch-dictionaries#TEXTSEARCH-STOPWORDS)
   * [12.6.2. Simple Dictionary](textsearch-dictionaries#TEXTSEARCH-SIMPLE-DICTIONARY)
   * [12.6.3. Synonym Dictionary](textsearch-dictionaries#TEXTSEARCH-SYNONYM-DICTIONARY)
   * [12.6.4. Thesaurus Dictionary](textsearch-dictionaries#TEXTSEARCH-THESAURUS)

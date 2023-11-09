@@ -1,6 +1,6 @@
 ## 36.4. Using Host Variables [#](#ECPG-VARIABLES)
 
-  * *   [36.4.1. Overview](ecpg-variables#ECPG-VARIABLES-OVERVIEW)
+  * [36.4.1. Overview](ecpg-variables#ECPG-VARIABLES-OVERVIEW)
   * [36.4.2. Declare Sections](ecpg-variables#ECPG-DECLARE-SECTIONS)
   * [36.4.3. Retrieving Query Results](ecpg-variables#ECPG-RETRIEVING)
   * [36.4.4. Type Mapping](ecpg-variables#ECPG-VARIABLES-TYPE-MAPPING)

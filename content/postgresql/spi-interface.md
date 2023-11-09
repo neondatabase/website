@@ -1,6 +1,6 @@
 ## 47.1. Interface Functions [#](#SPI-INTERFACE)
 
-  * *   [SPI\_connect](spi-spi-connect) — connect a C function to the SPI manager
+  * [SPI\_connect](spi-spi-connect) — connect a C function to the SPI manager
   * [SPI\_finish](spi-spi-finish) — disconnect a C function from the SPI manager
   * [SPI\_execute](spi-spi-execute) — execute a command
   * [SPI\_exec](spi-spi-exec) — execute a read/write command

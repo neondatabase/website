@@ -1,6 +1,6 @@
 ## 9.29. Event Trigger Functions [#](#FUNCTIONS-EVENT-TRIGGERS)
 
-  * *   [9.29.1. Capturing Changes at Command End](functions-event-triggers#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
+  * [9.29.1. Capturing Changes at Command End](functions-event-triggers#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
   * [9.29.2. Processing Objects Dropped by a DDL Command](functions-event-triggers#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
   * [9.29.3. Handling a Table Rewrite Event](functions-event-triggers#PG-EVENT-TRIGGER-TABLE-REWRITE-FUNCTIONS)
 

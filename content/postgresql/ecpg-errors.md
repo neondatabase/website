@@ -1,6 +1,6 @@
 ## 36.8. Error Handling [#](#ECPG-ERRORS)
 
-  * *   [36.8.1. Setting Callbacks](ecpg-errors#ECPG-WHENEVER)
+  * [36.8.1. Setting Callbacks](ecpg-errors#ECPG-WHENEVER)
   * [36.8.2. sqlca](ecpg-errors#ECPG-SQLCA)
   * [36.8.3. `SQLSTATE` vs. `SQLCODE`](ecpg-errors#ECPG-SQLSTATE-SQLCODE)
 

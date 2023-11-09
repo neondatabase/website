@@ -1,6 +1,6 @@
 ## 11.2. Index Types [#](#INDEXES-TYPES)
 
-  * *   [11.2.1. B-Tree](indexes-types#INDEXES-TYPES-BTREE)
+  * [11.2.1. B-Tree](indexes-types#INDEXES-TYPES-BTREE)
   * [11.2.2. Hash](indexes-types#INDEXES-TYPES-HASH)
   * [11.2.3. GiST](indexes-types#INDEXES-TYPE-GIST)
   * [11.2.4. SP-GiST](indexes-types#INDEXES-TYPE-SPGIST)

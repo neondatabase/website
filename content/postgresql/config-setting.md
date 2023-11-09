@@ -1,6 +1,6 @@
 ## 20.1. Setting Parameters [#](#CONFIG-SETTING)
 
-  * *   [20.1.1. Parameter Names and Values](config-setting#CONFIG-SETTING-NAMES-VALUES)
+  * [20.1.1. Parameter Names and Values](config-setting#CONFIG-SETTING-NAMES-VALUES)
   * [20.1.2. Parameter Interaction via the Configuration File](config-setting#CONFIG-SETTING-CONFIGURATION-FILE)
   * [20.1.3. Parameter Interaction via SQL](config-setting#CONFIG-SETTING-SQL)
   * [20.1.4. Parameter Interaction via the Shell](config-setting#CONFIG-SETTING-SHELL)

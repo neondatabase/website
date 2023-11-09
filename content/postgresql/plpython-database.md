@@ -1,6 +1,6 @@
 ## 46.6. Database Access [#](#PLPYTHON-DATABASE)
 
-  * *   [46.6.1. Database Access Functions](plpython-database#PLPYTHON-DATABASE-ACCESS-FUNCS)
+  * [46.6.1. Database Access Functions](plpython-database#PLPYTHON-DATABASE-ACCESS-FUNCS)
   * [46.6.2. Trapping Errors](plpython-database#PLPYTHON-TRAPPING)
 
 The PL/Python language module automatically imports a Python module called `plpy`. The functions and constants in this module are available to you in the Python code as `plpy.foo`.

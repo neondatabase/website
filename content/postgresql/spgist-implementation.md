@@ -1,6 +1,6 @@
 ## 69.4. Implementation [#](#SPGIST-IMPLEMENTATION)
 
-  * *   [69.4.1. SP-GiST Limits](spgist-implementation#SPGIST-LIMITS)
+  * [69.4.1. SP-GiST Limits](spgist-implementation#SPGIST-LIMITS)
   * [69.4.2. SP-GiST Without Node Labels](spgist-implementation#SPGIST-NULL-LABELS)
   * [69.4.3. “All-the-Same” Inner Tuples](spgist-implementation#SPGIST-ALL-THE-SAME)
 

@@ -1,6 +1,6 @@
 ## 9.9. Date/Time Functions and Operators [#](#FUNCTIONS-DATETIME)
 
-  * *   [9.9.1. `EXTRACT`, `date_part`](functions-datetime#FUNCTIONS-DATETIME-EXTRACT)
+  * [9.9.1. `EXTRACT`, `date_part`](functions-datetime#FUNCTIONS-DATETIME-EXTRACT)
   * [9.9.2. `date_trunc`](functions-datetime#FUNCTIONS-DATETIME-TRUNC)
   * [9.9.3. `date_bin`](functions-datetime#FUNCTIONS-DATETIME-BIN)
   * [9.9.4. `AT TIME ZONE and AT LOCAL`](functions-datetime#FUNCTIONS-DATETIME-ZONECONVERT)

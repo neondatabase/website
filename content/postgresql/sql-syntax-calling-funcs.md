@@ -1,6 +1,6 @@
 ## 4.3. Calling Functions [#](#SQL-SYNTAX-CALLING-FUNCS)
 
-  * *   [4.3.1. Using Positional Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-POSITIONAL)
+  * [4.3.1. Using Positional Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-POSITIONAL)
   * [4.3.2. Using Named Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-NAMED)
   * [4.3.3. Using Mixed Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-MIXED)
 

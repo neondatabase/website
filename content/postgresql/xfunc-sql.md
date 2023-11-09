@@ -1,6 +1,6 @@
 ## 38.5. Query Language (SQL) Functions [#](#XFUNC-SQL)
 
-  * *   [38.5.1. Arguments for SQL Functions](xfunc-sql#XFUNC-SQL-FUNCTION-ARGUMENTS)
+  * [38.5.1. Arguments for SQL Functions](xfunc-sql#XFUNC-SQL-FUNCTION-ARGUMENTS)
   * [38.5.2. SQL Functions on Base Types](xfunc-sql#XFUNC-SQL-BASE-FUNCTIONS)
   * [38.5.3. SQL Functions on Composite Types](xfunc-sql#XFUNC-SQL-COMPOSITE-FUNCTIONS)
   * [38.5.4. SQL Functions with Output Parameters](xfunc-sql#XFUNC-OUTPUT-PARAMETERS)

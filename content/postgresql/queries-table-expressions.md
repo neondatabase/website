@@ -1,6 +1,6 @@
 ## 7.2. Table Expressions [#](#QUERIES-TABLE-EXPRESSIONS)
 
-  * *   [7.2.1. The `FROM` Clause](queries-table-expressions#QUERIES-FROM)
+  * [7.2.1. The `FROM` Clause](queries-table-expressions#QUERIES-FROM)
   * [7.2.2. The `WHERE` Clause](queries-table-expressions#QUERIES-WHERE)
   * [7.2.3. The `GROUP BY` and `HAVING` Clauses](queries-table-expressions#QUERIES-GROUP)
   * [7.2.4. `GROUPING SETS`, `CUBE`, and `ROLLUP`](queries-table-expressions#QUERIES-GROUPING-SETS)

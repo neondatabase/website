@@ -1,6 +1,6 @@
 ## 43.11. PL/pgSQL under the Hood [#](#PLPGSQL-IMPLEMENTATION)
 
-  * *   [43.11.1. Variable Substitution](plpgsql-implementation#PLPGSQL-VAR-SUBST)
+  * [43.11.1. Variable Substitution](plpgsql-implementation#PLPGSQL-VAR-SUBST)
   * [43.11.2. Plan Caching](plpgsql-implementation#PLPGSQL-PLAN-CACHING)
 
 This section discusses some implementation details that are frequently important for PL/pgSQL users to know.

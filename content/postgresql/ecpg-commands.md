@@ -1,6 +1,6 @@
 ## 36.3. Running SQL Commands [#](#ECPG-COMMANDS)
 
-  * *   [36.3.1. Executing SQL Statements](ecpg-commands#ECPG-EXECUTING)
+  * [36.3.1. Executing SQL Statements](ecpg-commands#ECPG-EXECUTING)
   * [36.3.2. Using Cursors](ecpg-commands#ECPG-CURSORS)
   * [36.3.3. Managing Transactions](ecpg-commands#ECPG-TRANSACTIONS)
   * [36.3.4. Prepared Statements](ecpg-commands#ECPG-PREPARED)

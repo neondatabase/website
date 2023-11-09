@@ -1,6 +1,6 @@
 ## 34.10. Functions Associated with the `COPY` Command [#](#LIBPQ-COPY)
 
-  * *   [34.10.1. Functions for Sending `COPY` Data](libpq-copy#LIBPQ-COPY-SEND)
+  * [34.10.1. Functions for Sending `COPY` Data](libpq-copy#LIBPQ-COPY-SEND)
   * [34.10.2. Functions for Receiving `COPY` Data](libpq-copy#LIBPQ-COPY-RECEIVE)
   * [34.10.3. Obsolete Functions for `COPY`](libpq-copy#LIBPQ-COPY-DEPRECATED)
 

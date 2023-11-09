@@ -1,6 +1,6 @@
 ## 9.24. Row and Array Comparisons [#](#FUNCTIONS-COMPARISONS)
 
-  * *   [9.24.1. `IN`](functions-comparisons#FUNCTIONS-COMPARISONS-IN-SCALAR)
+  * [9.24.1. `IN`](functions-comparisons#FUNCTIONS-COMPARISONS-IN-SCALAR)
   * [9.24.2. `NOT IN`](functions-comparisons#FUNCTIONS-COMPARISONS-NOT-IN)
   * [9.24.3. `ANY`/`SOME` (array)](functions-comparisons#FUNCTIONS-COMPARISONS-ANY-SOME)
   * [9.24.4. `ALL` (array)](functions-comparisons#FUNCTIONS-COMPARISONS-ALL)

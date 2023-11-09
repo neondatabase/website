@@ -1,6 +1,6 @@
 ## F.42. tablefunc — functions that return tables (`crosstab` and others) [#](#TABLEFUNC)
 
-  * *   [F.42.1. Functions Provided](tablefunc#TABLEFUNC-FUNCTIONS-SECT)
+  * [F.42.1. Functions Provided](tablefunc#TABLEFUNC-FUNCTIONS-SECT)
   * [F.42.2. Author](tablefunc#TABLEFUNC-AUTHOR)
 
 The `tablefunc` module includes various functions that return tables (that is, multiple rows). These functions are useful both in their own right and as examples of how to write C functions that return multiple rows.

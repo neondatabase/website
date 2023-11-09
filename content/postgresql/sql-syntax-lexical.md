@@ -1,6 +1,6 @@
 ## 4.1. Lexical Structure [#](#SQL-SYNTAX-LEXICAL)
 
-  * *   [4.1.1. Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
+  * [4.1.1. Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
 * [4.1.2. Constants](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS)
 * [4.1.3. Operators](sql-syntax-lexical#SQL-SYNTAX-OPERATORS)
 * [4.1.4. Special Characters](sql-syntax-lexical#SQL-SYNTAX-SPECIAL-CHARS)

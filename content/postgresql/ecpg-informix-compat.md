@@ -1,6 +1,6 @@
 ## 36.15. Informix Compatibility Mode [#](#ECPG-INFORMIX-COMPAT)
 
-  * *   [36.15.1. Additional Types](ecpg-informix-compat#ECPG-INFORMIX-TYPES)
+  * [36.15.1. Additional Types](ecpg-informix-compat#ECPG-INFORMIX-TYPES)
   * [36.15.2. Additional/Missing Embedded SQL Statements](ecpg-informix-compat#ECPG-INFORMIX-STATEMENTS)
   * [36.15.3. Informix-compatible SQLDA Descriptor Areas](ecpg-informix-compat#ECPG-INFORMIX-SQLDA)
   * [36.15.4. Additional Functions](ecpg-informix-compat#ECPG-INFORMIX-FUNCTIONS)

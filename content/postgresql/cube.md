@@ -1,6 +1,6 @@
 ## F.11. cube — a multi-dimensional cube data type [#](#CUBE)
 
-  * *   [F.11.1. Syntax](cube#CUBE-SYNTAX)
+  * [F.11.1. Syntax](cube#CUBE-SYNTAX)
   * [F.11.2. Precision](cube#CUBE-PRECISION)
   * [F.11.3. Usage](cube#CUBE-USAGE)
   * [F.11.4. Defaults](cube#CUBE-DEFAULTS)

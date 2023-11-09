@@ -1,6 +1,6 @@
 ## F.41. sslinfo — obtain client SSL information [#](#SSLINFO)
 
-  * *   [F.41.1. Functions Provided](sslinfo#SSLINFO-FUNCTIONS)
+  * [F.41.1. Functions Provided](sslinfo#SSLINFO-FUNCTIONS)
   * [F.41.2. Author](sslinfo#SSLINFO-AUTHOR)
 
 The `sslinfo` module provides information about the SSL certificate that the current client provided when connecting to PostgreSQL. The module is useless (most functions will return NULL) if the current connection does not use SSL.

@@ -1,6 +1,6 @@
 ## 20.13. Version and Platform Compatibility [#](#RUNTIME-CONFIG-COMPATIBLE)
 
-  * *   [20.13.1. Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
+  * [20.13.1. Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
   * [20.13.2. Platform and Client Compatibility](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-CLIENTS)
 
 ### 20.13.1. Previous PostgreSQL Versions [#](#RUNTIME-CONFIG-COMPATIBLE-VERSION)

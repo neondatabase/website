@@ -1,6 +1,6 @@
 ## F.26. pg\_buffercache — inspect PostgreSQL buffer cache state [#](#PGBUFFERCACHE)
 
-  * *   [F.26.1. The `pg_buffercache` View](pgbuffercache#PGBUFFERCACHE-PG-BUFFERCACHE)
+  * [F.26.1. The `pg_buffercache` View](pgbuffercache#PGBUFFERCACHE-PG-BUFFERCACHE)
   * [F.26.2. The `pg_buffercache_summary()` Function](pgbuffercache#PGBUFFERCACHE-SUMMARY)
   * [F.26.3. The `pg_buffercache_usage_counts()` Function](pgbuffercache#PGBUFFERCACHE-USAGE-COUNTS)
   * [F.26.4. Sample Output](pgbuffercache#PGBUFFERCACHE-SAMPLE-OUTPUT)

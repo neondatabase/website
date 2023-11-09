@@ -1,6 +1,6 @@
 ## D.3. XML Limits and Conformance to SQL/XML [#](#XML-LIMITS-CONFORMANCE)
 
-  * *   [D.3.1. Queries Are Restricted to XPath 1.0](xml-limits-conformance#FUNCTIONS-XML-LIMITS-XPATH1)
+  * [D.3.1. Queries Are Restricted to XPath 1.0](xml-limits-conformance#FUNCTIONS-XML-LIMITS-XPATH1)
   * [D.3.2. Incidental Limits of the Implementation](xml-limits-conformance#FUNCTIONS-XML-LIMITS-POSTGRESQL)
 
 Significant revisions to the XML-related specifications in ISO/IEC 9075-14 (SQL/XML) were introduced with SQL:2006. PostgreSQL's implementation of the XML data type and related functions largely follows the earlier 2003 edition, with some borrowing from later editions. In particular:

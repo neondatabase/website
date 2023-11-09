@@ -1,6 +1,6 @@
 ## 9.15. XML Functions [#](#FUNCTIONS-XML)
 
-  * *   [9.15.1. Producing XML Content](functions-xml#FUNCTIONS-PRODUCING-XML)
+  * [9.15.1. Producing XML Content](functions-xml#FUNCTIONS-PRODUCING-XML)
 * [9.15.2. XML Predicates](functions-xml#FUNCTIONS-XML-PREDICATES)
 * [9.15.3. Processing XML](functions-xml#FUNCTIONS-XML-PROCESSING)
 * [9.15.4. Mapping Tables to XML](functions-xml#FUNCTIONS-XML-MAPPING)

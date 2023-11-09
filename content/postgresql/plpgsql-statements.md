@@ -1,6 +1,6 @@
 ## 43.5. Basic Statements [#](#PLPGSQL-STATEMENTS)
 
-  * *   [43.5.1. Assignment](plpgsql-statements#PLPGSQL-STATEMENTS-ASSIGNMENT)
+  * [43.5.1. Assignment](plpgsql-statements#PLPGSQL-STATEMENTS-ASSIGNMENT)
   * [43.5.2. Executing SQL Commands](plpgsql-statements#PLPGSQL-STATEMENTS-GENERAL-SQL)
   * [43.5.3. Executing a Command with a Single-Row Result](plpgsql-statements#PLPGSQL-STATEMENTS-SQL-ONEROW)
   * [43.5.4. Executing Dynamic Commands](plpgsql-statements#PLPGSQL-STATEMENTS-EXECUTING-DYN)

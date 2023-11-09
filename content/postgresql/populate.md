@@ -1,6 +1,6 @@
 ## 14.4. Populating a Database [#](#POPULATE)
 
-  * *   [14.4.1. Disable Autocommit](populate#DISABLE-AUTOCOMMIT)
+  * [14.4.1. Disable Autocommit](populate#DISABLE-AUTOCOMMIT)
   * [14.4.2. Use `COPY`](populate#POPULATE-COPY-FROM)
   * [14.4.3. Remove Indexes](populate#POPULATE-RM-INDEXES)
   * [14.4.4. Remove Foreign Key Constraints](populate#POPULATE-RM-FKEYS)

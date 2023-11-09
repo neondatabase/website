@@ -1,6 +1,6 @@
 ## F.20. intarray — manipulate arrays of integers [#](#INTARRAY)
 
-  * *   [F.20.1. `intarray` Functions and Operators](intarray#INTARRAY-FUNCS-OPS)
+  * [F.20.1. `intarray` Functions and Operators](intarray#INTARRAY-FUNCS-OPS)
   * [F.20.2. Index Support](intarray#INTARRAY-INDEX)
   * [F.20.3. Example](intarray#INTARRAY-EXAMPLE)
   * [F.20.4. Benchmark](intarray#INTARRAY-BENCHMARK)

@@ -1,6 +1,6 @@
 ## 43.1. Overview [#](#PLPGSQL-OVERVIEW)
 
-  * *   [43.1.1. Advantages of Using PL/pgSQL](plpgsql-overview#PLPGSQL-ADVANTAGES)
+  * [43.1.1. Advantages of Using PL/pgSQL](plpgsql-overview#PLPGSQL-ADVANTAGES)
   * [43.1.2. Supported Argument and Result Data Types](plpgsql-overview#PLPGSQL-ARGS-RESULTS)
 
 PL/pgSQL is a loadable procedural language for the PostgreSQL database system. The design goals of PL/pgSQL were to create a loadable procedural language that

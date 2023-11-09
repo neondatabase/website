@@ -1,6 +1,6 @@
 ## 19.3. Starting the Database Server [#](#SERVER-START)
 
-  * *   [19.3.1. Server Start-up Failures](server-start#SERVER-START-FAILURES)
+  * [19.3.1. Server Start-up Failures](server-start#SERVER-START-FAILURES)
   * [19.3.2. Client Connection Problems](server-start#CLIENT-CONNECTION-PROBLEMS)
 
 Before anyone can access the database, you must start the database server. The database server program is called `postgres`.

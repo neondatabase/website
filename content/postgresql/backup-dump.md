@@ -1,6 +1,6 @@
 ## 26.1. SQL Dump [#](#BACKUP-DUMP)
 
-  * *   [26.1.1. Restoring the Dump](backup-dump#BACKUP-DUMP-RESTORE)
+  * [26.1.1. Restoring the Dump](backup-dump#BACKUP-DUMP-RESTORE)
   * [26.1.2. Using pg\_dumpall](backup-dump#BACKUP-DUMP-ALL)
   * [26.1.3. Handling Large Databases](backup-dump#BACKUP-DUMP-LARGE)
 

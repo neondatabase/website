@@ -1,6 +1,6 @@
 ## 19.6. Upgrading a PostgreSQL Cluster [#](#UPGRADING)
 
-  * *   [19.6.1. Upgrading Data via pg\_dumpall](upgrading#UPGRADING-VIA-PGDUMPALL)
+  * [19.6.1. Upgrading Data via pg\_dumpall](upgrading#UPGRADING-VIA-PGDUMPALL)
   * [19.6.2. Upgrading Data via pg\_upgrade](upgrading#UPGRADING-VIA-PG-UPGRADE)
   * [19.6.3. Upgrading Data via Replication](upgrading#UPGRADING-VIA-REPLICATION)
 

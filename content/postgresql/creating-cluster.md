@@ -1,6 +1,6 @@
 ## 19.2. Creating a Database Cluster [#](#CREATING-CLUSTER)
 
-  * *   [19.2.1. Use of Secondary File Systems](creating-cluster#CREATING-CLUSTER-MOUNT-POINTS)
+  * [19.2.1. Use of Secondary File Systems](creating-cluster#CREATING-CLUSTER-MOUNT-POINTS)
   * [19.2.2. File Systems](creating-cluster#CREATING-CLUSTER-FILESYSTEM)
 
 Before you can do anything, you must initialize a database storage area on disk. We call this a *database cluster*. (The SQL standard uses the term catalog cluster.) A database cluster is a collection of databases that is managed by a single instance of a running database server. After initialization, a database cluster will contain a database named `postgres`, which is meant as a default database for use by utilities, users and third party applications. The database server itself does not require the `postgres` database to exist, but many external utility programs assume it exists. There are two more databases created within each cluster during initialization, named `template1` and `template0`. As the names suggest, these will be used as templates for subsequently-created databases; they should not be used for actual work. (See [Chapter 23](managing-databases "Chapter 23. Managing Databases") for information about creating new databases within a cluster.)

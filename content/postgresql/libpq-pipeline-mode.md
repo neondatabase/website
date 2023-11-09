@@ -1,6 +1,6 @@
 ## 34.5. Pipeline Mode [#](#LIBPQ-PIPELINE-MODE)
 
-  * *   [34.5.1. Using Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-USING)
+  * [34.5.1. Using Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-USING)
   * [34.5.2. Functions Associated with Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-FUNCTIONS)
   * [34.5.3. When to Use Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-TIPS)
 

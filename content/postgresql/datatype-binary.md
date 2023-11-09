@@ -1,6 +1,6 @@
 ## 8.4. Binary Data Types [#](#DATATYPE-BINARY)
 
-  * *   [8.4.1. `bytea` Hex Format](datatype-binary#DATATYPE-BINARY-BYTEA-HEX-FORMAT)
+  * [8.4.1. `bytea` Hex Format](datatype-binary#DATATYPE-BINARY-BYTEA-HEX-FORMAT)
   * [8.4.2. `bytea` Escape Format](datatype-binary#DATATYPE-BINARY-BYTEA-ESCAPE-FORMAT)
 
 The `bytea` data type allows storage of binary strings; see [Table 8.6](datatype-binary#DATATYPE-BINARY-TABLE "Table 8.6. Binary Data Types").

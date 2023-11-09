@@ -1,6 +1,6 @@
 ## F.14. dict\_xsyn — example synonym full-text search dictionary [#](#DICT-XSYN)
 
-  * *   [F.14.1. Configuration](dict-xsyn#DICT-XSYN-CONFIG)
+  * [F.14.1. Configuration](dict-xsyn#DICT-XSYN-CONFIG)
   * [F.14.2. Usage](dict-xsyn#DICT-XSYN-USAGE)
 
 `dict_xsyn` (Extended Synonym Dictionary) is an example of an add-on dictionary template for full-text search. This dictionary type replaces words with groups of their synonyms, and so makes it possible to search for a word using any of its synonyms.

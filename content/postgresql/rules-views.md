@@ -1,6 +1,6 @@
 ## 41.2. Views and the Rule System [#](#RULES-VIEWS)
 
-  * *   [41.2.1. How `SELECT` Rules Work](rules-views#RULES-SELECT)
+  * [41.2.1. How `SELECT` Rules Work](rules-views#RULES-SELECT)
   * [41.2.2. View Rules in Non-`SELECT` Statements](rules-views#RULES-VIEWS-NON-SELECT)
   * [41.2.3. The Power of Views in PostgreSQL](rules-views#RULES-VIEWS-POWER)
   * [41.2.4. Updating a View](rules-views#RULES-VIEWS-UPDATE)

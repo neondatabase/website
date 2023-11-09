@@ -1,6 +1,6 @@
 ## 43.6. Control Structures [#](#PLPGSQL-CONTROL-STRUCTURES)
 
-  * *   [43.6.1. Returning from a Function](plpgsql-control-structures#PLPGSQL-STATEMENTS-RETURNING)
+  * [43.6.1. Returning from a Function](plpgsql-control-structures#PLPGSQL-STATEMENTS-RETURNING)
   * [43.6.2. Returning from a Procedure](plpgsql-control-structures#PLPGSQL-STATEMENTS-RETURNING-PROCEDURE)
   * [43.6.3. Calling a Procedure](plpgsql-control-structures#PLPGSQL-STATEMENTS-CALLING-PROCEDURE)
   * [43.6.4. Conditionals](plpgsql-control-structures#PLPGSQL-CONDITIONALS)

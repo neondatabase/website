@@ -1,6 +1,6 @@
 ## 36.13. C++ Applications [#](#ECPG-CPP)
 
-  * *   [36.13.1. Scope for Host Variables](ecpg-cpp#ECPG-CPP-SCOPE)
+  * [36.13.1. Scope for Host Variables](ecpg-cpp#ECPG-CPP-SCOPE)
   * [36.13.2. C++ Application Development with External C Module](ecpg-cpp#ECPG-CPP-AND-C)
 
 ECPG has some limited support for C++ applications. This section describes some caveats.

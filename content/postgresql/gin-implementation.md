@@ -1,6 +1,6 @@
 ## 70.4. Implementation [#](#GIN-IMPLEMENTATION)
 
-  * *   [70.4.1. GIN Fast Update Technique](gin-implementation#GIN-FAST-UPDATE)
+  * [70.4.1. GIN Fast Update Technique](gin-implementation#GIN-FAST-UPDATE)
   * [70.4.2. Partial Match Algorithm](gin-implementation#GIN-PARTIAL-MATCH)
 
 Internally, a GIN index contains a B-tree index constructed over keys, where each key is an element of one or more indexed items (a member of an array, for example) and where each tuple in a leaf page contains either a pointer to a B-tree of heap pointers (a “posting tree”), or a simple list of heap pointers (a “posting list”) when the list is small enough to fit into a single index tuple along with the key value. [Figure 70.1](gin-implementation#GIN-INTERNALS-FIGURE "Figure 70.1. GIN Internals") illustrates these components of a GIN index.

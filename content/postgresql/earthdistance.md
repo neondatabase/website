@@ -1,6 +1,6 @@
 ## F.15. earthdistance — calculate great-circle distances [#](#EARTHDISTANCE)
 
-  * *   [F.15.1. Cube-Based Earth Distances](earthdistance#EARTHDISTANCE-CUBE-BASED)
+  * [F.15.1. Cube-Based Earth Distances](earthdistance#EARTHDISTANCE-CUBE-BASED)
   * [F.15.2. Point-Based Earth Distances](earthdistance#EARTHDISTANCE-POINT-BASED)
 
 The `earthdistance` module provides two different approaches to calculating great circle distances on the surface of the Earth. The one described first depends on the `cube` module. The second one is based on the built-in `point` data type, using longitude and latitude for the coordinates.

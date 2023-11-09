@@ -1,6 +1,6 @@
 ## 26.3. Continuous Archiving and Point-in-Time Recovery (PITR) [#](#CONTINUOUS-ARCHIVING)
 
-  * *   [26.3.1. Setting Up WAL Archiving](continuous-archiving#BACKUP-ARCHIVING-WAL)
+  * [26.3.1. Setting Up WAL Archiving](continuous-archiving#BACKUP-ARCHIVING-WAL)
   * [26.3.2. Making a Base Backup](continuous-archiving#BACKUP-BASE-BACKUP)
   * [26.3.3. Making a Base Backup Using the Low Level API](continuous-archiving#BACKUP-LOWLEVEL-BASE-BACKUP)
   * [26.3.4. Recovering Using a Continuous Archive Backup](continuous-archiving#BACKUP-PITR-RECOVERY)

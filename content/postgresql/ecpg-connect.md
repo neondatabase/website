@@ -1,6 +1,6 @@
 ## 36.2. Managing Database Connections [#](#ECPG-CONNECT)
 
-  * *   [36.2.1. Connecting to the Database Server](ecpg-connect#ECPG-CONNECTING)
+  * [36.2.1. Connecting to the Database Server](ecpg-connect#ECPG-CONNECTING)
   * [36.2.2. Choosing a Connection](ecpg-connect#ECPG-SET-CONNECTION)
   * [36.2.3. Closing a Connection](ecpg-connect#ECPG-DISCONNECT)
 

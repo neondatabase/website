@@ -1,6 +1,6 @@
 ## 49.8. Synchronous Replication Support for Logical Decoding [#](#LOGICALDECODING-SYNCHRONOUS)
 
-  * *   [49.8.1. Overview](logicaldecoding-synchronous#LOGICALDECODING-SYNCHRONOUS-OVERVIEW)
+  * [49.8.1. Overview](logicaldecoding-synchronous#LOGICALDECODING-SYNCHRONOUS-OVERVIEW)
   * [49.8.2. Caveats](logicaldecoding-synchronous#LOGICALDECODING-SYNCHRONOUS-CAVEATS)
 
 ### 49.8.1. Overview [#](#LOGICALDECODING-SYNCHRONOUS-OVERVIEW)

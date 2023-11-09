@@ -1,6 +1,6 @@
 ## 12.3. Controlling Text Search [#](#TEXTSEARCH-CONTROLS)
 
-  * *   [12.3.1. Parsing Documents](textsearch-controls#TEXTSEARCH-PARSING-DOCUMENTS)
+  * [12.3.1. Parsing Documents](textsearch-controls#TEXTSEARCH-PARSING-DOCUMENTS)
   * [12.3.2. Parsing Queries](textsearch-controls#TEXTSEARCH-PARSING-QUERIES)
   * [12.3.3. Ranking Search Results](textsearch-controls#TEXTSEARCH-RANKING)
   * [12.3.4. Highlighting Results](textsearch-controls#TEXTSEARCH-HEADLINE)

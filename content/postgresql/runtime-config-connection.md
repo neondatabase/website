@@ -1,6 +1,6 @@
 ## 20.3. Connections and Authentication [#](#RUNTIME-CONFIG-CONNECTION)
 
-  * *   [20.3.1. Connection Settings](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-SETTINGS)
+  * [20.3.1. Connection Settings](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-SETTINGS)
   * [20.3.2. TCP Settings](runtime-config-connection#RUNTIME-CONFIG-TCP-SETTINGS)
   * [20.3.3. Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
   * [20.3.4. SSL](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-SSL)

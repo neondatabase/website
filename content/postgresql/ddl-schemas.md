@@ -1,6 +1,6 @@
 ## 5.9. Schemas [#](#DDL-SCHEMAS)
 
-  * *   [5.9.1. Creating a Schema](ddl-schemas#DDL-SCHEMAS-CREATE)
+  * [5.9.1. Creating a Schema](ddl-schemas#DDL-SCHEMAS-CREATE)
   * [5.9.2. The Public Schema](ddl-schemas#DDL-SCHEMAS-PUBLIC)
   * [5.9.3. The Schema Search Path](ddl-schemas#DDL-SCHEMAS-PATH)
   * [5.9.4. Schemas and Privileges](ddl-schemas#DDL-SCHEMAS-PRIV)

@@ -1,6 +1,6 @@
 ## F.12. dblink — connect to other PostgreSQL databases [#](#DBLINK)
 
-  * *   [dblink\_connect](contrib-dblink-connect) — opens a persistent connection to a remote database
+  * [dblink\_connect](contrib-dblink-connect) — opens a persistent connection to a remote database
   * [dblink\_connect\_u](contrib-dblink-connect-u) — opens a persistent connection to a remote database, insecurely
   * [dblink\_disconnect](contrib-dblink-disconnect) — closes a persistent connection to a remote database
   * [dblink](contrib-dblink-function) — executes a query in a remote database

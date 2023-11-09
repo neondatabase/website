@@ -1,6 +1,6 @@
 ## 9.27. System Administration Functions [#](#FUNCTIONS-ADMIN)
 
-  * *   [9.27.1. Configuration Settings Functions](functions-admin#FUNCTIONS-ADMIN-SET)
+  * [9.27.1. Configuration Settings Functions](functions-admin#FUNCTIONS-ADMIN-SET)
   * [9.27.2. Server Signaling Functions](functions-admin#FUNCTIONS-ADMIN-SIGNAL)
   * [9.27.3. Backup Control Functions](functions-admin#FUNCTIONS-ADMIN-BACKUP)
   * [9.27.4. Recovery Control Functions](functions-admin#FUNCTIONS-RECOVERY-CONTROL)

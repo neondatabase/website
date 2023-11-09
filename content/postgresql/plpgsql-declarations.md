@@ -1,6 +1,6 @@
 ## 43.3. Declarations [#](#PLPGSQL-DECLARATIONS)
 
-  * *   [43.3.1. Declaring Function Parameters](plpgsql-declarations#PLPGSQL-DECLARATION-PARAMETERS)
+  * [43.3.1. Declaring Function Parameters](plpgsql-declarations#PLPGSQL-DECLARATION-PARAMETERS)
   * [43.3.2. `ALIAS`](plpgsql-declarations#PLPGSQL-DECLARATION-ALIAS)
   * [43.3.3. Copying Types](plpgsql-declarations#PLPGSQL-DECLARATION-TYPE)
   * [43.3.4. Row Types](plpgsql-declarations#PLPGSQL-DECLARATION-ROWTYPES)

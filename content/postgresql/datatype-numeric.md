@@ -1,6 +1,6 @@
 ## 8.1. Numeric Types [#](#DATATYPE-NUMERIC)
 
-  * *   [8.1.1. Integer Types](datatype-numeric#DATATYPE-INT)
+  * [8.1.1. Integer Types](datatype-numeric#DATATYPE-INT)
   * [8.1.2. Arbitrary Precision Numbers](datatype-numeric#DATATYPE-NUMERIC-DECIMAL)
   * [8.1.3. Floating-Point Types](datatype-numeric#DATATYPE-FLOAT)
   * [8.1.4. Serial Types](datatype-numeric#DATATYPE-SERIAL)

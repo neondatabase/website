@@ -1,6 +1,6 @@
 ## 19.9. Secure TCP/IP Connections with SSL [#](#SSL-TCP)
 
-  * *   [19.9.1. Basic Setup](ssl-tcp#SSL-SETUP)
+  * [19.9.1. Basic Setup](ssl-tcp#SSL-SETUP)
   * [19.9.2. OpenSSL Configuration](ssl-tcp#SSL-OPENSSL-CONFIG)
   * [19.9.3. Using Client Certificates](ssl-tcp#SSL-CLIENT-CERTIFICATES)
   * [19.9.4. SSL Server File Usage](ssl-tcp#SSL-SERVER-FILES)

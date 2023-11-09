@@ -1,6 +1,6 @@
 ## 14.1. Using `EXPLAIN` [#](#USING-EXPLAIN)
 
-  * *   [14.1.1. `EXPLAIN` Basics](using-explain#USING-EXPLAIN-BASICS)
+  * [14.1.1. `EXPLAIN` Basics](using-explain#USING-EXPLAIN-BASICS)
   * [14.1.2. `EXPLAIN ANALYZE`](using-explain#USING-EXPLAIN-ANALYZE)
   * [14.1.3. Caveats](using-explain#USING-EXPLAIN-CAVEATS)
 

@@ -1,6 +1,6 @@
 ## 8.14. JSON Types [#](#DATATYPE-JSON)
 
-  * *   [8.14.1. JSON Input and Output Syntax](datatype-json#JSON-KEYS-ELEMENTS)
+  * [8.14.1. JSON Input and Output Syntax](datatype-json#JSON-KEYS-ELEMENTS)
   * [8.14.2. Designing JSON Documents](datatype-json#JSON-DOC-DESIGN)
   * [8.14.3. `jsonb` Containment and Existence](datatype-json#JSON-CONTAINMENT)
   * [8.14.4. `jsonb` Indexing](datatype-json#JSON-INDEXING)

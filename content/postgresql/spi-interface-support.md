@@ -1,6 +1,6 @@
 ## 47.2. Interface Support Functions [#](#SPI-INTERFACE-SUPPORT)
 
-  * *   [SPI\_fname](spi-spi-fname) — determine the column name for the specified column number
+  * [SPI\_fname](spi-spi-fname) — determine the column name for the specified column number
   * [SPI\_fnumber](spi-spi-fnumber) — determine the column number for the specified column name
   * [SPI\_getvalue](spi-spi-getvalue) — return the string value of the specified column
   * [SPI\_getbinval](spi-spi-getbinval) — return the binary value of the specified column

@@ -1,6 +1,6 @@
 ## F.32. pgstattuple — obtain tuple-level statistics [#](#PGSTATTUPLE)
 
-  * *   [F.32.1. Functions](pgstattuple#PGSTATTUPLE-FUNCS)
+  * [F.32.1. Functions](pgstattuple#PGSTATTUPLE-FUNCS)
   * [F.32.2. Authors](pgstattuple#PGSTATTUPLE-AUTHORS)
 
 The `pgstattuple` module provides various functions to obtain tuple-level statistics.

@@ -1,6 +1,6 @@
 ## 47.4. Transaction Management [#](#SPI-TRANSACTION)
 
-  * *   [SPI\_commit](spi-spi-commit) — commit the current transaction
+  * [SPI\_commit](spi-spi-commit) — commit the current transaction
   * [SPI\_rollback](spi-spi-rollback) — abort the current transaction
   * [SPI\_start\_transaction](spi-spi-start-transaction) — obsolete function
 

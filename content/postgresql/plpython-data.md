@@ -1,6 +1,6 @@
 ## 46.2. Data Values [#](#PLPYTHON-DATA)
 
-  * *   [46.2.1. Data Type Mapping](plpython-data#PLPYTHON-DATA-TYPE-MAPPING)
+  * [46.2.1. Data Type Mapping](plpython-data#PLPYTHON-DATA-TYPE-MAPPING)
   * [46.2.2. Null, None](plpython-data#PLPYTHON-DATA-NULL)
   * [46.2.3. Arrays, Lists](plpython-data#PLPYTHON-ARRAYS)
   * [46.2.4. Composite Types](plpython-data#PLPYTHON-DATA-COMPOSITE-TYPES)

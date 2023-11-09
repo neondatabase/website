@@ -1,6 +1,6 @@
 ## 8.16. Composite Types [#](#ROWTYPES)
 
-  * *   [8.16.1. Declaration of Composite Types](rowtypes#ROWTYPES-DECLARING)
+  * [8.16.1. Declaration of Composite Types](rowtypes#ROWTYPES-DECLARING)
   * [8.16.2. Constructing Composite Values](rowtypes#ROWTYPES-CONSTRUCTING)
   * [8.16.3. Accessing Composite Types](rowtypes#ROWTYPES-ACCESSING)
   * [8.16.4. Modifying Composite Types](rowtypes#ROWTYPES-MODIFYING)

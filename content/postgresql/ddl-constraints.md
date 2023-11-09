@@ -1,6 +1,6 @@
 ## 5.4. Constraints [#](#DDL-CONSTRAINTS)
 
-  * *   [5.4.1. Check Constraints](ddl-constraints#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
+  * [5.4.1. Check Constraints](ddl-constraints#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
   * [5.4.2. Not-Null Constraints](ddl-constraints#DDL-CONSTRAINTS-NOT-NULL)
   * [5.4.3. Unique Constraints](ddl-constraints#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS)
   * [5.4.4. Primary Keys](ddl-constraints#DDL-CONSTRAINTS-PRIMARY-KEYS)

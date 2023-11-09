@@ -1,6 +1,6 @@
 ## 38.17. Packaging Related Objects into an Extension [#](#EXTEND-EXTENSIONS)
 
-  * *   [38.17.1. Extension Files](extend-extensions#EXTEND-EXTENSIONS-FILES)
+  * [38.17.1. Extension Files](extend-extensions#EXTEND-EXTENSIONS-FILES)
   * [38.17.2. Extension Relocatability](extend-extensions#EXTEND-EXTENSIONS-RELOCATION)
   * [38.17.3. Extension Configuration Tables](extend-extensions#EXTEND-EXTENSIONS-CONFIG-TABLES)
   * [38.17.4. Extension Updates](extend-extensions#EXTEND-EXTENSIONS-UPDATES)

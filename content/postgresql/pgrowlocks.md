@@ -1,6 +1,6 @@
 ## F.30. pgrowlocks — show a table's row locking information [#](#PGROWLOCKS)
 
-  * *   [F.30.1. Overview](pgrowlocks#PGROWLOCKS-OVERVIEW)
+  * [F.30.1. Overview](pgrowlocks#PGROWLOCKS-OVERVIEW)
   * [F.30.2. Sample Output](pgrowlocks#PGROWLOCKS-SAMPLE-OUTPUT)
   * [F.30.3. Author](pgrowlocks#PGROWLOCKS-AUTHOR)
 

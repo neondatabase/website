@@ -1,6 +1,6 @@
 ## 8.9. Network Address Types [#](#DATATYPE-NET-TYPES)
 
-  * *   [8.9.1. `inet`](datatype-net-types#DATATYPE-INET)
+  * [8.9.1. `inet`](datatype-net-types#DATATYPE-INET)
   * [8.9.2. `cidr`](datatype-net-types#DATATYPE-CIDR)
   * [8.9.3. `inet` vs. `cidr`](datatype-net-types#DATATYPE-INET-VS-CIDR)
   * [8.9.4. `macaddr`](datatype-net-types#DATATYPE-MACADDR)

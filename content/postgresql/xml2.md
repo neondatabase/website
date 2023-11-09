@@ -1,6 +1,6 @@
 ## F.49. xml2 — XPath querying and XSLT functionality [#](#XML2)
 
-  * *   [F.49.1. Deprecation Notice](xml2#XML2-DEPRECATION)
+  * [F.49.1. Deprecation Notice](xml2#XML2-DEPRECATION)
   * [F.49.2. Description of Functions](xml2#XML2-FUNCTIONS)
   * [F.49.3. `xpath_table`](xml2#XML2-XPATH-TABLE)
   * [F.49.4. XSLT Functions](xml2#XML2-XSLT)

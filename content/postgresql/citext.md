@@ -1,6 +1,6 @@
 ## F.10. citext — a case-insensitive character string type [#](#CITEXT)
 
-  * *   [F.10.1. Rationale](citext#CITEXT-RATIONALE)
+  * [F.10.1. Rationale](citext#CITEXT-RATIONALE)
   * [F.10.2. How to Use It](citext#CITEXT-HOW-TO-USE-IT)
   * [F.10.3. String Comparison Behavior](citext#CITEXT-STRING-COMPARISON-BEHAVIOR)
   * [F.10.4. Limitations](citext#CITEXT-LIMITATIONS)

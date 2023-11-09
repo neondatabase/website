@@ -1,6 +1,6 @@
 ## 27.2. Log-Shipping Standby Servers [#](#WARM-STANDBY)
 
-  * *   [27.2.1. Planning](warm-standby#STANDBY-PLANNING)
+  * [27.2.1. Planning](warm-standby#STANDBY-PLANNING)
   * [27.2.2. Standby Server Operation](warm-standby#STANDBY-SERVER-OPERATION)
   * [27.2.3. Preparing the Primary for Standby Servers](warm-standby#PREPARING-PRIMARY-FOR-STANDBY)
   * [27.2.4. Setting Up a Standby Server](warm-standby#STANDBY-SERVER-SETUP)

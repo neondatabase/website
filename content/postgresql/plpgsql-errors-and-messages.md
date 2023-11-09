@@ -1,6 +1,6 @@
 ## 43.9. Errors and Messages [#](#PLPGSQL-ERRORS-AND-MESSAGES)
 
-  * *   [43.9.1. Reporting Errors and Messages](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-RAISE)
+  * [43.9.1. Reporting Errors and Messages](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-RAISE)
   * [43.9.2. Checking Assertions](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-ASSERT)
 
 ### 43.9.1. Reporting Errors and Messages [#](#PLPGSQL-STATEMENTS-RAISE)

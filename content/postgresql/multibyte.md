@@ -1,6 +1,6 @@
 ## 24.3. Character Set Support [#](#MULTIBYTE)
 
-  * *   [24.3.1. Supported Character Sets](multibyte#MULTIBYTE-CHARSET-SUPPORTED)
+  * [24.3.1. Supported Character Sets](multibyte#MULTIBYTE-CHARSET-SUPPORTED)
   * [24.3.2. Setting the Character Set](multibyte#MULTIBYTE-SETTING)
   * [24.3.3. Automatic Character Set Conversion Between Server and Client](multibyte#MULTIBYTE-AUTOMATIC-CONVERSION)
   * [24.3.4. Available Character Set Conversions](multibyte#MULTIBYTE-CONVERSIONS-SUPPORTED)

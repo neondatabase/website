@@ -1,6 +1,6 @@
 ## F.37. postgres\_fdw — access data stored in external PostgreSQL servers [#](#POSTGRES-FDW)
 
-  * *   [F.37.1. FDW Options of postgres\_fdw](postgres-fdw#POSTGRES-FDW-OPTIONS)
+  * [F.37.1. FDW Options of postgres\_fdw](postgres-fdw#POSTGRES-FDW-OPTIONS)
   * [F.37.2. Functions](postgres-fdw#POSTGRES-FDW-FUNCTIONS)
   * [F.37.3. Connection Management](postgres-fdw#POSTGRES-FDW-CONNECTION-MANAGEMENT)
   * [F.37.4. Transaction Management](postgres-fdw#POSTGRES-FDW-TRANSACTION-MANAGEMENT)

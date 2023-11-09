@@ -1,6 +1,6 @@
 ## F.19. intagg — integer aggregator and enumerator [#](#INTAGG)
 
-  * *   [F.19.1. Functions](intagg#INTAGG-FUNCTIONS)
+  * [F.19.1. Functions](intagg#INTAGG-FUNCTIONS)
   * [F.19.2. Sample Uses](intagg#INTAGG-SAMPLES)
 
 The `intagg` module provides an integer aggregator and an enumerator. `intagg` is now obsolete, because there are built-in functions that provide a superset of its capabilities. However, the module is still provided as a compatibility wrapper around the built-in functions.

@@ -1,6 +1,6 @@
 ## 25.1. Routine Vacuuming [#](#ROUTINE-VACUUMING)
 
-  * *   [25.1.1. Vacuuming Basics](routine-vacuuming#VACUUM-BASICS)
+  * [25.1.1. Vacuuming Basics](routine-vacuuming#VACUUM-BASICS)
   * [25.1.2. Recovering Disk Space](routine-vacuuming#VACUUM-FOR-SPACE-RECOVERY)
   * [25.1.3. Updating Planner Statistics](routine-vacuuming#VACUUM-FOR-STATISTICS)
   * [25.1.4. Updating the Visibility Map](routine-vacuuming#VACUUM-FOR-VISIBILITY-MAP)

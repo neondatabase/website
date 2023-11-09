@@ -1,6 +1,6 @@
 ## F.34. pg\_trgm — support for similarity of text using trigram matching [#](#PGTRGM)
 
-  * *   [F.34.1. Trigram (or Trigraph) Concepts](pgtrgm#PGTRGM-CONCEPTS)
+  * [F.34.1. Trigram (or Trigraph) Concepts](pgtrgm#PGTRGM-CONCEPTS)
   * [F.34.2. Functions and Operators](pgtrgm#PGTRGM-FUNCS-OPS)
   * [F.34.3. GUC Parameters](pgtrgm#PGTRGM-GUC)
   * [F.34.4. Index Support](pgtrgm#PGTRGM-INDEX)

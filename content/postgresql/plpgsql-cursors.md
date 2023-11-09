@@ -1,6 +1,6 @@
 ## 43.7. Cursors [#](#PLPGSQL-CURSORS)
 
-  * *   [43.7.1. Declaring Cursor Variables](plpgsql-cursors#PLPGSQL-CURSOR-DECLARATIONS)
+  * [43.7.1. Declaring Cursor Variables](plpgsql-cursors#PLPGSQL-CURSOR-DECLARATIONS)
   * [43.7.2. Opening Cursors](plpgsql-cursors#PLPGSQL-CURSOR-OPENING)
   * [43.7.3. Using Cursors](plpgsql-cursors#PLPGSQL-CURSOR-USING)
   * [43.7.4. Looping through a Cursor's Result](plpgsql-cursors#PLPGSQL-CURSOR-FOR-LOOP)

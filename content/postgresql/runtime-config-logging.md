@@ -1,6 +1,6 @@
 ## 20.8. Error Reporting and Logging [#](#RUNTIME-CONFIG-LOGGING)
 
-  * *   [20.8.1. Where to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE)
+  * [20.8.1. Where to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE)
   * [20.8.2. When to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHEN)
   * [20.8.3. What to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHAT)
   * [20.8.4. Using CSV-Format Log Output](runtime-config-logging#RUNTIME-CONFIG-LOGGING-CSVLOG)

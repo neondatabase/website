@@ -1,6 +1,6 @@
 ## F.18. hstore — hstore key/value datatype [#](#HSTORE)
 
-  * *   [F.18.1. `hstore` External Representation](hstore#HSTORE-EXTERNAL-REP)
+  * [F.18.1. `hstore` External Representation](hstore#HSTORE-EXTERNAL-REP)
   * [F.18.2. `hstore` Operators and Functions](hstore#HSTORE-OPS-FUNCS)
   * [F.18.3. Indexes](hstore#HSTORE-INDEXES)
   * [F.18.4. Examples](hstore#HSTORE-EXAMPLES)

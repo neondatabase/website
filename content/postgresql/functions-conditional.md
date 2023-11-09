@@ -1,6 +1,6 @@
 ## 9.18. Conditional Expressions [#](#FUNCTIONS-CONDITIONAL)
 
-  * *   [9.18.1. `CASE`](functions-conditional#FUNCTIONS-CASE)
+  * [9.18.1. `CASE`](functions-conditional#FUNCTIONS-CASE)
   * [9.18.2. `COALESCE`](functions-conditional#FUNCTIONS-COALESCE-NVL-IFNULL)
   * [9.18.3. `NULLIF`](functions-conditional#FUNCTIONS-NULLIF)
   * [9.18.4. `GREATEST` and `LEAST`](functions-conditional#FUNCTIONS-GREATEST-LEAST)

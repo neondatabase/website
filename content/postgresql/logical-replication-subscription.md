@@ -1,6 +1,6 @@
 ## 31.2. Subscription [#](#LOGICAL-REPLICATION-SUBSCRIPTION)
 
-  * *   [31.2.1. Replication Slot Management](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
+  * [31.2.1. Replication Slot Management](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT)
   * [31.2.2. Examples: Set Up Logical Replication](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES)
   * [31.2.3. Examples: Deferred Replication Slot Creation](logical-replication-subscription#LOGICAL-REPLICATION-SUBSCRIPTION-EXAMPLES-DEFERRED-SLOT)
 

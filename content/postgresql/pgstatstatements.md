@@ -1,6 +1,6 @@
 ## F.31. pg\_stat\_statements — track statistics of SQL planning and execution [#](#PGSTATSTATEMENTS)
 
-  * *   [F.31.1. The `pg_stat_statements` View](pgstatstatements#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
+  * [F.31.1. The `pg_stat_statements` View](pgstatstatements#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
   * [F.31.2. The `pg_stat_statements_info` View](pgstatstatements#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO)
   * [F.31.3. Functions](pgstatstatements#PGSTATSTATEMENTS-FUNCS)
   * [F.31.4. Configuration Parameters](pgstatstatements#PGSTATSTATEMENTS-CONFIG-PARAMS)

@@ -1,6 +1,6 @@
 ## 17.3. Building and Installation with Autoconf and Make [#](#INSTALL-MAKE)
 
-  * *   [17.3.1. Short Version](install-make#INSTALL-SHORT-MAKE)
+  * [17.3.1. Short Version](install-make#INSTALL-SHORT-MAKE)
   * [17.3.2. Installation Procedure](install-make#INSTALL-PROCEDURE-MAKE)
   * [17.3.3. `configure` Options](install-make#CONFIGURE-OPTIONS)
   * [17.3.4. `configure` Environment Variables](install-make#CONFIGURE-ENVVARS)

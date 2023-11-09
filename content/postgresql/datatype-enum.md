@@ -1,6 +1,6 @@
 ## 8.7. Enumerated Types [#](#DATATYPE-ENUM)
 
-  * *   [8.7.1. Declaration of Enumerated Types](datatype-enum#DATATYPE-ENUM-DECLARATION)
+  * [8.7.1. Declaration of Enumerated Types](datatype-enum#DATATYPE-ENUM-DECLARATION)
   * [8.7.2. Ordering](datatype-enum#DATATYPE-ENUM-ORDERING)
   * [8.7.3. Type Safety](datatype-enum#DATATYPE-ENUM-TYPE-SAFETY)
   * [8.7.4. Implementation Details](datatype-enum#DATATYPE-ENUM-IMPLEMENTATION-DETAILS)

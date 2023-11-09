@@ -1,6 +1,6 @@
 ## 20.9. Run-time Statistics [#](#RUNTIME-CONFIG-STATISTICS)
 
-  * *   [20.9.1. Cumulative Query and Index Statistics](runtime-config-statistics#RUNTIME-CONFIG-CUMULATIVE-STATISTICS)
+  * [20.9.1. Cumulative Query and Index Statistics](runtime-config-statistics#RUNTIME-CONFIG-CUMULATIVE-STATISTICS)
   * [20.9.2. Statistics Monitoring](runtime-config-statistics#RUNTIME-CONFIG-STATISTICS-MONITOR)
 
 ### 20.9.1. Cumulative Query and Index Statistics [#](#RUNTIME-CONFIG-CUMULATIVE-STATISTICS)

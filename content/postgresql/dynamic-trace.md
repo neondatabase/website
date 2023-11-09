@@ -1,6 +1,6 @@
 ## 28.5. Dynamic Tracing [#](#DYNAMIC-TRACE)
 
-  * *   [28.5.1. Compiling for Dynamic Tracing](dynamic-trace#COMPILING-FOR-TRACE)
+  * [28.5.1. Compiling for Dynamic Tracing](dynamic-trace#COMPILING-FOR-TRACE)
   * [28.5.2. Built-in Probes](dynamic-trace#TRACE-POINTS)
   * [28.5.3. Using Probes](dynamic-trace#USING-TRACE-POINTS)
   * [28.5.4. Defining New Probes](dynamic-trace#DEFINING-TRACE-POINTS)

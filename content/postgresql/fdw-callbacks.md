@@ -1,6 +1,6 @@
 ## 59.2. Foreign Data Wrapper Callback Routines [#](#FDW-CALLBACKS)
 
-  * *   [59.2.1. FDW Routines for Scanning Foreign Tables](fdw-callbacks#FDW-CALLBACKS-SCAN)
+  * [59.2.1. FDW Routines for Scanning Foreign Tables](fdw-callbacks#FDW-CALLBACKS-SCAN)
   * [59.2.2. FDW Routines for Scanning Foreign Joins](fdw-callbacks#FDW-CALLBACKS-JOIN-SCAN)
   * [59.2.3. FDW Routines for Planning Post-Scan/Join Processing](fdw-callbacks#FDW-CALLBACKS-UPPER-PLANNING)
   * [59.2.4. FDW Routines for Updating Foreign Tables](fdw-callbacks#FDW-CALLBACKS-UPDATE)

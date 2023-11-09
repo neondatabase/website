@@ -1,6 +1,6 @@
 ## F.6. basic\_archive — an example WAL archive module [#](#BASIC-ARCHIVE)
 
-  * *   [F.6.1. Configuration Parameters](basic-archive#BASIC-ARCHIVE-CONFIGURATION-PARAMETERS)
+  * [F.6.1. Configuration Parameters](basic-archive#BASIC-ARCHIVE-CONFIGURATION-PARAMETERS)
   * [F.6.2. Notes](basic-archive#BASIC-ARCHIVE-NOTES)
   * [F.6.3. Author](basic-archive#BASIC-ARCHIVE-AUTHOR)
 

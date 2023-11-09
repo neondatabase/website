@@ -1,6 +1,6 @@
 ## 13.3. Explicit Locking [#](#EXPLICIT-LOCKING)
 
-  * *   [13.3.1. Table-Level Locks](explicit-locking#LOCKING-TABLES)
+  * [13.3.1. Table-Level Locks](explicit-locking#LOCKING-TABLES)
   * [13.3.2. Row-Level Locks](explicit-locking#LOCKING-ROWS)
   * [13.3.3. Page-Level Locks](explicit-locking#LOCKING-PAGES)
   * [13.3.4. Deadlocks](explicit-locking#LOCKING-DEADLOCKS)

@@ -1,6 +1,6 @@
 ## 43.13. Porting from Oracle PL/SQL [#](#PLPGSQL-PORTING)
 
-  * *   [43.13.1. Porting Examples](plpgsql-porting#PLPGSQL-PORTING-EXAMPLES)
+  * [43.13.1. Porting Examples](plpgsql-porting#PLPGSQL-PORTING-EXAMPLES)
   * [43.13.2. Other Things to Watch For](plpgsql-porting#PLPGSQL-PORTING-OTHER)
   * [43.13.3. Appendix](plpgsql-porting#PLPGSQL-PORTING-APPENDIX)
 

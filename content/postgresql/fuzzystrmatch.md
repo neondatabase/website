@@ -1,6 +1,6 @@
 ## F.17. fuzzystrmatch — determine string similarities and distance [#](#FUZZYSTRMATCH)
 
-  * *   [F.17.1. Soundex](fuzzystrmatch#FUZZYSTRMATCH-SOUNDEX)
+  * [F.17.1. Soundex](fuzzystrmatch#FUZZYSTRMATCH-SOUNDEX)
   * [F.17.2. Daitch-Mokotoff Soundex](fuzzystrmatch#FUZZYSTRMATCH-DAITCH-MOKOTOFF)
   * [F.17.3. Levenshtein](fuzzystrmatch#FUZZYSTRMATCH-LEVENSHTEIN)
   * [F.17.4. Metaphone](fuzzystrmatch#FUZZYSTRMATCH-METAPHONE)

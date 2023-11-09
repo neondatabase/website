@@ -1,6 +1,6 @@
 ## 12.4. Additional Features [#](#TEXTSEARCH-FEATURES)
 
-  * *   [12.4.1. Manipulating Documents](textsearch-features#TEXTSEARCH-MANIPULATE-TSVECTOR)
+  * [12.4.1. Manipulating Documents](textsearch-features#TEXTSEARCH-MANIPULATE-TSVECTOR)
   * [12.4.2. Manipulating Queries](textsearch-features#TEXTSEARCH-MANIPULATE-TSQUERY)
   * [12.4.3. Triggers for Automatic Updates](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS)
   * [12.4.4. Gathering Document Statistics](textsearch-features#TEXTSEARCH-STATISTICS)
