@@ -1,12 +1,18 @@
-## F.26. pg\_buffercache — inspect PostgreSQL buffer cache state [#](#PGBUFFERCACHE)
+[#id](#PGBUFFERCACHE)
 
-  * [F.26.1. The `pg_buffercache` View](pgbuffercache#PGBUFFERCACHE-PG-BUFFERCACHE)
-  * [F.26.2. The `pg_buffercache_summary()` Function](pgbuffercache#PGBUFFERCACHE-SUMMARY)
-  * [F.26.3. The `pg_buffercache_usage_counts()` Function](pgbuffercache#PGBUFFERCACHE-USAGE-COUNTS)
-  * [F.26.4. Sample Output](pgbuffercache#PGBUFFERCACHE-SAMPLE-OUTPUT)
-  * [F.26.5. Authors](pgbuffercache#PGBUFFERCACHE-AUTHORS)
+## F.27. pg\_buffercache — inspect PostgreSQL buffer cache state [#](#PGBUFFERCACHE)
+
+  * [F.27.1. The `pg_buffercache` View](pgbuffercache#PGBUFFERCACHE-PG-BUFFERCACHE)
+  * [F.27.2. The `pg_buffercache_summary()` Function](pgbuffercache#PGBUFFERCACHE-SUMMARY)
+  * [F.27.3. The `pg_buffercache_usage_counts()` Function](pgbuffercache#PGBUFFERCACHE-USAGE-COUNTS)
+  * [F.27.4. Sample Output](pgbuffercache#PGBUFFERCACHE-SAMPLE-OUTPUT)
+  * [F.27.5. Authors](pgbuffercache#PGBUFFERCACHE-AUTHORS)
+
+
 
 The `pg_buffercache` module provides a means for examining what's happening in the shared buffer cache in real time.
+
+
 
 This module provides the `pg_buffercache_pages()` function (wrapped in the `pg_buffercache` view), the `pg_buffercache_summary()` function, and the `pg_buffercache_usage_counts()` function.
 
@@ -18,25 +24,30 @@ The `pg_buffercache_usage_counts()` function returns a set of records, each row 
 
 By default, use is restricted to superusers and roles with privileges of the `pg_monitor` role. Access may be granted to others using `GRANT`.
 
-### F.26.1. The `pg_buffercache` View [#](#PGBUFFERCACHE-PG-BUFFERCACHE)
+[#id](#PGBUFFERCACHE-PG-BUFFERCACHE)
 
-The definitions of the columns exposed by the view are shown in [Table F.15](pgbuffercache#PGBUFFERCACHE-COLUMNS "Table F.15. pg_buffercache Columns").
+### F.27.1. The `pg_buffercache` View [#](#PGBUFFERCACHE-PG-BUFFERCACHE)
+
+The definitions of the columns exposed by the view are shown in [Table F.15](pgbuffercache#PGBUFFERCACHE-COLUMNS).
+
+[#id](#PGBUFFERCACHE-COLUMNS)
 
 **Table F.15. `pg_buffercache` Columns**
 
-| Column TypeDescription                                                                                                                      |
-| ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bufferid` `integer`ID, in the range 1..`shared_buffers`                                                                                    |
-| `relfilenode` `oid` (references [`pg_class`](catalog-pg-class "53.11. pg_class").`relfilenode`)Filenode number of the relation         |
-| `reltablespace` `oid` (references [`pg_tablespace`](catalog-pg-tablespace "53.56. pg_tablespace").`oid`)Tablespace OID of the relation |
-| `reldatabase` `oid` (references [`pg_database`](catalog-pg-database "53.15. pg_database").`oid`)Database OID of the relation           |
-| `relforknumber` `smallint`Fork number within the relation; see `common/relpath.h`                                                           |
-| `relblocknumber` `bigint`Page number within the relation                                                                                    |
-| `isdirty` `boolean`Is the page dirty?                                                                                                       |
-| `usagecount` `smallint`Clock-sweep access count                                                                                             |
-| `pinning_backends` `integer`Number of backends pinning this buffer                                                                          |
+| Column TypeDescription                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------- |
+| `bufferid` `integer`ID, in the range 1..`shared_buffers`                                                             |
+| `relfilenode` `oid` (references [`pg_class`](catalog-pg-class).`relfilenode`)Filenode number of the relation    |
+| `reltablespace` `oid` (references [`pg_tablespace`](catalog-pg-tablespace).`oid`)Tablespace OID of the relation |
+| `reldatabase` `oid` (references [`pg_database`](catalog-pg-database).`oid`)Database OID of the relation         |
+| `relforknumber` `smallint`Fork number within the relation; see `common/relpath.h`                                    |
+| `relblocknumber` `bigint`Page number within the relation                                                             |
+| `isdirty` `boolean`Is the page dirty?                                                                                |
+| `usagecount` `smallint`Clock-sweep access count                                                                      |
+| `pinning_backends` `integer`Number of backends pinning this buffer                                                   |
 
 \
+
 
 There is one row for each buffer in the shared cache. Unused buffers are shown with all fields null except `bufferid`. Shared system catalogs are shown as belonging to database zero.
 
@@ -44,9 +55,13 @@ Because the cache is shared by all the databases, there will normally be pages f
 
 Since buffer manager locks are not taken to copy the buffer state data that the view will display, accessing `pg_buffercache` view has less impact on normal buffer activity but it doesn't provide a consistent set of results across all buffers. However, we ensure that the information of each buffer is self-consistent.
 
-### F.26.2. The `pg_buffercache_summary()` Function [#](#PGBUFFERCACHE-SUMMARY)
+[#id](#PGBUFFERCACHE-SUMMARY)
 
-The definitions of the columns exposed by the function are shown in [Table F.16](pgbuffercache#PGBUFFERCACHE-SUMMARY-COLUMNS "Table F.16. pg_buffercache_summary() Output Columns").
+### F.27.2. The `pg_buffercache_summary()` Function [#](#PGBUFFERCACHE-SUMMARY)
+
+The definitions of the columns exposed by the function are shown in [Table F.16](pgbuffercache#PGBUFFERCACHE-SUMMARY-COLUMNS).
+
+[#id](#PGBUFFERCACHE-SUMMARY-COLUMNS)
 
 **Table F.16. `pg_buffercache_summary()` Output Columns**
 
@@ -60,13 +75,18 @@ The definitions of the columns exposed by the function are shown in [Table F.16
 
 \
 
+
 The `pg_buffercache_summary()` function returns a single row summarizing the state of all shared buffers. Similar and more detailed information is provided by the `pg_buffercache` view, but `pg_buffercache_summary()` is significantly cheaper.
 
 Like the `pg_buffercache` view, `pg_buffercache_summary()` does not acquire buffer manager locks. Therefore concurrent activity can lead to minor inaccuracies in the result.
 
-### F.26.3. The `pg_buffercache_usage_counts()` Function [#](#PGBUFFERCACHE-USAGE-COUNTS)
+[#id](#PGBUFFERCACHE-USAGE-COUNTS)
 
-The definitions of the columns exposed by the function are shown in [Table F.17](pgbuffercache#PGBUFFERCACHE_USAGE_COUNTS-COLUMNS "Table F.17. pg_buffercache_usage_counts() Output Columns").
+### F.27.3. The `pg_buffercache_usage_counts()` Function [#](#PGBUFFERCACHE-USAGE-COUNTS)
+
+The definitions of the columns exposed by the function are shown in [Table F.17](pgbuffercache#PGBUFFERCACHE_USAGE_COUNTS-COLUMNS).
+
+[#id](#PGBUFFERCACHE\_USAGE\_COUNTS-COLUMNS)
 
 **Table F.17. `pg_buffercache_usage_counts()` Output Columns**
 
@@ -79,14 +99,16 @@ The definitions of the columns exposed by the function are shown in [Table F.17
 
 \
 
+
 The `pg_buffercache_usage_counts()` function returns a set of rows summarizing the states of all shared buffers, aggregated over the possible usage count values. Similar and more detailed information is provided by the `pg_buffercache` view, but `pg_buffercache_usage_counts()` is significantly cheaper.
 
 Like the `pg_buffercache` view, `pg_buffercache_usage_counts()` does not acquire buffer manager locks. Therefore concurrent activity can lead to minor inaccuracies in the result.
 
-### F.26.4. Sample Output [#](#PGBUFFERCACHE-SAMPLE-OUTPUT)
+[#id](#PGBUFFERCACHE-SAMPLE-OUTPUT)
+
+### F.27.4. Sample Output [#](#PGBUFFERCACHE-SAMPLE-OUTPUT)
 
 ```
-
 regression=# SELECT n.nspname, c.relname, count(*) AS buffers
              FROM pg_buffercache b JOIN pg_class c
              ON b.relfilenode = pg_relation_filenode(c.oid) AND
@@ -131,7 +153,9 @@ regression=# SELECT * FROM pg_buffercache_usage_counts();
 (6 rows)
 ```
 
-### F.26.5. Authors [#](#PGBUFFERCACHE-AUTHORS)
+[#id](#PGBUFFERCACHE-AUTHORS)
+
+### F.27.5. Authors [#](#PGBUFFERCACHE-AUTHORS)
 
 Mark Kirkwood `<markir@paradise.net.nz>`
 

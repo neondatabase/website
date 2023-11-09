@@ -1,9 +1,13 @@
+[#id](#LOGICAL-REPLICATION-CONFIG)
+
 ## 31.10. Configuration Settings [#](#LOGICAL-REPLICATION-CONFIG)
 
   * [31.10.1. Publishers](logical-replication-config#LOGICAL-REPLICATION-CONFIG-PUBLISHER)
   * [31.10.2. Subscribers](logical-replication-config#LOGICAL-REPLICATION-CONFIG-SUBSCRIBER)
 
 Logical replication requires several configuration options to be set. Most options are relevant only on one side of the replication. However, `max_replication_slots` is used on both the publisher and the subscriber, but it has a different meaning for each.
+
+[#id](#LOGICAL-REPLICATION-CONFIG-PUBLISHER)
 
 ### 31.10.1. Publishers [#](#LOGICAL-REPLICATION-CONFIG-PUBLISHER)
 
@@ -14,6 +18,8 @@ Logical replication requires several configuration options to be set. Most optio
 [`max_wal_senders`](runtime-config-replication#GUC-MAX-WAL-SENDERS) should be set to at least the same as `max_replication_slots`, plus the number of physical replicas that are connected at the same time.
 
 Logical replication walsender is also affected by [`wal_sender_timeout`](runtime-config-replication#GUC-WAL-SENDER-TIMEOUT).
+
+[#id](#LOGICAL-REPLICATION-CONFIG-SUBSCRIBER)
 
 ### 31.10.2. Subscribers [#](#LOGICAL-REPLICATION-CONFIG-SUBSCRIBER)
 

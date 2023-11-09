@@ -1,4 +1,8 @@
+[#id](#LOGFILE-MAINTENANCE)
+
 ## 25.3. Log File Maintenance [#](#LOGFILE-MAINTENANCE)
+
+
 
 It is a good idea to save the database server's log output somewhere, rather than just discarding it via `/dev/null`. The log output is invaluable when diagnosing problems.
 
@@ -10,16 +14,15 @@ Log output tends to be voluminous (especially at higher debug levels) so you won
 
 If you simply direct the stderr of `postgres` into a file, you will have log output, but the only way to truncate the log file is to stop and restart the server. This might be acceptable if you are using PostgreSQL in a development environment, but few production servers would find this behavior acceptable.
 
-A better approach is to send the server's stderr output to some type of log rotation program. There is a built-in log rotation facility, which you can use by setting the configuration parameter `logging_collector` to `true` in `postgresql.conf`. The control parameters for this program are described in [Section 20.8.1](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE "20.8.1. Where to Log"). You can also use this approach to capture the log data in machine readable CSV (comma-separated values) format.
+A better approach is to send the server's stderr output to some type of log rotation program. There is a built-in log rotation facility, which you can use by setting the configuration parameter `logging_collector` to `true` in `postgresql.conf`. The control parameters for this program are described in [Section 20.8.1](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE). You can also use this approach to capture the log data in machine readable CSV (comma-separated values) format.
 
 Alternatively, you might prefer to use an external log rotation program if you have one that you are already using with other server software. For example, the rotatelogs tool included in the Apache distribution can be used with PostgreSQL. One way to do this is to pipe the server's stderr output to the desired program. If you start the server with `pg_ctl`, then stderr is already redirected to stdout, so you just need a pipe command, for example:
 
 ```
-
 pg_ctl start | rotatelogs /var/log/pgsql_log 86400
 ```
 
-You can combine these approaches by setting up logrotate to collect log files produced by PostgreSQL built-in logging collector. In this case, the logging collector defines the names and location of the log files, while logrotate periodically archives these files. When initiating log rotation, logrotate must ensure that the application sends further output to the new file. This is commonly done with a `postrotate` script that sends a `SIGHUP` signal to the application, which then reopens the log file. In PostgreSQL, you can run `pg_ctl` with the `logrotate` option instead. When the server receives this command, the server either switches to a new log file or reopens the existing file, depending on the logging configuration (see [Section 20.8.1](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE "20.8.1. Where to Log")).
+You can combine these approaches by setting up logrotate to collect log files produced by PostgreSQL built-in logging collector. In this case, the logging collector defines the names and location of the log files, while logrotate periodically archives these files. When initiating log rotation, logrotate must ensure that the application sends further output to the new file. This is commonly done with a `postrotate` script that sends a `SIGHUP` signal to the application, which then reopens the log file. In PostgreSQL, you can run `pg_ctl` with the `logrotate` option instead. When the server receives this command, the server either switches to a new log file or reopens the existing file, depending on the logging configuration (see [Section 20.8.1](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE)).
 
 ### Note
 

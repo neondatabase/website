@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-COLUMN-UDT-USAGE)
+
 ## 37.16. `column_udt_usage` [#](#INFOSCHEMA-COLUMN-UDT-USAGE)
 
-The view `column_udt_usage` identifies all columns that use data types owned by a currently enabled role. Note that in PostgreSQL, built-in data types behave like user-defined types, so they are included here as well. See also [Section 37.17](infoschema-columns "37.17. columns") for details.
+The view `column_udt_usage` identifies all columns that use data types owned by a currently enabled role. Note that in PostgreSQL, built-in data types behave like user-defined types, so they are included here as well. See also [Section 37.17](infoschema-columns) for details.
+
+[#id](#id-1.7.6.20.3)
 
 **Table 37.14. `column_udt_usage` Columns**
 

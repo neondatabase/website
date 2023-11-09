@@ -1,3 +1,5 @@
+[#id](#REGRESS-VARIANT)
+
 ## 33.3. Variant Comparison Files [#](#REGRESS-VARIANT)
 
 Since some of the tests inherently produce environment-dependent results, we have provided ways to specify alternate “expected” result files. Each regression test can have several comparison files showing possible results on different platforms. There are two independent mechanisms for determining which comparison file is used for each test.
@@ -7,7 +9,6 @@ The first mechanism allows comparison files to be selected for specific platform
 Each line in the mapping file is of the form
 
 ```
-
 testname:output:platformpattern=comparisonfilename
 ```
 
@@ -16,7 +17,6 @@ The test name is just the name of the particular regression test module. The out
 For example: some systems lack a working `strtof` function, for which our workaround causes rounding errors in the `float4` regression test. Therefore, we provide a variant comparison file, `float4-misrounded-input.out`, which includes the results to be expected on these systems. To silence the bogus “failure” message on Cygwin platforms, `resultmap` includes:
 
 ```
-
 float4:out:.*-.*-cygwin.*=float4-misrounded-input.out
 ```
 

@@ -1,3 +1,5 @@
+[#id](#PARALLEL-SAFETY)
+
 ## 15.4. Parallel Safety [#](#PARALLEL-SAFETY)
 
 * [15.4.1. Parallel Labeling for Functions and Aggregates](parallel-safety#PARALLEL-LABELING)
@@ -7,14 +9,20 @@ The planner classifies operations involved in a query as either *parallel safe*,
 The following operations are always parallel restricted:
 
 * Scans of common table expressions (CTEs).
+
 * Scans of temporary tables.
+
 * Scans of foreign tables, unless the foreign data wrapper has an `IsForeignScanParallelSafe` API that indicates otherwise.
+
 * Plan nodes to which an `InitPlan` is attached.
+
 * Plan nodes that reference a correlated `SubPlan`.
+
+[#id](#PARALLEL-LABELING)
 
 ### 15.4.1. Parallel Labeling for Functions and Aggregates [#](#PARALLEL-LABELING)
 
-The planner cannot automatically determine whether a user-defined function or aggregate is parallel safe, parallel restricted, or parallel unsafe, because this would require predicting every operation that the function could possibly perform. In general, this is equivalent to the Halting Problem and therefore impossible. Even for simple functions where it could conceivably be done, we do not try, since this would be expensive and error-prone. Instead, all user-defined functions are assumed to be parallel unsafe unless otherwise marked. When using [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION") or [ALTER FUNCTION](sql-alterfunction "ALTER FUNCTION"), markings can be set by specifying `PARALLEL SAFE`, `PARALLEL RESTRICTED`, or `PARALLEL UNSAFE` as appropriate. When using [CREATE AGGREGATE](sql-createaggregate "CREATE AGGREGATE"), the `PARALLEL` option can be specified with `SAFE`, `RESTRICTED`, or `UNSAFE` as the corresponding value.
+The planner cannot automatically determine whether a user-defined function or aggregate is parallel safe, parallel restricted, or parallel unsafe, because this would require predicting every operation that the function could possibly perform. In general, this is equivalent to the Halting Problem and therefore impossible. Even for simple functions where it could conceivably be done, we do not try, since this would be expensive and error-prone. Instead, all user-defined functions are assumed to be parallel unsafe unless otherwise marked. When using [CREATE FUNCTION](sql-createfunction) or [ALTER FUNCTION](sql-alterfunction), markings can be set by specifying `PARALLEL SAFE`, `PARALLEL RESTRICTED`, or `PARALLEL UNSAFE` as appropriate. When using [CREATE AGGREGATE](sql-createaggregate), the `PARALLEL` option can be specified with `SAFE`, `RESTRICTED`, or `UNSAFE` as the corresponding value.
 
 Functions and aggregates must be marked `PARALLEL UNSAFE` if they write to the database, access sequences, change the transaction state even temporarily (e.g., a PL/pgSQL function that establishes an `EXCEPTION` block to catch errors), or make persistent changes to settings. Similarly, functions must be marked `PARALLEL RESTRICTED` if they access temporary tables, client connection state, cursors, prepared statements, or miscellaneous backend-local state that the system cannot synchronize across workers. For example, `setseed` and `random` are parallel restricted for this last reason.
 

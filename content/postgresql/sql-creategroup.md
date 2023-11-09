@@ -1,3 +1,5 @@
+[#id](#SQL-CREATEGROUP)
+
 ## CREATE GROUP
 
 CREATE GROUP — define a new database role
@@ -5,7 +7,6 @@ CREATE GROUP — define a new database role
 ## Synopsis
 
 ```
-
 CREATE GROUP name [ [ WITH ] option [ ... ] ]
 
 where option can be:
@@ -28,14 +29,20 @@ where option can be:
     | SYSID uid
 ```
 
+[#id](#id-1.9.3.68.5)
+
 ## Description
 
-`CREATE GROUP` is now an alias for [CREATE ROLE](sql-createrole "CREATE ROLE").
+`CREATE GROUP` is now an alias for [CREATE ROLE](sql-createrole).
+
+[#id](#id-1.9.3.68.6)
 
 ## Compatibility
 
 There is no `CREATE GROUP` statement in the SQL standard.
 
+[#id](#id-1.9.3.68.7)
+
 ## See Also
 
-[CREATE ROLE](sql-createrole "CREATE ROLE")
+[CREATE ROLE](sql-createrole)

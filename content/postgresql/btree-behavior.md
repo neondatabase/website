@@ -1,6 +1,8 @@
+[#id](#BTREE-BEHAVIOR)
+
 ## 67.2. Behavior of B-Tree Operator Classes [#](#BTREE-BEHAVIOR)
 
-As shown in [Table 38.3](xindex#XINDEX-BTREE-STRAT-TABLE "Table 38.3. B-Tree Strategies"), a btree operator class must provide five comparison operators, `<`, `<=`, `=`, `>=` and `>`. One might expect that `<>` should also be part of the operator class, but it is not, because it would almost never be useful to use a `<>` WHERE clause in an index search. (For some purposes, the planner treats `<>` as associated with a btree operator class; but it finds that operator via the `=` operator's negator link, rather than from `pg_amop`.)
+As shown in [Table 38.3](xindex#XINDEX-BTREE-STRAT-TABLE), a btree operator class must provide five comparison operators, `<`, `<=`, `=`, `>=` and `>`. One might expect that `<>` should also be part of the operator class, but it is not, because it would almost never be useful to use a `<>` WHERE clause in an index search. (For some purposes, the planner treats `<>` as associated with a btree operator class; but it finds that operator via the `=` operator's negator link, rather than from `pg_amop`.)
 
 When several data types share near-identical sorting semantics, their operator classes can be grouped into an operator family. Doing so is advantageous because it allows the planner to make deductions about cross-type comparisons. Each operator class within the family should contain the single-type operators (and associated support functions) for its input data type, while cross-type comparison operators and support functions are “loose” in the family. It is recommendable that a complete set of cross-type operators be included in the family, thus ensuring that the planner can represent any comparison conditions that it deduces from transitivity.
 
@@ -9,19 +11,22 @@ There are some basic assumptions that a btree operator family must satisfy:
 * An `=` operator must be an equivalence relation; that is, for all non-null values *`A`*, *`B`*, *`C`* of the data type:
 
   * *`A`* `=` *`A`* is true (*reflexive law*)
+
   * if *`A`* `=` *`B`*, then *`B`* `=` *`A`* (*symmetric law*)
+
   * if *`A`* `=` *`B`* and *`B`* `=` *`C`*, then *`A`* `=` *`C`* (*transitive law*)
 
 * A `<` operator must be a strong ordering relation; that is, for all non-null values *`A`*, *`B`*, *`C`*:
 
   * *`A`* `<` *`A`* is false (*irreflexive law*)
+
   * if *`A`* `<` *`B`* and *`B`* `<` *`C`*, then *`A`* `<` *`C`* (*transitive law*)
 
 * Furthermore, the ordering is total; that is, for all non-null values *`A`*, *`B`*:
 
   * exactly one of *`A`* `<` *`B`*, *`A`* `=` *`B`*, and *`B`* `<` *`A`* is true (*trichotomy law*)
 
-    (The trichotomy law justifies the definition of the comparison support function, of course.)
+  (The trichotomy law justifies the definition of the comparison support function, of course.)
 
 The other three operators are defined in terms of `=` and `<` in the obvious way, and must act consistently with them.
 

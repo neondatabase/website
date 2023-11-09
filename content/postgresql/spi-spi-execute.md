@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-EXECUTE)
+
 ## SPI\_execute
 
 SPI\_execute — execute a command
@@ -5,9 +7,10 @@ SPI\_execute — execute a command
 ## Synopsis
 
 ```
-
 int SPI_execute(const char * command, bool read_only, long count)
 ```
+
+[#id](#id-1.8.12.8.4.5)
 
 ## Description
 
@@ -18,21 +21,18 @@ This function can only be called from a connected C function.
 If *`count`* is zero then the command is executed for all rows that it applies to. If *`count`* is greater than zero, then no more than *`count`* rows will be retrieved; execution stops when the count is reached, much like adding a `LIMIT` clause to the query. For example,
 
 ```
-
 SPI_execute("SELECT * FROM foo", true, 5);
 ```
 
 will retrieve at most 5 rows from the table. Note that such a limit is only effective when the command actually returns rows. For example,
 
 ```
-
 SPI_execute("INSERT INTO foo SELECT * FROM bar", false, 5);
 ```
 
 inserts all rows from `bar`, ignoring the *`count`* parameter. However, with
 
 ```
-
 SPI_execute("INSERT INTO foo SELECT * FROM bar RETURNING *", false, 5);
 ```
 
@@ -51,7 +51,6 @@ The actual number of rows for which the (last) command was executed is returned 
 The structure `SPITupleTable` is defined thus:
 
 ```
-
 typedef struct SPITupleTable
 {
     /* Public members */
@@ -71,19 +70,23 @@ The fields `tupdesc`, `vals`, and `numvals` can be used by SPI callers; the rema
 
 `SPI_finish` frees all `SPITupleTable`s allocated during the current C function. You can free a particular result table earlier, if you are done with it, by calling `SPI_freetuptable`.
 
+[#id](#id-1.8.12.8.4.6)
+
 ## Arguments
 
 * `const char * command`
 
-    string containing command to execute
+  string containing command to execute
 
 * `bool read_only`
 
-    `true` for read-only execution
+  `true` for read-only execution
 
 * `long count`
 
-    maximum number of rows to return, or `0` for no limit
+  maximum number of rows to return, or `0` for no limit
+
+[#id](#id-1.8.12.8.4.7)
 
 ## Return Value
 
@@ -91,69 +94,71 @@ If the execution of the command was successful then one of the following (nonneg
 
 * `SPI_OK_SELECT`
 
-    if a `SELECT` (but not `SELECT INTO`) was executed
+  if a `SELECT` (but not `SELECT INTO`) was executed
 
 * `SPI_OK_SELINTO`
 
-    if a `SELECT INTO` was executed
+  if a `SELECT INTO` was executed
 
 * `SPI_OK_INSERT`
 
-    if an `INSERT` was executed
+  if an `INSERT` was executed
 
 * `SPI_OK_DELETE`
 
-    if a `DELETE` was executed
+  if a `DELETE` was executed
 
 * `SPI_OK_UPDATE`
 
-    if an `UPDATE` was executed
+  if an `UPDATE` was executed
 
 * `SPI_OK_MERGE`
 
-    if a `MERGE` was executed
+  if a `MERGE` was executed
 
 * `SPI_OK_INSERT_RETURNING`
 
-    if an `INSERT RETURNING` was executed
+  if an `INSERT RETURNING` was executed
 
 * `SPI_OK_DELETE_RETURNING`
 
-    if a `DELETE RETURNING` was executed
+  if a `DELETE RETURNING` was executed
 
 * `SPI_OK_UPDATE_RETURNING`
 
-    if an `UPDATE RETURNING` was executed
+  if an `UPDATE RETURNING` was executed
 
 * `SPI_OK_UTILITY`
 
-    if a utility command (e.g., `CREATE TABLE`) was executed
+  if a utility command (e.g., `CREATE TABLE`) was executed
 
 * `SPI_OK_REWRITTEN`
 
-    if the command was rewritten into another kind of command (e.g., `UPDATE` became an `INSERT`) by a [rule](rules "Chapter 41. The Rule System").
+  if the command was rewritten into another kind of command (e.g., `UPDATE` became an `INSERT`) by a [rule](rules).
 
 On error, one of the following negative values is returned:
 
 * `SPI_ERROR_ARGUMENT`
 
-    if *`command`* is `NULL` or *`count`* is less than 0
+  if *`command`* is `NULL` or *`count`* is less than 0
 
 * `SPI_ERROR_COPY`
 
-    if `COPY TO stdout` or `COPY FROM stdin` was attempted
+  if `COPY TO stdout` or `COPY FROM stdin` was attempted
 
 * `SPI_ERROR_TRANSACTION`
 
-    if a transaction manipulation command was attempted (`BEGIN`, `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `PREPARE TRANSACTION`, `COMMIT PREPARED`, `ROLLBACK PREPARED`, or any variant thereof)
+  if a transaction manipulation command was attempted (`BEGIN`, `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `PREPARE TRANSACTION`, `COMMIT PREPARED`, `ROLLBACK PREPARED`, or any variant thereof)
 
 * `SPI_ERROR_OPUNKNOWN`
 
-    if the command type is unknown (shouldn't happen)
+  if the command type is unknown (shouldn't happen)
 
 * `SPI_ERROR_UNCONNECTED`
 
-    if called from an unconnected C function
+  if called from an unconnected C function
+
+[#id](#id-1.8.12.8.4.8)
 
 ## Notes
 

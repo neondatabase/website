@@ -1,6 +1,12 @@
+[#id](#FUNCTIONS-COMPARISON)
+
 ## 9.2. Comparison Functions and Operators [#](#FUNCTIONS-COMPARISON)
 
-The usual comparison operators are available, as shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators").
+
+
+The usual comparison operators are available, as shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE).
+
+[#id](#FUNCTIONS-COMPARISON-OP-TABLE)
 
 **Table 9.1. Comparison Operators**
 
@@ -16,6 +22,7 @@ The usual comparison operators are available, as shown in [Table 9.1](functions
 
 \
 
+
 ### Note
 
 `<>` is the standard SQL notation for “not equal”. `!=` is an alias, which is converted to `<>` at a very early stage of parsing. Hence, it is not possible to implement `!=` and `<>` operators that do different things.
@@ -26,7 +33,9 @@ It is usually possible to compare values of related data types as well; for exam
 
 As shown above, all comparison operators are binary operators that return values of type `boolean`. Thus, expressions like `1 < 2 < 3` are not valid (because there is no `<` operator to compare a Boolean value with `3`). Use the `BETWEEN` predicates shown below to perform range tests.
 
-There are also some comparison predicates, as shown in [Table 9.2](functions-comparison#FUNCTIONS-COMPARISON-PRED-TABLE "Table 9.2. Comparison Predicates"). These behave much like operators, but have special syntax mandated by the SQL standard.
+There are also some comparison predicates, as shown in [Table 9.2](functions-comparison#FUNCTIONS-COMPARISON-PRED-TABLE). These behave much like operators, but have special syntax mandated by the SQL standard.
+
+[#id](#FUNCTIONS-COMPARISON-PRED-TABLE)
 
 **Table 9.2. Comparison Predicates**
 
@@ -50,6 +59,7 @@ There are also some comparison predicates, as shown in [Table 9.2](functions-co
 | `boolean` `IS NOT UNKNOWN` → `boolean`Test whether boolean expression yields true or false.`true IS NOT UNKNOWN` → `t``NULL::boolean IS NOT UNKNOWN` → `f` (rather than `NULL`)                                            |
 
 \
+
 
 The `BETWEEN` predicate simplifies range tests:
 
@@ -99,6 +109,8 @@ expression ISNULL
 expression NOTNULL
 ```
 
+
+
 Do *not* write `expression = NULL` because `NULL` is not “equal to” `NULL`. (The null value represents an unknown value, and it is not known whether two unknown values are equal.)
 
 ### Tip
@@ -121,7 +133,9 @@ boolean_expression IS NOT UNKNOWN
 
 These will always return true or false, never a null value, even when the operand is null. A null input is treated as the logical value “unknown”. Notice that `IS UNKNOWN` and `IS NOT UNKNOWN` are effectively the same as `IS NULL` and `IS NOT NULL`, respectively, except that the input expression must be of Boolean type.
 
-Some comparison-related functions are also available, as shown in [Table 9.3](functions-comparison#FUNCTIONS-COMPARISON-FUNC-TABLE "Table 9.3. Comparison Functions").
+Some comparison-related functions are also available, as shown in [Table 9.3](functions-comparison#FUNCTIONS-COMPARISON-FUNC-TABLE).
+
+[#id](#FUNCTIONS-COMPARISON-FUNC-TABLE)
 
 **Table 9.3. Comparison Functions**
 

@@ -1,3 +1,5 @@
+[#id](#ECPG-PREPROC)
+
 ## 36.9. Preprocessor Directives [#](#ECPG-PREPROC)
 
   * [36.9.1. Including Files](ecpg-preproc#ECPG-INCLUDE)
@@ -5,6 +7,8 @@
   * [36.9.3. ifdef, ifndef, elif, else, and endif Directives](ecpg-preproc#ECPG-IFDEF)
 
 Several preprocessor directives are available that modify how the `ecpg` preprocessor parses and processes a file.
+
+[#id](#ECPG-INCLUDE)
 
 ### 36.9.1. Including Files [#](#ECPG-INCLUDE)
 
@@ -42,6 +46,8 @@ because this file would not be subject to SQL command preprocessing. Naturally, 
 ### Note
 
 The include file name is case-sensitive, even though the rest of the `EXEC SQL INCLUDE` command follows the normal SQL case-sensitivity rules.
+
+[#id](#ECPG-DEFINE)
 
 ### 36.9.2. The define and undef Directives [#](#ECPG-DEFINE)
 
@@ -86,29 +92,31 @@ EXEC SQL UPDATE Tbl SET col = MYNUMBER;
 
 then `ecpg` will already do the substitution and your C compiler will never see any name or identifier `MYNUMBER`. Note that you cannot use `#define` for a constant that you are going to use in an embedded SQL query because in this case the embedded SQL precompiler is not able to see this declaration.
 
+[#id](#ECPG-IFDEF)
+
 ### 36.9.3. ifdef, ifndef, elif, else, and endif Directives [#](#ECPG-IFDEF)
 
 You can use the following directives to compile code sections conditionally:
 
 * `EXEC SQL ifdef name;` [#](#ECPG-IFDEF-IFDEF)
 
-    Checks a *`name`* and processes subsequent lines if *`name`* has been defined via `EXEC SQL define name`.
+  Checks a *`name`* and processes subsequent lines if *`name`* has been defined via `EXEC SQL define name`.
 
 * `EXEC SQL ifndef name;` [#](#ECPG-IFDEF-IFNDEF)
 
-    Checks a *`name`* and processes subsequent lines if *`name`* has *not* been defined via `EXEC SQL define name`.
+  Checks a *`name`* and processes subsequent lines if *`name`* has *not* been defined via `EXEC SQL define name`.
 
 * `EXEC SQL elif name;` [#](#ECPG-IFDEF-ELIF)
 
-    Begins an optional alternative section after an `EXEC SQL ifdef name` or `EXEC SQL ifndef name` directive. Any number of `elif` sections can appear. Lines following an `elif` will be processed if *`name`* has been defined *and* no previous section of the same `ifdef`/`ifndef`...`endif` construct has been processed.
+  Begins an optional alternative section after an `EXEC SQL ifdef name` or `EXEC SQL ifndef name` directive. Any number of `elif` sections can appear. Lines following an `elif` will be processed if *`name`* has been defined *and* no previous section of the same `ifdef`/`ifndef`...`endif` construct has been processed.
 
 * `EXEC SQL else;` [#](#ECPG-IFDEF-ELSE)
 
-    Begins an optional, final alternative section after an `EXEC SQL ifdef name` or `EXEC SQL ifndef name` directive. Subsequent lines will be processed if no previous section of the same `ifdef`/`ifndef`...`endif` construct has been processed.
+  Begins an optional, final alternative section after an `EXEC SQL ifdef name` or `EXEC SQL ifndef name` directive. Subsequent lines will be processed if no previous section of the same `ifdef`/`ifndef`...`endif` construct has been processed.
 
 * `EXEC SQL endif;` [#](#ECPG-IFDEF-ENDIF)
 
-    Ends an `ifdef`/`ifndef`...`endif` construct. Subsequent lines are processed normally.
+  Ends an `ifdef`/`ifndef`...`endif` construct. Subsequent lines are processed normally.
 
 `ifdef`/`ifndef`...`endif` constructs can be nested, up to 127 levels deep.
 

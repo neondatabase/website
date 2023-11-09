@@ -1,9 +1,10 @@
+[#id](#INDEXES-INTRO)
+
 ## 11.1. Introduction [#](#INDEXES-INTRO)
 
 Suppose we have a table similar to this:
 
 ```
-
 CREATE TABLE test1 (
     id integer,
     content varchar
@@ -13,7 +14,6 @@ CREATE TABLE test1 (
 and the application issues many queries of the form:
 
 ```
-
 SELECT content FROM test1 WHERE id = constant;
 ```
 
@@ -24,7 +24,6 @@ A similar approach is used in most non-fiction books: terms and concepts that ar
 The following command can be used to create an index on the `id` column, as discussed:
 
 ```
-
 CREATE INDEX test1_id_index ON test1 (id);
 ```
 
@@ -32,10 +31,10 @@ The name `test1_id_index` can be chosen freely, but you should pick something th
 
 To remove an index, use the `DROP INDEX` command. Indexes can be added to and removed from tables at any time.
 
-Once an index is created, no further intervention is required: the system will update the index when the table is modified, and it will use the index in queries when it thinks doing so would be more efficient than a sequential table scan. But you might have to run the `ANALYZE` command regularly to update statistics to allow the query planner to make educated decisions. See [Chapter 14](performance-tips "Chapter 14. Performance Tips") for information about how to find out whether an index is used and when and why the planner might choose *not* to use an index.
+Once an index is created, no further intervention is required: the system will update the index when the table is modified, and it will use the index in queries when it thinks doing so would be more efficient than a sequential table scan. But you might have to run the `ANALYZE` command regularly to update statistics to allow the query planner to make educated decisions. See [Chapter 14](performance-tips) for information about how to find out whether an index is used and when and why the planner might choose *not* to use an index.
 
 Indexes can also benefit `UPDATE` and `DELETE` commands with search conditions. Indexes can moreover be used in join searches. Thus, an index defined on a column that is part of a join condition can also significantly speed up queries with joins.
 
-Creating an index on a large table can take a long time. By default, PostgreSQL allows reads (`SELECT` statements) to occur on the table in parallel with index creation, but writes (`INSERT`, `UPDATE`, `DELETE`) are blocked until the index build is finished. In production environments this is often unacceptable. It is possible to allow writes to occur in parallel with index creation, but there are several caveats to be aware of — for more information see [Building Indexes Concurrently](sql-createindex#SQL-CREATEINDEX-CONCURRENTLY "Building Indexes Concurrently").
+Creating an index on a large table can take a long time. By default, PostgreSQL allows reads (`SELECT` statements) to occur on the table in parallel with index creation, but writes (`INSERT`, `UPDATE`, `DELETE`) are blocked until the index build is finished. In production environments this is often unacceptable. It is possible to allow writes to occur in parallel with index creation, but there are several caveats to be aware of — for more information see [Building Indexes Concurrently](sql-createindex#SQL-CREATEINDEX-CONCURRENTLY).
 
-After an index is created, the system has to keep it synchronized with the table. This adds overhead to data manipulation operations. Indexes can also prevent the creation of [heap-only tuples](storage-hot "73.7. Heap-Only Tuples (HOT)"). Therefore indexes that are seldom or never used in queries should be removed.
+After an index is created, the system has to keep it synchronized with the table. This adds overhead to data manipulation operations. Indexes can also prevent the creation of [heap-only tuples](storage-hot). Therefore indexes that are seldom or never used in queries should be removed.

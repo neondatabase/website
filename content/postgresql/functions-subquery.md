@@ -1,3 +1,5 @@
+[#id](#FUNCTIONS-SUBQUERY)
+
 ## 9.23. Subquery Expressions [#](#FUNCTIONS-SUBQUERY)
 
   * [9.23.1. `EXISTS`](functions-subquery#FUNCTIONS-SUBQUERY-EXISTS)
@@ -7,7 +9,11 @@
   * [9.23.5. `ALL`](functions-subquery#FUNCTIONS-SUBQUERY-ALL)
   * [9.23.6. Single-Row Comparison](functions-subquery#FUNCTIONS-SUBQUERY-SINGLE-ROW-COMP)
 
+
+
 This section describes the SQL-compliant subquery expressions available in PostgreSQL. All of the expression forms documented in this section return Boolean (true/false) results.
+
+[#id](#FUNCTIONS-SUBQUERY-EXISTS)
 
 ### 9.23.1. `EXISTS` [#](#FUNCTIONS-SUBQUERY-EXISTS)
 
@@ -33,6 +39,8 @@ FROM tab1
 WHERE EXISTS (SELECT 1 FROM tab2 WHERE col2 = tab1.col2);
 ```
 
+[#id](#FUNCTIONS-SUBQUERY-IN)
+
 ### 9.23.2. `IN` [#](#FUNCTIONS-SUBQUERY-IN)
 
 ```
@@ -51,9 +59,11 @@ As with `EXISTS`, it's unwise to assume that the subquery will be evaluated comp
 row_constructor IN (subquery)
 ```
 
-The left-hand side of this form of `IN` is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors"). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. The left-hand expressions are evaluated and compared row-wise to each row of the subquery result. The result of `IN` is “true” if any equal subquery row is found. The result is “false” if no equal row is found (including the case where the subquery returns no rows).
+The left-hand side of this form of `IN` is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. The left-hand expressions are evaluated and compared row-wise to each row of the subquery result. The result of `IN` is “true” if any equal subquery row is found. The result is “false” if no equal row is found (including the case where the subquery returns no rows).
 
 As usual, null values in the rows are combined per the normal rules of SQL Boolean expressions. Two rows are considered equal if all their corresponding members are non-null and equal; the rows are unequal if any corresponding members are non-null and unequal; otherwise the result of that row comparison is unknown (null). If all the per-row results are either unequal or null, with at least one null, then the result of `IN` is null.
+
+[#id](#FUNCTIONS-SUBQUERY-NOTIN)
 
 ### 9.23.3. `NOT IN` [#](#FUNCTIONS-SUBQUERY-NOTIN)
 
@@ -73,9 +83,11 @@ As with `EXISTS`, it's unwise to assume that the subquery will be evaluated comp
 row_constructor NOT IN (subquery)
 ```
 
-The left-hand side of this form of `NOT IN` is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors"). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. The left-hand expressions are evaluated and compared row-wise to each row of the subquery result. The result of `NOT IN` is “true” if only unequal subquery rows are found (including the case where the subquery returns no rows). The result is “false” if any equal row is found.
+The left-hand side of this form of `NOT IN` is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. The left-hand expressions are evaluated and compared row-wise to each row of the subquery result. The result of `NOT IN` is “true” if only unequal subquery rows are found (including the case where the subquery returns no rows). The result is “false” if any equal row is found.
 
 As usual, null values in the rows are combined per the normal rules of SQL Boolean expressions. Two rows are considered equal if all their corresponding members are non-null and equal; the rows are unequal if any corresponding members are non-null and unequal; otherwise the result of that row comparison is unknown (null). If all the per-row results are either unequal or null, with at least one null, then the result of `NOT IN` is null.
+
+[#id](#FUNCTIONS-SUBQUERY-ANY-SOME)
 
 ### 9.23.4. `ANY`/`SOME` [#](#FUNCTIONS-SUBQUERY-ANY-SOME)
 
@@ -99,9 +111,11 @@ row_constructor operator ANY (subquery)
 row_constructor operator SOME (subquery)
 ```
 
-The left-hand side of this form of `ANY` is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors"). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. The left-hand expressions are evaluated and compared row-wise to each row of the subquery result, using the given *`operator`*. The result of `ANY` is “true” if the comparison returns true for any subquery row. The result is “false” if the comparison returns false for every subquery row (including the case where the subquery returns no rows). The result is NULL if no comparison with a subquery row returns true, and at least one comparison returns NULL.
+The left-hand side of this form of `ANY` is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. The left-hand expressions are evaluated and compared row-wise to each row of the subquery result, using the given *`operator`*. The result of `ANY` is “true” if the comparison returns true for any subquery row. The result is “false” if the comparison returns false for every subquery row (including the case where the subquery returns no rows). The result is NULL if no comparison with a subquery row returns true, and at least one comparison returns NULL.
 
-See [Section 9.24.5](functions-comparisons#ROW-WISE-COMPARISON "9.24.5. Row Constructor Comparison") for details about the meaning of a row constructor comparison.
+See [Section 9.24.5](functions-comparisons#ROW-WISE-COMPARISON) for details about the meaning of a row constructor comparison.
+
+[#id](#FUNCTIONS-SUBQUERY-ALL)
 
 ### 9.23.5. `ALL` [#](#FUNCTIONS-SUBQUERY-ALL)
 
@@ -121,17 +135,21 @@ As with `EXISTS`, it's unwise to assume that the subquery will be evaluated comp
 row_constructor operator ALL (subquery)
 ```
 
-The left-hand side of this form of `ALL` is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors"). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. The left-hand expressions are evaluated and compared row-wise to each row of the subquery result, using the given *`operator`*. The result of `ALL` is “true” if the comparison returns true for all subquery rows (including the case where the subquery returns no rows). The result is “false” if the comparison returns false for any subquery row. The result is NULL if no comparison with a subquery row returns false, and at least one comparison returns NULL.
+The left-hand side of this form of `ALL` is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. The left-hand expressions are evaluated and compared row-wise to each row of the subquery result, using the given *`operator`*. The result of `ALL` is “true” if the comparison returns true for all subquery rows (including the case where the subquery returns no rows). The result is “false” if the comparison returns false for any subquery row. The result is NULL if no comparison with a subquery row returns false, and at least one comparison returns NULL.
 
-See [Section 9.24.5](functions-comparisons#ROW-WISE-COMPARISON "9.24.5. Row Constructor Comparison") for details about the meaning of a row constructor comparison.
+See [Section 9.24.5](functions-comparisons#ROW-WISE-COMPARISON) for details about the meaning of a row constructor comparison.
+
+[#id](#FUNCTIONS-SUBQUERY-SINGLE-ROW-COMP)
 
 ### 9.23.6. Single-Row Comparison [#](#FUNCTIONS-SUBQUERY-SINGLE-ROW-COMP)
+
+
 
 ```
 
 row_constructor operator (subquery)
 ```
 
-The left-hand side is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS "4.2.13. Row Constructors"). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. Furthermore, the subquery cannot return more than one row. (If it returns zero rows, the result is taken to be null.) The left-hand side is evaluated and compared row-wise to the single subquery result row.
+The left-hand side is a row constructor, as described in [Section 4.2.13](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS). The right-hand side is a parenthesized subquery, which must return exactly as many columns as there are expressions in the left-hand row. Furthermore, the subquery cannot return more than one row. (If it returns zero rows, the result is taken to be null.) The left-hand side is evaluated and compared row-wise to the single subquery result row.
 
-See [Section 9.24.5](functions-comparisons#ROW-WISE-COMPARISON "9.24.5. Row Constructor Comparison") for details about the meaning of a row constructor comparison.
+See [Section 9.24.5](functions-comparisons#ROW-WISE-COMPARISON) for details about the meaning of a row constructor comparison.

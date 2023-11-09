@@ -1,6 +1,10 @@
+[#id](#BOOKINDEX)
+
 # Index
 
 [Symbols](#indexdiv-Symbols) | [A](#indexdiv-A) | [B](#indexdiv-B) | [C](#indexdiv-C) | [D](#indexdiv-D) | [E](#indexdiv-E) | [F](#indexdiv-F) | [G](#indexdiv-G) | [H](#indexdiv-H) | [I](#indexdiv-I) | [J](#indexdiv-J) | [K](#indexdiv-K) | [L](#indexdiv-L) | [M](#indexdiv-M) | [N](#indexdiv-N) | [O](#indexdiv-O) | [P](#indexdiv-P) | [Q](#indexdiv-Q) | [R](#indexdiv-R) | [S](#indexdiv-S) | [T](#indexdiv-T) | [U](#indexdiv-U) | [V](#indexdiv-V) | [W](#indexdiv-W) | [X](#indexdiv-X) | [Y](#indexdiv-Y) | [Z](#indexdiv-Z)
+
+[#id](#indexdiv-Symbols)
 
 ### Symbols
 
@@ -14,6 +18,8 @@
   * \_PG\_archive\_module\_init, [Initialization Functions](archive-module-init)
   * \_PG\_init, [Dynamic Loading](xfunc-c#XFUNC-C-DYNLOAD)
   * \_PG\_output\_plugin\_init, [Initialization Function](logicaldecoding-output-plugin#LOGICALDECODING-OUTPUT-INIT)
+
+[#id](#indexdiv-A)
 
 ### A
 
@@ -31,44 +37,38 @@
   * acosh, [Mathematical Functions and Operators](functions-math)
   * administration tools
 
-    
-
-  * externally maintained, [Administration Tools](external-admin-tools)
+  - externally maintained, [Administration Tools](external-admin-tools)
 
   * adminpack, [adminpack — pgAdmin support toolpack](adminpack)
   * advisory lock, [Advisory Locks](explicit-locking#ADVISORY-LOCKS)
   * age, [Date/Time Functions and Operators](functions-datetime)
   * aggregate function, [Aggregate Functions](tutorial-agg), [Aggregate Expressions](sql-expressions#SYNTAX-AGGREGATES), [Aggregate Functions](functions-aggregate), [User-Defined Aggregates](xaggr)
 
-    
-
-  * built-in, [Aggregate Functions](functions-aggregate)
-    * invocation, [Aggregate Expressions](sql-expressions#SYNTAX-AGGREGATES)
-    * moving aggregate, [Moving-Aggregate Mode](xaggr#XAGGR-MOVING-AGGREGATES)
-    * ordered set, [Ordered-Set Aggregates](xaggr#XAGGR-ORDERED-SET-AGGREGATES)
-    * partial aggregation, [Partial Aggregation](xaggr#XAGGR-PARTIAL-AGGREGATES)
-    * polymorphic, [Polymorphic and Variadic Aggregates](xaggr#XAGGR-POLYMORPHIC-AGGREGATES)
-    * support functions for, [Support Functions for Aggregates](xaggr#XAGGR-SUPPORT-FUNCTIONS)
-    * user-defined, [User-Defined Aggregates](xaggr)
-    * variadic, [Polymorphic and Variadic Aggregates](xaggr#XAGGR-POLYMORPHIC-AGGREGATES)
+    - built-in, [Aggregate Functions](functions-aggregate)
+    - invocation, [Aggregate Expressions](sql-expressions#SYNTAX-AGGREGATES)
+    - moving aggregate, [Moving-Aggregate Mode](xaggr#XAGGR-MOVING-AGGREGATES)
+    - ordered set, [Ordered-Set Aggregates](xaggr#XAGGR-ORDERED-SET-AGGREGATES)
+    - partial aggregation, [Partial Aggregation](xaggr#XAGGR-PARTIAL-AGGREGATES)
+    - polymorphic, [Polymorphic and Variadic Aggregates](xaggr#XAGGR-POLYMORPHIC-AGGREGATES)
+    - support functions for, [Support Functions for Aggregates](xaggr#XAGGR-SUPPORT-FUNCTIONS)
+    - user-defined, [User-Defined Aggregates](xaggr)
+    - variadic, [Polymorphic and Variadic Aggregates](xaggr#XAGGR-POLYMORPHIC-AGGREGATES)
 
 * AIX, [AIX](installation-platform-notes#INSTALLATION-NOTES-AIX)
 
-  * installation on, [AIX](installation-platform-notes#INSTALLATION-NOTES-AIX)
+    * installation on, [AIX](installation-platform-notes#INSTALLATION-NOTES-AIX)
     * IPC configuration, [Shared Memory and Semaphores](kernel-resources#SYSVIPC)
 
   * akeys, [hstore Operators and Functions](hstore#HSTORE-OPS-FUNCS)
   * alias, [Table and Column Aliases](queries-table-expressions#QUERIES-TABLE-ALIASES), [Column Labels](queries-select-lists#QUERIES-COLUMN-LABELS)
 
-    
-
-  * for table name in query, [Joins Between Tables](tutorial-join)
-    * in the FROM clause, [Table and Column Aliases](queries-table-expressions#QUERIES-TABLE-ALIASES)
-    * in the select list, [Column Labels](queries-select-lists#QUERIES-COLUMN-LABELS)
+    - for table name in query, [Joins Between Tables](tutorial-join)
+    - in the FROM clause, [Table and Column Aliases](queries-table-expressions#QUERIES-TABLE-ALIASES)
+    - in the select list, [Column Labels](queries-select-lists#QUERIES-COLUMN-LABELS)
 
 * ALL, [GROUPING SETS, CUBE, and ROLLUP](queries-table-expressions#QUERIES-GROUPING-SETS), [DISTINCT](queries-select-lists#QUERIES-DISTINCT), [Subquery Expressions](functions-subquery), [Row and Array Comparisons](functions-comparisons)
 
-  * GROUP BY ALL, [GROUPING SETS, CUBE, and ROLLUP](queries-table-expressions#QUERIES-GROUPING-SETS)
+    * GROUP BY ALL, [GROUPING SETS, CUBE, and ROLLUP](queries-table-expressions#QUERIES-GROUPING-SETS)
     * SELECT ALL, [DISTINCT](queries-select-lists#QUERIES-DISTINCT)
 
   * allow\_in\_place\_tablespaces configuration parameter, [Developer Options](runtime-config-developer)
@@ -146,16 +146,14 @@
   * armor, [armor(), dearmor()](pgcrypto#PGCRYPTO-PGP-ENC-FUNCS-ARMOR)
   * array, [Arrays](arrays)
 
-    
-
-  * accessing, [Accessing Arrays](arrays#ARRAYS-ACCESSING)
-    * constant, [Array Value Input](arrays#ARRAYS-INPUT)
-    * constructor, [Array Constructors](sql-expressions#SQL-SYNTAX-ARRAY-CONSTRUCTORS)
-    * declaration, [Declaration of Array Types](arrays#ARRAYS-DECLARATION)
-    * I/O, [Array Input and Output Syntax](arrays#ARRAYS-IO)
-    * modifying, [Modifying Arrays](arrays#ARRAYS-MODIFYING)
-    * of user-defined type, [User-Defined Types](xtypes)
-    * searching, [Searching in Arrays](arrays#ARRAYS-SEARCHING)
+    - accessing, [Accessing Arrays](arrays#ARRAYS-ACCESSING)
+    - constant, [Array Value Input](arrays#ARRAYS-INPUT)
+    - constructor, [Array Constructors](sql-expressions#SQL-SYNTAX-ARRAY-CONSTRUCTORS)
+    - declaration, [Declaration of Array Types](arrays#ARRAYS-DECLARATION)
+    - I/O, [Array Input and Output Syntax](arrays#ARRAYS-IO)
+    - modifying, [Modifying Arrays](arrays#ARRAYS-MODIFYING)
+    - of user-defined type, [User-Defined Types](xtypes)
+    - searching, [Searching in Arrays](arrays#ARRAYS-SEARCHING)
 
 * ARRAY, [Array Constructors](sql-expressions#SQL-SYNTAX-ARRAY-CONSTRUCTORS), [UNION, CASE, and Related Constructs](typeconv-union-case)
 
@@ -187,17 +185,14 @@
   * asinh, [Mathematical Functions and Operators](functions-math)
   * ASSERT
 
-    
-
-  * in PL/pgSQL, [Checking Assertions](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-ASSERT)
+  - in PL/pgSQL, [Checking Assertions](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-ASSERT)
 
 * assertions
 
   * in PL/pgSQL, [Checking Assertions](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-ASSERT)
 
   * asynchronous commit, [Asynchronous Commit](wal-async-commit)
-  * AT LOCAL, [AT TIME ZONE and AT LOCAL](functions-datetime#FUNCTIONS-DATETIME-ZONECONVERT)
-  * AT TIME ZONE, [AT TIME ZONE and AT LOCAL](functions-datetime#FUNCTIONS-DATETIME-ZONECONVERT)
+  * AT TIME ZONE, [AT TIME ZONE](functions-datetime#FUNCTIONS-DATETIME-ZONECONVERT)
   * atan, [Mathematical Functions and Operators](functions-math)
   * atan2, [Mathematical Functions and Operators](functions-math)
   * atan2d, [Mathematical Functions and Operators](functions-math)
@@ -206,86 +201,74 @@
   * authentication\_timeout configuration parameter, [Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
   * auth\_delay, [auth\_delay — pause on authentication failure](auth-delay)
   * auth\_delay.milliseconds configuration parameter, [Configuration Parameters](auth-delay#AUTH-DELAY-CONFIGURATION-PARAMETERS)
-  * auto-increment (see [serial](#ientry-idp105553307046783))
+  * auto-increment (see [serial](#ientry-idm2891015624))
   * autocommit
 
-    
-
-  * bulk-loading data, [Disable Autocommit](populate#DISABLE-AUTOCOMMIT)
-    * psql, [Variables](app-psql#APP-PSQL-VARIABLES)
+    - bulk-loading data, [Disable Autocommit](populate#DISABLE-AUTOCOMMIT)
+    - psql, [Variables](app-psql#APP-PSQL-VARIABLES)
 
   * autosummarize storage parameter, [Index Storage Parameters](sql-createindex#SQL-CREATEINDEX-STORAGE-PARAMETERS)
   * autovacuum
 
-    
-
-  * configuration parameters, [Automatic Vacuuming](runtime-config-autovacuum)
-    * general information, [The Autovacuum Daemon](routine-vacuuming#AUTOVACUUM)
+    - configuration parameters, [Automatic Vacuuming](runtime-config-autovacuum)
+    - general information, [The Autovacuum Daemon](routine-vacuuming#AUTOVACUUM)
 
   * autovacuum configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
   * autovacuum\_analyze\_scale\_factor
 
-    
-
-  * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
-    * storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
+    - configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
+    - storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
 
 * autovacuum\_analyze\_threshold
 
-  * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
+    * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
     * storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
 
   * autovacuum\_enabled storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
   * autovacuum\_freeze\_max\_age
 
-    
-
-  * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
-    * storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
+    - configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
+    - storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
 
   * autovacuum\_freeze\_min\_age storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
   * autovacuum\_freeze\_table\_age storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
   * autovacuum\_max\_workers configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
   * autovacuum\_multixact\_freeze\_max\_age
 
-    
-
-  * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
-    * storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
+    - configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
+    - storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
 
   * autovacuum\_multixact\_freeze\_min\_age storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
   * autovacuum\_multixact\_freeze\_table\_age storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
   * autovacuum\_naptime configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
   * autovacuum\_vacuum\_cost\_delay
 
-    
-
-  * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
-    * storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
+    - configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
+    - storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
 
 * autovacuum\_vacuum\_cost\_limit
 
-  * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
+    * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
     * storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
 
 * autovacuum\_vacuum\_insert\_scale\_factor
 
-  * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
+    * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
     * storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
 
 * autovacuum\_vacuum\_insert\_threshold
 
-  * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
+    * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
     * storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
 
 * autovacuum\_vacuum\_scale\_factor
 
-  * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
+    * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
     * storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
 
 * autovacuum\_vacuum\_threshold
 
-  * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
+    * configuration parameter, [Automatic Vacuuming](runtime-config-autovacuum)
     * storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
 
   * autovacuum\_work\_mem configuration parameter, [Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
@@ -307,9 +290,11 @@
   * average, [Aggregate Functions](functions-aggregate)
   * avg, [Aggregate Functions](functions-aggregate)
 
+[#id](#indexdiv-B)
+
 ### B
 
-  * B-Tree (see [index](#ientry-idp105553510265215))
+  * B-Tree (see [index](#ientry-idm2877840120))
   * backend\_flush\_after configuration parameter, [Asynchronous Behavior](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-ASYNC-BEHAVIOR)
   * Background workers, [Background Worker Processes](bgworker)
   * backslash escapes, [String Constants with C-Style Escapes](sql-syntax-lexical#SQL-SYNTAX-STRINGS-ESCAPE)
@@ -327,9 +312,7 @@
   * basic\_archive.archive\_directory configuration parameter, [Configuration Parameters](basic-archive#BASIC-ARCHIVE-CONFIGURATION-PARAMETERS)
   * batch mode, [Pipeline Mode](libpq-pipeline-mode)
 
-    
-
-  * in libpq, [Pipeline Mode](libpq-pipeline-mode)
+  - in libpq, [Pipeline Mode](libpq-pipeline-mode)
 
   * BEGIN, [BEGIN](sql-begin)
   * BETWEEN, [Comparison Functions and Operators](functions-comparison)
@@ -344,24 +327,20 @@
   * bigserial, [Serial Types](datatype-numeric#DATATYPE-SERIAL)
   * binary data, [Binary Data Types](datatype-binary), [Binary String Functions and Operators](functions-binarystring)
 
-    
-
-  * functions, [Binary String Functions and Operators](functions-binarystring)
+  - functions, [Binary String Functions and Operators](functions-binarystring)
 
 * binary string
 
-  * concatenation, [Binary String Functions and Operators](functions-binarystring)
+    * concatenation, [Binary String Functions and Operators](functions-binarystring)
     * converting to character string, [Binary String Functions and Operators](functions-binarystring)
     * length, [Binary String Functions and Operators](functions-binarystring)
 
   * bison, [Requirements](install-requirements)
   * bit string, [Bit-String Constants](sql-syntax-lexical#SQL-SYNTAX-BIT-STRINGS), [Bit String Types](datatype-bit)
 
-    
-
-  * constant, [Bit-String Constants](sql-syntax-lexical#SQL-SYNTAX-BIT-STRINGS)
-    * data type, [Bit String Types](datatype-bit)
-    * length, [Bit String Functions and Operators](functions-bitstring)
+    - constant, [Bit-String Constants](sql-syntax-lexical#SQL-SYNTAX-BIT-STRINGS)
+    - data type, [Bit String Types](datatype-bit)
+    - length, [Bit String Functions and Operators](functions-bitstring)
 
 * bit strings, [Bit String Functions and Operators](functions-bitstring)
 
@@ -373,31 +352,27 @@
   * bit\_length, [String Functions and Operators](functions-string), [Binary String Functions and Operators](functions-binarystring), [Bit String Functions and Operators](functions-bitstring)
   * bit\_or, [Aggregate Functions](functions-aggregate)
   * bit\_xor, [Aggregate Functions](functions-aggregate)
-  * BLOB (see [large object](#ientry-idp105553710311423))
+  * BLOB (see [large object](#ientry-idm2859647848))
   * block\_size configuration parameter, [Preset Options](runtime-config-preset)
   * bloom, [bloom — bloom filter index access method](bloom)
   * bonjour configuration parameter, [Connection Settings](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-SETTINGS)
   * bonjour\_name configuration parameter, [Connection Settings](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-SETTINGS)
   * Boolean, [Boolean Type](datatype-boolean)
 
-    
-
-  * data type, [Boolean Type](datatype-boolean)
-    * operators (see operators, logical)
+    - data type, [Boolean Type](datatype-boolean)
+    - operators (see operators, logical)
 
   * bool\_and, [Aggregate Functions](functions-aggregate)
   * bool\_or, [Aggregate Functions](functions-aggregate)
   * booting
 
-    
-
-  * starting the server during, [Starting the Database Server](server-start)
+  - starting the server during, [Starting the Database Server](server-start)
 
   * bound\_box, [Geometric Functions and Operators](functions-geometry)
   * box, [Geometric Functions and Operators](functions-geometry)
   * box (data type), [Boxes](datatype-geometric#DATATYPE-GEOMETRIC-BOXES)
   * bpchar, [Character Types](datatype-character)
-  * BRIN (see [index](#ientry-idp105553510265215))
+  * BRIN (see [index](#ientry-idm2877840120))
   * brin\_desummarize\_range, [Index Maintenance Functions](functions-admin#FUNCTIONS-ADMIN-INDEX)
   * brin\_metapage\_info, [BRIN Functions](pageinspect#PAGEINSPECT-BRIN-FUNCS)
   * brin\_page\_items, [BRIN Functions](pageinspect#PAGEINSPECT-BRIN-FUNCS)
@@ -420,6 +395,8 @@
   * bytea, [Binary Data Types](datatype-binary)
   * bytea\_output configuration parameter, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
+[#id](#indexdiv-C)
+
 ### C
 
   * C, [libpq — C Library](libpq), [ECPG — Embedded SQL in C](ecpg)
@@ -427,24 +404,18 @@
   * CALL, [CALL](sql-call)
   * canceling, [Canceling Queries in Progress](libpq-cancel)
 
-    
-
-  * SQL command, [Canceling Queries in Progress](libpq-cancel)
+  - SQL command, [Canceling Queries in Progress](libpq-cancel)
 
   * cardinality, [Array Functions and Operators](functions-array)
   * CASCADE, [Dependency Tracking](ddl-depend)
 
-    
-
-  * with DROP, [Dependency Tracking](ddl-depend)
-    * foreign key action, [Foreign Keys](ddl-constraints#DDL-CONSTRAINTS-FK)
+    - with DROP, [Dependency Tracking](ddl-depend)
+    - foreign key action, [Foreign Keys](ddl-constraints#DDL-CONSTRAINTS-FK)
 
   * Cascading Replication, [High Availability, Load Balancing, and Replication](high-availability)
   * CASE, [Conditional Expressions](functions-conditional), [UNION, CASE, and Related Constructs](typeconv-union-case)
 
-    
-
-  * determination of result type, [UNION, CASE, and Related Constructs](typeconv-union-case)
+  - determination of result type, [UNION, CASE, and Related Constructs](typeconv-union-case)
 
 * case sensitivity
 
@@ -461,23 +432,19 @@
   * Certificate, [Certificate Authentication](auth-cert)
   * chained transactions, [Transaction Management](plpgsql-transactions#PLPGSQL-TRANSACTION-CHAIN), [Parameters](sql-commit#SQL-COMMIT-CHAIN), [Parameters](sql-rollback#SQL-ROLLBACK-CHAIN)
 
-    
-
-  * in PL/pgSQL, [Transaction Management](plpgsql-transactions#PLPGSQL-TRANSACTION-CHAIN)
+  - in PL/pgSQL, [Transaction Management](plpgsql-transactions#PLPGSQL-TRANSACTION-CHAIN)
 
   * char, [Character Types](datatype-character)
   * character, [Character Types](datatype-character)
   * character set, [Locale and Formatting](runtime-config-client#RUNTIME-CONFIG-CLIENT-FORMAT), [Preset Options](runtime-config-preset), [Character Set Support](multibyte)
   * character string, [String Constants](sql-syntax-lexical#SQL-SYNTAX-STRINGS), [Character Types](datatype-character)
 
-    
-
-  * concatenation, [String Functions and Operators](functions-string)
-    * constant, [String Constants](sql-syntax-lexical#SQL-SYNTAX-STRINGS)
-    * converting to binary string, [Binary String Functions and Operators](functions-binarystring)
-    * data types, [Character Types](datatype-character)
-    * length, [String Functions and Operators](functions-string)
-    * prefix test, [String Functions and Operators](functions-string)
+    - concatenation, [String Functions and Operators](functions-string)
+    - constant, [String Constants](sql-syntax-lexical#SQL-SYNTAX-STRINGS)
+    - converting to binary string, [Binary String Functions and Operators](functions-binarystring)
+    - data types, [Character Types](datatype-character)
+    - length, [String Functions and Operators](functions-string)
+    - prefix test, [String Functions and Operators](functions-string)
 
   * character varying, [Character Types](datatype-character)
   * character\_length, [String Functions and Operators](functions-string)
@@ -499,9 +466,7 @@
   * citext, [citext — a case-insensitive character string type](citext)
   * client authentication, [Client Authentication](client-authentication)
 
-    
-
-  * timeout during, [Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
+  - timeout during, [Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
 
   * client\_connection\_check\_interval configuration parameter, [TCP Settings](runtime-config-connection#RUNTIME-CONFIG-TCP-SETTINGS)
   * client\_encoding configuration parameter, [Locale and Formatting](runtime-config-client#RUNTIME-CONFIG-CLIENT-FORMAT)
@@ -510,9 +475,7 @@
   * CLOSE, [CLOSE](sql-close)
   * cluster
 
-    
-
-  * of databases (see [database cluster](#ientry-idp105553308565119))
+  - of databases (see [database cluster](#ientry-idm2894272200))
 
   * CLUSTER, [CLUSTER](sql-cluster)
   * clusterdb, [clusterdb](app-clusterdb)
@@ -524,21 +487,17 @@
   * COLLATE, [Collation Expressions](sql-expressions#SQL-SYNTAX-COLLATE-EXPRS)
   * collation, [Collation Support](collation)
 
-    
-
-  * in PL/pgSQL, [Collation of PL/pgSQL Variables](plpgsql-declarations#PLPGSQL-DECLARATION-COLLATION)
-    * in SQL functions, [SQL Functions with Collations](xfunc-sql#XFUNC-SQL-COLLATIONS)
+    - in PL/pgSQL, [Collation of PL/pgSQL Variables](plpgsql-declarations#PLPGSQL-DECLARATION-COLLATION)
+    - in SQL functions, [SQL Functions with Collations](xfunc-sql#XFUNC-SQL-COLLATIONS)
 
   * COLLATION FOR, [System Catalog Information Functions](functions-info#FUNCTIONS-INFO-CATALOG)
   * color, [Color Support](color)
   * column, [Concepts](tutorial-concepts), [Table Basics](ddl-basics)
 
-    
-
-  * adding, [Adding a Column](ddl-alter#DDL-ALTER-ADDING-A-COLUMN)
-    * removing, [Removing a Column](ddl-alter#DDL-ALTER-REMOVING-A-COLUMN)
-    * renaming, [Renaming a Column](ddl-alter#DDL-ALTER-RENAMING-COLUMN)
-    * system column, [System Columns](ddl-system-columns)
+    - adding, [Adding a Column](ddl-alter#DDL-ALTER-ADDING-A-COLUMN)
+    - removing, [Removing a Column](ddl-alter#DDL-ALTER-REMOVING-A-COLUMN)
+    - renaming, [Renaming a Column](ddl-alter#DDL-ALTER-RENAMING-COLUMN)
+    - system column, [System Columns](ddl-system-columns)
 
 * column data type
 
@@ -548,25 +507,21 @@
   * col\_description, [Comment Information Functions](functions-info#FUNCTIONS-INFO-COMMENT)
   * comment, [Comments](sql-syntax-lexical#SQL-SYNTAX-COMMENTS)
 
-    
-
-  * about database objects, [Comment Information Functions](functions-info#FUNCTIONS-INFO-COMMENT)
-    * in SQL, [Comments](sql-syntax-lexical#SQL-SYNTAX-COMMENTS)
+    - about database objects, [Comment Information Functions](functions-info#FUNCTIONS-INFO-COMMENT)
+    - in SQL, [Comments](sql-syntax-lexical#SQL-SYNTAX-COMMENTS)
 
   * COMMENT, [COMMENT](sql-comment)
   * COMMIT, [COMMIT](sql-commit)
   * COMMIT PREPARED, [COMMIT PREPARED](sql-commit-prepared)
   * commit\_delay configuration parameter, [Settings](runtime-config-wal#RUNTIME-CONFIG-WAL-SETTINGS)
   * commit\_siblings configuration parameter, [Settings](runtime-config-wal#RUNTIME-CONFIG-WAL-SETTINGS)
-  * common table expression (see [WITH](#ientry-idp105553306362495))
+  * common table expression (see [WITH](#ientry-idm2891469176))
   * comparison, [Comparison Functions and Operators](functions-comparison), [Subquery Expressions](functions-subquery)
 
-    
-
-  * composite type, [Row and Array Comparisons](functions-comparisons)
-    * operators, [Comparison Functions and Operators](functions-comparison)
-    * row constructor, [Row and Array Comparisons](functions-comparisons)
-    * subquery result row, [Subquery Expressions](functions-subquery)
+    - composite type, [Row and Array Comparisons](functions-comparisons)
+    - operators, [Comparison Functions and Operators](functions-comparison)
+    - row constructor, [Row and Array Comparisons](functions-comparisons)
+    - subquery result row, [Subquery Expressions](functions-subquery)
 
 * compiling, [Building libpq Programs](libpq-build)
 
@@ -574,7 +529,7 @@
 
 * composite type, [Composite Types](rowtypes), [The PostgreSQL Type System](extend-type-system)
 
-  * comparison, [Row and Array Comparisons](functions-comparisons)
+    * comparison, [Row and Array Comparisons](functions-comparisons)
     * constant, [Constructing Composite Values](rowtypes#ROWTYPES-CONSTRUCTING)
     * constructor, [Row Constructors](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS)
 
@@ -586,19 +541,15 @@
   * conditional expression, [Conditional Expressions](functions-conditional)
   * configuration
 
-    
-
-  * of recovery
+  - of recovery
 
       * general settings, [Recovery](runtime-config-wal#RUNTIME-CONFIG-WAL-RECOVERY)
       * of a standby server, [Archive Recovery](runtime-config-wal#RUNTIME-CONFIG-WAL-ARCHIVE-RECOVERY)
 
-  * of the server, [Server Configuration](runtime-config)
+  - * of the server, [Server Configuration](runtime-config)
     * of the server
 
-        
-
-    * functions, [Configuration Settings Functions](functions-admin#FUNCTIONS-ADMIN-SET)
+    - functions, [Configuration Settings Functions](functions-admin#FUNCTIONS-ADMIN-SET)
 
   * configure, [Installation Procedure](install-make#CONFIGURE)
   * configure environment variables, [configure Environment Variables](install-make#CONFIGURE-ENVVARS)
@@ -611,26 +562,22 @@
   * constant, [Constants](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS)
   * constraint, [Constraints](ddl-constraints)
 
-    
-
-  * adding, [Adding a Constraint](ddl-alter#DDL-ALTER-ADDING-A-CONSTRAINT)
-    * check, [Check Constraints](ddl-constraints#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
-    * exclusion, [Exclusion Constraints](ddl-constraints#DDL-CONSTRAINTS-EXCLUSION)
-    * foreign key, [Foreign Keys](ddl-constraints#DDL-CONSTRAINTS-FK)
-    * name, [Check Constraints](ddl-constraints#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
-    * NOT NULL, [Not-Null Constraints](ddl-constraints#DDL-CONSTRAINTS-NOT-NULL)
-    * primary key, [Primary Keys](ddl-constraints#DDL-CONSTRAINTS-PRIMARY-KEYS)
-    * removing, [Removing a Constraint](ddl-alter#DDL-ALTER-REMOVING-A-CONSTRAINT)
-    * unique, [Unique Constraints](ddl-constraints#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS)
+    - adding, [Adding a Constraint](ddl-alter#DDL-ALTER-ADDING-A-CONSTRAINT)
+    - check, [Check Constraints](ddl-constraints#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
+    - exclusion, [Exclusion Constraints](ddl-constraints#DDL-CONSTRAINTS-EXCLUSION)
+    - foreign key, [Foreign Keys](ddl-constraints#DDL-CONSTRAINTS-FK)
+    - name, [Check Constraints](ddl-constraints#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
+    - NOT NULL, [Not-Null Constraints](ddl-constraints#DDL-CONSTRAINTS-NOT-NULL)
+    - primary key, [Primary Keys](ddl-constraints#DDL-CONSTRAINTS-PRIMARY-KEYS)
+    - removing, [Removing a Constraint](ddl-alter#DDL-ALTER-REMOVING-A-CONSTRAINT)
+    - unique, [Unique Constraints](ddl-constraints#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS)
 
   * constraint exclusion, [Partitioning and Constraint Exclusion](ddl-partitioning#DDL-PARTITIONING-CONSTRAINT-EXCLUSION), [Other Planner Options](runtime-config-query#RUNTIME-CONFIG-QUERY-OTHER)
   * constraint\_exclusion configuration parameter, [Other Planner Options](runtime-config-query#RUNTIME-CONFIG-QUERY-OTHER)
   * container type, [The PostgreSQL Type System](extend-type-system)
   * CONTINUE
 
-    
-
-  * in PL/pgSQL, [CONTINUE](plpgsql-control-structures#PLPGSQL-CONTROL-STRUCTURES-LOOPS-CONTINUE)
+  - in PL/pgSQL, [CONTINUE](plpgsql-control-structures#PLPGSQL-CONTROL-STRUCTURES-LOOPS-CONTINUE)
 
 * continuous archiving, [Backup and Restore](backup)
 
@@ -642,16 +589,12 @@
   * convert\_to, [Binary String Functions and Operators](functions-binarystring)
   * COPY, [Populating a Table With Rows](tutorial-populate), [Functions Associated with the COPY Command](libpq-copy), [COPY](sql-copy)
 
-    
-
-  * with libpq, [Functions Associated with the COPY Command](libpq-copy)
+  - with libpq, [Functions Associated with the COPY Command](libpq-copy)
 
   * corr, [Aggregate Functions](functions-aggregate)
   * correlation, [Aggregate Functions](functions-aggregate)
 
-    
-
-  * in the query planner, [Extended Statistics](planner-stats#PLANNER-STATS-EXTENDED)
+  - in the query planner, [Extended Statistics](planner-stats#PLANNER-STATS-EXTENDED)
 
   * cos, [Mathematical Functions and Operators](functions-math)
   * cosd, [Mathematical Functions and Operators](functions-math)
@@ -661,10 +604,8 @@
   * count, [Aggregate Functions](functions-aggregate)
   * covariance
 
-    
-
-  * population, [Aggregate Functions](functions-aggregate)
-    * sample, [Aggregate Functions](functions-aggregate)
+    - population, [Aggregate Functions](functions-aggregate)
+    - sample, [Aggregate Functions](functions-aggregate)
 
   * covar\_pop, [Aggregate Functions](functions-aggregate)
   * covar\_samp, [Aggregate Functions](functions-aggregate)
@@ -717,9 +658,7 @@
   * createdb, [Creating a Database](tutorial-createdb), [Creating a Database](manage-ag-createdb), [createdb](app-createdb)
   * createrole\_self\_grant
 
-    
-
-  * configuration parameter, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
+  - configuration parameter, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
 * createrole\_self\_grant configuration parameter
 
@@ -734,9 +673,7 @@
   * cstring, [Pseudo-Types](datatype-pseudo)
   * CSV (Comma-Separated Values) format
 
-    
-
-  * in psql, [Meta-Commands](app-psql#APP-PSQL-META-COMMANDS)
+  - in psql, [Meta-Commands](app-psql#APP-PSQL-META-COMMANDS)
 
   * ctid, [System Columns](ddl-system-columns)
   * CTID, [View Rules in Non-SELECT Statements](rules-views#RULES-VIEWS-NON-SELECT)
@@ -744,19 +681,15 @@
   * cube (extension), [cube — a multi-dimensional cube data type](cube)
   * cume\_dist, [Window Functions](functions-window)
 
-    
-
-  * hypothetical, [Aggregate Functions](functions-aggregate)
+  - hypothetical, [Aggregate Functions](functions-aggregate)
 
   * current\_catalog, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
   * current\_database, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
   * current\_date, [Date/Time Functions and Operators](functions-datetime)
   * current\_logfiles
 
-    
-
-  * and the log\_destination configuration parameter, [Where to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE)
-    * and the pg\_current\_logfile function, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
+    - and the log\_destination configuration parameter, [Where to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE)
+    - and the pg\_current\_logfile function, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
 
   * current\_query, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
   * current\_role, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
@@ -769,52 +702,48 @@
   * currval, [Sequence Manipulation Functions](functions-sequence)
   * cursor, [Cursors](plpgsql-cursors), [CLOSE](sql-close), [DECLARE](sql-declare), [EXPLAIN](sql-explain), [FETCH](sql-fetch), [MOVE](sql-move)
 
-    
-
-  * CLOSE, [CLOSE](sql-close)
-    * DECLARE, [DECLARE](sql-declare)
-    * FETCH, [FETCH](sql-fetch)
-    * in PL/pgSQL, [Cursors](plpgsql-cursors)
-    * MOVE, [MOVE](sql-move)
-    * showing the query plan, [EXPLAIN](sql-explain)
+    - CLOSE, [CLOSE](sql-close)
+    - DECLARE, [DECLARE](sql-declare)
+    - FETCH, [FETCH](sql-fetch)
+    - in PL/pgSQL, [Cursors](plpgsql-cursors)
+    - MOVE, [MOVE](sql-move)
+    - showing the query plan, [EXPLAIN](sql-explain)
 
   * cursor\_tuple\_fraction configuration parameter, [Other Planner Options](runtime-config-query#RUNTIME-CONFIG-QUERY-OTHER)
   * custom scan provider, [Writing a Custom Scan Provider](custom-scan)
 
-    
-
-  * handler for, [Writing a Custom Scan Provider](custom-scan)
+  - handler for, [Writing a Custom Scan Provider](custom-scan)
 
 * Cygwin, [Cygwin](installation-platform-notes#INSTALLATION-NOTES-CYGWIN)
 
   * installation on, [Cygwin](installation-platform-notes#INSTALLATION-NOTES-CYGWIN)
 
+[#id](#indexdiv-D)
+
 ### D
 
   * daitch\_mokotoff, [Daitch-Mokotoff Soundex](fuzzystrmatch#FUZZYSTRMATCH-DAITCH-MOKOTOFF)
-  * data area (see [database cluster](#ientry-idp105553308565119))
+  * data area (see [database cluster](#ientry-idm2894272200))
   * data partitioning, [High Availability, Load Balancing, and Replication](high-availability)
   * data type, [Data Types](datatype), [Numeric Types](datatype-numeric), [Enumerated Types](datatype-enum), [Domain Types](domains), [Type Conversion](typeconv), [The PostgreSQL Type System](extend-type-system), [The PostgreSQL Type System](extend-type-system), [The PostgreSQL Type System](extend-type-system), [Polymorphic Types](extend-type-system#EXTEND-TYPES-POLYMORPHIC), [Base Types in C-Language Functions](xfunc-c#XFUNC-C-BASETYPE), [User-Defined Types](xtypes)
 
-    
-
-  * base, [The PostgreSQL Type System](extend-type-system)
-    * category, [Overview](typeconv-overview)
-    * composite, [The PostgreSQL Type System](extend-type-system)
-    * constant, [Constants of Other Types](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS-GENERIC)
-    * container, [The PostgreSQL Type System](extend-type-system)
-    * conversion, [Type Conversion](typeconv)
-    * domain, [Domain Types](domains)
-    * enumerated (enum), [Enumerated Types](datatype-enum)
-    * internal organization, [Base Types in C-Language Functions](xfunc-c#XFUNC-C-BASETYPE)
-    * numeric, [Numeric Types](datatype-numeric)
-    * polymorphic, [Polymorphic Types](extend-type-system#EXTEND-TYPES-POLYMORPHIC)
-    * type cast, [Type Casts](sql-expressions#SQL-SYNTAX-TYPE-CASTS)
-    * user-defined, [User-Defined Types](xtypes)
+    - base, [The PostgreSQL Type System](extend-type-system)
+    - category, [Overview](typeconv-overview)
+    - composite, [The PostgreSQL Type System](extend-type-system)
+    - constant, [Constants of Other Types](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS-GENERIC)
+    - container, [The PostgreSQL Type System](extend-type-system)
+    - conversion, [Type Conversion](typeconv)
+    - domain, [Domain Types](domains)
+    - enumerated (enum), [Enumerated Types](datatype-enum)
+    - internal organization, [Base Types in C-Language Functions](xfunc-c#XFUNC-C-BASETYPE)
+    - numeric, [Numeric Types](datatype-numeric)
+    - polymorphic, [Polymorphic Types](extend-type-system#EXTEND-TYPES-POLYMORPHIC)
+    - type cast, [Type Casts](sql-expressions#SQL-SYNTAX-TYPE-CASTS)
+    - user-defined, [User-Defined Types](xtypes)
 
 * database, [Creating a Database](tutorial-createdb), [Managing Databases](managing-databases)
 
-  * creating, [Creating a Database](tutorial-createdb)
+    * creating, [Creating a Database](tutorial-createdb)
     * privilege to create, [Role Attributes](role-attributes)
 
 * database activity, [Monitoring Database Activity](monitoring)
@@ -828,15 +757,11 @@
   * data\_sync\_retry configuration parameter, [Error Handling](runtime-config-error-handling)
   * date, [Date/Time Types](datatype-datetime), [Dates](datatype-datetime#DATATYPE-DATETIME-INPUT-DATES)
 
-    
+    - constants, [Special Values](datatype-datetime#DATATYPE-DATETIME-SPECIAL-VALUES)
+    - current, [Current Date/Time](functions-datetime#FUNCTIONS-DATETIME-CURRENT)
+    - output format, [Date/Time Output](datatype-datetime#DATATYPE-DATETIME-OUTPUT)
 
-  * constants, [Special Values](datatype-datetime#DATATYPE-DATETIME-SPECIAL-VALUES)
-    * current, [Current Date/Time](functions-datetime#FUNCTIONS-DATETIME-CURRENT)
-    * output format, [Date/Time Output](datatype-datetime#DATATYPE-DATETIME-OUTPUT)
-
-        
-
-    * (see also [formatting](#ientry-idp105553373272959))
+    * (see also [formatting](#ientry-idm2886028520))
 
   * DateStyle configuration parameter, [Locale and Formatting](runtime-config-client#RUNTIME-CONFIG-CLIENT-FORMAT)
   * date\_add, [Date/Time Functions and Operators](functions-datetime)
@@ -863,11 +788,10 @@
   * dblink\_is\_busy, [dblink\_is\_busy](contrib-dblink-is-busy)
   * dblink\_open, [dblink\_open](contrib-dblink-open)
   * dblink\_send\_query, [dblink\_send\_query](contrib-dblink-send-query)
+  * db\_user\_namespace configuration parameter, [Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
   * deadlock, [Deadlocks](explicit-locking#LOCKING-DEADLOCKS)
 
-    
-
-  * timeout during, [Lock Management](runtime-config-locks)
+  - timeout during, [Lock Management](runtime-config-locks)
 
   * deadlock\_timeout configuration parameter, [Lock Management](runtime-config-locks)
   * DEALLOCATE, [DEALLOCATE](sql-deallocate)
@@ -882,23 +806,19 @@
   * debug\_print\_parse configuration parameter, [What to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHAT)
   * debug\_print\_plan configuration parameter, [What to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHAT)
   * debug\_print\_rewritten configuration parameter, [What to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHAT)
-  * decimal (see [numeric](#ientry-idp105553308165631))
+  * decimal (see [numeric](#ientry-idm2893788776))
   * DECLARE, [DECLARE](sql-declare)
   * decode, [Binary String Functions and Operators](functions-binarystring)
   * decode\_bytea
 
-    
-
-  * in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
+  - in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
 
   * decrypt, [Raw Encryption Functions](pgcrypto#PGCRYPTO-RAW-ENC-FUNCS)
   * decrypt\_iv, [Raw Encryption Functions](pgcrypto#PGCRYPTO-RAW-ENC-FUNCS)
   * deduplicate\_items storage parameter, [Index Storage Parameters](sql-createindex#SQL-CREATEINDEX-STORAGE-PARAMETERS)
   * default value, [Default Values](ddl-default)
 
-    
-
-  * changing, [Changing a Column's Default Value](ddl-alter#DDL-ALTER-COLUMN-DEFAULT)
+  - changing, [Changing a Column's Default Value](ddl-alter#DDL-ALTER-COLUMN-DEFAULT)
 
   * default-roles, [Default Roles Renamed to Predefined Roles](default-roles)
   * default\_statistics\_target configuration parameter, [Other Planner Options](runtime-config-query#RUNTIME-CONFIG-QUERY-OTHER)
@@ -911,27 +831,21 @@
   * default\_transaction\_read\_only configuration parameter, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
   * deferrable transaction, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
-    
-
-  * setting, [SET TRANSACTION](sql-set-transaction)
-    * setting default, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
+    - setting, [SET TRANSACTION](sql-set-transaction)
+    - setting default, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
   * defined, [hstore Operators and Functions](hstore#HSTORE-OPS-FUNCS)
   * degrees, [Mathematical Functions and Operators](functions-math)
   * delay, [Delaying Execution](functions-datetime#FUNCTIONS-DATETIME-DELAY)
   * DELETE, [Deletions](tutorial-delete), [Deleting Data](dml-delete), [Returning Data from Modified Rows](dml-returning), [DELETE](sql-delete)
 
-    
-
-  * RETURNING, [Returning Data from Modified Rows](dml-returning)
+  - RETURNING, [Returning Data from Modified Rows](dml-returning)
 
   * delete, [hstore Operators and Functions](hstore#HSTORE-OPS-FUNCS)
   * deleting, [Deleting Data](dml-delete)
   * dense\_rank, [Window Functions](functions-window)
 
-    
-
-  * hypothetical, [Aggregate Functions](functions-aggregate)
+  - hypothetical, [Aggregate Functions](functions-aggregate)
 
   * diagonal, [Geometric Functions and Operators](functions-geometry)
   * diameter, [Geometric Functions and Operators](functions-geometry)
@@ -947,10 +861,8 @@
   * disk usage, [Determining Disk Usage](disk-usage)
   * DISTINCT, [Querying a Table](tutorial-select), [GROUPING SETS, CUBE, and ROLLUP](queries-table-expressions#QUERIES-GROUPING-SETS), [DISTINCT](queries-select-lists#QUERIES-DISTINCT)
 
-    
-
-  * GROUP BY DISTINCT, [GROUPING SETS, CUBE, and ROLLUP](queries-table-expressions#QUERIES-GROUPING-SETS)
-    * SELECT DISTINCT, [DISTINCT](queries-select-lists#QUERIES-DISTINCT)
+    - GROUP BY DISTINCT, [GROUPING SETS, CUBE, and ROLLUP](queries-table-expressions#QUERIES-GROUPING-SETS)
+    - SELECT DISTINCT, [DISTINCT](queries-select-lists#QUERIES-DISTINCT)
 
   * div, [Mathematical Functions and Operators](functions-math)
   * dmetaphone, [Double Metaphone](fuzzystrmatch#FUZZYSTRMATCH-DOUBLE-METAPHONE)
@@ -958,9 +870,7 @@
   * DO, [DO](sql-do)
   * document, [What Is a Document?](textsearch-intro#TEXTSEARCH-DOCUMENT)
 
-    
-
-  * text search, [What Is a Document?](textsearch-intro#TEXTSEARCH-DOCUMENT)
+  - text search, [What Is a Document?](textsearch-intro#TEXTSEARCH-DOCUMENT)
 
   * dollar quoting, [Dollar-Quoted String Constants](sql-syntax-lexical#SQL-SYNTAX-DOLLAR-QUOTING)
   * domain, [Domain Types](domains)
@@ -1020,6 +930,8 @@
   * dynamic\_library\_path configuration parameter, [Other Defaults](runtime-config-client#RUNTIME-CONFIG-CLIENT-OTHER)
   * dynamic\_shared\_memory\_type configuration parameter, [Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
 
+[#id](#indexdiv-E)
+
 ### E
 
   * each, [hstore Operators and Functions](hstore#HSTORE-OPS-FUNCS)
@@ -1033,11 +945,9 @@
   * effective\_io\_concurrency configuration parameter, [Asynchronous Behavior](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-ASYNC-BEHAVIOR)
   * elog, [Reporting Errors Within the Server](error-message-reporting)
 
-    
-
-  * in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
-    * in PL/Python, [Utility Functions](plpython-util)
-    * in PL/Tcl, [Database Access from PL/Tcl](pltcl-dbaccess)
+    - in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
+    - in PL/Python, [Utility Functions](plpython-util)
+    - in PL/Tcl, [Database Access from PL/Tcl](pltcl-dbaccess)
 
 * embedded SQL, [ECPG — Embedded SQL in C](ecpg)
 
@@ -1068,9 +978,7 @@
   * encode, [Binary String Functions and Operators](functions-binarystring)
   * encode\_array\_constructor
 
-    
-
-  * in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
+  - in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
 
 * encode\_array\_literal
 
@@ -1087,9 +995,7 @@
   * encrypt, [Raw Encryption Functions](pgcrypto#PGCRYPTO-RAW-ENC-FUNCS)
   * encryption, [Encryption Options](encryption-options), [pgcrypto — cryptographic functions](pgcrypto)
 
-    
-
-  * for specific columns, [pgcrypto — cryptographic functions](pgcrypto)
+  - for specific columns, [pgcrypto — cryptographic functions](pgcrypto)
 
   * encrypt\_iv, [Raw Encryption Functions](pgcrypto#PGCRYPTO-RAW-ENC-FUNCS)
   * END, [END](sql-end)
@@ -1100,20 +1006,16 @@
   * environment variable, [Environment Variables](libpq-envars)
   * ephemeral named relation
 
-    
-
-  * registering with SPI, [SPI\_register\_relation](spi-spi-register-relation), [SPI\_register\_trigger\_data](spi-spi-register-trigger-data)
-    * unregistering from SPI, [SPI\_unregister\_relation](spi-spi-unregister-relation)
+    - registering with SPI, [SPI\_register\_relation](spi-spi-register-relation), [SPI\_register\_trigger\_data](spi-spi-register-trigger-data)
+    - unregistering from SPI, [SPI\_unregister\_relation](spi-spi-unregister-relation)
 
   * ereport, [Reporting Errors Within the Server](error-message-reporting)
   * erf, [Mathematical Functions and Operators](functions-math)
   * erfc, [Mathematical Functions and Operators](functions-math)
   * error codes, [PostgreSQL Error Codes](errcodes-appendix)
 
-    
-
-  * libpq, [Main Functions](libpq-exec#LIBPQ-EXEC-MAIN)
-    * list of, [PostgreSQL Error Codes](errcodes-appendix)
+    - libpq, [Main Functions](libpq-exec#LIBPQ-EXEC-MAIN)
+    - list of, [PostgreSQL Error Codes](errcodes-appendix)
 
   * error message, [Connection Status Functions](libpq-status)
   * escape format, [Binary String Functions and Operators](functions-binarystring)
@@ -1121,9 +1023,7 @@
   * escape\_string\_warning configuration parameter, [Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
   * escaping strings, [Escaping Strings for Inclusion in SQL Commands](libpq-exec#LIBPQ-EXEC-ESCAPE-STRING)
 
-    
-
-  * in libpq, [Escaping Strings for Inclusion in SQL Commands](libpq-exec#LIBPQ-EXEC-ESCAPE-STRING)
+  - in libpq, [Escaping Strings for Inclusion in SQL Commands](libpq-exec#LIBPQ-EXEC-ESCAPE-STRING)
 
 * event log, [Registering Event Log on Windows](event-log-registration)
 
@@ -1131,25 +1031,17 @@
 
 * event trigger, [Event Triggers](event-triggers), [Writing Event Trigger Functions in C](event-trigger-interface)
 
-  * in C, [Writing Event Trigger Functions in C](event-trigger-interface)
+    * in C, [Writing Event Trigger Functions in C](event-trigger-interface)
     * in PL/Tcl, [Event Trigger Functions in PL/Tcl](pltcl-event-trigger)
 
   * event\_source configuration parameter, [Where to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE)
   * event\_trigger, [Pseudo-Types](datatype-pseudo)
-  * event\_triggers
-
-    
-
-  * configuration parameter, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
-
   * every, [Aggregate Functions](functions-aggregate)
   * EXCEPT, [Combining Queries (UNION, INTERSECT, EXCEPT)](queries-union)
   * exceptions
 
-    
-
-  * in PL/pgSQL, [Trapping Errors](plpgsql-control-structures#PLPGSQL-ERROR-TRAPPING)
-    * in PL/Tcl, [Error Handling in PL/Tcl](pltcl-error-handling)
+    - in PL/pgSQL, [Trapping Errors](plpgsql-control-structures#PLPGSQL-ERROR-TRAPPING)
+    - in PL/Tcl, [Error Handling in PL/Tcl](pltcl-error-handling)
 
   * exclusion constraint, [Exclusion Constraints](ddl-constraints#DDL-CONSTRAINTS-EXCLUSION)
   * EXECUTE, [EXECUTE](sql-execute)
@@ -1157,30 +1049,26 @@
   * EXISTS, [Subquery Expressions](functions-subquery)
   * EXIT
 
-    
-
-  * in PL/pgSQL, [EXIT](plpgsql-control-structures#PLPGSQL-CONTROL-STRUCTURES-LOOPS-EXIT)
+  - in PL/pgSQL, [EXIT](plpgsql-control-structures#PLPGSQL-CONTROL-STRUCTURES-LOOPS-EXIT)
 
   * exit\_on\_error configuration parameter, [Error Handling](runtime-config-error-handling)
   * exp, [Mathematical Functions and Operators](functions-math)
   * EXPLAIN, [Using EXPLAIN](using-explain), [EXPLAIN](sql-explain)
   * expression, [Value Expressions](sql-expressions)
 
-    
-
-  * order of evaluation, [Expression Evaluation Rules](sql-expressions#SYNTAX-EXPRESS-EVAL)
-    * syntax, [Value Expressions](sql-expressions)
+    - order of evaluation, [Expression Evaluation Rules](sql-expressions#SYNTAX-EXPRESS-EVAL)
+    - syntax, [Value Expressions](sql-expressions)
 
   * extending SQL, [Extending SQL](extend)
   * extension, [Packaging Related Objects into an Extension](extend-extensions)
 
-    
-
-  * externally maintained, [Extensions](external-extensions)
+  - externally maintained, [Extensions](external-extensions)
 
   * external\_pid\_file configuration parameter, [File Locations](runtime-config-file-locations)
   * extract, [Date/Time Functions and Operators](functions-datetime), [EXTRACT, date\_part](functions-datetime#FUNCTIONS-DATETIME-EXTRACT)
   * extra\_float\_digits configuration parameter, [Locale and Formatting](runtime-config-client#RUNTIME-CONFIG-CLIENT-FORMAT)
+
+[#id](#indexdiv-F)
 
 ### F
 
@@ -1194,9 +1082,7 @@
   * FETCH, [FETCH](sql-fetch)
   * field
 
-    
-
-  * computed, [Using Composite Types in Queries](rowtypes#ROWTYPES-USAGE)
+  - computed, [Using Composite Types in Queries](rowtypes#ROWTYPES-USAGE)
 
   * field selection, [Field Selection](sql-expressions#FIELD-SELECTION)
   * file system mount points, [Use of Secondary File Systems](creating-cluster#CREATING-CLUSTER-MOUNT-POINTS)
@@ -1205,22 +1091,18 @@
   * FILTER, [Aggregate Expressions](sql-expressions#SYNTAX-AGGREGATES)
   * first\_value, [Window Functions](functions-window)
   * flex, [Requirements](install-requirements)
-  * float4 (see [real](#ientry-idp105553306091263))
-  * float8 (see [double precision](#ientry-idp105553307075327))
+  * float4 (see [real](#ientry-idm2891063736))
+  * float8 (see [double precision](#ientry-idm2891062328))
   * floating point, [Floating-Point Types](datatype-numeric#DATATYPE-FLOAT)
   * floating-point
 
-    
-
-  * display, [Locale and Formatting](runtime-config-client#RUNTIME-CONFIG-CLIENT-FORMAT)
+  - display, [Locale and Formatting](runtime-config-client#RUNTIME-CONFIG-CLIENT-FORMAT)
 
   * floor, [Mathematical Functions and Operators](functions-math)
   * foreign data, [Foreign Data](ddl-foreign-data)
   * foreign data wrapper, [Writing a Foreign Data Wrapper](fdwhandler)
 
-    
-
-  * handler for, [Writing a Foreign Data Wrapper](fdwhandler)
+  - handler for, [Writing a Foreign Data Wrapper](fdwhandler)
 
 * foreign key, [Foreign Keys](tutorial-fk), [Foreign Keys](ddl-constraints#DDL-CONSTRAINTS-FK)
 
@@ -1229,62 +1111,54 @@
   * foreign table, [Foreign Data](ddl-foreign-data)
   * format, [String Functions and Operators](functions-string), [format](functions-string#FUNCTIONS-STRING-FORMAT)
 
-    
-
-  * use in PL/pgSQL, [Executing Dynamic Commands](plpgsql-statements#PLPGSQL-STATEMENTS-EXECUTING-DYN)
+  - use in PL/pgSQL, [Executing Dynamic Commands](plpgsql-statements#PLPGSQL-STATEMENTS-EXECUTING-DYN)
 
   * formatting, [Data Type Formatting Functions](functions-formatting)
   * format\_type, [System Catalog Information Functions](functions-info#FUNCTIONS-INFO-CATALOG)
   * Free Space Map, [Free Space Map](storage-fsm)
   * FreeBSD
 
-    
-
-  * IPC configuration, [Shared Memory and Semaphores](kernel-resources#SYSVIPC)
-    * shared library, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
-    * start script, [Starting the Database Server](server-start)
+    - IPC configuration, [Shared Memory and Semaphores](kernel-resources#SYSVIPC)
+    - shared library, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
+    - start script, [Starting the Database Server](server-start)
 
   * from\_collapse\_limit configuration parameter, [Other Planner Options](runtime-config-query#RUNTIME-CONFIG-QUERY-OTHER)
-  * FSM (see [Free Space Map](#ientry-idp105554245263743))
+  * FSM (see [Free Space Map](#ientry-idm2680446824))
   * fsm\_page\_contents, [General Functions](pageinspect#PAGEINSPECT-GENERAL-FUNCS)
   * fsync configuration parameter, [Settings](runtime-config-wal#RUNTIME-CONFIG-WAL-SETTINGS)
   * full text search, [Text Search Types](datatype-textsearch), [Text Search Types](datatype-textsearch), [Full Text Search](textsearch)
 
-    
-
-  * data types, [Text Search Types](datatype-textsearch)
-    * functions and operators, [Text Search Types](datatype-textsearch)
+    - data types, [Text Search Types](datatype-textsearch)
+    - functions and operators, [Text Search Types](datatype-textsearch)
 
   * full\_page\_writes configuration parameter, [Settings](runtime-config-wal#RUNTIME-CONFIG-WAL-SETTINGS)
   * function, [Table Functions](queries-table-expressions#QUERIES-TABLEFUNCTIONS), [Functions and Operators](functions), [Statistics Information Functions](functions-statistics), [Functions](typeconv-func), [Polymorphic Types](extend-type-system#EXTEND-TYPES-POLYMORPHIC), [User-Defined Functions](xfunc), [Query Language (SQL) Functions](xfunc-sql), [Internal Functions](xfunc-internal), [C-Language Functions](xfunc-c)
 
-    
-
-  * default values for arguments, [SQL Functions with Default Values for Arguments](xfunc-sql#XFUNC-SQL-PARAMETER-DEFAULTS)
-    * in the FROM clause, [Table Functions](queries-table-expressions#QUERIES-TABLEFUNCTIONS)
-    * internal, [Internal Functions](xfunc-internal)
-    * invocation, [Function Calls](sql-expressions#SQL-EXPRESSIONS-FUNCTION-CALLS)
-    * mixed notation, [Using Mixed Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-MIXED)
-    * named argument, [Arguments for SQL Functions](xfunc-sql#XFUNC-SQL-FUNCTION-ARGUMENTS)
-    * named notation, [Using Named Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-NAMED)
-    * output parameter, [SQL Functions with Output Parameters](xfunc-sql#XFUNC-OUTPUT-PARAMETERS)
-    * polymorphic, [Polymorphic Types](extend-type-system#EXTEND-TYPES-POLYMORPHIC)
-    * positional notation, [Using Positional Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-POSITIONAL)
-    * RETURNS TABLE, [SQL Functions Returning TABLE](xfunc-sql#XFUNC-SQL-FUNCTIONS-RETURNING-TABLE)
-    * statistics, [Statistics Information Functions](functions-statistics)
-    * type resolution in an invocation, [Functions](typeconv-func)
-    * user-defined, [User-Defined Functions](xfunc), [Query Language (SQL) Functions](xfunc-sql), [C-Language Functions](xfunc-c)
-
-        
+    - default values for arguments, [SQL Functions with Default Values for Arguments](xfunc-sql#XFUNC-SQL-PARAMETER-DEFAULTS)
+    - in the FROM clause, [Table Functions](queries-table-expressions#QUERIES-TABLEFUNCTIONS)
+    - internal, [Internal Functions](xfunc-internal)
+    - invocation, [Function Calls](sql-expressions#SQL-EXPRESSIONS-FUNCTION-CALLS)
+    - mixed notation, [Using Mixed Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-MIXED)
+    - named argument, [Arguments for SQL Functions](xfunc-sql#XFUNC-SQL-FUNCTION-ARGUMENTS)
+    - named notation, [Using Named Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-NAMED)
+    - output parameter, [SQL Functions with Output Parameters](xfunc-sql#XFUNC-OUTPUT-PARAMETERS)
+    - polymorphic, [Polymorphic Types](extend-type-system#EXTEND-TYPES-POLYMORPHIC)
+    - positional notation, [Using Positional Notation](sql-syntax-calling-funcs#SQL-SYNTAX-CALLING-FUNCS-POSITIONAL)
+    - RETURNS TABLE, [SQL Functions Returning TABLE](xfunc-sql#XFUNC-SQL-FUNCTIONS-RETURNING-TABLE)
+    - statistics, [Statistics Information Functions](functions-statistics)
+    - type resolution in an invocation, [Functions](typeconv-func)
+    - user-defined, [User-Defined Functions](xfunc), [Query Language (SQL) Functions](xfunc-sql), [C-Language Functions](xfunc-c)
 
       * in C, [C-Language Functions](xfunc-c)
       * in SQL, [Query Language (SQL) Functions](xfunc-sql)
 
-  * variadic, [SQL Functions with Variable Numbers of Arguments](xfunc-sql#XFUNC-SQL-VARIADIC-FUNCTIONS)
+  - * variadic, [SQL Functions with Variable Numbers of Arguments](xfunc-sql#XFUNC-SQL-VARIADIC-FUNCTIONS)
     * with SETOF, [SQL Functions Returning Sets](xfunc-sql#XFUNC-SQL-FUNCTIONS-RETURNING-SET)
 
   * functional dependency, [The GROUP BY and HAVING Clauses](queries-table-expressions#QUERIES-GROUP)
   * fuzzystrmatch, [fuzzystrmatch — determine string similarities and distance](fuzzystrmatch)
+
+[#id](#indexdiv-G)
 
 ### G
 
@@ -1292,9 +1166,7 @@
   * gc\_to\_sec, [Cube-Based Earth Distances](earthdistance#EARTHDISTANCE-CUBE-BASED)
   * generated column, [Generated Columns](ddl-generated-columns), [Parameters](sql-createforeigntable#id-1.9.3.66.6), [Parameters](sql-createtable#id-1.9.3.85.6)
 
-    
-
-  * in triggers, [Overview of Trigger Behavior](trigger-definition)
+  - in triggers, [Overview of Trigger Behavior](trigger-definition)
 
   * generate\_series, [Set Returning Functions](functions-srf)
   * generate\_subscripts, [Set Returning Functions](functions-srf)
@@ -1302,7 +1174,7 @@
   * gen\_random\_bytes, [Random-Data Functions](pgcrypto#PGCRYPTO-RANDOM-DATA-FUNCS)
   * gen\_random\_uuid, [UUID Functions](functions-uuid), [Random-Data Functions](pgcrypto#PGCRYPTO-RANDOM-DATA-FUNCS)
   * gen\_salt, [gen\_salt()](pgcrypto#PGCRYPTO-PASSWORD-HASHING-FUNCS-GEN-SALT)
-  * GEQO (see [genetic query optimization](#ientry-idp105553575812863))
+  * GEQO (see [genetic query optimization](#ientry-idm2871537256))
   * geqo configuration parameter, [Genetic Query Optimizer](runtime-config-query#RUNTIME-CONFIG-QUERY-GEQO)
   * geqo\_effort configuration parameter, [Genetic Query Optimizer](runtime-config-query#RUNTIME-CONFIG-QUERY-GEQO)
   * geqo\_generations configuration parameter, [Genetic Query Optimizer](runtime-config-query#RUNTIME-CONFIG-QUERY-GEQO)
@@ -1314,7 +1186,7 @@
   * get\_byte, [Binary String Functions and Operators](functions-binarystring)
   * get\_current\_ts\_config, [Text Search Functions and Operators](functions-textsearch)
   * get\_raw\_page, [General Functions](pageinspect#PAGEINSPECT-GENERAL-FUNCS)
-  * GIN (see [index](#ientry-idp105553510265215))
+  * GIN (see [index](#ientry-idm2877840120))
   * gin\_clean\_pending\_list, [Index Maintenance Functions](functions-admin#FUNCTIONS-ADMIN-INDEX)
   * gin\_fuzzy\_search\_limit configuration parameter, [Other Defaults](runtime-config-client#RUNTIME-CONFIG-CLIENT-OTHER)
   * gin\_leafpage\_items, [GIN Functions](pageinspect#PAGEINSPECT-GIN-FUNCS)
@@ -1322,28 +1194,22 @@
   * gin\_page\_opaque\_info, [GIN Functions](pageinspect#PAGEINSPECT-GIN-FUNCS)
   * gin\_pending\_list\_limit
 
-    
+    - configuration parameter, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
+    - storage parameter, [Index Storage Parameters](sql-createindex#SQL-CREATEINDEX-STORAGE-PARAMETERS)
 
-  * configuration parameter, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
-    * storage parameter, [Index Storage Parameters](sql-createindex#SQL-CREATEINDEX-STORAGE-PARAMETERS)
-
-  * GiST (see [index](#ientry-idp105553510265215))
+  * GiST (see [index](#ientry-idm2877840120))
   * gist\_page\_items, [GiST Functions](pageinspect#PAGEINSPECT-GIST-FUNCS)
   * gist\_page\_items\_bytea, [GiST Functions](pageinspect#PAGEINSPECT-GIST-FUNCS)
   * gist\_page\_opaque\_info, [GiST Functions](pageinspect#PAGEINSPECT-GIST-FUNCS)
   * global data, [Global Data in PL/Tcl](pltcl-global)
 
-    
-
-  * in PL/Python, [Sharing Data](plpython-sharing)
-    * in PL/Tcl, [Global Data in PL/Tcl](pltcl-global)
+    - in PL/Python, [Sharing Data](plpython-sharing)
+    - in PL/Tcl, [Global Data in PL/Tcl](pltcl-global)
 
   * GRANT, [Privileges](ddl-priv), [GRANT](sql-grant)
   * GREATEST, [GREATEST and LEAST](functions-conditional#FUNCTIONS-GREATEST-LEAST), [UNION, CASE, and Related Constructs](typeconv-union-case)
 
-    
-
-  * determination of result type, [UNION, CASE, and Related Constructs](typeconv-union-case)
+  - determination of result type, [UNION, CASE, and Related Constructs](typeconv-union-case)
 
   * Gregorian calendar, [History of Units](datetime-units-history)
   * GROUP BY, [Aggregate Functions](tutorial-agg), [The GROUP BY and HAVING Clauses](queries-table-expressions#QUERIES-GROUP)
@@ -1353,16 +1219,16 @@
   * gssapi, [Secure TCP/IP Connections with GSSAPI Encryption](gssapi-enc)
   * GSSAPI, [GSSAPI Authentication](gssapi-auth)
 
-    
-
-  * with libpq, [Parameter Key Words](libpq-connect#LIBPQ-PARAMKEYWORDS)
+  - with libpq, [Parameter Key Words](libpq-connect#LIBPQ-PARAMKEYWORDS)
 
   * gss\_accept\_delegation configuration parameter, [Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
   * GUID, [UUID Type](datatype-uuid)
 
+[#id](#indexdiv-H)
+
 ### H
 
-  * hash (see [index](#ientry-idp105553510265215))
+  * hash (see [index](#ientry-idm2877840120))
   * hash\_bitmap\_info, [Hash Functions](pageinspect#PAGEINSPECT-HASH-FUNCS)
   * hash\_mem\_multiplier configuration parameter, [Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
   * hash\_metapage\_info, [Hash Functions](pageinspect#PAGEINSPECT-HASH-FUNCS)
@@ -1393,9 +1259,7 @@
   * high availability, [High Availability, Load Balancing, and Replication](high-availability)
   * history, [A Brief History of PostgreSQL](history)
 
-    
-
-  * of PostgreSQL, [A Brief History of PostgreSQL](history)
+  - of PostgreSQL, [A Brief History of PostgreSQL](history)
 
   * hmac, [hmac()](pgcrypto#PGCRYPTO-GENERAL-HASHING-FUNCS-HMAC)
   * host, [Network Address Functions and Operators](functions-net)
@@ -1412,13 +1276,12 @@
   * hstore\_to\_json\_loose, [hstore Operators and Functions](hstore#HSTORE-OPS-FUNCS)
   * hstore\_to\_matrix, [hstore Operators and Functions](hstore#HSTORE-OPS-FUNCS)
   * huge\_pages configuration parameter, [Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
-  * huge\_pages\_status configuration parameter, [Preset Options](runtime-config-preset)
   * huge\_page\_size configuration parameter, [Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
   * hypothetical-set aggregate
 
-    
+  - built-in, [Aggregate Functions](functions-aggregate)
 
-  * built-in, [Aggregate Functions](functions-aggregate)
+[#id](#indexdiv-I)
 
 ### I
 
@@ -1428,10 +1291,8 @@
   * ident, [Ident Authentication](auth-ident)
   * identifier, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
 
-    
-
-  * length, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
-    * syntax of, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
+    - length, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
+    - syntax of, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
 
   * IDENTIFY\_SYSTEM, [Streaming Replication Protocol](protocol-replication)
   * ident\_file configuration parameter, [File Locations](runtime-config-file-locations)
@@ -1447,9 +1308,7 @@
   * IN, [Subquery Expressions](functions-subquery), [Row and Array Comparisons](functions-comparisons)
   * INCLUDE
 
-    
-
-  * in index definitions, [Index-Only Scans and Covering Indexes](indexes-index-only-scans)
+  - in index definitions, [Index-Only Scans and Covering Indexes](indexes-index-only-scans)
 
 * include
 
@@ -1465,7 +1324,7 @@
 
 * index, [Indexes](indexes), [Multicolumn Indexes](indexes-multicolumn), [Indexes and ORDER BY](indexes-ordering), [Combining Multiple Indexes](indexes-bitmap-scans), [Unique Indexes](indexes-unique), [Indexes on Expressions](indexes-expressional), [Partial Indexes](indexes-partial), [Index-Only Scans and Covering Indexes](indexes-index-only-scans), [Index-Only Scans and Covering Indexes](indexes-index-only-scans), [Examining Index Usage](indexes-examine), [Preferred Index Types for Text Search](textsearch-indexes), [Preferred Index Types for Text Search](textsearch-indexes), [Locking and Indexes](locking-indexes), [Interfacing Extensions to Indexes](xindex), [Building Indexes Concurrently](sql-createindex#SQL-CREATEINDEX-CONCURRENTLY), [Rebuilding Indexes Concurrently](sql-reindex#SQL-REINDEX-CONCURRENTLY), [Operators and Functions](ltree#LTREE-OPS-FUNCS)
 
-  * and ORDER BY, [Indexes and ORDER BY](indexes-ordering)
+    * and ORDER BY, [Indexes and ORDER BY](indexes-ordering)
     * B-Tree, [B-Tree](indexes-types#INDEXES-TYPES-BTREE), [B-Tree Indexes](btree)
     * BRIN, [BRIN](indexes-types#INDEXES-TYPES-BRIN), [BRIN Indexes](brin)
     * building concurrently, [Building Indexes Concurrently](sql-createindex#SQL-CREATEINDEX-CONCURRENTLY)
@@ -1476,15 +1335,13 @@
     * for user-defined data type, [Interfacing Extensions to Indexes](xindex)
     * GIN, [GIN](indexes-types#INDEXES-TYPES-GIN), [Preferred Index Types for Text Search](textsearch-indexes), [GIN Indexes](gin)
 
-        
-
-    * text search, [Preferred Index Types for Text Search](textsearch-indexes)
+    - text search, [Preferred Index Types for Text Search](textsearch-indexes)
 
   * GiST, [GiST](indexes-types#INDEXES-TYPE-GIST), [Preferred Index Types for Text Search](textsearch-indexes), [GiST Indexes](gist)
 
     * text search, [Preferred Index Types for Text Search](textsearch-indexes)
 
-  * hash, [Hash](indexes-types#INDEXES-TYPES-HASH)
+    * hash, [Hash](indexes-types#INDEXES-TYPES-HASH)
     * Hash, [Hash Indexes](hash-index)
     * index-only scans, [Index-Only Scans and Covering Indexes](indexes-index-only-scans)
     * locks, [Locking and Indexes](locking-indexes)
@@ -1499,9 +1356,7 @@
   * index-only scan, [Index-Only Scans and Covering Indexes](indexes-index-only-scans)
   * indexam
 
-    
-
-  * Index Access Method, [Index Access Method Interface Definition](indexam)
+  - Index Access Method, [Index Access Method Interface Definition](indexam)
 
   * index\_am\_handler, [Pseudo-Types](datatype-pseudo)
   * inet (data type), [inet](datatype-net-types#DATATYPE-INET)
@@ -1513,10 +1368,8 @@
   * inet\_server\_port, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
   * infinity
 
-    
-
-  * floating point, [Floating-Point Types](datatype-numeric#DATATYPE-FLOAT)
-    * numeric (data type), [Arbitrary Precision Numbers](datatype-numeric#DATATYPE-NUMERIC-DECIMAL)
+    - floating point, [Floating-Point Types](datatype-numeric#DATATYPE-FLOAT)
+    - numeric (data type), [Arbitrary Precision Numbers](datatype-numeric#DATATYPE-NUMERIC-DECIMAL)
 
   * information schema, [The Information Schema](information-schema)
   * inheritance, [Inheritance](tutorial-inheritance), [Inheritance](ddl-inherit)
@@ -1526,41 +1379,33 @@
   * input function, [User-Defined Types](xtypes)
   * INSERT, [Populating a Table With Rows](tutorial-populate), [Inserting Data](dml-insert), [Returning Data from Modified Rows](dml-returning), [INSERT](sql-insert)
 
-    
-
-  * RETURNING, [Returning Data from Modified Rows](dml-returning)
+  - RETURNING, [Returning Data from Modified Rows](dml-returning)
 
   * inserting, [Inserting Data](dml-insert)
   * installation, [Installation from Source Code](installation)
 
-    
-
-  * binaries, [Installation from Binaries](install-binaries)
-    * on Windows, [Installation from Source Code on Windows](install-windows)
+    - binaries, [Installation from Binaries](install-binaries)
+    - on Windows, [Installation from Source Code on Windows](install-windows)
 
   * instr function, [Appendix](plpgsql-porting#PLPGSQL-PORTING-APPENDIX)
-  * int2 (see [smallint](#ientry-idp105553306094719))
-  * int4 (see [integer](#ientry-idp105553308164351))
-  * int8 (see [bigint](#ientry-idp105553308164991))
+  * int2 (see [smallint](#ientry-idm2891140712))
+  * int4 (see [integer](#ientry-idm2893790248))
+  * int8 (see [bigint](#ientry-idm2893789512))
   * intagg, [intagg — integer aggregator and enumerator](intagg)
   * intarray, [intarray — manipulate arrays of integers](intarray)
   * integer, [Numeric Constants](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS-NUMERIC), [Integer Types](datatype-numeric#DATATYPE-INT)
   * integer\_datetimes configuration parameter, [Preset Options](runtime-config-preset)
   * interfaces
 
-    
-
-  * externally maintained, [Client Interfaces](external-interfaces)
+  - externally maintained, [Client Interfaces](external-interfaces)
 
   * internal, [Pseudo-Types](datatype-pseudo)
   * INTERSECT, [Combining Queries (UNION, INTERSECT, EXCEPT)](queries-union)
   * interval, [Date/Time Types](datatype-datetime), [Interval Input](datatype-datetime#DATATYPE-INTERVAL-INPUT)
 
-    
+  - output format, [Interval Output](datatype-datetime#DATATYPE-INTERVAL-OUTPUT)
 
-  * output format, [Interval Output](datatype-datetime#DATATYPE-INTERVAL-OUTPUT)
-
-    * (see also [formatting](#ientry-idp105553373272959))
+    * (see also [formatting](#ientry-idm2886028520))
 
   * IntervalStyle configuration parameter, [Locale and Formatting](runtime-config-client#RUNTIME-CONFIG-CLIENT-FORMAT)
   * intset, [intarray Functions and Operators](intarray#INTARRAY-FUNCS-OPS)
@@ -1591,11 +1436,11 @@
   * isopen, [Geometric Functions and Operators](functions-geometry)
   * is\_array\_ref
 
-    
-
-  * in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
+  - in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
 
 * is\_valid, [Functions and Operators](isn#ISN-FUNCS-OPS)
+
+[#id](#indexdiv-J)
 
 ### J
 
@@ -1612,32 +1457,25 @@
   * jit\_tuple\_deforming configuration parameter, [Developer Options](runtime-config-developer)
   * join, [Joins Between Tables](tutorial-join), [Joined Tables](queries-table-expressions#QUERIES-JOIN), [Controlling the Planner with Explicit JOIN Clauses](explicit-joins)
 
-    
-
-  * controlling the order, [Controlling the Planner with Explicit JOIN Clauses](explicit-joins)
-    * cross, [Joined Tables](queries-table-expressions#QUERIES-JOIN)
-    * left, [Joined Tables](queries-table-expressions#QUERIES-JOIN)
-    * natural, [Joined Tables](queries-table-expressions#QUERIES-JOIN)
-    * outer, [Joins Between Tables](tutorial-join), [Joined Tables](queries-table-expressions#QUERIES-JOIN)
-    * right, [Joined Tables](queries-table-expressions#QUERIES-JOIN)
-    * self, [Joins Between Tables](tutorial-join)
+    - controlling the order, [Controlling the Planner with Explicit JOIN Clauses](explicit-joins)
+    - cross, [Joined Tables](queries-table-expressions#QUERIES-JOIN)
+    - left, [Joined Tables](queries-table-expressions#QUERIES-JOIN)
+    - natural, [Joined Tables](queries-table-expressions#QUERIES-JOIN)
+    - outer, [Joins Between Tables](tutorial-join), [Joined Tables](queries-table-expressions#QUERIES-JOIN)
+    - right, [Joined Tables](queries-table-expressions#QUERIES-JOIN)
+    - self, [Joins Between Tables](tutorial-join)
 
   * join\_collapse\_limit configuration parameter, [Other Planner Options](runtime-config-query#RUNTIME-CONFIG-QUERY-OTHER)
   * JSON, [JSON Types](datatype-json), [JSON Functions and Operators](functions-json)
 
-    
+  - functions and operators, [JSON Functions and Operators](functions-json)
 
-  * functions and operators, [JSON Functions and Operators](functions-json)
-
-  * json constructor, [Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
   * JSONB, [JSON Types](datatype-json)
   * jsonb
 
-    
-
-  * containment, [jsonb Containment and Existence](datatype-json#JSON-CONTAINMENT)
-    * existence, [jsonb Containment and Existence](datatype-json#JSON-CONTAINMENT)
-    * indexes on, [jsonb Indexing](datatype-json#JSON-INDEXING)
+    - containment, [jsonb Containment and Existence](datatype-json#JSON-CONTAINMENT)
+    - existence, [jsonb Containment and Existence](datatype-json#JSON-CONTAINMENT)
+    - indexes on, [jsonb Indexing](datatype-json#JSON-INDEXING)
 
   * jsonb\_agg, [Aggregate Functions](functions-aggregate)
   * jsonb\_agg\_strict, [Aggregate Functions](functions-aggregate)
@@ -1700,31 +1538,34 @@
   * json\_object\_keys, [Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
   * json\_populate\_record, [Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
   * json\_populate\_recordset, [Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
-  * json\_scalar, [Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
   * json\_strip\_nulls, [Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
   * json\_to\_record, [Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
   * json\_to\_recordset, [Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
   * json\_to\_tsvector, [Text Search Functions and Operators](functions-textsearch)
   * json\_typeof, [Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
   * Julian date, [Julian Dates](datetime-julian-dates)
-  * Just-In-Time compilation (see [JIT](#ientry-idp105553641305983))
+  * Just-In-Time compilation (see [JIT](#ientry-idm2862714824))
   * justify\_days, [Date/Time Functions and Operators](functions-datetime)
   * justify\_hours, [Date/Time Functions and Operators](functions-datetime)
   * justify\_interval, [Date/Time Functions and Operators](functions-datetime)
+
+[#id](#indexdiv-K)
 
 ### K
 
 * key word, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS), [SQL Key Words](sql-keywords-appendix)
 
-  * list of, [SQL Key Words](sql-keywords-appendix)
+    * list of, [SQL Key Words](sql-keywords-appendix)
     * syntax of, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
 
   * krb\_caseins\_users configuration parameter, [Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
   * krb\_server\_keyfile configuration parameter, [Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
 
+[#id](#indexdiv-L)
+
 ### L
 
-  * label (see [alias](#ientry-idp105553308450815))
+  * label (see [alias](#ientry-idm2894170648))
   * lag, [Window Functions](functions-window)
   * language\_handler, [Pseudo-Types](datatype-pseudo)
   * large object, [Large Objects](largeobjects)
@@ -1732,9 +1573,7 @@
   * last\_value, [Window Functions](functions-window)
   * LATERAL, [LATERAL Subqueries](queries-table-expressions#QUERIES-LATERAL)
 
-    
-
-  * in the FROM clause, [LATERAL Subqueries](queries-table-expressions#QUERIES-LATERAL)
+  - in the FROM clause, [LATERAL Subqueries](queries-table-expressions#QUERIES-LATERAL)
 
   * latitude, [Cube-Based Earth Distances](earthdistance#EARTHDISTANCE-CUBE-BASED)
   * lca, [Operators and Functions](ltree#LTREE-OPS-FUNCS)
@@ -1749,18 +1588,14 @@
   * lead, [Window Functions](functions-window)
   * LEAST, [GREATEST and LEAST](functions-conditional#FUNCTIONS-GREATEST-LEAST), [UNION, CASE, and Related Constructs](typeconv-union-case)
 
-    
-
-  * determination of result type, [UNION, CASE, and Related Constructs](typeconv-union-case)
+  - determination of result type, [UNION, CASE, and Related Constructs](typeconv-union-case)
 
   * left, [String Functions and Operators](functions-string)
   * left join, [Joined Tables](queries-table-expressions#QUERIES-JOIN)
   * length, [String Functions and Operators](functions-string), [Binary String Functions and Operators](functions-binarystring), [Bit String Functions and Operators](functions-bitstring), [Geometric Functions and Operators](functions-geometry), [Text Search Functions and Operators](functions-textsearch)
 
-    
-
-  * of a binary string (see binary strings, length)
-    * of a character string (see [character string, length](#ientry-idp105553308273023))
+    - of a binary string (see binary strings, length)
+    - of a character string (see [character string, length](#ientry-idm2893897720))
 
   * length(tsvector), [Manipulating Documents](textsearch-features#TEXTSEARCH-MANIPULATE-TSVECTOR)
   * levenshtein, [Levenshtein](fuzzystrmatch#FUZZYSTRMATCH-LEVENSHTEIN)
@@ -1768,17 +1603,13 @@
   * lex, [Requirements](install-requirements)
   * libedit, [Requirements](install-requirements)
 
-    
-
-  * in psql, [Command-Line Editing](app-psql#APP-PSQL-READLINE)
+  - in psql, [Command-Line Editing](app-psql#APP-PSQL-READLINE)
 
   * libperl, [Requirements](install-requirements)
   * libpq, [libpq — C Library](libpq), [Pipeline Mode](libpq-pipeline-mode), [Retrieving Query Results Row-by-Row](libpq-single-row-mode)
 
-    
-
-  * pipeline mode, [Pipeline Mode](libpq-pipeline-mode)
-    * single-row mode, [Retrieving Query Results Row-by-Row](libpq-single-row-mode)
+    - pipeline mode, [Pipeline Mode](libpq-pipeline-mode)
+    - single-row mode, [Retrieving Query Results Row-by-Row](libpq-single-row-mode)
 
   * libpq-fe.h, [libpq — C Library](libpq), [Connection Status Functions](libpq-status)
   * libpq-int.h, [Connection Status Functions](libpq-status)
@@ -1786,9 +1617,7 @@
   * library initialization function, [Dynamic Loading](xfunc-c#XFUNC-C-DYNLOAD)
   * LIKE, [LIKE](functions-matching#FUNCTIONS-LIKE)
 
-    
-
-  * and locales, [Behavior](locale#LOCALE-BEHAVIOR)
+  - and locales, [Behavior](locale#LOCALE-BEHAVIOR)
 
 * LIKE\_REGEX, [Differences from SQL Standard and XQuery](functions-matching#POSIX-VS-XQUERY), [SQL/JSON Regular Expressions](functions-json#JSONPATH-REGULAR-EXPRESSIONS)
 
@@ -1800,11 +1629,9 @@
   * linear regression, [Aggregate Functions](functions-aggregate)
   * Linux
 
-    
-
-  * IPC configuration, [Shared Memory and Semaphores](kernel-resources#SYSVIPC)
-    * shared library, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
-    * start script, [Starting the Database Server](server-start)
+    - IPC configuration, [Shared Memory and Semaphores](kernel-resources#SYSVIPC)
+    - shared library, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
+    - start script, [Starting the Database Server](server-start)
 
   * LISTEN, [LISTEN](sql-listen)
   * listen\_addresses configuration parameter, [Connection Settings](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-SETTINGS)
@@ -1820,10 +1647,8 @@
   * local\_preload\_libraries configuration parameter, [Shared Library Preloading](runtime-config-client#RUNTIME-CONFIG-CLIENT-PRELOAD)
   * lock, [Explicit Locking](explicit-locking), [Advisory Locks](explicit-locking#ADVISORY-LOCKS), [Viewing Locks](monitoring-locks)
 
-    
-
-  * advisory, [Advisory Locks](explicit-locking#ADVISORY-LOCKS)
-    * monitoring, [Viewing Locks](monitoring-locks)
+    - advisory, [Advisory Locks](explicit-locking#ADVISORY-LOCKS)
+    - monitoring, [Viewing Locks](monitoring-locks)
 
   * LOCK, [Table-Level Locks](explicit-locking#LOCKING-TABLES), [LOCK](sql-lock)
   * lock\_timeout configuration parameter, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
@@ -1832,10 +1657,8 @@
   * log10, [Mathematical Functions and Operators](functions-math)
   * Logging
 
-    
-
-  * current\_logfiles file and the pg\_current\_logfile function, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
-    * pg\_current\_logfile function, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
+    - current\_logfiles file and the pg\_current\_logfile function, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
+    - pg\_current\_logfile function, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
 
   * logging\_collector configuration parameter, [Where to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE)
   * Logical Decoding, [Logical Decoding](logicaldecoding), [Logical Decoding](logicaldecoding-explanation#LOGICALDECODING-EXPLANATION-LOG-DEC)
@@ -1843,10 +1666,8 @@
   * login privilege, [Role Attributes](role-attributes)
   * log\_autovacuum\_min\_duration
 
-    
-
-  * configuration parameter, [What to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHAT)
-    * storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
+    - configuration parameter, [What to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHAT)
+    - storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
 
   * log\_btree\_build\_stats configuration parameter, [Developer Options](runtime-config-developer)
   * log\_checkpoints configuration parameter, [What to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHAT)
@@ -1885,9 +1706,7 @@
   * longitude, [Cube-Based Earth Distances](earthdistance#EARTHDISTANCE-CUBE-BASED)
   * looks\_like\_number
 
-    
-
-  * in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
+  - in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
 
 * loop, [Simple Loops](plpgsql-control-structures#PLPGSQL-CONTROL-STRUCTURES-LOOPS)
 
@@ -1926,6 +1745,8 @@
   * ltree2text, [Operators and Functions](ltree#LTREE-OPS-FUNCS)
   * ltrim, [String Functions and Operators](functions-string), [Binary String Functions and Operators](functions-binarystring)
 
+[#id](#indexdiv-M)
+
 ### M
 
   * MAC address (see macaddr)
@@ -1935,11 +1756,9 @@
   * macaddr8\_set7bit, [Network Address Functions and Operators](functions-net)
   * macOS, [macOS](installation-platform-notes#INSTALLATION-NOTES-MACOS)
 
-    
-
-  * installation on, [macOS](installation-platform-notes#INSTALLATION-NOTES-MACOS)
-    * IPC configuration, [Shared Memory and Semaphores](kernel-resources#SYSVIPC)
-    * shared library, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
+    - installation on, [macOS](installation-platform-notes#INSTALLATION-NOTES-MACOS)
+    - IPC configuration, [Shared Memory and Semaphores](kernel-resources#SYSVIPC)
+    - shared library, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
 
   * magic block, [Dynamic Loading](xfunc-c#XFUNC-C-DYNLOAD)
   * maintenance, [Routine Database Maintenance Tasks](maintenance)
@@ -1957,9 +1776,7 @@
   * masklen, [Network Address Functions and Operators](functions-net)
   * materialized view, [Materialized Views](rules-materializedviews)
 
-    
-
-  * implementation through rules, [Materialized Views](rules-materializedviews)
+  - implementation through rules, [Materialized Views](rules-materializedviews)
 
   * materialized views, [pg\_matviews](view-pg-matviews)
   * max, [Aggregate Functions](functions-aggregate)
@@ -1980,10 +1797,8 @@
   * max\_prepared\_transactions configuration parameter, [Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
   * max\_replication\_slots configuration parameter
 
-    
-
-  * in a sending server, [Sending Servers](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-SENDER)
-    * in a subscriber, [Subscribers](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-SUBSCRIBER)
+    - in a sending server, [Sending Servers](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-SENDER)
+    - in a subscriber, [Subscribers](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-SUBSCRIBER)
 
   * max\_slot\_wal\_keep\_size configuration parameter, [Sending Servers](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-SENDER)
   * max\_stack\_depth configuration parameter, [Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
@@ -1997,9 +1812,7 @@
   * MD5, [Password Authentication](auth-password)
   * median, [Aggregate Expressions](sql-expressions#SYNTAX-AGGREGATES)
 
-    
-
-  * (see also [percentile](#ientry-idp105553440428159))
+  - (see also [percentile](#ientry-idm2881015608))
 
 * memory context
 
@@ -2012,9 +1825,7 @@
   * min, [Aggregate Functions](functions-aggregate)
   * MinGW, [MinGW/Native Windows](installation-platform-notes#INSTALLATION-NOTES-MINGW)
 
-    
-
-  * installation on, [MinGW/Native Windows](installation-platform-notes#INSTALLATION-NOTES-MINGW)
+  - installation on, [MinGW/Native Windows](installation-platform-notes#INSTALLATION-NOTES-MINGW)
 
   * min\_dynamic\_shared\_memory configuration parameter, [Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
   * min\_parallel\_index\_scan\_size configuration parameter, [Planner Cost Constants](runtime-config-query#RUNTIME-CONFIG-QUERY-CONSTANTS)
@@ -2024,9 +1835,7 @@
   * mod, [Mathematical Functions and Operators](functions-math)
   * mode
 
-    
-
-  * statistical, [Aggregate Functions](functions-aggregate)
+  - statistical, [Aggregate Functions](functions-aggregate)
 
 * monitoring, [Monitoring Database Activity](monitoring)
 
@@ -2040,31 +1849,29 @@
   * MultiXactId, [Multixacts and Wraparound](routine-vacuuming#VACUUM-FOR-MULTIXACT-WRAPAROUND)
   * MVCC, [Introduction](mvcc-intro)
 
+[#id](#indexdiv-N)
+
 ### N
 
 * name, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
 
-  * qualified, [Creating a Schema](ddl-schemas#DDL-SCHEMAS-CREATE)
+    * qualified, [Creating a Schema](ddl-schemas#DDL-SCHEMAS-CREATE)
     * syntax of, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
     * unqualified, [The Schema Search Path](ddl-schemas#DDL-SCHEMAS-PATH)
 
-  * NaN (see [not a number](#ientry-idp105553306067711))
+  * NaN (see [not a number](#ientry-idm2891093656))
   * natural join, [Joined Tables](queries-table-expressions#QUERIES-JOIN)
   * negation, [Logical Operators](functions-logical)
   * NetBSD
 
-    
-
-  * IPC configuration, [Shared Memory and Semaphores](kernel-resources#SYSVIPC)
-    * shared library, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
-    * start script, [Starting the Database Server](server-start)
+    - IPC configuration, [Shared Memory and Semaphores](kernel-resources#SYSVIPC)
+    - shared library, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
+    - start script, [Starting the Database Server](server-start)
 
   * netmask, [Network Address Functions and Operators](functions-net)
   * network, [Network Address Types](datatype-net-types), [Network Address Functions and Operators](functions-net)
 
-    
-
-  * data types, [Network Address Types](datatype-net-types)
+  - data types, [Network Address Types](datatype-net-types)
 
   * nextval, [Sequence Manipulation Functions](functions-sequence)
   * NFS, [NFS](creating-cluster#CREATING-CLUSTER-NFS)
@@ -2078,18 +1885,14 @@
   * NOT (operator), [Logical Operators](functions-logical)
   * not a number
 
-    
-
-  * floating point, [Floating-Point Types](datatype-numeric#DATATYPE-FLOAT)
-    * numeric (data type), [Arbitrary Precision Numbers](datatype-numeric#DATATYPE-NUMERIC-DECIMAL)
+    - floating point, [Floating-Point Types](datatype-numeric#DATATYPE-FLOAT)
+    - numeric (data type), [Arbitrary Precision Numbers](datatype-numeric#DATATYPE-NUMERIC-DECIMAL)
 
   * NOT IN, [Subquery Expressions](functions-subquery), [Row and Array Comparisons](functions-comparisons)
   * not-null constraint, [Not-Null Constraints](ddl-constraints#DDL-CONSTRAINTS-NOT-NULL)
   * notation, [Calling Functions](sql-syntax-calling-funcs)
 
-    
-
-  * functions, [Calling Functions](sql-syntax-calling-funcs)
+  - functions, [Calling Functions](sql-syntax-calling-funcs)
 
 * notice processing, [Notice Processing](libpq-notice-processing)
 
@@ -2099,9 +1902,7 @@
   * notice receiver, [Notice Processing](libpq-notice-processing)
   * NOTIFY, [Asynchronous Notification](libpq-notify), [NOTIFY](sql-notify)
 
-    
-
-  * in libpq, [Asynchronous Notification](libpq-notify)
+  - in libpq, [Asynchronous Notification](libpq-notify)
 
   * NOTNULL, [Comparison Functions and Operators](functions-comparison)
   * now, [Date/Time Functions and Operators](functions-datetime)
@@ -2110,23 +1911,19 @@
   * ntile, [Window Functions](functions-window)
   * null value
 
-    
-
-  * with check constraints, [Check Constraints](ddl-constraints#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
-    * comparing, [Comparison Functions and Operators](functions-comparison)
-    * default value, [Default Values](ddl-default)
-    * in DISTINCT, [DISTINCT](queries-select-lists#QUERIES-DISTINCT)
-    * in libpq, [Retrieving Query Result Information](libpq-exec#LIBPQ-EXEC-SELECT-INFO)
-    * in PL/Perl, [PL/Perl Functions and Arguments](plperl-funcs)
-    * in PL/Python, [Null, None](plpython-data#PLPYTHON-DATA-NULL)
-    * with unique constraints, [Unique Constraints](ddl-constraints#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS)
+    - with check constraints, [Check Constraints](ddl-constraints#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)
+    - comparing, [Comparison Functions and Operators](functions-comparison)
+    - default value, [Default Values](ddl-default)
+    - in DISTINCT, [DISTINCT](queries-select-lists#QUERIES-DISTINCT)
+    - in libpq, [Retrieving Query Result Information](libpq-exec#LIBPQ-EXEC-SELECT-INFO)
+    - in PL/Perl, [PL/Perl Functions and Arguments](plperl-funcs)
+    - in PL/Python, [Null, None](plpython-data#PLPYTHON-DATA-NULL)
+    - with unique constraints, [Unique Constraints](ddl-constraints#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS)
 
   * NULLIF, [NULLIF](functions-conditional#FUNCTIONS-NULLIF)
   * number
 
-    
-
-  * constant, [Numeric Constants](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS-NUMERIC)
+  - constant, [Numeric Constants](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS-NUMERIC)
 
   * numeric, [Numeric Constants](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS-NUMERIC)
   * numeric (data type), [Arbitrary Precision Numbers](datatype-numeric#DATATYPE-NUMERIC-DECIMAL)
@@ -2134,6 +1931,8 @@
   * num\_nonnulls, [Comparison Functions and Operators](functions-comparison)
   * num\_nulls, [Comparison Functions and Operators](functions-comparison)
   * NVL, [COALESCE](functions-conditional#FUNCTIONS-COALESCE-NVL-IFNULL)
+
+[#id](#indexdiv-O)
 
 ### O
 
@@ -2149,29 +1948,27 @@
   * oid, [Object Identifier Types](datatype-oid)
   * OID
 
-    
-
-  * in libpq, [Retrieving Other Result Information](libpq-exec#LIBPQ-EXEC-NONSELECT)
+  - in libpq, [Retrieving Other Result Information](libpq-exec#LIBPQ-EXEC-NONSELECT)
 
   * oid2name, [oid2name](oid2name)
+  * old\_snapshot, [old\_snapshot — inspect old\_snapshot\_threshold state](oldsnapshot)
+  * old\_snapshot\_threshold configuration parameter, [Asynchronous Behavior](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-ASYNC-BEHAVIOR)
   * ON CONFLICT, [INSERT](sql-insert)
   * ONLY, [The FROM Clause](queries-table-expressions#QUERIES-FROM)
   * OOM, [Linux Memory Overcommit](kernel-resources#LINUX-MEMORY-OVERCOMMIT)
   * OpenBSD
 
-    
-
-  * IPC configuration, [Shared Memory and Semaphores](kernel-resources#SYSVIPC)
-    * shared library, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
-    * start script, [Starting the Database Server](server-start)
+    - IPC configuration, [Shared Memory and Semaphores](kernel-resources#SYSVIPC)
+    - shared library, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
+    - start script, [Starting the Database Server](server-start)
 
 * OpenSSL, [PostgreSQL Features](install-make#CONFIGURE-OPTIONS-FEATURES), [PostgreSQL Features](install-meson#MESON-OPTIONS-FEATURES)
 
-  * (see also [SSL](#ientry-idp105553506987391))
+  * (see also [SSL](#ientry-idm2873426104))
 
 * operator, [Operators](sql-syntax-lexical#SQL-SYNTAX-OPERATORS), [Operator Precedence](sql-syntax-lexical#SQL-PRECEDENCE), [Functions and Operators](functions), [Logical Operators](functions-logical), [Operators](typeconv-oper), [User-Defined Operators](xoper)
 
-  * invocation, [Operator Invocations](sql-expressions#SQL-EXPRESSIONS-OPERATOR-CALLS)
+    * invocation, [Operator Invocations](sql-expressions#SQL-EXPRESSIONS-OPERATOR-CALLS)
     * logical, [Logical Operators](functions-logical)
     * precedence, [Operator Precedence](sql-syntax-lexical#SQL-PRECEDENCE)
     * syntax, [Operators](sql-syntax-lexical#SQL-SYNTAX-OPERATORS)
@@ -2182,17 +1979,13 @@
   * operator family, [Operator Classes and Operator Families](indexes-opclass), [Operator Classes and Operator Families](xindex#XINDEX-OPFAMILY)
   * optimization information, [Function Optimization Information](xfunc-optimization), [Operator Optimization Information](xoper-optimization)
 
-    
-
-  * for functions, [Function Optimization Information](xfunc-optimization)
-    * for operators, [Operator Optimization Information](xoper-optimization)
+    - for functions, [Function Optimization Information](xfunc-optimization)
+    - for operators, [Operator Optimization Information](xoper-optimization)
 
   * OR (operator), [Logical Operators](functions-logical)
   * Oracle, [Porting from Oracle PL/SQL](plpgsql-porting)
 
-    
-
-  * porting from PL/SQL to PL/pgSQL, [Porting from Oracle PL/SQL](plpgsql-porting)
+  - porting from PL/SQL to PL/pgSQL, [Porting from Oracle PL/SQL](plpgsql-porting)
 
 * ORDER BY, [Querying a Table](tutorial-select), [Sorting Rows (ORDER BY)](queries-order)
 
@@ -2212,12 +2005,12 @@
   * overlay, [String Functions and Operators](functions-string), [Binary String Functions and Operators](functions-binarystring), [Bit String Functions and Operators](functions-bitstring)
   * overloading, [Function Overloading](xfunc-overload)
 
-    
-
-  * functions, [Function Overloading](xfunc-overload)
-    * operators, [User-Defined Operators](xoper)
+    - functions, [Function Overloading](xfunc-overload)
+    - operators, [User-Defined Operators](xoper)
 
 * owner, [Privileges](ddl-priv)
+
+[#id](#indexdiv-P)
 
 ### P
 
@@ -2234,9 +2027,7 @@
   * parallel\_workers storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
   * parameter
 
-    
-
-  * syntax, [Positional Parameters](sql-expressions#SQL-EXPRESSIONS-PARAMETERS-POSITIONAL)
+  - syntax, [Positional Parameters](sql-expressions#SQL-EXPRESSIONS-PARAMETERS-POSITIONAL)
 
   * parenthesis, [Value Expressions](sql-expressions)
   * parse\_ident, [String Functions and Operators](functions-string)
@@ -2245,37 +2036,29 @@
   * partitioning, [Table Partitioning](ddl-partitioning)
   * password, [Role Attributes](role-attributes)
 
-    
-
-  * authentication, [Password Authentication](auth-password)
-    * of the superuser, [Creating a Database Cluster](creating-cluster)
+    - authentication, [Password Authentication](auth-password)
+    - of the superuser, [Creating a Database Cluster](creating-cluster)
 
   * password file, [The Password File](libpq-pgpass)
   * passwordcheck, [passwordcheck — verify password strength](passwordcheck)
   * password\_encryption configuration parameter, [Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
   * path, [Geometric Functions and Operators](functions-geometry)
 
-    
-
-  * for schemas, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
+  - for schemas, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
   * PATH, [Environment Variables](install-post#INSTALL-POST-ENV-VARS)
   * path (data type), [Paths](datatype-geometric#DATATYPE-GEOMETRIC-PATHS)
   * pattern matching, [Pattern Matching](functions-matching)
   * patterns
 
-    
-
-  * in psql and pg\_dump, [Patterns](app-psql#APP-PSQL-PATTERNS)
+  - in psql and pg\_dump, [Patterns](app-psql#APP-PSQL-PATTERNS)
 
   * pclose, [Geometric Functions and Operators](functions-geometry)
   * peer, [Peer Authentication](auth-peer)
   * percentile
 
-    
-
-  * continuous, [Aggregate Functions](functions-aggregate)
-    * discrete, [Aggregate Functions](functions-aggregate)
+    - continuous, [Aggregate Functions](functions-aggregate)
+    - discrete, [Aggregate Functions](functions-aggregate)
 
 * percent\_rank, [Window Functions](functions-window)
 
@@ -2284,7 +2067,7 @@
   * performance, [Performance Tips](performance-tips)
   * perl, [Requirements](install-requirements)
   * Perl, [PL/Perl — Perl Procedural Language](plperl)
-  * permission (see [privilege](#ientry-idp105553307467775))
+  * permission (see [privilege](#ientry-idm2892949784))
   * pfree, [Writing Code](xfunc-c#XFUNC-C-CODE)
   * PGAPPNAME, [Environment Variables](libpq-envars)
   * pgbench, [pgbench](pgbench)
@@ -2392,11 +2175,9 @@
   * pg\_column\_size, [Database Object Management Functions](functions-admin#FUNCTIONS-ADMIN-DBOBJECT)
   * pg\_config, [pg\_config](app-pgconfig), [pg\_config](view-pg-config)
 
-    
-
-  * with ecpg, [Processing Embedded SQL Programs](ecpg-process)
-    * with libpq, [Building libpq Programs](libpq-build)
-    * with user-defined C functions, [Writing Code](xfunc-c#XFUNC-C-CODE)
+    - with ecpg, [Processing Embedded SQL Programs](ecpg-process)
+    - with libpq, [Building libpq Programs](libpq-build)
+    - with user-defined C functions, [Writing Code](xfunc-c#XFUNC-C-CODE)
 
   * pg\_conf\_load\_time, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
   * pg\_constraint, [pg\_constraint](catalog-pg-constraint)
@@ -2434,9 +2215,7 @@
   * pg\_dump, [pg\_dump](app-pgdump)
   * pg\_dumpall, [pg\_dumpall](app-pg-dumpall)
 
-    
-
-  * use during upgrade, [Upgrading Data via pg\_dumpall](upgrading#UPGRADING-VIA-PGDUMPALL)
+  - use during upgrade, [Upgrading Data via pg\_dumpall](upgrading#UPGRADING-VIA-PGDUMPALL)
 
   * pg\_encoding\_to\_char, [System Catalog Information Functions](functions-info#FUNCTIONS-INFO-CATALOG)
   * pg\_enum, [pg\_enum](catalog-pg-enum)
@@ -2565,7 +2344,7 @@
   * pg\_read\_binary\_file, [Generic File Access Functions](functions-admin#FUNCTIONS-ADMIN-GENFILE)
   * pg\_read\_file, [Generic File Access Functions](functions-admin#FUNCTIONS-ADMIN-GENFILE)
   * pg\_receivewal, [pg\_receivewal](app-pgreceivewal)
-  * pg\_receivexlog, [pg\_receivexlog renamed to pg\_receivewal](app-pgreceivexlog) (see [pg\_receivewal](#ientry-idp105554114105855))
+  * pg\_receivexlog, [pg\_receivexlog renamed to pg\_receivewal](app-pgreceivexlog) (see [pg\_receivewal](#ientry-idm2694766984))
   * pg\_recvlogical, [pg\_recvlogical](app-pgrecvlogical)
   * pg\_relation\_filenode, [Database Object Management Functions](functions-admin#FUNCTIONS-ADMIN-DBOBJECT)
   * pg\_relation\_filepath, [Database Object Management Functions](functions-admin#FUNCTIONS-ADMIN-DBOBJECT)
@@ -2588,7 +2367,7 @@
   * pg\_replication\_slots, [pg\_replication\_slots](view-pg-replication-slots)
   * pg\_replication\_slot\_advance, [Replication Management Functions](functions-admin#FUNCTIONS-REPLICATION)
   * pg\_resetwal, [pg\_resetwal](app-pgresetwal)
-  * pg\_resetxlog, [pg\_resetxlog renamed to pg\_resetwal](app-pgresetxlog) (see [pg\_resetwal](#ientry-idp105554110329471))
+  * pg\_resetxlog, [pg\_resetxlog renamed to pg\_resetwal](app-pgresetxlog) (see [pg\_resetwal](#ientry-idm2691330776))
   * pg\_restore, [pg\_restore](app-pgrestore)
   * pg\_rewind, [pg\_rewind](app-pgrewind)
   * pg\_rewrite, [pg\_rewrite](catalog-pg-rewrite)
@@ -2681,9 +2460,7 @@
   * pg\_stat\_ssl, [Viewing Statistics](monitoring-stats#MONITORING-STATS-VIEWS), [pg\_stat\_ssl](monitoring-stats#MONITORING-PG-STAT-SSL-VIEW)
   * pg\_stat\_statements, [pg\_stat\_statements — track statistics of SQL planning and execution](pgstatstatements)
 
-    
-
-  * function, [Functions](pgstatstatements#PGSTATSTATEMENTS-FUNCS)
+  - function, [Functions](pgstatstatements#PGSTATSTATEMENTS-FUNCS)
 
   * pg\_stat\_statements.max configuration parameter, [Configuration Parameters](pgstatstatements#PGSTATSTATEMENTS-CONFIG-PARAMS)
   * pg\_stat\_statements.save configuration parameter, [Configuration Parameters](pgstatstatements#PGSTATSTATEMENTS-CONFIG-PARAMS)
@@ -2718,9 +2495,7 @@
   * pg\_table\_size, [Database Object Management Functions](functions-admin#FUNCTIONS-ADMIN-DBOBJECT)
   * pg\_temp, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
-    
-
-  * securing functions, [Writing SECURITY DEFINER Functions Safely](sql-createfunction#SQL-CREATEFUNCTION-SECURITY)
+  - securing functions, [Writing SECURITY DEFINER Functions Safely](sql-createfunction#SQL-CREATEFUNCTION-SECURITY)
 
   * pg\_terminate\_backend, [Server Signaling Functions](functions-admin#FUNCTIONS-ADMIN-SIGNAL)
   * pg\_test\_fsync, [pg\_test\_fsync](pgtestfsync)
@@ -2759,7 +2534,6 @@
   * pg\_views, [pg\_views](view-pg-views)
   * pg\_visibility, [pg\_visibility — visibility map information and utilities](pgvisibility)
   * pg\_visible\_in\_snapshot, [Transaction ID and Snapshot Information Functions](functions-info#FUNCTIONS-INFO-SNAPSHOT)
-  * pg\_wait\_events, [pg\_wait\_events](view-pg-wait-events)
   * pg\_waldump, [pg\_waldump](pgwaldump)
   * pg\_walfile\_name, [Backup Control Functions](functions-admin#FUNCTIONS-ADMIN-BACKUP)
   * pg\_walfile\_name\_offset, [Backup Control Functions](functions-admin#FUNCTIONS-ADMIN-BACKUP)
@@ -2770,32 +2544,28 @@
   * pg\_xact\_commit\_timestamp, [Committed Transaction Information Functions](functions-info#FUNCTIONS-INFO-COMMIT-TIMESTAMP)
   * pg\_xact\_commit\_timestamp\_origin, [Committed Transaction Information Functions](functions-info#FUNCTIONS-INFO-COMMIT-TIMESTAMP)
   * pg\_xact\_status, [Transaction ID and Snapshot Information Functions](functions-info#FUNCTIONS-INFO-SNAPSHOT)
-  * pg\_xlogdump, [pg\_xlogdump renamed to pg\_waldump](pgxlogdump) (see [pg\_waldump](#ientry-idp105554110926847))
+  * pg\_xlogdump, [pg\_xlogdump renamed to pg\_waldump](pgxlogdump) (see [pg\_waldump](#ientry-idm2690757528))
   * phantom read, [Transaction Isolation](transaction-iso)
   * phraseto\_tsquery, [Text Search Functions and Operators](functions-textsearch), [Parsing Queries](textsearch-controls#TEXTSEARCH-PARSING-QUERIES)
   * pi, [Mathematical Functions and Operators](functions-math)
   * PIC, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
   * PID
 
-    
-
-  * determining PID of server process
+  - determining PID of server process
 
     * in libpq, [Connection Status Functions](libpq-status)
 
 * pipelining, [Pipeline Mode](libpq-pipeline-mode), [Pipelining](protocol-flow#PROTOCOL-FLOW-PIPELINING)
 
-  * in libpq, [Pipeline Mode](libpq-pipeline-mode)
+    * in libpq, [Pipeline Mode](libpq-pipeline-mode)
     * protocol specification, [Pipelining](protocol-flow#PROTOCOL-FLOW-PIPELINING)
 
   * PITR, [Backup and Restore](backup)
   * PITR standby, [High Availability, Load Balancing, and Replication](high-availability)
   * pkg-config, [Requirements](install-requirements)
 
-    
-
-  * with ecpg, [Processing Embedded SQL Programs](ecpg-process)
-    * with libpq, [Building libpq Programs](libpq-build)
+    - with ecpg, [Processing Embedded SQL Programs](ecpg-process)
+    - with libpq, [Building libpq Programs](libpq-build)
 
   * PL/Perl, [PL/Perl — Perl Procedural Language](plperl)
   * PL/PerlU, [Trusted and Untrusted PL/Perl](plperl-trusted)
@@ -2803,9 +2573,7 @@
   * PL/Python, [PL/Python — Python Procedural Language](plpython)
   * PL/SQL (Oracle), [Porting from Oracle PL/SQL](plpgsql-porting)
 
-    
-
-  * porting to PL/pgSQL, [Porting from Oracle PL/SQL](plpgsql-porting)
+  - porting to PL/pgSQL, [Porting from Oracle PL/SQL](plpgsql-porting)
 
   * PL/Tcl, [PL/Tcl — Tcl Procedural Language](pltcl)
   * plainto\_tsquery, [Text Search Functions and Operators](functions-textsearch), [Parsing Queries](textsearch-controls#TEXTSEARCH-PARSING-QUERIES)
@@ -2824,17 +2592,15 @@
   * polygon, [Polygons](datatype-geometric#DATATYPE-POLYGON), [Geometric Functions and Operators](functions-geometry)
   * polymorphic function, [Polymorphic Types](extend-type-system#EXTEND-TYPES-POLYMORPHIC)
   * polymorphic type, [Polymorphic Types](extend-type-system#EXTEND-TYPES-POLYMORPHIC)
-  * popcount (see [bit\_count](#ientry-idp105553374222975))
+  * popcount (see [bit\_count](#ientry-idm2887207832))
   * popen, [Geometric Functions and Operators](functions-geometry)
   * populate\_record, [hstore Operators and Functions](hstore#HSTORE-OPS-FUNCS)
   * port, [Parameter Key Words](libpq-connect#LIBPQ-PARAMKEYWORDS)
   * port configuration parameter, [Connection Settings](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-SETTINGS)
   * portal
 
-    
-
-  * DECLARE, [DECLARE](sql-declare)
-    * in PL/pgSQL, [Opening Cursors](plpgsql-cursors#PLPGSQL-CURSOR-OPENING)
+    - DECLARE, [DECLARE](sql-declare)
+    - in PL/pgSQL, [Opening Cursors](plpgsql-cursors#PLPGSQL-CURSOR-OPENING)
 
   * position, [String Functions and Operators](functions-string), [Binary String Functions and Operators](functions-binarystring), [Bit String Functions and Operators](functions-bitstring)
   * POSITION\_REGEX, [Differences from SQL Standard and XQuery](functions-matching#POSIX-VS-XQUERY)
@@ -2851,15 +2617,11 @@
   * PQbackendPID, [Connection Status Functions](libpq-status)
   * PQbinaryTuples, [Retrieving Query Result Information](libpq-exec#LIBPQ-EXEC-SELECT-INFO)
 
-    
-
-  * with COPY, [Functions Associated with the COPY Command](libpq-copy)
+  - with COPY, [Functions Associated with the COPY Command](libpq-copy)
 
   * PQcancel, [Canceling Queries in Progress](libpq-cancel)
   * PQclear, [Main Functions](libpq-exec#LIBPQ-EXEC-MAIN)
   * PQclientEncoding, [Control Functions](libpq-control)
-  * PQclosePortal, [Main Functions](libpq-exec#LIBPQ-EXEC-MAIN)
-  * PQclosePrepared, [Main Functions](libpq-exec#LIBPQ-EXEC-MAIN)
   * PQcmdStatus, [Retrieving Other Result Information](libpq-exec#LIBPQ-EXEC-NONSELECT)
   * PQcmdTuples, [Retrieving Other Result Information](libpq-exec#LIBPQ-EXEC-NONSELECT)
   * PQconndefaults, [Database Connection Control Functions](libpq-connect)
@@ -2896,9 +2658,7 @@
   * PQexitPipelineMode, [Functions Associated with Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-FUNCTIONS)
   * PQfformat, [Retrieving Query Result Information](libpq-exec#LIBPQ-EXEC-SELECT-INFO)
 
-    
-
-  * with COPY, [Functions Associated with the COPY Command](libpq-copy)
+  - with COPY, [Functions Associated with the COPY Command](libpq-copy)
 
   * PQfinish, [Database Connection Control Functions](libpq-connect)
   * PQfireResultCreateEvents, [Miscellaneous Functions](libpq-misc)
@@ -2933,16 +2693,12 @@
   * PQisthreadsafe, [Behavior in Threaded Programs](libpq-threading)
   * PQlibVersion, [Miscellaneous Functions](libpq-misc)
 
-    
-
-  * (see also [PQserverVersion](#ientry-idp105553711783807))
+  - (see also [PQserverVersion](#ientry-idm2861623032))
 
   * PQmakeEmptyPGresult, [Miscellaneous Functions](libpq-misc)
   * PQnfields, [Retrieving Query Result Information](libpq-exec#LIBPQ-EXEC-SELECT-INFO)
 
-    
-
-  * with COPY, [Functions Associated with the COPY Command](libpq-copy)
+  - with COPY, [Functions Associated with the COPY Command](libpq-copy)
 
   * PQnotifies, [Asynchronous Notification](libpq-notify)
   * PQnparams, [Retrieving Query Result Information](libpq-exec#LIBPQ-EXEC-SELECT-INFO)
@@ -2979,8 +2735,6 @@
   * PQresultSetInstanceData, [Event Support Functions](libpq-events#LIBPQ-EVENTS-FUNCS)
   * PQresultStatus, [Main Functions](libpq-exec#LIBPQ-EXEC-MAIN)
   * PQresultVerboseErrorMessage, [Main Functions](libpq-exec#LIBPQ-EXEC-MAIN)
-  * PQsendClosePortal, [Asynchronous Command Processing](libpq-async)
-  * PQsendClosePrepared, [Asynchronous Command Processing](libpq-async)
   * PQsendDescribePortal, [Asynchronous Command Processing](libpq-async)
   * PQsendDescribePrepared, [Asynchronous Command Processing](libpq-async)
   * PQsendFlushRequest, [Functions Associated with Pipeline Mode](libpq-pipeline-mode#LIBPQ-PIPELINE-FUNCTIONS)
@@ -3020,16 +2774,14 @@
   * PREPARE TRANSACTION, [PREPARE TRANSACTION](sql-prepare-transaction)
   * prepared statements, [DEALLOCATE](sql-deallocate), [EXECUTE](sql-execute), [EXPLAIN](sql-explain), [PREPARE](sql-prepare)
 
-    
-
-  * creating, [PREPARE](sql-prepare)
-    * executing, [EXECUTE](sql-execute)
-    * removing, [DEALLOCATE](sql-deallocate)
-    * showing the query plan, [EXPLAIN](sql-explain)
+    - creating, [PREPARE](sql-prepare)
+    - executing, [EXECUTE](sql-execute)
+    - removing, [DEALLOCATE](sql-deallocate)
+    - showing the query plan, [EXPLAIN](sql-explain)
 
 * preparing a query
 
-  * in PL/pgSQL, [Plan Caching](plpgsql-implementation#PLPGSQL-PLAN-CACHING)
+    * in PL/pgSQL, [Plan Caching](plpgsql-implementation#PLPGSQL-PLAN-CACHING)
     * in PL/Python, [Database Access Functions](plpython-database#PLPYTHON-DATABASE-ACCESS-FUNCS)
     * in PL/Tcl, [Database Access from PL/Tcl](pltcl-dbaccess)
 
@@ -3039,16 +2791,14 @@
   * primary\_slot\_name configuration parameter, [Standby Servers](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-STANDBY)
   * privilege, [Privileges](ddl-priv), [Schemas and Privileges](ddl-schemas#DDL-SCHEMAS-PRIV), [Rules and Privileges](rules-privileges), [Rules and Privileges](rules-privileges)
 
-    
-
-  * querying, [Access Privilege Inquiry Functions](functions-info#FUNCTIONS-INFO-ACCESS)
-    * with rules, [Rules and Privileges](rules-privileges)
-    * for schemas, [Schemas and Privileges](ddl-schemas#DDL-SCHEMAS-PRIV)
-    * with views, [Rules and Privileges](rules-privileges)
+    - querying, [Access Privilege Inquiry Functions](functions-info#FUNCTIONS-INFO-ACCESS)
+    - with rules, [Rules and Privileges](rules-privileges)
+    - for schemas, [Schemas and Privileges](ddl-schemas#DDL-SCHEMAS-PRIV)
+    - with views, [Rules and Privileges](rules-privileges)
 
 * procedural language, [Procedural Languages](xplang), [Writing a Procedural Language Handler](plhandler)
 
-  * externally maintained, [Procedural Languages](external-pl)
+    * externally maintained, [Procedural Languages](external-pl)
     * handler for, [Writing a Procedural Language Handler](plhandler)
 
 * procedure, [User-Defined Procedures](xproc)
@@ -3070,6 +2820,8 @@
   * psql, [Accessing a Database](tutorial-accessdb), [psql](app-psql)
   * Python, [PL/Python — Python Procedural Language](plpython)
 
+[#id](#indexdiv-Q)
+
 ### Q
 
   * qualified name, [Creating a Schema](ddl-schemas#DDL-SCHEMAS-CREATE)
@@ -3079,28 +2831,26 @@
   * querytree, [Text Search Functions and Operators](functions-textsearch), [Manipulating Queries](textsearch-features#TEXTSEARCH-MANIPULATE-TSQUERY)
   * quotation marks
 
-    
-
-  * and identifiers, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
-    * escaping, [String Constants](sql-syntax-lexical#SQL-SYNTAX-STRINGS)
+    - and identifiers, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
+    - escaping, [String Constants](sql-syntax-lexical#SQL-SYNTAX-STRINGS)
 
   * quote\_all\_identifiers configuration parameter, [Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
   * quote\_ident, [String Functions and Operators](functions-string)
 
-    
-
-  * in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
-    * use in PL/pgSQL, [Executing Dynamic Commands](plpgsql-statements#PLPGSQL-STATEMENTS-EXECUTING-DYN)
+    - in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
+    - use in PL/pgSQL, [Executing Dynamic Commands](plpgsql-statements#PLPGSQL-STATEMENTS-EXECUTING-DYN)
 
 * quote\_literal, [String Functions and Operators](functions-string)
 
-  * in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
+    * in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
     * use in PL/pgSQL, [Executing Dynamic Commands](plpgsql-statements#PLPGSQL-STATEMENTS-EXECUTING-DYN)
 
 * quote\_nullable, [String Functions and Operators](functions-string)
 
-  * in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
+    * in PL/Perl, [Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
     * use in PL/pgSQL, [Executing Dynamic Commands](plpgsql-statements#PLPGSQL-STATEMENTS-EXECUTING-DYN)
+
+[#id](#indexdiv-R)
 
 ### R
 
@@ -3109,9 +2859,7 @@
   * RADIUS, [RADIUS Authentication](auth-radius)
   * RAISE
 
-    
-
-  * in PL/pgSQL, [Reporting Errors and Messages](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-RAISE)
+  - in PL/pgSQL, [Reporting Errors and Messages](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-RAISE)
 
   * random, [Mathematical Functions and Operators](functions-math)
   * random\_normal, [Mathematical Functions and Operators](functions-math)
@@ -3119,34 +2867,26 @@
   * range table, [The Query Tree](querytree)
   * range type, [Range Types](rangetypes)
 
-    
-
-  * exclude, [Constraints on Ranges](rangetypes#RANGETYPES-CONSTRAINT)
-    * indexes on, [Indexing](rangetypes#RANGETYPES-INDEXING)
+    - exclude, [Constraints on Ranges](rangetypes#RANGETYPES-CONSTRAINT)
+    - indexes on, [Indexing](rangetypes#RANGETYPES-INDEXING)
 
   * range\_agg, [Aggregate Functions](functions-aggregate)
   * range\_intersect\_agg, [Aggregate Functions](functions-aggregate)
   * range\_merge, [Range/Multirange Functions and Operators](functions-range)
   * rank, [Window Functions](functions-window)
 
-    
-
-  * hypothetical, [Aggregate Functions](functions-aggregate)
+  - hypothetical, [Aggregate Functions](functions-aggregate)
 
   * read committed, [Read Committed Isolation Level](transaction-iso#XACT-READ-COMMITTED)
   * read-only transaction, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
-    
-
-  * setting, [SET TRANSACTION](sql-set-transaction)
-    * setting default, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
+    - setting, [SET TRANSACTION](sql-set-transaction)
+    - setting default, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
   * readline, [Requirements](install-requirements)
   * Readline
 
-    
-
-  * in psql, [Command-Line Editing](app-psql#APP-PSQL-READLINE)
+  - in psql, [Command-Line Editing](app-psql#APP-PSQL-READLINE)
 
   * READ\_REPLICATION\_SLOT, [Streaming Replication Protocol](protocol-replication)
   * real, [Floating-Point Types](datatype-numeric#DATATYPE-FLOAT)
@@ -3169,10 +2909,8 @@
   * rectangle, [Boxes](datatype-geometric#DATATYPE-GEOMETRIC-BOXES)
   * RECURSIVE, [CREATE VIEW](sql-createview)
 
-    
-
-  * in common table expressions, [Recursive Queries](queries-with#QUERIES-WITH-RECURSIVE)
-    * in views, [CREATE VIEW](sql-createview)
+    - in common table expressions, [Recursive Queries](queries-with#QUERIES-WITH-RECURSIVE)
+    - in views, [CREATE VIEW](sql-createview)
 
   * recursive\_worktable\_factor configuration parameter, [Other Planner Options](runtime-config-query#RUNTIME-CONFIG-QUERY-OTHER)
   * referential integrity, [Foreign Keys](tutorial-fk), [Foreign Keys](ddl-constraints#DDL-CONSTRAINTS-FK)
@@ -3212,9 +2950,7 @@
   * regtype, [Object Identifier Types](datatype-oid)
   * regular expression, [SIMILAR TO Regular Expressions](functions-matching#FUNCTIONS-SIMILARTO-REGEXP), [POSIX Regular Expressions](functions-matching#FUNCTIONS-POSIX-REGEXP)
 
-    
-
-  * (see also [pattern matching](#ientry-idp105553375034495))
+  - (see also [pattern matching](#ientry-idm2886844696))
 
 * regular expressions
 
@@ -3235,10 +2971,8 @@
   * Replication Progress Tracking, [Replication Progress Tracking](replication-origins)
   * replication slot
 
-    
-
-  * logical replication, [Replication Slots](logicaldecoding-explanation#LOGICALDECODING-REPLICATION-SLOTS)
-    * streaming replication, [Replication Slots](warm-standby#STREAMING-REPLICATION-SLOTS)
+    - logical replication, [Replication Slots](logicaldecoding-explanation#LOGICALDECODING-REPLICATION-SLOTS)
+    - streaming replication, [Replication Slots](warm-standby#STREAMING-REPLICATION-SLOTS)
 
 * reporting errors
 
@@ -3251,17 +2985,13 @@
   * restore\_command configuration parameter, [Archive Recovery](runtime-config-wal#RUNTIME-CONFIG-WAL-ARCHIVE-RECOVERY)
   * RESTRICT, [Dependency Tracking](ddl-depend)
 
-    
-
-  * with DROP, [Dependency Tracking](ddl-depend)
-    * foreign key action, [Foreign Keys](ddl-constraints#DDL-CONSTRAINTS-FK)
+    - with DROP, [Dependency Tracking](ddl-depend)
+    - foreign key action, [Foreign Keys](ddl-constraints#DDL-CONSTRAINTS-FK)
 
   * retryable error, [Serialization Failure Handling](mvcc-serialization-failure-handling)
   * RETURN NEXT
 
-    
-
-  * in PL/pgSQL, [RETURN NEXT and RETURN QUERY](plpgsql-control-structures#PLPGSQL-STATEMENTS-RETURNING-RETURN-NEXT)
+  - in PL/pgSQL, [RETURN NEXT and RETURN QUERY](plpgsql-control-structures#PLPGSQL-STATEMENTS-RETURNING-RETURN-NEXT)
 
 * RETURN QUERY
 
@@ -3270,9 +3000,7 @@
   * RETURNING, [Returning Data from Modified Rows](dml-returning)
   * RETURNING INTO, [Executing a Command with a Single-Row Result](plpgsql-statements#PLPGSQL-STATEMENTS-SQL-ONEROW)
 
-    
-
-  * in PL/pgSQL, [Executing a Command with a Single-Row Result](plpgsql-statements#PLPGSQL-STATEMENTS-SQL-ONEROW)
+  - in PL/pgSQL, [Executing a Command with a Single-Row Result](plpgsql-statements#PLPGSQL-STATEMENTS-SQL-ONEROW)
 
   * reverse, [String Functions and Operators](functions-string)
   * REVOKE, [Privileges](ddl-priv), [REVOKE](sql-revoke)
@@ -3280,23 +3008,19 @@
   * right join, [Joined Tables](queries-table-expressions#QUERIES-JOIN)
   * role, [Database Roles](database-roles), [Role Membership](role-membership), [Predefined Roles](predefined-roles)
 
-    
-
-  * applicable, [applicable\_roles](infoschema-applicable-roles)
-    * enabled, [enabled\_roles](infoschema-enabled-roles)
-    * membership in, [Role Membership](role-membership)
-    * privilege to bypass, [Role Attributes](role-attributes)
-    * privilege to create, [Role Attributes](role-attributes)
-    * privilege to inherit, [Role Attributes](role-attributes)
-    * privilege to initiate replication, [Role Attributes](role-attributes)
-    * privilege to limit connection, [Role Attributes](role-attributes)
+    - applicable, [applicable\_roles](infoschema-applicable-roles)
+    - enabled, [enabled\_roles](infoschema-enabled-roles)
+    - membership in, [Role Membership](role-membership)
+    - privilege to bypass, [Role Attributes](role-attributes)
+    - privilege to create, [Role Attributes](role-attributes)
+    - privilege to inherit, [Role Attributes](role-attributes)
+    - privilege to initiate replication, [Role Attributes](role-attributes)
+    - privilege to limit connection, [Role Attributes](role-attributes)
 
   * ROLLBACK, [ROLLBACK](sql-rollback)
   * rollback
 
-    
-
-  * psql, [Variables](app-psql#APP-PSQL-VARIABLES)
+  - psql, [Variables](app-psql#APP-PSQL-VARIABLES)
 
   * ROLLBACK PREPARED, [ROLLBACK PREPARED](sql-rollback-prepared)
   * ROLLBACK TO SAVEPOINT, [ROLLBACK TO SAVEPOINT](sql-rollback-to)
@@ -3308,10 +3032,8 @@
   * ROW, [Row Constructors](sql-expressions#SQL-SYNTAX-ROW-CONSTRUCTORS)
   * row estimation, [Row Estimation Examples](row-estimation-examples)
 
-    
-
-  * multivariate, [Multivariate Statistics Examples](multivariate-statistics-examples)
-    * planner, [Row Estimation Examples](row-estimation-examples)
+    - multivariate, [Multivariate Statistics Examples](multivariate-statistics-examples)
+    - planner, [Row Estimation Examples](row-estimation-examples)
 
 * row type, [Composite Types](rowtypes)
 
@@ -3327,46 +3049,40 @@
   * rtrim, [String Functions and Operators](functions-string), [Binary String Functions and Operators](functions-binarystring)
   * rule, [The Rule System](rules), [Views and the Rule System](rules-views), [How SELECT Rules Work](rules-views#RULES-SELECT), [Materialized Views](rules-materializedviews), [Rules on INSERT, UPDATE, and DELETE](rules-update), [Rules on INSERT, UPDATE, and DELETE](rules-update), [Rules on INSERT, UPDATE, and DELETE](rules-update), [Rules Versus Triggers](rules-triggers)
 
-    
+    - and materialized views, [Materialized Views](rules-materializedviews)
+    - and views, [Views and the Rule System](rules-views)
+    - for DELETE, [Rules on INSERT, UPDATE, and DELETE](rules-update)
+    - for INSERT, [Rules on INSERT, UPDATE, and DELETE](rules-update)
+    - for SELECT, [How SELECT Rules Work](rules-views#RULES-SELECT)
+    - compared with triggers, [Rules Versus Triggers](rules-triggers)
+    - for UPDATE, [Rules on INSERT, UPDATE, and DELETE](rules-update)
 
-  * and materialized views, [Materialized Views](rules-materializedviews)
-    * and views, [Views and the Rule System](rules-views)
-    * for DELETE, [Rules on INSERT, UPDATE, and DELETE](rules-update)
-    * for INSERT, [Rules on INSERT, UPDATE, and DELETE](rules-update)
-    * for SELECT, [How SELECT Rules Work](rules-views#RULES-SELECT)
-    * compared with triggers, [Rules Versus Triggers](rules-triggers)
-    * for UPDATE, [Rules on INSERT, UPDATE, and DELETE](rules-update)
+[#id](#indexdiv-S)
 
 ### S
 
   * SAVEPOINT, [SAVEPOINT](sql-savepoint)
   * savepoints, [RELEASE SAVEPOINT](sql-release-savepoint), [ROLLBACK TO SAVEPOINT](sql-rollback-to), [SAVEPOINT](sql-savepoint)
 
-    
+    - defining, [SAVEPOINT](sql-savepoint)
+    - releasing, [RELEASE SAVEPOINT](sql-release-savepoint)
+    - rolling back, [ROLLBACK TO SAVEPOINT](sql-rollback-to)
 
-  * defining, [SAVEPOINT](sql-savepoint)
-    * releasing, [RELEASE SAVEPOINT](sql-release-savepoint)
-    * rolling back, [ROLLBACK TO SAVEPOINT](sql-rollback-to)
-
-  * scalar (see [expression](#ientry-idp105553309122431))
+  * scalar (see [expression](#ientry-idm2893668920))
   * scale, [Mathematical Functions and Operators](functions-math)
   * schema, [Schemas](ddl-schemas), [Creating a Schema](ddl-schemas#DDL-SCHEMAS-CREATE), [The Public Schema](ddl-schemas#DDL-SCHEMAS-PUBLIC), [Overview](manage-ag-overview)
 
-    
-
-  * creating, [Creating a Schema](ddl-schemas#DDL-SCHEMAS-CREATE)
-    * current, [The Schema Search Path](ddl-schemas#DDL-SCHEMAS-PATH), [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
-    * public, [The Public Schema](ddl-schemas#DDL-SCHEMAS-PUBLIC)
-    * removing, [Creating a Schema](ddl-schemas#DDL-SCHEMAS-CREATE)
+    - creating, [Creating a Schema](ddl-schemas#DDL-SCHEMAS-CREATE)
+    - current, [The Schema Search Path](ddl-schemas#DDL-SCHEMAS-PATH), [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
+    - public, [The Public Schema](ddl-schemas#DDL-SCHEMAS-PUBLIC)
+    - removing, [Creating a Schema](ddl-schemas#DDL-SCHEMAS-CREATE)
 
   * SCRAM, [Password Authentication](auth-password)
   * scram\_iterations configuration parameter, [Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
   * search path, [The Schema Search Path](ddl-schemas#DDL-SCHEMAS-PATH)
 
-    
-
-  * current, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
-    * object visibility, [Schema Visibility Inquiry Functions](functions-info#FUNCTIONS-INFO-SCHEMA)
+    - current, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
+    - object visibility, [Schema Visibility Inquiry Functions](functions-info#FUNCTIONS-INFO-SCHEMA)
 
 * search\_path configuration parameter, [The Schema Search Path](ddl-schemas#DDL-SCHEMAS-PATH), [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
@@ -3378,10 +3094,8 @@
   * segment\_size configuration parameter, [Preset Options](runtime-config-preset)
   * SELECT, [Querying a Table](tutorial-select), [Queries](queries), [SELECT Output Columns](typeconv-select), [SELECT](sql-select)
 
-    
-
-  * determination of result type, [SELECT Output Columns](typeconv-select)
-    * select list, [Select Lists](queries-select-lists)
+    - determination of result type, [SELECT Output Columns](typeconv-select)
+    - select list, [Select Lists](queries-select-lists)
 
 * SELECT INTO, [Executing a Command with a Single-Row Result](plpgsql-statements#PLPGSQL-STATEMENTS-SQL-ONEROW), [SELECT INTO](sql-selectinto)
 
@@ -3395,9 +3109,7 @@
   * sepgsql.permissive configuration parameter, [GUC Parameters](sepgsql#SEPGSQL-PARAMETERS)
   * sequence, [Sequence Manipulation Functions](functions-sequence)
 
-    
-
-  * and serial type, [Serial Types](datatype-numeric#DATATYPE-SERIAL)
+  - and serial type, [Serial Types](datatype-numeric#DATATYPE-SERIAL)
 
   * sequential scan, [Planner Method Configuration](runtime-config-query#RUNTIME-CONFIG-QUERY-ENABLE)
   * seq\_page\_cost configuration parameter, [Planner Cost Constants](runtime-config-query#RUNTIME-CONFIG-QUERY-CONSTANTS)
@@ -3411,9 +3123,7 @@
   * serialization failure, [Serialization Failure Handling](mvcc-serialization-failure-handling)
   * server log, [Error Reporting and Logging](runtime-config-logging), [Log File Maintenance](logfile-maintenance)
 
-    
-
-  * log file maintenance, [Log File Maintenance](logfile-maintenance)
+  - log file maintenance, [Log File Maintenance](logfile-maintenance)
 
   * Server Name Indication, [Parameter Key Words](libpq-connect#LIBPQ-PARAMKEYWORDS)
   * server spoofing, [Preventing Server Spoofing](preventing-server-spoofing)
@@ -3430,9 +3140,7 @@
   * set operation, [Combining Queries (UNION, INTERSECT, EXCEPT)](queries-union)
   * set returning functions, [Set Returning Functions](functions-srf)
 
-    
-
-  * functions, [Set Returning Functions](functions-srf)
+  - functions, [Set Returning Functions](functions-srf)
 
   * SET ROLE, [SET ROLE](sql-set-role)
   * SET SESSION AUTHORIZATION, [SET SESSION AUTHORIZATION](sql-set-session-authorization)
@@ -3443,9 +3151,7 @@
   * setval, [Sequence Manipulation Functions](functions-sequence)
   * setweight, [Text Search Functions and Operators](functions-textsearch), [Manipulating Documents](textsearch-features#TEXTSEARCH-MANIPULATE-TSVECTOR)
 
-    
-
-  * setweight for specific lexeme(s), [Text Search Functions and Operators](functions-textsearch)
+  - setweight for specific lexeme(s), [Text Search Functions and Operators](functions-textsearch)
 
   * set\_bit, [Binary String Functions and Operators](functions-binarystring), [Bit String Functions and Operators](functions-bitstring)
   * set\_byte, [Binary String Functions and Operators](functions-binarystring)
@@ -3474,9 +3180,7 @@
   * sign, [Mathematical Functions and Operators](functions-math)
   * signal
 
-    
-
-  * backend processes, [Server Signaling Functions](functions-admin#FUNCTIONS-ADMIN-SIGNAL)
+  - backend processes, [Server Signaling Functions](functions-admin#FUNCTIONS-ADMIN-SIGNAL)
 
   * significant digits, [Locale and Formatting](runtime-config-client#RUNTIME-CONFIG-CLIENT-FORMAT)
   * SIGQUIT, [Shutting Down the Server](server-shutdown)
@@ -3490,18 +3194,16 @@
   * skeys, [hstore Operators and Functions](hstore#HSTORE-OPS-FUNCS)
   * sleep, [Delaying Execution](functions-datetime#FUNCTIONS-DATETIME-DELAY)
   * slice, [hstore Operators and Functions](hstore#HSTORE-OPS-FUNCS)
-  * sliced bread (see [TOAST](#ientry-idp105553710317055))
+  * sliced bread (see [TOAST](#ientry-idm2859640248))
   * slope, [Geometric Functions and Operators](functions-geometry)
   * SLRU, [pg\_stat\_slru](monitoring-stats#MONITORING-PG-STAT-SLRU-VIEW)
   * smallint, [Integer Types](datatype-numeric#DATATYPE-INT)
   * smallserial, [Serial Types](datatype-numeric#DATATYPE-SERIAL)
   * Solaris, [Solaris](installation-platform-notes#INSTALLATION-NOTES-SOLARIS)
 
-    
-
-  * installation on, [Solaris](installation-platform-notes#INSTALLATION-NOTES-SOLARIS)
-    * shared library, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
-    * start script, [Starting the Database Server](server-start)
+    - installation on, [Solaris](installation-platform-notes#INSTALLATION-NOTES-SOLARIS)
+    - shared library, [Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
+    - start script, [Starting the Database Server](server-start)
 
   * SOME, [Aggregate Functions](functions-aggregate), [Subquery Expressions](functions-subquery), [Row and Array Comparisons](functions-comparisons)
   * sort, [intarray Functions and Operators](intarray#INTARRAY-FUNCS-OPS)
@@ -3509,12 +3211,10 @@
   * sort\_asc, [intarray Functions and Operators](intarray#INTARRAY-FUNCS-OPS)
   * sort\_desc, [intarray Functions and Operators](intarray#INTARRAY-FUNCS-OPS)
   * soundex, [Soundex](fuzzystrmatch#FUZZYSTRMATCH-SOUNDEX)
-  * SP-GiST (see [index](#ientry-idp105553510265215))
+  * SP-GiST (see [index](#ientry-idm2877840120))
   * SPI, [Server Programming Interface](spi), [spi — Server Programming Interface features/examples](contrib-spi)
 
-    
-
-  * examples, [spi — Server Programming Interface features/examples](contrib-spi)
+  - examples, [spi — Server Programming Interface features/examples](contrib-spi)
 
 * spi\_commit
 
@@ -3527,9 +3227,7 @@
   * SPI\_copytuple, [SPI\_copytuple](spi-spi-copytuple)
   * spi\_cursor\_close
 
-    
-
-  * in PL/Perl, [Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
+  - in PL/Perl, [Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
 
   * SPI\_cursor\_close, [SPI\_cursor\_close](spi-spi-cursor-close)
   * SPI\_cursor\_fetch, [SPI\_cursor\_fetch](spi-spi-cursor-fetch)
@@ -3549,9 +3247,7 @@
   * SPI\_execute\_with\_args, [SPI\_execute\_with\_args](spi-spi-execute-with-args)
   * spi\_exec\_prepared
 
-    
-
-  * in PL/Perl, [Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
+  - in PL/Perl, [Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
 
 * spi\_exec\_query
 
@@ -3566,9 +3262,7 @@
   * SPI\_fnumber, [SPI\_fnumber](spi-spi-fnumber)
   * spi\_freeplan
 
-    
-
-  * in PL/Perl, [Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
+  - in PL/Perl, [Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
 
   * SPI\_freeplan, [SPI\_freeplan](spi-spi-freeplan)
   * SPI\_freetuple, [SPI\_freetuple](spi-spi-freetuple)
@@ -3588,9 +3282,7 @@
   * SPI\_pfree, [SPI\_pfree](spi-spi-pfree)
   * spi\_prepare
 
-    
-
-  * in PL/Perl, [Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
+  - in PL/Perl, [Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
 
   * SPI\_prepare, [SPI\_prepare](spi-spi-prepare)
   * SPI\_prepare\_cursor, [SPI\_prepare\_cursor](spi-spi-prepare-cursor)
@@ -3598,9 +3290,7 @@
   * SPI\_prepare\_params, [SPI\_prepare\_params](spi-spi-prepare-params)
   * spi\_query
 
-    
-
-  * in PL/Perl, [Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
+  - in PL/Perl, [Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
 
 * spi\_query\_prepared
 
@@ -3613,9 +3303,7 @@
   * SPI\_returntuple, [SPI\_returntuple](spi-spi-returntuple)
   * spi\_rollback
 
-    
-
-  * in PL/Perl, [Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
+  - in PL/Perl, [Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
 
   * SPI\_rollback, [SPI\_rollback](spi-spi-rollback)
   * SPI\_rollback\_and\_chain, [SPI\_rollback](spi-spi-rollback)
@@ -3631,9 +3319,7 @@
   * SQL/JRT, [SQL Conformance](features)
   * SQL/JSON, [JSON Functions and Operators](functions-json)
 
-    
-
-  * functions and expressions, [JSON Functions and Operators](functions-json)
+  - functions and expressions, [JSON Functions and Operators](functions-json)
 
   * SQL/JSON path language, [The SQL/JSON Path Language](functions-json#FUNCTIONS-SQLJSON-PATH)
   * SQL/MDA, [SQL Conformance](features)
@@ -3644,20 +3330,16 @@
   * SQL/Schemata, [SQL Conformance](features)
   * SQL/XML, [SQL Conformance](features)
 
-    
-
-  * limits and conformance, [XML Limits and Conformance to SQL/XML](xml-limits-conformance)
+  - limits and conformance, [XML Limits and Conformance to SQL/XML](xml-limits-conformance)
 
   * sqrt, [Mathematical Functions and Operators](functions-math)
   * ssh, [Secure TCP/IP Connections with SSH Tunnels](ssh-tunnels)
   * SSI, [Introduction](mvcc-intro)
   * SSL, [Secure TCP/IP Connections with SSL](ssl-tcp), [SSL Support](libpq-ssl)
 
-    
-
-  * in libpq, [Connection Status Functions](libpq-status)
-    * with libpq, [Parameter Key Words](libpq-connect#LIBPQ-PARAMKEYWORDS)
-    * TLS, [Secure TCP/IP Connections with SSL](ssl-tcp), [SSL Support](libpq-ssl)
+    - in libpq, [Connection Status Functions](libpq-status)
+    - with libpq, [Parameter Key Words](libpq-connect#LIBPQ-PARAMKEYWORDS)
+    - TLS, [Secure TCP/IP Connections with SSL](ssl-tcp), [SSL Support](libpq-ssl)
 
   * ssl configuration parameter, [SSL](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-SSL)
   * sslinfo, [sslinfo — obtain client SSL information](sslinfo)
@@ -3689,21 +3371,17 @@
   * STABLE, [Function Volatility Categories](xfunc-volatility)
   * standard deviation, [Aggregate Functions](functions-aggregate)
 
-    
-
-  * population, [Aggregate Functions](functions-aggregate)
-    * sample, [Aggregate Functions](functions-aggregate)
+    - population, [Aggregate Functions](functions-aggregate)
+    - sample, [Aggregate Functions](functions-aggregate)
 
   * standard\_conforming\_strings configuration parameter, [Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
   * standby server, [High Availability, Load Balancing, and Replication](high-availability)
   * standby.signal, [Archive Recovery](runtime-config-wal#RUNTIME-CONFIG-WAL-ARCHIVE-RECOVERY), [Standby Server Operation](warm-standby#STANDBY-SERVER-OPERATION), [Setting Up a Standby Server](warm-standby#STANDBY-SERVER-SETUP)
 
-    
+    - for hot standby, [Administrator's Overview](hot-standby#HOT-STANDBY-ADMIN)
+    - pg\_basebackup --write-recovery-conf, [Options](app-pgbasebackup#id-1.9.4.10.6)
 
-  * for hot standby, [Administrator's Overview](hot-standby#HOT-STANDBY-ADMIN)
-    * pg\_basebackup --write-recovery-conf, [Options](app-pgbasebackup#id-1.9.4.10.6)
-
-  * standby\_mode (see [standby.signal](#ientry-idp105553577289855))
+  * standby\_mode (see [standby.signal](#ientry-idm2872098056))
   * START TRANSACTION, [START TRANSACTION](sql-start-transaction)
   * starts\_with, [String Functions and Operators](functions-string)
   * START\_REPLICATION, [Streaming Replication Protocol](protocol-replication)
@@ -3711,9 +3389,7 @@
   * statement\_timestamp, [Date/Time Functions and Operators](functions-datetime)
   * statistics, [Aggregate Functions](functions-aggregate), [Statistics Used by the Planner](planner-stats), [Extended Statistics](planner-stats#PLANNER-STATS-EXTENDED), [Updating Planner Statistics](routine-vacuuming#VACUUM-FOR-STATISTICS), [The Cumulative Statistics System](monitoring-stats)
 
-    
-
-  * of the planner, [Statistics Used by the Planner](planner-stats), [Extended Statistics](planner-stats#PLANNER-STATS-EXTENDED), [Updating Planner Statistics](routine-vacuuming#VACUUM-FOR-STATISTICS)
+  - of the planner, [Statistics Used by the Planner](planner-stats), [Extended Statistics](planner-stats#PLANNER-STATS-EXTENDED), [Updating Planner Statistics](routine-vacuuming#VACUUM-FOR-STATISTICS)
 
   * stats\_fetch\_consistency configuration parameter, [Cumulative Query and Index Statistics](runtime-config-statistics#RUNTIME-CONFIG-CUMULATIVE-STATISTICS)
   * stddev, [Aggregate Functions](functions-aggregate)
@@ -3723,14 +3399,12 @@
   * storage parameters, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
   * Streaming Replication, [High Availability, Load Balancing, and Replication](high-availability)
   * strict\_word\_similarity, [Functions and Operators](pgtrgm#PGTRGM-FUNCS-OPS)
-  * string (see [character string](#ientry-idp105553308273023))
+  * string (see [character string](#ientry-idm2893897720))
   * strings
 
-    
-
-  * backslash quotes, [Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
-    * escape warning, [Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
-    * standard conforming, [Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
+    - backslash quotes, [Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
+    - escape warning, [Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
+    - standard conforming, [Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
 
   * string\_agg, [Aggregate Functions](functions-aggregate)
   * string\_to\_array, [String Functions and Operators](functions-string)
@@ -3747,22 +3421,17 @@
   * SUBSTRING\_REGEX, [Differences from SQL Standard and XQuery](functions-matching#POSIX-VS-XQUERY)
   * subtransactions
 
-    
-
-  * in PL/Tcl, [Explicit Subtransactions in PL/Tcl](pltcl-subtransactions)
+  - in PL/Tcl, [Explicit Subtransactions in PL/Tcl](pltcl-subtransactions)
 
   * sum, [Aggregate Functions](functions-aggregate)
   * superuser, [Accessing a Database](tutorial-accessdb), [Role Attributes](role-attributes)
   * superuser\_reserved\_connections configuration parameter, [Connection Settings](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-SETTINGS)
   * support functions
 
-    
-
-  * in\_range, [B-Tree Support Functions](btree-support-funcs)
+  - in\_range, [B-Tree Support Functions](btree-support-funcs)
 
   * suppress\_redundant\_updates\_trigger, [Trigger Functions](functions-trigger)
   * svals, [hstore Operators and Functions](hstore#HSTORE-OPS-FUNCS)
-  * syncfs, [syncfs() Caveats](syncfs)
   * synchronize\_seqscans configuration parameter, [Previous PostgreSQL Versions](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-VERSION)
   * synchronous commit, [Asynchronous Commit](wal-async-commit)
   * Synchronous Replication, [High Availability, Load Balancing, and Replication](high-availability)
@@ -3770,9 +3439,7 @@
   * synchronous\_standby\_names configuration parameter, [Primary Server](runtime-config-replication#RUNTIME-CONFIG-REPLICATION-PRIMARY)
   * syntax, [SQL Syntax](sql-syntax)
 
-    
-
-  * SQL, [SQL Syntax](sql-syntax)
+  - SQL, [SQL Syntax](sql-syntax)
 
   * syslog\_facility configuration parameter, [Where to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE)
   * syslog\_ident configuration parameter, [Where to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE)
@@ -3780,9 +3447,7 @@
   * syslog\_split\_messages configuration parameter, [Where to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE)
   * system catalog, [The System Catalog Schema](ddl-schemas#DDL-SCHEMAS-CATALOG)
 
-    
-
-  * schema, [The System Catalog Schema](ddl-schemas#DDL-SCHEMAS-CATALOG)
+  - schema, [The System Catalog Schema](ddl-schemas#DDL-SCHEMAS-CATALOG)
 
 * systemd, [PostgreSQL Features](install-make#CONFIGURE-OPTIONS-FEATURES), [PostgreSQL Features](install-meson#MESON-OPTIONS-FEATURES), [Starting the Database Server](server-start)
 
@@ -3790,11 +3455,13 @@
 
 * system\_user, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
 
+[#id](#indexdiv-T)
+
 ### T
 
 * table, [Concepts](tutorial-concepts), [Table Basics](ddl-basics), [Modifying Tables](ddl-alter)
 
-  * creating, [Table Basics](ddl-basics)
+    * creating, [Table Basics](ddl-basics)
     * inheritance, [Inheritance](ddl-inherit)
     * modifying, [Modifying Tables](ddl-alter)
     * partitioning, [Table Partitioning](ddl-partitioning)
@@ -3806,26 +3473,20 @@
   * table expression, [Table Expressions](queries-table-expressions)
   * table function, [Table Functions](queries-table-expressions#QUERIES-TABLEFUNCTIONS), [xmltable](functions-xml#FUNCTIONS-XML-PROCESSING-XMLTABLE)
 
-    
-
-  * XMLTABLE, [xmltable](functions-xml#FUNCTIONS-XML-PROCESSING-XMLTABLE)
+  - XMLTABLE, [xmltable](functions-xml#FUNCTIONS-XML-PROCESSING-XMLTABLE)
 
   * table sampling method, [Writing a Table Sampling Method](tablesample-method)
   * tableam
 
-    
-
-  * Table Access Method, [Table Access Method Interface Definition](tableam)
+  - Table Access Method, [Table Access Method Interface Definition](tableam)
 
   * tablefunc, [tablefunc — functions that return tables (crosstab and others)](tablefunc)
   * tableoid, [System Columns](ddl-system-columns)
   * TABLESAMPLE method, [Writing a Table Sampling Method](tablesample-method)
   * tablespace, [Tablespaces](manage-ag-tablespaces)
 
-    
-
-  * default, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
-    * temporary, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
+    - default, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
+    - temporary, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
   * table\_am\_handler, [Pseudo-Types](datatype-pseudo)
   * tan, [Mathematical Functions and Operators](functions-math)
@@ -3848,42 +3509,32 @@
   * text, [Character Types](datatype-character), [Network Address Functions and Operators](functions-net)
   * text search, [Text Search Types](datatype-textsearch), [Text Search Types](datatype-textsearch), [Full Text Search](textsearch), [Preferred Index Types for Text Search](textsearch-indexes)
 
-    
-
-  * data types, [Text Search Types](datatype-textsearch)
-    * functions and operators, [Text Search Types](datatype-textsearch)
-    * indexes, [Preferred Index Types for Text Search](textsearch-indexes)
+    - data types, [Text Search Types](datatype-textsearch)
+    - functions and operators, [Text Search Types](datatype-textsearch)
+    - indexes, [Preferred Index Types for Text Search](textsearch-indexes)
 
   * text2ltree, [Operators and Functions](ltree#LTREE-OPS-FUNCS)
   * threads, [Behavior in Threaded Programs](libpq-threading)
 
-    
-
-  * with libpq, [Behavior in Threaded Programs](libpq-threading)
+  - with libpq, [Behavior in Threaded Programs](libpq-threading)
 
   * tid, [Object Identifier Types](datatype-oid)
   * time, [Date/Time Types](datatype-datetime), [Times](datatype-datetime#DATATYPE-DATETIME-INPUT-TIMES)
 
-    
+    - constants, [Special Values](datatype-datetime#DATATYPE-DATETIME-SPECIAL-VALUES)
+    - current, [Current Date/Time](functions-datetime#FUNCTIONS-DATETIME-CURRENT)
+    - output format, [Date/Time Output](datatype-datetime#DATATYPE-DATETIME-OUTPUT)
 
-  * constants, [Special Values](datatype-datetime#DATATYPE-DATETIME-SPECIAL-VALUES)
-    * current, [Current Date/Time](functions-datetime#FUNCTIONS-DATETIME-CURRENT)
-    * output format, [Date/Time Output](datatype-datetime#DATATYPE-DATETIME-OUTPUT)
-
-        
-
-    * (see also [formatting](#ientry-idp105553373272959))
+    * (see also [formatting](#ientry-idm2886028520))
 
   * time span, [Date/Time Types](datatype-datetime)
   * time with time zone, [Date/Time Types](datatype-datetime), [Times](datatype-datetime#DATATYPE-DATETIME-INPUT-TIMES)
   * time without time zone, [Date/Time Types](datatype-datetime), [Times](datatype-datetime#DATATYPE-DATETIME-INPUT-TIMES)
   * time zone, [Time Zones](datatype-datetime#DATATYPE-TIMEZONES), [Locale and Formatting](runtime-config-client#RUNTIME-CONFIG-CLIENT-FORMAT), [POSIX Time Zone Specifications](datetime-posix-timezone-specs)
 
-    
-
-  * conversion, [AT TIME ZONE and AT LOCAL](functions-datetime#FUNCTIONS-DATETIME-ZONECONVERT)
-    * input abbreviations, [Date/Time Configuration Files](datetime-config-files)
-    * POSIX-style specification, [POSIX Time Zone Specifications](datetime-posix-timezone-specs)
+    - conversion, [AT TIME ZONE](functions-datetime#FUNCTIONS-DATETIME-ZONECONVERT)
+    - input abbreviations, [Date/Time Configuration Files](datetime-config-files)
+    - POSIX-style specification, [POSIX Time Zone Specifications](datetime-posix-timezone-specs)
 
   * time zone data, [Build Process Details](install-make#CONFIGURE-OPTIONS-BUILD-PROCESS), [Build Process Details](install-meson#MESON-OPTIONS-BUILD-PROCESS)
   * time zone names, [Locale and Formatting](runtime-config-client#RUNTIME-CONFIG-CLIENT-FORMAT)
@@ -3892,10 +3543,8 @@
   * timeofday, [Date/Time Functions and Operators](functions-datetime)
   * timeout
 
-    
-
-  * client authentication, [Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
-    * deadlock, [Lock Management](runtime-config-locks)
+    - client authentication, [Authentication](runtime-config-connection#RUNTIME-CONFIG-CONNECTION-AUTHENTICATION)
+    - deadlock, [Lock Management](runtime-config-locks)
 
   * timestamp, [Date/Time Types](datatype-datetime), [Time Stamps](datatype-datetime#DATATYPE-DATETIME-INPUT-TIME-STAMPS)
   * timestamp with time zone, [Date/Time Types](datatype-datetime), [Time Stamps](datatype-datetime#DATATYPE-DATETIME-INPUT-TIME-STAMPS)
@@ -3905,29 +3554,23 @@
   * timezone\_abbreviations configuration parameter, [Locale and Formatting](runtime-config-client#RUNTIME-CONFIG-CLIENT-FORMAT)
   * TOAST, [TOAST](storage-toast)
 
-    
-
-  * and user-defined types, [TOAST Considerations](xtypes#XTYPES-TOAST)
-    * per-column storage settings, [Description](sql-altertable#id-1.9.3.35.5), [Parameters](sql-createtable#id-1.9.3.85.6)
-    * per-type storage settings, [Description](sql-altertype#id-1.9.3.42.5)
-    * versus large objects, [Introduction](lo-intro)
+    - and user-defined types, [TOAST Considerations](xtypes#XTYPES-TOAST)
+    - per-column storage settings, [Description](sql-altertable#id-1.9.3.35.5), [Parameters](sql-createtable#id-1.9.3.85.6)
+    - per-type storage settings, [Description](sql-altertype#id-1.9.3.42.5)
+    - versus large objects, [Introduction](lo-intro)
 
   * toast\_tuple\_target storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
   * token, [Lexical Structure](sql-syntax-lexical)
   * to\_ascii, [String Functions and Operators](functions-string)
-  * to\_bin, [String Functions and Operators](functions-string)
   * to\_char, [Data Type Formatting Functions](functions-formatting)
 
-    
-
-  * and locales, [Behavior](locale#LOCALE-BEHAVIOR)
+  - and locales, [Behavior](locale#LOCALE-BEHAVIOR)
 
   * to\_date, [Data Type Formatting Functions](functions-formatting)
   * to\_hex, [String Functions and Operators](functions-string)
   * to\_json, [Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
   * to\_jsonb, [Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
   * to\_number, [Data Type Formatting Functions](functions-formatting)
-  * to\_oct, [String Functions and Operators](functions-string)
   * to\_regclass, [System Catalog Information Functions](functions-info#FUNCTIONS-INFO-CATALOG)
   * to\_regcollation, [System Catalog Information Functions](functions-info#FUNCTIONS-INFO-CATALOG)
   * to\_regnamespace, [System Catalog Information Functions](functions-info#FUNCTIONS-INFO-CATALOG)
@@ -3958,22 +3601,18 @@
   * transaction, [Transactions](tutorial-transactions)
   * transaction ID, [Preventing Transaction ID Wraparound Failures](routine-vacuuming#VACUUM-FOR-WRAPAROUND)
 
-    
-
-  * wraparound, [Preventing Transaction ID Wraparound Failures](routine-vacuuming#VACUUM-FOR-WRAPAROUND)
+  - wraparound, [Preventing Transaction ID Wraparound Failures](routine-vacuuming#VACUUM-FOR-WRAPAROUND)
 
   * transaction isolation, [Transaction Isolation](transaction-iso)
   * transaction isolation level, [Transaction Isolation](transaction-iso), [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
-    
+    - read committed, [Read Committed Isolation Level](transaction-iso#XACT-READ-COMMITTED)
+    - repeatable read, [Repeatable Read Isolation Level](transaction-iso#XACT-REPEATABLE-READ)
+    - serializable, [Serializable Isolation Level](transaction-iso#XACT-SERIALIZABLE)
+    - setting, [SET TRANSACTION](sql-set-transaction)
+    - setting default, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
 
-  * read committed, [Read Committed Isolation Level](transaction-iso#XACT-READ-COMMITTED)
-    * repeatable read, [Repeatable Read Isolation Level](transaction-iso#XACT-REPEATABLE-READ)
-    * serializable, [Serializable Isolation Level](transaction-iso#XACT-SERIALIZABLE)
-    * setting, [SET TRANSACTION](sql-set-transaction)
-    * setting default, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
-
-  * transaction log (see [WAL](#ientry-idp105553640639359))
+  * transaction log (see [WAL](#ientry-idm2863296760))
   * transaction\_deferrable configuration parameter, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
   * transaction\_isolation configuration parameter, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
   * transaction\_read\_only configuration parameter, [Statement Behavior](runtime-config-client#RUNTIME-CONFIG-CLIENT-STATEMENT)
@@ -3981,27 +3620,23 @@
   * transform\_null\_equals configuration parameter, [Platform and Client Compatibility](runtime-config-compatible#RUNTIME-CONFIG-COMPATIBLE-CLIENTS)
   * transition tables, [CREATE TRIGGER](sql-createtrigger)
 
-    
-
-  * (see also [ephemeral named relation](#ientry-idp105553842007935))
-    * implementation in PLs, [SPI\_register\_trigger\_data](spi-spi-register-trigger-data)
-    * referencing from C trigger, [Writing Trigger Functions in C](trigger-interface)
+    - (see also [ephemeral named relation](#ientry-idm2846974392))
+    - implementation in PLs, [SPI\_register\_trigger\_data](spi-spi-register-trigger-data)
+    - referencing from C trigger, [Writing Trigger Functions in C](trigger-interface)
 
   * translate, [String Functions and Operators](functions-string)
   * TRANSLATE\_REGEX, [Differences from SQL Standard and XQuery](functions-matching#POSIX-VS-XQUERY)
   * transparent huge pages, [Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
   * trigger, [Pseudo-Types](datatype-pseudo), [Triggers](triggers), [Writing Trigger Functions in C](trigger-interface), [Rules Versus Triggers](rules-triggers), [Trigger Functions](plpgsql-trigger), [Trigger Functions](plpython-trigger)
 
-    
-
-  * arguments for trigger functions, [Overview of Trigger Behavior](trigger-definition)
-    * constraint trigger, [Description](sql-createtrigger#id-1.9.3.93.6)
-    * for updating a derived tsvector column, [Triggers for Automatic Updates](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS)
-    * in C, [Writing Trigger Functions in C](trigger-interface)
-    * in PL/pgSQL, [Trigger Functions](plpgsql-trigger)
-    * in PL/Python, [Trigger Functions](plpython-trigger)
-    * in PL/Tcl, [Trigger Functions in PL/Tcl](pltcl-trigger)
-    * compared with rules, [Rules Versus Triggers](rules-triggers)
+    - arguments for trigger functions, [Overview of Trigger Behavior](trigger-definition)
+    - constraint trigger, [Description](sql-createtrigger#id-1.9.3.93.6)
+    - for updating a derived tsvector column, [Triggers for Automatic Updates](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS)
+    - in C, [Writing Trigger Functions in C](trigger-interface)
+    - in PL/pgSQL, [Trigger Functions](plpgsql-trigger)
+    - in PL/Python, [Trigger Functions](plpython-trigger)
+    - in PL/Tcl, [Trigger Functions in PL/Tcl](pltcl-trigger)
+    - compared with rules, [Rules Versus Triggers](rules-triggers)
 
   * triggered\_change\_notification, [tcn — a trigger function to notify listeners of changes to table content](tcn)
   * trim, [String Functions and Operators](functions-string), [Binary String Functions and Operators](functions-binarystring)
@@ -4012,9 +3647,7 @@
   * TRUNCATE, [TRUNCATE](sql-truncate)
   * trusted, [Trusted and Untrusted PL/Perl](plperl-trusted)
 
-    
-
-  * PL/Perl, [Trusted and Untrusted PL/Perl](plperl-trusted)
+  - PL/Perl, [Trusted and Untrusted PL/Perl](plperl-trusted)
 
   * tsm\_handler, [Pseudo-Types](datatype-pseudo)
   * tsm\_system\_rows, [tsm\_system\_rows — the SYSTEM\_ROWS sampling method for TABLESAMPLE](tsm-system-rows)
@@ -4046,13 +3679,13 @@
   * txid\_snapshot\_xmin, [Transaction ID and Snapshot Information Functions](functions-info#FUNCTIONS-INFO-SNAPSHOT)
   * txid\_status, [Transaction ID and Snapshot Information Functions](functions-info#FUNCTIONS-INFO-SNAPSHOT)
   * txid\_visible\_in\_snapshot, [Transaction ID and Snapshot Information Functions](functions-info#FUNCTIONS-INFO-SNAPSHOT)
-  * type (see [data type](#ientry-idp105553308172031))
+  * type (see [data type](#ientry-idm2893781112))
   * type cast, [Numeric Constants](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS-NUMERIC), [Type Casts](sql-expressions#SQL-SYNTAX-TYPE-CASTS)
   * typedef
 
-    
+  - in ECPG, [Typedefs](ecpg-variables#ECPG-VARIABLES-NONPRIMITIVE-C-TYPEDEFS)
 
-  * in ECPG, [Typedefs](ecpg-variables#ECPG-VARIABLES-NONPRIMITIVE-C-TYPEDEFS)
+[#id](#indexdiv-U)
 
 ### U
 
@@ -4060,17 +3693,13 @@
   * unaccent, [unaccent — a text search dictionary which removes diacritics](unaccent), [Functions](unaccent#UNACCENT-FUNCTIONS)
   * Unicode escape, [String Constants with Unicode Escapes](sql-syntax-lexical#SQL-SYNTAX-STRINGS-UESCAPE)
 
-    
-
-  * in identifiers, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
-    * in string constants, [String Constants with Unicode Escapes](sql-syntax-lexical#SQL-SYNTAX-STRINGS-UESCAPE)
+    - in identifiers, [Identifiers and Key Words](sql-syntax-lexical#SQL-SYNTAX-IDENTIFIERS)
+    - in string constants, [String Constants with Unicode Escapes](sql-syntax-lexical#SQL-SYNTAX-STRINGS-UESCAPE)
 
   * Unicode normalization, [String Functions and Operators](functions-string)
   * UNION, [Combining Queries (UNION, INTERSECT, EXCEPT)](queries-union), [UNION, CASE, and Related Constructs](typeconv-union-case)
 
-    
-
-  * determination of result type, [UNION, CASE, and Related Constructs](typeconv-union-case)
+  - determination of result type, [UNION, CASE, and Related Constructs](typeconv-union-case)
 
   * uniq, [intarray Functions and Operators](intarray#INTARRAY-FUNCS-OPS)
   * unique constraint, [Unique Constraints](ddl-constraints#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS)
@@ -4083,27 +3712,21 @@
   * UNLISTEN, [UNLISTEN](sql-unlisten)
   * unnest, [Array Functions and Operators](functions-array)
 
-    
-
-  * for multirange, [Range/Multirange Functions and Operators](functions-range)
-    * for tsvector, [Text Search Functions and Operators](functions-textsearch)
+    - for multirange, [Range/Multirange Functions and Operators](functions-range)
+    - for tsvector, [Text Search Functions and Operators](functions-textsearch)
 
   * unqualified name, [The Schema Search Path](ddl-schemas#DDL-SCHEMAS-PATH)
   * updatable views, [Updatable Views](sql-createview#SQL-CREATEVIEW-UPDATABLE-VIEWS)
   * UPDATE, [Updates](tutorial-update), [Updating Data](dml-update), [Returning Data from Modified Rows](dml-returning), [UPDATE](sql-update)
 
-    
-
-  * RETURNING, [Returning Data from Modified Rows](dml-returning)
+  - RETURNING, [Returning Data from Modified Rows](dml-returning)
 
   * update\_process\_title configuration parameter, [Process Title](runtime-config-logging#RUNTIME-CONFIG-LOGGING-PROC-TITLE)
   * updating, [Updating Data](dml-update)
   * upgrading, [Upgrading a PostgreSQL Cluster](upgrading)
   * upper, [String Functions and Operators](functions-string), [Range/Multirange Functions and Operators](functions-range)
 
-    
-
-  * and locales, [Behavior](locale#LOCALE-BEHAVIOR)
+  - and locales, [Behavior](locale#LOCALE-BEHAVIOR)
 
   * upper\_inc, [Range/Multirange Functions and Operators](functions-range)
   * upper\_inf, [Range/Multirange Functions and Operators](functions-range)
@@ -4111,23 +3734,21 @@
   * URI, [Connection Strings](libpq-connect#LIBPQ-CONNSTRING)
   * user, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION), [Database Roles](database-roles)
 
-    
-
-  * current, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
+  - current, [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
 
   * user mapping, [Foreign Data](ddl-foreign-data)
   * User name maps, [User Name Maps](auth-username-maps)
   * user\_catalog\_table storage parameter, [Storage Parameters](sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS)
   * UUID, [UUID Type](datatype-uuid), [UUID Type](datatype-uuid), [PostgreSQL Features](install-make#CONFIGURE-OPTIONS-FEATURES), [PostgreSQL Features](install-meson#MESON-OPTIONS-FEATURES)
 
-    
-
-  * generating, [UUID Type](datatype-uuid)
+  - generating, [UUID Type](datatype-uuid)
 
   * uuid-ossp, [uuid-ossp — a UUID generator](uuid-ossp)
   * uuid\_generate\_v1, [uuid-ossp Functions](uuid-ossp#UUID-OSSP-FUNCTIONS-SECT)
   * uuid\_generate\_v1mc, [uuid-ossp Functions](uuid-ossp#UUID-OSSP-FUNCTIONS-SECT)
   * uuid\_generate\_v3, [uuid-ossp Functions](uuid-ossp#UUID-OSSP-FUNCTIONS-SECT)
+
+[#id](#indexdiv-V)
 
 ### V
 
@@ -4152,44 +3773,38 @@
   * value expression, [Value Expressions](sql-expressions)
   * VALUES, [VALUES Lists](queries-values), [UNION, CASE, and Related Constructs](typeconv-union-case), [VALUES](sql-values)
 
-    
-
-  * determination of result type, [UNION, CASE, and Related Constructs](typeconv-union-case)
+  - determination of result type, [UNION, CASE, and Related Constructs](typeconv-union-case)
 
   * varchar, [Character Types](datatype-character)
   * variadic function, [SQL Functions with Variable Numbers of Arguments](xfunc-sql#XFUNC-SQL-VARIADIC-FUNCTIONS)
   * variance, [Aggregate Functions](functions-aggregate)
 
-    
-
-  * population, [Aggregate Functions](functions-aggregate)
-    * sample, [Aggregate Functions](functions-aggregate)
+    - population, [Aggregate Functions](functions-aggregate)
+    - sample, [Aggregate Functions](functions-aggregate)
 
   * var\_pop, [Aggregate Functions](functions-aggregate)
   * var\_samp, [Aggregate Functions](functions-aggregate)
   * version, [Accessing a Database](tutorial-accessdb), [Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION), [Upgrading a PostgreSQL Cluster](upgrading)
 
-    
-
-  * compatibility, [Upgrading a PostgreSQL Cluster](upgrading)
+  - compatibility, [Upgrading a PostgreSQL Cluster](upgrading)
 
 * view, [Views](tutorial-views), [Views and the Rule System](rules-views), [Materialized Views](rules-materializedviews), [Cooperation with Views](rules-update#RULES-UPDATE-VIEWS)
 
-  * implementation through rules, [Views and the Rule System](rules-views)
+    * implementation through rules, [Views and the Rule System](rules-views)
     * materialized, [Materialized Views](rules-materializedviews)
     * updating, [Cooperation with Views](rules-update#RULES-UPDATE-VIEWS)
 
   * Visibility Map, [Visibility Map](storage-vm)
-  * VM (see [Visibility Map](#ientry-idp105554245272703))
+  * VM (see [Visibility Map](#ientry-idm2680435608))
   * void, [Pseudo-Types](datatype-pseudo)
   * VOLATILE, [Function Volatility Categories](xfunc-volatility)
   * volatility, [Function Volatility Categories](xfunc-volatility)
 
-    
-
-  * functions, [Function Volatility Categories](xfunc-volatility)
+  - functions, [Function Volatility Categories](xfunc-volatility)
 
 * VPATH, [Installation Procedure](install-make#INSTALL-PROCEDURE-MAKE), [Extension Building Infrastructure](extend-pgxs)
+
+[#id](#indexdiv-W)
 
 ### W
 
@@ -4221,19 +3836,15 @@
   * where to log, [Where to Log](runtime-config-logging#RUNTIME-CONFIG-LOGGING-WHERE)
   * WHILE
 
-    
-
-  * in PL/pgSQL, [WHILE](plpgsql-control-structures#PLPGSQL-CONTROL-STRUCTURES-LOOPS-WHILE)
+  - in PL/pgSQL, [WHILE](plpgsql-control-structures#PLPGSQL-CONTROL-STRUCTURES-LOOPS-WHILE)
 
   * width, [Geometric Functions and Operators](functions-geometry)
   * width\_bucket, [Mathematical Functions and Operators](functions-math)
   * window function, [Window Functions](tutorial-window), [Window Function Calls](sql-expressions#SYNTAX-WINDOW-FUNCTIONS), [Window Function Processing](queries-table-expressions#QUERIES-WINDOW), [Window Functions](functions-window)
 
-    
-
-  * built-in, [Window Functions](functions-window)
-    * invocation, [Window Function Calls](sql-expressions#SYNTAX-WINDOW-FUNCTIONS)
-    * order of execution, [Window Function Processing](queries-table-expressions#QUERIES-WINDOW)
+    - built-in, [Window Functions](functions-window)
+    - invocation, [Window Function Calls](sql-expressions#SYNTAX-WINDOW-FUNCTIONS)
+    - order of execution, [Window Function Processing](queries-table-expressions#QUERIES-WINDOW)
 
 * WITH, [WITH Queries (Common Table Expressions)](queries-with), [SELECT](sql-select)
 
@@ -4246,10 +3857,10 @@
   * work\_mem configuration parameter, [Memory](runtime-config-resource#RUNTIME-CONFIG-RESOURCE-MEMORY)
   * wraparound
 
-    
+    - of multixact IDs, [Multixacts and Wraparound](routine-vacuuming#VACUUM-FOR-MULTIXACT-WRAPAROUND)
+    - of transaction IDs, [Preventing Transaction ID Wraparound Failures](routine-vacuuming#VACUUM-FOR-WRAPAROUND)
 
-  * of multixact IDs, [Multixacts and Wraparound](routine-vacuuming#VACUUM-FOR-MULTIXACT-WRAPAROUND)
-    * of transaction IDs, [Preventing Transaction ID Wraparound Failures](routine-vacuuming#VACUUM-FOR-WRAPAROUND)
+[#id](#indexdiv-X)
 
 ### X
 
@@ -4284,9 +3895,13 @@
   * XQuery regular expressions, [Differences from SQL Standard and XQuery](functions-matching#POSIX-VS-XQUERY)
   * xslt\_process, [xslt\_process](xml2#XML2-XSLT-XSLT-PROCESS)
 
+[#id](#indexdiv-Y)
+
 ### Y
 
 * yacc, [Requirements](install-requirements)
+
+[#id](#indexdiv-Z)
 
 ### Z
 

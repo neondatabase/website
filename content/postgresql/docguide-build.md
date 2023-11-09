@@ -1,12 +1,16 @@
+[#id](#DOCGUIDE-BUILD)
+
 ## J.3. Building the Documentation with Make [#](#DOCGUIDE-BUILD)
 
-- [J.3.1. HTML](docguide-build#DOCGUIDE-BUILD-HTML)
-- [J.3.2. Manpages](docguide-build#DOCGUIDE-BUILD-MANPAGES)
-- [J.3.3. PDF](docguide-build#DOCGUIDE-BUILD-PDF)
-- [J.3.4. Plain Text Files](docguide-build#DOCGUIDE-BUILD-PLAIN-TEXT)
-- [J.3.5. Syntax Check](docguide-build#DOCGUIDE-BUILD-SYNTAX-CHECK)
+  * [J.3.1. HTML](docguide-build#DOCGUIDE-BUILD-HTML)
+  * [J.3.2. Manpages](docguide-build#DOCGUIDE-BUILD-MANPAGES)
+  * [J.3.3. PDF](docguide-build#DOCGUIDE-BUILD-PDF)
+  * [J.3.4. Plain Text Files](docguide-build#DOCGUIDE-BUILD-PLAIN-TEXT)
+  * [J.3.5. Syntax Check](docguide-build#DOCGUIDE-BUILD-SYNTAX-CHECK)
 
 Once you have everything set up, change to the directory `doc/src/sgml` and run one of the commands described in the following subsections to build the documentation. (Remember to use GNU make.)
+
+[#id](#DOCGUIDE-BUILD-HTML)
 
 ### J.3.1. HTML [#](#DOCGUIDE-BUILD-HTML)
 
@@ -28,6 +32,8 @@ doc/src/sgml$ make STYLE=website html
 
 If the `STYLE=website` option is used, the generated HTML files include references to stylesheets hosted on [postgresql.org](https://www.postgresql.org/docs/current/) and require network access to view.
 
+[#id](#DOCGUIDE-BUILD-MANPAGES)
+
 ### J.3.2. Manpages [#](#DOCGUIDE-BUILD-MANPAGES)
 
 We use the DocBook XSL stylesheets to convert DocBook `refentry` pages to \*roff output suitable for man pages. To create the man pages, use the command:
@@ -37,18 +43,20 @@ We use the DocBook XSL stylesheets to convert DocBook `refentry` pages to \*roff
 doc/src/sgml$ make man
 ```
 
+[#id](#DOCGUIDE-BUILD-PDF)
+
 ### J.3.3. PDF [#](#DOCGUIDE-BUILD-PDF)
 
 To produce a PDF rendition of the documentation using FOP, you can use one of the following commands, depending on the preferred paper format:
 
-- For A4 format:
+* For A4 format:
 
   ```
 
   doc/src/sgml$ make postgres-A4.pdf
   ```
 
-- For U.S. letter format:
+* For U.S. letter format:
 
   ```
 
@@ -79,11 +87,15 @@ LOGLEVEL=-Dorg.apache.commons.logging.simplelog.defaultlog=WARN
 
 Other XSL-FO processors can also be used manually, but the automated build process only supports FOP.
 
+[#id](#DOCGUIDE-BUILD-PLAIN-TEXT)
+
 ### J.3.4. Plain Text Files [#](#DOCGUIDE-BUILD-PLAIN-TEXT)
 
-The installation instructions are also distributed as plain text, in case they are needed in a situation where better reading tools are not available. The `INSTALL` file corresponds to [Chapter 17](installation 'Chapter 17. Installation from Source Code'), with some minor changes to account for the different context. To recreate the file, change to the directory `doc/src/sgml` and enter **`make INSTALL`**. Building text output requires Pandoc version 1.13 or newer as an additional build tool.
+The installation instructions are also distributed as plain text, in case they are needed in a situation where better reading tools are not available. The `INSTALL` file corresponds to [Chapter 17](installation), with some minor changes to account for the different context. To recreate the file, change to the directory `doc/src/sgml` and enter **`make INSTALL`**. Building text output requires Pandoc version 1.13 or newer as an additional build tool.
 
 In the past, the release notes and regression testing instructions were also distributed as plain text, but this practice has been discontinued.
+
+[#id](#DOCGUIDE-BUILD-SYNTAX-CHECK)
 
 ### J.3.5. Syntax Check [#](#DOCGUIDE-BUILD-SYNTAX-CHECK)
 

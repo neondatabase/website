@@ -1,14 +1,20 @@
+[#id](#USING-EXPLAIN)
+
 ## 14.1. Using `EXPLAIN` [#](#USING-EXPLAIN)
 
   * [14.1.1. `EXPLAIN` Basics](using-explain#USING-EXPLAIN-BASICS)
   * [14.1.2. `EXPLAIN ANALYZE`](using-explain#USING-EXPLAIN-ANALYZE)
   * [14.1.3. Caveats](using-explain#USING-EXPLAIN-CAVEATS)
 
-PostgreSQL devises a *query plan* for each query it receives. Choosing the right plan to match the query structure and the properties of the data is absolutely critical for good performance, so the system includes a complex *planner* that tries to choose good plans. You can use the [`EXPLAIN`](sql-explain "EXPLAIN") command to see what query plan the planner creates for any query. Plan-reading is an art that requires some experience to master, but this section attempts to cover the basics.
+
+
+PostgreSQL devises a *query plan* for each query it receives. Choosing the right plan to match the query structure and the properties of the data is absolutely critical for good performance, so the system includes a complex *planner* that tries to choose good plans. You can use the [`EXPLAIN`](sql-explain) command to see what query plan the planner creates for any query. Plan-reading is an art that requires some experience to master, but this section attempts to cover the basics.
 
 Examples in this section are drawn from the regression test database after doing a `VACUUM ANALYZE`, using 9.3 development sources. You should be able to get similar results if you try the examples yourself, but your estimated costs and row counts might vary slightly because `ANALYZE`'s statistics are random samples rather than exact, and because costs are inherently somewhat platform-dependent.
 
 The examples use `EXPLAIN`'s default “text” output format, which is compact and convenient for humans to read. If you want to feed `EXPLAIN`'s output to a program for further analysis, you should use one of its machine-readable output formats (XML, JSON, or YAML) instead.
+
+[#id](#USING-EXPLAIN-BASICS)
 
 ### 14.1.1. `EXPLAIN` Basics [#](#USING-EXPLAIN-BASICS)
 
@@ -17,7 +23,6 @@ The structure of a query plan is a tree of *plan nodes*. Nodes at the bottom lev
 Here is a trivial example, just to show what the output looks like:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1;
 
                          QUERY PLAN
@@ -28,11 +33,14 @@ EXPLAIN SELECT * FROM tenk1;
 Since this query has no `WHERE` clause, it must scan all the rows of the table, so the planner has chosen to use a simple sequential scan plan. The numbers that are quoted in parentheses are (left to right):
 
 * Estimated start-up cost. This is the time expended before the output phase can begin, e.g., time to do the sorting in a sort node.
+
 * Estimated total cost. This is stated on the assumption that the plan node is run to completion, i.e., all available rows are retrieved. In practice a node's parent node might stop short of reading all available rows (see the `LIMIT` example below).
+
 * Estimated number of rows output by this plan node. Again, the node is assumed to be run to completion.
+
 * Estimated average width of rows output by this plan node (in bytes).
 
-The costs are measured in arbitrary units determined by the planner's cost parameters (see [Section 20.7.2](runtime-config-query#RUNTIME-CONFIG-QUERY-CONSTANTS "20.7.2. Planner Cost Constants")). Traditional practice is to measure the costs in units of disk page fetches; that is, [seq\_page\_cost](runtime-config-query#GUC-SEQ-PAGE-COST) is conventionally set to `1.0` and the other cost parameters are set relative to that. The examples in this section are run with the default cost parameters.
+The costs are measured in arbitrary units determined by the planner's cost parameters (see [Section 20.7.2](runtime-config-query#RUNTIME-CONFIG-QUERY-CONSTANTS)). Traditional practice is to measure the costs in units of disk page fetches; that is, [seq\_page\_cost](runtime-config-query#GUC-SEQ-PAGE-COST) is conventionally set to `1.0` and the other cost parameters are set relative to that. The examples in this section are run with the default cost parameters.
 
 It's important to understand that the cost of an upper-level node includes the cost of all its child nodes. It's also important to realize that the cost only reflects things that the planner cares about. In particular, the cost does not consider the time spent transmitting result rows to the client, which could be an important factor in the real elapsed time; but the planner ignores it because it cannot change it by altering the plan. (Every correct plan will output the same row set, we trust.)
 
@@ -41,7 +49,6 @@ The `rows` value is a little tricky because it is not the number of rows process
 Returning to our example:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1;
 
                          QUERY PLAN
@@ -52,7 +59,6 @@ EXPLAIN SELECT * FROM tenk1;
 These numbers are derived very straightforwardly. If you do:
 
 ```
-
 SELECT relpages, reltuples FROM pg_class WHERE relname = 'tenk1';
 ```
 
@@ -61,7 +67,6 @@ you will find that `tenk1` has 358 disk pages and 10000 rows. The estimated cost
 Now let's modify the query to add a `WHERE` condition:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 WHERE unique1 < 7000;
 
                          QUERY PLAN
@@ -77,7 +82,6 @@ The actual number of rows this query would select is 7000, but the `rows` estima
 Now, let's make the condition more restrictive:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 WHERE unique1 < 100;
 
                                   QUERY PLAN
@@ -93,7 +97,6 @@ Here the planner has decided to use a two-step plan: the child plan node visits 
 Now let's add another condition to the `WHERE` clause:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 WHERE unique1 < 100 AND stringu1 = 'xxx';
 
                                   QUERY PLAN
@@ -110,7 +113,6 @@ The added condition `stringu1 = 'xxx'` reduces the output row count estimate, bu
 In some cases the planner will prefer a “simple” index scan plan:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 WHERE unique1 = 42;
 
                                  QUERY PLAN
@@ -124,7 +126,6 @@ In this type of plan the table rows are fetched in index order, which makes them
 The planner may implement an `ORDER BY` clause in several ways. The above example shows that such an ordering clause may be implemented implicitly. The planner may also add an explicit `sort` step:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 ORDER BY unique1;
                             QUERY PLAN
 -------------------------------------------------------------------
@@ -136,7 +137,6 @@ EXPLAIN SELECT * FROM tenk1 ORDER BY unique1;
 If a part of the plan guarantees an ordering on a prefix of the required sort keys, then the planner may instead decide to use an `incremental sort` step:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 ORDER BY four, ten LIMIT 100;
                                               QUERY PLAN
 -------------------------------------------------------------------​-----------------------------------
@@ -152,7 +152,6 @@ Compared to regular sorts, sorting incrementally allows returning tuples before 
 If there are separate indexes on several of the columns referenced in `WHERE`, the planner might choose to use an AND or OR combination of the indexes:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 WHERE unique1 < 100 AND unique2 > 9000;
 
                                      QUERY PLAN
@@ -171,7 +170,6 @@ But this requires visiting both indexes, so it's not necessarily a win compared 
 Here is an example showing the effects of `LIMIT`:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 WHERE unique1 < 100 AND unique2 > 9000 LIMIT 2;
 
                                      QUERY PLAN
@@ -187,7 +185,6 @@ This is the same query as above, but we added a `LIMIT` so that not all the rows
 Let's try joining two tables, using the columns we have been discussing:
 
 ```
-
 EXPLAIN SELECT *
 FROM tenk1 t1, tenk2 t2
 WHERE t1.unique1 < 10 AND t1.unique2 = t2.unique2;
@@ -208,7 +205,6 @@ In this plan, we have a nested-loop join node with two table scans as inputs, or
 In this example the join's output row count is the same as the product of the two scans' row counts, but that's not true in all cases because there can be additional `WHERE` clauses that mention both tables and so can only be applied at the join point, not to either input scan. Here's an example:
 
 ```
-
 EXPLAIN SELECT *
 FROM tenk1 t1, tenk2 t2
 WHERE t1.unique1 < 10 AND t2.unique2 < 10 AND t1.hundred < t2.hundred;
@@ -235,7 +231,6 @@ When dealing with outer joins, you might see join plan nodes with both “Join F
 If we change the query's selectivity a bit, we might get a very different join plan:
 
 ```
-
 EXPLAIN SELECT *
 FROM tenk1 t1, tenk2 t2
 WHERE t1.unique1 < 100 AND t1.unique2 = t2.unique2;
@@ -257,7 +252,6 @@ Here, the planner has chosen to use a hash join, in which rows of one table are 
 Another possible type of join is a merge join, illustrated here:
 
 ```
-
 EXPLAIN SELECT *
 FROM tenk1 t1, onek t2
 WHERE t1.unique1 < 100 AND t1.unique2 = t2.unique2;
@@ -275,10 +269,9 @@ WHERE t1.unique1 < 100 AND t1.unique2 = t2.unique2;
 
 Merge join requires its input data to be sorted on the join keys. In this plan the `tenk1` data is sorted by using an index scan to visit the rows in the correct order, but a sequential scan and sort is preferred for `onek`, because there are many more rows to be visited in that table. (Sequential-scan-and-sort frequently beats an index scan for sorting many rows, because of the nonsequential disk access required by the index scan.)
 
-One way to look at variant plans is to force the planner to disregard whatever strategy it thought was the cheapest, using the enable/disable flags described in [Section 20.7.1](runtime-config-query#RUNTIME-CONFIG-QUERY-ENABLE "20.7.1. Planner Method Configuration"). (This is a crude tool, but useful. See also [Section 14.3](explicit-joins "14.3. Controlling the Planner with Explicit JOIN Clauses").) For example, if we're unconvinced that sequential-scan-and-sort is the best way to deal with table `onek` in the previous example, we could try
+One way to look at variant plans is to force the planner to disregard whatever strategy it thought was the cheapest, using the enable/disable flags described in [Section 20.7.1](runtime-config-query#RUNTIME-CONFIG-QUERY-ENABLE). (This is a crude tool, but useful. See also [Section 14.3](explicit-joins).) For example, if we're unconvinced that sequential-scan-and-sort is the best way to deal with table `onek` in the previous example, we could try
 
 ```
-
 SET enable_sort = off;
 
 EXPLAIN SELECT *
@@ -296,12 +289,13 @@ WHERE t1.unique1 < 100 AND t1.unique2 = t2.unique2;
 
 which shows that the planner thinks that sorting `onek` by index-scanning is about 12% more expensive than sequential-scan-and-sort. Of course, the next question is whether it's right about that. We can investigate that using `EXPLAIN ANALYZE`, as discussed below.
 
+[#id](#USING-EXPLAIN-ANALYZE)
+
 ### 14.1.2. `EXPLAIN ANALYZE` [#](#USING-EXPLAIN-ANALYZE)
 
 It is possible to check the accuracy of the planner's estimates by using `EXPLAIN`'s `ANALYZE` option. With this option, `EXPLAIN` actually executes the query, and then displays the true row counts and true run time accumulated within each plan node, along with the same estimates that a plain `EXPLAIN` shows. For example, we might get a result like this:
 
 ```
-
 EXPLAIN ANALYZE SELECT *
 FROM tenk1 t1, tenk2 t2
 WHERE t1.unique1 < 10 AND t1.unique2 = t2.unique2;
@@ -326,7 +320,6 @@ In some query plans, it is possible for a subplan node to be executed more than 
 In some cases `EXPLAIN ANALYZE` shows additional execution statistics beyond the plan node execution times and row counts. For example, Sort and Hash nodes provide extra information:
 
 ```
-
 EXPLAIN ANALYZE SELECT *
 FROM tenk1 t1, tenk2 t2
 WHERE t1.unique1 < 100 AND t1.unique2 = t2.unique2 ORDER BY t1.fivethous;
@@ -354,7 +347,6 @@ The Sort node shows the sort method used (in particular, whether the sort was in
 Another type of extra information is the number of rows removed by a filter condition:
 
 ```
-
 EXPLAIN ANALYZE SELECT * FROM tenk1 WHERE ten < 7;
 
                                                QUERY PLAN
@@ -371,7 +363,6 @@ These counts can be particularly valuable for filter conditions applied at join 
 A case similar to filter conditions occurs with “lossy” index scans. For example, consider this search for polygons containing a specific point:
 
 ```
-
 EXPLAIN ANALYZE SELECT * FROM polygon_tbl WHERE f1 @> polygon '(0.5,2.0)';
 
                                               QUERY PLAN
@@ -386,7 +377,6 @@ EXPLAIN ANALYZE SELECT * FROM polygon_tbl WHERE f1 @> polygon '(0.5,2.0)';
 The planner thinks (quite correctly) that this sample table is too small to bother with an index scan, so we have a plain sequential scan in which all the rows got rejected by the filter condition. But if we force an index scan to be used, we see:
 
 ```
-
 SET enable_seqscan TO off;
 
 EXPLAIN ANALYZE SELECT * FROM polygon_tbl WHERE f1 @> polygon '(0.5,2.0)';
@@ -405,7 +395,6 @@ Here we can see that the index returned one candidate row, which was then reject
 `EXPLAIN` has a `BUFFERS` option that can be used with `ANALYZE` to get even more run time statistics:
 
 ```
-
 EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM tenk1 WHERE unique1 < 100 AND unique2 > 9000;
 
                                                            QUERY PLAN
@@ -430,7 +419,6 @@ The numbers provided by `BUFFERS` help to identify which parts of the query are 
 Keep in mind that because `EXPLAIN ANALYZE` actually runs the query, any side-effects will happen as usual, even though whatever results the query might output are discarded in favor of printing the `EXPLAIN` data. If you want to analyze a data-modifying query without changing your tables, you can roll the command back afterwards, for example:
 
 ```
-
 BEGIN;
 
 EXPLAIN ANALYZE UPDATE tenk1 SET hundred = hundred + 1 WHERE unique1 < 100;
@@ -454,7 +442,6 @@ As seen in this example, when the query is an `INSERT`, `UPDATE`, `DELETE`, or `
 When an `UPDATE`, `DELETE`, or `MERGE` command affects an inheritance hierarchy, the output might look like this:
 
 ```
-
 EXPLAIN UPDATE parent SET f2 = f2 + 1 WHERE f1 = 101;
                                               QUERY PLAN
 -------------------------------------------------------------------​-----------------------------------
@@ -481,16 +468,17 @@ The `Planning time` shown by `EXPLAIN ANALYZE` is the time it took to generate t
 
 The `Execution time` shown by `EXPLAIN ANALYZE` includes executor start-up and shut-down time, as well as the time to run any triggers that are fired, but it does not include parsing, rewriting, or planning time. Time spent executing `BEFORE` triggers, if any, is included in the time for the related Insert, Update, or Delete node; but time spent executing `AFTER` triggers is not counted there because `AFTER` triggers are fired after completion of the whole plan. The total time spent in each trigger (either `BEFORE` or `AFTER`) is also shown separately. Note that deferred constraint triggers will not be executed until end of transaction and are thus not considered at all by `EXPLAIN ANALYZE`.
 
+[#id](#USING-EXPLAIN-CAVEATS)
+
 ### 14.1.3. Caveats [#](#USING-EXPLAIN-CAVEATS)
 
-There are two significant ways in which run times measured by `EXPLAIN ANALYZE` can deviate from normal execution of the same query. First, since no output rows are delivered to the client, network transmission costs and I/O conversion costs are not included. Second, the measurement overhead added by `EXPLAIN ANALYZE` can be significant, especially on machines with slow `gettimeofday()` operating-system calls. You can use the [pg\_test\_timing](pgtesttiming "pg_test_timing") tool to measure the overhead of timing on your system.
+There are two significant ways in which run times measured by `EXPLAIN ANALYZE` can deviate from normal execution of the same query. First, since no output rows are delivered to the client, network transmission costs and I/O conversion costs are not included. Second, the measurement overhead added by `EXPLAIN ANALYZE` can be significant, especially on machines with slow `gettimeofday()` operating-system calls. You can use the [pg\_test\_timing](pgtesttiming) tool to measure the overhead of timing on your system.
 
 `EXPLAIN` results should not be extrapolated to situations much different from the one you are actually testing; for example, results on a toy-sized table cannot be assumed to apply to large tables. The planner's cost estimates are not linear and so it might choose a different plan for a larger or smaller table. An extreme example is that on a table that only occupies one disk page, you'll nearly always get a sequential scan plan whether indexes are available or not. The planner realizes that it's going to take one disk page read to process the table in any case, so there's no value in expending additional page reads to look at an index. (We saw this happening in the `polygon_tbl` example above.)
 
 There are cases in which the actual and estimated values won't match up well, but nothing is really wrong. One such case occurs when plan node execution is stopped short by a `LIMIT` or similar effect. For example, in the `LIMIT` query we used before,
 
 ```
-
 EXPLAIN ANALYZE SELECT * FROM tenk1 WHERE unique1 < 100 AND unique2 > 9000 LIMIT 2;
 
                                                           QUERY PLAN

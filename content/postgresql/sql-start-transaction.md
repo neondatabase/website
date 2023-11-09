@@ -1,3 +1,5 @@
+[#id](#SQL-START-TRANSACTION)
+
 ## START TRANSACTION
 
 START TRANSACTION — start a transaction block
@@ -5,7 +7,6 @@ START TRANSACTION — start a transaction block
 ## Synopsis
 
 ```
-
 START TRANSACTION [ transaction_mode [, ...] ]
 
 where transaction_mode is one of:
@@ -15,13 +16,19 @@ where transaction_mode is one of:
     [ NOT ] DEFERRABLE
 ```
 
+[#id](#id-1.9.3.180.5)
+
 ## Description
 
-This command begins a new transaction block. If the isolation level, read/write mode, or deferrable mode is specified, the new transaction has those characteristics, as if [`SET TRANSACTION`](sql-set-transaction "SET TRANSACTION") was executed. This is the same as the [`BEGIN`](sql-begin "BEGIN") command.
+This command begins a new transaction block. If the isolation level, read/write mode, or deferrable mode is specified, the new transaction has those characteristics, as if [`SET TRANSACTION`](sql-set-transaction) was executed. This is the same as the [`BEGIN`](sql-begin) command.
+
+[#id](#id-1.9.3.180.6)
 
 ## Parameters
 
-Refer to [SET TRANSACTION](sql-set-transaction "SET TRANSACTION") for information on the meaning of the parameters to this statement.
+Refer to [SET TRANSACTION](sql-set-transaction) for information on the meaning of the parameters to this statement.
+
+[#id](#id-1.9.3.180.7)
 
 ## Compatibility
 
@@ -31,8 +38,10 @@ The `DEFERRABLE` *`transaction_mode`* is a PostgreSQL language extension.
 
 The SQL standard requires commas between successive *`transaction_modes`*, but for historical reasons PostgreSQL allows the commas to be omitted.
 
-See also the compatibility section of [SET TRANSACTION](sql-set-transaction "SET TRANSACTION").
+See also the compatibility section of [SET TRANSACTION](sql-set-transaction).
+
+[#id](#id-1.9.3.180.8)
 
 ## See Also
 
-[BEGIN](sql-begin "BEGIN"), [COMMIT](sql-commit "COMMIT"), [ROLLBACK](sql-rollback "ROLLBACK"), [SAVEPOINT](sql-savepoint "SAVEPOINT"), [SET TRANSACTION](sql-set-transaction "SET TRANSACTION")
+[BEGIN](sql-begin), [COMMIT](sql-commit), [ROLLBACK](sql-rollback), [SAVEPOINT](sql-savepoint), [SET TRANSACTION](sql-set-transaction)

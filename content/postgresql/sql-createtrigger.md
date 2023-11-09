@@ -1,3 +1,5 @@
+[#id](#SQL-CREATETRIGGER)
+
 ## CREATE TRIGGER
 
 CREATE TRIGGER — define a new trigger
@@ -5,7 +7,6 @@ CREATE TRIGGER — define a new trigger
 ## Synopsis
 
 ```
-
 CREATE [ OR REPLACE ] [ CONSTRAINT ] TRIGGER name { BEFORE | AFTER | INSTEAD OF } { event [ OR ... ] }
     ON table_name
     [ FROM referenced_table_name ]
@@ -23,6 +24,8 @@ where event can be one of:
     TRUNCATE
 ```
 
+[#id](#id-1.9.3.93.6)
+
 ## Description
 
 `CREATE TRIGGER` creates a new trigger. `CREATE OR REPLACE TRIGGER` will either create a new trigger, or replace an existing trigger. The trigger will be associated with the specified table, view, or foreign table and will execute the specified function *`function_name`* when certain operations are performed on that table.
@@ -39,105 +42,110 @@ In addition, triggers may be defined to fire for `TRUNCATE`, though only `FOR EA
 
 The following table summarizes which types of triggers may be used on tables, views, and foreign tables:
 
-|     When     |            Event           |         Row-level         |          Statement-level          |
-| :----------: | :------------------------: | :-----------------------: | :-------------------------------: |
-|   `BEFORE`   | `INSERT`/`UPDATE`/`DELETE` | Tables and foreign tables | Tables, views, and foreign tables |
-|              |         `TRUNCATE`         |             —             |     Tables and foreign tables     |
-|    `AFTER`   | `INSERT`/`UPDATE`/`DELETE` | Tables and foreign tables | Tables, views, and foreign tables |
-|              |         `TRUNCATE`         |             —             |     Tables and foreign tables     |
-| `INSTEAD OF` | `INSERT`/`UPDATE`/`DELETE` |           Views           |                 —                 |
-|              |         `TRUNCATE`         |             —             |                 —                 |
+[#id](#SUPPORTED-TRIGGER-TYPES)
+
+| When         | Event                      | Row-level                 | Statement-level                   |
+| ------------ | -------------------------- | ------------------------- | --------------------------------- |
+| `BEFORE`     | `INSERT`/`UPDATE`/`DELETE` | Tables and foreign tables | Tables, views, and foreign tables |
+| `TRUNCATE`   | —                          | Tables and foreign tables |                                   |
+| `AFTER`      | `INSERT`/`UPDATE`/`DELETE` | Tables and foreign tables | Tables, views, and foreign tables |
+| `TRUNCATE`   | —                          | Tables and foreign tables |                                   |
+| `INSTEAD OF` | `INSERT`/`UPDATE`/`DELETE` | Views                     | —                                 |
+| `TRUNCATE`   | —                          | —                         |                                   |
 
 Also, a trigger definition can specify a Boolean `WHEN` condition, which will be tested to see whether the trigger should be fired. In row-level triggers the `WHEN` condition can examine the old and/or new values of columns of the row. Statement-level triggers can also have `WHEN` conditions, although the feature is not so useful for them since the condition cannot refer to any values in the table.
 
 If multiple triggers of the same kind are defined for the same event, they will be fired in alphabetical order by name.
 
-When the `CONSTRAINT` option is specified, this command creates a *constraint trigger*. This is the same as a regular trigger except that the timing of the trigger firing can be adjusted using [`SET CONSTRAINTS`](sql-set-constraints "SET CONSTRAINTS"). Constraint triggers must be `AFTER ROW` triggers on plain tables (not foreign tables). They can be fired either at the end of the statement causing the triggering event, or at the end of the containing transaction; in the latter case they are said to be *deferred*. A pending deferred-trigger firing can also be forced to happen immediately by using `SET CONSTRAINTS`. Constraint triggers are expected to raise an exception when the constraints they implement are violated.
+When the `CONSTRAINT` option is specified, this command creates a *constraint trigger*. This is the same as a regular trigger except that the timing of the trigger firing can be adjusted using [`SET CONSTRAINTS`](sql-set-constraints). Constraint triggers must be `AFTER ROW` triggers on plain tables (not foreign tables). They can be fired either at the end of the statement causing the triggering event, or at the end of the containing transaction; in the latter case they are said to be *deferred*. A pending deferred-trigger firing can also be forced to happen immediately by using `SET CONSTRAINTS`. Constraint triggers are expected to raise an exception when the constraints they implement are violated.
 
 The `REFERENCING` option enables collection of *transition relations*, which are row sets that include all of the rows inserted, deleted, or modified by the current SQL statement. This feature lets the trigger see a global view of what the statement did, not just one row at a time. This option is only allowed for an `AFTER` trigger that is not a constraint trigger; also, if the trigger is an `UPDATE` trigger, it must not specify a *`column_name`* list. `OLD TABLE` may only be specified once, and only for a trigger that can fire on `UPDATE` or `DELETE`; it creates a transition relation containing the *before-images* of all rows updated or deleted by the statement. Similarly, `NEW TABLE` may only be specified once, and only for a trigger that can fire on `UPDATE` or `INSERT`; it creates a transition relation containing the *after-images* of all rows updated or inserted by the statement.
 
 `SELECT` does not modify any rows so you cannot create `SELECT` triggers. Rules and views may provide workable solutions to problems that seem to need `SELECT` triggers.
 
-Refer to [Chapter 39](triggers "Chapter 39. Triggers") for more information about triggers.
+Refer to [Chapter 39](triggers) for more information about triggers.
+
+[#id](#id-1.9.3.93.7)
 
 ## Parameters
 
 * *`name`*
 
-    The name to give the new trigger. This must be distinct from the name of any other trigger for the same table. The name cannot be schema-qualified — the trigger inherits the schema of its table. For a constraint trigger, this is also the name to use when modifying the trigger's behavior using `SET CONSTRAINTS`.
+  The name to give the new trigger. This must be distinct from the name of any other trigger for the same table. The name cannot be schema-qualified — the trigger inherits the schema of its table. For a constraint trigger, this is also the name to use when modifying the trigger's behavior using `SET CONSTRAINTS`.
 
 * `BEFORE``AFTER``INSTEAD OF`
 
-    Determines whether the function is called before, after, or instead of the event. A constraint trigger can only be specified as `AFTER`.
+  Determines whether the function is called before, after, or instead of the event. A constraint trigger can only be specified as `AFTER`.
 
 * *`event`*
 
-    One of `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE`; this specifies the event that will fire the trigger. Multiple events can be specified using `OR`, except when transition relations are requested.
+  One of `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE`; this specifies the event that will fire the trigger. Multiple events can be specified using `OR`, except when transition relations are requested.
 
-    For `UPDATE` events, it is possible to specify a list of columns using this syntax:
+  For `UPDATE` events, it is possible to specify a list of columns using this syntax:
 
-    ```
+  ```
+  UPDATE OF column_name1 [, column_name2 ... ]
+  ```
 
-    UPDATE OF column_name1 [, column_name2 ... ]
-    ```
+  The trigger will only fire if at least one of the listed columns is mentioned as a target of the `UPDATE` command or if one of the listed columns is a generated column that depends on a column that is the target of the `UPDATE`.
 
-    The trigger will only fire if at least one of the listed columns is mentioned as a target of the `UPDATE` command or if one of the listed columns is a generated column that depends on a column that is the target of the `UPDATE`.
-
-    `INSTEAD OF UPDATE` events do not allow a list of columns. A column list cannot be specified when requesting transition relations, either.
+  `INSTEAD OF UPDATE` events do not allow a list of columns. A column list cannot be specified when requesting transition relations, either.
 
 * *`table_name`*
 
-    The name (optionally schema-qualified) of the table, view, or foreign table the trigger is for.
+  The name (optionally schema-qualified) of the table, view, or foreign table the trigger is for.
 
 * *`referenced_table_name`*
 
-    The (possibly schema-qualified) name of another table referenced by the constraint. This option is used for foreign-key constraints and is not recommended for general use. This can only be specified for constraint triggers.
+  The (possibly schema-qualified) name of another table referenced by the constraint. This option is used for foreign-key constraints and is not recommended for general use. This can only be specified for constraint triggers.
 
 * `DEFERRABLE``NOT DEFERRABLE``INITIALLY IMMEDIATE``INITIALLY DEFERRED`
 
-    The default timing of the trigger. See the [CREATE TABLE](sql-createtable "CREATE TABLE") documentation for details of these constraint options. This can only be specified for constraint triggers.
+  The default timing of the trigger. See the [CREATE TABLE](sql-createtable) documentation for details of these constraint options. This can only be specified for constraint triggers.
 
 * `REFERENCING`
 
-    This keyword immediately precedes the declaration of one or two relation names that provide access to the transition relations of the triggering statement.
+  This keyword immediately precedes the declaration of one or two relation names that provide access to the transition relations of the triggering statement.
 
 * `OLD TABLE``NEW TABLE`
 
-    This clause indicates whether the following relation name is for the before-image transition relation or the after-image transition relation.
+  This clause indicates whether the following relation name is for the before-image transition relation or the after-image transition relation.
 
 * *`transition_relation_name`*
 
-    The (unqualified) name to be used within the trigger for this transition relation.
+  The (unqualified) name to be used within the trigger for this transition relation.
 
 * `FOR EACH ROW``FOR EACH STATEMENT`
 
-    This specifies whether the trigger function should be fired once for every row affected by the trigger event, or just once per SQL statement. If neither is specified, `FOR EACH STATEMENT` is the default. Constraint triggers can only be specified `FOR EACH ROW`.
+  This specifies whether the trigger function should be fired once for every row affected by the trigger event, or just once per SQL statement. If neither is specified, `FOR EACH STATEMENT` is the default. Constraint triggers can only be specified `FOR EACH ROW`.
 
 * *`condition`*
 
-    A Boolean expression that determines whether the trigger function will actually be executed. If `WHEN` is specified, the function will only be called if the *`condition`* returns `true`. In `FOR EACH ROW` triggers, the `WHEN` condition can refer to columns of the old and/or new row values by writing `OLD.column_name` or `NEW.column_name` respectively. Of course, `INSERT` triggers cannot refer to `OLD` and `DELETE` triggers cannot refer to `NEW`.
+  A Boolean expression that determines whether the trigger function will actually be executed. If `WHEN` is specified, the function will only be called if the *`condition`* returns `true`. In `FOR EACH ROW` triggers, the `WHEN` condition can refer to columns of the old and/or new row values by writing `OLD.column_name` or `NEW.column_name` respectively. Of course, `INSERT` triggers cannot refer to `OLD` and `DELETE` triggers cannot refer to `NEW`.
 
-    `INSTEAD OF` triggers do not support `WHEN` conditions.
+  `INSTEAD OF` triggers do not support `WHEN` conditions.
 
-    Currently, `WHEN` expressions cannot contain subqueries.
+  Currently, `WHEN` expressions cannot contain subqueries.
 
-    Note that for constraint triggers, evaluation of the `WHEN` condition is not deferred, but occurs immediately after the row update operation is performed. If the condition does not evaluate to true then the trigger is not queued for deferred execution.
+  Note that for constraint triggers, evaluation of the `WHEN` condition is not deferred, but occurs immediately after the row update operation is performed. If the condition does not evaluate to true then the trigger is not queued for deferred execution.
 
 * *`function_name`*
 
-    A user-supplied function that is declared as taking no arguments and returning type `trigger`, which is executed when the trigger fires.
+  A user-supplied function that is declared as taking no arguments and returning type `trigger`, which is executed when the trigger fires.
 
-    In the syntax of `CREATE TRIGGER`, the keywords `FUNCTION` and `PROCEDURE` are equivalent, but the referenced function must in any case be a function, not a procedure. The use of the keyword `PROCEDURE` here is historical and deprecated.
+  In the syntax of `CREATE TRIGGER`, the keywords `FUNCTION` and `PROCEDURE` are equivalent, but the referenced function must in any case be a function, not a procedure. The use of the keyword `PROCEDURE` here is historical and deprecated.
 
 * *`arguments`*
 
-    An optional comma-separated list of arguments to be provided to the function when the trigger is executed. The arguments are literal string constants. Simple names and numeric constants can be written here, too, but they will all be converted to strings. Please check the description of the implementation language of the trigger function to find out how these arguments can be accessed within the function; it might be different from normal function arguments.
+  An optional comma-separated list of arguments to be provided to the function when the trigger is executed. The arguments are literal string constants. Simple names and numeric constants can be written here, too, but they will all be converted to strings. Please check the description of the implementation language of the trigger function to find out how these arguments can be accessed within the function; it might be different from normal function arguments.
+
+[#id](#SQL-CREATETRIGGER-NOTES)
 
 ## Notes
 
 To create or replace a trigger on a table, the user must have the `TRIGGER` privilege on the table. The user must also have `EXECUTE` privilege on the trigger function.
 
-Use [`DROP TRIGGER`](sql-droptrigger "DROP TRIGGER") to remove a trigger.
+Use [`DROP TRIGGER`](sql-droptrigger) to remove a trigger.
 
 Creating a row-level trigger on a partitioned table will cause an identical “clone” trigger to be created on each of its existing partitions; and any partitions created or attached later will have an identical trigger, too. If there is a conflictingly-named trigger on a child partition already, an error occurs unless `CREATE OR REPLACE TRIGGER` is used, in which case that trigger is replaced with a clone trigger. When a partition is detached from its parent, its clone triggers are removed.
 
@@ -161,14 +169,15 @@ Currently, the `OR REPLACE` option is not supported for constraint triggers.
 
 Replacing an existing trigger within a transaction that has already performed updating actions on the trigger's table is not recommended. Trigger firing decisions, or portions of firing decisions, that have already been made will not be reconsidered, so the effects could be surprising.
 
-There are a few built-in trigger functions that can be used to solve common problems without having to write your own trigger code; see [Section 9.28](functions-trigger "9.28. Trigger Functions").
+There are a few built-in trigger functions that can be used to solve common problems without having to write your own trigger code; see [Section 9.28](functions-trigger).
+
+[#id](#SQL-CREATETRIGGER-EXAMPLES)
 
 ## Examples
 
 Execute the function `check_account_update` whenever a row of the table `accounts` is about to be updated:
 
 ```
-
 CREATE TRIGGER check_update
     BEFORE UPDATE ON accounts
     FOR EACH ROW
@@ -178,7 +187,6 @@ CREATE TRIGGER check_update
 Modify that trigger definition to only execute the function if column `balance` is specified as a target in the `UPDATE` command:
 
 ```
-
 CREATE OR REPLACE TRIGGER check_update
     BEFORE UPDATE OF balance ON accounts
     FOR EACH ROW
@@ -188,7 +196,6 @@ CREATE OR REPLACE TRIGGER check_update
 This form only executes the function if column `balance` has in fact changed value:
 
 ```
-
 CREATE TRIGGER check_update
     BEFORE UPDATE ON accounts
     FOR EACH ROW
@@ -199,7 +206,6 @@ CREATE TRIGGER check_update
 Call a function to log updates of `accounts`, but only if something changed:
 
 ```
-
 CREATE TRIGGER log_update
     AFTER UPDATE ON accounts
     FOR EACH ROW
@@ -210,7 +216,6 @@ CREATE TRIGGER log_update
 Execute the function `view_insert_row` for each row to insert rows into the tables underlying a view:
 
 ```
-
 CREATE TRIGGER view_insert
     INSTEAD OF INSERT ON my_view
     FOR EACH ROW
@@ -220,7 +225,6 @@ CREATE TRIGGER view_insert
 Execute the function `check_transfer_balances_to_zero` for each statement to confirm that the `transfer` rows offset to a net of zero:
 
 ```
-
 CREATE TRIGGER transfer_insert
     AFTER INSERT ON transfer
     REFERENCING NEW TABLE AS inserted
@@ -231,7 +235,6 @@ CREATE TRIGGER transfer_insert
 Execute the function `check_matching_pairs` for each row to confirm that changes are made to matching pairs at the same time (by the same statement):
 
 ```
-
 CREATE TRIGGER paired_items_update
     AFTER UPDATE ON paired_items
     REFERENCING NEW TABLE AS newtab OLD TABLE AS oldtab
@@ -239,14 +242,18 @@ CREATE TRIGGER paired_items_update
     EXECUTE FUNCTION check_matching_pairs();
 ```
 
-[Section 39.4](trigger-example "39.4. A Complete Trigger Example") contains a complete example of a trigger function written in C.
+[Section 39.4](trigger-example) contains a complete example of a trigger function written in C.
+
+[#id](#SQL-CREATETRIGGER-COMPATIBILITY)
 
 ## Compatibility
 
 The `CREATE TRIGGER` statement in PostgreSQL implements a subset of the SQL standard. The following functionalities are currently missing:
 
 * While transition table names for `AFTER` triggers are specified using the `REFERENCING` clause in the standard way, the row variables used in `FOR EACH ROW` triggers may not be specified in a `REFERENCING` clause. They are available in a manner that is dependent on the language in which the trigger function is written, but is fixed for any one language. Some languages effectively behave as though there is a `REFERENCING` clause containing `OLD ROW AS OLD NEW ROW AS NEW`.
+
 * The standard allows transition tables to be used with column-specific `UPDATE` triggers, but then the set of rows that should be visible in the transition tables depends on the trigger's column list. This is not currently implemented by PostgreSQL.
+
 * PostgreSQL only allows the execution of a user-defined function for the triggered action. The standard allows the execution of a number of other SQL commands, such as `CREATE TABLE`, as the triggered action. This limitation is not hard to work around by creating a user-defined function that executes the desired commands.
 
 SQL specifies that multiple triggers should be fired in time-of-creation order. PostgreSQL uses name order, which was judged to be more convenient.
@@ -259,6 +266,8 @@ The ability to fire triggers for `TRUNCATE` is a PostgreSQL extension of the SQL
 
 `CREATE CONSTRAINT TRIGGER` is a PostgreSQL extension of the SQL standard. So is the `OR REPLACE` option.
 
+[#id](#id-1.9.3.93.11)
+
 ## See Also
 
-[ALTER TRIGGER](sql-altertrigger "ALTER TRIGGER"), [DROP TRIGGER](sql-droptrigger "DROP TRIGGER"), [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION"), [SET CONSTRAINTS](sql-set-constraints "SET CONSTRAINTS")
+[ALTER TRIGGER](sql-altertrigger), [DROP TRIGGER](sql-droptrigger), [CREATE FUNCTION](sql-createfunction), [SET CONSTRAINTS](sql-set-constraints)

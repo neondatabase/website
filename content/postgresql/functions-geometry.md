@@ -1,6 +1,10 @@
+[#id](#FUNCTIONS-GEOMETRY)
+
 ## 9.11. Geometric Functions and Operators [#](#FUNCTIONS-GEOMETRY)
 
-The geometric types `point`, `box`, `lseg`, `line`, `path`, `polygon`, and `circle` have a large set of native support functions and operators, shown in [Table 9.36](functions-geometry#FUNCTIONS-GEOMETRY-OP-TABLE "Table 9.36. Geometric Operators"), [Table 9.37](functions-geometry#FUNCTIONS-GEOMETRY-FUNC-TABLE "Table 9.37. Geometric Functions"), and [Table 9.38](functions-geometry#FUNCTIONS-GEOMETRY-CONV-TABLE "Table 9.38. Geometric Type Conversion Functions").
+The geometric types `point`, `box`, `lseg`, `line`, `path`, `polygon`, and `circle` have a large set of native support functions and operators, shown in [Table 9.36](functions-geometry#FUNCTIONS-GEOMETRY-OP-TABLE), [Table 9.37](functions-geometry#FUNCTIONS-GEOMETRY-FUNC-TABLE), and [Table 9.38](functions-geometry#FUNCTIONS-GEOMETRY-CONV-TABLE).
+
+[#id](#FUNCTIONS-GEOMETRY-OP-TABLE)
 
 **Table 9.36. Geometric Operators**
 
@@ -39,9 +43,10 @@ The geometric types `point`, `box`, `lseg`, `line`, `path`, `polygon`, and `circ
 | `line` `?-\|` `line` → `boolean``lseg` `?-\|` `lseg` → `boolean`Are lines perpendicular?`lseg '[(0,0),(0,1)]' ?-\| lseg '[(0,0),(1,0)]'` → `t`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `line` `?\|\|` `line` → `boolean``lseg` `?\|\|` `lseg` → `boolean`Are lines parallel?`lseg '[(-1,0),(1,0)]' ?\|\| lseg '[(-1,2),(1,2)]'` → `t`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | *`geometric_type`* `~=` *`geometric_type`* → `boolean`Are these objects the same? Available for `point`, `box`, `polygon`, `circle`.`polygon '((0,0),(1,1))' ~= polygon '((1,1),(0,0))'` → `t`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| [\[a\] ](#FUNCTIONS-GEOMETRY-ROTATION-FN)“Rotating” a box with these operators only moves its corner points: the box is still considered to have sides parallel to the axes. Hence the box's size is not preserved, as a true rotation would do.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| [#id](#ftn.FUNCTIONS-GEOMETRY-ROTATION-FN)[\[a\] ](#FUNCTIONS-GEOMETRY-ROTATION-FN)“Rotating” a box with these operators only moves its corner points: the box is still considered to have sides parallel to the axes. Hence the box's size is not preserved, as a true rotation would do.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 \
+
 
 ### Caution
 
@@ -50,6 +55,8 @@ Note that the “same as” operator, `~=`, represents the usual notion of equal
 ### Note
 
 Before PostgreSQL 14, the point is strictly below/above comparison operators `point` `<<|` `point` and `point` `|>>` `point` were respectively called `<^` and `>^`. These names are still available, but are deprecated and will eventually be removed.
+
+[#id](#FUNCTIONS-GEOMETRY-FUNC-TABLE)
 
 **Table 9.37. Geometric Functions**
 
@@ -71,6 +78,9 @@ Before PostgreSQL 14, the point is strictly below/above comparison operators `po
 | `width` ( `box` ) → `double precision`Computes horizontal size of box.`width(box '(1,2),(0,0)')` → `1`                                                                                                                                                                |
 
 \
+
+
+[#id](#FUNCTIONS-GEOMETRY-CONV-TABLE)
 
 **Table 9.38. Geometric Type Conversion Functions**
 
@@ -99,5 +109,6 @@ Before PostgreSQL 14, the point is strictly below/above comparison operators `po
 | `polygon` ( `path` ) → `polygon`Converts closed path to a polygon with the same list of points.`polygon(path '((0,0),(1,1),(2,0))')` → `((0,0),(1,1),(2,0))`                                                                                                                                                                                                                                                                                                                                                                                          |
 
 \
+
 
 It is possible to access the two component numbers of a `point` as though the point were an array with indexes 0 and 1. For example, if `t.p` is a `point` column then `SELECT p[0] FROM t` retrieves the X coordinate and `UPDATE t SET p[1] = ...` changes the Y coordinate. In the same way, a value of type `box` or `lseg` can be treated as an array of two `point` values.

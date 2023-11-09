@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-SQL-IMPLEMENTATION-INFO)
+
 ## 37.49. `sql_implementation_info` [#](#INFOSCHEMA-SQL-IMPLEMENTATION-INFO)
 
 The table `sql_implementation_info` contains information about various aspects that are left implementation-defined by the SQL standard. This information is primarily intended for use in the context of the ODBC interface; users of other interfaces will probably find this information to be of little use. For this reason, the individual implementation information items are not described here; you will find them in the description of the ODBC interface.
+
+[#id](#id-1.7.6.53.3)
 
 **Table 37.47. `sql_implementation_info` Columns**
 

@@ -1,4 +1,8 @@
+[#id](#DATATYPE-BIT)
+
 ## 8.10. Bit String Types [#](#DATATYPE-BIT)
+
+
 
 Bit strings are strings of 1's and 0's. They can be used to store or visualize bit masks. There are two SQL bit types: `bit(n)` and `bit varying(n)`, where *`n`* is a positive integer.
 
@@ -8,7 +12,9 @@ Bit strings are strings of 1's and 0's. They can be used to store or visualize b
 
 If one explicitly casts a bit-string value to `bit(n)`, it will be truncated or zero-padded on the right to be exactly *`n`* bits, without raising an error. Similarly, if one explicitly casts a bit-string value to `bit varying(n)`, it will be truncated on the right if it is more than *`n`* bits.
 
-Refer to [Section 4.1.2.5](sql-syntax-lexical#SQL-SYNTAX-BIT-STRINGS "4.1.2.5. Bit-String Constants") for information about the syntax of bit string constants. Bit-logical operators and string manipulation functions are available; see [Section 9.6](functions-bitstring "9.6. Bit String Functions and Operators").
+Refer to [Section 4.1.2.5](sql-syntax-lexical#SQL-SYNTAX-BIT-STRINGS) for information about the syntax of bit string constants. Bit-logical operators and string manipulation functions are available; see [Section 9.6](functions-bitstring).
+
+[#id](#id-1.5.7.18.7)
 
 **Example 8.3. Using the Bit String Types**
 
@@ -31,4 +37,5 @@ SELECT * FROM test;
 
 \
 
-A bit string value requires 1 byte for each group of 8 bits, plus 5 or 8 bytes overhead depending on the length of the string (but long values may be compressed or moved out-of-line, as explained in [Section 8.3](datatype-character "8.3. Character Types") for character strings).
+
+A bit string value requires 1 byte for each group of 8 bits, plus 5 or 8 bytes overhead depending on the length of the string (but long values may be compressed or moved out-of-line, as explained in [Section 8.3](datatype-character) for character strings).

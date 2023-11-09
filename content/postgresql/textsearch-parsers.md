@@ -1,8 +1,12 @@
+[#id](#TEXTSEARCH-PARSERS)
+
 ## 12.5. Parsers [#](#TEXTSEARCH-PARSERS)
 
 Text search parsers are responsible for splitting raw document text into *tokens* and identifying each token's type, where the set of possible types is defined by the parser itself. Note that a parser does not modify the text at all — it simply identifies plausible word boundaries. Because of this limited scope, there is less need for application-specific custom parsers than there is for custom dictionaries. At present PostgreSQL provides just one built-in parser, which has been found to be useful for a wide range of applications.
 
-The built-in parser is named `pg_catalog.default`. It recognizes 23 token types, shown in [Table 12.1](textsearch-parsers#TEXTSEARCH-DEFAULT-PARSER "Table 12.1. Default Parser's Token Types").
+The built-in parser is named `pg_catalog.default`. It recognizes 23 token types, shown in [Table 12.1](textsearch-parsers#TEXTSEARCH-DEFAULT-PARSER).
+
+[#id](#TEXTSEARCH-DEFAULT-PARSER)
 
 **Table 12.1. Default Parser's Token Types**
 
@@ -34,6 +38,7 @@ The built-in parser is named `pg_catalog.default`. It recognizes 23 token types,
 
 \
 
+
 ### Note
 
 The parser's notion of a “letter” is determined by the database's locale setting, specifically `lc_ctype`. Words containing only the basic ASCII letters are reported as a separate token type, since it is sometimes useful to distinguish them. In most European languages, token types `word` and `asciiword` should be treated alike.
@@ -43,7 +48,6 @@ The parser's notion of a “letter” is determined by the database's locale set
 It is possible for the parser to produce overlapping tokens from the same piece of text. As an example, a hyphenated word will be reported both as the entire word and as each component:
 
 ```
-
 SELECT alias, description, token FROM ts_debug('foo-bar-beta1');
       alias      |               description                |     token
 -----------------+------------------------------------------+---------------
@@ -58,7 +62,6 @@ SELECT alias, description, token FROM ts_debug('foo-bar-beta1');
 This behavior is desirable since it allows searches to work for both the whole compound word and for components. Here is another instructive example:
 
 ```
-
 SELECT alias, description, token FROM ts_debug('http://example.com/stuff/index');
   alias   |  description  |            token
 ----------+---------------+------------------------------

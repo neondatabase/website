@@ -1,15 +1,18 @@
+[#id](#PLPYTHON-SUBTRANSACTION)
+
 ## 46.7. Explicit Subtransactions [#](#PLPYTHON-SUBTRANSACTION)
 
 * [46.7.1. Subtransaction Context Managers](plpython-subtransaction#PLPYTHON-SUBTRANSACTION-CONTEXT-MANAGERS)
 
-Recovering from errors caused by database access as described in [Section 46.6.2](plpython-database#PLPYTHON-TRAPPING "46.6.2. Trapping Errors") can lead to an undesirable situation where some operations succeed before one of them fails, and after recovering from that error the data is left in an inconsistent state. PL/Python offers a solution to this problem in the form of explicit subtransactions.
+Recovering from errors caused by database access as described in [Section 46.6.2](plpython-database#PLPYTHON-TRAPPING) can lead to an undesirable situation where some operations succeed before one of them fails, and after recovering from that error the data is left in an inconsistent state. PL/Python offers a solution to this problem in the form of explicit subtransactions.
+
+[#id](#PLPYTHON-SUBTRANSACTION-CONTEXT-MANAGERS)
 
 ### 46.7.1. Subtransaction Context Managers [#](#PLPYTHON-SUBTRANSACTION-CONTEXT-MANAGERS)
 
 Consider a function that implements a transfer between two accounts:
 
 ```
-
 CREATE FUNCTION transfer_funds() RETURNS void AS $$
 try:
     plpy.execute("UPDATE accounts SET balance = balance - 100 WHERE account_name = 'joe'")
@@ -28,7 +31,6 @@ If the second `UPDATE` statement results in an exception being raised, this func
 To avoid such issues, you can wrap your `plpy.execute` calls in an explicit subtransaction. The `plpy` module provides a helper object to manage explicit subtransactions that gets created with the `plpy.subtransaction()` function. Objects created by this function implement the [context manager interface](https://docs.python.org/library/stdtypes.html#context-manager-types). Using explicit subtransactions we can rewrite our function as:
 
 ```
-
 CREATE FUNCTION transfer_funds2() RETURNS void AS $$
 try:
     with plpy.subtransaction():

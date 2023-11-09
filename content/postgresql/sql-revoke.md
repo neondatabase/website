@@ -1,3 +1,5 @@
+[#id](#SQL-REVOKE)
+
 ## REVOKE
 
 REVOKE — remove access privileges
@@ -5,7 +7,6 @@ REVOKE — remove access privileges
 ## Synopsis
 
 ```
-
 REVOKE [ GRANT OPTION FOR ]
     { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER }
     [, ...] | ALL [ PRIVILEGES ] }
@@ -124,11 +125,13 @@ where role_specification can be:
   | SESSION_USER
 ```
 
+[#id](#SQL-REVOKE-DESCRIPTION)
+
 ## Description
 
 The `REVOKE` command revokes previously granted privileges from one or more roles. The key word `PUBLIC` refers to the implicitly defined group of all roles.
 
-See the description of the [`GRANT`](sql-grant "GRANT") command for the meaning of the privilege types.
+See the description of the [`GRANT`](sql-grant) command for the meaning of the privilege types.
 
 Note that any particular role will have the sum of privileges granted directly to it, privileges granted to any role it is presently a member of, and privileges granted to `PUBLIC`. Thus, for example, revoking `SELECT` privilege from `PUBLIC` does not necessarily mean that all roles have lost `SELECT` privilege on the object: those who have it granted directly or via another role will still have it. Similarly, revoking `SELECT` from a user might not prevent that user from using `SELECT` if `PUBLIC` or another membership role still has `SELECT` rights.
 
@@ -142,6 +145,8 @@ When revoking membership in a role, `GRANT OPTION` is instead called `ADMIN OPTI
 
 Just as `ADMIN OPTION` can be removed from an existing role grant, it is also possible to revoke `INHERIT OPTION` or `SET OPTION`. This is equivalent to setting the value of the corresponding option to `FALSE`.
 
+[#id](#SQL-REVOKE-NOTES)
+
 ## Notes
 
 A user can only revoke privileges that were granted directly by that user. If, for example, user A has granted a privilege with grant option to user B, and user B has in turn granted it to user C, then user A cannot revoke the privilege directly from C. Instead, user A could revoke the grant option from user B and use the `CASCADE` option so that the privilege is in turn revoked from user C. For another example, if both A and B have granted the same privilege to C, A can revoke their own grant but not B's grant, so C will still effectively have the privilege.
@@ -154,21 +159,21 @@ If a superuser chooses to issue a `GRANT` or `REVOKE` command, the command is pe
 
 If the role executing `REVOKE` holds privileges indirectly via more than one role membership path, it is unspecified which containing role will be used to perform the command. In such cases it is best practice to use `SET ROLE` to become the specific role you want to do the `REVOKE` as. Failure to do so might lead to revoking privileges other than the ones you intended, or not revoking anything at all.
 
-See [Section 5.7](ddl-priv "5.7. Privileges") for more information about specific privilege types, as well as how to inspect objects' privileges.
+See [Section 5.7](ddl-priv) for more information about specific privilege types, as well as how to inspect objects' privileges.
+
+[#id](#SQL-REVOKE-EXAMPLES)
 
 ## Examples
 
 Revoke insert privilege for the public on table `films`:
 
 ```
-
 REVOKE INSERT ON films FROM PUBLIC;
 ```
 
 Revoke all privileges from user `manuel` on view `kinds`:
 
 ```
-
 REVOKE ALL PRIVILEGES ON kinds FROM manuel;
 ```
 
@@ -177,14 +182,17 @@ Note that this actually means “revoke all privileges that I granted”.
 Revoke membership in role `admins` from user `joe`:
 
 ```
-
 REVOKE admins FROM joe;
 ```
 
+[#id](#SQL-REVOKE-COMPATIBILITY)
+
 ## Compatibility
 
-The compatibility notes of the [`GRANT`](sql-grant "GRANT") command apply analogously to `REVOKE`. The keyword `RESTRICT` or `CASCADE` is required according to the standard, but PostgreSQL assumes `RESTRICT` by default.
+The compatibility notes of the [`GRANT`](sql-grant) command apply analogously to `REVOKE`. The keyword `RESTRICT` or `CASCADE` is required according to the standard, but PostgreSQL assumes `RESTRICT` by default.
+
+[#id](#id-1.9.3.166.9)
 
 ## See Also
 
-[GRANT](sql-grant "GRANT"), [ALTER DEFAULT PRIVILEGES](sql-alterdefaultprivileges "ALTER DEFAULT PRIVILEGES")
+[GRANT](sql-grant), [ALTER DEFAULT PRIVILEGES](sql-alterdefaultprivileges)

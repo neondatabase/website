@@ -1,3 +1,5 @@
+[#id](#SQL-CREATEUSER)
+
 ## CREATE USER
 
 CREATE USER — define a new database role
@@ -5,7 +7,6 @@ CREATE USER — define a new database role
 ## Synopsis
 
 ```
-
 CREATE USER name [ [ WITH ] option [ ... ] ]
 
 where option can be:
@@ -28,14 +29,20 @@ where option can be:
     | SYSID uid
 ```
 
+[#id](#id-1.9.3.95.5)
+
 ## Description
 
-`CREATE USER` is now an alias for [`CREATE ROLE`](sql-createrole "CREATE ROLE"). The only difference is that when the command is spelled `CREATE USER`, `LOGIN` is assumed by default, whereas `NOLOGIN` is assumed when the command is spelled `CREATE ROLE`.
+`CREATE USER` is now an alias for [`CREATE ROLE`](sql-createrole). The only difference is that when the command is spelled `CREATE USER`, `LOGIN` is assumed by default, whereas `NOLOGIN` is assumed when the command is spelled `CREATE ROLE`.
+
+[#id](#id-1.9.3.95.6)
 
 ## Compatibility
 
 The `CREATE USER` statement is a PostgreSQL extension. The SQL standard leaves the definition of users to the implementation.
 
+[#id](#id-1.9.3.95.7)
+
 ## See Also
 
-[CREATE ROLE](sql-createrole "CREATE ROLE")
+[CREATE ROLE](sql-createrole)

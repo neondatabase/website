@@ -1,15 +1,23 @@
-## F.42. tablefunc — functions that return tables (`crosstab` and others) [#](#TABLEFUNC)
+[#id](#TABLEFUNC)
 
-  * [F.42.1. Functions Provided](tablefunc#TABLEFUNC-FUNCTIONS-SECT)
-  * [F.42.2. Author](tablefunc#TABLEFUNC-AUTHOR)
+## F.43. tablefunc — functions that return tables (`crosstab` and others) [#](#TABLEFUNC)
+
+  * [F.43.1. Functions Provided](tablefunc#TABLEFUNC-FUNCTIONS-SECT)
+  * [F.43.2. Author](tablefunc#TABLEFUNC-AUTHOR)
+
+
 
 The `tablefunc` module includes various functions that return tables (that is, multiple rows). These functions are useful both in their own right and as examples of how to write C functions that return multiple rows.
 
 This module is considered “trusted”, that is, it can be installed by non-superusers who have `CREATE` privilege on the current database.
 
-### F.42.1. Functions Provided [#](#TABLEFUNC-FUNCTIONS-SECT)
+[#id](#TABLEFUNC-FUNCTIONS-SECT)
 
-[Table F.32](tablefunc#TABLEFUNC-FUNCTIONS "Table F.32. tablefunc Functions") summarizes the functions provided by the `tablefunc` module.
+### F.43.1. Functions Provided [#](#TABLEFUNC-FUNCTIONS-SECT)
+
+[Table F.32](tablefunc#TABLEFUNC-FUNCTIONS) summarizes the functions provided by the `tablefunc` module.
+
+[#id](#TABLEFUNC-FUNCTIONS)
 
 **Table F.32. `tablefunc` Functions**
 
@@ -24,10 +32,14 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 
 \
 
-#### F.42.1.1. `normal_rand` [#](#TABLEFUNC-FUNCTIONS-NORMAL-RAND)
+
+[#id](#TABLEFUNC-FUNCTIONS-NORMAL-RAND)
+
+#### F.43.1.1. `normal_rand` [#](#TABLEFUNC-FUNCTIONS-NORMAL-RAND)
+
+
 
 ```
-
 normal_rand(int numvals, float8 mean, float8 stddev) returns setof float8
 ```
 
@@ -38,7 +50,6 @@ normal_rand(int numvals, float8 mean, float8 stddev) returns setof float8
 For example, this call requests 1000 values with a mean of 5 and a standard deviation of 3:
 
 ```
-
 test=# SELECT * FROM normal_rand(1000, 5, 3);
      normal_rand
 ----------------------
@@ -56,10 +67,13 @@ test=# SELECT * FROM normal_rand(1000, 5, 3);
 (1000 rows)
 ```
 
-#### F.42.1.2. `crosstab(text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT)
+[#id](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT)
+
+#### F.43.1.2. `crosstab(text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT)
+
+
 
 ```
-
 crosstab(text sql)
 crosstab(text sql, int N)
 ```
@@ -67,7 +81,6 @@ crosstab(text sql, int N)
 The `crosstab` function is used to produce “pivot” displays, wherein data is listed across the page rather than down. For example, we might have data like
 
 ```
-
 row1    val11
 row1    val12
 row1    val13
@@ -81,7 +94,6 @@ row2    val23
 which we wish to display like
 
 ```
-
 row1    val11   val12   val13   ...
 row2    val21   val22   val23   ...
 ...
@@ -94,7 +106,6 @@ The *`sql`* parameter is an SQL statement that produces the source set of data. 
 For example, the provided query might produce a set something like:
 
 ```
-
  row_name    cat    value
 ----------+-------+-------
   row1      cat1    val1
@@ -110,14 +121,12 @@ For example, the provided query might produce a set something like:
 The `crosstab` function is declared to return `setof record`, so the actual names and types of the output columns must be defined in the `FROM` clause of the calling `SELECT` statement, for example:
 
 ```
-
 SELECT * FROM crosstab('...') AS ct(row_name text, category_1 text, category_2 text);
 ```
 
 This example produces a set something like:
 
 ```
-
            <== value  columns  ==>
  row_name   category_1   category_2
 ----------+------------+------------
@@ -134,7 +143,6 @@ In practice the SQL query should always specify `ORDER BY 1,2` to ensure that th
 Here is a complete example:
 
 ```
-
 CREATE TABLE ct(id SERIAL, rowid TEXT, attribute TEXT, value TEXT);
 INSERT INTO ct(rowid, attribute, value) VALUES('test1','att1','val1');
 INSERT INTO ct(rowid, attribute, value) VALUES('test1','att2','val2');
@@ -166,17 +174,19 @@ You can avoid always having to write out a `FROM` clause to define the output co
 
 See also the `\crosstabview` command in psql, which provides functionality similar to `crosstab()`.
 
-#### F.42.1.3. `crosstabN(text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-N-TEXT)
+[#id](#TABLEFUNC-FUNCTIONS-CROSSTAB-N-TEXT)
+
+#### F.43.1.3. `crosstabN(text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-N-TEXT)
+
+
 
 ```
-
 crosstabN(text sql)
 ```
 
 The `crosstabN` functions are examples of how to set up custom wrappers for the general `crosstab` function, so that you need not write out column names and types in the calling `SELECT` query. The `tablefunc` module includes `crosstab2`, `crosstab3`, and `crosstab4`, whose output row types are defined as
 
 ```
-
 CREATE TYPE tablefunc_crosstab_N AS (
     row_name TEXT,
     category_1 TEXT,
@@ -193,7 +203,6 @@ Thus, these functions can be used directly when the input query produces `row_na
 For instance, the example given in the previous section would also work as
 
 ```
-
 SELECT *
 FROM crosstab3(
   'select rowid, attribute, value
@@ -206,42 +215,43 @@ These functions are provided mostly for illustration purposes. You can create yo
 
 * Create a composite type describing the desired output columns, similar to the examples in `contrib/tablefunc/tablefunc--1.0.sql`. Then define a unique function name accepting one `text` parameter and returning `setof your_type_name`, but linking to the same underlying `crosstab` C function. For example, if your source data produces row names that are `text`, and values that are `float8`, and you want 5 value columns:
 
-    ```
+  ```
+  CREATE TYPE my_crosstab_float8_5_cols AS (
+      my_row_name text,
+      my_category_1 float8,
+      my_category_2 float8,
+      my_category_3 float8,
+      my_category_4 float8,
+      my_category_5 float8
+  );
 
-    CREATE TYPE my_crosstab_float8_5_cols AS (
-        my_row_name text,
-        my_category_1 float8,
-        my_category_2 float8,
-        my_category_3 float8,
-        my_category_4 float8,
-        my_category_5 float8
-    );
-
-    CREATE OR REPLACE FUNCTION crosstab_float8_5_cols(text)
-        RETURNS setof my_crosstab_float8_5_cols
-        AS '$libdir/tablefunc','crosstab' LANGUAGE C STABLE STRICT;
-    ```
+  CREATE OR REPLACE FUNCTION crosstab_float8_5_cols(text)
+      RETURNS setof my_crosstab_float8_5_cols
+      AS '$libdir/tablefunc','crosstab' LANGUAGE C STABLE STRICT;
+  ```
 
 * Use `OUT` parameters to define the return type implicitly. The same example could also be done this way:
 
-    ```
+  ```
+  CREATE OR REPLACE FUNCTION crosstab_float8_5_cols(
+      IN text,
+      OUT my_row_name text,
+      OUT my_category_1 float8,
+      OUT my_category_2 float8,
+      OUT my_category_3 float8,
+      OUT my_category_4 float8,
+      OUT my_category_5 float8)
+    RETURNS setof record
+    AS '$libdir/tablefunc','crosstab' LANGUAGE C STABLE STRICT;
+  ```
 
-    CREATE OR REPLACE FUNCTION crosstab_float8_5_cols(
-        IN text,
-        OUT my_row_name text,
-        OUT my_category_1 float8,
-        OUT my_category_2 float8,
-        OUT my_category_3 float8,
-        OUT my_category_4 float8,
-        OUT my_category_5 float8)
-      RETURNS setof record
-      AS '$libdir/tablefunc','crosstab' LANGUAGE C STABLE STRICT;
-    ```
+[#id](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT-2)
 
-#### F.42.1.4. `crosstab(text, text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT-2)
+#### F.43.1.4. `crosstab(text, text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT-2)
+
+
 
 ```
-
 crosstab(text source_sql, text category_sql)
 ```
 
@@ -252,7 +262,6 @@ The main limitation of the single-parameter form of `crosstab` is that it treats
 For example, *`source_sql`* might produce a set something like:
 
 ```
-
 SELECT row_name, extra_col, cat, value FROM foo ORDER BY 1;
 
  row_name    extra_col   cat    value
@@ -269,7 +278,6 @@ SELECT row_name, extra_col, cat, value FROM foo ORDER BY 1;
 *`category_sql`* is an SQL statement that produces the set of categories. This statement must return only one column. It must produce at least one row, or an error will be generated. Also, it must not produce duplicate values, or an error will be generated. *`category_sql`* might be something like:
 
 ```
-
 SELECT DISTINCT cat FROM foo ORDER BY 1;
     cat
   -------
@@ -282,7 +290,6 @@ SELECT DISTINCT cat FROM foo ORDER BY 1;
 The `crosstab` function is declared to return `setof record`, so the actual names and types of the output columns must be defined in the `FROM` clause of the calling `SELECT` statement, for example:
 
 ```
-
 SELECT * FROM crosstab('...', '...')
     AS ct(row_name text, extra text, cat1 text, cat2 text, cat3 text, cat4 text);
 ```
@@ -290,7 +297,6 @@ SELECT * FROM crosstab('...', '...')
 This will produce a result something like:
 
 ```
-
                   <==  value  columns   ==>
 row_name   extra   cat1   cat2   cat3   cat4
 ---------+-------+------+------+------+------
@@ -307,7 +313,6 @@ In practice the *`source_sql`* query should always specify `ORDER BY 1` to ensur
 Here are two complete examples:
 
 ```
-
 create table sales(year int, month int, qty int);
 insert into sales values(2007, 1, 1000);
 insert into sales values(2007, 2, 1500);
@@ -342,7 +347,6 @@ select * from crosstab(
 ```
 
 ```
-
 CREATE TABLE cth(rowid text, rowdt timestamp, attribute text, val text);
 INSERT INTO cth VALUES('test1','01 March 2003','temperature','42');
 INSERT INTO cth VALUES('test1','01 March 2003','test_result','PASS');
@@ -375,10 +379,13 @@ AS
 
 You can create predefined functions to avoid having to write out the result column names and types in each query. See the examples in the previous section. The underlying C function for this form of `crosstab` is named `crosstab_hash`.
 
-#### F.42.1.5. `connectby` [#](#TABLEFUNC-FUNCTIONS-CONNECTBY)
+[#id](#TABLEFUNC-FUNCTIONS-CONNECTBY)
+
+#### F.43.1.5. `connectby` [#](#TABLEFUNC-FUNCTIONS-CONNECTBY)
+
+
 
 ```
-
 connectby(text relname, text keyid_fld, text parent_keyid_fld
           [, text orderby_fld ], text start_with, int max_depth
           [, text branch_delim ])
@@ -386,7 +393,9 @@ connectby(text relname, text keyid_fld, text parent_keyid_fld
 
 The `connectby` function produces a display of hierarchical data that is stored in a table. The table must have a key field that uniquely identifies rows, and a parent-key field that references the parent (if any) of each row. `connectby` can display the sub-tree descending from any row.
 
-[Table F.33](tablefunc#TABLEFUNC-CONNECTBY-PARAMETERS "Table F.33. connectby Parameters") explains the parameters.
+[Table F.33](tablefunc#TABLEFUNC-CONNECTBY-PARAMETERS) explains the parameters.
+
+[#id](#TABLEFUNC-CONNECTBY-PARAMETERS)
 
 **Table F.33. `connectby` Parameters**
 
@@ -402,12 +411,12 @@ The `connectby` function produces a display of hierarchical data that is stored 
 
 \
 
+
 The key and parent-key fields can be any data type, but they must be the same type. Note that the *`start_with`* value must be entered as a text string, regardless of the type of the key field.
 
 The `connectby` function is declared to return `setof record`, so the actual names and types of the output columns must be defined in the `FROM` clause of the calling `SELECT` statement, for example:
 
 ```
-
 SELECT * FROM connectby('connectby_tree', 'keyid', 'parent_keyid', 'pos', 'row2', 0, '~')
     AS t(keyid text, parent_keyid text, level int, branch text, pos int);
 ```
@@ -427,7 +436,6 @@ It is important that the *`branch_delim`* string not appear in any key values, e
 Here is an example:
 
 ```
-
 CREATE TABLE connectby_tree(keyid text, parent_keyid text, pos int);
 
 INSERT INTO connectby_tree VALUES('row1',NULL, 0);
@@ -493,6 +501,8 @@ SELECT * FROM connectby('connectby_tree', 'keyid', 'parent_keyid', 'pos', 'row2'
 (6 rows)
 ```
 
-### F.42.2. Author [#](#TABLEFUNC-AUTHOR)
+[#id](#TABLEFUNC-AUTHOR)
+
+### F.43.2. Author [#](#TABLEFUNC-AUTHOR)
 
 Joe Conway

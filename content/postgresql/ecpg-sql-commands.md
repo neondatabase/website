@@ -1,3 +1,5 @@
+[#id](#ECPG-SQL-COMMANDS)
+
 ## 36.14. Embedded SQL Commands [#](#ECPG-SQL-COMMANDS)
 
   * [ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor) — allocate an SQL descriptor area
@@ -18,4 +20,4 @@
   * [VAR](ecpg-sql-var) — define a variable
   * [WHENEVER](ecpg-sql-whenever) — specify the action to be taken when an SQL statement causes a specific class condition to be raised
 
-This section describes all SQL commands that are specific to embedded SQL. Also refer to the SQL commands listed in [SQL Commands](sql-commands "SQL Commands"), which can also be used in embedded SQL, unless stated otherwise.
+This section describes all SQL commands that are specific to embedded SQL. Also refer to the SQL commands listed in [SQL Commands](sql-commands), which can also be used in embedded SQL, unless stated otherwise.

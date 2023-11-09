@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-TRIGGERS)
+
 ## 37.57. `triggers` [#](#INFOSCHEMA-TRIGGERS)
 
 The view `triggers` contains all triggers defined in the current database on tables and views that the current user owns or has some privilege other than `SELECT` on.
+
+[#id](#id-1.7.6.61.3)
 
 **Table 37.55. `triggers` Columns**
 
@@ -25,6 +29,7 @@ The view `triggers` contains all triggers defined in the current database on tab
 | `created` `time_stamp`Applies to a feature not available in PostgreSQL                                                                                                                                                                        |
 
 \
+
 
 Triggers in PostgreSQL have two incompatibilities with the SQL standard that affect the representation in the information schema. First, trigger names are local to each table in PostgreSQL, rather than being independent schema objects. Therefore there can be duplicate trigger names defined in one schema, so long as they belong to different tables. (`trigger_catalog` and `trigger_schema` are really the values pertaining to the table that the trigger is defined on.) Second, triggers can be defined to fire on multiple events in PostgreSQL (e.g., `ON INSERT OR UPDATE`), whereas the SQL standard only allows one. If a trigger is defined to fire on multiple events, it is represented as multiple rows in the information schema, one for each type of event. As a consequence of these two issues, the primary key of the view `triggers` is really `(trigger_catalog, trigger_schema, event_object_table, trigger_name, event_manipulation)` instead of `(trigger_catalog, trigger_schema, trigger_name)`, which is what the SQL standard specifies. Nonetheless, if you define your triggers in a manner that conforms with the SQL standard (trigger names unique in the schema and only one event type per trigger), this will not affect you.
 

@@ -1,3 +1,5 @@
+[#id](#SQL-CREATETSCONFIG)
+
 ## CREATE TEXT SEARCH CONFIGURATION
 
 CREATE TEXT SEARCH CONFIGURATION — define a new text search configuration
@@ -5,12 +7,13 @@ CREATE TEXT SEARCH CONFIGURATION — define a new text search configuration
 ## Synopsis
 
 ```
-
 CREATE TEXT SEARCH CONFIGURATION name (
     PARSER = parser_name |
     COPY = source_config
 )
 ```
+
+[#id](#id-1.9.3.88.5)
 
 ## Description
 
@@ -22,30 +25,38 @@ If a schema name is given then the text search configuration is created in the s
 
 The user who defines a text search configuration becomes its owner.
 
-Refer to [Chapter 12](textsearch "Chapter 12. Full Text Search") for further information.
+Refer to [Chapter 12](textsearch) for further information.
+
+[#id](#id-1.9.3.88.6)
 
 ## Parameters
 
 * *`name`*
 
-    The name of the text search configuration to be created. The name can be schema-qualified.
+  The name of the text search configuration to be created. The name can be schema-qualified.
 
 * *`parser_name`*
 
-    The name of the text search parser to use for this configuration.
+  The name of the text search parser to use for this configuration.
 
 * *`source_config`*
 
-    The name of an existing text search configuration to copy.
+  The name of an existing text search configuration to copy.
+
+[#id](#id-1.9.3.88.7)
 
 ## Notes
 
 The `PARSER` and `COPY` options are mutually exclusive, because when an existing configuration is copied, its parser selection is copied too.
 
+[#id](#id-1.9.3.88.8)
+
 ## Compatibility
 
 There is no `CREATE TEXT SEARCH CONFIGURATION` statement in the SQL standard.
 
+[#id](#id-1.9.3.88.9)
+
 ## See Also
 
-[ALTER TEXT SEARCH CONFIGURATION](sql-altertsconfig "ALTER TEXT SEARCH CONFIGURATION"), [DROP TEXT SEARCH CONFIGURATION](sql-droptsconfig "DROP TEXT SEARCH CONFIGURATION")
+[ALTER TEXT SEARCH CONFIGURATION](sql-altertsconfig), [DROP TEXT SEARCH CONFIGURATION](sql-droptsconfig)

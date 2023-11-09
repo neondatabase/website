@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-FOREIGN-SERVERS)
+
 ## 37.29. `foreign_servers` [#](#INFOSCHEMA-FOREIGN-SERVERS)
 
 The view `foreign_servers` contains all foreign servers defined in the current database. Only those foreign servers are shown that the current user has access to (by way of being the owner or having some privilege).
+
+[#id](#id-1.7.6.33.3)
 
 **Table 37.27. `foreign_servers` Columns**
 

@@ -1,16 +1,21 @@
+[#id](#PLANNER-STATS)
+
 ## 14.2. Statistics Used by the Planner [#](#PLANNER-STATS)
 
   * [14.2.1. Single-Column Statistics](planner-stats#PLANNER-STATS-SINGLE-COLUMN)
   * [14.2.2. Extended Statistics](planner-stats#PLANNER-STATS-EXTENDED)
 
+
+
+[#id](#PLANNER-STATS-SINGLE-COLUMN)
+
 ### 14.2.1. Single-Column Statistics [#](#PLANNER-STATS-SINGLE-COLUMN)
 
 As we saw in the previous section, the query planner needs to estimate the number of rows retrieved by a query in order to make good choices of query plans. This section provides a quick look at the statistics that the system uses for these estimates.
 
-One component of the statistics is the total number of entries in each table and index, as well as the number of disk blocks occupied by each table and index. This information is kept in the table [`pg_class`](catalog-pg-class "53.11. pg_class"), in the columns `reltuples` and `relpages`. We can look at it with queries similar to this one:
+One component of the statistics is the total number of entries in each table and index, as well as the number of disk blocks occupied by each table and index. This information is kept in the table [`pg_class`](catalog-pg-class), in the columns `reltuples` and `relpages`. We can look at it with queries similar to this one:
 
 ```
-
 SELECT relname, relkind, reltuples, relpages
 FROM pg_class
 WHERE relname LIKE 'tenk1%';
@@ -29,12 +34,15 @@ Here we can see that `tenk1` contains 10000 rows, as do its indexes, but the ind
 
 For efficiency reasons, `reltuples` and `relpages` are not updated on-the-fly, and so they usually contain somewhat out-of-date values. They are updated by `VACUUM`, `ANALYZE`, and a few DDL commands such as `CREATE INDEX`. A `VACUUM` or `ANALYZE` operation that does not scan the entire table (which is commonly the case) will incrementally update the `reltuples` count on the basis of the part of the table it did scan, resulting in an approximate value. In any case, the planner will scale the values it finds in `pg_class` to match the current physical table size, thus obtaining a closer approximation.
 
-Most queries retrieve only a fraction of the rows in a table, due to `WHERE` clauses that restrict the rows to be examined. The planner thus needs to make an estimate of the *selectivity* of `WHERE` clauses, that is, the fraction of rows that match each condition in the `WHERE` clause. The information used for this task is stored in the [`pg_statistic`](catalog-pg-statistic "53.51. pg_statistic") system catalog. Entries in `pg_statistic` are updated by the `ANALYZE` and `VACUUM ANALYZE` commands, and are always approximate even when freshly updated.
 
-Rather than look at `pg_statistic` directly, it's better to look at its view [`pg_stats`](view-pg-stats "54.27. pg_stats") when examining the statistics manually. `pg_stats` is designed to be more easily readable. Furthermore, `pg_stats` is readable by all, whereas `pg_statistic` is only readable by a superuser. (This prevents unprivileged users from learning something about the contents of other people's tables from the statistics. The `pg_stats` view is restricted to show only rows about tables that the current user can read.) For example, we might do:
+
+Most queries retrieve only a fraction of the rows in a table, due to `WHERE` clauses that restrict the rows to be examined. The planner thus needs to make an estimate of the *selectivity* of `WHERE` clauses, that is, the fraction of rows that match each condition in the `WHERE` clause. The information used for this task is stored in the [`pg_statistic`](catalog-pg-statistic) system catalog. Entries in `pg_statistic` are updated by the `ANALYZE` and `VACUUM ANALYZE` commands, and are always approximate even when freshly updated.
+
+
+
+Rather than look at `pg_statistic` directly, it's better to look at its view [`pg_stats`](view-pg-stats) when examining the statistics manually. `pg_stats` is designed to be more easily readable. Furthermore, `pg_stats` is readable by all, whereas `pg_statistic` is only readable by a superuser. (This prevents unprivileged users from learning something about the contents of other people's tables from the statistics. The `pg_stats` view is restricted to show only rows about tables that the current user can read.) For example, we might do:
 
 ```
-
 SELECT attname, inherited, n_distinct,
        array_to_string(most_common_vals, E'\n') as most_common_vals
 FROM pg_stats
@@ -59,19 +67,25 @@ Note that two rows are displayed for the same column, one corresponding to the c
 
 The amount of information stored in `pg_statistic` by `ANALYZE`, in particular the maximum number of entries in the `most_common_vals` and `histogram_bounds` arrays for each column, can be set on a column-by-column basis using the `ALTER TABLE SET STATISTICS` command, or globally by setting the [default\_statistics\_target](runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET) configuration variable. The default limit is presently 100 entries. Raising the limit might allow more accurate planner estimates to be made, particularly for columns with irregular data distributions, at the price of consuming more space in `pg_statistic` and slightly more time to compute the estimates. Conversely, a lower limit might be sufficient for columns with simple data distributions.
 
-Further details about the planner's use of statistics can be found in [Chapter 76](planner-stats-details "Chapter 76. How the Planner Uses Statistics").
+Further details about the planner's use of statistics can be found in [Chapter 76](planner-stats-details).
+
+[#id](#PLANNER-STATS-EXTENDED)
 
 ### 14.2.2. Extended Statistics [#](#PLANNER-STATS-EXTENDED)
+
+
 
 It is common to see slow queries running bad execution plans because multiple columns used in the query clauses are correlated. The planner normally assumes that multiple conditions are independent of each other, an assumption that does not hold when column values are correlated. Regular statistics, because of their per-individual-column nature, cannot capture any knowledge about cross-column correlation. However, PostgreSQL has the ability to compute *multivariate statistics*, which can capture such information.
 
 Because the number of possible column combinations is very large, it's impractical to compute multivariate statistics automatically. Instead, *extended statistics objects*, more often called just *statistics objects*, can be created to instruct the server to obtain statistics across interesting sets of columns.
 
-Statistics objects are created using the [`CREATE STATISTICS`](sql-createstatistics "CREATE STATISTICS") command. Creation of such an object merely creates a catalog entry expressing interest in the statistics. Actual data collection is performed by `ANALYZE` (either a manual command, or background auto-analyze). The collected values can be examined in the [`pg_statistic_ext_data`](catalog-pg-statistic-ext-data "53.53. pg_statistic_ext_data") catalog.
+Statistics objects are created using the [`CREATE STATISTICS`](sql-createstatistics) command. Creation of such an object merely creates a catalog entry expressing interest in the statistics. Actual data collection is performed by `ANALYZE` (either a manual command, or background auto-analyze). The collected values can be examined in the [`pg_statistic_ext_data`](catalog-pg-statistic-ext-data) catalog.
 
 `ANALYZE` computes extended statistics based on the same sample of table rows that it takes for computing regular single-column statistics. Since the sample size is increased by increasing the statistics target for the table or any of its columns (as described in the previous section), a larger statistics target will normally result in more accurate extended statistics, as well as more time spent calculating them.
 
 The following subsections describe the kinds of extended statistics that are currently supported.
+
+[#id](#PLANNER-STATS-EXTENDED-FUNCTIONAL-DEPS)
 
 #### 14.2.2.1. Functional Dependencies [#](#PLANNER-STATS-EXTENDED-FUNCTIONAL-DEPS)
 
@@ -84,7 +98,6 @@ To inform the planner about functional dependencies, `ANALYZE` can collect measu
 Here is an example of collecting functional-dependency statistics:
 
 ```
-
 CREATE STATISTICS stts (dependencies) ON city, zip FROM zipcodes;
 
 ANALYZE zipcodes;
@@ -102,6 +115,8 @@ Here it can be seen that column 1 (zip code) fully determines column 5 (city) so
 
 When computing the selectivity for a query involving functionally dependent columns, the planner adjusts the per-condition selectivity estimates using the dependency coefficients so as not to produce an underestimate.
 
+[#id](#PLANNER-STATS-EXTENDED-FUNCTIONAL-DEPS-LIMITS)
+
 ##### 14.2.2.1.1. Limitations of Functional Dependencies [#](#PLANNER-STATS-EXTENDED-FUNCTIONAL-DEPS-LIMITS)
 
 Functional dependencies are currently only applied when considering simple equality conditions that compare columns to constant values, and `IN` clauses with constant values. They are not used to improve estimates for equality conditions comparing two columns or comparing a column to an expression, nor for range clauses, `LIKE` or any other type of condition.
@@ -109,20 +124,20 @@ Functional dependencies are currently only applied when considering simple equal
 When estimating with functional dependencies, the planner assumes that conditions on the involved columns are compatible and hence redundant. If they are incompatible, the correct estimate would be zero rows, but that possibility is not considered. For example, given a query like
 
 ```
-
 SELECT * FROM zipcodes WHERE city = 'San Francisco' AND zip = '94105';
 ```
 
 the planner will disregard the `city` clause as not changing the selectivity, which is correct. However, it will make the same assumption about
 
 ```
-
 SELECT * FROM zipcodes WHERE city = 'San Francisco' AND zip = '90210';
 ```
 
 even though there will really be zero rows satisfying this query. Functional dependency statistics do not provide enough information to conclude that, however.
 
 In many practical situations, this assumption is usually satisfied; for example, there might be a GUI in the application that only allows selecting compatible city and ZIP code values to use in a query. But if that's not the case, functional dependencies may not be a viable option.
+
+[#id](#PLANNER-STATS-EXTENDED-N-DISTINCT-COUNTS)
 
 #### 14.2.2.2. Multivariate N-Distinct Counts [#](#PLANNER-STATS-EXTENDED-N-DISTINCT-COUNTS)
 
@@ -133,7 +148,6 @@ To improve such estimates, `ANALYZE` can collect n-distinct statistics for group
 Continuing the previous example, the n-distinct counts in a table of ZIP codes might look like the following:
 
 ```
-
 CREATE STATISTICS stts2 (ndistinct) ON city, state, zip FROM zipcodes;
 
 ANALYZE zipcodes;
@@ -151,6 +165,8 @@ This indicates that there are three combinations of columns that have 33178 dist
 
 It's advisable to create `ndistinct` statistics objects only on combinations of columns that are actually used for grouping, and for which misestimation of the number of groups is resulting in bad plans. Otherwise, the `ANALYZE` cycles are just wasted.
 
+[#id](#PLANNER-STATS-EXTENDED-MCV-LISTS)
+
 #### 14.2.2.3. Multivariate MCV Lists [#](#PLANNER-STATS-EXTENDED-MCV-LISTS)
 
 Another type of statistic stored for each column are most-common value lists. This allows very accurate estimates for individual columns, but may result in significant misestimates for queries with conditions on multiple columns.
@@ -160,7 +176,6 @@ To improve such estimates, `ANALYZE` can collect MCV lists on combinations of co
 Continuing the previous example, the MCV list for a table of ZIP codes might look like the following (unlike for simpler types of statistics, a function is required for inspection of MCV contents):
 
 ```
-
 CREATE STATISTICS stts3 (mcv) ON city, state FROM zipcodes;
 
 ANALYZE zipcodes;

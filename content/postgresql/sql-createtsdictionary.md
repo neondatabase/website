@@ -1,3 +1,5 @@
+[#id](#SQL-CREATETSDICTIONARY)
+
 ## CREATE TEXT SEARCH DICTIONARY
 
 CREATE TEXT SEARCH DICTIONARY — define a new text search dictionary
@@ -5,12 +7,13 @@ CREATE TEXT SEARCH DICTIONARY — define a new text search dictionary
 ## Synopsis
 
 ```
-
 CREATE TEXT SEARCH DICTIONARY name (
     TEMPLATE = template
     [, option = value [, ... ]]
 )
 ```
+
+[#id](#id-1.9.3.89.5)
 
 ## Description
 
@@ -20,34 +23,37 @@ If a schema name is given then the text search dictionary is created in the spec
 
 The user who defines a text search dictionary becomes its owner.
 
-Refer to [Chapter 12](textsearch "Chapter 12. Full Text Search") for further information.
+Refer to [Chapter 12](textsearch) for further information.
+
+[#id](#id-1.9.3.89.6)
 
 ## Parameters
 
 * *`name`*
 
-    The name of the text search dictionary to be created. The name can be schema-qualified.
+  The name of the text search dictionary to be created. The name can be schema-qualified.
 
 * *`template`*
 
-    The name of the text search template that will define the basic behavior of this dictionary.
+  The name of the text search template that will define the basic behavior of this dictionary.
 
 * *`option`*
 
-    The name of a template-specific option to be set for this dictionary.
+  The name of a template-specific option to be set for this dictionary.
 
 * *`value`*
 
-    The value to use for a template-specific option. If the value is not a simple identifier or number, it must be quoted (but you can always quote it, if you wish).
+  The value to use for a template-specific option. If the value is not a simple identifier or number, it must be quoted (but you can always quote it, if you wish).
 
 The options can appear in any order.
+
+[#id](#id-1.9.3.89.7)
 
 ## Examples
 
 The following example command creates a Snowball-based dictionary with a nonstandard list of stop words.
 
 ```
-
 CREATE TEXT SEARCH DICTIONARY my_russian (
     template = snowball,
     language = russian,
@@ -55,10 +61,14 @@ CREATE TEXT SEARCH DICTIONARY my_russian (
 );
 ```
 
+[#id](#id-1.9.3.89.8)
+
 ## Compatibility
 
 There is no `CREATE TEXT SEARCH DICTIONARY` statement in the SQL standard.
 
+[#id](#id-1.9.3.89.9)
+
 ## See Also
 
-[ALTER TEXT SEARCH DICTIONARY](sql-altertsdictionary "ALTER TEXT SEARCH DICTIONARY"), [DROP TEXT SEARCH DICTIONARY](sql-droptsdictionary "DROP TEXT SEARCH DICTIONARY")
+[ALTER TEXT SEARCH DICTIONARY](sql-altertsdictionary), [DROP TEXT SEARCH DICTIONARY](sql-droptsdictionary)

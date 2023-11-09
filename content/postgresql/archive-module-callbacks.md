@@ -1,3 +1,5 @@
+[#id](#ARCHIVE-MODULE-CALLBACKS)
+
 ## 51.2. Archive Module Callbacks [#](#ARCHIVE-MODULE-CALLBACKS)
 
   * [51.2.1. Startup Callback](archive-module-callbacks#ARCHIVE-MODULE-STARTUP)
@@ -7,6 +9,8 @@
 
 The archive callbacks define the actual archiving behavior of the module. The server will call them as required to process each individual WAL file.
 
+[#id](#ARCHIVE-MODULE-STARTUP)
+
 ### 51.2.1. Startup Callback [#](#ARCHIVE-MODULE-STARTUP)
 
 The `startup_cb` callback is called shortly after the module is loaded. This callback can be used to perform any additional initialization required. If the archive module has any state, it can use `state->private_data` to store it.
@@ -15,6 +19,8 @@ The `startup_cb` callback is called shortly after the module is loaded. This cal
 
 typedef void (*ArchiveStartupCB) (ArchiveModuleState *state);
 ```
+
+[#id](#ARCHIVE-MODULE-CHECK)
 
 ### 51.2.2. Check Callback [#](#ARCHIVE-MODULE-CHECK)
 
@@ -34,6 +40,8 @@ WARNING:  archive_mode enabled, yet archiving is not configured
 
 In the latter case, the server will periodically call this function, and archiving will proceed only when it returns `true`.
 
+[#id](#ARCHIVE-MODULE-ARCHIVE)
+
 ### 51.2.3. Archive Callback [#](#ARCHIVE-MODULE-ARCHIVE)
 
 The `archive_file_cb` callback is called to archive a single WAL file.
@@ -44,6 +52,8 @@ typedef bool (*ArchiveFileCB) (ArchiveModuleState *state, const char *file, cons
 ```
 
 If `true` is returned, the server proceeds as if the file was successfully archived, which may include recycling or removing the original WAL file. If `false` is returned, the server will keep the original WAL file and retry archiving later. *`file`* will contain just the file name of the WAL file to archive, while *`path`* contains the full path of the WAL file (including the file name).
+
+[#id](#ARCHIVE-MODULE-SHUTDOWN)
 
 ### 51.2.4. Shutdown Callback [#](#ARCHIVE-MODULE-SHUTDOWN)
 

@@ -1,3 +1,5 @@
+[#id](#ECPG-SQL-WHENEVER)
+
 ## WHENEVER
 
 WHENEVER — specify the action to be taken when an SQL statement causes a specific class condition to be raised
@@ -9,13 +11,19 @@ WHENEVER — specify the action to be taken when an SQL statement causes a speci
 WHENEVER { NOT FOUND | SQLERROR | SQLWARNING } action
 ```
 
+[#id](#id-1.7.5.20.19.3)
+
 ## Description
 
 Define a behavior which is called on the special cases (Rows not found, SQL warnings or errors) in the result of SQL execution.
 
+[#id](#id-1.7.5.20.19.4)
+
 ## Parameters
 
-See [Section 36.8.1](ecpg-errors#ECPG-WHENEVER "36.8.1. Setting Callbacks") for a description of the parameters.
+See [Section 36.8.1](ecpg-errors#ECPG-WHENEVER) for a description of the parameters.
+
+[#id](#id-1.7.5.20.19.5)
 
 ## Examples
 
@@ -66,6 +74,8 @@ main(void)
     return 0;
 }
 ```
+
+[#id](#id-1.7.5.20.19.6)
 
 ## Compatibility
 

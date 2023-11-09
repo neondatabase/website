@@ -1,3 +1,5 @@
+[#id](#APPLEVEL-CONSISTENCY)
+
 ## 13.4. Data Consistency Checks at the Application Level [#](#APPLEVEL-CONSISTENCY)
 
   * [13.4.1. Enforcing Consistency with Serializable Transactions](applevel-consistency#SERIALIZABLE-CONSISTENCY)
@@ -7,7 +9,9 @@ It is very difficult to enforce business rules regarding data integrity using Re
 
 While a Repeatable Read transaction has a stable view of the data throughout its execution, there is a subtle issue with using MVCC snapshots for data consistency checks, involving something known as *read/write conflicts*. If one transaction writes data and a concurrent transaction attempts to read the same data (whether before or after the write), it cannot see the work of the other transaction. The reader then appears to have executed first regardless of which started first or which committed first. If that is as far as it goes, there is no problem, but if the reader also writes data which is read by a concurrent transaction there is now a transaction which appears to have run before either of the previously mentioned transactions. If the transaction which appears to have executed last actually commits first, it is very easy for a cycle to appear in a graph of the order of execution of the transactions. When such a cycle appears, integrity checks will not work correctly without some help.
 
-As mentioned in [Section 13.2.3](transaction-iso#XACT-SERIALIZABLE "13.2.3. Serializable Isolation Level"), Serializable transactions are just Repeatable Read transactions which add nonblocking monitoring for dangerous patterns of read/write conflicts. When a pattern is detected which could cause a cycle in the apparent order of execution, one of the transactions involved is rolled back to break the cycle.
+As mentioned in [Section 13.2.3](transaction-iso#XACT-SERIALIZABLE), Serializable transactions are just Repeatable Read transactions which add nonblocking monitoring for dangerous patterns of read/write conflicts. When a pattern is detected which could cause a cycle in the apparent order of execution, one of the transactions involved is rolled back to break the cycle.
+
+[#id](#SERIALIZABLE-CONSISTENCY)
 
 ### 13.4.1. Enforcing Consistency with Serializable Transactions [#](#SERIALIZABLE-CONSISTENCY)
 
@@ -15,11 +19,13 @@ If the Serializable transaction isolation level is used for all writes and for a
 
 When using this technique, it will avoid creating an unnecessary burden for application programmers if the application software goes through a framework which automatically retries transactions which are rolled back with a serialization failure. It may be a good idea to set `default_transaction_isolation` to `serializable`. It would also be wise to take some action to ensure that no other transaction isolation level is used, either inadvertently or to subvert integrity checks, through checks of the transaction isolation level in triggers.
 
-See [Section 13.2.3](transaction-iso#XACT-SERIALIZABLE "13.2.3. Serializable Isolation Level") for performance suggestions.
+See [Section 13.2.3](transaction-iso#XACT-SERIALIZABLE) for performance suggestions.
 
 ### Warning: Serializable Transactions and Data Replication
 
-This level of integrity protection using Serializable transactions does not yet extend to hot standby mode ([Section 27.4](hot-standby "27.4. Hot Standby")) or logical replicas. Because of that, those using hot standby or logical replication may want to use Repeatable Read and explicit locking on the primary.
+This level of integrity protection using Serializable transactions does not yet extend to hot standby mode ([Section 27.4](hot-standby)) or logical replicas. Because of that, those using hot standby or logical replication may want to use Repeatable Read and explicit locking on the primary.
+
+[#id](#NON-SERIALIZABLE-CONSISTENCY)
 
 ### 13.4.2. Enforcing Consistency with Explicit Blocking Locks [#](#NON-SERIALIZABLE-CONSISTENCY)
 

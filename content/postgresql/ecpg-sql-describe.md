@@ -1,3 +1,5 @@
+[#id](#ECPG-SQL-DESCRIBE)
+
 ## DESCRIBE
 
 DESCRIBE — obtain information about a prepared statement or result set
@@ -11,23 +13,29 @@ DESCRIBE [ OUTPUT ] prepared_name INTO [ SQL ] DESCRIPTOR descriptor_name
 DESCRIBE [ OUTPUT ] prepared_name INTO sqlda_name
 ```
 
+[#id](#id-1.7.5.20.8.3)
+
 ## Description
 
 `DESCRIBE` retrieves metadata information about the result columns contained in a prepared statement, without actually fetching a row.
+
+[#id](#id-1.7.5.20.8.4)
 
 ## Parameters
 
 * *`prepared_name`* [#](#ECPG-SQL-DESCRIBE-PREPARED-NAME)
 
-    The name of a prepared statement. This can be an SQL identifier or a host variable.
+  The name of a prepared statement. This can be an SQL identifier or a host variable.
 
 * *`descriptor_name`* [#](#ECPG-SQL-DESCRIBE-DESCRIPTOR-NAME)
 
-    A descriptor name. It is case sensitive. It can be an SQL identifier or a host variable.
+  A descriptor name. It is case sensitive. It can be an SQL identifier or a host variable.
 
 * *`sqlda_name`* [#](#ECPG-SQL-DESCRIBE-SQLDA-NAME)
 
-    The name of an SQLDA variable.
+  The name of an SQLDA variable.
+
+[#id](#id-1.7.5.20.8.5)
 
 ## Examples
 
@@ -40,10 +48,14 @@ EXEC SQL GET DESCRIPTOR mydesc VALUE 1 :charvar = NAME;
 EXEC SQL DEALLOCATE DESCRIPTOR mydesc;
 ```
 
+[#id](#id-1.7.5.20.8.6)
+
 ## Compatibility
 
 `DESCRIBE` is specified in the SQL standard.
 
+[#id](#id-1.7.5.20.8.7)
+
 ## See Also
 
-[ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor "ALLOCATE DESCRIPTOR"), [GET DESCRIPTOR](ecpg-sql-get-descriptor "GET DESCRIPTOR")
+[ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor), [GET DESCRIPTOR](ecpg-sql-get-descriptor)

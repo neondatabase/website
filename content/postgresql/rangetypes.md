@@ -1,3 +1,5 @@
+[#id](#RANGETYPES)
+
 ## 8.17. Range Types [#](#RANGETYPES)
 
   * [8.17.1. Built-in Range and Multirange Types](rangetypes#RANGETYPES-BUILTIN)
@@ -11,29 +13,39 @@
   * [8.17.9. Indexing](rangetypes#RANGETYPES-INDEXING)
   * [8.17.10. Constraints on Ranges](rangetypes#RANGETYPES-CONSTRAINT)
 
+
+
 Range types are data types representing a range of values of some element type (called the range's *subtype*). For instance, ranges of `timestamp` might be used to represent the ranges of time that a meeting room is reserved. In this case the data type is `tsrange` (short for “timestamp range”), and `timestamp` is the subtype. The subtype must have a total order so that it is well-defined whether element values are within, before, or after a range of values.
 
 Range types are useful because they represent many element values in a single range value, and because concepts such as overlapping ranges can be expressed clearly. The use of time and date ranges for scheduling purposes is the clearest example; but price ranges, measurement ranges from an instrument, and so forth can also be useful.
 
 Every range type has a corresponding multirange type. A multirange is an ordered list of non-contiguous, non-empty, non-null ranges. Most range operators also work on multiranges, and they have a few functions of their own.
 
+[#id](#RANGETYPES-BUILTIN)
+
 ### 8.17.1. Built-in Range and Multirange Types [#](#RANGETYPES-BUILTIN)
 
 PostgreSQL comes with the following built-in range types:
 
 * `int4range` — Range of `integer`, `int4multirange` — corresponding Multirange
+
 * `int8range` — Range of `bigint`, `int8multirange` — corresponding Multirange
+
 * `numrange` — Range of `numeric`, `nummultirange` — corresponding Multirange
+
 * `tsrange` — Range of `timestamp without time zone`, `tsmultirange` — corresponding Multirange
+
 * `tstzrange` — Range of `timestamp with time zone`, `tstzmultirange` — corresponding Multirange
+
 * `daterange` — Range of `date`, `datemultirange` — corresponding Multirange
 
-In addition, you can define your own range types; see [CREATE TYPE](sql-createtype "CREATE TYPE") for more information.
+In addition, you can define your own range types; see [CREATE TYPE](sql-createtype) for more information.
+
+[#id](#RANGETYPES-EXAMPLES)
 
 ### 8.17.2. Examples [#](#RANGETYPES-EXAMPLES)
 
 ```
-
 CREATE TABLE reservation (room int, during tsrange);
 INSERT INTO reservation VALUES
     (1108, '[2010-01-01 14:30, 2010-01-01 15:30)');
@@ -54,15 +66,19 @@ SELECT int4range(10, 20) * int4range(15, 25);
 SELECT isempty(numrange(1, 5));
 ```
 
-See [Table 9.55](functions-range#RANGE-OPERATORS-TABLE "Table 9.55. Range Operators") and [Table 9.57](functions-range#RANGE-FUNCTIONS-TABLE "Table 9.57. Range Functions") for complete lists of operators and functions on range types.
+See [Table 9.55](functions-range#RANGE-OPERATORS-TABLE) and [Table 9.57](functions-range#RANGE-FUNCTIONS-TABLE) for complete lists of operators and functions on range types.
+
+[#id](#RANGETYPES-INCLUSIVITY)
 
 ### 8.17.3. Inclusive and Exclusive Bounds [#](#RANGETYPES-INCLUSIVITY)
 
 Every non-empty range has two bounds, the lower bound and the upper bound. All points between these values are included in the range. An inclusive bound means that the boundary point itself is included in the range as well, while an exclusive bound means that the boundary point is not included in the range.
 
-In the text form of a range, an inclusive lower bound is represented by “`[`” while an exclusive lower bound is represented by “`(`”. Likewise, an inclusive upper bound is represented by “`]`”, while an exclusive upper bound is represented by “`)`”. (See [Section 8.17.5](rangetypes#RANGETYPES-IO "8.17.5. Range Input/Output") for more details.)
+In the text form of a range, an inclusive lower bound is represented by “`[`” while an exclusive lower bound is represented by “`(`”. Likewise, an inclusive upper bound is represented by “`]`”, while an exclusive upper bound is represented by “`)`”. (See [Section 8.17.5](rangetypes#RANGETYPES-IO) for more details.)
 
 The functions `lower_inc` and `upper_inc` test the inclusivity of the lower and upper bounds of a range value, respectively.
+
+[#id](#RANGETYPES-INFINITE)
 
 ### 8.17.4. Infinite (Unbounded) Ranges [#](#RANGETYPES-INFINITE)
 
@@ -72,12 +88,13 @@ Element types that have the notion of “infinity” can use them as explicit bo
 
 The functions `lower_inf` and `upper_inf` test for infinite lower and upper bounds of a range, respectively.
 
+[#id](#RANGETYPES-IO)
+
 ### 8.17.5. Range Input/Output [#](#RANGETYPES-IO)
 
 The input for a range value must follow one of the following patterns:
 
 ```
-
 (lower-bound,upper-bound)
 (lower-bound,upper-bound]
 [lower-bound,upper-bound)
@@ -95,12 +112,11 @@ Whitespace is allowed before and after the range value, but any whitespace betwe
 
 ### Note
 
-These rules are very similar to those for writing field values in composite-type literals. See [Section 8.16.6](rowtypes#ROWTYPES-IO-SYNTAX "8.16.6. Composite Type Input and Output Syntax") for additional commentary.
+These rules are very similar to those for writing field values in composite-type literals. See [Section 8.16.6](rowtypes#ROWTYPES-IO-SYNTAX) for additional commentary.
 
 Examples:
 
 ```
-
 -- includes 3, does not include 7, and does include all points in between
 SELECT '[3,7)'::int4range;
 
@@ -119,18 +135,18 @@ The input for a multirange is curly brackets (`{` and `}`) containing zero or mo
 Examples:
 
 ```
-
 SELECT '{}'::int4multirange;
 SELECT '{[3,7)}'::int4multirange;
 SELECT '{[3,7), [8,9)}'::int4multirange;
 ```
+
+[#id](#RANGETYPES-CONSTRUCT)
 
 ### 8.17.6. Constructing Ranges and Multiranges [#](#RANGETYPES-CONSTRUCT)
 
 Each range type has a constructor function with the same name as the range type. Using the constructor function is frequently more convenient than writing a range literal constant, since it avoids the need for extra quoting of the bound values. The constructor function accepts two or three arguments. The two-argument form constructs a range in standard form (lower bound inclusive, upper bound exclusive), while the three-argument form constructs a range with bounds of the form specified by the third argument. The third argument must be one of the strings “`()`”, “`(]`”, “`[)`”, or “`[]`”. For example:
 
 ```
-
 -- The full form is: lower bound, upper bound, and text argument indicating
 -- inclusivity/exclusivity of bounds.
 SELECT numrange(1.0, 14.0, '(]');
@@ -149,11 +165,12 @@ SELECT numrange(NULL, 2.2);
 Each range type also has a multirange constructor with the same name as the multirange type. The constructor function takes zero or more arguments which are all ranges of the appropriate type. For example:
 
 ```
-
 SELECT nummultirange();
 SELECT nummultirange(numrange(1.0, 14.0));
 SELECT nummultirange(numrange(1.0, 14.0), numrange(20.0, 25.0));
 ```
+
+[#id](#RANGETYPES-DISCRETE)
 
 ### 8.17.7. Discrete Range Types [#](#RANGETYPES-DISCRETE)
 
@@ -165,12 +182,13 @@ A discrete range type should have a *canonicalization* function that is aware of
 
 The built-in range types `int4range`, `int8range`, and `daterange` all use a canonical form that includes the lower bound and excludes the upper bound; that is, `[)`. User-defined range types can use other conventions, however.
 
+[#id](#RANGETYPES-DEFINING)
+
 ### 8.17.8. Defining New Range Types [#](#RANGETYPES-DEFINING)
 
 Users can define their own range types. The most common reason to do this is to use ranges over subtypes not provided among the built-in range types. For example, to define a new range type of subtype `float8`:
 
 ```
-
 CREATE TYPE floatrange AS RANGE (
     subtype = float8,
     subtype_diff = float8mi
@@ -192,7 +210,6 @@ In addition, any range type that is meant to be used with GiST or SP-GiST indexe
 A less-oversimplified example of a `subtype_diff` function is:
 
 ```
-
 CREATE FUNCTION time_subtype_diff(x time, y time) RETURNS float8 AS
 'SELECT EXTRACT(EPOCH FROM (x - y))' LANGUAGE sql STRICT IMMUTABLE;
 
@@ -204,27 +221,33 @@ CREATE TYPE timerange AS RANGE (
 SELECT '[11:10, 23:00]'::timerange;
 ```
 
-See [CREATE TYPE](sql-createtype "CREATE TYPE") for more information about creating range types.
+See [CREATE TYPE](sql-createtype) for more information about creating range types.
+
+[#id](#RANGETYPES-INDEXING)
 
 ### 8.17.9. Indexing [#](#RANGETYPES-INDEXING)
+
+
 
 GiST and SP-GiST indexes can be created for table columns of range types. GiST indexes can be also created for table columns of multirange types. For instance, to create a GiST index:
 
 ```
-
 CREATE INDEX reservation_idx ON reservation USING GIST (during);
 ```
 
-A GiST or SP-GiST index on ranges can accelerate queries involving these range operators: `=`, `&&`, `<@`, `@>`, `<<`, `>>`, `-|-`, `&<`, and `&>`. A GiST index on multiranges can accelerate queries involving the same set of multirange operators. A GiST index on ranges and GiST index on multiranges can also accelerate queries involving these cross-type range to multirange and multirange to range operators correspondingly: `&&`, `<@`, `@>`, `<<`, `>>`, `-|-`, `&<`, and `&>`. See [Table 9.55](functions-range#RANGE-OPERATORS-TABLE "Table 9.55. Range Operators") for more information.
+A GiST or SP-GiST index on ranges can accelerate queries involving these range operators: `=`, `&&`, `<@`, `@>`, `<<`, `>>`, `-|-`, `&<`, and `&>`. A GiST index on multiranges can accelerate queries involving the same set of multirange operators. A GiST index on ranges and GiST index on multiranges can also accelerate queries involving these cross-type range to multirange and multirange to range operators correspondingly: `&&`, `<@`, `@>`, `<<`, `>>`, `-|-`, `&<`, and `&>`. See [Table 9.55](functions-range#RANGE-OPERATORS-TABLE) for more information.
 
 In addition, B-tree and hash indexes can be created for table columns of range types. For these index types, basically the only useful range operation is equality. There is a B-tree sort ordering defined for range values, with corresponding `<` and `>` operators, but the ordering is rather arbitrary and not usually useful in the real world. Range types' B-tree and hash support is primarily meant to allow sorting and hashing internally in queries, rather than creation of actual indexes.
 
+[#id](#RANGETYPES-CONSTRAINT)
+
 ### 8.17.10. Constraints on Ranges [#](#RANGETYPES-CONSTRAINT)
+
+
 
 While `UNIQUE` is a natural constraint for scalar values, it is usually unsuitable for range types. Instead, an exclusion constraint is often more appropriate (see [CREATE TABLE ... CONSTRAINT ... EXCLUDE](sql-createtable#SQL-CREATETABLE-EXCLUDE)). Exclusion constraints allow the specification of constraints such as “non-overlapping” on a range type. For example:
 
 ```
-
 CREATE TABLE reservation (
     during tsrange,
     EXCLUDE USING GIST (during WITH &&)
@@ -234,7 +257,6 @@ CREATE TABLE reservation (
 That constraint will prevent any overlapping values from existing in the table at the same time:
 
 ```
-
 INSERT INTO reservation VALUES
     ('[2010-01-01 11:30, 2010-01-01 15:00)');
 INSERT 0 1
@@ -246,10 +268,9 @@ DETAIL:  Key (during)=(["2010-01-01 14:45:00","2010-01-01 15:45:00")) conflicts
 with existing key (during)=(["2010-01-01 11:30:00","2010-01-01 15:00:00")).
 ```
 
-You can use the [`btree_gist`](btree-gist "F.9. btree_gist — GiST operator classes with B-tree behavior") extension to define exclusion constraints on plain scalar data types, which can then be combined with range exclusions for maximum flexibility. For example, after `btree_gist` is installed, the following constraint will reject overlapping ranges only if the meeting room numbers are equal:
+You can use the [`btree_gist`](btree-gist) extension to define exclusion constraints on plain scalar data types, which can then be combined with range exclusions for maximum flexibility. For example, after `btree_gist` is installed, the following constraint will reject overlapping ranges only if the meeting room numbers are equal:
 
 ```
-
 CREATE EXTENSION btree_gist;
 CREATE TABLE room_reservation (
     room text,

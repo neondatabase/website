@@ -1,3 +1,5 @@
+[#id](#SPI-INTERFACE)
+
 ## 47.1. Interface Functions [#](#SPI-INTERFACE)
 
   * [SPI\_connect](spi-spi-connect) — connect a C function to the SPI manager

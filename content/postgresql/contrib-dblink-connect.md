@@ -1,3 +1,5 @@
+[#id](#CONTRIB-DBLINK-CONNECT)
+
 ## dblink\_connect
 
 dblink\_connect — opens a persistent connection to a remote database
@@ -10,33 +12,43 @@ dblink_connect(text connstr) returns text
 dblink_connect(text connname, text connstr) returns text
 ```
 
+[#id](#id-1.11.7.22.5.5)
+
 ## Description
 
 `dblink_connect()` establishes a connection to a remote PostgreSQL database. The server and database to be contacted are identified through a standard libpq connection string. Optionally, a name can be assigned to the connection. Multiple named connections can be open at once, but only one unnamed connection is permitted at a time. The connection will persist until closed or until the database session is ended.
 
-The connection string may also be the name of an existing foreign server. It is recommended to use the foreign-data wrapper `dblink_fdw` when defining the foreign server. See the example below, as well as [CREATE SERVER](sql-createserver "CREATE SERVER") and [CREATE USER MAPPING](sql-createusermapping "CREATE USER MAPPING").
+The connection string may also be the name of an existing foreign server. It is recommended to use the foreign-data wrapper `dblink_fdw` when defining the foreign server. See the example below, as well as [CREATE SERVER](sql-createserver) and [CREATE USER MAPPING](sql-createusermapping).
+
+[#id](#id-1.11.7.22.5.6)
 
 ## Arguments
 
 * *`connname`*
 
-    The name to use for this connection; if omitted, an unnamed connection is opened, replacing any existing unnamed connection.
+  The name to use for this connection; if omitted, an unnamed connection is opened, replacing any existing unnamed connection.
 
 * *`connstr`*
 
-    libpq-style connection info string, for example `hostaddr=127.0.0.1 port=5432 dbname=mydb user=postgres password=mypasswd options=-csearch_path=`. For details see [Section 34.1.1](libpq-connect#LIBPQ-CONNSTRING "34.1.1. Connection Strings"). Alternatively, the name of a foreign server.
+  libpq-style connection info string, for example `hostaddr=127.0.0.1 port=5432 dbname=mydb user=postgres password=mypasswd options=-csearch_path=`. For details see [Section 34.1.1](libpq-connect#LIBPQ-CONNSTRING). Alternatively, the name of a foreign server.
+
+[#id](#id-1.11.7.22.5.7)
 
 ## Return Value
 
 Returns status, which is always `OK` (since any error causes the function to throw an error instead of returning).
 
+[#id](#id-1.11.7.22.5.8)
+
 ## Notes
 
-If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas#DDL-SCHEMAS-PATTERNS "5.9.6. Usage Patterns"), begin each session by removing publicly-writable schemas from `search_path`. One could, for example, add `options=-csearch_path=` to *`connstr`*. This consideration is not specific to `dblink`; it applies to every interface for executing arbitrary SQL commands.
+If untrusted users have access to a database that has not adopted a [secure schema usage pattern](ddl-schemas#DDL-SCHEMAS-PATTERNS), begin each session by removing publicly-writable schemas from `search_path`. One could, for example, add `options=-csearch_path=` to *`connstr`*. This consideration is not specific to `dblink`; it applies to every interface for executing arbitrary SQL commands.
 
 Only superusers may use `dblink_connect` to create non-password-authenticated and non-GSSAPI-authenticated connections. If non-superusers need this capability, use `dblink_connect_u` instead.
 
 It is unwise to choose connection names that contain equal signs, as this opens a risk of confusion with connection info strings in other `dblink` functions.
+
+[#id](#id-1.11.7.22.5.9)
 
 ## Examples
 

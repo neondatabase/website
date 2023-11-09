@@ -1,3 +1,5 @@
+[#id](#TRIGGER-DEFINITION)
+
 ## 39.1. Overview of Trigger Behavior [#](#TRIGGER-DEFINITION)
 
 A trigger is a specification that the database should automatically execute a particular function whenever a certain type of operation is performed. Triggers can be attached to tables (partitioned or not), views, and foreign tables.
@@ -8,7 +10,7 @@ On views, triggers can be defined to execute instead of `INSERT`, `UPDATE`, or `
 
 The trigger function must be defined before the trigger itself can be created. The trigger function must be declared as a function taking no arguments and returning type `trigger`. (The trigger function receives its input through a specially-passed `TriggerData` structure, not in the form of ordinary function arguments.)
 
-Once a suitable trigger function has been created, the trigger is established with [CREATE TRIGGER](sql-createtrigger "CREATE TRIGGER"). The same trigger function can be used for multiple triggers.
+Once a suitable trigger function has been created, the trigger is established with [CREATE TRIGGER](sql-createtrigger). The same trigger function can be used for multiple triggers.
 
 PostgreSQL offers both *per-row* triggers and *per-statement* triggers. With a per-row trigger, the trigger function is invoked once for each row that is affected by the statement that fired the trigger. In contrast, a per-statement trigger is invoked only once when an appropriate statement is executed, regardless of the number of rows affected by that statement. In particular, a statement that affects zero rows will still result in the execution of any applicable per-statement triggers. These two types of triggers are sometimes called *row-level* triggers and *statement-level* triggers, respectively. Triggers on `TRUNCATE` may only be defined at statement level, not per-row.
 
@@ -29,6 +31,7 @@ While running a `MERGE` command, statement-level `BEFORE` and `AFTER` triggers a
 Trigger functions invoked by per-statement triggers should always return `NULL`. Trigger functions invoked by per-row triggers can return a table row (a value of type `HeapTuple`) to the calling executor, if they choose. A row-level trigger fired before an operation has the following choices:
 
 * It can return `NULL` to skip the operation for the current row. This instructs the executor to not perform the row-level operation that invoked the trigger (the insertion, modification, or deletion of a particular table row).
+
 * For row-level `INSERT` and `UPDATE` triggers only, the returned row becomes the row that will be inserted or will replace the row being updated. This allows the trigger function to modify the row being inserted or updated.
 
 A row-level `BEFORE` trigger that does not intend to cause either of these behaviors must be careful to return as its result the same row that was passed in (that is, the `NEW` row for `INSERT` and `UPDATE` triggers, the `OLD` row for `DELETE` triggers).

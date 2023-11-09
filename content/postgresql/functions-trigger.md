@@ -1,18 +1,23 @@
+[#id](#FUNCTIONS-TRIGGER)
+
 ## 9.28. Trigger Functions [#](#FUNCTIONS-TRIGGER)
 
-While many uses of triggers involve user-written trigger functions, PostgreSQL provides a few built-in trigger functions that can be used directly in user-defined triggers. These are summarized in [Table 9.103](functions-trigger#BUILTIN-TRIGGERS-TABLE "Table 9.103. Built-In Trigger Functions"). (Additional built-in trigger functions exist, which implement foreign key constraints and deferred index constraints. Those are not documented here since users need not use them directly.)
+While many uses of triggers involve user-written trigger functions, PostgreSQL provides a few built-in trigger functions that can be used directly in user-defined triggers. These are summarized in [Table 9.103](functions-trigger#BUILTIN-TRIGGERS-TABLE). (Additional built-in trigger functions exist, which implement foreign key constraints and deferred index constraints. Those are not documented here since users need not use them directly.)
 
-For more information about creating triggers, see [CREATE TRIGGER](sql-createtrigger "CREATE TRIGGER").
+For more information about creating triggers, see [CREATE TRIGGER](sql-createtrigger).
+
+[#id](#BUILTIN-TRIGGERS-TABLE)
 
 **Table 9.103. Built-In Trigger Functions**
 
-| FunctionDescriptionExample Usage                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `suppress_redundant_updates_trigger` ( ) → `trigger`Suppresses do-nothing update operations. See below for details.`CREATE TRIGGER ... suppress_redundant_updates_trigger()`                                                                                                                                                                                                                                                                        |
-| `tsvector_update_trigger` ( ) → `trigger`Automatically updates a `tsvector` column from associated plain-text document column(s). The text search configuration to use is specified by name as a trigger argument. See [Section 12.4.3](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS "12.4.3. Triggers for Automatic Updates") for details.`CREATE TRIGGER ... tsvector_update_trigger(tsvcol, 'pg_catalog.swedish', title, body)`           |
-| `tsvector_update_trigger_column` ( ) → `trigger`Automatically updates a `tsvector` column from associated plain-text document column(s). The text search configuration to use is taken from a `regconfig` column of the table. See [Section 12.4.3](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS "12.4.3. Triggers for Automatic Updates") for details.`CREATE TRIGGER ... tsvector_update_trigger_column(tsvcol, tsconfigcol, title, body)` |
+| FunctionDescriptionExample Usage                                                                                                                                                                                                                                                                                                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `suppress_redundant_updates_trigger` ( ) → `trigger`Suppresses do-nothing update operations. See below for details.`CREATE TRIGGER ... suppress_redundant_updates_trigger()`                                                                                                                                                                                                                               |
+| `tsvector_update_trigger` ( ) → `trigger`Automatically updates a `tsvector` column from associated plain-text document column(s). The text search configuration to use is specified by name as a trigger argument. See [Section 12.4.3](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS) for details.`CREATE TRIGGER ... tsvector_update_trigger(tsvcol, 'pg_catalog.swedish', title, body)`           |
+| `tsvector_update_trigger_column` ( ) → `trigger`Automatically updates a `tsvector` column from associated plain-text document column(s). The text search configuration to use is taken from a `regconfig` column of the table. See [Section 12.4.3](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS) for details.`CREATE TRIGGER ... tsvector_update_trigger_column(tsvcol, tsconfigcol, title, body)` |
 
 \
+
 
 The `suppress_redundant_updates_trigger` function, when applied as a row-level `BEFORE UPDATE` trigger, will prevent any update that does not actually change the data in the row from taking place. This overrides the normal behavior which always performs a physical row update regardless of whether or not the data has changed. (This normal behavior makes updates run faster, since no checking is required, and is also useful in certain cases.)
 

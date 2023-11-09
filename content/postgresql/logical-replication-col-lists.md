@@ -1,8 +1,10 @@
+[#id](#LOGICAL-REPLICATION-COL-LISTS)
+
 ## 31.4. Column Lists [#](#LOGICAL-REPLICATION-COL-LISTS)
 
 * [31.4.1. Examples](logical-replication-col-lists#LOGICAL-REPLICATION-COL-LIST-EXAMPLES)
 
-Each publication can optionally specify which columns of each table are replicated to subscribers. The table on the subscriber side must have at least all the columns that are published. If no column list is specified, then all columns on the publisher are replicated. See [CREATE PUBLICATION](sql-createpublication "CREATE PUBLICATION") for details on the syntax.
+Each publication can optionally specify which columns of each table are replicated to subscribers. The table on the subscriber side must have at least all the columns that are published. If no column list is specified, then all columns on the publisher are replicated. See [CREATE PUBLICATION](sql-createpublication) for details on the syntax.
 
 The choice of columns can be based on behavioral or performance reasons. However, do not rely on this feature for security: a malicious subscriber is able to obtain data from columns that are not specifically published. If security is a consideration, protections can be applied at the publisher side.
 
@@ -20,20 +22,23 @@ Column lists have no effect for the `TRUNCATE` command.
 
 During initial data synchronization, only the published columns are copied. However, if the subscriber is from a release prior to 15, then all the columns in the table are copied during initial data synchronization, ignoring any column lists.
 
+[#id](#LOGICAL-REPLICATION-COL-LIST-COMBINING)
+
 ### Warning: Combining Column Lists from Multiple Publications
 
-There's currently no support for subscriptions comprising several publications where the same table has been published with different column lists. [CREATE SUBSCRIPTION](sql-createsubscription "CREATE SUBSCRIPTION") disallows creating such subscriptions, but it is still possible to get into that situation by adding or altering column lists on the publication side after a subscription has been created.
+There's currently no support for subscriptions comprising several publications where the same table has been published with different column lists. [CREATE SUBSCRIPTION](sql-createsubscription) disallows creating such subscriptions, but it is still possible to get into that situation by adding or altering column lists on the publication side after a subscription has been created.
 
 This means changing the column lists of tables on publications that are already subscribed could lead to errors being thrown on the subscriber side.
 
-If a subscription is affected by this problem, the only way to resume replication is to adjust one of the column lists on the publication side so that they all match; and then either recreate the subscription, or use [`ALTER SUBSCRIPTION ... DROP PUBLICATION`](sql-altersubscription#SQL-ALTERSUBSCRIPTION-PARAMS-SETADDDROP-PUBLICATION) to remove one of the offending publications and add it again.
+If a subscription is affected by this problem, the only way to resume replication is to adjust one of the column lists on the publication side so that they all match; and then either recreate the subscription, or use `ALTER SUBSCRIPTION ... DROP PUBLICATION` to remove one of the offending publications and add it again.
+
+[#id](#LOGICAL-REPLICATION-COL-LIST-EXAMPLES)
 
 ### 31.4.1. Examples [#](#LOGICAL-REPLICATION-COL-LIST-EXAMPLES)
 
 Create a table `t1` to be used in the following example.
 
 ```
-
 test_pub=# CREATE TABLE t1(id int, a text, b text, c text, d text, e text, PRIMARY KEY(id));
 CREATE TABLE
 ```
@@ -41,7 +46,6 @@ CREATE TABLE
 Create a publication `p1`. A column list is defined for table `t1` to reduce the number of columns that will be replicated. Notice that the order of column names in the column list does not matter.
 
 ```
-
 test_pub=# CREATE PUBLICATION p1 FOR TABLE t1 (id, b, a, d);
 CREATE PUBLICATION
 ```
@@ -49,7 +53,6 @@ CREATE PUBLICATION
 `psql` can be used to show the column lists (if defined) for each publication.
 
 ```
-
 test_pub=# \dRp+
                                Publication p1
   Owner   | All tables | Inserts | Updates | Deletes | Truncates | Via root
@@ -62,7 +65,6 @@ Tables:
 `psql` can be used to show the column lists (if defined) for each table.
 
 ```
-
 test_pub=# \d t1
                  Table "public.t1"
  Column |  Type   | Collation | Nullable | Default
@@ -82,7 +84,6 @@ Publications:
 On the subscriber node, create a table `t1` which now only needs a subset of the columns that were on the publisher table `t1`, and also create the subscription `s1` that subscribes to the publication `p1`.
 
 ```
-
 test_sub=# CREATE TABLE t1(id int, b text, a text, d text, PRIMARY KEY(id));
 CREATE TABLE
 test_sub=# CREATE SUBSCRIPTION s1
@@ -94,7 +95,6 @@ CREATE SUBSCRIPTION
 On the publisher node, insert some rows to table `t1`.
 
 ```
-
 test_pub=# INSERT INTO t1 VALUES(1, 'a-1', 'b-1', 'c-1', 'd-1', 'e-1');
 INSERT 0 1
 test_pub=# INSERT INTO t1 VALUES(2, 'a-2', 'b-2', 'c-2', 'd-2', 'e-2');
@@ -113,7 +113,6 @@ test_pub=# SELECT * FROM t1 ORDER BY id;
 Only data from the column list of publication `p1` is replicated.
 
 ```
-
 test_sub=# SELECT * FROM t1 ORDER BY id;
  id |  b  |  a  |  d
 ----+-----+-----+-----

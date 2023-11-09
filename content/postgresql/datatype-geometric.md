@@ -1,6 +1,8 @@
+[#id](#DATATYPE-GEOMETRIC)
+
 ## 8.8. Geometric Types [#](#DATATYPE-GEOMETRIC)
 
-* *   [8.8.1. Points](datatype-geometric#DATATYPE-GEOMETRIC-POINTS)
+* [8.8.1. Points](datatype-geometric#DATATYPE-GEOMETRIC-POINTS)
 * [8.8.2. Lines](datatype-geometric#DATATYPE-LINE)
 * [8.8.3. Line Segments](datatype-geometric#DATATYPE-LSEG)
 * [8.8.4. Boxes](datatype-geometric#DATATYPE-GEOMETRIC-BOXES)
@@ -8,7 +10,9 @@
 * [8.8.6. Polygons](datatype-geometric#DATATYPE-POLYGON)
 * [8.8.7. Circles](datatype-geometric#DATATYPE-CIRCLE)
 
-Geometric data types represent two-dimensional spatial objects. [Table 8.20](datatype-geometric#DATATYPE-GEO-TABLE "Table 8.20. Geometric Types") shows the geometric types available in PostgreSQL.
+Geometric data types represent two-dimensional spatial objects. [Table 8.20](datatype-geometric#DATATYPE-GEO-TABLE) shows the geometric types available in PostgreSQL.
+
+[#id](#DATATYPE-GEO-TABLE)
 
 **Table 8.20. Geometric Types**
 
@@ -23,9 +27,9 @@ Geometric data types represent two-dimensional spatial objects. [Table 8.20](da
 | `polygon` | 40+16n bytes | Polygon (similar to closed path) | `((x1,y1),...)`                       |
 | `circle`  | 24 bytes     | Circle                           | `<(x,y),r>` (center point and radius) |
 
-\
+A rich set of functions and operators is available to perform various geometric operations such as scaling, translation, rotation, and determining intersections. They are explained in [Section 9.11](functions-geometry).
 
-A rich set of functions and operators is available to perform various geometric operations such as scaling, translation, rotation, and determining intersections. They are explained in [Section 9.11](functions-geometry "9.11. Geometric Functions and Operators").
+[#id](#DATATYPE-GEOMETRIC-POINTS)
 
 ### 8.8.1. Points [#](#DATATYPE-GEOMETRIC-POINTS)
 
@@ -40,6 +44,8 @@ Points are the fundamental two-dimensional building block for geometric types. V
 where *`x`* and *`y`* are the respective coordinates, as floating-point numbers.
 
 Points are output using the first syntax.
+
+[#id](#DATATYPE-LINE)
 
 ### 8.8.2. Lines [#](#DATATYPE-LINE)
 
@@ -62,6 +68,8 @@ Alternatively, any of the following forms can be used for input:
 
 where `(x1,y1)` and `(x2,y2)` are two different points on the line.
 
+[#id](#DATATYPE-LSEG)
+
 ### 8.8.3. Line Segments [#](#DATATYPE-LSEG)
 
 Line segments are represented by pairs of points that are the endpoints of the segment. Values of type `lseg` are specified using any of the following syntaxes:
@@ -77,6 +85,8 @@ Line segments are represented by pairs of points that are the endpoints of the s
 where `(x1,y1)` and `(x2,y2)` are the end points of the line segment.
 
 Line segments are output using the first syntax.
+
+[#id](#DATATYPE-GEOMETRIC-BOXES)
 
 ### 8.8.4. Boxes [#](#DATATYPE-GEOMETRIC-BOXES)
 
@@ -94,6 +104,8 @@ where `(x1,y1)` and `(x2,y2)` are any two opposite corners of the box.
 Boxes are output using the second syntax.
 
 Any two opposite corners can be supplied on input, but the values will be reordered as needed to store the upper right and lower left corners, in that order.
+
+[#id](#DATATYPE-GEOMETRIC-PATHS)
 
 ### 8.8.5. Paths [#](#DATATYPE-GEOMETRIC-PATHS)
 
@@ -114,6 +126,8 @@ where the points are the end points of the line segments comprising the path. Sq
 
 Paths are output using the first or second syntax, as appropriate.
 
+[#id](#DATATYPE-POLYGON)
+
 ### 8.8.6. Polygons [#](#DATATYPE-POLYGON)
 
 Polygons are represented by lists of points (the vertexes of the polygon). Polygons are very similar to closed paths; the essential difference is that a polygon is considered to include the area within it, while a path is not.
@@ -131,6 +145,8 @@ Values of type `polygon` are specified using any of the following syntaxes:
 where the points are the end points of the line segments comprising the boundary of the polygon.
 
 Polygons are output using the first syntax.
+
+[#id](#DATATYPE-CIRCLE)
 
 ### 8.8.7. Circles [#](#DATATYPE-CIRCLE)
 

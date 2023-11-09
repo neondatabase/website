@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-REFERENTIAL-CONSTRAINTS)
+
 ## 37.34. `referential_constraints` [#](#INFOSCHEMA-REFERENTIAL-CONSTRAINTS)
 
 The view `referential_constraints` contains all referential (foreign key) constraints in the current database. Only those constraints are shown for which the current user has write access to the referencing table (by way of being the owner or having some privilege other than `SELECT`).
+
+[#id](#id-1.7.6.38.3)
 
 **Table 37.32. `referential_constraints` Columns**
 

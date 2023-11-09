@@ -1,8 +1,12 @@
+[#id](#FUNCTIONS-NET)
+
 ## 9.12. Network Address Functions and Operators [#](#FUNCTIONS-NET)
 
-The IP network address types, `cidr` and `inet`, support the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") as well as the specialized operators and functions shown in [Table 9.39](functions-net#CIDR-INET-OPERATORS-TABLE "Table 9.39. IP Address Operators") and [Table 9.40](functions-net#CIDR-INET-FUNCTIONS-TABLE "Table 9.40. IP Address Functions").
+The IP network address types, `cidr` and `inet`, support the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE) as well as the specialized operators and functions shown in [Table 9.39](functions-net#CIDR-INET-OPERATORS-TABLE) and [Table 9.40](functions-net#CIDR-INET-FUNCTIONS-TABLE).
 
 Any `cidr` value can be cast to `inet` implicitly; therefore, the operators and functions shown below as operating on `inet` also work on `cidr` values. (Where there are separate functions for `inet` and `cidr`, it is because the behavior should be different for the two cases.) Also, it is permitted to cast an `inet` value to `cidr`. When this is done, any bits to the right of the netmask are silently zeroed to create a valid `cidr` value.
+
+[#id](#CIDR-INET-OPERATORS-TABLE)
 
 **Table 9.39. IP Address Operators**
 
@@ -23,12 +27,15 @@ Any `cidr` value can be cast to `inet` implicitly; therefore, the operators and 
 
 \
 
+
+[#id](#CIDR-INET-FUNCTIONS-TABLE)
+
 **Table 9.40. IP Address Functions**
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                                                                                                                                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `abbrev` ( `inet` ) → `text`Creates an abbreviated display format as text. (The result is the same as the `inet` output function produces; it is “abbreviated” only in comparison to the result of an explicit cast to `text`, which for historical reasons will never suppress the netmask part.)`abbrev(inet '10.1.0.0/32')` → `10.1.0.0` |
-| `abbrev` ( `cidr` ) → `text`Creates an abbreviated display format as text. (The abbreviation consists of dropping all-zero octets to the right of the netmask; more examples are in [Table 8.22](datatype-net-types#DATATYPE-NET-CIDR-TABLE "Table 8.22. cidr Type Input Examples").)`abbrev(cidr '10.1.0.0/16')` → `10.1/16`              |
+| `abbrev` ( `cidr` ) → `text`Creates an abbreviated display format as text. (The abbreviation consists of dropping all-zero octets to the right of the netmask; more examples are in [Table 8.22](datatype-net-types#DATATYPE-NET-CIDR-TABLE).)`abbrev(cidr '10.1.0.0/16')` → `10.1/16`                                                     |
 | `broadcast` ( `inet` ) → `inet`Computes the broadcast address for the address's network.`broadcast(inet '192.168.1.5/24')` → `192.168.1.255/24`                                                                                                                                                                                             |
 | `family` ( `inet` ) → `integer`Returns the address's family: `4` for IPv4, `6` for IPv6.`family(inet '::1')` → `6`                                                                                                                                                                                                                          |
 | `host` ( `inet` ) → `text`Returns the IP address as text, ignoring the netmask.`host(inet '192.168.1.0/24')` → `192.168.1.0`                                                                                                                                                                                                                |
@@ -44,11 +51,14 @@ Any `cidr` value can be cast to `inet` implicitly; therefore, the operators and 
 
 \
 
+
 ### Tip
 
 The `abbrev`, `host`, and `text` functions are primarily intended to offer alternative display formats for IP addresses.
 
-The MAC address types, `macaddr` and `macaddr8`, support the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") as well as the specialized functions shown in [Table 9.41](functions-net#MACADDR-FUNCTIONS-TABLE "Table 9.41. MAC Address Functions"). In addition, they support the bitwise logical operators `~`, `&` and `|` (NOT, AND and OR), just as shown above for IP addresses.
+The MAC address types, `macaddr` and `macaddr8`, support the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE) as well as the specialized functions shown in [Table 9.41](functions-net#MACADDR-FUNCTIONS-TABLE). In addition, they support the bitwise logical operators `~`, `&` and `|` (NOT, AND and OR), just as shown above for IP addresses.
+
+[#id](#MACADDR-FUNCTIONS-TABLE)
 
 **Table 9.41. MAC Address Functions**
 

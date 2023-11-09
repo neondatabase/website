@@ -1,3 +1,5 @@
+[#id](#APP-ECPG)
+
 ## ecpg
 
 ecpg — embedded SQL C preprocessor
@@ -5,6 +7,8 @@ ecpg — embedded SQL C preprocessor
 ## Synopsis
 
 `ecpg` \[*`option`*...] *`file`*...
+
+[#id](#APP-ECPG-DESCRIPTION)
 
 ## Description
 
@@ -14,7 +18,9 @@ ecpg — embedded SQL C preprocessor
 
 If an input file name is just `-`, `ecpg` reads the program from standard input (and writes to standard output, unless that is overridden with `-o`).
 
-This reference page does not describe the embedded SQL language. See [Chapter 36](ecpg "Chapter 36. ECPG — Embedded SQL in C") for more information on that topic.
+This reference page does not describe the embedded SQL language. See [Chapter 36](ecpg) for more information on that topic.
+
+[#id](#id-1.9.4.8.6)
 
 ## Options
 
@@ -22,63 +28,65 @@ This reference page does not describe the embedded SQL language. See [Chapter 3
 
 * `-c`
 
-    Automatically generate certain C code from SQL code. Currently, this works for `EXEC SQL TYPE`.
+  Automatically generate certain C code from SQL code. Currently, this works for `EXEC SQL TYPE`.
 
 * `-C mode`
 
-    Set a compatibility mode. *`mode`* can be `INFORMIX`, `INFORMIX_SE`, or `ORACLE`.
+  Set a compatibility mode. *`mode`* can be `INFORMIX`, `INFORMIX_SE`, or `ORACLE`.
 
 * `-D symbol`
 
-    Define a C preprocessor symbol.
+  Define a C preprocessor symbol.
 
 * `-h`
 
-    Process header files. When this option is specified, the output file extension becomes `.h` not `.c`, and the default input file extension is `.pgh` not `.pgc`. Also, the `-c` option is forced on.
+  Process header files. When this option is specified, the output file extension becomes `.h` not `.c`, and the default input file extension is `.pgh` not `.pgc`. Also, the `-c` option is forced on.
 
 * `-i`
 
-    Parse system include files as well.
+  Parse system include files as well.
 
 * `-I directory`
 
-    Specify an additional include path, used to find files included via `EXEC SQL INCLUDE`. Defaults are `.` (current directory), `/usr/local/include`, the PostgreSQL include directory which is defined at compile time (default: `/usr/local/pgsql/include`), and `/usr/include`, in that order.
+  Specify an additional include path, used to find files included via `EXEC SQL INCLUDE`. Defaults are `.` (current directory), `/usr/local/include`, the PostgreSQL include directory which is defined at compile time (default: `/usr/local/pgsql/include`), and `/usr/include`, in that order.
 
 * `-o filename`
 
-    Specifies that `ecpg` should write all its output to the given *`filename`*. Write `-o -` to send all output to standard output.
+  Specifies that `ecpg` should write all its output to the given *`filename`*. Write `-o -` to send all output to standard output.
 
 * `-r option`
 
-    Selects run-time behavior. *`Option`* can be one of the following:
+  Selects run-time behavior. *`Option`* can be one of the following:
 
   * `no_indicator`
 
-        Do not use indicators but instead use special values to represent null values. Historically there have been databases using this approach.
+    Do not use indicators but instead use special values to represent null values. Historically there have been databases using this approach.
 
   * `prepare`
 
-        Prepare all statements before using them. Libecpg will keep a cache of prepared statements and reuse a statement if it gets executed again. If the cache runs full, libecpg will free the least used statement.
+    Prepare all statements before using them. Libecpg will keep a cache of prepared statements and reuse a statement if it gets executed again. If the cache runs full, libecpg will free the least used statement.
 
   * `questionmarks`
 
-        Allow question mark as placeholder for compatibility reasons. This used to be the default long ago.
+    Allow question mark as placeholder for compatibility reasons. This used to be the default long ago.
 
 * `-t`
 
-    Turn on autocommit of transactions. In this mode, each SQL command is automatically committed unless it is inside an explicit transaction block. In the default mode, commands are committed only when `EXEC SQL COMMIT` is issued.
+  Turn on autocommit of transactions. In this mode, each SQL command is automatically committed unless it is inside an explicit transaction block. In the default mode, commands are committed only when `EXEC SQL COMMIT` is issued.
 
 * `-v`
 
-    Print additional information including the version and the "include" path.
+  Print additional information including the version and the "include" path.
 
 * `--version`
 
-    Print the ecpg version and exit.
+  Print the ecpg version and exit.
 
 * `-?``--help`
 
-    Show help about ecpg command line arguments, and exit.
+  Show help about ecpg command line arguments, and exit.
+
+[#id](#id-1.9.4.8.7)
 
 ## Notes
 
@@ -86,7 +94,9 @@ When compiling the preprocessed C code files, the compiler needs to be able to f
 
 Programs using C code with embedded SQL have to be linked against the `libecpg` library, for example using the linker options `-L/usr/local/pgsql/lib -lecpg`.
 
-The value of either of these directories that is appropriate for the installation can be found out using [pg\_config](app-pgconfig "pg_config").
+The value of either of these directories that is appropriate for the installation can be found out using [pg\_config](app-pgconfig).
+
+[#id](#id-1.9.4.8.8)
 
 ## Examples
 

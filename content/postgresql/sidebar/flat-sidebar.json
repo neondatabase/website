@@ -5558,18 +5558,12 @@
   {
     "currentSlug": "view-pg-views",
     "prevSlug": "view-pg-user-mappings",
-    "nextSlug": "view-pg-wait-events",
+    "nextSlug": "protocol",
     "title": "54.35. `pg_views`"
   },
   {
-    "currentSlug": "view-pg-wait-events",
-    "prevSlug": "view-pg-views",
-    "nextSlug": "protocol",
-    "title": "54.36. `pg_wait_events`"
-  },
-  {
     "currentSlug": "protocol",
-    "prevSlug": "view-pg-wait-events",
+    "prevSlug": "view-pg-views",
     "nextSlug": "protocol-overview",
     "title": "Chapter 55. Frontend/Backend Protocol"
   },
@@ -6878,18 +6872,12 @@
   {
     "currentSlug": "color-which",
     "prevSlug": "color-when",
-    "nextSlug": "syncfs",
+    "nextSlug": "appendix-obsolete",
     "title": "N.2. Configuring the Colors"
   },
   {
-    "currentSlug": "syncfs",
-    "prevSlug": "color-which",
-    "nextSlug": "appendix-obsolete",
-    "title": "Appendix O. `syncfs()` Caveats"
-  },
-  {
     "currentSlug": "appendix-obsolete",
-    "prevSlug": "syncfs",
+    "prevSlug": "color-which",
     "nextSlug": "recovery-config",
     "title": "Appendix P. Obsolete or Renamed Features"
   },

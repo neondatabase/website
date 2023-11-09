@@ -1,3 +1,5 @@
+[#id](#DOCGUIDE-AUTHORING)
+
 ## J.5. Documentation Authoring [#](#DOCGUIDE-AUTHORING)
 
 * [J.5.1. Emacs](docguide-authoring#DOCGUIDE-AUTHORING-EMACS)
@@ -5,6 +7,8 @@
 The documentation sources are most conveniently modified with an editor that has a mode for editing XML, and even more so if it has some awareness of XML schema languages so that it can know about DocBook syntax specifically.
 
 Note that for historical reasons the documentation source files are named with an extension `.sgml` even though they are now XML files. So you might need to adjust your editor configuration to set the correct mode.
+
+[#id](#DOCGUIDE-AUTHORING-EMACS)
 
 ### J.5.1. Emacs [#](#DOCGUIDE-AUTHORING-EMACS)
 

@@ -1,6 +1,10 @@
+[#id](#FUNCTIONS-TEXTSEARCH)
+
 ## 9.13. Text Search Functions and Operators [#](#FUNCTIONS-TEXTSEARCH)
 
-[Table 9.42](functions-textsearch#TEXTSEARCH-OPERATORS-TABLE "Table 9.42. Text Search Operators"), [Table 9.43](functions-textsearch#TEXTSEARCH-FUNCTIONS-TABLE "Table 9.43. Text Search Functions") and [Table 9.44](functions-textsearch#TEXTSEARCH-FUNCTIONS-DEBUG-TABLE "Table 9.44. Text Search Debugging Functions") summarize the functions and operators that are provided for full text searching. See [Chapter 12](textsearch "Chapter 12. Full Text Search") for a detailed explanation of PostgreSQL's text search facility.
+[Table 9.42](functions-textsearch#TEXTSEARCH-OPERATORS-TABLE), [Table 9.43](functions-textsearch#TEXTSEARCH-FUNCTIONS-TABLE) and [Table 9.44](functions-textsearch#TEXTSEARCH-FUNCTIONS-DEBUG-TABLE) summarize the functions and operators that are provided for full text searching. See [Chapter 12](textsearch) for a detailed explanation of PostgreSQL's text search facility.
+
+[#id](#TEXTSEARCH-OPERATORS-TABLE)
 
 **Table 9.42. Text Search Operators**
 
@@ -17,9 +21,9 @@
 | `tsquery` `@>` `tsquery` → `boolean`Does first `tsquery` contain the second? (This considers only whether all the lexemes appearing in one query appear in the other, ignoring the combining operators.)`'cat'::tsquery @> 'cat & rat'::tsquery` → `f`                                                   |
 | `tsquery` `<@` `tsquery` → `boolean`Is first `tsquery` contained in the second? (This considers only whether all the lexemes appearing in one query appear in the other, ignoring the combining operators.)`'cat'::tsquery <@ 'cat & rat'::tsquery` → `t``'cat'::tsquery <@ '!cat & rat'::tsquery` → `t` |
 
-\
+In addition to these specialized operators, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE) are available for types `tsvector` and `tsquery`. These are not very useful for text searching but allow, for example, unique indexes to be built on columns of these types.
 
-In addition to these specialized operators, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for types `tsvector` and `tsquery`. These are not very useful for text searching but allow, for example, unique indexes to be built on columns of these types.
+[#id](#TEXTSEARCH-FUNCTIONS-TABLE)
 
 **Table 9.43. Text Search Functions**
 
@@ -54,13 +58,13 @@ In addition to these specialized operators, the usual comparison operators shown
 | `tsvector_to_array` ( `tsvector` ) → `text[]`Converts a `tsvector` to an array of lexemes.`tsvector_to_array('fat:2,4 cat:3 rat:5A'::tsvector)` → `{cat,fat,rat}`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `unnest` ( `tsvector` ) → `setof record` ( *`lexeme`* `text`, *`positions`* `smallint[]`, *`weights`* `text` )Expands a `tsvector` into a set of rows, one per lexeme.`select * from unnest('cat:3 fat:2,4 rat:5A'::tsvector)` →``      lexeme | positions | weights --------+-----------+---------  cat    | {3}       | {D}  fat    | {2,4}     | {D,D}  rat    | {5}       | {A}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
-\
-
 ### Note
 
 All the text search functions that accept an optional `regconfig` argument will use the configuration specified by [default\_text\_search\_config](runtime-config-client#GUC-DEFAULT-TEXT-SEARCH-CONFIG) when that argument is omitted.
 
-The functions in [Table 9.44](functions-textsearch#TEXTSEARCH-FUNCTIONS-DEBUG-TABLE "Table 9.44. Text Search Debugging Functions") are listed separately because they are not usually used in everyday text searching operations. They are primarily helpful for development and debugging of new text search configurations.
+The functions in [Table 9.44](functions-textsearch#TEXTSEARCH-FUNCTIONS-DEBUG-TABLE) are listed separately because they are not usually used in everyday text searching operations. They are primarily helpful for development and debugging of new text search configurations.
+
+[#id](#TEXTSEARCH-FUNCTIONS-DEBUG-TABLE)
 
 **Table 9.44. Text Search Debugging Functions**
 

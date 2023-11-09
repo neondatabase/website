@@ -1,8 +1,12 @@
+[#id](#FUNCTIONS-MATH)
+
 ## 9.3. Mathematical Functions and Operators [#](#FUNCTIONS-MATH)
 
 Mathematical operators are provided for many PostgreSQL types. For types without standard mathematical conventions (e.g., date/time types) we describe the actual behavior in subsequent sections.
 
-[Table 9.4](functions-math#FUNCTIONS-MATH-OP-TABLE "Table 9.4. Mathematical Operators") shows the mathematical operators that are available for the standard numeric types. Unless otherwise noted, operators shown as accepting *`numeric_type`* are available for all the types `smallint`, `integer`, `bigint`, `numeric`, `real`, and `double precision`. Operators shown as accepting *`integral_type`* are available for the types `smallint`, `integer`, and `bigint`. Except where noted, each form of an operator returns the same data type as its argument(s). Calls involving multiple argument data types, such as `integer` `+` `numeric`, are resolved by using the type appearing later in these lists.
+[Table 9.4](functions-math#FUNCTIONS-MATH-OP-TABLE) shows the mathematical operators that are available for the standard numeric types. Unless otherwise noted, operators shown as accepting *`numeric_type`* are available for all the types `smallint`, `integer`, `bigint`, `numeric`, `real`, and `double precision`. Operators shown as accepting *`integral_type`* are available for the types `smallint`, `integer`, and `bigint`. Except where noted, each form of an operator returns the same data type as its argument(s). Calls involving multiple argument data types, such as `integer` `+` `numeric`, are resolved by using the type appearing later in these lists.
+
+[#id](#FUNCTIONS-MATH-OP-TABLE)
 
 **Table 9.4. Mathematical Operators**
 
@@ -28,7 +32,9 @@ Mathematical operators are provided for many PostgreSQL types. For types without
 
 \
 
-[Table 9.5](functions-math#FUNCTIONS-MATH-FUNC-TABLE "Table 9.5. Mathematical Functions") shows the available mathematical functions. Many of these functions are provided in multiple forms with different argument types. Except where noted, any given form of a function returns the same data type as its argument(s); cross-type cases are resolved in the same way as explained above for operators. The functions working with `double precision` data are mostly implemented on top of the host system's C library; accuracy and behavior in boundary cases can therefore vary depending on the host system.
+[Table 9.5](functions-math#FUNCTIONS-MATH-FUNC-TABLE) shows the available mathematical functions. Many of these functions are provided in multiple forms with different argument types. Except where noted, any given form of a function returns the same data type as its argument(s); cross-type cases are resolved in the same way as explained above for operators. The functions working with `double precision` data are mostly implemented on top of the host system's C library; accuracy and behavior in boundary cases can therefore vary depending on the host system.
+
+[#id](#FUNCTIONS-MATH-FUNC-TABLE)
 
 **Table 9.5. Mathematical Functions**
 
@@ -67,9 +73,9 @@ Mathematical operators are provided for many PostgreSQL types. For types without
 | `width_bucket` ( *`operand`* `numeric`, *`low`* `numeric`, *`high`* `numeric`, *`count`* `integer` ) → `integer``width_bucket` ( *`operand`* `double precision`, *`low`* `double precision`, *`high`* `double precision`, *`count`* `integer` ) → `integer`Returns the number of the bucket in which *`operand`* falls in a histogram having *`count`* equal-width buckets spanning the range *`low`* to *`high`*. Returns `0` or `count+1` for an input outside that range.`width_bucket(5.35, 0.024, 10.06, 5)` → `3`                                    |
 | `width_bucket` ( *`operand`* `anycompatible`, *`thresholds`* `anycompatiblearray` ) → `integer`Returns the number of the bucket in which *`operand`* falls given an array listing the lower bounds of the buckets. Returns `0` for an input less than the first lower bound. *`operand`* and the array elements can be of any type having standard comparison operators. The *`thresholds`* array *must be sorted*, smallest first, or unexpected results will be obtained.`width_bucket(now(), array['yesterday', 'today', 'tomorrow']::timestamptz[])` → `2` |
 
-\
+[Table 9.6](functions-math#FUNCTIONS-MATH-RANDOM-TABLE) shows functions for generating random numbers.
 
-[Table 9.6](functions-math#FUNCTIONS-MATH-RANDOM-TABLE "Table 9.6. Random Functions") shows functions for generating random numbers.
+[#id](#FUNCTIONS-MATH-RANDOM-TABLE)
 
 **Table 9.6. Random Functions**
 
@@ -79,11 +85,11 @@ Mathematical operators are provided for many PostgreSQL types. For types without
 | `random_normal` ( \[ *`mean`* `double precision` \[, *`stddev`* `double precision` ]] ) → `double precision`Returns a random value from the normal distribution with the given parameters; *`mean`* defaults to 0.0 and *`stddev`* defaults to 1.0`random_normal(0.0, 1.0)` → `0.051285419` |
 | `setseed` ( `double precision` ) → `void`Sets the seed for subsequent `random()` and `random_normal()` calls; argument must be between -1.0 and 1.0, inclusive`setseed(0.12345)`                                                                                                            |
 
-\
+The `random()` function uses a deterministic pseudo-random number generator. It is fast but not suitable for cryptographic applications; see the [pgcrypto](pgcrypto) module for a more secure alternative. If `setseed()` is called, the series of results of subsequent `random()` calls in the current session can be repeated by re-issuing `setseed()` with the same argument. Without any prior `setseed()` call in the same session, the first `random()` call obtains a seed from a platform-dependent source of random bits. These remarks hold equally for `random_normal()`.
 
-The `random()` function uses a deterministic pseudo-random number generator. It is fast but not suitable for cryptographic applications; see the [pgcrypto](pgcrypto "F.27. pgcrypto — cryptographic functions") module for a more secure alternative. If `setseed()` is called, the series of results of subsequent `random()` calls in the current session can be repeated by re-issuing `setseed()` with the same argument. Without any prior `setseed()` call in the same session, the first `random()` call obtains a seed from a platform-dependent source of random bits. These remarks hold equally for `random_normal()`.
+[Table 9.7](functions-math#FUNCTIONS-MATH-TRIG-TABLE) shows the available trigonometric functions. Each of these functions comes in two variants, one that measures angles in radians and one that measures angles in degrees.
 
-[Table 9.7](functions-math#FUNCTIONS-MATH-TRIG-TABLE "Table 9.7. Trigonometric Functions") shows the available trigonometric functions. Each of these functions comes in two variants, one that measures angles in radians and one that measures angles in degrees.
+[#id](#FUNCTIONS-MATH-TRIG-TABLE)
 
 **Table 9.7. Trigonometric Functions**
 
@@ -112,7 +118,9 @@ The `random()` function uses a deterministic pseudo-random number generator. It 
 
 Another way to work with angles measured in degrees is to use the unit transformation functions `radians()` and `degrees()` shown earlier. However, using the degree-based trigonometric functions is preferred, as that way avoids round-off error for special cases such as `sind(30)`.
 
-[Table 9.8](functions-math#FUNCTIONS-MATH-HYP-TABLE "Table 9.8. Hyperbolic Functions") shows the available hyperbolic functions.
+[Table 9.8](functions-math#FUNCTIONS-MATH-HYP-TABLE) shows the available hyperbolic functions.
+
+[#id](#FUNCTIONS-MATH-HYP-TABLE)
 
 **Table 9.8. Hyperbolic Functions**
 

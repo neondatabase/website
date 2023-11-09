@@ -1,3 +1,5 @@
+[#id](#SQL-FETCH)
+
 ## FETCH
 
 FETCH — retrieve rows from a query using a cursor
@@ -5,7 +7,6 @@ FETCH — retrieve rows from a query using a cursor
 ## Synopsis
 
 ```
-
 FETCH [ direction ] [ FROM | IN ] cursor_name
 
 where direction can be one of:
@@ -26,6 +27,8 @@ where direction can be one of:
     BACKWARD ALL
 ```
 
+[#id](#id-1.9.3.149.6)
+
 ## Description
 
 `FETCH` retrieves rows using a previously-created cursor.
@@ -40,88 +43,93 @@ The forms using `FORWARD` and `BACKWARD` retrieve the indicated number of rows m
 
 ### Note
 
-This page describes usage of cursors at the SQL command level. If you are trying to use cursors inside a PL/pgSQL function, the rules are different — see [Section 43.7.3](plpgsql-cursors#PLPGSQL-CURSOR-USING "43.7.3. Using Cursors").
+This page describes usage of cursors at the SQL command level. If you are trying to use cursors inside a PL/pgSQL function, the rules are different — see [Section 43.7.3](plpgsql-cursors#PLPGSQL-CURSOR-USING).
+
+[#id](#id-1.9.3.149.7)
 
 ## Parameters
 
 * *`direction`*
 
-    *`direction`* defines the fetch direction and number of rows to fetch. It can be one of the following:
+  *`direction`* defines the fetch direction and number of rows to fetch. It can be one of the following:
 
   * `NEXT`
 
-        Fetch the next row. This is the default if *`direction`* is omitted.
+    Fetch the next row. This is the default if *`direction`* is omitted.
 
   * `PRIOR`
 
-        Fetch the prior row.
+    Fetch the prior row.
 
   * `FIRST`
 
-        Fetch the first row of the query (same as `ABSOLUTE 1`).
+    Fetch the first row of the query (same as `ABSOLUTE 1`).
 
   * `LAST`
 
-        Fetch the last row of the query (same as `ABSOLUTE -1`).
+    Fetch the last row of the query (same as `ABSOLUTE -1`).
 
   * `ABSOLUTE count`
 
-        Fetch the *`count`*'th row of the query, or the `abs(count)`'th row from the end if *`count`* is negative. Position before first row or after last row if *`count`* is out of range; in particular, `ABSOLUTE 0` positions before the first row.
+    Fetch the *`count`*'th row of the query, or the `abs(count)`'th row from the end if *`count`* is negative. Position before first row or after last row if *`count`* is out of range; in particular, `ABSOLUTE 0` positions before the first row.
 
   * `RELATIVE count`
 
-        Fetch the *`count`*'th succeeding row, or the `abs(count)`'th prior row if *`count`* is negative. `RELATIVE 0` re-fetches the current row, if any.
+    Fetch the *`count`*'th succeeding row, or the `abs(count)`'th prior row if *`count`* is negative. `RELATIVE 0` re-fetches the current row, if any.
 
   * *`count`*
 
-        Fetch the next *`count`* rows (same as `FORWARD count`).
+    Fetch the next *`count`* rows (same as `FORWARD count`).
 
   * `ALL`
 
-        Fetch all remaining rows (same as `FORWARD ALL`).
+    Fetch all remaining rows (same as `FORWARD ALL`).
 
   * `FORWARD`
 
-        Fetch the next row (same as `NEXT`).
+    Fetch the next row (same as `NEXT`).
 
   * `FORWARD count`
 
-        Fetch the next *`count`* rows. `FORWARD 0` re-fetches the current row.
+    Fetch the next *`count`* rows. `FORWARD 0` re-fetches the current row.
 
   * `FORWARD ALL`
 
-        Fetch all remaining rows.
+    Fetch all remaining rows.
 
   * `BACKWARD`
 
-        Fetch the prior row (same as `PRIOR`).
+    Fetch the prior row (same as `PRIOR`).
 
   * `BACKWARD count`
 
-        Fetch the prior *`count`* rows (scanning backwards). `BACKWARD 0` re-fetches the current row.
+    Fetch the prior *`count`* rows (scanning backwards). `BACKWARD 0` re-fetches the current row.
 
   * `BACKWARD ALL`
 
-        Fetch all prior rows (scanning backwards).
+    Fetch all prior rows (scanning backwards).
 
 * *`count`*
 
-    *`count`* is a possibly-signed integer constant, determining the location or number of rows to fetch. For `FORWARD` and `BACKWARD` cases, specifying a negative *`count`* is equivalent to changing the sense of `FORWARD` and `BACKWARD`.
+  *`count`* is a possibly-signed integer constant, determining the location or number of rows to fetch. For `FORWARD` and `BACKWARD` cases, specifying a negative *`count`* is equivalent to changing the sense of `FORWARD` and `BACKWARD`.
 
 * *`cursor_name`*
 
-    An open cursor's name.
+  An open cursor's name.
+
+[#id](#id-1.9.3.149.8)
 
 ## Outputs
 
 On successful completion, a `FETCH` command returns a command tag of the form
 
 ```
-
 FETCH count
 ```
 
 The *`count`* is the number of rows fetched (possibly zero). Note that in psql, the command tag will not actually be displayed, since psql displays the fetched rows instead.
+
+[#id](#id-1.9.3.149.9)
 
 ## Notes
 
@@ -129,14 +137,15 @@ The cursor should be declared with the `SCROLL` option if one intends to use any
 
 `ABSOLUTE` fetches are not any faster than navigating to the desired row with a relative move: the underlying implementation must traverse all the intermediate rows anyway. Negative absolute fetches are even worse: the query must be read to the end to find the last row, and then traversed backward from there. However, rewinding to the start of the query (as with `FETCH ABSOLUTE 0`) is fast.
 
-[`DECLARE`](sql-declare "DECLARE") is used to define a cursor. Use [`MOVE`](sql-move "MOVE") to change cursor position without retrieving data.
+[`DECLARE`](sql-declare) is used to define a cursor. Use [`MOVE`](sql-move) to change cursor position without retrieving data.
+
+[#id](#id-1.9.3.149.10)
 
 ## Examples
 
 The following example traverses a table using a cursor:
 
 ```
-
 BEGIN WORK;
 
 -- Set up a cursor:
@@ -165,6 +174,8 @@ CLOSE liahona;
 COMMIT WORK;
 ```
 
+[#id](#id-1.9.3.149.11)
+
 ## Compatibility
 
 The SQL standard defines `FETCH` for use in embedded SQL only. The variant of `FETCH` described here returns the data as if it were a `SELECT` result rather than placing it in host variables. Other than this point, `FETCH` is fully upward-compatible with the SQL standard.
@@ -173,6 +184,8 @@ The `FETCH` forms involving `FORWARD` and `BACKWARD`, as well as the forms `FETC
 
 The SQL standard allows only `FROM` preceding the cursor name; the option to use `IN`, or to leave them out altogether, is an extension.
 
+[#id](#id-1.9.3.149.12)
+
 ## See Also
 
-[CLOSE](sql-close "CLOSE"), [DECLARE](sql-declare "DECLARE"), [MOVE](sql-move "MOVE")
+[CLOSE](sql-close), [DECLARE](sql-declare), [MOVE](sql-move)

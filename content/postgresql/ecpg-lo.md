@@ -1,12 +1,16 @@
+[#id](#ECPG-LO)
+
 ## 36.12. Large Objects [#](#ECPG-LO)
 
 Large objects are not directly supported by ECPG, but ECPG application can manipulate large objects through the libpq large object functions, obtaining the necessary `PGconn` object by calling the `ECPGget_PGconn()` function. (However, use of the `ECPGget_PGconn()` function and touching `PGconn` objects directly should be done very carefully and ideally not mixed with other ECPG database access calls.)
 
-For more details about the `ECPGget_PGconn()`, see [Section 36.11](ecpg-library "36.11. Library Functions"). For information about the large object function interface, see [Chapter 35](largeobjects "Chapter 35. Large Objects").
+For more details about the `ECPGget_PGconn()`, see [Section 36.11](ecpg-library). For information about the large object function interface, see [Chapter 35](largeobjects).
 
 Large object functions have to be called in a transaction block, so when autocommit is off, `BEGIN` commands have to be issued explicitly.
 
-[Example 36.2](ecpg-lo#ECPG-LO-EXAMPLE "Example 36.2. ECPG Program Accessing Large Objects") shows an example program that illustrates how to create, write, and read a large object in an ECPG application.
+[Example 36.2](ecpg-lo#ECPG-LO-EXAMPLE) shows an example program that illustrates how to create, write, and read a large object in an ECPG application.
+
+[#id](#ECPG-LO-EXAMPLE)
 
 **Example 36.2. ECPG Program Accessing Large Objects**
 

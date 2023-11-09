@@ -1,3 +1,5 @@
+[#id](#CUBE)
+
 ## F.11. cube — a multi-dimensional cube data type [#](#CUBE)
 
   * [F.11.1. Syntax](cube#CUBE-SYNTAX)
@@ -7,13 +9,19 @@
   * [F.11.5. Notes](cube#CUBE-NOTES)
   * [F.11.6. Credits](cube#CUBE-CREDITS)
 
+
+
 This module implements a data type `cube` for representing multidimensional cubes.
 
 This module is considered “trusted”, that is, it can be installed by non-superusers who have `CREATE` privilege on the current database.
 
+[#id](#CUBE-SYNTAX)
+
 ### F.11.1. Syntax [#](#CUBE-SYNTAX)
 
-[Table F.2](cube#CUBE-REPR-TABLE "Table F.2. Cube External Representations") shows the valid external representations for the `cube` type. *`x`*, *`y`*, etc. denote floating-point numbers.
+[Table F.2](cube#CUBE-REPR-TABLE) shows the valid external representations for the `cube` type. *`x`*, *`y`*, etc. denote floating-point numbers.
+
+[#id](#CUBE-REPR-TABLE)
 
 **Table F.2. Cube External Representations**
 
@@ -30,17 +38,24 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 
 \
 
+
 It does not matter which order the opposite corners of a cube are entered in. The `cube` functions automatically swap values if needed to create a uniform “lower left — upper right” internal representation. When the corners coincide, `cube` stores only one corner along with an “is point” flag to avoid wasting space.
 
 White space is ignored on input, so `[(x),(y)]` is the same as `[ ( x ), ( y ) ]`.
+
+[#id](#CUBE-PRECISION)
 
 ### F.11.2. Precision [#](#CUBE-PRECISION)
 
 Values are stored internally as 64-bit floating point numbers. This means that numbers with more than about 16 significant digits will be truncated.
 
+[#id](#CUBE-USAGE)
+
 ### F.11.3. Usage [#](#CUBE-USAGE)
 
-[Table F.3](cube#CUBE-OPERATORS-TABLE "Table F.3. Cube Operators") shows the specialized operators provided for type `cube`.
+[Table F.3](cube#CUBE-OPERATORS-TABLE) shows the specialized operators provided for type `cube`.
+
+[#id](#CUBE-OPERATORS-TABLE)
 
 **Table F.3. Cube Operators**
 
@@ -57,7 +72,8 @@ Values are stored internally as 64-bit floating point numbers. This means that n
 
 \
 
-In addition to the above operators, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for type `cube`. These operators first compare the first coordinates, and if those are equal, compare the second coordinates, etc. They exist mainly to support the b-tree index operator class for `cube`, which can be useful for example if you would like a UNIQUE constraint on a `cube` column. Otherwise, this ordering is not of much practical use.
+
+In addition to the above operators, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE) are available for type `cube`. These operators first compare the first coordinates, and if those are equal, compare the second coordinates, etc. They exist mainly to support the b-tree index operator class for `cube`, which can be useful for example if you would like a UNIQUE constraint on a `cube` column. Otherwise, this ordering is not of much practical use.
 
 The `cube` module also provides a GiST index operator class for `cube` values. A `cube` GiST index can be used to search for values using the `=`, `&&`, `@>`, and `<@` operators in `WHERE` clauses.
 
@@ -82,7 +98,9 @@ And to get 2-D cubes ordered by the first coordinate of the upper right corner d
 SELECT c FROM test ORDER BY c ~> 3 DESC LIMIT 5;
 ```
 
-[Table F.4](cube#CUBE-FUNCTIONS-TABLE "Table F.4. Cube Functions") shows the available functions.
+[Table F.4](cube#CUBE-FUNCTIONS-TABLE) shows the available functions.
+
+[#id](#CUBE-FUNCTIONS-TABLE)
 
 **Table F.4. Cube Functions**
 
@@ -103,6 +121,8 @@ SELECT c FROM test ORDER BY c ~> 3 DESC LIMIT 5;
 | `cube_union` ( `cube`, `cube` ) → `cube`Produces the union of two cubes.`cube_union('(1,2)', '(3,4)')` → `(1, 2),(3, 4)`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `cube_inter` ( `cube`, `cube` ) → `cube`Produces the intersection of two cubes.`cube_inter('(1,2)', '(3,4)')` → `(3, 4),(1, 2)`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `cube_enlarge` ( *`c`* `cube`, *`r`* `double`, *`n`* `integer` ) → `cube`Increases the size of the cube by the specified radius *`r`* in at least *`n`* dimensions. If the radius is negative the cube is shrunk instead. All defined dimensions are changed by the radius *`r`*. Lower-left coordinates are decreased by *`r`* and upper-right coordinates are increased by *`r`*. If a lower-left coordinate is increased to more than the corresponding upper-right coordinate (this can only happen when *`r`* < 0) than both coordinates are set to their average. If *`n`* is greater than the number of defined dimensions and the cube is being enlarged (*`r`* > 0), then extra dimensions are added to make *`n`* altogether; 0 is used as the initial value for the extra coordinates. This function is useful for creating bounding boxes around a point for searching for nearby points.`cube_enlarge('(1,2),(3,4)', 0.5, 3)` → `(0.5, 1.5, -0.5),(3.5, 4.5, 0.5)` |
+
+[#id](#CUBE-DEFAULTS)
 
 ### F.11.4. Defaults [#](#CUBE-DEFAULTS)
 
@@ -147,11 +167,15 @@ t
 (1 row)
 ```
 
+[#id](#CUBE-NOTES)
+
 ### F.11.5. Notes [#](#CUBE-NOTES)
 
 For examples of usage, see the regression test `sql/cube.sql`.
 
 To make it harder for people to break things, there is a limit of 100 on the number of dimensions of cubes. This is set in `cubedata.h` if you need something bigger.
+
+[#id](#CUBE-CREDITS)
 
 ### F.11.6. Credits [#](#CUBE-CREDITS)
 

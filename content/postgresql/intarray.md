@@ -1,3 +1,5 @@
+[#id](#INTARRAY)
+
 ## F.20. intarray — manipulate arrays of integers [#](#INTARRAY)
 
   * [F.20.1. `intarray` Functions and Operators](intarray#INTARRAY-FUNCS-OPS)
@@ -5,6 +7,8 @@
   * [F.20.3. Example](intarray#INTARRAY-EXAMPLE)
   * [F.20.4. Benchmark](intarray#INTARRAY-BENCHMARK)
   * [F.20.5. Authors](intarray#INTARRAY-AUTHORS)
+
+
 
 The `intarray` module provides a number of useful functions and operators for manipulating null-free arrays of integers. There is also support for indexed searches using some of the operators.
 
@@ -14,9 +18,13 @@ Many of these operations are only sensible for one-dimensional arrays. Although 
 
 This module is considered “trusted”, that is, it can be installed by non-superusers who have `CREATE` privilege on the current database.
 
+[#id](#INTARRAY-FUNCS-OPS)
+
 ### F.20.1. `intarray` Functions and Operators [#](#INTARRAY-FUNCS-OPS)
 
-The functions provided by the `intarray` module are shown in [Table F.9](intarray#INTARRAY-FUNC-TABLE "Table F.9. intarray Functions"), the operators in [Table F.10](intarray#INTARRAY-OP-TABLE "Table F.10. intarray Operators").
+The functions provided by the `intarray` module are shown in [Table F.9](intarray#INTARRAY-FUNC-TABLE), the operators in [Table F.10](intarray#INTARRAY-OP-TABLE).
+
+[#id](#INTARRAY-FUNC-TABLE)
 
 **Table F.9. `intarray` Functions**
 
@@ -34,6 +42,9 @@ The functions provided by the `intarray` module are shown in [Table F.9](intarr
 
 \
 
+
+[#id](#INTARRAY-OP-TABLE)
+
 **Table F.10. `intarray` Operators**
 
 | OperatorDescription                                                                                                                                    |
@@ -41,7 +52,7 @@ The functions provided by the `intarray` module are shown in [Table F.9](intarr
 | `integer[]` `&&` `integer[]` → `boolean`Do arrays overlap (have at least one element in common)?                                                       |
 | `integer[]` `@>` `integer[]` → `boolean`Does left array contain right array?                                                                           |
 | `integer[]` `<@` `integer[]` → `boolean`Is left array contained in right array?                                                                        |
-| ```#``integer[]` → `integer`Returns the number of elements in the array.                                                                              |
+| ```#` `integer[]` → `integer`Returns the number of elements in the array.                                                                              |
 | `integer[]` `#` `integer` → `integer`Returns index of the first array element matching the right argument, or 0 if no match. (Same as `idx` function.) |
 | `integer[]` `+` `integer` → `integer[]`Adds element to end of array.                                                                                   |
 | `integer[]` `+` `integer[]` → `integer[]`Concatenates the arrays.                                                                                      |
@@ -55,9 +66,12 @@ The functions provided by the `intarray` module are shown in [Table F.9](intarr
 
 \
 
+
 The operators `&&`, `@>` and `<@` are equivalent to PostgreSQL's built-in operators of the same names, except that they work only on integer arrays that do not contain nulls, while the built-in operators work for any array type. This restriction makes them faster than the built-in operators in many cases.
 
 The `@@` and `~~` operators test whether an array satisfies a *query*, which is expressed as a value of a specialized data type `query_int`. A *query* consists of integer values that are checked against the elements of the array, possibly combined using the operators `&` (AND), `|` (OR), and `!` (NOT). Parentheses can be used as needed. For example, the query `1&(2|3)` matches arrays that contain 1 and also contain either 2 or 3.
+
+[#id](#INTARRAY-INDEX)
 
 ### F.20.2. Index Support [#](#INTARRAY-INDEX)
 
@@ -73,10 +87,11 @@ There is also a non-default GIN operator class `gin__int_ops`, which supports th
 
 The choice between GiST and GIN indexing depends on the relative performance characteristics of GiST and GIN, which are discussed elsewhere.
 
+[#id](#INTARRAY-EXAMPLE)
+
 ### F.20.3. Example [#](#INTARRAY-EXAMPLE)
 
 ```
-
 -- a message can be in one or more “sections”
 CREATE TABLE message (mid INT PRIMARY KEY, sections INT[], ...);
 
@@ -93,12 +108,13 @@ SELECT message.mid FROM message WHERE message.sections @> '{1,2}';
 SELECT message.mid FROM message WHERE message.sections @@ '1&2'::query_int;
 ```
 
+[#id](#INTARRAY-BENCHMARK)
+
 ### F.20.4. Benchmark [#](#INTARRAY-BENCHMARK)
 
 The source directory `contrib/intarray/bench` contains a benchmark test suite, which can be run against an installed PostgreSQL server. (It also requires `DBD::Pg` to be installed.) To run:
 
 ```
-
 cd .../contrib/intarray/bench
 createdb TEST
 psql -c "CREATE EXTENSION intarray" TEST
@@ -107,6 +123,8 @@ psql -c "CREATE EXTENSION intarray" TEST
 ```
 
 The `bench.pl` script has numerous options, which are displayed when it is run without any arguments.
+
+[#id](#INTARRAY-AUTHORS)
 
 ### F.20.5. Authors [#](#INTARRAY-AUTHORS)
 

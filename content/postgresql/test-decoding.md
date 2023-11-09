@@ -1,4 +1,8 @@
-## F.44. test\_decoding — SQL-based test/example module for WAL logical decoding [#](#TEST-DECODING)
+[#id](#TEST-DECODING)
+
+## F.45. test\_decoding — SQL-based test/example module for WAL logical decoding [#](#TEST-DECODING)
+
+
 
 `test_decoding` is an example of a logical decoding output plugin. It doesn't do anything especially useful, but can serve as a starting point for developing your own output plugin.
 
@@ -7,7 +11,6 @@
 Typical output from this plugin, used over the SQL logical decoding interface, might be:
 
 ```
-
 postgres=# SELECT * FROM pg_logical_slot_get_changes('test_slot', NULL, NULL, 'include-xids', '0');
    lsn     | xid |                       data
 -----------+-----+--------------------------------------------------
@@ -25,7 +28,6 @@ postgres=# SELECT * FROM pg_logical_slot_get_changes('test_slot', NULL, NULL, 'i
 We can also get the changes of the in-progress transaction, and the typical output might be:
 
 ```
-
 postgres[33712]=#* SELECT * FROM pg_logical_slot_get_changes('test_slot', NULL, NULL, 'stream-changes', '1');
     lsn    | xid |                       data
 -----------+-----+--------------------------------------------------

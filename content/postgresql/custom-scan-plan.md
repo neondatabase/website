@@ -1,3 +1,5 @@
+[#id](#CUSTOM-SCAN-PLAN)
+
 ## 61.2. Creating Custom Scan Plans [#](#CUSTOM-SCAN-PLAN)
 
 * [61.2.1. Custom Scan Plan Callbacks](custom-scan-plan#CUSTOM-SCAN-PLAN-CALLBACKS)
@@ -24,6 +26,8 @@ typedef struct CustomScan
 When a `CustomScan` scans a single relation, `scan.scanrelid` must be the range table index of the table to be scanned. When it replaces a join, `scan.scanrelid` should be zero.
 
 Plan trees must be able to be duplicated using `copyObject`, so all the data stored within the “custom” fields must consist of nodes that that function can handle. Furthermore, custom scan providers cannot substitute a larger structure that embeds a `CustomScan` for the structure itself, as would be possible for a `CustomPath` or `CustomScanState`.
+
+[#id](#CUSTOM-SCAN-PLAN-CALLBACKS)
 
 ### 61.2.1. Custom Scan Plan Callbacks [#](#CUSTOM-SCAN-PLAN-CALLBACKS)
 

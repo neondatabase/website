@@ -1,10 +1,14 @@
+[#id](#STORAGE-FILE-LAYOUT)
+
 ## 73.1. Database File Layout [#](#STORAGE-FILE-LAYOUT)
 
 This section describes the storage format at the level of files and directories.
 
 Traditionally, the configuration and data files used by a database cluster are stored together within the cluster's data directory, commonly referred to as `PGDATA` (after the name of the environment variable that can be used to define it). A common location for `PGDATA` is `/var/lib/pgsql/data`. Multiple clusters, managed by different server instances, can exist on the same machine.
 
-The `PGDATA` directory contains several subdirectories and control files, as shown in [Table 73.1](storage-file-layout#PGDATA-CONTENTS-TABLE "Table 73.1. Contents of PGDATA"). In addition to these required items, the cluster configuration files `postgresql.conf`, `pg_hba.conf`, and `pg_ident.conf` are traditionally stored in `PGDATA`, although it is possible to place them elsewhere.
+The `PGDATA` directory contains several subdirectories and control files, as shown in [Table 73.1](storage-file-layout#PGDATA-CONTENTS-TABLE). In addition to these required items, the cluster configuration files `postgresql.conf`, `pg_hba.conf`, and `pg_ident.conf` are traditionally stored in `PGDATA`, although it is possible to place them elsewhere.
+
+[#id](#PGDATA-CONTENTS-TABLE)
 
 **Table 73.1. Contents of `PGDATA`**
 
@@ -35,11 +39,12 @@ The `PGDATA` directory contains several subdirectories and control files, as sho
 
 \
 
+
 For each database in the cluster there is a subdirectory within `PGDATA``/base`, named after the database's OID in `pg_database`. This subdirectory is the default location for the database's files; in particular, its system catalogs are stored there.
 
-Note that the following sections describe the behavior of the builtin `heap` [table access method](tableam "Chapter 63. Table Access Method Interface Definition"), and the builtin [index access methods](indexam "Chapter 64. Index Access Method Interface Definition"). Due to the extensible nature of PostgreSQL, other access methods might work differently.
+Note that the following sections describe the behavior of the builtin `heap` [table access method](tableam), and the builtin [index access methods](indexam). Due to the extensible nature of PostgreSQL, other access methods might work differently.
 
-Each table and index is stored in a separate file. For ordinary relations, these files are named after the table or index's *filenode* number, which can be found in `pg_class`.`relfilenode`. But for temporary relations, the file name is of the form `tBBB_FFF`, where *`BBB`* is the backend ID of the backend which created the file, and *`FFF`* is the filenode number. In either case, in addition to the main file (a/k/a main fork), each table and index has a *free space map* (see [Section 73.3](storage-fsm "73.3. Free Space Map")), which stores information about free space available in the relation. The free space map is stored in a file named with the filenode number plus the suffix `_fsm`. Tables also have a *visibility map*, stored in a fork with the suffix `_vm`, to track which pages are known to have no dead tuples. The visibility map is described further in [Section 73.4](storage-vm "73.4. Visibility Map"). Unlogged tables and indexes have a third fork, known as the initialization fork, which is stored in a fork with the suffix `_init` (see [Section 73.5](storage-init "73.5. The Initialization Fork")).
+Each table and index is stored in a separate file. For ordinary relations, these files are named after the table or index's *filenode* number, which can be found in `pg_class`.`relfilenode`. But for temporary relations, the file name is of the form `tBBB_FFF`, where *`BBB`* is the backend ID of the backend which created the file, and *`FFF`* is the filenode number. In either case, in addition to the main file (a/k/a main fork), each table and index has a *free space map* (see [Section 73.3](storage-fsm)), which stores information about free space available in the relation. The free space map is stored in a file named with the filenode number plus the suffix `_fsm`. Tables also have a *visibility map*, stored in a fork with the suffix `_vm`, to track which pages are known to have no dead tuples. The visibility map is described further in [Section 73.4](storage-vm). Unlogged tables and indexes have a third fork, known as the initialization fork, which is stored in a fork with the suffix `_init` (see [Section 73.5](storage-init)).
 
 ### Caution
 
@@ -47,9 +52,9 @@ Note that while a table's filenode often matches its OID, this is *not* necessar
 
 When a table or index exceeds 1 GB, it is divided into gigabyte-sized *segments*. The first segment's file name is the same as the filenode; subsequent segments are named filenode.1, filenode.2, etc. This arrangement avoids problems on platforms that have file size limitations. (Actually, 1 GB is just the default segment size. The segment size can be adjusted using the configuration option `--with-segsize` when building PostgreSQL.) In principle, free space map and visibility map forks could require multiple segments as well, though this is unlikely to happen in practice.
 
-A table that has columns with potentially large entries will have an associated *TOAST* table, which is used for out-of-line storage of field values that are too large to keep in the table rows proper. `pg_class`.`reltoastrelid` links from a table to its TOAST table, if any. See [Section 73.2](storage-toast "73.2. TOAST") for more information.
+A table that has columns with potentially large entries will have an associated *TOAST* table, which is used for out-of-line storage of field values that are too large to keep in the table rows proper. `pg_class`.`reltoastrelid` links from a table to its TOAST table, if any. See [Section 73.2](storage-toast) for more information.
 
-The contents of tables and indexes are discussed further in [Section 73.6](storage-page-layout "73.6. Database Page Layout").
+The contents of tables and indexes are discussed further in [Section 73.6](storage-page-layout).
 
 Tablespaces make the scenario more complicated. Each user-defined tablespace has a symbolic link inside the `PGDATA``/pg_tblspc` directory, which points to the physical tablespace directory (i.e., the location specified in the tablespace's `CREATE TABLESPACE` command). This symbolic link is named after the tablespace's OID. Inside the physical tablespace directory there is a subdirectory with a name that depends on the PostgreSQL server version, such as `PG_9.0_201008051`. (The reason for using this subdirectory is so that successive versions of the database can use the same `CREATE TABLESPACE` location value without conflicts.) Within the version-specific subdirectory, there is a subdirectory for each database that has elements in the tablespace, named after the database's OID. Tables and indexes are stored within that directory, using the filenode naming scheme. The `pg_default` tablespace is not accessed through `pg_tblspc`, but corresponds to `PGDATA``/base`. Similarly, the `pg_global` tablespace is not accessed through `pg_tblspc`, but corresponds to `PGDATA``/global`.
 

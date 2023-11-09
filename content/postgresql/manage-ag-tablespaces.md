@@ -1,4 +1,8 @@
+[#id](#MANAGE-AG-TABLESPACES)
+
 ## 23.6. Tablespaces [#](#MANAGE-AG-TABLESPACES)
+
+
 
 Tablespaces in PostgreSQL allow database administrators to define locations in the file system where the files representing database objects can be stored. Once created, a tablespace can be referred to by name when creating database objects.
 
@@ -10,10 +14,9 @@ Second, tablespaces allow an administrator to use knowledge of the usage pattern
 
 Even though located outside the main PostgreSQL data directory, tablespaces are an integral part of the database cluster and *cannot* be treated as an autonomous collection of data files. They are dependent on metadata contained in the main data directory, and therefore cannot be attached to a different database cluster or backed up individually. Similarly, if you lose a tablespace (file deletion, disk failure, etc.), the database cluster might become unreadable or unable to start. Placing a tablespace on a temporary file system like a RAM disk risks the reliability of the entire cluster.
 
-To define a tablespace, use the [CREATE TABLESPACE](sql-createtablespace "CREATE TABLESPACE") command, for example::
+To define a tablespace, use the [CREATE TABLESPACE](sql-createtablespace) command, for example::
 
 ```
-
 CREATE TABLESPACE fastspace LOCATION '/ssd1/postgresql/data';
 ```
 
@@ -28,14 +31,12 @@ Creation of the tablespace itself must be done as a database superuser, but afte
 Tables, indexes, and entire databases can be assigned to particular tablespaces. To do so, a user with the `CREATE` privilege on a given tablespace must pass the tablespace name as a parameter to the relevant command. For example, the following creates a table in the tablespace `space1`:
 
 ```
-
 CREATE TABLE foo(i int) TABLESPACE space1;
 ```
 
 Alternatively, use the [default\_tablespace](runtime-config-client#GUC-DEFAULT-TABLESPACE) parameter:
 
 ```
-
 SET default_tablespace = space1;
 CREATE TABLE foo(i int);
 ```
@@ -50,15 +51,14 @@ Two tablespaces are automatically created when the database cluster is initializ
 
 Once created, a tablespace can be used from any database, provided the requesting user has sufficient privilege. This means that a tablespace cannot be dropped until all objects in all databases using the tablespace have been removed.
 
-To remove an empty tablespace, use the [DROP TABLESPACE](sql-droptablespace "DROP TABLESPACE") command.
+To remove an empty tablespace, use the [DROP TABLESPACE](sql-droptablespace) command.
 
-To determine the set of existing tablespaces, examine the [`pg_tablespace`](catalog-pg-tablespace "53.56. pg_tablespace")system catalog, for example
+To determine the set of existing tablespaces, examine the [`pg_tablespace` ](catalog-pg-tablespace)system catalog, for example
 
 ```
-
 SELECT spcname FROM pg_tablespace;
 ```
 
-The [psql](app-psql "psql") program's `\db` meta-command is also useful for listing the existing tablespaces.
+The [psql](app-psql) program's `\db` meta-command is also useful for listing the existing tablespaces.
 
 The directory `$PGDATA/pg_tblspc` contains symbolic links that point to each of the non-built-in tablespaces defined in the cluster. Although not recommended, it is possible to adjust the tablespace layout by hand by redefining these links. Under no circumstances perform this operation while the server is running. Note that in PostgreSQL 9.1 and earlier you will also need to update the `pg_tablespace` catalog with the new locations. (If you do not, `pg_dump` will continue to output the old tablespace locations.)

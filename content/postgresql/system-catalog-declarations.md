@@ -1,3 +1,5 @@
+[#id](#SYSTEM-CATALOG-DECLARATIONS)
+
 ## 75.1. System Catalog Declaration Rules [#](#SYSTEM-CATALOG-DECLARATIONS)
 
 The key part of a catalog header file is a C structure definition describing the layout of each row of the catalog. This begins with a `CATALOG` macro, which so far as the C compiler is concerned is just shorthand for `typedef struct FormData_catalogname`. Each field in the struct gives rise to a catalog column. Fields can be annotated using the BKI property macros described in `genbki.h`, for example to define a default value for a field or mark it as nullable or not nullable. The `CATALOG` line can also be annotated, with some other BKI property macros described in `genbki.h`, to define other properties of the catalog as a whole, such as whether it is a shared relation.

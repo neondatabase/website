@@ -1,6 +1,10 @@
+[#id](#RUNTIME-CONFIG-SHORT)
+
 ## 20.18. Short Options [#](#RUNTIME-CONFIG-SHORT)
 
-For convenience there are also single letter command-line option switches available for some parameters. They are described in [Table 20.4](runtime-config-short#RUNTIME-CONFIG-SHORT-TABLE "Table 20.4. Short Option Key"). Some of these options exist for historical reasons, and their presence as a single-letter option does not necessarily indicate an endorsement to use the option heavily.
+For convenience there are also single letter command-line option switches available for some parameters. They are described in [Table 20.4](runtime-config-short#RUNTIME-CONFIG-SHORT-TABLE). Some of these options exist for historical reasons, and their presence as a single-letter option does not necessarily indicate an endorsement to use the option heavily.
+
+[#id](#RUNTIME-CONFIG-SHORT-TABLE)
 
 **Table 20.4. Short Option Key**
 

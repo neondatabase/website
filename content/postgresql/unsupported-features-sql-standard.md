@@ -1,3 +1,5 @@
+[#id](#UNSUPPORTED-FEATURES-SQL-STANDARD)
+
 ## D.2. Unsupported Features [#](#UNSUPPORTED-FEATURES-SQL-STANDARD)
 
 The following features defined in SQL:2023 are not implemented in this release of PostgreSQL. In a few cases, equivalent functionality is available.

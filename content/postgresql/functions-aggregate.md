@@ -1,10 +1,14 @@
+[#id](#FUNCTIONS-AGGREGATE)
+
 ## 9.21. Aggregate Functions [#](#FUNCTIONS-AGGREGATE)
 
-*Aggregate functions* compute a single result from a set of input values. The built-in general-purpose aggregate functions are listed in [Table 9.59](functions-aggregate#FUNCTIONS-AGGREGATE-TABLE "Table 9.59. General-Purpose Aggregate Functions") while statistical aggregates are in [Table 9.60](functions-aggregate#FUNCTIONS-AGGREGATE-STATISTICS-TABLE "Table 9.60. Aggregate Functions for Statistics"). The built-in within-group ordered-set aggregate functions are listed in [Table 9.61](functions-aggregate#FUNCTIONS-ORDEREDSET-TABLE "Table 9.61. Ordered-Set Aggregate Functions") while the built-in within-group hypothetical-set ones are in [Table 9.62](functions-aggregate#FUNCTIONS-HYPOTHETICAL-TABLE "Table 9.62. Hypothetical-Set Aggregate Functions"). Grouping operations, which are closely related to aggregate functions, are listed in [Table 9.63](functions-aggregate#FUNCTIONS-GROUPING-TABLE "Table 9.63. Grouping Operations"). The special syntax considerations for aggregate functions are explained in [Section 4.2.7](sql-expressions#SYNTAX-AGGREGATES "4.2.7. Aggregate Expressions"). Consult [Section 2.7](tutorial-agg "2.7. Aggregate Functions") for additional introductory information.
+*Aggregate functions* compute a single result from a set of input values. The built-in general-purpose aggregate functions are listed in [Table 9.59](functions-aggregate#FUNCTIONS-AGGREGATE-TABLE) while statistical aggregates are in [Table 9.60](functions-aggregate#FUNCTIONS-AGGREGATE-STATISTICS-TABLE). The built-in within-group ordered-set aggregate functions are listed in [Table 9.61](functions-aggregate#FUNCTIONS-ORDEREDSET-TABLE) while the built-in within-group hypothetical-set ones are in [Table 9.62](functions-aggregate#FUNCTIONS-HYPOTHETICAL-TABLE). Grouping operations, which are closely related to aggregate functions, are listed in [Table 9.63](functions-aggregate#FUNCTIONS-GROUPING-TABLE). The special syntax considerations for aggregate functions are explained in [Section 4.2.7](sql-expressions#SYNTAX-AGGREGATES). Consult [Section 2.7](tutorial-agg) for additional introductory information.
 
 Aggregate functions that support *Partial Mode* are eligible to participate in various optimizations, such as parallel aggregation.
 
-**Table 9.59. General-Purpose Aggregate Functions** [#](#FUNCTIONS-AGGREGATE-TABLE)
+[#id](#FUNCTIONS-AGGREGATE-TABLE)
+
+**Table 9.59. General-Purpose Aggregate Functions**
 
 | FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Partial Mode |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
@@ -34,11 +38,11 @@ Aggregate functions that support *Partial Mode* are eligible to participate in v
 | `json_agg_strict` ( `anyelement` ) → `json``jsonb_agg_strict` ( `anyelement` ) → `jsonb`Collects all the input values, skipping nulls, into a JSON array. Values are converted to JSON as per `to_json` or `to_jsonb`.                                                                                                                                                                                                                                                                                                                                          | No           |
 | `string_agg` ( *`value`* `text`, *`delimiter`* `text` ) → `text``string_agg` ( *`value`* `bytea`, *`delimiter`* `bytea` ) → `bytea`Concatenates the non-null input values into a string. Each value after the first is preceded by the corresponding *`delimiter`* (if it's not null).                                                                                                                                                                                                                                                                              | Yes          |
 | `sum` ( `smallint` ) → `bigint``sum` ( `integer` ) → `bigint``sum` ( `bigint` ) → `numeric``sum` ( `numeric` ) → `numeric``sum` ( `real` ) → `real``sum` ( `double precision` ) → `double precision``sum` ( `interval` ) → `interval``sum` ( `money` ) → `money`Computes the sum of the non-null input values.                                                                                                                                                                                                                                                      | Yes          |
-| `xmlagg` ( `xml` ) → `xml`Concatenates the non-null XML input values (see [Section 9.15.1.7](functions-xml#FUNCTIONS-XML-XMLAGG "9.15.1.7. xmlagg")).                                                                                                                                                                                                                                                                                                                                                                                                          | No           |
+| `xmlagg` ( `xml` ) → `xml`Concatenates the non-null XML input values (see [Section 9.15.1.7](functions-xml#FUNCTIONS-XML-XMLAGG)).                                                                                                                                                                                                                                                                                                                                                                                                                             | No           |
 
 It should be noted that except for `count`, these functions return a null value when no rows are selected. In particular, `sum` of no rows returns null, not zero as one might expect, and `array_agg` returns null rather than an empty array when there are no input rows. The `coalesce` function can be used to substitute zero or an empty array for null when necessary.
 
-The aggregate functions `array_agg`, `json_agg`, `jsonb_agg`, `json_agg_strict`, `jsonb_agg_strict`, `json_object_agg`, `jsonb_object_agg`, `json_object_agg_strict`, `jsonb_object_agg_strict`, `json_object_agg_unique`, `jsonb_object_agg_unique`, `json_object_agg_unique_strict`, `jsonb_object_agg_unique_strict`, `string_agg`, and `xmlagg`, as well as similar user-defined aggregate functions, produce meaningfully different result values depending on the order of the input values. This ordering is unspecified by default, but can be controlled by writing an `ORDER BY` clause within the aggregate call, as shown in [Section 4.2.7](sql-expressions#SYNTAX-AGGREGATES "4.2.7. Aggregate Expressions"). Alternatively, supplying the input values from a sorted subquery will usually work. For example:
+The aggregate functions `array_agg`, `json_agg`, `jsonb_agg`, `json_agg_strict`, `jsonb_agg_strict`, `json_object_agg`, `jsonb_object_agg`, `json_object_agg_strict`, `jsonb_object_agg_strict`, `json_object_agg_unique`, `jsonb_object_agg_unique`, `json_object_agg_unique_strict`, `jsonb_object_agg_unique_strict`, `string_agg`, and `xmlagg`, as well as similar user-defined aggregate functions, produce meaningfully different result values depending on the order of the input values. This ordering is unspecified by default, but can be controlled by writing an `ORDER BY` clause within the aggregate call, as shown in [Section 4.2.7](sql-expressions#SYNTAX-AGGREGATES). Alternatively, supplying the input values from a sorted subquery will usually work. For example:
 
 ```
 
@@ -69,9 +73,11 @@ SELECT count(*) FROM sometable;
 
 will require effort proportional to the size of the table: PostgreSQL will need to scan either the entire table or the entirety of an index that includes all rows in the table.
 
-[Table 9.60](functions-aggregate#FUNCTIONS-AGGREGATE-STATISTICS-TABLE "Table 9.60. Aggregate Functions for Statistics") shows aggregate functions typically used in statistical analysis. (These are separated out merely to avoid cluttering the listing of more-commonly-used aggregates.) Functions shown as accepting *`numeric_type`* are available for all the types `smallint`, `integer`, `bigint`, `numeric`, `real`, and `double precision`. Where the description mentions *`N`*, it means the number of input rows for which all the input expressions are non-null. In all cases, null is returned if the computation is meaningless, for example when *`N`* is zero.
+[Table 9.60](functions-aggregate#FUNCTIONS-AGGREGATE-STATISTICS-TABLE) shows aggregate functions typically used in statistical analysis. (These are separated out merely to avoid cluttering the listing of more-commonly-used aggregates.) Functions shown as accepting *`numeric_type`* are available for all the types `smallint`, `integer`, `bigint`, `numeric`, `real`, and `double precision`. Where the description mentions *`N`*, it means the number of input rows for which all the input expressions are non-null. In all cases, null is returned if the computation is meaningless, for example when *`N`* is zero.
 
-**Table 9.60. Aggregate Functions for Statistics** [#](#FUNCTIONS-AGGREGATE-STATISTICS-TABLE)
+[#id](#FUNCTIONS-AGGREGATE-STATISTICS-TABLE)
+
+**Table 9.60. Aggregate Functions for Statistics**
 
 | FunctionDescription                                                                                                                                                                                                    | Partial Mode |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
@@ -96,9 +102,11 @@ will require effort proportional to the size of the table: PostgreSQL will need 
 
 \
 
-[Table 9.61](functions-aggregate#FUNCTIONS-ORDEREDSET-TABLE "Table 9.61. Ordered-Set Aggregate Functions") shows some aggregate functions that use the *ordered-set aggregate* syntax. These functions are sometimes referred to as “inverse distribution” functions. Their aggregated input is introduced by `ORDER BY`, and they may also take a *direct argument* that is not aggregated, but is computed only once. All these functions ignore null values in their aggregated input. For those that take a *`fraction`* parameter, the fraction value must be between 0 and 1; an error is thrown if not. However, a null *`fraction`* value simply produces a null result.
+[Table 9.61](functions-aggregate#FUNCTIONS-ORDEREDSET-TABLE) shows some aggregate functions that use the *ordered-set aggregate* syntax. These functions are sometimes referred to as “inverse distribution” functions. Their aggregated input is introduced by `ORDER BY`, and they may also take a *direct argument* that is not aggregated, but is computed only once. All these functions ignore null values in their aggregated input. For those that take a *`fraction`* parameter, the fraction value must be between 0 and 1; an error is thrown if not. However, a null *`fraction`* value simply produces a null result.
 
-**Table 9.61. Ordered-Set Aggregate Functions** [#](#FUNCTIONS-ORDEREDSET-TABLE)
+[#id](#FUNCTIONS-ORDEREDSET-TABLE)
+
+**Table 9.61. Ordered-Set Aggregate Functions**
 
 | FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Partial Mode |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
@@ -110,9 +118,11 @@ will require effort proportional to the size of the table: PostgreSQL will need 
 
 \
 
-Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-aggregate#FUNCTIONS-HYPOTHETICAL-TABLE "Table 9.62. Hypothetical-Set Aggregate Functions") is associated with a window function of the same name defined in [Section 9.22](functions-window "9.22. Window Functions"). In each case, the aggregate's result is the value that the associated window function would have returned for the “hypothetical” row constructed from *`args`*, if such a row had been added to the sorted group of rows represented by the *`sorted_args`*. For each of these functions, the list of direct arguments given in *`args`* must match the number and types of the aggregated arguments given in *`sorted_args`*. Unlike most built-in aggregates, these aggregates are not strict, that is they do not drop input rows containing nulls. Null values sort according to the rule specified in the `ORDER BY` clause.
+Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-aggregate#FUNCTIONS-HYPOTHETICAL-TABLE) is associated with a window function of the same name defined in [Section 9.22](functions-window). In each case, the aggregate's result is the value that the associated window function would have returned for the “hypothetical” row constructed from *`args`*, if such a row had been added to the sorted group of rows represented by the *`sorted_args`*. For each of these functions, the list of direct arguments given in *`args`* must match the number and types of the aggregated arguments given in *`sorted_args`*. Unlike most built-in aggregates, these aggregates are not strict, that is they do not drop input rows containing nulls. Null values sort according to the rule specified in the `ORDER BY` clause.
 
-**Table 9.62. Hypothetical-Set Aggregate Functions** [#](#FUNCTIONS-HYPOTHETICAL-TABLE)
+[#id](#FUNCTIONS-HYPOTHETICAL-TABLE)
+
+**Table 9.62. Hypothetical-Set Aggregate Functions**
 
 | FunctionDescription                                                                                                                                                                                                                                             | Partial Mode |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
@@ -121,7 +131,11 @@ Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-
 | `percent_rank` ( *`args`* ) `WITHIN GROUP` ( `ORDER BY` *`sorted_args`* ) → `double precision`Computes the relative rank of the hypothetical row, that is (`rank` - 1) / (total rows - 1). The value thus ranges from 0 to 1 inclusive.                     | No           |
 | `cume_dist` ( *`args`* ) `WITHIN GROUP` ( `ORDER BY` *`sorted_args`* ) → `double precision`Computes the cumulative distribution, that is (number of rows preceding or peers with hypothetical row) / (total rows). The value thus ranges from 1/*`N`* to 1. | No           |
 
-**Table 9.63. Grouping Operations** [#](#FUNCTIONS-GROUPING-TABLE)
+\
+
+[#id](#FUNCTIONS-GROUPING-TABLE)
+
+**Table 9.63. Grouping Operations**
 
 | FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -129,7 +143,7 @@ Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-
 
 \
 
-The grouping operations shown in [Table 9.63](functions-aggregate#FUNCTIONS-GROUPING-TABLE "Table 9.63. Grouping Operations") are used in conjunction with grouping sets (see [Section 7.2.4](queries-table-expressions#QUERIES-GROUPING-SETS "7.2.4. GROUPING SETS, CUBE, and ROLLUP")) to distinguish result rows. The arguments to the `GROUPING` function are not actually evaluated, but they must exactly match expressions given in the `GROUP BY` clause of the associated query level. For example:
+The grouping operations shown in [Table 9.63](functions-aggregate#FUNCTIONS-GROUPING-TABLE) are used in conjunction with grouping sets (see [Section 7.2.4](queries-table-expressions#QUERIES-GROUPING-SETS)) to distinguish result rows. The arguments to the `GROUPING` function are not actually evaluated, but they must exactly match expressions given in the `GROUP BY` clause of the associated query level. For example:
 
 ```
 

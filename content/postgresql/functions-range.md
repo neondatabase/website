@@ -1,8 +1,12 @@
+[#id](#FUNCTIONS-RANGE)
+
 ## 9.20. Range/Multirange Functions and Operators [#](#FUNCTIONS-RANGE)
 
-See [Section 8.17](rangetypes "8.17. Range Types") for an overview of range types.
+See [Section 8.17](rangetypes) for an overview of range types.
 
-[Table 9.55](functions-range#RANGE-OPERATORS-TABLE "Table 9.55. Range Operators") shows the specialized operators available for range types. [Table 9.56](functions-range#MULTIRANGE-OPERATORS-TABLE "Table 9.56. Multirange Operators") shows the specialized operators available for multirange types. In addition to those, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for range and multirange types. The comparison operators order first by the range lower bounds, and only if those are equal do they compare the upper bounds. The multirange operators compare each range until one is unequal. This does not usually result in a useful overall ordering, but the operators are provided to allow unique indexes to be constructed on ranges.
+[Table 9.55](functions-range#RANGE-OPERATORS-TABLE) shows the specialized operators available for range types. [Table 9.56](functions-range#MULTIRANGE-OPERATORS-TABLE) shows the specialized operators available for multirange types. In addition to those, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE) are available for range and multirange types. The comparison operators order first by the range lower bounds, and only if those are equal do they compare the upper bounds. The multirange operators compare each range until one is unequal. This does not usually result in a useful overall ordering, but the operators are provided to allow unique indexes to be constructed on ranges.
+
+[#id](#RANGE-OPERATORS-TABLE)
 
 **Table 9.55. Range Operators**
 
@@ -23,6 +27,9 @@ See [Section 8.17](rangetypes "8.17. Range Types") for an overview of range ty
 | `anyrange` `-` `anyrange` → `anyrange`Computes the difference of the ranges. The second range must not be contained in the first in such a way that the difference would not be a single range.`int8range(5,15) - int8range(10,20)` → `[5,10)` |
 
 \
+
+
+[#id](#MULTIRANGE-OPERATORS-TABLE)
 
 **Table 9.56. Multirange Operators**
 
@@ -60,13 +67,16 @@ See [Section 8.17](rangetypes "8.17. Range Types") for an overview of range ty
 
 \
 
+
 The left-of/right-of/adjacent operators always return false when an empty range or multirange is involved; that is, an empty range is not considered to be either before or after any other range.
 
 Elsewhere empty ranges and multiranges are treated as the additive identity: anything unioned with an empty value is itself. Anything minus an empty value is itself. An empty multirange has exactly the same points as an empty range. Every range contains the empty range. Every multirange contains as many empty ranges as you like.
 
 The range union and difference operators will fail if the resulting range would need to contain two disjoint sub-ranges, as such a range cannot be represented. There are separate operators for union and difference that take multirange parameters and return a multirange, and they do not fail even if their arguments are disjoint. So if you need a union or difference operation for ranges that may be disjoint, you can avoid errors by first casting your ranges to multiranges.
 
-[Table 9.57](functions-range#RANGE-FUNCTIONS-TABLE "Table 9.57. Range Functions") shows the functions available for use with range types. [Table 9.58](functions-range#MULTIRANGE-FUNCTIONS-TABLE "Table 9.58. Multirange Functions") shows the functions available for use with multirange types.
+[Table 9.57](functions-range#RANGE-FUNCTIONS-TABLE) shows the functions available for use with range types. [Table 9.58](functions-range#MULTIRANGE-FUNCTIONS-TABLE) shows the functions available for use with multirange types.
+
+[#id](#RANGE-FUNCTIONS-TABLE)
 
 **Table 9.57. Range Functions**
 
@@ -83,21 +93,29 @@ The range union and difference operators will fail if the resulting range would 
 
 \
 
+
+[#id](#MULTIRANGE-FUNCTIONS-TABLE)
+
 **Table 9.58. Multirange Functions**
 
-| FunctionDescriptionExample(s)                                                                                                                                                                                        |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `lower` ( `anymultirange` ) → `anyelement`Extracts the lower bound of the multirange (`NULL` if the multirange is empty or the lower bound is infinite).`lower('{[1.1,2.2)}'::nummultirange)` → `1.1`            |
-| `upper` ( `anymultirange` ) → `anyelement`Extracts the upper bound of the multirange (`NULL` if the multirange is empty or the upper bound is infinite).`upper('{[1.1,2.2)}'::nummultirange)` → `2.2`            |
-| `isempty` ( `anymultirange` ) → `boolean`Is the multirange empty?`isempty('{[1.1,2.2)}'::nummultirange)` → `f`                                                                                                   |
-| `lower_inc` ( `anymultirange` ) → `boolean`Is the multirange's lower bound inclusive?`lower_inc('{[1.1,2.2)}'::nummultirange)` → `t`                                                                             |
-| `upper_inc` ( `anymultirange` ) → `boolean`Is the multirange's upper bound inclusive?`upper_inc('{[1.1,2.2)}'::nummultirange)` → `f`                                                                             |
-| `lower_inf` ( `anymultirange` ) → `boolean`Is the multirange's lower bound infinite?`lower_inf('{(,)}'::datemultirange)` → `t`                                                                                   |
-| `upper_inf` ( `anymultirange` ) → `boolean`Is the multirange's upper bound infinite?`upper_inf('{(,)}'::datemultirange)` → `t`                                                                                   |
-| `range_merge` ( `anymultirange` ) → `anyrange`Computes the smallest range that includes the entire multirange.`range_merge('{[1,2), [3,4)}'::int4multirange)` → `[1,4)`                                          |
-| `multirange` ( `anyrange` ) → `anymultirange`Returns a multirange containing just the given range.`multirange('[1,2)'::int4range)` → `{[1,2)}`                                                                   |
-| `unnest` ( `anymultirange` ) → `setof anyrange`Expands a multirange into a set of ranges. The ranges are read out in storage order (ascending).`unnest('{[1,2), [3,4)}'::int4multirange)` →``      [1,2)  [3,4)  |
+| FunctionDescriptionExample(s)                                                                                                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lower` ( `anymultirange` ) → `anyelement`Extracts the lower bound of the multirange (`NULL` if the multirange is empty or the lower bound is infinite).`lower('{[1.1,2.2)}'::nummultirange)` → `1.1`               |
+| `upper` ( `anymultirange` ) → `anyelement`Extracts the upper bound of the multirange (`NULL` if the multirange is empty or the upper bound is infinite).`upper('{[1.1,2.2)}'::nummultirange)` → `2.2`               |
+| `isempty` ( `anymultirange` ) → `boolean`Is the multirange empty?`isempty('{[1.1,2.2)}'::nummultirange)` → `f`                                                                                                      |
+| `lower_inc` ( `anymultirange` ) → `boolean`Is the multirange's lower bound inclusive?`lower_inc('{[1.1,2.2)}'::nummultirange)` → `t`                                                                                |
+| `upper_inc` ( `anymultirange` ) → `boolean`Is the multirange's upper bound inclusive?`upper_inc('{[1.1,2.2)}'::nummultirange)` → `f`                                                                                |
+| `lower_inf` ( `anymultirange` ) → `boolean`Is the multirange's lower bound infinite?`lower_inf('{(,)}'::datemultirange)` → `t`                                                                                      |
+| `upper_inf` ( `anymultirange` ) → `boolean`Is the multirange's upper bound infinite?`upper_inf('{(,)}'::datemultirange)` → `t`                                                                                      |
+| `range_merge` ( `anymultirange` ) → `anyrange`Computes the smallest range that includes the entire multirange.`range_merge('{[1,2), [3,4)}'::int4multirange)` → `[1,4)`                                             |
+| `multirange` ( `anyrange` ) → `anymultirange`Returns a multirange containing just the given range.`multirange('[1,2)'::int4range)` → `{[1,2)}`                                                                      |
+| `unnest` ( `anymultirange` ) → `setof anyrange`Expands a multirange into a set of ranges. The ranges are read out in storage order (ascending).`unnest('{[1,2), [3,4)}'::int4multirange)` →`````
+
+ [1,2)
+ [3,4)
+``` |
 
 \
+
 
 The `lower_inc`, `upper_inc`, `lower_inf`, and `upper_inf` functions all return false for an empty range or multirange.

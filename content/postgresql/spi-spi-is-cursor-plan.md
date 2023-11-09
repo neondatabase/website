@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-IS-CURSOR-PLAN)
+
 ## SPI\_is\_cursor\_plan
 
 SPI\_is\_cursor\_plan — return `true` if a statement prepared by `SPI_prepare` can be used with `SPI_cursor_open`
@@ -5,19 +7,24 @@ SPI\_is\_cursor\_plan — return `true` if a statement prepared by `SPI_prepare`
 ## Synopsis
 
 ```
-
 bool SPI_is_cursor_plan(SPIPlanPtr plan)
 ```
+
+[#id](#id-1.8.12.8.14.5)
 
 ## Description
 
 `SPI_is_cursor_plan` returns `true` if a statement prepared by `SPI_prepare` can be passed as an argument to `SPI_cursor_open`, or `false` if that is not the case. The criteria are that the *`plan`* represents one single command and that this command returns tuples to the caller; for example, `SELECT` is allowed unless it contains an `INTO` clause, and `UPDATE` is allowed only if it contains a `RETURNING` clause.
 
+[#id](#id-1.8.12.8.14.6)
+
 ## Arguments
 
 * `SPIPlanPtr plan`
 
-    prepared statement (returned by `SPI_prepare`)
+  prepared statement (returned by `SPI_prepare`)
+
+[#id](#id-1.8.12.8.14.7)
 
 ## Return Value
 

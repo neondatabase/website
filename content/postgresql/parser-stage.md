@@ -1,3 +1,5 @@
+[#id](#PARSER-STAGE)
+
 ## 52.3. The Parser Stage [#](#PARSER-STAGE)
 
   * [52.3.1. Parser](parser-stage#PARSER-STAGE-PARSER)
@@ -6,7 +8,10 @@
 The *parser stage* consists of two parts:
 
 * The *parser* defined in `gram.y` and `scan.l` is built using the Unix tools bison and flex.
+
 * The *transformation process* does modifications and augmentations to the data structures returned by the parser.
+
+[#id](#PARSER-STAGE-PARSER)
 
 ### 52.3.1. Parser [#](#PARSER-STAGE-PARSER)
 
@@ -23,6 +28,8 @@ The file `scan.l` is transformed to the C source file `scan.c` using the program
 The mentioned transformations and compilations are normally done automatically using the *makefiles* shipped with the PostgreSQL source distribution.
 
 A detailed description of bison or the grammar rules given in `gram.y` would be beyond the scope of this manual. There are many books and documents dealing with flex and bison. You should be familiar with bison before you start to study the grammar given in `gram.y` otherwise you won't understand what happens there.
+
+[#id](#PARSER-STAGE-TRANSFORMATION-PROCESS)
 
 ### 52.3.2. Transformation Process [#](#PARSER-STAGE-TRANSFORMATION-PROCESS)
 

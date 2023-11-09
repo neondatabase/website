@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-PARAMETERS)
+
 ## 37.33. `parameters` [#](#INFOSCHEMA-PARAMETERS)
 
 The view `parameters` contains information about the parameters (arguments) of all functions in the current database. Only those functions are shown that the current user has access to (by way of being the owner or having some privilege).
+
+[#id](#id-1.7.6.37.3)
 
 **Table 37.31. `parameters` Columns**
 
@@ -8,7 +12,7 @@ The view `parameters` contains information about the parameters (arguments) of a
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `specific_catalog` `sql_identifier`Name of the database containing the function (always the current database)                                                                                                                                                                                                                                                |
 | `specific_schema` `sql_identifier`Name of the schema containing the function                                                                                                                                                                                                                                                                                 |
-| `specific_name` `sql_identifier`The “specific name” of the function. See [Section 37.45](infoschema-routines "37.45. routines") for more information.                                                                                                                                                                                                   |
+| `specific_name` `sql_identifier`The “specific name” of the function. See [Section 37.45](infoschema-routines) for more information.                                                                                                                                                                                                                     |
 | `ordinal_position` `cardinal_number`Ordinal position of the parameter in the argument list of the function (count starts at 1)                                                                                                                                                                                                                               |
 | `parameter_mode` `character_data``IN` for input parameter, `OUT` for output parameter, and `INOUT` for input/output parameter.                                                                                                                                                                                                                               |
 | `is_result` `yes_or_no`Applies to a feature not available in PostgreSQL                                                                                                                                                                                                                                                                                      |

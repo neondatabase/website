@@ -1,9 +1,12 @@
+[#id](#INDEXES-MULTICOLUMN)
+
 ## 11.3. Multicolumn Indexes [#](#INDEXES-MULTICOLUMN)
+
+
 
 An index can be defined on more than one column of a table. For example, if you have a table of this form:
 
 ```
-
 CREATE TABLE test2 (
   major int,
   minor int,
@@ -14,14 +17,12 @@ CREATE TABLE test2 (
 (say, you keep your `/dev` directory in a database...) and you frequently issue queries like:
 
 ```
-
 SELECT name FROM test2 WHERE major = constant AND minor = constant;
 ```
 
 then it might be appropriate to define an index on the columns `major` and `minor` together, e.g.:
 
 ```
-
 CREATE INDEX test2_mm_idx ON test2 (major, minor);
 ```
 
@@ -37,4 +38,4 @@ A multicolumn BRIN index can be used with query conditions that involve any subs
 
 Of course, each column must be used with operators appropriate to the index type; clauses that involve other operators will not be considered.
 
-Multicolumn indexes should be used sparingly. In most situations, an index on a single column is sufficient and saves space and time. Indexes with more than three columns are unlikely to be helpful unless the usage of the table is extremely stylized. See also [Section 11.5](indexes-bitmap-scans "11.5. Combining Multiple Indexes") and [Section 11.9](indexes-index-only-scans "11.9. Index-Only Scans and Covering Indexes") for some discussion of the merits of different index configurations.
+Multicolumn indexes should be used sparingly. In most situations, an index on a single column is sufficient and saves space and time. Indexes with more than three columns are unlikely to be helpful unless the usage of the table is extremely stylized. See also [Section 11.5](indexes-bitmap-scans) and [Section 11.9](indexes-index-only-scans) for some discussion of the merits of different index configurations.

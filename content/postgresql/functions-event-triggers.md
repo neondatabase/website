@@ -1,3 +1,5 @@
+[#id](#FUNCTIONS-EVENT-TRIGGERS)
+
 ## 9.29. Event Trigger Functions [#](#FUNCTIONS-EVENT-TRIGGERS)
 
   * [9.29.1. Capturing Changes at Command End](functions-event-triggers#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
@@ -6,9 +8,13 @@
 
 PostgreSQL provides these helper functions to retrieve information from event triggers.
 
-For more information about event triggers, see [Chapter 40](event-triggers "Chapter 40. Event Triggers").
+For more information about event triggers, see [Chapter 40](event-triggers).
+
+[#id](#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
 
 ### 9.29.1. Capturing Changes at Command End [#](#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
+
+
 
 ```
 
@@ -29,7 +35,11 @@ pg_event_trigger_ddl_commands () → setof record
 | `in_extension`    | `boolean`        | True if the command is part of an extension script                                                                                                                                                 |
 | `command`         | `pg_ddl_command` | A complete representation of the command, in internal format. This cannot be output directly, but it can be passed to other functions to obtain different pieces of information about the command. |
 
+[#id](#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
+
 ### 9.29.2. Processing Objects Dropped by a DDL Command [#](#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
+
+
 
 ```
 
@@ -78,9 +88,13 @@ CREATE EVENT TRIGGER test_event_trigger_for_drops
    EXECUTE FUNCTION test_event_trigger_for_drops();
 ```
 
+[#id](#PG-EVENT-TRIGGER-TABLE-REWRITE-FUNCTIONS)
+
 ### 9.29.3. Handling a Table Rewrite Event [#](#PG-EVENT-TRIGGER-TABLE-REWRITE-FUNCTIONS)
 
-The functions shown in [Table 9.104](functions-event-triggers#FUNCTIONS-EVENT-TRIGGER-TABLE-REWRITE "Table 9.104. Table Rewrite Information Functions") provide information about a table for which a `table_rewrite` event has just been called. If called in any other context, an error is raised.
+The functions shown in [Table 9.104](functions-event-triggers#FUNCTIONS-EVENT-TRIGGER-TABLE-REWRITE) provide information about a table for which a `table_rewrite` event has just been called. If called in any other context, an error is raised.
+
+[#id](#FUNCTIONS-EVENT-TRIGGER-TABLE-REWRITE)
 
 **Table 9.104. Table Rewrite Information Functions**
 
@@ -90,6 +104,7 @@ The functions shown in [Table 9.104](functions-event-triggers#FUNCTIONS-EVENT-T
 | `pg_event_trigger_table_rewrite_reason` () → `integer`Returns a code explaining the reason(s) for rewriting. The exact meaning of the codes is release dependent. |
 
 \
+
 
 These functions can be used in an event trigger like this:
 

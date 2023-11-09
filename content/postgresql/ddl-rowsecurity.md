@@ -1,18 +1,22 @@
+[#id](#DDL-ROWSECURITY)
+
 ## 5.8. Row Security Policies [#](#DDL-ROWSECURITY)
 
-In addition to the SQL-standard [privilege system](ddl-priv "5.7. Privileges") available through [GRANT](sql-grant "GRANT"), tables can have *row security policies* that restrict, on a per-user basis, which rows can be returned by normal queries or inserted, updated, or deleted by data modification commands. This feature is also known as *Row-Level Security*. By default, tables do not have any policies, so that if a user has access privileges to a table according to the SQL privilege system, all rows within it are equally available for querying or updating.
 
-When row security is enabled on a table (with [ALTER TABLE ... ENABLE ROW LEVEL SECURITY](sql-altertable "ALTER TABLE")), all normal access to the table for selecting rows or modifying rows must be allowed by a row security policy. (However, the table's owner is typically not subject to row security policies.) If no policy exists for the table, a default-deny policy is used, meaning that no rows are visible or can be modified. Operations that apply to the whole table, such as `TRUNCATE` and `REFERENCES`, are not subject to row security.
+
+In addition to the SQL-standard [privilege system](ddl-priv) available through [GRANT](sql-grant), tables can have *row security policies* that restrict, on a per-user basis, which rows can be returned by normal queries or inserted, updated, or deleted by data modification commands. This feature is also known as *Row-Level Security*. By default, tables do not have any policies, so that if a user has access privileges to a table according to the SQL privilege system, all rows within it are equally available for querying or updating.
+
+When row security is enabled on a table (with [ALTER TABLE ... ENABLE ROW LEVEL SECURITY](sql-altertable)), all normal access to the table for selecting rows or modifying rows must be allowed by a row security policy. (However, the table's owner is typically not subject to row security policies.) If no policy exists for the table, a default-deny policy is used, meaning that no rows are visible or can be modified. Operations that apply to the whole table, such as `TRUNCATE` and `REFERENCES`, are not subject to row security.
 
 Row security policies can be specific to commands, or to roles, or to both. A policy can be specified to apply to `ALL` commands, or to `SELECT`, `INSERT`, `UPDATE`, or `DELETE`. Multiple roles can be assigned to a given policy, and normal role membership and inheritance rules apply.
 
 To specify which rows are visible or modifiable according to a policy, an expression is required that returns a Boolean result. This expression will be evaluated for each row prior to any conditions or functions coming from the user's query. (The only exceptions to this rule are `leakproof` functions, which are guaranteed to not leak information; the optimizer may choose to apply such functions ahead of the row-security check.) Rows for which the expression does not return `true` will not be processed. Separate expressions may be specified to provide independent control over the rows which are visible and the rows which are allowed to be modified. Policy expressions are run as part of the query and with the privileges of the user running the query, although security-definer functions can be used to access data not available to the calling user.
 
-Superusers and roles with the `BYPASSRLS` attribute always bypass the row security system when accessing a table. Table owners normally bypass row security as well, though a table owner can choose to be subject to row security with [ALTER TABLE ... FORCE ROW LEVEL SECURITY](sql-altertable "ALTER TABLE").
+Superusers and roles with the `BYPASSRLS` attribute always bypass the row security system when accessing a table. Table owners normally bypass row security as well, though a table owner can choose to be subject to row security with [ALTER TABLE ... FORCE ROW LEVEL SECURITY](sql-altertable).
 
 Enabling and disabling row security, as well as adding policies to a table, is always the privilege of the table owner only.
 
-Policies are created using the [CREATE POLICY](sql-createpolicy "CREATE POLICY") command, altered using the [ALTER POLICY](sql-alterpolicy "ALTER POLICY") command, and dropped using the [DROP POLICY](sql-droppolicy "DROP POLICY") command. To enable and disable row security for a given table, use the [ALTER TABLE](sql-altertable "ALTER TABLE") command.
+Policies are created using the [CREATE POLICY](sql-createpolicy) command, altered using the [ALTER POLICY](sql-alterpolicy) command, and dropped using the [DROP POLICY](sql-droppolicy) command. To enable and disable row security for a given table, use the [ALTER TABLE](sql-altertable) command.
 
 Each policy has a name and multiple policies can be defined for a table. As policies are table-specific, each policy for a table must have a unique name. Different tables may have policies with the same name.
 
@@ -269,4 +273,4 @@ and her transaction is in `READ COMMITTED` mode, it is possible for her to see �
 
 There are several ways around this problem. One simple answer is to use `SELECT ... FOR SHARE` in sub-`SELECT`s in row security policies. However, that requires granting `UPDATE` privilege on the referenced table (here `users`) to the affected users, which might be undesirable. (But another row security policy could be applied to prevent them from actually exercising that privilege; or the sub-`SELECT` could be embedded into a security definer function.) Also, heavy concurrent use of row share locks on the referenced table could pose a performance problem, especially if updates of it are frequent. Another solution, practical if updates of the referenced table are infrequent, is to take an `ACCESS EXCLUSIVE` lock on the referenced table when updating it, so that no concurrent transactions could be examining old row values. Or one could just wait for all concurrent transactions to end after committing an update of the referenced table and before making changes that rely on the new security situation.
 
-For additional details see [CREATE POLICY](sql-createpolicy "CREATE POLICY") and [ALTER TABLE](sql-altertable "ALTER TABLE").
+For additional details see [CREATE POLICY](sql-createpolicy) and [ALTER TABLE](sql-altertable).

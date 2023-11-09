@@ -1,3 +1,5 @@
+[#id](#SPI-MEMORY)
+
 ## 47.3. Memory Management [#](#SPI-MEMORY)
 
   * [SPI\_palloc](spi-spi-palloc) — allocate memory in the upper executor context

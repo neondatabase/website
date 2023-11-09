@@ -1,3 +1,5 @@
+[#id](#SQL-ALTERROUTINE)
+
 ## ALTER ROUTINE
 
 ALTER ROUTINE — change the definition of a routine
@@ -5,7 +7,6 @@ ALTER ROUTINE — change the definition of a routine
 ## Synopsis
 
 ```
-
 ALTER ROUTINE name [ ( [ [ argmode ] [ argname ] argtype [, ...] ] ) ]
     action [ ... ] [ RESTRICT ]
 ALTER ROUTINE name [ ( [ [ argmode ] [ argname ] argtype [, ...] ] ) ]
@@ -31,27 +32,34 @@ where action is one of:
     RESET ALL
 ```
 
+[#id](#id-1.9.3.27.5)
+
 ## Description
 
-`ALTER ROUTINE` changes the definition of a routine, which can be an aggregate function, a normal function, or a procedure. See under [ALTER AGGREGATE](sql-alteraggregate "ALTER AGGREGATE"), [ALTER FUNCTION](sql-alterfunction "ALTER FUNCTION"), and [ALTER PROCEDURE](sql-alterprocedure "ALTER PROCEDURE") for the description of the parameters, more examples, and further details.
+`ALTER ROUTINE` changes the definition of a routine, which can be an aggregate function, a normal function, or a procedure. See under [ALTER AGGREGATE](sql-alteraggregate), [ALTER FUNCTION](sql-alterfunction), and [ALTER PROCEDURE](sql-alterprocedure) for the description of the parameters, more examples, and further details.
+
+[#id](#id-1.9.3.27.6)
 
 ## Examples
 
 To rename the routine `foo` for type `integer` to `foobar`:
 
 ```
-
 ALTER ROUTINE foo(integer) RENAME TO foobar;
 ```
 
 This command will work independent of whether `foo` is an aggregate, function, or procedure.
 
+[#id](#id-1.9.3.27.7)
+
 ## Compatibility
 
-This statement is partially compatible with the `ALTER ROUTINE` statement in the SQL standard. See under [ALTER FUNCTION](sql-alterfunction "ALTER FUNCTION") and [ALTER PROCEDURE](sql-alterprocedure "ALTER PROCEDURE") for more details. Allowing routine names to refer to aggregate functions is a PostgreSQL extension.
+This statement is partially compatible with the `ALTER ROUTINE` statement in the SQL standard. See under [ALTER FUNCTION](sql-alterfunction) and [ALTER PROCEDURE](sql-alterprocedure) for more details. Allowing routine names to refer to aggregate functions is a PostgreSQL extension.
+
+[#id](#id-1.9.3.27.8)
 
 ## See Also
 
-[ALTER AGGREGATE](sql-alteraggregate "ALTER AGGREGATE"), [ALTER FUNCTION](sql-alterfunction "ALTER FUNCTION"), [ALTER PROCEDURE](sql-alterprocedure "ALTER PROCEDURE"), [DROP ROUTINE](sql-droproutine "DROP ROUTINE")
+[ALTER AGGREGATE](sql-alteraggregate), [ALTER FUNCTION](sql-alterfunction), [ALTER PROCEDURE](sql-alterprocedure), [DROP ROUTINE](sql-droproutine)
 
 Note that there is no `CREATE ROUTINE` command.

@@ -1,3 +1,5 @@
+[#id](#MONITORING-STATS)
+
 ## 28.2. The Cumulative Statistics System [#](#MONITORING-STATS)
 
   * [28.2.1. Statistics Collection Configuration](monitoring-stats#MONITORING-STATS-SETUP)
@@ -26,13 +28,17 @@
   * [28.2.24. `pg_stat_slru`](monitoring-stats#MONITORING-PG-STAT-SLRU-VIEW)
   * [28.2.25. Statistics Functions](monitoring-stats#MONITORING-STATS-FUNCTIONS)
 
+
+
 PostgreSQL's *cumulative statistics system* supports collection and reporting of information about server activity. Presently, accesses to tables and indexes in both disk-block and individual-row terms are counted. The total number of rows in each table, and information about vacuum and analyze actions for each table are also counted. If enabled, calls to user-defined functions and the total time spent in each one are counted as well.
 
 PostgreSQL also supports reporting dynamic information about exactly what is going on in the system right now, such as the exact command currently being executed by other server processes, and which other connections exist in the system. This facility is independent of the cumulative statistics system.
 
+[#id](#MONITORING-STATS-SETUP)
+
 ### 28.2.1. Statistics Collection Configuration [#](#MONITORING-STATS-SETUP)
 
-Since collection of statistics adds some overhead to query execution, the system can be configured to collect or not collect information. This is controlled by configuration parameters that are normally set in `postgresql.conf`. (See [Chapter 20](runtime-config "Chapter 20. Server Configuration") for details about setting configuration parameters.)
+Since collection of statistics adds some overhead to query execution, the system can be configured to collect or not collect information. This is controlled by configuration parameters that are normally set in `postgresql.conf`. (See [Chapter 20](runtime-config) for details about setting configuration parameters.)
 
 The parameter [track\_activities](runtime-config-statistics#GUC-TRACK-ACTIVITIES) enables monitoring of the current command being executed by any server process.
 
@@ -44,13 +50,15 @@ The parameter [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING)
 
 The parameter [track\_wal\_io\_timing](runtime-config-statistics#GUC-TRACK-WAL-IO-TIMING) enables monitoring of WAL write times.
 
-Normally these parameters are set in `postgresql.conf` so that they apply to all server processes, but it is possible to turn them on or off in individual sessions using the [SET](sql-set "SET") command. (To prevent ordinary users from hiding their activity from the administrator, only superusers are allowed to change these parameters with `SET`.)
+Normally these parameters are set in `postgresql.conf` so that they apply to all server processes, but it is possible to turn them on or off in individual sessions using the [SET](sql-set) command. (To prevent ordinary users from hiding their activity from the administrator, only superusers are allowed to change these parameters with `SET`.)
 
 Cumulative statistics are collected in shared memory. Every PostgreSQL process collects statistics locally, then updates the shared data at appropriate intervals. When a server, including a physical replica, shuts down cleanly, a permanent copy of the statistics data is stored in the `pg_stat` subdirectory, so that statistics can be retained across server restarts. In contrast, when starting from an unclean shutdown (e.g., after an immediate shutdown, a server crash, starting from a base backup, and point-in-time recovery), all statistics counters are reset.
 
+[#id](#MONITORING-STATS-VIEWS)
+
 ### 28.2.2. Viewing Statistics [#](#MONITORING-STATS-VIEWS)
 
-Several predefined views, listed in [Table 28.1](monitoring-stats#MONITORING-STATS-DYNAMIC-VIEWS-TABLE "Table 28.1. Dynamic Statistics Views"), are available to show the current state of the system. There are also several other views, listed in [Table 28.2](monitoring-stats#MONITORING-STATS-VIEWS-TABLE "Table 28.2. Collected Statistics Views"), available to show the accumulated statistics. Alternatively, one can build custom views using the underlying cumulative statistics functions, as discussed in [Section 28.2.25](monitoring-stats#MONITORING-STATS-FUNCTIONS "28.2.25. Statistics Functions").
+Several predefined views, listed in [Table 28.1](monitoring-stats#MONITORING-STATS-DYNAMIC-VIEWS-TABLE), are available to show the current state of the system. There are also several other views, listed in [Table 28.2](monitoring-stats#MONITORING-STATS-VIEWS-TABLE), available to show the accumulated statistics. Alternatively, one can build custom views using the underlying cumulative statistics functions, as discussed in [Section 28.2.25](monitoring-stats#MONITORING-STATS-FUNCTIONS).
 
 When using the cumulative statistics views and functions to monitor collected data, it is important to realize that the information does not update instantaneously. Each individual server process flushes out accumulated statistics to shared memory just before going idle, but not more frequently than once per `PGSTAT_MIN_INTERVAL` milliseconds (1 second unless altered while building the server); so a query or transaction still in progress does not affect the displayed totals and the displayed information lags behind actual activity. However, current-query information collected by `track_activities` is always up-to-date.
 
@@ -58,148 +66,173 @@ Another important point is that when a server process is asked to display any of
 
 A transaction can also see its own statistics (not yet flushed out to the shared memory statistics) in the views `pg_stat_xact_all_tables`, `pg_stat_xact_sys_tables`, `pg_stat_xact_user_tables`, and `pg_stat_xact_user_functions`. These numbers do not act as stated above; instead they update continuously throughout the transaction.
 
-Some of the information in the dynamic statistics views shown in [Table 28.1](monitoring-stats#MONITORING-STATS-DYNAMIC-VIEWS-TABLE "Table 28.1. Dynamic Statistics Views") is security restricted. Ordinary users can only see all the information about their own sessions (sessions belonging to a role that they are a member of). In rows about other sessions, many columns will be null. Note, however, that the existence of a session and its general properties such as its sessions user and database are visible to all users. Superusers and roles with privileges of built-in role `pg_read_all_stats` (see also [Section 22.5](predefined-roles "22.5. Predefined Roles")) can see all the information about all sessions.
+Some of the information in the dynamic statistics views shown in [Table 28.1](monitoring-stats#MONITORING-STATS-DYNAMIC-VIEWS-TABLE) is security restricted. Ordinary users can only see all the information about their own sessions (sessions belonging to a role that they are a member of). In rows about other sessions, many columns will be null. Note, however, that the existence of a session and its general properties such as its sessions user and database are visible to all users. Superusers and roles with privileges of built-in role `pg_read_all_stats` (see also [Section 22.5](predefined-roles)) can see all the information about all sessions.
+
+[#id](#MONITORING-STATS-DYNAMIC-VIEWS-TABLE)
 
 **Table 28.1. Dynamic Statistics Views**
 
-| View Name                           | Description                                                                                                                                                                                                                                                   |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pg_stat_activity`              | One row per server process, showing information related to the current activity of that process, such as state and current query. See [`pg_stat_activity`](monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity") for details.    |
-| `pg_stat_replication`           | One row per WAL sender process, showing statistics about replication to that sender's connected standby server. See [`pg_stat_replication`](monitoring-stats#MONITORING-PG-STAT-REPLICATION-VIEW "28.2.4. pg_stat_replication") for details.             |
-| `pg_stat_wal_receiver`          | Only one row, showing statistics about the WAL receiver from that receiver's connected server. See [`pg_stat_wal_receiver`](monitoring-stats#MONITORING-PG-STAT-WAL-RECEIVER-VIEW "28.2.6. pg_stat_wal_receiver") for details.                           |
-| `pg_stat_recovery_prefetch`     | Only one row, showing statistics about blocks prefetched during recovery. See [`pg_stat_recovery_prefetch`](monitoring-stats#MONITORING-PG-STAT-RECOVERY-PREFETCH "28.2.7. pg_stat_recovery_prefetch") for details.                                      |
-| `pg_stat_subscription`          | At least one row per subscription, showing information about the subscription workers. See [`pg_stat_subscription`](monitoring-stats#MONITORING-PG-STAT-SUBSCRIPTION "28.2.8. pg_stat_subscription") for details.                                        |
-| `pg_stat_ssl`                   | One row per connection (regular and replication), showing information about SSL used on this connection. See [`pg_stat_ssl`](monitoring-stats#MONITORING-PG-STAT-SSL-VIEW "28.2.10. pg_stat_ssl") for details.                                           |
-| `pg_stat_gssapi`                | One row per connection (regular and replication), showing information about GSSAPI authentication and encryption used on this connection. See [`pg_stat_gssapi`](monitoring-stats#MONITORING-PG-STAT-GSSAPI-VIEW "28.2.11. pg_stat_gssapi") for details. |
-| `pg_stat_progress_analyze`      | One row for each backend (including autovacuum worker processes) running `ANALYZE`, showing current progress. See [Section 28.4.1](progress-reporting#ANALYZE-PROGRESS-REPORTING "28.4.1. ANALYZE Progress Reporting").                                  |
-| `pg_stat_progress_create_index` | One row for each backend running `CREATE INDEX` or `REINDEX`, showing current progress. See [Section 28.4.4](progress-reporting#CREATE-INDEX-PROGRESS-REPORTING "28.4.4. CREATE INDEX Progress Reporting").                                              |
-| `pg_stat_progress_vacuum`       | One row for each backend (including autovacuum worker processes) running `VACUUM`, showing current progress. See [Section 28.4.5](progress-reporting#VACUUM-PROGRESS-REPORTING "28.4.5. VACUUM Progress Reporting").                                     |
-| `pg_stat_progress_cluster`      | One row for each backend running `CLUSTER` or `VACUUM FULL`, showing current progress. See [Section 28.4.2](progress-reporting#CLUSTER-PROGRESS-REPORTING "28.4.2. CLUSTER Progress Reporting").                                                         |
-| `pg_stat_progress_basebackup`   | One row for each WAL sender process streaming a base backup, showing current progress. See [Section 28.4.6](progress-reporting#BASEBACKUP-PROGRESS-REPORTING "28.4.6. Base Backup Progress Reporting").                                                  |
-| `pg_stat_progress_copy`         | One row for each backend running `COPY`, showing current progress. See [Section 28.4.3](progress-reporting#COPY-PROGRESS-REPORTING "28.4.3. COPY Progress Reporting").                                                                                   |
+| View Name                           | Description                                                                                                                                                                                                                         |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pg_stat_activity`              | One row per server process, showing information related to the current activity of that process, such as state and current query. See [`pg_stat_activity`](monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW) for details.     |
+| `pg_stat_replication`           | One row per WAL sender process, showing statistics about replication to that sender's connected standby server. See [`pg_stat_replication`](monitoring-stats#MONITORING-PG-STAT-REPLICATION-VIEW) for details.                 |
+| `pg_stat_wal_receiver`          | Only one row, showing statistics about the WAL receiver from that receiver's connected server. See [`pg_stat_wal_receiver`](monitoring-stats#MONITORING-PG-STAT-WAL-RECEIVER-VIEW) for details.                                |
+| `pg_stat_recovery_prefetch`     | Only one row, showing statistics about blocks prefetched during recovery. See [`pg_stat_recovery_prefetch`](monitoring-stats#MONITORING-PG-STAT-RECOVERY-PREFETCH) for details.                                                |
+| `pg_stat_subscription`          | At least one row per subscription, showing information about the subscription workers. See [`pg_stat_subscription`](monitoring-stats#MONITORING-PG-STAT-SUBSCRIPTION) for details.                                             |
+| `pg_stat_ssl`                   | One row per connection (regular and replication), showing information about SSL used on this connection. See [`pg_stat_ssl`](monitoring-stats#MONITORING-PG-STAT-SSL-VIEW) for details.                                        |
+| `pg_stat_gssapi`                | One row per connection (regular and replication), showing information about GSSAPI authentication and encryption used on this connection. See [`pg_stat_gssapi`](monitoring-stats#MONITORING-PG-STAT-GSSAPI-VIEW) for details. |
+| `pg_stat_progress_analyze`      | One row for each backend (including autovacuum worker processes) running `ANALYZE`, showing current progress. See [Section 28.4.1](progress-reporting#ANALYZE-PROGRESS-REPORTING).                                             |
+| `pg_stat_progress_create_index` | One row for each backend running `CREATE INDEX` or `REINDEX`, showing current progress. See [Section 28.4.4](progress-reporting#CREATE-INDEX-PROGRESS-REPORTING).                                                              |
+| `pg_stat_progress_vacuum`       | One row for each backend (including autovacuum worker processes) running `VACUUM`, showing current progress. See [Section 28.4.5](progress-reporting#VACUUM-PROGRESS-REPORTING).                                               |
+| `pg_stat_progress_cluster`      | One row for each backend running `CLUSTER` or `VACUUM FULL`, showing current progress. See [Section 28.4.2](progress-reporting#CLUSTER-PROGRESS-REPORTING).                                                                    |
+| `pg_stat_progress_basebackup`   | One row for each WAL sender process streaming a base backup, showing current progress. See [Section 28.4.6](progress-reporting#BASEBACKUP-PROGRESS-REPORTING).                                                                 |
+| `pg_stat_progress_copy`         | One row for each backend running `COPY`, showing current progress. See [Section 28.4.3](progress-reporting#COPY-PROGRESS-REPORTING).                                                                                           |
 
 \
+
+
+[#id](#MONITORING-STATS-VIEWS-TABLE)
 
 **Table 28.2. Collected Statistics Views**
 
 | View Name                         | Description                                                                                                                                                                                                                                                                          |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `pg_stat_archiver`            | One row only, showing statistics about the WAL archiver process's activity. See [`pg_stat_archiver`](monitoring-stats#MONITORING-PG-STAT-ARCHIVER-VIEW "28.2.12. pg_stat_archiver") for details.                                                                                |
-| `pg_stat_bgwriter`            | One row only, showing statistics about the background writer process's activity. See [`pg_stat_bgwriter`](monitoring-stats#MONITORING-PG-STAT-BGWRITER-VIEW "28.2.14. pg_stat_bgwriter") for details.                                                                           |
-| `pg_stat_database`            | One row per database, showing database-wide statistics. See [`pg_stat_database`](monitoring-stats#MONITORING-PG-STAT-DATABASE-VIEW "28.2.16. pg_stat_database") for details.                                                                                                    |
-| `pg_stat_database_conflicts`  | One row per database, showing database-wide statistics about query cancels due to conflict with recovery on standby servers. See [`pg_stat_database_conflicts`](monitoring-stats#MONITORING-PG-STAT-DATABASE-CONFLICTS-VIEW "28.2.17. pg_stat_database_conflicts") for details. |
-| `pg_stat_io`                  | One row for each combination of backend type, context, and target object containing cluster-wide I/O statistics. See [`pg_stat_io`](monitoring-stats#MONITORING-PG-STAT-IO-VIEW "28.2.13. pg_stat_io") for details.                                                             |
-| `pg_stat_replication_slots`   | One row per replication slot, showing statistics about the replication slot's usage. See [`pg_stat_replication_slots`](monitoring-stats#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW "28.2.5. pg_stat_replication_slots") for details.                                             |
-| `pg_stat_slru`                | One row per SLRU, showing statistics of operations. See [`pg_stat_slru`](monitoring-stats#MONITORING-PG-STAT-SLRU-VIEW "28.2.24. pg_stat_slru") for details.                                                                                                                    |
-| `pg_stat_subscription_stats`  | One row per subscription, showing statistics about errors. See [`pg_stat_subscription_stats`](monitoring-stats#MONITORING-PG-STAT-SUBSCRIPTION-STATS "28.2.9. pg_stat_subscription_stats") for details.                                                                         |
-| `pg_stat_wal`                 | One row only, showing statistics about WAL activity. See [`pg_stat_wal`](monitoring-stats#MONITORING-PG-STAT-WAL-VIEW "28.2.15. pg_stat_wal") for details.                                                                                                                      |
-| `pg_stat_all_tables`          | One row for each table in the current database, showing statistics about accesses to that specific table. See [`pg_stat_all_tables`](monitoring-stats#MONITORING-PG-STAT-ALL-TABLES-VIEW "28.2.18. pg_stat_all_tables") for details.                                            |
+| `pg_stat_archiver`            | One row only, showing statistics about the WAL archiver process's activity. See [`pg_stat_archiver`](monitoring-stats#MONITORING-PG-STAT-ARCHIVER-VIEW) for details.                                                                                                            |
+| `pg_stat_bgwriter`            | One row only, showing statistics about the background writer process's activity. See [`pg_stat_bgwriter`](monitoring-stats#MONITORING-PG-STAT-BGWRITER-VIEW) for details.                                                                                                       |
+| `pg_stat_database`            | One row per database, showing database-wide statistics. See [`pg_stat_database`](monitoring-stats#MONITORING-PG-STAT-DATABASE-VIEW) for details.                                                                                                                                |
+| `pg_stat_database_conflicts`  | One row per database, showing database-wide statistics about query cancels due to conflict with recovery on standby servers. See [`pg_stat_database_conflicts`](monitoring-stats#MONITORING-PG-STAT-DATABASE-CONFLICTS-VIEW) for details.                                       |
+| `pg_stat_io`                  | One row for each combination of backend type, context, and target object containing cluster-wide I/O statistics. See [`pg_stat_io`](monitoring-stats#MONITORING-PG-STAT-IO-VIEW) for details.                                                                                   |
+| `pg_stat_replication_slots`   | One row per replication slot, showing statistics about the replication slot's usage. See [`pg_stat_replication_slots`](monitoring-stats#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW) for details.                                                                                 |
+| `pg_stat_slru`                | One row per SLRU, showing statistics of operations. See [`pg_stat_slru`](monitoring-stats#MONITORING-PG-STAT-SLRU-VIEW) for details.                                                                                                                                            |
+| `pg_stat_subscription_stats`  | One row per subscription, showing statistics about errors. See [`pg_stat_subscription_stats`](monitoring-stats#MONITORING-PG-STAT-SUBSCRIPTION-STATS) for details.                                                                                                              |
+| `pg_stat_wal`                 | One row only, showing statistics about WAL activity. See [`pg_stat_wal`](monitoring-stats#MONITORING-PG-STAT-WAL-VIEW) for details.                                                                                                                                             |
+| `pg_stat_all_tables`          | One row for each table in the current database, showing statistics about accesses to that specific table. See [`pg_stat_all_tables`](monitoring-stats#MONITORING-PG-STAT-ALL-TABLES-VIEW) for details.                                                                          |
 | `pg_stat_sys_tables`          | Same as `pg_stat_all_tables`, except that only system tables are shown.                                                                                                                                                                                                              |
 | `pg_stat_user_tables`         | Same as `pg_stat_all_tables`, except that only user tables are shown.                                                                                                                                                                                                                |
 | `pg_stat_xact_all_tables`     | Similar to `pg_stat_all_tables`, but counts actions taken so far within the current transaction (which are *not* yet included in `pg_stat_all_tables` and related views). The columns for numbers of live and dead rows and vacuum and analyze actions are not present in this view. |
 | `pg_stat_xact_sys_tables`     | Same as `pg_stat_xact_all_tables`, except that only system tables are shown.                                                                                                                                                                                                         |
 | `pg_stat_xact_user_tables`    | Same as `pg_stat_xact_all_tables`, except that only user tables are shown.                                                                                                                                                                                                           |
-| `pg_stat_all_indexes`         | One row for each index in the current database, showing statistics about accesses to that specific index. See [`pg_stat_all_indexes`](monitoring-stats#MONITORING-PG-STAT-ALL-INDEXES-VIEW "28.2.19. pg_stat_all_indexes") for details.                                         |
+| `pg_stat_all_indexes`         | One row for each index in the current database, showing statistics about accesses to that specific index. See [`pg_stat_all_indexes`](monitoring-stats#MONITORING-PG-STAT-ALL-INDEXES-VIEW) for details.                                                                        |
 | `pg_stat_sys_indexes`         | Same as `pg_stat_all_indexes`, except that only indexes on system tables are shown.                                                                                                                                                                                                  |
 | `pg_stat_user_indexes`        | Same as `pg_stat_all_indexes`, except that only indexes on user tables are shown.                                                                                                                                                                                                    |
-| `pg_stat_user_functions`      | One row for each tracked function, showing statistics about executions of that function. See [`pg_stat_user_functions`](monitoring-stats#MONITORING-PG-STAT-USER-FUNCTIONS-VIEW "28.2.23. pg_stat_user_functions") for details.                                                 |
+| `pg_stat_user_functions`      | One row for each tracked function, showing statistics about executions of that function. See [`pg_stat_user_functions`](monitoring-stats#MONITORING-PG-STAT-USER-FUNCTIONS-VIEW) for details.                                                                                   |
 | `pg_stat_xact_user_functions` | Similar to `pg_stat_user_functions`, but counts only calls during the current transaction (which are *not* yet included in `pg_stat_user_functions`).                                                                                                                                |
-| `pg_statio_all_tables`        | One row for each table in the current database, showing statistics about I/O on that specific table. See [`pg_statio_all_tables`](monitoring-stats#MONITORING-PG-STATIO-ALL-TABLES-VIEW "28.2.20. pg_statio_all_tables") for details.                                           |
+| `pg_statio_all_tables`        | One row for each table in the current database, showing statistics about I/O on that specific table. See [`pg_statio_all_tables`](monitoring-stats#MONITORING-PG-STATIO-ALL-TABLES-VIEW) for details.                                                                           |
 | `pg_statio_sys_tables`        | Same as `pg_statio_all_tables`, except that only system tables are shown.                                                                                                                                                                                                            |
 | `pg_statio_user_tables`       | Same as `pg_statio_all_tables`, except that only user tables are shown.                                                                                                                                                                                                              |
-| `pg_statio_all_indexes`       | One row for each index in the current database, showing statistics about I/O on that specific index. See [`pg_statio_all_indexes`](monitoring-stats#MONITORING-PG-STATIO-ALL-INDEXES-VIEW "28.2.21. pg_statio_all_indexes") for details.                                        |
+| `pg_statio_all_indexes`       | One row for each index in the current database, showing statistics about I/O on that specific index. See [`pg_statio_all_indexes`](monitoring-stats#MONITORING-PG-STATIO-ALL-INDEXES-VIEW) for details.                                                                         |
 | `pg_statio_sys_indexes`       | Same as `pg_statio_all_indexes`, except that only indexes on system tables are shown.                                                                                                                                                                                                |
 | `pg_statio_user_indexes`      | Same as `pg_statio_all_indexes`, except that only indexes on user tables are shown.                                                                                                                                                                                                  |
-| `pg_statio_all_sequences`     | One row for each sequence in the current database, showing statistics about I/O on that specific sequence. See [`pg_statio_all_sequences`](monitoring-stats#MONITORING-PG-STATIO-ALL-SEQUENCES-VIEW "28.2.22. pg_statio_all_sequences") for details.                            |
+| `pg_statio_all_sequences`     | One row for each sequence in the current database, showing statistics about I/O on that specific sequence. See [`pg_statio_all_sequences`](monitoring-stats#MONITORING-PG-STATIO-ALL-SEQUENCES-VIEW) for details.                                                               |
 | `pg_statio_sys_sequences`     | Same as `pg_statio_all_sequences`, except that only system sequences are shown. (Presently, no system sequences are defined, so this view is always empty.)                                                                                                                          |
 | `pg_statio_user_sequences`    | Same as `pg_statio_all_sequences`, except that only user sequences are shown.                                                                                                                                                                                                        |
 
 \
 
+
 The per-index statistics are particularly useful to determine which indexes are being used and how effective they are.
 
 The `pg_stat_io` and `pg_statio_` set of views are useful for determining the effectiveness of the buffer cache. They can be used to calculate a cache hit ratio. Note that while PostgreSQL's I/O statistics capture most instances in which the kernel was invoked in order to perform I/O, they do not differentiate between data which had to be fetched from disk and that which already resided in the kernel page cache. Users are advised to use the PostgreSQL statistics views in combination with operating system utilities for a more complete picture of their database's I/O performance.
 
+[#id](#MONITORING-PG-STAT-ACTIVITY-VIEW)
+
 ### 28.2.3. `pg_stat_activity` [#](#MONITORING-PG-STAT-ACTIVITY-VIEW)
+
+
 
 The `pg_stat_activity` view will have one row per server process, showing information related to the current activity of that process.
 
+[#id](#PG-STAT-ACTIVITY-VIEW)
+
 **Table 28.3. `pg_stat_activity` View**
 
-| Column TypeDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `datid` `oid`OID of the database this backend is connected to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `datname` `name`Name of the database this backend is connected to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `pid` `integer`Process ID of this backend                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `leader_pid` `integer`Process ID of the parallel group leader if this process is a parallel query worker, or process ID of the leader apply worker if this process is a parallel apply worker. `NULL` indicates that this process is a parallel group leader or leader apply worker, or does not participate in any parallel operation.                                                                                                                                                                                                                                                                                                                                      |
-| `usesysid` `oid`OID of the user logged into this backend                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `usename` `name`Name of the user logged into this backend                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `application_name` `text`Name of the application that is connected to this backend                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `client_addr` `inet`IP address of the client connected to this backend. If this field is null, it indicates either that the client is connected via a Unix socket on the server machine or that this is an internal process such as autovacuum.                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `client_hostname` `text`Host name of the connected client, as reported by a reverse DNS lookup of `client_addr`. This field will only be non-null for IP connections, and only when [log\_hostname](runtime-config-logging#GUC-LOG-HOSTNAME) is enabled.                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `client_port` `integer`TCP port number that the client is using for communication with this backend, or `-1` if a Unix socket is used. If this field is null, it indicates that this is an internal server process.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `backend_start` `timestamp with time zone`Time when this process was started. For client backends, this is the time the client connected to the server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `xact_start` `timestamp with time zone`Time when this process' current transaction was started, or null if no transaction is active. If the current query is the first of its transaction, this column is equal to the `query_start` column.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `query_start` `timestamp with time zone`Time when the currently active query was started, or if `state` is not `active`, when the last query was started                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `state_change` `timestamp with time zone`Time when the `state` was last changed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `wait_event_type` `text`The type of event for which the backend is waiting, if any; otherwise NULL. See [Table 28.4](monitoring-stats#WAIT-EVENT-TABLE "Table 28.4. Wait Event Types").                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `wait_event` `text`Wait event name if backend is currently waiting, otherwise NULL. See [Table 28.5](monitoring-stats#WAIT-EVENT-ACTIVITY-TABLE "Table 28.5. Wait Events of Type Activity") through [Table 28.13](monitoring-stats#WAIT-EVENT-TIMEOUT-TABLE "Table 28.13. Wait Events of Type Timeout").                                                                                                                                                                                                                                                                                                                                                           |
-| `state` `text`Current overall state of this backend. Possible values are:*   `active`: The backend is executing a query.
+| Column TypeDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `datid` `oid`OID of the database this backend is connected to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `datname` `name`Name of the database this backend is connected to                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `pid` `integer`Process ID of this backend                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `leader_pid` `integer`Process ID of the parallel group leader if this process is a parallel query worker, or process ID of the leader apply worker if this process is a parallel apply worker. `NULL` indicates that this process is a parallel group leader or leader apply worker, or does not participate in any parallel operation.                                                                                                                                                                                                                                                                                                                               |
+| `usesysid` `oid`OID of the user logged into this backend                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `usename` `name`Name of the user logged into this backend                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `application_name` `text`Name of the application that is connected to this backend                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `client_addr` `inet`IP address of the client connected to this backend. If this field is null, it indicates either that the client is connected via a Unix socket on the server machine or that this is an internal process such as autovacuum.                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `client_hostname` `text`Host name of the connected client, as reported by a reverse DNS lookup of `client_addr`. This field will only be non-null for IP connections, and only when [log\_hostname](runtime-config-logging#GUC-LOG-HOSTNAME) is enabled.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `client_port` `integer`TCP port number that the client is using for communication with this backend, or `-1` if a Unix socket is used. If this field is null, it indicates that this is an internal server process.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `backend_start` `timestamp with time zone`Time when this process was started. For client backends, this is the time the client connected to the server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `xact_start` `timestamp with time zone`Time when this process' current transaction was started, or null if no transaction is active. If the current query is the first of its transaction, this column is equal to the `query_start` column.                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `query_start` `timestamp with time zone`Time when the currently active query was started, or if `state` is not `active`, when the last query was started                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `state_change` `timestamp with time zone`Time when the `state` was last changed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `wait_event_type` `text`The type of event for which the backend is waiting, if any; otherwise NULL. See [Table 28.4](monitoring-stats#WAIT-EVENT-TABLE).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `wait_event` `text`Wait event name if backend is currently waiting, otherwise NULL. See [Table 28.5](monitoring-stats#WAIT-EVENT-ACTIVITY-TABLE) through [Table 28.13](monitoring-stats#WAIT-EVENT-TIMEOUT-TABLE).                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `state` `text`Current overall state of this backend. Possible values are:- `active`: The backend is executing a query.
 
-* `idle`: The backend is waiting for a new client command.
-* `idle in transaction`: The backend is in a transaction, but is not currently executing a query.
-* `idle in transaction (aborted)`: This state is similar to `idle in transaction`, except one of the statements in the transaction caused an error.
-* `fastpath function call`: The backend is executing a fast-path function.
-* `disabled`: This state is reported if [track\_activities](runtime-config-statistics#GUC-TRACK-ACTIVITIES) is disabled in this backend. |
-| `backend_xid` `xid`Top-level transaction identifier of this backend, if any; see [Section 74.1](transaction-id "74.1. Transactions and Identifiers").                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `backend_xmin` `xid`The current backend's `xmin` horizon.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `query_id` `bigint`Identifier of this backend's most recent query. If `state` is `active` this field shows the identifier of the currently executing query. In all other states, it shows the identifier of last query that was executed. Query identifiers are not computed by default so this field will be null unless [compute\_query\_id](runtime-config-statistics#GUC-COMPUTE-QUERY-ID) parameter is enabled or a third-party module that computes query identifiers is configured.                                                                                                                                                                              |
-| `query` `text`Text of this backend's most recent query. If `state` is `active` this field shows the currently executing query. In all other states, it shows the last query that was executed. By default the query text is truncated at 1024 bytes; this value can be changed via the parameter [track\_activity\_query\_size](runtime-config-statistics#GUC-TRACK-ACTIVITY-QUERY-SIZE).                                                                                                                                                                                                                                                                               |
-| `backend_type` `text`Type of current backend. Possible types are `autovacuum launcher`, `autovacuum worker`, `logical replication launcher`, `logical replication worker`, `parallel worker`, `background writer`, `client backend`, `checkpointer`, `archiver`, `standalone backend`, `startup`, `walreceiver`, `walsender` and `walwriter`. In addition, background workers registered by extensions may have additional types.                                                                                                                                                                                                                                            |
+- `idle`: The backend is waiting for a new client command.
+
+- `idle in transaction`: The backend is in a transaction, but is not currently executing a query.
+
+- `idle in transaction (aborted)`: This state is similar to `idle in transaction`, except one of the statements in the transaction caused an error.
+
+- `fastpath function call`: The backend is executing a fast-path function.
+
+- `disabled`: This state is reported if [track\_activities](runtime-config-statistics#GUC-TRACK-ACTIVITIES) is disabled in this backend. |
+| `backend_xid` `xid`Top-level transaction identifier of this backend, if any; see [Section 74.1](transaction-id).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `backend_xmin` `xid`The current backend's `xmin` horizon.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `query_id` `bigint`Identifier of this backend's most recent query. If `state` is `active` this field shows the identifier of the currently executing query. In all other states, it shows the identifier of last query that was executed. Query identifiers are not computed by default so this field will be null unless [compute\_query\_id](runtime-config-statistics#GUC-COMPUTE-QUERY-ID) parameter is enabled or a third-party module that computes query identifiers is configured.                                                                                                                                                                       |
+| `query` `text`Text of this backend's most recent query. If `state` is `active` this field shows the currently executing query. In all other states, it shows the last query that was executed. By default the query text is truncated at 1024 bytes; this value can be changed via the parameter [track\_activity\_query\_size](runtime-config-statistics#GUC-TRACK-ACTIVITY-QUERY-SIZE).                                                                                                                                                                                                                                                                        |
+| `backend_type` `text`Type of current backend. Possible types are `autovacuum launcher`, `autovacuum worker`, `logical replication launcher`, `logical replication worker`, `parallel worker`, `background writer`, `client backend`, `checkpointer`, `archiver`, `standalone backend`, `startup`, `walreceiver`, `walsender` and `walwriter`. In addition, background workers registered by extensions may have additional types.                                                                                                                                                                                                                                     |
 
 \
+
 
 ### Note
 
 The `wait_event` and `state` columns are independent. If a backend is in the `active` state, it may or may not be `waiting` on some event. If the state is `active` and `wait_event` is non-null, it means that a query is being executed, but is being blocked somewhere in the system.
 
+[#id](#WAIT-EVENT-TABLE)
+
 **Table 28.4. Wait Event Types**
 
-| Wait Event Type | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Activity`      | The server process is idle. This event type indicates a process waiting for activity in its main processing loop. `wait_event` will identify the specific wait point; see [Table 28.5](monitoring-stats#WAIT-EVENT-ACTIVITY-TABLE "Table 28.5. Wait Events of Type Activity").                                                                                                                                                                              |
-| `BufferPin`     | The server process is waiting for exclusive access to a data buffer. Buffer pin waits can be protracted if another process holds an open cursor that last read data from the buffer in question. See [Table 28.6](monitoring-stats#WAIT-EVENT-BUFFERPIN-TABLE "Table 28.6. Wait Events of Type Bufferpin").                                                                                                                                                 |
-| `Client`        | The server process is waiting for activity on a socket connected to a user application. Thus, the server expects something to happen that is independent of its internal processes. `wait_event` will identify the specific wait point; see [Table 28.7](monitoring-stats#WAIT-EVENT-CLIENT-TABLE "Table 28.7. Wait Events of Type Client").                                                                                                                |
-| `Extension`     | The server process is waiting for some condition defined by an extension module. See [Table 28.8](monitoring-stats#WAIT-EVENT-EXTENSION-TABLE "Table 28.8. Wait Events of Type Extension").                                                                                                                                                                                                                                                                 |
-| `IO`            | The server process is waiting for an I/O operation to complete. `wait_event` will identify the specific wait point; see [Table 28.9](monitoring-stats#WAIT-EVENT-IO-TABLE "Table 28.9. Wait Events of Type Io").                                                                                                                                                                                                                                            |
-| `IPC`           | The server process is waiting for some interaction with another server process. `wait_event` will identify the specific wait point; see [Table 28.10](monitoring-stats#WAIT-EVENT-IPC-TABLE "Table 28.10. Wait Events of Type Ipc").                                                                                                                                                                                                                        |
-| `Lock`          | The server process is waiting for a heavyweight lock. Heavyweight locks, also known as lock manager locks or simply locks, primarily protect SQL-visible objects such as tables. However, they are also used to ensure mutual exclusion for certain internal operations such as relation extension. `wait_event` will identify the type of lock awaited; see [Table 28.11](monitoring-stats#WAIT-EVENT-LOCK-TABLE "Table 28.11. Wait Events of Type Lock"). |
-| `LWLock`        | The server process is waiting for a lightweight lock. Most such locks protect a particular data structure in shared memory. `wait_event` will contain a name identifying the purpose of the lightweight lock. (Some locks have specific names; others are part of a group of locks each with a similar purpose.) See [Table 28.12](monitoring-stats#WAIT-EVENT-LWLOCK-TABLE "Table 28.12. Wait Events of Type Lwlock").                                     |
-| `Timeout`       | The server process is waiting for a timeout to expire. `wait_event` will identify the specific wait point; see [Table 28.13](monitoring-stats#WAIT-EVENT-TIMEOUT-TABLE "Table 28.13. Wait Events of Type Timeout").                                                                                                                                                                                                                                         |
+| Wait Event Type | Description                                                                                                                                                                                                                                                                                                                                                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Activity`      | The server process is idle. This event type indicates a process waiting for activity in its main processing loop. `wait_event` will identify the specific wait point; see [Table 28.5](monitoring-stats#WAIT-EVENT-ACTIVITY-TABLE).                                                                                                                                                                                 |
+| `BufferPin`     | The server process is waiting for exclusive access to a data buffer. Buffer pin waits can be protracted if another process holds an open cursor that last read data from the buffer in question. See [Table 28.6](monitoring-stats#WAIT-EVENT-BUFFERPIN-TABLE).                                                                                                                                                     |
+| `Client`        | The server process is waiting for activity on a socket connected to a user application. Thus, the server expects something to happen that is independent of its internal processes. `wait_event` will identify the specific wait point; see [Table 28.7](monitoring-stats#WAIT-EVENT-CLIENT-TABLE).                                                                                                                 |
+| `Extension`     | The server process is waiting for some condition defined by an extension module. See [Table 28.8](monitoring-stats#WAIT-EVENT-EXTENSION-TABLE).                                                                                                                                                                                                                                                                     |
+| `IO`            | The server process is waiting for an I/O operation to complete. `wait_event` will identify the specific wait point; see [Table 28.9](monitoring-stats#WAIT-EVENT-IO-TABLE).                                                                                                                                                                                                                                         |
+| `IPC`           | The server process is waiting for some interaction with another server process. `wait_event` will identify the specific wait point; see [Table 28.10](monitoring-stats#WAIT-EVENT-IPC-TABLE).                                                                                                                                                                                                                       |
+| `Lock`          | The server process is waiting for a heavyweight lock. Heavyweight locks, also known as lock manager locks or simply locks, primarily protect SQL-visible objects such as tables. However, they are also used to ensure mutual exclusion for certain internal operations such as relation extension. `wait_event` will identify the type of lock awaited; see [Table 28.11](monitoring-stats#WAIT-EVENT-LOCK-TABLE). |
+| `LWLock`        | The server process is waiting for a lightweight lock. Most such locks protect a particular data structure in shared memory. `wait_event` will contain a name identifying the purpose of the lightweight lock. (Some locks have specific names; others are part of a group of locks each with a similar purpose.) See [Table 28.12](monitoring-stats#WAIT-EVENT-LWLOCK-TABLE).                                       |
+| `Timeout`       | The server process is waiting for a timeout to expire. `wait_event` will identify the specific wait point; see [Table 28.13](monitoring-stats#WAIT-EVENT-TIMEOUT-TABLE).                                                                                                                                                                                                                                            |
 
 \
+
+
+[#id](#WAIT-EVENT-ACTIVITY-TABLE)
 
 **Table 28.5. Wait Events of Type `Activity`**
 
 | `Activity` Wait Event      | Description                                                                           |
 | -------------------------- | ------------------------------------------------------------------------------------- |
 | `ArchiverMain`             | Waiting in main loop of archiver process.                                             |
-| `AutovacuumMain`           | Waiting in main loop of autovacuum launcher process.                                  |
-| `BgwriterHibernate`        | Waiting in background writer process, hibernating.                                    |
-| `BgwriterMain`             | Waiting in main loop of background writer process.                                    |
+| `AutoVacuumMain`           | Waiting in main loop of autovacuum launcher process.                                  |
+| `BgWriterHibernate`        | Waiting in background writer process, hibernating.                                    |
+| `BgWriterMain`             | Waiting in main loop of background writer process.                                    |
 | `CheckpointerMain`         | Waiting in main loop of checkpointer process.                                         |
 | `LogicalApplyMain`         | Waiting in main loop of logical replication apply process.                            |
 | `LogicalLauncherMain`      | Waiting in main loop of logical replication launcher process.                         |
 | `LogicalParallelApplyMain` | Waiting in main loop of logical replication parallel apply process.                   |
 | `RecoveryWalStream`        | Waiting in main loop of startup process for WAL to arrive, during streaming recovery. |
-| `SysloggerMain`            | Waiting in main loop of syslogger process.                                            |
+| `SysLoggerMain`            | Waiting in main loop of syslogger process.                                            |
 | `WalReceiverMain`          | Waiting in main loop of WAL receiver process.                                         |
 | `WalSenderMain`            | Waiting in main loop of WAL sender process.                                           |
 | `WalWriterMain`            | Waiting in main loop of WAL writer process.                                           |
 
 \
 
-**Table 28.6. Wait Events of Type `Bufferpin`**
+
+[#id](#WAIT-EVENT-BUFFERPIN-TABLE)
+
+**Table 28.6. Wait Events of Type `BufferPin`**
 
 | `BufferPin` Wait Event | Description                                      |
 | ---------------------- | ------------------------------------------------ |
@@ -207,20 +240,26 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 
 \
 
+
+[#id](#WAIT-EVENT-CLIENT-TABLE)
+
 **Table 28.7. Wait Events of Type `Client`**
 
 | `Client` Wait Event       | Description                                                                               |
 | ------------------------- | ----------------------------------------------------------------------------------------- |
 | `ClientRead`              | Waiting to read data from the client.                                                     |
 | `ClientWrite`             | Waiting to write data to the client.                                                      |
-| `GssOpenServer`           | Waiting to read data from the client while establishing a GSSAPI session.                 |
-| `LibpqwalreceiverConnect` | Waiting in WAL receiver to establish connection to remote server.                         |
-| `LibpqwalreceiverReceive` | Waiting in WAL receiver to receive data from remote server.                               |
-| `SslOpenServer`           | Waiting for SSL while attempting connection.                                              |
-| `WalSenderWaitForWal`     | Waiting for WAL to be flushed in WAL sender process.                                      |
+| `GSSOpenServer`           | Waiting to read data from the client while establishing a GSSAPI session.                 |
+| `LibPQWalReceiverConnect` | Waiting in WAL receiver to establish connection to remote server.                         |
+| `LibPQWalReceiverReceive` | Waiting in WAL receiver to receive data from remote server.                               |
+| `SSLOpenServer`           | Waiting for SSL while attempting connection.                                              |
+| `WalSenderWaitForWAL`     | Waiting for WAL to be flushed in WAL sender process.                                      |
 | `WalSenderWriteData`      | Waiting for any activity when processing replies from WAL receiver in WAL sender process. |
 
 \
+
+
+[#id](#WAIT-EVENT-EXTENSION-TABLE)
 
 **Table 28.8. Wait Events of Type `Extension`**
 
@@ -230,16 +269,19 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 
 \
 
-**Table 28.9. Wait Events of Type `Io`**
+
+[#id](#WAIT-EVENT-IO-TABLE)
+
+**Table 28.9. Wait Events of Type `IO`**
 
 | `IO` Wait Event                | Description                                                                                        |
 | ------------------------------ | -------------------------------------------------------------------------------------------------- |
-| `BasebackupRead`               | Waiting for base backup to read from a file.                                                       |
-| `BasebackupSync`               | Waiting for data written by a base backup to reach durable storage.                                |
-| `BasebackupWrite`              | Waiting for base backup to write to a file.                                                        |
-| `BuffileRead`                  | Waiting for a read from a buffered file.                                                           |
-| `BuffileTruncate`              | Waiting for a buffered file to be truncated.                                                       |
-| `BuffileWrite`                 | Waiting for a write to a buffered file.                                                            |
+| `BaseBackupRead`               | Waiting for base backup to read from a file.                                                       |
+| `BaseBackupSync`               | Waiting for data written by a base backup to reach durable storage.                                |
+| `BaseBackupWrite`              | Waiting for base backup to write to a file.                                                        |
+| `BufFileRead`                  | Waiting for a read from a buffered file.                                                           |
+| `BufFileTruncate`              | Waiting for a buffered file to be truncated.                                                       |
+| `BufFileWrite`                 | Waiting for a write to a buffered file.                                                            |
 | `ControlFileRead`              | Waiting for a read from the `pg_control` file.                                                     |
 | `ControlFileSync`              | Waiting for the `pg_control` file to reach durable storage.                                        |
 | `ControlFileSyncUpdate`        | Waiting for an update to the `pg_control` file to reach durable storage.                           |
@@ -247,6 +289,8 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `ControlFileWriteUpdate`       | Waiting for a write to update the `pg_control` file.                                               |
 | `CopyFileRead`                 | Waiting for a read during a file copy operation.                                                   |
 | `CopyFileWrite`                | Waiting for a write during a file copy operation.                                                  |
+| `DSMAllocate`                  | Waiting for a dynamic shared memory segment to be allocated.                                       |
+| `DSMFillZeroWrite`             | Waiting to fill a dynamic shared memory backing file with zeroes.                                  |
 | `DataFileExtend`               | Waiting for a relation data file to be extended.                                                   |
 | `DataFileFlush`                | Waiting for a relation data file to reach durable storage.                                         |
 | `DataFileImmediateSync`        | Waiting for an immediate synchronization of a relation data file to durable storage.               |
@@ -255,15 +299,13 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `DataFileSync`                 | Waiting for changes to a relation data file to reach durable storage.                              |
 | `DataFileTruncate`             | Waiting for a relation data file to be truncated.                                                  |
 | `DataFileWrite`                | Waiting for a write to a relation data file.                                                       |
-| `DsmAllocate`                  | Waiting for a dynamic shared memory segment to be allocated.                                       |
-| `DsmFillZeroWrite`             | Waiting to fill a dynamic shared memory backing file with zeroes.                                  |
-| `LockFileAddtodatadirRead`     | Waiting for a read while adding a line to the data directory lock file.                            |
-| `LockFileAddtodatadirSync`     | Waiting for data to reach durable storage while adding a line to the data directory lock file.     |
-| `LockFileAddtodatadirWrite`    | Waiting for a write while adding a line to the data directory lock file.                           |
+| `LockFileAddToDataDirRead`     | Waiting for a read while adding a line to the data directory lock file.                            |
+| `LockFileAddToDataDirSync`     | Waiting for data to reach durable storage while adding a line to the data directory lock file.     |
+| `LockFileAddToDataDirWrite`    | Waiting for a write while adding a line to the data directory lock file.                           |
 | `LockFileCreateRead`           | Waiting to read while creating the data directory lock file.                                       |
 | `LockFileCreateSync`           | Waiting for data to reach durable storage while creating the data directory lock file.             |
 | `LockFileCreateWrite`          | Waiting for a write while creating the data directory lock file.                                   |
-| `LockFileRecheckdatadirRead`   | Waiting for a read during recheck of the data directory lock file.                                 |
+| `LockFileReCheckDataDirRead`   | Waiting for a read during recheck of the data directory lock file.                                 |
 | `LogicalRewriteCheckpointSync` | Waiting for logical rewrite mappings to reach durable storage during a checkpoint.                 |
 | `LogicalRewriteMappingSync`    | Waiting for mapping data to reach durable storage during a logical rewrite.                        |
 | `LogicalRewriteMappingWrite`   | Waiting for a write of mapping data during a logical rewrite.                                      |
@@ -280,10 +322,10 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `ReplicationSlotRestoreSync`   | Waiting for a replication slot control file to reach durable storage while restoring it to memory. |
 | `ReplicationSlotSync`          | Waiting for a replication slot control file to reach durable storage.                              |
 | `ReplicationSlotWrite`         | Waiting for a write to a replication slot control file.                                            |
-| `SlruFlushSync`                | Waiting for SLRU data to reach durable storage during a checkpoint or database shutdown.           |
-| `SlruRead`                     | Waiting for a read of an SLRU page.                                                                |
-| `SlruSync`                     | Waiting for SLRU data to reach durable storage following a page write.                             |
-| `SlruWrite`                    | Waiting for a write of an SLRU page.                                                               |
+| `SLRUFlushSync`                | Waiting for SLRU data to reach durable storage during a checkpoint or database shutdown.           |
+| `SLRURead`                     | Waiting for a read of an SLRU page.                                                                |
+| `SLRUSync`                     | Waiting for SLRU data to reach durable storage following a page write.                             |
+| `SLRUWrite`                    | Waiting for a write of an SLRU page.                                                               |
 | `SnapbuildRead`                | Waiting for a read of a serialized historical catalog snapshot.                                    |
 | `SnapbuildSync`                | Waiting for a serialized historical catalog snapshot to reach durable storage.                     |
 | `SnapbuildWrite`               | Waiting for a write of a serialized historical catalog snapshot.                                   |
@@ -296,22 +338,25 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `TwophaseFileSync`             | Waiting for a two phase state file to reach durable storage.                                       |
 | `TwophaseFileWrite`            | Waiting for a write of a two phase state file.                                                     |
 | `VersionFileWrite`             | Waiting for the version file to be written while creating a database.                              |
-| `WalsenderTimelineHistoryRead` | Waiting for a read from a timeline history file during a walsender timeline command.               |
-| `WalBootstrapSync`             | Waiting for WAL to reach durable storage during bootstrapping.                                     |
-| `WalBootstrapWrite`            | Waiting for a write of a WAL page during bootstrapping.                                            |
-| `WalCopyRead`                  | Waiting for a read when creating a new WAL segment by copying an existing one.                     |
-| `WalCopySync`                  | Waiting for a new WAL segment created by copying an existing one to reach durable storage.         |
-| `WalCopyWrite`                 | Waiting for a write when creating a new WAL segment by copying an existing one.                    |
-| `WalInitSync`                  | Waiting for a newly initialized WAL file to reach durable storage.                                 |
-| `WalInitWrite`                 | Waiting for a write while initializing a new WAL file.                                             |
-| `WalRead`                      | Waiting for a read from a WAL file.                                                                |
-| `WalSync`                      | Waiting for a WAL file to reach durable storage.                                                   |
-| `WalSyncMethodAssign`          | Waiting for data to reach durable storage while assigning a new WAL sync method.                   |
-| `WalWrite`                     | Waiting for a write to a WAL file.                                                                 |
+| `WALBootstrapSync`             | Waiting for WAL to reach durable storage during bootstrapping.                                     |
+| `WALBootstrapWrite`            | Waiting for a write of a WAL page during bootstrapping.                                            |
+| `WALCopyRead`                  | Waiting for a read when creating a new WAL segment by copying an existing one.                     |
+| `WALCopySync`                  | Waiting for a new WAL segment created by copying an existing one to reach durable storage.         |
+| `WALCopyWrite`                 | Waiting for a write when creating a new WAL segment by copying an existing one.                    |
+| `WALInitSync`                  | Waiting for a newly initialized WAL file to reach durable storage.                                 |
+| `WALInitWrite`                 | Waiting for a write while initializing a new WAL file.                                             |
+| `WALRead`                      | Waiting for a read from a WAL file.                                                                |
+| `WALSenderTimelineHistoryRead` | Waiting for a read from a timeline history file during a walsender timeline command.               |
+| `WALSync`                      | Waiting for a WAL file to reach durable storage.                                                   |
+| `WALSyncMethodAssign`          | Waiting for data to reach durable storage while assigning a new WAL sync method.                   |
+| `WALWrite`                     | Waiting for a write to a WAL file.                                                                 |
 
 \
 
-**Table 28.10. Wait Events of Type `Ipc`**
+
+[#id](#WAIT-EVENT-IPC-TABLE)
+
+**Table 28.10. Wait Events of Type `IPC`**
 
 | `IPC` Wait Event                  | Description                                                                                               |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------- |
@@ -320,12 +365,10 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `ArchiveCommand`                  | Waiting for [archive\_command](runtime-config-wal#GUC-ARCHIVE-COMMAND) to complete.                  |
 | `BackendTermination`              | Waiting for the termination of another backend.                                                           |
 | `BackupWaitWalArchive`            | Waiting for WAL files required for a backup to be successfully archived.                                  |
-| `BgworkerShutdown`                | Waiting for background worker to shut down.                                                               |
-| `BgworkerStartup`                 | Waiting for background worker to start up.                                                                |
+| `BgWorkerShutdown`                | Waiting for background worker to shut down.                                                               |
+| `BgWorkerStartup`                 | Waiting for background worker to start up.                                                                |
 | `BtreePage`                       | Waiting for the page number needed to continue a parallel B-tree scan to become available.                |
-| `BufferIo`                        | Waiting for buffer I/O to complete.                                                                       |
-| `CheckpointDelayComplete`         | Waiting for a backend that blocks a checkpoint from completing.                                           |
-| `CheckpointDelayStart`            | Waiting for a backend that blocks a checkpoint from starting.                                             |
+| `BufferIO`                        | Waiting for buffer I/O to complete.                                                                       |
 | `CheckpointDone`                  | Waiting for a checkpoint to complete.                                                                     |
 | `CheckpointStart`                 | Waiting for a checkpoint to start.                                                                        |
 | `ExecuteGather`                   | Waiting for activity from a child process while executing a `Gather` plan node.                           |
@@ -355,7 +398,7 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `ParallelBitmapScan`              | Waiting for parallel bitmap scan to become initialized.                                                   |
 | `ParallelCreateIndexScan`         | Waiting for parallel `CREATE INDEX` workers to finish heap scan.                                          |
 | `ParallelFinish`                  | Waiting for parallel workers to finish computing.                                                         |
-| `ProcarrayGroupUpdate`            | Waiting for the group leader to clear the transaction ID at end of a parallel operation.                  |
+| `ProcArrayGroupUpdate`            | Waiting for the group leader to clear the transaction ID at end of a parallel operation.                  |
 | `ProcSignalBarrier`               | Waiting for a barrier event to be processed by all backends.                                              |
 | `Promote`                         | Waiting for standby promotion.                                                                            |
 | `RecoveryConflictSnapshot`        | Waiting for recovery conflict resolution for a vacuum cleanup.                                            |
@@ -373,26 +416,32 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 
 \
 
+
+[#id](#WAIT-EVENT-LOCK-TABLE)
+
 **Table 28.11. Wait Events of Type `Lock`**
 
-| `Lock` Wait Event  | Description                                                                                                                     |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `advisory`         | Waiting to acquire an advisory user lock.                                                                                       |
-| `applytransaction` | Waiting to acquire a lock on a remote transaction being applied by a logical replication subscriber.                            |
-| `extend`           | Waiting to extend a relation.                                                                                                   |
-| `frozenid`         | Waiting to update `pg_database`.`datfrozenxid` and `pg_database`.`datminmxid`.                                                  |
-| `object`           | Waiting to acquire a lock on a non-relation database object.                                                                    |
-| `page`             | Waiting to acquire a lock on a page of a relation.                                                                              |
-| `relation`         | Waiting to acquire a lock on a relation.                                                                                        |
-| `spectoken`        | Waiting to acquire a speculative insertion lock.                                                                                |
-| `transactionid`    | Waiting for a transaction to finish.                                                                                            |
-| `tuple`            | Waiting to acquire a lock on a tuple.                                                                                           |
-| `userlock`         | Waiting to acquire a user lock.                                                                                                 |
-| `virtualxid`       | Waiting to acquire a virtual transaction ID lock; see [Section 74.1](transaction-id "74.1. Transactions and Identifiers"). |
+| `Lock` Wait Event  | Description                                                                                          |
+| ------------------ | ---------------------------------------------------------------------------------------------------- |
+| `advisory`         | Waiting to acquire an advisory user lock.                                                            |
+| `applytransaction` | Waiting to acquire a lock on a remote transaction being applied by a logical replication subscriber. |
+| `extend`           | Waiting to extend a relation.                                                                        |
+| `frozenid`         | Waiting to update `pg_database`.`datfrozenxid` and `pg_database`.`datminmxid`.                       |
+| `object`           | Waiting to acquire a lock on a non-relation database object.                                         |
+| `page`             | Waiting to acquire a lock on a page of a relation.                                                   |
+| `relation`         | Waiting to acquire a lock on a relation.                                                             |
+| `spectoken`        | Waiting to acquire a speculative insertion lock.                                                     |
+| `transactionid`    | Waiting for a transaction to finish.                                                                 |
+| `tuple`            | Waiting to acquire a lock on a tuple.                                                                |
+| `userlock`         | Waiting to acquire a user lock.                                                                      |
+| `virtualxid`       | Waiting to acquire a virtual transaction ID lock; see [Section 74.1](transaction-id).           |
 
 \
 
-**Table 28.12. Wait Events of Type `Lwlock`**
+
+[#id](#WAIT-EVENT-LWLOCK-TABLE)
+
+**Table 28.12. Wait Events of Type `LWLock`**
 
 | `LWLock` Wait Event          | Description                                                                                                                   |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -426,6 +475,7 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `NotifyQueueTail`            | Waiting to update limit on `NOTIFY` message storage.                                                                          |
 | `NotifySLRU`                 | Waiting to access the `NOTIFY` message SLRU cache.                                                                            |
 | `OidGen`                     | Waiting to allocate a new OID.                                                                                                |
+| `OldSnapshotTimeMap`         | Waiting to read or update old snapshot control information.                                                                   |
 | `ParallelAppend`             | Waiting to choose the next subplan during Parallel Append plan execution.                                                     |
 | `ParallelHashJoin`           | Waiting to synchronize workers during Parallel Hash Join plan execution.                                                      |
 | `ParallelQueryDSA`           | Waiting for parallel query dynamic shared memory allocation.                                                                  |
@@ -433,9 +483,9 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `PerSessionRecordType`       | Waiting to access a parallel query's information about composite types.                                                       |
 | `PerSessionRecordTypmod`     | Waiting to access a parallel query's information about type modifiers that identify anonymous record types.                   |
 | `PerXactPredicateList`       | Waiting to access the list of predicate locks held by the current serializable transaction during a parallel query.           |
-| `PgStatsData`                | Waiting for shared memory stats data access.                                                                                  |
-| `PgStatsDSA`                 | Waiting for stats dynamic shared memory allocator access.                                                                     |
-| `PgStatsHash`                | Waiting for stats shared memory hash table access.                                                                            |
+| `PgStatsData`                | Waiting for shared memory stats data access                                                                                   |
+| `PgStatsDSA`                 | Waiting for stats dynamic shared memory allocator access                                                                      |
+| `PgStatsHash`                | Waiting for stats shared memory hash table access                                                                             |
 | `PredicateLockManager`       | Waiting to access predicate lock information used by serializable transactions.                                               |
 | `ProcArray`                  | Waiting to access the shared per-process data structures (typically, to get a snapshot or report a session's transaction ID). |
 | `RelationMapping`            | Waiting to read or update a `pg_filenode.map` file (used to track the filenode assignments of certain system catalogs).       |
@@ -461,7 +511,6 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `SyncScan`                   | Waiting to select the starting location of a synchronized table scan.                                                         |
 | `TablespaceCreate`           | Waiting to create or drop a tablespace.                                                                                       |
 | `TwoPhaseState`              | Waiting to read or update the state of prepared transactions.                                                                 |
-| `WaitEventExtension`         | Waiting to read or update custom wait events information for extensions.                                                      |
 | `WALBufMapping`              | Waiting to replace a page in WAL buffers.                                                                                     |
 | `WALInsert`                  | Waiting to insert WAL data into a memory buffer.                                                                              |
 | `WALWrite`                   | Waiting for WAL buffers to be written to disk.                                                                                |
@@ -472,6 +521,13 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 | `XidGen`                     | Waiting to allocate a new transaction ID.                                                                                     |
 
 \
+
+
+### Note
+
+Extensions can add `LWLock` types to the list shown in [Table 28.12](monitoring-stats#WAIT-EVENT-LWLOCK-TABLE). In some cases, the name assigned by an extension will not be available in all server processes; so an `LWLock` wait event might be reported as just “`extension`” rather than the extension-assigned name.
+
+[#id](#WAIT-EVENT-TIMEOUT-TABLE)
 
 **Table 28.13. Wait Events of Type `Timeout`**
 
@@ -489,10 +545,10 @@ The `wait_event` and `state` columns are independent. If a backend is in the `ac
 
 \
 
-Here are examples of how wait events can be viewed:
+
+Here is an example of how wait events can be viewed:
 
 ```
-
 SELECT pid, wait_event_type, wait_event FROM pg_stat_activity WHERE wait_event is NOT NULL;
  pid  | wait_event_type | wait_event
 ------+-----------------+------------
@@ -501,61 +557,57 @@ SELECT pid, wait_event_type, wait_event FROM pg_stat_activity WHERE wait_event i
 (2 rows)
 ```
 
-```
-
-SELECT a.pid, a.wait_event, w.description
-  FROM pg_stat_activity a JOIN
-       pg_wait_events w ON (a.wait_event_type = w.type AND
-                            a.wait_event = w.name)
-  WHERE a.wait_event is NOT NULL and a.state = 'active';
--[ RECORD 1 ]------------------------------------------------------​------------
-pid         | 686674
-wait_event  | WALInitSync
-description | Waiting for a newly initialized WAL file to reach durable storage
-```
-
-### Note
-
-Extensions can add `Extension` and `LWLock` events to the lists shown in [Table 28.8](monitoring-stats#WAIT-EVENT-EXTENSION-TABLE "Table 28.8. Wait Events of Type Extension") and [Table 28.12](monitoring-stats#WAIT-EVENT-LWLOCK-TABLE "Table 28.12. Wait Events of Type Lwlock"). In some cases, the name of an `LWLock` assigned by an extension will not be available in all server processes. It might be reported as just “`extension`” rather than the extension-assigned name.
+[#id](#MONITORING-PG-STAT-REPLICATION-VIEW)
 
 ### 28.2.4. `pg_stat_replication` [#](#MONITORING-PG-STAT-REPLICATION-VIEW)
 
+
+
 The `pg_stat_replication` view will contain one row per WAL sender process, showing statistics about replication to that sender's connected standby server. Only directly connected standbys are listed; no information is available about downstream standby servers.
+
+[#id](#PG-STAT-REPLICATION-VIEW)
 
 **Table 28.14. `pg_stat_replication` View**
 
-| Column TypeDescription                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pid` `integer`Process ID of a WAL sender process                                                                                                                                                                                                                                                                                                                                                                       |
-| `usesysid` `oid`OID of the user logged into this WAL sender process                                                                                                                                                                                                                                                                                                                                                     |
-| `usename` `name`Name of the user logged into this WAL sender process                                                                                                                                                                                                                                                                                                                                                    |
-| `application_name` `text`Name of the application that is connected to this WAL sender                                                                                                                                                                                                                                                                                                                                   |
-| `client_addr` `inet`IP address of the client connected to this WAL sender. If this field is null, it indicates that the client is connected via a Unix socket on the server machine.                                                                                                                                                                                                                                    |
-| `client_hostname` `text`Host name of the connected client, as reported by a reverse DNS lookup of `client_addr`. This field will only be non-null for IP connections, and only when [log\_hostname](runtime-config-logging#GUC-LOG-HOSTNAME) is enabled.                                                                                                                                                           |
-| `client_port` `integer`TCP port number that the client is using for communication with this WAL sender, or `-1` if a Unix socket is used                                                                                                                                                                                                                                                                                |
-| `backend_start` `timestamp with time zone`Time when this process was started, i.e., when the client connected to this WAL sender                                                                                                                                                                                                                                                                                        |
-| `backend_xmin` `xid`This standby's `xmin` horizon reported by [hot\_standby\_feedback](runtime-config-replication#GUC-HOT-STANDBY-FEEDBACK).                                                                                                                                                                                                                                                                       |
-| `state` `text`Current WAL sender state. Possible values are:*   `startup`: This WAL sender is starting up.
+| Column TypeDescription                                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pid` `integer`Process ID of a WAL sender process                                                                                                                                                                                                                                                                                                                                                                 |
+| `usesysid` `oid`OID of the user logged into this WAL sender process                                                                                                                                                                                                                                                                                                                                               |
+| `usename` `name`Name of the user logged into this WAL sender process                                                                                                                                                                                                                                                                                                                                              |
+| `application_name` `text`Name of the application that is connected to this WAL sender                                                                                                                                                                                                                                                                                                                             |
+| `client_addr` `inet`IP address of the client connected to this WAL sender. If this field is null, it indicates that the client is connected via a Unix socket on the server machine.                                                                                                                                                                                                                              |
+| `client_hostname` `text`Host name of the connected client, as reported by a reverse DNS lookup of `client_addr`. This field will only be non-null for IP connections, and only when [log\_hostname](runtime-config-logging#GUC-LOG-HOSTNAME) is enabled.                                                                                                                                                     |
+| `client_port` `integer`TCP port number that the client is using for communication with this WAL sender, or `-1` if a Unix socket is used                                                                                                                                                                                                                                                                          |
+| `backend_start` `timestamp with time zone`Time when this process was started, i.e., when the client connected to this WAL sender                                                                                                                                                                                                                                                                                  |
+| `backend_xmin` `xid`This standby's `xmin` horizon reported by [hot\_standby\_feedback](runtime-config-replication#GUC-HOT-STANDBY-FEEDBACK).                                                                                                                                                                                                                                                                 |
+| `state` `text`Current WAL sender state. Possible values are:- `startup`: This WAL sender is starting up.
 
-* `catchup`: This WAL sender's connected standby is catching up with the primary.
-* `streaming`: This WAL sender is streaming changes after its connected standby server has caught up with the primary.
-* `backup`: This WAL sender is sending a backup.
-* `stopping`: This WAL sender is stopping. |
-| `sent_lsn` `pg_lsn`Last write-ahead log location sent on this connection                                                                                                                                                                                                                                                                                                                                                |
-| `write_lsn` `pg_lsn`Last write-ahead log location written to disk by this standby server                                                                                                                                                                                                                                                                                                                                |
-| `flush_lsn` `pg_lsn`Last write-ahead log location flushed to disk by this standby server                                                                                                                                                                                                                                                                                                                                |
-| `replay_lsn` `pg_lsn`Last write-ahead log location replayed into the database on this standby server                                                                                                                                                                                                                                                                                                                    |
-| `write_lag` `interval`Time elapsed between flushing recent WAL locally and receiving notification that this standby server has written it (but not yet flushed it or applied it). This can be used to gauge the delay that `synchronous_commit` level `remote_write` incurred while committing if this server was configured as a synchronous standby.                                                                  |
-| `flush_lag` `interval`Time elapsed between flushing recent WAL locally and receiving notification that this standby server has written and flushed it (but not yet applied it). This can be used to gauge the delay that `synchronous_commit` level `on` incurred while committing if this server was configured as a synchronous standby.                                                                              |
-| `replay_lag` `interval`Time elapsed between flushing recent WAL locally and receiving notification that this standby server has written, flushed and applied it. This can be used to gauge the delay that `synchronous_commit` level `remote_apply` incurred while committing if this server was configured as a synchronous standby.                                                                                   |
-| `sync_priority` `integer`Priority of this standby server for being chosen as the synchronous standby in a priority-based synchronous replication. This has no effect in a quorum-based synchronous replication.                                                                                                                                                                                                         |
-| `sync_state` `text`Synchronous state of this standby server. Possible values are:*   `async`: This standby server is asynchronous.
-* `potential`: This standby server is now asynchronous, but can potentially become synchronous if one of current synchronous ones fails.
-* `sync`: This standby server is synchronous.
-* `quorum`: This standby server is considered as a candidate for quorum standbys.       |
-| `reply_time` `timestamp with time zone`Send time of last reply message received from standby server                                                                                                                                                                                                                                                                                                                     |
+- `catchup`: This WAL sender's connected standby is catching up with the primary.
+
+- `streaming`: This WAL sender is streaming changes after its connected standby server has caught up with the primary.
+
+- `backup`: This WAL sender is sending a backup.
+
+- `stopping`: This WAL sender is stopping. |
+| `sent_lsn` `pg_lsn`Last write-ahead log location sent on this connection                                                                                                                                                                                                                                                                                                                                          |
+| `write_lsn` `pg_lsn`Last write-ahead log location written to disk by this standby server                                                                                                                                                                                                                                                                                                                          |
+| `flush_lsn` `pg_lsn`Last write-ahead log location flushed to disk by this standby server                                                                                                                                                                                                                                                                                                                          |
+| `replay_lsn` `pg_lsn`Last write-ahead log location replayed into the database on this standby server                                                                                                                                                                                                                                                                                                              |
+| `write_lag` `interval`Time elapsed between flushing recent WAL locally and receiving notification that this standby server has written it (but not yet flushed it or applied it). This can be used to gauge the delay that `synchronous_commit` level `remote_write` incurred while committing if this server was configured as a synchronous standby.                                                            |
+| `flush_lag` `interval`Time elapsed between flushing recent WAL locally and receiving notification that this standby server has written and flushed it (but not yet applied it). This can be used to gauge the delay that `synchronous_commit` level `on` incurred while committing if this server was configured as a synchronous standby.                                                                        |
+| `replay_lag` `interval`Time elapsed between flushing recent WAL locally and receiving notification that this standby server has written, flushed and applied it. This can be used to gauge the delay that `synchronous_commit` level `remote_apply` incurred while committing if this server was configured as a synchronous standby.                                                                             |
+| `sync_priority` `integer`Priority of this standby server for being chosen as the synchronous standby in a priority-based synchronous replication. This has no effect in a quorum-based synchronous replication.                                                                                                                                                                                                   |
+| `sync_state` `text`Synchronous state of this standby server. Possible values are:- `async`: This standby server is asynchronous.
+
+- `potential`: This standby server is now asynchronous, but can potentially become synchronous if one of current synchronous ones fails.
+
+- `sync`: This standby server is synchronous.
+
+- `quorum`: This standby server is considered as a candidate for quorum standbys.      |
+| `reply_time` `timestamp with time zone`Send time of last reply message received from standby server                                                                                                                                                                                                                                                                                                               |
 
 \
+
 
 The lag times reported in the `pg_stat_replication` view are measurements of the time taken for recent WAL to be written, flushed and replayed and for the sender to know about it. These times represent the commit delay that was (or would have been) introduced by each synchronous commit level, if the remote server was configured as a synchronous standby. For an asynchronous standby, the `replay_lag` column approximates the delay before recent transactions became visible to queries. If the standby server has entirely caught up with the sending server and there is no more WAL activity, the most recently measured lag times will continue to be displayed for a short time and then show NULL.
 
@@ -565,9 +617,15 @@ Lag times work automatically for physical replication. Logical decoding plugins 
 
 The reported lag times are not predictions of how long it will take for the standby to catch up with the sending server assuming the current rate of replay. Such a system would show similar times while new WAL is being generated, but would differ when the sender becomes idle. In particular, when the standby has caught up completely, `pg_stat_replication` shows the time taken to write, flush and replay the most recent reported WAL location rather than zero as some users might expect. This is consistent with the goal of measuring synchronous commit and transaction visibility delays for recent write transactions. To reduce confusion for users expecting a different model of lag, the lag columns revert to NULL after a short time on a fully replayed idle system. Monitoring systems should choose whether to represent this as missing data, zero or continue to display the last known value.
 
+[#id](#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW)
+
 ### 28.2.5. `pg_stat_replication_slots` [#](#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW)
 
+
+
 The `pg_stat_replication_slots` view will contain one row per logical replication slot, showing statistics about its usage.
+
+[#id](#PG-STAT-REPLICATION-SLOTS-VIEW)
 
 **Table 28.15. `pg_stat_replication_slots` View**
 
@@ -584,9 +642,15 @@ The `pg_stat_replication_slots` view will contain one row per logical replicatio
 | `total_bytes``bigint`Amount of transaction data decoded for sending transactions to the decoding output plugin while decoding changes from WAL for this slot. Note that this includes data that is streamed and/or spilled.                                                                                                                                                             |
 | `stats_reset` `timestamp with time zone`Time at which these statistics were last reset                                                                                                                                                                                                                                                                                                  |
 
+[#id](#MONITORING-PG-STAT-WAL-RECEIVER-VIEW)
+
 ### 28.2.6. `pg_stat_wal_receiver` [#](#MONITORING-PG-STAT-WAL-RECEIVER-VIEW)
 
+
+
 The `pg_stat_wal_receiver` view will contain only one row, showing statistics about the WAL receiver from that receiver's connected server.
+
+[#id](#PG-STAT-WAL-RECEIVER-VIEW)
 
 **Table 28.16. `pg_stat_wal_receiver` View**
 
@@ -608,9 +672,15 @@ The `pg_stat_wal_receiver` view will contain only one row, showing statistics ab
 | `sender_port` `integer`Port number of the PostgreSQL instance this WAL receiver is connected to.                                                                                                                                                                                              |
 | `conninfo` `text`Connection string used by this WAL receiver, with security-sensitive fields obfuscated.                                                                                                                                                                                      |
 
+[#id](#MONITORING-PG-STAT-RECOVERY-PREFETCH)
+
 ### 28.2.7. `pg_stat_recovery_prefetch` [#](#MONITORING-PG-STAT-RECOVERY-PREFETCH)
 
+
+
 The `pg_stat_recovery_prefetch` view will contain only one row. The columns `wal_distance`, `block_distance` and `io_depth` show current values, and the other columns show cumulative counters that can be reset with the `pg_stat_reset_shared` function.
+
+[#id](#PG-STAT-RECOVERY-PREFETCH-VIEW)
 
 **Table 28.17. `pg_stat_recovery_prefetch` View**
 
@@ -627,27 +697,38 @@ The `pg_stat_recovery_prefetch` view will contain only one row. The columns `wal
 | `block_distance` `int`How many blocks ahead the prefetcher is looking                                |
 | `io_depth` `int`How many prefetches have been initiated but are not yet known to have completed      |
 
+[#id](#MONITORING-PG-STAT-SUBSCRIPTION)
+
 ### 28.2.8. `pg_stat_subscription` [#](#MONITORING-PG-STAT-SUBSCRIPTION)
+
+
+
+[#id](#PG-STAT-SUBSCRIPTION)
 
 **Table 28.18. `pg_stat_subscription` View**
 
-| Column TypeDescription                                                                                                                                                                  |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `subid` `oid`OID of the subscription                                                                                                                                                    |
-| `subname` `name`Name of the subscription                                                                                                                                                |
-| `worker_type` `text`Type of the subscription worker process. Possible types are `apply`, `parallel apply`, and `table synchronization`.                                                 |
-| `pid` `integer`Process ID of the subscription worker process                                                                                                                            |
-| `leader_pid` `integer`Process ID of the leader apply worker if this process is a parallel apply worker; NULL if this process is a leader apply worker or a table synchronization worker |
-| `relid` `oid`OID of the relation that the worker is synchronizing; NULL for the leader apply worker and parallel apply workers                                                          |
-| `received_lsn` `pg_lsn`Last write-ahead log location received, the initial value of this field being 0; NULL for parallel apply workers                                                 |
-| `last_msg_send_time` `timestamp with time zone`Send time of last message received from origin WAL sender; NULL for parallel apply workers                                               |
-| `last_msg_receipt_time` `timestamp with time zone`Receipt time of last message received from origin WAL sender; NULL for parallel apply workers                                         |
-| `latest_end_lsn` `pg_lsn`Last write-ahead log location reported to origin WAL sender; NULL for parallel apply workers                                                                   |
-| `latest_end_time` `timestamp with time zone`Time of last write-ahead log location reported to origin WAL sender; NULL for parallel apply workers                                        |
+| Column TypeDescription                                                                                                                                                            |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `subid` `oid`OID of the subscription                                                                                                                                              |
+| `subname` `name`Name of the subscription                                                                                                                                          |
+| `pid` `integer`Process ID of the subscription worker process                                                                                                                      |
+| `leader_pid` `integer`Process ID of the leader apply worker if this process is a parallel apply worker; NULL if this process is a leader apply worker or a synchronization worker |
+| `relid` `oid`OID of the relation that the worker is synchronizing; NULL for the leader apply worker and parallel apply workers                                                    |
+| `received_lsn` `pg_lsn`Last write-ahead log location received, the initial value of this field being 0; NULL for parallel apply workers                                           |
+| `last_msg_send_time` `timestamp with time zone`Send time of last message received from origin WAL sender; NULL for parallel apply workers                                         |
+| `last_msg_receipt_time` `timestamp with time zone`Receipt time of last message received from origin WAL sender; NULL for parallel apply workers                                   |
+| `latest_end_lsn` `pg_lsn`Last write-ahead log location reported to origin WAL sender; NULL for parallel apply workers                                                             |
+| `latest_end_time` `timestamp with time zone`Time of last write-ahead log location reported to origin WAL sender; NULL for parallel apply workers                                  |
+
+[#id](#MONITORING-PG-STAT-SUBSCRIPTION-STATS)
 
 ### 28.2.9. `pg_stat_subscription_stats` [#](#MONITORING-PG-STAT-SUBSCRIPTION-STATS)
 
+
+
 The `pg_stat_subscription_stats` view will contain one row per subscription.
+
+[#id](#PG-STAT-SUBSCRIPTION-STATS)
 
 **Table 28.19. `pg_stat_subscription_stats` View**
 
@@ -659,9 +740,15 @@ The `pg_stat_subscription_stats` view will contain one row per subscription.
 | `sync_error_count` `bigint`Number of times an error occurred during the initial table synchronization |
 | `stats_reset` `timestamp with time zone`Time at which these statistics were last reset                |
 
+[#id](#MONITORING-PG-STAT-SSL-VIEW)
+
 ### 28.2.10. `pg_stat_ssl` [#](#MONITORING-PG-STAT-SSL-VIEW)
 
+
+
 The `pg_stat_ssl` view will contain one row per backend or WAL sender process, showing statistics about SSL usage on this connection. It can be joined to `pg_stat_activity` or `pg_stat_replication` on the `pid` column to get more details about the connection.
+
+[#id](#PG-STAT-SSL-VIEW)
 
 **Table 28.20. `pg_stat_ssl` View**
 
@@ -676,9 +763,15 @@ The `pg_stat_ssl` view will contain one row per backend or WAL sender process, s
 | `client_serial` `numeric`Serial number of the client certificate, or NULL if no client certificate was supplied or if SSL is not in use on this connection. The combination of certificate serial number and certificate issuer uniquely identifies a certificate (unless the issuer erroneously reuses serial numbers). |
 | `issuer_dn` `text`DN of the issuer of the client certificate, or NULL if no client certificate was supplied or if SSL is not in use on this connection. This field is truncated like `client_dn`.                                                                                                                        |
 
+[#id](#MONITORING-PG-STAT-GSSAPI-VIEW)
+
 ### 28.2.11. `pg_stat_gssapi` [#](#MONITORING-PG-STAT-GSSAPI-VIEW)
 
+
+
 The `pg_stat_gssapi` view will contain one row per backend, showing information about GSSAPI usage on this connection. It can be joined to `pg_stat_activity` or `pg_stat_replication` on the `pid` column to get more details about the connection.
+
+[#id](#PG-STAT-GSSAPI-VIEW)
 
 **Table 28.21. `pg_stat_gssapi` View**
 
@@ -690,9 +783,15 @@ The `pg_stat_gssapi` view will contain one row per backend, showing information 
 | `encrypted` `boolean`True if GSSAPI encryption is in use on this connection                                                                                                                                                                  |
 | `credentials_delegated` `boolean`True if GSSAPI credentials were delegated on this connection.                                                                                                                                               |
 
+[#id](#MONITORING-PG-STAT-ARCHIVER-VIEW)
+
 ### 28.2.12. `pg_stat_archiver` [#](#MONITORING-PG-STAT-ARCHIVER-VIEW)
 
+
+
 The `pg_stat_archiver` view will always have a single row, containing data about the archiver process of the cluster.
+
+[#id](#PG-STAT-ARCHIVER-VIEW)
 
 **Table 28.22. `pg_stat_archiver` View**
 
@@ -708,43 +807,54 @@ The `pg_stat_archiver` view will always have a single row, containing data about
 
 \
 
+
 Normally, WAL files are archived in order, oldest to newest, but that is not guaranteed, and does not hold under special circumstances like when promoting a standby or after crash recovery. Therefore it is not safe to assume that all files older than `last_archived_wal` have also been successfully archived.
 
+[#id](#MONITORING-PG-STAT-IO-VIEW)
+
 ### 28.2.13. `pg_stat_io` [#](#MONITORING-PG-STAT-IO-VIEW)
+
+
 
 The `pg_stat_io` view will contain one row for each combination of backend type, target I/O object, and I/O context, showing cluster-wide I/O statistics. Combinations which do not make sense are omitted.
 
 Currently, I/O on relations (e.g. tables, indexes) is tracked. However, relation I/O which bypasses shared buffers (e.g. when moving a table from one tablespace to another) is currently not tracked.
 
+[#id](#PG-STAT-IO-VIEW)
+
 **Table 28.23. `pg_stat_io` View**
 
-| Column TypeDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `backend_type` `text`Type of backend (e.g. background worker, autovacuum worker). See [`pg_stat_activity`](monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity") for more information on `backend_type`s. Some `backend_type`s do not accumulate I/O operation statistics and will not be included in the view.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `object` `text`Target object of an I/O operation. Possible values are:*   `relation`: Permanent relations.
+| Column TypeDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `backend_type` `text`Type of backend (e.g. background worker, autovacuum worker). See [`pg_stat_activity`](monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW) for more information on `backend_type`s. Some `backend_type`s do not accumulate I/O operation statistics and will not be included in the view.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `object` `text`Target object of an I/O operation. Possible values are:- `relation`: Permanent relations.
 
-* `temp relation`: Temporary relations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `context` `text`The context of an I/O operation. Possible values are:*   `normal`: The default or standard `context` for a type of I/O operation. For example, by default, relation data is read into and written out from shared buffers. Thus, reads and writes of relation data to and from shared buffers are tracked in `context` `normal`.
-* `vacuum`: I/O operations performed outside of shared buffers while vacuuming and analyzing permanent relations. Temporary table vacuums use the same local buffer pool as other temporary table IO operations and are tracked in `context` `normal`.
-* `bulkread`: Certain large read I/O operations done outside of shared buffers, for example, a sequential scan of a large table.
-* `bulkwrite`: Certain large write I/O operations done outside of shared buffers, such as `COPY`. |
-| `reads` `bigint`Number of read operations, each of the size specified in `op_bytes`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `read_time` `double precision`Time spent in read operations in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `writes` `bigint`Number of write operations, each of the size specified in `op_bytes`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `write_time` `double precision`Time spent in write operations in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `writebacks` `bigint`Number of units of size `op_bytes` which the process requested the kernel write out to permanent storage.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `writeback_time` `double precision`Time spent in writeback operations in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero). This includes the time spent queueing write-out requests and, potentially, the time spent to write out the dirty data.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `extends` `bigint`Number of relation extend operations, each of the size specified in `op_bytes`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `extend_time` `double precision`Time spent in extend operations in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `op_bytes` `bigint`The number of bytes per unit of I/O read, written, or extended.Relation data reads, writes, and extends are done in `block_size` units, derived from the build-time parameter `BLCKSZ`, which is `8192` by default.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `hits` `bigint`The number of times a desired block was found in a shared buffer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `evictions` `bigint`Number of times a block has been written out from a shared or local buffer in order to make it available for another use.In `context` `normal`, this counts the number of times a block was evicted from a buffer and replaced with another block. In `context`s `bulkwrite`, `bulkread`, and `vacuum`, this counts the number of times a block was evicted from shared buffers in order to add the shared buffer to a separate, size-limited ring buffer for use in a bulk I/O operation.                                                                                                                                                                                                                                                                                                                                   |
-| `reuses` `bigint`The number of times an existing buffer in a size-limited ring buffer outside of shared buffers was reused as part of an I/O operation in the `bulkread`, `bulkwrite`, or `vacuum` `context`s.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `fsyncs` `bigint`Number of `fsync` calls. These are only tracked in `context` `normal`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `fsync_time` `double precision`Time spent in fsync operations in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `stats_reset` `timestamp with time zone`Time at which these statistics were last reset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+- `temp relation`: Temporary relations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `context` `text`The context of an I/O operation. Possible values are:- `normal`: The default or standard `context` for a type of I/O operation. For example, by default, relation data is read into and written out from shared buffers. Thus, reads and writes of relation data to and from shared buffers are tracked in `context` `normal`.
+
+- `vacuum`: I/O operations performed outside of shared buffers while vacuuming and analyzing permanent relations. Temporary table vacuums use the same local buffer pool as other temporary table IO operations and are tracked in `context` `normal`.
+
+- `bulkread`: Certain large read I/O operations done outside of shared buffers, for example, a sequential scan of a large table.
+
+- `bulkwrite`: Certain large write I/O operations done outside of shared buffers, such as `COPY`. |
+| `reads` `bigint`Number of read operations, each of the size specified in `op_bytes`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `read_time` `double precision`Time spent in read operations in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `writes` `bigint`Number of write operations, each of the size specified in `op_bytes`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `write_time` `double precision`Time spent in write operations in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `writebacks` `bigint`Number of units of size `op_bytes` which the process requested the kernel write out to permanent storage.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `writeback_time` `double precision`Time spent in writeback operations in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero). This includes the time spent queueing write-out requests and, potentially, the time spent to write out the dirty data.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `extends` `bigint`Number of relation extend operations, each of the size specified in `op_bytes`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `extend_time` `double precision`Time spent in extend operations in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `op_bytes` `bigint`The number of bytes per unit of I/O read, written, or extended.Relation data reads, writes, and extends are done in `block_size` units, derived from the build-time parameter `BLCKSZ`, which is `8192` by default.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `hits` `bigint`The number of times a desired block was found in a shared buffer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `evictions` `bigint`Number of times a block has been written out from a shared or local buffer in order to make it available for another use.In `context` `normal`, this counts the number of times a block was evicted from a buffer and replaced with another block. In `context`s `bulkwrite`, `bulkread`, and `vacuum`, this counts the number of times a block was evicted from shared buffers in order to add the shared buffer to a separate, size-limited ring buffer for use in a bulk I/O operation.                                                                                                                                                                                                                                                                                                                              |
+| `reuses` `bigint`The number of times an existing buffer in a size-limited ring buffer outside of shared buffers was reused as part of an I/O operation in the `bulkread`, `bulkwrite`, or `vacuum` `context`s.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `fsyncs` `bigint`Number of `fsync` calls. These are only tracked in `context` `normal`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `fsync_time` `double precision`Time spent in fsync operations in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `stats_reset` `timestamp with time zone`Time at which these statistics were last reset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 \
+
 
 Some backend types never perform I/O operations on some I/O objects and/or in some I/O contexts. These rows are omitted from the view. For example, the checkpointer does not checkpoint temporary tables, so there will be no rows for `backend_type` `checkpointer` and `object` `temp relation`.
 
@@ -753,16 +863,24 @@ In addition, some I/O operations will never be performed either by certain backe
 `pg_stat_io` can be used to inform database tuning. For example:
 
 * A high `evictions` count can indicate that shared buffers should be increased.
-* Client backends rely on the checkpointer to ensure data is persisted to permanent storage. Large numbers of `fsyncs` by `client backend`s could indicate a misconfiguration of shared buffers or of the checkpointer. More information on configuring the checkpointer can be found in [Section 30.5](wal-configuration "30.5. WAL Configuration").
-* Normally, client backends should be able to rely on auxiliary processes like the checkpointer and the background writer to write out dirty data as much as possible. Large numbers of writes by client backends could indicate a misconfiguration of shared buffers or of the checkpointer. More information on configuring the checkpointer can be found in [Section 30.5](wal-configuration "30.5. WAL Configuration").
+
+* Client backends rely on the checkpointer to ensure data is persisted to permanent storage. Large numbers of `fsyncs` by `client backend`s could indicate a misconfiguration of shared buffers or of the checkpointer. More information on configuring the checkpointer can be found in [Section 30.5](wal-configuration).
+
+* Normally, client backends should be able to rely on auxiliary processes like the checkpointer and the background writer to write out dirty data as much as possible. Large numbers of writes by client backends could indicate a misconfiguration of shared buffers or of the checkpointer. More information on configuring the checkpointer can be found in [Section 30.5](wal-configuration).
 
 ### Note
 
 Columns tracking I/O time will only be non-zero when [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled. The user should be careful when referencing these columns in combination with their corresponding IO operations in case `track_io_timing` was not enabled for the entire time since the last stats reset.
 
+[#id](#MONITORING-PG-STAT-BGWRITER-VIEW)
+
 ### 28.2.14. `pg_stat_bgwriter` [#](#MONITORING-PG-STAT-BGWRITER-VIEW)
 
+
+
 The `pg_stat_bgwriter` view will always have a single row, containing global data for the cluster.
+
+[#id](#PG-STAT-BGWRITER-VIEW)
 
 **Table 28.24. `pg_stat_bgwriter` View**
 
@@ -780,64 +898,82 @@ The `pg_stat_bgwriter` view will always have a single row, containing global dat
 | `buffers_alloc` `bigint`Number of buffers allocated                                                                                                                                   |
 | `stats_reset` `timestamp with time zone`Time at which these statistics were last reset                                                                                                |
 
+[#id](#MONITORING-PG-STAT-WAL-VIEW)
+
 ### 28.2.15. `pg_stat_wal` [#](#MONITORING-PG-STAT-WAL-VIEW)
+
+
 
 The `pg_stat_wal` view will always have a single row, containing data about WAL activity of the cluster.
 
+[#id](#PG-STAT-WAL-VIEW)
+
 **Table 28.25. `pg_stat_wal` View**
 
-| Column TypeDescription                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `wal_records` `bigint`Total number of WAL records generated                                                                                                                                                                                                                                                                                                                                                                                        |
-| `wal_fpi` `bigint`Total number of WAL full page images generated                                                                                                                                                                                                                                                                                                                                                                                   |
-| `wal_bytes` `numeric`Total amount of WAL generated in bytes                                                                                                                                                                                                                                                                                                                                                                                        |
-| `wal_buffers_full` `bigint`Number of times WAL data was written to disk because WAL buffers became full                                                                                                                                                                                                                                                                                                                                            |
-| `wal_write` `bigint`Number of times WAL buffers were written out to disk via `XLogWrite` request. See [Section 30.5](wal-configuration "30.5. WAL Configuration") for more information about the internal WAL function `XLogWrite`.                                                                                                                                                                                                           |
-| `wal_sync` `bigint`Number of times WAL files were synced to disk via `issue_xlog_fsync` request (if [fsync](runtime-config-wal#GUC-FSYNC) is `on` and [wal\_sync\_method](runtime-config-wal#GUC-WAL-SYNC-METHOD) is either `fdatasync`, `fsync` or `fsync_writethrough`, otherwise zero). See [Section 30.5](wal-configuration "30.5. WAL Configuration") for more information about the internal WAL function `issue_xlog_fsync`. |
-| `wal_write_time` `double precision`Total amount of time spent writing WAL buffers to disk via `XLogWrite` request, in milliseconds (if [track\_wal\_io\_timing](runtime-config-statistics#GUC-TRACK-WAL-IO-TIMING) is enabled, otherwise zero). This includes the sync time when `wal_sync_method` is either `open_datasync` or `open_sync`.                                                                                                  |
-| `wal_sync_time` `double precision`Total amount of time spent syncing WAL files to disk via `issue_xlog_fsync` request, in milliseconds (if `track_wal_io_timing` is enabled, `fsync` is `on`, and `wal_sync_method` is either `fdatasync`, `fsync` or `fsync_writethrough`, otherwise zero).                                                                                                                                                       |
-| `stats_reset` `timestamp with time zone`Time at which these statistics were last reset                                                                                                                                                                                                                                                                                                                                                             |
+| Column TypeDescription                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `wal_records` `bigint`Total number of WAL records generated                                                                                                                                                                                                                                                                                                                                                              |
+| `wal_fpi` `bigint`Total number of WAL full page images generated                                                                                                                                                                                                                                                                                                                                                         |
+| `wal_bytes` `numeric`Total amount of WAL generated in bytes                                                                                                                                                                                                                                                                                                                                                              |
+| `wal_buffers_full` `bigint`Number of times WAL data was written to disk because WAL buffers became full                                                                                                                                                                                                                                                                                                                  |
+| `wal_write` `bigint`Number of times WAL buffers were written out to disk via `XLogWrite` request. See [Section 30.5](wal-configuration) for more information about the internal WAL function `XLogWrite`.                                                                                                                                                                                                           |
+| `wal_sync` `bigint`Number of times WAL files were synced to disk via `issue_xlog_fsync` request (if [fsync](runtime-config-wal#GUC-FSYNC) is `on` and [wal\_sync\_method](runtime-config-wal#GUC-WAL-SYNC-METHOD) is either `fdatasync`, `fsync` or `fsync_writethrough`, otherwise zero). See [Section 30.5](wal-configuration) for more information about the internal WAL function `issue_xlog_fsync`. |
+| `wal_write_time` `double precision`Total amount of time spent writing WAL buffers to disk via `XLogWrite` request, in milliseconds (if [track\_wal\_io\_timing](runtime-config-statistics#GUC-TRACK-WAL-IO-TIMING) is enabled, otherwise zero). This includes the sync time when `wal_sync_method` is either `open_datasync` or `open_sync`.                                                                        |
+| `wal_sync_time` `double precision`Total amount of time spent syncing WAL files to disk via `issue_xlog_fsync` request, in milliseconds (if `track_wal_io_timing` is enabled, `fsync` is `on`, and `wal_sync_method` is either `fdatasync`, `fsync` or `fsync_writethrough`, otherwise zero).                                                                                                                             |
+| `stats_reset` `timestamp with time zone`Time at which these statistics were last reset                                                                                                                                                                                                                                                                                                                                   |
+
+[#id](#MONITORING-PG-STAT-DATABASE-VIEW)
 
 ### 28.2.16. `pg_stat_database` [#](#MONITORING-PG-STAT-DATABASE-VIEW)
 
+
+
 The `pg_stat_database` view will contain one row for each database in the cluster, plus one for shared objects, showing database-wide statistics.
+
+[#id](#PG-STAT-DATABASE-VIEW)
 
 **Table 28.26. `pg_stat_database` View**
 
-| Column TypeDescription                                                                                                                                                                                                                                                                                                        |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `datid` `oid`OID of this database, or 0 for objects belonging to a shared relation                                                                                                                                                                                                                                            |
-| `datname` `name`Name of this database, or `NULL` for shared objects.                                                                                                                                                                                                                                                          |
-| `numbackends` `integer`Number of backends currently connected to this database, or `NULL` for shared objects. This is the only column in this view that returns a value reflecting current state; all other columns return the accumulated values since the last reset.                                                       |
-| `xact_commit` `bigint`Number of transactions in this database that have been committed                                                                                                                                                                                                                                        |
-| `xact_rollback` `bigint`Number of transactions in this database that have been rolled back                                                                                                                                                                                                                                    |
-| `blks_read` `bigint`Number of disk blocks read in this database                                                                                                                                                                                                                                                               |
-| `blks_hit` `bigint`Number of times disk blocks were found already in the buffer cache, so that a read was not necessary (this only includes hits in the PostgreSQL buffer cache, not the operating system's file system cache)                                                                                                |
-| `tup_returned` `bigint`Number of live rows fetched by sequential scans and index entries returned by index scans in this database                                                                                                                                                                                             |
-| `tup_fetched` `bigint`Number of live rows fetched by index scans in this database                                                                                                                                                                                                                                             |
-| `tup_inserted` `bigint`Number of rows inserted by queries in this database                                                                                                                                                                                                                                                    |
-| `tup_updated` `bigint`Number of rows updated by queries in this database                                                                                                                                                                                                                                                      |
-| `tup_deleted` `bigint`Number of rows deleted by queries in this database                                                                                                                                                                                                                                                      |
-| `conflicts` `bigint`Number of queries canceled due to conflicts with recovery in this database. (Conflicts occur only on standby servers; see [`pg_stat_database_conflicts`](monitoring-stats#MONITORING-PG-STAT-DATABASE-CONFLICTS-VIEW "28.2.17. pg_stat_database_conflicts") for details.)                            |
-| `temp_files` `bigint`Number of temporary files created by queries in this database. All temporary files are counted, regardless of why the temporary file was created (e.g., sorting or hashing), and regardless of the [log\_temp\_files](runtime-config-logging#GUC-LOG-TEMP-FILES) setting.                           |
-| `temp_bytes` `bigint`Total amount of data written to temporary files by queries in this database. All temporary files are counted, regardless of why the temporary file was created, and regardless of the [log\_temp\_files](runtime-config-logging#GUC-LOG-TEMP-FILES) setting.                                        |
-| `deadlocks` `bigint`Number of deadlocks detected in this database                                                                                                                                                                                                                                                             |
-| `checksum_failures` `bigint`Number of data page checksum failures detected in this database (or on a shared object), or NULL if data checksums are not enabled.                                                                                                                                                               |
-| `checksum_last_failure` `timestamp with time zone`Time at which the last data page checksum failure was detected in this database (or on a shared object), or NULL if data checksums are not enabled.                                                                                                                         |
-| `blk_read_time` `double precision`Time spent reading data file blocks by backends in this database, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                                                   |
-| `blk_write_time` `double precision`Time spent writing data file blocks by backends in this database, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                                                  |
-| `session_time` `double precision`Time spent by database sessions in this database, in milliseconds (note that statistics are only updated when the state of a session changes, so if sessions have been idle for a long time, this idle time won't be included)                                                               |
-| `active_time` `double precision`Time spent executing SQL statements in this database, in milliseconds (this corresponds to the states `active` and `fastpath function call` in [`pg_stat_activity`](monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity"))                                       |
-| `idle_in_transaction_time` `double precision`Time spent idling while in a transaction in this database, in milliseconds (this corresponds to the states `idle in transaction` and `idle in transaction (aborted)` in [`pg_stat_activity`](monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity")) |
-| `sessions` `bigint`Total number of sessions established to this database                                                                                                                                                                                                                                                      |
-| `sessions_abandoned` `bigint`Number of database sessions to this database that were terminated because connection to the client was lost                                                                                                                                                                                      |
-| `sessions_fatal` `bigint`Number of database sessions to this database that were terminated by fatal errors                                                                                                                                                                                                                    |
-| `sessions_killed` `bigint`Number of database sessions to this database that were terminated by operator intervention                                                                                                                                                                                                          |
-| `stats_reset` `timestamp with time zone`Time at which these statistics were last reset                                                                                                                                                                                                                                        |
+| Column TypeDescription                                                                                                                                                                                                                                                                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `datid` `oid`OID of this database, or 0 for objects belonging to a shared relation                                                                                                                                                                                                                  |
+| `datname` `name`Name of this database, or `NULL` for shared objects.                                                                                                                                                                                                                                |
+| `numbackends` `integer`Number of backends currently connected to this database, or `NULL` for shared objects. This is the only column in this view that returns a value reflecting current state; all other columns return the accumulated values since the last reset.                             |
+| `xact_commit` `bigint`Number of transactions in this database that have been committed                                                                                                                                                                                                              |
+| `xact_rollback` `bigint`Number of transactions in this database that have been rolled back                                                                                                                                                                                                          |
+| `blks_read` `bigint`Number of disk blocks read in this database                                                                                                                                                                                                                                     |
+| `blks_hit` `bigint`Number of times disk blocks were found already in the buffer cache, so that a read was not necessary (this only includes hits in the PostgreSQL buffer cache, not the operating system's file system cache)                                                                      |
+| `tup_returned` `bigint`Number of live rows fetched by sequential scans and index entries returned by index scans in this database                                                                                                                                                                   |
+| `tup_fetched` `bigint`Number of live rows fetched by index scans in this database                                                                                                                                                                                                                   |
+| `tup_inserted` `bigint`Number of rows inserted by queries in this database                                                                                                                                                                                                                          |
+| `tup_updated` `bigint`Number of rows updated by queries in this database                                                                                                                                                                                                                            |
+| `tup_deleted` `bigint`Number of rows deleted by queries in this database                                                                                                                                                                                                                            |
+| `conflicts` `bigint`Number of queries canceled due to conflicts with recovery in this database. (Conflicts occur only on standby servers; see [`pg_stat_database_conflicts`](monitoring-stats#MONITORING-PG-STAT-DATABASE-CONFLICTS-VIEW) for details.)                                        |
+| `temp_files` `bigint`Number of temporary files created by queries in this database. All temporary files are counted, regardless of why the temporary file was created (e.g., sorting or hashing), and regardless of the [log\_temp\_files](runtime-config-logging#GUC-LOG-TEMP-FILES) setting. |
+| `temp_bytes` `bigint`Total amount of data written to temporary files by queries in this database. All temporary files are counted, regardless of why the temporary file was created, and regardless of the [log\_temp\_files](runtime-config-logging#GUC-LOG-TEMP-FILES) setting.              |
+| `deadlocks` `bigint`Number of deadlocks detected in this database                                                                                                                                                                                                                                   |
+| `checksum_failures` `bigint`Number of data page checksum failures detected in this database (or on a shared object), or NULL if data checksums are not enabled.                                                                                                                                     |
+| `checksum_last_failure` `timestamp with time zone`Time at which the last data page checksum failure was detected in this database (or on a shared object), or NULL if data checksums are not enabled.                                                                                               |
+| `blk_read_time` `double precision`Time spent reading data file blocks by backends in this database, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                         |
+| `blk_write_time` `double precision`Time spent writing data file blocks by backends in this database, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)                                                                        |
+| `session_time` `double precision`Time spent by database sessions in this database, in milliseconds (note that statistics are only updated when the state of a session changes, so if sessions have been idle for a long time, this idle time won't be included)                                     |
+| `active_time` `double precision`Time spent executing SQL statements in this database, in milliseconds (this corresponds to the states `active` and `fastpath function call` in [`pg_stat_activity`](monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW))                                        |
+| `idle_in_transaction_time` `double precision`Time spent idling while in a transaction in this database, in milliseconds (this corresponds to the states `idle in transaction` and `idle in transaction (aborted)` in [`pg_stat_activity`](monitoring-stats#MONITORING-PG-STAT-ACTIVITY-VIEW))  |
+| `sessions` `bigint`Total number of sessions established to this database                                                                                                                                                                                                                            |
+| `sessions_abandoned` `bigint`Number of database sessions to this database that were terminated because connection to the client was lost                                                                                                                                                            |
+| `sessions_fatal` `bigint`Number of database sessions to this database that were terminated by fatal errors                                                                                                                                                                                          |
+| `sessions_killed` `bigint`Number of database sessions to this database that were terminated by operator intervention                                                                                                                                                                                |
+| `stats_reset` `timestamp with time zone`Time at which these statistics were last reset                                                                                                                                                                                                              |
+
+[#id](#MONITORING-PG-STAT-DATABASE-CONFLICTS-VIEW)
 
 ### 28.2.17. `pg_stat_database_conflicts` [#](#MONITORING-PG-STAT-DATABASE-CONFLICTS-VIEW)
 
+
+
 The `pg_stat_database_conflicts` view will contain one row per database, showing database-wide statistics about query cancels occurring due to conflicts with recovery on standby servers. This view will only contain information on standby servers, since conflicts do not occur on primary servers.
+
+[#id](#PG-STAT-DATABASE-CONFLICTS-VIEW)
 
 **Table 28.27. `pg_stat_database_conflicts` View**
 
@@ -852,44 +988,56 @@ The `pg_stat_database_conflicts` view will contain one row per database, showing
 | `confl_deadlock` `bigint`Number of queries in this database that have been canceled due to deadlocks                                                                                                             |
 | `confl_active_logicalslot` `bigint`Number of uses of logical slots in this database that have been canceled due to old snapshots or too low a [wal\_level](runtime-config-wal#GUC-WAL-LEVEL) on the primary |
 
+[#id](#MONITORING-PG-STAT-ALL-TABLES-VIEW)
+
 ### 28.2.18. `pg_stat_all_tables` [#](#MONITORING-PG-STAT-ALL-TABLES-VIEW)
+
+
 
 The `pg_stat_all_tables` view will contain one row for each table in the current database (including TOAST tables), showing statistics about accesses to that specific table. The `pg_stat_user_tables` and `pg_stat_sys_tables` views contain the same information, but filtered to only show user and system tables respectively.
 
+[#id](#PG-STAT-ALL-TABLES-VIEW)
+
 **Table 28.28. `pg_stat_all_tables` View**
 
-| Column TypeDescription                                                                                                                                                                                                                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `relid` `oid`OID of a table                                                                                                                                                                                                                                                                                              |
-| `schemaname` `name`Name of the schema that this table is in                                                                                                                                                                                                                                                              |
-| `relname` `name`Name of this table                                                                                                                                                                                                                                                                                       |
-| `seq_scan` `bigint`Number of sequential scans initiated on this table                                                                                                                                                                                                                                                    |
-| `last_seq_scan` `timestamp with time zone`The time of the last sequential scan on this table, based on the most recent transaction stop time                                                                                                                                                                             |
-| `seq_tup_read` `bigint`Number of live rows fetched by sequential scans                                                                                                                                                                                                                                                   |
-| `idx_scan` `bigint`Number of index scans initiated on this table                                                                                                                                                                                                                                                         |
-| `last_idx_scan` `timestamp with time zone`The time of the last index scan on this table, based on the most recent transaction stop time                                                                                                                                                                                  |
-| `idx_tup_fetch` `bigint`Number of live rows fetched by index scans                                                                                                                                                                                                                                                       |
-| `n_tup_ins` `bigint`Total number of rows inserted                                                                                                                                                                                                                                                                        |
-| `n_tup_upd` `bigint`Total number of rows updated. (This includes row updates counted in `n_tup_hot_upd` and `n_tup_newpage_upd`, and remaining non-HOT updates.)                                                                                                                                                         |
-| `n_tup_del` `bigint`Total number of rows deleted                                                                                                                                                                                                                                                                         |
-| `n_tup_hot_upd` `bigint`Number of rows [HOT updated](storage-hot "73.7. Heap-Only Tuples (HOT)"). These are updates where no successor versions are required in indexes.                                                                                                                                            |
-| `n_tup_newpage_upd` `bigint`Number of rows updated where the successor version goes onto a *new* heap page, leaving behind an original version with a [`t_ctid` field](storage-page-layout#STORAGE-TUPLE-LAYOUT "73.6.1. Table Row Layout") that points to a different heap page. These are always non-HOT updates. |
-| `n_live_tup` `bigint`Estimated number of live rows                                                                                                                                                                                                                                                                       |
-| `n_dead_tup` `bigint`Estimated number of dead rows                                                                                                                                                                                                                                                                       |
-| `n_mod_since_analyze` `bigint`Estimated number of rows modified since this table was last analyzed                                                                                                                                                                                                                       |
-| `n_ins_since_vacuum` `bigint`Estimated number of rows inserted since this table was last vacuumed                                                                                                                                                                                                                        |
-| `last_vacuum` `timestamp with time zone`Last time at which this table was manually vacuumed (not counting `VACUUM FULL`)                                                                                                                                                                                                 |
-| `last_autovacuum` `timestamp with time zone`Last time at which this table was vacuumed by the autovacuum daemon                                                                                                                                                                                                          |
-| `last_analyze` `timestamp with time zone`Last time at which this table was manually analyzed                                                                                                                                                                                                                             |
-| `last_autoanalyze` `timestamp with time zone`Last time at which this table was analyzed by the autovacuum daemon                                                                                                                                                                                                         |
-| `vacuum_count` `bigint`Number of times this table has been manually vacuumed (not counting `VACUUM FULL`)                                                                                                                                                                                                                |
-| `autovacuum_count` `bigint`Number of times this table has been vacuumed by the autovacuum daemon                                                                                                                                                                                                                         |
-| `analyze_count` `bigint`Number of times this table has been manually analyzed                                                                                                                                                                                                                                            |
-| `autoanalyze_count` `bigint`Number of times this table has been analyzed by the autovacuum daemon                                                                                                                                                                                                                        |
+| Column TypeDescription                                                                                                                                                                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `relid` `oid`OID of a table                                                                                                                                                                                                                                                                   |
+| `schemaname` `name`Name of the schema that this table is in                                                                                                                                                                                                                                   |
+| `relname` `name`Name of this table                                                                                                                                                                                                                                                            |
+| `seq_scan` `bigint`Number of sequential scans initiated on this table                                                                                                                                                                                                                         |
+| `last_seq_scan` `timestamp with time zone`The time of the last sequential scan on this table, based on the most recent transaction stop time                                                                                                                                                  |
+| `seq_tup_read` `bigint`Number of live rows fetched by sequential scans                                                                                                                                                                                                                        |
+| `idx_scan` `bigint`Number of index scans initiated on this table                                                                                                                                                                                                                              |
+| `last_idx_scan` `timestamp with time zone`The time of the last index scan on this table, based on the most recent transaction stop time                                                                                                                                                       |
+| `idx_tup_fetch` `bigint`Number of live rows fetched by index scans                                                                                                                                                                                                                            |
+| `n_tup_ins` `bigint`Total number of rows inserted                                                                                                                                                                                                                                             |
+| `n_tup_upd` `bigint`Total number of rows updated. (This includes row updates counted in `n_tup_hot_upd` and `n_tup_newpage_upd`, and remaining non-HOT updates.)                                                                                                                              |
+| `n_tup_del` `bigint`Total number of rows deleted                                                                                                                                                                                                                                              |
+| `n_tup_hot_upd` `bigint`Number of rows [HOT updated](storage-hot). These are updates where no successor versions are required in indexes.                                                                                                                                                |
+| `n_tup_newpage_upd` `bigint`Number of rows updated where the successor version goes onto a *new* heap page, leaving behind an original version with a [`t_ctid` field](storage-page-layout#STORAGE-TUPLE-LAYOUT) that points to a different heap page. These are always non-HOT updates. |
+| `n_live_tup` `bigint`Estimated number of live rows                                                                                                                                                                                                                                            |
+| `n_dead_tup` `bigint`Estimated number of dead rows                                                                                                                                                                                                                                            |
+| `n_mod_since_analyze` `bigint`Estimated number of rows modified since this table was last analyzed                                                                                                                                                                                            |
+| `n_ins_since_vacuum` `bigint`Estimated number of rows inserted since this table was last vacuumed                                                                                                                                                                                             |
+| `last_vacuum` `timestamp with time zone`Last time at which this table was manually vacuumed (not counting `VACUUM FULL`)                                                                                                                                                                      |
+| `last_autovacuum` `timestamp with time zone`Last time at which this table was vacuumed by the autovacuum daemon                                                                                                                                                                               |
+| `last_analyze` `timestamp with time zone`Last time at which this table was manually analyzed                                                                                                                                                                                                  |
+| `last_autoanalyze` `timestamp with time zone`Last time at which this table was analyzed by the autovacuum daemon                                                                                                                                                                              |
+| `vacuum_count` `bigint`Number of times this table has been manually vacuumed (not counting `VACUUM FULL`)                                                                                                                                                                                     |
+| `autovacuum_count` `bigint`Number of times this table has been vacuumed by the autovacuum daemon                                                                                                                                                                                              |
+| `analyze_count` `bigint`Number of times this table has been manually analyzed                                                                                                                                                                                                                 |
+| `autoanalyze_count` `bigint`Number of times this table has been analyzed by the autovacuum daemon                                                                                                                                                                                             |
+
+[#id](#MONITORING-PG-STAT-ALL-INDEXES-VIEW)
 
 ### 28.2.19. `pg_stat_all_indexes` [#](#MONITORING-PG-STAT-ALL-INDEXES-VIEW)
 
+
+
 The `pg_stat_all_indexes` view will contain one row for each index in the current database, showing statistics about accesses to that specific index. The `pg_stat_user_indexes` and `pg_stat_sys_indexes` views contain the same information, but filtered to only show user and system indexes respectively.
+
+[#id](#PG-STAT-ALL-INDEXES-VIEW)
 
 **Table 28.29. `pg_stat_all_indexes` View**
 
@@ -907,15 +1055,22 @@ The `pg_stat_all_indexes` view will contain one row for each index in the curren
 
 \
 
+
 Indexes can be used by simple index scans, “bitmap” index scans, and the optimizer. In a bitmap scan the output of several indexes can be combined via AND or OR rules, so it is difficult to associate individual heap row fetches with specific indexes when a bitmap scan is used. Therefore, a bitmap scan increments the `pg_stat_all_indexes`.`idx_tup_read` count(s) for the index(es) it uses, and it increments the `pg_stat_all_tables`.`idx_tup_fetch` count for the table, but it does not affect `pg_stat_all_indexes`.`idx_tup_fetch`. The optimizer also accesses indexes to check for supplied constants whose values are outside the recorded range of the optimizer statistics because the optimizer statistics might be stale.
 
 ### Note
 
 The `idx_tup_read` and `idx_tup_fetch` counts can be different even without any use of bitmap scans, because `idx_tup_read` counts index entries retrieved from the index while `idx_tup_fetch` counts live rows fetched from the table. The latter will be less if any dead or not-yet-committed rows are fetched using the index, or if any heap fetches are avoided by means of an index-only scan.
 
+[#id](#MONITORING-PG-STATIO-ALL-TABLES-VIEW)
+
 ### 28.2.20. `pg_statio_all_tables` [#](#MONITORING-PG-STATIO-ALL-TABLES-VIEW)
 
+
+
 The `pg_statio_all_tables` view will contain one row for each table in the current database (including TOAST tables), showing statistics about I/O on that specific table. The `pg_statio_user_tables` and `pg_statio_sys_tables` views contain the same information, but filtered to only show user and system tables respectively.
+
+[#id](#PG-STATIO-ALL-TABLES-VIEW)
 
 **Table 28.30. `pg_statio_all_tables` View**
 
@@ -933,9 +1088,15 @@ The `pg_statio_all_tables` view will contain one row for each table in the curre
 | `tidx_blks_read` `bigint`Number of disk blocks read from this table's TOAST table indexes (if any) |
 | `tidx_blks_hit` `bigint`Number of buffer hits in this table's TOAST table indexes (if any)         |
 
+[#id](#MONITORING-PG-STATIO-ALL-INDEXES-VIEW)
+
 ### 28.2.21. `pg_statio_all_indexes` [#](#MONITORING-PG-STATIO-ALL-INDEXES-VIEW)
 
+
+
 The `pg_statio_all_indexes` view will contain one row for each index in the current database, showing statistics about I/O on that specific index. The `pg_statio_user_indexes` and `pg_statio_sys_indexes` views contain the same information, but filtered to only show user and system indexes respectively.
+
+[#id](#PG-STATIO-ALL-INDEXES-VIEW)
 
 **Table 28.31. `pg_statio_all_indexes` View**
 
@@ -949,9 +1110,15 @@ The `pg_statio_all_indexes` view will contain one row for each index in the curr
 | `idx_blks_read` `bigint`Number of disk blocks read from this index |
 | `idx_blks_hit` `bigint`Number of buffer hits in this index         |
 
+[#id](#MONITORING-PG-STATIO-ALL-SEQUENCES-VIEW)
+
 ### 28.2.22. `pg_statio_all_sequences` [#](#MONITORING-PG-STATIO-ALL-SEQUENCES-VIEW)
 
+
+
 The `pg_statio_all_sequences` view will contain one row for each sequence in the current database, showing statistics about I/O on that specific sequence.
+
+[#id](#PG-STATIO-ALL-SEQUENCES-VIEW)
 
 **Table 28.32. `pg_statio_all_sequences` View**
 
@@ -963,9 +1130,15 @@ The `pg_statio_all_sequences` view will contain one row for each sequence in the
 | `blks_read` `bigint`Number of disk blocks read from this sequence |
 | `blks_hit` `bigint`Number of buffer hits in this sequence         |
 
+[#id](#MONITORING-PG-STAT-USER-FUNCTIONS-VIEW)
+
 ### 28.2.23. `pg_stat_user_functions` [#](#MONITORING-PG-STAT-USER-FUNCTIONS-VIEW)
 
+
+
 The `pg_stat_user_functions` view will contain one row for each tracked function, showing statistics about executions of that function. The [track\_functions](runtime-config-statistics#GUC-TRACK-FUNCTIONS) parameter controls exactly which functions are tracked.
+
+[#id](#PG-STAT-USER-FUNCTIONS-VIEW)
 
 **Table 28.33. `pg_stat_user_functions` View**
 
@@ -978,9 +1151,15 @@ The `pg_stat_user_functions` view will contain one row for each tracked function
 | `total_time` `double precision`Total time spent in this function and all other functions called by it, in milliseconds              |
 | `self_time` `double precision`Total time spent in this function itself, not including other functions called by it, in milliseconds |
 
+[#id](#MONITORING-PG-STAT-SLRU-VIEW)
+
 ### 28.2.24. `pg_stat_slru` [#](#MONITORING-PG-STAT-SLRU-VIEW)
 
+
+
 PostgreSQL accesses certain on-disk information via *SLRU* (simple least-recently-used) caches. The `pg_stat_slru` view will contain one row for each tracked SLRU cache, showing statistics about access to cached pages.
+
+[#id](#PG-STAT-SLRU-VIEW)
 
 **Table 28.34. `pg_stat_slru` View**
 
@@ -996,11 +1175,15 @@ PostgreSQL accesses certain on-disk information via *SLRU* (simple least-recentl
 | `truncates` `bigint`Number of truncates for this SLRU                                                                                                                                               |
 | `stats_reset` `timestamp with time zone`Time at which these statistics were last reset                                                                                                              |
 
+[#id](#MONITORING-STATS-FUNCTIONS)
+
 ### 28.2.25. Statistics Functions [#](#MONITORING-STATS-FUNCTIONS)
 
 Other ways of looking at the statistics can be set up by writing queries that use the same underlying statistics access functions used by the standard views shown above. For details such as the functions' names, consult the definitions of the standard views. (For example, in psql you could issue `\d+ pg_stat_activity`.) The access functions for per-database statistics take a database OID as an argument to identify which database to report on. The per-table and per-index functions take a table or index OID. The functions for per-function statistics take a function OID. Note that only tables, indexes, and functions in the current database can be seen with these functions.
 
-Additional functions related to the cumulative statistics system are listed in [Table 28.35](monitoring-stats#MONITORING-STATS-FUNCS-TABLE "Table 28.35. Additional Statistics Functions").
+Additional functions related to the cumulative statistics system are listed in [Table 28.35](monitoring-stats#MONITORING-STATS-FUNCS-TABLE).
+
+[#id](#MONITORING-STATS-FUNCS-TABLE)
 
 **Table 28.35. Additional Statistics Functions**
 
@@ -1022,18 +1205,20 @@ Additional functions related to the cumulative statistics system are listed in [
 
 \
 
+
 ### Warning
 
 Using `pg_stat_reset()` also resets counters that autovacuum uses to determine when to trigger a vacuum or an analyze. Resetting these counters can cause autovacuum to not perform necessary work, which can cause problems such as table bloat or out-dated table statistics. A database-wide `ANALYZE` is recommended after the statistics have been reset.
 
-`pg_stat_get_activity`, the underlying function of the `pg_stat_activity` view, returns a set of records containing all the available information about each backend process. Sometimes it may be more convenient to obtain just a subset of this information. In such cases, another set of per-backend statistics access functions can be used; these are shown in [Table 28.36](monitoring-stats#MONITORING-STATS-BACKEND-FUNCS-TABLE "Table 28.36. Per-Backend Statistics Functions"). These access functions use the session's backend ID number, which is a small positive integer that is distinct from the backend ID of any concurrent session, although a session's ID can be recycled as soon as it exits. The backend ID is used, among other things, to identify the session's temporary schema if it has one. The function `pg_stat_get_backend_idset` provides a convenient way to list all the active backends' ID numbers for invoking these functions. For example, to show the PIDs and current queries of all backends:
+`pg_stat_get_activity`, the underlying function of the `pg_stat_activity` view, returns a set of records containing all the available information about each backend process. Sometimes it may be more convenient to obtain just a subset of this information. In such cases, another set of per-backend statistics access functions can be used; these are shown in [Table 28.36](monitoring-stats#MONITORING-STATS-BACKEND-FUNCS-TABLE). These access functions use the session's backend ID number, which is a small positive integer that is distinct from the backend ID of any concurrent session, although a session's ID can be recycled as soon as it exits. The backend ID is used, among other things, to identify the session's temporary schema if it has one. The function `pg_stat_get_backend_idset` provides a convenient way to list all the active backends' ID numbers for invoking these functions. For example, to show the PIDs and current queries of all backends:
 
 ```
-
 SELECT pg_stat_get_backend_pid(backendid) AS pid,
        pg_stat_get_backend_activity(backendid) AS query
 FROM pg_stat_get_backend_idset() AS backendid;
 ```
+
+[#id](#MONITORING-STATS-BACKEND-FUNCS-TABLE)
 
 **Table 28.36. Per-Backend Statistics Functions**
 
@@ -1049,6 +1234,6 @@ FROM pg_stat_get_backend_idset() AS backendid;
 | `pg_stat_get_backend_start` ( `integer` ) → `timestamp with time zone`Returns the time when this process was started.                                                                                                                                                                                                                                                                     |
 | `pg_stat_get_backend_subxact` ( `integer` ) → `record`Returns a record of information about the subtransactions of the backend with the specified ID. The fields returned are *`subxact_count`*, which is the number of subtransactions in the backend's subtransaction cache, and *`subxact_overflow`*, which indicates whether the backend's subtransaction cache is overflowed or not. |
 | `pg_stat_get_backend_userid` ( `integer` ) → `oid`Returns the OID of the user logged into this backend.                                                                                                                                                                                                                                                                                   |
-| `pg_stat_get_backend_wait_event` ( `integer` ) → `text`Returns the wait event name if this backend is currently waiting, otherwise NULL. See [Table 28.5](monitoring-stats#WAIT-EVENT-ACTIVITY-TABLE "Table 28.5. Wait Events of Type Activity") through [Table 28.13](monitoring-stats#WAIT-EVENT-TIMEOUT-TABLE "Table 28.13. Wait Events of Type Timeout").                   |
-| `pg_stat_get_backend_wait_event_type` ( `integer` ) → `text`Returns the wait event type name if this backend is currently waiting, otherwise NULL. See [Table 28.4](monitoring-stats#WAIT-EVENT-TABLE "Table 28.4. Wait Event Types") for details.                                                                                                                                   |
+| `pg_stat_get_backend_wait_event` ( `integer` ) → `text`Returns the wait event name if this backend is currently waiting, otherwise NULL. See [Table 28.5](monitoring-stats#WAIT-EVENT-ACTIVITY-TABLE) through [Table 28.13](monitoring-stats#WAIT-EVENT-TIMEOUT-TABLE).                                                                                                         |
+| `pg_stat_get_backend_wait_event_type` ( `integer` ) → `text`Returns the wait event type name if this backend is currently waiting, otherwise NULL. See [Table 28.4](monitoring-stats#WAIT-EVENT-TABLE) for details.                                                                                                                                                                  |
 | `pg_stat_get_backend_xact_start` ( `integer` ) → `timestamp with time zone`Returns the time when the backend's current transaction was started.                                                                                                                                                                                                                                           |

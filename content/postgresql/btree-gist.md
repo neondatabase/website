@@ -1,7 +1,11 @@
+[#id](#BTREE-GIST)
+
 ## F.9. btree\_gist — GiST operator classes with B-tree behavior [#](#BTREE-GIST)
 
   * [F.9.1. Example Usage](btree-gist#BTREE-GIST-EXAMPLE-USAGE)
   * [F.9.2. Authors](btree-gist#BTREE-GIST-AUTHORS)
+
+
 
 `btree_gist` provides GiST index operator classes that implement B-tree equivalent behavior for the data types `int2`, `int4`, `int8`, `float4`, `float8`, `numeric`, `timestamp with time zone`, `timestamp without time zone`, `time with time zone`, `time without time zone`, `date`, `interval`, `oid`, `money`, `char`, `varchar`, `text`, `bytea`, `bit`, `varbit`, `macaddr`, `macaddr8`, `inet`, `cidr`, `uuid`, `bool` and all `enum` types.
 
@@ -12,6 +16,8 @@ In addition to the typical B-tree search operators, `btree_gist` also provides i
 Also, for data types for which there is a natural distance metric, `btree_gist` defines a distance operator `<->`, and provides GiST index support for nearest-neighbor searches using this operator. Distance operators are provided for `int2`, `int4`, `int8`, `float4`, `float8`, `timestamp with time zone`, `timestamp without time zone`, `time without time zone`, `date`, `interval`, `oid`, and `money`.
 
 This module is considered “trusted”, that is, it can be installed by non-superusers who have `CREATE` privilege on the current database.
+
+[#id](#BTREE-GIST-EXAMPLE-USAGE)
 
 ### F.9.1. Example Usage [#](#BTREE-GIST-EXAMPLE-USAGE)
 
@@ -48,6 +54,8 @@ DETAIL:  Key (cage, animal)=(123, lion) conflicts with existing key (cage, anima
 => INSERT INTO zoo VALUES(124, 'lion');
 INSERT 0 1
 ```
+
+[#id](#BTREE-GIST-AUTHORS)
 
 ### F.9.2. Authors [#](#BTREE-GIST-AUTHORS)
 

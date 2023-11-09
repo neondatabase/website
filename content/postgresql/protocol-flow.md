@@ -1,3 +1,5 @@
+[#id](#PROTOCOL-FLOW)
+
 ## 55.2. Message Flow [#](#PROTOCOL-FLOW)
 
   * [55.2.1. Start-up](protocol-flow#PROTOCOL-FLOW-START-UP)
@@ -12,7 +14,9 @@
   * [55.2.10. SSL Session Encryption](protocol-flow#PROTOCOL-FLOW-SSL)
   * [55.2.11. GSSAPI Session Encryption](protocol-flow#PROTOCOL-FLOW-GSSAPI)
 
-This section describes the message flow and the semantics of each message type. (Details of the exact representation of each message appear in [Section 55.7](protocol-message-formats "55.7. Message Formats").) There are several different sub-protocols depending on the state of the connection: start-up, query, function call, `COPY`, and termination. There are also special provisions for asynchronous operations (including notification responses and command cancellation), which can occur at any time after the start-up phase.
+This section describes the message flow and the semantics of each message type. (Details of the exact representation of each message appear in [Section 55.7](protocol-message-formats).) There are several different sub-protocols depending on the state of the connection: start-up, query, function call, `COPY`, and termination. There are also special provisions for asynchronous operations (including notification responses and command cancellation), which can occur at any time after the start-up phase.
+
+[#id](#PROTOCOL-FLOW-START-UP)
 
 ### 55.2.1. Start-up [#](#PROTOCOL-FLOW-START-UP)
 
@@ -26,51 +30,51 @@ The possible messages from the server in this phase are:
 
 * ErrorResponse
 
-    The connection attempt has been rejected. The server then immediately closes the connection.
+  The connection attempt has been rejected. The server then immediately closes the connection.
 
 * AuthenticationOk
 
-    The authentication exchange is successfully completed.
+  The authentication exchange is successfully completed.
 
 * AuthenticationKerberosV5
 
-    The frontend must now take part in a Kerberos V5 authentication dialog (not described here, part of the Kerberos specification) with the server. If this is successful, the server responds with an AuthenticationOk, otherwise it responds with an ErrorResponse. This is no longer supported.
+  The frontend must now take part in a Kerberos V5 authentication dialog (not described here, part of the Kerberos specification) with the server. If this is successful, the server responds with an AuthenticationOk, otherwise it responds with an ErrorResponse. This is no longer supported.
 
 * AuthenticationCleartextPassword
 
-    The frontend must now send a PasswordMessage containing the password in clear-text form. If this is the correct password, the server responds with an AuthenticationOk, otherwise it responds with an ErrorResponse.
+  The frontend must now send a PasswordMessage containing the password in clear-text form. If this is the correct password, the server responds with an AuthenticationOk, otherwise it responds with an ErrorResponse.
 
 * AuthenticationMD5Password
 
-    The frontend must now send a PasswordMessage containing the password (with user name) encrypted via MD5, then encrypted again using the 4-byte random salt specified in the AuthenticationMD5Password message. If this is the correct password, the server responds with an AuthenticationOk, otherwise it responds with an ErrorResponse. The actual PasswordMessage can be computed in SQL as `concat('md5', md5(concat(md5(concat(password, username)), random-salt)))`. (Keep in mind the `md5()` function returns its result as a hex string.)
+  The frontend must now send a PasswordMessage containing the password (with user name) encrypted via MD5, then encrypted again using the 4-byte random salt specified in the AuthenticationMD5Password message. If this is the correct password, the server responds with an AuthenticationOk, otherwise it responds with an ErrorResponse. The actual PasswordMessage can be computed in SQL as `concat('md5', md5(concat(md5(concat(password, username)), random-salt)))`. (Keep in mind the `md5()` function returns its result as a hex string.)
 
 * AuthenticationGSS
 
-    The frontend must now initiate a GSSAPI negotiation. The frontend will send a GSSResponse message with the first part of the GSSAPI data stream in response to this. If further messages are needed, the server will respond with AuthenticationGSSContinue.
+  The frontend must now initiate a GSSAPI negotiation. The frontend will send a GSSResponse message with the first part of the GSSAPI data stream in response to this. If further messages are needed, the server will respond with AuthenticationGSSContinue.
 
 * AuthenticationSSPI
 
-    The frontend must now initiate an SSPI negotiation. The frontend will send a GSSResponse with the first part of the SSPI data stream in response to this. If further messages are needed, the server will respond with AuthenticationGSSContinue.
+  The frontend must now initiate an SSPI negotiation. The frontend will send a GSSResponse with the first part of the SSPI data stream in response to this. If further messages are needed, the server will respond with AuthenticationGSSContinue.
 
 * AuthenticationGSSContinue
 
-    This message contains the response data from the previous step of GSSAPI or SSPI negotiation (AuthenticationGSS, AuthenticationSSPI or a previous AuthenticationGSSContinue). If the GSSAPI or SSPI data in this message indicates more data is needed to complete the authentication, the frontend must send that data as another GSSResponse message. If GSSAPI or SSPI authentication is completed by this message, the server will next send AuthenticationOk to indicate successful authentication or ErrorResponse to indicate failure.
+  This message contains the response data from the previous step of GSSAPI or SSPI negotiation (AuthenticationGSS, AuthenticationSSPI or a previous AuthenticationGSSContinue). If the GSSAPI or SSPI data in this message indicates more data is needed to complete the authentication, the frontend must send that data as another GSSResponse message. If GSSAPI or SSPI authentication is completed by this message, the server will next send AuthenticationOk to indicate successful authentication or ErrorResponse to indicate failure.
 
 * AuthenticationSASL
 
-    The frontend must now initiate a SASL negotiation, using one of the SASL mechanisms listed in the message. The frontend will send a SASLInitialResponse with the name of the selected mechanism, and the first part of the SASL data stream in response to this. If further messages are needed, the server will respond with AuthenticationSASLContinue. See [Section 55.3](sasl-authentication "55.3. SASL Authentication") for details.
+  The frontend must now initiate a SASL negotiation, using one of the SASL mechanisms listed in the message. The frontend will send a SASLInitialResponse with the name of the selected mechanism, and the first part of the SASL data stream in response to this. If further messages are needed, the server will respond with AuthenticationSASLContinue. See [Section 55.3](sasl-authentication) for details.
 
 * AuthenticationSASLContinue
 
-    This message contains challenge data from the previous step of SASL negotiation (AuthenticationSASL, or a previous AuthenticationSASLContinue). The frontend must respond with a SASLResponse message.
+  This message contains challenge data from the previous step of SASL negotiation (AuthenticationSASL, or a previous AuthenticationSASLContinue). The frontend must respond with a SASLResponse message.
 
 * AuthenticationSASLFinal
 
-    SASL authentication has completed with additional mechanism-specific data for the client. The server will next send AuthenticationOk to indicate successful authentication, or an ErrorResponse to indicate failure. This message is sent only if the SASL mechanism specifies additional data to be sent from server to client at completion.
+  SASL authentication has completed with additional mechanism-specific data for the client. The server will next send AuthenticationOk to indicate successful authentication, or an ErrorResponse to indicate failure. This message is sent only if the SASL mechanism specifies additional data to be sent from server to client at completion.
 
 * NegotiateProtocolVersion
 
-    The server does not support the minor protocol version requested by the client, but does support an earlier version of the protocol; this message indicates the highest supported minor version. This message will also be sent if the client requested unsupported protocol options (i.e., beginning with `_pq_.`) in the startup packet. This message will be followed by an ErrorResponse or a message indicating the success or failure of authentication.
+  The server does not support the minor protocol version requested by the client, but does support an earlier version of the protocol; this message indicates the highest supported minor version. This message will also be sent if the client requested unsupported protocol options (i.e., beginning with `_pq_.`) in the startup packet. This message will be followed by an ErrorResponse or a message indicating the success or failure of authentication.
 
 If the frontend does not support the authentication method requested by the server, then it should immediately close the connection.
 
@@ -82,25 +86,27 @@ The possible messages from the backend in this phase are:
 
 * BackendKeyData
 
-    This message provides secret-key data that the frontend must save if it wants to be able to issue cancel requests later. The frontend should not respond to this message, but should continue listening for a ReadyForQuery message.
+  This message provides secret-key data that the frontend must save if it wants to be able to issue cancel requests later. The frontend should not respond to this message, but should continue listening for a ReadyForQuery message.
 
 * ParameterStatus
 
-    This message informs the frontend about the current (initial) setting of backend parameters, such as [client\_encoding](runtime-config-client#GUC-CLIENT-ENCODING) or [DateStyle](runtime-config-client#GUC-DATESTYLE). The frontend can ignore this message, or record the settings for its future use; see [Section 55.2.7](protocol-flow#PROTOCOL-ASYNC "55.2.7. Asynchronous Operations") for more details. The frontend should not respond to this message, but should continue listening for a ReadyForQuery message.
+  This message informs the frontend about the current (initial) setting of backend parameters, such as [client\_encoding](runtime-config-client#GUC-CLIENT-ENCODING) or [DateStyle](runtime-config-client#GUC-DATESTYLE). The frontend can ignore this message, or record the settings for its future use; see [Section 55.2.7](protocol-flow#PROTOCOL-ASYNC) for more details. The frontend should not respond to this message, but should continue listening for a ReadyForQuery message.
 
 * ReadyForQuery
 
-    Start-up is completed. The frontend can now issue commands.
+  Start-up is completed. The frontend can now issue commands.
 
 * ErrorResponse
 
-    Start-up failed. The connection is closed after sending this message.
+  Start-up failed. The connection is closed after sending this message.
 
 * NoticeResponse
 
-    A warning message has been issued. The frontend should display the message but continue listening for ReadyForQuery or ErrorResponse.
+  A warning message has been issued. The frontend should display the message but continue listening for ReadyForQuery or ErrorResponse.
 
 The ReadyForQuery message is the same one that the backend will issue after each command cycle. Depending on the coding needs of the frontend, it is reasonable to consider ReadyForQuery as starting a command cycle, or to consider ReadyForQuery as ending the start-up phase and each subsequent command cycle.
+
+[#id](#PROTOCOL-FLOW-SIMPLE-QUERY)
 
 ### 55.2.2. Simple Query [#](#PROTOCOL-FLOW-SIMPLE-QUERY)
 
@@ -110,41 +116,41 @@ The possible response messages from the backend are:
 
 * CommandComplete
 
-    An SQL command completed normally.
+  An SQL command completed normally.
 
 * CopyInResponse
 
-    The backend is ready to copy data from the frontend to a table; see [Section 55.2.6](protocol-flow#PROTOCOL-COPY "55.2.6. COPY Operations").
+  The backend is ready to copy data from the frontend to a table; see [Section 55.2.6](protocol-flow#PROTOCOL-COPY).
 
 * CopyOutResponse
 
-    The backend is ready to copy data from a table to the frontend; see [Section 55.2.6](protocol-flow#PROTOCOL-COPY "55.2.6. COPY Operations").
+  The backend is ready to copy data from a table to the frontend; see [Section 55.2.6](protocol-flow#PROTOCOL-COPY).
 
 * RowDescription
 
-    Indicates that rows are about to be returned in response to a `SELECT`, `FETCH`, etc. query. The contents of this message describe the column layout of the rows. This will be followed by a DataRow message for each row being returned to the frontend.
+  Indicates that rows are about to be returned in response to a `SELECT`, `FETCH`, etc. query. The contents of this message describe the column layout of the rows. This will be followed by a DataRow message for each row being returned to the frontend.
 
 * DataRow
 
-    One of the set of rows returned by a `SELECT`, `FETCH`, etc. query.
+  One of the set of rows returned by a `SELECT`, `FETCH`, etc. query.
 
 * EmptyQueryResponse
 
-    An empty query string was recognized.
+  An empty query string was recognized.
 
 * ErrorResponse
 
-    An error has occurred.
+  An error has occurred.
 
 * ReadyForQuery
 
-    Processing of the query string is complete. A separate message is sent to indicate this because the query string might contain multiple SQL commands. (CommandComplete marks the end of processing one SQL command, not the whole string.) ReadyForQuery will always be sent, whether processing terminates successfully or with an error.
+  Processing of the query string is complete. A separate message is sent to indicate this because the query string might contain multiple SQL commands. (CommandComplete marks the end of processing one SQL command, not the whole string.) ReadyForQuery will always be sent, whether processing terminates successfully or with an error.
 
 * NoticeResponse
 
-    A warning message has been issued in relation to the query. Notices are in addition to other responses, i.e., the backend will continue processing the command.
+  A warning message has been issued in relation to the query. Notices are in addition to other responses, i.e., the backend will continue processing the command.
 
-The response to a `SELECT` query (or other queries that return row sets, such as `EXPLAIN` or `SHOW`) normally consists of RowDescription, zero or more DataRow messages, and then CommandComplete. `COPY` to or from the frontend invokes special protocol as described in [Section 55.2.6](protocol-flow#PROTOCOL-COPY "55.2.6. COPY Operations"). All other query types normally produce only a CommandComplete message.
+The response to a `SELECT` query (or other queries that return row sets, such as `EXPLAIN` or `SHOW`) normally consists of RowDescription, zero or more DataRow messages, and then CommandComplete. `COPY` to or from the frontend invokes special protocol as described in [Section 55.2.6](protocol-flow#PROTOCOL-COPY). All other query types normally produce only a CommandComplete message.
 
 Since a query string could contain several queries (separated by semicolons), there might be several such response sequences before the backend finishes processing the query string. ReadyForQuery is issued when the entire string has been processed and the backend is ready to accept a new query string.
 
@@ -154,16 +160,17 @@ In the event of an error, ErrorResponse is issued followed by ReadyForQuery. All
 
 In simple Query mode, the format of retrieved values is always text, except when the given command is a `FETCH` from a cursor declared with the `BINARY` option. In that case, the retrieved values are in binary format. The format codes given in the RowDescription message tell which format is being used.
 
-A frontend must be prepared to accept ErrorResponse and NoticeResponse messages whenever it is expecting any other type of message. See also [Section 55.2.7](protocol-flow#PROTOCOL-ASYNC "55.2.7. Asynchronous Operations") concerning messages that the backend might generate due to outside events.
+A frontend must be prepared to accept ErrorResponse and NoticeResponse messages whenever it is expecting any other type of message. See also [Section 55.2.7](protocol-flow#PROTOCOL-ASYNC) concerning messages that the backend might generate due to outside events.
 
 Recommended practice is to code frontends in a state-machine style that will accept any message type at any time that it could make sense, rather than wiring in assumptions about the exact sequence of messages.
+
+[#id](#PROTOCOL-FLOW-MULTI-STATEMENT)
 
 #### 55.2.2.1. Multiple Statements in a Simple Query [#](#PROTOCOL-FLOW-MULTI-STATEMENT)
 
 When a simple Query message contains more than one SQL statement (separated by semicolons), those statements are executed as a single transaction, unless explicit transaction control commands are included to force a different behavior. For example, if the message contains
 
 ```
-
 INSERT INTO mytable VALUES(1);
 SELECT 1/0;
 INSERT INTO mytable VALUES(2);
@@ -174,7 +181,6 @@ then the divide-by-zero failure in the `SELECT` will force rollback of the first
 If instead the message contains
 
 ```
-
 BEGIN;
 INSERT INTO mytable VALUES(1);
 COMMIT;
@@ -195,7 +201,6 @@ Savepoints are not allowed in an implicit transaction block, since they would co
 Remember that, regardless of any transaction control commands that may be present, execution of the Query message stops at the first error. Thus for example given
 
 ```
-
 BEGIN;
 SELECT 1/0;
 ROLLBACK;
@@ -206,7 +211,6 @@ in a single Query message, the session will be left inside a failed regular tran
 Another behavior of note is that initial lexical and syntactic analysis is done on the entire query string before any of it is executed. Thus simple errors (such as a misspelled keyword) in later statements can prevent execution of any of the statements. This is normally invisible to users since the statements would all roll back anyway when done as an implicit transaction block. However, it can be visible when attempting to do multiple transactions within a multi-statement Query. For instance, if a typo turned our previous example into
 
 ```
-
 BEGIN;
 INSERT INTO mytable VALUES(1);
 COMMIT;
@@ -215,6 +219,8 @@ SELCT 1/0;
 ```
 
 then none of the statements would get run, resulting in the visible difference that the first `INSERT` is not committed. Errors detected at semantic analysis or later, such as a misspelled table or column name, do not have this effect.
+
+[#id](#PROTOCOL-FLOW-EXT-QUERY)
 
 ### 55.2.3. Extended Query [#](#PROTOCOL-FLOW-EXT-QUERY)
 
@@ -270,7 +276,11 @@ The Flush message does not cause any specific output to be generated, but forces
 
 The simple Query message is approximately equivalent to the series Parse, Bind, portal Describe, Execute, Close, Sync, using the unnamed prepared statement and portal objects and no parameters. One difference is that it will accept multiple SQL statements in the query string, automatically performing the bind/describe/execute sequence for each one in succession. Another difference is that it will not return ParseComplete, BindComplete, CloseComplete, or NoData messages.
 
+[#id](#PROTOCOL-FLOW-PIPELINING)
+
 ### 55.2.4. Pipelining [#](#PROTOCOL-FLOW-PIPELINING)
+
+
 
 Use of the extended query protocol allows *pipelining*, which means sending a series of queries without waiting for earlier ones to complete. This reduces the number of network round trips needed to complete a given series of operations. However, the user must carefully consider the required behavior if one of the steps fails, since later queries will already be in flight to the server.
 
@@ -281,6 +291,8 @@ The extended query protocol provides another way to manage this concern, which i
 If the client has not issued an explicit `BEGIN`, then each Sync ordinarily causes an implicit `COMMIT` if the preceding step(s) succeeded, or an implicit `ROLLBACK` if they failed. However, there are a few DDL commands (such as `CREATE DATABASE`) that cannot be executed inside a transaction block. If one of these is executed in a pipeline, it will fail unless it is the first command in the pipeline. Furthermore, upon success it will force an immediate commit to preserve database consistency. Thus a Sync immediately following one of these commands has no effect except to respond with ReadyForQuery.
 
 When using this method, completion of the pipeline must be determined by counting ReadyForQuery messages and waiting for that to reach the number of Syncs sent. Counting command completion responses is unreliable, since some of the commands may be skipped and thus not produce a completion message.
+
+[#id](#PROTOCOL-FLOW-FUNCTION-CALL)
 
 ### 55.2.5. Function Call [#](#PROTOCOL-FLOW-FUNCTION-CALL)
 
@@ -296,19 +308,21 @@ The possible response messages from the backend are:
 
 * ErrorResponse
 
-    An error has occurred.
+  An error has occurred.
 
 * FunctionCallResponse
 
-    The function call was completed and returned the result given in the message. (Note that the Function Call protocol can only handle a single scalar result, not a row type or set of results.)
+  The function call was completed and returned the result given in the message. (Note that the Function Call protocol can only handle a single scalar result, not a row type or set of results.)
 
 * ReadyForQuery
 
-    Processing of the function call is complete. ReadyForQuery will always be sent, whether processing terminates successfully or with an error.
+  Processing of the function call is complete. ReadyForQuery will always be sent, whether processing terminates successfully or with an error.
 
 * NoticeResponse
 
-    A warning message has been issued in relation to the function call. Notices are in addition to other responses, i.e., the backend will continue processing the command.
+  A warning message has been issued in relation to the function call. Notices are in addition to other responses, i.e., the backend will continue processing the command.
+
+[#id](#PROTOCOL-COPY)
 
 ### 55.2.6. COPY Operations [#](#PROTOCOL-COPY)
 
@@ -324,11 +338,13 @@ Copy-out mode (data transfer from the server) is initiated when the backend exec
 
 In the event of a backend-detected error during copy-out mode, the backend will issue an ErrorResponse message and revert to normal processing. The frontend should treat receipt of ErrorResponse as terminating the copy-out mode.
 
-It is possible for NoticeResponse and ParameterStatus messages to be interspersed between CopyData messages; frontends must handle these cases, and should be prepared for other asynchronous message types as well (see [Section 55.2.7](protocol-flow#PROTOCOL-ASYNC "55.2.7. Asynchronous Operations")). Otherwise, any message type other than CopyData or CopyDone may be treated as terminating copy-out mode.
+It is possible for NoticeResponse and ParameterStatus messages to be interspersed between CopyData messages; frontends must handle these cases, and should be prepared for other asynchronous message types as well (see [Section 55.2.7](protocol-flow#PROTOCOL-ASYNC)). Otherwise, any message type other than CopyData or CopyDone may be treated as terminating copy-out mode.
 
-There is another Copy-related mode called copy-both, which allows high-speed bulk data transfer to *and* from the server. Copy-both mode is initiated when a backend in walsender mode executes a `START_REPLICATION` statement. The backend sends a CopyBothResponse message to the frontend. Both the backend and the frontend may then send CopyData messages until either end sends a CopyDone message. After the client sends a CopyDone message, the connection goes from copy-both mode to copy-out mode, and the client may not send any more CopyData messages. Similarly, when the server sends a CopyDone message, the connection goes into copy-in mode, and the server may not send any more CopyData messages. After both sides have sent a CopyDone message, the copy mode is terminated, and the backend reverts to the command-processing mode. In the event of a backend-detected error during copy-both mode, the backend will issue an ErrorResponse message, discard frontend messages until a Sync message is received, and then issue ReadyForQuery and return to normal processing. The frontend should treat receipt of ErrorResponse as terminating the copy in both directions; no CopyDone should be sent in this case. See [Section 55.4](protocol-replication "55.4. Streaming Replication Protocol") for more information on the subprotocol transmitted over copy-both mode.
+There is another Copy-related mode called copy-both, which allows high-speed bulk data transfer to *and* from the server. Copy-both mode is initiated when a backend in walsender mode executes a `START_REPLICATION` statement. The backend sends a CopyBothResponse message to the frontend. Both the backend and the frontend may then send CopyData messages until either end sends a CopyDone message. After the client sends a CopyDone message, the connection goes from copy-both mode to copy-out mode, and the client may not send any more CopyData messages. Similarly, when the server sends a CopyDone message, the connection goes into copy-in mode, and the server may not send any more CopyData messages. After both sides have sent a CopyDone message, the copy mode is terminated, and the backend reverts to the command-processing mode. In the event of a backend-detected error during copy-both mode, the backend will issue an ErrorResponse message, discard frontend messages until a Sync message is received, and then issue ReadyForQuery and return to normal processing. The frontend should treat receipt of ErrorResponse as terminating the copy in both directions; no CopyDone should be sent in this case. See [Section 55.4](protocol-replication) for more information on the subprotocol transmitted over copy-both mode.
 
 The CopyInResponse, CopyOutResponse and CopyBothResponse messages include fields that inform the frontend of the number of columns per row and the format codes being used for each column. (As of the present implementation, all columns in a given `COPY` operation will use the same format, but the message design does not assume this.)
+
+[#id](#PROTOCOL-ASYNC)
 
 ### 55.2.7. Asynchronous Operations [#](#PROTOCOL-ASYNC)
 
@@ -346,6 +362,8 @@ If a frontend issues a `LISTEN` command, then the backend will send a Notificati
 
 At present, NotificationResponse can only be sent outside a transaction, and thus it will not occur in the middle of a command-response series, though it might occur just before ReadyForQuery. It is unwise to design frontend logic that assumes that, however. Good practice is to be able to accept NotificationResponse at any point in the protocol.
 
+[#id](#PROTOCOL-FLOW-CANCELING-REQUESTS)
+
 ### 55.2.8. Canceling Requests in Progress [#](#PROTOCOL-FLOW-CANCELING-REQUESTS)
 
 During the processing of a query, the frontend might request cancellation of the query. The cancel request is not sent directly on the open connection to the backend for reasons of implementation efficiency: we don't want to have the backend constantly checking for new input from the frontend during query processing. Cancel requests should be relatively infrequent, so we make them slightly cumbersome in order to avoid a penalty in the normal case.
@@ -360,6 +378,8 @@ The upshot of all this is that for reasons of both security and efficiency, the 
 
 Since the cancel request is sent across a new connection to the server and not across the regular frontend/backend communication link, it is possible for the cancel request to be issued by any process, not just the frontend whose query is to be canceled. This might provide additional flexibility when building multiple-process applications. It also introduces a security risk, in that unauthorized persons might try to cancel queries. The security risk is addressed by requiring a dynamically generated secret key to be supplied in cancel requests.
 
+[#id](#PROTOCOL-FLOW-TERMINATION)
+
 ### 55.2.9. Termination [#](#PROTOCOL-FLOW-TERMINATION)
 
 The normal, graceful termination procedure is that the frontend sends a Terminate message and immediately closes the connection. On receipt of this message, the backend closes the connection and terminates.
@@ -370,9 +390,11 @@ Other termination scenarios arise from various failure cases, such as core dump 
 
 For either normal or abnormal termination, any open transaction is rolled back, not committed. One should note however that if a frontend disconnects while a non-`SELECT` query is being processed, the backend will probably finish the query before noticing the disconnection. If the query is outside any transaction block (`BEGIN` ... `COMMIT` sequence) then its results might be committed before the disconnection is recognized.
 
+[#id](#PROTOCOL-FLOW-SSL)
+
 ### 55.2.10. SSL Session Encryption [#](#PROTOCOL-FLOW-SSL)
 
-If PostgreSQL was built with SSL support, frontend/backend communications can be encrypted using SSL. This provides communication security in environments where attackers might be able to capture the session traffic. For more information on encrypting PostgreSQL sessions with SSL, see [Section 19.9](ssl-tcp "19.9. Secure TCP/IP Connections with SSL").
+If PostgreSQL was built with SSL support, frontend/backend communications can be encrypted using SSL. This provides communication security in environments where attackers might be able to capture the session traffic. For more information on encrypting PostgreSQL sessions with SSL, see [Section 19.9](ssl-tcp).
 
 To initiate an SSL-encrypted connection, the frontend initially sends an SSLRequest message rather than a StartupMessage. The server then responds with a single byte containing `S` or `N`, indicating that it is willing or unwilling to perform SSL, respectively. The frontend might close the connection at this point if it is dissatisfied with the response. To continue after `S`, perform an SSL startup handshake (not described here, part of the SSL specification) with the server. If this is successful, continue with sending the usual StartupMessage. In this case the StartupMessage and all subsequent data will be SSL-encrypted. To continue after `N`, send the usual StartupMessage and proceed without encryption. (Alternatively, it is permissible to issue a GSSENCRequest message after an `N` response to try to use GSSAPI encryption instead of SSL.)
 
@@ -384,9 +406,11 @@ An initial SSLRequest can also be used in a connection that is being opened to s
 
 While the protocol itself does not provide a way for the server to force SSL encryption, the administrator can configure the server to reject unencrypted sessions as a byproduct of authentication checking.
 
+[#id](#PROTOCOL-FLOW-GSSAPI)
+
 ### 55.2.11. GSSAPI Session Encryption [#](#PROTOCOL-FLOW-GSSAPI)
 
-If PostgreSQL was built with GSSAPI support, frontend/backend communications can be encrypted using GSSAPI. This provides communication security in environments where attackers might be able to capture the session traffic. For more information on encrypting PostgreSQL sessions with GSSAPI, see [Section 19.10](gssapi-enc "19.10. Secure TCP/IP Connections with GSSAPI Encryption").
+If PostgreSQL was built with GSSAPI support, frontend/backend communications can be encrypted using GSSAPI. This provides communication security in environments where attackers might be able to capture the session traffic. For more information on encrypting PostgreSQL sessions with GSSAPI, see [Section 19.10](gssapi-enc).
 
 To initiate a GSSAPI-encrypted connection, the frontend initially sends a GSSENCRequest message rather than a StartupMessage. The server then responds with a single byte containing `G` or `N`, indicating that it is willing or unwilling to perform GSSAPI encryption, respectively. The frontend might close the connection at this point if it is dissatisfied with the response. To continue after `G`, using the GSSAPI C bindings as discussed in [RFC 2744](https://tools.ietf.org/html/rfc2744) or equivalent, perform a GSSAPI initialization by calling `gss_init_sec_context()` in a loop and sending the result to the server, starting with an empty input and then with each result from the server, until it returns no output. When sending the results of `gss_init_sec_context()` to the server, prepend the length of the message as a four byte integer in network byte order. To continue after `N`, send the usual StartupMessage and proceed without encryption. (Alternatively, it is permissible to issue an SSLRequest message after an `N` response to try to use SSL encryption instead of GSSAPI.)
 

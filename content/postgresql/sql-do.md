@@ -1,3 +1,5 @@
+[#id](#SQL-DO)
+
 ## DO
 
 DO — execute an anonymous code block
@@ -5,9 +7,10 @@ DO — execute an anonymous code block
 ## Synopsis
 
 ```
-
 DO [ LANGUAGE lang_name ] code
 ```
+
+[#id](#id-1.9.3.102.6)
 
 ## Description
 
@@ -17,15 +20,19 @@ The code block is treated as though it were the body of a function with no param
 
 The optional `LANGUAGE` clause can be written either before or after the code block.
 
+[#id](#id-1.9.3.102.7)
+
 ## Parameters
 
 * *`code`*
 
-    The procedural language code to be executed. This must be specified as a string literal, just as in `CREATE FUNCTION`. Use of a dollar-quoted literal is recommended.
+  The procedural language code to be executed. This must be specified as a string literal, just as in `CREATE FUNCTION`. Use of a dollar-quoted literal is recommended.
 
 * *`lang_name`*
 
-    The name of the procedural language the code is written in. If omitted, the default is `plpgsql`.
+  The name of the procedural language the code is written in. If omitted, the default is `plpgsql`.
+
+[#id](#id-1.9.3.102.8)
 
 ## Notes
 
@@ -35,12 +42,13 @@ The user must have `USAGE` privilege for the procedural language, or must be a s
 
 If `DO` is executed in a transaction block, then the procedure code cannot execute transaction control statements. Transaction control statements are only allowed if `DO` is executed in its own transaction.
 
+[#id](#SQL-DO-EXAMPLES)
+
 ## Examples
 
 Grant all privileges on all views in schema `public` to role `webuser`:
 
 ```
-
 DO $$DECLARE r record;
 BEGIN
     FOR r IN SELECT table_schema, table_name FROM information_schema.tables
@@ -51,10 +59,14 @@ BEGIN
 END$$;
 ```
 
+[#id](#id-1.9.3.102.10)
+
 ## Compatibility
 
 There is no `DO` statement in the SQL standard.
 
+[#id](#id-1.9.3.102.11)
+
 ## See Also
 
-[CREATE LANGUAGE](sql-createlanguage "CREATE LANGUAGE")
+[CREATE LANGUAGE](sql-createlanguage)

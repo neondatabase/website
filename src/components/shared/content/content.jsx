@@ -21,19 +21,9 @@ import Link from 'components/shared/link';
 const Heading =
   (Tag) =>
   // eslint-disable-next-line react/prop-types
-  ({ children, className = null }) => {
-    const href =
-      // eslint-disable-next-line react/prop-types
-      Array.isArray(children) ? children.find((child) => child?.props?.href)?.props?.href : null;
-
-    const id = href?.replace('#', '');
-
-    return (
-      <Tag className={clsx(className, 'postgres-heading')} id={id || undefined}>
-        {children}
-      </Tag>
-    );
-  };
+  ({ children, className = null }) => (
+    <Tag className={clsx(className, 'postgres-heading')}>{children}</Tag>
+  );
 
 const getHeadingComponent = (heading, withoutAnchorHeading, isPostgres) => {
   if (withoutAnchorHeading) {
@@ -70,6 +60,10 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   ),
   a: (props) => {
     const { href, children, ...otherProps } = props;
+    if (children === '#id') {
+      const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
+      return <span id={id} />
+    }
     return (
       <Link to={href} {...otherProps}>
         {children}

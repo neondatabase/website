@@ -1,6 +1,12 @@
+[#id](#FUNCTIONS-BITSTRING)
+
 ## 9.6. Bit String Functions and Operators [#](#FUNCTIONS-BITSTRING)
 
-This section describes functions and operators for examining and manipulating bit strings, that is values of the types `bit` and `bit varying`. (While only type `bit` is mentioned in these tables, values of type `bit varying` can be used interchangeably.) Bit strings support the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators"), as well as the operators shown in [Table 9.14](functions-bitstring#FUNCTIONS-BIT-STRING-OP-TABLE "Table 9.14. Bit String Operators").
+
+
+This section describes functions and operators for examining and manipulating bit strings, that is values of the types `bit` and `bit varying`. (While only type `bit` is mentioned in these tables, values of type `bit varying` can be used interchangeably.) Bit strings support the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE), as well as the operators shown in [Table 9.14](functions-bitstring#FUNCTIONS-BIT-STRING-OP-TABLE).
+
+[#id](#FUNCTIONS-BIT-STRING-OP-TABLE)
 
 **Table 9.14. Bit String Operators**
 
@@ -16,7 +22,10 @@ This section describes functions and operators for examining and manipulating bi
 
 \
 
-Some of the functions available for binary strings are also available for bit strings, as shown in [Table 9.15](functions-bitstring#FUNCTIONS-BIT-STRING-TABLE "Table 9.15. Bit String Functions").
+
+Some of the functions available for binary strings are also available for bit strings, as shown in [Table 9.15](functions-bitstring#FUNCTIONS-BIT-STRING-TABLE).
+
+[#id](#FUNCTIONS-BIT-STRING-TABLE)
 
 **Table 9.15. Bit String Functions**
 
@@ -33,6 +42,7 @@ Some of the functions available for binary strings are also available for bit st
 | `set_bit` ( *`bits`* `bit`, *`n`* `integer`, *`newvalue`* `integer` ) → `bit`Sets *`n`*'th bit in bit string to *`newvalue`*; the first (leftmost) bit is bit 0.`set_bit(B'101010101010101010', 6, 0)` → `101010001010101010`                                                                                                                                                                                            |
 
 \
+
 
 In addition, it is possible to cast integral values to and from type `bit`. Casting an integer to `bit(n)` copies the rightmost `n` bits. Casting an integer to a bit string width wider than the integer itself will sign-extend on the left. Some examples:
 

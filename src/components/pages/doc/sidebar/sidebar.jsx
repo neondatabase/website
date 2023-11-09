@@ -20,7 +20,7 @@ const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = 
       className
     )}
   >
-    <div className="sticky top-10 z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-10 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-gray-new-10 dark:after:to-gray-new-10">
+    <div className="sticky top-10 z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-16 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-gray-new-10 dark:after:to-gray-new-10">
       <Search className="z-30" indexName={indexName} />
       <div className="flex mt-9 gap-x-8 border-b dark:border-gray-new-20 border-gray-new-90">
         <DocNavLink className="" to={LINKS.docs}>

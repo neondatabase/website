@@ -1,3 +1,5 @@
+[#id](#HSTORE)
+
 ## F.18. hstore — hstore key/value datatype [#](#HSTORE)
 
   * [F.18.1. `hstore` External Representation](hstore#HSTORE-EXTERNAL-REP)
@@ -9,9 +11,13 @@
   * [F.18.7. Transforms](hstore#HSTORE-TRANSFORMS)
   * [F.18.8. Authors](hstore#HSTORE-AUTHORS)
 
+
+
 This module implements the `hstore` data type for storing sets of key/value pairs within a single PostgreSQL value. This can be useful in various scenarios, such as rows with many attributes that are rarely examined, or semi-structured data. Keys and values are simply text strings.
 
 This module is considered “trusted”, that is, it can be installed by non-superusers who have `CREATE` privilege on the current database.
+
+[#id](#HSTORE-EXTERNAL-REP)
 
 ### F.18.1. `hstore` External Representation [#](#HSTORE-EXTERNAL-REP)
 
@@ -47,13 +53,17 @@ The `NULL` keyword is case-insensitive. Double-quote the `NULL` to treat it as t
 
 ### Note
 
-Keep in mind that the `hstore` text format, when used for input, applies *before* any required quoting or escaping. If you are passing an `hstore` literal via a parameter, then no additional processing is needed. But if you're passing it as a quoted literal constant, then any single-quote characters and (depending on the setting of the `standard_conforming_strings` configuration parameter) backslash characters need to be escaped correctly. See [Section 4.1.2.1](sql-syntax-lexical#SQL-SYNTAX-STRINGS "4.1.2.1. String Constants") for more on the handling of string constants.
+Keep in mind that the `hstore` text format, when used for input, applies *before* any required quoting or escaping. If you are passing an `hstore` literal via a parameter, then no additional processing is needed. But if you're passing it as a quoted literal constant, then any single-quote characters and (depending on the setting of the `standard_conforming_strings` configuration parameter) backslash characters need to be escaped correctly. See [Section 4.1.2.1](sql-syntax-lexical#SQL-SYNTAX-STRINGS) for more on the handling of string constants.
 
 On output, double quotes always surround keys and values, even when it's not strictly necessary.
 
+[#id](#HSTORE-OPS-FUNCS)
+
 ### F.18.2. `hstore` Operators and Functions [#](#HSTORE-OPS-FUNCS)
 
-The operators provided by the `hstore` module are shown in [Table F.7](hstore#HSTORE-OP-TABLE "Table F.7. hstore Operators"), the functions in [Table F.8](hstore#HSTORE-FUNC-TABLE "Table F.8. hstore Functions").
+The operators provided by the `hstore` module are shown in [Table F.7](hstore#HSTORE-OP-TABLE), the functions in [Table F.8](hstore#HSTORE-FUNC-TABLE).
+
+[#id](#HSTORE-OP-TABLE)
 
 **Table F.7. `hstore` Operators**
 
@@ -76,6 +86,9 @@ The operators provided by the `hstore` module are shown in [Table F.7](hstore#H
 
 \
 
+
+[#id](#HSTORE-FUNC-TABLE)
+
 **Table F.8. `hstore` Functions**
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -85,9 +98,17 @@ The operators provided by the `hstore` module are shown in [Table F.7](hstore#H
 | `hstore` ( `text[]`, `text[]` ) → `hstore`Constructs an `hstore` from separate key and value arrays.`hstore(ARRAY['a','b'], ARRAY['1','2'])` → `"a"=>"1", "b"=>"2"`                                                                                                                                                                                                                                           |
 | `hstore` ( `text`, `text` ) → `hstore`Makes a single-item `hstore`.`hstore('a', 'b')` → `"a"=>"b"`                                                                                                                                                                                                                                                                                                            |
 | `akeys` ( `hstore` ) → `text[]`Extracts an `hstore`'s keys as an array.`akeys('a=>1,b=>2')` → `{a,b}`                                                                                                                                                                                                                                                                                                     |
-| `skeys` ( `hstore` ) → `setof text`Extracts an `hstore`'s keys as a set.`skeys('a=>1,b=>2')` →``     a b                                                                                                                                                                                                                                                                                                  |
+| `skeys` ( `hstore` ) → `setof text`Extracts an `hstore`'s keys as a set.`skeys('a=>1,b=>2')` →`````
+
+a
+b
+```                                                                                                                                                                                                                                                                                              |
 | `avals` ( `hstore` ) → `text[]`Extracts an `hstore`'s values as an array.`avals('a=>1,b=>2')` → `{1,2}`                                                                                                                                                                                                                                                                                                   |
-| `svals` ( `hstore` ) → `setof text`Extracts an `hstore`'s values as a set.`svals('a=>1,b=>2')` →``     1 2                                                                                                                                                                                                                                                                                                |
+| `svals` ( `hstore` ) → `setof text`Extracts an `hstore`'s values as a set.`svals('a=>1,b=>2')` →`````
+
+1
+2
+```                                                                                                                                                                                                                                                                                            |
 | `hstore_to_array` ( `hstore` ) → `text[]`Extracts an `hstore`'s keys and values as an array of alternating keys and values.`hstore_to_array('a=>1,b=>2')` → `{a,1,b,2}`                                                                                                                                                                                                                                   |
 | `hstore_to_matrix` ( `hstore` ) → `text[]`Extracts an `hstore`'s keys and values as a two-dimensional array.`hstore_to_matrix('a=>1,b=>2')` → `{{a,1},{b,2}}`                                                                                                                                                                                                                                             |
 | `hstore_to_json` ( `hstore` ) → `json`Converts an `hstore` to a `json` value, converting all non-null values to JSON strings.This function is used implicitly when an `hstore` value is cast to `json`.`hstore_to_json('"a key"=>1, b=>t, c=>null, d=>12345, e=>012345, f=>1.234, g=>2.345e+4')` → `{"a key": "1", "b": "t", "c": null, "d": "12345", "e": "012345", "f": "1.234", "g": "2.345e+4"}`      |
@@ -95,7 +116,13 @@ The operators provided by the `hstore` module are shown in [Table F.7](hstore#H
 | `hstore_to_json_loose` ( `hstore` ) → `json`Converts an `hstore` to a `json` value, but attempts to distinguish numerical and Boolean values so they are unquoted in the JSON.`hstore_to_json_loose('"a key"=>1, b=>t, c=>null, d=>12345, e=>012345, f=>1.234, g=>2.345e+4')` → `{"a key": 1, "b": true, "c": null, "d": 12345, "e": "012345", "f": 1.234, "g": 2.345e+4}`                                |
 | `hstore_to_jsonb_loose` ( `hstore` ) → `jsonb`Converts an `hstore` to a `jsonb` value, but attempts to distinguish numerical and Boolean values so they are unquoted in the JSON.`hstore_to_jsonb_loose('"a key"=>1, b=>t, c=>null, d=>12345, e=>012345, f=>1.234, g=>2.345e+4')` → `{"a key": 1, "b": true, "c": null, "d": 12345, "e": "012345", "f": 1.234, "g": 2.345e+4}`                            |
 | `slice` ( `hstore`, `text[]` ) → `hstore`Extracts a subset of an `hstore` containing only the specified keys.`slice('a=>1,b=>2,c=>3'::hstore, ARRAY['b','c','x'])` → `"b"=>"2", "c"=>"3"`                                                                                                                                                                                                                 |
-| `each` ( `hstore` ) → `setof record` ( *`key`* `text`, *`value`* `text` )Extracts an `hstore`'s keys and values as a set of records.`select * from each('a=>1,b=>2')` →``      key | value -----+-------  a   | 1  b   | 2                                                                                                                                                                                |
+| `each` ( `hstore` ) → `setof record` ( *`key`* `text`, *`value`* `text` )Extracts an `hstore`'s keys and values as a set of records.`select * from each('a=>1,b=>2')` →`````
+
+ key | value
+-----+-------
+ a   | 1
+ b   | 2
+```                                                                                                                                                                            |
 | `exist` ( `hstore`, `text` ) → `boolean`Does `hstore` contain key?`exist('a=>1', 'a')` → `t`                                                                                                                                                                                                                                                                                                              |
 | `defined` ( `hstore`, `text` ) → `boolean`Does `hstore` contain a non-`NULL` value for key?`defined('a=>NULL', 'a')` → `f`                                                                                                                                                                                                                                                                                |
 | `delete` ( `hstore`, `text` ) → `hstore`Deletes pair with matching key.`delete('a=>1,b=>2', 'b')` → `"a"=>"1"`                                                                                                                                                                                                                                                                                            |
@@ -104,6 +131,7 @@ The operators provided by the `hstore` module are shown in [Table F.7](hstore#H
 | `populate_record` ( `anyelement`, `hstore` ) → `anyelement`Replaces fields in the left operand (which must be a composite type) with matching values from `hstore`.`populate_record(ROW(1,2), 'f1=>42'::hstore)` → `(42,2)`                                                                                                                                                                               |
 
 \
+
 
 In addition to these operators and functions, values of the `hstore` type can be subscripted, allowing them to act like associative arrays. Only a single subscript of type `text` can be specified; it is interpreted as a key and the corresponding value is fetched or stored. For example,
 
@@ -126,6 +154,8 @@ SELECT h FROM mytable;
 ```
 
 A subscripted fetch returns `NULL` if the subscript is `NULL` or that key does not exist in the `hstore`. (Thus, a subscripted fetch is not greatly different from the `->` operator.) A subscripted update fails if the subscript is `NULL`; otherwise, it replaces the value for that key, adding an entry to the `hstore` if the key does not already exist.
+
+[#id](#HSTORE-INDEXES)
 
 ### F.18.3. Indexes [#](#HSTORE-INDEXES)
 
@@ -155,6 +185,8 @@ CREATE INDEX hidx ON testhstore USING BTREE (h);
 
 CREATE INDEX hidx ON testhstore USING HASH (h);
 ```
+
+[#id](#HSTORE-EXAMPLES)
 
 ### F.18.4. Examples [#](#HSTORE-EXAMPLES)
 
@@ -228,6 +260,8 @@ SELECT (r).* FROM (SELECT t #= '"col3"=>"baz"' AS r FROM test t) s;
 (1 row)
 ```
 
+[#id](#HSTORE-STATISTICS)
+
 ### F.18.5. Statistics [#](#HSTORE-STATISTICS)
 
 The `hstore` type, because of its intrinsic liberality, could contain a lot of different keys. Checking for valid keys is the task of the application. The following examples demonstrate several techniques for checking keys and obtaining statistics.
@@ -268,6 +302,8 @@ SELECT key, count(*) FROM
 ...................
 ```
 
+[#id](#HSTORE-COMPATIBILITY)
+
 ### F.18.6. Compatibility [#](#HSTORE-COMPATIBILITY)
 
 As of PostgreSQL 9.0, `hstore` uses a different internal representation than previous versions. This presents no obstacle for dump/restore upgrades since the text representation (used in the dump) is unchanged.
@@ -288,6 +324,8 @@ ALTER TABLE tablename ALTER hstorecol TYPE hstore USING hstorecol || '';
 
 The `ALTER TABLE` method requires an `ACCESS EXCLUSIVE` lock on the table, but does not result in bloating the table with old row versions.
 
+[#id](#HSTORE-TRANSFORMS)
+
 ### F.18.7. Transforms [#](#HSTORE-TRANSFORMS)
 
 Additional extensions are available that implement transforms for the `hstore` type for the languages PL/Perl and PL/Python. The extensions for PL/Perl are called `hstore_plperl` and `hstore_plperlu`, for trusted and untrusted PL/Perl. If you install these transforms and specify them when creating a function, `hstore` values are mapped to Perl hashes. The extension for PL/Python is called `hstore_plpython3u`. If you use it, `hstore` values are mapped to Python dictionaries.
@@ -295,6 +333,8 @@ Additional extensions are available that implement transforms for the `hstore` t
 ### Caution
 
 It is strongly recommended that the transform extensions be installed in the same schema as `hstore`. Otherwise there are installation-time security hazards if a transform extension's schema contains objects defined by a hostile user.
+
+[#id](#HSTORE-AUTHORS)
 
 ### F.18.8. Authors [#](#HSTORE-AUTHORS)
 

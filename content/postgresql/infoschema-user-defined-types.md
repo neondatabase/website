@@ -1,8 +1,12 @@
+[#id](#INFOSCHEMA-USER-DEFINED-TYPES)
+
 ## 37.60. `user_defined_types` [#](#INFOSCHEMA-USER-DEFINED-TYPES)
 
 The view `user_defined_types` currently contains all composite types defined in the current database. Only those types are shown that the current user has access to (by way of being the owner or having some privilege).
 
-SQL knows about two kinds of user-defined types: structured types (also known as composite types in PostgreSQL) and distinct types (not implemented in PostgreSQL). To be future-proof, use the column `user_defined_type_category` to differentiate between these. Other user-defined types such as base types and enums, which are PostgreSQL extensions, are not shown here. For domains, see [Section 37.23](infoschema-domains "37.23. domains") instead.
+SQL knows about two kinds of user-defined types: structured types (also known as composite types in PostgreSQL) and distinct types (not implemented in PostgreSQL). To be future-proof, use the column `user_defined_type_category` to differentiate between these. Other user-defined types such as base types and enums, which are PostgreSQL extensions, are not shown here. For domains, see [Section 37.23](infoschema-domains) instead.
+
+[#id](#id-1.7.6.64.4)
 
 **Table 37.58. `user_defined_types` Columns**
 

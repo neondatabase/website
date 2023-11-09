@@ -1,3 +1,5 @@
+[#id](#GEQO-PG-INTRO)
+
 ## 62.3. Genetic Query Optimization (GEQO) in PostgreSQL [#](#GEQO-PG-INTRO)
 
   * [62.3.1. Generating Possible Plans with GEQO](geqo-pg-intro#GEQO-PG-INTRO-GEN-POSSIBLE-PLANS)
@@ -18,12 +20,16 @@ is encoded by the integer string '4-1-3-2', which means, first join relation '4'
 Specific characteristics of the GEQO implementation in PostgreSQL are:
 
 * Usage of a *steady state* GA (replacement of the least fit individuals in a population, not whole-generational replacement) allows fast convergence towards improved query plans. This is essential for query handling with reasonable time;
+
 * Usage of *edge recombination crossover* which is especially suited to keep edge losses low for the solution of the TSP by means of a GA;
+
 * Mutation as genetic operator is deprecated so that no repair mechanisms are needed to generate legal TSP tours.
 
 Parts of the GEQO module are adapted from D. Whitley's Genitor algorithm.
 
 The GEQO module allows the PostgreSQL query optimizer to support large join queries effectively through non-exhaustive search.
+
+[#id](#GEQO-PG-INTRO-GEN-POSSIBLE-PLANS)
 
 ### 62.3.1. Generating Possible Plans with GEQO [#](#GEQO-PG-INTRO-GEN-POSSIBLE-PLANS)
 
@@ -31,11 +37,14 @@ The GEQO planning process uses the standard planner code to generate plans for s
 
 This process is inherently nondeterministic, because of the randomized choices made during both the initial population selection and subsequent “mutation” of the best candidates. To avoid surprising changes of the selected plan, each run of the GEQO algorithm restarts its random number generator with the current [geqo\_seed](runtime-config-query#GUC-GEQO-SEED) parameter setting. As long as `geqo_seed` and the other GEQO parameters are kept fixed, the same plan will be generated for a given query (and other planner inputs such as statistics). To experiment with different search paths, try changing `geqo_seed`.
 
+[#id](#GEQO-FUTURE)
+
 ### 62.3.2. Future Implementation Tasks for PostgreSQL GEQO [#](#GEQO-FUTURE)
 
 Work is still needed to improve the genetic algorithm parameter settings. In file `src/backend/optimizer/geqo/geqo_main.c`, routines `gimme_pool_size` and `gimme_number_generations`, we have to find a compromise for the parameter settings to satisfy two competing demands:
 
 * Optimality of the query plan
+
 * Computing time
 
 In the current implementation, the fitness of each candidate join sequence is estimated by running the standard planner's join selection and cost estimation code from scratch. To the extent that different candidates use similar sub-sequences of joins, a great deal of work will be repeated. This could be made significantly faster by retaining cost estimates for sub-joins. The problem is to avoid expending unreasonable amounts of memory on retaining that state.

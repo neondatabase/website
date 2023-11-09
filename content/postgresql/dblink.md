@@ -1,3 +1,5 @@
+[#id](#DBLINK)
+
 ## F.12. dblink — connect to other PostgreSQL databases [#](#DBLINK)
 
   * [dblink\_connect](contrib-dblink-connect) — opens a persistent connection to a remote database
@@ -20,16 +22,8 @@
   * [dblink\_build\_sql\_delete](contrib-dblink-build-sql-delete) — builds a DELETE statement using supplied values for primary key field values
   * [dblink\_build\_sql\_update](contrib-dblink-build-sql-update) — builds an UPDATE statement using a local tuple, replacing the primary key field values with alternative supplied values
 
+
+
 `dblink` is a module that supports connections to other PostgreSQL databases from within a database session.
 
-`dblink` can report the following wait events under the wait event type `Extension`.
-
-* `DblinkConnect`
-
-    Waiting to establish a connection to a remote server.
-
-* `DblinkGetConnect`
-
-    Waiting to establish a connection to a remote server when it could not be found in the list of already-opened connections.
-
-See also [postgres\_fdw](postgres-fdw "F.37. postgres_fdw — access data stored in external PostgreSQL servers"), which provides roughly the same functionality using a more modern and standards-compliant infrastructure.
+See also [postgres\_fdw](postgres-fdw), which provides roughly the same functionality using a more modern and standards-compliant infrastructure.

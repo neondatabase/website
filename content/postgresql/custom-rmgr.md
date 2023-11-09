@@ -1,8 +1,10 @@
+[#id](#CUSTOM-RMGR)
+
 ## Chapter 66. Custom WAL Resource Managers
 
-This chapter explains the interface between the core PostgreSQL system and custom WAL resource managers, which enable extensions to integrate directly with the [WAL](wal "Chapter 30. Reliability and the Write-Ahead Log").
+This chapter explains the interface between the core PostgreSQL system and custom WAL resource managers, which enable extensions to integrate directly with the [WAL](wal).
 
-An extension, especially a [Table Access Method](tableam "Chapter 63. Table Access Method Interface Definition") or [Index Access Method](indexam "Chapter 64. Index Access Method Interface Definition"), may need to use WAL for recovery, replication, and/or [Logical Decoding](logicaldecoding "Chapter 49. Logical Decoding"). Custom resource managers are a more flexible alternative to [Generic WAL](generic-wal "Chapter 65. Generic WAL Records") (which does not support logical decoding), but more complex for an extension to implement.
+An extension, especially a [Table Access Method](tableam) or [Index Access Method](indexam), may need to use WAL for recovery, replication, and/or [Logical Decoding](logicaldecoding). Custom resource managers are a more flexible alternative to [Generic WAL](generic-wal) (which does not support logical decoding), but more complex for an extension to implement.
 
 To create a new custom WAL resource manager, first define an `RmgrData` structure with implementations for the resource manager methods. Refer to `src/backend/access/transam/README` and `src/include/access/xlog_internal.h` in the PostgreSQL source.
 
@@ -57,10 +59,10 @@ Then, register your new resource manager.
 extern void RegisterCustomRmgr(RmgrId rmid, const RmgrData *rmgr);
 ```
 
-`RegisterCustomRmgr` must be called from the extension module's [\_PG\_init](xfunc-c#XFUNC-C-DYNLOAD "38.10.1. Dynamic Loading") function. While developing a new extension, use `RM_EXPERIMENTAL_ID` for *`rmid`*. When you are ready to release the extension to users, reserve a new resource manager ID at the [Custom WAL Resource Manager](https://wiki.postgresql.org/wiki/CustomWALResourceManagers) page.
+`RegisterCustomRmgr` must be called from the extension module's [\_PG\_init](xfunc-c#XFUNC-C-DYNLOAD) function. While developing a new extension, use `RM_EXPERIMENTAL_ID` for *`rmid`*. When you are ready to release the extension to users, reserve a new resource manager ID at the [Custom WAL Resource Manager](https://wiki.postgresql.org/wiki/CustomWALResourceManagers) page.
 
 Place the extension module implementing the custom resource manager in [shared\_preload\_libraries](runtime-config-client#GUC-SHARED-PRELOAD-LIBRARIES) so that it will be loaded early during PostgreSQL startup.
 
 ### Note
 
-The extension must remain in `shared_preload_libraries` as long as any custom WAL records may exist in the system. Otherwise PostgreSQL will not be able to apply or decode the custom WAL records, which may prevent the server from starting.
+The extension must remain in shared\_preload\_libraries as long as any custom WAL records may exist in the system. Otherwise PostgreSQL will not be able to apply or decode the custom WAL records, which may prevent the server from starting.

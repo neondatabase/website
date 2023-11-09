@@ -1,14 +1,22 @@
+[#id](#RULES-UPDATE)
+
 ## 41.4. Rules on `INSERT`, `UPDATE`, and `DELETE` [#](#RULES-UPDATE)
 
   * [41.4.1. How Update Rules Work](rules-update#RULES-UPDATE-HOW)
   * [41.4.2. Cooperation with Views](rules-update#RULES-UPDATE-VIEWS)
 
+
+
 Rules that are defined on `INSERT`, `UPDATE`, and `DELETE` are significantly different from the view rules described in the previous sections. First, their `CREATE RULE` command allows more:
 
 * They are allowed to have no action.
+
 * They can have multiple actions.
+
 * They can be `INSTEAD` or `ALSO` (the default).
+
 * The pseudorelations `NEW` and `OLD` become useful.
+
 * They can have rule qualifications.
 
 Second, they don't modify the query tree in place. Instead they create zero or more new query trees and can throw away the original one.
@@ -19,12 +27,13 @@ In many cases, tasks that could be performed by rules on `INSERT`/`UPDATE`/`DELE
 
 Also, there are some cases that are not supported by these types of rules at all, notably including `WITH` clauses in the original query and multiple-assignment sub-`SELECT`s in the `SET` list of `UPDATE` queries. This is because copying these constructs into a rule query would result in multiple evaluations of the sub-query, contrary to the express intent of the query's author.
 
+[#id](#RULES-UPDATE-HOW)
+
 ### 41.4.1. How Update Rules Work [#](#RULES-UPDATE-HOW)
 
 Keep the syntax:
 
 ```
-
 CREATE [ OR REPLACE ] RULE name AS ON event
     TO table [ WHERE condition ]
     DO [ ALSO | INSTEAD ] { NOTHING | command | ( command ; command ... ) }
@@ -40,15 +49,15 @@ So we have three cases that produce the following query trees for a one-action r
 
 * No qualification, with either `ALSO` or `INSTEAD`
 
-    the query tree from the rule action with the original query tree's qualification added
+  the query tree from the rule action with the original query tree's qualification added
 
 * Qualification given and `ALSO`
 
-    the query tree from the rule action with the rule qualification and the original query tree's qualification added
+  the query tree from the rule action with the rule qualification and the original query tree's qualification added
 
 * Qualification given and `INSTEAD`
 
-    the query tree from the rule action with the rule qualification and the original query tree's qualification; and the original query tree with the negated rule qualification added
+  the query tree from the rule action with the rule qualification and the original query tree's qualification; and the original query tree with the negated rule qualification added
 
 Finally, if the rule is `ALSO`, the unchanged original query tree is added to the list. Since only qualified `INSTEAD` rules already add the original query tree, we end up with either one or two output query trees for a rule with one action.
 
@@ -60,12 +69,13 @@ The query trees found in the actions of the `pg_rewrite` system catalog are only
 
 After the system is done applying update rules, it applies view rules to the produced query tree(s). Views cannot insert new update actions so there is no need to apply update rules to the output of view rewriting.
 
+[#id](#RULES-UPDATE-HOW-FIRST)
+
 #### 41.4.1.1. A First Rule Step by Step [#](#RULES-UPDATE-HOW-FIRST)
 
 Say we want to trace changes to the `sl_avail` column in the `shoelace_data` relation. So we set up a log table and a rule that conditionally writes a log entry when an `UPDATE` is performed on `shoelace_data`.
 
 ```
-
 CREATE TABLE shoelace_log (
     sl_name    text,          -- shoelace changed
     sl_avail   integer,       -- new available value
@@ -86,14 +96,12 @@ CREATE RULE log_shoelace AS ON UPDATE TO shoelace_data
 Now someone does:
 
 ```
-
 UPDATE shoelace_data SET sl_avail = 6 WHERE sl_name = 'sl7';
 ```
 
 and we look at the log table:
 
 ```
-
 SELECT * FROM shoelace_log;
 
  sl_name | sl_avail | log_who | log_when
@@ -105,7 +113,6 @@ SELECT * FROM shoelace_log;
 That's what we expected. What happened in the background is the following. The parser created the query tree:
 
 ```
-
 UPDATE shoelace_data SET sl_avail = 6
   FROM shoelace_data shoelace_data
  WHERE shoelace_data.sl_name = 'sl7';
@@ -114,14 +121,12 @@ UPDATE shoelace_data SET sl_avail = 6
 There is a rule `log_shoelace` that is `ON UPDATE` with the rule qualification expression:
 
 ```
-
 NEW.sl_avail <> OLD.sl_avail
 ```
 
 and the action:
 
 ```
-
 INSERT INTO shoelace_log VALUES (
        new.sl_name, new.sl_avail,
        current_user, current_timestamp )
@@ -133,7 +138,6 @@ INSERT INTO shoelace_log VALUES (
 The rule is a qualified `ALSO` rule, so the rule system has to return two query trees: the modified rule action and the original query tree. In step 1, the range table of the original query is incorporated into the rule's action query tree. This results in:
 
 ```
-
 INSERT INTO shoelace_log VALUES (
        new.sl_name, new.sl_avail,
        current_user, current_timestamp )
@@ -144,7 +148,6 @@ INSERT INTO shoelace_log VALUES (
 In step 2, the rule qualification is added to it, so the result set is restricted to rows where `sl_avail` changes:
 
 ```
-
 INSERT INTO shoelace_log VALUES (
        new.sl_name, new.sl_avail,
        current_user, current_timestamp )
@@ -158,7 +161,6 @@ INSERT INTO shoelace_log VALUES (
 In step 3, the original query tree's qualification is added, restricting the result set further to only the rows that would have been touched by the original query:
 
 ```
-
 INSERT INTO shoelace_log VALUES (
        new.sl_name, new.sl_avail,
        current_user, current_timestamp )
@@ -171,7 +173,6 @@ INSERT INTO shoelace_log VALUES (
 Step 4 replaces references to `NEW` by the target list entries from the original query tree or by the matching variable references from the result relation:
 
 ```
-
 INSERT INTO shoelace_log VALUES (
        shoelace_data.sl_name, 6,
        current_user, current_timestamp )
@@ -184,7 +185,6 @@ INSERT INTO shoelace_log VALUES (
 Step 5 changes `OLD` references into result relation references:
 
 ```
-
 INSERT INTO shoelace_log VALUES (
        shoelace_data.sl_name, 6,
        current_user, current_timestamp )
@@ -197,7 +197,6 @@ INSERT INTO shoelace_log VALUES (
 That's it. Since the rule is `ALSO`, we also output the original query tree. In short, the output from the rule system is a list of two query trees that correspond to these statements:
 
 ```
-
 INSERT INTO shoelace_log VALUES (
        shoelace_data.sl_name, 6,
        current_user, current_timestamp )
@@ -214,7 +213,6 @@ These are executed in this order, and that is exactly what the rule was meant to
 The substitutions and the added qualifications ensure that, if the original query would be, say:
 
 ```
-
 UPDATE shoelace_data SET sl_color = 'green'
  WHERE sl_name = 'sl7';
 ```
@@ -222,7 +220,6 @@ UPDATE shoelace_data SET sl_color = 'green'
 no log entry would get written. In that case, the original query tree does not contain a target list entry for `sl_avail`, so `NEW.sl_avail` will get replaced by `shoelace_data.sl_avail`. Thus, the extra command generated by the rule is:
 
 ```
-
 INSERT INTO shoelace_log VALUES (
        shoelace_data.sl_name, shoelace_data.sl_avail,
        current_user, current_timestamp )
@@ -236,7 +233,6 @@ and that qualification will never be true.
 It will also work if the original query modifies multiple rows. So if someone issued the command:
 
 ```
-
 UPDATE shoelace_data SET sl_avail = 0
  WHERE sl_color = 'black';
 ```
@@ -244,7 +240,6 @@ UPDATE shoelace_data SET sl_avail = 0
 four rows in fact get updated (`sl1`, `sl2`, `sl3`, and `sl4`). But `sl3` already has `sl_avail = 0`. In this case, the original query trees qualification is different and that results in the extra query tree:
 
 ```
-
 INSERT INTO shoelace_log
 SELECT shoelace_data.sl_name, 0,
        current_user, current_timestamp
@@ -257,12 +252,15 @@ being generated by the rule. This query tree will surely insert three new log en
 
 Here we can see why it is important that the original query tree is executed last. If the `UPDATE` had been executed first, all the rows would have already been set to zero, so the logging `INSERT` would not find any row where `0 <> shoelace_data.sl_avail`.
 
+[#id](#RULES-UPDATE-VIEWS)
+
 ### 41.4.2. Cooperation with Views [#](#RULES-UPDATE-VIEWS)
+
+
 
 A simple way to protect view relations from the mentioned possibility that someone can try to run `INSERT`, `UPDATE`, or `DELETE` on them is to let those query trees get thrown away. So we could create the rules:
 
 ```
-
 CREATE RULE shoe_ins_protect AS ON INSERT TO shoe
     DO INSTEAD NOTHING;
 CREATE RULE shoe_upd_protect AS ON UPDATE TO shoe
@@ -276,7 +274,6 @@ If someone now tries to do any of these operations on the view relation `shoe`, 
 A more sophisticated way to use the rule system is to create rules that rewrite the query tree into one that does the right operation on the real tables. To do that on the `shoelace` view, we create the following rules:
 
 ```
-
 CREATE RULE shoelace_ins AS ON INSERT TO shoelace
     DO INSTEAD
     INSERT INTO shoelace_data VALUES (
@@ -306,7 +303,6 @@ CREATE RULE shoelace_del AS ON DELETE TO shoelace
 If you want to support `RETURNING` queries on the view, you need to make the rules include `RETURNING` clauses that compute the view rows. This is usually pretty trivial for views on a single table, but it's a bit tedious for join views such as `shoelace`. An example for the insert case is:
 
 ```
-
 CREATE RULE shoelace_ins AS ON INSERT TO shoelace
     DO INSTEAD
     INSERT INTO shoelace_data VALUES (
@@ -327,7 +323,6 @@ Note that this one rule supports both `INSERT` and `INSERT RETURNING` queries on
 Now assume that once in a while, a pack of shoelaces arrives at the shop and a big parts list along with it. But you don't want to manually update the `shoelace` view every time. Instead we set up two little tables: one where you can insert the items from the part list, and one with a special trick. The creation commands for these are:
 
 ```
-
 CREATE TABLE shoelace_arrive (
     arr_name    text,
     arr_quant   integer
@@ -348,7 +343,6 @@ CREATE RULE shoelace_ok_ins AS ON INSERT TO shoelace_ok
 Now you can fill the table `shoelace_arrive` with the data from the parts list:
 
 ```
-
 SELECT * FROM shoelace_arrive;
 
  arr_name | arr_quant
@@ -362,7 +356,6 @@ SELECT * FROM shoelace_arrive;
 Take a quick look at the current data:
 
 ```
-
 SELECT * FROM shoelace;
 
  sl_name  | sl_avail | sl_color | sl_len | sl_unit | sl_len_cm
@@ -381,14 +374,12 @@ SELECT * FROM shoelace;
 Now move the arrived shoelaces in:
 
 ```
-
 INSERT INTO shoelace_ok SELECT * FROM shoelace_arrive;
 ```
 
 and check the results:
 
 ```
-
 SELECT * FROM shoelace ORDER BY sl_name;
 
  sl_name  | sl_avail | sl_color | sl_len | sl_unit | sl_len_cm
@@ -417,7 +408,6 @@ SELECT * FROM shoelace_log;
 It's a long way from the one `INSERT ... SELECT` to these results. And the description of the query-tree transformation will be the last in this chapter. First, there is the parser's output:
 
 ```
-
 INSERT INTO shoelace_ok
 SELECT shoelace_arrive.arr_name, shoelace_arrive.arr_quant
   FROM shoelace_arrive shoelace_arrive, shoelace_ok shoelace_ok;
@@ -426,7 +416,6 @@ SELECT shoelace_arrive.arr_name, shoelace_arrive.arr_quant
 Now the first rule `shoelace_ok_ins` is applied and turns this into:
 
 ```
-
 UPDATE shoelace
    SET sl_avail = shoelace.sl_avail + shoelace_arrive.arr_quant
   FROM shoelace_arrive shoelace_arrive, shoelace_ok shoelace_ok,
@@ -438,7 +427,6 @@ UPDATE shoelace
 and throws away the original `INSERT` on `shoelace_ok`. This rewritten query is passed to the rule system again, and the second applied rule `shoelace_upd` produces:
 
 ```
-
 UPDATE shoelace_data
    SET sl_name = shoelace.sl_name,
        sl_avail = shoelace.sl_avail + shoelace_arrive.arr_quant,
@@ -456,7 +444,6 @@ UPDATE shoelace_data
 Again it's an `INSTEAD` rule and the previous query tree is trashed. Note that this query still uses the view `shoelace`. But the rule system isn't finished with this step, so it continues and applies the `_RETURN` rule on it, and we get:
 
 ```
-
 UPDATE shoelace_data
    SET sl_name = s.sl_name,
        sl_avail = s.sl_avail + shoelace_arrive.arr_quant,
@@ -476,7 +463,6 @@ UPDATE shoelace_data
 Finally, the rule `log_shoelace` gets applied, producing the extra query tree:
 
 ```
-
 INSERT INTO shoelace_log
 SELECT s.sl_name,
        s.sl_avail + shoelace_arrive.arr_quant,
@@ -500,7 +486,6 @@ After that the rule system runs out of rules and returns the generated query tre
 So we end up with two final query trees that are equivalent to the SQL statements:
 
 ```
-
 INSERT INTO shoelace_log
 SELECT s.sl_name,
        s.sl_avail + shoelace_arrive.arr_quant,
@@ -526,7 +511,6 @@ The result is that data coming from one relation inserted into another, changed 
 There is a little detail that's a bit ugly. Looking at the two queries, it turns out that the `shoelace_data` relation appears twice in the range table where it could definitely be reduced to one. The planner does not handle it and so the execution plan for the rule systems output of the `INSERT` will be
 
 ```
-
 Nested Loop
   ->  Merge Join
         ->  Seq Scan
@@ -541,7 +525,6 @@ Nested Loop
 while omitting the extra range table entry would result in a
 
 ```
-
 Merge Join
   ->  Seq Scan
         ->  Sort
@@ -556,7 +539,6 @@ which produces exactly the same entries in the log table. Thus, the rule system 
 Now we make a final demonstration of the PostgreSQL rule system and its power. Say you add some shoelaces with extraordinary colors to your database:
 
 ```
-
 INSERT INTO shoelace VALUES ('sl9', 0, 'pink', 35.0, 'inch', 0.0);
 INSERT INTO shoelace VALUES ('sl10', 1000, 'magenta', 40.0, 'inch', 0.0);
 ```
@@ -564,7 +546,6 @@ INSERT INTO shoelace VALUES ('sl10', 1000, 'magenta', 40.0, 'inch', 0.0);
 We would like to make a view to check which `shoelace` entries do not fit any shoe in color. The view for this is:
 
 ```
-
 CREATE VIEW shoelace_mismatch AS
     SELECT * FROM shoelace WHERE NOT EXISTS
         (SELECT shoename FROM shoe WHERE slcolor = sl_color);
@@ -573,7 +554,6 @@ CREATE VIEW shoelace_mismatch AS
 Its output is:
 
 ```
-
 SELECT * FROM shoelace_mismatch;
 
  sl_name | sl_avail | sl_color | sl_len | sl_unit | sl_len_cm
@@ -585,7 +565,6 @@ SELECT * FROM shoelace_mismatch;
 Now we want to set it up so that mismatching shoelaces that are not in stock are deleted from the database. To make it a little harder for PostgreSQL, we don't delete it directly. Instead we create one more view:
 
 ```
-
 CREATE VIEW shoelace_can_delete AS
     SELECT * FROM shoelace_mismatch WHERE sl_avail = 0;
 ```
@@ -593,7 +572,6 @@ CREATE VIEW shoelace_can_delete AS
 and do it this way:
 
 ```
-
 DELETE FROM shoelace WHERE EXISTS
     (SELECT * FROM shoelace_can_delete
              WHERE sl_name = shoelace.sl_name);
@@ -602,7 +580,6 @@ DELETE FROM shoelace WHERE EXISTS
 The results are:
 
 ```
-
 SELECT * FROM shoelace;
 
  sl_name | sl_avail | sl_color | sl_len | sl_unit | sl_len_cm

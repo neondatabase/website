@@ -1,3 +1,5 @@
+[#id](#SQL-CREATEAGGREGATE)
+
 ## CREATE AGGREGATE
 
 CREATE AGGREGATE — define a new aggregate function
@@ -5,7 +7,6 @@ CREATE AGGREGATE — define a new aggregate function
 ## Synopsis
 
 ```
-
 CREATE [ OR REPLACE ] AGGREGATE name ( [ argmode ] [ argname ] arg_data_type [ , ... ] ) (
     SFUNC = sfunc,
     STYPE = state_data_type
@@ -68,20 +69,21 @@ CREATE [ OR REPLACE ] AGGREGATE name (
 )
 ```
 
+[#id](#id-1.9.3.57.5)
+
 ## Description
 
-`CREATE AGGREGATE` defines a new aggregate function. `CREATE OR REPLACE AGGREGATE` will either define a new aggregate function or replace an existing definition. Some basic and commonly-used aggregate functions are included with the distribution; they are documented in [Section 9.21](functions-aggregate "9.21. Aggregate Functions"). If one defines new types or needs an aggregate function not already provided, then `CREATE AGGREGATE` can be used to provide the desired features.
+`CREATE AGGREGATE` defines a new aggregate function. `CREATE OR REPLACE AGGREGATE` will either define a new aggregate function or replace an existing definition. Some basic and commonly-used aggregate functions are included with the distribution; they are documented in [Section 9.21](functions-aggregate). If one defines new types or needs an aggregate function not already provided, then `CREATE AGGREGATE` can be used to provide the desired features.
 
 When replacing an existing definition, the argument types, result type, and number of direct arguments may not be changed. Also, the new definition must be of the same kind (ordinary aggregate, ordered-set aggregate, or hypothetical-set aggregate) as the old one.
 
 If a schema name is given (for example, `CREATE AGGREGATE myschema.myagg ...`) then the aggregate function is created in the specified schema. Otherwise it is created in the current schema.
 
-An aggregate function is identified by its name and input data type(s). Two aggregates in the same schema can have the same name if they operate on different input types. The name and input data type(s) of an aggregate must also be distinct from the name and input data type(s) of every ordinary function in the same schema. This behavior is identical to overloading of ordinary function names (see [CREATE FUNCTION](sql-createfunction "CREATE FUNCTION")).
+An aggregate function is identified by its name and input data type(s). Two aggregates in the same schema can have the same name if they operate on different input types. The name and input data type(s) of an aggregate must also be distinct from the name and input data type(s) of every ordinary function in the same schema. This behavior is identical to overloading of ordinary function names (see [CREATE FUNCTION](sql-createfunction)).
 
 A simple aggregate function is made from one or two ordinary functions: a state transition function *`sfunc`*, and an optional final calculation function *`ffunc`*. These are used as follows:
 
 ```
-
 sfunc( internal-state, next-data-values ) ---> next-internal-state
 ffunc( internal-state ) ---> aggregate-value
 ```
@@ -98,23 +100,21 @@ If the final function is declared “strict”, then it will not be called when 
 
 Sometimes it is useful to declare the final function as taking not just the state value, but extra parameters corresponding to the aggregate's input values. The main reason for doing this is if the final function is polymorphic and the state value's data type would be inadequate to pin down the result type. These extra parameters are always passed as NULL (and so the final function must not be strict when the `FINALFUNC_EXTRA` option is used), but nonetheless they are valid parameters. The final function could for example make use of `get_fn_expr_argtype` to identify the actual argument type in the current call.
 
-An aggregate can optionally support *moving-aggregate mode*, as described in [Section 38.12.1](xaggr#XAGGR-MOVING-AGGREGATES "38.12.1. Moving-Aggregate Mode"). This requires specifying the `MSFUNC`, `MINVFUNC`, and `MSTYPE` parameters, and optionally the `MSSPACE`, `MFINALFUNC`, `MFINALFUNC_EXTRA`, `MFINALFUNC_MODIFY`, and `MINITCOND` parameters. Except for `MINVFUNC`, these parameters work like the corresponding simple-aggregate parameters without `M`; they define a separate implementation of the aggregate that includes an inverse transition function.
+An aggregate can optionally support *moving-aggregate mode*, as described in [Section 38.12.1](xaggr#XAGGR-MOVING-AGGREGATES). This requires specifying the `MSFUNC`, `MINVFUNC`, and `MSTYPE` parameters, and optionally the `MSSPACE`, `MFINALFUNC`, `MFINALFUNC_EXTRA`, `MFINALFUNC_MODIFY`, and `MINITCOND` parameters. Except for `MINVFUNC`, these parameters work like the corresponding simple-aggregate parameters without `M`; they define a separate implementation of the aggregate that includes an inverse transition function.
 
 The syntax with `ORDER BY` in the parameter list creates a special type of aggregate called an *ordered-set aggregate*; or if `HYPOTHETICAL` is specified, then a *hypothetical-set aggregate* is created. These aggregates operate over groups of sorted values in order-dependent ways, so that specification of an input sort order is an essential part of a call. Also, they can have *direct* arguments, which are arguments that are evaluated only once per aggregation rather than once per input row. Hypothetical-set aggregates are a subclass of ordered-set aggregates in which some of the direct arguments are required to match, in number and data types, the aggregated argument columns. This allows the values of those direct arguments to be added to the collection of aggregate-input rows as an additional “hypothetical” row.
 
-An aggregate can optionally support *partial aggregation*, as described in [Section 38.12.4](xaggr#XAGGR-PARTIAL-AGGREGATES "38.12.4. Partial Aggregation"). This requires specifying the `COMBINEFUNC` parameter. If the *`state_data_type`* is `internal`, it's usually also appropriate to provide the `SERIALFUNC` and `DESERIALFUNC` parameters so that parallel aggregation is possible. Note that the aggregate must also be marked `PARALLEL SAFE` to enable parallel aggregation.
+An aggregate can optionally support *partial aggregation*, as described in [Section 38.12.4](xaggr#XAGGR-PARTIAL-AGGREGATES). This requires specifying the `COMBINEFUNC` parameter. If the *`state_data_type`* is `internal`, it's usually also appropriate to provide the `SERIALFUNC` and `DESERIALFUNC` parameters so that parallel aggregation is possible. Note that the aggregate must also be marked `PARALLEL SAFE` to enable parallel aggregation.
 
 Aggregates that behave like `MIN` or `MAX` can sometimes be optimized by looking into an index instead of scanning every input row. If this aggregate can be so optimized, indicate it by specifying a *sort operator*. The basic requirement is that the aggregate must yield the first element in the sort ordering induced by the operator; in other words:
 
 ```
-
 SELECT agg(col) FROM tab;
 ```
 
 must be equivalent to:
 
 ```
-
 SELECT col FROM tab ORDER BY col USING sortop LIMIT 1;
 ```
 
@@ -122,115 +122,119 @@ Further assumptions are that the aggregate ignores null inputs, and that it deli
 
 To be able to create an aggregate function, you must have `USAGE` privilege on the argument types, the state type(s), and the return type, as well as `EXECUTE` privilege on the supporting functions.
 
+[#id](#id-1.9.3.57.6)
+
 ## Parameters
 
 * *`name`*
 
-    The name (optionally schema-qualified) of the aggregate function to create.
+  The name (optionally schema-qualified) of the aggregate function to create.
 
 * *`argmode`*
 
-    The mode of an argument: `IN` or `VARIADIC`. (Aggregate functions do not support `OUT` arguments.) If omitted, the default is `IN`. Only the last argument can be marked `VARIADIC`.
+  The mode of an argument: `IN` or `VARIADIC`. (Aggregate functions do not support `OUT` arguments.) If omitted, the default is `IN`. Only the last argument can be marked `VARIADIC`.
 
 * *`argname`*
 
-    The name of an argument. This is currently only useful for documentation purposes. If omitted, the argument has no name.
+  The name of an argument. This is currently only useful for documentation purposes. If omitted, the argument has no name.
 
 * *`arg_data_type`*
 
-    An input data type on which this aggregate function operates. To create a zero-argument aggregate function, write `*` in place of the list of argument specifications. (An example of such an aggregate is `count(*)`.)
+  An input data type on which this aggregate function operates. To create a zero-argument aggregate function, write `*` in place of the list of argument specifications. (An example of such an aggregate is `count(*)`.)
 
 * *`base_type`*
 
-    In the old syntax for `CREATE AGGREGATE`, the input data type is specified by a `basetype` parameter rather than being written next to the aggregate name. Note that this syntax allows only one input parameter. To define a zero-argument aggregate function with this syntax, specify the `basetype` as `"ANY"` (not `*`). Ordered-set aggregates cannot be defined with the old syntax.
+  In the old syntax for `CREATE AGGREGATE`, the input data type is specified by a `basetype` parameter rather than being written next to the aggregate name. Note that this syntax allows only one input parameter. To define a zero-argument aggregate function with this syntax, specify the `basetype` as `"ANY"` (not `*`). Ordered-set aggregates cannot be defined with the old syntax.
 
 * *`sfunc`*
 
-    The name of the state transition function to be called for each input row. For a normal *`N`*-argument aggregate function, the *`sfunc`* must take *`N`*+1 arguments, the first being of type *`state_data_type`* and the rest matching the declared input data type(s) of the aggregate. The function must return a value of type *`state_data_type`*. This function takes the current state value and the current input data value(s), and returns the next state value.
+  The name of the state transition function to be called for each input row. For a normal *`N`*-argument aggregate function, the *`sfunc`* must take *`N`*+1 arguments, the first being of type *`state_data_type`* and the rest matching the declared input data type(s) of the aggregate. The function must return a value of type *`state_data_type`*. This function takes the current state value and the current input data value(s), and returns the next state value.
 
-    For ordered-set (including hypothetical-set) aggregates, the state transition function receives only the current state value and the aggregated arguments, not the direct arguments. Otherwise it is the same.
+  For ordered-set (including hypothetical-set) aggregates, the state transition function receives only the current state value and the aggregated arguments, not the direct arguments. Otherwise it is the same.
 
 * *`state_data_type`*
 
-    The data type for the aggregate's state value.
+  The data type for the aggregate's state value.
 
 * *`state_data_size`*
 
-    The approximate average size (in bytes) of the aggregate's state value. If this parameter is omitted or is zero, a default estimate is used based on the *`state_data_type`*. The planner uses this value to estimate the memory required for a grouped aggregate query.
+  The approximate average size (in bytes) of the aggregate's state value. If this parameter is omitted or is zero, a default estimate is used based on the *`state_data_type`*. The planner uses this value to estimate the memory required for a grouped aggregate query.
 
 * *`ffunc`*
 
-    The name of the final function called to compute the aggregate's result after all input rows have been traversed. For a normal aggregate, this function must take a single argument of type *`state_data_type`*. The return data type of the aggregate is defined as the return type of this function. If *`ffunc`* is not specified, then the ending state value is used as the aggregate's result, and the return type is *`state_data_type`*.
+  The name of the final function called to compute the aggregate's result after all input rows have been traversed. For a normal aggregate, this function must take a single argument of type *`state_data_type`*. The return data type of the aggregate is defined as the return type of this function. If *`ffunc`* is not specified, then the ending state value is used as the aggregate's result, and the return type is *`state_data_type`*.
 
-    For ordered-set (including hypothetical-set) aggregates, the final function receives not only the final state value, but also the values of all the direct arguments.
+  For ordered-set (including hypothetical-set) aggregates, the final function receives not only the final state value, but also the values of all the direct arguments.
 
-    If `FINALFUNC_EXTRA` is specified, then in addition to the final state value and any direct arguments, the final function receives extra NULL values corresponding to the aggregate's regular (aggregated) arguments. This is mainly useful to allow correct resolution of the aggregate result type when a polymorphic aggregate is being defined.
+  If `FINALFUNC_EXTRA` is specified, then in addition to the final state value and any direct arguments, the final function receives extra NULL values corresponding to the aggregate's regular (aggregated) arguments. This is mainly useful to allow correct resolution of the aggregate result type when a polymorphic aggregate is being defined.
 
 * `FINALFUNC_MODIFY` = { `READ_ONLY` | `SHAREABLE` | `READ_WRITE` }
 
-    This option specifies whether the final function is a pure function that does not modify its arguments. `READ_ONLY` indicates it does not; the other two values indicate that it may change the transition state value. See [Notes](sql-createaggregate#SQL-CREATEAGGREGATE-NOTES "Notes") below for more detail. The default is `READ_ONLY`, except for ordered-set aggregates, for which the default is `READ_WRITE`.
+  This option specifies whether the final function is a pure function that does not modify its arguments. `READ_ONLY` indicates it does not; the other two values indicate that it may change the transition state value. See [Notes](sql-createaggregate#SQL-CREATEAGGREGATE-NOTES) below for more detail. The default is `READ_ONLY`, except for ordered-set aggregates, for which the default is `READ_WRITE`.
 
 * *`combinefunc`*
 
-    The *`combinefunc`* function may optionally be specified to allow the aggregate function to support partial aggregation. If provided, the *`combinefunc`* must combine two *`state_data_type`* values, each containing the result of aggregation over some subset of the input values, to produce a new *`state_data_type`* that represents the result of aggregating over both sets of inputs. This function can be thought of as an *`sfunc`*, where instead of acting upon an individual input row and adding it to the running aggregate state, it adds another aggregate state to the running state.
+  The *`combinefunc`* function may optionally be specified to allow the aggregate function to support partial aggregation. If provided, the *`combinefunc`* must combine two *`state_data_type`* values, each containing the result of aggregation over some subset of the input values, to produce a new *`state_data_type`* that represents the result of aggregating over both sets of inputs. This function can be thought of as an *`sfunc`*, where instead of acting upon an individual input row and adding it to the running aggregate state, it adds another aggregate state to the running state.
 
-    The *`combinefunc`* must be declared as taking two arguments of the *`state_data_type`* and returning a value of the *`state_data_type`*. Optionally this function may be “strict”. In this case the function will not be called when either of the input states are null; the other state will be taken as the correct result.
+  The *`combinefunc`* must be declared as taking two arguments of the *`state_data_type`* and returning a value of the *`state_data_type`*. Optionally this function may be “strict”. In this case the function will not be called when either of the input states are null; the other state will be taken as the correct result.
 
-    For aggregate functions whose *`state_data_type`* is `internal`, the *`combinefunc`* must not be strict. In this case the *`combinefunc`* must ensure that null states are handled correctly and that the state being returned is properly stored in the aggregate memory context.
+  For aggregate functions whose *`state_data_type`* is `internal`, the *`combinefunc`* must not be strict. In this case the *`combinefunc`* must ensure that null states are handled correctly and that the state being returned is properly stored in the aggregate memory context.
 
 * *`serialfunc`*
 
-    An aggregate function whose *`state_data_type`* is `internal` can participate in parallel aggregation only if it has a *`serialfunc`* function, which must serialize the aggregate state into a `bytea` value for transmission to another process. This function must take a single argument of type `internal` and return type `bytea`. A corresponding *`deserialfunc`* is also required.
+  An aggregate function whose *`state_data_type`* is `internal` can participate in parallel aggregation only if it has a *`serialfunc`* function, which must serialize the aggregate state into a `bytea` value for transmission to another process. This function must take a single argument of type `internal` and return type `bytea`. A corresponding *`deserialfunc`* is also required.
 
 * *`deserialfunc`*
 
-    Deserialize a previously serialized aggregate state back into *`state_data_type`*. This function must take two arguments of types `bytea` and `internal`, and produce a result of type `internal`. (Note: the second, `internal` argument is unused, but is required for type safety reasons.)
+  Deserialize a previously serialized aggregate state back into *`state_data_type`*. This function must take two arguments of types `bytea` and `internal`, and produce a result of type `internal`. (Note: the second, `internal` argument is unused, but is required for type safety reasons.)
 
 * *`initial_condition`*
 
-    The initial setting for the state value. This must be a string constant in the form accepted for the data type *`state_data_type`*. If not specified, the state value starts out null.
+  The initial setting for the state value. This must be a string constant in the form accepted for the data type *`state_data_type`*. If not specified, the state value starts out null.
 
 * *`msfunc`*
 
-    The name of the forward state transition function to be called for each input row in moving-aggregate mode. This is exactly like the regular transition function, except that its first argument and result are of type *`mstate_data_type`*, which might be different from *`state_data_type`*.
+  The name of the forward state transition function to be called for each input row in moving-aggregate mode. This is exactly like the regular transition function, except that its first argument and result are of type *`mstate_data_type`*, which might be different from *`state_data_type`*.
 
 * *`minvfunc`*
 
-    The name of the inverse state transition function to be used in moving-aggregate mode. This function has the same argument and result types as *`msfunc`*, but it is used to remove a value from the current aggregate state, rather than add a value to it. The inverse transition function must have the same strictness attribute as the forward state transition function.
+  The name of the inverse state transition function to be used in moving-aggregate mode. This function has the same argument and result types as *`msfunc`*, but it is used to remove a value from the current aggregate state, rather than add a value to it. The inverse transition function must have the same strictness attribute as the forward state transition function.
 
 * *`mstate_data_type`*
 
-    The data type for the aggregate's state value, when using moving-aggregate mode.
+  The data type for the aggregate's state value, when using moving-aggregate mode.
 
 * *`mstate_data_size`*
 
-    The approximate average size (in bytes) of the aggregate's state value, when using moving-aggregate mode. This works the same as *`state_data_size`*.
+  The approximate average size (in bytes) of the aggregate's state value, when using moving-aggregate mode. This works the same as *`state_data_size`*.
 
 * *`mffunc`*
 
-    The name of the final function called to compute the aggregate's result after all input rows have been traversed, when using moving-aggregate mode. This works the same as *`ffunc`*, except that its first argument's type is *`mstate_data_type`* and extra dummy arguments are specified by writing `MFINALFUNC_EXTRA`. The aggregate result type determined by *`mffunc`* or *`mstate_data_type`* must match that determined by the aggregate's regular implementation.
+  The name of the final function called to compute the aggregate's result after all input rows have been traversed, when using moving-aggregate mode. This works the same as *`ffunc`*, except that its first argument's type is *`mstate_data_type`* and extra dummy arguments are specified by writing `MFINALFUNC_EXTRA`. The aggregate result type determined by *`mffunc`* or *`mstate_data_type`* must match that determined by the aggregate's regular implementation.
 
 * `MFINALFUNC_MODIFY` = { `READ_ONLY` | `SHAREABLE` | `READ_WRITE` }
 
-    This option is like `FINALFUNC_MODIFY`, but it describes the behavior of the moving-aggregate final function.
+  This option is like `FINALFUNC_MODIFY`, but it describes the behavior of the moving-aggregate final function.
 
 * *`minitial_condition`*
 
-    The initial setting for the state value, when using moving-aggregate mode. This works the same as *`initial_condition`*.
+  The initial setting for the state value, when using moving-aggregate mode. This works the same as *`initial_condition`*.
 
 * *`sort_operator`*
 
-    The associated sort operator for a `MIN`- or `MAX`-like aggregate. This is just an operator name (possibly schema-qualified). The operator is assumed to have the same input data types as the aggregate (which must be a single-argument normal aggregate).
+  The associated sort operator for a `MIN`- or `MAX`-like aggregate. This is just an operator name (possibly schema-qualified). The operator is assumed to have the same input data types as the aggregate (which must be a single-argument normal aggregate).
 
 * `PARALLEL =` { `SAFE` | `RESTRICTED` | `UNSAFE` }
 
-    The meanings of `PARALLEL SAFE`, `PARALLEL RESTRICTED`, and `PARALLEL UNSAFE` are the same as in [`CREATE FUNCTION`](sql-createfunction "CREATE FUNCTION"). An aggregate will not be considered for parallelization if it is marked `PARALLEL UNSAFE` (which is the default!) or `PARALLEL RESTRICTED`. Note that the parallel-safety markings of the aggregate's support functions are not consulted by the planner, only the marking of the aggregate itself.
+  The meanings of `PARALLEL SAFE`, `PARALLEL RESTRICTED`, and `PARALLEL UNSAFE` are the same as in [`CREATE FUNCTION`](sql-createfunction). An aggregate will not be considered for parallelization if it is marked `PARALLEL UNSAFE` (which is the default!) or `PARALLEL RESTRICTED`. Note that the parallel-safety markings of the aggregate's support functions are not consulted by the planner, only the marking of the aggregate itself.
 
 * `HYPOTHETICAL`
 
-    For ordered-set aggregates only, this flag specifies that the aggregate arguments are to be processed according to the requirements for hypothetical-set aggregates: that is, the last few direct arguments must match the data types of the aggregated (`WITHIN GROUP`) arguments. The `HYPOTHETICAL` flag has no effect on run-time behavior, only on parse-time resolution of the data types and collations of the aggregate's arguments.
+  For ordered-set aggregates only, this flag specifies that the aggregate arguments are to be processed according to the requirements for hypothetical-set aggregates: that is, the last few direct arguments must match the data types of the aggregated (`WITHIN GROUP`) arguments. The `HYPOTHETICAL` flag has no effect on run-time behavior, only on parse-time resolution of the data types and collations of the aggregate's arguments.
 
 The parameters of `CREATE AGGREGATE` can be written in any order, not just the order illustrated above.
+
+[#id](#SQL-CREATEAGGREGATE-NOTES)
 
 ## Notes
 
@@ -252,14 +256,20 @@ Currently, ordered-set aggregates do not need to support moving-aggregate mode, 
 
 Partial (including parallel) aggregation is currently not supported for ordered-set aggregates. Also, it will never be used for aggregate calls that include `DISTINCT` or `ORDER BY` clauses, since those semantics cannot be supported during partial aggregation.
 
+[#id](#id-1.9.3.57.8)
+
 ## Examples
 
-See [Section 38.12](xaggr "38.12. User-Defined Aggregates").
+See [Section 38.12](xaggr).
+
+[#id](#id-1.9.3.57.9)
 
 ## Compatibility
 
 `CREATE AGGREGATE` is a PostgreSQL language extension. The SQL standard does not provide for user-defined aggregate functions.
 
+[#id](#id-1.9.3.57.10)
+
 ## See Also
 
-[ALTER AGGREGATE](sql-alteraggregate "ALTER AGGREGATE"), [DROP AGGREGATE](sql-dropaggregate "DROP AGGREGATE")
+[ALTER AGGREGATE](sql-alteraggregate), [DROP AGGREGATE](sql-dropaggregate)

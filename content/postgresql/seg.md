@@ -1,17 +1,21 @@
-## F.38. seg — a datatype for line segments or floating point intervals [#](#SEG)
+[#id](#SEG)
 
-* *   [F.38.1. Rationale](seg#SEG-RATIONALE)
-* [F.38.2. Syntax](seg#SEG-SYNTAX)
-* [F.38.3. Precision](seg#SEG-PRECISION)
-* [F.38.4. Usage](seg#SEG-USAGE)
-* [F.38.5. Notes](seg#SEG-NOTES)
-* [F.38.6. Credits](seg#SEG-CREDITS)
+## F.39. seg — a datatype for line segments or floating point intervals [#](#SEG)
+
+* [F.39.1. Rationale](seg#SEG-RATIONALE)
+* [F.39.2. Syntax](seg#SEG-SYNTAX)
+* [F.39.3. Precision](seg#SEG-PRECISION)
+* [F.39.4. Usage](seg#SEG-USAGE)
+* [F.39.5. Notes](seg#SEG-NOTES)
+* [F.39.6. Credits](seg#SEG-CREDITS)
 
 This module implements a data type `seg` for representing line segments, or floating point intervals. `seg` can represent uncertainty in the interval endpoints, making it especially useful for representing laboratory measurements.
 
 This module is considered “trusted”, that is, it can be installed by non-superusers who have `CREATE` privilege on the current database.
 
-### F.38.1. Rationale [#](#SEG-RATIONALE)
+[#id](#SEG-RATIONALE)
+
+### F.39.1. Rationale [#](#SEG-RATIONALE)
 
 The geometry of measurements is usually more complex than that of a point in a numeric continuum. A measurement is usually a segment of that continuum with somewhat fuzzy limits. The measurements come out as intervals because of uncertainty and randomness, as well as because the value being measured may naturally be an interval indicating some condition, such as the temperature range of stability of a protein.
 
@@ -20,7 +24,6 @@ Using just common sense, it appears more convenient to store such data as interv
 Further along the line of common sense, the fuzziness of the limits suggests that the use of traditional numeric data types leads to a certain loss of information. Consider this: your instrument reads 6.50, and you input this reading into the database. What do you get when you fetch it? Watch:
 
 ```
-
 test=> select 6.50 :: float8 as "pH";
  pH
 ---
@@ -35,7 +38,6 @@ Conclusion? It is nice to have a special data type that can record the limits of
 Check this out:
 
 ```
-
 test=> select '6.25 .. 6.50'::seg as "pH";
           pH
 ------------
@@ -43,11 +45,15 @@ test=> select '6.25 .. 6.50'::seg as "pH";
 (1 row)
 ```
 
-### F.38.2. Syntax [#](#SEG-SYNTAX)
+[#id](#SEG-SYNTAX)
 
-The external representation of an interval is formed using one or two floating-point numbers joined by the range operator (`..` or `...`). Alternatively, it can be specified as a center point plus or minus a deviation. Optional certainty indicators (`<`, `>` or `~`) can be stored as well. (Certainty indicators are ignored by all the built-in operators, however.) [Table F.28](seg#SEG-REPR-TABLE "Table F.28. seg External Representations") gives an overview of allowed representations; [Table F.29](seg#SEG-INPUT-EXAMPLES "Table F.29. Examples of Valid seg Input") shows some examples.
+### F.39.2. Syntax [#](#SEG-SYNTAX)
 
-In [Table F.28](seg#SEG-REPR-TABLE "Table F.28. seg External Representations"), *`x`*, *`y`*, and *`delta`* denote floating-point numbers. *`x`* and *`y`*, but not *`delta`*, can be preceded by a certainty indicator.
+The external representation of an interval is formed using one or two floating-point numbers joined by the range operator (`..` or `...`). Alternatively, it can be specified as a center point plus or minus a deviation. Optional certainty indicators (`<`, `>` or `~`) can be stored as well. (Certainty indicators are ignored by all the built-in operators, however.) [Table F.28](seg#SEG-REPR-TABLE) gives an overview of allowed representations; [Table F.29](seg#SEG-INPUT-EXAMPLES) shows some examples.
+
+In [Table F.28](seg#SEG-REPR-TABLE), *`x`*, *`y`*, and *`delta`* denote floating-point numbers. *`x`* and *`y`*, but not *`delta`*, can be preceded by a certainty indicator.
+
+[#id](#SEG-REPR-TABLE)
 
 **Table F.28. `seg` External Representations**
 
@@ -59,7 +65,7 @@ In [Table F.28](seg#SEG-REPR-TABLE "Table F.28. seg External Representations"
 | `x ..`         | Open interval with lower bound *`x`*                 |
 | `.. x`         | Open interval with upper bound *`x`*                 |
 
-\
+[#id](#SEG-INPUT-EXAMPLES)
 
 **Table F.29. Examples of Valid `seg` Input**
 
@@ -75,21 +81,25 @@ In [Table F.28](seg#SEG-REPR-TABLE "Table F.28. seg External Representations"
 | `1.5e-2 .. 2E-2` | Creates an interval `0.015 .. 0.02`                                                                                           |
 | `1 ... 2`        | The same as `1...2`, or `1 .. 2`, or `1..2` (spaces around the range operator are ignored)                                    |
 
-\
-
 Because the `...` operator is widely used in data sources, it is allowed as an alternative spelling of the `..` operator. Unfortunately, this creates a parsing ambiguity: it is not clear whether the upper bound in `0...23` is meant to be `23` or `0.23`. This is resolved by requiring at least one digit before the decimal point in all numbers in `seg` input.
 
 As a sanity check, `seg` rejects intervals with the lower bound greater than the upper, for example `5 .. 2`.
 
-### F.38.3. Precision [#](#SEG-PRECISION)
+[#id](#SEG-PRECISION)
+
+### F.39.3. Precision [#](#SEG-PRECISION)
 
 `seg` values are stored internally as pairs of 32-bit floating point numbers. This means that numbers with more than 7 significant digits will be truncated.
 
 Numbers with 7 or fewer significant digits retain their original precision. That is, if your query returns 0.00, you will be sure that the trailing zeroes are not the artifacts of formatting: they reflect the precision of the original data. The number of leading zeroes does not affect precision: the value 0.0067 is considered to have just 2 significant digits.
 
-### F.38.4. Usage [#](#SEG-USAGE)
+[#id](#SEG-USAGE)
 
-The `seg` module includes a GiST index operator class for `seg` values. The operators supported by the GiST operator class are shown in [Table F.30](seg#SEG-GIST-OPERATORS "Table F.30. Seg GiST Operators").
+### F.39.4. Usage [#](#SEG-USAGE)
+
+The `seg` module includes a GiST index operator class for `seg` values. The operators supported by the GiST operator class are shown in [Table F.30](seg#SEG-GIST-OPERATORS).
+
+[#id](#SEG-GIST-OPERATORS)
 
 **Table F.30. Seg GiST Operators**
 
@@ -104,18 +114,17 @@ The `seg` module includes a GiST index operator class for `seg` values. The oper
 | `seg` `@>` `seg` → `boolean`Does the first `seg` contain the second?                                                          |
 | `seg` `<@` `seg` → `boolean`Is the first `seg` contained in the second?                                                       |
 
-\
+In addition to the above operators, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE) are available for type `seg`. These operators first compare (a) to (c), and if these are equal, compare (b) to (d). That results in reasonably good sorting in most cases, which is useful if you want to use ORDER BY with this type.
 
-In addition to the above operators, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators") are available for type `seg`. These operators first compare (a) to (c), and if these are equal, compare (b) to (d). That results in reasonably good sorting in most cases, which is useful if you want to use ORDER BY with this type.
+[#id](#SEG-NOTES)
 
-### F.38.5. Notes [#](#SEG-NOTES)
+### F.39.5. Notes [#](#SEG-NOTES)
 
 For examples of usage, see the regression test `sql/seg.sql`.
 
 The mechanism that converts `(+-)` to regular ranges isn't completely accurate in determining the number of significant digits for the boundaries. For example, it adds an extra digit to the lower boundary if the resulting interval includes a power of ten:
 
 ```
-
 postgres=> select '10(+-)1'::seg as seg;
       seg
 ---------
@@ -124,7 +133,9 @@ postgres=> select '10(+-)1'::seg as seg;
 
 The performance of an R-tree index can largely depend on the initial order of input values. It may be very helpful to sort the input table on the `seg` column; see the script `sort-segments.pl` for an example.
 
-### F.38.6. Credits [#](#SEG-CREDITS)
+[#id](#SEG-CREDITS)
+
+### F.39.6. Credits [#](#SEG-CREDITS)
 
 Original author: Gene Selkov, Jr. `<selkovjr@mcs.anl.gov>`, Mathematics and Computer Science Division, Argonne National Laboratory.
 
