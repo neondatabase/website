@@ -51,7 +51,7 @@ const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = 
 
         <ul>
           {sidebar.map((item, index) => (
-            <Item {...item} key={index} basePath={basePath} />
+            <Item {...item} key={index} basePath={basePath} isChildren={false} />
           ))}
         </ul>
       </nav>
