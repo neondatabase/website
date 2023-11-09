@@ -278,22 +278,6 @@ To learn more about using pagination to control large response sizes, the [Keyse
 
 Here is an example Neon API `GET` request, with a limit of 2 projects in the response:
 
-TEST
-
-<CodeTabs labels={["Tab1", "Tab2"]}>
-
-<CodeBlock>
-* step 1
-* step 2
-</CodeBlock>
-
-<CodeBlock>
-* step 1
-* step 2
-</CodeBlock>
-
-</CodeTabs>
-
 ```bash
 curl --request GET \
      --url https://console.neon.tech/api/v2/consumption/projects?limit=2 \
