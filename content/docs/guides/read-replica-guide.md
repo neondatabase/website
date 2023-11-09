@@ -45,15 +45,9 @@ Creating a read replica involves adding a read-only compute endpoint to a branch
 In a few moments, your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page. This is your read replica. The following section describes how to connect to your read replica.
 ````
 
-````content
-
-This is a CLI command:
-
 ```bash
 neonctl branches add-compute mybranch --type read_only
 ```
-
-````
 
 ```bash
 curl --request POST \
