@@ -37,7 +37,7 @@ You can set quotas for these consumption metrics per project using the following
 The `quota` object includes an array of parameters used to set threshold limits. Their names generally match their corresponding metric:
 
 * `active_time_seconds` &#8212; Sets the maximum amount of wall-clock time allowed in total across all of a project's compute endpoints. This means the total elapsed time, in seconds, from start to finish for each transaction handled by the project's endpoints, accumulated so far during the current billing period.
-* `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's compute endpoints. This includes any endpoints deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes through `compute_time_seconds`. For example, 1 second at .25 vCPU uses .25 `compute_time_seconds`, while 1 second at 4 vCPU consumes 4 `compute_time_seconds`.
+* `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's compute endpoints. This includes any endpoints deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes `compute_time_seconds`. For example, 1 second at .25 vCPU costs .25 compute seconds, while 1 second at 4 vCPU costs 4 compute seconds.
    | vCPUs  | active_time_seconds | compute_time_seconds |
    |--------|-----------------------|------------------------|
    | 0.25   | 1                     | 0.25                   |
@@ -157,7 +157,7 @@ Using a `GET` request from the Neon API (see [Get project details](https://api-d
 
 Using these details, you can set up the logic for when to send notification warnings, when to reset a quota, and other possible actions related to the pending or current suspension of a project's active computes.
 
-Here is an example of the `GET` request for an individual project.
+Here is an example a `GET` request for an individual project.
 
 ```bash
 curl --request GET \
@@ -180,7 +180,7 @@ And here is what the response might look like. The key fields are highlighted.
     "compute_time_seconds": 68400,
     "active_time_seconds": 75000,
     "cpu_used_sec": 7200,
-    "id": "wispy-wind-123456",
+    "id": "[project_ID]",
     "platform_id": "aws",
     "region_id": "aws-us-east-2",
     "name": "UserProject",
@@ -232,7 +232,7 @@ Looking at this response, here are some conclusions we can draw:
 
 ### Retrieving metrics for all projects
 
-Instead of retrieving metrics for an individual project, use the [Consumption API](https://api-docs.neon.tech/reference/listprojectsconsumption) to get a full list of key consumption metrics for all the projects in your Neon integration in a single API request. You can specify a date range to get metrics from across multiple billing periods and control pagination for large result sets.
+Instead of retrieving metrics for a single project per request, you can use the [Consumption API](https://api-docs.neon.tech/reference/listprojectsconsumption) to get a full list of key consumption metrics for all the projects in your Neon account in a single API request. You can specify a date range to get metrics from across multiple billing periods and control pagination for large result sets.
 
 <Admonition type="Warning" title="Preview API">
 This functionality is part of the preview API and is subject to change in the future.
@@ -243,11 +243,9 @@ Here is the URL in the Neon API where you can get details for all projects in yo
 ```bash
 https://console.neon.tech/api/v2/consumption/projects
 ```
-This API endpoint accepts the following query parameters:
-* `from` and `to`&#8212;  used to [set dates across billing periods](#setting-a-date-range-across-multiple-billing-periods)
-* `limit` and `cursor` &#8212; used to configure [pagination](#controlling-pagination-for-large-result-sets)
+This API endpoint accepts the following query parameters: `from`,`to`, `limit`, and `cursor`.
 
-#### Setting a date range across multiple billing periods
+#### Set a date range across multiple billing periods
 
 You can set `from` and `to` query parameters to define a time range that can span across multiple billing periods. 
 * `from` — Sets the start date and time of the time period for which you are seeking metrics.
@@ -323,27 +321,24 @@ Key details:
 * The `period_start` and `period_end` keys show the dates for that particular billing period. A `null` value indicates that the object is for the current billing period.
 * The `cursor` object under `pagination` shows the last project Id in the response. See more about pagination in the next section.
 
-#### Controlling pagination for large result sets
+#### Control pagination for large result sets
 
 To control pagination (number of results per response), you can include these query parameters:
-* `limit` &#8212; sets the number of projects to be included in the response
+* `limit` &#8212; sets the number of project objects to be included in the response
 * `cursor` &#8212; by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
 
-Here is a sample URL with both query parameters included, asking for the next 100 projects, starting with project id  `divine-tree-77657175`:
-```bash
-https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100
-```
-
-To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
-
-Here is an example Neon API `GET` request, with a limit of 2 projects in the response:
+Here is an example `GET` request asking for the next 100 projects, starting with project id `divine-tree-77657175`:
 
 ```bash
 curl --request GET \
-     --url https://console.neon.tech/api/v2/consumption/projects?limit=2 \
+     --url https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100\
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq'
 ```
+
+<Admonition>To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
+</Admonition>
+
 
 ## Resetting a project after suspend
 Projects remain suspended until the next billing period. It is good practice to notify your users when they are close to reaching a limit; if the user is then suspended and loses access to their database, it will not be unexpected. If you have configured no further actions, the user will have to wait until the next billing period starts to resume usage.
