@@ -302,7 +302,7 @@ To access the Hasura Console via the URL the HASURA_GRAPHQL_ENABLE_CONSOLE envir
 </CodeTabs>
 `````
 
-To display the tab that contains the plain text and code block, set `plain` label as an example above.
+To display the tab that contains the plain text and code block, set `content` label as an example above.
 
 <details>
 <summary>Examples</summary>
