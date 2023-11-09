@@ -282,11 +282,15 @@ TEST
 
 <CodeTabs labels={["Tab1", "Tab2"]}>
 
+<CodeBlock>
 * step 1
 * step 2
+</CodeBlock>
 
+<CodeBlock>
 * step 1
 * step 2
+</CodeBlock>
 
 </CodeTabs>
 
