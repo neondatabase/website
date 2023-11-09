@@ -182,6 +182,8 @@ int main() {
     return 0;
 }
 ```
+
+</CodeBlock>
 ````
 
 Multiple lines
