@@ -36,7 +36,7 @@ You can create one or more read replicas for any branch in your Neon project. Cr
 
 Alternatively, you can create read replicas using the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint) or [Neon CLI](/docs/reference/cli-branches#create).
 
-<CodeTabs labels={["API", "CLI", "Plain"]}>
+<CodeTabs labels={["API", "CLI"]}>
 
 ```bash
 curl --request POST \
