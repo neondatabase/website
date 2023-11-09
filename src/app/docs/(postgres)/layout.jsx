@@ -9,13 +9,18 @@ const PostgresDocsLayout = async ({ children }) => {
   const sidebar = await getSidebar();
 
   return (
-    <Layout headerTheme="white" headerWithBottomBorder footerWithTopBorder burgerWithoutBorder>
+    <Layout
+      headerTheme="white"
+      headerWithBottomBorder
+      footerWithTopBorder
+      burgerWithoutBorder
+      isDocPage
+    >
       <div className="safe-paddings flex flex-1 flex-col dark:bg-gray-new-8 dark:text-white lg:block">
         <MobileNav
           className="hidden lg:block"
           sidebar={sidebar}
           basePath={POSTGRES_DOCS_BASE_PATH}
-          isPostgres
         />
 
         <Container
@@ -26,7 +31,6 @@ const PostgresDocsLayout = async ({ children }) => {
             sidebar={sidebar}
             basePath={POSTGRES_DOCS_BASE_PATH}
             indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
-            isPostgres
           />
           {children}
         </Container>
