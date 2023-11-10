@@ -60,6 +60,63 @@ neonctl branches add-compute mybranch --type read_only
 
 </CodeTabs>
 
+<Tabs labels={["Content", "CLI"]}>
+
+<TabItem>
+In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
+
+```bash
+- name: <db_name>
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url:
+        from_env: <DB_URL_ENV_VAR>
+    pool_settings:
+      idle_timeout: 180
+      max_connections: 50
+      retries: 1
+  tables: []
+  functions: []
+```
+
+Apply the Metadata by running:
+
+```bash
+hasura metadata apply
+```
+
+If you've spun up the Hasura Engine with Docker, you can access the Hasura Console by accessing it in a browser at the URL of your Hasura Engine instance, usually http://localhost:8080.
+
+<Admonition type="note">
+To access the Hasura Console via the URL the HASURA_GRAPHQL_ENABLE_CONSOLE environment variable or the `--enable-console` flag must be set to true.
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+Alternatively, you can create read replicas using the Neon API or Neon CLI.
+
+```bash
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/late-bar-27572981/endpoints \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "endpoint": {
+    "type": "read_only",
+    "branch_id": "br-young-fire-15282225"
+  }
+}
+' | jq
+```
+
+</TabItem>
+
+</Tabs>
+
 ## Retrieve the connection string for your read replica
 
 Connecting to a read replica is the same as connecting to any branch in a Neon project, except you connect via a read-only compute endpoint instead of a read-write compute endpoint. The following steps describe how to retrieve the connection string (the URL) for a read replica from the Neon Console.
