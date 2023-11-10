@@ -29,9 +29,9 @@ Neon supports managing read replicas programmatically using the Neon API. See [M
 
 Creating a read replica involves adding a read-only compute endpoint to a branch. You can add a read-only compute endpoint to any branch in your Neon project  using the Neon Console, [Neon CLI](/docs/reference/cli-branches#create), or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
 
-<CodeTabs labels={["Console", "CLI", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
-````content
+<TabItem>
 1. In the Neon Console, select **Branches**.
 2. Select the branch where your database resides.
 3. Click **Add compute**.
@@ -43,11 +43,23 @@ Creating a read replica involves adding a read-only compute endpoint to a branch
 6. When you have finished making your selections, click **Create**.
 
 In a few moments, your read-only compute is provisioned and appears in the **Computes** section of the **Branches** page. This is your read replica. The following section describes how to connect to your read replica.
-````
+</TabItem>
+
+<TabItem>
+
+<CodeBlock showLineNumbers>
 
 ```bash
 neonctl branches add-compute mybranch --type read_only
 ```
+
+</CodeBlock>
+
+</TabItem>
+
+<TabItem>
+
+<CodeBlock showLineNumbers>
 
 ```bash
 curl --request POST \
@@ -65,7 +77,11 @@ curl --request POST \
 ' | jq
 ```
 
-</CodeTabs>
+</CodeBlock>
+
+</TabItem>
+
+</Tabs>
 
 ## Connect to a read replica
 
