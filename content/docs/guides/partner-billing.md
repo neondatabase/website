@@ -3,10 +3,10 @@ title: Manage billing with consumption limits
 subtitle: Learn how to set usage quotas per project with the Neon API
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-11-09T17:34:20.601Z'
+updatedOn: '2023-11-10T13:29:55.837Z'
 ---
 
-When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute size a given project can consume. For example, you may want to cap how much usage your free tier users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes). 
+When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free tier users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes). 
 
 ## Metrics and quotas
 By default, Neon tracks a variety of consumption metrics at the project level. If you want to set quotas (max limits) for these metrics, you need to explicitly [configure](#configuring-quotas) them. 
@@ -54,7 +54,7 @@ Let's say you want to set limits for an application with two tiers, Trial and Pr
 | Parameter (project)       | Trial  (.25 vCPU)               | Pro  (max 4 vCPU)                |
 |---------------------------|---------------------------------|----------------------------------|
 | active_time_seconds     | 633,600 (business month 22 days)| 2,592,000 (30 days)              |
-| compute_time_seconds    | 158,400 (approx 44 hours)       | 10,368,000 (up to 4 times the active time)|
+| compute_time_seconds    | 158,400 (approx 44 hours)       | 10,368,000 (4 times the active time for 4 vCPUs)|
 | written_data_bytes      | 1,000,000,000 (approx. 1 GiB)   | 50,000,000,000 (approx. 50 GiB)  |
 | data_transfer_bytes     | 500,000,000 (approx. 500 MiB)   | 10,000,000,000 (approx. 10 GiB)  |
 
@@ -71,12 +71,12 @@ Generally, the most effective quotas for controlling spend per project are those
 
 _**What happens when the quota is met?**_
 
-When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [autosuspend](/docs/guides/auto-suspend-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming proxy connection. If you don't take explicit action otherwise, the suspension remains in place until the end of the current billing period starts (`consumption_period_end`).
+When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [autosuspend](/docs/guides/auto-suspend-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming connection. If you don't take explicit action otherwise, the suspension remains in place until the end of the current billing period starts (`consumption_period_end`).
 
 See [Querying metrics and quotas](#querying-metrics-and-quotas) to find your reset date, billing period, and other values related to the project's consumption.
 
 <Admonition type="Note">
-Neon tracks these consumption metrics on a monthly cycle. If you want to track metrics on a specific time range, you need to store your metrics as snapshots. You can also use the Preview [Consumption API](#retrieving-metrics-for-all-projects) to collect metrics from across a range of billing periods. 
+Neon tracks these consumption metrics on a monthly cycle. If you want to track metrics on a different cycle, you need to take snapshots of your metrics at the desired interval and store the data externally. You can also use the Preview [Consumption API](#retrieving-metrics-for-all-projects) to collect metrics from across a range of billing periods. 
 </Admonition>
 
 ## Configuring quotas
@@ -86,7 +86,7 @@ You can set quotas using the Neon API either in a `POST` when you create a proje
 * [Update an existing project](#update-an-existing-project)
 
 ### Set quotas when you create the project
-For performance reasons, you might want to configure these quotas at the same time that you create a new project for your user, reducing the number of API calls you need to make.
+For performance reasons, you might want to configure these quotas at the same time that you create a new project for your user using the [Create a project](https://api-docs.neon.tech/reference/createproject) API, reducing the number of API calls you need to make.
 
 Here is a sample `POST` in `curl` that creates a new project called `UserNew` and sets the `active_time_seconds` quota to a total allowed time of 10 hours (36,000 seconds) for the month, and a total allowed `compute_time_seconds` set to 2.5 hours (9,000 seconds) for the month.  
 
