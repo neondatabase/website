@@ -65,6 +65,8 @@ neonctl branches add-compute mybranch --type read_only
 <TabItem>
 In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
 
+<CodeBlock showLineNumbers>
+
 ```bash
 - name: <db_name>
   kind: postgres
@@ -79,6 +81,8 @@ In your config v3 project, head to the `/metadata/databases/databases.yaml` file
   tables: []
   functions: []
 ```
+
+</CodeBlock>
 
 Apply the Metadata by running:
 
