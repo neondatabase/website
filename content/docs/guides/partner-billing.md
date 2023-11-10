@@ -28,15 +28,11 @@ To find the current usage level for any of these metrics, see [retrieving detail
 
 ### Corresponding quotas
 
-You can set quotas for these consumption metrics per project using the following Neon API URL:
-
-```bash
-/projects/{project_id}/settings/quota
-```
+You can set quotas for these consumption metrics per project using the `quote` object in the [Create project](https://api-docs.neon.tech/reference/createproject) or [Update project](https://api-docs.neon.tech/reference/updateproject) API.
 
 The `quota` object includes an array of parameters used to set threshold limits. Their names generally match their corresponding metric:
 
-* `active_time_seconds` &#8212; Sets the maximum amount of wall-clock time allowed in total across all of a project's compute endpoints. This means the total elapsed time, in seconds, from start to finish for each transaction handled by the project's endpoints, accumulated so far during the current billing period.
+* `active_time_seconds` &#8212; "Sets the maximum amount of time your project's total compute endpoints are allowed to be active during the current billing period. It excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute)."
 * `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's compute endpoints. This includes any endpoints deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes `compute_time_seconds`. For example, 1 second at .25 vCPU costs .25 compute seconds, while 1 second at 4 vCPU costs 4 compute seconds.
    | vCPUs  | active_time_seconds | compute_time_seconds |
    |--------|-----------------------|------------------------|
@@ -88,7 +84,7 @@ You can set quotas using the Neon API either in a `POST` when you create a proje
 ### Set quotas when you create the project
 For performance reasons, you might want to configure these quotas at the same time that you create a new project for your user using the [Create a project](https://api-docs.neon.tech/reference/createproject) API, reducing the number of API calls you need to make.
 
-Here is a sample `POST` in `curl` that creates a new project called `UserNew` and sets the `active_time_seconds` quota to a total allowed time of 10 hours (36,000 seconds) for the month, and a total allowed `compute_time_seconds` set to 2.5 hours (9,000 seconds) for the month.  
+Here is a sample `POST` in `curl` that creates a new project called `UserNew` and sets the `active_time_seconds` quota to a total allowed time of 10 hours (36,000 seconds) for the month, and a total allowed `compute_time_seconds` set to 2.5 hours (9,000 seconds) for the month. This 4:1 ratio between active and compute time is suitable for a fixed compute size of 0.25 vCPU.
 
 <CodeBlock highlight="11,12">
 ```bash
@@ -257,12 +253,15 @@ If you do not include these parameters, the query defaults to the current consum
 
 Here is an example query that returns metrics from September 1st and December 1st, 2023.
 
+<CodeBlock shouldWrap>
 ```bash
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/consumption/projects?limit=10&from=2023-09-01T00%3A00%3A00Z&to=2023-12-01T00%3A00%3A00Z' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq
 ```
+</CodeBlock>
+
 And here is a sample response (with key lines highlighted):
 <details>
 <summary>Response body</summary>
@@ -329,12 +328,14 @@ To control pagination (number of results per response), you can include these qu
 
 Here is an example `GET` request asking for the next 100 projects, starting with project id `divine-tree-77657175`:
 
+<CodeBlock shouldWrap>
 ```bash
 curl --request GET \
      --url https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100\
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq'
 ```
+</CodeBlock>
 
 <Admonition type="Note">
 To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
