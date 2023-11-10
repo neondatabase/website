@@ -2,10 +2,16 @@
 title: Documentation Contribution Guide
 subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
-updatedOn: '2023-10-24T13:30:10.819Z'
+updatedOn: '2023-11-09T19:24:28.538Z'
 ---
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
+
+<Admonition type="note" title="TL;DR: Contributing to the Neon Docs">
+- You can edit files on GitHub via the **Edit this page** link on our documentation pages or by forking the [neondatabase/website](https://github.com/neondatabase/website) repository and submitting a pull request.
+- If you want to contribute a guide, we provide a [template](https://github.com/neondatabase/website/blob/main/content/docs/guides/GUIDE_TEMPLATE.md) to help you get started. See [How to contribute](#how-to-contribute) for details.
+- Reference this contribution guide as needed for Markdown and style guidelines.
+</Admonition>
 
 ## Why should you contribute?
 
@@ -15,7 +21,7 @@ By contributing to the Neon docs, you're helping us create a stronger learning r
 
 ## How to contribute
 
-The content for the documentation is located in the [neondatabase/website](https://github.com/neondatabase/website) repository, in the `/content/docs` directory. To contribute, you have two options:
+Documentation source files are located in the [neondatabase/website](https://github.com/neondatabase/website) repository, in the `/content/docs` directory. To contribute, you have two options:
 
 1. Edit files directly on GitHub.
 2. Fork the [neondatabase/website](https://github.com/neondatabase/website) repository, create a branch for your changes, and submit a pull request.
@@ -26,7 +32,7 @@ If you prefer the first option, which is great for edits and small updates, ther
 
 Clicking the link takes you to the Markdown file in GitHub, where you can click the **Edit this page** icon to make a change. When you finish editing, commit your changes to create a pull request.
 
-If you would rather fork the [neondatabase/website](https://github.com/neondatabase/website) repository and submit pull requests, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request.
+If you would rather fork the [neondatabase/website](https://github.com/neondatabase/website) repository and submit a pull request, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request. To help you get started, we provide a [GUIDE_TEMPLATE.md](https://github.com/neondatabase/website/blob/main/content/docs/guides/GUIDE_TEMPLATE.md) file, which you can find in the [neondatabase/website](https://github.com/neondatabase/website) repository, under the `/content/docs/guides` directory. After you create a branch, copy the template file and rename it. Don't forget to add your guide to the sidebar. See [Add a new page](#add-a-new-page).
 
 ## Markdown
 
@@ -53,15 +59,17 @@ The Neon documentation file structure reflects the navigation you see on the web
 ```text
 ├── content
    └── docs
+       ├── ai
+       ├── community
        ├── connect
        ├── extensions
        ├── get-started-with-neon
        ├── guides
        ├── introduction
        ├── manage
+       ├── reference
        ├── security
        ├── serverless
-       └── tutorial
 ```
 
 - Every Markdown file in the `/docs` folder becomes a documentation page unless it's defined with an `isDraft: true` property in the page [frontmatter](#markdown-frontmatter).
@@ -146,7 +154,7 @@ subtitle: Set up a Neon project and connect from a Next.js application
 enableTableOfContents: true
 redirectFrom:
   - /docs/content/<old_directory_name>
-`updatedOn: '2023-10-07T12:25:27.662Z'`
+updatedOn: '2023-10-07T12:25:27.662Z'
 ---
 ```
 
