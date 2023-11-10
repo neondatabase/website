@@ -76,7 +76,7 @@ When any configured metric reaches its quota limit, all active computes for that
 See [Querying metrics and quotas](#querying-metrics-and-quotas) to find your reset date, billing period, and other values related to the project's consumption.
 
 <Admonition type="Note">
-Neon tracks these consumption metrics on a monthly cycle. If you want to track metrics on a specific time range, you need to store your metrics as snapshots. You can also use the Preview [Consumption API](#retrieving-metrics-for-all-projects) to collect metrics from across a range of billing periods. 
+Neon tracks these consumption metrics on a monthly cycle. If you want to track metrics on a different cycle, you need to take snapshots of your metrics at the desired interval and store the data externally. You can also use the Preview [Consumption API](#retrieving-metrics-for-all-projects) to collect metrics from across a range of billing periods. 
 </Admonition>
 
 ## Configuring quotas
