@@ -251,7 +251,7 @@ The response is organized by project and billing period: one object per project,
 
 If you do not include these parameters, the query defaults to the current consumption period. 
 
-Here is an example query that returns metrics from September 1st and December 1st, 2023.
+Here is an example query that returns metrics from September 1st and December 1st, 2023. Time values must be provided  in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
 
 <CodeBlock shouldWrap>
 ```bash
