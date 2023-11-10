@@ -268,7 +268,24 @@ class GFG {
 }
 ```
 
-````content
+</CodeTabs>
+`````
+
+<details>
+<summary>Examples</summary>
+
+![Code tabs example](code-tabs-example.jpg)
+
+</details>
+
+## Tabs
+
+To display the tabs with content as image, video, code block, .etc, wrap the `TabItem` with `Tabs`
+
+````md
+<Tabs labels={["Content", "CLI"]}>
+
+<TabItem>
 In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
 
 ```bash
@@ -285,6 +302,7 @@ In your config v3 project, head to the `/metadata/databases/databases.yaml` file
   tables: []
   functions: []
 ```
+
 Apply the Metadata by running:
 
 ```bash
@@ -297,19 +315,31 @@ If you've spun up the Hasura Engine with Docker, you can access the Hasura Conso
 To access the Hasura Console via the URL the HASURA_GRAPHQL_ENABLE_CONSOLE environment variable or the `--enable-console` flag must be set to true.
 </Admonition>
 
+</TabItem>
+
+<TabItem>
+Alternatively, you can create read replicas using the Neon API or Neon CLI.
+
+```bash
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/late-bar-27572981/endpoints \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "endpoint": {
+    "type": "read_only",
+    "branch_id": "br-young-fire-15282225"
+  }
+}
+' | jq
+```
+
+</TabItem>
+
+</Tabs>
 ````
-
-</CodeTabs>
-`````
-
-To display the tab that contains the plain text and code block, set `content` label as an example above.
-
-<details>
-<summary>Examples</summary>
-
-![Code tabs example](code-tabs-example.jpg)
-
-</details>
 
 ## Admonition
 

@@ -12,6 +12,8 @@ import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
+import Tabs from 'components/pages/doc/tabs';
+import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import AnchorHeading from 'components/shared/anchor-heading';
@@ -93,6 +95,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   DetailIconCards,
   TechnologyNavigation,
   CommunityBanner,
+  Tabs,
+  TabItem,
 });
 
 // eslint-disable-next-line no-return-assign
