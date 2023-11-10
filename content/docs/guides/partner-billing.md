@@ -86,7 +86,7 @@ You can set quotas using the Neon API either in a `POST` when you create a proje
 * [Update an existing project](#update-an-existing-project)
 
 ### Set quotas when you create the project
-For performance reasons, you might want to configure these quotas at the same time that you create a new project for your user, reducing the number of API calls you need to make.
+For performance reasons, you might want to configure these quotas at the same time that you create a new project for your user using the [Create a project](https://api-docs.neon.tech/reference/createproject) API, reducing the number of API calls you need to make.
 
 Here is a sample `POST` in `curl` that creates a new project called `UserNew` and sets the `active_time_seconds` quota to a total allowed time of 10 hours (36,000 seconds) for the month, and a total allowed `compute_time_seconds` set to 2.5 hours (9,000 seconds) for the month.  
 
