@@ -54,7 +54,7 @@ Let's say you want to set limits for an application with two tiers, Trial and Pr
 | Parameter (project)       | Trial  (.25 vCPU)               | Pro  (max 4 vCPU)                |
 |---------------------------|---------------------------------|----------------------------------|
 | active_time_seconds     | 633,600 (business month 22 days)| 2,592,000 (30 days)              |
-| compute_time_seconds    | 158,400 (approx 44 hours)       | 10,368,000 (up to 4 times the active time)|
+| compute_time_seconds    | 158,400 (approx 44 hours)       | 10,368,000 (4 times the active time for 4 vCPUs)|
 | written_data_bytes      | 1,000,000,000 (approx. 1 GiB)   | 50,000,000,000 (approx. 50 GiB)  |
 | data_transfer_bytes     | 500,000,000 (approx. 500 MiB)   | 10,000,000,000 (approx. 10 GiB)  |
 
