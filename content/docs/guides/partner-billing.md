@@ -71,7 +71,7 @@ Generally, the most effective quotas for controlling spend per project are those
 
 _**What happens when the quota is met?**_
 
-When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [autosuspend](/docs/guides/auto-suspend-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming proxy connection. If you don't take explicit action otherwise, the suspension remains in place until the end of the current billing period starts (`consumption_period_end`).
+When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [autosuspend](/docs/guides/auto-suspend-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming connection. If you don't take explicit action otherwise, the suspension remains in place until the end of the current billing period starts (`consumption_period_end`).
 
 See [Querying metrics and quotas](#querying-metrics-and-quotas) to find your reset date, billing period, and other values related to the project's consumption.
 
