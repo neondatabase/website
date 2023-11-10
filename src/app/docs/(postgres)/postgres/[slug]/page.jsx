@@ -2,6 +2,7 @@
 import Admonition from 'components/pages/doc/admonition';
 import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
 import Content from 'components/shared/content';
+import Link from 'components/shared/link/link';
 import { POSTGRES_DOCS_BASE_PATH, VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/docs';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import {
@@ -52,9 +53,9 @@ const PostgresPage = async ({ params }) => {
       <article>
         {!hasH1 && <h1 className="sr-only">{title}</h1>}
         <Admonition type="note">
-          You are viewing the Neon mirror of the official PostgreSQL Documentation. This
-          documentation is applicable to Neon because it is a Serverless Postgres platform built
-          using standard Postgres.
+          This mirror of official PostgreSQL documentation is brought to you by Neon with ❤️.
+          <br className="flat-none sm:flat-break" /> Not all features and functions are supported.
+          See <Link to="/docs/reference/compatibility">Postgres compatibility</Link> for details.
         </Admonition>
         <Content className="mt-10" content={mdxSource} isPostgres />
       </article>
