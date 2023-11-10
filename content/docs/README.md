@@ -1,6 +1,3 @@
----
-updatedOn: '2023-11-10T14:36:42.822Z'
----
 # Docs
 
 Welcome to Neon docs! This folder contains the source code of the [Neon docs](https://neon.tech/docs/).
@@ -227,7 +224,7 @@ int main() {
 
 To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and write labels of code tabs in order:
 
-`````md
+````md
 <CodeTabs labels={["Shell", "C++", "C#", "Java"]}>
 
 <CodeBlock highlight="2-4">
@@ -272,7 +269,7 @@ class GFG {
 ```
 
 </CodeTabs>
-`````
+````
 
 <details>
 <summary>Examples</summary>
@@ -384,12 +381,12 @@ Example file structure:
 ```md
 ├── public
 │ ├── docs
-│   ├── conceptual-guides
-│     ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
+│ ├── conceptual-guides
+│ ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
 ├── content
 │ ├── docs
-│   ├── conceptual-guides
-│     ├── architecture-overview.md
+│ ├── conceptual-guides
+│ ├── architecture-overview.md
 ```
 
 Example content in `architecture-overview.md`:
@@ -407,7 +404,7 @@ Custom `mdx` component that makes possible using [extended markdown syntax for d
 The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
-{/* other content here */}
+{/_ other content here _/}
 
 <DefinitionList>
 {/* required new line */}
@@ -427,10 +424,10 @@ Another term for smoke test
 [Stress test](/)
 : First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
 
-{/* other content here */}
+{/_ other content here _/}
 </DefinitionList>
 
-{/* other content here */}
+{/_ other content here _/}
 ```
 
 ### Detail Icon Cards
@@ -438,7 +435,6 @@ Another term for smoke test
 `DetailIconCards` is a custom MDX component that displays data in a card format. Each card contains icon, title, href and description. This layout is especially useful for presenting grouped information in a visually pleasing and easy-to-understand way.
 
 ```md
-
 <DetailIconCards>
 
 <a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
@@ -446,7 +442,6 @@ Another term for smoke test
 <a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
 
 </DetailIconCards>
-
 ```
 
 ### Acceptable markup for term
