@@ -31,7 +31,7 @@ const Header = ({
 }) => {
   const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
   const headerRef = useRef(null);
-  const isMobile = useMedia('(max-width: 1023px)');
+  const isMobile = useMedia('(max-width: 1023px)', false);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
