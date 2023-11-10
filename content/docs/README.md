@@ -288,6 +288,8 @@ To display the tabs with content as image, video, code block, .etc, wrap the `Ta
 <TabItem>
 In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
 
+<CodeBlock showLineNumbers>
+
 ```bash
 - name: <db_name>
   kind: postgres
@@ -302,6 +304,8 @@ In your config v3 project, head to the `/metadata/databases/databases.yaml` file
   tables: []
   functions: []
 ```
+
+</CodeBlock>
 
 Apply the Metadata by running:
 
