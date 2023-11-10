@@ -3,10 +3,10 @@ name: Update Frontmatter
 on:
   push:
     branches:
-      - 'main' # Exclude the main branch
+      - 'main'
     paths:
       - 'content/docs/**/*.md'
-      - '!content/docs/README.md' # Exclude the README.md file
+      - '!content/docs/README.md'
 
 jobs:
   update-date:
@@ -17,6 +17,9 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 2
+        token: ${{ secrets.ACCESS_TOKEN }}
+        # ACCESS_TOKEN is a personal access token with repo scope
+        # it needs to be updated in the repo secrets when it expires - Nov 10, 2024
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -26,19 +29,19 @@ jobs:
     - name: Get list of modified files
       id: get-modified-files
       run: |
-        modified_files=$(git diff --name-only HEAD^ HEAD | grep '^content/docs/.*\.md$' || echo "")
+        modified_files=$(git diff --name-only HEAD^ HEAD | grep '^content/docs/.*\.md$' | xargs)
         echo "Modified files: $modified_files"
         if [ -z "$modified_files" ]; then
           echo "No modified Markdown files to update."
           exit 0
         fi
-        echo "modified_files=$modified_files" >> $GITHUB_ENV
+        echo "modified_files=$modified_files" >> $GITHUB_OUTPUT
 
     - name: Install packages
       run: npm ci
       
     - name: Run update script
-      run: node src/scripts/update-frontmatter.js ${{ env.modified_files }}
+      run: node src/scripts/update-frontmatter.js ${{ steps.get-modified-files.outputs.modified_files }}
 
     - name: Commit changes
       run: |
@@ -47,8 +50,14 @@ jobs:
         export HUSKY=0
         git add -A
         if git diff --staged | grep '.'; then
-          git commit -m "chore(docs): Update frontmatter date"
-          git push
+          git commit -m "chore: update frontmatter date"
+          echo "Changes committed"
         else
           echo "No changes to commit"
+          exit 0
         fi
+
+    - name: Push changes
+      run: git push origin HEAD:main
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
