@@ -24,7 +24,7 @@ These consumption metrics represent total cumulative usage across all branches a
 
 Neon updates these metrics every 15 minutes but it could take up to 1 hour before they are reportable.
 
-To find the current usage level for any of these metrics, see [retrieving details about a project](#retrieving-details-about-a-project). You can read more about these metrics and how they impact billing [here](/docs/billing).
+To find the current usage level for any of these metrics, see [retrieving details about a project](#retrieving-details-about-a-project). You can read more about these metrics and how they impact billing [here](/docs/introduction/billing).
 
 ### Corresponding quotas
 
@@ -32,7 +32,7 @@ You can set quotas for these consumption metrics per project using the `quote` o
 
 The `quota` object includes an array of parameters used to set threshold limits. Their names generally match their corresponding metric:
 
-* `active_time_seconds` &#8212; "Sets the maximum amount of time your project's total compute endpoints are allowed to be active during the current billing period. It excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute)."
+* `active_time_seconds` &#8212; Sets the maximum amount of time your project's total compute endpoints are allowed to be active during the current billing period. It excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#auto-suspend-compute).
 * `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's compute endpoints. This includes any endpoints deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes `compute_time_seconds`. For example, 1 second at .25 vCPU costs .25 compute seconds, while 1 second at 4 vCPU costs 4 compute seconds.
    | vCPUs  | active_time_seconds | compute_time_seconds |
    |--------|-----------------------|------------------------|
