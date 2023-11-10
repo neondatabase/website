@@ -20,7 +20,7 @@ const borderClassNames = {
 const Admonition = ({ children = null, type = 'note', title = null }) => (
   <div
     className={clsx(
-      'not-prose mt-5 flex flex-col rounded-[1px] border-l-4 bg-gray-new-98 px-5 py-4 leading-normal dark:bg-gray-new-10',
+      'admonition not-prose mt-5 flex flex-col rounded-[1px] border-l-4 bg-gray-new-98 px-5 py-4 leading-normal dark:bg-gray-new-10',
       borderClassNames[type]
     )}
   >
