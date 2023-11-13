@@ -64,7 +64,7 @@ To write an array value as a literal constant, enclose the element values within
 
 where _`delim`_ is the delimiter character for the type, as recorded in its `pg_type` entry. Among the standard data types provided in the PostgreSQL distribution, all use a comma (`,`), except for type `box` which uses a semicolon (`;`). Each _`val`_ is either a constant of the array element type, or a subarray. An example of an array constant is:
 
-`{{1,2,3},{4,5,6},{7,8,9}}`
+\{\{1,2,3},\{4,5,6},\{7,8,9}}
 
 This constant is a two-dimensional, 3-by-3 array consisting of three subarrays of integers.
 
