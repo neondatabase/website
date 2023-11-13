@@ -17,7 +17,6 @@ import getExcerpt from 'utils/get-excerpt';
 import getMetadata from 'utils/get-metadata';
 import getReleaseNotesCategoryFromSlug from 'utils/get-release-notes-category-from-slug';
 import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug';
-import serializeMdx from 'utils/serialize-mdx';
 
 export async function generateStaticParams() {
   const releaseNotes = await getAllReleaseNotes();
@@ -70,7 +69,6 @@ const ReleaseNotePage = async ({ currentSlug }) => {
   const { capitalisedCategory } = getReleaseNotesCategoryFromSlug(currentSlug);
 
   const { content } = getPostBySlug(currentSlug, RELEASE_NOTES_DIR_PATH);
-  const mdxSource = await serializeMdx(content);
 
   const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
 
@@ -110,7 +108,7 @@ const ReleaseNotePage = async ({ currentSlug }) => {
                   {label}
                 </time>
               </h2>
-              <Content className="mt-8 max-w-full prose-h3:text-xl w-full" content={mdxSource} />
+              <Content className="mt-8 max-w-full prose-h3:text-xl w-full" content={content} />
               <Link
                 className="mt-10 font-semibold lg:mt-8"
                 to={RELEASE_NOTES_BASE_PATH}
@@ -149,20 +147,16 @@ export default async function ReleaseNotesPost({ params }) {
   const currentSlug = params?.slug.join('/');
   const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
   const allReleaseNotes = await getAllReleaseNotes();
-  const currentReleaseNotes = await Promise.all(
-    allReleaseNotes
-      .filter((item) => {
-        const { slug } = item;
-        const { category } = getReleaseNotesCategoryFromSlug(slug);
+  const currentReleaseNotes = allReleaseNotes
+    .filter((item) => {
+      const { slug } = item;
+      const { category } = getReleaseNotesCategoryFromSlug(slug);
 
-        return category === currentSlug;
-      })
-      .map(async (item) => ({
-        ...item,
-        content: await serializeMdx(item.content),
-      }))
-  );
-
+      return category === currentSlug;
+    })
+    .map(async (item) => ({
+      ...item,
+    }));
   return isReleaseNotePage ? (
     <ReleaseNotePage currentSlug={currentSlug} />
   ) : (

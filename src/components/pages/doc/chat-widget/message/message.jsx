@@ -1,12 +1,55 @@
 import clsx from 'clsx';
+import Image from 'next/image';
+import { MDXRemote } from 'next-mdx-remote';
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
-import Content from 'components/shared/content/content';
+import CodeBlock from 'components/shared/code-block';
+import Link from 'components/shared/link';
 import serializeMdx from 'utils/serialize-mdx';
 
 import ExampleIcon from '../images/example.inline.svg';
 import UserIcon from '../images/user.inline.svg';
+
+const components = {
+  table: (props) => (
+    <div className="table-wrapper">
+      <table {...props} />
+    </div>
+  ),
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  undefined: (props) => <Fragment {...props} />,
+  code: (props) => {
+    if (props?.className?.startsWith('language-') && props?.children) {
+      return <CodeBlock as="figure" {...props} />;
+    }
+    return <code {...props} />;
+  },
+  pre: (props) => (
+    <div>
+      <CodeBlock {...props} />
+    </div>
+  ),
+  a: (props) => {
+    const { href, children, ...otherProps } = props;
+    return (
+      <Link to={href} {...otherProps}>
+        {children}
+      </Link>
+    );
+  },
+  img: (props) => (
+    <Image
+      {...props}
+      loading="lazy"
+      width={796}
+      height={447}
+      style={{ width: '100%', height: '100%' }}
+    />
+  ),
+
+  CodeBlock,
+};
 
 const Message = ({ role, content }) => {
   const [mdxSource, setMdxSource] = useState(null);
@@ -42,10 +85,9 @@ const Message = ({ role, content }) => {
         {role === 'user' ? <UserIcon /> : <ExampleIcon />}
       </span>
       {mdxSource ? (
-        <Content
-          className="prose-chat max-w-[656px] grow pt-0.5 lg:w-[calc(100%-40px)] xs:prose-code:break-words"
-          content={mdxSource}
-        />
+        <div className="prose-doc prose dark:prose-invert prose-chat max-w-[656px] grow pt-0.5 lg:w-[calc(100%-40px)] xs:prose-code:break-words">
+          <MDXRemote {...mdxSource} components={components} />
+        </div>
       ) : (
         <div className="flex h-7 grow items-center">
           <span className="h-4 w-1 animate-loading bg-gray-new-50" />

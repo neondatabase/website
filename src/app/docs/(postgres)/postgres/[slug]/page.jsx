@@ -10,7 +10,6 @@ import {
   getPostBySlug,
 } from 'utils/api-postgres';
 import getMetadata from 'utils/get-metadata';
-import serializeMdx from 'utils/serialize-mdx';
 
 export async function generateMetadata({ params }) {
   const { slug: currentSlug } = params;
@@ -43,15 +42,13 @@ const PostgresPage = async ({ params }) => {
   const { title, content } = await getPostBySlug(`/${currentSlug}`, POSTGRES_DIR_PATH);
   const hasH1 = findH1(content);
 
-  const mdxSource = await serializeMdx(content);
-
   const { previousLink, nextLink } = getDocPreviousAndNextLinks(currentSlug);
 
   return (
     <div className="col-span-6 -mx-10 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
       <article>
         {!hasH1 && <h1 className="sr-only">{title}</h1>}
-        <Content content={mdxSource} isPostgres />
+        <Content content={content} isPostgres />
       </article>
       <PreviousAndNextLinks
         previousLink={previousLink}

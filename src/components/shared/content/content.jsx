@@ -1,17 +1,16 @@
-'use client';
-
 // eslint-disable-next-line import/no-extraneous-dependencies
 import clsx from 'clsx';
 import Image from 'next/image';
-import { MDXRemote } from 'next-mdx-remote';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
-import React, { Fragment, forwardRef } from 'react';
+import { Fragment } from 'react';
 
 import Admonition from 'components/pages/doc/admonition';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
+import IncludeBlock from 'components/pages/doc/include-block';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
@@ -97,37 +96,29 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   CommunityBanner,
   Tabs,
   TabItem,
+  IncludeBlock,
 });
 
 // eslint-disable-next-line no-return-assign
-const Content = forwardRef(
-  (
-    {
-      className = null,
-      content,
-      asHTML = false,
-      withoutAnchorHeading = false,
-      isReleaseNote = false,
-      isPostgres = false,
-    },
-    ref
-  ) => (
-    <div
-      className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}
-      ref={ref}
-    >
-      {asHTML ? (
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-      ) : (
-        <MDXRemote
-          components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres)}
-          {...content}
-        />
-      )}
-    </div>
-  )
+const Content = ({
+  className = null,
+  content,
+  asHTML = false,
+  withoutAnchorHeading = false,
+  isReleaseNote = false,
+  isPostgres = false,
+}) => (
+  <div className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}>
+    {asHTML ? (
+      <div dangerouslySetInnerHTML={{ __html: content }} />
+    ) : (
+      <MDXRemote
+        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres)}
+        source={content}
+      />
+    )}
+  </div>
 );
-
 Content.propTypes = {
   className: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
