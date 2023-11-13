@@ -147,16 +147,12 @@ export default async function ReleaseNotesPost({ params }) {
   const currentSlug = params?.slug.join('/');
   const isReleaseNotePage = RELEASE_NOTES_SLUG_REGEX.test(currentSlug);
   const allReleaseNotes = await getAllReleaseNotes();
-  const currentReleaseNotes = allReleaseNotes
-    .filter((item) => {
-      const { slug } = item;
-      const { category } = getReleaseNotesCategoryFromSlug(slug);
+  const currentReleaseNotes = allReleaseNotes.filter((item) => {
+    const { slug } = item;
+    const { category } = getReleaseNotesCategoryFromSlug(slug);
 
-      return category === currentSlug;
-    })
-    .map(async (item) => ({
-      ...item,
-    }));
+    return category === currentSlug;
+  });
   return isReleaseNotePage ? (
     <ReleaseNotePage currentSlug={currentSlug} />
   ) : (
