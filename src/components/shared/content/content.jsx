@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
+import remarkGfm from 'remark-gfm';
 
 import Admonition from 'components/pages/doc/admonition';
 import CodeTabs from 'components/pages/doc/code-tabs';
@@ -52,9 +53,9 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   h3: getHeadingComponent('h3', withoutAnchorHeading, isPostgres),
   h4: getHeadingComponent('h4', withoutAnchorHeading, isPostgres),
   table: (props) => (
-    <div className="table-wrapper">
+    <figure className="table-wrapper">
       <table {...props} />
-    </div>
+    </figure>
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
@@ -65,9 +66,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
     return <code {...props} />;
   },
   pre: (props) => (
-    <div>
-      <CodeBlock {...props} />
-    </div>
+    <CodeBlock {...props} />
   ),
   a: (props) => {
     const { href, children, ...otherProps } = props;
@@ -115,6 +114,14 @@ const Content = ({
       <MDXRemote
         components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres)}
         source={content}
+        options={{
+          mdxOptions: {
+            remarkPlugins: [
+              // Adds support for GitHub Flavored Markdown
+              remarkGfm,
+            ],
+          },
+        }}
       />
     )}
   </div>

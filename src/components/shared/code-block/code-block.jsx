@@ -56,7 +56,9 @@ const CodeBlock = ({
   const code =
     typeof children === 'string'
       ? children
-      : children?.props?.children?.props?.children || children?.props?.children;
+      : children?.props?.children?.props?.children?.props?.children ||
+        children?.props?.children?.props?.children ||
+        children?.props?.children;
 
   const content = isTrimmed ? code?.trim() : code;
 
