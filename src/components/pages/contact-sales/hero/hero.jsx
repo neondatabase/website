@@ -108,6 +108,7 @@ const Hero = () => {
                 opacity: 1,
                 transition: { delay: APPEAR_AND_EXIT_ANIMATION_DURATION },
               }}
+              data-test="success-message"
               aria-hidden={formState !== FORM_STATES.SUCCESS}
             >
               <Image
