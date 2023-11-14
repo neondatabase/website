@@ -1,7 +1,7 @@
 ---
 title: Backups
 enableTableOfContents: true
-updatedOn: '2023-10-24T18:56:54.990Z'
+updatedOn: '2023-11-14T12:31:38.483Z'
 ---
 
 Neon does not yet provide support for configuring automated backups in the Neon Console or API. This feature is on our roadmap. You can expect it to be introduced in the coming months. In the meantime, we support the following backup options:

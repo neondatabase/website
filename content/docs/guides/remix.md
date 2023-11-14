@@ -2,7 +2,7 @@
 title: Connect a Remix application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Remix application
 enableTableOfContents: true
-updatedOn: '2023-10-06T17:44:14.691Z'
+updatedOn: '2023-11-14T12:31:38.476Z'
 ---
 
 
