@@ -8,6 +8,7 @@ on:
     paths:
       - 'content/docs/**/*.md'
       - '!content/docs/README.md' # Exclude the README.md file
+      - '!content/docs/shared-content/**/*.md' # Exclude the shared-content folder
 
 jobs:
   update-date:
