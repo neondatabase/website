@@ -49,6 +49,4 @@ PolyScale identifies caching opportunities by recognizing and remembering patter
 
 For more information about using PolyScale and how it works, refer to the [PolyScale documentation](https://docs.polyscale.ai/).
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<IncludeBlock url="shared-content/need-help"></IncludeBlock>

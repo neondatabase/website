@@ -26,6 +26,4 @@ Use the following resources to get started with Vercel Postgres:
 - Read [Vercel Postgres Limits](https://vercel.com/docs/storage/vercel-postgres/limits) to learn about Vercel Postgres technical limits.
 - Refer to [Vercel Postgres Pricing](https://vercel.com/docs/storage/vercel-postgres/usage-and-pricing) to learn about the Vercel Postgres usage and pricing model.
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<IncludeBlock url="shared-content/need-help"></IncludeBlock>
