@@ -381,12 +381,12 @@ Example file structure:
 ```md
 ├── public
 │ ├── docs
-│ ├── conceptual-guides
-│ ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
+│   ├── conceptual-guides
+│   ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
 ├── content
 │ ├── docs
-│ ├── conceptual-guides
-│ ├── architecture-overview.md
+│   ├── conceptual-guides
+│   ├── architecture-overview.md
 ```
 
 Example content in `architecture-overview.md`:
@@ -442,6 +442,14 @@ Another term for smoke test
 <a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
 
 </DetailIconCards>
+```
+
+### IncludeBlock
+
+Include another markdown and render inline.
+
+```markdown
+<IncludeBlock slug="shared-content/need-help"></IncludeBlock>
 ```
 
 ### Acceptable markup for term
