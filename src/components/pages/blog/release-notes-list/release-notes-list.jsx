@@ -81,7 +81,7 @@ ReleaseNotesList.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,
-      content: PropTypes.string,
+      content: PropTypes.shape({}),
     })
   ),
 };
