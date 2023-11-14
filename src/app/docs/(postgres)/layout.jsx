@@ -21,6 +21,7 @@ const PostgresDocsLayout = async ({ children }) => {
           className="hidden lg:block"
           sidebar={sidebar}
           basePath={POSTGRES_DOCS_BASE_PATH}
+          isPostgres
         />
 
         <Container
@@ -31,6 +32,7 @@ const PostgresDocsLayout = async ({ children }) => {
             sidebar={sidebar}
             basePath={POSTGRES_DOCS_BASE_PATH}
             indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
+            isPostgres
           />
           {children}
         </Container>

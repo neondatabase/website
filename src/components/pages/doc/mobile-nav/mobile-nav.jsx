@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from 'react';
 
 import Item from 'components/pages/doc/sidebar/item';
 import Link from 'components/shared/link/link';
-import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
@@ -15,7 +14,6 @@ import useWindowSize from 'hooks/use-window-size';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
 import { ChatWidgetTrigger } from '../chat-widget';
-import DocNavLink from '../doc-nav-link';
 import { sidebarPropTypes } from '../sidebar/sidebar';
 
 const ANIMATION_DURATION = 0.2;
@@ -119,15 +117,9 @@ const MobileNav = ({ className = null, sidebar, basePath, isPostgres = false }) 
           variants={variants}
           style={{ height: containerHeight }}
         >
-          <div className="flex mt-5 mb-9 gap-x-8 border-b dark:border-gray-new-20 border-gray-new-90">
-            <DocNavLink className="" to={LINKS.docs}>
-              Neon Docs
-            </DocNavLink>
-            <DocNavLink to={LINKS.postgres}>Postgres Docs</DocNavLink>
-          </div>
           {!isPostgres && (
             <>
-              <ChatWidgetTrigger className="mb-3.5 flex" isSidebar />
+              <ChatWidgetTrigger className="mt-2.5 mb-3.5 flex" isSidebar />
               <ul className="mb-7">
                 {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
                   <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
@@ -144,7 +136,7 @@ const MobileNav = ({ className = null, sidebar, basePath, isPostgres = false }) 
               </ul>
             </>
           )}
-          <ul>
+          <ul className={clsx({ 'mt-2.5': isPostgres })}>
             {sidebar.map((item, index) => (
               <Item {...item} key={index} closeMenu={toggleMenu} basePath={basePath} />
             ))}
