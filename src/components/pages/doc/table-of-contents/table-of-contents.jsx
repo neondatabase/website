@@ -55,8 +55,7 @@ const TableOfContents = ({ items }) => {
     window.addEventListener('scroll', onScroll);
 
     return () => window.removeEventListener('scroll', onScroll);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [onScroll, updateCurrentAnchor]);
 
   if (items.length === 0) return null;
 
@@ -78,6 +77,7 @@ const TableOfContents = ({ items }) => {
                 level={level}
                 id={id}
                 currentAnchor={currentAnchor}
+                updateCurrentAnchor={updateCurrentAnchor}
               />
               <AnimatePresence initial={false}>
                 {!!items?.length &&
@@ -99,6 +99,7 @@ const TableOfContents = ({ items }) => {
                               level={level}
                               id={id}
                               currentAnchor={currentAnchor}
+                              updateCurrentAnchor={updateCurrentAnchor}
                             />
                           </li>
                         );
