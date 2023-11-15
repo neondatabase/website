@@ -87,7 +87,7 @@ const TableOfContents = ({ items }) => {
                     initial={{ opacity: 0, maxHeight: 0 }}
                     animate={{ opacity: 1, maxHeight: 1000 }}
                     exit={{ opacity: 0, maxHeight: 0 }}
-                    transition={{ duration: 0.65, ease: 'easeInOut' }}
+                    transition={{ duration: 0.25, ease: 'easeInOut' }}
                   >
                     {items.map(({ title, id, level }, index) => {
                       const linkHref = `#${id}`;
