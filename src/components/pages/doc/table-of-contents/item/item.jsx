@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 
 const linkClassName =
   'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white [&_code]:rounded-sm [&_code]:leading-none [&_code]:py-px [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:font-mono [&_code]:font-normal dark:[&_code]:bg-gray-new-15';
 
-const Item = ({ title, level, href, id, currentAnchor, updateCurrentAnchor }) => {
+const Item = ({ title, level, href, id, currentAnchor }) => {
   const handleAnchorClick = (e, anchor) => {
     e.preventDefault();
+
     document.querySelector(anchor).scrollIntoView({
       behavior: 'smooth',
       block: 'start',
@@ -23,16 +23,6 @@ const Item = ({ title, level, href, id, currentAnchor, updateCurrentAnchor }) =>
       window.location.hash = anchor;
     }
   };
-
-  useEffect(() => {
-    if (currentAnchor === id) {
-      updateCurrentAnchor();
-    }
-
-    window.addEventListener('scroll', updateCurrentAnchor);
-
-    return () => window.removeEventListener('scroll', updateCurrentAnchor);
-  }, [currentAnchor, id, updateCurrentAnchor]);
 
   return (
     <a
@@ -55,7 +45,6 @@ Item.propTypes = {
   href: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   currentAnchor: PropTypes.string,
-  updateCurrentAnchor: PropTypes.func.isRequired,
 };
 
 export default Item;

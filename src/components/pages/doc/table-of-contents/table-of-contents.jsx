@@ -47,7 +47,7 @@ const TableOfContents = ({ items }) => {
     setCurrentAnchor(currentTitle.id);
   }, []);
 
-  const onScroll = useThrottleCallback(updateCurrentAnchor, 10);
+  const onScroll = useThrottleCallback(updateCurrentAnchor, 100);
 
   useEffect(() => {
     updateCurrentAnchor();
@@ -68,6 +68,9 @@ const TableOfContents = ({ items }) => {
       <ul className="mt-2.5">
         {items.map(({ title, id, level, items }, index) => {
           const linkHref = `#${id}`;
+          const shouldRenderSubItems =
+            !!items?.length &&
+            (currentAnchor === id || items.some(({ id }) => currentAnchor === id));
 
           return (
             <li key={index}>
@@ -77,35 +80,32 @@ const TableOfContents = ({ items }) => {
                 level={level}
                 id={id}
                 currentAnchor={currentAnchor}
-                updateCurrentAnchor={updateCurrentAnchor}
               />
               <AnimatePresence initial={false}>
-                {!!items?.length &&
-                  (currentAnchor === id || items.some(({ id }) => currentAnchor === id)) && (
-                    <m.ul
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.15, ease: 'easeInOut' }}
-                    >
-                      {items.map(({ title, id, level }, index) => {
-                        const linkHref = `#${id}`;
+                {shouldRenderSubItems && (
+                  <m.ul
+                    initial={{ opacity: 0, maxHeight: 0 }}
+                    animate={{ opacity: 1, maxHeight: 1000 }}
+                    exit={{ opacity: 0, maxHeight: 0 }}
+                    transition={{ duration: 0.65, ease: 'easeInOut' }}
+                  >
+                    {items.map(({ title, id, level }, index) => {
+                      const linkHref = `#${id}`;
 
-                        return (
-                          <li key={index}>
-                            <Item
-                              href={linkHref}
-                              title={title}
-                              level={level}
-                              id={id}
-                              currentAnchor={currentAnchor}
-                              updateCurrentAnchor={updateCurrentAnchor}
-                            />
-                          </li>
-                        );
-                      })}
-                    </m.ul>
-                  )}
+                      return (
+                        <li key={index}>
+                          <Item
+                            href={linkHref}
+                            title={title}
+                            level={level}
+                            id={id}
+                            currentAnchor={currentAnchor}
+                          />
+                        </li>
+                      );
+                    })}
+                  </m.ul>
+                )}
               </AnimatePresence>
             </li>
           );
