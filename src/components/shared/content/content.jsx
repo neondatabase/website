@@ -53,9 +53,9 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   h3: getHeadingComponent('h3', withoutAnchorHeading, isPostgres),
   h4: getHeadingComponent('h4', withoutAnchorHeading, isPostgres),
   table: (props) => (
-    <figure className="table-wrapper">
+    <div className="table-wrapper">
       <table {...props} />
-    </figure>
+    </div>
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,

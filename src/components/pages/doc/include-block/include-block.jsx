@@ -6,7 +6,7 @@ import { DOCS_DIR_PATH, getPostBySlug } from 'utils/api-docs';
 const IncludeBlock = ({ url }) => {
   const post = getPostBySlug(url, DOCS_DIR_PATH);
 
-  return <Content className="" content={post.content} />;
+  return <Content content={post.content} />;
 };
 
 IncludeBlock.propTypes = {
