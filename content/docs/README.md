@@ -404,7 +404,7 @@ Custom `mdx` component that makes possible using [extended markdown syntax for d
 The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
-{/_ other content here _/}
+{/* other content here */}
 
 <DefinitionList>
 {/* required new line */}
@@ -424,32 +424,10 @@ Another term for smoke test
 [Stress test](/)
 : First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
 
-{/_ other content here _/}
+{/* other content here */}
 </DefinitionList>
 
-{/_ other content here _/}
-```
-
-### Detail Icon Cards
-
-`DetailIconCards` is a custom MDX component that displays data in a card format. Each card contains icon, title, href and description. This layout is especially useful for presenting grouped information in a visually pleasing and easy-to-understand way.
-
-```md
-<DetailIconCards>
-
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
-
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
-
-</DetailIconCards>
-```
-
-### IncludeBlock
-
-Include another markdown and render inline.
-
-```markdown
-<IncludeBlock slug="shared-content/need-help"></IncludeBlock>
+{/* other content here */}
 ```
 
 ### Acceptable markup for term
@@ -478,6 +456,28 @@ Include another markdown and render inline.
 ![Definition list example](definition-list-example.jpg)
 
 </details>
+
+## Detail Icon Cards
+
+`DetailIconCards` is a custom MDX component that displays data in a card format. Each card contains icon, title, href and description. This layout is especially useful for presenting grouped information in a visually pleasing and easy-to-understand way.
+
+```md
+<DetailIconCards>
+
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
+
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
+
+</DetailIconCards>
+```
+
+## IncludeBlock
+
+Include another markdown and render inline.
+
+```markdown
+<IncludeBlock slug="shared-content/need-help"></IncludeBlock>
+```
 
 ## Contributing
 
