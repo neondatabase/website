@@ -1,7 +1,6 @@
 'use client';
 
 import { useThrottleCallback } from '@react-hook/throttle';
-import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -13,6 +12,7 @@ const CURRENT_ANCHOR_GAP_PX = 100;
 const TableOfContents = ({ items }) => {
   const titles = useRef([]);
   const [currentAnchor, setCurrentAnchor] = useState(null);
+  const [isUserScrolling, setIsUserScrolling] = useState(true);
 
   const flatItems = useMemo(
     () =>
@@ -45,9 +45,14 @@ const TableOfContents = ({ items }) => {
     const currentTitle = titles.current[idx];
 
     setCurrentAnchor(currentTitle.id);
-  }, []);
 
-  const onScroll = useThrottleCallback(updateCurrentAnchor, 200);
+    if (isUserScrolling) {
+      // Open sub-items only if it's user-initiated scrolling
+      setCurrentAnchor(currentTitle.id);
+    }
+  }, [isUserScrolling]);
+
+  const onScroll = useThrottleCallback(updateCurrentAnchor, 100);
 
   useEffect(() => {
     updateCurrentAnchor();
@@ -60,58 +65,24 @@ const TableOfContents = ({ items }) => {
   if (items.length === 0) return null;
 
   return (
-    <LazyMotion features={domAnimation}>
+    <>
       <h3 className="flex items-center space-x-2 py-2 text-sm font-semibold leading-tight">
         <TOCIcon className="h-3.5 w-3.5 text-black dark:text-white" />
         <span>On this page</span>
       </h3>
       <ul className="mt-2.5">
-        {items.map(({ title, id, level, items }, index) => {
-          const linkHref = `#${id}`;
-          const shouldRenderSubItems =
-            !!items?.length &&
-            (currentAnchor === id || items.some(({ id }) => currentAnchor === id));
-
-          return (
-            <li key={index}>
-              <Item
-                href={linkHref}
-                title={title}
-                level={level}
-                id={id}
-                currentAnchor={currentAnchor}
-              />
-              <AnimatePresence initial={false}>
-                {shouldRenderSubItems && (
-                  <m.ul
-                    initial={{ opacity: 0, maxHeight: 0 }}
-                    animate={{ opacity: 1, maxHeight: 1000 }}
-                    exit={{ opacity: 0, maxHeight: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {items.map(({ title, id, level }, index) => {
-                      const linkHref = `#${id}`;
-
-                      return (
-                        <li key={index}>
-                          <Item
-                            href={linkHref}
-                            title={title}
-                            level={level}
-                            id={id}
-                            currentAnchor={currentAnchor}
-                          />
-                        </li>
-                      );
-                    })}
-                  </m.ul>
-                )}
-              </AnimatePresence>
-            </li>
-          );
-        })}
+        {items.map((item, index) => (
+          <li key={index}>
+            <Item
+              currentAnchor={currentAnchor}
+              isUserScrolling={isUserScrolling}
+              setIsUserScrolling={setIsUserScrolling}
+              {...item}
+            />
+          </li>
+        ))}
       </ul>
-    </LazyMotion>
+    </>
   );
 };
 
