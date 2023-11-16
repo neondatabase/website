@@ -471,12 +471,30 @@ Another term for smoke test
 </DetailIconCards>
 ```
 
-## IncludeBlock
+## Shared MDX components
 
-Include another markdown and render inline.
+Create markdown file in folder `content/docs/shared-content/`, import file in `content/docs/shared-content/index.js` and add to `sharedMdxComponents`.
 
-```markdown
-<IncludeBlock slug="shared-content/need-help"></IncludeBlock>
+```js
+import NeedHelp from './need-help.md'; 
+
+const sharedMdxComponents = {
+  NeedHelp, 
+};
+
+export default sharedMdxComponents;
+```
+
+Insert a shared markdown and render inline.
+
+```md
+## Resources
+
+- [Open AI tiktoken source code on GitHub](https://github.com/openai/tiktoken)
+- [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
+
+<NeedHelp/>
+
 ```
 
 ## Contributing
