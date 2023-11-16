@@ -473,7 +473,7 @@ Another term for smoke test
 
 ## Shared MDX components
 
-Create markdown file in folder `content/docs/shared-content/`, import file in `content/docs/shared-content/index.js` and add to `sharedMdxComponents`.
+Create a [markdown file](https://github.com/neondatabase/website/blob/main/content/docs/shared-content/need-help.md) in folder `content/docs/shared-content/`, import file in `content/docs/shared-content/index.js` and add to `sharedMdxComponents`.
 
 ```js
 import NeedHelp from './need-help.md'; 
