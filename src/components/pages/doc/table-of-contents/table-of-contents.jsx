@@ -8,7 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import TOCIcon from './images/toc.inline.svg';
 import Item from './item';
 
-const CURRENT_ANCHOR_GAP_PX = 32;
+const CURRENT_ANCHOR_GAP_PX = 100;
 
 const TableOfContents = ({ items }) => {
   const titles = useRef([]);
@@ -47,7 +47,7 @@ const TableOfContents = ({ items }) => {
     setCurrentAnchor(currentTitle.id);
   }, []);
 
-  const onScroll = useThrottleCallback(updateCurrentAnchor, 100);
+  const onScroll = useThrottleCallback(updateCurrentAnchor, 200);
 
   useEffect(() => {
     updateCurrentAnchor();
@@ -87,7 +87,7 @@ const TableOfContents = ({ items }) => {
                     initial={{ opacity: 0, maxHeight: 0 }}
                     animate={{ opacity: 1, maxHeight: 1000 }}
                     exit={{ opacity: 0, maxHeight: 0 }}
-                    transition={{ duration: 0.25, ease: 'easeInOut' }}
+                    transition={{ duration: 0.2 }}
                   >
                     {items.map(({ title, id, level }, index) => {
                       const linkHref = `#${id}`;
