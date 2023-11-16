@@ -167,6 +167,10 @@ To view integration permissions, manage integration access, or remove the Neon i
 1. On the Vercel dashboard, select **Settings** > **Integrations**.
 1. Find the **Neon** integration and select **Manage**.
 
+<Admonition type="note">
+Removing the Neon Vercel Integration removes the Vercel environment variables set by the integration. It does not remove Neon branches created by the integration. To remove Neon branches, see [Delete a branch](/docs/manage/branches#delete-a-branch).
+</Admonition>
+
 ## Need help?
 
 Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
