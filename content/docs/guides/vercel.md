@@ -3,7 +3,7 @@ title: Connect with the Neon Vercel Integration
 subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel
   Integration
 enableTableOfContents: true
-updatedOn: '2023-11-14T12:31:38.478Z'
+updatedOn: '2023-11-16T10:55:54.629Z'
 ---
 
 This guide describes how to connect using the [Neon Vercel Integration](https://vercel.com/integrations/neon) from the Vercel marketplace. The integration connects your Vercel project to a Neon database and enables creating a database branch for each preview deployment.

@@ -2,7 +2,7 @@
 title: Google Colab
 subtitle: Use Google Colab with Neon for vector similarity search
 enableTableOfContents: true
-updatedOn: '2023-11-14T12:31:38.443Z'
+updatedOn: '2023-11-16T10:55:54.609Z'
 ---
 
 [Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.

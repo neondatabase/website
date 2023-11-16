@@ -2,7 +2,7 @@
 title: The pg_embedding extension (Support Discontinued)
 subtitle: null
 enableTableOfContents: true
-updatedOn: '2023-11-14T12:31:38.455Z'
+updatedOn: '2023-11-16T10:55:54.617Z'
 ---
 
 <Admonition type="warning">

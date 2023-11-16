@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
-updatedOn: '2023-11-14T12:31:38.481Z'
+updatedOn: '2023-11-16T10:55:54.631Z'
 ---
 
 This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore` command line utilities.
