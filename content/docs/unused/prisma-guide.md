@@ -545,4 +545,4 @@ You can read more about this workflow in the Prisma documentation. See [Introspe
 
 You have completed the _Use Prisma with Neon_ guide. To recap, you have learned how to connect from Prisma to Neon, use Prisma Migrate to evolve a schema, add data using the Neon SQL Editor and Prisma Studio, send queries using Prisma Client, and finally, introspect an existing database.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

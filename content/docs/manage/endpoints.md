@@ -389,4 +389,4 @@ curl -X 'DELETE' \
 
 </details>
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

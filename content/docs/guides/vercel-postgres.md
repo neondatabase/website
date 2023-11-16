@@ -26,4 +26,4 @@ Use the following resources to get started with Vercel Postgres:
 - Read [Vercel Postgres Limits](https://vercel.com/docs/storage/vercel-postgres/limits) to learn about Vercel Postgres technical limits.
 - Refer to [Vercel Postgres Pricing](https://vercel.com/docs/storage/vercel-postgres/usage-and-pricing) to learn about the Vercel Postgres usage and pricing model.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

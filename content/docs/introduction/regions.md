@@ -46,4 +46,4 @@ Moving data to a new Neon project may require downtime if you are moving a produ
 
 To request support for additional regions, please visit the [Hosting in other AWS regions](https://community.neon.tech/t/hosting-in-other-aws-regions/81/5) topic in the Neon Community Forum.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

@@ -134,4 +134,4 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 For more information about using Neon with `pgvector`, see [The pgvector extension](/docs/extensions/pgvector).
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

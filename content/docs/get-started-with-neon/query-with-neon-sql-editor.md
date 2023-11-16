@@ -65,4 +65,4 @@ The Neon SQL Editor provides **Explain** and **Analyze** features.
 
 Understanding the information provided by the **Explain** and **Analyze** features requires familiarity with the Postgres [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) command and its `ANALYZE` parameter. Refer to the [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) documentation and the [Using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html) topic in the _PostgreSQL documentation_.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

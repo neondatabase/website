@@ -128,4 +128,4 @@ Please keep in mind that certain restrictions may apply with respect to Postgres
 
 Depending on the nature of your extension, Neon may also request a liability waiver.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

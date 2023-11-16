@@ -60,4 +60,4 @@ For additional Neon API examples, refer to the following topics:
 When using the Neon API programmatically, you can poll the operation `status` to ensure that an operation is finished before proceeding with the next API request. For more information, see [Poll operation status](/docs/manage/operations#poll-operation-status).
 </Admonition>
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

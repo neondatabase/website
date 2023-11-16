@@ -94,4 +94,4 @@ You do not need to specify the variable name explicitly when using a Neon CLI co
 
 This API key configuration ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Remember, you should handle your API key with the same level of security as your other credentials.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

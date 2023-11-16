@@ -283,4 +283,4 @@ To further your understanding of HNSW, the following resources are recommended:
 - [Similarity Search, Part 4: Hierarchical Navigable Small World (HNSW)](https://towardsdatascience.com/similarity-search-part-4-hierarchical-navigable-small-world-hnsw-2aad4fe87d37)
 - [IVFPQ + HNSW for Billion-scale Similarity Search](https://towardsdatascience.com/ivfpq-hnsw-for-billion-scale-similarity-search-89ff2f89d90e)
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

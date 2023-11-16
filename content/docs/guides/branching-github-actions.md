@@ -122,4 +122,4 @@ The following example applications use GitHub Actions to create and delete branc
 <a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with preview deployments in Vercel" icon="github">Preview branches app</a>
 </DetailIconCards>
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

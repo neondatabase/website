@@ -85,4 +85,4 @@ neonctl me -o json
 }
 ```
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

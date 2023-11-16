@@ -323,4 +323,4 @@ If you had trouble with any of the steps outlined above, refer to the video guid
 
 <YoutubeIframe embedId="JqOADpG5q-s" />
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

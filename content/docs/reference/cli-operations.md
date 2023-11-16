@@ -59,4 +59,4 @@ neonctl operations list
 └──────────────────────────────────────┴────────────────────┴──────────┴──────────────────────┘
 ```
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

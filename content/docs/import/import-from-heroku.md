@@ -159,4 +159,4 @@ heroku-cli: Pulling complete.
 3. Select the **Tables** tab.
 4. In the sidebar, verify that your database tables appear under the **Tables** heading.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

@@ -115,4 +115,4 @@ Visit [localhost:8080/postgres/version](http://localhost:8080/postgres/version) 
 PostgreSQL 15.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

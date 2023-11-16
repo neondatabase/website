@@ -83,4 +83,4 @@ Time: 0.051s
 
 For more information about `pgcli` features and capabilities, refer to the [pgcli documentation](https://www.pgcli.com/docs).
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

@@ -167,4 +167,4 @@ To view integration permissions, manage integration access, or remove the Neon i
 1. On the Vercel dashboard, select **Settings** > **Integrations**.
 1. Find the **Neon** integration and select **Manage**.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

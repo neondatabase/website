@@ -97,4 +97,4 @@ ERROR: The endpoint ID is not specified. Either upgrade the Postgres client libr
 
 </CodeBlock>
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

@@ -80,4 +80,4 @@ Watch Justin Mitchel's video course, _Micro eCommerce with Python, Django, Neon 
 
 <YoutubeIframe embedId="qx9nshX9CQQ?start=1569" />
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

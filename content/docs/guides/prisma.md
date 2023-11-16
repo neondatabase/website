@@ -156,4 +156,4 @@ For additional information about connecting from Prisma, refer to the following 
 - [PostgreSQL database connector](https://www.prisma.io/docs/concepts/database-connectors/postgresql)
 - [Increasing the pool timeout](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#increasing-the-pool-timeout)
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

@@ -49,4 +49,4 @@ fn main() -> Result<(), Box<dyn error::Error>> {
 
 You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

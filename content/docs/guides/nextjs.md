@@ -366,4 +366,4 @@ Result(1) [
 
 </CodeBlock>
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

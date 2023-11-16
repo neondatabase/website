@@ -137,4 +137,4 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     (1 row)
     ```
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

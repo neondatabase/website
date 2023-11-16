@@ -31,4 +31,4 @@ To create your first project:
 - [Connect to Neon from other applications or clients](/docs/connect/connect-from-any-app)
 - [Learn about the Neon object hierarchy and managing your Neon project](/docs/manage/overview)
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

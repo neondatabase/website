@@ -67,4 +67,4 @@ SELECT 1
 (1 row)
 ```
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

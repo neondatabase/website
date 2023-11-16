@@ -277,4 +277,4 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/05
 
 Possible operation `status` values include `running`, `finished`, `failed`, `scheduling`. Initially, the status of an operation might be `scheduling`. Before issuing the next API request, you would poll the operation until the status changes to `finished`. You could also add logic to handle a `failed` status.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

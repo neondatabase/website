@@ -99,4 +99,4 @@ Always consider your compute instance's memory resources when adjusting this par
 
 `pgvector` source code: [https://github.com/pgvector/pgvector](https://github.com/pgvector/pgvector)
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

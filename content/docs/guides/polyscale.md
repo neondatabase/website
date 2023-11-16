@@ -49,4 +49,4 @@ PolyScale identifies caching opportunities by recognizing and remembering patter
 
 For more information about using PolyScale and how it works, refer to the [PolyScale documentation](https://docs.polyscale.ai/).
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

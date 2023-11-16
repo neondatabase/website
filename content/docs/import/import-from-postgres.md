@@ -191,4 +191,4 @@ For information about the Postgres client utilities referred to in this topic, r
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
 - [psql](https://www.postgresql.org/docs/current/app-psql.html)
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

@@ -174,4 +174,4 @@ As you explore the capabilities of the `pg_tiktoken extension`, we encourage you
 - [Open AI tiktoken source code on GitHub](https://github.com/openai/tiktoken)
 - [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

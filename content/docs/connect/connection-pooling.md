@@ -53,4 +53,4 @@ The **Connection Details** widget on the Neon **Dashboard** provides **Pooled co
 
 Neon uses PgBouncer in _transaction mode_, which does not support Postgres features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

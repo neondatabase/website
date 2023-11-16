@@ -40,4 +40,4 @@ The authentication flow for the Neon CLI follows this order:
 
 Only [global options](/docs/reference/neon-cli#global-options) apply.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

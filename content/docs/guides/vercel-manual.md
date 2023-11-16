@@ -76,4 +76,4 @@ Vercel environment variables can also be configured when you first deploy an app
 
 You must redeploy your application in Vercel for the environment variable settings to take effect.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

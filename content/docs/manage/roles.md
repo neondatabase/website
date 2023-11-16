@@ -379,4 +379,4 @@ The following names are protected and cannot be given to a role:
 - `public`
 - `none`
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

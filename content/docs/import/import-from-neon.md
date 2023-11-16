@@ -54,4 +54,4 @@ To import your data from another Neon project:
 5. Run the command from your terminal or command window.
 6. If you no longer require the old project, you can remove it. See [Delete a project](/docs/manage/projects#delete-a-project) for instructions.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

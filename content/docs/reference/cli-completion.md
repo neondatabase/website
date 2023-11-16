@@ -76,4 +76,4 @@ or on OSX:
 source ~/.bash_profile
 ```
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

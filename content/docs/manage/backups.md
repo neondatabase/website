@@ -22,4 +22,4 @@ To dump a database from your Neon project, please refer to the `pg_dump` instruc
 
 Please be aware that dumping data from Neon is considered "data transfer". For data transfer costs, please refer to our [Billing](/docs/introduction/billing) documentation.
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>

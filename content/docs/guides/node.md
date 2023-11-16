@@ -132,4 +132,4 @@ Result(1) [
 ]
 ```
 
-<IncludeBlock url="shared-content/need-help"></IncludeBlock>
+<NeedHelp/>
