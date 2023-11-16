@@ -1,18 +1,20 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+// import {usePathname, useSearchParams} from 'next/navigation';
 
 import Link from 'components/shared/link';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
-import pagesWithNoTopbar from 'utils/pages-with-no-topbar';
+// import pagesWithNoTopbar from 'utils/pages-with-no-topbar';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 // TODO: If you want to change the background color of the topbar, please update the themeColor in function getMetadata (src/utils/get-metadata.js) as well
 // It is recommended to set background color for tab bar in safari browser https://github.com/neondatabase/website/assets/48465000/d79fba3a-ac4a-4e81-be64-b2cf371d57bc
 const TopBar = () => {
-  const pathname = usePathname();
+  // const pathname = usePathname();
+  // const params = useSearchParams();
 
-  const isTopBarHidden = pagesWithNoTopbar.includes(pathname);
+  // const isTopBarHidden = pagesWithNoTopbar.includes(pathname);
+  const isTopBarHidden = true;
 
   return isTopBarHidden ? null : (
     <Link
