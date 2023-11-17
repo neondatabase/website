@@ -6,6 +6,7 @@ const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 const slugify = require('slugify');
 
+const { default: sharedMdxComponents } = require('../../content/docs/shared-content');
 const { RELEASE_NOTES_DIR_PATH } = require('../constants/docs');
 
 const getExcerpt = require('./get-excerpt');
@@ -112,12 +113,9 @@ const getTableOfContents = (content) => {
 
   while ((match = mdxComponentRegex.exec(content)) !== null) {
     const componentName = match[1];
-    const fileName = componentName.replace(/([A-Z])/g, '-$1').toLowerCase();
 
-    // remove the first dash
-    const fileNameWithoutDash = fileName.slice(1);
-
-    const mdFilePath = `content/docs/shared-content/${fileNameWithoutDash}.md`;
+    const fileName = sharedMdxComponents[componentName];
+    const mdFilePath = `content/docs/${fileName}.md`;
 
     // Check if the MD file exists
     if (fs.existsSync(mdFilePath)) {
