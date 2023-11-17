@@ -248,4 +248,11 @@ export default {
       slug: LINKS.postgres,
     },
   ],
+  postgresSidebar: [
+    {
+      icon: PostgresDocsIcon,
+      title: 'Neon Docs',
+      slug: LINKS.docs,
+    },
+  ],
 };
