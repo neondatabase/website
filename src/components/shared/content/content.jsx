@@ -11,6 +11,7 @@ import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
+import IncludeBlock from 'components/pages/doc/include-block';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
@@ -20,6 +21,11 @@ import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
+
+const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
+  acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });
+  return acc;
+}, {});
 
 const Heading =
   (Tag) =>
@@ -66,9 +72,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
     }
     return <code {...props} />;
   },
-  pre: (props) => (
-    <CodeBlock {...props} />
-  ),
+  pre: (props) => <CodeBlock {...props} />,
   a: (props) => {
     const { href, children, ...otherProps } = props;
     return (
@@ -96,7 +100,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   CommunityBanner,
   Tabs,
   TabItem,
-  ...sharedMdxComponents,
+  ...sharedComponents,
 });
 
 // eslint-disable-next-line no-return-assign

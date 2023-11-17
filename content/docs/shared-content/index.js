@@ -1,9 +1,6 @@
-import NeedHelp from './need-help.md';
-
 const sharedMdxComponents = {
-  NeedHelp,
+  // name of component: path to component (not including content/docs/)
+  NeedHelp: 'shared-content/need-help',
 };
 
 export default sharedMdxComponents;
-
-
