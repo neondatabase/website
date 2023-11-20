@@ -140,26 +140,6 @@ const buildNestedToc = (headings, currentLevel) => {
   return toc;
 };
 
-// const getTableOfContents = (content) => {
-//   const mdxComponentRegex = /<(\w+)\/>/g;
-//   let match;
-
-//   while ((match = mdxComponentRegex.exec(content)) !== null) {
-//     const componentName = match[1];
-
-//     const fileName = sharedMdxComponents[componentName];
-//     const mdFilePath = `content/docs/${fileName}.md`;
-
-//     // Check if the MD file exists
-//     if (fs.existsSync(mdFilePath)) {
-//       const mdContent = fs.readFileSync(mdFilePath, 'utf8');
-//       content = content.replace(new RegExp(`<${componentName}\/>`, 'g'), mdContent);
-//     }
-//   }
-
-//   const headings = content.match(/(#+)\s(.*)/g) || [];
-//   const arr = headings.map((item) => item.replace(/(#+)\s/, '$1 '));
-
 const getTableOfContents = (content) => {
   const mdxComponentRegex = /<(\w+)\/>/g;
   let match;
