@@ -21,14 +21,10 @@ export async function GET() {
 
   allReleaseNotes.forEach((post) => {
     const { slug } = post;
-    // TODO: Add excerpt to release notes
-    const { content, excerpt } = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
+    const { data, excerpt } = getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
 
-    // return the first heading in the content
-    const heading = content.match(/# (.*)/)?.[1];
-    const description = heading
-      ? `${heading} and more. Check out the full list of changes for this release note.`
-      : excerpt;
+    const description = data.description || excerpt;
+
     const url = `${SITE_URL}${RELEASE_NOTES_BASE_PATH}${slug}`;
     const category = slug.slice(slug.lastIndexOf('-') + 1);
     const capitalisedCategory = category.charAt(0).toUpperCase() + category.slice(1);
