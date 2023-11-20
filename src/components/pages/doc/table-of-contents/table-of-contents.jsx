@@ -44,11 +44,11 @@ const TableOfContents = ({ items }) => {
 
     const currentTitle = titles.current[idx];
 
-    setCurrentAnchor(currentTitle.id);
+    setCurrentAnchor(currentTitle?.id);
 
     if (isUserScrolling) {
       // Open sub-items only if it's user-initiated scrolling
-      setCurrentAnchor(currentTitle.id);
+      setCurrentAnchor(currentTitle?.id);
     }
   }, [isUserScrolling]);
 
