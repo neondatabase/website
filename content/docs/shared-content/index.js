@@ -3,4 +3,4 @@ const sharedMdxComponents = {
   NeedHelp: 'shared-content/need-help',
 };
 
-export default sharedMdxComponents;
+module.exports = sharedMdxComponents;

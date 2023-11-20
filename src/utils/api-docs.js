@@ -6,7 +6,7 @@ const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 const slugify = require('slugify');
 
-const { default: sharedMdxComponents } = require('../../content/docs/shared-content');
+const sharedMdxComponents = require('../../content/docs/shared-content');
 const { RELEASE_NOTES_DIR_PATH } = require('../constants/docs');
 
 const getExcerpt = require('./get-excerpt');
