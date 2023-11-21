@@ -27,6 +27,8 @@ export async function generateMetadata({ params }) {
       title.length < MAX_TITLE_LENGTH
         ? `${VERCEL_URL}/docs/og?title=${encodedTitle}`
         : DEFAULT_IMAGE_PATH,
+    isPostgres: true,
+    currentSlug,
     robotsNoindex: 'noindex',
   });
 }
