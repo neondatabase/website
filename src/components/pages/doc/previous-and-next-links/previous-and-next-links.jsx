@@ -54,12 +54,12 @@ const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }
 
 PreviousAndNextLinks.propTypes = {
   previousLink: PropTypes.exact({
-    title: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    slug: PropTypes.string,
   }),
   nextLink: PropTypes.exact({
-    title: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    slug: PropTypes.string,
   }),
   basePath: PropTypes.string.isRequired,
 };

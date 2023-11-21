@@ -17,16 +17,13 @@ import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 
 const Heading =
   (Tag) =>
   // eslint-disable-next-line react/prop-types
   ({ children, className = null }) => (
-    <Tag
-      className={clsx(className, 'postgres-heading not-prose')}
-    >
-      {children}
-    </Tag>
+    <Tag className={clsx(className, 'postgres-heading not-prose')}>{children}</Tag>
   );
 
 const getHeadingComponent = (heading, withoutAnchorHeading, isPostgres) => {
@@ -68,6 +65,18 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
       const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
       return <span id={id} />;
     }
+
+    const regex = /^(?!\/|https?:|#)[\w-]+$/;
+    if (isPostgres && regex.test(href)) {
+      const postgresHref = `${LINKS.postgres}/${href}`;
+
+      return (
+        <Link to={postgresHref} {...otherProps}>
+          {children}
+        </Link>
+      );
+    }
+
     return (
       <Link to={href} {...otherProps}>
         {children}
