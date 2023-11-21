@@ -2,7 +2,7 @@
 title: The neon_utils extension
 subtitle: Monitor how Neon's Autoscaling feature allocates compute resources
 enableTableOfContents: true
-updatedOn: '2023-10-19T23:10:12.818Z'
+updatedOn: '2023-11-08T18:42:10.262Z'
 ---
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
@@ -21,13 +21,13 @@ For information about using the Neon **SQL Editor**, see [Query with Neon's SQL 
 
 ## Use the `num_cpus()` function
 
-In Neon, computing capacity is measured in _Compute Units (CU)_. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of CUs. A Neon compute can have anywhere from .25 to 7 CUs.
+In Neon, computing capacity is measured in _Compute Units (CU)_. One CU is 1 vCPU and 4 GB of RAM, 2 CU is 2 vCPU and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPU. A Neon compute can have anywhere from .25 to 7 CU.
 
 When you enable _Autoscaling_ for a compute endpoint, you define a minimum and maximum compute size, as shown below:
 
 ![Edit compute endpoint dialog showing an Autoscaling configuration](/docs/extensions/edit_compute_endpoint.png)
 
-As your workload changes, computing capacity scales dynamically between the minimum and maximum settings defined in your _Autoscaling_ configuration. To retrieve the number of allocated vCPUs at any point in time, you can run the following query:
+As your workload changes, computing capacity scales dynamically between the minimum and maximum settings defined in your _Autoscaling_ configuration. To retrieve the number of allocated vCPU at any point in time, you can run the following query:
 
 ```sql
 SELECT num_cpus();
@@ -39,7 +39,7 @@ For _Autoscaling_ configuration instructions, see [Compute size and Autoscaling 
 
 The following limitations apply:
 
-- The `num_cpus()` function does not return fractional vCPU sizes. The _Autoscaling_ feature can scale in fractional vCPUs, but the `num_cpus()` function reports the next whole number. For example, if the current number of allocated vCPUs is `.25` or `.5`, the `num_cpus()` function returns `1`.
+- The `num_cpus()` function does not return fractional vCPU sizes. The _Autoscaling_ feature can scale by fractional vCPU, but the `num_cpus()` function reports the next whole number. For example, if the current number of allocated vCPU is `.25` or `.5`, the `num_cpus()` function returns `1`.
 - The `num_cpus()` function only works on compute endpoints that have the _Autoscaling_ feature enabled. Running the function on a fixed size compute endpoint does not return a correct value.
 
 ## Observe Autoscaling with `neon_utils` and `pgbench`
@@ -127,7 +127,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
     ...
     ```
 
-4. Call the `num_cpus()` function to retrieve the current number of allocated vCPUs.
+4. Call the `num_cpus()` function to retrieve the current number of allocated vCPU.
 
     ```sql
     ​​neondb=> SELECT num_cpus();

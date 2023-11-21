@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2023-10-23T18:55:20.693Z'
+updatedOn: '2023-11-07T19:44:07.459Z'
 ---
 
 Neon is Serverless Postgres built for the cloud. Neon separates compute and storage to offer modern developer features such as autoscaling, branching, bottomless storage, and more.
@@ -68,6 +68,10 @@ Refer to our _Get started_ documentation to get up and running in just a few min
 <img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
 
 <img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale" title="Connect Neon to PolyScale" />
+
+<img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-jdbc" title="Connect Quarkus (JDBC) to Neon" />
+
+<img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-reactive" title="Connect Quarkus (Reactive) to Neon" />
 
 <img src="/images/technology-logos/remix-logo.svg" width="36" height="36" alt="Remix" href="/docs/guides/remix" title="Connect a Remix application to Neon" />
 
