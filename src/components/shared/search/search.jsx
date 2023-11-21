@@ -47,7 +47,7 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
   const onOpen = useCallback(() => {
     setIsOpen(true);
     if (!isBlog) {
-      sendGtagEvent('open_search');
+      sendGtagEvent('open_docs_search');
     }
   }, [isBlog]);
 
@@ -59,7 +59,7 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
     (event) => {
       setIsOpen(true);
       if (!isBlog) {
-        sendGtagEvent('open_search');
+        sendGtagEvent('open_docs_search');
       }
       setInitialQuery(event.key);
     },
