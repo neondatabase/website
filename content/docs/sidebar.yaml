@@ -49,8 +49,6 @@
   items:
     - title: Sign up
       slug: get-started-with-neon/signing-up
-    - title: Create your first project
-      slug: get-started-with-neon/setting-up-a-project
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
 - title: Connect

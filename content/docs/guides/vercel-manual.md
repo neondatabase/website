@@ -13,7 +13,7 @@ For other Vercel integration options, refer to the [Neon and Vercel integration 
 
 ## Prerequisites
 
-- A Neon project. If you do not have one, see [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
+- A Neon project. If you do not have one, see [Create a project](/docs/manage/projects#create-a-project).
 - A [Vercel account](https://vercel.com).
 - A project deployed to Vercel. If you do not have one, see [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project), in the _Vercel documentation_.
 
