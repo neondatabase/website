@@ -1,0 +1,37 @@
+name: E2E on Chrome
+
+on:
+  push:
+    paths:
+      - 'src/components/pages/contact-sales/hero/**'
+      - 'src/components/pages/partners/apply/**'
+      - 'src/components/pages/blog-post/subscribe-form/**'
+      - 'src/components/shared/subscribe/**'
+      - 'src/components/shared/subscribe-minimalistic/**'
+      - 'src/components/shared/subscription-form/**'
+      - 'src/utils/forms.js'
+      - 'src/constants/forms.js'
+      - 'cypress/**'
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          build: npm run build
+          start: npm run start
+          wait-on: "http://localhost:3000"
+        env:
+          NEXT_PUBLIC_DEFAULT_SITE_URL: http://localhost:3000
+          WP_HTACCESS_USERNAME: ${{ secrets.WP_HTACCESS_USERNAME }}
+          WP_HTACCESS_PASSWORD: ${{ secrets.WP_HTACCESS_PASSWORD }}
+          WP_GRAPHQL_URL: ${{ secrets.WP_GRAPHQL_URL }}
+          NEXT_PUBLIC_RELEASE_NOTES_API_URL: ${{ secrets.NEXT_PUBLIC_RELEASE_NOTES_API_URL }}
+          NEXT_PUBLIC_DOCS_GITHUB_PATH: ${{ secrets.NEXT_PUBLIC_DOCS_GITHUB_PATH }}
+          NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH: ${{ secrets.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH }}
+

@@ -28,6 +28,18 @@
     }
   }
 
+  .tab-item {
+    > * {
+      &:first-child {
+        @apply mt-0;
+      }
+
+      &:last-child {
+        @apply mb-0;
+      }
+    }
+  }
+
   .prose-doc {
     @apply max-w-none leading-normal text-gray-new-8 prose-strong:text-gray-new-8 dark:text-gray-new-90 dark:prose-strong:text-gray-new-90;
     @apply prose-headings:leading-tight prose-headings:font-semibold prose-headings:text-black-new prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white first:prose-h2:mt-0;

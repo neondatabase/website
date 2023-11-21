@@ -79,7 +79,6 @@ const Form = ({ className }) => {
 
   const onSubmit = async (formData, e) => {
     e.preventDefault();
-    debugger;
     const { message, ...rest } = formData;
     const data = { ...rest, 'TICKET.content': message };
 
@@ -260,12 +259,14 @@ const Form = ({ className }) => {
         placeholder="Message"
         name="message"
         {...register('message')}
+        error={errors.message?.message}
       />
       <div className="relative flex flex-col gap-y-6 lg:mt-3 lg:flex-row lg:items-center lg:gap-x-5 md:mt-0 md:flex-col md:items-stretch md:gap-y-4">
         <Button
           className="mt-4 h-12 py-[15px] text-lg font-medium leading-none tracking-[-0.02em] disabled:hover:bg-primary-1 xl:mt-2 lg:order-1 lg:ml-auto lg:mt-0 lg:basis-[316px] md:order-none md:ml-0 md:w-full md:basis-full"
           theme="primary"
           type="submit"
+          data-test="submit-button"
           disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
         >
           {formState === FORM_STATES.LOADING && (
@@ -294,7 +295,10 @@ const Form = ({ className }) => {
           .
         </p>
         {formError && (
-          <span className="absolute left-1/2 top-[calc(100%+1rem)] w-full -translate-x-1/2 text-sm leading-none text-secondary-1 xl:static xl:translate-x-0 lg:absolute lg:top-[calc(100%+0.25rem)] lg:-translate-x-1/2 md:static md:translate-x-0">
+          <span
+            className="absolute left-1/2 top-[calc(100%+1rem)] w-full -translate-x-1/2 text-sm leading-none text-secondary-1 xl:static xl:translate-x-0 lg:absolute lg:top-[calc(100%+0.25rem)] lg:-translate-x-1/2 md:static md:translate-x-0"
+            data-test="error-message"
+          >
             {formError}
           </span>
         )}

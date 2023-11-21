@@ -191,10 +191,10 @@ const ChatWidget = () => {
               >
                 <ChatInput ref={inputRef} onEnterPress={() => formRef.current.submit()} />
                 <div className="mt-2.5 flex flex-col space-y-1 text-center text-xs font-light leading-dense text-gray-new-30 dark:text-gray-new-80">
-                  <span>Neon Docs AI has a cap of 1 message every 5 seconds.</span>
+                  <span>Neon AI has a cap of 1 message every 5 seconds.</span>
                   <span>
-                    Neon Docs AI may produce inaccurate information. Evaluate answers carefully
-                    before implementing.
+                    Neon AI may produce inaccurate information. Evaluate answers carefully before
+                    implementing.
                   </span>
                 </div>
                 {!isLoading &&
@@ -278,7 +278,7 @@ const ChatWidgetTrigger = ({ className, isSidebar }) => {
         className
       )}
       type="button"
-      aria-label="Open Neon Docs AI"
+      aria-label="Open Neon AI"
       onClick={onClickHandler}
     >
       {isSidebar ? (
@@ -308,7 +308,7 @@ const ChatWidgetTrigger = ({ className, isSidebar }) => {
               'lg:hidden': !isSidebar,
             })}
           >
-            Neon Docs AI
+            Ask Neon AI
           </span>
           <span
             className={clsx('hidden text-gray-new-20 dark:text-gray-new-90 ', {
@@ -316,7 +316,7 @@ const ChatWidgetTrigger = ({ className, isSidebar }) => {
             })}
             aria-hidden
           >
-            Try Neon Docs AI instead
+            Ask Neon AI instead
           </span>
         </h3>
       </div>

@@ -2,22 +2,18 @@
 
 ## 8.15. Arrays [#](#ARRAYS)
 
-  * [8.15.1. Declaration of Array Types](arrays#ARRAYS-DECLARATION)
-  * [8.15.2. Array Value Input](arrays#ARRAYS-INPUT)
-  * [8.15.3. Accessing Arrays](arrays#ARRAYS-ACCESSING)
-  * [8.15.4. Modifying Arrays](arrays#ARRAYS-MODIFYING)
-  * [8.15.5. Searching in Arrays](arrays#ARRAYS-SEARCHING)
-  * [8.15.6. Array Input and Output Syntax](arrays#ARRAYS-IO)
-
-
+* [8.15.1. Declaration of Array Types](arrays#ARRAYS-DECLARATION)
+* [8.15.2. Array Value Input](arrays#ARRAYS-INPUT)
+* [8.15.3. Accessing Arrays](arrays#ARRAYS-ACCESSING)
+* [8.15.4. Modifying Arrays](arrays#ARRAYS-MODIFYING)
+* [8.15.5. Searching in Arrays](arrays#ARRAYS-SEARCHING)
+* [8.15.6. Array Input and Output Syntax](arrays#ARRAYS-IO)
 
 PostgreSQL allows columns of a table to be defined as variable-length multidimensional arrays. Arrays of any built-in or user-defined base type, enum type, composite type, range type, or domain can be created.
 
 [#id](#ARRAYS-DECLARATION)
 
 ### 8.15.1. Declaration of Array Types [#](#ARRAYS-DECLARATION)
-
-
 
 To illustrate the use of array types, we create this table:
 
@@ -65,8 +61,6 @@ As before, however, PostgreSQL does not enforce the size restriction in any case
 
 ### 8.15.2. Array Value Input [#](#ARRAYS-INPUT)
 
-
-
 To write an array value as a literal constant, enclose the element values within curly braces and separate them by commas. (If you know C, this is not unlike the C syntax for initializing structures.) You can put double quotes around any element value, and must do so if it contains commas or curly braces. (More details appear below.) Thus, the general format of an array constant is the following:
 
 ```
@@ -76,7 +70,7 @@ To write an array value as a literal constant, enclose the element values within
 
 where *`delim`* is the delimiter character for the type, as recorded in its `pg_type` entry. Among the standard data types provided in the PostgreSQL distribution, all use a comma (`,`), except for type `box` which uses a semicolon (`;`). Each *`val`* is either a constant of the array element type, or a subarray. An example of an array constant is:
 
-```
+```md
 
 '{{1,2,3},{4,5,6},{7,8,9}}'
 ```
@@ -145,8 +139,6 @@ Notice that the array elements are ordinary SQL constants or expressions; for in
 [#id](#ARRAYS-ACCESSING)
 
 ### 8.15.3. Accessing Arrays [#](#ARRAYS-ACCESSING)
-
-
 
 Now, we can run some queries on the table. First, we show how to access a single element of an array. This query retrieves the names of the employees whose pay changed in the second quarter:
 
@@ -275,8 +267,6 @@ SELECT cardinality(schedule) FROM sal_emp WHERE name = 'Carol';
 [#id](#ARRAYS-MODIFYING)
 
 ### 8.15.4. Modifying Arrays [#](#ARRAYS-MODIFYING)
-
-
 
 An array value can be replaced completely:
 
@@ -444,8 +434,6 @@ In the examples above, the parser sees an integer array on one side of the conca
 
 ### 8.15.5. Searching in Arrays [#](#ARRAYS-SEARCHING)
 
-
-
 To search for a value in an array, each value must be checked. This can be done manually, if you know the size of the array. For example:
 
 ```
@@ -516,8 +504,6 @@ Arrays are not sets; searching for specific array elements can be a sign of data
 [#id](#ARRAYS-IO)
 
 ### 8.15.6. Array Input and Output Syntax [#](#ARRAYS-IO)
-
-
 
 The external text representation of an array value consists of items that are interpreted according to the I/O conversion rules for the array's element type, plus decoration that indicates the array structure. The decoration consists of curly braces (`{` and `}`) around the array value plus delimiter characters between adjacent items. The delimiter character is usually a comma (`,`) but can be something else: it is determined by the `typdelim` setting for the array's element type. Among the standard data types provided in the PostgreSQL distribution, all use a comma, except for type `box`, which uses a semicolon (`;`). In a multidimensional array, each dimension (row, plane, cube, etc.) gets its own level of curly braces, and delimiters must be written between adjacent curly-braced entities of the same level.
 
