@@ -46,9 +46,9 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
 
   const onOpen = useCallback(() => {
     setIsOpen(true);
-    sendGtagEvent('open_search', {
-      search_type: isBlog ? 'blog' : 'docs',
-    });
+    if (!isBlog) {
+      sendGtagEvent('open_search');
+    }
   }, [isBlog]);
 
   const onClose = useCallback(() => {
@@ -58,9 +58,9 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
   const onInput = useCallback(
     (event) => {
       setIsOpen(true);
-      sendGtagEvent('open_search', {
-        search_type: isBlog ? 'blog' : 'docs',
-      });
+      if (!isBlog) {
+        sendGtagEvent('open_search');
+      }
       setInitialQuery(event.key);
     },
     [setIsOpen, setInitialQuery, isBlog]
