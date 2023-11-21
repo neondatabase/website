@@ -9,7 +9,7 @@ Neon read replicas are independent read-only compute instances designed to perfo
 
 ![Read-only compute instances](/docs/introduction/read_replicas.png)
 
-In data replication terms, Neon read replicas are asynchronous. As updates are made by read-write computes, Safekeepers store the data changes durably until they are processed by Pageservers. At the same time, Safekeepers keep read-only computes up to date with the latest changes, ensuring that data is _eventually consistent_.
+In data replication terms, Neon read replicas are asynchronous, which meanas they are _eventually consistent_. As updates are made by read-write computes, Safekeepers store the data changes durably until they are processed by Pageservers. At the same time, Safekeepers keep read-only computes up to date with the latest changes to maintain data consistency.
 
 Neon supports creating read replicas in the same region as your database. Cross-region read replicas are currently not supported. You can expect that feature in a future release.
 
