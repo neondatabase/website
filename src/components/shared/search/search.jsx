@@ -9,6 +9,7 @@ import { createPortal } from 'react-dom';
 
 import Link from 'components/shared/link';
 import debounce from 'utils/debounce';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const Hit = ({ hit, children }) => (
   <Link
@@ -45,7 +46,10 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
 
   const onOpen = useCallback(() => {
     setIsOpen(true);
-  }, [setIsOpen]);
+    sendGtagEvent('open_search', {
+      search_type: isBlog ? 'blog' : 'docs',
+    });
+  }, [isBlog]);
 
   const onClose = useCallback(() => {
     setIsOpen(false);
@@ -54,9 +58,12 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
   const onInput = useCallback(
     (event) => {
       setIsOpen(true);
+      sendGtagEvent('open_search', {
+        search_type: isBlog ? 'blog' : 'docs',
+      });
       setInitialQuery(event.key);
     },
-    [setIsOpen, setInitialQuery]
+    [setIsOpen, setInitialQuery, isBlog]
   );
 
   useDocSearchKeyboardEvents({
