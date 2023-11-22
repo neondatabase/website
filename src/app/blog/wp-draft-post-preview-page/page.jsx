@@ -1,4 +1,3 @@
-import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 import Aside from 'components/pages/blog-post/aside';
@@ -31,12 +30,10 @@ import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blo
   You can't have a post in Wordpress with the "wp-draft-post-preview-page" slug. Please be careful.
 */
 const BlogDraft = async ({ searchParams }) => {
-  const { isEnabled: isDraftModeEnabled } = draftMode();
-
   // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
   await Promise.resolve(JSON.stringify(searchParams));
 
-  if (!isDraftModeEnabled) {
+  if (!searchParams?.id || !searchParams?.status) {
     return notFound();
   }
 
@@ -123,7 +120,7 @@ const BlogDraft = async ({ searchParams }) => {
           />
         </article>
       </div>
-      {isDraftModeEnabled && <PreviewWarning />}
+      <PreviewWarning />
     </Layout>
   );
 };
