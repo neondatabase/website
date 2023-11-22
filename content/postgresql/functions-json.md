@@ -2,24 +2,24 @@
 
 ## 9.16. JSON Functions and Operators [#](#FUNCTIONS-JSON)
 
-* [9.16.1. Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
-* [9.16.2. The SQL/JSON Path Language](functions-json#FUNCTIONS-SQLJSON-PATH)
+- [9.16.1. Processing and Creating JSON Data](functions-json#FUNCTIONS-JSON-PROCESSING)
+- [9.16.2. The SQL/JSON Path Language](functions-json#FUNCTIONS-SQLJSON-PATH)
 
 This section describes:
 
-* functions and operators for processing and creating JSON data
+- functions and operators for processing and creating JSON data
 
-* the SQL/JSON path language
+- the SQL/JSON path language
 
-To provide native support for JSON data types within the SQL environment, PostgreSQL implements the *SQL/JSON data model*. This model comprises sequences of items. Each item can hold SQL scalar values, with an additional SQL/JSON null value, and composite data structures that use JSON arrays and objects. The model is a formalization of the implied data model in the JSON specification [RFC 7159](https://tools.ietf.org/html/rfc7159).
+To provide native support for JSON data types within the SQL environment, PostgreSQL implements the _SQL/JSON data model_. This model comprises sequences of items. Each item can hold SQL scalar values, with an additional SQL/JSON null value, and composite data structures that use JSON arrays and objects. The model is a formalization of the implied data model in the JSON specification [RFC 7159](https://tools.ietf.org/html/rfc7159).
 
 SQL/JSON allows you to handle JSON data alongside regular SQL data, with transaction support, including:
 
-* Uploading JSON data into the database and storing it in regular SQL columns as character or binary strings.
+- Uploading JSON data into the database and storing it in regular SQL columns as character or binary strings.
 
-* Generating JSON objects and arrays from relational data.
+- Generating JSON objects and arrays from relational data.
 
-* Querying JSON data using SQL/JSON query functions and SQL/JSON path language expressions.
+- Querying JSON data using SQL/JSON query functions and SQL/JSON path language expressions.
 
 To learn more about the SQL/JSON standard, see [\[sqltr-19075-6\]](biblio#SQLTR-19075-6). For details on JSON types supported in PostgreSQL, see [Section 8.14](datatype-json).
 
@@ -35,9 +35,9 @@ To learn more about the SQL/JSON standard, see [\[sqltr-19075-6\]](biblio#SQLTR-
 
 | OperatorDescriptionExample(s)                                                                                                                                                                                                                                                                                                    |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `json` `->` `integer` → `json``jsonb` `->` `integer` → `jsonb`Extracts *`n`*'th element of JSON array (array elements are indexed from zero, but negative integers count from the end).`'[{"a":"foo"},{"b":"bar"},{"c":"baz"}]'::json -> 2` → `{"c":"baz"}``'[{"a":"foo"},{"b":"bar"},{"c":"baz"}]'::json -> -3` → `{"a":"foo"}` |
+| `json` `->` `integer` → `json``jsonb` `->` `integer` → `jsonb`Extracts _`n`_'th element of JSON array (array elements are indexed from zero, but negative integers count from the end).`'[{"a":"foo"},{"b":"bar"},{"c":"baz"}]'::json -> 2` → `{"c":"baz"}``'[{"a":"foo"},{"b":"bar"},{"c":"baz"}]'::json -> -3` → `{"a":"foo"}` |
 | `json` `->` `text` → `json``jsonb` `->` `text` → `jsonb`Extracts JSON object field with the given key.`'{"a": {"b":"foo"}}'::json -> 'a'` → `{"b":"foo"}`                                                                                                                                                                        |
-| `json` `->>` `integer` → `text``jsonb` `->>` `integer` → `text`Extracts *`n`*'th element of JSON array, as `text`.`'[1,2,3]'::json ->> 2` → `3`                                                                                                                                                                                  |
+| `json` `->>` `integer` → `text``jsonb` `->>` `integer` → `text`Extracts _`n`_'th element of JSON array, as `text`.`'[1,2,3]'::json ->> 2` → `3`                                                                                                                                                                                  |
 | `json` `->>` `text` → `text``jsonb` `->>` `text` → `text`Extracts JSON object field with the given key, as `text`.`'{"a":1,"b":2}'::json ->> 'b'` → `2`                                                                                                                                                                          |
 | `json` `#>` `text[]` → `json``jsonb` `#>` `text[]` → `jsonb`Extracts JSON sub-object at the specified path, where path elements can be either field keys or array indexes.`'{"a": {"b": ["foo","bar"]}}'::json #> '{a,b,1}'` → `"bar"`                                                                                           |
 | `json` `#>>` `text[]` → `text``jsonb` `#>>` `text[]` → `text`Extracts JSON sub-object at the specified path as `text`.`'{"a": {"b": ["foo","bar"]}}'::json #>> '{a,b,1}'` → `bar`                                                                                                                                                |
@@ -54,7 +54,7 @@ Some further operators exist only for `jsonb`, as shown in [Table 9.46](functio
 
 | OperatorDescriptionExample(s)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `jsonb` `@>` `jsonb` → `boolean`Does the first JSON value contain the second? (See [Section 8.14.3](datatype-json#JSON-CONTAINMENT) for details about containment.)`'{"a":1, "b":2}'::jsonb @> '{"b":2}'::jsonb` → `t`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `jsonb` `@>` `jsonb` → `boolean`Does the first JSON value contain the second? (See [Section 8.14.3](datatype-json#JSON-CONTAINMENT) for details about containment.)`'{"a":1, "b":2}'::jsonb @> '{"b":2}'::jsonb` → `t`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `jsonb` `<@` `jsonb` → `boolean`Is the first JSON value contained in the second?`'{"b":2}'::jsonb <@ '{"a":1, "b":2}'::jsonb` → `t`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `jsonb` `?` `text` → `boolean`Does the text string exist as a top-level key or array element within the JSON value?`'{"a":1, "b":2}'::jsonb ? 'b'` → `t``'["a", "b", "c"]'::jsonb ? 'b'` → `t`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `jsonb` `?\|` `text[]` → `boolean`Do any of the strings in the text array exist as top-level keys or array elements?`'{"a":1, "b":2, "c":3}'::jsonb ?\| array['b', 'd']` → `t`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -62,7 +62,7 @@ Some further operators exist only for `jsonb`, as shown in [Table 9.46](functio
 | `jsonb` `\|\|` `jsonb` → `jsonb`Concatenates two `jsonb` values. Concatenating two arrays generates an array containing all the elements of each input. Concatenating two objects generates an object containing the union of their keys, taking the second object's value when there are duplicate keys. All other cases are treated by converting a non-array input into a single-element array, and then proceeding as for two arrays. Does not operate recursively: only the top-level array or object structure is merged.`'["a", "b"]'::jsonb \|\| '["a", "d"]'::jsonb` → `["a", "b", "a", "d"]``'{"a": "b"}'::jsonb \|\| '{"c": "d"}'::jsonb` → `{"a": "b", "c": "d"}``'[1, 2]'::jsonb \|\| '3'::jsonb` → `[1, 2, 3]``'{"a": "b"}'::jsonb \|\| '42'::jsonb` → `[{"a": "b"}, 42]`To append an array to another array as a single entry, wrap it in an additional layer of array, for example:`'[1, 2]'::jsonb \|\| jsonb_build_array('[3, 4]'::jsonb)` → `[1, 2, [3, 4]]` |
 | `jsonb` `-` `text` → `jsonb`Deletes a key (and its value) from a JSON object, or matching string value(s) from a JSON array.`'{"a": "b", "c": "d"}'::jsonb - 'a'` → `{"c": "d"}``'["a", "b", "c", "b"]'::jsonb - 'b'` → `["a", "c"]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `jsonb` `-` `text[]` → `jsonb`Deletes all matching keys or array elements from the left operand.`'{"a": "b", "c": "d"}'::jsonb - '{a,c}'::text[]` → `{}`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `jsonb` `-` `integer` → `jsonb`Deletes the array element with specified index (negative integers count from the end). Throws an error if JSON value is not an array.`'["a", "b"]'::jsonb - 1`→ `["a"]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `jsonb` `-` `integer` → `jsonb`Deletes the array element with specified index (negative integers count from the end). Throws an error if JSON value is not an array.`'["a", "b"]'::jsonb - 1`→ `["a"]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `jsonb` `#-` `text[]` → `jsonb`Deletes the field or array element at the specified path, where path elements can be either field keys or array indexes.`'["a", {"b":1}]'::jsonb #- '{1,b}'` → `["a", {}]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `jsonb` `@?` `jsonpath` → `boolean`Does JSON path return any item for the specified JSON value?`'{"a":[1,2,3,4,5]}'::jsonb @? '$.a[*] ? (@ > 2)'` → `t`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `jsonb` `@@` `jsonpath` → `boolean`Returns the result of a JSON path predicate check for the specified JSON value. Only the first item of the result is taken into account. If the result is not Boolean, then `NULL` is returned.`'{"a":[1,2,3,4,5]}'::jsonb @@ '$.a[*] > 2'` → `t`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -79,16 +79,16 @@ The `jsonpath` operators `@?` and `@@` suppress the following errors: missing ob
 
 | FunctionDescriptionExample(s)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `to_json` ( `anyelement` ) → `json``to_jsonb` ( `anyelement` ) → `jsonb`Converts any SQL value to `json` or `jsonb`. Arrays and composites are converted recursively to arrays and objects (multidimensional arrays become arrays of arrays in JSON). Otherwise, if there is a cast from the SQL data type to `json`, the cast function will be used to perform the conversion;[\[a\]](#ftn.id-1.5.8.22.8.9.2.2.1.1.3.4) otherwise, a scalar JSON value is produced. For any scalar other than a number, a Boolean, or a null value, the text representation will be used, with escaping as necessary to make it a valid JSON string value.`to_json('Fred said "Hi."'::text)` → `"Fred said \"Hi.\""``to_jsonb(row(42, 'Fred said "Hi."'::text))` → `{"f1": 42, "f2": "Fred said \"Hi.\""}`                                                                                                                                                                                                              |
-| `array_to_json` ( `anyarray` \[, `boolean` ] ) → `json`Converts an SQL array to a JSON array. The behavior is the same as `to_json` except that line feeds will be added between top-level array elements if the optional boolean parameter is true.`array_to_json('{{1,5},{99,100}}'::int[])` → `[[1,5],[99,100]]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `json_array` ( \[ \{ *`value_expression`* \[ `FORMAT JSON` ] } \[, ...] ] \[ \{ `NULL` \| `ABSENT` } `ON NULL` ] \[ `RETURNING` *`data_type`* \[ `FORMAT JSON` \[ `ENCODING UTF8` ] ] ])`json_array` ( \[ *`query_expression`* ] \[ `RETURNING` *`data_type`* \[ `FORMAT JSON` \[ `ENCODING UTF8` ] ] ])Constructs a JSON array from either a series of *`value_expression`* parameters or from the results of *`query_expression`*, which must be a SELECT query returning a single column. If `ABSENT ON NULL` is specified, NULL values are ignored. This is always the case if a *`query_expression`* is used.`json_array(1,true,json '{"a":null}')` → `[1, true, {"a":null}]``json_array(SELECT * FROM (VALUES(1),(2)) t)` → `[1, 2]`                                                                                                                                                                                                                                                                     |
-| `row_to_json` ( `record` \[, `boolean` ] ) → `json`Converts an SQL composite value to a JSON object. The behavior is the same as `to_json` except that line feeds will be added between top-level elements if the optional boolean parameter is true.`row_to_json(row(1,'foo'))` → `{"f1":1,"f2":"foo"}`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `json_build_array` ( `VARIADIC` `"any"` ) → `json``jsonb_build_array` ( `VARIADIC` `"any"` ) → `jsonb`Builds a possibly-heterogeneously-typed JSON array out of a variadic argument list. Each argument is converted as per `to_json` or `to_jsonb`.`json_build_array(1, 2, 'foo', 4, 5)` → `[1, 2, "foo", 4, 5]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `json_build_object` ( `VARIADIC` `"any"` ) → `json``jsonb_build_object` ( `VARIADIC` `"any"` ) → `jsonb`Builds a JSON object out of a variadic argument list. By convention, the argument list consists of alternating keys and values. Key arguments are coerced to text; value arguments are converted as per `to_json` or `to_jsonb`.`json_build_object('foo', 1, 2, row(3,'bar'))` → `{"foo" : 1, "2" : {"f1":3,"f2":"bar"}}`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `json_object` ( \[ \{ *`key_expression`* \{ `VALUE` \| ':' } *`value_expression`* \[ `FORMAT JSON` \[ `ENCODING UTF8` ] ] }\[, ...] ] \[ \{ `NULL` \| `ABSENT` } `ON NULL` ] \[ \{ `WITH` \| `WITHOUT` } `UNIQUE` \[ `KEYS` ] ] \[ `RETURNING` *`data_type`* \[ `FORMAT JSON` \[ `ENCODING UTF8` ] ] ])Constructs a JSON object of all the key/value pairs given, or an empty object if none are given. *`key_expression`* is a scalar expression defining the JSON key, which is converted to the `text` type. It cannot be `NULL` nor can it belong to a type that has a cast to the `json` type. If `WITH UNIQUE KEYS` is specified, there must not be any duplicate *`key_expression`*. Any pair for which the *`value_expression`* evaluates to `NULL` is omitted from the output if `ABSENT ON NULL` is specified; if `NULL ON NULL` is specified or the clause omitted, the key is included with value `NULL`.`json_object('code' VALUE 'P123', 'title': 'Jaws')` → `{"code" : "P123", "title" : "Jaws"}` |
-| `json_object` ( `text[]` ) → `json``jsonb_object` ( `text[]` ) → `jsonb`Builds a JSON object out of a text array. The array must have either exactly one dimension with an even number of members, in which case they are taken as alternating key/value pairs, or two dimensions such that each inner array has exactly two elements, which are taken as a key/value pair. All values are converted to JSON strings.`json_object('{a, 1, b, "def", c, 3.5}')` → `{"a" : "1", "b" : "def", "c" : "3.5"}``json_object('\{\{a, 1}, \{b, "def"}, \{c, 3.5}}')` → `\{"a" : "1", "b" : "def", "c" : "3.5"}`                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `json_object` ( *`keys`* `text[]`, *`values`* `text[]` ) → `json``jsonb_object` ( *`keys`* `text[]`, *`values`* `text[]` ) → `jsonb`This form of `json_object` takes keys and values pairwise from separate text arrays. Otherwise it is identical to the one-argument form.`json_object('{a,b}', '{1,2}')` → `{"a": "1", "b": "2"}`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| [#id](#ftn.id-1.5.8.22.8.9.2.2.1.1.3.4)[\[a\] ](#id-1.5.8.22.8.9.2.2.1.1.3.4)For example, the [hstore](hstore) extension has a cast from `hstore` to `json`, so that `hstore` values converted via the JSON creation functions will be represented as JSON objects, not as primitive string values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `to_json` ( `anyelement` ) → `json``to_jsonb` ( `anyelement` ) → `jsonb`Converts any SQL value to `json` or `jsonb`. Arrays and composites are converted recursively to arrays and objects (multidimensional arrays become arrays of arrays in JSON). Otherwise, if there is a cast from the SQL data type to `json`, the cast function will be used to perform the conversion;[\[a\]](#ftn.id-1.5.8.22.8.9.2.2.1.1.3.4) otherwise, a scalar JSON value is produced. For any scalar other than a number, a Boolean, or a null value, the text representation will be used, with escaping as necessary to make it a valid JSON string value.`to_json('Fred said "Hi."'::text)` → `"Fred said \"Hi.\""``to_jsonb(row(42, 'Fred said "Hi."'::text))` → `{"f1": 42, "f2": "Fred said \"Hi.\""}`                                                                                                                                                                                                                      |
+| `array_to_json` ( `anyarray` \[, `boolean` ] ) → `json`Converts an SQL array to a JSON array. The behavior is the same as `to_json` except that line feeds will be added between top-level array elements if the optional boolean parameter is true.`array_to_json('{{1,5},{99,100}}'::int[])` → `[[1,5],[99,100]]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `json_array` ( \[ \{ _`value_expression`_ \[ `FORMAT JSON` ] } \[, ...] ] \[ \{ `NULL` \| `ABSENT` } `ON NULL` ] \[ `RETURNING` _`data_type`_ \[ `FORMAT JSON` \[ `ENCODING UTF8` ] ] ])`json_array` ( \[ _`query_expression`_ ] \[ `RETURNING` _`data_type`_ \[ `FORMAT JSON` \[ `ENCODING UTF8` ] ] ])Constructs a JSON array from either a series of _`value_expression`_ parameters or from the results of _`query_expression`_, which must be a SELECT query returning a single column. If `ABSENT ON NULL` is specified, NULL values are ignored. This is always the case if a _`query_expression`_ is used.`json_array(1,true,json '{"a":null}')` → `[1, true, {"a":null}]``json_array(SELECT * FROM (VALUES(1),(2)) t)` → `[1, 2]`                                                                                                                                                                                                                                                                       |
+| `row_to_json` ( `record` \[, `boolean` ] ) → `json`Converts an SQL composite value to a JSON object. The behavior is the same as `to_json` except that line feeds will be added between top-level elements if the optional boolean parameter is true.`row_to_json(row(1,'foo'))` → `{"f1":1,"f2":"foo"}`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `json_build_array` ( `VARIADIC` `"any"` ) → `json``jsonb_build_array` ( `VARIADIC` `"any"` ) → `jsonb`Builds a possibly-heterogeneously-typed JSON array out of a variadic argument list. Each argument is converted as per `to_json` or `to_jsonb`.`json_build_array(1, 2, 'foo', 4, 5)` → `[1, 2, "foo", 4, 5]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `json_build_object` ( `VARIADIC` `"any"` ) → `json``jsonb_build_object` ( `VARIADIC` `"any"` ) → `jsonb`Builds a JSON object out of a variadic argument list. By convention, the argument list consists of alternating keys and values. Key arguments are coerced to text; value arguments are converted as per `to_json` or `to_jsonb`.`json_build_object('foo', 1, 2, row(3,'bar'))` → `{"foo" : 1, "2" : {"f1":3,"f2":"bar"}}`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `json_object` ( \[ \{ _`key_expression`_ \{ `VALUE` \| ':' } _`value_expression`_ \[ `FORMAT JSON` \[ `ENCODING UTF8` ] ] }\[, ...] ] \[ \{ `NULL` \| `ABSENT` } `ON NULL` ] \[ \{ `WITH` \| `WITHOUT` } `UNIQUE` \[ `KEYS` ] ] \[ `RETURNING` _`data_type`_ \[ `FORMAT JSON` \[ `ENCODING UTF8` ] ] ])Constructs a JSON object of all the key/value pairs given, or an empty object if none are given. _`key_expression`_ is a scalar expression defining the JSON key, which is converted to the `text` type. It cannot be `NULL` nor can it belong to a type that has a cast to the `json` type. If `WITH UNIQUE KEYS` is specified, there must not be any duplicate _`key_expression`_. Any pair for which the _`value_expression`_ evaluates to `NULL` is omitted from the output if `ABSENT ON NULL` is specified; if `NULL ON NULL` is specified or the clause omitted, the key is included with value `NULL`.`json_object('code' VALUE 'P123', 'title': 'Jaws')` → `{"code" : "P123", "title" : "Jaws"}` |
+| `json_object` ( `text[]` ) → `json``jsonb_object` ( `text[]` ) → `jsonb`Builds a JSON object out of a text array. The array must have either exactly one dimension with an even number of members, in which case they are taken as alternating key/value pairs, or two dimensions such that each inner array has exactly two elements, which are taken as a key/value pair. All values are converted to JSON strings.`json_object('{a, 1, b, "def", c, 3.5}')` → `{"a" : "1", "b" : "def", "c" : "3.5"}``json_object('\{\{a, 1}, \{b, "def"}, \{c, 3.5}}')` → `\{"a" : "1", "b" : "def", "c" : "3.5"}`                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `json_object` ( _`keys`_ `text[]`, _`values`_ `text[]` ) → `json``jsonb_object` ( _`keys`_ `text[]`, _`values`_ `text[]` ) → `jsonb`This form of `json_object` takes keys and values pairwise from separate text arrays. Otherwise it is identical to the one-argument form.`json_object('{a,b}', '{1,2}')` → `{"a": "1", "b": "2"}`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| [#id](#ftn.id-1.5.8.22.8.9.2.2.1.1.3.4)[\[a\] ](#id-1.5.8.22.8.9.2.2.1.1.3.4)For example, the [hstore](hstore) extension has a cast from `hstore` to `json`, so that `hstore` values converted via the JSON creation functions will be represented as JSON objects, not as primitive string values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 [Table 9.48](functions-json#FUNCTIONS-SQLJSON-MISC) details SQL/JSON facilities for testing JSON.
 
@@ -96,10 +96,44 @@ The `jsonpath` operators `@?` and `@@` suppress the following errors: missing ob
 
 **Table 9.48. SQL/JSON Testing Functions**
 
-| Function signatureDescriptionExample(s)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| *`expression`* `IS` \[ `NOT` ] `JSON` \[ \{ `VALUE` \| `SCALAR` \| `ARRAY` \| `OBJECT` } ] \[ \{ `WITH` \| `WITHOUT` } `UNIQUE` \[ `KEYS` ] ]This predicate tests whether *`expression`* can be parsed as JSON, possibly of a specified type. If `SCALAR` or `ARRAY` or `OBJECT` is specified, the test is whether or not the JSON is of that particular type. If `WITH UNIQUE KEYS` is specified, then any object in the *`expression`* is also tested to see if it has duplicate keys.```
-
+<table class="table" summary="SQL/JSON Testing Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function signature</p>
+        <p>Description</p>
+        <p>Example(s)</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.22.8.11.2.2.1.1.1.1" class="indexterm"></a>
+          <em class="replaceable"><code>expression</code></em>
+          <code class="literal">IS</code> [<span class="optional">
+            <code class="literal">NOT</code> </span>] <code class="literal">JSON</code> [<span class="optional">
+            \{ <code class="literal">VALUE</code> | <code class="literal">SCALAR</code> |
+            <code class="literal">ARRAY</code> | <code class="literal">OBJECT</code> } </span>] [<span class="optional">
+            \{ <code class="literal">WITH</code> | <code class="literal">WITHOUT</code> }
+            <code class="literal">UNIQUE</code> [<span class="optional">
+              <code class="literal">KEYS</code> </span>] </span>]
+        </p>
+        <p>
+          This predicate tests whether <em class="replaceable"><code>expression</code></em> can be
+          parsed as JSON, possibly of a specified type. If <code class="literal">SCALAR</code> or
+          <code class="literal">ARRAY</code> or <code class="literal">OBJECT</code> is specified,
+          the test is whether or not the JSON is of that particular type. If
+          <code class="literal">WITH UNIQUE KEYS</code> is specified, then any object in the
+          <em class="replaceable"><code>expression</code></em> is also tested to see if it has
+          duplicate keys.
+        </p>
+        <p>
+        <pre class="programlisting">
 SELECT js,
   js IS JSON "json?",
   js IS JSON SCALAR "scalar?",
@@ -109,32 +143,35 @@ FROM (VALUES
       ('123'), ('"abc"'), ('\{"a": "b"}'), ('[1,2]'),('abc')) foo(js);
      js     | json? | scalar? | object? | array?
 ------------+-------+---------+---------+--------
- `123`        | t     | t       | f       | f
- `"abc"`      | t     | t       | f       | f
- `{"a": "b"}` | t     | f       | t       | f
- `[1,2]`      | t     | f       | f       | t
- `abc`        | f     | f       | f       | f
-
-``````
-
+ 123        | t     | t       | f       | f
+ "abc"      | t     | t       | f       | f
+ \{"a": "b"} | t     | f       | t       | f
+ [1,2]      | t     | f       | f       | t
+ abc        | f     | f       | f       | f
+</pre>
+        </p>
+        <p>
+        <pre class="programlisting">
 SELECT js,
   js IS JSON OBJECT "object?",
   js IS JSON ARRAY "array?",
   js IS JSON ARRAY WITH UNIQUE KEYS "array w. UK?",
   js IS JSON ARRAY WITHOUT UNIQUE KEYS "array w/o UK?"
-FROM (VALUES ('[{"a":"1"},
- {"b":"2","b":"3"}]')) foo(js);
+FROM (VALUES ('[\{"a":"1"},
+ \{"b":"2","b":"3"}]')) foo(js);
 -[ RECORD 1 ]-+--------------------
-js            | [{"a":"1"},        +
-              |  {"b":"2","b":"3"}]
+js            | [\{"a":"1"},        +
+              |  \{"b":"2","b":"3"}]
 object?       | f
 array?        | t
 array w. UK?  | f
 array w/o UK? | t
-``` |
-
-
-
+</pre>
+</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 [Table 9.49](functions-json#FUNCTIONS-JSON-PROCESSING-TABLE) shows the functions that are available for processing `json` and `jsonb` values.
 
@@ -142,16 +179,18 @@ array w/o UK? | t
 
 **Table 9.49. JSON Processing Functions**
 
-| FunctionDescriptionExample(s)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| FunctionDescriptionExample(s) |
+| ----------------------------- |
+
 | `json_array_elements` ( `json` ) → `setof json``jsonb_array_elements` ( `jsonb` ) → `setof jsonb`Expands the top-level JSON array into a set of JSON values.`select * from json_array_elements('[1,true, [2,false]]')` →`````
 
-   value
------------
- 1
- true
- [2,false]
-```                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+## value
+
+1
+true
+[2,false]
+
+``````|
 | `json_array_elements_text` ( `json` ) → `setof text``jsonb_array_elements_text` ( `jsonb` ) → `setof text`Expands the top-level JSON array into a set of `text` values.`select * from json_array_elements_text('["foo", "bar"]')` →`````
 
    value
@@ -267,21 +306,22 @@ For example, suppose you have some JSON data from a GPS tracker that you would l
 ```
 
 {
-  "track": {
-    "segments": [
-      {
-        "location":   [ 47.763, 13.4034 ],
-        "start time": "2018-10-14 10:05:14",
-        "HR": 73
-      },
-      {
-        "location":   [ 47.706, 13.2635 ],
-        "start time": "2018-10-14 10:39:21",
-        "HR": 135
-      }
-    ]
-  }
+"track": {
+"segments": [
+{
+"location": [ 47.763, 13.4034 ],
+"start time": "2018-10-14 10:05:14",
+"HR": 73
+},
+{
+"location": [ 47.706, 13.2635 ],
+"start time": "2018-10-14 10:39:21",
+"HR": 135
 }
+]
+}
+}
+
 ```
 
 To retrieve the available track segments, you need to use the `.key` accessor operator to descend through surrounding JSON objects:
@@ -289,6 +329,7 @@ To retrieve the available track segments, you need to use the `.key` accessor op
 ```
 
 $.track.segments
+
 ```
 
 To retrieve the contents of an array, you typically use the `[*]` operator. For example, the following path will return the location coordinates for all the available track segments:
@@ -296,6 +337,7 @@ To retrieve the contents of an array, you typically use the `[*]` operator. For 
 ```
 
 $.track.segments[*].location
+
 ```
 
 To return the coordinates of the first segment only, you can specify the corresponding subscript in the `[]` accessor operator. Recall that JSON array indexes are 0-relative:
@@ -303,6 +345,7 @@ To return the coordinates of the first segment only, you can specify the corresp
 ```
 
 $.track.segments[0].location
+
 ```
 
 The result of each path evaluation step can be processed by one or more `jsonpath` operators and methods listed in [Section 9.16.2.2](functions-json#FUNCTIONS-SQLJSON-PATH-OPERATORS). Each method name must be preceded by a dot. For example, you can get the size of an array:
@@ -310,6 +353,7 @@ The result of each path evaluation step can be processed by one or more `jsonpat
 ```
 
 $.track.segments.size()
+
 ```
 
 More examples of using `jsonpath` operators and methods within path expressions appear below in [Section 9.16.2.2](functions-json#FUNCTIONS-SQLJSON-PATH-OPERATORS).
@@ -319,6 +363,7 @@ When defining a path, you can also use one or more *filter expressions* that wor
 ```
 
 ? (condition)
+
 ```
 
 Filter expressions must be written just after the path evaluation step to which they should apply. The result of that step is filtered to include only those items that satisfy the provided condition. SQL/JSON defines three-valued logic, so the condition can be `true`, `false`, or `unknown`. The `unknown` value plays the same role as SQL `NULL` and can be tested for with the `is unknown` predicate. Further path evaluation steps use only those items for which the filter expression returned `true`.
@@ -330,6 +375,7 @@ For example, suppose you would like to retrieve all heart rate values higher tha
 ```
 
 $.track.segments[*].HR ? (@ > 130)
+
 ```
 
 To get the start times of segments with such values, you have to filter out irrelevant segments before returning the start times, so the filter expression is applied to the previous step, and the path used in the condition is different:
@@ -337,6 +383,7 @@ To get the start times of segments with such values, you have to filter out irre
 ```
 
 $.track.segments[*] ? (@.HR > 130)."start time"
+
 ```
 
 You can use several filter expressions in sequence, if required. For example, the following expression selects start times of all segments that contain locations with relevant coordinates and high heart rate values:
@@ -344,6 +391,7 @@ You can use several filter expressions in sequence, if required. For example, th
 ```
 
 $.track.segments[*] ? (@.location[1] < 13.4) ? (@.HR > 130)."start time"
+
 ```
 
 Using filter expressions at different nesting levels is also allowed. The following example first filters all segments by location, and then returns high heart rate values for these segments, if available:
@@ -351,6 +399,7 @@ Using filter expressions at different nesting levels is also allowed. The follow
 ```
 
 $.track.segments[*] ? (@.location[1] < 13.4).HR ? (@ > 130)
+
 ```
 
 You can also nest filter expressions within each other:
@@ -358,6 +407,7 @@ You can also nest filter expressions within each other:
 ```
 
 $.track ? (exists(@.segments[*] ? (@.HR > 130))).segments.size()
+
 ```
 
 This expression returns the size of the track if it contains any segments with high heart rate values, or an empty sequence otherwise.
@@ -366,10 +416,11 @@ PostgreSQL's implementation of the SQL/JSON path language has the following devi
 
 * A path expression can be a Boolean predicate, although the SQL/JSON standard allows predicates only in filters. This is necessary for implementation of the `@@` operator. For example, the following `jsonpath` expression is valid in PostgreSQL:
 
-  ```
+```
 
-  $.track.segments[*].HR < 70
-  ```
+$.track.segments[*].HR < 70
+
+```
 
 * There are minor differences in the interpretation of regular expression patterns used in `like_regex` filters, as described in [Section 9.16.2.3](functions-json#JSONPATH-REGULAR-EXPRESSIONS).
 
@@ -394,6 +445,7 @@ For example, when querying the GPS data listed above, you can abstract from the 
 ```
 
 lax $.track.segments.location
+
 ```
 
 In the strict mode, the specified path must exactly match the structure of the queried JSON document to return an SQL/JSON item, so using this path expression will cause an error. To get the same result as in the lax mode, you have to explicitly unwrap the `segments` array:
@@ -401,20 +453,23 @@ In the strict mode, the specified path must exactly match the structure of the q
 ```
 
 strict $.track.segments[*].location
+
 ```
 
 The `.**` accessor can lead to surprising results when using the lax mode. For instance, the following query selects every `HR` value twice:
 
 ```
 
-lax $.**.HR
+lax $.\*\*.HR
+
 ```
 
 This happens because the `.**` accessor selects both the `segments` array and each of its elements, while the `.HR` accessor automatically unwraps arrays when using the lax mode. To avoid surprising results, we recommend using the `.**` accessor only in the strict mode. The following query selects each `HR` value just once:
 
 ```
 
-strict $.**.HR
+strict $.\*\*.HR
+
 ```
 
 [#id](#FUNCTIONS-SQLJSON-PATH-OPERATORS)
@@ -497,6 +552,7 @@ SQL/JSON path expressions allow matching text to a regular expression with the `
 ```
 
 $[*] ? (@ like_regex "^[aeiou]" flag "i")
+
 ```
 
 The optional `flag` string may include one or more of the characters `i` for case-insensitive match, `m` to allow `^` and `$` to match at newlines, `s` to allow `.` to match a newline, and `q` to quote the whole pattern (reducing the behavior to a simple substring match).
@@ -508,4 +564,7 @@ Keep in mind that the pattern argument of `like_regex` is a JSON path string lit
 ```
 
 $.* ? (@ like_regex "^\\d+$")
+
+```
+
 ```

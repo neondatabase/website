@@ -2,9 +2,9 @@
 
 ## 9.29. Event Trigger Functions [#](#FUNCTIONS-EVENT-TRIGGERS)
 
-  * [9.29.1. Capturing Changes at Command End](functions-event-triggers#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
-  * [9.29.2. Processing Objects Dropped by a DDL Command](functions-event-triggers#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
-  * [9.29.3. Handling a Table Rewrite Event](functions-event-triggers#PG-EVENT-TRIGGER-TABLE-REWRITE-FUNCTIONS)
+- [9.29.1. Capturing Changes at Command End](functions-event-triggers#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
+- [9.29.2. Processing Objects Dropped by a DDL Command](functions-event-triggers#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
+- [9.29.3. Handling a Table Rewrite Event](functions-event-triggers#PG-EVENT-TRIGGER-TABLE-REWRITE-FUNCTIONS)
 
 PostgreSQL provides these helper functions to retrieve information from event triggers.
 
@@ -13,8 +13,6 @@ For more information about event triggers, see [Chapter 40](event-triggers).
 [#id](#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
 
 ### 9.29.1. Capturing Changes at Command End [#](#PG-EVENT-TRIGGER-DDL-COMMAND-END-FUNCTIONS)
-
-
 
 ```
 
@@ -38,8 +36,6 @@ pg_event_trigger_ddl_commands () → setof record
 [#id](#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
 
 ### 9.29.2. Processing Objects Dropped by a DDL Command [#](#PG-EVENT-TRIGGER-SQL-DROP-FUNCTIONS)
-
-
 
 ```
 
@@ -98,11 +94,44 @@ The functions shown in [Table 9.104](functions-event-triggers#FUNCTIONS-EVENT-T
 
 **Table 9.104. Table Rewrite Information Functions**
 
-| FunctionDescription                                                                                                                                                   |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pg_event_trigger_table_rewrite_oid` () → `oid`Returns the OID of the table about to be rewritten.                                                                |
-| `pg_event_trigger_table_rewrite_reason` () → `integer`Returns a code explaining the reason(s) for rewriting. The exact meaning of the codes is release dependent. |
-
+<table class="table" summary="Table Rewrite Information Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.35.6.3.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">pg_event_trigger_table_rewrite_oid</code> () →
+          <code class="returnvalue">oid</code>
+        </p>
+        <p>Returns the OID of the table about to be rewritten.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.35.6.3.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">pg_event_trigger_table_rewrite_reason</code> () →
+          <code class="returnvalue">integer</code>
+        </p>
+        <p>
+          Returns a code explaining the reason(s) for rewriting. The exact meaning of the codes is
+          release dependent.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 These functions can be used in an event trigger like this:
 

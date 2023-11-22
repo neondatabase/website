@@ -2,43 +2,565 @@
 
 ## 9.21. Aggregate Functions [#](#FUNCTIONS-AGGREGATE)
 
-*Aggregate functions* compute a single result from a set of input values. The built-in general-purpose aggregate functions are listed in [Table 9.59](functions-aggregate#FUNCTIONS-AGGREGATE-TABLE) while statistical aggregates are in [Table 9.60](functions-aggregate#FUNCTIONS-AGGREGATE-STATISTICS-TABLE). The built-in within-group ordered-set aggregate functions are listed in [Table 9.61](functions-aggregate#FUNCTIONS-ORDEREDSET-TABLE) while the built-in within-group hypothetical-set ones are in [Table 9.62](functions-aggregate#FUNCTIONS-HYPOTHETICAL-TABLE). Grouping operations, which are closely related to aggregate functions, are listed in [Table 9.63](functions-aggregate#FUNCTIONS-GROUPING-TABLE). The special syntax considerations for aggregate functions are explained in [Section 4.2.7](sql-expressions#SYNTAX-AGGREGATES). Consult [Section 2.7](tutorial-agg) for additional introductory information.
+_Aggregate functions_ compute a single result from a set of input values. The built-in general-purpose aggregate functions are listed in [Table 9.59](functions-aggregate#FUNCTIONS-AGGREGATE-TABLE) while statistical aggregates are in [Table 9.60](functions-aggregate#FUNCTIONS-AGGREGATE-STATISTICS-TABLE). The built-in within-group ordered-set aggregate functions are listed in [Table 9.61](functions-aggregate#FUNCTIONS-ORDEREDSET-TABLE) while the built-in within-group hypothetical-set ones are in [Table 9.62](functions-aggregate#FUNCTIONS-HYPOTHETICAL-TABLE). Grouping operations, which are closely related to aggregate functions, are listed in [Table 9.63](functions-aggregate#FUNCTIONS-GROUPING-TABLE). The special syntax considerations for aggregate functions are explained in [Section 4.2.7](sql-expressions#SYNTAX-AGGREGATES). Consult [Section 2.7](tutorial-agg) for additional introductory information.
 
-Aggregate functions that support *Partial Mode* are eligible to participate in various optimizations, such as parallel aggregation.
+Aggregate functions that support _Partial Mode_ are eligible to participate in various optimizations, such as parallel aggregation.
 
 [#id](#FUNCTIONS-AGGREGATE-TABLE)
 
 **Table 9.59. General-Purpose Aggregate Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Partial Mode |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| `any_value` ( `anyelement` ) → `same as input type`Returns an arbitrary value from the non-null input values.                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Yes          |
-| `array_agg` ( `anynonarray` ) → `anyarray`Collects all the input values, including nulls, into an array.                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Yes          |
-| `array_agg` ( `anyarray` ) → `anyarray`Concatenates all the input arrays into an array of one higher dimension. (The inputs must all have the same dimensionality, and cannot be empty or null.)                                                                                                                                                                                                                                                                                                                                                                        | Yes          |
-| `avg` ( `smallint` ) → `numeric``avg` ( `integer` ) → `numeric``avg` ( `bigint` ) → `numeric``avg` ( `numeric` ) → `numeric``avg` ( `real` ) → `double precision``avg` ( `double precision` ) → `double precision``avg` ( `interval` ) → `interval`Computes the average (arithmetic mean) of all the non-null input values.                                                                                                                                                                                                                                     | Yes          |
-| `bit_and` ( `smallint` ) → `smallint``bit_and` ( `integer` ) → `integer``bit_and` ( `bigint` ) → `bigint``bit_and` ( `bit` ) → `bit`Computes the bitwise AND of all non-null input values.                                                                                                                                                                                                                                                                                                                                                                          | Yes          |
-| `bit_or` ( `smallint` ) → `smallint``bit_or` ( `integer` ) → `integer``bit_or` ( `bigint` ) → `bigint``bit_or` ( `bit` ) → `bit`Computes the bitwise OR of all non-null input values.                                                                                                                                                                                                                                                                                                                                                                               | Yes          |
-| `bit_xor` ( `smallint` ) → `smallint``bit_xor` ( `integer` ) → `integer``bit_xor` ( `bigint` ) → `bigint``bit_xor` ( `bit` ) → `bit`Computes the bitwise exclusive OR of all non-null input values. Can be useful as a checksum for an unordered set of values.                                                                                                                                                                                                                                                                                                     | Yes          |
-| `bool_and` ( `boolean` ) → `boolean`Returns true if all non-null input values are true, otherwise false.                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Yes          |
-| `bool_or` ( `boolean` ) → `boolean`Returns true if any non-null input value is true, otherwise false.                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Yes          |
-| `count` ( `*` ) → `bigint`Computes the number of input rows.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Yes          |
-| `count` ( `"any"` ) → `bigint`Computes the number of input rows in which the input value is not null.                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Yes          |
-| `every` ( `boolean` ) → `boolean`This is the SQL standard's equivalent to `bool_and`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Yes          |
-| `json_agg` ( `anyelement` ) → `json``jsonb_agg` ( `anyelement` ) → `jsonb`Collects all the input values, including nulls, into a JSON array. Values are converted to JSON as per `to_json` or `to_jsonb`.                                                                                                                                                                                                                                                                                                                                                       | No           |
-| `json_objectagg` ( \[ \{ *`key_expression`* \{ `VALUE` \| ':' } *`value_expression`* } ] \[ \{ `NULL` \| `ABSENT` } `ON NULL` ] \[ \{ `WITH` \| `WITHOUT` } `UNIQUE` \[ `KEYS` ] ] \[ `RETURNING` *`data_type`* \[ `FORMAT JSON` \[ `ENCODING UTF8` ] ] ])Behaves like `json_object`, but as an aggregate function, so it only takes one *`key_expression`* and one *`value_expression`* parameter.`SELECT json_objectagg(k:v) FROM (VALUES ('a'::text,current_date),('b',current_date + 1)) AS t(k,v)` → `{ "a" : "2022-05-10", "b" : "2022-05-11" }`                  | No           |
-| `json_object_agg` ( *`key`* `"any"`, *`value`* `"any"` ) → `json``jsonb_object_agg` ( *`key`* `"any"`, *`value`* `"any"` ) → `jsonb`Collects all the key/value pairs into a JSON object. Key arguments are coerced to text; value arguments are converted as per `to_json` or `to_jsonb`. Values can be null, but keys cannot.                                                                                                                                                                                                                                  | No           |
-| `json_object_agg_strict` ( *`key`* `"any"`, *`value`* `"any"` ) → `json``jsonb_object_agg_strict` ( *`key`* `"any"`, *`value`* `"any"` ) → `jsonb`Collects all the key/value pairs into a JSON object. Key arguments are coerced to text; value arguments are converted as per `to_json` or `to_jsonb`. The *`key`* can not be null. If the *`value`* is null then the entry is skipped,                                                                                                                                                                        | No           |
-| `json_object_agg_unique` ( *`key`* `"any"`, *`value`* `"any"` ) → `json``jsonb_object_agg_unique` ( *`key`* `"any"`, *`value`* `"any"` ) → `jsonb`Collects all the key/value pairs into a JSON object. Key arguments are coerced to text; value arguments are converted as per `to_json` or `to_jsonb`. Values can be null, but keys cannot. If there is a duplicate key an error is thrown.                                                                                                                                                                    | No           |
-| `json_arrayagg` ( \[ *`value_expression`* ] \[ `ORDER BY` *`sort_expression`* ] \[ \{ `NULL` \| `ABSENT` } `ON NULL` ] \[ `RETURNING` *`data_type`* \[ `FORMAT JSON` \[ `ENCODING UTF8` ] ] ])Behaves in the same way as `json_array` but as an aggregate function so it only takes one *`value_expression`* parameter. If `ABSENT ON NULL` is specified, any NULL values are omitted. If `ORDER BY` is specified, the elements will appear in the array in that order rather than in the input order.`SELECT json_arrayagg(v) FROM (VALUES(2),(1)) t(v)` → `[2, 1]` | No           |
-| `json_object_agg_unique_strict` ( *`key`* `"any"`, *`value`* `"any"` ) → `json``jsonb_object_agg_unique_strict` ( *`key`* `"any"`, *`value`* `"any"` ) → `jsonb`Collects all the key/value pairs into a JSON object. Key arguments are coerced to text; value arguments are converted as per `to_json` or `to_jsonb`. The *`key`* can not be null. If the *`value`* is null then the entry is skipped. If there is a duplicate key an error is thrown.                                                                                                          | No           |
-| `max` ( *`see text`* ) → `same as input type`Computes the maximum of the non-null input values. Available for any numeric, string, date/time, or enum type, as well as `inet`, `interval`, `money`, `oid`, `pg_lsn`, `tid`, `xid8`, and arrays of any of these types.                                                                                                                                                                                                                                                                                               | Yes          |
-| `min` ( *`see text`* ) → `same as input type`Computes the minimum of the non-null input values. Available for any numeric, string, date/time, or enum type, as well as `inet`, `interval`, `money`, `oid`, `pg_lsn`, `tid`, `xid8`, and arrays of any of these types.                                                                                                                                                                                                                                                                                               | Yes          |
-| `range_agg` ( *`value`* `anyrange` ) → `anymultirange``range_agg` ( *`value`* `anymultirange` ) → `anymultirange`Computes the union of the non-null input values.                                                                                                                                                                                                                                                                                                                                                                                                   | No           |
-| `range_intersect_agg` ( *`value`* `anyrange` ) → `anyrange``range_intersect_agg` ( *`value`* `anymultirange` ) → `anymultirange`Computes the intersection of the non-null input values.                                                                                                                                                                                                                                                                                                                                                                             | No           |
-| `json_agg_strict` ( `anyelement` ) → `json``jsonb_agg_strict` ( `anyelement` ) → `jsonb`Collects all the input values, skipping nulls, into a JSON array. Values are converted to JSON as per `to_json` or `to_jsonb`.                                                                                                                                                                                                                                                                                                                                          | No           |
-| `string_agg` ( *`value`* `text`, *`delimiter`* `text` ) → `text``string_agg` ( *`value`* `bytea`, *`delimiter`* `bytea` ) → `bytea`Concatenates the non-null input values into a string. Each value after the first is preceded by the corresponding *`delimiter`* (if it's not null).                                                                                                                                                                                                                                                                              | Yes          |
-| `sum` ( `smallint` ) → `bigint``sum` ( `integer` ) → `bigint``sum` ( `bigint` ) → `numeric``sum` ( `numeric` ) → `numeric``sum` ( `real` ) → `real``sum` ( `double precision` ) → `double precision``sum` ( `interval` ) → `interval``sum` ( `money` ) → `money`Computes the sum of the non-null input values.                                                                                                                                                                                                                                                      | Yes          |
-| `xmlagg` ( `xml` ) → `xml`Concatenates the non-null XML input values (see [Section 9.15.1.7](functions-xml#FUNCTIONS-XML-XMLAGG)).                                                                                                                                                                                                                                                                                                                                                                                                                             | No           |
+<table class="table" summary="General-Purpose Aggregate Functions" border="1">
+  <colgroup>
+    <col class="col1" />
+    <col class="col2" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+      <th>Partial Mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.1.1.1.1" class="indexterm"></a>
+          <code class="function">any_value</code> ( <code class="type">anyelement</code> ) →
+          <code class="returnvalue"><em class="replaceable"><code>same as input type</code></em></code>
+        </p>
+        <p>Returns an arbitrary value from the non-null input values.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.2.1.1.1" class="indexterm"></a>
+          <code class="function">array_agg</code> ( <code class="type">anynonarray</code> ) →
+          <code class="returnvalue">anyarray</code>
+        </p>
+        <p>Collects all the input values, including nulls, into an array.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <code class="function">array_agg</code> ( <code class="type">anyarray</code> ) →
+          <code class="returnvalue">anyarray</code>
+        </p>
+        <p>
+          Concatenates all the input arrays into an array of one higher dimension. (The inputs must
+          all have the same dimensionality, and cannot be empty or null.)
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.4.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.27.5.2.4.4.1.1.2" class="indexterm"></a>
+          <code class="function">avg</code> ( <code class="type">smallint</code> ) →
+          <code class="returnvalue">numeric</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">avg</code> ( <code class="type">integer</code> ) →
+          <code class="returnvalue">numeric</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">avg</code> ( <code class="type">bigint</code> ) →
+          <code class="returnvalue">numeric</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">avg</code> ( <code class="type">numeric</code> ) →
+          <code class="returnvalue">numeric</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">avg</code> ( <code class="type">real</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">avg</code> ( <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">avg</code> ( <code class="type">interval</code> ) →
+          <code class="returnvalue">interval</code>
+        </p>
+        <p>Computes the average (arithmetic mean) of all the non-null input values.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.5.1.1.1" class="indexterm"></a>
+          <code class="function">bit_and</code> ( <code class="type">smallint</code> ) →
+          <code class="returnvalue">smallint</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">bit_and</code> ( <code class="type">integer</code> ) →
+          <code class="returnvalue">integer</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">bit_and</code> ( <code class="type">bigint</code> ) →
+          <code class="returnvalue">bigint</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">bit_and</code> ( <code class="type">bit</code> ) →
+          <code class="returnvalue">bit</code>
+        </p>
+        <p>Computes the bitwise AND of all non-null input values.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.6.1.1.1" class="indexterm"></a>
+          <code class="function">bit_or</code> ( <code class="type">smallint</code> ) →
+          <code class="returnvalue">smallint</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">bit_or</code> ( <code class="type">integer</code> ) →
+          <code class="returnvalue">integer</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">bit_or</code> ( <code class="type">bigint</code> ) →
+          <code class="returnvalue">bigint</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">bit_or</code> ( <code class="type">bit</code> ) →
+          <code class="returnvalue">bit</code>
+        </p>
+        <p>Computes the bitwise OR of all non-null input values.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.7.1.1.1" class="indexterm"></a>
+          <code class="function">bit_xor</code> ( <code class="type">smallint</code> ) →
+          <code class="returnvalue">smallint</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">bit_xor</code> ( <code class="type">integer</code> ) →
+          <code class="returnvalue">integer</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">bit_xor</code> ( <code class="type">bigint</code> ) →
+          <code class="returnvalue">bigint</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">bit_xor</code> ( <code class="type">bit</code> ) →
+          <code class="returnvalue">bit</code>
+        </p>
+        <p>
+          Computes the bitwise exclusive OR of all non-null input values. Can be useful as a
+          checksum for an unordered set of values.
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.8.1.1.1" class="indexterm"></a>
+          <code class="function">bool_and</code> ( <code class="type">boolean</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Returns true if all non-null input values are true, otherwise false.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.9.1.1.1" class="indexterm"></a>
+          <code class="function">bool_or</code> ( <code class="type">boolean</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Returns true if any non-null input value is true, otherwise false.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.10.1.1.1" class="indexterm"></a>
+          <code class="function">count</code> ( <code class="literal">*</code> ) →
+          <code class="returnvalue">bigint</code>
+        </p>
+        <p>Computes the number of input rows.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <code class="function">count</code> ( <code class="type">"any"</code> ) →
+          <code class="returnvalue">bigint</code>
+        </p>
+        <p>Computes the number of input rows in which the input value is not null.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.12.1.1.1" class="indexterm"></a>
+          <code class="function">every</code> ( <code class="type">boolean</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>This is the SQL standard's equivalent to <code class="function">bool_and</code>.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.13.1.1.1" class="indexterm"></a>
+          <code class="function">json_agg</code> ( <code class="type">anyelement</code> ) →
+          <code class="returnvalue">json</code>
+        </p>
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.13.1.2.1" class="indexterm"></a>
+          <code class="function">jsonb_agg</code> ( <code class="type">anyelement</code> ) →
+          <code class="returnvalue">jsonb</code>
+        </p>
+        <p>
+          Collects all the input values, including nulls, into a JSON array. Values are converted to
+          JSON as per <code class="function">to_json</code> or
+          <code class="function">to_jsonb</code>.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.14.1.1.1" class="indexterm"></a>
+          <code class="function">json_objectagg</code> ( [<span class="optional">
+            \{ <em class="replaceable"><code>key_expression</code></em> \{
+            <code class="literal">VALUE</code> | ':' }
+            <em class="replaceable"><code>value_expression</code></em> } </span>] [<span class="optional">
+            \{ <code class="literal">NULL</code> | <code class="literal">ABSENT</code> }
+            <code class="literal">ON NULL</code> </span>] [<span class="optional">
+            \{ <code class="literal">WITH</code> | <code class="literal">WITHOUT</code> }
+            <code class="literal">UNIQUE</code> [<span class="optional">
+              <code class="literal">KEYS</code> </span>] </span>] [<span class="optional">
+            <code class="literal">RETURNING</code>
+            <em class="replaceable"><code>data_type</code></em> [<span class="optional">
+              <code class="literal">FORMAT JSON</code> [<span class="optional">
+                <code class="literal">ENCODING UTF8</code> </span>] </span>] </span>])
+        </p>
+        <p>
+          Behaves like <code class="function">json_object</code>, but as an aggregate function, so
+          it only takes one <em class="replaceable"><code>key_expression</code></em> and one
+          <em class="replaceable"><code>value_expression</code></em> parameter.
+        </p>
+        <p>
+          <code class="literal">SELECT json_objectagg(k:v) FROM (VALUES ('a'::text,current_date),('b',current_date +
+            1)) AS t(k,v)</code>
+          → <code class="returnvalue">\{ "a" : "2022-05-10", "b" : "2022-05-11" }</code>
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.15.1.1.1" class="indexterm"></a>
+          <code class="function">json_object_agg</code> (
+          <em class="parameter"><code>key</code></em> <code class="type">"any"</code>,
+          <em class="parameter"><code>value</code></em> <code class="type">"any"</code> ) →
+          <code class="returnvalue">json</code>
+        </p>
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.15.1.2.1" class="indexterm"></a>
+          <code class="function">jsonb_object_agg</code> (
+          <em class="parameter"><code>key</code></em> <code class="type">"any"</code>,
+          <em class="parameter"><code>value</code></em> <code class="type">"any"</code> ) →
+          <code class="returnvalue">jsonb</code>
+        </p>
+        <p>
+          Collects all the key/value pairs into a JSON object. Key arguments are coerced to text;
+          value arguments are converted as per
+          <code class="function">to_json</code> or <code class="function">to_jsonb</code>. Values
+          can be null, but keys cannot.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.16.1.1.1" class="indexterm"></a>
+          <code class="function">json_object_agg_strict</code> (
+          <em class="parameter"><code>key</code></em> <code class="type">"any"</code>,
+          <em class="parameter"><code>value</code></em> <code class="type">"any"</code> ) →
+          <code class="returnvalue">json</code>
+        </p>
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.16.1.2.1" class="indexterm"></a>
+          <code class="function">jsonb_object_agg_strict</code> (
+          <em class="parameter"><code>key</code></em> <code class="type">"any"</code>,
+          <em class="parameter"><code>value</code></em> <code class="type">"any"</code> ) →
+          <code class="returnvalue">jsonb</code>
+        </p>
+        <p>
+          Collects all the key/value pairs into a JSON object. Key arguments are coerced to text;
+          value arguments are converted as per
+          <code class="function">to_json</code> or <code class="function">to_jsonb</code>. The
+          <em class="parameter"><code>key</code></em> can not be null. If the
+          <em class="parameter"><code>value</code></em> is null then the entry is skipped,
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.17.1.1.1" class="indexterm"></a>
+          <code class="function">json_object_agg_unique</code> (
+          <em class="parameter"><code>key</code></em> <code class="type">"any"</code>,
+          <em class="parameter"><code>value</code></em> <code class="type">"any"</code> ) →
+          <code class="returnvalue">json</code>
+        </p>
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.17.1.2.1" class="indexterm"></a>
+          <code class="function">jsonb_object_agg_unique</code> (
+          <em class="parameter"><code>key</code></em> <code class="type">"any"</code>,
+          <em class="parameter"><code>value</code></em> <code class="type">"any"</code> ) →
+          <code class="returnvalue">jsonb</code>
+        </p>
+        <p>
+          Collects all the key/value pairs into a JSON object. Key arguments are coerced to text;
+          value arguments are converted as per
+          <code class="function">to_json</code> or <code class="function">to_jsonb</code>. Values
+          can be null, but keys cannot. If there is a duplicate key an error is thrown.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.18.1.1.1" class="indexterm"></a>
+          <code class="function">json_arrayagg</code> ( [<span class="optional"><em class="replaceable"><code>value_expression</code></em> </span>] [<span class="optional"><code class="literal">ORDER BY</code><em class="replaceable"><code>sort_expression</code></em> </span>] [<span class="optional">{ <code class="literal">NULL</code> | <code class="literal">ABSENT</code> }<code class="literal">ON NULL</code> </span>] [<span class="optional"><code class="literal">RETURNING</code><em class="replaceable"><code>data_type</code></em> [<span class="optional"><code class="literal">FORMAT JSON</code> [<span class="optional"><code class="literal">ENCODING UTF8</code> </span>] </span>] </span>])
+        </p>
+        <p>
+          Behaves in the same way as <code class="function">json_array</code>
+          but as an aggregate function so it only takes one
+          <em class="replaceable"><code>value_expression</code></em> parameter. If
+          <code class="literal">ABSENT ON NULL</code> is specified, any NULL values are omitted. If
+          <code class="literal">ORDER BY</code> is specified, the elements will appear in the array
+          in that order rather than in the input order.
+        </p>
+        <p>
+          <code class="literal">SELECT json_arrayagg(v) FROM (VALUES(2),(1)) t(v)</code>
+          → <code class="returnvalue">[2, 1]</code>
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.19.1.1.1" class="indexterm"></a>
+          <code class="function">json_object_agg_unique_strict</code> (
+          <em class="parameter"><code>key</code></em> <code class="type">"any"</code>,
+          <em class="parameter"><code>value</code></em> <code class="type">"any"</code> ) →
+          <code class="returnvalue">json</code>
+        </p>
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.19.1.2.1" class="indexterm"></a>
+          <code class="function">jsonb_object_agg_unique_strict</code> (
+          <em class="parameter"><code>key</code></em> <code class="type">"any"</code>,
+          <em class="parameter"><code>value</code></em> <code class="type">"any"</code> ) →
+          <code class="returnvalue">jsonb</code>
+        </p>
+        <p>
+          Collects all the key/value pairs into a JSON object. Key arguments are coerced to text;
+          value arguments are converted as per
+          <code class="function">to_json</code> or <code class="function">to_jsonb</code>. The
+          <em class="parameter"><code>key</code></em> can not be null. If the
+          <em class="parameter"><code>value</code></em> is null then the entry is skipped. If there
+          is a duplicate key an error is thrown.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.20.1.1.1" class="indexterm"></a>
+          <code class="function">max</code> ( <em class="replaceable"><code>see text</code></em> ) →
+          <code class="returnvalue"><em class="replaceable"><code>same as input type</code></em></code>
+        </p>
+        <p>
+          Computes the maximum of the non-null input values. Available for any numeric, string,
+          date/time, or enum type, as well as <code class="type">inet</code>,
+          <code class="type">interval</code>, <code class="type">money</code>,
+          <code class="type">oid</code>, <code class="type">pg_lsn</code>,
+          <code class="type">tid</code>, <code class="type">xid8</code>, and arrays of any of these
+          types.
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.21.1.1.1" class="indexterm"></a>
+          <code class="function">min</code> ( <em class="replaceable"><code>see text</code></em> ) →
+          <code class="returnvalue"><em class="replaceable"><code>same as input type</code></em></code>
+        </p>
+        <p>
+          Computes the minimum of the non-null input values. Available for any numeric, string,
+          date/time, or enum type, as well as <code class="type">inet</code>,
+          <code class="type">interval</code>, <code class="type">money</code>,
+          <code class="type">oid</code>, <code class="type">pg_lsn</code>,
+          <code class="type">tid</code>, <code class="type">xid8</code>, and arrays of any of these
+          types.
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.22.1.1.1" class="indexterm"></a>
+          <code class="function">range_agg</code> ( <em class="parameter"><code>value</code></em>
+          <code class="type">anyrange</code> ) → <code class="returnvalue">anymultirange</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">range_agg</code> ( <em class="parameter"><code>value</code></em>
+          <code class="type">anymultirange</code> ) → <code class="returnvalue">anymultirange</code>
+        </p>
+        <p>Computes the union of the non-null input values.</p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.23.1.1.1" class="indexterm"></a>
+          <code class="function">range_intersect_agg</code> (
+          <em class="parameter"><code>value</code></em> <code class="type">anyrange</code> ) →
+          <code class="returnvalue">anyrange</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">range_intersect_agg</code> (
+          <em class="parameter"><code>value</code></em> <code class="type">anymultirange</code> ) →
+          <code class="returnvalue">anymultirange</code>
+        </p>
+        <p>Computes the intersection of the non-null input values.</p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.24.1.1.1" class="indexterm"></a>
+          <code class="function">json_agg_strict</code> ( <code class="type">anyelement</code> ) →
+          <code class="returnvalue">json</code>
+        </p>
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.24.1.2.1" class="indexterm"></a>
+          <code class="function">jsonb_agg_strict</code> ( <code class="type">anyelement</code> ) →
+          <code class="returnvalue">jsonb</code>
+        </p>
+        <p>
+          Collects all the input values, skipping nulls, into a JSON array. Values are converted to
+          JSON as per <code class="function">to_json</code> or
+          <code class="function">to_jsonb</code>.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.25.1.1.1" class="indexterm"></a>
+          <code class="function">string_agg</code> ( <em class="parameter"><code>value</code></em>
+          <code class="type">text</code>, <em class="parameter"><code>delimiter</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">text</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">string_agg</code> ( <em class="parameter"><code>value</code></em>
+          <code class="type">bytea</code>, <em class="parameter"><code>delimiter</code></em>
+          <code class="type">bytea</code> ) → <code class="returnvalue">bytea</code>
+        </p>
+        <p>
+          Concatenates the non-null input values into a string. Each value after the first is
+          preceded by the corresponding <em class="parameter"><code>delimiter</code></em> (if it's
+          not null).
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.26.1.1.1" class="indexterm"></a>
+          <code class="function">sum</code> ( <code class="type">smallint</code> ) →
+          <code class="returnvalue">bigint</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">sum</code> ( <code class="type">integer</code> ) →
+          <code class="returnvalue">bigint</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">sum</code> ( <code class="type">bigint</code> ) →
+          <code class="returnvalue">numeric</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">sum</code> ( <code class="type">numeric</code> ) →
+          <code class="returnvalue">numeric</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">sum</code> ( <code class="type">real</code> ) →
+          <code class="returnvalue">real</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">sum</code> ( <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">sum</code> ( <code class="type">interval</code> ) →
+          <code class="returnvalue">interval</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">sum</code> ( <code class="type">money</code> ) →
+          <code class="returnvalue">money</code>
+        </p>
+        <p>Computes the sum of the non-null input values.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.5.2.4.27.1.1.1" class="indexterm"></a>
+          <code class="function">xmlagg</code> ( <code class="type">xml</code> ) →
+          <code class="returnvalue">xml</code>
+        </p>
+        <p>
+          Concatenates the non-null XML input values (see
+          <a class="xref" href="functions-xml.html#FUNCTIONS-XML-XMLAGG" title="9.15.1.7. xmlagg">Section 9.15.1.7</a>).
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
 
 It should be noted that except for `count`, these functions return a null value when no rows are selected. In particular, `sum` of no rows returns null, not zero as one might expect, and `array_agg` returns null rather than an empty array when there are no input rows. The `coalesce` function can be used to substitute zero or an empty array for null when necessary.
 
@@ -73,67 +595,563 @@ SELECT count(*) FROM sometable;
 
 will require effort proportional to the size of the table: PostgreSQL will need to scan either the entire table or the entirety of an index that includes all rows in the table.
 
-[Table 9.60](functions-aggregate#FUNCTIONS-AGGREGATE-STATISTICS-TABLE) shows aggregate functions typically used in statistical analysis. (These are separated out merely to avoid cluttering the listing of more-commonly-used aggregates.) Functions shown as accepting *`numeric_type`* are available for all the types `smallint`, `integer`, `bigint`, `numeric`, `real`, and `double precision`. Where the description mentions *`N`*, it means the number of input rows for which all the input expressions are non-null. In all cases, null is returned if the computation is meaningless, for example when *`N`* is zero.
+[Table 9.60](functions-aggregate#FUNCTIONS-AGGREGATE-STATISTICS-TABLE) shows aggregate functions typically used in statistical analysis. (These are separated out merely to avoid cluttering the listing of more-commonly-used aggregates.) Functions shown as accepting _`numeric_type`_ are available for all the types `smallint`, `integer`, `bigint`, `numeric`, `real`, and `double precision`. Where the description mentions _`N`_, it means the number of input rows for which all the input expressions are non-null. In all cases, null is returned if the computation is meaningless, for example when _`N`_ is zero.
 
 [#id](#FUNCTIONS-AGGREGATE-STATISTICS-TABLE)
 
 **Table 9.60. Aggregate Functions for Statistics**
 
-| FunctionDescription                                                                                                                                                                                                    | Partial Mode |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| `corr` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the correlation coefficient.                                                                                        | Yes          |
-| `covar_pop` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the population covariance.                                                                                     | Yes          |
-| `covar_samp` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the sample covariance.                                                                                        | Yes          |
-| `regr_avgx` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the average of the independent variable, `sum(X)/N`.                                                               | Yes          |
-| `regr_avgy` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the average of the dependent variable, `sum(Y)/N`.                                                                 | Yes          |
-| `regr_count` ( *`Y`* `double precision`, *`X`* `double precision` ) → `bigint`Computes the number of rows in which both inputs are non-null.                                                                       | Yes          |
-| `regr_intercept` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the y-intercept of the least-squares-fit linear equation determined by the (*`X`*, *`Y`*) pairs.          | Yes          |
-| `regr_r2` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the square of the correlation coefficient.                                                                           | Yes          |
-| `regr_slope` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the slope of the least-squares-fit linear equation determined by the (*`X`*, *`Y`*) pairs.                    | Yes          |
-| `regr_sxx` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the “sum of squares” of the independent variable, `sum(X^2) - sum(X)^2/N`.                                          | Yes          |
-| `regr_sxy` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the “sum of products” of independent times dependent variables, `sum(X*Y) - sum(X) * sum(Y)/N`.                     | Yes          |
-| `regr_syy` ( *`Y`* `double precision`, *`X`* `double precision` ) → `double precision`Computes the “sum of squares” of the dependent variable, `sum(Y^2) - sum(Y)^2/N`.                                            | Yes          |
-| `stddev` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`This is a historical alias for`stddev_samp`.                                                        | Yes          |
-| `stddev_pop` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`Computes the population standard deviation of the input values.                                  | Yes          |
-| `stddev_samp` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`Computes the sample standard deviation of the input values.                                     | Yes          |
-| `variance` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`This is a historical alias for`var_samp`.                                                             | Yes          |
-| `var_pop` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`Computes the population variance of the input values (square of the population standard deviation). | Yes          |
-| `var_samp` ( *`numeric_type`* ) → ```double precision` for `real` or `double precision`, otherwise`numeric`Computes the sample variance of the input values (square of the sample standard deviation).        | Yes          |
+<table class="table" summary="Aggregate Functions for Statistics" border="1">
+  <colgroup>
+    <col class="col1" />
+    <col class="col2" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+      <th>Partial Mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.1.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.27.13.2.4.1.1.1.2" class="indexterm"></a>
+          <code class="function">corr</code> ( <em class="parameter"><code>Y</code></em>
+          <code class="type">double precision</code>, <em class="parameter"><code>X</code></em>
+          <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>Computes the correlation coefficient.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.2.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.27.13.2.4.2.1.1.2" class="indexterm"></a>
+          <code class="function">covar_pop</code> ( <em class="parameter"><code>Y</code></em>
+          <code class="type">double precision</code>, <em class="parameter"><code>X</code></em>
+          <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>Computes the population covariance.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.3.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.27.13.2.4.3.1.1.2" class="indexterm"></a>
+          <code class="function">covar_samp</code> ( <em class="parameter"><code>Y</code></em>
+          <code class="type">double precision</code>, <em class="parameter"><code>X</code></em>
+          <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>Computes the sample covariance.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.4.1.1.1" class="indexterm"></a>
+          <code class="function">regr_avgx</code> ( <em class="parameter"><code>Y</code></em>
+          <code class="type">double precision</code>, <em class="parameter"><code>X</code></em>
+          <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>
+          Computes the average of the independent variable,
+          <code class="literal">sum(<em class="parameter"><code>X</code></em>)/<em class="parameter"><code>N</code></em></code>.
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.5.1.1.1" class="indexterm"></a>
+          <code class="function">regr_avgy</code> ( <em class="parameter"><code>Y</code></em>
+          <code class="type">double precision</code>, <em class="parameter"><code>X</code></em>
+          <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>
+          Computes the average of the dependent variable,
+          <code class="literal">sum(<em class="parameter"><code>Y</code></em>)/<em class="parameter"><code>N</code></em></code>.
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.6.1.1.1" class="indexterm"></a>
+          <code class="function">regr_count</code> ( <em class="parameter"><code>Y</code></em>
+          <code class="type">double precision</code>, <em class="parameter"><code>X</code></em>
+          <code class="type">double precision</code> ) → <code class="returnvalue">bigint</code>
+        </p>
+        <p>Computes the number of rows in which both inputs are non-null.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.7.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.27.13.2.4.7.1.1.2" class="indexterm"></a>
+          <code class="function">regr_intercept</code> ( <em class="parameter"><code>Y</code></em>
+          <code class="type">double precision</code>, <em class="parameter"><code>X</code></em>
+          <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>
+          Computes the y-intercept of the least-squares-fit linear equation determined by the (<em
+            class="parameter"><code>X</code></em>, <em class="parameter"><code>Y</code></em>) pairs.
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.8.1.1.1" class="indexterm"></a>
+          <code class="function">regr_r2</code> ( <em class="parameter"><code>Y</code></em>
+          <code class="type">double precision</code>, <em class="parameter"><code>X</code></em>
+          <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>Computes the square of the correlation coefficient.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.9.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.27.13.2.4.9.1.1.2" class="indexterm"></a>
+          <code class="function">regr_slope</code> ( <em class="parameter"><code>Y</code></em>
+          <code class="type">double precision</code>, <em class="parameter"><code>X</code></em>
+          <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>
+          Computes the slope of the least-squares-fit linear equation determined by the (<em
+            class="parameter"><code>X</code></em>, <em class="parameter"><code>Y</code></em>) pairs.
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.10.1.1.1" class="indexterm"></a>
+          <code class="function">regr_sxx</code> ( <em class="parameter"><code>Y</code></em>
+          <code class="type">double precision</code>, <em class="parameter"><code>X</code></em>
+          <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>
+          Computes the <span class="quote">“<span class="quote">sum of squares</span>”</span> of the
+          independent variable,
+          <code class="literal">sum(<em class="parameter"><code>X</code></em>^2) - sum(<em class="parameter"><code>X</code></em>)^2/<em class="parameter"><code>N</code></em></code>.
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.11.1.1.1" class="indexterm"></a>
+          <code class="function">regr_sxy</code> ( <em class="parameter"><code>Y</code></em>
+          <code class="type">double precision</code>, <em class="parameter"><code>X</code></em>
+          <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>
+          Computes the <span class="quote">“<span class="quote">sum of products</span>”</span> of
+          independent times dependent variables,
+          <code class="literal">sum(<em class="parameter"><code>X</code></em>*<em class="parameter"><code>Y</code></em>) - sum(<em class="parameter"><code>X</code></em>)* sum(<em class="parameter"><code>Y</code></em>)/<em class="parameter"><code>N</code></em></code>.
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.12.1.1.1" class="indexterm"></a>
+          <code class="function">regr_syy</code> ( <em class="parameter"><code>Y</code></em>
+          <code class="type">double precision</code>, <em class="parameter"><code>X</code></em>
+          <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>
+          Computes the <span class="quote">“<span class="quote">sum of squares</span>”</span> of the
+          dependent variable,
+          <code class="literal">sum(<em class="parameter"><code>Y</code></em>^2) - sum(<em class="parameter"><code>Y</code></em>)^2/<em class="parameter"><code>N</code></em></code>.
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.13.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.27.13.2.4.13.1.1.2" class="indexterm"></a>
+          <code class="function">stddev</code> (
+          <em class="replaceable"><code>numeric_type</code></em> ) →
+          <code class="returnvalue"></code> <code class="type">double precision</code> for
+          <code class="type">real</code> or <code class="type">double precision</code>, otherwise
+          <code class="type">numeric</code>
+        </p>
+        <p>This is a historical alias for <code class="function">stddev_samp</code>.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.14.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.27.13.2.4.14.1.1.2" class="indexterm"></a>
+          <code class="function">stddev_pop</code> (
+          <em class="replaceable"><code>numeric_type</code></em> ) →
+          <code class="returnvalue"></code> <code class="type">double precision</code> for
+          <code class="type">real</code> or <code class="type">double precision</code>, otherwise
+          <code class="type">numeric</code>
+        </p>
+        <p>Computes the population standard deviation of the input values.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.15.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.27.13.2.4.15.1.1.2" class="indexterm"></a>
+          <code class="function">stddev_samp</code> (
+          <em class="replaceable"><code>numeric_type</code></em> ) →
+          <code class="returnvalue"></code> <code class="type">double precision</code> for
+          <code class="type">real</code> or <code class="type">double precision</code>, otherwise
+          <code class="type">numeric</code>
+        </p>
+        <p>Computes the sample standard deviation of the input values.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.16.1.1.1" class="indexterm"></a>
+          <code class="function">variance</code> (
+          <em class="replaceable"><code>numeric_type</code></em> ) →
+          <code class="returnvalue"></code> <code class="type">double precision</code> for
+          <code class="type">real</code> or <code class="type">double precision</code>, otherwise
+          <code class="type">numeric</code>
+        </p>
+        <p>This is a historical alias for <code class="function">var_samp</code>.</p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.17.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.27.13.2.4.17.1.1.2" class="indexterm"></a>
+          <code class="function">var_pop</code> (
+          <em class="replaceable"><code>numeric_type</code></em> ) →
+          <code class="returnvalue"></code> <code class="type">double precision</code> for
+          <code class="type">real</code> or <code class="type">double precision</code>, otherwise
+          <code class="type">numeric</code>
+        </p>
+        <p>
+          Computes the population variance of the input values (square of the population standard
+          deviation).
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.13.2.4.18.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.27.13.2.4.18.1.1.2" class="indexterm"></a>
+          <code class="function">var_samp</code> (
+          <em class="replaceable"><code>numeric_type</code></em> ) →
+          <code class="returnvalue"></code> <code class="type">double precision</code> for
+          <code class="type">real</code> or <code class="type">double precision</code>, otherwise
+          <code class="type">numeric</code>
+        </p>
+        <p>
+          Computes the sample variance of the input values (square of the sample standard
+          deviation).
+        </p>
+      </td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
 
-[Table 9.61](functions-aggregate#FUNCTIONS-ORDEREDSET-TABLE) shows some aggregate functions that use the *ordered-set aggregate* syntax. These functions are sometimes referred to as “inverse distribution” functions. Their aggregated input is introduced by `ORDER BY`, and they may also take a *direct argument* that is not aggregated, but is computed only once. All these functions ignore null values in their aggregated input. For those that take a *`fraction`* parameter, the fraction value must be between 0 and 1; an error is thrown if not. However, a null *`fraction`* value simply produces a null result.
+[Table 9.61](functions-aggregate#FUNCTIONS-ORDEREDSET-TABLE) shows some aggregate functions that use the _ordered-set aggregate_ syntax. These functions are sometimes referred to as “inverse distribution” functions. Their aggregated input is introduced by `ORDER BY`, and they may also take a _direct argument_ that is not aggregated, but is computed only once. All these functions ignore null values in their aggregated input. For those that take a _`fraction`_ parameter, the fraction value must be between 0 and 1; an error is thrown if not. However, a null _`fraction`_ value simply produces a null result.
 
 [#id](#FUNCTIONS-ORDEREDSET-TABLE)
 
 **Table 9.61. Ordered-Set Aggregate Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Partial Mode |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| `mode` () `WITHIN GROUP` ( `ORDER BY` `anyelement` ) → `anyelement`Computes the *mode*, the most frequent value of the aggregated argument (arbitrarily choosing the first one if there are multiple equally-frequent values). The aggregated argument must be of a sortable type.                                                                                                                                                                                             | No           |
-| `percentile_cont` ( *`fraction`* `double precision` ) `WITHIN GROUP` ( `ORDER BY` `double precision` ) → `double precision``percentile_cont` ( *`fraction`* `double precision` ) `WITHIN GROUP` ( `ORDER BY` `interval` ) → `interval`Computes the *continuous percentile*, a value corresponding to the specified *`fraction`* within the ordered set of aggregated argument values. This will interpolate between adjacent input items if needed.                            | No           |
-| `percentile_cont` ( *`fractions`* `double precision[]` ) `WITHIN GROUP` ( `ORDER BY` `double precision` ) → `double precision[]``percentile_cont` ( *`fractions`* `double precision[]` ) `WITHIN GROUP` ( `ORDER BY` `interval` ) → `interval[]`Computes multiple continuous percentiles. The result is an array of the same dimensions as the *`fractions`* parameter, with each non-null element replaced by the (possibly interpolated) value corresponding to that percentile. | No           |
-| `percentile_disc` ( *`fraction`* `double precision` ) `WITHIN GROUP` ( `ORDER BY` `anyelement` ) → `anyelement`Computes the *discrete percentile*, the first value within the ordered set of aggregated argument values whose position in the ordering equals or exceeds the specified *`fraction`*. The aggregated argument must be of a sortable type.                                                                                                                       | No           |
-| `percentile_disc` ( *`fractions`* `double precision[]` ) `WITHIN GROUP` ( `ORDER BY` `anyelement` ) → `anyarray`Computes multiple discrete percentiles. The result is an array of the same dimensions as the *`fractions`* parameter, with each non-null element replaced by the input value corresponding to that percentile. The aggregated argument must be of a sortable type.                                                                                                 | No           |
+<table class="table" summary="Ordered-Set Aggregate Functions" border="1">
+  <colgroup>
+    <col class="col1" />
+    <col class="col2" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+      <th>Partial Mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.17.2.4.1.1.1.1" class="indexterm"></a>
+          <code class="function">mode</code> () <code class="literal">WITHIN GROUP</code> (
+          <code class="literal">ORDER BY</code> <code class="type">anyelement</code> ) →
+          <code class="returnvalue">anyelement</code>
+        </p>
+        <p>
+          Computes the <em class="firstterm">mode</em>, the most frequent value of the aggregated
+          argument (arbitrarily choosing the first one if there are multiple equally-frequent
+          values). The aggregated argument must be of a sortable type.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.17.2.4.2.1.1.1" class="indexterm"></a>
+          <code class="function">percentile_cont</code> (
+          <em class="parameter"><code>fraction</code></em>
+          <code class="type">double precision</code> ) <code class="literal">WITHIN GROUP</code> (
+          <code class="literal">ORDER BY</code> <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">percentile_cont</code> (
+          <em class="parameter"><code>fraction</code></em>
+          <code class="type">double precision</code> ) <code class="literal">WITHIN GROUP</code> (
+          <code class="literal">ORDER BY</code> <code class="type">interval</code> ) →
+          <code class="returnvalue">interval</code>
+        </p>
+        <p>
+          Computes the <em class="firstterm">continuous percentile</em>, a value corresponding to
+          the specified <em class="parameter"><code>fraction</code></em>
+          within the ordered set of aggregated argument values. This will interpolate between
+          adjacent input items if needed.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <code class="function">percentile_cont</code> (
+          <em class="parameter"><code>fractions</code></em>
+          <code class="type">double precision[]</code> ) <code class="literal">WITHIN GROUP</code> (
+          <code class="literal">ORDER BY</code> <code class="type">double precision</code> ) →
+          <code class="returnvalue">double precision[]</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">percentile_cont</code> (
+          <em class="parameter"><code>fractions</code></em>
+          <code class="type">double precision[]</code> ) <code class="literal">WITHIN GROUP</code> (
+          <code class="literal">ORDER BY</code> <code class="type">interval</code> ) →
+          <code class="returnvalue">interval[]</code>
+        </p>
+        <p>
+          Computes multiple continuous percentiles. The result is an array of the same dimensions as
+          the <em class="parameter"><code>fractions</code></em>
+          parameter, with each non-null element replaced by the (possibly interpolated) value
+          corresponding to that percentile.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.17.2.4.4.1.1.1" class="indexterm"></a>
+          <code class="function">percentile_disc</code> (
+          <em class="parameter"><code>fraction</code></em>
+          <code class="type">double precision</code> ) <code class="literal">WITHIN GROUP</code> (
+          <code class="literal">ORDER BY</code> <code class="type">anyelement</code> ) →
+          <code class="returnvalue">anyelement</code>
+        </p>
+        <p>
+          Computes the <em class="firstterm">discrete percentile</em>, the first value within the
+          ordered set of aggregated argument values whose position in the ordering equals or exceeds
+          the specified <em class="parameter"><code>fraction</code></em>. The aggregated argument must be of a sortable type.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <code class="function">percentile_disc</code> (
+          <em class="parameter"><code>fractions</code></em>
+          <code class="type">double precision[]</code> ) <code class="literal">WITHIN GROUP</code> (
+          <code class="literal">ORDER BY</code> <code class="type">anyelement</code> ) →
+          <code class="returnvalue">anyarray</code>
+        </p>
+        <p>
+          Computes multiple discrete percentiles. The result is an array of the same dimensions as
+          the <em class="parameter"><code>fractions</code></em> parameter, with each non-null
+          element replaced by the input value corresponding to that percentile. The aggregated
+          argument must be of a sortable type.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
 
-Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-aggregate#FUNCTIONS-HYPOTHETICAL-TABLE) is associated with a window function of the same name defined in [Section 9.22](functions-window). In each case, the aggregate's result is the value that the associated window function would have returned for the “hypothetical” row constructed from *`args`*, if such a row had been added to the sorted group of rows represented by the *`sorted_args`*. For each of these functions, the list of direct arguments given in *`args`* must match the number and types of the aggregated arguments given in *`sorted_args`*. Unlike most built-in aggregates, these aggregates are not strict, that is they do not drop input rows containing nulls. Null values sort according to the rule specified in the `ORDER BY` clause.
+Each of the “hypothetical-set” aggregates listed in [Table 9.62](functions-aggregate#FUNCTIONS-HYPOTHETICAL-TABLE) is associated with a window function of the same name defined in [Section 9.22](functions-window). In each case, the aggregate's result is the value that the associated window function would have returned for the “hypothetical” row constructed from _`args`_, if such a row had been added to the sorted group of rows represented by the _`sorted_args`_. For each of these functions, the list of direct arguments given in _`args`_ must match the number and types of the aggregated arguments given in _`sorted_args`_. Unlike most built-in aggregates, these aggregates are not strict, that is they do not drop input rows containing nulls. Null values sort according to the rule specified in the `ORDER BY` clause.
 
 [#id](#FUNCTIONS-HYPOTHETICAL-TABLE)
 
 **Table 9.62. Hypothetical-Set Aggregate Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                             | Partial Mode |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| `rank` ( *`args`* ) `WITHIN GROUP` ( `ORDER BY` *`sorted_args`* ) → `bigint`Computes the rank of the hypothetical row, with gaps; that is, the row number of the first row in its peer group.                                                               | No           |
-| `dense_rank` ( *`args`* ) `WITHIN GROUP` ( `ORDER BY` *`sorted_args`* ) → `bigint`Computes the rank of the hypothetical row, without gaps; this function effectively counts peer groups.                                                                    | No           |
-| `percent_rank` ( *`args`* ) `WITHIN GROUP` ( `ORDER BY` *`sorted_args`* ) → `double precision`Computes the relative rank of the hypothetical row, that is (`rank` - 1) / (total rows - 1). The value thus ranges from 0 to 1 inclusive.                     | No           |
-| `cume_dist` ( *`args`* ) `WITHIN GROUP` ( `ORDER BY` *`sorted_args`* ) → `double precision`Computes the cumulative distribution, that is (number of rows preceding or peers with hypothetical row) / (total rows). The value thus ranges from 1/*`N`* to 1. | No           |
+<table class="table" summary="Hypothetical-Set Aggregate Functions" border="1">
+  <colgroup>
+    <col class="col1" />
+    <col class="col2" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+      <th>Partial Mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.20.2.4.1.1.1.1" class="indexterm"></a>
+          <code class="function">rank</code> ( <em class="replaceable"><code>args</code></em> )
+          <code class="literal">WITHIN GROUP</code> ( <code class="literal">ORDER BY</code>
+          <em class="replaceable"><code>sorted_args</code></em> ) →
+          <code class="returnvalue">bigint</code>
+        </p>
+        <p>
+          Computes the rank of the hypothetical row, with gaps; that is, the row number of the first
+          row in its peer group.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.20.2.4.2.1.1.1" class="indexterm"></a>
+          <code class="function">dense_rank</code> (
+          <em class="replaceable"><code>args</code></em> )
+          <code class="literal">WITHIN GROUP</code> ( <code class="literal">ORDER BY</code>
+          <em class="replaceable"><code>sorted_args</code></em> ) →
+          <code class="returnvalue">bigint</code>
+        </p>
+        <p>
+          Computes the rank of the hypothetical row, without gaps; this function effectively counts
+          peer groups.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.20.2.4.3.1.1.1" class="indexterm"></a>
+          <code class="function">percent_rank</code> (
+          <em class="replaceable"><code>args</code></em> )
+          <code class="literal">WITHIN GROUP</code> ( <code class="literal">ORDER BY</code>
+          <em class="replaceable"><code>sorted_args</code></em> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>
+          Computes the relative rank of the hypothetical row, that is (<code class="function">rank</code>
+          - 1) / (total rows - 1). The value thus ranges from 0 to 1 inclusive.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.20.2.4.4.1.1.1" class="indexterm"></a>
+          <code class="function">cume_dist</code> ( <em class="replaceable"><code>args</code></em> )
+          <code class="literal">WITHIN GROUP</code> ( <code class="literal">ORDER BY</code>
+          <em class="replaceable"><code>sorted_args</code></em> ) →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>
+          Computes the cumulative distribution, that is (number of rows preceding or peers with
+          hypothetical row) / (total rows). The value thus ranges from 1/<em class="parameter"><code>N</code></em>
+          to 1.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
 
 [#id](#FUNCTIONS-GROUPING-TABLE)
 
 **Table 9.63. Grouping Operations**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `GROUPING` ( *`group_by_expression(s)`* ) → `integer`Returns a bit mask indicating which `GROUP BY` expressions are not included in the current grouping set. Bits are assigned with the rightmost argument corresponding to the least-significant bit; each bit is 0 if the corresponding expression is included in the grouping criteria of the grouping set generating the current result row, and 1 if it is not included. |
+<table class="table" summary="Grouping Operations" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.27.21.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">GROUPING</code> (
+          <em class="replaceable"><code>group_by_expression(s)</code></em> ) →
+          <code class="returnvalue">integer</code>
+        </p>
+        <p>
+          Returns a bit mask indicating which <code class="literal">GROUP BY</code>
+          expressions are not included in the current grouping set. Bits are assigned with the
+          rightmost argument corresponding to the least-significant bit; each bit is 0 if the
+          corresponding expression is included in the grouping criteria of the grouping set
+          generating the current result row, and 1 if it is not included.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 The grouping operations shown in [Table 9.63](functions-aggregate#FUNCTIONS-GROUPING-TABLE) are used in conjunction with grouping sets (see [Section 7.2.4](queries-table-expressions#QUERIES-GROUPING-SETS)) to distinguish result rows. The arguments to the `GROUPING` function are not actually evaluated, but they must exactly match expressions given in the `GROUP BY` clause of the associated query level. For example:
 

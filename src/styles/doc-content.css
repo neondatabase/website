@@ -28,6 +28,19 @@
     }
   }
 
+  .table {
+    .func_table_entry > * {
+      margin-top: 0.1em;
+      margin-bottom: 0.1em;
+      padding-left: 4em;
+      text-align: left;
+    }
+
+    .func_signature {
+      text-indent: -3.5em;
+    }
+  }
+
   .tab-item {
     > * {
       &:first-child {

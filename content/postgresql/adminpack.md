@@ -10,20 +10,81 @@ The functions shown in [Table F.1](adminpack#FUNCTIONS-ADMINPACK-TABLE) provide
 
 **Table F.1. `adminpack` Functions**
 
-| FunctionDescription                                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------------------------------- |
-| `pg_catalog.pg_file_write` ( *`filename`* `text`, *`data`* `text`, *`append`* `boolean` ) → `bigint`Writes, or appends to, a text file. |
-| `pg_catalog.pg_file_sync` ( *`filename`* `text` ) → `void`Flushes a file or directory to disk.                                          |
-| `pg_catalog.pg_file_rename` ( *`oldname`* `text`, *`newname`* `text` \[, *`archivename`* `text` ] ) → `boolean`Renames a file.          |
-| `pg_catalog.pg_file_unlink` ( *`filename`* `text` ) → `boolean`Removes a file.                                                          |
-| `pg_catalog.pg_logdir_ls` () → `setof record`Lists the log files in the `log_directory` directory.                                      |
+<table class="table" summary="adminpack Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <div class="func_signature">Function</div>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">pg_catalog.pg_file_write</code> (
+          <em class="parameter"><code>filename</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>data</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>append</code></em> <code class="type">boolean</code> ) →
+          <code class="returnvalue">bigint</code>
+        </div>
+        <p>Writes, or appends to, a text file.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">pg_catalog.pg_file_sync</code> (
+          <em class="parameter"><code>filename</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">void</code>
+        </div>
+        <p>Flushes a file or directory to disk.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">pg_catalog.pg_file_rename</code> (
+          <em class="parameter"><code>oldname</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>newname</code></em> <code class="type">text</code> [<span
+            class="optional">, <em class="parameter"><code>archivename</code></em>
+            <code class="type">text</code> </span>] ) → <code class="returnvalue">boolean</code>
+        </div>
+        <p>Renames a file.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">pg_catalog.pg_file_unlink</code> (
+          <em class="parameter"><code>filename</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <p>Removes a file.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">pg_catalog.pg_logdir_ls</code> () →
+          <code class="returnvalue">setof record</code>
+        </div>
+        <p>Lists the log files in the <code class="varname">log_directory</code> directory.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-`pg_file_write` writes the specified *`data`* into the file named by *`filename`*. If *`append`* is false, the file must not already exist. If *`append`* is true, the file can already exist, and will be appended to if so. Returns the number of bytes written.
+`pg_file_write` writes the specified _`data`_ into the file named by _`filename`_. If _`append`_ is false, the file must not already exist. If _`append`_ is true, the file can already exist, and will be appended to if so. Returns the number of bytes written.
 
-`pg_file_sync` fsyncs the specified file or directory named by *`filename`*. An error is thrown on failure (e.g., the specified file is not present). Note that [data\_sync\_retry](runtime-config-error-handling#GUC-DATA-SYNC-RETRY) has no effect on this function, and therefore a PANIC-level error will not be raised even on failure to flush database files.
+`pg_file_sync` fsyncs the specified file or directory named by _`filename`_. An error is thrown on failure (e.g., the specified file is not present). Note that [data_sync_retry](runtime-config-error-handling#GUC-DATA-SYNC-RETRY) has no effect on this function, and therefore a PANIC-level error will not be raised even on failure to flush database files.
 
-`pg_file_rename` renames a file. If *`archivename`* is omitted or NULL, it simply renames *`oldname`* to *`newname`* (which must not already exist). If *`archivename`* is provided, it first renames *`newname`* to *`archivename`* (which must not already exist), and then renames *`oldname`* to *`newname`*. In event of failure of the second rename step, it will try to rename *`archivename`* back to *`newname`* before reporting the error. Returns true on success, false if the source file(s) are not present or not writable; other cases throw errors.
+`pg_file_rename` renames a file. If _`archivename`_ is omitted or NULL, it simply renames _`oldname`_ to _`newname`_ (which must not already exist). If _`archivename`_ is provided, it first renames _`newname`_ to _`archivename`_ (which must not already exist), and then renames _`oldname`_ to _`newname`_. In event of failure of the second rename step, it will try to rename _`archivename`_ back to _`newname`_ before reporting the error. Returns true on success, false if the source file(s) are not present or not writable; other cases throw errors.
 
 `pg_file_unlink` removes the specified file. Returns true on success, false if the specified file is not present or the `unlink()` call fails; other cases throw errors.
 
-`pg_logdir_ls` returns the start timestamps and path names of all the log files in the [log\_directory](runtime-config-logging#GUC-LOG-DIRECTORY) directory. The [log\_filename](runtime-config-logging#GUC-LOG-FILENAME) parameter must have its default setting (`postgresql-%Y-%m-%d_%H%M%S.log`) to use this function.
+`pg_logdir_ls` returns the start timestamps and path names of all the log files in the [log_directory](runtime-config-logging#GUC-LOG-DIRECTORY) directory. The [log_filename](runtime-config-logging#GUC-LOG-FILENAME) parameter must have its default setting (`postgresql-%Y-%m-%d_%H%M%S.log`) to use this function.

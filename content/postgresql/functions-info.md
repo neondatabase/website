@@ -2,16 +2,16 @@
 
 ## 9.26. System Information Functions and Operators [#](#FUNCTIONS-INFO)
 
-  * [9.26.1. Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
-  * [9.26.2. Access Privilege Inquiry Functions](functions-info#FUNCTIONS-INFO-ACCESS)
-  * [9.26.3. Schema Visibility Inquiry Functions](functions-info#FUNCTIONS-INFO-SCHEMA)
-  * [9.26.4. System Catalog Information Functions](functions-info#FUNCTIONS-INFO-CATALOG)
-  * [9.26.5. Object Information and Addressing Functions](functions-info#FUNCTIONS-INFO-OBJECT)
-  * [9.26.6. Comment Information Functions](functions-info#FUNCTIONS-INFO-COMMENT)
-  * [9.26.7. Data Validity Checking Functions](functions-info#FUNCTIONS-INFO-VALIDITY)
-  * [9.26.8. Transaction ID and Snapshot Information Functions](functions-info#FUNCTIONS-INFO-SNAPSHOT)
-  * [9.26.9. Committed Transaction Information Functions](functions-info#FUNCTIONS-INFO-COMMIT-TIMESTAMP)
-  * [9.26.10. Control Data Functions](functions-info#FUNCTIONS-INFO-CONTROLDATA)
+- [9.26.1. Session Information Functions](functions-info#FUNCTIONS-INFO-SESSION)
+- [9.26.2. Access Privilege Inquiry Functions](functions-info#FUNCTIONS-INFO-ACCESS)
+- [9.26.3. Schema Visibility Inquiry Functions](functions-info#FUNCTIONS-INFO-SCHEMA)
+- [9.26.4. System Catalog Information Functions](functions-info#FUNCTIONS-INFO-CATALOG)
+- [9.26.5. Object Information and Addressing Functions](functions-info#FUNCTIONS-INFO-OBJECT)
+- [9.26.6. Comment Information Functions](functions-info#FUNCTIONS-INFO-COMMENT)
+- [9.26.7. Data Validity Checking Functions](functions-info#FUNCTIONS-INFO-VALIDITY)
+- [9.26.8. Transaction ID and Snapshot Information Functions](functions-info#FUNCTIONS-INFO-SNAPSHOT)
+- [9.26.9. Committed Transaction Information Functions](functions-info#FUNCTIONS-INFO-COMMIT-TIMESTAMP)
+- [9.26.10. Control Data Functions](functions-info#FUNCTIONS-INFO-CONTROLDATA)
 
 The functions described in this section are used to obtain various information about a PostgreSQL installation.
 
@@ -27,35 +27,421 @@ In addition to the functions listed in this section, there are a number of funct
 
 **Table 9.67. Session Information Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `current_catalog` → `name``current_database` () → `name`Returns the name of the current database. (Databases are called “catalogs” in the SQL standard, so `current_catalog` is the standard's spelling.)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `current_query` () → `text`Returns the text of the currently executing query, as submitted by the client (which might contain more than one statement).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `current_role` → `name`This is equivalent to `current_user`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `current_schema` → `name``current_schema` () → `name`Returns the name of the schema that is first in the search path (or a null value if the search path is empty). This is the schema that will be used for any tables or other named objects that are created without specifying a target schema.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `current_schemas` ( *`include_implicit`* `boolean` ) → `name[]`Returns an array of the names of all schemas presently in the effective search path, in their priority order. (Items in the current [search\_path](runtime-config-client#GUC-SEARCH-PATH) setting that do not correspond to existing, searchable schemas are omitted.) If the Boolean argument is `true`, then implicitly-searched system schemas such as `pg_catalog` are included in the result.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `current_user` → `name`Returns the user name of the current execution context.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `inet_client_addr` () → `inet`Returns the IP address of the current client, or `NULL` if the current connection is via a Unix-domain socket.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `inet_client_port` () → `integer`Returns the IP port number of the current client, or `NULL` if the current connection is via a Unix-domain socket.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `inet_server_addr` () → `inet`Returns the IP address on which the server accepted the current connection, or `NULL` if the current connection is via a Unix-domain socket.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `inet_server_port` () → `integer`Returns the IP port number on which the server accepted the current connection, or `NULL` if the current connection is via a Unix-domain socket.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `pg_backend_pid` () → `integer`Returns the process ID of the server process attached to the current session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `pg_blocking_pids` ( `integer` ) → `integer[]`Returns an array of the process ID(s) of the sessions that are blocking the server process with the specified process ID from acquiring a lock, or an empty array if there is no such server process or it is not blocked.One server process blocks another if it either holds a lock that conflicts with the blocked process's lock request (hard block), or is waiting for a lock that would conflict with the blocked process's lock request and is ahead of it in the wait queue (soft block). When using parallel queries the result always lists client-visible process IDs (that is, `pg_backend_pid` results) even if the actual lock is held or awaited by a child worker process. As a result of that, there may be duplicated PIDs in the result. Also note that when a prepared transaction holds a conflicting lock, it will be represented by a zero process ID.Frequent calls to this function could have some impact on database performance, because it needs exclusive access to the lock manager's shared state for a short time. |
-| `pg_conf_load_time` () → `timestamp with time zone`Returns the time when the server configuration files were last loaded. If the current session was alive at the time, this will be the time when the session itself re-read the configuration files (so the reading will vary a little in different sessions). Otherwise it is the time when the postmaster process re-read the configuration files.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `pg_current_logfile` ( \[ `text` ] ) → `text`Returns the path name of the log file currently in use by the logging collector. The path includes the [log\_directory](runtime-config-logging#GUC-LOG-DIRECTORY) directory and the individual log file name. The result is `NULL` if the logging collector is disabled. When multiple log files exist, each in a different format, `pg_current_logfile` without an argument returns the path of the file having the first format found in the ordered list: `stderr`, `csvlog`, `jsonlog`. `NULL` is returned if no log file has any of these formats. To request information about a specific log file format, supply either `csvlog`, `jsonlog` or `stderr` as the value of the optional parameter. The result is `NULL` if the log format requested is not configured in [log\_destination](runtime-config-logging#GUC-LOG-DESTINATION). The result reflects the contents of the `current_logfiles` file.                                                                                                                   |
-| `pg_my_temp_schema` () → `oid`Returns the OID of the current session's temporary schema, or zero if it has none (because it has not created any temporary tables).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `pg_is_other_temp_schema` ( `oid` ) → `boolean`Returns true if the given OID is the OID of another session's temporary schema. (This can be useful, for example, to exclude other sessions' temporary tables from a catalog display.)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `pg_jit_available` () → `boolean`Returns true if a JIT compiler extension is available (see [Chapter 32](jit)) and the [jit](runtime-config-query#GUC-JIT) configuration parameter is set to `on`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `pg_listening_channels` () → `setof text`Returns the set of names of asynchronous notification channels that the current session is listening to.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `pg_notification_queue_usage` () → `double precision`Returns the fraction (0–1) of the asynchronous notification queue's maximum size that is currently occupied by notifications that are waiting to be processed. See [LISTEN](sql-listen) and [NOTIFY](sql-notify) for more information.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `pg_postmaster_start_time` () → `timestamp with time zone`Returns the time when the server started.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `pg_safe_snapshot_blocking_pids` ( `integer` ) → `integer[]`Returns an array of the process ID(s) of the sessions that are blocking the server process with the specified process ID from acquiring a safe snapshot, or an empty array if there is no such server process or it is not blocked.A session running a `SERIALIZABLE` transaction blocks a `SERIALIZABLE READ ONLY DEFERRABLE` transaction from acquiring a snapshot until the latter determines that it is safe to avoid taking any predicate locks. See [Section 13.2.3](transaction-iso#XACT-SERIALIZABLE) for more information about serializable and deferrable transactions.Frequent calls to this function could have some impact on database performance, because it needs access to the predicate lock manager's shared state for a short time.                                                                                                                                                                                                                                                                          |
-| `pg_trigger_depth` () → `integer`Returns the current nesting level of PostgreSQL triggers (0 if not called, directly or indirectly, from inside a trigger).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `session_user` → `name`Returns the session user's name.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `system_user` → `text`Returns the authentication method and the identity (if any) that the user presented during the authentication cycle before they were assigned a database role. It is represented as `auth_method:identity` or `NULL` if the user has not been authenticated (for example if [Trust authentication](auth-trust) has been used).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `user` → `name`This is equivalent to `current_user`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `version` () → `text`Returns a string describing the PostgreSQL server's version. You can also get this information from [server\_version](runtime-config-preset#GUC-SERVER-VERSION), or for a machine-readable version use [server\_version\_num](runtime-config-preset#GUC-SERVER-VERSION-NUM). Software developers should use `server_version_num` (available since 8.2) or [`PQserverVersion`](libpq-status#LIBPQ-PQSERVERVERSION) instead of parsing the text version.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-
+<table class="table" summary="Session Information Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">current_catalog</code>
+          → <code class="returnvalue">name</code>
+        </p>
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.1.1.2.1" class="indexterm"></a>
+          <code class="function">current_database</code> () → <code class="returnvalue">name</code>
+        </p>
+        <p>
+          Returns the name of the current database. (Databases are called
+          <span class="quote">“<span class="quote">catalogs</span>”</span> in the SQL standard, so
+          <code class="function">current_catalog</code> is the standard's spelling.)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">current_query</code> () → <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Returns the text of the currently executing query, as submitted by the client (which might
+          contain more than one statement).
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.3.1.1.1" class="indexterm"></a>
+          <code class="function">current_role</code>
+          → <code class="returnvalue">name</code>
+        </p>
+        <p>This is equivalent to <code class="function">current_user</code>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.4.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.32.3.4.2.2.4.1.1.2" class="indexterm"></a>
+          <code class="function">current_schema</code>
+          → <code class="returnvalue">name</code>
+        </p>
+        <p class="func_signature">
+          <code class="function">current_schema</code> () → <code class="returnvalue">name</code>
+        </p>
+        <p>
+          Returns the name of the schema that is first in the search path (or a null value if the
+          search path is empty). This is the schema that will be used for any tables or other named
+          objects that are created without specifying a target schema.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.5.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.32.3.4.2.2.5.1.1.2" class="indexterm"></a>
+          <code class="function">current_schemas</code> (
+          <em class="parameter"><code>include_implicit</code></em>
+          <code class="type">boolean</code> ) → <code class="returnvalue">name[]</code>
+        </p>
+        <p>
+          Returns an array of the names of all schemas presently in the effective search path, in
+          their priority order. (Items in the current
+          <a class="xref" href="runtime-config-client.html#GUC-SEARCH-PATH">search_path</a> setting
+          that do not correspond to existing, searchable schemas are omitted.) If the Boolean
+          argument is <code class="literal">true</code>, then implicitly-searched system schemas
+          such as <code class="literal">pg_catalog</code> are included in the result.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.6.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.32.3.4.2.2.6.1.1.2" class="indexterm"></a>
+          <code class="function">current_user</code>
+          → <code class="returnvalue">name</code>
+        </p>
+        <p>Returns the user name of the current execution context.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.7.1.1.1" class="indexterm"></a>
+          <code class="function">inet_client_addr</code> () → <code class="returnvalue">inet</code>
+        </p>
+        <p>
+          Returns the IP address of the current client, or <code class="literal">NULL</code> if the
+          current connection is via a Unix-domain socket.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.8.1.1.1" class="indexterm"></a>
+          <code class="function">inet_client_port</code> () →
+          <code class="returnvalue">integer</code>
+        </p>
+        <p>
+          Returns the IP port number of the current client, or <code class="literal">NULL</code> if
+          the current connection is via a Unix-domain socket.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.9.1.1.1" class="indexterm"></a>
+          <code class="function">inet_server_addr</code> () → <code class="returnvalue">inet</code>
+        </p>
+        <p>
+          Returns the IP address on which the server accepted the current connection, or
+          <code class="literal">NULL</code> if the current connection is via a Unix-domain socket.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.10.1.1.1" class="indexterm"></a>
+          <code class="function">inet_server_port</code> () →
+          <code class="returnvalue">integer</code>
+        </p>
+        <p>
+          Returns the IP port number on which the server accepted the current connection, or
+          <code class="literal">NULL</code> if the current connection is via a Unix-domain socket.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.11.1.1.1" class="indexterm"></a>
+          <code class="function">pg_backend_pid</code> () → <code class="returnvalue">integer</code>
+        </p>
+        <p>Returns the process ID of the server process attached to the current session.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.12.1.1.1" class="indexterm"></a>
+          <code class="function">pg_blocking_pids</code> ( <code class="type">integer</code> ) →
+          <code class="returnvalue">integer[]</code>
+        </p>
+        <p>
+          Returns an array of the process ID(s) of the sessions that are blocking the server process
+          with the specified process ID from acquiring a lock, or an empty array if there is no such
+          server process or it is not blocked.
+        </p>
+        <p>
+          One server process blocks another if it either holds a lock that conflicts with the
+          blocked process's lock request (hard block), or is waiting for a lock that would conflict
+          with the blocked process's lock request and is ahead of it in the wait queue (soft block).
+          When using parallel queries the result always lists client-visible process IDs (that is,
+          <code class="function">pg_backend_pid</code> results) even if the actual lock is held or
+          awaited by a child worker process. As a result of that, there may be duplicated PIDs in
+          the result. Also note that when a prepared transaction holds a conflicting lock, it will
+          be represented by a zero process ID.
+        </p>
+        <p>
+          Frequent calls to this function could have some impact on database performance, because it
+          needs exclusive access to the lock manager's shared state for a short time.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.13.1.1.1" class="indexterm"></a>
+          <code class="function">pg_conf_load_time</code> () →
+          <code class="returnvalue">timestamp with time zone</code>
+        </p>
+        <p>
+          Returns the time when the server configuration files were last loaded. If the current
+          session was alive at the time, this will be the time when the session itself re-read the
+          configuration files (so the reading will vary a little in different sessions). Otherwise
+          it is the time when the postmaster process re-read the configuration files.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.14.1.1.1" class="indexterm"></a>
+          <a id="id-1.5.8.32.3.4.2.2.14.1.1.2" class="indexterm"></a>
+          <a id="id-1.5.8.32.3.4.2.2.14.1.1.3" class="indexterm"></a>
+          <a id="id-1.5.8.32.3.4.2.2.14.1.1.4" class="indexterm"></a>
+          <code class="function">pg_current_logfile</code> ( [<span class="optional">
+            <code class="type">text</code> </span>] ) → <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Returns the path name of the log file currently in use by the logging collector. The path
+          includes the
+          <a class="xref" href="runtime-config-logging.html#GUC-LOG-DIRECTORY">log_directory</a>
+          directory and the individual log file name. The result is
+          <code class="literal">NULL</code> if the logging collector is disabled. When multiple log
+          files exist, each in a different format,
+          <code class="function">pg_current_logfile</code> without an argument returns the path of
+          the file having the first format found in the ordered list:
+          <code class="literal">stderr</code>, <code class="literal">csvlog</code>,
+          <code class="literal">jsonlog</code>. <code class="literal">NULL</code> is returned if no
+          log file has any of these formats. To request information about a specific log file
+          format, supply either <code class="literal">csvlog</code>,
+          <code class="literal">jsonlog</code> or <code class="literal">stderr</code> as the value
+          of the optional parameter. The result is <code class="literal">NULL</code>
+          if the log format requested is not configured in
+          <a class="xref" href="runtime-config-logging.html#GUC-LOG-DESTINATION">log_destination</a>. The result reflects the contents of the
+          <code class="filename">current_logfiles</code> file.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.15.1.1.1" class="indexterm"></a>
+          <code class="function">pg_my_temp_schema</code> () → <code class="returnvalue">oid</code>
+        </p>
+        <p>
+          Returns the OID of the current session's temporary schema, or zero if it has none (because
+          it has not created any temporary tables).
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.16.1.1.1" class="indexterm"></a>
+          <code class="function">pg_is_other_temp_schema</code> ( <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Returns true if the given OID is the OID of another session's temporary schema. (This can
+          be useful, for example, to exclude other sessions' temporary tables from a catalog
+          display.)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.17.1.1.1" class="indexterm"></a>
+          <code class="function">pg_jit_available</code> () →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Returns true if a <acronym class="acronym">JIT</acronym> compiler extension is available
+          (see
+          <a class="xref" href="jit.html" title="Chapter 32. Just-in-Time Compilation (JIT)">Chapter 32</a>) and the <a class="xref" href="runtime-config-query.html#GUC-JIT">jit</a> configuration
+          parameter is set to <code class="literal">on</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.18.1.1.1" class="indexterm"></a>
+          <code class="function">pg_listening_channels</code> () →
+          <code class="returnvalue">setof text</code>
+        </p>
+        <p>
+          Returns the set of names of asynchronous notification channels that the current session is
+          listening to.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.19.1.1.1" class="indexterm"></a>
+          <code class="function">pg_notification_queue_usage</code> () →
+          <code class="returnvalue">double precision</code>
+        </p>
+        <p>
+          Returns the fraction (0–1) of the asynchronous notification queue's maximum size that is
+          currently occupied by notifications that are waiting to be processed. See
+          <a class="xref" href="sql-listen.html" title="LISTEN"
+            ><span class="refentrytitle">LISTEN</span></a>
+          and
+          <a class="xref" href="sql-notify.html" title="NOTIFY"><span class="refentrytitle">NOTIFY</span></a>
+          for more information.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.20.1.1.1" class="indexterm"></a>
+          <code class="function">pg_postmaster_start_time</code> () →
+          <code class="returnvalue">timestamp with time zone</code>
+        </p>
+        <p>Returns the time when the server started.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.21.1.1.1" class="indexterm"></a>
+          <code class="function">pg_safe_snapshot_blocking_pids</code> (
+          <code class="type">integer</code> ) → <code class="returnvalue">integer[]</code>
+        </p>
+        <p>
+          Returns an array of the process ID(s) of the sessions that are blocking the server process
+          with the specified process ID from acquiring a safe snapshot, or an empty array if there
+          is no such server process or it is not blocked.
+        </p>
+        <p>
+          A session running a <code class="literal">SERIALIZABLE</code> transaction blocks a
+          <code class="literal">SERIALIZABLE READ ONLY DEFERRABLE</code> transaction from acquiring
+          a snapshot until the latter determines that it is safe to avoid taking any predicate
+          locks. See
+          <a
+            class="xref"
+            href="transaction-iso.html#XACT-SERIALIZABLE"
+            title="13.2.3. Serializable Isolation Level">Section 13.2.3</a>
+          for more information about serializable and deferrable transactions.
+        </p>
+        <p>
+          Frequent calls to this function could have some impact on database performance, because it
+          needs access to the predicate lock manager's shared state for a short time.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.22.1.1.1" class="indexterm"></a>
+          <code class="function">pg_trigger_depth</code> () →
+          <code class="returnvalue">integer</code>
+        </p>
+        <p>
+          Returns the current nesting level of <span class="productname">PostgreSQL</span> triggers
+          (0 if not called, directly or indirectly, from inside a trigger).
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.23.1.1.1" class="indexterm"></a>
+          <code class="function">session_user</code>
+          → <code class="returnvalue">name</code>
+        </p>
+        <p>Returns the session user's name.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.24.1.1.1" class="indexterm"></a>
+          <code class="function">system_user</code>
+          → <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Returns the authentication method and the identity (if any) that the user presented during
+          the authentication cycle before they were assigned a database role. It is represented as
+          <code class="literal">auth_method:identity</code> or <code class="literal">NULL</code> if
+          the user has not been authenticated (for example if
+          <a class="link" href="auth-trust.html" title="21.4. Trust Authentication">Trust authentication</a>
+          has been used).
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.25.1.1.1" class="indexterm"></a>
+          <code class="function">user</code>
+          → <code class="returnvalue">name</code>
+        </p>
+        <p>This is equivalent to <code class="function">current_user</code>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.3.4.2.2.26.1.1.1" class="indexterm"></a>
+          <code class="function">version</code> () → <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Returns a string describing the <span class="productname">PostgreSQL</span>
+          server's version. You can also get this information from
+          <a class="xref" href="runtime-config-preset.html#GUC-SERVER-VERSION">server_version</a>,
+          or for a machine-readable version use
+          <a class="xref" href="runtime-config-preset.html#GUC-SERVER-VERSION-NUM">server_version_num</a>. Software developers should use
+          <code class="varname">server_version_num</code> (available since 8.2) or
+          <a class="xref" href="libpq-status.html#LIBPQ-PQSERVERVERSION"><code class="function">PQserverVersion</code></a>
+          instead of parsing the text version.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### Note
 
@@ -67,9 +453,7 @@ The `session_user` is normally the user who initiated the current database conne
 
 ### 9.26.2. Access Privilege Inquiry Functions [#](#FUNCTIONS-INFO-ACCESS)
 
-
-
-[Table 9.68](functions-info#FUNCTIONS-INFO-ACCESS-TABLE) lists functions that allow querying object access privileges programmatically. (See [Section 5.7](ddl-priv) for more information about privileges.) In these functions, the user whose privileges are being inquired about can be specified by name or by OID (`pg_authid`.`oid`), or if the name is given as `public` then the privileges of the PUBLIC pseudo-role are checked. Also, the *`user`* argument can be omitted entirely, in which case the `current_user` is assumed. The object that is being inquired about can be specified either by name or by OID, too. When specifying by name, a schema name can be included if relevant. The access privilege of interest is specified by a text string, which must evaluate to one of the appropriate privilege keywords for the object's type (e.g., `SELECT`). Optionally, `WITH GRANT OPTION` can be added to a privilege type to test whether the privilege is held with grant option. Also, multiple privilege types can be listed separated by commas, in which case the result will be true if any of the listed privileges is held. (Case of the privilege string is not significant, and extra whitespace is allowed between but not within privilege names.) Some examples:
+[Table 9.68](functions-info#FUNCTIONS-INFO-ACCESS-TABLE) lists functions that allow querying object access privileges programmatically. (See [Section 5.7](ddl-priv) for more information about privileges.) In these functions, the user whose privileges are being inquired about can be specified by name or by OID (`pg_authid`.`oid`), or if the name is given as `public` then the privileges of the PUBLIC pseudo-role are checked. Also, the _`user`_ argument can be omitted entirely, in which case the `current_user` is assumed. The object that is being inquired about can be specified either by name or by OID, too. When specifying by name, a schema name can be included if relevant. The access privilege of interest is specified by a text string, which must evaluate to one of the appropriate privilege keywords for the object's type (e.g., `SELECT`). Optionally, `WITH GRANT OPTION` can be added to a privilege type to test whether the privilege is held with grant option. Also, multiple privilege types can be listed separated by commas, in which case the result will be true if any of the listed privileges is held. (Case of the privilege string is not significant, and extra whitespace is allowed between but not within privilege names.) Some examples:
 
 ```
 
@@ -81,27 +465,298 @@ SELECT has_table_privilege('joe', 'mytable', 'INSERT, SELECT WITH GRANT OPTION')
 
 **Table 9.68. Access Privilege Inquiry Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `has_any_column_privilege` ( \[ *`user`* `name` or `oid`, ] *`table`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for any column of table? This succeeds either if the privilege is held for the whole table, or if there is a column-level grant of the privilege for at least one column. Allowable privilege types are `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES`.                                                                                                                                                                                                                                                                                  |
-| `has_column_privilege` ( \[ *`user`* `name` or `oid`, ] *`table`* `text` or `oid`, *`column`* `text` or `smallint`, *`privilege`* `text` ) → `boolean`Does user have privilege for the specified table column? This succeeds either if the privilege is held for the whole table, or if there is a column-level grant of the privilege for the column. The column can be specified by name or by attribute number (`pg_attribute`.`attnum`). Allowable privilege types are `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES`.                                                                                                                                                                 |
-| `has_database_privilege` ( \[ *`user`* `name` or `oid`, ] *`database`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for database? Allowable privilege types are `CREATE`, `CONNECT`, `TEMPORARY`, and `TEMP` (which is equivalent to `TEMPORARY`).                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `has_foreign_data_wrapper_privilege` ( \[ *`user`* `name` or `oid`, ] *`fdw`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for foreign-data wrapper? The only allowable privilege type is `USAGE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `has_function_privilege` ( \[ *`user`* `name` or `oid`, ] *`function`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for function? The only allowable privilege type is `EXECUTE`.When specifying a function by name rather than by OID, the allowed input is the same as for the `regprocedure` data type (see [Section 8.19](datatype-oid)). An example is:```
-
+<table class="table" summary="Access Privilege Inquiry Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">has_any_column_privilege</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>table</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>privilege</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for any column of table? This succeeds either if the privilege is
+          held for the whole table, or if there is a column-level grant of the privilege for at
+          least one column. Allowable privilege types are
+          <code class="literal">SELECT</code>, <code class="literal">INSERT</code>,
+          <code class="literal">UPDATE</code>, and <code class="literal">REFERENCES</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">has_column_privilege</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>table</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>column</code></em>
+          <code class="type">text</code> or <code class="type">smallint</code>,
+          <em class="parameter"><code>privilege</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for the specified table column? This succeeds either if the
+          privilege is held for the whole table, or if there is a column-level grant of the
+          privilege for the column. The column can be specified by name or by attribute number
+          (<code class="structname">pg_attribute</code>.<code class="structfield">attnum</code>).
+          Allowable privilege types are <code class="literal">SELECT</code>,
+          <code class="literal">INSERT</code>, <code class="literal">UPDATE</code>, and
+          <code class="literal">REFERENCES</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.3.1.1.1" class="indexterm"></a>
+          <code class="function">has_database_privilege</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>database</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>privilege</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for database? Allowable privilege types are
+          <code class="literal">CREATE</code>, <code class="literal">CONNECT</code>,
+          <code class="literal">TEMPORARY</code>, and <code class="literal">TEMP</code> (which is
+          equivalent to <code class="literal">TEMPORARY</code>).
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.4.1.1.1" class="indexterm"></a>
+          <code class="function">has_foreign_data_wrapper_privilege</code> ( [<span
+            class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>fdw</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>privilege</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for foreign-data wrapper? The only allowable privilege type is
+          <code class="literal">USAGE</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.5.1.1.1" class="indexterm"></a>
+          <code class="function">has_function_privilege</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>function</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>privilege</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for function? The only allowable privilege type is
+          <code class="literal">EXECUTE</code>.
+        </p>
+        <p>
+          When specifying a function by name rather than by OID, the allowed input is the same as
+          for the <code class="type">regprocedure</code> data type (see
+          <a class="xref" href="datatype-oid.html" title="8.19. Object Identifier Types">Section 8.19</a>). An example is:
+        </p>
+        <pre class="programlisting">
 SELECT has_function_privilege('joeuser', 'myfunc(int, text)', 'execute');
-```                                                                                                                                                                                                         |
-| `has_language_privilege` ( \[ *`user`* `name` or `oid`, ] *`language`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for language? The only allowable privilege type is `USAGE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `has_parameter_privilege` ( \[ *`user`* `name` or `oid`, ] *`parameter`* `text`, *`privilege`* `text` ) → `boolean`Does user have privilege for configuration parameter? The parameter name is case-insensitive. Allowable privilege types are `SET` and `ALTER SYSTEM`.                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `has_schema_privilege` ( \[ *`user`* `name` or `oid`, ] *`schema`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for schema? Allowable privilege types are `CREATE` and `USAGE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `has_sequence_privilege` ( \[ *`user`* `name` or `oid`, ] *`sequence`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for sequence? Allowable privilege types are `USAGE`, `SELECT`, and `UPDATE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `has_server_privilege` ( \[ *`user`* `name` or `oid`, ] *`server`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for foreign server? The only allowable privilege type is `USAGE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `has_table_privilege` ( \[ *`user`* `name` or `oid`, ] *`table`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for table? Allowable privilege types are `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, `REFERENCES`, and `TRIGGER`.                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `has_tablespace_privilege` ( \[ *`user`* `name` or `oid`, ] *`tablespace`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for tablespace? The only allowable privilege type is `CREATE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `has_type_privilege` ( \[ *`user`* `name` or `oid`, ] *`type`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for data type? The only allowable privilege type is `USAGE`. When specifying a type by name rather than by OID, the allowed input is the same as for the `regtype` data type (see [Section 8.19](datatype-oid)).                                                                                                                                                                                                                                                                                                                           |
-| `pg_has_role` ( \[ *`user`* `name` or `oid`, ] *`role`* `text` or `oid`, *`privilege`* `text` ) → `boolean`Does user have privilege for role? Allowable privilege types are `MEMBER`, `USAGE`, and `SET`. `MEMBER` denotes direct or indirect membership in the role without regard to what specific privileges may be conferred. `USAGE` denotes whether the privileges of the role are immediately available without doing `SET ROLE`, while `SET` denotes whether it is possible to change to the role using the `SET ROLE` command. This function does not allow the special case of setting *`user`* to `public`, because the PUBLIC pseudo-role can never be a member of real roles. |
-| `row_security_active` ( *`table`* `text` or `oid` ) → `boolean`Is row-level security active for the specified table in the context of the current user and current environment?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-
+</pre>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.6.1.1.1" class="indexterm"></a>
+          <code class="function">has_language_privilege</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>language</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>privilege</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for language? The only allowable privilege type is
+          <code class="literal">USAGE</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.7.1.1.1" class="indexterm"></a>
+          <code class="function">has_parameter_privilege</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>parameter</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>privilege</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for configuration parameter? The parameter name is
+          case-insensitive. Allowable privilege types are <code class="literal">SET</code> and
+          <code class="literal">ALTER SYSTEM</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.8.1.1.1" class="indexterm"></a>
+          <code class="function">has_schema_privilege</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>schema</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>privilege</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for schema? Allowable privilege types are
+          <code class="literal">CREATE</code> and <code class="literal">USAGE</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.9.1.1.1" class="indexterm"></a>
+          <code class="function">has_sequence_privilege</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>sequence</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>privilege</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for sequence? Allowable privilege types are
+          <code class="literal">USAGE</code>, <code class="literal">SELECT</code>, and
+          <code class="literal">UPDATE</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.10.1.1.1" class="indexterm"></a>
+          <code class="function">has_server_privilege</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>server</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>privilege</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for foreign server? The only allowable privilege type is
+          <code class="literal">USAGE</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.11.1.1.1" class="indexterm"></a>
+          <code class="function">has_table_privilege</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>table</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>privilege</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for table? Allowable privilege types are
+          <code class="literal">SELECT</code>, <code class="literal">INSERT</code>,
+          <code class="literal">UPDATE</code>, <code class="literal">DELETE</code>,
+          <code class="literal">TRUNCATE</code>, <code class="literal">REFERENCES</code>, and
+          <code class="literal">TRIGGER</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.12.1.1.1" class="indexterm"></a>
+          <code class="function">has_tablespace_privilege</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>tablespace</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>privilege</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for tablespace? The only allowable privilege type is
+          <code class="literal">CREATE</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.13.1.1.1" class="indexterm"></a>
+          <code class="function">has_type_privilege</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>type</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>privilege</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for data type? The only allowable privilege type is
+          <code class="literal">USAGE</code>. When specifying a type by name rather than by OID, the
+          allowed input is the same as for the <code class="type">regtype</code> data type (see
+          <a class="xref" href="datatype-oid.html" title="8.19. Object Identifier Types"
+            >Section 8.19</a>).
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.14.1.1.1" class="indexterm"></a>
+          <code class="function">pg_has_role</code> ( [<span class="optional">
+            <em class="parameter"><code>user</code></em> <code class="type">name</code> or
+            <code class="type">oid</code>, </span>] <em class="parameter"><code>role</code></em> <code class="type">text</code> or
+          <code class="type">oid</code>, <em class="parameter"><code>privilege</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does user have privilege for role? Allowable privilege types are
+          <code class="literal">MEMBER</code>, <code class="literal">USAGE</code>, and
+          <code class="literal">SET</code>. <code class="literal">MEMBER</code> denotes direct or
+          indirect membership in the role without regard to what specific privileges may be
+          conferred. <code class="literal">USAGE</code> denotes whether the privileges of the role
+          are immediately available without doing <code class="command">SET ROLE</code>, while
+          <code class="literal">SET</code> denotes whether it is possible to change to the role
+          using the <code class="literal">SET ROLE</code> command. This function does not allow the
+          special case of setting <em class="parameter"><code>user</code></em> to
+          <code class="literal">public</code>, because the PUBLIC pseudo-role can never be a member
+          of real roles.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.4.2.2.15.1.1.1" class="indexterm"></a>
+          <code class="function">row_security_active</code> (
+          <em class="parameter"><code>table</code></em> <code class="type">text</code> or
+          <code class="type">oid</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Is row-level security active for the specified table in the context of the current user
+          and current environment?
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 [Table 9.69](functions-info#FUNCTIONS-ACLITEM-OP-TABLE) shows the operators available for the `aclitem` type, which is the catalog representation of access privileges. See [Section 5.7](ddl-priv) for information about how to read access privilege values.
 
@@ -109,12 +764,74 @@ SELECT has_function_privilege('joeuser', 'myfunc(int, text)', 'execute');
 
 **Table 9.69. `aclitem` Operators**
 
-| OperatorDescriptionExample(s)                                                                                                                                                                                                                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `aclitem` `=` `aclitem` → `boolean`Are `aclitem`s equal? (Notice that type `aclitem` lacks the usual set of comparison operators; it has only equality. In turn, `aclitem` arrays can only be compared for equality.)`'calvin=r*w/hobbes'::aclitem = 'calvin=r*w*/hobbes'::aclitem` → `f`                                    |
-| `aclitem[]` `@>` `aclitem` → `boolean`Does array contain the specified privileges? (This is true if there is an array entry that matches the `aclitem`'s grantee and grantor, and has at least the specified set of privileges.)`'{calvin=r*w/hobbes,hobbes=r*w*/postgres}'::aclitem[] @> 'calvin=r*/hobbes'::aclitem` → `t` |
-| `aclitem[]` `~` `aclitem` → `boolean`This is a deprecated alias for `@>`.`'{calvin=r*w/hobbes,hobbes=r*w*/postgres}'::aclitem[] ~ 'calvin=r*/hobbes'::aclitem` → `t`                                                                                                                                                             |
-
+<table class="table" summary="aclitem Operators" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Operator</p>
+        <p>Description</p>
+        <p>Example(s)</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.6.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="type">aclitem</code> <code class="literal">=</code>
+          <code class="type">aclitem</code> → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Are <code class="type">aclitem</code>s equal? (Notice that type
+          <code class="type">aclitem</code> lacks the usual set of comparison operators; it has only
+          equality. In turn, <code class="type">aclitem</code>
+          arrays can only be compared for equality.)
+        </p>
+        <p>
+          <code class="literal">'calvin=r*w/hobbes'::aclitem = 'calvin=r*w*/hobbes'::aclitem</code>
+          → <code class="returnvalue">f</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.6.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="type">aclitem[]</code> <code class="literal">@&gt;</code>
+          <code class="type">aclitem</code> → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Does array contain the specified privileges? (This is true if there is an array entry that
+          matches the <code class="type">aclitem</code>'s grantee and grantor, and has at least the
+          specified set of privileges.)
+        </p>
+        <p>
+          <code class="literal">'\{calvin=r*w/hobbes,hobbes=r*w*/postgres}'::aclitem[] @&gt;
+            'calvin=r*/hobbes'::aclitem</code>
+          → <code class="returnvalue">t</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <code class="type">aclitem[]</code> <code class="literal">~</code>
+          <code class="type">aclitem</code> → <code class="returnvalue">boolean</code>
+        </p>
+        <p>This is a deprecated alias for <code class="literal">@&gt;</code>.</p>
+        <p>
+          <code class="literal">'\{calvin=r*w/hobbes,hobbes=r*w*/postgres}'::aclitem[] ~
+            'calvin=r*/hobbes'::aclitem</code>
+          → <code class="returnvalue">t</code>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 [Table 9.70](functions-info#FUNCTIONS-ACLITEM-FN-TABLE) shows some additional functions to manage the `aclitem` type.
 
@@ -122,53 +839,283 @@ SELECT has_function_privilege('joeuser', 'myfunc(int, text)', 'execute');
 
 **Table 9.70. `aclitem` Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `acldefault` ( *`type`* `"char"`, *`ownerId`* `oid` ) → `aclitem[]`Constructs an `aclitem` array holding the default access privileges for an object of type *`type`* belonging to the role with OID *`ownerId`*. This represents the access privileges that will be assumed when an object's ACL entry is null. (The default access privileges are described in [Section 5.7](ddl-priv).) The *`type`* parameter must be one of 'c' for `COLUMN`, 'r' for `TABLE` and table-like objects, 's' for `SEQUENCE`, 'd' for `DATABASE`, 'f' for `FUNCTION` or `PROCEDURE`, 'l' for `LANGUAGE`, 'L' for `LARGE OBJECT`, 'n' for `SCHEMA`, 'p' for `PARAMETER`, 't' for `TABLESPACE`, 'F' for `FOREIGN DATA WRAPPER`, 'S' for `FOREIGN SERVER`, or 'T' for `TYPE` or `DOMAIN`. |
-| `aclexplode` ( `aclitem[]` ) → `setof record` ( *`grantor`* `oid`, *`grantee`* `oid`, *`privilege_type`* `text`, *`is_grantable`* `boolean` )Returns the `aclitem` array as a set of rows. If the grantee is the pseudo-role PUBLIC, it is represented by zero in the *`grantee`* column. Each granted privilege is represented as `SELECT`, `INSERT`, etc (see [Table 5.1](ddl-priv#PRIVILEGE-ABBREVS-TABLE) for a full list). Note that each privilege is broken out as a separate row, so only one keyword appears in the *`privilege_type`* column.                                                                                                                                                                                                                 |
-| `makeaclitem` ( *`grantee`* `oid`, *`grantor`* `oid`, *`privileges`* `text`, *`is_grantable`* `boolean` ) → `aclitem`Constructs an `aclitem` with the given properties. *`privileges`* is a comma-separated list of privilege names such as `SELECT`, `INSERT`, etc, all of which are set in the result. (Case of the privilege string is not significant, and extra whitespace is allowed between but not within privilege names.)                                                                                                                                                                                                                                                                                                                                          |
+<table class="table" summary="aclitem Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.8.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">acldefault</code> ( <em class="parameter"><code>type</code></em>
+          <code class="type">"char"</code>, <em class="parameter"><code>ownerId</code></em>
+          <code class="type">oid</code> ) → <code class="returnvalue">aclitem[]</code>
+        </p>
+        <p>
+          Constructs an <code class="type">aclitem</code> array holding the default access
+          privileges for an object of type <em class="parameter"><code>type</code></em> belonging to
+          the role with OID <em class="parameter"><code>ownerId</code></em>. This represents the access privileges that will be assumed when an object's ACL entry
+          is null. (The default access privileges are described in
+          <a class="xref" href="ddl-priv.html" title="5.7.&nbsp;Privileges">Section&nbsp;5.7</a>.)
+          The <em class="parameter"><code>type</code></em> parameter must be one of 'c' for
+          <code class="literal">COLUMN</code>, 'r' for <code class="literal">TABLE</code> and
+          table-like objects, 's' for <code class="literal">SEQUENCE</code>, 'd' for
+          <code class="literal">DATABASE</code>, 'f' for <code class="literal">FUNCTION</code> or
+          <code class="literal">PROCEDURE</code>, 'l' for <code class="literal">LANGUAGE</code>, 'L'
+          for <code class="literal">LARGE OBJECT</code>, 'n' for
+          <code class="literal">SCHEMA</code>, 'p' for <code class="literal">PARAMETER</code>, 't'
+          for <code class="literal">TABLESPACE</code>, 'F' for
+          <code class="literal">FOREIGN DATA WRAPPER</code>, 'S' for
+          <code class="literal">FOREIGN SERVER</code>, or 'T' for
+          <code class="literal">TYPE</code> or <code class="literal">DOMAIN</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.8.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">aclexplode</code> ( <code class="type">aclitem[]</code> ) →
+          <code class="returnvalue">setof record</code> (
+          <em class="parameter"><code>grantor</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>grantee</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>privilege_type</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>is_grantable</code></em> <code class="type">boolean</code> )
+        </p>
+        <p>
+          Returns the <code class="type">aclitem</code> array as a set of rows. If the grantee is
+          the pseudo-role PUBLIC, it is represented by zero in the
+          <em class="parameter"><code>grantee</code></em> column. Each granted privilege is
+          represented as <code class="literal">SELECT</code>, <code class="literal">INSERT</code>,
+          etc (see
+          <a
+            class="xref"
+            href="ddl-priv.html#PRIVILEGE-ABBREVS-TABLE"
+            title="Table&nbsp;5.1.&nbsp;ACL Privilege Abbreviations">Table&nbsp;5.1</a>
+          for a full list). Note that each privilege is broken out as a separate row, so only one
+          keyword appears in the <em class="parameter"><code>privilege_type</code></em>
+          column.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.4.8.2.2.3.1.1.1" class="indexterm"></a>
+          <code class="function">makeaclitem</code> (
+          <em class="parameter"><code>grantee</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>grantor</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>privileges</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>is_grantable</code></em> <code class="type">boolean</code> ) →
+          <code class="returnvalue">aclitem</code>
+        </p>
+        <p>
+          Constructs an <code class="type">aclitem</code> with the given properties.
+          <em class="parameter"><code>privileges</code></em> is a comma-separated list of privilege
+          names such as <code class="literal">SELECT</code>, <code class="literal">INSERT</code>,
+          etc, all of which are set in the result. (Case of the privilege string is not significant,
+          and extra whitespace is allowed between but not within privilege names.)
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 [#id](#FUNCTIONS-INFO-SCHEMA)
 
 ### 9.26.3. Schema Visibility Inquiry Functions [#](#FUNCTIONS-INFO-SCHEMA)
 
-[Table 9.71](functions-info#FUNCTIONS-INFO-SCHEMA-TABLE) shows functions that determine whether a certain object is *visible* in the current schema search path. For example, a table is said to be visible if its containing schema is in the search path and no table of the same name appears earlier in the search path. This is equivalent to the statement that the table can be referenced by name without explicit schema qualification. Thus, to list the names of all visible tables:
+[Table 9.71](functions-info#FUNCTIONS-INFO-SCHEMA-TABLE) shows functions that determine whether a certain object is _visible_ in the current schema search path. For example, a table is said to be visible if its containing schema is in the search path and no table of the same name appears earlier in the search path. This is equivalent to the statement that the table can be referenced by name without explicit schema qualification. Thus, to list the names of all visible tables:
 
 ```
 
 SELECT relname FROM pg_class WHERE pg_table_is_visible(oid);
+
 ```
 
-For functions and operators, an object in the search path is said to be visible if there is no object of the same name *and argument data type(s)* earlier in the path. For operator classes and families, both the name and the associated index access method are considered.
-
-
+For functions and operators, an object in the search path is said to be visible if there is no object of the same name _and argument data type(s)_ earlier in the path. For operator classes and families, both the name and the associated index access method are considered.
 
 [#id](#FUNCTIONS-INFO-SCHEMA-TABLE)
 
 **Table 9.71. Schema Visibility Inquiry Functions**
 
-| FunctionDescription                                                                                                                                                                                            |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pg_collation_is_visible` ( *`collation`* `oid` ) → `boolean`Is collation visible in search path?                                                                                                          |
-| `pg_conversion_is_visible` ( *`conversion`* `oid` ) → `boolean`Is conversion visible in search path?                                                                                                       |
-| `pg_function_is_visible` ( *`function`* `oid` ) → `boolean`Is function visible in search path? (This also works for procedures and aggregates.)                                                            |
-| `pg_opclass_is_visible` ( *`opclass`* `oid` ) → `boolean`Is operator class visible in search path?                                                                                                         |
-| `pg_operator_is_visible` ( *`operator`* `oid` ) → `boolean`Is operator visible in search path?                                                                                                             |
-| `pg_opfamily_is_visible` ( *`opclass`* `oid` ) → `boolean`Is operator family visible in search path?                                                                                                       |
-| `pg_statistics_obj_is_visible` ( *`stat`* `oid` ) → `boolean`Is statistics object visible in search path?                                                                                                  |
-| `pg_table_is_visible` ( *`table`* `oid` ) → `boolean`Is table visible in search path? (This works for all types of relations, including views, materialized views, indexes, sequences and foreign tables.) |
-| `pg_ts_config_is_visible` ( *`config`* `oid` ) → `boolean`Is text search configuration visible in search path?                                                                                             |
-| `pg_ts_dict_is_visible` ( *`dict`* `oid` ) → `boolean`Is text search dictionary visible in search path?                                                                                                    |
-| `pg_ts_parser_is_visible` ( *`parser`* `oid` ) → `boolean`Is text search parser visible in search path?                                                                                                    |
-| `pg_ts_template_is_visible` ( *`template`* `oid` ) → `boolean`Is text search template visible in search path?                                                                                              |
-| `pg_type_is_visible` ( *`type`* `oid` ) → `boolean`Is type (or domain) visible in search path?                                                                                                             |
-
+<table class="table" summary="Schema Visibility Inquiry Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">pg_collation_is_visible</code> (
+          <em class="parameter"><code>collation</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Is collation visible in search path?</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">pg_conversion_is_visible</code> (
+          <em class="parameter"><code>conversion</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Is conversion visible in search path?</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.3.1.1.1" class="indexterm"></a>
+          <code class="function">pg_function_is_visible</code> (
+          <em class="parameter"><code>function</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Is function visible in search path? (This also works for procedures and aggregates.)</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.4.1.1.1" class="indexterm"></a>
+          <code class="function">pg_opclass_is_visible</code> (
+          <em class="parameter"><code>opclass</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Is operator class visible in search path?</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.5.1.1.1" class="indexterm"></a>
+          <code class="function">pg_operator_is_visible</code> (
+          <em class="parameter"><code>operator</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Is operator visible in search path?</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.6.1.1.1" class="indexterm"></a>
+          <code class="function">pg_opfamily_is_visible</code> (
+          <em class="parameter"><code>opclass</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Is operator family visible in search path?</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.7.1.1.1" class="indexterm"></a>
+          <code class="function">pg_statistics_obj_is_visible</code> (
+          <em class="parameter"><code>stat</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Is statistics object visible in search path?</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.8.1.1.1" class="indexterm"></a>
+          <code class="function">pg_table_is_visible</code> (
+          <em class="parameter"><code>table</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Is table visible in search path? (This works for all types of relations, including views,
+          materialized views, indexes, sequences and foreign tables.)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.9.1.1.1" class="indexterm"></a>
+          <code class="function">pg_ts_config_is_visible</code> (
+          <em class="parameter"><code>config</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Is text search configuration visible in search path?</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.10.1.1.1" class="indexterm"></a>
+          <code class="function">pg_ts_dict_is_visible</code> (
+          <em class="parameter"><code>dict</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Is text search dictionary visible in search path?</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.11.1.1.1" class="indexterm"></a>
+          <code class="function">pg_ts_parser_is_visible</code> (
+          <em class="parameter"><code>parser</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Is text search parser visible in search path?</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.12.1.1.1" class="indexterm"></a>
+          <code class="function">pg_ts_template_is_visible</code> (
+          <em class="parameter"><code>template</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Is text search template visible in search path?</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.5.4.2.2.13.1.1.1" class="indexterm"></a>
+          <code class="function">pg_type_is_visible</code> (
+          <em class="parameter"><code>type</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>Is type (or domain) visible in search path?</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 All these functions require object OIDs to identify the object to be checked. If you want to test an object by name, it is convenient to use the OID alias types (`regclass`, `regtype`, `regprocedure`, `regoperator`, `regconfig`, or `regdictionary`), for example:
 
 ```
 
 SELECT pg_type_is_visible('myschema.widget'::regtype);
+
 ```
 
 Note that it would not make much sense to test a non-schema-qualified type name in this way — if the name can be recognized at all, it must be visible.
@@ -183,75 +1130,730 @@ Note that it would not make much sense to test a non-schema-qualified type name 
 
 **Table 9.72. System Catalog Information Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `format_type` ( *`type`* `oid`, *`typemod`* `integer` ) → `text`Returns the SQL name for a data type that is identified by its type OID and possibly a type modifier. Pass NULL for the type modifier if no specific modifier is known.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `pg_char_to_encoding` ( *`encoding`* `name` ) → `integer`Converts the supplied encoding name into an integer representing the internal identifier used in some system catalog tables. Returns `-1` if an unknown encoding name is provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `pg_encoding_to_char` ( *`encoding`* `integer` ) → `name`Converts the integer used as the internal identifier of an encoding in some system catalog tables into a human-readable string. Returns an empty string if an invalid encoding number is provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `pg_get_catalog_foreign_keys` () → `setof record` ( *`fktable`* `regclass`, *`fkcols`* `text[]`, *`pktable`* `regclass`, *`pkcols`* `text[]`, *`is_array`* `boolean`, *`is_opt`* `boolean` )Returns a set of records describing the foreign key relationships that exist within the PostgreSQL system catalogs. The *`fktable`* column contains the name of the referencing catalog, and the *`fkcols`* column contains the name(s) of the referencing column(s). Similarly, the *`pktable`* column contains the name of the referenced catalog, and the *`pkcols`* column contains the name(s) of the referenced column(s). If *`is_array`* is true, the last referencing column is an array, each of whose elements should match some entry in the referenced catalog. If *`is_opt`* is true, the referencing column(s) are allowed to contain zeroes instead of a valid reference.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `pg_get_constraintdef` ( *`constraint`* `oid` \[, *`pretty`* `boolean` ] ) → `text`Reconstructs the creating command for a constraint. (This is a decompiled reconstruction, not the original text of the command.)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `pg_get_expr` ( *`expr`* `pg_node_tree`, *`relation`* `oid` \[, *`pretty`* `boolean` ] ) → `text`Decompiles the internal form of an expression stored in the system catalogs, such as the default value for a column. If the expression might contain Vars, specify the OID of the relation they refer to as the second parameter; if no Vars are expected, passing zero is sufficient.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `pg_get_functiondef` ( *`func`* `oid` ) → `text`Reconstructs the creating command for a function or procedure. (This is a decompiled reconstruction, not the original text of the command.) The result is a complete `CREATE OR REPLACE FUNCTION` or `CREATE OR REPLACE PROCEDURE` statement.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `pg_get_function_arguments` ( *`func`* `oid` ) → `text`Reconstructs the argument list of a function or procedure, in the form it would need to appear in within `CREATE FUNCTION` (including default values).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `pg_get_function_identity_arguments` ( *`func`* `oid` ) → `text`Reconstructs the argument list necessary to identify a function or procedure, in the form it would need to appear in within commands such as `ALTER FUNCTION`. This form omits default values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `pg_get_function_result` ( *`func`* `oid` ) → `text`Reconstructs the `RETURNS` clause of a function, in the form it would need to appear in within `CREATE FUNCTION`. Returns `NULL` for a procedure.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `pg_get_indexdef` ( *`index`* `oid` \[, *`column`* `integer`, *`pretty`* `boolean` ] ) → `text`Reconstructs the creating command for an index. (This is a decompiled reconstruction, not the original text of the command.) If *`column`* is supplied and is not zero, only the definition of that column is reconstructed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `pg_get_keywords` () → `setof record` ( *`word`* `text`, *`catcode`* `"char"`, *`barelabel`* `boolean`, *`catdesc`* `text`, *`baredesc`* `text` )Returns a set of records describing the SQL keywords recognized by the server. The *`word`* column contains the keyword. The *`catcode`* column contains a category code: `U` for an unreserved keyword, `C` for a keyword that can be a column name, `T` for a keyword that can be a type or function name, or `R` for a fully reserved keyword. The *`barelabel`* column contains `true` if the keyword can be used as a “bare” column label in `SELECT` lists, or `false` if it can only be used after `AS`. The *`catdesc`* column contains a possibly-localized string describing the keyword's category. The *`baredesc`* column contains a possibly-localized string describing the keyword's column label status.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `pg_get_partkeydef` ( *`table`* `oid` ) → `text`Reconstructs the definition of a partitioned table's partition key, in the form it would have in the `PARTITION BY` clause of `CREATE TABLE`. (This is a decompiled reconstruction, not the original text of the command.)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `pg_get_ruledef` ( *`rule`* `oid` \[, *`pretty`* `boolean` ] ) → `text`Reconstructs the creating command for a rule. (This is a decompiled reconstruction, not the original text of the command.)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `pg_get_serial_sequence` ( *`table`* `text`, *`column`* `text` ) → `text`Returns the name of the sequence associated with a column, or NULL if no sequence is associated with the column. If the column is an identity column, the associated sequence is the sequence internally created for that column. For columns created using one of the serial types (`serial`, `smallserial`, `bigserial`), it is the sequence created for that serial column definition. In the latter case, the association can be modified or removed with `ALTER SEQUENCE OWNED BY`. (This function probably should have been called `pg_get_owned_sequence`; its current name reflects the fact that it has historically been used with serial-type columns.) The first parameter is a table name with optional schema, and the second parameter is a column name. Because the first parameter potentially contains both schema and table names, it is parsed per usual SQL rules, meaning it is lower-cased by default. The second parameter, being just a column name, is treated literally and so has its case preserved. The result is suitably formatted for passing to the sequence functions (see [Section 9.17](functions-sequence)).A typical use is in reading the current value of the sequence for an identity or serial column, for example:```
-
+<table class="table" summary="System Catalog Information Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">format_type</code> ( <em class="parameter"><code>type</code></em>
+          <code class="type">oid</code>, <em class="parameter"><code>typemod</code></em>
+          <code class="type">integer</code> ) → <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Returns the SQL name for a data type that is identified by its type OID and possibly a
+          type modifier. Pass NULL for the type modifier if no specific modifier is known.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td id="PG-CHAR-TO-ENCODING" class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">pg_char_to_encoding</code> (
+          <em class="parameter"><code>encoding</code></em> <code class="type">name</code> ) →
+          <code class="returnvalue">integer</code>
+        </p>
+        <p>
+          Converts the supplied encoding name into an integer representing the internal identifier
+          used in some system catalog tables. Returns <code class="literal">-1</code> if an unknown
+          encoding name is provided.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td id="PG-ENCODING-TO-CHAR" class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.3.1.1.1" class="indexterm"></a>
+          <code class="function">pg_encoding_to_char</code> (
+          <em class="parameter"><code>encoding</code></em> <code class="type">integer</code> ) →
+          <code class="returnvalue">name</code>
+        </p>
+        <p>
+          Converts the integer used as the internal identifier of an encoding in some system catalog
+          tables into a human-readable string. Returns an empty string if an invalid encoding number
+          is provided.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.4.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_catalog_foreign_keys</code> () →
+          <code class="returnvalue">setof record</code> (
+          <em class="parameter"><code>fktable</code></em> <code class="type">regclass</code>,
+          <em class="parameter"><code>fkcols</code></em> <code class="type">text[]</code>,
+          <em class="parameter"><code>pktable</code></em> <code class="type">regclass</code>,
+          <em class="parameter"><code>pkcols</code></em> <code class="type">text[]</code>,
+          <em class="parameter"><code>is_array</code></em> <code class="type">boolean</code>,
+          <em class="parameter"><code>is_opt</code></em> <code class="type">boolean</code> )
+        </p>
+        <p>
+          Returns a set of records describing the foreign key relationships that exist within the
+          <span class="productname">PostgreSQL</span> system catalogs. The
+          <em class="parameter"><code>fktable</code></em> column contains the name of the
+          referencing catalog, and the <em class="parameter"><code>fkcols</code></em> column
+          contains the name(s) of the referencing column(s). Similarly, the
+          <em class="parameter"><code>pktable</code></em> column contains the name of the referenced
+          catalog, and the <em class="parameter"><code>pkcols</code></em> column contains the
+          name(s) of the referenced column(s). If
+          <em class="parameter"><code>is_array</code></em> is true, the last referencing column is
+          an array, each of whose elements should match some entry in the referenced catalog. If
+          <em class="parameter"><code>is_opt</code></em> is true, the referencing column(s) are
+          allowed to contain zeroes instead of a valid reference.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.5.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_constraintdef</code> (
+          <em class="parameter"><code>constraint</code></em> <code class="type">oid</code> [<span
+            class="optional">, <em class="parameter"><code>pretty</code></em>
+            <code class="type">boolean</code> </span>] ) → <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the creating command for a constraint. (This is a decompiled reconstruction,
+          not the original text of the command.)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.6.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_expr</code> ( <em class="parameter"><code>expr</code></em>
+          <code class="type">pg_node_tree</code>, <em class="parameter"><code>relation</code></em>
+          <code class="type">oid</code> [<span class="optional">, <em class="parameter"><code>pretty</code></em>
+            <code class="type">boolean</code> </span>] ) → <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Decompiles the internal form of an expression stored in the system catalogs, such as the
+          default value for a column. If the expression might contain Vars, specify the OID of the
+          relation they refer to as the second parameter; if no Vars are expected, passing zero is
+          sufficient.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.7.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_functiondef</code> (
+          <em class="parameter"><code>func</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the creating command for a function or procedure. (This is a decompiled
+          reconstruction, not the original text of the command.) The result is a complete
+          <code class="command">CREATE OR REPLACE FUNCTION</code> or
+          <code class="command">CREATE OR REPLACE PROCEDURE</code> statement.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.8.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_function_arguments</code> (
+          <em class="parameter"><code>func</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the argument list of a function or procedure, in the form it would need to
+          appear in within <code class="command">CREATE FUNCTION</code>
+          (including default values).
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.9.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_function_identity_arguments</code> (
+          <em class="parameter"><code>func</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the argument list necessary to identify a function or procedure, in the form
+          it would need to appear in within commands such as
+          <code class="command">ALTER FUNCTION</code>. This form omits default values.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.10.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_function_result</code> (
+          <em class="parameter"><code>func</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the <code class="literal">RETURNS</code> clause of a function, in the form it
+          would need to appear in within <code class="command">CREATE FUNCTION</code>. Returns
+          <code class="literal">NULL</code> for a procedure.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.11.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_indexdef</code> (
+          <em class="parameter"><code>index</code></em> <code class="type">oid</code> [<span
+            class="optional">, <em class="parameter"><code>column</code></em> <code class="type">integer</code>,
+            <em class="parameter"><code>pretty</code></em> <code class="type">boolean</code> </span>] ) → <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the creating command for an index. (This is a decompiled reconstruction, not
+          the original text of the command.) If <em class="parameter"><code>column</code></em> is
+          supplied and is not zero, only the definition of that column is reconstructed.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.12.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_keywords</code> () →
+          <code class="returnvalue">setof record</code> (
+          <em class="parameter"><code>word</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>catcode</code></em> <code class="type">"char"</code>,
+          <em class="parameter"><code>barelabel</code></em> <code class="type">boolean</code>,
+          <em class="parameter"><code>catdesc</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>baredesc</code></em> <code class="type">text</code> )
+        </p>
+        <p>
+          Returns a set of records describing the SQL keywords recognized by the server. The
+          <em class="parameter"><code>word</code></em> column contains the keyword. The
+          <em class="parameter"><code>catcode</code></em> column contains a category code:
+          <code class="literal">U</code> for an unreserved keyword,
+          <code class="literal">C</code> for a keyword that can be a column name,
+          <code class="literal">T</code> for a keyword that can be a type or function name, or
+          <code class="literal">R</code> for a fully reserved keyword. The
+          <em class="parameter"><code>barelabel</code></em> column contains
+          <code class="literal">true</code> if the keyword can be used as a
+          <span class="quote">“<span class="quote">bare</span>”</span> column label in
+          <code class="command">SELECT</code> lists, or <code class="literal">false</code> if it can
+          only be used after <code class="literal">AS</code>. The
+          <em class="parameter"><code>catdesc</code></em> column contains a possibly-localized
+          string describing the keyword's category. The
+          <em class="parameter"><code>baredesc</code></em> column contains a possibly-localized
+          string describing the keyword's column label status.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.13.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_partkeydef</code> (
+          <em class="parameter"><code>table</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the definition of a partitioned table's partition key, in the form it would
+          have in the <code class="literal">PARTITION BY</code> clause of
+          <code class="command">CREATE TABLE</code>. (This is a decompiled reconstruction, not the
+          original text of the command.)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.14.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_ruledef</code> (
+          <em class="parameter"><code>rule</code></em> <code class="type">oid</code> [<span
+            class="optional">, <em class="parameter"><code>pretty</code></em>
+            <code class="type">boolean</code> </span>] ) → <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the creating command for a rule. (This is a decompiled reconstruction, not
+          the original text of the command.)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.15.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_serial_sequence</code> (
+          <em class="parameter"><code>table</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>column</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Returns the name of the sequence associated with a column, or NULL if no sequence is
+          associated with the column. If the column is an identity column, the associated sequence
+          is the sequence internally created for that column. For columns created using one of the
+          serial types (<code class="type">serial</code>, <code class="type">smallserial</code>,
+          <code class="type">bigserial</code>), it is the sequence created for that serial column
+          definition. In the latter case, the association can be modified or removed with
+          <code class="command">ALTER SEQUENCE OWNED BY</code>. (This function probably should have
+          been called <code class="function">pg_get_owned_sequence</code>; its current name reflects
+          the fact that it has historically been used with serial-type columns.) The first parameter
+          is a table name with optional schema, and the second parameter is a column name. Because
+          the first parameter potentially contains both schema and table names, it is parsed per
+          usual SQL rules, meaning it is lower-cased by default. The second parameter, being just a
+          column name, is treated literally and so has its case preserved. The result is suitably
+          formatted for passing to the sequence functions (see
+          <a
+            class="xref"
+            href="functions-sequence.html"
+            title="9.17.&nbsp;Sequence Manipulation Functions">Section&nbsp;9.17</a>).
+        </p>
+        <p>
+          A typical use is in reading the current value of the sequence for an identity or serial
+          column, for example:
+        </p>
+        <pre class="programlisting">
 SELECT currval(pg_get_serial_sequence('sometable', 'id'));
-``` |
-| `pg_get_statisticsobjdef` ( *`statobj`* `oid` ) → `text`Reconstructs the creating command for an extended statistics object. (This is a decompiled reconstruction, not the original text of the command.)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `pg_get_triggerdef` ( *`trigger`* `oid` \[, *`pretty`* `boolean` ] ) → `text`Reconstructs the creating command for a trigger. (This is a decompiled reconstruction, not the original text of the command.)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `pg_get_userbyid` ( *`role`* `oid` ) → `name`Returns a role's name given its OID.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `pg_get_viewdef` ( *`view`* `oid` \[, *`pretty`* `boolean` ] ) → `text`Reconstructs the underlying `SELECT` command for a view or materialized view. (This is a decompiled reconstruction, not the original text of the command.)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `pg_get_viewdef` ( *`view`* `oid`, *`wrap_column`* `integer` ) → `text`Reconstructs the underlying `SELECT` command for a view or materialized view. (This is a decompiled reconstruction, not the original text of the command.) In this form of the function, pretty-printing is always enabled, and long lines are wrapped to try to keep them shorter than the specified number of columns.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `pg_get_viewdef` ( *`view`* `text` \[, *`pretty`* `boolean` ] ) → `text`Reconstructs the underlying `SELECT` command for a view or materialized view, working from a textual name for the view rather than its OID. (This is deprecated; use the OID variant instead.)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `pg_index_column_has_property` ( *`index`* `regclass`, *`column`* `integer`, *`property`* `text` ) → `boolean`Tests whether an index column has the named property. Common index column properties are listed in [Table 9.73](functions-info#FUNCTIONS-INFO-INDEX-COLUMN-PROPS). (Note that extension access methods can define additional property names for their indexes.) `NULL` is returned if the property name is not known or does not apply to the particular object, or if the OID or column number does not identify a valid object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `pg_index_has_property` ( *`index`* `regclass`, *`property`* `text` ) → `boolean`Tests whether an index has the named property. Common index properties are listed in [Table 9.74](functions-info#FUNCTIONS-INFO-INDEX-PROPS). (Note that extension access methods can define additional property names for their indexes.) `NULL` is returned if the property name is not known or does not apply to the particular object, or if the OID does not identify a valid object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `pg_indexam_has_property` ( *`am`* `oid`, *`property`* `text` ) → `boolean`Tests whether an index access method has the named property. Access method properties are listed in [Table 9.75](functions-info#FUNCTIONS-INFO-INDEXAM-PROPS). `NULL` is returned if the property name is not known or does not apply to the particular object, or if the OID does not identify a valid object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `pg_options_to_table` ( *`options_array`* `text[]` ) → `setof record` ( *`option_name`* `text`, *`option_value`* `text` )Returns the set of storage options represented by a value from `pg_class`.`reloptions` or `pg_attribute`.`attoptions`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `pg_settings_get_flags` ( *`guc`* `text` ) → `text[]`Returns an array of the flags associated with the given GUC, or `NULL` if it does not exist. The result is an empty array if the GUC exists but there are no flags to show. Only the most useful flags listed in [Table 9.76](functions-info#FUNCTIONS-PG-SETTINGS-FLAGS) are exposed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `pg_tablespace_databases` ( *`tablespace`* `oid` ) → `setof oid`Returns the set of OIDs of databases that have objects stored in the specified tablespace. If this function returns any rows, the tablespace is not empty and cannot be dropped. To identify the specific objects populating the tablespace, you will need to connect to the database(s) identified by `pg_tablespace_databases` and query their `pg_class` catalogs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `pg_tablespace_location` ( *`tablespace`* `oid` ) → `text`Returns the file system path that this tablespace is located in.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `pg_typeof` ( `"any"` ) → `regtype`Returns the OID of the data type of the value that is passed to it. This can be helpful for troubleshooting or dynamically constructing SQL queries. The function is declared as returning `regtype`, which is an OID alias type (see [Section 8.19](datatype-oid)); this means that it is the same as an OID for comparison purposes but displays as a type name.For example:```
-
+</pre>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.16.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_statisticsobjdef</code> (
+          <em class="parameter"><code>statobj</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the creating command for an extended statistics object. (This is a decompiled
+          reconstruction, not the original text of the command.)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.17.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_triggerdef</code> (
+          <em class="parameter"><code>trigger</code></em> <code class="type">oid</code> [<span
+            class="optional">, <em class="parameter"><code>pretty</code></em>
+            <code class="type">boolean</code> </span>] ) → <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the creating command for a trigger. (This is a decompiled reconstruction, not
+          the original text of the command.)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.18.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_userbyid</code> (
+          <em class="parameter"><code>role</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">name</code>
+        </p>
+        <p>Returns a role's name given its OID.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.19.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_viewdef</code> (
+          <em class="parameter"><code>view</code></em> <code class="type">oid</code> [<span
+            class="optional">, <em class="parameter"><code>pretty</code></em>
+            <code class="type">boolean</code> </span>] ) → <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the underlying <code class="command">SELECT</code> command for a view or
+          materialized view. (This is a decompiled reconstruction, not the original text of the
+          command.)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <code class="function">pg_get_viewdef</code> (
+          <em class="parameter"><code>view</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>wrap_column</code></em> <code class="type">integer</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the underlying <code class="command">SELECT</code> command for a view or
+          materialized view. (This is a decompiled reconstruction, not the original text of the
+          command.) In this form of the function, pretty-printing is always enabled, and long lines
+          are wrapped to try to keep them shorter than the specified number of columns.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <code class="function">pg_get_viewdef</code> (
+          <em class="parameter"><code>view</code></em> <code class="type">text</code> [<span
+            class="optional">, <em class="parameter"><code>pretty</code></em>
+            <code class="type">boolean</code> </span>] ) → <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reconstructs the underlying <code class="command">SELECT</code> command for a view or
+          materialized view, working from a textual name for the view rather than its OID. (This is
+          deprecated; use the OID variant instead.)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.22.1.1.1" class="indexterm"></a>
+          <code class="function">pg_index_column_has_property</code> (
+          <em class="parameter"><code>index</code></em> <code class="type">regclass</code>,
+          <em class="parameter"><code>column</code></em> <code class="type">integer</code>,
+          <em class="parameter"><code>property</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Tests whether an index column has the named property. Common index column properties are
+          listed in
+          <a
+            class="xref"
+            href="functions-info.html#FUNCTIONS-INFO-INDEX-COLUMN-PROPS"
+            title="Table&nbsp;9.73.&nbsp;Index Column Properties"
+            >Table&nbsp;9.73</a>. (Note that extension access methods can define additional property names for their
+          indexes.) <code class="literal">NULL</code> is returned if the property name is not known
+          or does not apply to the particular object, or if the OID or column number does not
+          identify a valid object.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.23.1.1.1" class="indexterm"></a>
+          <code class="function">pg_index_has_property</code> (
+          <em class="parameter"><code>index</code></em> <code class="type">regclass</code>,
+          <em class="parameter"><code>property</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Tests whether an index has the named property. Common index properties are listed in
+          <a
+            class="xref"
+            href="functions-info.html#FUNCTIONS-INFO-INDEX-PROPS"
+            title="Table&nbsp;9.74.&nbsp;Index Properties"
+            >Table&nbsp;9.74</a>. (Note that extension access methods can define additional property names for their
+          indexes.) <code class="literal">NULL</code> is returned if the property name is not known
+          or does not apply to the particular object, or if the OID does not identify a valid
+          object.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.24.1.1.1" class="indexterm"></a>
+          <code class="function">pg_indexam_has_property</code> (
+          <em class="parameter"><code>am</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>property</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Tests whether an index access method has the named property. Access method properties are
+          listed in
+          <a
+            class="xref"
+            href="functions-info.html#FUNCTIONS-INFO-INDEXAM-PROPS"
+            title="Table&nbsp;9.75.&nbsp;Index Access Method Properties"
+            >Table&nbsp;9.75</a>. <code class="literal">NULL</code> is returned if the property name is not known or does
+          not apply to the particular object, or if the OID does not identify a valid object.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.25.1.1.1" class="indexterm"></a>
+          <code class="function">pg_options_to_table</code> (
+          <em class="parameter"><code>options_array</code></em> <code class="type">text[]</code> ) →
+          <code class="returnvalue">setof record</code> (
+          <em class="parameter"><code>option_name</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>option_value</code></em> <code class="type">text</code> )
+        </p>
+        <p>
+          Returns the set of storage options represented by a value from
+          <code class="structname">pg_class</code>.<code class="structfield">reloptions</code> or
+          <code class="structname">pg_attribute</code>.<code class="structfield">attoptions</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.26.1.1.1" class="indexterm"></a>
+          <code class="function">pg_settings_get_flags</code> (
+          <em class="parameter"><code>guc</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">text[]</code>
+        </p>
+        <p>
+          Returns an array of the flags associated with the given GUC, or
+          <code class="literal">NULL</code> if it does not exist. The result is an empty array if
+          the GUC exists but there are no flags to show. Only the most useful flags listed in
+          <a
+            class="xref"
+            href="functions-info.html#FUNCTIONS-PG-SETTINGS-FLAGS"
+            title="Table&nbsp;9.76.&nbsp;GUC Flags"
+            >Table&nbsp;9.76</a>
+          are exposed.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.27.1.1.1" class="indexterm"></a>
+          <code class="function">pg_tablespace_databases</code> (
+          <em class="parameter"><code>tablespace</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">setof oid</code>
+        </p>
+        <p>
+          Returns the set of OIDs of databases that have objects stored in the specified tablespace.
+          If this function returns any rows, the tablespace is not empty and cannot be dropped. To
+          identify the specific objects populating the tablespace, you will need to connect to the
+          database(s) identified by <code class="function">pg_tablespace_databases</code> and query
+          their <code class="structname">pg_class</code> catalogs.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.28.1.1.1" class="indexterm"></a>
+          <code class="function">pg_tablespace_location</code> (
+          <em class="parameter"><code>tablespace</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>Returns the file system path that this tablespace is located in.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.29.1.1.1" class="indexterm"></a>
+          <code class="function">pg_typeof</code> ( <code class="type">"any"</code> ) →
+          <code class="returnvalue">regtype</code>
+        </p>
+        <p>
+          Returns the OID of the data type of the value that is passed to it. This can be helpful
+          for troubleshooting or dynamically constructing SQL queries. The function is declared as
+          returning <code class="type">regtype</code>, which is an OID alias type (see
+          <a class="xref" href="datatype-oid.html" title="8.19.&nbsp;Object Identifier Types"
+            >Section&nbsp;8.19</a>); this means that it is the same as an OID for comparison purposes but displays as a
+          type name.
+        </p>
+        <p>For example:</p>
+        <pre class="programlisting">
 SELECT pg_typeof(33);
  pg_typeof
 -----------
  integer
 
 SELECT typlen FROM pg_type WHERE oid = pg_typeof(33);
- typlen
---------
-      4
-```                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `COLLATION FOR` ( `"any"` ) → `text`Returns the name of the collation of the value that is passed to it. The value is quoted and schema-qualified if necessary. If no collation was derived for the argument expression, then `NULL` is returned. If the argument is not of a collatable data type, then an error is raised.For example:```
+typlen
 
+---
+
+      4
+
+</pre>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.30.1.1.1" class="indexterm"></a>
+          <code class="function">COLLATION FOR</code> ( <code class="type">"any"</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Returns the name of the collation of the value that is passed to it. The value is quoted
+          and schema-qualified if necessary. If no collation was derived for the argument
+          expression, then <code class="literal">NULL</code> is returned. If the argument is not of
+          a collatable data type, then an error is raised.
+        </p>
+        <p>For example:</p>
+        <pre class="programlisting">
 SELECT collation for (description) FROM pg_description LIMIT 1;
  pg_collation_for
 ------------------
- "default"
+
+"default"
 
 SELECT collation for ('foo' COLLATE "de_DE");
- pg_collation_for
-------------------
- "de_DE"
-```                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `to_regclass` ( `text` ) → `regclass`Translates a textual relation name to its OID. A similar result is obtained by casting the string to type `regclass` (see [Section 8.19](datatype-oid)); however, this function will return `NULL` rather than throwing an error if the name is not found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `to_regcollation` ( `text` ) → `regcollation`Translates a textual collation name to its OID. A similar result is obtained by casting the string to type `regcollation` (see [Section 8.19](datatype-oid)); however, this function will return `NULL` rather than throwing an error if the name is not found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `to_regnamespace` ( `text` ) → `regnamespace`Translates a textual schema name to its OID. A similar result is obtained by casting the string to type `regnamespace` (see [Section 8.19](datatype-oid)); however, this function will return `NULL` rather than throwing an error if the name is not found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `to_regoper` ( `text` ) → `regoper`Translates a textual operator name to its OID. A similar result is obtained by casting the string to type `regoper` (see [Section 8.19](datatype-oid)); however, this function will return `NULL` rather than throwing an error if the name is not found or is ambiguous.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `to_regoperator` ( `text` ) → `regoperator`Translates a textual operator name (with parameter types) to its OID. A similar result is obtained by casting the string to type `regoperator` (see [Section 8.19](datatype-oid)); however, this function will return `NULL` rather than throwing an error if the name is not found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `to_regproc` ( `text` ) → `regproc`Translates a textual function or procedure name to its OID. A similar result is obtained by casting the string to type `regproc` (see [Section 8.19](datatype-oid)); however, this function will return `NULL` rather than throwing an error if the name is not found or is ambiguous.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `to_regprocedure` ( `text` ) → `regprocedure`Translates a textual function or procedure name (with argument types) to its OID. A similar result is obtained by casting the string to type `regprocedure` (see [Section 8.19](datatype-oid)); however, this function will return `NULL` rather than throwing an error if the name is not found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `to_regrole` ( `text` ) → `regrole`Translates a textual role name to its OID. A similar result is obtained by casting the string to type `regrole` (see [Section 8.19](datatype-oid)); however, this function will return `NULL` rather than throwing an error if the name is not found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `to_regtype` ( `text` ) → `regtype`Translates a textual type name to its OID. A similar result is obtained by casting the string to type `regtype` (see [Section 8.19](datatype-oid)); however, this function will return `NULL` rather than throwing an error if the name is not found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+pg_collation_for
 
+---
 
-Most of the functions that reconstruct (decompile) database objects have an optional *`pretty`* flag, which if `true` causes the result to be “pretty-printed”. Pretty-printing suppresses unnecessary parentheses and adds whitespace for legibility. The pretty-printed format is more readable, but the default format is more likely to be interpreted the same way by future versions of PostgreSQL; so avoid using pretty-printed output for dump purposes. Passing `false` for the *`pretty`* parameter yields the same result as omitting the parameter.
+"de_DE"
+
+</pre>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.31.1.1.1" class="indexterm"></a>
+          <code class="function">to_regclass</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">regclass</code>
+        </p>
+        <p>
+          Translates a textual relation name to its OID. A similar result is obtained by casting the
+          string to type <code class="type">regclass</code> (see
+          <a class="xref" href="datatype-oid.html" title="8.19.&nbsp;Object Identifier Types">Section&nbsp;8.19</a>); however, this function will return <code class="literal">NULL</code> rather than
+          throwing an error if the name is not found.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.32.1.1.1" class="indexterm"></a>
+          <code class="function">to_regcollation</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">regcollation</code>
+        </p>
+        <p>
+          Translates a textual collation name to its OID. A similar result is obtained by casting
+          the string to type <code class="type">regcollation</code> (see
+          <a class="xref" href="datatype-oid.html" title="8.19.&nbsp;Object Identifier Types"
+            >Section&nbsp;8.19</a>); however, this function will return <code class="literal">NULL</code> rather than
+          throwing an error if the name is not found.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.33.1.1.1" class="indexterm"></a>
+          <code class="function">to_regnamespace</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">regnamespace</code>
+        </p>
+        <p>
+          Translates a textual schema name to its OID. A similar result is obtained by casting the
+          string to type <code class="type">regnamespace</code> (see
+          <a class="xref" href="datatype-oid.html" title="8.19.&nbsp;Object Identifier Types">Section&nbsp;8.19</a>); however, this function will return <code class="literal">NULL</code> rather than
+          throwing an error if the name is not found.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.34.1.1.1" class="indexterm"></a>
+          <code class="function">to_regoper</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">regoper</code>
+        </p>
+        <p>
+          Translates a textual operator name to its OID. A similar result is obtained by casting the
+          string to type <code class="type">regoper</code> (see
+          <a class="xref" href="datatype-oid.html" title="8.19.&nbsp;Object Identifier Types">Section&nbsp;8.19</a>); however, this function will return <code class="literal">NULL</code> rather than
+          throwing an error if the name is not found or is ambiguous.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.35.1.1.1" class="indexterm"></a>
+          <code class="function">to_regoperator</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">regoperator</code>
+        </p>
+        <p>
+          Translates a textual operator name (with parameter types) to its OID. A similar result is
+          obtained by casting the string to type <code class="type">regoperator</code> (see
+          <a class="xref" href="datatype-oid.html" title="8.19.&nbsp;Object Identifier Types"
+            >Section&nbsp;8.19</a>); however, this function will return <code class="literal">NULL</code> rather than
+          throwing an error if the name is not found.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.36.1.1.1" class="indexterm"></a>
+          <code class="function">to_regproc</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">regproc</code>
+        </p>
+        <p>
+          Translates a textual function or procedure name to its OID. A similar result is obtained
+          by casting the string to type <code class="type">regproc</code> (see
+          <a class="xref" href="datatype-oid.html" title="8.19.&nbsp;Object Identifier Types">Section&nbsp;8.19</a>); however, this function will return <code class="literal">NULL</code> rather than
+          throwing an error if the name is not found or is ambiguous.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.37.1.1.1" class="indexterm"></a>
+          <code class="function">to_regprocedure</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">regprocedure</code>
+        </p>
+        <p>
+          Translates a textual function or procedure name (with argument types) to its OID. A
+          similar result is obtained by casting the string to type
+          <code class="type">regprocedure</code> (see
+          <a class="xref" href="datatype-oid.html" title="8.19.&nbsp;Object Identifier Types">Section&nbsp;8.19</a>); however, this function will return <code class="literal">NULL</code> rather than
+          throwing an error if the name is not found.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.38.1.1.1" class="indexterm"></a>
+          <code class="function">to_regrole</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">regrole</code>
+        </p>
+        <p>
+          Translates a textual role name to its OID. A similar result is obtained by casting the
+          string to type <code class="type">regrole</code> (see
+          <a class="xref" href="datatype-oid.html" title="8.19.&nbsp;Object Identifier Types">Section&nbsp;8.19</a>); however, this function will return <code class="literal">NULL</code> rather than
+          throwing an error if the name is not found.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.6.3.2.2.39.1.1.1" class="indexterm"></a>
+          <code class="function">to_regtype</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">regtype</code>
+        </p>
+        <p>
+          Translates a textual type name to its OID. A similar result is obtained by casting the
+          string to type <code class="type">regtype</code> (see
+          <a class="xref" href="datatype-oid.html" title="8.19.&nbsp;Object Identifier Types">Section&nbsp;8.19</a>); however, this function will return <code class="literal">NULL</code> rather than
+          throwing an error if the name is not found.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+Most of the functions that reconstruct (decompile) database objects have an optional _`pretty`_ flag, which if `true` causes the result to be “pretty-printed”. Pretty-printing suppresses unnecessary parentheses and adds whitespace for legibility. The pretty-printed format is more readable, but the default format is more likely to be interpreted the same way by future versions of PostgreSQL; so avoid using pretty-printed output for dump purposes. Passing `false` for the _`pretty`_ parameter yields the same result as omitting the parameter.
 
 [#id](#FUNCTIONS-INFO-INDEX-COLUMN-PROPS)
 
@@ -269,7 +1871,6 @@ Most of the functions that reconstruct (decompile) database objects have an opti
 | `search_array`       | Does the column natively support `col = ANY(array)` searches?                                          |
 | `search_nulls`       | Does the column support `IS NULL` and `IS NOT NULL` searches?                                          |
 
-
 [#id](#FUNCTIONS-INFO-INDEX-PROPS)
 
 **Table 9.74. Index Properties**
@@ -280,7 +1881,6 @@ Most of the functions that reconstruct (decompile) database objects have an opti
 | `index_scan`    | Does the index support plain (non-bitmap) scans?                                                                         |
 | `bitmap_scan`   | Does the index support bitmap scans?                                                                                     |
 | `backward_scan` | Can the scan direction be changed in mid-scan (to support `FETCH BACKWARD` on a cursor without needing materialization)? |
-
 
 [#id](#FUNCTIONS-INFO-INDEXAM-PROPS)
 
@@ -293,7 +1893,6 @@ Most of the functions that reconstruct (decompile) database objects have an opti
 | `can_multi_col` | Does the access method support indexes with multiple columns?                        |
 | `can_exclude`   | Does the access method support exclusion constraints?                                |
 | `can_include`   | Does the access method support the `INCLUDE` clause of `CREATE INDEX`?               |
-
 
 [#id](#FUNCTIONS-PG-SETTINGS-FLAGS)
 
@@ -318,18 +1917,133 @@ Most of the functions that reconstruct (decompile) database objects have an opti
 
 **Table 9.77. Object Information and Addressing Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `pg_describe_object` ( *`classid`* `oid`, *`objid`* `oid`, *`objsubid`* `integer` ) → `text`Returns a textual description of a database object identified by catalog OID, object OID, and sub-object ID (such as a column number within a table; the sub-object ID is zero when referring to a whole object). This description is intended to be human-readable, and might be translated, depending on server configuration. This is especially useful to determine the identity of an object referenced in the `pg_depend` catalog. This function returns `NULL` values for undefined objects.                                                                                                                                                                                                                                                                                                                                                                                              |
-| `pg_identify_object` ( *`classid`* `oid`, *`objid`* `oid`, *`objsubid`* `integer` ) → `record` ( *`type`* `text`, *`schema`* `text`, *`name`* `text`, *`identity`* `text` )Returns a row containing enough information to uniquely identify the database object specified by catalog OID, object OID and sub-object ID. This information is intended to be machine-readable, and is never translated. *`type`* identifies the type of database object; *`schema`* is the schema name that the object belongs in, or `NULL` for object types that do not belong to schemas; *`name`* is the name of the object, quoted if necessary, if the name (along with schema name, if pertinent) is sufficient to uniquely identify the object, otherwise `NULL`; *`identity`* is the complete object identity, with the precise format depending on object type, and each name within the format being schema-qualified and quoted as necessary. Undefined objects are identified with `NULL` values. |
-| `pg_identify_object_as_address` ( *`classid`* `oid`, *`objid`* `oid`, *`objsubid`* `integer` ) → `record` ( *`type`* `text`, *`object_names`* `text[]`, *`object_args`* `text[]` )Returns a row containing enough information to uniquely identify the database object specified by catalog OID, object OID and sub-object ID. The returned information is independent of the current server, that is, it could be used to identify an identically named object in another server. *`type`* identifies the type of database object; *`object_names`* and *`object_args`* are text arrays that together form a reference to the object. These three values can be passed to `pg_get_object_address` to obtain the internal address of the object.                                                                                                                                                                                                                                             |
-| `pg_get_object_address` ( *`type`* `text`, *`object_names`* `text[]`, *`object_args`* `text[]` ) → `record` ( *`classid`* `oid`, *`objid`* `oid`, *`objsubid`* `integer` )Returns a row containing enough information to uniquely identify the database object specified by a type code and object name and argument arrays. The returned values are the ones that would be used in system catalogs such as `pg_depend`; they can be passed to other system functions such as `pg_describe_object` or `pg_identify_object`. *`classid`* is the OID of the system catalog containing the object; *`objid`* is the OID of the object itself, and *`objsubid`* is the sub-object ID, or zero if none. This function is the inverse of `pg_identify_object_as_address`. Undefined objects are identified with `NULL` values.                                                                                                                                                                     |
+<table class="table" summary="Object Information and Addressing Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.7.3.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">pg_describe_object</code> (
+          <em class="parameter"><code>classid</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>objid</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>objsubid</code></em> <code class="type">integer</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Returns a textual description of a database object identified by catalog OID, object OID,
+          and sub-object ID (such as a column number within a table; the sub-object ID is zero when
+          referring to a whole object). This description is intended to be human-readable, and might
+          be translated, depending on server configuration. This is especially useful to determine
+          the identity of an object referenced in the
+          <code class="structname">pg_depend</code> catalog. This function returns
+          <code class="literal">NULL</code> values for undefined objects.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.7.3.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">pg_identify_object</code> (
+          <em class="parameter"><code>classid</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>objid</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>objsubid</code></em> <code class="type">integer</code> ) →
+          <code class="returnvalue">record</code> ( <em class="parameter"><code>type</code></em>
+          <code class="type">text</code>, <em class="parameter"><code>schema</code></em>
+          <code class="type">text</code>, <em class="parameter"><code>name</code></em>
+          <code class="type">text</code>, <em class="parameter"><code>identity</code></em>
+          <code class="type">text</code> )
+        </p>
+        <p>
+          Returns a row containing enough information to uniquely identify the database object
+          specified by catalog OID, object OID and sub-object ID. This information is intended to be
+          machine-readable, and is never translated.
+          <em class="parameter"><code>type</code></em> identifies the type of database object;
+          <em class="parameter"><code>schema</code></em> is the schema name that the object belongs
+          in, or <code class="literal">NULL</code> for object types that do not belong to schemas;
+          <em class="parameter"><code>name</code></em> is the name of the object, quoted if
+          necessary, if the name (along with schema name, if pertinent) is sufficient to uniquely
+          identify the object, otherwise <code class="literal">NULL</code>;
+          <em class="parameter"><code>identity</code></em> is the complete object identity, with the
+          precise format depending on object type, and each name within the format being
+          schema-qualified and quoted as necessary. Undefined objects are identified with
+          <code class="literal">NULL</code> values.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.7.3.2.2.3.1.1.1" class="indexterm"></a>
+          <code class="function">pg_identify_object_as_address</code> (
+          <em class="parameter"><code>classid</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>objid</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>objsubid</code></em> <code class="type">integer</code> ) →
+          <code class="returnvalue">record</code> ( <em class="parameter"><code>type</code></em>
+          <code class="type">text</code>, <em class="parameter"><code>object_names</code></em>
+          <code class="type">text[]</code>, <em class="parameter"><code>object_args</code></em>
+          <code class="type">text[]</code> )
+        </p>
+        <p>
+          Returns a row containing enough information to uniquely identify the database object
+          specified by catalog OID, object OID and sub-object ID. The returned information is
+          independent of the current server, that is, it could be used to identify an identically
+          named object in another server.
+          <em class="parameter"><code>type</code></em> identifies the type of database object;
+          <em class="parameter"><code>object_names</code></em> and
+          <em class="parameter"><code>object_args</code></em>
+          are text arrays that together form a reference to the object. These three values can be
+          passed to <code class="function">pg_get_object_address</code> to obtain the internal
+          address of the object.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.7.3.2.2.4.1.1.1" class="indexterm"></a>
+          <code class="function">pg_get_object_address</code> (
+          <em class="parameter"><code>type</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>object_names</code></em> <code class="type">text[]</code>,
+          <em class="parameter"><code>object_args</code></em> <code class="type">text[]</code> ) →
+          <code class="returnvalue">record</code> ( <em class="parameter"><code>classid</code></em>
+          <code class="type">oid</code>, <em class="parameter"><code>objid</code></em>
+          <code class="type">oid</code>, <em class="parameter"><code>objsubid</code></em>
+          <code class="type">integer</code> )
+        </p>
+        <p>
+          Returns a row containing enough information to uniquely identify the database object
+          specified by a type code and object name and argument arrays. The returned values are the
+          ones that would be used in system catalogs such as
+          <code class="structname">pg_depend</code>; they can be passed to other system functions
+          such as <code class="function">pg_describe_object</code> or
+          <code class="function">pg_identify_object</code>.
+          <em class="parameter"><code>classid</code></em> is the OID of the system catalog
+          containing the object; <em class="parameter"><code>objid</code></em> is the OID of the
+          object itself, and <em class="parameter"><code>objsubid</code></em> is the sub-object ID,
+          or zero if none. This function is the inverse of
+          <code class="function">pg_identify_object_as_address</code>. Undefined objects are
+          identified with <code class="literal">NULL</code> values.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 [#id](#FUNCTIONS-INFO-COMMENT)
 
 ### 9.26.6. Comment Information Functions [#](#FUNCTIONS-INFO-COMMENT)
-
-
 
 The functions shown in [Table 9.78](functions-info#FUNCTIONS-INFO-COMMENT-TABLE) extract comments previously stored with the [COMMENT](sql-comment) command. A null value is returned if no comment could be found for the specified parameters.
 
@@ -337,12 +2051,88 @@ The functions shown in [Table 9.78](functions-info#FUNCTIONS-INFO-COMMENT-TABLE
 
 **Table 9.78. Comment Information Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `col_description` ( *`table`* `oid`, *`column`* `integer` ) → `text`Returns the comment for a table column, which is specified by the OID of its table and its column number. (`obj_description` cannot be used for table columns, since columns do not have OIDs of their own.)                                                                                                                                                                                                         |
-| `obj_description` ( *`object`* `oid`, *`catalog`* `name` ) → `text`Returns the comment for a database object specified by its OID and the name of the containing system catalog. For example, `obj_description(123456, 'pg_class')` would retrieve the comment for the table with OID 123456.                                                                                                                                                                                            |
-| `obj_description` ( *`object`* `oid` ) → `text`Returns the comment for a database object specified by its OID alone. This is *deprecated* since there is no guarantee that OIDs are unique across different system catalogs; therefore, the wrong comment might be returned.                                                                                                                                                                                                                 |
-| `shobj_description` ( *`object`* `oid`, *`catalog`* `name` ) → `text`Returns the comment for a shared database object specified by its OID and the name of the containing system catalog. This is just like `obj_description` except that it is used for retrieving comments on shared objects (that is, databases, roles, and tablespaces). Some system catalogs are global to all databases within each cluster, and the descriptions for objects in them are stored globally as well. |
+<table class="table" summary="Comment Information Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.8.4.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">col_description</code> (
+          <em class="parameter"><code>table</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>column</code></em> <code class="type">integer</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Returns the comment for a table column, which is specified by the OID of its table and its
+          column number. (<code class="function">obj_description</code> cannot be used for table
+          columns, since columns do not have OIDs of their own.)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.8.4.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">obj_description</code> (
+          <em class="parameter"><code>object</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>catalog</code></em> <code class="type">name</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Returns the comment for a database object specified by its OID and the name of the
+          containing system catalog. For example,
+          <code class="literal">obj_description(123456, 'pg_class')</code> would retrieve the
+          comment for the table with OID 123456.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <code class="function">obj_description</code> (
+          <em class="parameter"><code>object</code></em> <code class="type">oid</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Returns the comment for a database object specified by its OID alone. This is
+          <span class="emphasis"><em>deprecated</em></span> since there is no guarantee that OIDs
+          are unique across different system catalogs; therefore, the wrong comment might be
+          returned.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.8.4.2.2.4.1.1.1" class="indexterm"></a>
+          <code class="function">shobj_description</code> (
+          <em class="parameter"><code>object</code></em> <code class="type">oid</code>,
+          <em class="parameter"><code>catalog</code></em> <code class="type">name</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Returns the comment for a shared database object specified by its OID and the name of the
+          containing system catalog. This is just like
+          <code class="function">obj_description</code> except that it is used for retrieving
+          comments on shared objects (that is, databases, roles, and tablespaces). Some system
+          catalogs are global to all databases within each cluster, and the descriptions for objects
+          in them are stored globally as well.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 [#id](#FUNCTIONS-INFO-VALIDITY)
 
@@ -354,20 +2144,104 @@ The functions shown in [Table 9.79](functions-info#FUNCTIONS-INFO-VALIDITY-TABL
 
 **Table 9.79. Data Validity Checking Functions**
 
-| FunctionDescriptionExample(s)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pg_input_is_valid` ( *`string`* `text`, *`type`* `text` ) → `boolean`Tests whether the given *`string`* is valid input for the specified data type, returning true or false.This function will only work as desired if the data type's input function has been updated to report invalid input as a “soft” error. Otherwise, invalid input will abort the transaction, just as if the string had been cast to the type directly.`pg_input_is_valid('42', 'integer')` → `t``pg_input_is_valid('42000000000', 'integer')` → `f``pg_input_is_valid('1234.567', 'numeric(7,4)')` → `f`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `pg_input_error_info` ( *`string`* `text`, *`type`* `text` ) → `record` ( *`message`* `text`, *`detail`* `text`, *`hint`* `text`, *`sql_error_code`* `text` )Tests whether the given *`string`* is valid input for the specified data type; if not, return the details of the error that would have been thrown. If the input is valid, the results are NULL. The inputs are the same as for `pg_input_is_valid`.This function will only work as desired if the data type's input function has been updated to report invalid input as a “soft” error. Otherwise, invalid input will abort the transaction, just as if the string had been cast to the type directly.`select * from pg_input_error_info('42000000000', 'integer')` →`````
-
+<table class="table" summary="Data Validity Checking Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+        <p>Example(s)</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.9.3.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">pg_input_is_valid</code> (
+          <em class="parameter"><code>string</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>type</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Tests whether the given <em class="parameter"><code>string</code></em> is valid input for
+          the specified data type, returning true or false.
+        </p>
+        <p>
+          This function will only work as desired if the data type's input function has been updated
+          to report invalid input as a
+          <span class="quote">“<span class="quote">soft</span>”</span> error. Otherwise, invalid
+          input will abort the transaction, just as if the string had been cast to the type
+          directly.
+        </p>
+        <p>
+          <code class="literal">pg_input_is_valid('42', 'integer')</code>
+          → <code class="returnvalue">t</code>
+        </p>
+        <p>
+          <code class="literal">pg_input_is_valid('42000000000', 'integer')</code>
+          → <code class="returnvalue">f</code>
+        </p>
+        <p>
+          <code class="literal">pg_input_is_valid('1234.567', 'numeric(7,4)')</code>
+          → <code class="returnvalue">f</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.9.3.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">pg_input_error_info</code> (
+          <em class="parameter"><code>string</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>type</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">record</code> ( <em class="parameter"><code>message</code></em>
+          <code class="type">text</code>, <em class="parameter"><code>detail</code></em>
+          <code class="type">text</code>, <em class="parameter"><code>hint</code></em>
+          <code class="type">text</code>, <em class="parameter"><code>sql_error_code</code></em>
+          <code class="type">text</code> )
+        </p>
+        <p>
+          Tests whether the given <em class="parameter"><code>string</code></em> is valid input for
+          the specified data type; if not, return the details of the error that would have been
+          thrown. If the input is valid, the results are NULL. The inputs are the same as for
+          <code class="function">pg_input_is_valid</code>.
+        </p>
+        <p>
+          This function will only work as desired if the data type's input function has been updated
+          to report invalid input as a
+          <span class="quote">“<span class="quote">soft</span>”</span> error. Otherwise, invalid
+          input will abort the transaction, just as if the string had been cast to the type
+          directly.
+        </p>
+        <p>
+          <code class="literal">select * from pg_input_error_info('42000000000', 'integer')</code>
+          → <code class="returnvalue"></code>
+        </p>
+        <pre class="programlisting">
                        message                        | detail | hint | sql_error_code
 ------------------------------------------------------+--------+------+----------------
  value "42000000000" is out of range for type integer |        |      | 22003
-````select message, detail from pg_input_error_info('1234.567', 'numeric(7,4)')` →`````
-
+</pre>
+        <p></p>
+        <p>
+          <code class="literal">select message, detail from pg_input_error_info('1234.567', 'numeric(7,4)')</code>
+          → <code class="returnvalue"></code>
+        </p>
+        <pre class="programlisting">
         message         |                                      detail
-------------------------+----------------------------------​-------------------------------------------------
+------------------------+----------------------------------&ZeroWidthSpace;-------------------------------------------------
  numeric field overflow | A field with precision 7, scale 4 must round to an absolute value less than 10^3.
-``` |
+</pre>
+        <p></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 [#id](#FUNCTIONS-INFO-SNAPSHOT)
 
@@ -379,17 +2253,139 @@ The functions shown in [Table 9.80](functions-info#FUNCTIONS-PG-SNAPSHOT) provi
 
 **Table 9.80. Transaction ID and Snapshot Information Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pg_current_xact_id` () → `xid8`Returns the current transaction's ID. It will assign a new one if the current transaction does not have one already (because it has not performed any database updates); see [Section 74.1](transaction-id) for details. If executed in a subtransaction, this will return the top-level transaction ID; see [Section 74.3](subxacts) for details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `pg_current_xact_id_if_assigned` () → `xid8`Returns the current transaction's ID, or `NULL` if no ID is assigned yet. (It's best to use this variant if the transaction might otherwise be read-only, to avoid unnecessary consumption of an XID.) If executed in a subtransaction, this will return the top-level transaction ID.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `pg_xact_status` ( `xid8` ) → `text`Reports the commit status of a recent transaction. The result is one of `in progress`, `committed`, or `aborted`, provided that the transaction is recent enough that the system retains the commit status of that transaction. If it is old enough that no references to the transaction survive in the system and the commit status information has been discarded, the result is `NULL`. Applications might use this function, for example, to determine whether their transaction committed or aborted after the application and database server become disconnected while a `COMMIT` is in progress. Note that prepared transactions are reported as `in progress`; applications must check [`pg_prepared_xacts`](view-pg-prepared-xacts) if they need to determine whether a transaction ID belongs to a prepared transaction. |
-| `pg_current_snapshot` () → `pg_snapshot`Returns a current *snapshot*, a data structure showing which transaction IDs are now in-progress. Only top-level transaction IDs are included in the snapshot; subtransaction IDs are not shown; see [Section 74.3](subxacts) for details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `pg_snapshot_xip` ( `pg_snapshot` ) → `setof xid8`Returns the set of in-progress transaction IDs contained in a snapshot.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `pg_snapshot_xmax` ( `pg_snapshot` ) → `xid8`Returns the `xmax` of a snapshot.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `pg_snapshot_xmin` ( `pg_snapshot` ) → `xid8`Returns the `xmin` of a snapshot.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `pg_visible_in_snapshot` ( `xid8`, `pg_snapshot` ) → `boolean`Is the given transaction ID *visible* according to this snapshot (that is, was it completed before the snapshot was taken)? Note that this function will not give the correct answer for a subtransaction ID (subxid); see [Section 74.3](subxacts) for details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-
+<table class="table" summary="Transaction ID and Snapshot Information Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.3.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">pg_current_xact_id</code> () →
+          <code class="returnvalue">xid8</code>
+        </p>
+        <p>
+          Returns the current transaction's ID. It will assign a new one if the current transaction
+          does not have one already (because it has not performed any database updates); see
+          <a class="xref" href="transaction-id.html" title="74.1.&nbsp;Transactions and Identifiers">Section&nbsp;74.1</a>
+          for details. If executed in a subtransaction, this will return the top-level transaction
+          ID; see
+          <a class="xref" href="subxacts.html" title="74.3.&nbsp;Subtransactions">Section&nbsp;74.3</a>
+          for details.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.3.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">pg_current_xact_id_if_assigned</code> () →
+          <code class="returnvalue">xid8</code>
+        </p>
+        <p>
+          Returns the current transaction's ID, or <code class="literal">NULL</code> if no ID is
+          assigned yet. (It's best to use this variant if the transaction might otherwise be
+          read-only, to avoid unnecessary consumption of an XID.) If executed in a subtransaction,
+          this will return the top-level transaction ID.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.3.2.2.3.1.1.1" class="indexterm"></a>
+          <code class="function">pg_xact_status</code> ( <code class="type">xid8</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>
+          Reports the commit status of a recent transaction. The result is one of
+          <code class="literal">in progress</code>, <code class="literal">committed</code>, or
+          <code class="literal">aborted</code>, provided that the transaction is recent enough that
+          the system retains the commit status of that transaction. If it is old enough that no
+          references to the transaction survive in the system and the commit status information has
+          been discarded, the result is <code class="literal">NULL</code>. Applications might use
+          this function, for example, to determine whether their transaction committed or aborted
+          after the application and database server become disconnected while a
+          <code class="literal">COMMIT</code> is in progress. Note that prepared transactions are
+          reported as <code class="literal">in progress</code>; applications must check
+          <a class="link" href="view-pg-prepared-xacts.html" title="54.16.&nbsp;pg_prepared_xacts"><code class="structname">pg_prepared_xacts</code></a>
+          if they need to determine whether a transaction ID belongs to a prepared transaction.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.3.2.2.4.1.1.1" class="indexterm"></a>
+          <code class="function">pg_current_snapshot</code> () →
+          <code class="returnvalue">pg_snapshot</code>
+        </p>
+        <p>
+          Returns a current <em class="firstterm">snapshot</em>, a data structure showing which
+          transaction IDs are now in-progress. Only top-level transaction IDs are included in the
+          snapshot; subtransaction IDs are not shown; see
+          <a class="xref" href="subxacts.html" title="74.3.&nbsp;Subtransactions">Section&nbsp;74.3</a>
+          for details.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.3.2.2.5.1.1.1" class="indexterm"></a>
+          <code class="function">pg_snapshot_xip</code> ( <code class="type">pg_snapshot</code> ) →
+          <code class="returnvalue">setof xid8</code>
+        </p>
+        <p>Returns the set of in-progress transaction IDs contained in a snapshot.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.3.2.2.6.1.1.1" class="indexterm"></a>
+          <code class="function">pg_snapshot_xmax</code> ( <code class="type">pg_snapshot</code> ) →
+          <code class="returnvalue">xid8</code>
+        </p>
+        <p>Returns the <code class="structfield">xmax</code> of a snapshot.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.3.2.2.7.1.1.1" class="indexterm"></a>
+          <code class="function">pg_snapshot_xmin</code> ( <code class="type">pg_snapshot</code> ) →
+          <code class="returnvalue">xid8</code>
+        </p>
+        <p>Returns the <code class="structfield">xmin</code> of a snapshot.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.3.2.2.8.1.1.1" class="indexterm"></a>
+          <code class="function">pg_visible_in_snapshot</code> ( <code class="type">xid8</code>,
+          <code class="type">pg_snapshot</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>
+          Is the given transaction ID <em class="firstterm">visible</em> according to this snapshot
+          (that is, was it completed before the snapshot was taken)? Note that this function will
+          not give the correct answer for a subtransaction ID (subxid); see
+          <a class="xref" href="subxacts.html" title="74.3.&nbsp;Subtransactions">Section&nbsp;74.3</a>
+          for details.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 The internal transaction ID type `xid` is 32 bits wide and wraps around every 4 billion transactions. However, the functions shown in [Table 9.80](functions-info#FUNCTIONS-PG-SNAPSHOT) use a 64-bit type `xid8` that does not wrap around during the life of an installation and can be converted to `xid` by casting if required; see [Section 74.1](transaction-id) for details. The data type `pg_snapshot` stores information about transaction ID visibility at a particular moment in time. Its components are described in [Table 9.81](functions-info#FUNCTIONS-PG-SNAPSHOT-PARTS). `pg_snapshot`'s textual representation is `xmin:xmax:xip_list`. For example `10:20:10,14,15` means `xmin=10, xmax=20, xip_list=10, 14, 15`.
 
@@ -403,57 +2399,264 @@ The internal transaction ID type `xid` is 32 bits wide and wraps around every 4 
 | `xmax`     | One past the highest completed transaction ID. All transaction IDs greater than or equal to `xmax` had not yet completed as of the time of the snapshot, and thus are invisible.                                                                                                                                          |
 | `xip_list` | Transactions in progress at the time of the snapshot. A transaction ID that is `xmin <= X < xmax` and not in this list was already completed at the time of the snapshot, and thus is either visible or dead according to its commit status. This list does not include the transaction IDs of subtransactions (subxids). |
 
-
 In releases of PostgreSQL before 13 there was no `xid8` type, so variants of these functions were provided that used `bigint` to represent a 64-bit XID, with a correspondingly distinct snapshot data type `txid_snapshot`. These older functions have `txid` in their names. They are still supported for backward compatibility, but may be removed from a future release. See [Table 9.82](functions-info#FUNCTIONS-TXID-SNAPSHOT).
 
 [#id](#FUNCTIONS-TXID-SNAPSHOT)
 
 **Table 9.82. Deprecated Transaction ID and Snapshot Information Functions**
 
-| FunctionDescription                                                                                     |
-| ------------------------------------------------------------------------------------------------------- |
-| `txid_current` () → `bigint`See `pg_current_xact_id()`.                                             |
-| `txid_current_if_assigned` () → `bigint`See `pg_current_xact_id_if_assigned()`.                     |
-| `txid_current_snapshot` () → `txid_snapshot`See `pg_current_snapshot()`.                            |
-| `txid_snapshot_xip` ( `txid_snapshot` ) → `setof bigint`See `pg_snapshot_xip()`.                    |
-| `txid_snapshot_xmax` ( `txid_snapshot` ) → `bigint`See `pg_snapshot_xmax()`.                        |
-| `txid_snapshot_xmin` ( `txid_snapshot` ) → `bigint`See `pg_snapshot_xmin()`.                        |
-| `txid_visible_in_snapshot` ( `bigint`, `txid_snapshot` ) → `boolean`See `pg_visible_in_snapshot()`. |
-| `txid_status` ( `bigint` ) → `text`See `pg_xact_status()`.                                          |
+<table
+  class="table"
+  summary="Deprecated Transaction ID and Snapshot Information Functions"
+  border="1"
+>
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.7.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">txid_current</code> () → <code class="returnvalue">bigint</code>
+        </p>
+        <p>See <code class="function">pg_current_xact_id()</code>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.7.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">txid_current_if_assigned</code> () →
+          <code class="returnvalue">bigint</code>
+        </p>
+        <p>See <code class="function">pg_current_xact_id_if_assigned()</code>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.7.2.2.3.1.1.1" class="indexterm"></a>
+          <code class="function">txid_current_snapshot</code> () →
+          <code class="returnvalue">txid_snapshot</code>
+        </p>
+        <p>See <code class="function">pg_current_snapshot()</code>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.7.2.2.4.1.1.1" class="indexterm"></a>
+          <code class="function">txid_snapshot_xip</code> (
+          <code class="type">txid_snapshot</code> ) → <code class="returnvalue">setof bigint</code>
+        </p>
+        <p>See <code class="function">pg_snapshot_xip()</code>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.7.2.2.5.1.1.1" class="indexterm"></a>
+          <code class="function">txid_snapshot_xmax</code> (
+          <code class="type">txid_snapshot</code> ) → <code class="returnvalue">bigint</code>
+        </p>
+        <p>See <code class="function">pg_snapshot_xmax()</code>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.7.2.2.6.1.1.1" class="indexterm"></a>
+          <code class="function">txid_snapshot_xmin</code> (
+          <code class="type">txid_snapshot</code> ) → <code class="returnvalue">bigint</code>
+        </p>
+        <p>See <code class="function">pg_snapshot_xmin()</code>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.7.2.2.7.1.1.1" class="indexterm"></a>
+          <code class="function">txid_visible_in_snapshot</code> ( <code class="type">bigint</code>,
+          <code class="type">txid_snapshot</code> ) → <code class="returnvalue">boolean</code>
+        </p>
+        <p>See <code class="function">pg_visible_in_snapshot()</code>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.10.7.2.2.8.1.1.1" class="indexterm"></a>
+          <code class="function">txid_status</code> ( <code class="type">bigint</code> ) →
+          <code class="returnvalue">text</code>
+        </p>
+        <p>See <code class="function">pg_xact_status()</code>.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 [#id](#FUNCTIONS-INFO-COMMIT-TIMESTAMP)
 
 ### 9.26.9. Committed Transaction Information Functions [#](#FUNCTIONS-INFO-COMMIT-TIMESTAMP)
 
-The functions shown in [Table 9.83](functions-info#FUNCTIONS-COMMIT-TIMESTAMP) provide information about when past transactions were committed. They only provide useful data when the [track\_commit\_timestamp](runtime-config-replication#GUC-TRACK-COMMIT-TIMESTAMP) configuration option is enabled, and only for transactions that were committed after it was enabled.
+The functions shown in [Table 9.83](functions-info#FUNCTIONS-COMMIT-TIMESTAMP) provide information about when past transactions were committed. They only provide useful data when the [track_commit_timestamp](runtime-config-replication#GUC-TRACK-COMMIT-TIMESTAMP) configuration option is enabled, and only for transactions that were committed after it was enabled.
 
 [#id](#FUNCTIONS-COMMIT-TIMESTAMP)
 
 **Table 9.83. Committed Transaction Information Functions**
 
-| FunctionDescription                                                                                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pg_xact_commit_timestamp` ( `xid` ) → `timestamp with time zone`Returns the commit timestamp of a transaction.                                                                                                               |
-| `pg_xact_commit_timestamp_origin` ( `xid` ) → `record` ( *`timestamp`* `timestamp with time zone`, *`roident`* `oid`)Returns the commit timestamp and replication origin of a transaction.                                    |
-| `pg_last_committed_xact` () → `record` ( *`xid`* `xid`, *`timestamp`* `timestamp with time zone`, *`roident`* `oid` )Returns the transaction ID, commit timestamp and replication origin of the latest committed transaction. |
+<table class="table" summary="Committed Transaction Information Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.11.3.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">pg_xact_commit_timestamp</code> ( <code class="type">xid</code> ) →
+          <code class="returnvalue">timestamp with time zone</code>
+        </p>
+        <p>Returns the commit timestamp of a transaction.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.11.3.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">pg_xact_commit_timestamp_origin</code> (
+          <code class="type">xid</code> ) → <code class="returnvalue">record</code> (
+          <em class="parameter"><code>timestamp</code></em>
+          <code class="type">timestamp with time zone</code>,
+          <em class="parameter"><code>roident</code></em> <code class="type">oid</code>)
+        </p>
+        <p>Returns the commit timestamp and replication origin of a transaction.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.11.3.2.2.3.1.1.1" class="indexterm"></a>
+          <code class="function">pg_last_committed_xact</code> () →
+          <code class="returnvalue">record</code> ( <em class="parameter"><code>xid</code></em>
+          <code class="type">xid</code>, <em class="parameter"><code>timestamp</code></em>
+          <code class="type">timestamp with time zone</code>,
+          <em class="parameter"><code>roident</code></em> <code class="type">oid</code> )
+        </p>
+        <p>
+          Returns the transaction ID, commit timestamp and replication origin of the latest
+          committed transaction.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 [#id](#FUNCTIONS-INFO-CONTROLDATA)
 
 ### 9.26.10. Control Data Functions [#](#FUNCTIONS-INFO-CONTROLDATA)
 
-The functions shown in [Table 9.84](functions-info#FUNCTIONS-CONTROLDATA) print information initialized during `initdb`, such as the catalog version. They also show information about write-ahead logging and checkpoint processing. This information is cluster-wide, not specific to any one database. These functions provide most of the same information, from the same source, as the [pg\_controldata](app-pgcontroldata) application.
+The functions shown in [Table 9.84](functions-info#FUNCTIONS-CONTROLDATA) print information initialized during `initdb`, such as the catalog version. They also show information about write-ahead logging and checkpoint processing. This information is cluster-wide, not specific to any one database. These functions provide most of the same information, from the same source, as the [pg_controldata](app-pgcontroldata) application.
 
 [#id](#FUNCTIONS-CONTROLDATA)
 
 **Table 9.84. Control Data Functions**
 
-| FunctionDescription                                                                                                                                                         |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pg_control_checkpoint` () → `record`Returns information about current checkpoint state, as shown in [Table 9.85](functions-info#FUNCTIONS-PG-CONTROL-CHECKPOINT). |
-| `pg_control_system` () → `record`Returns information about current control file state, as shown in [Table 9.86](functions-info#FUNCTIONS-PG-CONTROL-SYSTEM).       |
-| `pg_control_init` () → `record`Returns information about cluster initialization state, as shown in [Table 9.87](functions-info#FUNCTIONS-PG-CONTROL-INIT).         |
-| `pg_control_recovery` () → `record`Returns information about recovery state, as shown in [Table 9.88](functions-info#FUNCTIONS-PG-CONTROL-RECOVERY).               |
-
+<table class="table" summary="Control Data Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <p class="func_signature">Function</p>
+        <p>Description</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.12.3.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">pg_control_checkpoint</code> () →
+          <code class="returnvalue">record</code>
+        </p>
+        <p>
+          Returns information about current checkpoint state, as shown in
+          <a
+            class="xref"
+            href="functions-info.html#FUNCTIONS-PG-CONTROL-CHECKPOINT"
+            title="Table&nbsp;9.85.&nbsp;pg_control_checkpoint Output Columns">Table&nbsp;9.85</a>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.12.3.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">pg_control_system</code> () →
+          <code class="returnvalue">record</code>
+        </p>
+        <p>
+          Returns information about current control file state, as shown in
+          <a
+            class="xref"
+            href="functions-info.html#FUNCTIONS-PG-CONTROL-SYSTEM"
+            title="Table&nbsp;9.86.&nbsp;pg_control_system Output Columns">Table&nbsp;9.86</a>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.12.3.2.2.3.1.1.1" class="indexterm"></a>
+          <code class="function">pg_control_init</code> () → <code class="returnvalue">record</code>
+        </p>
+        <p>
+          Returns information about cluster initialization state, as shown in
+          <a
+            class="xref"
+            href="functions-info.html#FUNCTIONS-PG-CONTROL-INIT"
+            title="Table&nbsp;9.87.&nbsp;pg_control_init Output Columns">Table&nbsp;9.87</a>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <p class="func_signature">
+          <a id="id-1.5.8.32.12.3.2.2.4.1.1.1" class="indexterm"></a>
+          <code class="function">pg_control_recovery</code> () →
+          <code class="returnvalue">record</code>
+        </p>
+        <p>
+          Returns information about recovery state, as shown in
+          <a
+            class="xref"
+            href="functions-info.html#FUNCTIONS-PG-CONTROL-RECOVERY"
+            title="Table&nbsp;9.88.&nbsp;pg_control_recovery Output Columns">Table&nbsp;9.88</a>.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 [#id](#FUNCTIONS-PG-CONTROL-CHECKPOINT)
 
@@ -480,7 +2683,6 @@ The functions shown in [Table 9.84](functions-info#FUNCTIONS-CONTROLDATA) print
 | `newest_commit_ts_xid` | `xid`                      |
 | `checkpoint_time`      | `timestamp with time zone` |
 
-
 [#id](#FUNCTIONS-PG-CONTROL-SYSTEM)
 
 **Table 9.86. `pg_control_system` Output Columns**
@@ -491,7 +2693,6 @@ The functions shown in [Table 9.84](functions-info#FUNCTIONS-CONTROLDATA) print
 | `catalog_version_no`       | `integer`                  |
 | `system_identifier`        | `bigint`                   |
 | `pg_control_last_modified` | `timestamp with time zone` |
-
 
 [#id](#FUNCTIONS-PG-CONTROL-INIT)
 
@@ -511,7 +2712,6 @@ The functions shown in [Table 9.84](functions-info#FUNCTIONS-CONTROLDATA) print
 | `float8_pass_by_value`       | `boolean` |
 | `data_page_checksum_version` | `integer` |
 
-
 [#id](#FUNCTIONS-PG-CONTROL-RECOVERY)
 
 **Table 9.88. `pg_control_recovery` Output Columns**
@@ -523,3 +2723,7 @@ The functions shown in [Table 9.84](functions-info#FUNCTIONS-CONTROLDATA) print
 | `backup_start_lsn`              | `pg_lsn`  |
 | `backup_end_lsn`                | `pg_lsn`  |
 | `end_of_backup_record_required` | `boolean` |
+
+```
+
+```
