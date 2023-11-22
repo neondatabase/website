@@ -49,6 +49,19 @@ const defaultConfig = {
           },
         ],
       },
+      {
+        source: '/blog/parsing-json-from-postgres-in-js',
+        headers: [
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'require-corp',
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin',
+          },
+        ],
+      },
     ];
   },
   async redirects() {
@@ -91,6 +104,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/docs/postgres',
+        destination: '/docs/postgres/index',
+        permanent: true,
+      },
+      {
         source: '/early-access',
         destination: '/',
         permanent: true,
@@ -125,6 +143,22 @@ const defaultConfig = {
         destination: 'https://trust.neon.tech',
         permanent: true,
       },
+      {
+        source: '/developer-days',
+        destination: 'https://devdays.neon.tech',
+        permanent: true,
+      },
+      {
+        source: '/ping-thing',
+        destination: '/demos/ping-thing',
+        permanent: true,
+      },
+      // redirect all path that contains /docs/postgres/**/*.html to /docs/postgres/**
+      {
+        source: '/docs/postgres/:path*.html',
+        destination: '/docs/postgres/:path*',
+        permanent: true,
+      },
       ...docsRedirects,
     ];
   },
@@ -135,12 +169,20 @@ const defaultConfig = {
         destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
       },
       {
-        source: '/ping-thing',
-        destination: 'https://ping-thing.vercel.app/ping-thing',
+        source: '/demos/ping-thing',
+        destination: 'https://ping-thing.vercel.app/demos/ping-thing',
       },
       {
-        source: '/ping-thing/:path*',
-        destination: 'https://ping-thing.vercel.app/ping-thing/:path*',
+        source: '/demos/ping-thing/:path*',
+        destination: 'https://ping-thing.vercel.app/demos/ping-thing/:path*',
+      },
+      {
+        source: '/demos/playground',
+        destination: 'https://postgres-ai-playground.vercel.app/demos/playground',
+      },
+      {
+        source: '/demos/playground/:path*',
+        destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
       },
     ];
   },

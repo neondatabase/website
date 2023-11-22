@@ -54,6 +54,7 @@
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
 - title: Connect
+  slug: connect/connect-intro
   items:
     - title: Connect from any application
       slug: connect/connect-from-any-app
@@ -95,9 +96,16 @@
       slug: manage/integrations
     - title: Operations
       slug: manage/operations
+    - title: Access
+      items: 
+         - title: Project access
+           slug: manage/project-access
+         - title: Database access
+           slug: manage/database-access
     - title: Backups
       slug: manage/backups
 - title: Guides
+  slug: guides/guides-intro
   items:
     - title: Neon features
       items: 
@@ -106,6 +114,7 @@
         - title: Auto-suspend
           slug: guides/auto-suspend-guide
         - title: Branching
+          slug: guides/branching-intro
           items: 
             - title: Branching — Point-in-time restore
               slug: guides/branching-pitr
@@ -119,7 +128,7 @@
               slug: guides/branching-github-actions
             - title: Refresh a branch with the Neon API
               slug: guides/branch-refresh
-            - title: Promote a branch to primary with the Neon API
+            - title: Promote a branch with the Neon API
               slug: guides/branch-promote
         - title: Project sharing
           slug: guides/project-sharing-guide
@@ -131,12 +140,18 @@
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
               slug: guides/read-replica-prisma
-        - title: Manage roles and databases with SQL
-          slug: guides/manage-database-access
         - title: Extensions
           items:
             - title: neon_utils
               slug: extensions/neon-utils
+    - title: Frameworks
+      items:
+        - title: Next.js
+          slug: guides/nextjs
+        - title: Astro
+          slug: guides/astro
+        - title: Remix
+          slug: guides/remix
     - title: Languages
       items:
         - title: Elixir
@@ -145,11 +160,15 @@
           slug: guides/go
           ariaLabel: Connect a Go application to Neon
         - title: Java
-          slug: guides/java
+          items:
+            - title: Quarkus (JDBC)
+              slug: guides/quarkus-jdbc
+            - title: Quarkus (Reactive)
+              slug: guides/quarkus-reactive
+            - title: JDBC
+              slug: guides/java
         - title: Javascript
           items:
-            - title: Next.js
-              slug: guides/nextjs
             - title: Node.js
               slug: guides/node
             - title: Prisma
@@ -220,26 +239,33 @@
       slug: ai/ai-concepts
     - title: Scale with Neon
       slug: ai/ai-scale-with-neon
-    - title: pg_embedding
-      slug: extensions/pg_embedding
     - title: pgvector
       slug: extensions/pgvector
     - title: pg_tiktoken
       slug: extensions/pg_tiktoken
+    - title: pg_embedding
+      slug: extensions/pg_embedding
+    - title: AI tools
+      items:
+        - title: Google Colab
+          slug: ai/ai-google-colab
 - title: Postgres extensions
   slug: extensions/pg-extensions
 - title: Import data
+  slug: import/import-intro
   items:
     - title: Import from Postgres
       slug: import/import-from-postgres
-    - title: Import from Heroku
-      slug: import/import-from-heroku
-    - title: Import from CSV
-      slug: import/import-from-csv
     - title: Import from a Neon project
       slug: import/import-from-neon
+    - title: Import from CSV
+      slug: import/import-from-csv
+    - title: Import from Heroku
+      slug: import/import-from-heroku
     - title: Migrate data with AWS DMS
       slug: import/migrate-aws-dms
+    - title: Sample data
+      slug: import/import-sample-data
 - title: Security
   items:
     - title: Security overview
@@ -279,3 +305,8 @@
       slug: reference/glossary
     - title: Postgres compatibility
       slug: reference/compatibility
+- title: Community
+  slug: community/community-intro
+  items:
+    - title: Docs Contribution Guide
+      slug: community/contribution-guide

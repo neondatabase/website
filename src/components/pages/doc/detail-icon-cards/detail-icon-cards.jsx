@@ -5,11 +5,27 @@ import Link from 'components/shared/link/link';
 
 import AppStore from './images/app-store.inline.svg';
 import AudioJack from './images/audio-jack.inline.svg';
+import Autoscaling from './images/autoscaling.inline.svg';
+import Branching from './images/branching.inline.svg';
+import ChartBar from './images/chart-bar.inline.svg';
+import CLI from './images/cli.inline.svg';
+import Enable from './images/enable.inline.svg';
+import Filter from './images/filter.inline.svg';
 import Github from './images/github.inline.svg';
+import Hourglass from './images/hourglass.inline.svg';
 import Import from './images/import.inline.svg';
+import Invert from './images/invert.inline.svg';
 import Ladder from './images/ladder.inline.svg';
+import OpenAI from './images/openai.inline.svg';
+import Queries from './images/queries.inline.svg';
+import Refresh from './images/refresh.inline.svg';
+import RespondArrow from './images/respond-arrow.inline.svg';
+import ScaleUp from './images/scale-up.inline.svg';
+import Screen from './images/screen.inline.svg';
+import Setup from './images/setup.inline.svg';
 import SplitBranch from './images/split-branch.inline.svg';
 import Transactions from './images/transactions.inline.svg';
+import TrendUp from './images/trend-up.inline.svg';
 
 const icons = {
   'audio-jack': AudioJack,
@@ -19,6 +35,22 @@ const icons = {
   'app-store': AppStore,
   transactions: Transactions,
   github: Github,
+  openai: OpenAI,
+  'trend-up': TrendUp,
+  autoscaling: Autoscaling,
+  branching: Branching,
+  cli: CLI,
+  enable: Enable,
+  filter: Filter,
+  hourglass: Hourglass,
+  invert: Invert,
+  queries: Queries,
+  refresh: Refresh,
+  setup: Setup,
+  'scale-up': ScaleUp,
+  'respond-arrow': RespondArrow,
+  'chart-bar': ChartBar,
+  screen: Screen,
 };
 
 const DetailIconCards = ({ children = null }) => (

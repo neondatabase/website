@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import useCookie from 'react-use/lib/useCookie';
@@ -14,6 +15,7 @@ import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
 
 import SendIcon from './images/send.inline.svg';
+import subscribeSmPattern from './images/subscribe-sm.pattern.svg';
 
 const STATES = {
   DEFAULT: 'default',
@@ -28,7 +30,7 @@ const appearAndExitAnimationVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const SubscribeForm = ({ className = null, size = 'lg' }) => {
+const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState(STATES.DEFAULT);
   const [submittedEmail, setSubmittedEmail] = useLocalStorage('submittedEmailNewsletterForm', []);
@@ -85,13 +87,13 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
         } else {
           doNowOrAfterSomeTime(() => {
             setFormState(STATES.ERROR);
-            setErrorMessage('Something went wrong. Please reload the page and try again');
+            setErrorMessage('Please reload the page and try again');
           }, loadingAnimationStartedTime);
         }
       } catch (error) {
         doNowOrAfterSomeTime(() => {
           setFormState(STATES.ERROR);
-          setErrorMessage('Something went wrong. Please reload the page and try again');
+          setErrorMessage('Please reload the page and try again');
         }, loadingAnimationStartedTime);
       }
     }
@@ -101,43 +103,71 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
     <section
       className={clsx(
         'subscribe-form safe-paddings overflow-hidden',
-
         {
           'pb-[125px] pt-[118px] xl:pb-[123px] xl:pt-[104px] lg:pb-28 lg:pt-20 md:pb-24 md:pt-16':
             size === 'lg',
           'mt:pt-7 -mx-10 rounded-xl bg-black-new p-[70px] pr-28 2xl:mx-0 2xl:px-10 xl:py-14 lt:px-11 lg:pb-16 md:px-5 md:pb-12 md:pt-7':
             size === 'md',
+          'rounded-md px-7 py-6 relative overflow-hidden': size === 'sm',
+          'before:bg-subscribe-sm before:inset-0 before:absolute before:z-[0] before:rounded-md before:bg-secondary-9 before:bg-opacity-10 after:bg-black-new after:absolute after:inset-px after:z-[0] after:rounded-md':
+            size === 'sm',
         },
         className
       )}
     >
+      {size === 'sm' && (
+        <Image
+          className="absolute right-1 bottom-px w-[458px] h-[98px] z-[1]"
+          src={subscribeSmPattern}
+          width={458}
+          height={98}
+          alt=""
+        />
+      )}
       <div
-        className={clsx('mx-auto flex max-w-[1166px] items-center justify-between lg:flex-col', {
-          'pr-12 2xl:px-10 2xl:pr-0 lg:px-8 md:px-4': size === 'lg',
-        })}
+        className={clsx(
+          'mx-auto flex max-w-[1166px] items-center justify-between',
+          size === 'sm' ? 'md:flex-col md:items-center' : 'lg:flex-col',
+          {
+            'pr-12 2xl:px-10 2xl:pr-0 lg:px-8 md:px-4': size === 'lg',
+          }
+        )}
       >
         <div className="relative z-20 lg:text-center">
-          <h2 className="text-4xl leading-none tracking-tighter xl:text-[32px] sm:text-[28px]">
-            Subscribe to <mark className="bg-transparent text-green-45">Neon’s News</mark>
-          </h2>
-          <p className="mt-4 text-lg leading-none tracking-[-0.02em] text-gray-new-80 xl:mt-2 xl:text-base xl:leading-tight sm:mx-auto sm:mt-2.5 sm:max-w-[300px]">
-            Get insider access to Neon's latest news and events
-          </p>
+          {size === 'sm' ? (
+            <h2 className="text-2xl leading-dense tracking-tighter w-[220px] shrink">
+              Subscribe to receive our latest updates
+            </h2>
+          ) : (
+            <>
+              <h2 className="text-4xl leading-none tracking-tighter xl:text-[32px] sm:text-[28px]">
+                Subscribe to <mark className="bg-transparent text-green-45">Neon’s News</mark>
+              </h2>
+              <p className="mt-4 text-lg leading-none tracking-[-0.02em] text-gray-new-80 xl:mt-2 xl:text-base xl:leading-tight sm:mx-auto sm:mt-2.5 sm:max-w-[300px]">
+                Get insider access to Neon's latest news and events
+              </p>
+            </>
+          )}
         </div>
         <form
-          className={clsx('relative w-full max-w-[518px] lg:mt-5 md:mt-7', {
-            'xl:max-w-[456px]': size === 'lg',
-            '2xl:max-w-[400px] xl:max-w-[350px] lt:mt-0 lt:max-w-[416px] lg:max-w-[464px] sm:mt-6':
+          className={clsx('relative w-full md:mt-7', {
+            'max-w-[518px] xl:max-w-[456px] lg:mt-5': size === 'lg',
+            'max-w-[518px] 2xl:max-w-[400px] xl:max-w-[350px] lt:mt-0 lt:max-w-[416px] lg:mt-5 lg:max-w-[464px] sm:mt-6':
               size === 'md',
+            'max-w-[350px]': size === 'sm',
           })}
           method="POST"
+          data-test={dataTest}
           noValidate
           onSubmit={handleSubmit}
         >
           <div className="relative z-20">
             <input
               className={clsx(
-                'remove-autocomplete-styles h-14 w-full appearance-none rounded-[50px] border bg-black-new pl-7 pr-36 text-white placeholder:text-white/60 focus:outline-none md:pr-32 xs:pr-7',
+                'remove-autocomplete-styles w-full appearance-none rounded-[50px] border bg-black-new pl-7 text-white placeholder:text-white/60 focus:outline-none md:pr-32 xs:pr-7',
+                size === 'sm'
+                  ? 'h-12 pr-32 2xl:pl-5 2xl:pr-[120px] xl:pr-32 xl:pl-7'
+                  : 'h-14 pr-36',
                 formState === STATES.ERROR ? 'border-secondary-1' : 'border-green-45',
                 formState === STATES.SUCCESS ? 'text-green-45' : 'text-white'
               )}
@@ -153,7 +183,10 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
                 {(formState === STATES.DEFAULT || formState === STATES.ERROR) && (
                   <m.button
                     className={clsx(
-                      'absolute inset-y-2 right-2 h-10 rounded-[80px] px-7 py-3 font-bold leading-none text-black transition-colors duration-200 sm:px-5 sm:py-3 xs:flex xs:h-10 xs:w-10 xs:items-center xs:justify-center xs:px-0',
+                      'absolute inset-y-2 right-2 rounded-[80px] font-bold leading-none text-black transition-colors duration-200 sm:px-5 xs:flex xs:h-10 xs:w-10 xs:items-center xs:justify-center xs:px-0',
+                      size === 'sm'
+                        ? 'h-8 py-2 px-5 2xl:px-4 xl:px-5 xs:inset-y-1 xs:right-1'
+                        : 'h-10 py-3 px-7',
                       formState === STATES.ERROR
                         ? 'bg-secondary-1/50'
                         : 'bg-green-45 hover:bg-[#00FFAA]'
@@ -207,6 +240,7 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
                     animate="animate"
                     exit="exit"
                     variants={appearAndExitAnimationVariants}
+                    data-test="success-message"
                   >
                     <CheckIcon className="h-10 w-10" />
                   </m.div>
@@ -215,16 +249,24 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
             </LazyMotion>
 
             {formState === STATES.ERROR && errorMessage && (
-              <span className="absolute left-7 top-full mt-2.5 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight">
+              <span
+                className={clsx(
+                  'absolute left-7 top-full text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight',
+                  size === 'sm' ? 'mt-1.5' : 'mt-2.5'
+                )}
+                data-test="error-message"
+              >
                 {errorMessage}
               </span>
             )}
           </div>
-          <LinesIllustration
-            className="z-10 !w-[125%]"
-            color={formState === STATES.ERROR ? '#FF4C79' : '#00E599'}
-            size="sm"
-          />
+          {size !== 'sm' && (
+            <LinesIllustration
+              className="z-10 !w-[125%]"
+              color={formState === STATES.ERROR ? '#FF4C79' : '#00E599'}
+              size="sm"
+            />
+          )}
         </form>
       </div>
     </section>
@@ -233,7 +275,8 @@ const SubscribeForm = ({ className = null, size = 'lg' }) => {
 
 SubscribeForm.propTypes = {
   className: PropTypes.string,
-  size: PropTypes.oneOf(['lg', 'md']),
+  size: PropTypes.oneOf(['lg', 'md', 'sm']),
+  dataTest: PropTypes.string,
 };
 
 export default SubscribeForm;

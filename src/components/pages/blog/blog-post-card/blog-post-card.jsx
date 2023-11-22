@@ -93,7 +93,7 @@ const BlogPostCard = ({
                 'group-hover:scale-110': withImageHover,
               })}
               src="/images/placeholder.jpg"
-              alt=""
+              alt={title}
               width={imageWidth || imageSizes[size].width}
               height={imageHeight || imageSizes[size].height}
               priority={isPriority}

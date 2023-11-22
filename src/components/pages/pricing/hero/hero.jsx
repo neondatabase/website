@@ -10,6 +10,7 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const items = [
   {
@@ -20,13 +21,14 @@ const items = [
     features: [
       { title: '1 project' },
       { title: '10 branches' },
-      { title: '3 GB of data per branch' },
+      { title: '3 GiB of data per branch' },
       { title: 'A shared compute with 1 GB of RAM' },
     ],
     button: {
       url: 'https://console.neon.tech/sign_in',
       text: 'Get Started',
       theme: 'white-outline',
+      event: 'pricing_hero_free_btn_click',
     },
   },
   {
@@ -45,6 +47,7 @@ const items = [
       url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
       text: 'Upgrade',
       theme: 'primary',
+      event: 'pricing_hero_pro_btn_click',
     },
   },
   {
@@ -62,6 +65,7 @@ const items = [
       url: LINKS.contactSales,
       text: 'Contact Sales',
       theme: 'white-outline',
+      event: 'pricing_hero_custom_btn_click',
     },
   },
 ];
@@ -141,6 +145,9 @@ const Hero = () => {
                     activeItemIndex !== index ? 'bg-gray-new-8' : 'bg-transparent'
                   )}
                   to={button.url}
+                  onClick={() => {
+                    sendGtagEvent(button.event);
+                  }}
                 >
                   <div className="mb-6 min-h-[280px] flex flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-7 lg:min-h-max">
                     <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">

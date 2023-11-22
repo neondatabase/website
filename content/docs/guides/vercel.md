@@ -1,7 +1,9 @@
 ---
 title: Connect with the Neon Vercel Integration
-subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel Integration
+subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel
+  Integration
 enableTableOfContents: true
+updatedOn: '2023-11-08T16:19:01.634Z'
 ---
 
 This guide describes how to connect using the [Neon Vercel Integration](https://vercel.com/integrations/neon) from the Vercel marketplace. The integration connects your Vercel project to a Neon database and enables creating a database branch for each preview deployment.
@@ -32,7 +34,7 @@ When you push changes to the GitHub repository associated with your Vercel proje
 This topic describes how to add the Neon Vercel Integration to your Vercel project.
 
 <Admonition type="important">
-The Neon Vercel Integration connects one Vercel project to one Neon project. The integration does not currently support sharing a Neon project between two or more Vercel projects, nor does it support connecting a single Vercel project to two or more Neon projects.
+Please be aware that the Neon Vercel Integration connects one Vercel project to one Neon project. It does not support connecting multiple Vercel projects to one Neon project, nor does it support connecting multiple Neon projects to one Vercel project.
 
 The Neon Vercel Integration is currently only supported with the GitHub source code repository.
 </Admonition>
@@ -121,9 +123,13 @@ After you add the Neon Vercel Integration to a Vercel project, Neon creates a da
 The Neon Free Tier allows you to create up to 10 branches. To avoid running out of branches for new preview deployments, remove old branches regularly. See [Manage branches](/docs/manage/branches) for instructions.
 </Admonition>
 
-## Add the integration to another Vercel project
+## Make the integration available to other Vercel projects
 
-If you already added the Neon Vercel Integration to a Vercel project and want to add it to another Vercel project, complete the following steps:
+If you added the Neon Vercel Integration to a single Vercel project but would like to make it available for use with your other Vercel projects, complete the steps outlined below.
+
+<Admonition type="important">
+Please be aware that the Neon Vercel Integration connects one Vercel project to one Neon project. It does not support connecting multiple Vercel projects to one Neon project, nor does it support connecting multiple Neon projects to one Vercel project. The steps below outline how to make the integration available to other Vercel projects to use with their own separate and dedicated Neon project.
+</Admonition>
 
 1. Ensure that the Neon Vercel Integration that you added previously has access to the Vercel project.
    1. On the Vercel Dashboard, select **Integrations**.
@@ -163,4 +169,4 @@ To view integration permissions, manage integration access, or remove the Neon i
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).

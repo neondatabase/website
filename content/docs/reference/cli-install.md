@@ -2,6 +2,7 @@
 title: Neon CLI — Install and connect
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
+updatedOn: '2023-11-08T18:42:10.264Z'
 ---
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
@@ -10,7 +11,7 @@ This section describes how to install the Neon CLI and connect via web authentic
 
 Before installing, ensure that you have met the following prerequisites:
 
-- Node.js 16.0 or higher. To check if you already have Node.js, run the following command:
+- Node.js 18.0 or higher. To check if you already have Node.js, run the following command:
 
     ```shell
     node -v

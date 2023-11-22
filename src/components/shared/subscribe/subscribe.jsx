@@ -7,7 +7,7 @@ import SubscriptionForm from 'components/shared/subscription-form';
 import { HUBSPOT_NEWSLETTERS_FORM_ID } from 'constants/forms';
 import LINKS from 'constants/links';
 import linkedinIcon from 'icons/linkedin.svg';
-import twitterIcon from 'icons/twitter.svg';
+import xIcon from 'icons/x.svg';
 
 // import DiscordIcon from './images/subscribe-discord.inline.svg';
 import githubIcon from './images/subscribe-github.svg';
@@ -15,9 +15,9 @@ import illustration from './images/subscribe-illustration.jpg';
 
 const links = [
   {
-    icon: twitterIcon,
+    icon: xIcon,
     to: LINKS.twitter,
-    name: 'Twitter',
+    name: 'X',
   },
   {
     icon: linkedinIcon,
@@ -74,6 +74,7 @@ const Subscribe = () => (
                   className="relative flex h-[72px] w-[72px] items-center justify-center rounded-full border-4 border-black bg-white transition-transform duration-200 hover:-translate-x-1.5 hover:translate-y-1.5 2xl:h-16 2xl:w-16 xl:h-14 xl:w-14 xl:hover:-translate-x-1 xl:hover:translate-y-1"
                   to={to}
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <img src={icon} width={32} height={32} alt="" loading="lazy" />
                   <span className="sr-only">{name}</span>

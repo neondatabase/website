@@ -121,9 +121,9 @@ export default {
       heading: 'Community',
       links: [
         {
-          text: 'Twitter',
+          text: 'X',
           to: LINKS.twitter,
-          icon: 'twitter-icon',
+          icon: 'x-icon',
         },
         {
           text: 'LinkedIn',
@@ -161,6 +161,22 @@ export default {
         {
           text: 'Terms of Service',
           to: LINKS.terms,
+        },
+        {
+          text: 'DPA',
+          to: LINKS.dpa,
+        },
+        {
+          text: 'Subprocessors List',
+          to: LINKS.subprocessors,
+        },
+        {
+          text: 'Privacy Guide',
+          to: LINKS.privacyGuide,
+        },
+        {
+          text: 'Cookie Policy',
+          to: LINKS.cookiePolicy,
         },
       ],
     },

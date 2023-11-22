@@ -1,54 +1,69 @@
 ---
-title: Configuring Auto-suspend for Neon computes 
-subtitle: Learn how to configure Neon's Auto-suspend feature to control when your compute scales to zero 
+title: Configuring Auto-suspend for Neon computes
+subtitle: Learn how to configure Neon's Auto-suspend feature to control when your
+  compute scales to zero
 enableTableOfContents: true
+updatedOn: '2023-10-24T18:56:54.982Z'
 ---
 
 Neon's [Auto-suspend](/docs/introduction/auto-suspend) feature controls when a Neon compute instance transitions to an `Idle` state (scales to zero) due to inactivity. This guide demonstrates how to configure the _Auto-suspend_ setting in your Neon project.
 
-You can configure the _Auto-suspend_ setting in an existing project by editing a compute endpoint. You can also configure it when you first create a Neon project, which sets the _Auto-suspend_ default for the project. Both methods are described below.
+[Neon Pro Plan](/docs/introduction/pro-plan) users can configure the _Auto-suspend_ setting for a new project, for an existing project, or for an individual compute endpoint. Configuring the _Auto-suspend_ setting for a new or existing project sets the project's default Auto-suspend setting, which is used from that point forward when creating new compute endpoints.
 
-## Configure Auto-suspend for a compute endpoint
+### Configure the Auto-suspend setting for a new project
 
-[Neon Pro plan](/docs/introduction/pro-plan) users can edit an individual compute endpoint to adjust the _Auto-suspend_ configuration.
+Configuring the _Auto-suspend_ setting for a new project sets the project's default, which is applied to all compute endpoints created from that point forward. You can adjust this _Auto-suspend_ default at any time, or configure the setting for individual compute endpoints later, as necessary.
 
-To edit a compute endpoint:
-
-1. In the Neon Console, select **Branches**.
-1. Select a branch.
-1. Click the compute endpoint kebab menu, and select **Edit**.
-![Edit compute endpoint menu](/docs/guides/autoscaling_edit.png)
-1. Under **Compute size**, enter the desired **Auto-suspend delay** setting. The value is specified in seconds. The maximum setting is `604800` seconds (7 days). A value of `0` is equivalent to the global default value of `300` seconds (5 minutes). A value of `-1` turns off the _Auto-suspend_ feature, which means that the compute remains active.
-
-    <Admonition type="note">
-    You can configure **Autoscaling** settings for your compute endpoint at the same time. For more information, see [Enable Autoscaling in Neon](/docs/guides/autoscaling-guide).
-    </Admonition>
-
-1. Click **Save**.
-
-## Set the Auto-suspend default when creating a project
-
-A project is a top-level object in the Neon object hierarchy. You can think of it as a container for all other objects, including branches and compute endpoints.
-
-Enabling _Auto-suspend_ when you create a project allows you to set the _Auto-suspend_ default setting for all compute endpoints created in your project. You can adjust _Auto-suspend_ setting for individual compute endpoints afterward, but setting a default when creating a project saves you from having to configure this setting for each compute later on.
-
-To configure the _Auto-suspend_ default setting at project creation time:
+To configure the _Auto-suspend_ default setting when you first create your project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
 1. Specify a name, a Postgres version, and a region.
-1. Under **Compute size**, enter the desired **Auto-suspend delay** setting.
+1. Under **Compute size**, select **Suspend compute after a period of inactivity** and specify your delay period (5 minutes or a custom period). The maximum setting is 7 days. Deselecting **Suspend compute after a period of inactivity** means the compute is always active.
 
     <Admonition type="note">
-    You can configure default **Autoscaling** settings at the same time. For more information, see [Enable Autoscaling in Neon](/docs/guides/autoscaling-guide).
+    You can configure default **Compute size** settings at the same time.
     </Admonition>
 
 1. Click **Save**.
-1. Click **Create Project**. Your initial compute endpoint is created with the specified setting. All compute endpoints created in the future when creating a branch or adding a compute endpoint to a branch are created with this setting.
+1. Click **Create Project**. Your initial compute endpoint is created with the specified setting.
 
-## Monitor compute status
+### Configure the Auto-suspend setting for an existing project
 
-You can monitor compute status on the **Branches** page in the Neon Console. A compute reports either an **Active** or **Idle** status.
+Configuring the _Auto-suspend_ setting for an existing project sets the project's default, which is applied to all compute endpoints created from that point forward. Existing compute endpoints are unaffected. You can adjust the _Auto-suspend_ default or configure the setting for individual compute endpoints later, as necessary.
+
+To configure the Auto-suspend default for an existing project:
+
+1. Select a project in the Neon console.
+1. On the Neon **Dashboard**, select **Settings**.
+1. Select **Compute** and click **Change**.
+1. Select **Suspend compute after a period of inactivity** and specify your delay period (5 minutes or a custom period). The maximum setting is 7 days. Deselecting **Suspend compute after a period of inactivity** means the compute is always active.
+
+    <Admonition type="note">
+    You can configure default **Compute size** settings at the same time.
+    </Admonition>
+
+1. Click **Save**.
+
+## Configure Auto-suspend for a compute endpoint
+
+To configure the _Auto-suspend_ setting for an individual compute endpoint:
+
+1. In the Neon Console, select **Branches**.
+1. Select a branch.
+1. Click the menu in the **Computes** table, and select **Edit**.
+![Edit compute endpoint menu](/docs/guides/autoscaling_edit.png)
+1. Under **Compute size**, select **Suspend compute after a period of inactivity** and specify your delay period (5 minutes or a custom period). The maximum setting is 7 days. Deselecting **Suspend compute after a period of inactivity** means the compute is always active.
+
+    <Admonition type="note">
+    You can configure **Compute size** settings for your compute endpoint at the same time.
+    </Admonition>
+
+1. Click **Save**.
+
+## Monitor auto-suspension
+
+You can monitor auto-suspension on the **Branches** page in the Neon Console. A compute reports either an **Active** or **Idle** status.
 
 ![Compute endpoint status](/docs/connect/compute_endpoint_state.png)
 

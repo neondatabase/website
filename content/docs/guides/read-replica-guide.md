@@ -1,10 +1,11 @@
 ---
-title: Working with Neon read replicas 
+title: Working with Neon read replicas
 subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
+updatedOn: '2023-10-24T18:56:54.985Z'
 ---
 
-[Read replicas](/docs/introduction/read-replicas) are supported with the [Neon Pro plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating and managing read replicas.
+[Read replicas](/docs/introduction/read-replicas) are supported with the [Neon Pro Plan](/docs/introduction/pro-plan). This guide will lead you through the process of creating and managing read replicas.
 
 The general methodology of using read replicas to segregate read-only work from your production database operations can be applied to a variety of uses cases, such as:
 
@@ -21,7 +22,7 @@ Neon supports managing read replicas programmatically using the Neon API. See [M
 
 ## Prerequisites
 
-- A [Pro plan](/docs/introduction/pro-plan) account.
+- A [Neon Pro Plan](/docs/introduction/pro-plan) account.
 - A [Neon project](/docs/manage/projects#create-a-project).
 
 ## Create a read replica
@@ -32,7 +33,7 @@ Creating a read replica involves adding a read-only compute endpoint to a branch
 2. Select the branch where your database resides.
 3. Click **Add compute**.
 4. On the **Create Compute Endpoint** dialog, select **Read-only** as the **Compute type**.
-5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable **Autoscaling** and configure a minimum and maximum compute size. You can also configure the **Auto-suspend delay** period, which is the amount of idle time after which your read-only compute is transitioned to an idle state. The default setting is 300 seconds (5 minutes). You can set this value up to 604800 seconds (7 days).
+5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable **Autoscaling** and configure a minimum and maximum compute size. You can also configure the **Suspend compute after a period of inactivity** setting, which is the amount of idle time after which your read-only compute is automatically suspended. The default setting is 5 minutes. You can set this value up 7 days.
     <Admonition type="note">
     The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
     </Admonition>
@@ -79,19 +80,12 @@ Connecting to a read replica is the same as connecting to any branch, except you
     <CodeBlock shouldWrap>
 
     ```bash
-    postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+    postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>
 
     If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string or example.
-
-    The information in your connection string corresponds to the following connection details:
-
-    - role: `daniel`
-    - password:`<password>`
-    - hostname: `ep-raspy-cherry-95040071.us-east-2.aws.neon.tech`
-    - database name: `neondb`. This is the default Neon database. Your database name may differ.
 
     When you use a read-only connection string, you are connecting to a read replica. No write operations are permitted on this connection.
 
@@ -108,7 +102,7 @@ To edit a read-only compute endpoint:
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. Under **Computes**, identify the read-only compute endpoint you want to modify, click the compute endpoint kebab menu, and select **Edit**.
-1. Specify your **Compute size** or **Auto-suspend delay** changes and click **Save**.
+1. Specify your **Compute size** or **Suspend compute after a period of inactivity** changes and click **Save**.
 
 ## Delete a read replica
 
@@ -180,4 +174,4 @@ For information about obtaining the required `project_id` and `endpoint_id` para
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).

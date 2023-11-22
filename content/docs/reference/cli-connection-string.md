@@ -2,6 +2,7 @@
 title: Neon CLI commands — connection-string
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
+updatedOn: '2023-10-19T23:10:12.850Z'
 ---
 
 ## Before you begin
@@ -43,7 +44,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     ```bash
     neonctl connection-string mybranch
-    postgres://daniel:<password>@ep-still-haze-361517.us-east-2.aws.neon.tech/neondb
+    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
 
     </CodeBlock>
@@ -54,7 +55,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     ```bash
     neonctl connection-string --pooled
-    postgres://daniel:<password>@ep-still-haze-361517-pooler.us-east-2.aws.neon.tech/neondb
+    postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
     ```
 
     </CodeBlock>
@@ -65,11 +66,11 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     ```bash
     neonctl connection-string --prisma
-    postgres://daniel:<password>@ep-green-thunder-758819.us-east-2.aws.neon.tech/neondb?connect_timeout=30
+   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?connect_timeout=30
     ```
 
     </CodeBlock>
 
 ## Need help?
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
