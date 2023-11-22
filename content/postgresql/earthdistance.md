@@ -33,6 +33,7 @@ The provided functions are shown in [Table F.5](earthdistance#EARTHDISTANCE-CUB
 
 **Table F.5. Cube-Based Earthdistance Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Cube-Based Earthdistance Functions" border="1">
   <colgroup>
     <col />
@@ -41,7 +42,7 @@ The provided functions are shown in [Table F.5](earthdistance#EARTHDISTANCE-CUB
     <tr>
       <th class="func_table_entry">
         <div class="func_signature">Function</div>
-        <p>Description</p>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
@@ -52,7 +53,7 @@ The provided functions are shown in [Table F.5](earthdistance#EARTHDISTANCE-CUB
           <a id="id-1.11.7.25.7.7.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">earth</code> () → <code class="returnvalue">float8</code>
         </div>
-        <p>Returns the assumed radius of the Earth.</p>
+        <div>Returns the assumed radius of the Earth.</div>
       </td>
     </tr>
     <tr>
@@ -100,7 +101,7 @@ The provided functions are shown in [Table F.5](earthdistance#EARTHDISTANCE-CUB
           <code class="function">latitude</code> ( <code class="type">earth</code> ) →
           <code class="returnvalue">float8</code>
         </div>
-        <p>Returns the latitude in degrees of a point on the surface of the Earth.</p>
+        <div>Returns the latitude in degrees of a point on the surface of the Earth.</div>
       </td>
     </tr>
     <tr>
@@ -110,7 +111,7 @@ The provided functions are shown in [Table F.5](earthdistance#EARTHDISTANCE-CUB
           <code class="function">longitude</code> ( <code class="type">earth</code> ) →
           <code class="returnvalue">float8</code>
         </div>
-        <p>Returns the longitude in degrees of a point on the surface of the Earth.</p>
+        <div>Returns the longitude in degrees of a point on the surface of the Earth.</div>
       </td>
     </tr>
     <tr>
@@ -120,7 +121,7 @@ The provided functions are shown in [Table F.5](earthdistance#EARTHDISTANCE-CUB
           <code class="function">earth_distance</code> ( <code class="type">earth</code>,
           <code class="type">earth</code> ) → <code class="returnvalue">float8</code>
         </div>
-        <p>Returns the great circle distance between two points on the surface of the Earth.</p>
+        <div>Returns the great circle distance between two points on the surface of the Earth.</div>
       </td>
     </tr>
     <tr>
@@ -142,6 +143,7 @@ The provided functions are shown in [Table F.5](earthdistance#EARTHDISTANCE-CUB
     </tr>
   </tbody>
 </table>
+</figure>
 
 [#id](#EARTHDISTANCE-POINT-BASED)
 
@@ -155,6 +157,7 @@ A single operator is provided, shown in [Table F.6](earthdistance#EARTHDISTANCE
 
 **Table F.6. Point-Based Earthdistance Operators**
 
+<figure class="table-wrapper">
 <table class="table" summary="Point-Based Earthdistance Operators" border="1">
   <colgroup>
     <col />
@@ -162,8 +165,8 @@ A single operator is provided, shown in [Table F.6](earthdistance#EARTHDISTANCE
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Operator</p>
-        <p>Description</p>
+        <div class="func_signature">Operator</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
@@ -174,11 +177,12 @@ A single operator is provided, shown in [Table F.6](earthdistance#EARTHDISTANCE
           <code class="type">point</code> <code class="literal">&lt;@&gt;</code>
           <code class="type">point</code> → <code class="returnvalue">float8</code>
         </div>
-        <p>Computes the distance in statute miles between two points on the Earth's surface.</p>
+        <div>Computes the distance in statute miles between two points on the Earth's surface.</div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 Note that unlike the `cube`-based part of the module, units are hardwired here: changing the `earth()` function will not affect the results of this operator.
 

@@ -54,6 +54,7 @@ Values are stored internally as 64-bit floating point numbers. This means that n
 
 **Table F.3. Cube Operators**
 
+<figure class="table-wrapper">
 <table class="table" summary="Cube Operators" border="1">
   <colgroup>
     <col />
@@ -62,7 +63,7 @@ Values are stored internally as 64-bit floating point numbers. This means that n
     <tr>
       <th class="func_table_entry">
         <div class="func_signature">Operator</div>
-        <p>Description</p>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
@@ -73,7 +74,7 @@ Values are stored internally as 64-bit floating point numbers. This means that n
           <code class="type">cube</code> <code class="literal">&amp;&amp;</code>
           <code class="type">cube</code> → <code class="returnvalue">boolean</code>
         </div>
-        <p>Do the cubes overlap?</p>
+        <div>Do the cubes overlap?</div>
       </td>
     </tr>
     <tr>
@@ -82,7 +83,7 @@ Values are stored internally as 64-bit floating point numbers. This means that n
           <code class="type">cube</code> <code class="literal">@&gt;</code>
           <code class="type">cube</code> → <code class="returnvalue">boolean</code>
         </div>
-        <p>Does the first cube contain the second?</p>
+        <div>Does the first cube contain the second?</div>
       </td>
     </tr>
     <tr>
@@ -91,7 +92,7 @@ Values are stored internally as 64-bit floating point numbers. This means that n
           <code class="type">cube</code> <code class="literal">&lt;@</code>
           <code class="type">cube</code> → <code class="returnvalue">boolean</code>
         </div>
-        <p>Is the first cube contained in the second?</p>
+        <div>Is the first cube contained in the second?</div>
       </td>
     </tr>
     <tr>
@@ -129,7 +130,7 @@ Values are stored internally as 64-bit floating point numbers. This means that n
           <code class="type">cube</code> <code class="literal">&lt;-&gt;</code>
           <code class="type">cube</code> → <code class="returnvalue">float8</code>
         </div>
-        <p>Computes the Euclidean distance between the two cubes.</p>
+        <div>Computes the Euclidean distance between the two cubes.</div>
       </td>
     </tr>
     <tr>
@@ -138,7 +139,7 @@ Values are stored internally as 64-bit floating point numbers. This means that n
           <code class="type">cube</code> <code class="literal">&lt;#&gt;</code>
           <code class="type">cube</code> → <code class="returnvalue">float8</code>
         </div>
-        <p>Computes the taxicab (L-1 metric) distance between the two cubes.</p>
+        <div>Computes the taxicab (L-1 metric) distance between the two cubes.</div>
       </td>
     </tr>
     <tr>
@@ -147,11 +148,12 @@ Values are stored internally as 64-bit floating point numbers. This means that n
           <code class="type">cube</code> <code class="literal">&lt;=&gt;</code>
           <code class="type">cube</code> → <code class="returnvalue">float8</code>
         </div>
-        <p>Computes the Chebyshev (L-inf metric) distance between the two cubes.</p>
+        <div>Computes the Chebyshev (L-inf metric) distance between the two cubes.</div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 In addition to the above operators, the usual comparison operators shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE) are available for type `cube`. These operators first compare the first coordinates, and if those are equal, compare the second coordinates, etc. They exist mainly to support the b-tree index operator class for `cube`, which can be useful for example if you would like a UNIQUE constraint on a `cube` column. Otherwise, this ordering is not of much practical use.
 
@@ -187,6 +189,7 @@ SELECT c FROM test ORDER BY c ~> 3 DESC LIMIT 5;
 
 **Table F.4. Cube Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Cube Functions" border="1">
   <colgroup>
     <col />
@@ -194,230 +197,230 @@ SELECT c FROM test ORDER BY c ~> 3 DESC LIMIT 5;
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
-        <p>Example(s)</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
+        <div>Example(s)</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube</code> ( <code class="type">float8</code> ) →
           <code class="returnvalue">cube</code>
-        </p>
-        <p>Makes a one dimensional cube with both coordinates the same.</p>
-        <p>
+        </div>
+        <div>Makes a one dimensional cube with both coordinates the same.</div>
+        <div>
           <code class="literal">cube(1)</code>
           → <code class="returnvalue">(1)</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube</code> ( <code class="type">float8</code>,
           <code class="type">float8</code> ) → <code class="returnvalue">cube</code>
-        </p>
-        <p>Makes a one dimensional cube.</p>
-        <p>
+        </div>
+        <div>Makes a one dimensional cube.</div>
+        <div>
           <code class="literal">cube(1, 2)</code>
           → <code class="returnvalue">(1),(2)</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube</code> ( <code class="type">float8[]</code> ) →
           <code class="returnvalue">cube</code>
-        </p>
-        <p>Makes a zero-volume cube using the coordinates defined by the array.</p>
-        <p>
+        </div>
+        <div>Makes a zero-volume cube using the coordinates defined by the array.</div>
+        <div>
           <code class="literal">cube(ARRAY[1,2,3])</code>
           → <code class="returnvalue">(1, 2, 3)</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube</code> ( <code class="type">float8[]</code>,
           <code class="type">float8[]</code> ) → <code class="returnvalue">cube</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Makes a cube with upper right and lower left coordinates as defined by the two arrays,
           which must be of the same length.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">cube(ARRAY[1,2], ARRAY[3,4])</code>
           → <code class="returnvalue">(1, 2),(3, 4)</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube</code> ( <code class="type">cube</code>,
           <code class="type">float8</code> ) → <code class="returnvalue">cube</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Makes a new cube by adding a dimension on to an existing cube, with the same values for
           both endpoints of the new coordinate. This is useful for building cubes piece by piece
           from calculated values.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">cube('(1,2),(3,4)'::cube, 5)</code>
           → <code class="returnvalue">(1, 2, 5),(3, 4, 5)</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube</code> ( <code class="type">cube</code>,
           <code class="type">float8</code>, <code class="type">float8</code> ) →
           <code class="returnvalue">cube</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Makes a new cube by adding a dimension on to an existing cube. This is useful for building
           cubes piece by piece from calculated values.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">cube('(1,2),(3,4)'::cube, 5, 6)</code>
           → <code class="returnvalue">(1, 2, 5),(3, 4, 6)</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube_dim</code> ( <code class="type">cube</code> ) →
           <code class="returnvalue">integer</code>
-        </p>
-        <p>Returns the number of dimensions of the cube.</p>
-        <p>
+        </div>
+        <div>Returns the number of dimensions of the cube.</div>
+        <div>
           <code class="literal">cube_dim('(1,2),(3,4)')</code>
           → <code class="returnvalue">2</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube_ll_coord</code> ( <code class="type">cube</code>,
           <code class="type">integer</code> ) → <code class="returnvalue">float8</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the <em class="parameter"><code>n</code></em>-th coordinate value for the lower left corner of the cube.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">cube_ll_coord('(1,2),(3,4)', 2)</code>
           → <code class="returnvalue">2</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube_ur_coord</code> ( <code class="type">cube</code>,
           <code class="type">integer</code> ) → <code class="returnvalue">float8</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the <em class="parameter"><code>n</code></em>-th coordinate value for the upper right corner of the cube.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">cube_ur_coord('(1,2),(3,4)', 2)</code>
           → <code class="returnvalue">4</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube_is_point</code> ( <code class="type">cube</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>Returns true if the cube is a point, that is, the two defining corners are the same.</p>
-        <p>
+        </div>
+        <div>Returns true if the cube is a point, that is, the two defining corners are the same.</div>
+        <div>
           <code class="literal">cube_is_point(cube(1,1))</code>
           → <code class="returnvalue">t</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube_distance</code> ( <code class="type">cube</code>,
           <code class="type">cube</code> ) → <code class="returnvalue">float8</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the distance between two cubes. If both cubes are points, this is the normal
           distance function.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">cube_distance('(1,2)', '(3,4)')</code>
           → <code class="returnvalue">2.8284271247461903</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube_subset</code> ( <code class="type">cube</code>,
           <code class="type">integer[]</code> ) → <code class="returnvalue">cube</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Makes a new cube from an existing cube, using a list of dimension indexes from an array.
           Can be used to extract the endpoints of a single dimension, or to drop dimensions, or to
           reorder them as desired.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">cube_subset(cube('(1,3,5),(6,7,8)'), ARRAY[2])</code>
           → <code class="returnvalue">(3),(7)</code>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">cube_subset(cube('(1,3,5),(6,7,8)'), ARRAY[3,2,1,1])</code>
           → <code class="returnvalue">(5, 3, 1, 1),(8, 7, 6, 6)</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube_union</code> ( <code class="type">cube</code>,
           <code class="type">cube</code> ) → <code class="returnvalue">cube</code>
-        </p>
-        <p>Produces the union of two cubes.</p>
-        <p>
+        </div>
+        <div>Produces the union of two cubes.</div>
+        <div>
           <code class="literal">cube_union('(1,2)', '(3,4)')</code>
           → <code class="returnvalue">(1, 2),(3, 4)</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube_inter</code> ( <code class="type">cube</code>,
           <code class="type">cube</code> ) → <code class="returnvalue">cube</code>
-        </p>
-        <p>Produces the intersection of two cubes.</p>
-        <p>
+        </div>
+        <div>Produces the intersection of two cubes.</div>
+        <div>
           <code class="literal">cube_inter('(1,2)', '(3,4)')</code>
           → <code class="returnvalue">(3, 4),(1, 2)</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">cube_enlarge</code> ( <em class="parameter"><code>c</code></em>
           <code class="type">cube</code>, <em class="parameter"><code>r</code></em>
           <code class="type">double</code>, <em class="parameter"><code>n</code></em>
           <code class="type">integer</code> ) → <code class="returnvalue">cube</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Increases the size of the cube by the specified radius
           <em class="parameter"><code>r</code></em> in at least
           <em class="parameter"><code>n</code></em> dimensions. If the radius is negative the cube
@@ -431,15 +434,16 @@ SELECT c FROM test ORDER BY c ~> 3 DESC LIMIT 5;
           extra dimensions are added to make <em class="parameter"><code>n</code></em> altogether; 0
           is used as the initial value for the extra coordinates. This function is useful for
           creating bounding boxes around a point for searching for nearby points.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">cube_enlarge('(1,2),(3,4)', 0.5, 3)</code>
           → <code class="returnvalue">(0.5, 1.5, -0.5),(3.5, 4.5, 0.5)</code>
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 [#id](#CUBE-DEFAULTS)
 

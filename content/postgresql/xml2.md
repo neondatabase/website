@@ -2,13 +2,11 @@
 
 ## F.50. xml2 — XPath querying and XSLT functionality [#](#XML2)
 
-  * [F.50.1. Deprecation Notice](xml2#XML2-DEPRECATION)
-  * [F.50.2. Description of Functions](xml2#XML2-FUNCTIONS)
-  * [F.50.3. `xpath_table`](xml2#XML2-XPATH-TABLE)
-  * [F.50.4. XSLT Functions](xml2#XML2-XSLT)
-  * [F.50.5. Author](xml2#XML2-AUTHOR)
-
-
+- [F.50.1. Deprecation Notice](xml2#XML2-DEPRECATION)
+- [F.50.2. Description of Functions](xml2#XML2-FUNCTIONS)
+- [F.50.3. `xpath_table`](xml2#XML2-XPATH-TABLE)
+- [F.50.4. XSLT Functions](xml2#XML2-XSLT)
+- [F.50.5. Author](xml2#XML2-AUTHOR)
 
 The `xml2` module provides XPath querying and XSLT functionality.
 
@@ -28,28 +26,171 @@ From PostgreSQL 8.3 on, there is XML-related functionality based on the SQL/XML 
 
 **Table F.36. `xml2` Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xml_valid` ( *`document`* `text` ) → `boolean`Parses the given document and returns true if the document is well-formed XML. (Note: this is an alias for the standard PostgreSQL function `xml_is_well_formed()`. The name `xml_valid()` is technically incorrect since validity and well-formedness have different meanings in XML.)                                                                                                         |
-| `xpath_string` ( *`document`* `text`, *`query`* `text` ) → `text`Evaluates the XPath query on the supplied document, and casts the result to `text`.                                                                                                                                                                                                                                                                                           |
-| `xpath_number` ( *`document`* `text`, *`query`* `text` ) → `real`Evaluates the XPath query on the supplied document, and casts the result to `real`.                                                                                                                                                                                                                                                                                           |
-| `xpath_bool` ( *`document`* `text`, *`query`* `text` ) → `boolean`Evaluates the XPath query on the supplied document, and casts the result to `boolean`.                                                                                                                                                                                                                                                                                       |
-| `xpath_nodeset` ( *`document`* `text`, *`query`* `text`, *`toptag`* `text`, *`itemtag`* `text` ) → `text`Evaluates the query on the document and wraps the result in XML tags. If the result is multivalued, the output will look like:```
-<toptag>
-<itemtag>Value 1 which could be an XML fragment</itemtag>
-<itemtag>Value 2....</itemtag>
-</toptag>
-```If either *`toptag`* or *`itemtag`* is an empty string, the relevant tag is omitted. |
-| `xpath_nodeset` ( *`document`* `text`, *`query`* `text`, *`itemtag`* `text` ) → `text`Like `xpath_nodeset(document, query, toptag, itemtag)` but result omits *`toptag`*.                                                                                                                                                                                                                                                                      |
-| `xpath_nodeset` ( *`document`* `text`, *`query`* `text` ) → `text`Like `xpath_nodeset(document, query, toptag, itemtag)` but result omits both tags.                                                                                                                                                                                                                                                                                           |
-| `xpath_list` ( *`document`* `text`, *`query`* `text`, *`separator`* `text` ) → `text`Evaluates the query on the document and returns multiple values separated by the specified separator, for example `Value 1,Value 2,Value 3` if *`separator`* is `,`.                                                                                                                                                                                      |
-| `xpath_list` ( *`document`* `text`, *`query`* `text` ) → `text`This is a wrapper for the above function that uses `,` as the separator.                                                                                                                                                                                                                                                                                                        |
+<figure class="table-wrapper">
+<table class="table" summary="xml2 Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <div class="func_signature">Function</div>
+        <div>Description</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">xml_valid</code> (
+          <em class="parameter"><code>document</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>
+          Parses the given document and returns true if the document is well-formed XML. (Note: this
+          is an alias for the standard PostgreSQL function
+          <code class="function">xml_is_well_formed()</code>. The name
+          <code class="function">xml_valid()</code> is technically incorrect since validity and
+          well-formedness have different meanings in XML.)
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">xpath_string</code> (
+          <em class="parameter"><code>document</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>query</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">text</code>
+        </div>
+        <div>
+          Evaluates the XPath query on the supplied document, and casts the result to
+          <code class="type">text</code>.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">xpath_number</code> (
+          <em class="parameter"><code>document</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>query</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">real</code>
+        </div>
+        <div>
+          Evaluates the XPath query on the supplied document, and casts the result to
+          <code class="type">real</code>.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">xpath_bool</code> (
+          <em class="parameter"><code>document</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>query</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>
+          Evaluates the XPath query on the supplied document, and casts the result to
+          <code class="type">boolean</code>.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">xpath_nodeset</code> (
+          <em class="parameter"><code>document</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>query</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>toptag</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>itemtag</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">text</code>
+        </div>
+        <div>
+          Evaluates the query on the document and wraps the result in XML tags. If the result is
+          multivalued, the output will look like:
+        </div>
+        <pre class="synopsis">
+&lt;toptag&gt;
+&lt;itemtag&gt;Value 1 which could be an XML fragment&lt;/itemtag&gt;
+&lt;itemtag&gt;Value 2....&lt;/itemtag&gt;
+&lt;/toptag&gt;
+</pre>
+        <div>
+          If either <em class="parameter"><code>toptag</code></em> or
+          <em class="parameter"><code>itemtag</code></em> is an empty string, the relevant tag is
+          omitted.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">xpath_nodeset</code> (
+          <em class="parameter"><code>document</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>query</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>itemtag</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">text</code>
+        </div>
+        <div>
+          Like <code class="function">xpath_nodeset(document, query, toptag, itemtag)</code> but
+          result omits <em class="parameter"><code>toptag</code></em>.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">xpath_nodeset</code> (
+          <em class="parameter"><code>document</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>query</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">text</code>
+        </div>
+        <div>
+          Like <code class="function">xpath_nodeset(document, query, toptag, itemtag)</code> but
+          result omits both tags.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">xpath_list</code> (
+          <em class="parameter"><code>document</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>query</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>separator</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">text</code>
+        </div>
+        <div>
+          Evaluates the query on the document and returns multiple values separated by the specified
+          separator, for example <code class="literal">Value 1,Value 2,Value 3</code> if
+          <em class="parameter"><code>separator</code></em> is <code class="literal">,</code>.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">xpath_list</code> (
+          <em class="parameter"><code>document</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>query</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">text</code>
+        </div>
+        <div>
+          This is a wrapper for the above function that uses <code class="literal">,</code>
+          as the separator.
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</figure>
 
 [#id](#XML2-XPATH-TABLE)
 
 ### F.50.3. `xpath_table` [#](#XML2-XPATH-TABLE)
-
-
 
 ```
 xpath_table(text key, text document, text relation, text xpaths, text criteria) returns setof record
@@ -63,18 +204,17 @@ xpath_table(text key, text document, text relation, text xpaths, text criteria) 
 
 | Parameter    | Description                                                                                                                                                                                                  |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| *`key`*      | the name of the “key” field — this is just a field to be used as the first column of the output table, i.e., it identifies the record from which each output row came (see note below about multiple values) |
-| *`document`* | the name of the field containing the XML document                                                                                                                                                            |
-| *`relation`* | the name of the table or view containing the documents                                                                                                                                                       |
-| *`xpaths`*   | one or more XPath expressions, separated by `\|`                                                                                                                                                             |
-| *`criteria`* | the contents of the WHERE clause. This cannot be omitted, so use `true` or `1=1` if you want to process all the rows in the relation                                                                         |
-
+| _`key`_      | the name of the “key” field — this is just a field to be used as the first column of the output table, i.e., it identifies the record from which each output row came (see note below about multiple values) |
+| _`document`_ | the name of the field containing the XML document                                                                                                                                                            |
+| _`relation`_ | the name of the table or view containing the documents                                                                                                                                                       |
+| _`xpaths`_   | one or more XPath expressions, separated by `\|`                                                                                                                                                             |
+| _`criteria`_ | the contents of the WHERE clause. This cannot be omitted, so use `true` or `1=1` if you want to process all the rows in the relation                                                                         |
 
 These parameters (except the XPath strings) are just substituted into a plain SQL SELECT statement, so you have some flexibility — the statement is
 
 `SELECT <key>, <document> FROM <relation> WHERE <criteria>`
 
-so those parameters can be *anything* valid in those particular locations. The result from this SELECT needs to return exactly two columns (which it will unless you try to list multiple fields for key or document). Beware that this simplistic approach requires that you validate any user-supplied values to avoid SQL injection attacks.
+so those parameters can be _anything_ valid in those particular locations. The result from this SELECT needs to return exactly two columns (which it will unless you try to list multiple fields for key or document). Beware that this simplistic approach requires that you validate any user-supplied values to avoid SQL injection attacks.
 
 The function has to be used in a `FROM` expression, with an `AS` clause to specify the output columns; for example
 
@@ -172,8 +312,6 @@ The following functions are available if libxslt is installed:
 [#id](#XML2-XSLT-XSLT-PROCESS)
 
 #### F.50.4.1. `xslt_process` [#](#XML2-XSLT-XSLT-PROCESS)
-
-
 
 ```
 xslt_process(text document, text stylesheet, text paramlist) returns text

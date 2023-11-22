@@ -2,17 +2,15 @@
 
 ## F.40. sepgsql — SELinux-, label-based mandatory access control (MAC) security module [#](#SEPGSQL)
 
-  * [F.40.1. Overview](sepgsql#SEPGSQL-OVERVIEW)
-  * [F.40.2. Installation](sepgsql#SEPGSQL-INSTALLATION)
-  * [F.40.3. Regression Tests](sepgsql#SEPGSQL-REGRESSION)
-  * [F.40.4. GUC Parameters](sepgsql#SEPGSQL-PARAMETERS)
-  * [F.40.5. Features](sepgsql#SEPGSQL-FEATURES)
-  * [F.40.6. Sepgsql Functions](sepgsql#SEPGSQL-FUNCTIONS)
-  * [F.40.7. Limitations](sepgsql#SEPGSQL-LIMITATIONS)
-  * [F.40.8. External Resources](sepgsql#SEPGSQL-RESOURCES)
-  * [F.40.9. Author](sepgsql#SEPGSQL-AUTHOR)
-
-
+- [F.40.1. Overview](sepgsql#SEPGSQL-OVERVIEW)
+- [F.40.2. Installation](sepgsql#SEPGSQL-INSTALLATION)
+- [F.40.3. Regression Tests](sepgsql#SEPGSQL-REGRESSION)
+- [F.40.4. GUC Parameters](sepgsql#SEPGSQL-PARAMETERS)
+- [F.40.5. Features](sepgsql#SEPGSQL-FEATURES)
+- [F.40.6. Sepgsql Functions](sepgsql#SEPGSQL-FUNCTIONS)
+- [F.40.7. Limitations](sepgsql#SEPGSQL-LIMITATIONS)
+- [F.40.8. External Resources](sepgsql#SEPGSQL-RESOURCES)
+- [F.40.9. Author](sepgsql#SEPGSQL-AUTHOR)
 
 `sepgsql` is a loadable module that supports label-based mandatory access control (MAC) based on SELinux security policy.
 
@@ -52,7 +50,7 @@ If SELinux is disabled or not installed, you must set that product up first befo
 
 To build this module, include the option `--with-selinux` in your PostgreSQL `configure` command. Be sure that the `libselinux-devel` RPM is installed at build time.
 
-To use this module, you must include `sepgsql` in the [shared\_preload\_libraries](runtime-config-client#GUC-SHARED-PRELOAD-LIBRARIES) parameter in `postgresql.conf`. The module will not function correctly if loaded in any other manner. Once the module is loaded, you should execute `sepgsql.sql` in each database. This will install functions needed for security label management, and assign initial security labels.
+To use this module, you must include `sepgsql` in the [shared_preload_libraries](runtime-config-client#GUC-SHARED-PRELOAD-LIBRARIES) parameter in `postgresql.conf`. The module will not function correctly if loaded in any other manner. Once the module is loaded, you should execute `sepgsql.sql` in each database. This will install functions needed for security label management, and assign initial security labels.
 
 Here is an example showing how to initialize a fresh database cluster with `sepgsql` functions and security labels installed. Adjust the paths shown as appropriate for your installation:
 
@@ -123,7 +121,7 @@ See [Section F.40.8](sepgsql#SEPGSQL-RESOURCES) for details on adjusting your w
 Finally, run the regression test script:
 
 ```
-$ ./test_sepgsql
+./test_sepgsql
 ```
 
 This script will attempt to verify that you have done all the configuration steps correctly, and then it will run the regression tests for the `sepgsql` module.
@@ -131,26 +129,26 @@ This script will attempt to verify that you have done all the configuration step
 After completing the tests, it's recommended you disable the `sepgsql_regression_test_mode` parameter:
 
 ```
-$ sudo setsebool sepgsql_regression_test_mode off
+sudo setsebool sepgsql_regression_test_mode off
 ```
 
 You might prefer to remove the `sepgsql-regtest` policy entirely:
 
 ```
-$ sudo semodule -r sepgsql-regtest
+sudo semodule -r sepgsql-regtest
 ```
 
 [#id](#SEPGSQL-PARAMETERS)
 
 ### F.40.4. GUC Parameters [#](#SEPGSQL-PARAMETERS)
 
-* `sepgsql.permissive` (`boolean`) [#](#GUC-SEPGSQL-PERMISSIVE)
+- `sepgsql.permissive` (`boolean`) [#](#GUC-SEPGSQL-PERMISSIVE)
 
   This parameter enables `sepgsql` to function in permissive mode, regardless of the system setting. The default is off. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
   When this parameter is on, `sepgsql` functions in permissive mode, even if SELinux in general is working in enforcing mode. This parameter is primarily useful for testing purposes.
 
-* `sepgsql.debug_audit` (`boolean`) [#](#GUC-SEPGSQL-DEBUG-AUDIT)
+- `sepgsql.debug_audit` (`boolean`) [#](#GUC-SEPGSQL-DEBUG-AUDIT)
 
   This parameter enables the printing of audit messages regardless of the system policy settings. The default is off, which means that messages will be printed according to the system settings.
 
@@ -208,23 +206,23 @@ SELinux defines several permissions to control common operations for each object
 
 Creating a new database object requires `create` permission. SELinux will grant or deny this permission based on the client's security label and the proposed security label for the new object. In some cases, additional privileges are required:
 
-* [`CREATE DATABASE`](sql-createdatabase) additionally requires `getattr` permission for the source or template database.
+- [`CREATE DATABASE`](sql-createdatabase) additionally requires `getattr` permission for the source or template database.
 
-* Creating a schema object additionally requires `add_name` permission on the parent schema.
+- Creating a schema object additionally requires `add_name` permission on the parent schema.
 
-* Creating a table additionally requires permission to create each individual table column, just as if each table column were a separate top-level object.
+- Creating a table additionally requires permission to create each individual table column, just as if each table column were a separate top-level object.
 
-* Creating a function marked as `LEAKPROOF` additionally requires `install` permission. (This permission is also checked when `LEAKPROOF` is set for an existing function.)
+- Creating a function marked as `LEAKPROOF` additionally requires `install` permission. (This permission is also checked when `LEAKPROOF` is set for an existing function.)
 
 When `DROP` command is executed, `drop` will be checked on the object being removed. Permissions will be also checked for objects dropped indirectly via `CASCADE`. Deletion of objects contained within a particular schema (tables, views, sequences and procedures) additionally requires `remove_name` on the schema.
 
 When `ALTER` command is executed, `setattr` will be checked on the object being modified for each object types, except for subsidiary objects such as the indexes or triggers of a table, where permissions are instead checked on the parent object. In some cases, additional permissions are required:
 
-* Moving an object to a new schema additionally requires `remove_name` permission on the old schema and `add_name` permission on the new one.
+- Moving an object to a new schema additionally requires `remove_name` permission on the old schema and `add_name` permission on the new one.
 
-* Setting the `LEAKPROOF` attribute on a function requires `install` permission.
+- Setting the `LEAKPROOF` attribute on a function requires `install` permission.
 
-* Using [`SECURITY LABEL`](sql-security-label) on an object additionally requires `relabelfrom` permission for the object in conjunction with its old security label and `relabelto` permission for the object in conjunction with its new security label. (In cases where multiple label providers are installed and the user tries to set a security label, but it is not managed by SELinux, only `setattr` should be checked here. This is currently not done due to implementation restrictions.)
+- Using [`SECURITY LABEL`](sql-security-label) on an object additionally requires `relabelfrom` permission for the object in conjunction with its old security label and `relabelto` permission for the object in conjunction with its new security label. (In cases where multiple label providers are installed and the user tries to set a security label, but it is not managed by SELinux, only `setattr` should be checked here. This is currently not done due to implementation restrictions.)
 
 [#id](#SEPGSQL-FEATURES-TRUSTED-PROCEDURES)
 
@@ -312,31 +310,99 @@ We reject the [`LOAD`](sql-load) command across the board, because any module lo
 
 **Table F.31. Sepgsql Functions**
 
-| FunctionDescription                                                                                                                                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sepgsql_getcon` () → `text`Returns the client domain, the current security label of the client.                                                                                                                                        |
-| `sepgsql_setcon` ( `text` ) → `boolean`Switches the client domain of the current session to the new domain, if allowed by the security policy. It also accepts `NULL` input as a request to transition to the client's original domain. |
-| `sepgsql_mcstrans_in` ( `text` ) → `text`Translates the given qualified MLS/MCS range into raw format if the mcstrans daemon is running.                                                                                                |
-| `sepgsql_mcstrans_out` ( `text` ) → `text`Translates the given raw MLS/MCS range into qualified format if the mcstrans daemon is running.                                                                                               |
-| `sepgsql_restorecon` ( `text` ) → `boolean`Sets up initial security labels for all objects within the current database. The argument may be `NULL`, or the name of a specfile to be used as alternative of the system default.          |
+<figure class="table-wrapper">
+<table class="table" summary="Sepgsql Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <div class="func_signature">Function</div>
+        <div>Description</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">sepgsql_getcon</code> () → <code class="returnvalue">text</code>
+        </div>
+        <div>Returns the client domain, the current security label of the client.</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">sepgsql_setcon</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>
+          Switches the client domain of the current session to the new domain, if allowed by the
+          security policy. It also accepts <code class="literal">NULL</code> input as a request to
+          transition to the client's original domain.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">sepgsql_mcstrans_in</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">text</code>
+        </div>
+        <div>
+          Translates the given qualified MLS/MCS range into raw format if the mcstrans daemon is
+          running.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">sepgsql_mcstrans_out</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">text</code>
+        </div>
+        <div>
+          Translates the given raw MLS/MCS range into qualified format if the mcstrans daemon is
+          running.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">sepgsql_restorecon</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>
+          Sets up initial security labels for all objects within the current database. The argument
+          may be <code class="literal">NULL</code>, or the name of a specfile to be used as
+          alternative of the system default.
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</figure>
 
 [#id](#SEPGSQL-LIMITATIONS)
 
 ### F.40.7. Limitations [#](#SEPGSQL-LIMITATIONS)
 
-* Data Definition Language (DDL) Permissions
+- Data Definition Language (DDL) Permissions
 
   Due to implementation restrictions, some DDL operations do not check permissions.
 
-* Data Control Language (DCL) Permissions
+- Data Control Language (DCL) Permissions
 
   Due to implementation restrictions, DCL operations do not check permissions.
 
-* Row-level access control
+- Row-level access control
 
   PostgreSQL supports row-level access, but `sepgsql` does not.
 
-* Covert channels
+- Covert channels
 
   `sepgsql` does not try to hide the existence of a certain object, even if the user is not allowed to reference it. For example, we can infer the existence of an invisible object as a result of primary key conflicts, foreign key violations, and so on, even if we cannot obtain the contents of the object. The existence of a top secret table cannot be hidden; we only hope to conceal its contents.
 
@@ -344,15 +410,15 @@ We reject the [`LOAD`](sql-load) command across the board, because any module lo
 
 ### F.40.8. External Resources [#](#SEPGSQL-RESOURCES)
 
-* [SE-PostgreSQL Introduction](https://wiki.postgresql.org/wiki/SEPostgreSQL)
+- [SE-PostgreSQL Introduction](https://wiki.postgresql.org/wiki/SEPostgreSQL)
 
   This wiki page provides a brief overview, security design, architecture, administration and upcoming features.
 
-* [SELinux User's and Administrator's Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/index)
+- [SELinux User's and Administrator's Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/index)
 
   This document provides a wide spectrum of knowledge to administer SELinux on your systems. It focuses primarily on Red Hat operating systems, but is not limited to them.
 
-* [Fedora SELinux FAQ](https://fedoraproject.org/wiki/SELinux_FAQ)
+- [Fedora SELinux FAQ](https://fedoraproject.org/wiki/SELinux_FAQ)
 
   This document answers frequently asked questions about SELinux. It focuses primarily on Fedora, but is not limited to Fedora.
 

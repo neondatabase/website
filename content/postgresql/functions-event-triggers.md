@@ -94,6 +94,7 @@ The functions shown in [Table 9.104](functions-event-triggers#FUNCTIONS-EVENT-T
 
 **Table 9.104. Table Rewrite Information Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Table Rewrite Information Functions" border="1">
   <colgroup>
     <col />
@@ -101,37 +102,38 @@ The functions shown in [Table 9.104](functions-event-triggers#FUNCTIONS-EVENT-T
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.35.6.3.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_event_trigger_table_rewrite_oid</code> () →
           <code class="returnvalue">oid</code>
-        </p>
-        <p>Returns the OID of the table about to be rewritten.</p>
+        </div>
+        <div>Returns the OID of the table about to be rewritten.</div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.35.6.3.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_event_trigger_table_rewrite_reason</code> () →
           <code class="returnvalue">integer</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns a code explaining the reason(s) for rewriting. The exact meaning of the codes is
           release dependent.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 These functions can be used in an event trigger like this:
 

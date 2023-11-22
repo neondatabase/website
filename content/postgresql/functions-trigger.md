@@ -10,12 +10,83 @@ For more information about creating triggers, see [CREATE TRIGGER](sql-createtri
 
 **Table 9.103. Built-In Trigger Functions**
 
-| FunctionDescriptionExample Usage                                                                                                                                                                                                                                                                                                                                                                               |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `suppress_redundant_updates_trigger` ( ) → `trigger`Suppresses do-nothing update operations. See below for details.`CREATE TRIGGER ... suppress_redundant_updates_trigger()`                                                                                                                                                                                                                               |
-| `tsvector_update_trigger` ( ) → `trigger`Automatically updates a `tsvector` column from associated plain-text document column(s). The text search configuration to use is specified by name as a trigger argument. See [Section 12.4.3](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS) for details.`CREATE TRIGGER ... tsvector_update_trigger(tsvcol, 'pg_catalog.swedish', title, body)`           |
-| `tsvector_update_trigger_column` ( ) → `trigger`Automatically updates a `tsvector` column from associated plain-text document column(s). The text search configuration to use is taken from a `regconfig` column of the table. See [Section 12.4.3](textsearch-features#TEXTSEARCH-UPDATE-TRIGGERS) for details.`CREATE TRIGGER ... tsvector_update_trigger_column(tsvcol, tsconfigcol, title, body)` |
-
+<figure class="table-wrapper">
+  <table class="table" summary="Built-In Trigger Functions" border="1">
+    <colgroup>
+      <col />
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="func_table_entry">
+          <div class="func_signature">Function</div>
+          <div>Description</div>
+          <div>Example Usage</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="func_table_entry">
+          <div class="func_signature">
+            <a id="id-1.5.8.34.4.2.2.1.1.1.1" class="indexterm"></a>
+            <code class="function">suppress_redundant_updates_trigger</code> ( ) →
+            <code class="returnvalue">trigger</code>
+          </div>
+          <div>Suppresses do-nothing update operations. See below for details.</div>
+          <div>
+            <code class="literal">CREATE TRIGGER ... suppress_redundant_updates_trigger()</code>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="func_table_entry">
+          <div class="func_signature">
+            <a id="id-1.5.8.34.4.2.2.2.1.1.1" class="indexterm"></a>
+            <code class="function">tsvector_update_trigger</code> ( ) →
+            <code class="returnvalue">trigger</code>
+          </div>
+          <div>
+            Automatically updates a <code class="type">tsvector</code> column from associated
+            plain-text document column(s). The text search configuration to use is specified by name
+            as a trigger argument. See
+            <a
+              class="xref"
+              href="textsearch-features.html#TEXTSEARCH-UPDATE-TRIGGERS"
+              title="12.4.3.&nbsp;Triggers for Automatic Updates">Section&nbsp;12.4.3</a>
+            for details.
+          </div>
+          <div>
+            <code class="literal">CREATE TRIGGER ... tsvector_update_trigger(tsvcol, 'pg_catalog.swedish', title,
+              body)</code>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="func_table_entry">
+          <div class="func_signature">
+            <a id="id-1.5.8.34.4.2.2.3.1.1.1" class="indexterm"></a>
+            <code class="function">tsvector_update_trigger_column</code> ( ) →
+            <code class="returnvalue">trigger</code>
+          </div>
+          <div>
+            Automatically updates a <code class="type">tsvector</code> column from associated
+            plain-text document column(s). The text search configuration to use is taken from a
+            <code class="type">regconfig</code> column of the table. See
+            <a
+              class="xref"
+              href="textsearch-features.html#TEXTSEARCH-UPDATE-TRIGGERS"
+              title="12.4.3.&nbsp;Triggers for Automatic Updates">Section&nbsp;12.4.3</a>
+            for details.
+          </div>
+          <div>
+            <code class="literal">CREATE TRIGGER ... tsvector_update_trigger_column(tsvcol, tsconfigcol, title,
+              body)</code>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
 
 The `suppress_redundant_updates_trigger` function, when applied as a row-level `BEFORE UPDATE` trigger, will prevent any update that does not actually change the data in the row from taking place. This overrides the normal behavior which always performs a physical row update regardless of whether or not the data has changed. (This normal behavior makes updates run faster, since no checking is required, and is also useful in certain cases.)
 

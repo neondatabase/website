@@ -8,6 +8,7 @@ The PostgreSQL formatting functions provide a powerful set of tools for converti
 
 **Table 9.26. Formatting Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Formatting Functions" border="1">
   <colgroup>
     <col />
@@ -15,123 +16,124 @@ The PostgreSQL formatting functions provide a powerful set of tools for converti
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
-        <p>Example(s)</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
+        <div>Example(s)</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.14.4.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">to_char</code> ( <code class="type">timestamp</code>,
           <code class="type">text</code> ) → <code class="returnvalue">text</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">to_char</code> (
           <code class="type">timestamp with time zone</code>, <code class="type">text</code> ) →
           <code class="returnvalue">text</code>
-        </p>
-        <p>Converts time stamp to string according to the given format.</p>
-        <p>
+        </div>
+        <div>Converts time stamp to string according to the given format.</div>
+        <div>
           <code class="literal">to_char(timestamp '2002-04-20 17:31:12.66', 'HH12:MI:SS')</code>
           → <code class="returnvalue">05:31:12</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">to_char</code> ( <code class="type">interval</code>,
           <code class="type">text</code> ) → <code class="returnvalue">text</code>
-        </p>
-        <p>Converts interval to string according to the given format.</p>
-        <p>
+        </div>
+        <div>Converts interval to string according to the given format.</div>
+        <div>
           <code class="literal">to_char(interval '15h 2m 12s', 'HH24:MI:SS')</code>
           → <code class="returnvalue">15:02:12</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">to_char</code> (
           <em class="replaceable"><code>numeric_type</code></em>, <code class="type">text</code> ) → <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Converts number to string according to the given format; available for
           <code class="type">integer</code>, <code class="type">bigint</code>,
           <code class="type">numeric</code>, <code class="type">real</code>,
           <code class="type">double precision</code>.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">to_char(125, '999')</code>
           → <code class="returnvalue">125</code>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">to_char(125.8::real, '999D9')</code>
           → <code class="returnvalue">125.8</code>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">to_char(-125.8, '999D99S')</code>
           → <code class="returnvalue">125.80-</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.14.4.2.2.4.1.1.1" class="indexterm"></a>
           <code class="function">to_date</code> ( <code class="type">text</code>,
           <code class="type">text</code> ) → <code class="returnvalue">date</code>
-        </p>
-        <p>Converts string to date according to the given format.</p>
-        <p>
+        </div>
+        <div>Converts string to date according to the given format.</div>
+        <div>
           <code class="literal">to_date('05 Dec 2000', 'DD Mon YYYY')</code>
           → <code class="returnvalue">2000-12-05</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.14.4.2.2.5.1.1.1" class="indexterm"></a>
           <code class="function">to_number</code> ( <code class="type">text</code>,
           <code class="type">text</code> ) → <code class="returnvalue">numeric</code>
-        </p>
-        <p>Converts string to numeric according to the given format.</p>
-        <p>
+        </div>
+        <div>Converts string to numeric according to the given format.</div>
+        <div>
           <code class="literal">to_number('12,454.8-', '99G999D9S')</code>
           → <code class="returnvalue">-12454.8</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.14.4.2.2.6.1.1.1" class="indexterm"></a>
           <code class="function">to_timestamp</code> ( <code class="type">text</code>,
           <code class="type">text</code> ) →
           <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Converts string to time stamp according to the given format. (See also
           <code class="function">to_timestamp(double precision)</code> in
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-TABLE"
             title="Table 9.33. Date/Time Functions">Table 9.33</a>.)
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">to_timestamp('05 Dec 2000', 'DD Mon YYYY')</code>
           → <code class="returnvalue">2000-12-05 00:00:00-05</code>
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 ### Tip
 

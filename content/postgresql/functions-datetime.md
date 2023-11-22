@@ -19,6 +19,7 @@ All the functions and operators described below that take `time` or `timestamp` 
 
 **Table 9.32. Date/Time Operators**
 
+<figure class="table-wrapper">
 <table class="table" summary="Date/Time Operators" border="1">
   <colgroup>
     <col />
@@ -26,252 +27,254 @@ All the functions and operators described below that take `time` or `timestamp` 
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Operator</p>
-        <p>Description</p>
-        <p>Example(s)</p>
+        <div class="func_signature">Operator</div>
+        <div>Description</div>
+        <div>Example(s)</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">date</code> <code class="literal">+</code>
           <code class="type">integer</code> → <code class="returnvalue">date</code>
-        </p>
-        <p>Add a number of days to a date</p>
-        <p>
+        </div>
+        <div>Add a number of days to a date</div>
+        <div>
           <code class="literal">date '2001-09-28' + 7</code>
           → <code class="returnvalue">2001-10-05</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">date</code> <code class="literal">+</code>
           <code class="type">interval</code> → <code class="returnvalue">timestamp</code>
-        </p>
-        <p>Add an interval to a date</p>
-        <p>
+        </div>
+        <div>Add an interval to a date</div>
+        <div>
           <code class="literal">date '2001-09-28' + interval '1 hour'</code>
           → <code class="returnvalue">2001-09-28 01:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">date</code> <code class="literal">+</code>
           <code class="type">time</code> → <code class="returnvalue">timestamp</code>
-        </p>
-        <p>Add a time-of-day to a date</p>
-        <p>
+        </div>
+        <div>Add a time-of-day to a date</div>
+        <div>
           <code class="literal">date '2001-09-28' + time '03:00'</code>
           → <code class="returnvalue">2001-09-28 03:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">interval</code> <code class="literal">+</code>
           <code class="type">interval</code> → <code class="returnvalue">interval</code>
-        </p>
-        <p>Add intervals</p>
-        <p>
+        </div>
+        <div>Add intervals</div>
+        <div>
           <code class="literal">interval '1 day' + interval '1 hour'</code>
           → <code class="returnvalue">1 day 01:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">timestamp</code> <code class="literal">+</code>
           <code class="type">interval</code> → <code class="returnvalue">timestamp</code>
-        </p>
-        <p>Add an interval to a timestamp</p>
-        <p>
+        </div>
+        <div>Add an interval to a timestamp</div>
+        <div>
           <code class="literal">timestamp '2001-09-28 01:00' + interval '23 hours'</code>
           → <code class="returnvalue">2001-09-29 00:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">time</code> <code class="literal">+</code>
           <code class="type">interval</code> → <code class="returnvalue">time</code>
-        </p>
-        <p>Add an interval to a time</p>
-        <p>
+        </div>
+        <div>Add an interval to a time</div>
+        <div>
           <code class="literal">time '01:00' + interval '3 hours'</code>
           → <code class="returnvalue">04:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="literal">-</code> <code class="type">interval</code> →
           <code class="returnvalue">interval</code>
-        </p>
-        <p>Negate an interval</p>
-        <p>
+        </div>
+        <div>Negate an interval</div>
+        <div>
           <code class="literal">- interval '23 hours'</code>
           → <code class="returnvalue">-23:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">date</code> <code class="literal">-</code>
           <code class="type">date</code> → <code class="returnvalue">integer</code>
-        </p>
-        <p>Subtract dates, producing the number of days elapsed</p>
-        <p>
+        </div>
+        <div>Subtract dates, producing the number of days elapsed</div>
+        <div>
           <code class="literal">date '2001-10-01' - date '2001-09-28'</code>
           → <code class="returnvalue">3</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">date</code> <code class="literal">-</code>
           <code class="type">integer</code> → <code class="returnvalue">date</code>
-        </p>
-        <p>Subtract a number of days from a date</p>
-        <p>
+        </div>
+        <div>Subtract a number of days from a date</div>
+        <div>
           <code class="literal">date '2001-10-01' - 7</code>
           → <code class="returnvalue">2001-09-24</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">date</code> <code class="literal">-</code>
           <code class="type">interval</code> → <code class="returnvalue">timestamp</code>
-        </p>
-        <p>Subtract an interval from a date</p>
-        <p>
+        </div>
+        <div>Subtract an interval from a date</div>
+        <div>
           <code class="literal">date '2001-09-28' - interval '1 hour'</code>
           → <code class="returnvalue">2001-09-27 23:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">time</code> <code class="literal">-</code>
           <code class="type">time</code> → <code class="returnvalue">interval</code>
-        </p>
-        <p>Subtract times</p>
-        <p>
+        </div>
+        <div>Subtract times</div>
+        <div>
           <code class="literal">time '05:00' - time '03:00'</code>
           → <code class="returnvalue">02:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">time</code> <code class="literal">-</code>
           <code class="type">interval</code> → <code class="returnvalue">time</code>
-        </p>
-        <p>Subtract an interval from a time</p>
-        <p>
+        </div>
+        <div>Subtract an interval from a time</div>
+        <div>
           <code class="literal">time '05:00' - interval '2 hours'</code>
           → <code class="returnvalue">03:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">timestamp</code> <code class="literal">-</code>
           <code class="type">interval</code> → <code class="returnvalue">timestamp</code>
-        </p>
-        <p>Subtract an interval from a timestamp</p>
-        <p>
+        </div>
+        <div>Subtract an interval from a timestamp</div>
+        <div>
           <code class="literal">timestamp '2001-09-28 23:00' - interval '23 hours'</code>
           → <code class="returnvalue">2001-09-28 00:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">interval</code> <code class="literal">-</code>
           <code class="type">interval</code> → <code class="returnvalue">interval</code>
-        </p>
-        <p>Subtract intervals</p>
-        <p>
+        </div>
+        <div>Subtract intervals</div>
+        <div>
           <code class="literal">interval '1 day' - interval '1 hour'</code>
           → <code class="returnvalue">1 day -01:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">timestamp</code> <code class="literal">-</code>
           <code class="type">timestamp</code> → <code class="returnvalue">interval</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Subtract timestamps (converting 24-hour intervals into days, similarly to
           <code class="function">justify_hours()</code>)
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">timestamp '2001-09-29 03:00' - timestamp '2001-07-27 12:00'</code>
           → <code class="returnvalue">63 days 15:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">interval</code> <code class="literal">*</code>
           <code class="type">double precision</code> → <code class="returnvalue">interval</code>
-        </p>
-        <p>Multiply an interval by a scalar</p>
-        <p>
+        </div>
+        <div>Multiply an interval by a scalar</div>
+        <div>
           <code class="literal">interval '1 second'* 900</code>
           → <code class="returnvalue">00:15:00</code>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">interval '1 day' *21</code>
           → <code class="returnvalue">21 days</code>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">interval '1 hour'* 3.5</code>
           → <code class="returnvalue">03:30:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">interval</code> <code class="literal">/</code>
           <code class="type">double precision</code> → <code class="returnvalue">interval</code>
-        </p>
-        <p>Divide an interval by a scalar</p>
-        <p>
+        </div>
+        <div>Divide an interval by a scalar</div>
+        <div>
           <code class="literal">interval '1 hour' / 1.5</code>
           → <code class="returnvalue">00:40:00</code>
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 [#id](#FUNCTIONS-DATETIME-TABLE)
 
 **Table 9.33. Date/Time Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Date/Time Functions" border="1">
   <colgroup>
     <col />
@@ -279,177 +282,177 @@ All the functions and operators described below that take `time` or `timestamp` 
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
-        <p>Example(s)</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
+        <div>Example(s)</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">age</code> ( <code class="type">timestamp</code>,
           <code class="type">timestamp</code> ) → <code class="returnvalue">interval</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Subtract arguments, producing a
           <span class="quote">“<span class="quote">symbolic</span>”</span> result that uses years
           and months, rather than just days
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">age(timestamp '2001-04-10', timestamp '1957-06-13')</code>
           → <code class="returnvalue">43 years 9 mons 27 days</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">age</code> ( <code class="type">timestamp</code> ) →
           <code class="returnvalue">interval</code>
-        </p>
-        <p>Subtract argument from <code class="function">current_date</code> (at midnight)</p>
-        <p>
+        </div>
+        <div>Subtract argument from <code class="function">current_date</code> (at midnight)</div>
+        <div>
           <code class="literal">age(timestamp '1957-06-13')</code>
           → <code class="returnvalue">62 years 6 mons 10 days</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">clock_timestamp</code> ( ) →
           <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current date and time (changes during statement execution); see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">clock_timestamp()</code>
           → <code class="returnvalue">2019-12-23 14:39:53.662522-05</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.4.1.1.1" class="indexterm"></a>
           <code class="function">current_date</code>
           → <code class="returnvalue">date</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current date; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">current_date</code>
           → <code class="returnvalue">2019-12-23</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.5.1.1.1" class="indexterm"></a>
           <code class="function">current_time</code>
           → <code class="returnvalue">time with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current time of day; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">current_time</code>
           → <code class="returnvalue">14:39:53.662522-05</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">current_time</code> ( <code class="type">integer</code> ) →
           <code class="returnvalue">time with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current time of day, with limited precision; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">current_time(2)</code>
           → <code class="returnvalue">14:39:53.66-05</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.7.1.1.1" class="indexterm"></a>
           <code class="function">current_timestamp</code>
           → <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current date and time (start of current transaction); see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">current_timestamp</code>
           → <code class="returnvalue">2019-12-23 14:39:53.662522-05</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">current_timestamp</code> ( <code class="type">integer</code> ) →
           <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current date and time (start of current transaction), with limited precision; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">current_timestamp(0)</code>
           → <code class="returnvalue">2019-12-23 14:39:53-05</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.9.1.1.1" class="indexterm"></a>
           <code class="function">date_add</code> (
           <code class="type">timestamp with time zone</code>,
           <code class="type">interval</code> [<span class="optional">, <code class="type">text</code> </span>] ) → <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Add an <code class="type">interval</code> to a
           <code class="type">timestamp with time zone</code>, computing times of day and
           daylight-savings adjustments according to the time zone named by the third argument, or
@@ -458,84 +461,84 @@ All the functions and operators described below that take `time` or `timestamp` 
           that is omitted. The form with two arguments is equivalent to the
           <code class="type">timestamp with time zone</code> <code class="literal">+</code>
           <code class="type">interval</code> operator.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">date_add('2021-10-31 00:00:00+02'::timestamptz, '1 day'::interval,
             'Europe/Warsaw')</code>
           → <code class="returnvalue">2021-10-31 23:00:00+00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">date_bin</code> ( <code class="type">interval</code>,
           <code class="type">timestamp</code>, <code class="type">timestamp</code> ) →
           <code class="returnvalue">timestamp</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Bin input into specified interval aligned with specified origin; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-BIN"
             title="9.9.3. date_bin">Section 9.9.3</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">date_bin('15 minutes', timestamp '2001-02-16 20:38:40', timestamp '2001-02-16
             20:05:00')</code>
           → <code class="returnvalue">2001-02-16 20:35:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.11.1.1.1" class="indexterm"></a>
           <code class="function">date_part</code> ( <code class="type">text</code>,
           <code class="type">timestamp</code> ) → <code class="returnvalue">double precision</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Get timestamp subfield (equivalent to <code class="function">extract</code>); see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT"
             title="9.9.1. EXTRACT, date_part">Section 9.9.1</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">date_part('hour', timestamp '2001-02-16 20:38:40')</code>
           → <code class="returnvalue">20</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">date_part</code> ( <code class="type">text</code>,
           <code class="type">interval</code> ) → <code class="returnvalue">double precision</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Get interval subfield (equivalent to <code class="function">extract</code>); see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT"
             title="9.9.1. EXTRACT, date_part"
             >Section 9.9.1</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">date_part('month', interval '2 years 3 months')</code>
           → <code class="returnvalue">3</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.13.1.1.1" class="indexterm"></a>
           <code class="function">date_subtract</code> (
           <code class="type">timestamp with time zone</code>,
           <code class="type">interval</code> [<span class="optional">, <code class="type">text</code> </span>] ) → <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Subtract an <code class="type">interval</code> from a
           <code class="type">timestamp with time zone</code>, computing times of day and
           daylight-savings adjustments according to the time zone named by the third argument, or
@@ -544,305 +547,305 @@ All the functions and operators described below that take `time` or `timestamp` 
           that is omitted. The form with two arguments is equivalent to the
           <code class="type">timestamp with time zone</code> <code class="literal">-</code>
           <code class="type">interval</code> operator.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">date_subtract('2021-11-01 00:00:00+01'::timestamptz, '1 day'::interval,
             'Europe/Warsaw')</code>
           → <code class="returnvalue">2021-10-30 22:00:00+00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.14.1.1.1" class="indexterm"></a>
           <code class="function">date_trunc</code> ( <code class="type">text</code>,
           <code class="type">timestamp</code> ) → <code class="returnvalue">timestamp</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Truncate to specified precision; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-TRUNC"
             title="9.9.2. date_trunc"
             >Section 9.9.2</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">date_trunc('hour', timestamp '2001-02-16 20:38:40')</code>
           → <code class="returnvalue">2001-02-16 20:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">date_trunc</code> ( <code class="type">text</code>,
           <code class="type">timestamp with time zone</code>, <code class="type">text</code> ) →
           <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Truncate to specified precision in the specified time zone; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-TRUNC"
             title="9.9.2. date_trunc"
             >Section 9.9.2</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">date_trunc('day', timestamptz '2001-02-16 20:38:40+00', 'Australia/Sydney')</code>
           → <code class="returnvalue">2001-02-16 13:00:00+00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">date_trunc</code> ( <code class="type">text</code>,
           <code class="type">interval</code> ) → <code class="returnvalue">interval</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Truncate to specified precision; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-TRUNC"
             title="9.9.2. date_trunc"
             >Section 9.9.2</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">date_trunc('hour', interval '2 days 3 hours 40 minutes')</code>
           → <code class="returnvalue">2 days 03:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.17.1.1.1" class="indexterm"></a>
           <code class="function">extract</code> ( <em class="parameter"><code>field</code></em>
           <code class="literal">from</code> <code class="type">timestamp</code> ) →
           <code class="returnvalue">numeric</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Get timestamp subfield; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT"
             title="9.9.1. EXTRACT, date_part"
             >Section 9.9.1</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">extract(hour from timestamp '2001-02-16 20:38:40')</code>
           → <code class="returnvalue">20</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">extract</code> ( <em class="parameter"><code>field</code></em>
           <code class="literal">from</code> <code class="type">interval</code> ) →
           <code class="returnvalue">numeric</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Get interval subfield; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT"
             title="9.9.1. EXTRACT, date_part"
             >Section 9.9.1</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">extract(month from interval '2 years 3 months')</code>
           → <code class="returnvalue">3</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.19.1.1.1" class="indexterm"></a>
           <code class="function">isfinite</code> ( <code class="type">date</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>Test for finite date (not +/-infinity)</p>
-        <p>
+        </div>
+        <div>Test for finite date (not +/-infinity)</div>
+        <div>
           <code class="literal">isfinite(date '2001-02-16')</code>
           → <code class="returnvalue">true</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">isfinite</code> ( <code class="type">timestamp</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>Test for finite timestamp (not +/-infinity)</p>
-        <p>
+        </div>
+        <div>Test for finite timestamp (not +/-infinity)</div>
+        <div>
           <code class="literal">isfinite(timestamp 'infinity')</code>
           → <code class="returnvalue">false</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">isfinite</code> ( <code class="type">interval</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>Test for finite interval (currently always true)</p>
-        <p>
+        </div>
+        <div>Test for finite interval (currently always true)</div>
+        <div>
           <code class="literal">isfinite(interval '4 hours')</code>
           → <code class="returnvalue">true</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.22.1.1.1" class="indexterm"></a>
           <code class="function">justify_days</code> ( <code class="type">interval</code> ) →
           <code class="returnvalue">interval</code>
-        </p>
-        <p>Adjust interval so 30-day time periods are represented as months</p>
-        <p>
+        </div>
+        <div>Adjust interval so 30-day time periods are represented as months</div>
+        <div>
           <code class="literal">justify_days(interval '35 days')</code>
           → <code class="returnvalue">1 mon 5 days</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.23.1.1.1" class="indexterm"></a>
           <code class="function">justify_hours</code> ( <code class="type">interval</code> ) →
           <code class="returnvalue">interval</code>
-        </p>
-        <p>Adjust interval so 24-hour time periods are represented as days</p>
-        <p>
+        </div>
+        <div>Adjust interval so 24-hour time periods are represented as days</div>
+        <div>
           <code class="literal">justify_hours(interval '27 hours')</code>
           → <code class="returnvalue">1 day 03:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.24.1.1.1" class="indexterm"></a>
           <code class="function">justify_interval</code> ( <code class="type">interval</code> ) →
           <code class="returnvalue">interval</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Adjust interval using <code class="function">justify_days</code> and
           <code class="function">justify_hours</code>, with additional sign adjustments
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">justify_interval(interval '1 mon -1 hour')</code>
           → <code class="returnvalue">29 days 23:00:00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.25.1.1.1" class="indexterm"></a>
           <code class="function">localtime</code>
           → <code class="returnvalue">time</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current time of day; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">localtime</code>
           → <code class="returnvalue">14:39:53.662522</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">localtime</code> ( <code class="type">integer</code> ) →
           <code class="returnvalue">time</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current time of day, with limited precision; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">localtime(0)</code>
           → <code class="returnvalue">14:39:53</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.27.1.1.1" class="indexterm"></a>
           <code class="function">localtimestamp</code>
           → <code class="returnvalue">timestamp</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current date and time (start of current transaction); see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">localtimestamp</code>
           → <code class="returnvalue">2019-12-23 14:39:53.662522</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="function">localtimestamp</code> ( <code class="type">integer</code> ) →
           <code class="returnvalue">timestamp</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current date and time (start of current transaction), with limited precision; see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">localtimestamp(2)</code>
           → <code class="returnvalue">2019-12-23 14:39:53.66</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.29.1.1.1" class="indexterm"></a>
           <code class="function">make_date</code> ( <em class="parameter"><code>year</code></em>
           <code class="type">int</code>, <em class="parameter"><code>month</code></em>
           <code class="type">int</code>, <em class="parameter"><code>day</code></em>
           <code class="type">int</code> ) → <code class="returnvalue">date</code>
-        </p>
-        <p>Create date from year, month and day fields (negative years signify BC)</p>
-        <p>
+        </div>
+        <div>Create date from year, month and day fields (negative years signify BC)</div>
+        <div>
           <code class="literal">make_date(2013, 7, 15)</code>
           → <code class="returnvalue">2013-07-15</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.30.1.1.1" class="indexterm"></a>
           <code class="function">make_interval</code> ( [<span class="optional">
             <em class="parameter"><code>years</code></em> <code class="type">int</code> [<span class="optional">, <em class="parameter"><code>months</code></em> <code class="type">int</code> [<span
@@ -852,36 +855,36 @@ All the functions and operators described below that take `time` or `timestamp` 
                     <code class="type">int</code> [<span class="optional">, <em class="parameter"><code>mins</code></em>
                       <code class="type">int</code> [<span class="optional">, <em class="parameter"><code>secs</code></em>
                         <code class="type">double precision</code> </span>]</span>]</span>]</span>]</span>]</span>]</span>] ) → <code class="returnvalue">interval</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Create interval from years, months, weeks, days, hours, minutes and seconds fields, each
           of which can default to zero
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">make_interval(days =&gt; 10)</code>
           → <code class="returnvalue">10 days</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.31.1.1.1" class="indexterm"></a>
           <code class="function">make_time</code> ( <em class="parameter"><code>hour</code></em>
           <code class="type">int</code>, <em class="parameter"><code>min</code></em>
           <code class="type">int</code>, <em class="parameter"><code>sec</code></em>
           <code class="type">double precision</code> ) → <code class="returnvalue">time</code>
-        </p>
-        <p>Create time from hour, minute and seconds fields</p>
-        <p>
+        </div>
+        <div>Create time from hour, minute and seconds fields</div>
+        <div>
           <code class="literal">make_time(8, 15, 23.5)</code>
           → <code class="returnvalue">08:15:23.5</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.32.1.1.1" class="indexterm"></a>
           <code class="function">make_timestamp</code> (
           <em class="parameter"><code>year</code></em> <code class="type">int</code>,
@@ -891,20 +894,20 @@ All the functions and operators described below that take `time` or `timestamp` 
           <em class="parameter"><code>min</code></em> <code class="type">int</code>,
           <em class="parameter"><code>sec</code></em> <code class="type">double precision</code> ) →
           <code class="returnvalue">timestamp</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Create timestamp from year, month, day, hour, minute and seconds fields (negative years
           signify BC)
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">make_timestamp(2013, 7, 15, 8, 15, 23.5)</code>
           → <code class="returnvalue">2013-07-15 08:15:23.5</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.33.1.1.1" class="indexterm"></a>
           <code class="function">make_timestamptz</code> (
           <em class="parameter"><code>year</code></em> <code class="type">int</code>,
@@ -915,72 +918,72 @@ All the functions and operators described below that take `time` or `timestamp` 
           <em class="parameter"><code>sec</code></em>
           <code class="type">double precision</code> [<span class="optional">, <em class="parameter"><code>timezone</code></em>
             <code class="type">text</code> </span>] ) → <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Create timestamp with time zone from year, month, day, hour, minute and seconds fields
           (negative years signify BC). If <em class="parameter"><code>timezone</code></em> is not
           specified, the current time zone is used; the examples assume the session time zone is
           <code class="literal">Europe/London</code>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">make_timestamptz(2013, 7, 15, 8, 15, 23.5)</code>
           → <code class="returnvalue">2013-07-15 08:15:23.5+01</code>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">make_timestamptz(2013, 7, 15, 8, 15, 23.5, 'America/New_York')</code>
           → <code class="returnvalue">2013-07-15 13:15:23.5+01</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.34.1.1.1" class="indexterm"></a>
           <code class="function">now</code> ( ) →
           <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current date and time (start of current transaction); see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">now()</code>
           → <code class="returnvalue">2019-12-23 14:39:53.662522-05</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.35.1.1.1" class="indexterm"></a>
           <code class="function">statement_timestamp</code> ( ) →
           <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current date and time (start of current statement); see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">statement_timestamp()</code>
           → <code class="returnvalue">2019-12-23 14:39:53.662522-05</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.36.1.1.1" class="indexterm"></a>
           <code class="function">timeofday</code> ( ) → <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current date and time (like <code class="function">clock_timestamp</code>, but as a
           <code class="type">text</code> string); see
           <a
@@ -988,50 +991,51 @@ All the functions and operators described below that take `time` or `timestamp` 
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">timeofday()</code>
           → <code class="returnvalue">Mon Dec 23 14:39:53.662522 2019 EST</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.37.1.1.1" class="indexterm"></a>
           <code class="function">transaction_timestamp</code> ( ) →
           <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Current date and time (start of current transaction); see
           <a
             class="xref"
             href="functions-datetime.html#FUNCTIONS-DATETIME-CURRENT"
             title="9.9.5. Current Date/Time"
             >Section 9.9.5</a>
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">transaction_timestamp()</code>
           → <code class="returnvalue">2019-12-23 14:39:53.662522-05</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.15.6.2.2.38.1.1.1" class="indexterm"></a>
           <code class="function">to_timestamp</code> ( <code class="type">double precision</code> )
           → <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>Convert Unix epoch (seconds since 1970-01-01 00:00:00+00) to timestamp with time zone</p>
-        <p>
+        </div>
+        <div>Convert Unix epoch (seconds since 1970-01-01 00:00:00+00) to timestamp with time zone</div>
+        <div>
           <code class="literal">to_timestamp(1284352323)</code>
           → <code class="returnvalue">2010-09-13 04:32:03+00</code>
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 In addition to these functions, the SQL `OVERLAPS` operator is supported:
 
@@ -1468,6 +1472,7 @@ The `AT TIME ZONE` operator converts time stamp _without_ time zone to/from time
 
 **Table 9.34. `AT TIME ZONE` Variants**
 
+<figure class="table-wrapper">
 <table class="table" summary="AT TIME ZONE Variants" border="1">
   <colgroup>
     <col />
@@ -1475,69 +1480,70 @@ The `AT TIME ZONE` operator converts time stamp _without_ time zone to/from time
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Operator</p>
-        <p>Description</p>
-        <p>Example(s)</p>
+        <div class="func_signature">Operator</div>
+        <div>Description</div>
+        <div>Example(s)</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">timestamp without time zone</code>
           <code class="literal">AT TIME ZONE</code> <em class="replaceable"><code>zone</code></em> →
           <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Converts given time stamp <span class="emphasis"><em>without</em></span> time zone to time
           stamp <span class="emphasis"><em>with</em></span> time zone, assuming the given value is
           in the named time zone.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">timestamp '2001-02-16 20:38:40' at time zone 'America/Denver'</code>
           → <code class="returnvalue">2001-02-17 03:38:40+00</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">timestamp with time zone</code>
           <code class="literal">AT TIME ZONE</code> <em class="replaceable"><code>zone</code></em> →
           <code class="returnvalue">timestamp without time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Converts given time stamp <span class="emphasis"><em>with</em></span> time zone to time
           stamp <span class="emphasis"><em>without</em></span> time zone, as the time would appear
           in that zone.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">timestamp with time zone '2001-02-16 20:38:40-05' at time zone 'America/Denver'</code>
           → <code class="returnvalue">2001-02-16 18:38:40</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <code class="type">time with time zone</code> <code class="literal">AT TIME ZONE</code>
           <em class="replaceable"><code>zone</code></em> →
           <code class="returnvalue">time with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Converts given time <span class="emphasis"><em>with</em></span> time zone to a new time
           zone. Since no date is supplied, this uses the currently active UTC offset for the named
           destination zone.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">time with time zone '05:34:17-05' at time zone 'UTC'</code>
           → <code class="returnvalue">10:34:17+00</code>
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 In these expressions, the desired time zone _`zone`_ can be specified either as a text value (e.g., `'America/Los_Angeles'`) or as an interval (e.g., `INTERVAL '-08:00'`). In the text case, a time zone name can be specified in any of the ways described in [Section 8.5.3](datatype-datetime#DATATYPE-TIMEZONES). The interval case is only useful for zones that have fixed offsets from UTC, so it is not very common in practice.
 

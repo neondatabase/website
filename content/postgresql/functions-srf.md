@@ -2,21 +2,88 @@
 
 ## 9.25. Set Returning Functions [#](#FUNCTIONS-SRF)
 
-
-
 This section describes functions that possibly return more than one row. The most widely used functions in this class are series generating functions, as detailed in [Table 9.65](functions-srf#FUNCTIONS-SRF-SERIES) and [Table 9.66](functions-srf#FUNCTIONS-SRF-SUBSCRIPTS). Other, more specialized set-returning functions are described elsewhere in this manual. See [Section 7.2.1.4](queries-table-expressions#QUERIES-TABLEFUNCTIONS) for ways to combine multiple set-returning functions.
 
 [#id](#FUNCTIONS-SRF-SERIES)
 
 **Table 9.65. Series Generating Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `generate_series` ( *`start`* `integer`, *`stop`* `integer` \[, *`step`* `integer` ] ) → `setof integer``generate_series` ( *`start`* `bigint`, *`stop`* `bigint` \[, *`step`* `bigint` ] ) → `setof bigint``generate_series` ( *`start`* `numeric`, *`stop`* `numeric` \[, *`step`* `numeric` ] ) → `setof numeric`Generates a series of values from *`start`* to *`stop`*, with a step size of *`step`*. *`step`* defaults to 1.                                                                                                                                                                                                 |
-| `generate_series` ( *`start`* `timestamp`, *`stop`* `timestamp`, *`step`* `interval` ) → `setof timestamp``generate_series` ( *`start`* `timestamp with time zone`, *`stop`* `timestamp with time zone`, *`step`* `interval` \[, *`timezone`* `text` ] ) → `setof timestamp with time zone`Generates a series of values from *`start`* to *`stop`*, with a step size of *`step`*. In the timezone-aware form, times of day and daylight-savings adjustments are computed according to the time zone named by the *`timezone`* argument, or the current [TimeZone](runtime-config-client#GUC-TIMEZONE) setting if that is omitted. |
+<figure class="table-wrapper">
+<table class="table" summary="Series Generating Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <div class="func_signature">Function</div>
+        <div>Description</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.5.8.31.4.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">generate_series</code> (
+          <em class="parameter"><code>start</code></em> <code class="type">integer</code>,
+          <em class="parameter"><code>stop</code></em> <code class="type">integer</code> [<span
+            class="optional">, <em class="parameter"><code>step</code></em> <code class="type">integer</code> </span>] ) → <code class="returnvalue">setof integer</code>
+        </div>
+        <div class="func_signature">
+          <code class="function">generate_series</code> (
+          <em class="parameter"><code>start</code></em> <code class="type">bigint</code>,
+          <em class="parameter"><code>stop</code></em> <code class="type">bigint</code> [<span
+            class="optional">, <em class="parameter"><code>step</code></em> <code class="type">bigint</code> </span>] ) → <code class="returnvalue">setof bigint</code>
+        </div>
+        <div class="func_signature">
+          <code class="function">generate_series</code> (
+          <em class="parameter"><code>start</code></em> <code class="type">numeric</code>,
+          <em class="parameter"><code>stop</code></em> <code class="type">numeric</code> [<span
+            class="optional">, <em class="parameter"><code>step</code></em> <code class="type">numeric</code> </span>] ) → <code class="returnvalue">setof numeric</code>
+        </div>
+        <div>
+          Generates a series of values from <em class="parameter"><code>start</code></em> to
+          <em class="parameter"><code>stop</code></em>, with a step size of <em class="parameter"><code>step</code></em>. <em class="parameter"><code>step</code></em>
+          defaults to 1.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">generate_series</code> (
+          <em class="parameter"><code>start</code></em> <code class="type">timestamp</code>,
+          <em class="parameter"><code>stop</code></em> <code class="type">timestamp</code>,
+          <em class="parameter"><code>step</code></em> <code class="type">interval</code> ) →
+          <code class="returnvalue">setof timestamp</code>
+        </div>
+        <div class="func_signature">
+          <code class="function">generate_series</code> (
+          <em class="parameter"><code>start</code></em>
+          <code class="type">timestamp with time zone</code>,
+          <em class="parameter"><code>stop</code></em>
+          <code class="type">timestamp with time zone</code>,
+          <em class="parameter"><code>step</code></em> <code class="type">interval</code> [<span
+            class="optional">, <em class="parameter"><code>timezone</code></em>
+            <code class="type">text</code> </span>] ) → <code class="returnvalue">setof timestamp with time zone</code>
+        </div>
+        <div>
+          Generates a series of values from <em class="parameter"><code>start</code></em> to
+          <em class="parameter"><code>stop</code></em>, with a step size of <em class="parameter"><code>step</code></em>. In the timezone-aware form, times of day and daylight-savings adjustments are computed
+          according to the time zone named by the
+          <em class="parameter"><code>timezone</code></em> argument, or the current
+          <a class="xref" href="runtime-config-client.html#GUC-TIMEZONE">TimeZone</a> setting if
+          that is omitted.
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</figure>
 
-
-When *`step`* is positive, zero rows are returned if *`start`* is greater than *`stop`*. Conversely, when *`step`* is negative, zero rows are returned if *`start`* is less than *`stop`*. Zero rows are also returned if any input is `NULL`. It is an error for *`step`* to be zero. Some examples follow:
+When _`step`_ is positive, zero rows are returned if _`start`_ is greater than _`stop`_. Conversely, when _`step`_ is negative, zero rows are returned if _`start`_ is less than _`stop`_. Zero rows are also returned if any input is `NULL`. It is an error for _`step`_ to be zero. Some examples follow:
 
 ```
 
@@ -97,11 +164,54 @@ SELECT * FROM generate_series('2001-10-22 00:00 -04:00'::timestamptz,
 
 **Table 9.66. Subscript Generating Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                         |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `generate_subscripts` ( *`array`* `anyarray`, *`dim`* `integer` ) → `setof integer`Generates a series comprising the valid subscripts of the *`dim`*'th dimension of the given array.                                                                                   |
-| `generate_subscripts` ( *`array`* `anyarray`, *`dim`* `integer`, *`reverse`* `boolean` ) → `setof integer`Generates a series comprising the valid subscripts of the *`dim`*'th dimension of the given array. When *`reverse`* is true, returns the series in reverse order. |
-
+<figure class="table-wrapper">
+<table class="table" summary="Subscript Generating Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <div class="func_signature">Function</div>
+        <div>Description</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.5.8.31.6.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">generate_subscripts</code> (
+          <em class="parameter"><code>array</code></em> <code class="type">anyarray</code>,
+          <em class="parameter"><code>dim</code></em> <code class="type">integer</code> ) →
+          <code class="returnvalue">setof integer</code>
+        </div>
+        <div>
+          Generates a series comprising the valid subscripts of the
+          <em class="parameter"><code>dim</code></em>'th dimension of the given array.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">generate_subscripts</code> (
+          <em class="parameter"><code>array</code></em> <code class="type">anyarray</code>,
+          <em class="parameter"><code>dim</code></em> <code class="type">integer</code>,
+          <em class="parameter"><code>reverse</code></em> <code class="type">boolean</code> ) →
+          <code class="returnvalue">setof integer</code>
+        </div>
+        <div>
+          Generates a series comprising the valid subscripts of the
+          <em class="parameter"><code>dim</code></em>'th dimension of the given array. When <em class="parameter"><code>reverse</code></em> is
+          true, returns the series in reverse order.
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</figure>
 
 `generate_subscripts` is a convenience function that generates the set of valid subscripts for the specified dimension of the given array. Zero rows are returned for arrays that do not have the requested dimension, or if any input is `NULL`. Some examples follow:
 
@@ -154,8 +264,6 @@ SELECT * FROM unnest2(ARRAY[[1,2],[3,4]]);
        4
 (4 rows)
 ```
-
-
 
 When a function in the `FROM` clause is suffixed by `WITH ORDINALITY`, a `bigint` column is appended to the function's output column(s), which starts from 1 and increments by 1 for each row of the function's output. This is most useful in the case of set returning functions such as `unnest()`.
 

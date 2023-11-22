@@ -25,6 +25,7 @@ The functions described in this section are used to control and monitor a Postgr
 
 **Table 9.89. Configuration Settings Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Configuration Settings Functions" border="1">
   <colgroup>
     <col />
@@ -32,22 +33,22 @@ The functions described in this section are used to control and monitor a Postgr
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
-        <p>Example(s)</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
+        <div>Example(s)</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.3.6.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">current_setting</code> (
           <em class="parameter"><code>setting_name</code></em> <code class="type">text</code> [<span class="optional">, <em class="parameter"><code>missing_ok</code></em>
             <code class="type">boolean</code> </span>] ) → <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the current value of the setting
           <em class="parameter"><code>setting_name</code></em>. If there is no such setting, <code class="function">current_setting</code> throws an
           error unless <em class="parameter"><code>missing_ok</code></em> is supplied and is
@@ -55,39 +56,40 @@ The functions described in this section are used to control and monitor a Postgr
           corresponds to the <acronym class="acronym">SQL</acronym> command
           <a class="xref" href="sql-show.html" title="SHOW"
             ><span class="refentrytitle">SHOW</span></a>.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">current_setting('datestyle')</code>
           → <code class="returnvalue">ISO, MDY</code>
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.3.6.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">set_config</code> (
           <em class="parameter"><code>setting_name</code></em> <code class="type">text</code>,
           <em class="parameter"><code>new_value</code></em> <code class="type">text</code>,
           <em class="parameter"><code>is_local</code></em> <code class="type">boolean</code> ) →
           <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Sets the parameter <em class="parameter"><code>setting_name</code></em> to
           <em class="parameter"><code>new_value</code></em>, and returns that value. If <em class="parameter"><code>is_local</code></em> is
           <code class="literal">true</code>, the new value will only apply during the current
           transaction. If you want the new value to apply for the rest of the current session, use
           <code class="literal">false</code> instead. This function corresponds to the SQL command
           <a class="xref" href="sql-set.html" title="SET"><span class="refentrytitle">SET</span></a>.
-        </p>
-        <p>
+        </div>
+        <div>
           <code class="literal">set_config('log_statement_stats', 'off', false)</code>
           → <code class="returnvalue">off</code>
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 [#id](#FUNCTIONS-ADMIN-SIGNAL)
 
@@ -101,6 +103,7 @@ Each of these functions returns `true` if the signal was successfully sent and `
 
 **Table 9.90. Server Signaling Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Server Signaling Functions" border="1">
   <colgroup>
     <col />
@@ -108,38 +111,38 @@ Each of these functions returns `true` if the signal was successfully sent and `
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.4.5.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_cancel_backend</code> (
           <em class="parameter"><code>pid</code></em> <code class="type">integer</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Cancels the current query of the session whose backend process has the specified process
           ID. This is also allowed if the calling role is a member of the role whose backend is
           being canceled or the calling role has privileges of
           <code class="literal">pg_signal_backend</code>, however only superusers can cancel
           superuser backends.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.4.5.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_log_backend_memory_contexts</code> (
           <em class="parameter"><code>pid</code></em> <code class="type">integer</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Requests to log the memory contexts of the backend with the specified process ID. This
           function can send the request to backends and auxiliary processes except logger. These
           memory contexts will be logged at
@@ -151,16 +154,16 @@ Each of these functions returns `true` if the signal was successfully sent and `
             title="20.8. Error Reporting and Logging">Section 20.8</a>
           for more information), but will not be sent to the client regardless of
           <a class="xref" href="runtime-config-client.html#GUC-CLIENT-MIN-MESSAGES">client_min_messages</a>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.4.5.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">pg_reload_conf</code> () → <code class="returnvalue">boolean</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Causes all processes of the <span class="productname">PostgreSQL</span> server to reload
           their configuration files. (This is initiated by sending a
           <span class="systemitem">SIGHUP</span> signal to the postmaster process, which in turn
@@ -170,40 +173,40 @@ Each of these functions returns `true` if the signal was successfully sent and `
           and
           <a class="link" href="view-pg-hba-file-rules.html" title="54.9. pg_hba_file_rules"><code class="structname">pg_ident_file_mappings</code></a>
           views to check the configuration files for possible errors, before reloading.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.4.5.2.2.4.1.1.1" class="indexterm"></a>
           <code class="function">pg_rotate_logfile</code> () →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Signals the log-file manager to switch to a new output file immediately. This works only
           when the built-in log collector is running, since otherwise there is no log-file manager
           subprocess.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.4.5.2.2.5.1.1.1" class="indexterm"></a>
           <code class="function">pg_terminate_backend</code> (
           <em class="parameter"><code>pid</code></em> <code class="type">integer</code>,
           <em class="parameter"><code>timeout</code></em> <code class="type">bigint</code>
           <code class="literal">DEFAULT</code> <code class="literal">0</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Terminates the session whose backend process has the specified process ID. This is also
           allowed if the calling role is a member of the role whose backend is being terminated or
           the calling role has privileges of <code class="literal">pg_signal_backend</code>, however
           only superusers can terminate superuser backends.
-        </p>
-        <p>
+        </div>
+        <div>
           If <em class="parameter"><code>timeout</code></em> is not specified or zero, this function
           returns <code class="literal">true</code> whether the process actually terminates or not,
           indicating only that the sending of the signal was successful. If the
@@ -212,11 +215,12 @@ Each of these functions returns `true` if the signal was successfully sent and `
           time has passed. If the process is terminated, the function returns
           <code class="literal">true</code>. On timeout, a warning is emitted and
           <code class="literal">false</code> is returned.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 `pg_cancel_backend` and `pg_terminate_backend` send signals (SIGINT or SIGTERM respectively) to backend processes identified by process ID. The process ID of an active backend can be found from the `pid` column of the `pg_stat_activity` view, or by listing the `postgres` processes on the server (using ps on Unix or the Task Manager on Windows). The role of an active backend can be found from the `usename` column of the `pg_stat_activity` view.
 
@@ -264,6 +268,7 @@ For details about proper usage of these functions, see [Section 26.3](continuou
 
 **Table 9.91. Backup Control Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Backup Control Functions" border="1">
   <colgroup>
     <col />
@@ -271,21 +276,21 @@ For details about proper usage of these functions, see [Section 26.3](continuou
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.5.5.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_create_restore_point</code> (
           <em class="parameter"><code>name</code></em> <code class="type">text</code> ) →
           <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Creates a named marker record in the write-ahead log that can later be used as a recovery
           target, and returns the corresponding write-ahead log location. The given name can then be
           used with
@@ -293,52 +298,52 @@ For details about proper usage of these functions, see [Section 26.3](continuou
           to specify the point up to which recovery will proceed. Avoid creating multiple restore
           points with the same name, since recovery will stop at the first one whose name matches
           the recovery target.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.5.5.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_current_wal_flush_lsn</code> () →
           <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p>Returns the current write-ahead log flush location (see notes below).</p>
+        </div>
+        <div>Returns the current write-ahead log flush location (see notes below).</div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.5.5.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">pg_current_wal_insert_lsn</code> () →
           <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p>Returns the current write-ahead log insert location (see notes below).</p>
+        </div>
+        <div>Returns the current write-ahead log insert location (see notes below).</div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.5.5.2.2.4.1.1.1" class="indexterm"></a>
           <code class="function">pg_current_wal_lsn</code> () →
           <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p>Returns the current write-ahead log write location (see notes below).</p>
+        </div>
+        <div>Returns the current write-ahead log write location (see notes below).</div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.5.5.2.2.5.1.1.1" class="indexterm"></a>
           <code class="function">pg_backup_start</code> (
           <em class="parameter"><code>label</code></em> <code class="type">text</code> [<span
             class="optional">, <em class="parameter"><code>fast</code></em> <code class="type">boolean</code> </span>] ) → <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Prepares the server to begin an on-line backup. The only required parameter is an
           arbitrary user-defined label for the backup. (Typically this would be the name under which
           the backup dump file will be stored.) If the optional second parameter is given as
@@ -346,30 +351,30 @@ For details about proper usage of these functions, see [Section 26.3](continuou
           <code class="function">pg_backup_start</code> as quickly as possible. This forces an
           immediate checkpoint which will cause a spike in I/O operations, slowing any concurrently
           executing queries.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.5.5.2.2.6.1.1.1" class="indexterm"></a>
           <code class="function">pg_backup_stop</code> ( [<span class="optional"><em class="parameter"><code>wait_for_archive</code></em>
             <code class="type">boolean</code> </span>] ) → <code class="returnvalue">record</code> (
           <em class="parameter"><code>lsn</code></em> <code class="type">pg_lsn</code>,
           <em class="parameter"><code>labelfile</code></em> <code class="type">text</code>,
           <em class="parameter"><code>spcmapfile</code></em> <code class="type">text</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Finishes performing an on-line backup. The desired contents of the backup label file and
           the tablespace map file are returned as part of the result of the function and must be
           written to files in the backup area. These files must not be written to the live data
           directory (doing so will cause PostgreSQL to fail to restart in the event of a crash).
-        </p>
-        <p>
+        </div>
+        <div>
           There is an optional parameter of type <code class="type">boolean</code>. If false, the
           function will return immediately after the backup is completed, without waiting for WAL to
           be archived. This behavior is only useful with backup software that independently monitors
@@ -381,8 +386,8 @@ For details about proper usage of these functions, see [Section 26.3](continuou
           activity on the primary is low, it may be useful to run
           <code class="function">pg_switch_wal</code> on the primary in order to trigger an
           immediate segment switch.)
-        </p>
-        <p>
+        </div>
+        <div>
           When executed on a primary, this function also creates a backup history file in the
           write-ahead log archive area. The history file includes the label given to
           <code class="function">pg_backup_start</code>, the starting and ending write-ahead log
@@ -390,92 +395,92 @@ For details about proper usage of these functions, see [Section 26.3](continuou
           the ending location, the current write-ahead log insertion point is automatically advanced
           to the next write-ahead log file, so that the ending write-ahead log file can be archived
           immediately to complete the backup.
-        </p>
-        <p>
+        </div>
+        <div>
           The result of the function is a single record. The
           <em class="parameter"><code>lsn</code></em> column holds the backup's ending write-ahead
           log location (which again can be ignored). The second column returns the contents of the
           backup label file, and the third column returns the contents of the tablespace map file.
           These must be stored as part of the backup and are required as part of the restore
           process.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.5.5.2.2.7.1.1.1" class="indexterm"></a>
           <code class="function">pg_switch_wal</code> () → <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Forces the server to switch to a new write-ahead log file, which allows the current file
           to be archived (assuming you are using continuous archiving). The result is the ending
           write-ahead log location plus 1 within the just-completed write-ahead log file. If there
           has been no write-ahead log activity since the last write-ahead log switch,
           <code class="function">pg_switch_wal</code> does nothing and returns the start location of
           the write-ahead log file currently in use.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.5.5.2.2.8.1.1.1" class="indexterm"></a>
           <code class="function">pg_walfile_name</code> (
           <em class="parameter"><code>lsn</code></em> <code class="type">pg_lsn</code> ) →
           <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Converts a write-ahead log location to the name of the WAL file holding that location.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.5.5.2.2.9.1.1.1" class="indexterm"></a>
           <code class="function">pg_walfile_name_offset</code> (
           <em class="parameter"><code>lsn</code></em> <code class="type">pg_lsn</code> ) →
           <code class="returnvalue">record</code> (
           <em class="parameter"><code>file_name</code></em> <code class="type">text</code>,
           <em class="parameter"><code>file_offset</code></em> <code class="type">integer</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Converts a write-ahead log location to a WAL file name and byte offset within that file.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.5.5.2.2.10.1.1.1" class="indexterm"></a>
           <code class="function">pg_split_walfile_name</code> (
           <em class="parameter"><code>file_name</code></em> <code class="type">text</code> ) →
           <code class="returnvalue">record</code> (
           <em class="parameter"><code>segment_number</code></em> <code class="type">numeric</code>,
           <em class="parameter"><code>timeline_id</code></em> <code class="type">bigint</code> )
-        </p>
-        <p>Extracts the sequence number and timeline ID from a WAL file name.</p>
+        </div>
+        <div>Extracts the sequence number and timeline ID from a WAL file name.</div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.5.5.2.2.11.1.1.1" class="indexterm"></a>
           <code class="function">pg_wal_lsn_diff</code> (
           <em class="parameter"><code>lsn1</code></em> <code class="type">pg_lsn</code>,
           <em class="parameter"><code>lsn2</code></em> <code class="type">pg_lsn</code> ) →
           <code class="returnvalue">numeric</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Calculates the difference in bytes (<em class="parameter"><code>lsn1</code></em> -
           <em class="parameter"><code>lsn2</code></em>) between two write-ahead log locations. This can be used with
           <code class="structname">pg_stat_replication</code> or some of the functions shown in
@@ -484,11 +489,12 @@ For details about proper usage of these functions, see [Section 26.3](continuou
             href="functions-admin.html#FUNCTIONS-ADMIN-BACKUP-TABLE"
             title="Table 9.91. Backup Control Functions">Table 9.91</a>
           to get the replication lag.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 `pg_current_wal_lsn` displays the current write-ahead log write location in the same format used by the above functions. Similarly, `pg_current_wal_insert_lsn` displays the current write-ahead log insertion location and `pg_current_wal_flush_lsn` displays the current write-ahead log flush location. The insertion location is the “logical” end of the write-ahead log at any instant, while the write location is the end of what has actually been written out from the server's internal buffers, and the flush location is the last location known to be written to durable storage. The write location is the end of what can be examined from outside the server, and is usually what you want if you are interested in archiving partially-complete write-ahead log files. The insertion and flush locations are made available primarily for server debugging purposes. These are all read-only operations and do not require superuser permissions.
 
@@ -531,6 +537,7 @@ The functions shown in [Table 9.92](functions-admin#FUNCTIONS-RECOVERY-INFO-TAB
 
 **Table 9.92. Recovery Information Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Recovery Information Functions" border="1">
   <colgroup>
     <col />
@@ -538,63 +545,63 @@ The functions shown in [Table 9.92](functions-admin#FUNCTIONS-RECOVERY-INFO-TAB
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.6.3.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_is_in_recovery</code> () →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>Returns true if recovery is still in progress.</p>
+        </div>
+        <div>Returns true if recovery is still in progress.</div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.6.3.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_last_wal_receive_lsn</code> () →
           <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the last write-ahead log location that has been received and synced to disk by
           streaming replication. While streaming replication is in progress this will increase
           monotonically. If recovery has completed then this will remain static at the location of
           the last WAL record received and synced to disk during recovery. If streaming replication
           is disabled, or if it has not yet started, the function returns
           <code class="literal">NULL</code>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.6.3.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">pg_last_wal_replay_lsn</code> () →
           <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the last write-ahead log location that has been replayed during recovery. If
           recovery is still in progress this will increase monotonically. If recovery has completed
           then this will remain static at the location of the last WAL record applied during
           recovery. When the server has been started normally without recovery, the function returns
           <code class="literal">NULL</code>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.6.3.2.2.4.1.1.1" class="indexterm"></a>
           <code class="function">pg_last_xact_replay_timestamp</code> () →
           <code class="returnvalue">timestamp with time zone</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the time stamp of the last transaction replayed during recovery. This is the time
           at which the commit or abort WAL record for that transaction was generated on the primary.
           If no transactions have been replayed during recovery, the function returns
@@ -602,28 +609,29 @@ The functions shown in [Table 9.92](functions-admin#FUNCTIONS-RECOVERY-INFO-TAB
           increase monotonically. If recovery has completed then this will remain static at the time
           of the last transaction applied during recovery. When the server has been started normally
           without recovery, the function returns <code class="literal">NULL</code>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.6.3.2.2.5.1.1.1" class="indexterm"></a>
           <code class="function">pg_get_wal_resource_managers</code> () →
           <code class="returnvalue">setof record</code> (
           <em class="parameter"><code>rm_id</code></em> <code class="type">integer</code>,
           <em class="parameter"><code>rm_name</code></em> <code class="type">text</code>,
           <em class="parameter"><code>rm_builtin</code></em> <code class="type">boolean</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the currently-loaded WAL resource managers in the system. The column
           <em class="parameter"><code>rm_builtin</code></em> indicates whether it's a built-in
           resource manager, or a custom resource manager loaded by an extension.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 The functions shown in [Table 9.93](functions-admin#FUNCTIONS-RECOVERY-CONTROL-TABLE) control the progress of recovery. These functions may be executed only during recovery.
 
@@ -631,6 +639,7 @@ The functions shown in [Table 9.93](functions-admin#FUNCTIONS-RECOVERY-CONTROL-
 
 **Table 9.93. Recovery Control Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Recovery Control Functions" border="1">
   <colgroup>
     <col />
@@ -638,48 +647,48 @@ The functions shown in [Table 9.93](functions-admin#FUNCTIONS-RECOVERY-CONTROL-
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.6.5.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_is_wal_replay_paused</code> () →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>Returns true if recovery pause is requested.</p>
+        </div>
+        <div>Returns true if recovery pause is requested.</div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.6.5.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_get_wal_replay_pause_state</code> () →
           <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns recovery pause state. The return values are
           <code class="literal"> not paused</code> if pause is not requested,
           <code class="literal"> pause requested</code> if pause is requested but recovery is not
           yet paused, and <code class="literal">paused</code> if the recovery is actually paused.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.6.5.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">pg_promote</code> ( <em class="parameter"><code>wait</code></em>
           <code class="type">boolean</code> <code class="literal">DEFAULT</code>
           <code class="literal">true</code>, <em class="parameter"><code>wait_seconds</code></em>
           <code class="type">integer</code> <code class="literal">DEFAULT</code>
           <code class="literal">60</code> ) → <code class="returnvalue">boolean</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Promotes a standby server to primary status. With
           <em class="parameter"><code>wait</code></em> set to <code class="literal">true</code> (the
           default), the function waits until promotion is completed or
@@ -689,21 +698,21 @@ The functions shown in [Table 9.93](functions-admin#FUNCTIONS-RECOVERY-CONTROL-
           <em class="parameter"><code>wait</code></em> is set to <code class="literal">false</code>,
           the function returns <code class="literal">true</code> immediately after sending a
           <code class="literal">SIGUSR1</code> signal to the postmaster to trigger promotion.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.6.5.2.2.4.1.1.1" class="indexterm"></a>
           <code class="function">pg_wal_replay_pause</code> () →
           <code class="returnvalue">void</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Request to pause recovery. A request doesn't mean that recovery stops right away. If you
           want a guarantee that recovery is actually paused, you need to check for the recovery
           pause state returned by
@@ -712,29 +721,30 @@ The functions shown in [Table 9.93](functions-admin#FUNCTIONS-RECOVERY-CONTROL-
           While recovery is paused, no further database changes are applied. If hot standby is
           active, all new queries will see the same consistent snapshot of the database, and no
           further query conflicts will be generated until recovery is resumed.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.6.5.2.2.5.1.1.1" class="indexterm"></a>
           <code class="function">pg_wal_replay_resume</code> () →
           <code class="returnvalue">void</code>
-        </p>
-        <p>Restarts recovery if it was paused.</p>
-        <p>
+        </div>
+        <div>Restarts recovery if it was paused.</div>
+        <div>
           This function is restricted to superusers by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 `pg_wal_replay_pause` and `pg_wal_replay_resume` cannot be executed while a promotion is ongoing. If a promotion is triggered while recovery is paused, the paused state ends and promotion continues.
 
@@ -754,6 +764,7 @@ Snapshots are exported with the `pg_export_snapshot` function, shown in [Table 
 
 **Table 9.94. Snapshot Synchronization Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Snapshot Synchronization Functions" border="1">
   <colgroup>
     <col />
@@ -761,51 +772,52 @@ Snapshots are exported with the `pg_export_snapshot` function, shown in [Table 
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.7.5.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_export_snapshot</code> () →
           <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Saves the transaction's current snapshot and returns a
           <code class="type">text</code> string identifying the snapshot. This string must be passed
           (outside the database) to clients that want to import the snapshot. The snapshot is
           available for import only until the end of the transaction that exported it.
-        </p>
-        <p>
+        </div>
+        <div>
           A transaction can export more than one snapshot, if needed. Note that doing so is only
           useful in <code class="literal">READ COMMITTED</code> transactions, since in
           <code class="literal">REPEATABLE READ</code> and higher isolation levels, transactions use
           the same snapshot throughout their lifetime. Once a transaction has exported any
           snapshots, it cannot be prepared with
           <a class="xref" href="sql-prepare-transaction.html" title="PREPARE TRANSACTION"><span class="refentrytitle">PREPARE TRANSACTION</span></a>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.7.5.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_log_standby_snapshot</code> () →
           <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Take a snapshot of running transactions and write it to WAL, without having to wait for
           bgwriter or checkpointer to log one. This is useful for logical decoding on standby, as
           logical slot creation has to wait until such a record is replayed on the standby.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 [#id](#FUNCTIONS-REPLICATION)
 
@@ -821,6 +833,7 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
 
 **Table 9.95. Replication Management Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Replication Management Functions" border="1">
   <colgroup>
     <col />
@@ -828,15 +841,15 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_create_physical_replication_slot</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code> [<span class="optional">, <em class="parameter"><code>immediately_reserve</code></em>
@@ -844,8 +857,8 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
             <code class="type">boolean</code> </span>] ) → <code class="returnvalue">record</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code>,
           <em class="parameter"><code>lsn</code></em> <code class="type">pg_lsn</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Creates a new physical replication slot named
           <em class="parameter"><code>slot_name</code></em>. The optional second parameter, when <code class="literal">true</code>, specifies that
           the <acronym class="acronym">LSN</acronym> for this replication slot be reserved
@@ -859,28 +872,28 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
           is only meant for use by the current session. Temporary slots are also released upon any
           error. This function corresponds to the replication protocol command
           <code class="literal">CREATE_REPLICATION_SLOT ... PHYSICAL</code>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_drop_replication_slot</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Drops the physical or logical replication slot named
           <em class="parameter"><code>slot_name</code></em>. Same as replication protocol command
           <code class="literal">DROP_REPLICATION_SLOT</code>. For logical slots, this must be called
           while connected to the same database the slot was created on.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">pg_create_logical_replication_slot</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code>,
@@ -889,8 +902,8 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
             <code class="type">boolean</code> </span>] ) → <code class="returnvalue">record</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code>,
           <em class="parameter"><code>lsn</code></em> <code class="type">pg_lsn</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Creates a new logical (decoding) replication slot named
           <em class="parameter"><code>slot_name</code></em> using the output plugin
           <em class="parameter"><code>plugin</code></em>. The optional third parameter, <em class="parameter"><code>temporary</code></em>, when set to true, specifies that the slot should not be permanently stored to disk and
@@ -898,12 +911,12 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
           error. The optional fourth parameter, <em class="parameter"><code>twophase</code></em>, when set to true, specifies that the decoding of prepared transactions is enabled for
           this slot. A call to this function has the same effect as the replication protocol command
           <code class="literal">CREATE_REPLICATION_SLOT ... LOGICAL</code>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.4.1.1.1" class="indexterm"></a>
           <code class="function">pg_copy_physical_replication_slot</code> (
           <em class="parameter"><code>src_slot_name</code></em> <code class="type">name</code>,
@@ -912,8 +925,8 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
             <code class="type">boolean</code> </span>] ) → <code class="returnvalue">record</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code>,
           <em class="parameter"><code>lsn</code></em> <code class="type">pg_lsn</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Copies an existing physical replication slot named
           <em class="parameter"><code>src_slot_name</code></em> to a physical replication slot named
           <em class="parameter"><code>dst_slot_name</code></em>. The copied physical slot starts to reserve WAL from the same
@@ -921,12 +934,12 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
           <em class="parameter"><code>temporary</code></em> is optional. If
           <em class="parameter"><code>temporary</code></em>
           is omitted, the same value as the source slot is used.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.5.1.1.1" class="indexterm"></a>
           <code class="function">pg_copy_logical_replication_slot</code> (
           <em class="parameter"><code>src_slot_name</code></em> <code class="type">name</code>,
@@ -936,8 +949,8 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
               <code class="type">name</code> </span>]</span>] ) → <code class="returnvalue">record</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code>,
           <em class="parameter"><code>lsn</code></em> <code class="type">pg_lsn</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Copies an existing logical replication slot named
           <em class="parameter"><code>src_slot_name</code></em> to a logical replication slot named
           <em class="parameter"><code>dst_slot_name</code></em>, optionally changing the output plugin and persistence. The copied logical slot starts
@@ -945,12 +958,12 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
           <em class="parameter"><code>temporary</code></em> and
           <em class="parameter"><code>plugin</code></em> are optional; if they are omitted, the
           values of the source slot are used.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.6.1.1.1" class="indexterm"></a>
           <code class="function">pg_logical_slot_get_changes</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code>,
@@ -961,8 +974,8 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
           <em class="parameter"><code>lsn</code></em> <code class="type">pg_lsn</code>,
           <em class="parameter"><code>xid</code></em> <code class="type">xid</code>,
           <em class="parameter"><code>data</code></em> <code class="type">text</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Returns changes in the slot <em class="parameter"><code>slot_name</code></em>, starting from the point from which changes have been consumed last. If
           <em class="parameter"><code>upto_lsn</code></em>
           and <em class="parameter"><code>upto_nchanges</code></em> are NULL, logical decoding will
@@ -973,12 +986,12 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
           value. Note, however, that the actual number of rows returned may be larger, since this
           limit is only checked after adding the rows produced when decoding each new transaction
           commit.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.7.1.1.1" class="indexterm"></a>
           <code class="function">pg_logical_slot_peek_changes</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code>,
@@ -989,17 +1002,17 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
           <em class="parameter"><code>lsn</code></em> <code class="type">pg_lsn</code>,
           <em class="parameter"><code>xid</code></em> <code class="type">xid</code>,
           <em class="parameter"><code>data</code></em> <code class="type">text</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Behaves just like the
           <code class="function">pg_logical_slot_get_changes()</code> function, except that changes
           are not consumed; that is, they will be returned again on future calls.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.8.1.1.1" class="indexterm"></a>
           <code class="function">pg_logical_slot_get_binary_changes</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code>,
@@ -1010,17 +1023,17 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
           <em class="parameter"><code>lsn</code></em> <code class="type">pg_lsn</code>,
           <em class="parameter"><code>xid</code></em> <code class="type">xid</code>,
           <em class="parameter"><code>data</code></em> <code class="type">bytea</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Behaves just like the
           <code class="function">pg_logical_slot_get_changes()</code> function, except that changes
           are returned as <code class="type">bytea</code>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.9.1.1.1" class="indexterm"></a>
           <code class="function">pg_logical_slot_peek_binary_changes</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code>,
@@ -1031,17 +1044,17 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
           <em class="parameter"><code>lsn</code></em> <code class="type">pg_lsn</code>,
           <em class="parameter"><code>xid</code></em> <code class="type">xid</code>,
           <em class="parameter"><code>data</code></em> <code class="type">bytea</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Behaves just like the
           <code class="function">pg_logical_slot_peek_changes()</code> function, except that changes
           are returned as <code class="type">bytea</code>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.10.1.1.1" class="indexterm"></a>
           <code class="function">pg_replication_slot_advance</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code>,
@@ -1049,193 +1062,193 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
           <code class="returnvalue">record</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">name</code>,
           <em class="parameter"><code>end_lsn</code></em> <code class="type">pg_lsn</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Advances the current confirmed position of a replication slot named
           <em class="parameter"><code>slot_name</code></em>. The slot will not be moved backwards, and it will not be moved beyond the current
           insert location. Returns the name of the slot and the actual position that it was advanced
           to. The updated slot position information is written out at the next checkpoint if any
           advancing is done. So in the event of a crash, the slot may return to an earlier position.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td id="PG-REPLICATION-ORIGIN-CREATE" class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.11.1.1.1" class="indexterm"></a>
           <code class="function">pg_replication_origin_create</code> (
           <em class="parameter"><code>node_name</code></em> <code class="type">text</code> ) →
           <code class="returnvalue">oid</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Creates a replication origin with the given external name, and returns the internal ID
           assigned to it.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td id="PG-REPLICATION-ORIGIN-DROP" class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.12.1.1.1" class="indexterm"></a>
           <code class="function">pg_replication_origin_drop</code> (
           <em class="parameter"><code>node_name</code></em> <code class="type">text</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Deletes a previously-created replication origin, including any associated replay progress.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.13.1.1.1" class="indexterm"></a>
           <code class="function">pg_replication_origin_oid</code> (
           <em class="parameter"><code>node_name</code></em> <code class="type">text</code> ) →
           <code class="returnvalue">oid</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Looks up a replication origin by name and returns the internal ID. If no such replication
           origin is found, <code class="literal">NULL</code> is returned.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td id="PG-REPLICATION-ORIGIN-SESSION-SETUP" class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.14.1.1.1" class="indexterm"></a>
           <code class="function">pg_replication_origin_session_setup</code> (
           <em class="parameter"><code>node_name</code></em> <code class="type">text</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Marks the current session as replaying from the given origin, allowing replay progress to
           be tracked. Can only be used if no origin is currently selected. Use
           <code class="function">pg_replication_origin_session_reset</code> to undo.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.15.1.1.1" class="indexterm"></a>
           <code class="function">pg_replication_origin_session_reset</code> () →
           <code class="returnvalue">void</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Cancels the effects of
           <code class="function">pg_replication_origin_session_setup()</code>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.16.1.1.1" class="indexterm"></a>
           <code class="function">pg_replication_origin_session_is_setup</code> () →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>Returns true if a replication origin has been selected in the current session.</p>
+        </div>
+        <div>Returns true if a replication origin has been selected in the current session.</div>
       </td>
     </tr>
     <tr>
       <td id="PG-REPLICATION-ORIGIN-SESSION-PROGRESS" class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.17.1.1.1" class="indexterm"></a>
           <code class="function">pg_replication_origin_session_progress</code> (
           <em class="parameter"><code>flush</code></em> <code class="type">boolean</code> ) →
           <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the replay location for the replication origin selected in the current session.
           The parameter <em class="parameter"><code>flush</code></em>
           determines whether the corresponding local transaction will be guaranteed to have been
           flushed to disk or not.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td id="PG-REPLICATION-ORIGIN-XACT-SETUP" class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.18.1.1.1" class="indexterm"></a>
           <code class="function">pg_replication_origin_xact_setup</code> (
           <em class="parameter"><code>origin_lsn</code></em> <code class="type">pg_lsn</code>,
           <em class="parameter"><code>origin_timestamp</code></em>
           <code class="type">timestamp with time zone</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Marks the current transaction as replaying a transaction that has committed at the given
           <acronym class="acronym">LSN</acronym> and timestamp. Can only be called when a
           replication origin has been selected using
           <code class="function">pg_replication_origin_session_setup</code>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td id="PG-REPLICATION-ORIGIN-XACT-RESET" class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.19.1.1.1" class="indexterm"></a>
           <code class="function">pg_replication_origin_xact_reset</code> () →
           <code class="returnvalue">void</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Cancels the effects of
           <code class="function">pg_replication_origin_xact_setup()</code>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td id="PG-REPLICATION-ORIGIN-ADVANCE" class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.20.1.1.1" class="indexterm"></a>
           <code class="function">pg_replication_origin_advance</code> (
           <em class="parameter"><code>node_name</code></em> <code class="type">text</code>,
           <em class="parameter"><code>lsn</code></em> <code class="type">pg_lsn</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Sets replication progress for the given node to the given location. This is primarily
           useful for setting up the initial location, or setting a new location after configuration
           changes and similar. Be aware that careless use of this function can lead to
           inconsistently replicated data.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td id="PG-REPLICATION-ORIGIN-PROGRESS" class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.21.1.1.1" class="indexterm"></a>
           <code class="function">pg_replication_origin_progress</code> (
           <em class="parameter"><code>node_name</code></em> <code class="type">text</code>,
           <em class="parameter"><code>flush</code></em> <code class="type">boolean</code> ) →
           <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the replay location for the given replication origin. The parameter
           <em class="parameter"><code>flush</code></em> determines whether the corresponding local
           transaction will be guaranteed to have been flushed to disk or not.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td id="PG-LOGICAL-EMIT-MESSAGE" class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.8.5.2.2.22.1.1.1" class="indexterm"></a>
           <code class="function">pg_logical_emit_message</code> (
           <em class="parameter"><code>transactional</code></em> <code class="type">boolean</code>,
           <em class="parameter"><code>prefix</code></em> <code class="type">text</code>,
           <em class="parameter"><code>content</code></em> <code class="type">text</code> ) →
           <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_logical_emit_message</code> (
           <em class="parameter"><code>transactional</code></em> <code class="type">boolean</code>,
           <em class="parameter"><code>prefix</code></em> <code class="type">text</code>,
           <em class="parameter"><code>content</code></em> <code class="type">bytea</code> ) →
           <code class="returnvalue">pg_lsn</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Emits a logical decoding message. This can be used to pass generic messages to logical
           decoding plugins through WAL. The
           <em class="parameter"><code>transactional</code></em> parameter specifies if the message
@@ -1245,11 +1258,12 @@ The functions described in [Section 9.27.3](functions-admin#FUNCTIONS-ADMIN-BAC
           used by logical decoding plugins to easily recognize messages that are interesting for
           them. The <em class="parameter"><code>content</code></em> parameter is the content of the
           message, given either in text or binary form.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 [#id](#FUNCTIONS-ADMIN-DBOBJECT)
 
@@ -1261,6 +1275,7 @@ The functions shown in [Table 9.96](functions-admin#FUNCTIONS-ADMIN-DBSIZE) cal
 
 **Table 9.96. Database Object Size Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Database Object Size Functions" border="1">
   <colgroup>
     <col />
@@ -1268,76 +1283,76 @@ The functions shown in [Table 9.96](functions-admin#FUNCTIONS-ADMIN-DBSIZE) cal
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.3.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_column_size</code> ( <code class="type">"any"</code> ) →
           <code class="returnvalue">integer</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Shows the number of bytes used to store any individual data value. If applied directly to
           a table column value, this reflects any compression that was done.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.3.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_column_compression</code> ( <code class="type">"any"</code> ) →
           <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Shows the compression algorithm that was used to compress an individual variable-length
           value. Returns <code class="literal">NULL</code>
           if the value is not compressed.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.3.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">pg_database_size</code> ( <code class="type">name</code> ) →
           <code class="returnvalue">bigint</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_database_size</code> ( <code class="type">oid</code> ) →
           <code class="returnvalue">bigint</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Computes the total disk space used by the database with the specified name or OID. To use
           this function, you must have <code class="literal">CONNECT</code> privilege on the
           specified database (which is granted by default) or have privileges of the
           <code class="literal">pg_read_all_stats</code> role.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.3.2.2.4.1.1.1" class="indexterm"></a>
           <code class="function">pg_indexes_size</code> ( <code class="type">regclass</code> ) →
           <code class="returnvalue">bigint</code>
-        </p>
-        <p>Computes the total disk space used by indexes attached to the specified table.</p>
+        </div>
+        <div>Computes the total disk space used by indexes attached to the specified table.</div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.3.2.2.5.1.1.1" class="indexterm"></a>
           <code class="function">pg_relation_size</code> (
           <em class="parameter"><code>relation</code></em> <code class="type">regclass</code> [<span class="optional">, <em class="parameter"><code>fork</code></em> <code class="type">text</code> </span>] ) → <code class="returnvalue">bigint</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Computes the disk space used by one
           <span class="quote">“<span class="quote">fork</span>”</span> of the specified relation.
           (Note that for most purposes it is more convenient to use the higher-level functions
@@ -1345,123 +1360,124 @@ The functions shown in [Table 9.96](functions-admin#FUNCTIONS-ADMIN-DBSIZE) cal
           <code class="function">pg_table_size</code>, which sum the sizes of all forks.) With one
           argument, this returns the size of the main data fork of the relation. The second argument
           can be provided to specify which fork to examine:
-        </p>
+        </div>
         <div class="itemizedlist">
           <ul class="itemizedlist compact">
             <li class="listitem">
-              <p>
+              <div>
                 <code class="literal">main</code> returns the size of the main data fork of the
                 relation.
-              </p>
+              </div>
             </li>
             <li class="listitem">
-              <p>
+              <div>
                 <code class="literal">fsm</code> returns the size of the Free Space Map (see
                 <a class="xref" href="storage-fsm.html" title="73.3. Free Space Map">Section 73.3</a>) associated with the relation.
-              </p>
+              </div>
             </li>
             <li class="listitem">
-              <p>
+              <div>
                 <code class="literal">vm</code> returns the size of the Visibility Map (see
                 <a class="xref" href="storage-vm.html" title="73.4. Visibility Map">Section 73.4</a>) associated with the relation.
-              </p>
+              </div>
             </li>
             <li class="listitem">
-              <p>
+              <div>
                 <code class="literal">init</code> returns the size of the initialization fork, if
                 any, associated with the relation.
-              </p>
+              </div>
             </li>
           </ul>
         </div>
-        <p></p>
+        <div></div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.3.2.2.6.1.1.1" class="indexterm"></a>
           <code class="function">pg_size_bytes</code> ( <code class="type">text</code> ) →
           <code class="returnvalue">bigint</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Converts a size in human-readable format (as returned by
           <code class="function">pg_size_pretty</code>) into bytes. Valid units are
           <code class="literal">bytes</code>, <code class="literal">B</code>,
           <code class="literal">kB</code>, <code class="literal">MB</code>,
           <code class="literal">GB</code>, <code class="literal">TB</code>, and
           <code class="literal">PB</code>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.3.2.2.7.1.1.1" class="indexterm"></a>
           <code class="function">pg_size_pretty</code> ( <code class="type">bigint</code> ) →
           <code class="returnvalue">text</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_size_pretty</code> ( <code class="type">numeric</code> ) →
           <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Converts a size in bytes into a more easily human-readable format with size units (bytes,
           kB, MB, GB, TB, or PB as appropriate). Note that the units are powers of 2 rather than
           powers of 10, so 1kB is 1024 bytes, 1MB is 1024<sup>2</sup> = 1048576 bytes, and so on.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.3.2.2.8.1.1.1" class="indexterm"></a>
           <code class="function">pg_table_size</code> ( <code class="type">regclass</code> ) →
           <code class="returnvalue">bigint</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Computes the disk space used by the specified table, excluding indexes (but including its
           TOAST table if any, free space map, and visibility map).
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.3.2.2.9.1.1.1" class="indexterm"></a>
           <code class="function">pg_tablespace_size</code> ( <code class="type">name</code> ) →
           <code class="returnvalue">bigint</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_tablespace_size</code> ( <code class="type">oid</code> ) →
           <code class="returnvalue">bigint</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Computes the total disk space used in the tablespace with the specified name or OID. To
           use this function, you must have <code class="literal">CREATE</code> privilege on the
           specified tablespace or have privileges of the
           <code class="literal">pg_read_all_stats</code> role, unless it is the default tablespace
           for the current database.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.3.2.2.10.1.1.1" class="indexterm"></a>
           <code class="function">pg_total_relation_size</code> (
           <code class="type">regclass</code> ) → <code class="returnvalue">bigint</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Computes the total disk space used by the specified table, including all indexes and
           <acronym class="acronym">TOAST</acronym> data. The result is equivalent to
           <code class="function">pg_table_size</code> <code class="literal">+</code>
           <code class="function">pg_indexes_size</code>.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 The functions above that operate on tables or indexes accept a `regclass` argument, which is simply the OID of the table or index in the `pg_class` system catalog. You do not have to look up the OID by hand, however, since the `regclass` data type's input converter will do the work for you. See [Section 8.19](datatype-oid) for details.
 
@@ -1471,6 +1487,7 @@ The functions shown in [Table 9.97](functions-admin#FUNCTIONS-ADMIN-DBLOCATION)
 
 **Table 9.97. Database Object Location Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Database Object Location Functions" border="1">
   <colgroup>
     <col />
@@ -1478,21 +1495,21 @@ The functions shown in [Table 9.97](functions-admin#FUNCTIONS-ADMIN-DBLOCATION)
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.6.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_relation_filenode</code> (
           <em class="parameter"><code>relation</code></em> <code class="type">regclass</code> ) →
           <code class="returnvalue">oid</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the <span class="quote">“<span class="quote">filenode</span>”</span> number
           currently assigned to the specified relation. The filenode is the base component of the
           file name(s) used for the relation (see
@@ -1502,44 +1519,45 @@ The functions shown in [Table 9.97](functions-admin#FUNCTIONS-ADMIN-DBLOCATION)
           for certain system catalogs <code class="structfield">relfilenode</code>
           is zero and this function must be used to get the correct value. The function returns NULL
           if passed a relation that does not have storage, such as a view.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.6.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_relation_filepath</code> (
           <em class="parameter"><code>relation</code></em> <code class="type">regclass</code> ) →
           <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the entire file path name (relative to the database cluster's data directory,
           <code class="varname">PGDATA</code>) of the relation.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.6.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">pg_filenode_relation</code> (
           <em class="parameter"><code>tablespace</code></em> <code class="type">oid</code>,
           <em class="parameter"><code>filenode</code></em> <code class="type">oid</code> ) →
           <code class="returnvalue">regclass</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns a relation's OID given the tablespace OID and filenode it is stored under. This is
           essentially the inverse mapping of
           <code class="function">pg_relation_filepath</code>. For a relation in the database's
           default tablespace, the tablespace can be specified as zero. Returns
           <code class="literal">NULL</code> if no relation in the current database is associated
           with the given values.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 [Table 9.98](functions-admin#FUNCTIONS-ADMIN-COLLATION) lists functions used to manage collations.
 
@@ -1547,6 +1565,7 @@ The functions shown in [Table 9.97](functions-admin#FUNCTIONS-ADMIN-DBLOCATION)
 
 **Table 9.98. Collation Management Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Collation Management Functions" border="1">
   <colgroup>
     <col />
@@ -1554,53 +1573,53 @@ The functions shown in [Table 9.97](functions-admin#FUNCTIONS-ADMIN-DBLOCATION)
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.8.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_collation_actual_version</code> (
           <code class="type">oid</code> ) → <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the actual version of the collation object as it is currently installed in the
           operating system. If this is different from the value in
           <code class="structname">pg_collation</code>.<code class="structfield">collversion</code>,
           then objects depending on the collation might need to be rebuilt. See also
           <a class="xref" href="sql-altercollation.html" title="ALTER COLLATION"><span class="refentrytitle">ALTER COLLATION</span></a>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.8.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_database_collation_actual_version</code> (
           <code class="type">oid</code> ) → <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the actual version of the database's collation as it is currently installed in the
           operating system. If this is different from the value in
           <code class="structname">pg_database</code>.<code class="structfield">datcollversion</code>, then objects depending on the collation might need to be rebuilt. See also
           <a class="xref" href="sql-alterdatabase.html" title="ALTER DATABASE"
             ><span class="refentrytitle">ALTER DATABASE</span></a>.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.8.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">pg_import_system_collations</code> (
           <em class="parameter"><code>schema</code></em> <code class="type">regnamespace</code> ) →
           <code class="returnvalue">integer</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Adds collations to the system catalog <code class="structname">pg_collation</code> based
           on all the locales it finds in the operating system. This is what
           <code class="command">initdb</code> uses; see
@@ -1617,11 +1636,12 @@ The functions shown in [Table 9.97](functions-admin#FUNCTIONS-ADMIN-DBLOCATION)
           <code class="literal">pg_catalog</code>, but that is not a requirement; the collations
           could be installed into some other schema as well. The function returns the number of new
           collation objects it created. Use of this function is restricted to superusers.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 [Table 9.99](functions-admin#FUNCTIONS-INFO-PARTITION) lists functions that provide information about the structure of partitioned tables.
 
@@ -1629,6 +1649,7 @@ The functions shown in [Table 9.97](functions-admin#FUNCTIONS-ADMIN-DBLOCATION)
 
 **Table 9.99. Partitioning Information Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Partitioning Information Functions" border="1">
   <colgroup>
     <col />
@@ -1636,15 +1657,15 @@ The functions shown in [Table 9.97](functions-admin#FUNCTIONS-ADMIN-DBLOCATION)
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.10.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_partition_tree</code> ( <code class="type">regclass</code> ) →
           <code class="returnvalue">setof record</code> (
@@ -1652,8 +1673,8 @@ The functions shown in [Table 9.97](functions-admin#FUNCTIONS-ADMIN-DBLOCATION)
           <em class="parameter"><code>parentrelid</code></em> <code class="type">regclass</code>,
           <em class="parameter"><code>isleaf</code></em> <code class="type">boolean</code>,
           <em class="parameter"><code>level</code></em> <code class="type">integer</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Lists the tables or indexes in the partition tree of the given partitioned table or
           partitioned index, with one row for each partition. Information provided includes the OID
           of the partition, the OID of its immediate parent, a boolean value telling if the
@@ -1661,38 +1682,39 @@ The functions shown in [Table 9.97](functions-admin#FUNCTIONS-ADMIN-DBLOCATION)
           0 for the input table or index, 1 for its immediate child partitions, 2 for their
           partitions, and so on. Returns no rows if the relation does not exist or is not a
           partition or partitioned table.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.10.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_partition_ancestors</code> (
           <code class="type">regclass</code> ) → <code class="returnvalue">setof regclass</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Lists the ancestor relations of the given partition, including the relation itself.
           Returns no rows if the relation does not exist or is not a partition or partitioned table.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.9.10.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">pg_partition_root</code> ( <code class="type">regclass</code> ) →
           <code class="returnvalue">regclass</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the top-most parent of the partition tree to which the given relation belongs.
           Returns <code class="literal">NULL</code> if the relation does not exist or is not a
           partition or partitioned table.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 For example, to check the total size of the data contained in a partitioned table `measurement`, one could use the following query:
 
@@ -1712,6 +1734,7 @@ SELECT pg_size_pretty(sum(pg_relation_size(relid))) AS total_size
 
 **Table 9.100. Index Maintenance Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Index Maintenance Functions" border="1">
   <colgroup>
     <col />
@@ -1719,68 +1742,68 @@ SELECT pg_size_pretty(sum(pg_relation_size(relid))) AS total_size
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.10.3.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">brin_summarize_new_values</code> (
           <em class="parameter"><code>index</code></em> <code class="type">regclass</code> ) →
           <code class="returnvalue">integer</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Scans the specified BRIN index to find page ranges in the base table that are not
           currently summarized by the index; for any such range it creates a new summary index tuple
           by scanning those table pages. Returns the number of new page range summaries that were
           inserted into the index.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.10.3.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">brin_summarize_range</code> (
           <em class="parameter"><code>index</code></em> <code class="type">regclass</code>,
           <em class="parameter"><code>blockNumber</code></em> <code class="type">bigint</code> ) →
           <code class="returnvalue">integer</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Summarizes the page range covering the given block, if not already summarized. This is
           like <code class="function">brin_summarize_new_values</code> except that it only processes
           the page range that covers the given table block number.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.10.3.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">brin_desummarize_range</code> (
           <em class="parameter"><code>index</code></em> <code class="type">regclass</code>,
           <em class="parameter"><code>blockNumber</code></em> <code class="type">bigint</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Removes the BRIN index tuple that summarizes the page range covering the given table
           block, if there is one.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.10.3.2.2.4.1.1.1" class="indexterm"></a>
           <code class="function">gin_clean_pending_list</code> (
           <em class="parameter"><code>index</code></em> <code class="type">regclass</code> ) →
           <code class="returnvalue">bigint</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Cleans up the <span class="quote">“<span class="quote">pending</span>”</span> list of the
           specified GIN index by moving entries in it, in bulk, to the main GIN data structure.
           Returns the number of pages removed from the pending list. If the argument is a GIN index
@@ -1794,11 +1817,12 @@ SELECT pg_size_pretty(sum(pg_relation_size(relid))) AS total_size
           <a class="xref" href="gin-tips.html" title="70.5. GIN Tips and Tricks">Section 70.5</a>
           for details about the pending list and <code class="literal">fastupdate</code>
           option.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 [#id](#FUNCTIONS-ADMIN-GENFILE)
 
@@ -1816,6 +1840,7 @@ Some of these functions take an optional _`missing_ok`_ parameter, which specifi
 
 **Table 9.101. Generic File Access Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Generic File Access Functions" border="1">
   <colgroup>
     <col />
@@ -1823,22 +1848,22 @@ Some of these functions take an optional _`missing_ok`_ parameter, which specifi
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.11.6.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_ls_dir</code> ( <em class="parameter"><code>dirname</code></em>
           <code class="type">text</code> [<span class="optional">, <em class="parameter"><code>missing_ok</code></em> <code class="type">boolean</code>,
             <em class="parameter"><code>include_dot_dirs</code></em>
             <code class="type">boolean</code> </span>] ) → <code class="returnvalue">setof text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the names of all files (and directories and other special files) in the specified
           directory. The <em class="parameter"><code>include_dot_dirs</code></em> parameter
           indicates whether <span class="quote">“<span class="quote">.</span>”</span> and
@@ -1846,16 +1871,16 @@ Some of these functions take an optional _`missing_ok`_ parameter, which specifi
           result set; the default is to exclude them. Including them can be useful when
           <em class="parameter"><code>missing_ok</code></em> is <code class="literal">true</code>,
           to distinguish an empty directory from a non-existent directory.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.11.6.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_ls_logdir</code> () →
           <code class="returnvalue">setof record</code> (
@@ -1863,22 +1888,22 @@ Some of these functions take an optional _`missing_ok`_ parameter, which specifi
           <em class="parameter"><code>size</code></em> <code class="type">bigint</code>,
           <em class="parameter"><code>modification</code></em>
           <code class="type">timestamp with time zone</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the name, size, and last modification time (mtime) of each ordinary file in the
           server's log directory. Filenames beginning with a dot, directories, and other special
           files are excluded.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers and roles with privileges of the
           <code class="literal">pg_monitor</code> role by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.11.6.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">pg_ls_waldir</code> () →
           <code class="returnvalue">setof record</code> (
@@ -1886,22 +1911,22 @@ Some of these functions take an optional _`missing_ok`_ parameter, which specifi
           <em class="parameter"><code>size</code></em> <code class="type">bigint</code>,
           <em class="parameter"><code>modification</code></em>
           <code class="type">timestamp with time zone</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the name, size, and last modification time (mtime) of each ordinary file in the
           server's write-ahead log (WAL) directory. Filenames beginning with a dot, directories, and
           other special files are excluded.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers and roles with privileges of the
           <code class="literal">pg_monitor</code> role by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.11.6.2.2.4.1.1.1" class="indexterm"></a>
           <code class="function">pg_ls_logicalmapdir</code> () →
           <code class="returnvalue">setof record</code> (
@@ -1909,23 +1934,23 @@ Some of these functions take an optional _`missing_ok`_ parameter, which specifi
           <em class="parameter"><code>size</code></em> <code class="type">bigint</code>,
           <em class="parameter"><code>modification</code></em>
           <code class="type">timestamp with time zone</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the name, size, and last modification time (mtime) of each ordinary file in the
           server's <code class="filename">pg_logical/mappings</code>
           directory. Filenames beginning with a dot, directories, and other special files are
           excluded.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers and members of the
           <code class="literal">pg_monitor</code> role by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.11.6.2.2.5.1.1.1" class="indexterm"></a>
           <code class="function">pg_ls_logicalsnapdir</code> () →
           <code class="returnvalue">setof record</code> (
@@ -1933,23 +1958,23 @@ Some of these functions take an optional _`missing_ok`_ parameter, which specifi
           <em class="parameter"><code>size</code></em> <code class="type">bigint</code>,
           <em class="parameter"><code>modification</code></em>
           <code class="type">timestamp with time zone</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the name, size, and last modification time (mtime) of each ordinary file in the
           server's <code class="filename">pg_logical/snapshots</code>
           directory. Filenames beginning with a dot, directories, and other special files are
           excluded.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers and members of the
           <code class="literal">pg_monitor</code> role by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.11.6.2.2.6.1.1.1" class="indexterm"></a>
           <code class="function">pg_ls_replslotdir</code> (
           <em class="parameter"><code>slot_name</code></em> <code class="type">text</code> ) →
@@ -1958,24 +1983,24 @@ Some of these functions take an optional _`missing_ok`_ parameter, which specifi
           <em class="parameter"><code>size</code></em> <code class="type">bigint</code>,
           <em class="parameter"><code>modification</code></em>
           <code class="type">timestamp with time zone</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the name, size, and last modification time (mtime) of each ordinary file in the
           server's <code class="filename">pg_replslot/slot_name</code> directory, where
           <em class="parameter"><code>slot_name</code></em> is the name of the replication slot
           provided as input of the function. Filenames beginning with a dot, directories, and other
           special files are excluded.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers and members of the
           <code class="literal">pg_monitor</code> role by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.11.6.2.2.7.1.1.1" class="indexterm"></a>
           <code class="function">pg_ls_archive_statusdir</code> () →
           <code class="returnvalue">setof record</code> (
@@ -1983,21 +2008,21 @@ Some of these functions take an optional _`missing_ok`_ parameter, which specifi
           <em class="parameter"><code>size</code></em> <code class="type">bigint</code>,
           <em class="parameter"><code>modification</code></em>
           <code class="type">timestamp with time zone</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the name, size, and last modification time (mtime) of each ordinary file in the
           server's WAL archive status directory (<code class="filename">pg_wal/archive_status</code>). Filenames beginning with a dot, directories, and other special files are excluded.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers and members of the
           <code class="literal">pg_monitor</code> role by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.11.6.2.2.8.1.1.1" class="indexterm"></a>
           <code class="function">pg_ls_tmpdir</code> ( [<span class="optional">
             <em class="parameter"><code>tablespace</code></em> <code class="type">oid</code> </span>] ) → <code class="returnvalue">setof record</code> (
@@ -2005,32 +2030,32 @@ Some of these functions take an optional _`missing_ok`_ parameter, which specifi
           <em class="parameter"><code>size</code></em> <code class="type">bigint</code>,
           <em class="parameter"><code>modification</code></em>
           <code class="type">timestamp with time zone</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Returns the name, size, and last modification time (mtime) of each ordinary file in the
           temporary file directory for the specified
           <em class="parameter"><code>tablespace</code></em>. If <em class="parameter"><code>tablespace</code></em> is not provided, the
           <code class="literal">pg_default</code> tablespace is examined. Filenames beginning with a
           dot, directories, and other special files are excluded.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers and members of the
           <code class="literal">pg_monitor</code> role by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.11.6.2.2.9.1.1.1" class="indexterm"></a>
           <code class="function">pg_read_file</code> (
           <em class="parameter"><code>filename</code></em> <code class="type">text</code> [<span
             class="optional">, <em class="parameter"><code>offset</code></em> <code class="type">bigint</code>,
             <em class="parameter"><code>length</code></em> <code class="type">bigint</code> </span>] [<span class="optional">, <em class="parameter"><code>missing_ok</code></em>
             <code class="type">boolean</code> </span>] ) → <code class="returnvalue">text</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns all or part of a text file, starting at the given byte
           <em class="parameter"><code>offset</code></em>, returning at most <em class="parameter"><code>length</code></em> bytes (less if the end
           of file is reached first). If <em class="parameter"><code>offset</code></em> is negative,
@@ -2039,47 +2064,47 @@ Some of these functions take an optional _`missing_ok`_ parameter, which specifi
           <em class="parameter"><code>length</code></em> are omitted, the entire file is returned.
           The bytes read from the file are interpreted as a string in the database's encoding; an
           error is thrown if they are not valid in that encoding.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.11.6.2.2.10.1.1.1" class="indexterm"></a>
           <code class="function">pg_read_binary_file</code> (
           <em class="parameter"><code>filename</code></em> <code class="type">text</code> [<span
             class="optional">, <em class="parameter"><code>offset</code></em> <code class="type">bigint</code>,
             <em class="parameter"><code>length</code></em> <code class="type">bigint</code> </span>] [<span class="optional">, <em class="parameter"><code>missing_ok</code></em>
             <code class="type">boolean</code> </span>] ) → <code class="returnvalue">bytea</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Returns all or part of a file. This function is identical to
           <code class="function">pg_read_file</code> except that it can read arbitrary binary data,
           returning the result as <code class="type">bytea</code> not
           <code class="type">text</code>; accordingly, no encoding checks are performed.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
-        <p>
+        </div>
+        <div>
           In combination with the <code class="function">convert_from</code> function, this function
           can be used to read a text file in a specified encoding and convert to the database's
           encoding:
-        </p>
+        </div>
         <pre class="programlisting">
 SELECT convert_from(pg_read_binary_file('file_in_utf8.txt'), 'UTF8');
 </pre>
-        <p></p>
+        <div></div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.11.6.2.2.11.1.1.1" class="indexterm"></a>
           <code class="function">pg_stat_file</code> (
           <em class="parameter"><code>filename</code></em> <code class="type">text</code> [<span
@@ -2095,20 +2120,21 @@ SELECT convert_from(pg_read_binary_file('file_in_utf8.txt'), 'UTF8');
           <em class="parameter"><code>creation</code></em>
           <code class="type">timestamp with time zone</code>,
           <em class="parameter"><code>isdir</code></em> <code class="type">boolean</code> )
-        </p>
-        <p>
+        </div>
+        <div>
           Returns a record containing the file's size, last access time stamp, last modification
           time stamp, last file status change time stamp (Unix platforms only), file creation time
           stamp (Windows only), and a flag indicating if it is a directory.
-        </p>
-        <p>
+        </div>
+        <div>
           This function is restricted to superusers by default, but other users can be granted
           EXECUTE to run the function.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 [#id](#FUNCTIONS-ADVISORY-LOCKS)
 
@@ -2122,6 +2148,7 @@ All these functions are intended to be used to lock application-defined resource
 
 **Table 9.102. Advisory Lock Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="Advisory Lock Functions" border="1">
   <colgroup>
     <col />
@@ -2129,224 +2156,225 @@ All these functions are intended to be used to lock application-defined resource
   <thead>
     <tr>
       <th class="func_table_entry">
-        <p class="func_signature">Function</p>
-        <p>Description</p>
+        <div class="func_signature">Function</div>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.12.4.2.2.1.1.1.1" class="indexterm"></a>
           <code class="function">pg_advisory_lock</code> (
           <em class="parameter"><code>key</code></em> <code class="type">bigint</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_advisory_lock</code> (
           <em class="parameter"><code>key1</code></em> <code class="type">integer</code>,
           <em class="parameter"><code>key2</code></em> <code class="type">integer</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p>Obtains an exclusive session-level advisory lock, waiting if necessary.</p>
+        </div>
+        <div>Obtains an exclusive session-level advisory lock, waiting if necessary.</div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.12.4.2.2.2.1.1.1" class="indexterm"></a>
           <code class="function">pg_advisory_lock_shared</code> (
           <em class="parameter"><code>key</code></em> <code class="type">bigint</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_advisory_lock_shared</code> (
           <em class="parameter"><code>key1</code></em> <code class="type">integer</code>,
           <em class="parameter"><code>key2</code></em> <code class="type">integer</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p>Obtains a shared session-level advisory lock, waiting if necessary.</p>
+        </div>
+        <div>Obtains a shared session-level advisory lock, waiting if necessary.</div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.12.4.2.2.3.1.1.1" class="indexterm"></a>
           <code class="function">pg_advisory_unlock</code> (
           <em class="parameter"><code>key</code></em> <code class="type">bigint</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_advisory_unlock</code> (
           <em class="parameter"><code>key1</code></em> <code class="type">integer</code>,
           <em class="parameter"><code>key2</code></em> <code class="type">integer</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Releases a previously-acquired exclusive session-level advisory lock. Returns
           <code class="literal">true</code> if the lock is successfully released. If the lock was
           not held, <code class="literal">false</code> is returned, and in addition, an SQL warning
           will be reported by the server.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.12.4.2.2.4.1.1.1" class="indexterm"></a>
           <code class="function">pg_advisory_unlock_all</code> () →
           <code class="returnvalue">void</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Releases all session-level advisory locks held by the current session. (This function is
           implicitly invoked at session end, even if the client disconnects ungracefully.)
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.12.4.2.2.5.1.1.1" class="indexterm"></a>
           <code class="function">pg_advisory_unlock_shared</code> (
           <em class="parameter"><code>key</code></em> <code class="type">bigint</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_advisory_unlock_shared</code> (
           <em class="parameter"><code>key1</code></em> <code class="type">integer</code>,
           <em class="parameter"><code>key2</code></em> <code class="type">integer</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Releases a previously-acquired shared session-level advisory lock. Returns
           <code class="literal">true</code> if the lock is successfully released. If the lock was
           not held, <code class="literal">false</code> is returned, and in addition, an SQL warning
           will be reported by the server.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.12.4.2.2.6.1.1.1" class="indexterm"></a>
           <code class="function">pg_advisory_xact_lock</code> (
           <em class="parameter"><code>key</code></em> <code class="type">bigint</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_advisory_xact_lock</code> (
           <em class="parameter"><code>key1</code></em> <code class="type">integer</code>,
           <em class="parameter"><code>key2</code></em> <code class="type">integer</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p>Obtains an exclusive transaction-level advisory lock, waiting if necessary.</p>
+        </div>
+        <div>Obtains an exclusive transaction-level advisory lock, waiting if necessary.</div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.12.4.2.2.7.1.1.1" class="indexterm"></a>
           <code class="function">pg_advisory_xact_lock_shared</code> (
           <em class="parameter"><code>key</code></em> <code class="type">bigint</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_advisory_xact_lock_shared</code> (
           <em class="parameter"><code>key1</code></em> <code class="type">integer</code>,
           <em class="parameter"><code>key2</code></em> <code class="type">integer</code> ) →
           <code class="returnvalue">void</code>
-        </p>
-        <p>Obtains a shared transaction-level advisory lock, waiting if necessary.</p>
+        </div>
+        <div>Obtains a shared transaction-level advisory lock, waiting if necessary.</div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.12.4.2.2.8.1.1.1" class="indexterm"></a>
           <code class="function">pg_try_advisory_lock</code> (
           <em class="parameter"><code>key</code></em> <code class="type">bigint</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_try_advisory_lock</code> (
           <em class="parameter"><code>key1</code></em> <code class="type">integer</code>,
           <em class="parameter"><code>key2</code></em> <code class="type">integer</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Obtains an exclusive session-level advisory lock if available. This will either obtain the
           lock immediately and return <code class="literal">true</code>, or return
           <code class="literal">false</code>
           without waiting if the lock cannot be acquired immediately.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.12.4.2.2.9.1.1.1" class="indexterm"></a>
           <code class="function">pg_try_advisory_lock_shared</code> (
           <em class="parameter"><code>key</code></em> <code class="type">bigint</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_try_advisory_lock_shared</code> (
           <em class="parameter"><code>key1</code></em> <code class="type">integer</code>,
           <em class="parameter"><code>key2</code></em> <code class="type">integer</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Obtains a shared session-level advisory lock if available. This will either obtain the
           lock immediately and return <code class="literal">true</code>, or return
           <code class="literal">false</code>
           without waiting if the lock cannot be acquired immediately.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.12.4.2.2.10.1.1.1" class="indexterm"></a>
           <code class="function">pg_try_advisory_xact_lock</code> (
           <em class="parameter"><code>key</code></em> <code class="type">bigint</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_try_advisory_xact_lock</code> (
           <em class="parameter"><code>key1</code></em> <code class="type">integer</code>,
           <em class="parameter"><code>key2</code></em> <code class="type">integer</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Obtains an exclusive transaction-level advisory lock if available. This will either obtain
           the lock immediately and return <code class="literal">true</code>, or return
           <code class="literal">false</code>
           without waiting if the lock cannot be acquired immediately.
-        </p>
+        </div>
       </td>
     </tr>
     <tr>
       <td class="func_table_entry">
-        <p class="func_signature">
+        <div class="func_signature">
           <a id="id-1.5.8.33.12.4.2.2.11.1.1.1" class="indexterm"></a>
           <code class="function">pg_try_advisory_xact_lock_shared</code> (
           <em class="parameter"><code>key</code></em> <code class="type">bigint</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p class="func_signature">
+        </div>
+        <div class="func_signature">
           <code class="function">pg_try_advisory_xact_lock_shared</code> (
           <em class="parameter"><code>key1</code></em> <code class="type">integer</code>,
           <em class="parameter"><code>key2</code></em> <code class="type">integer</code> ) →
           <code class="returnvalue">boolean</code>
-        </p>
-        <p>
+        </div>
+        <div>
           Obtains a shared transaction-level advisory lock if available. This will either obtain the
           lock immediately and return <code class="literal">true</code>, or return
           <code class="literal">false</code>
           without waiting if the lock cannot be acquired immediately.
-        </p>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>

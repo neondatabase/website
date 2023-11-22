@@ -179,7 +179,8 @@ WHERE table_schema = 'pg_catalog';
 
                                 xmlforest
 ------------------------------------​-----------------------------------
- <table_name>pg_authid</table_name>​<column_name>rolname</column_name>
+ <figure class="table-wrapper">
+<table_name>pg_authid</table_name>​<column_name>rolname</column_name>
  <table_name>pg_authid</table_name>​<column_name>rolsuper</column_name>
  ...
 ```
@@ -797,6 +798,7 @@ As an example of using the output produced by these functions, [Example 9.1](fu
             </tr>
           </xsl:for-each>
         </table>
+</figure>
       </body>
     </html>
   </xsl:template>

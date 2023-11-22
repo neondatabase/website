@@ -2,10 +2,8 @@
 
 ## F.43. tablefunc — functions that return tables (`crosstab` and others) [#](#TABLEFUNC)
 
-  * [F.43.1. Functions Provided](tablefunc#TABLEFUNC-FUNCTIONS-SECT)
-  * [F.43.2. Author](tablefunc#TABLEFUNC-AUTHOR)
-
-
+- [F.43.1. Functions Provided](tablefunc#TABLEFUNC-FUNCTIONS-SECT)
+- [F.43.2. Author](tablefunc#TABLEFUNC-AUTHOR)
 
 The `tablefunc` module includes various functions that return tables (that is, multiple rows). These functions are useful both in their own right and as examples of how to write C functions that return multiple rows.
 
@@ -21,21 +19,114 @@ This module is considered “trusted”, that is, it can be installed by non-sup
 
 **Table F.32. `tablefunc` Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                              |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `normal_rand` ( *`numvals`* `integer`, *`mean`* `float8`, *`stddev`* `float8` ) → `setof float8`Produces a set of normally distributed random values.                                                                                                                            |
-| `crosstab` ( *`sql`* `text` ) → `setof record`Produces a “pivot table” containing row names plus *`N`* value columns, where *`N`* is determined by the row type specified in the calling query.                                                                                  |
-| `crosstabN` ( *`sql`* `text` ) → `setof table_crosstab_N`Produces a “pivot table” containing row names plus *`N`* value columns. `crosstab2`, `crosstab3`, and `crosstab4` are predefined, but you can create additional `crosstabN` functions as described below.               |
-| `crosstab` ( *`source_sql`* `text`, *`category_sql`* `text` ) → `setof record`Produces a “pivot table” with the value columns specified by a second query.                                                                                                                       |
-| `crosstab` ( *`sql`* `text`, *`N`* `integer` ) → `setof record`Obsolete version of `crosstab(text)`. The parameter *`N`* is now ignored, since the number of value columns is always determined by the calling query.                                                            |
-| `connectby` ( *`relname`* `text`, *`keyid_fld`* `text`, *`parent_keyid_fld`* `text` \[, *`orderby_fld`* `text` ], *`start_with`* `text`, *`max_depth`* `integer` \[, *`branch_delim`* `text` ] ) → `setof record`Produces a representation of a hierarchical tree structure. |
-
+<figure class="table-wrapper">
+<table class="table" summary="tablefunc Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <div class="func_signature">Function</div>
+        <div>Description</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">normal_rand</code> (
+          <em class="parameter"><code>numvals</code></em> <code class="type">integer</code>,
+          <em class="parameter"><code>mean</code></em> <code class="type">float8</code>,
+          <em class="parameter"><code>stddev</code></em> <code class="type">float8</code> ) →
+          <code class="returnvalue">setof float8</code>
+        </div>
+        <div>Produces a set of normally distributed random values.</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">crosstab</code> ( <em class="parameter"><code>sql</code></em>
+          <code class="type">text</code> ) → <code class="returnvalue">setof record</code>
+        </div>
+        <div>
+          Produces a <span class="quote">“<span class="quote">pivot table</span>”</span> containing
+          row names plus <em class="replaceable"><code>N</code></em> value columns, where
+          <em class="replaceable"><code>N</code></em> is determined by the row type specified in the
+          calling query.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">crosstab<em class="replaceable"><code>N</code></em></code>
+          ( <em class="parameter"><code>sql</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">setof table_crosstab_<em class="replaceable"><code>N</code></em></code>
+        </div>
+        <div>
+          Produces a <span class="quote">“<span class="quote">pivot table</span>”</span> containing
+          row names plus <em class="replaceable"><code>N</code></em> value columns.
+          <code class="function">crosstab2</code>, <code class="function">crosstab3</code>, and
+          <code class="function">crosstab4</code> are predefined, but you can create additional
+          <code class="function">crosstab<em class="replaceable"><code>N</code></em></code>
+          functions as described below.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">crosstab</code> (
+          <em class="parameter"><code>source_sql</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>category_sql</code></em> <code class="type">text</code> ) →
+          <code class="returnvalue">setof record</code>
+        </div>
+        <div>
+          Produces a <span class="quote">“<span class="quote">pivot table</span>”</span>
+          with the value columns specified by a second query.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">crosstab</code> ( <em class="parameter"><code>sql</code></em>
+          <code class="type">text</code>, <em class="parameter"><code>N</code></em>
+          <code class="type">integer</code> ) → <code class="returnvalue">setof record</code>
+        </div>
+        <div>
+          Obsolete version of <code class="function">crosstab(text)</code>. The parameter
+          <em class="parameter"><code>N</code></em> is now ignored, since the number of value
+          columns is always determined by the calling query.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.11.7.52.5.3.2.2.6.1.1.1" class="indexterm"></a>
+          <code class="function">connectby</code> ( <em class="parameter"><code>relname</code></em>
+          <code class="type">text</code>, <em class="parameter"><code>keyid_fld</code></em>
+          <code class="type">text</code>, <em class="parameter"><code>parent_keyid_fld</code></em>
+          <code class="type">text</code> [<span class="optional">, <em class="parameter"><code>orderby_fld</code></em>
+            <code class="type">text</code> </span>], <em class="parameter"><code>start_with</code></em> <code class="type">text</code>,
+          <em class="parameter"><code>max_depth</code></em> <code class="type">integer</code> [<span
+            class="optional">, <em class="parameter"><code>branch_delim</code></em>
+            <code class="type">text</code> </span>] ) → <code class="returnvalue">setof record</code>
+        </div>
+        <div>Produces a representation of a hierarchical tree structure.</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</figure>
 
 [#id](#TABLEFUNC-FUNCTIONS-NORMAL-RAND)
 
 #### F.43.1.1. `normal_rand` [#](#TABLEFUNC-FUNCTIONS-NORMAL-RAND)
-
-
 
 ```
 normal_rand(int numvals, float8 mean, float8 stddev) returns setof float8
@@ -43,7 +134,7 @@ normal_rand(int numvals, float8 mean, float8 stddev) returns setof float8
 
 `normal_rand` produces a set of normally distributed random values (Gaussian distribution).
 
-*`numvals`* is the number of values to be returned from the function. *`mean`* is the mean of the normal distribution of values and *`stddev`* is the standard deviation of the normal distribution of values.
+_`numvals`_ is the number of values to be returned from the function. _`mean`_ is the mean of the normal distribution of values and _`stddev`_ is the standard deviation of the normal distribution of values.
 
 For example, this call requests 1000 values with a mean of 5 and a standard deviation of 3:
 
@@ -68,8 +159,6 @@ test=# SELECT * FROM normal_rand(1000, 5, 3);
 [#id](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT)
 
 #### F.43.1.2. `crosstab(text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT)
-
-
 
 ```
 crosstab(text sql)
@@ -99,7 +188,7 @@ row2    val21   val22   val23   ...
 
 The `crosstab` function takes a text parameter that is an SQL query producing raw data formatted in the first way, and produces a table formatted in the second way.
 
-The *`sql`* parameter is an SQL statement that produces the source set of data. This statement must return one `row_name` column, one `category` column, and one `value` column. *`N`* is an obsolete parameter, ignored if supplied (formerly this had to match the number of output value columns, but now that is determined by the calling query).
+The _`sql`_ parameter is an SQL statement that produces the source set of data. This statement must return one `row_name` column, one `category` column, and one `value` column. _`N`_ is an obsolete parameter, ignored if supplied (formerly this had to match the number of output value columns, but now that is determined by the calling query).
 
 For example, the provided query might produce a set something like:
 
@@ -176,8 +265,6 @@ See also the `\crosstabview` command in psql, which provides functionality simil
 
 #### F.43.1.3. `crosstabN(text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-N-TEXT)
 
-
-
 ```
 crosstabN(text sql)
 ```
@@ -211,7 +298,7 @@ FROM crosstab3(
 
 These functions are provided mostly for illustration purposes. You can create your own return types and functions based on the underlying `crosstab()` function. There are two ways to do it:
 
-* Create a composite type describing the desired output columns, similar to the examples in `contrib/tablefunc/tablefunc--1.0.sql`. Then define a unique function name accepting one `text` parameter and returning `setof your_type_name`, but linking to the same underlying `crosstab` C function. For example, if your source data produces row names that are `text`, and values that are `float8`, and you want 5 value columns:
+- Create a composite type describing the desired output columns, similar to the examples in `contrib/tablefunc/tablefunc--1.0.sql`. Then define a unique function name accepting one `text` parameter and returning `setof your_type_name`, but linking to the same underlying `crosstab` C function. For example, if your source data produces row names that are `text`, and values that are `float8`, and you want 5 value columns:
 
   ```
   CREATE TYPE my_crosstab_float8_5_cols AS (
@@ -228,7 +315,7 @@ These functions are provided mostly for illustration purposes. You can create yo
       AS '$libdir/tablefunc','crosstab' LANGUAGE C STABLE STRICT;
   ```
 
-* Use `OUT` parameters to define the return type implicitly. The same example could also be done this way:
+- Use `OUT` parameters to define the return type implicitly. The same example could also be done this way:
 
   ```
   CREATE OR REPLACE FUNCTION crosstab_float8_5_cols(
@@ -247,17 +334,15 @@ These functions are provided mostly for illustration purposes. You can create yo
 
 #### F.43.1.4. `crosstab(text, text)` [#](#TABLEFUNC-FUNCTIONS-CROSSTAB-TEXT-2)
 
-
-
 ```
 crosstab(text source_sql, text category_sql)
 ```
 
 The main limitation of the single-parameter form of `crosstab` is that it treats all values in a group alike, inserting each value into the first available column. If you want the value columns to correspond to specific categories of data, and some groups might not have data for some of the categories, that doesn't work well. The two-parameter form of `crosstab` handles this case by providing an explicit list of the categories corresponding to the output columns.
 
-*`source_sql`* is an SQL statement that produces the source set of data. This statement must return one `row_name` column, one `category` column, and one `value` column. It may also have one or more “extra” columns. The `row_name` column must be first. The `category` and `value` columns must be the last two columns, in that order. Any columns between `row_name` and `category` are treated as “extra”. The “extra” columns are expected to be the same for all rows with the same `row_name` value.
+_`source_sql`_ is an SQL statement that produces the source set of data. This statement must return one `row_name` column, one `category` column, and one `value` column. It may also have one or more “extra” columns. The `row_name` column must be first. The `category` and `value` columns must be the last two columns, in that order. Any columns between `row_name` and `category` are treated as “extra”. The “extra” columns are expected to be the same for all rows with the same `row_name` value.
 
-For example, *`source_sql`* might produce a set something like:
+For example, _`source_sql`_ might produce a set something like:
 
 ```
 SELECT row_name, extra_col, cat, value FROM foo ORDER BY 1;
@@ -273,7 +358,7 @@ SELECT row_name, extra_col, cat, value FROM foo ORDER BY 1;
   row2         extra2    cat4    val8
 ```
 
-*`category_sql`* is an SQL statement that produces the set of categories. This statement must return only one column. It must produce at least one row, or an error will be generated. Also, it must not produce duplicate values, or an error will be generated. *`category_sql`* might be something like:
+_`category_sql`_ is an SQL statement that produces the set of categories. This statement must return only one column. It must produce at least one row, or an error will be generated. Also, it must not produce duplicate values, or an error will be generated. _`category_sql`_ might be something like:
 
 ```
 SELECT DISTINCT cat FROM foo ORDER BY 1;
@@ -302,11 +387,11 @@ row_name   extra   cat1   cat2   cat3   cat4
   row2     extra2  val5   val6   val7   val8
 ```
 
-The `FROM` clause must define the proper number of output columns of the proper data types. If there are *`N`* columns in the *`source_sql`* query's result, the first *`N`*-2 of them must match up with the first *`N`*-2 output columns. The remaining output columns must have the type of the last column of the *`source_sql`* query's result, and there must be exactly as many of them as there are rows in the *`category_sql`* query's result.
+The `FROM` clause must define the proper number of output columns of the proper data types. If there are _`N`_ columns in the _`source_sql`_ query's result, the first _`N`_-2 of them must match up with the first _`N`_-2 output columns. The remaining output columns must have the type of the last column of the _`source_sql`_ query's result, and there must be exactly as many of them as there are rows in the _`category_sql`_ query's result.
 
-The `crosstab` function produces one output row for each consecutive group of input rows with the same `row_name` value. The output `row_name` column, plus any “extra” columns, are copied from the first row of the group. The output `value` columns are filled with the `value` fields from rows having matching `category` values. If a row's `category` does not match any output of the *`category_sql`* query, its `value` is ignored. Output columns whose matching category is not present in any input row of the group are filled with nulls.
+The `crosstab` function produces one output row for each consecutive group of input rows with the same `row_name` value. The output `row_name` column, plus any “extra” columns, are copied from the first row of the group. The output `value` columns are filled with the `value` fields from rows having matching `category` values. If a row's `category` does not match any output of the _`category_sql`_ query, its `value` is ignored. Output columns whose matching category is not present in any input row of the group are filled with nulls.
 
-In practice the *`source_sql`* query should always specify `ORDER BY 1` to ensure that values with the same `row_name` are brought together. However, ordering of the categories within a group is not important. Also, it is essential to be sure that the order of the *`category_sql`* query's output matches the specified output column order.
+In practice the _`source_sql`_ query should always specify `ORDER BY 1` to ensure that values with the same `row_name` are brought together. However, ordering of the categories within a group is not important. Also, it is essential to be sure that the order of the _`category_sql`_ query's output matches the specified output column order.
 
 Here are two complete examples:
 
@@ -381,8 +466,6 @@ You can create predefined functions to avoid having to write out the result colu
 
 #### F.43.1.5. `connectby` [#](#TABLEFUNC-FUNCTIONS-CONNECTBY)
 
-
-
 ```
 connectby(text relname, text keyid_fld, text parent_keyid_fld
           [, text orderby_fld ], text start_with, int max_depth
@@ -399,16 +482,15 @@ The `connectby` function produces a display of hierarchical data that is stored 
 
 | Parameter            | Description                                              |
 | -------------------- | -------------------------------------------------------- |
-| *`relname`*          | Name of the source relation                              |
-| *`keyid_fld`*        | Name of the key field                                    |
-| *`parent_keyid_fld`* | Name of the parent-key field                             |
-| *`orderby_fld`*      | Name of the field to order siblings by (optional)        |
-| *`start_with`*       | Key value of the row to start at                         |
-| *`max_depth`*        | Maximum depth to descend to, or zero for unlimited depth |
-| *`branch_delim`*     | String to separate keys with in branch output (optional) |
+| _`relname`_          | Name of the source relation                              |
+| _`keyid_fld`_        | Name of the key field                                    |
+| _`parent_keyid_fld`_ | Name of the parent-key field                             |
+| _`orderby_fld`_      | Name of the field to order siblings by (optional)        |
+| _`start_with`_       | Key value of the row to start at                         |
+| _`max_depth`_        | Maximum depth to descend to, or zero for unlimited depth |
+| _`branch_delim`_     | String to separate keys with in branch output (optional) |
 
-
-The key and parent-key fields can be any data type, but they must be the same type. Note that the *`start_with`* value must be entered as a text string, regardless of the type of the key field.
+The key and parent-key fields can be any data type, but they must be the same type. Note that the _`start_with`_ value must be entered as a text string, regardless of the type of the key field.
 
 The `connectby` function is declared to return `setof record`, so the actual names and types of the output columns must be defined in the `FROM` clause of the calling `SELECT` statement, for example:
 
@@ -417,17 +499,17 @@ SELECT * FROM connectby('connectby_tree', 'keyid', 'parent_keyid', 'pos', 'row2'
     AS t(keyid text, parent_keyid text, level int, branch text, pos int);
 ```
 
-The first two output columns are used for the current row's key and its parent row's key; they must match the type of the table's key field. The third output column is the depth in the tree and must be of type `integer`. If a *`branch_delim`* parameter was given, the next output column is the branch display and must be of type `text`. Finally, if an *`orderby_fld`* parameter was given, the last output column is a serial number, and must be of type `integer`.
+The first two output columns are used for the current row's key and its parent row's key; they must match the type of the table's key field. The third output column is the depth in the tree and must be of type `integer`. If a _`branch_delim`_ parameter was given, the next output column is the branch display and must be of type `text`. Finally, if an _`orderby_fld`_ parameter was given, the last output column is a serial number, and must be of type `integer`.
 
-The “branch” output column shows the path of keys taken to reach the current row. The keys are separated by the specified *`branch_delim`* string. If no branch display is wanted, omit both the *`branch_delim`* parameter and the branch column in the output column list.
+The “branch” output column shows the path of keys taken to reach the current row. The keys are separated by the specified _`branch_delim`_ string. If no branch display is wanted, omit both the _`branch_delim`_ parameter and the branch column in the output column list.
 
-If the ordering of siblings of the same parent is important, include the *`orderby_fld`* parameter to specify which field to order siblings by. This field can be of any sortable data type. The output column list must include a final integer serial-number column, if and only if *`orderby_fld`* is specified.
+If the ordering of siblings of the same parent is important, include the _`orderby_fld`_ parameter to specify which field to order siblings by. This field can be of any sortable data type. The output column list must include a final integer serial-number column, if and only if _`orderby_fld`_ is specified.
 
 The parameters representing table and field names are copied as-is into the SQL queries that `connectby` generates internally. Therefore, include double quotes if the names are mixed-case or contain special characters. You may also need to schema-qualify the table name.
 
 In large tables, performance will be poor unless there is an index on the parent-key field.
 
-It is important that the *`branch_delim`* string not appear in any key values, else `connectby` may incorrectly report an infinite-recursion error. Note that if *`branch_delim`* is not provided, a default value of `~` is used for recursion detection purposes.
+It is important that the _`branch_delim`_ string not appear in any key values, else `connectby` may incorrectly report an infinite-recursion error. Note that if _`branch_delim`_ is not provided, a default value of `~` is used for recursion detection purposes.
 
 Here is an example:
 

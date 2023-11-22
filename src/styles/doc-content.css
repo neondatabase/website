@@ -28,12 +28,24 @@
     }
   }
 
+  .table-wrapper {
+    @apply md:-mx-4 md:overflow-x-auto md:px-4;
+  }
+
   .table {
-    .func_table_entry > * {
-      margin-top: 0.1em;
-      margin-bottom: 0.1em;
-      padding-left: 4em;
-      text-align: left;
+    @apply my-10 w-full leading-normal md:min-w-[500px];
+
+    .func_table_entry {
+      > * {
+        margin-top: 0.1em;
+        margin-bottom: 0.1em;
+        padding-left: 4em;
+        text-align: left;
+      }
+
+      p {
+        @apply my-1;
+      }
     }
 
     .func_signature {

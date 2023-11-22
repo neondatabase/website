@@ -10,6 +10,7 @@ The functions shown in [Table F.1](adminpack#FUNCTIONS-ADMINPACK-TABLE) provide
 
 **Table F.1. `adminpack` Functions**
 
+<figure class="table-wrapper">
 <table class="table" summary="adminpack Functions" border="1">
   <colgroup>
     <col />
@@ -18,7 +19,7 @@ The functions shown in [Table F.1](adminpack#FUNCTIONS-ADMINPACK-TABLE) provide
     <tr>
       <th class="func_table_entry">
         <div class="func_signature">Function</div>
-        <p>Description</p>
+        <div>Description</div>
       </th>
     </tr>
   </thead>
@@ -32,7 +33,7 @@ The functions shown in [Table F.1](adminpack#FUNCTIONS-ADMINPACK-TABLE) provide
           <em class="parameter"><code>append</code></em> <code class="type">boolean</code> ) →
           <code class="returnvalue">bigint</code>
         </div>
-        <p>Writes, or appends to, a text file.</p>
+        <div>Writes, or appends to, a text file.</div>
       </td>
     </tr>
     <tr>
@@ -42,7 +43,7 @@ The functions shown in [Table F.1](adminpack#FUNCTIONS-ADMINPACK-TABLE) provide
           <em class="parameter"><code>filename</code></em> <code class="type">text</code> ) →
           <code class="returnvalue">void</code>
         </div>
-        <p>Flushes a file or directory to disk.</p>
+        <div>Flushes a file or directory to disk.</div>
       </td>
     </tr>
     <tr>
@@ -54,7 +55,7 @@ The functions shown in [Table F.1](adminpack#FUNCTIONS-ADMINPACK-TABLE) provide
             class="optional">, <em class="parameter"><code>archivename</code></em>
             <code class="type">text</code> </span>] ) → <code class="returnvalue">boolean</code>
         </div>
-        <p>Renames a file.</p>
+        <div>Renames a file.</div>
       </td>
     </tr>
     <tr>
@@ -64,7 +65,7 @@ The functions shown in [Table F.1](adminpack#FUNCTIONS-ADMINPACK-TABLE) provide
           <em class="parameter"><code>filename</code></em> <code class="type">text</code> ) →
           <code class="returnvalue">boolean</code>
         </div>
-        <p>Removes a file.</p>
+        <div>Removes a file.</div>
       </td>
     </tr>
     <tr>
@@ -73,11 +74,12 @@ The functions shown in [Table F.1](adminpack#FUNCTIONS-ADMINPACK-TABLE) provide
           <code class="function">pg_catalog.pg_logdir_ls</code> () →
           <code class="returnvalue">setof record</code>
         </div>
-        <p>Lists the log files in the <code class="varname">log_directory</code> directory.</p>
+        <div>Lists the log files in the <code class="varname">log_directory</code> directory.</div>
       </td>
     </tr>
   </tbody>
 </table>
+</figure>
 
 `pg_file_write` writes the specified _`data`_ into the file named by _`filename`_. If _`append`_ is false, the file must not already exist. If _`append`_ is true, the file can already exist, and will be appended to if so. Returns the number of bytes written.
 
