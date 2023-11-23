@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import { notFound } from 'next/navigation';
+
 import Admonition from 'components/pages/doc/admonition';
 import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
 import Content from 'components/shared/content';
@@ -17,8 +19,11 @@ import serializeMdx from 'utils/serialize-mdx';
 export async function generateMetadata({ params }) {
   const { slug: currentSlug } = params;
 
-  const { title, excerpt } = await getPostBySlug(`/${currentSlug}`, POSTGRES_DIR_PATH);
+  const post = await getPostBySlug(`/${currentSlug}`, POSTGRES_DIR_PATH);
 
+  if (!post) return notFound();
+
+  const { title, excerpt } = post;
   const encodedTitle = Buffer.from(title || 'PostgreSQL').toString('base64');
 
   return getMetadata({
@@ -44,7 +49,11 @@ function findH1(content) {
 const PostgresPage = async ({ params }) => {
   const { slug: currentSlug } = params;
 
-  const { title, content } = await getPostBySlug(`/${currentSlug}`, POSTGRES_DIR_PATH);
+  const post = await getPostBySlug(`/${currentSlug}`, POSTGRES_DIR_PATH);
+
+  if (!post) return notFound();
+
+  const { title, content } = post;
   const hasH1 = findH1(content);
 
   const mdxSource = await serializeMdx(content);
