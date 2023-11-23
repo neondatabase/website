@@ -2,7 +2,7 @@
 title: Auto-suspend
 subtitle: Scale computes to zero when not in use
 enableTableOfContents: true
-updatedOn: '2023-11-08T13:26:01.330Z'
+updatedOn: '2023-11-23T13:58:00.340Z'
 ---
 
 Neon's _Auto-suspend_ feature controls when a Neon compute instance transitions to an `Idle` state (scales to zero) due to inactivity.

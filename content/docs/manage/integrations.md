@@ -2,7 +2,7 @@
 title: Manage integrations
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-11-08T13:26:01.331Z'
+updatedOn: '2023-11-23T13:58:00.341Z'
 ---
 
 The **Integrations** page in the Neon Console provides a hub for managing third-party integrations with your Neon project. Use these supported integrations to optimize and extend Neon's functionality and streamline your workflow.
