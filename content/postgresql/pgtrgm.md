@@ -1,16 +1,14 @@
 [#id](#PGTRGM)
 
-## F.35. pg\_trgm — support for similarity of text using trigram matching [#](#PGTRGM)
+## F.35. pg_trgm — support for similarity of text using trigram matching [#](#PGTRGM)
 
-  * [F.35.1. Trigram (or Trigraph) Concepts](pgtrgm#PGTRGM-CONCEPTS)
-  * [F.35.2. Functions and Operators](pgtrgm#PGTRGM-FUNCS-OPS)
-  * [F.35.3. GUC Parameters](pgtrgm#PGTRGM-GUC)
-  * [F.35.4. Index Support](pgtrgm#PGTRGM-INDEX)
-  * [F.35.5. Text Search Integration](pgtrgm#PGTRGM-TEXT-SEARCH)
-  * [F.35.6. References](pgtrgm#PGTRGM-REFERENCES)
-  * [F.35.7. Authors](pgtrgm#PGTRGM-AUTHORS)
-
-
+- [F.35.1. Trigram (or Trigraph) Concepts](pgtrgm#PGTRGM-CONCEPTS)
+- [F.35.2. Functions and Operators](pgtrgm#PGTRGM-FUNCS-OPS)
+- [F.35.3. GUC Parameters](pgtrgm#PGTRGM-GUC)
+- [F.35.4. Index Support](pgtrgm#PGTRGM-INDEX)
+- [F.35.5. Text Search Integration](pgtrgm#PGTRGM-TEXT-SEARCH)
+- [F.35.6. References](pgtrgm#PGTRGM-REFERENCES)
+- [F.35.7. Authors](pgtrgm#PGTRGM-AUTHORS)
 
 The `pg_trgm` module provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, as well as index operator classes that support fast searching for similar strings.
 
@@ -24,7 +22,7 @@ A trigram is a group of three consecutive characters taken from a string. We can
 
 ### Note
 
-`pg_trgm` ignores non-word characters (non-alphanumerics) when extracting trigrams from a string. Each word is considered to have two spaces prefixed and one space suffixed when determining the set of trigrams contained in the string. For example, the set of trigrams in the string “`cat`” is “` c`”, “` ca`”, “`cat`”, and “`at `”. The set of trigrams in the string “`foo|bar`” is “` f`”, “` fo`”, “`foo`”, “`oo `”, “` b`”, “` ba`”, “`bar`”, and “`ar `”.
+`pg_trgm` ignores non-word characters (non-alphanumerics) when extracting trigrams from a string. Each word is considered to have two spaces prefixed and one space suffixed when determining the set of trigrams contained in the string. For example, the set of trigrams in the string “`cat`” is “`c`”, “`ca`”, “`cat`”, and “`at`”. The set of trigrams in the string “`foo|bar`” is “`f`”, “`fo`”, “`foo`”, “`oo`”, “`b`”, “`ba`”, “`bar`”, and “`ar`”.
 
 [#id](#PGTRGM-FUNCS-OPS)
 
@@ -36,15 +34,109 @@ The functions provided by the `pg_trgm` module are shown in [Table F.26](pgtrgm
 
 **Table F.26. `pg_trgm` Functions**
 
-| FunctionDescription                                                                                                                                                                                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `similarity` ( `text`, `text` ) → `real`Returns a number that indicates how similar the two arguments are. The range of the result is zero (indicating that the two strings are completely dissimilar) to one (indicating that the two strings are identical).                                                  |
-| `show_trgm` ( `text` ) → `text[]`Returns an array of all the trigrams in the given string. (In practice this is seldom useful except for debugging.)                                                                                                                                                            |
-| `word_similarity` ( `text`, `text` ) → `real`Returns a number that indicates the greatest similarity between the set of trigrams in the first string and any continuous extent of an ordered set of trigrams in the second string. For details, see the explanation below.                                      |
-| `strict_word_similarity` ( `text`, `text` ) → `real`Same as `word_similarity`, but forces extent boundaries to match word boundaries. Since we don't have cross-word trigrams, this function actually returns greatest similarity between first string and any continuous extent of words of the second string. |
-| `show_limit` () → `real`Returns the current similarity threshold used by the `%` operator. This sets the minimum similarity between two words for them to be considered similar enough to be misspellings of each other, for example. (*Deprecated*; instead use `SHOW` `pg_trgm.similarity_threshold`.)        |
-| `set_limit` ( `real` ) → `real`Sets the current similarity threshold that is used by the `%` operator. The threshold must be between 0 and 1 (default is 0.3). Returns the same value passed in. (*Deprecated*; instead use `SET` `pg_trgm.similarity_threshold`.)                                              |
-
+<figure class="table-wrapper">
+<table class="table" summary="pg_trgm Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <div class="func_signature">Function</div>
+        <div>Description</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.11.7.44.6.3.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">similarity</code> ( <code class="type">text</code>,
+          <code class="type">text</code> ) → <code class="returnvalue">real</code>
+        </div>
+        <div>
+          Returns a number that indicates how similar the two arguments are. The range of the result
+          is zero (indicating that the two strings are completely dissimilar) to one (indicating
+          that the two strings are identical).
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.11.7.44.6.3.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">show_trgm</code> ( <code class="type">text</code> ) →
+          <code class="returnvalue">text[]</code>
+        </div>
+        <div>
+          Returns an array of all the trigrams in the given string. (In practice this is seldom
+          useful except for debugging.)
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.11.7.44.6.3.2.2.3.1.1.1" class="indexterm"></a>
+          <code class="function">word_similarity</code> ( <code class="type">text</code>,
+          <code class="type">text</code> ) → <code class="returnvalue">real</code>
+        </div>
+        <div>
+          Returns a number that indicates the greatest similarity between the set of trigrams in the
+          first string and any continuous extent of an ordered set of trigrams in the second string.
+          For details, see the explanation below.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.11.7.44.6.3.2.2.4.1.1.1" class="indexterm"></a>
+          <code class="function">strict_word_similarity</code> ( <code class="type">text</code>,
+          <code class="type">text</code> ) → <code class="returnvalue">real</code>
+        </div>
+        <div>
+          Same as <code class="function">word_similarity</code>, but forces extent boundaries to
+          match word boundaries. Since we don't have cross-word trigrams, this function actually
+          returns greatest similarity between first string and any continuous extent of words of the
+          second string.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.11.7.44.6.3.2.2.5.1.1.1" class="indexterm"></a>
+          <code class="function">show_limit</code> () → <code class="returnvalue">real</code>
+        </div>
+        <div>
+          Returns the current similarity threshold used by the
+          <code class="literal">%</code> operator. This sets the minimum similarity between two
+          words for them to be considered similar enough to be misspellings of each other, for
+          example. (<span class="emphasis"><em>Deprecated</em></span>; instead use <code class="command">SHOW</code>
+          <code class="varname">pg_trgm.similarity_threshold</code>.)
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.11.7.44.6.3.2.2.6.1.1.1" class="indexterm"></a>
+          <code class="function">set_limit</code> ( <code class="type">real</code> ) →
+          <code class="returnvalue">real</code>
+        </div>
+        <div>
+          Sets the current similarity threshold that is used by the
+          <code class="literal">%</code> operator. The threshold must be between 0 and 1 (default is
+          0.3). Returns the same value passed in. (<span class="emphasis"><em>Deprecated</em></span>; instead use <code class="command">SET</code>
+          <code class="varname">pg_trgm.similarity_threshold</code>.)
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</figure>
 
 Consider the following example:
 
@@ -76,32 +168,152 @@ Thus, the `strict_word_similarity` function is useful for finding the similarity
 
 **Table F.27. `pg_trgm` Operators**
 
-| OperatorDescription                                                                                                                                                                                                                                                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `text` `%` `text` → `boolean`Returns `true` if its arguments have a similarity that is greater than the current similarity threshold set by `pg_trgm.similarity_threshold`.                                                                                                                                                                    |
-| `text` `<%` `text` → `boolean`Returns `true` if the similarity between the trigram set in the first argument and a continuous extent of an ordered trigram set in the second argument is greater than the current word similarity threshold set by `pg_trgm.word_similarity_threshold` parameter.                                              |
-| `text` `%>` `text` → `boolean`Commutator of the `<%` operator.                                                                                                                                                                                                                                                                                 |
-| `text` `<<%` `text` → `boolean`Returns `true` if its second argument has a continuous extent of an ordered trigram set that matches word boundaries, and its similarity to the trigram set of the first argument is greater than the current strict word similarity threshold set by the `pg_trgm.strict_word_similarity_threshold` parameter. |
-| `text` `%>>` `text` → `boolean`Commutator of the `<<%` operator.                                                                                                                                                                                                                                                                               |
-| `text` `<->` `text` → `real`Returns the “distance” between the arguments, that is one minus the `similarity()` value.                                                                                                                                                                                                                          |
-| `text` `<<->` `text` → `real`Returns the “distance” between the arguments, that is one minus the `word_similarity()` value.                                                                                                                                                                                                                    |
-| `text` `<->>` `text` → `real`Commutator of the `<<->` operator.                                                                                                                                                                                                                                                                                |
-| `text` `<<<->` `text` → `real`Returns the “distance” between the arguments, that is one minus the `strict_word_similarity()` value.                                                                                                                                                                                                            |
-| `text` `<->>>` `text` → `real`Commutator of the `<<<->` operator.                                                                                                                                                                                                                                                                              |
+<figure class="table-wrapper">
+<table class="table" summary="pg_trgm Operators" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <div class="func_signature">Operator</div>
+        <div>Description</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">text</code> <code class="literal">%</code>
+          <code class="type">text</code> → <code class="returnvalue">boolean</code>
+        </div>
+        <div>
+          Returns <code class="literal">true</code> if its arguments have a similarity that is
+          greater than the current similarity threshold set by
+          <code class="varname">pg_trgm.similarity_threshold</code>.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">text</code> <code class="literal">&lt;%</code>
+          <code class="type">text</code> → <code class="returnvalue">boolean</code>
+        </div>
+        <div>
+          Returns <code class="literal">true</code> if the similarity between the trigram set in the
+          first argument and a continuous extent of an ordered trigram set in the second argument is
+          greater than the current word similarity threshold set by
+          <code class="varname">pg_trgm.word_similarity_threshold</code>
+          parameter.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">text</code> <code class="literal">%&gt;</code>
+          <code class="type">text</code> → <code class="returnvalue">boolean</code>
+        </div>
+        <div>Commutator of the <code class="literal">&lt;%</code> operator.</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">text</code> <code class="literal">&lt;&lt;%</code>
+          <code class="type">text</code> → <code class="returnvalue">boolean</code>
+        </div>
+        <div>
+          Returns <code class="literal">true</code> if its second argument has a continuous extent
+          of an ordered trigram set that matches word boundaries, and its similarity to the trigram
+          set of the first argument is greater than the current strict word similarity threshold set
+          by the <code class="varname">pg_trgm.strict_word_similarity_threshold</code> parameter.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">text</code> <code class="literal">%&gt;&gt;</code>
+          <code class="type">text</code> → <code class="returnvalue">boolean</code>
+        </div>
+        <div>Commutator of the <code class="literal">&lt;&lt;%</code> operator.</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">text</code> <code class="literal">&lt;-&gt;</code>
+          <code class="type">text</code> → <code class="returnvalue">real</code>
+        </div>
+        <div>
+          Returns the <span class="quote">“<span class="quote">distance</span>”</span> between the
+          arguments, that is one minus the <code class="function">similarity()</code> value.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">text</code> <code class="literal">&lt;&lt;-&gt;</code>
+          <code class="type">text</code> → <code class="returnvalue">real</code>
+        </div>
+        <div>
+          Returns the <span class="quote">“<span class="quote">distance</span>”</span> between the
+          arguments, that is one minus the <code class="function">word_similarity()</code> value.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">text</code> <code class="literal">&lt;-&gt;&gt;</code>
+          <code class="type">text</code> → <code class="returnvalue">real</code>
+        </div>
+        <div>Commutator of the <code class="literal">&lt;&lt;-&gt;</code> operator.</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">text</code> <code class="literal">&lt;&lt;&lt;-&gt;</code>
+          <code class="type">text</code> → <code class="returnvalue">real</code>
+        </div>
+        <div>
+          Returns the <span class="quote">“<span class="quote">distance</span>”</span> between the
+          arguments, that is one minus the
+          <code class="function">strict_word_similarity()</code> value.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">text</code> <code class="literal">&lt;-&gt;&gt;&gt;</code>
+          <code class="type">text</code> → <code class="returnvalue">real</code>
+        </div>
+        <div>Commutator of the <code class="literal">&lt;&lt;&lt;-&gt;</code> operator.</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</figure>
 
 [#id](#PGTRGM-GUC)
 
 ### F.35.3. GUC Parameters [#](#PGTRGM-GUC)
 
-* `pg_trgm.similarity_threshold` (`real`) [#](#GUC-PGTRGM-SIMILARITY-THRESHOLD)
+- `pg_trgm.similarity_threshold` (`real`) [#](#GUC-PGTRGM-SIMILARITY-THRESHOLD)
 
   Sets the current similarity threshold that is used by the `%` operator. The threshold must be between 0 and 1 (default is 0.3).
 
-* `pg_trgm.word_similarity_threshold` (`real`) [#](#GUC-PGTRGM-WORD-SIMILARITY-THRESHOLD)
+- `pg_trgm.word_similarity_threshold` (`real`) [#](#GUC-PGTRGM-WORD-SIMILARITY-THRESHOLD)
 
   Sets the current word similarity threshold that is used by the `<%` and `%>` operators. The threshold must be between 0 and 1 (default is 0.6).
 
-* `pg_trgm.strict_word_similarity_threshold` (`real`) [#](#GUC-PGTRGM-STRICT-WORD-SIMILARITY-THRESHOLD)
+- `pg_trgm.strict_word_similarity_threshold` (`real`) [#](#GUC-PGTRGM-STRICT-WORD-SIMILARITY-THRESHOLD)
 
   Sets the current strict word similarity threshold that is used by the `<<%` and `%>>` operators. The threshold must be between 0 and 1 (default is 0.5).
 
@@ -141,7 +353,7 @@ SELECT t, similarity(t, 'word') AS sml
   ORDER BY sml DESC, t;
 ```
 
-This will return all values in the text column that are sufficiently similar to *`word`*, sorted from best match to worst. The index will be used to make this a fast operation even over very large data sets.
+This will return all values in the text column that are sufficiently similar to _`word`_, sorted from best match to worst. The index will be used to make this a fast operation even over very large data sets.
 
 A variant of the above query is
 
@@ -171,7 +383,7 @@ SELECT t, strict_word_similarity('word', t) AS sml
   ORDER BY sml DESC, t;
 ```
 
-This will return all values in the text column for which there is a continuous extent in the corresponding ordered trigram set that is sufficiently similar to the trigram set of *`word`*, sorted from best match to worst. The index will be used to make this a fast operation even over very large data sets.
+This will return all values in the text column for which there is a continuous extent in the corresponding ordered trigram set that is sufficiently similar to the trigram set of _`word`_, sorted from best match to worst. The index will be used to make this a fast operation even over very large data sets.
 
 Possible variants of the above queries are:
 

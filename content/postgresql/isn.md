@@ -2,12 +2,12 @@
 
 ## F.21. isn — data types for international standard numbers (ISBN, EAN, UPC, etc.) [#](#ISN)
 
-* [F.21.1. Data Types](isn#ISN-DATA-TYPES)
-* [F.21.2. Casts](isn#ISN-CASTS)
-* [F.21.3. Functions and Operators](isn#ISN-FUNCS-OPS)
-* [F.21.4. Examples](isn#ISN-EXAMPLES)
-* [F.21.5. Bibliography](isn#ISN-BIBLIOGRAPHY)
-* [F.21.6. Author](isn#ISN-AUTHOR)
+- [F.21.1. Data Types](isn#ISN-DATA-TYPES)
+- [F.21.2. Casts](isn#ISN-CASTS)
+- [F.21.3. Functions and Operators](isn#ISN-FUNCS-OPS)
+- [F.21.4. Examples](isn#ISN-EXAMPLES)
+- [F.21.5. Bibliography](isn#ISN-BIBLIOGRAPHY)
+- [F.21.6. Author](isn#ISN-AUTHOR)
 
 The `isn` module provides data types for the following international product numbering standards: EAN13, UPC, ISBN (books), ISMN (music), and ISSN (serials). Numbers are validated on input according to a hard-coded list of prefixes; this list of prefixes is also used to hyphenate numbers on output. Since new prefixes are assigned from time to time, the list of prefixes may be out of date. It is hoped that a future version of this module will obtain the prefix list from one or more tables that can be easily updated by users as needed; however, at present, the list can only be updated by modifying the source code and recompiling. Alternatively, prefix validation and hyphenation support may be dropped from a future version of this module.
 
@@ -60,25 +60,25 @@ The `ISBN`, `ISMN`, and `ISSN` types will display the short version of the numbe
 
 The `isn` module provides the following pairs of type casts:
 
-* `ISBN13 <=> EAN13`
+- `ISBN13 <=> EAN13`
 
-* `ISMN13 <=> EAN13`
+- `ISMN13 <=> EAN13`
 
-* `ISSN13 <=> EAN13`
+- `ISSN13 <=> EAN13`
 
-* `ISBN <=> EAN13`
+- `ISBN <=> EAN13`
 
-* `ISMN <=> EAN13`
+- `ISMN <=> EAN13`
 
-* `ISSN <=> EAN13`
+- `ISSN <=> EAN13`
 
-* `UPC <=> EAN13`
+- `UPC <=> EAN13`
 
-* `ISBN <=> ISBN13`
+- `ISBN <=> ISBN13`
 
-* `ISMN <=> ISMN13`
+- `ISMN <=> ISMN13`
 
-* `ISSN <=> ISSN13`
+- `ISSN <=> ISSN13`
 
 When casting from `EAN13` to another type, there is a run-time check that the value is within the domain of the other type, and an error is thrown if not. The other casts are simply relabelings that will always succeed.
 
@@ -92,14 +92,63 @@ The `isn` module provides the standard comparison operators, plus B-tree and has
 
 **Table F.12. `isn` Functions**
 
-| FunctionDescription                                                                        |
-| ------------------------------------------------------------------------------------------ |
-| `isn_weak` ( `boolean` ) → `boolean`Sets the weak input mode, and returns new setting. |
-| `isn_weak` () → `boolean`Returns the current status of the weak mode.                      |
-| `make_valid` ( `isn` ) → `isn`Validates an invalid number (clears the invalid flag).   |
-| `is_valid` ( `isn` ) → `boolean`Checks for the presence of the invalid flag.           |
+<figure class="table-wrapper">
+<table class="table" summary="isn Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <div class="func_signature">Function</div>
+        <div>Description</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.11.7.31.7.3.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">isn_weak</code> ( <code class="type">boolean</code> ) →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Sets the weak input mode, and returns new setting.</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="function">isn_weak</code> () → <code class="returnvalue">boolean</code>
+        </div>
+        <div>Returns the current status of the weak mode.</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.11.7.31.7.3.2.2.3.1.1.1" class="indexterm"></a>
+          <code class="function">make_valid</code> ( <code class="type">isn</code> ) →
+          <code class="returnvalue">isn</code>
+        </div>
+        <div>Validates an invalid number (clears the invalid flag).</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.11.7.31.7.3.2.2.4.1.1.1" class="indexterm"></a>
+          <code class="function">is_valid</code> ( <code class="type">isn</code> ) →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Checks for the presence of the invalid flag.</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</figure>
 
-*Weak* mode is used to be able to insert invalid data into a table. Invalid means the check digit is wrong, not that there are missing numbers.
+_Weak_ mode is used to be able to insert invalid data into a table. Invalid means the check digit is wrong, not that there are missing numbers.
 
 Why would you want to use the weak mode? Well, it could be that you have a huge collection of ISBN numbers, and that there are so many of them that for weird reasons some have the wrong check digit (perhaps the numbers were scanned from a printed list and the OCR got the numbers wrong, perhaps the numbers were manually captured... who knows). Anyway, the point is you might want to clean the mess up, but you still want to be able to have all the numbers in your database and maybe use an external tool to locate the invalid numbers in the database so you can verify the information and validate it more easily; so for example you'd want to select all the invalid numbers in the table.
 
@@ -159,25 +208,25 @@ SELECT isbn13(id) FROM test;
 
 The information to implement this module was collected from several sites, including:
 
-* [https://www.isbn-international.org/](https://www.isbn-international.org/)
+- [https://www.isbn-international.org/](https://www.isbn-international.org/)
 
-* [https://www.issn.org/](https://www.issn.org/)
+- [https://www.issn.org/](https://www.issn.org/)
 
-* [https://www.ismn-international.org/](https://www.ismn-international.org/)
+- [https://www.ismn-international.org/](https://www.ismn-international.org/)
 
-* [https://www.wikipedia.org/](https://www.wikipedia.org/)
+- [https://www.wikipedia.org/](https://www.wikipedia.org/)
 
 The prefixes used for hyphenation were also compiled from:
 
-* [https://www.gs1.org/standards/id-keys](https://www.gs1.org/standards/id-keys)
+- [https://www.gs1.org/standards/id-keys](https://www.gs1.org/standards/id-keys)
 
-* [https://en.wikipedia.org/wiki/List_of_ISBN_identifier_groups](https://en.wikipedia.org/wiki/List_of_ISBN_identifier_groups)
+- [https://en.wikipedia.org/wiki/List_of_ISBN_identifier_groups](https://en.wikipedia.org/wiki/List_of_ISBN_identifier_groups)
 
-* [https://www.isbn-international.org/content/isbn-users-manual](https://www.isbn-international.org/content/isbn-users-manual)
+- [https://www.isbn-international.org/content/isbn-users-manual](https://www.isbn-international.org/content/isbn-users-manual)
 
-* [https://en.wikipedia.org/wiki/International_Standard_Music_Number](https://en.wikipedia.org/wiki/International_Standard_Music_Number)
+- [https://en.wikipedia.org/wiki/International_Standard_Music_Number](https://en.wikipedia.org/wiki/International_Standard_Music_Number)
 
-* [https://www.ismn-international.org/ranges.html](https://www.ismn-international.org/ranges.html)
+- [https://www.ismn-international.org/ranges.html](https://www.ismn-international.org/ranges.html)
 
 Care was taken during the creation of the algorithms and they were meticulously verified against the suggested algorithms in the official ISBN, ISMN, ISSN User Manuals.
 

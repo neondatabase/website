@@ -35,7 +35,8 @@
   .table {
     @apply my-10 w-full leading-normal md:min-w-[500px];
 
-    .func_table_entry {
+    .func_table_entry,
+    .catalog_table_entry {
       > * {
         margin-top: 0.1em;
         margin-bottom: 0.1em;
@@ -50,6 +51,11 @@
 
     .func_signature {
       text-indent: -3.5em;
+    }
+
+    .column_definition {
+      text-indent: -3.5em;
+      word-spacing: 0.25em;
     }
   }
 
