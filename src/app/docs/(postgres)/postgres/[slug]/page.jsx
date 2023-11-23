@@ -66,7 +66,11 @@ const PostgresPage = async ({ params }) => {
         {!hasH1 && <h1 className="sr-only">{title}</h1>}
         <Admonition type="note">
           This mirror of{' '}
-          <Link to={`https://www.postgresql.org/docs/16/${currentSlug}.html`}>
+          <Link
+            to={`https://www.postgresql.org/docs/16/${currentSlug}.html`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             official PostgreSQL documentation
           </Link>{' '}
           is brought to you by Neon with ❤️.
