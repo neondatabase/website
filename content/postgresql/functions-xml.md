@@ -179,7 +179,7 @@ WHERE table_schema = 'pg_catalog';
 
                                 xmlforest
 ------------------------------------​-----------------------------------
- <figure class="table-wrapper">
+
 <table_name>pg_authid</table_name>​<column_name>rolname</column_name>
  <table_name>pg_authid</table_name>​<column_name>rolsuper</column_name>
  ...
