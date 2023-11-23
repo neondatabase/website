@@ -11,7 +11,7 @@ on:
 jobs:
   update-date:
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'GitHub Action' }}
+    if: ${{ !contains(github.event.head_commit.message, 'auto-update') }}
 
     steps:
     - name: Checkout repository
@@ -50,11 +50,13 @@ jobs:
         git config user.email "action@github.com"
         export HUSKY=0
         git add -A
-        if git diff --staged | grep '.'; then
-          git commit -m "chore: update frontmatter date"
+        # Check for meaningful changes before committing
+        if [ -n "$(git status --porcelain)" ]; then
+          # Commit only modified markdown files, not all changes
+          git commit -m "chore: update frontmatter date (auto-update)" ${{ steps.get-modified-files.outputs.modified_files }}
           echo "Changes committed"
         else
-          echo "No changes to commit"
+          echo "No significant changes to commit"
           exit 0
         fi
 
