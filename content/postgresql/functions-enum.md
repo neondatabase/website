@@ -66,7 +66,7 @@ CREATE TYPE rainbow AS ENUM ('red', 'orange', 'yellow', 'green', 'blue', 'purple
         <div>Returns all values of the input enum type in an ordered array.</div>
         <div>
           <code class="literal">enum_range(null::rainbow)</code>
-          → <code class="returnvalue">{red,orange,yellow,​green,blue,purple}</code>
+          → <code class="returnvalue">\{red,orange,yellow,​green,blue,purple}</code>
         </div>
       </td>
     </tr>
@@ -84,15 +84,15 @@ CREATE TYPE rainbow AS ENUM ('red', 'orange', 'yellow', 'green', 'blue', 'purple
         </div>
         <div>
           <code class="literal">enum_range('orange'::rainbow, 'green'::rainbow)</code>
-          → <code class="returnvalue">{orange,yellow,green}</code>
+          → <code class="returnvalue">\{orange,yellow,green}</code>
         </div>
         <div>
           <code class="literal">enum_range(NULL, 'green'::rainbow)</code>
-          → <code class="returnvalue">{red,orange,​yellow,green}</code>
+          → <code class="returnvalue">\{red,orange,​yellow,green}</code>
         </div>
         <div>
           <code class="literal">enum_range('orange'::rainbow, NULL)</code>
-          → <code class="returnvalue">{orange,yellow,green,​blue,purple}</code>
+          → <code class="returnvalue">\{orange,yellow,green,​blue,purple}</code>
         </div>
       </td>
     </tr>
