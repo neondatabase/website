@@ -65,7 +65,11 @@ const PostgresPage = async ({ params }) => {
       <article>
         {!hasH1 && <h1 className="sr-only">{title}</h1>}
         <Admonition type="note">
-          This mirror of official PostgreSQL documentation is brought to you by Neon with ❤️.
+          This mirror of{' '}
+          <Link to={`https://www.postgresql.org/docs/16/${currentSlug}.html`}>
+            official PostgreSQL documentation
+          </Link>{' '}
+          is brought to you by Neon with ❤️.
           <br className="flat-none sm:flat-break" /> Not all features and functions are supported.
           See <Link to="/docs/reference/compatibility">Postgres compatibility</Link> for details.
         </Admonition>
