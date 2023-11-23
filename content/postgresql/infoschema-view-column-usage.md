@@ -1,3 +1,5 @@
+[#id](#INFOSCHEMA-VIEW-COLUMN-USAGE)
+
 ## 37.63. `view_column_usage` [#](#INFOSCHEMA-VIEW-COLUMN-USAGE)
 
 The view `view_column_usage` identifies all columns that are used in the query expression of a view (the `SELECT` statement that defines the view). A column is only included if the table that contains the column is owned by a currently enabled role.
@@ -5,6 +7,8 @@ The view `view_column_usage` identifies all columns that are used in the query e
 ### Note
 
 Columns of system tables are not included. This should be fixed sometime.
+
+[#id](#id-1.7.6.67.4)
 
 **Table 37.61. `view_column_usage` Columns**
 

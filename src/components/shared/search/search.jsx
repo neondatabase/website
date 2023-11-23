@@ -38,7 +38,7 @@ Hit.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const Search = ({ className = null, indexName, isBlog = false }) => {
+const Search = ({ className = null, isBlog = false, indexName }) => {
   const router = useRouter();
   const searchButtonRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -158,8 +158,8 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
 
 Search.propTypes = {
   className: PropTypes.string,
-  indexName: PropTypes.string.isRequired,
   isBlog: PropTypes.bool,
+  indexName: PropTypes.string.isRequired,
 };
 
 export default Search;

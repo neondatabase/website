@@ -1,20 +1,20 @@
+[#id](#PLPGSQL-STRUCTURE)
+
 ## 43.2. Structure of PL/pgSQL [#](#PLPGSQL-STRUCTURE)
 
-Functions written in PL/pgSQL are defined to the server by executing [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION") commands. Such a command would normally look like, say,
+Functions written in PL/pgSQL are defined to the server by executing [CREATE FUNCTION](sql-createfunction) commands. Such a command would normally look like, say,
 
 ```
-
 CREATE FUNCTION somefunc(integer, text) RETURNS integer
 AS 'function body text'
 LANGUAGE plpgsql;
 ```
 
-The function body is simply a string literal so far as `CREATE FUNCTION` is concerned. It is often helpful to use dollar quoting (see [Section 4.1.2.4](sql-syntax-lexical.html#SQL-SYNTAX-DOLLAR-QUOTING "4.1.2.4. Dollar-Quoted String Constants")) to write the function body, rather than the normal single quote syntax. Without dollar quoting, any single quotes or backslashes in the function body must be escaped by doubling them. Almost all the examples in this chapter use dollar-quoted literals for their function bodies.
+The function body is simply a string literal so far as `CREATE FUNCTION` is concerned. It is often helpful to use dollar quoting (see [Section 4.1.2.4](sql-syntax-lexical#SQL-SYNTAX-DOLLAR-QUOTING)) to write the function body, rather than the normal single quote syntax. Without dollar quoting, any single quotes or backslashes in the function body must be escaped by doubling them. Almost all the examples in this chapter use dollar-quoted literals for their function bodies.
 
 PL/pgSQL is a block-structured language. The complete text of a function body must be a *block*. A block is defined as:
 
 ```
-
 [ <<label>> ]
 [ DECLARE
     declarations ]
@@ -38,7 +38,6 @@ Comments work the same way in PL/pgSQL code as in ordinary SQL. A double dash (`
 Any statement in the statement section of a block can be a *subblock*. Subblocks can be used for logical grouping or to localize variables to a small group of statements. Variables declared in a subblock mask any similarly-named variables of outer blocks for the duration of the subblock; but you can access the outer variables anyway if you qualify their names with their block's label. For example:
 
 ```
-
 CREATE FUNCTION somefunc() RETURNS integer AS $$
 << outerblock >>
 DECLARE
@@ -65,6 +64,6 @@ $$ LANGUAGE plpgsql;
 
 ### Note
 
-There is actually a hidden “outer block” surrounding the body of any PL/pgSQL function. This block provides the declarations of the function's parameters (if any), as well as some special variables such as `FOUND` (see [Section 43.5.5](plpgsql-statements.html#PLPGSQL-STATEMENTS-DIAGNOSTICS "43.5.5. Obtaining the Result Status")). The outer block is labeled with the function's name, meaning that parameters and special variables can be qualified with the function's name.
+There is actually a hidden “outer block” surrounding the body of any PL/pgSQL function. This block provides the declarations of the function's parameters (if any), as well as some special variables such as `FOUND` (see [Section 43.5.5](plpgsql-statements#PLPGSQL-STATEMENTS-DIAGNOSTICS)). The outer block is labeled with the function's name, meaning that parameters and special variables can be qualified with the function's name.
 
-It is important not to confuse the use of `BEGIN`/`END` for grouping statements in PL/pgSQL with the similarly-named SQL commands for transaction control. PL/pgSQL's `BEGIN`/`END` are only for grouping; they do not start or end a transaction. See [Section 43.8](plpgsql-transactions.html "43.8. Transaction Management") for information on managing transactions in PL/pgSQL. Also, a block containing an `EXCEPTION` clause effectively forms a subtransaction that can be rolled back without affecting the outer transaction. For more about that see [Section 43.6.8](plpgsql-control-structures.html#PLPGSQL-ERROR-TRAPPING "43.6.8. Trapping Errors").
+It is important not to confuse the use of `BEGIN`/`END` for grouping statements in PL/pgSQL with the similarly-named SQL commands for transaction control. PL/pgSQL's `BEGIN`/`END` are only for grouping; they do not start or end a transaction. See [Section 43.8](plpgsql-transactions) for information on managing transactions in PL/pgSQL. Also, a block containing an `EXCEPTION` clause effectively forms a subtransaction that can be rolled back without affecting the outer transaction. For more about that see [Section 43.6.8](plpgsql-control-structures#PLPGSQL-ERROR-TRAPPING).

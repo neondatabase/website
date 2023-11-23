@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-FOREIGN-TABLE-OPTIONS)
+
 ## 37.30. `foreign_table_options` [#](#INFOSCHEMA-FOREIGN-TABLE-OPTIONS)
 
 The view `foreign_table_options` contains all the options defined for foreign tables in the current database. Only those foreign tables are shown that the current user has access to (by way of being the owner or having some privilege).
+
+[#id](#id-1.7.6.34.3)
 
 **Table 37.28. `foreign_table_options` Columns**
 

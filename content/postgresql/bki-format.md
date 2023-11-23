@@ -1,3 +1,5 @@
+[#id](#BKI-FORMAT)
+
 ## 75.3. BKI File Format [#](#BKI-FORMAT)
 
 This section describes how the PostgreSQL backend interprets BKI files. This description will be easier to understand if the `postgres.bki` file is at hand as an example.

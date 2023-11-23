@@ -1,3 +1,5 @@
+[#id](#ECPG-SQL-GET-DESCRIPTOR)
+
 ## GET DESCRIPTOR
 
 GET DESCRIPTOR — get information from an SQL descriptor area
@@ -10,33 +12,39 @@ GET DESCRIPTOR descriptor_name :cvariable = descriptor_header_item [, ... ]
 GET DESCRIPTOR descriptor_name VALUE column_number :cvariable = descriptor_item [, ... ]
 ```
 
+[#id](#id-1.7.5.20.11.3)
+
 ## Description
 
 `GET DESCRIPTOR` retrieves information about a query result set from an SQL descriptor area and stores it into host variables. A descriptor area is typically populated using `FETCH` or `SELECT` before using this command to transfer the information into host language variables.
 
 This command has two forms: The first form retrieves descriptor “header” items, which apply to the result set in its entirety. One example is the row count. The second form, which requires the column number as additional parameter, retrieves information about a particular column. Examples are the column name and the actual column value.
 
+[#id](#id-1.7.5.20.11.4)
+
 ## Parameters
 
 * *`descriptor_name`* [#](#ECPG-SQL-GET-DESCRIPTOR-DESCRIPTOR-NAME)
 
-    A descriptor name.
+  A descriptor name.
 
 * *`descriptor_header_item`* [#](#ECPG-SQL-GET-DESCRIPTOR-DESCRIPTOR-HEADER-ITEM)
 
-    A token identifying which header information item to retrieve. Only `COUNT`, to get the number of columns in the result set, is currently supported.
+  A token identifying which header information item to retrieve. Only `COUNT`, to get the number of columns in the result set, is currently supported.
 
 * *`column_number`* [#](#ECPG-SQL-GET-DESCRIPTOR-COLUMN-NUMBER)
 
-    The number of the column about which information is to be retrieved. The count starts at 1.
+  The number of the column about which information is to be retrieved. The count starts at 1.
 
 * *`descriptor_item`* [#](#ECPG-SQL-GET-DESCRIPTOR-DESCRIPTOR-ITEM)
 
-    A token identifying which item of information about a column to retrieve. See [Section 36.7.1](ecpg-descriptors.html#ECPG-NAMED-DESCRIPTORS "36.7.1. Named SQL Descriptor Areas") for a list of supported items.
+  A token identifying which item of information about a column to retrieve. See [Section 36.7.1](ecpg-descriptors#ECPG-NAMED-DESCRIPTORS) for a list of supported items.
 
 * *`cvariable`* [#](#ECPG-SQL-GET-DESCRIPTOR-CVARIABLE)
 
-    A host variable that will receive the data retrieved from the descriptor area.
+  A host variable that will receive the data retrieved from the descriptor area.
+
+[#id](#id-1.7.5.20.11.5)
 
 ## Examples
 
@@ -115,10 +123,14 @@ d_returned_octet_length = 6
 d_data                  = testdb
 ```
 
+[#id](#id-1.7.5.20.11.6)
+
 ## Compatibility
 
 `GET DESCRIPTOR` is specified in the SQL standard.
 
+[#id](#id-1.7.5.20.11.7)
+
 ## See Also
 
-[ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor.html "ALLOCATE DESCRIPTOR"), [SET DESCRIPTOR](ecpg-sql-set-descriptor.html "SET DESCRIPTOR")
+[ALLOCATE DESCRIPTOR](ecpg-sql-allocate-descriptor), [SET DESCRIPTOR](ecpg-sql-set-descriptor)

@@ -1,17 +1,23 @@
+[#id](#FUNCTIONS-XML)
+
 ## 9.15. XML Functions [#](#FUNCTIONS-XML)
 
-  * *   [9.15.1. Producing XML Content](functions-xml.html#FUNCTIONS-PRODUCING-XML)
-* [9.15.2. XML Predicates](functions-xml.html#FUNCTIONS-XML-PREDICATES)
-* [9.15.3. Processing XML](functions-xml.html#FUNCTIONS-XML-PROCESSING)
-* [9.15.4. Mapping Tables to XML](functions-xml.html#FUNCTIONS-XML-MAPPING)
+* [9.15.1. Producing XML Content](functions-xml#FUNCTIONS-PRODUCING-XML)
+* [9.15.2. XML Predicates](functions-xml#FUNCTIONS-XML-PREDICATES)
+* [9.15.3. Processing XML](functions-xml#FUNCTIONS-XML-PROCESSING)
+* [9.15.4. Mapping Tables to XML](functions-xml#FUNCTIONS-XML-MAPPING)
 
-The functions and function-like expressions described in this section operate on values of type `xml`. See [Section 8.13](datatype-xml.html "8.13. XML Type") for information about the `xml` type. The function-like expressions `xmlparse` and `xmlserialize` for converting to and from type `xml` are documented there, not in this section.
+The functions and function-like expressions described in this section operate on values of type `xml`. See [Section 8.13](datatype-xml) for information about the `xml` type. The function-like expressions `xmlparse` and `xmlserialize` for converting to and from type `xml` are documented there, not in this section.
 
 Use of most of these functions requires PostgreSQL to have been built with `configure --with-libxml`.
+
+[#id](#FUNCTIONS-PRODUCING-XML)
 
 ### 9.15.1. Producing XML Content [#](#FUNCTIONS-PRODUCING-XML)
 
 A set of functions and function-like expressions is available for producing XML content from SQL data. As such, they are particularly suitable for formatting query results into XML documents for processing in client applications.
+
+[#id](#FUNCTIONS-PRODUCING-XML-XMLCOMMENT)
 
 #### 9.15.1.1. `xmlcomment` [#](#FUNCTIONS-PRODUCING-XML-XMLCOMMENT)
 
@@ -32,6 +38,8 @@ SELECT xmlcomment('hello');
 --------------
  <!--hello-->
 ```
+
+[#id](#FUNCTIONS-PRODUCING-XML-XMLCONCAT)
 
 #### 9.15.1.2. `xmlconcat` [#](#FUNCTIONS-PRODUCING-XML-XMLCONCAT)
 
@@ -65,6 +73,8 @@ SELECT xmlconcat('<?xml version="1.1"?><foo/>', '<?xml version="1.1" standalone=
 -----------------------------------
  <?xml version="1.1"?><foo/><bar/>
 ```
+
+[#id](#FUNCTIONS-PRODUCING-XML-XMLELEMENT)
 
 #### 9.15.1.3. `xmlelement` [#](#FUNCTIONS-PRODUCING-XML-XMLELEMENT)
 
@@ -139,7 +149,9 @@ SELECT xmlelement(name foo, xmlattributes('xyz' as bar),
  <foo bar="xyz"><abc/><!--test--><xyz/></foo>
 ```
 
-Content of other types will be formatted into valid XML character data. This means in particular that the characters `<`, `>`, and `&` will be converted to entities. Binary data (data type `bytea`) will be represented in base64 or hex encoding, depending on the setting of the configuration parameter [xmlbinary](runtime-config-client.html#GUC-XMLBINARY). The particular behavior for individual data types is expected to evolve in order to align the PostgreSQL mappings with those specified in SQL:2006 and later, as discussed in [Section D.3.1.3](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-CASTS "D.3.1.3. Mappings between SQL and XML Data Types and Values").
+Content of other types will be formatted into valid XML character data. This means in particular that the characters `<`, `>`, and & will be converted to entities. Binary data (data type `bytea`) will be represented in base64 or hex encoding, depending on the setting of the configuration parameter [xmlbinary](runtime-config-client#GUC-XMLBINARY). The particular behavior for individual data types is expected to evolve in order to align the PostgreSQL mappings with those specified in SQL:2006 and later, as discussed in [Section D.3.1.3](xml-limits-conformance#FUNCTIONS-XML-LIMITS-CASTS).
+
+[#id](#FUNCTIONS-PRODUCING-XML-XMLFOREST)
 
 #### 9.15.1.4. `xmlforest` [#](#FUNCTIONS-PRODUCING-XML-XMLFOREST)
 
@@ -167,7 +179,8 @@ WHERE table_schema = 'pg_catalog';
 
                                 xmlforest
 ------------------------------------​-----------------------------------
- <table_name>pg_authid</table_name>​<column_name>rolname</column_name>
+ <figure class="table-wrapper">
+<table_name>pg_authid</table_name>​<column_name>rolname</column_name>
  <table_name>pg_authid</table_name>​<column_name>rolsuper</column_name>
  ...
 ```
@@ -177,6 +190,8 @@ As seen in the second example, the element name can be omitted if the content va
 Element names that are not valid XML names are escaped as shown for `xmlelement` above. Similarly, content data is escaped to make valid XML content, unless it is already of type `xml`.
 
 Note that XML forests are not valid XML documents if they consist of more than one element, so it might be useful to wrap `xmlforest` expressions in `xmlelement`.
+
+[#id](#FUNCTIONS-PRODUCING-XML-XMLPI)
 
 #### 9.15.1.5. `xmlpi` [#](#FUNCTIONS-PRODUCING-XML-XMLPI)
 
@@ -198,6 +213,8 @@ SELECT xmlpi(name php, 'echo "hello world";');
  <?php echo "hello world";?>
 ```
 
+[#id](#FUNCTIONS-PRODUCING-XML-XMLROOT)
+
 #### 9.15.1.6. `xmlroot` [#](#FUNCTIONS-PRODUCING-XML-XMLROOT)
 
 ```
@@ -218,6 +235,8 @@ SELECT xmlroot(xmlparse(document '<?xml version="1.1"?><content>abc</content>'),
  <content>abc</content>
 ```
 
+[#id](#FUNCTIONS-XML-XMLAGG)
+
 #### 9.15.1.7. `xmlagg` [#](#FUNCTIONS-XML-XMLAGG)
 
 ```
@@ -225,7 +244,7 @@ SELECT xmlroot(xmlparse(document '<?xml version="1.1"?><content>abc</content>'),
 xmlagg ( xml ) → xml
 ```
 
-The function `xmlagg` is, unlike the other functions described here, an aggregate function. It concatenates the input values to the aggregate function call, much like `xmlconcat` does, except that concatenation occurs across rows rather than across expressions in a single row. See [Section 9.21](functions-aggregate.html "9.21. Aggregate Functions") for additional information about aggregate functions.
+The function `xmlagg` is, unlike the other functions described here, an aggregate function. It concatenates the input values to the aggregate function call, much like `xmlconcat` does, except that concatenation occurs across rows rather than across expressions in a single row. See [Section 9.21](functions-aggregate) for additional information about aggregate functions.
 
 Example:
 
@@ -240,7 +259,7 @@ SELECT xmlagg(x) FROM test;
  <foo>abc</foo><bar/>
 ```
 
-To determine the order of the concatenation, an `ORDER BY` clause may be added to the aggregate call as described in [Section 4.2.7](sql-expressions.html#SYNTAX-AGGREGATES "4.2.7. Aggregate Expressions"). For example:
+To determine the order of the concatenation, an `ORDER BY` clause may be added to the aggregate call as described in [Section 4.2.7](sql-expressions#SYNTAX-AGGREGATES). For example:
 
 ```
 
@@ -260,9 +279,13 @@ SELECT xmlagg(x) FROM (SELECT * FROM test ORDER BY y DESC) AS tab;
  <bar/><foo>abc</foo>
 ```
 
+[#id](#FUNCTIONS-XML-PREDICATES)
+
 ### 9.15.2. XML Predicates [#](#FUNCTIONS-XML-PREDICATES)
 
 The expressions described in this section check properties of `xml` values.
+
+[#id](#FUNCTIONS-PRODUCING-XML-IS-DOCUMENT)
 
 #### 9.15.2.1. `IS DOCUMENT` [#](#FUNCTIONS-PRODUCING-XML-IS-DOCUMENT)
 
@@ -271,7 +294,9 @@ The expressions described in this section check properties of `xml` values.
 xml IS DOCUMENT → boolean
 ```
 
-The expression `IS DOCUMENT` returns true if the argument XML value is a proper XML document, false if it is not (that is, it is a content fragment), or null if the argument is null. See [Section 8.13](datatype-xml.html "8.13. XML Type") about the difference between documents and content fragments.
+The expression `IS DOCUMENT` returns true if the argument XML value is a proper XML document, false if it is not (that is, it is a content fragment), or null if the argument is null. See [Section 8.13](datatype-xml) about the difference between documents and content fragments.
+
+[#id](#FUNCTIONS-PRODUCING-XML-IS-NOT-DOCUMENT)
 
 #### 9.15.2.2. `IS NOT DOCUMENT` [#](#FUNCTIONS-PRODUCING-XML-IS-NOT-DOCUMENT)
 
@@ -281,6 +306,8 @@ xml IS NOT DOCUMENT → boolean
 ```
 
 The expression `IS NOT DOCUMENT` returns false if the argument XML value is a proper XML document, true if it is not (that is, it is a content fragment), or null if the argument is null.
+
+[#id](#XML-EXISTS)
 
 #### 9.15.2.3. `XMLEXISTS` [#](#XML-EXISTS)
 
@@ -303,9 +330,11 @@ SELECT xmlexists('//town[text() = ''Toronto'']' PASSING BY VALUE '<towns><town>T
 (1 row)
 ```
 
-The `BY REF` and `BY VALUE` clauses are accepted in PostgreSQL, but are ignored, as discussed in [Section D.3.2](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-POSTGRESQL "D.3.2. Incidental Limits of the Implementation").
+The `BY REF` and `BY VALUE` clauses are accepted in PostgreSQL, but are ignored, as discussed in [Section D.3.2](xml-limits-conformance#FUNCTIONS-XML-LIMITS-POSTGRESQL).
 
-In the SQL standard, the `xmlexists` function evaluates an expression in the XML Query language, but PostgreSQL allows only an XPath 1.0 expression, as discussed in [Section D.3.1](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-XPATH1 "D.3.1. Queries Are Restricted to XPath 1.0").
+In the SQL standard, the `xmlexists` function evaluates an expression in the XML Query language, but PostgreSQL allows only an XPath 1.0 expression, as discussed in [Section D.3.1](xml-limits-conformance#FUNCTIONS-XML-LIMITS-XPATH1).
+
+[#id](#XML-IS-WELL-FORMED)
 
 #### 9.15.2.4. `xml_is_well_formed` [#](#XML-IS-WELL-FORMED)
 
@@ -316,7 +345,7 @@ xml_is_well_formed_document ( text ) → boolean
 xml_is_well_formed_content ( text ) → boolean
 ```
 
-These functions check whether a `text` string represents well-formed XML, returning a Boolean result. `xml_is_well_formed_document` checks for a well-formed document, while `xml_is_well_formed_content` checks for well-formed content. `xml_is_well_formed` does the former if the [xmloption](runtime-config-client.html#GUC-XMLOPTION) configuration parameter is set to `DOCUMENT`, or the latter if it is set to `CONTENT`. This means that `xml_is_well_formed` is useful for seeing whether a simple cast to type `xml` will succeed, whereas the other two functions are useful for seeing whether the corresponding variants of `XMLPARSE` will succeed.
+These functions check whether a `text` string represents well-formed XML, returning a Boolean result. `xml_is_well_formed_document` checks for a well-formed document, while `xml_is_well_formed_content` checks for well-formed content. `xml_is_well_formed` does the former if the [xmloption](runtime-config-client#GUC-XMLOPTION) configuration parameter is set to `DOCUMENT`, or the latter if it is set to `CONTENT`. This means that `xml_is_well_formed` is useful for seeing whether a simple cast to type `xml` will succeed, whereas the other two functions are useful for seeing whether the corresponding variants of `XMLPARSE` will succeed.
 
 Examples:
 
@@ -357,9 +386,13 @@ SELECT xml_is_well_formed_document('<pg:foo xmlns:pg="http://postgresql.org/stuf
 
 The last example shows that the checks include whether namespaces are correctly matched.
 
+[#id](#FUNCTIONS-XML-PROCESSING)
+
 ### 9.15.3. Processing XML [#](#FUNCTIONS-XML-PROCESSING)
 
 To process values of data type `xml`, PostgreSQL offers the functions `xpath` and `xpath_exists`, which evaluate XPath 1.0 expressions, and the `XMLTABLE` table function.
+
+[#id](#FUNCTIONS-XML-PROCESSING-XPATH)
 
 #### 9.15.3.1. `xpath` [#](#FUNCTIONS-XML-PROCESSING-XPATH)
 
@@ -400,6 +433,8 @@ SELECT xpath('//mydefns:b/text()', '<a xmlns="http://example.com"><b>test</b></a
 (1 row)
 ```
 
+[#id](#FUNCTIONS-XML-PROCESSING-XPATH-EXISTS)
+
 #### 9.15.3.2. `xpath_exists` [#](#FUNCTIONS-XML-PROCESSING-XPATH-EXISTS)
 
 ```
@@ -422,6 +457,8 @@ SELECT xpath_exists('/my:a/text()', '<my:a xmlns:my="http://example.com">test</m
 (1 row)
 ```
 
+[#id](#FUNCTIONS-XML-PROCESSING-XMLTABLE)
+
 #### 9.15.3.3. `xmltable` [#](#FUNCTIONS-XML-PROCESSING-XMLTABLE)
 
 ```
@@ -441,9 +478,9 @@ The optional `XMLNAMESPACES` clause gives a comma-separated list of namespace de
 
 The required *`row_expression`* argument is an XPath 1.0 expression (given as `text`) that is evaluated, passing the XML value *`document_expression`* as its context item, to obtain a set of XML nodes. These nodes are what `xmltable` transforms into output rows. No rows will be produced if the *`document_expression`* is null, nor if the *`row_expression`* produces an empty node-set or any value other than a node-set.
 
-*`document_expression`* provides the context item for the *`row_expression`*. It must be a well-formed XML document; fragments/forests are not accepted. The `BY REF` and `BY VALUE` clauses are accepted but ignored, as discussed in [Section D.3.2](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-POSTGRESQL "D.3.2. Incidental Limits of the Implementation").
+*`document_expression`* provides the context item for the *`row_expression`*. It must be a well-formed XML document; fragments/forests are not accepted. The `BY REF` and `BY VALUE` clauses are accepted but ignored, as discussed in [Section D.3.2](xml-limits-conformance#FUNCTIONS-XML-LIMITS-POSTGRESQL).
 
-In the SQL standard, the `xmltable` function evaluates expressions in the XML Query language, but PostgreSQL allows only XPath 1.0 expressions, as discussed in [Section D.3.1](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-XPATH1 "D.3.1. Queries Are Restricted to XPath 1.0").
+In the SQL standard, the `xmltable` function evaluates expressions in the XML Query language, but PostgreSQL allows only XPath 1.0 expressions, as discussed in [Section D.3.1](xml-limits-conformance#FUNCTIONS-XML-LIMITS-XPATH1).
 
 The required `COLUMNS` clause specifies the column(s) that will be produced in the output table. See the syntax summary above for the format. A name is required for each column, as is a data type (unless `FOR ORDINALITY` is specified, in which case type `integer` is implicit). The path, default and nullability clauses are optional.
 
@@ -451,7 +488,7 @@ A column marked `FOR ORDINALITY` will be populated with row numbers, starting wi
 
 ### Note
 
-XPath 1.0 does not specify an order for nodes in a node-set, so code that relies on a particular order of the results will be implementation-dependent. Details can be found in [Section D.3.1.2](xml-limits-conformance.html#XML-XPATH-1-SPECIFICS "D.3.1.2. Restriction of XPath to 1.0").
+XPath 1.0 does not specify an order for nodes in a node-set, so code that relies on a particular order of the results will be implementation-dependent. Details can be found in [Section D.3.1.2](xml-limits-conformance#XML-XPATH-1-SPECIFICS).
 
 The *`column_expression`* for a column is an XPath 1.0 expression that is evaluated for each row, with the current node from the *`row_expression`* result as its context item, to find the value of the column. If no *`column_expression`* is given, then the column name is used as an implicit path.
 
@@ -463,7 +500,7 @@ A non-XML result assigned to an `xml` output column produces content, a single t
 
 The string value of an XML element is the concatenation, in document order, of all text nodes contained in that element and its descendants. The string value of an element with no descendant text nodes is an empty string (not `NULL`). Any `xsi:nil` attributes are ignored. Note that the whitespace-only `text()` node between two non-text elements is preserved, and that leading whitespace on a `text()` node is not flattened. The XPath 1.0 `string` function may be consulted for the rules defining the string value of other XML node types and non-XML values.
 
-The conversion rules presented here are not exactly those of the SQL standard, as discussed in [Section D.3.1.3](xml-limits-conformance.html#FUNCTIONS-XML-LIMITS-CASTS "D.3.1.3. Mappings between SQL and XML Data Types and Values").
+The conversion rules presented here are not exactly those of the SQL standard, as discussed in [Section D.3.1.3](xml-limits-conformance#FUNCTIONS-XML-LIMITS-CASTS).
 
 If the path expression returns an empty node-set (typically, when it does not match) for a given row, the column will be set to `NULL`, unless a *`default_expression`* is specified; then the value resulting from evaluating that expression is used.
 
@@ -560,6 +597,8 @@ SELECT xmltable.*
 (3 rows)
 ```
 
+[#id](#FUNCTIONS-XML-MAPPING)
+
 ### 9.15.4. Mapping Tables to XML [#](#FUNCTIONS-XML-MAPPING)
 
 The following functions map the contents of relational tables to XML values. They can be thought of as XML export functionality:
@@ -574,7 +613,7 @@ cursor_to_xml ( cursor refcursor, count integer, nulls boolean,
                 tableforest boolean, targetns text ) → xml
 ```
 
-`table_to_xml` maps the content of the named table, passed as parameter *`table`*. The `regclass` type accepts strings identifying tables using the usual notation, including optional schema qualification and double quotes (see [Section 8.19](datatype-oid.html "8.19. Object Identifier Types") for details). `query_to_xml` executes the query whose text is passed as parameter *`query`* and maps the result set. `cursor_to_xml` fetches the indicated number of rows from the cursor specified by the parameter *`cursor`*. This variant is recommended if large tables have to be mapped, because the result value is built up in memory by each function.
+`table_to_xml` maps the content of the named table, passed as parameter *`table`*. The `regclass` type accepts strings identifying tables using the usual notation, including optional schema qualification and double quotes (see [Section 8.19](datatype-oid) for details). `query_to_xml` executes the query whose text is passed as parameter *`query`* and maps the result set. `cursor_to_xml` fetches the indicated number of rows from the cursor specified by the parameter *`cursor`*. This variant is recommended if large tables have to be mapped, because the result value is built up in memory by each function.
 
 If *`tableforest`* is false, then the resulting XML document looks like this:
 
@@ -712,7 +751,9 @@ The result of a database content mapping looks like this:
 
 where the schema mapping is as above.
 
-As an example of using the output produced by these functions, [Example 9.1](functions-xml.html#XSLT-XML-HTML "Example 9.1. XSLT Stylesheet for Converting SQL/XML Output to HTML") shows an XSLT stylesheet that converts the output of `table_to_xml_and_xmlschema` to an HTML document containing a tabular rendition of the table data. In a similar manner, the results from these functions can be converted into other XML-based formats.
+As an example of using the output produced by these functions, [Example 9.1](functions-xml#XSLT-XML-HTML) shows an XSLT stylesheet that converts the output of `table_to_xml_and_xmlschema` to an HTML document containing a tabular rendition of the table data. In a similar manner, the results from these functions can be converted into other XML-based formats.
+
+[#id](#XSLT-XML-HTML)
 
 **Example 9.1. XSLT Stylesheet for Converting SQL/XML Output to HTML**
 
@@ -757,6 +798,7 @@ As an example of using the output produced by these functions, [Example 9.1](fu
             </tr>
           </xsl:for-each>
         </table>
+</figure>
       </body>
     </html>
   </xsl:template>

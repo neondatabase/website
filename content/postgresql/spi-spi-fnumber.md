@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-FNUMBER)
+
 ## SPI\_fnumber
 
 SPI\_fnumber — determine the column number for the specified column name
@@ -5,9 +7,10 @@ SPI\_fnumber — determine the column number for the specified column name
 ## Synopsis
 
 ```
-
 int SPI_fnumber(TupleDesc rowdesc, const char * colname)
 ```
+
+[#id](#id-1.8.12.9.5.5)
 
 ## Description
 
@@ -15,15 +18,19 @@ int SPI_fnumber(TupleDesc rowdesc, const char * colname)
 
 If *`colname`* refers to a system column (e.g., `ctid`) then the appropriate negative column number will be returned. The caller should be careful to test the return value for exact equality to `SPI_ERROR_NOATTRIBUTE` to detect an error; testing the result for less than or equal to 0 is not correct unless system columns should be rejected.
 
+[#id](#id-1.8.12.9.5.6)
+
 ## Arguments
 
 * `TupleDesc rowdesc`
 
-    input row description
+  input row description
 
 * `const char * colname`
 
-    column name
+  column name
+
+[#id](#id-1.8.12.9.5.7)
 
 ## Return Value
 

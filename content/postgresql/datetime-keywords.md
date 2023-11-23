@@ -1,6 +1,10 @@
+[#id](#DATETIME-KEYWORDS)
+
 ## B.3. Date/Time Key Words [#](#DATETIME-KEYWORDS)
 
-[Table B.1](datetime-keywords.html#DATETIME-MONTH-TABLE "Table B.1. Month Names") shows the tokens that are recognized as names of months.
+[Table B.1](datetime-keywords#DATETIME-MONTH-TABLE) shows the tokens that are recognized as names of months.
+
+[#id](#DATETIME-MONTH-TABLE)
 
 **Table B.1. Month Names**
 
@@ -19,9 +23,10 @@
 | November  | Nov           |
 | December  | Dec           |
 
-\
 
-[Table B.2](datetime-keywords.html#DATETIME-DOW-TABLE "Table B.2. Day of the Week Names") shows the tokens that are recognized as names of days of the week.
+[Table B.2](datetime-keywords#DATETIME-DOW-TABLE) shows the tokens that are recognized as names of days of the week.
+
+[#id](#DATETIME-DOW-TABLE)
 
 **Table B.2. Day of the Week Names**
 
@@ -35,9 +40,10 @@
 | Friday    | Fri              |
 | Saturday  | Sat              |
 
-\
 
-[Table B.3](datetime-keywords.html#DATETIME-MOD-TABLE "Table B.3. Date/Time Field Modifiers") shows the tokens that serve various modifier purposes.
+[Table B.3](datetime-keywords#DATETIME-MOD-TABLE) shows the tokens that serve various modifier purposes.
+
+[#id](#DATETIME-MOD-TABLE)
 
 **Table B.3. Date/Time Field Modifiers**
 

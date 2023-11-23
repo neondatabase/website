@@ -1,3 +1,5 @@
+[#id](#OID2NAME)
+
 ## oid2name
 
 oid2name — resolve OIDs and file nodes in a PostgreSQL data directory
@@ -6,9 +8,11 @@ oid2name — resolve OIDs and file nodes in a PostgreSQL data directory
 
 `oid2name` \[*`option`*...]
 
+[#id](#id-1.11.8.4.3.5)
+
 ## Description
 
-oid2name is a utility program that helps administrators to examine the file structure used by PostgreSQL. To make use of it, you need to be familiar with the database file structure, which is described in [Chapter 73](storage.html "Chapter 73. Database Physical Storage").
+oid2name is a utility program that helps administrators to examine the file structure used by PostgreSQL. To make use of it, you need to be familiar with the database file structure, which is described in [Chapter 73](storage).
 
 ### Note
 
@@ -16,71 +20,73 @@ The name “oid2name” is historical, and is actually rather misleading, since 
 
 oid2name connects to a target database and extracts OID, filenode, and/or table name information. You can also have it show database OIDs or tablespace OIDs.
 
+[#id](#id-1.11.8.4.3.6)
+
 ## Options
 
 oid2name accepts the following command-line arguments:
 
 * `-f filenode``--filenode=filenode`
 
-    show info for table with filenode *`filenode`*.
+  show info for table with filenode *`filenode`*.
 
 * `-i``--indexes`
 
-    include indexes and sequences in the listing.
+  include indexes and sequences in the listing.
 
 * `-o oid``--oid=oid`
 
-    show info for table with OID *`oid`*.
+  show info for table with OID *`oid`*.
 
 * `-q``--quiet`
 
-    omit headers (useful for scripting).
+  omit headers (useful for scripting).
 
 * `-s``--tablespaces`
 
-    show tablespace OIDs.
+  show tablespace OIDs.
 
 * `-S``--system-objects`
 
-    include system objects (those in `information_schema`, `pg_toast` and `pg_catalog` schemas).
+  include system objects (those in `information_schema`, `pg_toast` and `pg_catalog` schemas).
 
 * `-t tablename_pattern``--table=tablename_pattern`
 
-    show info for table(s) matching *`tablename_pattern`*.
+  show info for table(s) matching *`tablename_pattern`*.
 
 * `-V``--version`
 
-    Print the oid2name version and exit.
+  Print the oid2name version and exit.
 
 * `-x``--extended`
 
-    display more information about each object shown: tablespace name, schema name, and OID.
+  display more information about each object shown: tablespace name, schema name, and OID.
 
 * `-?``--help`
 
-    Show help about oid2name command line arguments, and exit.
+  Show help about oid2name command line arguments, and exit.
 
 oid2name also accepts the following command-line arguments for connection parameters:
 
 * `-d database``--dbname=database`
 
-    database to connect to.
+  database to connect to.
 
 * `-h host``--host=host`
 
-    database server's host.
+  database server's host.
 
 * `-H host`
 
-    database server's host. Use of this parameter is *deprecated* as of PostgreSQL 12.
+  database server's host. Use of this parameter is *deprecated* as of PostgreSQL 12.
 
 * `-p port``--port=port`
 
-    database server's port.
+  database server's port.
 
 * `-U username``--username=username`
 
-    user name to connect as.
+  user name to connect as.
 
 To display specific tables, select which tables to show by using `-o`, `-f` and/or `-t`. `-o` takes an OID, `-f` takes a filenode, and `-t` takes a table name (actually, it's a `LIKE` pattern, so you can use things like `foo%`). You can use as many of these options as you like, and the listing will include all objects matched by any of the options. But note that these options can only show objects in the database given by `-d`.
 
@@ -88,24 +94,29 @@ If you don't give any of `-o`, `-f` or `-t`, but do give `-d`, it will list all 
 
 If you don't give `-d` either, it will show a listing of database OIDs. Alternatively you can give `-s` to get a tablespace listing.
 
+[#id](#id-1.11.8.4.3.7)
+
 ## Environment
 
 * `PGHOST``PGPORT``PGUSER`
 
-    Default connection parameters.
+  Default connection parameters.
 
-This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars.html "34.15. Environment Variables")).
+This utility, like most other PostgreSQL utilities, also uses the environment variables supported by libpq (see [Section 34.15](libpq-envars)).
 
 The environment variable `PG_COLOR` specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
+
+[#id](#id-1.11.8.4.3.8)
 
 ## Notes
 
 oid2name requires a running database server with non-corrupt system catalogs. It is therefore of only limited use for recovering from catastrophic database corruption situations.
 
+[#id](#id-1.11.8.4.3.9)
+
 ## Examples
 
 ```
-
 $ # what's in this database server, anyway?
 $ oid2name
 All databases:
@@ -223,6 +234,8 @@ From database "alvherre":
 ----------------------
     155156         foo
 ```
+
+[#id](#id-1.11.8.4.3.10)
 
 ## Author
 

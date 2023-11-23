@@ -1,28 +1,36 @@
-## F.31. pg\_stat\_statements — track statistics of SQL planning and execution [#](#PGSTATSTATEMENTS)
+[#id](#PGSTATSTATEMENTS)
 
-  * *   [F.31.1. The `pg_stat_statements` View](pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
-  * [F.31.2. The `pg_stat_statements_info` View](pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO)
-  * [F.31.3. Functions](pgstatstatements.html#PGSTATSTATEMENTS-FUNCS)
-  * [F.31.4. Configuration Parameters](pgstatstatements.html#PGSTATSTATEMENTS-CONFIG-PARAMS)
-  * [F.31.5. Sample Output](pgstatstatements.html#PGSTATSTATEMENTS-SAMPLE-OUTPUT)
-  * [F.31.6. Authors](pgstatstatements.html#PGSTATSTATEMENTS-AUTHORS)
+## F.32. pg\_stat\_statements — track statistics of SQL planning and execution [#](#PGSTATSTATEMENTS)
+
+  * [F.32.1. The `pg_stat_statements` View](pgstatstatements#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
+  * [F.32.2. The `pg_stat_statements_info` View](pgstatstatements#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO)
+  * [F.32.3. Functions](pgstatstatements#PGSTATSTATEMENTS-FUNCS)
+  * [F.32.4. Configuration Parameters](pgstatstatements#PGSTATSTATEMENTS-CONFIG-PARAMS)
+  * [F.32.5. Sample Output](pgstatstatements#PGSTATSTATEMENTS-SAMPLE-OUTPUT)
+  * [F.32.6. Authors](pgstatstatements#PGSTATSTATEMENTS-AUTHORS)
+
+
 
 The `pg_stat_statements` module provides a means for tracking planning and execution statistics of all SQL statements executed by a server.
 
-The module must be loaded by adding `pg_stat_statements` to [shared\_preload\_libraries](runtime-config-client.html#GUC-SHARED-PRELOAD-LIBRARIES) in `postgresql.conf`, because it requires additional shared memory. This means that a server restart is needed to add or remove the module. In addition, query identifier calculation must be enabled in order for the module to be active, which is done automatically if [compute\_query\_id](runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID) is set to `auto` or `on`, or any third-party module that calculates query identifiers is loaded.
+The module must be loaded by adding `pg_stat_statements` to [shared\_preload\_libraries](runtime-config-client#GUC-SHARED-PRELOAD-LIBRARIES) in `postgresql.conf`, because it requires additional shared memory. This means that a server restart is needed to add or remove the module. In addition, query identifier calculation must be enabled in order for the module to be active, which is done automatically if [compute\_query\_id](runtime-config-statistics#GUC-COMPUTE-QUERY-ID) is set to `auto` or `on`, or any third-party module that calculates query identifiers is loaded.
 
 When `pg_stat_statements` is active, it tracks statistics across all databases of the server. To access and manipulate these statistics, the module provides views `pg_stat_statements` and `pg_stat_statements_info`, and the utility functions `pg_stat_statements_reset` and `pg_stat_statements`. These are not available globally but can be enabled for a specific database with `CREATE EXTENSION pg_stat_statements`.
 
-### F.31.1. The `pg_stat_statements` View [#](#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
+[#id](#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
 
-The statistics gathered by the module are made available via a view named `pg_stat_statements`. This view contains one row for each distinct combination of database ID, user ID, query ID and whether it's a top-level statement or not (up to the maximum number of distinct statements that the module can track). The columns of the view are shown in [Table F.22](pgstatstatements.html#PGSTATSTATEMENTS-COLUMNS "Table F.22. pg_stat_statements Columns").
+### F.32.1. The `pg_stat_statements` View [#](#PGSTATSTATEMENTS-PG-STAT-STATEMENTS)
+
+The statistics gathered by the module are made available via a view named `pg_stat_statements`. This view contains one row for each distinct combination of database ID, user ID, query ID and whether it's a top-level statement or not (up to the maximum number of distinct statements that the module can track). The columns of the view are shown in [Table F.22](pgstatstatements#PGSTATSTATEMENTS-COLUMNS).
+
+[#id](#PGSTATSTATEMENTS-COLUMNS)
 
 **Table F.22. `pg_stat_statements` Columns**
 
 | Column TypeDescription                                                                                                                                                                                                        |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `userid` `oid` (references [`pg_authid`](catalog-pg-authid.html "53.8. pg_authid").`oid`)OID of user who executed the statement                                                                                               |
-| `dbid` `oid` (references [`pg_database`](catalog-pg-database.html "53.15. pg_database").`oid`)OID of database in which the statement was executed                                                                             |
+| `userid` `oid` (references [`pg_authid`](catalog-pg-authid).`oid`)OID of user who executed the statement                                                                                                                 |
+| `dbid` `oid` (references [`pg_database`](catalog-pg-database).`oid`)OID of database in which the statement was executed                                                                                                  |
 | `toplevel` `bool`True if the query was executed as a top-level statement (always true if `pg_stat_statements.track` is set to `top`)                                                                                          |
 | `queryid` `bigint`Hash code to identify identical normalized queries.                                                                                                                                                         |
 | `query` `text`Text of a representative statement                                                                                                                                                                              |
@@ -49,19 +57,15 @@ The statistics gathered by the module are made available via a view named `pg_st
 | `local_blks_written` `bigint`Total number of local blocks written by the statement                                                                                                                                            |
 | `temp_blks_read` `bigint`Total number of temp blocks read by the statement                                                                                                                                                    |
 | `temp_blks_written` `bigint`Total number of temp blocks written by the statement                                                                                                                                              |
-| `shared_blk_read_time` `double precision`Total time the statement spent reading shared blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)        |
-| `shared_blk_write_time` `double precision`Total time the statement spent writing shared blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)       |
-| `local_blk_read_time` `double precision`Total time the statement spent reading local blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)          |
-| `local_blk_write_time` `double precision`Total time the statement spent writing local blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)         |
-| `temp_blk_read_time` `double precision`Total time the statement spent reading temporary file blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)  |
-| `temp_blk_write_time` `double precision`Total time the statement spent writing temporary file blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics.html#GUC-TRACK-IO-TIMING) is enabled, otherwise zero) |
+| `blk_read_time` `double precision`Total time the statement spent reading data file blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)            |
+| `blk_write_time` `double precision`Total time the statement spent writing data file blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)           |
+| `temp_blk_read_time` `double precision`Total time the statement spent reading temporary file blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero)  |
+| `temp_blk_write_time` `double precision`Total time the statement spent writing temporary file blocks, in milliseconds (if [track\_io\_timing](runtime-config-statistics#GUC-TRACK-IO-TIMING) is enabled, otherwise zero) |
 | `wal_records` `bigint`Total number of WAL records generated by the statement                                                                                                                                                  |
 | `wal_fpi` `bigint`Total number of WAL full page images generated by the statement                                                                                                                                             |
 | `wal_bytes` `numeric`Total amount of WAL generated by the statement in bytes                                                                                                                                                  |
 | `jit_functions` `bigint`Total number of functions JIT-compiled by the statement                                                                                                                                               |
 | `jit_generation_time` `double precision`Total time spent by the statement on generating JIT code, in milliseconds                                                                                                             |
-| `jit_deform_count` `bigint`Total number of tuple deform functions JIT-compiled by the statement                                                                                                                               |
-| `jit_deform_time` `double precision`Total time spent by the statement on JIT-compiling tuple deform functions, in milliseconds                                                                                                |
 | `jit_inlining_count` `bigint`Number of times functions have been inlined                                                                                                                                                      |
 | `jit_inlining_time` `double precision`Total time spent by the statement on inlining functions, in milliseconds                                                                                                                |
 | `jit_optimization_count` `bigint`Number of times the statement has been optimized                                                                                                                                             |
@@ -69,7 +73,6 @@ The statistics gathered by the module are made available via a view named `pg_st
 | `jit_emission_count` `bigint`Number of times code has been emitted                                                                                                                                                            |
 | `jit_emission_time` `double precision`Total time spent by the statement on emitting code, in milliseconds                                                                                                                     |
 
-\
 
 For security reasons, only superusers and roles with privileges of the `pg_read_all_stats` role are allowed to see the SQL text and `queryid` of queries executed by other users. Other users can see the statistics, however, if the view has been installed in their database.
 
@@ -77,11 +80,11 @@ Plannable queries (that is, `SELECT`, `INSERT`, `UPDATE`, `DELETE`, and `MERGE`)
 
 ### Note
 
-The following details about constant replacement and `queryid` only apply when [compute\_query\_id](runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID) is enabled. If you use an external module instead to compute `queryid`, you should refer to its documentation for details.
+The following details about constant replacement and `queryid` only apply when [compute\_query\_id](runtime-config-statistics#GUC-COMPUTE-QUERY-ID) is enabled. If you use an external module instead to compute `queryid`, you should refer to its documentation for details.
 
 When a constant's value has been ignored for purposes of matching the query to other queries, the constant is replaced by a parameter symbol, such as `$1`, in the `pg_stat_statements` display. The rest of the query text is that of the first query that had the particular `queryid` hash value associated with the `pg_stat_statements` entry.
 
-Queries on which normalization can be applied may be observed with constant values in `pg_stat_statements`, especially when there is a high rate of entry deallocations. To reduce the likelihood of this happening, consider increasing `pg_stat_statements.max`. The `pg_stat_statements_info` view, discussed below in [Section F.31.2](pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO "F.31.2. The pg_stat_statements_info View"), provides statistics about entry deallocations.
+Queries on which normalization can be applied may be observed with constant values in `pg_stat_statements`, especially when there is a high rate of entry deallocations. To reduce the likelihood of this happening, consider increasing `pg_stat_statements.max`. The `pg_stat_statements_info` view, discussed below in [Section F.32.2](pgstatstatements#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO), provides statistics about entry deallocations.
 
 In some cases, queries with visibly different texts might get merged into a single `pg_stat_statements` entry. Normally this will happen only for semantically equivalent queries, but there is a small chance of hash collisions causing unrelated queries to be merged into one entry. (This cannot happen for queries belonging to different users or databases, however.)
 
@@ -97,9 +100,15 @@ The representative query texts are kept in an external disk file, and do not con
 
 `plans` and `calls` aren't always expected to match because planning and execution statistics are updated at their respective end phase, and only for successful operations. For example, if a statement is successfully planned but fails during the execution phase, only its planning statistics will be updated. If planning is skipped because a cached plan is used, only its execution statistics will be updated.
 
-### F.31.2. The `pg_stat_statements_info` View [#](#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO)
+[#id](#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO)
 
-The statistics of the `pg_stat_statements` module itself are tracked and made available via a view named `pg_stat_statements_info`. This view contains only a single row. The columns of the view are shown in [Table F.23](pgstatstatements.html#PGSTATSTATEMENTSINFO-COLUMNS "Table F.23. pg_stat_statements_info Columns").
+### F.32.2. The `pg_stat_statements_info` View [#](#PGSTATSTATEMENTS-PG-STAT-STATEMENTS-INFO)
+
+
+
+The statistics of the `pg_stat_statements` module itself are tracked and made available via a view named `pg_stat_statements_info`. This view contains only a single row. The columns of the view are shown in [Table F.23](pgstatstatements#PGSTATSTATEMENTSINFO-COLUMNS).
+
+[#id](#PGSTATSTATEMENTSINFO-COLUMNS)
 
 **Table F.23. `pg_stat_statements_info` Columns**
 
@@ -108,44 +117,47 @@ The statistics of the `pg_stat_statements` module itself are tracked and made av
 | `dealloc` `bigint`Total number of times `pg_stat_statements` entries about the least-executed statements were deallocated because more distinct statements than `pg_stat_statements.max` were observed |
 | `stats_reset` `timestamp with time zone`Time at which all statistics in the `pg_stat_statements` view were last reset.                                                                                 |
 
-### F.31.3. Functions [#](#PGSTATSTATEMENTS-FUNCS)
+[#id](#PGSTATSTATEMENTS-FUNCS)
+
+### F.32.3. Functions [#](#PGSTATSTATEMENTS-FUNCS)
 
 * `pg_stat_statements_reset(userid Oid, dbid Oid, queryid bigint) returns void`
 
-    `pg_stat_statements_reset` discards statistics gathered so far by `pg_stat_statements` corresponding to the specified `userid`, `dbid` and `queryid`. If any of the parameters are not specified, the default value `0`(invalid) is used for each of them and the statistics that match with other parameters will be reset. If no parameter is specified or all the specified parameters are `0`(invalid), it will discard all statistics. If all statistics in the `pg_stat_statements` view are discarded, it will also reset the statistics in the `pg_stat_statements_info` view. By default, this function can only be executed by superusers. Access may be granted to others using `GRANT`.
+  `pg_stat_statements_reset` discards statistics gathered so far by `pg_stat_statements` corresponding to the specified `userid`, `dbid` and `queryid`. If any of the parameters are not specified, the default value `0`(invalid) is used for each of them and the statistics that match with other parameters will be reset. If no parameter is specified or all the specified parameters are `0`(invalid), it will discard all statistics. If all statistics in the `pg_stat_statements` view are discarded, it will also reset the statistics in the `pg_stat_statements_info` view. By default, this function can only be executed by superusers. Access may be granted to others using `GRANT`.
 
 * `pg_stat_statements(showtext boolean) returns setof record`
 
-    The `pg_stat_statements` view is defined in terms of a function also named `pg_stat_statements`. It is possible for clients to call the `pg_stat_statements` function directly, and by specifying `showtext := false` have query text be omitted (that is, the `OUT` argument that corresponds to the view's `query` column will return nulls). This feature is intended to support external tools that might wish to avoid the overhead of repeatedly retrieving query texts of indeterminate length. Such tools can instead cache the first query text observed for each entry themselves, since that is all `pg_stat_statements` itself does, and then retrieve query texts only as needed. Since the server stores query texts in a file, this approach may reduce physical I/O for repeated examination of the `pg_stat_statements` data.
+  The `pg_stat_statements` view is defined in terms of a function also named `pg_stat_statements`. It is possible for clients to call the `pg_stat_statements` function directly, and by specifying `showtext := false` have query text be omitted (that is, the `OUT` argument that corresponds to the view's `query` column will return nulls). This feature is intended to support external tools that might wish to avoid the overhead of repeatedly retrieving query texts of indeterminate length. Such tools can instead cache the first query text observed for each entry themselves, since that is all `pg_stat_statements` itself does, and then retrieve query texts only as needed. Since the server stores query texts in a file, this approach may reduce physical I/O for repeated examination of the `pg_stat_statements` data.
 
-### F.31.4. Configuration Parameters [#](#PGSTATSTATEMENTS-CONFIG-PARAMS)
+[#id](#PGSTATSTATEMENTS-CONFIG-PARAMS)
+
+### F.32.4. Configuration Parameters [#](#PGSTATSTATEMENTS-CONFIG-PARAMS)
 
 * `pg_stat_statements.max` (`integer`)
 
-    `pg_stat_statements.max` is the maximum number of statements tracked by the module (i.e., the maximum number of rows in the `pg_stat_statements` view). If more distinct statements than that are observed, information about the least-executed statements is discarded. The number of times such information was discarded can be seen in the `pg_stat_statements_info` view. The default value is 5000. This parameter can only be set at server start.
+  `pg_stat_statements.max` is the maximum number of statements tracked by the module (i.e., the maximum number of rows in the `pg_stat_statements` view). If more distinct statements than that are observed, information about the least-executed statements is discarded. The number of times such information was discarded can be seen in the `pg_stat_statements_info` view. The default value is 5000. This parameter can only be set at server start.
 
 * `pg_stat_statements.track` (`enum`)
 
-    `pg_stat_statements.track` controls which statements are counted by the module. Specify `top` to track top-level statements (those issued directly by clients), `all` to also track nested statements (such as statements invoked within functions), or `none` to disable statement statistics collection. The default value is `top`. Only superusers can change this setting.
+  `pg_stat_statements.track` controls which statements are counted by the module. Specify `top` to track top-level statements (those issued directly by clients), `all` to also track nested statements (such as statements invoked within functions), or `none` to disable statement statistics collection. The default value is `top`. Only superusers can change this setting.
 
 * `pg_stat_statements.track_utility` (`boolean`)
 
-    `pg_stat_statements.track_utility` controls whether utility commands are tracked by the module. Utility commands are all those other than `SELECT`, `INSERT`, `UPDATE`, `DELETE`, and `MERGE`. The default value is `on`. Only superusers can change this setting.
+  `pg_stat_statements.track_utility` controls whether utility commands are tracked by the module. Utility commands are all those other than `SELECT`, `INSERT`, `UPDATE`, `DELETE`, and `MERGE`. The default value is `on`. Only superusers can change this setting.
 
 * `pg_stat_statements.track_planning` (`boolean`)
 
-    `pg_stat_statements.track_planning` controls whether planning operations and duration are tracked by the module. Enabling this parameter may incur a noticeable performance penalty, especially when statements with identical query structure are executed by many concurrent connections which compete to update a small number of `pg_stat_statements` entries. The default value is `off`. Only superusers can change this setting.
+  `pg_stat_statements.track_planning` controls whether planning operations and duration are tracked by the module. Enabling this parameter may incur a noticeable performance penalty, especially when statements with identical query structure are executed by many concurrent connections which compete to update a small number of `pg_stat_statements` entries. The default value is `off`. Only superusers can change this setting.
 
 * `pg_stat_statements.save` (`boolean`)
 
-    `pg_stat_statements.save` specifies whether to save statement statistics across server shutdowns. If it is `off` then statistics are not saved at shutdown nor reloaded at server start. The default value is `on`. This parameter can only be set in the `postgresql.conf` file or on the server command line.
+  `pg_stat_statements.save` specifies whether to save statement statistics across server shutdowns. If it is `off` then statistics are not saved at shutdown nor reloaded at server start. The default value is `on`. This parameter can only be set in the `postgresql.conf` file or on the server command line.
 
 The module requires additional shared memory proportional to `pg_stat_statements.max`. Note that this memory is consumed whenever the module is loaded, even if `pg_stat_statements.track` is set to `none`.
 
 These parameters must be set in `postgresql.conf`. Typical usage might be:
 
 ```
-
 # postgresql.conf
 shared_preload_libraries = 'pg_stat_statements'
 
@@ -154,10 +166,11 @@ pg_stat_statements.max = 10000
 pg_stat_statements.track = all
 ```
 
-### F.31.5. Sample Output [#](#PGSTATSTATEMENTS-SAMPLE-OUTPUT)
+[#id](#PGSTATSTATEMENTS-SAMPLE-OUTPUT)
+
+### F.32.5. Sample Output [#](#PGSTATSTATEMENTS-SAMPLE-OUTPUT)
 
 ```
-
 bench=# SELECT pg_stat_statements_reset();
 
 $ pgbench -i bench
@@ -257,6 +270,8 @@ rows            | 0
 hit_percent     |
 ```
 
-### F.31.6. Authors [#](#PGSTATSTATEMENTS-AUTHORS)
+[#id](#PGSTATSTATEMENTS-AUTHORS)
+
+### F.32.6. Authors [#](#PGSTATSTATEMENTS-AUTHORS)
 
 Takahiro Itagaki `<itagaki.takahiro@oss.ntt.co.jp>`. Query normalization added by Peter Geoghegan `<peter@2ndquadrant.com>`.

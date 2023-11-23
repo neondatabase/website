@@ -19,23 +19,14 @@ import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 
 const Heading =
   (Tag) =>
   // eslint-disable-next-line react/prop-types
-  ({ children, className = null }) => {
-    const href =
-      // eslint-disable-next-line react/prop-types
-      Array.isArray(children) ? children.find((child) => child?.props?.href)?.props?.href : null;
-
-    const id = href?.replace('#', '');
-
-    return (
-      <Tag className={clsx(className, 'postgres-heading')} id={id || undefined}>
-        {children}
-      </Tag>
-    );
-  };
+  ({ children, className = null }) => (
+    <Tag className={clsx(className, 'postgres-heading not-prose')}>{children}</Tag>
+  );
 
 const getHeadingComponent = (heading, withoutAnchorHeading, isPostgres) => {
   if (withoutAnchorHeading) {
@@ -72,6 +63,22 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   ),
   a: (props) => {
     const { href, children, ...otherProps } = props;
+    if (children === '#id') {
+      const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
+      return <span id={id} />;
+    }
+
+    const regex = /^(?!\/|https?:|#)[\w-]+$/;
+    if (isPostgres && regex.test(href)) {
+      const postgresHref = `${LINKS.postgres}/${href}`;
+
+      return (
+        <Link to={postgresHref} {...otherProps}>
+          {children}
+        </Link>
+      );
+    }
+
     return (
       <Link to={href} {...otherProps}>
         {children}
@@ -87,6 +94,16 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
       style={{ width: '100%', height: '100%' }}
     />
   ),
+  p: (props) => {
+    const { children, className } = props;
+    const href =
+      // eslint-disable-next-line react/prop-types
+      Array.isArray(children) ? children.find((child) => child?.props?.href)?.props?.href : null;
+
+    const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
+
+    return <p className={clsx(className, { 'postgres-paragraph': id })} id={id} {...props} />;
+  },
   YoutubeIframe,
   DefinitionList,
   Admonition,

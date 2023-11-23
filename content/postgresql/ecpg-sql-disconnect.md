@@ -1,3 +1,5 @@
+[#id](#ECPG-SQL-DISCONNECT)
+
 ## DISCONNECT
 
 DISCONNECT — terminate a database connection
@@ -12,27 +14,33 @@ DISCONNECT DEFAULT
 DISCONNECT ALL
 ```
 
+[#id](#id-1.7.5.20.9.3)
+
 ## Description
 
 `DISCONNECT` closes a connection (or all connections) to the database.
+
+[#id](#id-1.7.5.20.9.4)
 
 ## Parameters
 
 * *`connection_name`* [#](#ECPG-SQL-DISCONNECT-CONNECTION-NAME)
 
-    A database connection name established by the `CONNECT` command.
+  A database connection name established by the `CONNECT` command.
 
 * `CURRENT` [#](#ECPG-SQL-DISCONNECT-CURRENT)
 
-    Close the “current” connection, which is either the most recently opened connection, or the connection set by the `SET CONNECTION` command. This is also the default if no argument is given to the `DISCONNECT` command.
+  Close the “current” connection, which is either the most recently opened connection, or the connection set by the `SET CONNECTION` command. This is also the default if no argument is given to the `DISCONNECT` command.
 
 * `DEFAULT` [#](#ECPG-SQL-DISCONNECT-DEFAULT)
 
-    Close the default connection.
+  Close the default connection.
 
 * `ALL` [#](#ECPG-SQL-DISCONNECT-ALL)
 
-    Close all open connections.
+  Close all open connections.
+
+[#id](#id-1.7.5.20.9.5)
 
 ## Examples
 
@@ -54,10 +62,14 @@ main(void)
 }
 ```
 
+[#id](#id-1.7.5.20.9.6)
+
 ## Compatibility
 
 `DISCONNECT` is specified in the SQL standard.
 
+[#id](#id-1.7.5.20.9.7)
+
 ## See Also
 
-[CONNECT](ecpg-sql-connect.html "CONNECT"), [SET CONNECTION](ecpg-sql-set-connection.html "SET CONNECTION")
+[CONNECT](ecpg-sql-connect), [SET CONNECTION](ecpg-sql-set-connection)

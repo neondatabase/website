@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
+import useMedia from 'react-use/lib/useMedia';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -30,6 +31,7 @@ const Header = ({
 }) => {
   const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
   const headerRef = useRef(null);
+  const isMobile = useMedia('(max-width: 1023px)', false);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -39,6 +41,12 @@ const Header = ({
 
   const handleBurgerClick = () => {
     setIsMobileMenuOpen((isMobileMenuOpen) => !isMobileMenuOpen);
+  };
+
+  const findIndexName = () => {
+    if (isDocPage) return process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME;
+    if (isBlogPage) return process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME;
+    return null;
   };
 
   return (
@@ -161,27 +169,19 @@ const Header = ({
               </Button>
             )}
           </div>
-          <div className="hidden items-center lg:flex lg:gap-x-3 md:gap-x-5">
-            {isDocPage && (
-              <Search
-                className="mobile-search"
-                indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
-              />
-            )}
-            {isBlogPage && (
-              <Search
-                className="mobile-search"
-                indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
-                isBlog
-              />
-            )}
+          {isMobile && (
+            <div className="items-center flex gap-x-3 md:gap-x-5">
+              {(isDocPage || isBlogPage) && (
+                <Search className="mobile-search" indexName={findIndexName()} isBlog={isBlogPage} />
+              )}
 
-            <Burger
-              className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
-              isToggled={isMobileMenuOpen}
-              onClick={handleBurgerClick}
-            />
-          </div>
+              <Burger
+                className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
+                isToggled={isMobileMenuOpen}
+                onClick={handleBurgerClick}
+              />
+            </div>
+          )}
         </Container>
       </header>
       <MobileMenu

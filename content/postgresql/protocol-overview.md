@@ -1,8 +1,10 @@
+[#id](#PROTOCOL-OVERVIEW)
+
 ## 55.1. Overview [#](#PROTOCOL-OVERVIEW)
 
-  * *   [55.1.1. Messaging Overview](protocol-overview.html#PROTOCOL-MESSAGE-CONCEPTS)
-  * [55.1.2. Extended Query Overview](protocol-overview.html#PROTOCOL-QUERY-CONCEPTS)
-  * [55.1.3. Formats and Format Codes](protocol-overview.html#PROTOCOL-FORMAT-CODES)
+  * [55.1.1. Messaging Overview](protocol-overview#PROTOCOL-MESSAGE-CONCEPTS)
+  * [55.1.2. Extended Query Overview](protocol-overview#PROTOCOL-QUERY-CONCEPTS)
+  * [55.1.3. Formats and Format Codes](protocol-overview#PROTOCOL-FORMAT-CODES)
 
 The protocol has separate phases for startup and normal operation. In the startup phase, the frontend opens a connection to the server and authenticates itself to the satisfaction of the server. (This might involve a single message, or multiple messages depending on the authentication method being used.) If all goes well, the server then sends status information to the frontend, and finally enters normal operation. Except for the initial startup-request message, this part of the protocol is driven by the server.
 
@@ -14,6 +16,8 @@ Within normal operation, SQL commands can be executed through either of two sub-
 
 Normal operation has additional sub-protocols for special operations such as `COPY`.
 
+[#id](#PROTOCOL-MESSAGE-CONCEPTS)
+
 ### 55.1.1. Messaging Overview [#](#PROTOCOL-MESSAGE-CONCEPTS)
 
 All communication is through a stream of messages. The first byte of a message identifies the message type, and the next four bytes specify the length of the rest of the message (this length count includes itself, but not the message-type byte). The remaining contents of the message are determined by the message type. For historical reasons, the very first message sent by the client (the startup message) has no initial message-type byte.
@@ -22,6 +26,8 @@ To avoid losing synchronization with the message stream, both servers and client
 
 Conversely, both servers and clients must take care never to send an incomplete message. This is commonly done by marshaling the entire message in a buffer before beginning to send it. If a communications failure occurs partway through sending or receiving a message, the only sensible response is to abandon the connection, since there is little hope of recovering message-boundary synchronization.
 
+[#id](#PROTOCOL-QUERY-CONCEPTS)
+
 ### 55.1.2. Extended Query Overview [#](#PROTOCOL-QUERY-CONCEPTS)
 
 In the extended-query protocol, execution of SQL commands is divided into multiple steps. The state retained between steps is represented by two types of objects: *prepared statements* and *portals*. A prepared statement represents the result of parsing and semantic analysis of a textual query string. A prepared statement is not in itself ready to execute, because it might lack specific values for *parameters*. A portal represents a ready-to-execute or already-partially-executed statement, with any missing parameter values filled in. (For `SELECT` statements, a portal is equivalent to an open cursor, but we choose to use a different term since cursors don't handle non-`SELECT` statements.)
@@ -29,6 +35,8 @@ In the extended-query protocol, execution of SQL commands is divided into multip
 The overall execution cycle consists of a *parse* step, which creates a prepared statement from a textual query string; a *bind* step, which creates a portal given a prepared statement and values for any needed parameters; and an *execute* step that runs a portal's query. In the case of a query that returns rows (`SELECT`, `SHOW`, etc.), the execute step can be told to fetch only a limited number of rows, so that multiple execute steps might be needed to complete the operation.
 
 The backend can keep track of multiple prepared statements and portals (but note that these exist only within a session, and are never shared across sessions). Existing prepared statements and portals are referenced by names assigned when they were created. In addition, an “unnamed” prepared statement and portal exist. Although these behave largely the same as named objects, operations on them are optimized for the case of executing a query only once and then discarding it, whereas operations on named objects are optimized on the expectation of multiple uses.
+
+[#id](#PROTOCOL-FORMAT-CODES)
 
 ### 55.1.3. Formats and Format Codes [#](#PROTOCOL-FORMAT-CODES)
 

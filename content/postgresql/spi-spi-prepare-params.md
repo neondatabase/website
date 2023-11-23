@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-PREPARE-PARAMS)
+
 ## SPI\_prepare\_params
 
 SPI\_prepare\_params — prepare a statement, without executing it yet
@@ -5,12 +7,13 @@ SPI\_prepare\_params — prepare a statement, without executing it yet
 ## Synopsis
 
 ```
-
 SPIPlanPtr SPI_prepare_params(const char * command,
                               ParserSetupHook parserSetup,
                               void * parserSetupArg,
                               int cursorOptions)
 ```
+
+[#id](#id-1.8.12.8.11.5)
 
 ## Description
 
@@ -18,23 +21,27 @@ SPIPlanPtr SPI_prepare_params(const char * command,
 
 This function is now deprecated in favor of `SPI_prepare_extended`.
 
+[#id](#id-1.8.12.8.11.6)
+
 ## Arguments
 
 * `const char * command`
 
-    command string
+  command string
 
 * `ParserSetupHook parserSetup`
 
-    Parser hook setup function
+  Parser hook setup function
 
 * `void * parserSetupArg`
 
-    pass-through argument for *`parserSetup`*
+  pass-through argument for *`parserSetup`*
 
 * `int cursorOptions`
 
-    integer bit mask of cursor options; zero produces default behavior
+  integer bit mask of cursor options; zero produces default behavior
+
+[#id](#id-1.8.12.8.11.7)
 
 ## Return Value
 
