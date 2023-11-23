@@ -1,21 +1,30 @@
+[#id](#DDL-PARTITIONING)
+
 ## 5.11. Table Partitioning [#](#DDL-PARTITIONING)
 
-  * *   [5.11.1. Overview](ddl-partitioning.html#DDL-PARTITIONING-OVERVIEW)
-  * [5.11.2. Declarative Partitioning](ddl-partitioning.html#DDL-PARTITIONING-DECLARATIVE)
-  * [5.11.3. Partitioning Using Inheritance](ddl-partitioning.html#DDL-PARTITIONING-USING-INHERITANCE)
-  * [5.11.4. Partition Pruning](ddl-partitioning.html#DDL-PARTITION-PRUNING)
-  * [5.11.5. Partitioning and Constraint Exclusion](ddl-partitioning.html#DDL-PARTITIONING-CONSTRAINT-EXCLUSION)
-  * [5.11.6. Best Practices for Declarative Partitioning](ddl-partitioning.html#DDL-PARTITIONING-DECLARATIVE-BEST-PRACTICES)
+  * [5.11.1. Overview](ddl-partitioning#DDL-PARTITIONING-OVERVIEW)
+  * [5.11.2. Declarative Partitioning](ddl-partitioning#DDL-PARTITIONING-DECLARATIVE)
+  * [5.11.3. Partitioning Using Inheritance](ddl-partitioning#DDL-PARTITIONING-USING-INHERITANCE)
+  * [5.11.4. Partition Pruning](ddl-partitioning#DDL-PARTITION-PRUNING)
+  * [5.11.5. Partitioning and Constraint Exclusion](ddl-partitioning#DDL-PARTITIONING-CONSTRAINT-EXCLUSION)
+  * [5.11.6. Best Practices for Declarative Partitioning](ddl-partitioning#DDL-PARTITIONING-DECLARATIVE-BEST-PRACTICES)
+
+
 
 PostgreSQL supports basic table partitioning. This section describes why and how to implement partitioning as part of your database design.
+
+[#id](#DDL-PARTITIONING-OVERVIEW)
 
 ### 5.11.1. Overview [#](#DDL-PARTITIONING-OVERVIEW)
 
 Partitioning refers to splitting what is logically one large table into smaller physical pieces. Partitioning can provide several benefits:
 
 * Query performance can be improved dramatically in certain situations, particularly when most of the heavily accessed rows of the table are in a single partition or a small number of partitions. Partitioning effectively substitutes for the upper tree levels of indexes, making it more likely that the heavily-used parts of the indexes fit in memory.
+
 * When queries or updates access a large percentage of a single partition, performance can be improved by using a sequential scan of that partition instead of using an index, which would require random-access reads scattered across the whole table.
+
 * Bulk loads and deletes can be accomplished by adding or removing partitions, if the usage pattern is accounted for in the partitioning design. Dropping an individual partition using `DROP TABLE`, or doing `ALTER TABLE DETACH PARTITION`, is far faster than a bulk operation. These commands also entirely avoid the `VACUUM` overhead caused by a bulk `DELETE`.
+
 * Seldom-used data can be migrated to cheaper and slower storage media.
 
 These benefits will normally be worthwhile only when a table would otherwise be very large. The exact point at which a table will benefit from partitioning depends on the application, although a rule of thumb is that the size of the table should exceed the physical memory of the database server.
@@ -24,17 +33,19 @@ PostgreSQL offers built-in support for the following forms of partitioning:
 
 * Range Partitioning [#](#DDL-PARTITIONING-OVERVIEW-RANGE)
 
-    The table is partitioned into “ranges” defined by a key column or set of columns, with no overlap between the ranges of values assigned to different partitions. For example, one might partition by date ranges, or by ranges of identifiers for particular business objects. Each range's bounds are understood as being inclusive at the lower end and exclusive at the upper end. For example, if one partition's range is from `1` to `10`, and the next one's range is from `10` to `20`, then value `10` belongs to the second partition not the first.
+  The table is partitioned into “ranges” defined by a key column or set of columns, with no overlap between the ranges of values assigned to different partitions. For example, one might partition by date ranges, or by ranges of identifiers for particular business objects. Each range's bounds are understood as being inclusive at the lower end and exclusive at the upper end. For example, if one partition's range is from `1` to `10`, and the next one's range is from `10` to `20`, then value `10` belongs to the second partition not the first.
 
 * List Partitioning [#](#DDL-PARTITIONING-OVERVIEW-LIST)
 
-    The table is partitioned by explicitly listing which key value(s) appear in each partition.
+  The table is partitioned by explicitly listing which key value(s) appear in each partition.
 
 * Hash Partitioning [#](#DDL-PARTITIONING-OVERVIEW-HASH)
 
-    The table is partitioned by specifying a modulus and a remainder for each partition. Each partition will hold the rows for which the hash value of the partition key divided by the specified modulus will produce the specified remainder.
+  The table is partitioned by specifying a modulus and a remainder for each partition. Each partition will hold the rows for which the hash value of the partition key divided by the specified modulus will produce the specified remainder.
 
 If your application needs to use other forms of partitioning not listed above, alternative methods such as inheritance and `UNION ALL` views can be used instead. Such methods offer flexibility but do not have some of the performance benefits of built-in declarative partitioning.
+
+[#id](#DDL-PARTITIONING-DECLARATIVE)
 
 ### 5.11.2. Declarative Partitioning [#](#DDL-PARTITIONING-DECLARATIVE)
 
@@ -42,11 +53,13 @@ PostgreSQL allows you to declare that a table is divided into partitions. The ta
 
 The partitioned table itself is a “virtual” table having no storage of its own. Instead, the storage belongs to *partitions*, which are otherwise-ordinary tables associated with the partitioned table. Each partition stores a subset of the data as defined by its *partition bounds*. All rows inserted into a partitioned table will be routed to the appropriate one of the partitions based on the values of the partition key column(s). Updating the partition key of a row will cause it to be moved into a different partition if it no longer satisfies the partition bounds of its original partition.
 
-Partitions may themselves be defined as partitioned tables, resulting in *sub-partitioning*. Although all partitions must have the same columns as their partitioned parent, partitions may have their own indexes, constraints and default values, distinct from those of other partitions. See [CREATE TABLE](sql-createtable.html "CREATE TABLE") for more details on creating partitioned tables and partitions.
+Partitions may themselves be defined as partitioned tables, resulting in *sub-partitioning*. Although all partitions must have the same columns as their partitioned parent, partitions may have their own indexes, constraints and default values, distinct from those of other partitions. See [CREATE TABLE](sql-createtable) for more details on creating partitioned tables and partitions.
 
-It is not possible to turn a regular table into a partitioned table or vice versa. However, it is possible to add an existing regular or partitioned table as a partition of a partitioned table, or remove a partition from a partitioned table turning it into a standalone table; this can simplify and speed up many maintenance processes. See [ALTER TABLE](sql-altertable.html "ALTER TABLE") to learn more about the `ATTACH PARTITION` and `DETACH PARTITION` sub-commands.
+It is not possible to turn a regular table into a partitioned table or vice versa. However, it is possible to add an existing regular or partitioned table as a partition of a partitioned table, or remove a partition from a partitioned table turning it into a standalone table; this can simplify and speed up many maintenance processes. See [ALTER TABLE](sql-altertable) to learn more about the `ATTACH PARTITION` and `DETACH PARTITION` sub-commands.
 
-Partitions can also be [foreign tables](ddl-foreign-data.html "5.12. Foreign Data"), although considerable care is needed because it is then the user's responsibility that the contents of the foreign table satisfy the partitioning rule. There are some other restrictions as well. See [CREATE FOREIGN TABLE](sql-createforeigntable.html "CREATE FOREIGN TABLE") for more information.
+Partitions can also be [foreign tables](ddl-foreign-data), although considerable care is needed because it is then the user's responsibility that the contents of the foreign table satisfy the partitioning rule. There are some other restrictions as well. See [CREATE FOREIGN TABLE](sql-createforeigntable) for more information.
+
+[#id](#DDL-PARTITIONING-DECLARATIVE-EXAMPLE)
 
 #### 5.11.2.1. Example [#](#DDL-PARTITIONING-DECLARATIVE-EXAMPLE)
 
@@ -68,71 +81,73 @@ To use declarative partitioning in this case, use the following steps:
 
 1. Create the `measurement` table as a partitioned table by specifying the `PARTITION BY` clause, which includes the partitioning method (`RANGE` in this case) and the list of column(s) to use as the partition key.
 
-    ```
+   ```
 
-    CREATE TABLE measurement (
-        city_id         int not null,
-        logdate         date not null,
-        peaktemp        int,
-        unitsales       int
-    ) PARTITION BY RANGE (logdate);
-    ```
+   CREATE TABLE measurement (
+       city_id         int not null,
+       logdate         date not null,
+       peaktemp        int,
+       unitsales       int
+   ) PARTITION BY RANGE (logdate);
+   ```
 
 2. Create partitions. Each partition's definition must specify bounds that correspond to the partitioning method and partition key of the parent. Note that specifying bounds such that the new partition's values would overlap with those in one or more existing partitions will cause an error.
 
-    Partitions thus created are in every way normal PostgreSQL tables (or, possibly, foreign tables). It is possible to specify a tablespace and storage parameters for each partition separately.
+   Partitions thus created are in every way normal PostgreSQL tables (or, possibly, foreign tables). It is possible to specify a tablespace and storage parameters for each partition separately.
 
-    For our example, each partition should hold one month's worth of data, to match the requirement of deleting one month's data at a time. So the commands might look like:
+   For our example, each partition should hold one month's worth of data, to match the requirement of deleting one month's data at a time. So the commands might look like:
 
-    ```
+   ```
 
-    CREATE TABLE measurement_y2006m02 PARTITION OF measurement
-        FOR VALUES FROM ('2006-02-01') TO ('2006-03-01');
+   CREATE TABLE measurement_y2006m02 PARTITION OF measurement
+       FOR VALUES FROM ('2006-02-01') TO ('2006-03-01');
 
-    CREATE TABLE measurement_y2006m03 PARTITION OF measurement
-        FOR VALUES FROM ('2006-03-01') TO ('2006-04-01');
+   CREATE TABLE measurement_y2006m03 PARTITION OF measurement
+       FOR VALUES FROM ('2006-03-01') TO ('2006-04-01');
 
-    ...
-    CREATE TABLE measurement_y2007m11 PARTITION OF measurement
-        FOR VALUES FROM ('2007-11-01') TO ('2007-12-01');
+   ...
+   CREATE TABLE measurement_y2007m11 PARTITION OF measurement
+       FOR VALUES FROM ('2007-11-01') TO ('2007-12-01');
 
-    CREATE TABLE measurement_y2007m12 PARTITION OF measurement
-        FOR VALUES FROM ('2007-12-01') TO ('2008-01-01')
-        TABLESPACE fasttablespace;
+   CREATE TABLE measurement_y2007m12 PARTITION OF measurement
+       FOR VALUES FROM ('2007-12-01') TO ('2008-01-01')
+       TABLESPACE fasttablespace;
 
-    CREATE TABLE measurement_y2008m01 PARTITION OF measurement
-        FOR VALUES FROM ('2008-01-01') TO ('2008-02-01')
-        WITH (parallel_workers = 4)
-        TABLESPACE fasttablespace;
-    ```
+   CREATE TABLE measurement_y2008m01 PARTITION OF measurement
+       FOR VALUES FROM ('2008-01-01') TO ('2008-02-01')
+       WITH (parallel_workers = 4)
+       TABLESPACE fasttablespace;
+   ```
 
-    (Recall that adjacent partitions can share a bound value, since range upper bounds are treated as exclusive bounds.)
+   (Recall that adjacent partitions can share a bound value, since range upper bounds are treated as exclusive bounds.)
 
-    If you wish to implement sub-partitioning, again specify the `PARTITION BY` clause in the commands used to create individual partitions, for example:
+   If you wish to implement sub-partitioning, again specify the `PARTITION BY` clause in the commands used to create individual partitions, for example:
 
-    ```
+   ```
 
-    CREATE TABLE measurement_y2006m02 PARTITION OF measurement
-        FOR VALUES FROM ('2006-02-01') TO ('2006-03-01')
-        PARTITION BY RANGE (peaktemp);
-    ```
+   CREATE TABLE measurement_y2006m02 PARTITION OF measurement
+       FOR VALUES FROM ('2006-02-01') TO ('2006-03-01')
+       PARTITION BY RANGE (peaktemp);
+   ```
 
-    After creating partitions of `measurement_y2006m02`, any data inserted into `measurement` that is mapped to `measurement_y2006m02` (or data that is directly inserted into `measurement_y2006m02`, which is allowed provided its partition constraint is satisfied) will be further redirected to one of its partitions based on the `peaktemp` column. The partition key specified may overlap with the parent's partition key, although care should be taken when specifying the bounds of a sub-partition such that the set of data it accepts constitutes a subset of what the partition's own bounds allow; the system does not try to check whether that's really the case.
+   After creating partitions of `measurement_y2006m02`, any data inserted into `measurement` that is mapped to `measurement_y2006m02` (or data that is directly inserted into `measurement_y2006m02`, which is allowed provided its partition constraint is satisfied) will be further redirected to one of its partitions based on the `peaktemp` column. The partition key specified may overlap with the parent's partition key, although care should be taken when specifying the bounds of a sub-partition such that the set of data it accepts constitutes a subset of what the partition's own bounds allow; the system does not try to check whether that's really the case.
 
-    Inserting data into the parent table that does not map to one of the existing partitions will cause an error; an appropriate partition must be added manually.
+   Inserting data into the parent table that does not map to one of the existing partitions will cause an error; an appropriate partition must be added manually.
 
-    It is not necessary to manually create table constraints describing the partition boundary conditions for partitions. Such constraints will be created automatically.
+   It is not necessary to manually create table constraints describing the partition boundary conditions for partitions. Such constraints will be created automatically.
 
 3. Create an index on the key column(s), as well as any other indexes you might want, on the partitioned table. (The key index is not strictly necessary, but in most scenarios it is helpful.) This automatically creates a matching index on each partition, and any partitions you create or attach later will also have such an index. An index or unique constraint declared on a partitioned table is “virtual” in the same way that the partitioned table is: the actual data is in child indexes on the individual partition tables.
 
-    ```
+   ```
 
-    CREATE INDEX ON measurement (logdate);
-    ```
+   CREATE INDEX ON measurement (logdate);
+   ```
 
-4. Ensure that the [enable\_partition\_pruning](runtime-config-query.html#GUC-ENABLE-PARTITION-PRUNING) configuration parameter is not disabled in `postgresql.conf`. If it is, queries will not be optimized as desired.
+4. Ensure that the [enable\_partition\_pruning](runtime-config-query#GUC-ENABLE-PARTITION-PRUNING) configuration parameter is not disabled in `postgresql.conf`. If it is, queries will not be optimized as desired.
 
 In the above example we would be creating a new partition each month, so it might be wise to write a script that generates the required DDL automatically.
+
+[#id](#DDL-PARTITIONING-DECLARATIVE-MAINTENANCE)
 
 #### 5.11.2.2. Partition Maintenance [#](#DDL-PARTITIONING-DECLARATIVE-MAINTENANCE)
 
@@ -155,7 +170,7 @@ ALTER TABLE measurement DETACH PARTITION measurement_y2006m02;
 ALTER TABLE measurement DETACH PARTITION measurement_y2006m02 CONCURRENTLY;
 ```
 
-These allow further operations to be performed on the data before it is dropped. For example, this is often a useful time to back up the data using `COPY`, pg\_dump, or similar tools. It might also be a useful time to aggregate data into smaller formats, perform other data manipulations, or run reports. The first form of the command requires an `ACCESS EXCLUSIVE` lock on the parent table. Adding the `CONCURRENTLY` qualifier as in the second form allows the detach operation to require only `SHARE UPDATE EXCLUSIVE` lock on the parent table, but see [`ALTER TABLE ... DETACH PARTITION`](sql-altertable.html#SQL-ALTERTABLE-DETACH-PARTITION) for details on the restrictions.
+These allow further operations to be performed on the data before it is dropped. For example, this is often a useful time to back up the data using `COPY`, pg\_dump, or similar tools. It might also be a useful time to aggregate data into smaller formats, perform other data manipulations, or run reports. The first form of the command requires an `ACCESS EXCLUSIVE` lock on the parent table. Adding the `CONCURRENTLY` qualifier as in the second form allows the detach operation to require only `SHARE UPDATE EXCLUSIVE` lock on the parent table, but see [`ALTER TABLE ... DETACH PARTITION`](sql-altertable#SQL-ALTERTABLE-DETACH-PARTITION) for details on the restrictions.
 
 Similarly we can add a new partition to handle new data. We can create an empty partition in the partitioned table just as the original partitions were created above:
 
@@ -213,31 +228,45 @@ ALTER INDEX measurement_city_id_logdate_key
 ...
 ```
 
+[#id](#DDL-PARTITIONING-DECLARATIVE-LIMITATIONS)
+
 #### 5.11.2.3. Limitations [#](#DDL-PARTITIONING-DECLARATIVE-LIMITATIONS)
 
 The following limitations apply to partitioned tables:
 
 * To create a unique or primary key constraint on a partitioned table, the partition keys must not include any expressions or function calls and the constraint's columns must include all of the partition key columns. This limitation exists because the individual indexes making up the constraint can only directly enforce uniqueness within their own partitions; therefore, the partition structure itself must guarantee that there are not duplicates in different partitions.
-* Similarly an exclusion constraint must include all the partition key columns. Furthermore the constraint must compare those columns for equality (not e.g. `&&`). Again, this limitation stems from not being able to enforce cross-partition restrictions. The constraint may include additional columns that aren't part of the partition key, and it may compare those with any operators you like.
+
+* There is no way to create an exclusion constraint spanning the whole partitioned table. It is only possible to put such a constraint on each leaf partition individually. Again, this limitation stems from not being able to enforce cross-partition restrictions.
+
 * `BEFORE ROW` triggers on `INSERT` cannot change which partition is the final destination for a new row.
+
 * Mixing temporary and permanent relations in the same partition tree is not allowed. Hence, if the partitioned table is permanent, so must be its partitions and likewise if the partitioned table is temporary. When using temporary relations, all members of the partition tree have to be from the same session.
 
 Individual partitions are linked to their partitioned table using inheritance behind-the-scenes. However, it is not possible to use all of the generic features of inheritance with declaratively partitioned tables or their partitions, as discussed below. Notably, a partition cannot have any parents other than the partitioned table it is a partition of, nor can a table inherit from both a partitioned table and a regular table. That means partitioned tables and their partitions never share an inheritance hierarchy with regular tables.
 
-Since a partition hierarchy consisting of the partitioned table and its partitions is still an inheritance hierarchy, `tableoid` and all the normal rules of inheritance apply as described in [Section 5.10](ddl-inherit.html "5.10. Inheritance"), with a few exceptions:
+Since a partition hierarchy consisting of the partitioned table and its partitions is still an inheritance hierarchy, `tableoid` and all the normal rules of inheritance apply as described in [Section 5.10](ddl-inherit), with a few exceptions:
 
 * Partitions cannot have columns that are not present in the parent. It is not possible to specify columns when creating partitions with `CREATE TABLE`, nor is it possible to add columns to partitions after-the-fact using `ALTER TABLE`. Tables may be added as a partition with `ALTER TABLE ... ATTACH PARTITION` only if their columns exactly match the parent.
+
 * Both `CHECK` and `NOT NULL` constraints of a partitioned table are always inherited by all its partitions. `CHECK` constraints that are marked `NO INHERIT` are not allowed to be created on partitioned tables. You cannot drop a `NOT NULL` constraint on a partition's column if the same constraint is present in the parent table.
+
 * Using `ONLY` to add or drop a constraint on only the partitioned table is supported as long as there are no partitions. Once partitions exist, using `ONLY` will result in an error. Instead, constraints on the partitions themselves can be added and (if they are not present in the parent table) dropped.
+
 * As a partitioned table does not have any data itself, attempts to use `TRUNCATE` `ONLY` on a partitioned table will always return an error.
+
+[#id](#DDL-PARTITIONING-USING-INHERITANCE)
 
 ### 5.11.3. Partitioning Using Inheritance [#](#DDL-PARTITIONING-USING-INHERITANCE)
 
 While the built-in declarative partitioning is suitable for most common use cases, there are some circumstances where a more flexible approach may be useful. Partitioning can be implemented using table inheritance, which allows for several features not supported by declarative partitioning, such as:
 
 * For declarative partitioning, partitions must have exactly the same set of columns as the partitioned table, whereas with table inheritance, child tables may have extra columns not present in the parent.
+
 * Table inheritance allows for multiple inheritance.
+
 * Declarative partitioning only supports range, list and hash partitioning, whereas table inheritance allows data to be divided in a manner of the user's choosing. (Note, however, that if constraint exclusion is unable to prune child tables effectively, query performance might be poor.)
+
+[#id](#DDL-PARTITIONING-INHERITANCE-EXAMPLE)
 
 #### 5.11.3.1. Example [#](#DDL-PARTITIONING-INHERITANCE-EXAMPLE)
 
@@ -245,169 +274,171 @@ This example builds a partitioning structure equivalent to the declarative parti
 
 1. Create the “root” table, from which all of the “child” tables will inherit. This table will contain no data. Do not define any check constraints on this table, unless you intend them to be applied equally to all child tables. There is no point in defining any indexes or unique constraints on it, either. For our example, the root table is the `measurement` table as originally defined:
 
-    ```
+   ```
 
-    CREATE TABLE measurement (
-        city_id         int not null,
-        logdate         date not null,
-        peaktemp        int,
-        unitsales       int
-    );
-    ```
+   CREATE TABLE measurement (
+       city_id         int not null,
+       logdate         date not null,
+       peaktemp        int,
+       unitsales       int
+   );
+   ```
 
 2. Create several “child” tables that each inherit from the root table. Normally, these tables will not add any columns to the set inherited from the root. Just as with declarative partitioning, these tables are in every way normal PostgreSQL tables (or foreign tables).
 
-    ```
+   ```
 
-    CREATE TABLE measurement_y2006m02 () INHERITS (measurement);
-    CREATE TABLE measurement_y2006m03 () INHERITS (measurement);
-    ...
-    CREATE TABLE measurement_y2007m11 () INHERITS (measurement);
-    CREATE TABLE measurement_y2007m12 () INHERITS (measurement);
-    CREATE TABLE measurement_y2008m01 () INHERITS (measurement);
-    ```
+   CREATE TABLE measurement_y2006m02 () INHERITS (measurement);
+   CREATE TABLE measurement_y2006m03 () INHERITS (measurement);
+   ...
+   CREATE TABLE measurement_y2007m11 () INHERITS (measurement);
+   CREATE TABLE measurement_y2007m12 () INHERITS (measurement);
+   CREATE TABLE measurement_y2008m01 () INHERITS (measurement);
+   ```
 
 3. Add non-overlapping table constraints to the child tables to define the allowed key values in each.
 
-    Typical examples would be:
+   Typical examples would be:
 
-    ```
+   ```
 
-    CHECK ( x = 1 )
-    CHECK ( county IN ( 'Oxfordshire', 'Buckinghamshire', 'Warwickshire' ))
-    CHECK ( outletID >= 100 AND outletID < 200 )
-    ```
+   CHECK ( x = 1 )
+   CHECK ( county IN ( 'Oxfordshire', 'Buckinghamshire', 'Warwickshire' ))
+   CHECK ( outletID >= 100 AND outletID < 200 )
+   ```
 
-    Ensure that the constraints guarantee that there is no overlap between the key values permitted in different child tables. A common mistake is to set up range constraints like:
+   Ensure that the constraints guarantee that there is no overlap between the key values permitted in different child tables. A common mistake is to set up range constraints like:
 
-    ```
+   ```
 
-    CHECK ( outletID BETWEEN 100 AND 200 )
-    CHECK ( outletID BETWEEN 200 AND 300 )
-    ```
+   CHECK ( outletID BETWEEN 100 AND 200 )
+   CHECK ( outletID BETWEEN 200 AND 300 )
+   ```
 
-    This is wrong since it is not clear which child table the key value 200 belongs in. Instead, ranges should be defined in this style:
+   This is wrong since it is not clear which child table the key value 200 belongs in. Instead, ranges should be defined in this style:
 
-    ```
+   ```
 
-    CREATE TABLE measurement_y2006m02 (
-        CHECK ( logdate >= DATE '2006-02-01' AND logdate < DATE '2006-03-01' )
-    ) INHERITS (measurement);
+   CREATE TABLE measurement_y2006m02 (
+       CHECK ( logdate >= DATE '2006-02-01' AND logdate < DATE '2006-03-01' )
+   ) INHERITS (measurement);
 
-    CREATE TABLE measurement_y2006m03 (
-        CHECK ( logdate >= DATE '2006-03-01' AND logdate < DATE '2006-04-01' )
-    ) INHERITS (measurement);
+   CREATE TABLE measurement_y2006m03 (
+       CHECK ( logdate >= DATE '2006-03-01' AND logdate < DATE '2006-04-01' )
+   ) INHERITS (measurement);
 
-    ...
-    CREATE TABLE measurement_y2007m11 (
-        CHECK ( logdate >= DATE '2007-11-01' AND logdate < DATE '2007-12-01' )
-    ) INHERITS (measurement);
+   ...
+   CREATE TABLE measurement_y2007m11 (
+       CHECK ( logdate >= DATE '2007-11-01' AND logdate < DATE '2007-12-01' )
+   ) INHERITS (measurement);
 
-    CREATE TABLE measurement_y2007m12 (
-        CHECK ( logdate >= DATE '2007-12-01' AND logdate < DATE '2008-01-01' )
-    ) INHERITS (measurement);
+   CREATE TABLE measurement_y2007m12 (
+       CHECK ( logdate >= DATE '2007-12-01' AND logdate < DATE '2008-01-01' )
+   ) INHERITS (measurement);
 
-    CREATE TABLE measurement_y2008m01 (
-        CHECK ( logdate >= DATE '2008-01-01' AND logdate < DATE '2008-02-01' )
-    ) INHERITS (measurement);
-    ```
+   CREATE TABLE measurement_y2008m01 (
+       CHECK ( logdate >= DATE '2008-01-01' AND logdate < DATE '2008-02-01' )
+   ) INHERITS (measurement);
+   ```
 
 4. For each child table, create an index on the key column(s), as well as any other indexes you might want.
 
-    ```
+   ```
 
-    CREATE INDEX measurement_y2006m02_logdate ON measurement_y2006m02 (logdate);
-    CREATE INDEX measurement_y2006m03_logdate ON measurement_y2006m03 (logdate);
-    CREATE INDEX measurement_y2007m11_logdate ON measurement_y2007m11 (logdate);
-    CREATE INDEX measurement_y2007m12_logdate ON measurement_y2007m12 (logdate);
-    CREATE INDEX measurement_y2008m01_logdate ON measurement_y2008m01 (logdate);
-    ```
+   CREATE INDEX measurement_y2006m02_logdate ON measurement_y2006m02 (logdate);
+   CREATE INDEX measurement_y2006m03_logdate ON measurement_y2006m03 (logdate);
+   CREATE INDEX measurement_y2007m11_logdate ON measurement_y2007m11 (logdate);
+   CREATE INDEX measurement_y2007m12_logdate ON measurement_y2007m12 (logdate);
+   CREATE INDEX measurement_y2008m01_logdate ON measurement_y2008m01 (logdate);
+   ```
 
 5. We want our application to be able to say `INSERT INTO measurement ...` and have the data be redirected into the appropriate child table. We can arrange that by attaching a suitable trigger function to the root table. If data will be added only to the latest child, we can use a very simple trigger function:
 
-    ```
+   ```
 
-    CREATE OR REPLACE FUNCTION measurement_insert_trigger()
-    RETURNS TRIGGER AS $$
-    BEGIN
-        INSERT INTO measurement_y2008m01 VALUES (NEW.*);
-        RETURN NULL;
-    END;
-    $$
-    LANGUAGE plpgsql;
-    ```
+   CREATE OR REPLACE FUNCTION measurement_insert_trigger()
+   RETURNS TRIGGER AS $$
+   BEGIN
+       INSERT INTO measurement_y2008m01 VALUES (NEW.*);
+       RETURN NULL;
+   END;
+   $$
+   LANGUAGE plpgsql;
+   ```
 
-    After creating the function, we create a trigger which calls the trigger function:
+   After creating the function, we create a trigger which calls the trigger function:
 
-    ```
+   ```
 
-    CREATE TRIGGER insert_measurement_trigger
-        BEFORE INSERT ON measurement
-        FOR EACH ROW EXECUTE FUNCTION measurement_insert_trigger();
-    ```
+   CREATE TRIGGER insert_measurement_trigger
+       BEFORE INSERT ON measurement
+       FOR EACH ROW EXECUTE FUNCTION measurement_insert_trigger();
+   ```
 
-    We must redefine the trigger function each month so that it always inserts into the current child table. The trigger definition does not need to be updated, however.
+   We must redefine the trigger function each month so that it always inserts into the current child table. The trigger definition does not need to be updated, however.
 
-    We might want to insert data and have the server automatically locate the child table into which the row should be added. We could do this with a more complex trigger function, for example:
+   We might want to insert data and have the server automatically locate the child table into which the row should be added. We could do this with a more complex trigger function, for example:
 
-    ```
+   ```
 
-    CREATE OR REPLACE FUNCTION measurement_insert_trigger()
-    RETURNS TRIGGER AS $$
-    BEGIN
-        IF ( NEW.logdate >= DATE '2006-02-01' AND
-             NEW.logdate < DATE '2006-03-01' ) THEN
-            INSERT INTO measurement_y2006m02 VALUES (NEW.*);
-        ELSIF ( NEW.logdate >= DATE '2006-03-01' AND
-                NEW.logdate < DATE '2006-04-01' ) THEN
-            INSERT INTO measurement_y2006m03 VALUES (NEW.*);
-        ...
-        ELSIF ( NEW.logdate >= DATE '2008-01-01' AND
-                NEW.logdate < DATE '2008-02-01' ) THEN
-            INSERT INTO measurement_y2008m01 VALUES (NEW.*);
-        ELSE
-            RAISE EXCEPTION 'Date out of range.  Fix the measurement_insert_trigger() function!';
-        END IF;
-        RETURN NULL;
-    END;
-    $$
-    LANGUAGE plpgsql;
-    ```
+   CREATE OR REPLACE FUNCTION measurement_insert_trigger()
+   RETURNS TRIGGER AS $$
+   BEGIN
+       IF ( NEW.logdate >= DATE '2006-02-01' AND
+            NEW.logdate < DATE '2006-03-01' ) THEN
+           INSERT INTO measurement_y2006m02 VALUES (NEW.*);
+       ELSIF ( NEW.logdate >= DATE '2006-03-01' AND
+               NEW.logdate < DATE '2006-04-01' ) THEN
+           INSERT INTO measurement_y2006m03 VALUES (NEW.*);
+       ...
+       ELSIF ( NEW.logdate >= DATE '2008-01-01' AND
+               NEW.logdate < DATE '2008-02-01' ) THEN
+           INSERT INTO measurement_y2008m01 VALUES (NEW.*);
+       ELSE
+           RAISE EXCEPTION 'Date out of range.  Fix the measurement_insert_trigger() function!';
+       END IF;
+       RETURN NULL;
+   END;
+   $$
+   LANGUAGE plpgsql;
+   ```
 
-    The trigger definition is the same as before. Note that each `IF` test must exactly match the `CHECK` constraint for its child table.
+   The trigger definition is the same as before. Note that each `IF` test must exactly match the `CHECK` constraint for its child table.
 
-    While this function is more complex than the single-month case, it doesn't need to be updated as often, since branches can be added in advance of being needed.
+   While this function is more complex than the single-month case, it doesn't need to be updated as often, since branches can be added in advance of being needed.
 
-### Note
+   ### Note
 
-    In practice, it might be best to check the newest child first, if most inserts go into that child. For simplicity, we have shown the trigger's tests in the same order as in other parts of this example.
+   In practice, it might be best to check the newest child first, if most inserts go into that child. For simplicity, we have shown the trigger's tests in the same order as in other parts of this example.
 
-    A different approach to redirecting inserts into the appropriate child table is to set up rules, instead of a trigger, on the root table. For example:
+   A different approach to redirecting inserts into the appropriate child table is to set up rules, instead of a trigger, on the root table. For example:
 
-    ```
+   ```
 
-    CREATE RULE measurement_insert_y2006m02 AS
-    ON INSERT TO measurement WHERE
-        ( logdate >= DATE '2006-02-01' AND logdate < DATE '2006-03-01' )
-    DO INSTEAD
-        INSERT INTO measurement_y2006m02 VALUES (NEW.*);
-    ...
-    CREATE RULE measurement_insert_y2008m01 AS
-    ON INSERT TO measurement WHERE
-        ( logdate >= DATE '2008-01-01' AND logdate < DATE '2008-02-01' )
-    DO INSTEAD
-        INSERT INTO measurement_y2008m01 VALUES (NEW.*);
-    ```
+   CREATE RULE measurement_insert_y2006m02 AS
+   ON INSERT TO measurement WHERE
+       ( logdate >= DATE '2006-02-01' AND logdate < DATE '2006-03-01' )
+   DO INSTEAD
+       INSERT INTO measurement_y2006m02 VALUES (NEW.*);
+   ...
+   CREATE RULE measurement_insert_y2008m01 AS
+   ON INSERT TO measurement WHERE
+       ( logdate >= DATE '2008-01-01' AND logdate < DATE '2008-02-01' )
+   DO INSTEAD
+       INSERT INTO measurement_y2008m01 VALUES (NEW.*);
+   ```
 
-    A rule has significantly more overhead than a trigger, but the overhead is paid once per query rather than once per row, so this method might be advantageous for bulk-insert situations. In most cases, however, the trigger method will offer better performance.
+   A rule has significantly more overhead than a trigger, but the overhead is paid once per query rather than once per row, so this method might be advantageous for bulk-insert situations. In most cases, however, the trigger method will offer better performance.
 
-    Be aware that `COPY` ignores rules. If you want to use `COPY` to insert data, you'll need to copy into the correct child table rather than directly into the root. `COPY` does fire triggers, so you can use it normally if you use the trigger approach.
+   Be aware that `COPY` ignores rules. If you want to use `COPY` to insert data, you'll need to copy into the correct child table rather than directly into the root. `COPY` does fire triggers, so you can use it normally if you use the trigger approach.
 
-    Another disadvantage of the rule approach is that there is no simple way to force an error if the set of rules doesn't cover the insertion date; the data will silently go into the root table instead.
+   Another disadvantage of the rule approach is that there is no simple way to force an error if the set of rules doesn't cover the insertion date; the data will silently go into the root table instead.
 
-6. Ensure that the [constraint\_exclusion](runtime-config-query.html#GUC-CONSTRAINT-EXCLUSION) configuration parameter is not disabled in `postgresql.conf`; otherwise child tables may be accessed unnecessarily.
+6. Ensure that the [constraint\_exclusion](runtime-config-query#GUC-CONSTRAINT-EXCLUSION) configuration parameter is not disabled in `postgresql.conf`; otherwise child tables may be accessed unnecessarily.
 
 As we can see, a complex table hierarchy could require a substantial amount of DDL. In the above example we would be creating a new child table each month, so it might be wise to write a script that generates the required DDL automatically.
+
+[#id](#DDL-PARTITIONING-INHERITANCE-MAINTENANCE)
 
 #### 5.11.3.2. Maintenance for Inheritance Partitioning [#](#DDL-PARTITIONING-INHERITANCE-MAINTENANCE)
 
@@ -447,30 +478,36 @@ ALTER TABLE measurement_y2008m02 ADD CONSTRAINT y2008m02
 ALTER TABLE measurement_y2008m02 INHERIT measurement;
 ```
 
+[#id](#DDL-PARTITIONING-INHERITANCE-CAVEATS)
+
 #### 5.11.3.3. Caveats [#](#DDL-PARTITIONING-INHERITANCE-CAVEATS)
 
 The following caveats apply to partitioning implemented using inheritance:
 
 * There is no automatic way to verify that all of the `CHECK` constraints are mutually exclusive. It is safer to create code that generates child tables and creates and/or modifies associated objects than to write each by hand.
 
-* Indexes and foreign key constraints apply to single tables and not to their inheritance children, hence they have some [caveats](ddl-inherit.html#DDL-INHERIT-CAVEATS "5.10.1. Caveats") to be aware of.
+* Indexes and foreign key constraints apply to single tables and not to their inheritance children, hence they have some [caveats](ddl-inherit#DDL-INHERIT-CAVEATS) to be aware of.
 
 * The schemes shown here assume that the values of a row's key column(s) never change, or at least do not change enough to require it to move to another partition. An `UPDATE` that attempts to do that will fail because of the `CHECK` constraints. If you need to handle such cases, you can put suitable update triggers on the child tables, but it makes management of the structure much more complicated.
 
 * If you are using manual `VACUUM` or `ANALYZE` commands, don't forget that you need to run them on each child table individually. A command like:
 
-    ```
+  ```
 
-    ANALYZE measurement;
-    ```
+  ANALYZE measurement;
+  ```
 
-    will only process the root table.
+  will only process the root table.
 
 * `INSERT` statements with `ON CONFLICT` clauses are unlikely to work as expected, as the `ON CONFLICT` action is only taken in case of unique violations on the specified target relation, not its child relations.
 
 * Triggers or rules will be needed to route rows to the desired child table, unless the application is explicitly aware of the partitioning scheme. Triggers may be complicated to write, and will be much slower than the tuple routing performed internally by declarative partitioning.
 
+[#id](#DDL-PARTITION-PRUNING)
+
 ### 5.11.4. Partition Pruning [#](#DDL-PARTITION-PRUNING)
+
+
 
 *Partition pruning* is a query optimization technique that improves performance for declaratively partitioned tables. As an example:
 
@@ -482,7 +519,7 @@ SELECT count(*) FROM measurement WHERE logdate >= DATE '2008-01-01';
 
 Without partition pruning, the above query would scan each of the partitions of the `measurement` table. With partition pruning enabled, the planner will examine the definition of each partition and prove that the partition need not be scanned because it could not contain any rows meeting the query's `WHERE` clause. When the planner can prove this, it excludes (*prunes*) the partition from the query plan.
 
-By using the EXPLAIN command and the [enable\_partition\_pruning](runtime-config-query.html#GUC-ENABLE-PARTITION-PRUNING) configuration parameter, it's possible to show the difference between a plan for which partitions have been pruned and one for which they have not. A typical unoptimized plan for this type of table setup is:
+By using the EXPLAIN command and the [enable\_partition\_pruning](runtime-config-query#GUC-ENABLE-PARTITION-PRUNING) configuration parameter, it's possible to show the difference between a plan for which partitions have been pruned and one for which they have not. A typical unoptimized plan for this type of table setup is:
 
 ```
 
@@ -523,11 +560,16 @@ Note that partition pruning is driven only by the constraints defined implicitly
 Partition pruning can be performed not only during the planning of a given query, but also during its execution. This is useful as it can allow more partitions to be pruned when clauses contain expressions whose values are not known at query planning time, for example, parameters defined in a `PREPARE` statement, using a value obtained from a subquery, or using a parameterized value on the inner side of a nested loop join. Partition pruning during execution can be performed at any of the following times:
 
 * During initialization of the query plan. Partition pruning can be performed here for parameter values which are known during the initialization phase of execution. Partitions which are pruned during this stage will not show up in the query's `EXPLAIN` or `EXPLAIN ANALYZE`. It is possible to determine the number of partitions which were removed during this phase by observing the “Subplans Removed” property in the `EXPLAIN` output.
+
 * During actual execution of the query plan. Partition pruning may also be performed here to remove partitions using values which are only known during actual query execution. This includes values from subqueries and values from execution-time parameters such as those from parameterized nested loop joins. Since the value of these parameters may change many times during the execution of the query, partition pruning is performed whenever one of the execution parameters being used by partition pruning changes. Determining if partitions were pruned during this phase requires careful inspection of the `loops` property in the `EXPLAIN ANALYZE` output. Subplans corresponding to different partitions may have different values for it depending on how many times each of them was pruned during execution. Some may be shown as `(never executed)` if they were pruned every time.
 
-Partition pruning can be disabled using the [enable\_partition\_pruning](runtime-config-query.html#GUC-ENABLE-PARTITION-PRUNING) setting.
+Partition pruning can be disabled using the [enable\_partition\_pruning](runtime-config-query#GUC-ENABLE-PARTITION-PRUNING) setting.
+
+[#id](#DDL-PARTITIONING-CONSTRAINT-EXCLUSION)
 
 ### 5.11.5. Partitioning and Constraint Exclusion [#](#DDL-PARTITIONING-CONSTRAINT-EXCLUSION)
+
+
 
 *Constraint exclusion* is a query optimization technique similar to partition pruning. While it is primarily used for partitioning implemented using the legacy inheritance method, it can be used for other purposes, including with declarative partitioning.
 
@@ -535,14 +577,19 @@ Constraint exclusion works in a very similar way to partition pruning, except th
 
 The fact that constraint exclusion uses `CHECK` constraints, which makes it slow compared to partition pruning, can sometimes be used as an advantage: because constraints can be defined even on declaratively-partitioned tables, in addition to their internal partition bounds, constraint exclusion may be able to elide additional partitions from the query plan.
 
-The default (and recommended) setting of [constraint\_exclusion](runtime-config-query.html#GUC-CONSTRAINT-EXCLUSION) is neither `on` nor `off`, but an intermediate setting called `partition`, which causes the technique to be applied only to queries that are likely to be working on inheritance partitioned tables. The `on` setting causes the planner to examine `CHECK` constraints in all queries, even simple ones that are unlikely to benefit.
+The default (and recommended) setting of [constraint\_exclusion](runtime-config-query#GUC-CONSTRAINT-EXCLUSION) is neither `on` nor `off`, but an intermediate setting called `partition`, which causes the technique to be applied only to queries that are likely to be working on inheritance partitioned tables. The `on` setting causes the planner to examine `CHECK` constraints in all queries, even simple ones that are unlikely to benefit.
 
 The following caveats apply to constraint exclusion:
 
 * Constraint exclusion is only applied during query planning, unlike partition pruning, which can also be applied during query execution.
+
 * Constraint exclusion only works when the query's `WHERE` clause contains constants (or externally supplied parameters). For example, a comparison against a non-immutable function such as `CURRENT_TIMESTAMP` cannot be optimized, since the planner cannot know which child table the function's value might fall into at run time.
+
 * Keep the partitioning constraints simple, else the planner may not be able to prove that child tables might not need to be visited. Use simple equality conditions for list partitioning, or simple range tests for range partitioning, as illustrated in the preceding examples. A good rule of thumb is that partitioning constraints should contain only comparisons of the partitioning column(s) to constants using B-tree-indexable operators, because only B-tree-indexable column(s) are allowed in the partition key.
+
 * All constraints on all children of the parent table are examined during constraint exclusion, so large numbers of children are likely to increase query planning time considerably. So the legacy inheritance based partitioning will work well with up to perhaps a hundred child tables; don't try to use many thousands of children.
+
+[#id](#DDL-PARTITIONING-DECLARATIVE-BEST-PRACTICES)
 
 ### 5.11.6. Best Practices for Declarative Partitioning [#](#DDL-PARTITIONING-DECLARATIVE-BEST-PRACTICES)
 

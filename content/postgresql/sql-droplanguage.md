@@ -1,3 +1,5 @@
+[#id](#SQL-DROPLANGUAGE)
+
 ## DROP LANGUAGE
 
 DROP LANGUAGE — remove a procedural language
@@ -5,9 +7,10 @@ DROP LANGUAGE — remove a procedural language
 ## Synopsis
 
 ```
-
 DROP [ PROCEDURAL ] LANGUAGE [ IF EXISTS ] name [ CASCADE | RESTRICT ]
 ```
+
+[#id](#id-1.9.3.117.5)
 
 ## Description
 
@@ -15,39 +18,46 @@ DROP [ PROCEDURAL ] LANGUAGE [ IF EXISTS ] name [ CASCADE | RESTRICT ]
 
 ### Note
 
-As of PostgreSQL 9.1, most procedural languages have been made into “extensions”, and should therefore be removed with [`DROP EXTENSION`](sql-dropextension.html "DROP EXTENSION") not `DROP LANGUAGE`.
+As of PostgreSQL 9.1, most procedural languages have been made into “extensions”, and should therefore be removed with [`DROP EXTENSION`](sql-dropextension) not `DROP LANGUAGE`.
+
+[#id](#id-1.9.3.117.6)
 
 ## Parameters
 
 * `IF EXISTS`
 
-    Do not throw an error if the language does not exist. A notice is issued in this case.
+  Do not throw an error if the language does not exist. A notice is issued in this case.
 
 * *`name`*
 
-    The name of an existing procedural language.
+  The name of an existing procedural language.
 
 * `CASCADE`
 
-    Automatically drop objects that depend on the language (such as functions in the language), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend.html "5.14. Dependency Tracking")).
+  Automatically drop objects that depend on the language (such as functions in the language), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend)).
 
 * `RESTRICT`
 
-    Refuse to drop the language if any objects depend on it. This is the default.
+  Refuse to drop the language if any objects depend on it. This is the default.
+
+[#id](#id-1.9.3.117.7)
 
 ## Examples
 
 This command removes the procedural language `plsample`:
 
 ```
-
 DROP LANGUAGE plsample;
 ```
+
+[#id](#id-1.9.3.117.8)
 
 ## Compatibility
 
 There is no `DROP LANGUAGE` statement in the SQL standard.
 
+[#id](#id-1.9.3.117.9)
+
 ## See Also
 
-[ALTER LANGUAGE](sql-alterlanguage.html "ALTER LANGUAGE"), [CREATE LANGUAGE](sql-createlanguage.html "CREATE LANGUAGE")
+[ALTER LANGUAGE](sql-alterlanguage), [CREATE LANGUAGE](sql-createlanguage)

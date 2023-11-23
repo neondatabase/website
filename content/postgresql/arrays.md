@@ -1,13 +1,17 @@
+[#id](#ARRAYS)
+
 ## 8.15. Arrays [#](#ARRAYS)
 
-- [8.15.1. Declaration of Array Types](arrays.html#ARRAYS-DECLARATION)
-- [8.15.2. Array Value Input](arrays.html#ARRAYS-INPUT)
-- [8.15.3. Accessing Arrays](arrays.html#ARRAYS-ACCESSING)
-- [8.15.4. Modifying Arrays](arrays.html#ARRAYS-MODIFYING)
-- [8.15.5. Searching in Arrays](arrays.html#ARRAYS-SEARCHING)
-- [8.15.6. Array Input and Output Syntax](arrays.html#ARRAYS-IO)
+* [8.15.1. Declaration of Array Types](arrays#ARRAYS-DECLARATION)
+* [8.15.2. Array Value Input](arrays#ARRAYS-INPUT)
+* [8.15.3. Accessing Arrays](arrays#ARRAYS-ACCESSING)
+* [8.15.4. Modifying Arrays](arrays#ARRAYS-MODIFYING)
+* [8.15.5. Searching in Arrays](arrays#ARRAYS-SEARCHING)
+* [8.15.6. Array Input and Output Syntax](arrays#ARRAYS-IO)
 
 PostgreSQL allows columns of a table to be defined as variable-length multidimensional arrays. Arrays of any built-in or user-defined base type, enum type, composite type, range type, or domain can be created.
+
+[#id](#ARRAYS-DECLARATION)
 
 ### 8.15.1. Declaration of Array Types [#](#ARRAYS-DECLARATION)
 
@@ -53,6 +57,8 @@ Or, if no array size is to be specified:
 
 As before, however, PostgreSQL does not enforce the size restriction in any case.
 
+[#id](#ARRAYS-INPUT)
+
 ### 8.15.2. Array Value Input [#](#ARRAYS-INPUT)
 
 To write an array value as a literal constant, enclose the element values within curly braces and separate them by commas. (If you know C, this is not unlike the C syntax for initializing structures.) You can put double quotes around any element value, and must do so if it contains commas or curly braces. (More details appear below.) Thus, the general format of an array constant is the following:
@@ -62,9 +68,9 @@ To write an array value as a literal constant, enclose the element values within
 '{ val1 delim val2 delim ... }'
 ```
 
-where _`delim`_ is the delimiter character for the type, as recorded in its `pg_type` entry. Among the standard data types provided in the PostgreSQL distribution, all use a comma (`,`), except for type `box` which uses a semicolon (`;`). Each _`val`_ is either a constant of the array element type, or a subarray. An example of an array constant is:
+where *`delim`* is the delimiter character for the type, as recorded in its `pg_type` entry. Among the standard data types provided in the PostgreSQL distribution, all use a comma (`,`), except for type `box` which uses a semicolon (`;`). Each *`val`* is either a constant of the array element type, or a subarray. An example of an array constant is:
 
-```bash
+```md
 
 '{{1,2,3},{4,5,6},{7,8,9}}'
 ```
@@ -73,7 +79,7 @@ This constant is a two-dimensional, 3-by-3 array consisting of three subarrays o
 
 To set an element of an array constant to NULL, write `NULL` for the element value. (Any upper- or lower-case variant of `NULL` will do.) If you want an actual string value “NULL”, you must put double quotes around it.
 
-(These kinds of array constants are actually only a special case of the generic type constants discussed in [Section 4.1.2.7](sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS-GENERIC '4.1.2.7. Constants of Other Types'). The constant is initially treated as a string and passed to the array input conversion routine. An explicit type specification might be necessary.)
+(These kinds of array constants are actually only a special case of the generic type constants discussed in [Section 4.1.2.7](sql-syntax-lexical#SQL-SYNTAX-CONSTANTS-GENERIC). The constant is initially treated as a string and passed to the array input conversion routine. An explicit type specification might be necessary.)
 
 Now we can show some `INSERT` statements:
 
@@ -128,7 +134,9 @@ INSERT INTO sal_emp
     ARRAY[['breakfast', 'consulting'], ['meeting', 'lunch']]);
 ```
 
-Notice that the array elements are ordinary SQL constants or expressions; for instance, string literals are single quoted, instead of double quoted as they would be in an array literal. The `ARRAY` constructor syntax is discussed in more detail in [Section 4.2.12](sql-expressions.html#SQL-SYNTAX-ARRAY-CONSTRUCTORS '4.2.12. Array Constructors').
+Notice that the array elements are ordinary SQL constants or expressions; for instance, string literals are single quoted, instead of double quoted as they would be in an array literal. The `ARRAY` constructor syntax is discussed in more detail in [Section 4.2.12](sql-expressions#SQL-SYNTAX-ARRAY-CONSTRUCTORS).
+
+[#id](#ARRAYS-ACCESSING)
 
 ### 8.15.3. Accessing Arrays [#](#ARRAYS-ACCESSING)
 
@@ -144,7 +152,7 @@ SELECT name FROM sal_emp WHERE pay_by_quarter[1] <> pay_by_quarter[2];
 (1 row)
 ```
 
-The array subscript numbers are written within square brackets. By default PostgreSQL uses a one-based numbering convention for arrays, that is, an array of _`n`_ elements starts with `array[1]` and ends with `array[n]`.
+The array subscript numbers are written within square brackets. By default PostgreSQL uses a one-based numbering convention for arrays, that is, an array of *`n`* elements starts with `array[1]` and ends with `array[n]`.
 
 This query retrieves the third quarter pay of all employees:
 
@@ -185,7 +193,7 @@ SELECT schedule[1:2][2] FROM sal_emp WHERE name = 'Bill';
 
 To avoid confusion with the non-slice case, it's best to use slice syntax for all dimensions, e.g., `[1:2][1:1]`, not `[2][1:1]`.
 
-It is possible to omit the _`lower-bound`_ and/or _`upper-bound`_ of a slice specifier; the missing bound is replaced by the lower or upper limit of the array's subscripts. For example:
+It is possible to omit the *`lower-bound`* and/or *`upper-bound`* of a slice specifier; the missing bound is replaced by the lower or upper limit of the array's subscripts. For example:
 
 ```
 
@@ -256,6 +264,8 @@ SELECT cardinality(schedule) FROM sal_emp WHERE name = 'Carol';
 (1 row)
 ```
 
+[#id](#ARRAYS-MODIFYING)
+
 ### 8.15.4. Modifying Arrays [#](#ARRAYS-MODIFYING)
 
 An array value can be replaced completely:
@@ -290,7 +300,7 @@ UPDATE sal_emp SET pay_by_quarter[1:2] = '{27000,27000}'
     WHERE name = 'Carol';
 ```
 
-The slice syntaxes with omitted _`lower-bound`_ and/or _`upper-bound`_ can be used too, but only when updating an array value that is not NULL or zero-dimensional (otherwise, there is no existing subscript limit to substitute).
+The slice syntaxes with omitted *`lower-bound`* and/or *`upper-bound`* can be used too, but only when updating an array value that is not NULL or zero-dimensional (otherwise, there is no existing subscript limit to substitute).
 
 A stored array value can be enlarged by assigning to elements not already present. Any positions between those previously present and the newly assigned elements will be filled with nulls. For example, if array `myarray` currently has 4 elements, it will have six elements after an update that assigns to `myarray[6]`; `myarray[5]` will contain null. Currently, enlargement in this fashion is only allowed for one-dimensional arrays, not multidimensional arrays.
 
@@ -313,7 +323,7 @@ SELECT ARRAY[5,6] || ARRAY[[1,2],[3,4]];
 (1 row)
 ```
 
-The concatenation operator allows a single element to be pushed onto the beginning or end of a one-dimensional array. It also accepts two _`N`_-dimensional arrays, or an _`N`_-dimensional and an _`N+1`_-dimensional array.
+The concatenation operator allows a single element to be pushed onto the beginning or end of a one-dimensional array. It also accepts two *`N`*-dimensional arrays, or an *`N`*-dimensional and an *`N+1`*-dimensional array.
 
 When a single element is pushed onto either the beginning or end of a one-dimensional array, the result is an array with the same lower bound subscript as the array operand. For example:
 
@@ -349,7 +359,7 @@ SELECT array_dims(ARRAY[[1,2],[3,4]] || ARRAY[[5,6],[7,8],[9,0]]);
 (1 row)
 ```
 
-When an _`N`_-dimensional array is pushed onto the beginning or end of an _`N+1`_-dimensional array, the result is analogous to the element-array case above. Each _`N`_-dimensional sub-array is essentially an element of the _`N+1`_-dimensional array's outer dimension. For example:
+When an *`N`*-dimensional array is pushed onto the beginning or end of an *`N+1`*-dimensional array, the result is analogous to the element-array case above. Each *`N`*-dimensional sub-array is essentially an element of the *`N+1`*-dimensional array's outer dimension. For example:
 
 ```
 
@@ -420,6 +430,8 @@ SELECT array_append(ARRAY[1, 2], NULL);    -- this might have been meant
 
 In the examples above, the parser sees an integer array on one side of the concatenation operator, and a constant of undetermined type on the other. The heuristic it uses to resolve the constant's type is to assume it's of the same type as the operator's other input — in this case, integer array. So the concatenation operator is presumed to represent `array_cat`, not `array_append`. When that's the wrong choice, it could be fixed by casting the constant to the array's element type; but explicit use of `array_append` might be a preferable solution.
 
+[#id](#ARRAYS-SEARCHING)
+
 ### 8.15.5. Searching in Arrays [#](#ARRAYS-SEARCHING)
 
 To search for a value in an array, each value must be checked. This can be done manually, if you know the size of the array. For example:
@@ -432,7 +444,7 @@ SELECT * FROM sal_emp WHERE pay_by_quarter[1] = 10000 OR
                             pay_by_quarter[4] = 10000;
 ```
 
-However, this quickly becomes tedious for large arrays, and is not helpful if the size of the array is unknown. An alternative method is described in [Section 9.24](functions-comparisons.html '9.24. Row and Array Comparisons'). The above query could be replaced by:
+However, this quickly becomes tedious for large arrays, and is not helpful if the size of the array is unknown. An alternative method is described in [Section 9.24](functions-comparisons). The above query could be replaced by:
 
 ```
 
@@ -457,7 +469,7 @@ SELECT * FROM
  WHERE pay_by_quarter[s] = 10000;
 ```
 
-This function is described in [Table 9.66](functions-srf.html#FUNCTIONS-SRF-SUBSCRIPTS 'Table 9.66. Subscript Generating Functions').
+This function is described in [Table 9.66](functions-srf#FUNCTIONS-SRF-SUBSCRIPTS).
 
 You can also search an array using the `&&` operator, which checks whether the left operand overlaps with the right operand. For instance:
 
@@ -466,7 +478,7 @@ You can also search an array using the `&&` operator, which checks whether the l
 SELECT * FROM sal_emp WHERE pay_by_quarter && ARRAY[10000];
 ```
 
-This and other array operators are further described in [Section 9.19](functions-array.html '9.19. Array Functions and Operators'). It can be accelerated by an appropriate index, as described in [Section 11.2](indexes-types.html '11.2. Index Types').
+This and other array operators are further described in [Section 9.19](functions-array). It can be accelerated by an appropriate index, as described in [Section 11.2](indexes-types).
 
 You can also search for specific values in an array using the `array_position` and `array_positions` functions. The former returns the subscript of the first occurrence of a value in an array; the latter returns an array with the subscripts of all occurrences of the value in the array. For example:
 
@@ -489,6 +501,8 @@ SELECT array_positions(ARRAY[1, 4, 3, 1, 3, 4, 2, 1], 1);
 
 Arrays are not sets; searching for specific array elements can be a sign of database misdesign. Consider using a separate table with a row for each item that would be an array element. This will be easier to search, and is likely to scale better for a large number of elements.
 
+[#id](#ARRAYS-IO)
+
 ### 8.15.6. Array Input and Output Syntax [#](#ARRAYS-IO)
 
 The external text representation of an array value consists of items that are interpreted according to the I/O conversion rules for the array's element type, plus decoration that indicates the array structure. The decoration consists of curly braces (`{` and `}`) around the array value plus delimiter characters between adjacent items. The delimiter character is usually a comma (`,`) but can be something else: it is determined by the `typdelim` setting for the array's element type. Among the standard data types provided in the PostgreSQL distribution, all use a comma, except for type `box`, which uses a semicolon (`;`). In a multidimensional array, each dimension (row, plane, cube, etc.) gets its own level of curly braces, and delimiters must be written between adjacent curly-braced entities of the same level.
@@ -510,12 +524,12 @@ SELECT f1[1][-2][3] AS e1, f1[1][-1][5] AS e2
 
 The array output routine will include explicit dimensions in its result only when there are one or more lower bounds different from one.
 
-If the value written for an element is `NULL` (in any case variant), the element is taken to be NULL. The presence of any quotes or backslashes disables this and allows the literal string value “NULL” to be entered. Also, for backward compatibility with pre-8.2 versions of PostgreSQL, the [array_nulls](runtime-config-compatible.html#GUC-ARRAY-NULLS) configuration parameter can be turned `off` to suppress recognition of `NULL` as a NULL.
+If the value written for an element is `NULL` (in any case variant), the element is taken to be NULL. The presence of any quotes or backslashes disables this and allows the literal string value “NULL” to be entered. Also, for backward compatibility with pre-8.2 versions of PostgreSQL, the [array\_nulls](runtime-config-compatible#GUC-ARRAY-NULLS) configuration parameter can be turned `off` to suppress recognition of `NULL` as a NULL.
 
-As shown previously, when writing an array value you can use double quotes around any individual array element. You _must_ do so if the element value would otherwise confuse the array-value parser. For example, elements containing curly braces, commas (or the data type's delimiter character), double quotes, backslashes, or leading or trailing whitespace must be double-quoted. Empty strings and strings matching the word `NULL` must be quoted, too. To put a double quote or backslash in a quoted array element value, precede it with a backslash. Alternatively, you can avoid quotes and use backslash-escaping to protect all data characters that would otherwise be taken as array syntax.
+As shown previously, when writing an array value you can use double quotes around any individual array element. You *must* do so if the element value would otherwise confuse the array-value parser. For example, elements containing curly braces, commas (or the data type's delimiter character), double quotes, backslashes, or leading or trailing whitespace must be double-quoted. Empty strings and strings matching the word `NULL` must be quoted, too. To put a double quote or backslash in a quoted array element value, precede it with a backslash. Alternatively, you can avoid quotes and use backslash-escaping to protect all data characters that would otherwise be taken as array syntax.
 
 You can add whitespace before a left brace or after a right brace. You can also add whitespace before or after any individual item string. In all of these cases the whitespace will be ignored. However, whitespace within double-quoted elements, or surrounded on both sides by non-whitespace characters of an element, is not ignored.
 
 ### Tip
 
-The `ARRAY` constructor syntax (see [Section 4.2.12](sql-expressions.html#SQL-SYNTAX-ARRAY-CONSTRUCTORS '4.2.12. Array Constructors')) is often easier to work with than the array-literal syntax when writing array values in SQL commands. In `ARRAY`, individual element values are written the same way they would be written when not members of an array.
+The `ARRAY` constructor syntax (see [Section 4.2.12](sql-expressions#SQL-SYNTAX-ARRAY-CONSTRUCTORS)) is often easier to work with than the array-literal syntax when writing array values in SQL commands. In `ARRAY`, individual element values are written the same way they would be written when not members of an array.

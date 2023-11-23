@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-TABLES)
+
 ## 37.54. `tables` [#](#INFOSCHEMA-TABLES)
 
 The view `tables` contains all tables and views defined in the current database. Only those tables and views are shown that the current user has access to (by way of being the owner or having some privilege).
+
+[#id](#id-1.7.6.58.3)
 
 **Table 37.52. `tables` Columns**
 

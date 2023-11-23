@@ -1,9 +1,12 @@
+[#id](#TUTORIAL-TABLE)
+
 ## 2.3. Creating a New Table [#](#TUTORIAL-TABLE)
+
+
 
 You can create a new table by specifying the table name, along with all column names and their types:
 
 ```
-
 CREATE TABLE weather (
     city            varchar(80),
     temp_lo         int,           -- low temperature
@@ -24,7 +27,6 @@ PostgreSQL supports the standard SQL types `int`, `smallint`, `real`, `double pr
 The second example will store cities and their associated geographical location:
 
 ```
-
 CREATE TABLE cities (
     name            varchar(80),
     location        point
@@ -33,9 +35,8 @@ CREATE TABLE cities (
 
 The `point` type is an example of a PostgreSQL-specific data type.
 
-lly, it should be mentioned that if you don't need a table any longer or want to recreate it differently you can remove it using the following command:
+Finally, it should be mentioned that if you don't need a table any longer or want to recreate it differently you can remove it using the following command:
 
 ```
-
 DROP TABLE tablename;
 ```

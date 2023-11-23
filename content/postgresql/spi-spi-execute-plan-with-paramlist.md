@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-EXECUTE-PLAN-WITH-PARAMLIST)
+
 ## SPI\_execute\_plan\_with\_paramlist
 
 SPI\_execute\_plan\_with\_paramlist — execute a statement prepared by `SPI_prepare`
@@ -5,12 +7,13 @@ SPI\_execute\_plan\_with\_paramlist — execute a statement prepared by `SPI_pre
 ## Synopsis
 
 ```
-
 int SPI_execute_plan_with_paramlist(SPIPlanPtr plan,
                                     ParamListInfo params,
                                     bool read_only,
                                     long count)
 ```
+
+[#id](#id-1.8.12.8.17.5)
 
 ## Description
 
@@ -18,23 +21,27 @@ int SPI_execute_plan_with_paramlist(SPIPlanPtr plan,
 
 This function is now deprecated in favor of `SPI_execute_plan_extended`.
 
+[#id](#id-1.8.12.8.17.6)
+
 ## Arguments
 
 * `SPIPlanPtr plan`
 
-    prepared statement (returned by `SPI_prepare`)
+  prepared statement (returned by `SPI_prepare`)
 
 * `ParamListInfo params`
 
-    data structure containing parameter types and values; NULL if none
+  data structure containing parameter types and values; NULL if none
 
 * `bool read_only`
 
-    `true` for read-only execution
+  `true` for read-only execution
 
 * `long count`
 
-    maximum number of rows to return, or `0` for no limit
+  maximum number of rows to return, or `0` for no limit
+
+[#id](#id-1.8.12.8.17.7)
 
 ## Return Value
 

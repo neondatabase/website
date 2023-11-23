@@ -1,18 +1,23 @@
+[#id](#QUERIES-WITH)
+
 ## 7.8. `WITH` Queries (Common Table Expressions) [#](#QUERIES-WITH)
 
-  * *   [7.8.1. `SELECT` in `WITH`](queries-with.html#QUERIES-WITH-SELECT)
-  * [7.8.2. Recursive Queries](queries-with.html#QUERIES-WITH-RECURSIVE)
-  * [7.8.3. Common Table Expression Materialization](queries-with.html#QUERIES-WITH-CTE-MATERIALIZATION)
-  * [7.8.4. Data-Modifying Statements in `WITH`](queries-with.html#QUERIES-WITH-MODIFYING)
+  * [7.8.1. `SELECT` in `WITH`](queries-with#QUERIES-WITH-SELECT)
+  * [7.8.2. Recursive Queries](queries-with#QUERIES-WITH-RECURSIVE)
+  * [7.8.3. Common Table Expression Materialization](queries-with#QUERIES-WITH-CTE-MATERIALIZATION)
+  * [7.8.4. Data-Modifying Statements in `WITH`](queries-with#QUERIES-WITH-MODIFYING)
+
+
 
 `WITH` provides a way to write auxiliary statements for use in a larger query. These statements, which are often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist just for one query. Each auxiliary statement in a `WITH` clause can be a `SELECT`, `INSERT`, `UPDATE`, or `DELETE`; and the `WITH` clause itself is attached to a primary statement that can be a `SELECT`, `INSERT`, `UPDATE`, `DELETE`, or `MERGE`.
+
+[#id](#QUERIES-WITH-SELECT)
 
 ### 7.8.1. `SELECT` in `WITH` [#](#QUERIES-WITH-SELECT)
 
 The basic value of `SELECT` in `WITH` is to break down complicated queries into simpler parts. An example is:
 
 ```
-
 WITH regional_sales AS (
     SELECT region, SUM(amount) AS total_sales
     FROM orders
@@ -33,12 +38,13 @@ GROUP BY region, product;
 
 which displays per-product sales totals in only the top sales regions. The `WITH` clause defines two auxiliary statements named `regional_sales` and `top_regions`, where the output of `regional_sales` is used in `top_regions` and the output of `top_regions` is used in the primary `SELECT` query. This example could have been written without `WITH`, but we'd have needed two levels of nested sub-`SELECT`s. It's a bit easier to follow this way.
 
+[#id](#QUERIES-WITH-RECURSIVE)
+
 ### 7.8.2. Recursive Queries [#](#QUERIES-WITH-RECURSIVE)
 
 The optional `RECURSIVE` modifier changes `WITH` from a mere syntactic convenience into a feature that accomplishes things not otherwise possible in standard SQL. Using `RECURSIVE`, a `WITH` query can refer to its own output. A very simple example is this query to sum the integers from 1 through 100:
 
 ```
-
 WITH RECURSIVE t(n) AS (
     VALUES (1)
   UNION ALL
@@ -49,14 +55,17 @@ SELECT sum(n) FROM t;
 
 The general form of a recursive `WITH` query is always a *non-recursive term*, then `UNION` (or `UNION ALL`), then a *recursive term*, where only the recursive term can contain a reference to the query's own output. Such a query is executed as follows:
 
+[#id](#id-1.5.6.12.6.3)
+
 **Recursive Query Evaluation**
 
 1. Evaluate the non-recursive term. For `UNION` (but not `UNION ALL`), discard duplicate rows. Include all remaining rows in the result of the recursive query, and also place them in a temporary *working table*.
 
 2. So long as the working table is not empty, repeat these steps:
 
-    1. Evaluate the recursive term, substituting the current contents of the working table for the recursive self-reference. For `UNION` (but not `UNION ALL`), discard duplicate rows and rows that duplicate any previous result row. Include all remaining rows in the result of the recursive query, and also place them in a temporary *intermediate table*.
-    2. Replace the contents of the working table with the contents of the intermediate table, then empty the intermediate table.
+   1. Evaluate the recursive term, substituting the current contents of the working table for the recursive self-reference. For `UNION` (but not `UNION ALL`), discard duplicate rows and rows that duplicate any previous result row. Include all remaining rows in the result of the recursive query, and also place them in a temporary *intermediate table*.
+
+   2. Replace the contents of the working table with the contents of the intermediate table, then empty the intermediate table.
 
 ### Note
 
@@ -67,7 +76,6 @@ In the example above, the working table has just a single row in each step, and 
 Recursive queries are typically used to deal with hierarchical or tree-structured data. A useful example is this query to find all the direct and indirect sub-parts of a product, given only a table that shows immediate inclusions:
 
 ```
-
 WITH RECURSIVE included_parts(sub_part, part, quantity) AS (
     SELECT sub_part, part, quantity FROM parts WHERE part = 'our_product'
   UNION ALL
@@ -80,6 +88,8 @@ FROM included_parts
 GROUP BY sub_part
 ```
 
+[#id](#QUERIES-WITH-SEARCH)
+
 #### 7.8.2.1. Search Order [#](#QUERIES-WITH-SEARCH)
 
 When computing a tree traversal using a recursive query, you might want to order the results in either depth-first or breadth-first order. This can be done by computing an ordering column alongside the other data columns and using that to sort the results at the end. Note that this does not actually control in which order the query evaluation visits the rows; that is as always in SQL implementation-dependent. This approach merely provides a convenient way to order the results afterwards.
@@ -87,7 +97,6 @@ When computing a tree traversal using a recursive query, you might want to order
 To create a depth-first order, we compute for each result row an array of rows that we have visited so far. For example, consider the following query that searches a table `tree` using a `link` field:
 
 ```
-
 WITH RECURSIVE search_tree(id, link, data) AS (
     SELECT t.id, t.link, t.data
     FROM tree t
@@ -102,7 +111,6 @@ SELECT * FROM search_tree;
 To add depth-first ordering information, you can write this:
 
 ```
-
 WITH RECURSIVE search_tree(id, link, data, path) AS (
     SELECT t.id, t.link, t.data, ARRAY[t.id]
     FROM tree t
@@ -117,7 +125,6 @@ SELECT * FROM search_tree ORDER BY path;
 In the general case where more than one field needs to be used to identify a row, use an array of rows. For example, if we needed to track fields `f1` and `f2`:
 
 ```
-
 WITH RECURSIVE search_tree(id, link, data, path) AS (
     SELECT t.id, t.link, t.data, ARRAY[ROW(t.f1, t.f2)]
     FROM tree t
@@ -136,7 +143,6 @@ Omit the `ROW()` syntax in the common case where only one field needs to be trac
 To create a breadth-first order, you can add a column that tracks the depth of the search, for example:
 
 ```
-
 WITH RECURSIVE search_tree(id, link, data, depth) AS (
     SELECT t.id, t.link, t.data, 0
     FROM tree t
@@ -157,7 +163,6 @@ The recursive query evaluation algorithm produces its output in breadth-first se
 There is built-in syntax to compute a depth- or breadth-first sort column. For example:
 
 ```
-
 WITH RECURSIVE search_tree(id, link, data) AS (
     SELECT t.id, t.link, t.data
     FROM tree t
@@ -181,12 +186,13 @@ SELECT * FROM search_tree ORDER BY ordercol;
 
 This syntax is internally expanded to something similar to the above hand-written forms. The `SEARCH` clause specifies whether depth- or breadth first search is wanted, the list of columns to track for sorting, and a column name that will contain the result data that can be used for sorting. That column will implicitly be added to the output rows of the CTE.
 
+[#id](#QUERIES-WITH-CYCLE)
+
 #### 7.8.2.2. Cycle Detection [#](#QUERIES-WITH-CYCLE)
 
 When working with recursive queries it is important to be sure that the recursive part of the query will eventually return no tuples, or else the query will loop indefinitely. Sometimes, using `UNION` instead of `UNION ALL` can accomplish this by discarding rows that duplicate previous output rows. However, often a cycle does not involve output rows that are completely duplicate: it may be necessary to check just one or a few fields to see if the same point has been reached before. The standard method for handling such situations is to compute an array of the already-visited values. For example, consider again the following query that searches a table `graph` using a `link` field:
 
 ```
-
 WITH RECURSIVE search_graph(id, link, data, depth) AS (
     SELECT g.id, g.link, g.data, 0
     FROM graph g
@@ -201,7 +207,6 @@ SELECT * FROM search_graph;
 This query will loop if the `link` relationships contain cycles. Because we require a “depth” output, just changing `UNION ALL` to `UNION` would not eliminate the looping. Instead we need to recognize whether we have reached the same row again while following a particular path of links. We add two columns `is_cycle` and `path` to the loop-prone query:
 
 ```
-
 WITH RECURSIVE search_graph(id, link, data, depth, is_cycle, path) AS (
     SELECT g.id, g.link, g.data, 0,
       false,
@@ -222,7 +227,6 @@ Aside from preventing cycles, the array value is often useful in its own right a
 In the general case where more than one field needs to be checked to recognize a cycle, use an array of rows. For example, if we needed to compare fields `f1` and `f2`:
 
 ```
-
 WITH RECURSIVE search_graph(id, link, data, depth, is_cycle, path) AS (
     SELECT g.id, g.link, g.data, 0,
       false,
@@ -245,7 +249,6 @@ Omit the `ROW()` syntax in the common case where only one field needs to be chec
 There is built-in syntax to simplify cycle detection. The above query can also be written like this:
 
 ```
-
 WITH RECURSIVE search_graph(id, link, data, depth) AS (
     SELECT g.id, g.link, g.data, 1
     FROM graph g
@@ -266,7 +269,6 @@ The cycle path column is computed in the same way as the depth-first ordering co
 A helpful trick for testing queries when you are not certain if they might loop is to place a `LIMIT` in the parent query. For example, this query would loop forever without the `LIMIT`:
 
 ```
-
 WITH RECURSIVE t(n) AS (
     SELECT 1
   UNION ALL
@@ -277,6 +279,8 @@ SELECT n FROM t LIMIT 100;
 
 This works because PostgreSQL's implementation evaluates only as many rows of a `WITH` query as are actually fetched by the parent query. Using this trick in production is not recommended, because other systems might work differently. Also, it usually won't work if you make the outer query sort the recursive query's results or join them to some other table, because in such cases the outer query will usually try to fetch all of the `WITH` query's output anyway.
 
+[#id](#QUERIES-WITH-CTE-MATERIALIZATION)
+
 ### 7.8.3. Common Table Expression Materialization [#](#QUERIES-WITH-CTE-MATERIALIZATION)
 
 A useful property of `WITH` queries is that they are normally evaluated only once per execution of the parent query, even if they are referred to more than once by the parent query or sibling `WITH` queries. Thus, expensive calculations that are needed in multiple places can be placed within a `WITH` query to avoid redundant work. Another possible application is to prevent unwanted multiple evaluations of functions with side-effects. However, the other side of this coin is that the optimizer is not able to push restrictions from the parent query down into a multiply-referenced `WITH` query, since that might affect all uses of the `WITH` query's output when it should affect only one. The multiply-referenced `WITH` query will be evaluated as written, without suppression of rows that the parent query might discard afterwards. (But, as mentioned above, evaluation might stop early if the reference(s) to the query demand only a limited number of rows.)
@@ -286,7 +290,6 @@ However, if a `WITH` query is non-recursive and side-effect-free (that is, it is
 A simple example of these rules is
 
 ```
-
 WITH w AS (
     SELECT * FROM big_table
 )
@@ -296,14 +299,12 @@ SELECT * FROM w WHERE key = 123;
 This `WITH` query will be folded, producing the same execution plan as
 
 ```
-
 SELECT * FROM big_table WHERE key = 123;
 ```
 
 In particular, if there's an index on `key`, it will probably be used to fetch just the rows having `key = 123`. On the other hand, in
 
 ```
-
 WITH w AS (
     SELECT * FROM big_table
 )
@@ -314,7 +315,6 @@ WHERE w2.key = 123;
 the `WITH` query will be materialized, producing a temporary copy of `big_table` that is then joined with itself — without benefit of any index. This query will be executed much more efficiently if written as
 
 ```
-
 WITH w AS NOT MATERIALIZED (
     SELECT * FROM big_table
 )
@@ -327,7 +327,6 @@ so that the parent query's restrictions can be applied directly to scans of `big
 An example where `NOT MATERIALIZED` could be undesirable is
 
 ```
-
 WITH w AS (
     SELECT key, very_expensive_function(val) as f FROM some_table
 )
@@ -338,12 +337,13 @@ Here, materialization of the `WITH` query ensures that `very_expensive_function`
 
 The examples above only show `WITH` being used with `SELECT`, but it can be attached in the same way to `INSERT`, `UPDATE`, `DELETE`, or `MERGE`. In each case it effectively provides temporary table(s) that can be referred to in the main command.
 
+[#id](#QUERIES-WITH-MODIFYING)
+
 ### 7.8.4. Data-Modifying Statements in `WITH` [#](#QUERIES-WITH-MODIFYING)
 
 You can use most data-modifying statements (`INSERT`, `UPDATE`, or `DELETE`, but not `MERGE`) in `WITH`. This allows you to perform several different operations in the same query. An example is:
 
 ```
-
 WITH moved_rows AS (
     DELETE FROM products
     WHERE
@@ -359,10 +359,9 @@ This query effectively moves rows from `products` to `products_log`. The `DELETE
 
 A fine point of the above example is that the `WITH` clause is attached to the `INSERT`, not the sub-`SELECT` within the `INSERT`. This is necessary because data-modifying statements are only allowed in `WITH` clauses that are attached to the top-level statement. However, normal `WITH` visibility rules apply, so it is possible to refer to the `WITH` statement's output from the sub-`SELECT`.
 
-Data-modifying statements in `WITH` usually have `RETURNING` clauses (see [Section 6.4](dml-returning.html "6.4. Returning Data from Modified Rows")), as shown in the example above. It is the output of the `RETURNING` clause, *not* the target table of the data-modifying statement, that forms the temporary table that can be referred to by the rest of the query. If a data-modifying statement in `WITH` lacks a `RETURNING` clause, then it forms no temporary table and cannot be referred to in the rest of the query. Such a statement will be executed nonetheless. A not-particularly-useful example is:
+Data-modifying statements in `WITH` usually have `RETURNING` clauses (see [Section 6.4](dml-returning)), as shown in the example above. It is the output of the `RETURNING` clause, *not* the target table of the data-modifying statement, that forms the temporary table that can be referred to by the rest of the query. If a data-modifying statement in `WITH` lacks a `RETURNING` clause, then it forms no temporary table and cannot be referred to in the rest of the query. Such a statement will be executed nonetheless. A not-particularly-useful example is:
 
 ```
-
 WITH t AS (
     DELETE FROM foo
 )
@@ -374,7 +373,6 @@ This example would remove all rows from tables `foo` and `bar`. The number of af
 Recursive self-references in data-modifying statements are not allowed. In some cases it is possible to work around this limitation by referring to the output of a recursive `WITH`, for example:
 
 ```
-
 WITH RECURSIVE included_parts(sub_part, part) AS (
     SELECT sub_part, part FROM parts WHERE part = 'our_product'
   UNION ALL
@@ -390,10 +388,9 @@ This query would remove all direct and indirect subparts of a product.
 
 Data-modifying statements in `WITH` are executed exactly once, and always to completion, independently of whether the primary query reads all (or indeed any) of their output. Notice that this is different from the rule for `SELECT` in `WITH`: as stated in the previous section, execution of a `SELECT` is carried only as far as the primary query demands its output.
 
-The sub-statements in `WITH` are executed concurrently with each other and with the main query. Therefore, when using data-modifying statements in `WITH`, the order in which the specified updates actually happen is unpredictable. All the statements are executed with the same *snapshot* (see [Chapter 13](mvcc.html "Chapter 13. Concurrency Control")), so they cannot “see” one another's effects on the target tables. This alleviates the effects of the unpredictability of the actual order of row updates, and means that `RETURNING` data is the only way to communicate changes between different `WITH` sub-statements and the main query. An example of this is that in
+The sub-statements in `WITH` are executed concurrently with each other and with the main query. Therefore, when using data-modifying statements in `WITH`, the order in which the specified updates actually happen is unpredictable. All the statements are executed with the same *snapshot* (see [Chapter 13](mvcc)), so they cannot “see” one another's effects on the target tables. This alleviates the effects of the unpredictability of the actual order of row updates, and means that `RETURNING` data is the only way to communicate changes between different `WITH` sub-statements and the main query. An example of this is that in
 
 ```
-
 WITH t AS (
     UPDATE products SET price = price * 1.05
     RETURNING *
@@ -404,7 +401,6 @@ SELECT * FROM products;
 the outer `SELECT` would return the original prices before the action of the `UPDATE`, while in
 
 ```
-
 WITH t AS (
     UPDATE products SET price = price * 1.05
     RETURNING *

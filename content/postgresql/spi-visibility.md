@@ -1,15 +1,16 @@
+[#id](#SPI-VISIBILITY)
+
 ## 47.5. Visibility of Data Changes [#](#SPI-VISIBILITY)
 
 The following rules govern the visibility of data changes in functions that use SPI (or any other C function):
 
 * During the execution of an SQL command, any data changes made by the command are invisible to the command itself. For example, in:
 
-    ```
+  ```
+  INSERT INTO a SELECT * FROM a;
+  ```
 
-    INSERT INTO a SELECT * FROM a;
-    ```
-
-    the inserted rows are invisible to the `SELECT` part.
+  the inserted rows are invisible to the `SELECT` part.
 
 * Changes made by a command C are visible to all commands that are started after C, no matter whether they are started inside C (during the execution of C) or after C is done.
 

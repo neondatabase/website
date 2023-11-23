@@ -1,3 +1,5 @@
+[#id](#CONTRIB-DBLINK-CONNECT-U)
+
 ## dblink\_connect\_u
 
 dblink\_connect\_u — opens a persistent connection to a remote database, insecurely
@@ -9,6 +11,8 @@ dblink\_connect\_u — opens a persistent connection to a remote database, insec
 dblink_connect_u(text connstr) returns text
 dblink_connect_u(text connname, text connstr) returns text
 ```
+
+[#id](#id-1.11.7.22.6.5)
 
 ## Description
 

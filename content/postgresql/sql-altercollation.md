@@ -1,3 +1,5 @@
+[#id](#SQL-ALTERCOLLATION)
+
 ## ALTER COLLATION
 
 ALTER COLLATION — change the definition of a collation
@@ -5,7 +7,6 @@ ALTER COLLATION — change the definition of a collation
 ## Synopsis
 
 ```
-
 ALTER COLLATION name REFRESH VERSION
 
 ALTER COLLATION name RENAME TO new_name
@@ -13,40 +14,45 @@ ALTER COLLATION name OWNER TO { new_owner | CURRENT_ROLE | CURRENT_USER | SESSIO
 ALTER COLLATION name SET SCHEMA new_schema
 ```
 
+[#id](#id-1.9.3.5.5)
+
 ## Description
 
 `ALTER COLLATION` changes the definition of a collation.
 
 You must own the collation to use `ALTER COLLATION`. To alter the owner, you must be able to `SET ROLE` to the new owning role, and that role must have `CREATE` privilege on the collation's schema. (These restrictions enforce that altering the owner doesn't do anything you couldn't do by dropping and recreating the collation. However, a superuser can alter ownership of any collation anyway.)
 
+[#id](#id-1.9.3.5.6)
+
 ## Parameters
 
 * *`name`*
 
-    The name (optionally schema-qualified) of an existing collation.
+  The name (optionally schema-qualified) of an existing collation.
 
 * *`new_name`*
 
-    The new name of the collation.
+  The new name of the collation.
 
 * *`new_owner`*
 
-    The new owner of the collation.
+  The new owner of the collation.
 
 * *`new_schema`*
 
-    The new schema for the collation.
+  The new schema for the collation.
 
 * `REFRESH VERSION`
 
-    Update the collation's version. See [Notes](sql-altercollation.html#SQL-ALTERCOLLATION-NOTES "Notes") below.
+  Update the collation's version. See [Notes](sql-altercollation#SQL-ALTERCOLLATION-NOTES) below.
+
+[#id](#SQL-ALTERCOLLATION-NOTES)
 
 ## Notes
 
 When a collation object is created, the provider-specific version of the collation is recorded in the system catalog. When the collation is used, the current version is checked against the recorded version, and a warning is issued when there is a mismatch, for example:
 
 ```
-
 WARNING:  collation "xx-x-icu" has version mismatch
 DETAIL:  The collation in the database was created using version 1.2.3.4, but the operating system provides version 2.3.4.5.
 HINT:  Rebuild all objects affected by this collation and run ALTER COLLATION pg_catalog."xx-x-icu" REFRESH VERSION, or build PostgreSQL with the right library version.
@@ -67,7 +73,6 @@ For the database default collation, there is an analogous command `ALTER DATABAS
 The following query can be used to identify all collations in the current database that need to be refreshed and the objects that depend on them:
 
 ```
-
 SELECT pg_describe_object(refclassid, refobjid, refobjsubid) AS "Collation",
        pg_describe_object(classid, objid, objsubid) AS "Object"
   FROM pg_depend d JOIN pg_collation c
@@ -76,26 +81,30 @@ SELECT pg_describe_object(refclassid, refobjid, refobjsubid) AS "Collation",
   ORDER BY 1, 2;
 ```
 
+[#id](#id-1.9.3.5.8)
+
 ## Examples
 
 To rename the collation `de_DE` to `german`:
 
 ```
-
 ALTER COLLATION "de_DE" RENAME TO german;
 ```
 
 To change the owner of the collation `en_US` to `joe`:
 
 ```
-
 ALTER COLLATION "en_US" OWNER TO joe;
 ```
+
+[#id](#id-1.9.3.5.9)
 
 ## Compatibility
 
 There is no `ALTER COLLATION` statement in the SQL standard.
 
+[#id](#id-1.9.3.5.10)
+
 ## See Also
 
-[CREATE COLLATION](sql-createcollation.html "CREATE COLLATION"), [DROP COLLATION](sql-dropcollation.html "DROP COLLATION")
+[CREATE COLLATION](sql-createcollation), [DROP COLLATION](sql-dropcollation)

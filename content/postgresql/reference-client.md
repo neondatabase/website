@@ -1,3 +1,5 @@
+[#id](#REFERENCE-CLIENT)
+
 # PostgreSQL Client Applications
 
 This part contains reference information for PostgreSQL client applications and utilities. Not all of these commands are of general utility; some might require special privileges. The common feature of these applications is that they can be run on any host, independent of where the database server resides.

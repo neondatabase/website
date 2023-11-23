@@ -1,3 +1,5 @@
+[#id](#CONTRIB-DBLINK-IS-BUSY)
+
 ## dblink\_is\_busy
 
 dblink\_is\_busy — checks if connection is busy with an async query
@@ -9,19 +11,27 @@ dblink\_is\_busy — checks if connection is busy with an async query
 dblink_is_busy(text connname) returns int
 ```
 
+[#id](#id-1.11.7.22.16.5)
+
 ## Description
 
 `dblink_is_busy` tests whether an async query is in progress.
+
+[#id](#id-1.11.7.22.16.6)
 
 ## Arguments
 
 * *`connname`*
 
-    Name of the connection to check.
+  Name of the connection to check.
+
+[#id](#id-1.11.7.22.16.7)
 
 ## Return Value
 
 Returns 1 if connection is busy, 0 if it is not busy. If this function returns 0, it is guaranteed that `dblink_get_result` will not block.
+
+[#id](#id-1.11.7.22.16.8)
 
 ## Examples
 

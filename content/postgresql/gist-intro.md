@@ -1,3 +1,5 @@
+[#id](#GIST-INTRO)
+
 ## 68.1. Introduction [#](#GIST-INTRO)
 
 GiST stands for Generalized Search Tree. It is a balanced, tree-structured access method, that acts as a base template in which to implement arbitrary indexing schemes. B-trees, R-trees and many other indexing schemes can be implemented in GiST.

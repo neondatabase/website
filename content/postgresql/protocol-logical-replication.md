@@ -1,12 +1,16 @@
+[#id](#PROTOCOL-LOGICAL-REPLICATION)
+
 ## 55.5. Logical Streaming Replication Protocol [#](#PROTOCOL-LOGICAL-REPLICATION)
 
-  * *   [55.5.1. Logical Streaming Replication Parameters](protocol-logical-replication.html#PROTOCOL-LOGICAL-REPLICATION-PARAMS)
-  * [55.5.2. Logical Replication Protocol Messages](protocol-logical-replication.html#PROTOCOL-LOGICAL-MESSAGES)
-  * [55.5.3. Logical Replication Protocol Message Flow](protocol-logical-replication.html#PROTOCOL-LOGICAL-MESSAGES-FLOW)
+  * [55.5.1. Logical Streaming Replication Parameters](protocol-logical-replication#PROTOCOL-LOGICAL-REPLICATION-PARAMS)
+  * [55.5.2. Logical Replication Protocol Messages](protocol-logical-replication#PROTOCOL-LOGICAL-MESSAGES)
+  * [55.5.3. Logical Replication Protocol Message Flow](protocol-logical-replication#PROTOCOL-LOGICAL-MESSAGES-FLOW)
 
 This section describes the logical replication protocol, which is the message flow started by the `START_REPLICATION` `SLOT` *`slot_name`* `LOGICAL` replication command.
 
 The logical streaming replication protocol builds on the primitives of the physical streaming replication protocol.
+
+[#id](#PROTOCOL-LOGICAL-REPLICATION-PARAMS)
 
 ### 55.5.1. Logical Streaming Replication Parameters [#](#PROTOCOL-LOGICAL-REPLICATION-PARAMS)
 
@@ -14,25 +18,29 @@ The logical replication `START_REPLICATION` command accepts following parameters
 
 * proto\_version
 
-    Protocol version. Currently versions `1`, `2`, `3`, and `4` are supported.
+  Protocol version. Currently versions `1`, `2`, `3`, and `4` are supported.
 
-    Version `2` is supported only for server version 14 and above, and it allows streaming of large in-progress transactions.
+  Version `2` is supported only for server version 14 and above, and it allows streaming of large in-progress transactions.
 
-    Version `3` is supported only for server version 15 and above, and it allows streaming of two-phase commits.
+  Version `3` is supported only for server version 15 and above, and it allows streaming of two-phase commits.
 
-    Version `4` is supported only for server version 16 and above, and it allows streams of large in-progress transactions to be applied in parallel.
+  Version `4` is supported only for server version 16 and above, and it allows streams of large in-progress transactions to be applied in parallel.
 
 * publication\_names
 
-    Comma separated list of publication names for which to subscribe (receive changes). The individual publication names are treated as standard objects names and can be quoted the same as needed.
+  Comma separated list of publication names for which to subscribe (receive changes). The individual publication names are treated as standard objects names and can be quoted the same as needed.
+
+[#id](#PROTOCOL-LOGICAL-MESSAGES)
 
 ### 55.5.2. Logical Replication Protocol Messages [#](#PROTOCOL-LOGICAL-MESSAGES)
 
-The individual protocol messages are discussed in the following subsections. Individual messages are described in [Section 55.9](protocol-logicalrep-message-formats.html "55.9. Logical Replication Message Formats").
+The individual protocol messages are discussed in the following subsections. Individual messages are described in [Section 55.9](protocol-logicalrep-message-formats).
 
 All top-level protocol messages begin with a message type byte. While represented in code as a character, this is a signed byte with no associated encoding.
 
 Since the streaming replication protocol supplies a message length there is no need for top-level protocol messages to embed a length in their header.
+
+[#id](#PROTOCOL-LOGICAL-MESSAGES-FLOW)
 
 ### 55.5.3. Logical Replication Protocol Message Flow [#](#PROTOCOL-LOGICAL-MESSAGES-FLOW)
 

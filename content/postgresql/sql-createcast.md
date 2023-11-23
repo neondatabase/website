@@ -1,3 +1,5 @@
+[#id](#SQL-CREATECAST)
+
 ## CREATE CAST
 
 CREATE CAST — define a new cast
@@ -5,7 +7,6 @@ CREATE CAST — define a new cast
 ## Synopsis
 
 ```
-
 CREATE CAST (source_type AS target_type)
     WITH FUNCTION function_name [ (argument_type [, ...]) ]
     [ AS ASSIGNMENT | AS IMPLICIT ]
@@ -19,12 +20,13 @@ CREATE CAST (source_type AS target_type)
     [ AS ASSIGNMENT | AS IMPLICIT ]
 ```
 
+[#id](#SQL-CREATECAST-DESCRIPTION)
+
 ## Description
 
 `CREATE CAST` defines a new cast. A cast specifies how to perform a conversion between two data types. For example,
 
 ```
-
 SELECT CAST(42 AS float8);
 ```
 
@@ -39,7 +41,6 @@ By default, a cast can be invoked only by an explicit cast request, that is an e
 If the cast is marked `AS ASSIGNMENT` then it can be invoked implicitly when assigning a value to a column of the target data type. For example, supposing that `foo.f1` is a column of type `text`, then:
 
 ```
-
 INSERT INTO foo (f1) VALUES (42);
 ```
 
@@ -48,14 +49,12 @@ will be allowed if the cast from type `integer` to type `text` is marked `AS ASS
 If the cast is marked `AS IMPLICIT` then it can be invoked implicitly in any context, whether assignment or internally in an expression. (We generally use the term *implicit cast* to describe this kind of cast.) For example, consider this query:
 
 ```
-
 SELECT 2 + 4.0;
 ```
 
 The parser initially marks the constants as being of type `integer` and `numeric` respectively. There is no `integer` `+` `numeric` operator in the system catalogs, but there is a `numeric` `+` `numeric` operator. The query will therefore succeed if a cast from `integer` to `numeric` is available and is marked `AS IMPLICIT` — which in fact it is. The parser will apply the implicit cast and resolve the query as if it had been written
 
 ```
-
 SELECT CAST ( 2 AS numeric ) + 4.0;
 ```
 
@@ -65,39 +64,41 @@ It is wise to be conservative about marking casts as implicit. An overabundance 
 
 ### Note
 
-Sometimes it is necessary for usability or standards-compliance reasons to provide multiple implicit casts among a set of types, resulting in ambiguity that cannot be avoided as above. The parser has a fallback heuristic based on *type categories* and *preferred types* that can help to provide desired behavior in such cases. See [CREATE TYPE](sql-createtype.html "CREATE TYPE") for more information.
+Sometimes it is necessary for usability or standards-compliance reasons to provide multiple implicit casts among a set of types, resulting in ambiguity that cannot be avoided as above. The parser has a fallback heuristic based on *type categories* and *preferred types* that can help to provide desired behavior in such cases. See [CREATE TYPE](sql-createtype) for more information.
 
 To be able to create a cast, you must own the source or the target data type and have `USAGE` privilege on the other type. To create a binary-coercible cast, you must be superuser. (This restriction is made because an erroneous binary-coercible cast conversion can easily crash the server.)
+
+[#id](#id-1.9.3.58.6)
 
 ## Parameters
 
 * *`source_type`*
 
-    The name of the source data type of the cast.
+  The name of the source data type of the cast.
 
 * *`target_type`*
 
-    The name of the target data type of the cast.
+  The name of the target data type of the cast.
 
 * `function_name[(argument_type [, ...])]`
 
-    The function used to perform the cast. The function name can be schema-qualified. If it is not, the function will be looked up in the schema search path. The function's result data type must match the target type of the cast. Its arguments are discussed below. If no argument list is specified, the function name must be unique in its schema.
+  The function used to perform the cast. The function name can be schema-qualified. If it is not, the function will be looked up in the schema search path. The function's result data type must match the target type of the cast. Its arguments are discussed below. If no argument list is specified, the function name must be unique in its schema.
 
 * `WITHOUT FUNCTION`
 
-    Indicates that the source type is binary-coercible to the target type, so no function is required to perform the cast.
+  Indicates that the source type is binary-coercible to the target type, so no function is required to perform the cast.
 
 * `WITH INOUT`
 
-    Indicates that the cast is an I/O conversion cast, performed by invoking the output function of the source data type, and passing the resulting string to the input function of the target data type.
+  Indicates that the cast is an I/O conversion cast, performed by invoking the output function of the source data type, and passing the resulting string to the input function of the target data type.
 
 * `AS ASSIGNMENT`
 
-    Indicates that the cast can be invoked implicitly in assignment contexts.
+  Indicates that the cast can be invoked implicitly in assignment contexts.
 
 * `AS IMPLICIT`
 
-    Indicates that the cast can be invoked implicitly in any context.
+  Indicates that the cast can be invoked implicitly in any context.
 
 Cast implementation functions can have one to three arguments. The first argument type must be identical to or binary-coercible from the cast's source type. The second argument, if present, must be type `integer`; it receives the type modifier associated with the destination type, or `-1` if there is none. The third argument, if present, must be type `boolean`; it receives `true` if the cast is an explicit cast, `false` otherwise. (Bizarrely, the SQL standard demands different behaviors for explicit and implicit casts in some cases. This argument is supplied for functions that must implement such casts. It is not recommended that you design your own data types so that this matters.)
 
@@ -109,11 +110,15 @@ When a cast has different source and target types and a function that takes more
 
 A cast to or from a domain type currently has no effect. Casting to or from a domain uses the casts associated with its underlying type.
 
+[#id](#SQL-CREATECAST-NOTES)
+
 ## Notes
 
-Use [`DROP CAST`](sql-dropcast.html "DROP CAST") to remove user-defined casts.
+Use [`DROP CAST`](sql-dropcast) to remove user-defined casts.
 
 Remember that if you want to be able to convert types both ways you need to declare casts both ways explicitly.
+
+
 
 It is normally not necessary to create casts between user-defined types and the standard string types (`text`, `varchar`, and `char(n)`, as well as user-defined types that are defined to be in the string category). PostgreSQL provides automatic I/O conversion casts for that. The automatic casts to string types are treated as assignment casts, while the automatic casts from string types are explicit-only. You can override this behavior by declaring your own cast to replace an automatic cast, but usually the only reason to do so is if you want the conversion to be more easily invokable than the standard assignment-only or explicit-only setting. Another possible reason is that you want the conversion to behave differently from the type's I/O function; but that is sufficiently surprising that you should think twice about whether it's a good idea. (A small number of the built-in types do indeed have different behaviors for conversions, mostly because of requirements of the SQL standard.)
 
@@ -127,21 +132,26 @@ Actually the preceding paragraph is an oversimplification: there are two cases i
 
 There is also an exception to the exception: I/O conversion casts from composite types to string types cannot be invoked using functional syntax, but must be written in explicit cast syntax (either `CAST` or `::` notation). This exception was added because after the introduction of automatically-provided I/O conversion casts, it was found too easy to accidentally invoke such a cast when a function or column reference was intended.
 
+[#id](#SQL-CREATECAST-EXAMPLES)
+
 ## Examples
 
 To create an assignment cast from type `bigint` to type `int4` using the function `int4(bigint)`:
 
 ```
-
 CREATE CAST (bigint AS int4) WITH FUNCTION int4(bigint) AS ASSIGNMENT;
 ```
 
 (This cast is already predefined in the system.)
 
+[#id](#SQL-CREATECAST-COMPAT)
+
 ## Compatibility
 
 The `CREATE CAST` command conforms to the SQL standard, except that SQL does not make provisions for binary-coercible types or extra arguments to implementation functions. `AS IMPLICIT` is a PostgreSQL extension, too.
 
+[#id](#SQL-CREATECAST-SEEALSO)
+
 ## See Also
 
-[CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [CREATE TYPE](sql-createtype.html "CREATE TYPE"), [DROP CAST](sql-dropcast.html "DROP CAST")
+[CREATE FUNCTION](sql-createfunction), [CREATE TYPE](sql-createtype), [DROP CAST](sql-dropcast)

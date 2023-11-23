@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-FREETUPLETABLE)
+
 ## SPI\_freetuptable
 
 SPI\_freetuptable — free a row set created by `SPI_execute` or a similar function
@@ -5,9 +7,10 @@ SPI\_freetuptable — free a row set created by `SPI_execute` or a similar funct
 ## Synopsis
 
 ```
-
 void SPI_freetuptable(SPITupleTable * tuptable)
 ```
+
+[#id](#id-1.8.12.10.13.5)
 
 ## Description
 
@@ -17,8 +20,10 @@ This function is useful if an SPI-using C function needs to execute multiple com
 
 Beginning in PostgreSQL 9.3, `SPI_freetuptable` contains guard logic to protect against duplicate deletion requests for the same row set. In previous releases, duplicate deletions would lead to crashes.
 
+[#id](#id-1.8.12.10.13.6)
+
 ## Arguments
 
 * `SPITupleTable * tuptable`
 
-    pointer to row set to free, or NULL to do nothing
+  pointer to row set to free, or NULL to do nothing

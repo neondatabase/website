@@ -17,7 +17,10 @@ const Search = dynamic(() => import('components/shared/search'), { ssr: false })
 const CTA = ({ isDocsPage = false }) =>
   isDocsPage ? (
     <div className="flex w-full flex-col">
-      <Search className="DocSearch-notFound my-8" />
+      <Search
+        className="DocSearch-notFound my-8"
+        indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
+      />
       <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
         Back to home
       </Link>

@@ -1,16 +1,18 @@
+[#id](#TUTORIAL-WINDOW)
+
 ## 3.5. Window Functions [#](#TUTORIAL-WINDOW)
+
+
 
 A *window function* performs a calculation across a set of table rows that are somehow related to the current row. This is comparable to the type of calculation that can be done with an aggregate function. However, window functions do not cause rows to become grouped into a single output row like non-window aggregate calls would. Instead, the rows retain their separate identities. Behind the scenes, the window function is able to access more than just the current row of the query result.
 
 Here is an example that shows how to compare each employee's salary with the average salary in his or her department:
 
 ```
-
 SELECT depname, empno, salary, avg(salary) OVER (PARTITION BY depname) FROM empsalary;
 ```
 
 ```
-
   depname  | empno | salary |          avg
 -----------+-------+--------+-----------------------
  develop   |    11 |   5200 | 5020.0000000000000000
@@ -33,14 +35,12 @@ A window function call always contains an `OVER` clause directly following the w
 You can also control the order in which rows are processed by window functions using `ORDER BY` within `OVER`. (The window `ORDER BY` does not even have to match the order in which the rows are output.) Here is an example:
 
 ```
-
 SELECT depname, empno, salary,
        rank() OVER (PARTITION BY depname ORDER BY salary DESC)
 FROM empsalary;
 ```
 
 ```
-
   depname  | empno | salary | rank
 -----------+-------+--------+------
  develop   |     8 |   6000 |    1
@@ -65,12 +65,10 @@ We already saw that `ORDER BY` can be omitted if the ordering of rows is not imp
 There is another important concept associated with window functions: for each row, there is a set of rows within its partition called its *window frame*. Some window functions act only on the rows of the window frame, rather than of the whole partition. By default, if `ORDER BY` is supplied then the frame consists of all rows from the start of the partition up through the current row, plus any following rows that are equal to the current row according to the `ORDER BY` clause. When `ORDER BY` is omitted the default frame consists of all rows in the partition. [\[5\]](#ftn.id-1.4.5.6.9.5) Here is an example using `sum`:
 
 ```
-
 SELECT salary, sum(salary) OVER () FROM empsalary;
 ```
 
 ```
-
  salary |  sum
 --------+-------
    5200 | 47100
@@ -89,12 +87,10 @@ SELECT salary, sum(salary) OVER () FROM empsalary;
 Above, since there is no `ORDER BY` in the `OVER` clause, the window frame is the same as the partition, which for lack of `PARTITION BY` is the whole table; in other words each sum is taken over the whole table and so we get the same result for each output row. But if we add an `ORDER BY` clause, we get very different results:
 
 ```
-
 SELECT salary, sum(salary) OVER (ORDER BY salary) FROM empsalary;
 ```
 
 ```
-
  salary |  sum
 --------+-------
    3500 |  3500
@@ -117,7 +113,6 @@ Window functions are permitted only in the `SELECT` list and the `ORDER BY` clau
 If there is a need to filter or group rows after the window calculations are performed, you can use a sub-select. For example:
 
 ```
-
 SELECT depname, empno, salary, enroll_date
 FROM
   (SELECT depname, empno, salary, enroll_date,
@@ -132,10 +127,9 @@ The above query only shows the rows from the inner query having `rank` less than
 When a query involves multiple window functions, it is possible to write out each one with a separate `OVER` clause, but this is duplicative and error-prone if the same windowing behavior is wanted for several functions. Instead, each windowing behavior can be named in a `WINDOW` clause and then referenced in `OVER`. For example:
 
 ```
-
 SELECT sum(salary) OVER w, avg(salary) OVER w
   FROM empsalary
   WINDOW w AS (PARTITION BY depname ORDER BY salary DESC);
 ```
 
-More details about window functions can be found in [Section 4.2.8](sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS "4.2.8. Window Function Calls"), [Section 9.22](functions-window.html "9.22. Window Functions"), [Section 7.2.5](queries-table-expressions.html#QUERIES-WINDOW "7.2.5. Window Function Processing"), and the [SELECT](sql-select.html "SELECT") reference page.
+More details about window functions can be found in [Section 4.2.8](sql-expressions#SYNTAX-WINDOW-FUNCTIONS), [Section 9.22](functions-window), [Section 7.2.5](queries-table-expressions#QUERIES-WINDOW), and the [SELECT](sql-select) reference page.

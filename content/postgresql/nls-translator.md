@@ -1,11 +1,15 @@
+[#id](#NLS-TRANSLATOR)
+
 ## 57.1. For the Translator [#](#NLS-TRANSLATOR)
 
-  * *   [57.1.1. Requirements](nls-translator.html#NLS-TRANSLATOR-REQUIREMENTS)
-  * [57.1.2. Concepts](nls-translator.html#NLS-TRANSLATOR-CONCEPTS)
-  * [57.1.3. Creating and Maintaining Message Catalogs](nls-translator.html#NLS-TRANSLATOR-MESSAGE-CATALOGS)
-  * [57.1.4. Editing the PO Files](nls-translator.html#NLS-TRANSLATOR-EDITING-PO)
+  * [57.1.1. Requirements](nls-translator#NLS-TRANSLATOR-REQUIREMENTS)
+  * [57.1.2. Concepts](nls-translator#NLS-TRANSLATOR-CONCEPTS)
+  * [57.1.3. Creating and Maintaining Message Catalogs](nls-translator#NLS-TRANSLATOR-MESSAGE-CATALOGS)
+  * [57.1.4. Editing the PO Files](nls-translator#NLS-TRANSLATOR-EDITING-PO)
 
 PostgreSQL programs (server and client) can issue their messages in your favorite language — if the messages have been translated. Creating and maintaining translated message sets needs the help of people who speak their own language well and want to contribute to the PostgreSQL effort. You do not have to be a programmer at all to do this. This section explains how to help.
+
+[#id](#NLS-TRANSLATOR-REQUIREMENTS)
 
 ### 57.1.1. Requirements [#](#NLS-TRANSLATOR-REQUIREMENTS)
 
@@ -14,6 +18,8 @@ We won't judge your language skills — this section is about software tools. Th
 If you want to start a new translation effort or want to do a message catalog merge (described later), you will need the programs `xgettext` and `msgmerge`, respectively, in a GNU-compatible implementation. Later, we will try to arrange it so that if you use a packaged source distribution, you won't need `xgettext`. (If working from Git, you will still need it.) GNU Gettext 0.10.36 or later is currently recommended.
 
 Your local gettext implementation should come with its own documentation. Some of that is probably duplicated in what follows, but for additional details you should look there.
+
+[#id](#NLS-TRANSLATOR-CONCEPTS)
 
 ### 57.1.2. Concepts [#](#NLS-TRANSLATOR-CONCEPTS)
 
@@ -24,7 +30,6 @@ The extension of the message catalog file is to no surprise either `.po` or `.mo
 The file format of the PO files is illustrated here:
 
 ```
-
 # comment
 
 msgid "original string"
@@ -42,13 +47,14 @@ The msgid lines are extracted from the program source. (They need not be, but th
 The # character introduces a comment. If whitespace immediately follows the # character, then this is a comment maintained by the translator. There can also be automatic comments, which have a non-whitespace character immediately following the #. These are maintained by the various tools that operate on the PO files and are intended to aid the translator.
 
 ```
-
 #. automatic comment
 #: filename.c:1023
 #, flags, flags
 ```
 
 The #. style comments are extracted from the source file where the message is used. Possibly the programmer has inserted information for the translator, such as about expected alignment. The #: comments indicate the exact locations where the message is used in the source. The translator need not look at the program source, but can if there is doubt about the correct translation. The #, comments contain flags that describe the message in some way. There are currently two flags: `fuzzy` is set if the message has possibly been outdated because of changes in the program source. The translator can then verify this and possibly remove the fuzzy flag. Note that fuzzy messages are not made available to the end user. The other flag is `c-format`, which indicates that the message is a `printf`-style format template. This means that the translation should also be a format string with the same number and type of placeholders. There are tools that can verify this, which key off the c-format flag.
+
+[#id](#NLS-TRANSLATOR-MESSAGE-CATALOGS)
 
 ### 57.1.3. Creating and Maintaining Message Catalogs [#](#NLS-TRANSLATOR-MESSAGE-CATALOGS)
 
@@ -59,14 +65,12 @@ If there are already some `.po` files, then someone has already done some transl
 If you need to start a new translation effort, then first run the command:
 
 ```
-
 make init-po
 ```
 
 This will create a file `progname.pot`. (`.pot` to distinguish it from PO files that are “in production”. The `T` stands for “template”.) Copy this file to `language.po` and edit it. To make it known that the new language is available, also edit the file `po/LINGUAS` and add the language (or language and country) code next to languages already listed, like:
 
 ```
-
 de fr
 ```
 
@@ -75,11 +79,12 @@ de fr
 As the underlying program or library changes, messages might be changed or added by the programmers. In this case you do not need to start from scratch. Instead, run the command:
 
 ```
-
 make update-po
 ```
 
 which will create a new blank message catalog file (the pot file you started with) and will merge it with the existing PO files. If the merge algorithm is not sure about a particular message it marks it “fuzzy” as explained above. The new PO file is saved with a `.po.new` extension.
+
+[#id](#NLS-TRANSLATOR-EDITING-PO)
 
 ### 57.1.4. Editing the PO Files [#](#NLS-TRANSLATOR-EDITING-PO)
 
@@ -95,15 +100,14 @@ Here are some things to keep in mind while editing the translations:
 
 * If the original is a `printf` format string, the translation also needs to be. The translation also needs to have the same format specifiers in the same order. Sometimes the natural rules of the language make this impossible or at least awkward. In that case you can modify the format specifiers like this:
 
-    ```
+  ```
+  msgstr "Die Datei %2$s hat %1$u Zeichen."
+  ```
 
-    msgstr "Die Datei %2$s hat %1$u Zeichen."
-    ```
-
-    Then the first placeholder will actually use the second argument from the list. The `digits$` needs to follow the % immediately, before any other format manipulators. (This feature really exists in the `printf` family of functions. You might not have heard of it before because there is little use for it outside of message internationalization.)
+  Then the first placeholder will actually use the second argument from the list. The `digits$` needs to follow the % immediately, before any other format manipulators. (This feature really exists in the `printf` family of functions. You might not have heard of it before because there is little use for it outside of message internationalization.)
 
 * If the original string contains a linguistic mistake, report that (or fix it yourself in the program source) and translate normally. The corrected string can be merged in when the program sources have been updated. If the original string contains a factual mistake, report that (or fix it yourself) and do not translate it. Instead, you can mark the string with a comment in the PO file.
 
-* Maintain the style and tone of the original string. Specifically, messages that are not sentences (`cannot open file %s`) should probably not start with a capital letter (if your language distinguishes letter case) or end with a period (if your language uses punctuation marks). It might help to read [Section 56.3](error-style-guide.html "56.3. Error Message Style Guide").
+* Maintain the style and tone of the original string. Specifically, messages that are not sentences (`cannot open file %s`) should probably not start with a capital letter (if your language distinguishes letter case) or end with a period (if your language uses punctuation marks). It might help to read [Section 56.3](error-style-guide).
 
 * If you don't know what a message means, or if it is ambiguous, ask on the developers' mailing list. Chances are that English speaking end users might also not understand it or find it ambiguous, so it's best to improve the message.

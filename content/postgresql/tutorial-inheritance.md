@@ -1,11 +1,14 @@
+[#id](#TUTORIAL-INHERITANCE)
+
 ## 3.6. Inheritance [#](#TUTORIAL-INHERITANCE)
+
+
 
 Inheritance is a concept from object-oriented databases. It opens up interesting new possibilities of database design.
 
 Let's create two tables: A table `cities` and a table `capitals`. Naturally, capitals are also cities, so you want some way to show the capitals implicitly when you list all cities. If you're really clever you might invent some scheme like this:
 
 ```
-
 CREATE TABLE capitals (
   name       text,
   population real,
@@ -30,7 +33,6 @@ This works OK as far as querying goes, but it gets ugly when you need to update 
 A better solution is this:
 
 ```
-
 CREATE TABLE cities (
   name       text,
   population real,
@@ -47,7 +49,6 @@ In this case, a row of `capitals` *inherits* all columns (`name`, `population`, 
 For example, the following query finds the names of all cities, including state capitals, that are located at an elevation over 500 feet:
 
 ```
-
 SELECT name, elevation
   FROM cities
   WHERE elevation > 500;
@@ -56,7 +57,6 @@ SELECT name, elevation
 which returns:
 
 ```
-
    name    | elevation
 -----------+-----------
  Las Vegas |      2174
@@ -68,14 +68,12 @@ which returns:
 On the other hand, the following query finds all the cities that are not state capitals and are situated at an elevation over 500 feet:
 
 ```
-
 SELECT name, elevation
     FROM ONLY cities
     WHERE elevation > 500;
 ```
 
 ```
-
    name    | elevation
 -----------+-----------
  Las Vegas |      2174
@@ -87,4 +85,4 @@ Here the `ONLY` before `cities` indicates that the query should be run over only
 
 ### Note
 
-Although inheritance is frequently useful, it has not been integrated with unique constraints or foreign keys, which limits its usefulness. See [Section 5.10](ddl-inherit.html "5.10. Inheritance") for more detail.
+Although inheritance is frequently useful, it has not been integrated with unique constraints or foreign keys, which limits its usefulness. See [Section 5.10](ddl-inherit) for more detail.

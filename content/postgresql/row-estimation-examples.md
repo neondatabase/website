@@ -1,11 +1,14 @@
+[#id](#ROW-ESTIMATION-EXAMPLES)
+
 ## 76.1. Row Estimation Examples [#](#ROW-ESTIMATION-EXAMPLES)
 
-The examples shown below use tables in the PostgreSQL regression test database. Note also that since `ANALYZE` uses random sampling while producing statistics, the results will change slightly after any new `ANALYZE`.
+
+
+The examples shown below use tables in the PostgreSQL regression test database. The outputs shown are taken from version 8.3. The behavior of earlier (or later) versions might vary. Note also that since `ANALYZE` uses random sampling while producing statistics, the results will change slightly after any new `ANALYZE`.
 
 Let's start with a very simple query:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1;
 
                          QUERY PLAN
@@ -13,10 +16,9 @@ EXPLAIN SELECT * FROM tenk1;
  Seq Scan on tenk1  (cost=0.00..458.00 rows=10000 width=244)
 ```
 
-How the planner determines the cardinality of `tenk1` is covered in [Section 14.2](planner-stats.html "14.2. Statistics Used by the Planner"), but is repeated here for completeness. The number of pages and rows is looked up in `pg_class`:
+How the planner determines the cardinality of `tenk1` is covered in [Section 14.2](planner-stats), but is repeated here for completeness. The number of pages and rows is looked up in `pg_class`:
 
 ```
-
 SELECT relpages, reltuples FROM pg_class WHERE relname = 'tenk1';
 
  relpages | reltuples
@@ -29,7 +31,6 @@ These numbers are current as of the last `VACUUM` or `ANALYZE` on the table. The
 Let's move on to an example with a range condition in its `WHERE` clause:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 WHERE unique1 < 1000;
 
                                    QUERY PLAN
@@ -43,7 +44,6 @@ EXPLAIN SELECT * FROM tenk1 WHERE unique1 < 1000;
 The planner examines the `WHERE` clause condition and looks up the selectivity function for the operator `<` in `pg_operator`. This is held in the column `oprrest`, and the entry in this case is `scalarltsel`. The `scalarltsel` function retrieves the histogram for `unique1` from `pg_statistic`. For manual queries it is more convenient to look in the simpler `pg_stats` view:
 
 ```
-
 SELECT histogram_bounds FROM pg_stats
 WHERE tablename='tenk1' AND attname='unique1';
 
@@ -55,7 +55,6 @@ WHERE tablename='tenk1' AND attname='unique1';
 Next the fraction of the histogram occupied by “< 1000” is worked out. This is the selectivity. The histogram divides the range into equal frequency buckets, so all we have to do is locate the bucket that our value is in and count *part* of it and *all* of the ones before. The value 1000 is clearly in the second bucket (993–1997). Assuming a linear distribution of values inside each bucket, we can calculate the selectivity as:
 
 ```
-
 selectivity = (1 + (1000 - bucket[2].min)/(bucket[2].max - bucket[2].min))/num_buckets
             = (1 + (1000 - 993)/(1997 - 993))/10
             = 0.100697
@@ -64,7 +63,6 @@ selectivity = (1 + (1000 - bucket[2].min)/(bucket[2].max - bucket[2].min))/num_b
 that is, one whole bucket plus a linear fraction of the second, divided by the number of buckets. The estimated number of rows can now be calculated as the product of the selectivity and the cardinality of `tenk1`:
 
 ```
-
 rows = rel_cardinality * selectivity
      = 10000 * 0.100697
      = 1007  (rounding off)
@@ -73,7 +71,6 @@ rows = rel_cardinality * selectivity
 Next let's consider an example with an equality condition in its `WHERE` clause:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 WHERE stringu1 = 'CRAAAA';
 
                         QUERY PLAN
@@ -85,7 +82,6 @@ EXPLAIN SELECT * FROM tenk1 WHERE stringu1 = 'CRAAAA';
 Again the planner examines the `WHERE` clause condition and looks up the selectivity function for `=`, which is `eqsel`. For equality estimation the histogram is not useful; instead the list of *most common values* (MCVs) is used to determine the selectivity. Let's have a look at the MCVs, with some additional columns that will be useful later:
 
 ```
-
 SELECT null_frac, n_distinct, most_common_vals, most_common_freqs FROM pg_stats
 WHERE tablename='tenk1' AND attname='stringu1';
 
@@ -98,7 +94,6 @@ most_common_freqs | {0.00333333,0.003,0.003,0.003,0.003,0.003,​0.003,0.003,0.0
 Since `CRAAAA` appears in the list of MCVs, the selectivity is merely the corresponding entry in the list of most common frequencies (MCFs):
 
 ```
-
 selectivity = mcf[3]
             = 0.003
 ```
@@ -106,7 +101,6 @@ selectivity = mcf[3]
 As before, the estimated number of rows is just the product of this with the cardinality of `tenk1`:
 
 ```
-
 rows = 10000 * 0.003
      = 30
 ```
@@ -114,7 +108,6 @@ rows = 10000 * 0.003
 Now consider the same query, but with a constant that is not in the MCV list:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 WHERE stringu1 = 'xxx';
 
                         QUERY PLAN
@@ -126,7 +119,6 @@ EXPLAIN SELECT * FROM tenk1 WHERE stringu1 = 'xxx';
 This is quite a different problem: how to estimate the selectivity when the value is *not* in the MCV list. The approach is to use the fact that the value is not in the list, combined with the knowledge of the frequencies for all of the MCVs:
 
 ```
-
 selectivity = (1 - sum(mcv_freqs))/(num_distinct - num_mcv)
             = (1 - (0.00333333 + 0.003 + 0.003 + 0.003 + 0.003 + 0.003 +
                     0.003 + 0.003 + 0.003 + 0.003))/(676 - 10)
@@ -136,7 +128,6 @@ selectivity = (1 - sum(mcv_freqs))/(num_distinct - num_mcv)
 That is, add up all the frequencies for the MCVs and subtract them from one, then divide by the number of *other* distinct values. This amounts to assuming that the fraction of the column that is not any of the MCVs is evenly distributed among all the other distinct values. Notice that there are no null values so we don't have to worry about those (otherwise we'd subtract the null fraction from the numerator as well). The estimated number of rows is then calculated as usual:
 
 ```
-
 rows = 10000 * 0.0014559
      = 15  (rounding off)
 ```
@@ -144,7 +135,6 @@ rows = 10000 * 0.0014559
 The previous example with `unique1 < 1000` was an oversimplification of what `scalarltsel` really does; now that we have seen an example of the use of MCVs, we can fill in some more detail. The example was correct as far as it went, because since `unique1` is a unique column it has no MCVs (obviously, no value is any more common than any other value). For a non-unique column, there will normally be both a histogram and an MCV list, and *the histogram does not include the portion of the column population represented by the MCVs*. We do things this way because it allows more precise estimation. In this situation `scalarltsel` directly applies the condition (e.g., “< 1000”) to each value of the MCV list, and adds up the frequencies of the MCVs for which the condition is true. This gives an exact estimate of the selectivity within the portion of the table that is MCVs. The histogram is then used in the same way as above to estimate the selectivity in the portion of the table that is not MCVs, and then the two numbers are combined to estimate the overall selectivity. For example, consider
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 WHERE stringu1 < 'IAAAAA';
 
                          QUERY PLAN
@@ -156,7 +146,6 @@ EXPLAIN SELECT * FROM tenk1 WHERE stringu1 < 'IAAAAA';
 We already saw the MCV information for `stringu1`, and here is its histogram:
 
 ```
-
 SELECT histogram_bounds FROM pg_stats
 WHERE tablename='tenk1' AND attname='stringu1';
 
@@ -168,7 +157,6 @@ WHERE tablename='tenk1' AND attname='stringu1';
 Checking the MCV list, we find that the condition `stringu1 < 'IAAAAA'` is satisfied by the first six entries and not the last four, so the selectivity within the MCV part of the population is
 
 ```
-
 selectivity = sum(relevant mvfs)
             = 0.00333333 + 0.003 + 0.003 + 0.003 + 0.003 + 0.003
             = 0.01833333
@@ -177,7 +165,6 @@ selectivity = sum(relevant mvfs)
 Summing all the MCFs also tells us that the total fraction of the population represented by MCVs is 0.03033333, and therefore the fraction represented by the histogram is 0.96966667 (again, there are no nulls, else we'd have to exclude them here). We can see that the value `IAAAAA` falls nearly at the end of the third histogram bucket. Using some rather cheesy assumptions about the frequency of different characters, the planner arrives at the estimate 0.298387 for the portion of the histogram population that is less than `IAAAAA`. We then combine the estimates for the MCV and non-MCV populations:
 
 ```
-
 selectivity = mcv_selectivity + histogram_selectivity * histogram_fraction
             = 0.01833333 + 0.298387 * 0.96966667
             = 0.307669
@@ -191,7 +178,6 @@ In this particular example, the correction from the MCV list is fairly small, be
 Now let's consider a case with more than one condition in the `WHERE` clause:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 WHERE unique1 < 1000 AND stringu1 = 'xxx';
 
                                    QUERY PLAN
@@ -206,7 +192,6 @@ EXPLAIN SELECT * FROM tenk1 WHERE unique1 < 1000 AND stringu1 = 'xxx';
 The planner assumes that the two conditions are independent, so that the individual selectivities of the clauses can be multiplied together:
 
 ```
-
 selectivity = selectivity(unique1 < 1000) * selectivity(stringu1 = 'xxx')
             = 0.100697 * 0.0014559
             = 0.0001466
@@ -220,7 +205,6 @@ Notice that the number of rows estimated to be returned from the bitmap index sc
 Finally we will examine a query that involves a join:
 
 ```
-
 EXPLAIN SELECT * FROM tenk1 t1, tenk2 t2
 WHERE t1.unique1 < 50 AND t1.unique2 = t2.unique2;
 
@@ -238,7 +222,6 @@ WHERE t1.unique1 < 50 AND t1.unique2 = t2.unique2;
 The restriction on `tenk1`, `unique1 < 50`, is evaluated before the nested-loop join. This is handled analogously to the previous range example. This time the value 50 falls into the first bucket of the `unique1` histogram:
 
 ```
-
 selectivity = (0 + (50 - bucket[1].min)/(bucket[1].max - bucket[1].min))/num_buckets
             = (0 + (50 - 0)/(993 - 0))/10
             = 0.005035
@@ -250,7 +233,6 @@ rows        = 10000 * 0.005035
 The restriction for the join is `t2.unique2 = t1.unique2`. The operator is just our familiar `=`, however the selectivity function is obtained from the `oprjoin` column of `pg_operator`, and is `eqjoinsel`. `eqjoinsel` looks up the statistical information for both `tenk2` and `tenk1`:
 
 ```
-
 SELECT tablename, null_frac,n_distinct, most_common_vals FROM pg_stats
 WHERE tablename IN ('tenk1', 'tenk2') AND attname='unique2';
 
@@ -263,7 +245,6 @@ tablename  | null_frac | n_distinct | most_common_vals
 In this case there is no MCV information for `unique2` because all the values appear to be unique, so we use an algorithm that relies only on the number of distinct values for both relations together with their null fractions:
 
 ```
-
 selectivity = (1 - null_frac1) * (1 - null_frac2) * min(1/num_distinct1, 1/num_distinct2)
             = (1 - 0) * (1 - 0) / max(10000, 10000)
             = 0.0001
@@ -272,7 +253,6 @@ selectivity = (1 - null_frac1) * (1 - null_frac2) * min(1/num_distinct1, 1/num_d
 This is, subtract the null fraction from one for each of the relations, and divide by the maximum of the numbers of distinct values. The number of rows that the join is likely to emit is calculated as the cardinality of the Cartesian product of the two inputs, multiplied by the selectivity:
 
 ```
-
 rows = (outer_cardinality * inner_cardinality) * selectivity
      = (50 * 10000) * 0.0001
      = 50

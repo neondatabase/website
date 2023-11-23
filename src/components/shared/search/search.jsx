@@ -9,6 +9,7 @@ import { createPortal } from 'react-dom';
 
 import Link from 'components/shared/link';
 import debounce from 'utils/debounce';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const Hit = ({ hit, children }) => (
   <Link
@@ -37,7 +38,7 @@ Hit.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const Search = ({ className = null, indexName, isBlog = false }) => {
+const Search = ({ className = null, isBlog = false, indexName }) => {
   const router = useRouter();
   const searchButtonRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +46,10 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
 
   const onOpen = useCallback(() => {
     setIsOpen(true);
-  }, [setIsOpen]);
+    if (!isBlog) {
+      sendGtagEvent('open_docs_search');
+    }
+  }, [isBlog]);
 
   const onClose = useCallback(() => {
     setIsOpen(false);
@@ -54,9 +58,12 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
   const onInput = useCallback(
     (event) => {
       setIsOpen(true);
+      if (!isBlog) {
+        sendGtagEvent('open_docs_search');
+      }
       setInitialQuery(event.key);
     },
-    [setIsOpen, setInitialQuery]
+    [setIsOpen, setInitialQuery, isBlog]
   );
 
   useDocSearchKeyboardEvents({
@@ -151,8 +158,8 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
 
 Search.propTypes = {
   className: PropTypes.string,
-  indexName: PropTypes.string.isRequired,
   isBlog: PropTypes.bool,
+  indexName: PropTypes.string.isRequired,
 };
 
 export default Search;

@@ -1,31 +1,41 @@
+[#id](#XFUNC-C)
+
 ## 38.10. C-Language Functions [#](#XFUNC-C)
 
-  * *   [38.10.1. Dynamic Loading](xfunc-c.html#XFUNC-C-DYNLOAD)
-  * [38.10.2. Base Types in C-Language Functions](xfunc-c.html#XFUNC-C-BASETYPE)
-  * [38.10.3. Version 1 Calling Conventions](xfunc-c.html#XFUNC-C-V1-CALL-CONV)
-  * [38.10.4. Writing Code](xfunc-c.html#XFUNC-C-CODE)
-  * [38.10.5. Compiling and Linking Dynamically-Loaded Functions](xfunc-c.html#DFUNC)
-  * [38.10.6. Composite-Type Arguments](xfunc-c.html#XFUNC-C-COMPOSITE-TYPE-ARGS)
-  * [38.10.7. Returning Rows (Composite Types)](xfunc-c.html#XFUNC-C-RETURNING-ROWS)
-  * [38.10.8. Returning Sets](xfunc-c.html#XFUNC-C-RETURN-SET)
-  * [38.10.9. Polymorphic Arguments and Return Types](xfunc-c.html#XFUNC-C-POLYMORPHIC)
-  * [38.10.10. Shared Memory and LWLocks](xfunc-c.html#XFUNC-SHARED-ADDIN)
-  * [38.10.11. Custom Wait Events](xfunc-c.html#XFUNC-ADDIN-WAIT-EVENTS)
-  * [38.10.12. Using C++ for Extensibility](xfunc-c.html#EXTEND-CPP)
+  * [38.10.1. Dynamic Loading](xfunc-c#XFUNC-C-DYNLOAD)
+  * [38.10.2. Base Types in C-Language Functions](xfunc-c#XFUNC-C-BASETYPE)
+  * [38.10.3. Version 1 Calling Conventions](xfunc-c#XFUNC-C-V1-CALL-CONV)
+  * [38.10.4. Writing Code](xfunc-c#XFUNC-C-CODE)
+  * [38.10.5. Compiling and Linking Dynamically-Loaded Functions](xfunc-c#DFUNC)
+  * [38.10.6. Composite-Type Arguments](xfunc-c#XFUNC-C-COMPOSITE-TYPE-ARGS)
+  * [38.10.7. Returning Rows (Composite Types)](xfunc-c#XFUNC-C-RETURNING-ROWS)
+  * [38.10.8. Returning Sets](xfunc-c#XFUNC-C-RETURN-SET)
+  * [38.10.9. Polymorphic Arguments and Return Types](xfunc-c#XFUNC-C-POLYMORPHIC)
+  * [38.10.10. Shared Memory and LWLocks](xfunc-c#XFUNC-SHARED-ADDIN)
+  * [38.10.11. Using C++ for Extensibility](xfunc-c#EXTEND-CPP)
+
+
 
 User-defined functions can be written in C (or a language that can be made compatible with C, such as C++). Such functions are compiled into dynamically loadable objects (also called shared libraries) and are loaded by the server on demand. The dynamic loading feature is what distinguishes “C language” functions from “internal” functions — the actual coding conventions are essentially the same for both. (Hence, the standard internal function library is a rich source of coding examples for user-defined C functions.)
 
 Currently only one calling convention is used for C functions (“version 1”). Support for that calling convention is indicated by writing a `PG_FUNCTION_INFO_V1()` macro call for the function, as illustrated below.
 
+[#id](#XFUNC-C-DYNLOAD)
+
 ### 38.10.1. Dynamic Loading [#](#XFUNC-C-DYNLOAD)
+
+
 
 The first time a user-defined function in a particular loadable object file is called in a session, the dynamic loader loads that object file into memory so that the function can be called. The `CREATE FUNCTION` for a user-defined C function must therefore specify two pieces of information for the function: the name of the loadable object file, and the C name (link symbol) of the specific function to call within that object file. If the C name is not explicitly specified then it is assumed to be the same as the SQL function name.
 
 The following algorithm is used to locate the shared object file based on the name given in the `CREATE FUNCTION` command:
 
 1. If the name is an absolute path, the given file is loaded.
+
 2. If the name starts with the string `$libdir`, that part is replaced by the PostgreSQL package library directory name, which is determined at build time.
-3. If the name does not contain a directory part, the file is searched for in the path specified by the configuration variable [dynamic\_library\_path](runtime-config-client.html#GUC-DYNAMIC-LIBRARY-PATH).
+
+3. If the name does not contain a directory part, the file is searched for in the path specified by the configuration variable [dynamic\_library\_path](runtime-config-client#GUC-DYNAMIC-LIBRARY-PATH).
+
 4. Otherwise (the file was not found in the path, or it contains a non-absolute directory part), the dynamic loader will try to take the name as given, which will most likely fail. (It is unreliable to depend on the current working directory.)
 
 If this sequence does not work, the platform-specific shared library file name extension (often `.so`) is appended to the given name and this sequence is tried again. If that fails as well, the load will fail.
@@ -38,43 +48,50 @@ In any case, the file name that is given in the `CREATE FUNCTION` command is rec
 
 ### Note
 
-PostgreSQL will not compile a C function automatically. The object file must be compiled before it is referenced in a `CREATE FUNCTION` command. See [Section 38.10.5](xfunc-c.html#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions") for additional information.
+PostgreSQL will not compile a C function automatically. The object file must be compiled before it is referenced in a `CREATE FUNCTION` command. See [Section 38.10.5](xfunc-c#DFUNC) for additional information.
+
+
 
 To ensure that a dynamically loaded object file is not loaded into an incompatible server, PostgreSQL checks that the file contains a “magic block” with the appropriate contents. This allows the server to detect obvious incompatibilities, such as code compiled for a different major version of PostgreSQL. To include a magic block, write this in one (and only one) of the module source files, after having included the header `fmgr.h`:
 
 ```
-
 PG_MODULE_MAGIC;
 ```
 
 After it is used for the first time, a dynamically loaded object file is retained in memory. Future calls in the same session to the function(s) in that file will only incur the small overhead of a symbol table lookup. If you need to force a reload of an object file, for example after recompiling it, begin a fresh session.
 
+
+
 Optionally, a dynamically loaded file can contain an initialization function. If the file includes a function named `_PG_init`, that function will be called immediately after loading the file. The function receives no parameters and should return void. There is presently no way to unload a dynamically loaded file.
 
+[#id](#XFUNC-C-BASETYPE)
+
 ### 38.10.2. Base Types in C-Language Functions [#](#XFUNC-C-BASETYPE)
+
+
 
 To know how to write C-language functions, you need to know how PostgreSQL internally represents base data types and how they can be passed to and from functions. Internally, PostgreSQL regards a base type as a “blob of memory”. The user-defined functions that you define over a type in turn define the way that PostgreSQL can operate on it. That is, PostgreSQL will only store and retrieve the data from disk and use your user-defined functions to input, process, and output the data.
 
 Base types can have one of three internal formats:
 
 * pass by value, fixed-length
+
 * pass by reference, fixed-length
+
 * pass by reference, variable-length
 
 By-value types can only be 1, 2, or 4 bytes in length (also 8 bytes, if `sizeof(Datum)` is 8 on your machine). You should be careful to define your types such that they will be the same size (in bytes) on all architectures. For example, the `long` type is dangerous because it is 4 bytes on some machines and 8 bytes on others, whereas `int` type is 4 bytes on most Unix machines. A reasonable implementation of the `int4` type on Unix machines might be:
 
 ```
-
 /* 4-byte integer, passed by value */
 typedef int int4;
 ```
 
-(The actual PostgreSQL C code calls this type `int32`, because it is a convention in C that `intXX` means *`XX`* *bits*. Note therefore also that the C type `int8` is 1 byte in size. The SQL type `int8` is called `int64` in C. See also [Table 38.2](xfunc-c.html#XFUNC-C-TYPE-TABLE "Table 38.2. Equivalent C Types for Built-in SQL Types").)
+(The actual PostgreSQL C code calls this type `int32`, because it is a convention in C that `intXX` means *`XX`* *bits*. Note therefore also that the C type `int8` is 1 byte in size. The SQL type `int8` is called `int64` in C. See also [Table 38.2](xfunc-c#XFUNC-C-TYPE-TABLE).)
 
 On the other hand, fixed-length types of any size can be passed by-reference. For example, here is a sample implementation of a PostgreSQL type:
 
 ```
-
 /* 16-byte structure, passed by reference */
 typedef struct
 {
@@ -90,12 +107,11 @@ Another important point is to avoid leaving any uninitialized bits within data t
 
 ### Warning
 
-*Never* modify the contents of a pass-by-reference input value. If you do so you are likely to corrupt on-disk data, since the pointer you are given might point directly into a disk buffer. The sole exception to this rule is explained in [Section 38.12](xaggr.html "38.12. User-Defined Aggregates").
+*Never* modify the contents of a pass-by-reference input value. If you do so you are likely to corrupt on-disk data, since the pointer you are given might point directly into a disk buffer. The sole exception to this rule is explained in [Section 38.12](xaggr).
 
 As an example, we can define the type `text` as follows:
 
 ```
-
 typedef struct {
     int32 length;
     char data[FLEXIBLE_ARRAY_MEMBER];
@@ -107,7 +123,6 @@ The `[FLEXIBLE_ARRAY_MEMBER]` notation means that the actual length of the data 
 When manipulating variable-length types, we must be careful to allocate the correct amount of memory and set the length field correctly. For example, if we wanted to store 40 bytes in a `text` structure, we might use a code fragment like this:
 
 ```
-
 #include "postgres.h"
 ...
 char buffer[40]; /* our source data */
@@ -120,7 +135,9 @@ memcpy(destination->data, buffer, 40);
 
 `VARHDRSZ` is the same as `sizeof(int32)`, but it's considered good style to use the macro `VARHDRSZ` to refer to the size of the overhead for a variable-length type. Also, the length field *must* be set using the `SET_VARSIZE` macro, not by simple assignment.
 
-[Table 38.2](xfunc-c.html#XFUNC-C-TYPE-TABLE "Table 38.2. Equivalent C Types for Built-in SQL Types") shows the C types corresponding to many of the built-in SQL data types of PostgreSQL. The “Defined In” column gives the header file that needs to be included to get the type definition. (The actual definition might be in a different file that is included by the listed file. It is recommended that users stick to the defined interface.) Note that you should always include `postgres.h` first in any source file of server code, because it declares a number of things that you will need anyway, and because including other headers first can cause portability issues.
+[Table 38.2](xfunc-c#XFUNC-C-TYPE-TABLE) shows the C types corresponding to many of the built-in SQL data types of PostgreSQL. The “Defined In” column gives the header file that needs to be included to get the type definition. (The actual definition might be in a different file that is included by the listed file. It is recommended that users stick to the defined interface.) Note that you should always include `postgres.h` first in any source file of server code, because it declares a number of things that you will need anyway, and because including other headers first can cause portability issues.
+
+[#id](#XFUNC-C-TYPE-TABLE)
 
 **Table 38.2. Equivalent C Types for Built-in SQL Types**
 
@@ -156,23 +173,22 @@ memcpy(destination->data, buffer, 40);
 | `varchar`                     | `VarChar*`      | `postgres.h`                           |
 | `xid`                         | `TransactionId` | `postgres.h`                           |
 
-\
 
 Now that we've gone over all of the possible structures for base types, we can show some examples of real functions.
+
+[#id](#XFUNC-C-V1-CALL-CONV)
 
 ### 38.10.3. Version 1 Calling Conventions [#](#XFUNC-C-V1-CALL-CONV)
 
 The version-1 calling convention relies on macros to suppress most of the complexity of passing arguments and results. The C declaration of a version-1 function is always:
 
 ```
-
 Datum funcname(PG_FUNCTION_ARGS)
 ```
 
 In addition, the macro call:
 
 ```
-
 PG_FUNCTION_INFO_V1(funcname);
 ```
 
@@ -183,7 +199,6 @@ In a version-1 function, each actual argument is fetched using a `PG_GETARG_xxx(
 Here are some examples using the version-1 calling convention:
 
 ```
-
 #include "postgres.h"
 #include <string.h>
 #include "fmgr.h"
@@ -282,7 +297,6 @@ concat_text(PG_FUNCTION_ARGS)
 Supposing that the above code has been prepared in file `funcs.c` and compiled into a shared object, we could define the functions to PostgreSQL with commands like this:
 
 ```
-
 CREATE FUNCTION add_one(integer) RETURNS integer
      AS 'DIRECTORY/funcs', 'add_one'
      LANGUAGE C STRICT;
@@ -315,7 +329,9 @@ At first glance, the version-1 coding conventions might appear to be just pointl
 
 Other options provided by the version-1 interface are two variants of the `PG_GETARG_xxx()` macros. The first of these, `PG_GETARG_xxx_COPY()`, guarantees to return a copy of the specified argument that is safe for writing into. (The normal macros will sometimes return a pointer to a value that is physically stored in a table, which must not be written to. Using the `PG_GETARG_xxx_COPY()` macros guarantees a writable result.) The second variant consists of the `PG_GETARG_xxx_SLICE()` macros which take three arguments. The first is the number of the function argument (as above). The second and third are the offset and length of the segment to be returned. Offsets are counted from zero, and a negative length requests that the remainder of the value be returned. These macros provide more efficient access to parts of large values in the case where they have storage type “external”. (The storage type of a column can be specified using `ALTER TABLE tablename ALTER COLUMN colname SET STORAGE storagetype`. *`storagetype`* is one of `plain`, `external`, `extended`, or `main`.)
 
-Finally, the version-1 function call conventions make it possible to return set results ([Section 38.10.8](xfunc-c.html#XFUNC-C-RETURN-SET "38.10.8. Returning Sets")) and implement trigger functions ([Chapter 39](triggers.html "Chapter 39. Triggers")) and procedural-language call handlers ([Chapter 58](plhandler.html "Chapter 58. Writing a Procedural Language Handler")). For more details see `src/backend/utils/fmgr/README` in the source distribution.
+Finally, the version-1 function call conventions make it possible to return set results ([Section 38.10.8](xfunc-c#XFUNC-C-RETURN-SET)) and implement trigger functions ([Chapter 39](triggers)) and procedural-language call handlers ([Chapter 58](plhandler)). For more details see `src/backend/utils/fmgr/README` in the source distribution.
+
+[#id](#XFUNC-C-CODE)
 
 ### 38.10.4. Writing Code [#](#XFUNC-C-CODE)
 
@@ -324,12 +340,20 @@ Before we turn to the more advanced topics, we should discuss some coding rules 
 The basic rules for writing and building C functions are as follows:
 
 * Use `pg_config --includedir-server` to find out where the PostgreSQL server header files are installed on your system (or the system that your users will be running on).
-* Compiling and linking your code so that it can be dynamically loaded into PostgreSQL always requires special flags. See [Section 38.10.5](xfunc-c.html#DFUNC "38.10.5. Compiling and Linking Dynamically-Loaded Functions") for a detailed explanation of how to do it for your particular operating system.
-* Remember to define a “magic block” for your shared library, as described in [Section 38.10.1](xfunc-c.html#XFUNC-C-DYNLOAD "38.10.1. Dynamic Loading").
+
+* Compiling and linking your code so that it can be dynamically loaded into PostgreSQL always requires special flags. See [Section 38.10.5](xfunc-c#DFUNC) for a detailed explanation of how to do it for your particular operating system.
+
+* Remember to define a “magic block” for your shared library, as described in [Section 38.10.1](xfunc-c#XFUNC-C-DYNLOAD).
+
 * When allocating memory, use the PostgreSQL functions `palloc` and `pfree` instead of the corresponding C library functions `malloc` and `free`. The memory allocated by `palloc` will be freed automatically at the end of each transaction, preventing memory leaks.
+
 * Always zero the bytes of your structures using `memset` (or allocate them with `palloc0` in the first place). Even if you assign to each field of your structure, there might be alignment padding (holes in the structure) that contain garbage values. Without this, it's difficult to support hash indexes or hash joins, as you must pick out only the significant bits of your data structure to compute a hash. The planner also sometimes relies on comparing constants via bitwise equality, so you can get undesirable planning results if logically-equivalent values aren't bitwise equal.
+
 * Most of the internal PostgreSQL types are declared in `postgres.h`, while the function manager interfaces (`PG_FUNCTION_ARGS`, etc.) are in `fmgr.h`, so you will need to include at least these two files. For portability reasons it's best to include `postgres.h` *first*, before any other system or user header files. Including `postgres.h` will also include `elog.h` and `palloc.h` for you.
+
 * Symbol names defined within object files must not conflict with each other or with symbols defined in the PostgreSQL server executable. You will have to rename your functions or variables if you get error messages to this effect.
+
+[#id](#DFUNC)
 
 ### 38.10.5. Compiling and Linking Dynamically-Loaded Functions [#](#DFUNC)
 
@@ -343,73 +367,66 @@ In the following examples we assume that your source code is in a file `foo.c` a
 
 * FreeBSD
 
-    The compiler flag to create PIC is `-fPIC`. To create shared libraries the compiler flag is `-shared`.
+  The compiler flag to create PIC is `-fPIC`. To create shared libraries the compiler flag is `-shared`.
 
-    ```
+  ```
+  gcc -fPIC -c foo.c
+  gcc -shared -o foo.so foo.o
+  ```
 
-    gcc -fPIC -c foo.c
-    gcc -shared -o foo.so foo.o
-    ```
-
-    This is applicable as of version 3.0 of FreeBSD.
+  This is applicable as of version 3.0 of FreeBSD.
 
 * Linux
 
-    The compiler flag to create PIC is `-fPIC`. The compiler flag to create a shared library is `-shared`. A complete example looks like this:
+  The compiler flag to create PIC is `-fPIC`. The compiler flag to create a shared library is `-shared`. A complete example looks like this:
 
-    ```
-
-    cc -fPIC -c foo.c
-    cc -shared -o foo.so foo.o
-    ```
+  ```
+  cc -fPIC -c foo.c
+  cc -shared -o foo.so foo.o
+  ```
 
 * macOS
 
-    Here is an example. It assumes the developer tools are installed.
+  Here is an example. It assumes the developer tools are installed.
 
-    ```
-
-    cc -c foo.c
-    cc -bundle -flat_namespace -undefined suppress -o foo.so foo.o
-    ```
+  ```
+  cc -c foo.c
+  cc -bundle -flat_namespace -undefined suppress -o foo.so foo.o
+  ```
 
 * NetBSD
 
-    The compiler flag to create PIC is `-fPIC`. For ELF systems, the compiler with the flag `-shared` is used to link shared libraries. On the older non-ELF systems, `ld -Bshareable` is used.
+  The compiler flag to create PIC is `-fPIC`. For ELF systems, the compiler with the flag `-shared` is used to link shared libraries. On the older non-ELF systems, `ld -Bshareable` is used.
 
-    ```
-
-    gcc -fPIC -c foo.c
-    gcc -shared -o foo.so foo.o
-    ```
+  ```
+  gcc -fPIC -c foo.c
+  gcc -shared -o foo.so foo.o
+  ```
 
 * OpenBSD
 
-    The compiler flag to create PIC is `-fPIC`. `ld -Bshareable` is used to link shared libraries.
+  The compiler flag to create PIC is `-fPIC`. `ld -Bshareable` is used to link shared libraries.
 
-    ```
-
-    gcc -fPIC -c foo.c
-    ld -Bshareable -o foo.so foo.o
-    ```
+  ```
+  gcc -fPIC -c foo.c
+  ld -Bshareable -o foo.so foo.o
+  ```
 
 * Solaris
 
-    The compiler flag to create PIC is `-KPIC` with the Sun compiler and `-fPIC` with GCC. To link shared libraries, the compiler option is `-G` with either compiler or alternatively `-shared` with GCC.
+  The compiler flag to create PIC is `-KPIC` with the Sun compiler and `-fPIC` with GCC. To link shared libraries, the compiler option is `-G` with either compiler or alternatively `-shared` with GCC.
 
-    ```
+  ```
+  cc -KPIC -c foo.c
+  cc -G -o foo.so foo.o
+  ```
 
-    cc -KPIC -c foo.c
-    cc -G -o foo.so foo.o
-    ```
+  or
 
-    or
-
-    ```
-
-    gcc -fPIC -c foo.c
-    gcc -G -o foo.so foo.o
-    ```
+  ```
+  gcc -fPIC -c foo.c
+  gcc -G -o foo.so foo.o
+  ```
 
 ### Tip
 
@@ -417,7 +434,9 @@ If this is too complicated for you, you should consider using [GNU Libtool](http
 
 The resulting shared library file can then be loaded into PostgreSQL. When specifying the file name to the `CREATE FUNCTION` command, one must give it the name of the shared library file, not the intermediate object file. Note that the system's standard shared-library extension (usually `.so` or `.sl`) can be omitted from the `CREATE FUNCTION` command, and normally should be omitted for best portability.
 
-Refer back to [Section 38.10.1](xfunc-c.html#XFUNC-C-DYNLOAD "38.10.1. Dynamic Loading") about where the server expects to find the shared library files.
+Refer back to [Section 38.10.1](xfunc-c#XFUNC-C-DYNLOAD) about where the server expects to find the shared library files.
+
+[#id](#XFUNC-C-COMPOSITE-TYPE-ARGS)
 
 ### 38.10.6. Composite-Type Arguments [#](#XFUNC-C-COMPOSITE-TYPE-ARGS)
 
@@ -426,7 +445,6 @@ Composite types do not have a fixed layout like C structures. Instances of a com
 Suppose we want to write a function to answer the query:
 
 ```
-
 SELECT name, c_overpaid(emp, 1500) AS overpaid
     FROM emp
     WHERE name = 'Bill' OR name = 'Sam';
@@ -435,7 +453,6 @@ SELECT name, c_overpaid(emp, 1500) AS overpaid
 Using the version-1 calling conventions, we can define `c_overpaid` as:
 
 ```
-
 #include "postgres.h"
 #include "executor/executor.h"  /* for GetAttributeByName() */
 
@@ -467,7 +484,6 @@ There is also `GetAttributeByNum`, which selects the target attribute by column 
 The following command declares the function `c_overpaid` in SQL:
 
 ```
-
 CREATE FUNCTION c_overpaid(emp, integer) RETURNS boolean
     AS 'DIRECTORY/funcs', 'c_overpaid'
     LANGUAGE C STRICT;
@@ -475,12 +491,13 @@ CREATE FUNCTION c_overpaid(emp, integer) RETURNS boolean
 
 Notice we have used `STRICT` so that we did not have to check whether the input arguments were NULL.
 
+[#id](#XFUNC-C-RETURNING-ROWS)
+
 ### 38.10.7. Returning Rows (Composite Types) [#](#XFUNC-C-RETURNING-ROWS)
 
 To return a row or composite-type value from a C-language function, you can use a special API that provides macros and functions to hide most of the complexity of building composite data types. To use this API, the source file must include:
 
 ```
-
 #include "funcapi.h"
 ```
 
@@ -489,7 +506,6 @@ There are two ways you can build a composite data value (henceforth a “tuple�
 Several helper functions are available for setting up the needed `TupleDesc`. The recommended way to do this in most functions returning composite values is to call:
 
 ```
-
 TypeFuncClass get_call_result_type(FunctionCallInfo fcinfo,
                                    Oid *resultTypeId,
                                    TupleDesc *resultTupleDesc)
@@ -508,14 +524,12 @@ passing the same `fcinfo` struct passed to the calling function itself. (This of
 Older, now-deprecated functions for obtaining `TupleDesc`s are:
 
 ```
-
 TupleDesc RelationNameGetTupleDesc(const char *relname)
 ```
 
 to get a `TupleDesc` for the row type of a named relation, and:
 
 ```
-
 TupleDesc TypeGetTupleDesc(Oid typeoid, List *colaliases)
 ```
 
@@ -524,14 +538,12 @@ to get a `TupleDesc` based on a type OID. This can be used to get a `TupleDesc` 
 Once you have a `TupleDesc`, call:
 
 ```
-
 TupleDesc BlessTupleDesc(TupleDesc tupdesc)
 ```
 
 if you plan to work with Datums, or:
 
 ```
-
 AttInMetadata *TupleDescGetAttInMetadata(TupleDesc tupdesc)
 ```
 
@@ -540,7 +552,6 @@ if you plan to work with C strings. If you are writing a function returning set,
 When working with Datums, use:
 
 ```
-
 HeapTuple heap_form_tuple(TupleDesc tupdesc, Datum *values, bool *isnull)
 ```
 
@@ -549,7 +560,6 @@ to build a `HeapTuple` given user data in Datum form.
 When working with C strings, use:
 
 ```
-
 HeapTuple BuildTupleFromCStrings(AttInMetadata *attinmeta, char **values)
 ```
 
@@ -558,13 +568,14 @@ to build a `HeapTuple` given user data in C string form. *`values`* is an array 
 Once you have built a tuple to return from your function, it must be converted into a `Datum`. Use:
 
 ```
-
 HeapTupleGetDatum(HeapTuple tuple)
 ```
 
 to convert a `HeapTuple` into a valid Datum. This `Datum` can be returned directly if you intend to return just a single row, or it can be used as the current return value in a set-returning function.
 
 An example appears in the next section.
+
+[#id](#XFUNC-C-RETURN-SET)
 
 ### 38.10.8. Returning Sets [#](#XFUNC-C-RETURN-SET)
 
@@ -577,7 +588,6 @@ The remainder of this section documents a set of helper macros that are commonly
 To use the ValuePerCall support macros described here, include `funcapi.h`. These macros work with a structure `FuncCallContext` that contains the state that needs to be saved across calls. Within the calling SRF, `fcinfo->flinfo->fn_extra` is used to hold a pointer to `FuncCallContext` across calls. The macros automatically fill that field on first use, and expect to find the same pointer there on subsequent uses.
 
 ```
-
 typedef struct FuncCallContext
 {
     /*
@@ -642,21 +652,18 @@ typedef struct FuncCallContext
 The macros to be used by an SRF using this infrastructure are:
 
 ```
-
 SRF_IS_FIRSTCALL()
 ```
 
 Use this to determine if your function is being called for the first or a subsequent time. On the first call (only), call:
 
 ```
-
 SRF_FIRSTCALL_INIT()
 ```
 
 to initialize the `FuncCallContext`. On every function call, including the first, call:
 
 ```
-
 SRF_PERCALL_SETUP()
 ```
 
@@ -665,14 +672,12 @@ to set up for using the `FuncCallContext`.
 If your function has data to return in the current call, use:
 
 ```
-
 SRF_RETURN_NEXT(funcctx, result)
 ```
 
 to return it to the caller. (`result` must be of type `Datum`, either a single value or a tuple prepared as described above.) Finally, when your function is finished returning data, use:
 
 ```
-
 SRF_RETURN_DONE(funcctx)
 ```
 
@@ -687,7 +692,6 @@ While the actual arguments to the function remain unchanged between calls, if yo
 A complete pseudo-code example looks like the following:
 
 ```
-
 Datum
 my_set_returning_function(PG_FUNCTION_ARGS)
 {
@@ -735,7 +739,6 @@ my_set_returning_function(PG_FUNCTION_ARGS)
 A complete example of a simple SRF returning a composite type looks like:
 
 ```
-
 PG_FUNCTION_INFO_V1(retcomposite);
 
 Datum
@@ -829,7 +832,6 @@ retcomposite(PG_FUNCTION_ARGS)
 One way to declare this function in SQL is:
 
 ```
-
 CREATE TYPE __retcomposite AS (f1 integer, f2 integer, f3 integer);
 
 CREATE OR REPLACE FUNCTION retcomposite(integer, integer)
@@ -841,7 +843,6 @@ CREATE OR REPLACE FUNCTION retcomposite(integer, integer)
 A different way is to use OUT parameters:
 
 ```
-
 CREATE OR REPLACE FUNCTION retcomposite(IN integer, IN integer,
     OUT f1 integer, OUT f2 integer, OUT f3 integer)
     RETURNS SETOF record
@@ -851,14 +852,15 @@ CREATE OR REPLACE FUNCTION retcomposite(IN integer, IN integer,
 
 Notice that in this method the output type of the function is formally an anonymous `record` type.
 
+[#id](#XFUNC-C-POLYMORPHIC)
+
 ### 38.10.9. Polymorphic Arguments and Return Types [#](#XFUNC-C-POLYMORPHIC)
 
-C-language functions can be declared to accept and return the polymorphic types described in [Section 38.2.5](extend-type-system.html#EXTEND-TYPES-POLYMORPHIC "38.2.5. Polymorphic Types"). When a function's arguments or return types are defined as polymorphic types, the function author cannot know in advance what data type it will be called with, or need to return. There are two routines provided in `fmgr.h` to allow a version-1 C function to discover the actual data types of its arguments and the type it is expected to return. The routines are called `get_fn_expr_rettype(FmgrInfo *flinfo)` and `get_fn_expr_argtype(FmgrInfo *flinfo, int argnum)`. They return the result or argument type OID, or `InvalidOid` if the information is not available. The structure `flinfo` is normally accessed as `fcinfo->flinfo`. The parameter `argnum` is zero based. `get_call_result_type` can also be used as an alternative to `get_fn_expr_rettype`. There is also `get_fn_expr_variadic`, which can be used to find out whether variadic arguments have been merged into an array. This is primarily useful for `VARIADIC "any"` functions, since such merging will always have occurred for variadic functions taking ordinary array types.
+C-language functions can be declared to accept and return the polymorphic types described in [Section 38.2.5](extend-type-system#EXTEND-TYPES-POLYMORPHIC). When a function's arguments or return types are defined as polymorphic types, the function author cannot know in advance what data type it will be called with, or need to return. There are two routines provided in `fmgr.h` to allow a version-1 C function to discover the actual data types of its arguments and the type it is expected to return. The routines are called `get_fn_expr_rettype(FmgrInfo *flinfo)` and `get_fn_expr_argtype(FmgrInfo *flinfo, int argnum)`. They return the result or argument type OID, or `InvalidOid` if the information is not available. The structure `flinfo` is normally accessed as `fcinfo->flinfo`. The parameter `argnum` is zero based. `get_call_result_type` can also be used as an alternative to `get_fn_expr_rettype`. There is also `get_fn_expr_variadic`, which can be used to find out whether variadic arguments have been merged into an array. This is primarily useful for `VARIADIC "any"` functions, since such merging will always have occurred for variadic functions taking ordinary array types.
 
 For example, suppose we want to write a function to accept a single element of any type, and return a one-dimensional array of that type:
 
 ```
-
 PG_FUNCTION_INFO_V1(make_array);
 Datum
 make_array(PG_FUNCTION_ARGS)
@@ -905,7 +907,6 @@ make_array(PG_FUNCTION_ARGS)
 The following command declares the function `make_array` in SQL:
 
 ```
-
 CREATE FUNCTION make_array(anyelement) RETURNS anyarray
     AS 'DIRECTORY/funcs', 'make_array'
     LANGUAGE C IMMUTABLE;
@@ -913,12 +914,13 @@ CREATE FUNCTION make_array(anyelement) RETURNS anyarray
 
 There is a variant of polymorphism that is only available to C-language functions: they can be declared to take parameters of type `"any"`. (Note that this type name must be double-quoted, since it's also an SQL reserved word.) This works like `anyelement` except that it does not constrain different `"any"` arguments to be the same type, nor do they help determine the function's result type. A C-language function can also declare its final parameter to be `VARIADIC "any"`. This will match one or more actual arguments of any type (not necessarily the same type). These arguments will *not* be gathered into an array as happens with normal variadic functions; they will just be passed to the function separately. The `PG_NARGS()` macro and the methods described above must be used to determine the number of actual arguments and their types when using this feature. Also, users of such a function might wish to use the `VARIADIC` keyword in their function call, with the expectation that the function would treat the array elements as separate arguments. The function itself must implement that behavior if wanted, after using `get_fn_expr_variadic` to detect that the actual argument was marked with `VARIADIC`.
 
+[#id](#XFUNC-SHARED-ADDIN)
+
 ### 38.10.10. Shared Memory and LWLocks [#](#XFUNC-SHARED-ADDIN)
 
-Add-ins can reserve LWLocks and an allocation of shared memory on server startup. The add-in's shared library must be preloaded by specifying it in [shared\_preload\_libraries](runtime-config-client.html#GUC-SHARED-PRELOAD-LIBRARIES). The shared library should register a `shmem_request_hook` in its `_PG_init` function. This `shmem_request_hook` can reserve LWLocks or shared memory. Shared memory is reserved by calling:
+Add-ins can reserve LWLocks and an allocation of shared memory on server startup. The add-in's shared library must be preloaded by specifying it in [shared\_preload\_libraries](runtime-config-client#GUC-SHARED-PRELOAD-LIBRARIES). The shared library should register a `shmem_request_hook` in its `_PG_init` function. This `shmem_request_hook` can reserve LWLocks or shared memory. Shared memory is reserved by calling:
 
 ```
-
 void RequestAddinShmemSpace(int size)
 ```
 
@@ -927,7 +929,6 @@ from your `shmem_request_hook`.
 LWLocks are reserved by calling:
 
 ```
-
 void RequestNamedLWLockTranche(const char *tranche_name, int num_lwlocks)
 ```
 
@@ -938,7 +939,6 @@ An example of a `shmem_request_hook` can be found in `contrib/pg_stat_statements
 To avoid possible race-conditions, each backend should use the LWLock `AddinShmemInitLock` when connecting to and initializing its allocation of shared memory, as shown here:
 
 ```
-
 static mystruct *ptr = NULL;
 
 if (!ptr)
@@ -957,36 +957,20 @@ if (!ptr)
 }
 ```
 
-### 38.10.11. Custom Wait Events [#](#XFUNC-ADDIN-WAIT-EVENTS)
+[#id](#EXTEND-CPP)
 
-Add-ins can define custom wait events under the wait event type `Extension` by calling:
+### 38.10.11. Using C++ for Extensibility [#](#EXTEND-CPP)
 
-```
 
-uint32 WaitEventExtensionNew(const char *wait_event_name)
-```
-
-The wait event is associated to a user-facing custom string. An example can be found in `src/test/modules/worker_spi` in the PostgreSQL source tree.
-
-Custom wait events can be viewed in [`pg_stat_activity`](monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW "28.2.3. pg_stat_activity"):
-
-```
-
-=# SELECT wait_event_type, wait_event FROM pg_stat_activity
-     WHERE backend_type ~ 'worker_spi';
- wait_event_type |  wait_event
------------------+---------------
- Extension       | WorkerSpiMain
-(1 row)
-```
-
-### 38.10.12. Using C++ for Extensibility [#](#EXTEND-CPP)
 
 Although the PostgreSQL backend is written in C, it is possible to write extensions in C++ if these guidelines are followed:
 
 * All functions accessed by the backend must present a C interface to the backend; these C functions can then call C++ functions. For example, `extern C` linkage is required for backend-accessed functions. This is also necessary for any functions that are passed as pointers between the backend and C++ code.
+
 * Free memory using the appropriate deallocation method. For example, most backend memory is allocated using `palloc()`, so use `pfree()` to free it. Using C++ `delete` in such cases will fail.
+
 * Prevent exceptions from propagating into the C code (use a catch-all block at the top level of all `extern C` functions). This is necessary even if the C++ code does not explicitly throw any exceptions, because events like out-of-memory can still throw exceptions. Any exceptions must be caught and appropriate errors passed back to the C interface. If possible, compile C++ with `-fno-exceptions` to eliminate exceptions entirely; in such cases, you must check for failures in your C++ code, e.g., check for NULL returned by `new()`.
+
 * If calling backend functions from C++ code, be sure that the C++ call stack contains only plain old data structures (POD). This is necessary because backend errors generate a distant `longjmp()` that does not properly unroll a C++ call stack with non-POD objects.
 
 In summary, it is best to place C++ code behind a wall of `extern C` functions that interface to the backend, and avoid exception, memory, and call stack leakage.

@@ -3,8 +3,7 @@ name: Update Frontmatter
 on:
   push:
     branches:
-      - '*'
-      - '!main' # Exclude the main branch
+      - 'main'
     paths:
       - 'content/docs/**/*.md'
       - '!content/docs/README.md' # Exclude the README.md file
@@ -12,12 +11,16 @@ on:
 jobs:
   update-date:
     runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, 'auto-update') }}
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
         fetch-depth: 2
+        token: ${{ secrets.ACCESS_TOKEN }}
+        # ACCESS_TOKEN is a personal access token with repo scope
+        # it needs to be updated in the repo secrets when it expires - Nov 10, 2024
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -29,6 +32,10 @@ jobs:
       run: |
         modified_files=$(git diff --name-only HEAD^ HEAD | grep '^content/docs/.*\.md$' | xargs)
         echo "Modified files: $modified_files"
+        if [ -z "$modified_files" ]; then
+          echo "No modified Markdown files to update."
+          exit 0
+        fi
         echo "modified_files=$modified_files" >> $GITHUB_OUTPUT
 
     - name: Install packages
@@ -43,9 +50,17 @@ jobs:
         git config user.email "action@github.com"
         export HUSKY=0
         git add -A
-        if git diff --staged | grep '.'; then
-          git commit -m "chore(docs): Update frontmatter date"
-          git push
+        # Check for meaningful changes before committing
+        if [ -n "$(git status --porcelain)" ]; then
+          # Commit only modified markdown files, not all changes
+          git commit -m "chore: update frontmatter date (auto-update)" ${{ steps.get-modified-files.outputs.modified_files }}
+          echo "Changes committed"
         else
-          echo "No changes to commit"
+          echo "No significant changes to commit"
+          exit 0
         fi
+
+    - name: Push changes
+      run: git push origin HEAD:main
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}

@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-COLUMN-COLUMN-USAGE)
+
 ## 37.12. `column_column_usage` [#](#INFOSCHEMA-COLUMN-COLUMN-USAGE)
 
 The view `column_column_usage` identifies all generated columns that depend on another base column in the same table. Only tables owned by a currently enabled role are included.
+
+[#id](#id-1.7.6.16.3)
 
 **Table 37.10. `column_column_usage` Columns**
 
