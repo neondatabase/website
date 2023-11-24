@@ -179,7 +179,7 @@ insert into person (ID, NAME) values (3, 'Ms. Smith');
 
 Run the migration on each environment in order by specifying the environment's configuration file in the `flyway migrate` command. You'll start with your `development` environment, then `staging`, and then finally, `production`.
 
-<Tabs labels={[“Development”, “Staging”, “Production”]}>
+<Tabs labels={["Development", "Staging", "Production"]}>
 
 <TabItem>
 
