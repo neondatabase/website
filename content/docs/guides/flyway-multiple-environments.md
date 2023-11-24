@@ -36,18 +36,32 @@ Using Neon's branching feature, create your _development_ and _staging_ database
 
 Perform these steps twice, once for your _development_ branch and once for your _staging_ branch.
 
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
 1. In the Neon Console, select your project.
 2. Select **Branches**.
 3. Click **New Branch** to open the branch creation dialog.
 4. Enter a name for the branch. For example, name the branch for the environment (_development_ or _staging_).
 5. Select a parent branch. This should be the branch where you created the `person` table.
 6. Leave the other default settings and click **Create Branch**.
+</TabItem>
 
-When you are finished, you should have a _development_ branch and a _staging_ branch.
+<TabItem>
 
-Alternatively, you can create your _development_ and _staging_ branches using the [Neon API](https://api-docs.neon.tech/reference/createprojectbranch) or [Neon CLI](/docs/reference/cli-branches#create).
+<CodeBlock showLineNumbers>
 
-<CodeTabs labels={["API", "CLI"]}>
+```bash
+neonctl branches create --name development
+```
+
+</CodeBlock>
+
+</TabItem>
+
+<TabItem>
+
+<CodeBlock showLineNumbers>
 
 ```bash
 curl --request POST \
@@ -69,11 +83,13 @@ curl --request POST \
 ' | jq
 ```
 
-```bash
-neonctl branches create --name development
-```
+</CodeBlock>
 
-</CodeTabs>
+</TabItem>
+
+</Tabs>
+
+When you are finished, you should have a _development_ branch and a _staging_ branch.
 
 ## Retrieve your Neon database connection strings
 
