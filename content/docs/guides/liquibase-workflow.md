@@ -19,7 +19,7 @@ The instructions in this guide are based on the workflow described in the [Liqui
 
 ## Initialize a new Liquibase project
 
-Run the [init project](https://docs.liquibase.com/commands/init/project.html) command to initialize a Liquibase project in the specified directory. The project directory is created if it does not exist. Initializing a Liquibase project in this way provides us with a pre-populated Liquibase properties file, which we'll modify in a later step.
+Run the [init project](https://docs.liquibase.com/commands/init/project.html) command to initialize a Liquibase project in the specified directory. The project directory is created if it does not exist. Initializing a Liquibase project in this way provides you with a pre-populated Liquibase properties file, which we'll modify in a later step.
 
 ```bash
 liquibase init project --project-dir ~/blogdb
