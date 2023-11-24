@@ -1,11 +1,14 @@
+[#id](#LO-EXAMPLESECT)
+
 ## 35.5. Example Program [#](#LO-EXAMPLESECT)
 
-[Example 35.1](lo-examplesect.html#LO-EXAMPLE "Example 35.1. Large Objects with libpq Example Program") is a sample program which shows how the large object interface in libpq can be used. Parts of the program are commented out but are left in the source for the reader's benefit. This program can also be found in `src/test/examples/testlo.c` in the source distribution.
+[Example 35.1](lo-examplesect#LO-EXAMPLE) is a sample program which shows how the large object interface in libpq can be used. Parts of the program are commented out but are left in the source for the reader's benefit. This program can also be found in `src/test/examples/testlo.c` in the source distribution.
+
+[#id](#LO-EXAMPLE)
 
 **Example 35.1. Large Objects with libpq Example Program**
 
 ```
-
 /*-----------------------------------------------------------------
  *
  * testlo.c

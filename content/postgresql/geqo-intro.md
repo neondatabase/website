@@ -1,3 +1,5 @@
+[#id](#GEQO-INTRO)
+
 ## 62.1. Query Handling as a Complex Optimization Problem [#](#GEQO-INTRO)
 
 Among all relational operators the most difficult one to process and optimize is the *join*. The number of possible query plans grows exponentially with the number of joins in the query. Further optimization effort is caused by the support of a variety of *join methods* (e.g., nested loop, hash join, merge join in PostgreSQL) to process individual joins and a diversity of *indexes* (e.g., B-tree, hash, GiST and GIN in PostgreSQL) as access paths for relations.

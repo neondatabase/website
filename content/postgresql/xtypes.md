@@ -1,8 +1,12 @@
+[#id](#XTYPES)
+
 ## 38.13. User-Defined Types [#](#XTYPES)
 
-* [38.13.1. TOAST Considerations](xtypes.html#XTYPES-TOAST)
+* [38.13.1. TOAST Considerations](xtypes#XTYPES-TOAST)
 
-As described in [Section 38.2](extend-type-system.html "38.2. The PostgreSQL Type System"), PostgreSQL can be extended to support new data types. This section describes how to define new base types, which are data types defined below the level of the SQL language. Creating a new base type requires implementing functions to operate on the type in a low-level language, usually C.
+
+
+As described in [Section 38.2](extend-type-system), PostgreSQL can be extended to support new data types. This section describes how to define new base types, which are data types defined below the level of the SQL language. Creating a new base type requires implementing functions to operate on the type in a low-level language, usually C.
 
 The examples in this section can be found in `complex.sql` and `complex.c` in the `src/tutorial` directory of the source distribution. See the `README` file in that directory for instructions about running the examples.
 
@@ -11,7 +15,6 @@ A user-defined type must always have input and output functions. These functions
 Suppose we want to define a type `complex` that represents complex numbers. A natural way to represent a complex number in memory would be the following C structure:
 
 ```
-
 typedef struct Complex {
     double      x;
     double      y;
@@ -25,7 +28,6 @@ As the external string representation of the type, we choose a string of the for
 The input and output functions are usually not hard to write, especially the output function. But when defining the external string representation of the type, remember that you must eventually write a complete and robust parser for that representation as your input function. For instance:
 
 ```
-
 PG_FUNCTION_INFO_V1(complex_in);
 
 Datum
@@ -52,7 +54,6 @@ complex_in(PG_FUNCTION_ARGS)
 The output function can simply be:
 
 ```
-
 PG_FUNCTION_INFO_V1(complex_out);
 
 Datum
@@ -71,7 +72,6 @@ You should be careful to make the input and output functions inverses of each ot
 Optionally, a user-defined type can provide binary input and output routines. Binary I/O is normally faster but less portable than textual I/O. As with textual I/O, it is up to you to define exactly what the external binary representation is. Most of the built-in data types try to provide a machine-independent binary representation. For `complex`, we will piggy-back on the binary I/O converters for type `float8`:
 
 ```
-
 PG_FUNCTION_INFO_V1(complex_recv);
 
 Datum
@@ -104,14 +104,12 @@ complex_send(PG_FUNCTION_ARGS)
 Once we have written the I/O functions and compiled them into a shared library, we can define the `complex` type in SQL. First we declare it as a shell type:
 
 ```
-
 CREATE TYPE complex;
 ```
 
 This serves as a placeholder that allows us to reference the type while defining its I/O functions. Now we can define the I/O functions:
 
 ```
-
 CREATE FUNCTION complex_in(cstring)
     RETURNS complex
     AS 'filename'
@@ -136,7 +134,6 @@ CREATE FUNCTION complex_send(complex)
 Finally, we can provide the full definition of the data type:
 
 ```
-
 CREATE TYPE complex (
    internallength = 16,
    input = complex_in,
@@ -153,11 +150,15 @@ Once the data type exists, we can declare additional functions to provide useful
 
 If the internal representation of the data type is variable-length, the internal representation must follow the standard layout for variable-length data: the first four bytes must be a `char[4]` field which is never accessed directly (customarily named `vl_len_`). You must use the `SET_VARSIZE()` macro to store the total size of the datum (including the length field itself) in this field and `VARSIZE()` to retrieve it. (These macros exist because the length field may be encoded depending on platform.)
 
-For further details see the description of the [CREATE TYPE](sql-createtype.html "CREATE TYPE") command.
+For further details see the description of the [CREATE TYPE](sql-createtype) command.
+
+[#id](#XTYPES-TOAST)
 
 ### 38.13.1. TOAST Considerations [#](#XTYPES-TOAST)
 
-If the values of your data type vary in size (in internal form), it's usually desirable to make the data type TOAST-able (see [Section 73.2](storage-toast.html "73.2. TOAST")). You should do this even if the values are always too small to be compressed or stored externally, because TOAST can save space on small data too, by reducing header overhead.
+
+
+If the values of your data type vary in size (in internal form), it's usually desirable to make the data type TOAST-able (see [Section 73.2](storage-toast)). You should do this even if the values are always too small to be compressed or stored externally, because TOAST can save space on small data too, by reducing header overhead.
 
 To support TOAST storage, the C functions operating on the data type must always be careful to unpack any toasted values they are handed by using `PG_DETOAST_DATUM`. (This detail is customarily hidden by defining type-specific `GETARG_DATATYPE_P` macros.) Then, when running the `CREATE TYPE` command, specify the internal length as `variable` and select some appropriate storage option other than `plain`.
 

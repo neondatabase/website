@@ -1,8 +1,12 @@
-## F.47. unaccent — a text search dictionary which removes diacritics [#](#UNACCENT)
+[#id](#UNACCENT)
 
-  * *   [F.47.1. Configuration](unaccent.html#UNACCENT-CONFIGURATION)
-  * [F.47.2. Usage](unaccent.html#UNACCENT-USAGE)
-  * [F.47.3. Functions](unaccent.html#UNACCENT-FUNCTIONS)
+## F.48. unaccent — a text search dictionary which removes diacritics [#](#UNACCENT)
+
+  * [F.48.1. Configuration](unaccent#UNACCENT-CONFIGURATION)
+  * [F.48.2. Usage](unaccent#UNACCENT-USAGE)
+  * [F.48.3. Functions](unaccent#UNACCENT-FUNCTIONS)
+
+
 
 `unaccent` is a text search dictionary that removes accents (diacritic signs) from lexemes. It's a filtering dictionary, which means its output is always passed to the next dictionary (if any), unlike the normal behavior of dictionaries. This allows accent-insensitive processing for full text search.
 
@@ -10,7 +14,9 @@ The current implementation of `unaccent` cannot be used as a normalizing diction
 
 This module is considered “trusted”, that is, it can be installed by non-superusers who have `CREATE` privilege on the current database.
 
-### F.47.1. Configuration [#](#UNACCENT-CONFIGURATION)
+[#id](#UNACCENT-CONFIGURATION)
+
+### F.48.1. Configuration [#](#UNACCENT-CONFIGURATION)
 
 An `unaccent` dictionary accepts the following options:
 
@@ -20,44 +26,33 @@ The rules file has the following format:
 
 * Each line represents one translation rule, consisting of a character with accent followed by a character without accent. The first is translated into the second. For example,
 
-    ```
+  ```
+  À        A
+  Á        A
+  Â        A
+  Ã        A
+  Ä        A
+  Å        A
+  Æ        AE
+  ```
 
-    À        A
-    Á        A
-    Â        A
-    Ã        A
-    Ä        A
-    Å        A
-    Æ        AE
-    ```
-
-    The two characters must be separated by whitespace, and any leading or trailing whitespace on a line is ignored.
+  The two characters must be separated by whitespace, and any leading or trailing whitespace on a line is ignored.
 
 * Alternatively, if only one character is given on a line, instances of that character are deleted; this is useful in languages where accents are represented by separate characters.
 
 * Actually, each “character” can be any string not containing whitespace, so `unaccent` dictionaries could be used for other sorts of substring substitutions besides diacritic removal.
 
-* Some characters, like numeric symbols, may require whitespaces in their translation rule. It is possible to use double quotes around the translated characters in this case. A double quote needs to be escaped with a second double quote when including one in the translated character. For example:
-
-    ```
-
-    ¼      " 1/4"
-    ½      " 1/2"
-    ¾      " 3/4"
-    “       """"
-    ”       """"
-    ```
-
 * As with other PostgreSQL text search configuration files, the rules file must be stored in UTF-8 encoding. The data is automatically translated into the current database's encoding when loaded. Any lines containing untranslatable characters are silently ignored, so that rules files can contain rules that are not applicable in the current encoding.
 
 A more complete example, which is directly useful for most European languages, can be found in `unaccent.rules`, which is installed in `$SHAREDIR/tsearch_data/` when the `unaccent` module is installed. This rules file translates characters with accents to the same characters without accents, and it also expands ligatures into the equivalent series of simple characters (for example, Æ to AE).
 
-### F.47.2. Usage [#](#UNACCENT-USAGE)
+[#id](#UNACCENT-USAGE)
+
+### F.48.2. Usage [#](#UNACCENT-USAGE)
 
 Installing the `unaccent` extension creates a text search template `unaccent` and a dictionary `unaccent` based on it. The `unaccent` dictionary has the default parameter setting `RULES='unaccent'`, which makes it immediately usable with the standard `unaccent.rules` file. If you wish, you can alter the parameter, for example
 
 ```
-
 mydb=# ALTER TEXT SEARCH DICTIONARY unaccent (RULES='my_rules');
 ```
 
@@ -66,7 +61,6 @@ or create new dictionaries based on the template.
 To test the dictionary, you can try:
 
 ```
-
 mydb=# select ts_lexize('unaccent','Hôtel');
  ts_lexize
 -----------
@@ -77,7 +71,6 @@ mydb=# select ts_lexize('unaccent','Hôtel');
 Here is an example showing how to insert the `unaccent` dictionary into a text search configuration:
 
 ```
-
 mydb=# CREATE TEXT SEARCH CONFIGURATION fr ( COPY = french );
 mydb=# ALTER TEXT SEARCH CONFIGURATION fr
         ALTER MAPPING FOR hword, hword_part, word
@@ -101,12 +94,15 @@ mydb=# select ts_headline('fr','Hôtel de la Mer',to_tsquery('fr','Hotels'));
 (1 row)
 ```
 
-### F.47.3. Functions [#](#UNACCENT-FUNCTIONS)
+[#id](#UNACCENT-FUNCTIONS)
+
+### F.48.3. Functions [#](#UNACCENT-FUNCTIONS)
 
 The `unaccent()` function removes accents (diacritic signs) from a given string. Basically, it's a wrapper around `unaccent`-type dictionaries, but it can be used outside normal text search contexts.
 
-```
 
+
+```
 unaccent([dictionary regdictionary, ] string text) returns text
 ```
 
@@ -115,7 +111,6 @@ If the *`dictionary`* argument is omitted, the text search dictionary named `una
 For example:
 
 ```
-
 SELECT unaccent('unaccent', 'Hôtel');
 SELECT unaccent('Hôtel');
 ```

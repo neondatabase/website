@@ -2,7 +2,7 @@
 title: Connect Quarkus (Reactive) to Neon
 subtitle: Learn how to connect to Neon from Quarkus using a Reactive SQL Client
 enableTableOfContents: true
-updatedOn: '2023-11-16T10:55:54.626Z'
+updatedOn: '2023-11-23T13:58:00.340Z'
 ---
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using a Reactive SQL Client.

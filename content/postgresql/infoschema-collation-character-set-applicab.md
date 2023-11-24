@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-COLLATION-CHARACTER-SET-APPLICAB)
+
 ## 37.11. `collation_character_set_​applicability` [#](#INFOSCHEMA-COLLATION-CHARACTER-SET-APPLICAB)
 
-The view `collation_character_set_applicability` identifies which character set the available collations are applicable to. In PostgreSQL, there is only one character set per database (see explanation in [Section 37.7](infoschema-character-sets.html "37.7. character_sets")), so this view does not provide much useful information.
+The view `collation_character_set_applicability` identifies which character set the available collations are applicable to. In PostgreSQL, there is only one character set per database (see explanation in [Section 37.7](infoschema-character-sets)), so this view does not provide much useful information.
+
+[#id](#id-1.7.6.15.3)
 
 **Table 37.9. `collation_character_set_applicability` Columns**
 

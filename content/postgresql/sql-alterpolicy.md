@@ -1,3 +1,5 @@
+[#id](#SQL-ALTERPOLICY)
+
 ## ALTER POLICY
 
 ALTER POLICY — change the definition of a row-level security policy
@@ -5,7 +7,6 @@ ALTER POLICY — change the definition of a row-level security policy
 ## Synopsis
 
 ```
-
 ALTER POLICY name ON table_name RENAME TO new_name
 
 ALTER POLICY name ON table_name
@@ -13,6 +14,8 @@ ALTER POLICY name ON table_name
     [ USING ( using_expression ) ]
     [ WITH CHECK ( check_expression ) ]
 ```
+
+[#id](#id-1.9.3.23.5)
 
 ## Description
 
@@ -22,36 +25,42 @@ To use `ALTER POLICY`, you must own the table that the policy applies to.
 
 In the second form of `ALTER POLICY`, the role list, *`using_expression`*, and *`check_expression`* are replaced independently if specified. When one of those clauses is omitted, the corresponding part of the policy is unchanged.
 
+[#id](#id-1.9.3.23.6)
+
 ## Parameters
 
 * *`name`*
 
-    The name of an existing policy to alter.
+  The name of an existing policy to alter.
 
 * *`table_name`*
 
-    The name (optionally schema-qualified) of the table that the policy is on.
+  The name (optionally schema-qualified) of the table that the policy is on.
 
 * *`new_name`*
 
-    The new name for the policy.
+  The new name for the policy.
 
 * *`role_name`*
 
-    The role(s) to which the policy applies. Multiple roles can be specified at one time. To apply the policy to all roles, use `PUBLIC`.
+  The role(s) to which the policy applies. Multiple roles can be specified at one time. To apply the policy to all roles, use `PUBLIC`.
 
 * *`using_expression`*
 
-    The `USING` expression for the policy. See [CREATE POLICY](sql-createpolicy.html "CREATE POLICY") for details.
+  The `USING` expression for the policy. See [CREATE POLICY](sql-createpolicy) for details.
 
 * *`check_expression`*
 
-    The `WITH CHECK` expression for the policy. See [CREATE POLICY](sql-createpolicy.html "CREATE POLICY") for details.
+  The `WITH CHECK` expression for the policy. See [CREATE POLICY](sql-createpolicy) for details.
+
+[#id](#id-1.9.3.23.7)
 
 ## Compatibility
 
 `ALTER POLICY` is a PostgreSQL extension.
 
+[#id](#id-1.9.3.23.8)
+
 ## See Also
 
-[CREATE POLICY](sql-createpolicy.html "CREATE POLICY"), [DROP POLICY](sql-droppolicy.html "DROP POLICY")
+[CREATE POLICY](sql-createpolicy), [DROP POLICY](sql-droppolicy)

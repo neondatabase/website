@@ -1,13 +1,16 @@
+[#id](#RULES-PRIVILEGES)
+
 ## 41.5. Rules and Privileges [#](#RULES-PRIVILEGES)
+
+
 
 Due to rewriting of queries by the PostgreSQL rule system, other tables/views than those used in the original query get accessed. When update rules are used, this can include write access to tables.
 
-Rewrite rules don't have a separate owner. The owner of a relation (table or view) is automatically the owner of the rewrite rules that are defined for it. The PostgreSQL rule system changes the behavior of the default access control system. With the exception of `SELECT` rules associated with security invoker views (see [`CREATE VIEW`](sql-createview.html "CREATE VIEW")), all relations that are used due to rules get checked against the privileges of the rule owner, not the user invoking the rule. This means that, except for security invoker views, users only need the required privileges for the tables/views that are explicitly named in their queries.
+Rewrite rules don't have a separate owner. The owner of a relation (table or view) is automatically the owner of the rewrite rules that are defined for it. The PostgreSQL rule system changes the behavior of the default access control system. With the exception of `SELECT` rules associated with security invoker views (see [`CREATE VIEW`](sql-createview)), all relations that are used due to rules get checked against the privileges of the rule owner, not the user invoking the rule. This means that, except for security invoker views, users only need the required privileges for the tables/views that are explicitly named in their queries.
 
 For example: A user has a list of phone numbers where some of them are private, the others are of interest for the assistant of the office. The user can construct the following:
 
 ```
-
 CREATE TABLE phone_data (person text, phone text, private boolean);
 CREATE VIEW phone_number AS
     SELECT person, CASE WHEN NOT private THEN phone END AS phone
@@ -24,7 +27,6 @@ One might think that this rule-by-rule checking is a security hole, but in fact 
 Note that while views can be used to hide the contents of certain columns using the technique shown above, they cannot be used to reliably conceal the data in unseen rows unless the `security_barrier` flag has been set. For example, the following view is insecure:
 
 ```
-
 CREATE VIEW phone_number AS
     SELECT person, phone FROM phone_data WHERE phone NOT LIKE '412%';
 ```
@@ -32,7 +34,6 @@ CREATE VIEW phone_number AS
 This view might seem secure, since the rule system will rewrite any `SELECT` from `phone_number` into a `SELECT` from `phone_data` and add the qualification that only entries where `phone` does not begin with 412 are wanted. But if the user can create their own functions, it is not difficult to convince the planner to execute the user-defined function prior to the `NOT LIKE` expression. For example:
 
 ```
-
 CREATE FUNCTION tricky(text, text) RETURNS bool AS $$
 BEGIN
     RAISE NOTICE '% => %', $1, $2;
@@ -50,7 +51,6 @@ Similar considerations apply to update rules. In the examples of the previous se
 When it is necessary for a view to provide row-level security, the `security_barrier` attribute should be applied to the view. This prevents maliciously-chosen functions and operators from being passed values from rows until after the view has done its work. For example, if the view shown above had been created like this, it would be secure:
 
 ```
-
 CREATE VIEW phone_number WITH (security_barrier) AS
     SELECT person, phone FROM phone_data WHERE phone NOT LIKE '412%';
 ```

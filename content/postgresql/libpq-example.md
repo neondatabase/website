@@ -1,11 +1,14 @@
+[#id](#LIBPQ-EXAMPLE)
+
 ## 34.22. Example Programs [#](#LIBPQ-EXAMPLE)
 
 These examples and others can be found in the directory `src/test/examples` in the source code distribution.
 
+[#id](#LIBPQ-EXAMPLE-1)
+
 **Example 34.1. libpq Example Program 1**
 
 ```
-
 
 /*
  * src/test/examples/testlibpq.c
@@ -140,12 +143,12 @@ main(int argc, char **argv)
 }
 ```
 
-\
+
+[#id](#LIBPQ-EXAMPLE-2)
 
 **Example 34.2. libpq Example Program 2**
 
 ```
-
 
 /*
  * src/test/examples/testlibpq2.c
@@ -299,12 +302,12 @@ main(int argc, char **argv)
 }
 ```
 
-\
+
+[#id](#LIBPQ-EXAMPLE-3)
 
 **Example 34.3. libpq Example Program 3**
 
 ```
-
 
 /*
  * src/test/examples/testlibpq3.c

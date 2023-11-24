@@ -1,8 +1,12 @@
+[#id](#DDL-DEFAULT)
+
 ## 5.2. Default Values [#](#DDL-DEFAULT)
 
-A column can be assigned a default value. When a new row is created and no values are specified for some of the columns, those columns will be filled with their respective default values. A data manipulation command can also request explicitly that a column be set to its default value, without having to know what that value is. (Details about data manipulation commands are in [Chapter 6](dml.html "Chapter 6. Data Manipulation").)
 
-o default value is declared explicitly, the default value is the null value. This usually makes sense because a null value can be considered to represent unknown data.
+
+A column can be assigned a default value. When a new row is created and no values are specified for some of the columns, those columns will be filled with their respective default values. A data manipulation command can also request explicitly that a column be set to its default value, without having to know what that value is. (Details about data manipulation commands are in [Chapter 6](dml).)
+
+If no default value is declared explicitly, the default value is the null value. This usually makes sense because a null value can be considered to represent unknown data.
 
 In a table definition, default values are listed after the column data type. For example:
 
@@ -25,7 +29,7 @@ CREATE TABLE products (
 );
 ```
 
-where the `nextval()` function supplies successive values from a *sequence object* (see [Section 9.17](functions-sequence.html "9.17. Sequence Manipulation Functions")). This arrangement is sufficiently common that there's a special shorthand for it:
+where the `nextval()` function supplies successive values from a *sequence object* (see [Section 9.17](functions-sequence)). This arrangement is sufficiently common that there's a special shorthand for it:
 
 ```
 
@@ -35,4 +39,4 @@ CREATE TABLE products (
 );
 ```
 
-The `SERIAL` shorthand is discussed further in [Section 8.1.4](datatype-numeric.html#DATATYPE-SERIAL "8.1.4. Serial Types").
+The `SERIAL` shorthand is discussed further in [Section 8.1.4](datatype-numeric#DATATYPE-SERIAL).

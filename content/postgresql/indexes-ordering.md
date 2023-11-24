@@ -1,4 +1,8 @@
+[#id](#INDEXES-ORDERING)
+
 ## 11.4. Indexes and `ORDER BY` [#](#INDEXES-ORDERING)
+
+
 
 In addition to simply finding the rows to be returned by a query, an index may be able to deliver them in a specific sorted order. This allows a query's `ORDER BY` specification to be honored without a separate sorting step. Of the index types currently supported by PostgreSQL, only B-tree can produce sorted output — the other index types return matching rows in an unspecified, implementation-dependent order.
 
@@ -9,7 +13,6 @@ By default, B-tree indexes store their entries in ascending order with nulls las
 You can adjust the ordering of a B-tree index by including the options `ASC`, `DESC`, `NULLS FIRST`, and/or `NULLS LAST` when creating the index; for example:
 
 ```
-
 CREATE INDEX test2_info_nulls_low ON test2 (info NULLS FIRST);
 CREATE INDEX test3_desc_index ON test3 (id DESC NULLS LAST);
 ```

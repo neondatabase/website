@@ -1,9 +1,12 @@
+[#id](#INDEXES-OPCLASS)
+
 ## 11.10. Operator Classes and Operator Families [#](#INDEXES-OPCLASS)
+
+
 
 An index definition can specify an *operator class* for each column of an index.
 
 ```
-
 CREATE INDEX name ON table (column opclass [ ( opclass_options ) ] [sort options] [, ...]);
 ```
 
@@ -13,17 +16,15 @@ There are also some built-in operator classes besides the default ones:
 
 * The operator classes `text_pattern_ops`, `varchar_pattern_ops`, and `bpchar_pattern_ops` support B-tree indexes on the types `text`, `varchar`, and `char` respectively. The difference from the default operator classes is that the values are compared strictly character by character rather than according to the locale-specific collation rules. This makes these operator classes suitable for use by queries involving pattern matching expressions (`LIKE` or POSIX regular expressions) when the database does not use the standard “C” locale. As an example, you might index a `varchar` column like this:
 
-    ```
+  ```
+  CREATE INDEX test_index ON test_table (col varchar_pattern_ops);
+  ```
 
-    CREATE INDEX test_index ON test_table (col varchar_pattern_ops);
-    ```
-
-    Note that you should also create an index with the default operator class if you want queries involving ordinary `<`, `<=`, `>`, or `>=` comparisons to use an index. Such queries cannot use the `xxx_pattern_ops` operator classes. (Ordinary equality comparisons can use these operator classes, however.) It is possible to create multiple indexes on the same column with different operator classes. If you do use the C locale, you do not need the `xxx_pattern_ops` operator classes, because an index with the default operator class is usable for pattern-matching queries in the C locale.
+  Note that you should also create an index with the default operator class if you want queries involving ordinary `<`, `<=`, `>`, or `>=` comparisons to use an index. Such queries cannot use the `xxx_pattern_ops` operator classes. (Ordinary equality comparisons can use these operator classes, however.) It is possible to create multiple indexes on the same column with different operator classes. If you do use the C locale, you do not need the `xxx_pattern_ops` operator classes, because an index with the default operator class is usable for pattern-matching queries in the C locale.
 
 The following query shows all defined operator classes:
 
 ```
-
 SELECT am.amname AS index_method,
        opc.opcname AS opclass_name,
        opc.opcintype::regtype AS indexed_type,
@@ -38,7 +39,6 @@ An operator class is actually just a subset of a larger structure called an *ope
 This expanded version of the previous query shows the operator family each operator class belongs to:
 
 ```
-
 SELECT am.amname AS index_method,
        opc.opcname AS opclass_name,
        opf.opfname AS opfamily_name,
@@ -53,7 +53,6 @@ SELECT am.amname AS index_method,
 This query shows all defined operator families and all the operators included in each family:
 
 ```
-
 SELECT am.amname AS index_method,
        opf.opfname AS opfamily_name,
        amop.amopopr::regoperator AS opfamily_operator
@@ -65,4 +64,4 @@ SELECT am.amname AS index_method,
 
 ### Tip
 
-[psql](app-psql.html "psql") has commands `\dAc`, `\dAf`, and `\dAo`, which provide slightly more sophisticated versions of these queries.
+[psql](app-psql) has commands `\dAc`, `\dAf`, and `\dAo`, which provide slightly more sophisticated versions of these queries.

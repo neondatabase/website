@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-TABLE-PRIVILEGES)
+
 ## 37.53. `table_privileges` [#](#INFOSCHEMA-TABLE-PRIVILEGES)
 
 The view `table_privileges` identifies all privileges granted on tables or views to a currently enabled role or by a currently enabled role. There is one row for each combination of table, grantor, and grantee.
+
+[#id](#id-1.7.6.57.3)
 
 **Table 37.51. `table_privileges` Columns**
 

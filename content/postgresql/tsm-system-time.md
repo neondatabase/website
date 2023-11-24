@@ -1,8 +1,12 @@
-## F.46. tsm\_system\_time — the `SYSTEM_TIME` sampling method for `TABLESAMPLE` [#](#TSM-SYSTEM-TIME)
+[#id](#TSM-SYSTEM-TIME)
 
-* [F.46.1. Examples](tsm-system-time.html#TSM-SYSTEM-TIME-EXAMPLES)
+## F.47. tsm\_system\_time — the `SYSTEM_TIME` sampling method for `TABLESAMPLE` [#](#TSM-SYSTEM-TIME)
 
-The `tsm_system_time` module provides the table sampling method `SYSTEM_TIME`, which can be used in the `TABLESAMPLE` clause of a [`SELECT`](sql-select.html "SELECT") command.
+* [F.47.1. Examples](tsm-system-time#TSM-SYSTEM-TIME-EXAMPLES)
+
+
+
+The `tsm_system_time` module provides the table sampling method `SYSTEM_TIME`, which can be used in the `TABLESAMPLE` clause of a [`SELECT`](sql-select) command.
 
 This table sampling method accepts a single floating-point argument that is the maximum number of milliseconds to spend reading the table. This gives you direct control over how long the query takes, at the price that the size of the sample becomes hard to predict. The resulting sample will contain as many rows as could be read in the specified time, unless the whole table has been read first.
 
@@ -12,19 +16,19 @@ Like the built-in `SYSTEM` sampling method, `SYSTEM_TIME` performs block-level s
 
 This module is considered “trusted”, that is, it can be installed by non-superusers who have `CREATE` privilege on the current database.
 
-### F.46.1. Examples [#](#TSM-SYSTEM-TIME-EXAMPLES)
+[#id](#TSM-SYSTEM-TIME-EXAMPLES)
+
+### F.47.1. Examples [#](#TSM-SYSTEM-TIME-EXAMPLES)
 
 Here is an example of selecting a sample of a table with `SYSTEM_TIME`. First install the extension:
 
 ```
-
 CREATE EXTENSION tsm_system_time;
 ```
 
 Then you can use it in a `SELECT` command, for instance:
 
 ```
-
 SELECT * FROM my_table TABLESAMPLE SYSTEM_TIME(1000);
 ```
 

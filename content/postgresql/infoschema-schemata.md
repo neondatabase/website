@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-SCHEMATA)
+
 ## 37.46. `schemata` [#](#INFOSCHEMA-SCHEMATA)
 
 The view `schemata` contains all schemas in the current database that the current user has access to (by way of being the owner or having some privilege).
+
+[#id](#id-1.7.6.50.3)
 
 **Table 37.44. `schemata` Columns**
 

@@ -1,3 +1,5 @@
+[#id](#PROTOCOL-CHANGES)
+
 ## 55.10. Summary of Changes since Protocol 2.0 [#](#PROTOCOL-CHANGES)
 
 This section provides a quick checklist of changes, for the benefit of developers trying to update existing client libraries to protocol 3.0.

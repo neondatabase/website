@@ -1,3 +1,5 @@
+[#id](#SQL-NOTIFY)
+
 ## NOTIFY
 
 NOTIFY — generate a notification
@@ -5,9 +7,10 @@ NOTIFY — generate a notification
 ## Synopsis
 
 ```
-
 NOTIFY channel [ , payload ]
 ```
+
+[#id](#id-1.9.3.158.5)
 
 ## Description
 
@@ -27,34 +30,43 @@ If the same channel name is signaled multiple times with identical payload strin
 
 It is common for a client that executes `NOTIFY` to be listening on the same notification channel itself. In that case it will get back a notification event, just like all the other listening sessions. Depending on the application logic, this could result in useless work, for example, reading a database table to find the same updates that that session just wrote out. It is possible to avoid such extra work by noticing whether the notifying session's server process PID (supplied in the notification event message) is the same as one's own session's PID (available from libpq). When they are the same, the notification event is one's own work bouncing back, and can be ignored.
 
+[#id](#id-1.9.3.158.6)
+
 ## Parameters
 
 * *`channel`*
 
-    Name of the notification channel to be signaled (any identifier).
+  Name of the notification channel to be signaled (any identifier).
 
 * *`payload`*
 
-    The “payload” string to be communicated along with the notification. This must be specified as a simple string literal. In the default configuration it must be shorter than 8000 bytes. (If binary data or large amounts of information need to be communicated, it's best to put it in a database table and send the key of the record.)
+  The “payload” string to be communicated along with the notification. This must be specified as a simple string literal. In the default configuration it must be shorter than 8000 bytes. (If binary data or large amounts of information need to be communicated, it's best to put it in a database table and send the key of the record.)
+
+[#id](#id-1.9.3.158.7)
 
 ## Notes
 
 There is a queue that holds notifications that have been sent but not yet processed by all listening sessions. If this queue becomes full, transactions calling `NOTIFY` will fail at commit. The queue is quite large (8GB in a standard installation) and should be sufficiently sized for almost every use case. However, no cleanup can take place if a session executes `LISTEN` and then enters a transaction for a very long time. Once the queue is half full you will see warnings in the log file pointing you to the session that is preventing cleanup. In this case you should make sure that this session ends its current transaction so that cleanup can proceed.
 
-The function `pg_notification_queue_usage` returns the fraction of the queue that is currently occupied by pending notifications. See [Section 9.26](functions-info.html "9.26. System Information Functions and Operators") for more information.
+The function `pg_notification_queue_usage` returns the fraction of the queue that is currently occupied by pending notifications. See [Section 9.26](functions-info) for more information.
 
 A transaction that has executed `NOTIFY` cannot be prepared for two-phase commit.
 
+[#id](#id-1.9.3.158.7.5)
+
 ### pg\_notify
 
+
+
 To send a notification you can also use the function `pg_notify(text, text)`. The function takes the channel name as the first argument and the payload as the second. The function is much easier to use than the `NOTIFY` command if you need to work with non-constant channel names and payloads.
+
+[#id](#id-1.9.3.158.8)
 
 ## Examples
 
 Configure and execute a listen/notify sequence from psql:
 
 ```
-
 LISTEN virtual;
 NOTIFY virtual;
 Asynchronous notification "virtual" received from server process with PID 8448.
@@ -66,10 +78,14 @@ SELECT pg_notify('fo' || 'o', 'pay' || 'load');
 Asynchronous notification "foo" with payload "payload" received from server process with PID 14728.
 ```
 
+[#id](#id-1.9.3.158.9)
+
 ## Compatibility
 
 There is no `NOTIFY` statement in the SQL standard.
 
+[#id](#id-1.9.3.158.10)
+
 ## See Also
 
-[LISTEN](sql-listen.html "LISTEN"), [UNLISTEN](sql-unlisten.html "UNLISTEN")
+[LISTEN](sql-listen), [UNLISTEN](sql-unlisten)

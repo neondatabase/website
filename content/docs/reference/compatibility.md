@@ -3,7 +3,7 @@ title: Postgres compatibility
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2023-11-16T10:55:54.639Z'
+updatedOn: '2023-11-23T15:54:41.199Z'
 ---
 
 Neon is protocol and application-compatible with Postgres. However, when using the Neon cloud service, there are some limitations that you should be aware of.
@@ -66,5 +66,14 @@ Statistics collected by the Postgres [cumulative statistics system](https://www.
 ## Database encoding
 
 Neon does not currently support changing the database encoding. This feature will become available when we add support for creating databases using SQL, which is on our roadmap. Currently, creating a database is supported only in the Neon Console. See [Manage databases](/docs/manage/databases).
+
+## PostgreSQL documentation
+
+Neon provides a mirror of the official PostgreSQL documentation on the [Neon documentation site](https://neon.tech/docs/introduction) for the convenience of our users. As Neon is built on standard PostgreSQL, most information from the official PostgreSQL documentation applies to our platform. However, there are a few key differences to consider when referencing the official PostgreSQL docs:
+
+- As a managed Postgres service, certain aspects of the official PostgreSQL documentation like installation procedures do not apply to Neon.
+- Some features detailed in the official PostgreSQL documentation may not be relevant for Neon, such as those mentioned on this Postgres compatibility page.
+- Features requiring the PostgreSQL superuser privilege may not be supported. See [Roles and permissions](#roles-and-permissions) above.
+- Neon may not support all of the extensions mentioned in the official PostgreSQL documentation. See [Postgres extensions](#postgres-extensions) above.
 
 <NeedHelp/>

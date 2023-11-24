@@ -1,3 +1,5 @@
+[#id](#SQL-REASSIGN-OWNED)
+
 ## REASSIGN OWNED
 
 REASSIGN OWNED — change the ownership of database objects owned by a database role
@@ -5,24 +7,29 @@ REASSIGN OWNED — change the ownership of database objects owned by a database 
 ## Synopsis
 
 ```
-
 REASSIGN OWNED BY { old_role | CURRENT_ROLE | CURRENT_USER | SESSION_USER } [, ...]
                TO { new_role | CURRENT_ROLE | CURRENT_USER | SESSION_USER }
 ```
+
+[#id](#id-1.9.3.161.5)
 
 ## Description
 
 `REASSIGN OWNED` instructs the system to change the ownership of database objects owned by any of the *`old_roles`* to *`new_role`*.
 
+[#id](#id-1.9.3.161.6)
+
 ## Parameters
 
 * *`old_role`*
 
-    The name of a role. The ownership of all the objects within the current database, and of all shared objects (databases, tablespaces), owned by this role will be reassigned to *`new_role`*.
+  The name of a role. The ownership of all the objects within the current database, and of all shared objects (databases, tablespaces), owned by this role will be reassigned to *`new_role`*.
 
 * *`new_role`*
 
-    The name of the role that will be made the new owner of the affected objects.
+  The name of the role that will be made the new owner of the affected objects.
+
+[#id](#id-1.9.3.161.7)
 
 ## Notes
 
@@ -30,16 +37,20 @@ REASSIGN OWNED BY { old_role | CURRENT_ROLE | CURRENT_USER | SESSION_USER } [, .
 
 `REASSIGN OWNED` requires membership on both the source role(s) and the target role.
 
-The [`DROP OWNED`](sql-drop-owned.html "DROP OWNED") command is an alternative that simply drops all the database objects owned by one or more roles.
+The [`DROP OWNED`](sql-drop-owned) command is an alternative that simply drops all the database objects owned by one or more roles.
 
 The `REASSIGN OWNED` command does not affect any privileges granted to the *`old_roles`* on objects that are not owned by them. Likewise, it does not affect default privileges created with `ALTER DEFAULT PRIVILEGES`. Use `DROP OWNED` to revoke such privileges.
 
-See [Section 22.4](role-removal.html "22.4. Dropping Roles") for more discussion.
+See [Section 22.4](role-removal) for more discussion.
+
+[#id](#id-1.9.3.161.8)
 
 ## Compatibility
 
 The `REASSIGN OWNED` command is a PostgreSQL extension.
 
+[#id](#id-1.9.3.161.9)
+
 ## See Also
 
-[DROP OWNED](sql-drop-owned.html "DROP OWNED"), [DROP ROLE](sql-droprole.html "DROP ROLE"), [ALTER DATABASE](sql-alterdatabase.html "ALTER DATABASE")
+[DROP OWNED](sql-drop-owned), [DROP ROLE](sql-droprole), [ALTER DATABASE](sql-alterdatabase)

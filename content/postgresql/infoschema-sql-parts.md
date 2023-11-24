@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-SQL-PARTS)
+
 ## 37.50. `sql_parts` [#](#INFOSCHEMA-SQL-PARTS)
 
 The table `sql_parts` contains information about which of the several parts of the SQL standard are supported by PostgreSQL.
+
+[#id](#id-1.7.6.54.3)
 
 **Table 37.48. `sql_parts` Columns**
 

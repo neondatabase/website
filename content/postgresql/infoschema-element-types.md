@@ -1,9 +1,10 @@
+[#id](#INFOSCHEMA-ELEMENT-TYPES)
+
 ## 37.24. `element_types` [#](#INFOSCHEMA-ELEMENT-TYPES)
 
 The view `element_types` contains the data type descriptors of the elements of arrays. When a table column, composite-type attribute, domain, function parameter, or function return value is defined to be of an array type, the respective information schema view only contains `ARRAY` in the column `data_type`. To obtain information on the element type of the array, you can join the respective view with this view. For example, to show the columns of a table with data types and array element types, if applicable, you could do:
 
 ```
-
 SELECT c.column_name, c.data_type, e.data_type AS element_type
 FROM information_schema.columns c LEFT JOIN information_schema.element_types e
      ON ((c.table_catalog, c.table_schema, c.table_name, 'TABLE', c.dtd_identifier)
@@ -13,6 +14,8 @@ ORDER BY c.ordinal_position;
 ```
 
 This view only includes objects that the current user has access to, by way of being the owner or having some privilege.
+
+[#id](#id-1.7.6.28.3)
 
 **Table 37.22. `element_types` Columns**
 
@@ -38,6 +41,7 @@ This view only includes objects that the current user has access to, by way of b
 | `datetime_precision` `cardinal_number`Always null, since this information is not applied to array element data types in PostgreSQL                                                                                                                                                                                                                                          |
 | `interval_type` `character_data`Always null, since this information is not applied to array element data types in PostgreSQL                                                                                                                                                                                                                                                |
 | `interval_precision` `cardinal_number`Always null, since this information is not applied to array element data types in PostgreSQL                                                                                                                                                                                                                                          |
+| `domain_default` `character_data`Not yet implemented                                                                                                                                                                                                                                                                                                                        |
 | `udt_catalog` `sql_identifier`Name of the database that the data type of the elements is defined in (always the current database)                                                                                                                                                                                                                                           |
 | `udt_schema` `sql_identifier`Name of the schema that the data type of the elements is defined in                                                                                                                                                                                                                                                                            |
 | `udt_name` `sql_identifier`Name of the data type of the elements                                                                                                                                                                                                                                                                                                            |

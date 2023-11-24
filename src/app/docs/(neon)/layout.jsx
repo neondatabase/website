@@ -29,7 +29,11 @@ const NeonDocsLayout = async ({ children }) => {
             className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-[110px] xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
             size="medium"
           >
-            <Sidebar sidebar={sidebar} basePath={DOCS_BASE_PATH} />
+            <Sidebar
+              sidebar={sidebar}
+              basePath={DOCS_BASE_PATH}
+              indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
+            />
             {children}
             <ChatWidget />
           </Container>

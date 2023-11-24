@@ -1,10 +1,14 @@
+[#id](#BLOOM)
+
 ## F.7. bloom — bloom filter index access method [#](#BLOOM)
 
-  * *   [F.7.1. Parameters](bloom.html#BLOOM-PARAMETERS)
-  * [F.7.2. Examples](bloom.html#BLOOM-EXAMPLES)
-  * [F.7.3. Operator Class Interface](bloom.html#BLOOM-OPERATOR-CLASS-INTERFACE)
-  * [F.7.4. Limitations](bloom.html#BLOOM-LIMITATIONS)
-  * [F.7.5. Authors](bloom.html#BLOOM-AUTHORS)
+  * [F.7.1. Parameters](bloom#BLOOM-PARAMETERS)
+  * [F.7.2. Examples](bloom#BLOOM-EXAMPLES)
+  * [F.7.3. Operator Class Interface](bloom#BLOOM-OPERATOR-CLASS-INTERFACE)
+  * [F.7.4. Limitations](bloom#BLOOM-LIMITATIONS)
+  * [F.7.5. Authors](bloom#BLOOM-AUTHORS)
+
+
 
 `bloom` provides an index access method based on [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter).
 
@@ -14,19 +18,21 @@ A signature is a lossy representation of the indexed attribute(s), and as such i
 
 This type of index is most useful when a table has many attributes and queries test arbitrary combinations of them. A traditional btree index is faster than a bloom index, but it can require many btree indexes to support all possible queries where one needs only a single bloom index. Note however that bloom indexes only support equality queries, whereas btree indexes can also perform inequality and range searches.
 
+[#id](#BLOOM-PARAMETERS)
+
 ### F.7.1. Parameters [#](#BLOOM-PARAMETERS)
 
 A `bloom` index accepts the following parameters in its `WITH` clause:
 
 * `length`
 
-    Length of each signature (index entry) in bits. It is rounded up to the nearest multiple of `16`. The default is `80` bits and the maximum is `4096`.
+  Length of each signature (index entry) in bits. It is rounded up to the nearest multiple of `16`. The default is `80` bits and the maximum is `4096`.
 
+- `col1 — col32`
 
+  Number of bits generated for each index column. Each parameter's name refers to the number of the index column that it controls. The default is `2` bits and the maximum is `4095`. Parameters for index columns not actually used are ignored.
 
-* `col1 — col32`
-
-    Number of bits generated for each index column. Each parameter's name refers to the number of the index column that it controls. The default is `2` bits and the maximum is `4095`. Parameters for index columns not actually used are ignored.
+[#id](#BLOOM-EXAMPLES)
 
 ### F.7.2. Examples [#](#BLOOM-EXAMPLES)
 
@@ -152,6 +158,8 @@ CREATE INDEX
 
 Although this query runs much faster than with either of the single indexes, we pay a penalty in index size. Each of the single-column btree indexes occupies 2 MB, so the total space needed is 12 MB, eight times the space used by the bloom index.
 
+[#id](#BLOOM-OPERATOR-CLASS-INTERFACE)
+
 ### F.7.3. Operator Class Interface [#](#BLOOM-OPERATOR-CLASS-INTERFACE)
 
 An operator class for bloom indexes requires only a hash function for the indexed data type and an equality operator for searching. This example shows the operator class definition for the `text` data type:
@@ -164,12 +172,19 @@ DEFAULT FOR TYPE text USING bloom AS
     FUNCTION    1   hashtext(text);
 ```
 
+[#id](#BLOOM-LIMITATIONS)
+
 ### F.7.4. Limitations [#](#BLOOM-LIMITATIONS)
 
 * Only operator classes for `int4` and `text` are included with the module.
+
 * Only the `=` operator is supported for search. But it is possible to add support for arrays with union and intersection operations in the future.
+
 * `bloom` access method doesn't support `UNIQUE` indexes.
+
 * `bloom` access method doesn't support searching for `NULL` values.
+
+[#id](#BLOOM-AUTHORS)
 
 ### F.7.5. Authors [#](#BLOOM-AUTHORS)
 
