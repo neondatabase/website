@@ -175,15 +175,45 @@ insert into person (ID, NAME) values (2, 'Mr. Lopez');
 insert into person (ID, NAME) values (3, 'Ms. Smith');
 ```
 
-In the following steps, you'll run the migration on each environment in order by specifying the environment's configuration file in the `flyway migrate` command. You'll start with your `development` environment, then `staging`, and then finally, `production`.
+### Run the migration on each environment
 
-### Run the migration on your development environment
+Run the migration on each environment in order by specifying the environment's configuration file in the `flyway migrate` command. You'll start with your `development` environment, then `staging`, and then finally, `production`.
 
+<Tabs labels={[“Development”, “Staging”, “Production”]}>
+
+<TabItem>
 ```bash
 flyway migrate -configFiles="conf/env_dev.conf"
 ```
+</TabItem>
 
-If the command was successful, you’ll see output similar to the following:
+<TabItem>
+
+<CodeBlock showLineNumbers>
+
+```bash
+flyway migrate -configFiles="conf/env_staging.conf"
+```
+
+</CodeBlock>
+
+</TabItem>
+
+<TabItem>
+
+<CodeBlock showLineNumbers>
+
+```bash
+flyway migrate -configFiles="conf/env_prod.conf"
+```
+
+</CodeBlock>
+
+</TabItem>
+
+</Tabs>
+
+If the migration command succesful, you’ll see output similar to the following. You'll should see this output for each command.
 
 ```bash
 Database: jdbc:postgresql://ep-nameless-unit-49929920.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
@@ -197,24 +227,7 @@ Successfully applied 1 migration to schema "public", now at version v2 (executio
 A Flyway report has been generated here: /home/alex/flyway-x.y.z/report.html
 ```
 
-### Run the migration on your staging environment
-
-```bash
-flyway migrate -configFiles="conf/env_staging.conf"
-```
-
-If the command was successful, you’ll see output similar to that shown above.
-
-### Run the migration on your product environment
-
-Switch to the Flyway root directory and run the following command:
-```bash
-flyway migrate -configFiles="conf/env_prod.conf"
-```
-
-If the command was successful, you’ll again see output similar to that shown above.
-
-Your database should now be consistent across all three environments. You can verify that the data was added to each by viewing the branch and table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+Your database should now be consistent across all three environments. You can verify that the data was added to each database by viewing the branch and table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
 
 ## Conclusion
 

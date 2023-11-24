@@ -1,7 +1,6 @@
 ---
 title: Neon user guides
-subtitle: Explore Neon features and how to integrate with different frameworks,
-  languages, and platforms
+subtitle: Explore Neon framework, language, platform, and feature guides
 enableTableOfContents: true
 updatedOn: '2023-11-07T19:44:07.454Z'
 ---
