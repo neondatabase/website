@@ -203,7 +203,7 @@ Now, you can start making database schema changes by creating [changesets](https
     touch dbchangelog.xml
     ```
 
-2. Add the following changeset, which adds a `comments` table to your database:
+2. Add the following changeset to the `dbchangelog.xml` file, which adds a `comments` table to your database:
 
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>  
