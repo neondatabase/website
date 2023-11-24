@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2023-10-24T18:56:54.992Z'
+updatedOn: '2023-11-24T11:25:06.761Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases, and with the Neon Pro Plan, as many branches of those databases, as your application or workflow needs. However, [tier limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Tier limits you to one project per Neon account.
@@ -438,6 +438,4 @@ curl -X 'DELETE' \
 
 </details>
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

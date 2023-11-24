@@ -1,3 +1,5 @@
+[#id](#INFOSCHEMA-SCHEMA)
+
 ## 37.1. The Schema [#](#INFOSCHEMA-SCHEMA)
 
 The information schema itself is a schema named `information_schema`. This schema automatically exists in all databases. The owner of this schema is the initial database user in the cluster, and that user naturally has all the privileges on this schema, including the ability to drop it (but the space savings achieved by that are minuscule).

@@ -193,8 +193,8 @@ const ChatWidget = () => {
                 <div className="mt-2.5 flex flex-col space-y-1 text-center text-xs font-light leading-dense text-gray-new-30 dark:text-gray-new-80">
                   <span>Neon AI has a cap of 1 message every 5 seconds.</span>
                   <span>
-                    Neon AI may produce inaccurate information. Evaluate answers carefully
-                    before implementing.
+                    Neon AI may produce inaccurate information. Evaluate answers carefully before
+                    implementing.
                   </span>
                 </div>
                 {!isLoading &&
@@ -271,7 +271,7 @@ const ChatWidgetTrigger = ({ className, isSidebar }) => {
   return (
     <button
       className={clsx(
-        'chat-widget group flex text-sm focus:outline-none',
+        'chat-widget group flex text-sm w-full focus:outline-none',
         isSidebar
           ? 'items-center space-x-3'
           : 'flex-col xl:flex-row xl:items-center xl:space-x-1.5',

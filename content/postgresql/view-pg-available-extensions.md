@@ -1,6 +1,12 @@
+[#id](#VIEW-PG-AVAILABLE-EXTENSIONS)
+
 ## 54.2. `pg_available_extensions` [#](#VIEW-PG-AVAILABLE-EXTENSIONS)
 
-The `pg_available_extensions` view lists the extensions that are available for installation. See also the [`pg_extension`](catalog-pg-extension.html "53.22. pg_extension") catalog, which shows the extensions currently installed.
+
+
+The `pg_available_extensions` view lists the extensions that are available for installation. See also the [`pg_extension`](catalog-pg-extension) catalog, which shows the extensions currently installed.
+
+[#id](#id-1.10.5.6.4)
 
 **Table 54.2. `pg_available_extensions` Columns**
 
@@ -11,6 +17,5 @@ The `pg_available_extensions` view lists the extensions that are available for i
 | `installed_version` `text`Currently installed version of the extension, or `NULL` if not installed |
 | `comment` `text`Comment string from the extension's control file                                   |
 
-\
 
 The `pg_available_extensions` view is read-only.

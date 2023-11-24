@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura
   - /docs/integrations/hasura
-updatedOn: '2023-10-19T23:10:12.829Z'
+updatedOn: '2023-11-24T11:25:06.752Z'
 ---
 
 Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
@@ -78,6 +78,4 @@ To view the newly created tables from the Neon Console:
 
 If you are migrating from Hasura with Heroku Postgres to Neon, refer to the [Import data from Heroku](/docs/import/import-from-heroku) guide for data import instructions. For general data import instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

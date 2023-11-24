@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-ROLE-USAGE-GRANTS)
+
 ## 37.39. `role_usage_grants` [#](#INFOSCHEMA-ROLE-USAGE-GRANTS)
 
 The view `role_usage_grants` identifies `USAGE` privileges granted on various kinds of objects where the grantor or grantee is a currently enabled role. Further information can be found under `usage_privileges`. The only effective difference between this view and `usage_privileges` is that this view omits objects that have been made accessible to the current user by way of a grant to `PUBLIC`.
+
+[#id](#id-1.7.6.43.3)
 
 **Table 37.37. `role_usage_grants` Columns**
 

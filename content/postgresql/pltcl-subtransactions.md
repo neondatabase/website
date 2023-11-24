@@ -1,11 +1,14 @@
+[#id](#PLTCL-SUBTRANSACTIONS)
+
 ## 44.9. Explicit Subtransactions in PL/Tcl [#](#PLTCL-SUBTRANSACTIONS)
 
-Recovering from errors caused by database access as described in [Section 44.8](pltcl-error-handling.html "44.8. Error Handling in PL/Tcl") can lead to an undesirable situation where some operations succeed before one of them fails, and after recovering from that error the data is left in an inconsistent state. PL/Tcl offers a solution to this problem in the form of explicit subtransactions.
+
+
+Recovering from errors caused by database access as described in [Section 44.8](pltcl-error-handling) can lead to an undesirable situation where some operations succeed before one of them fails, and after recovering from that error the data is left in an inconsistent state. PL/Tcl offers a solution to this problem in the form of explicit subtransactions.
 
 Consider a function that implements a transfer between two accounts:
 
 ```
-
 CREATE FUNCTION transfer_funds() RETURNS void AS $$
     if [catch {
         spi_exec "UPDATE accounts SET balance = balance - 100 WHERE account_name = 'joe'"
@@ -24,7 +27,6 @@ If the second `UPDATE` statement results in an exception being raised, this func
 To handle such cases, you can wrap multiple database operations in an explicit subtransaction, which will succeed or roll back as a whole. PL/Tcl provides a `subtransaction` command to manage this. We can rewrite our function as:
 
 ```
-
 CREATE FUNCTION transfer_funds2() RETURNS void AS $$
     if [catch {
         subtransaction {

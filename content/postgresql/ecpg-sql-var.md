@@ -1,3 +1,5 @@
+[#id](#ECPG-SQL-VAR)
+
 ## VAR
 
 VAR — define a variable
@@ -9,19 +11,25 @@ VAR — define a variable
 VAR varname IS ctype
 ```
 
+[#id](#id-1.7.5.20.18.3)
+
 ## Description
 
 The `VAR` command assigns a new C data type to a host variable. The host variable must be previously declared in a declare section.
+
+[#id](#id-1.7.5.20.18.4)
 
 ## Parameters
 
 * *`varname`* [#](#ECPG-SQL-VAR-VARNAME)
 
-    A C variable name.
+  A C variable name.
 
 * *`ctype`* [#](#ECPG-SQL-VAR-CTYPE)
 
-    A C type specification.
+  A C type specification.
+
+[#id](#id-1.7.5.20.18.5)
 
 ## Examples
 
@@ -32,6 +40,8 @@ short a;
 exec sql end declare section;
 EXEC SQL VAR a IS int;
 ```
+
+[#id](#id-1.7.5.20.18.6)
 
 ## Compatibility
 

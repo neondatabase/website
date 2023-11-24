@@ -1,3 +1,5 @@
+[#id](#BTREE-INTRO)
+
 ## 67.1. Introduction [#](#BTREE-INTRO)
 
 PostgreSQL includes an implementation of the standard btree (multi-way balanced tree) index data structure. Any data type that can be sorted into a well-defined linear order can be indexed by a btree index. The only limitation is that an index entry cannot exceed approximately one-third of a page (after TOAST compression, if applicable).

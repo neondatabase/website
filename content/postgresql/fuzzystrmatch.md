@@ -1,10 +1,14 @@
+[#id](#FUZZYSTRMATCH)
+
 ## F.17. fuzzystrmatch — determine string similarities and distance [#](#FUZZYSTRMATCH)
 
-  * *   [F.17.1. Soundex](fuzzystrmatch.html#FUZZYSTRMATCH-SOUNDEX)
-  * [F.17.2. Daitch-Mokotoff Soundex](fuzzystrmatch.html#FUZZYSTRMATCH-DAITCH-MOKOTOFF)
-  * [F.17.3. Levenshtein](fuzzystrmatch.html#FUZZYSTRMATCH-LEVENSHTEIN)
-  * [F.17.4. Metaphone](fuzzystrmatch.html#FUZZYSTRMATCH-METAPHONE)
-  * [F.17.5. Double Metaphone](fuzzystrmatch.html#FUZZYSTRMATCH-DOUBLE-METAPHONE)
+  * [F.17.1. Soundex](fuzzystrmatch#FUZZYSTRMATCH-SOUNDEX)
+  * [F.17.2. Daitch-Mokotoff Soundex](fuzzystrmatch#FUZZYSTRMATCH-DAITCH-MOKOTOFF)
+  * [F.17.3. Levenshtein](fuzzystrmatch#FUZZYSTRMATCH-LEVENSHTEIN)
+  * [F.17.4. Metaphone](fuzzystrmatch#FUZZYSTRMATCH-METAPHONE)
+  * [F.17.5. Double Metaphone](fuzzystrmatch#FUZZYSTRMATCH-DOUBLE-METAPHONE)
+
+
 
 The `fuzzystrmatch` module provides several functions to determine similarities and distance between strings.
 
@@ -14,11 +18,15 @@ At present, the `soundex`, `metaphone`, `dmetaphone`, and `dmetaphone_alt` funct
 
 This module is considered “trusted”, that is, it can be installed by non-superusers who have `CREATE` privilege on the current database.
 
+[#id](#FUZZYSTRMATCH-SOUNDEX)
+
 ### F.17.1. Soundex [#](#FUZZYSTRMATCH-SOUNDEX)
 
 The Soundex system is a method of matching similar-sounding names by converting them to the same code. It was initially used by the United States Census in 1880, 1900, and 1910. Note that Soundex is not very useful for non-English names.
 
 The `fuzzystrmatch` module provides two functions for working with Soundex codes:
+
+
 
 ```
 
@@ -50,14 +58,21 @@ SELECT * FROM s WHERE soundex(nm) = soundex('john');
 SELECT * FROM s WHERE difference(s.nm, 'john') > 2;
 ```
 
+[#id](#FUZZYSTRMATCH-DAITCH-MOKOTOFF)
+
 ### F.17.2. Daitch-Mokotoff Soundex [#](#FUZZYSTRMATCH-DAITCH-MOKOTOFF)
 
 Like the original Soundex system, Daitch-Mokotoff Soundex matches similar-sounding names by converting them to the same code. However, Daitch-Mokotoff Soundex is significantly more useful for non-English names than the original system. Major improvements over the original system include:
 
 * The code is based on the first six meaningful letters rather than four.
+
 * A letter or combination of letters maps into ten possible codes rather than seven.
+
 * Where two consecutive letters have a single sound, they are coded as a single number.
+
 * When a letter or combination of letters may have different sounds, multiple codes are emitted to cover all possibilities.
+
+
 
 This function generates the Daitch-Mokotoff soundex codes for its input:
 
@@ -95,7 +110,7 @@ SELECT daitch_mokotoff('Schwartzenegger');
  {479465}
 ```
 
-For matching of single names, returned text arrays can be matched directly using the `&&` operator: any overlap can be considered a match. A GIN index may be used for efficiency, see [Chapter 70](gin.html "Chapter 70. GIN Indexes") and this example:
+For matching of single names, returned text arrays can be matched directly using the `&&` operator: any overlap can be considered a match. A GIN index may be used for efficiency, see [Chapter 70](gin) and this example:
 
 ```
 
@@ -114,7 +129,7 @@ SELECT * FROM s WHERE daitch_mokotoff(nm) && daitch_mokotoff('Jane');
 SELECT * FROM s WHERE daitch_mokotoff(nm) && daitch_mokotoff('Jens');
 ```
 
-For indexing and matching of any number of names in any order, Full Text Search features can be used. See [Chapter 12](textsearch.html "Chapter 12. Full Text Search") and this example:
+For indexing and matching of any number of names in any order, Full Text Search features can be used. See [Chapter 12](textsearch) and this example:
 
 ```
 
@@ -148,11 +163,15 @@ SELECT * FROM s WHERE soundex_tsvector(nm) @@ soundex_tsquery('besst, giorgio');
 SELECT * FROM s WHERE soundex_tsvector(nm) @@ soundex_tsquery('Jameson John');
 ```
 
-If it is desired to avoid recalculation of soundex codes during index rechecks, an index on a separate column can be used instead of an index on an expression. A stored generated column can be used for this; see [Section 5.3](ddl-generated-columns.html "5.3. Generated Columns").
+If it is desired to avoid recalculation of soundex codes during index rechecks, an index on a separate column can be used instead of an index on an expression. A stored generated column can be used for this; see [Section 5.3](ddl-generated-columns).
+
+[#id](#FUZZYSTRMATCH-LEVENSHTEIN)
 
 ### F.17.3. Levenshtein [#](#FUZZYSTRMATCH-LEVENSHTEIN)
 
 This function calculates the Levenshtein distance between two strings:
+
+
 
 ```
 
@@ -195,11 +214,15 @@ test=# SELECT levenshtein_less_equal('extensive', 'exhaustive', 4);
 (1 row)
 ```
 
+[#id](#FUZZYSTRMATCH-METAPHONE)
+
 ### F.17.4. Metaphone [#](#FUZZYSTRMATCH-METAPHONE)
 
 Metaphone, like Soundex, is based on the idea of constructing a representative code for an input string. Two strings are then deemed similar if they have the same codes.
 
 This function calculates the metaphone code of an input string:
+
+
 
 ```
 
@@ -219,9 +242,13 @@ test=# SELECT metaphone('GUMBO', 4);
 (1 row)
 ```
 
+[#id](#FUZZYSTRMATCH-DOUBLE-METAPHONE)
+
 ### F.17.5. Double Metaphone [#](#FUZZYSTRMATCH-DOUBLE-METAPHONE)
 
 The Double Metaphone system computes two “sounds like” strings for a given input string — a “primary” and an “alternate”. In most cases they are the same, but for non-English names especially they can be a bit different, depending on pronunciation. These functions compute the primary and alternate codes:
+
+
 
 ```
 

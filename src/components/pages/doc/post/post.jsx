@@ -30,7 +30,7 @@ ReleaseNotes.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string.isRequired,
-      content: PropTypes.shape({}).isRequired,
+      content: PropTypes.string.isRequired,
     })
   ).isRequired,
 };
@@ -105,7 +105,7 @@ Post.propTypes = {
     enableTableOfContents: PropTypes.bool,
     updatedOn: PropTypes.string,
   }).isRequired,
-  content: PropTypes.shape({}).isRequired,
+  content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   navigationLinks: PropTypes.exact({
     previousLink: PropTypes.shape({}),
@@ -115,7 +115,7 @@ Post.propTypes = {
   releaseNotes: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,
-      content: PropTypes.shape({}),
+      content: PropTypes.string,
     })
   ),
   currentSlug: PropTypes.string.isRequired,

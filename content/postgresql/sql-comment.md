@@ -1,3 +1,5 @@
+[#id](#SQL-COMMENT)
+
 ## COMMENT
 
 COMMENT — define or change the comment of an object
@@ -5,7 +7,6 @@ COMMENT — define or change the comment of an object
 ## Synopsis
 
 ```
-
 COMMENT ON
 {
   ACCESS METHOD object_name |
@@ -60,6 +61,8 @@ where aggregate_signature is:
 [ [ argmode ] [ argname ] argtype [ , ... ] ] ORDER BY [ argmode ] [ argname ] argtype [ , ... ]
 ```
 
+[#id](#id-1.9.3.52.5)
+
 ## Description
 
 `COMMENT` stores a comment about a database object.
@@ -70,90 +73,93 @@ A `SHARE UPDATE EXCLUSIVE` lock is acquired on the object to be commented.
 
 For most kinds of object, only the object's owner can set the comment. Roles don't have owners, so the rule for `COMMENT ON ROLE` is that you must be superuser to comment on a superuser role, or have the `CREATEROLE` privilege and have been granted `ADMIN OPTION` on the target role. Likewise, access methods don't have owners either; you must be superuser to comment on an access method. Of course, a superuser can comment on anything.
 
-Comments can be viewed using psql's `\d` family of commands. Other user interfaces to retrieve comments can be built atop the same built-in functions that psql uses, namely `obj_description`, `col_description`, and `shobj_description` (see [Table 9.78](functions-info.html#FUNCTIONS-INFO-COMMENT-TABLE "Table 9.78. Comment Information Functions")).
+Comments can be viewed using psql's `\d` family of commands. Other user interfaces to retrieve comments can be built atop the same built-in functions that psql uses, namely `obj_description`, `col_description`, and `shobj_description` (see [Table 9.78](functions-info#FUNCTIONS-INFO-COMMENT-TABLE)).
+
+[#id](#id-1.9.3.52.6)
 
 ## Parameters
 
 * *`object_name`**`relation_name`*.*`column_name`**`aggregate_name`**`constraint_name`**`function_name`**`operator_name`**`policy_name`**`procedure_name`**`routine_name`**`rule_name`**`trigger_name`*
 
-    The name of the object to be commented. Names of objects that reside in schemas (tables, functions, etc.) can be schema-qualified. When commenting on a column, *`relation_name`* must refer to a table, view, composite type, or foreign table.
+  The name of the object to be commented. Names of objects that reside in schemas (tables, functions, etc.) can be schema-qualified. When commenting on a column, *`relation_name`* must refer to a table, view, composite type, or foreign table.
 
 * *`table_name`**`domain_name`*
 
-    When creating a comment on a constraint, a trigger, a rule or a policy these parameters specify the name of the table or domain on which that object is defined.
+  When creating a comment on a constraint, a trigger, a rule or a policy these parameters specify the name of the table or domain on which that object is defined.
 
 * *`source_type`*
 
-    The name of the source data type of the cast.
+  The name of the source data type of the cast.
 
 * *`target_type`*
 
-    The name of the target data type of the cast.
+  The name of the target data type of the cast.
 
 * *`argmode`*
 
-    The mode of a function, procedure, or aggregate argument: `IN`, `OUT`, `INOUT`, or `VARIADIC`. If omitted, the default is `IN`. Note that `COMMENT` does not actually pay any attention to `OUT` arguments, since only the input arguments are needed to determine the function's identity. So it is sufficient to list the `IN`, `INOUT`, and `VARIADIC` arguments.
+  The mode of a function, procedure, or aggregate argument: `IN`, `OUT`, `INOUT`, or `VARIADIC`. If omitted, the default is `IN`. Note that `COMMENT` does not actually pay any attention to `OUT` arguments, since only the input arguments are needed to determine the function's identity. So it is sufficient to list the `IN`, `INOUT`, and `VARIADIC` arguments.
 
 * *`argname`*
 
-    The name of a function, procedure, or aggregate argument. Note that `COMMENT` does not actually pay any attention to argument names, since only the argument data types are needed to determine the function's identity.
+  The name of a function, procedure, or aggregate argument. Note that `COMMENT` does not actually pay any attention to argument names, since only the argument data types are needed to determine the function's identity.
 
 * *`argtype`*
 
-    The data type of a function, procedure, or aggregate argument.
+  The data type of a function, procedure, or aggregate argument.
 
 * *`large_object_oid`*
 
-    The OID of the large object.
+  The OID of the large object.
 
 * *`left_type`**`right_type`*
 
-    The data type(s) of the operator's arguments (optionally schema-qualified). Write `NONE` for the missing argument of a prefix operator.
+  The data type(s) of the operator's arguments (optionally schema-qualified). Write `NONE` for the missing argument of a prefix operator.
 
 * `PROCEDURAL`
 
-    This is a noise word.
+  This is a noise word.
 
 * *`type_name`*
 
-    The name of the data type of the transform.
+  The name of the data type of the transform.
 
 * *`lang_name`*
 
-    The name of the language of the transform.
+  The name of the language of the transform.
 
 * *`string_literal`*
 
-    The new comment contents, written as a string literal.
+  The new comment contents, written as a string literal.
 
 * `NULL`
 
-    Write `NULL` to drop the comment.
+  Write `NULL` to drop the comment.
+
+[#id](#id-1.9.3.52.7)
 
 ## Notes
 
 There is presently no security mechanism for viewing comments: any user connected to a database can see all the comments for objects in that database. For shared objects such as databases, roles, and tablespaces, comments are stored globally so any user connected to any database in the cluster can see all the comments for shared objects. Therefore, don't put security-critical information in comments.
+
+[#id](#id-1.9.3.52.8)
 
 ## Examples
 
 Attach a comment to the table `mytable`:
 
 ```
-
 COMMENT ON TABLE mytable IS 'This is my table.';
 ```
 
 Remove it again:
 
 ```
-
 COMMENT ON TABLE mytable IS NULL;
 ```
 
 Some more examples:
 
 ```
-
 COMMENT ON ACCESS METHOD gin IS 'GIN index access method';
 COMMENT ON AGGREGATE my_aggregate (double precision) IS 'Computes sample variance';
 COMMENT ON CAST (text AS int4) IS 'Allow casts from text to int4';
@@ -199,6 +205,8 @@ COMMENT ON TRIGGER my_trigger ON my_table IS 'Used for RI';
 COMMENT ON TYPE complex IS 'Complex number data type';
 COMMENT ON VIEW my_view IS 'View of departmental costs';
 ```
+
+[#id](#id-1.9.3.52.9)
 
 ## Compatibility
 

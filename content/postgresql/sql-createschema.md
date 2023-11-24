@@ -1,3 +1,5 @@
+[#id](#SQL-CREATESCHEMA)
+
 ## CREATE SCHEMA
 
 CREATE SCHEMA — define a new schema
@@ -5,7 +7,6 @@ CREATE SCHEMA — define a new schema
 ## Synopsis
 
 ```
-
 CREATE SCHEMA schema_name [ AUTHORIZATION role_specification ] [ schema_element [ ... ] ]
 CREATE SCHEMA AUTHORIZATION role_specification [ schema_element [ ... ] ]
 CREATE SCHEMA IF NOT EXISTS schema_name [ AUTHORIZATION role_specification ]
@@ -19,6 +20,8 @@ where role_specification can be:
   | SESSION_USER
 ```
 
+[#id](#id-1.9.3.80.5)
+
 ## Description
 
 `CREATE SCHEMA` enters a new schema into the current database. The schema name must be distinct from the name of any existing schema in the current database.
@@ -27,55 +30,57 @@ A schema is essentially a namespace: it contains named objects (tables, data typ
 
 Optionally, `CREATE SCHEMA` can include subcommands to create objects within the new schema. The subcommands are treated essentially the same as separate commands issued after creating the schema, except that if the `AUTHORIZATION` clause is used, all the created objects will be owned by that user.
 
+[#id](#id-1.9.3.80.6)
+
 ## Parameters
 
 * *`schema_name`*
 
-    The name of a schema to be created. If this is omitted, the *`user_name`* is used as the schema name. The name cannot begin with `pg_`, as such names are reserved for system schemas.
+  The name of a schema to be created. If this is omitted, the *`user_name`* is used as the schema name. The name cannot begin with `pg_`, as such names are reserved for system schemas.
 
 * *`user_name`*
 
-    The role name of the user who will own the new schema. If omitted, defaults to the user executing the command. To create a schema owned by another role, you must be able to `SET ROLE` to that role.
+  The role name of the user who will own the new schema. If omitted, defaults to the user executing the command. To create a schema owned by another role, you must be able to `SET ROLE` to that role.
 
 * *`schema_element`*
 
-    An SQL statement defining an object to be created within the schema. Currently, only `CREATE TABLE`, `CREATE VIEW`, `CREATE INDEX`, `CREATE SEQUENCE`, `CREATE TRIGGER` and `GRANT` are accepted as clauses within `CREATE SCHEMA`. Other kinds of objects may be created in separate commands after the schema is created.
+  An SQL statement defining an object to be created within the schema. Currently, only `CREATE TABLE`, `CREATE VIEW`, `CREATE INDEX`, `CREATE SEQUENCE`, `CREATE TRIGGER` and `GRANT` are accepted as clauses within `CREATE SCHEMA`. Other kinds of objects may be created in separate commands after the schema is created.
 
 * `IF NOT EXISTS`
 
-    Do nothing (except issuing a notice) if a schema with the same name already exists. *`schema_element`* subcommands cannot be included when this option is used.
+  Do nothing (except issuing a notice) if a schema with the same name already exists. *`schema_element`* subcommands cannot be included when this option is used.
+
+[#id](#id-1.9.3.80.7)
 
 ## Notes
 
 To create a schema, the invoking user must have the `CREATE` privilege for the current database. (Of course, superusers bypass this check.)
+
+[#id](#id-1.9.3.80.8)
 
 ## Examples
 
 Create a schema:
 
 ```
-
 CREATE SCHEMA myschema;
 ```
 
 Create a schema for user `joe`; the schema will also be named `joe`:
 
 ```
-
 CREATE SCHEMA AUTHORIZATION joe;
 ```
 
 Create a schema named `test` that will be owned by user `joe`, unless there already is a schema named `test`. (It does not matter whether `joe` owns the pre-existing schema.)
 
 ```
-
 CREATE SCHEMA IF NOT EXISTS test AUTHORIZATION joe;
 ```
 
 Create a schema and create a table and view within it:
 
 ```
-
 CREATE SCHEMA hollywood
     CREATE TABLE films (title text, release date, awards text[])
     CREATE VIEW winners AS
@@ -87,12 +92,13 @@ Notice that the individual subcommands do not end with semicolons.
 The following is an equivalent way of accomplishing the same result:
 
 ```
-
 CREATE SCHEMA hollywood;
 CREATE TABLE hollywood.films (title text, release date, awards text[]);
 CREATE VIEW hollywood.winners AS
     SELECT title, release FROM hollywood.films WHERE awards IS NOT NULL;
 ```
+
+[#id](#id-1.9.3.80.9)
 
 ## Compatibility
 
@@ -104,6 +110,8 @@ According to the SQL standard, the owner of a schema always owns all objects wit
 
 The `IF NOT EXISTS` option is a PostgreSQL extension.
 
+[#id](#id-1.9.3.80.10)
+
 ## See Also
 
-[ALTER SCHEMA](sql-alterschema.html "ALTER SCHEMA"), [DROP SCHEMA](sql-dropschema.html "DROP SCHEMA")
+[ALTER SCHEMA](sql-alterschema), [DROP SCHEMA](sql-dropschema)

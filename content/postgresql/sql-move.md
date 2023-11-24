@@ -1,3 +1,5 @@
+[#id](#SQL-MOVE)
+
 ## MOVE
 
 MOVE — position a cursor
@@ -5,7 +7,6 @@ MOVE — position a cursor
 ## Synopsis
 
 ```
-
 MOVE [ direction ] [ FROM | IN ] cursor_name
 
 where direction can be one of:
@@ -26,27 +27,31 @@ where direction can be one of:
     BACKWARD ALL
 ```
 
+[#id](#id-1.9.3.157.6)
+
 ## Description
 
 `MOVE` repositions a cursor without retrieving any data. `MOVE` works exactly like the `FETCH` command, except it only positions the cursor and does not return rows.
 
-The parameters for the `MOVE` command are identical to those of the `FETCH` command; refer to [FETCH](sql-fetch.html "FETCH") for details on syntax and usage.
+The parameters for the `MOVE` command are identical to those of the `FETCH` command; refer to [FETCH](sql-fetch) for details on syntax and usage.
+
+[#id](#id-1.9.3.157.7)
 
 ## Outputs
 
 On successful completion, a `MOVE` command returns a command tag of the form
 
 ```
-
 MOVE count
 ```
 
 The *`count`* is the number of rows that a `FETCH` command with the same parameters would have returned (possibly zero).
 
+[#id](#id-1.9.3.157.8)
+
 ## Examples
 
 ```
-
 BEGIN WORK;
 DECLARE liahona CURSOR FOR SELECT * FROM films;
 
@@ -66,10 +71,14 @@ CLOSE liahona;
 COMMIT WORK;
 ```
 
+[#id](#id-1.9.3.157.9)
+
 ## Compatibility
 
 There is no `MOVE` statement in the SQL standard.
 
+[#id](#id-1.9.3.157.10)
+
 ## See Also
 
-[CLOSE](sql-close.html "CLOSE"), [DECLARE](sql-declare.html "DECLARE"), [FETCH](sql-fetch.html "FETCH")
+[CLOSE](sql-close), [DECLARE](sql-declare), [FETCH](sql-fetch)
