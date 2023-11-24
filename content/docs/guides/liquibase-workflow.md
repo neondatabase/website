@@ -289,7 +289,7 @@ liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech
 If the command was successful, you’ll see output similar to the following indicating that there is one changeset that has not been applied to the source database. This is your `comments` table changeset.
 
 ```bash
-tarting Liquibase at 12:30:51 (version 4.24.0 #14062 built at 2023-09-28 12:18+0000)
+Starting Liquibase at 12:30:51 (version 4.24.0 #14062 built at 2023-09-28 12:18+0000)
 Liquibase Version: 4.24.0
 Liquibase Open Source 4.24.0 by Liquibase
 1 changesets have not been applied to alex@jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog
