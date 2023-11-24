@@ -12,7 +12,7 @@ In this guide, we'll show you how to use Neon's branching feature to spin up a b
 
 ## Prerequisites
 
-- A flyway installation. See [Get started with Flyway and Neon](/doscs/guides/flyway) for installation instructions.
+- A flyway installation. See [Get started with Flyway and Neon](/docs/guides/flyway) for installation instructions.
 - A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
 - A database. This guide uses the ready-to-use `neondb` database on the `main` branch of your Neon project. You can create your own database if you like. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
