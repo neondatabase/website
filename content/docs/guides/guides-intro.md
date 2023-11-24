@@ -1,7 +1,6 @@
 ---
 title: Neon user guides
-subtitle: Explore Neon features and how to integrate with different frameworks,
-  languages, and platforms
+subtitle: Explore Neon framework, language, platform, and feature guides
 enableTableOfContents: true
 updatedOn: '2023-11-07T19:44:07.454Z'
 ---
@@ -32,6 +31,8 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/exograph-logo.svg" width="36" height="36" alt="Exograph" href="/docs/guides/exograph" title="Use Exograph with Neon" />
 
+<img src="/images/technology-logos/flyway-logo.svg" width="36" height="36" alt="Flyway" href="/docs/guides/flyway" title="Use Flyway with Neon" />
+
 <img src="/images/technology-logos/go-logo.svg" width="80" height="36" alt="Go" href="/docs/guides/go" title="Connect a Go application to Neon" />
 
 <img src="/images/technology-logos/grafbase-logo.svg" width="36" height="36" alt="Grafbase" href="/docs/guides/grafbase" title="Use Grafbase Edge Resolvers with Neon" />
@@ -43,6 +44,8 @@ Integrate your applications with Neon.
 <img src="/images/technology-logos/koyeb-logo.svg" width="36" height="36" alt="Koyeb" href="/docs/guides/koyeb" title="Use Neon with Koyeb" />
 
 <img src="/images/technology-logos/laravel-logo.svg" width="35" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect from Laravel to Neon" />
+
+<img src="/images/technology-logos/liquibase-logo.svg" width="35" height="36" alt="Liquibase" href="/docs/guides/liquibase" title="Use Liquibase with Neon" />
 
 <img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
 

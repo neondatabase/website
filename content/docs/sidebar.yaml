@@ -203,6 +203,20 @@
           slug: guides/stepzen
         - title: WunderGraph
           slug: guides/wundergraph
+    - title: Schema migration
+      items:
+        - title: Flyway
+          items:
+            - title: Get started
+              slug: guides/flyway  
+            - title: Manage multiple environments
+              slug: guides/flyway-multiple-environments 
+        - title: Liquibase
+          items:
+             - title: Get started
+               slug: guides/liquibase
+             - title: Developer workflow
+               slug: guides/liquibase-workflow
     - title: Serverless
       items:
         - title: Neon serverless driver
