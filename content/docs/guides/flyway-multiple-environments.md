@@ -51,7 +51,7 @@ Alternatively, you can create your _development_ and _staging_ branches using th
 
 ```bash
 curl --request POST \
-     --url https://console.neon.tech/api/v2/projects/project_id/branches \
+     --url https://console.neon.tech/api/v2/projects/{project_id}/branches \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API' \
      --header 'content-type: application/json' \
