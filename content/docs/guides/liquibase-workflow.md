@@ -15,7 +15,7 @@ The instructions in this guide are based on the workflow described in the [Liqui
 - A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
 - Liquibase requires Java. To check if you have Java installed, run `java --version`. If not, refer to the installation instructions for your operating system.
-- An installation of Liquibase. For instructions, refer to [Manage schema changes with Liquibase](/docs/guides/liquibase) for installation instructions.
+- An installation of Liquibase. For instructions, refer to [Get started with Liquibase and Neon](/docs/guides/liquibase) for installation instructions.
 
 ## Initialize a new Liquibase project
 
