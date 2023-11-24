@@ -182,9 +182,15 @@ Run the migration on each environment in order by specifying the environment's c
 <Tabs labels={[“Development”, “Staging”, “Production”]}>
 
 <TabItem>
+
+<CodeBlock showLineNumbers>
+
 ```bash
 flyway migrate -configFiles="conf/env_dev.conf"
 ```
+
+</CodeBlock>
+
 </TabItem>
 
 <TabItem>
