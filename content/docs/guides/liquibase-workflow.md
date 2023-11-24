@@ -119,7 +119,7 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
 
     </CodeBlock>
 
-4. Change the source database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `main` branch. You can obtain the required details from the connection string you copied previously. You will need to swap out the hostname (`ep-cool-darkness-123456.us-east-2.aws.neon.tech`), username, and password for your own.
+4. Change the source database settings to the correct values for the `blog` database on your `main` branch. The username and password will be the same as your `dev1` branch, but make sure to use the right hostname. Copy the snippet below and replace the hostname (`ep-cool-darkness-123456.us-east-2.aws.neon.tech`), username, and password for your own.
 
     <CodeBlock shouldWrap>
 
