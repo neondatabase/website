@@ -38,7 +38,7 @@ This guide steps you through installing the Flyway command-line tool, configurin
 
 Add the Flyway directory to your `PATH` so that you can execute Flyway commands from any location.
 
-<CodeTabs labels={["bash", "zsh]}>
+<CodeTabs labels={["bash", "zsh"]}>
 
 ```bash
 echo 'export PATH=$PATH:~/flyway-x.y.z' >> ~/.bashrc
