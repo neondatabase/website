@@ -265,7 +265,7 @@ You can verify these tables were created by viewing the `blog` database on the *
 Try rolling back your last change by running the Liquibase [rollbackCount](https://docs.liquibase.com/commands/rollback/rollback-count.html) command:
 
 ```bash
-liquibase$ liquibase rollbackCount 1
+liquibase rollbackCount 1
 ```
 
 <details>
