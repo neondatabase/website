@@ -191,8 +191,8 @@ Prisma Migrate requires a direct connection to the database. It does not support
 
 The `terminating connection due to administrator command` error is typically encountered when running a query from a connection that has sat idle long enough for the compute endpoint to suspend due to inactivity. Neon automatically suspends a compute endpoint after 5 minutes of inactivity, by default. You can reproduce this error by connecting to your database from an application or client such as `psql`, letting the connection remain idle until the compute suspends, and then running a query from the same connection.
 
-This error may also occur when a connection is established less than 500ms before a compute endpoint suspends due to inactivity. Neon monitors for connection activity every 500ms. In this case, Neon is not aware of the connection and proceeds with the compute suspension operation, resulting in the connection being terminated.
+This error may also occur when a connection is established less than 500ms before a compute endpoint suspends due to inactivity. Neon monitors for activity every 500ms. In this case, Neon is not aware of any activity and proceeds with the compute suspension operation, resulting in the connection being terminated.
 
-If you encounter this error, you can try adjusting the timing of your query. Alternatively, if you are a [Neon Pro Plan](/docs/introduction/pro-plan) user, you can disable auto-suspend or configure a different suspension period. For instructions, see [Configuring Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide). For [Neon Free Tier](/docs/introduction/free-tier) users, the default 5 minute auto-suspend setting is not configurable. 
+If you encounter this error, you can try adjusting the timing of your query. Alternatively, if you are a [Neon Pro Plan](/docs/introduction/pro-plan) user, you can disable auto-suspend or configure a different suspension period. For instructions, see [Configuring Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide).  [Neon Free Tier](/docs/introduction/free-tier) users cannot modify the default 5 minute auto-suspend setting. 
 
 <NeedHelp/>
