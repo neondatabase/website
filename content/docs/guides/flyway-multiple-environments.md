@@ -119,7 +119,7 @@ To enable Flyway to connect to multiple environments, we'll create a configurati
 By default, Flyway loads its configuration from the default `conf/flyway.conf` file. This is true even if you specify another configuration file when running Flyway. You can take advantage of this behavior by defining non-environment specific configuration settings in the default `conf/flyway.conf` file, and placing your environment-specific settings in separate configuration files, as we'll do here.
 </Admonition>
 
-1. Change to your Flyway `/conf` directory and create the following configuration files, one for each environment, by copying the default configuration file. For example:
+1. Switch to your Flyway `/conf` directory and create the following configuration files, one for each environment, by copying the default configuration file. For example:
 
     ```bash
     cd ~/flyway-9.22.3/conf
