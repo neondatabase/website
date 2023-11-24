@@ -16,19 +16,19 @@ This guide steps you through installing the Flyway command-line tool, configurin
 
 ## Download and extract Flyway
 
-1. Download the [Flyway command-line tool](https://documentation.red-gate.com/fd/command-line-184127404.html).
+1. Download the latest version of the [Flyway command-line tool](https://documentation.red-gate.com/fd/command-line-184127404.html).
 
 2. Extract the Flyway files. For example:
 
     ```bash
     cd ~/Downloads
-    tar -xzvf flyway-commandline-9.22.3-linux-x64.tar.gz -C ~/
+    tar -xzvf flyway-commandline-x.y.z-linux-x64.tar.gz -C ~/
     ```
 
 3. Open a command prompt to view the contents of your Flyway installation:
 
     ```bash
-    cd ~/flyway-9.22.3
+    cd ~/flyway-x.y.z
     ls
     assets  drivers  flyway.cmd  jre  licenses    rules
     conf    flyway   jars        lib  README.txt  sql
@@ -36,19 +36,21 @@ This guide steps you through installing the Flyway command-line tool, configurin
 
 ## Set your path variable
 
-Add the Flyway directory to your `PATH` so that you can execute Flyway commands from any location. For example:
+Add the Flyway directory to your `PATH` so that you can execute Flyway commands from any location.
+
+<CodeTabs labels={["bash", "zsh]}>
 
 ```bash
-echo 'export PATH=$PATH:~/flyway-9.22.3' >> ~/.bashrc
+echo 'export PATH=$PATH:~/flyway-x.y.z' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-or
-
-```bash
-echo 'export PATH=$PATH:~/flyway-9.22.3' >> ~/.profile
-source ~/.profile
+```zsh
+echo 'export PATH=$PATH:~/flyway-x.y.x' >> ~/.zshrc
+source ~/.zshrc
 ```
+
+</CodeTabs>
 
 ## Retrieve your Neon database connection string
 
@@ -66,7 +68,7 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=al
 
 ## Configure flyway
 
-Configure Flyway to connect to your Neon database by uncommenting and updating the following items in the `/conf/flyway.conf` file with the connection details you retrieved in the previous step.
+To configure Flyway to connect to your Neon database, create a `flyway.conf` file in the /conf directory. Include the following items, modified to use the connection details you retrieved in the previous step.
 
 <CodeBlock shouldWrap>
 
@@ -77,14 +79,14 @@ flyway.user=alex
 
 flyway.password=AbC123dEf
 
-flyway.locations=filesystem:/home/alex/flyway-9.22.3/sql
+flyway.locations=filesystem:/home/alex/flyway-x.y.z/sql
 ```
 
 </CodeBlock>
 
 ## Create the first migration
 
-Create your first migration in the `/sql` directory. This migration creates a `person` table in your database. We'll name the migration file `V1__Create_person_table.sql`:
+Create an `sql` directory to hold your first migration file. We'll name the file `V1__Create_person_table.sql` and include the following command, which creates a person table in your database.
 
 ```bash
 create table person (
@@ -138,7 +140,7 @@ Successfully validated 2 migrations (execution time 00:00.225s)
 Current version of schema "public": 1
 Migrating schema "public" to version "2 - Add people"
 Successfully applied 1 migration to schema "public", now at version v2 (execution time 00:00.388s)
-A Flyway report has been generated here: /home/alex/flyway-9.22.3/sql/report.html
+A Flyway report has been generated here: /home/alex/flyway-x.y.z/sql/report.html
 ```
 
 You can verify that the data was added by viewing the table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
@@ -157,7 +159,7 @@ Schema version: 2
 | Versioned | 1       | Create person table | SQL  | 2023-10-22 19:00:39 | Success | No       |
 | Versioned | 2       | Add people          | SQL  | 2023-10-22 19:04:42 | Success | No       |
 +-----------+---------+---------------------+------+---------------------+---------+----------+
-A Flyway report has been generated here: /home/alex/flyway-9.22.3/sql/report.html
+A Flyway report has been generated here: /home/alex/flyway-x.y.z/sql/report.html
 ```
 
 You can also view the table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.

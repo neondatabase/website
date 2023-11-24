@@ -122,7 +122,7 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
 1. Switch to your Flyway `/conf` directory and create the following configuration files, one for each environment, by copying the default configuration file. For example:
 
     ```bash
-    cd ~/flyway-9.22.3/conf
+    cd ~/flyway-x.y.z/conf
     cp flyway.conf env_dev.conf
     cp flyway.conf env_staging.conf
     cp flyway.conf env_prod.conf
@@ -139,7 +139,7 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
 
     flyway.password=AbC123dEf
 
-    flyway.locations=filesystem:/home/alex/flyway-9.22.3/sql
+    flyway.locations=filesystem:/home/alex/flyway-x.y.z/sql
 
     flyway.baselineOnMigrate=true
     ```
@@ -178,7 +178,7 @@ Successfully baselined schema with version: 1
 Current version of schema "public": 1
 Migrating schema "public" to version "2 - Add people"
 Successfully applied 1 migration to schema "public", now at version v2 (execution time 00:00.410s)
-A Flyway report has been generated here: /home/alex/flyway-9.22.3/report.html
+A Flyway report has been generated here: /home/alex/flyway-x.y.z/report.html
 ```
 
 ### Run the migration on your staging environment
