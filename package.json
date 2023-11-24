@@ -37,6 +37,7 @@
     "@rive-app/react-canvas": "^4.1.4",
     "@splinetool/react-spline": "^2.2.6",
     "@tailwindcss/typography": "github:tailwindcss/typography",
+    "analytics-node": "^6.2.0",
     "clsx": "^2.0.0",
     "copy-to-clipboard": "^3.3.3",
     "date-fns": "^2.30.0",
