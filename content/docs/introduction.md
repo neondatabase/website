@@ -10,8 +10,9 @@ Neon is Serverless Postgres built for the cloud. Neon separates compute and stor
 Refer to our _Get started_ documentation to get up and running in just a few minutes. You will learn how to:
 
 - [Sign up](/docs/get-started-with-neon/signing-up)
-- [Create your first project](/docs/get-started-with-neon/setting-up-a-project)
 - [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
+- [Connect with psql](/docs/connect/query-with-psql-editor)
+- [Install the Neon CLI](/docs/reference/cli-install)
 
 ## Explore the docs
 

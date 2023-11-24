@@ -21,7 +21,7 @@ Neon currently supports the following AWS regions:
 
 ## Select a region for your Neon project
 
-You can select the region for your Neon project during project creation. See [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
+You can select the region for your Neon project during project creation. See [Create a project](/docs/manage/projects#create-a-project).
 
 All branches and databases created in a Neon project are created in the region selected for the project.
 
@@ -35,7 +35,7 @@ After you select a region for a Neon project, it cannot be changed for that proj
 
 If you need to move your data to a different region, the following steps are recommended:
 
-1. Create a new project in the desired region. For project creation instructions, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
+1. Create a new project in the desired region. For project creation instructions, see [Create a project](/docs/manage/projects#create-a-project).
 1. Move your data from the old project to the new project. For instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
 
 <Admonition type="note">
