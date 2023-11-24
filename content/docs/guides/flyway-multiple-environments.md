@@ -21,7 +21,7 @@ In this guide, we'll show you how to use Neon's branching feature to spin up a b
 
 Set up a database to work with by adding a table to your `neondb` database on the `main` branch of your Neon project. We'll consider this your _production_ environment database.
 
-Open the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), and run the following statement:
+If you still need to create the `person` table, open the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), and run the following statement:
 
 ```bash
 create table person (
