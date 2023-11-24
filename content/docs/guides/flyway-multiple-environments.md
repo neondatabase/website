@@ -128,7 +128,7 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
     cp flyway.conf env_prod.conf
     ```
 
-2. In each configuration file, update the following items with the correct connection details for the database environment. The `url` setting will differ for each environment. In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
+2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf` this will point to `main`). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
 
     <CodeBlock shouldWrap>
 
