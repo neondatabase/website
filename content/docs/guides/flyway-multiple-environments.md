@@ -190,7 +190,7 @@ flyway migrate -configFiles="conf/env_staging.conf"
 If the command was successful, you’ll see output similar to that shown above.
 
 ### Run the migration on your product environment
-
+Switch to the Flyway root directory and run the following command:
 ```bash
 flyway migrate -configFiles="conf/env_prod.conf"
 ```
