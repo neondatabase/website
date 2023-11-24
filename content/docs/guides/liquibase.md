@@ -12,7 +12,7 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 - A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- Liquibase requires Java. To check if you have Java installed, run `java --version`. If not, refer to the installation instructions for your operating system.
+- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS`. 
 
 ## Download and extract Liquibase
 
@@ -191,7 +191,7 @@ Now, you can start making database schema changes by creating [changesets](https
     touch dbchangelog.xml
     ```
 
-2. Add the following changeset, which adds a `comments` table to your database:
+2. Add the following changeset, which adds a `comments` table to your database. Replace `author="alex" id="myIDNumber1234"` with your auther name and id, which you can retrieve from youyr changelog file, described in the previous step.
 
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>  
@@ -282,6 +282,8 @@ Liquibase command 'rollbackCount' was executed successfully.
 ```
 
 </details>
+
+You can verify that creation of the `comments` table was rolled back viewing the `blog` database on the **Tables** page in the Neon console. Select **Tables** from the sidebar.
 
 ## Next steps
 
