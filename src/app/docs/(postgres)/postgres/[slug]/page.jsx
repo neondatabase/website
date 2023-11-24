@@ -14,7 +14,6 @@ import {
   getPostBySlug,
 } from 'utils/api-postgres';
 import getMetadata from 'utils/get-metadata';
-import serializeMdx from 'utils/serialize-mdx';
 
 export async function generateMetadata({ params }) {
   const { slug: currentSlug } = params;
@@ -56,8 +55,6 @@ const PostgresPage = async ({ params }) => {
   const { title, content } = post;
   const hasH1 = findH1(content);
 
-  const mdxSource = await serializeMdx(content);
-
   const { previousLink, nextLink } = getDocPreviousAndNextLinks(currentSlug);
 
   return (
@@ -77,7 +74,7 @@ const PostgresPage = async ({ params }) => {
           <br className="flat-none sm:flat-break" /> Not all features and functions are supported.
           See <Link to="/docs/reference/compatibility">Postgres compatibility</Link> for details.
         </Admonition>
-        <Content className="mt-10" content={mdxSource} isPostgres />
+        <Content className="mt-10" content={content} isPostgres />
       </article>
       <PreviousAndNextLinks
         previousLink={previousLink}

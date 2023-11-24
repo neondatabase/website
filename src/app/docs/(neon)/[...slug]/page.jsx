@@ -17,10 +17,18 @@ import {
   getTableOfContents,
 } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
-import serializeMdx from 'utils/serialize-mdx';
+
+const isUnusedOrSharedContent = (slug) =>
+  slug.includes('unused/') ||
+  slug.includes('shared-content/') ||
+  slug.includes('README') ||
+  slug.includes('GUIDE_TEMPLATE') ||
+  slug.includes('RELEASE_NOTES_TEMPLATE');
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
+
+  if (!posts) return notFound();
 
   return posts.map(({ slug }) => {
     const slugsArray = slug.split('/');
@@ -34,6 +42,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = params;
   const currentSlug = slug.join('/');
+
+  if (isUnusedOrSharedContent(currentSlug)) return notFound();
 
   const post = getPostBySlug(currentSlug, DOCS_DIR_PATH);
 
@@ -65,17 +75,12 @@ export default async function DocPost({ params }) {
   const { slug } = params;
   const currentSlug = slug.join('/');
 
+  if (isUnusedOrSharedContent(currentSlug)) return notFound();
+
   const flatSidebar = await getFlatSidebar(getSidebar());
 
   const isReleaseNotesIndex = !!currentSlug.match('release-notes')?.length;
   const releaseNotes = await getAllReleaseNotes();
-
-  const releaseNotesWithMdxSource = await Promise.all(
-    releaseNotes.map(async (item) => ({
-      ...item,
-      content: await serializeMdx(item.content),
-    }))
-  );
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
   const navigationLinks = getDocPreviousAndNextLinks(currentSlug, flatSidebar);
@@ -86,7 +91,6 @@ export default async function DocPost({ params }) {
   if (!getPostBySlug(currentSlug, DOCS_DIR_PATH)) return notFound();
 
   const { data, content } = getPostBySlug(currentSlug, DOCS_DIR_PATH);
-  const mdxSource = await serializeMdx(content);
   const tableOfContents = getTableOfContents(content);
 
   const jsonLd = {
@@ -106,7 +110,7 @@ export default async function DocPost({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Post
-        content={mdxSource}
+        content={content}
         data={data}
         breadcrumbs={breadcrumbs}
         navigationLinks={navigationLinks}
@@ -114,7 +118,7 @@ export default async function DocPost({ params }) {
         releaseNotesActiveLabel="all"
         currentSlug={currentSlug}
         fileOriginPath={fileOriginPath}
-        releaseNotes={releaseNotesWithMdxSource}
+        releaseNotes={releaseNotes}
         tableOfContents={tableOfContents}
       />
     </>

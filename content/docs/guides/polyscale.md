@@ -3,7 +3,7 @@ title: Connect Neon to PolyScale
 subtitle: Connect Neon to PolyScale to distribute and cache your data globally
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-19T23:10:12.832Z'
+updatedOn: '2023-11-16T10:55:54.624Z'
 ---
 
 [PolyScale](https://docs.polyscale.ai/) is a serverless database cache service. With PolyScale, you can distribute and cache your data globally, allowing you to scale your database without altering transactional semantics. No coding or infrastructure changes are required. You can connect Neon to PolyScale in minutes, providing your database-backed applications with speedy access to your Neon data from anywhere in the world.
@@ -49,6 +49,4 @@ PolyScale identifies caching opportunities by recognizing and remembering patter
 
 For more information about using PolyScale and how it works, refer to the [PolyScale documentation](https://docs.polyscale.ai/).
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

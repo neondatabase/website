@@ -15,6 +15,4 @@ Signing up for Neon is easy. Simply navigate to [https://console.neon.tech](http
 
 After signing in, you are directed to the Neon Console where you can create your first project. For instructions, see [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

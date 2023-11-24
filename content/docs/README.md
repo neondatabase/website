@@ -471,6 +471,31 @@ Another term for smoke test
 </DetailIconCards>
 ```
 
+## Shared MDX components
+
+Create a [markdown file](https://github.com/neondatabase/website/blob/main/content/docs/shared-content/need-help.md) in folder `content/docs/shared-content/`, add to `sharedMdxComponents` the name of component and the path to component.
+
+```js
+const sharedMdxComponents = {
+  // name of component: path to component (not including content/docs/)
+  NeedHelp: 'shared-content/need-help',
+};
+
+export default sharedMdxComponents;
+```
+
+Insert a shared markdown and render inline.
+
+```md
+## Resources
+
+- [Open AI tiktoken source code on GitHub](https://github.com/openai/tiktoken)
+- [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
+
+<NeedHelp/>
+
+```
+
 ## Contributing
 
 For small changes and spelling fixes, we recommend using the GitHub UI because Markdown files are relatively easy to edit.

@@ -1,17 +1,17 @@
-'use client';
-
 // eslint-disable-next-line import/no-extraneous-dependencies
 import clsx from 'clsx';
 import Image from 'next/image';
-import { MDXRemote } from 'next-mdx-remote';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
-import React, { Fragment, forwardRef } from 'react';
+import { Fragment } from 'react';
+import remarkGfm from 'remark-gfm';
 
 import Admonition from 'components/pages/doc/admonition';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
+import IncludeBlock from 'components/pages/doc/include-block';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
@@ -20,6 +20,13 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+
+import sharedMdxComponents from '../../../../content/docs/shared-content';
+
+const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
+  acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });
+  return acc;
+}, {});
 
 const Heading =
   (Tag) =>
@@ -56,11 +63,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
     }
     return <code {...props} />;
   },
-  pre: (props) => (
-    <div>
-      <CodeBlock {...props} />
-    </div>
-  ),
+  pre: (props) => <CodeBlock {...props} />,
   a: (props) => {
     const { href, children, ...otherProps } = props;
     if (children === '#id') {
@@ -114,37 +117,37 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   CommunityBanner,
   Tabs,
   TabItem,
+  ...sharedComponents,
 });
 
 // eslint-disable-next-line no-return-assign
-const Content = forwardRef(
-  (
-    {
-      className = null,
-      content,
-      asHTML = false,
-      withoutAnchorHeading = false,
-      isReleaseNote = false,
-      isPostgres = false,
-    },
-    ref
-  ) => (
-    <div
-      className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}
-      ref={ref}
-    >
-      {asHTML ? (
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-      ) : (
-        <MDXRemote
-          components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres)}
-          {...content}
-        />
-      )}
-    </div>
-  )
+const Content = ({
+  className = null,
+  content,
+  asHTML = false,
+  withoutAnchorHeading = false,
+  isReleaseNote = false,
+  isPostgres = false,
+}) => (
+  <div className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}>
+    {asHTML ? (
+      <div dangerouslySetInnerHTML={{ __html: content }} />
+    ) : (
+      <MDXRemote
+        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres)}
+        source={content}
+        options={{
+          mdxOptions: {
+            remarkPlugins: [
+              // Adds support for GitHub Flavored Markdown
+              remarkGfm,
+            ],
+          },
+        }}
+      />
+    )}
+  </div>
 );
-
 Content.propTypes = {
   className: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,

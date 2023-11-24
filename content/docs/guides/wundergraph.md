@@ -4,7 +4,7 @@ subtitle: Leverage the power of Neon and WunderGraph to build fully serverless a
   minutes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-19T23:10:12.841Z'
+updatedOn: '2023-11-16T10:55:54.630Z'
 ---
 
 _This guide was contributed by the team at WunderGraph_
@@ -323,6 +323,4 @@ If you had trouble with any of the steps outlined above, refer to the video guid
 
 <YoutubeIframe embedId="JqOADpG5q-s" />
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>
