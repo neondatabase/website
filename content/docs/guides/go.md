@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2023-11-16T10:55:54.622Z'
+updatedOn: '2023-11-24T11:25:06.751Z'
 ---
 
 To connect to Neon from a Go application:

@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/symfony
   - /docs/integrations/symfony
-updatedOn: '2023-11-16T10:55:54.628Z'
+updatedOn: '2023-11-24T11:25:06.756Z'
 ---
 
 Symfony is a free and open-source PHP web application framework. Symfony uses the Doctrine library for database access. Connecting to Neon from Symfony with Doctrine is the same as connecting to a standalone Postgres installation from Symfony with Doctrine. Only the connection details differ.

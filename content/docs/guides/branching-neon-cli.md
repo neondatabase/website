@@ -2,7 +2,7 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 enableTableOfContents: true
-updatedOn: '2023-11-16T10:55:54.621Z'
+updatedOn: '2023-11-24T11:25:06.750Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.

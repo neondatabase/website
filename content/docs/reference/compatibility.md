@@ -3,7 +3,7 @@ title: Postgres compatibility
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2023-11-23T15:54:41.199Z'
+updatedOn: '2023-11-24T11:25:06.767Z'
 ---
 
 Neon is protocol and application-compatible with Postgres. However, when using the Neon cloud service, there are some limitations that you should be aware of.

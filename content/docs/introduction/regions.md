@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2023-11-16T10:55:54.632Z'
+updatedOn: '2023-11-24T11:25:06.758Z'
 ---
 Neon supports project deployment in several regions. We recommended that you select the region closest to your application server to reduce latency between your Neon project and your application.
 
