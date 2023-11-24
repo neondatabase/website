@@ -1,7 +1,9 @@
 ---
 title: Manage multiple database environments
-subtitle: Learn how to create and manage multiple database environments with Neon and Flyway
+subtitle: Learn how to create and manage multiple database environments with Neon and
+  Flyway
 enableTableOfContents: true
+updatedOn: '2023-11-24T19:55:37.121Z'
 ---
 
 Flyway is a database migration tool that facilitates version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
