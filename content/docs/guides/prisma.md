@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/quickstart/prisma
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
-updatedOn: '2023-10-19T23:10:12.833Z'
+updatedOn: '2023-11-24T11:25:06.754Z'
 ---
 
 Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide explains how to connect Prisma to Neon, establish connections when using Prisma Client in serverless functions, and resolve [connection timeout](#connection-timeouts) issues.
@@ -128,7 +128,7 @@ You can disable the pool timeouts by setting `pool_timeout=0`.
 
 ## JSON protocol for large Prisma schemas
 
-If you are working with a large Prisma schema, Prisma recently introduced a new preview feature that expresses queries using `JSON` instead of GraphQL. The JSON implementation uses less CPU and memory, which can help reduce latencies when connecting from Prisma.
+If you are working with a large Prisma schema, Prisma recently introduced a new Preview feature that expresses queries using `JSON` instead of GraphQL. The JSON implementation uses less CPU and memory, which can help reduce latencies when connecting from Prisma.
 
 To try the new protocol, enable the `jsonProtocol` Preview feature in your Prisma schema:
 
@@ -138,6 +138,12 @@ generator client {
   previewFeatures = ["jsonProtocol"]
 }
 ```
+
+<Admonition type="note">
+
+The `jsonProtocol` Preview feature is Generally Available from Prisma version 5.0.0 upwards and is the default wire protocol. This feature is available in Preview from version 4.8.0 and 4.16.2.
+
+</Admonition>
 
 You can read more about this feature here: [Preview feature feedback](https://github.com/prisma/prisma/issues/18095).
 
@@ -150,6 +156,4 @@ For additional information about connecting from Prisma, refer to the following 
 - [PostgreSQL database connector](https://www.prisma.io/docs/concepts/database-connectors/postgresql)
 - [Increasing the pool timeout](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#increasing-the-pool-timeout)
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

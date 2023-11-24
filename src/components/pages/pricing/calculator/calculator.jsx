@@ -13,6 +13,7 @@ import ArrowRight from 'icons/arrow-sm.inline.svg';
 import CheckIcon from 'icons/check.inline.svg';
 import infoHoveredIcon from 'icons/tooltip-hovered.svg';
 import infoIcon from 'icons/tooltip.svg';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const PROJECT_STORAGE_PRICE = 0.000164;
@@ -454,6 +455,16 @@ const Calculator = () => {
               linesOffsetSide={26}
               linesOffsetBottom={55}
               isAnimated
+              onClick={() => {
+                sendGtagEvent('pricing_estimated_price', {
+                  price: estimatedPrice,
+                  computeUnits,
+                  activeTime,
+                  storageValue,
+                  dataTransferValue,
+                  writtenDataValue,
+                });
+              }}
             >
               {estimatedPrice >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </AnimatedButton>

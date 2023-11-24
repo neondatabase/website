@@ -53,7 +53,12 @@ const CodeBlock = ({
   const match = /language-(\w+)/.exec(className || '');
   const snippetLanguage = (match ? match[1] : language) || DEFAULT_LANGUAGE;
 
-  const code = typeof children === 'string' ? children : children?.props?.children.props.children;
+  const code =
+    typeof children === 'string'
+      ? children
+      : children?.props?.children?.props?.children?.props?.children ||
+        children?.props?.children?.props?.children ||
+        children?.props?.children;
 
   const content = isTrimmed ? code?.trim() : code;
 

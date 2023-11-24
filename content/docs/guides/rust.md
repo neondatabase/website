@@ -4,7 +4,7 @@ subtitle: Set up a Neon project in seconds and connect from a Rust application
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2023-10-19T23:10:12.835Z'
+updatedOn: '2023-11-24T11:25:06.755Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Rust application.
@@ -49,6 +49,4 @@ fn main() -> Result<(), Box<dyn error::Error>> {
 
 You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

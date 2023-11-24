@@ -4,7 +4,7 @@ subtitle: Learn how to enable connection pooling in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2023-10-24T18:56:54.980Z'
+updatedOn: '2023-11-24T11:25:06.744Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to offer support for connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -53,6 +53,4 @@ The **Connection Details** widget on the Neon **Dashboard** provides **Pooled co
 
 Neon uses PgBouncer in _transaction mode_, which does not support Postgres features such as prepared statements or [LISTEN](https://www.postgresql.org/docs/15/sql-listen.html)/[NOTIFY](https://www.postgresql.org/docs/15/sql-notify.html). For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

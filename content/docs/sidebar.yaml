@@ -49,8 +49,6 @@
   items:
     - title: Sign up
       slug: get-started-with-neon/signing-up
-    - title: Create your first project
-      slug: get-started-with-neon/setting-up-a-project
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
 - title: Connect
@@ -160,7 +158,13 @@
           slug: guides/go
           ariaLabel: Connect a Go application to Neon
         - title: Java
-          slug: guides/java
+          items:
+            - title: Quarkus (JDBC)
+              slug: guides/quarkus-jdbc
+            - title: Quarkus (Reactive)
+              slug: guides/quarkus-reactive
+            - title: JDBC
+              slug: guides/java
         - title: Javascript
           items:
             - title: Node.js

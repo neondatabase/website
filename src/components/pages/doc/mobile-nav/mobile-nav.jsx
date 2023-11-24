@@ -40,7 +40,7 @@ const variants = {
   },
 };
 
-const MobileNav = ({ className = null, sidebar }) => {
+const MobileNav = ({ className = null, sidebar, basePath, isPostgres = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [containerHeight, setContainerHeight] = useState(null);
   const [buttonTop, setButtonTop] = useState(null);
@@ -117,24 +117,28 @@ const MobileNav = ({ className = null, sidebar }) => {
           variants={variants}
           style={{ height: containerHeight }}
         >
-          <ChatWidgetTrigger className="mb-3.5 mt-[18px] flex" isSidebar />
-          <ul>
-            {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
-              <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
-                <Link className="group flex items-center space-x-3" to={slug}>
-                  <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
-                    <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
-                  </span>
-                  <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
-                    {title}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <ul className="mt-7">
+          {!isPostgres && (
+            <>
+              <ChatWidgetTrigger className="mt-2.5 mb-3.5 flex" isSidebar />
+              <ul className="mb-7">
+                {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
+                  <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
+                    <Link className="group flex items-center space-x-3" to={slug}>
+                      <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
+                        <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
+                      </span>
+                      <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
+                        {title}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          <ul className={clsx({ 'mt-2.5': isPostgres })}>
             {sidebar.map((item, index) => (
-              <Item {...item} key={index} closeMenu={toggleMenu} />
+              <Item {...item} key={index} closeMenu={toggleMenu} basePath={basePath} />
             ))}
           </ul>
         </m.div>
@@ -146,6 +150,8 @@ const MobileNav = ({ className = null, sidebar }) => {
 MobileNav.propTypes = {
   className: PropTypes.string,
   sidebar: sidebarPropTypes,
+  basePath: PropTypes.string.isRequired,
+  isPostgres: PropTypes.bool,
 };
 
 export default MobileNav;

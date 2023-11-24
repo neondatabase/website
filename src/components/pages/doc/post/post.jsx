@@ -10,6 +10,7 @@ import Hero from 'components/pages/release-notes/hero';
 import ReleaseNoteList from 'components/pages/release-notes/release-note-list';
 // import ReleaseNotesFilter from 'components/pages/release-notes/release-notes-filter';
 import Content from 'components/shared/content';
+import { DOCS_BASE_PATH } from 'constants/docs';
 
 // TODO: Add pagination for release notes
 const ReleaseNotes = ({
@@ -29,7 +30,7 @@ ReleaseNotes.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string.isRequired,
-      content: PropTypes.shape({}).isRequired,
+      content: PropTypes.string.isRequired,
     })
   ).isRequired,
 };
@@ -80,7 +81,11 @@ const Post = ({
           </article>
         )}
 
-        <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
+        <PreviousAndNextLinks
+          previousLink={previousLink}
+          nextLink={nextLink}
+          basePath={DOCS_BASE_PATH}
+        />
         <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
       </div>
 
@@ -100,7 +105,7 @@ Post.propTypes = {
     enableTableOfContents: PropTypes.bool,
     updatedOn: PropTypes.string,
   }).isRequired,
-  content: PropTypes.shape({}).isRequired,
+  content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   navigationLinks: PropTypes.exact({
     previousLink: PropTypes.shape({}),
@@ -110,7 +115,7 @@ Post.propTypes = {
   releaseNotes: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,
-      content: PropTypes.shape({}),
+      content: PropTypes.string,
     })
   ),
   currentSlug: PropTypes.string.isRequired,

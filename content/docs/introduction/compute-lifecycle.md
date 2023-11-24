@@ -3,7 +3,7 @@ title: Compute lifecycle
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compute-lifecycle
-updatedOn: '2023-10-24T18:56:54.988Z'
+updatedOn: '2023-11-23T13:58:00.341Z'
 ---
 
 A compute node in Neon is a stateless Postgres process due to the separation of storage and compute. It has two main states: `Active` and `Idle`.
@@ -18,7 +18,7 @@ Also, Postgres shared memory buffers are cold after a compute wakes up from the 
 
 After a period of time in the `Idle` state, Neon occasionally activates your compute to check for data availability. The time between checks gradually increases if the compute does not receive any client connections over an extended period of time.
 
-You can check if a compute is `Active` or `Idle` and watch as a compute transitions form one state to another in the **Branches** widget on the Neon **Dashboard** or on the **Branches** page.
+You can check if a compute is `Active` or `Idle` and watch as a compute transitions from one state to another in the **Branches** widget on the Neon **Dashboard** or on the **Branches** page.
 
 ## Compute configuration
 

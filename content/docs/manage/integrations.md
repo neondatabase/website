@@ -2,43 +2,38 @@
 title: Manage integrations
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-07T10:43:33.418Z'
+updatedOn: '2023-11-23T13:58:00.341Z'
 ---
 
-Neon supports integrations with partners such as Vercel. You can view and revoke integrations for a Neon project from the **Integrations** page in the Neon Console.
+The **Integrations** page in the Neon Console provides a hub for managing third-party integrations with your Neon project. Use these supported integrations to optimize and extend Neon's functionality and streamline your workflow.
 
-<Admonition type="note">
-The **Integrations** page appears empty if you have not configured any integrations.
-</Admonition>
+When visiting the **Integrations** page in your console, you'll notice different categories:
 
-## View integrations
+- **Available**: These are integrations available for you to add and use immediately.
+- **Coming soon**: These are the integrations that will be available in the near future.
+- **Request an integration**: An option for you to request new integrations.
 
-To view integrations for a project:
+## Add integrations
 
-1. Navigate to the [Neon Console](https://console.neon.tech).
-1. Select a project.
-1. Select **Integrations**.
+For integrations listed under the **Available** section, follow the provided **Steps to connect** link for instructions.
 
-## Revoke integrations
+## Express interest in upcoming integrations
 
-<Admonition type="note">
-For the [Neon integration with Vercel](https://vercel.com/integrations/neon), revoking an integration prevents the integration from creating database branches for preview deployments. It does not remove the integration in Vercel or the Vercel environment variables that contain database connection details. To fully remove a Neon Vercel Integration, do so from Vercel. For instructions, see [Manage your integration with Vercel](/docs/guides/vercel#manage-your-neon-integration).
-</Admonition>
+For integrations listed under **Coming soon**, you have the option to express your interest. This helps the Neon team gauge user demand and prioritize integration rollouts.
 
-To revoke an integration:
+To express interest:
 
-1. Navigate to the [Neon Console](https://console.neon.tech).
-1. Select a project.
-1. Select **Integrations**.
-1. Identify the integration you want to remove and click **Revoke**.
+1. Locate the integration you're interested in.
+2. Click the **Express interest** link.
+3. Type your message and click **Yes, I'm interested**.
 
-## Supported integrations
+## Request new integrations
 
-Neon currently supports the following integrations:
+If you can't find the integration you're looking for:
 
-- [Neon integration with Vercel](/docs/guides/vercel)
-- [Neon integration with Hasura](/docs/guides/hasura)
+1. Navigate to the **Request an integration** section of the page.
+2. Click the **Request integration** button.
+3. Fill out the necessary details for the integration you'd like to see added.
+4. Click **Request integration**.
 
-<Admonition type="note">
-Currently, the **Integrations** page only displays Vercel integrations.
-</Admonition>
+The Neon team will review your request and get back to you.

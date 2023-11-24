@@ -2,7 +2,7 @@
 title: Connect from any application
 subtitle: Learn how to connect to Neon from any application
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.362Z'
+updatedOn: '2023-11-24T11:25:06.741Z'
 ---
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch.
 
@@ -87,6 +87,4 @@ Additionally, Neon provides a serverless driver that supports both WebSocket and
 - Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](/docs/connect/connection-errors).
 - Some Java-based tools that use the pgJDBC driver for connecting to Postgres, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For an example, see [Connect a GUI or IDE](/docs/connect/connect-postgres-gui#connect-to-the-database).
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

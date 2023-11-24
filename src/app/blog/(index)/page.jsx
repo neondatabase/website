@@ -41,7 +41,7 @@ export default async function BlogPage() {
       <ReleaseNotesList items={featuredReleaseNotes} />
       <PostsList title="Company" posts={companyFeaturedPosts} alignment="left" />
       <VideoList videos={videos} />
-      <SubscribeForm size="md" />
+      <SubscribeForm size="md" dataTest="blog-subscribe-form" />
       <AppearanceEngineering
         appearancesPosts={appearances}
         engineeringPosts={engineeringFeaturedPosts}

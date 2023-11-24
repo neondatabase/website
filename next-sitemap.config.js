@@ -8,6 +8,7 @@ module.exports = {
     '/ping-thing',
     '/all-things-open-2023',
     '/stackoverflow',
+    // '/docs/postgres*',
   ],
   generateRobotsTxt: true,
   robotsTxtOptions: {
@@ -20,6 +21,7 @@ module.exports = {
           '/ping-thing$',
           '/all-things-open-2023$',
           '/stackoverflow$',
+          '/docs/postgres*',
         ],
       },
     ],

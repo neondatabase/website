@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2023-10-24T18:56:54.984Z'
+updatedOn: '2023-11-24T11:25:06.750Z'
 ---
 
 Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined history retention period. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
@@ -119,6 +119,4 @@ The following GitHub repositories are available for these examples:
 <a href="https://github.com/kelvich/branching_demo_bisect" description="Use Neon branching, the Neon API, and a bisect script to recover lost data" icon="github">Neon branch bisect demo</a>
 </DetailIconCards>
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

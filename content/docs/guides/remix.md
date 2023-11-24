@@ -2,7 +2,7 @@
 title: Connect a Remix application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Remix application
 enableTableOfContents: true
-updatedOn: '2023-10-06T17:44:14.691Z'
+updatedOn: '2023-11-24T11:25:06.755Z'
 ---
 
 
@@ -182,6 +182,4 @@ Result(1) [
 
 </CodeBlock>
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

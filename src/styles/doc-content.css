@@ -12,6 +12,65 @@
     }
   }
 
+  .postgres-heading {
+    > a {
+      @apply border-b-0 opacity-0 text-green-45 transition-opacity duration-200 ease-in-out;
+    }
+
+    &:hover > a {
+      @apply opacity-100;
+    }
+  }
+
+  .postgres-paragraph {
+    > a {
+      @apply border-b-0 text-secondary-8 dark:text-green-45;
+    }
+  }
+
+  .table-wrapper {
+    @apply md:-mx-4 md:overflow-x-auto md:px-4;
+  }
+
+  .table {
+    @apply my-10 w-full leading-normal md:min-w-[500px];
+
+    .func_table_entry,
+    .catalog_table_entry {
+      > * {
+        margin-top: 0.1em;
+        margin-bottom: 0.1em;
+        padding-left: 4em;
+        text-align: left;
+      }
+
+      p {
+        @apply my-1;
+      }
+    }
+
+    .func_signature {
+      text-indent: -3.5em;
+    }
+
+    .column_definition {
+      text-indent: -3.5em;
+      word-spacing: 0.25em;
+    }
+  }
+
+  .tab-item {
+    > * {
+      &:first-child {
+        @apply mt-0;
+      }
+
+      &:last-child {
+        @apply mb-0;
+      }
+    }
+  }
+
   .prose-doc {
     @apply max-w-none leading-normal text-gray-new-8 prose-strong:text-gray-new-8 dark:text-gray-new-90 dark:prose-strong:text-gray-new-90;
     @apply prose-headings:leading-tight prose-headings:font-semibold prose-headings:text-black-new prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white;
@@ -175,6 +234,37 @@
   }
 
   .prose-static {
+    @apply prose-ol:list-none;
+
+    ol {
+      counter-reset: item;
+      @apply m-0 p-0;
+    }
+
+    ol > li {
+      display: table;
+      counter-increment: item;
+      @apply mb-[0.6em];
+    }
+
+    ol > li ol {
+      @apply md:pl-0;
+    }
+
+    ol > li:before {
+      content: counters(item, '.') '. ';
+      display: table-cell;
+      @apply pr-[0.6em];
+    }
+
+    li ol > li {
+      @apply m-0;
+    }
+
+    li ol > li:before {
+      content: counters(item, '.') ' ';
+    }
+
     .wp-block-table {
       @apply md:-mx-4 md:overflow-x-auto md:px-4;
     }

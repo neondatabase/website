@@ -4,12 +4,12 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2023-10-19T23:10:12.848Z'
+updatedOn: '2023-11-24T11:25:06.761Z'
 ---
 
-In Neon, roles are Postgres roles. Each Neon project is created with a default Postgres role that takes its name from your Neon account (the Google, GitHub, or partner account that you registered with). This role owns the ready-to-use database (`neondb`) that is created in your Neon project's primary branch.
+In Neon, roles are Postgres roles. Each Neon project is created with a default Postgres role that takes its name from your Neon account (the email, GitHub, Google, or partner account that you registered with). This role owns the ready-to-use database (`neondb`) that is created in your Neon project's primary branch.
 
-Your default Postgres role and roles created in the Neon console, API, and CLI are granted membership in the [neon_superuser](#the-neon_superuser-role) role. Roles created with SQL from clients like [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) are only granted the basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-acess).
+Your default Postgres role and roles created in the Neon console, API, and CLI are granted membership in the [neon_superuser](#the-neon_superuser-role) role. Roles created with SQL from clients like [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) are only granted the basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-access).
 
 <Admonition type="note">
 Neon is a managed Postgres service, so you cannot access the host operating system, and you can't connect using the Postgres `superuser` account like you can in a standalone Postgres installation.
@@ -37,7 +37,7 @@ Roles created in the Neon console, CLI, or API, including the default role creat
 - `pg_read_all_data`: A predefined role in Postgres that provides the ability to read all data (tables, views, sequences), as if having `SELECT` rights on those objects, and `USAGE` rights on all schemas.
 - `pg_write_all_data`: A predefined role in Postgres that provides the ability to write all data (tables, views, sequences), as if having `INSERT`, `UPDATE`, and `DELETE` rights on those objects, and `USAGE` rights on all schemas.
 
-You can think of roles with `neon_superuser` privileges as administrator roles. If you require roles with limited privileges, such as a read-only role, you can create those roles from an SQL client. For more information, see [Manage database access](/docs/manage/database-acess).
+You can think of roles with `neon_superuser` privileges as administrator roles. If you require roles with limited privileges, such as a read-only role, you can create those roles from an SQL client. For more information, see [Manage database access](/docs/manage/database-access).
 
 ## Manage roles in the Neon console
 
@@ -379,6 +379,4 @@ The following names are protected and cannot be given to a role:
 - `public`
 - `none`
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

@@ -49,7 +49,10 @@ const Field = forwardRef(
       </Tag>
 
       {error && (
-        <p className="absolute top-[calc(100%+0.5rem)] text-sm leading-none text-secondary-1">
+        <p
+          className="absolute top-[calc(100%+0.5rem)] text-sm leading-none text-secondary-1"
+          data-test="error-field-message"
+        >
           {error}
         </p>
       )}
