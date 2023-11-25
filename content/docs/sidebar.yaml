@@ -49,8 +49,6 @@
   items:
     - title: Sign up
       slug: get-started-with-neon/signing-up
-    - title: Create your first project
-      slug: get-started-with-neon/setting-up-a-project
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
 - title: Connect
@@ -205,6 +203,20 @@
           slug: guides/stepzen
         - title: WunderGraph
           slug: guides/wundergraph
+    - title: Schema migration
+      items:
+        - title: Flyway
+          items:
+            - title: Get started
+              slug: guides/flyway  
+            - title: Manage multiple environments
+              slug: guides/flyway-multiple-environments 
+        - title: Liquibase
+          items:
+             - title: Get started
+               slug: guides/liquibase
+             - title: Developer workflow
+               slug: guides/liquibase-workflow
     - title: Serverless
       items:
         - title: Neon serverless driver

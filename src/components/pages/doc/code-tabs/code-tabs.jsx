@@ -5,34 +5,6 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
 import CodeBlock from 'components/shared/code-block';
-import Content from 'components/shared/content';
-import serializeMdx from 'utils/serialize-mdx';
-
-const TabItem = ({ children }) => {
-  const [mdxSource, setMdxSource] = useState(null);
-
-  useEffect(() => {
-    const fetchMdx = async () => {
-      const serializedContent = await serializeMdx(children);
-      setMdxSource(serializedContent);
-    };
-
-    if (children) {
-      fetchMdx();
-    }
-  }, [children]);
-
-  return mdxSource ? (
-    <Content
-      className="py-5 px-4 [&_pre.prismjs]:!bg-gray-new-94 [&_pre.prismjs]:dark:!bg-gray-new-15"
-      content={mdxSource}
-    />
-  ) : null;
-};
-
-TabItem.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -50,7 +22,7 @@ const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
         {labels.map((label, index) => (
           <div
             className={clsx(
-              'relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pb-3.5 pt-3 font-semibold leading-none transition-colors duration-200',
+              'relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pb-3.5 pt-3 font-semibold leading-none transition-colors duration-200 hover:text-secondary-8 dark:hover:text-green-45',
               index === currentIndex
                 ? 'border-secondary-8 text-secondary-8 after:opacity-100 dark:border-primary-1 dark:text-primary-1'
                 : 'border-transparent text-gray-new-40 dark:text-gray-7'
@@ -73,11 +45,6 @@ const CodeTabs = ({ children = null, shouldWrap = false, labels = [] }) => {
 
         const { children, className } =
           child.props?.children.props?.children.props || child.props?.children.props || {};
-        const match = /language-(\w+)/.exec(className || '');
-
-        if (match[1] === 'content') {
-          return <TabItem>{children}</TabItem>;
-        }
 
         return (
           <CodeBlock

@@ -1,3 +1,5 @@
+[#id](#SOURCE-FORMAT)
+
 ## 56.1. Formatting [#](#SOURCE-FORMAT)
 
 Source code formatting uses 4 column tab spacing, with tabs preserved (i.e., tabs are not expanded to spaces). Each logical indentation level is one additional tab stop.
@@ -11,7 +13,6 @@ To maintain a consistent coding style, do not use C++ style comments (`//` comme
 The preferred style for multi-line comment blocks is
 
 ```
-
 /*
  * comment text begins here
  * and continues here
@@ -21,7 +22,6 @@ The preferred style for multi-line comment blocks is
 Note that comment blocks that begin in column 1 will be preserved as-is by pgindent, but it will re-flow indented comment blocks as though they were plain text. If you want to preserve the line breaks in an indented block, add dashes like this:
 
 ```
-
     /*----------
      * comment text begins here
      * and continues here
@@ -38,7 +38,6 @@ If you'd like to run pgindent locally to help make your code match project style
 The text browsing tools more and less can be invoked as:
 
 ```
-
 more -x4
 less -x4
 ```

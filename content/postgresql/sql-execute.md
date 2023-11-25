@@ -1,3 +1,5 @@
+[#id](#SQL-EXECUTE)
+
 ## EXECUTE
 
 EXECUTE — execute a prepared statement
@@ -5,9 +7,10 @@ EXECUTE — execute a prepared statement
 ## Synopsis
 
 ```
-
 EXECUTE name [ ( parameter [, ...] ) ]
 ```
+
+[#id](#id-1.9.3.147.6)
 
 ## Description
 
@@ -15,30 +18,40 @@ EXECUTE name [ ( parameter [, ...] ) ]
 
 If the `PREPARE` statement that created the statement specified some parameters, a compatible set of parameters must be passed to the `EXECUTE` statement, or else an error is raised. Note that (unlike functions) prepared statements are not overloaded based on the type or number of their parameters; the name of a prepared statement must be unique within a database session.
 
-For more information on the creation and usage of prepared statements, see [PREPARE](sql-prepare.html "PREPARE").
+For more information on the creation and usage of prepared statements, see [PREPARE](sql-prepare).
+
+[#id](#id-1.9.3.147.7)
 
 ## Parameters
 
 * *`name`*
 
-    The name of the prepared statement to execute.
+  The name of the prepared statement to execute.
 
 * *`parameter`*
 
-    The actual value of a parameter to the prepared statement. This must be an expression yielding a value that is compatible with the data type of this parameter, as was determined when the prepared statement was created.
+  The actual value of a parameter to the prepared statement. This must be an expression yielding a value that is compatible with the data type of this parameter, as was determined when the prepared statement was created.
+
+[#id](#id-1.9.3.147.8)
 
 ## Outputs
 
 The command tag returned by `EXECUTE` is that of the prepared statement, and not `EXECUTE`.
 
+[#id](#id-1.9.3.147.9)
+
 ## Examples
 
-Examples are given in [Examples](sql-prepare.html#SQL-PREPARE-EXAMPLES "Examples") in the [PREPARE](sql-prepare.html "PREPARE") documentation.
+Examples are given in [Examples](sql-prepare#SQL-PREPARE-EXAMPLES) in the [PREPARE](sql-prepare) documentation.
+
+[#id](#id-1.9.3.147.10)
 
 ## Compatibility
 
 The SQL standard includes an `EXECUTE` statement, but it is only for use in embedded SQL. This version of the `EXECUTE` statement also uses a somewhat different syntax.
 
+[#id](#id-1.9.3.147.11)
+
 ## See Also
 
-[DEALLOCATE](sql-deallocate.html "DEALLOCATE"), [PREPARE](sql-prepare.html "PREPARE")
+[DEALLOCATE](sql-deallocate), [PREPARE](sql-prepare)

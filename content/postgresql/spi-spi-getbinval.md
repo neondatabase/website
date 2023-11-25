@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-GETBINVAL)
+
 ## SPI\_getbinval
 
 SPI\_getbinval — return the binary value of the specified column
@@ -5,10 +7,11 @@ SPI\_getbinval — return the binary value of the specified column
 ## Synopsis
 
 ```
-
 Datum SPI_getbinval(HeapTuple row, TupleDesc rowdesc, int colnumber,
                     bool * isnull)
 ```
+
+[#id](#id-1.8.12.9.7.5)
 
 ## Description
 
@@ -16,23 +19,27 @@ Datum SPI_getbinval(HeapTuple row, TupleDesc rowdesc, int colnumber,
 
 This function does not allocate new space for the datum. In the case of a pass-by-reference data type, the return value will be a pointer into the passed row.
 
+[#id](#id-1.8.12.9.7.6)
+
 ## Arguments
 
 * `HeapTuple row`
 
-    input row to be examined
+  input row to be examined
 
 * `TupleDesc rowdesc`
 
-    input row description
+  input row description
 
 * `int colnumber`
 
-    column number (count starts at 1)
+  column number (count starts at 1)
 
 * `bool * isnull`
 
-    flag for a null value in the column
+  flag for a null value in the column
+
+[#id](#id-1.8.12.9.7.7)
 
 ## Return Value
 

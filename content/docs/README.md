@@ -1,3 +1,6 @@
+---
+updatedOn: '2023-11-24T11:25:06.736Z'
+---
 # Docs
 
 Welcome to Neon docs! This folder contains the source code of the [Neon docs](https://neon.tech/docs/).
@@ -224,7 +227,7 @@ int main() {
 
 To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and write labels of code tabs in order:
 
-`````md
+````md
 <CodeTabs labels={["Shell", "C++", "C#", "Java"]}>
 
 <CodeBlock highlight="2-4">
@@ -268,8 +271,27 @@ class GFG {
 }
 ```
 
-````content
+</CodeTabs>
+````
+
+<details>
+<summary>Examples</summary>
+
+![Code tabs example](code-tabs-example.jpg)
+
+</details>
+
+## Tabs
+
+To display the tabs with content as image, video, code block, .etc, wrap the `TabItem` with `Tabs`
+
+````md
+<Tabs labels={["Content", "CLI"]}>
+
+<TabItem>
 In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
+
+<CodeBlock showLineNumbers>
 
 ```bash
 - name: <db_name>
@@ -285,6 +307,9 @@ In your config v3 project, head to the `/metadata/databases/databases.yaml` file
   tables: []
   functions: []
 ```
+
+</CodeBlock>
+
 Apply the Metadata by running:
 
 ```bash
@@ -297,19 +322,31 @@ If you've spun up the Hasura Engine with Docker, you can access the Hasura Conso
 To access the Hasura Console via the URL the HASURA_GRAPHQL_ENABLE_CONSOLE environment variable or the `--enable-console` flag must be set to true.
 </Admonition>
 
+</TabItem>
+
+<TabItem>
+Alternatively, you can create read replicas using the Neon API or Neon CLI.
+
+```bash
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/late-bar-27572981/endpoints \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "endpoint": {
+    "type": "read_only",
+    "branch_id": "br-young-fire-15282225"
+  }
+}
+' | jq
+```
+
+</TabItem>
+
+</Tabs>
 ````
-
-</CodeTabs>
-`````
-
-To display the tab that contains the plain text and code block, set `content` label as an example above.
-
-<details>
-<summary>Examples</summary>
-
-![Code tabs example](code-tabs-example.jpg)
-
-</details>
 
 ## Admonition
 
@@ -348,11 +385,11 @@ Example file structure:
 ├── public
 │ ├── docs
 │   ├── conceptual-guides
-│     ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
+│   ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
 ├── content
 │ ├── docs
 │   ├── conceptual-guides
-│     ├── architecture-overview.md
+│   ├── architecture-overview.md
 ```
 
 Example content in `architecture-overview.md`:
@@ -396,22 +433,6 @@ Another term for smoke test
 {/* other content here */}
 ```
 
-### Detail Icon Cards
-
-`DetailIconCards` is a custom MDX component that displays data in a card format. Each card contains icon, title, href and description. This layout is especially useful for presenting grouped information in a visually pleasing and easy-to-understand way.
-
-```md
-
-<DetailIconCards>
-
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
-
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
-
-</DetailIconCards>
-
-```
-
 ### Acceptable markup for term
 
 - `*italic*`
@@ -438,6 +459,45 @@ Another term for smoke test
 ![Definition list example](definition-list-example.jpg)
 
 </details>
+
+## Detail Icon Cards
+
+`DetailIconCards` is a custom MDX component that displays data in a card format. Each card contains icon, title, href and description. This layout is especially useful for presenting grouped information in a visually pleasing and easy-to-understand way.
+
+```md
+<DetailIconCards>
+
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
+
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
+
+</DetailIconCards>
+```
+
+## Shared MDX components
+
+Create a [markdown file](https://github.com/neondatabase/website/blob/main/content/docs/shared-content/need-help.md) in folder `content/docs/shared-content/`, add to `sharedMdxComponents` the name of component and the path to component.
+
+```js
+const sharedMdxComponents = {
+  // name of component: path to component (not including content/docs/)
+  NeedHelp: 'shared-content/need-help',
+};
+
+export default sharedMdxComponents;
+```
+
+Insert a shared markdown and render inline.
+
+```md
+## Resources
+
+- [Open AI tiktoken source code on GitHub](https://github.com/openai/tiktoken)
+- [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
+
+<NeedHelp/>
+
+```
 
 ## Contributing
 

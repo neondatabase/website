@@ -2,7 +2,7 @@
 title: Google Colab
 subtitle: Use Google Colab with Neon for vector similarity search
 enableTableOfContents: true
-updatedOn: '2023-10-20T14:08:54.526Z'
+updatedOn: '2023-11-24T11:25:06.740Z'
 ---
 
 [Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.
@@ -134,6 +134,4 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 For more information about using Neon with `pgvector`, see [The pgvector extension](/docs/extensions/pgvector).
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

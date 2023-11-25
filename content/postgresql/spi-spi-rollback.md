@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-ROLLBACK)
+
 ## SPI\_rollback
 
 SPI\_rollback, SPI\_rollback\_and\_chain — abort the current transaction
@@ -5,14 +7,14 @@ SPI\_rollback, SPI\_rollback\_and\_chain — abort the current transaction
 ## Synopsis
 
 ```
-
 void SPI_rollback(void)
 ```
 
 ```
-
 void SPI_rollback_and_chain(void)
 ```
+
+[#id](#id-1.8.12.11.5.6)
 
 ## Description
 

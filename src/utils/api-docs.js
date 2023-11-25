@@ -6,6 +6,7 @@ const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 const slugify = require('slugify');
 
+const sharedMdxComponents = require('../../content/docs/shared-content');
 const { RELEASE_NOTES_DIR_PATH } = require('../constants/docs');
 
 const getExcerpt = require('./get-excerpt');
@@ -15,7 +16,13 @@ const DOCS_DIR_PATH = 'content/docs';
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
-    ignore: ['**/RELEASE_NOTES_TEMPLATE.md', '**/README.md', '**/unused/**'],
+    ignore: [
+      '**/RELEASE_NOTES_TEMPLATE.md',
+      '**/README.md',
+      '**/unused/**',
+      '**/shared-content/**',
+      '**/GUIDE_TEMPLATE.md',
+    ],
   });
   return files.map((file) => file.replace(pathname, '').replace('.md', ''));
 };
@@ -83,7 +90,10 @@ const getDocPreviousAndNextLinks = (slug, flatSidebar) => {
   const previousItem = items[currentItemIndex - 1];
   const nextItem = items[currentItemIndex + 1];
 
-  return { previousLink: previousItem, nextLink: nextItem };
+  return {
+    previousLink: { title: previousItem?.title, slug: previousItem?.slug },
+    nextLink: { title: nextItem?.title, slug: nextItem?.slug },
+  };
 };
 
 const getAllReleaseNotes = async () => {
@@ -100,28 +110,65 @@ const getAllReleaseNotes = async () => {
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
-const getTableOfContents = (content) => {
-  const headings = content.match(/(#+)\s(.*)/g) || [];
-  const arr = headings.map((item) => item.replace(/(#+)\s/, '$1 '));
-
+const buildNestedToc = (headings, currentLevel) => {
   const toc = [];
 
-  arr.forEach((item) => {
-    const [depth, title] = parseMDXHeading(item);
-
-    // replace mdx inline code with html inline code
+  while (headings.length > 0) {
+    const [depth, title] = parseMDXHeading(headings[0]);
     const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-    if (title && depth && depth <= 3) {
-      toc.push({
+    if (depth === currentLevel) {
+      const tocItem = {
         title: titleWithInlineCode,
         id: slugify(title, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
-        level: depth + 1,
-      });
+        level: depth,
+      };
+
+      headings.shift(); // remove the current heading
+
+      if (headings.length > 0 && parseMDXHeading(headings[0])[0] > currentLevel) {
+        tocItem.items = buildNestedToc(headings, currentLevel + 1);
+      }
+
+      toc.push(tocItem);
+    } else if (depth < currentLevel) {
+      // Return toc if heading is of shallower level
+      return toc;
+    } else {
+      // Skip headings of deeper levels
+      headings.shift();
     }
-  });
+  }
 
   return toc;
+};
+
+const getTableOfContents = (content) => {
+  const mdxComponentRegex = /<(\w+)\/>/g;
+  let match;
+  // check if the content has any mdx shared components
+  while ((match = mdxComponentRegex.exec(content)) !== null) {
+    const componentName = match[1];
+
+    const fileName = sharedMdxComponents[componentName];
+    const mdFilePath = `content/docs/${fileName}.md`;
+
+    // Check if the MD file exists
+    if (fs.existsSync(mdFilePath)) {
+      const mdContent = fs.readFileSync(mdFilePath, 'utf8');
+      content = content.replace(new RegExp(`<${componentName}\/>`, 'g'), mdContent);
+    }
+  }
+
+  const codeBlockRegex = /```[\s\S]*?```/g;
+  const headingRegex = /^(#+)\s(.*)$/gm;
+
+  const contentWithoutCodeBlocks = content.replace(codeBlockRegex, '');
+  const headings = contentWithoutCodeBlocks.match(headingRegex) || [];
+
+  const arr = headings.map((item) => item.replace(/(#+)\s/, '$1 '));
+
+  return buildNestedToc(arr, 1);
 };
 
 module.exports = {

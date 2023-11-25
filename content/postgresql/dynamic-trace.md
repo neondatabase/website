@@ -1,9 +1,13 @@
+[#id](#DYNAMIC-TRACE)
+
 ## 28.5. Dynamic Tracing [#](#DYNAMIC-TRACE)
 
-  * *   [28.5.1. Compiling for Dynamic Tracing](dynamic-trace.html#COMPILING-FOR-TRACE)
-  * [28.5.2. Built-in Probes](dynamic-trace.html#TRACE-POINTS)
-  * [28.5.3. Using Probes](dynamic-trace.html#USING-TRACE-POINTS)
-  * [28.5.4. Defining New Probes](dynamic-trace.html#DEFINING-TRACE-POINTS)
+  * [28.5.1. Compiling for Dynamic Tracing](dynamic-trace#COMPILING-FOR-TRACE)
+  * [28.5.2. Built-in Probes](dynamic-trace#TRACE-POINTS)
+  * [28.5.3. Using Probes](dynamic-trace#USING-TRACE-POINTS)
+  * [28.5.4. Defining New Probes](dynamic-trace#DEFINING-TRACE-POINTS)
+
+
 
 PostgreSQL provides facilities to support dynamic tracing of the database server. This allows an external utility to be called at specific points in the code and thereby trace execution.
 
@@ -11,13 +15,19 @@ A number of probes or trace points are already inserted into the source code. Th
 
 Currently, the [DTrace](https://en.wikipedia.org/wiki/DTrace) utility is supported, which, at the time of this writing, is available on Solaris, macOS, FreeBSD, NetBSD, and Oracle Linux. The [SystemTap](https://sourceware.org/systemtap/) project for Linux provides a DTrace equivalent and can also be used. Supporting other dynamic tracing utilities is theoretically possible by changing the definitions for the macros in `src/include/utils/probes.h`.
 
+[#id](#COMPILING-FOR-TRACE)
+
 ### 28.5.1. Compiling for Dynamic Tracing [#](#COMPILING-FOR-TRACE)
 
-By default, probes are not available, so you will need to explicitly tell the configure script to make the probes available in PostgreSQL. To include DTrace support specify `--enable-dtrace` to configure. See [Section 17.3.3.6](install-make.html#CONFIGURE-OPTIONS-DEVEL "17.3.3.6. Developer Options") for further information.
+By default, probes are not available, so you will need to explicitly tell the configure script to make the probes available in PostgreSQL. To include DTrace support specify `--enable-dtrace` to configure. See [Section 17.3.3.6](install-make#CONFIGURE-OPTIONS-DEVEL) for further information.
+
+[#id](#TRACE-POINTS)
 
 ### 28.5.2. Built-in Probes [#](#TRACE-POINTS)
 
-A number of standard probes are provided in the source code, as shown in [Table 28.48](dynamic-trace.html#DTRACE-PROBE-POINT-TABLE "Table 28.48. Built-in DTrace Probes"); [Table 28.49](dynamic-trace.html#TYPEDEFS-TABLE "Table 28.49. Defined Types Used in Probe Parameters") shows the types used in the probes. More probes can certainly be added to enhance PostgreSQL's observability.
+A number of standard probes are provided in the source code, as shown in [Table 28.48](dynamic-trace#DTRACE-PROBE-POINT-TABLE); [Table 28.49](dynamic-trace#TYPEDEFS-TABLE) shows the types used in the probes. More probes can certainly be added to enhance PostgreSQL's observability.
+
+[#id](#DTRACE-PROBE-POINT-TABLE)
 
 **Table 28.48. Built-in DTrace Probes**
 
@@ -59,7 +69,7 @@ A number of standard probes are provided in the source code, as shown in [Table�
 | `buffer-read-done`             | `(ForkNumber, BlockNumber, Oid, Oid, Oid, int, bool)`                              | Probe that fires when a buffer read is complete. arg0 and arg1 contain the fork and block numbers of the page. arg2, arg3, and arg4 contain the tablespace, database, and relation OIDs identifying the relation. arg5 is the ID of the backend which created the temporary relation for a local buffer, or `InvalidBackendId` (-1) for a shared buffer. arg6 is true if the buffer was found in the pool, false if not.                                                                                                                             |
 | `buffer-flush-start`           | `(ForkNumber, BlockNumber, Oid, Oid, Oid)`                                         | Probe that fires before issuing any write request for a shared buffer. arg0 and arg1 contain the fork and block numbers of the page. arg2, arg3, and arg4 contain the tablespace, database, and relation OIDs identifying the relation.                                                                                                                                                                                                                                                                                                              |
 | `buffer-flush-done`            | `(ForkNumber, BlockNumber, Oid, Oid, Oid)`                                         | Probe that fires when a write request is complete. (Note that this just reflects the time to pass the data to the kernel; it's typically not actually been written to disk yet.) The arguments are the same as for `buffer-flush-start`.                                                                                                                                                                                                                                                                                                             |
-| `wal-buffer-write-dirty-start` | `()`                                                                               | Probe that fires when a server process begins to write a dirty WAL buffer because no more WAL buffer space is available. (If this happens often, it implies that [wal\_buffers](runtime-config-wal.html#GUC-WAL-BUFFERS) is too small.)                                                                                                                                                                                                                                                                                                              |
+| `wal-buffer-write-dirty-start` | `()`                                                                               | Probe that fires when a server process begins to write a dirty WAL buffer because no more WAL buffer space is available. (If this happens often, it implies that [wal\_buffers](runtime-config-wal#GUC-WAL-BUFFERS) is too small.)                                                                                                                                                                                                                                                                                                              |
 | `wal-buffer-write-dirty-done`  | `()`                                                                               | Probe that fires when a dirty WAL buffer write is complete.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `wal-insert`                   | `(unsigned char, unsigned char)`                                                   | Probe that fires when a WAL record is inserted. arg0 is the resource manager (rmid) for the record. arg1 contains the info flags.                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `wal-switch`                   | `()`                                                                               | Probe that fires when a WAL segment switch is requested.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -79,7 +89,8 @@ A number of standard probes are provided in the source code, as shown in [Table�
 | `lock-wait-done`               | `(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, LOCKMODE)` | Probe that fires when a request for a heavyweight lock (lmgr lock) has finished waiting (i.e., has acquired the lock). The arguments are the same as for `lock-wait-start`.                                                                                                                                                                                                                                                                                                                                                                          |
 | `deadlock-found`               | `()`                                                                               | Probe that fires when a deadlock is found by the deadlock detector.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
-\
+
+[#id](#TYPEDEFS-TABLE)
 
 **Table 28.49. Defined Types Used in Probe Parameters**
 
@@ -92,6 +103,8 @@ A number of standard probes are provided in the source code, as shown in [Table�
 | `Oid`                | `unsigned int`  |
 | `ForkNumber`         | `int`           |
 | `bool`               | `unsigned char` |
+
+[#id](#USING-TRACE-POINTS)
 
 ### 28.5.3. Using Probes [#](#USING-TRACE-POINTS)
 
@@ -139,47 +152,52 @@ SystemTap uses a different notation for trace scripts than DTrace does, even tho
 
 You should remember that DTrace scripts need to be carefully written and debugged, otherwise the trace information collected might be meaningless. In most cases where problems are found it is the instrumentation that is at fault, not the underlying system. When discussing information found using dynamic tracing, be sure to enclose the script used to allow that too to be checked and discussed.
 
+[#id](#DEFINING-TRACE-POINTS)
+
 ### 28.5.4. Defining New Probes [#](#DEFINING-TRACE-POINTS)
 
 New probes can be defined within the code wherever the developer desires, though this will require a recompilation. Below are the steps for inserting new probes:
 
 1. Decide on probe names and data to be made available through the probes
+
 2. Add the probe definitions to `src/backend/utils/probes.d`
+
 3. Include `pg_trace.h` if it is not already present in the module(s) containing the probe points, and insert `TRACE_POSTGRESQL` probe macros at the desired locations in the source code
+
 4. Recompile and verify that the new probes are available
 
-**Example:** Here is an example of how you would add a probe to trace all new transactions by transaction ID.
+**Example: ** Here is an example of how you would add a probe to trace all new transactions by transaction ID.
 
 1. Decide that the probe will be named `transaction-start` and requires a parameter of type `LocalTransactionId`
 
 2. Add the probe definition to `src/backend/utils/probes.d`:
 
-    ```
+   ```
 
-    probe transaction__start(LocalTransactionId);
-    ```
+   probe transaction__start(LocalTransactionId);
+   ```
 
-    Note the use of the double underline in the probe name. In a DTrace script using the probe, the double underline needs to be replaced with a hyphen, so `transaction-start` is the name to document for users.
+   Note the use of the double underline in the probe name. In a DTrace script using the probe, the double underline needs to be replaced with a hyphen, so `transaction-start` is the name to document for users.
 
 3. At compile time, `transaction__start` is converted to a macro called `TRACE_POSTGRESQL_TRANSACTION_START` (notice the underscores are single here), which is available by including `pg_trace.h`. Add the macro call to the appropriate location in the source code. In this case, it looks like the following:
 
-    ```
+   ```
 
-    TRACE_POSTGRESQL_TRANSACTION_START(vxid.localTransactionId);
-    ```
+   TRACE_POSTGRESQL_TRANSACTION_START(vxid.localTransactionId);
+   ```
 
 4. After recompiling and running the new binary, check that your newly added probe is available by executing the following DTrace command. You should see similar output:
 
-    ```
+   ```
 
-    # dtrace -ln transaction-start
-       ID    PROVIDER          MODULE           FUNCTION NAME
-    18705 postgresql49878     postgres     StartTransactionCommand transaction-start
-    18755 postgresql49877     postgres     StartTransactionCommand transaction-start
-    18805 postgresql49876     postgres     StartTransactionCommand transaction-start
-    18855 postgresql49875     postgres     StartTransactionCommand transaction-start
-    18986 postgresql49873     postgres     StartTransactionCommand transaction-start
-    ```
+   # dtrace -ln transaction-start
+      ID    PROVIDER          MODULE           FUNCTION NAME
+   18705 postgresql49878     postgres     StartTransactionCommand transaction-start
+   18755 postgresql49877     postgres     StartTransactionCommand transaction-start
+   18805 postgresql49876     postgres     StartTransactionCommand transaction-start
+   18855 postgresql49875     postgres     StartTransactionCommand transaction-start
+   18986 postgresql49873     postgres     StartTransactionCommand transaction-start
+   ```
 
 There are a few things to be careful about when adding trace macros to the C code:
 
@@ -187,10 +205,10 @@ There are a few things to be careful about when adding trace macros to the C cod
 
 * On most platforms, if PostgreSQL is built with `--enable-dtrace`, the arguments to a trace macro will be evaluated whenever control passes through the macro, *even if no tracing is being done*. This is usually not worth worrying about if you are just reporting the values of a few local variables. But beware of putting expensive function calls into the arguments. If you need to do that, consider protecting the macro with a check to see if the trace is actually enabled:
 
-    ```
+  ```
 
-    if (TRACE_POSTGRESQL_TRANSACTION_START_ENABLED())
-        TRACE_POSTGRESQL_TRANSACTION_START(some_function(...));
-    ```
+  if (TRACE_POSTGRESQL_TRANSACTION_START_ENABLED())
+      TRACE_POSTGRESQL_TRANSACTION_START(some_function(...));
+  ```
 
-    Each trace macro has a corresponding `ENABLED` macro.
+  Each trace macro has a corresponding `ENABLED` macro.

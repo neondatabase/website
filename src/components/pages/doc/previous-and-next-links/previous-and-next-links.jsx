@@ -13,11 +13,12 @@ const getUrl = (slug, basePath) => {
 };
 
 const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }) => {
-  const previousLinkUrl = previousLink && getUrl(previousLink.slug, basePath);
-  const nextLinkUrl = nextLink && getUrl(nextLink.slug, basePath);
+  const previousLinkUrl = previousLink?.slug && getUrl(previousLink.slug, basePath);
+  const nextLinkUrl = nextLink?.slug && getUrl(nextLink.slug, basePath);
+
   return (
     <div className="mt-10 flex w-full space-x-10 sm:mt-7 sm:space-x-0">
-      {previousLink && (
+      {previousLink?.title && previousLink?.slug && (
         <Link
           to={previousLinkUrl}
           className="group mr-auto flex w-1/2 items-center justify-between rounded border border-gray-new-90 p-4 dark:border-gray-new-20 sm:hidden"
@@ -32,7 +33,7 @@ const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }
           </div>
         </Link>
       )}
-      {nextLink && (
+      {nextLink?.title && nextLink?.slug && (
         <Link
           to={nextLinkUrl}
           className="group ml-auto flex w-1/2 items-center justify-between rounded border border-gray-new-90 p-4 text-right dark:border-gray-new-20 sm:w-full sm:space-x-3"
@@ -53,12 +54,12 @@ const PreviousAndNextLinks = ({ previousLink = null, nextLink = null, basePath }
 
 PreviousAndNextLinks.propTypes = {
   previousLink: PropTypes.exact({
-    title: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    slug: PropTypes.string,
   }),
   nextLink: PropTypes.exact({
-    title: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    slug: PropTypes.string,
   }),
   basePath: PropTypes.string.isRequired,
 };

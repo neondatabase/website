@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-KEY-COLUMN-USAGE)
+
 ## 37.32. `key_column_usage` [#](#INFOSCHEMA-KEY-COLUMN-USAGE)
 
 The view `key_column_usage` identifies all columns in the current database that are restricted by some unique, primary key, or foreign key constraint. Check constraints are not included in this view. Only those columns are shown that the current user has access to, by way of being the owner or having some privilege.
+
+[#id](#id-1.7.6.36.3)
 
 **Table 37.30. `key_column_usage` Columns**
 

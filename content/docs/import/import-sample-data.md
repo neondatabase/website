@@ -2,7 +2,7 @@
 title: Postgres sample data
 subtitle: 'Download sample data for learning, testing, and exploring Neon'
 enableTableOfContents: true
-updatedOn: '2023-10-20T14:08:54.553Z'
+updatedOn: '2023-11-24T11:25:06.758Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.
@@ -573,6 +573,4 @@ An airport database containing information about airports, aircraft, bookings, p
 - License: [BSD 3-Clause License](https://github.com/hettie-d/postgres_air/blob/main/LICENSE)
 - `Copyright (c) 2020, hettie-d All rights reserved.`
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

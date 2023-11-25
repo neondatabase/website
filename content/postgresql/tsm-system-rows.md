@@ -1,8 +1,12 @@
-## F.45. tsm\_system\_rows — the `SYSTEM_ROWS` sampling method for `TABLESAMPLE` [#](#TSM-SYSTEM-ROWS)
+[#id](#TSM-SYSTEM-ROWS)
 
-* [F.45.1. Examples](tsm-system-rows.html#TSM-SYSTEM-ROWS-EXAMPLES)
+## F.46. tsm\_system\_rows — the `SYSTEM_ROWS` sampling method for `TABLESAMPLE` [#](#TSM-SYSTEM-ROWS)
 
-The `tsm_system_rows` module provides the table sampling method `SYSTEM_ROWS`, which can be used in the `TABLESAMPLE` clause of a [`SELECT`](sql-select.html "SELECT") command.
+* [F.46.1. Examples](tsm-system-rows#TSM-SYSTEM-ROWS-EXAMPLES)
+
+
+
+The `tsm_system_rows` module provides the table sampling method `SYSTEM_ROWS`, which can be used in the `TABLESAMPLE` clause of a [`SELECT`](sql-select) command.
 
 This table sampling method accepts a single integer argument that is the maximum number of rows to read. The resulting sample will always contain exactly that many rows, unless the table does not contain enough rows, in which case the whole table is selected.
 
@@ -12,19 +16,19 @@ Like the built-in `SYSTEM` sampling method, `SYSTEM_ROWS` performs block-level s
 
 This module is considered “trusted”, that is, it can be installed by non-superusers who have `CREATE` privilege on the current database.
 
-### F.45.1. Examples [#](#TSM-SYSTEM-ROWS-EXAMPLES)
+[#id](#TSM-SYSTEM-ROWS-EXAMPLES)
+
+### F.46.1. Examples [#](#TSM-SYSTEM-ROWS-EXAMPLES)
 
 Here is an example of selecting a sample of a table with `SYSTEM_ROWS`. First install the extension:
 
 ```
-
 CREATE EXTENSION tsm_system_rows;
 ```
 
 Then you can use it in a `SELECT` command, for instance:
 
 ```
-
 SELECT * FROM my_table TABLESAMPLE SYSTEM_ROWS(100);
 ```
 

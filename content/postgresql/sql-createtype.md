@@ -1,3 +1,5 @@
+[#id](#SQL-CREATETYPE)
+
 ## CREATE TYPE
 
 CREATE TYPE — define a new data type
@@ -5,7 +7,6 @@ CREATE TYPE — define a new data type
 ## Synopsis
 
 ```
-
 CREATE TYPE name AS
     ( [ attribute_name data_type [ COLLATE collation ] [, ... ] ] )
 
@@ -46,6 +47,8 @@ CREATE TYPE name (
 CREATE TYPE name
 ```
 
+[#id](#id-1.9.3.94.5)
+
 ## Description
 
 `CREATE TYPE` registers a new data type for use in the current database. The user who defines a type becomes its owner.
@@ -54,27 +57,35 @@ If a schema name is given then the type is created in the specified schema. Othe
 
 There are five forms of `CREATE TYPE`, as shown in the syntax synopsis above. They respectively create a *composite type*, an *enum type*, a *range type*, a *base type*, or a *shell type*. The first four of these are discussed in turn below. A shell type is simply a placeholder for a type to be defined later; it is created by issuing `CREATE TYPE` with no parameters except for the type name. Shell types are needed as forward references when creating range types and base types, as discussed in those sections.
 
+[#id](#id-1.9.3.94.5.5)
+
 ### Composite Types
 
 The first form of `CREATE TYPE` creates a composite type. The composite type is specified by a list of attribute names and data types. An attribute's collation can be specified too, if its data type is collatable. A composite type is essentially the same as the row type of a table, but using `CREATE TYPE` avoids the need to create an actual table when all that is wanted is to define a type. A stand-alone composite type is useful, for example, as the argument or return type of a function.
 
 To be able to create a composite type, you must have `USAGE` privilege on all attribute types.
 
+[#id](#SQL-CREATETYPE-ENUM)
+
 ### Enumerated Types
 
-The second form of `CREATE TYPE` creates an enumerated (enum) type, as described in [Section 8.7](datatype-enum.html "8.7. Enumerated Types"). Enum types take a list of quoted labels, each of which must be less than `NAMEDATALEN` bytes long (64 bytes in a standard PostgreSQL build). (It is possible to create an enumerated type with zero labels, but such a type cannot be used to hold values before at least one label is added using [`ALTER TYPE`](sql-altertype.html "ALTER TYPE").)
+The second form of `CREATE TYPE` creates an enumerated (enum) type, as described in [Section 8.7](datatype-enum). Enum types take a list of quoted labels, each of which must be less than `NAMEDATALEN` bytes long (64 bytes in a standard PostgreSQL build). (It is possible to create an enumerated type with zero labels, but such a type cannot be used to hold values before at least one label is added using [`ALTER TYPE`](sql-altertype).)
+
+[#id](#SQL-CREATETYPE-RANGE)
 
 ### Range Types
 
-The third form of `CREATE TYPE` creates a new range type, as described in [Section 8.17](rangetypes.html "8.17. Range Types").
+The third form of `CREATE TYPE` creates a new range type, as described in [Section 8.17](rangetypes).
 
 The range type's *`subtype`* can be any type with an associated b-tree operator class (to determine the ordering of values for the range type). Normally the subtype's default b-tree operator class is used to determine ordering; to use a non-default operator class, specify its name with *`subtype_opclass`*. If the subtype is collatable, and you want to use a non-default collation in the range's ordering, specify the desired collation with the *`collation`* option.
 
-The optional *`canonical`* function must take one argument of the range type being defined, and return a value of the same type. This is used to convert range values to a canonical form, when applicable. See [Section 8.17.8](rangetypes.html#RANGETYPES-DEFINING "8.17.8. Defining New Range Types") for more information. Creating a *`canonical`* function is a bit tricky, since it must be defined before the range type can be declared. To do this, you must first create a shell type, which is a placeholder type that has no properties except a name and an owner. This is done by issuing the command `CREATE TYPE name`, with no additional parameters. Then the function can be declared using the shell type as argument and result, and finally the range type can be declared using the same name. This automatically replaces the shell type entry with a valid range type.
+The optional *`canonical`* function must take one argument of the range type being defined, and return a value of the same type. This is used to convert range values to a canonical form, when applicable. See [Section 8.17.8](rangetypes#RANGETYPES-DEFINING) for more information. Creating a *`canonical`* function is a bit tricky, since it must be defined before the range type can be declared. To do this, you must first create a shell type, which is a placeholder type that has no properties except a name and an owner. This is done by issuing the command `CREATE TYPE name`, with no additional parameters. Then the function can be declared using the shell type as argument and result, and finally the range type can be declared using the same name. This automatically replaces the shell type entry with a valid range type.
 
-The optional *`subtype_diff`* function must take two values of the *`subtype`* type as argument, and return a `double precision` value representing the difference between the two given values. While this is optional, providing it allows much greater efficiency of GiST indexes on columns of the range type. See [Section 8.17.8](rangetypes.html#RANGETYPES-DEFINING "8.17.8. Defining New Range Types") for more information.
+The optional *`subtype_diff`* function must take two values of the *`subtype`* type as argument, and return a `double precision` value representing the difference between the two given values. While this is optional, providing it allows much greater efficiency of GiST indexes on columns of the range type. See [Section 8.17.8](rangetypes#RANGETYPES-DEFINING) for more information.
 
 The optional *`multirange_type_name`* parameter specifies the name of the corresponding multirange type. If not specified, this name is chosen automatically as follows. If the range type name contains the substring `range`, then the multirange type name is formed by replacement of the `range` substring with `multirange` in the range type name. Otherwise, the multirange type name is formed by appending a `_multirange` suffix to the range type name.
+
+[#id](#id-1.9.3.94.5.8)
 
 ### Base Types
 
@@ -92,9 +103,9 @@ The optional *`type_modifier_input_function`* and *`type_modifier_output_functio
 
 The optional *`analyze_function`* performs type-specific statistics collection for columns of the data type. By default, `ANALYZE` will attempt to gather statistics using the type's “equals” and “less-than” operators, if there is a default b-tree operator class for the type. For non-scalar types this behavior is likely to be unsuitable, so it can be overridden by specifying a custom analysis function. The analysis function must be declared to take a single argument of type `internal`, and return a `boolean` result. The detailed API for analysis functions appears in `src/include/commands/vacuum.h`.
 
-The optional *`subscript_function`* allows the data type to be subscripted in SQL commands. Specifying this function does not cause the type to be considered a “true” array type; for example, it will not be a candidate for the result type of `ARRAY[]` constructs. But if subscripting a value of the type is a natural notation for extracting data from it, then a *`subscript_function`* can be written to define what that means. The subscript function must be declared to take a single argument of type `internal`, and return an `internal` result, which is a pointer to a struct of methods (functions) that implement subscripting. The detailed API for subscript functions appears in `src/include/nodes/subscripting.h`. It may also be useful to read the array implementation in `src/backend/utils/adt/arraysubs.c`, or the simpler code in `contrib/hstore/hstore_subs.c`. Additional information appears in [Array Types](sql-createtype.html#SQL-CREATETYPE-ARRAY "Array Types") below.
+The optional *`subscript_function`* allows the data type to be subscripted in SQL commands. Specifying this function does not cause the type to be considered a “true” array type; for example, it will not be a candidate for the result type of `ARRAY[]` constructs. But if subscripting a value of the type is a natural notation for extracting data from it, then a *`subscript_function`* can be written to define what that means. The subscript function must be declared to take a single argument of type `internal`, and return an `internal` result, which is a pointer to a struct of methods (functions) that implement subscripting. The detailed API for subscript functions appears in `src/include/nodes/subscripting.h`. It may also be useful to read the array implementation in `src/backend/utils/adt/arraysubs.c`, or the simpler code in `contrib/hstore/hstore_subs.c`. Additional information appears in [Array Types](sql-createtype#SQL-CREATETYPE-ARRAY) below.
 
-While the details of the new type's internal representation are only known to the I/O functions and other functions you create to work with the type, there are several properties of the internal representation that must be declared to PostgreSQL. Foremost of these is *`internallength`*. Base data types can be fixed-length, in which case *`internallength`* is a positive integer, or variable-length, indicated by setting *`internallength`* to `VARIABLE`. (Internally, this is represented by setting `typlen` to -1.) The internal representation of all variable-length types must start with a 4-byte integer giving the total length of this value of the type. (Note that the length field is often encoded, as described in [Section 73.2](storage-toast.html "73.2. TOAST"); it's unwise to access it directly.)
+While the details of the new type's internal representation are only known to the I/O functions and other functions you create to work with the type, there are several properties of the internal representation that must be declared to PostgreSQL. Foremost of these is *`internallength`*. Base data types can be fixed-length, in which case *`internallength`* is a positive integer, or variable-length, indicated by setting *`internallength`* to `VARIABLE`. (Internally, this is represented by setting `typlen` to -1.) The internal representation of all variable-length types must start with a 4-byte integer giving the total length of this value of the type. (Note that the length field is often encoded, as described in [Section 73.2](storage-toast); it's unwise to access it directly.)
 
 The optional flag `PASSEDBYVALUE` indicates that values of this data type are passed by value, rather than by reference. Types passed by value must be fixed-length, and their internal representation cannot be larger than the size of the `Datum` type (4 bytes on some machines, 8 bytes on others).
 
@@ -102,19 +113,21 @@ The *`alignment`* parameter specifies the storage alignment required for the dat
 
 The *`storage`* parameter allows selection of storage strategies for variable-length data types. (Only `plain` is allowed for fixed-length types.) `plain` specifies that data of the type will always be stored in-line and not compressed. `extended` specifies that the system will first try to compress a long data value, and will move the value out of the main table row if it's still too long. `external` allows the value to be moved out of the main table, but the system will not try to compress it. `main` allows compression, but discourages moving the value out of the main table. (Data items with this storage strategy might still be moved out of the main table if there is no other way to make a row fit, but they will be kept in the main table preferentially over `extended` and `external` items.)
 
-All *`storage`* values other than `plain` imply that the functions of the data type can handle values that have been *toasted*, as described in [Section 73.2](storage-toast.html "73.2. TOAST") and [Section 38.13.1](xtypes.html#XTYPES-TOAST "38.13.1. TOAST Considerations"). The specific other value given merely determines the default TOAST storage strategy for columns of a toastable data type; users can pick other strategies for individual columns using `ALTER TABLE SET STORAGE`.
+All *`storage`* values other than `plain` imply that the functions of the data type can handle values that have been *toasted*, as described in [Section 73.2](storage-toast) and [Section 38.13.1](xtypes#XTYPES-TOAST). The specific other value given merely determines the default TOAST storage strategy for columns of a toastable data type; users can pick other strategies for individual columns using `ALTER TABLE SET STORAGE`.
 
 The *`like_type`* parameter provides an alternative method for specifying the basic representation properties of a data type: copy them from some existing type. The values of *`internallength`*, *`passedbyvalue`*, *`alignment`*, and *`storage`* are copied from the named type. (It is possible, though usually undesirable, to override some of these values by specifying them along with the `LIKE` clause.) Specifying representation this way is especially useful when the low-level implementation of the new type “piggybacks” on an existing type in some fashion.
 
-The *`category`* and *`preferred`* parameters can be used to help control which implicit cast will be applied in ambiguous situations. Each data type belongs to a category named by a single ASCII character, and each type is either “preferred” or not within its category. The parser will prefer casting to preferred types (but only from other types within the same category) when this rule is helpful in resolving overloaded functions or operators. For more details see [Chapter 10](typeconv.html "Chapter 10. Type Conversion"). For types that have no implicit casts to or from any other types, it is sufficient to leave these settings at the defaults. However, for a group of related types that have implicit casts, it is often helpful to mark them all as belonging to a category and select one or two of the “most general” types as being preferred within the category. The *`category`* parameter is especially useful when adding a user-defined type to an existing built-in category, such as the numeric or string types. However, it is also possible to create new entirely-user-defined type categories. Select any ASCII character other than an upper-case letter to name such a category.
+The *`category`* and *`preferred`* parameters can be used to help control which implicit cast will be applied in ambiguous situations. Each data type belongs to a category named by a single ASCII character, and each type is either “preferred” or not within its category. The parser will prefer casting to preferred types (but only from other types within the same category) when this rule is helpful in resolving overloaded functions or operators. For more details see [Chapter 10](typeconv). For types that have no implicit casts to or from any other types, it is sufficient to leave these settings at the defaults. However, for a group of related types that have implicit casts, it is often helpful to mark them all as belonging to a category and select one or two of the “most general” types as being preferred within the category. The *`category`* parameter is especially useful when adding a user-defined type to an existing built-in category, such as the numeric or string types. However, it is also possible to create new entirely-user-defined type categories. Select any ASCII character other than an upper-case letter to name such a category.
 
 A default value can be specified, in case a user wants columns of the data type to default to something other than the null value. Specify the default with the `DEFAULT` key word. (Such a default can be overridden by an explicit `DEFAULT` clause attached to a particular column.)
 
-To indicate that a type is a fixed-length array type, specify the type of the array elements using the `ELEMENT` key word. For example, to define an array of 4-byte integers (`int4`), specify `ELEMENT = int4`. For more details, see [Array Types](sql-createtype.html#SQL-CREATETYPE-ARRAY "Array Types") below.
+To indicate that a type is a fixed-length array type, specify the type of the array elements using the `ELEMENT` key word. For example, to define an array of 4-byte integers (`int4`), specify `ELEMENT = int4`. For more details, see [Array Types](sql-createtype#SQL-CREATETYPE-ARRAY) below.
 
 To indicate the delimiter to be used between values in the external representation of arrays of this type, *`delimiter`* can be set to a specific character. The default delimiter is the comma (`,`). Note that the delimiter is associated with the array element type, not the array type itself.
 
 If the optional Boolean parameter *`collatable`* is true, column definitions and expressions of the type may carry collation information through use of the `COLLATE` clause. It is up to the implementations of the functions operating on the type to actually make use of the collation information; this does not happen automatically merely by marking the type collatable.
+
+[#id](#SQL-CREATETYPE-ARRAY)
 
 ### Array Types
 
@@ -126,119 +139,123 @@ Specifying the `SUBSCRIPT` option allows a data type to be subscripted, even tho
 
 When specifying a custom `SUBSCRIPT` function, it is not necessary to specify `ELEMENT` unless the `SUBSCRIPT` handler function needs to consult `typelem` to find out what to return. Be aware that specifying `ELEMENT` causes the system to assume that the new type contains, or is somehow physically dependent on, the element type; thus for example changing properties of the element type won't be allowed if there are any columns of the dependent type.
 
+[#id](#id-1.9.3.94.6)
+
 ## Parameters
 
 * *`name`*
 
-    The name (optionally schema-qualified) of a type to be created.
+  The name (optionally schema-qualified) of a type to be created.
 
 * *`attribute_name`*
 
-    The name of an attribute (column) for the composite type.
+  The name of an attribute (column) for the composite type.
 
 * *`data_type`*
 
-    The name of an existing data type to become a column of the composite type.
+  The name of an existing data type to become a column of the composite type.
 
 * *`collation`*
 
-    The name of an existing collation to be associated with a column of a composite type, or with a range type.
+  The name of an existing collation to be associated with a column of a composite type, or with a range type.
 
 * *`label`*
 
-    A string literal representing the textual label associated with one value of an enum type.
+  A string literal representing the textual label associated with one value of an enum type.
 
 * *`subtype`*
 
-    The name of the element type that the range type will represent ranges of.
+  The name of the element type that the range type will represent ranges of.
 
 * *`subtype_operator_class`*
 
-    The name of a b-tree operator class for the subtype.
+  The name of a b-tree operator class for the subtype.
 
 * *`canonical_function`*
 
-    The name of the canonicalization function for the range type.
+  The name of the canonicalization function for the range type.
 
 * *`subtype_diff_function`*
 
-    The name of a difference function for the subtype.
+  The name of a difference function for the subtype.
 
 * *`multirange_type_name`*
 
-    The name of the corresponding multirange type.
+  The name of the corresponding multirange type.
 
 * *`input_function`*
 
-    The name of a function that converts data from the type's external textual form to its internal form.
+  The name of a function that converts data from the type's external textual form to its internal form.
 
 * *`output_function`*
 
-    The name of a function that converts data from the type's internal form to its external textual form.
+  The name of a function that converts data from the type's internal form to its external textual form.
 
 * *`receive_function`*
 
-    The name of a function that converts data from the type's external binary form to its internal form.
+  The name of a function that converts data from the type's external binary form to its internal form.
 
 * *`send_function`*
 
-    The name of a function that converts data from the type's internal form to its external binary form.
+  The name of a function that converts data from the type's internal form to its external binary form.
 
 * *`type_modifier_input_function`*
 
-    The name of a function that converts an array of modifier(s) for the type into internal form.
+  The name of a function that converts an array of modifier(s) for the type into internal form.
 
 * *`type_modifier_output_function`*
 
-    The name of a function that converts the internal form of the type's modifier(s) to external textual form.
+  The name of a function that converts the internal form of the type's modifier(s) to external textual form.
 
 * *`analyze_function`*
 
-    The name of a function that performs statistical analysis for the data type.
+  The name of a function that performs statistical analysis for the data type.
 
 * *`subscript_function`*
 
-    The name of a function that defines what subscripting a value of the data type does.
+  The name of a function that defines what subscripting a value of the data type does.
 
 * *`internallength`*
 
-    A numeric constant that specifies the length in bytes of the new type's internal representation. The default assumption is that it is variable-length.
+  A numeric constant that specifies the length in bytes of the new type's internal representation. The default assumption is that it is variable-length.
 
 * *`alignment`*
 
-    The storage alignment requirement of the data type. If specified, it must be `char`, `int2`, `int4`, or `double`; the default is `int4`.
+  The storage alignment requirement of the data type. If specified, it must be `char`, `int2`, `int4`, or `double`; the default is `int4`.
 
 * *`storage`*
 
-    The storage strategy for the data type. If specified, must be `plain`, `external`, `extended`, or `main`; the default is `plain`.
+  The storage strategy for the data type. If specified, must be `plain`, `external`, `extended`, or `main`; the default is `plain`.
 
 * *`like_type`*
 
-    The name of an existing data type that the new type will have the same representation as. The values of *`internallength`*, *`passedbyvalue`*, *`alignment`*, and *`storage`* are copied from that type, unless overridden by explicit specification elsewhere in this `CREATE TYPE` command.
+  The name of an existing data type that the new type will have the same representation as. The values of *`internallength`*, *`passedbyvalue`*, *`alignment`*, and *`storage`* are copied from that type, unless overridden by explicit specification elsewhere in this `CREATE TYPE` command.
 
 * *`category`*
 
-    The category code (a single ASCII character) for this type. The default is `'U'` for “user-defined type”. Other standard category codes can be found in [Table 53.65](catalog-pg-type.html#CATALOG-TYPCATEGORY-TABLE "Table 53.65. typcategory Codes"). You may also choose other ASCII characters in order to create custom categories.
+  The category code (a single ASCII character) for this type. The default is `'U'` for “user-defined type”. Other standard category codes can be found in [Table 53.65](catalog-pg-type#CATALOG-TYPCATEGORY-TABLE). You may also choose other ASCII characters in order to create custom categories.
 
 * *`preferred`*
 
-    True if this type is a preferred type within its type category, else false. The default is false. Be very careful about creating a new preferred type within an existing type category, as this could cause surprising changes in behavior.
+  True if this type is a preferred type within its type category, else false. The default is false. Be very careful about creating a new preferred type within an existing type category, as this could cause surprising changes in behavior.
 
 * *`default`*
 
-    The default value for the data type. If this is omitted, the default is null.
+  The default value for the data type. If this is omitted, the default is null.
 
 * *`element`*
 
-    The type being created is an array; this specifies the type of the array elements.
+  The type being created is an array; this specifies the type of the array elements.
 
 * *`delimiter`*
 
-    The delimiter character to be used between values in arrays made of this type.
+  The delimiter character to be used between values in arrays made of this type.
 
 * *`collatable`*
 
-    True if this type's operations can use collation information. The default is false.
+  True if this type's operations can use collation information. The default is false.
+
+[#id](#SQL-CREATETYPE-NOTES)
 
 ## Notes
 
@@ -252,12 +269,13 @@ Before PostgreSQL version 8.2, the shell-type creation syntax `CREATE TYPE name`
 
 In PostgreSQL version 16 and later, it is desirable for base types' input functions to return “soft” errors using the new `errsave()`/`ereturn()` mechanism, rather than throwing `ereport()` exceptions as in previous versions. See `src/backend/utils/fmgr/README` for more information.
 
+[#id](#id-1.9.3.94.8)
+
 ## Examples
 
 This example creates a composite type and uses it in a function definition:
 
 ```
-
 CREATE TYPE compfoo AS (f1 int, f2 text);
 
 CREATE FUNCTION getfoo() RETURNS SETOF compfoo AS $$
@@ -268,7 +286,6 @@ $$ LANGUAGE SQL;
 This example creates an enumerated type and uses it in a table definition:
 
 ```
-
 CREATE TYPE bug_status AS ENUM ('new', 'open', 'closed');
 
 CREATE TABLE bug (
@@ -281,14 +298,12 @@ CREATE TABLE bug (
 This example creates a range type:
 
 ```
-
 CREATE TYPE float8_range AS RANGE (subtype = float8, subtype_diff = float8mi);
 ```
 
 This example creates the base data type `box` and then uses the type in a table definition:
 
 ```
-
 CREATE TYPE box;
 
 CREATE FUNCTION my_box_in_function(cstring) RETURNS box AS ... ;
@@ -309,7 +324,6 @@ CREATE TABLE myboxes (
 If the internal structure of `box` were an array of four `float4` elements, we might instead use:
 
 ```
-
 CREATE TYPE box (
     INTERNALLENGTH = 16,
     INPUT = my_box_in_function,
@@ -323,7 +337,6 @@ which would allow a box value's component numbers to be accessed by subscripting
 This example creates a large object type and uses it in a table definition:
 
 ```
-
 CREATE TYPE bigobj (
     INPUT = lo_filein, OUTPUT = lo_fileout,
     INTERNALLENGTH = VARIABLE
@@ -334,7 +347,9 @@ CREATE TABLE big_objs (
 );
 ```
 
-More examples, including suitable input and output functions, are in [Section 38.13](xtypes.html "38.13. User-Defined Types").
+More examples, including suitable input and output functions, are in [Section 38.13](xtypes).
+
+[#id](#SQL-CREATETYPE-COMPATIBILITY)
 
 ## Compatibility
 
@@ -342,6 +357,8 @@ The first form of the `CREATE TYPE` command, which creates a composite type, con
 
 The ability to create a composite type with zero attributes is a PostgreSQL-specific deviation from the standard (analogous to the same case in `CREATE TABLE`).
 
+[#id](#SQL-CREATETYPE-SEE-ALSO)
+
 ## See Also
 
-[ALTER TYPE](sql-altertype.html "ALTER TYPE"), [CREATE DOMAIN](sql-createdomain.html "CREATE DOMAIN"), [CREATE FUNCTION](sql-createfunction.html "CREATE FUNCTION"), [DROP TYPE](sql-droptype.html "DROP TYPE")
+[ALTER TYPE](sql-altertype), [CREATE DOMAIN](sql-createdomain), [CREATE FUNCTION](sql-createfunction), [DROP TYPE](sql-droptype)

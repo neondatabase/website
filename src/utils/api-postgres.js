@@ -15,23 +15,23 @@ const getPostSlugs = async (pathname) => {
 
 const findTitle = (sidebar, currentSlug) => {
   let title = '';
+
+  if (currentSlug === 'index') {
+    title = 'PostgreSQL 16.0 Documentation';
+  }
+  if (currentSlug === 'legalnotice') {
+    title = 'Legal Notice';
+  }
   sidebar.forEach((item) => {
-    if (item.slug === 'index') {
-      title = 'PostgreSQL 17devel Documentation';
-    }
-    if (item.slug === 'legalnotice') {
-      title = 'Legal Notice';
-    }
     if (item.slug === currentSlug) {
       title = item.title;
-    } else if (item.items) {
-      item.items.forEach((child) => {
-        if (child.slug === currentSlug) {
-          title = child.title;
-        }
-      });
+    }
+
+    if (!title && item.items) {
+      title = findTitle(item.items, currentSlug);
     }
   });
+
   return title;
 };
 
@@ -44,6 +44,7 @@ const getPostBySlug = async (path, basePath) => {
     const sidebarData = JSON.parse(sidebar);
 
     const title = findTitle(sidebarData, currentSlug);
+
     const excerpt = getExcerpt(content, 200);
 
     return { title, excerpt, content };

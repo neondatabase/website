@@ -2,7 +2,7 @@
 title: Manage databases
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-10-20T14:08:54.556Z'
+updatedOn: '2023-11-24T19:55:37.127Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is no limit on the number of databases you can create.
@@ -12,7 +12,7 @@ A Neon project's primary branch is created with a ready-to-use database called `
 All databases in Neon are created with a `public` schema. SQL objects are created in the `public` schema, by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
 
 <Admonition type="note">
-As of Postgres 15, only a database owner has the `CREATE` privilege on a database's `public` schema. For other users, the `CREATE` privilege must be granted manually via a `GRANT CREATE ON SCHEMA public TO <username>;` statement.
+As of Postgres 15, only a database owner has the `CREATE` privilege on a database's `public` schema. For other users, the `CREATE` privilege must be granted manually via a `GRANT CREATE ON SCHEMA public TO <username>;` statement. For more information, see [Public schema privileges](/docs/manage/database-access#public-schema-privileges).
 </Admonition>
 
 Databases belong to a branch. If you create a child branch, databases from the parent branch are copied to the child branch. For example, if database `mydb` exists in the parent branch, it will be copied to the child branch. The only time this does not occur is when you create a branch that includes data up to a particular point in time. If a database was created in the parent branch after that point in time, it is not duplicated in the child branch.
@@ -36,7 +36,7 @@ To create a database:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Databases**.
+1. Select **Databases** from the sidebar.
 1. Select the branch where you want to create the database.
 1. Click **New Database**.
 1. Enter a database name, and select a database owner.
@@ -52,7 +52,7 @@ To view databases:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Databases**
+1. Select **Databases** from the sidebar.
 1. Select a branch to view the databases in the branch.
 
 ### Delete a database
@@ -63,7 +63,7 @@ To delete a database:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Databases**.
+1. Select **Databases** from the sidebar.
 1. Select a branch to view the databases in the branch.
 1. For the database you want to delete, click the delete icon.
 1. In the confirmation dialog, click **Delete**.
@@ -352,6 +352,4 @@ The following names are protected and cannot be given to a database:
 - `template0`
 - `template1`
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

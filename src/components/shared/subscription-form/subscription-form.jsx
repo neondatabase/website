@@ -149,6 +149,7 @@ const SubscriptionForm = ({
               animate="animate"
               exit="exit"
               variants={appearAndExitAnimationVariants}
+              data-test="error-message"
             >
               {errorMessage}
             </m.span>
@@ -235,7 +236,10 @@ const SubscriptionForm = ({
               aria-hidden
             >
               {formState === 'success' && (
-                <CheckIcon className={clsx(sizeClassNames[size].stateIcon)} />
+                <CheckIcon
+                  className={clsx(sizeClassNames[size].stateIcon)}
+                  data-test="success-message"
+                />
               )}
               {formState === 'error' && (
                 <ErrorIcon className={clsx(sizeClassNames[size].stateIcon)} />

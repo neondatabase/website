@@ -21,6 +21,7 @@ const Item = ({
   isStandalone = false,
   items = null,
   closeMenu = null,
+  isChildren = false,
 }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
@@ -45,10 +46,11 @@ const Item = ({
   const Tag = slug ? Link : 'button';
 
   return (
-    <li className="flex flex-col">
+    <li className="flex flex-col group/item">
       <Tag
         className={clsx(
           'group flex w-full items-start justify-between py-2 text-left text-sm transition-colors duration-200',
+          { 'group-first/item:pt-0': !isChildren },
           currentSlug === slug
             ? 'font-medium text-black-new dark:text-white'
             : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white'
@@ -92,7 +94,13 @@ const Item = ({
                 }}
               >
                 {items.map((item, index) => (
-                  <Item {...item} key={index} closeMenu={closeMenu} basePath={basePath} />
+                  <Item
+                    {...item}
+                    key={index}
+                    closeMenu={closeMenu}
+                    basePath={basePath}
+                    isChildren
+                  />
                 ))}
               </m.ul>
             ) : null}
@@ -118,6 +126,7 @@ Item.propTypes = {
     })
   ),
   closeMenu: PropTypes.func,
+  isChildren: PropTypes.bool,
 };
 
 export default Item;

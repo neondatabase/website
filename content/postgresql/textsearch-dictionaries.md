@@ -1,11 +1,13 @@
+[#id](#TEXTSEARCH-DICTIONARIES)
+
 ## 12.6. Dictionaries [#](#TEXTSEARCH-DICTIONARIES)
 
-  * *   [12.6.1. Stop Words](textsearch-dictionaries.html#TEXTSEARCH-STOPWORDS)
-  * [12.6.2. Simple Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SIMPLE-DICTIONARY)
-  * [12.6.3. Synonym Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SYNONYM-DICTIONARY)
-  * [12.6.4. Thesaurus Dictionary](textsearch-dictionaries.html#TEXTSEARCH-THESAURUS)
-  * [12.6.5. Ispell Dictionary](textsearch-dictionaries.html#TEXTSEARCH-ISPELL-DICTIONARY)
-  * [12.6.6. Snowball Dictionary](textsearch-dictionaries.html#TEXTSEARCH-SNOWBALL-DICTIONARY)
+  * [12.6.1. Stop Words](textsearch-dictionaries#TEXTSEARCH-STOPWORDS)
+  * [12.6.2. Simple Dictionary](textsearch-dictionaries#TEXTSEARCH-SIMPLE-DICTIONARY)
+  * [12.6.3. Synonym Dictionary](textsearch-dictionaries#TEXTSEARCH-SYNONYM-DICTIONARY)
+  * [12.6.4. Thesaurus Dictionary](textsearch-dictionaries#TEXTSEARCH-THESAURUS)
+  * [12.6.5. Ispell Dictionary](textsearch-dictionaries#TEXTSEARCH-ISPELL-DICTIONARY)
+  * [12.6.6. Snowball Dictionary](textsearch-dictionaries#TEXTSEARCH-SNOWBALL-DICTIONARY)
 
 Dictionaries are used to eliminate words that should not be considered in a search (*stop words*), and to *normalize* words so that different derived forms of the same word will match. A successfully normalized word is called a *lexeme*. Aside from improving search quality, normalization and removal of stop words reduce the size of the `tsvector` representation of a document, thereby improving performance. Normalization does not always have linguistic meaning and usually depends on application semantics.
 
@@ -16,7 +18,9 @@ Some examples of normalization:
 * URL locations can be canonicalized to make equivalent URLs match:
 
   * http\://www\.pgsql.ru/db/mw/index.html
+
   * http\://www\.pgsql.ru/db/mw/
+
   * http\://www\.pgsql.ru/db/../db/mw/index.html
 
 * Color names can be replaced by their hexadecimal values, e.g., `red, green, blue, magenta -> FF0000, 00FF00, 0000FF, FF00FF`
@@ -26,8 +30,11 @@ Some examples of normalization:
 A dictionary is a program that accepts a token as input and returns:
 
 * an array of lexemes if the input token is known to the dictionary (notice that one token can produce more than one lexeme)
+
 * a single lexeme with the `TSL_FILTER` flag set, to replace the original token with a new token to be passed to subsequent dictionaries (a dictionary that does this is called a *filtering dictionary*)
+
 * an empty array if the dictionary knows the token, but it is a stop word
+
 * `NULL` if the dictionary does not recognize the input token
 
 PostgreSQL provides predefined dictionaries for many languages. There are also several predefined templates that can be used to create new dictionaries with custom parameters. Each predefined dictionary template is described below. If no existing template is suitable, it is possible to create new ones; see the `contrib/` area of the PostgreSQL distribution for examples.
@@ -37,19 +44,19 @@ A text search configuration binds a parser together with a set of dictionaries t
 The general rule for configuring a list of dictionaries is to place first the most narrow, most specific dictionary, then the more general dictionaries, finishing with a very general dictionary, like a Snowball stemmer or `simple`, which recognizes everything. For example, for an astronomy-specific search (`astro_en` configuration) one could bind token type `asciiword` (ASCII word) to a synonym dictionary of astronomical terms, a general English dictionary and a Snowball English stemmer:
 
 ```
-
 ALTER TEXT SEARCH CONFIGURATION astro_en
     ADD MAPPING FOR asciiword WITH astrosyn, english_ispell, english_stem;
 ```
 
-A filtering dictionary can be placed anywhere in the list, except at the end where it'd be useless. Filtering dictionaries are useful to partially normalize words to simplify the task of later dictionaries. For example, a filtering dictionary could be used to remove accents from accented letters, as is done by the [unaccent](unaccent.html "F.47. unaccent — a text search dictionary which removes diacritics") module.
+A filtering dictionary can be placed anywhere in the list, except at the end where it'd be useless. Filtering dictionaries are useful to partially normalize words to simplify the task of later dictionaries. For example, a filtering dictionary could be used to remove accents from accented letters, as is done by the [unaccent](unaccent) module.
+
+[#id](#TEXTSEARCH-STOPWORDS)
 
 ### 12.6.1. Stop Words [#](#TEXTSEARCH-STOPWORDS)
 
 Stop words are words that are very common, appear in almost every document, and have no discrimination value. Therefore, they can be ignored in the context of full text searching. For example, every English text contains words like `a` and `the`, so it is useless to store them in an index. However, stop words do affect the positions in `tsvector`, which in turn affect ranking:
 
 ```
-
 SELECT to_tsvector('english', 'in the list of stop words');
         to_tsvector
 ----------------------------
@@ -59,7 +66,6 @@ SELECT to_tsvector('english', 'in the list of stop words');
 The missing positions 1,2,4 are because of stop words. Ranks calculated for documents with and without stop words are quite different:
 
 ```
-
 SELECT ts_rank_cd (to_tsvector('english', 'in the list of stop words'), to_tsquery('list & stop'));
  ts_rank_cd
 ------------
@@ -73,6 +79,8 @@ SELECT ts_rank_cd (to_tsvector('english', 'list stop words'), to_tsquery('list &
 
 It is up to the specific dictionary how it treats stop words. For example, `ispell` dictionaries first normalize words and then look at the list of stop words, while `Snowball` stemmers first check the list of stop words. The reason for the different behavior is an attempt to decrease noise.
 
+[#id](#TEXTSEARCH-SIMPLE-DICTIONARY)
+
 ### 12.6.2. Simple Dictionary [#](#TEXTSEARCH-SIMPLE-DICTIONARY)
 
 The `simple` dictionary template operates by converting the input token to lower case and checking it against a file of stop words. If it is found in the file then an empty array is returned, causing the token to be discarded. If not, the lower-cased form of the word is returned as the normalized lexeme. Alternatively, the dictionary can be configured to report non-stop-words as unrecognized, allowing them to be passed on to the next dictionary in the list.
@@ -80,7 +88,6 @@ The `simple` dictionary template operates by converting the input token to lower
 Here is an example of a dictionary definition using the `simple` template:
 
 ```
-
 CREATE TEXT SEARCH DICTIONARY public.simple_dict (
     TEMPLATE = pg_catalog.simple,
     STOPWORDS = english
@@ -92,7 +99,6 @@ Here, `english` is the base name of a file of stop words. The file's full name w
 Now we can test our dictionary:
 
 ```
-
 SELECT ts_lexize('public.simple_dict', 'YeS');
  ts_lexize
 -----------
@@ -107,7 +113,6 @@ SELECT ts_lexize('public.simple_dict', 'The');
 We can also choose to return `NULL`, instead of the lower-cased word, if it is not found in the stop words file. This behavior is selected by setting the dictionary's `Accept` parameter to `false`. Continuing the example:
 
 ```
-
 ALTER TEXT SEARCH DICTIONARY public.simple_dict ( Accept = false );
 
 SELECT ts_lexize('public.simple_dict', 'YeS');
@@ -131,12 +136,13 @@ Most types of dictionaries rely on configuration files, such as files of stop wo
 
 Normally, a database session will read a dictionary configuration file only once, when it is first used within the session. If you modify a configuration file and want to force existing sessions to pick up the new contents, issue an `ALTER TEXT SEARCH DICTIONARY` command on the dictionary. This can be a “dummy” update that doesn't actually change any parameter values.
 
+[#id](#TEXTSEARCH-SYNONYM-DICTIONARY)
+
 ### 12.6.3. Synonym Dictionary [#](#TEXTSEARCH-SYNONYM-DICTIONARY)
 
-This dictionary template is used to create dictionaries that replace a word with a synonym. Phrases are not supported (use the thesaurus template ([Section 12.6.4](textsearch-dictionaries.html#TEXTSEARCH-THESAURUS "12.6.4. Thesaurus Dictionary")) for that). A synonym dictionary can be used to overcome linguistic problems, for example, to prevent an English stemmer dictionary from reducing the word “Paris” to “pari”. It is enough to have a `Paris paris` line in the synonym dictionary and put it before the `english_stem` dictionary. For example:
+This dictionary template is used to create dictionaries that replace a word with a synonym. Phrases are not supported (use the thesaurus template ([Section 12.6.4](textsearch-dictionaries#TEXTSEARCH-THESAURUS)) for that). A synonym dictionary can be used to overcome linguistic problems, for example, to prevent an English stemmer dictionary from reducing the word “Paris” to “pari”. It is enough to have a `Paris paris` line in the synonym dictionary and put it before the `english_stem` dictionary. For example:
 
 ```
-
 SELECT * FROM ts_debug('english', 'Paris');
    alias   |   description   | token |  dictionaries  |  dictionary  | lexemes
 -----------+-----------------+-------+----------------+--------------+---------
@@ -161,10 +167,9 @@ The only parameter required by the `synonym` template is `SYNONYMS`, which is th
 
 The `synonym` template also has an optional parameter `CaseSensitive`, which defaults to `false`. When `CaseSensitive` is `false`, words in the synonym file are folded to lower case, as are input tokens. When it is `true`, words and tokens are not folded to lower case, but are compared as-is.
 
-An asterisk (`*`) can be placed at the end of a synonym in the configuration file. This indicates that the synonym is a prefix. The asterisk is ignored when the entry is used in `to_tsvector()`, but when it is used in `to_tsquery()`, the result will be a query item with the prefix match marker (see [Section 12.3.2](textsearch-controls.html#TEXTSEARCH-PARSING-QUERIES "12.3.2. Parsing Queries")). For example, suppose we have these entries in `$SHAREDIR/tsearch_data/synonym_sample.syn`:
+An asterisk (`*`) can be placed at the end of a synonym in the configuration file. This indicates that the synonym is a prefix. The asterisk is ignored when the entry is used in `to_tsvector()`, but when it is used in `to_tsquery()`, the result will be a query item with the prefix match marker (see [Section 12.3.2](textsearch-controls#TEXTSEARCH-PARSING-QUERIES)). For example, suppose we have these entries in `$SHAREDIR/tsearch_data/synonym_sample.syn`:
 
 ```
-
 postgres        pgsql
 postgresql      pgsql
 postgre pgsql
@@ -175,7 +180,6 @@ indices index*
 Then we will get these results:
 
 ```
-
 mydb=# CREATE TEXT SEARCH DICTIONARY syn (template=synonym, synonyms='synonym_sample');
 mydb=# SELECT ts_lexize('syn', 'indices');
  ts_lexize
@@ -210,6 +214,8 @@ mydb=# SELECT 'indexes are very useful'::tsvector @@ to_tsquery('tst', 'indices'
 (1 row)
 ```
 
+[#id](#TEXTSEARCH-THESAURUS)
+
 ### 12.6.4. Thesaurus Dictionary [#](#TEXTSEARCH-THESAURUS)
 
 A thesaurus dictionary (sometimes abbreviated as TZ) is a collection of words that includes information about the relationships of words and phrases, i.e., broader terms (BT), narrower terms (NT), preferred terms, non-preferred terms, related terms, etc.
@@ -217,7 +223,6 @@ A thesaurus dictionary (sometimes abbreviated as TZ) is a collection of words th
 Basically a thesaurus dictionary replaces all non-preferred terms by one preferred term and, optionally, preserves the original terms for indexing as well. PostgreSQL's current implementation of the thesaurus dictionary is an extension of the synonym dictionary with added *phrase* support. A thesaurus dictionary requires a configuration file of the following format:
 
 ```
-
 # this is a comment
 sample word(s) : indexed word(s)
 more sample word(s) : more indexed word(s)
@@ -233,7 +238,6 @@ The thesaurus dictionary chooses the longest match if there are multiple phrases
 Specific stop words recognized by the subdictionary cannot be specified; instead use `?` to mark the location where any stop word can appear. For example, assuming that `a` and `the` are stop words according to the subdictionary:
 
 ```
-
 ? one ? two : swsw
 ```
 
@@ -245,12 +249,13 @@ Since a thesaurus dictionary has the capability to recognize phrases it must rem
 
 Thesauruses are used during indexing so any change in the thesaurus dictionary's parameters *requires* reindexing. For most other dictionary types, small changes such as adding or removing stopwords does not force reindexing.
 
+[#id](#TEXTSEARCH-THESAURUS-CONFIG)
+
 #### 12.6.4.1. Thesaurus Configuration [#](#TEXTSEARCH-THESAURUS-CONFIG)
 
 To define a new thesaurus dictionary, use the `thesaurus` template. For example:
 
 ```
-
 CREATE TEXT SEARCH DICTIONARY thesaurus_simple (
     TEMPLATE = thesaurus,
     DictFile = mythesaurus,
@@ -261,24 +266,26 @@ CREATE TEXT SEARCH DICTIONARY thesaurus_simple (
 Here:
 
 * `thesaurus_simple` is the new dictionary's name
+
 * `mythesaurus` is the base name of the thesaurus configuration file. (Its full name will be `$SHAREDIR/tsearch_data/mythesaurus.ths`, where `$SHAREDIR` means the installation shared-data directory.)
+
 * `pg_catalog.english_stem` is the subdictionary (here, a Snowball English stemmer) to use for thesaurus normalization. Notice that the subdictionary will have its own configuration (for example, stop words), which is not shown here.
 
 Now it is possible to bind the thesaurus dictionary `thesaurus_simple` to the desired token types in a configuration, for example:
 
 ```
-
 ALTER TEXT SEARCH CONFIGURATION russian
     ALTER MAPPING FOR asciiword, asciihword, hword_asciipart
     WITH thesaurus_simple;
 ```
+
+[#id](#TEXTSEARCH-THESAURUS-EXAMPLES)
 
 #### 12.6.4.2. Thesaurus Example [#](#TEXTSEARCH-THESAURUS-EXAMPLES)
 
 Consider a simple astronomical thesaurus `thesaurus_astro`, which contains some astronomical word combinations:
 
 ```
-
 supernovae stars : sn
 crab nebulae : crab
 ```
@@ -286,7 +293,6 @@ crab nebulae : crab
 Below we create a dictionary and bind some token types to an astronomical thesaurus and English stemmer:
 
 ```
-
 CREATE TEXT SEARCH DICTIONARY thesaurus_astro (
     TEMPLATE = thesaurus,
     DictFile = thesaurus_astro,
@@ -301,7 +307,6 @@ ALTER TEXT SEARCH CONFIGURATION russian
 Now we can see how it works. `ts_lexize` is not very useful for testing a thesaurus, because it treats its input as a single token. Instead we can use `plainto_tsquery` and `to_tsvector` which will break their input strings into multiple tokens:
 
 ```
-
 SELECT plainto_tsquery('supernova star');
  plainto_tsquery
 -----------------
@@ -316,7 +321,6 @@ SELECT to_tsvector('supernova star');
 In principle, one can use `to_tsquery` if you quote the argument:
 
 ```
-
 SELECT to_tsquery('''supernova star''');
  to_tsquery
 ------------
@@ -328,7 +332,6 @@ Notice that `supernova star` matches `supernovae stars` in `thesaurus_astro` bec
 To index the original phrase as well as the substitute, just include it in the right-hand part of the definition:
 
 ```
-
 supernovae stars : sn supernovae stars
 
 SELECT plainto_tsquery('supernova star');
@@ -336,6 +339,8 @@ SELECT plainto_tsquery('supernova star');
 -----------------------------
  'sn' & 'supernova' & 'star'
 ```
+
+[#id](#TEXTSEARCH-ISPELL-DICTIONARY)
 
 ### 12.6.5. Ispell Dictionary [#](#TEXTSEARCH-ISPELL-DICTIONARY)
 
@@ -347,24 +352,22 @@ To create an Ispell dictionary perform these steps:
 
 * download dictionary configuration files. OpenOffice extension files have the `.oxt` extension. It is necessary to extract `.aff` and `.dic` files, change extensions to `.affix` and `.dict`. For some dictionary files it is also needed to convert characters to the UTF-8 encoding with commands (for example, for a Norwegian language dictionary):
 
-    ```
-
-    iconv -f ISO_8859-1 -t UTF-8 -o nn_no.affix nn_NO.aff
-    iconv -f ISO_8859-1 -t UTF-8 -o nn_no.dict nn_NO.dic
-    ```
+  ```
+  iconv -f ISO_8859-1 -t UTF-8 -o nn_no.affix nn_NO.aff
+  iconv -f ISO_8859-1 -t UTF-8 -o nn_no.dict nn_NO.dic
+  ```
 
 * copy files to the `$SHAREDIR/tsearch_data` directory
 
 * load files into PostgreSQL with the following command:
 
-    ```
-
-    CREATE TEXT SEARCH DICTIONARY english_hunspell (
-        TEMPLATE = ispell,
-        DictFile = en_us,
-        AffFile = en_us,
-        Stopwords = english);
-    ```
+  ```
+  CREATE TEXT SEARCH DICTIONARY english_hunspell (
+      TEMPLATE = ispell,
+      DictFile = en_us,
+      AffFile = en_us,
+      Stopwords = english);
+  ```
 
 Here, `DictFile`, `AffFile`, and `StopWords` specify the base names of the dictionary, affixes, and stop-words files. The stop-words file has the same format explained above for the `simple` dictionary type. The format of the other files is not specified here but is available from the above-mentioned web sites.
 
@@ -373,7 +376,6 @@ Ispell dictionaries usually recognize a limited set of words, so they should be 
 The `.affix` file of Ispell has the following structure:
 
 ```
-
 prefixes
 flag *A:
     .           >   RE      # As in enter > reenter
@@ -388,7 +390,6 @@ flag T:
 And the `.dict` file has the following structure:
 
 ```
-
 lapse/ADGRS
 lard/DGRS
 large/PRTY
@@ -398,14 +399,12 @@ lark/MRS
 Format of the `.dict` file is:
 
 ```
-
 basic_form/affix_class_name
 ```
 
 In the `.affix` file every affix flag is described in the following format:
 
 ```
-
 condition > [-stripping_letters,] adding_affix
 ```
 
@@ -414,14 +413,12 @@ Here, condition has a format similar to the format of regular expressions. It ca
 Ispell dictionaries support splitting compound words; a useful feature. Notice that the affix file should specify a special flag using the `compoundwords controlled` statement that marks dictionary words that can participate in compound formation:
 
 ```
-
 compoundwords  controlled z
 ```
 
 Here are some examples for the Norwegian language:
 
 ```
-
 SELECT ts_lexize('norwegian_ispell', 'overbuljongterningpakkmesterassistent');
    {over,buljong,terning,pakk,mester,assistent}
 SELECT ts_lexize('norwegian_ispell', 'sjokoladefabrikk');
@@ -431,7 +428,6 @@ SELECT ts_lexize('norwegian_ispell', 'sjokoladefabrikk');
 MySpell format is a subset of Hunspell. The `.affix` file of Hunspell has the following structure:
 
 ```
-
 PFX A Y 1
 PFX A   0     re         .
 SFX T N 4
@@ -444,15 +440,18 @@ SFX T   0     est        [^ey]
 The first line of an affix class is the header. Fields of an affix rules are listed after the header:
 
 * parameter name (PFX or SFX)
+
 * flag (name of the affix class)
+
 * stripping characters from beginning (at prefix) or end (at suffix) of the word
+
 * adding affix
+
 * condition that has a format similar to the format of regular expressions.
 
 The `.dict` file looks like the `.dict` file of Ispell:
 
 ```
-
 larder/M
 lardy/RT
 large/RSPMYT
@@ -463,12 +462,13 @@ largehearted
 
 MySpell does not support compound words. Hunspell has sophisticated support for compound words. At present, PostgreSQL implements only the basic compound word operations of Hunspell.
 
+[#id](#TEXTSEARCH-SNOWBALL-DICTIONARY)
+
 ### 12.6.6. Snowball Dictionary [#](#TEXTSEARCH-SNOWBALL-DICTIONARY)
 
 The Snowball dictionary template is based on a project by Martin Porter, inventor of the popular Porter's stemming algorithm for the English language. Snowball now provides stemming algorithms for many languages (see the [Snowball site](https://snowballstem.org/) for more information). Each algorithm understands how to reduce common variant forms of words to a base, or stem, spelling within its language. A Snowball dictionary requires a `language` parameter to identify which stemmer to use, and optionally can specify a `stopword` file name that gives a list of words to eliminate. (PostgreSQL's standard stopword lists are also provided by the Snowball project.) For example, there is a built-in definition equivalent to
 
 ```
-
 CREATE TEXT SEARCH DICTIONARY english_stem (
     TEMPLATE = snowball,
     Language = english,

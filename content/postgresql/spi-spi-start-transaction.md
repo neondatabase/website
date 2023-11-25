@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-START-TRANSACTION)
+
 ## SPI\_start\_transaction
 
 SPI\_start\_transaction — obsolete function
@@ -5,9 +7,10 @@ SPI\_start\_transaction — obsolete function
 ## Synopsis
 
 ```
-
 void SPI_start_transaction(void)
 ```
+
+[#id](#id-1.8.12.11.6.5)
 
 ## Description
 
