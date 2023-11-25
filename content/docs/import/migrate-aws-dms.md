@@ -29,18 +29,18 @@ Complete the following steps before you begin:
 4. Select **Target endpoint** as the **Endpoint type**.
 5. Provide an **Endpoint identifier** label for your new target endpoint. In this guide, we use `neon` as the identifier.
 6. In the **Target engine** drop-down menu, select `PostgreSQL`.
-7. Under **Access to endpoint database**, select **Provide access information manually** and enter the information outlined below. You can obtain the connection details from your Neon connection string, which you can find in the **Connection Details** widget on the Neon **Dashboard**. Your  connection string will look similar to this: `postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"`.
+7. Under **Access to endpoint database**, select **Provide access information manually** and enter the information outlined below. You can obtain the connection details from your Neon connection string, which you can find in the **Connection Details** widget on the Neon **Dashboard**. Your  connection string will look similar to this: `postgres://daniel:AbC123dEf@ep-curly-term-54009904.us-east-2.aws.neon.tech/neondb"`.
 
-    - **Server name**: Specify your Neon hostname, which is this portion of your connection string: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
+    - **Server name**: Specify your Neon hostname, which is this portion of your connection string: `ep-curly-term-54009904.us-east-2.aws.neon.tech`
     - **Port**: `5432`
     - **User name**: Specify the Neon user.
     - **Password**: Specify the password in the following format: `endpoint=[endpoint_id]$[password]`, which looks similar to this when defined:
 
       ```text
-      endpoint=ep-cool-darkness-123456$AbC123dEf
+      endpoint=ep-curly-term-54009904$AbC123dEf
       ```
 
-      You can obtain the `endpoint_id` and password from your Neon connection string. The `endpoint_id` appears similar to this: `ep-cool-darkness-123456`. For information about why this password format is required, see [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified). AWS DMS requires the [Option D workaround](https://neon.tech/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field).
+      You can obtain the `endpoint_id` and password from your Neon connection string. The `endpoint_id` appears similar to this: `ep-curly-term-54009904`. For information about why this password format is required, see [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified). AWS DMS requires the [Option D workaround](https://neon.tech/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field).
 
     - **Secure Sockets Layer (SSL) mode**: Select `require`.
     - **Database name**: The name of your Neon database. In this example, we use a database named `neondb`
