@@ -129,11 +129,11 @@ If you want to connect from an application, the **Connection Details** widget on
 
 ## Reset a branch from parent
 
-When working with database branches, you might find yourself in a situation where your working branch diverges too far from its parent. For example, let's say you have two child branches, `staging` and `development`, forked from your `main` production branch. You have been working on the `development` branch and find it is now too far out of date with production. You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the `Reset from parent` feature, you can accomplish this clean reset to the latest data from the parent in a single operation, saving you the manual complication.
+When working with database branches, you might find yourself in a situation where your working branch diverges too far from its parent. For example, let's say you have two child branches `staging` and `development` forked from your `main` production branch. You have been working on the `development` branch and find it is now too far out of date with production. You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the *Reset from parent* feature, you can perform this clean reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
 
 Some key points:
-* You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN resets are not currently supported.
-* This reset is a complete override, not a refresh or a merge. Any local changes you made to the child branch are lost during this reset.
+* You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are not currently supported.
+* This reset is a complete override, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
 * Existing connections will be temporarily interupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
 
 <Tabs labels={["Console", "CLI", "API"]}>
@@ -141,9 +141,9 @@ Some key points:
 <TabItem>
 On the *Branches* page in the Neon Console, select the branch that you want to reset.
 
-The console opens a dashboard for your branch, giving you key infomration about its child branch status: its parent, the last time it was reset, the branching point and other relevent detail.
+The console opens a dashboard for your branch, giving you key information about the branch and its child status: its parent, the last time it was reset, and other relevent detail.
 
-To reset, you can select *Reset from parent* from either the *More* dropdown or the *Last Data Reset* panel.
+To reset the branch, select *Reset from parent* from either the *More* dropdown or the *Last Data Reset* panel.
 
 ![Reset from parent](/docs/manage/reset_from_parent.png)
 
@@ -163,7 +163,7 @@ In the `branch` field, specify the name of the child branch whose data you want 
 </TabItem>
 
 <TabItem>
-Resetting from parent is not directly supported from the API yet. However, you can use the instructions on [Refreshing a branch](docs/guides/branch-refresh) to perform a similar operation using the API. It invovles using the API to create a new branch, transfer the compute endpoint, deleting the old branch, and (optionally) renaming the new branch.
+Resetting from parent is not directly supported from the API. However, you can use the instructions on [Refreshing a branch](docs/guides/branch-refresh) to perform a similar operation. It invovles using the API to create a new branch, transfer the compute endpoint, deleting the old branch, and (optionally) renaming the new branch.
 </TabItem>
 
 </Tabs>
