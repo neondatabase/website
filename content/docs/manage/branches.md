@@ -129,7 +129,7 @@ If you want to connect from an application, the **Connection Details** widget on
 
 ## Reset a branch from parent
 
-When working with database branches, you might find yourself in a situation where your working branch diverges too far from its parent. For example, let's say you have two child branches `staging` and `development` forked from your `main` production branch. You have been working on the `development` branch and find it is now too far out of date with production. You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the *Reset from parent* feature, you can perform this clean reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
+When working with database branches, you might find yourself in a situation where your working branch diverges too far from its parent. For example, let's say you have two child branches `staging` and `development` forked from your `main` production branch. You have been working on the `development` branch and find it is now too far out of date with production. You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the **Reset from parent** feature, you can perform this clean reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
 
 Some key points:
 * You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are not currently supported.
@@ -148,7 +148,7 @@ To reset the branch, select **Reset from parent** from either the **More** dropd
 ![Reset from parent](/docs/manage/reset_from_parent.png)
 
 <Admonition type="note">
-If this branch has children of its own, resetting is blocked. The error dialog lets you delete these child branches, after which you can continue with the reset.
+If this branch has children of its own, resetting is blocked. The resulting error dialog lets you delete these child branches, after which you can continue with the reset.
 </Admonition>
 
 </TabItem>
@@ -175,7 +175,7 @@ neonctl branches reset development --parent --project-id noisy-pond-12345678
 </TabItem>
 
 <TabItem>
-Resetting from parent is not directly supported from the API. However, you can use the instructions on [Refreshing a branch](docs/guides/branch-refresh) to perform a similar operation. It invovles using the API to create a new branch, transfer the compute endpoint, deleting the old branch, and (optionally) renaming the new branch.
+Resetting from parent is not directly supported from the API. However, you can use the instructions on [Refreshing a branch](docs/guides/branch-refresh) to perform a similar operation. It involves using the API to create a new branch, transfer the compute endpoint, deleting the old branch, and (optionally) renaming the new branch.
 </TabItem>
 
 </Tabs>
