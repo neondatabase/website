@@ -22,6 +22,8 @@ Here are the relevant metrics that you can set project-level quotas for:
 
 These consumption metrics represent total cumulative usage across all branches and computes in a given project, accrued so far in a given monthly billing period. Metrics are refreshed on the first day of the following month, when the new billing period starts. 
 
+There is an additional value you can set quota controls for: `logical_size`, which gives you the current size of a particular branch. 
+
 Neon updates these metrics every 15 minutes but it could take up to 1 hour before they are reportable.
 
 To find the current usage level for any of these metrics, see [retrieving details about a project](#retrieving-details-about-a-project). You can read more about these metrics and how they impact billing [here](/docs/introduction/billing).
@@ -349,3 +351,37 @@ Alternatively, you can actively reset a suspended compute by changing the impact
 
 ### Using quotas to actively suspend a user
 If you want to suspend a user for any reason &#8212; for example, suspicious activity or payment issues &#8212; you can use these quotas to actively suspend a given user. For example, setting `active_time_limit` to a very low threshold (e.g., `1`) will force a suspension if the user has 1 second of active compute for that month. To remove this suspension, you can set the threshold temporarily to `0` (infinite) or some value larger than their currently consumed usage.
+
+## Other consumption related settings
+
+In addition to setting hard quota limits against the project as a whole, there are other sizing-related settings you might want to use to control the amount of resources any particular endpoint is able to consume:
+* `autoscaling_limit_min_cu` &#8212; Sets the minimium compute size for the endpoint. The minimum by default is .25 vCPU, but can be increased if your user's project could benefit from a larger compute start size.
+* `autoscaling_limit_max_cu` &#8212; Sets a hard limit on how much compute an endpoint can consume in response to increased demand. For more info on min and max cpu limits, see [Autoscaling](/docs/guides/autoscaling-guide). . 
+* `suspend_timeout_seconds` &#8212; Sets how long an endpoint's alloted compute will remain alive with no current demand. After the timeout period, the endpoint is suspended until demand picks up. This setting is useful for saving compute time for projects with inconsistend demand. For more info, see [Autosuspend](/docs/guides/auto-suspend-guide).
+
+There are several ways you can set these values using the Neon API:
+* As project-level default settings, applied to any branch's compute created in a given project (unless there is an explicit override). See [Create a project](https://api-docs.neon.tech/reference/createproject). These default values are set in the
+`default_endpoint_settings` object. See sample CURL request
+<details>
+<summary>Sample CURL</summary>
+```curl
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "project": {
+    "default_endpoint_settings": {
+      "autoscaling_limit_min_cu": 1,
+      "autoscaling_limit_max_cu": 3,
+      "suspend_timeout_seconds": 600
+    },
+    "pg_version": 15
+  }
+}
+' | jq```
+</details>
+* When creating a branch, you can create its endpoint at the same time. See [Create a branch](https://api-docs.neon.tech/reference/createprojectbranch)
+* Or you can create an endpoint for an existing branch independently. See [Create an endpoint](https://api-docs.neon.tech/reference/createprojectendpoint)
