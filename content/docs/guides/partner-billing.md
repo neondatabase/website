@@ -372,7 +372,7 @@ See these sample CURL requests for each method.
 
 <TabItem>
 Default settings applied to any endpoint created in a project. In this sample, we are setting the minimum compute size to 1 vCPU, the max size at 3 vCPU, and a 10 minute inactivty period before the endpoint is suspended.
-
+<CodeBlock>
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects \
@@ -391,9 +391,11 @@ curl --request POST \
   }
 }
 ' | jq```
+</CodeBlock>
 </TabItem>
 <TabItem>
 In this POST request, we are creating an endpoint at the same time that we create the new branch called `NewBranch`.
+<CodeBlock>
 
 ```bash
 curl --request POST \
@@ -415,10 +417,14 @@ curl --request POST \
     }
   ]
 }
-' | jq```
+' | jq
+```
+</CodeBlock>
+
 </TabItem>
 <TabItem>
 In this POST request, we are creating a new endpoint for an already existing branch with ID `br-wandering-field-12345678`, with a min compute of 1 vCPU, a max of 3 vCPU, and a suspend timeout of 10 minutes (600 seconds).
+<CodeBlock>
 
 ```bash
 curl --request POST \
@@ -436,6 +442,9 @@ curl --request POST \
     "branch_id": "br-wandering-field-12345678"
   }
 }
-' | jq```
+' | jq
+```
+</CodeBlock>
+
 </TabItem>
 </Tabs>
