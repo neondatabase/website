@@ -356,32 +356,32 @@ If you want to suspend a user for any reason &#8212; for example, suspicious act
 
 In addition to setting hard quota limits against the project as a whole, there are other sizing-related settings you might want to use to control the amount of resources any particular endpoint is able to consume:
 * `autoscaling_limit_min_cu` &#8212; Sets the minimium compute size for the endpoint. The minimum by default is .25 vCPU, but can be increased if your user's project could benefit from a larger compute start size.
-* `autoscaling_limit_max_cu` &#8212; Sets a hard limit on how much compute an endpoint can consume in response to increased demand. For more info on min and max cpu limits, see [Autoscaling](/docs/guides/autoscaling-guide). . 
+* `autoscaling_limit_max_cu` &#8212; Sets a hard limit on how much compute an endpoint can consume in response to increased demand. For more info on min and max cpu limits, see [Autoscaling](/docs/guides/autoscaling-guide).
 * `suspend_timeout_seconds` &#8212; Sets how long an endpoint's alloted compute will remain alive with no current demand. After the timeout period, the endpoint is suspended until demand picks up. This setting is useful for saving compute time for projects with inconsistend demand. For more info, see [Autosuspend](/docs/guides/auto-suspend-guide).
 
 There are several ways you can set these values using the Neon API:
 * As project-level default settings, applied to any branch's compute created in a given project (unless there is an explicit override). See [Create a project](https://api-docs.neon.tech/reference/createproject). These default values are set in the
 `default_endpoint_settings` object. See sample CURL request
-<details>
-<summary>Sample CURL</summary>
-```curl
-curl --request POST \
-     --url https://console.neon.tech/api/v2/projects \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
-     --data '
-{
-  "project": {
-    "default_endpoint_settings": {
-      "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 3,
-      "suspend_timeout_seconds": 600
-    },
-    "pg_version": 15
-  }
-}
-' | jq```
-</details>
+    <details>
+    <summary>Sample CURL</summary>
+    ```bash
+    curl --request POST \
+         --url https://console.neon.tech/api/v2/projects \
+         --header 'accept: application/json' \
+         --header 'authorization: Bearer $NEON_API_KEY' \
+         --header 'content-type: application/json' \
+         --data '
+    {
+      "project": {
+        "default_endpoint_settings": {
+          "autoscaling_limit_min_cu": 1,
+          "autoscaling_limit_max_cu": 3,
+          "suspend_timeout_seconds": 600
+        },
+        "pg_version": 15
+      }
+    }
+    ' | jq```
+   </details>
 * When creating a branch, you can create its endpoint at the same time. See [Create a branch](https://api-docs.neon.tech/reference/createprojectbranch)
 * Or you can create an endpoint for an existing branch independently. See [Create an endpoint](https://api-docs.neon.tech/reference/createprojectendpoint)
