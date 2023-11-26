@@ -157,9 +157,21 @@ If this branch has children of its own, resetting is blocked. The error dialog l
 Using the CLI, you can reset a branch from parent using the following command:
 
 ``` bash
-neonctl branches reset <branch> --parent
+neonctl branches reset <branch name> --parent
 ```
 In the `branch` field, specify the name of the child branch whose data you want to reset. The `--parent` parameter specifies the kind of reset action that Neon will perform. In the future, there may be other kinds of resets available. For example, rewinding a branch to an earlier period in time.
+
+If you have multiple projects in your account, you'll also have to include the project-id in the command along with the branch.
+
+``` bash
+neonctl branches reset <branch name> --parent --project-id <project id>
+```
+
+Example:
+``` bash
+neonctl branches reset development --parent --project-id noisy-pond-12345678
+```
+
 </TabItem>
 
 <TabItem>
