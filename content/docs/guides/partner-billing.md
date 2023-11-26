@@ -373,7 +373,8 @@ See these sample CURL requests for each method.
 <TabItem>
 Default settings applied to any endpoint created in a project. In this sample, we are setting the minimum compute size to 1 vCPU, the max size at 3 vCPU, and a 10 minute inactivty period before the endpoint is suspended.
 <CodeBlock>
-```bash
+
+``` bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects \
      --header 'accept: application/json' \
@@ -390,14 +391,15 @@ curl --request POST \
     "pg_version": 15
   }
 }
-' | jq```
+' | jq
+```
 </CodeBlock>
 </TabItem>
 <TabItem>
 In this POST request, we are creating an endpoint at the same time that we create the new branch called `NewBranch`.
 <CodeBlock>
 
-```bash
+``` bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/noisy-pond-28482075/branches \
      --header 'accept: application/json' \
@@ -426,7 +428,7 @@ curl --request POST \
 In this POST request, we are creating a new endpoint for an already existing branch with ID `br-wandering-field-12345678`, with a min compute of 1 vCPU, a max of 3 vCPU, and a suspend timeout of 10 minutes (600 seconds).
 <CodeBlock>
 
-```bash
+``` bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/noisy-pond-28482075/endpoints \
      --header 'accept: application/json' \
