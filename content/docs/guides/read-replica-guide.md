@@ -46,7 +46,7 @@ In a few moments, your read-only compute is provisioned and appears in the **Com
 <TabItem>
 
 <CodeBlock showLineNumbers>
-To create a read replica from the Neon CLI, use the [branches](/docs/reference/cli-branches) command and specify type read_only. 
+To create a read replica using the Neon CLI, use the [branches](/docs/reference/cli-branches) command, specifying the `add-compute` and `-type read_only` options. If you have more than one Neon project, also  include the `--project-id` option.  
 
 
 ```bash
@@ -60,6 +60,7 @@ neonctl branches add-compute mybranch --type read_only
 <TabItem>
 
 <CodeBlock showLineNumbers>
+To create a branch using the Neon API:
 
 ```bash
 curl --request POST \
