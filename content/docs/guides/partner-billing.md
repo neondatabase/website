@@ -359,7 +359,7 @@ In addition to setting quota limits against the project as a whole, there are ot
 * `autoscaling_limit_max_cu` &#8212; Sets a hard limit on how much compute an endpoint can consume in response to increased demand. For more info on min and max cpu limits, see [Autoscaling](/docs/guides/autoscaling-guide).
 * `suspend_timeout_seconds` &#8212; Sets how long an endpoint's alloted compute will remain alive with no current demand. After the timeout period, the endpoint is suspended until demand picks up. For more info, see [Autosuspend](/docs/guides/auto-suspend-guide).
 
-There are several ways you can set these endpoint settings using the Neon API: you can set project-level defaults that apply for any new computes created in the project, you can define the endpoint settings when creating a new branch, or you can adjust these settings when createing or updating an endpoint for an existing branch.
+There are several ways you can set these endpoint settings using the Neon API: you can set project-level defaults that apply for any new computes created in the project, you can define the endpoint settings when creating a new branch, or you can adjust these settings when creating or updating an endpoint for an existing branch.
 
 See these sample CURL requests for each method.
 
@@ -425,7 +425,7 @@ curl --request POST \
 <TabItem>
 In this example, we are creating a new endpoint for an already existing branch with ID `br-wandering-field-12345678`, with a min compute of **2 vCPU**, a max of **6 vCPU**, and a suspend timeout of 5 minutes (**300** seconds).
 
-<CodeBlock highlight="1--13">
+<CodeBlock highlight="11-14">
 ``` bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/noisy-pond-28482075/endpoints \
