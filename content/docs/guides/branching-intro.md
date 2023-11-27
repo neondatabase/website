@@ -14,7 +14,7 @@ Learn about branching and how you can apply it in your development workflows.
 
 <a href="/docs/introduction/branching" description="Learn about Neon's branching feature and how to use it in your development workflows" icon="branching">Learn about branching</a>
 
-<a href="https://neon.tech/blog/database-branching-for-postgres-with-neon" description="Blog: Read about how Neon's branching feature works and what it means for your workflows" icon="split-branch">Data branching for Postgres</a>
+<a href="https://neon.tech/blog/database-branching-for-postgres-with-neon" description="Blog: Read about how Neon's branching feature works and what it means for your workflows" icon="split-branch">Database branching for Postgres</a>
 
 </DetailIconCards>
 
