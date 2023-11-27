@@ -24,7 +24,7 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
     ```bash
     cd ~/Downloads
     mkdir ~/liquibase
-    tar -xzvf liquibase-4.24.0.tar.gz -C ~/liquibase/
+    tar -xzvf liquibase-x.yy.z.tar.gz -C ~/liquibase/
     ```
 
 3. Open a command prompt to view the contents of your Liquibase installation:
@@ -39,19 +39,26 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 ## Set your path variable
 
-Add the Liquibase directory to your `PATH`. For example:
+Add the Liquibase directory to your `PATH` so that you can run Liquibase commands from any location.
+
+<CodeTabs labels={["bashrc", "profile", "zsh"]}>
 
 ```bash
 echo 'export PATH=$PATH:/path/to/liquibase' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-or
-
 ```bash
 echo 'export PATH=$PATH:/path/to/liquibase' >> ~/.profile
 source ~/.profile
 ```
+
+```bash
+echo 'export PATH=$PATH:/path/to/liquibase' >> ~/.zshrc
+source ~/.zshrc
+```
+
+</CodeTabs>
 
 ## Verify your installation
 
@@ -60,8 +67,8 @@ Verify that the Liquibase installation was successful by running the following c
 ```bash
 liquibase --version
 ...
-Liquibase Version: 4.24.0
-Liquibase Open Source 4.24.0 by Liquibase
+Liquibase Version: x.yy.z
+Liquibase Open Source x.yy.z by Liquibase
 ```
 
 ## Prepare a Neon database
@@ -192,7 +199,7 @@ Now, you can start making database schema changes by creating [changesets](https
     touch dbchangelog.xml
     ```
 
-2. Add the following changeset, which adds a `comments` table to your database. Replace `author="alex" id="myIDNumber1234"` with your auther name and id, which you can retrieve from youyr changelog file, described in the previous step.
+2. Add the following changeset, which adds a `comments` table to your database. Replace `author="alex" id="myIDNumber1234"` with your auther name and id, which you can retrieve from your changelog file, described in the previous step.
 
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>  

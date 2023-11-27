@@ -23,10 +23,10 @@ To create a point-in-time branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Click **New Branch** to open the branch creation dialog.
-![Create branch dialog](/docs/manage/create_branch.png)
+![Create branch dialog](/docs/guides/create_data_recovery_branch.png)
 4. Enter a name for the branch.
 5. Select a parent branch.
-6. Under **Include data up to**, select the **Specific date and time** option, which creates a branch with data up to the specified date and time. For example, if the data loss occurred on July 11, 2023 at 10:01am, select July 11, 2023, at 10:00am, just before the faulty query was run.
+6. Under **Include data up to**, select the **Specific date and time** option, which creates a branch with data up to the specified date and time. For example, if the data loss occurred on Nov 26, 2023 at 5:01pm, select Nov 11, 2023, at 5:00pm, just before the faulty query was run.
 
     <Admonition type="note">
     The **Specific date and time** option does not include data changes that occured after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your history retention window, which is 7 days by default. See [Configure history retention](/docs/manage/projects#configure-history-retention).

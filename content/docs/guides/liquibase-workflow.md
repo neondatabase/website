@@ -15,8 +15,8 @@ The instructions in this guide are based on the workflow described in the [Liqui
 
 - A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- Liquibase requires Java. To check if you have Java installed, run `java --version`. If not, refer to the installation instructions for your operating system.
-- An installation of Liquibase. For instructions, refer to [Get started with Liquibase and Neon](/docs/guides/liquibase) for installation instructions.
+- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS`. 
+- An installation of Liquibase. For instructions, refer to [Get started with Liquibase and Neon](/docs/guides/liquibase).
 
 ## Initialize a new Liquibase project
 
@@ -268,7 +268,7 @@ When you run a changeset for the first time, Liquibase automatically creates two
 You can verify these tables were created by viewing the `blog` database on your `dev1` branch on the **Tables** page in the Neon console. Select **Tables** from the sidebar.
 </Admonition>
 
-At this point, you can continue to iterate, applying schema changes to you database, until you are satisfied with the modified schema.
+At this point, you can continue to iterate, applying schema changes to your database, until you are satisfied with the modified schema.
 
 ### Review schema changes
 

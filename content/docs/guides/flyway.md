@@ -1,6 +1,6 @@
 ---
 title: Get started with Flyway and Neon
-subtitle: Learn how to manage schema changes in Neon with the Flyway command-line tool
+subtitle: Learn how to manage schema changes in Neon with Flyway
 enableTableOfContents: true
 updatedOn: '2023-11-24T19:55:37.124Z'
 ---

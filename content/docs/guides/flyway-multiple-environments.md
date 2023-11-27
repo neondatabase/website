@@ -1,7 +1,6 @@
 ---
 title: Manage multiple database environments
-subtitle: Learn how to create and manage multiple database environments with Neon and
-  Flyway
+subtitle: Learn how to manage schemas for multiple database environments with Flyway
 enableTableOfContents: true
 updatedOn: '2023-11-24T19:55:37.121Z'
 ---
@@ -15,8 +14,7 @@ In this guide, we'll show you how to use Neon's branching feature to spin up a b
 ## Prerequisites
 
 - A flyway installation. See [Get started with Flyway and Neon](/docs/guides/flyway) for installation instructions.
-- A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
-- A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
+- A Neon account and project. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A database. This guide uses the ready-to-use `neondb` database on the `main` branch of your Neon project. You can create your own database if you like. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 
 ## Add a table to your database
@@ -146,7 +144,7 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
     cp flyway.conf env_prod.conf
     ```
 
-2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf` this will point to `main`). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
+2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf`, the `url` will point to `main`). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
 
     <CodeBlock shouldWrap>
 
@@ -221,7 +219,7 @@ flyway migrate -configFiles="conf/env_prod.conf"
 
 </Tabs>
 
-If the migration command succesful, you’ll see output similar to the following. You'll should see this output for each command.
+A successful migration command returns output similar to the following:
 
 ```bash
 Database: jdbc:postgresql://ep-nameless-unit-49929920.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
@@ -235,7 +233,7 @@ Successfully applied 1 migration to schema "public", now at version v2 (executio
 A Flyway report has been generated here: /home/alex/flyway-x.y.z/report.html
 ```
 
-Your database should now be consistent across all three environments. You can verify that the data was added to each database by viewing the branch and table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+After you run the migration commands, your database should be consistent across all three environments. You can verify that the data was added to each database by viewing the branch and table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
 
 ## Conclusion
 
