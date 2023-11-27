@@ -10,6 +10,7 @@ import { createPortal } from 'react-dom';
 import Link from 'components/shared/link';
 import debounce from 'utils/debounce';
 import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 const Hit = ({ hit, children }) => (
   <Link
@@ -48,6 +49,7 @@ const Search = ({ className = null, isBlog = false, indexName }) => {
     setIsOpen(true);
     if (!isBlog) {
       sendGtagEvent('open_docs_search');
+      sendSegmentEvent('open_docs_search');
     }
   }, [isBlog]);
 
@@ -60,6 +62,7 @@ const Search = ({ className = null, isBlog = false, indexName }) => {
       setIsOpen(true);
       if (!isBlog) {
         sendGtagEvent('open_docs_search');
+        sendSegmentEvent('open_docs_search');
       }
       setInitialQuery(event.key);
     },
