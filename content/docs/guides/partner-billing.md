@@ -425,7 +425,7 @@ curl --request POST \
 <TabItem>
 In this example, we are creating a new endpoint for an already existing branch with ID `br-wandering-field-12345678`, with a min compute of **2 vCPU**, a max of **6 vCPU**, and a suspend timeout of 5 minutes (**300** seconds).
 
-<CodeBlock highlight="11-14">
+<CodeBlock highlight="10-13">
 ``` bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/noisy-pond-28482075/endpoints \
