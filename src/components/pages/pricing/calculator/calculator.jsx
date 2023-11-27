@@ -14,6 +14,7 @@ import CheckIcon from 'icons/check.inline.svg';
 import infoHoveredIcon from 'icons/tooltip-hovered.svg';
 import infoIcon from 'icons/tooltip.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const PROJECT_STORAGE_PRICE = 0.000164;
@@ -129,6 +130,20 @@ const Calculator = () => {
         : setWrittenAndTransferDataCost(totalCost * PERCENTAGE_OF_MONTHLY_COST),
     [dataTransferCost, isAdvanced, totalCost, writtenDataCost]
   );
+
+  const handleButtonClick = () => {
+    const eventName = 'pricing_estimated_price';
+    const properties = {
+      price: estimatedPrice,
+      computeUnits,
+      activeTime,
+      storageValue,
+      dataTransferValue,
+      writtenDataValue,
+    };
+    sendGtagEvent(eventName, properties);
+    sendSegmentEvent(eventName, properties);
+  };
 
   return (
     <section
@@ -455,16 +470,7 @@ const Calculator = () => {
               linesOffsetSide={26}
               linesOffsetBottom={55}
               isAnimated
-              onClick={() => {
-                sendGtagEvent('pricing_estimated_price', {
-                  price: estimatedPrice,
-                  computeUnits,
-                  activeTime,
-                  storageValue,
-                  dataTransferValue,
-                  writtenDataValue,
-                });
-              }}
+              onClick={handleButtonClick}
             >
               {estimatedPrice >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </AnimatedButton>

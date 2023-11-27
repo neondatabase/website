@@ -14,6 +14,7 @@ import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 import Burger from './burger';
 import Github from './images/header-github.inline.svg';
@@ -148,7 +149,10 @@ const Header = ({
               theme={isThemeBlack ? 'tertiary' : 'quaternary'}
               rel="noopener noreferrer"
               target="_blank"
-              onClick={() => sendGtagEvent('click_star_us_button')}
+              onClick={() => {
+                sendGtagEvent('click_star_us_button');
+                sendSegmentEvent('click_star_us_button');
+              }}
             >
               <Github
                 className={clsx(

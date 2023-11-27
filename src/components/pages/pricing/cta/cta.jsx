@@ -10,6 +10,7 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import links from 'constants/links';
 import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 const CTA = () => {
   const [contentRef, isContentInView] = useInView({ rootMargin: '50px 0px', triggerOnce: true });
@@ -58,6 +59,7 @@ const CTA = () => {
             isAnimated
             onClick={() => {
               sendGtagEvent('pricing_cta_click');
+              sendSegmentEvent('pricing_cta_click');
             }}
           >
             Talk to sales
