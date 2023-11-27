@@ -354,25 +354,27 @@ If you want to suspend a user for any reason &#8212; for example, suspicious act
 
 ## Other consumption related settings
 
-In addition to setting hard quota limits against the project as a whole, there are other sizing-related settings you might want to use to control the amount of resources any particular endpoint is able to consume:
-* `autoscaling_limit_min_cu` &#8212; Sets the minimium compute size for the endpoint. The minimum by default is .25 vCPU, but can be increased if your user's project could benefit from a larger compute start size.
+In addition to setting quota limits against the project as a whole, there are other sizing-related settings you might want to use to control the amount of resources any particular endpoint is able to consume:
+* `autoscaling_limit_min_cu` &#8212; Sets the minimium compute size for the endpoint. The default minimum is .25 vCPU but can be increased if your user's project could benefit from a larger compute start size.
 * `autoscaling_limit_max_cu` &#8212; Sets a hard limit on how much compute an endpoint can consume in response to increased demand. For more info on min and max cpu limits, see [Autoscaling](/docs/guides/autoscaling-guide).
-* `suspend_timeout_seconds` &#8212; Sets how long an endpoint's alloted compute will remain alive with no current demand. After the timeout period, the endpoint is suspended until demand picks up. This setting is useful for saving compute time for projects with inconsistend demand. For more info, see [Autosuspend](/docs/guides/auto-suspend-guide).
+* `suspend_timeout_seconds` &#8212; Sets how long an endpoint's alloted compute will remain alive with no current demand. After the timeout period, the endpoint is suspended until demand picks up. For more info, see [Autosuspend](/docs/guides/auto-suspend-guide).
 
 There are several ways you can set these values using the Neon API:
 
-* As project-level default settings, applied to any branch's compute created in a given project (unless there is an explicit override). See [Create a project](https://api-docs.neon.tech/reference/createproject). These default values are set in the
-`default_endpoint_settings` object. 
-* When creating a branch, you can create its endpoint at the same time. See [Create a branch](https://api-docs.neon.tech/reference/createprojectbranch)
-* Or you can create an endpoint for an existing branch independently. See [Create an endpoint](https://api-docs.neon.tech/reference/createprojectendpoint)
+* **Project-level defaults** &#8212; You can set default min and max cpu and suspend timeout period that are then applied automtically to any new compute instances created in that project. See [Create a project](https://api-docs.neon.tech/reference/createproject).
+* **Branch** &#8212; When creating a new branch, you can create its endpoint at the same time. See [Create a branch](https://api-docs.neon.tech/reference/createprojectbranch)
+* **Endpoint** &#8212; You can also create new endpoitns for any existing branch. See [Create an endpoint](https://api-docs.neon.tech/reference/createprojectendpoint)
 
 See these sample CURL requests for each method.
 
 <Tabs labels={["Project", "Branch","Endpoint"]}>
 
 <TabItem>
-Default settings applied to any endpoint created in a project. In this sample, we are setting the minimum compute size to 1 vCPU, the max size at 3 vCPU, and a 10 minute inactivty period before the endpoint is suspended.
-<CodeBlock>
+In this sample, we are setting the minimum compute size to **1 vCPU**, the max size at **3 vCPU**, and a 10 minute (**600 seconds**) inactivty period before the endpoint is suspended.
+
+These default values are set in the
+`default_endpoint_settings` object. 
+<CodeBlock highlight="9-12">
 
 ``` bash
 curl --request POST \
@@ -396,9 +398,8 @@ curl --request POST \
 </CodeBlock>
 </TabItem>
 <TabItem>
-In this POST request, we are creating an endpoint at the same time that we create the new branch called `NewBranch`.
-<CodeBlock>
-
+In this POST request, we are creating a new endpoint at the same time that we create our new branch called `Development`.
+<CodeBlock highlight="14-16">
 ``` bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/noisy-pond-28482075/branches \
@@ -408,7 +409,7 @@ curl --request POST \
      --data '
 {
   "branch": {
-    "name": "NewBranch"
+    "name": "Development"
   },
   "endpoints": [
     {
@@ -425,9 +426,8 @@ curl --request POST \
 
 </TabItem>
 <TabItem>
-In this POST request, we are creating a new endpoint for an already existing branch with ID `br-wandering-field-12345678`, with a min compute of 1 vCPU, a max of 3 vCPU, and a suspend timeout of 10 minutes (600 seconds).
-<CodeBlock>
-
+In this example, we are creating a new endpoint for an already existing branch with ID `br-wandering-field-12345678`, with a min compute of **2 vCPU**, a max of **6 vCPU**, and a suspend timeout of 5 minutes (300 seconds).
+<CodeBlock highlight="1--13">
 ``` bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/noisy-pond-28482075/endpoints \
@@ -438,9 +438,9 @@ curl --request POST \
 {
   "endpoint": {
     "type": "read_write",
-    "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 3,
-    "suspend_timeout_seconds": 600,
+    "autoscaling_limit_min_cu": 2,
+    "autoscaling_limit_max_cu": 6,
+    "suspend_timeout_seconds": 300,
     "branch_id": "br-wandering-field-12345678"
   }
 }
