@@ -16,10 +16,6 @@ The general methodology of using read replicas to segregate read-only work from 
 
 Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Auto-suspend_ features are also supported, providing you with control over compute usage.
 
-<Admonition type="note">
-Neon supports managing read replicas programmatically using the Neon API. See [Manage read replicas using the Neon API](#manage-read-replicas-using-the-neon-api).
-</Admonition>
-
 ## Prerequisites
 
 - A [Neon Pro Plan](/docs/introduction/pro-plan) account.
@@ -32,6 +28,8 @@ Creating a read replica involves adding a read-only compute endpoint to a branch
 <Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
+To create a read replica from the Neon Console:
+
 1. In the Neon Console, select **Branches**.
 2. Select the branch where your database resides.
 3. Click **Add compute**.
@@ -48,6 +46,8 @@ In a few moments, your read-only compute is provisioned and appears in the **Com
 <TabItem>
 
 <CodeBlock showLineNumbers>
+To create a read replica from the Neon CLI, use the [branches](/docs/reference/cli-branches) command and specify type read_only. 
+
 
 ```bash
 neonctl branches add-compute mybranch --type read_only
