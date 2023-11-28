@@ -39,6 +39,8 @@ Roles created in the Neon console, CLI, or API, including the default role creat
 
 You can think of roles with `neon_superuser` privileges as administrator roles. If you require roles with limited privileges, such as a read-only role, you can create those roles from an SQL client. For more information, see [Manage database access](/docs/manage/database-access).
 
+Creating a database with the `neon_superuser` role using `CREATE DATABASE dbname WITH OWNER neon_superuser` syntax is not permitted. It should not be used directly or modified.
+
 ## Manage roles in the Neon console
 
 This section describes how to create, view, and delete roles in the Neon Console. All roles created in the Neon console are granted membership in the [neon_superuser](#the-neon_superuser-role) role.
