@@ -6,6 +6,8 @@ description: Neon metrics collection and new usage guidelines for the neon_super
 
 - Compute: Neon has introduced a new "neon" extension, which includes functions and views designed to gather Neon-specific metrics. The metrics are intended for use by the Neon team for the purpose of enhancing our service. The views are readily available for access. You can view them by connecting to the `postgres` database using `psql` and execute the command `\dv neon.*`, as shown below. At present, the extension includes two views for local file cache metrics. We may incorporate additional views in future releases.
 
+    <CodeBlock shouldWrap>
+
     ```bash
     psql 'postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require'
 
@@ -17,6 +19,8 @@ description: Neon metrics collection and new usage guidelines for the neon_super
     neon   | neon_lfc_stats | view | cloud_admin
     (2 rows)
     ```
+
+    </CodeBlock>
 
 - Compute: Creating a database with the `neon_superuser` role using `CREATE DATABASE dbname WITH OWNER neon_superuser` syntax is no longer permitted. The `neon_superuser` role is a `NOLOGIN` role used by Neon to grant prvileges to PostgreSQL roles created via the Neon Console, CLI, or API, and should not be used directly or modified. For more information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
