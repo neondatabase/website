@@ -140,8 +140,10 @@
               slug: guides/read-replica-prisma
         - title: Extensions
           items:
+            - title: neon
+              slug: extensions/neon
             - title: neon_utils
-              slug: extensions/neon-utils
+              slug: extensions/neon-utils            
     - title: Frameworks
       items:
         - title: Next.js
