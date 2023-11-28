@@ -4,7 +4,7 @@ description: Neon metrics collection and new usage guidelines for the neon_super
 
 ### Fixes & improvements
 
-- Compute: Neon has introduced a new "neon" extension, which includes functions and views designed to gather Neon-specific metrics. The metrics are intended for use by the Neon team for the purpose of enhancing our service. The views are readily available for access. You can view them by connecting to the `postgres` database using `psql` and execute the command `\dv neon.*`, as shown below. At present, the extension includes two views for local file cache metrics. We may incorporate additional views in future releases.
+- Compute: Neon has introduced a new pre-installed "neon" extension, which includes functions and views designed to gather Neon-specific metrics. The metrics are intended for use by the Neon team for the purpose of enhancing our service. The views are owned by a Neon system role (`cloud_admin`) but you are able to view them by connecting to the `postgres` database using `psql` and executing the command `\dv neon.*`, as shown below. At present, the extension includes two views for local file cache metrics. We may incorporate additional views in future releases.
 
     <CodeBlock shouldWrap>
 
