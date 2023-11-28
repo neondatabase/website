@@ -13,7 +13,9 @@ By default, Neon tracks a variety of consumption metrics at the project level. I
 
 ### Available metrics
 
-Here are the relevant metrics that you can set project-level quotas for:
+Here are the relevant metrics that you might want to track to understand your users' current consumption levels.
+
+#### Project-level metrics
 
 * `active_time_seconds`
 * `compute_time_seconds`
@@ -22,7 +24,9 @@ Here are the relevant metrics that you can set project-level quotas for:
 
 These consumption metrics represent total cumulative usage across all branches and computes in a given project, accrued so far in a given monthly billing period. Metrics are refreshed on the first day of the following month, when the new billing period starts. 
 
-There is an additional value you can set quota controls for: `logical_size`, which gives you the current size of a particular branch. 
+#### Branch-level metric
+
+There is an additional value that you also might want to track: `logical_size`, which gives you the current size of a particular branch. 
 
 Neon updates these metrics every 15 minutes but it could take up to 1 hour before they are reportable.
 
@@ -64,6 +68,20 @@ Let's say you want to set limits for an application with two tiers, Trial and Pr
 ### Guidelines
 
 Generally, the most effective quotas for controlling spend per project are those controlling maximum compute (`active_time_seconds` and `compute_time_seconds`) and maximum written storage (`written_data_bytes`). In practice, it is possible that `data_transfer_bytes` could introduce unintended logical constraints against your usage. For example, let's say you want to run a cleanup operation to reduce your storage. If part of this cleanup operation involves moving data across the network (for instance, to create an offsite backup before deletion), the `data_transfer_bytes` limit could prevent you from completing the operation &#8212; an undesirable situation where two measures meant to control cost interfere with one another.
+
+### Neon Default Limits
+
+In addition to the configurable limits that you can set, Neon also sets certain branch size limits by default. You might notice these limits in a [Get Project](#retrieving-details-about-a-project) response:
+* `branch_logical_size_limit` (MiB)
+* `branch_logical_size_limit_bytes `(Bytes)
+
+These limits are not directly configurable. They act as "failsafe" limits to prevent runaway branch size growth due to possible issues with your application. If you need larger limits here, contact Neon Support.
+
+| Tier            | Limit Description           | `branch_logical_size_limit` | `branch_logical_size_limit_bytes` |
+|-----------------|-----------------------------|-----------------------------|-----------------------------------|
+| Neon Free Tier  | 3 GB per branch             | 3072                        | 3221225472                        |
+| Neon Pro Tier   | Approximately 200 GB        | 204800                      | 214748364800                      |
+
 
 ## Suspending active computes
 
