@@ -175,6 +175,12 @@ Example:
 ``` bash
 neonctl branches reset development --parent --project-id noisy-pond-12345678
 ```
+Alternatively, you can set the project-id as background context for the duration of your CLI session, letting you perform any other actions against that project without having to include the project-id in every command.
+
+```bash
+neonctl set-context --project-id <project id>
+```
+For more about setting contexts, see <cli docs>.
 
 </TabItem>
 
