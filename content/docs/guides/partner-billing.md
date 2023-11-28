@@ -77,18 +77,13 @@ In addition to the configurable limits that you can set, Neon also sets certain 
 
 These limits are not directly configurable. They act as "failsafe" limits to prevent runaway branch size growth due to possible issues with your application. If you need larger limits here, contact Neon Support.
 
-| Description                   | Neon Free Tier  | Neon Pro Tier      |
-|-------------------------------|-----------------|--------------------|
-| Limit per branch              | Approx 3 GB     | Approx 200 GB      |
-| `branch_logical_size_limit`   | 3072            | 204800             |
-| `branch_logical_size_limit_bytes` | 3221225472  | 214748364800       |
+For Neon Free Tier users, the limit is approximately 3 GiB per branch:
+* `branch_logical_size_limit`: 3072
+* `branch_logical_size_limit_bytes:` 3221225472
 
-
-| Tier            | Limit Description           | `branch_logical_size_limit` | `branch_logical_size_limit_bytes` |
-|-----------------|-----------------------------|-----------------------------|-----------------------------------|
-| Neon Free Tier  | 3 GB per branch             | 3072                        | 3221225472                        |
-| Neon Pro Tier   | Approximately 200 GB        | 204800                      | 214748364800                      |
-
+For Neon Pro Tier users, the limit is approximately 200 GiB per branch:
+* `branch_logical_size_limit`: 204800
+* `branch_logical_size_limit_bytes`: 214748364800
 
 ## Suspending active computes
 
