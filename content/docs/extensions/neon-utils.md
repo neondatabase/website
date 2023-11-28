@@ -2,7 +2,7 @@
 title: The neon_utils extension
 subtitle: Monitor how Neon's Autoscaling feature allocates compute resources
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.746Z'
+updatedOn: '2023-11-27T16:33:52.713Z'
 ---
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
@@ -23,11 +23,11 @@ For information about using the Neon **SQL Editor**, see [Query with Neon's SQL 
 
 In Neon, computing capacity is measured in _Compute Units (CU)_. One CU is 1 vCPU and 4 GB of RAM, 2 CU is 2 vCPU and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPU. A Neon compute can have anywhere from .25 to 7 CU.
 
-When you enable _Autoscaling_ for a compute endpoint, you define a minimum and maximum compute size, as shown below:
+Defining a minimum and maximum compute size for your compute endpoint, as shown below, enables _Autoscaling_.
 
 ![Edit compute endpoint dialog showing an Autoscaling configuration](/docs/extensions/edit_compute_endpoint.png)
 
-As your workload changes, computing capacity scales dynamically between the minimum and maximum settings defined in your _Autoscaling_ configuration. To retrieve the number of allocated vCPU at any point in time, you can run the following query:
+As your workload changes, computing capacity scales dynamically between the minimum and maximum settings defined in your compute endpoint configuration. To retrieve the number of allocated vCPU at any point in time, you can run the following query:
 
 ```sql
 SELECT num_cpus();

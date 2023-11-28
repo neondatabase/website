@@ -140,8 +140,10 @@
               slug: guides/read-replica-prisma
         - title: Extensions
           items:
+            - title: neon
+              slug: extensions/neon
             - title: neon_utils
-              slug: extensions/neon-utils
+              slug: extensions/neon-utils            
     - title: Frameworks
       items:
         - title: Next.js
@@ -241,8 +243,13 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
-    - title: OAuth
-      slug: guides/oauth-integration
+    - title: For Partners
+      slug: guides/partner-intro
+      items: 
+        - title: OAuth
+          slug: guides/oauth-integration
+        - title: Manage billing with quotas
+          slug: guides/partner-billing
 - title: AI & embeddings
   items:
     - title: Introduction
