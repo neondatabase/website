@@ -23,4 +23,3 @@ description: Neon metrics collection and new usage guidelines for the neon_super
     </CodeBlock>
 
 - Compute: Creating a database with the `neon_superuser` role, altering a database to have owner `neon_superuser`, and altering the `neon_superuser role` itself are no longer permitted. The `neon_superuser` role is a `NOLOGIN` role used by Neon to grant prvileges to PostgreSQL roles created via the Neon Console, CLI, or API, and is not intended to be used directly or modified. For more information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
-
