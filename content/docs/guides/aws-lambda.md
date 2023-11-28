@@ -147,11 +147,16 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
     'use strict';
 
     const { Client } = require('pg');
+    let client;
 
     module.exports.getAllUsers = async () => {
-     var client = new Client(process.env.DATABASE_URL);
-     client.connect();
-     var { rows } = await client.query('SELECT * from users');
+     if (!client) {
+       client = new Client(process.env.DATABASE_URL);
+       await client.connect();
+     }
+
+     const { rows } = await client.query('SELECT * from users');
+
      return {
        statusCode: 200,
        body: JSON.stringify({
