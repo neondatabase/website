@@ -4,7 +4,7 @@ description: Neon metrics collection and new usage guidelines for the neon_super
 
 ### Fixes & improvements
 
-- Compute: Neon now creates a `neon` extension in the `neon` schema in the `postgres` database. This extension contains functions and views for collecting Neon-specific metrics for the purpose of improving our service. The views are fully accessible. You can access them by connecting to the `postgres` database via `psql` and running a `\dv neon.*` command, as shown below. Currently, the extension includes two views for collecting local file cache metrics. Additional views may be added in future releases.
+- Compute: Neon has introduced a new "neon" extension, which includes functions and views designed to gather Neon-specific metrics. The metrics are intended for use by the Neon team for the purpose of enhancing our service. The views are readily available for access. You can view them by connecting to the `postgres` database using `psql` and execute the command `\dv neon.*`, as shown below. At present, the extension includes two views for local file cache metrics. We may incorporate additional views in future releases.
 
     ```bash
     psql 'postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require'
