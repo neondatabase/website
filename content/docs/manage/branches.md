@@ -180,7 +180,7 @@ Alternatively, you can set the project-id as background context for the duration
 ```bash
 neonctl set-context --project-id <project id>
 ```
-For more about setting contexts, see <cli docs>.
+For more about setting contexts, see [cli docs.
 
 </TabItem>
 
