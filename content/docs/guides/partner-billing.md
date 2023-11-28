@@ -13,7 +13,7 @@ By default, Neon tracks a variety of consumption metrics at the project level. I
 
 ### Available metrics
 
-Here are the relevant metrics that you might want to track to understand your users' current consumption levels.
+Here are the relevant metrics that you can track in order to understand your users' current consumption levels.
 
 #### Project-level metrics
 
@@ -28,7 +28,7 @@ These consumption metrics represent total cumulative usage across all branches a
 
 There is an additional value that you also might want to track: `logical_size`, which gives you the current size of a particular branch. 
 
-Neon updates these metrics every 15 minutes but it could take up to 1 hour before they are reportable.
+Neon updates all metrics every 15 minutes but it could take up to 1 hour before they are reportable.
 
 To find the current usage level for any of these metrics, see [retrieving details about a project](#retrieving-details-about-a-project). You can read more about these metrics and how they impact billing [here](/docs/introduction/billing).
 
@@ -76,6 +76,13 @@ In addition to the configurable limits that you can set, Neon also sets certain 
 * `branch_logical_size_limit_bytes `(Bytes)
 
 These limits are not directly configurable. They act as "failsafe" limits to prevent runaway branch size growth due to possible issues with your application. If you need larger limits here, contact Neon Support.
+
+| Description                   | Neon Free Tier  | Neon Pro Tier      |
+|-------------------------------|-----------------|--------------------|
+| Limit per branch              | Approx 3 GB     | Approx 200 GB      |
+| `branch_logical_size_limit`   | 3072            | 204800             |
+| `branch_logical_size_limit_bytes` | 3221225472  | 214748364800       |
+
 
 | Tier            | Limit Description           | `branch_logical_size_limit` | `branch_logical_size_limit_bytes` |
 |-----------------|-----------------------------|-----------------------------|-----------------------------------|
