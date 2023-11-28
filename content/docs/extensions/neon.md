@@ -18,4 +18,6 @@ With each Neon project, Neon creates  a "neon" extension, which includes functio
     neon   | neon_lfc_stats | view | cloud_admin
     (2 rows)
 
+    </CodeBlock>
+
 <NeedHelp/>
