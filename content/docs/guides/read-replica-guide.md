@@ -45,7 +45,6 @@ In a few moments, your read-only compute is provisioned and appears in the **Com
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
 To create a read replica using the Neon CLI, use the [branches](/docs/reference/cli-branches) command, specifying the `add-compute` and `-type read_only` options. If you have more than one Neon project, also  include the `--project-id` option.  
 
 
@@ -53,13 +52,9 @@ To create a read replica using the Neon CLI, use the [branches](/docs/reference/
 neonctl branches add-compute mybranch --type read_only
 ```
 
-</CodeBlock>
-
 </TabItem>
 
 <TabItem>
-
-<CodeBlock showLineNumbers>
 
 In Neon, a read replica is implemented as a read-only compute endpoint. To create a read-only compute endpoint using the Neon API,  use the [Create endpoint](https://api-docs.neon.tech/reference/createprojectendpoint) method. The `type` attribute in the following example specifies `read_only`, which creates a read-only compute endpoint. For information about obtaining the required `project_id` and `branch_id` parameters, refer to [Create an endpoint](https://api-docs.neon.tech/reference/createprojectendpoint), in the _Neon API reference_.
 
@@ -79,8 +74,6 @@ curl --request POST \
 ' | jq
 ```
 
-</CodeBlock>
-
 </TabItem>
 
 </Tabs>
@@ -95,13 +88,9 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
     A **psql** connection string appears similar to the following:
 
-    <CodeBlock shouldWrap>
-
     ```bash
     postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
-
-    </CodeBlock>
 
     If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string or example.
 
@@ -122,15 +111,12 @@ In Neon, a read replica is implemented as a read-only compute endpoint.  To view
 
 For information about obtaining the required `project_id` parameter for this command, refer to [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints), in the _Neon API reference_.
 
-<CodeBlock showLineNumbers>
-
 ```bash
 curl -X 'GET' \
   'https://console.neon.tech/api/v2/projects/<project_id>/endpoints' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
-</CodeBlock>
 
 </TabItem>
 
@@ -157,8 +143,6 @@ In Neon, a read replica is implemented as a read-only compute endpoint. To edit 
 
 Compute endpoints are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint), in the _Neon API reference_.
 
-<CodeBlock showLineNumbers>
-
 ```bash
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/project_id/endpoints/endpoint_id \
@@ -176,8 +160,6 @@ curl --request PATCH \
 }
 '
 ```
-
-</CodeBlock>
 
 </TabItem>
 
@@ -205,17 +187,12 @@ In Neon, a read replica is implemented as a read-only compute endpoint. To delet
 
 Compute endpoints are identified by their `project_id` and `endpoint_id`, regardless of whether they are read-write or read-only. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint), in the _Neon API reference_.
 
-
-<CodeBlock showLineNumbers>
-
 ```bash
 curl --request DELETE \
      --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/endpoint_id \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY’
 ```
-
-</CodeBlock>
 
 </TabItem>
 
