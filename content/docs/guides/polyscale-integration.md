@@ -29,7 +29,7 @@ To get started with the Neon PolyScale integration, follow the instructions belo
 To add the PolyScale integration to your Neon project:
 
 1. In the Neon Console, navigate to the **Integrations** page.
-2. Under **Available**, locate the PolyScale integration and click **Add** to open the **Add PolyScale** side panel.
+2. Under **Available**, locate the PolyScale integration and click **Add** to open the **Add PolyScale** drawer.
     ![Integrations page showing PolyScale](/docs/guides/polyscale_int_add_integration.png)
 3. Under **How to add**, click **Sign in**.
     ![Integrations page showing PolyScale](/docs/guides/polyscale_int_how_to_add.png)
@@ -41,11 +41,11 @@ To add the PolyScale integration to your Neon project:
     After the integration is added, you are returned to the **Integrations** page in the Neon Console where the PolyScale integration appears under the **Configured** heading.
     ![Connection details widget](/docs/guides/polyscale_int_configured.png)
 
-6. Click **Manage** to open the **Manage PolyScale** side panel. 
+6. Click **Manage** to open the **Manage PolyScale** drawer. 
 
     ![Connection details widget](/docs/guides/polyscale_int_manage.png)
 
-    In the PolyScale side panel, you can view information about your newly created PolyScale cache and copy the PolyScale connection string. Use this connection string in place of your Neon connection string in your application.
+    In the PolyScale drawer, you can view information about your newly created PolyScale cache and copy the PolyScale connection string. Use this connection string in place of your Neon connection string in your application.
 
     You might notice the drop-down menus for **Database** and **Role**. If you have multiple databases and roles on the primary branch of your Neon project, use the drop-down menus to select the database and role you want to connect with. Your selection will be reflected in the PolyScale connection string.
    
@@ -58,7 +58,7 @@ To add the PolyScale integration to your Neon project:
 You can access your PolyScale cache directly from the Neon PolyScale integration.
 
 1. In the Neon Console, navigate to the **Integrations** page.
-2. Under **Configured**, locate the PolyScale integration and click **Manage** to open the **Manage PolyScale** side panel.
+2. Under **Configured**, locate the PolyScale integration and click **Manage** to open the **Manage PolyScale** drawer.
 3. Click the **View cache in PolyScale** link. You directed to PolyScale where you will be required to log in if not logged in already.
 
 ## Purging your PolyScale cache
@@ -68,7 +68,7 @@ Occasionally, it may be necessary to purge your PolyScale cache. For example, yo
 To purge your PolyScale cache:
 
 1. In the Neon Console, navigate to the **Integrations** page.
-2. Under **Configured**, locate the PolyScale integration and click **Manage** to open the **Manage PolyScale** side panel.
+2. Under **Configured**, locate the PolyScale integration and click **Manage** to open the **Manage PolyScale** drawer.
 3. Click **Purge PolyScale cache**.
 
 Purging the cache purges all cached data globally.
@@ -78,7 +78,7 @@ Purging the cache purges all cached data globally.
 To remove the PolyScale integration:
 
 1. In the Neon Console, navigate to the **Integrations** page.
-2. Under **Configured**, locate the PolyScale integration and click **Manage** to open the **Manage PolyScale** side panel.
+2. Under **Configured**, locate the PolyScale integration and click **Manage** to open the **Manage PolyScale** drawer.
 3. Click **Remove integration**.
 
 Removing the integration deletes the cache and terminates all current connections using the PolyScale connection string.
