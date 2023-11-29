@@ -180,12 +180,12 @@ Alternatively, you can set the project-id as background context for the duration
 ```bash
 neonctl set-context --project-id <project id>
 ```
-For more about setting contexts, see [CLI set-context command](/docs/reference/cli-set-context).
+For more about performing branching actions from the CLI in [CLI - branches](/docs/reference/cli-branches), and more about setting contexts in [CLI - set-context](/docs/reference/cli-set-context).
 
 </TabItem>
 
 <TabItem>
-Resetting from parent is not directly supported from the API. However, you can use the instructions on [Refreshing a branch](docs/guides/branch-refresh) to perform a similar operation. It involves using the API to create a new branch, transfer the compute endpoint, deleting the old branch, and (optionally) renaming the new branch.
+Resetting from parent is not directly supported from the API. However, you can use the instructions on [Refreshing a branch](/docs/guides/branch-refresh) to perform a similar operation. It involves using the API to create a new branch, transfer the compute endpoint, deleting the old branch, and (optionally) renaming the new branch.
 </TabItem>
 
 </Tabs>
