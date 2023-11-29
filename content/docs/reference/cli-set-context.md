@@ -26,6 +26,6 @@ The `set-context` command requires you set at least one of these options:
 | Option       | Description   | Type   | Required  |
 | ------------ | ------------- | ------ | :------: |
 | `--project-id` | Project ID    | string | Sets the identified project as the context for the rest of your CLI session, or until reset |
-| `--branch-id` | Branch ID | string | Sets the identified branch as the context for the rest of your CLI session, or until reset |
+| `--branch` | Branch ID or name | string | Sets the identified branch as the context for the rest of your CLI session, or until reset |
 
 [Global options](/docs/reference/neon-cli#global-options) are also supported.
