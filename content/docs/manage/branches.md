@@ -133,7 +133,7 @@ If you want to connect from an application, the **Connection Details** widget on
 
 ## Reset a branch from parent
 
-When working with database branches, you might find yourself in a situation where your working branch diverges too far from its parent. For example, let's say you have two child branches `staging` and `development` forked from your `main` production branch. You have been working on the `development` branch and find it is now too far out of date with production. You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the **Reset from parent** feature, you can perform this clean reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
+When working with database branches, you might find yourself in a situation where you need to update your working branch to the latest data from production. For example, let's say you have two child branches `staging` and `development` forked from your `main` production branch. You have been working on the `development` branch and find it is now too far out of date with production. You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the **Reset from parent** feature, you can perform a clean reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
 
 <u>Key points</u>:
 * You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are not currently supported.
@@ -145,7 +145,7 @@ When working with database branches, you might find yourself in a situation wher
 <TabItem>
 On the **Branches** page in the Neon Console, select the branch that you want to reset.
 
-The console opens to the details page your branch, giving you key information about the branch and its child status: its parent, the last time it was reset, and other relevent detail.
+The console opens to the details page for your branch, giving you key information about the branch and its child status: its parent, the last time it was reset, and other relevent detail.
 
 To reset the branch, select **Reset from parent** from either the **More** dropdown or the **Last Data Reset** panel.
 
@@ -180,7 +180,7 @@ Alternatively, you can set the project-id as background context for the duration
 ```bash
 neonctl set-context --project-id <project id>
 ```
-For more about performing branching actions from the CLI in [CLI - branches](/docs/reference/cli-branches), and more about setting contexts in [CLI - set-context](/docs/reference/cli-set-context).
+Read more about performing branching actions from the CLI in [CLI - branches](/docs/reference/cli-branches), and more about setting contexts in [CLI - set-context](/docs/reference/cli-set-context).
 
 </TabItem>
 
