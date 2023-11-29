@@ -142,7 +142,7 @@ jobs:
     uses: neondatabase/reset-branch-action@beta
     with:
       project_id: rapid-haze-373089
-      parent: true  # optional (defaults to your primary branch)
+      parent: true # optional (defaults to your primary branch)
       branch: from_action_reusable
       api_key: {{ secrets.NEON_API_KEY }}
     id: reset-branch
@@ -152,8 +152,8 @@ jobs:
 ### Input variables
 
 - `project_id`: The ID of your Neon project. Find this value in the Neon Console on the **Settings** page.
-- `parent`: Optional parameter. If set to `true`, it defaults to your primary branch.
-- `branch`: The name of the branch to reset.
+- `parent`: Optional parameter. If specified, the branch will be reset to the parent branch.
+- `branch`: The name or id of the branch to reset.
 - `api_key`: An API key created in your Neon account. See [Create an API key](/docs/manage/api-keys#create-an-api-key) for instructions.
 
 ### Outputs
@@ -161,11 +161,10 @@ jobs:
 ```yaml
 outputs:
   branch_id:
-    description: "Reset branch Id"
+    description: "Reset branch id"
     value: ${{ steps.reset-branch.outputs.branch_id }}
 ```
-
-- `branch_id`: The ID of the reset branch.
+- `branch_id`: The ID of the newly reset branch.
 
 ## Example applications
 
