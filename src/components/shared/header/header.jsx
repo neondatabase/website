@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
+import useMedia from 'react-use/lib/useMedia';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -13,6 +14,7 @@ import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 import Burger from './burger';
 import Github from './images/header-github.inline.svg';
@@ -30,6 +32,7 @@ const Header = ({
 }) => {
   const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
   const headerRef = useRef(null);
+  const isMobile = useMedia('(max-width: 1023px)', false);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -39,6 +42,12 @@ const Header = ({
 
   const handleBurgerClick = () => {
     setIsMobileMenuOpen((isMobileMenuOpen) => !isMobileMenuOpen);
+  };
+
+  const findIndexName = () => {
+    if (isDocPage) return process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME;
+    if (isBlogPage) return process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME;
+    return null;
   };
 
   return (
@@ -140,7 +149,10 @@ const Header = ({
               theme={isThemeBlack ? 'tertiary' : 'quaternary'}
               rel="noopener noreferrer"
               target="_blank"
-              onClick={() => sendGtagEvent('click_star_us_button')}
+              onClick={() => {
+                sendGtagEvent('click_star_us_button');
+                sendSegmentEvent('click_star_us_button');
+              }}
             >
               <Github
                 className={clsx(
@@ -161,27 +173,19 @@ const Header = ({
               </Button>
             )}
           </div>
-          <div className="hidden items-center lg:flex lg:gap-x-3 md:gap-x-5">
-            {isDocPage && (
-              <Search
-                className="mobile-search"
-                indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
-              />
-            )}
-            {isBlogPage && (
-              <Search
-                className="mobile-search"
-                indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
-                isBlog
-              />
-            )}
+          {isMobile && (
+            <div className="items-center flex gap-x-3 md:gap-x-5">
+              {(isDocPage || isBlogPage) && (
+                <Search className="mobile-search" indexName={findIndexName()} isBlog={isBlogPage} />
+              )}
 
-            <Burger
-              className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
-              isToggled={isMobileMenuOpen}
-              onClick={handleBurgerClick}
-            />
-          </div>
+              <Burger
+                className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
+                isToggled={isMobileMenuOpen}
+                onClick={handleBurgerClick}
+              />
+            </div>
+          )}
         </Container>
       </header>
       <MobileMenu

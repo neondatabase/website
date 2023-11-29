@@ -1,3 +1,5 @@
+[#id](#PLPERL-GLOBAL)
+
 ## 45.4. Global Values in PL/Perl [#](#PLPERL-GLOBAL)
 
 You can use the global hash `%_SHARED` to store data, including code references, between function calls for the lifetime of the current session.
@@ -5,7 +7,6 @@ You can use the global hash `%_SHARED` to store data, including code references,
 Here is a simple example for shared data:
 
 ```
-
 CREATE OR REPLACE FUNCTION set_var(name text, val text) RETURNS text AS $$
     if ($_SHARED{$_[0]} = $_[1]) {
         return 'ok';
@@ -25,7 +26,6 @@ SELECT get_var('sample');
 Here is a slightly more complicated example using a code reference:
 
 ```
-
 CREATE OR REPLACE FUNCTION myfuncs() RETURNS void AS $$
     $_SHARED{myquote} = sub {
         my $arg = shift;

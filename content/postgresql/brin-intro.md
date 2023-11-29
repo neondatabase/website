@@ -1,6 +1,8 @@
+[#id](#BRIN-INTRO)
+
 ## 71.1. Introduction [#](#BRIN-INTRO)
 
-* [71.1.1. Index Maintenance](brin-intro.html#BRIN-OPERATION)
+* [71.1.1. Index Maintenance](brin-intro#BRIN-OPERATION)
 
 BRIN stands for Block Range Index. BRIN is designed for handling very large tables in which certain columns have some natural correlation with their physical location within the table.
 
@@ -12,11 +14,13 @@ The specific data that a BRIN index will store, as well as the specific queries 
 
 The size of the block range is determined at index creation time by the `pages_per_range` storage parameter. The number of index entries will be equal to the size of the relation in pages divided by the selected value for `pages_per_range`. Therefore, the smaller the number, the larger the index becomes (because of the need to store more index entries), but at the same time the summary data stored can be more precise and more data blocks can be skipped during an index scan.
 
+[#id](#BRIN-OPERATION)
+
 ### 71.1.1. Index Maintenance [#](#BRIN-OPERATION)
 
 At the time of creation, all existing heap pages are scanned and a summary index tuple is created for each range, including the possibly-incomplete range at the end. As new pages are filled with data, page ranges that are already summarized will cause the summary information to be updated with data from the new tuples. When a new page is created that does not fall within the last summarized range, the range that the new page belongs to does not automatically acquire a summary tuple; those tuples remain unsummarized until a summarization run is invoked later, creating the initial summary for that range.
 
-There are several ways to trigger the initial summarization of a page range. If the table is vacuumed, either manually or by [autovacuum](routine-vacuuming.html#AUTOVACUUM "25.1.6. The Autovacuum Daemon"), all existing unsummarized page ranges are summarized. Also, if the index's [autosummarize](sql-createindex.html#INDEX-RELOPTION-AUTOSUMMARIZE) parameter is enabled, which it isn't by default, whenever autovacuum runs in that database, summarization will occur for all unsummarized page ranges that have been filled, regardless of whether the table itself is processed by autovacuum; see below.
+There are several ways to trigger the initial summarization of a page range. If the table is vacuumed, either manually or by [autovacuum](routine-vacuuming#AUTOVACUUM), all existing unsummarized page ranges are summarized. Also, if the index's [autosummarize](sql-createindex#INDEX-RELOPTION-AUTOSUMMARIZE) parameter is enabled, which it isn't by default, whenever autovacuum runs in that database, summarization will occur for all unsummarized page ranges that have been filled, regardless of whether the table itself is processed by autovacuum; see below.
 
 Lastly, the following functions can be used:
 
@@ -34,4 +38,4 @@ LOG:  request for BRIN range summarization for index "brin_wi_idx" page 128 was 
 
 When this happens, the range will remain unsummarized until the next regular vacuum run on the table, or one of the functions mentioned above are invoked.
 
-Conversely, a range can be de-summarized using the `brin_desummarize_range(regclass, bigint)` function, which is useful when the index tuple is no longer a very good representation because the existing values have changed. See [Section 9.27.8](functions-admin.html#FUNCTIONS-ADMIN-INDEX "9.27.8. Index Maintenance Functions") for details.
+Conversely, a range can be de-summarized using the `brin_desummarize_range(regclass, bigint)` function, which is useful when the index tuple is no longer a very good representation because the existing values have changed. See [Section 9.27.8](functions-admin#FUNCTIONS-ADMIN-INDEX) for details.

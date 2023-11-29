@@ -1,3 +1,5 @@
+[#id](#SQL-ALTERDATABASE)
+
 ## ALTER DATABASE
 
 ALTER DATABASE — change a database
@@ -5,7 +7,6 @@ ALTER DATABASE — change a database
 ## Synopsis
 
 ```
-
 ALTER DATABASE name [ [ WITH ] option [ ... ] ]
 
 where option can be:
@@ -28,6 +29,8 @@ ALTER DATABASE name RESET configuration_parameter
 ALTER DATABASE name RESET ALL
 ```
 
+[#id](#id-1.9.3.7.5)
+
 ## Description
 
 `ALTER DATABASE` changes the attributes of a database.
@@ -42,65 +45,74 @@ The fourth form changes the default tablespace of the database. Only the databas
 
 The remaining forms change the session default for a run-time configuration variable for a PostgreSQL database. Whenever a new session is subsequently started in that database, the specified value becomes the session default value. The database-specific default overrides whatever setting is present in `postgresql.conf` or has been received from the `postgres` command line. Only the database owner or a superuser can change the session defaults for a database. Certain variables cannot be set this way, or can only be set by a superuser.
 
+[#id](#id-1.9.3.7.6)
+
 ## Parameters
 
 * *`name`*
 
-    The name of the database whose attributes are to be altered.
+  The name of the database whose attributes are to be altered.
 
 * *`allowconn`*
 
-    If false then no one can connect to this database.
+  If false then no one can connect to this database.
 
 * *`connlimit`*
 
-    How many concurrent connections can be made to this database. -1 means no limit.
+  How many concurrent connections can be made to this database. -1 means no limit.
 
 * *`istemplate`*
 
-    If true, then this database can be cloned by any user with `CREATEDB` privileges; if false, then only superusers or the owner of the database can clone it.
+  If true, then this database can be cloned by any user with `CREATEDB` privileges; if false, then only superusers or the owner of the database can clone it.
 
 * *`new_name`*
 
-    The new name of the database.
+  The new name of the database.
 
 * *`new_owner`*
 
-    The new owner of the database.
+  The new owner of the database.
 
 * *`new_tablespace`*
 
-    The new default tablespace of the database.
+  The new default tablespace of the database.
 
-    This form of the command cannot be executed inside a transaction block.
+  This form of the command cannot be executed inside a transaction block.
 
 * `REFRESH COLLATION VERSION`
 
-    Update the database collation version. See [Notes](sql-altercollation.html#SQL-ALTERCOLLATION-NOTES "Notes") for background.
+  Update the database collation version. See [Notes](sql-altercollation#SQL-ALTERCOLLATION-NOTES) for background.
 
 * *`configuration_parameter`**`value`*
 
-    Set this database's session default for the specified configuration parameter to the given value. If *`value`* is `DEFAULT` or, equivalently, `RESET` is used, the database-specific setting is removed, so the system-wide default setting will be inherited in new sessions. Use `RESET ALL` to clear all database-specific settings. `SET FROM CURRENT` saves the session's current value of the parameter as the database-specific value.
+  Set this database's session default for the specified configuration parameter to the given value. If *`value`* is `DEFAULT` or, equivalently, `RESET` is used, the database-specific setting is removed, so the system-wide default setting will be inherited in new sessions. Use `RESET ALL` to clear all database-specific settings. `SET FROM CURRENT` saves the session's current value of the parameter as the database-specific value.
 
-    See [SET](sql-set.html "SET") and [Chapter 20](runtime-config.html "Chapter 20. Server Configuration") for more information about allowed parameter names and values.
+  See [SET](sql-set) and [Chapter 20](runtime-config) for more information about allowed parameter names and values.
+
+[#id](#id-1.9.3.7.7)
 
 ## Notes
 
-It is also possible to tie a session default to a specific role rather than to a database; see [ALTER ROLE](sql-alterrole.html "ALTER ROLE"). Role-specific settings override database-specific ones if there is a conflict.
+It is also possible to tie a session default to a specific role rather than to a database; see [ALTER ROLE](sql-alterrole). Role-specific settings override database-specific ones if there is a conflict.
+
+[#id](#id-1.9.3.7.8)
 
 ## Examples
 
 To disable index scans by default in the database `test`:
 
 ```
-
 ALTER DATABASE test SET enable_indexscan TO off;
 ```
+
+[#id](#id-1.9.3.7.9)
 
 ## Compatibility
 
 The `ALTER DATABASE` statement is a PostgreSQL extension.
 
+[#id](#id-1.9.3.7.10)
+
 ## See Also
 
-[CREATE DATABASE](sql-createdatabase.html "CREATE DATABASE"), [DROP DATABASE](sql-dropdatabase.html "DROP DATABASE"), [SET](sql-set.html "SET"), [CREATE TABLESPACE](sql-createtablespace.html "CREATE TABLESPACE")
+[CREATE DATABASE](sql-createdatabase), [DROP DATABASE](sql-dropdatabase), [SET](sql-set), [CREATE TABLESPACE](sql-createtablespace)

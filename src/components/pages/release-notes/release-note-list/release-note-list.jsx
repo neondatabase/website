@@ -46,7 +46,7 @@ ReleaseNoteList.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string.isRequired,
-      content: PropTypes.shape({}).isRequired,
+      content: PropTypes.string.isRequired,
     })
   ).isRequired,
 };

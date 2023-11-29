@@ -1,3 +1,5 @@
+[#id](#SQL-GRANT)
+
 ## GRANT
 
 GRANT — define access privileges
@@ -5,7 +7,6 @@ GRANT — define access privileges
 ## Synopsis
 
 ```
-
 GRANT { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER }
     [, ...] | ALL [ PRIVILEGES ] }
     ON { [ TABLE ] table_name [, ...]
@@ -95,9 +96,13 @@ where role_specification can be:
   | SESSION_USER
 ```
 
+[#id](#SQL-GRANT-DESCRIPTION)
+
 ## Description
 
 The `GRANT` command has two basic variants: one that grants privileges on a database object (table, column, view, foreign table, sequence, database, foreign-data wrapper, foreign server, function, procedure, procedural language, large object, configuration parameter, schema, tablespace, or type), and one that grants membership in a role. These variants are similar in many ways, but they are different enough to be described separately.
+
+[#id](#SQL-GRANT-DESCRIPTION-OBJECTS)
 
 ### GRANT on Database Objects
 
@@ -117,19 +122,21 @@ The possible privileges are:
 
 * `SELECT``INSERT``UPDATE``DELETE``TRUNCATE``REFERENCES``TRIGGER``CREATE``CONNECT``TEMPORARY``EXECUTE``USAGE``SET``ALTER SYSTEM`
 
-    Specific types of privileges, as defined in [Section 5.7](ddl-priv.html "5.7. Privileges").
+  Specific types of privileges, as defined in [Section 5.7](ddl-priv).
 
 * `TEMP`
 
-    Alternative spelling for `TEMPORARY`.
+  Alternative spelling for `TEMPORARY`.
 
 * `ALL PRIVILEGES`
 
-    Grant all of the privileges available for the object's type. The `PRIVILEGES` key word is optional in PostgreSQL, though it is required by strict SQL.
+  Grant all of the privileges available for the object's type. The `PRIVILEGES` key word is optional in PostgreSQL, though it is required by strict SQL.
 
 The `FUNCTION` syntax works for plain functions, aggregate functions, and window functions, but not for procedures; use `PROCEDURE` for those. Alternatively, use `ROUTINE` to refer to a function, aggregate function, window function, or procedure regardless of its precise type.
 
 There is also an option to grant privileges on all objects of the same type within one or more schemas. This functionality is currently supported only for tables, sequences, functions, and procedures. `ALL TABLES` also affects views and foreign tables, just like the specific-object `GRANT` command. `ALL FUNCTIONS` also affects aggregate and window functions, but not procedures, again just like the specific-object `GRANT` command. Use `ALL ROUTINES` to include procedures.
+
+[#id](#SQL-GRANT-DESCRIPTION-ROLES)
 
 ### GRANT on Roles
 
@@ -139,9 +146,9 @@ Each of the options described below can be set to either `TRUE` or `FALSE`. The 
 
 The `ADMIN` option allows the member to in turn grant membership in the role to others, and revoke membership in the role as well. Without the admin option, ordinary users cannot do that. A role is not considered to hold `WITH ADMIN OPTION` on itself. Database superusers can grant or revoke membership in any role to anyone. This option defaults to `FALSE`.
 
-The `INHERIT` option, if it is set to `TRUE`, causes the member to inherit the privileges of the granted role. That is, it can automatically use whatever database privileges have been granted to that role. If set to `FALSE`, the member does not inherit the privileges of the granted role. If this clause is not specified, it defaults to true if the member role is set to `INHERIT` and to false if the member role is set to `NOINHERIT`. See [`CREATE ROLE`](sql-createrole.html "CREATE ROLE").
+The `INHERIT` option, if it is set to `TRUE`, causes the member to inherit the privileges of the granted role. That is, it can automatically use whatever database privileges have been granted to that role. If set to `FALSE`, the member does not inherit the privileges of the granted role. If this clause is not specified, it defaults to true if the member role is set to `INHERIT` and to false if the member role is set to `NOINHERIT`. See [`CREATE ROLE`](sql-createrole).
 
-The `SET` option, if it is set to `TRUE`, allows the member to change to the granted role using the [`SET ROLE`](sql-set-role.html "SET ROLE") command. If a role is an indirect member of another role, it can use `SET ROLE` to change to that role only if there is a chain of grants each of which has `SET TRUE`. This option defaults to `TRUE`.
+The `SET` option, if it is set to `TRUE`, allows the member to change to the granted role using the [`SET ROLE`](sql-set-role) command. If a role is an indirect member of another role, it can use `SET ROLE` to change to that role only if there is a chain of grants each of which has `SET TRUE`. This option defaults to `TRUE`.
 
 To create an object owned by another role or give ownership of an existing object to another role, you must have the ability to `SET ROLE` to that role; otherwise, commands such as `ALTER ... OWNER TO` or `CREATE DATABASE ... OWNER` will fail. However, a user who inherits the privileges of a role but does not have the ability to `SET ROLE` to that role may be able to obtain full access to the role by manipulating existing objects owned by that role (e.g. they could redefine an existing function to act as a Trojan horse). Therefore, if a role's privileges are to be inherited but should not be accessible via `SET ROLE`, it should not own any SQL objects.
 
@@ -149,9 +156,11 @@ If `GRANTED BY` is specified, the grant is recorded as having been done by the s
 
 Unlike the case with privileges, membership in a role cannot be granted to `PUBLIC`. Note also that this form of the command does not allow the noise word `GROUP` in *`role_specification`*.
 
+[#id](#SQL-GRANT-NOTES)
+
 ## Notes
 
-The [`REVOKE`](sql-revoke.html "REVOKE") command is used to revoke access privileges.
+The [`REVOKE`](sql-revoke) command is used to revoke access privileges.
 
 Since PostgreSQL 8.1, the concepts of users and groups have been unified into a single kind of entity called a role. It is therefore no longer necessary to use the keyword `GROUP` to identify whether a grantee is a user or a group. `GROUP` is still allowed in the command, but it is a noise word.
 
@@ -169,21 +178,21 @@ If the role executing `GRANT` holds the required privileges indirectly via more 
 
 Granting permission on a table does not automatically extend permissions to any sequences used by the table, including sequences tied to `SERIAL` columns. Permissions on sequences must be set separately.
 
-See [Section 5.7](ddl-priv.html "5.7. Privileges") for more information about specific privilege types, as well as how to inspect objects' privileges.
+See [Section 5.7](ddl-priv) for more information about specific privilege types, as well as how to inspect objects' privileges.
+
+[#id](#SQL-GRANT-EXAMPLES)
 
 ## Examples
 
 Grant insert privilege to all users on table `films`:
 
 ```
-
 GRANT INSERT ON films TO PUBLIC;
 ```
 
 Grant all available privileges to user `manuel` on view `kinds`:
 
 ```
-
 GRANT ALL PRIVILEGES ON kinds TO manuel;
 ```
 
@@ -192,9 +201,10 @@ Note that while the above will indeed grant all privileges if executed by a supe
 Grant membership in role `admins` to user `joe`:
 
 ```
-
 GRANT admins TO joe;
 ```
+
+[#id](#SQL-GRANT-COMPATIBILITY)
 
 ## Compatibility
 
@@ -212,6 +222,8 @@ In the SQL standard, sequences only have a `USAGE` privilege, which controls the
 
 Privileges on databases, tablespaces, schemas, languages, and configuration parameters are PostgreSQL extensions.
 
+[#id](#id-1.9.3.150.9)
+
 ## See Also
 
-[REVOKE](sql-revoke.html "REVOKE"), [ALTER DEFAULT PRIVILEGES](sql-alterdefaultprivileges.html "ALTER DEFAULT PRIVILEGES")
+[REVOKE](sql-revoke), [ALTER DEFAULT PRIVILEGES](sql-alterdefaultprivileges)

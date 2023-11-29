@@ -1,3 +1,5 @@
+[#id](#CLIENT-AUTHENTICATION-PROBLEMS)
+
 ## 21.15. Authentication Problems [#](#CLIENT-AUTHENTICATION-PROBLEMS)
 
 Authentication failures and related problems generally manifest themselves through error messages like the following:

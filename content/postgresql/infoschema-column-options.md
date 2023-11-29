@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-COLUMN-OPTIONS)
+
 ## 37.14. `column_options` [#](#INFOSCHEMA-COLUMN-OPTIONS)
 
 The view `column_options` contains all the options defined for foreign table columns in the current database. Only those foreign table columns are shown that the current user has access to (by way of being the owner or having some privilege).
+
+[#id](#id-1.7.6.18.3)
 
 **Table 37.12. `column_options` Columns**
 

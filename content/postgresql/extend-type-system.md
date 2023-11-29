@@ -1,40 +1,58 @@
+[#id](#EXTEND-TYPE-SYSTEM)
+
 ## 38.2. The PostgreSQL Type System [#](#EXTEND-TYPE-SYSTEM)
 
-  * *   [38.2.1. Base Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-BASE)
-  * [38.2.2. Container Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-CONTAINER)
-  * [38.2.3. Domains](extend-type-system.html#EXTEND-TYPE-SYSTEM-DOMAINS)
-  * [38.2.4. Pseudo-Types](extend-type-system.html#EXTEND-TYPE-SYSTEM-PSEUDO)
-  * [38.2.5. Polymorphic Types](extend-type-system.html#EXTEND-TYPES-POLYMORPHIC)
+  * [38.2.1. Base Types](extend-type-system#EXTEND-TYPE-SYSTEM-BASE)
+  * [38.2.2. Container Types](extend-type-system#EXTEND-TYPE-SYSTEM-CONTAINER)
+  * [38.2.3. Domains](extend-type-system#EXTEND-TYPE-SYSTEM-DOMAINS)
+  * [38.2.4. Pseudo-Types](extend-type-system#EXTEND-TYPE-SYSTEM-PSEUDO)
+  * [38.2.5. Polymorphic Types](extend-type-system#EXTEND-TYPES-POLYMORPHIC)
+
+
 
 PostgreSQL data types can be divided into base types, container types, domains, and pseudo-types.
 
+[#id](#EXTEND-TYPE-SYSTEM-BASE)
+
 ### 38.2.1. Base Types [#](#EXTEND-TYPE-SYSTEM-BASE)
 
-Base types are those, like `integer`, that are implemented below the level of the SQL language (typically in a low-level language such as C). They generally correspond to what are often known as abstract data types. PostgreSQL can only operate on such types through functions provided by the user and only understands the behavior of such types to the extent that the user describes them. The built-in base types are described in [Chapter 8](datatype.html "Chapter 8. Data Types").
+Base types are those, like `integer`, that are implemented below the level of the SQL language (typically in a low-level language such as C). They generally correspond to what are often known as abstract data types. PostgreSQL can only operate on such types through functions provided by the user and only understands the behavior of such types to the extent that the user describes them. The built-in base types are described in [Chapter 8](datatype).
 
-Enumerated (enum) types can be considered as a subcategory of base types. The main difference is that they can be created using just SQL commands, without any low-level programming. Refer to [Section 8.7](datatype-enum.html "8.7. Enumerated Types") for more information.
+Enumerated (enum) types can be considered as a subcategory of base types. The main difference is that they can be created using just SQL commands, without any low-level programming. Refer to [Section 8.7](datatype-enum) for more information.
+
+[#id](#EXTEND-TYPE-SYSTEM-CONTAINER)
 
 ### 38.2.2. Container Types [#](#EXTEND-TYPE-SYSTEM-CONTAINER)
 
 PostgreSQL has three kinds of “container” types, which are types that contain multiple values of other types. These are arrays, composites, and ranges.
 
-Arrays can hold multiple values that are all of the same type. An array type is automatically created for each base type, composite type, range type, and domain type. But there are no arrays of arrays. So far as the type system is concerned, multi-dimensional arrays are the same as one-dimensional arrays. Refer to [Section 8.15](arrays.html "8.15. Arrays") for more information.
+Arrays can hold multiple values that are all of the same type. An array type is automatically created for each base type, composite type, range type, and domain type. But there are no arrays of arrays. So far as the type system is concerned, multi-dimensional arrays are the same as one-dimensional arrays. Refer to [Section 8.15](arrays) for more information.
 
-Composite types, or row types, are created whenever the user creates a table. It is also possible to use [CREATE TYPE](sql-createtype.html "CREATE TYPE") to define a “stand-alone” composite type with no associated table. A composite type is simply a list of types with associated field names. A value of a composite type is a row or record of field values. Refer to [Section 8.16](rowtypes.html "8.16. Composite Types") for more information.
+Composite types, or row types, are created whenever the user creates a table. It is also possible to use [CREATE TYPE](sql-createtype) to define a “stand-alone” composite type with no associated table. A composite type is simply a list of types with associated field names. A value of a composite type is a row or record of field values. Refer to [Section 8.16](rowtypes) for more information.
 
-A range type can hold two values of the same type, which are the lower and upper bounds of the range. Range types are user-created, although a few built-in ones exist. Refer to [Section 8.17](rangetypes.html "8.17. Range Types") for more information.
+A range type can hold two values of the same type, which are the lower and upper bounds of the range. Range types are user-created, although a few built-in ones exist. Refer to [Section 8.17](rangetypes) for more information.
+
+[#id](#EXTEND-TYPE-SYSTEM-DOMAINS)
 
 ### 38.2.3. Domains [#](#EXTEND-TYPE-SYSTEM-DOMAINS)
 
-A domain is based on a particular underlying type and for many purposes is interchangeable with its underlying type. However, a domain can have constraints that restrict its valid values to a subset of what the underlying type would allow. Domains are created using the SQL command [CREATE DOMAIN](sql-createdomain.html "CREATE DOMAIN"). Refer to [Section 8.18](domains.html "8.18. Domain Types") for more information.
+A domain is based on a particular underlying type and for many purposes is interchangeable with its underlying type. However, a domain can have constraints that restrict its valid values to a subset of what the underlying type would allow. Domains are created using the SQL command [CREATE DOMAIN](sql-createdomain). Refer to [Section 8.18](domains) for more information.
+
+[#id](#EXTEND-TYPE-SYSTEM-PSEUDO)
 
 ### 38.2.4. Pseudo-Types [#](#EXTEND-TYPE-SYSTEM-PSEUDO)
 
-There are a few “pseudo-types” for special purposes. Pseudo-types cannot appear as columns of tables or components of container types, but they can be used to declare the argument and result types of functions. This provides a mechanism within the type system to identify special classes of functions. [Table 8.27](datatype-pseudo.html#DATATYPE-PSEUDOTYPES-TABLE "Table 8.27. Pseudo-Types") lists the existing pseudo-types.
+There are a few “pseudo-types” for special purposes. Pseudo-types cannot appear as columns of tables or components of container types, but they can be used to declare the argument and result types of functions. This provides a mechanism within the type system to identify special classes of functions. [Table 8.27](datatype-pseudo#DATATYPE-PSEUDOTYPES-TABLE) lists the existing pseudo-types.
+
+[#id](#EXTEND-TYPES-POLYMORPHIC)
 
 ### 38.2.5. Polymorphic Types [#](#EXTEND-TYPES-POLYMORPHIC)
 
-Some pseudo-types of special interest are the *polymorphic types*, which are used to declare *polymorphic functions*. This powerful feature allows a single function definition to operate on many different data types, with the specific data type(s) being determined by the data types actually passed to it in a particular call. The polymorphic types are shown in [Table 38.1](extend-type-system.html#EXTEND-TYPES-POLYMORPHIC-TABLE "Table 38.1. Polymorphic Types"). Some examples of their use appear in [Section 38.5.11](xfunc-sql.html#XFUNC-SQL-POLYMORPHIC-FUNCTIONS "38.5.11. Polymorphic SQL Functions").
+
+
+Some pseudo-types of special interest are the *polymorphic types*, which are used to declare *polymorphic functions*. This powerful feature allows a single function definition to operate on many different data types, with the specific data type(s) being determined by the data types actually passed to it in a particular call. The polymorphic types are shown in [Table 38.1](extend-type-system#EXTEND-TYPES-POLYMORPHIC-TABLE). Some examples of their use appear in [Section 38.5.11](xfunc-sql#XFUNC-SQL-POLYMORPHIC-FUNCTIONS).
+
+[#id](#EXTEND-TYPES-POLYMORPHIC-TABLE)
 
 **Table 38.1. Polymorphic Types**
 
@@ -43,16 +61,15 @@ Some pseudo-types of special interest are the *polymorphic types*, which are use
 | `anyelement`              | Simple | Indicates that a function accepts any data type                                                                                  |
 | `anyarray`                | Simple | Indicates that a function accepts any array data type                                                                            |
 | `anynonarray`             | Simple | Indicates that a function accepts any non-array data type                                                                        |
-| `anyenum`                 | Simple | Indicates that a function accepts any enum data type (see [Section 8.7](datatype-enum.html "8.7. Enumerated Types"))             |
-| `anyrange`                | Simple | Indicates that a function accepts any range data type (see [Section 8.17](rangetypes.html "8.17. Range Types"))                  |
-| `anymultirange`           | Simple | Indicates that a function accepts any multirange data type (see [Section 8.17](rangetypes.html "8.17. Range Types"))             |
+| `anyenum`                 | Simple | Indicates that a function accepts any enum data type (see [Section 8.7](datatype-enum))                                     |
+| `anyrange`                | Simple | Indicates that a function accepts any range data type (see [Section 8.17](rangetypes))                                      |
+| `anymultirange`           | Simple | Indicates that a function accepts any multirange data type (see [Section 8.17](rangetypes))                                 |
 | `anycompatible`           | Common | Indicates that a function accepts any data type, with automatic promotion of multiple arguments to a common data type            |
 | `anycompatiblearray`      | Common | Indicates that a function accepts any array data type, with automatic promotion of multiple arguments to a common data type      |
 | `anycompatiblenonarray`   | Common | Indicates that a function accepts any non-array data type, with automatic promotion of multiple arguments to a common data type  |
 | `anycompatiblerange`      | Common | Indicates that a function accepts any range data type, with automatic promotion of multiple arguments to a common data type      |
 | `anycompatiblemultirange` | Common | Indicates that a function accepts any multirange data type, with automatic promotion of multiple arguments to a common data type |
 
-\
 
 Polymorphic arguments and results are tied to each other and are resolved to specific data types when a query calling a polymorphic function is parsed. When there is more than one polymorphic argument, the actual data types of the input values must match up as described below. If the function's result type is polymorphic, or it has output parameters of polymorphic types, the types of those results are deduced from the actual types of the polymorphic inputs as described below.
 
@@ -72,7 +89,7 @@ In most cases, the parser can infer the actual data type for a polymorphic resul
 
 Note that `anynonarray` and `anyenum` do not represent separate type variables; they are the same type as `anyelement`, just with an additional constraint. For example, declaring a function as `f(anyelement, anyenum)` is equivalent to declaring it as `f(anyenum, anyenum)`: both actual arguments have to be the same enum type.
 
-For the “common” family of polymorphic types, the matching and deduction rules work approximately the same as for the “simple” family, with one major difference: the actual types of the arguments need not be identical, so long as they can be implicitly cast to a single common type. The common type is selected following the same rules as for `UNION` and related constructs (see [Section 10.5](typeconv-union-case.html "10.5. UNION, CASE, and Related Constructs")). Selection of the common type considers the actual types of `anycompatible` and `anycompatiblenonarray` inputs, the array element types of `anycompatiblearray` inputs, the range subtypes of `anycompatiblerange` inputs, and the multirange subtypes of `anycompatiblemultirange` inputs. If `anycompatiblenonarray` is present then the common type is required to be a non-array type. Once a common type is identified, arguments in `anycompatible` and `anycompatiblenonarray` positions are automatically cast to that type, and arguments in `anycompatiblearray` positions are automatically cast to the array type for that type.
+For the “common” family of polymorphic types, the matching and deduction rules work approximately the same as for the “simple” family, with one major difference: the actual types of the arguments need not be identical, so long as they can be implicitly cast to a single common type. The common type is selected following the same rules as for `UNION` and related constructs (see [Section 10.5](typeconv-union-case)). Selection of the common type considers the actual types of `anycompatible` and `anycompatiblenonarray` inputs, the array element types of `anycompatiblearray` inputs, the range subtypes of `anycompatiblerange` inputs, and the multirange subtypes of `anycompatiblemultirange` inputs. If `anycompatiblenonarray` is present then the common type is required to be a non-array type. Once a common type is identified, arguments in `anycompatible` and `anycompatiblenonarray` positions are automatically cast to that type, and arguments in `anycompatiblearray` positions are automatically cast to the array type for that type.
 
 Since there is no way to select a range type knowing only its subtype, use of `anycompatiblerange` and/or `anycompatiblemultirange` requires that all arguments declared with that type have the same actual range and/or multirange type, and that that type's subtype agree with the selected common type, so that no casting of the range values is required. As with `anyrange` and `anymultirange`, use of `anycompatiblerange` and `anymultirange` as a function result type requires that there be an `anycompatiblerange` or `anycompatiblemultirange` argument.
 
@@ -89,4 +106,4 @@ RETURNS anycompatible AS ...
 
 In an actual call of this function, the first two inputs must have exactly the same type. The last two inputs must be promotable to a common type, but this type need not have anything to do with the type of the first two inputs. The result will have the common type of the last two inputs.
 
-A variadic function (one taking a variable number of arguments, as in [Section 38.5.6](xfunc-sql.html#XFUNC-SQL-VARIADIC-FUNCTIONS "38.5.6. SQL Functions with Variable Numbers of Arguments")) can be polymorphic: this is accomplished by declaring its last parameter as `VARIADIC` `anyarray` or `VARIADIC` `anycompatiblearray`. For purposes of argument matching and determining the actual result type, such a function behaves the same as if you had written the appropriate number of `anynonarray` or `anycompatiblenonarray` parameters.
+A variadic function (one taking a variable number of arguments, as in [Section 38.5.6](xfunc-sql#XFUNC-SQL-VARIADIC-FUNCTIONS)) can be polymorphic: this is accomplished by declaring its last parameter as `VARIADIC` `anyarray` or `VARIADIC` `anycompatiblearray`. For purposes of argument matching and determining the actual result type, such a function behaves the same as if you had written the appropriate number of `anynonarray` or `anycompatiblenonarray` parameters.

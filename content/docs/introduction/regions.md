@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2023-10-19T23:10:12.843Z'
+updatedOn: '2023-11-24T11:25:06.758Z'
 ---
 Neon supports project deployment in several regions. We recommended that you select the region closest to your application server to reduce latency between your Neon project and your application.
 
@@ -21,7 +21,7 @@ Neon currently supports the following AWS regions:
 
 ## Select a region for your Neon project
 
-You can select the region for your Neon project during project creation. See [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
+You can select the region for your Neon project during project creation. See [Create a project](/docs/manage/projects#create-a-project).
 
 All branches and databases created in a Neon project are created in the region selected for the project.
 
@@ -35,7 +35,7 @@ After you select a region for a Neon project, it cannot be changed for that proj
 
 If you need to move your data to a different region, the following steps are recommended:
 
-1. Create a new project in the desired region. For project creation instructions, see [Setting up a project](/docs/get-started-with-neon/setting-up-a-project).
+1. Create a new project in the desired region. For project creation instructions, see [Create a project](/docs/manage/projects#create-a-project).
 1. Move your data from the old project to the new project. For instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
 
 <Admonition type="note">
@@ -46,6 +46,4 @@ Moving data to a new Neon project may require downtime if you are moving a produ
 
 To request support for additional regions, please visit the [Hosting in other AWS regions](https://community.neon.tech/t/hosting-in-other-aws-regions/81/5) topic in the Neon Community Forum.
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

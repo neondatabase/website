@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-PREPARE-CURSOR)
+
 ## SPI\_prepare\_cursor
 
 SPI\_prepare\_cursor — prepare a statement, without executing it yet
@@ -5,10 +7,11 @@ SPI\_prepare\_cursor — prepare a statement, without executing it yet
 ## Synopsis
 
 ```
-
 SPIPlanPtr SPI_prepare_cursor(const char * command, int nargs,
                               Oid * argtypes, int cursorOptions)
 ```
+
+[#id](#id-1.8.12.8.9.5)
 
 ## Description
 
@@ -16,27 +19,33 @@ SPIPlanPtr SPI_prepare_cursor(const char * command, int nargs,
 
 This function is now deprecated in favor of `SPI_prepare_extended`.
 
+[#id](#id-1.8.12.8.9.6)
+
 ## Arguments
 
 * `const char * command`
 
-    command string
+  command string
 
 * `int nargs`
 
-    number of input parameters (`$1`, `$2`, etc.)
+  number of input parameters (`$1`, `$2`, etc.)
 
 * `Oid * argtypes`
 
-    pointer to an array containing the OIDs of the data types of the parameters
+  pointer to an array containing the OIDs of the data types of the parameters
 
 * `int cursorOptions`
 
-    integer bit mask of cursor options; zero produces default behavior
+  integer bit mask of cursor options; zero produces default behavior
+
+[#id](#id-1.8.12.8.9.7)
 
 ## Return Value
 
 `SPI_prepare_cursor` has the same return conventions as `SPI_prepare`.
+
+[#id](#id-1.8.12.8.9.8)
 
 ## Notes
 

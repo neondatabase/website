@@ -1,3 +1,5 @@
+[#id](#SQL-ALTERTSPARSER)
+
 ## ALTER TEXT SEARCH PARSER
 
 ALTER TEXT SEARCH PARSER — change the definition of a text search parser
@@ -5,10 +7,11 @@ ALTER TEXT SEARCH PARSER — change the definition of a text search parser
 ## Synopsis
 
 ```
-
 ALTER TEXT SEARCH PARSER name RENAME TO new_name
 ALTER TEXT SEARCH PARSER name SET SCHEMA new_schema
 ```
+
+[#id](#id-1.9.3.39.5)
 
 ## Description
 
@@ -16,24 +19,30 @@ ALTER TEXT SEARCH PARSER name SET SCHEMA new_schema
 
 You must be a superuser to use `ALTER TEXT SEARCH PARSER`.
 
+[#id](#id-1.9.3.39.6)
+
 ## Parameters
 
 * *`name`*
 
-    The name (optionally schema-qualified) of an existing text search parser.
+  The name (optionally schema-qualified) of an existing text search parser.
 
 * *`new_name`*
 
-    The new name of the text search parser.
+  The new name of the text search parser.
 
 * *`new_schema`*
 
-    The new schema for the text search parser.
+  The new schema for the text search parser.
+
+[#id](#id-1.9.3.39.7)
 
 ## Compatibility
 
 There is no `ALTER TEXT SEARCH PARSER` statement in the SQL standard.
 
+[#id](#id-1.9.3.39.8)
+
 ## See Also
 
-[CREATE TEXT SEARCH PARSER](sql-createtsparser.html "CREATE TEXT SEARCH PARSER"), [DROP TEXT SEARCH PARSER](sql-droptsparser.html "DROP TEXT SEARCH PARSER")
+[CREATE TEXT SEARCH PARSER](sql-createtsparser), [DROP TEXT SEARCH PARSER](sql-droptsparser)

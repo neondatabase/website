@@ -1,3 +1,5 @@
+[#id](#CONTRIB-DBLINK-GET-PKEY)
+
 ## dblink\_get\_pkey
 
 dblink\_get\_pkey — returns the positions and field names of a relation's primary key fields
@@ -9,15 +11,21 @@ dblink\_get\_pkey — returns the positions and field names of a relation's prim
 dblink_get_pkey(text relname) returns setof dblink_pkey_results
 ```
 
+[#id](#id-1.11.7.22.20.5)
+
 ## Description
 
 `dblink_get_pkey` provides information about the primary key of a relation in the local database. This is sometimes useful in generating queries to be sent to remote databases.
+
+[#id](#id-1.11.7.22.20.6)
 
 ## Arguments
 
 * *`relname`*
 
-    Name of a local relation, for example `foo` or `myschema.mytab`. Include double quotes if the name is mixed-case or contains special characters, for example `"FooBar"`; without quotes, the string will be folded to lower case.
+  Name of a local relation, for example `foo` or `myschema.mytab`. Include double quotes if the name is mixed-case or contains special characters, for example `"FooBar"`; without quotes, the string will be folded to lower case.
+
+[#id](#id-1.11.7.22.20.7)
 
 ## Return Value
 
@@ -29,6 +37,8 @@ CREATE TYPE dblink_pkey_results AS (position int, colname text);
 ```
 
 The `position` column simply runs from 1 to *`N`*; it is the number of the field within the primary key, not the number within the table's columns.
+
+[#id](#id-1.11.7.22.20.8)
 
 ## Examples
 

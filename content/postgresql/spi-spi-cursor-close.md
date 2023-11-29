@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-CURSOR-CLOSE)
+
 ## SPI\_cursor\_close
 
 SPI\_cursor\_close — close a cursor
@@ -5,9 +7,10 @@ SPI\_cursor\_close — close a cursor
 ## Synopsis
 
 ```
-
 void SPI_cursor_close(Portal portal)
 ```
+
+[#id](#id-1.8.12.8.28.5)
 
 ## Description
 
@@ -15,8 +18,10 @@ void SPI_cursor_close(Portal portal)
 
 All open cursors are closed automatically at the end of a transaction. `SPI_cursor_close` need only be invoked if it is desirable to release resources sooner.
 
+[#id](#id-1.8.12.8.28.6)
+
 ## Arguments
 
 * `Portal portal`
 
-    portal containing the cursor
+  portal containing the cursor
