@@ -6,13 +6,13 @@ isDraft: false
 updatedOn: '2023-11-24T11:25:06.753Z'
 ---
 
-[PolyScale](https://docs.polyscale.ai/) is a serverless database cache service. With PolyScale, you can distribute and cache your data globally, allowing you to scale your database without altering transactional semantics. No coding or infrastructure changes are required. You can connect Neon to PolyScale in minutes, providing your database-backed applications with speedy access to your Neon data from anywhere in the world.
-
-Follow the steps below to connect your Neon database to PolyScale manually. Neon also provides a PolyScale integration, which allows you to set up a global cache in just a few clicks. See [PolyScale integration](/docs/guides/polyscale-integration). 
+[PolyScale](https://docs.polyscale.ai/) is a serverless database cache service. With PolyScale, you can distribute and cache your data globally, allowing you to scale your database without altering transactional semantics. No coding or infrastructure changes are required. You can connect Neon to PolyScale in minutes, providing your database-backed applications with speedy access to your Neon data from anywhere in the world. 
 
 <Admonition type="note">
-The PolyScale integration creates a cache for the read-write compute endpoint associated with your project's primary branch. If you want to set up a cache for a read-only compute endpoint or a non-primary branch, use these manual setup instructions.
+Neon also provides a PolyScale integration, which allows you to set up a PolyScale cache in just a few clicks. See [PolyScale integration](/docs/guides/polyscale-integration). The PolyScale integration creates a cache for the read-write compute endpoint associated with your project's primary branch. If you do not wnat to use the integration or you want to set up a cache for a read-only compute endpoint or a non-primary branch in your Neon project, you can use these manual setup instructions.
 </Admonition>
+
+Follow the steps below to connect your Neon database to PolyScale manually.
 
 ## Retrieve your Neon connection details
 
