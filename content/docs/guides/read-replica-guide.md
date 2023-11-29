@@ -107,9 +107,7 @@ To view read replicas for a branch, select **Branches** in the Neon Console, and
 </TabItem>
 
 <TabItem>
-In Neon, a read replica is implemented as a read-only compute endpoint.  To view read-only compute endpoints with the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint), use the [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints) method. In the response body, read replica compute endpoints are identified by the `type` value, which is `read_only`. 
-
-For information about obtaining the required `project_id` parameter for this command, refer to [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints), in the _Neon API reference_.
+In Neon, a read replica is implemented as a read-only compute endpoint.  To view read-only compute endpoints with the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint), use the [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints) method. 
 
 ```bash
 curl -X 'GET' \
@@ -118,6 +116,9 @@ curl -X 'GET' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
+For information about obtaining the required `project_id` parameter for this command, refer to [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+
+In the response body for this method, read replica compute endpoints are identified by the `type` value, which is `read_only`.
 </TabItem>
 
 </Tabs>
@@ -141,8 +142,6 @@ To edit a read-only compute endpoint using the Neon Console:
 <TabItem>
 In Neon, a read replica is implemented as a read-only compute endpoint. To edit a read-only compute endpoint with the Neon API, use the [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) method. 
 
-Compute endpoints are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint), in the _Neon API reference_.
-
 ```bash
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/project_id/endpoints/endpoint_id \
@@ -160,6 +159,8 @@ curl --request PATCH \
 }
 '
 ```
+
+Compute endpoints are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 </TabItem>
 
@@ -185,14 +186,14 @@ To delete a read replica using the Neon Console:
 <TabItem>
 In Neon, a read replica is implemented as a read-only compute endpoint. To delete a read-only compute endpoint with the Neon API, use the [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint) method. 
 
-Compute endpoints are identified by their `project_id` and `endpoint_id`, regardless of whether they are read-write or read-only. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint), in the _Neon API reference_.
-
 ```bash
 curl --request DELETE \
      --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/endpoint_id \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY’
 ```
+
+Compute endpoints are identified by their `project_id` and `endpoint_id`, regardless of whether they are read-write or read-only. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 </TabItem>
 
