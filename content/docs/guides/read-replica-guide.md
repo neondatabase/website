@@ -45,7 +45,7 @@ In a few moments, your read-only compute is provisioned and appears in the **Com
 
 <TabItem>
 
-To create a read replica using the Neon CLI, use the [branches](/docs/reference/cli-branches) command, specifying the `add-compute` and `-type read_only` options. If you have more than one Neon project, also  include the `--project-id` option.  
+To create a read replica using the Neon CLI, use the [branches](/docs/reference/cli-branches) command, specifying the `add-compute` subcommand with `--type read_only`. If you have more than one Neon project, also include the `--project-id` option.  
 
 
 ```bash
@@ -104,6 +104,8 @@ You can view read replicas using the Neon Console or [Neon API](https://api-docs
 
 <TabItem>
 To view read replicas for a branch, select **Branches** in the Neon Console, and select a branch. Under the **Computes** heading, the **Type** field identifies your read replicas. Read replicas have a `R/O` value instead of `R/W`.
+
+![View read replicas](/docs/guides/view_read_replica.png)
 </TabItem>
 
 <TabItem>
@@ -144,7 +146,7 @@ In Neon, a read replica is implemented as a read-only compute endpoint. To edit 
 
 ```bash
 curl --request PATCH \
-     --url https://console.neon.tech/api/v2/projects/project_id/endpoints/endpoint_id \
+     --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id> \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY` \
      --header 'content-type: application/json' \
@@ -188,12 +190,12 @@ In Neon, a read replica is implemented as a read-only compute endpoint. To delet
 
 ```bash
 curl --request DELETE \
-     --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/endpoint_id \
+     --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id> \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY’
 ```
 
-Compute endpoints are identified by their `project_id` and `endpoint_id`, regardless of whether they are read-write or read-only. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+Compute endpoints are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 </TabItem>
 
