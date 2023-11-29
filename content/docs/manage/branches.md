@@ -135,7 +135,7 @@ If you want to connect from an application, the **Connection Details** widget on
 
 When working with database branches, you might find yourself in a situation where your working branch diverges too far from its parent. For example, let's say you have two child branches `staging` and `development` forked from your `main` production branch. You have been working on the `development` branch and find it is now too far out of date with production. You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the **Reset from parent** feature, you can perform this clean reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
 
-Some key points:
+<u>Key points</u>:
 * You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are not currently supported.
 * This reset is a complete override, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
 * Existing connections will be temporarily interupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
@@ -161,14 +161,14 @@ If this branch has children of its own, resetting is blocked. The resulting erro
 Using the CLI, you can reset a branch from parent using the following command:
 
 ``` bash
-neonctl branches reset <branch name> --parent
+neonctl branches reset <id|name> --parent
 ```
-In the `branch` field, specify the name of the child branch whose data you want to reset. The `--parent` parameter specifies the kind of reset action that Neon will perform. In the future, there may be other kinds of resets available. For example, rewinding a branch to an earlier period in time.
+In the `id|name` field, specify the branch ID or name of the child branch whose data you want to reset. The `--parent` parameter specifies the kind of reset action that Neon will perform. In the future, there may be other kinds of resets available. For example, rewinding a branch to an earlier period in time.
 
 If you have multiple projects in your account, you'll also have to include the project-id in the command along with the branch.
 
 ``` bash
-neonctl branches reset <branch name> --parent --project-id <project id>
+neonctl branches reset <id|name> --parent --project-id <project id>
 ```
 
 Example:
@@ -180,7 +180,7 @@ Alternatively, you can set the project-id as background context for the duration
 ```bash
 neonctl set-context --project-id <project id>
 ```
-For more about setting contexts, see [cli docs.
+For more about setting contexts, see [CLI set-context command](/docs/reference/cli-set-context).
 
 </TabItem>
 
