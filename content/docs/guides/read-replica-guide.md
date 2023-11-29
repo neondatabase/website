@@ -96,7 +96,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
     When you use a read-only connection string, you are connecting to a read replica. No write operations are permitted on this connection.
 
-## Viewing read replicas
+## View read replicas
 
 You can view read replicas using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
 
