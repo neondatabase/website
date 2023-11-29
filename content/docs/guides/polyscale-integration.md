@@ -10,7 +10,9 @@ Adding the PolyScale integration to your Neon project automatically creates a gl
 
 By default, PolyScale automatically caches all queries that pass through its platform. That means you can connect using the PolyScale connection string, and any queries you run will be cached.
 
+<Admonition type="note">
 The PolyScale integration creates a cache for the read-write compute endpoint associated with the primary branch of your Neon project. It does not cache queries for read-only compute endpoints or non-primary branches. If you want to set up a cache for those, please refer to the [manual PolyScale setup instructions](/docs/guides/polyscale).
+</Admonition>
 
 For more information about PolyScale, see [How PolyScale works](#how-polyscale-works).
 
@@ -83,13 +85,12 @@ Removing the integration deletes the cache and terminates all current connection
 
 ## How PolyScale works
 
-When you use a PolyScale connection string in your application, PolyScale automatically caches the queries that pass through the PolyScale platform via the connection string. That means when you are connected to PolyScale, any queries you run are cached.
+When you use a PolyScale connection string in your application, PolyScale automatically caches the queries that pass through its platform via the connection string. That means any queries you run using the PolyScale connection string are cached, by default.
 
-PolyScale identifies caching opportunities by recognizing and remembering patterns in query traffic. New queries typically begin to see cache hits on or about the third query. For more information, see [Time To First Hit](https://docs.polyscale.ai/how-does-it-work/#time-to-first-hit-ttfh), in the _PolyScale documentation_.
+PolyScale identifies caching opportunities by recognizing and remembering patterns in query traffic. New queries typically begin to see cache hits on or about the third query. For more information on this topic, see [Time To First Hit](https://docs.polyscale.ai/how-does-it-work/#time-to-first-hit-ttfh), in the _PolyScale documentation_.
 
-After queries from your application start passing through PolyScale, you can monitor traffic and caching behavior on the **Observability** tab in PolyScale. For more information, see [Observability](https://docs.polyscale.ai/database-observability/), in the _PolyScale documentation_.
+After queries from your application start passing through PolyScale, you can monitor traffic and caching behavior on the **Observability** tab in PolyScale. For instructions, see [Observability](https://docs.polyscale.ai/database-observability/), in the _PolyScale documentation_.
 
-
-For additional information about PolyScale, please refer to the [PolyScale documentation](https://docs.polyscale.ai/).
+For additional information about the PolyScale platform, please refer to the [PolyScale documentation](https://docs.polyscale.ai/).
 
 <NeedHelp/>
