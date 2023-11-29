@@ -60,11 +60,12 @@ neonctl branches add-compute mybranch --type read_only
 <TabItem>
 
 <CodeBlock showLineNumbers>
-To create a branch using the Neon API:
+
+In Neon, a read replica is implemented as a read-only compute endpoint. To create a read-only compute endpoint using the Neon API,  use the [Create endpoint](https://api-docs.neon.tech/reference/createprojectendpoint) method. The `type` attribute in the following example specifies `read_only`, which creates a read-only compute endpoint. For information about obtaining the required `project_id` and `branch_id` parameters, refer to [Create an endpoint](https://api-docs.neon.tech/reference/createprojectendpoint), in the _Neon API reference_.
 
 ```bash
 curl --request POST \
-     --url https://console.neon.tech/api/v2/projects/late-bar-27572981/endpoints \
+     --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' \
      --header 'content-type: application/json' \
@@ -72,7 +73,7 @@ curl --request POST \
 {
   "endpoint": {
     "type": "read_only",
-    "branch_id": "br-young-fire-15282225"
+    "branch_id": "<branch_id>"
   }
 }
 ' | jq
@@ -108,85 +109,116 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
 ## Viewing read replicas
 
+You can view read replicas using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
 To view read replicas for a branch, select **Branches** in the Neon Console, and select a branch. Under the **Computes** heading, the **Type** field identifies your read replicas. Read replicas have a `R/O` value instead of `R/W`.
+</TabItem>
+
+<TabItem>
+In Neon, a read replica is implemented as a read-only compute endpoint.  To view read-only compute endpoints with the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint), use the [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints) method. In the response body, read replica compute endpoints are identified by the `type` value, which is `read_only`. 
+
+For information about obtaining the required `project_id` parameter for this command, refer to [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints), in the _Neon API reference_.
+
+<CodeBlock showLineNumbers>
+
+```bash
+curl -X 'GET' \
+  'https://console.neon.tech/api/v2/projects/<project_id>/endpoints' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY'
+```
+</CodeBlock>
+
+</TabItem>
+
+</Tabs>
+
 
 ## Edit a read replica
 
-You can edit your read replica to change the [Compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) or [Auto-suspend](/docs/manage/endpoints#auto-suspend-configuration) configuration.
+You can edit a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to change the [Compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) or [Auto-suspend](/docs/manage/endpoints#auto-suspend-configuration) configuration.
 
-To edit a read-only compute endpoint:
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+To edit a read-only compute endpoint using the Neon Console:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Under **Computes**, identify the read-only compute endpoint you want to modify, click the compute endpoint kebab menu, and select **Edit**.
+1. Under **Computes**, identify the read-only compute endpoint you want to modify, click the compute endpoint menu, and select **Edit**.
 1. Specify your **Compute size** or **Suspend compute after a period of inactivity** changes and click **Save**.
+</TabItem>
+
+<TabItem>
+In Neon, a read replica is implemented as a read-only compute endpoint. To edit a read-only compute endpoint with the Neon API, use the [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) method. 
+
+Compute endpoints are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint), in the _Neon API reference_.
+
+<CodeBlock showLineNumbers>
+
+```bash
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/project_id/endpoints/endpoint_id \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY` \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "endpoint": {
+    "autoscaling_limit_min_cu": 25,
+    "autoscaling_limit_max_cu": 3,
+    "suspend_timeout_seconds": 604800,
+    "provisioner": "k8s-neonvm"
+  }
+}
+'
+```
+
+</CodeBlock>
+
+</TabItem>
+
+</Tabs>
+
 
 ## Delete a read replica
 
-Deleting a read replica is a permanent action, but you can quickly create a new read replica if you need one.
-To delete a read replica:
+You can delete a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Deleting a read replica is a permanent action, but you can quickly create a new read replica if you need one.
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+To delete a read replica using the Neon Console:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. Under **Computes**, find the read-only compute endpoint you want to delete. Read replicas have a `R/O` type.
 1. Click the compute endpoint kebab menu, and select **Delete**.
 1. On the confirmation dialog, click **Delete**.
+</TabItem>
 
-## Manage read replicas using the Neon API
+<TabItem>
+In Neon, a read replica is implemented as a read-only compute endpoint. To delete a read-only compute endpoint with the Neon API, use the [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint) method. 
 
-In Neon, a read replica is implemented as a read-only compute endpoint. The following examples demonstrate creating and deleting read-only compute endpoints using the Neon API. The Neon API also supports get, list, edit, start, and suspend API methods. For information about those methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+Compute endpoints are identified by their `project_id` and `endpoint_id`, regardless of whether they are read-write or read-only. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint), in the _Neon API reference_.
 
-<Admonition type="note">
-The API examples that follow only show some of the user-configurable request body attributes that are available to you. To view all attributes, refer to the method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
-</Admonition>
 
-### Prerequisites
-
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key. You must replace this value with an actual API key when making a Neon API request.
-
-### Create a read replica with the API
-
-The following Neon API method creates a read-only compute endpoint.
-
-```text
-POST /projects/{project_id}/endpoints
-```
-
-The API method appears as follows when specified in a cURL command. A compute endpoint must be associated with a branch. A branch can only have a single read-write endpoint but can have multiple read-only compute endpoints. The `type` attribute in the following example specifies `read_only`, which creates a read-only compute endpoint:
+<CodeBlock showLineNumbers>
 
 ```bash
-curl -X 'POST' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "endpoint": {
-    "branch_id": "br-blue-tooth-671580",
-    "type": "read_only"
-  }
-}'
+curl --request DELETE \
+     --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/endpoint_id \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY’
 ```
 
-For information about obtaining the required `project_id` and `branch_id` parameters, refer to [Create an endpoint](https://api-docs.neon.tech/reference/createprojectendpoint), in the _Neon API reference_.
+</CodeBlock>
 
-### Delete a read replica with the API
+</TabItem>
 
-The following Neon API method deletes the specified compute endpoint. Compute endpoints are identified by their `branch_id` and `endpoint_id`, regardless of whether they are read-write or read-only. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectendpoint).
-
-```text
-DELETE /projects/{project_id}/endpoints/{endpoint_id}
-```
-
-The API method appears as follows when specified in a cURL command.
-
-```bash
-curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints/ep-young-art-646685' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY'
-```
-
-For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Delete an endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint), in the _Neon API reference_.
+</Tabs>
 
 <NeedHelp/>
