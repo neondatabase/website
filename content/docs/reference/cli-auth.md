@@ -7,7 +7,7 @@ updatedOn: '2023-11-24T11:25:06.762Z'
 
 ## Before you begin
 
-Before running the `auth` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+Before running the `auth` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
 
 ## The `auth` command
 

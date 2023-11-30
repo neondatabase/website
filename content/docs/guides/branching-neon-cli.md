@@ -11,7 +11,7 @@ The examples show the default `table` output format. The Neon CLI also supports 
 
 ## Prerequisites
 
-- The Neon CLI. See [Install the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli) for instructions.
+- The Neon CLI. See [Install the Neon CLI](/docs/reference/cli-install) for instructions.
 - To run CLI commands, you must either authenticate through your browser or supply an API key using the `--api-key` option. See [Connect with the Neon CLI](/docs/reference/neon-cli#connect).
 
 ## Create a branch with the CLI
