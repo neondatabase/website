@@ -13,18 +13,16 @@ import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
-import sendGtagEvent from 'utils/send-gtag-event';
-import sendSegmentEvent from 'utils/send-segment-event';
+
+import GithubStarCounter from '../github-star-counter';
 
 import Burger from './burger';
-import Github from './images/header-github.inline.svg';
 
 const Search = dynamic(() => import('components/shared/search'), { ssr: false });
 
 const Header = ({
   className = null,
   theme,
-  isSignIn = false,
   isSticky = false,
   withBottomBorder = false,
   isDocPage = false,
@@ -141,37 +139,25 @@ const Header = ({
             </ul>
           </nav>
 
-          <div className="flex space-x-5 lg:hidden">
+          <div className="flex lg:hidden">
+            <GithubStarCounter className="mr-5" isThemeBlack={isThemeBlack} />
             <Button
-              className="relative pl-11 dark:border-white dark:bg-gray-new-8 dark:text-white dark:hover:border-primary-2 xl:hidden"
-              to={LINKS.github}
+              className="mr-3.5 !px-[22px] !py-2.5 !font-semibold"
+              to={LINKS.login}
               size="new-md"
-              theme={isThemeBlack ? 'tertiary' : 'quaternary'}
-              rel="noopener noreferrer"
-              target="_blank"
-              onClick={() => {
-                sendGtagEvent('click_star_us_button');
-                sendSegmentEvent('click_star_us_button');
-              }}
+              theme={isThemeBlack ? 'gray-outline' : 'gray-outline-black'}
             >
-              <Github
-                className={clsx(
-                  'absolute left-1.5 top-1/2 -translate-y-1/2 dark:text-white',
-                  isThemeBlack ? 'text-white' : 'text-black'
-                )}
-              />
-              <span>Star us</span>
+              Log In
             </Button>
-            {isSignIn && (
-              <Button to={LINKS.dashboard} size="new-md" theme="primary">
-                Sign in
-              </Button>
-            )}
-            {!isSignIn && (
-              <Button to={LINKS.signup} size="new-md" theme="primary">
-                Sign up
-              </Button>
-            )}
+
+            <Button
+              className="!px-[22px] !py-2.5 !font-semibold"
+              to={LINKS.signup}
+              size="new-md"
+              theme="primary"
+            >
+              Sign Up
+            </Button>
           </div>
           {isMobile && (
             <div className="items-center flex gap-x-3 md:gap-x-5">
@@ -201,7 +187,7 @@ Header.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
   withBottomBorder: PropTypes.bool,
-  isSignIn: PropTypes.bool,
+
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
   isBlogPage: PropTypes.bool,
