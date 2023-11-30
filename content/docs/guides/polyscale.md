@@ -4,16 +4,14 @@ subtitle: Set up a global database cache with Neon's PolyScale integration
 enableTableOfContents: true
 ---
 
-[PolyScale](https://docs.polyscale.ai/) allows you to easily distribute and cache your data globally through its low-latency edge network, enabling speedy access to your data from anywhere in the world. PolyScale offers a simpler alternative to cross-regional replication by providing data availability and performance without added complexity.
+[PolyScale](https://docs.polyscale.ai/) allows you to easily distribute and cache your data globally through its low-latency edge network, enabling speedy access to your data from anywhere in the world. PolyScale offers a simple alternative to cross-regional replication by providing data availability and performance without the added complexity. No coding or infrastructure chnages are required to use PolyScale.
 
-With Neon's PolyScale integration, you can create a global cache for your Neon database in a few clicks. No coding or infrastructure changes are required. 
-
-Adding the PolyScale integration to your Neon project automatically creates a global cache. It also provides a PolyScale connection string, which can be used in your application as a direct replacement for the Neon connection string.
+Adding the PolyScale integration to your Neon project automatically creates a global cache. It also provides a PolyScale connection string, which you can use in your application as a direct replacement for the Neon connection string.
 
 By default, PolyScale automatically caches all queries that pass through its platform. This means that when you connect using the PolyScale connection string, any queries you run will be automatically cached.
 
 <Admonition type="note">
-The PolyScale integration creates a cache for the read-write compute endpoint associated with the primary branch of your Neon project. It does not cache queries for read-only compute endpoints or non-primary branches.
+The PolyScale integration creates a cache for the read-write compute endpoint associated with the [primary branch](/docs/manage/branches#primary-branch) of your Neon project. It does not cache queries for read-only compute endpoints ([read replicas](/docs/introduction/read-replicas)) or [non-primary branches](/docs/manage/branches#non-primary-branch).
 </Admonition>
 
 For more information about PolyScale, see [How PolyScale works](#how-polyscale-works).
