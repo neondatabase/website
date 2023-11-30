@@ -16,7 +16,7 @@ const GithubStarCounter = ({ className = '', isThemeBlack = false }) => {
   const [starsCount, setStarsCount] = useState(null);
 
   useEffect(() => {
-    const prevStarsCount = window.sessionStorage.getItem('neon_github_stargazers_count');
+    const prevStarsCount = window.localStorage.getItem('neon_github_stargazers_count');
 
     if (prevStarsCount) {
       setStarsCount(prevStarsCount);
@@ -29,7 +29,7 @@ const GithubStarCounter = ({ className = '', isThemeBlack = false }) => {
         .then((res) => res.json())
         .then((json) => json.stargazers_count);
 
-      window.sessionStorage.setItem('neon_github_stargazers_count', updatedStarsCount);
+      window.localStorage.setItem('neon_github_stargazers_count', updatedStarsCount);
 
       setStarsCount(updatedStarsCount);
     }
