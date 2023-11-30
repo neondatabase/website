@@ -30,7 +30,7 @@ To add the PolyScale integration to your Neon project:
 1. In the Neon Console, navigate to the **Integrations** page for your project.
 2. Under **Add**, locate the PolyScale integration and click **Add** to open the **Add PolyScale** drawer.
     ![Integrations page showing PolyScale](/docs/guides/polyscale_int_add_integration.png)
-3. Under **How to add**, click **Sign in**, and sign in to PolyScale using your Google, GitHub, or email account.
+3. Under **How to add**, click **Sign in**, and sign in to PolyScale using your Google, GitHub, or email account. If you do not have a PolyScale account, you can create one. A credit card is not required.
     ![PolyScale sign in](/docs/guides/polyscale_int_sign_in.png)
 4. Select the desired PolyScale **Workspace** and click **Authorize Access** to allow Neon to access read and write caches on PolyScale.
     ![PolyScale authorize access](/docs/guides/polyscale_int_authorize.png)
