@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/introduction/technical-preview-free-tier
-updatedOn: '2023-10-24T18:56:54.988Z'
+updatedOn: '2023-11-30T18:21:20.863Z'
 ---
 
 Neon is currently in Technical Preview. For information about how the Technical Preview fits within Neon's release plans, refer to the [Neon roadmap](/docs/reference/roadmap).
