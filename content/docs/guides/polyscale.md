@@ -1,56 +1,94 @@
 ---
-title: Connect Neon to PolyScale manually
-subtitle: Connect Neon to PolyScale to distribute and cache your data globally
+title: Add the Neon PolyScale integration
+subtitle: Set up a global database cache with Neon's PolyScale integration
 enableTableOfContents: true
-isDraft: false
-updatedOn: '2023-11-24T11:25:06.753Z'
 ---
 
-[PolyScale](https://docs.polyscale.ai/) is a serverless database cache service. With PolyScale, you can distribute and cache your data globally, allowing you to scale your database without altering transactional semantics. No coding or infrastructure changes are required. You can connect Neon to PolyScale in minutes, providing your database-backed applications with speedy access to your Neon data from anywhere in the world. 
+[PolyScale](https://docs.polyscale.ai/) allows you to easily distribute and cache your data globally through its low-latency edge network, enabling speedy access to your data from anywhere in the world. PolyScale offers a simpler alternative to cross-regional replication by providing data availability and performance without added complexity.
+
+With Neon's PolyScale integration, you can create a global cache for your Neon database in a few clicks. No coding or infrastructure changes are required. 
+
+Adding the PolyScale integration to your Neon project automatically creates a global cache. It also provides a PolyScale connection string, which can be used in your application as a direct replacement for the Neon connection string.
+
+By default, PolyScale automatically caches all queries that pass through its platform. This means that when you connect using the PolyScale connection string, and any queries you run will be automatically cached.
 
 <Admonition type="note">
-Neon also provides a PolyScale integration, which allows you to set up a PolyScale cache in just a few clicks. See [PolyScale integration](/docs/guides/polyscale-integration). The PolyScale integration creates a cache for the read-write compute endpoint associated with your project's primary branch. If you do not wnat to use the integration or you want to set up a cache for a read-only compute endpoint or a non-primary branch in your Neon project, you can use these manual setup instructions.
+The PolyScale integration creates a cache for the read-write compute endpoint associated with the primary branch of your Neon project. It does not cache queries for read-only compute endpoints or non-primary branches.
 </Admonition>
 
-Follow the steps below to connect your Neon database to PolyScale manually.
+For more information about PolyScale, see [How PolyScale works](#how-polyscale-works).
 
-## Retrieve your Neon connection details
+To get started with the Neon PolyScale integration, follow the instructions below.
 
-In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+## Prerequisites
 
-![Connection details widget](/docs/connect/connection_details.png)
+- A Neon account and project. For instructions, see [Sign up](/docs/get-started-with-neon/signing-up).
+- A database on the primary branch of your Neon project. See [Create a database](/docs/manage/databases#create-a-database).
 
-The connection string includes the user name, password, hostname, and database name.
+## Add the PolyScale integration
 
-Copy the hostname. In the example above, the hostname is this part of the connection string:
+To add the PolyScale integration to your Neon project:
 
-```text
- ep-raspy-cherry-95040071.us-east-2.aws.neon.tech
- ```
+1. In the Neon Console, navigate to the **Integrations** page for your project.
+2. Under **Add**, locate the PolyScale integration and click **Add** to open the **Add PolyScale** drawer.
+    ![Integrations page showing PolyScale](/docs/guides/polyscale_int_add_integration.png)
+3. Under **How to add**, click **Sign in**.
+    ![Integrations page showing PolyScale](/docs/guides/polyscale_int_how_to_add.png)
+4. Sign in to PolyScale using your Google, GitHub, or email account.
+    ![PolyScale sign in](/docs/guides/polyscale_int_sign_in.png)
+5. Select the desired PolyScale **Workspace** and click **Authorize Access** to allow Neon to access read and write caches on PolyScale.
+    ![PolyScale authorize access](/docs/guides/polyscale_int_authorize.png)
 
-Also, make note of the user, password, and database name. You will need those details when you configure a connection from your  application to PolyScale.
+    After the integration is added, you are returned to the **Integrations** page in the Neon Console where the PolyScale integration appears under the **Manage** heading and the **Manage PolyScale** drawer is open. 
 
-## Create a PolyScale cache
+    ![PolyScale manage drawer](/docs/guides/polyscale_int_manage.png)
 
-A PolyScale account can have one or more caches. A cache identifies a database by the hostname and port number. Typically, you create one cache per database.
+    In the **Manage PolyScale** drawer, you can view information about your newly created PolyScale cache and copy the PolyScale connection string. Use this connection string in place of your Neon connection string in your application.
 
-To create the database cache:
+    You might notice the drop-down menus for **Database** and **Role**. If you have multiple databases and roles on the primary branch of your Neon project, use the drop-down menus to select the database and role you want to connect with. Your selections will be reflected in the PolyScale connection string.
+   
+    <Admonition type="note">
+    To ensure your cache remains current, always use the PolyScale connection string. Modifying your database directly through a Neon connection string or the Neon SQL Editor can result in an outdated cache.
+    </Admonition>
 
-1. Log into [PolyScale](https://app.polyscale.ai/signup/). If you do not have an account, you can create one by logging in with your GitHub or Google account. PolyScale has a free tier and does not require a credit card to sign up.
-2. If you have just signed up for PolyScale, select **Create new cache** from the **Welcome to PolyScale** dialog.
-![Connection details widget](/docs/guides/welcome_to_polyscale.png)
-If you already have a PolyScale account, click the **New Cache** button in the upper right corner of the PolyScale dashboard.
-3. Enter a name for the cache, select `PostgreSQL` as the type, enter the Neon hostname you copied earlier, and enter the database port number. Neon uses the default Postgres port, `5432`. Leave the default values for the other settings. The **Caching** setting enables the database query cache, so this setting should remain enabled.
-![Create a PolyScale cache](/docs/guides/polyscale_create_cache.png)
-4. Click **Create**. PolyScale creates a cache for your Neon database and provides a new **Connection URI** to use in your application in place of the Neon connection string. Simply replace `[USERNAME]`, `[PASSWORD]`, and `[DATABASE]` with the values from your Neon connection string.
-![Create a PolyScale cache](/docs/guides/polyscale_success.png)
+## View your PolyScale cache
 
-After queries from your application start passing through PolyScale, you can monitor traffic and caching behavior on the **Observability** tab in PolyScale. For more information, see [Observability](https://docs.polyscale.ai/database-observability/), in the _PolyScale documentation_.
+You can access your PolyScale cache directly from the Neon PolyScale integration.
 
-By default, PolyScale automatically caches all queries that pass through the platform. That means you can connect to PolyScale, and any queries you run will be cached.
+1. In the Neon Console, navigate to the **Integrations** page.
+2. Under **Configured**, locate the PolyScale integration and click **Manage** to open the **Manage PolyScale** drawer.
+3. Click the **View cache in PolyScale** link. You directed to PolyScale where you will be required to log in if not logged in already.
 
-PolyScale identifies caching opportunities by recognizing and remembering patterns in query traffic. New queries typically begin to see cache hits on or about the third query. For more information, see [Time To First Hit](https://docs.polyscale.ai/how-does-it-work/#time-to-first-hit-ttfh), in the _PolyScale documentation_.
+## Purging your PolyScale cache
 
-For more information about using PolyScale and how it works, refer to the [PolyScale documentation](https://docs.polyscale.ai/).
+Occasionally, it may be necessary to purge your PolyScale cache. For example, you may want to purge your cache after modifying your data directly without using the PolyScale connection string, which can result in an outdated cache.
+
+To purge your PolyScale cache:
+
+1. In the Neon Console, navigate to the **Integrations** page.
+2. Under **Configured**, locate the PolyScale integration and click **Manage** to open the **Manage PolyScale** drawer.
+3. Click **Purge PolyScale cache**.
+
+Purging the cache purges all cached data globally.
+
+## Remove the PolyScale integration
+
+To remove the PolyScale integration:
+
+1. In the Neon Console, navigate to the **Integrations** page.
+2. Under **Configured**, locate the PolyScale integration and click **Manage** to open the **Manage PolyScale** drawer.
+3. Click **Remove integration**.
+
+Removing the integration deletes the cache and terminates all current connections using the PolyScale connection string.
+
+## How PolyScale works
+
+When you use a PolyScale connection string in your application, PolyScale automatically caches the queries that pass through its platform via the connection string. That means any queries you run using the PolyScale connection string are cached, by default.
+
+PolyScale identifies caching opportunities by recognizing and remembering patterns in query traffic. New queries typically begin to see cache hits on or about the third query. For more information on this topic, see [Time To First Hit](https://docs.polyscale.ai/how-does-it-work/#time-to-first-hit-ttfh), in the _PolyScale documentation_.
+
+After queries from your application start passing through PolyScale, you can monitor traffic and caching behavior on the **Observability** tab in PolyScale. For instructions, see [Observability](https://docs.polyscale.ai/database-observability/), in the _PolyScale documentation_.
+
+For additional information about the PolyScale platform, please refer to the [PolyScale documentation](https://docs.polyscale.ai/).
 
 <NeedHelp/>
