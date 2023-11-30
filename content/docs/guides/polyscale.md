@@ -10,7 +10,7 @@ With Neon's PolyScale integration, you can create a global cache for your Neon d
 
 Adding the PolyScale integration to your Neon project automatically creates a global cache. It also provides a PolyScale connection string, which can be used in your application as a direct replacement for the Neon connection string.
 
-By default, PolyScale automatically caches all queries that pass through its platform. This means that when you connect using the PolyScale connection string, and any queries you run will be automatically cached.
+By default, PolyScale automatically caches all queries that pass through its platform. This means that when you connect using the PolyScale connection string, any queries you run will be automatically cached.
 
 <Admonition type="note">
 The PolyScale integration creates a cache for the read-write compute endpoint associated with the primary branch of your Neon project. It does not cache queries for read-only compute endpoints or non-primary branches.
