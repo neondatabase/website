@@ -195,7 +195,7 @@ Check for the `mydatabase_changelog.xml` file in your Liquibase project director
 
 ## Create a schema change
 
-Now, you can start making database schema changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.htm) and adding them to the changelog file you defined in your `liquibase.properties` file. A changeset is the basic unit of change in Liquibase.
+Now, you can start making database schema changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.html) and adding them to the changelog file you defined in your `liquibase.properties` file. A changeset is the basic unit of change in Liquibase.
 
 1. Create the changelog file where you will add your schema changes:
 
