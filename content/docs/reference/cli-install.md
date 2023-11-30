@@ -17,7 +17,7 @@ To install the Neon CLI via [npm](https://www.npmjs.com/package/neonctl):
 npm i -g neonctl
 ```
 
-`npm` installation requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
+Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
 
 
 </TabItem>
@@ -46,13 +46,7 @@ neonctl-win.exe <command> [options]
 
 <TabItem>
 
-On Linux, you can install with [Homebrew](https://formulae.brew.sh/formula/neonctl), [npm](https://www.npmjs.com/package/neonctl), or the [neonctl-linux](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary:
-
-[Homebrew](https://formulae.brew.sh/formula/neonctl)
-
-```bash
-brew install neonctl
-```
+On Linux, you can install with [npm](https://www.npmjs.com/package/neonctl), the [neonctl-linux](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary, or [Homebrew](https://formulae.brew.sh/formula/neonctl).
 
 [npm](https://www.npmjs.com/package/neonctl)
 
@@ -63,6 +57,12 @@ npm i -g neonctl
 [Binary](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0)
 
 Download and install the [neonctl-linux](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary.
+
+[Homebrew](https://formulae.brew.sh/formula/neonctl)
+
+```bash
+brew install neonctl
+```
 
 </TabItem>
 
