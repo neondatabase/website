@@ -7,41 +7,71 @@ updatedOn: '2023-11-08T18:42:10.264Z'
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
 
-### Prerequisites
+<Tabs labels={["npm", "macOS", "Windows", "Linux"]}>
 
-Before installing, ensure that you have met the following prerequisites:
+<TabItem>
 
-- Node.js 18.0 or higher. To check if you already have Node.js, run the following command:
-
-    ```shell
-    node -v
-    ```
-
-- The `npm` package manager.  To check if you already have `npm`, run the following command:
-
-   ```shell
-   npm -v
-   ```
-
-  If you need to install `Node.js` or `npm`, refer to instructions on the [official nodejs page](https://nodejs.org) or use the [Node version manager](https://github.com/nvm-sh/nvm).
-
-### Install
-
-To install the Neon CLI, run the following command:
+To install the Neon CLI via [npm](https://www.npmjs.com/package/neonctl):
 
 ```shell
 npm i -g neonctl
 ```
 
-Homebrew is also supported:
+`npm` installation requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
+
+
+</TabItem>
+
+<TabItem>
+
+To install the Neon CLI via [Homebrew](https://formulae.brew.sh/formula/neonctl):
 
 ```bash
 brew install neonctl
 ```
 
+</TabItem>
+
+<TabItem>
+
+Download the [neonctl-win.exe binary](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0).
+
+No installation is required. Run the Neon CLI as follows:
+
+```bash
+neonctl-win.exe <command> [options]
+```
+
+</TabItem>
+
+<TabItem>
+
+On Linux, you can install with [Homebrew](https://formulae.brew.sh/formula/neonctl), [npm](https://www.npmjs.com/package/neonctl), or the [neonctl-linux](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary:
+
+- [Homebrew](https://formulae.brew.sh/formula/neonctl)
+
+```bash
+brew install neonctl
+```
+
+- [npm](https://www.npmjs.com/package/neonctl)
+
+```shell
+npm i -g neonctl
+```
+
+- [Binary](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0)
+
+Download and install the [neonctl-linux](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary.
+
+</TabItem>
+
+</Tabs>
+
+
 ### Upgrade
 
-To upgrade to the latest version of the Neon CLI, run the `npm i -g neonctl` command again.
+When a new version is released, you can update the the Neon CLI using the same installation methods described above.
 
 ## Connect
 
