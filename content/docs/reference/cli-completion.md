@@ -52,7 +52,7 @@ complete -o bashdefault -o default -F _neonctl_yargs_completions neonctl
 ###-end-neonctl-completions-###
 ```
 
-Use the commands shown below to install the completion script to your shell configuration file, which is typically located in your `home` directory. Your shell configuration file may differ by platform. For example, on Ubuntu, you should have a `.bashrc` file, and on macOS, you might have `bash_profile` or `.zshrc`. The `source` command causes the changes to your shell configuration file to take effect immediately in the current shell session. 
+Use the commands provided below to install the completion script to your shell configuration file, which is typically located in your `home` directory. Your shell configuration file may differ by platform. For example, on Ubuntu, you should have a `.bashrc` file, and on macOS, you might have `bash_profile` or `.zshrc`. The `source` command causes the changes to your shell configuration file to take effect immediately in the current shell session. 
 
 <Tabs labels={["bashrc", "bash_profile", "profile", "zshrc"]}>
 
@@ -72,6 +72,7 @@ neonctl completion >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
+</TabItem>
 
 <TabItem>
 
@@ -79,7 +80,6 @@ source ~/.bash_profile
 neonctl completion >> ~/.profile
 source ~/.profile
 ```
-
 
 </TabItem>
 
@@ -93,6 +93,5 @@ source ~/.zshrc
 </TabItem>
 
 </Tabs>
-
 
 <NeedHelp/>
