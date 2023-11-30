@@ -53,7 +53,7 @@ You can access your PolyScale cache directly from the Neon PolyScale integration
 
 1. In the Neon Console, navigate to the **Integrations** page.
 2. Under **Manage**, locate the PolyScale integration and click **Manage** to open the **Manage PolyScale** drawer.
-3. Click the **View cache in PolyScale** link. You directed to PolyScale where you will be required to log in if not logged in already.
+3. Click the **View cache in PolyScale** link. This directs you to PolyScale where you will be required to log in if not logged in already.
 
 ## Purging your PolyScale cache
 
