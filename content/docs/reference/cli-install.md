@@ -48,21 +48,21 @@ neonctl-win.exe <command> [options]
 
 On Linux, you can install with [npm](https://www.npmjs.com/package/neonctl), the [neonctl-linux](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary, or [Homebrew](https://formulae.brew.sh/formula/neonctl).
 
-[npm](https://www.npmjs.com/package/neonctl)
+- [npm](https://www.npmjs.com/package/neonctl)
 
-```shell
-npm i -g neonctl
-```
+  ```shell
+  npm i -g neonctl
+  ```
 
-[Binary](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0)
+- [Binary](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0)
 
-Download and install the [neonctl-linux](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary.
+  Download and install the [neonctl-linux](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary.
 
-[Homebrew](https://formulae.brew.sh/formula/neonctl)
+- [Homebrew](https://formulae.brew.sh/formula/neonctl)
 
-```bash
-brew install neonctl
-```
+  ```bash
+  brew install neonctl
+  ```
 
 </TabItem>
 
