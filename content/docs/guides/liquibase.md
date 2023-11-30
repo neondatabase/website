@@ -2,7 +2,7 @@
 title: Get started with Liquibase and Neon
 subtitle: Learn how to manage schema changes in Neon with Liquibase
 enableTableOfContents: true
-updatedOn: '2023-11-27T16:33:52.718Z'
+updatedOn: '2023-11-30T17:39:12.805Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -190,7 +190,7 @@ You’ll get a changelog file for your database that looks something like this:
 
 ## Create a schema change
 
-Now, you can start making database schema changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.htm) and adding them to the database changelog file you defined in your `liquibase.properties` file. A changeset is the basic unit of change in Liquibase.
+Now, you can start making database schema changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.html) and adding them to the database changelog file you defined in your `liquibase.properties` file. A changeset is the basic unit of change in Liquibase.
 
 1. Create the changelog file where you will add your schema changes:
 

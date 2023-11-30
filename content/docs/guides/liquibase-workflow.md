@@ -2,7 +2,7 @@
 title: Liquibase developer workflow with Neon
 subtitle: Implement a developer workflow with Liquibase and Neon branching
 enableTableOfContents: true
-updatedOn: '2023-11-27T16:33:52.718Z'
+updatedOn: '2023-11-30T17:39:12.804Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -195,7 +195,7 @@ Check for the `mydatabase_changelog.xml` file in your Liquibase project director
 
 ## Create a schema change
 
-Now, you can start making database schema changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.htm) and adding them to the changelog file you defined in your `liquibase.properties` file. A changeset is the basic unit of change in Liquibase.
+Now, you can start making database schema changes by creating [changesets](https://docs.liquibase.com/concepts/changelogs/changeset.html) and adding them to the changelog file you defined in your `liquibase.properties` file. A changeset is the basic unit of change in Liquibase.
 
 1. Create the changelog file where you will add your schema changes:
 
