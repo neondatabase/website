@@ -9,7 +9,7 @@ module.exports = {
     '/all-things-open-2023',
     '/stackoverflow',
     '/thank-you',
-    // '/docs/postgres*',
+    '/docs/postgres*',
   ],
   generateRobotsTxt: true,
   robotsTxtOptions: {
