@@ -57,7 +57,7 @@ You can access your PolyScale cache directly from the Neon PolyScale integration
 
 ## Purging your PolyScale cache
 
-Occasionally, it may be necessary to purge your PolyScale cache. For example, you may want to purge your cache after modifying your data directly without using the PolyScale connection string, which can result in an outdated cache.
+Occasionally, it may be necessary to purge your PolyScale cache. For example, if you modify your data directly, without using the PolyScale connection string, this can result in an outdated cache. In this case, you may want to purge to keep the cache up to date.
 
 To purge your PolyScale cache:
 
