@@ -34,7 +34,7 @@ brew install neonctl
 
 <TabItem>
 
-Download the [neonctl-win.exe binary](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0).
+Download the [neonctl-win.exe](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary.
 
 No installation is required. Run the Neon CLI as follows:
 
