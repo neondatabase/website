@@ -264,7 +264,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 | Option        | Description | Type   | Required  |
 | ------------- | ----------- | ------ | :-----: |
-| --project-id  | Project ID  | string | Only if your Neon account has more than one project |
+| --project-id  | Project ID  | string | Only if your Neon account has more than one project or context is not set|
 
 #### Example
 

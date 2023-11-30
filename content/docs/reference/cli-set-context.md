@@ -12,12 +12,18 @@ updatedOn: '2023-11-24T11:25:06.765Z'
 
 ## The `set-context` command
 
-This command sets a background context for the duration of your CLI session, letting you perform project or branch specific actions without having to specify the project or branch id in every command.
+This command sets a background context for your CLI session, letting you perform project or branch specific actions without having to specify the project or branch id in every command. The setting is saved in a `context-file` and remains in place until you set a new context, or you remove the `context-file`.
 
 ### Usage
 
 ```bash
 neonctl set-context <option>
+```
+
+You can also set context for a new project during project creation:
+
+```bash
+neonctl projects create --name my_project --set-context
 ```
 
 ### Options
