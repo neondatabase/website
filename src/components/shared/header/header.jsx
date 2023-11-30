@@ -145,7 +145,7 @@ const Header = ({
               className="mr-3.5 !px-[22px] !py-2.5 !font-semibold"
               to={LINKS.login}
               size="new-md"
-              theme={isThemeBlack ? 'gray-outline' : 'gray-outline-black'}
+              theme={isThemeBlack ? 'gray-dark-outline' : 'gray-dark-outline-black'}
             >
               Log In
             </Button>
