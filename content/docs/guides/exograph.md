@@ -59,7 +59,7 @@ Started server on 0.0.0.0:9876 in 717.19 ms
  http://0.0.0.0:9876/graphql
 ```
 
-That's it! You can now open <http://localhost:9876/playground> in your browser to see the GraphQL Playground.
+That's it! You can now open [http://localhost:9876/playground](http://localhost:9876/playground) in your browser to see the GraphQL Playground.
 
 You can create a todo by running the following mutation:
 
