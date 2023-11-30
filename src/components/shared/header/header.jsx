@@ -142,18 +142,16 @@ const Header = ({
           <div className="flex lg:hidden">
             <GithubStarCounter className="mr-5" isThemeBlack={isThemeBlack} />
             <Button
-              className="mr-3.5 !px-[22px] !py-2.5 !font-semibold"
+              className="mr-3.5 px-[22px] h-9 font-semibold text-base duration-200 transition-colors leading-none"
               to={LINKS.login}
-              size="new-md"
               theme={isThemeBlack ? 'gray-dark-outline' : 'gray-dark-outline-black'}
             >
               Log In
             </Button>
 
             <Button
-              className="!px-[22px] !py-2.5 !font-semibold"
+              className="px-[22px] h-9 font-semibold text-base duration-200 transition-colors leading-none"
               to={LINKS.signup}
-              size="new-md"
               theme="primary"
             >
               Sign Up
