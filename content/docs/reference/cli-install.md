@@ -32,15 +32,15 @@ On macOS, install with Homebrew or the `neonctl-macos` binary:
     brew install neonctl
     ```
 
-- [Binary](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0)
+- [Binary](https://github.com/neondatabase/neonctl/releases)
 
-    Download the [neonctl-macos](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary.
+    Download the [neonctl-macos](https://github.com/neondatabase/neonctl/releases) binary.
 
 </TabItem>
 
 <TabItem>
 
-Download the [neonctl-win.exe](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary.
+Download the [neonctl-win.exe](https://github.com/neondatabase/neonctl/releases) binary.
 
 No installation is required. Run the Neon CLI as follows:
 
@@ -52,11 +52,11 @@ neonctl-win.exe <command> [options]
 
 <TabItem>
 
-On Linux, install with the [neonctl-linux](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary, [npm](https://www.npmjs.com/package/neonctl), or [Homebrew](https://formulae.brew.sh/formula/neonctl).
+On Linux, install with the [neonctl-linux](https://github.com/neondatabase/neonctl/releases) binary, [npm](https://www.npmjs.com/package/neonctl), or [Homebrew](https://formulae.brew.sh/formula/neonctl).
 
 - [Binary](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0)
 
-    Download the [neonctl-linux](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0) binary.
+    Download the [neonctl-linux](https://github.com/neondatabase/neonctl/releases) binary.
 
 - [npm](https://www.npmjs.com/package/neonctl)
 
