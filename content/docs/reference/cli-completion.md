@@ -23,7 +23,7 @@ The command outputs a completion script similar to the one shown below.
 
 <Admonition type="important">
 Use the completion scription that is output to your terminal or command window, as the script may differ depending on your operating environment.
-</Admonition/>
+</Admonition>
 
 ```text
 ###-begin-neonctl-completions-###
