@@ -10,7 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "dev:build": "next build",
-    "postbuild": "next-sitemap",
+    "postbuild": "next-sitemap --config next-sitemap.config.js && next-sitemap --config next-sitemap-postgres.config.js",
     "start": "next start",
     "format": "prettier --write .",
     "lint": "npm run lint:js && npm run lint:md",
