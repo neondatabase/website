@@ -24,7 +24,7 @@ Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
 
 <TabItem>
 
-To install the Neon CLI with [Homebrew](https://formulae.brew.sh/formula/neonctl)
+To install the Neon CLI with [Homebrew](https://formulae.brew.sh/formula/neonctl):
 
 ```bash
 brew install neonctl
@@ -85,7 +85,7 @@ To install a binary:
 
 ### Upgrade
 
-When a new version is released, you can update your Neon CLI using the same installation methods described above. To check the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed Neon CLI version, run the folliowing command:
+When a new version is released, you can update your Neon CLI using the installation methods described above. To check the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed Neon CLI version, run the folliowing command:
 
 ```bash
 neonctl --version
