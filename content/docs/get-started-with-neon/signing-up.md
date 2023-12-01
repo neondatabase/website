@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2023-11-02T17:14:39.696Z'
+updatedOn: '2023-12-01T18:35:17.561Z'
 ---
 
 You can sign up for free and upgrade to a paid plan when you are ready to scale. For information about what's included with the Neon Free Tier, see [Neon Free Tier](/docs/introduction/free-tier). For information about Neon's paid plan options, see [Neon plans](/docs/introduction/plans).
