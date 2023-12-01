@@ -77,7 +77,7 @@ On Linux, install with the [neonctl-linux](https://github.com/neondatabase/neonc
 
 ### Upgrade
 
-When a new version is released, you can update your Neon CLI using the same installation methods described above. To chack the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed Neon CLI version, run the folliowing command:
+When a new version is released, you can update your Neon CLI using the same installation methods described above. To check the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed Neon CLI version, run the folliowing command:
 
 ```bash
 neonctl --version
