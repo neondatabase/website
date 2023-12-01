@@ -7,41 +7,101 @@ updatedOn: '2023-11-08T18:42:10.264Z'
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
 
-### Prerequisites
+<Tabs labels={["npm", "Homebrew", "Binary"]}>
 
-Before installing, ensure that you have met the following prerequisites:
+<TabItem>
 
-- Node.js 18.0 or higher. To check if you already have Node.js, run the following command:
-
-    ```shell
-    node -v
-    ```
-
-- The `npm` package manager.  To check if you already have `npm`, run the following command:
-
-   ```shell
-   npm -v
-   ```
-
-  If you need to install `Node.js` or `npm`, refer to instructions on the [official nodejs page](https://nodejs.org) or use the [Node version manager](https://github.com/nvm-sh/nvm).
-
-### Install
-
-To install the Neon CLI, run the following command:
+To install the Neon CLI via [npm](https://www.npmjs.com/package/neonctl):
 
 ```shell
 npm i -g neonctl
 ```
 
-Homebrew is also supported:
+Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
+
+
+</TabItem>
+
+<TabItem>
+
+To install the Neon CLI with [Homebrew](https://formulae.brew.sh/formula/neonctl):
 
 ```bash
 brew install neonctl
 ```
 
+</TabItem>
+
+<TabItem>
+
+To install a [binary](https://github.com/neondatabase/neonctl/releases):
+
+- **macOS**
+
+    Download the macOS binary:
+
+    <CodeBlock shouldWrap>
+
+    ```bash
+    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
+    ```
+
+    </CodeBlock>
+
+    No installation is required. Run the Neon CLI as follows:
+
+    ```bash
+    neonctl <command> [options]
+    ```
+
+- **Linux**
+
+    Download the Linux binary:
+
+    <CodeBlock shouldWrap>
+
+    ```bash
+    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux -o neonctl
+    ```
+
+    </CodeBlock>
+
+    No installation is required. Run the Neon CLI as follows:
+
+    ```bash
+    neonctl <command> [options]
+    ```
+
+- **Windows**
+
+    Download the Windows binary:
+
+    <CodeBlock shouldWrap>
+
+    ```bash
+    curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
+    ```
+
+    </CodeBlock>
+
+    No installation is required. Run the Neon CLI as follows:
+
+    ```bash
+    neonctl-win.exe <command> [options]
+    ```
+
+</TabItem>
+
+</Tabs>
+
+
 ### Upgrade
 
-To upgrade to the latest version of the Neon CLI, run the `npm i -g neonctl` command again.
+When a new version is released, you can update your Neon CLI using the installation methods described above. To check for the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed Neon CLI version, run the folliowing command:
+
+```bash
+neonctl --version
+```
 
 ## Connect
 

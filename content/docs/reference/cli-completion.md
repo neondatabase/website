@@ -7,11 +7,11 @@ updatedOn: '2023-11-24T11:25:06.763Z'
 
 ## Before you begin
 
-Before running the `completion` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+Before running the `completion` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
 
 ## The `completion` command
 
-This command generates a completion script for the `neonctl` command-line interface (CLI). The completion script, when installed, helps you type `neonctl` commands faster and more accurately. It does this by presenting the possible commands and options when you press the tab key after typing or partially typing a command or option.
+This command generates a completion script for the `neonctl` command-line interface (CLI). The completion script, when installed, helps you type `neonctl` commands faster and more accurately. It does this by presenting the possible commands and options when you press the **tab** key after typing or partially typing a command or option.
 
 ### Usage
 
@@ -19,7 +19,7 @@ This command generates a completion script for the `neonctl` command-line interf
 neonctl completion
 ```
 
-The command outputs the following completion script with installation instructions:
+The command outputs the following completion script similar to the following with installation instructions. **Use the completeion scription that is output to your terminal or command window**, as the script may differ depending on your operating environment. 
 
 ```text
 ###-begin-neonctl-completions-###
@@ -52,28 +52,46 @@ complete -o bashdefault -o default -F _neonctl_yargs_completions neonctl
 ###-end-neonctl-completions-###
 ```
 
-Install this script as instructed in the script header by running:
+Use the commands provided below to install the completion script to your shell configuration file, which is typically located in your `home` directory. Your shell configuration file may differ by platform. For example, on Ubuntu, you should have a `.bashrc` file, and on macOS, you might have `bash_profile` or `.zshrc`. The `source` command causes the changes to your shell configuration file to take effect immediately in the current shell session. 
+
+<Tabs labels={["bashrc", "bash_profile", "profile", "zshrc"]}>
+
+<TabItem>
 
 ```bash
 neonctl completion >> ~/.bashrc
-```
-
-or on OSX:
-
-```bash
-neonctl completion >> ~/.bash_profile
-```
-
-Remember, changes made to `~/.bashrc` or `~/.bash_profile` won't affect existing shell sessions — only new ones. You need to either source the file in the existing session or start a new shell session after adding the script to `~/.bashrc` or `~/.bash_profile`. To source the file, run:
-
-```bash
 source ~/.bashrc
 ```
 
-or on OSX:
+</TabItem>
+
+<TabItem>
 
 ```bash
+neonctl completion >> ~/.bash_profile
 source ~/.bash_profile
 ```
+
+</TabItem>
+
+<TabItem>
+
+```bash
+neonctl completion >> ~/.profile
+source ~/.profile
+```
+
+</TabItem>
+
+<TabItem>
+
+```bash
+neonctl completion >> ~/.zshrc
+source ~/.zshrc
+```
+
+</TabItem>
+
+</Tabs>
 
 <NeedHelp/>
