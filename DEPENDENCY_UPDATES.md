@@ -115,7 +115,7 @@ Space for a free-form description of the problem
 
 ### next
 
-Get the error when update Next.js to v14.
+Get the error when update Next.js to v14, can't use serialize in client components.
 Error message: `export 'serialize' (reexported as 'serialize') was not found`.
 [Related issue](https://github.com/hashicorp/next-mdx-remote/issues/416)
 
