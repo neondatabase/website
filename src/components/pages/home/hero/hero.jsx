@@ -82,8 +82,8 @@ const Hero = () => {
             {titleContentLg}
           </Heading>
           <p className="t-xl mt-7 max-w-[550px] text-white 2xl:mt-6 2xl:max-w-[480px] xl:mt-5 xl:max-w-[456px] lg:mx-auto lg:max-w-[414px]">
-            The fully managed serverless Postgres with a generous free tier. We separate storage
-            and compute to offer autoscaling, branching, and bottomless storage.
+            The fully managed serverless Postgres with a generous free tier. We separate storage and
+            compute to offer autoscaling, branching, and bottomless storage.
           </p>
           <Button
             id="hero-button"
@@ -92,7 +92,7 @@ const Hero = () => {
             size="md"
             theme="primary"
           >
-            Sign up
+            Sign Up
           </Button>
         </div>
         <div

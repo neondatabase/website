@@ -462,7 +462,7 @@ const Calculator = () => {
             </p>
             <AnimatedButton
               className="my-6 w-full max-w-[260px] !bg-[var(--accentColor)] !py-[17px] !text-lg font-medium hover:!bg-[var(--hoverColor)] lg:my-5 md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1 sm:my-8"
-              to={estimatedPrice >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
+              to={estimatedPrice >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.login}
               theme="primary"
               size="sm"
               animationColor="var(--accentColor)"
