@@ -26,7 +26,7 @@ Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
 
 On macOS, install with Homebrew or the `neonctl-macos` binary:
 
-- [Homebrew](https://formulae.brew.sh/formula/neonctl):
+- [Homebrew](https://formulae.brew.sh/formula/neonctl)
 
     ```bash
     brew install neonctl
