@@ -1,3 +1,5 @@
+[#id](#APP-PGVERIFYBACKUP)
+
 ## pg\_verifybackup
 
 pg\_verifybackup — verify the integrity of a base backup of a PostgreSQL cluster
@@ -5,6 +7,8 @@ pg\_verifybackup — verify the integrity of a base backup of a PostgreSQL clust
 ## Synopsis
 
 `pg_verifybackup` \[*`option`*...]
+
+[#id](#id-1.9.4.19.5)
 
 ## Description
 
@@ -22,53 +26,57 @@ Finally, `pg_verifybackup` will use the manifest to verify that the write-ahead 
 
 Note that if extra WAL files which are not required to recover the backup are present, they will not be checked by this tool, although a separate invocation of `pg_waldump` could be used for that purpose. Also note that WAL verification is version-specific: you must use the version of `pg_verifybackup`, and thus of `pg_waldump`, which pertains to the backup being checked. In contrast, the data file integrity checks should work with any version of the server that generates a `backup_manifest` file.
 
+[#id](#id-1.9.4.19.6)
+
 ## Options
 
 pg\_verifybackup accepts the following command-line arguments:
 
 * `-e``--exit-on-error`
 
-    Exit as soon as a problem with the backup is detected. If this option is not specified, `pg_verifybackup` will continue checking the backup even after a problem has been detected, and will report all problems detected as errors.
+  Exit as soon as a problem with the backup is detected. If this option is not specified, `pg_verifybackup` will continue checking the backup even after a problem has been detected, and will report all problems detected as errors.
 
 * `-i path``--ignore=path`
 
-    Ignore the specified file or directory, which should be expressed as a relative path name, when comparing the list of data files actually present in the backup to those listed in the `backup_manifest` file. If a directory is specified, this option affects the entire subtree rooted at that location. Complaints about extra files, missing files, file size differences, or checksum mismatches will be suppressed if the relative path name matches the specified path name. This option can be specified multiple times.
+  Ignore the specified file or directory, which should be expressed as a relative path name, when comparing the list of data files actually present in the backup to those listed in the `backup_manifest` file. If a directory is specified, this option affects the entire subtree rooted at that location. Complaints about extra files, missing files, file size differences, or checksum mismatches will be suppressed if the relative path name matches the specified path name. This option can be specified multiple times.
 
 * `-m path``--manifest-path=path`
 
-    Use the manifest file at the specified path, rather than one located in the root of the backup directory.
+  Use the manifest file at the specified path, rather than one located in the root of the backup directory.
 
 * `-n``--no-parse-wal`
 
-    Don't attempt to parse write-ahead log data that will be needed to recover from this backup.
+  Don't attempt to parse write-ahead log data that will be needed to recover from this backup.
 
 * `-P``--progress`
 
-    Enable progress reporting. Turning this on will deliver a progress report while verifying checksums.
+  Enable progress reporting. Turning this on will deliver a progress report while verifying checksums.
 
-    This option cannot be used together with the option `--quiet`.
+  This option cannot be used together with the option `--quiet`.
 
 * `-q``--quiet`
 
-    Don't print anything when a backup is successfully verified.
+  Don't print anything when a backup is successfully verified.
 
 * `-s``--skip-checksums`
 
-    Do not verify data file checksums. The presence or absence of files and the sizes of those files will still be checked. This is much faster, because the files themselves do not need to be read.
+  Do not verify data file checksums. The presence or absence of files and the sizes of those files will still be checked. This is much faster, because the files themselves do not need to be read.
 
 * `-w path``--wal-directory=path`
 
-    Try to parse WAL files stored in the specified directory, rather than in `pg_wal`. This may be useful if the backup is stored in a separate location from the WAL archive.
+  Try to parse WAL files stored in the specified directory, rather than in `pg_wal`. This may be useful if the backup is stored in a separate location from the WAL archive.
 
 Other options are also available:
 
 * `-V``--version`
 
-    Print the pg\_verifybackup version and exit.
+  Print the pg\_verifybackup version and exit.
 
 * `-?``--help`
 
-    Show help about pg\_verifybackup command line arguments, and exit.
+  Show help about pg\_verifybackup command line arguments, and exit.
+
+[#id](#id-1.9.4.19.7)
 
 ## Examples
 
@@ -76,28 +84,30 @@ To create a base backup of the server at `mydbserver` and verify the integrity o
 
 ```
 
-pg_basebackup -h mydbserver -D /usr/local/pgsql/data
-pg_verifybackup /usr/local/pgsql/data
+$ pg_basebackup -h mydbserver -D /usr/local/pgsql/data
+$ pg_verifybackup /usr/local/pgsql/data
 ```
 
 To create a base backup of the server at `mydbserver`, move the manifest somewhere outside the backup directory, and verify the backup:
 
 ```
 
-pg_basebackup -h mydbserver -D /usr/local/pgsql/backup1234
-mv /usr/local/pgsql/backup1234/backup_manifest /my/secure/location/backup_manifest.1234
-pg_verifybackup -m /my/secure/location/backup_manifest.1234 /usr/local/pgsql/backup1234
+$ pg_basebackup -h mydbserver -D /usr/local/pgsql/backup1234
+$ mv /usr/local/pgsql/backup1234/backup_manifest /my/secure/location/backup_manifest.1234
+$ pg_verifybackup -m /my/secure/location/backup_manifest.1234 /usr/local/pgsql/backup1234
 ```
 
 To verify a backup while ignoring a file that was added manually to the backup directory, and also skipping checksum verification:
 
 ```
 
-pg_basebackup -h mydbserver -D /usr/local/pgsql/data
-edit /usr/local/pgsql/data/note.to.self
-pg_verifybackup --ignore=note.to.self --skip-checksums /usr/local/pgsql/data
+$ pg_basebackup -h mydbserver -D /usr/local/pgsql/data
+$ edit /usr/local/pgsql/data/note.to.self
+$ pg_verifybackup --ignore=note.to.self --skip-checksums /usr/local/pgsql/data
 ```
+
+[#id](#id-1.9.4.19.8)
 
 ## See Also
 
-[pg\_basebackup](app-pgbasebackup.html "pg_basebackup")
+[pg\_basebackup](app-pgbasebackup)

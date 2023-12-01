@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-FOREIGN-DATA-WRAPPERS)
+
 ## 37.27. `foreign_data_wrappers` [#](#INFOSCHEMA-FOREIGN-DATA-WRAPPERS)
 
 The view `foreign_data_wrappers` contains all foreign-data wrappers defined in the current database. Only those foreign-data wrappers are shown that the current user has access to (by way of being the owner or having some privilege).
+
+[#id](#id-1.7.6.31.3)
 
 **Table 37.25. `foreign_data_wrappers` Columns**
 

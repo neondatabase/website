@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-ROLE-UDT-GRANTS)
+
 ## 37.38. `role_udt_grants` [#](#INFOSCHEMA-ROLE-UDT-GRANTS)
 
 The view `role_udt_grants` is intended to identify `USAGE` privileges granted on user-defined types where the grantor or grantee is a currently enabled role. Further information can be found under `udt_privileges`. The only effective difference between this view and `udt_privileges` is that this view omits objects that have been made accessible to the current user by way of a grant to `PUBLIC`. Since data types do not have real privileges in PostgreSQL, but only an implicit grant to `PUBLIC`, this view is empty.
+
+[#id](#id-1.7.6.42.3)
 
 **Table 37.36. `role_udt_grants` Columns**
 

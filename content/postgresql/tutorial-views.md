@@ -1,9 +1,12 @@
+[#id](#TUTORIAL-VIEWS)
+
 ## 3.2. Views [#](#TUTORIAL-VIEWS)
 
-Refer back to the queries in [Section 2.6](tutorial-join.html "2.6. Joins Between Tables"). Suppose the combined listing of weather records and city location is of particular interest to your application, but you do not want to type the query each time you need it. You can create a *view* over the query, which gives a name to the query that you can refer to like an ordinary table:
+
+
+Refer back to the queries in [Section 2.6](tutorial-join). Suppose the combined listing of weather records and city location is of particular interest to your application, but you do not want to type the query each time you need it. You can create a *view* over the query, which gives a name to the query that you can refer to like an ordinary table:
 
 ```
-
 CREATE VIEW myview AS
     SELECT name, temp_lo, temp_hi, prcp, date, location
         FROM weather, cities

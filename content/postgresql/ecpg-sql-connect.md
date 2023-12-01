@@ -1,3 +1,5 @@
+[#id](#ECPG-SQL-CONNECT)
+
 ## CONNECT
 
 CONNECT — establish a database connection
@@ -12,51 +14,57 @@ CONNECT connection_user
 DATABASE connection_target
 ```
 
+[#id](#id-1.7.5.20.4.3)
+
 ## Description
 
 The `CONNECT` command establishes a connection between the client and the PostgreSQL server.
+
+[#id](#id-1.7.5.20.4.4)
 
 ## Parameters
 
 * *`connection_target`* [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET)
 
-    *`connection_target`* specifies the target server of the connection on one of several forms.
+  *`connection_target`* specifies the target server of the connection on one of several forms.
 
   * \[ *`database_name`* ] \[ `@`*`host`* ] \[ `:`*`port`* ] [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-DATABASE-NAME)
 
-        Connect over TCP/IP
+    Connect over TCP/IP
 
   * `unix:postgresql://`*`host`* \[ `:`*`port`* ] `/` \[ *`database_name`* ] \[ `?`*`connection_option`* ] [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-UNIX-DOMAIN-SOCKETS)
 
-        Connect over Unix-domain sockets
+    Connect over Unix-domain sockets
 
   * `tcp:postgresql://`*`host`* \[ `:`*`port`* ] `/` \[ *`database_name`* ] \[ `?`*`connection_option`* ] [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-TCP-IP)
 
-        Connect over TCP/IP
+    Connect over TCP/IP
 
   * SQL string constant [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-CONSTANT)
 
-        containing a value in one of the above forms
+    containing a value in one of the above forms
 
   * host variable [#](#ECPG-SQL-CONNECT-CONNECTION-TARGET-HOST-VARIABLE)
 
-        host variable of type `char[]` or `VARCHAR[]` containing a value in one of the above forms
+    host variable of type `char[]` or `VARCHAR[]` containing a value in one of the above forms
 
 * *`connection_name`* [#](#ECPG-SQL-CONNECT-CONNECTION-NAME)
 
-    An optional identifier for the connection, so that it can be referred to in other commands. This can be an SQL identifier or a host variable.
+  An optional identifier for the connection, so that it can be referred to in other commands. This can be an SQL identifier or a host variable.
 
 * *`connection_user`* [#](#ECPG-SQL-CONNECT-CONNECTION-USER)
 
-    The user name for the database connection.
+  The user name for the database connection.
 
-    This parameter can also specify user name and password, using one the forms `user_name/password`, `user_name IDENTIFIED BY password`, or `user_name USING password`.
+  This parameter can also specify user name and password, using one the forms `user_name/password`, `user_name IDENTIFIED BY password`, or `user_name USING password`.
 
-    User name and password can be SQL identifiers, string constants, or host variables.
+  User name and password can be SQL identifiers, string constants, or host variables.
 
 * `DEFAULT` [#](#ECPG-SQL-CONNECT-DEFAULT)
 
-    Use all default connection parameters, as defined by libpq.
+  Use all default connection parameters, as defined by libpq.
+
+[#id](#id-1.7.5.20.4.5)
 
 ## Examples
 
@@ -124,10 +132,14 @@ EXEC SQL END DECLARE SECTION;
 }
 ```
 
+[#id](#id-1.7.5.20.4.6)
+
 ## Compatibility
 
 `CONNECT` is specified in the SQL standard, but the format of the connection parameters is implementation-specific.
 
+[#id](#id-1.7.5.20.4.7)
+
 ## See Also
 
-[DISCONNECT](ecpg-sql-disconnect.html "DISCONNECT"), [SET CONNECTION](ecpg-sql-set-connection.html "SET CONNECTION")
+[DISCONNECT](ecpg-sql-disconnect), [SET CONNECTION](ecpg-sql-set-connection)

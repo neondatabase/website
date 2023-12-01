@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-CURSOR-OPEN)
+
 ## SPI\_cursor\_open
 
 SPI\_cursor\_open — set up a cursor using a statement created with `SPI_prepare`
@@ -5,11 +7,12 @@ SPI\_cursor\_open — set up a cursor using a statement created with `SPI_prepar
 ## Synopsis
 
 ```
-
 Portal SPI_cursor_open(const char * name, SPIPlanPtr plan,
                        Datum * values, const char * nulls,
                        bool read_only)
 ```
+
+[#id](#id-1.8.12.8.19.5)
 
 ## Description
 
@@ -19,29 +22,33 @@ Using a cursor instead of executing the statement directly has two benefits. Fir
 
 The passed-in parameter data will be copied into the cursor's portal, so it can be freed while the cursor still exists.
 
+[#id](#id-1.8.12.8.19.6)
+
 ## Arguments
 
 * `const char * name`
 
-    name for portal, or `NULL` to let the system select a name
+  name for portal, or `NULL` to let the system select a name
 
 * `SPIPlanPtr plan`
 
-    prepared statement (returned by `SPI_prepare`)
+  prepared statement (returned by `SPI_prepare`)
 
 * `Datum * values`
 
-    An array of actual parameter values. Must have same length as the statement's number of arguments.
+  An array of actual parameter values. Must have same length as the statement's number of arguments.
 
 * `const char * nulls`
 
-    An array describing which parameters are null. Must have same length as the statement's number of arguments.
+  An array describing which parameters are null. Must have same length as the statement's number of arguments.
 
-    If *`nulls`* is `NULL` then `SPI_cursor_open` assumes that no parameters are null. Otherwise, each entry of the *`nulls`* array should be `' '` if the corresponding parameter value is non-null, or `'n'` if the corresponding parameter value is null. (In the latter case, the actual value in the corresponding *`values`* entry doesn't matter.) Note that *`nulls`* is not a text string, just an array: it does not need a `'\0'` terminator.
+  If *`nulls`* is `NULL` then `SPI_cursor_open` assumes that no parameters are null. Otherwise, each entry of the *`nulls`* array should be `' '` if the corresponding parameter value is non-null, or `'n'` if the corresponding parameter value is null. (In the latter case, the actual value in the corresponding *`values`* entry doesn't matter.) Note that *`nulls`* is not a text string, just an array: it does not need a `'\0'` terminator.
 
 * `bool read_only`
 
-    `true` for read-only execution
+  `true` for read-only execution
+
+[#id](#id-1.8.12.8.19.7)
 
 ## Return Value
 

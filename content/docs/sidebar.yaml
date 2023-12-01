@@ -49,8 +49,6 @@
   items:
     - title: Sign up
       slug: get-started-with-neon/signing-up
-    - title: Create your first project
-      slug: get-started-with-neon/setting-up-a-project
     - title: Query with Neon's SQL Editor
       slug: get-started-with-neon/query-with-neon-sql-editor
 - title: Connect
@@ -142,8 +140,10 @@
               slug: guides/read-replica-prisma
         - title: Extensions
           items:
+            - title: neon
+              slug: extensions/neon
             - title: neon_utils
-              slug: extensions/neon-utils
+              slug: extensions/neon-utils            
     - title: Frameworks
       items:
         - title: Next.js
@@ -205,6 +205,20 @@
           slug: guides/stepzen
         - title: WunderGraph
           slug: guides/wundergraph
+    - title: Schema migration
+      items:
+        - title: Flyway
+          items:
+            - title: Get started
+              slug: guides/flyway  
+            - title: Manage multiple environments
+              slug: guides/flyway-multiple-environments 
+        - title: Liquibase
+          items:
+             - title: Get started
+               slug: guides/liquibase
+             - title: Developer workflow
+               slug: guides/liquibase-workflow
     - title: Serverless
       items:
         - title: Neon serverless driver
@@ -229,8 +243,13 @@
               slug: guides/vercel
             - title: Connect manually
               slug: guides/vercel-manual
-    - title: OAuth
-      slug: guides/oauth-integration
+    - title: For Partners
+      slug: guides/partner-intro
+      items: 
+        - title: OAuth
+          slug: guides/oauth-integration
+        - title: Manage billing with quotas
+          slug: guides/partner-billing
 - title: AI & embeddings
   items:
     - title: Introduction

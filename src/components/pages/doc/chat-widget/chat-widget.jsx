@@ -10,6 +10,7 @@ import Button from 'components/shared/button/button';
 import useAbortController from 'hooks/use-abort-controller';
 import useDocsAIChatStream from 'hooks/use-docs-ai-chat-stream';
 import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 import ChatInput from './chat-input';
 import AttentionIcon from './images/attention.inline.svg';
@@ -59,9 +60,12 @@ const ChatWidget = () => {
 
   const handleExampleClick = (e) => {
     setSelectedValue(e.target.textContent);
-    sendGtagEvent('chat_widget_example_click', {
+    const eventName = 'chat_widget_example_click';
+    const properties = {
       value: e.target.textContent,
-    });
+    };
+    sendGtagEvent(eventName, properties);
+    sendSegmentEvent(eventName, properties);
     inputRef.current.value = e.target.textContent;
     inputRef.current.focus();
   };
@@ -86,6 +90,9 @@ const ChatWidget = () => {
       if (!isLoading && inputText) {
         setMessages((prevMessages) => prevMessages.concat([{ role: 'user', content: inputText }]));
         sendGtagEvent('chat_widget_submit', {
+          value: inputText,
+        });
+        sendSegmentEvent('chat_widget_submit', {
           value: inputText,
         });
         setSelectedValue('');
@@ -118,6 +125,9 @@ const ChatWidget = () => {
     setIsStopped(true);
     const lastMessage = messages.findLast((message) => message.role === 'user');
     sendGtagEvent('chat_widget_stop_generating_answer', {
+      value: lastMessage?.content,
+    });
+    sendSegmentEvent('chat_widget_stop_generating_answer', {
       value: lastMessage?.content,
     });
   };
@@ -191,10 +201,10 @@ const ChatWidget = () => {
               >
                 <ChatInput ref={inputRef} onEnterPress={() => formRef.current.submit()} />
                 <div className="mt-2.5 flex flex-col space-y-1 text-center text-xs font-light leading-dense text-gray-new-30 dark:text-gray-new-80">
-                  <span>Neon Docs AI has a cap of 1 message every 5 seconds.</span>
+                  <span>Neon AI has a cap of 1 message every 5 seconds.</span>
                   <span>
-                    Neon Docs AI may produce inaccurate information. Evaluate answers carefully
-                    before implementing.
+                    Neon AI may produce inaccurate information. Evaluate answers carefully before
+                    implementing.
                   </span>
                 </div>
                 {!isLoading &&
@@ -266,19 +276,20 @@ const ChatWidgetTrigger = ({ className, isSidebar }) => {
   const onClickHandler = () => {
     setIsOpen(true);
     sendGtagEvent('chat_widget_open');
+    sendSegmentEvent('chat_widget_open');
   };
 
   return (
     <button
       className={clsx(
-        'chat-widget group flex text-sm focus:outline-none',
+        'chat-widget group flex text-sm w-full focus:outline-none',
         isSidebar
           ? 'items-center space-x-3'
           : 'flex-col xl:flex-row xl:items-center xl:space-x-1.5',
         className
       )}
       type="button"
-      aria-label="Open Neon Docs AI"
+      aria-label="Open Neon AI"
       onClick={onClickHandler}
     >
       {isSidebar ? (
@@ -308,7 +319,7 @@ const ChatWidgetTrigger = ({ className, isSidebar }) => {
               'lg:hidden': !isSidebar,
             })}
           >
-            Neon Docs AI
+            Ask Neon AI
           </span>
           <span
             className={clsx('hidden text-gray-new-20 dark:text-gray-new-90 ', {
@@ -316,7 +327,7 @@ const ChatWidgetTrigger = ({ className, isSidebar }) => {
             })}
             aria-hidden
           >
-            Try Neon Docs AI instead
+            Ask Neon AI instead
           </span>
         </h3>
       </div>

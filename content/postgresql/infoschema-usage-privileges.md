@@ -1,3 +1,5 @@
+[#id](#INFOSCHEMA-USAGE-PRIVILEGES)
+
 ## 37.59. `usage_privileges` [#](#INFOSCHEMA-USAGE-PRIVILEGES)
 
 The view `usage_privileges` identifies `USAGE` privileges granted on various kinds of objects to a currently enabled role or by a currently enabled role. In PostgreSQL, this currently applies to collations, domains, foreign-data wrappers, foreign servers, and sequences. There is one row for each combination of object, grantor, and grantee.
@@ -5,6 +7,8 @@ The view `usage_privileges` identifies `USAGE` privileges granted on various kin
 Since collations do not have real privileges in PostgreSQL, this view shows implicit non-grantable `USAGE` privileges granted by the owner to `PUBLIC` for all collations. The other object types, however, show real privileges.
 
 In PostgreSQL, sequences also support `SELECT` and `UPDATE` privileges in addition to the `USAGE` privilege. These are nonstandard and therefore not visible in the information schema.
+
+[#id](#id-1.7.6.63.5)
 
 **Table 37.57. `usage_privileges` Columns**
 

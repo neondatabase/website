@@ -1,3 +1,5 @@
+[#id](#ECPG-SQL-TYPE)
+
 ## TYPE
 
 TYPE — define a new data type
@@ -9,21 +11,27 @@ TYPE — define a new data type
 TYPE type_name IS ctype
 ```
 
+[#id](#id-1.7.5.20.17.3)
+
 ## Description
 
 The `TYPE` command defines a new C type. It is equivalent to putting a `typedef` into a declare section.
 
 This command is only recognized when `ecpg` is run with the `-c` option.
 
+[#id](#id-1.7.5.20.17.4)
+
 ## Parameters
 
 * *`type_name`* [#](#ECPG-SQL-TYPE-TYPE-NAME)
 
-    The name for the new type. It must be a valid C type name.
+  The name for the new type. It must be a valid C type name.
 
 * *`ctype`* [#](#ECPG-SQL-TYPE-CTYPE)
 
-    A C type specification.
+  A C type specification.
+
+[#id](#id-1.7.5.20.17.5)
 
 ## Examples
 
@@ -103,6 +111,8 @@ t.i = 256
 t_ind.v_ind = 0
 t_ind.i_ind = 0
 ```
+
+[#id](#id-1.7.5.20.17.6)
 
 ## Compatibility
 

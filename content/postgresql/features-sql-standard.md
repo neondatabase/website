@@ -1,3 +1,5 @@
+[#id](#FEATURES-SQL-STANDARD)
+
 ## D.1. Supported Features [#](#FEATURES-SQL-STANDARD)
 
 | Identifier | Core? | Description                                                                                                              | Comment                                                     |

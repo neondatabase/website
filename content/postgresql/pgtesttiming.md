@@ -1,3 +1,5 @@
+[#id](#PGTESTTIMING)
+
 ## pg\_test\_timing
 
 pg\_test\_timing — measure timing overhead
@@ -6,9 +8,13 @@ pg\_test\_timing — measure timing overhead
 
 `pg_test_timing` \[*`option`*...]
 
+[#id](#id-1.9.5.11.5)
+
 ## Description
 
 pg\_test\_timing is a tool to measure the timing overhead on your system and confirm that the system time never moves backwards. Systems that are slow to collect timing data can give less accurate `EXPLAIN ANALYZE` results.
+
+[#id](#id-1.9.5.11.6)
 
 ## Options
 
@@ -16,24 +22,27 @@ pg\_test\_timing accepts the following command-line options:
 
 * `-d duration``--duration=duration`
 
-    Specifies the test duration, in seconds. Longer durations give slightly better accuracy, and are more likely to discover problems with the system clock moving backwards. The default test duration is 3 seconds.
+  Specifies the test duration, in seconds. Longer durations give slightly better accuracy, and are more likely to discover problems with the system clock moving backwards. The default test duration is 3 seconds.
 
 * `-V``--version`
 
-    Print the pg\_test\_timing version and exit.
+  Print the pg\_test\_timing version and exit.
 
 * `-?``--help`
 
-    Show help about pg\_test\_timing command line arguments, and exit.
+  Show help about pg\_test\_timing command line arguments, and exit.
+
+[#id](#id-1.9.5.11.7)
 
 ## Usage
+
+[#id](#id-1.9.5.11.7.2)
 
 ### Interpreting Results
 
 Good results will show most (>90%) individual timing calls take less than one microsecond. Average per loop overhead will be even lower, below 100 nanoseconds. This example from an Intel i7-860 system using a TSC clock source shows excellent performance:
 
 ```
-
 Testing timing overhead for 3 seconds.
 Per loop time including overhead: 35.96 ns
 Histogram of timing durations:
@@ -47,12 +56,13 @@ Histogram of timing durations:
 
 Note that different units are used for the per loop time than the histogram. The loop can have resolution within a few nanoseconds (ns), while the individual timing calls can only resolve down to one microsecond (us).
 
+[#id](#id-1.9.5.11.7.3)
+
 ### Measuring Executor Timing Overhead
 
 When the query executor is running a statement using `EXPLAIN ANALYZE`, individual operations are timed as well as showing a summary. The overhead of your system can be checked by counting rows with the psql program:
 
 ```
-
 CREATE TABLE t AS SELECT * FROM generate_series(1,100000);
 \timing
 SELECT COUNT(*) FROM t;
@@ -61,12 +71,13 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM t;
 
 The i7-860 system measured runs the count query in 9.8 ms while the `EXPLAIN ANALYZE` version takes 16.6 ms, each processing just over 100,000 rows. That 6.8 ms difference means the timing overhead per row is 68 ns, about twice what pg\_test\_timing estimated it would be. Even that relatively small amount of overhead is making the fully timed count statement take almost 70% longer. On more substantial queries, the timing overhead would be less problematic.
 
+[#id](#id-1.9.5.11.7.4)
+
 ### Changing Time Sources
 
 On some newer Linux systems, it's possible to change the clock source used to collect timing data at any time. A second example shows the slowdown possible from switching to the slower acpi\_pm time source, on the same system used for the fast results above:
 
 ```
-
 # cat /sys/devices/system/clocksource/clocksource0/available_clocksource
 tsc hpet acpi_pm
 # echo acpi_pm > /sys/devices/system/clocksource/clocksource0/current_clocksource
@@ -86,7 +97,6 @@ In this configuration, the sample `EXPLAIN ANALYZE` above takes 115.9 ms. That's
 FreeBSD also allows changing the time source on the fly, and it logs information about the timer selected during boot:
 
 ```
-
 # dmesg | grep "Timecounter"
 Timecounter "ACPI-fast" frequency 3579545 Hz quality 900
 Timecounter "i8254" frequency 1193182 Hz quality 0
@@ -99,7 +109,6 @@ kern.timecounter.hardware: ACPI-fast -> TSC
 Other systems may only allow setting the time source on boot. On older Linux systems the "clock" kernel setting is the only way to make this sort of change. And even on some more recent ones, the only option you'll see for a clock source is "jiffies". Jiffies are the older Linux software clock implementation, which can have good resolution when it's backed by fast enough timing hardware, as in this example:
 
 ```
-
 $ cat /sys/devices/system/clocksource/clocksource0/available_clocksource
 jiffies
 $ dmesg | grep time.c
@@ -118,6 +127,8 @@ Histogram of timing durations:
     32      0.00000          1
 ```
 
+[#id](#id-1.9.5.11.7.5)
+
 ### Clock Hardware and Timing Accuracy
 
 Collecting accurate timing information is normally done on computers using hardware clocks with various levels of accuracy. With some hardware the operating systems can pass the system clock time almost directly to programs. A system clock can also be derived from a chip that simply provides timing interrupts, periodic ticks at some known time interval. In either case, operating system kernels provide a clock source that hides these details. But the accuracy of that clock source and how quickly it can return results varies based on the underlying hardware.
@@ -134,6 +145,8 @@ Advanced Configuration and Power Interface (ACPI) provides a Power Management (P
 
 Timers used on older PC hardware include the 8254 Programmable Interval Timer (PIT), the real-time clock (RTC), the Advanced Programmable Interrupt Controller (APIC) timer, and the Cyclone timer. These timers aim for millisecond resolution.
 
+[#id](#id-1.9.5.11.8)
+
 ## See Also
 
-[EXPLAIN](sql-explain.html "EXPLAIN")
+[EXPLAIN](sql-explain)

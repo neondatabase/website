@@ -3,7 +3,8 @@ export default {
   aboutUs: '/about-us',
   careers: '/careers',
   blog: '/blog',
-  signup: 'https://console.neon.tech/sign_in',
+  signup: 'https://console.neon.tech/register',
+  login: 'https://console.neon.tech/login',
   security: '/docs/security/security-overview',
   releaseNotes: '/docs/release-notes',
   discord: 'https://discord.gg/YKY4CBXZT2',
@@ -36,4 +37,5 @@ export default {
   awsIsrael: '/partners/aws-israel',
   thankYou: '/thank-you',
   trust: '/trust',
+  postgres: '/docs/postgres',
 };

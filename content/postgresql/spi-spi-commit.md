@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-COMMIT)
+
 ## SPI\_commit
 
 SPI\_commit, SPI\_commit\_and\_chain — commit the current transaction
@@ -5,14 +7,14 @@ SPI\_commit, SPI\_commit\_and\_chain — commit the current transaction
 ## Synopsis
 
 ```
-
 void SPI_commit(void)
 ```
 
 ```
-
 void SPI_commit_and_chain(void)
 ```
+
+[#id](#id-1.8.12.11.4.6)
 
 ## Description
 

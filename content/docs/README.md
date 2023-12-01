@@ -1,3 +1,6 @@
+---
+updatedOn: '2023-11-24T11:25:06.736Z'
+---
 # Docs
 
 Welcome to Neon docs! This folder contains the source code of the [Neon docs](https://neon.tech/docs/).
@@ -469,6 +472,31 @@ Another term for smoke test
 <a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
 
 </DetailIconCards>
+```
+
+## Shared MDX components
+
+Create a [markdown file](https://github.com/neondatabase/website/blob/main/content/docs/shared-content/need-help.md) in folder `content/docs/shared-content/`, add to `sharedMdxComponents` the name of component and the path to component.
+
+```js
+const sharedMdxComponents = {
+  // name of component: path to component (not including content/docs/)
+  NeedHelp: 'shared-content/need-help',
+};
+
+export default sharedMdxComponents;
+```
+
+Insert a shared markdown and render inline.
+
+```md
+## Resources
+
+- [Open AI tiktoken source code on GitHub](https://github.com/openai/tiktoken)
+- [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
+
+<NeedHelp/>
+
 ```
 
 ## Contributing

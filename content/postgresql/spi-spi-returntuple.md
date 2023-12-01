@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-RETURNTUPLE)
+
 ## SPI\_returntuple
 
 SPI\_returntuple — prepare to return a tuple as a Datum
@@ -5,9 +7,10 @@ SPI\_returntuple — prepare to return a tuple as a Datum
 ## Synopsis
 
 ```
-
 HeapTupleHeader SPI_returntuple(HeapTuple row, TupleDesc rowdesc)
 ```
+
+[#id](#id-1.8.12.10.10.5)
 
 ## Description
 
@@ -17,15 +20,19 @@ This function can only be used while connected to SPI. Otherwise, it returns NUL
 
 Note that this should be used for functions that are declared to return composite types. It is not used for triggers; use `SPI_copytuple` for returning a modified row in a trigger.
 
+[#id](#id-1.8.12.10.10.6)
+
 ## Arguments
 
 * `HeapTuple row`
 
-    row to be copied
+  row to be copied
 
 * `TupleDesc rowdesc`
 
-    descriptor for row (pass the same descriptor each time for most effective caching)
+  descriptor for row (pass the same descriptor each time for most effective caching)
+
+[#id](#id-1.8.12.10.10.7)
 
 ## Return Value
 

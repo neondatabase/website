@@ -1,4 +1,8 @@
+[#id](#EVENT-TRIGGER-INTERFACE)
+
 ## 40.3. Writing Event Trigger Functions in C [#](#EVENT-TRIGGER-INTERFACE)
+
+
 
 This section describes the low-level details of the interface to an event trigger function. This information is only needed when writing event trigger functions in C. If you are using a higher-level language then these details are handled for you. In most cases you should consider using a procedural language before writing your event triggers in C. The documentation of each procedural language explains how to write an event trigger in that language.
 
@@ -37,18 +41,18 @@ where the members are defined as follows:
 
 * `type`
 
-    Always `T_EventTriggerData`.
+  Always `T_EventTriggerData`.
 
 * `event`
 
-    Describes the event for which the function is called, one of `"ddl_command_start"`, `"ddl_command_end"`, `"sql_drop"`, `"table_rewrite"`. See [Section 40.1](event-trigger-definition.html "40.1. Overview of Event Trigger Behavior") for the meaning of these events.
+  Describes the event for which the function is called, one of `"ddl_command_start"`, `"ddl_command_end"`, `"sql_drop"`, `"table_rewrite"`. See [Section 40.1](event-trigger-definition) for the meaning of these events.
 
 * `parsetree`
 
-    A pointer to the parse tree of the command. Check the PostgreSQL source code for details. The parse tree structure is subject to change without notice.
+  A pointer to the parse tree of the command. Check the PostgreSQL source code for details. The parse tree structure is subject to change without notice.
 
 * `tag`
 
-    The command tag associated with the event for which the event trigger is run, for example `"CREATE FUNCTION"`.
+  The command tag associated with the event for which the event trigger is run, for example `"CREATE FUNCTION"`.
 
 An event trigger function must return a `NULL` pointer (*not* an SQL null value, that is, do not set *`isNull`* true).

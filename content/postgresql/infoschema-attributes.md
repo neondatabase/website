@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-ATTRIBUTES)
+
 ## 37.6. `attributes` [#](#INFOSCHEMA-ATTRIBUTES)
 
 The view `attributes` contains information about the attributes of composite data types defined in the database. (Note that the view does not give information about table columns, which are sometimes called attributes in PostgreSQL contexts.) Only those attributes are shown that the current user has access to (by way of being the owner of or having some privilege on the type).
+
+[#id](#id-1.7.6.10.3)
 
 **Table 37.4. `attributes` Columns**
 
@@ -38,6 +42,5 @@ The view `attributes` contains information about the attributes of composite dat
 | `dtd_identifier` `sql_identifier`An identifier of the data type descriptor of the column, unique among the data type descriptors pertaining to the table. This is mainly useful for joining with other instances of such identifiers. (The specific format of the identifier is not defined and not guaranteed to remain the same in future versions.)                                                                                  |
 | `is_derived_reference_attribute` `yes_or_no`Applies to a feature not available in PostgreSQL                                                                                                                                                                                                                                                                                                                                            |
 
-\
 
-See also under [Section 37.17](infoschema-columns.html "37.17. columns"), a similarly structured view, for further information on some of the columns.
+See also under [Section 37.17](infoschema-columns), a similarly structured view, for further information on some of the columns.
