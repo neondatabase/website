@@ -7,7 +7,7 @@ updatedOn: '2023-11-08T18:42:10.264Z'
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
 
-<Tabs labels={["npm", "macOS", "Windows", "Linux"]}>
+<Tabs labels={["npm", "Homebrew", "Binary"]}>
 
 <TabItem>
 
@@ -24,50 +24,58 @@ Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
 
 <TabItem>
 
-On macOS, install with Homebrew or the `neonctl-macos` binary:
-
-- [Homebrew](https://formulae.brew.sh/formula/neonctl)
-
-    ```bash
-    brew install neonctl
-    ```
-
-- [Binary](https://github.com/neondatabase/neonctl/releases)
-
-    Download the [neonctl-macos](https://github.com/neondatabase/neonctl/releases) binary.
-
-</TabItem>
-
-<TabItem>
-
-Download the [neonctl-win.exe](https://github.com/neondatabase/neonctl/releases) binary.
-
-No installation is required. Run the Neon CLI as follows:
+To install the Neon CLI with [Homebrew](https://formulae.brew.sh/formula/neonctl)
 
 ```bash
-neonctl-win.exe <command> [options]
+brew install neonctl
 ```
 
 </TabItem>
 
 <TabItem>
 
-On Linux, install with the [neonctl-linux](https://github.com/neondatabase/neonctl/releases) binary, [npm](https://www.npmjs.com/package/neonctl), or [Homebrew](https://formulae.brew.sh/formula/neonctl).
+To install a binary:
 
-- [Binary](https://github.com/neondatabase/neonctl/releases/tag/v1.24.0)
+- **macOS**
 
-    Download the [neonctl-linux](https://github.com/neondatabase/neonctl/releases) binary.
-
-- [npm](https://www.npmjs.com/package/neonctl)
-
-    ```shell
-    npm i -g neonctl
-    ```
-
-- [Homebrew](https://formulae.brew.sh/formula/neonctl)
+    Download the macOS binary: 
 
     ```bash
-    brew install neonctl
+    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
+    ```
+
+    No installation is required. Run the Neon CLI as follows:
+
+    ```bash
+    neonctl <command> [options]
+    ```
+
+- **Linux**
+
+    Download the Linux binary: 
+
+    ```bash
+    curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux -o neonctl
+    ```
+
+    No installation is required. Run the Neon CLI as follows:
+
+    ```bash
+    neonctl <command> [options]
+    ```
+
+- **Windows**
+
+    Download the Windows binary:
+
+    ```bash
+    curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
+    ```
+
+    No installation is required. Run the Neon CLI as follows:
+
+    ```bash
+    neonctl-win.exe <command> [options]
     ```
 
 </TabItem>
