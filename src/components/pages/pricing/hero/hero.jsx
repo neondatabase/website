@@ -26,7 +26,7 @@ const items = [
       { title: 'A shared compute with 1 GB of RAM' },
     ],
     button: {
-      url: 'https://console.neon.tech/sign_in',
+      url: LINKS.signup,
       text: 'Get Started',
       theme: 'white-outline',
       event: 'pricing_hero_free_btn_click',
