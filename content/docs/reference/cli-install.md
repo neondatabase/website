@@ -34,15 +34,19 @@ brew install neonctl
 
 <TabItem>
 
-To install a binary:
+To install a [binary](https://github.com/neondatabase/neonctl/releases):
 
 - **macOS**
 
-    Download the macOS binary: 
+    Download the macOS binary:
+
+    <CodeBlock shouldWrap>
 
     ```bash
     curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
     ```
+
+    </CodeBlock>
 
     No installation is required. Run the Neon CLI as follows:
 
@@ -52,11 +56,15 @@ To install a binary:
 
 - **Linux**
 
-    Download the Linux binary: 
+    Download the Linux binary:
+
+    <CodeBlock shouldWrap>
 
     ```bash
     curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux -o neonctl
     ```
+
+    </CodeBlock>
 
     No installation is required. Run the Neon CLI as follows:
 
@@ -68,9 +76,13 @@ To install a binary:
 
     Download the Windows binary:
 
+    <CodeBlock shouldWrap>
+
     ```bash
     curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
     ```
+
+    </CodeBlock>
 
     No installation is required. Run the Neon CLI as follows:
 
@@ -85,7 +97,7 @@ To install a binary:
 
 ### Upgrade
 
-When a new version is released, you can update your Neon CLI using the installation methods described above. To check the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed Neon CLI version, run the folliowing command:
+When a new version is released, you can update your Neon CLI using the installation methods described above. To check for the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed Neon CLI version, run the folliowing command:
 
 ```bash
 neonctl --version
