@@ -104,3 +104,21 @@ Add information if you're having trouble updating any dependencies, this could b
 Space for a free-form description of the problem
 
 </details>
+
+### remark-gfm
+
+[Breaks with latest version of remark-gfm](https://github.com/hashicorp/next-mdx-remote/issues/403)
+
+- **Issue found on:** 01 December, 2023
+- **Problematic version:** 4.0.0
+- **Last stable version:** 3.0.1
+
+### next
+
+Get the error when update Next.js to v14.
+Error message: `export 'serialize' (reexported as 'serialize') was not found`.
+[Related issue](https://github.com/hashicorp/next-mdx-remote/issues/416)
+
+- **Issue found on:** 01 December, 2023
+- **Problematic version:** >14.x.x
+- **Last stable version:** 13.5.6
