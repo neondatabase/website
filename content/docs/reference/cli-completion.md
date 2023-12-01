@@ -19,7 +19,11 @@ This command generates a completion script for the `neonctl` command-line interf
 neonctl completion
 ```
 
-The command outputs the following completion script similar to the following with installation instructions. **Use the completeion scription that is output to your terminal or command window**, as the script may differ depending on your operating environment. 
+The command outputs a completion script similar to the one shown below.
+
+<Admonition type="important">
+Use the completion script that is output to your terminal or command window, as the script may differ depending on your operating environment.
+</Admonition>
 
 ```text
 ###-begin-neonctl-completions-###
@@ -52,7 +56,7 @@ complete -o bashdefault -o default -F _neonctl_yargs_completions neonctl
 ###-end-neonctl-completions-###
 ```
 
-Use the commands provided below to install the completion script to your shell configuration file, which is typically located in your `home` directory. Your shell configuration file may differ by platform. For example, on Ubuntu, you should have a `.bashrc` file, and on macOS, you might have `bash_profile` or `.zshrc`. The `source` command causes the changes to your shell configuration file to take effect immediately in the current shell session. 
+Use the commands provided below to add the completion script to your shell configuration file, which is typically found in your `home` directory. Your shell configuration file may differ by platform. For example, on Ubuntu, you should have a `.bashrc` file, and on macOS, you might have `bash_profile` or `.zshrc` file. The `source` command causes the changes to take effect immediately in the current shell session. 
 
 <Tabs labels={["bashrc", "bash_profile", "profile", "zshrc"]}>
 
