@@ -123,6 +123,3 @@ This creates a hidden file with the following context details:
 }
 ```
 You can now use any command that would normally require an additional `--project-id` or `branch` parameter and the command will default to this context.
-
-
-
