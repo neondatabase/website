@@ -14,10 +14,10 @@ updatedOn: '2023-11-24T11:25:06.765Z'
 
 This command sets a background context for your CLI session, letting you perform project or branch specific actions without having to specify the project or branch id in every command. There are two ways to set conext:
 
-* Hidden file &#8212; the specified context is saved to a hidden file that gets added to whichever diretory you run the command from
-* Named `context-file` &#8212; the context is saved to a named `context-file`, at wahtever path you specify
+* Hidden file &#8212; the specified context is saved to a hidden file that gets added to whichever directory you run the command from
+* Named `context-file` &#8212; the context is included in a named `context-file`, saved in whichever directory you specify
 
-These two methods can be used independently from one another; you can specify different contexts between your hidden and named files. When running commands, the hidden file gets used by default; the `context-file` is only used when explictly included in a command.
+These two methods can be used independently from one another; the contexts in your hidden and named files can be different. When running commands, the hidden file gets used by default; the `context-file` is only used when explictly included in a command.
 
 The settings remain in place until you set a new context, or you remove the `context-file`.
 
@@ -26,12 +26,12 @@ The settings remain in place until you set a new context, or you remove the `con
 #### set-context (hidden file)
 
 ```bash
-neonctl set-context <option>
+neonctl set-context [option]
 ```
 #### set-context to context-file
 
 ```bash
-neonctl set-context <option> --context-file your_context_file
+neonctl set-context [option] --context-file <your_context_file>
 ```
 
 #### set-context during project creation
@@ -39,7 +39,7 @@ neonctl set-context <option> --context-file your_context_file
 You can also set context for a new project during project creation:
 
 ```bash
-neonctl projects create --name <project_name> --set-context your_context_file
+neonctl projects create --name <project_name> --set-context <your_context_file>
 ```
 
 ### Options
@@ -49,15 +49,15 @@ The `set-context` command requires you set at least one of these options:
 | ------------ | ------------- | ------ | :------: |
 | `--project-id` | Project ID    | string | Sets the identified project as the context until you reset or remove context-file |
 | `--branch` | Branch ID or name | string | Sets the identified branch as the context until you reset or remove context-file |
-| `--context-file` | path and file name | string | Creates a file that holds your set-context information 
+| `--context-file` | path and file name | string | Creates a file that holds project-id or branch context 
 
 [Global options](/docs/reference/neon-cli#global-options) are also supported.
 
-### Examples of using a context
+## Examples of using a context
 
 Here is an example of setting a hidden context to a project, and then using it in a branch list command:
 
-#### Using hidden file
+### Using hidden file
 
 Setting the context:
 ```bash
@@ -67,7 +67,7 @@ This branches list command does not need to specify the project, even though mul
 ```bash
 neonctl branches list
 ```
-The results show details from the `patient-frost-50125040` project:
+The results show details for all branches in the `patient-frost-50125040` project:
 ```bash
 ┌──────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                       │ Name        │ Primary │ Created At           │ Updated At           │
@@ -78,7 +78,7 @@ The results show details from the `patient-frost-50125040` project:
 └──────────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
 
-#### Using a named `context-file`
+### Using a named `context-file`
 
 Setting the context to a different project in the same account:
 ```bash
@@ -88,7 +88,7 @@ This branches list command does not need to specify the project, even though oth
 ```bash
 neonctl branches list --context-file Documents/MyContext
 ```
-The results show details from the `plain-waterfall-84865553` project:
+The results show details for all branches in the `plain-waterfall-84865553` project:
 ```bash
 ┌─────────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                          │ Name        │ Primary │ Created At           │ Updated At           │
@@ -102,7 +102,7 @@ The results show details from the `plain-waterfall-84865553` project:
 ```
 
 <Admonition type="note">
-Notice that these `branches list commands` are using different contexts for the same account: the hidden file is set to `patient-frost-50125040` and the named `context-file` is set to `plain-waterfall-84865553`. Each can be called independently. You can set as many `context-files` as you'd like, using different names or saved to different directories, depending on your needs.
+Notice that these two `branches list` commands are using different contexts for the same account: the hidden file is set to `patient-frost-50125040` and the named `context-file` is set to `plain-waterfall-84865553`. Each can be called independently. You can set as many `context-files` as you'd like, using different names or saved to different directories, depending on your needs.
 </Admonition>
 
 
