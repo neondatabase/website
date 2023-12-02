@@ -2,12 +2,12 @@
 title: Neon CLI commands — databases
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.764Z'
+updatedOn: '2023-12-01T19:05:09.474Z'
 ---
 
 ## Before you begin
 
-- Before running the `databases` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+- Before running the `databases` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
 - If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 For information about databases in Neon, see [Manage databases](/docs/manage/databases).

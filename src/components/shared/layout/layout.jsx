@@ -10,7 +10,6 @@ const Layout = ({
   headerTheme,
   footerTheme = 'white',
   withOverflowHidden = false,
-  isSignIn = false,
   children,
   isHeaderSticky = false,
   headerWithBottomBorder = false,
@@ -24,7 +23,6 @@ const Layout = ({
       className={headerClassName}
       withBottomBorder={headerWithBottomBorder}
       theme={headerTheme}
-      isSignIn={isSignIn}
       isSticky={isHeaderSticky}
       isDocPage={isDocPage}
       isBlogPage={isBlogPage}
@@ -49,7 +47,6 @@ Layout.propTypes = {
   footerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']),
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  isSignIn: PropTypes.bool,
   isHeaderSticky: PropTypes.bool,
   headerWithBottomBorder: PropTypes.bool,
   footerWithTopBorder: PropTypes.bool,

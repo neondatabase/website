@@ -17,7 +17,7 @@ export const metadata = getMetadata({
 });
 
 const StackOverflowPage = () => (
-  <Layout headerTheme="black" isSignIn footerWithTopBorder withOverflowHidden>
+  <Layout headerTheme="black" footerWithTopBorder withOverflowHidden>
     <FirstSection />
     <Community />
     <Scalability />

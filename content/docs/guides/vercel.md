@@ -3,7 +3,7 @@ title: Connect with the Neon Vercel Integration
 subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel
   Integration
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.756Z'
+updatedOn: '2023-12-01T21:50:13.133Z'
 ---
 
 This guide describes how to connect using the [Neon Vercel Integration](https://vercel.com/integrations/neon) from the Vercel marketplace. The integration connects your Vercel project to a Neon database and enables creating a database branch for each preview deployment.
@@ -166,5 +166,9 @@ To view integration permissions, manage integration access, or remove the Neon i
 
 1. On the Vercel dashboard, select **Settings** > **Integrations**.
 1. Find the **Neon** integration and select **Manage**.
+
+<Admonition type="note">
+Removing the Neon Vercel Integration removes the Vercel environment variables set by the integration. It does not remove Neon branches created by the integration. To remove Neon branches, see [Delete a branch](/docs/manage/branches#delete-a-branch).
+</Admonition>
 
 <NeedHelp/>
