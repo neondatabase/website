@@ -36,7 +36,7 @@ neonctl set-context [option] --context-file <your_context_file>
 
 #### set-context during project creation
 
-You can also set context for a new project during project creation:
+You can also set context for a new project during project creation.
 
 ```bash
 neonctl projects create --name <project_name> --set-context <your_context_file>
@@ -53,7 +53,7 @@ The `set-context` command requires you set at least one of these options:
 
 [Global options](/docs/reference/neon-cli#global-options) are also supported.
 
-## Examples of using a context
+## Examples of setting and using a context
 
 Here is an example of setting a hidden context to a project, and then using it in a branch list command:
 
@@ -105,6 +105,23 @@ The results show details for all branches in the `plain-waterfall-84865553` proj
 Notice that these two `branches list` commands are using different contexts for the same account: the hidden file is set to `patient-frost-50125040` and the named `context-file` is set to `plain-waterfall-84865553`. Each can be called independently. You can set as many `context-files` as you'd like, using different names or saved to different directories, depending on your needs.
 </Admonition>
 
+### Setting context when creating a new project
+
+Let's say you want to create a new project called `MyLatest`. You can automatically set the project ID and primary branch ID  context at the same time as we create the project.
+
+```bash
+neonctl projects create --name MyLatest --set-context
+```
+
+This creates a hidden file with the following context details:
+
+```json
+{
+  "projectId": "quiet-water-76237589",
+  "branchId": "br-still-wind-46531853"
+}
+```
+You can now use any command that would normally require an additional `--project-id` or `branch`` parameter and the command will default to this context.
 
 
 
