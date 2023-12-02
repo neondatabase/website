@@ -55,15 +55,16 @@ The `set-context` command requires you set at least one of these options:
 
 ## Examples of setting and using a context
 
-Here is an example of setting a hidden context to a project, and then using it in a branch list command:
+Here are some examples of setting contexts to specific projects, then using them in an example command.
 
 ### Using hidden file
 
-Setting the context:
+Set the context:
 ```bash
 neonctl set-context --project-id patient-frost-50125040
 ```
-This branches list command does not need to specify the project, even though multiple projects exist for this account:
+List all branches for this project using `branches list`. You do not need to include `--project-id` even though multiple projects exist for this account:
+
 ```bash
 neonctl branches list
 ```
@@ -80,11 +81,11 @@ The results show details for all branches in the `patient-frost-50125040` projec
 
 ### Using a named `context-file`
 
-Setting the context to a different project in the same account:
+Set the context to a different project in the same account:
 ```bash
 neonctl set-context --project-id plain-waterfall-84865553 --context-file Documents/MyContext
 ```
-This branches list command does not need to specify the project, even though other projects exist for this account:
+List all branches using the `branches list` command. No need to specify the project since the context-file provides it.
 ```bash
 neonctl branches list --context-file Documents/MyContext
 ```
@@ -107,7 +108,7 @@ Notice that these two `branches list` commands are using different contexts for 
 
 ### Setting context when creating a new project
 
-Let's say you want to create a new project called `MyLatest`. You can automatically set the project ID and primary branch ID  context at the same time as we create the project.
+Let's say you want to create a new project called `MyLatest`. You can automatically set the project ID and primary branch ID  context at the same time as you create the project.
 
 ```bash
 neonctl projects create --name MyLatest --set-context
@@ -121,7 +122,7 @@ This creates a hidden file with the following context details:
   "branchId": "br-still-wind-46531853"
 }
 ```
-You can now use any command that would normally require an additional `--project-id` or `branch`` parameter and the command will default to this context.
+You can now use any command that would normally require an additional `--project-id` or `branch` parameter and the command will default to this context.
 
 
 
