@@ -19,7 +19,7 @@ This command sets a background context for your CLI session, letting you perform
 
 These two methods can be used independently from one another; the contexts in your hidden and named files can be different. When running commands, the hidden file gets used by default; the `context-file` is only used when explictly included in a command.
 
-The settings remain in place until you set a new context, or you remove the `context-file`.
+The settings remain in place until you set a new context or you remove the `context-file`.
 
 ### Usage
 
