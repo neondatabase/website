@@ -3,6 +3,7 @@ title: Security overview
 enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
+  - /docs/security
 updatedOn: '2023-10-07T10:43:33.430Z'
 ---
 
