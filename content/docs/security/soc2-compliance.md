@@ -10,7 +10,7 @@ The **SOC 2 Type 1 Compliance** audit assessed the design of our controls at a s
 
 The **SOC 2 Type 2 Compliance** audit assessed operational effectiveness of these controls over a period of time. This comprehensive audit provides assurance that our controls are not only well-designed but also consistently applied and effective in practice.
 
-Acheieving SOC 2 Type 1 and Type 2 compliance underscores Neon's ongoing commitment to safeguarding customer data and maintaining a high level of security. We will continue to invest in regular audits and adhere to industry best practices to ensure the security, integrity, and privacy of the data you entrust us with.
+Achieving SOC 2 Type 1 and Type 2 compliance underscores Neon's ongoing commitment to safeguarding customer data and maintaining a high level of security. We will continue to invest in regular audits and adhere to industry best practices to ensure the security, integrity, and privacy of the data you entrust us with.
 
 <Admonition type="note">
 If you would like to review our SOC 2 audit reports, you can request those documents through our [Trust Center](https://trust.neon.tech/). If you have other security questions or concerns, please contact us at [security@neon.tech](mailto:security@neon.tech).
