@@ -36,6 +36,7 @@
         - title: Custom
           slug: introduction/custom-plan
     - title: Billing
+      slug: introduction/about-billing
       items:
         - title: Billing metrics
           slug: introduction/billing
