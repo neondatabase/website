@@ -12,9 +12,9 @@ updatedOn: '2023-11-24T11:25:06.765Z'
 
 ## The `set-context` command
 
-This command sets a background context for your CLI sessions, letting you perform project or branch specific actions without having to specify the project or branch id in every command. The context is saved as a reference file. Use the `context-file` parameter to save the context to the file of your choice. You can switch contexts by providing differnet files. If you don't specify any file, a default `.neon` file is added to your current directory.
+This command sets a background context for your CLI sessions, letting you perform project or branch specific actions without having to specify the project or branch id in every command. The context is saved as a reference file. Using the `context-file` parameter, you can save the context to a file of your choice. If you don't specify a file, a default `.neon` file is saved to the current directory. You can switch contexts by providing differnet files.
 
-The context remains in place until you reset to a new context or you remove the `context-file`.
+The context remains in place until you reset to a new context or remove the `context-file`.
 
 ### Usage
 
@@ -120,5 +120,5 @@ This creates a hidden file with the following context details:
 You can now use any command that would normally require an additional `--project-id` or `branch` parameter and the command will default to this context.
 
 <Admonition type="note">
-Neon does not savea any confidential information to the context file (for example, auth tokens). You can safely commit this file to your repository or share with others.
+Neon does not save any confidential information to the context file (for example, auth tokens). You can safely commit this file to your repository or share with others.
 </Admonition>
