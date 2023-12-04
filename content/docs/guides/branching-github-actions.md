@@ -139,7 +139,7 @@ name: Reset Neon Branch with GitHub Actions Demo
 run-name: Reset a Neon Branch 🚀
 jobs:
   Reset-Neon-Branch:
-    uses: neondatabase/reset-branch-action@beta
+    uses: neondatabase/reset-branch-action@v1
     with:
       project_id: rapid-haze-373089
       parent: true
