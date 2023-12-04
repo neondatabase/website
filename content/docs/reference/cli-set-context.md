@@ -52,9 +52,9 @@ The `set-context` command requires you set at least one of these options:
 
 Here are some examples of setting contexts to specific projects, then using them in an example command.
 
-### Using hidden file
+### Using default file
 
-Set the context:
+Set the context to the default `.neon` file:
 ```bash
 neonctl set-context --project-id patient-frost-50125040
 ```
@@ -76,7 +76,7 @@ The results show details for all branches in the `patient-frost-50125040` projec
 
 ### Using a named `context-file`
 
-Set the context to a different project in the same account:
+Set the context to the `context-file` of your choice:
 ```bash
 neonctl set-context --project-id plain-waterfall-84865553 --context-file Documents/MyContext
 ```
