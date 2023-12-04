@@ -1,3 +1,8 @@
+---
+redirectFrom:
+  - /docs/release-notes/2023-10-06-storage-and-compute
+---
+
 ### Postgres extension updates
 
 The following Postgres extensions were updated to a newer version and are now supported with Postgres 16:

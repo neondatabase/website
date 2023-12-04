@@ -2,6 +2,8 @@
 title: Neon user guides
 subtitle: 'Explore Neon framework, language, platform, and feature guides'
 enableTableOfContents: true
+redirectFrom:
+  - /docs/integrations/integrations-list/
 updatedOn: '2023-11-24T19:55:37.125Z'
 ---
 

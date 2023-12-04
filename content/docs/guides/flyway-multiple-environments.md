@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2023-11-27T16:33:52.717Z'
 ---
 
-Flyway is a database migration tool that facilitates version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
+With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
 
 When automating releases, there are often multiple environments or a chain of environments that you must deliver changes to in a particular order. Such environments might include _development_, _staging_, and _production_.
 
