@@ -12,7 +12,7 @@ updatedOn: '2023-11-24T11:25:06.765Z'
 
 ## The `set-context` command
 
-This command sets a background context for your CLI session, letting you perform project or branch specific actions without having to specify the project or branch id in every command. There are two ways to set context:
+This command sets a background context for your CLI sessions, letting you perform project or branch specific actions without having to specify the project or branch id in every command. There are two ways to set context:
 
 * Hidden file &#8212; the specified context is saved to a hidden file that gets added to whichever directory you run the command from
 * Named `context-file` &#8212; the context is included in a named `context-file`, saved in whichever directory you specify
