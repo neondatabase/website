@@ -98,7 +98,7 @@ The results show details for all branches in the `plain-waterfall-84865553` proj
 ```
 
 <Admonition type="note">
-These two `branches list` commands demonstrate the use of different contexts in the same account. The hidden file context is set to `patient-frost-50125040` while the named `context-file` is set to `plain-waterfall-84865553`. These contexts operate independently. You can set as many `context-files` as you'd like, using unique names or in different directories, depending on your needs.
+These two `branches list` commands demonstrate the use of different contexts in the same account. The default `.neon` context is set to `patient-frost-50125040` while the named `context-file` is set to `plain-waterfall-84865553`. These contexts operate independently. You can set as many `context-files` as you'd like, using unique names or in different directories, depending on your needs.
 </Admonition>
 
 ### Setting context when creating a new project
