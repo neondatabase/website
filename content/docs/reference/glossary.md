@@ -200,6 +200,10 @@ A feature provided by some hypervisors, such as QEMU, that allows the transfer o
 
 A layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute instance. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly.
 
+### Logical data size
+
+For a Postgres database, it is the size of the database, including all tables, indexes, views, and stored procedures. In Neon, a branch can have multiple databases. The logical data size for a branch is therefore equal to the total logical size of all databases on the branch.
+
 ### LSN
 
 Log Sequence Number. A byte offset to a location in the [WAL stream](#wal-stream). The Neon branching feature supports creating branches with data up to a specified LSN.

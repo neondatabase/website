@@ -81,7 +81,7 @@ For Neon Free Tier users, the limit is approximately 3 GiB per branch:
 * `branch_logical_size_limit`: 3072
 * `branch_logical_size_limit_bytes:` 3221225472
 
-For Neon Pro Tier users, the limit is approximately 200 GiB per branch:
+For Neon Pro Tier users, the logical data size limit is approximately 200 GiB per branch:
 * `branch_logical_size_limit`: 204800
 * `branch_logical_size_limit_bytes`: 214748364800
 
