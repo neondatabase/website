@@ -2,7 +2,7 @@
 title: Manage multiple database environments
 subtitle: Learn how to manage schemas for multiple database environments with Flyway
 enableTableOfContents: true
-updatedOn: '2023-11-27T16:33:52.717Z'
+updatedOn: '2023-12-04T12:15:51.547Z'
 ---
 
 With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
