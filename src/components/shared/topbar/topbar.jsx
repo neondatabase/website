@@ -25,7 +25,7 @@ const TopBar = () => {
       }}
     >
       <span className="mr-4 truncate py-1 pr-4 text-sm font-semibold">
-        Neon is now SOC 2 Type 2 compliment 🚀 Read more.
+        Neon is now SOC 2 Type 2 compliant 🚀 Read more.
       </span>
       {/* <span className="inline-flex items-center text-sm font-bold sm:hidden">
         <span>Get your ticket</span>
