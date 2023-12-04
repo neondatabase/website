@@ -12,7 +12,7 @@ updatedOn: '2023-11-24T11:25:06.765Z'
 
 ## The `set-context` command
 
-This command sets a background context for your CLI sessions, letting you perform project or branch specific actions without having to specify the project or branch id in every command. The context is saved as a reference file. Using the `context-file` parameter, you can save the context to a file of your choice. If you don't specify a file, a default `.neon` file is saved to the current directory. You can switch contexts by providing differnet files.
+This command sets a background context for your CLI sessions, letting you perform project or branch specific actions without having to specify the project or branch id in every command. Using the `context-file` parameter, you can save the context to a file of your choice. If you don't specify a file, a default `.neon` file is saved to the current directory. You can switch contexts by providing differnet files.
 
 The context remains in place until you reset to a new context or remove the `context-file`.
 
