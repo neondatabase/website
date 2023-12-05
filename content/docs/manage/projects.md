@@ -125,6 +125,7 @@ From the **Settings** page, you can also set defaults or apply bulk changes acro
 
 - [Reset default compute size](#reset-the-default-compute-size) (Neon Pro Plan only)
 - [Configure history retention range](#configure-history-retention)
+- [Configiure the IP Allowlist](#configure-the-ip-allowlist)
 
 ### Reset the default compute size
 
@@ -157,6 +158,47 @@ To configure the history retention period for a project:
     ![History retention configuration](/docs/relnotes/history_retention.png)
 4. Use the slider to select the history retention period.
 5. Click **Save**.
+
+### Configure the IP Allowlist
+
+An IP Allowlist is a security feature that restricts access to your database to only those IP addresses that you specify. It acts as a gatekeeper, ensuring that only trusted IP addresses can connect to your database. This feature helps prevent unauthorized access, safeguarding sensitive data, and maintaining overall database integrity. In Neon, the IP Allowlist you specify is applied to all branches by default. Optionally, you can apply the IP Allowlist to the primary branch only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches. 
+
+You can define an allowlist with individual IP addresses, IP ranges, or CIDR notation. A combination of these options is also permitted. When adding multiple entries to your allowlist, the entries must be separated by a comma.
+
+- **Add individual IP addresses**: You can add individual IP addresses that you wish to allow. This is useful if you want to grant access to specific users or locations. This example represents a single IP address, typically used for allowing one specific device or user.
+
+```text
+192.168.1.15
+```
+
+You can specify multiple individual IP addresses as a comma-separated list.
+
+- **Define IP ranges**: For broader access control, you can define IP ranges. This is particularly useful for allowing access from a company network or a range of known IPs. This example range includes all IP addresses from `192.168.1.20` to `192.168.1.30`, useful for allowing a group of devices within a specific network segment. 
+
+```
+192.168.1.20-192.168.1.30
+```
+
+You can specify multiple IP ranges as a comma-separated list.
+
+
+- **Use CIDR notation**: For more advanced control, you can use CIDR (Classless Inter-Domain Routing) notation to specify an IP address block. This is a compact way of defining a range of IPs and is particularly useful for larger networks.
+
+This CIDR notation represents all 256 IP addresses from  `192.168.1.0` to `192.168.1.255`. It's efficient for specifying larger groups of IPs, often used for entire network subnets. 
+
+ ```text
+ 192.168.1.0/24
+ ```
+
+You can specify multiple CIDR notation entries as a comma-separated list.
+ 
+A combined example using all three options above, specified as a comma-separated list, would appear similar to the following:
+
+```text
+192.168.1.15, 192.168.1.20-192.168.1.30, 192.168.1.0/24
+```
+
+This list combines the individual IP address, a range of IP addresses, and a CIDR block. It illustrates how different types of IP specifications can be used together in a single allowlist configuration, offering a flexible approach to access control.
 
 ## Manage projects with the Neon API
 
