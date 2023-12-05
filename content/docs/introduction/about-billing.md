@@ -19,6 +19,7 @@ With key features like autoscaling, autosuspend, minimum and max compute sizes a
 <TabItem>
 storage image
 </TabItem>
+</Tabs>
 
 
 
