@@ -4,6 +4,45 @@ enableTableOfContents: true
 subtitle: Learn how Neon billing works to save you money
 ---
 
+Find all the documentation you need to understand, manage, and reduce your monthly Neon bill.
+
+## Pricing calculators and metrics
+
+Start with our pricing calculators to get a sense of how different compute and storage sizes can affect your bill. Then get more detail about the underlying metrics.
+
+<DetailIconCards>
+
+<a href="/docs/introduction/billing-calculators" description="Our pricing calculator and cost estimator tools help you estimate your next Neon bill." icon="branching">Pricing calculators</a>
+
+<a href="h/docs/introduction/billing-metrics" description="Find detailed descriptions of the metrics that make up your bill" icon="split-branch">Billing metrics</a>
+
+</DetailIconCards>
+
+## Reference
+
+Read our sample billing page to see how costs accrue in a typical medium-sized organization. Get a detailed cost breakdown for compute and storage in your region.
+
+<DetailIconCards>
+
+<a href="/docs/introduction/billing-sample" description="See how billing breaks down for a sample project." icon="branching">Sample projects</a>
+
+<a href="h/docs/introduction/billing-regions" description="Reference table of billing rates per region" icon="split-branch">Billing rates</a>
+
+</DetailIconCards>
+
+## Manage billing
+
+Find information about invoices, payment methods, and other actions around viewing and managing your bill.
+
+<DetailIconCards>
+
+<a href="/docs/introduction/manage-billing" description="Manage your monthly bill." icon="branching">Manage billing</a>
+
+</DetailIconCards>
+
+
+---
+
 Just as we separate storage from compute in our architecture, we separate storage from compute when calculating your bill.
 
 <Tabs labels={["Compute", "Storage"]}>
