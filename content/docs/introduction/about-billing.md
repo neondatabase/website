@@ -56,7 +56,10 @@ With key features like [autoscaling](), [autosuspend](), minimum and max [comput
 </TabItem>
 
 <TabItem>
-storage image
+Neon storage uses copy-on-write branching to keep storage size as small as possible. This can make it hard to visualize "how big is my database", since branches with a shared history don't immediately add to storage costs. Your storage size is a combination of the data itself and the change history that is used to enable features like x, y, z. Neon charges you by the hour based on the size of your project storage, using the following calcuation.
+
+![Storage calculation](/docs/introduction/storage_calc.png)
+
 </TabItem>
 </Tabs>
 
