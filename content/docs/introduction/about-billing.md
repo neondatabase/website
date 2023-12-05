@@ -6,6 +6,8 @@ subtitle: Learn how Neon billing works to save you money
 
 Find all the documentation you need to understand, manage, and reduce your monthly Neon bill.
 
+![Compute metrics graph](/docs/introduction/compute-metrics.png)
+
 ## Pricing calculators and metrics
 
 Start with our pricing calculators to get a sense of how different compute and storage sizes can affect your bill. Then get more detail about the underlying metrics.
