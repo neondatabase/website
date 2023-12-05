@@ -13,9 +13,9 @@ Find an integration.
 
 <img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale-integration" title="Add the Neon PolyScale integration" />
 
-<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel" title="Integrate Neon with Vercel" />
+<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel" title="Add the Neon Vercel integration" />
 
-</TechnologyNavigation>
+</TechnologyNavigation>+
 
 
 ## Caching
@@ -58,6 +58,6 @@ Find an integration.
 
 <img src="/images/technology-logos/koyeb-logo.svg" width="36" height="36" alt="Koyeb" href="/docs/guides/koyeb" title="Use Neon with Koyeb" />
 
-<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel" title="Integrate Neon with Vercel" />
+<img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel" title="Add the Neon Vercel integration" />
 
 </TechnologyNavigation>
