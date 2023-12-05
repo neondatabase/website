@@ -15,7 +15,7 @@ Find an integration.
 
 <img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel" title="Add the Neon Vercel integration" />
 
-</TechnologyNavigation>+
+</TechnologyNavigation>
 
 ## Backend as a service
 
@@ -31,7 +31,7 @@ Find an integration.
 
 <img src="/images/technology-logos/wundergraph-logo.svg" width="36" height="36" alt="Wundergraph" href="/docs/guides/wundergraph" title="Use Wundergraph with Neon" />
 
-<TechnologyNavigation>
+</TechnologyNavigation>
 
 ## Caching
 
