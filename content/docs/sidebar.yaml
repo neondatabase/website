@@ -252,6 +252,8 @@
           slug: guides/oauth-integration
         - title: Manage billing with quotas
           slug: guides/partner-billing
+- title: Integrations
+  slug: integrations/integrations-intro  
 - title: AI & embeddings
   items:
     - title: Introduction
