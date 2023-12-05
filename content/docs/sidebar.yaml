@@ -228,7 +228,9 @@
           slug: guides/aws-lambda
     - title: Caching
       items:
-        - title: PolyScale
+        - title: PolyScale integration
+          slug: guides/polyscale-integration
+        - title: PolyScale manual setup
           slug: guides/polyscale
     - title: Deployment platforms
       items:

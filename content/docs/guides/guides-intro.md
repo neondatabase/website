@@ -2,7 +2,9 @@
 title: Neon user guides
 subtitle: 'Explore Neon framework, language, platform, and feature guides'
 enableTableOfContents: true
-updatedOn: '2023-11-24T19:55:37.125Z'
+redirectFrom:
+  - /docs/integrations/integrations-list/
+updatedOn: '2023-12-04T18:49:23.385Z'
 ---
 
 Find detailed instructions for integration across various frameworks, languages, and platforms, or exploring Neon's features, our guides are tailored to assist you.
@@ -49,7 +51,7 @@ Integrate your applications with Neon.
 
 <img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
 
-<img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale" title="Connect Neon to PolyScale" />
+<img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale-integration" title="Add the Neon PolyScale integration" />
 
 <img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-jdbc" title="Connect Quarkus (JDBC) to Neon" />
 
