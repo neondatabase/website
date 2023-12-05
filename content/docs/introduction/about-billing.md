@@ -6,7 +6,7 @@ subtitle: Learn how Neon billing works to save you money
 
 Find all the documentation you need to understand, manage, and reduce your monthly Neon bill.
 
-![Compute metrics graph](/docs/introduction/compute-metrics.png)
+![Compute metrics graph](/docs/introduction/compute-metrics2.png)
 
 ## Pricing calculators and metrics
 
@@ -52,7 +52,7 @@ Just as we separate storage from compute in our architecture, we separate storag
 <TabItem>
 With key features like [autoscaling](), [autosuspend](), minimum and max [compute sizes]() all enabled, you can get a sense of how your compute costs might accrue in the following graph.
 
-![Compute metrics graph](/docs/introduction/compute-metrics.png)
+![Compute metrics graph](/docs/introduction/compute-metrics2.png)
 </TabItem>
 
 <TabItem>
