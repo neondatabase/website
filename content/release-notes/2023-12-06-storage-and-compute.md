@@ -12,6 +12,5 @@ description: Storage optimization, a new timescaledb extension version, and more
     | `timescaledb`                | 2.10.1        | 2.13.0        |
 
     If you installed this extension previously and want to upgrade to the latest version, please refer to [Update an extension version](/docs/extensions/pg-extensions#update-an-extension-version) for instructions. For a complete list of Postgres extensions supported by Neon, see [Postgres extensions](/docs/extensions/pg-extensions).
-- Compute: Patched the PgBouncer release used by Neon (PgBouncer 1.21.0) to support `DEALLOCATE` and `DISCARD ALL` with prepared statements. Prepared statement support was added to PgBouncer in version 1.21.0.
 - Proxy: Enabled channel binding in the Neon proxy, which is an additional security measure that ties the authentication process (using SCRAM) to the specific secure communication channel, protecting it from advanced types of cyberattacks where the attacker is able to intercept and mimic secure communication channels.
 
