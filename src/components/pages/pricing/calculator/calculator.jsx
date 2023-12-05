@@ -311,7 +311,7 @@ const Calculator = ({ className }) => {
                   <span className="font-normal text-gray-new-70">per month</span>
                 </p>
                 <p className="text-right text-sm leading-none text-gray-new-70">
-                  <span className="text-gray-new-94">${COMPUTE_TIME_PRICE}</span> per hour
+                  <span className="text-gray-new-94">${PROJECT_STORAGE_PRICE}</span> per hour
                 </p>
               </div>
             </div>
