@@ -17,7 +17,7 @@ const borderClassNames = {
   info: 'border-gray-new-70',
 };
 
-const Admonition = ({ children = null, type = 'note', title = null }) => (
+const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => (
   <div
     className={clsx(
       'admonition not-prose mt-5 flex flex-col rounded-[1px] border-l-4 bg-gray-new-98 px-5 py-4 leading-normal dark:bg-gray-new-10 [&_pre.prismjs]:!bg-white [&_pre.prismjs]:dark:!bg-gray-new-8 [&_pre]:py-3 [&_pre]:px-4 [&_pre_code]:!text-sm',
@@ -25,7 +25,14 @@ const Admonition = ({ children = null, type = 'note', title = null }) => (
     )}
   >
     <h4 className={clsx('text-xs font-bold uppercase', titleClassNames[type])}>{title || type}</h4>
-    <div className="admonition-text mt-1.5 text-base">{children}</div>
+    {asHTML ? (
+      <div
+        className="admonition-text mt-1.5 text-base"
+        dangerouslySetInnerHTML={{ __html: children }}
+      />
+    ) : (
+      <div className="admonition-text mt-1.5 text-base">{children}</div>
+    )}
   </div>
 );
 
@@ -33,6 +40,7 @@ Admonition.propTypes = {
   children: PropTypes.node,
   type: PropTypes.oneOf(Object.keys(titleClassNames)),
   title: PropTypes.string,
+  asHTML: PropTypes.bool,
 };
 
 export default Admonition;
