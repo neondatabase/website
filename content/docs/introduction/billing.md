@@ -188,7 +188,7 @@ Neon provides pricing tools you can use to estimate monthly costs based on the b
 
 ### Pricing calculator
 
-The [Pricing](https://neon.tech/pricing) page on the Neon website provides a [calculator](https://neon.tech/pricing#calc) that allows you to estimate monthly costs based on usage amounts that you provide.
+Neon website provides a [calculator](/calculator) that allows you to estimate monthly costs based on usage amounts that you provide.
 
 ![Pricing page calculator](/docs/introduction/pricing_page_calculator.png)
 
