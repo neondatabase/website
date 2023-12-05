@@ -7,7 +7,7 @@ isDraft: false
 
 Find an integration.
 
-## Featured integrations
+## Featured built-in integrations
 
 <TechnologyNavigation>
 
@@ -16,15 +16,6 @@ Find an integration.
 <img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel" title="Add the Neon Vercel integration" />
 
 </TechnologyNavigation>+
-
-
-## Caching
-
-<TechnologyNavigation>
-
-<img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale-integration" title="Add the Neon PolyScale integration" />
-
-</TechnologyNavigation>
 
 ## Backend as a service
 
@@ -42,13 +33,11 @@ Find an integration.
 
 <TechnologyNavigation>
 
-## Schema migration
+## Caching
 
 <TechnologyNavigation>
 
-<img src="/images/technology-logos/flyway-logo.svg" width="36" height="36" alt="Flyway" href="/docs/guides/flyway" title="Use Flyway with Neon" />
-
-<img src="/images/technology-logos/liquibase-logo.svg" width="35" height="36" alt="Liquibase" href="/docs/guides/liquibase" title="Use Liquibase with Neon" />
+<img src="/images/technology-logos/polyscale-logo.svg" width="36" height="36" alt="PolyScale" href="/docs/guides/polyscale-integration" title="Add the Neon PolyScale integration" />
 
 </TechnologyNavigation>
 
@@ -59,5 +48,15 @@ Find an integration.
 <img src="/images/technology-logos/koyeb-logo.svg" width="36" height="36" alt="Koyeb" href="/docs/guides/koyeb" title="Use Neon with Koyeb" />
 
 <img src="/images/technology-logos/vercel-logo.svg"  width="42" height="36" alt="Vercel" href="/docs/guides/vercel" title="Add the Neon Vercel integration" />
+
+</TechnologyNavigation>
+
+## Schema migration
+
+<TechnologyNavigation>
+
+<img src="/images/technology-logos/flyway-logo.svg" width="36" height="36" alt="Flyway" href="/docs/guides/flyway" title="Use Flyway with Neon" />
+
+<img src="/images/technology-logos/liquibase-logo.svg" width="35" height="36" alt="Liquibase" href="/docs/guides/liquibase" title="Use Liquibase with Neon" />
 
 </TechnologyNavigation>
