@@ -39,7 +39,7 @@ const PricingPage = () => (
     <Logos className="mt-[152px] xl:mt-40 lg:mt-28 md:mt-20" logos={logos} />
     <Metrics />
     <Estimates />
-    <Calculator />
+    <Calculator className="mb-40 mt-[17.25rem] xl:mb-36 xl:mt-40 lg:mb-16 lg:mt-32 md:my-20" />
     <Faq />
     <CTA />
   </Layout>
