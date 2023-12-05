@@ -7,7 +7,7 @@ isDraft: false
 
 Find an integration.
 
-## Featured built-in integrations
+## Featured integrations
 
 <TechnologyNavigation>
 
