@@ -161,11 +161,11 @@ To configure the history retention period for a project:
 
 ### Configure the IP Allowlist
 
-An IP Allowlist is a security feature that restricts access to your database to only those IP addresses that you specify. It acts as a gatekeeper, ensuring that only trusted IP addresses can connect to your database. This feature helps prevent unauthorized access, safeguarding sensitive data, and maintaining overall database integrity. In Neon, the IP Allowlist you specify is applied to all branches by default. Optionally, you can apply the IP Allowlist to the primary branch only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches. 
+The IP Allowlist is a security feature that restricts access to the branch where your database resides to only those IP addresses that you specify, providing an added layer of security for your data. In Neon, the IP Allowlist is applied to all branches by default. Optionally, you can apply the IP Allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches. 
 
-You can define an allowlist with individual IP addresses, IP ranges, or CIDR notation. A combination of these options is also permitted. When adding multiple entries to your allowlist, the entries must be separated by a comma.
+You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). A combination of these options is also permitted. Multiple entries must be separated by a comma.
 
-- **Add individual IP addresses**: You can add individual IP addresses that you wish to allow. This is useful if you want to grant access to specific users or locations. This example represents a single IP address, typically used for allowing one specific device or user.
+- **Add individual IP addresses**: You can add individual IP addresses that you want to allow. This is useful for granting access to specific users or devices. This example represents a single IP address, typically used for allowing one specific user or device.
 
 ```text
 192.168.1.15
@@ -181,10 +181,9 @@ You can specify multiple individual IP addresses as a comma-separated list.
 
 You can specify multiple IP ranges as a comma-separated list.
 
+- **Use CIDR notation**: For more advanced control, you can use [CIDR (Classless Inter-Domain Routing) notation](/docs/reference/glossary#cidr-notation). This is a compact way of defining a range of IPs and is particularly useful for larger networks or subnets. Using CIDR notation can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network.
 
-- **Use CIDR notation**: For more advanced control, you can use CIDR (Classless Inter-Domain Routing) notation to specify an IP address block. This is a compact way of defining a range of IPs and is particularly useful for larger networks.
-
-This CIDR notation represents all 256 IP addresses from  `192.168.1.0` to `192.168.1.255`. It's efficient for specifying larger groups of IPs, often used for entire network subnets. 
+This CIDR notation example represents all 256 IP addresses from  `192.168.1.0` to `192.168.1.255`. 
 
  ```text
  192.168.1.0/24
