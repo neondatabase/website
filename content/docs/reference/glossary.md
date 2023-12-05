@@ -178,7 +178,7 @@ See [Neon Free Tier](#neon-free-tier).
 
 ### IP Allowlist
 
-A security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, the IP Allowlist can be used used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or to your [primary branch](#primary-branch) only. For more information, see [Configure the IP Allowlist](/docs/manage/projects#configure-the-ip-allowlist).
+A security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, the IP Allowlist is a [Neon Pro Plan](/docs/introduction/pro-plan) feature that can be used used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or to your [primary branch](#primary-branch) only. For more information, see [Configure the IP Allowlist](/docs/manage/projects#configure-the-ip-allowlist).
 
 ### Kubernetes
 

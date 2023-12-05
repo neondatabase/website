@@ -161,7 +161,7 @@ To configure the history retention period for a project:
 
 ### Configure the IP Allowlist
 
-The IP Allowlist is a security feature that restricts access to the branch where your database resides to only those IP addresses that you specify, providing an added layer of security for your data. In Neon, the IP Allowlist is applied to all branches by default. Optionally, you can apply the IP Allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches. 
+The IP Allowlist is a security feature avialable to [Neon Pro Plan](/docs/introduction/pro-plan) users that restricts access to the branch where your database resides to only those IP addresses that you specify, providing an added layer of security for your data. In Neon, the IP Allowlist is applied to all branches by default. Optionally, you can apply the IP Allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches. 
 
 You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). A combination of these options is also permitted. Multiple entries must be separated by a comma.
 
@@ -194,6 +194,7 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
 A combined example using all three options above, specified as a comma-separated list, would appear similar to the following:
 
   ```ini
+
   192.168.1.15, 192.168.1.20-192.168.1.30, 192.168.1.0/24S
   ```
 

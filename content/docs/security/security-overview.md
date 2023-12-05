@@ -19,7 +19,7 @@ In addition, Neon requires a 60-bit entropy password for all PostgreSQL roles. T
 
 ## IP Allowlist support
 
-Neon's IP Allowlist feature ensures that only trusted IP addresses can connect to the branch where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addreses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure the IP Allowlist](/docs/manage/projects#configure-the-ip-allowlist).
+Neon's IP Allowlist feature, available with the [Neon Pro Plan](/docs/introduction/pro-plan), ensures that only trusted IP addresses can connect to the branch where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addreses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure the IP Allowlist](/docs/manage/projects#configure-the-ip-allowlist).
 
 ## Data-at-rest encryption
 
