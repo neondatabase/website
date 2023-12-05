@@ -51,6 +51,14 @@ Find an integration.
 
 </TechnologyNavigation>
 
+## Developer tools
+
+<TechnologyNavigation>
+
+<img src="/images/technology-logos/prisma-logo.svg" width="30" height="36" alt="Prisma" href="/docs/guides/prisma" title="Connect from Prisma to Neon" />
+
+</TechnologyNavigation>
+
 ## Schema migration
 
 <TechnologyNavigation>
