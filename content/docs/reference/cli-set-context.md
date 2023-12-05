@@ -44,7 +44,7 @@ The `set-context` command requires you set at least one of these options:
 | ------------ | ------------- | ------ | :------: |
 | `--project-id` | Project ID    | string | Sets the identified project as the context until you reset or remove context-file |
 | `--branch` | Branch ID or name | string | Sets the identified branch as the context until you reset or remove context-file |
-| `--context-file` | path and file name | string | Creates a file that holds project-id or branch context 
+| `--context-file` | path and file name | string | Creates a file that holds project-id and branch context 
 
 [Global options](/docs/reference/neon-cli#global-options) are also supported.
 
