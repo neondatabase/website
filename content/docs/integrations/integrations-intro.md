@@ -1,6 +1,6 @@
 ---
 title: Integrations
-subtitle: Extend your database by integrating for your favorite tools
+subtitle: Extend your database by integrating your favorite tools
 enableTableOfContents: true
 isDraft: false
 ---
