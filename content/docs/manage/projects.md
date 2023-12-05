@@ -167,17 +167,17 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
 
 - **Add individual IP addresses**: You can add individual IP addresses that you want to allow. This is useful for granting access to specific users or devices. This example represents a single IP address, typically used for allowing one specific user or device.
 
-```text
-192.168.1.15
-```
+  ```text
+  192.168.1.15
+  ```
 
 You can specify multiple individual IP addresses as a comma-separated list.
 
 - **Define IP ranges**: For broader access control, you can define IP ranges. This is particularly useful for allowing access from a company network or a range of known IPs. This example range includes all IP addresses from `192.168.1.20` to `192.168.1.30`, useful for allowing a group of devices within a specific network segment. 
 
-```
-192.168.1.20-192.168.1.30
-```
+  ```
+  192.168.1.20-192.168.1.30
+  ```
 
 You can specify multiple IP ranges as a comma-separated list.
 
@@ -185,17 +185,17 @@ You can specify multiple IP ranges as a comma-separated list.
 
 This CIDR notation example represents all 256 IP addresses from  `192.168.1.0` to `192.168.1.255`. 
 
- ```text
- 192.168.1.0/24
- ```
+  ```text
+  192.168.1.0/24
+  ```
 
 You can specify multiple CIDR notation entries as a comma-separated list.
  
 A combined example using all three options above, specified as a comma-separated list, would appear similar to the following:
 
-```text
-192.168.1.15, 192.168.1.20-192.168.1.30, 192.168.1.0/24
-```
+  ```text
+  192.168.1.15, 192.168.1.20-192.168.1.30, 192.168.1.0/24
+  ```
 
 This list combines the individual IP address, a range of IP addresses, and a CIDR block. It illustrates how different types of IP specifications can be used together in a single allowlist configuration, offering a flexible approach to access control.
 
