@@ -171,7 +171,7 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
   192.168.1.15
   ```
 
-You can specify multiple individual IP addresses as a comma-separated list.
+  You can specify multiple individual IP addresses as a comma-separated list.
 
 - **Define IP ranges**: For broader access control, you can define IP ranges. This is particularly useful for allowing access from a company network or a range of known IPs. This example range includes all IP addresses from `192.168.1.20` to `192.168.1.30`, useful for allowing a group of devices within a specific network segment. 
 
@@ -179,22 +179,22 @@ You can specify multiple individual IP addresses as a comma-separated list.
   192.168.1.20-192.168.1.30
   ```
 
-You can specify multiple IP ranges as a comma-separated list.
+  You can specify multiple IP ranges as a comma-separated list.
 
 - **Use CIDR notation**: For more advanced control, you can use [CIDR (Classless Inter-Domain Routing) notation](/docs/reference/glossary#cidr-notation). This is a compact way of defining a range of IPs and is particularly useful for larger networks or subnets. Using CIDR notation can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network.
 
-This CIDR notation example represents all 256 IP addresses from  `192.168.1.0` to `192.168.1.255`. 
+  This CIDR notation example represents all 256 IP addresses from  `192.168.1.0` to `192.168.1.255`. 
 
   ```text
   192.168.1.0/24
   ```
 
-You can specify multiple CIDR notation entries as a comma-separated list.
+  You can specify multiple CIDR notation entries as a comma-separated list.
  
 A combined example using all three options above, specified as a comma-separated list, would appear similar to the following:
 
   ```text
-  192.168.1.15, 192.168.1.20-192.168.1.30, 192.168.1.0/24
+  192.168.1.15, 192.168.1.20-192.168.1.30, 192.168.1.0/24S
   ```
 
 This list combines the individual IP address, a range of IP addresses, and a CIDR block. It illustrates how different types of IP specifications can be used together in a single allowlist configuration, offering a flexible approach to access control.
