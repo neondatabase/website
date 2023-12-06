@@ -13,9 +13,9 @@ Start with our pricing calculators to get a sense of how different compute and s
 
 <DetailIconCards>
 
-<a href="/docs/introduction/billing-calculators" description="Our pricing calculator and cost estimator tools help you estimate your next Neon bill." icon="branching">Pricing calculators</a>
+<a href="/docs/introduction/billing-calculators" description="Our pricing calculator and cost estimator tools help you estimate your next Neon bill." icon="transactions">Pricing calculators</a>
 
-<a href="/docs/introduction/billing-overview" description="Quick introduction to how billing works in Neon." icon="branching">Billing overview</a>
+<a href="/docs/introduction/billing-overview" description="Quick introduction to how billing works in Neon." icon="chart-bar">Billing overview</a>
 
 </DetailIconCards>
 
@@ -25,9 +25,9 @@ Find detailed definitions of the metrics that make up your bill and a cost break
 
 <DetailIconCards>
 
-<a href="h/docs/introduction/billing" description="Find detailed descriptions of the metrics that make up your bill" icon="transactions">Billing metrics</a>
+<a href="h/docs/introduction/billing" description="Find detailed descriptions of the metrics that make up your bill" icon="trend-upline">Billing metrics</a>
 
-<a href="h/docs/introduction/billing-rates" description="Reference table of billing rates per region" icon="pricing">Billing rates</a>
+<a href="h/docs/introduction/billing-rates" description="Reference table of billing rates per region" icon="hourglass">Billing rates</a>
 
 </DetailIconCards>
 
@@ -37,8 +37,8 @@ Find information about invoices, payment methods, and other actions around viewi
 
 <DetailIconCards>
 
-<a href="/docs/introduction/manage-billing" description="Manage your monthly bill." icon="branching">Manage billing</a>
+<a href="/docs/introduction/manage-billing" description="Manage your monthly bill." icon="setup">Manage billing</a>
 
-<a href="/docs/introduction/billing-sample" description="See how billing breaks down for a sample project." icon="branching">Sample projects</a>
+<a href="/docs/introduction/billing-sample" description="See how billing breaks down for a sample project." icon="chart-bar">Sample projects</a>
 
 </DetailIconCards>
