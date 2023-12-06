@@ -185,7 +185,7 @@ Error querying the database: db error: ERROR: prepared statement
 "s0" already exists
 ```
 
-Prisma Migrate requires a direct connection to the database. It does not support a pooled connection with PgBouncer, which is the connection pooler used by Neon. Attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes this error. To resolve this issue, please refer to our [Prisma Migrate with PgBouncer](/docs/guides/prisma-migrate#prisma-migrate-with-pgbouncer) instructions.
+Prisma Migrate requires a direct connection to the database. It does not support a pooled connection with PgBouncer, which is the connection pooler used by Neon. Attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes this error. To resolve this issue, please refer to our [Connection pooling with Prisma Migrate](/docs/guides/prisma#connect-pooling-with-prisma-migrate) instructions.
 
 ## Terminating connection due to administrator command
 

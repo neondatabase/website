@@ -6,6 +6,7 @@ redirectFrom:
   - /docs/quickstart/prisma
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
+  - /docs/guides/prisma-migrate
 updatedOn: '2023-11-24T11:25:06.754Z'
 ---
 
@@ -17,8 +18,6 @@ Prisma is an open-source, next-generation ORM that enables you to manage and int
 - [Connection timeouts](#connection-timeouts)
 - [Connect pool timeouts](#connection-pool-timeouts)
 - [JSON protocol for large Prisma schemas](#json-protocol-for-large-prisma-schemas)
-
-For information about using Prisma Migrate with Neon, see [Use Prisma Migrate with Neon](/docs/guides/prisma-migrate).
 
 ## Connect to Neon from Prisma
 
@@ -66,9 +65,51 @@ DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.
 - Neon uses PgBouncer to provide [connection pooling](/docs/connect/connection-pooling). Prisma requires the `pgbouncer=true` flag when using Prisma Client with PgBouncer, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
 - Both the pooled Neon connection string and the `pgbouncer=true` flag are required to use Noen's connection pooler with Prisma. See the example above.
 
+### Connection pooling with Prisma Migrate
+
+You cannot use a pooled connection string to perform certain operations with Prisma that require a direct connection to the database, such as schema migration with Prisma Migrate. Attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes the following error:
+
+```text
+Error undefined: Database error
+Error querying the database: db error: ERROR: prepared statement
+"s0" already exists
+```
+
+To avoid this issue, make sure you are using a direct connection to the database for Prisma Migrate. Neon supports both pooled and direct connections to the same database. See [Enable connection pooling](/docs/connect/connection-pooling#enable-connection-pooling) for details.
+
+You can configure a direct connection while allowing applications to use Prisma Client with a pooled connection by adding a `directUrl` property to the datasource block in your `schema.prisma` file. For example:
+
+```typescript
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+```
+
 <Admonition type="note">
-Please be aware that you cannot use a pooled connection string to perform certain operations with Prisma that require a direct connection to the database, such as schema migration with Prisma Migrate. To work around this limitation, you can add a `DIRECT_URL` environment variable to your environment variable configuration file, specifying an unpooled Neon connection string. For configuration instructions, see [Use Prisma Migrate with Neon](/docs/guides/prisma-migrate).
+The `directUrl` property is available in Prisma version [4.10.0](https://github.com/prisma/prisma/releases/tag/4.10.0) and higher. For more information about this property, refer to the [Prisma schema reference](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#fields).
 </Admonition>
+
+After adding the `directUrl` property to your `schema.prisma` file, update the `DATABASE_URL` and `DIRECT_URL` variables settings in your `.env` file:
+
+1. Set `DATABASE_URL` to the pooled connection string for your Neon database. Applications that require a pooled connection should use this connection.
+1. Set `DIRECT_URL` to the direct (non-pooled) connection string. This is the direct connection to the database required by Prisma Migrate and other Prisma CLI operations.
+
+When you finish updating your `.env` file, your variable settings should appear similar to the following:
+
+<CodeBlock shouldWrap>
+
+```ini
+# Pooled Neon connection string
+DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?pgbouncer=true
+
+# Unpooled Neon connection string for operations requiring a direct connection
+DIRECT_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+```
+
+</CodeBlock>
+
 
 ## Use the Neon serverless driver with Prisma
 
