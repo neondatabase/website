@@ -12,11 +12,11 @@ updatedOn: '2023-11-24T11:25:06.754Z'
 
 Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide covers the following topics:
 
-- [Connecting to Neon from Prisma](#connect-to-neon-from-prisma)
-- [Using connection pooling with Prisma](#use-connection-pooling-with-prisma)
-- [Using the Neon serverless driver with Prisma](#use-the-neon-serverless-driver-with-prisma)
+- [Connect to Neon from Prisma](#connect-to-neon-from-prisma)
+- [Use connection pooling with Prisma](#use-connection-pooling-with-prisma)
+- [Use the Neon serverless driver with Prisma](#use-the-neon-serverless-driver-with-prisma)
 - [Connection timeouts](#connection-timeouts)
-- [Connect pool timeouts](#connection-pool-timeouts)
+- [Connection pool timeouts](#connection-pool-timeouts)
 - [JSON protocol for large Prisma schemas](#json-protocol-for-large-prisma-schemas)
 
 ## Connect to Neon from Prisma
