@@ -9,14 +9,16 @@ redirectFrom:
 updatedOn: '2023-11-24T11:25:06.754Z'
 ---
 
-Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide explains how to connect Prisma to Neon, how to use Neon's connection pooler with Prisma, how to connect with the Neon serverloess driver, and how to resolve [connection timeout](#connection-timeouts) issues.
+Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide covers the following topics:
 
-To configure Prisma Migrate with Neon, see [Use Prisma Migrate with Neon](/docs/guides/prisma-migrate).
+- [Connecting to Neon from Prisma](#connect-to-neon-from-prisma)
+- [Using connection pooling with Prisma](#use-connection-pooling-with-prisma)
+- [Using the Neon serverless driver with Prisma](#use-the-neon-serverless-driver-with-prisma)
+- [Connection timeouts](#connection-timeouts)
+- [Connect pool timeouts](#connection-pool-timeouts)
+- [JSON protocol for large Prisma schemas](#json-protocol-for-large-prisma-schemas)
 
-## Prerequisites
-
-- A Neon project. See [Create a project](/docs/manage/projects#create-a-project).
-- A Prisma project. See [Set up Prisma](https://www.prisma.io/docs/getting-started/setup-prisma), in the _Prisma documentation_.
+For information about using Prisma Migrate with Neon, see [Use Prisma Migrate with Neon](/docs/guides/prisma-migrate).
 
 ## Connect to Neon from Prisma
 
@@ -35,7 +37,7 @@ To establish a basic connection from Prisma to Neon, perform the following steps
    }
    ```
 
-3. Add a `DATABASE_URL` variable to your `.env` file and it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a secure connection. For more information about configurfing secure connections, see [Connect securely](/docs/connect/connect-securely).
+3. Add a `DATABASE_URL` variable to your `.env` file and it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a secure connection. For more information about configuring secure connections, see [Connect securely](/docs/connect/connect-securely).
 
    Your setting will appear similar to the following:
 
@@ -48,12 +50,12 @@ To establish a basic connection from Prisma to Neon, perform the following steps
    </CodeBlock>
 
 <Admonition type="important">
-If you are using Prisma Client from a serverless function, see [Use connection pooling with Prisma](#use-connection-pooling-with-prisma) for additional configuration instructions. To adjust your connection string to avoid connection timeouts issues, see [Connection timeouts](#connection-timeouts).
+If you are using Prisma Client from a serverless function, see [Use connection pooling with Prisma](#use-connection-pooling-with-prisma) for additional configuration instructions. To adjust your connection string to avoid connection timeout issues, see [Connection timeouts](#connection-timeouts).
 </Admonition>
 
 ## Use connection pooling with Prisma
 
-Serverless functions typically require a large number of database connections. If you use serverless functions in your application, it is recommend that you use Neon's connection pooler. To do so, you must use a pooled Neon connection string with the `pgbouncer=true` option, as shown:
+Serverless functions typically require a large number of database connections. If you use serverless functions in your application, it is recommended that you use Neon's connection pooler. To do so, you must use a pooled Neon connection string with the `pgbouncer=true` option, as shown:
 
 ```ini
 # Connect to Neon with PgBouncer.
@@ -140,7 +142,7 @@ This error most likely means that the Prisma query engine timed out before the N
 
 A Neon compute has two main states: _Active_ and _Idle_. Active means that the compute is currently running. If there is no query activity for 5 minutes, Neon places a compute into an idle state by default.
 
-When you connect to an idle compute from Prisma, Neon automatically activates it. Activation typically happens within a few seconds but added latency can result in a connection timeout. To address this issue, your can adjust your Neon connection string by adding a `connect_timeout` parameter. This parameter defines the maximum number of seconds to wait for a new connection to be opened. The default value is 5 seconds. A higher setting may provide the time required to avoid connection timeouts. For example:
+When you connect to an idle compute from Prisma, Neon automatically activates it. Activation typically happens within a few seconds but added latency can result in a connection timeout. To address this issue, you can adjust your Neon connection string by adding a `connect_timeout` parameter. This parameter defines the maximum number of seconds to wait for a new connection to be opened. The default value is 5 seconds. A higher setting may provide the time required to avoid connection timeouts. For example:
 
 <CodeBlock shouldWrap>
 

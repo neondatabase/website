@@ -41,7 +41,7 @@ After adding the `directUrl` property to your `schema.prisma` file, update the `
 1. Set `DATABASE_URL` to the pooled connection string for your Neon database. Applications that require a pooled connection should use this connection.
 1. Set `DIRECT_URL` to the direct (non-pooled) connection string. This is the direct connection to the database required by Prisma Migrate and other Prisma CLI operations.
 
-When you are finished updating your `.env` file, your variable settings should appear similar to the following:
+When you finish updating your `.env` file, your variable settings should appear similar to the following:
 
 <CodeBlock shouldWrap>
 
