@@ -4,10 +4,18 @@ enableTableOfContents: true
 subtitle: Get familiar with Neon billing using our pricing calculators
 ---
 
+## Basic questions
+
+With autoscaling as the key to our pay-for-use model, you should have some sense of what kind of usage your application requires before you try out our calculators. A few questions for you to consider:
+* _How active are your users_?
+* _What level of performance does your applciation require_?
+* _How much storage do you require_?
+
+These questions translate into the metrics [active time](/docs/introduction/billing#active-time), [compute time](/docs/introduction/billing#compute-time), and [storage space](/docs/introduction/billing#project-storage).
 
 ## Pricing calculators
 
-Neon provides pricing tools you can use to estimate monthly costs based on the billing metrics described above.
+If you already have a sense of your sizing and usage needs, we recommend that you try out our Pricing Calculator on our website or our Pro Plan Cost Estimator in the Neon Console. The tools let you estimate monthly costs based on the billing metrics above.
 
 ### Pricing calculator
 
