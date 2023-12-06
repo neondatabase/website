@@ -3,7 +3,7 @@ title: Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2023-11-24T11:25:06.746Z'
+updatedOn: '2023-12-06T14:18:54.294Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
@@ -73,7 +73,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [seg](https://www.postgresql.org/docs/15/seg.html)                      | 1.4              | 1.4               |   1.4               |                                                                                                                   |
 | [tablefunc](https://www.postgresql.org/docs/15/tablefunc.html)                | 1.0        | 1.0         |     1.0         |                                                                                                                 |
 | [tcn](https://www.postgresql.org/docs/15/tcn.html)                      | 1.0              | 1.0               |  1.0               |                                                                                                                  |
-| [timescaledb](https://docs.timescale.com/about/latest/timescaledb-editions/)              | 2.10.1              | 2.10.1               | -               | Only Apache-2 licensed features are supported. Compression is not supported.                                                                                                                 |
+| [timescaledb](https://docs.timescale.com/about/latest/timescaledb-editions/)              | 2.10.1              | 2.10.1               | 2.13.0               | Only Apache-2 licensed features are supported. Compression is not supported.                                                                                                                 |
 | [tsm_system_rows](https://www.postgresql.org/docs/15/tsm-system-rows.html)          | 1.0  | 1.0   |  1.0   |                                                                                                                   |
 | [tsm_system_time](https://www.postgresql.org/docs/15/tsm-system-time.html)          | 1.0  | 1.0   |   1.0   |                                                                                                                  |
 | [unaccent](https://www.postgresql.org/docs/15/unaccent.html)                 | 1.1         | 1.1          |  1.1          |                                                                                                                    |
