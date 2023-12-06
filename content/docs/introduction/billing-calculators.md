@@ -13,17 +13,15 @@ With autoscaling as the key to our pay-for-use model, you should have some sense
 
 These questions translate into the metrics [active time](/docs/introduction/billing#active-time), [compute time](/docs/introduction/billing#compute-time), and [storage space](/docs/introduction/billing#project-storage).
 
-## Pricing calculators
-
 If you already have a sense of your sizing and usage needs, we recommend that you try out our Pricing Calculator on our website or our Pro Plan Cost Estimator in the Neon Console. The tools let you estimate monthly costs based on the billing metrics above.
 
-### Pricing calculator
+## Pricing calculator
 
 The [Pricing](https://neon.tech/pricing) page on the Neon website provides a [calculator](https://neon.tech/pricing#calc) that allows you to estimate monthly costs based on usage amounts that you provide.
 
 ![Pricing page calculator](/docs/introduction/pricing_page_calculator.png)
 
-### Pro Plan Cost Estimator
+## Pro Plan Cost Estimator
 
 The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimator** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro Plan?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Open Cost Estimator**.
 
