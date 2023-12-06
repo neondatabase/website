@@ -17,9 +17,9 @@ Neon supports the `verify-full` SSL mode for client connections, which is the st
 
 In addition, Neon requires a 60-bit entropy password for all PostgreSQL roles. This degree of entropy ensures that passwords have a high level of randomness. Assuming a perfect distribution of choices for every bit of entropy, a password with 60 bits of entropy has 2^60 (or about 1.15 quintillion) possible combinations, which makes it computationally infeasible for attackers to guess the password through brute-force methods. For Neon users created via the Neon Console, API, and CLI, passwords are generated with 60-bit entropy. For SQL users created via SQL, user-defined passwords are validated at user-creation time to ensure 60-bit entropy.
 
-## IP Allowlist support
+## IP allowlist support
 
-Neon's IP Allowlist feature, available with the [Neon Pro Plan](/docs/introduction/pro-plan), ensures that only trusted IP addresses can connect to the branch where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addreses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure the IP Allowlist](/docs/manage/projects#configure-the-ip-allowlist).
+Neon's IP Allow feature, available with the [Neon Pro Plan](/docs/introduction/pro-plan), ensures that only trusted IP addresses can connect to the branch where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addreses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
 ## Data-at-rest encryption
 

@@ -125,7 +125,7 @@ From the **Settings** page, you can also set defaults or apply bulk changes acro
 
 - [Reset default compute size](#reset-the-default-compute-size) (Neon Pro Plan only)
 - [Configure history retention range](#configure-history-retention)
-- [Configiure the IP Allowlist](#configure-the-ip-allowlist)
+- [Configiure IP Allow](#configure-ip-allow)
 
 ### Reset the default compute size
 
@@ -159,9 +159,9 @@ To configure the history retention period for a project:
 4. Use the slider to select the history retention period.
 5. Click **Save**.
 
-### Configure the IP Allowlist
+### Configure IP Allow
 
-Available to [Neon Pro Plan](/docs/introduction/pro-plan) users, the IP Allowlist feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP Allowlist is applied to all branches by default. Optionally, you can instead apply the IP Allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches. 
+Available to [Neon Pro Plan](/docs/introduction/pro-plan) users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default. Optionally, you can instead apply the IP allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches. 
 
 You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). A combination of these options is also permitted. Multiple entries, whether they are the same or different type, must be separated by a comma.
 
