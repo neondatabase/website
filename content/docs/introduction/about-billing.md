@@ -4,7 +4,7 @@ enableTableOfContents: true
 subtitle: Learn how Neon billing works to save you money
 ---
 
-Find all the documentation you need to understand, manage, and reduce your monthly Neon bill.
+Find all the documentation you need to understand, manage, and optimize the features and metrics that contribute to your monthly Neon bill.
 
 
 ## Pricing calculators and billing overivew
@@ -25,9 +25,9 @@ Find detailed definitions of the metrics that make up your bill and a cost break
 
 <DetailIconCards>
 
-<a href="h/docs/introduction/billing-metrics" description="Find detailed descriptions of the metrics that make up your bill" icon="split-branch">Billing metrics</a>
+<a href="h/docs/introduction/billing" description="Find detailed descriptions of the metrics that make up your bill" icon="transactions">Billing metrics</a>
 
-<a href="h/docs/introduction/billing-rates" description="Reference table of billing rates per region" icon="split-branch">Billing rates</a>
+<a href="h/docs/introduction/billing-rates" description="Reference table of billing rates per region" icon="pricing">Billing rates</a>
 
 </DetailIconCards>
 
