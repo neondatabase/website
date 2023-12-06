@@ -163,25 +163,21 @@ To configure the history retention period for a project:
 
 Available to [Neon Pro Plan](/docs/introduction/pro-plan) users, the IP Allowlist feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP Allowlist is applied to all branches by default. Optionally, you can instead apply the IP Allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches. 
 
-You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). A combination of these options is also permitted. Multiple entries must be separated by a comma.
+You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). A combination of these options is also permitted. Multiple entries, whether they are the same or different type, must be separated by a comma.
 
-- **Add individual IP addresses**: You can add individual IP addresses that you want to allow. This is useful for granting access to specific users or devices. This example represents a single IP address, typically used for allowing one specific user or device.
+- **Add individual IP addresses**: You can add individual IP addresses that you want to allow. This is useful for granting access to specific users or devices. This example represents a single IP address:
 
   ```ini
   192.168.1.15
   ```
 
-  You can specify multiple individual IP addresses as a comma-separated list.
-
-- **Define IP ranges**: For broader access control, you can define IP ranges. This is particularly useful for allowing access from a company network or a range of known IPs. This example range includes all IP addresses from `192.168.1.20` to `192.168.1.30`, useful for allowing a group of devices within a specific network segment. 
+- **Define IP ranges**: For broader access control, you can define IP ranges. This is useful for allowing access from a company network or a range of known IPs. This example range includes all IP addresses from `192.168.1.20` to `192.168.1.30`: 
 
   ```ini
   192.168.1.20-192.168.1.30
   ```
 
-  You can specify multiple IP ranges as a comma-separated list.
-
-- **Use CIDR notation**: For more advanced control, you can use [CIDR (Classless Inter-Domain Routing) notation](/docs/reference/glossary#cidr-notation). This is a compact way of defining a range of IPs and is particularly useful for larger networks or subnets. Using CIDR notation can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network.
+- **Use CIDR notation**: For more advanced control, you can use [CIDR (Classless Inter-Domain Routing) notation](/docs/reference/glossary#cidr-notation). This is a compact way of defining a range of IPs and is useful for larger networks or subnets. Using CIDR notation can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network.
 
   This CIDR notation example represents all 256 IP addresses from  `192.168.1.0` to `192.168.1.255`. 
 
@@ -189,16 +185,14 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
   192.168.1.0/24
   ```
 
-  You can specify multiple CIDR notation entries as a comma-separated list.
- 
 A combined example using all three options above, specified as a comma-separated list, would appear similar to the following:
 
   ```ini
 
-  192.168.1.15, 192.168.1.20-192.168.1.30, 192.168.1.0/24S
+  192.168.1.15, 192.168.1.16, 192.168.1.20-192.168.1.30, 192.168.1.0/24S
   ```
 
-This list combines the individual IP address, a range of IP addresses, and a CIDR block. It illustrates how different types of IP specifications can be used together in a single allowlist configuration, offering a flexible approach to access control.
+This list combines individual IP addresses, a range of IP addresses, and a CIDR block. It illustrates how different types of IP specifications can be used together in a single allowlist configuration, offering a flexible approach to access control.
 
 ## Manage projects with the Neon API
 
