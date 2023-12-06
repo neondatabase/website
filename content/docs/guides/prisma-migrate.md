@@ -8,8 +8,7 @@ redirectFrom:
 updatedOn: '2023-10-07T10:43:33.387Z'
 ---
 
-This topic also describes how to configure Prisma Migrate when you need to connect to the same Neon database from Prisma Migrate, which requires a direct database connection, and serverless functions that require a pooled database connection.
-
+This topic describes how to configure Prisma Migrate when you need to connect to the same Neon database from Prisma Migrate, which requires a direct database connection, and serverless functions that require a pooled database connection.
 
 ## Prisma Migrate with PgBouncer
 

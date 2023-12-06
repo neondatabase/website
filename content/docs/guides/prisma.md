@@ -51,21 +51,95 @@ To establish a basic connection from Prisma to Neon, perform the following steps
 If you are using Prisma Client from a serverless function, see [Connect from serverless functions](#connect-from-serverless-functions). To adjust your connection string to avoid connection timeouts issues, see [Connection timeouts](#connection-timeouts).
 </Admonition>
 
-## Connect from serverless functions
+## Use connection pooling with Prisma
 
-Serverless functions typically require a large number of database connections. When connecting from Prisma Client to Neon from a serverless function, use a pooled Neon connection string together with a `pgbouncer=true` flag, as shown:
+Serverless functions typically require a large number of database connections. If you use serverless functions in your application, it is recommend that you use Neon's connection pooler. To do so, you must use a pooled Neon connection string with the `pgbouncer=true` option in the `url` property of the datasource block of your `schema.prisma` file, as shown:
 
-<CodeBlock shouldWrap>
-
-```text
-DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&pgbouncer=true
+```ini
+# Connect to Neon with PgBouncer.
+DATABASE_URL=postgres://[user]:[password]@ep-mute-rain-952417-pooler.us-east-2.aws.neon.tech/[dbname]?pgbouncer=true
 ```
-
-</CodeBlock>
 
 - A pooled Neon connection string appends `-pooler` to the endpoint ID, which tells Neon to use a pooled connection rather than a direct connection. The **Connection Details** widget on the Neon **Dashboard** provides a **Pooled connection** checkbox that adds `-pooler` suffix to your connection string.
 - Neon uses PgBouncer to provide [connection pooling](/docs/connect/connection-pooling). Prisma requires the `pgbouncer=true` flag when using Prisma Client with PgBouncer, as described in the [Prisma documentation](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management/configure-pg-bouncer#add-pgbouncer-to-the-connection-url).
-- In summary, to use a pooled Neon connection with Prisma Client, you require a pooled Neon connection string (one that includes `-pooler`) and the `pgbouncer=true` flag, which is required by Prisma Client. See the example above.
+- Both the pooled Neon connection string and the `pgbouncer=true` flag are required. See the example above.
+
+However, please be aware that you cannot use a pooled connection string to perform certain operations with Prisma that require a direct connection to the database, such as schema migration with Prisma Migrate. To work around this limitation, add a `DIRECT_URL` environment variable to your environment variable configuration file, specifying an unpooled Neon connection string for your database. For example: 
+
+```ini
+# Pooled Neon connection string
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?pgbouncer=true
+
+# Unpooled Neon connection string for operations requiring a direct connection
+DIRECT_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
+```
+
+After configuring the `DIRECT_URL` environment variable, add the `directUrl` property to the datasource block of your `schema.prisma` file. This enables Prisma to use a direct connection to your database for operatiosn that require it.
+
+```ini
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+```
+
+More information about Prisma's `directUrl` property can be found [here](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#fields).
+
+## Use the Neon serverless driver with Prisma
+
+The Neon serverless driver is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP. For more information about the driver, see [Neon serverless driver](/docs/serverless/serverless-driver).
+
+You can use Prisma with the Neon serverless driver using the Prisma driver adapter. The driver adapter allows you to use a different database driver from the default driver that Prisma provides to communicate with your database.
+
+The Prisma driver adapter feature is available in Preview in Prisma versions 5.4.2 and later.
+
+To get started, enable the `driverAdapters` Preview feature flag in your `schema.prisma` file, as shown:
+
+```javascript
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+```
+
+Next, generate the Prisma Client:
+
+```bash
+npx prisma generate
+```
+
+Install the Prisma adapter for Neon, Neon serverless driver and `ws` packages:
+
+```bash
+npm install @prisma/adapter-neon @neondatabase/serverless ws
+npm install --save-dev @types/ws
+```
+
+Update your Prisma Client instance:
+
+```javascript
+import { Pool, neonConfig } from '@neondatabase/serverless'
+import { PrismaNeon } from '@prisma/adapter-neon'
+import { PrismaClient } from '@prisma/client'
+import dotenv from 'dotenv'
+import ws from 'ws'
+
+dotenv.config()
+neonConfig.webSocketConstructor = ws
+const connectionString = `${process.env.DATABASE_URL}`
+
+const pool = new Pool({ connectionString })
+const adapter = new PrismaNeon(pool)
+const prisma = new PrismaClient({ adapter })
+```
+
+You can then use Prisma Client as you normally would with full type-safety. Prisma Migrate, introspection, and Prisma Studio will continue working as before, using the Neon connection string defined in your `schema.prisma` file.
 
 ## Connection timeouts
 
