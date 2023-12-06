@@ -1,10 +1,9 @@
 ---
-description: Storage optimization, a new timescaledb extension version, and more
+description: A new timescaledb extension version and a security enhancement
 ---
 
 ### Fixes & improvements
 
-- Compute: Optimized storage of null pages in the Write Ahead Log (WAL).
 - Compute: The `timescaledb` extension was updated to a new version for Postgres 14 and 15, and added to Postgres 16, where it was previously not available.
 
     | Postgres extension           | Old version   | New version   |
