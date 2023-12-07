@@ -81,6 +81,10 @@ const sharedComponents = {
       />
     );
   },
+  a: (props) => {
+    const { href, ...otherProps } = props;
+    return <Link to={href} {...otherProps} />;
+  },
 };
 
 export default function getReactContentWithLazyBlocks(content, pageComponents, includeBaseTags) {
@@ -108,12 +112,30 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
     },
     replace: (domNode) => {
       if (domNode.type === 'tag') {
-        if (
-          domNode.attribs?.class?.includes('wp-block-lazyblock') ||
-          domNode.attribs?.class?.includes('wp-block-image')
-        ) {
+        if (domNode.attribs?.class?.includes('wp-block-lazyblock')) {
           const element =
             domNode.children[0].type === 'tag' ? domNode.children[0] : domNode.children[1];
+
+          const Component = components[element.name];
+          if (!Component) return <></>;
+
+          const props = transformProps(attributesToProps(element.attribs));
+
+          return <Component {...props} />;
+        }
+
+        if (domNode.attribs?.class?.includes('wp-block-image')) {
+          const element =
+            domNode.children[0].type === 'tag' ? domNode.children[0] : domNode.children[1];
+          const Component = components[element.name];
+          if (!Component) return <></>;
+
+          if (domNode.children[0].name === 'img') {
+            const isPriority = isFirstImage;
+            isFirstImage = false;
+            const props = transformProps(attributesToProps({ ...element.attribs, isPriority }));
+            return <Component {...props} />;
+          }
 
           if (element.name === 'a' && element.children[0].name === 'img') {
             const linkProps = transformProps(attributesToProps(element.attribs));
@@ -142,23 +164,6 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
               </figure>
             );
           }
-
-          const Component = components[element.name];
-          if (!Component) return <></>;
-
-          if (
-            domNode.attribs?.class?.includes('wp-block-image') &&
-            domNode.children[0].name === 'img'
-          ) {
-            const isPriority = isFirstImage;
-            isFirstImage = false;
-            const props = transformProps(attributesToProps({ ...element.attribs, isPriority }));
-            return <Component {...props} />;
-          }
-
-          const props = transformProps(attributesToProps(element.attribs));
-
-          return <Component {...props} />;
         }
 
         if (domNode.attribs?.class?.includes('wp-block-embed-twitter')) {
