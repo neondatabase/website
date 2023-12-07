@@ -186,7 +186,7 @@ const defaultConfig = {
       },
       {
         source: '/discord',
-        destination: 'http://discord.gg/6vBX46pv',
+        destination: 'https://discord.gg/6vBX46pv',
       },
     ];
   },
