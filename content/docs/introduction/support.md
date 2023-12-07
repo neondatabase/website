@@ -15,9 +15,7 @@ Support channels for the Neon Free Tier, Pro, and Custom plans are outlined belo
 
 ## Join the community
 
-All Neon users can join the Neon community forum to ask questions or see what others are doing with Neon.
-
-<CommunityBanner>Neon Discourse Community</CommunityBanner>
+All Neon users can join the [Neon Discord Server](/discord) or [Neon Discourse Community](https://community.neon.tech/) to ask questions or see what others are doing with Neon.
 
 ## Open a support ticket
 
