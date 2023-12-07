@@ -124,7 +124,7 @@ DIRECT_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon
 
 ## Use the Neon serverless driver with Prisma
 
-The Neon serverless driver is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments. For more information about the driver, see [Neon serverless driver](/docs/serverless/serverless-driver).
+The Neon serverless driver is a low-latency Postgres driver for JavaScript and TypeScript that lets you query data from serverless and edge environments. For more information about the driver, see [Neon serverless driver](/docs/serverless/serverless-driver).
 
 To set up Prisma with the Neon serverless driver, use the Prisma driver adapter. This adapter allows you to choose a different database driver than Prisma's default driver for communicating with your database.
 
