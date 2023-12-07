@@ -141,6 +141,11 @@ export default {
           icon: 'github-icon',
         },
         {
+          text: 'Discord',
+          to: LINKS.discord,
+          icon: 'discord-icon',
+        },
+        {
           text: 'Discourse',
           to: LINKS.discourse,
           icon: 'discourse-icon',
