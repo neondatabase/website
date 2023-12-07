@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-COLLATIONS)
+
 ## 37.10. `collations` [#](#INFOSCHEMA-COLLATIONS)
 
 The view `collations` contains the collations available in the current database.
+
+[#id](#id-1.7.6.14.3)
 
 **Table 37.8. `collations` Columns**
 

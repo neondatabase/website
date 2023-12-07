@@ -1,20 +1,22 @@
+[#id](#FUNCTIONS-COMPARISON)
+
 ## 9.2. Comparison Functions and Operators [#](#FUNCTIONS-COMPARISON)
 
-The usual comparison operators are available, as shown in [Table 9.1](functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE "Table 9.1. Comparison Operators").
+The usual comparison operators are available, as shown in [Table 9.1](functions-comparison#FUNCTIONS-COMPARISON-OP-TABLE).
+
+[#id](#FUNCTIONS-COMPARISON-OP-TABLE)
 
 **Table 9.1. Comparison Operators**
 
 | Operator                                   | Description              |
 | ------------------------------------------ | ------------------------ |
-| *`datatype`* `<` *`datatype`* → `boolean`  | Less than                |
-| *`datatype`* `>` *`datatype`* → `boolean`  | Greater than             |
-| *`datatype`* `<=` *`datatype`* → `boolean` | Less than or equal to    |
-| *`datatype`* `>=` *`datatype`* → `boolean` | Greater than or equal to |
-| *`datatype`* `=` *`datatype`* → `boolean`  | Equal                    |
-| *`datatype`* `<>` *`datatype`* → `boolean` | Not equal                |
-| *`datatype`* `!=` *`datatype`* → `boolean` | Not equal                |
-
-\
+| _`datatype`_ `<` _`datatype`_ → `boolean`  | Less than                |
+| _`datatype`_ `>` _`datatype`_ → `boolean`  | Greater than             |
+| _`datatype`_ `<=` _`datatype`_ → `boolean` | Less than or equal to    |
+| _`datatype`_ `>=` _`datatype`_ → `boolean` | Greater than or equal to |
+| _`datatype`_ `=` _`datatype`_ → `boolean`  | Equal                    |
+| _`datatype`_ `<>` _`datatype`_ → `boolean` | Not equal                |
+| _`datatype`_ `!=` _`datatype`_ → `boolean` | Not equal                |
 
 ### Note
 
@@ -26,30 +28,281 @@ It is usually possible to compare values of related data types as well; for exam
 
 As shown above, all comparison operators are binary operators that return values of type `boolean`. Thus, expressions like `1 < 2 < 3` are not valid (because there is no `<` operator to compare a Boolean value with `3`). Use the `BETWEEN` predicates shown below to perform range tests.
 
-There are also some comparison predicates, as shown in [Table 9.2](functions-comparison.html#FUNCTIONS-COMPARISON-PRED-TABLE "Table 9.2. Comparison Predicates"). These behave much like operators, but have special syntax mandated by the SQL standard.
+There are also some comparison predicates, as shown in [Table 9.2](functions-comparison#FUNCTIONS-COMPARISON-PRED-TABLE). These behave much like operators, but have special syntax mandated by the SQL standard.
+
+[#id](#FUNCTIONS-COMPARISON-PRED-TABLE)
 
 **Table 9.2. Comparison Predicates**
 
-| PredicateDescriptionExample(s)                                                                                                                                                                                             |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| *`datatype`* `BETWEEN` *`datatype`* `AND` *`datatype`* → `boolean`Between (inclusive of the range endpoints).`2 BETWEEN 1 AND 3` → `t``2 BETWEEN 3 AND 1` → `f`                                                            |
-| *`datatype`* `NOT BETWEEN` *`datatype`* `AND` *`datatype`* → `boolean`Not between (the negation of `BETWEEN`).`2 NOT BETWEEN 1 AND 3` → `f`                                                                                |
-| *`datatype`* `BETWEEN SYMMETRIC` *`datatype`* `AND` *`datatype`* → `boolean`Between, after sorting the two endpoint values.`2 BETWEEN SYMMETRIC 3 AND 1` → `t`                                                             |
-| *`datatype`* `NOT BETWEEN SYMMETRIC` *`datatype`* `AND` *`datatype`* → `boolean`Not between, after sorting the two endpoint values.`2 NOT BETWEEN SYMMETRIC 3 AND 1` → `f`                                                 |
-| *`datatype`* `IS DISTINCT FROM` *`datatype`* → `boolean`Not equal, treating null as a comparable value.`1 IS DISTINCT FROM NULL` → `t` (rather than `NULL`)`NULL IS DISTINCT FROM NULL` → `f` (rather than `NULL`)         |
-| *`datatype`* `IS NOT DISTINCT FROM` *`datatype`* → `boolean`Equal, treating null as a comparable value.`1 IS NOT DISTINCT FROM NULL` → `f` (rather than `NULL`)`NULL IS NOT DISTINCT FROM NULL` → `t` (rather than `NULL`) |
-| *`datatype`* `IS NULL` → `boolean`Test whether value is null.`1.5 IS NULL` → `f`                                                                                                                                           |
-| *`datatype`* `IS NOT NULL` → `boolean`Test whether value is not null.`'null' IS NOT NULL` → `t`                                                                                                                            |
-| *`datatype`* `ISNULL` → `boolean`Test whether value is null (nonstandard syntax).                                                                                                                                          |
-| *`datatype`* `NOTNULL` → `boolean`Test whether value is not null (nonstandard syntax).                                                                                                                                     |
-| `boolean` `IS TRUE` → `boolean`Test whether boolean expression yields true.`true IS TRUE` → `t``NULL::boolean IS TRUE` → `f` (rather than `NULL`)                                                                          |
-| `boolean` `IS NOT TRUE` → `boolean`Test whether boolean expression yields false or unknown.`true IS NOT TRUE` → `f``NULL::boolean IS NOT TRUE` → `t` (rather than `NULL`)                                                  |
-| `boolean` `IS FALSE` → `boolean`Test whether boolean expression yields false.`true IS FALSE` → `f``NULL::boolean IS FALSE` → `f` (rather than `NULL`)                                                                      |
-| `boolean` `IS NOT FALSE` → `boolean`Test whether boolean expression yields true or unknown.`true IS NOT FALSE` → `t``NULL::boolean IS NOT FALSE` → `t` (rather than `NULL`)                                                |
-| `boolean` `IS UNKNOWN` → `boolean`Test whether boolean expression yields unknown.`true IS UNKNOWN` → `f``NULL::boolean IS UNKNOWN` → `t` (rather than `NULL`)                                                              |
-| `boolean` `IS NOT UNKNOWN` → `boolean`Test whether boolean expression yields true or false.`true IS NOT UNKNOWN` → `t``NULL::boolean IS NOT UNKNOWN` → `f` (rather than `NULL`)                                            |
-
-\
+<figure class="table-wrapper">
+<table class="table" summary="Comparison Predicates" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <div class="func_signature">Predicate</div>
+        <div>Description</div>
+        <div>Example(s)</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <em class="replaceable"><code>datatype</code></em> <code class="literal">BETWEEN</code>
+          <em class="replaceable"><code>datatype</code></em> <code class="literal">AND</code>
+          <em class="replaceable"><code>datatype</code></em> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Between (inclusive of the range endpoints).</div>
+        <div>
+          <code class="literal">2 BETWEEN 1 AND 3</code>
+          → <code class="returnvalue">t</code>
+        </div>
+        <div>
+          <code class="literal">2 BETWEEN 3 AND 1</code>
+          → <code class="returnvalue">f</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <em class="replaceable"><code>datatype</code></em>
+          <code class="literal">NOT BETWEEN</code>
+          <em class="replaceable"><code>datatype</code></em> <code class="literal">AND</code>
+          <em class="replaceable"><code>datatype</code></em> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Not between (the negation of <code class="literal">BETWEEN</code>).</div>
+        <div>
+          <code class="literal">2 NOT BETWEEN 1 AND 3</code>
+          → <code class="returnvalue">f</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <em class="replaceable"><code>datatype</code></em>
+          <code class="literal">BETWEEN SYMMETRIC</code>
+          <em class="replaceable"><code>datatype</code></em> <code class="literal">AND</code>
+          <em class="replaceable"><code>datatype</code></em> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Between, after sorting the two endpoint values.</div>
+        <div>
+          <code class="literal">2 BETWEEN SYMMETRIC 3 AND 1</code>
+          → <code class="returnvalue">t</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <em class="replaceable"><code>datatype</code></em>
+          <code class="literal">NOT BETWEEN SYMMETRIC</code>
+          <em class="replaceable"><code>datatype</code></em> <code class="literal">AND</code>
+          <em class="replaceable"><code>datatype</code></em> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Not between, after sorting the two endpoint values.</div>
+        <div>
+          <code class="literal">2 NOT BETWEEN SYMMETRIC 3 AND 1</code>
+          → <code class="returnvalue">f</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <em class="replaceable"><code>datatype</code></em>
+          <code class="literal">IS DISTINCT FROM</code>
+          <em class="replaceable"><code>datatype</code></em> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Not equal, treating null as a comparable value.</div>
+        <div>
+          <code class="literal">1 IS DISTINCT FROM NULL</code>
+          → <code class="returnvalue">t</code> (rather than <code class="literal">NULL</code>)
+        </div>
+        <div>
+          <code class="literal">NULL IS DISTINCT FROM NULL</code>
+          → <code class="returnvalue">f</code> (rather than <code class="literal">NULL</code>)
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <em class="replaceable"><code>datatype</code></em>
+          <code class="literal">IS NOT DISTINCT FROM</code>
+          <em class="replaceable"><code>datatype</code></em> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Equal, treating null as a comparable value.</div>
+        <div>
+          <code class="literal">1 IS NOT DISTINCT FROM NULL</code>
+          → <code class="returnvalue">f</code> (rather than <code class="literal">NULL</code>)
+        </div>
+        <div>
+          <code class="literal">NULL IS NOT DISTINCT FROM NULL</code>
+          → <code class="returnvalue">t</code> (rather than <code class="literal">NULL</code>)
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <em class="replaceable"><code>datatype</code></em> <code class="literal">IS NULL</code> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Test whether value is null.</div>
+        <div>
+          <code class="literal">1.5 IS NULL</code>
+          → <code class="returnvalue">f</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <em class="replaceable"><code>datatype</code></em>
+          <code class="literal">IS NOT NULL</code> → <code class="returnvalue">boolean</code>
+        </div>
+        <div>Test whether value is not null.</div>
+        <div>
+          <code class="literal">'null' IS NOT NULL</code>
+          → <code class="returnvalue">t</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <em class="replaceable"><code>datatype</code></em> <code class="literal">ISNULL</code> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Test whether value is null (nonstandard syntax).</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <em class="replaceable"><code>datatype</code></em> <code class="literal">NOTNULL</code> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Test whether value is not null (nonstandard syntax).</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">boolean</code> <code class="literal">IS TRUE</code> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Test whether boolean expression yields true.</div>
+        <div>
+          <code class="literal">true IS TRUE</code>
+          → <code class="returnvalue">t</code>
+        </div>
+        <div>
+          <code class="literal">NULL::boolean IS TRUE</code>
+          → <code class="returnvalue">f</code> (rather than <code class="literal">NULL</code>)
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">boolean</code> <code class="literal">IS NOT TRUE</code> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Test whether boolean expression yields false or unknown.</div>
+        <div>
+          <code class="literal">true IS NOT TRUE</code>
+          → <code class="returnvalue">f</code>
+        </div>
+        <div>
+          <code class="literal">NULL::boolean IS NOT TRUE</code>
+          → <code class="returnvalue">t</code> (rather than <code class="literal">NULL</code>)
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">boolean</code> <code class="literal">IS FALSE</code> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Test whether boolean expression yields false.</div>
+        <div>
+          <code class="literal">true IS FALSE</code>
+          → <code class="returnvalue">f</code>
+        </div>
+        <div>
+          <code class="literal">NULL::boolean IS FALSE</code>
+          → <code class="returnvalue">f</code> (rather than <code class="literal">NULL</code>)
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">boolean</code> <code class="literal">IS NOT FALSE</code> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Test whether boolean expression yields true or unknown.</div>
+        <div>
+          <code class="literal">true IS NOT FALSE</code>
+          → <code class="returnvalue">t</code>
+        </div>
+        <div>
+          <code class="literal">NULL::boolean IS NOT FALSE</code>
+          → <code class="returnvalue">t</code> (rather than <code class="literal">NULL</code>)
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">boolean</code> <code class="literal">IS UNKNOWN</code> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Test whether boolean expression yields unknown.</div>
+        <div>
+          <code class="literal">true IS UNKNOWN</code>
+          → <code class="returnvalue">f</code>
+        </div>
+        <div>
+          <code class="literal">NULL::boolean IS UNKNOWN</code>
+          → <code class="returnvalue">t</code> (rather than <code class="literal">NULL</code>)
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <code class="type">boolean</code> <code class="literal">IS NOT UNKNOWN</code> →
+          <code class="returnvalue">boolean</code>
+        </div>
+        <div>Test whether boolean expression yields true or false.</div>
+        <div>
+          <code class="literal">true IS NOT UNKNOWN</code>
+          → <code class="returnvalue">t</code>
+        </div>
+        <div>
+          <code class="literal">NULL::boolean IS NOT UNKNOWN</code>
+          → <code class="returnvalue">f</code> (rather than <code class="literal">NULL</code>)
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</figure>
 
 The `BETWEEN` predicate simplifies range tests:
 
@@ -99,13 +352,13 @@ expression ISNULL
 expression NOTNULL
 ```
 
-Do *not* write `expression = NULL` because `NULL` is not “equal to” `NULL`. (The null value represents an unknown value, and it is not known whether two unknown values are equal.)
+Do _not_ write `expression = NULL` because `NULL` is not “equal to” `NULL`. (The null value represents an unknown value, and it is not known whether two unknown values are equal.)
 
 ### Tip
 
-Some applications might expect that `expression = NULL` returns true if *`expression`* evaluates to the null value. It is highly recommended that these applications be modified to comply with the SQL standard. However, if that cannot be done the [transform\_null\_equals](runtime-config-compatible.html#GUC-TRANSFORM-NULL-EQUALS) configuration variable is available. If it is enabled, PostgreSQL will convert `x = NULL` clauses to `x IS NULL`.
+Some applications might expect that `expression = NULL` returns true if _`expression`_ evaluates to the null value. It is highly recommended that these applications be modified to comply with the SQL standard. However, if that cannot be done the [transform_null_equals](runtime-config-compatible#GUC-TRANSFORM-NULL-EQUALS) configuration variable is available. If it is enabled, PostgreSQL will convert `x = NULL` clauses to `x IS NULL`.
 
-If the *`expression`* is row-valued, then `IS NULL` is true when the row expression itself is null or when all the row's fields are null, while `IS NOT NULL` is true when the row expression itself is non-null and all the row's fields are non-null. Because of this behavior, `IS NULL` and `IS NOT NULL` do not always return inverse results for row-valued expressions; in particular, a row-valued expression that contains both null and non-null fields will return false for both tests. In some cases, it may be preferable to write *`row`* `IS DISTINCT FROM NULL` or *`row`* `IS NOT DISTINCT FROM NULL`, which will simply check whether the overall row value is null without any additional tests on the row fields.
+If the _`expression`_ is row-valued, then `IS NULL` is true when the row expression itself is null or when all the row's fields are null, while `IS NOT NULL` is true when the row expression itself is non-null and all the row's fields are non-null. Because of this behavior, `IS NULL` and `IS NOT NULL` do not always return inverse results for row-valued expressions; in particular, a row-valued expression that contains both null and non-null fields will return false for both tests. In some cases, it may be preferable to write _`row`_ `IS DISTINCT FROM NULL` or _`row`_ `IS NOT DISTINCT FROM NULL`, which will simply check whether the overall row value is null without any additional tests on the row fields.
 
 Boolean values can also be tested using the predicates
 
@@ -121,11 +374,55 @@ boolean_expression IS NOT UNKNOWN
 
 These will always return true or false, never a null value, even when the operand is null. A null input is treated as the logical value “unknown”. Notice that `IS UNKNOWN` and `IS NOT UNKNOWN` are effectively the same as `IS NULL` and `IS NOT NULL`, respectively, except that the input expression must be of Boolean type.
 
-Some comparison-related functions are also available, as shown in [Table 9.3](functions-comparison.html#FUNCTIONS-COMPARISON-FUNC-TABLE "Table 9.3. Comparison Functions").
+Some comparison-related functions are also available, as shown in [Table 9.3](functions-comparison#FUNCTIONS-COMPARISON-FUNC-TABLE).
+
+[#id](#FUNCTIONS-COMPARISON-FUNC-TABLE)
 
 **Table 9.3. Comparison Functions**
 
-| FunctionDescriptionExample(s)                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------------------------ |
-| `num_nonnulls` ( `VARIADIC` `"any"` ) → `integer`Returns the number of non-null arguments.`num_nonnulls(1, NULL, 2)` → `2` |
-| `num_nulls` ( `VARIADIC` `"any"` ) → `integer`Returns the number of null arguments.`num_nulls(1, NULL, 2)` → `1`           |
+<figure class="table-wrapper">
+<table class="table" summary="Comparison Functions" border="1">
+  <colgroup>
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="func_table_entry">
+        <div class="func_signature">Function</div>
+        <div>Description</div>
+        <div>Example(s)</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.5.8.8.21.2.2.1.1.1.1" class="indexterm"></a>
+          <code class="function">num_nonnulls</code> ( <code class="literal">VARIADIC</code>
+          <code class="type">"any"</code> ) → <code class="returnvalue">integer</code>
+        </div>
+        <div>Returns the number of non-null arguments.</div>
+        <div>
+          <code class="literal">num_nonnulls(1, NULL, 2)</code>
+          → <code class="returnvalue">2</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="func_table_entry">
+        <div class="func_signature">
+          <a id="id-1.5.8.8.21.2.2.2.1.1.1" class="indexterm"></a>
+          <code class="function">num_nulls</code> ( <code class="literal">VARIADIC</code>
+          <code class="type">"any"</code> ) → <code class="returnvalue">integer</code>
+        </div>
+        <div>Returns the number of null arguments.</div>
+        <div>
+          <code class="literal">num_nulls(1, NULL, 2)</code>
+          → <code class="returnvalue">1</code>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</figure>

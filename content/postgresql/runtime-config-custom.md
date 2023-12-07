@@ -1,3 +1,5 @@
+[#id](#RUNTIME-CONFIG-CUSTOM)
+
 ## 20.16. Customized Options [#](#RUNTIME-CONFIG-CUSTOM)
 
 This feature was designed to allow parameters not normally known to PostgreSQL to be added by add-on modules (such as procedural languages). This allows extension modules to be configured in the standard ways.

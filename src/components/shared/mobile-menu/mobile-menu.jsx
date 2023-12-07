@@ -86,11 +86,11 @@ const MobileMenu = ({ isOpen = false, headerRef, onOutsideClick }) => {
             <div className="mt-5 space-y-4">
               <Button
                 className="!flex h-12 items-center justify-center"
-                to={LINKS.dashboard}
+                to={LINKS.login}
                 size="xs"
                 theme="quaternary"
               >
-                Sign In
+                Login
               </Button>
               <Button
                 className="!flex h-12 items-center"

@@ -1,3 +1,5 @@
+[#id](#PLPYTHON-SHARING)
+
 ## 46.3. Sharing Data [#](#PLPYTHON-SHARING)
 
 The global dictionary `SD` is available to store private data between repeated calls to the same function. The global dictionary `GD` is public data, that is available to all Python functions within a session; use with care.

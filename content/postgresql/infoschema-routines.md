@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-ROUTINES)
+
 ## 37.45. `routines` [#](#INFOSCHEMA-ROUTINES)
 
 The view `routines` contains all functions and procedures in the current database. Only those functions and procedures are shown that the current user has access to (by way of being the owner or having some privilege).
+
+[#id](#id-1.7.6.49.3)
 
 **Table 37.43. `routines` Columns**
 

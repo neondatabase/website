@@ -6,6 +6,7 @@ const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 const slugify = require('slugify');
 
+const sharedMdxComponents = require('../../content/docs/shared-content');
 const { RELEASE_NOTES_DIR_PATH } = require('../constants/docs');
 
 const getExcerpt = require('./get-excerpt');
@@ -15,7 +16,13 @@ const DOCS_DIR_PATH = 'content/docs';
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
-    ignore: ['**/RELEASE_NOTES_TEMPLATE.md', '**/README.md', '**/unused/**'],
+    ignore: [
+      '**/RELEASE_NOTES_TEMPLATE.md',
+      '**/README.md',
+      '**/unused/**',
+      '**/shared-content/**',
+      '**/GUIDE_TEMPLATE.md',
+    ],
   });
   return files.map((file) => file.replace(pathname, '').replace('.md', ''));
 };
@@ -83,7 +90,10 @@ const getDocPreviousAndNextLinks = (slug, flatSidebar) => {
   const previousItem = items[currentItemIndex - 1];
   const nextItem = items[currentItemIndex + 1];
 
-  return { previousLink: previousItem, nextLink: nextItem };
+  return {
+    previousLink: { title: previousItem?.title, slug: previousItem?.slug },
+    nextLink: { title: nextItem?.title, slug: nextItem?.slug },
+  };
 };
 
 const getAllReleaseNotes = async () => {
@@ -134,6 +144,22 @@ const buildNestedToc = (headings, currentLevel) => {
 };
 
 const getTableOfContents = (content) => {
+  const mdxComponentRegex = /<(\w+)\/>/g;
+  let match;
+  // check if the content has any mdx shared components
+  while ((match = mdxComponentRegex.exec(content)) !== null) {
+    const componentName = match[1];
+
+    const fileName = sharedMdxComponents[componentName];
+    const mdFilePath = `content/docs/${fileName}.md`;
+
+    // Check if the MD file exists
+    if (fs.existsSync(mdFilePath)) {
+      const mdContent = fs.readFileSync(mdFilePath, 'utf8');
+      content = content.replace(new RegExp(`<${componentName}\/>`, 'g'), mdContent);
+    }
+  }
+
   const codeBlockRegex = /```[\s\S]*?```/g;
   const headingRegex = /^(#+)\s(.*)$/gm;
 

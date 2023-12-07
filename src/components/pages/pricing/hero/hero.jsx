@@ -11,6 +11,7 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 const items = [
   {
@@ -25,7 +26,7 @@ const items = [
       { title: 'A shared compute with 1 GB of RAM' },
     ],
     button: {
-      url: 'https://console.neon.tech/sign_in',
+      url: LINKS.signup,
       text: 'Get Started',
       theme: 'white-outline',
       event: 'pricing_hero_free_btn_click',
@@ -147,6 +148,7 @@ const Hero = () => {
                   to={button.url}
                   onClick={() => {
                     sendGtagEvent(button.event);
+                    sendSegmentEvent(button.event);
                   }}
                 >
                   <div className="mb-6 min-h-[280px] flex flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-7 lg:min-h-max">

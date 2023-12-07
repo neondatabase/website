@@ -10,6 +10,7 @@ import { createPortal } from 'react-dom';
 import Link from 'components/shared/link';
 import debounce from 'utils/debounce';
 import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 const Hit = ({ hit, children }) => (
   <Link
@@ -38,7 +39,7 @@ Hit.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const Search = ({ className = null, indexName, isBlog = false }) => {
+const Search = ({ className = null, isBlog = false, indexName }) => {
   const router = useRouter();
   const searchButtonRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -48,6 +49,7 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
     setIsOpen(true);
     if (!isBlog) {
       sendGtagEvent('open_docs_search');
+      sendSegmentEvent('open_docs_search');
     }
   }, [isBlog]);
 
@@ -60,6 +62,7 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
       setIsOpen(true);
       if (!isBlog) {
         sendGtagEvent('open_docs_search');
+        sendSegmentEvent('open_docs_search');
       }
       setInitialQuery(event.key);
     },
@@ -158,8 +161,8 @@ const Search = ({ className = null, indexName, isBlog = false }) => {
 
 Search.propTypes = {
   className: PropTypes.string,
-  indexName: PropTypes.string.isRequired,
   isBlog: PropTypes.bool,
+  indexName: PropTypes.string.isRequired,
 };
 
 export default Search;

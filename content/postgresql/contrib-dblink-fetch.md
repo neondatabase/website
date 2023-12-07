@@ -1,3 +1,5 @@
+[#id](#CONTRIB-DBLINK-FETCH)
+
 ## dblink\_fetch
 
 dblink\_fetch — returns rows from an open cursor in a remote database
@@ -10,35 +12,45 @@ dblink_fetch(text cursorname, int howmany [, bool fail_on_error]) returns setof 
 dblink_fetch(text connname, text cursorname, int howmany [, bool fail_on_error]) returns setof record
 ```
 
+[#id](#id-1.11.7.22.11.5)
+
 ## Description
 
 `dblink_fetch` fetches rows from a cursor previously established by `dblink_open`.
+
+[#id](#id-1.11.7.22.11.6)
 
 ## Arguments
 
 * *`connname`*
 
-    Name of the connection to use; omit this parameter to use the unnamed connection.
+  Name of the connection to use; omit this parameter to use the unnamed connection.
 
 * *`cursorname`*
 
-    The name of the cursor to fetch from.
+  The name of the cursor to fetch from.
 
 * *`howmany`*
 
-    The maximum number of rows to retrieve. The next *`howmany`* rows are fetched, starting at the current cursor position, moving forward. Once the cursor has reached its end, no more rows are produced.
+  The maximum number of rows to retrieve. The next *`howmany`* rows are fetched, starting at the current cursor position, moving forward. Once the cursor has reached its end, no more rows are produced.
 
 * *`fail_on_error`*
 
-    If true (the default when omitted) then an error thrown on the remote side of the connection causes an error to also be thrown locally. If false, the remote error is locally reported as a NOTICE, and the function returns no rows.
+  If true (the default when omitted) then an error thrown on the remote side of the connection causes an error to also be thrown locally. If false, the remote error is locally reported as a NOTICE, and the function returns no rows.
+
+[#id](#id-1.11.7.22.11.7)
 
 ## Return Value
 
 The function returns the row(s) fetched from the cursor. To use this function, you will need to specify the expected set of columns, as previously discussed for `dblink`.
 
+[#id](#id-1.11.7.22.11.8)
+
 ## Notes
 
 On a mismatch between the number of return columns specified in the `FROM` clause, and the actual number of columns returned by the remote cursor, an error will be thrown. In this event, the remote cursor is still advanced by as many rows as it would have been if the error had not occurred. The same is true for any other error occurring in the local query after the remote `FETCH` has been done.
+
+[#id](#id-1.11.7.22.11.9)
 
 ## Examples
 

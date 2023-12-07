@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-ROLE-COLUMN-GRANTS)
+
 ## 37.35. `role_column_grants` [#](#INFOSCHEMA-ROLE-COLUMN-GRANTS)
 
 The view `role_column_grants` identifies all privileges granted on columns where the grantor or grantee is a currently enabled role. Further information can be found under `column_privileges`. The only effective difference between this view and `column_privileges` is that this view omits columns that have been made accessible to the current user by way of a grant to `PUBLIC`.
+
+[#id](#id-1.7.6.39.3)
 
 **Table 37.33. `role_column_grants` Columns**
 

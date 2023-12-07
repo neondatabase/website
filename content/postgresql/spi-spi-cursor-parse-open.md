@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-CURSOR-PARSE-OPEN)
+
 ## SPI\_cursor\_parse\_open
 
 SPI\_cursor\_parse\_open — set up a cursor using a query string and parameters
@@ -5,11 +7,12 @@ SPI\_cursor\_parse\_open — set up a cursor using a query string and parameters
 ## Synopsis
 
 ```
-
 Portal SPI_cursor_parse_open(const char *name,
                              const char *command,
                              const SPIParseOpenOptions * options)
 ```
+
+[#id](#id-1.8.12.8.22.5)
 
 ## Description
 
@@ -21,33 +24,37 @@ The *`options->params`* object should normally mark each parameter with the `PAR
 
 The passed-in parameter data will be copied into the cursor's portal, so it can be freed while the cursor still exists.
 
+[#id](#id-1.8.12.8.22.6)
+
 ## Arguments
 
 * `const char * name`
 
-    name for portal, or `NULL` to let the system select a name
+  name for portal, or `NULL` to let the system select a name
 
 * `const char * command`
 
-    command string
+  command string
 
 * `const SPIParseOpenOptions * options`
 
-    struct containing optional arguments
+  struct containing optional arguments
 
 Callers should always zero out the entire *`options`* struct, then fill whichever fields they want to set. This ensures forward compatibility of code, since any fields that are added to the struct in future will be defined to behave backwards-compatibly if they are zero. The currently available *`options`* fields are:
 
 * `ParamListInfo params`
 
-    data structure containing query parameter types and values; NULL if none
+  data structure containing query parameter types and values; NULL if none
 
 * `int cursorOptions`
 
-    integer bit mask of cursor options; zero produces default behavior
+  integer bit mask of cursor options; zero produces default behavior
 
 * `bool read_only`
 
-    `true` for read-only execution
+  `true` for read-only execution
+
+[#id](#id-1.8.12.8.22.7)
 
 ## Return Value
 

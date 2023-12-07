@@ -2,12 +2,12 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-10-24T18:56:54.993Z'
+updatedOn: '2023-12-01T19:05:09.476Z'
 ---
 
 ## Before you begin
 
-- Before running the `projects` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+- Before running the `projects` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
 - If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 For information about projects in Neon, see [Projects](/docs/manage/projects).
@@ -238,6 +238,4 @@ neonctl projects get muddy-wood-859533
 └───────────────────┴───────────────┴───────────────┴──────────────────────┘
 ```
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

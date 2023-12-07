@@ -1,3 +1,5 @@
+[#id](#SQL-CREATEOPFAMILY)
+
 ## CREATE OPERATOR FAMILY
 
 CREATE OPERATOR FAMILY — define a new operator family
@@ -5,9 +7,10 @@ CREATE OPERATOR FAMILY — define a new operator family
 ## Synopsis
 
 ```
-
 CREATE OPERATOR FAMILY name USING index_method
 ```
+
+[#id](#id-1.9.3.74.5)
 
 ## Description
 
@@ -19,22 +22,28 @@ If a schema name is given then the operator family is created in the specified s
 
 The user who defines an operator family becomes its owner. Presently, the creating user must be a superuser. (This restriction is made because an erroneous operator family definition could confuse or even crash the server.)
 
-Refer to [Section 38.16](xindex.html "38.16. Interfacing Extensions to Indexes") for further information.
+Refer to [Section 38.16](xindex) for further information.
+
+[#id](#id-1.9.3.74.6)
 
 ## Parameters
 
 * *`name`*
 
-    The name of the operator family to be created. The name can be schema-qualified.
+  The name of the operator family to be created. The name can be schema-qualified.
 
 * *`index_method`*
 
-    The name of the index method this operator family is for.
+  The name of the index method this operator family is for.
+
+[#id](#id-1.9.3.74.7)
 
 ## Compatibility
 
 `CREATE OPERATOR FAMILY` is a PostgreSQL extension. There is no `CREATE OPERATOR FAMILY` statement in the SQL standard.
 
+[#id](#id-1.9.3.74.8)
+
 ## See Also
 
-[ALTER OPERATOR FAMILY](sql-alteropfamily.html "ALTER OPERATOR FAMILY"), [DROP OPERATOR FAMILY](sql-dropopfamily.html "DROP OPERATOR FAMILY"), [CREATE OPERATOR CLASS](sql-createopclass.html "CREATE OPERATOR CLASS"), [ALTER OPERATOR CLASS](sql-alteropclass.html "ALTER OPERATOR CLASS"), [DROP OPERATOR CLASS](sql-dropopclass.html "DROP OPERATOR CLASS")
+[ALTER OPERATOR FAMILY](sql-alteropfamily), [DROP OPERATOR FAMILY](sql-dropopfamily), [CREATE OPERATOR CLASS](sql-createopclass), [ALTER OPERATOR CLASS](sql-alteropclass), [DROP OPERATOR CLASS](sql-dropopclass)

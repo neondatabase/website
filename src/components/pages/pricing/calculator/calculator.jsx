@@ -14,6 +14,7 @@ import CheckIcon from 'icons/check.inline.svg';
 import infoHoveredIcon from 'icons/tooltip-hovered.svg';
 import infoIcon from 'icons/tooltip.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 const COMPUTE_TIME_PRICE = 0.102;
 const PROJECT_STORAGE_PRICE = 0.000164;
@@ -129,6 +130,20 @@ const Calculator = () => {
         : setWrittenAndTransferDataCost(totalCost * PERCENTAGE_OF_MONTHLY_COST),
     [dataTransferCost, isAdvanced, totalCost, writtenDataCost]
   );
+
+  const handleButtonClick = () => {
+    const eventName = 'pricing_estimated_price';
+    const properties = {
+      price: estimatedPrice,
+      computeUnits,
+      activeTime,
+      storageValue,
+      dataTransferValue,
+      writtenDataValue,
+    };
+    sendGtagEvent(eventName, properties);
+    sendSegmentEvent(eventName, properties);
+  };
 
   return (
     <section
@@ -298,7 +313,7 @@ const Calculator = () => {
                   <span className="font-normal text-gray-new-70">per month</span>
                 </p>
                 <p className="text-right text-sm leading-none text-gray-new-70">
-                  <span className="text-gray-new-94">${COMPUTE_TIME_PRICE}</span> per hour
+                  <span className="text-gray-new-94">${PROJECT_STORAGE_PRICE}</span> per hour
                 </p>
               </div>
             </div>
@@ -447,7 +462,7 @@ const Calculator = () => {
             </p>
             <AnimatedButton
               className="my-6 w-full max-w-[260px] !bg-[var(--accentColor)] !py-[17px] !text-lg font-medium hover:!bg-[var(--hoverColor)] lg:my-5 md:col-start-2 md:w-full md:max-w-[340px] sm:col-start-1 sm:my-8"
-              to={estimatedPrice >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.dashboard}
+              to={estimatedPrice >= CUSTOM_THRESHOLD ? LINKS.contactSales : LINKS.signup}
               theme="primary"
               size="sm"
               animationColor="var(--accentColor)"
@@ -455,16 +470,7 @@ const Calculator = () => {
               linesOffsetSide={26}
               linesOffsetBottom={55}
               isAnimated
-              onClick={() => {
-                sendGtagEvent('pricing_estimated_price', {
-                  price: estimatedPrice,
-                  computeUnits,
-                  activeTime,
-                  storageValue,
-                  dataTransferValue,
-                  writtenDataValue,
-                });
-              }}
+              onClick={handleButtonClick}
             >
               {estimatedPrice >= CUSTOM_THRESHOLD ? 'Get Custom Quote' : 'Get Started'}
             </AnimatedButton>

@@ -1,7 +1,7 @@
 ---
 title: Import data from CSV
 enableTableOfContents: true
-updatedOn: '2023-10-19T23:10:12.841Z'
+updatedOn: '2023-11-24T11:25:06.757Z'
 ---
 
 This topic describes how to import data into a Neon database table from a CSV file.
@@ -62,6 +62,4 @@ The following example uses the ready-to-use `neondb` database that is created wi
 
    For more information about the `\copy` option, refer to the [psql reference](https://www.postgresql.org/docs/current/app-psql.html), in the _PostgreSQL Documentation_.
 
-## Need help?
-
-Join the [Neon community forum](https://community.neon.tech/) to ask questions or see what others are doing with Neon. [Neon Pro Plan](/docs/introduction/pro-plan) users can open a support ticket from the console. For more detail, see [Getting Support](/docs/introduction/support).
+<NeedHelp/>

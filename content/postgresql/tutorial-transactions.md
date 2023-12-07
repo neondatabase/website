@@ -1,11 +1,14 @@
+[#id](#TUTORIAL-TRANSACTIONS)
+
 ## 3.4. Transactions [#](#TUTORIAL-TRANSACTIONS)
+
+
 
 *Transactions* are a fundamental concept of all database systems. The essential point of a transaction is that it bundles multiple steps into a single, all-or-nothing operation. The intermediate states between the steps are not visible to other concurrent transactions, and if some failure occurs that prevents the transaction from completing, then none of the steps affect the database at all.
 
 For example, consider a bank database that contains balances for various customer accounts, as well as total deposit balances for branches. Suppose that we want to record a payment of $100.00 from Alice's account to Bob's account. Simplifying outrageously, the SQL commands for this might look like:
 
 ```
-
 UPDATE accounts SET balance = balance - 100.00
     WHERE name = 'Alice';
 UPDATE branches SET balance = balance - 100.00
@@ -25,7 +28,6 @@ Another important property of transactional databases is closely related to the 
 In PostgreSQL, a transaction is set up by surrounding the SQL commands of the transaction with `BEGIN` and `COMMIT` commands. So our banking transaction would actually look like:
 
 ```
-
 BEGIN;
 UPDATE accounts SET balance = balance - 100.00
     WHERE name = 'Alice';
@@ -50,7 +52,6 @@ All this is happening within the transaction block, so none of it is visible to 
 Remembering the bank database, suppose we debit $100.00 from Alice's account, and credit Bob's account, only to find later that we should have credited Wally's account. We could do it using savepoints like this:
 
 ```
-
 BEGIN;
 UPDATE accounts SET balance = balance - 100.00
     WHERE name = 'Alice';

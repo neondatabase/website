@@ -9,6 +9,7 @@ import MoreArticles from 'components/pages/blog-post/more-articles';
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
+import Admonition from 'components/shared/admonition';
 import CodeBlock from 'components/shared/code-block';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
@@ -53,6 +54,7 @@ const BlogDraft = async ({ searchParams }) => {
       blogpostcode: CodeBlock,
       blogpostcodetabs: CodeTabs,
       blogpostcta: CTA,
+      blogpostadmonition: (props) => <Admonition {...props} asHTML />,
     },
     true
   );

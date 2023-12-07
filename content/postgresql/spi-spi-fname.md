@@ -1,3 +1,5 @@
+[#id](#SPI-SPI-FNAME)
+
 ## SPI\_fname
 
 SPI\_fname — determine the column name for the specified column number
@@ -5,23 +7,28 @@ SPI\_fname — determine the column name for the specified column number
 ## Synopsis
 
 ```
-
 char * SPI_fname(TupleDesc rowdesc, int colnumber)
 ```
+
+[#id](#id-1.8.12.9.4.5)
 
 ## Description
 
 `SPI_fname` returns a copy of the column name of the specified column. (You can use `pfree` to release the copy of the name when you don't need it anymore.)
 
+[#id](#id-1.8.12.9.4.6)
+
 ## Arguments
 
 * `TupleDesc rowdesc`
 
-    input row description
+  input row description
 
 * `int colnumber`
 
-    column number (count starts at 1)
+  column number (count starts at 1)
+
+[#id](#id-1.8.12.9.4.7)
 
 ## Return Value
 

@@ -1,6 +1,10 @@
+[#id](#INFOSCHEMA-SEQUENCES)
+
 ## 37.47. `sequences` [#](#INFOSCHEMA-SEQUENCES)
 
 The view `sequences` contains all sequences defined in the current database. Only those sequences are shown that the current user has access to (by way of being the owner or having some privilege).
+
+[#id](#id-1.7.6.51.3)
 
 **Table 37.45. `sequences` Columns**
 
@@ -19,6 +23,5 @@ The view `sequences` contains all sequences defined in the current database. Onl
 | `increment` `character_data`The increment of the sequence                                                                                                                                                                                                                                                                                      |
 | `cycle_option` `yes_or_no``YES` if the sequence cycles, else `NO`                                                                                                                                                                                                                                                                              |
 
-\
 
 Note that in accordance with the SQL standard, the start, minimum, maximum, and increment values are returned as character strings.
