@@ -24,6 +24,7 @@ Commands:
   neonctl roles                       Manage roles               [aliases: role]
   neonctl operations                  Manage operations     [aliases: operation]
   neonctl connection-string [branch]  Get connection string        [aliases: cs]
+  neonctl set-context                 Set the current context
   neonctl completion                  generate completion script
 
 Global options:
@@ -45,12 +46,13 @@ Global options:
 | [auth](../reference/cli-auth)                                     |                                        | Authenticate              |
 | [me](../reference/cli-me)                                         |                                        | Show current user         |
 | [projects](../reference/cli-projects)                             | `list`, `create`, `update`, `delete`, `get` | Manage projects           |
-| [branches](../reference/cli-branches)                             | `list`, `create`, `rename`, `add-compute`, `set-primary`, `delete`, `get` | Manage branches           |
+| [branches](../reference/cli-branches)                             | `list`, `create`, `reset`, `rename`, `add-compute`, `set-primary`, `delete`, `get` | Manage branches           |
 | [databases](../reference/cli-databases)                           | `list`, `create`, `delete`             | Manage databases          |
 | [roles](../reference/cli-roles)                                   | `list`, `create`,  `delete`            | Manage roles              |
 | [operations](../reference/cli-operations)                         | `list`                                 | Manage operations         |
 | [connection-string](../reference/cli-connection-string)           |                                        | Get connection string     |
-| [completion](../reference/cli-completion)           |                                        | Generate a completion script     |
+| [set-context](../reference/cli-set-context)                       | `project-id`, `branch`                 | Set context for session   |
+| [completion](../reference/cli-completion)                         |                                        | Generate a completion script     |
 
 ## Global options
 

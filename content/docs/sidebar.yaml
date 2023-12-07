@@ -318,6 +318,8 @@
           slug: reference/cli-operations
         - title: connection-string
           slug: reference/cli-connection-string
+        - title: set-context
+          slug: reference/cli-set-context
         - title: completion
           slug: reference/cli-completion
     - title: SDKs
