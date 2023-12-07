@@ -79,7 +79,7 @@ DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2
 
 ### Connection pooling with Prisma Migrate
 
-You cannot use a pooled connection string to perform certain operations with Prisma that require a direct connection to the database, such as schema migration with Prisma Migrate. Attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes the following error:
+You cannot use a pooled connection for certain operations in Prisma that require a direct connection to the database; for example, schema migration with Prisma Migrate. Attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes the following error:
 
 ```text
 Error undefined: Database error
