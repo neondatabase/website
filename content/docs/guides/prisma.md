@@ -20,7 +20,7 @@ Prisma is an open-source, next-generation ORM that enables you to manage and int
 - [JSON protocol for large Prisma schemas](#json-protocol-for-large-prisma-schemas)
 
 <Admonition type="note">
-This topic discusses several connection string parameters you can addd to your Neon connection string, such as `sslmode=require`, `pgbouncer=true`, and `connect_timeout=10`. A `?` character is used in a connection string to signify the end of the main part of the connection string and the start of additional options or parameters. You can use an `&` character to separate multiple parameters. For example:
+This topic discusses several connection string parameters that you can add to your Neon connection string, such as `sslmode=require`, `pgbouncer=true`, and `connect_timeout=10`. A `?` character is used in a connection string to signify the end of the main part of the connection string and the start of additional options or parameters. You can use an `&` character to separate multiple parameters. For example:
 
 ```ini
 postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&pgbouncer=true
