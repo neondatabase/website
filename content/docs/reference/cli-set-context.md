@@ -2,7 +2,7 @@
 title: Neon CLI commands — set-context
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.765Z'
+updatedOn: '2023-12-07T19:06:47.675Z'
 ---
 
 ## Before you begin
