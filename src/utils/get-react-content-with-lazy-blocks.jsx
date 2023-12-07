@@ -138,16 +138,16 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
           }
 
           if (element.name === 'a' && element.children[0].name === 'img') {
-            const linkProps = transformProps(attributesToProps(element.attribs));
+            const linkProps = transformProps(attributesToProps(element?.attribs));
             const { href: linkHref, ...otherLinkProps } = linkProps;
-            const imgProps = transformProps(attributesToProps(element.children[0].attribs));
+            const imgProps = transformProps(attributesToProps(element?.children[0]?.attribs));
             const { className: imgClassName, ...otherImgProps } = imgProps;
-            const captionProps = transformProps(attributesToProps(element.next.attribs));
+            const captionProps = transformProps(attributesToProps(element?.next?.attribs));
             const { className: captionClassName, ...otherCaptionProps } = captionProps;
 
-            const caption = element.next.children;
+            const caption = element?.next?.children;
 
-            const Component = components[element.children[0].name];
+            const Component = components[element?.children[0]?.name];
             return (
               <figure className="image-with-link">
                 <Link to={linkHref} {...otherLinkProps}>
