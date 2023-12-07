@@ -25,7 +25,7 @@ const TopBar = () => {
       }}
     >
       <span className="mr-4 py-1 truncate pr-4 text-sm font-medium border-r border-black border-opacity-20 sm:border-none sm:mr-0 sm:pr-0">
-        We have launched our Discord server 🚀
+        Neon is now on Discord 🚀
       </span>
       <span className="inline-flex items-center text-sm font-bold sm:hidden">
         <span>Join us</span>
