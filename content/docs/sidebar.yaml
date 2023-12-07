@@ -172,11 +172,7 @@
             - title: Node.js
               slug: guides/node
             - title: Prisma
-              items:
-                - title: Connect from Prisma
-                  slug: guides/prisma
-                - title: Use Prisma Migrate With Neon
-                  slug: guides/prisma-migrate
+              slug: guides/prisma
         - title: PHP
           items:
             - title: Laravel
