@@ -62,7 +62,7 @@ If you plan to use Prisma Client from a serverless function, see [Use connection
 
 ## Use connection pooling with Prisma
 
-Serverless functions typically require a large number of database connections. If you use serverless functions in your application, it is recommended that you use a pooled Neon connection string with the `pgbouncer=true` option, as shown:
+Serverless functions can end up requiring a large number of database connections as demand increases. If you use serverless functions in your application, it is recommended that you use a pooled Neon connection string with the `pgbouncer=true` option, as shown:
 
 <CodeBlock shouldWrap>
 
