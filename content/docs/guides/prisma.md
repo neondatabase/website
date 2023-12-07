@@ -19,6 +19,14 @@ Prisma is an open-source, next-generation ORM that enables you to manage and int
 - [Connection pool timeouts](#connection-pool-timeouts)
 - [JSON protocol for large Prisma schemas](#json-protocol-for-large-prisma-schemas)
 
+<Admonition type="important">
+This topic discusses several connection string parameters you can addd to your Neon connection string, such as `sslmode=require`, `pgbouncer=true`, and `connect_timeout=10`. A `?` character is used in a connection string to signify the end of the main part of the connection string and the start of additional options or parameters. You can use an `&` character to separate multiple parameters. For example:
+
+```ini
+postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&pgbouncer=true
+```
+</Admonition>
+
 ## Connect to Neon from Prisma
 
 To establish a basic connection from Prisma to Neon, perform the following steps:
@@ -60,7 +68,7 @@ Serverless functions typically require a large number of database connections. I
 
 ```ini
 # Pooled Neon connection string
-DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?pgbouncer=true
+DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&pgbouncer=true
 ```
 
 </CodeBlock>
@@ -106,10 +114,10 @@ When you finish updating your `.env` file, your variable settings should appear 
 
 ```ini
 # Pooled Neon connection string
-DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?pgbouncer=true
+DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&pgbouncer=true
 
 # Unpooled Neon connection string
-DIRECT_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+DIRECT_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&
 ```
 
 </CodeBlock>
