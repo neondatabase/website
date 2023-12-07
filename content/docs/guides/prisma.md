@@ -10,7 +10,7 @@ redirectFrom:
 updatedOn: '2023-11-24T11:25:06.754Z'
 ---
 
-Prisma is an open-source, next-generation ORM that enables you to manage and interact with your database. This guide covers the following topics:
+Prisma is an open-source, next-generation ORM that lets you to manage and interact with your database. This guide covers the following topics:
 
 - [Connect to Neon from Prisma](#connect-to-neon-from-prisma)
 - [Use connection pooling with Prisma](#use-connection-pooling-with-prisma)
