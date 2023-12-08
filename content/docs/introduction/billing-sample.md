@@ -39,7 +39,7 @@ With the high number of connections used by this application, connection pooling
 
 This graph shows steady using for the month, as well as low data write and transfer rates.
 
-![Sample billing graph](docs/introduction/billing-sample-graph.png)
+![Sample billing graph](/docs/introduction/billing-sample-graph.png)
 
 | Metric          | Daily Average | Monthly Total |
 |-----------------|---------------|---------------|
