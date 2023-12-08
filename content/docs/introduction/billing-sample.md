@@ -18,11 +18,12 @@ Tech stack assumptions:
 * [NextAuth.JS](https://next-auth.js.org/) for authentication with OAuth
 * Neon Serverless PostGres to store user info and session detail
 * [Prisma ORM](https://www.prisma.io/) to handle the database interaction
+* Deployment region US East (Ohio) 
 
 Userbase assumptions:
 * **Daily Active Users.** 80,000 users per day represents means a steady volume of read queries. With a global, consumer-oriented user base, there are no peak or dormant usage periods.
 * **Account creation.** Sign-ups average 3-5 people per hour, or 120 new accounts per day, which gives you an idea of the number of writes to user table in the database for user auth.
-* **Generation activity.** Usage is capped at 5 generations per month. Usage details like IDs of generated photos and incremental number of generations are also written to the relevant tables.
+* **User activity.** Usage is capped at 5 generations per month. Usage details like IDs of generated photos and incremental number of generations are also written to the relevant tables.
 
 <Admonition type="note">
 With the high number of connections used by this application, connection pooling is required. And since the database connection is managed through Prisma, the datbase connection string also required `?pgbouncer=true`. 
@@ -33,10 +34,19 @@ Compute, storage, and data write and transfer assumptions:
 * Written data. Indicates how much data is actively written to database storage. Average per day is 0.15 GB with a monthly total of 4.4 GB.
 * Data transfer. The amount of data transferred out of Neon. Daily average is 0.09 GB with a monthly total of 2.7 GB.
 
-## Table of assumptions
+## Consumption breakdown for the month
 
 | Metric          | Daily Average | Monthly Total |
 |-----------------|---------------|---------------|
 | Compute Time    | 23.94 GB      | 718.35 GB     |
 | Written Data    | 0.15 GB       | 4.4 GB        |
 | Data Transfer   | 0.09 GB       | 2.7 GB        |
+
+## Bill for the month
+
+| Metric              | Month    | Rate     | Amount    |
+|---------------------|----------|----------|-----------|
+| Compute Time Cost   | 718.35 GB| $0.102   | $73.27    |
+| Written Data Cost   | 4.4 GB   | $0.09600 | $0.42     |
+| Data Transfer Cost  | 2.7 GB   | $0.09000 | $0.24     |
+| **Total Bill**      |          |          | **$73.94**|
