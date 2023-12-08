@@ -14,25 +14,25 @@ Consider a typical day for this high-traffic application. It attracts roughly 80
 
 ## Assumptions
 
-**Tech stack:**
+### Tech stack:
 * **Authentication**: [NextAuth.JS](https://next-auth.js.org/) for authentication with OAuth
 * **Database**: Neon Serverless PostgreSQL to store user info and session detail
-* **ORM***: [Prisma ORM](https://www.prisma.io/) for database interactions
+* **ORM**: [Prisma ORM](https://www.prisma.io/) for database interactions
 * **Deployment Region**: US East (Ohio)
 
-**Userbase:**
+### Userbase:
 * **Daily Active Users.** 80,000 users/day, implying a consistent volume of read queries. With a global, consumer-oriented user base, traffic is evenly distributed with no distinct peaks or dormant periods.
 * **Account creation.** Average of 3-5 sing-ups per hour, totally 120 new accounts per day. This gives you an idea of the number of write operations to user table in the database for user authentication.
-* **User activity.** Each user's ssage is capped at 5 generations per month. This includes logging IDs of generated photos and the incremental number of generations, which are written to the relevant tables.
+* **User activity.** Each user's usage is capped at 5 generations per month. This includes logging IDs of generated photos and the incremental number of generations, which are written to the relevant tables.
 
 <Admonition type="note">
 Given the high number of connections used by this application, connection pooling is essential. Also, since the database connection is managed through Prisma, the datbase connection string also requires the addition of `?pgbouncer=true` for proper performance. 
 </Admonition>
 
-**Compute, storage, data write and transfer:**
+### Compute, storage, data write and transfer:
 
-* **Compute time.** The applciation is active for nearly 24 hours each day. The average daily compute usage 23.94 GB, totally 718.35 GB for the sample month. This indicates steady traffic with low volume per user.
-* **Written data.** This metric indicates the volume of data actively written to database storage. The daily average 0.15 GB, resulting in a total of 4.4 GB for the month.
+* **Compute time.** The appliciation is active for nearly 24 hours each day. The average daily compute usage is 23.94 GB, totally 718.35 GB for the sample month. This indicates steady traffic with low volume per user.
+* **Written data.** This metric shows the volume of data actively written to database storage. The daily average 0.15 GB, resulting in a total of 4.4 GB for the month.
 * **Data transfer.** This refers to the amount of data transferred out of Neon. Daily average is 0.09 GB with a monthly total of 2.7 GB.
 
 ## Consumption breakdown for the month
@@ -41,6 +41,8 @@ This graph shows steady CPU usage for the month, along with low data storage and
 
 ![Sample billing graph](/docs/introduction/billing_sample_graph.png)
 
+Here are the daily averages and monthly totals for the 3 key metrics Neon uses to calculate your bill.
+
 | Metric          | Daily Average | Monthly Total |
 |-----------------|---------------|---------------|
 | Compute Time    | 23.94 GB      | 718.35 GB     |
@@ -48,6 +50,8 @@ This graph shows steady CPU usage for the month, along with low data storage and
 | Data Transfer   | 0.09 GB       | 2.7 GB        |
 
 ## Bill for the month
+
+This table shows what the billing costs might look like with billing rates set to the region US-East (Ohio).
 
 | Metric              | Month    | Rate     | Amount    |
 |---------------------|----------|----------|-----------|
