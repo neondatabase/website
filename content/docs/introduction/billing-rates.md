@@ -4,7 +4,7 @@ enableTableOfContents: true
 subtitle: Billing rates by region
 ---
 
-## Billing rates
+Current billing rates for all relevant metrics by region.
 
 | Cloud provider | Region                   | Billing metric  | Price     | Unit           |
 | :------------- | :----------------------- | :-------------- | :-------- | :------------- |
