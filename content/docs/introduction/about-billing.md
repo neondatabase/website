@@ -39,6 +39,6 @@ Find information about invoices, payment methods, and other actions around viewi
 
 <a href="/docs/introduction/manage-billing" description="Manage your monthly bill" icon="setup">Manage billing</a>
 
-<a href="/docs/introduction/billing-sample" description="See how billing breaks down for a sample project" icon="chart-bar">Sample projects/a>
+<a href="/docs/introduction/billing-sample" description="See how billing breaks down for a sample project" icon="chart-bar">Sample projects</a>
 
 </DetailIconCards>
