@@ -26,7 +26,7 @@ Consider a typical day for this high-traffic application. It attracts roughly 80
 * **User activity.** Each user's usage is capped at 5 generations per month. This includes logging IDs of generated photos and the incremental number of generations, which are written to the relevant tables.
 
 <Admonition type="note">
-Given the high number of connections used by this application, connection pooling is essential. Also, since the database connection is managed through Prisma, the datbase connection string also requires the addition of `?pgbouncer=true` for proper performance. 
+Given the high number of connections used by this application, [connection pooling](/docs/connect/connection-pooling) is essential. Also, since the database connection is managed through Prisma, the datbase connection string also requires the addition of [`?pgbouncer=true`](/docs/guides/prisma#use-connection-pooling-with-prisma) for proper performance. 
 </Admonition>
 
 ### Compute, storage, data write and transfer:
