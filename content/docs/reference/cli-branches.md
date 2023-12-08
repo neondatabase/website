@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-12-01T19:05:09.473Z'
+updatedOn: '2023-12-07T19:06:47.674Z'
 ---
 
 ## Before you begin
@@ -24,6 +24,7 @@ neonctl branches <subcommand> [options]
 |---------|------------------|
 | [list](#list)    | List branches    |
 | [create](#create)  | Create a branch |
+| [reset](#reset)   | Reset data to parent
 | [rename](#rename)   | Rename a branch |
 | [set-primary](#set-primary)   | Set a primary branch |
 | [add-compute](#add-compute)   | Add replica to a branch |
@@ -243,6 +244,38 @@ neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
 ```
 
 The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+
+### reset
+
+This command resets a child branch to the latest data from its parent.
+
+#### Usage
+
+```bash
+neonctl branches reset <id|name> --parent
+```
+`<id|name>` refers to the branch ID or branch name. You can use either one for this operation.
+
+`--parent` specifies the type of reset operation. Currently, Neon only supports reset from parent. This parameter is required for the operation to work. In the future, Neon might add support for other reset types: for example, rewinding a branch to an earlier period in time.
+
+#### Options
+
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `reset` subcommand supports this option:
+
+| Option        | Description | Type   | Required  |
+| ------------- | ----------- | ------ | :-----: |
+| --project-id  | Project ID  | string | Only if your Neon account has more than one project or context is not set|
+
+#### Example
+
+```bash
+neonctl branches reset mybranch --parent
+┌──────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                       │ Name        │ Primary │ Created At           │ Last Reset At        │
+├──────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-raspy-meadow-26349337 │ development │ false   │ 2023-11-28T19:19:11Z │ 2023-11-28T19:29:26Z │
+└──────────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
+```
 
 ### rename
 
