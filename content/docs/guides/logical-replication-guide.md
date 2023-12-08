@@ -5,17 +5,17 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-In this guide, you will learn how to enable logical replication in Neon, create publications, and configure subscribers to recieve replicated data.
+In this guide, you will learn how to enable logical replication in Neon, create a publication, and configure subscribers to recieve replicated data.
 
 ## Enable logical replication
 
 Neon's logical replication feature, which is currently in **Beta**, allows for replication of data to external subscribers. These subscribers might include platforms for operational data warehousing, analytical database services, real-time stream processing systems, messaging and event-streaming technologies, change data capture (CDC) ecosystems, data pipeline orchestrators, among others.
 
 <Admonition type="warning">
-Enabling logical replication results in a permanent modification of the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. This change increases the amount of data written to the WAL (Write-Ahead Logging), thereby leading to an increase in storage utilization. It's important to note that once the `wal_level` setting is changed to `logical`, it cannot be reverted.
+Enabling logical replication results in a permanent modification of the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. This change increases the amount of data written to the WAL (Write-Ahead Logging), which will increase your storage consumption. It's important to note that once the `wal_level` setting is changed to `logical`, it cannot be reverted.
 </Admonition>
 
-To enable the logical replication for your project:
+To enable the logical replication for your Neon project:
 
 1. Select your project in the Neon console.
 2. On the Neon **Dashboard**, select **Settings**.
@@ -52,7 +52,7 @@ CREATE PUBLICATION users_publication FOR TABLE users;
 This command creates a publication named `users_publication` which will include all changes to the users table.
 
 <Admonition type="note">
-In addition to creating a publication for a specific table, Postgres allows you to create a publication for all tables within your database by using CREATE PUBLICATION all_tables_publication FOR ALL TABLES;. This command is particularly useful when you need to replicate the entire database. Furthermore, PostgreSQL allows for fine-tuning your publications. For instance, you can create a publication for a subset of tables or configure publications to only replicate certain types of data changes, such as inserts, updates, or deletes. This level of customization ensures that your replication strategy aligns precisely with your data management and integration requirements.
+In addition to creating a publication for a specific table, Postgres allows you to create a publication for all tables within your database by using `CREATE PUBLICATION all_tables_publication FOR ALL TABLES;`. This command is particularly useful when you need to replicate the entire database. Furthermore, PostgreSQL allows for fine-tuning your publications. For instance, you can create a publication for a subset of tables or configure publications to only replicate certain types of data changes, such as inserts, updates, or deletes. This level of customization ensures that your replication strategy aligns precisely with your data management and integration requirements.
 </Admonition>
 
 With your publication created, you're now set to configure subscribers that will receive the data changes from this publication. These steps lay the groundwork for more complex replication setups and will be covered in subsequent topics.
@@ -65,14 +65,86 @@ In general, configuring a subscriber involves setting up a connection to the Neo
 
 Subscribers can range from other Postgres instances to a variety of data services and platforms, each serving different roles within your data infrastructure.
 
-The configuration process for each type of subscriber will have its differences. Below, you will find setup guides for various subscribers:
+The configuration process for each type of subscriber will have its differences. Below, you will find setup guides for different subscribers:
 
-- [Configuring PostgreSQL as a Subscriber](tbd): Steps to connect a standalone Postgres database to your Neon publication.
-- [Configuring Service A as a Subscriber](tbd): Instructions for integrating a data warehousing platform to synchronize with your Neon data changes.
-- [Configuring Service B as a Subscriber](tbd): How to connect real-time stream processing systems to receive updates from Neon.
-- [Configuring Service C as a Subscriber](tbd): Guidance on setting up scalable messaging and event-streaming service as a subscribers to your Neon publication.
+- [Configure PostgreSQL as a subscriber](#configure-potgresql-as-a-subscriber): Steps to connect a standalone Postgres database to your Neon publication.
+- [Configure Service A as a Subscriber](tbd): Instructions for integrating a data warehousing platform to synchronize with your Neon data changes.
+- [Configure Service B as a Subscriber](tbd): How to connect real-time stream processing systems to receive updates from Neon.
+- [Configure Service C as a Subscriber](tbd): Guidance on setting up scalable messaging and event-streaming service as a subscribers to your Neon publication.
 
-These resources are designed to provide you with the necessary instructions to expand your data's reach, ensuring that regardless of where your data needs to go, you have the knowledge and tools to get it there effectively.
+### Configure PotgreSQL as a subscriber
+
+This section describes how to connect a standalone Postgres database to your Neon database publication.
+
+### Prerequisites
+
+- A separate Postgres instance ready to act as the subscriber. This must be a Postgres instance other than Neon, such as a local PostgreSQL installation. Currently, a Neon database only be defined as a publisher, not a subscriber.
+- The PostgreSQL version of the subscriber should be compatible with the publisher. The primary (publishing) server must be of the same or a higher version than the replica (subscribing) server. For example, you can replicate from PostgreSQL 14 to 16, but not from 16 to 14.
+
+### Create the subscription
+
+1. Use `psql` or another PostgreSQL client to connect to your subscriber Postgres database (a Postgres database other than Neon).
+2. Create the subscription using the using the `CREATE SUBSCRIPTION` command. This example creates a subscription for user table publication (`users_publication`) created above, in [Create a publication](#create-publications).
+
+    ```sql
+    CREATE SUBSCRIPTION users_subscription 
+    CONNECTION 'postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname' 
+    PUBLICATION users_publication;
+    ```
+
+    - `subscription_name`: A name you choose for the subscription.
+    - `connection_string`: Contains the connection string for connecting to your Neon database, where you defined the publication.
+    - `publication_name`: The name of the publication you created on your Neon database.
+
+3. Verify the subscription was created by running the following command: 
+
+    ```sql
+    SELECT * FROM pg_stat_subscription;
+    ```
+
+    The subscription (`users_subscription` in this example) should be listed, confirming that that your subscription has been successfully created.
+
+### Test the replication
+
+Testing your PostgreSQL logical replication setup is crucial to ensure that the data is being replicated correctly from the publisher to the subscriber. 
+
+1. First, you need to generate some changes in the users table on the publisher database to see if these changes are replicated to the subscriber.
+
+2. Connect to your publisher database using psql or another PostgreSQL client.
+
+3. Perform an `INSERT` or `UPDATE` operation. For example:
+
+  ```sql
+  -- Insert a new user
+  INSERT INTO users (username, email) VALUES ('new_user', 'new_user@example.com');
+
+  -- Update an existing user
+  UPDATE users SET email = 'updated_email@example.com' WHERE username = 'existing_user';
+  ```
+
+2. After making changes, query the users table on the publisher to confirm your `INSERT` or `UPDATE`:
+
+  ```sql
+  SELECT * FROM users;
+  ```
+
+  Note the changes you made for comparison with the subscriber's data.
+
+3. Now, connect to your subscriber database and query the users table on the subscriber:
+
+  ```sql
+  SELECT * FROM users;
+  ```
+
+  Compare the results with what you observed on the publisher.
+
+4. On the subscriber, you can also check the status of the replication:
+
+  ```sql
+  SELECT * FROM pg_stat_subscription;
+  ```
+
+  Look for the `last_msg_receive_time` or similar fields to confirm that the subscription is active and receiving data.
 
 ## Monitor logical replication
 
@@ -88,11 +160,11 @@ SELECT * FROM pg_stat_replication;
 
 This query returns a table with multiple columns providing details such as:
 
-- pid: The process ID of the walsender process.
-- state: The current state of the replication, e.g., streaming, backup, or catchup.
-- application_name: The name of the replication application.
-- sync_state: Synchronization state of the standby servers.
-- replication_lag: The time difference between the last WAL entry received and the last WAL entry applied.
+- `pid`: The process ID of the walsender process.
+- `state`: The current state of the replication, e.g., streaming, backup, or catchup.
+- `application_name`: The name of the replication application.
+- `sync_state`: Synchronization state of the standby servers.
+- `replication_lag`: The time difference between the last WAL entry received and the last WAL entry applied.
 
 ### Monitoring replication slots
 
