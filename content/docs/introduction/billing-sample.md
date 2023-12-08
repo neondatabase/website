@@ -1,45 +1,45 @@
 ---
 title: Sample project billing
 enableTableOfContents: true
-subtitle: Learn from a sample project how billing works in Neon
+subtitle: Practical example of how Neon pricing is calculated
 ---
 
 ## Generative AI example
 
-To give you a clearer sense of how billing works for Neon Pro users, consider this real-world example of a simple image generation app that leverages Neon as the serverless database for storing information about its users: user authentication details and records of how many images each user generates. This example of how usage breaks down in a given monthly billing period can help you understand the nuances of billing, based on actual usage scenarios.
+To give you a clear sense of how billing works for Neon Pro users, let's explore a real-world example. Consider a simple image generation app that leverages Neon as the serverless database for storing user authentication detials and recrods of image generation per user. Analyzing this usage in a monthly billing period can give you understand the nuances of Neon billing based on actual scenarios.
 
 ## Overview: Costs by usage
 
-To illustrate typical costs, consider a typical day for this heavily trafficked application. With roughly 80K visitors a day, or up to 450K in a week, and with 3-5 people creating an account every hour, and generation actions capped at 5 per month, this gives you a sense of typical database usage.
+Consider a typical day for this high-traffic application. It attracts roughly 80K visitors daily, or up to 450K weekly. With 3-5 new accounts created hourly and generation actions capped at 5 per month, this gives you a sense of the steady activity hitting the database.
 
 ## Assumptions
 
 **Tech stack:**
-* [NextAuth.JS](https://next-auth.js.org/) for authentication with OAuth
-* Neon Serverless PostGres to store user info and session detail
-* [Prisma ORM](https://www.prisma.io/) to handle the database interaction
-* Deployment region **US East (Ohio)** 
+* **Authentication**: [NextAuth.JS](https://next-auth.js.org/) for authentication with OAuth
+* **Database**: Neon Serverless PostgreSQL to store user info and session detail
+* **ORM***: [Prisma ORM](https://www.prisma.io/) for database interactions
+* **Deployment Region**: US East (Ohio)
 
 **Userbase:**
-* **Daily Active Users.** 80,000 users per day represents means a steady volume of read queries. With a global, consumer-oriented user base, there are no peak or dormant usage periods.
-* **Account creation.** Sign-ups average 3-5 people per hour, or 120 new accounts per day, which gives you an idea of the number of writes to user table in the database for user auth.
-* **User activity.** Usage is capped at 5 generations per month. Usage details like IDs of generated photos and incremental number of generations are also written to the relevant tables.
+* **Daily Active Users.** 80,000 users/day, implying a consistent volume of read queries. With a global, consumer-oriented user base, traffic is evenly distributed with no distinct peaks or dormant periods.
+* **Account creation.** Average of 3-5 sing-ups per hour, totally 120 new accounts per day. This gives you an idea of the number of write operations to user table in the database for user authentication.
+* **User activity.** Each user's ssage is capped at 5 generations per month. This includes logging IDs of generated photos and the incremental number of generations, which are written to the relevant tables.
 
 <Admonition type="note">
-With the high number of connections used by this application, connection pooling is required. And since the database connection is managed through Prisma, the datbase connection string also required `?pgbouncer=true`. 
+Given the high number of connections used by this application, connection pooling is essential. Also, since the database connection is managed through Prisma, the datbase connection string also requires the addition of `?pgbouncer=true` for proper performance. 
 </Admonition>
 
 **Compute, storage, data write and transfer:**
 
-* **Compute time.** Compute time is active for close to a full 24 hours per day. Average per day is 23.94 GB with a monthly total of 718.35 GB. This indicates steady traffic but low volume per user.
-* **Written data. **Indicates how much data is actively written to database storage. Average per day is 0.15 GB with a monthly total of 4.4 GB.
-* **Data transfer.** The amount of data transferred out of Neon. Daily average is 0.09 GB with a monthly total of 2.7 GB.
+* **Compute time.** The applciation is active for nearly 24 hours each day. The average daily compute usage 23.94 GB, totally 718.35 GB for the sample month. This indicates steady traffic with low volume per user.
+* **Written data.** This metric indicates the volume of data actively written to database storage. The daily average 0.15 GB, resulting in a total of 4.4 GB for the month.
+* **Data transfer.** This refers to the amount of data transferred out of Neon. Daily average is 0.09 GB with a monthly total of 2.7 GB.
 
 ## Consumption breakdown for the month
 
-This graph shows steady using for the month, as well as low data write and transfer rates.
+This graph shows steady CPU usage for the month, along with low data storage and transfer rates.
 
-![Sample billing graph](/docs/introduction/billing-sample-graph.png)
+![Sample billing graph](/docs/introduction/billing_sample_graph.png)
 
 | Metric          | Daily Average | Monthly Total |
 |-----------------|---------------|---------------|
