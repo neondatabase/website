@@ -10,11 +10,11 @@ To give you a clearer sense of how billing works for Neon Pro users, let's explo
 
 ## Overview: Costs by usage
 
-Consider a typical day for this high-traffic application. It attracts roughly 80K visitors daily, or up to 450K weekly. the application receives a steady influx of new users, with 3-5 new accounts created efvery hour. Each user's activity is capped at 5 images per month. This pattern of interaction and account creation gives you a sense of the steady but low volume of activity hitting the database.
+This high-traffic application attracts roughly 80K visitors daily, up to 450K weekly. It receives a steady influx of new users, with 3-5 new accounts created every hour. Each user's activity is capped at 5 images per month. This pattern of interaction and account creation gives you a sense of the steady volume of activity hitting the database.
 
 ## Assumptions
 
-### Tech stack:
+### Tech stack (user management portion of the app):
 * **Authentication**: [NextAuth.JS](https://next-auth.js.org/) for authentication with OAuth
 * **Database**: Neon Serverless PostgreSQL to store user info and session detail
 * **ORM**: [Prisma ORM](https://www.prisma.io/) for database interactions
