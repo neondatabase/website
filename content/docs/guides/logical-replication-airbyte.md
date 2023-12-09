@@ -1,17 +1,17 @@
 ---
-title: Get started with logical replication
-subtitle: Learn how to enable Neon's logical replication feature and configure subscribers
+title: Replicate data with Airbyte
+subtitle: Learn how to replicate data from Neon with Airbyte
 enableTableOfContents: true
 isDraft: true
 ---
 
-In this guide, you will learn how to enable logical replication in Neon, create a publication, and configure subscribers to recieve replicated data.
+In this guide, you will learn how to enable logical replication in Neon, create a publication, and configure an external Postgres database as a subscriber to recieve replicated data.
 
 ## Enable logical replication
 
-Neon's logical replication feature, which is currently in **Beta**, allows for replication of data to external subscribers. These subscribers might include platforms for operational data warehousing, analytical database services, real-time stream processing systems, messaging and event-streaming technologies, change data capture (CDC) ecosystems, data pipeline orchestrators, among others.
+Neon's logical replication feature, which is currently in **Beta**, allows for replication of data to external subscribers. These subscribers might include an external Postgres database, platforms for operational data warehousing, analytical database services, real-time stream processing systems, messaging and event-streaming technologies, change data capture (CDC) ecosystems, data pipeline orchestrators, among others.
 
-<Admonition type="warning">
+<Admonition type="important">
 Enabling logical replication permanently modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. This change increases the amount of data written to the WAL (Write-Ahead Logging), which will increase your storage consumption. It's important to note that once the `wal_level` setting is changed to `logical`, it cannot be reverted.
 </Admonition>
 
@@ -24,7 +24,7 @@ To enable the logical replication for your Neon project:
 
 After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. These processes are the same as those you would perform for a standalone Postgresql environment. 
 
-## Create publications
+## Create a publication
 
 Publications in PostgreSQL are a fundamental part of logical replication. They allow you to specify a set of database changes that can be replicated to subscribers. For Neon users, setting up a publication is an essential step towards synchronizing data with other systems. This section walks you through creating a publication for a `users` table.
 
@@ -52,26 +52,17 @@ In addition to creating a publication for a specific table, Postgres allows you 
 
 With your publication created, you're now ready to configure subscribers that will receive the data changes from this publication.
 
-## Configure subscribers
+## Configure PotgreSQL as a subscriber
 
-Subscribers are destinations that receive data changes from your publications. 
+A subscriber is a destination that receive data changes from your publications. 
 
-Subscribers can range from other Postgres instances to a variety of data services and platforms, each serving different roles within your data infrastructure.
-
-The configuration process for each type of subscriber will have its differences. Below, you will find setup guides for different types subscribers:
-
-- [Configure PostgreSQL as a subscriber](#configure-potgresql-as-a-subscriber): Steps to connect a standalone Postgres database to your Neon publication.
-- [Configure Service A as a Subscriber](tbd): Instructions for integrating a data warehousing platform to synchronize with your Neon data changes.
-- [Configure Service B as a Subscriber](tbd): How to connect real-time stream processing systems to receive updates from Neon.
-- [Configure Service C as a Subscriber](tbd): Guidance on setting up scalable messaging and event-streaming service as a subscribers to your Neon publication.
-
-### Configure PotgreSQL as a subscriber
+Subscribers can range from external Postgres instances to a variety of data services and platforms, each serving different roles within your data infrastructure.
 
 This section describes how to configure a subscription on a standalone Postgres instance to a publication on defined on your Neon database. After the subscription is defined, the destination Postgres instance will able to receive data changes from the publication defined on your Neon database.
 
 ### Prerequisites
 
-- You have created a publication on your Neon database, as described in [Create publications](#create-publications).
+- You have created a publication on your Neon database, as described in [Create a publication](#create-a-publication).
 - A separate Postgres instance ready to act as the subscriber. This must be a Postgres instance other than Neon, such as a local PostgreSQL installation. Currently, a Neon database cannot be defined as a subscriber.
 - The PostgreSQL version of the subscriber should be compatible with the publisher. The primary (publishing) server must be of the same or a higher version than the replica (subscribing) server. For example, you can replicate from PostgreSQL 14 to 16, but not from 16 to 14. Neon supports Postgres 14, 15, and 16. The Postgres version is deifned when you create a Neon project.
 
@@ -174,7 +165,7 @@ If you have not already, you'll need to configure your destination (subscriber) 
 To create a subscription:
 
 1. Use `psql` or another SQL client to connect to your subscriber Postgres database (a Postgres instance other than Neon).
-2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement. This example creates a subscription for the `user` table publication (`users_publication`) that you created previously, in [Create publications](#create-publications).
+2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement. This example creates a subscription for the `user` table publication (`users_publication`) that you created previously, in [Create a publication](#create-a-publications).
 
     ```sql
     CREATE SUBSCRIPTION users_subscription 

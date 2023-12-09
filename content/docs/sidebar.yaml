@@ -128,6 +128,13 @@
               slug: guides/branch-refresh
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
+        - title: Logical replication
+          slug: guides/logical-replication-intro
+          items:
+            - title: Replicate to Postgres
+              slug: guides/logical-replication-postgres
+            - title: Replicate with Airbyte
+              slug: guides/logical-replication-airbyte
         - title: Project sharing
           slug: guides/project-sharing-guide
         - title: Read replicas
