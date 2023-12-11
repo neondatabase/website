@@ -87,7 +87,6 @@ To reset a role's password:
 5. Select **Reset password**.
 6. On the confirmation dialog, click **Sure, reset**. A reset password dialog is displayed with your new password.
 
-
 <Admonition type="note">
 Resetting a password in the Neon Console resets the password to a generated value. To set your own password value, you can reset the password using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor) with the following syntax:
 
