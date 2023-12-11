@@ -22,7 +22,7 @@ This high-traffic application attracts roughly 80K visitors daily, up to 450K we
 
 ### Userbase:
 * **Daily Active Users.** 80,000 users/day, implying a consistent volume of read queries. With a global, consumer-oriented user base, traffic is evenly distributed with no distinct peaks or dormant periods.
-* **Account creation.** Average of 3-5 sing-ups per hour, totally 120 new accounts per day. This gives you an idea of the number of write operations to user table in the database for user authentication.
+* **Account creation.** Average of 3-5 sign-ups per hour, totally 120 new accounts per day. This gives you an idea of the number of write operations to the database for user authentication.
 * **User activity.** Each user's usage is capped at 5 generations per month. This includes logging IDs of generated photos and the incremental number of generations, which are written to the relevant tables.
 
 <Admonition type="note">
@@ -31,7 +31,8 @@ Given the high number of connections used by this application, [connection pooli
 
 ### Compute, storage, data write and transfer:
 
-* **Compute time.** This metrics refers to the size of CPU required to handle your interactions plus the length of time your compute is active. The average daily compute usage is 23.94 GB, totally 718.35 GB for the sample month. This indicates steady but low intensity database usage.
+* **Compute time.** This metric refers to the size of CPU required to handle your interactions plus the length of time your compute is active. The average daily compute usage is 23.94 GB, totally 718.35 GB for the sample month. This indicates steady but low intensity database usage.
+* **Storage size.** The amount of storage needed for your project billed. (need this info)
 * **Written data.** This metric shows the volume of data actively written to database storage. The daily average of 0.15 GB results in a total of 4.4 GB for the month.
 * **Data transfer.** This refers to the amount of data transferred out of Neon. Daily average is 0.09 GB with a monthly total of 2.7 GB.
 
