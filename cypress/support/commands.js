@@ -29,13 +29,3 @@ Cypress.Commands.add('formErrorSubmit', () => {
     }
   ).as('formErrorSubmit');
 });
-
-Cypress.Commands.add('stubSegment', () => {
-  cy.window().then((win) => {
-    const dummyAnalytics = {
-      track: cy.stub().as('trackEvent'),
-      // Add other Segment methods you want to stub
-    };
-    win.analytics = dummyAnalytics;
-  });
-});
