@@ -131,10 +131,14 @@
         - title: Logical replication
           slug: guides/logical-replication-intro
           items:
-            - title: Replicate to Postgres
-              slug: guides/logical-replication-postgres
-            - title: Replicate with Airbyte
+            - title: Airbyte
               slug: guides/logical-replication-airbyte
+            - title: Confluent
+              slug: guides/logical-replication-confluent
+            - title: Materialize
+              slug: guides/logical-replication-materialize
+            - title: Postgres
+              slug: guides/logical-replication-postgres
         - title: Project sharing
           slug: guides/project-sharing-guide
         - title: Read replicas
