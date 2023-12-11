@@ -5,226 +5,61 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-In this guide, you will learn how to enable logical replication in Neon, create a publication, and configure an external Postgres database as a subscriber to recieve replicated data.
+In this guide, you will learn how to how to replicate data from Neon with Airbyte.
 
-## Enable logical replication
+## Set up a connector
 
-Neon's logical replication feature, which is currently in **Beta**, allows for replication of data to external subscribers. These subscribers might include an external Postgres database, platforms for operational data warehousing, analytical database services, real-time stream processing systems, messaging and event-streaming technologies, change data capture (CDC) ecosystems, data pipeline orchestrators, among others.
+### Step 1: Create a dedicated read-only Postgres user
 
-<Admonition type="important">
-Enabling logical replication permanently modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. This change increases the amount of data written to the WAL (Write-Ahead Logging), which will increase your storage consumption. It's important to note that once the `wal_level` setting is changed to `logical`, it cannot be reverted.
-</Admonition>
+These steps create a dedicated read-only user for replicating data. Alternatively, you can use an existing Postgres user in your database.
 
-To enable the logical replication for your Neon project:
+The following commands will create a new user:
 
-1. Select your project in the Neon console.
-2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Replication**.
-4. Click **Enable**.
+```sql
+CREATE USER <user_name> PASSWORD 'your_password_here';
+```
 
-After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. These processes are the same as those you would perform for a standalone Postgresql environment. 
+Provide this user with read-only access to relevant schemas and tables. Re-run this command for each schema you expect to replicate data from:
 
-## Create a publication
+```sql
+GRANT USAGE ON SCHEMA <schema_name> TO <user_name>;
+GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <user_name>;
+ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <user_name>;
+```
 
-Publications in PostgreSQL are a fundamental part of logical replication. They allow you to specify a set of database changes that can be replicated to subscribers. For Neon users, setting up a publication is an essential step towards synchronizing data with other systems. This section walks you through creating a publication for a `users` table.
+### Step 2: Create a new Postgres source in Airbyte UI
 
-1. Create the `users` table in your Neon database. You can do this via the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or by connecting to your Neon database from an SQL client such as [psql](/docs/connect/query-with-psql-editor).
+From your Airbyte Cloud or Airbyte Open Source account, select Sources from the left navigation bar, search for Postgres, then create a new Postgres source.
 
-    ```sql
-    CREATE TABLE users (
-      id SERIAL PRIMARY KEY,
-      username VARCHAR(50) NOT NULL,
-      email VARCHAR(100) NOT NULL
-    );
-    ```
+To fill out the required information:
 
-2. To create a publication for the `users` table.
+1. Enter the hostname, port number, and name for your Postgres database. You can obtain these details from your Neon Connection string, which you'll find in the **Connection Details** widget on the Dashboard of your Neon project.
+2. You may optionally opt to list each of the schemas you want to sync. These are case-sensitive, and multiple schemas may be entered. By default, `public` is the only selected schema.
+3. Enter the username and password you created in Step 1.
+4. Select an SSL mode. You will most frequently choose require or verify-ca. Both of these always require encryption. verify-ca also requires certificates from your Postgres database. See here to learn about other SSL modes and SSH tunneling.
+5. Select Standard (xmin) from available replication methods. This uses the xmin system column to reliably replicate data from your database.
+If your database is particularly large (> 500 GB), you will benefit from configuring your Postgres source using logical replication (CDC).
 
-    ```sql
-    CREATE PUBLICATION users_publication FOR TABLE users;
-    ```
+Step 3: (Airbyte Cloud Only) Allow inbound traffic from Airbyte IPs.
+If you are on Airbyte Cloud, you will always need to modify your database configuration to allow inbound traffic from Airbyte IPs. You can find a list of all IPs that need to be allowlisted in our Airbyte Security docs.
 
-This command creates a publication named `users_publication` which will include all changes to the `users` table in your replication stream.
+Now, click Set up source in the Airbyte UI. Airbyte will now test connecting to your database. Once this succeeds, you've configured an Airbyte Postgres source!
 
-<Admonition type="note">
-In addition to creating a publication for a specific table, Postgres allows you to create a publication for all tables within your database by using `CREATE PUBLICATION all_tables_publication FOR ALL TABLES` syntax. This command is particularly useful when you need to replicate the entire database. Furthermore, PostgreSQL allows for fine-tuning your publications. For instance, you can create a publication for a subset of tables or configure publications to only replicate certain types of data changes, such as inserts, updates, or deletes. This level of customization ensures that your replication strategy aligns precisely with your data management and integration requirements.
-</Admonition>
+## Step 3: (Airbyte Cloud Only) Allow inbound traffic from Airbyte IPs.
 
-With your publication created, you're now ready to configure subscribers that will receive the data changes from this publication.
+If you are on Airbyte Cloud, and you are using the IP Allow feature in None to limit IP address that can connect to Neon, you will always to allow inbound traffic from Airbyte IPs. You can find a list of all IPs that need to be allowlisted in our [Airbyte Security docs](https://docs.airbyte.com/operating-airbyte/security). For information about configuring allowed IPs in Neon, see [Configure IP Allow]().
 
-## Configure PotgreSQL as a subscriber
+Now, click **Set up source** in the Airbyte UI. Airbyte will now test connecting to your database. Once this succeeds, you've configured an Airbyte Postgres source!
 
-A subscriber is a destination that receive data changes from your publications. 
+## Step 4: Configure your Postgres source using CDC
 
-Subscribers can range from external Postgres instances to a variety of data services and platforms, each serving different roles within your data infrastructure.
+After successfully creating a source, these are the additional steps required to configure your Postgres source using CDC:
 
-This section describes how to configure a subscription on a standalone Postgres instance to a publication on defined on your Neon database. After the subscription is defined, the destination Postgres instance will able to receive data changes from the publication defined on your Neon database.
+Provide additional REPLICATION permissions to read-only user
+Enable logical replication in Neon
+Create a replication slot on your Postgres database
+Create publication and replication identities for each Postgres table
+Enable CDC replication in the Airbyte UI
 
-### Prerequisites
-
-- You have created a publication on your Neon database, as described in [Create a publication](#create-a-publication).
-- A separate Postgres instance ready to act as the subscriber. This must be a Postgres instance other than Neon, such as a local PostgreSQL installation. Currently, a Neon database cannot be defined as a subscriber.
-- The PostgreSQL version of the subscriber should be compatible with the publisher. The primary (publishing) server must be of the same or a higher version than the replica (subscribing) server. For example, you can replicate from PostgreSQL 14 to 16, but not from 16 to 14. Neon supports Postgres 14, 15, and 16. The Postgres version is deifned when you create a Neon project.
-
-### Configure the destination Postgres instance for replication
-
-If you have not already, you'll need to configure your destination (subscriber) Postgres instance for logical replication, following these steps:
-
-1. Modify `postgresql.conf`, which is typically located in the PostgreSQL data directory. Update the `postgresql.conf` file with the following configurations:
-
-  - `wal_level`: Set the value to logical to enable logical decoding, which is essential for logical replication.
-
-      ```ini
-      wal_level = logical
-      ```
-  - `max_replication_slots`: Increase this to the number of subscriptions you intend to have, allowing for a dedicated slot for each replication connection. For exmaple, if you plan to have 10 replication connections:
-
-      ```ini
-      max_replication_slots = 10
-      ```
-
-  - `max_wal_senders`: Set this to the number of concurrent WAL sender processes, which should accommodate all replication and backup processes.
-
-      ```ini
-      max_wal_senders = 10
-      ```
-
-2. Restart your Postgres instance to apply these configuration changes. How to restart may differ based on your environment and how you installed Postgres.
-
-    <Tabs labels={["Systemd", "Windows", "MacOS", "Docker", "Binary"]}>
-
-    <TabItem>
-
-    ```bash
-    sudo systemctl restart postgresql
-    ```
-    </TabItem>
-
-    <TabItem>
-
-    ```bash
-    net stop postgresql-x64-<version> && net start postgresql-x64-<version>
-    # Replace <version> with your installed PostgreSQL version
-    ```
-    </TabItem>
-
-    <TabItem>
-
-    ```bash
-    brew services restart postgresql
-    ```
-    </TabItem>
-
-    <TabItem>
-
-    ```bash
-    docker restart <container_name>
-    # Replace <container_name> with the name or ID of your PostgreSQL Docker container
-    ```
-    </TabItem>
-
-    <TabItem>
-
-    ```bash
-    pg_ctl restart -D /path/to/data/directory
-    # Replace /path/to/data/directory with your Postgres data directory path
-    ```
-
-    </TabItem>
-
-    </Tabs>
-
-3. Configure `pg_hba.conf`, which is located in the same directory as `postgresql.conf`, to allow replication connections from your Neon database host:
-
-    You can set the IP address to `0.0.0.0` to allow connections from any IP. However, this is not recommended for production environments due to security concerns.
-
-    ```ini
-    host replication <replication_username> 0.0.0.0/0 md5
-    ```
-
-    It's safer to specify the IP address of your publishing Neon database. You can use a tool like `nslookup` to find the IP address of your Neon host, which you can obtain from your Neon connection string. For example:
-
-    ```bash
-    nslookup ep-cool-darkness-123456.us-east-2.aws.neon.tech
-    ```
-
-    Then, update `pg_hba.conf` with that IP address:
-
-    ```ini
-    host replication <replication_username> 192.0.2.1/32 md5
-    ```
-
-    Apply the changes by reloading the PostgreSQL configuration:
-
-    ```sql
-    SELECT pg_reload_conf();
-    ```
-
-### Create the subscription
-
-To create a subscription:
-
-1. Use `psql` or another SQL client to connect to your subscriber Postgres database (a Postgres instance other than Neon).
-2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement. This example creates a subscription for the `user` table publication (`users_publication`) that you created previously, in [Create a publication](#create-a-publications).
-
-    ```sql
-    CREATE SUBSCRIPTION users_subscription 
-    CONNECTION 'postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname' 
-    PUBLICATION users_publication;
-    ```
-
-    - `subscription_name`: A name you choose for the subscription.
-    - `connection_string`: The connection string for connecting to your Neon database, where you defined the publication.
-    - `publication_name`: The name of the publication you created on your Neon database.
-
-3. Verify the subscription was created by running the following command: 
-
-    ```sql
-    SELECT * FROM pg_stat_subscription;
-    ```
-
-    The subscription (`users_subscription`) should be listed, confirming that that your subscription has been successfully created.
-
-### Test the replication
-
-Testing your logical replication setup ensures that the data is being replicated correctly from the publisher to the subscriber; in this case, from your Neon database to your standalone Postgres instance.
-
-First, you need to generate some changes in the users table on the publisher database to see if these changes are replicated to the subscriber. To do so:
-
-1. Connect to your Neon database (the publisher) and perform an `INSERT` operation. For example:
-
-    ```sql
-    -- Insert a new user
-    INSERT INTO users (username, email) VALUES ('new_user', 'new_user@example.com');
-    ```
-
-2. After making changes, query the `users` table on the publisher to confirm your `INSERT`:
-
-    ```sql
-    SELECT * FROM users;
-    ```
-
-  Note the changes you made for comparison with the subscriber's data.
-
-3. Now, connect to your subscriber database on your standalone Postgres instance:
-
-    ```bash
-    psql -h [server_IP_or_hostname] -U [username] -d [database] -W
-    ```
-
-4. Query the `users` table:
-
-    ```sql
-    SELECT * FROM users;
-    ```
-
-  Compare the results with what you observed on the publisher.
-
-4. On the subscriber, you can also check the status of the replication:
-
-  ```sql
-  SELECT * FROM pg_stat_subscription;
-  ```
-
-  Look for the `last_msg_receive_time` to confirm that the subscription is active and receiving data.
+### Step 1: Provide additional permissions to read-only user
 

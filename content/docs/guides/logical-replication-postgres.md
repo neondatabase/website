@@ -1,6 +1,6 @@
 ---
-title: Replicate data to Postgres
-subtitle: Learn how to replicate data from Neon to an external Postgres database
+title: Replicate data with Airbyte
+subtitle: Learn how to replicate data from Neon with Airbyte
 enableTableOfContents: true
 isDraft: true
 ---
