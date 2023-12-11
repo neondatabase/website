@@ -1,7 +1,6 @@
 describe('Newsletter Subscribe Form', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.stubSegment();
   });
 
   it('allows users to subscribe to newsletter', () => {

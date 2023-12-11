@@ -1,7 +1,6 @@
 describe('Blog Index Subscribe Form', () => {
   beforeEach(() => {
     cy.visit('/blog');
-    cy.stubSegment();
 
     cy.getByData('blog-subscribe-form').should('exist');
   });

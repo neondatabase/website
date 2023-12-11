@@ -1,7 +1,6 @@
 describe('Contact Form', () => {
   beforeEach(() => {
     cy.visit('/contact-sales');
-    cy.stubSegment();
   });
 
   it('allows users to contact sales', () => {

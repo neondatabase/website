@@ -1,7 +1,6 @@
 describe('Apply Form', () => {
   beforeEach(() => {
     cy.visit('/partners');
-    cy.stubSegment();
   });
 
   it('allows users to apply to become a partner', () => {
