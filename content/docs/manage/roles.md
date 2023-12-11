@@ -94,7 +94,7 @@ Resetting a password in the Neon Console resets the password to a generated valu
 ALTER USER user_name WITH PASSWORD 'new_password';
 ```
 
-For password requirements, see [Manage roles with SQL](#manage-roles-with-sql).
+For password requirements, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 </Admonition>
 
 ## Manage roles with the Neon CLI
