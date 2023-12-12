@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Neon's logical replication feature, which is currently in **Beta**, allows for replication of data to external subscribers. With Airbyte, you can deifne a Neon database as a replication source and replicate data to any of Airbyte's over 40 supported destinations.  
+Neon's logical replication feature, which is currently in **Beta**, allows for replication of data to external subscribers. With Airbyte, you can define a Neon database as a replication source and replicate data to any of Airbyte's over 40 supported destinations.  
 
 ## Enable logical replication in Neon
 
@@ -129,7 +129,7 @@ ALTER USER <user_name> REPLICATION;
 
 Airbyte requires a replication slot configured only for its use. Only one source should be configured that uses this replication slot.
 
-For this step, Airbyte requires use of the pgoutput plugin. To create a replication slot called airbyte_slot using pgoutput, run as the user with the newly granted REPLICATION role:
+For this step, Airbyte requires use of the `pgoutput` plugin. To create a replication slot called `airbyte_slot` using pgoutput, run as the user with the newly granted `REPLICATION` role:
 
 ```sql
 SELECT pg_create_logical_replication_slot('airbyte_slot', 'pgoutput');
