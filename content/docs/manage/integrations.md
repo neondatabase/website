@@ -9,31 +9,30 @@ The **Integrations** page in the Neon Console provides a hub for managing third-
 
 When visiting the **Integrations** page in your console, you'll notice different categories:
 
-- **Available**: These are integrations available for you to add and use immediately.
-- **Coming soon**: These are the integrations that will be available in the near future.
-- **Request an integration**: An option for you to request new integrations.
+- **Add**: These are integrations available for you to add and use immediately.
+- **Request**: These are the integrations that will be available in the near future.
 
 ## Add integrations
 
-For integrations listed under the **Available** section, follow the provided **Steps to connect** link for instructions.
+For integrations listed under the **Add** section, follow the provided instructions.
 
 ## Express interest in upcoming integrations
 
-For integrations listed under **Coming soon**, you have the option to express your interest. This helps the Neon team gauge user demand and prioritize integration rollouts.
+For integrations listed under **Request**, you have the option to express your interest. This helps the Neon team gauge user demand and prioritize integration rollouts.
 
 To express interest:
 
 1. Locate the integration you're interested in.
-2. Click the **Express interest** link.
+2. Click the **Request** link.
 3. Type your message and click **Yes, I'm interested**.
 
-## Request new integrations
+## Suggest new integrations
 
 If you can't find the integration you're looking for:
 
-1. Navigate to the **Request an integration** section of the page.
-2. Click the **Request integration** button.
+1. Navigate to the bottom of the page.
+2. Click the **Suggest** button in the **Suggest an integration** card.
 3. Fill out the necessary details for the integration you'd like to see added.
-4. Click **Request integration**.
+4. Click **Suggest integration**.
 
 The Neon team will review your request and get back to you.
