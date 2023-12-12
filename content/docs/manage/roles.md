@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2023-11-28T18:39:00.767Z'
+updatedOn: '2023-12-11T20:55:01.071Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a default Postgres role that takes its name from your Neon account (the email, GitHub, Google, or partner account that you registered with). This role owns the ready-to-use database (`neondb`) that is created in your Neon project's primary branch.
@@ -86,6 +86,16 @@ To reset a role's password:
 4. Select a branch to view roles in the branch.
 5. Select **Reset password**.
 6. On the confirmation dialog, click **Sure, reset**. A reset password dialog is displayed with your new password.
+
+<Admonition type="note">
+Resetting a password in the Neon Console resets the password to a generated value. To set your own password value, you can reset the password using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor) with the following syntax:
+
+```sql
+ALTER USER user_name WITH PASSWORD 'new_password';
+```
+
+For password requirements, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+</Admonition>
 
 ## Manage roles with the Neon CLI
 
