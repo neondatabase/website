@@ -10,7 +10,7 @@ To give you a clearer sense of how billing works for Neon Pro users, let's explo
 
 ## Overview: Costs by usage
 
-This high-traffic application attracts roughly 80K visitors daily, up to 450K weekly. It receives a steady influx of new users, with 3-5 new accounts created every hour. Each user's activity is capped at 5 images per month. This pattern of interaction and account creation gives you a sense of the steady volume of activity hitting the database.
+Roughly six months since launch, this high-traffic application attracts about 80K visitors daily, up to 450K weekly. It receives a steady influx of new users, with 3-5 new accounts created every hour. Each user's activity is capped at 5 images per month. This pattern of interaction and account creation gives you a sense of the steady volume of activity hitting the database. 
 
 ## Assumptions
 
@@ -32,7 +32,7 @@ Given the high number of connections used by this application, [connection pooli
 ### Compute, storage, data write and transfer:
 
 * **Compute time.** This metric refers to the size of CPU required to handle your interactions plus the length of time your compute is active. The average daily compute usage is 23.94 GB, totally 718.35 GB for the sample month. This indicates steady but low intensity database usage.
-* **Storage size.** The amount of storage needed for your project billed. (need this info)
+* **Storage size.** The amount of database storage currently used by your project. It includes the total volume of data across all branches plus the shared history. The database is now over 25 GiB and growing steadily with new written data.
 * **Written data.** This metric shows the volume of data actively written to database storage. The daily average of 0.15 GB results in a total of 4.4 GB for the month.
 * **Data transfer.** This refers to the amount of data transferred out of Neon. Daily average is 0.09 GB with a monthly total of 2.7 GB.
 
@@ -42,7 +42,7 @@ This graph shows steady CPU usage for the month, along with low data storage and
 
 ![Sample billing graph](/docs/introduction/billing_sample_graph.png)
 
-Here are the daily averages and monthly totals for the 3 key metrics that Neon uses to calculate your bill.
+Here are the daily averages and monthly totals for the 3 key usage metrics that Neon uses to calculate your bill, plus the total current storage costs.
 
 | Metric          | Daily Average | Monthly Total |
 |-----------------|---------------|---------------|
@@ -50,13 +50,18 @@ Here are the daily averages and monthly totals for the 3 key metrics that Neon u
 | Written Data    | 0.15 GB       | 4.4 GB        |
 | Data Transfer   | 0.09 GB       | 2.7 GB        |
 
+ Metric           | Start of billing period| End of billing period |
+|-----------------|---------------|---------------|
+| Data storage    | 22 GiB        | 26.4 GiB         |
+
 ## Bill for the month
 
 This table shows what the billing costs might look like with billing rates set to the region US-East (Ohio).
 
-| Metric              | Month    | Rate     | Amount    |
-|---------------------|----------|----------|-----------|
-| Compute Time Cost   | 718.35 GB| $0.102   | $73.27    |
-| Written Data Cost   | 4.4 GB   | $0.09600 | $0.42     |
-| Data Transfer Cost  | 2.7 GB   | $0.09000 | $0.24     |
-| **Total Bill**      |          |          | **$73.94**|
+| Metric              | Month      | Rate                  | Amount    |
+|---------------------|------------|-----------------------|-----------|
+| Compute Time Cost   | 718.35 GiB | $0.102 per GiB        | $73.27    |
+| Data Storage Cost   | 26.4 GiB   | $0.000164 per GiB-hour| $3.16
+| Written Data Cost   | 4.4 GiB    | $0.09600 per Gib      | $0.42     |
+| Data Transfer Cost  | 2.7 GiB    | $0.09000 per GiB      | $0.24     |
+| **Total Bill**      |            |                       | **$77.09**|
