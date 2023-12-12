@@ -92,6 +92,10 @@ Neon's _Auto-suspend_ feature automatically transitions a compute endpoint into 
 
 The maximum **Suspend compute after a period of inactivity** setting is 7 days. To configure a compute as "always-active", deselect **Suspend compute after a period of inactivity**. For more information, refer to [Configuring Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide).
 
+## Restart a compute endpoint
+
+To restart a compute endpoint, you can temporarily set your compute's **Suspend compute after a period of inactivity*** setting to 1 second (the default is 5 minutes). See [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console to see if your compute endpoint restarted. Look for `suspend_compute` and `start_compute` actions. Alternatively, you can issue [Suspend endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. Please be aware that restarting a compute endpoint interrupts any connections currently using the compute endpoint.
+
 ## Delete a compute endpoint
 
 Deleting a compute endpoint is a permanent action.
