@@ -48,7 +48,9 @@ Compute usage is steady at 1 vCPU almost 24/7 for the month.
 
 ![Sample billing graph](/docs/introduction/billing_sample_graph.png)
 
-Compute time calculation: 18.35 GB GB * $0.102 per GiB = $73.27 for this billing period
+Daily average of 23.94 GiB leads to a total of 713.35 GiB compute hours for the month.
+
+Compute time calculation: 718.35 GiB * $0.102 per GiB = **$73.27** for this billing period
 
 </TabItem>
 
@@ -56,7 +58,10 @@ Compute time calculation: 18.35 GB GB * $0.102 per GiB = $73.27 for this billing
 </TabItem>
 
 <TabItem>
+Written data 
 </TabItem>
+
+</Tabs>
 
 steady CPU usage for the month, along with low data storage and transfer rates.
 
