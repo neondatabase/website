@@ -38,7 +38,27 @@ Given the high number of connections used by this application, [connection pooli
 
 ## Consumption breakdown for the month
 
-This graph shows steady CPU usage for the month, along with low data storage and transfer rates.
+These graphs shows the usage and costs incurred for the month.
+
+<Tabs labels={["Compute", "Storage","Data write and transfer"]}>
+
+<TabItem>
+
+Compute usage is steady at 1 vCPU almost 24/7 for the month.
+
+![Sample billing graph](/docs/introduction/billing_sample_graph.png)
+
+Compute time calculation: 18.35 GB GB * $0.102 per GiB = $73.27 for this billing period
+
+</TabItem>
+
+<TabItem>
+</TabItem>
+
+<TabItem>
+</TabItem>
+
+steady CPU usage for the month, along with low data storage and transfer rates.
 
 ![Sample billing graph](/docs/introduction/billing_sample_graph.png)
 
