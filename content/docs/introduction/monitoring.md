@@ -7,6 +7,8 @@ enableTableOfContents: true
 ## Overview
 [Blurb about monitoring in general for saas serverless db.]
 
+With Neon as your serverless database, we understand the importance of robust monitoring features, not only to provide insight into the status of your database, but you also need to understand how your computes are performing
+
 ## Current state of monitoring features
 
 [Politely explain we don't have monitoring but plan to soon]
@@ -15,7 +17,7 @@ As of now, Neon is light on built-in monitoring features. We know their importan
 
 ## Roadmap and future developments
 
-[detail what is def in the roadmap, and what types of monitoring features we are thinking about adding]]
+[detail what is def in the roadmap, and what types of monitoring features we are thinking about adding]
 
 ## Native Postgres options for monitoring your database
 
