@@ -45,6 +45,8 @@
       slug: introduction/support
     - title: Status
       slug: introduction/status
+    - title: Monitoring
+      slug: introduction/monitoring
 - title: Get started
   items:
     - title: Sign up
