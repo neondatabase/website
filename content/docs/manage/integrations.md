@@ -9,7 +9,7 @@ The **Integrations** page in the Neon Console provides a hub for managing third-
 
 When visiting the **Integrations** page in your console, you'll notice different categories:
 
-- **Manage**: These are integrations added to your project.
+- **Manage**: A list of integrations that have already been added to your project.
 - **Add**: These are integrations available for you to add and use immediately.
 - **Request**: These are the integrations that will be available in the near future.
 
