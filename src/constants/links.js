@@ -7,7 +7,7 @@ export default {
   login: 'https://console.neon.tech/login',
   security: '/docs/security/security-overview',
   releaseNotes: '/docs/release-notes',
-  discord: 'https://discord.gg/YKY4CBXZT2',
+  discord: 'https://discord.gg/92vNTzKDGp',
   discussions: 'https://github.com/neondatabase/neon/discussions',
   discourse: 'https://community.neon.tech',
   github: 'https://github.com/neondatabase/neon',

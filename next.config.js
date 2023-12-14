@@ -190,6 +190,10 @@ const defaultConfig = {
         source: '/demos/playground/:path*',
         destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
       },
+      {
+        source: '/discord',
+        destination: 'https://discord.gg/92vNTzKDGp',
+      },
     ];
   },
   webpack(config) {

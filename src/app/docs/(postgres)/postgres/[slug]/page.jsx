@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
-import Admonition from 'components/pages/doc/admonition';
 import PreviousAndNextLinks from 'components/pages/doc/previous-and-next-links';
+import Admonition from 'components/shared/admonition';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
 import { MAX_TITLE_LENGTH, POSTGRES_DOCS_BASE_PATH, VERCEL_URL } from 'constants/docs';
