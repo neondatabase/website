@@ -11,7 +11,7 @@ When visiting the **Integrations** page in your console, you'll notice different
 
 - **Manage**: A list of integrations that have already been added to your project.
 - **Add**: These are integrations available for you to add and use immediately.
-- **Request**: These are the integrations that will be available in the near future.
+- **Request**: Upcoming integrations that you can express interest in to help prioritize their release.
 
 ## Manage integrations
 
