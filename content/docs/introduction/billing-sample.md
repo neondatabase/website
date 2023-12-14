@@ -79,7 +79,7 @@ Here are the daily averages and monthly totals for the 3 key usage metrics that 
 
  Metric           | Start of billing period| End of billing period |
 |-----------------|---------------|---------------|
-| Data storage    | 22 GiB        | 26.4 GiB         |
+| Data storage    | 23.6 GiB        | 28 GiB         |
 
 ## Bill for the month
 
@@ -88,7 +88,7 @@ This table shows what the billing costs might look like with billing rates set t
 | Metric              | Month      | Rate                  | Amount    |
 |---------------------|------------|-----------------------|-----------|
 | Compute Time Cost   | 718.35 GiB | $0.102 per compute-hour        | $73.27    |
-| Data Storage Cost   | 26.4 GiB   | $0.000164 per GiB-hour| $3.35
+| Data Storage Cost   | 28 GiB   | $0.000164 per GiB-hour| $3.35
 | Written Data Cost   | 4.4 GiB    | $0.09600 per Gib      | $0.42     |
 | Data Transfer Cost  | 2.7 GiB    | $0.09000 per GiB      | $0.24     |
 | **Total Bill**      |            |                       | **$77.28**|
