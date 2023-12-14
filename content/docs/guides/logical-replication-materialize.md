@@ -195,7 +195,7 @@ Now that you’ve configured your database network and created an ingestion clus
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
     ```
 
-    </CodeBlock shouldWrap>
+    </CodeBlock>
 
     - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
     - Replace `<role_name>` with the name of the role you created earlier. (e.g., `alex`)
