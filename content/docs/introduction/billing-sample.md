@@ -40,7 +40,7 @@ Given the high number of connections used by this application, [connection pooli
 
 These graphs shows the usage and costs incurred for the month.
 
-<Tabs labels={["Compute", "Storage","Data write and transfer"]}>
+<Tabs labels={["Compute", "Storage","Data throughput"]}>
 
 <TabItem>
 
@@ -56,13 +56,18 @@ Compute time calculation: 718.35 GiB * $0.102 per GiB = **$73.27** for this bill
 
 <TabItem>
 
-Project storage across all projects and branches grew 4.4 GiB in the month, from 23.6 GiB to 28 GiB.
+Project storage grew 4.4 GiB over the month, from 23.6 GiB to 28 GiB.
+
+Storage cost calculation: 28 GiB * $0.000164 per GiB-hour * 730 (1 month) = **$3.35** for this billing period
 
 ![Sample storage graph](/docs/introduction/billing_storage_graph.png)
 </TabItem>
 
 <TabItem>
 Written data to Neon storage and data transfer out of Neon are both minimal for the month. 
+
+Written data calcuation: 4.4 GiB * $0.09600 per Gib = **$0.42** for this billing period
+Data transfer calculation: 2.7 GiB * $0.09000 per GiB = **$0.24** for the billing period
 
 ![Sample storage graph](/docs/introduction/billing_data_graph.png)
 
@@ -91,7 +96,7 @@ This table shows what the billing costs might look like with billing rates set t
 | Metric              | Month      | Rate                  | Amount    |
 |---------------------|------------|-----------------------|-----------|
 | Compute Time Cost   | 718.35 GiB | $0.102 per GiB        | $73.27    |
-| Data Storage Cost   | 26.4 GiB   | $0.000164 per GiB-hour| $3.16
+| Data Storage Cost   | 26.4 GiB   | $0.000164 per GiB-hour| $3.35
 | Written Data Cost   | 4.4 GiB    | $0.09600 per Gib      | $0.42     |
 | Data Transfer Cost  | 2.7 GiB    | $0.09000 per GiB      | $0.24     |
-| **Total Bill**      |            |                       | **$77.09**|
+| **Total Bill**      |            |                       | **$77.28**|

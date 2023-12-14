@@ -25,9 +25,9 @@ Find detailed definitions of the metrics that make up your bill and a cost break
 
 <DetailIconCards>
 
-<a href="h/docs/introduction/billing" description="Find detailed descriptions of the metrics that make up your bill" icon="trend-up">Billing metrics</a>
+<a href="/docs/introduction/billing" description="Find detailed descriptions of the metrics that make up your bill" icon="trend-up">Billing metrics</a>
 
-<a href="h/docs/introduction/billing-rates" description="Reference table of billing rates per region" icon="hourglass">Billing rates</a>
+<a href="/docs/introduction/billing-rates" description="Reference table of billing rates per region" icon="hourglass">Billing rates</a>
 
 </DetailIconCards>
 
