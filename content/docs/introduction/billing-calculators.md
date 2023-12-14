@@ -13,7 +13,7 @@ With autoscaling as the key to our pay-for-use model, you will ideally have some
 * _What level of performance does your applciation require_?
 * _How much storage do you require_?
 
-These questions translate into the metrics [active time](/docs/introduction/billing#active-time), [compute time](/docs/introduction/billing#compute-time), and [storage space](/docs/introduction/billing#project-storage).
+These questions translate into the metrics [active time](/docs/introduction/billing#active-time), [compute size](docs/manage/endpoints#compute-size-and-autoscaling-configuration), and [storage space](/docs/introduction/billing#project-storage).
 
 ## Pricing calculator
 

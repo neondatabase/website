@@ -40,41 +40,6 @@ Given the high number of connections used by this application, [connection pooli
 
 These graphs shows the usage and costs incurred for the month.
 
-<Tabs labels={["Compute", "Storage","Data throughput"]}>
-
-<TabItem>
-
-Compute usage is steady at 1 vCPU almost 24/7 for the month.
-
-![Sample billing graph](/docs/introduction/billing_compute_graph.png)
-
-Daily average of 23.94 GiB leads to a total of 713.35 GiB compute hours for the month.
-
-Compute time calculation: 718.35 GiB * $0.102 per GiB = **$73.27** for this billing period
-
-</TabItem>
-
-<TabItem>
-
-Project storage grew 4.4 GiB over the month, from 23.6 GiB to 28 GiB.
-
-Storage cost calculation: 28 GiB * $0.000164 per GiB-hour * 730 (1 month) = **$3.35** for this billing period
-
-![Sample storage graph](/docs/introduction/billing_storage_graph.png)
-</TabItem>
-
-<TabItem>
-Written data to Neon storage and data transfer out of Neon are both minimal for the month. 
-
-Written data calcuation: 4.4 GiB * $0.09600 per Gib = **$0.42** for this billing period
-Data transfer calculation: 2.7 GiB * $0.09000 per GiB = **$0.24** for the billing period
-
-![Sample storage graph](/docs/introduction/billing_data_graph.png)
-
-</TabItem>
-
-</Tabs>
-
 ### Compute
 
 Compute usage is steady at almost 24 compute hours per day across the month.
