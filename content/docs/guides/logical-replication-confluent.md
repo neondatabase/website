@@ -7,3 +7,4 @@ isDraft: true
 
 In this guide, you will learn how to how to replicate data from Neon with Confluent.
 
+<NeedHelp/>

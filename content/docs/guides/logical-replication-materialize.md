@@ -195,7 +195,9 @@ Now that you’ve configured your database network and created an ingestion clus
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
     ```
 
-    </CodeBlock>
+    </CodeBlock
+    
+    >
 
     - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
     - Replace `<role_name>` with the name of the role you created earlier. (e.g., `alex`)
@@ -333,3 +335,5 @@ With Materialize ingesting your Postgres data into durable storage, you can star
 - Compute real-time results in memory with [CREATE VIEW](https://materialize.com/docs/sql/create-view/) and [CREATE INDEX](https://materialize.com/docs/sql/create-index/) or in durable storage with [CREATE MATERIALIZED VIEW](https://materialize.com/docs/sql/create-materialized-view/).
 - Serve results to a Postgres-compatible SQL client or driver with [SELECT](https://materialize.com/docs/sql/select/) or [SUBSCRIBE](https://materialize.com/docs/sql/subscribe/) or to an external message broker with [CREATE SINK](https://materialize.com/docs/sql/create-sink/).
 - Check out the [tools and integrations](https://materialize.com/docs/integrations/) supported by Materialize.
+
+<NeedHelp/>

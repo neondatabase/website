@@ -228,3 +228,4 @@ First, you need to generate some changes in the users table on the publisher dat
 
   Look for the `last_msg_receive_time` to confirm that the subscription is active and receiving data.
 
+<NeedHelp/>
