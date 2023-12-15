@@ -33,7 +33,7 @@ Let's consider a scenario where we have a table storing information about users:
 | 4  | Jane Doe |  25 | London   |
 
 
-<!--
+{/*
 ```sql
 CREATE TABLE users (
  id SERIAL PRIMARY KEY,
@@ -47,7 +47,7 @@ INSERT INTO users (name, age, city)
 VALUES ('John Doe', 30, 'New York'),
       ('Jane Doe', 25, 'London');
 ```
--->
+*/}
 
 
 Use `json_build_object` to create a JSON structure with user information:
@@ -93,7 +93,7 @@ Let’s say we have a table of products with an `attributes` column containing J
 | 2  | Coffee Mug  | 12.99 | A ceramic mug with a funny design   | Kitchen  | {"size": "Large", "color": "White", "material": "Ceramic"}
 
 
-<!--
+{/*
 ```sql
 CREATE TABLE products (
  id SERIAL PRIMARY KEY,
@@ -116,7 +116,7 @@ VALUES ('T-Shirt', 25.99, 'A comfortable cotton T-Shirt', 'Clothing', json_build
  'size', 'Large'
 ));
 ```
--->
+*/}
 
 
 Use `json_build_object` to build a nested JSON object that represents the details of individual products:
@@ -169,7 +169,7 @@ Let's consider an example with a modified version of the `products` table where 
 | 3  | Sneakers   | 49.99 | Sporty sneakers for everyday use  | Footwear | {"size": "10", "color": "Black", "rating": 4.2}
 
 
-<!--
+{/*
 ```sql
 CREATE TABLE products_with_rating (
    id SERIAL PRIMARY KEY,
@@ -199,7 +199,7 @@ VALUES
        'rating', 4.2
    ));
 ```
--->
+*/}
 
 
 Retrieve the products, building a JSON structure with `json_build_object` and ordering the results based on the `rating`:
