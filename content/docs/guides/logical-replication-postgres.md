@@ -52,11 +52,9 @@ In addition to creating a publication for a specific table, Postgres allows you 
 
 With your publication created, you're now ready to configure subscribers that will receive the data changes from this publication.
 
-## Configure PotgreSQL as a subscriber
+## Configure PostgreSQL as a subscriber
 
 A subscriber is a destination that receive data changes from your publications. 
-
-Subscribers can range from external Postgres instances to a variety of data services and platforms, each serving different roles within your data infrastructure.
 
 This section describes how to configure a subscription on a standalone Postgres instance to a publication on defined on your Neon database. After the subscription is defined, the destination Postgres instance will able to receive data changes from the publication defined on your Neon database.
 
