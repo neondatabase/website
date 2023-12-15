@@ -3,7 +3,7 @@ title: Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2023-12-06T14:18:54.294Z'
+updatedOn: '2023-12-12T20:29:04.395Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
@@ -53,7 +53,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [pgrowlocks](https://www.postgresql.org/docs/15/pgrowlocks.html)               | 1.2       | 1.2        |   1.2        |                                                                                                                 |
 | [pgstattuple](https://www.postgresql.org/docs/15/pgstattuple.html)              | 1.5      | 1.5       |  1.5       |                                                                                                                  |
 | [pgtap](https://pgtap.org/documentation.html)                    | 1.2.0                   | 1.2.0       |   1.2.0       |                                                                                                                    |
-| [pgvector](https://github.com/pgvector/pgvector)                 | 0.5.0                   | 0.5.0  | 0.5.0                  | Install with `CREATE EXTENSION vector;`                                                                                                                    |
+| [pgvector](https://github.com/pgvector/pgvector)                 | 0.5.1                   | 0.5.1  | 0.5.1                  | Install with `CREATE EXTENSION vector;`                                                                                                                    |
 | [pgx_ulid](https://github.com/pksunkara/pgx_ulid)                 | 0.1.3                   | 0.1.3  | 0.1.3                                 | Install with `CREATE EXTENSION ulid;`                                                                                                                    |
 | [plcoffee](https://github.com/plv8/plv8/)                 | 3.1.5                          | 3.1.5  | 3.1.8                         |                                                                                                                    |
 | [plls](https://github.com/plv8/plv8/)                     | 3.1.5                          | 3.1.5 | 3.1.8                          |                                                                                                                    |  
@@ -104,6 +104,10 @@ You can update an extension to the latest version using `ALTER EXTENSION <extens
   ```sql
   ALTER EXTENSION postgis_topology UPDATE TO '3.3.2';
   ```
+
+<Admonition type="important">
+When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [Auto-suspend](/docs/introduction/auto-suspend) behavior. However, if your compute never restarts because you disabled Auto-suspend or because your compute is constantly active, you may need force a restart. To force a restart, Neon Pro Plan users can temporarily set a compute's **Suspend compute after a period of inactivity** setting to 1 second (the default is 5 minutes). See [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console to see if your compute endpoint restarted. Look for `suspend_compute` and `start_compute` actions. Alternatively, all Neon users can issue [Suspend endpoint](https://api-docs.neon.tech/reference/suspendprojectendpoint) and [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API calls. Please be aware that restarting a compute endpoint temporarily interrupts any connections currently using the compute.
+</Admonition>
 
 ## Extension support notes
 

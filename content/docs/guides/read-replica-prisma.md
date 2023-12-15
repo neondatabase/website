@@ -76,7 +76,7 @@ Connecting to a read replica is the same as connecting to any branch in a Neon p
 
    </CodeBlock>
 
-   If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string, but remember to append `?pgbouncer=true` to the connection string when using a pooled connection. Prisma requires this flag when using Prisma Client with PgBouncer. See [Connect from serverless functions](/docs/guides/prisma#connect-from-serverless-functions) for more information.
+   If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string, but remember to append `?pgbouncer=true` to the connection string when using a pooled connection. Prisma requires this flag when using Prisma Client with PgBouncer. See [Use connection pooling with Prisma](/docs/guides/prisma#use-connection-pooling-with-prisma) for more information.
 
 ## Update your env file
 

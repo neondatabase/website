@@ -140,9 +140,9 @@ const Header = ({
           </nav>
 
           <div className="flex lg:hidden">
-            <GithubStarCounter className="mr-5" isThemeBlack={isThemeBlack} />
+            <GithubStarCounter className="mr-5 xl:mr-3" isThemeBlack={isThemeBlack} />
             <Button
-              className="mr-3.5 px-[22px] h-9 font-semibold text-base duration-200 transition-colors leading-none"
+              className="mr-3.5 xl:mr-2 px-[22px] h-9 font-semibold text-base duration-200 transition-colors leading-none xl:px-4"
               to={LINKS.login}
               theme={isThemeBlack ? 'gray-dark-outline' : 'gray-dark-outline-black'}
             >
@@ -150,7 +150,7 @@ const Header = ({
             </Button>
 
             <Button
-              className="px-[22px] h-9 font-semibold text-base duration-200 transition-colors leading-none"
+              className="px-[22px] h-9 font-semibold text-base duration-200 transition-colors leading-none xl:px-4"
               to={LINKS.signup}
               theme="primary"
             >
