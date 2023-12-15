@@ -24,13 +24,14 @@ Let's consider a scenario where we have a table storing information about users:
 
 **users**
 
-
+```text
 | id |   name   | age |   city  
 |----|----------|-----|----------
 | 1  | John Doe |  30 | New York |
 | 2  | Jane Doe |  25 | London   |
 | 3  | John Doe |  30 | New York |
 | 4  | Jane Doe |  25 | London   |
+```
 
 
 {/*
@@ -68,11 +69,12 @@ FROM users;
 
 Returns:
 
-
+```text
 | id |                       user_data                       
 |----|--------------------------------------------------------
 | 1  | {"name" : "John Doe", "age" : 30, "city" : "New York"}
 | 2  | {"name" : "Jane Doe", "age" : 25, "city" : "London"}
+```
 
 
 ## Advanced examples
@@ -86,11 +88,12 @@ Let’s say we have a table of products with an `attributes` column containing J
 
 **products**
 
-
+```text
 | id |    name     | price |             description              | category |                           attributes                           
 |----|-------------|-------|-------------------------------------|----------|---------------------------------------------------------------
 | 1  | T-Shirt     | 25.99 | A comfortable cotton T-Shirt        | Clothing | {"size": "Medium", "color": "Blue"}
 | 2  | Coffee Mug  | 12.99 | A ceramic mug with a funny design   | Kitchen  | {"size": "Large", "color": "White", "material": "Ceramic"}
+```
 
 
 {/*
@@ -141,14 +144,12 @@ FROM products;
 
 Returns:
 
-
+```text
 | id |    name     | price |                                                               details                                                              
 |----|-------------|-------|-------------------------------------------------------------------------------------------------------------------------------------
 | 1  | T-Shirt     | 25.99 | {"category" : "Clothing", "description" : "A comfortable cotton T-Shirt", "attributes" : {"color" : "Blue", "size" : "Medium"}}
 | 2  | Coffee Mug  | 12.99 | {"category" : "Kitchen", "description" : "A ceramic mug with a funny design", "attributes" : {"color" : "White", "size" : "Large"}}
-
-
-
+```
 
 ### Use with `ORDER BY`
 
@@ -161,13 +162,13 @@ Let's consider an example with a modified version of the `products` table where 
 
 **products**
 
-
+```text
 | id |    name    | price |            description            | category |                     attributes                    
 |----|------------|-------|-----------------------------------|----------|----------------------------------------------------
 | 1  | T-Shirt    | 25.99 | A comfortable cotton T-Shirt      | Clothing | {"size": "Medium", "color": "Blue", "rating": 4.5}
 | 2  | Coffee Mug | 12.99 | A ceramic mug with a funny design | Kitchen  | {"size": "Small", "color": "White", "rating": 3.8}
 | 3  | Sneakers   | 49.99 | Sporty sneakers for everyday use  | Footwear | {"size": "10", "color": "Black", "rating": 4.2}
-
+```
 
 {/*
 ```sql
@@ -229,13 +230,13 @@ ORDER BY (attributes->>'rating')::NUMERIC DESC;
 
 Returns:
 
-
+```text
 | id |    name    | price |                                                                        details                                                                       
 |----|------------|-------|-------------------------------------------------------------------------------------------------------------------------------------------------------
 | 1  | T-Shirt    | 25.99 | {"category" : "Clothing", "description" : "A comfortable cotton T-Shirt", "attributes" : {"color" : "Blue", "size" : "Medium", "rating" : "4.5"}}
 | 3  | Sneakers   | 49.99 | {"category" : "Footwear", "description" : "Sporty sneakers for everyday use", "attributes" : {"color" : "Black", "size" : "10", "rating" : "4.2"}}
 | 2  | Coffee Mug | 12.99 | {"category" : "Kitchen", "description" : "A ceramic mug with a funny design", "attributes" : {"color" : "White", "size" : "Small", "rating" : "3.8"}}
-
+```
 
 ### Use with `GROUP BY`
 
@@ -256,9 +257,9 @@ GROUP BY category;
 
 Returns:
 
-
+```text
 | category |  category_total_price  
 |----------|-------------------------
 | Kitchen  | {"total_price" : 12.99}
 | Clothing | {"total_price" : 25.99}
-
+```
