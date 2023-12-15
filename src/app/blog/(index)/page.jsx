@@ -38,10 +38,10 @@ export default async function BlogPage() {
     <>
       <h1 className="sr-only">Blog</h1>
       <FeaturedPostsList posts={featuredPosts} />
-      <PostsList title="Community" posts={communityFeaturedPosts} alignment="right" />
+      <PostsList title="AI" posts={aiFeaturedPosts} alignment="right" />
       <ReleaseNotesList items={featuredReleaseNotes} />
       <PostsList title="Company" posts={companyFeaturedPosts} alignment="left" />
-      <PostsList title="AI" posts={aiFeaturedPosts} alignment="right" />
+      <PostsList title="Community" posts={communityFeaturedPosts} alignment="right" />
       <VideoList videos={videos} />
       <SubscribeForm size="md" dataTest="blog-subscribe-form" />
       <AppearanceEngineering
