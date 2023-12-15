@@ -31,6 +31,7 @@ export default async function BlogPage() {
     videos,
     appearances,
     engineeringFeaturedPosts,
+    aiFeaturedPosts,
   } = await getWpBlogPage();
 
   return (
@@ -40,6 +41,7 @@ export default async function BlogPage() {
       <PostsList title="Community" posts={communityFeaturedPosts} alignment="right" />
       <ReleaseNotesList items={featuredReleaseNotes} />
       <PostsList title="Company" posts={companyFeaturedPosts} alignment="left" />
+      <PostsList title="AI" posts={aiFeaturedPosts} alignment="right" />
       <VideoList videos={videos} />
       <SubscribeForm size="md" dataTest="blog-subscribe-form" />
       <AppearanceEngineering
