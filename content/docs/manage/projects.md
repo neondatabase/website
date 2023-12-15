@@ -161,9 +161,19 @@ To configure the history retention period for a project:
 
 ### Configure IP Allow
 
-Available to [Neon Pro Plan](/docs/introduction/pro-plan) users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default. Optionally, you can apply the IP allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches. 
+Available to [Neon Pro Plan](/docs/introduction/pro-plan) users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default. Optionally, you can apply the IP allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches.
 
-To configure **IP Allow** for a project:
+By default, Neon allows IP addresses from 0.0.0.0, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access to Neon.
+
+<Admonition type="note">
+Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4).
+</Admonition>
+
+You configure **IP Allow** for a project using the Neon Console, CLI, or API:
+
+<Tabs labels={["Neon Console", "CLI", "API"]}>
+
+<TabItem>
 
 1. Select a project in the Neon console.
 2. On the Neon **Dashboard**, select **Settings**.
@@ -172,6 +182,48 @@ To configure **IP Allow** for a project:
 4. Specify the IP addresses you want to permit.
 5. Optionally, select **Apply to primary branch only** to apply the allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only
 5. Click **Apply changes**.
+
+</TabItem>
+
+<TabItem>
+
+The [Neon CLI projects command](https://neon.tech/docs/reference/cli-projects) supports IP Allow configuration. For example, this command configures IP for an existing Neon project:
+
+```bash
+projects update still-bird-22384887 --ip-allow 127.0.0.1 192.168.2.1/24 --ip-primary-only
+```
+
+</TabItem>
+
+<TabItem>
+
+The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, this API configures **IP Allow** for an existing Neon project:
+
+```bash
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/project_id \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "project": {
+    "settings": {
+      "allowed_ips": {
+        "primary_branch_only": true,
+        "ips": [
+          "192.168.1.15, 192.168.1.16, 192.168.1.20-192.168.1.30, 192.168.1.0/24S"
+        ]
+      }
+    }
+  }
+}
+'
+```
+</TabItem>
+
+</Tabs>
+
 
 #### How to specify IP addresses
 
@@ -200,7 +252,6 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
 A combined example using all three options above, specified as a comma-separated list, would appear similar to the following:
 
   ```ini
-
   192.168.1.15, 192.168.1.16, 192.168.1.20-192.168.1.30, 192.168.1.0/24S
   ```
 
