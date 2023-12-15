@@ -18,11 +18,11 @@ const CommunityBanner = ({ buttonText, buttonUrl, children = null, logo }) => (
     <span className="absolute h-px w-[28%] right-1.5 -top-px bg-[radial-gradient(circle,rgba(0,229,153,0.7)0%,rgba(0,229,153,0.05)100%)] sm:hidden" />
     <div className="relative overflow-hidden flex items-center rounded-[10px] bg-[#18191B] p-8">
       <div>
-        <h2 className="!my-0 text-[26px] font-medium leading-tight text-white max-w-[334px] xs:text-2xl">
+        <h2 className="!my-0 text-[26px] font-medium leading-dense text-white max-w-[334px] xs:text-2xl">
           {children}
         </h2>
         <Button
-          className="mt-5 px-5 py-2 !font-semibold !text-black-new hover:bg-[#00e5bf]"
+          className="mt-5 !px-5 !py-2.5 !font-semibold !text-black-new hover:bg-[#00e5bf]"
           to={buttonUrl}
           size="xs"
           theme="primary"
