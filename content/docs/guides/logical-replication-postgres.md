@@ -185,7 +185,7 @@ To create a subscription:
 
     The subscription (`users_subscription`) should be listed, confirming that that your subscription has been successfully created.
 
-### Test the replication
+## Test the replication
 
 Testing your logical replication setup ensures that the data is being replicated correctly from the publisher to the subscriber; in this case, from your Neon database to your standalone Postgres instance.
 
