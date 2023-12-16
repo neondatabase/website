@@ -190,7 +190,7 @@ You configure **IP Allow** for a project using the Neon Console, CLI, or API:
 The [Neon CLI projects command](https://neon.tech/docs/reference/cli-projects) supports IP Allow configuration. For example, this command configures IP for an existing Neon project:
 
 ```bash
-projects update still-bird-22384887 --ip-allow 127.0.0.1 192.168.2.1/24 --ip-primary-only
+neonctl projects update still-bird-22384887 --ip-allow 127.0.0.1 192.168.2.1/24 --ip-primary-only
 ```
 
 </TabItem>
