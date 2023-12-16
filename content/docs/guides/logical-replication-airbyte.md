@@ -146,7 +146,6 @@ The Airbyte UI currently allows selecting any tables for Change Data Capture (CD
 
     - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
     - **Port**: 5432
-
     - **Database Name**: dbname
     - **Username**: alex
     - **Password**: AbC123dEf
