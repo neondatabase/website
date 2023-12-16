@@ -17,13 +17,11 @@ Neon's logical replication feature allows for replication of data to external su
 
 ## Enable logical replication
 
-Your first step is to enable logical replication in Neon.
+The first step is to enable logical replication in Neon.
 
 <Admonition type="important">
-Enabling logical replication in Neon permanently changes the PostgreSQL `wal_level` configuration parameter setting from `replica` to `logical` for all databases in your Neon project. This change increases the amount of data written to the WAL (Write-Ahead Logging), which adds to your storage consumption. Once the `wal_level` setting is changed to `logical`, it cannot be reverted.
+Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter permanently, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Also, enabling logical replication increases the amount of data written to the WAL (Write-Ahead Logging), which means that you will consume additional storage.
 </Admonition>
-
-To enable logical replication:
 
 1. Select your project in the [Neon Console](https://console.neon.tech/app/projects).
 2. On the Neon **Dashboard**, select **Settings**.
