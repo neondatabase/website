@@ -5,9 +5,9 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Confluent Cloud is a fully managed, cloud-native service for real-time data streaming, built on Apache Kafka. It allows you to stream data from many different sources including Postgres and build apps that consume messages from an Apache Kafka cluster using popular clients, such as Java, .NET, Python, Node.js, C/C++, and Go.
+Confluent Cloud is a fully managed, cloud-native service for real-time data streaming, built on Apache Kafka. It allows you to stream data from many different sources, including Postgres, and build apps that consume messages from an Apache Kafka cluster using popular clients.
 
-In this guide, you will learn how to how to replicate data from a Neon Postgres database with Confluent Cloud. You will use the [PostgreSQL CDC Source Connector (Debezium) for Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-postgresql-cdc-source-debezium.html) to read Change Data Capture (CDC) events from the Postgres Write-Ahead Log (WAL) in real time. The connector will write events to a Kafka stream and auto-generate a Kafka topic name based on the source database schema and table name. The connector performs an initial snapshot of the table and streams change events for you.
+In this guide, you will learn how to how to replicate data from a Neon Postgres database with Confluent Cloud. You will use the [PostgreSQL CDC Source Connector (Debezium) for Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-postgresql-cdc-source-debezium.html) to read Change Data Capture (CDC) events from the Postgres Write-Ahead Log (WAL) in real time. The connector will write events to a Kafka stream and auto-generate a Kafka topic name based on the source database schema and table name. The connector performs an initial snapshot of the table and then streams any futue change events.
 
 Confluent Cloud Connectors can be set up using the [Confluent Cloud UI](https://confluent.cloud/home) or the [Confluent command-line interface (CLI)](https://docs.confluent.io/confluent-cli/current/overview.html). This guide uses the Confluent Cloud UI.
 
@@ -206,50 +206,50 @@ To set up a Postgres CDC source connector for Confluent Cloud:
 
     Click **Continue**.
 
-8. Adjust your **Connector name** if desired, and review your **Connector configuration**, which is show in JSON format. We'll use the default connector name in this guide.
+8. Adjust your **Connector name** if desired, and review your **Connector configuration**, which is provided in `JSON` format, as shown below. We'll use the default connector name in this guide.
 
-```JSON
-{
-  "connector.class": "PostgresCdcSource",
-  "name": "PostgresCdcSourceConnector_0",
-  "kafka.auth.mode": "KAFKA_API_KEY",
-  "kafka.api.key": "2WY3UABFDN7DDFIV",
-  "kafka.api.secret": "****************************************************************",
-  "schema.context.name": "default",
-  "database.hostname": "ep-cool-darkness-123456.us-east-2.aws.neon.tech",
-  "database.port": "5432",
-  "database.user": "alex",
-  "database.password": "************",
-  "database.dbname": "dbname",
-  "database.server.name": "neon_server",
-  "database.sslmode": "require",
-  "publication.name": "users_publication",
-  "publication.autocreate.mode": "all_tables",
-  "snapshot.mode": "initial",
-  "tombstones.on.delete": "true",
-  "plugin.name": "pgoutput",
-  "slot.name": "debezium",
-  "poll.interval.ms": "1000",
-  "max.batch.size": "1000",
-  "event.processing.failure.handling.mode": "fail",
-  "heartbeat.interval.ms": "0",
-  "provide.transaction.metadata": "false",
-  "decimal.handling.mode": "precise",
-  "binary.handling.mode": "bytes",
-  "time.precision.mode": "adaptive",
-  "cleanup.policy": "delete",
-  "hstore.handling.mode": "json",
-  "interval.handling.mode": "numeric",
-  "schema.refresh.mode": "columns_diff",
-  "output.data.format": "JSON",
-  "after.state.only": "true",
-  "output.key.format": "JSON",
-  "json.output.decimal.format": "BASE64",
-  "tasks.max": "1"
-}
-```
+    ```JSON
+    {
+      "connector.class": "PostgresCdcSource",
+      "name": "PostgresCdcSourceConnector_0",
+      "kafka.auth.mode": "KAFKA_API_KEY",
+      "kafka.api.key": "2WY3UABFDN7DDFIV",
+      "kafka.api.secret": "****************************************************************",
+      "schema.context.name": "default",
+      "database.hostname": "ep-cool-darkness-123456.us-east-2.aws.neon.tech",
+      "database.port": "5432",
+      "database.user": "alex",
+      "database.password": "************",
+      "database.dbname": "dbname",
+      "database.server.name": "neon_server",
+      "database.sslmode": "require",
+      "publication.name": "users_publication",
+      "publication.autocreate.mode": "all_tables",
+      "snapshot.mode": "initial",
+      "tombstones.on.delete": "true",
+      "plugin.name": "pgoutput",
+      "slot.name": "debezium",
+      "poll.interval.ms": "1000",
+      "max.batch.size": "1000",
+      "event.processing.failure.handling.mode": "fail",
+      "heartbeat.interval.ms": "0",
+      "provide.transaction.metadata": "false",
+      "decimal.handling.mode": "precise",
+      "binary.handling.mode": "bytes",
+      "time.precision.mode": "adaptive",
+      "cleanup.policy": "delete",
+      "hstore.handling.mode": "json",
+      "interval.handling.mode": "numeric",
+      "schema.refresh.mode": "columns_diff",
+      "output.data.format": "JSON",
+      "after.state.only": "true",
+      "output.key.format": "JSON",
+      "json.output.decimal.format": "BASE64",
+      "tasks.max": "1"
+    }
+    ```
 
-Click **Continue** to provision the connector, which may take a few monents to complete.
+    Click **Continue** to provision the connector, which may take a few monents to complete.
 
 
 ## Verify your Kafka stream
@@ -267,7 +267,7 @@ To verify that events now being published to a Kafka stream in Confluent:
 
 ## Next steps
 
-With events now being published to a Kafka stream in Confluent, you can now set up a connection between Confluent and a supported destination. This is quite simple using a Confluent Connector. For example, you could stream data to [Snowflake](https://signup.snowflake.com/) using the [Confluent Cloud Snowflake Sink connector](https://docs.confluent.io/cloud/current/connectors/cc-snowflake-sink.html). Refer to the Confluent documentation for connector-specific instructions.
+With events now being published to a Kafka stream in Confluent, you can now set up a connection between Confluent and a supported consumer. This is quite simple using a Confluent Connector. For example, you can stream data to [Databricks](https://docs.confluent.io/cloud/current/connectors/cc-databricks-delta-lake-sink/databricks-aws-setup.html#), [Snowflake](https://docs.confluent.io/cloud/current/connectors/cc-snowflake-sink.html), or one of the many other supported consumers. Refer to the Confluent documentation for connector-specific instructions.
 
 ## References
 

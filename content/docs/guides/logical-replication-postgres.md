@@ -22,6 +22,17 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 3. Select **Replication**.
 4. Click **Enable**.
 
+The new setting is applied the next time your compute restarts. By default, a compute scales to zero after five minutes of activity and restarts on the next access. To force an immediate restart, refer to [Restart a compute endpoint](/docs/manage/endpoints/).
+
+You can verify that Neon is enabled for logical replication by running the following query:
+
+```sql
+SHOW wal_level;
+ wal_level 
+-----------
+ logical
+```
+
 After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. These processes are the same as those you would perform for a standalone Postgresql environment. 
 
 ## Create a publication
@@ -154,7 +165,7 @@ First, generate some changes in the `users` table on the publisher database to s
     SELECT * FROM users;
     ```
 
-  Note the changes you made for comparison with the subscriber's data.
+    Note the changes you made for comparison with the subscriber's data.
 
 3. Now, connect to your subscriber database on your standalone Postgres instance:
 
@@ -172,10 +183,10 @@ First, generate some changes in the `users` table on the publisher database to s
 
 4. On the subscriber, you can also check the status of the replication:
 
-  ```sql
-  SELECT * FROM pg_stat_subscription;
-  ```
+    ```sql
+    SELECT * FROM pg_stat_subscription;
+    ```
 
-  Look for the `last_msg_receive_time` to confirm that the subscription is active and receiving data.
+    Look for the `last_msg_receive_time` to confirm that the subscription is active and receiving data.
 
 <NeedHelp/>
