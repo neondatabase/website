@@ -61,7 +61,7 @@ To edit a compute endpoint:
 1. Once you've made your changes, click **Save**. All changes take immediate effect.
 
 <Admonition type="warning">
-Changing the size of your compute restarts the endpoint and _temporarily disconnects all existing connections_. Resizing via autoscaling, however, is seamless: there are no restarts or disconnects, it just works.
+Changing the size of your compute restarts the endpoint and _temporarily disconnects all existing connections_. Resizing via autoscaling, however, is seamless: there are no restarts or disconnects, it just scales.
 </Admonition>
 
 ### Compute size and Autoscaling configuration
