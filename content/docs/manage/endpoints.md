@@ -58,11 +58,11 @@ To edit a compute endpoint:
 1. Select a branch.
 1. Click the kebab menu in the **Computes** table, and select **Edit**.
    
-   The edit window opens, letting you take a range of actions, depending on your tier.
+   The **Edit** window opens, letting you take a range of actions, depending on your tier.
 1. Once you've made your changes, click **Save**. All changes take immediate effect.
 
 <Admonition type="warning">
-Changing the size of your compute restarts the endpoint and _temporarily disconnects all existing connections_. Resizing via autoscaling, however, is seamless: there are no restarts or disconnects, it just scales.
+Changing the size of your compute restarts the endpoint and _temporarily disconnects all existing connections_. Resizing via autoscaling, however, is seamless: there are no restarts or disconnects, it just scales up or down with demand.
 </Admonition>
 
 ### Compute size and Autoscaling configuration
