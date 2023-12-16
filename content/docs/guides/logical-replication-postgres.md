@@ -66,22 +66,22 @@ If you haven't already, you'll need to configure your destination (subscriber) P
 
 1. Modify `postgresql.conf`, which is typically located in the PostgreSQL data directory. Update the `postgresql.conf` file with the following configurations:
 
-  - `wal_level`: Set the value to logical to enable logical decoding, which is essential for logical replication.
+    - `wal_level`: Set the value to logical to enable logical decoding, which is essential for logical replication.
 
-      ```ini
-      wal_level = logical
-      ```
-  - `max_replication_slots`: Increase this to the number of subscriptions you intend to have, allowing for a dedicated slot for each replication connection. For example, if you plan to have 10 replication connections:
+        ```ini
+        wal_level = logical
+        ```
+    - `max_replication_slots`: Increase this to the number of subscriptions you intend to have, allowing for a dedicated slot for each replication connection. For example, if you plan to have 10 replication connections:
 
-      ```ini
-      max_replication_slots = 10
-      ```
+        ```ini
+        max_replication_slots = 10
+        ```
 
-  - `max_wal_senders`: Set this to the number of concurrent WAL sender processes, which should accommodate all replication and backup processes.
+    - `max_wal_senders`: Set this to the number of concurrent WAL sender processes, which should accommodate all replication and backup processes.
 
-      ```ini
-      max_wal_senders = 10
-      ```
+        ```ini
+        max_wal_senders = 10
+        ```
 
 2. Restart your Postgres instance to apply these configuration changes.
 3. Configure `pg_hba.conf`, which is located in the same directory as `postgresql.conf`, to allow replication connections from your Neon database host:
