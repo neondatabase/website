@@ -5,13 +5,26 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Neon's logical replication feature allows for replication of data to external subscribers. With Airbyte, you can define a Neon database as a replication source and stream data to any of the 30+ destinations supported by Airbyte.  
+Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. 
 
-## Enable logical replication
+[Airbyte](https://airbyte.com/) is an open-source data integration platform that moves data from a source system to a destination system. Airbyte offers a large library of connectors for various data sources and destinations.
+
+In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to one or more of Airbyte's many supported destinations.
+
+## Prerequisites
+
+- An [Airbyte account](https://airbyte.com/)
+- A [Neon account](https://console.neon.tech/)
+
+## Enable logical replication in Neon
 
 <Admonition type="important">
-Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter permanently, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Also, enabling logical replication increases the amount of data written to the WAL (Write-Ahead Logging), which means that you will consume additional storage.
+Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted.
+
+Since logical replication requires more detailed logging to the Write-Ahead Log (WAL) for write transactions, it consumes additional storage.
 </Admonition>
+
+To enable logical replication in Neon:
 
 1. Select your project in the Neon console.
 2. On the Neon **Dashboard**, select **Settings**.
@@ -81,7 +94,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 ## Grant schema access
 
-Grant your dedicated POstgres replication role read-only access to the relevant schemas and tables. Re-run this command for each schema you expect to replicate data from:
+Grant your dedicated Postgres replication role read-only access to the relevant schemas and tables. Re-run this command for each schema you expect to replicate data from:
 
 ```sql
 GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
@@ -93,7 +106,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <role
 
 Airbyte requires a dedicated replication slot. Only one source should be configured to use this replication slot.
 
-Airbyte uses the `pgoutput` plugin in Postgres. To create a replication slot called `airbyte_slot` that uses the `pgoutput` plugin, run the following command on your database using your dedicated `REPLICATION` role:
+Airbyte uses the `pgoutput` plugin in Postgres for decoding WAL changes into a logical replication stream. To create a replication slot called `airbyte_slot` that uses the `pgoutput` plugin, run the following command on your database using your dedicated `REPLICATION` role:
 
 ```sql
 SELECT pg_create_logical_replication_slot('airbyte_slot', 'pgoutput');
@@ -111,29 +124,29 @@ Perform the following steps for each table you want to replicate data from:
     ALTER TABLE tbl1 REPLICA IDENTITY DEFAULT;
     ```
 
-    In rare cases, if your tables use data types that support TOAST or have very large field values, consider instead using replica identity type full: 
+    In rare cases, if your tables use data types that support [TOAST](https://www.postgresql.org/docs/current/storage-toast.html) or have very large field values, consider instead using `REPLICA IDENTITY FULL`: 
 
     ```sql
     ALTER TABLE tbl1 REPLICA IDENTITY FULL;
     ```
 
-2. Create the Postgres publication. You should include all tables you want to replicate as part of the publication:
+2. Create the Postgres publication. Include all tables you want to replicate as part of the publication:
 
     ```sql
     CREATE PUBLICATION airbyte_publication FOR TABLE <tbl1, tbl2, tbl3>;
     ```
 
-    The publication name is customizable. Refer to the Postgres docs if you need to add or remove tables from your publication in the future.
+    The publication name is customizable. Refer to the [Postgres docs](https://www.postgresql.org/docs/current/logical-replication-publication.html) if you need to add or remove tables from your publication in the future.
 
 
 <Admonition type="note">
 The Airbyte UI currently allows selecting any tables for Change Data Capture (CDC). If a table is selected that is not part of the publication, it will not be replicated even though it is selected. If a table is part of the publication but does not have a replication identity, that replication identity will be created automatically on the first run if the Airbyte user has the necessary permissions.
 </Admonition>
 
-## Create a Postgres source
+## Create a Postgres source in Airbyte
 
 1. From your Airbyte Cloud or Airbyte Open Source account, select **Sources** from the left navigation bar, search for **Postgres**, then create a new Postgres source.
-2. Enter the connection details for the Neon database. You can get these details from your Neon connection string, which you can find in the **Connection Details** widget on the **Dashboard** of your Neon project. 
+2. Enter the connection details for the Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project. 
     For example, given a connection string like this:
 
     ```bash
@@ -150,11 +163,11 @@ The Airbyte UI currently allows selecting any tables for Change Data Capture (CD
 
     ![Airbyte Create a source](/docs/guides/airbyte_create_source.png)
 
-3. Under **Optional fields**, list each of the schemas you want to sync. Schema names are case-sensitive, and multiple schemas may be entered. By default, `public` is the only selected schema.
-4. Select an SSL mode. You will most frequently choose `require` or `verify-ca`. Both of these options always require encryption. The `verify-ca` mode requires a certificate. Refer to [Connect securely](/docs/connect/connect-securely) for information about the location of certificate files that you can use with Neon.
+3. Under **Optional fields**, list the schemas you want to sync. Schema names are case-sensitive, and multiple schemas may be entered. By default, `public` is the only selected schema.
+4. Select an SSL mode. You will most frequently choose `require` or `verify-ca`. Both of these options always require encryption. The `verify-ca` mode requires a certificate. Refer to [Connect securely](/docs/connect/connect-securely) for information about the location of certificate files you can use with Neon.
 5. Under **Advanced**:
     
-    - Select **Logical Replication (CDC)** from available replication methods, and enter the replication slot and publication you just created.
+    - Select **Logical Replication (CDC)** from available replication methods.
     - In the **Replication Slot** field, enter the name of the replication slot you created previosly (`airbyte_slot`).
     - In the **Publication** field, enter the name of the publication you created previously (`airbyte_publication`).
     ![Airbyte advanced fields](/docs/guides/airbyte_cdc_advanced_fields.png)
@@ -169,9 +182,15 @@ To complete your source setup, click **Set up source** in the Airbyte UI. Airbyt
 
 ## Configure a destination
 
-To complete your replication setup, you can now add one of Airbyte's many supported destinations, including data services such as Snowflake, BigQuery, and Kafka, to name a few. After configuring a destination, you'' need to set up a connection between your Neon source database and your chosen destination. Refer to the Airbyte documentation for instructions:
+To complete your data integration setup, you can now add one of Airbyte's many supported destinations, including data services such as Snowflake, BigQuery, and Kafka, to name a few. After configuring a destination, you'll need to set up a connection between your Neon source database and your chosen destination. Refer to the Airbyte documentation for instructions:
 
 - [Add a destination](https://docs.airbyte.com/using-airbyte/getting-started/add-a-destination)
 - [Set up a connection](https://docs.airbyte.com/using-airbyte/getting-started/set-up-a-connection)
+
+## References
+
+- [What is an ELT data pipeline?](https://airbyte.com/blog/elt-pipeline)
+- [Logical replication - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html)
+- [Publications - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-publication.html)
 
 <NeedHelp/>

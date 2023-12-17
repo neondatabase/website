@@ -5,23 +5,27 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-[Materialize](https://materialize.com/) is a data warehouse that is built for operational workloads.
+Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. 
 
-Neon's logical replication feature allows for replication of data to external subscribers. This guide shows you how to stream data from a Neon Postgres database to Materialize using the Materialize [PostgreSQL source](https://materialize.com/docs/sql/create-source/postgres/).
+[Materialize](https://materialize.com/) is a data warehouse for operational workloads, purpose-built for low-latency applications. You can use it to process data at speeds and scales not possible in traditional databases, but without the cost, complexity, or development time of most streaming engines.
+
+In this guide, you will learn how to stream data from your Neon Postgres database to Materialize using the Materialize [PostgreSQL source](https://materialize.com/docs/sql/create-source/postgres/).
 
 ## Prerequisites
 
 - A [Materialize account](https://materialize.com/register/)
 - A [Neon account](https://console.neon.tech/)
-- Optionally, install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility, which you can use to run commands in Neon and Materialize. Alternatively, you can run the commands in this guide from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and Materialize **SQL Shell**. 
+- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run the commands in this guide from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup. 
 
 ## Enable logical replication
 
-The first step is to enable logical replication in Neon.
-
 <Admonition type="important">
-Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter permanently, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Also, enabling logical replication increases the amount of data written to the WAL (Write-Ahead Logging), which means that you will consume additional storage.
+Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted.
+
+Since logical replication requires more detailed logging to the Write-Ahead Log (WAL) for write transactions, it consumes additional storage.
 </Admonition>
+
+To enable logical replication in Neon:
 
 1. Select your project in the [Neon Console](https://console.neon.tech/app/projects).
 2. On the Neon **Dashboard**, select **Settings**.
@@ -57,12 +61,6 @@ After logical replication is enabled in Neon, the next step is to create a publi
 
     ```sql
     CREATE PUBLICATION mz_source FOR TABLE <table1>, <table2>;
-    ```
-
-    For all tables in the database:
-
-    ```sql
-    CREATE PUBLICATION mz_source FOR ALL TABLES;
     ```
 
     The `mz_source` publication will contain the set of change events generated from the specified tables, and will later be used to ingest the replication stream.
