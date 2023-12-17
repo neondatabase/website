@@ -5,11 +5,15 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-Confluent Cloud is a fully managed, cloud-native service for real-time data streaming, built on Apache Kafka. It allows you to stream data from many different sources, including Postgres, and build apps that consume messages from an Apache Kafka cluster using popular clients.
+Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
-In this guide, you will learn how to how to replicate data from a Neon Postgres database with Confluent Cloud. You will use the [PostgreSQL CDC Source Connector (Debezium) for Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-postgresql-cdc-source-debezium.html) to read Change Data Capture (CDC) events from the Postgres Write-Ahead Log (WAL) in real time. The connector will write events to a Kafka stream and auto-generate a Kafka topic name based on the source database schema and table name. The connector performs an initial snapshot of the table and then streams any futue change events.
+Confluent Cloud is a fully managed, cloud-native service for real-time data streaming, built on Apache Kafka. It allows you to stream data from many different sources, including Postgres, and build apps that consume messages from an Apache Kafka cluster.
 
+In this guide, you will learn how to how to stream data from a Neon Postgres database to Confluent Cloud. You will use the [PostgreSQL CDC Source Connector (Debezium) for Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-postgresql-cdc-source-debezium.html) to read Change Data Capture (CDC) events from the Write-Ahead Log (WAL) of your Neon database in real time. The connector will write events to a Kafka stream and auto-generate a Kafka topic. The connector performs an initial snapshot of the table and then streams any futue change events.
+
+<Admonition type="note">
 Confluent Cloud Connectors can be set up using the [Confluent Cloud UI](https://confluent.cloud/home) or the [Confluent command-line interface (CLI)](https://docs.confluent.io/confluent-cli/current/overview.html). This guide uses the Confluent Cloud UI.
+</Admonition>
 
 ## Prerequistes
 
@@ -31,9 +35,9 @@ To enable logical replication in Neon:
 3. Select **Beta**.
 4. Click **Enable** to enable logical replication.
 
-The new setting is applied the next time your compute restarts. By default, a compute scales to zero after five minutes of activity and restarts on the next access. To force an immediate restart, refer to [Restart a compute endpoint](/docs/manage/endpoints/).
+The new setting is applied the next time your compute restarts. By default, the compute that runs your Neon Postgres intance automatically suspends after five minutes of inactivity and restarts on the next access. To force an immediate restart, refer to [Restart a compute endpoint](/docs/manage/endpoints/).
 
-You can verify that Neon is enabled for logical replication by running the following query:
+You can verify that logical replication is enabled by running the following query from the the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
 
 ```sql
 SHOW wal_level;

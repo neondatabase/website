@@ -31,9 +31,9 @@ To enable logical replication in Neon:
 3. Select **Beta**.
 4. Click **Enable** to enable logical replication.
 
-The new setting is applied to your compute endpoint the next time is restarts. To force an immediate restart, refer to [Restart a compute endpoint](/docs/manage/endpoints/).
+The new setting is applied the next time your compute restarts. By default, the compute that runs your Neon Postgres intance automatically suspends after five minutes of inactivity and restarts on the next access. To force an immediate restart, refer to [Restart a compute endpoint](/docs/manage/endpoints/).
 
-You can verify that Neon is enabled for logical replication by running the following query from the the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query from the the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
 
 ```sql
 SHOW wal_level;
@@ -124,7 +124,7 @@ Perform the following steps for each table you want to replicate data from:
     ALTER TABLE tbl1 REPLICA IDENTITY DEFAULT;
     ```
 
-    In rare cases, if your tables use data types that support [TOAST](https://www.postgresql.org/docs/current/storage-toast.html) or have very large field values, consider instead using `REPLICA IDENTITY FULL`: 
+    In rare cases, if your tables use data types that support [TOAST](https://www.postgresql.org/docs/current/storage-toast.html) or have very large field values, consider using `REPLICA IDENTITY FULL` instead: 
 
     ```sql
     ALTER TABLE tbl1 REPLICA IDENTITY FULL;
@@ -140,20 +140,24 @@ Perform the following steps for each table you want to replicate data from:
 
 
 <Admonition type="note">
-The Airbyte UI currently allows selecting any tables for Change Data Capture (CDC). If a table is selected that is not part of the publication, it will not be replicated even though it is selected. If a table is part of the publication but does not have a replication identity, that replication identity will be created automatically on the first run if the Airbyte user has the necessary permissions.
+The Airbyte UI currently allows selecting any tables for Change Data Capture (CDC). If a table is selected that is not part of the publication, it will not be replicated even though it is selected. If a table is part of the publication but does not have a replication identity, the replication identity will be created automatically on the first run if the Postgres role you defined for use with Airbyte has the necessary permissions.
 </Admonition>
 
 ## Create a Postgres source in Airbyte
 
-1. From your Airbyte Cloud or Airbyte Open Source account, select **Sources** from the left navigation bar, search for **Postgres**, then create a new Postgres source.
-2. Enter the connection details for the Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project. 
+1. From your Airbyte Cloud account, select **Sources** from the left navigation bar, search for **Postgres**, and then create a new Postgres source.
+2. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project. 
     For example, given a connection string like this:
+
+    <CodeBlock shouldWrap>
 
     ```bash
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
     ```
 
-    You would enter the details in the Airbyte **Create a source** dialog as shown:
+    </CodeBlock>
+
+    Enter the details in the Airbyte **Create a source** dialog as shown below. Your values will differ.
 
     - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
     - **Port**: 5432
@@ -168,8 +172,8 @@ The Airbyte UI currently allows selecting any tables for Change Data Capture (CD
 5. Under **Advanced**:
     
     - Select **Logical Replication (CDC)** from available replication methods.
-    - In the **Replication Slot** field, enter the name of the replication slot you created previosly (`airbyte_slot`).
-    - In the **Publication** field, enter the name of the publication you created previously (`airbyte_publication`).
+    - In the **Replication Slot** field, enter the name of the replication slot you created previosly: `airbyte_slot`.
+    - In the **Publication** field, enter the name of the publication you created previously: `airbyte_publication`.
     ![Airbyte advanced fields](/docs/guides/airbyte_cdc_advanced_fields.png)
 
 ## Allow inbound traffic
@@ -178,11 +182,11 @@ If you are on Airbyte Cloud, and you are using Neon's **IP Allow** feature in to
 
 ## Complete the source setup
 
-To complete your source setup, click **Set up source** in the Airbyte UI. Airbyte will test connecting to your database. Once this succeeds, you've successfully configured an Airbyte Postgres source for your Neon database.
+To complete your source setup, click **Set up source** in the Airbyte UI. Airbyte will test the connection to your database. Once this succeeds, you've successfully configured an Airbyte Postgres source for your Neon database.
 
 ## Configure a destination
 
-To complete your data integration setup, you can now add one of Airbyte's many supported destinations, including data services such as Snowflake, BigQuery, and Kafka, to name a few. After configuring a destination, you'll need to set up a connection between your Neon source database and your chosen destination. Refer to the Airbyte documentation for instructions:
+To complete your data integration setup, you can now add one of Airbyte's many supported destinations, such as Snowflake, BigQuery, or Kafka, to name a few. After configuring a destination, you'll need to set up a connection between your Neon source database and your chosen destination. Refer to the Airbyte documentation for instructions:
 
 - [Add a destination](https://docs.airbyte.com/using-airbyte/getting-started/add-a-destination)
 - [Set up a connection](https://docs.airbyte.com/using-airbyte/getting-started/set-up-a-connection)

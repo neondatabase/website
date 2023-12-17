@@ -24,9 +24,9 @@ To enable logical replication in Neon:
 3. Select **Replication**.
 4. Click **Enable**.
 
-The new setting is applied the next time your compute restarts. By default, a compute scales to zero after five minutes of activity and restarts on the next access. To force an immediate restart, refer to [Restart a compute endpoint](/docs/manage/endpoints/).
+The new setting is applied the next time your compute restarts. By default, the compute that runs your Neon Postgres intance automatically suspends after five minutes of inactivity and restarts on the next access. To force an immediate restart, refer to [Restart a compute endpoint](/docs/manage/endpoints/).
 
-You can verify that Neon is enabled for logical replication by running the following query:
+You can verify that logical replication is enabled by running the following query from the the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
 
 ```sql
 SHOW wal_level;
