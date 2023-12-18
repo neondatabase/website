@@ -7,11 +7,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container/container';
-import Link from 'components/shared/link';
-import LINKS from 'constants/links';
 import { activities, performance, storage } from 'constants/pricing';
 import useWindowSize from 'hooks/use-window-size';
-import ArrowIcon from 'icons/arrow-sm.inline.svg';
 
 import Metrics from './metrics';
 import { MOBILE_WIDTH } from './select/select';
@@ -36,7 +33,7 @@ const getSelectedIndex = (activeTitle, items) => {
   return index === -1 ? 1 : index + 1;
 };
 
-const Forecast = () => {
+const Estimates = () => {
   const sectionRef = useRef();
   const animationRef = useRef();
   const { width: windowWidth, height: pageHeight } = useWindowSize();
@@ -179,8 +176,9 @@ const Forecast = () => {
 
   return (
     <section
-      className="forecast safe-paddings pt-[200px] 2xl:pt-36 md:pt-24 md:pb-20"
+      className="forecast safe-paddings pt-36 md:pt-20 md:pb-20"
       ref={sectionRef}
+      id="estimates"
     >
       <LazyMotion features={domAnimation}>
         <m.div
@@ -192,32 +190,15 @@ const Forecast = () => {
           }}
           transition={{ duration: 0.2 }}
         >
-          <Container
-            className="relative z-10 grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
-            size="medium"
-          >
-            <div className="col-start-2 col-span-5 -mr-10 xl:col-start-1 xl:col-span-6 xl:mr-0 md:col-span-full">
-              <h2 className="text-6xl leading-none font-medium tracking-tighter 2xl:text-[60px] xl:text-[56px] lg:text-5xl md:text-4xl">
-                Forecasting is easy
-              </h2>
-              <p className="text-lg leading-snug font-light mt-4 max-w-[464px] md:text-base md:max-w-none">
-                Forecast your monthly bill by answering questions about user activity and app needs.
-              </p>
-            </div>
-            <div className="col-end-12 col-span-4 -ml-10 md:col-span-full md:ml-0">
-              <div>
-                <p className="text-lg leading-snug font-light mt-4 max-w-[248px] md:text-base md:max-w-none">
-                  Need additional help or custom volume-based plans?
-                </p>
-                <Link
-                  className="mt-3.5 pt-[7px] pb-2 px-3 text-[15px] border border-green-45 rounded-[50px] inline-flex items-baseline leading-none text-green-45 tracking-extra-tight transition-colors duration-200 hover:border-[#00e5bf] hover:text-[#00e5bf]"
-                  to={LINKS.contactSales}
-                >
-                  Contact Sales
-                  <ArrowIcon className="ml-1" />
-                </Link>
-              </div>
-            </div>
+          <Container className="relative z-10 text-center" size="medium">
+            <h2 className="leading-none font-medium tracking-tighter text-[56px] lg:text-5xl md:text-4xl [&_span]:text-green-45">
+              <span>Each user is unique.</span>
+              <br /> However, we can give you estimates.
+            </h2>
+            <p className="text-lg leading-snug font-light mt-4 max-w-[656px] mx-auto md:text-base md:max-w-none">
+              Simply answer three questions to get an estimated cost projection, tailored to give
+              you a clear understanding of expenses based on usage scenarios.
+            </p>
           </Container>
         </m.div>
 
@@ -259,4 +240,4 @@ const Forecast = () => {
   );
 };
 
-export default Forecast;
+export default Estimates;
