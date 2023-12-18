@@ -12,7 +12,7 @@ updatedOn: '2023-12-01T19:05:09.474Z'
 
 For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-## The `connection string` command
+## The `connection-string` command
 
 This command constructs a Postgres connection string for connecting to a database in your Neon project. You can construct a connection string for any database in any branch. The connection string includes the password for the specified role.
 
