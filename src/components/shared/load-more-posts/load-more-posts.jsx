@@ -2,16 +2,44 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Button from 'components/shared/button';
 
-const LoadMorePosts = ({ className, children, defaultCountPosts, countToAdd }) => {
+const ReleaseNotesWrapper = ({ children, countPosts }) => {
+  const [allPostsShown, setAllPostsShown] = useState(false);
+  useEffect(() => {
+    if (countPosts >= children.length) {
+      setAllPostsShown(true);
+    }
+  }, [countPosts, children.length]);
+
+  return (
+    <div className={clsx(allPostsShown ? 'mb-0' : '-mb-4')}>{children.slice(0, countPosts)}</div>
+  );
+};
+
+ReleaseNotesWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+  countPosts: PropTypes.number.isRequired,
+};
+
+const LoadMorePosts = ({
+  className,
+  children,
+  defaultCountPosts,
+  countToAdd,
+  isReleaseNotes = false,
+}) => {
   const [countPosts, setCountPosts] = useState(defaultCountPosts);
 
   return (
     <>
-      {children.slice(0, countPosts)}
+      {isReleaseNotes ? (
+        <ReleaseNotesWrapper countPosts={countPosts}>{children}</ReleaseNotesWrapper>
+      ) : (
+        children.slice(0, countPosts)
+      )}
       {countPosts < children.length && (
         <div className={clsx('col-span-full text-center', className)}>
           <Button
@@ -32,6 +60,7 @@ LoadMorePosts.propTypes = {
   children: PropTypes.node.isRequired,
   defaultCountPosts: PropTypes.number.isRequired,
   countToAdd: PropTypes.number.isRequired,
+  isReleaseNotes: PropTypes.bool,
 };
 
 export default LoadMorePosts;
