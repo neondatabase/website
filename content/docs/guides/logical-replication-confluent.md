@@ -94,7 +94,7 @@ FROM pg_roles
 WHERE rolname = '<role_name>';
 ```
 
-If the schemas and tables you are replicating from are not owned by this role, make sure to grant this role access. Run these commands for each schema you expect to replicate data from:
+If the schemas and tables you are replicating from are not owned by this role, make sure to grant access. Run these commands for each schema you expect to replicate data from:
 
 ```sql
 GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
