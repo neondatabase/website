@@ -11,7 +11,7 @@ Logical replication in Neon works in the same way as logical replication a stand
 
 Replication starts by copying a snapshot of the data from the publisher to the subscriber. Once this is done, subsequent changes are sent to the subscriber as they occur in real-time. Replicated changes are applied in the order they were committed on the publisher in order to maintain transactional consistency on the subscriber.
 
-To learn more about Postgres logical replication including basic concepts and syntax, see [Logical replication basics](tbd). For the ins and outs of logical replication in Neon, including limitations, see [Logical replication in Neon](tbd). If you just want to get started, jump into one of our step-by-step [logical replication guides](#logical-replication-guides). 
+To learn more about Postgres logical replication including basic concepts and syntax, see [Logical replication basics](/docs/guides/logical-replication-basics). For the ins and outs of logical replication in Neon, including limitations, see [Logical replication in Neon](/docs/guides/logical-replication-neon). If you just want to get started, jump into one of our step-by-step [logical replication guides](#logical-replication-guides). 
 
 ## Learn about logical replication
 
@@ -19,7 +19,7 @@ To learn more about Postgres logical replication including basic concepts and sy
 
 <a href="/docs/guides/logical-replication-basics" description="Learn about Postgres logical replication concepts and syntax" icon="scale-up">Logical replication basics</a>
 
-<a href="/docs/guides/logical-replication-neon" description="Learn the ins and outs of logical replication in Neon" icon="screen">Logical replication in Neon</a>
+<a href="/docs/guides/logical-replication-neon" description="Logical replicatiion specifics in Neon, including current limitations" icon="screen">Logical replication in Neon</a>
 
 </DetailIconCards>
 
