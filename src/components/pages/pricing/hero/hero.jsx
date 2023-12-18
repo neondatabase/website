@@ -13,15 +13,16 @@ import CheckIcon from 'icons/check.inline.svg';
 
 const items = [
   {
-    type: 'Free',
-    price: 'Try Neon now',
+    type: 'Free Tier',
+    price: 'Start free',
     description:
-      'Essential features to help you get started with Neon. Perfect for prototyping and personal projects.',
+      'A generous free tier with essential features perfect for prototypes and personal projects.',
     features: [
-      { title: '1 project' },
-      { title: '10 branches' },
-      { title: '3 GB of data per branch' },
-      { title: 'A shared compute with 1 GB of RAM' },
+      { title: '1 project, 10 Branches, unlimited DBs' },
+      { title: 'Shared compute w/1 GB of RAM' },
+      { title: 'Up to 3GB Storage' },
+      { title: '7 Day Point-in-time restore' },
+      { title: 'Community Support' },
     ],
     button: {
       url: 'https://console.neon.tech/sign_in',
@@ -31,31 +32,30 @@ const items = [
   },
   {
     type: 'Pro',
-    price: 'Starting at <span class="font-normal text-pricing-primary-1">$0.00</span>',
+    price: 'Pay as you go',
     description:
-      'A usage-based plan for small to medium teams. Unlimited resources with advanced configuration options.',
+      'A pro plan with features for production. Scales from $0 based on compute & storage usage.',
     features: [
-      { title: 'Unlimited projects & databases' },
-      { title: 'Unlimited branches' },
-      { title: 'Autoscaling' },
-      { title: 'Configurable compute size' },
-      { title: 'Read replicas' },
+      { title: 'Unlimited Projects, Branches, Databases' },
+      { title: 'Flexible compute, unlimited storage' },
+      { title: 'Autoscaling and read replicas' },
+      { title: 'Project Sharing' },
+      { title: 'Pro support' },
     ],
     button: {
-      url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
-      text: 'Upgrade',
+      url: '#estimates',
+      text: 'Estimate Your Cost',
       theme: 'primary',
     },
   },
   {
-    type: 'Custom',
-    price: 'Contact us',
+    type: 'Enterprise',
+    price: 'Custom plans',
     description:
-      'Custom volume-based plans for medium to large teams, database fleets, and resale.',
+      'Custom volume-based plans for <span class="text-white">medium to large teams, database fleets, and resale.</span>',
     features: [
-      { title: 'Custom contracts' },
-      { title: 'Prepaid plans' },
-      { title: 'Volume discounts' },
+      { title: 'Custom pricing with volume discounts' },
+      { title: 'Prepaid plans and capacity contracts' },
       { title: 'Enterprise support' },
     ],
     button: {
@@ -124,9 +124,9 @@ const Hero = () => {
                 )}
                 style={{
                   '--accentColor':
-                    type === 'Free' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
+                    type === 'Free Tier' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
                   '--hoverColor':
-                    type === 'Free' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
+                    type === 'Free Tier' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
                 }}
                 key={index}
                 onPointerEnter={() => {
@@ -146,10 +146,9 @@ const Hero = () => {
                     <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
                       {type}
                     </span>
-                    <h2
-                      className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px] md:mt-4"
-                      dangerouslySetInnerHTML={{ __html: price }}
-                    />
+                    <h2 className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px] md:mt-4">
+                      {price}
+                    </h2>
                     <AnimatedButton
                       className={clsx(
                         'mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 md:mt-7 sm:max-w-none',
@@ -169,9 +168,8 @@ const Hero = () => {
                         'mt-9 font-light leading-snug tracking-tight text-gray-new-70 md:mt-8',
                         type === 'Pro' ? 'lg:mt-5' : 'lg:min-h-[66px] md:min-h-fit'
                       )}
-                    >
-                      {description}
-                    </p>
+                      dangerouslySetInnerHTML={{ __html: description }}
+                    />
                   </div>
                   <div className="mt-auto flex grow flex-col">
                     <ul

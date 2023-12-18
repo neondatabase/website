@@ -166,7 +166,7 @@ const Metrics = ({
 
           <p className="mt-11 relative z-10 text-base leading-snug font-light text-gray-new-80">
             <strong className="font-medium text-white">Want to learn more?</strong> For advanced
-            users we highly recommend exploring our{' '}
+            usage we recommend exploring our{' '}
             <Link
               className="inline-block leading-tight decoration-1 underline-offset-[6px]"
               theme="green-underlined"

@@ -6,12 +6,12 @@ export const activities = [
   },
   {
     title: 'Only during business hours',
-    description: 'Users access the application only during business hours',
+    description: 'Users access app primarily during business hours',
     unit: 7,
   },
   {
     title: 'Always active',
-    description: 'Users are active 24/7 and require instant connections',
+    description: 'Users are active 24/7 and require instant connection',
     unit: 24,
   },
 ];
