@@ -26,6 +26,8 @@ const CommunityBanner = ({ buttonText, buttonUrl, children = null, logo }) => (
           to={buttonUrl}
           size="xs"
           theme="primary"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           {buttonText}
         </Button>
