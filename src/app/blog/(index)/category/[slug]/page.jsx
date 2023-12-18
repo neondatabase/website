@@ -26,7 +26,7 @@ export default async function BlogCategoryPage({ params: { slug } }) {
       <h1 className="sr-only">{generateBlogTitle(category)}</h1>
       <div className="dark grid grid-cols-3 gap-x-10 gap-y-16 2xl:gap-y-12 xl:gap-x-6 xl:gap-y-10 md:grid-cols-2 md:gap-y-5 sm:grid-cols-1">
         {category.slug === 'all-posts' ? (
-          <LoadMorePosts defaultCountPosts={10} countToAdd={10}>
+          <LoadMorePosts defaultCountPosts={13} countToAdd={12}>
             {posts.map((post, index) => (
               <BlogPostCard
                 className={clsx({ 'col-span-full': index === 0 })}

@@ -9,7 +9,7 @@ import getReleaseNotesDateFromSlug from 'utils/get-release-notes-date-from-slug'
 
 const ReleaseNoteList = ({ className, items }) => (
   <div className={clsx('sm:space-y-7', className)}>
-    <LoadMorePosts defaultCountPosts={13} countToAdd={12}>
+    <LoadMorePosts defaultCountPosts={10} countToAdd={10}>
       {items.map(({ slug, content }, index) => {
         const { datetime, label } = getReleaseNotesDateFromSlug(slug);
         const releaseNotesPath = generateReleaseNotePath(slug);
