@@ -1,18 +1,19 @@
 'use client';
 
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Button from 'components/shared/button';
 
-const LoadMorePosts = ({ children, defaultCountPosts, countToAdd }) => {
+const LoadMorePosts = ({ className, children, defaultCountPosts, countToAdd }) => {
   const [countPosts, setCountPosts] = useState(defaultCountPosts);
 
   return (
     <>
       {children.slice(0, countPosts)}
       {countPosts < children.length && (
-        <div className="col-span-full text-center">
+        <div className={clsx('col-span-full text-center', className)}>
           <Button
             theme="gray-outline"
             size="xs"
@@ -27,6 +28,7 @@ const LoadMorePosts = ({ children, defaultCountPosts, countToAdd }) => {
 };
 
 LoadMorePosts.propTypes = {
+  className: PropTypes.string,
   children: PropTypes.node.isRequired,
   defaultCountPosts: PropTypes.number.isRequired,
   countToAdd: PropTypes.number.isRequired,
