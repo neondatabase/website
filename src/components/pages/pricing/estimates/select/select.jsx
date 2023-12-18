@@ -103,7 +103,7 @@ const Select = (props) => {
                     setActiveItems({ ...activeItems, [type]: item });
                     if (!allItemsSelected) {
                       scroller.scrollTo(nextId, {
-                        duration: 1200,
+                        duration: 400,
                         delay: 0,
                         smooth: true,
                         isDynamic: true,
