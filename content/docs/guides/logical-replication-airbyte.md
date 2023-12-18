@@ -42,65 +42,25 @@ SHOW wal_level;
  logical
 ```
 
-## Create a Postgres role
+## Grant schema access to your Postgres role
 
-It is recommended that you create a dedicated Postgres role for replication. The role must have the `REPLICATION` privilege. Roles created using the Neon Console, CLI, or API are granted the membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+The role you use for replication requires the `REPLICATION` privilege. Currently, only the default Postgres role created with your Neon project has this privilege and it cannot be granted to other roles. This is the role that is named for the email, Google, GitHub, or partner account you signed up with. For example, if you signed up as `alex@example.com`, you should have a default Postgres uers named `alex`. You can verify your user has this privilege by running the follow query: 
 
-<Tabs labels={["Neon Console", "CLI", "API"]}>
-
-<TabItem>
-
-To create a role in the Neon Console:
-
-1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select a project.
-3. Select **Roles**.
-4. Select the branch where you want to create the role.
-4. Click **New Role**.
-5. In the role creation dialog, specify a role name. The length of the role name is limited to 63 bytes.
-6. Click **Create**. The role is created and you are provided with the password for the role.
-
-</TabItem>
-
-<TabItem>
-
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
-
-```bash
-neonctl roles create --name <role>
+``sql
+SELECT rolname, rolreplication 
+FROM pg_roles 
+WHERE rolname = '<role_name>';
 ```
 
-</TabItem>
-
-<TabItem>
-
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](/docs/reference/cli-roles).
-
-```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
-  -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "role": {
-    "name": "alex"
-  }
-}' | jq
-```
-
-</TabItem>
-
-</Tabs>
-
-## Grant schema access
-
-Grant your dedicated Postgres replication role read-only access to the relevant schemas and tables. Re-run this command for each schema you expect to replicate data from:
+If the schemas and tables you are replicating from are not owned by this role, make sure to grant this role access. Run these commands for each schema you expect to replicate data from:
 
 ```sql
 GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
 GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <role_name>;
 ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <role_name>;
 ```
+
+Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication in the future.
 
 ## Create a replication slot
 

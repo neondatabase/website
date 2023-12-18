@@ -117,17 +117,23 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 </Tabs>
 
-## Grant schema access
+## Grant schema access to your Postgres role
 
-Your dedicated Postgres replication role must be able to access to the relevant schemas and tables. If necessary, you can grant read-only access with the following commands. Re-run these command for each schema you expect to replicate data from:
+The role you use for replication requires the `REPLICATION` privilege. Currently, only the default Postgres role created with your Neon project has this privilege and it cannot be granted to other roles. This is the role that is named for the email, Google, GitHub, or partner account you signed up with. For example, if you signed up as `alex@example.com`, you should have a default Postgres uers named `alex`. You can verify your user has this privilege by running the follow query: 
+
+``sql
+SELECT rolname, rolreplication 
+FROM pg_roles 
+WHERE rolname = '<role_name>';
+```
+
+If the schemas and tables you are replicating from are not owned by this role, make sure to grant this role access. Run these commands for each schema you expect to replicate data from:
 
 ```sql
 GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
 GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <role_name>;
 ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <role_name>;
 ```
-
-Once connected to your database, Materialize takes an initial snapshot of the tables in your publication. `SELECT` privileges are required for this initial snapshot.
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication in the future.
 

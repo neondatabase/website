@@ -65,6 +65,27 @@ In addition to creating a publication for a specific table, Postgres allows you 
 
 With your publication created, you're now ready to configure subscribers that will receive the data changes from this publication.
 
+
+## Grant schema access to your Postgres role
+
+The role you use for replication requires the `REPLICATION` privilege. Currently, only the default Postgres role created with your Neon project has this privilege and it cannot be granted to other roles. This is the role that is named for the email, Google, GitHub, or partner account you signed up with. For example, if you signed up as `alex@example.com`, you should have a default Postgres uers named `alex`. You can verify your user has this privilege by running the follow query: 
+
+``sql
+SELECT rolname, rolreplication 
+FROM pg_roles 
+WHERE rolname = '<role_name>';
+```
+
+If the schemas and tables you are replicating from are not owned by this role, make sure to grant this role access. Run these commands for each schema you expect to replicate data from:
+
+```sql
+GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
+GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <role_name>;
+ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <role_name>;
+```
+
+Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication in the future.
+
 ## Configure PostgreSQL as a subscriber
 
 A subscriber is a destination that receives data changes from your publications. 
