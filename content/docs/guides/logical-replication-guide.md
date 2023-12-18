@@ -15,6 +15,8 @@ To learn more about Postgres logical replication including basic concepts and sy
 
 ## Learn about logical replication
 
+<DetailIconCards>
+
 <a href="/docs/guides/logical-replication-basics" description="Learn about Postgres logical replication concepts and syntax" icon="scale-up">Logical replication basics</a>
 
 <a href="/docs/guides/logical-replication-neon" description="Learn the ins and outs of logical replication in Neon" icon="screen">Logical replication in Neon</a>
