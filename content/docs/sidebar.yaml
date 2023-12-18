@@ -129,7 +129,7 @@
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
         - title: Logical replication
-          slug: guides/logical-replication-intro
+          slug: guides/logical-replication-guide
           items:
             - title: Airbyte
               slug: guides/logical-replication-airbyte
