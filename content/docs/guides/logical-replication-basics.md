@@ -1,75 +1,176 @@
 ---
-title: PostgreSQL logical replication basics
-subtitle: Learn about POstgreSQL logical replication concepts and syntax
+title: Postgres logical replication basics
+subtitle: Learn about PostgreSQL logical replication concepts and syntax
 enableTableOfContents: true
 isDraft: true
 ---
 
-Logical replication in Postgres involves transferring data changes from a publisher node to a subscriber node. The publisher node hosts publications, which are essentially sets of database changes. On the other hand, the subscriber node hosts subscriptions that receive these changes.
+Logical replication is one of those most useful features in Postgres. Do you need to move your to a specialized business analytics platform? Want to set up am ETL pipeline from your Postgres database to a data warehouse? Want to stream data to change data capture (CDC) ecosystem or an external instance of Postgres? You can do all of these things and more with logical replication.
 
-In this model, multiple subscribers can subscribe to various publications on a publisher node. These subscribers actively retrieve data from their respective publications.
+With logical replication, you can copy some or all of your data to a different location and continue sending updates from your source in real-time, allowing you to maintain up-to-date copies of your data in different locations. 
 
-## Publications
+Postgres logical replication architecture is very simple. It use a _publisher and subscriber_ model for data replication, which you can read about in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html). The primary data source, your Neon database in this case, is the _publisher_. The database or platform receiving the data is the _subscriber_. On the initial connection from a subscriber, all of the data is copied from the publisher to the subscriber. After the initial copy operation, any changes made on the publisher are sent to the subscriber.
 
-Publications are defined on the primary node to replicate changes. A publication consists of changes from one or more tables and is unique to a single database. It can be thought of as a change set or replication set.
+![Logical replication publisher subscriber archtitecture](/docs/guides/logical_replication_model.png)
 
-Tables can be included in multiple publications as required. Currently, publications can only encompass tables or all tables within a schema.
+In the next section, we'll look at how to set up the publisher for replication, which is generally the same on any standard Postgres installation, including Neon. 
 
-Publications have the flexibility to specify the types of changes they replicate, which can include `INSERT`, `UPDATE`, `DELETE`, and `TRUNCATE` operations. By default, they replicate all these operation types. 
+## Publisher setup
 
-### Defining a publication
+This sectioon describes how to set up the publisher for replication.
 
-You can create a publication for a specific table like this:
+### Configuring the publisher
+
+To turn on logical replication on the publisher, you'll need to change the Postgres `wal_level` configuration parameter setting to `logical`. This parameter is set to `replica` by default. 
+
+```ini
+wal_level = logical
+```
+
+In a standalone Postgres installation, you would do this by modifying your `postgresql.conf` configuration file and restarting Postgres. In Neon, you can do this from the console, following these steps:
+
+1. Select your project in the Neon console.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Replication**.
+4. Click **Enable**.
+
+The new setting is applied the next time your compute restarts. By default, the compute that runs your Neon Postgres intance automatically suspends after five minutes of inactivity and restarts on the next access. To force an immediate restart, refer to [Restart a compute endpoint](/docs/manage/endpoints/).
+
+You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
+
+```sql
+SHOW wal_level;
+ wal_level 
+-----------
+ logical
+```
+
+<Admonition type="note">
+Logical replication increases the amount of data written to the Write-Ahead Log (WAL) for write transactions. This is becuase detailed row-level changes and additional metadata are required to support the replication process. This detailed logging ensures that each change can be accurately replicated to the subscriber. Typically, you can expect a 10% to 30% increase in the amount of data written to the WAL, which means increased storage usage.
+</Admonition>
+
+Next, you'll want to check your `max_wal_senders` and `max_replication_slots` configuration parameter settings to make sure you have enough WAL senders and replication slots.
+
+The `max_wal_senders` parameter defines the maximum number of concurrent WAL sender processes, which are responsible for streaming WAL data to subscribers. In most cases, you should have one WAL sender process for each subscriber or replication slot to ensure efficient and consistent data replication. In Neon's default configuration, this parameter is preset to 10.
+
+The `max_replication_slots` defines the maximum number of replication slots, which are used to manage database replication connections. Each replication slot tracks changes in the publisher database to ensure that each connected subscriber stays up to date. You'll want a replication slot for each replication connection. For example, if you expect to have 10 separate subscribers replicating your from your database, you would set `max_replication_slots` to 10 to accommodate each connection. In Neon, this value is preset to 10. If you need a higher setting, the configuration can be adjusted by updating your project using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+
+```ini
+max_wal_senders = 10
+max_replication_slots = 10
+```
+
+### Creating a replication role
+
+For suscribers to connect to a publication, they require a POstgres role with the `REPLICATION` privilege. In a standalone Postgres system, you would typically create a role using a `CREATE ROLE` statement and assign the that role the `REPLICATION` privilege. In Neon, any role created using the Neon Console, CLI, or API is granted the membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege. The default Postgres role created with your Neon project also has the `REPLICATION` privilege.
+
+<Tabs labels={["Neon Console", "CLI", "API"]}>
+
+<TabItem>
+
+To create a role in the Neon Console:
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+2. Select a project.
+3. Select **Roles**.
+4. Select the branch where you want to create the role.
+4. Click **New Role**.
+5. In the role creation dialog, specify a role name.
+6. Click **Create**. The role is created and you are provided with the password for the role.
+
+</TabItem>
+
+<TabItem>
+
+The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
+
+```bash
+neonctl roles create --name <role>
+```
+
+</TabItem>
+
+<TabItem>
+
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](/docs/reference/cli-roles).
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "role": {
+    "name": "alex"
+  }
+}' | jq
+```
+
+</TabItem>
+
+</Tabs>
+
+To make sure your replication role can access the data you intend to publish, be sure to grant read-only access to all of the relevant schemas and tables. For example, run these commands for each schema you expect to replicate data from:
+
+```sql
+GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
+GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <role_name>;
+ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <role_name>;
+```
+
+Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication in the future.
+
+### Allowing inbound traffic
+
+Generally speaking, your subscriber will need to be able to get past any firewall or IP restrictions in order to access the publisher database. In Neon, action is only required in this regard if you use Neon's **IP Allow** feature to limit IP addresses that can connect to Neon.
+
+If you do use Neon's **IP Allow** feature:
+
+1. Determine the IP address or addresses of the subscriber.
+2. In your Neon project, add the IPs to your **IP Allow** list, which you can find in your project's settings. For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+
+### Creating a publication
+
+The Postgres documentation describes a [publication](https://www.postgresql.org/docs/current/logical-replication-publication.html) as a group of tables whose data changes are intended to be replicated through logical replication. It also describes a publication as a set of changes generated from a table or a group of tables, and as a "change set" or "replication set". It's indeed all of those things.
+
+A particular table can be included in multiple publications, if necessary. Currently, publications can only include tables within a particular schema.
+
+Publications can specify the types of changes they replicate, which can include `INSERT`, `UPDATE`, `DELETE`, and `TRUNCATE` operations. By default, they replicate all these operation types. 
+
+You can create a publication for a specific table using [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html) syntax. 
+
+This command creates a publication named `users_publication` that will track changes made to the `users` table.
 
 ```sql
 CREATE PUBLICATION users_publication FOR TABLE users;
 ```
 
-This command creates a publication named `users_publication` that will track changes made to the `users` table.
-
-### Multiple publications for a table
-
-A table can be part of several publications. This is useful in complex replication setups where different subscribers might need different sets of changes from the same table. For instance, alongside the `users_publication`, you might want to create another publication for a different purpose:
+This command creates a publication that publishes all changes in two tables:
 
 ```sql
-CREATE PUBLICATION audit_publication FOR TABLE users;
+CREATE PUBLICATION users_publication FOR TABLE users, departments;
 ```
+<Admonition type="note">
+Neon currently does not support creating publications that include all tables within a schema using `CREATE PUBLICATION publication_name FOR ALL TABLES` syntax. This requires the PostgreSQL superuser privilege, which is not available in Neon.
+</Admonition>
 
-Here, `audit_publication` could be a separate publication used for auditing purposes, tracking the same `users` table.
-
-### Specifying types of changes
-
-Publications can be configured to replicate specific types of changes: `INSERT`, `UPDATE`, `DELETE`, and `TRUNCATE`. By default, a publication will replicate all these types of operations. However, you can limit the types of changes a publication replicates. For example, to create a publication that only replicates `INSERT` and `UPDATE` operations, you could use:
+This command creates a publication that only publishes `INSERT` and `UPDATE` operations in one table. In this case, all data is published without any data being deleted.
 
 ```sql
-CREATE PUBLICATION selective_publication FOR TABLE users WITH (publish = 'insert, update');
+CREATE PUBLICATION users_publication FOR TABLE users
+    WITH (publish = 'insert,update');
 ```
 
-In this case, `selective_publication` will only replicate insertions and updates made to the `users` table.
+For more examples and the full syntax, refer to [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 
-### Whole schema publications
 
-Neon currently does not support creating publications that include all tables within a schema using `CREATE PUBLICATION publication_name FOR ALL TABLES` syntax. This requires the PostgreSQL superuser privilege, which is not available in Neon. If you want to include all tables within a schema, specify the table names indivaidually in a comma-separated list using this syntax:
+## Subscriber setup
 
-```sql
-CREATE PUBLICATION multi_table_publication FOR TABLE users, orders, sales;
-```
+In PostgreSQL's logical replication framework, a subscription represents the downstream side of logical replication. It establishes a connection to the publisher and identifies the publication it intends to subscribe to. 
 
-## Subscriptions
+A single subscriber can maintain multiple subscriptions, including multiple subscriptions to the same publisher. 
 
-In PostgreSQL's logical replication framework, a subscription represents the downstream side of logical replication. It establishes a connection to the publisher and identifies one or more publications it intends to subscribe to. This setup enables the subscriber database to receive and apply changes from the publisher database.
-
-A single subscriber node can maintain multiple subscriptions, including multiple subscriptions to the same publisher. In scenarios with multiple subscriptions between the same publisher and subscriber, it's important ensure that there is no overlap in the publication objects being subscribed to. This helps avoid conflicts or redundant data replication.
-
-### Replication slots and data synchronization
-
-Each subscription utilizes a replication slot on the publisher side. Replication slots are a feature in PostgreSQL that ensures the database retains all necessary information until it is confirmed to be received by the subscriber. This mechanism is crucial for maintaining data consistency and ensuring that no changes are lost during replication.
-
-For initial data synchronization, especially for pre-existing table data, additional replication slots might be required. These slots are temporary and are typically dropped after the completion of the data synchronization process. This initial synchronization ensures that the subscriber is up-to-date with the publisher before it starts receiving incremental changes.
-
-Example of creating a subscription
-
-Building on the `users_publication`` example above, here’s how you can create a subscription:
+Building on the `users_publication` example above, here’s how you can create a subscription. A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication.
 
 ```sql
 CREATE SUBSCRIPTION users_subscription 
@@ -77,4 +178,55 @@ CONNECTION 'postgres://username:password@host:port/dbname'
 PUBLICATION users_publication;
 ```
 
+If you don't do this correctly the first time, 
+
 In this example, `users_subscription` is the subscription that connects to a publication named `users_publication`. Replace username, password, host, port, and dbname with your specific database details. In Neon, you can replace this with your Neon database connection string.
+
+## Replication Slots
+
+Replication slots play a critical role in logical replication. They are used to ensure data consistency and reliability during the replication process.
+
+A replication slot on the publisher database tracks the progress of the corresponding subscriber, ensuring that the publisher retains all changes that have not yet been replicated to the subscriber. This mechanism helps prevent data loss during replication, especially in cases of network issues or subscriber downtime.
+
+### Creating Replication Slots
+
+Typically, replication slots are created automatically when a new subscription is set up. However, they can also be manually created and managed, which is useful in advanced replication setups. For example, some data platforms require that you create replication slot when configuring replication from Postgres.
+
+To create a replication slot manually, you would use the following SQL command:
+
+```sql
+SELECT * FROM pg_create_physical_replication_slot('slot_name');
+```
+
+In this example, `slot_name` is the name of the new replication slot.
+
+### Monitoring replication slots
+
+Monitoring replication slots is important to ensure they are being used effectively and not causing undue storage retention on the publisher. The following query can be used to view the status of all replication slots:
+
+```sql
+SELECT * FROM pg_replication_slots;
+```
+
+This query provides information about each slot, such as whether it is active, the last received LSN (Log Sequence Number), and more.
+
+### Managing replication slots
+
+In some cases, replication slots may need to be manually removed, particularly if a subscription is no longer needed, or if you're reconfiguring your replication setup. To drop a replication slot, use the following command:
+
+```sql
+SELECT pg_drop_replication_slot('slot_name');
+```
+
+This command will remove the replication slot named `slot_name`.
+
+### Example in the context of logical replication
+
+Considering our earlier examples with `users_publication` and `users_subscription`, the replication slot for this subscription would typically be created automatically. However, if you need to manage it manually for advanced configurations or troubleshooting, you can reference it by the subscription name:
+
+```sql
+SELECT * FROM pg_replication_slots WHERE slot_name = 'users_subscription';
+```
+
+This query would show the status of the replication slot associated with `users_subscription`.
+

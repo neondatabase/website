@@ -26,7 +26,7 @@ To enable logical replication in Neon:
 
 The new setting is applied the next time your compute restarts. By default, the compute that runs your Neon Postgres intance automatically suspends after five minutes of inactivity and restarts on the next access. To force an immediate restart, refer to [Restart a compute endpoint](/docs/manage/endpoints/).
 
-You can verify that logical replication is enabled by running the following query from the the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
 
 ```sql
 SHOW wal_level;
@@ -73,31 +73,9 @@ This section describes how to configure a subscription on a standalone Postgres 
 
 It is assumed that you have a separate Postgres instance ready to act as the subscriber. This must be a Postgres instance other than Neon, such as a local PostgreSQL installation. Currently, a Neon database cannot be defined as a subscriber. The PostgreSQL version of the subscriber should be compatible with the publisher. The primary (publishing) server must be of the same or a higher version than the replica (subscribing) server. For example, you can replicate from PostgreSQL 14 to 16, but not from 16 to 14. Neon supports Postgres 14, 15, and 16. The Postgres version is defined when you create a Neon project.
 
-### Configure the destination Postgres instance
+### Allow inbound traffic
 
-If you haven't already, you'll need to configure your destination (subscriber) Postgres instance for logical replication, following these steps:
-
-1. Modify `postgresql.conf`, which is typically located in the PostgreSQL data directory. Update the `postgresql.conf` file with the following configurations:
-
-    - `wal_level`: Set the value to logical to enable logical decoding, which is essential for logical replication.
-
-        ```ini
-        wal_level = logical
-        ```
-    - `max_replication_slots`: Increase this to the number of subscriptions you intend to have, allowing for a dedicated slot for each replication connection. For example, if you plan to have 10 replication connections:
-
-        ```ini
-        max_replication_slots = 10
-        ```
-
-    - `max_wal_senders`: Set this to the number of concurrent WAL sender processes, which should accommodate all replication and backup processes.
-
-        ```ini
-        max_wal_senders = 10
-        ```
-
-2. Restart your Postgres instance to apply these configuration changes.
-3. Configure `pg_hba.conf`, which is located in the same directory as `postgresql.conf`, to allow replication connections from your Neon database host:
+Configure `pg_hba.conf`, which is located in the same directory as `postgresql.conf`, to allow replication connections from your Neon database host:
 
     You can set the IP address to `0.0.0.0` to allow connections from any IP. However, this is not recommended for production environments due to security concerns.
 
@@ -123,9 +101,7 @@ If you haven't already, you'll need to configure your destination (subscriber) P
     SELECT pg_reload_conf();
     ```
 
-### Create the subscription
-
-To create a subscription:
+### Create a subscription
 
 1. Use `psql` or another SQL client to connect to your subscriber Postgres database.
 2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement. This example creates a subscription for the `user` table publication (`users_publication`) that you created previously.
