@@ -139,7 +139,7 @@ const Hero = () => {
                   )}
                   to={button.url}
                 >
-                  <div className="mb-6 min-h-[280px] flex flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-7 lg:min-h-max">
+                  <div className="mb-6 flex min-h-[280px] flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-7 lg:min-h-max">
                     <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
                       {type}
                     </span>

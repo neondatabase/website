@@ -176,7 +176,7 @@ const Estimates = () => {
 
   return (
     <section
-      className="forecast safe-paddings pt-36 md:pt-20 md:pb-20"
+      className="forecast safe-paddings pt-36 md:pb-20 md:pt-20"
       ref={sectionRef}
       id="estimates"
     >
@@ -191,11 +191,11 @@ const Estimates = () => {
           transition={{ duration: 0.2 }}
         >
           <Container className="relative z-10 text-center" size="medium">
-            <h2 className="leading-none font-medium tracking-tighter text-[56px] lg:text-5xl md:text-4xl [&_span]:text-green-45">
+            <h2 className="text-[56px] font-medium leading-none tracking-tighter lg:text-5xl md:text-4xl [&_span]:text-green-45">
               <span>Each user is unique.</span>
               <br /> However, we can give you estimates.
             </h2>
-            <p className="text-lg leading-snug font-light mt-4 max-w-[656px] mx-auto md:text-base md:max-w-none">
+            <p className="mx-auto mt-4 max-w-[656px] text-lg font-light leading-snug md:max-w-none md:text-base">
               Simply answer three questions to get an estimated cost projection, tailored to give
               you a clear understanding of expenses based on usage scenarios.
             </p>
@@ -206,9 +206,9 @@ const Estimates = () => {
           className="relative grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
           size="medium"
         >
-          <div className="relative col-span-5 -mx-[140px] col-start-2 h-full xl:col-span-6 xl:col-start-1 xl:row-start-1 xl:-mx-24 md:col-span-full md:hidden">
+          <div className="relative col-span-5 col-start-2 -mx-[140px] h-full xl:col-span-6 xl:col-start-1 xl:row-start-1 xl:-mx-24 md:col-span-full md:hidden">
             <div
-              className="sticky top-0 h-screen min-h-[700px] -mt-[20vh] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh]"
+              className="sticky top-0 -mt-[20vh] h-screen min-h-[700px] [@media(max-height:900px)]:-mt-[10vh] [@media(min-height:1800px)]:-mt-[30vh]"
               ref={animationRef}
             >
               <m.div
@@ -223,7 +223,7 @@ const Estimates = () => {
             </div>
           </div>
           <div
-            className="relative col-end-12 col-span-4 -ml-10 z-10 xl:col-end-13 xl:col-span-5 xl:row-start-1 md:col-span-full md:ml-0"
+            className="relative z-10 col-span-4 col-end-12 -ml-10 xl:col-span-5 xl:col-end-13 xl:row-start-1 md:col-span-full md:ml-0"
             ref={contentRef}
           >
             <Metrics
