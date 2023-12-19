@@ -133,8 +133,8 @@
           items:
             - title: Airbyte
               slug: guides/logical-replication-airbyte
-            - title: Confluent
-              slug: guides/logical-replication-confluent
+            - title: Kafka (Confluent)
+              slug: guides/logical-replication-kafka-confluent
             - title: Materialize
               slug: guides/logical-replication-materialize
             - title: Postgres
