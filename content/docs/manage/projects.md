@@ -169,11 +169,7 @@ By default, Neon allows IP addresses from 0.0.0.0, which means that Neon accepts
 Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4).
 </Admonition>
 
-You configure **IP Allow** for a project using the Neon Console, CLI, or API:
-
-<Tabs labels={["Neon Console", "CLI", "API"]}>
-
-<TabItem>
+You configure **IP Allow** for a project using the Neon Console:
 
 1. Select a project in the Neon console.
 2. On the Neon **Dashboard**, select **Settings**.
@@ -183,61 +179,19 @@ You configure **IP Allow** for a project using the Neon Console, CLI, or API:
 5. Optionally, select **Apply to primary branch only** to apply the allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only
 5. Click **Apply changes**.
 
-</TabItem>
-
-<TabItem>
-
-The [Neon CLI projects command](https://neon.tech/docs/reference/cli-projects) supports IP Allow configuration. For example, this command configures IP for an existing Neon project:
-
-```bash
-neonctl projects update still-bird-22384887 --ip-allow 127.0.0.1 192.168.2.1/24 --ip-primary-only
-```
-
-</TabItem>
-
-<TabItem>
-
-The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, this API configures **IP Allow** for an existing Neon project:
-
-```bash
-curl --request PATCH \
-     --url https://console.neon.tech/api/v2/projects/project_id \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
-     --data '
-{
-  "project": {
-    "settings": {
-      "allowed_ips": {
-        "primary_branch_only": true,
-        "ips": [
-          "192.168.1.15, 192.168.1.16, 192.168.1.20-192.168.1.30, 192.168.1.0/24S"
-        ]
-      }
-    }
-  }
-}
-'
-```
-</TabItem>
-
-</Tabs>
-
-
 #### How to specify IP addresses
 
-You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). A combination of these options is also permitted. Multiple entries, whether they are the same or of different types, must be separated by a comma.
+You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). A combination of these options is also permitted. Multiple entries, whether they are the same or of different types, must be separated by a comma. Whitespace is ignored.
 
 - **Add individual IP addresses**: You can add individual IP addresses that you want to allow. This is useful for granting access to specific users or devices. This example represents a single IP address:
 
-  ```ini
+  ```text
   192.168.1.15
   ```
 
 - **Define IP ranges**: For broader access control, you can define IP ranges. This is useful for allowing access from a company network or a range of known IPs. This example range includes all IP addresses from `192.168.1.20` to `192.168.1.30`: 
 
-  ```ini
+  ```text
   192.168.1.20-192.168.1.30
   ```
 
@@ -245,13 +199,13 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
 
   This CIDR notation example represents all 256 IP addresses from  `192.168.1.0` to `192.168.1.255`. 
 
-  ```ini
+  ```text
   192.168.1.0/24
   ```
 
 A combined example using all three options above, specified as a comma-separated list, would appear similar to the following:
 
-  ```ini
+  ```text
   192.168.1.15, 192.168.1.16, 192.168.1.20-192.168.1.30, 192.168.1.0/24S
   ```
 
