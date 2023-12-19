@@ -386,7 +386,7 @@ For role creation and access management examples, refer to the [Manage database 
 
 The following names are protected and cannot be given to a role:
 
-- Any name starting with `pg`
+- Any name starting with `pg_`
 - `neon_superuser`
 - `cloud_admin`
 - `zenith_admin`
