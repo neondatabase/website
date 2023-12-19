@@ -30,12 +30,12 @@ const Forecasting = () => (
           <div className="flex mt-9 gap-x-4 xs:flex-col xs:gap-y-2 xs:items-baseline">
             {buttons.map(({ text, link }) => (
               <Link
-                className="rounded-[50px] flex leading-tight items-center tracking-extra-tight py-2.5 pr-2.5 pl-4 bg-gray-new-10"
+                className="group rounded-[50px] flex leading-tight items-center tracking-extra-tight py-2.5 pr-2.5 pl-4 bg-gray-new-10 transition-colors duration-200 hover:bg-gray-new-20"
                 to={link}
                 key={text}
               >
                 <span>{text}</span>
-                <ArrowIcon className="ml-6 sm:ml-3" />
+                <ArrowIcon className="ml-6 sm:ml-3 text-gray-new-70 transition-colors duration-200 group-hover:text-white" />
               </Link>
             ))}
           </div>
