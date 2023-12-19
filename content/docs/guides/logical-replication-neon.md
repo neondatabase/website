@@ -20,8 +20,6 @@ In standalone PostgreSQL, logical replication is enabled by setting `wal_level=l
 3. Select **Replication**.
 4. Click **Enable**.
 
-The new setting is applied the next time your compute restarts. By default, the compute that runs your Neon Postgres instance automatically suspends after five minutes of inactivity and restarts on the next access. To force an immediate restart, refer to [Restart a compute endpoint](/docs/manage/endpoints/).
-
 You can verify that logical replication is enabled by running the following query:
 
 ```sql

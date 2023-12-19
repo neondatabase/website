@@ -19,9 +19,9 @@ If you just want to get started, jump into one of our step-by-step [logical repl
 
 <DetailIconCards>
 
-<a href="/docs/guides/logical-replication-basics" description="Learn about Postgres logical replication concepts and syntax" icon="scale-up">Logical replication concepts</a>
+<a href="/docs/guides/logical-replication-concepts" description="Learn about Postgres logical replication concepts" icon="scale-up">Logical replication concepts</a>
 
-<a href="/docs/guides/logical-replication-neon" description="Managing logical replication in Neon" icon="screen">Manage logical replication</a>
+<a href="/docs/guides/logical-replication-neon" description="Learn about managing logical replication in Neon" icon="screen">Manage logical replication</a>
 
 </DetailIconCards>
 
