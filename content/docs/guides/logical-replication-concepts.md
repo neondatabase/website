@@ -75,7 +75,7 @@ PUBLICATION users_publication;
 
 A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication that it is subscribing to.
 
-## But how does it work under the covers?
+## How does it work under the covers?
 
 While the publisher and subscriber model forms the surface of PostgreSQL logical replication, the underlying meachanism is driven by a few key components, described beelow.
 
@@ -115,7 +115,7 @@ To use this decoder plugin, you'll need to create a dedicated replication slot f
 SELECT pg_create_logical_replication_slot('my_replication_slot', 'wal2json');
 ```
 
-## WAL senders
+### WAL senders
 
 WAL senders are processes on the publisher database that read the WAL and send the relevant data to the subscriber. 
 
@@ -127,7 +127,7 @@ The `max_wal_senders` configuration parameter on Neon is set to `10` by default,
 max_wal_senders = 10
 ```
 
-## WAL receivers
+### WAL receivers
 
 On the subscriber side, WAL receivers receive the replication stream (the decoded WAL data), and apply these changes to the subscriber database. The number of WAL receivers is determined by the number of connections made by subscribers. 
 
