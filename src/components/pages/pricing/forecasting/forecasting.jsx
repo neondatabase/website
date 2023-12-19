@@ -1,5 +1,8 @@
+'use client';
+
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 
 import ArrowIcon from './images/arrow.inline.svg';
 import linesSm from './images/lines-sm.svg';
@@ -12,7 +15,7 @@ const buttons = [
   },
   {
     text: 'View billing docs',
-    link: '/docs/billing',
+    link: LINKS.billing,
   },
 ];
 
@@ -34,6 +37,13 @@ const Forecasting = () => (
                 className="group flex items-center rounded-[50px] bg-gray-new-10 py-2.5 pl-4 pr-2.5 leading-tight tracking-extra-tight transition-colors duration-200 hover:bg-gray-new-20 sm:flex-1 xs:w-full"
                 to={link}
                 key={text}
+                onClick={(e) => {
+                  if (link === '#estimates') {
+                    e.preventDefault();
+                    const estimates = document.getElementById('estimates');
+                    estimates.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
               >
                 <span>{text}</span>
                 <ArrowIcon className="ml-6 text-gray-new-70 transition-colors duration-200 group-hover:text-white sm:ml-auto" />
@@ -68,5 +78,4 @@ const Forecasting = () => (
     </Container>
   </section>
 );
-
 export default Forecasting;

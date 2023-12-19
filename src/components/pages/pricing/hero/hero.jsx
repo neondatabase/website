@@ -138,6 +138,13 @@ const Hero = () => {
                     activeItemIndex !== index ? 'bg-gray-new-8' : 'bg-transparent'
                   )}
                   to={button.url}
+                  onClick={(e) => {
+                    if (button.url === '#estimates') {
+                      e.preventDefault();
+                      const estimates = document.getElementById('estimates');
+                      estimates.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
                 >
                   <div className="mb-6 flex min-h-[280px] flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-7 lg:min-h-max">
                     <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
