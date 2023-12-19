@@ -18,11 +18,9 @@ const items = [
     description:
       'A generous free tier with essential features perfect for prototypes and personal projects.',
     features: [
-      { title: '1 project, 10 Branches, unlimited DBs' },
-      { title: 'Shared compute w/1 GB of RAM' },
-      { title: 'Up to 3GB Storage' },
-      { title: '7 Day Point-in-time restore' },
-      { title: 'Community Support' },
+      { title: '1 project, 10 branches, unlimited DBs' },
+      { title: 'Shared compute, 3GiB storage' },
+      { title: 'Community support' },
     ],
     button: {
       url: 'https://console.neon.tech/sign_in',
@@ -36,11 +34,10 @@ const items = [
     description:
       'A pro plan with features for production. Scales from $0 based on compute & storage usage.',
     features: [
-      { title: 'Unlimited Projects, Branches, Databases' },
-      { title: 'Flexible compute, unlimited storage' },
-      { title: 'Autoscaling and read replicas' },
-      { title: 'Project Sharing' },
+      { title: 'Unlimited projects, branches, databases' },
+      { title: 'Configurable compute, unlimited storage' },
       { title: 'Pro support' },
+      { title: 'Autoscaling, read replicas, project sharing' },
     ],
     button: {
       url: '#estimates',
