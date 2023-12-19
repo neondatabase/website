@@ -1,11 +1,11 @@
 ---
 title: Logical replication in Neon
-subtitle: Learn about logical replication specifics in Neon, including current limitations
+subtitle: Learn how to manage logical replication in Neon
 enableTableOfContents: true
 isDraft: true
 ---
 
-This topic outlines information about logical replicatiion specific to Neon, including current limitations.
+This topic outlines how to manage your logical replication setup in Neon. It includes information specific to logical replication in Neon and known limitations.
 
 <Admonition type="note">
 Logical replication in Neon is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the **Feedback** link inthe Neon Console or by reaching out to us on [Discord](https://t.co/kORvEuCUpJ).

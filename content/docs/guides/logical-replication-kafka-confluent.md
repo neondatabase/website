@@ -1,6 +1,6 @@
 ---
-title: Replicate data with Confluent (Kafka) and Debezium
-subtitle: Learn how to replicate data from Neon with Confluent (Kafka) and Debezium
+title: Replicate data with Kafka (Confluent) and Debezium
+subtitle: Learn how to replicate data from Neon with Kafka (Confluent) and Debezium
 enableTableOfContents: true
 isDraft: true
 ---
@@ -9,7 +9,7 @@ Neon's logical replication feature allows you to replicate data from your Neon P
 
 Confluent Cloud is a fully managed, cloud-native service for real-time data streaming, built on Apache Kafka. It allows you to stream data from many different sources, including Postgres, and build apps that consume messages from an Apache Kafka cluster.
 
-In this guide, you will learn how to how to stream data from a Neon Postgres database to Confluent Cloud. You will use the [PostgreSQL CDC Source Connector (Debezium) for Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-postgresql-cdc-source-debezium.html) to read Change Data Capture (CDC) events from the Write-Ahead Log (WAL) of your Neon database in real time. The connector will write events to a Kafka stream and auto-generate a Kafka topic. The connector performs an initial snapshot of the table and then streams any futue change events.
+In this guide, you will learn how to how to stream data from a Neon Postgres database to a Kafka cluster in Confluent Cloud. You will use the [PostgreSQL CDC Source Connector (Debezium) for Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-postgresql-cdc-source-debezium.html) to read Change Data Capture (CDC) events from the Write-Ahead Log (WAL) of your Neon database in real time. The connector will write events to a Kafka stream and auto-generate a Kafka topic. The connector performs an initial snapshot of the table and then streams any futue change events.
 
 <Admonition type="note">
 Confluent Cloud Connectors can be set up using the [Confluent Cloud UI](https://confluent.cloud/home) or the [Confluent command-line interface (CLI)](https://docs.confluent.io/confluent-cli/current/overview.html). This guide uses the Confluent Cloud UI.
@@ -99,7 +99,7 @@ SELECT pg_create_logical_replication_slot('debezium', 'pgoutput');
 - `debezium` is the name assigned to the replication slot. You will need to provide the slot name when you set up your source connector in Confluent. 
 - `pgoutput` is the logical decoder plugin used in this example. Neon supports both `pgoutput` and `wal2json` decoder plugins. 
 
-## Set up a Confluent Cloud cluster
+## Set up a Kafka cluster in Confluent Cloud
 
 1. Sign in to Confluent Cloud at https://confluent.cloud.
 2. Click **Add cluster**.
