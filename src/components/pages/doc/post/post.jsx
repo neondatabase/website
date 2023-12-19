@@ -81,11 +81,13 @@ const Post = ({
           </article>
         )}
 
-        <PreviousAndNextLinks
-          previousLink={previousLink}
-          nextLink={nextLink}
-          basePath={DOCS_BASE_PATH}
-        />
+        {!isReleaseNotes && (
+          <PreviousAndNextLinks
+            previousLink={previousLink}
+            nextLink={nextLink}
+            basePath={DOCS_BASE_PATH}
+          />
+        )}
         <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
       </div>
 
