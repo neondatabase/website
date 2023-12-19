@@ -2,6 +2,7 @@ import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 
 import ArrowIcon from './images/arrow.inline.svg';
+import linesSm from './images/lines-sm.svg';
 import lines from './images/lines.svg';
 
 const buttons = [
@@ -47,11 +48,20 @@ const Forecasting = () => (
     </Container>
     <Container className="mt-[72px] md:mt-14" size="medium">
       <img
-        className="mx-auto h-auto w-full max-w-[1220px]"
+        className="mx-auto h-auto w-full max-w-[1220px] sm:hidden"
         src={lines}
         alt=""
         loading="lazy"
         width={1220}
+        height={66}
+        aria-hidden
+      />
+      <img
+        className="mx-auto hidden h-auto w-full sm:block"
+        src={linesSm}
+        alt=""
+        loading="lazy"
+        width={414}
         height={66}
         aria-hidden
       />
