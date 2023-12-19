@@ -125,6 +125,7 @@ From the **Settings** page, you can also set defaults or apply bulk changes acro
 
 - [Reset default compute size](#reset-the-default-compute-size) (Neon Pro Plan only)
 - [Configure history retention range](#configure-history-retention)
+- [Configiure IP Allow](#configure-ip-allow)
 
 ### Reset the default compute size
 
@@ -157,6 +158,58 @@ To configure the history retention period for a project:
     ![History retention configuration](/docs/relnotes/history_retention.png)
 4. Use the slider to select the history retention period.
 5. Click **Save**.
+
+### Configure IP Allow
+
+Available to [Neon Pro Plan](/docs/introduction/pro-plan) users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default. Optionally, you can apply the IP allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only. For instance, you might want to restrict access to the primary branch to a handful of trusted IPs while allowing broader access to development branches.
+
+By default, Neon allows IP addresses from 0.0.0.0, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access to Neon.
+
+<Admonition type="note">
+Currently, Neon only supports [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4).
+</Admonition>
+
+You configure **IP Allow** for a project using the Neon Console:
+
+1. Select a project in the Neon console.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **IP Allow**.
+    ![IP Allow configuration](/docs/manage/ip_allow.png)
+4. Specify the IP addresses you want to permit.
+5. Optionally, select **Apply to primary branch only** to apply the allowlist to your project's [primary branch](/docs/manage/branches#primary-branch) only
+5. Click **Apply changes**.
+
+#### How to specify IP addresses
+
+You can define an allowlist with individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). A combination of these options is also permitted. Multiple entries, whether they are the same or of different types, must be separated by a comma. Whitespace is ignored.
+
+- **Add individual IP addresses**: You can add individual IP addresses that you want to allow. This is useful for granting access to specific users or devices. This example represents a single IP address:
+
+  ```text
+  192.168.1.15
+  ```
+
+- **Define IP ranges**: For broader access control, you can define IP ranges. This is useful for allowing access from a company network or a range of known IPs. This example range includes all IP addresses from `192.168.1.20` to `192.168.1.30`: 
+
+  ```text
+  192.168.1.20-192.168.1.30
+  ```
+
+- **Use CIDR notation**: For more advanced control, you can use [CIDR (Classless Inter-Domain Routing) notation](/docs/reference/glossary#cidr-notation). This is a compact way of defining a range of IPs and is useful for larger networks or subnets. Using CIDR notation can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network.
+
+  This CIDR notation example represents all 256 IP addresses from  `192.168.1.0` to `192.168.1.255`. 
+
+  ```text
+  192.168.1.0/24
+  ```
+
+A combined example using all three options above, specified as a comma-separated list, would appear similar to the following:
+
+  ```text
+  192.168.1.15, 192.168.1.16, 192.168.1.20-192.168.1.30, 192.168.1.0/24S
+  ```
+
+This list combines individual IP addresses, a range of IP addresses, and a CIDR block. It illustrates how different types of IP specifications can be used together in a single allowlist configuration, offering a flexible approach to access control.
 
 ## Manage projects with the Neon API
 

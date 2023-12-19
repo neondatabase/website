@@ -69,6 +69,10 @@ A Neon Control Plane operation that checks the availability of data in a branch 
 
 Continuous integration and continuous delivery or continuous deployment.
 
+## CIDR notation
+
+CIDR (Classless Inter-Domain Routing) notation is a method used to define ranges of IP addresses in network management. It is presented in the format of an IP address, followed by a slash, and then a number (e.g., 192.168.1.0/24). The number after the slash represents the size of the address block, providing a compact way to specify a large range of IP addresses. In Neon's IP Allow feature, CIDR notation allows for efficiently specifying a block of IP addresses, especially useful for larger networks or subnets. This can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network. For related information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+
 ## cgroups
 
 Control groups, a Linux kernel feature that allows the organization, prioritization, and accounting of system resources for groups of processes.
@@ -172,6 +176,10 @@ A custom volume-based paid plan offered by Neon. See [Neon plans](/docs/introduc
 ## Free Tier
 
 See [Neon Free Tier](#neon-free-tier).
+
+## IP allowlist
+
+An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a [Neon Pro Plan](/docs/introduction/pro-plan) feature that can be used used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or to your [primary branch](#primary-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
 
 ## Kubernetes
 
@@ -281,7 +289,7 @@ Older projects may have a `web-access` system role, used by the [SQL Editor](#sq
 
 Each Neon project is created with a primary branch called `main`, but you can designate any branch as your project's primary branch. The advantage of the primary branch is that its compute endpoint remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the primary branch. For more information, see [Primary branch](/docs/manage/branches#primary-branch).
 
-## Pro Plan
+### Pro Plan
 
 See [Neon Pro Plan](#neon-pro-plan).
 
