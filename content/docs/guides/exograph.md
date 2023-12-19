@@ -3,7 +3,7 @@ title: Use Exograph with Neon
 subtitle: Build GraphQL backends in minutes with Exograph and Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-11-30T17:39:12.801Z'
 ---
 
 _This guide was contributed by the Exograph team_
@@ -31,7 +31,8 @@ You can check the code it created by examining the `src/index.exo` file (which h
 Next, let's set up the Neon database.
 
 ## Create the schema in Neon
-1. Navigate to the Neon Console, select your project, and copy the connection string (which will look something like `postgres://...neon.tech/todo-db`).
+
+1. Navigate to the Neon Console, select your project, and copy the connection string, which will look something like this: `postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname`.
 2. Create schema in Neon using Exograph CLI:
 
 ```bash
@@ -53,9 +54,9 @@ Watching the src directory for changes...
 Verifying new model...
 Started server on 0.0.0.0:9876 in 717.19 ms
 - Playground hosted at:
-	http://0.0.0.0:9876/playground
+ http://0.0.0.0:9876/playground
 - Endpoint hosted at:
-	http://0.0.0.0:9876/graphql
+ http://0.0.0.0:9876/graphql
 ```
 
 That's it! You can now open [http://localhost:9876/playground](http://localhost:9876/playground) in your browser to see the GraphQL Playground.
@@ -86,8 +87,9 @@ And you should see the todo you just added. Please follow Exograph's [guide to c
 
 ## Learn more
 
-In this guide, we have created a basic todo backend using Exograph and Neon. You can extend this further by establishing relationships between types, implementing access control rules, and integrating custom business logic. Check out Exograph's [application tutorial](https://exograph.dev/docs/application-tutorial/) for more details.
+In this guide, we have created a basic todo backend using Exograph and Neon. You can extend this further by establishing relationships between types, implementing access control rules, and integrating custom business logic. Check out Exograph's [application tutorial](https://exograph.dev/docs/application-tutorial/overview) for more details.
 
 To deploy Exograph in the cloud and connect it to Neon, follow the guide below (select the "External Database" tab for Neon-specific instructions in each case):
+
 1. Deploying on [Fly.io](https://exograph.dev/docs/deployment/cloud-deployment) (these instructions can be adapted to other cloud providers)
 2. Deploying on [AWS Lambda](https://exograph.dev/docs/deployment/aws-lambda-deployment)

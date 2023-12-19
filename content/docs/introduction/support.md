@@ -1,22 +1,36 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2023-06-07T19:20:39Z'
+updatedOn: '2023-12-07T17:00:43.493Z'
 ---
 
 Support channels for the Neon Free Tier, Pro, and Custom plans are outlined below.
 
 | Support channels                                     | Free Tier |   Pro   | Custom  |
 | :--------------------------------------------------- | :-------: | :-----: | :-----: |
-| [Neon Community Forum](https://community.neon.tech/) |  &check;  | &check; | &check; |
-| Ability to open support tickets                      |  &check;  | &check; | &check; |
+| Neon community forum                                 |  &check;  | &check; | &check; |
+| Ability to open support tickets                      |     -     | &check; | &check; |
 | Video chat                                           |     -     | &check; | &check; |
 | Resale customer support                              |     -     |    -    | &check; |
 
-All Neon users can open a support ticket from the Neon console or by sending an email to [support@neon.tech](mailto:support@neon.tech).
+## Join the community
 
-To open a support ticket from the Neon Console, select **Support** from the sidebar to open the **Create Ticket for Support** modal, where you can describe your issue.
+All Neon users can join the [Neon Discord Server](/discord) or [Neon Discourse Community](https://community.neon.tech/) to ask questions or see what others are doing with Neon.
 
-Pro and Custom plan users can expect an initial response time of 2 business days, from 6am to 6pm Pacific Standard Time (UTC -8), Monday through Friday, excluding public holidays in the United States. For custom support solutions, please contact [Sales](https://neon.tech/contact-sales).
+## Open a support ticket
 
-Free Tier users are not guaranteed a specific response time.
+[Neon Pro Plan](/docs/introduction/pro-plan) and [Custom Plan](/docs/introduction/custom-plan) users can open a support ticket from the Neon console. Look for the **Support** link in the sidebar. It opens the **Create Support Ticket** modal, where you can describe your issue.
+
+![Support ticket modal](/docs/introduction/neon-support-modal.png)
+
+You can expect an initial response time of 2 business days, from 6am to 6pm Pacific Standard Time (UTC -8), Monday through Friday, excluding public holidays in the United States. For custom support solutions, please contact [Sales](https://neon.tech/contact-sales).
+
+Video chat requests and retail customer support inquiries can be submitted through a support ticket.
+
+## Support email
+
+If you're unable to access Neon's primary support channels (e.g., the support ticket form in the Neon Console or the Neon Community Forum), you can use the following email as a fallback:
+
+**Email**: `support@neon.tech`
+
+Response times might be longer than our primary channels, so we appreciate your patience.

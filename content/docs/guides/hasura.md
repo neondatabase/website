@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura
   - /docs/integrations/hasura
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-11-24T11:25:06.752Z'
 ---
 
 Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
@@ -37,11 +37,11 @@ Use the following instructions to connect to an existing Neon database from Hasu
 ### Prerequisites
 
 - An existing Neon account. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up).
-- An existing Neon project. If you do not have a Neon project, see [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- A connection string for a branch in Neon project that includes your password. For example:
+- An existing Neon project. If you do not have a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+- A connection string for a branch in your Neon project:
 
   ```text
-  postgres://<user>:<password>@<hostname>:5432/neondb
+  postgres://[user]:[password]@[neon_hostname]/[dbname]
   ```
 
   Your project's connection string can be found on the Neon **Dashboard**, under **Connection Details**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
@@ -78,6 +78,4 @@ To view the newly created tables from the Neon Console:
 
 If you are migrating from Hasura with Heroku Postgres to Neon, refer to the [Import data from Heroku](/docs/import/import-from-heroku) guide for data import instructions. For general data import instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

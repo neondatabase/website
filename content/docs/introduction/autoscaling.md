@@ -2,10 +2,10 @@
 title: Autoscaling
 subtitle: Learn how Neon automatically scales compute resources on demand
 enableTableOfContents: true
-updatedOn: '2023-08-08T20:44:56Z'
+updatedOn: '2023-12-09T09:37:25.764Z'
 ---
 
-Neon's _Autoscaling_ feature, available for [Pro plan](/docs/introduction/pro-plan) users, dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current load, eliminating the need for manual intervention.
+Neon's _Autoscaling_ feature, available for [Neon Pro Plan](/docs/introduction/pro-plan) users, dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current load, eliminating the need for manual intervention.
 
 ## Autoscaling benefits
 
@@ -59,7 +59,7 @@ Postgres memory consumption can escalate rapidly in specific scenarios. Fortunat
 
 ### Local file cache
 
-To expedite queries, the Autoscaling system incorporates a Postgres extension that places a cache in front of the storage layer. Many queries benefit from this additional memory, particularly those requiring multiple database scans (such as creating an index). The [local file cache](/docs/reference/glossary#local-file-cache) capitalizes on the additional memory allocated to the VM by dedicating a portion to the cache to itself. The cache is stored in a single file within a [tmpfs](/docs/reference/glossary#tmpfs) to minimize disk usage, with entries maintained as 1 MB chunks and evicted using a [Least Recently Used (LRU) policy]../reference/glossary#lru-policy). Due to the storage model, writebacks are not required, resulting in near-instant evictions. The vm-informant adjusts the local file cache size when scaling occurs through the autoscaler-agent, ensuring seamless operation.
+To expedite queries, the Autoscaling system incorporates a Postgres extension that places a cache in front of the storage layer. Many queries benefit from this additional memory, particularly those requiring multiple database scans (such as creating an index). The [local file cache](/docs/reference/glossary#local-file-cache) capitalizes on the additional memory allocated to the VM by dedicating a portion to the cache to itself. The cache is backed by disk and kept at a size intended to fit in the kernel page cache. Due to the storage model, writebacks are not required, resulting in near-instant evictions. The vm-informant adjusts the local file cache size when scaling occurs through the autoscaler-agent, ensuring seamless operation.
 
 ## Autoscaling source code
 

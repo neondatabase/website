@@ -2,7 +2,7 @@
 title: Connect from AWS Lambda
 subtitle: Learn how to set up a Neon database and connect from an AWS Lambda function
 enableTableOfContents: true
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-10-07T10:43:33.372Z'
 ---
 
 AWS Lambda is a serverless, event-driven compute service that allows you to run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.
@@ -143,7 +143,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
 
 5. In the `aws-node-project` directory, add a `users.js` file, and add the following code to it:
 
-    ```js
+    ```javascript
     'use strict';
 
     const { Client } = require('pg');
@@ -174,13 +174,15 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
     </Admonition>
 
     You can copy the connection string from **Connection Details** widget the Neon Console. Add the `DATABASE_URL` under `environment`, and add `sslmode=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells Postgres to use SSL encryption and verify the server's certificate.
+
+    <CodeBlock shouldWrap>
   
     ```yaml
     provider:
      name: aws
      runtime: nodejs14.x
      environment:
-       DATABASE_URL: postgres://<USER>:<PASSWORD>@<HOST>/<DATABASE>?sslmode=require
+       DATABASE_URL: postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
 
     functions:
      getAllUsers:
@@ -190,6 +192,8 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
              path: /users
              method: get
     ```
+
+    </CodeBlock>
 
 7. Deploy the serverless function using the following command:
 
@@ -264,9 +268,13 @@ If you make API calls to the Lambda function from your app, you will likely need
 
 You can run the following command to enable CORS to your local development environment:
 
+<CodeBlock shouldWrap>
+
 ```bash
 aws apigatewayv2 update-api --api-id <api-id> --cors-configuration AllowOrigins="http://localhost:3000"
 ```
+
+</CodeBlock>
 
 You can find your `api-id` on the API Gateway dashboard:
 

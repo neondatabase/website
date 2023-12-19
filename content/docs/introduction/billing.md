@@ -1,7 +1,7 @@
 ---
 title: Billing metrics
 enableTableOfContents: true
-updatedOn: '2023-09-19T09:04:14Z'
+updatedOn: '2023-10-24T18:56:54.987Z'
 ---
 
 Neon [paid plans](/docs/introduction/plans#neon-plans) bill for usage based on the following metrics:
@@ -48,7 +48,7 @@ Factors that affect _Compute time_ include:
 
 - The number of active computes
 - The size of each compute
-- The _Auto-suspend_ feature, which suspends a compute after 5 minutes of inactivity. Neon [Pro plan](/docs/introduction/pro-plan) users can configure the `Auto-suspend` timeout timeout or disable _Auto-suspend_ entirely.
+- The _Auto-suspend_ feature, which suspends a compute after 5 minutes of inactivity. [Neon Pro Plan](/docs/introduction/pro-plan) users can configure the `Auto-suspend` timeout timeout or disable _Auto-suspend_ entirely.
 - The _Autoscaling_ feature, which allows you to set a minimum and maximum compute size. Compute size automatically scales up and down between these boundaries based on workload.
 
 <Admonition type="note">
@@ -128,7 +128,7 @@ Project storage (GiB) * (seconds stored / 3600) * price per hour
 
 ## Written data
 
-_Written data_ measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiBs). Writing data from compute to storage ensures the durability and integrity of your data, as it reflects the data changes made by your computes.
+_Written data_ measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiB). Writing data from compute to storage ensures the durability and integrity of your data, as it reflects the data changes made by your computes.
 
 The cost calculation for _Written data_ is as follows:
 
@@ -138,7 +138,7 @@ Written data (GiB) * price per GiB
 
 ## Data transfer
 
-_Data transfer_ measures the total volume of data transferred out of Neon (known as "egress") during a given billing period, measured in gigibytes (GiBs). It includes data sent from your Neon project to external destinations. If your data transfer is high, contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
+_Data transfer_ measures the total volume of data transferred out of Neon (known as "egress") during a given billing period, measured in gigibytes (GiB). It includes data sent from your Neon project to external destinations. If your data transfer is high, contact [Sales](https://neon.tech/contact-sales) for custom solutions to minimize data transfer costs.
 
 The cost calculation for _Data transfer_ is as follows:
 
@@ -194,7 +194,7 @@ The [Pricing](https://neon.tech/pricing) page on the Neon website provides a [ca
 
 ### Pro Plan Cost Estimator
 
-The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimator** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro plan?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Open Cost Estimator**.
+The **Billing** page in the Neon Console provides a **Pro Plan Cost Estimator** tool, which estimates costs based on your current project usage. If you have ever wondered, "How much would my monthly cost be if I upgraded to the Neon Pro Plan?", this tool provides the answer. To access it, navigate to the **Billing** page via the sidebar of the Neon Console, and select **Open Cost Estimator**.
 
 To provide cost estimates, the **Pro Plan Cost Estimator** requires at least one month of project usage.
 

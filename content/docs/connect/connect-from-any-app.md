@@ -2,51 +2,38 @@
 title: Connect from any application
 subtitle: Learn how to connect to Neon from any application
 enableTableOfContents: true
-updatedOn: '2023-09-15T13:00:43Z'
+updatedOn: '2023-11-24T11:25:06.741Z'
 ---
-When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch. The primary branch in a Neon project is created with a ready-to-use database named `neondb`.
+When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the primary branch of your project (`main`) or a child branch.
 
-To connect to a database, you must connect to the branch where the database resides, and you must do so by connecting through a compute endpoint associated with the branch.
-
-```text
-Project
-    |----primary branch (main) ---- compute endpoint <--- application/client
-             |    |
-             |    |---- database (neondb)
-             |
-             ---- child branch ---- compute endpoint <--- application/client
-                            |
-                            |---- database (mydb)  
-```
-
-You can obtain the connection details you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
+You can obtain the database connection details you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
 Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
 
-A Neon connection string includes the role, the compute endpoint hostname, and the database name.
+A Neon connection string includes the role, the hostname, and the database name.
 
 ```text
-postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
-             ^                                ^                                  ^
-             |- <role>                        |- <hostname>                      |- <database>
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+           ^              ^                                               ^
+           |- role        |- hostname                                     |- database
 ```
 
 <Admonition type="note">
-The hostname includes the ID of the compute endpoint, which has an `ep-` prefix: `ep-raspy-cherry-95040071`. For more information about Neon connection strings, see [Connection string](/docs/reference/glossary#connection-string).
+The hostname includes the ID of the compute endpoint, which has an `ep-` prefix: `ep-cool-darkness-123456`. For more information about Neon connection strings, see [Connection string](/docs/reference/glossary#connection-string).
 </Admonition>
 
-You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line, as shown:
+You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line.
 
 `.env` file:
 
 ```text
-PGHOST='ep-raspy-cherry-95040071.us-east-2.aws.neon.tech'
-PGDATABASE='neondb'
-PGUSER='daniel'
-PGPASSWORD='<password>'
-PGPORT='5432'
+PGUSER=alex
+PGHOST=ep-cool-darkness-123456.us-east-2.aws.neon.tech
+PGDATABASE=dbname
+PGPASSWORD=AbC123dEf
+PGPORT=5432
 ```
 
 Variable:
@@ -54,7 +41,7 @@ Variable:
 <CodeBlock shouldWrap>
 
 ```text
-DATABASE_URL="postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb"
+DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
 ```
 
 </CodeBlock>
@@ -64,7 +51,7 @@ Command-line:
 <CodeBlock shouldWrap>
 
 ```bash
-psql postgres://daniel:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/neondb
+psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
 
 </CodeBlock>
@@ -100,6 +87,4 @@ Additionally, Neon provides a serverless driver that supports both WebSocket and
 - Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](/docs/connect/connection-errors).
 - Some Java-based tools that use the pgJDBC driver for connecting to Postgres, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For an example, see [Connect a GUI or IDE](/docs/connect/connect-postgres-gui#connect-to-the-database).
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

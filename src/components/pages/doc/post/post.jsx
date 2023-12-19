@@ -10,6 +10,7 @@ import Hero from 'components/pages/release-notes/hero';
 import ReleaseNoteList from 'components/pages/release-notes/release-note-list';
 // import ReleaseNotesFilter from 'components/pages/release-notes/release-notes-filter';
 import Content from 'components/shared/content';
+import { DOCS_BASE_PATH } from 'constants/docs';
 
 // TODO: Add pagination for release notes
 const ReleaseNotes = ({
@@ -29,7 +30,7 @@ ReleaseNotes.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string.isRequired,
-      content: PropTypes.shape({}).isRequired,
+      content: PropTypes.string.isRequired,
     })
   ).isRequired,
 };
@@ -73,14 +74,20 @@ const Post = ({
             )}
             <Content className="mt-5" content={content} />
             {lastUpdatedOn && (
-              <p className="text-gray-new-40 text-sm dark:text-gray-new-80 mt-10">
+              <p className="mt-10 text-sm text-gray-new-40 dark:text-gray-new-80">
                 Last updated on <time dateTime={updatedOn}>{lastUpdatedOn}</time>
               </p>
             )}
           </article>
         )}
 
-        <PreviousAndNextLinks previousLink={previousLink} nextLink={nextLink} />
+        {!isReleaseNotes && (
+          <PreviousAndNextLinks
+            previousLink={previousLink}
+            nextLink={nextLink}
+            basePath={DOCS_BASE_PATH}
+          />
+        )}
         <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
       </div>
 
@@ -100,7 +107,7 @@ Post.propTypes = {
     enableTableOfContents: PropTypes.bool,
     updatedOn: PropTypes.string,
   }).isRequired,
-  content: PropTypes.shape({}).isRequired,
+  content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   navigationLinks: PropTypes.exact({
     previousLink: PropTypes.shape({}),
@@ -110,7 +117,7 @@ Post.propTypes = {
   releaseNotes: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,
-      content: PropTypes.shape({}),
+      content: PropTypes.string,
     })
   ),
   currentSlug: PropTypes.string.isRequired,

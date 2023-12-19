@@ -3,7 +3,7 @@ title: Vercel Postgres
 subtitle: Learn about Vercel Postgres powered by Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-07-01T08:51:49Z'
+updatedOn: '2023-11-24T11:25:06.756Z'
 ---
 
 [Vercel Storage](https://vercel.com/docs/storage) is a collection of managed storage products that you can integrate with your frontend framework. Included in this suite of products is [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres), which is serverless Postgres **powered by Neon**.
@@ -26,6 +26,4 @@ Use the following resources to get started with Vercel Postgres:
 - Read [Vercel Postgres Limits](https://vercel.com/docs/storage/vercel-postgres/limits) to learn about Vercel Postgres technical limits.
 - Refer to [Vercel Postgres Pricing](https://vercel.com/docs/storage/vercel-postgres/usage-and-pricing) to learn about the Vercel Postgres usage and pricing model.
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

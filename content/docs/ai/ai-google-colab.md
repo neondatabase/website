@@ -2,6 +2,7 @@
 title: Google Colab
 subtitle: Use Google Colab with Neon for vector similarity search
 enableTableOfContents: true
+updatedOn: '2023-11-24T11:25:06.740Z'
 ---
 
 [Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.
@@ -33,7 +34,7 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 ## Connect to your database
 
-1. In your Colab notebook, create a code block to define your database connection and create a cursor object. Replace `postgres://<user>:<password>@<hostname>/neondb` with the database connection string you retrieved in the previous step.
+1. In your Colab notebook, create a code block to define your database connection and create a cursor object. Replace `postgres://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved in the previous step.
 
     <CodeBlock shouldWrap>
 
@@ -42,7 +43,7 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
     import psycopg2
 
     # Provide your Neon connection string
-    connection_string = "postgres://<user>:<password>@<hostname>/neondb"
+    connection_string = "postgres://[user]:[password]@[neon_hostname]/[dbname]"
 
     # Connect using the connection string
     connection = psycopg2.connect(connection_string)
@@ -133,6 +134,4 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 For more information about using Neon with `pgvector`, see [The pgvector extension](/docs/extensions/pgvector).
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

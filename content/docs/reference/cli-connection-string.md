@@ -2,17 +2,17 @@
 title: Neon CLI commands — connection-string
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-12-19T08:49:51.605Z'
 ---
 
 ## Before you begin
 
-- Before running the `connection-string` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+- Before running the `connection-string` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
 - If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-## The `connection string` command
+## The `connection-string` command
 
 This command constructs a Postgres connection string for connecting to a database in your Neon project. You can construct a connection string for any database in any branch. The connection string includes the password for the specified role.
 
@@ -44,7 +44,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     ```bash
     neonctl connection-string mybranch
-    postgres://daniel:<password>@ep-still-haze-361517.us-east-2.aws.neon.tech/neondb
+    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
     ```
 
     </CodeBlock>
@@ -55,7 +55,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     ```bash
     neonctl connection-string --pooled
-    postgres://daniel:<password>@ep-still-haze-361517-pooler.us-east-2.aws.neon.tech/neondb
+    postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
     ```
 
     </CodeBlock>
@@ -66,11 +66,9 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
     ```bash
     neonctl connection-string --prisma
-    postgres://daniel:<password>@ep-green-thunder-758819.us-east-2.aws.neon.tech/neondb?connect_timeout=30
+   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?connect_timeout=30
     ```
 
     </CodeBlock>
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

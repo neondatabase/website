@@ -1,8 +1,9 @@
 ---
 title: Use Neon with Koyeb
-subtitle: Learn how to connect a Neon Postgres database to an application deployed with Koyeb
+subtitle: Learn how to connect a Neon Postgres database to an application deployed with
+  Koyeb
 enableTableOfContents: true
-updatedOn: '2023-09-15T13:00:43Z'
+updatedOn: '2023-10-07T10:43:33.385Z'
 ---
 
 [Koyeb](https://www.koyeb.com/) is a developer-friendly, serverless platform designed to easily deploy reliable and scalable applications globally. Koyeb offers native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across their edge network with zero configuration.
@@ -24,7 +25,7 @@ The example application connects to your Neon Postgres database using [Prisma](h
 A dialog pops up with your Neon connection string, which appears similar to the following:
 
 ```bash
-postgres://<user>:<password>@<host>:<port>/neondb
+postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 Store this value in a safe place. It is required later. The connection string specifies `neondb` as the database. This is the ready-to-use database created with each Neon project. You will use this database with the example application.
@@ -82,10 +83,10 @@ koyeb app init express-neon \
 --ports 8080:http \
 --routes /:8080 \
 --env PORT=8080 \
---env DATABASE_URL="postgres://<user>:<password>@<host>:5432/neondb"
+--env DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]"
 ```
 
-Make sure to replace `<user>`, `<password>`, and `<host>` with your Neon connection string values.
+Make sure to replace `[user]`, `[password]`, and `[host]` with your Neon connection string values.
 
 ### Access Koyeb deployment logs
 

@@ -2,7 +2,7 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 enableTableOfContents: true
-updatedOn: '2023-08-03T23:20:09Z'
+updatedOn: '2023-12-01T19:05:09.469Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -11,7 +11,7 @@ The examples show the default `table` output format. The Neon CLI also supports 
 
 ## Prerequisites
 
-- The Neon CLI. See [Install the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli) for instructions.
+- The Neon CLI. See [Install the Neon CLI](/docs/reference/cli-install) for instructions.
 - To run CLI commands, you must either authenticate through your browser or supply an API key using the `--api-key` option. See [Connect with the Neon CLI](/docs/reference/neon-cli#connect).
 
 ## Create a branch with the CLI
@@ -42,7 +42,7 @@ connection_uris
 ┌───────────────────────────────────────────────────────────────────────────────────────┐
 │ Connection Uri                                                                        │
 ├───────────────────────────────────────────────────────────────────────────────────────┤
-│ postgres://daniel:<password>@ep-mute-voice-52609794.us-east-2.aws.neon.tech/neondb    │
+│ postgres://[user]:[password]@[neon_hostname]/[dbname]                                 │
 └───────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -94,6 +94,4 @@ You do not need to specify the variable name explicitly when using a Neon CLI co
 
 This API key configuration ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Remember, you should handle your API key with the same level of security as your other credentials.
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

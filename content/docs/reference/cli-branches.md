@@ -2,12 +2,12 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-08-09T16:35:13Z'
+updatedOn: '2023-12-07T19:06:47.674Z'
 ---
 
 ## Before you begin
 
-- Before running the `branches` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+- Before running the `branches` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
 - If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 ## The `branches` command
@@ -24,6 +24,7 @@ neonctl branches <subcommand> [options]
 |---------|------------------|
 | [list](#list)    | List branches    |
 | [create](#create)  | Create a branch |
+| [reset](#reset)   | Reset data to parent
 | [rename](#rename)   | Rename a branch |
 | [set-primary](#set-primary)   | Set a primary branch |
 | [add-compute](#add-compute)   | Add replica to a branch |
@@ -147,7 +148,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ┌──────────────────────────────────────────────────────────────────────────────────────────┐
     │ Connection Uri                                                                           │
     ├──────────────────────────────────────────────────────────────────────────────────────────┤
-    │ postgres://daniel:<password>@ep-floral-violet-94096438.us-east-2.aws.neon.tech/neondb    │
+    │ postgres://[user]:[password]@[neon_hostname]/[dbname]                                    │
     └──────────────────────────────────────────────────────────────────────────────────────────┘
     ```
 
@@ -180,8 +181,8 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     },
     "endpoints": [
         {
-        "host": "ep-patient-sun-49170531.us-east-2.aws.neon.tech",
-        "id": "ep-patient-sun-49170531",
+        "host": "@ep-cool-darkness-123456.us-east-2.aws.neon.tech",
+        "id": "@ep-cool-darkness-123456",
         "project_id": "polished-shape-60485499",
         "branch_id": "br-frosty-art-30264288",
         "autoscaling_limit_min_cu": 1,
@@ -205,13 +206,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ],
     "connection_uris": [
         {
-        "connection_uri": "postgres://daniel:<password>@ep-patient-sun-49170531.us-east-2.aws.neon.tech/neondb",
+        "connection_uri": "postgres://alex:AbC123dEf@@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname",
         "connection_parameters": {
-            "database": "neondb",
-            "password": "<password>",
-            "role": "daniel",
-            "host": "ep-patient-sun-49170531.us-east-2.aws.neon.tech",
-            "pooler_host": "ep-patient-sun-49170531-pooler.us-east-2.aws.neon.tech"
+            "database": "dbname",
+            "password": "AbC123dEf",
+            "role": "alex",
+            "host": "@ep-cool-darkness-123456.us-east-2.aws.neon.tech",
+            "pooler_host": "@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech"
         }
         }
     ]
@@ -243,6 +244,38 @@ neonctl branches create --name data_recovery --parent 2023-07-11T10:00:00Z
 ```
 
 The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+
+### reset
+
+This command resets a child branch to the latest data from its parent.
+
+#### Usage
+
+```bash
+neonctl branches reset <id|name> --parent
+```
+`<id|name>` refers to the branch ID or branch name. You can use either one for this operation.
+
+`--parent` specifies the type of reset operation. Currently, Neon only supports reset from parent. This parameter is required for the operation to work. In the future, Neon might add support for other reset types: for example, rewinding a branch to an earlier period in time.
+
+#### Options
+
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `reset` subcommand supports this option:
+
+| Option        | Description | Type   | Required  |
+| ------------- | ----------- | ------ | :-----: |
+| --project-id  | Project ID  | string | Only if your Neon account has more than one project or context is not set|
+
+#### Example
+
+```bash
+neonctl branches reset mybranch --parent
+┌──────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                       │ Name        │ Primary │ Created At           │ Last Reset At        │
+├──────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-raspy-meadow-26349337 │ development │ false   │ 2023-11-28T19:19:11Z │ 2023-11-28T19:29:26Z │
+└──────────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
+```
 
 ### rename
 
@@ -421,6 +454,4 @@ neonctl branches get main --output json
   "updated_at": "2023-07-11T12:22:59Z"
 ```
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

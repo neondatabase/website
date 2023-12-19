@@ -1,15 +1,16 @@
 ---
 title: Branching
+subtitle: Branch your data the same way you branch your code
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/branches
   - /docs/conceptual-guides/branching
-updatedOn: '2023-09-06T14:36:02Z'
+updatedOn: '2023-10-07T10:43:33.404Z'
 ---
 
 <a id="branches-coming-soon/"></a>
 
-Neon allows you to instantly branch your data in the same way that you branch your code. You can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines. See [Branching workflows](#branching-workflows) for a discussion of different ways to integrate branching into your development workflows.
+With Neon, you can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
 
 ## What is a branch?
 
@@ -19,21 +20,11 @@ A branch is isolated from its originating data, so you are free to play around w
 
 Creating a branch does not increase load on the parent branch or affect it in any way, which means you can create a branch without impacting the performance of your production system.
 
-Each Neon project is created with a root called `main`. The first branch that you create is branched from the project's root branch. Subsequent branches can be branched from root or from a previously created branch.
-
-## Branch compute endpoints
-
-When creating a new branch, you have the option to create a compute endpoint for the branch.
-
-A compute endpoint allows you to connect to the branch from a client or application. Neon supports both read-write and read-only compute endpoints. Read-only compute endpoints are also referred to as [Read replicas](/docs/introduction/read-replicas). A branch can have a single read-write compute endpoint but supports multiple read-only compute endpoints.
-
-Your Neon project's root branch is created with a read-write compute endpoint, by default.
-
-To connect to a database in a branch from a client or application, you must connect to the branch's compute endpoint. For more information connecting to a branch, see [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
+Each Neon project is created with a root branch called `main`. The first branch that you create is branched from the project's root branch. Subsequent branches can be branched from the root branch or from a previously created branch.
 
 ## Branching workflows
 
-You can use Neon's branching feature in variety workflows, some of which are described below.
+You can use Neon's branching feature in variety workflows.
 
 ### Development
 
@@ -41,16 +32,27 @@ You can create a branch of your production database that developers are free to 
 
 ![development environment branch](/docs/introduction/branching_dev_env.png)
 
-For branch creation instructions, see [Create a branch](/docs/manage/branches#create-a-branch).
+The following video shows how to create a branch in the Neon Console. For step-by-step instructions, see [Create a branch](/docs/manage/branches#create-a-branch).
+
+<video autoPlay playsInline muted loop width="800" height="600">
+  <source type="video/mp4" src="/docs/introduction/create_branch.mp4"/>
+</video>
 
 You can integrate branching into your development workflows and toolchains using the Neon CLI, API, or GitHub Actions. If you use Vercel, you can use the Neon Vercel Integration to create a branch for each preview deployment.
 
 Refer to the following guides for instructions:
 
-- [Branching with the Neon CLI](/docs/guides/branching-neon-cli)
-- [Branching with the Neon API](/docs/guides/branching-neon-api)
-- [Branching with GitHub Actions](/docs/guides/branching-github-actions)
-- [Connect with the Neon Vercel Integration](/docs/guides/vercel)
+<DetailIconCards>
+
+<a href="/docs/guides/branching-neon-api" description="Learn how to instantly create and manage branches with the Neon API" icon="transactions">Branching with the Neon API</a>
+
+<a href="/docs/guides/branching-neon-cli" description="Learn how to instantly create and manage branches with the Neon CLI" icon="cli">Branching with the Neon CLI</a>
+
+<a href="/docs/guides/branching-github-actions" description="Automate branching with Neon's GitHub Actions for branching" icon="split-branch">Branching with GitHub Actions</a>
+
+<a href="/docs/guides/branching-neon-api" description="Connect your Vercel project and create a branch for each preview deployment" icon="split-branch">The Neon Vercel Integration</a>
+
+</DetailIconCards>
 
 ### Testing
 
@@ -58,14 +60,26 @@ Testers can create branches for testing schema changes, validating new queries, 
 
 ![test environment branches](/docs/introduction/branching_test.png)
 
-Refer to the following guide for instructions: [Branching — Testing queries](/docs/guides/branching-test-queries).
+Refer to the following guide for instructions.
+
+<DetailIconCards>
+
+<a href="/docs/guides/branching-test-queries" description="Instantly create a branch to test queries before running them in production" icon="queries">Branching — Testing queries</a>
+
+</DetailIconCards>
 
 ### Data recovery
 
-If you lose data due to an unintended deletion or some other event, you can create a branch with data as it existed before the event occurred, allowing you to recover the lost data.
+If you lose data due to an unintended deletion or some other event, you can create a branch from the past to recover the lost data.
 
 ![data recovery branch](/docs/introduction/branching_data_loss.png)
 
-Refer to the following guide for instructions: [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+Refer to the following guides for instructions.
 
-For another data recovery example using Neon's branching feature, refer to [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This example uses a bisect script and the Neon API to recover data to the last known good.
+<DetailIconCards>
+
+<a href="/docs/introduction/point-in-time-restore" description="Restore data to a previous state with Neon's point-in-time restore feature" icon="invert">Learn about point-in-time restore</a>
+
+<a href="/docs/guides/branching-pitr" description="Learn how to restore your data to previous state with branching" icon="screen">Create a branch from the past</a>
+
+</DetailIconCards>

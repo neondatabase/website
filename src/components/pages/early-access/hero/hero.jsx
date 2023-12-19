@@ -105,7 +105,7 @@ const Hero = () => {
           </h2>
           <p className="mt-5 border-t border-t-[#2E3338] pt-5 font-semibold">Free Tier includes:</p>
           <ul className="mt-5 space-y-4">
-            {['compute up to 1 vCPU / 256 MB', 'up to 10 GB storage', '3 projects per user'].map(
+            {['compute up to 1 vCPU / 256 MB', 'up to 10 GiB storage', '3 projects per user'].map(
               (item, index) => (
                 <li className="flex items-center space-x-2 font-bold" key={index}>
                   <CheckIcon />

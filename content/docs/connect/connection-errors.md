@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2023-09-15T13:00:43Z'
+updatedOn: '2023-11-27T10:35:45.864Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -15,6 +15,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [Couldn't connect to compute node](#couldnt-connect-to-compute-node)
 - [Can't reach database server](#cant-reach-database-server)
 - [Error undefined: Database error](#error-undefined-database-error)
+- [Terminating connection due to administrator command](#terminating-connection-due-to-administrator-command)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -42,12 +43,12 @@ If a library or application upgrade does not help, there are several workarounds
 
 ### A. Pass the endpoint ID as an option
 
-Neon supports a connection option named `endpoint`, which you can use to identify the compute endpoint you are connecting to. Specifically, you can add `options=endpoint%3Dep-mute-recipe-123456` as a parameter to your connection string, as shown in the example below. The `%3D` is a URL-encoded `=` sign.
+Neon supports a connection option named `endpoint`, which you can use to identify the compute endpoint you are connecting to. Specifically, you can add `options=endpoint%3D[endpoint_id]` as a parameter to your connection string, as shown in the example below. The `%3D` is a URL-encoded `=` sign. Replace `[endpoint_id]` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
 <CodeBlock shouldWrap>
 
 ```txt
-postgres://<user>:<password>@ep-mute-recipe-123456.us-east-2.aws.neon.tech/neondb?options=endpoint%3Dep-mute-recipe-123456
+postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
 ```
 
 </CodeBlock>
@@ -60,10 +61,10 @@ The `endpoint` option works if your application or library permits it to be set.
 
 ### B. Use libpq key=value syntax in the database field
 
-If your application or client is based on `libpq` but you cannot upgrade the library, such as when the library is compiled inside of a an application, you can take advantage of the fact that `libpq` permits adding options to the database name. So, in addition to the database name, you can specify the `endpoint` option, as shown below. Replace `<endpoint_id>` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-mute-recipe-123456`.
+If your application or client is based on `libpq` but you cannot upgrade the library, such as when the library is compiled inside of a an application, you can take advantage of the fact that `libpq` permits adding options to the database name. So, in addition to the database name, you can specify the `endpoint` option, as shown below. Replace `[endpoint_id]` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
 ```txt
-dbname=neondb options=endpoint=<endpoint_id>
+dbname=neondb options=endpoint=[endpoint_id]
 ```
 
 ### C. Set verify-full for golang-based clients
@@ -72,7 +73,7 @@ If your application or service uses golang Postgres clients like `pgx` and `lib/
 
 ### D. Specify the endpoint ID in the password field
 
-Another supported workaround involves specifying the endpoint ID in the password field. So, instead of specifying only your password, you provide a string consisting of the `endpoint` option and your password, separated by a semicolon (`;`) or dollar sign character (`$`), as shown in the examples below. Replace `<endpoint_id>` with your compute's endpoint ID, which you can find in your Neon connection string. An `endpoint_id` looks similar to this: `ep-mute-recipe-123456`.
+Another supported workaround involves specifying the endpoint ID in the password field. So, instead of specifying only your password, you provide a string consisting of the `endpoint` option and your password, separated by a semicolon (`;`) or dollar sign character (`$`), as shown in the examples below. Replace `[endpoint_id]` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
 ```txt
 endpoint=<endpoint_id>;<password>
@@ -129,7 +130,7 @@ Check your connection to see if it is defined correctly. Your Neon connection st
 <CodeBlock shouldWrap>
 
 ```text
-postgres://daniel:f98wh99w398h@ep-white-morning-123456.us-east-2.aws.neon.tech/neondb
+postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 </CodeBlock>
@@ -184,8 +185,12 @@ Error querying the database: db error: ERROR: prepared statement
 "s0" already exists
 ```
 
-Prisma Migrate requires a direct connection to the database. It does not support a pooled connection with PgBouncer, which is the connection pooler used by Neon. Attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes this error. To resolve this issue, please refer to our [Prisma Migrate with PgBouncer](/docs/guides/prisma-migrate#prisma-migrate-with-pgbouncer) instructions.
+Prisma Migrate requires a direct connection to the database. It does not support a pooled connection with PgBouncer, which is the connection pooler used by Neon. Attempting to run Prisma Migrate commands, such as `prisma migrate dev`, with a pooled connection causes this error. To resolve this issue, please refer to our [Connection pooling with Prisma Migrate](/docs/guides/prisma#connect-pooling-with-prisma-migrate) instructions.
 
-## Need help?
+## Terminating connection due to administrator command
 
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+The `terminating connection due to administrator command` error is typically encountered when running a query from a connection that has sat idle long enough for the compute endpoint to suspend due to inactivity. Neon automatically suspends a compute endpoint after 5 minutes of inactivity, by default. You can reproduce this error by connecting to your database from an application or client such as `psql`, letting the connection remain idle until the compute suspends, and then running a query from the same connection.
+
+If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a [Neon Pro Plan](/docs/introduction/pro-plan) user, you can disable auto-suspend or configure a different suspension period. For instructions, see [Configuring Auto-suspend for Neon computes](/docs/guides/auto-suspend-guide).  [Neon Free Tier](/docs/introduction/free-tier) users cannot modify the default 5 minute auto-suspend setting. 
+
+<NeedHelp/>

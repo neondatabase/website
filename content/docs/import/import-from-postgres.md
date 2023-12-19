@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
-updatedOn: '2023-09-15T19:30:41Z'
+updatedOn: '2023-11-24T11:25:06.758Z'
 ---
 
 This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore` command line utilities.
@@ -23,13 +23,13 @@ Repeat the `pg_dump` and `pg_restore` process for each database you want to migr
    <CodeBlock shouldWrap>
 
    ```bash
-   postgres://<user>:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/<dbname>
+   postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>
 
 - Consider running a test migration first to ensure your actual migration goes smoothly. See [Run a test migration](#run-a-test-migration).
-- If your database is small (< 1 GB), you can pipe `pg_dump` output directly to `pg_restore` to save time. See [Pipe pg_dump to pg_restore](#pipe-pg_dump-to-pg_restore).
+- If your database is small, you can pipe `pg_dump` output directly to `pg_restore` to save time. See [Pipe pg_dump to pg_restore](#pipe-pg_dump-to-pg_restore).
 
 ## Export data with pg_dump
 
@@ -84,19 +84,19 @@ The following example shows how data from a `pagila` source database is dumped a
 
 ```bash
 ~$ cd mydump
-~/mydump$ pg_dump -Fc -v -d postgres://sally:<password>@<hostname>:<port>/pagila -f mydumpfile.bak 
+~/mydump$ pg_dump -Fc -v -d postgres://[user]:[password]@[neon_hostname]/pagila -f mydumpfile.bak 
 
 ~/mydump$ ls
 mydumpfile.bak
 
-~/mydump$ pg_restore -v -d postgres://sally:<password>@ep-polished-water-579720.us-east-2.aws.neon.tech/pagila mydumpfile.bak
+~/mydump$ pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak
 ```
 
 </CodeBlock>
 
 ## Pipe pg_dump to pg_restore
 
-For small databases (< 1 GB), the standard output of `pg_dump` can be piped directly into a `pg_restore` command to minimize migration downtime:
+For small databases, the standard output of `pg_dump` can be piped directly into a `pg_restore` command to minimize migration downtime:
 
 ```bash
 pg_dump [args] | pg_restore [args]
@@ -112,7 +112,7 @@ pg_dump -Fc -v -d <source_database_connection_string> | pg_restore -v -d <neon-d
 
 </CodeBlock>
 
-Piping is not recommended for medium (> 1 GB) and large databases (> 5 GB), as it is susceptible to failures during lengthy migration operations.
+Piping is not recommended for large databases, as it is susceptible to failures during lengthy migration operations.
 
 When piping `pg_dump` output directly to `pg_restore`, the custom output format (`-Fc`) is most efficient. The directory format (`-Fd`) format cannot be piped to `pg_restore`.
 
@@ -133,7 +133,7 @@ To avoid the non-fatal errors, you can ignore database object ownership statemen
 <CodeBlock shouldWrap>
 
 ```bash
-pg_restore -v -O -d postgres://sally:<password>@ep-raspy-cherry-95040071.us-east-2.aws.neon.tech/pagila mydumpfile.bak 
+pg_restore -v -O -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak 
 ```
 
 </CodeBlock>
@@ -149,13 +149,13 @@ The `pg_dump` and `pg_restore` commands provide numerous advanced options, some 
 - `-Z`: Defines the compression level to use when using a compressible format. 0 means no compression, while 9 means maximum compression. In general, we recommend a setting of 1. A higher compression level slows the dump and restore process but also uses less disk space.
 - `--lock-wait-timeout=20s`: Error out early in the dump process instead of waiting for an unknown amount of time if there is lock contention.
 Do not wait forever to acquire shared table locks at the beginning of the dump. Instead fail if unable to lock a table within the specified timeout.`
-- `-j <njobs>`: Consider this option for medium (>1 GB) and large databases (>5) to dump tables in parallel. Set `<njobs>` to the number of available CPUs. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for more information. In Neon, this option only make sense for Pro plan users who can configure computes with >1 vCPU.
+- `-j <njobs>`: Consider this option for large databases to dump tables in parallel. Set `<njobs>` to the number of available CPUs. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for more information. In Neon, this option only make sense for Neon Pro Plan users who can configure computes with >1 vCPU.
 - `--no-blobs`: Excludes large objects from your dump. See [Data migration notes](#data-migration-notes).
 
 ### pg_restore options
 
 - `-c --if-exists`: Drop database objects before creating them if they already exist. If you had a failed migration, you can use these options to drop objects created by the previous migration to avoid errors when retrying the migration.
-- `-j <njobs>`: Consider this option for medium (>1 GB) and large databases (>5) to run the restore process in parallel. Set `<njobs>` to the number of available vCPUs. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for more information. In Neon, this option only makes sense for Pro plan users who can configure computes with >1 vCPU. It cannot be used together with `--single-transaction`.
+- `-j <njobs>`: Consider this option for large databases to run the restore process in parallel. Set `<njobs>` to the number of available vCPUs. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for more information. In Neon, this option only makes sense for Neon Pro Plan users who can configure computes with >1 vCPU. It cannot be used together with `--single-transaction`.
 - `--single-transaction`: Forces the operation to run as an atomic transaction, which ensures that no data is left behind when a restore operation fails. Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.
 - `--no-tablespaces`: Do not output commands to select tablespaces. See [Data migration notes](#data-migration-notes).
 - `-t <table_name>`: Allows you to restore individual tables from a custom-format database dump. Individual tables can also be imported from a CSV file. See [Import from CSV](/docs/import/import-from-csv).
@@ -191,6 +191,4 @@ For information about the Postgres client utilities referred to in this topic, r
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
 - [psql](https://www.postgresql.org/docs/current/app-psql.html)
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

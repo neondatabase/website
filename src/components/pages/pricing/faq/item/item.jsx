@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Link from 'components/shared/link/link';
+import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 import ArrowIcon from '../svg/arrow.inline.svg';
 
@@ -27,12 +29,19 @@ const Item = ({ question, answer, linkText = null, linkUrl = null, linkLabel = n
 
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
+    const eventName = 'pricing_faq';
+    const properties = {
+      faq_question: question,
+      faq_answer: answer,
+    };
+    sendGtagEvent(eventName, properties);
+    sendSegmentEvent(eventName, properties);
   };
 
   return (
     <li className="border-b border-gray-new-20 py-3.5">
       <button
-        className="relative flex w-full items-start gap-4 text-left after:absolute after:w-full after:left-0 after:-inset-y-3.5"
+        className="relative flex w-full items-start gap-4 text-left after:absolute after:-inset-y-3.5 after:left-0 after:w-full"
         type="button"
         aria-expanded={isOpen}
         aria-controls={index}

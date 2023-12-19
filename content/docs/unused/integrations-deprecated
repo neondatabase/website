@@ -91,7 +91,7 @@ Then, go to the Project dashboard in Neon and generate a connection string in th
 <CodeBlock shouldWrap>
 
 ```shell
-DATABASE_URL=postgres://user:pass@project-name-123.cloud.neon.tech/neondb
+DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 </CodeBlock>

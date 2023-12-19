@@ -12,7 +12,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.index);
 
 const Home = () => (
-  <Layout headerTheme="black" isSignIn footerWithTopBorder withOverflowHidden>
+  <Layout headerTheme="black" footerWithTopBorder withOverflowHidden>
     <FirstSection />
     <Community />
     <Scalability />

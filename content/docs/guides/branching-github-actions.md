@@ -2,13 +2,14 @@
 title: Automate branching with GitHub Actions
 subtitle: Create and delete branches with GitHub Actions
 enableTableOfContents: true
-updatedOn: '2023-08-15T20:03:50Z'
+updatedOn: '2023-12-07T19:06:47.671Z'
 ---
 
 Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:
 
 - [Create branch action](#create-branch-action)
 - [Delete branch action](#delete-branch-action)
+- [Reset from parent action](#reset-from-parent-action)
 
 ## Create branch action
 
@@ -113,6 +114,58 @@ jobs:
 
 This Action has no outputs.
 
+## Reset from parent action
+
+This GitHub Action resets a child branch with the latest data from its parent branch.
+
+> **Info**
+> The source code for this action is available on [GitHub](https://github.com/neondatabase/reset-branch-action).
+
+### Prerequisites
+
+- Using this action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+- Add your Neon API key to your GitHub Secrets:
+    1. In your GitHub repository, go to **Settings** and locate **Secrets** at the bottom of the left sidebar.
+    2. Click **Actions** > **New Repository Secret**.
+    3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field.
+    4. Click **Add Secret**.
+
+### Example
+
+The following example demonstrates how to reset a branch in your Neon project:
+
+```yaml
+name: Reset Neon Branch with GitHub Actions Demo
+run-name: Reset a Neon Branch 🚀
+jobs:
+  Reset-Neon-Branch:
+    uses: neondatabase/reset-branch-action@v1
+    with:
+      project_id: rapid-haze-373089
+      parent: true
+      branch: child_branch
+      api_key: {{ secrets.NEON_API_KEY }}
+    id: reset-branch
+  - run: echo branch_id ${{ steps.reset-branch.outputs.branch_id }}
+```
+
+### Input variables
+
+- `project_id`: The ID of your Neon project. Find this value in the Neon Console on the **Settings** page.
+- `parent`: If specified, the branch will be reset to the latest (HEAD) of parent branch.
+- `branch`: The name or id of the branch to reset.
+- `api_key`: An API key created in your Neon account. See [Create an API key](/docs/manage/api-keys#create-an-api-key) for instructions.
+
+### Outputs
+
+```yaml
+outputs:
+  branch_id:
+    description: "Reset branch id"
+    value: ${{ steps.reset-branch.outputs.branch_id }}
+```
+- `branch_id`: The ID of the newly reset branch.
+
 ## Example applications
 
 The following example applications use GitHub Actions to create and delete branches in Neon.
@@ -122,6 +175,4 @@ The following example applications use GitHub Actions to create and delete branc
 <a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with preview deployments in Vercel" icon="github">Preview branches app</a>
 </DetailIconCards>
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

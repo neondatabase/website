@@ -1,30 +1,66 @@
 'use client';
 
-import clsx from 'clsx';
+import { useThrottleCallback } from '@react-hook/throttle';
 import PropTypes from 'prop-types';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import TOCIcon from './images/toc.inline.svg';
+import Item from './item';
 
-const linkClassName =
-  'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white [&_code]:rounded-sm [&_code]:leading-none [&_code]:py-px [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:font-mono [&_code]:font-normal dark:[&_code]:bg-gray-new-15';
+const CURRENT_ANCHOR_GAP_PX = 100;
 
 const TableOfContents = ({ items }) => {
-  const handleAnchorClick = (e, anchor) => {
-    e.preventDefault();
-    document.querySelector(anchor).scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
+  const titles = useRef([]);
+  const [currentAnchor, setCurrentAnchor] = useState(null);
+  const [isUserScrolling, setIsUserScrolling] = useState(true);
+
+  const flatItems = useMemo(
+    () =>
+      items.reduce((acc, item) => {
+        if (item.items) {
+          return [...acc, item, ...item.items];
+        }
+        return [...acc, item];
+      }, []),
+    [items]
+  );
+
+  useEffect(() => {
+    titles.current = flatItems
+      .map(({ id }) => document.getElementById(id))
+      .filter((anchor) => anchor !== null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const updateCurrentAnchor = useCallback(() => {
+    const currentTitleIdx = titles.current.findIndex((anchor) => {
+      const { top } = anchor.getBoundingClientRect();
+
+      return top - CURRENT_ANCHOR_GAP_PX >= 0;
     });
-    // changing hash without default jumps to anchor
-    // eslint-disable-next-line no-restricted-globals
-    if (history.pushState) {
-      // eslint-disable-next-line no-restricted-globals
-      history.pushState(false, false, anchor);
-    } else {
-      // old browser support
-      window.location.hash = anchor;
+
+    const idx =
+      currentTitleIdx === -1 ? titles.current.length - 1 : Math.max(currentTitleIdx - 1, 0);
+
+    const currentTitle = titles.current[idx];
+
+    setCurrentAnchor(currentTitle?.id);
+
+    if (isUserScrolling) {
+      // Open sub-items only if it's user-initiated scrolling
+      setCurrentAnchor(currentTitle?.id);
     }
-  };
+  }, [isUserScrolling]);
+
+  const onScroll = useThrottleCallback(updateCurrentAnchor, 100);
+
+  useEffect(() => {
+    updateCurrentAnchor();
+
+    window.addEventListener('scroll', onScroll);
+
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [onScroll, updateCurrentAnchor]);
 
   if (items.length === 0) return null;
 
@@ -35,30 +71,16 @@ const TableOfContents = ({ items }) => {
         <span>On this page</span>
       </h3>
       <ul className="mt-2.5">
-        {items.map((item, index) => {
-          const linkHref = `#${item.id}`;
-
-          return (
-            <li key={index}>
-              {item.level === 2 && (
-                <a
-                  className={linkClassName}
-                  href={linkHref}
-                  dangerouslySetInnerHTML={{ __html: item.title }}
-                  onClick={(e) => handleAnchorClick(e, linkHref)}
-                />
-              )}
-              {item.level === 3 && (
-                <a
-                  className={clsx(linkClassName, 'ml-3')}
-                  href={linkHref}
-                  dangerouslySetInnerHTML={{ __html: item.title }}
-                  onClick={(e) => handleAnchorClick(e, linkHref)}
-                />
-              )}
-            </li>
-          );
-        })}
+        {items.map((item, index) => (
+          <li key={index}>
+            <Item
+              currentAnchor={currentAnchor}
+              isUserScrolling={isUserScrolling}
+              setIsUserScrolling={setIsUserScrolling}
+              {...item}
+            />
+          </li>
+        ))}
       </ul>
     </>
   );

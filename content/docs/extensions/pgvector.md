@@ -2,7 +2,7 @@
 title: The pgvector extension
 subtitle: Use the pgvector for vector similarity search in Postgres
 enableTableOfContents: true
-updatedOn: '2023-08-31T13:27:41Z'
+updatedOn: '2023-11-24T11:25:06.748Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models. This topic describes how to enable the `pgvector` extension in Neon and how to create, store, and query vectors.
@@ -99,6 +99,4 @@ Always consider your compute instance's memory resources when adjusting this par
 
 `pgvector` source code: [https://github.com/pgvector/pgvector](https://github.com/pgvector/pgvector)
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

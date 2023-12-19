@@ -5,12 +5,12 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2023-09-15T20:02:38Z'
+updatedOn: '2023-11-27T16:33:52.716Z'
 ---
 
 Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined history retention period. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
 
-The history retention period is configurable. The supported range is 0 to 7 days for [Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Pro plan](/docs/introduction/pro-plan) users. For configuration instructions, see [Configure history retention](/docs/manage/projects#configure-history-retention).
+The history retention period is configurable. The supported range is 0 to 7 days for [Neon Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Neon Pro Plan](/docs/introduction/pro-plan) users. For configuration instructions, see [Configure history retention](/docs/manage/projects#configure-history-retention).
 
 This guide shows how to recover your data to a point in time before a data loss occurred using Neon's branching feature.
 
@@ -20,14 +20,21 @@ Suppose that you have a table named `orders` that was accidentally deleted by a 
 
 To create a point-in-time branch:
 
-1. Navigate to the **Branches** page in the Neon Console.
-1. Click **Create branch** to open the branch creation dialog.
-1. Enter a name for the branch. You can call it `recovery_branch`, for example.
-    ![Data recovery create branch dialog](/docs/guides/data_recovery_create_branch.png)
-1. For the **Parent branch**, select the branch where the data loss occurred.
-1. Select the **Time** option to create a branch with data as it existed at a specific date and time. For example, if the data loss occurred on July 11, 2023 at 10:01am, set the time to July 11, 2023, at 10:00am, just before the faulty query was run.
-1. Leave the **Create compute endpoint** option selected. A compute endpoint is required to connect to the new branch.
-1. Click **Create Branch** to create your point-in-time branch.
+1. In the Neon Console, select a project.
+2. Select **Branches**.
+3. Click **New Branch** to open the branch creation dialog.
+![Create branch dialog](/docs/guides/create_data_recovery_branch.png)
+4. Enter a name for the branch.
+5. Select a parent branch.
+6. Under **Include data up to**, select the **Specific date and time** option, which creates a branch with data up to the specified date and time. For example, if the data loss occurred on Nov 26, 2023 at 5:01pm, select Nov 11, 2023, at 5:00pm, just before the faulty query was run.
+
+    <Admonition type="note">
+    The **Specific date and time** option does not include data changes that occured after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your history retention window, which is 7 days by default. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+    </Admonition>
+
+8. Click **Create new branch** to create your branch.
+
+You are directed to the **Branches** page where you are shown the details for your new branch.
 
 <Admonition type="tip">
 You can also create point-in-time branches using the [Neon CLI](/docs/reference/neon-cli). For example, you can perform the same action described above with the following CLI command:
@@ -54,12 +61,12 @@ To connect to your branch:
 2. On the project **Dashboard**, under **Connection Details**, select your `recovery_branch`, the database, and the role you want to connect with.
 ![Connection details widget recovery branch](/docs/guides/data_recovery_connection_details.png)
 3. Copy the connection string. A connection string includes your role name, password, compute endpoint hostname, and database name.
-4. Connect with `psql`. Your connection string will look something like this:
+4. Connect with `psql`.
 
    <CodeBlock shouldWrap>
 
    ```bash
-   postgres://daniel:<password>@ep-curly-term-54009904.us-east-2.aws.neon.tech/neondb
+   psql postgres://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
    </CodeBlock>
@@ -119,6 +126,4 @@ The following GitHub repositories are available for these examples:
 <a href="https://github.com/kelvich/branching_demo_bisect" description="Use Neon branching, the Neon API, and a bisect script to recover lost data" icon="github">Neon branch bisect demo</a>
 </DetailIconCards>
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

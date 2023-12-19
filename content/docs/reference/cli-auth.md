@@ -2,12 +2,12 @@
 title: Neon CLI commands — auth
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-07-28T11:30:44Z'
+updatedOn: '2023-12-01T19:05:09.472Z'
 ---
 
 ## Before you begin
 
-Before running the `auth` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+Before running the `auth` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
 
 ## The `auth` command
 
@@ -40,6 +40,4 @@ The authentication flow for the Neon CLI follows this order:
 
 Only [global options](/docs/reference/neon-cli#global-options) apply.
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

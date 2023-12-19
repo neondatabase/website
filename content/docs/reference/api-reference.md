@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about
   - /docs/api/about
-updatedOn: '2023-07-01T08:51:49Z'
+updatedOn: '2023-11-24T11:25:06.762Z'
 ---
 
 The Neon API allows you to manage your Neon projects programmatically.
@@ -60,6 +60,4 @@ For additional Neon API examples, refer to the following topics:
 When using the Neon API programmatically, you can poll the operation `status` to ensure that an operation is finished before proceeding with the next API request. For more information, see [Poll operation status](/docs/manage/operations#poll-operation-status).
 </Admonition>
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

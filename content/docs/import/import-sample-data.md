@@ -2,7 +2,7 @@
 title: Postgres sample data
 subtitle: 'Download sample data for learning, testing, and exploring Neon'
 enableTableOfContents: true
-updatedOn: '2023-09-22T13:22:40Z'
+updatedOn: '2023-11-24T11:25:06.758Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.
@@ -12,13 +12,13 @@ This guide describes how to download and install sample data for use with Neon.
 - [wget](https://www.gnu.org/software/wget/) for downloading datasets, unless otherwise instructed. If your system does not support `wget`, you can paste the source file address in your browser's address bar.
 - A `psql` client for connecting to your Neon database and loading data. This client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
 - A `pg_restore` client if you are loading the [employees](#employees-database) or [postgres_air](#postgres-air-database) database. The `pg_restore` client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
-- A Neon database connection string. After creating a database, you can obtain the connection string from the **Connection Details** widget on the Neon **Dashboard**. In the instructions that follow, replace `postgres://<user>:<password>@<hostname>/<dbname>` with your connection string.
-- A Neon [Pro](/docs/introduction/pro-plan) account if you intend to install a dataset larger than 3 GBs.
+- A Neon database connection string. After creating a database, you can obtain the connection string from the **Connection Details** widget on the Neon **Dashboard**. In the instructions that follow, replace `postgres://[user]:[password]@[neon_hostname]/[dbname]` with your connection string.
+- A Neon [Pro](/docs/introduction/pro-plan) account if you intend to install a dataset larger than 3 GB.
 - Instructions for each dataset require that you create a database. You can do so from a client such as `psql` or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 ## Sample data
 
-Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Tier has a storage limit of 3 GBs per branch. Datasets larger than 3 GBs cannot be loaded on the Free Tier.
+Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Tier has a storage limit of 3 GB per branch. Datasets larger than 3 GB cannot be loaded on the Free Tier.
 
 | Name                                                | Tables | Records | Source file size      | Installed size |
 |-----------------------------------------------------|--------|------   |-----------------------|----------------|
@@ -62,7 +62,7 @@ A table containing data about the periodic table of elements.
     <CodeBlock shouldWrap>
 
     ```bash
-    psql -d "postgres://<user>:<password>@<hostname>/periodic_table" -f periodic_table.sql
+    psql -d "postgres://[user]:[password]@[neon_hostname]/periodic_table" -f periodic_table.sql
     ```
 
     </CodeBlock>
@@ -70,7 +70,7 @@ A table containing data about the periodic table of elements.
 4. Connect to the `periodic_table` database:
 
     ```bash
-    psql postgres://<user>:<password>@<hostname>/periodic_table
+    psql postgres://[user]:[password]@[neon_hostname]/periodic_table
     ```
 
 5. Look up the the element with the Atomic Number 10:
@@ -106,13 +106,13 @@ A dataset with multiple indicators for evaluating the happiness of countries of 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
     ```bash
-    psql -d "postgres://<user>:<password>@<hostname>/happiness_index" -f happiness_index.sql
+    psql -d "postgres://[user]:[password]@[neon_hostname]/happiness_index" -f happiness_index.sql
     ```
 
 4. Connect to the `titanic` database:
 
     ```bash
-    psql postgres://<user>:<password>@<hostname>/world_happiness_index
+    psql postgres://[user]:[password]@[neon_hostname]/world_happiness_index
     ```
 
 5. Find the countries where the happiness score is above average but the GDP per capita is below average:
@@ -160,7 +160,7 @@ A dataset containing information on the passengers aboard the RMS Titanic, which
     <CodeBlock shouldWrap>
 
     ```bash
-    psql -d "postgres://<user>:<password>@<hostname>/titanic" -f titanic.sql
+    psql -d "postgres://[user]:[password]@[neon_hostname]/titanic" -f titanic.sql
     ```
 
     </CodeBlock>
@@ -168,7 +168,7 @@ A dataset containing information on the passengers aboard the RMS Titanic, which
 4. Connect to the `titanic` database:
 
     ```bash
-    psql postgres://<user>:<password>@<hostname>/titanic
+    psql postgres://[user]:[password]@[neon_hostname]/titanic
     ```
 
 5. Query passengers with the most expensive fares:
@@ -208,7 +208,7 @@ A dataset containing information about movies and tv shows on Netflix.
     <CodeBlock>
 
     ```bash
-    psql -d "postgres://<user>:<password>@<hostname>/netflix" -f netflix_shows.sql
+    psql -d "postgres://[user]:[password]@[neon_hostname]/netflix" -f netflix_shows.sql
     ```
 
     </CodeBlock>
@@ -216,7 +216,7 @@ A dataset containing information about movies and tv shows on Netflix.
 4. Connect to the `netflix` database:
 
     ```bash
-    psql postgres://<user>:<password>@<hostname>/netflix
+    psql postgres://[user]:[password]@[neon_hostname]/netflix
     ```
 
 5. Find the directors with the most movies in the database:
@@ -262,13 +262,13 @@ Sample data for a fictional DVD rental store. Pagila includes tables for films, 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
     ```bash
-    psql -d "postgres://<user>:<password>@<hostname>/pagila" -f pagila.sql
+    psql -d "postgres://[user]:[password]@[neon_hostname]/pagila" -f pagila.sql
     ```
 
 4. Connect to the `pagila` database:
 
     ```bash
-    psql postgres://<user>:<password>@<hostname>/pagila
+    psql postgres://[user]:[password]@[neon_hostname]/pagila
     ```
 
 5. Find the top 10 most popular film categories based on rental frequency:
@@ -313,7 +313,7 @@ A sample database for a digital media store, including tables for artists, album
     <CodeBlock shouldWrap>
 
     ```bash
-    psql -d "postgres://<user>:<password>@<hostname>/chinook" -f chinook.sql
+    psql -d "postgres://[user]:[password]@[neon_hostname]/chinook" -f chinook.sql
     ```
 
     </CodeBlock>
@@ -321,7 +321,7 @@ A sample database for a digital media store, including tables for artists, album
 4. Connect to the `chinook` database:
 
     ```bash
-    psql postgres://<user>:<password>@<hostname>/chinook
+    psql postgres://[user]:[password]@[neon_hostname]/chinook
     ```
 
 5. Find out the most sold item by track title:
@@ -368,13 +368,13 @@ A dataset containing information about various LEGO sets, their themes, parts, c
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
     ```bash
-    psql -d "postgres://<user>:<password>@<hostname>/lego" -f lego.sql
+    psql -d "postgres://[user]:[password]@[neon_hostname]/lego" -f lego.sql
     ```
 
 4. Connect to the `lego` database:
 
     ```bash
-    psql postgres://<user>:<password>@<hostname>/lego
+    psql postgres://[user]:[password]@[neon_hostname]/lego
     ```
 
 5. Find the top 5 LEGO themes by the number of sets:
@@ -418,7 +418,7 @@ A dataset containing details about employees, their departments, salaries, and m
     <CodeBlock shouldWrap>
 
     ```bash
-    pg_restore -d postgres://<user>:<password>@<hostname>/employees -Fc employees.sql.gz -c -v --no-owner --no-privileges
+    pg_restore -d postgres://[user]:[password]@[neon_hostname]/employees -Fc employees.sql.gz -c -v --no-owner --no-privileges
     ```
 
     </CodeBlock>
@@ -428,7 +428,7 @@ A dataset containing details about employees, their departments, salaries, and m
 4. Connect to the `employees` database:
 
     ```bash
-    psql postgres://<user>:<password>@<hostname>/employees
+    psql postgres://[user]:[password]@[neon_hostname]/employees
     ```
 
 5. Find the top 5 departments with the highest average salary:
@@ -444,7 +444,7 @@ A dataset containing details about employees, their departments, salaries, and m
     LIMIT 5;
     ```
 
-- Source: The initial dataset was created by Fusheng Wang and Carlo Zaniolo from Siemens Corporate Research, and can be found in XML format at this location: [http://timecenter.cs.aau.dk/software.htm](http://timecenter.cs.aau.dk/software.htm). Designing the relational schema was undertaken by Giuseppe Maxia while Patrick Crews was responsible for transforming the data into a format compatible with MySQL. Their work can be accessed here: [https://github.com/datacharmer/test_db](https://github.com/datacharmer/test_db). Subsequently, this information was adapted to a format suitable for PostgreSQL: [https://github.com/h8/employees-database](https://github.com/h8/employees-database). The data was generated, and there are inconsistencies.
+- Source: The initial dataset was created by Fusheng Wang and Carlo Zaniolo from Siemens Corporate Research. Designing the relational schema was undertaken by Giuseppe Maxia while Patrick Crews was responsible for transforming the data into a format compatible with MySQL. Their work can be accessed here: [https://github.com/datacharmer/test_db](https://github.com/datacharmer/test_db). Subsequently, this information was adapted to a format suitable for PostgreSQL: [https://github.com/h8/employees-database](https://github.com/h8/employees-database). The data was generated, and there are inconsistencies.
 - License: This work is licensed under the Creative Commons Attribution-Share Alike 3.0 Unported License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/) or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 
 ### Wikipedia vector embeddings
@@ -476,7 +476,7 @@ An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wi
 3. Connect to the `wikipedia` database:
 
     ```bash
-    psql postgres://<user>:<password>@<hostname>/wikipedia
+    psql postgres://[user]:[password]@[neon_hostname]/wikipedia
     ```
 
 3. Install the `pgvector` extension:
@@ -516,7 +516,7 @@ An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wi
     <CodeBlock shouldWrap>
 
     ```bash
-    psql -d "postgres://<user>:<password>@<hostname>/wikipedia" -c "\COPY public.articles (id, url, title, content, title_vector, content_vector, vector_id) FROM 'vector_database_wikipedia_articles_embedded.csv' WITH (FORMAT CSV, HEADER true, DELIMITER ',');"
+    psql -d "postgres://[user]:[password]@[neon_hostname]/wikipedia" -c "\COPY public.articles (id, url, title, content, title_vector, content_vector, vector_id) FROM 'vector_database_wikipedia_articles_embedded.csv' WITH (FORMAT CSV, HEADER true, DELIMITER ',');"
     ```
 
     </CodeBlock>
@@ -545,7 +545,7 @@ An airport database containing information about airports, aircraft, bookings, p
     <CodeBlock shouldWrap>
 
     ```bash
-    pg_restore -d postgres://<user>:<password>@<hostname>/postgres_air -Fc postgres_air_2023.backup -c -v --no-owner --no-privileges
+    pg_restore -d postgres://[user]:[password]@[neon_hostname]/postgres_air -Fc postgres_air_2023.backup -c -v --no-owner --no-privileges
     ```
 
     </CodeBlock>
@@ -555,7 +555,7 @@ An airport database containing information about airports, aircraft, bookings, p
 4. Connect to the `postgres_air` database:
 
     ```bash
-    psql postgres://<user>:<password>@<hostname>/wikipedia
+    psql postgres://[user]:[password]@[neon_hostname]/wikipedia
     ```
 
 5. Find the aircraft type with the most flights:
@@ -573,6 +573,4 @@ An airport database containing information about airports, aircraft, bookings, p
 - License: [BSD 3-Clause License](https://github.com/hettie-d/postgres_air/blob/main/LICENSE)
 - `Copyright (c) 2020, hettie-d All rights reserved.`
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

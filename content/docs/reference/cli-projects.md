@@ -2,12 +2,12 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2023-08-04T16:21:17Z'
+updatedOn: '2023-12-01T19:05:09.476Z'
 ---
 
 ## Before you begin
 
-- Before running the `projects` command, ensure that you have [installed the Neon CLI](/docs/reference/neon-cli#install-the-neon-cli).
+- Before running the `projects` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
 - If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 For information about projects in Neon, see [Projects](/docs/manage/projects).
@@ -63,7 +63,7 @@ neonctl projects list
 
 This subcommand allows you to create a Neon project.
 
-The [Neon Free Tier](../introduction/free-tier) supports creating a single project. The [Neon Pro plan](../introduction/pro-plan) allows creating multiple projects.
+The [Neon Free Tier](../introduction/free-tier) supports creating a single project. The [Neon Pro Plan](../introduction/pro-plan) allows creating multiple projects.
 
 #### Usage
 
@@ -95,7 +95,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     ┌──────────────────────────────────────────────────────────────────────────────────────┐
     │ Connection Uri                                                                       │
     ├──────────────────────────────────────────────────────────────────────────────────────┤
-    │ postgres://daniel:<password>@ep-bitter-field-476253.us-west-2.aws.neon.tech/neondb   │
+    │ postgres://[user]:[password]@[neon_hostname]/[dbname]                                │
     └──────────────────────────────────────────────────────────────────────────────────────┘
     ```
 
@@ -140,13 +140,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
     },
     "connection_uris": [
         {
-        "connection_uri": "postgres://daniel:<password>@ep-bitter-heart-24388432.us-east-2.aws.neon.tech/neondb",
+        "connection_uri": "postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname",
         "connection_parameters": {
-            "database": "neondb",
-            "password": "<password>",
-            "role": "daniel",
-            "host": "ep-bitter-heart-24388432.us-east-2.aws.neon.tech",
-            "pooler_host": "ep-bitter-heart-24388432-pooler.us-east-2.aws.neon.tech"
+            "database": "dbname",
+            "password": "AbC123dEf",
+            "role": "alex",
+            "host": "ep-cool-darkness-123456.us-east-2.aws.neon.tech",
+            "pooler_host": "ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech"
         }
         }
     ]
@@ -238,6 +238,4 @@ neonctl projects get muddy-wood-859533
 └───────────────────┴───────────────┴───────────────┴──────────────────────┘
 ```
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

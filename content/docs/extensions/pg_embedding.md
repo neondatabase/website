@@ -1,8 +1,8 @@
 ---
 title: The pg_embedding extension (Support Discontinued)
-subtitle:
+subtitle: null
 enableTableOfContents: true
-updatedOn: '2023-09-28T11:36:07Z'
+updatedOn: '2023-11-24T11:25:06.747Z'
 ---
 
 <Admonition type="warning">
@@ -283,6 +283,4 @@ To further your understanding of HNSW, the following resources are recommended:
 - [Similarity Search, Part 4: Hierarchical Navigable Small World (HNSW)](https://towardsdatascience.com/similarity-search-part-4-hierarchical-navigable-small-world-hnsw-2aad4fe87d37)
 - [IVFPQ + HNSW for Billion-scale Similarity Search](https://towardsdatascience.com/ivfpq-hnsw-for-billion-scale-similarity-search-89ff2f89d90e)
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>

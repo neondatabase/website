@@ -3,6 +3,7 @@ import ConsoleIcon from 'icons/console.inline.svg';
 import aboutUsIcon from 'icons/header-about-us.svg';
 import careersIcon from 'icons/header-careers.svg';
 import partnersIcon from 'icons/header-partners.svg';
+import PostgresDocsIcon from 'icons/postgres.inline.svg';
 import TransactionsIcon from 'icons/transactions.inline.svg';
 
 import LINKS from './links';
@@ -140,6 +141,11 @@ export default {
           icon: 'github-icon',
         },
         {
+          text: 'Discord',
+          to: LINKS.discord,
+          icon: 'discord-icon',
+        },
+        {
           text: 'Discourse',
           to: LINKS.discourse,
           icon: 'discourse-icon',
@@ -161,6 +167,22 @@ export default {
         {
           text: 'Terms of Service',
           to: LINKS.terms,
+        },
+        {
+          text: 'DPA',
+          to: LINKS.dpa,
+        },
+        {
+          text: 'Subprocessors List',
+          to: LINKS.subprocessors,
+        },
+        {
+          text: 'Privacy Guide',
+          to: LINKS.privacyGuide,
+        },
+        {
+          text: 'Cookie Policy',
+          to: LINKS.cookiePolicy,
         },
       ],
     },
@@ -224,6 +246,18 @@ export default {
       icon: CalendarIcon,
       title: 'Release notes',
       slug: LINKS.releaseNotes,
+    },
+    {
+      icon: PostgresDocsIcon,
+      title: 'Postgres Docs',
+      slug: LINKS.postgres,
+    },
+  ],
+  postgresSidebar: [
+    {
+      icon: PostgresDocsIcon,
+      title: 'Neon Docs',
+      slug: LINKS.docs,
     },
   ],
 };

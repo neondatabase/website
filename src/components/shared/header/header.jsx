@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
+import useMedia from 'react-use/lib/useMedia';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -12,17 +13,16 @@ import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
-import sendGtagEvent from 'utils/send-gtag-event';
+
+import GithubStarCounter from '../github-star-counter';
 
 import Burger from './burger';
-import Github from './images/header-github.inline.svg';
 
 const Search = dynamic(() => import('components/shared/search'), { ssr: false });
 
 const Header = ({
   className = null,
   theme,
-  isSignIn = false,
   isSticky = false,
   withBottomBorder = false,
   isDocPage = false,
@@ -30,6 +30,7 @@ const Header = ({
 }) => {
   const isThemeBlack = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
   const headerRef = useRef(null);
+  const isMobile = useMedia('(max-width: 1023px)', false);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -39,6 +40,12 @@ const Header = ({
 
   const handleBurgerClick = () => {
     setIsMobileMenuOpen((isMobileMenuOpen) => !isMobileMenuOpen);
+  };
+
+  const findIndexName = () => {
+    if (isDocPage) return process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME;
+    if (isBlogPage) return process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME;
+    return null;
   };
 
   return (
@@ -132,56 +139,37 @@ const Header = ({
             </ul>
           </nav>
 
-          <div className="flex space-x-5 lg:hidden">
+          <div className="flex lg:hidden">
+            <GithubStarCounter className="mr-5 xl:mr-3" isThemeBlack={isThemeBlack} />
             <Button
-              className="relative pl-11 dark:border-white dark:bg-gray-new-8 dark:text-white dark:hover:border-primary-2 xl:hidden"
-              to={LINKS.github}
-              size="new-md"
-              theme={isThemeBlack ? 'tertiary' : 'quaternary'}
-              rel="noopener noreferrer"
-              target="_blank"
-              onClick={() => sendGtagEvent('click_star_us_button')}
+              className="mr-3.5 h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:mr-2 xl:px-4"
+              to={LINKS.login}
+              theme={isThemeBlack ? 'gray-dark-outline' : 'gray-dark-outline-black'}
             >
-              <Github
-                className={clsx(
-                  'absolute left-1.5 top-1/2 -translate-y-1/2 dark:text-white',
-                  isThemeBlack ? 'text-white' : 'text-black'
-                )}
-              />
-              <span>Star us</span>
+              Log In
             </Button>
-            {isSignIn && (
-              <Button to={LINKS.dashboard} size="new-md" theme="primary">
-                Sign in
-              </Button>
-            )}
-            {!isSignIn && (
-              <Button to={LINKS.signup} size="new-md" theme="primary">
-                Sign up
-              </Button>
-            )}
-          </div>
-          <div className="hidden items-center lg:flex lg:gap-x-3 md:gap-x-5">
-            {isDocPage && (
-              <Search
-                className="mobile-search"
-                indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
-              />
-            )}
-            {isBlogPage && (
-              <Search
-                className="mobile-search"
-                indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
-                isBlog
-              />
-            )}
 
-            <Burger
-              className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
-              isToggled={isMobileMenuOpen}
-              onClick={handleBurgerClick}
-            />
+            <Button
+              className="h-9 px-[22px] text-base font-semibold leading-none transition-colors duration-200 xl:px-4"
+              to={LINKS.signup}
+              theme="primary"
+            >
+              Sign Up
+            </Button>
           </div>
+          {isMobile && (
+            <div className="flex items-center gap-x-3 md:gap-x-5">
+              {(isDocPage || isBlogPage) && (
+                <Search className="mobile-search" indexName={findIndexName()} isBlog={isBlogPage} />
+              )}
+
+              <Burger
+                className={clsx(isThemeBlack ? 'text-white' : 'text-black dark:text-white')}
+                isToggled={isMobileMenuOpen}
+                onClick={handleBurgerClick}
+              />
+            </div>
+          )}
         </Container>
       </header>
       <MobileMenu
@@ -197,7 +185,7 @@ Header.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
   withBottomBorder: PropTypes.bool,
-  isSignIn: PropTypes.bool,
+
   isSticky: PropTypes.bool,
   isDocPage: PropTypes.bool,
   isBlogPage: PropTypes.bool,

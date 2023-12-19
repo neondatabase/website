@@ -10,6 +10,8 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
+import sendGtagEvent from 'utils/send-gtag-event';
+import sendSegmentEvent from 'utils/send-segment-event';
 
 const items = [
   {
@@ -23,9 +25,10 @@ const items = [
       { title: 'Community support' },
     ],
     button: {
-      url: 'https://console.neon.tech/sign_in',
+      url: LINKS.signup,
       text: 'Get Started',
       theme: 'white-outline',
+      event: 'pricing_hero_free_btn_click',
     },
   },
   {
@@ -43,6 +46,7 @@ const items = [
       url: '#estimates',
       text: 'Estimate Your Cost',
       theme: 'primary',
+      event: 'pricing_hero_pro_btn_click',
     },
   },
   {
@@ -59,6 +63,7 @@ const items = [
       url: LINKS.contactSales,
       text: 'Contact Sales',
       theme: 'white-outline',
+      event: 'pricing_hero_custom_btn_click',
     },
   },
 ];
@@ -139,6 +144,9 @@ const Hero = () => {
                   )}
                   to={button.url}
                   onClick={(e) => {
+                    sendGtagEvent(button.event);
+                    sendSegmentEvent(button.event);
+
                     if (button.url === '#estimates') {
                       e.preventDefault();
                       const estimates = document.getElementById('estimates');

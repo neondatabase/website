@@ -9,7 +9,7 @@ import LINKS from 'constants/links';
 import linkedinIcon from 'icons/linkedin.svg';
 import xIcon from 'icons/x.svg';
 
-// import DiscordIcon from './images/subscribe-discord.inline.svg';
+import discordIcon from './images/subscribe-discord.svg';
 import githubIcon from './images/subscribe-github.svg';
 import illustration from './images/subscribe-illustration.jpg';
 
@@ -24,11 +24,11 @@ const links = [
     to: LINKS.linkedin,
     name: 'LinkedIn',
   },
-  // {
-  //   icon: DiscordIcon,
-  //   to: LINKS.discord,
-  //   name: 'Discord',
-  // },
+  {
+    icon: discordIcon,
+    to: LINKS.discord,
+    name: 'Discord',
+  },
   {
     icon: githubIcon,
     to: LINKS.github,
@@ -74,6 +74,7 @@ const Subscribe = () => (
                   className="relative flex h-[72px] w-[72px] items-center justify-center rounded-full border-4 border-black bg-white transition-transform duration-200 hover:-translate-x-1.5 hover:translate-y-1.5 2xl:h-16 2xl:w-16 xl:h-14 xl:w-14 xl:hover:-translate-x-1 xl:hover:translate-y-1"
                   to={to}
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <img src={icon} width={32} height={32} alt="" loading="lazy" />
                   <span className="sr-only">{name}</span>

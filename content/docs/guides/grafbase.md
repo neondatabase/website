@@ -1,9 +1,10 @@
 ---
 title: Use Grafbase Edge Resolvers with Neon
-subtitle: Learn how to build and deploy serverless GraphQL backends with Grafbase and Neon
+subtitle: Learn how to build and deploy serverless GraphQL backends with Grafbase and
+  Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-07-01T08:51:49Z'
+updatedOn: '2023-10-07T10:43:33.377Z'
 ---
 
 _This guide was contributed by Josep Vidal from Grafbase_
@@ -93,7 +94,7 @@ A database connection string is required to forward queries to your Neon databas
     <CodeBlock shouldWrap>
 
     ```text
-    postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb
+    postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>
@@ -103,7 +104,7 @@ A database connection string is required to forward queries to your Neon databas
     <CodeBlock shouldWrap>
 
     ```text
-    DATABASE_URL=postgres://<user>:<password>@ep-crimson-wildflower-999999.eu-central-1.aws.neon.tech/neondb
+    DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
     ```
 
     </CodeBlock>
@@ -160,7 +161,7 @@ To test the resolvers with Neon, perform the following steps:
     npx grafbase dev
     ```
 
-2. Go to [http://localhost:4000](http://localhost:4000) and execute the following GraphQL mutation, which creates a new product:
+2. Go to http://localhost:4000 and execute the following GraphQL mutation, which creates a new product:
 
     ```graphql
     mutation {

@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/security/secure-connections
-updatedOn: '2023-08-05T08:44:53Z'
+updatedOn: '2023-11-24T11:25:06.743Z'
 ---
 
 Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Neon rejects connections that do not use SSL/TLS, behaving in the same way as standalone Postgres with only `hostssl` records in a `pg_hba.conf` configuration file.
@@ -19,7 +19,7 @@ When connecting to Neon or any Postgres database, the `sslmode` parameter settin
 <CodeBlock shouldWrap>
 
 ```text
-postgres://<user>:<password>@ep-wild-haze-482989.us-east-2.aws.neon.tech?sslmode=verify-full
+postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full
 ```
 
 </CodeBlock>
@@ -54,10 +54,10 @@ If the client application uses a popular Postgres client library, such as `psyco
 import psycopg2
 
 conn = psycopg2.connect(
-    dbname='<dbname>',
-    user='<username>',
-    password='<password>',
-    host='ep-wild-haze-482989.us-east-2.aws.neon.tech',
+    dbname='dbname',
+    user='alex',
+    password='AbC123dEf',
+    host='ep-cool-darkness-123456.us-east-2.aws.neon.tech',
     port='5432',
     sslmode='verify-full',
     sslrootcert='/path/to/your/root.crt'
@@ -116,6 +116,4 @@ The location of the root store varies by operating system or distribution. Here 
 
 The system root certificate locations listed above may differ depending on the version, distribution, and configuration of your operating system. If you do not find the root certificates in these locations, refer to your operating system documentation.
 
-## Need help?
-
-Send a request to [support@neon.tech](mailto:support@neon.tech), or join the [Neon community forum](https://community.neon.tech/).
+<NeedHelp/>
