@@ -66,10 +66,10 @@ Some key points to understand about how your endpoint responds when you make cha
 
 * Changing the size of your fixed compute restarts the endpoint and _temporarily disconnect all existing connections_. 
   <Admonition type="note">
-  When your compute resizes automatically as part of the autoscaling feature, there are no restarts disconnects; it just scales. 
+  When your compute resizes automatically as part of the autoscaling feature, there are no restarts or disconnects; it just scales. 
   </Admonition>
 * Editing minimum or maxiumum autoscaling sizes also requires a restart; existing connections are temporariliy disconnected.
-* Changes to autosuspend do not require an endpoint restart; existing connections are unaffected.
+* Changes to autosuspend settings do not require an endpoint restart; existing connections are unaffected.
 
 ### Compute size and Autoscaling configuration
 
