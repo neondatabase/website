@@ -57,7 +57,19 @@ To edit a compute endpoint:
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. Click the kebab menu in the **Computes** table, and select **Edit**.
-1. Specify your changes and click **Save**.
+   
+   The **Edit** window opens, letting you take a range of actions, depending on your tier.
+1. Once you've made your changes, click **Save**. All changes take immediate effect.
+
+### What happens to the endpoint when making changes
+Some key points to understand about how your endpoint responds when you make changes to your compute settings:
+
+* Changing the size of your fixed compute restarts the endpoint and _temporarily disconnect all existing connections_. 
+  <Admonition type="note">
+  When your compute resizes automatically as part of the autoscaling feature, there are no restarts or disconnects; it just scales. 
+  </Admonition>
+* Editing minimum or maxiumum autoscaling sizes also requires a restart; existing connections are temporariliy disconnected.
+* Changes to autosuspend settings do not require an endpoint restart; existing connections are unaffected.
 
 ### Compute size and Autoscaling configuration
 
