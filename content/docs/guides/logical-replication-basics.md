@@ -13,15 +13,13 @@ Postgres logical replication architecture is very simple. It uses a _publisher a
 
 ![Logical replication publisher subscriber archtitecture](/docs/guides/logical_replication_model.png)
 
-In the next section, we'll look at how to set up the publisher for replication, which is generally the same on any standard Postgres installation, including Neon. 
-
 ## Publisher setup
 
 This section describes how to set up the publisher for replication.
 
 ### Configuring the publisher
 
-To enable logical replication on the publisher, you'll need to change the Postgres `wal_level` configuration parameter setting to `logical`. This parameter is set to `replica` by default. 
+To enable logical replication on the publisher, you'll need to change the Postgres `wal_level` configuration parameter setting to `logical`. 
 
 ```ini
 wal_level = logical
@@ -46,10 +44,10 @@ SHOW wal_level;
 ```
 
 <Admonition type="note">
-Logical replication increases the amount of data written to the Write-Ahead Log (WAL) for write transactions. This is because detailed row-level changes and additional metadata are required to support the replication process. This detailed logging ensures that each change can be accurately replicated to the subscriber. Typically, you can expect a 10% to 30% increase in the amount of data written to the WAL, depending on the extent of write activity.
+Logical replication increases the amount of data written to the Write-Ahead Log (WAL). This is because detailed row-level changes and additional metadata are required to support the replication process. This detailed logging ensures that each change can be accurately replicated to the subscriber. Typically, you can expect a 10% to 30% increase in the amount of data written to the WAL, depending on the extent of write activity.
 </Admonition>
 
-Next, you'll want to check your `max_wal_senders` and `max_replication_slots` configuration parameter settings to make sure you have enough WAL senders and replication slots.
+Next, you'll want to check your `max_wal_senders` and `max_replication_slots` configuration parameter settings.
 
 The `max_wal_senders` parameter defines the maximum number of concurrent WAL sender processes which are responsible for streaming WAL data to subscribers. In most cases, you should have one WAL sender process for each subscriber or replication slot to ensure efficient and consistent data replication. In Neon's default configuration, this parameter is preset to 10.
 
@@ -62,7 +60,7 @@ max_replication_slots = 10
 
 ### Granting schema access to your Postgres role
 
-The role you use for replication requires the `REPLICATION` privilege. Currently, only the default Postgres role created with your Neon project has this privilege, and it cannot be granted to other roles. This is the role that is named for the email, Google, GitHub, or partner account you signed up with. For example, if you signed up as `alex@example.com`, you should have a default Postgres users named `alex`. You can verify your user has this privilege by running the following query: 
+The role you use for replication requires the `REPLICATION` privilege. Currently, only the default Postgres role created with your Neon project has this privilege, and it cannot be granted to other roles. This is the role that is named for the email, Google, GitHub, or partner account you signed up with. For example, if you signed up as `alex@example.com`, you should have a default Postgres role named `alex`. You can verify that your role has this privilege by running the following query: 
 
 ```sql
 SELECT rolname, rolreplication 
@@ -110,7 +108,7 @@ This command creates a publication that publishes all changes in two tables:
 CREATE PUBLICATION users_publication FOR TABLE users, departments;
 ```
 <Admonition type="note">
-Neon currently does not support creating publications that include all tables within a schema using `CREATE PUBLICATION publication_name FOR ALL TABLES` syntax. This requires the PostgreSQL superuser privilege, which is not available in a managed service like Neon.
+Neon currently does not support creating publications using `CREATE PUBLICATION publication_name FOR ALL TABLES` syntax. The `ALL TABLES` clause requires the PostgreSQL superuser privilege, which is not available in a managed service like Neon.
 </Admonition>
 
 This command creates a publication that only publishes `INSERT` and `UPDATE` operations in one table. In this case, all data will be published to a subscriber without any data being deleted.
@@ -144,14 +142,14 @@ For the full syntax and more examples, refer to [CREATE SUBSCRIPTION](https://ww
 
 ## Monitoring replication
 
-To ensure that your logical replication setup is running as expected, you should monitor replication processes regularly. PostgreSQL provides several ways to monitor replication status. One of the most useful is the [pg_stat_replication](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-VIEW) view, which displays information about each active replication connection to the publisher:
+To ensure that your logical replication setup is running as expected, you should monitor replication processes regularly. Postgres provides several ways to monitor replication status. One of the most useful is the [pg_stat_replication](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-VIEW) view, which displays information about each active replication connection to the publisher.
 
 ```sql
 SELECT * FROM pg_stat_replication;
 ```
 This view provides details like the state of the replication, the last received WAL location, sent location, write location, and the delay between the publisher and subscriber.
 
-Additionally, the [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html) view shows information about the current replication slots on the publisher, including their size:
+Additionally, the [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html) view shows information about the current replication slots on the publisher, including their size.
 
 ```sql
 SELECT * FROM pg_replication_slots;

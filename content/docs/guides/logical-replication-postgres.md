@@ -13,8 +13,6 @@ You will learn how to enable logical replication in Neon, create a publication, 
 
 <Admonition type="important">
 Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted.
-
-Since logical replication requires more detailed logging to the Write-Ahead Log (WAL) for write transactions, it consumes additional storage.
 </Admonition>
 
 To enable logical replication in Neon:
@@ -26,7 +24,7 @@ To enable logical replication in Neon:
 
 The new setting is applied the next time your compute restarts. By default, the compute that runs your Neon Postgres intance automatically suspends after five minutes of inactivity and restarts on the next access. To force an immediate restart, refer to [Restart a compute endpoint](/docs/manage/endpoints/).
 
-You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query:
 
 ```sql
 SHOW wal_level;
@@ -35,7 +33,7 @@ SHOW wal_level;
  logical
 ```
 
-After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. These processes are the same as those you would perform for a standalone Postgresql environment. 
+After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. These processes are the same as those you would perform in a standalone Postgres environment. 
 
 ## Create a publication
 
@@ -59,15 +57,11 @@ Publications are a fundamental part of logical replication in Postgres. They all
 
 This command creates a publication named `users_publication`, which will include all changes to the `users` table in your replication stream.
 
-<Admonition type="note">
-In addition to creating a publication for a specific table, Postgres allows you to create a publication for all tables within your database by using `CREATE PUBLICATION all_tables_publication FOR ALL TABLES` syntax. This command is particularly useful when you need to replicate the entire database. Furthermore, PostgreSQL allows for fine-tuning your publications. For instance, you can create a publication for a subset of tables or configure publications to only replicate certain types of data changes, such as inserts, updates, or deletes. This level of customization ensures that your replication strategy aligns precisely with your data management and integration requirements.
-</Admonition>
-
-With your publication created, you're now ready to configure subscribers that will receive the data changes from this publication.
+With your publication created, you're now ready to configure a subscriber that will receive the data changes from this publication.
 
 ## Grant schema access to your Postgres role
 
-The role you use for replication requires the `REPLICATION` privilege. Currently, only the default Postgres role created with your Neon project has this privilege and it cannot be granted to other roles. This is the role that is named for the email, Google, GitHub, or partner account you signed up with. For example, if you signed up as `alex@example.com`, you should have a default Postgres uers named `alex`. You can verify your user has this privilege by running the follow query: 
+The role you use for replication requires the `REPLICATION` privilege. Currently, only the default Postgres role created with your Neon project has this privilege, which cannot be granted to other roles. This is the role that is named for the email, Google, GitHub, or partner account you signed up with. For example, if you signed up as `alex@example.com`, you should have a default Postgres role named `alex`. You can verify that your role has the `REPLICATION` privilege by running the follow query:
 
 ```sql
 SELECT rolname, rolreplication 
@@ -75,7 +69,7 @@ FROM pg_roles
 WHERE rolname = '<role_name>';
 ```
 
-If the schemas and tables you are replicating from are not owned by this role, make sure to grant access. Run these commands for each schema you expect to replicate data from:
+If the schemas and tables you are replicating from are not owned by this role, make sure to grant access. Run these commands for each schema:
 
 ```sql
 GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
@@ -83,7 +77,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <role_name>;
 ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <role_name>;
 ```
 
-Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication in the future.
+Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
 
 ## Configure PostgreSQL as a subscriber
 
@@ -132,7 +126,7 @@ Configure `pg_hba.conf`, which is located in the same directory as `postgresql.c
     PUBLICATION users_publication;
     ```
 
-    - `subscription_name`: A name you choose for the subscription.
+    - `subscription_name`: A name you chose for the subscription.
     - `connection_string`: The connection string for your Neon database, where you defined the publication.
     - `publication_name`: The name of the publication you created on your Neon database.
 
@@ -153,7 +147,6 @@ First, generate some changes in the `users` table on the publisher database to s
 1. Connect to your Neon database (the publisher) and perform an `INSERT` operation. For example:
 
     ```sql
-    -- Insert a new user
     INSERT INTO users (username, email) VALUES ('new_user', 'new_user@example.com');
     ```
 

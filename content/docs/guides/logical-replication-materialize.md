@@ -15,14 +15,12 @@ In this guide, you will learn how to stream data from your Neon Postgres databas
 
 - A [Materialize account](https://materialize.com/register/)
 - A [Neon account](https://console.neon.tech/)
-- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run the commands in this guide from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup. 
+- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup. 
 
 ## Enable logical replication
 
 <Admonition type="important">
 Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted.
-
-Since logical replication requires more detailed logging to the Write-Ahead Log (WAL) for write transactions, it consumes additional storage.
 </Admonition>
 
 To enable logical replication in Neon:
@@ -34,7 +32,7 @@ To enable logical replication in Neon:
 
 The new setting is applied the next time your compute restarts. By default, the compute that runs your Neon Postgres intance automatically suspends after five minutes of inactivity and restarts on the next access. To force an immediate restart, refer to [Restart a compute endpoint](/docs/manage/endpoints/).
 
-You can verify that logical replication is enabled by running the following query from the the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query:
 
 ```sql
 SHOW wal_level;
@@ -69,7 +67,7 @@ After logical replication is enabled in Neon, the next step is to create a publi
 
 ## Grant schema access to your Postgres role
 
-The role you use for replication requires the `REPLICATION` privilege. Currently, only the default Postgres role created with your Neon project has this privilege and it cannot be granted to other roles. This is the role that is named for the email, Google, GitHub, or partner account you signed up with. For example, if you signed up as `alex@example.com`, you should have a default Postgres uers named `alex`. You can verify your user has this privilege by running the follow query: 
+The role you use for replication requires the `REPLICATION` privilege. Currently, only the default Postgres role created with your Neon project has this privilege, and it cannot be granted to other roles. This is the role that is named for the email, Google, GitHub, or partner account you signed up with. For example, if you signed up as `alex@example.com`, you should have a default Postgres role named `alex`. You can verify that your role has the `REPLICATION` privilege by running the follow query:
 
 ```sql
 SELECT rolname, rolreplication 
@@ -77,7 +75,7 @@ FROM pg_roles
 WHERE rolname = '<role_name>';
 ```
 
-If the schemas and tables you are replicating from are not owned by this role, make sure to grant access. Run these commands for each schema you expect to replicate data from:
+If the schemas and tables you are replicating from are not owned by this role, make sure to grant access. Run these commands for each schema:
 
 ```sql
 GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
@@ -85,7 +83,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <role_name>;
 ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <role_name>;
 ```
 
-Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication in the future.
+Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
 
 ## Allow inbound traffic
 
@@ -99,7 +97,6 @@ If you use Neon's **IP Allow** feature to limit IP addresses that can connect to
 
 2. In your Neon project, add the IPs to your **IP Allow** list, which you can find in your project's settings. For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
-
 ## Create an ingestion cluster
 
 In Materialize, a [cluster](https://materialize.com/docs/get-started/key-concepts/#clusters) is an isolated environment, similar to a virtual warehouse in Snowflake. When you create a cluster, you choose the size of its compute resource allocation based on the work you need the cluster to do, whether ingesting data from a source, computing always-up-to-date query results, serving results to clients, or a combination.
@@ -112,7 +109,7 @@ From a `psql` client connected to Materialize or from the Materialize **SQL Shel
 CREATE CLUSTER ingest_postgres SIZE = 'medium';
 ```
 
-Materialize recommends starting with a medium [size](https://materialize.com/docs/sql/create-cluster/#size) replica or larger. This helps Materialize quickly process the initial snapshot of the tables in your publication. Once the snapshot is finished, you’ll right-size the cluster.
+Materialize recommends starting with a medium [size](https://materialize.com/docs/sql/create-cluster/#size) replica or larger. This helps Materialize quickly process the initial snapshot of the tables in your publication. Once the snapshot is finished, you can right-size the cluster.
 
 ## Start ingesting data
 
@@ -139,7 +136,7 @@ Now that you’ve configured your database network and created an ingestion clus
     );
     ```
 
-    You can find the connection details for the role you created earlier in the **Connection Details** widget on the Neon **Dashboard**. A Neon connection string looks like this:
+    You can find the connection details for your replication role in the **Connection Details** widget on the Neon **Dashboard**. A Neon connection string looks like this:
 
     <CodeBlock shouldWrap>
 
@@ -147,13 +144,11 @@ Now that you’ve configured your database network and created an ingestion clus
     postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
     ```
 
-    </CodeBlock
-    
-    >
+    </CodeBlock>
 
     - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
-    - Replace `<role_name>` with the name of the role you created earlier. (e.g., `alex`)
-    - Replace `<database>` with the name of the database containing the tables you want to replicate to Materialize. (e.g., `dbname`)
+    - Replace `<role_name>` with the name of your Postgres role (e.g., `alex`)
+    - Replace `<database>` with the name of the database containing the tables you want to replicate to Materialize (e.g., `dbname`)
 
 3. Use the [CREATE SOURCE](https://materialize.com/docs/sql/create-source/) command to connect Materialize to your Neon Postgres database and start ingesting data from the publication you created earlier:
 
@@ -172,7 +167,7 @@ Now that you’ve configured your database network and created an ingestion clus
 
 ## Check the ingestion status
 
-Before Materialize starts consuming a replication stream, it takes a snapshot of the relevant tables in your publication. Until this snapshot is complete, Materialize won’t have the same view of your data as your Postgres database.
+Before Materialize starts consuming a replication stream, it takes a snapshot of the tables in your publication. Until this snapshot is complete, Materialize won’t have the same view of your data as your Postgres database.
 
 In this step, you’ll verify that the source is running and then check the status of the snapshotting process.
 

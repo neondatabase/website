@@ -31,7 +31,7 @@ Logical replication in Neon is currently in Beta. We welcome your feedback to he
 
     Once you enable logical replication in Neon, the setting cannot be reverted.
 
-- The role you to connect from the subscriber to the published in a subscription requires the `REPLICATION` privilege. Currently, only the default Postgres role created with your Neon project has this privilege, and it cannot be granted to other roles. This is the role that is named for the email, Google, GitHub, or partner account you signed up with. For example, if you signed up as `alex@example.com`, you should have a default Postgres users named `alex`. You can verify that your user has this privilege by running the following query: 
+- The role you use to connect from the subscriber to the publisher in a subscription requires the `REPLICATION` privilege. Currently, only the default Postgres role created with your Neon project has this privilege, and it cannot be granted to other roles. This is the role that is named for the email, Google, GitHub, or partner account you signed up with. For example, if you signed up as `alex@example.com`, you should have a default Postgres role named `alex`. You can verify that your role has this privilege by running the following query: 
 
     ```sql
     SELECT rolname, rolreplication 
@@ -42,8 +42,8 @@ Logical replication in Neon is currently in Beta. We welcome your feedback to he
 - If you use Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, you will need to determine the IP address or addresses of the subscriber and add those IPs to your **IP Allow** list, which you can find in your Neon project's settings. For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 - Neon supports both `pgoutput` and `wal2json` replication output plugins for logical decoding.
 
-    - `pgoutput`: This is the default logical replication output plugin for PostgreSQL. Specifically, it's part of PostgreSQL's built-in logical replication system, designed to read changes from the database's write-ahead log (WAL) and output them in a format suitable for logical replication. 
-    - `wal2json`: This is also a logical replication output plugin for PostgreSQL, but it differs from `pgoutput` in that it converts WAL data into `JSON` format. This makes it useful for integrating PostgreSQL with systems and applications that work with `JSON` data. For usage information, see [wal2json](https://github.com/eulerto/wal2json).
+    - `pgoutput`: This is the default logical replication output plugin for Postgres. Specifically, it's part of the Postgres built-in logical replication system, designed to read changes from the database's write-ahead log (WAL) and output them in a format suitable for logical replication. 
+    - `wal2json`: This is also a logical replication output plugin for Postgres, but it differs from `pgoutput` in that it converts WAL data into `JSON` format. This makes it useful for integrating Postgres with systems and applications that work with `JSON` data. For usage information, see [wal2json](https://github.com/eulerto/wal2json).
 - Some data services and platforms require dedicated replication slots. You can create a dedicated replication slot using the standrad PostgreSQL syntax. As mentioned above, Neon supports both `pgoutput` and `wal2json` replication output decoder plugins.
 
     ```sql
@@ -68,8 +68,10 @@ Logical replication in Neon is currently in Beta. We welcome your feedback to he
 
 ## Limitations
 
-Neon is working toward lifting the following limitations in a future release:
+Neon is working toward removing the following limitations in a future release:
 
-- A Neon database can only act as a publisher in a replication setup. You cannot define a Neon database as a subscriber. Creating a subscription on a Neon database is not permitted. You can only create publications on the Neon database.
+- A Neon database can only act as a publisher in a replication setup. Creating a subscription on a Neon database is not permitted. You can only create publications on a Neon database. This means that you cannot replicate data from one Neon database to another or from one Neon project to another.
 - Only your default Neon Postgres role has the `REPLICATION` privilege. This privilege cannot be granted to other roles. You can expect this limitation to be lifted in a future release.
 - You cannot use `CREATE PUBLICATION my_publication FOR ALL TABLES;` syntax in Neon. Specifying `ALL TABLES` requires the Postgres `superuser` privilege, which is not available on Neon. Instead, you can specify multiple tables using `CREATE PUBLICATION my_pub FOR TABLE <table1>, <table2>;` syntax.
+
+<NeedHelp/>
