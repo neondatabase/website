@@ -25,7 +25,7 @@ export const performance = [
   },
   {
     title: '5 vCPU, 20GB RAM',
-    description: 'CRM, Social media, Travel booking',
+    description: 'CRM, social media, travel booking',
     type: 'Dynamic SaaS apps',
     unit: 5,
   },
@@ -46,7 +46,7 @@ export const storage = [
   },
   {
     title: '100 GB',
-    description: 'CRM, Social media, Travel booking',
+    description: 'CRM, social media, travel booking',
     type: 'Dynamic SaaS apps',
     unit: 100,
   },

@@ -49,7 +49,7 @@ const items = [
     type: 'Enterprise',
     price: 'Custom plans',
     description:
-      'Custom volume-based plans for <span class="text-white">medium to large teams, database fleets, and resale.</span>',
+      'Custom volume-based plans for medium to large teams, database fleets, and resale.',
     features: [
       { title: 'Custom pricing with volume discounts' },
       { title: 'Prepaid plans and capacity contracts' },
@@ -165,8 +165,9 @@ const Hero = () => {
                         'mt-9 font-light leading-snug tracking-tight text-gray-new-70 md:mt-8',
                         type === 'Pro' ? 'lg:mt-5' : 'lg:min-h-[66px] md:min-h-fit'
                       )}
-                      dangerouslySetInnerHTML={{ __html: description }}
-                    />
+                    >
+                      {description}
+                    </p>
                   </div>
                   <div className="mt-auto flex grow flex-col">
                     <ul
