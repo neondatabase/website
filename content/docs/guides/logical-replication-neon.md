@@ -219,7 +219,55 @@ logical
 
 ### Replication roles
 
-The role you use to connect from the subscriber to the publisher in a subscription requires the `REPLICATION` privilege. Currently, only the default Postgres role created with your Neon project has this privilege, and it cannot be granted to other roles. This is the role that is named for the email, Google, GitHub, or partner account you signed up with. For example, if you signed up as `alex@example.com`, you should have a default Postgres role named `alex`. You can verify that your role has this privilege by running the following query: 
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role create with your Neon project and roles created using the Neon Console, CLI, or API are granted the membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege. Roles created via SQL do not have this privilege, and the `REPLICATION` privilege cannot be granted.
+
+<Tabs labels={["Neon Console", "CLI", "API"]}>
+
+<TabItem>
+
+To create a replication role in the Neon Console:
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+2. Select a project.
+3. Select **Roles**.
+4. Select the branch where you want to create the role.
+4. Click **New Role**.
+5. In the role creation dialog, specify a role name.
+6. Click **Create**. The role is created and you are provided with the password for the role.
+
+</TabItem>
+
+<TabItem>
+
+The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
+
+```bash
+neonctl roles create --name <role>
+```
+
+</TabItem>
+
+<TabItem>
+
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](/docs/reference/cli-roles).
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "role": {
+    "name": "alex"
+  }
+}' | jq
+```
+
+</TabItem>
+
+</Tabs>
+
+You can verify that your role has the `REPLICATION` privilege by running the follow query:
 
 ```sql
 SELECT rolname, rolreplication 
@@ -274,7 +322,7 @@ If you require different values for these paramters, please contact Neon support
 Neon is working toward removing the following limitations in future releases:
 
 - A Neon database can only act as a publisher in a replication setup. Creating a subscription on a Neon database is not permitted. You can only create publications on a Neon database. This means that you cannot replicate data from one Neon database to another or from one Neon project to another.
-- Only your default Neon Postgres role has the `REPLICATION` privilege. This privilege cannot be granted to other roles. You can expect this limitation to be lifted in a future release.
+- Only your default Neon Postgres role and roles created via the Neon Console, CLI, or API have the `REPLICATION` privilege. This privilege cannot be granted to other roles. You can expect this limitation to be lifted in a future release. Roles created via SQL do not have the `REPLICATION` privilege, and this privilege cannot be granted.
 - You cannot use `CREATE PUBLICATION my_publication FOR ALL TABLES;` syntax in Neon. Specifying `ALL TABLES` requires the Postgres `superuser` privilege, which is not available on Neon. Instead, you can specify multiple tables using `CREATE PUBLICATION my_pub FOR TABLE <table1>, <table2>;` syntax.
 
 ## References
