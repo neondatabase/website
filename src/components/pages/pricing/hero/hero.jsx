@@ -38,8 +38,7 @@ const items = [
     description:
       'A usage-based plan for small to medium teams. Unlimited resources with advanced configuration options.',
     features: [
-      { title: 'Unlimited projects & databases' },
-      { title: 'Unlimited branches' },
+      { title: 'Unlimited projects, branches, databases' },
       { title: 'Autoscaling' },
       { title: 'Configurable compute size' },
       { title: 'Read replicas' },
